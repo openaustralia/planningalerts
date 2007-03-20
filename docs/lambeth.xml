@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<planning>
+    <authority_name>
+        London Borough of Lambeth
+    </authority_name>
+    <authority_short_name>
+        Lambeth
+    </authority_short_name>
+    <applications>
+                    <application>
+                <council_reference>06/04182/TCA</council_reference>
+
+                <address>35 Spenser Road
+London
+SE24 0NS
+</address>
+                <postcode>SE24 0NS</postcode>
+                <description>To crown reduce 1 x Catalpa tree to front of property by 25%.</description>
+                <info_url>http://planning.lambeth.gov.uk/publicaccess/dc/DcApplication/application_detailview.aspx?caseno=06/04182/TCA</info_url>
+                <comment_url>http://planning.lambeth.gov.uk/publicaccess/dc/DcApplication/application_comments_entryform.aspx?caseno=06/04182/TCA</comment_url>
+                <date_received>06/12/2006</date_received>            
+            </application>
+
+                    <application>
+                <council_reference>06/04121/LDCP</council_reference>
+                <address>12 Finch Avenue
+London
+SE27 9TX
+</address>
+                <postcode>SE27 9TX</postcode>
+                <description>Application for a Certificate of Lawful Development (Proposed) with respect to the erection of a single storey ground floor rear extension.</description>
+                <info_url>http://planning.lambeth.gov.uk/publicaccess/dc/DcApplication/application_detailview.aspx?caseno=06/04121/LDCP</info_url>
+
+                <comment_url>http://planning.lambeth.gov.uk/publicaccess/dc/DcApplication/application_comments_entryform.aspx?caseno=06/04121/LDCP</comment_url>
+                <date_received>06/12/2006</date_received>            
+            </application>
+                    <application>
+                <council_reference>06/03747/LDCP</council_reference>
+                <address>19 Greenhurst Road
+London
+SE27 0LH
+</address>
+                <postcode>SE27 0LH</postcode>
+
+                <description>Application for a Certificate of Lawfulness (proposed) with respect to a pavement crossover.</description>
+                <info_url>http://planning.lambeth.gov.uk/publicaccess/dc/DcApplication/application_detailview.aspx?caseno=06/03747/LDCP</info_url>
+                <comment_url>http://planning.lambeth.gov.uk/publicaccess/dc/DcApplication/application_comments_entryform.aspx?caseno=06/03747/LDCP</comment_url>
+                <date_received>07/11/2006</date_received>            
+            </application>
+                    <application>
+                <council_reference>06/03579/LDCP</council_reference>
+
+                <address>14 Turney Road
+London
+SE21 8LU
+</address>
+                <postcode>SE21 8LU</postcode>
+                <description>Application for a Certificate of Lawful Development (Proposed) with respect to a single storey  ground floor side infill extension together with a  loft conversion involving the erection of a full width rear dormer with 2 windows and double doors with a glass balustrade.</description>
+                <info_url>http://planning.lambeth.gov.uk/publicaccess/dc/DcApplication/application_detailview.aspx?caseno=06/03579/LDCP</info_url>
+                <comment_url>http://planning.lambeth.gov.uk/publicaccess/dc/DcApplication/application_comments_entryform.aspx?caseno=06/03579/LDCP</comment_url>
+                <date_received>25/10/2006</date_received>            
+            </application>
+
+                    <application>
+                <council_reference>06/03419/FUL</council_reference>
+                <address>Effra Mansions
+Crownstone Road
+London
+SW2 1LU
+</address>
+                <postcode>SW2 1LU</postcode>
+                <description>Mansard roof extension and conversion to create third floor level involving raising of existing gable walls and chimney stacks and formation of rooflights to provide four two bedroom self contained flats.</description>
+                <info_url>http://planning.lambeth.gov.uk/publicaccess/dc/DcApplication/application_detailview.aspx?caseno=06/03419/FUL</info_url>
+
+                <comment_url>http://planning.lambeth.gov.uk/publicaccess/dc/DcApplication/application_comments_entryform.aspx?caseno=06/03419/FUL</comment_url>
+                <date_received>13/10/2006</date_received>            
+            </application>
+            </applications>
+    
+</planning>

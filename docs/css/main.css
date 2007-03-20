@@ -1,0 +1,81 @@
+body {font-family:georgia, serif; text-align:center;line-height:2em;margin:0;
+	color:#0f0f0f;}	
+#divPage {width:500px; margin:0 auto;background:white;text-align:left;}
+h1 {font-weight:normal; font-size:2.7em;padding-left:115px;padding-bottom:0.2em;padding-top:0.1em;}
+h1 a {color:#456FB1;text-decoration:none;}
+h1 span {color:#96ca2f;}
+h1 small {font-size:0.3em; text-transform:uppercase;position:absolute;
+	right:0.8em;top:2.1em;color:#456FB1}
+h2 {font-weight:normal;font-size:1em;border-bottom:dotted 1px #808080;padding-left:115px;
+	padding-bottom:1.5em;color:#96ca2f;font-style:italic;font-size:1.15em;}
+h2 em {text-decoration:underline}
+h3, h4 {color:#96ca2f;font-style:italic;font-weight:normal}
+
+#divHeader {margin-top:1.7em;padding-bottom:1em;position:relative;}
+#divHeader img {position:absolute;top:-15px;}
+
+/* Menu */
+#divMenu {background:#6E84BD;height:2.3em;font-size:0.7em;}
+#divMenu ul {width:500px;margin:0 auto;}
+#divMenu ul li {float:right;text-align:center;}
+#divMenu ul li a {margin-left:1em;margin-right:1em;display:block; color:white; 
+	text-decoration:none;position:relative; top:-0.2em;}
+#divMenu ul li.selected {background:#96ca2f;}
+
+/* Beta note */
+#pBeta {font-size:0.8em; text-align:center;padding:0;margin:0;position:relative; top:-0.4em;
+	color:#666;}
+#pBeta span {background:#fdd9ea;}
+
+/* Warnings & errors*/
+#divWarning {background:#fdd9ea;font-size:0.9em;text-align:center; margin-bottom:1em;}
+input.error {background:#fdd9ea;}
+
+/* Signup form */
+span.number {font-size:2em;float:left;display:block;
+	text-align:center;padding-bottom:0.6em;margin-right:0.7em;margin-left:0.4em;
+	color:#456FB1;}
+#liAlertArea span.number {margin-bottom:2em;}
+#ulSignup label {width:250px;}
+#ulSignup input.textbox {position:relative; top:0.4em;}
+#ulSignup fieldset label {display:inline;float:none;}
+#liEmail, #liPostcode, #liAlertArea {background:#ffffaa;}
+#liEmail {height:2.3em;margin-bottom:1em;}
+#liEmail input.textbox {width:230px;}
+#liPostcode {height:2.3em;}
+#liPostcode input.textbox {width:80px;}
+#liPostcode small {position:relative; top:0.6em;padding-left:0.3em;}
+#pAlertArea {margin-bottom:0;}
+#ulAlertArea {font-size:0.9em;line-height:1.3em;}
+#ulAlertArea li {}
+#liSignup input.button {font-size:1.5em;margin-top:0.5em;margin-bottom:0.5em;}
+
+/* Attention grabbers */
+div.attention {text-align:center; padding-top:1em;}
+div.attention h3 {font-size:2em;padding-bottom:0.3em;font-style:normal; color:#456FB1;}
+
+/* Faqs */
+dl.faq dt {color:#96ca2f;font-style:italic;}
+dl.faq dd {padding-left:0;margin-left:0;}
+
+/* infobox */
+.infobox {background:#fdd9ea; font-size:0.9em;}
+
+/* highlight */
+span.highlight {background:#ffffaa;}
+
+/* Index footer */
+#divSiteUpdates {border-top:dotted 1px #808080;padding-top:0.5em;}
+#divSiteUpdates ul {font-size:0.9em;margin:0;}
+#divSiteUpdates em {padding-right:0.5em;color:#456FB1;}
+
+/* Links */
+a {color:#22579C;}
+
+/* Footer */
+#divFooter {text-align:center;font-size:0.9em;
+	padding-top:1.5em;}
+#divFooter ul {border-top:dotted 1px #808080;}
+
+/* Buttons */
+input.button {font-family:georgia, serif;}

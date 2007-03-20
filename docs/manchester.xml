@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<planning>
+    <authority_name>
+        City of Manchester
+    </authority_name>
+    <authority_short_name>
+        Manchester
+    </authority_short_name>
+    <applications>
+    <application>
+        <council_reference>081569/FH/2006</council_reference>
+        <address>22 Willoughby Avenue
+Didsbury
+Manchester
+M20 6AS
+</address>
+        <postcode>M20 6AS</postcode>
+        <description>Erection of part two part single storey side extension to form additional living accommodation</description>
+        <info_url>http://www.publicaccess.manchester.gov.uk/publicaccess/tdc/DcApplication/application_detailview.aspx?caseno=081569/FH/2006</info_url>
+        <comment_url>http://www.publicaccess.manchester.gov.uk/publicaccess/tdc/DcApplication/application_comments_entryform.aspx?caseno=081569/FH/2006</comment_url>
+    </application>
+    <application>
+        <council_reference>081566/FH/2006/S2</council_reference>
+        <address>13 Kingsway Crescent
+Burnage
+Manchester
+M19 1GA
+</address>
+        <postcode>M19 1GA</postcode>
+        <description>Erection of part 2 storey, part single storey rear extension to form additional living accommodation</description>
+        <info_url>http://www.publicaccess.manchester.gov.uk/publicaccess/tdc/DcApplication/application_detailview.aspx?caseno=081566/FH/2006/S2</info_url>
+        <comment_url>http://www.publicaccess.manchester.gov.uk/publicaccess/tdc/DcApplication/application_comments_entryform.aspx?caseno=081566/FH/2006/S2</comment_url>
+    </application>
+    <application>
+        <council_reference>081451/FH/2006/S1</council_reference>
+        <address>52 Arnfield Road
+Withington
+Manchester
+M20 4AR
+
+</address>
+        <postcode>M20 4AR</postcode>
+        <description>Erection of single storey side and single storey and first floor rear extensions to form additional living accommodation</description>
+        <info_url>http://www.publicaccess.manchester.gov.uk/publicaccess/tdc/DcApplication/application_detailview.aspx?caseno=081451/FH/2006/S1</info_url>
+        <comment_url>http://www.publicaccess.manchester.gov.uk/publicaccess/tdc/DcApplication/application_comments_entryform.aspx?caseno=081451/FH/2006/S1</comment_url>
+    </application>
+    <application>
+        <council_reference>081202/FO/2006/N2</council_reference>
+        <address>574-576A Hyde Road
+Gorton
+Manchester
+M18 7EE
+</address>
+        <postcode>M18 7EE</postcode>
+        <description>Demolition of three single storey shops and erection of 4 storey building to form 2 shops at ground floor with 4 flats above</description>
+        <info_url>http://www.publicaccess.manchester.gov.uk/publicaccess/tdc/DcApplication/application_detailview.aspx?caseno=081202/FO/2006/N2</info_url>
+        <comment_url>http://www.publicaccess.manchester.gov.uk/publicaccess/tdc/DcApplication/application_comments_entryform.aspx?caseno=081202/FO/2006/N2</comment_url>
+    </application>
+</applications>
+</planning>
