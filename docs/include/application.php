@@ -107,7 +107,7 @@ require_once('DB.php');
 
 		function query($x,$y,$d) {
 			$db = DB::connect(DB_CONNECTION_STRING);
-			$sql = "select council_reference, address, postcode, description, info_url, comment_url, map_url, x, y, full_name
+			$sql = "select council_reference, address, postcode, description, info_url, comment_url, map_url, x, y, date_receive, full_name
 						from application 
 						inner join authority on application.authority_id = authority.authority_id
 						where application.x > " . $db->quote($x - $d) . " and application.x < " . $db->quote($x + $d) .
@@ -129,7 +129,8 @@ require_once('DB.php');
 					$application->map_url = $application_results[$i][6];
 					$application->x = $application_results[$i][7];
 					$application->y  = $application_results[$i][8];
-					$application->authority_name  = $application_results[$i][9];
+					$application->date_received = $application_results[$i][9];
+					$application->authority_name  = $application_results[$i][10];
 
 					$os = new OSRef($application->x, $application->y);
 					$latlng = $os->toLatLng();
