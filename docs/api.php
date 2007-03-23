@@ -1,5 +1,5 @@
 <?php 
-    require_once ("include/config.php"); 
+    require_once ("config.php"); 
     require_once ("phpcoord.php");    
             
 $api = new api;
@@ -15,8 +15,12 @@ class api {
 
 	//Constructor
 	function api() {
-		$this->setup();
-		$this->bind();
+		if (isset($_GET['howto'])){
+			$this->howto();
+		} else {
+			$this->setup();
+			$this->bind();
+		}
 	}
 	
     //setup
@@ -70,6 +74,20 @@ class api {
 		//Render
 		$smarty->display('rss.tpl');
 		
+	}
+
+	//howto
+	function howto() {
+		$form_action = $_SERVER['PHP_SELF'];
+
+		$smarty = new Smarty;
+		$smarty->force_compile = true;
+		$smarty->compile_dir = SMARTY_COMPILE_DIRECTORY;
+
+		$smarty->assign("page_title","API HOWTO");
+		$smarty->assign("menu_item","api");
+
+		$smarty->display('apihowto.tpl');
 	}
 
 }

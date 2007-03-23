@@ -19,6 +19,8 @@
     <div id="divMenu">
         <ul class="collapse">
             <li {if $menu_item =="about"}class="selected"{/if}><a href="about.php">About</a></li>                                     
+			<li {if $menu_item == "api"}class="selected"{/if}><a href="api.php?howto">API</a></li>
+
             <li {if $menu_item =="getinvolved"}class="selected"{/if}><a href="getinvolved.php">Get involved</a></li>                                       
             <li {if $menu_item =="faq"}class="selected"{/if}><a href="faq.php"><acronym title="Frequently asked questions">FAQ</acronym>s</a></li>                
             <li {if $menu_item =="signup"}class="selected"{/if}><a href="/">Signup</a></li>            
