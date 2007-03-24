@@ -84,7 +84,7 @@ class api {
 		$smarty->force_compile = true;
 		$smarty->compile_dir = SMARTY_COMPILE_DIRECTORY;
 
-		$smarty->assign("page_title","API HOWTO");
+		$smarty->assign("page_title","API");
 		$smarty->assign("menu_item","api");
 
 		$smarty->display('apihowto.tpl');

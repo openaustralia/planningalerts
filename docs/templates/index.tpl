@@ -42,6 +42,8 @@
 <div id="divSiteUpdates">
     <h4>Recent site updates</h4>
     <ul class="nobullets">
+        <li><em>March 2007</em> Added an API and a few more councils (inc. Islington and Hackney)</li>
+        <li><em>February 2007</em> Added loads more councils (inc. Camden and Tower Hamlets)</li>
         <li><em>December 2006</em> beta launch</li>
     </ul>   
 </div>

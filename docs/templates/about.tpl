@@ -2,7 +2,7 @@
 
 <p>You'd probably know if your next door neighbour was going to knock their house down (you'd get a letter through the door telling you they had applied for planning permission and asking you what you thought about it). But you probably never find out if the old cinema or pub 5 streets away is going to be converted into luxury flats until <a href="http://www.bbc.co.uk/cult/hitchhikers/gallery/tv/fordprosser.shtml">the bulldozers turned up</a>.</p>
 <p>
-    PlanningAlerts.com is a free service built by <a href="http://www.memespring.co.uk">Richard Pope</a> and <a href="http://brainoff.com">Mikel Maron</a> kindly hosted by  <a href="http://www.mysociety.org">mySociety.org</a>. It searches as many local authority planning websites as it can find and emails you details of applications near you. The aim of this to enable shared scrutiny of what is being built (and <a href="http://www.urban75.net/vbulletin/showthread.php?t=154006" title="Death of the Queen">knocked down</a>) in peoples communities.
+    PlanningAlerts.com is a free service built by <a href="http://www.memespring.co.uk">Richard Pope</a>, <a href="http://brainoff.com">Mikel Maron</a>, Sam Smith and Duncan Parkes. The site is kindly hosted by  <a href="http://www.mysociety.org">mySociety.org</a>. It searches as many local authority planning websites as it can find and emails you details of applications near you. The aim of this to enable shared scrutiny of what is being built (and <a href="http://www.urban75.net/vbulletin/showthread.php?t=154006" title="Death of the Queen">knocked down</a>) in peoples communities.
 </p>
 
 <h3 id="authorities">Planning authorities currently covered by the service</h3>

@@ -80,7 +80,7 @@ function scrape_applications_publicaccess ($search_url, $info_url_base, $comment
 	return $applications;
 }
 
-function scrape_applications_wam ($search_url, $info_url_base, $comment_url_base){
+function scrape_applications_wam ($search_url, $info_url_base, $comment_url_base, $detail_mode = 1){
 
 	$applications = array();
 	$application_pattern = '/<tr><td class=[^>]*>([^<]*)<\/td><td class=[^>]*><a href="[^"]*">([^<]*)<\/a><\/td><td class=[^>]*>([^<]*)<\/td><td class=[^>]*>([^<]*)<\/td>/';
@@ -105,7 +105,7 @@ function scrape_applications_wam ($search_url, $info_url_base, $comment_url_base
 		$application->date_received = $application_match[1];			
 		$application->address = $application_match[3];
 		//$application->status = $application_match[4];
-		
+
 		//if weve found a caase number, then get the details
 		if($case_number !=""){
     		//Comment and info urls		    
@@ -125,9 +125,16 @@ function scrape_applications_wam ($search_url, $info_url_base, $comment_url_base
     		$details_html = safe_scrape_page($info_url_base . $case_number);
 			$details_html = str_replace("\r\n","",$details_html);
 
-    		//regular expresion and clean
-    		$full_detail_pattern = '/Development:<.*<td colspan="3">([^<]*)<\/td>/';
+    		//regular expresion and clean. SItes vary a tiny bit in their html, so there's a bit of a hack here
+    		if ($detail_mode == 1){
+    		    $full_detail_pattern = '/Development:<.*<td colspan="3">([^<]*)<\/td>/';
+		    }
+		    if ($detail_mode == 2){
+                $full_detail_pattern = '/Development:<\/td><td>([^<]*)/';
+		    }
+
     		preg_match($full_detail_pattern, $details_html, $full_detail_matches);
+
     		if (isset($full_detail_matches[1])){
     			$application->description =  $full_detail_matches[1];
 			}
@@ -165,7 +172,6 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
     //grab the page
     $html = safe_scrape_page($search_url);
 
-
 	preg_match_all($application_pattern, $html, $application_matches, PREG_PATTERN_ORDER);
 
 	foreach ($application_matches[0] as $application_match){
@@ -182,17 +188,20 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
 
 		//Comment and info urls		    
 		$application->info_url = $info_url_base . $application->council_reference;
-		//$application->comment_url = $comment_url_base . $case_number;		
+		$application->comment_url = $comment_url_base . $application->council_reference;			
 
 		//get full details
 		$details_html = "";
 		$details_html = safe_scrape_page($info_url_base . $application->council_reference);
-//		$details_html = str_replace("\n","", $details_html);
-//		$details_html = str_replace("\t","", $details_html);		
-
+		$details_html = str_replace("\r\n","",$details_html);		
 
         //Details
-        print $details_html;exit;
+        $full_detail_pattern = '/Proposal:<\/label><\/td>([^<]*)<td colspan="3">([^<]*)/';
+                
+		preg_match($full_detail_pattern, $details_html, $full_detail_matches);
+		if (isset($full_detail_matches[2])){
+			$application->description =  $full_detail_matches[2];			
+		}
 
         //Address
         $address_pattern = '/Main location:<\/label><\/td>([^<]*)<td colspan="3">([^<]*)/';

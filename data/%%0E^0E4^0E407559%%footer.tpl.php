@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.16, created on 2007-03-17 15:57:52
+<?php /* Smarty version 2.6.16, created on 2007-03-24 11:13:35
          compiled from footer.tpl */ ?>
         </div>
         <div id="divFooter">

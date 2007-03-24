@@ -16,7 +16,7 @@ $info_url_base = "http://planningonline.camden.gov.uk/WAM/showCaseFile.do?action
 $comment_url_base = "http://planningonine.camden.gov.uk/WAM/createComment.do?action=CreateApplicationComment&&applicationType=Planning&appNumber=";
 
 //grab urls
-$applications = scrape_applications_wam($search_url, $info_url_base, $comment_url_base);
+$applications = scrape_applications_wam($search_url, $info_url_base, $comment_url_base, 1);
 
 display_applications($applications, "Camden Council", "Camden");
 

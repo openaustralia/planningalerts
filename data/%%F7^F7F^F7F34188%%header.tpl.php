@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.16, created on 2007-03-17 15:57:51
+<?php /* Smarty version 2.6.16, created on 2007-03-24 11:13:47
          compiled from header.tpl */ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -22,6 +22,8 @@
     <div id="divMenu">
         <ul class="collapse">
             <li <?php if ($this->_tpl_vars['menu_item'] == 'about'): ?>class="selected"<?php endif; ?>><a href="about.php">About</a></li>                                     
+			<li <?php if ($this->_tpl_vars['menu_item'] == 'api'): ?>class="selected"<?php endif; ?>><a href="api.php?howto">API</a></li>
+
             <li <?php if ($this->_tpl_vars['menu_item'] == 'getinvolved'): ?>class="selected"<?php endif; ?>><a href="getinvolved.php">Get involved</a></li>                                       
             <li <?php if ($this->_tpl_vars['menu_item'] == 'faq'): ?>class="selected"<?php endif; ?>><a href="faq.php"><acronym title="Frequently asked questions">FAQ</acronym>s</a></li>                
             <li <?php if ($this->_tpl_vars['menu_item'] == 'signup'): ?>class="selected"<?php endif; ?>><a href="/">Signup</a></li>            

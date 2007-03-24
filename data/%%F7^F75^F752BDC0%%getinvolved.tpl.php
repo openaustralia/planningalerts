@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.16, created on 2007-01-26 09:58:31
+<?php /* Smarty version 2.6.16, created on 2007-03-24 11:13:35
          compiled from getinvolved.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "header.tpl", 'smarty_include_vars' => array()));
@@ -6,7 +6,7 @@ $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
 
-    <p>PlanningAlerts.com is run by volunteers if you would like to get involved we'd love to here from you:</p>
+    <p>PlanningAlerts.com is run by volunteers. If you would like to get involved we'd love to here from you:</p>
 
     <h3>I am a programmer and want to add my local authority</h3>
     <p>
