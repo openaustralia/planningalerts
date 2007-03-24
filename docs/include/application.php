@@ -107,7 +107,7 @@ require_once('DB.php');
 
 		function query($x,$y,$d) {
 			$db = DB::connect(DB_CONNECTION_STRING);
-			$sql = "select council_reference, address, postcode, description, info_url, comment_url, map_url, x, y, date_receive, full_name
+			$sql = "select council_reference, address, postcode, description, info_url, comment_url, map_url, x, y, date_recieved, full_name
 						from application 
 						inner join authority on application.authority_id = authority.authority_id
 						where application.x > " . $db->quote($x - $d) . " and application.x < " . $db->quote($x + $d) .
