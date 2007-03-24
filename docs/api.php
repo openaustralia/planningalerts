@@ -41,13 +41,15 @@ class api {
             //Get OS ref from postcode
 			if (isset($_GET['postcode'])) {
             	$xy = postcode_to_location($_GET['postcode']);
+    			$this->easting = $xy[0];
+    			$this->northing = $xy[1];            	
 			} else {
 				$latlng = new LatLng($_GET['lat'], $_GET['lng']);
 				$xy = $latlng->toOSRef();
+    			$this->easting = $xy->easting;
+    			$this->northing = $xy->northing;				
 			}	
 
-			$this->easting = $xy->easting;
-			$this->northing = $xy->northing;
 			$this->area_size = $_GET['area_size'];
 
 			$this->applications = Applications::query($this->easting, $this->northing, alert_size_to_meters($this->area_size));

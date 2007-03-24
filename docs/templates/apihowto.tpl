@@ -2,7 +2,7 @@
 
     <h3>PlanningAlerts.com API</h3>
         <p>
-		    Planning application data is available programmatically as <a href="http://georss.org/">GeoRSS feeds</a>. GeoRSS can be used in most all web mapping APIs and desktop GIS software, and in services like <a href="http://mapufacture.com">mapufacture</a> and <a href="http://pipes.yahoo.com/">Yahoo Pipes</a>.
+		    Planning application data is available programmatically as <a href="http://georss.org/">GeoRSS feeds</a>. GeoRSS can be used in almost most all web mapping APIs and desktop GIS software, and in services like <a href="http://mapufacture.com">mapufacture</a> and <a href="http://pipes.yahoo.com/">Yahoo Pipes</a>.
 		<p/>
 
         <p>

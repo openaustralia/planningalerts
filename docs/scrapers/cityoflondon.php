@@ -15,13 +15,13 @@ if (isset($_GET['year'])){
 }
 
 	//search url
-	$search_url = "http://www.planning.cityoflondon.gov.uk/dc/DcApplication/application_searchresults.aspx?searchtype=WEEKLY&selWeeklyListRange=#daterange&weektype=VAL";
+	$search_url = "http://www.planning.cityoflondon.gov.uk/PublicAccess/tdc/DcApplication/application_searchresults.aspx?searchtype=WEEKLY&selWeeklyListRange=#daterange&weektype=VAL";
     $date_range = "{$day}%2F{$month}%2F{$year}%7C{$day}%2F{$month}%2F{$year}";
 	$search_url = str_replace("#daterange", $date_range, $search_url);
 
 	//comment and info urls
-	$info_url_base = "http://www.planning.cityoflondon.gov.uk/dc/DcApplication/application_detailview.aspx?caseno=";
-	$comment_url_base = "http://www.planning.cityoflondon.gov.uk/dc/DcApplication/application_comments_entryform.aspx?caseno=";
+	$info_url_base = "http://www.planning.cityoflondon.gov.uk/PublicAccess/tdc/DcApplication/application_detailview.aspx?caseno=";
+	$comment_url_base = "http://www.planning.cityoflondon.gov.uk/PublicAccess/tdc/DcApplication/application_comments_entryform.aspx?caseno=";
 	
     //grab urls
 	$applications = scrape_applications_publicaccess($search_url, $info_url_base, $comment_url_base);
