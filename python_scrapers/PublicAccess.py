@@ -350,6 +350,15 @@ class PublicAccessPropertyPageParser(HTMLParser.HTMLParser):
 #http://planning.hambleton.gov.uk/publicaccess/tdc/DcApplication/application_searchform.aspx
 #"Hambleton District Council", "Hambleton", "http://planning.hambleton.gov.uk/publicaccess/tdc/"
 
+# Bromley
+# http://83.244.199.114/publicaccess/
+# looks like it might be a PublicAccess site, but limits users to IE.
+# Not fooled by setting the browser identifer in konqueror...
+
+# West Berkshire
+#http://ww2.westberks.gov.uk/publicaccess/tdc/tdc_home.aspx
+# Displays an error message.
+
 # These use https:
 
 # Chiltern

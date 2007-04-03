@@ -8,7 +8,7 @@ python generateCGIScripts.py
 
 svn add ../CGI/*
 
-echo Committing changes to svn
-(cd ../CGI ; svn commit -m "Removing and regenerating CGI directory")
+#echo Committing changes to svn
+#(cd ../CGI ; svn commit -m "Removing and regenerating CGI directory")
 
 echo Done
