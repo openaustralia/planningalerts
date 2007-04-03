@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Buckinghamshire County Council"
 authority_short_name = "Buckinghamshire"
-base_url = "http://www.bucksplanning.gov.uk/PublicAccess/"
+base_url = "http://www.bucksplanning.gov.uk/PublicAccess/tdc/"
 
 import PublicAccess
 

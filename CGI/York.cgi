@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "City of York Council"
 authority_short_name = "York"
-base_url = "http://planning.york.gov.uk/PublicAccess/"
+base_url = "http://planning.york.gov.uk/PublicAccess/tdc/"
 
 import PublicAccess
 

@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "The Borough of Oadby and Wigston"
 authority_short_name = "Oadby and Wigston"
-base_url = "http://web.owbc.net/PublicAccess/"
+base_url = "http://web.owbc.net/PublicAccess/tdc/"
 
 import PublicAccess
 

@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Woking Borough Council"
 authority_short_name = "Woking"
-base_url = "http://caps.woking.gov.uk/publicaccess/"
+base_url = "http://caps.woking.gov.uk/publicaccess/tdc/"
 
 import PublicAccess
 

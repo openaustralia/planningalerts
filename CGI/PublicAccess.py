@@ -13,9 +13,9 @@ cookie_jar = cookielib.CookieJar()
 from PlanningUtils import fixNewlines, PlanningAuthorityResults, PlanningApplication
 
 
-search_form_url_end = "tdc/DcApplication/application_searchform.aspx"
-search_results_url_end = "tdc/DcApplication/application_searchresults.aspx"
-comments_url_end = "tdc/DcApplication/application_comments_entryform.aspx"
+search_form_url_end = "DcApplication/application_searchform.aspx"
+search_results_url_end = "DcApplication/application_searchresults.aspx"
+comments_url_end = "DcApplication/application_comments_entryform.aspx"
 
 class PublicAccessParser(HTMLParser.HTMLParser):
     """This is the class which parses the PublicAccess search results page.
@@ -339,3 +339,20 @@ class PublicAccessPropertyPageParser(HTMLParser.HTMLParser):
 		    if attr == "value":
 			self.postcode = value
 
+
+# These still don't work:
+
+# Perthshire
+#http://193.63.61.22/publicaccess/tdc/DcApplication/application_searchform.aspx
+#"Perth and Kinross Council", "Perthshire", "http://193.63.61.22/publicaccess/tdc/"
+
+# Hambleton
+#http://planning.hambleton.gov.uk/publicaccess/tdc/DcApplication/application_searchform.aspx
+#"Hambleton District Council", "Hambleton", "http://planning.hambleton.gov.uk/publicaccess/tdc/"
+
+# These use https:
+
+# Chiltern
+#https://isa.chiltern.gov.uk/publicaccess/tdc/tdc_home.aspx
+# Hinckley-Bosworth
+#https://cx.hinckley-bosworth.gov.uk/PublicAccess/dc/DcApplication/application_searchform.aspx

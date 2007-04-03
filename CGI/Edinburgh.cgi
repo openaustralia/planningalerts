@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# This is the parser for Basildon District Council.
+# This is the parser for The City of Edinburgh Council.
 # it is generated from the file CGITemplate
 
 import cgi
@@ -14,9 +14,9 @@ month = form.getfirst('month')
 year = form.getfirst('year')
 
 
-authority_name = "Basildon District Council"
-authority_short_name = "Basildon"
-base_url = "http://planning.basildon.gov.uk/publicaccess/tdc/"
+authority_name = "The City of Edinburgh Council"
+authority_short_name = "Edinburgh"
+base_url = "http://citydev-portal.edinburgh.gov.uk/publicaccess/dc/"
 
 import PublicAccess
 

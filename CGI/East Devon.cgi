@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "East Devon District Council"
 authority_short_name = "East Devon"
-base_url = "http://planning.eastdevon.gov.uk/PublicAccess/"
+base_url = "http://planning.eastdevon.gov.uk/PublicAccess/tdc/"
 
 import PublicAccess
 

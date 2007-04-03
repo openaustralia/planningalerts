@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Rushmoor Borough Council"
 authority_short_name = "Rushmoor"
-base_url = "http://pa-dc.rushmoor.gov.uk/publicaccess/"
+base_url = "http://pa-dc.rushmoor.gov.uk/publicaccess/tdc/"
 
 import PublicAccess
 

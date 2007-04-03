@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Stevenage Borough Council"
 authority_short_name = "Stevenage"
-base_url = "http://publicaccess.stevenage.gov.uk/publicaccess/"
+base_url = "http://publicaccess.stevenage.gov.uk/publicaccess/tdc/"
 
 import PublicAccess
 

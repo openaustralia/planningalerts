@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Kings Lynn and West Norfolk Borough Council"
 authority_short_name = "West Norfolk"
-base_url = "http://online.west-norfolk.gov.uk/publicaccess/"
+base_url = "http://online.west-norfolk.gov.uk/publicaccess/tdc/"
 
 import PublicAccess
 

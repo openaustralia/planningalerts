@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "South Staffordshire Council"
 authority_short_name = "South Staffs"
-base_url = "https://services.sstaffs.gov.uk/PublicAccess/"
+base_url = "https://services.sstaffs.gov.uk/PublicAccess/tdc/"
 
 import PublicAccess
 

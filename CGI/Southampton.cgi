@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Southampton City Council"
 authority_short_name = "Southampton"
-base_url = "http://publicaccess.southampton.gov.uk/publicaccess/"
+base_url = "http://publicaccess.southampton.gov.uk/publicaccess/tdc/"
 
 import PublicAccess
 

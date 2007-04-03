@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Spelthorne Borough Council"
 authority_short_name = "Spelthorne"
-base_url = "http://phoenix.spelthorne.gov.uk/PublicAccess/"
+base_url = "http://phoenix.spelthorne.gov.uk/PublicAccess/tdc/"
 
 import PublicAccess
 

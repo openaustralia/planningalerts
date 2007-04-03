@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Sunderland City Council"
 authority_short_name = "Sunderland"
-base_url = "http://www.sunderland.gov.uk/publicaccess/"
+base_url = "http://www.sunderland.gov.uk/publicaccess/tdc/"
 
 import PublicAccess
 

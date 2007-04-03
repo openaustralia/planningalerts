@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Luton Borough Council"
 authority_short_name = "Luton"
-base_url = "http://www.eplan.luton.gov.uk/PublicAccess/"
+base_url = "http://www.eplan.luton.gov.uk/PublicAccess/tdc/"
 
 import PublicAccess
 

@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Bristol City Council"
 authority_short_name = "Bristol"
-base_url = "http://e2eweb.bristol-city.gov.uk/publicaccess/"
+base_url = "http://e2eweb.bristol-city.gov.uk/publicaccess/tdc/"
 
 import PublicAccess
 

@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Lancaster City Council"
 authority_short_name = "Lancaster"
-base_url = "http://planapps.lancaster.gov.uk/PublicAccess/"
+base_url = "http://planapps.lancaster.gov.uk/PublicAccess/tdc/"
 
 import PublicAccess
 

@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Portsmouth City Council"
 authority_short_name = "Portsmouth"
-base_url = "http://planning.portsmouth.gov.uk/PublicAccess/"
+base_url = "http://planning.portsmouth.gov.uk/PublicAccess/tdc/"
 
 import PublicAccess
 

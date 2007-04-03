@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Huntingdonshire District Council"
 authority_short_name = "Huntingdonshire"
-base_url = "http://planning.huntsdc.gov.uk/publicaccess/"
+base_url = "http://planning.huntsdc.gov.uk/publicaccess/tdc/"
 
 import PublicAccess
 

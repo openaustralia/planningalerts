@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Test Valley Borough Council"
 authority_short_name = "Test Valley"
-base_url = "http://publicaccess.testvalley.gov.uk/publicaccess/"
+base_url = "http://publicaccess.testvalley.gov.uk/publicaccess/tdc/"
 
 import PublicAccess
 

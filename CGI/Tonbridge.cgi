@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Tonbridge and Malling Borough Council"
 authority_short_name = "Tonbridge"
-base_url = "http://publicaccess.tmbc.gov.uk/publicaccess/"
+base_url = "http://publicaccess.tmbc.gov.uk/publicaccess/tdc/"
 
 import PublicAccess
 

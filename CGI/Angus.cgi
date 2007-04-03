@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Angus Council"
 authority_short_name = "Angus"
-base_url = "http://planning.angus.gov.uk/PublicAccess/"
+base_url = "http://planning.angus.gov.uk/PublicAccess/tdc/"
 
 import PublicAccess
 

@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Sevenoaks District Council"
 authority_short_name = "Sevenoaks"
-base_url = "http://publicaccess.sevenoaks.gov.uk/publicaccess/"
+base_url = "http://publicaccess.sevenoaks.gov.uk/publicaccess/tdc/"
 
 import PublicAccess
 

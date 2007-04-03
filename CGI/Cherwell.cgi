@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Cherwell District Council"
 authority_short_name = "Cherwell"
-base_url = "http://cherweb.cherwell-dc.gov.uk/publicaccess/"
+base_url = "http://cherweb.cherwell-dc.gov.uk/publicaccess/tdc/"
 
 import PublicAccess
 

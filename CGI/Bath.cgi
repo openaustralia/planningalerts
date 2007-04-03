@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Bath and North East Somerset"
 authority_short_name = "Bath"
-base_url = "http://planning.bathnes.gov.uk/publicaccess/"
+base_url = "http://planning.bathnes.gov.uk/publicaccess/tdc/"
 
 import PublicAccess
 

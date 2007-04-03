@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Bexley Council"
 authority_short_name = "Bexley"
-base_url = "http://publicaccess.bexley.gov.uk/publicaccess/"
+base_url = "http://publicaccess.bexley.gov.uk/publicaccess/tdc/"
 
 import PublicAccess
 
