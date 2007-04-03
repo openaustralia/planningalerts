@@ -8,3 +8,14 @@ generates new cgi files in the CGI directory,
 copies in some other files that are needed,
 and commits all these changes to svn.
 
+There is currently something very nasty in the permissions
+column in the file OtherFilesToCopy.csv
+
+Until version 2.6 of python, there appears to be no convenient
+way to convert a string like 0755 into an octal. I am therefore
+using integers to specify permissions of the copied files...
+
+420 is 0644
+493 is 0755
+
+This is horrid, and must change in the future...
