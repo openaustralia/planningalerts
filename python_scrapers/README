@@ -1,0 +1,4 @@
+In order to generate the contents of the CGI directory (../CGI)
+run
+
+./createCGI.sh
