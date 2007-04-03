@@ -39,6 +39,13 @@ for file_dict in other_files_csv_reader:
     print file_dict
     filename = file_dict["filename"]
     copyfile(filename, cgi_dir+filename)
+
+    # the idea here is to have filename and permissions
+    # in the csv file.
+    # Until version 2.6 of python, there is no easy way
+    # to convert a string to an octal, so I am using
+    # integers to represent permissions...
+    # see README for details.
     chmod(cgi_dir+filename, int(file_dict["permissions"]))
     
 # write a README to warn people not to svn add stuff to CGI directory
