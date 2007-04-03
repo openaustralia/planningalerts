@@ -2,3 +2,9 @@ In order to generate the contents of the CGI directory (../CGI)
 run
 
 ./createCGI.sh
+
+This script svn deletes the old CGI directory's contents,
+generates new cgi files in the CGI directory,
+copies in some other files that are needed,
+and commits all these changes to svn.
+
