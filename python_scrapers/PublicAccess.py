@@ -346,9 +346,11 @@ class PublicAccessPropertyPageParser(HTMLParser.HTMLParser):
 #http://193.63.61.22/publicaccess/tdc/DcApplication/application_searchform.aspx
 #"Perth and Kinross Council", "Perthshire", "http://193.63.61.22/publicaccess/tdc/"
 
-# Hambleton
+# These ones give sensible results in a browser,
+# but are always empty for my script...
 #http://planning.hambleton.gov.uk/publicaccess/tdc/DcApplication/application_searchform.aspx
 #"Hambleton District Council", "Hambleton", "http://planning.hambleton.gov.uk/publicaccess/tdc/"
+"Newcastle City Council", "Newcastle", "http://gispublic.newcastle.gov.uk/publicaccess/dc/"
 
 # Bromley
 # http://83.244.199.114/publicaccess/
@@ -359,6 +361,24 @@ class PublicAccessPropertyPageParser(HTMLParser.HTMLParser):
 #http://ww2.westberks.gov.uk/publicaccess/tdc/tdc_home.aspx
 # Displays an error message.
 
+# Newham
+# doesn't seem to work currently
+# http://pacaps.newham.gov.uk/publicaccess/
+
+# Stratford
+# http://217.33.198.119/publicaccess/default.aspx
+# Doesn't seem to work currently
+
+# Watford
+#http://ww3.watford.gov.uk/publicaccess/system_error.aspx?aspxerrorpath=/publicaccess/tdc/tdc_home.aspx
+# Doesn't seem to work currently
+
+# Teignbridge
+#http://213.152.63.161/publicaccess/tdc/tdc_home.aspx
+# Doesn't seem to work currently
+
+# Gravesham seems to be broken
+#"Gravesham Borough Council", "Gravesham", "http://195.102.67.4/PublicAccess/tdc/"
 # These use https:
 
 # Chiltern
