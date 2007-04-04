@@ -350,7 +350,10 @@ class PublicAccessPropertyPageParser(HTMLParser.HTMLParser):
 # but are always empty for my script...
 #http://planning.hambleton.gov.uk/publicaccess/tdc/DcApplication/application_searchform.aspx
 #"Hambleton District Council", "Hambleton", "http://planning.hambleton.gov.uk/publicaccess/tdc/"
-"Newcastle City Council", "Newcastle", "http://gispublic.newcastle.gov.uk/publicaccess/dc/"
+#"Newcastle City Council", "Newcastle", "http://gispublic.newcastle.gov.uk/publicaccess/dc/"
+#"City of Durham Council", "Durham", "http://publicaccess.durhamcity.gov.uk/publicaccess/dc/"
+#"Selby District Council", "Selby", "http://publicaccess.selby.gov.uk/publicaccess/dc/"
+
 
 # Bromley
 # http://83.244.199.114/publicaccess/
@@ -379,6 +382,22 @@ class PublicAccessPropertyPageParser(HTMLParser.HTMLParser):
 
 # Gravesham seems to be broken
 #"Gravesham Borough Council", "Gravesham", "http://195.102.67.4/PublicAccess/tdc/"
+
+# Manchester
+# Missing the main menu on the left.
+#http://www.publicaccess.manchester.gov.uk/publicaccess/tdc/tdc_home.aspx
+
+#Bracknell Forest - has an error
+#https://my.bracknell-forest.gov.uk/publicaccess/tdc/tdc_home.aspx
+
+# Redditch
+# Gives an error
+# http://access.redditchbc.gov.uk/publicaccess/tdc/tdc_home.aspx
+
+# Stirling
+# Gives an error
+#http://planpub.stirling.gov.uk/publicaccess/tdc/tdc_home.aspx
+
 # These use https:
 
 # Chiltern
