@@ -1,15 +1,22 @@
 <?php
 
-    require_once('tools_ini.php'); 
-    require_once('application.php'); 
-    require_once('DB.php');        
+    require_once('tools_ini.php');
+    require_once('application.php');
+    require_once('DB.php');
     
     //Initialise
     $application_parser = new application_parser();
-    $application_parser->date = getdate(strtotime("-" . SCRAPE_DELAY . " days"));
-    $application_parser->run();
     
-    //class
+    //Scrape for the last X days (apps already in the database are ignored)
+    for ($i=0; $i < SCRAPE_DELAY; $i++){ 
+        $application_parser->date = getdate(strtotime("-" . $i . " days"));
+        $application_parser->run();
+    }
+    
+    //Send email
+    $application_parser->email_log();
+    
+    //Parser class
     class application_parser{
 
     //Properties
@@ -85,10 +92,6 @@
             sleep($this->sleep_interval);
             
         }
-        
-        //Email log
-        send_text_email(LOG_EMAIL, "parser@" . DOMAIN, "parser@" . DOMAIN, "Planning parser log", print_r($this->log, true));
-        $this->store_log("Debug email sent to " . LOG_EMAIL);
 
     }    
      
@@ -164,7 +167,11 @@
            print $text . "\n\n";
     }
 
-        
+    function email_log(){
+        //Email log
+        send_text_email(LOG_EMAIL, "parser@" . DOMAIN, "parser@" . DOMAIN, "Planning parser log", print_r($this->log, true));
+        $this->store_log("Debug email sent to " . LOG_EMAIL);
+    }   
         
 }
 

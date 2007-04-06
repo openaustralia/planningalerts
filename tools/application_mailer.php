@@ -45,7 +45,8 @@
                             inner join authority on application.authority_id = authority.authority_id 
                          where date_scraped > " . $db->quote(mysql_date(time() - (24 * 60 * 60))) . 
                             " and (application.x > " .  $user_results[$i][3] . " and application.x < " . $user_results[$i][5] . ")
-                              and (application.y > " .  $user_results[$i][4] . " and application.y < " . $user_results[$i][6] . ")";
+                              and (application.y > " .  $user_results[$i][4] . " and application.y < " . $user_results[$i][6] .
+                              and (application.y <> 0  and application.y <> 0 ")";
 
                 $application_results = $db->getAll($sql);
 
