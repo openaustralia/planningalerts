@@ -18,7 +18,9 @@
      	
      	
      	--------------------------------------
+     	
      	PlanningAlerts.com is a free service run by volunteers
+     	
      	To stop receiving these emails click here: {$base_url}/unsubscribe.php?cid={$confirm_id}
 
 {/textformat}

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/local/bin/python
 
 # This is the parser for Blaby District Council.
 # it is generated from the file CGITemplate

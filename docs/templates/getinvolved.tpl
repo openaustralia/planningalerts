@@ -4,7 +4,7 @@
 
     <h3>I am a programmer and want to add my local authority</h3>
     <p>
-        You can help by writing a <a href="http://en.wikipedia.org/wiki/Screen_scraping">screen scraper</a> for your local authority that was can import into plannignalerts.com. There are only 2 criteria for the screen scraper:
+        You can help by writing a <a href="http://en.wikipedia.org/wiki/Screen_scraping">screen scraper</a> for your local authority that was can import into planningalerts.com. There are only 2 criteria for the screen scraper:
     </p>
     <ol>
         <li>That it can output data in the following format: <a href="http://www.planningalerts.com/lambeth.xml">http://www.planningalerts.com/lambeth.xml</a></li>
