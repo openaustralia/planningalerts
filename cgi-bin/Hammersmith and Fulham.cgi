@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/bin/python
 
 # This is the parser for London Borough Of Hammersmith and Fulham.
 # it is generated from the file CGITemplate

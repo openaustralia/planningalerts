@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/bin/python
 
 # This is the parser for Kings Lynn and West Norfolk Borough Council.
 # it is generated from the file CGITemplate

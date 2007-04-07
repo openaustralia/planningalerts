@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/bin/python
 
 # This is the parser for East Devon District Council.
 # it is generated from the file CGITemplate

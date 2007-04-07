@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/bin/python
 
 # This is the parser for South Staffordshire Council.
 # it is generated from the file CGITemplate

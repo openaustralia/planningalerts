@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/bin/python
 
 # This is the parser for Bath and North East Somerset.
 # it is generated from the file CGITemplate

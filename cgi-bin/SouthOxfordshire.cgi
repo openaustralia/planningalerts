@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/bin/python
 
 import cgi
 import cgitb; cgitb.enable(display=0, logdir="/tmp")

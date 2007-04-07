@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/bin/python
 
 # This is the parser for The Borough of Oadby and Wigston.
 # it is generated from the file CGITemplate

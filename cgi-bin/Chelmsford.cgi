@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/bin/python
 
 # This is the parser for Chelmsford Borough Council.
 # it is generated from the file CGITemplate

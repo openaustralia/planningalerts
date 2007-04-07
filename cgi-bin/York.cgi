@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/local/bin/python
 
 # This is the parser for City of York Council.
 # it is generated from the file CGITemplate
