@@ -259,7 +259,7 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
     //Google maps url
     function googlemap_url_from_postcode($postcode, $zoom = 15){
         $postcode = strtolower(str_replace(" ", "+", $postcode));
-        return "http://maps.google.com/maps?q=$postcode&z=$zoom";
+        return "http://maps.google.co.uk/maps?q=$postcode&z=$zoom";
     }
     
     //postcode to location
