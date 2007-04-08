@@ -78,13 +78,15 @@ print_r($application_results);
                     $smarty->assign("applications", $applications);
                     $smarty->assign("base_url", BASE_URL);
                     $smarty->assign("confirm_id", $user_results[$i][8]);      
+                    $smarty->assign("alert_area_size", $user_results[$i][7]);                          
+                    $smarty->assign("alert_postcode", $user_results[$i][2]);                                              
                     
                     //Get the email text
                     $email_text = $smarty->fetch(SMARTY_TEMPLATE_DIRECTORY . 'alert_email_text.tpl');
                     
                     //Send the email
                     if($email_text !=""){
-                        send_text_email($user_results[$i][1], EMAIL_FROM_NAME, EMAIL_FROM_ADDRESS, "Planning applications near " . $user_results[$i][2],  $email_text);
+                        send_text_email($user_results[$i][1], EMAIL_FROM_NAME, EMAIL_FROM_ADDRESS, "Planning applications near " . strtoupper($user_results[$i][2]),  $email_text);
                         $this->store_log("sent applications to " . $user_results[$i][1]);
                     }else{
                         $this->store_log("BLANK EMAIL TEXT !!! EMAIL NOT SENT");
