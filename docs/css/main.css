@@ -73,9 +73,11 @@ span.highlight {background:#ffffaa;}
 a {color:#22579C;}
 
 /* Footer */
-#divFooter {text-align:center;font-size:0.9em;
-	padding-top:1.5em;}
-#divFooter ul {border-top:dotted 1px #808080;}
+#divFooter {font-size:0.9em;
+	padding-top:1.5em;position:relative;}
+#divFooter #aHosted {display:block;width:130px;height:35px;background:url(../images/hosted.png);
+	position:absolute; right:0; top:30px;}
+#divFooter ul {border-top:dotted 1px #808080;padding-top:3px;padding-bottom:20px;}
 
 /* Buttons */
 input.button {font-family:georgia, serif;}

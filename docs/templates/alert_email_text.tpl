@@ -1,5 +1,5 @@
 {foreach name="applications" from="$applications" item="application"}
-{$application->address|upper} {$application->postcode|upper}  ({$application->council_reference|upper})
+{$application->address|upper} {$application->postcode|upper} ({$application->council_reference|upper})
 
 {$application->description}
 
