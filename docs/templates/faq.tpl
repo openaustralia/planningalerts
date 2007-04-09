@@ -22,12 +22,12 @@
         Yes please! To be able to cover the whole country we need help in writing screen scrapers to search the websites of every local authority in the country. If you'd like to write one for your local council <a href="about.php#contact">get in touch</a>.
     </dd>
         <dt>Can I have a copy of your data?</dt>
-        <dd>Yes. You can use our <a href="http://www.planningalerts.com/api.php?howto">API</a> or download the <a               href="http://www.planningalerts.com/backup.gz"> raw data</a> (gzipped mysql database dump with all user information removed)
+        <dd>Yes. You can use our <a href="http://www.planningalerts.com/apihowto.php">API</a> or download the <a               href="http://www.planningalerts.com/backup.gz"> raw data</a> (gzipped mysql database dump with all user information removed)
     </a>. 
     </dd>
     <dt>What kind of license is your data available under?</dt>
     <dd>
-        Both the <a href="http://www.planningalerts.com/backup.gz"> raw data</a> and data via the api are licensed under the <a hrref="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons Attribution-ShareAlike 2.0 license</a>. The license granted in relation to the 'Work' should be read broadly to relate not only copyright but all other IP rights present in this dataset including, for example, any Database rights.
+        Both the <a href="http://www.planningalerts.com/backup.gz"> raw data</a> and data via the api are licensed under the <a href="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons Attribution-ShareAlike 2.0 license</a>. The license granted in relation to the 'Work' should be read broadly to relate not only copyright but all other IP rights present in this dataset including, for example, any Database rights.
     </dd>
 </dl>
 {include file="footer.tpl"}
