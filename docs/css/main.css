@@ -1,4 +1,4 @@
-body {font-family:georgia, serif; text-align:center;line-height:2em;margin:0;
+body {font-family:georgia, serif; text-align:center;line-height:1.8em;margin:0;
 	color:#0f0f0f;}	
 #divPage {width:500px; margin:0 auto;background:white;text-align:left;}
 h1 {font-weight:normal; font-size:2.7em;padding-left:115px;padding-bottom:0.2em;padding-top:0.1em;}
@@ -58,6 +58,14 @@ div.attention h3 {font-size:2em;padding-bottom:0.3em;font-style:normal; color:#4
 dl.faq dt {color:#96ca2f;font-style:italic;}
 dl.faq dd {padding-left:0;margin-left:0;}
 
+/* api */
+div.apiitem {border:dotted 1px #808080;background:#fafafa;padding:10px;margin-bottom:1em;}
+div.apiitem code {background:white;display:block;padding:10px;border:solid 1px #808080;
+word-wrap: break-word}
+div.apiitem code em {color:#808080;}
+div.apiitem p {font-size:0.8em;margin:0;padding:0;line-height:1.5em;margin-bottom:1em;}
+p.apiexamples {position:relative; top:0.7em;}
+
 /* infobox */
 .infobox {background:#fdd9ea; font-size:0.9em;}
 
@@ -75,6 +83,8 @@ a {color:#22579C;}
 /* Footer */
 #divFooter {font-size:0.9em;
 	padding-top:1.5em;position:relative;}
+#divFooter #aOpen {display:block;width:80px;height:15px;background:red url(../images/opendata.png);
+	position:absolute; right:140px; top:40px;}
 #divFooter #aHosted {display:block;width:130px;height:35px;background:url(../images/hosted.png);
 	position:absolute; right:0; top:30px;}
 #divFooter ul {border-top:dotted 1px #808080;padding-top:3px;padding-bottom:20px;}

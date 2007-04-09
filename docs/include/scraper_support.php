@@ -419,4 +419,8 @@ function throw_error($message){
     throw new exception($message);
 }
 
+function redirect ($url){
+    header("Location: $url");
+}
+
 ?>
