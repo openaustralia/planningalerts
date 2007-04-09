@@ -21,5 +21,9 @@
     <dd>
         Yes please! To be able to cover the whole country we need help in writing screen scrapers to search the websites of every local authority in the country. If you'd like to write one for your local council <a href="about.php#contact">get in touch</a>.
     </dd>
+        <dt>Can I have a copy of your data </dt>
+        <dd>Yes. You can use our <a href="http://www.planningalerts.com/api.php?howto">API</a> or download the <a href="h
+    ttp://www.planningalerts.com/backup.gz"> raw data</a> (gzipped mysql database dump will all user information removed)
+    </a>. </dd>
 </dl>
 {include file="footer.tpl"}
