@@ -33,14 +33,17 @@ class api {
         
         switch ($call) {
             case "postcode":        
-                    if(!isset($_GET['postcode']) || !is_postcode($_GET['area_size'])){
+
+                    if(!isset($_GET['area_size']) || !is_postcode($_GET['postcode'])){
                         array_push($this->warnings, "No valid postcode specified");
                     }
                     if(!isset($_GET['area_size'])){
                         array_push($this->warnings, "Area size specified");
                     }
+
                     //all good, get the data
                     if(sizeof($this->warnings) == 0){
+
                         $xy = postcode_to_location($_GET['postcode']);
             			$easting = $xy[0];
             			$northing = $xy[1];
