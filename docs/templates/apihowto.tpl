@@ -21,7 +21,7 @@
     	</code>
     	<p class="apiexamples">
     	    <a href="http://www.planningalerts.com/api.php?call=postcode&postcode=sw98jx&area_size=l">view example</a>
-    	    <a href="http://www.planningalerts.com/api.php?call=postcode&postcode=sw98jx&area_size=l">view on a map</a>
+    	    <a href="http://maps.google.com/maps?f=q&hl=en&q=http://www.planningalerts.com/api.php%3Flat%3D51.52277%26lng%3D-0.067281%26area_size%3Dl&layer=&ie=UTF8&z=13&om=1">view on a map</a>
         </p>
     </div>
 	
