@@ -2,10 +2,10 @@
 
     <h3>PlanningAlerts.com API</h3>
     <p>
-	    Planning application data is available programmatically as <a href="http://georss.org/">GeoRSS feeds</a>. GeoRSS can be used in almost most all web mapping APIs and desktop GIS software, and in services like <a href="http://mapufactu re.com">mapufacture</a> and <a href="http://pipes.yahoo.com/">Yahoo Pipes</a>.
+	    Planning application data is available programmatically as <a href="http://georss.org/">GeoRSS</a> feeds which can be used in most web mapping APIs and desktop GIS software like <a href="http://mapufactu re.com">mapufacture</a> and <a href="http://pipes.yahoo.com/">Yahoo Pipes</a>. Details of the API are listed below.
 	<p/>
 	<p>
-	   Just want the raw data? You can also download it <a href="http://www.planningalerts.com/backup.gz">here</a>. (gzipped mysql database dump with all user information removed).
+	   Just want the raw data instead? You can download it <a href="http://www.planningalerts.com/backup.gz">here</a>. (gzipped mysql database dump with all user information removed).
 	</p>
 
     <h4>API documentation</h4>
@@ -87,7 +87,7 @@
     
     <!--Box-->
 	<div class="apiitem">
-    	<h5>By planning authority</h5>
+    	<h5>Planning authority</h5>
     	<p class="apidefinition">
     	   Return applications for a specific planning authority (e.g. a local council) by authority short name.
     	</p>
@@ -101,9 +101,9 @@
     </div>
 	
 
-    <h4>License information</h4>
+    <h4 id="hLicenseInfo">License information</h4>
     <p>
-                Both the <a href="http://www.planningalerts.com/backup.gz"> raw data</a> and data via the api are licensed under the <a hrref="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons Attribution-ShareAlike 2.0 license</a>. The license granted in relation to the 'Work' should be read broadly to relate not only copyright but all other IP rights present in this dataset including, for example, any Database rights.
+                Both the <a href="http://www.planningalerts.com/backup.gz"> raw data</a> and data via the api are licensed under the <a href="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons Attribution-ShareAlike 2.0 license</a>. The license granted in relation to the 'Work' should be read broadly to relate not only copyright but all other IP rights present in this dataset including, for example, any Database rights.
     </p>
 		
 {include file="footer.tpl"}
