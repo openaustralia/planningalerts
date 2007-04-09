@@ -101,7 +101,7 @@ class api {
                     if(sizeof($this->warnings) == 0){
         				$bottom_left_latlng = new LatLng($_GET['bottom_left_lat'], $_GET['bottom_left_lng']);
         				$bottom_left_xy = $bottom_left_latlng->toOSRef();
-        				$top_right_latlng = new LatLng($_GET['bottom_left_lat'], $_GET['bottom_left_lng']);
+        				$top_right_latlng = new LatLng($_GET['top_right_lat'], $_GET['top_right_lng']);
         				$top_right_xy = $top_right_latlng->toOSRef();
 
             			$this->applications = Applications::query_area($bottom_left_xy->easting, $bottom_left_xy->northing, $top_right_xy->easting, $top_right_xy->northing);
