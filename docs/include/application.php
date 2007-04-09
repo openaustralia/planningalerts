@@ -114,7 +114,7 @@ class Applications{
 					where application.x > " . $db->quote($x - $d) . " and application.x < " . $db->quote($x + $d) .
 						" and application.y > " . $db->quote($y - $d) . " and application.y < " . $db->quote($y + $d) .
 					" order by date_scraped desc limit 100";
-
+print $sql; exit;
 		$application_results = $db->getAll($sql);			
 		return applications::load_applications($application_results);
 	}
@@ -128,7 +128,6 @@ class Applications{
 					where application.x > " . $db->quote($x1) . " and application.x < " . $db->quote($x2) .
 						" and application.y > " . $db->quote($y1) . " and application.y < " . $db->quote($y2) .
 					" order by date_scraped desc limit 100";
-
 		$application_results = $db->getAll($sql);			
 		return applications::load_applications($application_results);
 	}

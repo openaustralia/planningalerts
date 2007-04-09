@@ -20,8 +20,8 @@
     	http://www.planningalerts.com/api.php?<strong>call</strong>=postcode<br/>&<strong>postcode</strong>=[some postcode]&<strong>area_size</strong>=['s' 'm' or 'l']</em>
     	</code>
     	<p class="apiexamples">
-    	    <a href="http://www.planningalerts.com/api.php?lat=51.52277&lng=-0.067281&area_size=l">view example</a>
-    	    <a href="http://www.planningalerts.com/api.php?lat=51.52277&lng=-0.067281&area_size=l">view on a map</a>
+    	    <a href="http://www.planningalerts.com/api.php?call=postcode&postcode=sw98jx&area_size=l">view example</a>
+    	    <a href="http://www.planningalerts.com/api.php?call=postcode&postcode=sw98jx&area_size=l">view on a map</a>
         </p>
     </div>
 	
@@ -35,8 +35,8 @@
     	http://www.planningalerts.com/api.php?<strong>call</strong>=point<br/>&<strong>lat</strong>=[some latitude]&<strong>lng</strong>=[some longitude]<strong>area_size</strong>=['s' 'm' or 'l']
     	</code>
     	<p class="apiexamples">
-    	    <a href="http://www.planningalerts.com/api.php?lat=51.52277&lng=-0.067281&area_size=l">view example</a>
-    	    <a href="http://www.planningalerts.com/api.php?lat=51.52277&lng=-0.067281&area_size=l">view on a map</a>
+    	    <a href="http://www.planningalerts.com/api.php?call=point&lat=51.52277&lng=-0.067281&area_size=l">view example</a>
+    	    <a href="http://maps.google.com/maps?f=q&hl=en&q=http://www.planningalerts.com/api.php%3Fcall%3Dpoint%26lat%3D51.52277%26lng%3D-0.067281%26area_size%3Dl&layer=&ie=UTF8&z=13&om=1">view on a map</a>
         </p>
     </div>
     
@@ -50,8 +50,8 @@
     	http://www.planningalerts.com/api.php?<strong>call</strong>=pointos<br/>&<strong>easting</strong>=[some easting]&<strong>northing</strong>=[some northing]<strong>area_size</strong>=['s' 'm' or 'l']
     	</code>
     	<p class="apiexamples">
-    	    <a href="http://www.planningalerts.com/api.php?lat=51.52277&lng=-0.067281&area_size=l">view example</a>
-    	    <a href="http://www.planningalerts.com/api.php?lat=51.52277&lng=-0.067281&area_size=l">view on a map</a>
+    	    <a href="http://www.planningalerts.com/api.php?call=pointos&easting=383480&northing=398000&area_size=m">view example</a>
+    	    <a href="http://maps.google.com/maps?f=q&hl=en&q=http://www.planningalerts.com/api.php%3Fcall%3Dpointos%26easting%3D383480%26northing%3D398000%26area_size%3Dm&layer=&ie=UTF8&z=15&om=1">view on a map</a>
         </p>
     </div>
 
