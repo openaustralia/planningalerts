@@ -65,8 +65,8 @@
     	http://www.planningalerts.com/api.php?<strong>call</strong>=area<br/>&<strong>bottom_left_lat</strong>=[some latitude]&<strong>bottom_left_lng</strong>=[some longitude]&<strong>top_right_lat</strong>=[some latitude]&<strong>top_right_lng</strong>=[some longitude]
     	</code>
     	<p class="apiexamples">
-    	    <a href="http://www.planningalerts.com/api.php?lat=51.52277&lng=-0.067281&area_size=l">view example</a>
-    	    <a href="http://www.planningalerts.com/api.php?lat=51.52277&lng=-0.067281&area_size=l">view on a map</a>
+    	    <a href="http://www.planningalerts.com/api.php?call=area&bottom_left_lat=51.52277&bottom_left_lng=-0.067281&top_right_lat=52.52277&top_right_lng=15">view example</a>
+    	    <a href="http://maps.google.com/maps?f=q&hl=en&q=http://www.planningalerts.com/api.php%3Fcall%3Darea%26bottom_left_lat%3D51.52277%26bottom_left_lng%3D-0.067281%26top_right_lat%3D52.52277%26top_right_lng%3D15&layer=&ie=UTF8&z=8&om=1">view on a map</a>
         </p>
     </div>
     

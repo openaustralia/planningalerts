@@ -120,6 +120,7 @@ class Applications{
 	
 	//by area
 	function query_area($x1,$y1,$x2,$y2) {
+
 		$db = DB::connect(DB_CONNECTION_STRING);
 		$sql = "select council_reference, address, postcode, description, info_url, comment_url, map_url, x, y, date_recieved, full_name
 					from application 

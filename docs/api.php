@@ -107,6 +107,18 @@ class api {
             			$this->applications = Applications::query_area($bottom_left_xy->easting, $bottom_left_xy->northing, $top_right_xy->easting, $top_right_xy->northing);
                     }
                 break;
+                case "areaos":
+                    //validation
+                    if(!isset($_GET['bottom_left_easting']) || !isset($_GET['bottom_left_northing']) || !isset($_GET['top_right_easting']) || !isset($_GET['top_right_northing'])){
+                        array_push($this->warnings, "Bounding box was not specified");
+                    }
+
+                    //all good, get the data
+                    if(sizeof($this->warnings) == 0){
+            			$this->applications = Applications::query_area($_GET['bottom_left_easting'], $_GET['bottom_left_northing'], $_GET['top_right_easting'], $_GET['top_right_easting']);
+                    }
+                break;
+                
             default:
                 $this->warnings = "No call type specified";
         }
