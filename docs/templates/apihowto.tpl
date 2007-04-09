@@ -80,8 +80,8 @@
     	http://www.planningalerts.com/api.php?<strong>call</strong>=areaos<br/>&<strong>bottom_left_easting</strong>=[some easting]&<strong>bottom_left_northing</strong>=[some northing]&<strong>top_right_easting</strong>=[some easting]&<strong>top_right_northing</strong>=[some northing]
     	</code>
     	<p class="apiexamples">
-    	    <a href="http://www.planningalerts.com/api.php?lat=51.52277&lng=-0.067281&area_size=l">view example</a>
-    	    <a href="http://www.planningalerts.com/api.php?lat=51.52277&lng=-0.067281&area_size=l">view on a map</a>
+    	    <a href="http://www.planningalerts.com/api.php?call=areaos&bottom_left_easting=373480&bottom_left_northing=388000&top_right_easting=403480&top_right_northing=408000">view example</a>
+    	    <a href="http://maps.google.com/maps?f=q&hl=en&q=http://www.planningalerts.com/api.php%3Fcall%3Dareaos%26bottom_left_easting%3D373480%26bottom_left_northing%3D388000%26top_right_easting%3D403480%26top_right_northing%3D408000&layer=&ie=UTF8&z=11&om=1">view on a map</a>
         </p>
     </div>
     
@@ -95,8 +95,8 @@
     	http://www.planningalerts.com/api.php?<strong>call</strong>=authority<br/>&<strong>authority_short_name</strong>=[some name]
     	</code>
     	<p class="apiexamples">
-    	    <a href="http://www.planningalerts.com/api.php?lat=51.52277&lng=-0.067281&area_size=l">view example</a>
-    	    <a href="http://www.planningalerts.com/api.php?lat=51.52277&lng=-0.067281&area_size=l">view on a map</a>
+    	    <a href="http://www.planningalerts.com/api.php?call=authority&authority=Scottish%20Borders">view example</a>
+    	    <a href="http://maps.google.com/maps?f=q&hl=en&q=http://www.planningalerts.com/api.php%3Fcall%3Dauthority%26authority%3DScottish%2520Borders&layer=&ie=UTF8&z=8&om=1">view on a map</a>
         </p>
     </div>
 	
