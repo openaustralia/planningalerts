@@ -70,3 +70,4 @@
 "Wear Valley District Council", "Wear Valley", "http://planning.wearvalley.gov.uk/", "ApplicationSearchServletParser", "WearValleySearchParser"
 "Chorley Borough Council", "Chorley", "http://planning.chorley.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Gravesham Borough Council", "Gravesham", "http://195.102.67.4/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
+"London Borough Of Newham", "Newham", "http://pacaps.newham.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
