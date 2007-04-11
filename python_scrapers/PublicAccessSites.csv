@@ -73,3 +73,5 @@
 "London Borough Of Newham", "Newham", "http://pacaps.newham.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "North West Leicestershire District Council", "NW Leicestershire", "http://paccess.nwleics.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Redditch Borough Council", "Redditch", "http://access.redditchbc.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
+"Stirling Council", "Stirling", "http://planpub.stirling.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
+"Stratford-on-Avon District Council", "Stratford", "http://217.33.198.119/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
