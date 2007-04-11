@@ -68,3 +68,4 @@
 "Ealing Council", "Ealing", "http://www.pam.ealing.gov.uk/", "ApplicationSearchServletParser", "EalingSearchParser"
 "Denbighshire County Council", "Denbighshire", "http://planning.denbighshire.gov.uk/", "ApplicationSearchServletParser", "DenbighshireSearchParser"
 "Wear Valley District Council", "Wear Valley", "http://planning.wearvalley.gov.uk/", "ApplicationSearchServletParser", "WearValleySearchParser"
+"Chorley Borough Council", "Chorley", "http://planning.chorley.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
