@@ -69,3 +69,4 @@
 "Denbighshire County Council", "Denbighshire", "http://planning.denbighshire.gov.uk/", "ApplicationSearchServletParser", "DenbighshireSearchParser"
 "Wear Valley District Council", "Wear Valley", "http://planning.wearvalley.gov.uk/", "ApplicationSearchServletParser", "WearValleySearchParser"
 "Chorley Borough Council", "Chorley", "http://planning.chorley.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
+"Gravesham Borough Council", "Gravesham", "http://195.102.67.4/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
