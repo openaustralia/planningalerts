@@ -3,9 +3,9 @@
 list_of_sites_filename = "PublicAccessSites.csv"
 other_files_to_copy_filename = "OtherFilesToCopy.csv"
 template_filename = "CGITemplate"
-python_location = "/usr/bin/python"
+python_location = "/usr/local/bin/python"
 
-cgi_dir = "../CGI/"
+cgi_dir = "../cgi-bin/"
 
 import csv
 from os import chmod

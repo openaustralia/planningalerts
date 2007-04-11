@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 
-# This is the parser for Kerrier District Council.
+# This is the parser for Coventry City Council.
 # it is generated from the file CGITemplate
 
 import cgi
@@ -14,13 +14,13 @@ month = form.getfirst('month')
 year = form.getfirst('year')
 
 
-authority_name = "Kerrier District Council"
-authority_short_name = "Kerrier"
-base_url = "http://publicaccess.kerrier.gov.uk/publicaccess/tdc/"
+authority_name = "Coventry City Council"
+authority_short_name = "Coventry"
+base_url = "http://planning.coventry.gov.uk/"
 
-import PublicAccess
+import ApplicationSearchServletParser
 
-parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
+parser = ApplicationSearchServletParser.CoventrySearchParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
 

@@ -1,4 +1,4 @@
-#!/opt/local/bin/python
+#!/usr/local/bin/python
 
 # This is the parser for Blaby District Council.
 # it is generated from the file CGITemplate
@@ -20,9 +20,7 @@ base_url = "http://www.blaby.gov.uk/PublicAccess/tdc/"
 
 import PublicAccess
 
-parser = PublicAccess.PublicAccessParser(authority_name,
-                                         authority_short_name,
-                                         base_url)
+parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
 

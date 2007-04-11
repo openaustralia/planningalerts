@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 
-# This is the parser for Kerrier District Council.
+# This is the parser for High Peak Borough Council.
 # it is generated from the file CGITemplate
 
 import cgi
@@ -14,13 +14,13 @@ month = form.getfirst('month')
 year = form.getfirst('year')
 
 
-authority_name = "Kerrier District Council"
-authority_short_name = "Kerrier"
-base_url = "http://publicaccess.kerrier.gov.uk/publicaccess/tdc/"
+authority_name = "High Peak Borough Council"
+authority_short_name = "High Peak"
+base_url = "http://planning.highpeak.gov.uk/"
 
-import PublicAccess
+import ApplicationSearchServletParser
 
-parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
+parser = ApplicationSearchServletParser.HighPeakSearchParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
 

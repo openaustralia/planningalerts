@@ -56,7 +56,7 @@ class PlanningAuthorityResults:
 
     def __repr__(self):
 	return self.displayXML()
-
+        
     def displayXML(self):
         """This should display the contents of this object in the planningalerts format.
            i.e. in the same format as this one:
@@ -88,7 +88,7 @@ class PlanningApplication:
 
     def __repr__(self):
 	return self.displayXML()
-
+        
     def displayXML(self):
 	return "<application>\n" +\
 	"<council_reference>%s</council_reference>\n" %xmlQuote(self.council_reference) +\

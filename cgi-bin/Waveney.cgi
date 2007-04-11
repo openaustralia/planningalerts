@@ -20,9 +20,7 @@ base_url = "http://publicaccess.waveney.gov.uk/PublicAccess/tdc/"
 
 import PublicAccess
 
-parser = PublicAccess.PublicAccessParser(authority_name,
-                                         authority_short_name,
-                                         base_url)
+parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
 

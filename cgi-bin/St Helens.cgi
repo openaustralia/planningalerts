@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 
-# This is the parser for Kerrier District Council.
+# This is the parser for St Helens Council.
 # it is generated from the file CGITemplate
 
 import cgi
@@ -14,13 +14,13 @@ month = form.getfirst('month')
 year = form.getfirst('year')
 
 
-authority_name = "Kerrier District Council"
-authority_short_name = "Kerrier"
-base_url = "http://publicaccess.kerrier.gov.uk/publicaccess/tdc/"
+authority_name = "St Helens Council"
+authority_short_name = "St Helens"
+base_url = "http://212.248.225.150:8080/"
 
-import PublicAccess
+import ApplicationSearchServletParser
 
-parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
+parser = ApplicationSearchServletParser.StHelensSearchParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
 
