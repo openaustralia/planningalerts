@@ -266,6 +266,15 @@ CREATE TABLE  `planning`.`user` (
 INSERT INTO `planning`.`user` VALUES  (51,'richard@memespring.co.uk','sw98jx',0,'2007-01-07 10:16:08',530045,174349,532145,176449,'d8a8495e75bece822921',1,'l'),
  (52,'richard@memespring.co.uk','sw98jx',0,'2007-01-06 11:04:37',530045,174349,532145,176449,'c4a175ffa33297125bf9',0,'l');
 
+CREATE TABLE  `planning`.`stats` (
+  `key` varchar(25) NOT NULL,
+  `value` int(11) NOT NULL,
+  PRIMARY KEY  (`key`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+INSERT INTO `planning`.`stats` (`key`,`value`) VALUES 
+ ('applications_sent',4),
+ ('emails_sent',4);
+
 
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

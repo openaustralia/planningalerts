@@ -13,6 +13,8 @@
         
     //Properties
     var $log = array();
+	var $application_count = 0;
+	var $email_count = 0;
 
     //Run
      function run (){
@@ -34,8 +36,6 @@
              
              //Loop though users
              for ($i=0; $i < sizeof($user_results); $i++){ 
-
-                 $this->store_log("Processing user " . $i);
                 
                  //Find applications for that user
                  $sql = "select council_reference, address, 
@@ -51,13 +51,11 @@
 
                 //Send email if we have any 
                 if(sizeof($application_results) > 0){
-
-                    $this->store_log("Found " . sizeof($application_results) . "applications for this user. w00t!");
                     
                     //Setup applications array (bit pikey this)
                     $applications = array();
                     for ($ii=0; $ii < sizeof($application_results); $ii++){ 
-print_r($application_results);                        
+       
                         $application = new application();
                         $application->council_reference = $application_results[$ii][0];
                         $application->address = $application_results[$ii][1]; 
@@ -69,7 +67,9 @@ print_r($application_results);
                         $application->authority_name = $application_results[$ii][7];                        
                         
                         array_push($applications, $application);
-                    } 
+                    }
+
+					$this->application_count += sizeof($applications); 
                     
                     //Smarty template
                     $smarty = new Smarty;
@@ -87,11 +87,11 @@ print_r($application_results);
                     //Send the email
                     if($email_text !=""){
                         send_text_email($user_results[$i][1], EMAIL_FROM_NAME, EMAIL_FROM_ADDRESS, "Planning applications near " . strtoupper($user_results[$i][2]),  $email_text);
-                        $this->store_log("sent applications to " . $user_results[$i][1]);
+						$this->email_count +=1;
                     }else{
                         $this->store_log("BLANK EMAIL TEXT !!! EMAIL NOT SENT");
                     }
-                 
+
                     //Update last sent
                     $sql = "update user set last_sent = " . $db->quote(mysql_date(time())) . " where user_id = " . $user_results[$i][0];
                     $db->query($sql);   
@@ -101,11 +101,34 @@ print_r($application_results);
              }
 
          }
-      
+
+      $this->store_log("Sent " . $this->application_count . " applications  to " . $this->email_count . " people!");	
+
+	 //update the number of apps sent
+	  $sql = "select `key`, `value` from stats";
+	  $stats_results = $db->getAll($sql);
+	  $new_application_total = 0;	
+	  $new_email_total = 0;	
+	  for ($i=0; $i < sizeof($stats_results); $i++){ 
+			if($stats_results[$i][0] == 'applications_sent'){
+				$new_application_total = $stats_results[$i][1] + $this->application_count;
+				$new_email_total = $stats_results[$i][1] + $this->email_count;
+			}	
+	  }
+	
+	//add stats to email
+	 $this->store_log("Total applications ever sent:  " . $new_application_total);	
+	 $this->store_log("Total emails ever sent:  " . $new_email_total);
+	
+	//update stats in DB
+	 $sql = "update stats set `value` = " . $new_application_total . " where `key` = 'applications_sent'";
+	 $db->query($sql);	
+	
+	 $sql = "update stats set `value` = " . $new_email_total . " where `key` = 'emails_sent'";
+	 $db->query($sql);
+		
       //Send the log
       send_text_email(LOG_EMAIL, "mailer@" . DOMAIN, "mailer@" . DOMAIN, "Planning mailer log", print_r($this->log, true));
-      
-      $this->store_log("Debug email sent to " . LOG_EMAIL);
          
      }
      

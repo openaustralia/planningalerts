@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.16, created on 2007-04-09 19:59:18
+<?php /* Smarty version 2.6.16, created on 2007-04-21 12:06:10
          compiled from rss.tpl */ ?>
 <?php echo '<?xml'; ?>
  version="1.0" encoding="UTF-8"<?php echo '?>'; ?>
