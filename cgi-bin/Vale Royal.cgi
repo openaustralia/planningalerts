@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 
-# This is the parser for Kerrier District Council.
+# This is the parser for Vale Royal Borough Council.
 # it is generated from the file CGITemplate
 
 import cgi
@@ -14,9 +14,9 @@ month = form.getfirst('month')
 year = form.getfirst('year')
 
 
-authority_name = "Kerrier District Council"
-authority_short_name = "Kerrier"
-base_url = "http://publicaccess.kerrier.gov.uk/publicaccess/tdc/"
+authority_name = "Vale Royal Borough Council"
+authority_short_name = "Vale Royal"
+base_url = "http://pa.valeroyal.gov.uk/publicaccess/tdc/"
 
 import PublicAccess
 
