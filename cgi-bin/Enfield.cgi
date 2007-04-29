@@ -8,6 +8,7 @@ use HTML::TreeBuilder;
 use LWP::UserAgent;
 use XML::Writer;
 
+
 # The master URLs for the Enfield planning search
 our $SearchURL = "http://forms.enfield.gov.uk/swiftlg/apas/run/WPHAPPCRITERIA";
 our $InfoURL = "http://forms.enfield.gov.uk/swiftlg/apas/run/WPHAPPDETAIL.DisplayUrl?theApnID=";
