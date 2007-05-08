@@ -330,7 +330,6 @@ class DerbyParser(AcolnetParser):
     action_regex = re.compile("<FORM  name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" onSubmit=\"return ValidateSearch\(\)\" enctype=\"multipart/form-data\">")
 
 class CroydonParser(AcolnetParser):
-    
     case_number_tr = 1 # this one can be got by the td class attribute
     reg_date_tr = 3
     location_tr = 5
@@ -338,6 +337,15 @@ class CroydonParser(AcolnetParser):
 
     comments_email_address = "planning.control@croydon.gov.uk"
     action_regex = re.compile("<form id=\"frmSearch\" onSubmit=\"\"return ValidateSearch\(\)\"\" name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" enctype=\"multipart/form-data\">")
+
+class EastLindseyParser(AcolnetParser):
+    case_number_tr = 1 # this one can be got by the td class attribute
+    reg_date_tr = 3
+    location_tr = 5
+    proposal_tr = 6    
+
+    comments_email_address = "development.control@e-lindsey.gov.uk"
+    action_regex = re.compile("<form id=\"frmSearch\" onSubmit=\"return ValidateSearch\(\)\" name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" enctype=\"multipart/form-data\">")
 
 if __name__ == '__main__':
     day = 15

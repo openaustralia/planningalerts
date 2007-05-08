@@ -94,4 +94,5 @@
 "Bury Metropolitan Borough Council", "Bury", "http://e-planning.bury.gov.uk/ePlanning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch", "AcolnetParser", "BuryParser"
 "Derby City Council", "Derby", "http://195.224.106.204/scripts/planningpages02%5CXSLPagesDC_DERBY%5CDCWebPages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "DerbyParser"
 "London Borough of Croydon", "Croydon", "http://planning.croydon.gov.uk/DCWebPages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "CroydonParser"
+"East Lindsey District Council", "East Lindsey", "http://www.e-lindsey.gov.uk/planning/AcolnetCGI.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "EastLindseyParser"
 
