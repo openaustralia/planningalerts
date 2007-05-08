@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 
-# This is the parser for Kerrier District Council.
+# This is the parser for Derby City Council.
 # it is generated from the file CGITemplate
 
 import cgi
@@ -14,13 +14,13 @@ month = form.getfirst('month')
 year = form.getfirst('year')
 
 
-authority_name = "Kerrier District Council"
-authority_short_name = "Kerrier"
-base_url = "http://publicaccess.kerrier.gov.uk/publicaccess/tdc/"
+authority_name = "Derby City Council"
+authority_short_name = "Derby"
+base_url = "http://195.224.106.204/scripts/planningpages02%5CXSLPagesDC_DERBY%5CDCWebPages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
 
-import PublicAccess
+import AcolnetParser
 
-parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
+parser = AcolnetParser.DerbyParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
 
