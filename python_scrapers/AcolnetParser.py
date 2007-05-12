@@ -355,6 +355,16 @@ class FyldeParser(AcolnetParser):
 
     comments_email_address = "planning@fylde.gov.uk"
     action_regex = re.compile("<FORM  name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" onSubmit=\"return ValidateSearch\(\)\" enctype=\"multipart/form-data\">")
+
+
+class HarlowParser(AcolnetParser):
+    case_number_tr = 1 # this one can be got by the td class attribute
+    reg_date_tr = 2
+    location_tr = 4
+    proposal_tr = 5    
+
+    comments_email_address = "Planning.services@harlow.gov.uk"
+    action_regex = re.compile("<FORM  name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" onSubmit=\"return ValidateSearch\(\)\" enctype=\"multipart/form-data\">")    
     
 
 if __name__ == '__main__':
