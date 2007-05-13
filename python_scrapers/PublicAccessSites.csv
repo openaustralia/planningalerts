@@ -98,4 +98,5 @@
 "Fylde Borough Council", "Fylde", "http://www2.fylde.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "FyldeParser"
 "Harlow Council", "Harlow", "http://planning.harlow.gov.uk/PlanningSearch/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "HarlowParser"
 "Hertsmere Borough Council", "Hertsmere", "http://www2.hertsmere.gov.uk/ACOLNET/DCOnline//acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "HertsmereParser"
+"London Borough of Lewisham", "Lewisham", "http://acolnet.lewisham.gov.uk/lewis-xslpagesdc/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.PgeSearch", "AcolnetParser", "LewishamParser"
 "North Hertfordshire District Council", "North Hertfordshire", "http://www.north-herts.gov.uk/dcdataonline/Pages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch", "AcolnetParser", "NorthHertfordshireParser"

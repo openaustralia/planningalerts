@@ -387,6 +387,15 @@ class HertsmereParser(AcolnetParser):
 
     comments_email_address = "planning@hertsmere.gov.uk"
     action_regex = re.compile("<FORM  name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" onSubmit=\"return ValidateSearch\(\)\" enctype=\"multipart/form-data\">", re.IGNORECASE)    
+
+class LewishamParser(AcolnetParser):
+    case_number_tr = 1 # this one can be got by the td class attribute
+    reg_date_tr = 2
+    location_tr = 4
+    proposal_tr = 5    
+
+    comments_email_address = "planning@hertsmere.gov.uk"
+    action_regex = re.compile("<FORM  name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" onSubmit=\"return ValidateSearch\(\)\" enctype=\"multipart/form-data\">", re.IGNORECASE)    
     
 class NorthHertfordshireParser(AcolnetParser):
     case_number_tr = 1 # this one can be got by the td class attribute
@@ -394,8 +403,8 @@ class NorthHertfordshireParser(AcolnetParser):
     location_tr = 4
     proposal_tr = 5    
 
-    comments_email_address = "planningcontrol@north-herts.gov.uk"
-    action_regex = re.compile("<FORM  name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" onSubmit=\"return ValidateSearch\(\)\" enctype=\"multipart/form-data\">", re.IGNORECASE)    
+    comments_email_address = "planning@lewisham.gov.uk"
+    action_regex = re.compile("<FORM  name=\"frmSearch\" method=\"post\" action=\"\" onSubmit=\"return ValidateSearch\(\)\" enctype=\"multipart/form-data\">", re.IGNORECASE)    
     
 
 if __name__ == '__main__':
