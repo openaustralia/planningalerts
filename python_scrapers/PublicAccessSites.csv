@@ -47,6 +47,7 @@
 "Cornwall County Council", "Cornwall", "http://planapps.cornwall.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "South Bucks District Council", "South Bucks", "http://sbdc-paweb.southbucks.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Malvern Hills District Council", "Malvern Hills", "http://public.malvernhills.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
+"Manchester City Council", "Manchester", "http://www.publicaccess.manchester.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "West Lancashire District Council", "West Lancashire", "http://publicaccess.westlancsdc.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Torbay Council", "Torbay", "http://www.torbay.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "South Ribble Borough Council", "South Ribble", "http://publicaccess.southribble.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
