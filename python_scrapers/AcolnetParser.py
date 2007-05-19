@@ -23,6 +23,8 @@ from time import strptime
 date_format = "%d/%m/%Y"
 our_date = date(2007,4,25)
 
+#This is to get the system key out of the info url
+system_key_regex = re.compile("TheSystemkey=(\d*)", re.IGNORECASE)
 
 class AcolnetParser(HTMLParser.HTMLParser):
     case_number_tr = None # this one can be got by the td class attribute
@@ -34,6 +36,7 @@ class AcolnetParser(HTMLParser.HTMLParser):
     # appropriate email address instead
     comments_email_address = None
 
+    action_regex = re.compile("<form[^>]*action=\"([^\"]*ACTION=UNWRAP&RIPSESSION=[^\"]*)\"[^>]*>", re.IGNORECASE)    
     
     def __init__(self,
                  authority_name,
@@ -96,23 +99,18 @@ class AcolnetParser(HTMLParser.HTMLParser):
                 self._tr_number += 1
             if tag == "td":
                 self._in_td = True
-                if self._tr_number == self.case_number_tr:
-                    #get the reference and the info link here
-                    pass
-                elif self._tr_number == self.reg_date_tr:
-                    #get the registration date here
-                    pass
-                elif self._tr_number == self.location_tr:
-                    #get the address and postcode here
-                    pass
-                elif self._tr_number == self.proposal_tr:
-                    #get the description here
-                    pass
             if tag == "a" and self._tr_number == self.case_number_tr:
                 # this is where we get the info link and the case number
                 for key, value in attrs:
                     if key == "href":
                         self._current_application.info_url = value
+
+                        system_key = system_key_regex.search(value).groups()[0]
+
+                        if self.comments_email_address is not None:
+                            self._current_application.comment_url = self.comments_email_address
+                        else:
+                            self._current_application.comment_url = value.replace("PgeResultDetail", "PgeCommentForm")
                         
     def handle_data(self, data):
         # If we are in the tr which contains the case number,
@@ -206,51 +204,30 @@ class AcolnetParser(HTMLParser.HTMLParser):
 
 
 class BaberghParser(AcolnetParser):
-    #search_url = "http://planning.babergh.gov.uk/dataOnlinePlanning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
-
     case_number_tr = 1 # this one can be got by the td class attribute
     reg_date_tr = 2
     location_tr = 4
     proposal_tr = 5
 
-    #authority_name = "Babergh District Council"
-    #authority_short_name = "Babergh"
-
     # It would be nice to scrape this...
     comments_email_address = "planning.reception@babergh.gov.uk"
 
-    action_regex = re.compile("<FORM  name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" onSubmit=\"return ValidateSearch\(\)\" enctype=\"multipart/form-data\">")
-
 class BasingstokeParser(AcolnetParser):
-    #search_url = "http://planning.basingstoke.gov.uk/DCOnline2/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
-    
     case_number_tr = 1 # this one can be got by the td class attribute
     reg_date_tr = 3
     location_tr = 6
     proposal_tr = 8
 
-    #authority_name = "Basingstoke and Deane Borough Council"
-    #authority_short_name = "Basingstoke and Deane"
-
     # It would be nice to scrape this...
     comments_email_address = "development.control@basingstoke.gov.uk"
 
-    action_regex = re.compile("<form id=\"frmSearch\" onSubmit=\"\"return ValidateSearch\(\)\"\" name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" enctype=\"multipart/form-data\">")
-
 class BassetlawParser(AcolnetParser):
-    #search_url =  "http://www.bassetlaw.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
-
     case_number_tr = 1 # this one can be got by the td class attribute
     reg_date_tr = 2
     location_tr = 5
     proposal_tr = 6    
 
-    #authority_name = "Bassetlaw District Council"
-    #authority_short_name = "Bassetlaw"
-
     comments_email_address = "planning@bassetlaw.gov.uk"
-
-    action_regex = re.compile("<FORM  name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" onSubmit=\"return ValidateSearch\(\)\" enctype=\"multipart/form-data\">", re.IGNORECASE)
 
     def _cleanupHTML(self, html):
         """There is a broken div in this page. We don't need any divs, so
@@ -260,34 +237,26 @@ class BassetlawParser(AcolnetParser):
         return div_regex.sub('', html)
 
 
-class BridgenorthParser(AcolnetParser):
+class BridgnorthParser(AcolnetParser):
+    # This site is currently down...
     #search_url = "http://www2.bridgnorth-dc.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch"
-
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 2
-    location_tr = 4
-    proposal_tr = 5    
-
     #authority_name = "Bridgenorth District Council"
     #authority_short_name = "Bridgenorth"
 
-    comments_email_address = "contactus@bridgnorth-dc.gov.uk"
-
-    action_regex = re.compile("<FORM  name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" onSubmit=\"return ValidateSearch\(\)\" enctype=\"multipart/form-data\">", re.IGNORECASE)
-
-class BuryParser(AcolnetParser):
-    #search_url = "http://e-planning.bury.gov.uk/ePlanning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch"
-
     case_number_tr = 1 # this one can be got by the td class attribute
     reg_date_tr = 2
     location_tr = 4
     proposal_tr = 5    
 
-    #authority_name = "Bury Metropolitan Borough Council"
-    #authority_short_name = "Bury"
+    comments_email_address = "contactus@bridgnorth-dc.gov.uk"
+
+class BuryParser(AcolnetParser):
+    case_number_tr = 1 # this one can be got by the td class attribute
+    reg_date_tr = 2
+    location_tr = 4
+    proposal_tr = 5    
 
     comments_email_address = "development.control@bury.gov.uk"
-    action_regex = re.compile("<FORM  name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" onSubmit=\"return ValidateSearch\(\)\" enctype=\"multipart/form-data\">", re.IGNORECASE)
 
 ## class CanterburyParser(AcolnetParser):
 ##     search_url = "http://planning.canterbury.gov.uk/scripts/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
@@ -301,36 +270,22 @@ class BuryParser(AcolnetParser):
 ##     authority_short_name = "Canterbury"
 
 ##     comments_email_address = ""
-##     action_regex = re.compile("<form id=\"frmSearch\" onSubmit=\"\"return ValidateSearch\(\)\"\" name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" enctype=\"multipart/form-data\">")
 
 class CarlisleParser(AcolnetParser):
-    #search_url = "http://planning.carlisle.gov.uk/acolnet/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch"
-
     case_number_tr = 1 # this one can be got by the td class attribute
     reg_date_tr = 2
     location_tr = 5
     proposal_tr = 6    
 
-    #authority_name = "Carlisle City Council"
-    #authority_short_name = "Carlisle"
-
     comments_email_address = "dc@carlisle.gov.uk"
-    action_regex = re.compile("<form id=\"frmSearch\" onSubmit=\"\"return ValidateSearch\(\)\"\" name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" enctype=\"multipart/form-data\">", re.IGNORECASE)
-
 
 class DerbyParser(AcolnetParser):
-    #search_url = "http://195.224.106.204/scripts/planningpages02%5CXSLPagesDC_DERBY%5CDCWebPages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
-
     case_number_tr = 1 # this one can be got by the td class attribute
     reg_date_tr = 3
     location_tr = 4
     proposal_tr = 5    
 
-    #authority_name = "Derby City Council"
-    #authority_short_name = "Derby"
-
     comments_email_address = "developmentcontrol@derby.gov.uk"
-    action_regex = re.compile("<FORM  name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" onSubmit=\"return ValidateSearch\(\)\" enctype=\"multipart/form-data\">", re.IGNORECASE)
 
 class CroydonParser(AcolnetParser):
     case_number_tr = 1 # this one can be got by the td class attribute
@@ -339,7 +294,6 @@ class CroydonParser(AcolnetParser):
     proposal_tr = 6    
 
     comments_email_address = "planning.control@croydon.gov.uk"
-    action_regex = re.compile("<form id=\"frmSearch\" onSubmit=\"\"return ValidateSearch\(\)\"\" name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" enctype=\"multipart/form-data\">", re.IGNORECASE)
 
 class EastLindseyParser(AcolnetParser):
     case_number_tr = 1 # this one can be got by the td class attribute
@@ -348,7 +302,6 @@ class EastLindseyParser(AcolnetParser):
     proposal_tr = 6    
 
     comments_email_address = "development.control@e-lindsey.gov.uk"
-    action_regex = re.compile("<form id=\"frmSearch\" onSubmit=\"return ValidateSearch\(\)\" name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" enctype=\"multipart/form-data\">", re.IGNORECASE)
 
 class FyldeParser(AcolnetParser):
     case_number_tr = 1 # this one can be got by the td class attribute
@@ -357,8 +310,6 @@ class FyldeParser(AcolnetParser):
     proposal_tr = 5    
 
     comments_email_address = "planning@fylde.gov.uk"
-    action_regex = re.compile("<FORM  name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" onSubmit=\"return ValidateSearch\(\)\" enctype=\"multipart/form-data\">")
-
 
 class HarlowParser(AcolnetParser):
     case_number_tr = 1 # this one can be got by the td class attribute
@@ -367,8 +318,6 @@ class HarlowParser(AcolnetParser):
     proposal_tr = 5    
 
     comments_email_address = "Planning.services@harlow.gov.uk"
-    action_regex = re.compile("<FORM  name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" onSubmit=\"return ValidateSearch\(\)\" enctype=\"multipart/form-data\">", re.IGNORECASE)    
-    
 
 class HavantParser(AcolnetParser):
     case_number_tr = 1 # this one can be got by the td class attribute
@@ -377,7 +326,6 @@ class HavantParser(AcolnetParser):
     proposal_tr = 5    
 
     comments_email_address = "representations@havant.gov.uk"
-    action_regex = re.compile("<form id=\"frmSearch\" onSubmit=\"\"return ValidateSearch\(\)\"\" theme=\"\"[theme]\"\" name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" enctype=\"multipart/form-data\">", re.IGNORECASE)    
 
 class HertsmereParser(AcolnetParser):
     case_number_tr = 1 # this one can be got by the td class attribute
@@ -386,7 +334,6 @@ class HertsmereParser(AcolnetParser):
     proposal_tr = 5    
 
     comments_email_address = "planning@hertsmere.gov.uk"
-    action_regex = re.compile("<FORM  name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" onSubmit=\"return ValidateSearch\(\)\" enctype=\"multipart/form-data\">", re.IGNORECASE)    
 
 class LewishamParser(AcolnetParser):
     case_number_tr = 1 # this one can be got by the td class attribute
@@ -394,49 +341,45 @@ class LewishamParser(AcolnetParser):
     location_tr = 4
     proposal_tr = 5    
 
-    comments_email_address = "planning@hertsmere.gov.uk"
-    action_regex = re.compile("<FORM  name=\"frmSearch\" method=\"post\" action=\"([^\"]*)\" onSubmit=\"return ValidateSearch\(\)\" enctype=\"multipart/form-data\">", re.IGNORECASE)    
+    comments_email_address = "planning@lewisham.gov.uk"
     
-class NorthHertfordshireParser(AcolnetParser):
+## class NorthHertfordshireParser(AcolnetParser):
+##     case_number_tr = 1 # this one can be got by the td class attribute
+##     reg_date_tr = 2
+##     location_tr = 4
+##     proposal_tr = 5    
+
+##     comments_email_address = "planning@lewisham.gov.uk"
+    
+## class MidSuffolkParser(AcolnetParser):
+##     case_number_tr = 1 # this one can be got by the td class attribute
+##     reg_date_tr = 2
+##     location_tr = 4
+##     proposal_tr = 5    
+
+##     comments_email_address = "planning@lewisham.gov.uk"
+##     #action_regex = re.compile("<FORM .*action=\"(.*ACTION=UNWRAP&RIPSESSION=[^\"]*)\"[^>]*>", re.IGNORECASE)    
+
+class NewForestParser(AcolnetParser):
+    # In this case there is an online comment facility at the
+    # bottom of each view app page...
     case_number_tr = 1 # this one can be got by the td class attribute
     reg_date_tr = 2
     location_tr = 4
     proposal_tr = 5    
-
-    comments_email_address = "planning@lewisham.gov.uk"
-    action_regex = re.compile("<FORM  name=\"frmSearch\" method=\"post\" action=\"\" onSubmit=\"return ValidateSearch\(\)\" enctype=\"multipart/form-data\">", re.IGNORECASE)    
-    
-
 if __name__ == '__main__':
     day = 15
     month = 3
     year = 2007
 
-    # working
-    # parser = BasingstokeParser()
-    #parser = BaberghParser("Babergh District Council", "Babergh", "http://planning.babergh.gov.uk/dataOnlinePlanning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-
-    # works with the divs stripped out
-    #parser = BassetlawParser()
-
     # returns error 400 - bad request
     #parser = BridgenorthParser()
-
-    # working
-    #parser = BuryParser()
 
     # cambridgeshire is a bit different...
     # no advanced search page
 
     # canterbury
     # results as columns of one table
-
-    # returns error 400 - bad request
-    #parser = CarlisleParser()
-
-    # working
-    #parser = DerbyParser()
-
 
     parser = HavantParser("HavantBC", "Havant", "http://www3.havant.gov.uk/scripts/planningpages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     
