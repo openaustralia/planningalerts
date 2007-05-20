@@ -366,7 +366,15 @@ class NewForestParser(AcolnetParser):
     case_number_tr = 1 # this one can be got by the td class attribute
     reg_date_tr = 2
     location_tr = 4
-    proposal_tr = 5    
+    proposal_tr = 5
+
+class NorthWiltshireParser(AcolnetParser):
+    case_number_tr = 1 # this one can be got by the td class attribute
+    reg_date_tr = 3
+    location_tr = 6
+    proposal_tr = 7
+
+    
 if __name__ == '__main__':
     day = 15
     month = 3

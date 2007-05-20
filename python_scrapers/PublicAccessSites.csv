@@ -104,3 +104,5 @@
 "New Forest National Park", "New Forest", "http://web01.newforestnpa.gov.uk/planningpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "NewForestParser"
 "Bridgnorth District Council", "Bridgnorth", "http://www2.bridgnorth-dc.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch", "AcolnetParser", "BridgnorthParser"
 "Carlisle City Council", "Carlisle", "http://planning.carlisle.gov.uk/acolnet/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "CarlisleParser"
+"Newcastle City Council", "Newcastle",  "http://gispublic.newcastle.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
+"North Wiltshire District Council", "North Wiltshire", "http://planning.northwilts.gov.uk/DCOnline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "NorthWiltshireParser"
