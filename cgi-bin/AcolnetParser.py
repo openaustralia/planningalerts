@@ -374,6 +374,21 @@ class NorthWiltshireParser(AcolnetParser):
     location_tr = 6
     proposal_tr = 7
 
+class OldhamParser(AcolnetParser):
+    case_number_tr = 1 # this one can be got by the td class attribute
+    reg_date_tr = 3
+    location_tr = 6
+    proposal_tr = 7
+
+    def _cleanupHTML(self, html):
+        """There is a bad table end tag in this one.
+        Fix it before we start"""
+        
+        bad_table_end = '</table summary="Copyright">'
+        good_table_end = '</table>'
+        return html.replace(bad_table_end, good_table_end)
+
+        
     
 if __name__ == '__main__':
     day = 15
@@ -389,7 +404,7 @@ if __name__ == '__main__':
     # canterbury
     # results as columns of one table
 
-    parser = HavantParser("HavantBC", "Havant", "http://www3.havant.gov.uk/scripts/planningpages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    parser = OldhamParser("Oldham", "Oldham", "http://planning.oldham.gov.uk/planning//acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     
     print parser.getResults(day, month, year)
     
