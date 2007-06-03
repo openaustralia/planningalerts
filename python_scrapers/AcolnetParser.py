@@ -389,6 +389,13 @@ class OldhamParser(AcolnetParser):
         return html.replace(bad_table_end, good_table_end)
 
         
+class RenfrewshireParser(AcolnetParser):
+    case_number_tr = 1 # this one can be got by the td class attribute
+    reg_date_tr = 2
+    location_tr = 4
+    proposal_tr = 5
+
+    comments_email_address = "pt@renfrewshire.gov.uk"
     
 if __name__ == '__main__':
     day = 15
