@@ -61,7 +61,7 @@ class confirmed_page {
 		$smarty->assign("menu_item", "signup");
 		$smarty->assign("page_title","Confirmed");		
 		$smarty->assign("form_action", $form_action);
-		$smarty->assign("postcode", $this->postcode);
+		$smarty->assign("postcode", clean_postcode($this->postcode));
 		$smarty->assign("alert_area_size", $this->alert_area_size);		
 
 		//Render

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.16, created on 2007-01-07 11:04:37
+<?php /* Smarty version 2.6.16, created on 2007-06-09 16:07:32
          compiled from confirm_email_text.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('block', 'textformat', 'confirm_email_text.tpl', 1, false),)), $this); ?>

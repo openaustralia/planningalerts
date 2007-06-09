@@ -236,6 +236,22 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
        }
        return $valid;
     }
+
+	function clean_postcode ($postcode, $upper = true) {
+
+		$reg = array();
+		$postcode = trim($postcode);
+		preg_match('/^(.+?)([0-9][a-z]{2})$/',$postcode, $reg);
+	
+		$clean_postcode = trim($reg[1]) . ' ' . trim($reg[2]);
+	
+		if($upper){
+			$clean_postcode = strtoupper($clean_postcode);
+		}
+	
+		return $clean_postcode;
+	
+	}
     
     //Tiny url
     function tiny_url($url,$length=30){
@@ -344,7 +360,7 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
     }
     
     function safe_scrape_page($url, $method = "GET"){
-error_log(print_r($url, true));     
+
         $page = "";
         for ($i=0; $i < 3; $i++){ 
             if($page == false){

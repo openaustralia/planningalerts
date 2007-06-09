@@ -47,7 +47,7 @@
              $smarty->compile_dir = SMARTY_COMPILE_DIRECTORY;
              
              $smarty->assign("email", $this->email);
-             $smarty->assign("postcode", $this->postcode);  
+             $smarty->assign("postcode", clean_postcode($this->postcode));  
              $smarty->assign("url", BASE_URL . "/confirmed.php?cid=" . $this->confirm_id);  
              
              //Get the email text
