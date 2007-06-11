@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 
-# This is the parser for Kerrier District Council.
+# This is the parser for South Bedfordshire District Council.
 # it is generated from the file CGITemplate
 
 import cgi
@@ -14,13 +14,13 @@ month = form.getfirst('month')
 year = form.getfirst('year')
 
 
-authority_name = "Kerrier District Council"
-authority_short_name = "Kerrier"
-base_url = "http://publicaccess.kerrier.gov.uk/publicaccess/tdc/"
+authority_name = "South Bedfordshire District Council"
+authority_short_name = "South Bedfordshire"
+base_url = "http://planning.southbeds.gov.uk/plantech/DCWebPages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.PgeSearch"
 
-import PublicAccess
+import AcolnetParser
 
-parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
+parser = AcolnetParser.SouthBedfordshireParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
 

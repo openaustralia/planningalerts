@@ -396,6 +396,12 @@ class RenfrewshireParser(AcolnetParser):
     proposal_tr = 5
 
     comments_email_address = "pt@renfrewshire.gov.uk"
+
+class SouthBedfordshireParser(AcolnetParser):
+    case_number_tr = 1 # this one can be got by the td class attribute
+    reg_date_tr = 3
+    location_tr = 5
+    proposal_tr = 6
     
 if __name__ == '__main__':
     day = 15
