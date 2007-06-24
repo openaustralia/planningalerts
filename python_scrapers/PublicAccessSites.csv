@@ -110,3 +110,4 @@
 "Renfrewshire Council", "Renfrewshire", "http://planning.renfrewshire.gov.uk/acolnetDCpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch", "AcolnetParser", "RenfrewshireParser"
 "Selby District Council", "Selby", "http://publicaccess.selby.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "South Bedfordshire District Council", "South Bedfordshire", "http://planning.southbeds.gov.uk/plantech/DCWebPages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.PgeSearch", "AcolnetParser", "SouthBedfordshireParser"
+"Suffolk Coastal District Council", "Suffolk Coastal", "https://apps3.suffolkcoastal.gov.uk/planningonline/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "SuffolkCoastalParser"
