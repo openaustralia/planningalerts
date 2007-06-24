@@ -10,7 +10,7 @@ import cookielib
 cookie_jar = cookielib.CookieJar()
 
 
-from PlanningUtils import fixNewlines, PlanningAuthorityResults, PlanningApplication
+from PlanningUtils import fixNewlines, getPostcodeFromText, PlanningAuthorityResults, PlanningApplication
 
 
 search_form_url_end = "DcApplication/application_searchform.aspx"
@@ -167,6 +167,9 @@ class PublicAccessParser(HTMLParser.HTMLParser):
                 # one found on the property page
                 if property_file_parser.postcode is not None:
                     self._current_application.postcode = property_file_parser.postcode
+                else:
+                    # If there is no postcode in here, then we'll have to make do with regexing one out of the address.
+                    self._current_application.postcode = getPostcodeFromText(self._current_application.address)
 
                 # There is no need for us to look at any more attributes.
 		break

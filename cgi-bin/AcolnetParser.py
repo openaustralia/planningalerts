@@ -159,8 +159,8 @@ class AcolnetParser(HTMLParser.HTMLParser):
         search_form_response = urllib2.urlopen(self.base_url)
         search_form_contents = search_form_response.read()
 
-        #outfile = open("tmpfile", "w")
-        #outfile.write(search_form_contents)
+        outfile = open("tmpfile", "w")
+        outfile.write(search_form_contents)
 
         # This sometimes causes a problem in HTMLParser, so let's just get the link
         # out with a regex...
@@ -410,6 +410,14 @@ class SuffolkCoastalParser(AcolnetParser):
     proposal_tr = 5
 
     comments_email_address = "d.c.admin@suffolkcoastal.gov.uk"
+
+class SurreyHeathParser(AcolnetParser):
+    case_number_tr = 1 # this one can be got by the td class attribute
+    reg_date_tr = 2
+    location_tr = 4
+    proposal_tr = 5
+
+    comments_email_address = "development-control@surreyheath.gov.uk"
     
 if __name__ == '__main__':
     day = 15
@@ -425,7 +433,7 @@ if __name__ == '__main__':
     # canterbury
     # results as columns of one table
 
-    parser = OldhamParser("Oldham", "Oldham", "http://planning.oldham.gov.uk/planning//acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    parser = SurreyHeathParser("Surrey Heath", "Surrey Heath", "https://www.public.surreyheath-online.gov.uk/whalecom60b1ef305f59f921/whalecom0/Scripts/PlanningPagesOnline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     
     print parser.getResults(day, month, year)
     

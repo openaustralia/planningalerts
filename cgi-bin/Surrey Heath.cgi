@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 
-# This is the parser for Derby City Council.
+# This is the parser for Surrey Heath Borough Council.
 # it is generated from the file CGITemplate
 
 import cgi
@@ -14,13 +14,13 @@ month = form.getfirst('month')
 year = form.getfirst('year')
 
 
-authority_name = "Derby City Council"
-authority_short_name = "Derby"
-base_url = "http://195.224.106.204/scripts/planningpages02%5CXSLPagesDC_DERBY%5CDCWebPages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
+authority_name = "Surrey Heath Borough Council"
+authority_short_name = "Surrey Heath"
+base_url = "https://www.public.surreyheath-online.gov.uk/whalecom60b1ef305f59f921/whalecom0/Scripts/PlanningPagesOnline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
 
 import AcolnetParser
 
-parser = AcolnetParser.DerbyParser(authority_name, authority_short_name, base_url)
+parser = AcolnetParser.SurreyHeathParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
 

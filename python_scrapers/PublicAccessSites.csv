@@ -111,3 +111,4 @@
 "Selby District Council", "Selby", "http://publicaccess.selby.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "South Bedfordshire District Council", "South Bedfordshire", "http://planning.southbeds.gov.uk/plantech/DCWebPages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.PgeSearch", "AcolnetParser", "SouthBedfordshireParser"
 "Suffolk Coastal District Council", "Suffolk Coastal", "https://apps3.suffolkcoastal.gov.uk/planningonline/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "SuffolkCoastalParser"
+"Surrey Heath Borough Council", "Surrey Heath", "https://www.public.surreyheath-online.gov.uk/whalecom60b1ef305f59f921/whalecom0/Scripts/PlanningPagesOnline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "SurreyHeathParser"
