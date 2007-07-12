@@ -1,5 +1,6 @@
 <?php 
     require_once ("config.php"); 
+    require_once ("stats.php"); 
  
 $getinvolved_page = new getinvolved_page();
 
@@ -20,7 +21,7 @@ class getinvolved_page {
 		$smarty = new Smarty;
         $smarty->force_compile = true;
         $smarty->compile_dir = SMARTY_COMPILE_DIRECTORY;
-
+		$smarty->assign("stats", stats::get_stats());
 		$smarty->assign("page_title","Get involved");		
 		$smarty->assign("menu_item", "getinvolved");	
 		//Render

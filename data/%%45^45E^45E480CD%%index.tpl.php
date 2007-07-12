@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.16, created on 2007-06-09 16:07:02
+<?php /* Smarty version 2.6.16, created on 2007-07-12 07:12:04
          compiled from index.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "header.tpl", 'smarty_include_vars' => array()));
@@ -10,7 +10,7 @@ unset($_smarty_tpl_vars);
     <fieldset>
         <input type="hidden" name="_is_postback" value="1" />
     </fieldset>
-    <p id="pBeta"><span>This site is in Beta (test) mode, so local authorities near you may not be included in alerts.</span></p>
+
     <ul id="ulSignup" class="form nobullets">
         <li id="liEmail">
             <label for="txtEmail"><span class="number">1</span> Enter your email address</label>
@@ -48,12 +48,16 @@ unset($_smarty_tpl_vars);
                 </ul>
             </fieldset>
         </li>  
-        <li id="liSignup"><input type="submit" class="button" value="Create alert >>" /></li>              
+        <li id="liSignup">
+            <input type="submit" class="button" value="Create alert >>" />
+            <span id="spnBeta">This site is in Beta (test) mode, so all local authorities near you may not be included in alerts.</span>
+        </li>              
     </ul>
 </form>
 <div id="divSiteUpdates">
     <h4>Recent site updates</h4>
     <ul class="nobullets">
+        <li><em>July 2007</em>Added 21 councils inc. Lewisham, New Forest National Park and Edinburgh </li>        
         <li><em>April 2007</em>Added 50 more councils.<li>  
         <li><em>March 2007</em> Added an API and a few more councils (inc. Islington and Hackney)</li>
         <li><em>February 2007</em> Added loads more councils (inc. Camden and Tower Hamlets)</li>

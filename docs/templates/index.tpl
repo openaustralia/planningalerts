@@ -3,7 +3,7 @@
     <fieldset>
         <input type="hidden" name="_is_postback" value="1" />
     </fieldset>
-    <p id="pBeta"><span>This site is in Beta (test) mode, so local authorities near you may not be included in alerts.</span></p>
+
     <ul id="ulSignup" class="form nobullets">
         <li id="liEmail">
             <label for="txtEmail"><span class="number">1</span> Enter your email address</label>
@@ -36,12 +36,16 @@
                 </ul>
             </fieldset>
         </li>  
-        <li id="liSignup"><input type="submit" class="button" value="Create alert >>" /></li>              
+        <li id="liSignup">
+            <input type="submit" class="button" value="Create alert >>" />
+            <span id="spnBeta">This site is in Beta (test) mode, so all local authorities near you may not be included in alerts.</span>
+        </li>              
     </ul>
 </form>
 <div id="divSiteUpdates">
     <h4>Recent site updates</h4>
     <ul class="nobullets">
+        <li><em>July 2007</em>Added 21 councils inc. Lewisham, New Forest National Park and Edinburgh </li>        
         <li><em>April 2007</em>Added 50 more councils.<li>  
         <li><em>March 2007</em> Added an API and a few more councils (inc. Islington and Hackney)</li>
         <li><em>February 2007</em> Added loads more councils (inc. Camden and Tower Hamlets)</li>

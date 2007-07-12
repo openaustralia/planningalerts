@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.16, created on 2007-06-09 16:07:33
+<?php /* Smarty version 2.6.16, created on 2007-07-12 07:12:04
          compiled from header.tpl */ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -33,6 +33,9 @@
         <div id="divHeader">
             <h1><a href="/">PlanningAlerts<span>.</span>com</a><small>beta</small></h1>
             <h2>Email alerts of planning applications <em>near you</em></h2>
+            <p id="pStats"><?php echo $this->_tpl_vars['stats']['alert_count']; ?>
+ alerts sent for <?php echo $this->_tpl_vars['stats']['authority_count']; ?>
+ local authorities</p>
             <img alt="logo" title="logo" src="./images/logo.png" />
         </div>
         <div id="divContent">

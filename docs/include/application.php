@@ -108,7 +108,7 @@ class Applications{
     //by point
 	function query($x,$y,$d) {
 		$db = DB::connect(DB_CONNECTION_STRING);
-		$sql = "select council_reference, address, postcode, description, info_url, comment_url, map_url, x, y, date_recieved, full_name
+		$sql = "select council_reference, address, postcode, description, info_url, comment_url, map_url, x, y, date_recieved, date_scraped, full_name
 					from application 
 					inner join authority on application.authority_id = authority.authority_id
 					where application.x > " . $db->quote($x - $d) . " and application.x < " . $db->quote($x + $d) .
@@ -122,7 +122,7 @@ class Applications{
 	function query_area($x1,$y1,$x2,$y2) {
 
 		$db = DB::connect(DB_CONNECTION_STRING);
-		$sql = "select council_reference, address, postcode, description, info_url, comment_url, map_url, x, y, date_recieved, full_name
+		$sql = "select council_reference, address, postcode, description, info_url, comment_url, map_url, x, y, date_recieved, date_scraped, full_name
 					from application 
 					inner join authority on application.authority_id = authority.authority_id
 					where application.x > " . $db->quote($x1) . " and application.x < " . $db->quote($x2) .
@@ -136,7 +136,7 @@ class Applications{
 	//by authority
 	function query_authority($authority_short_name) {
 		$db = DB::connect(DB_CONNECTION_STRING);
-		$sql = "select council_reference, address, postcode, description, info_url, comment_url, map_url, x, y, date_recieved, full_name
+		$sql = "select council_reference, address, postcode, description, info_url, comment_url, map_url, x, y, date_recieved, date_scraped, full_name
 					from application 
 					inner join authority on application.authority_id = authority.authority_id
 					where authority.short_name = " . $db->quote($authority_short_name) ." order by date_scraped desc limit 100";
@@ -160,7 +160,8 @@ class Applications{
 				$application->x = $application_results[$i][7];
 				$application->y  = $application_results[$i][8];
 				$application->date_received = $application_results[$i][9];
-				$application->authority_name  = $application_results[$i][10];
+				$application->date_scraped = $application_results[$i][10];				
+				$application->authority_name  = $application_results[$i][11];
 
 				$os = new OSRef($application->x, $application->y);
 				$latlng = $os->toLatLng();

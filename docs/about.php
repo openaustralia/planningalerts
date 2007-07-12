@@ -1,6 +1,7 @@
 <?php 
     require_once ("config.php"); 
     require_once ("DB.php");    
+    require_once ("stats.php"); 
  
 $about_page = new about_page;
 
@@ -39,7 +40,7 @@ class about_page {
 		$smarty = new Smarty;
         $smarty->force_compile = true;
         $smarty->compile_dir = SMARTY_COMPILE_DIRECTORY;
-
+		$smarty->assign("stats", stats::get_stats());
 		$smarty->assign("page_title","About");		
 		$smarty->assign("menu_item", "about");	
 	

@@ -1,6 +1,8 @@
 <?php 
     require_once ("config.php"); 
     require_once ("user.php");     
+    require_once ("stats.php"); 
+
 $confirmed_page = new confirmed_page;
 
 class confirmed_page {
@@ -57,7 +59,7 @@ class confirmed_page {
 		$smarty = new Smarty;
         $smarty->force_compile = true;
         $smarty->compile_dir = SMARTY_COMPILE_DIRECTORY;
-
+		$smarty->assign("stats", stats::get_stats());
 		$smarty->assign("menu_item", "signup");
 		$smarty->assign("page_title","Confirmed");		
 		$smarty->assign("form_action", $form_action);

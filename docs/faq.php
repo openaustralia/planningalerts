@@ -1,5 +1,6 @@
 <?php 
     require_once ("config.php"); 
+    require_once ("stats.php"); 
  
 $faq_page = new faq_page;
 
@@ -19,7 +20,7 @@ class faq_page {
 		$smarty = new Smarty;
         $smarty->force_compile = true;
         $smarty->compile_dir = SMARTY_COMPILE_DIRECTORY;
-
+		$smarty->assign("stats", stats::get_stats());
 		$smarty->assign("page_title","Frequently asked questions");		
 		$smarty->assign("menu_item", "faq");	
 		//Render

@@ -1,7 +1,7 @@
 <?php 
     require_once ("config.php"); 
     require_once ("user.php");   
-
+    require_once ("stats.php"); 
 
 $index_page = new index_page;
 
@@ -46,6 +46,7 @@ class index_page {
         $smarty->force_compile = true;
         $smarty->compile_dir = SMARTY_COMPILE_DIRECTORY;
         
+		$smarty->assign("stats", stats::get_stats());
 		$smarty->assign("menu_item", "signup");
 		$smarty->assign("postcode", $this->postcode);
 		$smarty->assign("email", $this->email);		
@@ -53,7 +54,7 @@ class index_page {
 		$smarty->assign("page_title","Email alerts of planning applications near you");
 		$smarty->assign("warnings", $this->warnings);
 		$smarty->assign("email_warn", $this->email_warn);		
-		$smarty->assign("postcode_warn", $this->postcode_warn);		
+		$smarty->assign("postcode_warn", $this->postcode_warn);	
 		
 		$smarty->assign("onloadscript", $this->onloadscript);
 		$smarty->assign("small_zone_size",SMALL_ZONE_SIZE);

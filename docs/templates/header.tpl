@@ -30,6 +30,7 @@
         <div id="divHeader">
             <h1><a href="/">PlanningAlerts<span>.</span>com</a><small>beta</small></h1>
             <h2>Email alerts of planning applications <em>near you</em></h2>
+            <p id="pStats">{$stats.alert_count} alerts sent for {$stats.authority_count} local authorities</p>
             <img alt="logo" title="logo" src="./images/logo.png" />
         </div>
         <div id="divContent">

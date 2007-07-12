@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.16, created on 2007-04-09 19:25:31
+<?php /* Smarty version 2.6.16, created on 2007-07-12 07:08:16
          compiled from about.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "header.tpl", 'smarty_include_vars' => array()));
@@ -31,7 +31,7 @@ if ($this->_foreach['authorities']['total'] > 0):
 
 <h3 id="contact">Contact</h3>
 <p>
-   You can get in touch at <a href="#">team@planningalerts.com</a>
+   You can get in touch at <a href="mailto:team@planningalerts.com">team@planningalerts.com</a>
 </p>
 
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
