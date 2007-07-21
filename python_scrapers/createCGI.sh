@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo Removing contents of directory cgi-bin
-svn rm --force ../cgi-bin/*
+#echo Removing contents of directory cgi-bin
+#svn rm --force ../cgi-bin/*
 
 echo Running generateCGIScripts
 python generateCGIScripts.py
