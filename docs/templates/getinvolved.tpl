@@ -13,9 +13,7 @@
     <p>
        Other than that it's up to you. It can be in any language. You can host them yourself or we can host it for you.
     </p>
-    <p><span class="highlight">You can grab the code for this site and view some developent tickets <a href="http://code.goo
-    gle.com/p/planningalerts/">here</a> and join our developer mailing list <a href="http://groups.google.com/group/planningaler
-    ts-dev"> here</a>.</span>
+    <p><span class="highlight">You can grab the code for this site and view some developent tickets <a href="http://code.google.com/p/planningalerts/">here</a> and join our developer mailing list <a href="http://groups.google.com/group/planningalerts-dev"> here</a>.</span>
     </p>
     <h3>I work for a local authority and would like to make our data available</h3>
     <p>
