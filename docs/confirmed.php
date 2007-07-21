@@ -19,7 +19,7 @@ class confirmed_page {
     
     //Setup
     function setup (){
-        
+
         //Grab the user
         if(isset($_GET['cid'])){
             $confirm_id = $_GET['cid'];

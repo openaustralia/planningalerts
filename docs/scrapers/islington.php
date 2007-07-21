@@ -32,15 +32,8 @@ if (isset($_GET['year'])){
 		
 	//grab urls
 	$applications = scrape_applications_islington($search_url, $info_url_base, $comment_url_base);
-	
-	//comment and info urls
-	$info_url_base = "http://www.blaby.gov.uk/publicaccess/dc/DcApplication/application_detailview.aspx?caseno=";
-	$comment_url_base = "http://www.blaby.gov.uk/publicaccess/dc/DcApplication/application_comments_entryform.aspx?caseno=";
-
-print_r($applications);
-
 
     //Display applications
-//    display_applications($applications, "Balby District Council", "Balby");
+    display_applications($applications, "London Borough of Islington", "Islington");
 
 ?>

@@ -27,7 +27,7 @@
 				}
 
 				//Count of authorities
-				$authority_sql = "select count(authority_id) from authority";
+				$authority_sql = "select count(authority_id) from authority where disabled = 0 or disabled is null";
 				$results =  $db->getAll($authority_sql);
 				if(sizeof($results) >0){
 					$authority_count = $results[0][0];
