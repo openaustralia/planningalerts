@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 
-# This is the parser for New Forest National Park.
+# This is the parser for New Forest District Council.
 # it is generated from the file CGITemplate
 
 import cgi
@@ -14,13 +14,13 @@ month = form.getfirst('month')
 year = form.getfirst('year')
 
 
-authority_name = "New Forest National Park"
-authority_short_name = "New Forest"
-base_url = "http://web01.newforestnpa.gov.uk/planningpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
+authority_name = "New Forest District Council"
+authority_short_name = "New Forest DC"
+base_url = "http://web3.newforest.gov.uk/planningonline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
 
 import AcolnetParser
 
-parser = AcolnetParser.NewForestParser(authority_name, authority_short_name, base_url)
+parser = AcolnetParser.NewForestDCParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
 

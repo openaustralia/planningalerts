@@ -101,7 +101,7 @@
 "Hertsmere Borough Council", "Hertsmere", "http://www2.hertsmere.gov.uk/ACOLNET/DCOnline//acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "HertsmereParser"
 "London Borough of Lewisham", "Lewisham", "http://acolnet.lewisham.gov.uk/lewis-xslpagesdc/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.PgeSearch", "AcolnetParser", "LewishamParser"
 "North Hertfordshire District Council", "North Hertfordshire", "http://www.north-herts.gov.uk/dcdataonline/Pages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch", "AcolnetParser", "NorthHertfordshireParser"
-"New Forest National Park", "New Forest", "http://web01.newforestnpa.gov.uk/planningpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "NewForestParser"
+"New Forest National Park", "New Forest NP", "http://web01.newforestnpa.gov.uk/planningpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "NewForestNPParser"
 "Bridgnorth District Council", "Bridgnorth", "http://www2.bridgnorth-dc.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch", "AcolnetParser", "BridgnorthParser"
 "Carlisle City Council", "Carlisle", "http://planning.carlisle.gov.uk/acolnet/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "CarlisleParser"
 "Newcastle City Council", "Newcastle",  "http://gispublic.newcastle.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
@@ -112,3 +112,4 @@
 "South Bedfordshire District Council", "South Bedfordshire", "http://planning.southbeds.gov.uk/plantech/DCWebPages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.PgeSearch", "AcolnetParser", "SouthBedfordshireParser"
 "Suffolk Coastal District Council", "Suffolk Coastal", "https://apps3.suffolkcoastal.gov.uk/planningonline/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "SuffolkCoastalParser"
 "Surrey Heath Borough Council", "Surrey Heath", "https://www.public.surreyheath-online.gov.uk/whalecom60b1ef305f59f921/whalecom0/Scripts/PlanningPagesOnline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "SurreyHeathParser"
+"New Forest District Council", "New Forest DC", "http://web3.newforest.gov.uk/planningonline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "NewForestDCParser"

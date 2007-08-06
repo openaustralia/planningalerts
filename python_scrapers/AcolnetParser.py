@@ -159,8 +159,8 @@ class AcolnetParser(HTMLParser.HTMLParser):
         search_form_response = urllib2.urlopen(self.base_url)
         search_form_contents = search_form_response.read()
 
-        outfile = open("tmpfile", "w")
-        outfile.write(search_form_contents)
+        #outfile = open("tmpfile", "w")
+        #outfile.write(search_form_contents)
 
         # This sometimes causes a problem in HTMLParser, so let's just get the link
         # out with a regex...
@@ -360,13 +360,21 @@ class LewishamParser(AcolnetParser):
 ##     comments_email_address = "planning@lewisham.gov.uk"
 ##     #action_regex = re.compile("<FORM .*action=\"(.*ACTION=UNWRAP&RIPSESSION=[^\"]*)\"[^>]*>", re.IGNORECASE)    
 
-class NewForestParser(AcolnetParser):
+class NewForestNPParser(AcolnetParser):
     # In this case there is an online comment facility at the
     # bottom of each view app page...
     case_number_tr = 1 # this one can be got by the td class attribute
     reg_date_tr = 2
     location_tr = 4
     proposal_tr = 5
+
+class NewForestDCParser(AcolnetParser):
+    # In this case there is an online comment facility at the
+    # bottom of each view app page...
+    case_number_tr = 1 # this one can be got by the td class attribute
+    reg_date_tr = 2
+    location_tr = 5
+    proposal_tr = 6
 
 class NorthWiltshireParser(AcolnetParser):
     case_number_tr = 1 # this one can be got by the td class attribute
@@ -379,8 +387,8 @@ class OldhamParser(AcolnetParser):
     reg_date_tr = 3
     location_tr = 6
     proposal_tr = 7
-
-    def _cleanupHTML(self, html):
+        
+def _cleanupHTML(self, html):
         """There is a bad table end tag in this one.
         Fix it before we start"""
         
