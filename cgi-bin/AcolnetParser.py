@@ -343,14 +343,12 @@ class LewishamParser(AcolnetParser):
 
     comments_email_address = "planning@lewisham.gov.uk"
     
-## class NorthHertfordshireParser(AcolnetParser):
-##     case_number_tr = 1 # this one can be got by the td class attribute
-##     reg_date_tr = 2
-##     location_tr = 4
-##     proposal_tr = 5    
+class NorthHertfordshireParser(AcolnetParser):
+    case_number_tr = 1 # this one can be got by the td class attribute
+    reg_date_tr = 2
+    location_tr = 4
+    proposal_tr = 5    
 
-##     comments_email_address = "planning@lewisham.gov.uk"
-    
 ## class MidSuffolkParser(AcolnetParser):
 ##     case_number_tr = 1 # this one can be got by the td class attribute
 ##     reg_date_tr = 2
