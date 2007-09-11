@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Stratford-on-Avon District Council"
 authority_short_name = "Stratford"
-base_url = "http://217.33.198.119/publicaccess/tdc/"
+base_url = "http://apps.stratford.gov.uk/publicaccess/tdc/"
 
 import PublicAccess
 

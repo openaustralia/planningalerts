@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Fenland District Council"
 authority_short_name = "Fenland"
-base_url = "http://www.fenland.gov.uk/publicaccess/dc/"
+base_url = "http://www.fenland.gov.uk/publicaccess/tdc/"
 
 import PublicAccess
 

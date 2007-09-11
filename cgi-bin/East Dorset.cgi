@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "East Dorset District Council"
 authority_short_name = "East Dorset"
-base_url = "http://193.243.228.16/PublicAccess/dc/"
+base_url = "http://193.243.228.16/PublicAccess/tdc/"
 
 import PublicAccess
 
