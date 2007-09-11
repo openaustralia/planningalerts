@@ -122,3 +122,8 @@
 "Welwyn-Hatfield District Council", "Welwyn-Hatfield", "https://fastweb.welhat.gov.uk/", "FastWeb", "FastWeb"
 "Wyre Forest District Council", "Wyre Forest", "http://www.wyreforest.gov.uk/fastweb/", "FastWeb", "FastWeb"
 "London Borough of Bromley", "Bromley", "http://planningaccess.bromley.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
+"Watford Borough Council", "Watford", "http://ww3.watford.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
+"Caradon District Council", "Caradon", "http://publicaccess.caradon.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
+"Hambleton District Council", "Hambleton", "http://planning.hambleton.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
+"Moray Council", "Moray", "http://public.moray.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
+"Perth and Kinross Council", "Perthshire", "http://193.63.61.22/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
