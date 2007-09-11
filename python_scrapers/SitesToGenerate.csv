@@ -34,7 +34,7 @@
 "Kerrier District Council", "Kerrier", "http://publicaccess.kerrier.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Oswestry Borough Council", "Oswestry", "http://193.114.205.78/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Stockton-On-Tees Borough Council", "Stockton-On-Tees", "http://www.developmentcontrol.stockton.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
-"Doncaster Metropolitan Borough Council", "Doncaster", "http://maps.doncaster.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
+"Doncaster Metropolitan Borough Council", "Doncaster", "http://local.doncaster.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Waveney District Council", "Waveney", "http://publicaccess.waveney.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Chelmsford Borough Council", "Chelmsford", "http://web1.chelmsfordbc.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Knowsley Council", "Knowsley", "http://publicaccess.knowsley.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
@@ -121,3 +121,4 @@
 "London Borough of Sutton", "Sutton", "http://82.43.4.135/FASTWEB/", "FastWeb", "FastWeb"
 "Welwyn-Hatfield District Council", "Welwyn-Hatfield", "https://fastweb.welhat.gov.uk/", "FastWeb", "FastWeb"
 "Wyre Forest District Council", "Wyre Forest", "http://www.wyreforest.gov.uk/fastweb/", "FastWeb", "FastWeb"
+"London Borough of Bromley", "Bromley", "http://planningaccess.bromley.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
