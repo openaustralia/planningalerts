@@ -1,6 +1,6 @@
 #!/usr/local/bin/python
 
-list_of_sites_filename = "PublicAccessSites.csv"
+list_of_sites_filename = "SitesToGenerate.csv"
 other_files_to_copy_filename = "OtherFilesToCopy.csv"
 template_filename = "CGITemplate"
 python_location = "/usr/local/bin/python"
