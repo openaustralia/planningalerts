@@ -127,3 +127,7 @@
 "Hambleton District Council", "Hambleton", "http://planning.hambleton.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Moray Council", "Moray", "http://public.moray.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Perth and Kinross Council", "Perthshire", "http://193.63.61.22/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
+"Broads Authority", "Broads", "https://planning.broads-authority.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
+"Bracknell Forest Borough Council", "Bracknell Forest", "https://my.bracknell-forest.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
+"Chiltern District Council", "Chiltern", "https://isa.chiltern.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
+"Hinkley and Bosworth Borough Council", "Hinkley and Bosworth", "https://cx.hinckley-bosworth.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"

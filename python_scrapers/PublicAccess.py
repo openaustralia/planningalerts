@@ -144,7 +144,7 @@ class PublicAccessParser(HTMLParser.HTMLParser):
                 # Join this query string to the comments URL, and store this as
                 # the comments URL of the current planning application
                 comments_url = urlparse.urljoin(self.base_url, comments_url_end)
-		self._current_application.comment_url = urlparse.urljoin(comments_url, query_string)
+                self._current_application.comment_url = "?".join([comments_url, query_string])
 
 		# while we're here, let's follow some links to find the postcode...
                 # the postcode is in an input tag in the property page. This page
@@ -300,20 +300,24 @@ class PublicAccessInfoPageParser(HTMLParser.HTMLParser):
         Once we have got the URL, there is no need for us to look at any more <a> tags.
         """
 	if tag == "a" and self.property_page_url is None:
+            
+            #print attrs
 	    if attrs.count(("id","A_btnPropertyDetails")) > 0:
 		for attr,value in attrs:
 		    if attr == "href":
 			the_link = value
 
-			# this has some garbage on either side of it...
+			# this may have some garbage on either side of it...
 			# let's strip that off
+
+                        # If the stripping fails, take the whole link
 
                         # the garbage on the left is separated by whitespace.
                         # the garbage on the right is separated by a "'".
-
-			self.property_page_url = the_link.split()[1].split("'")[0]
-
-
+                        try:
+                            self.property_page_url = the_link.split()[1].split("'")[0]
+                        except IndexError:
+                            self.property_page_url = the_link
 
 
 class PublicAccessPropertyPageParser(HTMLParser.HTMLParser):
