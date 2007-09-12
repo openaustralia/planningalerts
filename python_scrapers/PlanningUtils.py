@@ -90,7 +90,7 @@ class PlanningApplication:
 	return self.displayXML()
         
     def displayXML(self):
-        print self.council_reference, self.address, self.postcode, self.description, self.info_url, self.comment_url, self.date_received
+        #print self.council_reference, self.address, self.postcode, self.description, self.info_url, self.comment_url, self.date_received
 	return "<application>\n" +\
 	"<council_reference>%s</council_reference>\n" %xmlQuote(self.council_reference) +\
         "<address>%s</address>\n" %xmlQuote(self.address) +\
