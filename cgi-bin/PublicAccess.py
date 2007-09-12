@@ -65,7 +65,9 @@ class PublicAccessParser(HTMLParser.HTMLParser):
 	    self.handle_start_td(attrs)
         # we are only interested in <a> tags if we are in the 6th td in
         # the results table.
-	elif self._in_td and self._td_count == 6 and tag == "a":
+        # UPDATE: It seems that, in the case of Chiltern, we are interested in
+        # td 5.
+	elif self._in_td and (self._td_count == 5 or self._td_count == 6) and tag == "a":
 	    self.handle_start_a(attrs)
 	# If the tag is not one of these then we aren't interested
 
@@ -128,7 +130,7 @@ class PublicAccessParser(HTMLParser.HTMLParser):
 
         # go through the attributes of the <a> looking for one
         # named 'href'
-	for attr,value in attrs:
+        for attr,value in attrs:
 	    if attr == "href":
                 # the value of this tag is a relative url.
                 # parse it so we can get the query string from it
