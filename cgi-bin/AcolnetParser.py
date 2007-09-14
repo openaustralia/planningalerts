@@ -386,7 +386,7 @@ class OldhamParser(AcolnetParser):
     location_tr = 6
     proposal_tr = 7
         
-def _cleanupHTML(self, html):
+    def _cleanupHTML(self, html):
         """There is a bad table end tag in this one.
         Fix it before we start"""
         
