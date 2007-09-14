@@ -321,9 +321,9 @@ class HarlowParser(AcolnetParser):
 
 class HavantParser(AcolnetParser):
     case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 2
-    location_tr = 4
-    proposal_tr = 5    
+    reg_date_tr = 3
+    location_tr = 6
+    proposal_tr = 8    
 
     comments_email_address = "representations@havant.gov.uk"
 
