@@ -18,11 +18,15 @@ authority_name = "Chorley Borough Council"
 authority_short_name = "Chorley"
 base_url = "http://planning.chorley.gov.uk/PublicAccess/tdc/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import PublicAccess
 
 parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

@@ -18,11 +18,15 @@ authority_name = "Ealing Council"
 authority_short_name = "Ealing"
 base_url = "http://www.pam.ealing.gov.uk/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import ApplicationSearchServletParser
 
 parser = ApplicationSearchServletParser.EalingSearchParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

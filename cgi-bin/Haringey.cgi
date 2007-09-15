@@ -18,11 +18,15 @@ authority_name = "Haringey Council"
 authority_short_name = "Haringey"
 base_url = "http://www.planningservices.haringey.gov.uk/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import ApplicationSearchServletParser
 
 parser = ApplicationSearchServletParser.HaringeySearchParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

@@ -18,11 +18,15 @@ authority_name = "Bath and North East Somerset"
 authority_short_name = "Bath"
 base_url = "http://planning.bathnes.gov.uk/publicaccess/tdc/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import PublicAccess
 
 parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

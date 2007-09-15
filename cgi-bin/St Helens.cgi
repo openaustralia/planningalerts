@@ -18,11 +18,15 @@ authority_name = "St Helens Council"
 authority_short_name = "St Helens"
 base_url = "http://212.248.225.150:8080/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import ApplicationSearchServletParser
 
 parser = ApplicationSearchServletParser.StHelensSearchParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

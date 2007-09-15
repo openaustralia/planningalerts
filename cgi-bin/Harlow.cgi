@@ -18,11 +18,15 @@ authority_name = "Harlow Council"
 authority_short_name = "Harlow"
 base_url = "http://planning.harlow.gov.uk/PlanningSearch/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import AcolnetParser
 
 parser = AcolnetParser.HarlowParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

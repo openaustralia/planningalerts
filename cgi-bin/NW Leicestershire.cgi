@@ -18,11 +18,15 @@ authority_name = "North West Leicestershire District Council"
 authority_short_name = "NW Leicestershire"
 base_url = "http://paccess.nwleics.gov.uk/PublicAccess/tdc/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import PublicAccess
 
 parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

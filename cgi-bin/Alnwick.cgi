@@ -18,11 +18,15 @@ authority_name = "Alnwick District Council"
 authority_short_name = "Alnwick"
 base_url = "http://services.castlemorpeth.gov.uk:7777/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import ApplicationSearchServletParser
 
 parser = ApplicationSearchServletParser.AlnwickSearchParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

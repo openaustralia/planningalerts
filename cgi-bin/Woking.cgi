@@ -18,11 +18,15 @@ authority_name = "Woking Borough Council"
 authority_short_name = "Woking"
 base_url = "http://caps.woking.gov.uk/publicaccess/tdc/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import PublicAccess
 
 parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

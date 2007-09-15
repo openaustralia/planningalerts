@@ -18,11 +18,15 @@ authority_name = "Carlisle City Council"
 authority_short_name = "Carlisle"
 base_url = "http://planning.carlisle.gov.uk/acolnet/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import AcolnetParser
 
 parser = AcolnetParser.CarlisleParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

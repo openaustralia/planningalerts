@@ -18,11 +18,15 @@ authority_name = "Chelmsford Borough Council"
 authority_short_name = "Chelmsford"
 base_url = "http://web1.chelmsfordbc.gov.uk/publicaccess/tdc/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import PublicAccess
 
 parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

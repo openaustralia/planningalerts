@@ -18,11 +18,15 @@ authority_name = "Craven District Council"
 authority_short_name = "Craven"
 base_url = "http://www.planning.cravendc.gov.uk/fastweb/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import FastWeb
 
 parser = FastWeb.FastWeb(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

@@ -18,11 +18,15 @@ authority_name = "Bridgnorth District Council"
 authority_short_name = "Bridgnorth"
 base_url = "http://www2.bridgnorth-dc.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import AcolnetParser
 
 parser = AcolnetParser.BridgnorthParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

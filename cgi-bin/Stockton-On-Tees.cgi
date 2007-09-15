@@ -18,11 +18,15 @@ authority_name = "Stockton-On-Tees Borough Council"
 authority_short_name = "Stockton-On-Tees"
 base_url = "http://www.developmentcontrol.stockton.gov.uk/publicaccess/tdc/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import PublicAccess
 
 parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

@@ -18,11 +18,15 @@ authority_name = "Hertsmere Borough Council"
 authority_short_name = "Hertsmere"
 base_url = "http://www2.hertsmere.gov.uk/ACOLNET/DCOnline//acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import AcolnetParser
 
 parser = AcolnetParser.HertsmereParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

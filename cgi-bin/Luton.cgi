@@ -18,11 +18,15 @@ authority_name = "Luton Borough Council"
 authority_short_name = "Luton"
 base_url = "http://www.eplan.luton.gov.uk/PublicAccess/tdc/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import PublicAccess
 
 parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

@@ -18,11 +18,15 @@ authority_name = "London Borough of Sutton"
 authority_short_name = "Sutton"
 base_url = "http://82.43.4.135/FASTWEB/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import FastWeb
 
 parser = FastWeb.FastWeb(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

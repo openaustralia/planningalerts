@@ -18,11 +18,15 @@ authority_name = "North Warwickshire Borough Council"
 authority_short_name = "North Warwickshire"
 base_url = "http://planning.northwarks.gov.uk/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import ApplicationSearchServletParser
 
 parser = ApplicationSearchServletParser.NorthWarksSearchParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

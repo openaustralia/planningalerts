@@ -18,11 +18,15 @@ authority_name = "Babergh District Council"
 authority_short_name = "Babergh"
 base_url = "http://planning.babergh.gov.uk/dataOnlinePlanning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import AcolnetParser
 
 parser = AcolnetParser.BaberghParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

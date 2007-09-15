@@ -18,11 +18,15 @@ authority_name = "Welwyn-Hatfield District Council"
 authority_short_name = "Welwyn-Hatfield"
 base_url = "https://fastweb.welhat.gov.uk/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import FastWeb
 
 parser = FastWeb.FastWeb(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

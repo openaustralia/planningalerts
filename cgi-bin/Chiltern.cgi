@@ -18,11 +18,15 @@ authority_name = "Chiltern District Council"
 authority_short_name = "Chiltern"
 base_url = "https://isa.chiltern.gov.uk/publicaccess/tdc/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import PublicAccess
 
 parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

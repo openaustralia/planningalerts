@@ -18,11 +18,15 @@ authority_name = "High Peak Borough Council"
 authority_short_name = "High Peak"
 base_url = "http://planning.highpeak.gov.uk/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import ApplicationSearchServletParser
 
 parser = ApplicationSearchServletParser.HighPeakSearchParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

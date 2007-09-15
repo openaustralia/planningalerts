@@ -18,11 +18,15 @@ authority_name = "London Borough Of Hammersmith and Fulham"
 authority_short_name = "Hammersmith and Fulham"
 base_url = "http://www.apps.lbhf.gov.uk/PublicAccess/tdc/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import PublicAccess
 
 parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

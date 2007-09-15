@@ -18,11 +18,15 @@ authority_name = "Derby City Council"
 authority_short_name = "Derby"
 base_url = "http://195.224.106.204/scripts/planningpages02%5CXSLPagesDC_DERBY%5CDCWebPages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import AcolnetParser
 
 parser = AcolnetParser.DerbyParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

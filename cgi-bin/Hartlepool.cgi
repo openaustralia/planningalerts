@@ -18,11 +18,15 @@ authority_name = "Hartlepool Borough Council"
 authority_short_name = "Hartlepool"
 base_url = "http://eforms.hartlepool.gov.uk:7777/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import ApplicationSearchServletParser
 
 parser = ApplicationSearchServletParser.HartlepoolSearchParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

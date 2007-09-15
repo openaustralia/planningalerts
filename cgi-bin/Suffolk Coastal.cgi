@@ -18,11 +18,15 @@ authority_name = "Suffolk Coastal District Council"
 authority_short_name = "Suffolk Coastal"
 base_url = "https://apps3.suffolkcoastal.gov.uk/planningonline/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import AcolnetParser
 
 parser = AcolnetParser.SuffolkCoastalParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

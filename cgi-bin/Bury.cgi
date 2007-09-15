@@ -18,11 +18,15 @@ authority_name = "Bury Metropolitan Borough Council"
 authority_short_name = "Bury"
 base_url = "http://e-planning.bury.gov.uk/ePlanning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import AcolnetParser
 
 parser = AcolnetParser.BuryParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

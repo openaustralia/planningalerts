@@ -18,11 +18,15 @@ authority_name = "Barrow Borough Council"
 authority_short_name = "Barrow"
 base_url = "http://localportal.barrowbc.gov.uk/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import ApplicationSearchServletParser
 
 parser = ApplicationSearchServletParser.BarrowSearchParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

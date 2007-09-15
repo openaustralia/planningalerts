@@ -18,11 +18,15 @@ authority_name = "Denbighshire County Council"
 authority_short_name = "Denbighshire"
 base_url = "http://planning.denbighshire.gov.uk/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import ApplicationSearchServletParser
 
 parser = ApplicationSearchServletParser.DenbighshireSearchParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

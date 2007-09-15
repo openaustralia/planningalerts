@@ -18,11 +18,15 @@ authority_name = "District of Easington"
 authority_short_name = "Easington"
 base_url = "http://planning.easington.gov.uk/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import ApplicationSearchServletParser
 
 parser = ApplicationSearchServletParser.EasingtonSearchParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

@@ -18,11 +18,15 @@ authority_name = "Hinkley and Bosworth Borough Council"
 authority_short_name = "Hinkley and Bosworth"
 base_url = "https://cx.hinckley-bosworth.gov.uk/PublicAccess/tdc/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import PublicAccess
 
 parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

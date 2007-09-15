@@ -16,11 +16,15 @@ authority_name = "%(authority_name)s"
 authority_short_name = "%(authority_short_name)s"
 base_url = "%(base_url)s"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import %(module)s
 
 parser = %(module)s.%(parser)s(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

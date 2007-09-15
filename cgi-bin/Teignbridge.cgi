@@ -18,11 +18,15 @@ authority_name = "Teignbridge District Council"
 authority_short_name = "Teignbridge"
 base_url = "http://213.152.63.161/publicaccess/tdc/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import PublicAccess
 
 parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

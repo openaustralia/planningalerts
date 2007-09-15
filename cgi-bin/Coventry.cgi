@@ -18,11 +18,15 @@ authority_name = "Coventry City Council"
 authority_short_name = "Coventry"
 base_url = "http://planning.coventry.gov.uk/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import ApplicationSearchServletParser
 
 parser = ApplicationSearchServletParser.CoventrySearchParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

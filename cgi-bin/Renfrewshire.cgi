@@ -18,11 +18,15 @@ authority_name = "Renfrewshire Council"
 authority_short_name = "Renfrewshire"
 base_url = "http://planning.renfrewshire.gov.uk/acolnetDCpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import AcolnetParser
 
 parser = AcolnetParser.RenfrewshireParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

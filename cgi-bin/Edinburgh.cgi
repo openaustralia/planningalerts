@@ -18,11 +18,15 @@ authority_name = "The City of Edinburgh Council"
 authority_short_name = "Edinburgh"
 base_url = "http://citydev-portal.edinburgh.gov.uk/publicaccess/dc/"
 
+#print "Content-Type: text/html"     # HTML is following
+#print
+
 import PublicAccess
 
 parser = PublicAccess.PublicAccessParser(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
+
 
 print "Content-Type: text/xml"     # XML is following
 print

@@ -4,6 +4,11 @@ import urllib, urllib2
 import HTMLParser
 #from BeautifulSoup import BeautifulSoup
 
+# Adding this to try to help Surrey Heath - Duncan 14/9/2007
+import cookielib
+cookie_jar = cookielib.CookieJar()
+################
+
 import urlparse
 
 import re
@@ -154,9 +159,20 @@ class AcolnetParser(HTMLParser.HTMLParser):
         elif tag == "td":
             self._in_td = False
 
+
+    def _getSearchResponse(self):
+        # It looks like we sometimes need to do some stuff to get around a
+        # javascript redirect and cookies.
+        search_form_request = urllib2.Request(self.base_url)
+        search_form_response = urllib2.urlopen(search_form_request)
+
+        return search_form_response
+        
+
     def getResultsByDayMonthYear(self, day, month, year):
         # first we fetch the search page to get ourselves some session info...
-        search_form_response = urllib2.urlopen(self.base_url)
+        search_form_response = self._getSearchResponse()
+        
         search_form_contents = search_form_response.read()
 
         #outfile = open("tmpfile", "w")
@@ -418,16 +434,50 @@ class SuffolkCoastalParser(AcolnetParser):
     comments_email_address = "d.c.admin@suffolkcoastal.gov.uk"
 
 class SurreyHeathParser(AcolnetParser):
+    # This is not working yet.
+    # _getSearchResponse is an attempt to work around
+    # cookies and a javascript redirect.
+    # I may have a bit more of a go at this at some point if I have time.
     case_number_tr = 1 # this one can be got by the td class attribute
     reg_date_tr = 2
     location_tr = 4
     proposal_tr = 5
 
     comments_email_address = "development-control@surreyheath.gov.uk"
+
+    def _getSearchResponse(self):
+        # It looks like we sometimes need to do some stuff to get around a
+        # javascript redirect and cookies.
+        search_form_request = urllib2.Request(self.base_url)
+
+        # Lying about the user-agent doesn't seem to help.
+        #search_form_request.add_header("user-agent", "Mozilla/5.0 (compatible; Konqu...L/3.5.6 (like Gecko) (Kubuntu)")
+        
+        search_form_response = urllib2.urlopen(search_form_request)
+        
+        cookie_jar.extract_cookies(search_form_response, search_form_request)
+
+
+        print search_form_response.geturl()
+        print search_form_response.info()
+
+        print search_form_response.read()
+#        validate_url = "https://www.public.surreyheath-online.gov.uk/whalecom7cace3215643e22bb7b0b8cc97a7/whalecom0/InternalSite/Validate.asp"
+#        javascript_redirect_url = urlparse.urljoin(self.base_url, "/whalecom7cace3215643e22bb7b0b8cc97a7/whalecom0/InternalSite/RedirectToOrigURL.asp?site_name=public&secure=1")
+
+#        javascript_redirect_request = urllib2.Request(javascript_redirect_url)
+#        javascript_redirect_request.add_header('Referer', validate_url)
+        
+#        cookie_jar.add_cookie_header(javascript_redirect_request)
+
+#        javascript_redirect_response = urllib2.urlopen(javascript_redirect_request)
+        
+#        return javascript_redirect_response
     
+        
 if __name__ == '__main__':
-    day = 15
-    month = 3
+    day = 31
+    month = 8
     year = 2007
 
     # returns error 400 - bad request
@@ -440,6 +490,6 @@ if __name__ == '__main__':
     # results as columns of one table
 
     parser = SurreyHeathParser("Surrey Heath", "Surrey Heath", "https://www.public.surreyheath-online.gov.uk/whalecom60b1ef305f59f921/whalecom0/Scripts/PlanningPagesOnline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-    
+
     print parser.getResults(day, month, year)
     
