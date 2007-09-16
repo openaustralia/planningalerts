@@ -433,6 +433,14 @@ class SuffolkCoastalParser(AcolnetParser):
 
     comments_email_address = "d.c.admin@suffolkcoastal.gov.uk"
 
+class GuildfordParser(AcolnetParser):
+    case_number_tr = 1
+    reg_date_tr = 7
+    location_tr = 2
+    proposal_tr = 3
+    
+    #http://www.guildford.gov.uk/acolnet/acolnetcgi.gov?ACTION=UNWRAP&Root=PgeSearch
+
 class SurreyHeathParser(AcolnetParser):
     # This is not working yet.
     # _getSearchResponse is an attempt to work around
@@ -476,9 +484,9 @@ class SurreyHeathParser(AcolnetParser):
     
         
 if __name__ == '__main__':
-    day = 31
-    month = 8
-    year = 2007
+    day = 22
+    month = 2
+    year = 2005
 
     # returns error 400 - bad request
     #parser = BridgenorthParser()
@@ -489,7 +497,8 @@ if __name__ == '__main__':
     # canterbury
     # results as columns of one table
 
-    parser = SurreyHeathParser("Surrey Heath", "Surrey Heath", "https://www.public.surreyheath-online.gov.uk/whalecom60b1ef305f59f921/whalecom0/Scripts/PlanningPagesOnline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = SurreyHeathParser("Surrey Heath", "Surrey Heath", "https://www.public.surreyheath-online.gov.uk/whalecom60b1ef305f59f921/whalecom0/Scripts/PlanningPagesOnline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
 
+    parser = GuildfordParser("Guildford", "Guildford", "http://www.guildford.gov.uk/acolnet/acolnetcgi.gov?ACTION=UNWRAP&Root=PgeSearch")
     print parser.getResults(day, month, year)
     

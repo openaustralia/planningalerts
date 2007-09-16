@@ -10,7 +10,8 @@ require_once('phpcoord.php');
 function scrape_applications_publicaccess ($search_url, $info_url_base, $comment_url_base){
 
 	$applications = array();
-	$application_pattern = "/<tr><th>([0-9]*)<\/th>([^;]*)([^<]*)/";
+	//$application_pattern = "/<tr><th>([0-9]*)<\/th>([^;]*)([^<]*)/";
+	$application_pattern = "/<tr><th>([0-9]*)<\/th>.*(?=<\/tr)/U";
 
     //grab the page
     $html = safe_scrape_page($search_url);
@@ -21,6 +22,10 @@ function scrape_applications_publicaccess ($search_url, $info_url_base, $comment
 	preg_match_all($application_pattern, $html, $application_matches, PREG_PATTERN_ORDER);
 
 	foreach ($application_matches[0] as $application_match){
+		//START Duncan's debug
+		//print_r($application_match);
+		//print_r("END");
+		// END Duncan's debug
 
 		$detail_pattern = "/<td>([^<])*/";
 		preg_match_all($detail_pattern, $application_match, $detail_matches, PREG_PATTERN_ORDER);
@@ -36,12 +41,16 @@ function scrape_applications_publicaccess ($search_url, $info_url_base, $comment
         //match case number
 		$casenumber_pattern = "/caseno=([^&]*)/";
 		preg_match($casenumber_pattern, $application_match, $casenumber_matches);
-		
+		//START Duncan's debug
+		//print_r($application_match);
+		//var_dump($casenumber_matches);
+		//END Duncan's debug
+
 		$case_number ="";
 		if(sizeof($casenumber_matches)>0){
 		    $case_number = str_replace("caseno=","", $casenumber_matches[0]);
 	    }
-		
+
 		//if weve found a caase number, then get the details
 		if($case_number !=""){
     		//Comment and info urls		    
