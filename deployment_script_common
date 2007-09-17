@@ -67,14 +67,19 @@ if [ -a $BACKUP_DIRECTORY/docs/.htaccess ];
     echo "No .htaccess to put back";
 fi;
 
+echo "Enter a reason for deployment:"
+read $REASON
+echo
+
 # Write something in the deployment log
 echo
 echo "Updating deployment log"
-echo "Deployed by $USER on `date`" >> $DEPLOYMENT_LOG
+echo -e "Deployed by $USER on `date`\nReason: $REASON" >> $DEPLOYMENT_LOG
+echo
 
 # Email the team
 echo "emailing the team"
-echo "www.planningalerts.com redeployed by $USER at `date`" | mail -s "PlanningAlerts Deployment" $TEAM_EMAIL
+echo -e "www.planningalerts.com redeployed by $USER on `date`\nReason: $REASON" | mail -s "PlanningAlerts Deployment" $TEAM_EMAIL
 
 echo
 echo "Remember to check that there are no changes needed in:"
