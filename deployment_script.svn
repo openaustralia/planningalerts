@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 
 export PLANNING_ROOT="/data/vhost/www.planningalerts.com/"
 export PLANNING_BACKUPS="$PLANNING_ROOT/backups/"
@@ -6,5 +6,7 @@ export DEPLOYMENT_LOG_DIRECTORY="$PLANNING_ROOT/logs/"
 export DEPLOYMENT_LOG="$DEPLOYMENT_LOG_DIRECTORY/deployment_log"
 
 export BACKUP_DIRECTORY_NAME="planningalerts_backup_`date +%F_%Hh%Mm%Ss`"
+
+export BACKUP_DIRECTORY="$PLANNING_BACKUPS$BACKUP_DIRECTORY_NAME/"
 
 $SHELL deployment_script_common

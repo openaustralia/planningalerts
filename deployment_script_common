@@ -1,15 +1,5 @@
 #!/bin/bash
 
-PLANNING_ROOT="/data/vhost/www.planningalerts.com/"
-PLANNING_BACKUPS="$PLANNING_ROOT/backups/"
-DEPLOYMENT_LOG_DIRECTORY="$PLANNING_ROOT/logs/"
-DEPLOYMENT_LOG="$DEPLOYMENT_LOG_DIRECTORY/deployment_log"
-
-BACKUP_DIRECTORY_NAME="planningalerts_backup_`date +%F_%Hh%Mm%Ss`"
-
-# This will be the name of the new backup directory
-BACKUP_DIRECTORY=$PLANNING_BACKUPS$BACKUP_DIRECTORY_NAME
-
 # Check to see if the PLANNING_ROOT directory exists and is writable
 if ! [ -w $PLANNING_ROOT ];
   then
@@ -46,6 +36,11 @@ cp -R data $BACKUP_DIRECTORY;
 );
 echo "Done"
 echo
+
+echo "Generating python scrapers"
+# Generate the python cgi files
+(cd python_scrapers; ./generateCGIScripts.py)
+echo "Done generating python scrapers"
 
 # Copy the new versions of docs, cgi-bin and tools to PLANNING_ROOT
 echo "Deploying the new versions of docs, cgi-bin, and tools"

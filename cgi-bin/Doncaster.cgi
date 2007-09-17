@@ -16,7 +16,7 @@ year = form.getfirst('year')
 
 authority_name = "Doncaster Metropolitan Borough Council"
 authority_short_name = "Doncaster"
-base_url = "http://maps.doncaster.gov.uk/publicaccess/tdc/"
+base_url = "http://local.doncaster.gov.uk/PublicAccess/tdc/"
 
 #print "Content-Type: text/html"     # HTML is following
 #print
