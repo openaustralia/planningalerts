@@ -22,7 +22,7 @@ if (isset($_GET['year'])){
 }
 
 	//search url
-	$search_url = "http://publicaccess.salford.gov.uk/publicaccess/dc/DcApplication/application_searchresults.aspx?searchtype=WEEKLY&selWeeklyListRange=#daterange&weektype=VAL";
+	$search_url = "http://publicaccess.salford.gov.uk/publicaccess/tdc/DcApplication/application_searchresults.aspx?searchtype=WEEKLY&selWeeklyListRange=#daterange&weektype=VAL";
     $date_range = "{$day}%2F{$month}%2F{$year}%7C{$day}%2F{$month}%2F{$year}";
 	$search_url = str_replace("#daterange", $date_range, $search_url);
 	
