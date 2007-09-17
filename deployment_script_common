@@ -1,0 +1,84 @@
+#!/bin/bash
+
+PLANNING_ROOT="/data/vhost/www.planningalerts.com/"
+PLANNING_BACKUPS="$PLANNING_ROOT/backups/"
+DEPLOYMENT_LOG_DIRECTORY="$PLANNING_ROOT/logs/"
+DEPLOYMENT_LOG="$DEPLOYMENT_LOG_DIRECTORY/deployment_log"
+
+BACKUP_DIRECTORY_NAME="planningalerts_backup_`date +%F_%Hh%Mm%Ss`"
+
+# This will be the name of the new backup directory
+BACKUP_DIRECTORY=$PLANNING_BACKUPS$BACKUP_DIRECTORY_NAME
+
+# Check to see if the PLANNING_ROOT directory exists and is writable
+if ! [ -w $PLANNING_ROOT ];
+  then
+    echo "Planning root directory: $PLANNING_ROOT doesn't exist, or isn't writable by this user";
+    exit 1
+fi;
+
+# Check that the PLANNING_BACKUPS directory exists and is writable
+if ! [ -w $PLANNING_BACKUPS ];
+  then
+    echo "Planning backups directory: $PLANNING_BACKUPS doesn't exist, or isn't writable";
+    exit 2
+fi;
+
+# Check that the DEPLOYMENT_LOG exists and is writable
+# FIXME - these checks could be better
+if [ ! -w $DEPLOYMENT_LOG -a ! -w $DEPLOYMENT_LOG_DIRECTORY ];
+  then
+    echo "Deployment log: $DEPLOYMENT_LOG doesn't exist, or isn't writable";
+    exit 3
+fi;
+
+# Make a the directory to put the backup in
+mkdir $BACKUP_DIRECTORY
+
+# Move docs, cgi-bin and tools to the backups area
+# Copy data to the backups area
+# FIXME - which directories should probably be a variable
+echo
+echo "Backing up the current deployment to $BACKUP_DIRECTORY"
+(cd $PLANNING_ROOT; 
+mv docs cgi-bin tools $BACKUP_DIRECTORY;
+cp -R data $BACKUP_DIRECTORY;
+);
+echo "Done"
+echo
+
+# Copy the new versions of docs, cgi-bin and tools to PLANNING_ROOT
+echo "Deploying the new versions of docs, cgi-bin, and tools"
+cp -R docs cgi-bin tools $PLANNING_ROOT
+
+# Copy the config files from $PLANNING_BACKUPS to $PLANNING_ROOT
+# FIXME - we should have a variable for which files to do here
+
+if [ -a $BACKUP_DIRECTORY/docs/include/config.php ];
+  then
+    echo "Copying back config.php";
+    cp $BACKUP_DIRECTORY/docs/include/config.php $PLANNING_ROOT/docs/include/;
+  else
+    echo "No config.php to put back";
+fi;
+
+# Sort out .htaccess
+if [ -a $BACKUP_DIRECTORY/docs/.htaccess ];
+  then
+    echo "Copying back .htaccess";
+    cp $BACKUP_DIRECTORY/docs/.htaccess $PLANNING_ROOT/docs/;
+    # FIXME - should we rename the old .htaccess?
+  else
+    echo "No .htaccess to put back";
+fi;
+
+# Write something in the deployment log
+echo
+echo "Updating deployment log"
+echo "Deployed by $USER on `date`" >> $DEPLOYMENT_LOG
+
+echo
+echo "Remember to check that there are no changes needed in:"
+echo ".htaccess"
+echo "docs/include/config.php"
+echo
