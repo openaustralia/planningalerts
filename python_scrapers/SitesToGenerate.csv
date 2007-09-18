@@ -87,7 +87,7 @@
 "Vale Royal Borough Council", "Vale Royal", "http://pa.valeroyal.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Winchester City Council", "Winchester", "http://win2padmz.winchester.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Wolverhampton City Council", "Wolverhampton", "http://planningonline.wolverhampton.gov.uk/PublicAccess/dc/", "PublicAccess", "PublicAccessParser"
-"Babergh District Council", "Babergh", "http://planning.babergh.gov.uk/dataOnlinePlanning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "BaberghParser"
+"Babergh District Council", "Babergh", "http://planning.babergh.gov.uk/dcdatav2//acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "BaberghParser"
 "Basingstoke and Deane Borough Council", "Basingstoke and Deane", "http://planning.basingstoke.gov.uk/DCOnline2/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "BasingstokeParser"
 "Bassetlaw District Council", "Bassetlaw","http://www.bassetlaw.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "BassetlawParser"
 "Bury Metropolitan Borough Council", "Bury", "http://e-planning.bury.gov.uk/ePlanning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch", "AcolnetParser", "BuryParser"
