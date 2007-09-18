@@ -68,8 +68,9 @@ if [ -a $BACKUP_DIRECTORY/docs/.htaccess ];
 fi;
 
 echo "Enter a reason for deployment:"
-read $REASON
+read REASON
 echo
+echo $REASON
 
 # Write something in the deployment log
 echo
