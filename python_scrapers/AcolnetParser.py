@@ -268,7 +268,7 @@ class BridgnorthParser(AcolnetParser):
     #search_url = "http://www2.bridgnorth-dc.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch"
     #authority_name = "Bridgenorth District Council"
     #authority_short_name = "Bridgenorth"
-
+    
     case_number_tr = 1 # this one can be got by the td class attribute
     reg_date_tr = 2
     location_tr = 4
@@ -278,11 +278,11 @@ class BridgnorthParser(AcolnetParser):
 
 class BuryParser(AcolnetParser):
     case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 2
-    location_tr = 4
-    proposal_tr = 5    
+    reg_date_tr = 3
+    location_tr = 5
+    proposal_tr = 6    
 
-    comments_email_address = "development.control@bury.gov.uk"
+    #comments_email_address = "development.control@bury.gov.uk"
 
 ## class CanterburyParser(AcolnetParser):
 ##     search_url = "http://planning.canterbury.gov.uk/scripts/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
