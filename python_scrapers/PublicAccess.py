@@ -349,3 +349,11 @@ class PublicAccessPropertyPageParser(HTMLParser.HTMLParser):
 			self.postcode = value
 
 
+if __name__ == '__main__':
+    day = 31
+    month = 8
+    year = 2007
+
+    parser = PublicAccessParser("Bristol", "Bristol", "http://e2eweb.bristol-city.gov.uk/PublicAccess/tdc/", True)
+    print parser.getResults(day, month, year)
+    

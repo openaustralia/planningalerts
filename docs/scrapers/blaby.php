@@ -34,6 +34,6 @@ if (isset($_GET['year'])){
 	$applications = scrape_applications_publicaccess($search_url, $info_url_base, $comment_url_base);
 
     //Display applications
-    display_applications($applications, "Balby District Council", "Balby");
+    display_applications($applications, "Blaby District Council", "Blaby");
 
 ?>
