@@ -1,5 +1,5 @@
 "authority_name", "authority_short_name", "base_url", "module", "parser"
-"City of York Council", "York", "http://planning.york.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser", "PublicAccess", "PublicAccessParser"
+"City of York Council", "York", "http://planning.york.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Cherwell District Council", "Cherwell", "http://cherweb.cherwell-dc.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Angus Council", "Angus", "http://planning.angus.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Huntingdonshire District Council", "Huntingdonshire", "http://planning.huntsdc.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
