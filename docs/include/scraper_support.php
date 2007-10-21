@@ -287,43 +287,27 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
         return "http://maps.google.co.uk/maps?q=$postcode&z=$zoom";
     }
     
+
     //postcode to location
     function postcode_to_location($postcode){
-        
-        $x = 0;
-        $y = 0;
-        
+
+	// We don't actually need to fetch the page, we
+	// can get everything we need from the url we are
+	// redirected to.
         $clean_postcode = strtolower($postcode);
         $clean_postcode = str_replace(" ","+", $clean_postcode);
+
         $url = "http://www.streetmap.co.uk/newsearch.srf?type=Postcode&name=" . $clean_postcode;
 
-        $html = file_get_contents($url);
-        $x_pattern = "/var _LocationX=\d*;/";
-        $y_pattern = "/var _LocationY=\d*;/";
-        
-        //X
-        preg_match($x_pattern, $html, $matches);
-        if(sizeof($matches) >0){
-            $x = $matches[0];
-            $x =  str_replace('var _LocationX=',"", $x);
-            $x =  str_replace(";","", $x);
-        }
-        
-        //Y
-        preg_match($y_pattern, $html, $matches);
-        if(sizeof($matches) >0){        
-            $y =  str_replace("var _LocationY=","", $matches[0]);
-            $y =  str_replace(";","", $y);
-        }
-        
-        $return = array();
-        
-        $return[0] = $x;
-        $return[1] = $y;
-        return $return;
+	$headers = get_headers($url, 1);
+	$location = $headers["Location"];
+	$location_regex = "/x=(\d*)&y=(\d*)&/";
+
+	preg_match ($location_regex, $location, $matches);
+
+	return array_slice ($matches, 1);
     }
-    
-    
+        
     
     function valid_email ($string) {
         $valid = false;
