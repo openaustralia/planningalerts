@@ -299,13 +299,13 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
 
         $url = "http://www.streetmap.co.uk/newsearch.srf?type=Postcode&name=" . $clean_postcode;
 
-	$headers = get_headers($url, 1);
-	$location = $headers["Location"];
-	$location_regex = "/x=(\d*)&y=(\d*)&/";
+		$headers = get_headers($url, 1);
+		$location = $headers["Location"];
+		$location_regex = "/x=(\d*)&y=(\d*)&/";
 
-	preg_match ($location_regex, $location, $matches);
+		preg_match ($location_regex, $location, $matches);
 
-	return array_slice ($matches, 1);
+		return array_slice ($matches, 1);
     }
         
     

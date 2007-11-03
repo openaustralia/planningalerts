@@ -96,3 +96,7 @@ a {color:#22579C;}
 
 /* Buttons */
 input.button {font-family:georgia, serif;}
+
+/* Ad box */
+div.ad {border:solid 3px black;}
+div.ad h4 {color:black;font-weight:bold;}
