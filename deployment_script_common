@@ -67,6 +67,11 @@ if [ -a $BACKUP_DIRECTORY/docs/.htaccess ];
     echo "No .htaccess to put back";
 fi;
 
+
+# Now make all the files group writable
+echo "Making the planningalerts root directory group writable."
+chmod -R g+w $PLANNING_ROOT
+
 echo "Enter a reason for deployment:"
 read REASON
 echo
