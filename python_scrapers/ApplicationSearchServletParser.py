@@ -188,7 +188,7 @@ class AllerdaleSearchParser(ApplicationSearchServletParser):
 
     _reference_col_no = 1
     _location_col_no = 3
-    _description_col_no = 6
+    _description_col_no = 4
     
     def _checkAttrsForResultsTable(self, attrs):
         got_class = False
