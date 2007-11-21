@@ -396,9 +396,9 @@ class NewForestDCParser(AcolnetParser):
     # In this case there is an online comment facility at the
     # bottom of each view app page...
     case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 2
-    location_tr = 5
-    proposal_tr = 6
+    reg_date_tr = 3
+    location_tr = 6
+    proposal_tr = 7
 
 class NorthWiltshireParser(AcolnetParser):
     case_number_tr = 1 # this one can be got by the td class attribute
