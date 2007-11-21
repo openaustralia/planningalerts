@@ -436,10 +436,17 @@ class SouthBedfordshireParser(AcolnetParser):
     proposal_tr = 6
 
 class SuffolkCoastalParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 2
-    location_tr = 4
-    proposal_tr = 5
+#    case_number_tr = 1 # this one can be got by the td class attribute
+#    reg_date_tr = 2
+#    location_tr = 4
+#    proposal_tr = 5
+
+# New URL with different layout
+    case_number_tr = 1
+    reg_date_tr = 3
+    location_tr = 5
+    proposal_tr = 6
+
 
     comments_email_address = "d.c.admin@suffolkcoastal.gov.uk"
 
