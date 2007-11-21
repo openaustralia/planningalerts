@@ -56,7 +56,7 @@
 "Milton Keynes Council", "Milton Keynes", "http://publicaccess.milton-keynes.gov.uk/tdc/", "PublicAccess", "PublicAccessParser"
 "Coventry City Council", "Coventry", "http://planning.coventry.gov.uk/", "ApplicationSearchServletParser", "CoventrySearchParser"
 "Alnwick District Council", "Alnwick", "http://services.castlemorpeth.gov.uk:7777/", "ApplicationSearchServletParser", "AlnwickSearchParser"
-"Haringey Council", "Haringey", "http://www.planningservices.haringey.gov.uk/portal/servlets/ApplicationSearchServlet", "ApplicationSearchServletParser", "HaringeySearchParser"
+"Haringey Council", "Haringey", "http://www.planningservices.haringey.gov.uk/", "ApplicationSearchServletParser", "HaringeySearchParser"
 "Hartlepool Borough Council", "Hartlepool", "http://eforms.hartlepool.gov.uk:7777/", "ApplicationSearchServletParser", "HartlepoolSearchParser"
 "North Warwickshire Borough Council", "North Warwickshire", "http://planning.northwarks.gov.uk/", "ApplicationSearchServletParser", "NorthWarksSearchParser"
 "St Helens Council", "St Helens", "http://212.248.225.150:8080/", "ApplicationSearchServletParser", "StHelensSearchParser"
