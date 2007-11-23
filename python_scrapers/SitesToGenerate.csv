@@ -137,3 +137,7 @@
 "Chester-le-Street District Council", "Chester-le-Street", "http://planning.chester-le-street.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Vale of the White Horse District Council", "Vale of the White Horse", "http://planning.whitehorsedc.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Corby Borough Council", "Corby", "https://publicaccess.corby.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
+"Rutland County Council", "Rutland", "http://www.rutland.gov.uk/wellandplanning/searchparam.asp", "RutlandLike", "RutlandLikeParser"
+"Melton Borough Council", "Melton", "http://www.meltononline.co.uk/planning/searchparam.asp", "RutlandLike", "RutlandLikeParser"
+"Harborough District Council", "Harborough", "http://pa.harborough.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
+"East Northamptonshire Council", "East Northants", "http://publicaccesssrv.east-northamptonshire.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"

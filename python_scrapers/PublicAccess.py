@@ -350,10 +350,10 @@ class PublicAccessPropertyPageParser(HTMLParser.HTMLParser):
 
 
 if __name__ == '__main__':
-    day = 31
-    month = 8
+    day = 20
+    month = 11
     year = 2007
 
-    parser = PublicAccessParser("Bristol", "Bristol", "http://e2eweb.bristol-city.gov.uk/PublicAccess/tdc/", True)
+    parser = PublicAccessParser("Hambleton", "Hambleton", "http://planning.hambleton.gov.uk/publicaccess/tdc/", True)
     print parser.getResults(day, month, year)
     
