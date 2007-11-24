@@ -88,6 +88,19 @@ class PlanningApplication:
 
     def __repr__(self):
 	return self.displayXML()
+
+    def is_ready(self):
+        # This method tells us if the application is complete
+        # Because of the postcode default, we can't really
+        # check the postcode - make sure it is filled in when
+        # you do the address.
+        return self.council_reference \
+            and self.address \
+            and self.description \
+            and self.info_url \
+            and self.comment_url \
+            and self.date_received
+    
         
     def displayXML(self):
         #print self.council_reference, self.address, self.postcode, self.description, self.info_url, self.comment_url, self.date_received
