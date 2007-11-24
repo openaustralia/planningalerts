@@ -68,7 +68,14 @@ class AtriumePlanningParser:
                     if td.string.strip() == "Date Registered":
                         # We are starting a new App
                         self._current_application = PlanningApplication()
-                        self._current_application.date_received = datetime.datetime.strptime(td.findNext("td").string, "%d-%m-%Y")
+
+                        # 
+                        day, month, year = [int(x) for x in td.findNext("td").string.split("-")]
+                        self._current_application.date_received = datetime.date(year, month, day)
+                        # FIXME - when python on haggis is a bit newer, 
+                        #we can do the following, which is neater 
+                        #(and get rid of the import of time).
+                        #self._current_application.date_received = datetime.datetime.strptime(td.findNext("td").string, "%d-%m-%Y")
                     elif td.string.strip() == "Application Number":
                         self._current_application.council_reference = td.findNext("td").string
                     elif td.string.strip() == "Location":

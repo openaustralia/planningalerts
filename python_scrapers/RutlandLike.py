@@ -2,7 +2,7 @@ import urllib2
 import urllib
 import urlparse
 
-import datetime
+import datetime, time
 #import re
 
 from BeautifulSoup import BeautifulSoup
