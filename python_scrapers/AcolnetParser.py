@@ -458,6 +458,13 @@ class GuildfordParser(AcolnetParser):
     
     #http://www.guildford.gov.uk/acolnet/acolnetcgi.gov?ACTION=UNWRAP&Root=PgeSearch
 
+class BoltonParser(AcolnetParser):
+    case_number_tr = 1
+    reg_date_tr = 2
+    location_tr = 4
+    proposal_tr = 5
+    comments_email_address = "Planning.control@bolton.gov.uk"
+
 class SurreyHeathParser(AcolnetParser):
     # This is not working yet.
     # _getSearchResponse is an attempt to work around

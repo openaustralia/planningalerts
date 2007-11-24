@@ -144,3 +144,4 @@
 "Cumbria County Council", "Cumbria", "http://217.114.50.149:7778/ePlanningOPS/loadResults.do", "AtriumePlanning", "AtriumePlanningParser"
 "Lincolnshire County Council", "Lincolnshire", "http://apps1.lincolnshire.gov.uk/ePlanning/loadResults.do", "AtriumePlanning", "AtriumePlanningParser"
 "West Sussex County Council", "West Sussex", "http://eplanning.westsussex.gov.uk/ePlanningOPS/loadResults.do", "AtriumePlanning", "AtriumePlanningParser"
+"Bolton Metropolitan Borough Council", "Bolton", "http://www.planning.bolton.gov.uk/PlanningSearch/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser",  "BoltonParser"
