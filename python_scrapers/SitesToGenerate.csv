@@ -145,3 +145,4 @@
 "Lincolnshire County Council", "Lincolnshire", "http://apps1.lincolnshire.gov.uk/ePlanning/loadResults.do", "AtriumePlanning", "AtriumePlanningParser"
 "West Sussex County Council", "West Sussex", "http://eplanning.westsussex.gov.uk/ePlanningOPS/loadResults.do", "AtriumePlanning", "AtriumePlanningParser"
 "Bolton Metropolitan Borough Council", "Bolton", "http://www.planning.bolton.gov.uk/PlanningSearch/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser",  "BoltonParser"
+"Exeter City Council", "Exeter", "http://pub.exeter.gov.uk/scripts/Acolnet/dataonlineplanning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "ExeterParser"

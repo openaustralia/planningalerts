@@ -471,6 +471,14 @@ class BoltonParser(AcolnetParser):
     proposal_tr = 5
     comments_email_address = "Planning.control@bolton.gov.uk"
 
+
+class ExeterParser(AcolnetParser):
+    case_number_tr = 1
+    reg_date_tr = 3
+    location_tr = 5
+    proposal_tr = 6
+    
+
 class SurreyHeathParser(AcolnetParser):
     # This is not working yet.
     # _getSearchResponse is an attempt to work around
