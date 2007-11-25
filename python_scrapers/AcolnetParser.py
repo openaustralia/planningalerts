@@ -41,7 +41,9 @@ class AcolnetParser(HTMLParser.HTMLParser):
     # appropriate email address instead
     comments_email_address = None
 
-    action_regex = re.compile("<form[^>]*action=\"([^\"]*ACTION=UNWRAP&RIPSESSION=[^\"]*)\"[^>]*>", re.IGNORECASE)    
+    # The optional amp; is to cope with Oldham, which seems to have started
+    # quoting this url.
+    action_regex = re.compile("<form[^>]*action=\"([^\"]*ACTION=UNWRAP&(?:amp;)?RIPSESSION=[^\"]*)\"[^>]*>", re.IGNORECASE)    
     
     def __init__(self,
                  authority_name,
@@ -175,9 +177,6 @@ class AcolnetParser(HTMLParser.HTMLParser):
         
         search_form_contents = search_form_response.read()
 
-        #outfile = open("tmpfile", "w")
-        #outfile.write(search_form_contents)
-
         # This sometimes causes a problem in HTMLParser, so let's just get the link
         # out with a regex...
 
@@ -186,8 +185,12 @@ class AcolnetParser(HTMLParser.HTMLParser):
         action = groups[0] 
         #print action
 
+        # This is to handle the amp; which seems to have appeared in this
+        # url on the Oldham site
+        action = ''.join(action.split('amp;'))
+
         action_url = urlparse.urljoin(self.base_url, action)
-        #print action_url
+        print action_url
 
         our_date = date(year, month, day)
         
@@ -198,6 +201,9 @@ class AcolnetParser(HTMLParser.HTMLParser):
         opener = urllib2.build_opener(MultipartPostHandler.MultipartPostHandler)
         response = opener.open(action_url, search_data)
         results_html = response.read()
+
+        #outfile = open("tmpfile", "w")
+        #outfile.write(results_html)
 
         # This is for doing site specific html cleanup
         results_html = self._cleanupHTML(results_html)
@@ -508,9 +514,9 @@ class SurreyHeathParser(AcolnetParser):
     
         
 if __name__ == '__main__':
-    day = 22
-    month = 2
-    year = 2005
+    day = 20
+    month = 11
+    year = 2007
 
     # returns error 400 - bad request
     #parser = BridgenorthParser()
@@ -523,6 +529,6 @@ if __name__ == '__main__':
 
     #parser = SurreyHeathParser("Surrey Heath", "Surrey Heath", "https://www.public.surreyheath-online.gov.uk/whalecom60b1ef305f59f921/whalecom0/Scripts/PlanningPagesOnline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
 
-    parser = GuildfordParser("Guildford", "Guildford", "http://www.guildford.gov.uk/acolnet/acolnetcgi.gov?ACTION=UNWRAP&Root=PgeSearch")
+    parser = OldhamParser("Oldham", "Oldham", "http://planning.oldham.gov.uk/planning/AcolNetCGI.gov?ACTION=UNWRAP&Root=PgeSearch")
     print parser.getResults(day, month, year)
     

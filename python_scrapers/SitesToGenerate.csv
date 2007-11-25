@@ -104,7 +104,7 @@
 "Carlisle City Council", "Carlisle", "http://planning.carlisle.gov.uk/acolnet/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "CarlisleParser"
 "Newcastle City Council", "Newcastle",  "http://gispublic.newcastle.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "North Wiltshire District Council", "North Wiltshire", "http://planning.northwilts.gov.uk/DCOnline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "NorthWiltshireParser"
-"Oldham Metropolitan Borough Council", "Oldham", "http://planning.oldham.gov.uk/planning//acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "OldhamParser"
+"Oldham Metropolitan Borough Council", "Oldham", "http://planning.oldham.gov.uk/planning/AcolNetCGI.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "OldhamParser"
 "Renfrewshire Council", "Renfrewshire", "http://planning.renfrewshire.gov.uk/acolnetDCpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch", "AcolnetParser", "RenfrewshireParser"
 "Selby District Council", "Selby", "http://publicaccess.selby.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "South Bedfordshire District Council", "South Bedfordshire", "http://planning.southbeds.gov.uk/plantech/DCWebPages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.PgeSearch", "AcolnetParser", "SouthBedfordshireParser"
