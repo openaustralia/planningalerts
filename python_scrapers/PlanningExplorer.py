@@ -180,6 +180,7 @@ class PlanningExplorerParser:
         headers = self._getHeaders()
 
         request = urllib2.Request(self.search_url, post_data, headers)
+
         post_response = urllib2.urlopen(request)
 
         # We have actually been returned here by an http302 object
@@ -546,14 +547,14 @@ if __name__ == '__main__':
     #parser = EastStaffsParser("East Staffordshire Borough Council", "East Staffs", "http://www2.eaststaffsbc.gov.uk/")
     #parser = EppingForestParser("Epping Forest District Council", "Epping Forest", "http://plan1.eppingforestdc.gov.uk/")
     #parser = ForestHeathParser("Forest Heath District Council", "Forest Heath", "http://195.171.177.73/")
-    parser = HackneyParser("London Borough of Hackney", "Hackney", "http://www.hackney.gov.uk/servapps/")
+    #parser = HackneyParser("London Borough of Hackney", "Hackney", "http://www.hackney.gov.uk/servapps/")
     #parser = KennetParser("Kennet District Council", "Kennet", "http://mvm-planning.kennet.gov.uk/")
     #parser = LincolnParser("Lincoln City Council", "Lincoln", "http://online.lincoln.gov.uk/")
     #parser = LiverpoolParser("Liverpool City Council", "Liverpool", "http://www.liverpool.gov.uk/")
     #parser = SouthNorfolkParser("South Norfolk Council", "South Norfolk", "http://planning.south-norfolk.gov.uk/")
     #parser = SouthShropshireParser("South Shropshire District Council", "South Shropshire", "http://194.201.44.102/")
     #parser = SouthTynesideParser("South Tyneside Council", "South Tyneside", "http://poppy.southtyneside.gov.uk/")
-    #parser = StockportParser("Stockport Metropolitan District Council", "Stockport", "http://s1.stockport.gov.uk/council/eed/dc/planning/")
+    parser = StockportParser("Stockport Metropolitan District Council", "Stockport", "http://s1.stockport.gov.uk/council/eed/dc/planning/")
     #parser = TamworthParser("Tamworth Borough Council", "Tamworth", "http://80.1.64.77/")
     #parser = TraffordParser("Trafford Council", "Trafford", "http://planning.trafford.gov.uk/")
     #parser = WestOxfordshireParser("West Oxfordshire District Council", "West Oxfordshire", "http://planning.westoxon.gov.uk/")
