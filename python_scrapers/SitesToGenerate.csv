@@ -180,4 +180,5 @@
 "Snowdonia National Park Authority", "Snowdonia", "http://www.snowdonia-npa.gov.uk/swiftlg/apas/run/", "SwiftLG", "SwiftLGParser"
 "St Edmundsbury Borough Council", "Bury St Edmunds", "http://www.stedmundsbury.gov.uk/swiftlg/apas/run/", "SwiftLG", "SwiftLGParser"
 "Boston Borough Council", "Boston", "http://195.224.121.199/swiftlg/apas/run/", "SwiftLG", "SwiftLGParser"
-"City and County of Swansea", "Swansea", "http://www2.swansea.gov.uk/", "PlanningExplorer", "SwanseaParser"
+"Swansea City and County", "Swansea", "http://www2.swansea.gov.uk/", "PlanningExplorer", "SwanseaParser"
+"Shrewsbury and Atcham Borough Council", "Shrewsbury", "http://www2.shrewsbury.gov.uk/", "PlanningExplorer", "ShrewsburyParser"

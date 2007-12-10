@@ -471,8 +471,10 @@ class LiverpoolParser(PlanningExplorerParser):
 
         return ''.join(ws_re.split(url))
 
-# FIXME - Merton and Shrewsbury need to be done here.
-# Both are down today...
+# FIXME - Merton needs to be done here when it is back up.
+
+class ShrewsburyParser(PlanningExplorerParser):
+    use_firefox_user_agent = True
 
 class SouthNorfolkParser(PlanningExplorerParser):
     use_firefox_user_agent = True
@@ -553,11 +555,12 @@ if __name__ == '__main__':
     #parser = KennetParser("Kennet District Council", "Kennet", "http://mvm-planning.kennet.gov.uk/")
     #parser = LincolnParser("Lincoln City Council", "Lincoln", "http://online.lincoln.gov.uk/")
     #parser = LiverpoolParser("Liverpool City Council", "Liverpool", "http://www.liverpool.gov.uk/")
+    parser = ShrewsburyParser("Shrewsbury and Atcham Borough Council", "Shrewsbury", "http://www2.shrewsbury.gov.uk/")
     #parser = SouthNorfolkParser("South Norfolk Council", "South Norfolk", "http://planning.south-norfolk.gov.uk/")
     #parser = SouthShropshireParser("South Shropshire District Council", "South Shropshire", "http://194.201.44.102/")
     #parser = SouthTynesideParser("South Tyneside Council", "South Tyneside", "http://poppy.southtyneside.gov.uk/")
     #parser = StockportParser("Stockport Metropolitan District Council", "Stockport", "http://s1.stockport.gov.uk/council/eed/dc/planning/")
-    parser = SwanseaParser("City and County of Swansea", "Swansea", "http://www2.swansea.gov.uk/")
+    #parser = SwanseaParser("Swansea City and County Council", "Swansea", "http://www2.swansea.gov.uk/")
     #parser = TamworthParser("Tamworth Borough Council", "Tamworth", "http://80.1.64.77/")
     #parser = TraffordParser("Trafford Council", "Trafford", "http://planning.trafford.gov.uk/")
     #parser = WestOxfordshireParser("West Oxfordshire District Council", "West Oxfordshire", "http://planning.westoxon.gov.uk/")
