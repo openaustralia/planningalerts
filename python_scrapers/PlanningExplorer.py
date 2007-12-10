@@ -471,8 +471,8 @@ class LiverpoolParser(PlanningExplorerParser):
 
         return ''.join(ws_re.split(url))
 
-# FIXME - Merton, Shrewsbury, and South Norfolk need to be done here.
-# All are down today...
+# FIXME - Merton and Shrewsbury need to be done here.
+# Both are down today...
 
 class SouthNorfolkParser(PlanningExplorerParser):
     use_firefox_user_agent = True
@@ -517,7 +517,9 @@ class StockportParser(PlanningExplorerParser):
 
         return post_data
 
-# FIXME - should add Swansea, but it is currently down
+class SwanseaParser(BroadlandLike, PlanningExplorerParser):
+    # Unlike the other BroadlandLike sites, there are postcodes :-)
+    pass
 
 class TamworthParser(PlanningExplorerParser):
     comments_email_address = "planningadmin@tamworth.gov.uk"
@@ -554,7 +556,8 @@ if __name__ == '__main__':
     #parser = SouthNorfolkParser("South Norfolk Council", "South Norfolk", "http://planning.south-norfolk.gov.uk/")
     #parser = SouthShropshireParser("South Shropshire District Council", "South Shropshire", "http://194.201.44.102/")
     #parser = SouthTynesideParser("South Tyneside Council", "South Tyneside", "http://poppy.southtyneside.gov.uk/")
-    parser = StockportParser("Stockport Metropolitan District Council", "Stockport", "http://s1.stockport.gov.uk/council/eed/dc/planning/")
+    #parser = StockportParser("Stockport Metropolitan District Council", "Stockport", "http://s1.stockport.gov.uk/council/eed/dc/planning/")
+    parser = SwanseaParser("City and County of Swansea", "Swansea", "http://www2.swansea.gov.uk/")
     #parser = TamworthParser("Tamworth Borough Council", "Tamworth", "http://80.1.64.77/")
     #parser = TraffordParser("Trafford Council", "Trafford", "http://planning.trafford.gov.uk/")
     #parser = WestOxfordshireParser("West Oxfordshire District Council", "West Oxfordshire", "http://planning.westoxon.gov.uk/")
