@@ -1,19 +1,19 @@
 #!/usr/local/bin/python
 
-import urllib, urllib2
-import HTMLParser
-#from BeautifulSoup import BeautifulSoup
+import urllib2
+import urlparse
+
+from datetime import date
+import datetime
+
+import re
+
+from BeautifulSoup import BeautifulSoup
 
 # Adding this to try to help Surrey Heath - Duncan 14/9/2007
 import cookielib
 cookie_jar = cookielib.CookieJar()
 ################
-
-import urlparse
-
-import re
-
-end_head_regex = re.compile("</head", re.IGNORECASE)
 
 import MultipartPostHandler
 # this is not mine, or part of standard python (though it should be!)
@@ -21,21 +21,20 @@ import MultipartPostHandler
 
 from PlanningUtils import getPostcodeFromText, PlanningAuthorityResults, PlanningApplication
 
-from datetime import date
-from time import strptime
-
 
 date_format = "%d/%m/%Y"
-our_date = date(2007,4,25)
 
 #This is to get the system key out of the info url
 system_key_regex = re.compile("TheSystemkey=(\d*)", re.IGNORECASE)
 
+# We allow the optional > for Bridgnorth, which doesn't have broken html
+end_head_regex = re.compile("</head>?", re.IGNORECASE)
+
+
 class AcolnetParser(HTMLParser.HTMLParser):
-    case_number_tr = None # this one can be got by the td class attribute
-    reg_date_tr = None
-    location_tr = None
-    proposal_tr = None
+    received_date_format = "%d/%m/%Y"
+
+    comment_qs_template = "ACTION=UNWRAP&RIPNAME=Root.PgeCommentForm&TheSystemkey=%s"
 
     # There is no online comment facility in these, so we provide an
     # appropriate email address instead
@@ -44,31 +43,59 @@ class AcolnetParser(HTMLParser.HTMLParser):
     # The optional amp; is to cope with Oldham, which seems to have started
     # quoting this url.
     action_regex = re.compile("<form[^>]*action=\"([^\"]*ACTION=UNWRAP&(?:amp;)?RIPSESSION=[^\"]*)\"[^>]*>", re.IGNORECASE)    
+  
+    def _getResultsSections(self, soup):
+        """In most cases, there is a table per app."""
+        return soup.findAll("table", {"class": "results-table"})
+  
+    def _getCouncilReference(self, app_table):
+        return app_table.a.string.strip()
+
+    def _getDateReceived(self, app_table):
+        date_str = ''.join(app_table.find(text="Registration Date:").findNext("td").string.strip().split())
+        
+        return datetime.datetime.strptime(date_str, self.received_date_format)
+
+    def _getAddress(self, app_table):
+        return app_table.find(text="Location:").findNext("td").string.strip()
     
+    def _getDescription(self, app_table):
+        return app_table.find(text="Proposal:").findNext("td").string.strip()
+
+    def _getInfoUrl(self, app_table):
+        """Returns the info url for this app.
+        
+        We also set the system key on self._current_application, 
+        as we'll need that for the comment url.
+
+        """
+        url = app_table.a['href']
+        self._current_application.system_key = system_key_regex.search(url).groups()[0]
+        return urlparse.urljoin(self.base_url, url)
+
+    def _getCommentUrl(self, app_table):
+        """This must be run after _getInfoUrl"""
+
+        if self.comments_email_address:
+            return self.comments_email_address
+
+        split_info_url = urlparse.urlsplit(self._current_application.info_url)
+
+        comment_qs = self.comment_qs_template %self._current_application.system_key
+
+        return urlparse.urlunsplit(split_info_url[:3] + (comment_qs,) + split_info_url[4:])
+
+
     def __init__(self,
                  authority_name,
                  authority_short_name,
                  base_url,
                  debug=False):
-
-
-        HTMLParser.HTMLParser.__init__(self)
-
         self.authority_name = authority_name
         self.authority_short_name = authority_short_name
         self.base_url = base_url
 
         self.debug = debug
-
-        self._tr_number = 0
-
-        # This will be used to track the subtable depth
-        # when we are in a results-table, in order to
-        # avoid adding an application before we have got to
-        # the end of the results-table
-        self._subtable_depth = None
-
-        self._in_td = False
 
         # This in where we store the results
         self._results = PlanningAuthorityResults(self.authority_name, self.authority_short_name)
@@ -81,86 +108,6 @@ class AcolnetParser(HTMLParser.HTMLParser):
         """This method should be overridden in subclasses to perform site specific
         HTML cleanup."""
         return html
-
-    def handle_starttag(self, tag, attrs):
-        #print tag, attrs
-                    
-        if tag == "table":
-            if self._current_application is None:
-                # Each application is in a separate table with class "results-table"
-                for key, value in attrs:
-                    if key == "class" and value == "results-table":
-                        #print "found results-table"
-                        self._current_application = PlanningApplication()
-                        self._tr_number = 0
-                        self._subtable_depth = 0
-                        self._current_application.comment_url = self.comments_email_address
-                        break
-            else:
-                # We are already in a results-table, and this is the start of a subtable,
-                # so increment the subtable depth.
-                self._subtable_depth += 1
-
-        elif self._current_application is not None:
-            if tag == "tr" and self._subtable_depth == 0:
-                self._tr_number += 1
-            if tag == "td":
-                self._in_td = True
-            if tag == "a" and self._tr_number == self.case_number_tr:
-                # this is where we get the info link and the case number
-                for key, value in attrs:
-                    if key == "href":
-                        self._current_application.info_url = value
-
-                        system_key = system_key_regex.search(value).groups()[0]
-
-                        if self.comments_email_address is not None:
-                            self._current_application.comment_url = self.comments_email_address
-                        else:
-                            self._current_application.comment_url = value.replace("PgeResultDetail", "PgeCommentForm")
-                        
-    def handle_data(self, data):
-        # If we are in the tr which contains the case number,
-        # then data is the council reference, so
-        # add it to self._current_application.
-        if self._in_td:
-            if self._tr_number == self.case_number_tr:
-                self._current_application.council_reference = data.strip()
-            elif self._tr_number == self.reg_date_tr:
-                # we need to make a date object out of data
-                date_as_str = ''.join(data.strip().split())
-                received_date = date(*strptime(date_as_str, date_format)[0:3])
-
-                #print received_date
-
-                self._current_application.date_received = received_date
-
-            elif self._tr_number == self.location_tr:
-                location = data.strip()
-
-                self._current_application.address = location
-                self._current_application.postcode = getPostcodeFromText(location)
-            elif self._tr_number == self.proposal_tr:
-                self._current_application.description = data.strip()
-
-
-    def handle_endtag(self, tag):
-        #print "ending: ", tag
-        if tag == "table" and self._current_application is not None:
-            if self._subtable_depth > 0:
-                self._subtable_depth -= 1
-            else:
-                # We need to add the last application in the table
-                if self._current_application is not None:
-                    #print "adding application"
-                    self._results.addApplication(self._current_application)
-                    #print self._current_application
-                    self._current_application = None
-                    self._tr_number = None
-                    self._subtable_depth = None
-        elif tag == "td":
-            self._in_td = False
-
 
     def _getSearchResponse(self):
         # It looks like we sometimes need to do some stuff to get around a
@@ -202,9 +149,6 @@ class AcolnetParser(HTMLParser.HTMLParser):
         response = opener.open(action_url, search_data)
         results_html = response.read()
 
-        #outfile = open("tmpfile", "w")
-        #outfile.write(results_html)
-
         # This is for doing site specific html cleanup
         results_html = self._cleanupHTML(results_html)
 
@@ -212,11 +156,31 @@ class AcolnetParser(HTMLParser.HTMLParser):
         #so we'll just have the body
         just_body = "<html>" + end_head_regex.split(results_html)[-1]
 
-        #outfile = open(self.authority_short_name + ".debug", "w")
-        #outfile.write(just_body)        
-
-        self.feed(just_body)
+        #self.feed(just_body)
         
+        soup = BeautifulSoup(just_body)
+
+        # Each app is in a table of it's own.
+        results_tables = self._getResultsSections(soup)
+
+
+        for app_table in results_tables:
+            self._current_application = PlanningApplication()
+
+            self._current_application.council_reference = self._getCouncilReference(app_table)
+            self._current_application.address = self._getAddress(app_table)
+            
+            # Get the postcode from the address
+            self._current_application.postcode = getPostcodeFromText(self._current_application.address)
+            
+            self._current_application.description = self._getDescription(app_table)
+            self._current_application.info_url = self._getInfoUrl(app_table)
+            self._current_application.comment_url = self._getCommentUrl(app_table)
+            self._current_application.date_received = self._getDateReceived(app_table)
+
+            self._results.addApplication(self._current_application)
+
+
         return self._results
 
 
@@ -224,41 +188,8 @@ class AcolnetParser(HTMLParser.HTMLParser):
     def getResults(self, day, month, year):
         return self.getResultsByDayMonthYear(int(day), int(month), int(year)).displayXML()
 
-## # Babergh up to 21/06/2007
-## class BaberghParser(AcolnetParser):
-##     case_number_tr = 1 # this one can be got by the td class attribute
-##     reg_date_tr = 2
-##     location_tr = 4
-##     proposal_tr = 5
-
-##     # It would be nice to scrape this...
-##     comments_email_address = "planning.reception@babergh.gov.uk"
-
-# Site changes to here from 22/06/2007
-class BaberghParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 3
-    location_tr = 5
-    proposal_tr = 6
-
-    # It would be nice to scrape this...
-    comments_email_address = "planning.reception@babergh.gov.uk"
-
-class BasingstokeParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 3
-    location_tr = 6
-    proposal_tr = 8
-
-    # It would be nice to scrape this...
-    comments_email_address = "development.control@basingstoke.gov.uk"
 
 class BassetlawParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 2
-    location_tr = 4
-    proposal_tr = 5    
-
     comments_email_address = "planning@bassetlaw.gov.uk"
 
     def _cleanupHTML(self, html):
@@ -270,214 +201,58 @@ class BassetlawParser(AcolnetParser):
 
 
 class BridgnorthParser(AcolnetParser):
-    # This site is currently down...
-    #search_url = "http://www2.bridgnorth-dc.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch"
-    #authority_name = "Bridgenorth District Council"
-    #authority_short_name = "Bridgenorth"
+    def _getResultsSections(self, soup):
+        return soup.findAll("table", {"class": "app"})
+
+    def _getCouncilReference(self, app_table):
+        return app_table.a.string.split()[-1]
+
+
+    def _getCommentUrl(self, app_table):
+        """This must be run after _getInfoUrl"""
+#http://www2.bridgnorth-dc.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeCommentForm&TheSystemkey=46958
+        return self._current_application.info_url.replace("NewPages", "PgeCommentForm")
+
+# Cambridgeshire, although an Acolnet site, is so different that it
+# may as well be handled completely separately.
+
+class CanterburyParser(AcolnetParser):
+    """Here the apps are one row each in a big table."""
+
+    def _getResultsSections(self, soup):
+        return soup.find("table", {"class": "results-table"}).findAll("tr")[1:]
+
+    def _getDateReceived(self, app_table):
+        date_str = app_table.findAll("td")[3].string.strip()
+
+        return datetime.datetime.strptime(date_str, self.received_date_format)
+
+    def _getAddress(self, app_table):
+        return app_table.findAll("td")[1].string.strip()
+
+    def _getDescription(self, app_table):
+        return app_table.findAll("td")[2].string.strip()        
+
+#Kensington and chelsea is sufficiently different, it may as well be handled separately    
+
+# Mid Bedfordshire - there is an acolnet here, but you have to have a username
+# and password to access it!
     
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 2
-    location_tr = 4
-    proposal_tr = 5    
-
-    comments_email_address = "contactus@bridgnorth-dc.gov.uk"
-
-class BuryParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 3
-    location_tr = 5
-    proposal_tr = 6    
-
-    #comments_email_address = "development.control@bury.gov.uk"
-
-## class CanterburyParser(AcolnetParser):
-##     search_url = "http://planning.canterbury.gov.uk/scripts/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch"
-
-##     case_number_tr = 1 # this one can be got by the td class attribute
-##     reg_date_tr = 2
-##     location_tr = 4
-##     proposal_tr = 5    
-
-##     authority_name = "Canterbury City Council"
-##     authority_short_name = "Canterbury"
-
-##     comments_email_address = ""
-
-class CarlisleParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 2
-    location_tr = 5
-    proposal_tr = 6    
-
-    comments_email_address = "dc@carlisle.gov.uk"
-
-class DerbyParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 3
-    location_tr = 4
-    proposal_tr = 5    
-
-    comments_email_address = "developmentcontrol@derby.gov.uk"
-
-class CroydonParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 3
-    location_tr = 5
-    proposal_tr = 6    
-
-    comments_email_address = "planning.control@croydon.gov.uk"
-
-class EastLindseyParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 3
-    location_tr = 5
-    proposal_tr = 6    
-
-    comments_email_address = "development.control@e-lindsey.gov.uk"
-
-class FyldeParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 2
-    location_tr = 4
-    proposal_tr = 5    
-
-    comments_email_address = "planning@fylde.gov.uk"
-
-class HarlowParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 2
-    location_tr = 4
-    proposal_tr = 5    
-
-    comments_email_address = "Planning.services@harlow.gov.uk"
-
-class HavantParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 3
-    location_tr = 6
-    proposal_tr = 8    
-
-    comments_email_address = "representations@havant.gov.uk"
-
-class HertsmereParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 2
-    location_tr = 4
-    proposal_tr = 5    
-
-    comments_email_address = "planning@hertsmere.gov.uk"
-
-class LewishamParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 2
-    location_tr = 4
-    proposal_tr = 5    
-
-    comments_email_address = "planning@lewisham.gov.uk"
-    
-class NorthHertfordshireParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 2
-    location_tr = 4
-    proposal_tr = 5    
-
-## class MidSuffolkParser(AcolnetParser):
-##     case_number_tr = 1 # this one can be got by the td class attribute
-##     reg_date_tr = 2
-##     location_tr = 4
-##     proposal_tr = 5    
-
-##     comments_email_address = "planning@lewisham.gov.uk"
-##     #action_regex = re.compile("<FORM .*action=\"(.*ACTION=UNWRAP&RIPSESSION=[^\"]*)\"[^>]*>", re.IGNORECASE)    
-
-class NewForestNPParser(AcolnetParser):
-    # In this case there is an online comment facility at the
-    # bottom of each view app page...
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 2
-    location_tr = 4
-    proposal_tr = 5
-
-class NewForestDCParser(AcolnetParser):
-    # In this case there is an online comment facility at the
-    # bottom of each view app page...
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 3
-    location_tr = 6
-    proposal_tr = 7
-
-class NorthWiltshireParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 3
-    location_tr = 6
-    proposal_tr = 7
-
 class OldhamParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 3
-    location_tr = 6
-    proposal_tr = 7
-        
     def _cleanupHTML(self, html):
         """There is a bad table end tag in this one.
         Fix it before we start"""
         
         bad_table_end = '</table summary="Copyright">'
         good_table_end = '</table>'
+
         return html.replace(bad_table_end, good_table_end)
 
+class SouthwarkParser(AcolnetParser):
+    def _getDateReceived(self, app_table):
+        date_str = ''.join(app_table.find(text="Statutory start date:").findNext("td").string.strip().split())
         
-class RenfrewshireParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 2
-    location_tr = 4
-    proposal_tr = 5
-
-    comments_email_address = "pt@renfrewshire.gov.uk"
-
-class SouthBedfordshireParser(AcolnetParser):
-    case_number_tr = 1 # this one can be got by the td class attribute
-    reg_date_tr = 3
-    location_tr = 5
-    proposal_tr = 6
-
-class SuffolkCoastalParser(AcolnetParser):
-#    case_number_tr = 1 # this one can be got by the td class attribute
-#    reg_date_tr = 2
-#    location_tr = 4
-#    proposal_tr = 5
-
-# New URL with different layout
-    case_number_tr = 1
-    reg_date_tr = 3
-    location_tr = 5
-    proposal_tr = 6
-
-
-    comments_email_address = "d.c.admin@suffolkcoastal.gov.uk"
-
-class GuildfordParser(AcolnetParser):
-    case_number_tr = 1
-    reg_date_tr = 7
-    location_tr = 2
-    proposal_tr = 3
-    
-    #http://www.guildford.gov.uk/acolnet/acolnetcgi.gov?ACTION=UNWRAP&Root=PgeSearch
-
-class BoltonParser(AcolnetParser):
-    case_number_tr = 1
-    reg_date_tr = 2
-    location_tr = 4
-    proposal_tr = 5
-    comments_email_address = "Planning.control@bolton.gov.uk"
-
-
-class ExeterParser(AcolnetParser):
-    case_number_tr = 1
-    reg_date_tr = 3
-    location_tr = 5
-    proposal_tr = 6
-    
+        return datetime.datetime.strptime(date_str, self.received_date_format)
 
 class SurreyHeathParser(AcolnetParser):
     # This is not working yet.
@@ -520,23 +295,42 @@ class SurreyHeathParser(AcolnetParser):
         
 #        return javascript_redirect_response
     
+# Wychavon is rather different, and will need some thought. There is no
+# advanced search page
         
 if __name__ == '__main__':
-    day = 20
+    day = 30
     month = 11
     year = 2007
 
-    # returns error 400 - bad request
-    #parser = BridgenorthParser()
-
-    # cambridgeshire is a bit different...
-    # no advanced search page
-
-    # canterbury
-    # results as columns of one table
-
-    #parser = SurreyHeathParser("Surrey Heath", "Surrey Heath", "https://www.public.surreyheath-online.gov.uk/whalecom60b1ef305f59f921/whalecom0/Scripts/PlanningPagesOnline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-
-    parser = OldhamParser("Oldham", "Oldham", "http://planning.oldham.gov.uk/planning/AcolNetCGI.gov?ACTION=UNWRAP&Root=PgeSearch")
+    #parser = AcolnetParser("Babergh", "Babergh", "http://planning.babergh.gov.uk/dcdatav2//acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("Basingstoke", "Basingstoke", "http://planning.basingstoke.gov.uk/DCOnline2/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = BassetlawParser("Bassetlaw", "Bassetlaw", "http://www.bassetlaw.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("Bolton", "Bolton", "http://www.planning.bolton.gov.uk/PlanningSearch/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+#    parser = BridgnorthParser("Bridgnorth", "Bridgnorth", "http://www2.bridgnorth-dc.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch")
+    #parser = AcolnetParser("Bury", "Bury", "http://e-planning.bury.gov.uk/DCWebPages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = CanterburyParser("Canterbury", "Canterbury", "http://planning.canterbury.gov.uk/scripts/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("Carlisle", "Carlisle", "http://planning.carlisle.gov.uk/acolnet/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("Croydon", "Croydon", "http://planning.croydon.gov.uk/DCWebPages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("Derby", "Derby", "http://eplanning.derby.gov.uk/acolnet/planningpages02/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("East Lindsey", "East Lindsey", "http://www.e-lindsey.gov.uk/planning/AcolnetCGI.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser")
+    #parser = AcolnetParser("Exeter City Council", "Exeter", "http://pub.exeter.gov.uk/scripts/Acolnet/dataonlineplanning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("Fylde", "Fylde", "http://www2.fylde.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("Guildford", "Guildford", "http://www.guildford.gov.uk/DLDC_Version_2/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("Harlow", "Harlow", "http://planning.harlow.gov.uk/PlanningSearch/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("Havant", "Havant", "http://www3.havant.gov.uk/scripts/planningpages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("Hertsmere", "Hertsmere", "http://www2.hertsmere.gov.uk/ACOLNET/DCOnline//acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("Lewisham", "Lewisham", "http://acolnet.lewisham.gov.uk/lewis-xslpagesdc/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.PgeSearch")
+    #parser = AcolnetParser("Mid Suffolk", "Mid Suffolk", "http://planning.midsuffolk.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("New Forest District Council", "New Forest DC", "http://web3.newforest.gov.uk/planningonline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("New Forest National Park Authority", "New Forest NPA", "http://web01.newforestnpa.gov.uk/planningpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("North Hertfordshire", "North Herts", "http://www.north-herts.gov.uk/dcdataonline/Pages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch")
+    #parser = AcolnetParser("North Wiltshire", "North Wilts", "http://planning.northwilts.gov.uk/DCOnline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = OldhamParser("Oldham", "Oldham", "http://planning.oldham.gov.uk/planning/AcolNetCGI.gov?ACTION=UNWRAP&Root=PgeSearch")
+    #parser = AcolnetParser("Renfrewshire", "Renfrewshire", "http://planning.renfrewshire.gov.uk/acolnetDCpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch")
+    #parser = AcolnetParser("South Bedfordshire", "South Bedfordshire", "http://planning.southbeds.gov.uk/plantech/DCWebPages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.PgeSearch")
+    #parser = SouthwarkParser("London Borough of Southwark", "Southwark", "http://planningonline.southwarksites.com/planningonline2/AcolNetCGI.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("Suffolk Coastal", "Suffolk Coastal", "http://apps3.suffolkcoastal.gov.uk/DCDataV2/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("Surrey Heath", "Surrey Heath", "https://www.public.surreyheath-online.gov.uk/whalecom60b1ef305f59f921/whalecom0/Scripts/PlanningPagesOnline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     print parser.getResults(day, month, year)
     
