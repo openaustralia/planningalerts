@@ -182,3 +182,4 @@
 "Boston Borough Council", "Boston", "http://195.224.121.199/swiftlg/apas/run/", "SwiftLG", "SwiftLGParser"
 "Swansea City and County", "Swansea", "http://www2.swansea.gov.uk/", "PlanningExplorer", "SwanseaParser"
 "Shrewsbury and Atcham Borough Council", "Shrewsbury", "http://www2.shrewsbury.gov.uk/", "PlanningExplorer", "ShrewsburyParser"
+"Dorset County Council", "Dorset", "http://www.dorsetforyou.com/ePlanning/loadResults.do", "AtriumePlanning", "AtriumePlanningParser"

@@ -3,7 +3,6 @@ import urllib
 import urlparse
 
 import datetime
-#import re
 
 from BeautifulSoup import BeautifulSoup
 
@@ -109,7 +108,7 @@ class AtriumePlanningParser:
         return self.getResultsByDayMonthYear(int(day), int(month), int(year)).displayXML()
 
 
-#if __name__ == '__main__':
+if __name__ == '__main__':
 #    cumbria_parser = AtriumePlanningParser("Cumbria County Council", "Cumbria", "http://217.114.50.149:7778/ePlanningOPS/loadResults.do")
 
 #    print cumbria_parser.getResults(22,11,2007)
@@ -117,3 +116,5 @@ class AtriumePlanningParser:
 
 #    print cumbria_parser.getResults(22,11,2007)
 
+    parser = AtriumePlanningParser("Dorset County Council", "Dorset", "http://www.dorsetforyou.com/ePlanning/loadResults.do")
+    print parser.getResults(13,11,2007)
