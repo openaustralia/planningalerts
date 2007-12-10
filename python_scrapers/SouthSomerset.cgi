@@ -13,9 +13,11 @@ our %Months = ( 1 => "Jan", 2 => "Feb", 3 => "Mar", 4 => "Apr",
                 5 => "May", 5 => "Jun", 7 => "Jul", 8 => "Aug",
                 9 => "Sep", 10 => "Oct", 11 => "Nov", 12 => "Dec" );
 
-# The master URLs for the Enfield planning search
+# The master URLs for the South Somerset planning search
 our $StartURL = "http://www.southsomerset.gov.uk/index.jsp?articleid=1925&page_name=startsearch";
 our $SearchURL = "http://www.southsomerset.gov.uk/index.jsp?articleid=1925&page_name=searchresults";
+our $InfoURL = "http://www.southsomerset.gov.uk/index.jsp?articleid=1925&page_name=details&p_caseno=";
+our $CommentURL = "http://www.southsomerset.gov.uk/index.jsp?articleid=1925&page_name=comments&p_caseno=";
 
 # We're a CGI script...
 my $query = CGI->new();
@@ -108,7 +110,6 @@ sub output_applications
     my $postcode;
     my $description;
     my $date_received;
-    my $info_url;
 
     # Find the result table
     my $table = $page->look_down("_tag" => "div", "class" => "mainText")->look_down("_tag" => "table");
@@ -122,12 +123,17 @@ sub output_applications
         {
             if (defined($reference))
             {
+                my $linkref = $reference;
+
+                $linkref =~ s|/||g;
+
                 $Writer->startTag("application");
                 $Writer->dataElement("council_reference", $reference);
                 $Writer->dataElement("address", $address);
                 $Writer->dataElement("postcode", $postcode);
                 $Writer->dataElement("description", $description);
-                $Writer->dataElement("info_url", $info_url);
+                $Writer->dataElement("info_url", $InfoURL . $linkref);
+                $Writer->dataElement("comment_url", $CommentURL . $linkref);
                 $Writer->dataElement("date_received", $date_received);
                 $Writer->endTag("application");
             }
@@ -137,7 +143,6 @@ sub output_applications
             undef $postcode;
             undef $description;
             undef $date_received;
-            undef $info_url
         }
         elsif (@cells == 1 && defined($reference))
         {
@@ -150,7 +155,6 @@ sub output_applications
             $reference = $cells[0]->as_trimmed_text;
             $date_received = $cells[1]->as_trimmed_text;
             $address = $cells[2]->as_trimmed_text;
-            $info_url = URI->new_abs($cells[4]->look_down("_tag" => "a")->attr("href"), $SearchURL);
 
             if ($address =~ /\s+([A-Z]+\d+\s+\d+[A-Z]+)$/)
             {
