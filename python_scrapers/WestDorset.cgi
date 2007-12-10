@@ -139,6 +139,7 @@ sub output_applications
             $Writer->dataElement("postcode", $postcode);
             $Writer->dataElement("description", $description);
             $Writer->dataElement("info_url", $InfoURL . $reference);
+            $Writer->dataElement("comment_url", $InfoURL . $reference);
             $Writer->dataElement("date_received", $date);
             $Writer->endTag("application");
         }

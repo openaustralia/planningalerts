@@ -11,7 +11,7 @@ use XML::Writer;
 
 # The master URLs for the Christchurch planning search
 our $SearchURL = "http://webapps.christchurch.gov.uk/PlanningApplications/pages/ApplicationSearch.aspx";
-our $InfoURL = "http://webapps.chirstchurch.gov.uk/PlanningApplications/pages/ApplicationDetails.aspx?Authority=Christchurch%20Borough%20Council&Application=";
+our $InfoURL = "http://webapps.christchurch.gov.uk/PlanningApplications/pages/ApplicationDetails.aspx?Authority=Christchurch%20Borough%20Council&Application=";
 
 # We're a CGI script...
 my $query = CGI->new();
@@ -139,6 +139,7 @@ sub output_applications
             $Writer->dataElement("postcode", $postcode);
             $Writer->dataElement("description", $description);
             $Writer->dataElement("info_url", $InfoURL . $reference);
+            $Writer->dataElement("comment_url", $InfoURL . $reference);
             $Writer->dataElement("date_received", $date);
             $Writer->endTag("application");
         }
