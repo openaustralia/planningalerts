@@ -31,7 +31,7 @@ system_key_regex = re.compile("TheSystemkey=(\d*)", re.IGNORECASE)
 end_head_regex = re.compile("</head>?", re.IGNORECASE)
 
 
-class AcolnetParser(HTMLParser.HTMLParser):
+class AcolnetParser:
     received_date_format = "%d/%m/%Y"
 
     comment_qs_template = "ACTION=UNWRAP&RIPNAME=Root.PgeCommentForm&TheSystemkey=%s"

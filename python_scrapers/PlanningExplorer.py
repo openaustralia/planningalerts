@@ -545,7 +545,7 @@ if __name__ == '__main__':
     
     #parser = BlackburnParser("Blackburn With Darwen Borough Council", "Blackburn", "http://195.8.175.6/")
     #parser = BroadlandParser("Broadland Council", "Broadland", "http://www.broadland.gov.uk/")
-    #parser = CamdenParser("London Borough of Camden", "Camden", "http://planningrecords.camden.gov.uk/")
+    parser = CamdenParser("London Borough of Camden", "Camden", "http://planningrecords.camden.gov.uk/")
     #parser = CharnwoodParser("Charnwood Borough Council", "Charnwood", "http://portal.charnwoodbc.gov.uk/")
     #parser = CreweParser("Crewe and Nantwich Borough Council", "Crewe and Nantwich", "http://portal.crewe-nantwich.gov.uk/")
     #parser = EastStaffsParser("East Staffordshire Borough Council", "East Staffs", "http://www2.eaststaffsbc.gov.uk/")
@@ -555,7 +555,7 @@ if __name__ == '__main__':
     #parser = KennetParser("Kennet District Council", "Kennet", "http://mvm-planning.kennet.gov.uk/")
     #parser = LincolnParser("Lincoln City Council", "Lincoln", "http://online.lincoln.gov.uk/")
     #parser = LiverpoolParser("Liverpool City Council", "Liverpool", "http://www.liverpool.gov.uk/")
-    parser = ShrewsburyParser("Shrewsbury and Atcham Borough Council", "Shrewsbury", "http://www2.shrewsbury.gov.uk/")
+    #parser = ShrewsburyParser("Shrewsbury and Atcham Borough Council", "Shrewsbury", "http://www2.shrewsbury.gov.uk/")
     #parser = SouthNorfolkParser("South Norfolk Council", "South Norfolk", "http://planning.south-norfolk.gov.uk/")
     #parser = SouthShropshireParser("South Shropshire District Council", "South Shropshire", "http://194.201.44.102/")
     #parser = SouthTynesideParser("South Tyneside Council", "South Tyneside", "http://poppy.southtyneside.gov.uk/")
