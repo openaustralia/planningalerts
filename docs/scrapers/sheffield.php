@@ -27,8 +27,8 @@ if (isset($_GET['year'])){
 	$search_url = str_replace("#daterange", $date_range, $search_url);
 	
 	//comment and info urls
-	$info_url_base = "http://212.56.70.100/publicaccess/dc/DcApplication/application_detailview.aspx?caseno=";
-	$comment_url_base = "http://212.56.70.100/publicaccess/dc/DcApplication/application_comments_entryform.aspx?caseno=";
+	$info_url_base = "http://212.56.70.100/publicaccess/tdc/DcApplication/application_detailview.aspx?caseno=";
+	$comment_url_base = "http://212.56.70.100/publicaccess/tdc/DcApplication/application_comments_entryform.aspx?caseno=";
 	
     //grab urls
 	$applications = scrape_applications_publicaccess($search_url, $info_url_base, $comment_url_base);
