@@ -4,7 +4,9 @@ import urllib2
 import urlparse
 
 from datetime import date
-import datetime
+
+# Use this when we have python 2.5
+#import datetime
 
 import re
 
@@ -54,8 +56,11 @@ class AcolnetParser:
 
     def _getDateReceived(self, app_table):
         date_str = ''.join(app_table.find(text="Registration Date:").findNext("td").string.strip().split())
-        
-        return datetime.datetime.strptime(date_str, self.received_date_format)
+        day, month, year = date_str.split('/')
+        return date(int(year), int(month), int(day))
+
+        # This will be better from python 2.5
+        #return datetime.datetime.strptime(date_str, self.received_date_format)
 
     def _getAddress(self, app_table):
         return app_table.find(text="Location:").findNext("td").string.strip()
@@ -226,7 +231,11 @@ class CanterburyParser(AcolnetParser):
     def _getDateReceived(self, app_table):
         date_str = app_table.findAll("td")[3].string.strip()
 
-        return datetime.datetime.strptime(date_str, self.received_date_format)
+        day, month, year = date_str.split('/')
+        return date(int(year), int(month), int(day))
+
+        # This will be better once we have python 2.5
+        #return datetime.datetime.strptime(date_str, self.received_date_format)
 
     def _getAddress(self, app_table):
         return app_table.findAll("td")[1].string.strip()
@@ -253,7 +262,11 @@ class SouthwarkParser(AcolnetParser):
     def _getDateReceived(self, app_table):
         date_str = ''.join(app_table.find(text="Statutory start date:").findNext("td").string.strip().split())
         
-        return datetime.datetime.strptime(date_str, self.received_date_format)
+        day, month, year = date_str.split('/')
+        return date(int(year), int(month), int(day))
+    
+        # Use this once we have python 2.5
+        #return datetime.datetime.strptime(date_str, self.received_date_format)
 
 class SurreyHeathParser(AcolnetParser):
     # This is not working yet.
@@ -311,6 +324,11 @@ class BoltonParser(AcolnetParser):
     def _getCouncilReference(self, app_table):
         return app_table.findAll("a")[1].string.strip()
     
+class CarlisleParser(AcolnetParser):
+    def _getCouncilReference(self, app_table):
+        return app_table.findAll("a")[1].string.strip()
+    
+
 class LewishamParser(AcolnetParser):
     def _getCouncilReference(self, app_table):
         return app_table.findAll("a")[1].string.strip()        
@@ -327,7 +345,7 @@ if __name__ == '__main__':
     #parser = BridgnorthParser("Bridgnorth", "Bridgnorth", "http://www2.bridgnorth-dc.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch")
     #parser = AcolnetParser("Bury", "Bury", "http://e-planning.bury.gov.uk/DCWebPages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = CanterburyParser("Canterbury", "Canterbury", "http://planning.canterbury.gov.uk/scripts/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-    #parser = AcolnetParser("Carlisle", "Carlisle", "http://planning.carlisle.gov.uk/acolnet/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = CarlisleParser("Carlisle", "Carlisle", "http://planning.carlisle.gov.uk/acolnet/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("Croydon", "Croydon", "http://planning.croydon.gov.uk/DCWebPages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("Derby", "Derby", "http://eplanning.derby.gov.uk/acolnet/planningpages02/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("East Lindsey", "East Lindsey", "http://www.e-lindsey.gov.uk/planning/AcolnetCGI.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser")
@@ -335,9 +353,9 @@ if __name__ == '__main__':
     #parser = AcolnetParser("Fylde", "Fylde", "http://www2.fylde.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("Guildford", "Guildford", "http://www.guildford.gov.uk/DLDC_Version_2/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("Harlow", "Harlow", "http://planning.harlow.gov.uk/PlanningSearch/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-    #parser = AcolnetParser("Havant", "Havant", "http://www3.havant.gov.uk/scripts/planningpages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    parser = AcolnetParser("Havant", "Havant", "http://www3.havant.gov.uk/scripts/planningpages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("Hertsmere", "Hertsmere", "http://www2.hertsmere.gov.uk/ACOLNET/DCOnline//acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-    parser = LewishamParser("Lewisham", "Lewisham", "http://acolnet.lewisham.gov.uk/lewis-xslpagesdc/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.PgeSearch")
+    #parser = LewishamParser("Lewisham", "Lewisham", "http://acolnet.lewisham.gov.uk/lewis-xslpagesdc/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.PgeSearch")
     #parser = AcolnetParser("Mid Suffolk", "Mid Suffolk", "http://planning.midsuffolk.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = NewForestDCParser("New Forest District Council", "New Forest DC", "http://web3.newforest.gov.uk/planningonline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = NewForestNPAParser("New Forest National Park Authority", "New Forest NPA", "http://web01.newforestnpa.gov.uk/planningpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")

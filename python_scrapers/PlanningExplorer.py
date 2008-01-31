@@ -564,7 +564,7 @@ if __name__ == '__main__':
     #parser = TamworthParser("Tamworth Borough Council", "Tamworth", "http://80.1.64.77/")
     #parser = TraffordParser("Trafford Council", "Trafford", "http://planning.trafford.gov.uk/")
     #parser = WestOxfordshireParser("West Oxfordshire District Council", "West Oxfordshire", "http://planning.westoxon.gov.uk/")
-    print parser.getResults(1, 11, 2007)
+    print parser.getResults(22, 1, 2008)
 
 # To Do
 
