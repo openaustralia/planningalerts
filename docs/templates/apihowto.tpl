@@ -2,7 +2,7 @@
 
     <h3>PlanningAlerts.com API</h3>
     <p>
-	    Planning application data is available programmatically as <a href="http://georss.org/">GeoRSS</a> feeds which can be used in most web mapping APIs and desktop GIS software like <a href="http://mapufactu re.com">mapufacture</a> and <a href="http://pipes.yahoo.com/">Yahoo Pipes</a>. Details of the API are listed below.
+	    Planning application data is available programmatically as <a href="http://georss.org/">GeoRSS</a> feeds which can be used in most web mapping APIs and desktop GIS software like <a href="http://mapufacture.com">mapufacture</a> and <a href="http://pipes.yahoo.com/">Yahoo Pipes</a>. Details of the API are listed below.
 	<p/>
 	<p>
 	   Just want the raw data instead? You can download it <a href="http://www.planningalerts.com/backup.gz">here</a>. (gzipped mysql database dump with all user information removed).
