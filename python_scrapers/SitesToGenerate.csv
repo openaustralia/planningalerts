@@ -188,3 +188,4 @@
 "Mid Suffolk District Council", "Mid Suffolk", "http://planning.midsuffolk.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "AcolnetParser"
 "London Borough of Southwark", "Southwark", "http://planningonline.southwarksites.com/planningonline2/AcolNetCGI.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "SouthwarkParser"
 "Canterbury City Council", "Canterbury", "http://planning.canterbury.gov.uk/scripts/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "CanterburyParser"
+"London Borough of Merton", "Merton", "http://planning.merton.gov.uk/MVM/Online/PL/GeneralSearch.aspx", "PlanningExplorer", "MertonParser"

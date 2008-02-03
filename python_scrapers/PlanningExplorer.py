@@ -473,6 +473,9 @@ class LiverpoolParser(PlanningExplorerParser):
 
 # FIXME - Merton needs to be done here when it is back up.
 
+class MertonParser(PlanningExplorerParser):
+    use_firefox_user_agent = True
+    
 class ShrewsburyParser(PlanningExplorerParser):
     use_firefox_user_agent = True
 
@@ -545,7 +548,7 @@ if __name__ == '__main__':
     
     #parser = BlackburnParser("Blackburn With Darwen Borough Council", "Blackburn", "http://195.8.175.6/")
     #parser = BroadlandParser("Broadland Council", "Broadland", "http://www.broadland.gov.uk/")
-    parser = CamdenParser("London Borough of Camden", "Camden", "http://planningrecords.camden.gov.uk/")
+    #parser = CamdenParser("London Borough of Camden", "Camden", "http://planningrecords.camden.gov.uk/")
     #parser = CharnwoodParser("Charnwood Borough Council", "Charnwood", "http://portal.charnwoodbc.gov.uk/")
     #parser = CreweParser("Crewe and Nantwich Borough Council", "Crewe and Nantwich", "http://portal.crewe-nantwich.gov.uk/")
     #parser = EastStaffsParser("East Staffordshire Borough Council", "East Staffs", "http://www2.eaststaffsbc.gov.uk/")
