@@ -354,6 +354,6 @@ if __name__ == '__main__':
     month = 11
     year = 2007
 
-    parser = PublicAccessParser("Hambleton", "Hambleton", "http://planning.hambleton.gov.uk/publicaccess/tdc/", True)
+    parser = PublicAccessParser("Chester-le-Street", "Chester-le-Street", "http://planning.chester-le-street.gov.uk/publicaccess/tdc/", True)
     print parser.getResults(day, month, year)
     
