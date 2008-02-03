@@ -27,7 +27,7 @@
 "Sevenoaks District Council", "Sevenoaks", "http://publicaccess.sevenoaks.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Woking Borough Council", "Woking", "http://caps.woking.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Basildon District Council", "Basildon", "http://planning.basildon.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
-"The City of Edinburgh Council", "Edinburgh", "http://citydev-portal.edinburgh.gov.uk/publicaccess/dc/", "PublicAccess", "PublicAccessParser"
+"The City of Edinburgh Council", "Edinburgh", "http://citydev-portal.edinburgh.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Fenland District Council", "Fenland", "http://www.fenland.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Scarborough Borough Council", "Scarborough", "http://planning.scarborough.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Harrogate Borough Council", "Harrogate", "http://publicaccess.harrogate.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
