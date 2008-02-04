@@ -330,6 +330,8 @@ class CarlisleParser(AcolnetParser):
     
 
 class LewishamParser(AcolnetParser):
+    comments_email_address = "planning@lewisham.com"
+
     def _getCouncilReference(self, app_table):
         return app_table.findAll("a")[1].string.strip()        
         
