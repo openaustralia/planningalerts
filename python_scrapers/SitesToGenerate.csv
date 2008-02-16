@@ -189,3 +189,4 @@
 "London Borough of Southwark", "Southwark", "http://planningonline.southwarksites.com/planningonline2/AcolNetCGI.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "SouthwarkParser"
 "Canterbury City Council", "Canterbury", "http://planning.canterbury.gov.uk/scripts/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "CanterburyParser"
 "London Borough of Merton", "Merton", "http://planning.merton.gov.uk/", "PlanningExplorer", "MertonParser"
+"Chichester District Council", "Chichester", "http://pa.chichester.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
