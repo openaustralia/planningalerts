@@ -548,7 +548,7 @@ if __name__ == '__main__':
     
     #parser = BlackburnParser("Blackburn With Darwen Borough Council", "Blackburn", "http://195.8.175.6/")
     #parser = BroadlandParser("Broadland Council", "Broadland", "http://www.broadland.gov.uk/")
-    #parser = CamdenParser("London Borough of Camden", "Camden", "http://planningrecords.camden.gov.uk/")
+    parser = CamdenParser("London Borough of Camden", "Camden", "http://planningrecords.camden.gov.uk/")
     #parser = CharnwoodParser("Charnwood Borough Council", "Charnwood", "http://portal.charnwoodbc.gov.uk/")
     #parser = CreweParser("Crewe and Nantwich Borough Council", "Crewe and Nantwich", "http://portal.crewe-nantwich.gov.uk/")
     #parser = EastStaffsParser("East Staffordshire Borough Council", "East Staffs", "http://www2.eaststaffsbc.gov.uk/")
@@ -576,3 +576,5 @@ if __name__ == '__main__':
 
 # Investigate catching unavailable message:
 # Charnwood
+
+# South Norfolk has no postcodes. I wonder if the postcodes are in the WAM site...
