@@ -86,7 +86,10 @@ class WAMParser:
                 tds = tr.findAll("td")
 
                 date_received_string = tds[0].contents[0].strip()
-                self._current_application.date_received = datetime.datetime.strptime(clean_string(date_received_string), self.date_format)
+                
+                # Some day we'll be on python 2.5, and we'll be able to use the nicer version below...
+                self._current_application.date_received = datetime.datetime(*(time.strptime(clean_string(date_received_string), self.date_format)[0:6]))
+                #self._current_application.date_received = datetime.datetime.strptime(clean_string(date_received_string), self.date_format)
 
                 relative_info_url = tr.a['href']
                 info_url_no_params = remove_params(relative_info_url)
