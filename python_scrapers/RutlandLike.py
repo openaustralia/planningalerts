@@ -91,7 +91,7 @@ class RutlandLikeParser:
 
 
 if __name__ == '__main__':
-    rutland_parser = RutlandLikeParser("Rutland long", "Rutland", "http://www.meltononline.co.uk/planning/searchparam.asp")
-
-    print rutland_parser.getResults(15,11,2007)
+    #parser = RutlandLikeParser("Rutland long", "Rutland", "http://www.meltononline.co.uk/planning/searchparam.asp")
+    parser = RutlandLikeParser("Melton Borough Council", "Melton", "http://www.meltononline.co.uk/planning/searchparam.asp")
+    print parser.getResults(3,2,2008)
 
