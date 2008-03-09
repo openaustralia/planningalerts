@@ -204,6 +204,9 @@ class BassetlawParser(AcolnetParser):
         div_regex = re.compile("</?div[^>]*>", re.IGNORECASE)
         return div_regex.sub('', html)
 
+    def _getCouncilReference(self, app_table):
+        return app_table.findAll("a")[1].string.strip()
+    
 
 class BridgnorthParser(AcolnetParser):
     def _getResultsSections(self, soup):
@@ -340,7 +343,7 @@ if __name__ == '__main__':
 
     #parser = AcolnetParser("Babergh", "Babergh", "http://planning.babergh.gov.uk/dcdatav2//acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("Basingstoke", "Basingstoke", "http://planning.basingstoke.gov.uk/DCOnline2/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-    #parser = BassetlawParser("Bassetlaw", "Bassetlaw", "http://www.bassetlaw.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    parser = BassetlawParser("Bassetlaw", "Bassetlaw", "http://www.bassetlaw.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = BoltonParser("Bolton", "Bolton", "http://www.planning.bolton.gov.uk/PlanningSearch/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = BridgnorthParser("Bridgnorth", "Bridgnorth", "http://www2.bridgnorth-dc.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch")
     #parser = AcolnetParser("Bury", "Bury", "http://e-planning.bury.gov.uk/DCWebPages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
@@ -350,7 +353,7 @@ if __name__ == '__main__':
     #parser = AcolnetParser("Derby", "Derby", "http://eplanning.derby.gov.uk/acolnet/planningpages02/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("East Lindsey", "East Lindsey", "http://www.e-lindsey.gov.uk/planning/AcolnetCGI.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser")
     #parser = AcolnetParser("Exeter City Council", "Exeter", "http://pub.exeter.gov.uk/scripts/Acolnet/dataonlineplanning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-    parser = BoltonParser("Fylde", "Fylde", "http://www2.fylde.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = BoltonParser("Fylde", "Fylde", "http://www2.fylde.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("Guildford", "Guildford", "http://www.guildford.gov.uk/DLDC_Version_2/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("Harlow", "Harlow", "http://planning.harlow.gov.uk/PlanningSearch/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("Havant", "Havant", "http://www3.havant.gov.uk/scripts/planningpages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
