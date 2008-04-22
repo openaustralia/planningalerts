@@ -512,7 +512,7 @@ if __name__ == "__main__":
     #parser = EalingSearchParser("Ealing", "Ealing", "http://www.pam.ealing.gov.uk")
     #print parser.getResults(20,3,2007)
     parser = HaringeySearchParser("Haringey", "Haringey", "http://www.planningservices.haringey.gov.uk")
-    print parser.getResults(3,1,2008)
+    print parser.getResults(3,3,2008)
     #parser = DenbighshireSearchParser("Denbighshire", "Denbighshire", "http://planning.denbighshire.gov.uk")
     #print parser.getResults(20,3,2007)
     pass

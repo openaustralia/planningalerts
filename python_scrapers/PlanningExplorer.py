@@ -542,13 +542,65 @@ class WestOxfordshireParser(PlanningExplorerParser):
 
     use_firefox_user_agent = True
 
+class WalthamForestParser(PlanningExplorerParser):
+    address_td_no = 2
+    description_td_no = 3
+
+    search_url_path = "PlanningExplorer/GeneralSearch.aspx"
+    info_url_path = "PlanningExplorer/Generic/"
+    use_firefox_user_agent = True
+
+    def _getPostData(self, asp_args, search_date):
+        post_data = urllib.urlencode(asp_args + (
+                ("txtApplicantName", ""),
+                ("txtAgentName", ""),
+                ("cboStreetReferenceNumber", ""),
+                ("txtProposal", ""),
+                ("cboWardCode", ""),
+                ("cboParishCode", ""),
+                ("cboApplicationTypeCode", ""),
+                ("cboDevelopmentTypeCode", ""),
+                ("cboStatusCode", ""),
+                ("cboSelectDateValue", "DATE_RECEIVED"),
+                ("cboMonths", "1"),
+                ("cboDays", "1"),
+                ("rbGroup", "rbRange"),
+                ("dateStart", search_date.strftime(date_format)),
+                ("dateEnd", search_date.strftime(date_format)),
+                #&dateStart=01%2F03%2F2008&dateEnd=01%2F04%2F2008&
+                ("edrDateSelection", ""),
+                ("csbtnSearch", "Search"),
+                ))
+
+        print post_data
+        return post_data
+
+
+#txtApplicantName=
+#txtAgentName=
+#cboStreetReferenceNumber=
+#txtProposal=
+#cboWardCode=
+#cboParishCode=
+#cboApplicationTypeCode=
+#cboDevelopmentTypeCode=
+#cboStatusCode=
+#cboSelectDateValue=DATE_RECEIVED
+#cboMonths=1
+#cboDays=1
+#rbGroup=rbRange
+#dateStart=01%2F03%2F2008
+#dateEnd=01%2F04%2F2008
+#edrDateSelection=
+#csbtnSearch=Search
+
 if __name__ == '__main__':
     # NOTE - 04/11/2007 is a sunday
     # I'm using it to test that the scrapers behave on days with no apps.
     
     #parser = BlackburnParser("Blackburn With Darwen Borough Council", "Blackburn", "http://195.8.175.6/")
     #parser = BroadlandParser("Broadland Council", "Broadland", "http://www.broadland.gov.uk/")
-    parser = CamdenParser("London Borough of Camden", "Camden", "http://planningrecords.camden.gov.uk/")
+    #parser = CamdenParser("London Borough of Camden", "Camden", "http://planningrecords.camden.gov.uk/")
     #parser = CharnwoodParser("Charnwood Borough Council", "Charnwood", "http://portal.charnwoodbc.gov.uk/")
     #parser = CreweParser("Crewe and Nantwich Borough Council", "Crewe and Nantwich", "http://portal.crewe-nantwich.gov.uk/")
     #parser = EastStaffsParser("East Staffordshire Borough Council", "East Staffs", "http://www2.eaststaffsbc.gov.uk/")
@@ -567,6 +619,7 @@ if __name__ == '__main__':
     #parser = TamworthParser("Tamworth Borough Council", "Tamworth", "http://80.1.64.77/")
     #parser = TraffordParser("Trafford Council", "Trafford", "http://planning.trafford.gov.uk/")
     #parser = WestOxfordshireParser("West Oxfordshire District Council", "West Oxfordshire", "http://planning.westoxon.gov.uk/")
+    parser = WalthamForestParser("Waltham Forest", "Waltham Forest", "http://planning.walthamforest.gov.uk/")
     print parser.getResults(22, 1, 2008)
 
 # To Do
