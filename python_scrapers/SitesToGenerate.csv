@@ -139,7 +139,7 @@
 "Vale of the White Horse District Council", "Vale of the White Horse", "http://planning.whitehorsedc.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Corby Borough Council", "Corby", "https://publicaccess.corby.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Rutland County Council", "Rutland", "http://www.rutland.gov.uk/wellandplanning/searchparam.asp", "RutlandLike", "RutlandLikeParser"
-"Melton Borough Council", "Melton", "http://www.meltononline.co.uk/planning/searchparam.asp", "RutlandLike", "RutlandLikeParser"
+"Melton Borough Council", "Melton", "http://publicaccess.melton.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Harborough District Council", "Harborough", "http://pa.harborough.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
 "East Northamptonshire Council", "East Northants", "http://publicaccesssrv.east-northamptonshire.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Cumbria County Council", "Cumbria", "http://217.114.50.149:7778/ePlanningOPS/loadResults.do", "AtriumePlanning", "AtriumePlanningParser"
