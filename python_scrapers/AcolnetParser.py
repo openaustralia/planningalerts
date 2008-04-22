@@ -322,7 +322,7 @@ class HarlowParser(AcolnetParser):
     def _getCommentUrl(self, app_table):
         """This must be run after _getInfoUrl"""
 #http://www2.bridgnorth-dc.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeCommentForm&TheSystemkey=46958
-        return self._current_application.info_url.replace("PgeResultDetail", "PgeCommentNeighbourForm&hasreference=no")
+        return self._current_application.info_url.replace("PgeResultDetail", "PgeCommentNeighbourForm&amp;hasreference=no")
 
 if __name__ == '__main__':
     day = 4
