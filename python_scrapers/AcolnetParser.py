@@ -201,7 +201,6 @@ class BridgnorthParser(AcolnetParser):
     def _getCouncilReference(self, app_table):
         return app_table.a.string.split()[-1]
 
-
     def _getCommentUrl(self, app_table):
         """This must be run after _getInfoUrl"""
 #http://www2.bridgnorth-dc.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeCommentForm&TheSystemkey=46958
@@ -319,7 +318,12 @@ class BassetlawParser(BoltonLikeParser):
         div_regex = re.compile("</?div[^>]*>", re.IGNORECASE)
         return div_regex.sub('', html)
 
-        
+class HarlowParser(AcolnetParser):
+    def _getCommentUrl(self, app_table):
+        """This must be run after _getInfoUrl"""
+#http://www2.bridgnorth-dc.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeCommentForm&TheSystemkey=46958
+        return self._current_application.info_url.replace("PgeResultDetail", "PgeCommentNeighbourForm&hasreference=no")
+
 if __name__ == '__main__':
     day = 4
     month = 4
