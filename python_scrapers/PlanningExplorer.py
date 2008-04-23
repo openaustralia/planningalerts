@@ -432,6 +432,7 @@ class KennetParser(PlanningExplorerParser):
     
 class LincolnParser(PlanningExplorerParser):
     use_firefox_user_agent = True
+    results_table_attrs = {"class": "resultstable"}
     
 class LiverpoolParser(PlanningExplorerParser):
     comments_email_address = "planningandbuildingcontrol@liverpool.gov.uk"
@@ -608,7 +609,7 @@ if __name__ == '__main__':
     #parser = ForestHeathParser("Forest Heath District Council", "Forest Heath", "http://195.171.177.73/")
     #parser = HackneyParser("London Borough of Hackney", "Hackney", "http://www.hackney.gov.uk/servapps/")
     #parser = KennetParser("Kennet District Council", "Kennet", "http://mvm-planning.kennet.gov.uk/")
-    #parser = LincolnParser("Lincoln City Council", "Lincoln", "http://online.lincoln.gov.uk/")
+    parser = LincolnParser("Lincoln City Council", "Lincoln", "http://online.lincoln.gov.uk/")
     #parser = LiverpoolParser("Liverpool City Council", "Liverpool", "http://www.liverpool.gov.uk/")
     #parser = ShrewsburyParser("Shrewsbury and Atcham Borough Council", "Shrewsbury", "http://www2.shrewsbury.gov.uk/")
     #parser = SouthNorfolkParser("South Norfolk Council", "South Norfolk", "http://planning.south-norfolk.gov.uk/")
@@ -619,8 +620,8 @@ if __name__ == '__main__':
     #parser = TamworthParser("Tamworth Borough Council", "Tamworth", "http://80.1.64.77/")
     #parser = TraffordParser("Trafford Council", "Trafford", "http://planning.trafford.gov.uk/")
     #parser = WestOxfordshireParser("West Oxfordshire District Council", "West Oxfordshire", "http://planning.westoxon.gov.uk/")
-    parser = WalthamForestParser("Waltham Forest", "Waltham Forest", "http://planning.walthamforest.gov.uk/")
-    print parser.getResults(22, 1, 2008)
+    #parser = WalthamForestParser("Waltham Forest", "Waltham Forest", "http://planning.walthamforest.gov.uk/")
+    print parser.getResults(18, 4, 2008)
 
 # To Do
 
