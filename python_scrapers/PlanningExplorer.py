@@ -425,10 +425,8 @@ class HackneyParser(PlanningExplorerParser):
 
         return post_data
             
-class KennetParser(PlanningExplorerParser):
-    use_firefox_user_agent = True
-
-    address_td_no = 3
+class KennetParser(BroadlandLike, PlanningExplorerParser):
+    comments_path = "Northgate/PlanningExplorer/PLComments.aspx?pk=%s"
     
 class LincolnParser(PlanningExplorerParser):
     use_firefox_user_agent = True
@@ -608,8 +606,8 @@ if __name__ == '__main__':
     #parser = EppingForestParser("Epping Forest District Council", "Epping Forest", "http://plan1.eppingforestdc.gov.uk/")
     #parser = ForestHeathParser("Forest Heath District Council", "Forest Heath", "http://195.171.177.73/")
     #parser = HackneyParser("London Borough of Hackney", "Hackney", "http://www.hackney.gov.uk/servapps/")
-    #parser = KennetParser("Kennet District Council", "Kennet", "http://mvm-planning.kennet.gov.uk/")
-    parser = LincolnParser("Lincoln City Council", "Lincoln", "http://online.lincoln.gov.uk/")
+    parser = KennetParser("Kennet District Council", "Kennet", "http://mvm-planning.kennet.gov.uk/")
+    #parser = LincolnParser("Lincoln City Council", "Lincoln", "http://online.lincoln.gov.uk/")
     #parser = LiverpoolParser("Liverpool City Council", "Liverpool", "http://www.liverpool.gov.uk/")
     #parser = ShrewsburyParser("Shrewsbury and Atcham Borough Council", "Shrewsbury", "http://www2.shrewsbury.gov.uk/")
     #parser = SouthNorfolkParser("South Norfolk Council", "South Norfolk", "http://planning.south-norfolk.gov.uk/")
