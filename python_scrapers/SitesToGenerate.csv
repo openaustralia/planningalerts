@@ -145,7 +145,7 @@
 "Cumbria County Council", "Cumbria", "http://217.114.50.149:7778/ePlanningOPS/loadResults.do", "AtriumePlanning", "AtriumePlanningParser"
 "Lincolnshire County Council", "Lincolnshire", "http://eplanning.lincolnshire.gov.uk/ePlanning/loadResults.do", "AtriumePlanning", "AtriumePlanningParser"
 "West Sussex County Council", "West Sussex", "http://eplanning.westsussex.gov.uk/ePlanningOPS/loadResults.do", "AtriumePlanning", "AtriumePlanningParser"
-"Bolton Metropolitan Borough Council", "Bolton", "http://www.planning.bolton.gov.uk/PlanningSearch/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser",  "BoltonLikeParser"
+"Bolton Metropolitan Borough Council", "Bolton", "http://www.planning.bolton.gov.uk/DCOnlineV2/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser",  "AcolnetParser"
 "Exeter City Council", "Exeter", "http://pub.exeter.gov.uk/scripts/Acolnet/dataonlineplanning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "AcolnetParser"
 "Suffolk County Council", "Suffolk", "http://atrium.suffolkcc.gov.uk/ePlanning/loadResults.do", "AtriumePlanning", "AtriumePlanningParser"
 "Blackburn with Darwen Borough Council", "Blackburn", "http://195.8.175.6/", "PlanningExplorer", "BlackburnParser"
