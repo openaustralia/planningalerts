@@ -351,9 +351,11 @@ class PublicAccessPropertyPageParser(HTMLParser.HTMLParser):
 
 if __name__ == '__main__':
     day = 20
-    month = 11
-    year = 2007
+    month = 5
+    year = 2008
 
-    parser = PublicAccessParser("East Northants", "East Northants", "http://publicaccesssrv.east-northamptonshire.gov.uk/PublicAccess/tdc/", True)
+    #parser = PublicAccessParser("East Northants", "East Northants", "http://publicaccesssrv.east-northamptonshire.gov.uk/PublicAccess/tdc/", True)
+    #parser = PublicAccessParser("Cherwell District Council", "Cherwell", "http://cherweb.cherwell-dc.gov.uk/publicaccess/tdc/", False)
+    parser = PublicAccessParser("Hambleton District Council", "Hambleton", "http://planning.hambleton.gov.uk/publicaccess/tdc/", True)
     print parser.getResults(day, month, year)
     
