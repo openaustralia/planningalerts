@@ -202,3 +202,8 @@
 "South Gloucestershire Council", "South Gloucestershire", "http://planning.southglos.gov.uk/WAM/pas/WeeklyApplications.do", "WAM", "BraintreeParser"
 "London Borough of Tower Hamlets", "Tower Hamlets", "http://194.201.98.213/WAM/weeklyApplications.do", "WAM", "BraintreeParser"
 "Sheffield City Council", "Sheffield", "http://planning.sheffield.gov.uk/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
+"Elmbridge Borough Council", "Elmbridge", "http://www2.elmbridge.gov.uk/Planet/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry", "Planet", "PlanetParser"
+"North Lincolnshire Council", "North Lincolnshire", "http://www.planning.northlincs.gov.uk/planet/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry", "Planet", "PlanetParser"
+"Ryedale District Council", "Ryedale", "http://www.ryedale.gov.uk/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry", "Planet", "PlanetParser"
+"Tewkesbury Borough Council", "Tewkesbury", "http://planning.tewkesbury.gov.uk/Planet/ispforms.asp?serviceKey=07WCC04163103430", "Planet", "PlanetParser"
+"Worcester City Council", "Worcester", "http://www.worcester.gov.uk:8080/planet/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry", "Planet", "PlanetParser"

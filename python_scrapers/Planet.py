@@ -147,9 +147,16 @@ class PlanetParser:
 
 
 if __name__ == '__main__':
-#    parser = PlanetParser("Worcester City Council", "Worcester", "http://www.worcester.gov.uk:8080/planet/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry", debug=True)
 #    parser = PlanetParser("Elmbridge Borough Council", "Elmbridge", "http://www2.elmbridge.gov.uk/Planet/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry")
 #    parser = PlanetParser("North Lincolnshire Council", "North Lincolnshire", "http://www.planning.northlincs.gov.uk/planet/ispforms.asp?ServiceKey=SysDoc-PlanetApplicationEnquiry")
 #    parser = PlanetParser("Rydale District Council", "Rydale", "http://www.ryedale.gov.uk/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry")
     parser = PlanetParser("Tewkesbury Borough Council", "Tewkesbury", "http://planning.tewkesbury.gov.uk/Planet/ispforms.asp?serviceKey=07WCC04163103430")
     print parser.getResults(21,5,2008)
+#    parser = PlanetParser("Worcester City Council", "Worcester", "http://www.worcester.gov.uk:8080/planet/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry", debug=True)
+
+# TODO
+
+# 1) Pagination
+# 2) Work OK with no results.
+
+# 3) Use OSGB for Tewkesbury?
