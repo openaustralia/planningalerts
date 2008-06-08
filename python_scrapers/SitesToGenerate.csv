@@ -207,3 +207,4 @@
 "Ryedale District Council", "Ryedale", "http://www.ryedale.gov.uk/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry", "Planet", "PlanetParser"
 "Tewkesbury Borough Council", "Tewkesbury", "http://planning.tewkesbury.gov.uk/Planet/ispforms.asp?serviceKey=07WCC04163103430", "Planet", "PlanetParser"
 "Worcester City Council", "Worcester", "http://www.worcester.gov.uk:8080/planet/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry", "Planet", "PlanetParser"
+"London Borough of Barnet", "Barnet", "http://194.75.183.100/planning-cases/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "AcolnetParser"
