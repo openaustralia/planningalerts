@@ -67,7 +67,13 @@ class OcellaParser:
 
         # We need to find where the post action goes
         action = get_soup.form['action']
-        session_id = get_soup.find('input', {'name': 'p_session_id'})['value']
+
+        try:
+            session_id = get_soup.find('input', {'name': 'p_session_id'})['value']
+        except TypeError:
+            # In the case of Middlesbrough, there is no session cookie, 
+            # but it seems we don't need it...
+            session_id = None
 
 # # From Breckland
 
@@ -176,18 +182,22 @@ if __name__ == '__main__':
 #    parser = OcellaParser("Arun", "Arun", "http://www.arun.gov.uk/iplanning/portal/page?_pageid=33,4139&_dad=portal&_schema=PORTAL")
 #    parser = OcellaParser("Breckland Council", "Breckland", "http://wplan01.intranet.breckland.gov.uk:7778/portal/page?_pageid=33,30988&_dad=portal&_schema=PORTAL")
 #    parser = OcellaParser("Ellesmere Port", "Ellesmere Port", "http://ocella.epnbc.gov.uk/portal/page?_pageid=33,38205&_dad=portal&_schema=PORTAL")
-#    parser = OcellaParser("Uttlesford", "Uttlesford", "http://planning.uttlesford.gov.uk/portal/page?_pageid=33,35447&_dad=portal&_schema=PORTAL")
-#    parser = OcellaParser("North East Lincolnshire", "North East Lincolnshire", "http://planning.nelincs.gov.uk/portal/page?_pageid=33,68034&_dad=portal&_schema=PORTAL")
 #    parser = OcellaParser("Fareham", "Fareham", "http://eocella.fareham.gov.uk/portal/page?_pageid=33,31754&_dad=portal&_schema=PORTAL")
 #    parser = OcellaParser("Hillingdon", "Hillingdon", "http://w09.hillingdon.gov.uk/portal/page?_pageid=33,82093&_dad=portal&_schema=PORTAL")
+#    parser = OcellaParser("North East Lincolnshire", "North East Lincolnshire", "http://planning.nelincs.gov.uk/portal/page?_pageid=33,68034&_dad=portal&_schema=PORTAL")
+#    parser = OcellaParser("Middlesbrough", "Middlesbrough", "http://planserv.middlesbrough.gov.uk/portal/page?_pageid=33,4166&_dad=portal&_schema=PORTAL")
+#    parser = OcellaParser("Uttlesford", "Uttlesford", "http://planning.uttlesford.gov.uk/portal/page?_pageid=33,35447&_dad=portal&_schema=PORTAL")
 
-    # Bad status line?
-#    parser = BrecklandParser("Bridgend", "Bridgend", "http://eplan.bridgend.gov.uk:7778/portal/page?_pageid=55,31779&_dad=portal&_schema=PORTAL")
-#    parser = ArunParser("Havering", "Havering", "http://planning.havering.gov.uk/portal/page?_pageid=33,1026&_dad=portal&_schema=PORTAL")
+
+    # Bad status line? Try changing browser id string?
+#    parser = OcellaParser("Bridgend", "Bridgend", "http://eplan.bridgend.gov.uk:7778/portal/page?_pageid=55,31779&_dad=portal&_schema=PORTAL")
+
+# Post never comes back
+#    parser = OcellaParser("Havering", "Havering", "http://planning.havering.gov.uk/portal/page?_pageid=33,1026&_dad=portal&_schema=PORTAL")
 
     # Can't find the URL similar to the others, even though it is clearly Ocella
-    parser = OcellaParser("Great Yarmouth", "Great Yarmouth", "http://www.great-yarmouth.gov.uk/wmplan_application_search-6.htm")
-
+    # We get a 406 at the moment. Try browser id string?
+    parser = OcellaParser("Great Yarmouth", "Great Yarmouth", "http://planning.great-yarmouth.gov.uk/portal/page/portal/plan/search")
 
 
     print parser.getResults(21,5,2008)
