@@ -217,3 +217,4 @@
 "Middlesbrough Borough Council", "Middlesbrough", "http://planserv.middlesbrough.gov.uk/portal/page?_pageid=33,4166&_dad=portal&_schema=PORTAL", "Ocella", "OcellaParser"
 "Uttlesford District Council", "Uttlesford", "http://planning.uttlesford.gov.uk/portal/page?_pageid=33,35447&_dad=portal&_schema=PORTAL", "Ocella", "OcellaParser"
 "Mid Bedfordshire District Council", "Mid Beds", "http://www.midbeds.gov.uk/acolnetDC/DCpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "MidBedsParser"
+"Cambridgeshire County Council", "Cambridgeshire", "http://planapps2.cambridgeshire.gov.uk/DCWebPages/AcolNetCGI.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "AcolnetParser"

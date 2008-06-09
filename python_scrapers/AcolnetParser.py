@@ -205,8 +205,6 @@ class BridgnorthParser(AcolnetParser):
 #http://www2.bridgnorth-dc.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeCommentForm&TheSystemkey=46958
         return self._current_application.info_url.replace("NewPages", "PgeCommentForm")
 
-# Cambridgeshire, although an Acolnet site, is so different that it
-# may as well be handled completely separately.
 
 class CanterburyParser(AcolnetParser):
     """Here the apps are one row each in a big table."""
@@ -300,8 +298,6 @@ class SurreyHeathParser(AcolnetParser):
         
 #        return javascript_redirect_response
     
-# Wychavon is rather different, and will need some thought. There is no
-# advanced search page
 
 class BoltonLikeParser(AcolnetParser):
     """Note that Bolton has ceased to be BoltonLike with its latest change of url."""
@@ -330,7 +326,7 @@ class HarlowParser(AcolnetParser):
         return self._current_application.info_url.replace("PgeResultDetail", "PgeCommentNeighbourForm&amp;hasreference=no")
 
 if __name__ == '__main__':
-    day = 21
+    day = 14
     month = 5
     year = 2008
 
@@ -367,6 +363,9 @@ if __name__ == '__main__':
 
     #parser = AcolnetParser("Stockport Metropolitan Borough Council", "Stockport", "http://planning.stockport.gov.uk/PlanningData/AcolNetCGI.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
 
-    parser = MidBedsParser("Mid Bedfordshire District Council", "Mid Beds", "http://www.midbeds.gov.uk/acolnetDC/DCpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+#    parser = MidBedsParser("Mid Bedfordshire District Council", "Mid Beds", "http://www.midbeds.gov.uk/acolnetDC/DCpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    parser = AcolnetParser("Cambridgeshire County Council", "Cambridgeshire", "http://planapps2.cambridgeshire.gov.uk/DCWebPages/AcolNetCGI.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+
+
     print parser.getResults(day, month, year)
     
