@@ -65,12 +65,13 @@ class PlanningAuthorityResults:
 
 	applications_bit = "".join([x.displayXML() for x in self.planning_applications])
 
-	return "<planning>\n" +\
-               "<authority_name>%s</authority_name>\n" %self.authority_name +\
-               "<authority_short_name>%s</authority_short_name>\n" %self.authority_short_name +\
-               "<applications>\n" + applications_bit +\
-	       "</applications>\n" +\
-               "</planning>\n"
+	return u"""<?xml version="1.0" encoding="UTF-8"?>\n""" + \
+            u"<planning>\n" +\
+            u"<authority_name>%s</authority_name>\n" %self.authority_name +\
+            u"<authority_short_name>%s</authority_short_name>\n" %self.authority_short_name +\
+            u"<applications>\n" + applications_bit +\
+            u"</applications>\n" +\
+            u"</planning>\n"
 
 
 
@@ -104,12 +105,14 @@ class PlanningApplication:
         
     def displayXML(self):
         #print self.council_reference, self.address, self.postcode, self.description, self.info_url, self.comment_url, self.date_received
-	return "<application>\n" +\
-	"<council_reference>%s</council_reference>\n" %xmlQuote(self.council_reference) +\
-        "<address>%s</address>\n" %xmlQuote(self.address) +\
-        "<postcode>%s</postcode>\n" %self.postcode +\
-	"<description>%s</description>\n" %xmlQuote(self.description) +\
-	"<info_url>%s</info_url>\n" %xmlQuote(self.info_url) +\
-	"<comment_url>%s</comment_url>\n" %xmlQuote(self.comment_url) +\
-        "<date_received>%s</date_received>\n" %self.date_received.strftime(date_format) +\
-        "</application>\n"
+	return  u"<application>\n" +\
+	u"<council_reference>%s</council_reference>\n" %xmlQuote(self.council_reference) +\
+        u"<address>%s</address>\n" %xmlQuote(self.address) +\
+        u"<postcode>%s</postcode>\n" %self.postcode +\
+	u"<description>%s</description>\n" %xmlQuote(self.description) +\
+	u"<info_url>%s</info_url>\n" %xmlQuote(self.info_url) +\
+	u"<comment_url>%s</comment_url>\n" %xmlQuote(self.comment_url) +\
+        u"<date_received>%s</date_received>\n" %self.date_received.strftime(date_format) +\
+        u"</application>\n"
+
+        

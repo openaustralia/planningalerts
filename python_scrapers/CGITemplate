@@ -28,4 +28,4 @@ xml = parser.getResults(day, month, year)
 
 print "Content-Type: text/xml"     # XML is following
 print
-print xml                          # print the xml
+print xml.encode("utf-8")                          # print the xml
