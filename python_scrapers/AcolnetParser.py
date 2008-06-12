@@ -364,8 +364,8 @@ if __name__ == '__main__':
     #parser = AcolnetParser("Stockport Metropolitan Borough Council", "Stockport", "http://planning.stockport.gov.uk/PlanningData/AcolNetCGI.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
 
 #    parser = MidBedsParser("Mid Bedfordshire District Council", "Mid Beds", "http://www.midbeds.gov.uk/acolnetDC/DCpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-    parser = AcolnetParser("Cambridgeshire County Council", "Cambridgeshire", "http://planapps2.cambridgeshire.gov.uk/DCWebPages/AcolNetCGI.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-
+#    parser = AcolnetParser("Cambridgeshire County Council", "Cambridgeshire", "http://planapps2.cambridgeshire.gov.uk/DCWebPages/AcolNetCGI.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    parser = AcolnetParser("East Hampshire District Council", "East Hampshire", "http://planningdevelopment.easthants.gov.uk/dconline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
 
     print parser.getResults(day, month, year)
     
