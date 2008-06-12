@@ -225,4 +225,5 @@
 "The Royal Borough of Kensington and Chelsea", "Kensington and Chelsea", "", "Kensington", "KensingtonParser"
 "Comhairle Nan Eilean Siar", "Comhairle Nan Eilean Siar", "http://planning.cne-siar.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
 "East Hampshire District Council", "East Hampshire", "http://planningdevelopment.easthants.gov.uk/dconline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "AcolnetParser"
-
+"Fife Council", "Fife", "", "Fife", "FifeParser"
+"Forest of Dean District Council", "Forest of Dean", "", "ForestOfDean", "ForestOfDeanParser"
