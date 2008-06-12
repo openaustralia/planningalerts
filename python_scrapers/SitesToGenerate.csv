@@ -222,3 +222,4 @@
 "Barnsley Metropolitan Borough Council", "Barnsley", "", "Barnsley", "BarnsleyParser"
 "Daventry District Council", "Daventry", "http://www.daventrydc.gov.uk/swiftlg/apas/run/wphappcriteria.display", "SwiftLG", "SwiftLGParser"
 "Shetland Islands Council", "Shetland Islands", "", "Shetland", "ShetlandParser"
+"The Royal Borough of Kensington and Chelsea", "Kensington and Chelsea", "", "Kensington", "KensingtonParser"
