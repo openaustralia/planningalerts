@@ -97,3 +97,4 @@ if __name__ == '__main__':
 
 # 1) Check that it works ok on a no results page.
 # 2) Email the council about non-linkable info page.
+# 3) Email the council about missing descriptions?
