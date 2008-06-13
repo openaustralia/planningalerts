@@ -87,6 +87,11 @@ class PlanningApplication:
         # expecting this as a datetime.date object
 	self.date_received = None
 
+        # If we can get them, we may as well include OSGB.
+        # These will be the entirely numeric version.
+        self.osgb_x = None
+        self.osgb_y = None
+
     def __repr__(self):
 	return self.displayXML()
 
@@ -105,14 +110,19 @@ class PlanningApplication:
         
     def displayXML(self):
         #print self.council_reference, self.address, self.postcode, self.description, self.info_url, self.comment_url, self.date_received
-	return  u"<application>\n" +\
-	u"<council_reference>%s</council_reference>\n" %xmlQuote(self.council_reference) +\
-        u"<address>%s</address>\n" %xmlQuote(self.address) +\
-        u"<postcode>%s</postcode>\n" %self.postcode +\
-	u"<description>%s</description>\n" %xmlQuote(self.description) +\
-	u"<info_url>%s</info_url>\n" %xmlQuote(self.info_url) +\
-	u"<comment_url>%s</comment_url>\n" %xmlQuote(self.comment_url) +\
-        u"<date_received>%s</date_received>\n" %self.date_received.strftime(date_format) +\
-        u"</application>\n"
 
-        
+	contents = [
+            u"<council_reference>%s</council_reference>" %xmlQuote(self.council_reference),
+            u"<address>%s</address>" %xmlQuote(self.address),
+            u"<postcode>%s</postcode>" %self.postcode,
+            u"<description>%s</description>" %xmlQuote(self.description),
+            u"<info_url>%s</info_url>" %xmlQuote(self.info_url),
+            u"<comment_url>%s</comment_url>" %xmlQuote(self.comment_url),
+            u"<date_received>%s</date_received>" %self.date_received.strftime(date_format),
+            ]
+        if self.osgb_x:
+            contents.append(u"<osgb_x>%s</osgb_x>" %(self.osgb_x))
+        if self.osgb_y:
+            contents.append(u"<osgb_y>%s</osgb_y>" %(self.osgb_y))
+
+        return u"<application>\n%s\n</application>" %('\n'.join(contents))
