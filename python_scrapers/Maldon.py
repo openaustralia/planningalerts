@@ -17,12 +17,17 @@ date_format = "%d/%m/%Y"
 
 class MaldonParser:
     comment_email_address = "dc.planning@maldon.gov.uk"
-    info_url = "http://forms.maldon.gov.uk:8080/PlanApp/jsp/searchPlan.jsp"
-    def __init__(self, *args):
 
-        self.authority_name = "Maldon District Council"
-        self.authority_short_name = "Maldon"
-        self.base_url = "http://forms.maldon.gov.uk:8080/PlanApp/jsp/searchPlanApp-action.do"
+    def __init__(self, authority_name, authority_short_name, base_url, debug=False):
+
+        self.debug = debug
+
+        self.authority_name = authority_name
+        self.authority_short_name = authority_short_name
+        self.base_url = base_url
+
+        self.info_url = urlparse.urljoin(base_url, "searchPlan.jsp")
+
         self._split_base_url = urlparse.urlsplit(self.base_url)
 
         self._results = PlanningAuthorityResults(self.authority_name, self.authority_short_name)
@@ -43,6 +48,11 @@ class MaldonParser:
 
         response = urllib2.urlopen(search_url)
         soup = BeautifulSoup(response.read())
+
+        # First check if we have the no apps found page
+
+        if soup.find(text="No Applications Found"):
+            return self._results
 
         # Not a very good way of finding the table, but it works for the moment.
         results_table = soup.find("table", cellpadding="5px")
@@ -89,12 +99,16 @@ class MaldonParser:
     def getResults(self, day, month, year):
         return self.getResultsByDayMonthYear(int(day), int(month), int(year)).displayXML()
 
+
+class PendleParser(MaldonParser):
+    comment_email_address = "planning@pendle.gov.uk"
+
 if __name__ == '__main__':
-    parser = MaldonParser()
-    print parser.getResults(02,6,2008)
+    #parser = MaldonParser("Maldon District Council", "Maldon", "http://forms.maldon.gov.uk:8080/PlanApp/jsp/searchPlanApp-action.do")
+    parser = PendleParser("Pendle Borough Council", "Pendle", "http://bopdoccip.pendle.gov.uk/PlanApp/jsp/searchPlanApp-action.do")
+    print parser.getResults(21,5,2008)
 
 # TODO
 
-# 1) Check that it works ok on a no results page.
-# 2) Email the council about non-linkable info page.
-# 3) Email the council about missing descriptions?
+# 1) Email the council about non-linkable info page.
+# 2) Email the council about missing descriptions?

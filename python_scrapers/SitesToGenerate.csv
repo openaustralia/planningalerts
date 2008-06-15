@@ -228,5 +228,6 @@
 "Fife Council", "Fife", "", "Fife", "FifeParser"
 "Forest of Dean District Council", "Forest of Dean", "", "ForestOfDean", "ForestOfDeanParser"
 "Flintshire County Council", "Flintshire", "", "Flintshire", "FlintshireParser"
-"Maldon District Council", "Maldon", "", "Maldon", "MaldonParser"
+"Maldon District Council", "Maldon", "http://forms.maldon.gov.uk:8080/PlanApp/jsp/searchPlanApp-action.do", "Maldon", "MaldonParser"
 "Medway Council", "Medway", "", "Medway", "MedwayParser"
+"Pendle Borough Council", "Pendle", "http://bopdoccip.pendle.gov.uk/PlanApp/jsp/searchPlanApp-action.do", "Maldon", "PendleParser"
