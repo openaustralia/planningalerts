@@ -45,6 +45,8 @@
 <div id="divSiteUpdates">
     <h4>Recent site updates</h4>
     <ul class="nobullets">
+        <li><em>May 2008</em>Now has 250 Local authorities covered</li>        
+        <li><em>July 2007</em>Shortlisted for New Statesman New Media Award</li>        
         <li><em>July 2007</em>Added 21 councils inc. Lewisham, New Forest National Park and Edinburgh </li>        
         <li><em>April 2007</em>Added 50 more councils.<li>  
         <li><em>March 2007</em> Added an API and a few more councils (inc. Islington and Hackney)</li>
