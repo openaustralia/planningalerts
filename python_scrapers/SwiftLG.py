@@ -214,8 +214,9 @@ if __name__ == '__main__':
 #    parser = SwiftLGParser("Snowdonia National Park", "Snowdonia", "http://www.snowdonia-npa.gov.uk/swiftlg/apas/run/")
 #    parser = SwiftLGParser("St Edmundsbury", "Bury St Edmunds", "http://www.stedmundsbury.gov.uk/swiftlg/apas/run/")
 #    parser = MacclesfieldParser("Macclesfield", "Macclesfield", "http://www.planportal.macclesfield.gov.uk/swiftlg/apas/run/")
-    parser = SwiftLGParser("Daventry District Council", "Daventry", "http://www.daventrydc.gov.uk/swiftlg/apas/run/wphappcriteria.display")
-    print parser.getResults(22,11,2007)
+#    parser = SwiftLGParser("Daventry District Council", "Daventry", "http://www.daventrydc.gov.uk/swiftlg/apas/run/wphappcriteria.display")
+    parser = SwiftLGParser("Warrington Borough Council", "Warrington", "http://212.248.237.123:8080/swiftlg/apas/run/wphappcriteria.display")
+    print parser.getResults(26,6,2008)
 
 
 # To Do:
