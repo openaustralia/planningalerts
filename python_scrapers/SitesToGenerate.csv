@@ -234,3 +234,4 @@
 "Shropshire County Council", "Shropshire", "http://planning.shropshire.gov.uk/PlanAppList.asp", "Shropshire", "ShropshireParser"
 "North Yorkshire County Council", "North Yorkshire", "https://onlineplanningregister.northyorks.gov.uk/Online%20Register/PlanAppList.asp", "Shropshire", "NorthYorkshireParser"
 "South Northamptonshire Council", "South Northamptonshire", "http://snc.planning-register.co.uk/PlanAppList.asp", "Shropshire", "SouthNorthamptonshireParser"
+"Lewes District Council", "Lewes", "http://planning.lewes.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"

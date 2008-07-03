@@ -147,13 +147,14 @@ class SouthNorthamptonshireParser(ShropshireParser):
         return soup.find("div", {"class": "div-content-class"}).findAll("a")
 
 if __name__ == '__main__':
-    parser = ShropshireParser("Shropshire County Council", "Shropshire", "http://planning.shropshire.gov.uk/PlanAppList.asp")
-    print parser.getResults(6,6,2008)
+#    parser = ShropshireParser("Shropshire County Council", "Shropshire", "http://planning.shropshire.gov.uk/PlanAppList.asp")
+#    print parser.getResults(6,6,2008)
 #    parser = NorthYorkshireParser("North Yorkshire County Council", "North Yorkshire", "https://onlineplanningregister.northyorks.gov.uk/Online%20Register/PlanAppList.asp")
 #    print parser.getResults(10,6,2008)
 #    parser = SouthNorthamptonshireParser("South Northamptonshire Council", "South Northamptonshire", "http://snc.planning-register.co.uk/PlanAppList.asp")
 #    print parser.getResults(5,6,2008)
-
+    parser = ShropshireParser("Purbeck District Council", "Purbeck", "http://www.purbeck.gov.uk/planning/PlanAppList.asp")
+    print parser.getResults(5,6,2008)
 
 # TODO
 
