@@ -236,3 +236,4 @@
 "South Northamptonshire Council", "South Northamptonshire", "http://snc.planning-register.co.uk/PlanAppList.asp", "Shropshire", "SouthNorthamptonshireParser"
 "Lewes District Council", "Lewes", "http://planning.lewes.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Warrington Borough Council", "Warrington", "http://212.248.237.123:8080/swiftlg/apas/run/wphappcriteria.display", "SwiftLG", "SwiftLGParser"
+"Olympic Delivery Authority", "Olympics", "http://planning.london2012.com/publicaccess/tdc/", "PublicAccess", "PublicAccessParser"
