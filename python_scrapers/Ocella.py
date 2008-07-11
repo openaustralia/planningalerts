@@ -50,6 +50,7 @@ class OcellaParser:
         # These will be used to store the column numbers of the appropriate items in the results table
         self.reference_col = None
         self.address_col = None
+        self.applicant_col = None
         self.description_col = None
         self.received_date_col = None
         self.accepted_date_col = None
@@ -59,6 +60,7 @@ class OcellaParser:
 
         # First get the search page
         get_request = urllib2.Request(self.base_url)
+        get_request.add_header('Accept', 'text/html')
         get_response = urllib2.urlopen(get_request)
 
         cookie_jar.extract_cookies(get_response, get_request)
@@ -75,6 +77,14 @@ class OcellaParser:
             # but it seems we don't need it...
             session_id = None
 
+        # Unless we retrieve the correct form name, we will simply get the last week's applications
+        submit_tag = get_soup.find('input', {'value': 'Search'}) or get_soup.find('input', {'value': 'Search for Applications'}) or get_soup.find('input', {'value': 'Submit'})
+        try:
+            submit_name = submit_tag['name']
+            form_name = submit_name.split('.')[0]
+        except TypeError:
+            form_name = 'FRM_PLANNING_LIST'
+
 # # From Breckland
 
 # p_object_name=FRM_WEEKLY_LIST.DEFAULT.SUBMIT_TOP.01
@@ -88,21 +98,23 @@ class OcellaParser:
 # FRM_WEEKLY_LIST.DEFAULT.PARISH.01=
 
         post_data = urllib.urlencode(
-            [('p_object_name', 'FRM_WEEKLY_LIST.DEFAULT.SUBMIT_TOP.01'),
+            [('p_object_name', form_name + '.DEFAULT.SUBMIT_TOP.01'),
              ('p_instance', '1'),
              ('p_event_type', 'ON_CLICK'),
              ('p_user_args', ''),
              ('p_session_id', session_id),
              ('p_page_url', self.base_url),
-             ('FRM_WEEKLY_LIST.DEFAULT.START_DATE.01', search_date.strftime(search_date_format)),
-             ('FRM_WEEKLY_LIST.DEFAULT.END_DATE.01', search_date.strftime(search_date_format)),
-             ('FRM_WEEKLY_LIST.DEFAULT.PARISH.01', ''),
+             (form_name + '.DEFAULT.AGENT.01', ''),
+             (form_name + '.DEFAULT.START_DATE.01', search_date.strftime(search_date_format)),
+             (form_name + '.DEFAULT.END_DATE.01', search_date.strftime(search_date_format)),
+             (form_name + '.DEFAULT.PARISH.01', ''),
                 ]
             )
         
         post_request = urllib2.Request(action, post_data)
         cookie_jar.add_cookie_header(post_request)
 
+        post_request.add_header('Accept', 'text/html')
         post_request.add_header('Referer', self.base_url)
 
         post_response = cookie_handling_opener.open(post_request)
@@ -119,10 +131,12 @@ class OcellaParser:
         th_index = 0
         for th in ths:
             th_content = th.font.string.strip()
-            if th_content == 'Reference' or th_content == 'Application Ref':
+            if th_content == 'Reference' or th_content == 'Application Ref' or th_content == 'Application Number':
                 self.reference_col = th_index
             elif th_content == 'Location':
                 self.address_col = th_index
+            elif th_content == 'Applicant Details':
+                self.applicant_col = th_index
             elif th_content == 'Proposal':
                 self.description_col = th_index
             elif th_content == 'Development Description':
@@ -159,8 +173,12 @@ class OcellaParser:
 
             self._current_application.address = tds[self.address_col].font.string.strip()
             self._current_application.postcode = getPostcodeFromText(self._current_application.address)
+            if self._current_application.postcode is None and self.applicant_col is not None:
+                # won't always be accurate to do this but better than nothing (needed for Havering)
+                self._current_application.postcode = getPostcodeFromText(tds[self.applicant_col].font.string.strip())
             self._current_application.description = tds[self.description_col].font.string.strip()
-            self._current_application.info_url = tds[self.reference_col].a['href']
+            # seems to be dependent on the implementation whether the URL is encoded (e.g. Great Yarmouth does this), so we cannot do anything more "standard"
+            self._current_application.info_url = urlparse.urljoin(post_response.geturl(), tds[self.reference_col].a['href'].replace('&amp;','&'))
 
 # This is what a comment url looks like
 # It seems to be no problem to remove the sessionid (which is in any case blank...)
@@ -184,20 +202,13 @@ if __name__ == '__main__':
 #    parser = OcellaParser("Ellesmere Port", "Ellesmere Port", "http://ocella.epnbc.gov.uk/portal/page?_pageid=33,38205&_dad=portal&_schema=PORTAL")
 #    parser = OcellaParser("Fareham", "Fareham", "http://eocella.fareham.gov.uk/portal/page?_pageid=33,31754&_dad=portal&_schema=PORTAL")
 #    parser = OcellaParser("Hillingdon", "Hillingdon", "http://w09.hillingdon.gov.uk/portal/page?_pageid=33,82093&_dad=portal&_schema=PORTAL")
-#    parser = OcellaParser("Middlesbrough", "Middlesbrough", "http://planserv.middlesbrough.gov.uk/portal/page?_pageid=33,4166&_dad=portal&_schema=PORTAL")
-#    parser = OcellaParser("North East Lincolnshire", "North East Lincolnshire", "http://planning.nelincs.gov.uk/portal/page?_pageid=33,68034&_dad=portal&_schema=PORTAL")
-#    parser = OcellaParser("Uttlesford", "Uttlesford", "http://planning.uttlesford.gov.uk/portal/page?_pageid=33,35447&_dad=portal&_schema=PORTAL")
-
-
-    # Bad status line? Try changing browser id string?
+#    parser = OcellaParser("Middlesbrough", "Middlesbrough", "http://planserv.middlesbrough.gov.uk/portal/page?_pageid=33,4178&_dad=portal&_schema=PORTAL")
+#    parser = OcellaParser("North East Lincolnshire", "North East Lincolnshire", "http://planning.nelincs.gov.uk/portal/page?_pageid=33,64104&_dad=portal&_schema=PORTAL")
+#    parser = OcellaParser("Uttlesford", "Uttlesford", "http://planning.uttlesford.gov.uk/portal/page/portal/plan/weekly")
 #    parser = OcellaParser("Bridgend", "Bridgend", "http://eplan.bridgend.gov.uk:7778/portal/page?_pageid=55,31779&_dad=portal&_schema=PORTAL")
-
-# Post never comes back
-#    parser = OcellaParser("Havering", "Havering", "http://planning.havering.gov.uk/portal/page?_pageid=33,1026&_dad=portal&_schema=PORTAL")
-
-    # Can't find the URL similar to the others, even though it is clearly Ocella
-    # We get a 406 at the moment. Try browser id string?
-    parser = OcellaParser("Great Yarmouth", "Great Yarmouth", "http://planning.great-yarmouth.gov.uk/portal/page/portal/plan/search")
+    parser = OcellaParser("Havering", "Havering", "http://planning.havering.gov.uk/portal/page?_pageid=33,1026&_dad=portal&_schema=PORTAL")
+#    parser = OcellaParser("Castle Point", "Castle Point", "http://planning.castlepoint.gov.uk/portal/page?_pageid=35,38205&_dad=portal&_schema=PORTAL")
+#    parser = OcellaParser("Great Yarmouth", "Great Yarmouth", "http://planning.great-yarmouth.gov.uk/portal/page/portal/plan/weekly")
 
 
     print parser.getResults(21,5,2008)

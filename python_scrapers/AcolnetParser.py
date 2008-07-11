@@ -34,6 +34,7 @@ end_head_regex = re.compile("</head>?", re.IGNORECASE)
 
 
 class AcolnetParser:
+    received_date_label = "Registration Date:"
     received_date_format = "%d/%m/%Y"
 
     comment_qs_template = "ACTION=UNWRAP&RIPNAME=Root.PgeCommentForm&TheSystemkey=%s"
@@ -55,7 +56,7 @@ class AcolnetParser:
         return app_table.a.string.strip()
 
     def _getDateReceived(self, app_table):
-        date_str = ''.join(app_table.find(text="Registration Date:").findNext("td").string.strip().split())
+        date_str = ''.join(app_table.find(text=self.received_date_label).findNext("td").string.strip().split())
         day, month, year = date_str.split('/')
         return date(int(year), int(month), int(day))
 
@@ -205,6 +206,15 @@ class BridgnorthParser(AcolnetParser):
 #http://www2.bridgnorth-dc.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeCommentForm&TheSystemkey=46958
         return self._current_application.info_url.replace("NewPages", "PgeCommentForm")
 
+class BlackpoolParser(AcolnetParser):
+    received_date_label = "Application Date:"
+
+    def _getResultsSections(self, soup):
+        return soup.findAll("table", {"class": "acolnet-results-table"})
+
+    def _getCommentUrl(self, app_table):
+        ref = self._getCouncilReference(app_table)
+        return "https://www.blackpool.gov.uk/Services/M-R/PlanningApplications/Forms/PlanningNeighbourResponseForm.htm?Application_No=" + ref.replace('/','%2F')
 
 class CanterburyParser(AcolnetParser):
     """Here the apps are one row each in a big table."""
@@ -227,14 +237,17 @@ class CanterburyParser(AcolnetParser):
     def _getDescription(self, app_table):
         return app_table.findAll("td")[2].string.strip()        
 
-#Kensington and chelsea is sufficiently different, it may as well be handled separately    
+class GreenwichParser(AcolnetParser):
+    received_date_label = "Registration date:"
+    comment_qs_template = "ACTION=UNWRAP&RIPNAME=Root.PgeCommentNeighbourForm&TheSystemkey=%s"
 
-# Mid Bedfordshire - there is an acolnet here, but you have to have a username
-# and password to access it!
+    def _getInfoUrl(self, app_table):
+        return AcolnetParser._getInfoUrl(self, app_table).replace('/?', '/acolnetcgi.gov?', 1)
+
+#Kensington and chelsea is sufficiently different, it may as well be handled separately    
 
 class MidBedsParser(AcolnetParser):
     def _getCouncilReference(self, app_table):
-#        return app_table.findAll("a")[1].string.strip()
         return app_table.findAll("a")[1].string.strip()
     
 class OldhamParser(AcolnetParser):
@@ -361,11 +374,11 @@ if __name__ == '__main__':
     #parser = AcolnetParser("Suffolk Coastal", "Suffolk Coastal", "http://apps3.suffolkcoastal.gov.uk/DCDataV2/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
 #    parser = AcolnetParser("Surrey Heath", "Surrey Heath", "https://www.public.surreyheath-online.gov.uk/whalecom60b1ef305f59f921/whalecom0/Scripts/PlanningPagesOnline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
 
-    #parser = AcolnetParser("Stockport Metropolitan Borough Council", "Stockport", "http://planning.stockport.gov.uk/PlanningData/AcolNetCGI.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-
 #    parser = MidBedsParser("Mid Bedfordshire District Council", "Mid Beds", "http://www.midbeds.gov.uk/acolnetDC/DCpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
 #    parser = AcolnetParser("Cambridgeshire County Council", "Cambridgeshire", "http://planapps2.cambridgeshire.gov.uk/DCWebPages/AcolNetCGI.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-    parser = AcolnetParser("East Hampshire District Council", "East Hampshire", "http://planningdevelopment.easthants.gov.uk/dconline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-
+#    parser = AcolnetParser("East Hampshire District Council", "East Hampshire", "http://planningdevelopment.easthants.gov.uk/dconline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+#    parser = AcolnetParser("Stockport Metropolitan Borough Council", "Stockport", "http://planning.stockport.gov.uk/PlanningData/AcolNetCGI.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+#    parser = BlackpoolParser("Blackpool Borough Council", "Blackpool", "http://www2.blackpool.gov.uk/PlanningApplications/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    parser = GreenwichParser("London Borough of Greenwich", "Greenwich", "http://onlineplanning.greenwich.gov.uk/acolnet/planningpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     print parser.getResults(day, month, year)
     
