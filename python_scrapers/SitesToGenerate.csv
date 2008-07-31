@@ -243,3 +243,5 @@
 "London Borough of Havering", "Havering", "http://planning.havering.gov.uk/portal/page?_pageid=33,1026&_dad=portal&_schema=PORTAL", "Ocella", "OcellaParser"
 "Castle Point Borough Council", "Castle Point", "http://planning.castlepoint.gov.uk/portal/page?_pageid=35,38205&_dad=portal&_schema=PORTAL", "Ocella", "OcellaParser"
 "Great Yarmouth Borough Council", "Great Yarmouth", "http://planning.great-yarmouth.gov.uk/portal/page/portal/plan/weekly", "Ocella", "OcellaParser"
+"Conwy County Borough Council", "Conwy", "http://www.conwy.gov.uk/", "PlanningExplorer", "ConwyParser"
+"London Borough of Merton", "Merton", "http://planning.merton.gov.uk", "PlanningExplorer", "MertonParser"

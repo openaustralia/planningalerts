@@ -60,6 +60,10 @@ class PlanningExplorerParser:
     address_td_no = 1
     description_td_no = 2
 
+    # In some cases we won't be able to get the full address/description/postcode without getting the info page for each app.
+    # If fetch_info_page is set to true, then we need to get a copy of the info page and store it as an attribute on current_application (naughty!)
+    fetch_info_page = False
+
     def _modify_response(self, response):
         """For most sites, we have managed to get all the apps on a
         single page by choosing the right parameters.
@@ -129,7 +133,20 @@ class PlanningExplorerParser:
         
         return post_data
 
-    def _getPostCode(self):
+
+    def _getAddress(self, tds, info_soup):
+        # If this td contains a div, then the address is the
+        # string in there - otherwise, use the string in the td.
+        address_td = tds[self.address_td_no]
+        if address_td.div is not None:
+            address = address_td.div.string
+        else:
+            address = address_td.string
+            
+        return address
+
+
+    def _getPostCode(self, info_soup):
         """In most cases, the postcode can be got from the address in 
         the results table. Some councils put the address there without the
         postcode. In this case we will have to go to the info page to get
@@ -138,6 +155,21 @@ class PlanningExplorerParser:
 
         return getPostcodeFromText(self._current_application.address)
         
+    def _getDescription(self, tds, info_soup):
+        description_td = tds[self.description_td_no]
+        
+        if description_td.div is not None:
+            # Mostly this is in a div
+            # Use the empty string if the description is missing
+            description = description_td.div.string or ""
+        else:
+            # But sometimes (eg Crewe) it is directly in the td.
+            # Use the empty string if the description is missing
+            description = description_td.string or ""
+
+        return description
+
+
     def __init__(self,
                  authority_name,
                  authority_short_name,
@@ -214,53 +246,39 @@ class PlanningExplorerParser:
 
                 tds = tr.findAll("td")
 
-                for td_no in range(len(tds)):
-                    if td_no == self.reference_td_no:
-                        # This td contains the reference number and a link to details
-                        self._current_application.council_reference = tds[td_no].a.string
+                self._current_application.council_reference = tds[self.reference_td_no].a.string
 
-                        relative_info_url =  self._sanitiseInfoUrl(tds[td_no].a['href'])
+                relative_info_url = self._sanitiseInfoUrl(tds[self.reference_td_no].a['href'])
+                self._current_application.info_url = urlparse.urljoin(self.info_url_base, relative_info_url)
 
-                        self._current_application.info_url = urlparse.urljoin(self.info_url_base, relative_info_url)
+                # Fetch the info page if we need it, otherwise set it to None
+
+                if self.fetch_info_page:
+                    # We need to quote the spaces in the info url
+                    info_request = urllib2.Request(urllib.quote(self._current_application.info_url, ":/&?="))
+                    
+                    info_soup = BeautifulSoup(urllib2.urlopen(info_request))
+                else:
+                    info_soup = None
+
+                # What about a comment url?
+                # There doesn't seem to be one, so we'll use the email address
+                if self.comments_email_address is not None:
+                    # We're using the email address, as there doesn't seem
+                    # to be a web form for comments
+                    self._current_application.comment_url = self.comments_email_address
+                else:
+                    # This link contains a code which we need for the comments url
+                    # (on those sites that use it)
+                    application_code = app_code_regex.search(relative_info_url).groups()[0]
+
+                    relative_comments_url = self.comments_path %(application_code)
+                    self._current_application.comment_url = urlparse.urljoin(self.base_url, relative_comments_url)
 
 
-                        # What about a comment url?
-                        # There doesn't seem to be one, so we'll use the email address
-                        if self.comments_email_address is not None:
-                            # We're using the email address, as there doesn't seem
-                            # to be a web form for comments
-                            self._current_application.comment_url = self.comments_email_address
-                        else:
-                            # This link contains a code which we need for the comments url
-                            # (on those sites that use it)
-                            application_code = app_code_regex.search(relative_info_url).groups()[0]
-
-                            relative_comments_url = self.comments_path %(application_code)
-                            self._current_application.comment_url = urlparse.urljoin(self.base_url, relative_comments_url)
-
-                    elif td_no == self.address_td_no:
-                        # If this td contains a div, then the address is the
-                        # string in there - otherwise, use the string in the td.
-                        if tds[td_no].div is not None:
-                            address = tds[td_no].div.string
-                        else:
-                            address = tds[td_no].string
-
-                        self._current_application.address = address
-
-                        self._current_application.postcode = self._getPostCode()
-
-                    elif td_no == self.description_td_no:
-                        if tds[td_no].div is not None:
-                            # Mostly this is in a div
-                            # Use the empty string if the description is missing
-                            description = tds[td_no].div.string or ""
-                        else:
-                            # But sometimes (eg Crewe) it is directly in the td.
-                            # Use the empty string if the description is missing
-                            description = tds[td_no].string or ""
-
-                        self._current_application.description = description
+                self._current_application.address = self._getAddress(tds, info_soup)
+                self._current_application.postcode = self._getPostCode(info_soup)
+                self._current_application.description = self._getDescription(tds, info_soup)
 
                 self._results.addApplication(self._current_application)
 
@@ -470,11 +488,17 @@ class LiverpoolParser(PlanningExplorerParser):
 
         return ''.join(ws_re.split(url))
 
-# FIXME - Merton needs to be done here when it is back up.
-
 class MertonParser(PlanningExplorerParser):
     use_firefox_user_agent = True
-    
+    fetch_info_page = True
+
+    def _getAddress(self, tds, info_soup):
+        return info_soup.find(text="Site Address").findNext("td").string.strip()
+
+    def _getDescription(self, tds, info_soup):
+        return info_soup.find(text="Development Proposal").findNext("td").string.strip()
+
+
 class ShrewsburyParser(PlanningExplorerParser):
     use_firefox_user_agent = True
 
@@ -574,6 +598,16 @@ class WalthamForestParser(PlanningExplorerParser):
         print post_data
         return post_data
 
+class ConwyParser(BroadlandLike, PlanningExplorerParser):
+    search_url_path = "Northgate/planningexplorerenglish/generalsearch.aspx"
+    info_url_path = "Northgate/PlanningExplorerEnglish/Generic/"
+    comments_path = "Northgate/PlanningExplorerEnglish/PLComments.aspx?pk=%s"
+
+    use_firefox_user_agent = True
+
+
+#&txtApplicationNumber=&txtProposal=&txtSiteAddress=&cboWardCode=&cboParishCode=&cboApplicationTypeCode=&cboDevelopmentTypeCode=&cboStatusCode=&cboSelectDateValue=DATE_RECEIVED&cboMonths=1&cboDays=1&rbGroup=rbRange&dateStart=10%2F07%2F2008&dateEnd=20%2F07%2F2008&edrDateSelection=&csbtnSearch=Search
+
 
 #txtApplicantName=
 #txtAgentName=
@@ -597,29 +631,31 @@ if __name__ == '__main__':
     # NOTE - 04/11/2007 is a sunday
     # I'm using it to test that the scrapers behave on days with no apps.
     
-    #parser = BlackburnParser("Blackburn With Darwen Borough Council", "Blackburn", "http://195.8.175.6/")
-    #parser = BroadlandParser("Broadland Council", "Broadland", "http://www.broadland.gov.uk/")
-    #parser = CamdenParser("London Borough of Camden", "Camden", "http://planningrecords.camden.gov.uk/")
-    #parser = CharnwoodParser("Charnwood Borough Council", "Charnwood", "http://portal.charnwoodbc.gov.uk/")
-    #parser = CreweParser("Crewe and Nantwich Borough Council", "Crewe and Nantwich", "http://portal.crewe-nantwich.gov.uk/")
-    #parser = EastStaffsParser("East Staffordshire Borough Council", "East Staffs", "http://www2.eaststaffsbc.gov.uk/")
-    #parser = EppingForestParser("Epping Forest District Council", "Epping Forest", "http://plan1.eppingforestdc.gov.uk/")
-    #parser = ForestHeathParser("Forest Heath District Council", "Forest Heath", "http://195.171.177.73/")
-    #parser = HackneyParser("London Borough of Hackney", "Hackney", "http://www.hackney.gov.uk/servapps/")
-    #parser = KennetParser("Kennet District Council", "Kennet", "http://mvm-planning.kennet.gov.uk/")
-    #parser = LincolnParser("Lincoln City Council", "Lincoln", "http://online.lincoln.gov.uk/")
-    #parser = LiverpoolParser("Liverpool City Council", "Liverpool", "http://www.liverpool.gov.uk/")
-    #parser = ShrewsburyParser("Shrewsbury and Atcham Borough Council", "Shrewsbury", "http://www2.shrewsbury.gov.uk/")
-    #parser = SouthNorfolkParser("South Norfolk Council", "South Norfolk", "http://planning.south-norfolk.gov.uk/")
-    #parser = SouthShropshireParser("South Shropshire District Council", "South Shropshire", "http://194.201.44.102/")
-    #parser = SouthTynesideParser("South Tyneside Council", "South Tyneside", "http://poppy.southtyneside.gov.uk/")
-    parser = StockportParser("Stockport Metropolitan District Council", "Stockport", "http://s1.stockport.gov.uk/council/eed/dc/planning/")
-    #parser = SwanseaParser("Swansea City and County Council", "Swansea", "http://www2.swansea.gov.uk/")
-    #parser = TamworthParser("Tamworth Borough Council", "Tamworth", "http://80.1.64.77/")
-    #parser = TraffordParser("Trafford Council", "Trafford", "http://planning.trafford.gov.uk/")
-    #parser = WestOxfordshireParser("West Oxfordshire District Council", "West Oxfordshire", "http://planning.westoxon.gov.uk/")
-    #parser = WalthamForestParser("Waltham Forest", "Waltham Forest", "http://planning.walthamforest.gov.uk/")
-    print parser.getResults(18, 4, 2008)
+    parser = BlackburnParser("Blackburn With Darwen Borough Council", "Blackburn", "http://195.8.175.6/")
+#    parser = BroadlandParser("Broadland Council", "Broadland", "http://www.broadland.gov.uk/")
+#    parser = CamdenParser("London Borough of Camden", "Camden", "http://planningrecords.camden.gov.uk/")
+#    parser = CharnwoodParser("Charnwood Borough Council", "Charnwood", "http://portal.charnwoodbc.gov.uk/")
+#    parser = CreweParser("Crewe and Nantwich Borough Council", "Crewe and Nantwich", "http://portal.crewe-nantwich.gov.uk/")
+#    parser = EastStaffsParser("East Staffordshire Borough Council", "East Staffs", "http://www2.eaststaffsbc.gov.uk/")
+#    parser = EppingForestParser("Epping Forest District Council", "Epping Forest", "http://plan1.eppingforestdc.gov.uk/")
+#    parser = ForestHeathParser("Forest Heath District Council", "Forest Heath", "http://195.171.177.73/")
+#    parser = HackneyParser("London Borough of Hackney", "Hackney", "http://www.hackney.gov.uk/servapps/")
+#    parser = KennetParser("Kennet District Council", "Kennet", "http://mvm-planning.kennet.gov.uk/")
+#    parser = LincolnParser("Lincoln City Council", "Lincoln", "http://online.lincoln.gov.uk/")
+#    parser = LiverpoolParser("Liverpool City Council", "Liverpool", "http://www.liverpool.gov.uk/")
+#    parser = ShrewsburyParser("Shrewsbury and Atcham Borough Council", "Shrewsbury", "http://www2.shrewsbury.gov.uk/")
+#    parser = SouthNorfolkParser("South Norfolk Council", "South Norfolk", "http://planning.south-norfolk.gov.uk/")
+#    parser = SouthShropshireParser("South Shropshire District Council", "South Shropshire", "http://194.201.44.102/")
+#    parser = SouthTynesideParser("South Tyneside Council", "South Tyneside", "http://poppy.southtyneside.gov.uk/")
+#    parser = StockportParser("Stockport Metropolitan District Council", "Stockport", "http://s1.stockport.gov.uk/council/eed/dc/planning/")
+#    parser = SwanseaParser("Swansea City and County Council", "Swansea", "http://www2.swansea.gov.uk/")
+#    parser = TamworthParser("Tamworth Borough Council", "Tamworth", "http://80.1.64.77/")
+#    parser = TraffordParser("Trafford Council", "Trafford", "http://planning.trafford.gov.uk/")
+#    parser = WestOxfordshireParser("West Oxfordshire District Council", "West Oxfordshire", "http://planning.westoxon.gov.uk/")
+#    parser = WalthamForestParser("Waltham Forest", "Waltham Forest", "http://planning.walthamforest.gov.uk/")
+#    parser = ConwyParser("Conwy County Borough Council", "Conwy", "http://www.conwy.gov.uk/")
+#    parser = MertonParser("London Borough of Merton", "Merton", "http://planning.merton.gov.uk")
+    print parser.getResults(3, 7, 2008)
 
 # To Do
 
