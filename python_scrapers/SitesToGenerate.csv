@@ -190,7 +190,7 @@
 "Canterbury City Council", "Canterbury", "http://planning.canterbury.gov.uk/scripts/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "CanterburyParser"
 "London Borough of Merton", "Merton", "http://planning.merton.gov.uk/", "PlanningExplorer", "MertonParser"
 "Chichester District Council", "Chichester", "http://pa.chichester.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
-"London Borough of Barking and Dagenham", "Barking and Dagenham", "http://idoxwam.lbbd.gov.uk:8081/WAM/pas/searchApplications.do", "WAM", "WAMParser"
+"London Borough of Barking and Dagenham", "Barking and Dagenham", "http://paweb.barking-dagenham.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Braintree District Council", "Braintree", "http://planningapp.braintree.gov.uk/WAM1/weeklyApplications.do", "WAM", "BraintreeParser"
 "Colchester Borough Council", "Colchester", "http://www.planning.colchester.gov.uk/WAM/weeklyApplications.do", "WAM", "BraintreeParser"
 "East Lothian Council", "East Lothian", "http://www.planning.eastlothian.gov.uk/WAM/pas/searchApplications.do", "WAM", "WAMParser"
