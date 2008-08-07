@@ -165,7 +165,6 @@ class BraintreeParser(WAMParser):
         
 
 if __name__ == '__main__':
-    #parser = WAMParser("Barking and Dagenham", "Barking and Dagenham", "http://idoxwam.lbbd.gov.uk:8081/WAM/pas/searchApplications.do", debug=True)
     #parser = BraintreeParser("Braintree", "Braintree", "http://planningapp.braintree.gov.uk/WAM1/weeklyApplications.do", debug=True)
     # Camden
     parser = WAMParser("Castle Point", "Castle Point", "http://wam.castlepoint.gov.uk/WAM/pas/searchApplications.do")#, debug=True)
