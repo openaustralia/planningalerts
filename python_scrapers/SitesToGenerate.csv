@@ -248,3 +248,4 @@
 "London Borough of Enfield", "Enfield", "http://forms.enfield.gov.uk/swiftlg/apas/run/wphappcriteria.display", "SwiftLG", "SwiftLGParser"
 "Amber Valley Borough Council", "Amber Valley", "", "AmberValley", "AmberValleyParser"
 "Aberdeenshire Council", "Aberdeenshire", "", "Aberdeenshire", "AberdeenshireParser"
+"London Borough of Brent", "Brent", "", "Brent", "BrentParser"
