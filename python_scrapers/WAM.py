@@ -167,7 +167,7 @@ class BraintreeParser(WAMParser):
 if __name__ == '__main__':
     #parser = BraintreeParser("Braintree", "Braintree", "http://planningapp.braintree.gov.uk/WAM1/weeklyApplications.do", debug=True)
     # Camden
-    parser = WAMParser("Castle Point", "Castle Point", "http://wam.castlepoint.gov.uk/WAM/pas/searchApplications.do")#, debug=True)
+#    parser = WAMParser("Castle Point", "Castle Point", "http://wam.castlepoint.gov.uk/WAM/pas/searchApplications.do")#, debug=True)
     #Chichester - Done as PublicAccess
     #parser = BraintreeParser("Colchester", "Colchester", "http://www.planning.colchester.gov.uk/WAM/weeklyApplications.do", debug=True)
     #parser = WAMParser("East Lothian", "East Lothian", "http://www.planning.eastlothian.gov.uk/WAM/pas/searchApplications.do", debug=True)
@@ -178,9 +178,9 @@ if __name__ == '__main__':
     #parser = BraintreeParser("South Gloucestershire", "South Gloucestershire", "http://planning.southglos.gov.uk/WAM/pas/WeeklyApplications.do", debug=True)
     #parser = WAMParser("South Norfolk", "South Norfolk", "http://wam.south-norfolk.gov.uk/WAM/pas/searchApplications.do", debug=True)
     #parser = BraintreeParser("Tower Hamlets", "Tower Hamlets", "http://194.201.98.213/WAM/weeklyApplications.do", debug=True)
-    #parser = WAMParser("Westminster", "Westminster", "http://idocs.westminster.gov.uk:8080/WAM/search/pas/index.htm", debug=True)
+    parser = WAMParser("Westminster", "Westminster", "http://idocs.westminster.gov.uk:8080/WAM/search/pas/index.htm", debug=True)
 
-    print parser.getResults(20,5,2008)
+    print parser.getResults(1,8,2008)
 
 # Left to fix
 
