@@ -196,10 +196,10 @@ class FastWebResultsPageParser(HTMLParser.HTMLParser):
 
 
 #suttonparser = FastWeb("Sutton", "Sutton", "http://82.43.4.135/FASTWEB/")
-
+suttonparser = FastWeb("Sutton", "Sutton", "http://213.122.180.105/FASTWEB/")
 #print eastleighparser.getResults(10,8,2007)
 #print cravenparser.getResults(25,12,2006)
-#print suttonparser.getResults(10,8,2007)
+print suttonparser.getResults(1,8,2008)
 
 #south_lakeland_parser = FastWeb("South Lakeland", "South Lakeland", "http://www.southlakeland.gov.uk/fastweb/")
 
