@@ -10,13 +10,13 @@ class confirmed_page {
     //Properties
     var $postcode = "";
     var $alert_area_size = 0;
-    
+
 	//Constructor
 	function confirmed_page() {	
 	    $this->setup();
 		$this->bind();
     }
-    
+
     //Setup
     function setup (){
 

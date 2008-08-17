@@ -742,7 +742,7 @@
     return new OSRef($east + $nx, $north + $ny);
   }
   
-    
+
   /**
    *  Work out the UTM latitude zone from the latitude
    *
