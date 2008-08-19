@@ -9,7 +9,7 @@
                 <title><![CDATA[{$application->address}]]></title>
                 <pubDate>{$application->date_scraped|date_format:"%a, %e %b %Y"}</pubDate>                
                 <guid isPermaLink="false">{$application->council_reference}</guid>
-                <georss:featurename>{$application->address}</georss:featurename>
+                <georss:featurename><![CDATA[{$application->address}]]></georss:featurename>
                 <georss:point>{$application->lat} {$application->lon}</georss:point>
                 <description><![CDATA[{$application->description}]]></description>
                 <link><![CDATA[{$application->info_url}]]></link>
