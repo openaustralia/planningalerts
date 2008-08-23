@@ -219,7 +219,7 @@
 "Cambridgeshire County Council", "Cambridgeshire", "http://planapps2.cambridgeshire.gov.uk/DCWebPages/AcolNetCGI.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "AcolnetParser"
 "Isle of Wight Council", "Isle of Wight", "", "IsleOfWight", "IsleOfWightParser"
 "Barnsley Metropolitan Borough Council", "Barnsley", "", "Barnsley", "BarnsleyParser"
-"Daventry District Council", "Daventry", "http://www.daventrydc.gov.uk/swiftlg/apas/run/wphappcriteria.display", "SwiftLG", "SwiftLGParser"
+"Daventry District Council", "Daventry", "http://62.231.149.150/swiftlg/apas/run/wphappcriteria.display", "SwiftLG", "SwiftLGParser"
 "Shetland Islands Council", "Shetland Islands", "", "Shetland", "ShetlandParser"
 "The Royal Borough of Kensington and Chelsea", "Kensington and Chelsea", "", "Kensington", "KensingtonParser"
 "Comhairle Nan Eilean Siar", "Comhairle Nan Eilean Siar", "http://planning.cne-siar.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"

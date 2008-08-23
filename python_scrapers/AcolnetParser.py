@@ -191,8 +191,9 @@ class AcolnetParser:
 
 
     def getResults(self, day, month, year):
-        return self.getResultsByDayMonthYear(int(day), int(month), int(year)).displayXML()
-
+        results =  self.getResultsByDayMonthYear(int(day), int(month), int(year)).displayXML()
+        #        import pdb;pdb.set_trace()
+        return results
 
 class BridgnorthParser(AcolnetParser):
     def _getResultsSections(self, soup):
@@ -339,12 +340,12 @@ class HarlowParser(AcolnetParser):
         return self._current_application.info_url.replace("PgeResultDetail", "PgeCommentNeighbourForm&amp;hasreference=no")
 
 if __name__ == '__main__':
-    day = 29
-    month = 7
+    day = 1
+    month = 8
     year = 2008
 
     #parser = AcolnetParser("Babergh", "Babergh", "http://planning.babergh.gov.uk/dcdatav2//acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-    #parser = AcolnetParser("Barnet", "Barnet", "http://194.75.183.100/planning-cases/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+#    parser = AcolnetParser("Barnet", "Barnet", "http://194.75.183.100/planning-cases/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("Basingstoke", "Basingstoke", "http://planning.basingstoke.gov.uk/DCOnline2/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = BassetlawParser("Bassetlaw", "Bassetlaw", "http://www.bassetlaw.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("Bolton", "Bolton", "http://www.planning.bolton.gov.uk/DCOnlineV2/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")

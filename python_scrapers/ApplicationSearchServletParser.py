@@ -501,4 +501,4 @@ if __name__ == "__main__":
     #parser = EalingSearchParser("Ealing", "Ealing", "http://www.pam.ealing.gov.uk")
     parser = HaringeySearchParser("Haringey", "Haringey", "http://www.planningservices.haringey.gov.uk")
     #parser = DenbighshireSearchParser("Denbighshire", "Denbighshire", "http://planning.denbighshire.gov.uk")
-    print parser.getResults(20,5,2008)
+    print parser.getResults(1,8,2008)
