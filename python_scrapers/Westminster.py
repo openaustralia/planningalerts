@@ -61,12 +61,12 @@ class WestminsterParser:
 
             # Now get the search page
 
-            sys.stderr.write("Fetching: %s" %self.base_url)
-            sys.stderr.write("post data: %s" %post_data) 
+            sys.stderr.write("Fetching: %s\n" %self.base_url)
+            sys.stderr.write("post data: %s\n" %post_data) 
             
             response = urllib2.urlopen(self.base_url, post_data)
 
-            sys.stderr.write("Got it")
+            sys.stderr.write("Got it\n")
             soup = BeautifulSoup(response.read())
 
             results_form = soup.find("form", {"name": "currentsearchresultsNext"})
@@ -95,9 +95,9 @@ class WestminsterParser:
 
                 # To get the comment url, we're going to have to go to each info url :-(
 
-                sys.stderr.write("Fetching: %s" %application.info_url)
+                sys.stderr.write("Fetching: %s\n" %application.info_url)
                 info_response = urllib2.urlopen(application.info_url)
-                sys.stderr.write("Got it")
+                sys.stderr.write("Got it\n")
 
                 info_soup = BeautifulSoup(info_response)
 
