@@ -16,6 +16,8 @@ import urlparse
 import datetime, time
 import cgi
 
+import sys
+
 from BeautifulSoup import BeautifulSoup
 
 from PlanningUtils import PlanningApplication, \
@@ -58,7 +60,13 @@ class WestminsterParser:
         while post_data:
 
             # Now get the search page
+
+            sys.stderr.write("Fetching: %s" %self.base_url)
+            sys.stderr.write("post data: %s" %post_data) 
+            
             response = urllib2.urlopen(self.base_url, post_data)
+
+            sys.stderr.write("Got it")
             soup = BeautifulSoup(response.read())
 
             results_form = soup.find("form", {"name": "currentsearchresultsNext"})
@@ -87,7 +95,10 @@ class WestminsterParser:
 
                 # To get the comment url, we're going to have to go to each info url :-(
 
+                sys.stderr.write("Fetching: %s" %application.info_url)
                 info_response = urllib2.urlopen(application.info_url)
+                sys.stderr.write("Got it")
+
                 info_soup = BeautifulSoup(info_response)
 
                 comment_nav_string = info_soup.find(text="Comment on this case")

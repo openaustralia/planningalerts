@@ -350,8 +350,8 @@ class PublicAccessPropertyPageParser(HTMLParser.HTMLParser):
 
 
 if __name__ == '__main__':
-    day = 20
-    month = 5
+    day = 1
+    month = 8
     year = 2008
 
     #parser = PublicAccessParser("East Northants", "East Northants", "http://publicaccesssrv.east-northamptonshire.gov.uk/PublicAccess/tdc/", True)
@@ -359,6 +359,7 @@ if __name__ == '__main__':
     #parser = PublicAccessParser("Hambleton District Council", "Hambleton", "http://planning.hambleton.gov.uk/publicaccess/tdc/", True)
     #parser = PublicAccessParser("Durham City Council", "Durham", "http://publicaccess.durhamcity.gov.uk/publicaccess/tdc/", True)
     #parser = PublicAccessParser("Moray Council", "Moray", "http://public.moray.gov.uk/publicaccess/tdc/", True)
-    parser = PublicAccessParser("Sheffield City Council", "Sheffield", "http://planning.sheffield.gov.uk/publicaccess/tdc/")
+#    parser = PublicAccessParser("Sheffield City Council", "Sheffield", "http://planning.sheffield.gov.uk/publicaccess/tdc/")
+    parser = PublicAccessParser("London Borough of Barking and Dagenham", "Barking and Dagenham", "http://paweb.barking-dagenham.gov.uk/PublicAccess/tdc/")
     print parser.getResults(day, month, year)
     
