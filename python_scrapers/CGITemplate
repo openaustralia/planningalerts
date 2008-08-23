@@ -19,12 +19,11 @@ base_url = "%(base_url)s"
 #print "Content-Type: text/html"     # HTML is following
 #print
 
-import %(module)s
-
-parser = %(module)s.%(parser)s(authority_name, authority_short_name, base_url)
-
 print "Content-Type: text/xml; charset=utf-8"     # XML is following
 print
+
+import %(module)s
+parser = %(module)s.%(parser)s(authority_name, authority_short_name, base_url)
 
 xml = parser.getResults(day, month, year)
 print xml.encode("utf-8")                          # print the xml

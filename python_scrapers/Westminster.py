@@ -58,6 +58,7 @@ class WestminsterParser:
         post_data = "REFNO=&STName=&STNUMB=&ADRSNO=&WARD=AllWards&AGT=&ATCDE=AllApps&DECDE=AllDecs&DTErec=%(date)s&DTErecTo=%(date)s&DTEvalid=&DTEvalidTo=&APDECDE=AllAppDecs&submit=Start+Search" %{"date": search_day.strftime(date_format)}
 
         while post_data:
+            
 
             # Now get the search page
 
@@ -69,19 +70,30 @@ class WestminsterParser:
             sys.stderr.write("Got it\n")
             soup = BeautifulSoup(response.read())
 
+            sys.stderr.write("Created soup\n")
+
             results_form = soup.find("form", {"name": "currentsearchresultsNext"})
 
             # Sort out the post_data for the next page, if there is one
             # If there is no next page then there will be no inputs in the form.
             # In this case, post_data will be '', which is false.
 
+            sys.stderr.write("Found form containing results\n")
+
             post_data = urllib.urlencode([(x['name'], x['value']) for x in results_form.findAll("input")])
+
+            sys.stderr.write("Got post data\n")
 
             # Each result has one link, and they are the only links in the form
 
             links = results_form.findAll("a")
 
+            sys.stderr.write("Got list of links\n")
+
             for link in links:
+
+                sys.stderr.write("Working on link: %s\n" %link['href'])
+
                 application = PlanningApplication()
 
                 application.date_received = search_day
@@ -111,6 +123,10 @@ class WestminsterParser:
 
                 self._results.addApplication(application)
 
+                sys.stderr.write("Finished that link\n")
+
+
+        sys.stderr.write("Finished while loop, returning stuff.\n")
 
         return self._results
 
