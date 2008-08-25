@@ -320,7 +320,7 @@ class BoltonLikeParser(AcolnetParser):
     
     
 class LewishamParser(BoltonLikeParser):
-    comments_email_address = "planning@lewisham.com"
+    comments_email_address = "planning@lewisham.gov.uk"
 
 
 class BassetlawParser(BoltonLikeParser):
