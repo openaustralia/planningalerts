@@ -120,7 +120,7 @@ parse_search($date);
 header("Content-Type: text/xml");
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 echo "<planning>\n";
-echo "\t<authority_name>Wealden</authority_name>\n";
+echo "\t<authority_name>Wealden District Council</authority_name>\n";
 echo "\t<authority_short_name>Wealden</authority_short_name>\n";
 echo "\t<applications>\n";
 foreach($applications as $application) {
