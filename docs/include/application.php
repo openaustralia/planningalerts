@@ -145,6 +145,18 @@ class Applications{
 			return applications::load_applications($application_results);
 	}
 	
+	//latest
+	function query_latest($count = 100) {
+		$db = DB::connect(DB_CONNECTION_STRING);
+		$sql = "select council_reference, address, postcode, description, info_url, comment_url, map_url, x, y, date_recieved, date_scraped, full_name
+					from application 
+					inner join authority on application.authority_id = authority.authority_id
+					order by date_scraped desc limit " . $count;
+
+			$application_results = $db->getAll($sql);			
+			return applications::load_applications($application_results);
+	}
+	
 	function load_applications($application_results){
 	    $applications = array();
 		if (sizeof($application_results) > 0) {

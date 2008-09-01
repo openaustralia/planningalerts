@@ -118,7 +118,12 @@ class api {
             			$this->applications = Applications::query_area($_GET['bottom_left_easting'], $_GET['bottom_left_northing'], $_GET['top_right_easting'], $_GET['top_right_easting']);
                     }
                 break;
-                
+
+                case "latest":
+            			$this->applications = Applications::query_latest(500);
+                break;
+
+query_latest
             default:
                 $this->warnings = "No call type specified";
         }
