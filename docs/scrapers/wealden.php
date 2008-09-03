@@ -8,7 +8,11 @@
 // to get all the data add 'all=true' to the end of the query string
 //
 // You need to set the location of the 'cookie jar'  for the scraper to work
-$cookiejar = '/tmp/wealden_cookies.txt';
+
+// This is truly horrible - the tempnam function can't be called without
+// the arguments in order to get the system temporary directory, but it falls
+// back on it if the first argument doesn't exist - Duncan
+$cookiejar = tempnam('nonexistantdirectory', '');
 
 //Check a day is set and is valid
 $day = (isset($_GET['day']) && !empty($_GET['day']) && $_GET['day'] > 0 && $_GET['day'] < 32) ? $_GET['day'] : 1;
