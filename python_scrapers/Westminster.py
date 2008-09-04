@@ -64,8 +64,8 @@ class WestminsterParser:
 
             # Now get the search page
 
-#            sys.stderr.write("Fetching: %s\n" %self.base_url)
-#            sys.stderr.write("post data: %s\n" %post_data) 
+            sys.stderr.write("Fetching: %s\n" %self.base_url)
+            sys.stderr.write("post data: %s\n" %post_data) 
             
 
             # This gives us something to use as the callback
@@ -81,13 +81,13 @@ class WestminsterParser:
 
             curlobj.perform()
 
-#            sys.stderr.write("Got it\n")
+            sys.stderr.write("Got it\n")
             soup = BeautifulSoup(fakefile.getvalue())
 
             # We may as well free up the memory used by fakefile
             fakefile.close()
 
-#            sys.stderr.write("Created soup\n")
+            sys.stderr.write("Created soup\n")
 
             results_form = soup.find("form", {"name": "currentsearchresultsNext"})
 
@@ -95,21 +95,21 @@ class WestminsterParser:
             # If there is no next page then there will be no inputs in the form.
             # In this case, post_data will be '', which is false.
 
-#            sys.stderr.write("Found form containing results\n")
+            sys.stderr.write("Found form containing results\n")
 
             post_data = urllib.urlencode([(x['name'], x['value']) for x in results_form.findAll("input")])
 
-#            sys.stderr.write("Got post data\n")
+            sys.stderr.write("Got post data\n")
 
             # Each result has one link, and they are the only links in the form
 
             links = results_form.findAll("a")
 
-#            sys.stderr.write("Got list of links\n")
+            sys.stderr.write("Got list of links\n")
 
             for link in links:
 
-#                sys.stderr.write("Working on link: %s\n" %link['href'])
+                sys.stderr.write("Working on link: %s\n" %link['href'])
 
                 application = PlanningApplication()
 
@@ -124,7 +124,7 @@ class WestminsterParser:
 
                 # To get the comment url, we're going to have to go to each info url :-(
 
-#                sys.stderr.write("Fetching: %s\n" %application.info_url)
+                sys.stderr.write("Fetching: %s\n" %application.info_url)
 
 
                 fakefile = StringIO.StringIO()
@@ -138,7 +138,7 @@ class WestminsterParser:
 
                 curlobj.perform()
 
-#                sys.stderr.write("Got it\n")
+                sys.stderr.write("Got it\n")
 
                 info_soup = BeautifulSoup(fakefile.getvalue())
 
@@ -154,10 +154,10 @@ class WestminsterParser:
 
                 self._results.addApplication(application)
 
-#                sys.stderr.write("Finished that link\n")
+                sys.stderr.write("Finished that link\n")
 
 
-#        sys.stderr.write("Finished while loop, returning stuff.\n")
+        sys.stderr.write("Finished while loop, returning stuff.\n")
 
         return self._results
 
