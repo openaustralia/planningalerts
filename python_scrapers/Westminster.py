@@ -9,9 +9,11 @@ This is the PublicAccess url:
 http://publicaccess.westminster.gov.uk/publicaccess/
 """
 
-import urllib2
 import urllib
 import urlparse
+
+import pycurl
+import StringIO
 
 import datetime, time
 import cgi
@@ -62,15 +64,30 @@ class WestminsterParser:
 
             # Now get the search page
 
-            sys.stderr.write("Fetching: %s\n" %self.base_url)
-            sys.stderr.write("post data: %s\n" %post_data) 
+#            sys.stderr.write("Fetching: %s\n" %self.base_url)
+#            sys.stderr.write("post data: %s\n" %post_data) 
             
-            response = urllib2.urlopen(self.base_url, post_data)
 
-            sys.stderr.write("Got it\n")
-            soup = BeautifulSoup(response.read())
+            # This gives us something to use as the callback
+            fakefile = StringIO.StringIO()
 
-            sys.stderr.write("Created soup\n")
+            curlobj = pycurl.Curl()
+            curlobj.setopt(pycurl.URL, self.base_url)
+            curlobj.setopt(pycurl.POST, True)
+            curlobj.setopt(pycurl.POSTFIELDS, post_data)
+            curlobj.setopt(pycurl.WRITEFUNCTION, fakefile.write)
+            curlobj.setopt(pycurl.FOLLOWLOCATION, True)
+            curlobj.setopt(pycurl.MAXREDIRS, 10)
+
+            curlobj.perform()
+
+#            sys.stderr.write("Got it\n")
+            soup = BeautifulSoup(fakefile.getvalue())
+
+            # We may as well free up the memory used by fakefile
+            fakefile.close()
+
+#            sys.stderr.write("Created soup\n")
 
             results_form = soup.find("form", {"name": "currentsearchresultsNext"})
 
@@ -78,21 +95,21 @@ class WestminsterParser:
             # If there is no next page then there will be no inputs in the form.
             # In this case, post_data will be '', which is false.
 
-            sys.stderr.write("Found form containing results\n")
+#            sys.stderr.write("Found form containing results\n")
 
             post_data = urllib.urlencode([(x['name'], x['value']) for x in results_form.findAll("input")])
 
-            sys.stderr.write("Got post data\n")
+#            sys.stderr.write("Got post data\n")
 
             # Each result has one link, and they are the only links in the form
 
             links = results_form.findAll("a")
 
-            sys.stderr.write("Got list of links\n")
+#            sys.stderr.write("Got list of links\n")
 
             for link in links:
 
-                sys.stderr.write("Working on link: %s\n" %link['href'])
+#                sys.stderr.write("Working on link: %s\n" %link['href'])
 
                 application = PlanningApplication()
 
@@ -107,11 +124,25 @@ class WestminsterParser:
 
                 # To get the comment url, we're going to have to go to each info url :-(
 
-                sys.stderr.write("Fetching: %s\n" %application.info_url)
-                info_response = urllib2.urlopen(application.info_url)
-                sys.stderr.write("Got it\n")
+#                sys.stderr.write("Fetching: %s\n" %application.info_url)
 
-                info_soup = BeautifulSoup(info_response)
+
+                fakefile = StringIO.StringIO()
+
+
+                curlobj.setopt(pycurl.HTTPGET, True)
+                curlobj.setopt(pycurl.WRITEFUNCTION, fakefile.write)
+
+                # We have to convert the info url to ascii for curl
+                curlobj.setopt(pycurl.URL, application.info_url.encode("ascii"))
+
+                curlobj.perform()
+
+#                sys.stderr.write("Got it\n")
+
+                info_soup = BeautifulSoup(fakefile.getvalue())
+
+                fakefile.close()
 
                 comment_nav_string = info_soup.find(text="Comment on this case")
                 if comment_nav_string:
@@ -123,10 +154,10 @@ class WestminsterParser:
 
                 self._results.addApplication(application)
 
-                sys.stderr.write("Finished that link\n")
+#                sys.stderr.write("Finished that link\n")
 
 
-        sys.stderr.write("Finished while loop, returning stuff.\n")
+#        sys.stderr.write("Finished while loop, returning stuff.\n")
 
         return self._results
 
