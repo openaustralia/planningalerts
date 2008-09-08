@@ -20,7 +20,7 @@ class HerefordshireParser:
 
     def __init__(self, *args):
 
-        self.authority_name = "Herefordshire County Council"
+        self.authority_name = "Herefordshire Council"
         self.authority_short_name = "Herefordshire"
         self.base_url = "http://www.herefordshire.gov.uk/gis/planListResults.aspx?pc=&address=&querytype=current&startdate=%(date)s&enddate=%(date)s&startrecord=0"
         #As we are going to the info page, we may as well pick up the comment url from there.
