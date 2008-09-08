@@ -631,7 +631,7 @@ if __name__ == '__main__':
     # NOTE - 04/11/2007 is a sunday
     # I'm using it to test that the scrapers behave on days with no apps.
     
-    parser = BlackburnParser("Blackburn With Darwen Borough Council", "Blackburn", "http://195.8.175.6/")
+#    parser = BlackburnParser("Blackburn With Darwen Borough Council", "Blackburn", "http://195.8.175.6/")
 #    parser = BroadlandParser("Broadland Council", "Broadland", "http://www.broadland.gov.uk/")
 #    parser = CamdenParser("London Borough of Camden", "Camden", "http://planningrecords.camden.gov.uk/")
 #    parser = CharnwoodParser("Charnwood Borough Council", "Charnwood", "http://portal.charnwoodbc.gov.uk/")
@@ -639,7 +639,7 @@ if __name__ == '__main__':
 #    parser = EastStaffsParser("East Staffordshire Borough Council", "East Staffs", "http://www2.eaststaffsbc.gov.uk/")
 #    parser = EppingForestParser("Epping Forest District Council", "Epping Forest", "http://plan1.eppingforestdc.gov.uk/")
 #    parser = ForestHeathParser("Forest Heath District Council", "Forest Heath", "http://195.171.177.73/")
-#    parser = HackneyParser("London Borough of Hackney", "Hackney", "http://www.hackney.gov.uk/servapps/")
+    parser = HackneyParser("London Borough of Hackney", "Hackney", "http://www.hackney.gov.uk/servapps/")
 #    parser = KennetParser("Kennet District Council", "Kennet", "http://mvm-planning.kennet.gov.uk/")
 #    parser = LincolnParser("Lincoln City Council", "Lincoln", "http://online.lincoln.gov.uk/")
 #    parser = LiverpoolParser("Liverpool City Council", "Liverpool", "http://www.liverpool.gov.uk/")
@@ -655,7 +655,7 @@ if __name__ == '__main__':
 #    parser = WalthamForestParser("Waltham Forest", "Waltham Forest", "http://planning.walthamforest.gov.uk/")
 #    parser = ConwyParser("Conwy County Borough Council", "Conwy", "http://www.conwy.gov.uk/")
 #    parser = MertonParser("London Borough of Merton", "Merton", "http://planning.merton.gov.uk")
-    print parser.getResults(3, 7, 2008)
+    print parser.getResults(4, 9, 2008)
 
 # To Do
 

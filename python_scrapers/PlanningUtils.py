@@ -4,13 +4,6 @@ import re
 
 date_format = "%d/%m/%Y"
 
-
-def xmlQuote(text):
-    # Change &s to &amp;s
-    # I suspect there is probably some standard python
-    # function I should be using for this...
-    return text.replace('&', '&amp;')
-
 def fixNewlines(text):
     # This can be used to sort out windows newlines
     return text.replace("\r\n","\n")
@@ -112,13 +105,13 @@ class PlanningApplication:
         #print self.council_reference, self.address, self.postcode, self.description, self.info_url, self.comment_url, self.date_received
 
 	contents = [
-            u"<council_reference>%s</council_reference>" %xmlQuote(self.council_reference),
-            u"<address>%s</address>" %xmlQuote(self.address),
-            u"<postcode>%s</postcode>" %self.postcode,
-            u"<description>%s</description>" %xmlQuote(self.description),
-            u"<info_url>%s</info_url>" %xmlQuote(self.info_url),
-            u"<comment_url>%s</comment_url>" %xmlQuote(self.comment_url),
-            u"<date_received>%s</date_received>" %self.date_received.strftime(date_format),
+            u"<council_reference><![CDATA[%s]]></council_reference>" %(self.council_reference),
+            u"<address><![CDATA[%s]]></address>" %(self.address),
+            u"<postcode><![CDATA[%s]]></postcode>" %self.postcode,
+            u"<description><![CDATA[%s]]></description>" %(self.description),
+            u"<info_url><![CDATA[%s]]></info_url>" %(self.info_url),
+            u"<comment_url><![CDATA[%s]]></comment_url>" %(self.comment_url),
+            u"<date_received><![CDATA[%s]]></date_received>" %self.date_received.strftime(date_format),
             ]
         if self.osgb_x:
             contents.append(u"<osgb_x>%s</osgb_x>" %(self.osgb_x))
