@@ -5,6 +5,12 @@ import cgi
 import re
 import datetime
 
+
+import cookielib
+
+cookie_jar = cookielib.CookieJar()
+
+
 from BeautifulSoup import BeautifulSoup
 
 from PlanningUtils import PlanningApplication, \
@@ -64,6 +70,8 @@ class PlanningExplorerParser:
     # If fetch_info_page is set to true, then we need to get a copy of the info page and store it as an attribute on current_application (naughty!)
     fetch_info_page = False
 
+    asp_args_regex = re.compile('<input[^>]*name=\"(__[A-Z]*)\"[^>]*value=\"([^\"]*)\"[^>]*>')
+
     def _modify_response(self, response):
         """For most sites, we have managed to get all the apps on a
         single page by choosing the right parameters.
@@ -90,7 +98,7 @@ class PlanningExplorerParser:
         """If an authority has info urls which are for some reason full
         of crap (like Broadland does), then this method should be overridden
         in order to tidy them up."""
-        return url
+        return ''.join(url.split())
 
     def _getHeaders(self):
         """If the authority requires any headers for the post request,
@@ -194,16 +202,17 @@ class PlanningExplorerParser:
         get_request = urllib2.Request(self.search_url)
         get_response = urllib2.urlopen(get_request)
 
+        cookie_jar.extract_cookies(get_response, get_request)
+
         html = get_response.read()
 
         # We need to find those ASP parameters such as __VIEWSTATE
         # so we can use them in the next POST
-        asp_args_regex = re.compile('<input[^>]*name=\"(__[A-Z]*)\"[^>]*value=\"([^\"]*)\"[^>]*>')
 
         # re.findall gets us a list of key value pairs.
         # We want to concatenate it with a tuple, so we must
         # make it a tuple
-        asp_args = tuple(re.findall(asp_args_regex, html))
+        asp_args = tuple(re.findall(self.asp_args_regex, html))
 
         # The post data needs to be different for different councils
         # so we have a method on each council's scraper to make it.
@@ -212,7 +221,7 @@ class PlanningExplorerParser:
         headers = self._getHeaders()
 
         request = urllib2.Request(self.search_url, post_data, headers)
-
+        cookie_jar.add_cookie_header(request)
         post_response = urllib2.urlopen(request)
 
         # We have actually been returned here by an http302 object
@@ -358,19 +367,36 @@ class CharnwoodParser(PlanningExplorerParser):
 
 class CreweParser(PlanningExplorerParser):
     use_firefox_user_agent = True
-    address_td_no = 4
+    use_referer = True
+
+    info_url_path = "Northgate/PlanningExplorer/Generic/"
+    search_url_path = "northgate/planningexplorer/generalsearch.aspx"
+    
+    results_table_attrs = {"class": "display_table"}
 
     def _getPostData(self, asp_args, search_date):
         year_month_day = search_date.timetuple()[:3]
 
         post_data = urllib.urlencode(asp_args + (
-                ("drDateReceived:_ctl0_hidden", urllib.quote('<DateChooser Value="%d%%2C%d%%2C%d"><ExpandEffects></ExpandEffects></DateChooser>' %year_month_day)),
-                ("drDateReceivedxxctl0_input", search_date.strftime(date_format)),
-                ("drDateReceived:_ctl1_hidden", urllib.quote('<DateChooser Value="%d%%2C%d%%2C%d"><ExpandEffects></ExpandEffects></DateChooser>' %year_month_day)),
-                ("drDateReceivedxxctl1_input", search_date.strftime(date_format)),
-                ("cboNumRecs", "99999"),
+                ("txtApplicantName", ""),
+                ("txtAgentName", ""),
+                ("cboStreetReferenceNumber", ""),
+                ("txtProposal", ""),
+                ("cboWardCode", ""),
+                ("cboParishCode", ""),
+                ("cboApplicationTypeCode", ""),
+                ("cboDevelopmentTypeCode", ""),
+                ("cboStatusCode", ""),
+                ("cboSelectDateValue", "DATE_RECEIVED"),
+                ("cboMonths", "1"),
+                ("cboDays", "1"),
+                ("rbGroup", "rbRange"),
+                ("dateStart", search_date.strftime(date_format)),
+                ("dateEnd", search_date.strftime(date_format)),
+                ("edrDateSelection", ""),
                 ("csbtnSearch", "Search"),
-                ))
+                )
+                                     )
 
         return post_data
 
@@ -430,26 +456,72 @@ class HackneyParser(PlanningExplorerParser):
 
         return new_response
 
-
+#txtApplicationNumber=&ctl00=DATE_REGISTERED&ctl01=1&ctl02=1&rbGroup=ctl05&ctl07_hidden=&ctl07_input=28%2F08%2F2008&ctl08_hidden=&ctl08_input=28%2F08%2F2008&edrDateSelection=1&cboApplicationTypeCode=&txtLocality=&txtPostCode=&txtPropertyName=&txtPropertyNumber=&txtSiteAddress=&txtStreetName=&csbtnSearch=Search&
     def _getPostData(self, asp_args, search_date):
+        """Note - using date registered here, not date received. There is too much time taken
+        between the council 'receiving' an app and 'registering' it for the latter to be useful."""
         post_data = urllib.urlencode(asp_args + (
-                ("ctl00", "DATE_RECEIVED"),
+                ("txtApplicationNumber", ""),
+                ("ctl00", "DATE_REGISTERED"),
+                ("ctl01", "1"),
+                ("ctl02", "1"),
                 ("rbGroup", "ctl05"),
+                ("ctl07_hidden", ""),
                 ("ctl07_input", search_date.strftime(date_format)),
+                ("ctl08_hidden", ""),
                 ("ctl08_input", search_date.strftime(date_format)),
                 ("edrDateSelection", "1"),
+                ("cboApplicationTypeCode", ""),
+                ("txtLocality", ""),
+                ("txtPostCode", ""),
+                ("txtPropertyName", ""),
+                ("txtPropertyNumber", ""),
+                ("txtSiteAddress", ""),
+                ("txtStreetName", ""),
                 ("csbtnSearch", "Search"),
-                ))
-
+                )
+                                     )
         return post_data
-            
+
 class KennetParser(BroadlandLike, PlanningExplorerParser):
     comments_path = "Northgate/PlanningExplorer/PLComments.aspx?pk=%s"
     
 class LincolnParser(PlanningExplorerParser):
     use_firefox_user_agent = True
-    results_table_attrs = {"class": "resultstable"}
+    use_referer = True
+
+    results_table_attrs = {"class": "display_table"}
     
+    search_url_path = "northgate/planningexplorer/generalsearch.aspx"
+    info_url_path = "Northgate/PlanningExplorer/Generic/"
+
+
+    def _getPostData(self, asp_args, search_date):
+        post_data = urllib.urlencode(asp_args + (
+                ("txtApplicationNumber", ""),
+                ("txtApplicantName", ""),
+                ("txtAgentName", ""),
+                ("cboApplicationTypeCode", ""),
+                ("cboStatusCode", ""),
+                ("txtPropertyName", ""),
+                ("txtPropertyNumber", ""),
+                ("cboStreetReferenceNumber", ""),
+                ("txtPostCode", ""),
+                ("cboLocality", ""),
+                ("txtProposal", ""),
+                ("cboSelectDateValue", "DATE_REGISTERED"),
+                ("cboMonths", "1"),
+                ("rbGroup", "rbDay"),
+                ("cboDays", "10"),
+                ("dateStart", search_date.strftime(date_format)),
+                ("dateEnd", search_date.strftime(date_format)),
+                ("edrDateSelection", ""),
+                ("csbtnSearch", "Search"),
+                )
+                                     )
+        return post_data
+
+
 class LiverpoolParser(PlanningExplorerParser):
     comments_email_address = "planningandbuildingcontrol@liverpool.gov.uk"
     use_firefox_user_agent = True
@@ -639,9 +711,9 @@ if __name__ == '__main__':
 #    parser = EastStaffsParser("East Staffordshire Borough Council", "East Staffs", "http://www2.eaststaffsbc.gov.uk/")
 #    parser = EppingForestParser("Epping Forest District Council", "Epping Forest", "http://plan1.eppingforestdc.gov.uk/")
 #    parser = ForestHeathParser("Forest Heath District Council", "Forest Heath", "http://195.171.177.73/")
-    parser = HackneyParser("London Borough of Hackney", "Hackney", "http://www.hackney.gov.uk/servapps/")
+#    parser = HackneyParser("London Borough of Hackney", "Hackney", "http://www.hackney.gov.uk/servapps/")
 #    parser = KennetParser("Kennet District Council", "Kennet", "http://mvm-planning.kennet.gov.uk/")
-#    parser = LincolnParser("Lincoln City Council", "Lincoln", "http://online.lincoln.gov.uk/")
+    parser = LincolnParser("Lincoln City Council", "Lincoln", "http://online.lincoln.gov.uk/")
 #    parser = LiverpoolParser("Liverpool City Council", "Liverpool", "http://www.liverpool.gov.uk/")
 #    parser = ShrewsburyParser("Shrewsbury and Atcham Borough Council", "Shrewsbury", "http://www2.shrewsbury.gov.uk/")
 #    parser = SouthNorfolkParser("South Norfolk Council", "South Norfolk", "http://planning.south-norfolk.gov.uk/")
@@ -655,7 +727,7 @@ if __name__ == '__main__':
 #    parser = WalthamForestParser("Waltham Forest", "Waltham Forest", "http://planning.walthamforest.gov.uk/")
 #    parser = ConwyParser("Conwy County Borough Council", "Conwy", "http://www.conwy.gov.uk/")
 #    parser = MertonParser("London Borough of Merton", "Merton", "http://planning.merton.gov.uk")
-    print parser.getResults(4, 9, 2008)
+    print parser.getResults(9, 9, 2008)
 
 # To Do
 
@@ -666,3 +738,7 @@ if __name__ == '__main__':
 # Charnwood
 
 # South Norfolk has no postcodes. I wonder if the postcodes are in the WAM site...
+
+# Notes:
+
+# Since the changed, Liverpool and Crewe look rather similar. They are also a little Broadlandlike. Maybe we can do some consolidation
