@@ -638,12 +638,16 @@ class WestOxfordshireParser(PlanningExplorerParser):
     use_firefox_user_agent = True
 
 class WalthamForestParser(PlanningExplorerParser):
-    address_td_no = 2
-    description_td_no = 3
-
     search_url_path = "PlanningExplorer/GeneralSearch.aspx"
     info_url_path = "PlanningExplorer/Generic/"
     use_firefox_user_agent = True
+    use_referer = True
+
+    # I know - I should change this so that the attribute is not comments_email_address, but
+    # something more general
+    comments_email_address = "https://www1.walthamforest.gov.uk/webforms/plan_comments/"
+
+    results_table_attrs = {"class": "display_table"}
 
     def _getPostData(self, asp_args, search_date):
         post_data = urllib.urlencode(asp_args + (
@@ -656,18 +660,17 @@ class WalthamForestParser(PlanningExplorerParser):
                 ("cboApplicationTypeCode", ""),
                 ("cboDevelopmentTypeCode", ""),
                 ("cboStatusCode", ""),
-                ("cboSelectDateValue", "DATE_RECEIVED"),
+                ("cboSelectDateValue", "DATE_REGISTERED"),
                 ("cboMonths", "1"),
-                ("cboDays", "1"),
+                ("cboDays", "10"),
                 ("rbGroup", "rbRange"),
                 ("dateStart", search_date.strftime(date_format)),
                 ("dateEnd", search_date.strftime(date_format)),
-                #&dateStart=01%2F03%2F2008&dateEnd=01%2F04%2F2008&
                 ("edrDateSelection", ""),
                 ("csbtnSearch", "Search"),
-                ))
+                )
+                                     )
 
-        print post_data
         return post_data
 
 class ConwyParser(BroadlandLike, PlanningExplorerParser):
@@ -713,7 +716,7 @@ if __name__ == '__main__':
 #    parser = ForestHeathParser("Forest Heath District Council", "Forest Heath", "http://195.171.177.73/")
 #    parser = HackneyParser("London Borough of Hackney", "Hackney", "http://www.hackney.gov.uk/servapps/")
 #    parser = KennetParser("Kennet District Council", "Kennet", "http://mvm-planning.kennet.gov.uk/")
-    parser = LincolnParser("Lincoln City Council", "Lincoln", "http://online.lincoln.gov.uk/")
+#    parser = LincolnParser("Lincoln City Council", "Lincoln", "http://online.lincoln.gov.uk/")
 #    parser = LiverpoolParser("Liverpool City Council", "Liverpool", "http://www.liverpool.gov.uk/")
 #    parser = ShrewsburyParser("Shrewsbury and Atcham Borough Council", "Shrewsbury", "http://www2.shrewsbury.gov.uk/")
 #    parser = SouthNorfolkParser("South Norfolk Council", "South Norfolk", "http://planning.south-norfolk.gov.uk/")
@@ -724,10 +727,10 @@ if __name__ == '__main__':
 #    parser = TamworthParser("Tamworth Borough Council", "Tamworth", "http://80.1.64.77/")
 #    parser = TraffordParser("Trafford Council", "Trafford", "http://planning.trafford.gov.uk/")
 #    parser = WestOxfordshireParser("West Oxfordshire District Council", "West Oxfordshire", "http://planning.westoxon.gov.uk/")
-#    parser = WalthamForestParser("Waltham Forest", "Waltham Forest", "http://planning.walthamforest.gov.uk/")
+    parser = WalthamForestParser("Waltham Forest", "Waltham Forest", "http://planning.walthamforest.gov.uk/")
 #    parser = ConwyParser("Conwy County Borough Council", "Conwy", "http://www.conwy.gov.uk/")
 #    parser = MertonParser("London Borough of Merton", "Merton", "http://planning.merton.gov.uk")
-    print parser.getResults(9, 9, 2008)
+    print parser.getResults(28, 8, 2008)
 
 # To Do
 

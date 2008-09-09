@@ -262,3 +262,4 @@
 "Herefordshire Council", "Herefordshire", "", "Herefordshire", "HerefordshireParser"
 "Exmoor National Park", "Exmoor", "", "Exmoor", "ExmoorParser"
 "Eastbourne Borough Council", "Eastbourne", "", "Eastbourne", "EastbourneParser"
+"Waltham Forest Council", "Waltham Forest", "http://planning.walthamforest.gov.uk/", "PlanningExplorer", "WalthamForestParser"
