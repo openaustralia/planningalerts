@@ -65,7 +65,7 @@ my $year_tree = HTML::TreeBuilder->new;
 $year_tree->parse(decode_utf8(get($year_absurl) or die "couldn't fetch day page"));
 $year_tree->eof;
 
-my $day_re = strftime('Received %e[a-z]* %B %Y', 0, 0, 0, $day, $month-1, $year-1900);
+my $day_re = strftime("Received 0?$day\[a-z]* %B %Y", 0, 0, 0, $day, $month-1, $year-1900);
 $day_re =~ s/ +/\\s+/g;
 my ($pdf_link) = $year_tree->look_down(
 	"_tag", "a",

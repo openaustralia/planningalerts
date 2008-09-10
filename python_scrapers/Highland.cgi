@@ -62,7 +62,7 @@ $month_h2 or no_results($year, $month, $day, "Cannot find month header");
 
 my $month_list = $month_h2->right;
 
-my $day_re = strftime('Planning Applications (?:[A-Za-z0-9 ]*?to )?%b[a-z]* ?%e[a-z]', 0, 0, 0, $day, $month-1, $year-1900);
+my $day_re = qr/^Planning Applications.* $day[a-z]+$/;
 
 my ($day_link) = $month_list->look_down(
 	"_tag", "a",

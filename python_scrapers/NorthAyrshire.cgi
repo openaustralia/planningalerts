@@ -51,7 +51,7 @@ my $tree = HTML::TreeBuilder->new;
 $tree->parse(decode_utf8(get('http://www.north-ayrshire.gov.uk/na/Home.nsf/OtherMenuPage?ReadForm&MenuType=Environment-Planning&DocDisplay=NoDoc&CatLevel=2||') or die "couldn't fetch index page"));
 $tree->eof;
 
-my $re = strftime('Planning Applications Received week ending %d %B %Y', 0, 0, 0, $day, $month-1, $year-1900);
+my $re = strftime("Planning Applications Received week ending 0?$day %B %Y", 0, 0, 0, $day, $month-1, $year-1900);
 
 my ($day_link) = $tree->look_down(
 	"_tag", "a",
