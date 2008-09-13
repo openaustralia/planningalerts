@@ -130,7 +130,7 @@ class PlanningExplorerParser:
         year_month_day = search_date.timetuple()[:3]
 
         post_data = urllib.urlencode(asp_args + (
-                ("_ctl0", "DATE_RECEIVED"),
+                ("_ctl0", "DATE_REGISTERED"),
                 ("rbGroup", "_ctl5"),
                 ("_ctl7_hidden", urllib.quote('<DateChooser Value="%d%%2C%d%%2C%d"><ExpandEffects></ExpandEffects></DateChooser>' %year_month_day)),
                 ("_ctl8_hidden", urllib.quote('<DateChooser Value="%d%%2C%d%%2C%d"><ExpandEffects></ExpandEffects></DateChooser>' %year_month_day)),
@@ -339,6 +339,7 @@ class BroadlandLike:
 
 class BlackburnParser(PlanningExplorerParser):
     use_firefox_user_agent = True
+
 
 class BroadlandParser(BroadlandLike, PlanningExplorerParser):
     # FIXME - is http://secure.broadland.gov.uk/mvm/Online/PL/GeneralSearch.aspx
@@ -588,7 +589,7 @@ class SouthShropshireParser(PlanningExplorerParser):
 
         post_data = urllib.urlencode(asp_args + (
                 ("edrDateSelection:htxtRange", "radRangeBetween"),
-                ("cboDateList", "DATE_RECEIVED"),
+                ("cboDateList", "DATE_REGISTERED"),
                 ("edrDateSelection:txtStart", search_date.strftime(local_date_format)),
                 ("edrDateSelection:txtEnd", search_date.strftime(local_date_format)),
                 ("edrDateSelection:txtDateReceived", "%(day)d-%(month)d-%(year)d~%(day)d-%(month)d-%(year)d" %({"day":day, "month":month, "year":year})),
@@ -717,7 +718,7 @@ if __name__ == '__main__':
 #    parser = HackneyParser("London Borough of Hackney", "Hackney", "http://www.hackney.gov.uk/servapps/")
 #    parser = KennetParser("Kennet District Council", "Kennet", "http://mvm-planning.kennet.gov.uk/")
 #    parser = LincolnParser("Lincoln City Council", "Lincoln", "http://online.lincoln.gov.uk/")
-#    parser = LiverpoolParser("Liverpool City Council", "Liverpool", "http://www.liverpool.gov.uk/")
+    parser = LiverpoolParser("Liverpool City Council", "Liverpool", "http://www.liverpool.gov.uk/")
 #    parser = ShrewsburyParser("Shrewsbury and Atcham Borough Council", "Shrewsbury", "http://www2.shrewsbury.gov.uk/")
 #    parser = SouthNorfolkParser("South Norfolk Council", "South Norfolk", "http://planning.south-norfolk.gov.uk/")
 #    parser = SouthShropshireParser("South Shropshire District Council", "South Shropshire", "http://194.201.44.102/")
@@ -727,7 +728,7 @@ if __name__ == '__main__':
 #    parser = TamworthParser("Tamworth Borough Council", "Tamworth", "http://80.1.64.77/")
 #    parser = TraffordParser("Trafford Council", "Trafford", "http://planning.trafford.gov.uk/")
 #    parser = WestOxfordshireParser("West Oxfordshire District Council", "West Oxfordshire", "http://planning.westoxon.gov.uk/")
-    parser = WalthamForestParser("Waltham Forest", "Waltham Forest", "http://planning.walthamforest.gov.uk/")
+#    parser = WalthamForestParser("Waltham Forest", "Waltham Forest", "http://planning.walthamforest.gov.uk/")
 #    parser = ConwyParser("Conwy County Borough Council", "Conwy", "http://www.conwy.gov.uk/")
 #    parser = MertonParser("London Borough of Merton", "Merton", "http://planning.merton.gov.uk")
     print parser.getResults(28, 8, 2008)
