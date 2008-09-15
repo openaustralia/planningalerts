@@ -4,25 +4,34 @@
     require_once('application.php');
     require_once('DB.php');
     
+    $swiches = getopt('d:');
+
+	$day = isset($swiches['d']) ? $swiches['d'] : null;
+		
     //Initialise
     $application_parser = new application_parser();
-    
-    //Scrape for the last X days (apps already in the database are ignored)
-    for ($i=0; $i < SCRAPE_DELAY; $i++){ 
-        $application_parser->date = getdate(strtotime("-" . $i . " days"));
-        $application_parser->run();
-    }
-    
+
+	if(isset($day)){
+        $application_parser->date = getdate(strtotime("-" . $day . " days"));
+        $application_parser->run();		
+	}else{
+	    //Scrape for the last X days (apps already in the database are ignored)
+	    for ($i=0; $i < SCRAPE_DELAY; $i++){ 
+	        $application_parser->date = getdate(strtotime("-" . $i . " days"));
+	        $application_parser->run();
+	    }
+	}
+
     //Send email
     $application_parser->email_log();
-    
+
     //Parser class
     class application_parser{
 
     //Properties
     var $date;
     var $log = array();
-    var $sleep_interval = 5; //how long to wait between scraping each feed
+    var $sleep_interval = 2; //how long to wait between scraping each feed
      
     //Constructor
    function application_parser (){
