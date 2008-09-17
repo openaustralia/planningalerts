@@ -38,7 +38,7 @@
              for ($i=0; $i < sizeof($user_results); $i++){ 
 
                  //Find applications for that user
-                 $sql = "select council_reference, address, 
+                 $sql = "select distinct council_reference, address, 
                             postcode, description, info_tinyurl, 
                             comment_tinyurl, map_url, full_name
                         from application
