@@ -112,10 +112,10 @@ if __name__ == '__main__':
 #    cumbria_parser = AtriumePlanningParser("Cumbria County Council", "Cumbria", "http://217.114.50.149:7778/ePlanningOPS/loadResults.do")
 
 #    print cumbria_parser.getResults(22,11,2007)
-    parser = AtriumePlanningParser("Lincolnshire County Council", "Lincolnshire", "http://eplanning.lincolnshire.gov.uk/ePlanning/loadResults.do")
+#    parser = AtriumePlanningParser("Lincolnshire County Council", "Lincolnshire", "http://eplanning.lincolnshire.gov.uk/ePlanning/loadResults.do")
 
 #    print cumbria_parser.getResults(22,11,2007)
 
-    #parser = AtriumePlanningParser("Dorset County Council", "Dorset", "http://www.dorsetforyou.com/ePlanning/loadResults.do")
+    parser = AtriumePlanningParser("Dorset County Council", "Dorset", "http://195.49.180.81/ePlanning/loadResults.do")
 #    parser = AtriumePlanningParser("Somerset County Council", "Somerset", "http://webapp1.somerset.gov.uk/ePlanning/loadResults.do")
-    print parser.getResults(10,3,2008)
+    print parser.getResults(29,9,2008)

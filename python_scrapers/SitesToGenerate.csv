@@ -183,7 +183,7 @@
 "Boston Borough Council", "Boston", "http://195.224.121.199/swiftlg/apas/run/", "SwiftLG", "SwiftLGParser"
 "Swansea City and County", "Swansea", "http://www2.swansea.gov.uk/", "PlanningExplorer", "SwanseaParser"
 "Shrewsbury and Atcham Borough Council", "Shrewsbury", "http://www2.shrewsbury.gov.uk/", "PlanningExplorer", "ShrewsburyParser"
-"Dorset County Council", "Dorset", "http://www.dorsetforyou.com/ePlanning/loadResults.do", "AtriumePlanning", "AtriumePlanningParser"
+"Dorset County Council", "Dorset", "http://195.49.180.81/ePlanning/loadResults.do", "AtriumePlanning", "AtriumePlanningParser"
 "Somerset County Council", "Somerset", "http://webapp1.somerset.gov.uk/ePlanning/loadResults.do", "AtriumePlanning", "AtriumePlanningParser"
 "Mid Suffolk District Council", "Mid Suffolk", "http://planning.midsuffolk.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "AcolnetParser"
 "London Borough of Southwark", "Southwark", "http://planningonline.southwarksites.com/planningonline2/AcolNetCGI.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "SouthwarkParser"
