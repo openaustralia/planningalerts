@@ -22,17 +22,46 @@ our $UA = LWP::UserAgent->new(env_proxy => 1,
                               requests_redirectable => [ 'GET', 'HEAD', 'POST' ]);
 
 # Post the URL to get an initial blank form
-my $state = get_state(do_post());
+my ($state, $eventvalidation) = get_state(do_post());
 
 # Do the search
 my $page = do_post({"__VIEWSTATE" => $state,
-                    "Template:_ctl12:_ctl0:btnSearch" => "Search",
-                    "Template:_ctl12:_ctl0:tbRegistrationFromDay" => $query->param("day"),
-                    "Template:_ctl12:_ctl0:tbRegistrationFromMon" => $query->param("month"),
-                    "Template:_ctl12:_ctl0:tbRegistrationFromYear" => $query->param("year"),
-                    "Template:_ctl12:_ctl0:tbRegistrationToDay" => $query->param("day"),
-                    "Template:_ctl12:_ctl0:tbRegistrationToMon" => $query->param("month"),
-                    "Template:_ctl12:_ctl0:tbRegistrationToYear" => $query->param("year")});
+		    "searchcriteria" => "Search",
+		    "Template\$ctl10\$ctl00\$rbSearchType2" => "rbOther",
+		    "Template\$ctl10\$ctl00\$tbApplicationReference" => "",
+		    "Template\$ctl10\$ctl00\$tbHouseNumber" => "",
+		    "Template\$ctl10\$ctl00\$tbStreetName" => "",
+		    "Template\$ctl10\$ctl00\$tbTownVillage" => "",
+		    "Template\$ctl10\$ctl00\$tbPostCode" => "",
+		    "Template\$ctl10\$ctl00\$tbApplicant" => "",
+		    "Template\$ctl10\$ctl00\$tbAgent" => "",
+		    "Template\$ctl10\$ctl00\$tbRegistrationFromDay" => "02",
+		    "Template\$ctl10\$ctl00\$tbRegistrationFromMon" => "10",
+		    "Template\$ctl10\$ctl00\$tbRegistrationFromYear" => "2008",
+		    "Template\$ctl10\$ctl00\$tbRegistrationToDay" => "02",
+		    "Template\$ctl10\$ctl00\$tbRegistrationToMon" => "10",
+		    "Template\$ctl10\$ctl00\$tbRegistrationToYear" => "2008",
+		    "Template\$ctl10\$ctl00\$tbDecisionFromDay" => "",
+		    "Template\$ctl10\$ctl00\$tbDecisionFromMon" => "",
+		    "Template\$ctl10\$ctl00\$tbDecisionFromYear" => "",
+		    "Template\$ctl10\$ctl00\$tbDecisionToDay" => "",
+		    "Template\$ctl10\$ctl00\$tbDecisionToMon" => "",
+		    "Template\$ctl10\$ctl00\$tbDecisionToYear" => "",
+		    "Template\$ctl10\$ctl00\$tbAppRecFromDay" => "",
+		    "Template\$ctl10\$ctl00\$tbAppRecFromMon" => "",
+		    "Template\$ctl10\$ctl00\$tbAppRecFromYear" => "",
+		    "Template\$ctl10\$ctl00\$tbAppRecToDay" => "",
+		    "Template\$ctl10\$ctl00\$tbAppRecToMon" => "",
+		    "Template\$ctl10\$ctl00\$tbAppRecToYear" => "",
+		    "Template\$ctl10\$ctl00\$tbAppDecFromDay" => "",
+		    "Template\$ctl10\$ctl00\$tbAppDecFromMon" => "",
+		    "Template\$ctl10\$ctl00\$tbAppDecFromYear" => "",
+		    "Template\$ctl10\$ctl00\$tbAppDecToDay" => "",
+		    "Template\$ctl10\$ctl00\$tbAppDecToMon" => "",
+		    "Template\$ctl10\$ctl00\$tbAppDecToYear" => "",
+		    "Template\$ctl10\$ctl00\$btnSearch" => "Search",
+		    "__EVENTVALIDATION" => $eventvalidation
+		   });
 
 # Output an HTTP response header
 print $query->header(-type  => "text/xml");
@@ -53,6 +82,7 @@ my $table = $page->look_down("_tag" => "table", "class" => "FormDataGrid");
 # Process each row of the results
 foreach my $row ($table->look_down("_tag" => "tr"))
 {
+    $Writer->dataElement("test", "in for loop");
     my @cells = $row->look_down("_tag" => "td");
 
     if ($cells[0]->attr("class") eq "FormGridDataItem" ||
@@ -93,8 +123,9 @@ sub get_state
 {
     my $page = shift;
     my $viewstate = $page->look_down("_tag" => "input", "name" => "__VIEWSTATE");
+    my $eventvalidation = $page->look_down("_tag" => "input", "name" => "__EVENTVALIDATION");
 
-    return $viewstate->attr("value");
+    return ($viewstate->attr("value"), $eventvalidation->attr("value"));
 }
 
 # Post to the planning search page
