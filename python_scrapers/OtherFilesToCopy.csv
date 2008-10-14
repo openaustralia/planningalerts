@@ -1,6 +1,7 @@
 "filename", "permissions"
 "PublicAccess.py", "420"
 "PlanningUtils.py", "420"
+"HTTPHandlers.py", "420"
 "SouthOxfordshireParser.py", "420"  
 "SouthOxfordshire.cgi", "493"
 "ApplicationSearchServletParser.py", "420"
@@ -58,3 +59,4 @@
 "Herefordshire.py", "420"
 "Exmoor.py", "420"
 "Eastbourne.py", "420"
+"Gosport.py", "420"

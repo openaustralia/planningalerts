@@ -264,3 +264,4 @@
 "Eastbourne Borough Council", "Eastbourne", "", "Eastbourne", "EastbourneParser"
 "Waltham Forest Council", "Waltham Forest", "http://planning.walthamforest.gov.uk/", "PlanningExplorer", "WalthamForestParser"
 "Caerphilly County Borough Council", "Caerphilly", "http://publicaccess.caerphilly.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
+"Gosport Borough Council", "Gosport", "", "Gosport", "GosportParser"

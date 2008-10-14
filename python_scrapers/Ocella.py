@@ -18,16 +18,9 @@ search_date_format = "%d-%m-%Y" # Format used for the accepted date when searchi
 
 possible_date_formats = [search_date_format, "%d/%m/%Y"]
 
-class CookieAddingHTTPRedirectHandler(urllib2.HTTPRedirectHandler):
-    """The standard python HttpRedirectHandler doesn't add a cookie to the new request after a 302. This handler does."""
-    def redirect_request(self, req, fp, code, msg, headers, newurl):
-        new_request = urllib2.HTTPRedirectHandler.redirect_request(self, req, fp, code, msg, headers, newurl)
-        # We need to add a cookie from the cookie_jar
-        cookie_jar.add_cookie_header(new_request)
+from HTTPHandlers import CookieAddingHTTPRedirectHandler
 
-        return new_request
-
-cookie_handling_opener = urllib2.build_opener(CookieAddingHTTPRedirectHandler())
+cookie_handling_opener = urllib2.build_opener(CookieAddingHTTPRedirectHandler(cookie_jar))
 
 
 class OcellaParser:
@@ -206,7 +199,7 @@ if __name__ == '__main__':
 #    parser = OcellaParser("North East Lincolnshire", "North East Lincolnshire", "http://planning.nelincs.gov.uk/portal/page?_pageid=33,64104&_dad=portal&_schema=PORTAL")
 #    parser = OcellaParser("Uttlesford", "Uttlesford", "http://planning.uttlesford.gov.uk/portal/page/portal/plan/weekly")
 #    parser = OcellaParser("Bridgend", "Bridgend", "http://eplan.bridgend.gov.uk:7778/portal/page?_pageid=55,31779&_dad=portal&_schema=PORTAL")
-    parser = OcellaParser("Havering", "Havering", "http://planning.havering.gov.uk/portal/page?_pageid=33,1026&_dad=portal&_schema=PORTAL")
+#    parser = OcellaParser("Havering", "Havering", "http://planning.havering.gov.uk/portal/page?_pageid=33,1026&_dad=portal&_schema=PORTAL")
 #    parser = OcellaParser("Castle Point", "Castle Point", "http://planning.castlepoint.gov.uk/portal/page?_pageid=35,38205&_dad=portal&_schema=PORTAL")
     parser = OcellaParser("Great Yarmouth", "Great Yarmouth", "http://planning.great-yarmouth.gov.uk/portal/page/portal/plan/weekly")
 
