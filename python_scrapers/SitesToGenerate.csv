@@ -266,3 +266,4 @@
 "Caerphilly County Borough Council", "Caerphilly", "http://publicaccess.caerphilly.gov.uk/PublicAccess/tdc/", "PublicAccess", "PublicAccessParser"
 "Gosport Borough Council", "Gosport", "", "Gosport", "GosportParser"
 "West Dorset District Council", "West Dorset", "", "WestDorset", "WestDorsetParser"
+"Kirklees Council", "Kirklees", "", "Kirklees", "KirkleesParser"
