@@ -16,7 +16,6 @@
 "SwiftLG.py", "420"
 "Dacorum.cgi", "493"
 "SouthSomerset.cgi", "493"
-"WestDorset.cgi", "493"
 "Christchurch.cgi", "493"
 "WAM.py", "420"
 "Planet.py", "420"
@@ -60,3 +59,4 @@
 "Exmoor.py", "420"
 "Eastbourne.py", "420"
 "Gosport.py", "420"
+"WestDorset.py", "420"
