@@ -19,15 +19,14 @@ def fixNewlines(text):
 
 postcode_regex = re.compile("[A-Z][A-Z]?\d(\d|[A-Z])? ?\d[A-Z][A-Z]")
 
-def getPostcodeFromText(text):
+def getPostcodeFromText(text, default_postcode="No Postcode"):
     """This function takes a piece of text and returns the first
     bit of it that looks like a postcode."""
 
     postcode_match = postcode_regex.search(text)
 
-    if postcode_match is not None:
-        return postcode_match.group()
-    
+    return postcode_match.group() if postcode_match else default_postcode
+
 
 class PlanningAuthorityResults:
     """This class represents a set of results of a planning search.
@@ -69,10 +68,10 @@ class PlanningAuthorityResults:
 
 
 class PlanningApplication:
-    def __init__(self, no_postcode_default='No postcode'):
+    def __init__(self):
         self.council_reference = None
 	self.address = None
-	self.postcode = no_postcode_default
+	self.postcode = None
 	self.description = None
 	self.info_url = None
 	self.comment_url = None
@@ -103,6 +102,9 @@ class PlanningApplication:
         
     def displayXML(self):
         #print self.council_reference, self.address, self.postcode, self.description, self.info_url, self.comment_url, self.date_received
+
+        if not self.postcode:
+            self.postcode = getPostcodeFromText(self.address)
 
 	contents = [
             u"<council_reference><![CDATA[%s]]></council_reference>" %(self.council_reference),
