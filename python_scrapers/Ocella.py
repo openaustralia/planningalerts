@@ -198,13 +198,13 @@ if __name__ == '__main__':
 #    parser = OcellaParser("Middlesbrough", "Middlesbrough", "http://planserv.middlesbrough.gov.uk/portal/page?_pageid=33,4178&_dad=portal&_schema=PORTAL")
 #    parser = OcellaParser("North East Lincolnshire", "North East Lincolnshire", "http://planning.nelincs.gov.uk/portal/page?_pageid=33,64104&_dad=portal&_schema=PORTAL")
 #    parser = OcellaParser("Uttlesford", "Uttlesford", "http://planning.uttlesford.gov.uk/portal/page/portal/plan/weekly")
-#    parser = OcellaParser("Bridgend", "Bridgend", "http://eplan.bridgend.gov.uk:7778/portal/page?_pageid=55,31779&_dad=portal&_schema=PORTAL")
+    parser = OcellaParser("Bridgend", "Bridgend", "http://eplan.bridgend.gov.uk:7778/portal/page?_pageid=55,31779&_dad=portal&_schema=PORTAL")
 #    parser = OcellaParser("Havering", "Havering", "http://planning.havering.gov.uk/portal/page?_pageid=33,1026&_dad=portal&_schema=PORTAL")
 #    parser = OcellaParser("Castle Point", "Castle Point", "http://planning.castlepoint.gov.uk/portal/page?_pageid=35,38205&_dad=portal&_schema=PORTAL")
-    parser = OcellaParser("Great Yarmouth", "Great Yarmouth", "http://planning.great-yarmouth.gov.uk/portal/page/portal/plan/weekly")
+#    parser = OcellaParser("Great Yarmouth", "Great Yarmouth", "http://planning.great-yarmouth.gov.uk/portal/page/portal/plan/weekly")
 
 
-    print parser.getResults(21,5,2008)
+    print parser.getResults(21,11,2008)
 
 #TODO
 

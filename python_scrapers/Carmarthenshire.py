@@ -74,5 +74,5 @@ class CarmarthenshireParser:
 
 if __name__ == '__main__':
     parser = CarmarthenshireParser()
-    print parser.getResults(8,8,2008)
+    print parser.getResults(20,11,2008)
 

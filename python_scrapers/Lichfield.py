@@ -7,6 +7,7 @@ ignoring the date passed in.
 
 import urllib2
 import urlparse
+import re
 
 import datetime
 
@@ -17,6 +18,8 @@ from PlanningUtils import PlanningApplication, \
     getPostcodeFromText
 
 date_format = "%d/%m/%Y"
+
+date_received_re = re.compile("(\d\d?)[a-z]{2} ([a-zA-Z]*) (\d{4})")
 
 class LichfieldParser:
     def __init__(self, *args):
@@ -51,8 +54,12 @@ class LichfieldParser:
             info_response = urllib2.urlopen(application.info_url)
             info_soup = BeautifulSoup.BeautifulSoup(info_response.read())
 
-            application.description = info_soup.find(text="Proposal:").findPrevious("div").contents[1].strip()
-            application.date_received = datetime.datetime.strptime(info_soup.find(text="Date Application Valid:").findNext("span").string.strip(), date_format).date()
+            application.description = info_soup.find(text="Proposal").findNext(text=True).strip()
+            date_received_str = info_soup.find(text="Date Application Valid").findNext(text=True).split(",")[1].strip()
+
+            # This is a nasty botch, but the easiest way I can see to get a date out of this is to make another string and use strptime
+            better_date_str = "%s %s %s" %date_received_re.match(date_received_str).groups()
+            application.date_received = datetime.datetime.strptime(better_date_str, "%d %B %Y").date()
             application.comment_url = info_soup.find("a", title="Comment on this planning application.")['href']
 
             self._results.addApplication(application)
@@ -64,4 +71,4 @@ class LichfieldParser:
 
 if __name__ == '__main__':
     parser = LichfieldParser()
-    print parser.getResults(12,10,2008)
+    print parser.getResults(20,11,2008)

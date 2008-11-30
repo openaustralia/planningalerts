@@ -82,7 +82,6 @@ my $table = $page->look_down("_tag" => "table", "class" => "FormDataGrid");
 # Process each row of the results
 foreach my $row ($table->look_down("_tag" => "tr"))
 {
-    $Writer->dataElement("test", "in for loop");
     my @cells = $row->look_down("_tag" => "td");
 
     if ($cells[0]->attr("class") eq "FormGridDataItem" ||
