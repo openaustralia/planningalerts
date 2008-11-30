@@ -350,8 +350,8 @@ class PublicAccessPropertyPageParser(HTMLParser.HTMLParser):
 
 
 if __name__ == '__main__':
-    day = 1
-    month = 8
+    day = 20
+    month = 11
     year = 2008
 
     #parser = PublicAccessParser("East Northants", "East Northants", "http://publicaccesssrv.east-northamptonshire.gov.uk/PublicAccess/tdc/", True)

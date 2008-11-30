@@ -6,7 +6,7 @@ import cgi
 import re
 import datetime
 
-from BeautifulSoup import BeautifulSoup
+import BeautifulSoup
 
 from PlanningUtils import getPostcodeFromText, \
     PlanningAuthorityResults, \
@@ -85,7 +85,7 @@ class SwiftLGParser:
 
         # Check for the no results warning
         if not contents.count("No Matching Applications Found"):
-            soup = BeautifulSoup(contents)
+            soup = BeautifulSoup.BeautifulSoup(contents)
 
             # Get the links to later pages of results.
             later_pages = soup.findAll("a", {"href": re.compile("WPHAPPSEARCHRES\.displayResultsURL.*StartIndex=\d*.*")})
@@ -118,7 +118,7 @@ class SwiftLGParser:
                     this_page_url = urlparse.urljoin(self.base_url, url)
                     response = urllib2.urlopen(this_page_url)
                     contents = response.read()
-                    soup = BeautifulSoup(contents)
+                    soup = BeautifulSoup.BeautifulSoup(contents)
 
                 results_table = self._findResultsTable(soup)#.body.find("table", {"class": "apas_tbl"})
 
@@ -152,11 +152,7 @@ class SwiftLGParser:
                     #LAND ADJ. BRAMBLING, HAWKENBURY ROAD, HAWKENBURY, TN120EA
                     #</td>
 
-                    # For some reason, this doesn't work:
-                    #address = tds[2].string
-
-                    # But this does
-                    address = tds[2].input.next.strip()
+                    address = ' '.join([x for x in tds[2].contents if isinstance(x, BeautifulSoup.NavigableString)]).strip()
 
                     self._current_application.address = address
                     self._current_application.postcode = getPostcodeFromText(address)
@@ -190,7 +186,8 @@ class MacclesfieldParser(SwiftLGParser):
 
 class MoleValleyParser(SwiftLGParser):
     def _findResultsTable(self, soup):
-        return soup.findAll("table")[5]
+#        import pdb;pdb.set_trace()
+        return soup.findAll("table")[2]
 
 class SloughParser(SwiftLGParser):
     def _findResultsTable(self, soup):
@@ -207,18 +204,18 @@ if __name__ == '__main__':
 #    parser = IslingtonParser("Islington", "Islington", "https://www.islington.gov.uk/onlineplanning/apas/run/")
 #    parser = LakeDistrictParser("Lake District", "Lake District", "http://www.lake-district.gov.uk/swiftlg/apas/run/")
 #    parser = SwiftLGParser("Maidstone Borough Council", "Maidstone", "http://digitalmaidstone.co.uk/swiftlg/apas/run/")
-#    parser = MoleValleyParser("Mole Valley", "Mole Valley", "http://www.molevalley.gov.uk/swiftlg/apas/run/")
+    parser = MoleValleyParser("Mole Valley", "Mole Valley", "http://www.molevalley.gov.uk/swiftlg/apas/run/")
 #    parser = SwiftLGParser("Pembrokeshire County Council", "Pembrokeshire", "http://planning.pembrokeshire.gov.uk/swiftlg/apas/run/")
 #    parser = SwiftLGParser("Rochdale Metropolitan Borough Council", "Rochdale", "http://www.rochdale.gov.uk/swiftlg/apas/run/")
 #    parser = SloughParser("Slough", "Slough", "http://www2.slough.gov.uk/swiftlg/apas/run/")
-    parser = SwiftLGParser("Snowdonia National Park", "Snowdonia", "http://www.snowdonia-npa.gov.uk/swiftlg/apas/run/")
+#    parser = SwiftLGParser("Snowdonia National Park", "Snowdonia", "http://www.snowdonia-npa.gov.uk/swiftlg/apas/run/")
 #    parser = SwiftLGParser("St Edmundsbury", "Bury St Edmunds", "http://www.stedmundsbury.gov.uk/swiftlg/apas/run/")
 #    parser = MacclesfieldParser("Macclesfield", "Macclesfield", "http://www.planportal.macclesfield.gov.uk/swiftlg/apas/run/")
 #    parser = SwiftLGParser("Daventry District Council", "Daventry", "http://62.231.149.150/swiftlg/apas/run/wphappcriteria.display")
 #    parser = SwiftLGParser("Warrington Borough Council", "Warrington", "http://212.248.237.123:8080/swiftlg/apas/run/wphappcriteria.display")
 #    parser = SwiftLGParser("Cannock Chase District Council", "Cannock Chase", "http://planning.cannockchasedc.com/swiftlg/apas/run/wphappcriteria.display")
 #    parser = SwiftLGParser("London Borough of Enfield", "Enfield", "http://forms.enfield.gov.uk/swiftlg/apas/run/wphappcriteria.display")
-    print parser.getResults(1,8,2008)
+    print parser.getResults(20,11,2008)
 
 
 # To Do:
