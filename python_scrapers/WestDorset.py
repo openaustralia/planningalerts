@@ -84,5 +84,5 @@ class WestDorsetParser:
 
 if __name__ == '__main__':
     parser = WestDorsetParser()
-    print parser.getResults(1,10,2008)
+    print parser.getResults(20,11,2008)
 

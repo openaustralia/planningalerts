@@ -164,7 +164,7 @@
 "South Shropshire District Council", "South Shropshire", "http://194.201.44.102/", "PlanningExplorer", "SouthShropshireParser"
 "South Tyneside Council", "South Tyneside", "http://poppy.southtyneside.gov.uk/",  "PlanningExplorer", "SouthTynesideParser"
 "Stockport Metropolitan Borough Council", "Stockport", "http://planning.stockport.gov.uk/PlanningData/AcolNetCGI.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch", "AcolnetParser", "AcolnetParser"
-"Tamworth Borough Council", "Tamworth", "http://80.1.64.77/", "PlanningExplorer", "TamworthParser"
+"Tamworth Borough Council", "Tamworth", "http://80.1.64.91/", "PlanningExplorer", "TamworthParser"
  "Trafford Council", "Trafford", "http://planning.trafford.gov.uk/", "PlanningExplorer", "TraffordParser"
 "West Oxfordshire District Council", "West Oxfordshire", "http://planning.westoxon.gov.uk/", "PlanningExplorer", "WestOxfordshireParser"
 "Dudley Metropolitan Borough Council", "Dudley", "http://www2.dudley.gov.uk/swiftlg/apas/run/", "SwiftLG", "SwiftLGParser"
