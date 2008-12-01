@@ -6,7 +6,7 @@ require_once('DB.php');
 class Application{
     var $authority_id = 0;
 	var $council_reference = "";
-	var $date_recieved = "";
+	var $date_received = "";
 	var $date_scraped ="";
 	var $address = "";
 	var $postcode = "";
@@ -63,6 +63,7 @@ class Application{
           $x = $db->quote($this->x);     
           $y = $db->quote($this->y);     
           $date_scraped = $db->quote($this->date_scraped);     
+          $date_received = $db->quote($this->date_received);     
           $map_url = $db->quote($this->map_url);                                               
 
         $sql ="insert into application 
@@ -79,6 +80,7 @@ class Application{
             x,
             y,
             date_scraped,
+            date_recieved,
             map_url
             )
             values(
@@ -94,6 +96,7 @@ class Application{
             $x,
             $y,
             $date_scraped,
+            $date_received,
             $map_url
             )";
             

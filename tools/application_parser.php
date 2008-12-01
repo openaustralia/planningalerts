@@ -135,7 +135,18 @@
                 //Grab basic data from the xml
                 $application->authority_id = $authority_id;
                 $application->council_reference = $parsed_application->council_reference;
-                $application->date_received = $parsed_application->date_received;            
+
+                $date_received_dmy = split("/", $parsed_application->date_received);
+                if (count($date_received_dmy) == 3){
+                    $application->date_received = "$date_received_dmy[2]-$date_received_dmy[1]-$date_received_dmy[0]";
+                } else {
+                    // Make a best effort attempt to parse the date
+                    $ts = strtotime($parsed_application->date_received);
+                    if ($ts != FALSE && $ts != -1) {
+                        $application->date_received = date("Y-m-d", $ts);
+                    }
+                }
+
                 $application->address = $parsed_application->address;            
                 $application->postcode = $parsed_application->postcode;                        
                 $application->description = $parsed_application->description;
