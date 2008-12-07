@@ -19,7 +19,7 @@ class news_mailer {
          //Grab all the users
          $sql = "select user_id, email, postcode, bottom_left_x, bottom_left_y, top_right_x, top_right_y, alert_area_size, confirm_id
             from user
-            where confirmed = 1 and user_id = 5959";  
+            where confirmed = 1";  
 
          $user_results = $db->getAll($sql);
          
