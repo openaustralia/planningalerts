@@ -18,7 +18,7 @@
 
     //Run
      function run (){
-         
+
         $db = DB::connect(DB_CONNECTION_STRING);
                  
          //Grab all the users

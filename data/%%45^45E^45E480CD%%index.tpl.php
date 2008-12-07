@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.16, created on 2008-02-21 14:24:04
+<?php /* Smarty version 2.6.16, created on 2008-09-28 20:51:25
          compiled from index.tpl */ ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "header.tpl", 'smarty_include_vars' => array()));
@@ -57,6 +57,8 @@ unset($_smarty_tpl_vars);
 <div id="divSiteUpdates">
     <h4>Recent site updates</h4>
     <ul class="nobullets">
+        <li><em>May 2008</em>Now has 250 Local authorities covered</li>        
+        <li><em>July 2007</em>Shortlisted for New Statesman New Media Award</li>        
         <li><em>July 2007</em>Added 21 councils inc. Lewisham, New Forest National Park and Edinburgh </li>        
         <li><em>April 2007</em>Added 50 more councils.<li>  
         <li><em>March 2007</em> Added an API and a few more councils (inc. Islington and Hackney)</li>
