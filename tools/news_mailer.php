@@ -19,7 +19,7 @@ class news_mailer {
          //Grab all the users
          $sql = "select distinct email            
              from user
-             where confirmed = 1 and user_id = 5959";
+             where confirmed = 1";
 
          $user_results = $db->getAll($sql);
          
