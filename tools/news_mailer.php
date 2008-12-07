@@ -17,9 +17,9 @@ class news_mailer {
         $db = DB::connect(DB_CONNECTION_STRING);
 
          //Grab all the users
-         $sql = "select user_id, email, postcode, bottom_left_x, bottom_left_y, top_right_x, top_right_y, alert_area_size, confirm_id
-            from user
-            where confirmed = 1";  
+         $sql = "select distinct email            
+             from user
+             where confirmed = 1 and user_id = 5959";
 
          $user_results = $db->getAll($sql);
          
@@ -40,7 +40,7 @@ class news_mailer {
                     
                     //Send the email
                     if($email_text !=""){
-                        send_text_email($user_results[$i][1], EMAIL_FROM_NAME, EMAIL_FROM_ADDRESS, "StreetWire - a new service from PlanningAlerts",  $email_text);
+                        send_text_email($user_results[$i][0], EMAIL_FROM_NAME, EMAIL_FROM_ADDRESS, "StreetWire - a new service from PlanningAlerts",  $email_text);
                     }
 
                 }
