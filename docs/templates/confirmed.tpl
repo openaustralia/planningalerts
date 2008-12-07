@@ -10,7 +10,7 @@
                 <h4>Find out even more about your local area using StreetWire</h4>
                 <p>
                     StreetWire is like PlanningAlerts for everything. Including Licensing Applications, 
-                    local news and crime.
+                    local news, crime and missing animals.
                     <br/>
                     <a href="http://www.streetwire.org">Visit StreetWire</a>
                 </p>
