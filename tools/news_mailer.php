@@ -8,8 +8,8 @@
     $news_mailer = new news_mailer();
     $news_mailer->run();
 
-    //class
-    class news_mailer {
+//class
+class news_mailer {
 
     //Run
      function run (){
@@ -48,8 +48,6 @@
              }
 
          }
-
-     }
      
     }
 
