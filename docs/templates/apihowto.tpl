@@ -92,7 +92,7 @@
     	   Return applications for a specific planning authority (e.g. a local council) by authority short name.
     	</p>
     	<code>
-    	http://www.planningalerts.com/api.php?<strong>call</strong>=authority<br/>&<strong>authority_short_name</strong>=[some name]
+    	http://www.planningalerts.com/api.php?<strong>call</strong>=authority<br/>&<strong>authority</strong>=[some name]
     	</code>
     	<p class="apiexamples">
     	    <a href="http://www.planningalerts.com/api.php?call=authority&authority=Scottish%20Borders">view example</a>
