@@ -1,4 +1,6 @@
-# This is the parser for %(authority_name)s.
+#!/usr/bin/env python
+
+# This is the parser for %(full_name)s.
 # it is generated from the file CGITemplate
 
 import cgi
@@ -12,8 +14,8 @@ month = form.getfirst('month')
 year = form.getfirst('year')
 
 
-authority_name = "%(authority_name)s"
-authority_short_name = "%(authority_short_name)s"
+full_name = "%(full_name)s"
+short_name = "%(short_name)s"
 base_url = "%(base_url)s"
 
 #print "Content-Type: text/html"     # HTML is following
@@ -22,8 +24,8 @@ base_url = "%(base_url)s"
 print "Content-Type: text/xml; charset=utf-8"     # XML is following
 print
 
-import %(module)s
-parser = %(module)s.%(parser)s(authority_name, authority_short_name, base_url)
+import %(python_module)s
+parser = %(python_module)s.%(parser_class)s(full_name, short_name, base_url)
 
 xml = parser.getResults(day, month, year)
 print xml.encode("utf-8")                          # print the xml

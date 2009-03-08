@@ -36,10 +36,20 @@ cp -R data $BACKUP_DIRECTORY;
 );
 echo "Done"
 echo
+echo "Enter mysql db name:"
+read MYSQL_DB_NAME
+echo $MYSQL_DB_NAME
+export $MYSQL_DB_NAME
+echo "Enter mysql username:"
+read MYSQL_USERNAME
+export $MYSQL_USERNAME
+echo "Enter mysql password:"
+read MYSQL_PASSWORD
+export $MYSQL_PASSWORD
 
 echo "Generating python scrapers"
 # Generate the python cgi files
-(cd python_scrapers; ./generateCGIScripts.py)
+./generateCGIScripts.py
 echo "Done generating python scrapers"
 
 # Copy the new versions of docs, cgi-bin and tools to PLANNING_ROOT
