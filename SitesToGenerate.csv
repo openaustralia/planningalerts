@@ -166,7 +166,7 @@ full_name,short_name,planning_email,feed_url,external,disabled,notes,base_url,py
 "Leicestershire County Council",Leicestershire,,,,,,,Leicestershire,LeicestershireParser,
 "Lewes District Council",Lewes,,,,,,http://planning.lewes.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
 "London Borough of Lewisham",Lewisham,,,,,,http://acolnet.lewisham.gov.uk/lewis-xslpagesdc/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.PgeSearch,AcolnetParser,LewishamParser,
-"Lichfield District Council",Lichfield,,http://www2.lichfielddc.gov.uk/planning/alerts.php?day={day}&month={month}&year={year},1,,,,Lichfield,LichfieldParser,
+"Lichfield District Council",Lichfield,,,,,,,Lichfield,LichfieldParser,
 "Lincoln City Council",Lincoln,,,,,,http://online.lincoln.gov.uk/,PlanningExplorer,LincolnParser,
 "Lincolnshire County Council",Lincolnshire,,,,,,http://eplanning.lincolnshire.gov.uk/ePlanning/loadResults.do,AtriumePlanning,AtriumePlanningParser,
 "Liverpool City Council",Liverpool,,http://duncan.devel.disruptiveproactivity.com/Liverpool.cgi?day={day}&month={month}&year={year},1,,,http://www.liverpool.gov.uk/,PlanningExplorer,LiverpoolParser,
