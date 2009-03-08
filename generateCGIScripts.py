@@ -48,8 +48,6 @@ csv_reader = csv.DictReader(
 template= open(template_filename).read()
 
 # Get a mysql cursor
-import pdb;pdb.set_trace()
-
 mysql_connection = MySQLdb.connect(
     db=environ['MYSQL_DB_NAME'],
     user=environ['MYSQL_USERNAME'],
@@ -65,7 +63,7 @@ php_scraper_location = "/scrapers/%(php_scraper)s.php?day={day}&month={month}&ye
 authority_select_query = "SELECT * FROM authority WHERE short_name = '%(short_name)s';"
 
 # FIXME: Both of these queries should set planning_email and notes.
-authority_insert_query = 'INSERT INTO authority (full_name, short_name, feed_url, external, disabled) values ("%(full_name)s", "%(short_name)s", "%(feed_url)s", %(external)s, %(disabled)s);'
+authority_insert_query = 'INSERT INTO authority (full_name, short_name, feed_url, external, disabled, planning_email) values ("%(full_name)s", "%(short_name)s", "%(feed_url)s", %(external)s, %(disabled)s, "%(planning_email)s");'
 authority_update_query = 'UPDATE authority SET full_name="%(full_name)s", external="%(external)s", disabled=%(disabled)s, feed_url="%(feed_url)s", external=%(external)s WHERE short_name = "%(short_name)s";'
 
 for site_dict in csv_reader:

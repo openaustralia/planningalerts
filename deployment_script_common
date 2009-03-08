@@ -38,7 +38,6 @@ echo "Done"
 echo
 echo "Enter mysql db name:"
 read MYSQL_DB_NAME
-echo $MYSQL_DB_NAME
 export MYSQL_DB_NAME
 echo "Enter mysql username:"
 read MYSQL_USERNAME
