@@ -129,7 +129,7 @@ full_name,short_name,planning_email,feed_url,external,disabled,notes,base_url,py
 "London Borough of Hackney",Hackney,,,,,,http://www.hackney.gov.uk/servapps/,PlanningExplorer,HackneyParser,
 "Halton Borough Council",Halton,,,,,,,Halton,HaltonParser,
 "Hambleton District Council",Hambleton,,,,,,http://planning.hambleton.gov.uk/publicaccess/tdc/,PublicAccess,PublicAccessParser,
-"London Borough Of Hammersmith and Fulham","Hammersmith and Fulham",,,,,,http://www.apps.lbhf.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
+"London Borough of Hammersmith and Fulham","Hammersmith and Fulham",,,,,,http://www.apps.lbhf.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
 "Hampshire County Council",Hampshire,,,,,,,Hampshire,HampshireParser,
 "Harborough District Council",Harborough,,,,,,http://pa.harborough.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
 "Haringey Council",Haringey,,http://duncan.devel.disruptiveproactivity.com/Haringey.cgi?day={day}&month={month}&year={year},1,,,http://www.planningservices.haringey.gov.uk/,ApplicationSearchServletParser,HaringeySearchParser,
@@ -208,8 +208,8 @@ full_name,short_name,planning_email,feed_url,external,disabled,notes,base_url,py
 "North Yorkshire County Council","North Yorkshire",,,,,,https://onlineplanningregister.northyorks.gov.uk/Online%20Register/PlanAppList.asp,Shropshire,NorthYorkshireParser,
 "Norwich City Council",Norwich,,,,,,http://publicaccess.norwich.gov.uk/publicaccess/tdc/,PublicAccess,PublicAccessParser,
 "Nottingham City Council",Nottingham,,http://duncan.devel.disruptiveproactivity.com/Nottingham.cgi?day={day}&month={month}&year={year},1,,,http://plan4.nottinghamcity.gov.uk/WAM/pas/searchApplications.do,WAM,WAMParser,
-"North West Leicestershire District Council","NW Leicestershire",,,,,,http://paccess.nwleics.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
-"The Borough of Oadby and Wigston","Oadby and Wigston",,,,,,http://pa.owbc.net/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
+"North West Leicestershire District Council","North West Leicestershire",,,,,,http://paccess.nwleics.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
+"Oadby and Wigston Borough Council","Oadby and Wigston",,,,,,http://pa.owbc.net/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
 "Oldham Metropolitan Borough Council",Oldham,,,,,,http://planning.oldham.gov.uk/planning/AcolNetCGI.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch,AcolnetParser,OldhamParser,
 "Olympic Delivery Authority",Olympics,,,,,,http://planning.london2012.com/publicaccess/tdc/,PublicAccess,PublicAccessParser,
 "Oswestry Borough Council",Oswestry,,,,,,http://193.114.205.78/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
@@ -223,7 +223,7 @@ full_name,short_name,planning_email,feed_url,external,disabled,notes,base_url,py
 "Reading Borough Council",Reading,,,,,,http://planning.reading.gov.uk/publicaccess/tdc/,PublicAccess,PublicAccessParser,
 "London Borough of Redbridge",Redbridge,,/cgi-bin/Redbridge.cgi?day={day}&month={month}&year={year},,,,,,,
 "Redditch Borough Council",Redditch,,,,,,http://access.redditchbc.gov.uk/publicaccess/tdc/,PublicAccess,PublicAccessParser,
-"Reigate and Banstead Borough Council",,"Reigate and Banstead",,,,,,,,reigateandbanstead
+"Reigate and Banstead Borough Council","Reigate and Banstead",,,,,,,,,reigateandbanstead
 "Renfrewshire Council",Renfrewshire,,,,,,http://planning.renfrewshire.gov.uk/acolnetDCpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch,AcolnetParser,BoltonLikeParser,
 "London Borough of Richmond upon Thames",Richmond,,,,,,,,,richmond
 "Richmondshire District Council",Richmondshire,,,,,,http://publicaccess.richmondshire.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
