@@ -48,7 +48,13 @@ csv_reader = csv.DictReader(
 template= open(template_filename).read()
 
 # Get a mysql cursor
-mysql_connection = MySQLdb.connect(db="planning")
+import pdb;pdb.set_trace()
+
+mysql_connection = MySQLdb.connect(
+    db=environ['MYSQL_DB_NAME'],
+    user=environ['MYSQL_USERNAME'],
+    passwd=environ['MYSQL_PASSWORD'],
+    )
 mysql_cursor = mysql_connection.cursor()
 
 python_scraper_location = "/cgi-bin/%s.cgi?day={day}&month={month}&year={year}"

@@ -39,13 +39,13 @@ echo
 echo "Enter mysql db name:"
 read MYSQL_DB_NAME
 echo $MYSQL_DB_NAME
-export $MYSQL_DB_NAME
+export MYSQL_DB_NAME
 echo "Enter mysql username:"
 read MYSQL_USERNAME
-export $MYSQL_USERNAME
+export MYSQL_USERNAME
 echo "Enter mysql password:"
 read MYSQL_PASSWORD
-export $MYSQL_PASSWORD
+export MYSQL_PASSWORD
 
 echo "Generating python scrapers"
 # Generate the python cgi files
