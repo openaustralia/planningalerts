@@ -148,7 +148,6 @@
                 }
 
                 $application->address = $parsed_application->address;            
-                $application->postcode = $parsed_application->postcode;                        
                 $application->description = $parsed_application->description;
                 $application->info_url = $parsed_application->info_url;
                 $application->comment_url = $parsed_application->comment_url;                        
@@ -164,14 +163,27 @@
                     $this->store_log("ERROR: Created blank comment tiny url");
                 }
 
+                if (isset($parsed_application->postcode)) {
+                    //Workout the XY location from postcode
+                    $xy = postcode_to_location($parsed_application->postcode);
+                    $application->postcode = $parsed_application->postcode;
+                    $application->x        = $xy[0];
+                    $application->y        = $xy[1];            
+                }
+                else if (isset($parsed_application->easting) && 
+                         isset($parsed_application->northing)) {
+                    $postcode = location_to_postcode(
+                      $parsed_application->easting, 
+                      $parsed_application->northing
+                    );
+                    $application->postcode = $postcode;
+                    $application->x        = $parsed_application->easting;
+                    $application->y        = $parsed_application->northing;
+                }
+
                 $application->info_tinyurl =$info_tiny_url;            
                 $application->comment_tinyurl = $comment_tiny_url;
                 $application->map_url = googlemap_url_from_postcode($application->postcode);
-
-                //Workout the XY location from postcode
-                $xy = postcode_to_location($application->postcode);
-                $application->x = $xy[0];
-                $application->y = $xy[1];            
             
                 //Add to array
                 array_push($return_applications, $application);
@@ -195,4 +207,4 @@
         
 }
 
-?>
+?> 

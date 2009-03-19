@@ -308,6 +308,18 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
 		return array_slice ($matches, 1);
     }
         
+    function location_to_postcode($easting, $northing) {
+        $url = sprintf(
+            "http://streetmap.co.uk/streetmap.dll?GridConvert?name=%d,%d&type=OSGrid",
+            $easting, $northing);
+        $resp = @file($url);
+        if (is_array($resp)) $resp = join("\n", $resp);
+        $resp = strip_tags($resp);
+        // Kinda ghetto. Would be nice to have a nicer regex for postcodes.
+        if (preg_match('/Nearest\s+Post\s+Code\s+(\S+\s+\S+)/i', $resp, $mat))
+            return $mat[1];
+        return NULL;
+    }
     
     function valid_email ($string) {
         $valid = false;
