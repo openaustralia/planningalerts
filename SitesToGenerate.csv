@@ -285,6 +285,7 @@ full_name,short_name,planning_email,feed_url,external,disabled,notes,base_url,py
 "Test Valley Borough Council","Test Valley",,,,,,http://publicaccess.testvalley.gov.uk/publicaccess/tdc/,PublicAccess,PublicAccessParser,
 "Tewkesbury Borough Council",Tewkesbury,,,,,,http://planning.tewkesbury.gov.uk/Planet/ispforms.asp?serviceKey=07WCC04163103430,Planet,PlanetParser,
 "Three Rivers District Council","Three Rivers",,,,,,http://www2.threerivers.gov.uk/publicaccess/tdc/,PublicAccess,PublicAccessParser,
+"Thurrock Borough Council",Thurrock,,,,,,http://regs.thurrock.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
 "Tonbridge and Malling Borough Council",Tonbridge,,,,,,http://publicaccess.tmbc.gov.uk/publicaccess/tdc/,PublicAccess,PublicAccessParser,
 "Torbay Council",Torbay,,,,,,http://www.torbay.gov.uk/publicaccess/tdc/,PublicAccess,PublicAccessParser,
 "Torridge District Council",Torridge,,,,,,http://www.torridge.gov.uk/publicaccess/tdc/,PublicAccess,PublicAccessParser,
