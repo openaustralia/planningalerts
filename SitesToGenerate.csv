@@ -40,7 +40,7 @@ full_name,short_name,planning_email,feed_url,external,disabled,notes,base_url,py
 "London Borough of Bromley",Bromley,,,,,,http://planningaccess.bromley.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
 "Broxbourne Borough Council",Broxbourne,,/cgi-bin/Broxbourne.cgi?day={day}&month={month}&year={year},,,,,,,
 "Broxtowe Borough Council",Broxtowe,,,,,,,Broxtowe,BroxtoweParser,
-"Buckinghamshire County Council",Buckinghamshire,,,,,,http://www.bucksplanning.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
+"Buckinghamshire County Council",Buckinghamshire,,,,,,http://bucksplanning.buckscc.gov.uk/PublicAccessLive/tdc/,PublicAccess,PublicAccessParser,
 "Bury Metropolitan Borough Council",Bury,,,,,,http://e-planning.bury.gov.uk/DCWebPages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch,AcolnetParser,AcolnetParser,
 "St Edmundsbury Borough Council","Bury St Edmunds",,,,,,http://www.stedmundsbury.gov.uk/swiftlg/apas/run/,SwiftLG,SwiftLGParser,
 "Caerphilly County Borough Council",Caerphilly,,,,,,http://publicaccess.caerphilly.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
