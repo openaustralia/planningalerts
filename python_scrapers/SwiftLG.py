@@ -50,6 +50,7 @@ class SwiftLGParser:
         """The usual situation is for the results table to contain
         one row of headers, followed by a row per app.
         If this is not the case, override this in a subclass."""
+#        import pdb;pdb.set_trace()
         return results_table.findAll("tr")[1:]
 
     def __init__(self,
@@ -176,10 +177,6 @@ class IslingtonParser(SwiftLGParser):
     def _findResultsTable(self, soup):
         return soup.table.table
 
-class LakeDistrictParser(SwiftLGParser):
-    def _findResultsTable(self, soup):
-        return soup.table.table
-
 class MacclesfieldParser(SwiftLGParser):
     def _findResultsTable(self, soup):
         return soup.findAll("table")[6]
@@ -202,9 +199,9 @@ if __name__ == '__main__':
 #    parser = EastHertsParser("East Hertfordshire", "East Herts", "http://e-services.eastherts.gov.uk/swiftlg/apas/run/")
 #    parser = GwyneddParser("Gwynedd", "Gwynedd", "http://www.gwynedd.gov.uk/swiftlg/apas/run/")
 #    parser = IslingtonParser("Islington", "Islington", "https://www.islington.gov.uk/onlineplanning/apas/run/")
-#    parser = LakeDistrictParser("Lake District", "Lake District", "http://www.lake-district.gov.uk/swiftlg/apas/run/")
+    parser = SwiftLGParser("Lake District", "Lake District", "http://www.lake-district.gov.uk/swiftlg/apas/run/")
 #    parser = SwiftLGParser("Maidstone Borough Council", "Maidstone", "http://digitalmaidstone.co.uk/swiftlg/apas/run/")
-    parser = MoleValleyParser("Mole Valley", "Mole Valley", "http://www.molevalley.gov.uk/swiftlg/apas/run/")
+#    parser = MoleValleyParser("Mole Valley", "Mole Valley", "http://www.molevalley.gov.uk/swiftlg/apas/run/")
 #    parser = SwiftLGParser("Pembrokeshire County Council", "Pembrokeshire", "http://planning.pembrokeshire.gov.uk/swiftlg/apas/run/")
 #    parser = SwiftLGParser("Rochdale Metropolitan Borough Council", "Rochdale", "http://www.rochdale.gov.uk/swiftlg/apas/run/")
 #    parser = SloughParser("Slough", "Slough", "http://www2.slough.gov.uk/swiftlg/apas/run/")
@@ -215,7 +212,7 @@ if __name__ == '__main__':
 #    parser = SwiftLGParser("Warrington Borough Council", "Warrington", "http://212.248.237.123:8080/swiftlg/apas/run/wphappcriteria.display")
 #    parser = SwiftLGParser("Cannock Chase District Council", "Cannock Chase", "http://planning.cannockchasedc.com/swiftlg/apas/run/wphappcriteria.display")
 #    parser = SwiftLGParser("London Borough of Enfield", "Enfield", "http://forms.enfield.gov.uk/swiftlg/apas/run/wphappcriteria.display")
-    print parser.getResults(20,11,2008)
+    print parser.getResults(18,3,2009)
 
 
 # To Do:

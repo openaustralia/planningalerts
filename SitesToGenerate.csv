@@ -159,7 +159,7 @@ full_name,short_name,planning_email,feed_url,external,disabled,notes,base_url,py
 "Royal Borough of Kingston upon Thames","Kingston upon Thames",,,,,,,KingstonUponThames,KingstonParser,
 "Kirklees Council",Kirklees,,,,,,,Kirklees,KirkleesParser,
 "Knowsley Council",Knowsley,,,,,,http://publicaccess.knowsley.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
-"Lake District National Park Authority","Lake District",,,,,,http://www.lake-district.gov.uk/swiftlg/apas/run/,SwiftLG,LakeDistrictParser,
+"Lake District National Park Authority","Lake District",,,,,,http://www.lake-district.gov.uk/swiftlg/apas/run/,SwiftLG,SwiftLGParser,
 "London Borough of Lambeth",Lambeth,,,,,,http://planning.lambeth.gov.uk/publicaccess/tdc/,PublicAccess,PublicAccessParser,
 "Lancaster City Council",Lancaster,,,,,,http://planapps.lancaster.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
 "Leeds City Council",Leeds,,,,,,http://planningapplications.leeds.gov.uk/publicaccess/tdc/,PublicAccess,PublicAccessParser,
