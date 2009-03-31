@@ -340,12 +340,12 @@ class HarlowParser(AcolnetParser):
         return self._current_application.info_url.replace("PgeResultDetail", "PgeCommentNeighbourForm&amp;hasreference=no")
 
 if __name__ == '__main__':
-    day = 1
-    month = 8
-    year = 2008
+    day = 27
+    month = 3
+    year = 2009
 
     #parser = AcolnetParser("Babergh", "Babergh", "http://planning.babergh.gov.uk/dcdatav2//acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-    parser = AcolnetParser("Barnet", "Barnet", "http://194.75.183.100/planning-cases/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("Barnet", "Barnet", "http://194.75.183.100/planning-cases/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("Basingstoke", "Basingstoke", "http://planning.basingstoke.gov.uk/DCOnline2/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = BassetlawParser("Bassetlaw", "Bassetlaw", "http://www.bassetlaw.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("Bolton", "Bolton", "http://www.planning.bolton.gov.uk/DCOnlineV2/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
@@ -365,7 +365,7 @@ if __name__ == '__main__':
     #parser = LewishamParser("Lewisham", "Lewisham", "http://acolnet.lewisham.gov.uk/lewis-xslpagesdc/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.PgeSearch")
     #parser = AcolnetParser("Mid Suffolk", "Mid Suffolk", "http://planning.midsuffolk.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = BoltonLikeParser("New Forest District Council", "New Forest DC", "http://web3.newforest.gov.uk/planningonline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-    #parser = BoltonLikeParser("New Forest National Park Authority", "New Forest NPA", "http://web01.newforestnpa.gov.uk/planningpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    parser = AcolnetParser("New Forest National Park Authority", "New Forest NPA", "http://web01.newforestnpa.gov.uk/Pages3/AcolNetCGI.dcgov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("North Hertfordshire", "North Herts", "http://www.north-herts.gov.uk/dcdataonline/Pages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch")
     #parser = AcolnetParser("North Wiltshire", "North Wilts", "http://planning.northwilts.gov.uk/DCOnline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = OldhamParser("Oldham", "Oldham", "http://planning.oldham.gov.uk/planning/AcolNetCGI.gov?ACTION=UNWRAP&Root=PgeSearch")

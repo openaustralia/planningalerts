@@ -194,7 +194,7 @@ full_name,short_name,planning_email,feed_url,external,disabled,notes,base_url,py
 "Newcastle-under-Lyme Borough Council",Newcastle-under-Lyme,,,,,,http://publicaccess.newcastle-staffs.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
 "Newport City Council",Newport,,/cgi-bin/Newport.cgi?day={day}&month={month}&year={year},,,,,,,
 "New Forest District Council","New Forest DC",,,,,,http://web3.newforest.gov.uk/planningonline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch,AcolnetParser,BoltonLikeParser,
-"New Forest National Park","New Forest NP",,,,,,http://web01.newforestnpa.gov.uk/planningpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch,AcolnetParser,BoltonLikeParser,
+"New Forest National Park","New Forest NP",,,,,,http://web01.newforestnpa.gov.uk/Pages3/AcolNetCGI.dcgov?ACTION=UNWRAP&RIPNAME=Root.pgesearch,AcolnetParser,AcolnetParser,
 "London Borough Of Newham",Newham,,,,,,http://pacaps.newham.gov.uk/publicaccess/tdc/,PublicAccess,PublicAccessParser,
 "North Ayrshire Council","North Ayrshire",,/cgi-bin/NorthAyrshire.cgi?day={day}&month={month}&year={year},,,,,,,
 "North East Derbyshire District Council","North East Derbyshire",,,,,,http://planapps-online.ne-derbyshire.gov.uk/publicaccess/tdc/,PublicAccess,PublicAccessParser,
