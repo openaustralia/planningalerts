@@ -710,7 +710,7 @@ if __name__ == '__main__':
 #    parser = BlackburnParser("Blackburn With Darwen Borough Council", "Blackburn", "http://195.8.175.6/")
 #    parser = BroadlandParser("Broadland Council", "Broadland", "http://www.broadland.gov.uk/")
 #    parser = CamdenParser("London Borough of Camden", "Camden", "http://planningrecords.camden.gov.uk/")
-#    parser = CharnwoodParser("Charnwood Borough Council", "Charnwood", "http://portal.charnwoodbc.gov.uk/")
+    parser = CharnwoodParser("Charnwood Borough Council", "Charnwood", "http://portal.charnwoodbc.gov.uk/")
 #    parser = CreweParser("Crewe and Nantwich Borough Council", "Crewe and Nantwich", "http://portal.crewe-nantwich.gov.uk/")
 #    parser = EastStaffsParser("East Staffordshire Borough Council", "East Staffs", "http://www2.eaststaffsbc.gov.uk/")
 #    parser = EppingForestParser("Epping Forest District Council", "Epping Forest", "http://plan1.eppingforestdc.gov.uk/")
@@ -725,13 +725,13 @@ if __name__ == '__main__':
 #    parser = SouthTynesideParser("South Tyneside Council", "South Tyneside", "http://poppy.southtyneside.gov.uk/")
 #    parser = StockportParser("Stockport Metropolitan District Council", "Stockport", "http://s1.stockport.gov.uk/council/eed/dc/planning/")
 #    parser = SwanseaParser("Swansea City and County Council", "Swansea", "http://www2.swansea.gov.uk/")
-    parser = TamworthParser("Tamworth Borough Council", "Tamworth", "http://80.1.64.91/")
+#    parser = TamworthParser("Tamworth Borough Council", "Tamworth", "http://80.1.64.91/")
 #    parser = TraffordParser("Trafford Council", "Trafford", "http://planning.trafford.gov.uk/")
 #    parser = WestOxfordshireParser("West Oxfordshire District Council", "West Oxfordshire", "http://planning.westoxon.gov.uk/")
 #    parser = WalthamForestParser("Waltham Forest", "Waltham Forest", "http://planning.walthamforest.gov.uk/")
 #    parser = ConwyParser("Conwy County Borough Council", "Conwy", "http://www.conwy.gov.uk/")
 #    parser = MertonParser("London Borough of Merton", "Merton", "http://planning.merton.gov.uk")
-    print parser.getResults(20, 11, 2008)
+    print parser.getResults(30, 3, 2009)
 
 # To Do
 
