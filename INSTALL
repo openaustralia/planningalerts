@@ -1,14 +1,7 @@
-In order to install this lot:
+Setting up PlannignAlerts
 
-Make sure you are in a nice clean fresh svn export, by doing:
+1) Make sure you have PHP and mySQL
 
-svn export http://planningalerts.googlecode.com/svn/trunk/ planningalerts
+2) Create a database using /schema/planningalerts.sql
 
-If deployment_script.svn has changed, you'll need to merge the changes into
-your local copy. In particular, make sure that line 1 of the file points to
-the correct path for bash.
-
-Then all you need to do is run:
-
-./deployment_script
-
+3) copy /docs/include/config.php.svn to /docs/include/config.php and edit it to your local settings.
