@@ -248,6 +248,7 @@
 "Solihull Metropolitan Borough Council","Solihull",,,,,,,"Solihull","SolihullParser",
 "Somerset County Council","Somerset",,,,,,"http://webapp1.somerset.gov.uk/ePlanning/loadResults.do","AtriumePlanning","AtriumePlanningParser",
 "Southampton City Council","Southampton",,,,,,"http://publicaccess.southampton.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
+"Southend-on-Sea Borough Council","Southend",,,,,,"http://planning.southend.gov.uk/PublicAccess/tdc/","PublicAccess","PublicAccessParser",
 "South Bedfordshire District Council","South Bedfordshire",,,,,,"http://planning.southbeds.gov.uk/plantech/DCWebPages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.PgeSearch","AcolnetParser","AcolnetParser",
 "South Bucks District Council","South Bucks",,,,,,"http://sbdc-paweb.southbucks.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "South Gloucestershire Council","South Gloucestershire",,"http://duncan.devel.disruptiveproactivity.com/South%20Gloucestershire.cgi?day={day}&month={month}&year={year}",1,,,"http://planning.southglos.gov.uk/WAM/pas/WeeklyApplications.do","WAM","BraintreeParser",
