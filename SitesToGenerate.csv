@@ -317,6 +317,7 @@
 "Wolverhampton City Council","Wolverhampton",,,,,,"http://planningonline.wolverhampton.gov.uk/PublicAccess/tdc/","PublicAccess","PublicAccessParser",
 "Worcester City Council","Worcester",,,,,,"http://www.worcester.gov.uk:8080/planet/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry","Planet","PlanetParser",
 "Worthing Borough Council","Worthing",,,,,,"http://planning.worthing.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
+"Wychavon District Council","Wychavon",,,,,,,"Wychavon","WychavonParser",
 "Wycombe District Council","Wycombe",,,,,,"http://planningpa.wycombe.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "Wyre Forest District Council","Wyre Forest",,,,,,"http://www.wyreforest.gov.uk/fastweb/","FastWeb","FastWeb",
 "City of York Council","York",,,,,,"http://planning.york.gov.uk/PublicAccess/tdc/","PublicAccess","PublicAccessParser",
