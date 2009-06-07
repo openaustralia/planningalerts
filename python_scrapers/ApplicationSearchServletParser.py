@@ -485,6 +485,23 @@ class DenbighshireSearchParser(ApplicationSearchServletParser):
         else:
             self._in_results_table = 0
 
+class RutlandParser(ApplicationSearchServletParser):
+    _reference_col_no = 1
+    _location_col_no = 3
+    _description_col_no = 4
+
+    def _checkAttrsForResultsTable(self, attrs):
+        got_class = False
+        
+        for key, value in attrs:
+            if key == 'class' and value == 'nis_table':
+                got_class = True
+
+        if got_class:
+            self._in_results_table = 2
+        else:
+            self._in_results_table = 0
+
 
 if __name__ == "__main__":
     #parser = CoventrySearchParser("Coventry", "Coventry", "http://planning.coventry.gov.uk")
@@ -499,6 +516,7 @@ if __name__ == "__main__":
     #parser = WearValleySearchParser("Wear Valley", "Wear Valley", "http://planning.wearvalley.gov.uk")
     #parser = WellingboroughSearchParser("Wellingborough", "Wellingborough", "http://planning.wellingborough.gov.uk")
     #parser = EalingSearchParser("Ealing", "Ealing", "http://www.pam.ealing.gov.uk")
-    parser = HaringeySearchParser("Haringey", "Haringey", "http://www.planningservices.haringey.gov.uk")
+    #parser = HaringeySearchParser("Haringey", "Haringey", "http://www.planningservices.haringey.gov.uk")
     #parser = DenbighshireSearchParser("Denbighshire", "Denbighshire", "http://planning.denbighshire.gov.uk")
-    print parser.getResults(1,8,2008)
+    parser = RutlandParser("Rutland County Council", "Rutland", "http://planningonline.rutland.gov.uk:7777")
+    print parser.getResults(1,6,2009)

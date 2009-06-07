@@ -163,7 +163,7 @@ if __name__ == '__main__':
     year = 2008
 
     #parser = PublicAccessParser("East Northants", "East Northants", "http://publicaccesssrv.east-northamptonshire.gov.uk/PublicAccess/tdc/", True)
-    #parser = PublicAccessParser("Cherwell District Council", "Cherwell", "http://cherweb.cherwell-dc.gov.uk/publicaccess/tdc/", False)
+    parser = PublicAccessParser("Cherwell District Council", "Cherwell", "http://cherweb.cherwell-dc.gov.uk/publicaccess/tdc/", False)
     #parser = PublicAccessParser("Hambleton District Council", "Hambleton", "http://planning.hambleton.gov.uk/publicaccess/tdc/", True)
     #parser = PublicAccessParser("Durham City Council", "Durham", "http://publicaccess.durhamcity.gov.uk/publicaccess/tdc/", True)
     #parser = PublicAccessParser("Moray Council", "Moray", "http://public.moray.gov.uk/publicaccess/tdc/", True)
@@ -174,6 +174,6 @@ if __name__ == '__main__':
 #    parser = PublicAccessParser("Harrogate Borough Council", "Harrogate", "http://publicaccess.harrogate.gov.uk/publicaccess/tdc/")
 #    parser = PublicAccessParser("West Lancashire District Council", "West Lancashire", "http://publicaccess.westlancsdc.gov.uk/PublicAccess/tdc/")
 #    parser = PublicAccessParser("Torbay Council", "Torbay", "http://www.torbay.gov.uk/publicaccess/tdc/")
-    parser = PublicAccessParser("Hambleton District Council", "Hambleton", "http://planning.hambleton.gov.uk/publicaccess/tdc/")
+#    parser = PublicAccessParser("Hambleton District Council", "Hambleton", "http://planning.hambleton.gov.uk/publicaccess/tdc/")
     print parser.getResults(day, month, year)
     
