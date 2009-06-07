@@ -33,6 +33,12 @@ class PlanetParser:
 
         self._results = PlanningAuthorityResults(self.authority_name, self.authority_short_name)
 
+    def get_info_url(self, soup_fragment):
+        return self.base_url
+
+    def get_comment_url(self, soup_fragment):
+        return self.get_info_url(soup_fragment)
+
     def getResultsByDayMonthYear(self, day, month, year):
         # What is the serviceKey for this council?
         # It's in our base url
@@ -101,10 +107,10 @@ class PlanetParser:
             self._current_application.description = tds[2].string.strip()
 
             # There is no good info url, so we just give the search page.
-            self._current_application.info_url = self.base_url
+            self._current_application.info_url = self.get_info_url(tr)
 
             # Similarly for the comment url
-            self._current_application.comment_url = self.base_url
+            self._current_application.comment_url = self.get_comment_url(tr)
             
             self._results.addApplication(self._current_application)
             
@@ -146,13 +152,20 @@ class PlanetParser:
         return self.getResultsByDayMonthYear(int(day), int(month), int(year)).displayXML()
 
 
+class ElmbridgeParser(PlanetParser):
+    info_url_template = "http://emaps.elmbridge.gov.uk/LinkToSoftwareAG.aspx?appref=%s"
+    
+    def get_info_url(self, soup_fragment):
+        return self.info_url_template %self._current_application.council_reference
+
+
 if __name__ == '__main__':
-#    parser = PlanetParser("Elmbridge Borough Council", "Elmbridge", "http://www2.elmbridge.gov.uk/Planet/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry")
+    parser = ElmbridgeParser("Elmbridge Borough Council", "Elmbridge", "http://www2.elmbridge.gov.uk/Planet/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry")
 #    parser = PlanetParser("North Lincolnshire Council", "North Lincolnshire", "http://www.planning.northlincs.gov.uk/planet/ispforms.asp?ServiceKey=SysDoc-PlanetApplicationEnquiry")
 #    parser = PlanetParser("Rydale District Council", "Rydale", "http://www.ryedale.gov.uk/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry")
-    parser = PlanetParser("Tewkesbury Borough Council", "Tewkesbury", "http://planning.tewkesbury.gov.uk/Planet/ispforms.asp?serviceKey=07WCC04163103430")
-    print parser.getResults(20,11,2008)
+#    parser = PlanetParser("Tewkesbury Borough Council", "Tewkesbury", "http://planning.tewkesbury.gov.uk/Planet/ispforms.asp?serviceKey=07WCC04163103430")
 #    parser = PlanetParser("Worcester City Council", "Worcester", "http://www.worcester.gov.uk:8080/planet/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry", debug=True)
+    print parser.getResults(1,5,2009)
 
 # TODO
 

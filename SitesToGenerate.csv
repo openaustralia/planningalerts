@@ -102,7 +102,7 @@
 "Eden District Council","Eden",,,,,,"http://eforms.eden.gov.uk/fastweb/","FastWeb","FastWeb",
 "The City of Edinburgh Council","Edinburgh",,,,,,"http://citydev-portal.edinburgh.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "Ellesmere Port and Neston Borough Council","Ellesmere Port",,,,,,"http://ocella.epnbc.gov.uk/portal/page?_pageid=33,38205&_dad=portal&_schema=PORTAL","Ocella","OcellaParser",
-"Elmbridge Borough Council","Elmbridge",,,,,,"http://www2.elmbridge.gov.uk/Planet/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry","Planet","PlanetParser",
+"Elmbridge Borough Council","Elmbridge",,,,,,"http://www2.elmbridge.gov.uk/Planet/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry","Planet","ElmbridgeParser",
 "London Borough of Enfield","Enfield",,,,,,"http://forms.enfield.gov.uk/swiftlg/apas/run/wphappcriteria.display","SwiftLG","SwiftLGParser",
 "Epping Forest District Council","Epping Forest",,"http://duncan.devel.disruptiveproactivity.com/Epping%20Forest.cgi?day={day}&month={month}&year={year}",1,,,"http://plan1.eppingforestdc.gov.uk/","PlanningExplorer","EppingForestParser",
 "Epsom and Ewell Borough Council","Epsom and Ewell",,,,,,"http://eplanning.epsom-ewell.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
