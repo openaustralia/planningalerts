@@ -154,7 +154,7 @@
 "The Royal Borough of Kensington and Chelsea","Kensington and Chelsea",,,,,,,"Kensington","KensingtonParser",
 "Kerrier District Council","Kerrier",,,,,,"http://publicaccess.kerrier.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "Kingston upon Hull City Council","Kingston upon Hull",,,,,,,,,"hull"
-"Royal Borough of Kingston upon Thames","Kingston upon Thames",,,,,,,"KingstonUponThames","KingstonParser",
+"Royal Borough of Kingston upon Thames","Kingston upon Thames",,"http://maps.kingston.gov.uk/isis_service/PlanningAlerts.aspx?dayno={day}&monthno={month}&yearno={year}&datetype=date_week_list&username=planningalerts&pwd=Al3rts",1,,,,"KingstonUponThames","KingstonParser",
 "Kirklees Council","Kirklees",,,,,,,"Kirklees","KirkleesParser",
 "Knowsley Council","Knowsley",,,,,,"http://publicaccess.knowsley.gov.uk/PublicAccess/tdc/","PublicAccess","PublicAccessParser",
 "Lake District National Park Authority","Lake District",,,,,,"http://www.lake-district.gov.uk/swiftlg/apas/run/","SwiftLG","SwiftLGParser",
