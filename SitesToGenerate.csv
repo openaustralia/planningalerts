@@ -72,6 +72,7 @@
 "Cornwall County Council","Cornwall",,,,,,"http://planapps.cornwall.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "Coventry City Council","Coventry",,,,,,"http://planning.coventry.gov.uk/","ApplicationSearchServletParser","CoventrySearchParser",
 "Craven District Council","Craven",,,,,,"http://www.planning.cravendc.gov.uk/fastweb/","FastWeb","FastWeb",
+"Crawley Borough Council","Crawley",,,,,,,"Crawley","CrawleyParser",
 "Crewe and Nantwich Borough Council","Crewe and Nantwich",,,,,,"http://portal.crewe-nantwich.gov.uk/","PlanningExplorer","CreweParser",
 "London Borough of Croydon","Croydon",,,,,,"http://planning.croydon.gov.uk/DCWebPages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch","AcolnetParser","AcolnetParser",
 "Cumbria County Council","Cumbria",,,,,,"http://217.114.50.149:7778/ePlanningOPS/loadResults.do","AtriumePlanning","AtriumePlanningParser",
