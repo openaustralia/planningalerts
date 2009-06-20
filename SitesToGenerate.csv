@@ -183,7 +183,7 @@
 "London Borough of Merton","Merton",,,,,,"http://planning.merton.gov.uk/","PlanningExplorer","MertonParser",
 "Mid Bedfordshire District Council","Mid Beds",,,,,,"http://www.midbeds.gov.uk/acolnetDC/DCpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch","AcolnetParser","MidBedsParser",
 "Mid Devon District Council","Mid Devon",,,,,,"http://planning.middevon.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
-"Middlesbrough Borough Council","Middlesbrough",,,,,,"http://planserv.middlesbrough.gov.uk/portal/page?_pageid=33,4178&_dad=portal&_schema=PORTAL","Ocella","OcellaParser",
+"Middlesbrough Borough Council","Middlesbrough",,,,,,"http://eplan.bridgend.gov.uk/portal/page/portal/bridgend/search","Ocella","OcellaParser",
 "Mid Suffolk District Council","Mid Suffolk",,,,,,"http://planning.midsuffolk.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch","AcolnetParser","AcolnetParser",
 "Mid Sussex District Council","Mid Sussex",,,,,,"http://dc.midsussex.gov.uk/PublicAccess/tdc/","PublicAccess","PublicAccessParser",
 "Milton Keynes Council","Milton Keynes",,,,,,"http://publicaccess.milton-keynes.gov.uk/tdc/","PublicAccess","PublicAccessParser",
