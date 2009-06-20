@@ -1,4 +1,5 @@
 import urllib2
+import cgi
 import urlparse
 import datetime, time
 import BeautifulSoup
@@ -42,7 +43,7 @@ class CrawleyParser:
                 application.council_reference = tds[0].a.contents[0].strip().replace("&#47;", "/")
                 application.info_url = urlparse.urljoin(self.base_url, tds[0].a['href'])
 
-                info_qs = urlparse.parse_qs(urlparse.urlsplit(application.info_url)[3])
+                info_qs = cgi.parse_qs(urlparse.urlsplit(application.info_url)[3])
 
                 comment_qs = {
                   "pAppNo": application.council_reference,
