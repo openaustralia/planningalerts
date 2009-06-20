@@ -50,7 +50,7 @@
 "Cambridgeshire County Council","Cambridgeshire",,,,,,"http://planapps2.cambridgeshire.gov.uk/DCWebPages/AcolNetCGI.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch","AcolnetParser","AcolnetParser",
 "London Borough of Camden","Camden",,,,,,"http://planningrecords.camden.gov.uk/","PlanningExplorer","CamdenParser",
 "Cannock Chase District Council","Cannock Chase",,,,,,"http://planning.cannockchasedc.com/swiftlg/apas/run/wphappcriteria.display","SwiftLG","SwiftLGParser",
-"Canterbury City Council","Canterbury",,,,,,"http://planning.canterbury.gov.uk/scripts/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch","AcolnetParser","CanterburyParser",
+"Canterbury City Council","Canterbury",,,,,,"http://www2.canterbury.gov.uk/planning/acolnetcgi.cgi?ACTION=UNWRAP&RIPNAME=Root.PgeSearch","AcolnetParser","CanterburyParser",
 "Caradon District Council","Caradon",,,,,,"http://publicaccess.caradon.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "Carlisle City Council","Carlisle",,,,,,"http://planning.carlisle.gov.uk/PlanData/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch","AcolnetParser","AcolnetParser",
 "Carmarthenshire County Council","Carmarthenshire",,,,,,,"Carmarthenshire","CarmarthenshireParser",

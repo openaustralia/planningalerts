@@ -219,6 +219,7 @@ class BlackpoolParser(AcolnetParser):
 
 class CanterburyParser(AcolnetParser):
     """Here the apps are one row each in a big table."""
+    comments_email_address = "development.control@canterbury.gov.uk"
 
     def _getResultsSections(self, soup):
         return soup.find("table").findAll("tr")[1:]
@@ -351,7 +352,7 @@ if __name__ == '__main__':
 #    parser = AcolnetParser("Bolton", "Bolton", "http://www.planning.bolton.gov.uk/DCOnlineV2/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = BridgnorthParser("Bridgnorth", "Bridgnorth", "http://www2.bridgnorth-dc.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch")
     #parser = AcolnetParser("Bury", "Bury", "http://e-planning.bury.gov.uk/DCWebPages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-    #parser = CanterburyParser("Canterbury", "Canterbury", "http://planning.canterbury.gov.uk/scripts/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    parser = CanterburyParser("Canterbury", "Canterbury", "http://www2.canterbury.gov.uk/planning/acolnetcgi.cgi?ACTION=UNWRAP&RIPNAME=Root.PgeSearch")
 #    parser = AcolnetParser("Carlisle", "Carlisle", "http://planning.carlisle.gov.uk/PlanData/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("Croydon", "Croydon", "http://planning.croydon.gov.uk/DCWebPages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("Derby", "Derby", "http://eplanning.derby.gov.uk/acolnet/planningpages02/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
@@ -364,7 +365,7 @@ if __name__ == '__main__':
     #parser = BoltonLikeParser("Hertsmere", "Hertsmere", "http://www2.hertsmere.gov.uk/ACOLNET/DCOnline//acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = LewishamParser("Lewisham", "Lewisham", "http://acolnet.lewisham.gov.uk/lewis-xslpagesdc/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.PgeSearch")
     #parser = AcolnetParser("Mid Suffolk", "Mid Suffolk", "http://planning.midsuffolk.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-    parser = AcolnetParser("New Forest District Council", "New Forest DC", "http://web3.newforest.gov.uk/planningonline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    #parser = AcolnetParser("New Forest District Council", "New Forest DC", "http://web3.newforest.gov.uk/planningonline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("New Forest National Park Authority", "New Forest NPA", "http://web01.newforestnpa.gov.uk/Pages3/AcolNetCGI.dcgov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("North Hertfordshire", "North Herts", "http://www.north-herts.gov.uk/dcdataonline/Pages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch")
     #parser = AcolnetParser("North Wiltshire", "North Wilts", "http://planning.northwilts.gov.uk/DCOnline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
