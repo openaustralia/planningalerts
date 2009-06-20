@@ -172,15 +172,16 @@ if __name__ == '__main__':
     #parser = BraintreeParser("Colchester", "Colchester", "http://www.planning.colchester.gov.uk/WAM/weeklyApplications.do", debug=True)
     #parser = WAMParser("East Lothian", "East Lothian", "http://www.planning.eastlothian.gov.uk/WAM/pas/searchApplications.do", debug=True)
     #parser = BraintreeParser("North Somerset", "North Somerset", "http://wam.n-somerset.gov.uk/MULTIWAM/weeklyApplications.do", debug=True)
-    parser = WAMParser("Nottingham", "Nottingham", "http://plan4.nottinghamcity.gov.uk/WAM/pas/searchApplications.do", debug=True)
+    #parser = WAMParser("Nottingham", "Nottingham", "http://plan4.nottinghamcity.gov.uk/WAM/pas/searchApplications.do", debug=True)
     #parser = PooleParser("Poole long", "Poole", "http://wam.boroughofpoole.com/WAM/pas/searchApplications.do", debug=True)
     #parser = WAMParser("Rother long", "Rother", "http://www.planning.rother.gov.uk/WAM/pas/searchApplications.do", debug=True)
-    #parser = BraintreeParser("South Gloucestershire", "South Gloucestershire", "http://planning.southglos.gov.uk/WAM/pas/WeeklyApplications.do", debug=True)
+#    parser = BraintreeParser("South Gloucestershire", "South Gloucestershire", "http://planning.southglos.gov.uk/WAM/pas/WeeklyApplications.do", debug=True)
+    parser = BraintreeParser("South Gloucestershire", "South Gloucestershire", "http://planning.southglos.gov.uk/WAM/WeeklyApplications.do", debug=True)
     #parser = WAMParser("South Norfolk", "South Norfolk", "http://wam.south-norfolk.gov.uk/WAM/pas/searchApplications.do", debug=True)
     #parser = BraintreeParser("Tower Hamlets", "Tower Hamlets", "http://194.201.98.213/WAM/weeklyApplications.do", debug=True)
     #parser = WAMParser("Westminster", "Westminster", "http://idocs.westminster.gov.uk:8080/WAM/search/pas/index.htm", debug=True)
 
-    print parser.getResults(31,8,2008)
+    print parser.getResults(12,6,2009)
 
 # Left to fix
 

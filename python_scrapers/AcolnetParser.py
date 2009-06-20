@@ -316,7 +316,6 @@ class SurreyHeathParser(AcolnetParser):
 class BoltonLikeParser(AcolnetParser):
     """Note that Bolton has ceased to be BoltonLike with its latest change of url."""
     def _getCouncilReference(self, app_table):
-        import pdb;pdb.set_trace()
         return app_table.findAll("a")[1].string.strip()
     
     
