@@ -191,11 +191,11 @@ class OcellaParser:
 
 if __name__ == '__main__':
 #    parser = OcellaParser("Arun", "Arun", "http://www.arun.gov.uk/iplanning/portal/page?_pageid=33,4139&_dad=portal&_schema=PORTAL")
-#    parser = OcellaParser("Breckland Council", "Breckland", "http://wplan01.intranet.breckland.gov.uk:7778/portal/page?_pageid=33,30988&_dad=portal&_schema=PORTAL")
+    parser = OcellaParser("Breckland Council", "Breckland", "http://wplan01.intranet.breckland.gov.uk:7778/portal/page?_pageid=33,30988&_dad=portal&_schema=PORTAL")
 #    parser = OcellaParser("Ellesmere Port", "Ellesmere Port", "http://ocella.epnbc.gov.uk/portal/page?_pageid=33,38205&_dad=portal&_schema=PORTAL")
 #    parser = OcellaParser("Fareham", "Fareham", "http://eocella.fareham.gov.uk/portal/page?_pageid=33,31754&_dad=portal&_schema=PORTAL")
 #    parser = OcellaParser("Hillingdon", "Hillingdon", "http://w09.hillingdon.gov.uk/portal/page?_pageid=33,82093&_dad=portal&_schema=PORTAL")
-    parser = OcellaParser("Middlesbrough", "Middlesbrough", "http://eplan.bridgend.gov.uk/portal/page/portal/bridgend/search")
+#    parser = OcellaParser("Middlesbrough", "Middlesbrough", "http://eplan.bridgend.gov.uk/portal/page/portal/bridgend/search")
 #    parser = OcellaParser("North East Lincolnshire", "North East Lincolnshire", "http://planning.nelincs.gov.uk/portal/page?_pageid=33,64104&_dad=portal&_schema=PORTAL")
 #    parser = OcellaParser("Uttlesford", "Uttlesford", "http://planning.uttlesford.gov.uk/portal/page/portal/plan/weekly")
 #    parser = OcellaParser("Bridgend", "Bridgend", "http://eplan.bridgend.gov.uk:7778/portal/page?_pageid=55,31779&_dad=portal&_schema=PORTAL")

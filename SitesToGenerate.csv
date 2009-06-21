@@ -312,7 +312,7 @@
 "Kings Lynn and West Norfolk Borough Council","West Norfolk",,,,,,"http://online.west-norfolk.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "West Oxfordshire District Council","West Oxfordshire",,,,,,"http://planning.westoxon.gov.uk/","PlanningExplorer","WestOxfordshireParser",
 "West Sussex County Council","West Sussex",,,,,,"http://eplanning.westsussex.gov.uk/ePlanningOPS/loadResults.do","AtriumePlanning","AtriumePlanningParser",
-"West Wiltshire District Council","West Wiltshire",,,,,,"http://planning.westwiltshire.gov.uk/PublicAccess/tdc/","PublicAccess","PublicAccessParser",
+"West Wiltshire District Council","West Wiltshire",,,,,,"http://planning.westwiltshire.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "Wiltshire County Council","Wiltshire",,,,,,,,,"wiltshire"
 "Winchester City Council","Winchester",,,,1,"Now using a bespoke system","http://win2padmz.winchester.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "Woking Borough Council","Woking",,,,,,"http://caps.woking.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",

@@ -81,5 +81,5 @@ class HastingsParser:
 
 if __name__ == '__main__':
     parser = HastingsParser()
-    print parser.getResults(2,9,2008)
+    print parser.getResults(12,6,2009)
 
