@@ -129,7 +129,7 @@
 "Cyngor Gwynedd Council","Gwynedd",,,,,,"http://www.gwynedd.gov.uk/swiftlg/apas/run/","SwiftLG","GwyneddParser",
 "London Borough of Hackney","Hackney",,,,,,"http://www.hackney.gov.uk/servapps/","PlanningExplorer","HackneyParser",
 "Halton Borough Council","Halton",,,,,,,"Halton","HaltonParser",
-"Hambleton District Council","Hambleton",,,,,,"http://planning.hambleton.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
+"Hambleton District Council","Hambleton",,,,,,"http://planning.hambleton.gov.uk/publicaccess/tdc/","PublicAccess","HambletonParser",
 "London Borough of Hammersmith and Fulham","Hammersmith and Fulham",,,,,,"http://www.apps.lbhf.gov.uk/PublicAccess/tdc/","PublicAccess","PublicAccessParser",
 "Hampshire County Council","Hampshire",,,,,,,"Hampshire","HampshireParser",
 "Harborough District Council","Harborough",,,,,,"http://pa.harborough.gov.uk/PublicAccess/tdc/","PublicAccess","PublicAccessParser",
