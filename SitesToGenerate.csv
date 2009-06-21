@@ -229,7 +229,7 @@
 "London Borough of Richmond upon Thames","Richmond",,,,,,,,,"richmond"
 "Richmondshire District Council","Richmondshire",,,,,,"http://publicaccess.richmondshire.gov.uk/PublicAccess/tdc/","PublicAccess","PublicAccessParser",
 "Rochdale Metropolitan Borough Council","Rochdale",,,,,,"http://www.rochdale.gov.uk/swiftlg/apas/run/","SwiftLG","SwiftLGParser",
-"Rochford District Council","Rochford",,,,,,"http://www.rochford.gov.uk/PublicAccess/tdc/","PublicAccess","PublicAccessParser",
+"Rochford District Council","Rochford",,,,,,"http://publicaccess.rochford.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "Rother District Council","Rother",,"http://duncan.devel.disruptiveproactivity.com/Rother.cgi?day={day}&month={month}&year={year}",1,,,"http://www.planning.rother.gov.uk/WAM/pas/searchApplications.do","WAM","WAMParser",
 "Rugby Borough Council","Rugby",,"http://api.hexten.net/planning.api/rugby?day={day}&month={month}&year={year}",1,,,,,,
 "Rushmoor Borough Council","Rushmoor",,,,,,"http://pa-dc.rushmoor.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
