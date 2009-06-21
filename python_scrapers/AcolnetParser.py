@@ -324,7 +324,7 @@ class LewishamParser(BoltonLikeParser):
     comments_email_address = "planning@lewisham.gov.uk"
 
 
-class BassetlawParser(BoltonLikeParser):
+class BassetlawParser(AcolnetParser):
     comments_email_address = "planning@bassetlaw.gov.uk"
 
     def _cleanupHTML(self, html):
@@ -348,7 +348,7 @@ if __name__ == '__main__':
     #parser = AcolnetParser("Babergh", "Babergh", "http://planning.babergh.gov.uk/dcdatav2//acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("Barnet", "Barnet", "http://194.75.183.100/planning-cases/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = AcolnetParser("Basingstoke", "Basingstoke", "http://planning.basingstoke.gov.uk/DCOnline2/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-    #parser = BassetlawParser("Bassetlaw", "Bassetlaw", "http://www.bassetlaw.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+    parser = BassetlawParser("Bassetlaw", "Bassetlaw", "http://www.bassetlaw.gov.uk/planning/AcolNetCGI.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
 #    parser = AcolnetParser("Bolton", "Bolton", "http://www.planning.bolton.gov.uk/DCOnlineV2/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     #parser = BridgnorthParser("Bridgnorth", "Bridgnorth", "http://www2.bridgnorth-dc.gov.uk/planning/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.PgeSearch")
     #parser = AcolnetParser("Bury", "Bury", "http://e-planning.bury.gov.uk/DCWebPages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
@@ -381,6 +381,6 @@ if __name__ == '__main__':
 #    parser = AcolnetParser("East Hampshire District Council", "East Hampshire", "http://planningdevelopment.easthants.gov.uk/dconline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
 #    parser = AcolnetParser("Stockport Metropolitan Borough Council", "Stockport", "http://planning.stockport.gov.uk/PlanningData/AcolNetCGI.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
 #    parser = BlackpoolParser("Blackpool Borough Council", "Blackpool", "http://www2.blackpool.gov.uk/PlanningApplications/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
-    parser = GreenwichParser("London Borough of Greenwich", "Greenwich", "http://onlineplanning.greenwich.gov.uk/acolnet/planningonline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
+#    parser = GreenwichParser("London Borough of Greenwich", "Greenwich", "http://onlineplanning.greenwich.gov.uk/acolnet/planningonline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch")
     print parser.getResults(day, month, year)
     
