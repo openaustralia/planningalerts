@@ -55,7 +55,7 @@ class GosportParser:
 #            ("ApplicationSearch21%3AtbDevAddress", ""),
 #            ("ApplicationSearch21%3AtbApplicantName", ""),
 #            ("ApplicationSearch21%3AtbAgentName", ""),
-            ("ApplicationSearch21:tbDateSubmitted", "10/01/2008"),
+            ("ApplicationSearch21:tbDateSubmitted", search_date.strftime(search_date_format)),
             ("ApplicationSearch21:btnDateSubmitted", "Search"),
 #            ("ApplicationSearch21%3AtbDateDetermined", ""),
             )
@@ -96,5 +96,5 @@ class GosportParser:
 
 if __name__ == '__main__':
     parser = GosportParser()
-    print parser.getResults(20,11,2008)
+    print parser.getResults(12,6,2009)
 
