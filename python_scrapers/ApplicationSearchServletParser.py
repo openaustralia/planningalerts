@@ -350,8 +350,8 @@ class HighPeakSearchParser(ApplicationSearchServletParser):
     # results table spotter
     # table class="data" width="95%"
     _reference_col_no = 1
-    _location_col_no = 2
-    _description_col_no = 5
+    _location_col_no = 3
+    _description_col_no = 6
     
     def _checkAttrsForResultsTable(self, attrs):
         got_class = False
@@ -512,11 +512,11 @@ if __name__ == "__main__":
     #parser = NorthWarksSearchParser("North Warwickshire", "North Warks", "http://planning.northwarks.gov.uk")
     #parser = StHelensSearchParser("St Helens", "St Helens", "http://212.248.225.150:8080")
     #parser = EasingtonSearchParser("Easington", "Easington", "http://planning.easington.gov.uk")
-    #parser = HighPeakSearchParser("High Peak", "High Peak", "http://planning.highpeak.gov.uk")
+    parser = HighPeakSearchParser("High Peak", "High Peak", "http://planning.highpeak.gov.uk")
     #parser = WearValleySearchParser("Wear Valley", "Wear Valley", "http://planning.wearvalley.gov.uk")
     #parser = WellingboroughSearchParser("Wellingborough", "Wellingborough", "http://planning.wellingborough.gov.uk")
     #parser = EalingSearchParser("Ealing", "Ealing", "http://www.pam.ealing.gov.uk")
     #parser = HaringeySearchParser("Haringey", "Haringey", "http://www.planningservices.haringey.gov.uk")
     #parser = DenbighshireSearchParser("Denbighshire", "Denbighshire", "http://planning.denbighshire.gov.uk")
-    parser = RutlandParser("Rutland County Council", "Rutland", "http://planningonline.rutland.gov.uk:7777")
-    print parser.getResults(1,6,2009)
+    #parser = RutlandParser("Rutland County Council", "Rutland", "http://planningonline.rutland.gov.uk:7777")
+    print parser.getResults(12,6,2009)
