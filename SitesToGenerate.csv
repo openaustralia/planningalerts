@@ -57,7 +57,7 @@
 "Castle Point Borough Council","Castle Point",,,,,,"http://planning.castlepoint.gov.uk/portal/page?_pageid=35,38205&_dad=portal&_schema=PORTAL","Ocella","OcellaParser",
 "Charnwood Borough Council","Charnwood",,"http://duncan.devel.disruptiveproactivity.com/Charnwood.cgi?day={day}&month={month}&year={year}",1,,,"http://portal.charnwoodbc.gov.uk/","PlanningExplorer","CharnwoodParser",
 "Chelmsford Borough Council","Chelmsford",,,,,,"http://web1.chelmsfordbc.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
-"Cheltenham Borough Council","Cheltenham",,,,,,,,,"cheltenham"
+"Cheltenham Borough Council","Cheltenham",,,,,,"http://planning.cheltenham.gov.uk/PublicAccess/tdc/","PublicAccess","PublicAccessParser",
 "Cherwell District Council","Cherwell",,,,,,"http://cherweb.cherwell-dc.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "Cheshire East Council","Cheshire East",,,,,"New unitary authority currently using old Macclesfield site.","http://www.planportal.macclesfield.gov.uk/swiftlg/apas/run/","SwiftLG","MacclesfieldParser",
 "Chester-le-Street District Council","Chester-le-Street",,,,,,"http://planning.chester-le-street.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
