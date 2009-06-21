@@ -41,6 +41,9 @@ class SwiftLGParser:
     info_path = "WPHAPPDETAIL.DisplayUrl?theApnID=%s"
     comment_path ="wphmakerep.displayURL?ApnID=%s"
 
+    def _fixHTML(self, html):
+        return html
+
     def _findResultsTable(self, soup):
         """Unless there is just one table in the page, the resuts table,
         override this in a subclass."""
@@ -83,6 +86,10 @@ class SwiftLGParser:
         
         response = urllib2.urlopen(self.search_url, post_data)
         contents = response.read()
+
+        # Let's give scrapers the change to tidy up any rubbish - I'm looking
+        # at you Cannock Chase
+        contents = self._fixHTML(contents)
 
         # Check for the no results warning
         if not contents.count("No Matching Applications Found"):
@@ -193,13 +200,17 @@ class SloughParser(SwiftLGParser):
     def _findTRs(self, results_table):
         return results_table.findAll("tr")[2:]
 
+class CannockChaseParser(SwiftLGParser):
+    def _fixHTML(self, html):
+        return html.replace('</tr class="tablebody">', '</tr>')
+
 if __name__ == '__main__':
 #    parser = SwiftLGParser("Boston Borough Council", "Boston", "http://195.224.121.199/swiftlg/apas/run/")
 #    parser = SwiftLGParser("Dudley", "Dudley", "http://www2.dudley.gov.uk/swiftlg/apas/run/")
 #    parser = EastHertsParser("East Hertfordshire", "East Herts", "http://e-services.eastherts.gov.uk/swiftlg/apas/run/")
 #    parser = GwyneddParser("Gwynedd", "Gwynedd", "http://www.gwynedd.gov.uk/swiftlg/apas/run/")
 #    parser = IslingtonParser("Islington", "Islington", "https://www.islington.gov.uk/onlineplanning/apas/run/")
-    parser = SwiftLGParser("Lake District", "Lake District", "http://www.lake-district.gov.uk/swiftlg/apas/run/")
+#    parser = SwiftLGParser("Lake District", "Lake District", "http://www.lake-district.gov.uk/swiftlg/apas/run/")
 #    parser = SwiftLGParser("Maidstone Borough Council", "Maidstone", "http://digitalmaidstone.co.uk/swiftlg/apas/run/")
 #    parser = MoleValleyParser("Mole Valley", "Mole Valley", "http://www.molevalley.gov.uk/swiftlg/apas/run/")
 #    parser = SwiftLGParser("Pembrokeshire County Council", "Pembrokeshire", "http://planning.pembrokeshire.gov.uk/swiftlg/apas/run/")
@@ -210,9 +221,9 @@ if __name__ == '__main__':
 #    parser = MacclesfieldParser("Macclesfield", "Macclesfield", "http://www.planportal.macclesfield.gov.uk/swiftlg/apas/run/")
 #    parser = SwiftLGParser("Daventry District Council", "Daventry", "http://62.231.149.150/swiftlg/apas/run/wphappcriteria.display")
 #    parser = SwiftLGParser("Warrington Borough Council", "Warrington", "http://212.248.237.123:8080/swiftlg/apas/run/wphappcriteria.display")
-#    parser = SwiftLGParser("Cannock Chase District Council", "Cannock Chase", "http://planning.cannockchasedc.com/swiftlg/apas/run/wphappcriteria.display")
+    parser = CannockChaseParser("Cannock Chase District Council", "Cannock Chase", "http://planning.cannockchasedc.com/swiftlg/apas/run/wphappcriteria.display")
 #    parser = SwiftLGParser("London Borough of Enfield", "Enfield", "http://forms.enfield.gov.uk/swiftlg/apas/run/wphappcriteria.display")
-    print parser.getResults(18,3,2009)
+    print parser.getResults(12,6,2009)
 
 
 # To Do:
