@@ -86,7 +86,7 @@
 "Dorset County Council","Dorset",,,,,,"http://195.49.180.81/ePlanning/loadResults.do","AtriumePlanning","AtriumePlanningParser",
 "Dudley Metropolitan Borough Council","Dudley",,,,,,"http://www2.dudley.gov.uk/swiftlg/apas/run/","SwiftLG","SwiftLGParser",
 "Dundee City Council","Dundee",,,,,,"http://bwarrant.dundeecity.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
-"Durham City Council","Durham",,,,,,"http://publicaccess.durhamcity.gov.uk/publicaccess/dc/","PublicAccess","PublicAccessParser",
+"Durham City Council","Durham",,,,,,"http://publicaccess.durhamcity.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "Ealing Council","Ealing",,,,,,"http://www.pam.ealing.gov.uk/","ApplicationSearchServletParser","EalingSearchParser",
 "Easington District Council","Easington",,,,,,"http://planning.easington.gov.uk/","ApplicationSearchServletParser","EasingtonSearchParser",
 "Eastbourne Borough Council","Eastbourne",,,,,,,"Eastbourne","EastbourneParser",
