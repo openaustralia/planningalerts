@@ -106,7 +106,7 @@ class PendleParser(MaldonParser):
 if __name__ == '__main__':
     #parser = MaldonParser("Maldon District Council", "Maldon", "http://forms.maldon.gov.uk:8080/PlanApp/jsp/searchPlanApp-action.do")
     parser = PendleParser("Pendle Borough Council", "Pendle", "http://bopdoccip.pendle.gov.uk/PlanApp/jsp/searchPlanApp-action.do")
-    print parser.getResults(21,5,2008)
+    print parser.getResults(12,6,2009)
 
 # TODO
 

@@ -179,7 +179,7 @@
 "Mansfield District Council","Mansfield",,,,,,"http://www.mansfield.gov.uk/Fastweb/","FastWeb","FastWeb",
 "Medway Council","Medway",,,,,,,"Medway","MedwayParser",
 "Melton Borough Council","Melton",,,,,,"http://publicaccess.melton.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
-"Mendip District Council","Mendip",,,,,,,"Mendip","MendipParser",
+"Mendip District Council","Mendip",,,,,"Now using planningexplorer rather than bespoke","http://planning.mendip.gov.uk/","PlanningExplorer","MendipParser",
 "London Borough of Merton","Merton",,,,,,"http://planning.merton.gov.uk/","PlanningExplorer","MertonParser",
 "Mid Bedfordshire District Council","Mid Beds",,,,,,"http://www.midbeds.gov.uk/acolnetDC/DCpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch","AcolnetParser","MidBedsParser",
 "Mid Devon District Council","Mid Devon",,,,,,"http://planning.middevon.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
@@ -314,7 +314,7 @@
 "West Sussex County Council","West Sussex",,,,,,"http://eplanning.westsussex.gov.uk/ePlanningOPS/loadResults.do","AtriumePlanning","AtriumePlanningParser",
 "West Wiltshire District Council","West Wiltshire",,,,,,"http://planning.westwiltshire.gov.uk/PublicAccess/tdc/","PublicAccess","PublicAccessParser",
 "Wiltshire County Council","Wiltshire",,,,,,,,,"wiltshire"
-"Winchester City Council","Winchester",,,,,,"http://win2padmz.winchester.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
+"Winchester City Council","Winchester",,,,1,"Now using a bespoke system","http://win2padmz.winchester.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "Woking Borough Council","Woking",,,,,,"http://caps.woking.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "Wolverhampton City Council","Wolverhampton",,,,,,"http://planningonline.wolverhampton.gov.uk/PublicAccess/tdc/","PublicAccess","PublicAccessParser",
 "Worcester City Council","Worcester",,,,,,"http://www.worcester.gov.uk:8080/planet/ispforms.asp?serviceKey=SysDoc-PlanetApplicationEnquiry","Planet","PlanetParser",

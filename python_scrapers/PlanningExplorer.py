@@ -681,6 +681,13 @@ class ConwyParser(BroadlandLike, PlanningExplorerParser):
 
     use_firefox_user_agent = True
 
+class MendipParser(BroadlandLike, PlanningExplorerParser):
+    comments_email_address = "customerservices@mendip.gov.uk"
+
+
+#    search_url_path = "northgate/planningexplorer/generalsearch.aspx"
+
+#&first=1&quick=1&search=&txtApplicationNumber=&txtApplicantName=&txtAgentName=&txtProposal=&txtSiteAddress=&txtStreetName=&cboWardCode=&cboParishCode=&cboApplicationTypeCode=&cboDevelopmentTypeCode=&cboStatusCode=&cboSelectDateValue=DATE_RECEIVED&cboMonths=1&cboDays=1&rbGroup=rbRange&dateStart=12%2F06%2F2009&dateEnd=12%2F06%2F2009&edrDateSelection=&csbtnSearch=Search
 
 #&txtApplicationNumber=&txtProposal=&txtSiteAddress=&cboWardCode=&cboParishCode=&cboApplicationTypeCode=&cboDevelopmentTypeCode=&cboStatusCode=&cboSelectDateValue=DATE_RECEIVED&cboMonths=1&cboDays=1&rbGroup=rbRange&dateStart=10%2F07%2F2008&dateEnd=20%2F07%2F2008&edrDateSelection=&csbtnSearch=Search
 
@@ -731,7 +738,8 @@ if __name__ == '__main__':
 #    parser = WalthamForestParser("Waltham Forest", "Waltham Forest", "http://planning.walthamforest.gov.uk/")
 #    parser = ConwyParser("Conwy County Borough Council", "Conwy", "http://www.conwy.gov.uk/")
 #    parser = MertonParser("London Borough of Merton", "Merton", "http://planning.merton.gov.uk")
-    print parser.getResults(30, 3, 2009)
+    parser = MendipParser("Mendip District Council", "Mendip", "http://planning.mendip.gov.uk/")
+    print parser.getResults(12, 6, 2009)
 
 # To Do
 
