@@ -266,7 +266,7 @@
 "London Borough of Southwark","Southwark",,,,,,"http://planningonline.southwarksites.com/planningonline2/AcolNetCGI.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch","AcolnetParser","SouthwarkParser",
 "Spelthorne Borough Council","Spelthorne",,,,,,"http://phoenix.spelthorne.gov.uk/PublicAccess/tdc/","PublicAccess","PublicAccessParser",
 "Stafford Borough Council","Stafford",,,,,,"http://www3.staffordbc.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
-"Staffordshire Moorlands District Council","Staffordshire Moorlands",,,,,,,,,"staffordshiremoorlands"
+"Staffordshire Moorlands District Council","Staffordshire Moorlands",,,,,,"http://publicaccess.salford.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "Stevenage Borough Council","Stevenage",,,,,,"http://publicaccess.stevenage.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "St Helens Council","St Helens",,,,,,"http://212.248.225.150:8080/","ApplicationSearchServletParser","StHelensSearchParser",
 "Stirling Council","Stirling",,,,,,"http://planpub.stirling.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
@@ -297,7 +297,7 @@
 "Vale Royal Borough Council","Vale Royal",,,,,,"http://pa.valeroyal.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "Wakefield Metropolitan District Council","Wakefield",,,,,,"http://planning.wakefield.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "Waltham Forest Council","Waltham Forest",,,,,,"http://planning.walthamforest.gov.uk/","PlanningExplorer","WalthamForestParser",
-"Wansbeck District Council","Wansbeck",,"http://www.wansbeck.gov.uk/planning.cfm?day={day}&month={month}&year={year}",1,,,,,,
+"Wansbeck District Council","Wansbeck",,"http://www.wansbeck.gov.uk/planning.cfm?day={day}&month={month}&year={year}",1,1,"Now part of Northumberland. The page they put up for us has gone :-(",,,,
 "Warrington Borough Council","Warrington",,,,,,"http://212.248.237.123:8080/swiftlg/apas/run/wphappcriteria.display","SwiftLG","SwiftLGParser",
 "Watford Borough Council","Watford",,,,,,"http://ww3.watford.gov.uk/publicaccess/tdc/","PublicAccess","PublicAccessParser",
 "Waveney District Council","Waveney",,,,,,"http://publicaccess.waveney.gov.uk/PublicAccess/tdc/","PublicAccess","PublicAccessParser",
