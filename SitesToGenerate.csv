@@ -124,7 +124,7 @@
 "Gosport Borough Council","Gosport",,,,,,,"Gosport","GosportParser",
 "Gravesham Borough Council","Gravesham",,,,,,"http://plan.gravesham.gov.uk/PublicAccess/tdc/","PublicAccess","PublicAccessParser",
 "Great Yarmouth Borough Council","Great Yarmouth",,,,,,"http://planning.great-yarmouth.gov.uk/portal/page/portal/plan/weekly","Ocella","OcellaParser",
-"London Borough of Greenwich","Greenwich",,,,,,"http://onlineplanning.greenwich.gov.uk/acolnet/planningpages/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch","AcolnetParser","GreenwichParser",
+"London Borough of Greenwich","Greenwich",,,,,,"http://onlineplanning.greenwich.gov.uk/acolnet/planningonline/acolnetcgi.gov?ACTION=UNWRAP&RIPNAME=Root.pgesearch","AcolnetParser","GreenwichParser",
 "Guildford Borough Council","Guildford",,,,,,"http://www.guildford.gov.uk/DLDC_Version_2/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.pgesearch","AcolnetParser","AcolnetParser",
 "Cyngor Gwynedd Council","Gwynedd",,,,,,"http://www.gwynedd.gov.uk/swiftlg/apas/run/","SwiftLG","GwyneddParser",
 "London Borough of Hackney","Hackney",,,,,,"http://www.hackney.gov.uk/servapps/","PlanningExplorer","HackneyParser",
