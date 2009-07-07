@@ -40,9 +40,10 @@ class news_mailer {
                     
                     //Send the email
                     if($email_text !=""){
-                        send_text_email($user_results[$i][0], EMAIL_FROM_NAME, EMAIL_FROM_ADDRESS, "PlanningAlerts needs your help",  $email_text);
+                        //send_text_email($user_results[$i][0], EMAIL_FROM_NAME, EMAIL_FROM_ADDRESS, "PlanningAlerts needs your help",  $email_text);
+send_text_email("testing@memespring.co.uk", EMAIL_FROM_NAME, EMAIL_FROM_ADDRESS, "PlanningAlerts needs your help",  $email_text);                        
                     }
-
+                    exit;
                 }
 
              }
