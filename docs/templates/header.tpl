@@ -17,7 +17,7 @@
         <a href="#divContent">Skip navigation</a>
     </div>
     <div id="divAppeal">
-        Please help support Planning Alerts - <a href="{$www_server}/dontate.php">donate to our server fund today!</a>
+        Please help support Planning Alerts - <a href="{$www_server}/donate.php">donate to our server fund today!</a>
     </div>
     <div id="divMenu">
         <ul class="collapse">
