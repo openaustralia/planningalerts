@@ -1,19 +1,20 @@
 {textformat style='email'}
 Hello,
 
-This is a one-off email to let you know about a new website I've built that's a bit like Planning Alerts: http://www.streetwire.org
+We don't normally ask anything of people signed up to PlanningAlerts, but hopefully you'll excuse a one off cheeky request for help.
 
-StreetWire is like PlanningAlerts for every kind of local information. As well as planning applications, it will tell you about licensing applications, crime, events and local news near you.
+Planning Alerts has continued to grow with more councils added, and more and more people signing up to use it. This is really great, and people continue to tell us that they like the service, which is always nice to hear.
 
-You can also share news with your neighbours, so if you know some little titbit of local news, or want to tell people about an event, it helps connect you with your local community.
+But we've reached the point where we need to move to a bigger server, and that is going to cost us money. So we were wondering if you would consider donating to a small amount to help us out?
 
-You can sign-up here:
+You can donate here:
 
-http://www.streetwire.org
+http://www.planningalerts.com/donate.php
 
-I hope you find this useful. It would be really great to hear what you think of it, and what sort of information you'd like to see.
 
-All the best,
+Since it seems unfair to ask for money and not do anything in return, if we raise enough money to pay for a new server, we'll promise to make a start at including Licensing Applications (new pubs, off licenses etc) in our emails. If that seems like a fair deal, please click on the link above.
 
-Richard Pope (volunteer PlanningAlerts.com)
+Thanks and all the best,
+
+Richard & Duncan (PlanningAlerts.com volunteers)
 {/textformat}

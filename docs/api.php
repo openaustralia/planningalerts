@@ -79,7 +79,7 @@ class api {
                     if(sizeof($this->warnings) == 0){
             			$this->applications = Applications::query($_GET['easting'], $_GET['northing'], alert_size_to_meters($_GET['area_size']));
                     }
-                    break;    
+                    break;
                 case "authority":
                     //validation
                     if(!isset($_GET['authority'])){

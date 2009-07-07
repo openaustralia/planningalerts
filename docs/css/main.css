@@ -17,6 +17,11 @@ h3, h4 {color:#96ca2f;font-style:italic;font-weight:normal}
 #divHeader {margin-top:1.7em;padding-bottom:1em;position:relative;}
 #divHeader img {position:absolute;top:-15px;}
 
+/* Appeal */
+#divAppeal {background:#fff; color:#333; border-bottom:solid 1px #333; font-size:0.8em; padding-bottom:0.2em;}
+#divAppeal a {color:#CC0000;}
+#divPayment {text-align:center; border:solid 1px #ccc; padding:2em 1em 1em 1em; background:#ffff88;}
+
 /* Menu */
 #divMenu {background:#6E84BD;height:2.2em;font-size:0.7em;}
 #divMenu ul {width:500px;margin:0 auto;}

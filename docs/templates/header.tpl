@@ -16,6 +16,9 @@
     <div class="hide">
         <a href="#divContent">Skip navigation</a>
     </div>
+    <div id="divAppeal">
+        Please help support Planning Alerts - <a href="{$www_server}/dontate.php">donate to our server fund today!</a>
+    </div>
     <div id="divMenu">
         <ul class="collapse">
             <li {if $menu_item =="about"}class="selected"{/if}><a href="about.php">About</a></li>                                     

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.16, created on 2008-09-28 20:51:25
+<?php /* Smarty version 2.6.16, created on 2009-07-05 11:09:12
          compiled from header.tpl */ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -18,6 +18,10 @@
 
     <div class="hide">
         <a href="#divContent">Skip navigation</a>
+    </div>
+    <div id="divAppeal">
+        Please help support Planning Alerts - <a href="<?php echo $this->_tpl_vars['www_server']; ?>
+/dontate.php">donate to our server fund today!</a>
     </div>
     <div id="divMenu">
         <ul class="collapse">
