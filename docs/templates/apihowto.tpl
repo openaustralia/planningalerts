@@ -103,7 +103,9 @@
 
     <h4 id="hLicenseInfo">License information</h4>
     <p>
-                Both the <a href="http://www.planningalerts.com/backup.gz"> raw data</a> and data via the api are licensed under the <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-Noncommercial 3.0 license</a>. The license granted in relation to the 'Work' should be read broadly to relate not only copyright but all other IP rights present in this dataset including, for example, any Database rights.
+        A <a href="http://www.planningalerts.com/backup.gz"> copy of the Planning Alerts database</a> is made available under the <a href="http://opendatacommons.org/licenses/odbl/1.0/">Open Database License</a>. Any rights in individual contents of the database are licensed under the <a href="http://opendatacommons.org/licenses/dbcl/1.0/">Database Contents License</a>.
+        
+        Data via the api is licensed under the <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-Noncommercial 3.0 license</a>.
     </p>
 		
 {include file="footer.tpl"}
