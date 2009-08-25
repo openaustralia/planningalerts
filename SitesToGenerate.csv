@@ -253,7 +253,7 @@ full_name,short_name,planning_email,feed_url,external,disabled,notes,base_url,py
 "Southend-on-Sea Borough Council",Southend,,,,,,http://planning.southend.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
 "South Bedfordshire District Council","South Bedfordshire",,,,,,http://planning.southbeds.gov.uk/plantech/DCWebPages/acolnetcgi.exe?ACTION=UNWRAP&RIPNAME=Root.PgeSearch,AcolnetParser,AcolnetParser,
 "South Bucks District Council","South Bucks",,,,,,http://sbdc-paweb.southbucks.gov.uk/publicaccess/tdc/,PublicAccess,PublicAccessParser,
-"South Cambridgeshire","South Cambs",,http://scambs.jdi-consult.net/devcon/planningalerts.php?year={year}&month={month}&day={day},1,,"Feed from the guys who run the site :-)",,,,
+"South Cambridgeshire District Council","South Cambs",,http://scambs.jdi-consult.net/devcon/planningalerts.php?year={year}&month={month}&day={day},1,,"Feed from the guys who run the site :-)",,,,
 "South Gloucestershire Council","South Gloucestershire",,http://duncan.devel.disruptiveproactivity.com/South%20Gloucestershire.cgi?day={day}&month={month}&year={year},1,,,http://planning.southglos.gov.uk/WAM/pas/WeeklyApplications.do,WAM,BraintreeParser,
 "South Lakeland District Council","South Lakeland",,,,,,http://www.southlakeland.gov.uk/fastweb/,FastWeb,FastWeb,
 "South Norfolk Council","South Norfolk",,,,,,http://planning.south-norfolk.gov.uk/,PlanningExplorer,SouthNorfolkParser,
