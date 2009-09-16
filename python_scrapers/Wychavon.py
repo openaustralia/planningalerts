@@ -65,13 +65,12 @@ RIPNAME=Root%2EPages%2EPgeDC%2EPgeListCases"
                 application.description = ""
             else:
                 application.description = descrip.strip()
-            
-            rec_m, rec_d, rec_y = trs[1].findAll("td")[3].font.string.strip().\
-                                                                    split("/")
+
+            date_format = "%d/%m/%y"
+            date_string = trs[1].findAll("td")[3].font.string.strip()
                                                                     
-            application.date_received = datetime.date(int(rec_y), int(rec_m), \
-                                                                    int(rec_d))
-            
+            application.date_received = datetime.datetime.strptime(date_string, date_format) 
+
             apptype = trs[0].findAll("td")[3].font.string
             # Avoids throwing an error if no apptype is given (this can happen)
             if apptype != None:
