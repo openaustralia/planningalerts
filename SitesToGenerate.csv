@@ -38,6 +38,7 @@ full_name,short_name,planning_email,feed_url,external,disabled,notes,base_url,py
 "Broadland District Council",Broadland,,http://duncan.devel.disruptiveproactivity.com/Broadland.cgi?day={day}&month={month}&year={year},1,,,http://www.broadland.gov.uk/,PlanningExplorer,BroadlandParser,
 "Broads Authority",Broads,,,,,,https://planning.broads-authority.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
 "London Borough of Bromley",Bromley,,,,,,http://planningaccess.bromley.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
+"Bromsgrove District Council",Bromsgrove,,,,,,http://appuview.bromsgrove.gov.uk/PublicAccess/tdc/,PublicAccess,PublicAccessParser,
 "Broxbourne Borough Council",Broxbourne,,/cgi-bin/Broxbourne.cgi?day={day}&month={month}&year={year},,,,,,,
 "Broxtowe Borough Council",Broxtowe,,,,,,,Broxtowe,BroxtoweParser,
 "Buckinghamshire County Council",Buckinghamshire,,,,,,http://bucksplanning.buckscc.gov.uk/PublicAccessLive/tdc/,PublicAccess,PublicAccessParser,
