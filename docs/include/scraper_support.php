@@ -297,7 +297,7 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
         $clean_postcode = strtolower($postcode);
         $clean_postcode = str_replace(" ","+", $clean_postcode);
 
-        $url = "http://ernestmarples.com/?p=sw98jx&f=csv";
+        $url = "http://ernestmarples.com/?p=" . $clean_postcode . "&f=csv";
         $result = file_get_contents($url);
         $result = split(",", $result);
         if(count($result) != 2){
@@ -312,7 +312,7 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
         $return = array($OSBG->easting, $OSBG->northing);
 
     }
-        
+
     function location_to_postcode($easting, $northing) {
         $url = sprintf(
             "http://streetmap.co.uk/streetmap.dll?GridConvert?name=%d,%d&type=OSGrid",
