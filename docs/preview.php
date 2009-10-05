@@ -33,7 +33,7 @@ class preview_page {
             $this->warnings .= "No area size specified ";
         }
 
-        if ($this->warnings == ""){   
+        if ($this->warnings == ""){
                         
             $url = "http://ernestmarples.com/?p=sw98jx&f=csv";
             $result = file_get_contents($url);

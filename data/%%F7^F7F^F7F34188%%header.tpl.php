@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.16, created on 2009-10-05 13:50:52
+<?php /* Smarty version 2.6.16, created on 2009-10-05 14:04:40
          compiled from header.tpl */ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -20,8 +20,9 @@
         <a href="#divContent">Skip navigation</a>
     </div>
     <div id="divAppeal">
-        Please help support Planning Alerts - <a href="<?php echo $this->_tpl_vars['www_server']; ?>
-/donate.php">donate to our server fund today!</a>
+        <strong>PlanningAlerts.com is currently experiencing technical difficulties because of ongoing legal action by Royal Mail</strong>.<br/> 
+        Our provider of postcode data, ErnestMarples.com, has been taken offline because of legal action. Until we find an alternative source, PlanningAlerts.com will be unable to send out any email alerts, or publish data via it's API.
+        We apologise for the inconvenience. For more information, visit the <a href="http://www.ernestmarples.com/blog/">Ernest Marples Blog</a>
     </div>
     <div id="divMenu">
         <ul class="collapse">
