@@ -32,17 +32,26 @@ class preview_page {
         if (!isset($_GET['area_size'])){
             $this->warnings .= "No area size specified ";
         }
-        
-        if ($this->warnings == ""){     
-            
+
+        if ($this->warnings == ""){   
+                        
+            $url = "http://ernestmarples.com/?p=sw98jx&f=csv";
+            $result = file_get_contents($url);
+            $result = split(",", $result);
+            if(count($result) != 2){
+                trigger_error("No lat/long could be found");
+            }
+            $lat = $result[0];
+            $lng = $result[1];
+
             //Get OS ref from postcode
             $xy = postcode_to_location($_GET['postcode']);
 
             //Get the centroid long  / lat (google maps doesnt handle grid refs)
-            $os_ref = new OSRef($xy[0], $xy[1]);
-            $long_lat = $os_ref->toLatLng();
-            $this->center_long = $long_lat->lng;
-            $this->center_lat = $long_lat->lat;            
+            //$os_ref = new OSRef($xy[0], $xy[1]);
+            //$long_lat = $os_ref->toLatLng();
+            $this->center_long = $lng; //$long_lat->lng;
+            $this->center_lat = $lat; //$long_lat->lat;            
             
             //get long lat for the bounding box (OS grid refs are in meters in case you were wondering)
             

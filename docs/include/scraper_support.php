@@ -297,15 +297,20 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
         $clean_postcode = strtolower($postcode);
         $clean_postcode = str_replace(" ","+", $clean_postcode);
 
-        $url = "http://www.streetmap.co.uk/newsearch.srf?type=Postcode&name=" . $clean_postcode;
+        $url = "http://ernestmarples.com/?p=sw98jx&f=csv";
+        $result = file_get_contents($url);
+        $result = split(",", $result);
+        if(count($result) != 2){
+            trigger_error("No lat/long could be found");
+        }
+        $lat = $result[0];
+        $lng = $result[1];
 
-		$headers = get_headers($url, 1);
-		$location = $headers["Location"];
-		$location_regex = "/x=(\d*)&y=(\d*)&/";
+        $LatLng = new LatLng($lat, $lng);
+        $OSBG = $LatLng->toOSRef();
 
-		preg_match ($location_regex, $location, $matches);
+        $return = array($OSBG->easting, $OSBG->northing);
 
-		return array_slice ($matches, 1);
     }
         
     function location_to_postcode($easting, $northing) {
