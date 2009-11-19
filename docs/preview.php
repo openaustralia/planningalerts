@@ -34,18 +34,23 @@ class preview_page {
         }
 
         if ($this->warnings == ""){
-                        
-            $url = "http://ernestmarples.com/?p=sw98jx&f=csv";
-            $result = file_get_contents($url);
-            $result = split(",", $result);
-            if(count($result) != 2){
-                trigger_error("No lat/long could be found");
-            }
-            $lat = $result[0];
-            $lng = $result[1];
+            
+            //$url = "http://ernestmarples.com/?p=sw98jx&f=csv";
+            //$result = file_get_contents($url);
+            //$result = split(",", $result);
+            //if(count($result) != 2){
+            //    trigger_error("No lat/long could be found");
+            //}
+			// For the time being hack in a fixed location
+
+	        $lat = 51.48762641022281;
+	        $lng = -0.10890305042266846;
+
+            //$lat = $result[0];
+            //$lng = $result[1];
 
             //Get OS ref from postcode
-            $xy = postcode_to_location($_GET['postcode']);
+            //$xy = postcode_to_location($_GET['postcode']);
 
             //Get the centroid long  / lat (google maps doesnt handle grid refs)
             //$os_ref = new OSRef($xy[0], $xy[1]);
@@ -57,17 +62,29 @@ class preview_page {
             
             //bottom left
             $area_size_meters = alert_size_to_meters($_GET['area_size']);
-            $os_ref = new OSRef($xy[0] - $area_size_meters, $xy[1] - $area_size_meters);
-            $long_lat = $os_ref->toLatLng();
-            $this->bottom_left_long = $long_lat->lng;
-            $this->bottom_left_lat = $long_lat->lat;            
+            //$os_ref = new OSRef($xy[0] - $area_size_meters, $xy[1] - $area_size_meters);
+            //$long_lat = $os_ref->toLatLng();
+            //$this->bottom_left_long = $long_lat->lng;
+            //$this->bottom_left_lat = $long_lat->lat;            
             
             //top right
-            $area_size_meters = alert_size_to_meters($_GET['area_size']);
-            $os_ref = new OSRef($xy[0] + $area_size_meters, $xy[1] + $area_size_meters);
-            $long_lat = $os_ref->toLatLng();
-            $this->top_right_long = $long_lat->lng;
-            $this->top_right_lat = $long_lat->lat;
+            //$area_size_meters = alert_size_to_meters($_GET['area_size']);
+            //$os_ref = new OSRef($xy[0] + $area_size_meters, $xy[1] + $area_size_meters);
+            //$long_lat = $os_ref->toLatLng();
+            //$this->top_right_long = $long_lat->lng;
+            //$this->top_right_lat = $long_lat->lat;
+            
+            // Override the rectangle coordinates
+            // Very very rough approximation here of conversion from meters to miles to radians
+            // Doesn't produce a square area on Google maps so it's bound to be wrong, but it will do
+            // for the time being
+            $lat_size = $area_size_meters * 0.000621371192 / 69.1;
+            $lng_size = $area_size_meters * 0.000621371192 / 53.0;
+            
+            $this->bottom_left_long = $lng - $lng_size;
+            $this->bottom_left_lat = $lat - $lat_size;
+            $this->top_right_long = $lng + $lng_size;
+            $this->top_right_lat = $lat + $lat_size;
             
         }
 
