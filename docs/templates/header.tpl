@@ -16,11 +16,6 @@
     <div class="hide">
         <a href="#divContent">Skip navigation</a>
     </div>
-    <div id="divAppeal">
-        <strong>PlanningAlerts.com is currently experiencing technical difficulties because of ongoing legal action by Royal Mail</strong>.<br/> 
-        Our provider of postcode data, ErnestMarples.com, has been taken offline because of legal action. Until we find an alternative source, PlanningAlerts.com will be unable to send out any email alerts, or publish data via it's API.
-        We apologise for the inconvenience. For more information, visit the <a href="http://www.ernestmarples.com/blog/">Ernest Marples Blog</a>
-    </div>
     <div id="divMenu">
         <ul class="collapse">
             <li {if $menu_item =="about"}class="selected"{/if}><a href="about.php">About</a></li>                                     
