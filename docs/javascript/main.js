@@ -3,27 +3,27 @@
 function previewMap(sAreaSize) {
     var sWarnings = "";
 
-	//Check we have a valid postcode
-	var sPostcode = document.getElementById('txtPostcode').value;
+	//Check we have entered a street address
+	var sAddress = document.getElementById('txtAddress').value;
 	
-	if (sPostcode == ""){
-		sWarnings = "Please enter a postcode";
-	}else if (checkPostCode(sPostcode) ==false){
-		sWarnings = "Sorry, the postcode you entered seems to be invalid";		
+	if (sAddress == ""){
+		sWarnings = "Please enter a street address";
+	//}else if (checkPostCode(sPostcode) ==false){
+	//	sWarnings = "Sorry, the postcode you entered seems to be invalid";		
 	}
 
 	if (sWarnings == ""){
 		//hide any exisitng warnings
 		hideWarning();
-		document.getElementById('txtPostcode').className = document.getElementById('txtPostcode').className.replace(" error","");
+		document.getElementById('txtAddress').className = document.getElementById('txtAddress').className.replace(" error","");
 		
 		//build url and open new window
-    	var sUrl = 'preview.php?postcode=' + sPostcode + '&area_size=' + sAreaSize;
+    	var sUrl = 'preview.php?address=' + sAddress + '&area_size=' + sAreaSize;
 		document.open(sUrl,'name', 'width=515,height=490');
 	}else{
 		showWarning(sWarnings);
-		document.getElementById('txtPostcode').className += " error";
-		setFocus('txtPostcode');
+		document.getElementById('txtAddress').className += " error";
+		setFocus('txtAddress');
 	}
 	    
 }

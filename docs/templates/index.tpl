@@ -9,10 +9,10 @@
             <label for="txtEmail"><span class="number">1</span> Enter your email address</label>
             <input type="text"  class="textbox {if $email_warn == true}error{/if}" id="txtEmail" name="txtEmail" value="{$email}" />
         </li>
-        <li id="liPostcode">
-            <label for="txtPostcode"><span class="number">2</span> Enter a postcode</label>
-            <input type="text" class="textbox  {if $postcode_warn == true}error{/if}" id="txtPostcode" name="txtPostcode" value="{$postcode}" />
-            <small>e.g. SW9 8JX</small>
+        <li id="liAddress">
+            <label for="txtAddress"><span class="number">2</span> Enter a street address</label>
+            <input type="text" class="textbox  {if $address_warn == true}error{/if}" id="txtAddress" name="txtAddress" value="{$address}" />
+            <small>e.g. 24 Bruce Road, Glenbrook, NSW 2773</small>
         </li>
         <li id="liAlertArea">
             <p id="pAlertArea"><span class="number">3</span> Choose what size area would you like to receive alerts for</p>

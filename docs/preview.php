@@ -26,8 +26,8 @@ class preview_page {
         
         //Grab the postcode and area size from the get string
         
-        if (!isset($_GET['postcode'])){
-            $this->warnings .= "No postcode specified ";
+        if (!isset($_GET['address'])){
+            $this->warnings .= "No street address specified ";
         }
         if (!isset($_GET['area_size'])){
             $this->warnings .= "No area size specified ";

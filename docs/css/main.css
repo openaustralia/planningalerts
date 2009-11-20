@@ -46,12 +46,12 @@ span.number {font-size:2em;float:left;display:block;
 #ulSignup label {width:250px;}
 #ulSignup input.textbox {position:relative; top:0.4em;}
 #ulSignup fieldset label {display:inline;float:none;}
-#liEmail, #liPostcode, #liAlertArea {background:#ffffaa;}
+#liEmail, #liAddress, #liAlertArea {background:#ffffaa;}
 #liEmail {height:2.3em;margin-bottom:1em;}
 #liEmail input.textbox {width:230px;}
-#liPostcode {height:2.3em;}
-#liPostcode input.textbox {width:80px;}
-#liPostcode small {position:relative; top:0.6em;padding-left:0.3em;}
+#liAddress {height:2.3em;}
+#liAddress input.textbox {width:230px;}
+#liAddress small {position:relative; top:0.6em;padding-left:0.3em;}
 #pAlertArea {margin-bottom:0;}
 #ulAlertArea {font-size:0.9em;line-height:1.3em;}
 #liSignup {padding-top:1em;line-height:1.3em;}
