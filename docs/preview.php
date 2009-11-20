@@ -4,6 +4,19 @@
             
 $preview_page = new preview_page;
 
+function address_to_lat_lng($address)
+{
+    // Use Google's Geocoder to look up this street address and convert to latitude and longitude
+    // Only interested in Australian addresses
+    $encoded_address = str_replace(" ", "+", $address);
+    $r = safe_scrape_page("http://maps.google.com/maps/geo?q=".$encoded_address."&output=json&sensor=false&key=".GOOGLE_MAPS_KEY."&gl=au");
+    $result = json_decode($r, true);
+    $lat = $result["Placemark"][0]["Point"]["coordinates"][1];
+    $lng = $result["Placemark"][0]["Point"]["coordinates"][0];
+
+    return array($lat, $lng);
+}
+
 class preview_page {
 
     //Properties
@@ -41,11 +54,11 @@ class preview_page {
             //if(count($result) != 2){
             //    trigger_error("No lat/long could be found");
             //}
-			// For the time being hack in a fixed location
 
-	        $lat = 51.48762641022281;
-	        $lng = -0.10890305042266846;
-
+            $result = address_to_lat_lng($_GET['address']);
+            $lat = $result[0];
+            $lng = $result[1];
+            
             //$lat = $result[0];
             //$lng = $result[1];
 
