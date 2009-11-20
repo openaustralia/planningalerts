@@ -163,22 +163,15 @@
                     $this->store_log("ERROR: Created blank comment tiny url");
                 }
 
-                if (isset($parsed_application->postcode)) {
-                    //Workout the XY location from postcode
-                    $xy = postcode_to_location($parsed_application->postcode);
-                    $application->postcode = $parsed_application->postcode;
-                    $application->x        = $xy[0];
-                    $application->y        = $xy[1];            
-                }
-                else if (isset($parsed_application->easting) && 
-                         isset($parsed_application->northing)) {
-                    $postcode = location_to_postcode(
-                      $parsed_application->easting, 
-                      $parsed_application->northing
-                    );
-                    $application->postcode = $postcode;
-                    $application->x        = $parsed_application->easting;
-                    $application->y        = $parsed_application->northing;
+                if (isset($parsed_application->address)) {
+                    //Workout the location from the address
+                    $result = address_to_lat_lng($parsed_application->address);
+                    
+                    $lat = $result[0];
+                    $lng = $result[1];
+                    
+                    $application->lng = $lng;
+                    $application->lat = $lat;
                 }
 
                 $application->info_tinyurl =$info_tiny_url;            

@@ -17,10 +17,6 @@ class Application{
 	var $comment_url = "";
 	var $comment_tinyurl = "";
 	var $map_url = "";
-	var $x = 0;
-	var $y = 0;
-
-	#lat/lon used by rss.tpl, not yet in schema
 	var $lat = 0;
 	var $lon = 0;
 
@@ -60,8 +56,8 @@ class Application{
           $comment_url = $db->quote($this->comment_url);
           $comment_tinyurl = $db->quote($this->comment_tinyurl);
           $authority_id = $db->quote($this->authority_id);                                                        
-          $x = $db->quote($this->x);     
-          $y = $db->quote($this->y);     
+          $lat = $db->quote($this->lat);     
+          $lng = $db->quote($this->lng);     
           $date_scraped = $db->quote($this->date_scraped);     
           $date_received = $db->quote($this->date_received);     
           $map_url = $db->quote($this->map_url);                                               
@@ -77,8 +73,8 @@ class Application{
             comment_url,
             comment_tinyurl,
             authority_id,
-            x,
-            y,
+            lat,
+            lng,
             date_scraped,
             date_recieved,
             map_url
@@ -93,8 +89,8 @@ class Application{
             $comment_url,
             $comment_tinyurl,
             $authority_id,
-            $x,
-            $y,
+            $lat,
+            $lng,
             $date_scraped,
             $date_received,
             $map_url
