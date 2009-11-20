@@ -312,6 +312,19 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
         $return = array($OSBG->easting, $OSBG->northing);
 
     }
+    
+    function address_to_lat_lng($address)
+    {
+        // Use Google's Geocoder to look up this street address and convert to latitude and longitude
+        // Only interested in Australian addresses
+        $encoded_address = str_replace(" ", "+", $address);
+        $r = safe_scrape_page("http://maps.google.com/maps/geo?q=".$encoded_address."&output=json&sensor=false&key=".GOOGLE_MAPS_KEY."&gl=au");
+        $result = json_decode($r, true);
+        $lat = $result["Placemark"][0]["Point"]["coordinates"][1];
+        $lng = $result["Placemark"][0]["Point"]["coordinates"][0];
+
+        return array($lat, $lng);
+    }
 
     function location_to_postcode($easting, $northing) {
         $url = sprintf(
