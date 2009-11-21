@@ -176,7 +176,7 @@
 
                 $application->info_tinyurl =$info_tiny_url;            
                 $application->comment_tinyurl = $comment_tiny_url;
-                $application->map_url = googlemap_url_from_postcode($application->postcode);
+                $application->map_url = googlemap_url_from_address($application->address);
             
                 //Add to array
                 array_push($return_applications, $application);
