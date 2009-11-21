@@ -21,52 +21,52 @@
 CREATE DATABASE IF NOT EXISTS planning;
 USE planning;
 
-CREATE TABLE  `planning`.`application` (
+CREATE TABLE `application` (
   `application_id` int(11) NOT NULL auto_increment,
   `council_reference` varchar(50) NOT NULL,
   `address` text NOT NULL,
   `postcode` varchar(10) NOT NULL,
   `description` text,
-  `info_url` varchar(1024) default NULL,
-  `info_tinyurl` varchar(50) default NULL,
-  `comment_url` varchar(1024) default NULL,
-  `comment_tinyurl` varchar(50) default NULL,
+  `info_url` varchar(1024) DEFAULT NULL,
+  `info_tinyurl` varchar(50) DEFAULT NULL,
+  `comment_url` varchar(1024) DEFAULT NULL,
+  `comment_tinyurl` varchar(50) DEFAULT NULL,
   `authority_id` int(11) NOT NULL,
   `lat` double NOT NULL,
   `lng` double NOT NULL,
-  `date_scraped` timestamp NOT NULL default CURRENT_TIMESTAMP,
-  `date_recieved` date default NULL,
-  `map_url` varchar(150) default NULL,
+  `date_scraped` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_recieved` date DEFAULT NULL,
+  `map_url` varchar(150) DEFAULT NULL,
   PRIMARY KEY  (`application_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=972 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE  `planning`.`authority` (
+CREATE TABLE `authority` (
   `authority_id` int(11) NOT NULL auto_increment,
   `full_name` varchar(200) NOT NULL,
   `short_name` varchar(100) NOT NULL,
   `planning_email` varchar(100) NOT NULL,
-  `feed_url` varchar(255) default NULL,
-  `external` tinyint(1) default NULL,
-  `disabled` tinyint(1) default NULL,
+  `feed_url` varchar(255) DEFAULT NULL,
+  `external` tinyint(1) DEFAULT NULL,
+  `disabled` tinyint(1) DEFAULT NULL,
   `notes` text,
   PRIMARY KEY  (`authority_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE  `planning`.`user` (
+CREATE TABLE `user` (
   `user_id` int(11) NOT NULL auto_increment,
   `email` varchar(120) NOT NULL,
   `address` varchar(120) NOT NULL,
-  `digest_mode` tinyint(1) NOT NULL default '0',
-  `last_sent` datetime default NULL,
+  `digest_mode` tinyint(1) NOT NULL DEFAULT '0',
+  `last_sent` datetime DEFAULT NULL,
   `lat` double NOT NULL,
   `lng` double NOT NULL,
-  `confirm_id` varchar(20) default NULL,
-  `confirmed` tinyint(1) default NULL,
-  `alert_area_size` varchar(1) default NULL,
+  `confirm_id` varchar(20) DEFAULT NULL,
+  `confirmed` tinyint(1) DEFAULT NULL,
+  `alert_area_size` varchar(1) DEFAULT NULL,
   PRIMARY KEY  (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE TABLE  `planning`.`stats` (
+CREATE TABLE `stats` (
   `key` varchar(25) NOT NULL,
   `value` int(11) NOT NULL,
   PRIMARY KEY  (`key`)
