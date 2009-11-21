@@ -237,7 +237,7 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
 	return $applications;
 }    
     //Tiny url
-    function tiny_url($url,$length=30){
+    function tinyurl($url,$length=30){
 
     	// make nasty big url all small
     	if (strlen($url) >= $length){

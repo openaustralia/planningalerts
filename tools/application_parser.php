@@ -154,12 +154,12 @@
                 $application->date_scraped = mysql_date(time());
 
                 //Make the urls
-                $info_tiny_url = tiny_url($application->info_url);
-                if ($info_tiny_url == ""){
+                $info_tinyurl = tinyurl($application->info_url);
+                if ($info_tinyurl == ""){
                     $this->store_log("ERROR: Created blank info tiny url");
                 }
-                $comment_tiny_url = tiny_url($application->comment_url);            
-                if ($comment_tiny_url == ""){
+                $comment_tinyurl = tinyurl($application->comment_url);            
+                if ($comment_tinyurl == ""){
                     $this->store_log("ERROR: Created blank comment tiny url");
                 }
 
@@ -174,8 +174,8 @@
                     $application->lat = $lat;
                 }
 
-                $application->info_tinyurl =$info_tiny_url;            
-                $application->comment_tinyurl = $comment_tiny_url;
+                $application->info_tinyurl =$info_tinyurl;            
+                $application->comment_tinyurl = $comment_tinyurl;
                 $application->map_url = googlemap_url_from_address($application->address);
             
                 //Add to array
