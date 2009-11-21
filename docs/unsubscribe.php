@@ -8,8 +8,8 @@ $unsubscribe_page = new unsubscribe_page;
 class unsubscribe_page {
 
     //Properties
-    var $postcode = "";
-    var $alert_area_size = 0;
+    var $address = "";
+    var $area_size_meters = 0;
     
 	//Constructor
 	function unsubscribe_page() {	
@@ -31,9 +31,9 @@ class unsubscribe_page {
         $user = new user();
         if ($user->load_from_confirm_id($confirm_id)){
 
-            //Grab the postcode and area
-            $this->postcode = $user->postcode;
-            $this->alert_area_size = alert_size_to_meters($user->alert_area_size);
+            //Grab the address and area
+            $this->address = $user->address;
+            $this->area_size_meters = $user->area_size_meters;
         
             //delete the user
             $user->delete();
@@ -56,8 +56,8 @@ class unsubscribe_page {
 		$smarty->assign("stats", stats::get_stats());
 		$smarty->assign("menu_item", "signup");
 		$smarty->assign("page_title","Unsubscribed");		
-		$smarty->assign("postcode", $this->postcode);
-		$smarty->assign("alert_area_size", $this->alert_area_size);		
+		$smarty->assign("address", $this->address);
+		$smarty->assign("area_size_meters", $this->area_size_meters);		
 
 		//Render
 		$smarty->display('unsubscribe.tpl');
