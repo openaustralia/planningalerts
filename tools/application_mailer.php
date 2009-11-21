@@ -22,7 +22,7 @@
         $db = DB::connect(DB_CONNECTION_STRING);
                  
          //Grab all the users
-         $sql = "select user_id, email, postcode, bottom_left_x, bottom_left_y, top_right_x, top_right_y, alert_area_size, confirm_id
+         $sql = "select user_id, email, address, lat, lng, alert_area_size, confirm_id
             from user
             where confirmed = 1 and last_sent < " . $db->quote(mysql_date(time() - (20 * 60 * 60)));  
 
@@ -35,8 +35,24 @@
          if(sizeof($user_results) > 0){
              
              //Loop though users
-             for ($i=0; $i < sizeof($user_results); $i++){ 
-
+             for ($i=0; $i < sizeof($user_results); $i++){
+                 $user_id = $user_results[$i][0];
+                 $email = $user_results[$i][1];
+                 // TODO: Hmm.. Alert address is actually much more descriptive than address. Maybe change this in the schema?
+                 $alert_address = $user_results[$i][2];
+                 $lat = $user_results[$i][3];
+                 $lng = $user_results[$i][4];
+                 $alert_area_size = $user_results[$i][5];
+                 $confirm_id = $user_results[$i][6];
+                 
+                 // Calculate bounds of search area for this user
+                 $area_size_meters = alert_size_to_meters($alert_area_size);
+                 $result = area_coordinates($lat, $lng, $area_size_meters);
+                 $bottom_left_lat = $result[0];
+                 $bottom_left_lng = $result[1];
+                 $top_right_lat = $result[2];
+                 $top_right_lng = $result[3];
+                 
                  //Find applications for that user
                  $sql = "select distinct council_reference, address, 
                             postcode, description, info_tinyurl, 
@@ -44,8 +60,8 @@
                         from application
                             inner join authority on application.authority_id = authority.authority_id 
                          where date_scraped > " . $db->quote(mysql_date(time() - (24 * 60 * 60))) . 
-                            " and (application.x > " .  $user_results[$i][3] . " and application.x < " . $user_results[$i][5] . ")
-                              and (application.y > " .  $user_results[$i][4] . " and application.y < " . $user_results[$i][6] .       ") and (application.y <> 0  and application.y <> 0 )";
+                            " and (application.lat > " .  $bottom_left_lat . " and application.lat < " . $top_right_lat . ")
+                              and (application.lng > " .  $bottom_left_lng . " and application.lng < " . $top_right_lng . ") and (application.lat <> 0  and application.lng <> 0 )";
 
                 $application_results = $db->getAll($sql);
 
@@ -77,23 +93,23 @@
                     $smarty->compile_dir = SMARTY_COMPILE_DIRECTORY;
                     $smarty->assign("applications", $applications);
                     $smarty->assign("base_url", BASE_URL);
-                    $smarty->assign("confirm_id", $user_results[$i][8]);      
-                    $smarty->assign("alert_area_size", $user_results[$i][7]);                          
-                    $smarty->assign("alert_postcode", $user_results[$i][2]);                                              
+                    $smarty->assign("confirm_id", $confirm_id);      
+                    $smarty->assign("alert_area_size", $alert_area_size);                          
+                    $smarty->assign("alert_address", $alert_address);                                              
                     
                     //Get the email text
                     $email_text = $smarty->fetch(SMARTY_TEMPLATE_DIRECTORY . 'alert_email_text.tpl');
                     
                     //Send the email
                     if($email_text !=""){
-                        send_text_email($user_results[$i][1], EMAIL_FROM_NAME, EMAIL_FROM_ADDRESS, "Planning applications near " . strtoupper($user_results[$i][2]),  $email_text);
+                        send_text_email($email, EMAIL_FROM_NAME, EMAIL_FROM_ADDRESS, "Planning applications near " . $alert_address,  $email_text);
 						$this->email_count +=1;
                     }else{
                         $this->store_log("BLANK EMAIL TEXT !!! EMAIL NOT SENT");
                     }
 
                     //Update last sent
-                    $sql = "update user set last_sent = " . $db->quote(mysql_date(time())) . " where user_id = " . $user_results[$i][0];
+                    $sql = "update user set last_sent = " . $db->quote(mysql_date(time())) . " where user_id = " . $user_id;
                     $db->query($sql);   
                     $this->store_log("Updating last checked date/time");
                 }
