@@ -22,7 +22,7 @@ CREATE DATABASE IF NOT EXISTS planning;
 USE planning;
 
 CREATE TABLE `application` (
-  `application_id` int(11) NOT NULL auto_increment,
+  `application_id` int(11) NOT NULL AUTO_INCREMENT,
   `council_reference` varchar(50) NOT NULL,
   `address` text NOT NULL,
   `postcode` varchar(10) NOT NULL,
@@ -37,11 +37,11 @@ CREATE TABLE `application` (
   `date_scraped` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_recieved` date DEFAULT NULL,
   `map_url` varchar(150) DEFAULT NULL,
-  PRIMARY KEY  (`application_id`)
+  PRIMARY KEY (`application_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `authority` (
-  `authority_id` int(11) NOT NULL auto_increment,
+  `authority_id` int(11) NOT NULL AUTO_INCREMENT,
   `full_name` varchar(200) NOT NULL,
   `short_name` varchar(100) NOT NULL,
   `planning_email` varchar(100) NOT NULL,
@@ -49,11 +49,11 @@ CREATE TABLE `authority` (
   `external` tinyint(1) DEFAULT NULL,
   `disabled` tinyint(1) DEFAULT NULL,
   `notes` text,
-  PRIMARY KEY  (`authority_id`)
+  PRIMARY KEY (`authority_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL auto_increment,
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(120) NOT NULL,
   `address` varchar(120) NOT NULL,
   `digest_mode` tinyint(1) NOT NULL DEFAULT '0',
@@ -63,13 +63,13 @@ CREATE TABLE `user` (
   `confirm_id` varchar(20) DEFAULT NULL,
   `confirmed` tinyint(1) DEFAULT NULL,
   `alert_area_size` varchar(1) DEFAULT NULL,
-  PRIMARY KEY  (`user_id`)
+  PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `stats` (
   `key` varchar(25) NOT NULL,
   `value` int(11) NOT NULL,
-  PRIMARY KEY  (`key`)
+  PRIMARY KEY (`key`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
