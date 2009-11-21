@@ -163,6 +163,8 @@
                     $this->store_log("ERROR: Created blank comment tiny url");
                 }
 
+                // TODO: We're geocoding every address even if this application is already in the database. Would be good
+                // to only geocode new applications.
                 if (isset($parsed_application->address)) {
                     //Workout the location from the address
                     $result = address_to_lat_lng($parsed_application->address);
