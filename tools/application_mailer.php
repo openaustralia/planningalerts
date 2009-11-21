@@ -93,7 +93,7 @@
                     $smarty->assign("applications", $applications);
                     $smarty->assign("base_url", BASE_URL);
                     $smarty->assign("confirm_id", $confirm_id);      
-                    $smarty->assign("alert_area_size", $alert_area_size);                          
+                    $smarty->assign("area_size_meters", $area_size_meters);                          
                     $smarty->assign("alert_address", $alert_address);                                              
                     
                     //Get the email text
