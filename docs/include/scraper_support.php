@@ -236,32 +236,6 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
 	//return
 	return $applications;
 }    
-    //validate postcode
-    function is_postcode ($postcode){
-       $valid = false;
-       $postcode=str_replace(" ","",$postcode);
-       if(ereg ('^[a-zA-Z]{1,2}[0-9]{1,2}[a-zA-Z]{0,1}[0-9]{1}[a-zA-Z]{2}$', $postcode)){
-          $valid = true;
-       }
-       return $valid;
-    }
-
-	function clean_postcode ($postcode, $upper = true) {
-
-		$reg = array();
-		$postcode = trim($postcode);
-		preg_match('/^(.+?)([0-9][a-z]{2})$/',$postcode, $reg);
-	
-		$clean_postcode = trim($reg[1]) . ' ' . trim($reg[2]);
-	
-		if($upper){
-			$clean_postcode = strtoupper($clean_postcode);
-		}
-	
-		return $clean_postcode;
-	
-	}
-    
     //Tiny url
     function tiny_url($url,$length=30){
 
@@ -288,31 +262,6 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
     }
     
 
-    //postcode to location
-    function postcode_to_location($postcode){
-
-	// We don't actually need to fetch the page, we
-	// can get everything we need from the url we are
-	// redirected to.
-        $clean_postcode = strtolower($postcode);
-        $clean_postcode = str_replace(" ","+", $clean_postcode);
-
-        $url = "http://ernestmarples.com/?p=" . $clean_postcode . "&f=csv";
-        $result = file_get_contents($url);
-        $result = split(",", $result);
-        if(count($result) != 2){
-            trigger_error("No lat/long could be found");
-        }
-        $lat = $result[0];
-        $lng = $result[1];
-
-        $LatLng = new LatLng($lat, $lng);
-        $OSBG = $LatLng->toOSRef();
-
-        $return = array($OSBG->easting, $OSBG->northing);
-
-    }
-    
     function address_to_lat_lng($address)
     {
         // Use Google's Geocoder to look up this street address and convert to latitude and longitude

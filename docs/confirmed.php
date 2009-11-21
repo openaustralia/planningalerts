@@ -39,8 +39,8 @@ class confirmed_page {
 
             $user->save(false);
 
-            //Grab the postcode and area
-            $this->postcode = $user->postcode;
+            //Grab the address and area
+            $this->address = $user->address;
             $this->alert_area_size =  alert_size_to_meters($user->alert_area_size);
             
         }else{
@@ -63,7 +63,7 @@ class confirmed_page {
 		$smarty->assign("menu_item", "signup");
 		$smarty->assign("page_title","Confirmed");		
 		$smarty->assign("form_action", $form_action);
-		$smarty->assign("postcode", clean_postcode($this->postcode));
+		$smarty->assign("address", $this->address);
 		$smarty->assign("alert_area_size", $this->alert_area_size);		
 
 		//Render

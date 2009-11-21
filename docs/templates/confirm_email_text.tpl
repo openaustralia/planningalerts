@@ -1,6 +1,6 @@
 {textformat style='email'}
 
-Please click on the link below to confirm you want to receive email alerts for planning applications near {$postcode}:
+Please click on the link below to confirm you want to receive email alerts for planning applications near {$address}:
 
 {$url}
 
