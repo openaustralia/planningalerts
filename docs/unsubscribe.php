@@ -60,7 +60,7 @@ class unsubscribe_page {
 		$smarty->assign("alert_area_size", $this->alert_area_size);		
 
 		//Render
-		$smarty->display('unsubscribed.tpl');
+		$smarty->display('unsubscribe.tpl');
 		
 	}
 	
