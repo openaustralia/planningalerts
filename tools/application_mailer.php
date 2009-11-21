@@ -22,7 +22,7 @@
         $db = DB::connect(DB_CONNECTION_STRING);
                  
          //Grab all the users
-         $sql = "select user_id, email, address, lat, lng, alert_area_size, confirm_id
+         $sql = "select user_id, email, address, lat, lng, area_size_meters, confirm_id
             from user
             where confirmed = 1 and last_sent < " . $db->quote(mysql_date(time() - (20 * 60 * 60)));  
 
@@ -42,11 +42,10 @@
                  $alert_address = $user_results[$i][2];
                  $lat = $user_results[$i][3];
                  $lng = $user_results[$i][4];
-                 $alert_area_size = $user_results[$i][5];
+                 $area_size_meters = $user_results[$i][5];
                  $confirm_id = $user_results[$i][6];
                  
                  // Calculate bounds of search area for this user
-                 $area_size_meters = alert_size_to_meters($alert_area_size);
                  $result = area_coordinates($lat, $lng, $area_size_meters);
                  $bottom_left_lat = $result[0];
                  $bottom_left_lng = $result[1];

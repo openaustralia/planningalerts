@@ -14,7 +14,7 @@
     var $last_sent;
     var $confirm_id;    
     var $confirmed;
-    var $alert_area_size;    
+    var $area_size_meters;    
     
     
     function save($send_confirmation_email = false){   
@@ -71,7 +71,7 @@
                  last_sent = " . $db->quote($this->last_sent) . ",
                  confirm_id = " . $db->quote($this->confirm_id) . ",                                                         
                  confirmed = " . $db->quote($this->confirmed) . ",
-                 alert_area_size = " . $db->quote($this->alert_area_size) . "
+                 area_size_meters = " . $db->quote($this->area_size_meters) . "
                  where user_id = " .  $db->quote($this->user_id) . "
 
           ";
@@ -93,7 +93,7 @@
                      last_sent,
                      confirm_id,
                      confirmed,
-                     alert_area_size
+                     area_size_meters
                  )
                  values(
                      " . $db->quote($this->email) . ",
@@ -103,7 +103,7 @@
                      " . $db->quote($this->last_sent) . ",
                      " . $db->quote($this->confirm_id) . ",                                                         
                      " . $db->quote($this->confirmed) . ",
-                     " . $db->quote($this->alert_area_size) . "
+                     " . $db->quote($this->area_size_meters) . "
                  )
 
           ";
@@ -137,7 +137,7 @@
             //Set email, postcode and size
             $this->email = $email;
             $this->address = $address;
-            $this->alert_area_size = $alert_area_size;
+            $this->area_size_meters = alert_size_to_meters($alert_area_size);
             
             //Get xy of the postcode
             $result = address_to_lat_lng($address);
@@ -173,7 +173,7 @@
         $success = false;
         $db = DB::connect(DB_CONNECTION_STRING);
         $sql = "select user_id, email, address, lat, lng, last_sent, 
-            confirm_id, confirmed, alert_area_size
+            confirm_id, confirmed, area_size_meters
             from user where confirm_id = " . $db->quote($confirm_id);
 
         $results = $db->getall($sql);
@@ -189,7 +189,7 @@
             $this->last_sent = $results[5];
             $this->confirm_id = $results[6];    
             $this->confirmed = $results[7];
-            $this->alert_area_size = $results[8];        
+            $this->area_size_meters = $results[8];        
         }
         
         return $success;

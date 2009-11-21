@@ -62,7 +62,7 @@ CREATE TABLE `user` (
   `lng` double NOT NULL,
   `confirm_id` varchar(20) DEFAULT NULL,
   `confirmed` tinyint(1) DEFAULT NULL,
-  `alert_area_size` varchar(1) DEFAULT NULL,
+  `area_size_meters` int(6) NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

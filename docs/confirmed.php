@@ -9,7 +9,7 @@ class confirmed_page {
 
     //Properties
     var $postcode = "";
-    var $alert_area_size = 0;
+    var $area_size_meters = 0;
 
 	//Constructor
 	function confirmed_page() {	
@@ -41,7 +41,7 @@ class confirmed_page {
 
             //Grab the address and area
             $this->address = $user->address;
-            $this->alert_area_size =  alert_size_to_meters($user->alert_area_size);
+            $this->area_size_meters =  $user->area_size_meters;
             
         }else{
            header("HTTP/1.0 404 Not Found"); 
@@ -64,7 +64,7 @@ class confirmed_page {
 		$smarty->assign("page_title","Confirmed");		
 		$smarty->assign("form_action", $form_action);
 		$smarty->assign("address", $this->address);
-		$smarty->assign("alert_area_size", $this->alert_area_size);		
+		$smarty->assign("area_size_meters", $this->area_size_meters);		
 
 		//Render
 		$smarty->display('confirmed.tpl');
