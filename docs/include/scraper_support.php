@@ -257,8 +257,7 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
     
     //Google maps url
     function googlemap_url_from_address($address, $zoom = 15){
-        $address = str_replace(" ", "+", $address);
-        return "http://maps.google.com/maps?q=$address&z=$zoom";
+        return "http://maps.google.com/maps?q=".urlencode($address)."&z=$zoom";
     }
     
     // Convert a distance in meters on the ground to a latitude change
@@ -291,8 +290,7 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
     {
         // Use Google's Geocoder to look up this street address and convert to latitude and longitude
         // Only interested in Australian addresses
-        $encoded_address = str_replace(" ", "+", $address);
-        $r = safe_scrape_page("http://maps.google.com/maps/geo?q=".$encoded_address."&output=json&sensor=false&key=".GOOGLE_MAPS_KEY."&gl=au");
+        $r = safe_scrape_page("http://maps.google.com/maps/geo?q=".urlencode($address)."&output=json&sensor=false&key=".GOOGLE_MAPS_KEY."&gl=au");
         $result = json_decode($r, true);
         $lat = $result["Placemark"][0]["Point"]["coordinates"][1];
         $lng = $result["Placemark"][0]["Point"]["coordinates"][0];
