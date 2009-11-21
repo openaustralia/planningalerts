@@ -75,21 +75,14 @@ class preview_page {
             //$this->top_right_lat = $long_lat->lat;
             
             // Override the rectangle coordinates
-            // Very very rough approximation here of conversion from meters to miles to radians
-            // Doesn't produce a square area on Google maps so it's bound to be wrong, but it will do
-            // for the time being
-            $lat_size = $area_size_meters * 0.000621371192 / 69.1;
-            $lng_size = $area_size_meters * 0.000621371192 / 53.0;
-            
-            $this->bottom_left_long = $lng - $lng_size;
-            $this->bottom_left_lat = $lat - $lat_size;
-            $this->top_right_long = $lng + $lng_size;
-            $this->top_right_lat = $lat + $lat_size;
-            
+            $result = area_coordinates($lat, $lng, $area_size_meters);
+            $this->bottom_left_lat = $result[0];
+            $this->bottom_left_long = $result[1];
+            $this->top_right_lat = $result[2];
+            $this->top_right_long = $result[3];
         }
-
     }
-
+    
 	//Bind
 	function bind () {
 	    

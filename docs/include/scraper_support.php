@@ -261,6 +261,31 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
         return "http://maps.google.co.uk/maps?q=$postcode&z=$zoom";
     }
     
+    // Convert a distance in meters on the ground to a latitude change
+    // This uses a very very rough approximation here of conversion from meters to miles to radians
+    // Doesn't produce a square area on Google maps so it's bound to be wrong, but it will do
+    // for the time being    
+    function meters_to_lat($meters) {
+        return $meters * 0.000621371192 / 69.1;
+    }
+    
+    // Convert a distance in meters on the ground to a longitude change
+    function meters_to_lng($meters) {
+        return $meters * 0.000621371192 / 53.0;
+    }
+
+    // Returns the latitude longitude of the corners of a square centered on the given point with a given size (in meters)
+    function area_coordinates($lat, $lng, $area_size_meters) {
+        $lat_size = meters_to_lat($area_size_meters);
+        $lng_size = meters_to_lng($area_size_meters);
+
+        $bottom_left_lng = $lng - $lng_size / 2;
+        $bottom_left_lat = $lat - $lat_size / 2;
+        $top_right_lng = $lng + $lng_size / 2;
+        $top_right_lat = $lat + $lat_size / 2;
+        
+        return array($bottom_left_lat, $bottom_left_lng, $top_right_lat, $top_right_lng);
+    }
 
     function address_to_lat_lng($address)
     {
