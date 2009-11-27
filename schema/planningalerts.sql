@@ -18,9 +18,6 @@
 -- Create schema planning
 --
 
-CREATE DATABASE IF NOT EXISTS planning;
-USE planning;
-
 CREATE TABLE `application` (
   `application_id` int(11) NOT NULL AUTO_INCREMENT,
   `council_reference` varchar(50) NOT NULL,
