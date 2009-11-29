@@ -5,6 +5,7 @@ require_once('config.php');
 require_once('application.php');
 require_once ("PEAR/HTTP/Request.php");     
 require_once('phpcoord.php');
+require_once("PEAR/JSON.php");
 
 //Generic scrapers
 function scrape_applications_publicaccess ($search_url, $info_url_base, $comment_url_base){
@@ -291,9 +292,11 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
         // Use Google's Geocoder to look up this street address and convert to latitude and longitude
         // Only interested in Australian addresses
         $r = safe_scrape_page("http://maps.google.com/maps/geo?q=".urlencode($address)."&output=json&sensor=false&key=".GOOGLE_MAPS_KEY."&gl=au");
-        $result = json_decode($r, true);
-        $lat = $result["Placemark"][0]["Point"]["coordinates"][1];
-        $lng = $result["Placemark"][0]["Point"]["coordinates"][0];
+        // Using PEAR version of json decode so that we're not dependent on using recent version of PHP
+        $json = new Services_JSON();
+        $result = $json->decode($r);
+        $lat = $result->{"Placemark"}[0]->{"Point"}->{"coordinates"}[1];
+        $lng = $result->{"Placemark"}[0]->{"Point"}->{"coordinates"}[0];
 
         return array($lat, $lng);
     }
