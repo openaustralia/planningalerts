@@ -141,7 +141,6 @@
             
             //Get xy of the postcode
             $result = address_to_lat_lng($address);
-            var_dump($result);
             
             $lat = $result[0];
             $lng = $result[1];
