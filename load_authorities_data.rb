@@ -3,7 +3,7 @@
 # Currently only supporting internal scrapers. Will be very easy to add external ones
 
 # This URL returns a list of scrapers
-internal_scraper_url = "http://localhost:9393/"
+internal_scraper_url = "http://localhost:4567/"
 
 require 'rubygems'
 require 'mechanize'
