@@ -41,6 +41,11 @@ end
 Authority.delete_all
 
 agent = WWW::Mechanize.new
+# Quick little hack to get around the fact that the test instance is password protected
+if internal_scraper_url == "http://test.planningalerts.org.au/scrapers/"
+  agent.auth("test", "test")
+end
+
 page = agent.get(internal_scraper_url)
 Nokogiri::XML(page.body).search('scraper').each do |scraper|
   authority = Authority.new(:full_name => scraper.at('authority_name').inner_text,
