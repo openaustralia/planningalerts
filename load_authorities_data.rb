@@ -2,20 +2,28 @@
 # First bash at a script for loading the list of planning authorities into the database.
 # Currently only supporting internal scrapers. Will be very easy to add external ones
 
-# This URL returns a list of scrapers
-internal_scraper_url = "http://localhost:4567/"
-
 require 'rubygems'
 require 'mechanize'
 require 'active_record'
 
 # Get the database connection information from the php configuration file
+lines = []
 File.open("#{File.dirname(__FILE__)}/docs/include/config.php") do |f|
-  unless f.readlines.grep(/DB_CONNECTION_STRING/).first =~ /'mysql:\/\/(\w+):(\w+)@(\w+)\/(\w+)'/
-    raise "Couldn't match structure of DB_CONNECTION_STRING line in php configuration file"
-  end
+  lines = f.readlines
 end
-username, password, host, database = $~[1..4]
+if lines.grep(/DB_CONNECTION_STRING/).first =~ /'mysql:\/\/(\w+):(\w+)@(\w+)\/(\w+)'/
+  username, password, host, database = $~[1..4]
+else
+  raise "Couldn't match structure of DB_CONNECTION_STRING line in php configuration file"
+end
+if lines.grep(/BASE_URL/).first =~ /'http(.+)'/
+  base_url = "http" + $~[1]
+else
+  raise "Couldn't match structure of DB_CONNECTION_STRING line in php configuration file"
+end
+
+# This URL returns a list of scrapers
+internal_scraper_url = "#{base_url}/scrapers/"
 
 ActiveRecord::Base.establish_connection(
         :adapter  => "mysql",
