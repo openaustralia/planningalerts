@@ -68,6 +68,11 @@ CREATE TABLE `stats` (
   `value` int(11) NOT NULL,
   PRIMARY KEY (`key`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+INSERT INTO `planning`.`stats` (`key`,`value`) VALUES 
+ ('applications_sent',0),
+ ('emails_sent',0);
+
+
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
