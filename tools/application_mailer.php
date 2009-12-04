@@ -127,6 +127,8 @@
 	  for ($i=0; $i < sizeof($stats_results); $i++){ 
 			if($stats_results[$i][0] == 'applications_sent'){
 				$new_application_total = $stats_results[$i][1] + $this->application_count;
+			}
+			elseif ($stats_results[$i][0] == 'emails_sent'){
 				$new_email_total = $stats_results[$i][1] + $this->email_count;
 			}	
 	  }
