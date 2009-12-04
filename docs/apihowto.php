@@ -28,8 +28,8 @@ class api {
 		$smarty->assign("menu_item","api");
 		
 		$example_address = "24 Bruce Road Glenbrook, NSW 2773";
-		$example_lat = 51.52277;
-		$example_lng = -0.067281;
+		$example_lat = -33.772609;
+		$example_lng = 150.624263;
 		$example_size = 4000;
 		$example_bottom_left_lat = 51.52277;
 		$example_bottom_left_lng = -0.067281;
