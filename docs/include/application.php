@@ -18,7 +18,7 @@ class Application{
 	var $comment_tinyurl = "";
 	var $map_url = "";
 	var $lat = 0;
-	var $lon = 0;
+	var $lng = 0;
 
 	#authority name in join'd table 'authority'
     var $authority_name = "";            	
@@ -105,13 +105,19 @@ class Application{
 class Applications{
 
     //by point
-	function query($x,$y,$d) {
+	function query($lat,$lng,$area_size_meters) {
+	    $result = area_coordinates($lat, $lng, $area_size_meters);
+        $bottom_left_lat = $result[0];
+        $bottom_left_lng = $result[1];
+        $top_right_lat = $result[2];
+        $top_right_lng = $result[3];
+        
 		$db = DB::connect(DB_CONNECTION_STRING);
-		$sql = "select council_reference, address, postcode, description, info_url, comment_url, map_url, x, y, date_recieved, date_scraped, full_name
+		$sql = "select council_reference, address, description, info_url, comment_url, map_url, lat, lng, date_recieved, date_scraped, full_name
 					from application 
 					inner join authority on application.authority_id = authority.authority_id
-					where application.x > " . $db->quote($x - $d) . " and application.x < " . $db->quote($x + $d) .
-						" and application.y > " . $db->quote($y - $d) . " and application.y < " . $db->quote($y + $d) .
+					where application.lat > " . $db->quote($bottom_left_lat) . " and application.lat < " . $db->quote($top_right_lat) .
+						" and application.lng > " . $db->quote($bottom_left_lng) . " and application.lng < " . $db->quote($top_right_lng) .
 					" order by date_scraped desc limit 100";
 		$application_results = $db->getAll($sql);			
 		return applications::load_applications($application_results);
@@ -121,7 +127,7 @@ class Applications{
 	function query_area($x1,$y1,$x2,$y2) {
 
 		$db = DB::connect(DB_CONNECTION_STRING);
-		$sql = "select council_reference, address, postcode, description, info_url, comment_url, map_url, x, y, date_recieved, date_scraped, full_name
+		$sql = "select council_reference, address, description, info_url, comment_url, map_url, lat, lng, date_recieved, date_scraped, full_name
 					from application 
 					inner join authority on application.authority_id = authority.authority_id
 					where application.x > " . $db->quote($x1) . " and application.x < " . $db->quote($x2) .
@@ -135,7 +141,7 @@ class Applications{
 	//by authority
 	function query_authority($authority_short_name) {
 		$db = DB::connect(DB_CONNECTION_STRING);
-		$sql = "select council_reference, address, postcode, description, info_url, comment_url, map_url, x, y, date_recieved, date_scraped, full_name
+		$sql = "select council_reference, address, description, info_url, comment_url, map_url, lat, lng, date_recieved, date_scraped, full_name
 					from application 
 					inner join authority on application.authority_id = authority.authority_id
 					where authority.short_name = " . $db->quote($authority_short_name) ." order by date_scraped desc limit 100";
@@ -147,7 +153,7 @@ class Applications{
 	//latest
 	function query_latest($count = 100) {
 		$db = DB::connect(DB_CONNECTION_STRING);
-		$sql = "select council_reference, address, postcode, description, info_url, comment_url, map_url, x, y, date_recieved, date_scraped, full_name
+		$sql = "select council_reference, address, description, info_url, comment_url, map_url, lat, lng, date_recieved, date_scraped, full_name
 					from application 
 					inner join authority on application.authority_id = authority.authority_id
 					order by date_scraped desc limit " . $count;
@@ -163,21 +169,16 @@ class Applications{
 				$application = new application();
 				$application->council_reference = $application_results[$i][0];
 				$application->address = $application_results[$i][1];
-				$application->postcode = $application_results[$i][2];
-				$application->description = $application_results[$i][3];
-				$application->info_url = $application_results[$i][4];
-				$application->comment_url = $application_results[$i][5];
-				$application->map_url = $application_results[$i][6];
-				$application->x = $application_results[$i][7];
-				$application->y  = $application_results[$i][8];
-				$application->date_received = $application_results[$i][9];
-				$application->date_scraped = $application_results[$i][10];				
-				$application->authority_name  = $application_results[$i][11];
+				$application->description = $application_results[$i][2];
+				$application->info_url = $application_results[$i][3];
+				$application->comment_url = $application_results[$i][4];
+				$application->map_url = $application_results[$i][5];
+				$application->lat = $application_results[$i][6];
+				$application->lng  = $application_results[$i][7];
+				$application->date_received = $application_results[$i][8];
+				$application->date_scraped = $application_results[$i][9];				
+				$application->authority_name  = $application_results[$i][10];
 
-				$os = new OSRef($application->x, $application->y);
-				$latlng = $os->toLatLng();
-				$application->lat = $latlng->lat;
-				$application->lon = $latlng->lng;
 				array_push($applications, $application);
 			}
 		}

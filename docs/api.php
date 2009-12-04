@@ -60,11 +60,7 @@ class api {
                 }
                 //all good, get the data
                 if(sizeof($this->warnings) == 0){
-    				$latlng = new LatLng($_GET['lat'], $_GET['lng']);
-    				$xy = $latlng->toOSRef();
-        			$easting = $xy->easting;
-        			$northing = $xy->northing;
-        			$this->applications = Applications::query($easting, $northing, alert_size_to_meters($_GET['area_size']));
+                    $this->applications = Applications::query($_GET['lat'], $_GET['lng'], $_GET['area_size']);
                 }
                 break;
                 case "pointos":
