@@ -17,8 +17,8 @@
     	http://www.planningalerts.com/api.php?<strong>call</strong>=address<br/>&<strong>address</strong>=[some address]&<strong>area_size</strong>=[size in metres]</em>
     	</code>
     	<p class="apiexamples">
-    	    <a href="http://www.planningalerts.com/api.php?call=address&address=24+Bruce+Road+Glenbrook+NSW+2773&area_size=4000">view example</a>
-    	    <a href="http://maps.google.com/maps?f=q&hl=en&q=http://www.planningalerts.com/api.php%3Flat%3D51.52277%26lng%3D-0.067281%26area_size%3Dl&layer=&ie=UTF8&z=13&om=1">view on a map</a>
+    	    <a href="{$api_example_address_url}">view example</a>
+    	    <a href="{$map_example_address_url}">view on a map</a>
         </p>
     </div>
 	
@@ -32,12 +32,12 @@
     	http://www.planningalerts.com/api.php?<strong>call</strong>=point<br/>&<strong>lat</strong>=[some latitude]&<strong>lng</strong>=[some longitude]<strong>area_size</strong>=[size in metres]
     	</code>
     	<p class="apiexamples">
-    	    <a href="http://www.planningalerts.com/api.php?call=point&lat=51.52277&lng=-0.067281&area_size=l">view example</a>
-    	    <a href="http://maps.google.com/maps?f=q&hl=en&q=http://www.planningalerts.com/api.php%3Fcall%3Dpoint%26lat%3D51.52277%26lng%3D-0.067281%26area_size%3Dl&layer=&ie=UTF8&z=13&om=1">view on a map</a>
+    	    <a href="{$api_example_latlong_url}">view example</a>
+    	    <a href="{$map_example_latlong_url}">view on a map</a>
         </p>
     </div>
     
-    <!--Box-->
+    <!--Area-->
 	<div class="apiitem">
     	<h5>Area by longitude/latitude</h5>
     	<p class="apidefinition">
@@ -47,12 +47,12 @@
     	http://www.planningalerts.com/api.php?<strong>call</strong>=area<br/>&<strong>bottom_left_lat</strong>=[some latitude]&<strong>bottom_left_lng</strong>=[some longitude]&<strong>top_right_lat</strong>=[some latitude]&<strong>top_right_lng</strong>=[some longitude]
     	</code>
     	<p class="apiexamples">
-    	    <a href="http://www.planningalerts.com/api.php?call=area&bottom_left_lat=51.52277&bottom_left_lng=-0.067281&top_right_lat=52.52277&top_right_lng=15">view example</a>
-    	    <a href="http://maps.google.com/maps?f=q&hl=en&q=http://www.planningalerts.com/api.php%3Fcall%3Darea%26bottom_left_lat%3D51.52277%26bottom_left_lng%3D-0.067281%26top_right_lat%3D52.52277%26top_right_lng%3D15&layer=&ie=UTF8&z=8&om=1">view on a map</a>
+    	    <a href="{$api_example_area_url}">view example</a>
+    	    <a href="{$map_example_area_url}">view on a map</a>
         </p>
     </div>
     
-    <!--Box-->
+    <!--Authority-->
 	<div class="apiitem">
     	<h5>Planning authority</h5>
     	<p class="apidefinition">
@@ -62,8 +62,8 @@
     	http://www.planningalerts.com/api.php?<strong>call</strong>=authority<br/>&<strong>authority</strong>=[some name]
     	</code>
     	<p class="apiexamples">
-    	    <a href="http://www.planningalerts.com/api.php?call=authority&authority=Scottish%20Borders">view example</a>
-    	    <a href="http://maps.google.com/maps?f=q&hl=en&q=http://www.planningalerts.com/api.php%3Fcall%3Dauthority%26authority%3DScottish%2520Borders&layer=&ie=UTF8&z=8&om=1">view on a map</a>
+    	    <a href="{$api_example_authority_url}">view example</a>
+    	    <a href="{$map_example_authority_url}">view on a map</a>
         </p>
     </div>
 	
