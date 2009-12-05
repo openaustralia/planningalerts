@@ -31,6 +31,23 @@ class api {
         //get the call type
         $call = $_GET['call'];
         switch ($call) {
+            case "address":
+                if(!isset($_GET['address'])){
+                    array_push($this->warnings, "No address specified");
+                }
+                if(!isset($_GET['area_size'])){
+                    array_push($this->warnings, "Area size specified");
+                }
+
+                //all good, get the data
+                if(sizeof($this->warnings) == 0){
+                    $result = address_to_lat_lng($_GET['address']);
+                    $lat = $result[0];
+                    $lng = $result[1];
+        			$this->applications = Applications::query($lat, $lng, $_GET['area_size']);
+                }
+                
+            break;
             case "postcode":        
 
                     if(!isset($_GET['area_size']) || !is_postcode($_GET['postcode'])){
