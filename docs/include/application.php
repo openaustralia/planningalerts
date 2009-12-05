@@ -124,14 +124,14 @@ class Applications{
 	}
 	
 	//by area
-	function query_area($x1,$y1,$x2,$y2) {
+	function query_area($lat1,$lng1,$lat2,$lng2) {
 
 		$db = DB::connect(DB_CONNECTION_STRING);
 		$sql = "select council_reference, address, description, info_url, comment_url, map_url, lat, lng, date_recieved, date_scraped, full_name
 					from application 
 					inner join authority on application.authority_id = authority.authority_id
-					where application.x > " . $db->quote($x1) . " and application.x < " . $db->quote($x2) .
-						" and application.y > " . $db->quote($y1) . " and application.y < " . $db->quote($y2) .
+					where application.lat > " . $db->quote($lat1) . " and application.lat < " . $db->quote($lat2) .
+						" and application.lng > " . $db->quote($lng1) . " and application.lng < " . $db->quote($lng2) .
 					" order by date_scraped desc limit 100";
 
 		$application_results = $db->getAll($sql);			
