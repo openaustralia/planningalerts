@@ -12,8 +12,8 @@ class api {
 	}
 
     // Turn a url for an API call into a Google Map of that data
-    function mapify($url) {
-        return "http://maps.google.com/maps?f=q&hl=en&layer=&ie=UTF8&z=13&om=1&q=" . urlencode($url);
+    function mapify($url, $zoom = 13) {
+        return "http://maps.google.com/maps?f=q&hl=en&layer=&ie=UTF8&z=" . $zoom . "&om=1&q=" . urlencode($url);
     }
     
 	//howto
@@ -54,10 +54,10 @@ class api {
         $smarty->assign("api_example_area_url", $api_example_area_url);
         $smarty->assign("api_example_authority_url", $api_example_authority_url);
 
-        $smarty->assign("map_example_address_url", $this->mapify($api_example_address_url));
-        $smarty->assign("map_example_latlong_url", $this->mapify($api_example_latlong_url));
-        $smarty->assign("map_example_area_url", $this->mapify($api_example_area_url));
-        $smarty->assign("map_example_authority_url", $this->mapify($api_example_authority_url));
+        $smarty->assign("map_example_address_url", $this->mapify($api_example_address_url, 14));
+        $smarty->assign("map_example_latlong_url", $this->mapify($api_example_latlong_url, 14));
+        $smarty->assign("map_example_area_url", $this->mapify($api_example_area_url, 6));
+        $smarty->assign("map_example_authority_url", $this->mapify($api_example_authority_url, 11));
         
 		$smarty->display('apihowto.tpl');
 	}
