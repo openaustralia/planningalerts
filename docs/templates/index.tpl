@@ -20,15 +20,15 @@
                 <ul id="ulAlertArea" class="form nobullets">
                     <li>
                         <input type="radio" id="radAlertAreaSize_street" name="radAlertAreaSize" value="s" {if $alert_area_size == s}checked="checked"{/if} />
-                        <label for="radAlertAreaSize_street">My street (approximately {$small_zone_size} m)</label> <small><a href="javascript:previewMap('s');">view on a map (new window)</a></small>
+                        <label for="radAlertAreaSize_street">My street (approximately {$small_zone_size} m)</label> <small><a href="javascript:previewMap('{$small_zone_size}');">view on a map (new window)</a></small>
                     </li>
                     <li>
                         <input type="radio" id="radAlertAreaSize_neihgbourhood" name="radAlertAreaSize" value="m" {if $alert_area_size == m}checked="checked"{/if} />                                    
-                        <label for="radAlertAreaSize_neihgbourhood">My neighbourhood  (approximately {$medium_zone_size} m)</label> <small><a href="javascript:previewMap('m');">view on a map (new window)</a></small>
+                        <label for="radAlertAreaSize_neihgbourhood">My neighbourhood  (approximately {$medium_zone_size} m)</label> <small><a href="javascript:previewMap('{$medium_zone_size}');">view on a map (new window)</a></small>
                     </li>
                     <li>
                         <input type="radio" id="radAlertAreaSize_town" name="radAlertAreaSize" value="l" {if $alert_area_size == l}checked="checked"{/if} />                                    
-                        <label for="radAlertAreaSize_town">Wider area  (approximately {$large_zone_size} m)</label> <small><a href="javascript:previewMap('l');">view on a map (new window)</a></small>                                
+                        <label for="radAlertAreaSize_town">Wider area  (approximately {$large_zone_size} m)</label> <small><a href="javascript:previewMap('{$large_zone_size}');">view on a map (new window)</a></small>                                
                     </li>
                     <li>
                         <noscript><fieldset>Note: viewing the alert area on a map requires javascript</fieldset></noscript>

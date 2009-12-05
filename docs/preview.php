@@ -61,7 +61,6 @@ class preview_page {
             //get long lat for the bounding box (OS grid refs are in meters in case you were wondering)
             
             //bottom left
-            $area_size_meters = alert_size_to_meters($_GET['area_size']);
             //$os_ref = new OSRef($xy[0] - $area_size_meters, $xy[1] - $area_size_meters);
             //$long_lat = $os_ref->toLatLng();
             //$this->bottom_left_long = $long_lat->lng;
@@ -75,7 +74,7 @@ class preview_page {
             //$this->top_right_lat = $long_lat->lat;
             
             // Override the rectangle coordinates
-            $result = area_coordinates($lat, $lng, $area_size_meters);
+            $result = area_coordinates($lat, $lng, $_GET['area_size']);
             $this->bottom_left_lat = $result[0];
             $this->bottom_left_long = $result[1];
             $this->top_right_lat = $result[2];
