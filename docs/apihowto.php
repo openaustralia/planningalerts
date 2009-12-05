@@ -28,14 +28,16 @@ class api {
 		$smarty->assign("menu_item","api");
 		
 		$example_address = "24 Bruce Road Glenbrook, NSW 2773";
+		$example_size = 4000;
+		$example_authority = "Blue Mountains";
+		// This lat/lng is for 24 Bruce Road as well
 		$example_lat = -33.772609;
 		$example_lng = 150.624263;
-		$example_size = 4000;
-		$example_bottom_left_lat = 51.52277;
-		$example_bottom_left_lng = -0.067281;
-		$example_top_right_lat = 52.52277;
-		$example_top_right_lng = 15;
-		$example_authority = "Blue Mountains";
+		// This covers most of Victoria and NSW
+		$example_bottom_left_lat = -38.556757;
+		$example_bottom_left_lng = 140.833740;
+		$example_top_right_lat = -29.113775;
+		$example_top_right_lng = 153.325195;
 		
 		$api_base = BASE_URL . "/api.php";
 		$api_example_address_url = $api_base . "?call=address&address=" . urlencode($example_address) .
