@@ -48,25 +48,6 @@ class api {
                 }
                 
             break;
-            case "postcode":        
-
-                    if(!isset($_GET['area_size']) || !is_postcode($_GET['postcode'])){
-                        array_push($this->warnings, "No valid postcode specified");
-                    }
-                    if(!isset($_GET['area_size'])){
-                        array_push($this->warnings, "Area size specified");
-                    }
-
-                    //all good, get the data
-                    if(sizeof($this->warnings) == 0){
-
-                        $xy = postcode_to_location($_GET['postcode']);
-            			$easting = $xy[0];
-            			$northing = $xy[1];
-            			$this->applications = Applications::query($easting, $northing, alert_size_to_meters($_GET['area_size']));
-                    }
-                    
-                break;
             case "point":
                 //validation
                 if(!isset($_GET['lat']) || !isset($_GET['lng'])){
@@ -80,19 +61,6 @@ class api {
                     $this->applications = Applications::query($_GET['lat'], $_GET['lng'], $_GET['area_size']);
                 }
                 break;
-                case "pointos":
-                    //validation
-                    if(!isset($_GET['easting']) || !isset($_GET['northing'])){
-                        array_push($this->warnings, "No easting or northing was specified");
-                    }
-                    if(!isset($_GET['area_size'])){
-                        array_push($this->warnings, "Area size specified");
-                    }
-                    //all good, get the data
-                    if(sizeof($this->warnings) == 0){
-            			$this->applications = Applications::query($_GET['easting'], $_GET['northing'], alert_size_to_meters($_GET['area_size']));
-                    }
-                    break;
                 case "authority":
                     //validation
                     if(!isset($_GET['authority'])){
@@ -113,17 +81,6 @@ class api {
                     //all good, get the data
                     if(sizeof($this->warnings) == 0){
             			$this->applications = Applications::query_area($_GET['bottom_left_lat'], $_GET['bottom_left_lng'], $_GET['top_right_lat'], $_GET['top_right_lng']);
-                    }
-                break;
-                case "areaos":
-                    //validation
-                    if(!isset($_GET['bottom_left_easting']) || !isset($_GET['bottom_left_northing']) || !isset($_GET['top_right_easting']) || !isset($_GET['top_right_northing'])){
-                        array_push($this->warnings, "Bounding box was not specified");
-                    }
-
-                    //all good, get the data
-                    if(sizeof($this->warnings) == 0){
-            			$this->applications = Applications::query_area($_GET['bottom_left_easting'], $_GET['bottom_left_northing'], $_GET['top_right_easting'], $_GET['top_right_easting']);
                     }
                 break;
                 case "latest":
