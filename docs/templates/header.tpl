@@ -10,7 +10,7 @@
     <script src="./javascript/main.js" type="text/javascript"></script>      	
 	
 </head>
-
+{include file="analytics.tpl"}
 <body>
 
     <div class="hide">
