@@ -20,7 +20,7 @@
 
 <h3 id="contact">Contact</h3>
 <p>
-   You can get in touch at <a href="mailto:team@planningalerts.com">team@planningalerts.com</a>
+   You can get in touch at <a href="mailto:contact@planningalerts.org.au">contact@planningalerts.org.au</a>
 </p>
 
 {include file="footer.tpl"}
