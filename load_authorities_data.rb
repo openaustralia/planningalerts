@@ -32,10 +32,8 @@ ActiveRecord::Base.establish_connection(
 
 class Authority < ActiveRecord::Base
   set_table_name "authority"
+  set_primary_key "authority_id"
 end
-
-# Brutal: blast away all the data in the authority table!
-Authority.delete_all
 
 agent = WWW::Mechanize.new
 # Quick little hack to get around the fact that the test instance is password protected
@@ -45,15 +43,25 @@ end
 
 page = agent.get(internal_scrapers_index_url)
 Nokogiri::XML(page.body).search('scraper').each do |scraper|
-  authority = Authority.new(:full_name => scraper.at('authority_name').inner_text,
-    :short_name => scraper.at('authority_short_name').inner_text,
-    :feed_url => scraper.at('url').inner_text,
-    # TODO Find a way of setting the planning email address or maybe it's not used at all
-    :planning_email => "unknown@unknown.org",
-    :external => 1,
-    :disabled => 0)
+  short_name = scraper.at('authority_short_name').inner_text
+  authority = Authority.find_by_short_name(short_name)
+  if authority.nil?
+    puts "New authority: #{short_name}"
+    authority = Authority.new(:short_name => short_name)
+  else
+    puts "Updating authority: #{short_name}"
+  end
+  authority.full_name = scraper.at('authority_name').inner_text
+  authority.feed_url = scraper.at('url').inner_text
+  # TODO Find a way of setting the planning email address or maybe it's not used at all
+  authority.planning_email = "unknown@unknown.org"
+  authority.external = 1
+  authority.disabled = 0
+  
   authority.save!
 end
+
+# TODO: Check if there are any authorities in the database that are not known about here
 
 puts "All is good."
 
