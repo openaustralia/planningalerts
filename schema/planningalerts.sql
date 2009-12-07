@@ -34,7 +34,9 @@ CREATE TABLE `application` (
   `date_scraped` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_recieved` date DEFAULT NULL,
   `map_url` varchar(150) DEFAULT NULL,
-  PRIMARY KEY (`application_id`)
+  PRIMARY KEY (`application_id`),
+  KEY `authority_id` (`authority_id`),
+  CONSTRAINT `application_ibfk_1` FOREIGN KEY (`authority_id`) REFERENCES `authority` (`authority_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `authority` (
