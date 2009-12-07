@@ -96,8 +96,9 @@ class Application{
             $map_url
             )";
             
-            $db->query($sql);
-
+            $result = $db->query($sql);
+            if (DB::isError($result))
+                die ("Application save failed: " . $result->getMessage () . "\n");
     }
 
 }
