@@ -48,7 +48,8 @@ CREATE TABLE `authority` (
   `external` tinyint(1) DEFAULT NULL,
   `disabled` tinyint(1) DEFAULT NULL,
   `notes` text,
-  PRIMARY KEY (`authority_id`)
+  PRIMARY KEY (`authority_id`),
+  UNIQUE KEY `short_name_unique` (`short_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `user` (
