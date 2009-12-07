@@ -35,7 +35,7 @@ CREATE TABLE `application` (
   `date_recieved` date DEFAULT NULL,
   `map_url` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`application_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `authority` (
   `authority_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -47,7 +47,7 @@ CREATE TABLE `authority` (
   `disabled` tinyint(1) DEFAULT NULL,
   `notes` text,
   PRIMARY KEY (`authority_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -61,13 +61,13 @@ CREATE TABLE `user` (
   `confirmed` tinyint(1) DEFAULT NULL,
   `area_size_meters` int(6) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `stats` (
   `key` varchar(25) NOT NULL,
   `value` int(11) NOT NULL,
   PRIMARY KEY (`key`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO `planning`.`stats` (`key`,`value`) VALUES 
  ('applications_sent',0),
  ('emails_sent',0);
