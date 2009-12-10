@@ -53,7 +53,7 @@
         }
 
         //log
-        $this->store_log("Scraping " . sizeof($results) . "authorities");
+        $this->store_log("Scraping " . sizeof($results) . " authorities");
 
         //Parse & save each feed        
         foreach($results as $result){
@@ -89,9 +89,9 @@
                 foreach ($applications as $application){
                     if(!$application->exists()){
                         $application->save();
-                        $this->store_log("Saving application" . $application->council_reference);                        
+                        $this->store_log("Saving application " . $application->council_reference);                        
                     }else{
-                        $this->store_log("Application already exists in database" . $application->council_reference);                        
+                        $this->store_log("Application already exists in database " . $application->council_reference);                        
                     }
                 }
 
