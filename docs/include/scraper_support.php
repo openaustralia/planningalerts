@@ -295,9 +295,17 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
         // Using PEAR version of json decode so that we're not dependent on using recent version of PHP
         $json = new Services_JSON();
         $result = $json->decode($r);
-        $lat = $result->{"Placemark"}[0]->{"Point"}->{"coordinates"}[1];
-        $lng = $result->{"Placemark"}[0]->{"Point"}->{"coordinates"}[0];
-
+        $status_code = $result->Status->code;
+        # Status code 200 from the geocoder is success
+        if ($status_code == 200) {
+            $lat = $result->Placemark[0]->Point->coordinates[1];
+            $lng = $result->Placemark[0]->Point->coordinates[0];
+        }
+        else {
+            echo "Couldn't geocode address: " . $address . ". Geocoder returned status code: " . $status_code . "\n";
+            $lat = NULL;
+            $lng = NULL;
+        }
         return array($lat, $lng);
     }
 
