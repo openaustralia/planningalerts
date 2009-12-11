@@ -23,11 +23,11 @@
     </dd>
     <dt>Can I have a copy of your data?</dt>
     <dd>
-        Yes. You can use our <a href="http://www.planningalerts.com/apihowto.php">API</a>.
+        Yes. You can use our <a href="/apihowto.php">API</a>.
     </dd>
     <dt>What kind of license is your data available under?</dt>
     <dd>
-        The data via the <a href="http://www.planningalerts.com/apihowto.php">API</a> is licensed under the <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-Noncommercial 3.0 license</a>. The license granted in relation to the 'Work' should be read broadly to relate not only copyright but all other IP rights present in this dataset including, for example, any Database rights.
+        The data via the <a href="/apihowto.php">API</a> is licensed under the <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-Noncommercial 3.0 license</a>. The license granted in relation to the 'Work' should be read broadly to relate not only copyright but all other IP rights present in this dataset including, for example, any Database rights.
     </dd>
 </dl>
 {include file="footer.tpl"}

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:georss="http://www.georss.org/georss">
 	<channel>
-		<title>PlanningAlerts.com</title>
-		<link>http://www.planningalerts.com/</link>
+		<title>PlanningAlerts.org.au</title>
+		<link>http://www.planningalerts.org.au/</link>
 		<description></description>
         {foreach name="applications" from="$applications" item="application"}
             <item>

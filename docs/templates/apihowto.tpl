@@ -1,6 +1,6 @@
 {include file="header.tpl"}
 
-    <h3>PlanningAlerts.com API</h3>
+    <h3>PlanningAlerts.org.au API</h3>
     <p>
 	    Planning application data is available programmatically as <a href="http://georss.org/">GeoRSS</a> feeds which can be used in most web mapping APIs and desktop GIS software like <a href="http://mapufacture.com">mapufacture</a> and <a href="http://pipes.yahoo.com/">Yahoo Pipes</a>. Details of the API are listed below.
 	<p/>

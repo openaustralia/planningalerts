@@ -7,7 +7,7 @@
         You can help by writing a <a href="http://en.wikipedia.org/wiki/Screen_scraping">screen scraper</a> for your local planning authority that we can import into planningalerts.org.au. There are only 2 criteria for the screen scraper:
     </p>
     <ol>
-        <li>That it can output data in the following format: <a href="/brisbane.xml">http://www.planningalerts.com/brisbane.xml</a></li>
+        <li>That it can output data in the following format: <a href="/brisbane.xml">http://www.planningalerts.org.au/brisbane.xml</a></li>
         <li>That it can accept a query sting in the format day=X&amp;month=Y&amp;year=Z</li>
     </ol>
     <p>
