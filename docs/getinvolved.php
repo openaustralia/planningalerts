@@ -24,6 +24,7 @@ class getinvolved_page {
 		$smarty->assign("stats", stats::get_stats());
 		$smarty->assign("page_title","Get involved");		
 		$smarty->assign("menu_item", "getinvolved");	
+		$smarty->assign("base_url", BASE_URL);
 		//Render
 		$smarty->display('getinvolved.tpl');
 		
