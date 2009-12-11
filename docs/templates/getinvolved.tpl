@@ -1,6 +1,6 @@
 {include file="header.tpl"}
 
-    <p>PlanningAlerts.org.au is run by a charity, OpenAustralia Foundation, and relies on the support of volunteers. If you would like to get involved we'd love to here from you:</p>
+    <p>PlanningAlerts.org.au is run by a charity, the OpenAustralia Foundation, and relies on the support of volunteers. If you would like to get involved we'd love to hear from you:</p>
 
     <h3>I am a programmer and want to add my local planning authority</h3>
     <p>
