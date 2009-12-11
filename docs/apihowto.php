@@ -26,6 +26,7 @@ class api {
 		$smarty->assign("stats", stats::get_stats());
 		$smarty->assign("page_title","API");
 		$smarty->assign("menu_item","api");
+		$smarty->assign("api_url", BASE_URL . "/api.php");
 		
 		$example_address = "24 Bruce Road Glenbrook, NSW 2773";
 		$example_size = 4000;

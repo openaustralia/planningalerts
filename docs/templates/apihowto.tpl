@@ -14,7 +14,7 @@
     	   Return applications near a given street address. The area included is a square of the given size (in metres) with the address at its center. Suggested sizes are 400, 800 or 4000 metres.
     	</p>
         <code>
-    	http://www.planningalerts.com/api.php?<strong>call</strong>=address<br/>&<strong>address</strong>=[some address]&<strong>area_size</strong>=[size in metres]</em>
+    	{$api_url}?<strong>call</strong>=address<br/>&<strong>address</strong>=[some address]&<strong>area_size</strong>=[size in metres]</em>
     	</code>
     	<p class="apiexamples">
     	    <a href="{$api_example_address_url}">view example</a>
@@ -29,7 +29,7 @@
     	   Return applications near a given longitude/latitude. The area included is a square of the given size (in metres) with the longitude/latitude at its center. Suggested sizes are 400, 800 or 4000 metres.
     	</p>
     	<code>
-    	http://www.planningalerts.com/api.php?<strong>call</strong>=point<br/>&<strong>lat</strong>=[some latitude]&<strong>lng</strong>=[some longitude]<strong>area_size</strong>=[size in metres]
+    	{$api_url}?<strong>call</strong>=point<br/>&<strong>lat</strong>=[some latitude]&<strong>lng</strong>=[some longitude]<strong>area_size</strong>=[size in metres]
     	</code>
     	<p class="apiexamples">
     	    <a href="{$api_example_latlong_url}">view example</a>
@@ -44,7 +44,7 @@
     	   Return applications within a rectangle defined by longitude/latitude.
     	</p>
     	<code>
-    	http://www.planningalerts.com/api.php?<strong>call</strong>=area<br/>&<strong>bottom_left_lat</strong>=[some latitude]&<strong>bottom_left_lng</strong>=[some longitude]&<strong>top_right_lat</strong>=[some latitude]&<strong>top_right_lng</strong>=[some longitude]
+    	{$api_url}?<strong>call</strong>=area<br/>&<strong>bottom_left_lat</strong>=[some latitude]&<strong>bottom_left_lng</strong>=[some longitude]&<strong>top_right_lat</strong>=[some latitude]&<strong>top_right_lng</strong>=[some longitude]
     	</code>
     	<p class="apiexamples">
     	    <a href="{$api_example_area_url}">view example</a>
@@ -59,7 +59,7 @@
     	   Return applications for a specific planning authority (e.g. a local council) by authority short name.
     	</p>
     	<code>
-    	http://www.planningalerts.com/api.php?<strong>call</strong>=authority<br/>&<strong>authority</strong>=[some name]
+    	{$api_url}?<strong>call</strong>=authority<br/>&<strong>authority</strong>=[some name]
     	</code>
     	<p class="apiexamples">
     	    <a href="{$api_example_authority_url}">view example</a>
