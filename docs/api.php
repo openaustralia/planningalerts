@@ -135,7 +135,8 @@ class api {
         
 		$smarty->assign("warnings", $this->warnings);
 		$smarty->assign("applications", $this->applications);
-	
+	    $smarty->assign("base_url", BASE_URL);
+	    
 		//Render
 		$smarty->display('rss.tpl');
 		

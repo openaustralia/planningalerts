@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:georss="http://www.georss.org/georss">
 	<channel>
 		<title>PlanningAlerts.org.au</title>
-		<link>http://www.planningalerts.org.au/</link>
+		<link>{$base_url}</link>
 		<description></description>
         {foreach name="applications" from="$applications" item="application"}
             <item>
