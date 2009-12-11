@@ -15,6 +15,6 @@ WHAT DO YOU THINK?: {$application->comment_tinyurl}
 
 PlanningAlerts.com is a free service run by the charity OpenAustralia Foundation.
 
-You can subscribe to a geoRSS feed of applications for {$alert_postcode|upper} here: {$base_url}/api.php?postcode={$alert_postcode}&area_size={$area_size_meters}
+You can subscribe to a geoRSS feed of applications for {$alert_postcode|upper} here: {$base_url}/api.php?address={$alert_address|escape:'url'}&area_size={$area_size_meters}
 
 To stop receiving these emails click here: {$base_url}/unsubscribe.php?cid={$confirm_id}
