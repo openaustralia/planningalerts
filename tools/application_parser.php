@@ -88,6 +88,23 @@
                 //save applications (probably shouldent be saved individually, but sod it for the moment)
                 foreach ($applications as $application){
                     if(!$application->exists()){
+                        // Make the tinyurls
+                        $application->info_tinyurl = tinyurl($application->info_url);;            
+                        if ($application->info_tinyurl == ""){
+                            $this->store_log("ERROR: Created blank info tiny url");
+                        }
+                        $application->comment_tinyurl = tinyurl($application->comment_url);            
+                        if ($application->comment_tinyurl == ""){
+                            $this->store_log("ERROR: Created blank comment tiny url");
+                        }
+                        // Geocode the address
+                        if (isset($application->address)) {
+                            //Workout the location from the address
+                            $result = address_to_lat_lng($application->address);
+                            $application->lng = $result[1];
+                            $application->lat = $result[0];
+                        }
+                        
                         $application->save();
                         $this->store_log("Saving application " . $application->council_reference);                        
                     }else{
@@ -152,32 +169,6 @@
                 $application->info_url = $parsed_application->info_url;
                 $application->comment_url = $parsed_application->comment_url;                        
                 $application->date_scraped = mysql_date(time());
-
-                //Make the urls
-                $info_tinyurl = tinyurl($application->info_url);
-                if ($info_tinyurl == ""){
-                    $this->store_log("ERROR: Created blank info tiny url");
-                }
-                $comment_tinyurl = tinyurl($application->comment_url);            
-                if ($comment_tinyurl == ""){
-                    $this->store_log("ERROR: Created blank comment tiny url");
-                }
-
-                // TODO: We're geocoding every address even if this application is already in the database. Would be good
-                // to only geocode new applications.
-                if (isset($parsed_application->address)) {
-                    //Workout the location from the address
-                    $result = address_to_lat_lng($parsed_application->address);
-                    
-                    $lat = $result[0];
-                    $lng = $result[1];
-                    
-                    $application->lng = $lng;
-                    $application->lat = $lat;
-                }
-
-                $application->info_tinyurl =$info_tinyurl;            
-                $application->comment_tinyurl = $comment_tinyurl;
                 $application->map_url = googlemap_url_from_address($application->address);
             
                 //Add to array
