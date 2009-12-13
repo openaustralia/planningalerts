@@ -45,7 +45,7 @@
     function run(){
         
         $db = DB::connect(DB_CONNECTION_STRING);
-        $sql = "Select authority_id, feed_url, external, disabled, short_name from authority where disabled <> 1";
+        $sql = "Select authority_id, feed_url, external, disabled, short_name from authority where disabled <> 1 ORDER BY short_name";
         $results = $db->getAll($sql);
         
         if (sizeof($results) == 0){
