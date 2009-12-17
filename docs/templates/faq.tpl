@@ -9,6 +9,11 @@
     <dd>
         We search as many planning authority websites as we can find and forward the data on to you.
     </dd>
+    <dt>What's a planning authority?</dt>
+    <dd>
+        Your local planning authority is the part of government that assesses planning and development applications.
+        Depending on where you live, this might be your local council or territory government.
+    </dd>
     <dt>How can I stop receiving alerts?</dt>
     <dd>
         At the bottom of each email you receive there is a link to unsubscribe from that alert. Just click on it and we'll delete your alert.
