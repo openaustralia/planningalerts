@@ -51,7 +51,6 @@ span.number {font-size:2em;float:left;display:block;
 #ulSignup label {width:250px;}
 #ulSignup input.textbox {position:relative; top:0.4em;}
 #ulSignup fieldset label {display:inline;float:none;}
-#liEmail, #liAddress, #liAlertArea {background:#ffffaa;}
 #liEmail {height:2.3em;margin-bottom:1em;}
 #liEmail input.textbox {width:270px;}
 #liAddress {height:3.7em;}
