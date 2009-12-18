@@ -3,7 +3,7 @@
   src: url("/fonts/junction.eot");
   src: local("Junction"), url("/fonts/junction.otf") format("opentype"); }
 
-body {font-family:Junction, "Lucida Grande", Lucida, Verdana, sans-serif; text-align:center;line-height:1.7em;margin:0;
+body {font-family:"Lucida Grande", Lucida, Verdana, sans-serif; text-align:center;line-height:1.7em;margin:0;
 	color:#0f0f0f;}	
 #divPage {width:580px; margin:0 auto;background:white;text-align:left;}
 h1 {font-weight:normal; font-size:2.7em;padding-left:115px;padding-bottom:0.2em;padding-top:0.1em;}
@@ -35,6 +35,7 @@ h3, h4 {color:#96ca2f;font-style:italic;font-weight:normal}
 	padding-left: 0;
 	padding-bottom: 0;
 	right: 0;
+	border-bottom-style: none;
 }
 /* Appeal */
 #divAppeal {background:#f9b4b4; color:#333; border-bottom:solid 1px #333; font-size:0.8em; padding-bottom:0.2em;}
