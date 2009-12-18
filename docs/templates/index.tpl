@@ -15,7 +15,7 @@
             <small>e.g. 24 Bruce Road, Glenbrook, NSW 2773</small>
         </li>
         <li id="liAlertArea">
-            <p id="pAlertArea"><span class="number">3</span> Choose what size area would you like to receive alerts for</p>
+            <p id="pAlertArea"><span class="number">3</span>What size area would you like to receive alerts for?</p>
             <fieldset>
                 <ul id="ulAlertArea" class="form nobullets">
                     <li>
