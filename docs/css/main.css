@@ -47,12 +47,14 @@ h3, h4 {color:#96ca2f;font-style:italic;font-weight:normal}
 #divPayment {text-align:center; border:solid 1px #ccc; padding:2em 1em 1em 1em; background:#ffff88;}
 
 /* Menu */
-#divMenu {background:#6E84BD;height:2.2em;font-size:0.7em;}
+#divMenu {background: #989898;height:2.5em;font-size:0.7em;}
 #divMenu ul {width:500px;margin:0 auto;}
 #divMenu ul li {float:right;text-align:center;}
-#divMenu ul li a {margin-left:1em;margin-right:1em;display:block; color:white; 
-	text-decoration:none;position:relative; top:-0.2em;padding-bottom:4px;}
-#divMenu ul li.selected {background:#96ca2f;}
+#divMenu ul li a {margin-left:1em;margin-right:1em;color:white; 
+	text-decoration:none}
+#divMenu ul li.selected {background:#ff8c00;
+	height: 2.5em;
+}
 
 /* Beta note */
 #spnBeta {font-size:0.8em; padding:0;margin:0;
