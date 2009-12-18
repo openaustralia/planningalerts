@@ -8,9 +8,9 @@ body {font-family:"Lucida Grande", Lucida, Verdana, sans-serif; text-align:cente
 #divPage {width:580px; margin:0 auto;background:white;text-align:left;}
 h1 {font-weight:normal; font-size:2.7em;padding-left:115px;padding-bottom:0.2em;padding-top:0.1em;}
 h1 a {color:#456FB1;text-decoration:none;}
-h1 span {color:#96ca2f;}
+h1 span {color: #ff8c00;}
 h1 sup {font-size:0.3em; text-transform:uppercase;
-	color:#456FB1}
+	color: #ff8c00}
 h2 {font-weight:normal;font-size:1em;border-bottom:dotted 1px #808080;padding-left:115px;
 	padding-bottom:1.5em;color:#96ca2f;font-style:italic;font-size:1.15em;}
 h2 em {text-decoration:underline}
@@ -29,6 +29,9 @@ h3, h4 {color:#96ca2f;font-style:italic;font-weight:normal}
 	position: absolute;
 	top: 0.6em;
 }
+#divHeader h1 a {
+	color:  #f4f323;
+}
 #divHeader h2 {
 	position: absolute;
 	top: 6em;
@@ -36,6 +39,7 @@ h3, h4 {color:#96ca2f;font-style:italic;font-weight:normal}
 	padding-bottom: 0;
 	right: 0;
 	border-bottom-style: none;
+	color: #ff8c00;
 }
 /* Appeal */
 #divAppeal {background:#f9b4b4; color:#333; border-bottom:solid 1px #333; font-size:0.8em; padding-bottom:0.2em;}
