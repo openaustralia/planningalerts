@@ -34,6 +34,13 @@ class index_page {
 
     }
 
+    function meters_in_words($meters) {
+        if ($meters < 1000)
+            return $meters . " m";
+        else
+            return $meters / 1000 . " km";
+    }
+
 	//Bind
 	function bind() {
 	    
@@ -57,9 +64,9 @@ class index_page {
 		//$smarty->assign("postcode_warn", $this->postcode_warn);	
 		
 		$smarty->assign("onloadscript", $this->onloadscript);
-		$smarty->assign("small_zone_size",SMALL_ZONE_SIZE);
-		$smarty->assign("medium_zone_size",MEDIUM_ZONE_SIZE);
-		$smarty->assign("large_zone_size",LARGE_ZONE_SIZE);				
+		$smarty->assign("small_zone_size", $this->meters_in_words(SMALL_ZONE_SIZE));
+		$smarty->assign("medium_zone_size", $this->meters_in_words(MEDIUM_ZONE_SIZE));
+		$smarty->assign("large_zone_size", $this->meters_in_words(LARGE_ZONE_SIZE));				
 		
 		//Render
 		$smarty->display('index.tpl');
