@@ -13,6 +13,12 @@
 {include file="analytics.tpl"}
 <body>
 
+    <div id="divHeader">
+        <img alt="banner" title="banner" src="./images/banner.png" />
+        <h1><a href="/">PlanningAlerts<span>.</span>org<span>.</span>au</a><sup>beta</sup></h1>
+        <h2>Email alerts of planning applications <em>near you</em></h2>
+        <p id="pStats">{$stats.alert_count} alerts sent for {$stats.authority_count} planning authorities</p>
+    </div>
     <div class="hide">
         <a href="#divContent">Skip navigation</a>
     </div>
@@ -27,12 +33,6 @@
         </ul>
     </div>
     <div id="divPage">
-        <div id="divHeader">
-            <h1><a href="/">PlanningAlerts<span>.</span>org<span>.</span>au</a><small>beta</small></h1>
-            <h2>Email alerts of planning applications <em>near you</em></h2>
-            <p id="pStats">{$stats.alert_count} alerts sent for {$stats.authority_count} planning authorities</p>
-            <img alt="logo" title="logo" src="./images/logo.png" />
-        </div>
         <div id="divContent">
             <div id="divWarning" {if $warnings == ""}class="hide"{/if}>
                 {$warnings}
