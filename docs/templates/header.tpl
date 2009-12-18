@@ -14,7 +14,6 @@
 <body>
 
     <div id="divHeader">
-        <img alt="banner" title="banner" src="./images/banner.png" />
         <h1><a href="/">PlanningAlerts<span>.</span>org<span>.</span>au</a><sup>beta</sup></h1>
         <h2>Email alerts of planning applications <em>near you</em></h2>
         <p id="pStats">{$stats.alert_count} alerts sent for {$stats.authority_count} planning authorities</p>
