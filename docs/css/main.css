@@ -47,7 +47,7 @@ input.error {background:#fdd9ea;}
 span.number {font-size:2em;float:left;display:block;
 	text-align: left;
 	color:#456FB1;
-	width: 1em;
+	width: 1.3em;
 }
 #liAlertArea span.number {margin-bottom:2em;}
 #ulSignup label {width:250px;}
