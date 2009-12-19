@@ -13,26 +13,25 @@
 {include file="analytics.tpl"}
 <body>
 
+    <div id="divHeader">
+        <h1><a href="/">PlanningAlerts<span>.</span>org<span>.</span>au</a><sup>beta</sup></h1>
+        <h2>Email alerts of planning applications <em>near you</em></h2>
+        <!-- <p id="pStats">{$stats.alert_count} alerts sent for {$stats.authority_count} planning authorities</p> -->
+    </div>
     <div class="hide">
         <a href="#divContent">Skip navigation</a>
     </div>
     <div id="divMenu">
         <ul class="collapse">
             <li {if $menu_item =="about"}class="selected"{/if}><a href="about.php">About</a></li>                                     
-			<li {if $menu_item == "api"}class="selected"{/if}><a href="apihowto.php">API</a></li>
+			<li {if $menu_item == "api"}class="selected"{/if}><a href="apihowto.php"><acronym title="Application programming interface">API</acronym></a></li>
 
-            <li {if $menu_item =="getinvolved"}class="selected"{/if}><a href="getinvolved.php">Get involved</a></li>                                       
-            <li {if $menu_item =="faq"}class="selected"{/if}><a href="faq.php"><acronym title="Frequently asked questions">FAQ</acronym>s</a></li>                
-            <li {if $menu_item =="signup"}class="selected"{/if}><a href="/">Signup</a></li>            
+            <li {if $menu_item =="getinvolved"}class="selected"{/if}><a href="getinvolved.php">Get Involved</a></li>                                       
+            <li {if $menu_item =="faq"}class="selected"{/if}><a href="faq.php"><acronym title="Frequently asked questions">FAQ</acronym></a></li>                
+            <li {if $menu_item =="signup"}class="selected"{/if}><a href="/">Sign Up</a></li>            
         </ul>
     </div>
     <div id="divPage">
-        <div id="divHeader">
-            <h1><a href="/">PlanningAlerts<span>.</span>org<span>.</span>au</a><small>beta</small></h1>
-            <h2>Email alerts of planning applications <em>near you</em></h2>
-            <p id="pStats">{$stats.alert_count} alerts sent for {$stats.authority_count} planning authorities</p>
-            <img alt="logo" title="logo" src="./images/logo.png" />
-        </div>
         <div id="divContent">
             <div id="divWarning" {if $warnings == ""}class="hide"{/if}>
                 {$warnings}
