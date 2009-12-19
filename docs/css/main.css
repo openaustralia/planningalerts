@@ -72,6 +72,9 @@ span.number {font-size:2em;float:left;display:block;
 	color:#456FB1;
 	width: 1.3em;
 }
+input.textbox {
+	font: 1em "Lucida Grande", Lucida, Verdana, sans-serif;
+}
 #liAlertArea span.number {margin-bottom:2em;}
 #ulSignup label {width:250px;}
 #ulSignup input.textbox {position:relative; top:0.4em;}
