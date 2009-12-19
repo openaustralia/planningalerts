@@ -8,7 +8,7 @@
     </p>
     <ol>
         <li>That it can output data in the following format: <a href="{$base_url}/brisbane.xml">{$base_url}/brisbane.xml</a></li>
-        <li>That it can accept a query sting in the format day=X&amp;month=Y&amp;year=Z</li>
+        <li>That it can accept a query string in the format day=X&amp;month=Y&amp;year=Z</li>
     </ol>
     <p>
        Other than that it's up to you. It can be in any language. You can host them yourself or we can host it for you.
