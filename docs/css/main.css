@@ -59,8 +59,9 @@ h3, h4 {color:#ff8c00;font-style:italic;font-weight:normal}
 }
 
 /* Beta note */
-#spnBeta {font-size:0.8em; padding:0;margin:0;
-	color:#666;background: rgba(244,243,35,0.5);line-height:1em; position:relative; top:-5px;}
+#spnBeta {font-size: 0.8em; color:#666;
+	line-height: 1.4em;
+}
 
 /* Warnings & errors*/
 #divWarning {background:#f4f323;font-size:0.9em;text-align:center; margin-bottom:1em;}

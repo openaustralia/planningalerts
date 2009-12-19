@@ -36,10 +36,9 @@
                 </ul>
             </fieldset>
         </li>  
-        <li id="liSignup">
-            <input type="submit" class="button" value="Create alert >>" />
-            <span id="spnBeta">This site is in beta mode, so all local authorities near you may not be included in alerts.</span>
-        </li>              
+        <input type="submit" class="button" value="Create alert >>" />
+        <p id="spnBeta">It's early days for this service so your local authority may not be included yet. Sign up
+            anyway and you'll receive alerts as soon as they're available.</p>
     </ul>
 </form>
 
