@@ -13,7 +13,7 @@
     <p>
        Other than that it's up to you. It can be in any language. You can host them yourself or we can host it for you.
     </p>
-    <p><span class="highlight">Please go ahead and <a href="http://github.com/openaustralia/planningalerts-app">grab the code for this site</a> and <a href="http://tickets.openaustralia.org/browse/PA">view some development tickets</a> or join the <a href="http://groups.google.com/group/openaustralia-dev">OpenAustralia Community mailing list</a>.</span>
+    <p><span class="highlight">Please go ahead and grab the code for <a href="http://github.com/openaustralia/planningalerts-app">this site</a>, <a href="http://github.com/openaustralia/planningalerts-parsers">the scrapers</a>, <a href="http://tickets.openaustralia.org/browse/PA">view some development tickets</a> and join the <a href="http://groups.google.com/group/openaustralia-dev">OpenAustralia Community mailing list</a>.</span>
     </p>
     <h3>I work for a local council or planning authority and would like to make our data available</h3>
     <p>
