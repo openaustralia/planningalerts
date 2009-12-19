@@ -1,3 +1,5 @@
+The following new planning applications have been found near {$alert_address}:
+
 {foreach name="applications" from="$applications" item="application"}
 {$application->address|upper} ({$application->council_reference|upper})
 
