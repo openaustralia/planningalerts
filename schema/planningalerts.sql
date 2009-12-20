@@ -71,7 +71,7 @@ CREATE TABLE `stats` (
   `value` int(11) NOT NULL,
   PRIMARY KEY (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-INSERT INTO `planning`.`stats` (`key`,`value`) VALUES 
+INSERT INTO `stats` (`key`,`value`) VALUES 
  ('applications_sent',0),
  ('emails_sent',0);
 
