@@ -2,7 +2,8 @@
         <div id="divFooter">
             <ul class="inline">
                 <li><a href="about.php#contact">Contact</a></li>  
-                <li><a href="http://blog.openaustralia.org">Blog</a></li>              
+                <li><a href="http://blog.openaustralia.org">Blog</a></li>
+                <li><a href="http://twitter.com/planningalerts">Twitter</a></li>              
             </ul>
             <span id="oaf">An OpenAustralia Foundation Project</span>
             {*            
