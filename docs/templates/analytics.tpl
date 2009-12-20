@@ -5,7 +5,7 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 </script>
 <script type="text/javascript">
 try {
-var pageTracker = _gat._getTracker("UA-3107958-5");
+var pageTracker = _gat._getTracker("{/literal}{$smarty.const.GOOGLE_ANALYTICS_KEY}{literal}");
 pageTracker._trackPageview();
 } catch(err) {}</script>
 {/literal}

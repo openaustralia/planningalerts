@@ -40,4 +40,6 @@ define ("LOG_EMAIL", 'richard@memespring.co.uk');
 //Google maps key
 define ("GOOGLE_MAPS_KEY", 'ABQIAAAA74qlSxRXDySLggVC9lWIbBQeWac_qjVnPmH5iTpTixX1E2xfnBR9X0On0aXuFhRdSPx42Pz0LmJzhQ');
 
+//Google Analytics key
+define ("GOOGLE_ANALYTICS_KEY", "UA-XXXXXXX-X")
 ?>
