@@ -124,14 +124,15 @@ span.highlight {background: rgba(244,243,35,0.5);}
 a {color:#22579C;}
 
 /* Footer */
-#divFooter {font-size:0.9em;
+#divFooter {font-size:0.8em;
 	padding-top:1.5em;position:relative;}
 #divFooter #aOpen {display:block;width:80px;height:15px;background:red url(../images/opendata.png);
 	position:absolute; right:140px; top:40px;}
 #divFooter #aHosted {display:block;width:130px;height:35px;background:url(../images/hosted.png);
 	position:absolute; right:0; top:30px;}
-#divFooter ul {border-top:dotted 1px #808080;padding-top:8px;padding-bottom:20px;}
-#divFooter #oaf {display:block;position:absolute; right:0; top:30px;}
+#divFooter ul {border-top:dotted 1px #808080;padding-top:4px;padding-bottom:20px;}
+#divFooter ul li {display:inline;margin:0;padding: 0 10px 0 0;}
+#divFooter #oaf {display:block;position:absolute; right:0; top:26px;}
 
 /* Buttons */
 input.button {background-color: #f4f323;
