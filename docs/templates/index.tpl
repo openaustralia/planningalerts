@@ -12,7 +12,7 @@
         <li id="liAddress">
             <label for="txtAddress"><span class="number">2</span> Enter a street address</label>
             <input type="text" class="textbox  {if $address_warn == true}error{/if}" id="txtAddress" name="txtAddress" value="{$address}" />
-            <small>e.g. 24 Bruce Road, Glenbrook, NSW 2773</small>
+            <small>e.g. 1 Sowerby St, Goulburn, NSW 2580</small>
         </li>
         <li id="liAlertArea">
             <p id="pAlertArea"><span class="number">3</span>What size area would you like to receive alerts for?</p>
