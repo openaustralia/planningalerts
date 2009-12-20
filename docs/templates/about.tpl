@@ -1,6 +1,6 @@
 {include file="header.tpl"}
 
-<p>You'd probably know if your next door neighbour was going to knock their house down (you'd get a letter through the door telling you they had applied for planning permission and asking you what you thought about it). But you probably never find out if the old cinema or pub 5 streets away is going to be converted into luxury flats until <a href="http://www.bbc.co.uk/cult/hitchhikers/gallery/tv/fordprosser.shtml">the bulldozers turned up</a>.</p>
+<p>You'd probably know if your next door neighbour was going to knock their house down (you'd get a letter through the door telling you they had applied for planning permission and asking you what you thought about it). But you probably never find out if the old cinema or pub 5 streets away is going to be converted into luxury flats until <a href="http://www.youtube.com/watch?v=srGsCYSYjwA">the bulldozers turned up</a>.</p>
 <p>
     PlanningAlerts.org.au is a free service which searches as many planning authority websites as it can find and emails you details of applications near you. The aim of this to enable shared scrutiny of what is being built (and <a href="http://www.flickr.com/photos/kentjohnson/3634555801/" title="Carlton and United Brewery Site, Broadway Sydney">knocked down</a>) in peoples' communities.
 </p>
