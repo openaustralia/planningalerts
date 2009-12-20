@@ -5,7 +5,7 @@
     PlanningAlerts.org.au is a free service which searches as many planning authority websites as it can find and emails you details of applications near you. The aim of this to enable shared scrutiny of what is being built (and <a href="http://www.flickr.com/photos/kentjohnson/3634555801/" title="Carlton and United Brewery Site, Broadway Sydney">knocked down</a>) in peoples' communities.
 </p>
 <p>    
-    PlanningAlerts.org.au is brought to you by the <a href="http://www.openaustraliafoundation.org.au">OpenAustralia Foundation</a> with financial assistance from the Australian <a href="http://gov2.net.au/blog/2009/09/22/allocating-the-project-fund-we-want-your-ideas/#comment-4672">Government 2.0 Taskforce</a>. It was adapted for Australia by Matthew Landauer and Katherine Szuminska, and is based on the UK site <a href="PlanningAlerts.com">PlanningAlerts.com</a>, built by Richard Pope, Mikel Maron, Sam Smith, Duncan Parkes, Tom Hughes and Andy Armstrong.
+    PlanningAlerts.org.au is brought to you by the <a href="http://www.openaustraliafoundation.org.au">OpenAustralia Foundation</a> with financial assistance from the Australian <a href="http://gov2.net.au/blog/2009/09/22/allocating-the-project-fund-we-want-your-ideas/#comment-4672">Government 2.0 Taskforce</a>. It was adapted for Australia by Matthew Landauer and Katherine Szuminska, and is based on the UK site <a href="http://www.planningalerts.com">PlanningAlerts.com</a>, built by Richard Pope, Mikel Maron, Sam Smith, Duncan Parkes, Tom Hughes and Andy Armstrong.
 </p>
 
 <h3 id="authorities">Planning authorities currently covered by the service</h3>
