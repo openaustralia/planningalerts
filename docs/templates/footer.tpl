@@ -1,10 +1,10 @@
         </div>
         <div id="divFooter">
             <ul class="inline">
-                <li><a href="/">Home</a></li>
-                <li><a href="about.php">About</a></li>                
-                <li><a href="about.php#contact">Contact</a></li>                
+                <li><a href="about.php#contact">Contact</a></li>  
+                <li><a href="http://blog.openaustralia.org">Blog</a></li>              
             </ul>
+            <span id="oaf">An OpenAustralia Foundation Project</span>
             {*            
             <a id="aOpen" href="http://okd.okfn.org/" title="Data on this site is open"><span class="hide">Open Data</span></a>
 

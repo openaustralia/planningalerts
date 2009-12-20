@@ -131,6 +131,7 @@ a {color:#22579C;}
 #divFooter #aHosted {display:block;width:130px;height:35px;background:url(../images/hosted.png);
 	position:absolute; right:0; top:30px;}
 #divFooter ul {border-top:dotted 1px #808080;padding-top:8px;padding-bottom:20px;}
+#divFooter #oaf {display:block;position:absolute; right:0; top:30px;}
 
 /* Buttons */
 input.button {background-color: #f4f323;
