@@ -8,17 +8,21 @@
 	<link rel="stylesheet" media="all" type="text/css" href="./css/memespring.css" />		
 	<link rel="stylesheet" media="all" type="text/css" href="./css/main.css" />
     <script src="./javascript/main.js" type="text/javascript"></script>      	
-	
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '{$smarty.const.GOOGLE_ANALYTICS_KEY}']);
+      _gaq.push(['_trackPageview']);
+      {literal}
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+      })();
+      {/literal}
+    </script>	
 </head>
-{literal}<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("{/literal}{$smarty.const.GOOGLE_ANALYTICS_KEY}{literal}");
-pageTracker._trackPageview();
-} catch(err) {}</script>{/literal}
 <body>
 
     <div id="divHeader">
