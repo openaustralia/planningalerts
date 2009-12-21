@@ -58,6 +58,15 @@ h3, h4 {color:#ff8c00;font-style:italic;font-weight:normal}
 	height: 2.5em;
 }
 
+/* Privacy note */
+#privacy {font-size: 0.8em; color:#666;
+	line-height: 1.4em;
+}
+#privacy em {
+	font-weight: bold;
+	font-style: normal;
+}
+
 /* Beta note */
 #spnBeta {font-size: 0.8em; color:#666;
 	line-height: 1.4em;
