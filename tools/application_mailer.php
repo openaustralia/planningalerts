@@ -94,7 +94,8 @@
                     $smarty->assign("base_url", BASE_URL);
                     $smarty->assign("confirm_id", $confirm_id);      
                     $smarty->assign("area_size_meters", $area_size_meters);                          
-                    $smarty->assign("alert_address", $alert_address);                                              
+                    $smarty->assign("alert_address", $alert_address);
+                    $smarty->assign("georss_url", BASE_URL . "/api.php?call=address&address=" . urlencode($alert_address) . "&area_size=" . $area_size_meters);
                     
                     //Get the email text
                     $email_text = $smarty->fetch(SMARTY_TEMPLATE_DIRECTORY . 'alert_email_text.tpl');

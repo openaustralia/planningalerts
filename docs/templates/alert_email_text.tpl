@@ -17,8 +17,8 @@ WHAT DO YOU THINK?: {$application->comment_tinyurl}
 
 PlanningAlerts.org.au is a free service run by the charity OpenAustralia Foundation.
 
-You can subscribe to a geoRSS feed of applications for {$alert_address} here: {$base_url}/api.php?call=address&address={$alert_address|escape:'url'}&area_size={$area_size_meters}
+You can subscribe to a geoRSS feed of applications for {$alert_address} here: {$georss_url}
 
-GeoRSS can be used to display planning applications on a map. For example, on Google Maps: http://maps.google.com.au/maps?q={$base_url}/api.php?call=address&address={$alert_address|escape:'url'}&area_size={$area_size_meters}
+GeoRSS can be used to display planning applications on a map. For example, on Google Maps: http://maps.google.com.au/maps?q={$georss_url|urlencode}
 
 To stop receiving these emails click here: {$base_url}/unsubscribe.php?cid={$confirm_id}
