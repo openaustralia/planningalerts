@@ -70,7 +70,7 @@
 
     <h4 id="hLicenseInfo">License information</h4>
     <p>
-        Data via the api is licensed under the <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-Noncommercial 3.0 license</a>.
+        Data via the api is licensed under the <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0 license</a>.
     </p>
 		
 {include file="footer.tpl"}
