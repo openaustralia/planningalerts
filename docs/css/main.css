@@ -18,8 +18,19 @@ h2 {font-weight:normal;font-size:1em;border-bottom:dotted 1px #808080;padding-le
 h2 em {text-decoration:underline}
 h3, h4 {color:#ff8c00;font-style:italic;font-weight:normal}
 
-#pStats {padding:0; margin:0;position:absolute; left:115px;bottom:1.5em;
-	color:#808080; font-size:0.9em;}
+#pStats { margin:0;position:absolute;
+	color: #989898;
+	right: 30px;
+	background-color: #feffff;
+	font-size: 0.8em;
+	line-height: 1em;
+	padding: 5px;
+	top: 30px;
+}
+
+#pStats a {
+	text-decoration: none; color: #989898;
+}
 
 #divHeader {
 	margin: auto;
