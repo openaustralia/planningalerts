@@ -126,8 +126,10 @@ word-wrap: break-word}
 div.apiitem code em {color:#808080;}
 div.apiitem p {font-size:0.8em;margin:0;padding:0;line-height:1.5em;margin-bottom:1em;}
 p.apiexamples {position:relative; top:0.7em;}
-#hLicenseInfo {background:url(../images/salicense.png) no-repeat right 1em;padding-bottom:4px;
-	padding-top:1em;}
+#hLicenseInfo {background:url(../images/salicense.png) no-repeat right 1em;
+	padding-top:1em;
+	padding-bottom: 5px;
+}
 
 /* infobox */
 .infobox {background:#fdd9ea; font-size:0.9em;}
