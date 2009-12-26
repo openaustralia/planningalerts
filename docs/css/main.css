@@ -21,11 +21,11 @@ h3, h4 {color:#ff8c00;font-style:italic;font-weight:normal}
 #pStats { margin:0;position:absolute;
 	color: #989898;
 	right: 30px;
-	background-color: #feffff;
 	font-size: 0.8em;
 	line-height: 1em;
-	padding: 5px;
 	top: 30px;
+	padding: 5px 5px 5px 78px;
+	background: #feffff url(/images/plane.png) repeat-y 0 center;
 }
 
 #pStats a {
