@@ -101,8 +101,13 @@
                         if (isset($application->address)) {
                             //Workout the location from the address
                             $result = address_to_lat_lng($application->address);
-                            $application->lng = $result[1];
                             $application->lat = $result[0];
+                            $application->lng = $result[1];
+                            $status_code = $result[2];
+                            if ($status_code != 200) {
+                                echo "Couldn't geocode address: " . $application->address .
+                                    ". Geocoder returned status code: " . $status_code . "\n";
+                            }
                         }
                         
                         $application->save();

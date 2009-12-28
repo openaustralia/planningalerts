@@ -302,11 +302,10 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
             $lng = $result->Placemark[0]->Point->coordinates[0];
         }
         else {
-            echo "Couldn't geocode address: " . $address . ". Geocoder returned status code: " . $status_code . "\n";
             $lat = NULL;
             $lng = NULL;
         }
-        return array($lat, $lng);
+        return array($lat, $lng, $status_code);
     }
 
     function location_to_postcode($easting, $northing) {
