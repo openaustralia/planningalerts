@@ -11,6 +11,8 @@ class index_page {
 	var $warnings = "";
 	var $onloadscript = "";
 	var $address = "";
+	var $lat = NULL;
+	var $lng = NULL;
 	var $email = "";
 	var $alert_area_size = "m";
 	var $email_warn = false;
@@ -86,11 +88,17 @@ class index_page {
     }
     
     function validate (){
+        // Geocode address here - so that we can check its validity and store the result
+        $result = address_to_lat_lng($this->address);        
+        $this->lat = $result[0];
+        $this->lng = $result[1];
+        $status_code = $result[2];
+        
         if($this->email =="" || !valid_email($this->email)){
             $this->email_warn = true;
             $this->warnings .= " Please enter a valid email address.";            
         }
-        if($this->address =="") {
+        if($this->address =="" || $status_code != 200) {
             $this->address_warn = true;            
             $this->warnings .= " Please enter a valid street address.";
         }
@@ -108,7 +116,7 @@ class index_page {
             $user = new user();
             
             //Populate new user
-            $user->populate_new($this->email, $this->address, $this->alert_area_size);
+            $user->populate_new($this->email, $this->address, $this->lat, $this->lng, $this->alert_area_size);
             
             //Save 
             $user->save(true);

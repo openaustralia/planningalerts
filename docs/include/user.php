@@ -132,21 +132,14 @@
      }
      
      
-     function populate_new($email, $address, $alert_area_size){
+     function populate_new($email, $address, $lat, $lng, $alert_area_size){
             
             //Set email, postcode and size
             $this->email = $email;
             $this->address = $address;
-            $this->area_size_meters = alert_size_to_meters($alert_area_size);
-            
-            //Get xy of the postcode
-            $result = address_to_lat_lng($address);
-            
-            $lat = $result[0];
-            $lng = $result[1];
-            
             $this->lat = $lat;
             $this->lng = $lng;
+            $this->area_size_meters = alert_size_to_meters($alert_area_size);            
             
             //Get actual size of zone
             //$area_size_meters = alert_size_to_meters($this->alert_area_size);
