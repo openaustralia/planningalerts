@@ -96,6 +96,7 @@ class index_page {
         $country_name_code = $result[3];
         $google_address = $result[4];
         $unique = $result[5];
+        $accuracy = $result[6];
         
         if($this->email =="" || !valid_email($this->email)){
             $this->email_warn = true;
@@ -112,6 +113,10 @@ class index_page {
         elseif (!$unique) {
             $this->address_warn = true;
             $this->warnings .= "Oops! That's not quite enough information. Please enter a full street address, including suburb and state, e.g. ". $google_address . "<br/>";
+        }
+        elseif ($accuracy < 6) {
+            $this->address_warn = true;
+            $this->warnings .= "Oops! We saw that address as \"". $google_address . "\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state.<br/>";
         }
         if($this->alert_area_size != "s" && $this->alert_area_size != "m" && $this->alert_area_size != "l"){
             $this->warnings .= "Please select an area for the alerts.<br/>";
