@@ -16,7 +16,7 @@ class index_page {
 	var $email = "";
 	var $alert_area_size = "m";
 	var $email_warn = false;
-	//var $postcode_warn = false;	
+	var $address_warn = false;	
 
 	//Constructor
 	function index_page() {
@@ -63,7 +63,7 @@ class index_page {
 		$smarty->assign("page_title","Email alerts of planning applications near you");
 		$smarty->assign("warnings", $this->warnings);
 		$smarty->assign("email_warn", $this->email_warn);		
-		//$smarty->assign("postcode_warn", $this->postcode_warn);	
+		$smarty->assign("address_warn", $this->address_warn);	
 		
 		$smarty->assign("onloadscript", $this->onloadscript);
 		$smarty->assign("small_zone_size_in_words", $this->meters_in_words(SMALL_ZONE_SIZE));
