@@ -37,7 +37,7 @@
             </fieldset>
         </li>  
         <input type="submit" class="button" value="Create alert >>" />
-        <p id="privacy">Our <em>Privacy Policy</em> is very simple: We we will not sell or distribute any personal information
+        <p id="privacy">Our <em>Privacy Policy</em> is very simple: We will not sell or distribute any personal information
             you share with us - at all, ever.</p>
         <p id="spnBeta">It's early days for this service so your local authority may not be included yet. Sign up
             anyway and you'll receive alerts as soon as they're available.</p>
