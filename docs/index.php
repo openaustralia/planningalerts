@@ -122,6 +122,11 @@ class index_page {
             $this->warnings .= "Please select an area for the alerts.<br/>";
         }
         
+        // If there were no problems with geocoding use the format of the address returned
+        // by the geocoder as the address. Gives a little more feedback to the user
+        if ($this->warnings == "")
+            $this->address = $google_address;
+
         return $this->warnings =="";
         
     }
