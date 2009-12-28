@@ -94,6 +94,8 @@ class index_page {
         $this->lng = $result[1];
         $status_code = $result[2];
         $country_name_code = $result[3];
+        $google_address = $result[4];
+        $unique = $result[5];
         
         if($this->email =="" || !valid_email($this->email)){
             $this->email_warn = true;
@@ -106,6 +108,10 @@ class index_page {
         elseif ($country_name_code != "AU") {
             $this->address_warn = true;
             $this->warnings .= " Please enter a valid street address in Australia.";
+        }
+        elseif (!$unique) {
+            $this->address_warn = true;
+            $this->warnings .= " Oops! That's not quite enough information. Please enter a full street address, including suburb and state, e.g. ". $google_address;
         }
         if($this->alert_area_size != "s" && $this->alert_area_size != "m" && $this->alert_area_size != "l"){
             $this->warnings .= " Please select an area for the alerts.";

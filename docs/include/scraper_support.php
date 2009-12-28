@@ -298,6 +298,8 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
         $status_code = $result->Status->code;
         # Status code 200 from the geocoder is success
         if ($status_code == 200) {
+            // Is this a unique address?
+            $unique = (count($result->Placemark) == 1);
             $place = $result->Placemark[0];
             $lat = $place->Point->coordinates[1];
             $lng = $place->Point->coordinates[0];
@@ -305,12 +307,14 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
                 $country_name_code = $place->AddressDetails->Country->CountryNameCode;
             else
                 $country_name_code = NULL;
+            // Also return address formatted by Google (with the country removed from the end)
+            $google_address = str_replace(", Australia", "", $place->address);
         }
         else {
             $lat = NULL;
             $lng = NULL;
         }
-        return array($lat, $lng, $status_code, $country_name_code);
+        return array($lat, $lng, $status_code, $country_name_code, $google_address, $unique);
     }
 
     function location_to_postcode($easting, $northing) {
