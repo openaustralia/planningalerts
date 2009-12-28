@@ -298,14 +298,19 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
         $status_code = $result->Status->code;
         # Status code 200 from the geocoder is success
         if ($status_code == 200) {
-            $lat = $result->Placemark[0]->Point->coordinates[1];
-            $lng = $result->Placemark[0]->Point->coordinates[0];
+            $place = $result->Placemark[0];
+            $lat = $place->Point->coordinates[1];
+            $lng = $place->Point->coordinates[0];
+            if (property_exists($place->AddressDetails, "Country"))
+                $country_name_code = $place->AddressDetails->Country->CountryNameCode;
+            else
+                $country_name_code = NULL;
         }
         else {
             $lat = NULL;
             $lng = NULL;
         }
-        return array($lat, $lng, $status_code);
+        return array($lat, $lng, $status_code, $country_name_code);
     }
 
     function location_to_postcode($easting, $northing) {

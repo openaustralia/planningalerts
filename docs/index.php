@@ -93,14 +93,19 @@ class index_page {
         $this->lat = $result[0];
         $this->lng = $result[1];
         $status_code = $result[2];
+        $country_name_code = $result[3];
         
         if($this->email =="" || !valid_email($this->email)){
             $this->email_warn = true;
             $this->warnings .= " Please enter a valid email address.";            
         }
         if($this->address =="" || $status_code != 200) {
-            $this->address_warn = true;            
+            $this->address_warn = true;
             $this->warnings .= " Please enter a valid street address.";
+        }
+        elseif ($country_name_code != "AU") {
+            $this->address_warn = true;
+            $this->warnings .= " Please enter a valid street address in Australia.";
         }
         if($this->alert_area_size != "s" && $this->alert_area_size != "m" && $this->alert_area_size != "l"){
             $this->warnings .= " Please select an area for the alerts.";
