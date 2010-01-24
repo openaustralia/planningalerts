@@ -1,7 +1,0 @@
-Setting up PlannignAlerts
-
-1) Make sure you have PHP and mySQL
-
-2) Create a database using /schema/planningalerts.sql
-
-3) copy /docs/include/config.php.svn to /docs/include/config.php and edit it to your local settings.
