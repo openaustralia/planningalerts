@@ -1,0 +1,59 @@
+/*
+This file is for usefull reusable css 
+*/
+
+/* lists */
+ul.form label {display:block; float:left; width:170px; padding-top:4px;}
+ul.form label.radiolabel {display:inline; float: none;}
+ul.form span.fauxlabel {display:block; float:left; width:160px;}
+ul.form li {margin:5px 0;padding-bottom: 6px!important;}
+ul.form input.textbox {width:165px;}
+ul.form select {width:175px;}
+ul.form input.textbox.small, ul.form select.small {width:80px;}
+ul.form input.textbox.verysmall {width:30px;}
+ul.form select.verysmall {width:45px;}
+ul.form input.textbox.right {text-align:right;padding-right:0.2em;}
+
+ul.collapse, ol.collapse {margin:0;padding:0;}
+ul.collapse li, ol.collapse li {margin:0;padding:0;float:left;}
+ul.collapse li, ol.collapse {list-style-type:none;}
+
+ul.inline {margin:0;padding:0;}
+ul.inline li {display:inline;margin:0;padding:0;}
+
+ul.nobullets {list-style-type:none;margin:0;padding:0;}
+ul.nobullets li {margin:0;padding:0;}
+
+/* image replacement */
+.hide {display:none;}
+
+/* clear */
+br.clear {clear:both}
+
+/* controls */
+fieldset {border:none; padding:0; margin:0;}
+
+/* links */
+a img {border:none;}
+
+/* headings */
+h1, h2, h3, h4, h5, h6 {margin:0;padding:0;}
+
+/* form elements */
+input.textbox.autopostback {background: white url(../images/return.png) no-repeat right 50%;}
+input select, textarea {background:white}
+input.textbox {width:180px;}
+input.textbox.small {width:80px;}
+input.textbox.verysmall {width:80px;}
+input.textbox.right {text-align:right;padding-right:0.2em;}
+
+/* alignment */
+.alignright {text-align:right;}
+
+/* tables */
+table {border-collapse: collapse;}
+
+/* buttons */
+div.buttons {text-align:right; padding:1em;}
+
+

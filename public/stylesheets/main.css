@@ -1,0 +1,173 @@
+/* @override http://dev.planningalerts.org.au/css/main.css */
+
+@font-face {
+  font-family: "Junction";
+  src: url("/fonts/junction.eot");
+  src: local("Junction"), url("/fonts/junction.otf") format("opentype"); }
+
+body {font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif; text-align:center;line-height:1.7em;margin:0;
+	color:#0f0f0f;}	
+#divPage {width:580px; margin:0 auto;background:white;text-align:left;}
+h1 {font-weight:normal; font-size:2.7em;padding-left:115px;padding-bottom:0.2em;padding-top:0.1em;}
+h1 a {color:#456FB1;text-decoration:none;}
+h1 span {color: #ff8c00;}
+h1 sup {font-size:0.3em; text-transform:uppercase;
+	color: #ff8c00}
+h2 {font-weight:normal;font-size:1em;border-bottom:dotted 1px #808080;padding-left:115px;
+	padding-bottom:1.5em;color:#96ca2f;font-style:italic;font-size:1.15em;}
+h2 em {text-decoration:underline}
+h3, h4 {color:#ff8c00;font-style:italic;font-weight:normal}
+
+#statsbanner {
+	position:absolute;
+	right: 30px;
+	top: 30px;
+	padding-left: 73px;
+	background: url(/images/plane.png) no-repeat 0 center;
+}
+#pStats { margin:0;
+	color: #989898;
+	font-size: 0.8em;
+	line-height: 1em;
+	background: #feffff;
+	padding: 5px;
+}
+
+#pStats a {
+	text-decoration: none; color: #989898;
+}
+
+#divHeader {
+	margin: auto;
+	height: 140px;
+	background: url(/images/banner.png) repeat-x center 0;
+	position: relative;
+}
+#divHeader h1 {
+	white-space: nowrap;
+	padding: 20px 240px 0 0;
+}
+#divHeader h1 a {
+	color:  #f4f323;
+}
+#divHeader h2 {
+	border-bottom-style: none;
+	color: #ff8c00;
+	white-space: nowrap;
+	top: 0;
+	padding: 53px 0 0 240px;
+}
+/* Appeal */
+#divAppeal {background:#f9b4b4; color:#333; border-bottom:solid 1px #333; font-size:0.8em; padding-bottom:0.2em;}
+#divAppeal a {color:#CC0000;}
+#divPayment {text-align:center; border:solid 1px #ccc; padding:2em 1em 1em 1em; background:#ffff88;}
+
+/* Menu */
+#divMenu {background: #989898;height:2.5em;font-size:0.7em;
+	margin-bottom: 2em;
+}
+#divMenu ul {width:500px;margin:0 auto;}
+#divMenu ul li {float:right;text-align:center;}
+#divMenu ul li a {margin-left:1em;margin-right:1em;color:white; 
+	text-decoration:none}
+#divMenu ul li.selected {background:#ff8c00;
+	height: 2.5em;
+}
+
+/* Privacy note */
+#privacy {font-size: 0.8em; color:#666;
+	line-height: 1.4em;
+}
+#privacy em {
+	font-weight: bold;
+	font-style: normal;
+}
+
+/* Beta note */
+#spnBeta {font-size: 0.8em; color:#666;
+	line-height: 1.4em;
+}
+
+/* Warnings & errors*/
+#divWarning {background:#f4f323;font-size:0.9em;text-align:center; margin-bottom:1em;}
+input.error {background:#f4f323;}
+
+/* Signup form */
+span.number {font-size:2em;float:left;display:block;
+	text-align: left;
+	color:#ff8c00;
+	width: 1.3em;
+}
+input.textbox {
+	font: 1em "Lucida Grande", Lucida, Verdana, sans-serif;
+}
+#liAlertArea span.number {margin-bottom:2em;}
+#ulSignup label {width:250px;}
+#ulSignup input.textbox {position:relative; top:0.4em;}
+#ulSignup fieldset label {display:inline;float:none;}
+#liEmail {height:2.3em;margin-bottom:1em;}
+#liEmail input.textbox {width:270px;}
+#liAddress {height:3.7em;}
+#liAddress input.textbox {width:270px;}
+#liAddress small {position: relative;float: left;top: 0.4em;color: #8e8e8e;}
+#pAlertArea {margin-bottom:0;}
+#ulAlertArea {font-size:0.9em;line-height:1.3em;}
+#liSignup {padding-top:1em;line-height:1.3em;}
+#liSignup input.button {font-size:1.5em;margin-bottom:0.5em;float:left;
+	margin-right:10px;}
+
+/* Attention grabbers */
+div.attention {text-align:center; padding-top:1em;}
+div.attention h3 {font-size:2em;padding-bottom:0.3em;font-style:normal; color:#456FB1;}
+
+/* Faqs */
+dl.faq dt {color:#ff8c00;font-style:italic;}
+dl.faq dd {padding-left:0;margin-left:0;}
+
+/* api */
+div.apiitem {border:dotted 1px #808080;background:#fafafa;padding:10px;margin-top:1em;}
+div.apiitem code {background:white;display:block;padding:10px;border:solid 1px #808080;
+word-wrap: break-word}
+div.apiitem code em {color:#808080;}
+div.apiitem p {font-size:0.8em;margin:0;padding:0;line-height:1.5em;margin-bottom:1em;}
+p.apiexamples {position:relative; top:0.7em;}
+#hLicenseInfo {background:url(../images/salicense.png) no-repeat right 1em;
+	padding-top:1em;
+	padding-bottom: 5px;
+}
+
+/* infobox */
+.infobox {background:#fdd9ea; font-size:0.9em;}
+
+/* highlight */
+span.highlight {background: rgba(244,243,35,0.5);}
+
+/* Index footer */
+#divSiteUpdates {border-top:dotted 1px #808080;padding-top:0.5em;}
+#divSiteUpdates ul {font-size:0.9em;margin:0;}
+#divSiteUpdates em {padding-right:0.5em;color:#456FB1;}
+
+/* Links */
+a {color:#22579C;}
+
+/* Footer */
+#divFooter {font-size:0.8em;
+	padding-top:1.5em;position:relative;}
+#divFooter #aOpen {display:block;width:80px;height:15px;background:red url(../images/opendata.png);
+	position:absolute; right:140px; top:40px;}
+#divFooter #aHosted {display:block;width:130px;height:35px;background:url(../images/hosted.png);
+	position:absolute; right:0; top:30px;}
+#divFooter ul {border-top:dotted 1px #808080;padding-top:4px;padding-bottom:20px;}
+#divFooter ul li {display:inline;margin:0;padding: 0 10px 0 0;}
+#divFooter #oaf {display:block;position:absolute; right:0; top:26px;}
+
+/* Buttons */
+input.button {background-color: #f4f323;
+	font-size: 1em;
+	border-style: solid;
+	border-width: 1px;
+}
+
+/* Ad box */
+div.ad {border:solid 3px black;}
+div.ad h4 {color:black;font-weight:bold;}
