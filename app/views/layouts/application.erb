@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>PlanningAlerts.org.au | <%= @page_title %></title>
+	<link rel="stylesheet" media="all" type="text/css" href="./css/memespring.css" />		
+	<link rel="stylesheet" media="all" type="text/css" href="./css/main.css" />
+    <script src="./javascript/main.js" type="text/javascript"></script>      	
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '<%= @google_analytics_key %>']);
+      _gaq.push(['_trackPageview']);
+      
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+      })();
+      
+    </script>	
+</head>
+<body>
+
+    <div id="divHeader">
+        <h1><a href="/">PlanningAlerts<span>.</span>org<span>.</span>au</a><sup>beta</sup></h1>
+        <h2>Email alerts of planning applications <em>near you</em></h2>
+        <div id="statsbanner"><p id="pStats"><%= @alert_count %> alerts sent for <a href="/about.php#authorities"><%= @authority_count %> authorities</a></p></div>
+    </div>
+    <div class="hide">
+        <a href="#divContent">Skip navigation</a>
+    </div>
+    <div id="divMenu">
+        <ul class="collapse">
+            <li <% if @menu_item =="about" %>class="selected"<% end %>><a href="about.php">About</a></li>                                     
+			<li <% if @menu_item == "api" %>class="selected"<% end %>><a href="apihowto.php"><acronym title="Application programming interface">API</acronym></a></li>
+
+            <li <% if @menu_item =="getinvolved" %>class="selected"<% end %>><a href="getinvolved.php">Get Involved</a></li>                                       
+            <li <% if @menu_item =="faq" %>class="selected"<% end %>><a href="faq.php"><acronym title="Frequently asked questions">FAQ</acronym></a></li>                
+            <li <% if @menu_item =="signup" %>class="selected"<% end %>><a href="/">Sign Up</a></li>            
+        </ul>
+    </div>
+    <div id="divPage">
+        <div id="divContent">
+            <div id="divWarning" <% if @warnings == "" %>class="hide"<% end %>>
+                <%= @warnings %>
+            </div>
+<%= yield %>
+        </div>
+        <div id="divFooter">
+            <ul class="inline">
+                <li><a href="about.php#contact">Contact</a></li>  
+                <li><a href="http://blog.openaustralia.org">Blog</a></li>
+                <li><a href="http://twitter.com/planningalerts">Twitter</a></li>              
+            </ul>
+            <span id="oaf">An OpenAustralia Foundation Project</span>
+                    </div>
+    </div>
+    <% if @onloadscript !="" || $set_focus_control !="" -%>
+		<script type="text/javascript" defer="defer">
+						 <% if @set_focus_control !="" %>setFocus('<%= @set_focus_control %>');<% end %><% if @onloadscript !="" %><%= @onloadscript %>; <% end -%>
+		</script>
+	<% end -%>
+</body>
+</html>
