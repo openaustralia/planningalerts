@@ -7,4 +7,12 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+  
+  before_filter :load_configuration
+
+  def load_configuration
+    @google_analytics_key = "UA-3107958-5"
+    @alert_count = 78
+    @authority_count = 51
+  end
 end
