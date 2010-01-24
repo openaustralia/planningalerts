@@ -48,4 +48,8 @@ describe "Compare rails html with php html" do
   it "should render the home page exactly the same as the php version" do
     compare_with_php("/", "home")
   end
+  
+  it "should render the faq" do
+    compare_with_php("/faq.php", "faq")
+  end
 end

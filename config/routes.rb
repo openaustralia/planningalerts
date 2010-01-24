@@ -31,7 +31,8 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   map.root :controller => "signup"
-
+  map.connect 'faq.php', :controller => 'faq'
+  
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.
