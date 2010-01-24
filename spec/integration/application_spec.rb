@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'open-uri'
 require 'hpricot'
 
-describe SignupController do
+describe "Compare rails html with php html" do
 
   def tidy(text)
     File.open("temp.html", "w") {|f| f.write(text) }
