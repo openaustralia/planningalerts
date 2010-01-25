@@ -5,7 +5,7 @@ module HTMLCompareHelper
   def tidy(text)
     File.open("temp.html", "w") {|f| f.write(text) }
     # Requires HTML Tidy (http://tidy.sourceforge.net/) version 14 June 2007 or later
-    system("/usr/local/bin/tidy --sort-attributes alpha yes -q -m temp.html")
+    system("/usr/local/bin/tidy --sort-attributes alpha -q -m temp.html")
     r = File.read("temp.html")
     # Make sure that comments of the form <!-- comment --> are followed by a new line
     File.delete("temp.html")
