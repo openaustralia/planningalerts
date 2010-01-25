@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def load_configuration
     @google_analytics_key = "UA-3107958-5"
-    @alert_count = 15
+    @alert_count = Stat.applications_sent
     @authority_count = 2
   end
 end
