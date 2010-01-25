@@ -1,9 +1,7 @@
-require 'spec_helper'
 require 'open-uri'
 require 'hpricot'
 
-describe "Compare rails html with php html" do
-
+module HTMLCompareHelper
   def tidy(text)
     File.open("temp.html", "w") {|f| f.write(text) }
     # Requires HTML Tidy (http://tidy.sourceforge.net/) version 14 June 2007 or later
@@ -43,13 +41,5 @@ describe "Compare rails html with php html" do
       File.open("result_#{name}_tidy.html", "w") {|f| f.write(result_tidy)}
     end
     result_tidy.should == expected_tidy
-  end
-  
-  it "should render the home page exactly the same as the php version" do
-    compare_with_php("/", "home")
-  end
-  
-  it "should render the faq" do
-    compare_with_php("/faq.php", "faq")
   end
 end
