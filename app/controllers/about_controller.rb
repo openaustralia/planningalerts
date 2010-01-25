@@ -3,7 +3,7 @@ class AboutController < ApplicationController
     @page_title = "About"
     @menu_item = "about"
     
-    @authorities = ["Kangaroo City Council", "Wombat City Council"]
+    @authorities = Authority.active.find(:all, :order => "full_name")
       
     @warnings = ""
     @onloadscript = ""
