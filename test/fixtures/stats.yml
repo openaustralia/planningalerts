@@ -1,0 +1,8 @@
+applications_sent:
+  key: "applications_sent"
+  value: 15
+
+emails_sent:
+  key: "emails_sent"
+  value: 3
+
