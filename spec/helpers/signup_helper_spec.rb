@@ -2,10 +2,9 @@ require 'spec_helper'
 
 describe SignupHelper do
 
-  #Delete this example and add some real ones or delete this file
-  it "should be included in the object returned by #helper" do
-    included_modules = (class << helper; self; end).send :included_modules
-    included_modules.should include(SignupHelper)
+  it "should convert a distance in metres to simple concise text" do
+    helper.meters_in_words(2000).should == "2 km"
+    helper.meters_in_words(500).should == "500 m"
   end
 
 end
