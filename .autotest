@@ -1,0 +1,27 @@
+Autotest.add_hook :initialize do |at|
+  at.add_mapping(%r%^spec/integration/.*rb$%) { |filename, _|
+    filename
+  }
+  # Prepending this rule so it overrides the one defined by rspec-rails
+  at.add_mapping(%r%^app/controllers/(.*)\.rb$%, true) { |_, m|
+    if m[1] == "application"
+      at.files_matching(%r%^spec/(controllers|integration)/.*_spec\.rb$%)
+    else
+      ["spec/controllers/#{m[1]}_spec.rb", "spec/integration/#{m[1]}_spec.rb"]
+    end
+  }
+  at.add_mapping(%r%^app/views/(.*)/.*$%, true) { |_, m|
+    at.files_matching(%r%^spec/integration/#{m[1]}_controller_spec.rb$%)
+  }
+  at.add_mapping(%r%^app/helpers/(.*)_helper\.rb$%, true) { |_, m|
+    if m[1] == "application" then
+      at.files_matching(%r%^spec/(views|helpers|integration)/.*_spec\.rb$%)
+    else
+      ["spec/helpers/#{m[1]}_helper_spec.rb", "spec/integration/#{m[1]}_controller_spec.rb"] + at.files_matching(%r%^spec\/views\/#{m[1]}/.*_spec\.rb$%)
+    end
+  }
+  at.add_mapping(%r%^app/models/(.*)\.rb$%, true) { |_, m|
+    ["spec/models/#{m[1]}_spec.rb", "spec/integration/#{m[1]}_controller_spec.rb"]
+  }
+  nil
+end
