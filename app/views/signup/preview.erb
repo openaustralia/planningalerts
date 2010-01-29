@@ -9,7 +9,7 @@
       <script src="./javascript/preview.js" type="text/javascript"></script>      
   </head>
 
-  <body onload="load(<%= @center_long %>, <%= @center_lat %>, <%= @bottom_left_long %>, <%= @bottom_left_lat %>, <%= @top_right_long %>, <%= @top_right_lat %>)" onunload="GUnload()">
+  <body onload="load(<%= @center.lng %>, <%= @center.lat %>, <%= @bottom_left.lng %>, <%= @bottom_left.lat %>, <%= @top_right.lng %>, <%= @top_right.lat %>)" onunload="GUnload()">
     <div id="map" style="width: 500px; height: 500px"></div>
   </body>
 </html>
