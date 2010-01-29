@@ -12,4 +12,10 @@ describe Stat do
     
     Stat.emails_sent.should == 2
   end
+  
+  it "should return 0 when a key is missing but log an error" do
+    Stat.logger.should_receive(:error).with("Could not find key applications_sent for Stat lookup")
+    Stat.should_receive(:find).with(:first, :conditions => {:key => "applications_sent"}).and_return(nil)
+    Stat.applications_sent.should == 0
+  end
 end

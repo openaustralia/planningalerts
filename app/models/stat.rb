@@ -12,7 +12,11 @@ class Stat < ActiveRecord::Base
   # Returns value for given key
   def self.value_for_key(key)
     stat = Stat.find(:first, :conditions => {:key => key})
-    raise "Could not find key: #{key}" unless stat
-    stat.value
+    if stat
+      stat.value
+    else
+      logger.error("Could not find key #{key} for Stat lookup")
+      0
+    end
   end
 end
