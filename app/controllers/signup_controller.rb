@@ -14,13 +14,8 @@ class SignupController < ApplicationController
   
   def preview
     @google_maps_key = "ABQIAAAAo-lZBjwKTxZxJsD-PJnp8RSar6C2u_L4pWCtZvTKzbAvP1AIvRSM06g5G1CDCy9niXlYd7l_YqMpVg"
-    @center = Geokit::Geocoders::GoogleGeocoder.geocode(params[:address])
-    # Very naive conversion between a box represented as a size in metres to the coordinates of the corners
-    # of the box represented as a latitude / longitude
-    width_lat = 0.00000899234721 * params[:area_size].to_i
-    width_lng = 0.0000117239848 * params[:area_size].to_i
-    @bottom_left = Geokit::LatLng.new(@center.lat - width_lat / 2, @center.lng - width_lng / 2)
-    @top_right = Geokit::LatLng.new(@center.lat + width_lat / 2, @center.lng + width_lng / 2)
+    @center = Location.geocode(params[:address])
+    @bottom_left, @top_right = @center.box_with_size_in_metres(params[:area_size].to_i)
 
     render :layout => false
   end
