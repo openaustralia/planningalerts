@@ -42,4 +42,16 @@ class SignupController < ApplicationController
     @onloadscript = ""
     @set_focus_control = ""
   end
+  
+  def unsubscribe
+    @page_title = "Unsubscribed"
+    @menu_item = "signup"
+
+    @address = "24 Bruce Rd, Glenbrook NSW 2773"
+    @area_size_meters = 800
+
+    @warnings = ""
+    @onloadscript = ""
+    @set_focus_control = ""
+  end
 end
