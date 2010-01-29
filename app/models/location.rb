@@ -20,4 +20,13 @@ class Location
   def ==(a)
     a.lat == lat && a.lng == lng
   end
+  
+  def to_geokit
+    Geokit::LatLng.new(lat, lng)
+  end
+  
+  # Distance (in metres) to other point
+  def distance_to(l)
+    to_geokit.distance_to(l.to_geokit) * 1000
+  end
 end
