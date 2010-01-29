@@ -31,6 +31,8 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   map.root :controller => "signup"
+  map.connect 'preview.php', :controller => 'signup', :action => 'preview'
+
   map.connect 'faq.php', :controller => 'faq'
   map.connect 'getinvolved.php', :controller => 'get_involved'
   map.connect 'apihowto.php', :controller => 'api_howto'
