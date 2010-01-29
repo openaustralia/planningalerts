@@ -16,4 +16,8 @@ describe SignupController do
       [Location.new(-33.773508234721, 150.62309060152), Location.new(-33.771709765279, 150.62543539848)])
     compare_with_php("/preview.php?address=24%20bruce%20road,%20glenbrook,%20NSW%202773&area_size=200", "preview")
   end
+  
+  it "should render the check mail page the same as the php version" do
+    compare_with_php("/checkmail.php", "checkmail")
+  end
 end

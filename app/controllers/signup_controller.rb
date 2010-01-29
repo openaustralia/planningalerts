@@ -19,4 +19,14 @@ class SignupController < ApplicationController
 
     render :layout => false
   end
+  
+  def check_mail
+    @page_title = "Now check your email"
+    # TODO: Get rid of @menu_item by using standard rails stuff for links
+    @menu_item = "signup"
+    
+    @warnings = ""
+    @onloadscript = ""
+    @set_focus_control = ""
+  end
 end
