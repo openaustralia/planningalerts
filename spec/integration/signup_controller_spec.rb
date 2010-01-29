@@ -20,4 +20,8 @@ describe SignupController do
   it "should render the check mail page the same as the php version" do
     compare_with_php("/checkmail.php", "checkmail")
   end
+  
+  it "should render the confirmed page the same as the php version" do
+    compare_with_php("/confirmed.php?cid=0d527f6458a3506b0621", "confirmed")
+  end
 end

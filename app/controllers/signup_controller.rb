@@ -29,4 +29,17 @@ class SignupController < ApplicationController
     @onloadscript = ""
     @set_focus_control = ""
   end
+  
+  def confirmed
+    @page_title = "Confirmed"
+    @menu_item = "signup"
+    
+    @form_action = "/confirmed.php"
+    @address = "24 Bruce Rd, Glenbrook NSW 2773"
+    @area_size_meters = 800
+  
+    @warnings = ""
+    @onloadscript = ""
+    @set_focus_control = ""
+  end
 end
