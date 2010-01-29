@@ -5,16 +5,29 @@ class Location
     @lat, @lng = lat, lng
   end
 
+  def self.geokit(g)
+    Location.new(g.lat, g.lng)
+  end
+
   # Super-thin veneer over Geokit geocoder
   def self.geocode(address)
-    l = Geokit::Geocoders::GoogleGeocoder.geocode(address)
-    Location.new(l.lat, l.lng)
+    geokit(Geokit::Geocoders::GoogleGeocoder.geocode(address))
+  end
+  
+  def to_s
+    to_geokit.to_s
   end
   
   # Coordinates of bottom-left and top-right corners of a box centred on the current location
   # with a given size in metres
   def box_with_size_in_metres(size_in_metres)
-    [Location.new(-33.773508234721, 150.62309060152), Location.new(-33.771709765279, 150.62543539848)]
+    lower_center = endpoint(180, size_in_metres / 2)
+    upper_center = endpoint(0, size_in_metres / 2)
+    center_left = endpoint(270, size_in_metres / 2)
+    center_right = endpoint(90, size_in_metres / 2)
+    lower_left = Location.new(lower_center.lat, center_left.lng)
+    upper_right = Location.new(upper_center.lat, center_right.lng)
+    [lower_left, upper_right]
   end
   
   def ==(a)
@@ -25,8 +38,13 @@ class Location
     Geokit::LatLng.new(lat, lng)
   end
   
+  # Distance given is in metres
+  def endpoint(bearing, distance)
+    Location.geokit(to_geokit.endpoint(bearing, distance / 1000.0, :units => :kms))
+  end
+  
   # Distance (in metres) to other point
   def distance_to(l)
-    to_geokit.distance_to(l.to_geokit) * 1000
+    to_geokit.distance_to(l.to_geokit, :units => :kms) * 1000.0
   end
 end
