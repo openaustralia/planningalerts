@@ -1,9 +1,8 @@
 class User < ActiveRecord::Base
   set_table_name :user
-  
-  validate :validate_email
 
-  before_create :geocode
+  validate :validate_email, :validate_address
+  before_validation :geocode
   
   def location=(l)
     if l
@@ -21,6 +20,10 @@ class User < ActiveRecord::Base
   def geocode
     # For the time being just set latitude/longitude to zero so that we can save this record
     self.location = Location.geocode(address)
+  end
+  
+  def validate_address
+    errors.add(:address, "Please enter a valid street address") if location.nil?
   end
   
   def validate_email

@@ -5,6 +5,8 @@ describe User do
     @address = "24 Bruce Road, Glenbrook, NSW"
     @attributes = {:email => "matthew@openaustralia.org", :address => @address,
       :area_size_meters => 200}
+    # Unless we override this elsewhere just stub the geocoder to return some arbitrary numbers
+    Location.stub!(:geocode).and_return(Location.new(1.0, 2.0))
   end
 
   it "should have no trouble creating a user with valid attributes" do
@@ -46,5 +48,13 @@ describe User do
     u.lat.should be_nil
     u.lng.should be_nil
     u.location.should be_nil
+  end
+  
+  it "should error if the address is empty" do
+    Location.should_receive(:geocode).with(nil).and_return(nil)
+    @attributes.delete(:address)
+    u = User.new(@attributes)
+    u.should_not be_valid
+    u.errors.on(:address).should == "Please enter a valid street address"
   end
 end
