@@ -17,4 +17,9 @@ describe "Location" do
     result_lower_left.distance_to(expected_lower_left).should < 10
     result_upper_right.distance_to(expected_upper_right).should < 10
   end
+  
+  it "should return nil if the address to geocode isn't valid" do
+    Geokit::Geocoders::GoogleGeocoder.should_receive(:geocode).with("").and_return(Geokit::LatLng.new(nil, nil))
+    Location.geocode("").should == nil
+  end
 end

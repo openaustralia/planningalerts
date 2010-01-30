@@ -6,7 +6,7 @@ class Location
   end
 
   def self.geokit(g)
-    Location.new(g.lat, g.lng)
+    Location.new(g.lat, g.lng) if g.lat && g.lng
   end
 
   # Super-thin veneer over Geokit geocoder
@@ -31,7 +31,7 @@ class Location
   end
   
   def ==(a)
-    a.lat == lat && a.lng == lng
+    a.respond_to?(:lat) && a.respond_to?(:lng) && a.lat == lat && a.lng == lng
   end
   
   def to_geokit
