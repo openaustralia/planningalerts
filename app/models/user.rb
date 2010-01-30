@@ -6,23 +6,25 @@ class User < ActiveRecord::Base
   before_create :geocode
   
   def location=(l)
-    self.lat = l.lat
-    self.lng = l.lng
+    if l
+      self.lat = l.lat
+      self.lng = l.lng
+    end
   end
   
   def location
-    Location.new(self.lat, self.lng)
+    Location.new(lat, lng) if lat && lng
   end
   
   private
   
   def geocode
     # For the time being just set latitude/longitude to zero so that we can save this record
-    self.location = Location.geocode(self.address)
+    self.location = Location.geocode(address)
   end
   
   def validate_email
-    TMail::Address.parse(self.email)
+    TMail::Address.parse(email)
   rescue
     errors.add(:email, "Please enter a valid email address")
   end

@@ -31,4 +31,20 @@ describe User do
     u.should_not be_valid
     u.errors.on(:email).should == "Please enter a valid email address"    
   end
+  
+  it "should be able to store the attribute location" do
+    u = User.new
+    u.location = Location.new(1, 2)
+    u.lat.should == 1
+    u.lng.should == 2
+    u.location.should == Location.new(1, 2)
+  end
+  
+  it "should handle location being nil" do
+    u = User.new
+    u.location = nil
+    u.lat.should be_nil
+    u.lng.should be_nil
+    u.location.should be_nil
+  end
 end
