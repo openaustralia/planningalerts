@@ -5,8 +5,8 @@ describe User do
     @address = "24 Bruce Road, Glenbrook, NSW"
     @attributes = {:email => "matthew@openaustralia.org", :address => @address,
       :area_size_meters => 200}
-    # Unless we override this elsewhere just stub the geocoder to return some arbitrary coordinates notionally in Australia
-    @loc = Location.new(1.0, 2.0)
+    # Unless we override this elsewhere just stub the geocoder to return coordinates of address above
+    @loc = Location.new(-33.772609, 150.624263)
     @loc.stub!(:country_code).and_return("AU")
     @loc.stub!(:accuracy).and_return(8)
     @loc.stub!(:all).and_return([@loc])
