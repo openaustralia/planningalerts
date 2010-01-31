@@ -1,17 +1,19 @@
-class Location
-  attr_reader :lat, :lng, :country_code
+# Super thin veneer over Geokit geocoder and the results of the geocoding. The other main difference with
+# geokit vanilla is that the distances are all in meters
 
-  def initialize(lat, lng, country_code = nil)
-    @lat, @lng, @country_code = lat, lng, country_code
+class Location < SimpleDelegator
+  def initialize(*params)
+    if params.count == 2
+      super(Geokit::LatLng.new(*params))
+    elsif params.count == 1
+      super(params.first)
+    else
+      raise "Unexpected number of parameters"
+    end
   end
 
-  # Super-thin veneer over Geokit geocoder
   def self.geocode(address)
-    geokit(Geokit::Geocoders::GoogleGeocoder.geocode(address))
-  end
-  
-  def to_s
-    to_geokit.to_s
+    Location.new(Geokit::Geocoders::GoogleGeocoder.geocode(address))
   end
   
   # Coordinates of bottom-left and top-right corners of a box centred on the current location
@@ -26,33 +28,13 @@ class Location
     [lower_left, upper_right]
   end
   
-  def ==(a)
-    a.respond_to?(:lat) && a.respond_to?(:lng) && a.lat == lat && a.lng == lng
-  end
-  
   # Distance given is in metres
   def endpoint(bearing, distance)
-    Location.geokit(to_geokit.endpoint(bearing, distance / 1000.0, :units => :kms))
+    Location.new(__getobj__.endpoint(bearing, distance / 1000.0, :units => :kms))
   end
   
   # Distance (in metres) to other point
   def distance_to(l)
-    to_geokit.distance_to(l.to_geokit, :units => :kms) * 1000.0
-  end
-  
-  protected
-
-  def to_geokit
-    Geokit::LatLng.new(lat, lng)
-  end
-  
-  def self.geokit(g)
-    if g.lat.nil? || g.lng.nil?
-      nil
-    elsif g.respond_to? :country_code
-      Location.new(g.lat, g.lng, g.country_code)
-    else
-      Location.new(g.lat, g.lng)
-    end
+    __getobj__.distance_to(l.__getobj__, :units => :kms) * 1000.0
   end
 end
