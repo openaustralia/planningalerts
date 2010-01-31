@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
       errors.add(:address, "Please enter a valid street address")
     elsif @geocode_result.country_code != "AU"
       errors.add(:address, "Please enter a valid street address in Australia")
+    elsif @geocode_result.all.size > 1
+      errors.add(:address, "Oops! That's not quite enough information. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
     end
   end
   

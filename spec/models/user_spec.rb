@@ -5,8 +5,11 @@ describe User do
     @address = "24 Bruce Road, Glenbrook, NSW"
     @attributes = {:email => "matthew@openaustralia.org", :address => @address,
       :area_size_meters => 200}
-    # Unless we override this elsewhere just stub the geocoder to return some arbitrary numbers
-    Location.stub!(:geocode).and_return(Location.new(1.0, 2.0, "AU"))
+    # Unless we override this elsewhere just stub the geocoder to return some arbitrary coordinates notionally in Australia
+    @loc = Location.new(1.0, 2.0)
+    @loc.stub!(:country_code).and_return("AU")
+    @loc.stub!(:all).and_return([@loc])
+    Location.stub!(:geocode).and_return(@loc)
   end
 
   it "should have no trouble creating a user with valid attributes" do
@@ -14,10 +17,9 @@ describe User do
   end
   
   it "should automatically geocode the address" do
-    loc = Location.new(1.0, 2.0, "AU")
-    Location.should_receive(:geocode).with(@address).and_return(loc)
     user = User.create!(@attributes)
-    user.location.distance_to(loc).should < 1
+    user.lat.should == @loc.lat
+    user.lng.should == @loc.lng
   end
   
   it "should error if there is nothing in the email address" do
@@ -36,10 +38,11 @@ describe User do
   
   it "should be able to store the attribute location" do
     u = User.new
-    u.location = Location.new(1, 2)
-    u.lat.should == 1
-    u.lng.should == 2
-    u.location.should == Location.new(1, 2)
+    u.location = Location.new(1.0, 2.0)
+    u.lat.should == 1.0
+    u.lng.should == 2.0
+    u.location.lat.should == 1.0
+    u.location.lng.should == 2.0
   end
   
   it "should handle location being nil" do
@@ -51,7 +54,7 @@ describe User do
   end
   
   it "should error if the address is empty" do
-    Location.should_receive(:geocode).with(nil).and_return(nil)
+    Location.stub!(:geocode).and_return(Location.new(nil, nil))
     @attributes.delete(:address)
     u = User.new(@attributes)
     u.should_not be_valid
@@ -59,10 +62,20 @@ describe User do
   end
   
   it "should error if the street address is not in australia" do
-    Location.should_receive(:geocode).with("New York").and_return(Location.new(1, 2, "US"))
+    @loc.stub!(:country_code).and_return("US")
     @attributes[:address] = "New York"
     u = User.new(@attributes)
     u.should_not be_valid
     u.errors.on(:address).should == "Please enter a valid street address in Australia"
+  end
+  
+  it "should error if there are multiple matches from the geocoder" do
+    @loc.stub!(:all).and_return([@loc, nil])
+    @loc.stub!(:full_address).and_return("Bruce Rd, VIC 3885, Australia")
+
+    @attributes[:address] = "Bruce Road"
+    u = User.new(@attributes)
+    u.should_not be_valid
+    u.errors.on(:address).should == "Oops! That's not quite enough information. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"
   end
 end
