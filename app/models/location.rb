@@ -1,5 +1,5 @@
 # Super thin veneer over Geokit geocoder and the results of the geocoding. The other main difference with
-# geokit vanilla is that the distances are all in meters
+# geokit vanilla is that the distances are all in meters and the geocoding is biased towards Australian addresses
 
 class Location < SimpleDelegator
   def initialize(*params)
@@ -13,7 +13,7 @@ class Location < SimpleDelegator
   end
 
   def self.geocode(address)
-    Location.new(Geokit::Geocoders::GoogleGeocoder.geocode(address))
+    Location.new(Geokit::Geocoders::GoogleGeocoder.geocode(address, :bias => "au"))
   end
   
   # Coordinates of bottom-left and top-right corners of a box centred on the current location
