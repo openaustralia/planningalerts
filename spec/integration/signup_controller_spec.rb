@@ -10,7 +10,7 @@ describe SignupController do
   end
   
   it "should render the preview page the same as the php version" do
-    loc = Location.new(-33.772609, 150.624263)
+    loc = mock("Location", :lat => -33.772609, :lng => 150.624263)
     Location.should_receive(:geocode).with("24 bruce road, glenbrook, NSW 2773").and_return(loc)
     loc.should_receive(:box_with_size_in_metres).with(200).and_return(
       [Location.new(-33.773508234721, 150.62309060152), Location.new(-33.771709765279, 150.62543539848)])
