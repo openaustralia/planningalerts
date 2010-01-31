@@ -89,4 +89,18 @@ describe User do
     u.should_not be_valid
     u.errors.on(:address).should == "Oops! We saw that address as \"Glenbrook NSW\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state"
   end
+  
+  it "should have a number for area_size_meters" do
+    @attributes[:area_size_meters] = "a"
+    u = User.new(@attributes)
+    u.should_not be_valid
+    u.errors.on(:area_size_meters).should == "Please select an area for the alerts"
+  end
+  
+  it "should have area_size_meters which is greater than zero" do
+    @attributes[:area_size_meters] = "0"
+    u = User.new(@attributes)
+    u.should_not be_valid
+    u.errors.on(:area_size_meters).should == "Please select an area for the alerts"    
+  end
 end

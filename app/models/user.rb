@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   set_table_name :user
 
+  validates_numericality_of :area_size_meters, :greater_than => 0, :message => "Please select an area for the alerts"
   validate :validate_email, :validate_address
   before_validation :geocode
   
