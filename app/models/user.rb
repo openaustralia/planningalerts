@@ -18,12 +18,16 @@ class User < ActiveRecord::Base
   private
   
   def geocode
-    # For the time being just set latitude/longitude to zero so that we can save this record
-    self.location = Location.geocode(address)
+    @geocode_result = Location.geocode(address)
+    self.location = @geocode_result
   end
   
   def validate_address
-    errors.add(:address, "Please enter a valid street address") if location.nil?
+    if location.nil?
+      errors.add(:address, "Please enter a valid street address")
+    elsif @geocode_result.country_code != "AU"
+      errors.add(:address, "Please enter a valid street address in Australia")
+    end
   end
   
   def validate_email

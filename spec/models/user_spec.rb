@@ -6,7 +6,7 @@ describe User do
     @attributes = {:email => "matthew@openaustralia.org", :address => @address,
       :area_size_meters => 200}
     # Unless we override this elsewhere just stub the geocoder to return some arbitrary numbers
-    Location.stub!(:geocode).and_return(Location.new(1.0, 2.0))
+    Location.stub!(:geocode).and_return(Location.new(1.0, 2.0, "AU"))
   end
 
   it "should have no trouble creating a user with valid attributes" do
@@ -14,7 +14,7 @@ describe User do
   end
   
   it "should automatically geocode the address" do
-    loc = Location.new(1.0, 2.0)
+    loc = Location.new(1.0, 2.0, "AU")
     Location.should_receive(:geocode).with(@address).and_return(loc)
     user = User.create!(@attributes)
     user.location.distance_to(loc).should < 1
@@ -56,5 +56,13 @@ describe User do
     u = User.new(@attributes)
     u.should_not be_valid
     u.errors.on(:address).should == "Please enter a valid street address"
+  end
+  
+  it "should error if the street address is not in australia" do
+    Location.should_receive(:geocode).with("New York").and_return(Location.new(1, 2, "US"))
+    @attributes[:address] = "New York"
+    u = User.new(@attributes)
+    u.should_not be_valid
+    u.errors.on(:address).should == "Please enter a valid street address in Australia"
   end
 end
