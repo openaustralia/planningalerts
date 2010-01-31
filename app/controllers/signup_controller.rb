@@ -2,12 +2,28 @@ class SignupController < ApplicationController
   def index
     @page_title = "Email alerts of planning applications near you"
     @menu_item = "signup"
-
-    @warnings = ""
     @small_zone_size = 200
     @medium_zone_size = 800
     @large_zone_size = 2000
-    @alert_area_size = "m"
+    if request.get?
+      @alert_area_size = "m"
+      @warnings = ""
+    else
+      @address = params[:txtAddress]
+      @email = params[:txtEmail]
+      @alert_area_size = params[:radAlertAreaSize]
+      area_size_meters = {'s' => @small_zone_size, 'm' => @medium_zone_size, 'l' => @large_zone_size}[@alert_area_size]
+      u = User.new(:address => @address, :email => @email, :area_size_meters => area_size_meters)
+      if u.save
+        # TODO: Send email
+        redirect_to :action => "check_mail"
+      else
+        @warnings = u.errors.full_messages.join("<br>")
+        @email_warn = !u.errors.on(:email_address).nil?
+        @address_warn = !u.errors.on(:street_address).nil?
+      end
+    end
+
     @set_focus_control = "txtEmail"
     @onloadscript = nil
   end
