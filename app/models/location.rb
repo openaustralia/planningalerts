@@ -1,8 +1,8 @@
 class Location
-  attr_reader :lat, :lng
+  attr_reader :lat, :lng, :country_code
 
-  def initialize(lat, lng)
-    @lat, @lng = lat, lng
+  def initialize(lat, lng, country_code = nil)
+    @lat, @lng, @country_code = lat, lng, country_code
   end
 
   # Super-thin veneer over Geokit geocoder
@@ -47,6 +47,6 @@ class Location
   end
   
   def self.geokit(g)
-    Location.new(g.lat, g.lng) if g.lat && g.lng
+    Location.new(g.lat, g.lng, (g.country_code if g.respond_to? :country_code)) if g.lat && g.lng
   end
 end

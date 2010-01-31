@@ -22,4 +22,8 @@ describe "Location" do
     Geokit::Geocoders::GoogleGeocoder.should_receive(:geocode).with("").and_return(Geokit::LatLng.new(nil, nil))
     Location.geocode("").should == nil
   end
+  
+  it "should return the country code of the geocoded address" do
+    Location.geocode("24 Bruce Road, Glenbrook, NSW 2773").country_code.should == "AU"
+  end
 end
