@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
   set_table_name :user
 
-  validates_numericality_of :area_size_meters, :greater_than => 0, :message => "Please select an area for the alerts"
+  validates_numericality_of :area_size_meters, :greater_than => 0, :message => "isn't selected"
   validate :validate_email, :validate_address
+  
   before_validation :geocode
   
   def location=(l)
@@ -21,23 +22,32 @@ class User < ActiveRecord::Base
   def geocode
     @geocode_result = Location.geocode(address)
     self.location = @geocode_result
+    self.address = @geocode_result.full_address
   end
   
   def validate_address
-    if location.nil?
-      errors.add(:address, "Please enter a valid street address")
+    if address == ""
+      errors.add(:street_address, "can't be empty")
+    elsif location.nil?
+      errors.add(:street_address, "isn't valid")
     elsif @geocode_result.country_code != "AU"
-      errors.add(:address, "Please enter a valid street address in Australia")
+      errors.add(:street_address, "isn't in Australia")
     elsif @geocode_result.all.size > 1
-      errors.add(:address, "Oops! That's not quite enough information. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
+      errors.add(:street_address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
     elsif @geocode_result.accuracy < 6
-      errors.add(:address, "Oops! We saw that address as \"#{@geocode_result.full_address}\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state")
+      errors.add(:street_address, "isn't complete. We saw that address as \"#{@geocode_result.full_address}\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state")
     end
   end
   
   def validate_email
-    TMail::Address.parse(email)
-  rescue
-    errors.add(:email, "Please enter a valid email address")
+    if email == ""
+      errors.add(:email_address, "can't be empty")
+    else
+      begin
+        TMail::Address.parse(email)
+      rescue
+        errors.add(:email_address, "isn't valid")
+      end
+    end
   end
 end
