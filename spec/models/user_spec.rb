@@ -8,6 +8,7 @@ describe User do
     # Unless we override this elsewhere just stub the geocoder to return some arbitrary coordinates notionally in Australia
     @loc = Location.new(1.0, 2.0)
     @loc.stub!(:country_code).and_return("AU")
+    @loc.stub!(:accuracy).and_return(8)
     @loc.stub!(:all).and_return([@loc])
     Location.stub!(:geocode).and_return(@loc)
   end
@@ -77,5 +78,15 @@ describe User do
     u = User.new(@attributes)
     u.should_not be_valid
     u.errors.on(:address).should == "Oops! That's not quite enough information. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"
+  end
+  
+  it "should error if the address is not a full street address but rather a suburb name or similar" do
+    @loc.stub!(:accuracy).and_return(5)
+    @loc.stub!(:full_address).and_return("Glenbrook NSW")
+    
+    @attributes[:address] = "Glenbrook, NSW"
+    u = User.new(@attributes)
+    u.should_not be_valid
+    u.errors.on(:address).should == "Oops! We saw that address as \"Glenbrook NSW\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state"
   end
 end
