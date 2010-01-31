@@ -47,6 +47,12 @@ class Location
   end
   
   def self.geokit(g)
-    Location.new(g.lat, g.lng, (g.country_code if g.respond_to? :country_code)) if g.lat && g.lng
+    if g.lat.nil? || g.lng.nil?
+      nil
+    elsif g.respond_to? :country_code
+      Location.new(g.lat, g.lng, g.country_code)
+    else
+      Location.new(g.lat, g.lng)
+    end
   end
 end
