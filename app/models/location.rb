@@ -5,10 +5,6 @@ class Location
     @lat, @lng = lat, lng
   end
 
-  def self.geokit(g)
-    Location.new(g.lat, g.lng) if g.lat && g.lng
-  end
-
   # Super-thin veneer over Geokit geocoder
   def self.geocode(address)
     geokit(Geokit::Geocoders::GoogleGeocoder.geocode(address))
@@ -34,10 +30,6 @@ class Location
     a.respond_to?(:lat) && a.respond_to?(:lng) && a.lat == lat && a.lng == lng
   end
   
-  def to_geokit
-    Geokit::LatLng.new(lat, lng)
-  end
-  
   # Distance given is in metres
   def endpoint(bearing, distance)
     Location.geokit(to_geokit.endpoint(bearing, distance / 1000.0, :units => :kms))
@@ -46,5 +38,15 @@ class Location
   # Distance (in metres) to other point
   def distance_to(l)
     to_geokit.distance_to(l.to_geokit, :units => :kms) * 1000.0
+  end
+  
+  protected
+
+  def to_geokit
+    Geokit::LatLng.new(lat, lng)
+  end
+  
+  def self.geokit(g)
+    Location.new(g.lat, g.lng) if g.lat && g.lng
   end
 end
