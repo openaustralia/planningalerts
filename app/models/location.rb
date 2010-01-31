@@ -37,4 +37,8 @@ class Location < SimpleDelegator
   def distance_to(l)
     __getobj__.distance_to(l.__getobj__, :units => :kms) * 1000.0
   end
+  
+  def full_address
+    __getobj__.full_address.sub(", Australia", "")
+  end
 end

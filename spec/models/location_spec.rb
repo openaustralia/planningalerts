@@ -34,4 +34,9 @@ describe "Location" do
   it "should bias the results of geocoding to australian addresses" do
     Location.geocode("Bruce Road").country_code.should == "AU"
   end
+  
+  it "should normalise addresses without the country in them" do
+    loc = Location.new(mock(:full_address => "24 Bruce Road, Glenbrook, NSW 2773, Australia"))
+    loc.full_address.should == "24 Bruce Road, Glenbrook, NSW 2773"
+  end
 end
