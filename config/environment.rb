@@ -39,4 +39,10 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
+  
+  # TODO: This value needs to be picked up from a configuration file. We need this because
+  # we are generating emails (which need to have the host name in them) outside of a web request. So,
+  # we don't always have access to the host name other than through this kind of mechanism. Well, since
+  # we're doing this anyway, we might as well use it for all the email templates.
+  config.action_mailer.default_url_options = { :host => "www.planningalerts.org.au" }
 end
