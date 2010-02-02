@@ -12,3 +12,6 @@ Feature: Manage alerts
     When I open the email
     Then I should see "Please confirm your planning alert" in the email subject
     And I should see "24 Bruce Rd, Glenbrook NSW 2773" in the email body
+    When I click the first link in the email
+    Then I should see "your alert has been activated"
+    And I should see "24 Bruce Rd, Glenbrook NSW 2773"
