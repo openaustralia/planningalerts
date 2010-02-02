@@ -15,7 +15,7 @@ class SignupController < ApplicationController
       area_size_meters = {'s' => @small_zone_size, 'm' => @medium_zone_size, 'l' => @large_zone_size}[@alert_area_size]
       u = User.new(:address => @address, :email => @email, :area_size_meters => area_size_meters)
       if u.save
-        # TODO: Send email
+        UserNotifier.deliver_confirm(u)
         redirect_to :action => "check_mail"
       else
         @warnings = u.errors.full_messages.join("<br>")
