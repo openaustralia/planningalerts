@@ -52,8 +52,7 @@ class SignupController < ApplicationController
     @menu_item = "signup"
     
     @form_action = "/confirmed.php"
-    @address = "24 Bruce Rd, Glenbrook NSW 2773"
-    @area_size_meters = 800
+    @user = User.new(:address => "24 Bruce Rd, Glenbrook NSW 2773", :area_size_meters => 800)
   
     @warnings = ""
     @onloadscript = ""
