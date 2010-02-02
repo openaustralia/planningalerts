@@ -18,6 +18,15 @@ describe User do
     User.create!(@attributes)
   end
   
+  it "should be able to accept location information if it is already known and so not use the geocoder" do
+    Location.should_not_receive(:geocode)
+    @attributes[:lat] = 1.0
+    @attributes[:lng] = 2.0
+    u = User.create!(@attributes)
+    u.lat.should == 1.0
+    u.lng.should == 2.0
+  end
+  
   describe "geocoding" do
     it "should happen automatically on saving" do
       user = User.create!(@attributes)

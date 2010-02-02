@@ -26,22 +26,28 @@ class User < ActiveRecord::Base
   end
 
   def geocode
-    @geocode_result = Location.geocode(address)
-    self.location = @geocode_result
-    self.address = @geocode_result.full_address
+    # Only geocode if location hasn't been set
+    if self.lat.nil? && self.lng.nil?
+      @geocode_result = Location.geocode(address)
+      self.location = @geocode_result
+      self.address = @geocode_result.full_address
+    end
   end
   
   def validate_address
-    if address == ""
-      errors.add(:street_address, "can't be empty")
-    elsif location.nil?
-      errors.add(:street_address, "isn't valid")
-    elsif @geocode_result.country_code != "AU"
-      errors.add(:street_address, "isn't in Australia")
-    elsif @geocode_result.all.size > 1
-      errors.add(:street_address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
-    elsif @geocode_result.accuracy < 6
-      errors.add(:street_address, "isn't complete. We saw that address as \"#{@geocode_result.full_address}\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state")
+    # Only validate the street address if we used the geocoder
+    if @geocode_result
+      if address == ""
+        errors.add(:street_address, "can't be empty")
+      elsif location.nil?
+        errors.add(:street_address, "isn't valid")
+      elsif @geocode_result.country_code != "AU"
+        errors.add(:street_address, "isn't in Australia")
+      elsif @geocode_result.all.size > 1
+        errors.add(:street_address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
+      elsif @geocode_result.accuracy < 6
+        errors.add(:street_address, "isn't complete. We saw that address as \"#{@geocode_result.full_address}\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state")
+      end
     end
   end
   
