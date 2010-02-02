@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   validate :validate_email, :validate_address
   
   before_validation :geocode
+  before_create :set_confirm_info
   
   def location=(l)
     if l
@@ -19,6 +20,11 @@ class User < ActiveRecord::Base
   
   private
   
+  def set_confirm_info
+    # TODO: Should check that this is unique across all alerts and if not try again
+    self.confirm_id = Digest::MD5.hexdigest(rand.to_s + Time.now.to_s)[0...20]
+  end
+
   def geocode
     @geocode_result = Location.geocode(address)
     self.location = @geocode_result

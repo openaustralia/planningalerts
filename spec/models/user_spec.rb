@@ -111,4 +111,22 @@ describe User do
     u.save!
     u.address.should == "24 Bruce Rd, Glenbrook NSW 2773"
   end
+  
+  describe "confirm_id" do
+    it "should be a string" do
+      u = User.create!(@attributes)
+      u.confirm_id.should be_instance_of(String)
+    end
+  
+    it "should not be the the same for two different users" do
+      u1 = User.create!(@attributes)
+      u2 = User.create!(@attributes)
+      u1.confirm_id.should_not == u2.confirm_id
+    end
+    
+    it "should only have hex characters in it and be exactly twenty characters long" do
+      u = User.create!(@attributes)
+      u.confirm_id.should =~ /^[0-9a-f]{20}$/
+    end
+  end
 end
