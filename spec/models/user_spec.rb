@@ -135,5 +135,19 @@ describe User do
       u = User.create!(@attributes)
       u.confirmed.should be_false
     end
+    
+    it "should be able to be set to false" do
+      u = User.new(@attributes)
+      u.confirmed = false
+      u.save!
+      u.confirmed.should == false
+    end
+    
+    it "should be able to set to true" do
+      u = User.new(@attributes)
+      u.confirmed = true
+      u.save!
+      u.confirmed.should == true
+    end
   end
 end
