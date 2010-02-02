@@ -129,4 +129,11 @@ describe User do
       u.confirm_id.should =~ /^[0-9a-f]{20}$/
     end
   end
+  
+  describe "confirmed" do
+    it "should be false when alert is created" do
+      u = User.create!(@attributes)
+      u.confirmed.should be_false
+    end
+  end
 end
