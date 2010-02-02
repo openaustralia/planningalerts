@@ -2,6 +2,7 @@ class SignupController < ApplicationController
   def index
     @page_title = "Email alerts of planning applications near you"
     @menu_item = "signup"
+    # TODO: Pick these sizes up from a configuration file
     @small_zone_size = 200
     @medium_zone_size = 800
     @large_zone_size = 2000
