@@ -52,8 +52,9 @@ class SignupController < ApplicationController
     @menu_item = "signup"
     
     @form_action = "/confirmed.php"
-    @user = User.new(:address => "24 Bruce Rd, Glenbrook NSW 2773", :area_size_meters => 800)
-  
+    @user = User.find(:first, :conditions => {:confirm_id => params[:cid]})
+    @user.confirmed = true
+
     @warnings = ""
     @onloadscript = ""
     @set_focus_control = ""
