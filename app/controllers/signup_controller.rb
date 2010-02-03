@@ -52,7 +52,7 @@ class SignupController < ApplicationController
     @menu_item = "signup"
     
     @form_action = "/confirmed.php"
-    @user = User.find(:first, :conditions => {:confirm_id => params[:cid]})
+    @user = User.find_by_confirm_id(params[:cid])
     if @user
       @user.confirmed = true
       @user.save!
