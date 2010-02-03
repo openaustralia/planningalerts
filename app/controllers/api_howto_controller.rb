@@ -15,7 +15,9 @@ class ApiHowtoController < ApplicationController
     example_top_right_lat = -29.113775
     example_top_right_lng = 153.325195
 
-    @api_url = "http://dev.planningalerts.org.au/api.php"
+    @api_url = url_for(:controller => :api)
+    # Doing this rather than using url_for so that the parameters stay in this order
+    # TODO: Rejig the URL scheme for the API so we don't have to do above
     @api_example_address_url = "#{@api_url}?call=address&address=#{CGI.escape(example_address)}&area_size=#{example_size}"
     @api_example_latlong_url = "#{@api_url}?call=point&lat=#{example_lat}&lng=#{example_lng}&area_size=#{example_size}"
     @api_example_area_url = "#{@api_url}?call=area&bottom_left_lat=#{example_bottom_left_lat}&bottom_left_lng=#{example_bottom_left_lng}&top_right_lat=#{example_top_right_lat}&top_right_lng=#{example_top_right_lng}"
