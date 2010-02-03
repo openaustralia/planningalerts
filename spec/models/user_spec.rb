@@ -18,6 +18,23 @@ describe User do
     User.create!(@attributes)
   end
   
+  # In order to stop frustrating multiple alerts
+  it "should only have one alert active for a particular street address / email address combination at one time" do
+    email = "foo@foo.org"
+    u1 = User.create!(:email => email, :address => "A street address", :area_size_meters => 200, :lat => 1.0, :lng => 2.0)
+    u2 = User.create!(:email => email, :address => "A street address", :area_size_meters => 800, :lat => 1.0, :lng => 2.0)
+    users = User.find_all_by_email(email) 
+    users.count.should == 1
+    users.first.area_size_meters.should == u2.area_size_meters
+  end
+  
+  it "should allow multiple alerts for different street addresses but the same email address" do
+    email = "foo@foo.org"
+    User.create!(:email => email, :address => "A street address", :area_size_meters => 200, :lat => 1.0, :lng => 2.0)
+    User.create!(:email => email, :address => "Another street address", :area_size_meters => 800, :lat => 1.0, :lng => 2.0)
+    User.find_all_by_email(email).count.should == 2
+  end
+  
   it "should be able to accept location information if it is already known and so not use the geocoder" do
     Location.should_not_receive(:geocode)
     @attributes[:lat] = 1.0

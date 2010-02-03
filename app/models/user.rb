@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   
   before_validation :geocode
   before_create :set_confirm_info
+  before_create :remove_other_alerts_for_this_address
   
   def location=(l)
     if l
@@ -19,6 +20,10 @@ class User < ActiveRecord::Base
   end
   
   private
+  
+  def remove_other_alerts_for_this_address
+    User.delete_all(:email => email, :address => address)
+  end
   
   def set_confirm_info
     # TODO: Should check that this is unique across all alerts and if not try again
