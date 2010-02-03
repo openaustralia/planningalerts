@@ -38,8 +38,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect 'faq.php', :controller => 'faq'
   map.connect 'getinvolved.php', :controller => 'get_involved'
-  map.connect 'apihowto.php', :controller => 'api_howto'
   map.connect 'about.php', :controller => 'about'
+  map.connect 'apihowto.php', :controller => 'api', :action => 'howto'
   map.connect 'api.php', :controller => 'api'
   
   # See how all your routes lay out with "rake routes"
