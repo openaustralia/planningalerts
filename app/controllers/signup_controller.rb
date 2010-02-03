@@ -2,10 +2,9 @@ class SignupController < ApplicationController
   def index
     @page_title = "Email alerts of planning applications near you"
     @menu_item = "signup"
-    # TODO: Pick these sizes up from a configuration file
-    @small_zone_size = 200
-    @medium_zone_size = 800
-    @large_zone_size = 2000
+    @zone_sizes = {'s' => Configuration::SMALL_ZONE_SIZE,
+      'm' => Configuration::MEDIUM_ZONE_SIZE,
+      'l' => Configuration::LARGE_ZONE_SIZE}
     if request.get?
       @alert_area_size = "m"
       @warnings = ""
@@ -13,7 +12,7 @@ class SignupController < ApplicationController
       @address = params[:txtAddress]
       @email = params[:txtEmail]
       @alert_area_size = params[:radAlertAreaSize]
-      area_size_meters = {'s' => @small_zone_size, 'm' => @medium_zone_size, 'l' => @large_zone_size}[@alert_area_size]
+      area_size_meters = @zone_sizes[@alert_area_size]
       u = User.new(:address => @address, :email => @email, :area_size_meters => area_size_meters)
       if u.save
         UserNotifier.deliver_confirm(u)
@@ -30,7 +29,6 @@ class SignupController < ApplicationController
   end
   
   def preview
-    @google_maps_key = "ABQIAAAAo-lZBjwKTxZxJsD-PJnp8RSar6C2u_L4pWCtZvTKzbAvP1AIvRSM06g5G1CDCy9niXlYd7l_YqMpVg"
     @center = Location.geocode(params[:address])
     @bottom_left, @top_right = @center.box_with_size_in_metres(params[:area_size].to_i)
 
@@ -51,6 +49,7 @@ class SignupController < ApplicationController
     @page_title = "Confirmed"
     @menu_item = "signup"
     
+    # TODO: Get rid of this @form_action
     @form_action = "/confirmed.php"
     @user = User.find_by_confirm_id(params[:cid])
     if @user

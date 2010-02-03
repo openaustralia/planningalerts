@@ -12,7 +12,6 @@ class ApplicationController < ActionController::Base
   before_filter :load_configuration
 
   def load_configuration
-    @google_analytics_key = "UA-3107958-5"
     @alert_count = Stat.applications_sent
     @authority_count = Authority.active.count
   end

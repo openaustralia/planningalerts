@@ -19,7 +19,7 @@ describe UserNotifier, "when sending a new user confirmation email" do
   end
   
   it "should include a confirmation url" do
-    @email.body.should include_text("http://www.planningalerts.org.au/confirmed.php?cid=abcdef")
+    @email.body.should include_text("http://dev.planningalerts.org.au/confirmed.php?cid=abcdef")
   end
   
   it "should include the address for the alert" do

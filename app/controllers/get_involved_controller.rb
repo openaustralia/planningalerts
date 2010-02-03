@@ -3,7 +3,8 @@ class GetInvolvedController < ApplicationController
     @page_title = "Get involved"
     @menu_item = "getinvolved"
     @warnings = ""
-    @base_url = "http://dev.planningalerts.org.au"
+    # TODO: Ugly. fix this
+    @base_url = "http://#{Configuration::HOST}"
     @onloadscript = ""
     @set_focus_control = ""
   end

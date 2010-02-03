@@ -1,5 +1,5 @@
 Please click on the link below to confirm you want to receive email alerts for planning applications near <%= @user.address %>:
 
-<%= url_for :controller => "signup", :action => "confirmed", :cid => @user.confirm_id, :only_path => false %>
+<%= url_for :controller => "signup", :action => "confirmed", :cid => @user.confirm_id, :host => Configuration::HOST %>
 
 If your email program does not let you click on this link, just copy and paste it into your web browser and hit return.
