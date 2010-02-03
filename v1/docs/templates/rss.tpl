@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:georss="http://www.georss.org/georss">
 	<channel>
 		<title>PlanningAlerts.org.au</title>
-		<link>{$base_url}</link>
+		<link>{$base_url}/</link>
 		<description></description>
         {foreach name="applications" from="$applications" item="application"}
             <item>
                 <title><![CDATA[{$application->address}]]></title>
-                <pubDate>{$application->date_scraped|date_format:"%a, %e %b %Y"}</pubDate>                
+                <pubDate>{$application->date_scraped|date_format:"%e %b %Y"}</pubDate>                
                 <guid isPermaLink="false">{$application->council_reference}</guid>
                 <georss:featurename><![CDATA[{$application->address}]]></georss:featurename>
                 <georss:point>{$application->lat} {$application->lng}</georss:point>
