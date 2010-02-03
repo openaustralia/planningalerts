@@ -69,8 +69,8 @@ class SignupController < ApplicationController
     @page_title = "Unsubscribed"
     @menu_item = "signup"
 
-    @address = "24 Bruce Rd, Glenbrook NSW 2773"
-    @area_size_meters = 800
+    @user = User.find_by_confirm_id(params[:cid])
+    @user.delete
 
     @warnings = ""
     @onloadscript = ""

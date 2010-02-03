@@ -24,8 +24,4 @@ describe SignupController do
   it "should render the confirmed page the same as the php version" do
     compare_with_php("/confirmed.php?cid=1234", "confirmed")
   end
-  
-  it "should render the unsubscribe page the same as the php version" do
-    compare_with_php("/unsubscribe.php?cid=aaaa", "unsubscribe")
-  end
 end
