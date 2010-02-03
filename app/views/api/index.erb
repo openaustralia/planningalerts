@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:georss="http://www.georss.org/georss">
+	<channel>
+		<title>PlanningAlerts.org.au</title>
+		<link><%= @base_url %></link>
+		<description></description>
+        <% @applications.each do |application| -%>
+            <item>
+                <title><![CDATA[<%= application.address %>]]></title>
+                <pubDate><%= application.date_scraped.to_date.to_formatted_s(:rfc822) %></pubDate>                
+                <guid isPermaLink="false"><%= application.council_reference %></guid>
+                <georss:featurename><![CDATA[<%= application.address %>]]></georss:featurename>
+                <georss:point><%= application.lat %> <%= application.lng %></georss:point>
+                <description><![CDATA[<%= application.description %>]]></description>
+                <link><![CDATA[<%= application.info_url %>]]></link>
+                <comments><![CDATA[<%= application.comment_url %>]]></comments>
+            </item>
+        <% end -%>
+    </channel>
+</rss>
