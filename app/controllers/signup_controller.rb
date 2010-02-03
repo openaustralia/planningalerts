@@ -56,7 +56,7 @@ class SignupController < ApplicationController
     if @user
       @user.confirmed = true
     else
-      render :status => 404
+      render :text => "", :status => 404
     end
     
     @warnings = ""
