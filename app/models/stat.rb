@@ -1,6 +1,4 @@
 class Stat < ActiveRecord::Base
-  set_primary_key "key"
-  
   def self.applications_sent
     value_for_key "applications_sent"
   end
