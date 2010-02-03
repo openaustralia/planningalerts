@@ -7,4 +7,9 @@ describe SignupController, "confirming" do
     user.should_receive(:confirmed=).with(true)
     get :confirmed, :cid => "1234"
   end
+  
+  it "should return a 404 when the wrong confirm_id is used" do
+    get :confirmed, :cid => "1111"
+    response.code.should == "404"
+  end
 end

@@ -53,8 +53,12 @@ class SignupController < ApplicationController
     
     @form_action = "/confirmed.php"
     @user = User.find(:first, :conditions => {:confirm_id => params[:cid]})
-    @user.confirmed = true
-
+    if @user
+      @user.confirmed = true
+    else
+      render :status => 404
+    end
+    
     @warnings = ""
     @onloadscript = ""
     @set_focus_control = ""
