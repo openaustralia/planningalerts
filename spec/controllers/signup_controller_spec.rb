@@ -5,6 +5,7 @@ describe SignupController, "confirming" do
     user = mock_model(User)
     User.should_receive(:find).with(:first, :conditions => {:confirm_id => "1234"}).and_return(user)
     user.should_receive(:confirmed=).with(true)
+    user.should_receive(:save!)
     get :confirmed, :cid => "1234"
   end
   

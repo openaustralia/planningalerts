@@ -55,6 +55,7 @@ class SignupController < ApplicationController
     @user = User.find(:first, :conditions => {:confirm_id => params[:cid]})
     if @user
       @user.confirmed = true
+      @user.save!
     else
       render :text => "", :status => 404
     end
