@@ -1,7 +1,8 @@
 class ApiController < ApplicationController
   def index
     # TODO: Move the template over to using an xml builder
-    @applications = Application.find(:all)
+    area = Area.centre_and_size(Location.geocode(params[:address]), params[:area_size].to_i)
+    @applications = Application.within(area).find(:all, :order => "date_scraped DESC", :limit => 100)
     @base_url = url_for(:controller => :signup)
     render :layout => false
   end

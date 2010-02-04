@@ -12,4 +12,8 @@ describe ApiController do
   it "should render one of the api examples the same as php" do
     compare_with_php("/api.php?call=address&address=24+Bruce+Road+Glenbrook,+NSW+2773&area_size=4000", "api")
   end
+
+  it "should render one of the api examples with a narrower search the same as php" do
+    compare_with_php("/api.php?call=address&address=24+Bruce+Road+Glenbrook,+NSW+2773&area_size=2000", "api")
+  end
 end
