@@ -16,13 +16,6 @@ class Location < SimpleDelegator
     Location.new(Geokit::Geocoders::GoogleGeocoder.geocode(address, :bias => "au"))
   end
   
-  # Coordinates of bottom-left and top-right corners of a box centred on the current location
-  # with a given size in metres
-  def box_with_size_in_metres(size_in_metres)
-    a = Area.new(self, size_in_metres)
-    [a.lower_left, a.upper_right]
-  end
-  
   # Distance given is in metres
   def endpoint(bearing, distance)
     Location.new(__getobj__.endpoint(bearing, distance / 1000.0, :units => :kms))

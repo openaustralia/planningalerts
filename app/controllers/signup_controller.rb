@@ -29,8 +29,7 @@ class SignupController < ApplicationController
   end
   
   def preview
-    @center = Location.geocode(params[:address])
-    @bottom_left, @top_right = @center.box_with_size_in_metres(params[:area_size].to_i)
+    @area = Area.new(Location.geocode(params[:address]), params[:area_size].to_i)
 
     render :layout => false
   end
