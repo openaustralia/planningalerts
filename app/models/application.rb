@@ -4,7 +4,7 @@ class Application < ActiveRecord::Base
   
   belongs_to :authority
   
-  named_scope :within, lambda { |p1, p2|
-    { :conditions => ['lat > ? AND lng > ? AND lat < ? AND lng < ?', p1.lat, p1.lng, p2.lat, p2.lng] }
+  named_scope :within, lambda { |a|
+    { :conditions => ['lat > ? AND lng > ? AND lat < ? AND lng < ?', a.lower_left.lat, a.lower_left.lng, a.upper_right.lat, a.upper_right.lng] }
   }
 end
