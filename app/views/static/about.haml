@@ -1,0 +1,34 @@
+%p
+  You'd probably know if your next door neighbour was going to knock their house down (you'd get a letter through
+  the door telling you they had applied for planning permission and asking you what you thought about it). But you'd
+  probably never find out if the old cinema or pub 5 streets away is going to be converted into luxury flats until
+  <a href="http://www.youtube.com/watch?v=srGsCYSYjwA">the bulldozers turned up</a>.
+%p
+  PlanningAlerts.org.au is a free service which searches as many planning authority websites as it can find and emails
+  you details of applications near you. The aim of this to enable shared scrutiny of what is being built (and
+  <a href="http://www.flickr.com/photos/kentjohnson/3634555801/" title="Carlton and United Brewery Site, Broadway Sydney">knocked down</a>)
+  in peoples' communities.
+%p
+  PlanningAlerts.org.au is brought to you by the
+  <a href="http://www.openaustraliafoundation.org.au">OpenAustralia Foundation</a>
+  with financial assistance from the Australian
+  <a href="http://gov2.net.au/blog/2009/09/22/allocating-the-project-fund-we-want-your-ideas/#comment-4672">Government 2.0 Taskforce</a>.
+  It was adapted for Australia by Matthew Landauer and Katherine Szuminska, and is based on the UK site
+  <a href="http://www.planningalerts.com">PlanningAlerts.com</a>, built by Richard Pope, Mikel Maron, Sam Smith,
+  Duncan Parkes, Tom Hughes and Andy Armstrong.
+%h3#authorities Planning authorities currently covered by the service
+%p
+  %small
+    <span class="highlight">New authorities are being added all the time, so if your local authority isn't listed below
+    <a href="/">sign up any way</a> and you'll start receiving alerts once it has been included</span>.
+%ul.nobullets
+  - @authorities.each do |authority|
+    %li= authority.full_name
+%p
+  If you are a programmer and would like to write a scraper for your local authority, or work for a local authority
+  and would like to make your data available, <a href="/getinvolved.php">find out how you can get involved</a>.
+%h3#contact
+  Contact
+%p
+  You can get in touch at
+  %a{ :href => "mailto:contact@planningalerts.org.au" } contact@planningalerts.org.au
