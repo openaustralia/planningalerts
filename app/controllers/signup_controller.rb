@@ -7,6 +7,8 @@ class SignupController < ApplicationController
       'l' => Configuration::LARGE_ZONE_SIZE}
     if request.get?
       @alert_area_size = "m"
+      @email = ""
+      @address = ""
     else
       @address = params[:txtAddress]
       @email = params[:txtEmail]
@@ -22,7 +24,7 @@ class SignupController < ApplicationController
         @address_warn = !u.errors.on(:street_address).nil?
       end
     end
-
+    @form_action = ""
     @set_focus_control = "txtEmail"
   end
   

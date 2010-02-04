@@ -1,0 +1,66 @@
+%form{ :method => "post", :action => @form_action }
+  %fieldset
+    %input{ :name => "_is_postback", :value => "1", :type => "hidden" }
+  %ul#ulSignup.form.nobullets
+    %li#liEmail
+      %label{ :for => "txtEmail" }
+        %span.number 1
+        Enter your email address
+      - if @email_warn
+        %input#txtEmail.textbox.error{ :name => "txtEmail", :type => "text", :value => @email }
+      - else
+        %input#txtEmail.textbox{ :name => "txtEmail", :type => "text", :value => @email }
+    %li#liAddress
+      %label{ :for => "txtAddress" }
+        %span.number 2
+        Enter a street address
+      - if @address_warn
+        %input#txtAddress.textbox.error{ :name => "txtAddress", :type => "text", :value => @address }
+      - else
+        %input#txtAddress.textbox{ :name => "txtAddress", :type => "text", :value => @address }
+      %small e.g. 1 Sowerby St, Goulburn, NSW 2580
+    %li#liAlertArea
+      %p#pAlertArea
+        %span.number> 3
+        What size area would you like to receive alerts for?
+      %fieldset
+        %ul#ulAlertArea.form.nobullets
+          %li
+            - if @alert_area_size == "s"
+              %input#radAlertAreaSize_street{ :type => "radio", :name => "radAlertAreaSize", :value => "s", :checked => "checked" }
+            - else
+              %input#radAlertAreaSize_street{ :type => "radio", :name => "radAlertAreaSize", :value => "s" }
+            %label{ :for => "radAlertAreaSize_street" }
+              My street (about #{meters_in_words(@zone_sizes['s'])})
+            %small
+              %a{ :href => "javascript:previewMap('#{@zone_sizes['s']}');" } view on a map (new window)
+          %li
+            - if @alert_area_size == "m"
+              %input#radAlertAreaSize_neihgbourhood{ :type => "radio", :name => "radAlertAreaSize", :value => "m", :checked => "checked" }
+            - else
+              %input#radAlertAreaSize_neihgbourhood{ :type => "radio", :name => "radAlertAreaSize", :value => "m" }
+            %label{ :for => "radAlertAreaSize_neihgbourhood" }
+              My neighbourhood  (about #{meters_in_words(@zone_sizes['m'])})
+            %small
+              %a{ :href => "javascript:previewMap('#{@zone_sizes['m']}');" } view on a map (new window)
+          %li
+            - if @alert_area_size == "l"
+              %input#radAlertAreaSize_town{ :type => "radio", :name => "radAlertAreaSize", :value => "l", :checked => "checked" }
+            - else
+              %input#radAlertAreaSize_town{ :type => "radio", :name => "radAlertAreaSize", :value => "l" }
+            %label{ :for => "radAlertAreaSize_town" }
+              My suburb  (about #{meters_in_words(@zone_sizes['l'])})
+            %small
+              %a{ :href => "javascript:previewMap('#{@zone_sizes['l']}');" } view on a map (new window)
+          %li
+            %noscript
+              %fieldset Note: viewing the alert area on a map requires javascript
+    %input.button{ :value => "Create alert >>", :type => "submit" }
+    %p#privacy
+      Our
+      %em Privacy Policy
+      is very simple: We will not sell or distribute any personal information
+      you share with us - at all, ever.
+    %p#spnBeta
+      It's early days for this service so your local authority may not be included yet. Sign up
+      anyway and you'll receive alerts as soon as they're available.
