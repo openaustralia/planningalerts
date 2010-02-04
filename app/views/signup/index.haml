@@ -6,10 +6,7 @@
       %label{ :for => "txtEmail" }
         %span.number 1
         Enter your email address
-      - if @email_warn
-        %input#txtEmail.textbox.error{ :name => "txtEmail", :type => "text", :value => @email }
-      - else
-        %input#txtEmail.textbox{ :name => "txtEmail", :type => "text", :value => @email }
+      %input#txtEmail.textbox{ :class => ("error" if @email_warn), :name => "txtEmail", :type => "text", :value => @email }
     %li#liAddress
       %label{ :for => "txtAddress" }
         %span.number 2
@@ -26,28 +23,19 @@
       %fieldset
         %ul#ulAlertArea.form.nobullets
           %li
-            - if @alert_area_size == "s"
-              %input#radAlertAreaSize_street{ :type => "radio", :name => "radAlertAreaSize", :value => "s", :checked => "checked" }
-            - else
-              %input#radAlertAreaSize_street{ :type => "radio", :name => "radAlertAreaSize", :value => "s" }
+            %input#radAlertAreaSize_street{ :type => "radio", :name => "radAlertAreaSize", :value => "s", :checked => ("checked" if @alert_area_size == "s") }
             %label{ :for => "radAlertAreaSize_street" }
               My street (about #{meters_in_words(@zone_sizes['s'])})
             %small
               %a{ :href => "javascript:previewMap('#{@zone_sizes['s']}');" } view on a map (new window)
           %li
-            - if @alert_area_size == "m"
-              %input#radAlertAreaSize_neihgbourhood{ :type => "radio", :name => "radAlertAreaSize", :value => "m", :checked => "checked" }
-            - else
-              %input#radAlertAreaSize_neihgbourhood{ :type => "radio", :name => "radAlertAreaSize", :value => "m" }
+            %input#radAlertAreaSize_neihgbourhood{ :type => "radio", :name => "radAlertAreaSize", :value => "m", :checked => ("checked" if @alert_area_size == "m")}
             %label{ :for => "radAlertAreaSize_neihgbourhood" }
               My neighbourhood  (about #{meters_in_words(@zone_sizes['m'])})
             %small
               %a{ :href => "javascript:previewMap('#{@zone_sizes['m']}');" } view on a map (new window)
           %li
-            - if @alert_area_size == "l"
-              %input#radAlertAreaSize_town{ :type => "radio", :name => "radAlertAreaSize", :value => "l", :checked => "checked" }
-            - else
-              %input#radAlertAreaSize_town{ :type => "radio", :name => "radAlertAreaSize", :value => "l" }
+            %input#radAlertAreaSize_town{ :type => "radio", :name => "radAlertAreaSize", :value => "l", :checked => ("checked" if @alert_area_size == "l") }
             %label{ :for => "radAlertAreaSize_town" }
               My suburb  (about #{meters_in_words(@zone_sizes['l'])})
             %small
