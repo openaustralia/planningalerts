@@ -47,7 +47,7 @@ class ApiController < ApplicationController
       Area.centre_and_size(location, params[:area_size].to_i)
     when "area"
       lower_left = Location.new(params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f)
-      upper_rigt = Location.new(params[:top_right_lat].to_f, params[:top_right_lng].to_f)
+      upper_right = Location.new(params[:top_right_lat].to_f, params[:top_right_lng].to_f)
       Area.lower_left_and_upper_right(lower_left, upper_right)
     else
       raise "unexpected value for :call"
