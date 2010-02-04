@@ -1,0 +1,56 @@
+%h3
+  PlanningAlerts.org.au API
+%p
+  Planning application data is available programmatically as <a href="http://georss.org/">GeoRSS</a> feeds which can
+  be used in most web mapping APIs and desktop GIS software like <a href="http://mapufacture.com">mapufacture</a>
+  and <a href="http://pipes.yahoo.com/">Yahoo Pipes</a>. Details of the API are listed below.
+  %p
+    %h4
+      API documentation
+    .apiitem
+      %h5
+        Single Location by address
+      %p.apidefinition
+        Return applications near a given street address. The area included is a square of the given size (in metres)
+        with the address at its center. Suggested sizes are 400, 800 or 4000 metres.
+      %code
+        #{@api_url}?<strong>call</strong>=address<br/>&<strong>address</strong>=[some address]&<strong>area_size</strong>=[size in metres]
+      %p.apiexamples
+        %a{ :href => @api_example_address_url } view example
+        %a{ :href => mapify(@api_example_address_url, 14) } view on a map
+    .apiitem
+      %h5
+        Single Location by longitude/latitude
+      %p.apidefinition
+        Return applications near a given longitude/latitude. The area included is a square of the given size (in metres)
+        with the longitude/latitude at its center. Suggested sizes are 400, 800 or 4000 metres.
+      %code
+        #{@api_url}?<strong>call</strong>=point<br/>&<strong>lat</strong>=[some latitude]&<strong>lng</strong>=[some longitude]&<strong>area_size</strong>=[size in metres]
+      %p.apiexamples
+        %a{ :href => @api_example_latlong_url } view example
+        %a{ :href => mapify(@api_example_latlong_url, 14) } view on a map
+    .apiitem
+      %h5
+        Area by longitude/latitude
+      %p.apidefinition
+        Return applications within a rectangle defined by longitude/latitude.
+      %code
+        #{@api_url}?<strong>call</strong>=area<br/>&<strong>bottom_left_lat</strong>=[some latitude]&<strong>bottom_left_lng</strong>=[some longitude]&<strong>top_right_lat</strong>=[some latitude]&<strong>top_right_lng</strong>=[some longitude]
+      %p.apiexamples
+        %a{ :href => @api_example_area_url } view example
+        %a{ :href => mapify(@api_example_area_url, 6) } view on a map
+    .apiitem
+      %h5
+        Planning authority
+      %p.apidefinition
+        Return applications for a specific planning authority (e.g. a local council) by authority short name.
+      %code
+        #{@api_url}?<strong>call</strong>=authority<br/>&<strong>authority</strong>=[some name]
+      %p.apiexamples
+        %a{ :href => @api_example_authority_url } view example
+        %a{ :href => mapify(@api_example_authority_url, 11) } view on a map
+    %h4#hLicenseInfo
+      License information
+    %p
+      Data via the api is licensed under the
+      <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0 license</a>.

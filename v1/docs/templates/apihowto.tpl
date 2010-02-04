@@ -7,7 +7,6 @@
 
     <h4>API documentation</h4>
     
-    <!--Address-->
     <div class="apiitem">
         <h5>Single Location by address</h5>
         <p class="apidefinition">
@@ -22,14 +21,13 @@
         </p>
     </div>
 	
-	<!--Single-->
 	<div class="apiitem">
     	<h5>Single Location by longitude/latitude</h5>
     	<p class="apidefinition">
     	   Return applications near a given longitude/latitude. The area included is a square of the given size (in metres) with the longitude/latitude at its center. Suggested sizes are 400, 800 or 4000 metres.
     	</p>
     	<code>
-    	{$api_url}?<strong>call</strong>=point<br/>&<strong>lat</strong>=[some latitude]&<strong>lng</strong>=[some longitude]<strong>area_size</strong>=[size in metres]
+    	{$api_url}?<strong>call</strong>=point<br/>&<strong>lat</strong>=[some latitude]&<strong>lng</strong>=[some longitude]&<strong>area_size</strong>=[size in metres]
     	</code>
     	<p class="apiexamples">
     	    <a href="{$api_example_latlong_url}">view example</a>
@@ -37,7 +35,6 @@
         </p>
     </div>
     
-    <!--Area-->
 	<div class="apiitem">
     	<h5>Area by longitude/latitude</h5>
     	<p class="apidefinition">
@@ -52,7 +49,6 @@
         </p>
     </div>
     
-    <!--Authority-->
 	<div class="apiitem">
     	<h5>Planning authority</h5>
     	<p class="apidefinition">
