@@ -35,8 +35,6 @@ class ApiController < ApplicationController
     @api_example_latlong_url = "#{@api_url}?call=point&lat=#{example_lat}&lng=#{example_lng}&area_size=#{example_size}"
     @api_example_area_url = "#{@api_url}?call=area&bottom_left_lat=#{example_bottom_left_lat}&bottom_left_lng=#{example_bottom_left_lng}&top_right_lat=#{example_top_right_lat}&top_right_lng=#{example_top_right_lng}"
     @api_example_authority_url = "#{@api_url}?call=authority&authority=#{CGI.escape(example_authority)}"
-
-    @set_focus_control = ""
   end
   
   private

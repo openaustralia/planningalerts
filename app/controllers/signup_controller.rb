@@ -36,8 +36,6 @@ class SignupController < ApplicationController
     @page_title = "Now check your email"
     # TODO: Get rid of @menu_item by using standard rails stuff for links
     @menu_item = "signup"
-    
-    @set_focus_control = ""
   end
   
   def confirmed
@@ -53,8 +51,6 @@ class SignupController < ApplicationController
     else
       render :text => "", :status => 404
     end
-    
-    @set_focus_control = ""
   end
   
   def unsubscribe
@@ -63,7 +59,5 @@ class SignupController < ApplicationController
 
     @user = User.find_by_confirm_id(params[:cid])
     @user.delete
-
-    @set_focus_control = ""
   end
 end

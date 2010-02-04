@@ -4,7 +4,5 @@ class AboutController < ApplicationController
     @menu_item = "about"
     
     @authorities = Authority.active.find(:all, :order => "full_name")
-      
-    @set_focus_control = ""
   end
 end
