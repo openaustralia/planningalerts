@@ -11,4 +11,12 @@ describe Area do
     result.lower_left.distance_to(expected_lower_left).should < 10
     result.upper_right.distance_to(expected_upper_right).should < 10
   end
+  
+  it "should construct an area using two coordinates for the lower left and upper right corner" do
+    p1 = Location.new(1.0, 2.0)
+    p2 = Location.new(3.0, 4.0)
+    area = Area.lower_left_and_upper_right(p1, p2)
+    area.lower_left.should == p1
+    area.upper_right.should == p2
+  end
 end

@@ -2,6 +2,12 @@
 class Area
   attr_accessor :lower_left, :upper_right
 
+  def self.lower_left_and_upper_right(lower_left, upper_right)
+    area = Area.new
+    area.lower_left, area.upper_right = lower_left, upper_right
+    area
+  end
+  
   def self.centre_and_size(centre, size_in_metres)
     lower_centre = centre.endpoint(180, size_in_metres / 2)
     upper_centre = centre.endpoint(0, size_in_metres / 2)
