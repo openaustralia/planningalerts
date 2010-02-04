@@ -19,13 +19,8 @@ class Location < SimpleDelegator
   # Coordinates of bottom-left and top-right corners of a box centred on the current location
   # with a given size in metres
   def box_with_size_in_metres(size_in_metres)
-    lower_center = endpoint(180, size_in_metres / 2)
-    upper_center = endpoint(0, size_in_metres / 2)
-    center_left = endpoint(270, size_in_metres / 2)
-    center_right = endpoint(90, size_in_metres / 2)
-    lower_left = Location.new(lower_center.lat, center_left.lng)
-    upper_right = Location.new(upper_center.lat, center_right.lng)
-    [lower_left, upper_right]
+    a = Area.new(self, size_in_metres)
+    [a.lower_left, a.upper_right]
   end
   
   # Distance given is in metres
@@ -40,5 +35,9 @@ class Location < SimpleDelegator
   
   def full_address
     __getobj__.full_address.sub(", Australia", "")
+  end
+  
+  def ==(a)
+    lat == a.lat && lng == a.lng
   end
 end
