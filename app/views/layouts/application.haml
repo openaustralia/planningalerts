@@ -1,0 +1,64 @@
+!!! Strict
+%html{ "xml:lang" => "en", :lang => "en", :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
+    %title PlanningAlerts.org.au | #{@page_title}
+    %link{ :href => "./css/memespring.css", :rel => "stylesheet", :type => "text/css", :media => "all" }
+    %link{ :href => "./css/main.css", :rel => "stylesheet", :type => "text/css", :media => "all" }
+    %script{ :src => "./javascript/main.js", :type => "text/javascript" }
+    %script{ :type => "text/javascript" }
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '#{Configuration::GOOGLE_ANALYTICS_KEY}']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+      })();
+  %body
+    #divHeader
+      %h1
+        %a{ :href => "/" }> PlanningAlerts<span>.</span>org<span>.</span>au
+        %sup> beta
+      %h2
+        Email alerts of planning applications
+        %em near you
+      #statsbanner
+        %p#pStats
+          #{@alert_count} alerts sent for
+          %a{ :href => "/about.php#authorities" } #{@authority_count} authorities
+    .hide
+      %a{ :href => "#divContent" } Skip navigation
+    #divMenu
+      %ul.collapse
+        %li{ :class => ("selected" if @menu_item == "about") }
+          %a{ :href => "about.php" } About
+        %li{ :class => ("selected" if @menu_item == "api") }
+          %a{ :href => "apihowto.php" }
+            %acronym{ :title => "Application programming interface" } API
+        %li{ :class => ("selected" if @menu_item == "getinvolved") }
+          %a{ :href => "getinvolved.php" } Get Involved
+        %li{ :class => ("selected" if @menu_item == "faq") }
+          %a{ :href => "faq.php" }
+            %acronym{ :title => "Frequently asked questions" } FAQ
+        %li{ :class => ("selected" if @menu_item == "signup") }
+          %a{ :href => "/" } Sign Up
+    #divPage
+      #divContent
+        #divWarning{ :class => ("hide" if @warnings.nil?) }
+          = @warnings
+        = yield
+      #divFooter
+        %ul.inline
+          %li
+            %a{ :href => "about.php#contact" } Contact
+          %li
+            %a{ :href => "http://blog.openaustralia.org" } Blog
+          %li
+            %a{ :href => "http://twitter.com/planningalerts" } Twitter
+        %span#oaf An OpenAustralia Foundation Project
+    - if @set_focus_control
+      %script{ :type => "text/javascript", :defer => "defer" }<
+        setFocus('#{@set_focus_control}');;

@@ -10,17 +10,14 @@
     <script src="./javascript/main.js" type="text/javascript"></script>      	
 
     <script type="text/javascript">
-
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', '{$smarty.const.GOOGLE_ANALYTICS_KEY}']);
       _gaq.push(['_trackPageview']);
-      {literal}
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
-      })();
-      {/literal}
+      {literal}(function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+      })();{/literal}
     </script>	
 </head>
 <body>
