@@ -5,7 +5,6 @@ class AboutController < ApplicationController
     
     @authorities = Authority.active.find(:all, :order => "full_name")
       
-    @warnings = ""
     @onloadscript = ""
     @set_focus_control = ""
   end

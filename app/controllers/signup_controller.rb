@@ -7,7 +7,6 @@ class SignupController < ApplicationController
       'l' => Configuration::LARGE_ZONE_SIZE}
     if request.get?
       @alert_area_size = "m"
-      @warnings = ""
     else
       @address = params[:txtAddress]
       @email = params[:txtEmail]
@@ -39,7 +38,6 @@ class SignupController < ApplicationController
     # TODO: Get rid of @menu_item by using standard rails stuff for links
     @menu_item = "signup"
     
-    @warnings = ""
     @onloadscript = ""
     @set_focus_control = ""
   end
@@ -58,7 +56,6 @@ class SignupController < ApplicationController
       render :text => "", :status => 404
     end
     
-    @warnings = ""
     @onloadscript = ""
     @set_focus_control = ""
   end
@@ -70,7 +67,6 @@ class SignupController < ApplicationController
     @user = User.find_by_confirm_id(params[:cid])
     @user.delete
 
-    @warnings = ""
     @onloadscript = ""
     @set_focus_control = ""
   end

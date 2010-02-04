@@ -45,7 +45,7 @@
     </div>
     <div id="divPage">
         <div id="divContent">
-            <div id="divWarning" <% if @warnings == "" %>class="hide"<% end %>>
+            <div id="divWarning" <% if @warnings.nil? %>class="hide"<% end %>>
                 <%= @warnings %>
             </div>
 <%= yield %>
