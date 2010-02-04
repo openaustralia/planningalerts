@@ -24,7 +24,6 @@ class SignupController < ApplicationController
     end
 
     @set_focus_control = "txtEmail"
-    @onloadscript = nil
   end
   
   def preview
@@ -38,7 +37,6 @@ class SignupController < ApplicationController
     # TODO: Get rid of @menu_item by using standard rails stuff for links
     @menu_item = "signup"
     
-    @onloadscript = ""
     @set_focus_control = ""
   end
   
@@ -56,7 +54,6 @@ class SignupController < ApplicationController
       render :text => "", :status => 404
     end
     
-    @onloadscript = ""
     @set_focus_control = ""
   end
   
@@ -67,7 +64,6 @@ class SignupController < ApplicationController
     @user = User.find_by_confirm_id(params[:cid])
     @user.delete
 
-    @onloadscript = ""
     @set_focus_control = ""
   end
 end
