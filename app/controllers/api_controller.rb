@@ -4,7 +4,9 @@ class ApiController < ApplicationController
     if params[:call] == "address" || params[:call] == "point" || params[:call] == "area"
       @applications = Application.within(search_area).find(:all, :order => "date_scraped DESC", :limit => 100)
     elsif params[:call] == "authority"
-      @applications = Authority.find_by_short_name(params[:authority]).applications(:order => "date_scraped DESC", :limit => 100)
+      # TODO Handle the situation where the authority name isn't found
+      authority = Authority.find_by_short_name(params[:authority])
+      @applications = authority.applications(:order => "date_scraped DESC", :limit => 100)
     else
       raise "unexpected value for :call"
     end
