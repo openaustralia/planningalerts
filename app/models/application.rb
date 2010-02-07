@@ -3,7 +3,7 @@ class Application < ActiveRecord::Base
   set_primary_key "application_id"
   
   belongs_to :authority
-  before_save :make_tinyurls
+  before_save :lookup_comment_tinyurl, :lookup_info_tinyurl
   
   named_scope :within, lambda { |a|
     { :conditions => ['lat > ? AND lng > ? AND lat < ? AND lng < ?', a.lower_left.lat, a.lower_left.lng, a.upper_right.lat, a.upper_right.lng] }
@@ -11,16 +11,20 @@ class Application < ActiveRecord::Base
   
   private
   
-  def make_tinyurls
-    if comment_url
-      self.comment_tinyurl = ShortURL.shorten(comment_url, :tinyurl)
+  def shorten_url(url)
+    if url
+      ShortURL.shorten(url, :tinyurl)
     else
-      logger.warn "comment_url for application number: #{id} is empty"
+      logger.warn "shortening of url was skipped for application number: #{id} because url is empty"
+      nil
     end
-    if info_url
-      self.info_tinyurl = ShortURL.shorten(info_url, :tinyurl)
-    else
-      logger.warn "info_url for application number: #{id} is empty"
-    end
+  end
+  
+  def lookup_comment_tinyurl
+    self.comment_tinyurl = shorten_url(comment_url)
+  end
+  
+  def lookup_info_tinyurl
+    self.info_tinyurl = shorten_url(info_url)
   end
 end
