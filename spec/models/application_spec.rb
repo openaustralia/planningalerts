@@ -4,7 +4,7 @@ describe Application do
   before :each do
     @auth = Authority.create!(:planning_email => "foo", :full_name => "Fiddlesticks", :short_name => "Fiddle")
     # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
-    Location.stub!(:geocode).and_return(mock(:lat => 1.0, :lng => 2.0))
+    Location.stub!(:geocode).and_return(mock(:lat => 1.0, :lng => 2.0, :success => true))
   end
   
   describe "within" do
@@ -41,11 +41,26 @@ describe Application do
     end
     
     it "should geocode the address" do
-      loc = mock("Location", :lat => -33.772609, :lng => 150.624263)
+      loc = mock("Location", :lat => -33.772609, :lng => 150.624263, :success => true)
       Location.should_receive(:geocode).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
       a = @auth.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :postcode => "", :council_reference => "r1")
       a.lat.should == loc.lat
       a.lng.should == loc.lng
+    end
+    
+    it "should log an error if the geocoder can't make sense of the address" do
+      Location.should_receive(:geocode).with("dfjshd").and_return(mock("Location", :success => false))
+      logger = mock("Logger")
+      logger.should_receive(:error).with("Couldn't geocode address: dfjshd")
+      # Ignore the warning message (from the tinyurl'ing)
+      logger.stub!(:warn)
+
+      a = @auth.applications.new(:address => "dfjshd", :postcode => "", :council_reference => "r1")
+      a.stub!(:logger).and_return(logger)
+      
+      a.save!
+      a.lat.should be_nil
+      a.lng.should be_nil
     end
   end
 end

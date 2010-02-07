@@ -37,8 +37,12 @@ class Application < ActiveRecord::Base
     # Only geocode if location hasn't been set
     if self.lat.nil? && self.lng.nil?
       r = Location.geocode(address)
-      self.lat = r.lat
-      self.lng = r.lng
+      if r.success
+        self.lat = r.lat
+        self.lng = r.lng
+      else
+        logger.error "Couldn't geocode address: #{address}"
+      end
     end
   end
 end
