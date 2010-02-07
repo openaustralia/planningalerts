@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Application do
   before :each do
     @auth = Authority.create!(:planning_email => "foo", :full_name => "Fiddlesticks", :short_name => "Fiddle")
+    # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
+    Location.stub!(:geocode).and_return(mock(:lat => 1.0, :lng => 2.0))
   end
   
   describe "within" do
@@ -36,6 +38,14 @@ describe Application do
       ShortURL.should_receive(:shorten).with("http://example.org/info", :tinyurl).and_return("http://tinyurl.com/1234")
       a = @auth.applications.create!(:info_url => "http://example.org/info", :postcode => "", :council_reference => "r1")
       a.info_tinyurl.should == "http://tinyurl.com/1234"      
+    end
+    
+    it "should geocode the address" do
+      loc = mock("Location", :lat => -33.772609, :lng => 150.624263)
+      Location.should_receive(:geocode).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
+      a = @auth.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :postcode => "", :council_reference => "r1")
+      a.lat.should == loc.lat
+      a.lng.should == loc.lng
     end
   end
 end
