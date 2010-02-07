@@ -68,4 +68,75 @@ describe Application do
       a.map_url.should == "http://maps.google.com/maps?q=24+Bruce+Road%2C+Glenbrook%2C+NSW&z=15"
     end
   end
+  
+  describe "collecting applications from the scraper web service urls" do
+    before :each do
+      @feed_xml = <<-EOF
+      <?xml version="1.0" encoding="UTF-8"?>
+      <planning>
+        <authority_name>Fiddlesticks</authority_name>
+        <authority_short_name>Fiddle</authority_short_name>
+        <applications>
+          <application>
+            <council_reference>R1</council_reference>
+            <address>1 Smith Street, Fiddleville</address>
+            <description>Knocking a house down</description>
+            <info_url>http://fiddle.gov.au/info/R1</info_url>
+            <comment_url>http://fiddle.gov.au/comment/R1</comment_url>
+            <date_received>2009-01-01</date_received>
+          </application>
+          <application>
+            <council_reference>R2</council_reference>
+            <address>2 Smith Street, Fiddleville</address>
+            <description>Putting a house up</description>
+            <info_url>http://fiddle.gov.au/info/R2</info_url>
+            <comment_url>http://fiddle.gov.au/comment/R2</comment_url>
+            <date_received>2009-01-01</date_received>
+          </application>
+        </applications>
+      </planning>
+      EOF
+      @date = Date.new(2009, 1, 1)
+      @feed_url = "http://example.org?year=#{@date.year}&month=#{@date.month}&day=#{@date.day}"
+      @auth.stub!(:feed_url_for_date).with(@date).and_return(@feed_url)
+    end
+    
+    it "should collect the correct applications" do
+      handle = mock("Handle")
+      Application.should_receive(:open).with(@feed_url).and_return(handle)
+      handle.should_receive(:read).and_return(@feed_xml)
+      logger = mock
+      Application.stub!(:logger).and_return(logger)
+      logger.should_receive(:info).with("Saving application R1")
+      logger.should_receive(:info).with("Saving application R2")
+      
+      Application.delete_all
+      Application.collect_applications_for_authority(@auth, @date)
+      Application.count.should == 2
+      r1 = Application.find_by_council_reference("R1")
+      r1.authority.should == @auth
+      r1.address.should == "1 Smith Street, Fiddleville"
+      r1.description.should == "Knocking a house down"
+      r1.info_url.should == "http://fiddle.gov.au/info/R1"
+      r1.comment_url.should == "http://fiddle.gov.au/comment/R1"
+      r1.date_recieved.should == @date
+    end
+    
+    it "should not create new applications when they already exist" do
+      Application.stub!(:open).and_return(mock(:read => @feed_xml))
+      logger = mock
+      Application.stub!(:logger).and_return(logger)
+      logger.should_receive(:info).with("Saving application R1")
+      logger.should_receive(:info).with("Saving application R2")
+      logger.should_receive(:info).with("Application already exists in database R1")
+      logger.should_receive(:info).with("Application already exists in database R2")
+
+      Application.delete_all      
+      # Getting the feed twice with the same content
+      Application.collect_applications_for_authority(@auth, @date)
+      Application.collect_applications_for_authority(@auth, @date)
+      Application.count.should == 2
+      
+    end 
+  end
 end
