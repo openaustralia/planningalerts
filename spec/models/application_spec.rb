@@ -62,5 +62,10 @@ describe Application do
       a.lat.should be_nil
       a.lng.should be_nil
     end
+    
+    it "should set the url for showing the address on a google map" do
+      a = @auth.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :postcode => "", :council_reference => "r1")
+      a.map_url.should == "http://maps.google.com/maps?q=24+Bruce+Road%2C+Glenbrook%2C+NSW&z=15"
+    end
   end
 end
