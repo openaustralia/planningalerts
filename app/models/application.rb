@@ -3,13 +3,18 @@ class Application < ActiveRecord::Base
   set_primary_key "application_id"
   
   belongs_to :authority
-  before_save :lookup_comment_tinyurl, :lookup_info_tinyurl
+  before_save :lookup_comment_tinyurl, :lookup_info_tinyurl, :set_date_scraped
   
   named_scope :within, lambda { |a|
     { :conditions => ['lat > ? AND lng > ? AND lat < ? AND lng < ?', a.lower_left.lat, a.lower_left.lng, a.upper_right.lat, a.upper_right.lng] }
   }
   
   private
+  
+  # TODO: rename date_scraped column to updated_at so that we can use rails "magic fields"
+  def set_date_scraped
+    self.date_scraped = DateTime.now
+  end
   
   def shorten_url(url)
     if url
