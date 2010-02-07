@@ -1,5 +1,3 @@
-require 'mechanize'
-
 class Authority < ActiveRecord::Base
   set_table_name "authority"
   set_primary_key "authority_id"
@@ -8,9 +6,8 @@ class Authority < ActiveRecord::Base
   named_scope :active, :conditions => 'disabled = 0 or disabled is null'
   
   def self.load_from_web_service
-    agent = WWW::Mechanize.new
-    page = agent.get(Configuration::INTERNAL_SCRAPERS_INDEX_URL)
-    Nokogiri::XML(page.body).search('scraper').each do |scraper|
+    page = Nokogiri::XML(open(Configuration::INTERNAL_SCRAPERS_INDEX_URL).read)
+    page.search('scraper').each do |scraper|
       short_name = scraper.at('authority_short_name').inner_text
       authority = Authority.find_by_short_name(short_name)
       if authority.nil?

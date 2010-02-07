@@ -3,11 +3,9 @@ require 'spec_helper'
 describe Authority do
   describe "load_from_web_service" do
     it "should load all the authorities data from the scraper web service index" do
-      agent = mock("Agent")
-      page = mock("Page")
-      WWW::Mechanize.should_receive(:new).and_return(agent)
-      agent.should_receive(:get).and_return(page)
-      page.should_receive(:body).and_return(
+      handle = mock("Handle")
+      Authority.should_receive(:open).and_return(handle)
+      handle.should_receive(:read).and_return(
         <<-EOF
         <scrapers> 
           <scraper> 
