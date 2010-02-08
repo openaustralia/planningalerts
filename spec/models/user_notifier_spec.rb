@@ -34,9 +34,13 @@ describe UserNotifier do
   
   describe "when sending a planning alert" do
     before :each do
+      @original_emails_sent = Stat.emails_sent
+      @original_applications_sent = Stat.applications_sent
       @a1 = Application.new(:address => "Foo Street, Bar", :council_reference => "a1", :description => "Knock something down",
         :info_tinyurl => "tinyurl1", :map_url => "map1", :comment_tinyurl => "tinyurl2")
-      @email = UserNotifier.create_alert(@user, [@a1])
+      @a2 = Application.new(:address => "Bar Street, Foo", :council_reference => "a2", :description => "Put something up",
+        :info_tinyurl => "tinyurl3", :map_url => "map2", :comment_tinyurl => "tinyurl4")
+      @email = UserNotifier.create_alert(@user, [@a1, @a2])
     end
     
     it "should be sent to the user's email address" do
@@ -75,6 +79,11 @@ describe UserNotifier do
     
     it "should include a link to the unsubscribe url" do
       @email.body.should include_text("http://dev.planningalerts.org.au/unsubscribe.php?cid=abcdef")
+    end
+    
+    it "should update the statistics" do
+      Stat.emails_sent.should == @original_emails_sent + 1
+      Stat.applications_sent.should == @original_applications_sent + 2
     end
   end
 end
