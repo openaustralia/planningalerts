@@ -7,4 +7,11 @@ namespace :planningalerts do
       Authority.load_from_web_service
     end
   end
+  
+  namespace :application do
+    desc "Scrape all the applications for the last few days for all the loaded authorities"
+    task :scrape => :environment do
+      Application.collect_applications(Logger.new(STDOUT))
+    end
+  end
 end

@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class Application < ActiveRecord::Base
   set_table_name "application"
   set_primary_key "application_id"
@@ -9,25 +11,33 @@ class Application < ActiveRecord::Base
     { :conditions => ['lat > ? AND lng > ? AND lat < ? AND lng < ?', a.lower_left.lat, a.lower_left.lng, a.upper_right.lat, a.upper_right.lng] }
   }
   
-  def self.collect_applications
+  # Optionally pass a logger which is just used for sending informational messages to do with this long-running job to
+  def self.collect_applications(info_logger = logger)
     start_date = Date.today - Configuration::SCRAPE_DELAY
     (start_date..(Date.today)).each do |date|
-      Authority.find(:all).each do |auth|
-        collect_applications_for_authority(auth, date)
+      authorities = Authority.find(:all)
+      info_logger.info "Scraping #{authorities.count} authorities"
+      authorities.each do |auth|
+        collect_applications_for_authority(auth, date, info_logger)
       end
     end
   end
   
-  def self.collect_applications_for_authority(auth, date)
-    feed = Nokogiri::XML(open(auth.feed_url_for_date(date)).read)
-    feed.search('application').each do |a|
+  def self.collect_applications_for_authority(auth, date, info_logger = logger)
+    url = auth.feed_url_for_date(date)
+    info_logger.info "Scraping authority #{auth.full_name} from #{url}"
+    feed = Nokogiri::XML(open(url).read)
+    applications = feed.search('application')
+    info_logger.info "Found #{applications.count} applications for #{auth.full_name}"
+    
+    applications.each do |a|
       # TODO: Check if the application already exists
       council_reference = a.at('council_reference').inner_text
       # TODO Consider if it would be better to overwrite applications with new data if they already exists
       # This would allow for the possibility that the application information was incorrectly entered at source
       # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
       if auth.applications.find_by_council_reference(council_reference)
-        logger.info "Application already exists in database #{council_reference}"
+        info_logger.info "Application already exists in database #{council_reference}"
       else
         auth.applications.create!(
           :council_reference => council_reference,
@@ -39,7 +49,7 @@ class Application < ActiveRecord::Base
           :date_recieved => a.at('date_received').inner_text,
           # TODO Get rid of postcode column in the table. It's not being used
           :postcode => "")
-        logger.info "Saving application #{council_reference}"
+        info_logger.info "Saving application #{council_reference}"
       end
     end
   end

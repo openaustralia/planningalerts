@@ -107,6 +107,8 @@ describe Application do
     it "should collect the correct applications" do
       logger = mock
       Application.stub!(:logger).and_return(logger)
+      logger.should_receive(:info).with("Scraping authority Fiddlesticks from http://example.org?year=2009&month=1&day=1")
+      logger.should_receive(:info).with("Found 2 applications for Fiddlesticks")
       logger.should_receive(:info).with("Saving application R1")
       logger.should_receive(:info).with("Saving application R2")
       
@@ -124,6 +126,8 @@ describe Application do
     it "should not create new applications when they already exist" do
       logger = mock
       Application.stub!(:logger).and_return(logger)
+      logger.should_receive(:info).twice.with("Scraping authority Fiddlesticks from http://example.org?year=2009&month=1&day=1")
+      logger.should_receive(:info).twice.with("Found 2 applications for Fiddlesticks")
       logger.should_receive(:info).with("Saving application R1")
       logger.should_receive(:info).with("Saving application R2")
       logger.should_receive(:info).with("Application already exists in database R1")
@@ -139,12 +143,14 @@ describe Application do
       auth2 = Authority.create!(:planning_email => "", :full_name => "Wombat City Council", :short_name => "Wombat")
       # TODO Overwriting a constant here. Ugh. Do this better
       Configuration::SCRAPE_DELAY = 1
-      Application.should_receive(:collect_applications_for_authority).with(@auth, Date.today)
-      Application.should_receive(:collect_applications_for_authority).with(auth2, Date.today)
-      Application.should_receive(:collect_applications_for_authority).with(@auth, Date.today - 1)
-      Application.should_receive(:collect_applications_for_authority).with(auth2, Date.today - 1)
+      logger = mock
+      logger.should_receive(:info).twice.with("Scraping 2 authorities")
+      Application.should_receive(:collect_applications_for_authority).with(@auth, Date.today, logger)
+      Application.should_receive(:collect_applications_for_authority).with(auth2, Date.today, logger)
+      Application.should_receive(:collect_applications_for_authority).with(@auth, Date.today - 1, logger)
+      Application.should_receive(:collect_applications_for_authority).with(auth2, Date.today - 1, logger)
 
-      Application.collect_applications
+      Application.collect_applications(logger)
     end
   end
 end
