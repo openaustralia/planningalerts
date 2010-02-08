@@ -15,7 +15,7 @@ class Application < ActiveRecord::Base
   def self.collect_applications(info_logger = logger)
     start_date = Date.today - Configuration::SCRAPE_DELAY
     (start_date..(Date.today)).each do |date|
-      authorities = Authority.find(:all)
+      authorities = Authority.active
       info_logger.info "Scraping #{authorities.count} authorities"
       authorities.each do |auth|
         collect_applications_for_authority(auth, date, info_logger)
