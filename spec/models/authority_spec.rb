@@ -37,4 +37,10 @@ describe Authority do
       r.feed_url == "http://localhost:4567/brisbane?year={year}&month={month}&day={day}"
     end
   end
+  
+  it "should substitute the date in the url" do
+    a = Authority.new(:feed_url => "http://example.org?year={year}&month={month}&day={day}")
+    date = Date.new(2009, 2, 1)
+    a.feed_url_for_date(date).should == "http://example.org?year=2009&month=2&day=1"
+  end
 end
