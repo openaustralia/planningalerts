@@ -1,0 +1,24 @@
+The following new planning applications have been found near <%= @user.address %>:
+
+<% @applications.each do |app| -%>
+<%= app.address.upcase %> (<%= app.council_reference.upcase %>)
+
+<%= app.description %>
+
+MORE INFORMATION: <%= app.info_tinyurl %>
+MAP: <%= app.map_url %>
+WHAT DO YOU THINK?: <%= app.comment_tinyurl %>
+
+=============================
+
+<% end -%>
+
+------------------------------------------------------------
+
+PlanningAlerts.org.au is a free service run by the charity OpenAustralia Foundation.
+
+You can subscribe to a geoRSS feed of applications for <%= @user.address %> here: <%= @georss_url %>
+
+GeoRSS can be used to display planning applications on a map. For example, on Google Maps: http://maps.google.com.au/maps?q=<%= CGI.escape(@georss_url) %>
+
+To stop receiving these emails click here: <%= @base_url %>/unsubscribe.php?cid=<%= @user.confirm_id %>
