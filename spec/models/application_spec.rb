@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Application do
   before :each do
+    Authority.delete_all
     @auth = Authority.create!(:planning_email => "foo", :full_name => "Fiddlesticks", :short_name => "Fiddle")
     # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
     Location.stub!(:geocode).and_return(mock(:lat => 1.0, :lng => 2.0, :success => true))
@@ -98,19 +99,17 @@ describe Application do
       EOF
       @date = Date.new(2009, 1, 1)
       @feed_url = "http://example.org?year=#{@date.year}&month=#{@date.month}&day=#{@date.day}"
-      @auth.stub!(:feed_url_for_date).with(@date).and_return(@feed_url)
+      @auth.stub!(:feed_url_for_date).and_return(@feed_url)
+      Application.delete_all
+      Application.stub!(:open).and_return(mock(:read => @feed_xml))
     end
     
     it "should collect the correct applications" do
-      handle = mock("Handle")
-      Application.should_receive(:open).with(@feed_url).and_return(handle)
-      handle.should_receive(:read).and_return(@feed_xml)
       logger = mock
       Application.stub!(:logger).and_return(logger)
       logger.should_receive(:info).with("Saving application R1")
       logger.should_receive(:info).with("Saving application R2")
       
-      Application.delete_all
       Application.collect_applications_for_authority(@auth, @date)
       Application.count.should == 2
       r1 = Application.find_by_council_reference("R1")
@@ -123,7 +122,6 @@ describe Application do
     end
     
     it "should not create new applications when they already exist" do
-      Application.stub!(:open).and_return(mock(:read => @feed_xml))
       logger = mock
       Application.stub!(:logger).and_return(logger)
       logger.should_receive(:info).with("Saving application R1")
@@ -131,12 +129,22 @@ describe Application do
       logger.should_receive(:info).with("Application already exists in database R1")
       logger.should_receive(:info).with("Application already exists in database R2")
 
-      Application.delete_all      
       # Getting the feed twice with the same content
       Application.collect_applications_for_authority(@auth, @date)
       Application.collect_applications_for_authority(@auth, @date)
       Application.count.should == 2
-      
-    end 
+    end
+    
+    it "should collect all the applications from all the authorities over the last n days" do
+      auth2 = Authority.create!(:planning_email => "", :full_name => "Wombat City Council", :short_name => "Wombat")
+      # TODO Overwriting a constant here. Ugh. Do this better
+      Configuration::SCRAPE_DELAY = 1
+      Application.should_receive(:collect_applications_for_authority).with(@auth, Date.today)
+      Application.should_receive(:collect_applications_for_authority).with(auth2, Date.today)
+      Application.should_receive(:collect_applications_for_authority).with(@auth, Date.today - 1)
+      Application.should_receive(:collect_applications_for_authority).with(auth2, Date.today - 1)
+
+      Application.collect_applications
+    end
   end
 end

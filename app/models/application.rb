@@ -9,6 +9,15 @@ class Application < ActiveRecord::Base
     { :conditions => ['lat > ? AND lng > ? AND lat < ? AND lng < ?', a.lower_left.lat, a.lower_left.lng, a.upper_right.lat, a.upper_right.lng] }
   }
   
+  def self.collect_applications
+    start_date = Date.today - Configuration::SCRAPE_DELAY
+    (start_date..(Date.today)).each do |date|
+      Authority.find(:all).each do |auth|
+        collect_applications_for_authority(auth, date)
+      end
+    end
+  end
+  
   def self.collect_applications_for_authority(auth, date)
     feed = Nokogiri::XML(open(auth.feed_url_for_date(date)).read)
     feed.search('application').each do |a|

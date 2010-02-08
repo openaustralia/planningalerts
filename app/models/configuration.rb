@@ -15,7 +15,7 @@ module Configuration
   EMAIL_FROM_NAME = 'PlanningAlerts.org.au'
 
   # Scraper params
-  SCRAPE_DELAY = '5'
+  SCRAPE_DELAY = 5
   LOG_EMAIL = 'matthew@openaustralia.org'
 
   # Google maps key
