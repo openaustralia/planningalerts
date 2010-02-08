@@ -13,7 +13,7 @@ class UserNotifier < ActionMailer::Base
     @user = user
     @applications = applications
 
-    @georss_url = url_for(:host => "example.org", :controller => "api", :call => "address", :address => @user.address, :area_size => @user.area_size_meters)
-    @base_url = "http://example.org"
+    @georss_url = url_for(:host => Configuration::HOST, :controller => "api", :call => "address", :address => @user.address, :area_size => @user.area_size_meters)
+    @unsubscribe_url = url_for(:host => Configuration::HOST, :controller => "signup", :action => "unsubscribe", :cid => @user.confirm_id)
   end
 end
