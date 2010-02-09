@@ -20,11 +20,11 @@
     </dd>
     <dt>Do you cover the whole country?</dt>
     <dd>
-        No, but we are working on it. There is a list of the planning authorities we currently cover <a href="about.php#authorities">here</a>.  Not every planning authority publishes their planning data online so some places will always be missing. If your local authority is missing, you could always <a href="about.php#contact">help out by writing a screen scraper to search their website.</a>
+        No, but we are working on it. There is a list of the planning authorities we currently cover <a href="/about.php#authorities">here</a>.  Not every planning authority publishes their planning data online so some places will always be missing. If your local authority is missing, you could always <a href="/about.php#contact">help out by writing a screen scraper to search their website.</a>
     </dd>
     <dt>Can I help?</dt>
     <dd>
-        Yes please! To be able to cover the whole country we need help in writing screen scrapers to search the websites of every planning authority in the country. If you'd like to write one for your local planning authority <a href="about.php#contact">get in touch</a>.
+        Yes please! To be able to cover the whole country we need help in writing screen scrapers to search the websites of every planning authority in the country. If you'd like to write one for your local planning authority <a href="/about.php#contact">get in touch</a>.
     </dd>
     <dt>Can I have a copy of your data?</dt>
     <dd>

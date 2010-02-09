@@ -32,7 +32,7 @@
     </div>
     <div id="divMenu">
         <ul class="collapse">
-            <li {if $menu_item =="about"}class="selected"{/if}><a href="about.php">About</a></li>                                     
+            <li {if $menu_item =="about"}class="selected"{/if}><a href="/about.php">About</a></li>                                     
 			<li {if $menu_item == "api"}class="selected"{/if}><a href="apihowto.php"><acronym title="Application programming interface">API</acronym></a></li>
 
             <li {if $menu_item =="getinvolved"}class="selected"{/if}><a href="getinvolved.php">Get Involved</a></li>                                       

@@ -39,7 +39,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'apihowto.php', :controller => 'api', :action => 'howto'
   map.connect 'api.php', :controller => 'api'
   
-  map.connect 'about.php', :controller => 'static', :action => 'about'
+  map.about 'about.php', :controller => 'static', :action => 'about'
   map.connect 'faq.php', :controller => 'static', :action => 'faq'
   map.connect 'getinvolved.php', :controller => 'static', :action => 'get_involved'
 
