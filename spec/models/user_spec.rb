@@ -176,4 +176,24 @@ describe User do
       u.confirmed.should == true
     end
   end
+  
+  describe "search area" do
+    it "should have a centre the same as the latitude and longitude of the alert" do
+      u = User.create!(@attributes)
+      area = u.search_area
+      centre_of_area_lat = (area.lower_left.lat + area.upper_right.lat) / 2
+      centre_of_area_lng = (area.lower_left.lng + area.upper_right.lng) / 2
+      centre_of_area_lat.should be_close(u.lat, 1e-10)
+      centre_of_area_lng.should be_close(u.lng, 1e-10)
+    end
+    
+    it "should have the width and height set by area_size_meters" do
+      u = User.create!(@attributes)
+      area = u.search_area
+      a = Location.new(area.lower_left.lat, area.upper_right.lng)
+      b = Location.new(area.upper_right.lat, area.lower_left.lng)
+      area.lower_left.distance_to(a).should be_close(u.area_size_meters, 1e-2)
+      area.lower_left.distance_to(b).should be_close(u.area_size_meters, 1e-2)
+    end
+  end
 end

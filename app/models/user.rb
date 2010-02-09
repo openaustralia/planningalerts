@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
     Location.new(lat, lng) if lat && lng
   end
   
+  def search_area
+    Area.centre_and_size(location, area_size_meters)
+  end
+  
   private
   
   def remove_other_alerts_for_this_address
