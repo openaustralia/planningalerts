@@ -31,7 +31,6 @@ class Application < ActiveRecord::Base
     info_logger.info "Found #{applications.count} applications for #{auth.full_name}"
     
     applications.each do |a|
-      # TODO: Check if the application already exists
       council_reference = a.at('council_reference').inner_text
       # TODO Consider if it would be better to overwrite applications with new data if they already exists
       # This would allow for the possibility that the application information was incorrectly entered at source
