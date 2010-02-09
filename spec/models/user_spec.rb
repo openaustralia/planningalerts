@@ -12,6 +12,7 @@ describe User do
     @loc.stub!(:accuracy).and_return(8)
     @loc.stub!(:all).and_return([@loc])
     Location.stub!(:geocode).and_return(@loc)
+    User.delete_all
   end
 
   it "should have no trouble creating a user with valid attributes" do
