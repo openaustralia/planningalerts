@@ -13,7 +13,7 @@ class UserNotifier < ActionMailer::Base
     @user = user
     @applications = applications
 
-    @georss_url = url_for(:host => Configuration::HOST, :controller => "api", :call => "address", :address => @user.address, :area_size => @user.area_size_meters)
+    @georss_url = api_url(:host => Configuration::HOST, :call => "address", :address => @user.address, :area_size => @user.area_size_meters)
     @unsubscribe_url = unsubscribe_url(:host => Configuration::HOST, :cid => @user.confirm_id)
     
     # Update statistics. Is this a good place to do them or would it make more sense to do it after the mailing has

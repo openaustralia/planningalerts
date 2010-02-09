@@ -30,7 +30,7 @@ class ApiController < ApplicationController
     example_top_right_lat = -29.113775
     example_top_right_lng = 153.325195
 
-    @api_url = url_for(:controller => :api)
+    @api_url = api_url
     # Doing this rather than using url_for so that the parameters stay in this order
     # TODO: Rejig the URL scheme for the API so we don't have to do above
     @api_example_address_url = "#{@api_url}?call=address&address=#{CGI.escape(example_address)}&area_size=#{example_size}"
