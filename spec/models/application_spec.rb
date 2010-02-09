@@ -6,6 +6,8 @@ describe Application do
     @auth = Authority.create!(:planning_email => "foo", :full_name => "Fiddlesticks", :short_name => "Fiddle")
     # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
     Location.stub!(:geocode).and_return(mock(:lat => 1.0, :lng => 2.0, :success => true))
+    # Stub out the URL shortener so that by default the tests don't require a network connection
+    Application.stub!(:shorten_url).and_return(nil)
   end
   
   describe "within" do
@@ -30,13 +32,16 @@ describe Application do
     end
     
     it "should make a tinyurl version of the comment_url" do
-      ShortURL.should_receive(:shorten).with("http://example.org/comment", :tinyurl).and_return("http://tinyurl.com/abcdef")
+      # Mocking Application.shorten_url rather than ShortURL.shorten so that we can easily check if the real url
+      # shortener is being called during the tests (which we don't want so that our tests don't depend on
+      # a network connection)
+      Application.should_receive(:shorten_url).with("http://example.org/comment").and_return("http://tinyurl.com/abcdef")
       a = @auth.applications.create!(:comment_url => "http://example.org/comment", :postcode => "", :council_reference => "r1")
       a.comment_tinyurl.should == "http://tinyurl.com/abcdef"
     end
     
     it "should make a tinyurl version of the info_url" do
-      ShortURL.should_receive(:shorten).with("http://example.org/info", :tinyurl).and_return("http://tinyurl.com/1234")
+      Application.should_receive(:shorten_url).with("http://example.org/info").and_return("http://tinyurl.com/1234")
       a = @auth.applications.create!(:info_url => "http://example.org/info", :postcode => "", :council_reference => "r1")
       a.info_tinyurl.should == "http://tinyurl.com/1234"      
     end
