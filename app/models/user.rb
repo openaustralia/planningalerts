@@ -29,6 +29,25 @@ class User < ActiveRecord::Base
     Application.within(search_area).find(:all, :conditions => ['date_scraped > ?', last_sent || Date.yesterday])
   end
   
+  # This is a long-running method. Call with care
+  # TODO: Untested method
+  def self.send_alerts(info_logger = logger)
+    # Only send alerts to confirmed users
+    no_emails = 0
+    no_applications = 0
+    users = User.find_all_by_confirmed(true)
+    info_logger.info "Checking #{users.count} confirmed users"
+    users.each do |user|
+      applications = user.recent_applications
+      no_applications += applications.size
+      unless applications.empty?
+        UserNotifier.deliver_alert(user, applications)
+        no_emails += 1
+      end
+    end
+    info_logger.info "Sent #{no_applications} applications to #{no_emails} people!"
+  end
+  
   private
   
   def remove_other_alerts_for_this_address

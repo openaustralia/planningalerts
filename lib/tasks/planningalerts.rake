@@ -6,10 +6,15 @@ namespace :planningalerts do
     end
   end
   
-  namespace :application do
+  namespace :applications do
     desc "Scrape all the applications for the last few days for all the loaded authorities"
     task :scrape => :environment do
       Application.collect_applications(Logger.new(STDOUT))
+    end
+    
+    desc "Send planning alerts"
+    task :email => :environment do
+      User.send_alerts(Logger.new(STDOUT))
     end
   end
 end
