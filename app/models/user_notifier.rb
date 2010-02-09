@@ -18,6 +18,9 @@ class UserNotifier < ActionMailer::Base
     
     # Update statistics. Is this a good place to do them or would it make more sense to do it after the mailing has
     # happened and we can check whether is was sucessful?
+    # TODO: Once we put caching in place this will mean that the stats will be updated frequently during the sending
+    # out of all the email alerts. This means that the cache will be continuously dirtied during the email alerts
+    # and the performance of all the page loads will suffer (as they contain statistics)
     Stat.emails_sent += 1
     Stat.applications_sent += applications.count
     # TODO: Like the comment above, is this really a good place to update the model?
