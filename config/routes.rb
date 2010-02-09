@@ -41,7 +41,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.about 'about.php', :controller => 'static', :action => 'about'
   map.faq 'faq.php', :controller => 'static', :action => 'faq'
-  map.connect 'getinvolved.php', :controller => 'static', :action => 'get_involved'
+  map.get_involved 'getinvolved.php', :controller => 'static', :action => 'get_involved'
 
   # See how all your routes lay out with "rake routes"
 

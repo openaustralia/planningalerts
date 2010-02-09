@@ -39,7 +39,7 @@
           %a{ :href => "apihowto.php" }
             %acronym{ :title => "Application programming interface" } API
         %li{ :class => ("selected" if @menu_item == "getinvolved") }
-          %a{ :href => "getinvolved.php" } Get Involved
+          = link_to "Get Involved", get_involved_path
         %li{ :class => ("selected" if @menu_item == "faq") }
           - link_to faq_path do
             %acronym{ :title => "Frequently asked questions" } FAQ
