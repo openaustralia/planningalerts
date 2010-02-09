@@ -20,5 +20,8 @@ class UserNotifier < ActionMailer::Base
     # happened and we can check whether is was sucessful?
     Stat.emails_sent += 1
     Stat.applications_sent += applications.count
+    # TODO: Like the comment above, is this really a good place to update the model?
+    user.last_sent = Time.now
+    user.save!
   end
 end

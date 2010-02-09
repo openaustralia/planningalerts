@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe UserNotifier do
   before :each do
-    @user = mock("User", :email => "matthew@openaustralia.org", :confirm_id => "abcdef", :address => "24 Bruce Rd, Glenbrook NSW 2773",
-      :area_size_meters => 800)
+    @user = User.create!(:email => "matthew@openaustralia.org", :address => "24 Bruce Rd, Glenbrook NSW 2773",
+      :lat => 1.0, :lng => 2.0, :area_size_meters => 800)
+    @user.stub!(:confirm_id).and_return("abcdef")
   end
 
   describe "when sending a new user confirmation email" do
@@ -84,6 +85,10 @@ describe UserNotifier do
     it "should update the statistics" do
       Stat.emails_sent.should == @original_emails_sent + 1
       Stat.applications_sent.should == @original_applications_sent + 2
+    end
+    
+    it "should update last_sent to the current time" do
+      (Time.now - @user.last_sent).abs.should < 1e-2
     end
   end
 end
