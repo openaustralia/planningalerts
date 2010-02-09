@@ -10,7 +10,7 @@ class ApiController < ApplicationController
     else
       raise "unexpected value for :call"
     end
-    @base_url = url_for(:controller => :signup)
+    @base_url = root_url
     render :layout => false
   end
   
