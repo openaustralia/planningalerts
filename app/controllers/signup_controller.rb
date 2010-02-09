@@ -17,7 +17,7 @@ class SignupController < ApplicationController
       u = User.new(:address => @address, :email => @email, :area_size_meters => area_size_meters)
       if u.save
         UserNotifier.deliver_confirm(u)
-        redirect_to :action => "check_mail"
+        redirect_to check_mail_url
       else
         @warnings = u.errors.full_messages.join("<br>")
         @email_warn = !u.errors.on(:email_address).nil?
@@ -45,7 +45,7 @@ class SignupController < ApplicationController
     @menu_item = "signup"
     
     # TODO: Get rid of this @form_action
-    @form_action = "/confirmed.php"
+    @form_action = confirmed_path
     @user = User.find_by_confirm_id(params[:cid])
     if @user
       @user.confirmed = true

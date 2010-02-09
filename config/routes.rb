@@ -32,9 +32,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.root :controller => "signup"
   map.connect 'preview.php', :controller => 'signup', :action => 'preview'
-  map.connect 'checkmail.php', :controller => 'signup', :action => 'check_mail'
-  map.connect 'confirmed.php', :controller => 'signup', :action => 'confirmed'
-  map.connect 'unsubscribe.php', :controller => 'signup', :action => 'unsubscribe'
+  map.check_mail 'checkmail.php', :controller => 'signup', :action => 'check_mail'
+  map.confirmed 'confirmed.php', :controller => 'signup', :action => 'confirmed'
+  map.unsubscribe 'unsubscribe.php', :controller => 'signup', :action => 'unsubscribe'
 
   map.connect 'apihowto.php', :controller => 'api', :action => 'howto'
   map.connect 'api.php', :controller => 'api'

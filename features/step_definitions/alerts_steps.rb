@@ -14,7 +14,7 @@ end
 
 When /^I click on the unsubscribe link in the email alert for "([^\"]*)"$/ do |address|
   u = User.find_by_address(address)
-  visit url_for(:controller => :signup, :action => :unsubscribe, :cid => u.confirm_id)
+  visit unsubscribe_url(:cid => u.confirm_id)
 end
 
 Then /^I should receive email alerts for the street address "([^\"]*)"$/ do |address|
