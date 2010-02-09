@@ -70,7 +70,8 @@ class Application < ActiveRecord::Base
     self.date_scraped = DateTime.now
   end
   
-  def shorten_url(url)
+  # Very thin wrapper around ShortURL gem
+  def self.shorten_url(url)
     if url
       ShortURL.shorten(url, :tinyurl)
     else
@@ -80,11 +81,11 @@ class Application < ActiveRecord::Base
   end
   
   def lookup_comment_tinyurl
-    self.comment_tinyurl = shorten_url(comment_url)
+    self.comment_tinyurl = Application.shorten_url(comment_url)
   end
   
   def lookup_info_tinyurl
-    self.info_tinyurl = shorten_url(info_url)
+    self.info_tinyurl = Application.shorten_url(info_url)
   end
   
   # TODO: Optimisation is to make sure that this doesn't get called again on save when the address hasn't changed
