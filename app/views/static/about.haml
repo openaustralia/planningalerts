@@ -20,7 +20,7 @@
 %p
   %small
     <span class="highlight">New authorities are being added all the time, so if your local authority isn't listed below
-    <a href="/">sign up any way</a> and you'll start receiving alerts once it has been included</span>.
+    #{link_to "sign up any way", signup_path} and you'll start receiving alerts once it has been included</span>.
 %ul.nobullets
   - @authorities.each do |authority|
     %li= authority.full_name
