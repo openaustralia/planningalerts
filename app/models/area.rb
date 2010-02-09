@@ -22,5 +22,9 @@ class Area
   def centre
     Location.new((lower_left.lat + upper_right.lat) / 2, (lower_left.lng + upper_right.lng) / 2)
   end
+  
+  def ==(a)
+    lower_left == a.lower_left && upper_right == a.upper_right
+  end
 end
 

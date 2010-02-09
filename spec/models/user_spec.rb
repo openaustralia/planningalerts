@@ -196,4 +196,24 @@ describe User do
       area.lower_left.distance_to(b).should be_close(u.area_size_meters, 1e-2)
     end
   end
+  
+  describe "recent applications for this user" do
+    it "should return an array of applications" do
+      u = User.create!(@attributes)
+      a = u.recent_applications
+      a.should be_kind_of(Array)
+    end
+    
+    it "should return applications within the user's search area" do
+      u = User.create!(@attributes)
+      Application.should_receive(:within).with(u.search_area).and_return(mock(:find => []))
+      u.recent_applications
+    end
+    
+    it "should return applications that have been scraped in the last 24 hours" do
+      u = User.create!(@attributes)
+      Application.should_receive(:find).with(:all, :conditions => ['date_scraped > ?', Date.yesterday])
+      u.recent_applications
+    end
+  end
 end

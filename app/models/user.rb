@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
     Area.centre_and_size(location, area_size_meters)
   end
   
+  def recent_applications
+    Application.within(search_area).find(:all, :conditions => ['date_scraped > ?', Date.yesterday])
+  end
+  
   private
   
   def remove_other_alerts_for_this_address
