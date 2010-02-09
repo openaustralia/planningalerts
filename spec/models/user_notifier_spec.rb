@@ -18,6 +18,7 @@ describe UserNotifier do
   
     it "should be from the main planningalerts email address" do
       @email.from.should == ["contact@planningalerts.org.au"]
+      @email.from_addrs.first.name.should == "PlanningAlerts.org.au"
     end
   
     it "should say in the subject line it is an email to confirm a planning alert" do
@@ -50,6 +51,7 @@ describe UserNotifier do
     
     it "should be from the main planningalerts email address" do
       @email.from.should == ["contact@planningalerts.org.au"]
+      @email.from_addrs.first.name.should == "PlanningAlerts.org.au"
     end
     
     it "should have a sensible subject line" do

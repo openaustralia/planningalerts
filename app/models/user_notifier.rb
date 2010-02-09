@@ -1,14 +1,14 @@
 class UserNotifier < ActionMailer::Base
   def confirm(user)
     @recipients = user.email
-    @from = Configuration::EMAIL_FROM_ADDRESS
+    @from = "#{Configuration::EMAIL_FROM_NAME} <#{Configuration::EMAIL_FROM_ADDRESS}>"
     @subject = "Please confirm your planning alert"
     @user = user
   end
   
   def alert(user, applications)
     @recipients = user.email
-    @from = Configuration::EMAIL_FROM_ADDRESS
+    @from = "#{Configuration::EMAIL_FROM_NAME} <#{Configuration::EMAIL_FROM_ADDRESS}>"
     @subject = "Planning applications near #{user.address}"
     @user = user
     @applications = applications
