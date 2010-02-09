@@ -27,19 +27,19 @@
             %label{ :for => "radAlertAreaSize_street" }
               My street (about #{meters_in_words(@zone_sizes['s'])})
             %small
-              %a{ :href => "javascript:previewMap('#{@zone_sizes['s']}');" } view on a map (new window)
+              = link_to "view on a map (new window)", "javascript:previewMap('#{@zone_sizes['s']}');"
           %li
             %input#radAlertAreaSize_neihgbourhood{ :type => "radio", :name => "radAlertAreaSize", :value => "m", :checked => ("checked" if @alert_area_size == "m")}
             %label{ :for => "radAlertAreaSize_neihgbourhood" }
               My neighbourhood  (about #{meters_in_words(@zone_sizes['m'])})
             %small
-              %a{ :href => "javascript:previewMap('#{@zone_sizes['m']}');" } view on a map (new window)
+              = link_to "view on a map (new window)", "javascript:previewMap('#{@zone_sizes['m']}');"
           %li
             %input#radAlertAreaSize_town{ :type => "radio", :name => "radAlertAreaSize", :value => "l", :checked => ("checked" if @alert_area_size == "l") }
             %label{ :for => "radAlertAreaSize_town" }
               My suburb  (about #{meters_in_words(@zone_sizes['l'])})
             %small
-              %a{ :href => "javascript:previewMap('#{@zone_sizes['l']}');" } view on a map (new window)
+              = link_to "view on a map (new window)", "javascript:previewMap('#{@zone_sizes['l']}');"
           %li
             %noscript
               %fieldset Note: viewing the alert area on a map requires javascript

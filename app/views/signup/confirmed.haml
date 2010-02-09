@@ -9,5 +9,4 @@
       (within approximately #{meters_in_words_no_space(@user.area_size_meters)}).
       If this alert doesn't cover everywhere you are interested in
       %span.highlight
-        %a{ :href => "/" }
-          you can sign up for multiple alerts
+        = link_to "you can sign up for multiple alerts", signup_path

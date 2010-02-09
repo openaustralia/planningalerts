@@ -6,4 +6,4 @@
     (within approximately #{meters_in_words(@user.area_size_meters)}).
   %p
     If you have unsubscribed because you were getting too many emails,
-    %a{ :href => "/" } you could always create a new alert for a smaller area?
+    = link_to "you could always create a new alert for a smaller area?", signup_path

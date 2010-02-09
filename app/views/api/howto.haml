@@ -16,8 +16,8 @@
       %code
         #{@api_url}?<strong>call</strong>=address<br/>&<strong>address</strong>=[some address]&<strong>area_size</strong>=[size in metres]
       %p.apiexamples
-        %a{ :href => @api_example_address_url } view example
-        %a{ :href => mapify(@api_example_address_url, 14) } view on a map
+        = link_to "view example", @api_example_address_url
+        = link_to "view on a map", mapify(@api_example_address_url, 14)
     .apiitem
       %h5
         Single Location by longitude/latitude
@@ -27,8 +27,8 @@
       %code
         #{@api_url}?<strong>call</strong>=point<br/>&<strong>lat</strong>=[some latitude]&<strong>lng</strong>=[some longitude]&<strong>area_size</strong>=[size in metres]
       %p.apiexamples
-        %a{ :href => @api_example_latlong_url } view example
-        %a{ :href => mapify(@api_example_latlong_url, 14) } view on a map
+        = link_to "view example", @api_example_latlong_url
+        = link_to "view on a map", mapify(@api_example_latlong_url, 14)
     .apiitem
       %h5
         Area by longitude/latitude
@@ -37,8 +37,8 @@
       %code
         #{@api_url}?<strong>call</strong>=area<br/>&<strong>bottom_left_lat</strong>=[some latitude]&<strong>bottom_left_lng</strong>=[some longitude]&<strong>top_right_lat</strong>=[some latitude]&<strong>top_right_lng</strong>=[some longitude]
       %p.apiexamples
-        %a{ :href => @api_example_area_url } view example
-        %a{ :href => mapify(@api_example_area_url, 6) } view on a map
+        = link_to "view example", @api_example_area_url
+        = link_to "view on a map", mapify(@api_example_area_url, 6)
     .apiitem
       %h5
         Planning authority
@@ -47,8 +47,8 @@
       %code
         #{@api_url}?<strong>call</strong>=authority<br/>&<strong>authority</strong>=[some name]
       %p.apiexamples
-        %a{ :href => @api_example_authority_url } view example
-        %a{ :href => mapify(@api_example_authority_url, 11) } view on a map
+        = link_to "view example", @api_example_authority_url
+        = link_to "view on a map", mapify(@api_example_authority_url, 11)
     %h4#hLicenseInfo
       License information
     %p

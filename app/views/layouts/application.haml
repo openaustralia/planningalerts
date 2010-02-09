@@ -20,7 +20,7 @@
   %body
     #divHeader
       %h1
-        %a{ :href => "/" }> PlanningAlerts<span>.</span>org<span>.</span>au
+        = link_to "PlanningAlerts<span>.</span>org<span>.</span>au", root_path
         %sup> beta
       %h2
         Email alerts of planning applications
@@ -44,7 +44,7 @@
           - link_to faq_path do
             %acronym{ :title => "Frequently asked questions" } FAQ
         %li{ :class => ("selected" if @menu_item == "signup") }
-          %a{ :href => "/" } Sign Up
+          = link_to "Sign Up", signup_path
     #divPage
       #divContent
         #divWarning{ :class => ("hide" if @warnings.nil?) }
@@ -55,9 +55,9 @@
           %li
             = link_to "Contact", about_path(:anchor => "contact")
           %li
-            %a{ :href => "http://blog.openaustralia.org" } Blog
+            = link_to "Blog", "http://blog.openaustralia.org"
           %li
-            %a{ :href => "http://twitter.com/planningalerts" } Twitter
+            = link_to "Twitter", "http://twitter.com/planningalerts"
         %span#oaf An OpenAustralia Foundation Project
     - if @set_focus_control
       %script{ :type => "text/javascript", :defer => "defer" }<

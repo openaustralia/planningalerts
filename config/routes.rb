@@ -30,7 +30,8 @@ ActionController::Routing::Routes.draw do |map|
   #     admin.resources :products
   #   end
 
-  map.root :controller => "signup"
+  map.signup '', :controller => "signup"
+  map.root :signup
   map.connect 'preview.php', :controller => 'signup', :action => 'preview'
   map.check_mail 'checkmail.php', :controller => 'signup', :action => 'check_mail'
   map.confirmed 'confirmed.php', :controller => 'signup', :action => 'confirmed'
