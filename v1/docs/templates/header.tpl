@@ -36,7 +36,7 @@
 			<li {if $menu_item == "api"}class="selected"{/if}><a href="apihowto.php"><acronym title="Application programming interface">API</acronym></a></li>
 
             <li {if $menu_item =="getinvolved"}class="selected"{/if}><a href="getinvolved.php">Get Involved</a></li>                                       
-            <li {if $menu_item =="faq"}class="selected"{/if}><a href="faq.php"><acronym title="Frequently asked questions">FAQ</acronym></a></li>                
+            <li {if $menu_item =="faq"}class="selected"{/if}><a href="/faq.php"><acronym title="Frequently asked questions">FAQ</acronym></a></li>                
             <li {if $menu_item =="signup"}class="selected"{/if}><a href="/">Sign Up</a></li>            
         </ul>
     </div>

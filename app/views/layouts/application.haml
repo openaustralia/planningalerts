@@ -41,7 +41,7 @@
         %li{ :class => ("selected" if @menu_item == "getinvolved") }
           %a{ :href => "getinvolved.php" } Get Involved
         %li{ :class => ("selected" if @menu_item == "faq") }
-          %a{ :href => "faq.php" }
+          - link_to faq_path do
             %acronym{ :title => "Frequently asked questions" } FAQ
         %li{ :class => ("selected" if @menu_item == "signup") }
           %a{ :href => "/" } Sign Up
