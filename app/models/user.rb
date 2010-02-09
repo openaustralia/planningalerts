@@ -24,8 +24,9 @@ class User < ActiveRecord::Base
     Area.centre_and_size(location, area_size_meters)
   end
   
+  # Applications that have been scraped since the last time the user was sent an alert
   def recent_applications
-    Application.within(search_area).find(:all, :conditions => ['date_scraped > ?', Date.yesterday])
+    Application.within(search_area).find(:all, :conditions => ['date_scraped > ?', last_sent || Date.yesterday])
   end
   
   private

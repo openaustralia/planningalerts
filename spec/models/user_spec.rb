@@ -210,10 +210,16 @@ describe User do
       u.recent_applications
     end
     
-    it "should return applications that have been scraped in the last 24 hours" do
+    it "should return applications that have been scraped since the last time the user was sent an alert" do
+      u = User.create!(@attributes.merge :last_sent => Date.new(2009, 1, 1))
+      Application.should_receive(:find).with(:all, :conditions => ['date_scraped > ?', u.last_sent])
+      u.recent_applications
+    end
+    
+    it "should return applications that have been scraped in the last twenty four hours if the user has never had an alert" do
       u = User.create!(@attributes)
       Application.should_receive(:find).with(:all, :conditions => ['date_scraped > ?', Date.yesterday])
-      u.recent_applications
+      u.recent_applications      
     end
   end
 end
