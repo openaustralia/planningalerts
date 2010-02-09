@@ -90,7 +90,7 @@ describe UserNotifier do
     end
     
     it "should update last_sent to the current time" do
-      (Time.now - @user.last_sent).abs.should < 1e-2
+      (Time.now - @user.last_sent).abs.should < 1
     end
   end
 end
