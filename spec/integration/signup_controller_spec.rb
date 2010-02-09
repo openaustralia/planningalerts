@@ -9,6 +9,7 @@ describe SignupController do
     compare_with_php("/", "home")
   end
   
+  # TODO: This test is dependent on a network connection because we can't simply mock the geocoder in the php framework
   it "should render the preview page the same as the php version" do
     loc = Location.new(-33.772609, 150.624263)
     Location.should_receive(:geocode).with("24 bruce road, glenbrook, NSW 2773").and_return(loc)
