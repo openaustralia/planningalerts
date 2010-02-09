@@ -36,7 +36,7 @@ ActionController::Routing::Routes.draw do |map|
   map.confirmed 'confirmed.php', :controller => 'signup', :action => 'confirmed'
   map.unsubscribe 'unsubscribe.php', :controller => 'signup', :action => 'unsubscribe'
 
-  map.connect 'apihowto.php', :controller => 'api', :action => 'howto'
+  map.api_howto 'apihowto.php', :controller => 'api', :action => 'howto'
   map.connect 'api.php', :controller => 'api'
   
   map.about 'about.php', :controller => 'static', :action => 'about'

@@ -36,7 +36,7 @@
         %li{ :class => ("selected" if @menu_item == "about") }
           = link_to "About", about_path
         %li{ :class => ("selected" if @menu_item == "api") }
-          %a{ :href => "apihowto.php" }
+          - link_to api_howto_path do
             %acronym{ :title => "Application programming interface" } API
         %li{ :class => ("selected" if @menu_item == "getinvolved") }
           = link_to "Get Involved", get_involved_path
