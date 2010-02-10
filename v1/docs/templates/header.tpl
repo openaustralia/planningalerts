@@ -5,9 +5,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 	<title>PlanningAlerts.org.au | {$page_title}</title>
-	<link rel="stylesheet" media="all" type="text/css" href="./css/memespring.css" />		
-	<link rel="stylesheet" media="all" type="text/css" href="./css/main.css" />
-    <script src="./javascript/main.js" type="text/javascript"></script>      	
+	<link rel="stylesheet" media="all" type="text/css" href="./stylesheets/memespring.css" />		
+	<link rel="stylesheet" media="all" type="text/css" href="./stylesheets/main.css" />
+    <script src="./javascripts/main.js" type="text/javascript"></script>      	
 
     <script type="text/javascript">
       var _gaq = _gaq || [];

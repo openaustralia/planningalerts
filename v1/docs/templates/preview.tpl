@@ -6,7 +6,7 @@
     <title>PlanningAlerts.org.au | Alert area preview</title>
     <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={$google_maps_key}"
       type="text/javascript"></script>
-      <script src="./javascript/preview.js" type="text/javascript"></script>      
+      <script src="./javascripts/preview.js" type="text/javascript"></script>      
   </head>
 
   <body onload="load({$center_long}, {$center_lat}, {$bottom_left_long}, {$bottom_left_lat}, {$top_right_long}, {$top_right_lat})" onunload="GUnload()">
