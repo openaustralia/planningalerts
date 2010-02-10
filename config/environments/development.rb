@@ -15,5 +15,6 @@ config.action_controller.perform_caching             = false
 
 # Send mail via smtp and raise an error if there is a problem
 config.action_mailer.raise_delivery_errors = true
-config.action_mailer.delivery_method = :smtp
-config.action_mailer.smtp_settings = { :address => "mail.internode.on.net" }
+config.action_mailer.delivery_method = :sendmail
+#config.action_mailer.delivery_method = :smtp
+#config.action_mailer.smtp_settings = { :address => "mail.internode.on.net" }
