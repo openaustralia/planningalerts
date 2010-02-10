@@ -22,6 +22,9 @@ Rails::Initializer.run do |config|
   config.gem "geokit"
   config.gem "shorturl"
   config.gem "nokogiri"
+  # For some reason putting config.gem 'email_spec' in environments/test.rb didn't work when
+  # running "cucumber". So, putting it here so that we don't have to have the plugin installed in vendor.
+  config.gem 'email_spec', :lib => 'email_spec'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
