@@ -26,7 +26,13 @@ class Application < ActiveRecord::Base
   def self.collect_applications_for_authority(auth, date, info_logger = logger)
     url = auth.feed_url_for_date(date)
     info_logger.info "Scraping authority #{auth.full_name} from #{url}"
-    feed = Nokogiri::XML(open(url).read)
+    begin
+      feed_data = open(url).read
+    rescue Exception => e
+      info_logger.error "Error #{e} while getting data from url #{url}. So, skipping"
+      return
+    end
+    feed = Nokogiri::XML(feed_data)
     applications = feed.search('application')
     info_logger.info "Found #{applications.count} applications for #{auth.full_name}"
     
