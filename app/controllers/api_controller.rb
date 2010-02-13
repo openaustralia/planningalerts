@@ -1,5 +1,5 @@
 class ApiController < ApplicationController
-  caches_page :howto
+  #caches_page :howto
 
   def index
     # TODO: Move the template over to using an xml builder
