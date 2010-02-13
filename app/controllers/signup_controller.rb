@@ -1,4 +1,6 @@
 class SignupController < ApplicationController
+  caches_page :index
+
   def index
     @page_title = "Email alerts of planning applications near you"
     @menu_item = "signup"
