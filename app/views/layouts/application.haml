@@ -22,9 +22,7 @@
       %h1
         = link_to "PlanningAlerts<span>.</span>org<span>.</span>au", root_path
         %sup> beta
-      %h2
-        Email alerts of planning applications
-        %em near you
+      %h2 Email alerts of planning applications <em>near you</em>
       #statsbanner
         %p#pStats
           #{@alert_count} alerts sent for
@@ -52,12 +50,9 @@
         = yield
       #divFooter
         %ul.inline
-          %li
-            = link_to "Contact", about_path(:anchor => "contact")
-          %li
-            = link_to "Blog", "http://blog.openaustralia.org"
-          %li
-            = link_to "Twitter", "http://twitter.com/planningalerts"
+          %li= link_to "Contact", about_path(:anchor => "contact")
+          %li= link_to "Blog", "http://blog.openaustralia.org"
+          %li= link_to "Twitter", "http://twitter.com/planningalerts"
         %span#oaf An OpenAustralia Foundation Project
     - if @set_focus_control
       %script{ :type => "text/javascript", :defer => "defer" }<
