@@ -29,7 +29,20 @@
           = link_to "#{@authority_count} authorities", about_path(:anchor => "authorities")
     .hide
       %a{ :href => "#divContent" } Skip navigation
-    = menu
+    #divMenu
+      %ul.collapse
+        = li_selected(:controller => "static", :action => "about") do
+          - link_to 'About', about_path
+        = li_selected(:controller => "api", :action => "howto") do
+          - link_to api_howto_path do
+            %acronym{ :title => "Application programming interface" } API
+        = li_selected(:controller => "static", :action => "get_involved") do
+          - link_to 'Get Involved', get_involved_path
+        = li_selected(:controller => "static", :action => "faq") do
+          - link_to faq_path do
+            %acronym{ :title => "Frequently asked questions"} FAQ
+        = li_selected(:controller => "signup", :action => ["index", "check_mail", "confirmed", "unsubscribe"]) do
+          - link_to 'Sign Up', signup_path
     #divPage
       #divContent
         #divWarning{ :class => ("hide" if @warnings.nil?) }
