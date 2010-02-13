@@ -1,5 +1,7 @@
 # Controller for (mostly) static content
 class StaticController < ApplicationController
+  caches_page :about, :faq, :get_involved
+
   def about
     @page_title = "About"
     @menu_item = "about"

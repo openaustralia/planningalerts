@@ -1,4 +1,6 @@
 class ApiController < ApplicationController
+  caches_page :howto
+
   def index
     # TODO: Move the template over to using an xml builder
     if params[:call] == "address" || params[:call] == "point" || params[:call] == "area"
