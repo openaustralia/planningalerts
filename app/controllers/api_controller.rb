@@ -18,7 +18,6 @@ class ApiController < ApplicationController
   
   def howto
     @page_title = "API"
-    @menu_item = "api"
     
     example_address = "24 Bruce Road Glenbrook, NSW 2773"
     example_size = 4000

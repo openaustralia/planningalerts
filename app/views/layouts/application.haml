@@ -29,20 +29,7 @@
           = link_to "#{@authority_count} authorities", about_path(:anchor => "authorities")
     .hide
       %a{ :href => "#divContent" } Skip navigation
-    #divMenu
-      %ul.collapse
-        %li{ :class => ("selected" if @menu_item == "about") }
-          = link_to "About", about_path
-        %li{ :class => ("selected" if @menu_item == "api") }
-          - link_to api_howto_path do
-            %acronym{ :title => "Application programming interface" } API
-        %li{ :class => ("selected" if @menu_item == "getinvolved") }
-          = link_to "Get Involved", get_involved_path
-        %li{ :class => ("selected" if @menu_item == "faq") }
-          - link_to faq_path do
-            %acronym{ :title => "Frequently asked questions" } FAQ
-        %li{ :class => ("selected" if @menu_item == "signup") }
-          = link_to "Sign Up", signup_path
+    = menu
     #divPage
       #divContent
         #divWarning{ :class => ("hide" if @warnings.nil?) }

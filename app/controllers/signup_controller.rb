@@ -3,7 +3,6 @@ class SignupController < ApplicationController
 
   def index
     @page_title = "Email alerts of planning applications near you"
-    @menu_item = "signup"
     @zone_sizes = {'s' => Configuration::SMALL_ZONE_SIZE,
       'm' => Configuration::MEDIUM_ZONE_SIZE,
       'l' => Configuration::LARGE_ZONE_SIZE}
@@ -38,13 +37,10 @@ class SignupController < ApplicationController
   
   def check_mail
     @page_title = "Now check your email"
-    # TODO: Get rid of @menu_item by using standard rails stuff for links
-    @menu_item = "signup"
   end
   
   def confirmed
     @page_title = "Confirmed"
-    @menu_item = "signup"
     
     # TODO: Get rid of this @form_action
     @form_action = confirmed_path
@@ -59,7 +55,6 @@ class SignupController < ApplicationController
   
   def unsubscribe
     @page_title = "Unsubscribed"
-    @menu_item = "signup"
 
     @user = User.find_by_confirm_id(params[:cid])
     @user.delete
