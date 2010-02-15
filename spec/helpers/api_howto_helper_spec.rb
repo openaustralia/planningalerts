@@ -13,9 +13,9 @@ describe ApiHowtoHelper do
   end
   
   it "should display the example urls nicely" do
-    helper.api_example_address_url_html.should == "http://test.host/api.php?<strong>call</strong>=address<br/>&<strong>address</strong>=[some address]&<strong>area_size</strong>=[size in metres]"
-    helper.api_example_latlong_url_html.should == "http://test.host/api.php?<strong>call</strong>=point<br/>&<strong>lat</strong>=[some latitude]&<strong>lng</strong>=[some longitude]&<strong>area_size</strong>=[size in metres]"
-    helper.api_example_area_url_html.should == "http://test.host/api.php?<strong>call</strong>=area<br/>&<strong>bottom_left_lat</strong>=[some latitude]&<strong>bottom_left_lng</strong>=[some longitude]&<strong>top_right_lat</strong>=[some latitude]&<strong>top_right_lng</strong>=[some longitude]"
-    helper.api_example_authority_url_html.should == "http://test.host/api.php?<strong>call</strong>=authority<br/>&<strong>authority</strong>=[some name]"
+    helper.api_example_address_url_html.should == "http://test.host/api.php?<strong>call</strong>=address&<strong>address</strong>=[address]&<strong>area_size</strong>=[size_in_metres]"
+    helper.api_example_latlong_url_html.should == "http://test.host/api.php?<strong>call</strong>=point&<strong>lat</strong>=[latitude]&<strong>lng</strong>=[longitude]&<strong>area_size</strong>=[size_in_metres]"
+    helper.api_example_area_url_html.should == "http://test.host/api.php?<strong>call</strong>=area&<strong>bottom_left_lat</strong>=[latitude]&<strong>bottom_left_lng</strong>=[longitude]&<strong>top_right_lat</strong>=[latitude]&<strong>top_right_lng</strong>=[longitude]"
+    helper.api_example_authority_url_html.should == "http://test.host/api.php?<strong>call</strong>=authority&<strong>authority</strong>=[name]"
   end
 end
