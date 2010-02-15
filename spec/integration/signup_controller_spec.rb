@@ -5,6 +5,7 @@ describe SignupController do
   include HTMLCompareHelper
   fixtures :stats, :authority, :user
   
+  # TODO: Need cucumber tests to cover the choice of alerts size before I can get rid of this
   it "should render the home page exactly the same as the php version" do
     compare_with_php("/", "home")
   end
@@ -17,13 +18,5 @@ describe SignupController do
       :upper_right => Location.new(-33.771709765279, 150.62543539848), :centre => loc)
     Area.should_receive(:centre_and_size).with(loc, 200).and_return(area)
     compare_with_php("/preview.php?address=24%20bruce%20road,%20glenbrook,%20NSW%202773&area_size=200", "preview")
-  end
-  
-  it "should render the check mail page the same as the php version" do
-    compare_with_php("/checkmail.php", "checkmail")
-  end
-
-  it "should render the confirmed page the same as the php version" do
-    compare_with_php("/confirmed.php?cid=1234", "confirmed")
   end
 end
