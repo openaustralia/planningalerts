@@ -1,23 +1,6 @@
 require 'spec_helper'
 
 describe ApiController do
-  describe "howto" do
-    before :each do
-      get :howto
-    end
-
-    it "should provide urls of examples of use of the api" do
-      assigns[:api_example_address_url].should == "http://test.host/api.php?call=address&address=24+Bruce+Road+Glenbrook%2C+NSW+2773&area_size=4000"
-      assigns[:api_example_latlong_url].should == "http://test.host/api.php?call=point&lat=-33.772609&lng=150.624263&area_size=4000"
-      assigns[:api_example_area_url].should == "http://test.host/api.php?call=area&bottom_left_lat=-38.556757&bottom_left_lng=140.83374&top_right_lat=-29.113775&top_right_lng=153.325195"
-      assigns[:api_example_authority_url].should == "http://test.host/api.php?call=authority&authority=Blue+Mountains"
-    end
-    
-    it "should set the base url for api" do
-      assigns[:api_url].should == "http://test.host/api.php"
-    end
-  end
-  
   describe "call=address" do
     it "should find recent 100 applications near the address with the most recently scraped first" do
       location, area, scope, result = mock, mock, mock, mock
