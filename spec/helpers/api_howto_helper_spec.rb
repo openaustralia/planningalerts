@@ -11,4 +11,11 @@ describe ApiHowtoHelper do
     helper.api_example_area_url.should == "http://test.host/api.php?call=area&bottom_left_lat=-38.556757&bottom_left_lng=140.83374&top_right_lat=-29.113775&top_right_lng=153.325195"
     helper.api_example_authority_url.should == "http://test.host/api.php?call=authority&authority=Blue+Mountains"
   end
+  
+  it "should display the example urls nicely" do
+    helper.api_example_address_url_html.should == "http://test.host/api.php?<strong>call</strong>=address<br/>&<strong>address</strong>=[some address]&<strong>area_size</strong>=[size in metres]"
+    helper.api_example_latlong_url_html.should == "http://test.host/api.php?<strong>call</strong>=point<br/>&<strong>lat</strong>=[some latitude]&<strong>lng</strong>=[some longitude]&<strong>area_size</strong>=[size in metres]"
+    helper.api_example_area_url_html.should == "http://test.host/api.php?<strong>call</strong>=area<br/>&<strong>bottom_left_lat</strong>=[some latitude]&<strong>bottom_left_lng</strong>=[some longitude]&<strong>top_right_lat</strong>=[some latitude]&<strong>top_right_lng</strong>=[some longitude]"
+    helper.api_example_authority_url_html.should == "http://test.host/api.php?<strong>call</strong>=authority<br/>&<strong>authority</strong>=[some name]"
+  end
 end
