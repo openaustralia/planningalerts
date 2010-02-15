@@ -12,7 +12,6 @@ class ApiController < ApplicationController
     else
       raise "unexpected value for :call"
     end
-    @base_url = root_url
     render :layout => false, :content_type => Mime::XML
   end
   
