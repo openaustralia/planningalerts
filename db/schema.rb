@@ -9,7 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100216220001) do
+ActiveRecord::Schema.define(:version => 20100216224259) do
+
+  create_table "alerts", :force => true do |t|
+    t.string   "email",            :limit => 120, :null => false
+    t.string   "address",          :limit => 120, :null => false
+    t.datetime "last_sent"
+    t.float    "lat",                             :null => false
+    t.float    "lng",                             :null => false
+    t.string   "confirm_id",       :limit => 20
+    t.boolean  "confirmed"
+    t.integer  "area_size_meters",                :null => false
+  end
 
   create_table "applications", :force => true do |t|
     t.string    "council_reference", :limit => 50,   :null => false
@@ -41,17 +52,6 @@ ActiveRecord::Schema.define(:version => 20100216220001) do
   create_table "stats", :force => true do |t|
     t.string  "key",   :limit => 25, :null => false
     t.integer "value",               :null => false
-  end
-
-  create_table "users", :force => true do |t|
-    t.string   "email",            :limit => 120, :null => false
-    t.string   "address",          :limit => 120, :null => false
-    t.datetime "last_sent"
-    t.float    "lat",                             :null => false
-    t.float    "lng",                             :null => false
-    t.string   "confirm_id",       :limit => 20
-    t.boolean  "confirmed"
-    t.integer  "area_size_meters",                :null => false
   end
 
   add_foreign_key "applications", "authorities", :name => "applications_authority_id_fk"
