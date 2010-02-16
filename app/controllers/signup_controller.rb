@@ -17,7 +17,7 @@ class SignupController < ApplicationController
       area_size_meters = @zone_sizes[@alert_area_size]
       u = Alert.new(:address => @address, :email => @email, :area_size_meters => area_size_meters)
       if u.save
-        UserNotifier.deliver_confirm(u)
+        AlertNotifier.deliver_confirm(u)
         redirect_to check_mail_url
       else
         @warnings = u.errors.full_messages.join("<br>")

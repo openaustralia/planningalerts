@@ -38,7 +38,7 @@ class Alert < ActiveRecord::Base
       applications = user.recent_applications
       no_applications += applications.size
       unless applications.empty?
-        UserNotifier.deliver_alert(user, applications)
+        AlertNotifier.deliver_alert(user, applications)
         no_emails += 1
       end
     end

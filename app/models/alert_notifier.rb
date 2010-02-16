@@ -1,4 +1,4 @@
-class UserNotifier < ActionMailer::Base
+class AlertNotifier < ActionMailer::Base
   def confirm(user)
     @recipients = user.email
     @from = "#{Configuration::EMAIL_FROM_NAME} <#{Configuration::EMAIL_FROM_ADDRESS}>"

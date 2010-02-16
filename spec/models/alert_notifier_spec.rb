@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UserNotifier do
+describe AlertNotifier do
   before :each do
     @user = Alert.create!(:email => "matthew@openaustralia.org", :address => "24 Bruce Rd, Glenbrook NSW 2773",
       :lat => 1.0, :lng => 2.0, :area_size_meters => 800)
@@ -9,7 +9,7 @@ describe UserNotifier do
 
   describe "when sending a new user confirmation email" do
     before :each do
-      @email = UserNotifier.create_confirm(@user)
+      @email = AlertNotifier.create_confirm(@user)
     end
 
     it "should be sent to the user's email address" do
@@ -42,7 +42,7 @@ describe UserNotifier do
         :info_tinyurl => "tinyurl1", :map_url => "map1", :comment_tinyurl => "tinyurl2")
       @a2 = Application.new(:address => "Bar Street, Foo", :council_reference => "a2", :description => "Put something up",
         :info_tinyurl => "tinyurl3", :map_url => "map2", :comment_tinyurl => "tinyurl4")
-      @email = UserNotifier.create_alert(@user, [@a1, @a2])
+      @email = AlertNotifier.create_alert(@user, [@a1, @a2])
     end
     
     it "should be sent to the user's email address" do
