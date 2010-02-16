@@ -15,7 +15,7 @@ class SignupController < ApplicationController
       @email = params[:txtEmail]
       @alert_area_size = params[:radAlertAreaSize]
       area_size_meters = @zone_sizes[@alert_area_size]
-      u = User.new(:address => @address, :email => @email, :area_size_meters => area_size_meters)
+      u = Alert.new(:address => @address, :email => @email, :area_size_meters => area_size_meters)
       if u.save
         UserNotifier.deliver_confirm(u)
         redirect_to check_mail_url
@@ -44,7 +44,7 @@ class SignupController < ApplicationController
     
     # TODO: Get rid of this @form_action
     @form_action = confirmed_path
-    @user = User.find_by_confirm_id(params[:cid])
+    @user = Alert.find_by_confirm_id(params[:cid])
     if @user
       @user.confirmed = true
       @user.save!
@@ -56,7 +56,7 @@ class SignupController < ApplicationController
   def unsubscribe
     @page_title = "Unsubscribed"
 
-    @user = User.find_by_confirm_id(params[:cid])
+    @user = Alert.find_by_confirm_id(params[:cid])
     @user.delete
   end
 end

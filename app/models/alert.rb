@@ -1,6 +1,4 @@
-class User < ActiveRecord::Base
-  set_table_name "alerts"
-  
+class Alert < ActiveRecord::Base
   validates_numericality_of :area_size_meters, :greater_than => 0, :message => "isn't selected"
   validate :validate_email, :validate_address
   
@@ -34,7 +32,7 @@ class User < ActiveRecord::Base
     # Only send alerts to confirmed users
     no_emails = 0
     no_applications = 0
-    users = User.find_all_by_confirmed(true)
+    users = Alert.find_all_by_confirmed(true)
     info_logger.info "Checking #{users.count} confirmed users"
     users.each do |user|
       applications = user.recent_applications
@@ -50,7 +48,7 @@ class User < ActiveRecord::Base
   private
   
   def remove_other_alerts_for_this_address
-    User.delete_all(:email => email, :address => address)
+    Alert.delete_all(:email => email, :address => address)
   end
   
   def set_confirm_info

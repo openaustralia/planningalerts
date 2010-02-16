@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe UserNotifier do
   before :each do
-    @user = User.create!(:email => "matthew@openaustralia.org", :address => "24 Bruce Rd, Glenbrook NSW 2773",
+    @user = Alert.create!(:email => "matthew@openaustralia.org", :address => "24 Bruce Rd, Glenbrook NSW 2773",
       :lat => 1.0, :lng => 2.0, :area_size_meters => 800)
     @user.stub!(:confirm_id).and_return("abcdef")
   end

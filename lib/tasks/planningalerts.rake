@@ -14,7 +14,7 @@ namespace :planningalerts do
     
     desc "Send planning alerts"
     task :email => :environment do
-      User.send_alerts(Logger.new(STDOUT))
+      Alert.send_alerts(Logger.new(STDOUT))
     end
   end
 end
