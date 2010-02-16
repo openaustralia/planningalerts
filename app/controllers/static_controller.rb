@@ -1,6 +1,6 @@
 # Controller for (mostly) static content
 class StaticController < ApplicationController
-  #caches_page :about, :faq, :get_involved
+  caches_page :about, :faq, :get_involved
 
   # TODO: Once we've moved to Rails 3 we can move these redirects completely into the routes file
   def old_about

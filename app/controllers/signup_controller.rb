@@ -1,5 +1,5 @@
 class SignupController < ApplicationController
-  #caches_page :index, :check_mail
+  caches_page :index, :check_mail
 
   def index
     @page_title = "Email alerts of planning applications near you"

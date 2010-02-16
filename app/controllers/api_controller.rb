@@ -1,5 +1,5 @@
 class ApiController < ApplicationController
-  #caches_page :howto
+  caches_page :howto
 
   def old_index
     # Not using redirects because this is an api and I'm not sure that we can depend on people following
