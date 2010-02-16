@@ -30,19 +30,27 @@ ActionController::Routing::Routes.draw do |map|
   #     admin.resources :products
   #   end
 
+  # Redirect old urls
+  # TODO: Once we have moved to Rails 3 we can do redirection directly inside here
+  map.connect 'apihowto.php', :controller => 'api', :action => 'old_howto'
+  map.connect 'about.php', :controller => 'static', :action => 'old_about'
+  map.connect 'faq.php', :controller => 'static', :action => 'old_faq'
+  map.connect 'getinvolved.php', :controller => 'static', :action => 'old_get_involved'
+  map.connect 'api.php', :controller => 'api', :action => 'old_index'
+  
   map.signup '', :controller => "signup"
   map.root :signup
-  map.connect 'preview.php', :controller => 'signup', :action => 'preview'
-  map.check_mail 'checkmail.php', :controller => 'signup', :action => 'check_mail'
-  map.confirmed 'confirmed.php', :controller => 'signup', :action => 'confirmed'
-  map.unsubscribe 'unsubscribe.php', :controller => 'signup', :action => 'unsubscribe'
+  map.connect 'preview', :controller => 'signup', :action => 'preview'
+  map.check_mail 'checkmail', :controller => 'signup', :action => 'check_mail'
+  map.confirmed 'confirmed', :controller => 'signup', :action => 'confirmed'
+  map.unsubscribe 'unsubscribe', :controller => 'signup', :action => 'unsubscribe'
 
-  map.api_howto 'apihowto.php', :controller => 'api', :action => 'howto'
-  map.api 'api.php', :controller => 'api'
+  map.api_howto 'api/howto', :controller => 'api', :action => 'howto'
+  map.api 'api', :controller => 'api', :action => 'index'
   
-  map.about 'about.php', :controller => 'static', :action => 'about'
-  map.faq 'faq.php', :controller => 'static', :action => 'faq'
-  map.get_involved 'getinvolved.php', :controller => 'static', :action => 'get_involved'
+  map.about 'about', :controller => 'static', :action => 'about'
+  map.faq 'faq', :controller => 'static', :action => 'faq'
+  map.get_involved 'getinvolved', :controller => 'static', :action => 'get_involved'
 
   # See how all your routes lay out with "rake routes"
 

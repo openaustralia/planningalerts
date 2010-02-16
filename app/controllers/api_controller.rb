@@ -1,6 +1,12 @@
 class ApiController < ApplicationController
   #caches_page :howto
 
+  def old_index
+    # Not using redirects because this is an api and I'm not sure that we can depend on people following
+    # redirects with an API?
+    index
+  end
+  
   def index
     # TODO: Move the template over to using an xml builder
     if params[:call] == "address" || params[:call] == "point" || params[:call] == "area"
@@ -12,7 +18,12 @@ class ApiController < ApplicationController
     else
       raise "unexpected value for :call"
     end
-    render :layout => false, :content_type => Mime::XML
+    # Using explit name for template because this can be called from old_index as well. Ugh, I know. Ugly.
+    render "index", :layout => false, :content_type => Mime::XML
+  end
+  
+  def old_howto
+    redirect_to :action => :howto
   end
   
   def howto
