@@ -32,13 +32,13 @@ class Alert < ActiveRecord::Base
     # Only send alerts to confirmed users
     no_emails = 0
     no_applications = 0
-    users = Alert.find_all_by_confirmed(true)
-    info_logger.info "Checking #{users.count} confirmed users"
-    users.each do |user|
-      applications = user.recent_applications
+    alerts = Alert.find_all_by_confirmed(true)
+    info_logger.info "Checking #{alerts.count} confirmed users"
+    alerts.each do |alert|
+      applications = alert.recent_applications
       no_applications += applications.size
       unless applications.empty?
-        AlertNotifier.deliver_alert(user, applications)
+        AlertNotifier.deliver_alert(alert, applications)
         no_emails += 1
       end
     end

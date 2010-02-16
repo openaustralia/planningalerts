@@ -2,8 +2,8 @@
   %h3 You have been unsubscribed
   %p
     You will no longer receive email alerts for any planning applications we find near
-    %strong= @user.address
-    (within approximately #{meters_in_words(@user.area_size_meters)}).
+    %strong= @alert.address
+    (within approximately #{meters_in_words(@alert.area_size_meters)}).
   %p
     If you have unsubscribed because you were getting too many emails,
     = link_to "you could always create a new alert for a smaller area?", signup_path

@@ -2,18 +2,18 @@ require 'spec_helper'
 
 describe AlertNotifier do
   before :each do
-    @user = Alert.create!(:email => "matthew@openaustralia.org", :address => "24 Bruce Rd, Glenbrook NSW 2773",
+    @alert = Alert.create!(:email => "matthew@openaustralia.org", :address => "24 Bruce Rd, Glenbrook NSW 2773",
       :lat => 1.0, :lng => 2.0, :area_size_meters => 800)
-    @user.stub!(:confirm_id).and_return("abcdef")
+    @alert.stub!(:confirm_id).and_return("abcdef")
   end
 
   describe "when sending a new user confirmation email" do
     before :each do
-      @email = AlertNotifier.create_confirm(@user)
+      @email = AlertNotifier.create_confirm(@alert)
     end
 
     it "should be sent to the user's email address" do
-      @email.to.should == [@user.email]
+      @email.to.should == [@alert.email]
     end
   
     it "should be from the main planningalerts email address" do
@@ -30,7 +30,7 @@ describe AlertNotifier do
     end
   
     it "should include the address for the alert" do
-      @email.body.should include_text(@user.address)
+      @email.body.should include_text(@alert.address)
     end
   end
   
@@ -42,11 +42,11 @@ describe AlertNotifier do
         :info_tinyurl => "tinyurl1", :map_url => "map1", :comment_tinyurl => "tinyurl2")
       @a2 = Application.new(:address => "Bar Street, Foo", :council_reference => "a2", :description => "Put something up",
         :info_tinyurl => "tinyurl3", :map_url => "map2", :comment_tinyurl => "tinyurl4")
-      @email = AlertNotifier.create_alert(@user, [@a1, @a2])
+      @email = AlertNotifier.create_alert(@alert, [@a1, @a2])
     end
     
     it "should be sent to the user's email address" do
-      @email.to.should == [@user.email]
+      @email.to.should == [@alert.email]
     end
     
     it "should be from the main planningalerts email address" do
@@ -55,7 +55,7 @@ describe AlertNotifier do
     end
     
     it "should have a sensible subject line" do
-      @email.subject.should == "Planning applications near #{@user.address}"
+      @email.subject.should == "Planning applications near #{@alert.address}"
     end
     
     it "should include the development application address and council id" do
@@ -90,7 +90,7 @@ describe AlertNotifier do
     end
     
     it "should update last_sent to the current time" do
-      (Time.now - @user.last_sent).abs.should < 1
+      (Time.now - @alert.last_sent).abs.should < 1
     end
   end
 end

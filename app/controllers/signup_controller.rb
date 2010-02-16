@@ -44,10 +44,10 @@ class SignupController < ApplicationController
     
     # TODO: Get rid of this @form_action
     @form_action = confirmed_path
-    @user = Alert.find_by_confirm_id(params[:cid])
-    if @user
-      @user.confirmed = true
-      @user.save!
+    @alert = Alert.find_by_confirm_id(params[:cid])
+    if @alert
+      @alert.confirmed = true
+      @alert.save!
     else
       render :text => "", :status => 404
     end
@@ -56,7 +56,7 @@ class SignupController < ApplicationController
   def unsubscribe
     @page_title = "Unsubscribed"
 
-    @user = Alert.find_by_confirm_id(params[:cid])
-    @user.delete
+    @alert = Alert.find_by_confirm_id(params[:cid])
+    @alert.delete
   end
 end

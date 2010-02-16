@@ -5,8 +5,8 @@
     %h3 Thanks, your alert has been activated
     %p
       You will now receive email alerts for any planning applications we find near
-      %strong= @user.address
-      (within approximately #{meters_in_words_no_space(@user.area_size_meters)}).
+      %strong= @alert.address
+      (within approximately #{meters_in_words_no_space(@alert.area_size_meters)}).
       If this alert doesn't cover everywhere you are interested in
       %span.highlight
         = link_to "you can sign up for multiple alerts", signup_path

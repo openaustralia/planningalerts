@@ -24,9 +24,9 @@ describe Alert do
     email = "foo@foo.org"
     u1 = Alert.create!(:email => email, :address => "A street address", :area_size_meters => 200, :lat => 1.0, :lng => 2.0)
     u2 = Alert.create!(:email => email, :address => "A street address", :area_size_meters => 800, :lat => 1.0, :lng => 2.0)
-    users = Alert.find_all_by_email(email) 
-    users.count.should == 1
-    users.first.area_size_meters.should == u2.area_size_meters
+    alerts = Alert.find_all_by_email(email) 
+    alerts.count.should == 1
+    alerts.first.area_size_meters.should == u2.area_size_meters
   end
   
   it "should allow multiple alerts for different street addresses but the same email address" do
@@ -47,9 +47,9 @@ describe Alert do
   
   describe "geocoding" do
     it "should happen automatically on saving" do
-      user = Alert.create!(@attributes)
-      user.lat.should == @loc.lat
-      user.lng.should == @loc.lng
+      alert = Alert.create!(@attributes)
+      alert.lat.should == @loc.lat
+      alert.lng.should == @loc.lng
     end
 
     it "should error if the address is empty" do

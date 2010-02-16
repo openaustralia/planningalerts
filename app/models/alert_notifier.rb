@@ -1,20 +1,20 @@
 class AlertNotifier < ActionMailer::Base
-  def confirm(user)
-    @recipients = user.email
+  def confirm(alert)
+    @recipients = alert.email
     @from = "#{Configuration::EMAIL_FROM_NAME} <#{Configuration::EMAIL_FROM_ADDRESS}>"
     @subject = "Please confirm your planning alert"
-    @user = user
+    @alert = alert
   end
   
-  def alert(user, applications)
-    @recipients = user.email
+  def alert(alert, applications)
+    @recipients = alert.email
     @from = "#{Configuration::EMAIL_FROM_NAME} <#{Configuration::EMAIL_FROM_ADDRESS}>"
-    @subject = "Planning applications near #{user.address}"
-    @user = user
+    @subject = "Planning applications near #{alert.address}"
+    @alert = alert
     @applications = applications
 
-    @georss_url = api_url(:host => Configuration::HOST, :call => "address", :address => @user.address, :area_size => @user.area_size_meters)
-    @unsubscribe_url = unsubscribe_url(:host => Configuration::HOST, :cid => @user.confirm_id)
+    @georss_url = api_url(:host => Configuration::HOST, :call => "address", :address => @alert.address, :area_size => @alert.area_size_meters)
+    @unsubscribe_url = unsubscribe_url(:host => Configuration::HOST, :cid => @alert.confirm_id)
     
     # Update statistics. Is this a good place to do them or would it make more sense to do it after the mailing has
     # happened and we can check whether is was sucessful?
@@ -24,7 +24,7 @@ class AlertNotifier < ActionMailer::Base
     Stat.emails_sent += 1
     Stat.applications_sent += applications.count
     # TODO: Like the comment above, is this really a good place to update the model?
-    user.last_sent = Time.now
-    user.save!
+    alert.last_sent = Time.now
+    alert.save!
   end
 end
