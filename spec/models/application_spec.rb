@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Application do
   before :each do
     Authority.delete_all
-    @auth = Authority.create!(:planning_email => "foo", :full_name => "Fiddlesticks", :short_name => "Fiddle")
+    @auth = Authority.create!(:full_name => "Fiddlesticks", :short_name => "Fiddle")
     # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
     Location.stub!(:geocode).and_return(mock(:lat => 1.0, :lng => 2.0, :success => true))
     # Stub out the URL shortener so that by default the tests don't require a network connection
@@ -12,10 +12,10 @@ describe Application do
   
   describe "within" do
     it "should limit the results to those within the given area" do
-      a1 = @auth.applications.create!(:lat => 2.0, :lng => 3.0, :postcode => "", :council_reference => "r1") # Within the box
-      a2 = @auth.applications.create!(:lat => 4.0, :lng => 3.0, :postcode => "", :council_reference => "r2") # Outside the box
-      a3 = @auth.applications.create!(:lat => 2.0, :lng => 1.0, :postcode => "", :council_reference => "r3") # Outside the box
-      a4 = @auth.applications.create!(:lat => 1.5, :lng => 3.5, :postcode => "", :council_reference => "r4") # Within the box
+      a1 = @auth.applications.create!(:lat => 2.0, :lng => 3.0, :council_reference => "r1") # Within the box
+      a2 = @auth.applications.create!(:lat => 4.0, :lng => 3.0, :council_reference => "r2") # Outside the box
+      a3 = @auth.applications.create!(:lat => 2.0, :lng => 1.0, :council_reference => "r3") # Outside the box
+      a4 = @auth.applications.create!(:lat => 1.5, :lng => 3.5, :council_reference => "r4") # Within the box
       r = Application.within(Area.lower_left_and_upper_right(Location.new(1.0, 2.0), Location.new(3.0, 4.0)))
       r.count.should == 2
       r[0].should == a1
@@ -27,7 +27,7 @@ describe Application do
     it "should set the date_scraped to the current time and date" do
       date = DateTime.civil(2009,1,1)
       DateTime.should_receive(:now).and_return(date)
-      a = @auth.applications.create!(:postcode => "", :council_reference => "r1")
+      a = @auth.applications.create!(:council_reference => "r1")
       a.date_scraped.utc.should == date
     end
     
@@ -36,20 +36,20 @@ describe Application do
       # shortener is being called during the tests (which we don't want so that our tests don't depend on
       # a network connection)
       Application.should_receive(:shorten_url).with("http://example.org/comment").and_return("http://tinyurl.com/abcdef")
-      a = @auth.applications.create!(:comment_url => "http://example.org/comment", :postcode => "", :council_reference => "r1")
+      a = @auth.applications.create!(:comment_url => "http://example.org/comment", :council_reference => "r1")
       a.comment_tinyurl.should == "http://tinyurl.com/abcdef"
     end
     
     it "should make a tinyurl version of the info_url" do
       Application.should_receive(:shorten_url).with("http://example.org/info").and_return("http://tinyurl.com/1234")
-      a = @auth.applications.create!(:info_url => "http://example.org/info", :postcode => "", :council_reference => "r1")
+      a = @auth.applications.create!(:info_url => "http://example.org/info", :council_reference => "r1")
       a.info_tinyurl.should == "http://tinyurl.com/1234"      
     end
     
     it "should geocode the address" do
       loc = mock("Location", :lat => -33.772609, :lng => 150.624263, :success => true)
       Location.should_receive(:geocode).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
-      a = @auth.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :postcode => "", :council_reference => "r1")
+      a = @auth.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1")
       a.lat.should == loc.lat
       a.lng.should == loc.lng
     end
@@ -61,7 +61,7 @@ describe Application do
       # Ignore the warning message (from the tinyurl'ing)
       logger.stub!(:warn)
 
-      a = @auth.applications.new(:address => "dfjshd", :postcode => "", :council_reference => "r1")
+      a = @auth.applications.new(:address => "dfjshd", :council_reference => "r1")
       a.stub!(:logger).and_return(logger)
       
       a.save!
@@ -70,7 +70,7 @@ describe Application do
     end
     
     it "should set the url for showing the address on a google map" do
-      a = @auth.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :postcode => "", :council_reference => "r1")
+      a = @auth.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1")
       a.map_url.should == "http://maps.google.com/maps?q=24+Bruce+Road%2C+Glenbrook%2C+NSW&z=15"
     end
   end
@@ -145,7 +145,7 @@ describe Application do
     end
     
     it "should collect all the applications from all the authorities over the last n days" do
-      auth2 = Authority.create!(:planning_email => "", :full_name => "Wombat City Council", :short_name => "Wombat")
+      auth2 = Authority.create!(:full_name => "Wombat City Council", :short_name => "Wombat")
       # TODO Overwriting a constant here. Ugh. Do this better
       Configuration::SCRAPE_DELAY = 1
       logger = mock

@@ -17,9 +17,6 @@ class Authority < ActiveRecord::Base
       end
       authority.full_name = scraper.at('authority_name').inner_text
       authority.feed_url = scraper.at('url').inner_text
-      # TODO Find a way of setting the planning email address or maybe it's not used at all
-      authority.planning_email = "unknown@unknown.org"
-      authority.external = 1
       authority.disabled = 0
 
       authority.save!

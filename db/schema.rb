@@ -9,12 +9,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100216211530) do
+ActiveRecord::Schema.define(:version => 20100216220001) do
 
   create_table "applications", :force => true do |t|
     t.string    "council_reference", :limit => 50,   :null => false
     t.text      "address",                           :null => false
-    t.string    "postcode",          :limit => 10,   :null => false
     t.text      "description"
     t.string    "info_url",          :limit => 1024
     t.string    "info_tinyurl",      :limit => 50
@@ -31,13 +30,10 @@ ActiveRecord::Schema.define(:version => 20100216211530) do
   add_index "applications", ["authority_id"], :name => "authority_id"
 
   create_table "authorities", :force => true do |t|
-    t.string  "full_name",      :limit => 200, :null => false
-    t.string  "short_name",     :limit => 100, :null => false
-    t.string  "planning_email", :limit => 100, :null => false
+    t.string  "full_name",  :limit => 200, :null => false
+    t.string  "short_name", :limit => 100, :null => false
     t.string  "feed_url"
-    t.boolean "external"
     t.boolean "disabled"
-    t.text    "notes"
   end
 
   add_index "authorities", ["short_name"], :name => "short_name_unique", :unique => true
@@ -48,15 +44,14 @@ ActiveRecord::Schema.define(:version => 20100216211530) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",            :limit => 120,                    :null => false
-    t.string   "address",          :limit => 120,                    :null => false
-    t.boolean  "digest_mode",                     :default => false, :null => false
+    t.string   "email",            :limit => 120, :null => false
+    t.string   "address",          :limit => 120, :null => false
     t.datetime "last_sent"
-    t.float    "lat",                                                :null => false
-    t.float    "lng",                                                :null => false
+    t.float    "lat",                             :null => false
+    t.float    "lng",                             :null => false
     t.string   "confirm_id",       :limit => 20
     t.boolean  "confirmed"
-    t.integer  "area_size_meters",                                   :null => false
+    t.integer  "area_size_meters",                :null => false
   end
 
   add_foreign_key "applications", "authorities", :name => "applications_authority_id_fk"

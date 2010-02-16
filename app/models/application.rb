@@ -48,9 +48,7 @@ class Application < ActiveRecord::Base
           :info_url => a.at('info_url').inner_text,
           :comment_url => a.at('comment_url').inner_text,
           # TODO date_recieved attribute is misspelled!
-          :date_recieved => a.at('date_received').inner_text,
-          # TODO Get rid of postcode column in the table. It's not being used
-          :postcode => "")
+          :date_recieved => a.at('date_received').inner_text)
         info_logger.info "Saving application #{council_reference}"
       end
     end
