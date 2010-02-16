@@ -6,5 +6,4 @@ log/cucumber.log
 config/database.yml
 db/development.sqlite3
 db/test.sqlite3
-db/schema.rb
 rerun.txt
