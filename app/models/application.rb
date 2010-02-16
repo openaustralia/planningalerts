@@ -1,9 +1,6 @@
 require 'open-uri'
 
 class Application < ActiveRecord::Base
-  set_table_name "application"
-  set_primary_key "application_id"
-  
   belongs_to :authority
   before_save :lookup_comment_tinyurl, :lookup_info_tinyurl, :set_date_scraped, :geocode, :set_map_url
   
