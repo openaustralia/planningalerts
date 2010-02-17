@@ -53,6 +53,10 @@ class SignupController < ApplicationController
     end
   end
   
+  def old_unsubscribe
+    redirect_to :action => "unsubscribe"
+  end
+  
   def unsubscribe
     @page_title = "Unsubscribed"
 
