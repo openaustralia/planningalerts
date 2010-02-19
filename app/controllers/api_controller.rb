@@ -30,8 +30,7 @@ class ApiController < ApplicationController
     else
       raise "unexpected value for :call"
     end
-    # Using explit name for template because this can be called from old_index as well. Ugh, I know. Ugly.
-    render "index", :layout => false, :content_type => Mime::XML
+    render "shared/applications.rss", :layout => false, :content_type => Mime::XML
   end
   
   def old_howto
