@@ -2,9 +2,21 @@ class ApiController < ApplicationController
   caches_page :howto
 
   def old_index
-    # Not using redirects because this is an api and I'm not sure that we can depend on people following
-    # redirects with an API?
-    index
+    case params[:call]
+    when "address"
+      redirect_to api_url(:call => "address", :address => params[:address], :area_size => params[:area_size])
+    when "point"
+      redirect_to api_url(:call => "point", :lat => params[:lat], :lng => params[:lng],
+        :area_size => params[:area_size])
+    when "area"
+      redirect_to api_url(:call => "area",
+        :bottom_left_lat => params[:bottom_left_lat], :bottom_left_lng => params[:bottom_left_lng],
+        :top_right_lat => params[:top_right_lat], :top_right_lng => params[:top_right_lng])
+    when "authority"
+      redirect_to api_url(:call => "authority", :authority => params[:authority])
+    else
+      raise "unexpected value for :call"
+    end
   end
   
   def index
