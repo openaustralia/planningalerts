@@ -53,6 +53,8 @@ ActionController::Routing::Routes.draw do |map|
   map.faq 'faq', :controller => 'static', :action => 'faq'
   map.get_involved 'getinvolved', :controller => 'static', :action => 'get_involved'
 
+  map.resources 'applications', :only => :index
+
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.
