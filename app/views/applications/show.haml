@@ -1,0 +1,9 @@
+%h3= @application.address
+%p= @application.description
+%p Council reference: #{@application.council_reference}
+
+= image_tag static_google_map_url(:size => "512x512", :address => @application.address), :size => "512x512"
+
+%p
+  = link_to "More information", @application.info_url
+  = link_to "What do you think?", @application.comment_url

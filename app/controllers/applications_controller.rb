@@ -10,6 +10,11 @@ class ApplicationsController < ApplicationController
     end
     render "shared/applications.rss", :layout => false, :content_type => Mime::XML
   end
+  
+  def show
+    @application = Application.find(params[:id])
+    @page_title = @application.address
+  end
 
   private
   
