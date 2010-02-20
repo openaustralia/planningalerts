@@ -27,8 +27,8 @@ module ApiHowtoHelper
       :top_right_lat => top_right_lat, :top_right_lng => top_right_lng)
   end
   
-  def api_example_authority_url(authority = CGI.escape(Configuration::API_EXAMPLE_AUTHORITY))
-    "#{api_url}?call=authority&authority=#{authority}"
+  def api_example_authority_url(authority = Configuration::API_EXAMPLE_AUTHORITY)
+    authority_applications_url(:format => "rss", :authority_id => authority)
   end
   
   def api_example_address_url_html
@@ -45,6 +45,6 @@ module ApiHowtoHelper
   end
   
   def api_example_authority_url_html
-    htmlify(api_example_authority_url("[name]"))
+    htmlify(api_example_authority_url("11").sub("11", "[name]"))
   end
 end

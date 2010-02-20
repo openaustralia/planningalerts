@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ApplicationsController do
-  describe "call=address" do
+  describe "search by address" do
     it "should find recent 100 applications near the address with the most recently scraped first" do
       location, area, scope, result = mock, mock, mock, mock
       
@@ -14,7 +14,7 @@ describe ApplicationsController do
     end
   end
   
-  describe "call=point" do
+  describe "search by point" do
     it "should find recent 100 applications near the point with the most recently scraped first" do
       area, scope, result = mock, mock, mock
 
@@ -27,7 +27,7 @@ describe ApplicationsController do
     end
   end
   
-  describe "call=area" do
+  describe "search by area" do
     it "should find recent 100 applications in an area with the most recently scraped first" do
       area, scope, result = mock, mock, mock
 
@@ -37,6 +37,18 @@ describe ApplicationsController do
 
       get :index, :format => "rss", :bottom_left_lat => 1.0, :bottom_left_lng => 2.0,
         :top_right_lat => 3.0, :top_right_lng => 4.0
+      assigns[:applications].should == result
+    end
+  end
+  
+  describe "search by authority" do
+    it "should find recent 100 applications for an authority with the most recently scraped first" do
+      authority, result = mock, mock
+
+      Authority.should_receive(:find_by_short_name).with("Blue Mountains").and_return(authority)
+      authority.should_receive(:applications).with(:limit=>100, :order=>"date_scraped DESC").and_return(result)
+
+      get :index, :format => "rss", :authority_id => "Blue Mountains"
       assigns[:applications].should == result
     end
   end

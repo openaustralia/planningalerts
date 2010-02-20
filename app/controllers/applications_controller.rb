@@ -1,7 +1,13 @@
 class ApplicationsController < ApplicationController
   def index
-    # TODO: Move the template over to using an xml builder
-    @applications = Application.within(search_area).find(:all, :order => "date_scraped DESC", :limit => 100)
+    if params[:authority_id]
+      # TODO Handle the situation where the authority name isn't found
+      authority = Authority.find_by_short_name(params[:authority_id])
+      @applications = authority.applications(:order => "date_scraped DESC", :limit => 100)
+    else
+      # TODO: Move the template over to using an xml builder
+      @applications = Application.within(search_area).find(:all, :order => "date_scraped DESC", :limit => 100)
+    end
     render "shared/applications.rss", :layout => false, :content_type => Mime::XML
   end
 

@@ -54,6 +54,9 @@ ActionController::Routing::Routes.draw do |map|
   map.get_involved 'getinvolved', :controller => 'static', :action => 'get_involved'
 
   map.resources 'applications', :only => :index
+  map.resources 'authorities', :only => [] do |authority|
+    authority.resources :applications, :only => :index
+  end
 
   # See how all your routes lay out with "rake routes"
 
