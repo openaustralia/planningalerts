@@ -2,7 +2,7 @@
 %p= @application.description
 %p Council reference: #{@application.council_reference}
 
-= image_tag static_google_map_url(:size => "512x512", :address => @application.address), :size => "512x512"
+= @map.div(:width => 512, :height => 512)
 
 %p
   = link_to "More information", @application.info_url

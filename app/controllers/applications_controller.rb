@@ -14,6 +14,12 @@ class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
     @page_title = @application.address
+    
+    @map = Mapstraction.new("map_div",:google)
+    @map.control_init(:small => true)
+    @map.center_zoom_init([@application.lat, @application.lng], 14)
+    @map.marker_init(Marker.new([@application.lat, @application.lng],:label => @application.address,
+      :info_bubble => "<b>#{@application.address}</b><p>#{@application.description}</p>"))
   end
 
   private
