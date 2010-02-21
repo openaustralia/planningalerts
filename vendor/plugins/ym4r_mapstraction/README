@@ -1,0 +1,113 @@
+=YM4R/Mapstraction plugin for Rails
+
+This is the YM4R/Mapstraction plugin for Rails. It is aimed at facilitating the use of the Mapstraction library from Rails application. 
+
+==Getting Started
+I present here the most common operations you would want to do with YM4R/Mapstraction. Read the rest of the documents if you want more details.
+
+In your controller, here is a typical initialization sequence in action +index+:
+	def index
+	  @map = Mapstraction.new("map_div",:yahoo)
+	  @map.control_init(:small => true)
+	  @map.center_zoom_init([75.5,-42.56],4)
+	  @map.marker_init(Marker.new([75.6,-42.467],:label => "Hello", :info_bubble => "Info! Info!", 
+		:icon => "/images/icon02.png"))
+	end
+
+Here I create a Mapstraction map (which will be placed inside a DIV of id +map_div+) which will use Yahoo! Maps, add a small control (it is the only available control currently), set the center and the zoom and add a marker. The 3 possible options to pass to the +Marker+ constructor are all shown above. Of these 4 steps only the creation of the map and the setting of the center and the zoom are absolutely necessary. Apart from Yahoo! Maps, I could have created a map of type <tt>:google</tt> (Google Maps) or <tt>:microsoft</tt> (Virtual Earth).
+
+In your view, here is what you would have:
+	<html><head><title>Test</title>
+	<%= Mapstraction.header(:yahoo) %>
+	<%= @map.to_html %>
+	</head><body>
+	<%= @map.div(:width => 600, :height => 400) %>
+	</body></html>
+
+First you must output the header, used by all the maps of the page: It includes the Mapstraction JS code and the JS helper functions of YM4R/Mapstraction. It also includes the API files, as determined according to the parameter of the method. Usually, if you only have one map, there will be a single symbol, identical to the one used to create the map. But you can also pass an array of symbols, in which case all the corresponding API's will be included. Then we initialize the map by calling <tt>@map.to_html</tt>. In the body, we need a DIV whose +id+ is the same as the one passed to the Mapstraction constructor in the controller. The call to <tt>@map.div</tt> outputs such a DIV. We pass to it options to set the width and height of the map in the style attribute of the DIV. 
+
+<b>Note that you need to set a size for the map DIV element at some point or the map will not be displayed.</b> You have a few ways to do this:
+- You define it yourself, wherever you want. Usually as part of the layout definition in an external CSS.
+- In the head of the document, through a CSS instruction output by <tt>@map.header_width_height</tt>, to which you pass 2 arguments (width and height).
+- When outputting the DIV with <tt>@map.div</tt>, you can also pass an option hash, with keys <tt>:width</tt> and <tt>:height</tt> and a style attribute for the DIV element will be output.
+
+You can update the map trough RJS. Here is an action you can call from a <tt>link_remote_tag</tt> which would do this:
+	def update
+	  @map = Variable.new("map")
+	  @marker = Marker.new([75.89,-42.767],:label => "Update", :info_bubble => "I have been placed through RJS")
+	end
+
+Here, I first bind the Ruby <tt>@map</tt> variable to the JS variable <tt>map</tt>, which already exists in the client browser. +map+ is by default the name given to a map created from YM4R/Mapstraction (this could be overriden by passing a second argument to the Mapstraction constructor). Then I create a marker.
+
+And you would have inside the RJS template for the action:
+	page << @map.remove_all_markers
+	page << @map.add_marker(@marker)
+
+Here I first clear the map of all markers. Then I add the marker. Note that the +marker_init+ is not used anymore since, as its name indicates, this method is only for the initialization of the map.
+
+==Installation
+Install like any other Rails plugin:
+	ruby script/plugin install svn://rubyforge.org/var/svn/ym4r/Plugins/Mapstraction/trunk/ym4r_mapstraction
+
+As part of the installation procedure, the JavaScript files found in the <tt>PLUGIN_ROOT/javascript</tt> directory will be copied to the <tt>RAILS_ROOT/public/javascripts/</tt> directory. 
+
+Moreover a <tt>gmaps_api_key.yml</tt> file will also be created in the <tt>RAILS_ROOT/config/</tt> folder. This is in order to setup the Google Maps API in case you want to use it with Mapstraction. You don't need to do anything special if you use only Yahoo! Maps or Virtual Earth. If this file already exists (installed for example by a previous version of the plugin), nothing will be done to it, so you can keep your configuration data even after updating the plugin. This file is a YAML representation of a hash, similar to the <tt>database.yml</tt> file in that the primary keys in the file are the different environments (development, test, production), since you will probably need to have different Google Maps API keys depending on that criteria (for example: a key for localhost for development and test; a key for your host for production). If you don't have any special need, there will be only one key associated with each environment. If however, you need to have multiple keys (for example if your app will be accessible from multiple URLs, for which you need different keys), you can also associate a hash to the environment, whose keys will be the different hosts. In this case, you will need to pass a value to the <tt>:host</tt> key when calling the method <tt>Mapstraction.header</tt> (usually <tt>@request.host</tt>). 
+
+==Operations
+===Static switching between mapping API's
+It is the goal of the Mapstraction API to make it trivial to switch API (for example, in case the currently used API changes its term of service). It is equally easy to do this with YM4R/Mapstraction. You need to do 2 things:
+- Change the provider when creating a Mapstraction map
+- Change the provider when calling the <tt>Mapstraction.header</tt>
+
+===Dynamic switching between mapping API's
+The Mapstraction API provides a method +swap+ to be called on a Mapstraction JS object, with the name of the new API as argument, that will switch the mapping API on the fly. The zoom levels and elements will be copied over to the new API. 
+===Markers
+Markers are constructed with either a LatLonPoint or a 2D-array of coordinates in the first argument, followed by an option hash. The keys to the hash can be <tt>:info_bubble</tt> (text to display when the marker is clicked), <tt>:label</tt> (summary text of the marker; The way it is displayed depends on the mapping service used) or <tt>:icon</tt> (to indicate the URL of an icon to use for the marker). Support for icons is a bit flaky since the different services have different conventions for their origins, so you should probably have different sets of icons depending on the service to make it less confusing for the user.
+
+===MarkerGroup
+Surprisingly, MarkerGroups are groups of markers. They can be useful if you want to be able to show and hide a group of markers at the same time in response to a user-generated event (for example, as a response to a click on a link in the HTML page) without having to declare all the markers as global variables. Instead you declare only the group as global and give it the markers. Then you can call +show+ and +hide+ on the group, to act on all the markers of the group at the same time.
+
+===Polylines
+Polylines are constructed with an array of LatLonPoints, as well as with options like the opacity (<tt>:opacity</tt>), the width (<tt>:width</tt>) or the color (<tt>:color</tt> and with a value in the form "#RRGGBB", with RR, GG and BB numbers between 0 and 255 in hexadecimal form). You add the marker to the map at initialization time with the method +polyline_init+:
+	@map.polyline_init(Polyline.new([LatLonPoint.new([45.12,22.3]), 
+	LatLonPoint.new([34.12,56.1])],:width => 5, :color => "#FF00AB", 
+	:opacity => 0.7))
+
+===Clusterer
+A clusterer contains a large number of markers, which are dynamically grouped in clusters if needed. This allows to have a lot of markers on a map without being slowed down too much. It is an adaptation to Mapstraction of Jef Poskanzer's Clusterer2 library for Google Maps. It works for all 3 Mapstraction backends. To use it from your Rails code, do the following:
+	marker_array = [.....] #large number of markers
+	clusterer = Clusterer.new(marker_array,:max_visible_markers => 20)
+	@map.clusterer_init(clusterer)
+By default the markers start being clustered when there are more than 150 in the clusterer. Nothing special happens before this. This setting can be changed with the <tt>:max_visible_markers</tt> option. Other options are possible. Look inside the JS code inside the <tt>clusterer.js</tt> to know what they are.
+
+===Routing
+Currently supported only by Mapquest. 
+Must be initialized at the same time as the map. In your controller, here is a typical initialization sequence in action +index+:
+	def index
+	  @router = Router.new(:display_route, 'mapquest', :error_route)
+	end
+
+The router is created with 3 possible options to pass to the +Router+ constructor and all are necessary. First one is the name of the callback function that will show the route on the map. You can change the name of the callback function but if you do not pass :no_callback option in +to_html+ the method will be implemented as shown in routing.rb. The same goes for :error_route callback (gets called if an error occures). If you leave them as they are in the example, all will work fine. The middle parameter is the name of the routing provider and for now it is allways 'mapquest'. Additionally, you can pass two more parameters, the variable name for the router (default = "router") and variable name for the map (default = "map").
+
+In your view, xou have to output the header after map header (@map.to_html):
+<%= @router.to_html %>
+
+For usage, you can choose weather you will use the routing option with geocoding, as in mapstraction examples or you can prepare point in some other fashion and just use the router to connect them. So, when you have the points, in your rjs you can do the following:
+page << @router.routePoints(@points)
+
+Be carefull here because routePoints is an additional mastraction library method that is not in the main trunk yet. But you can use +route+ too.
+
+==Recent changes
+- Support for latest Mapstraction version
+- Support for polylines
+- Some additional documentation
+
+==TODO
+- Update to newer versions of Mapstraction as they come along
+- More documentation
+
+==License
+The YM4R/Mapstraction plugin is released under the MIT license. 
+
+==Support
+Any questions, enhancement proposals, bug notifications or corrections can be sent to mailto:guilhem.vellut@gmail.com.
