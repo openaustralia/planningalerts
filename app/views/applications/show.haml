@@ -9,7 +9,7 @@
   = link_to "What do you think?", @application.comment_url
 
 - unless @nearby_applications.empty?
-  %h3 Other recent applications nearby (within 10km)
+  %h3 Other recent applications nearby (within #{meters_in_words(@nearby_distance)})
   %ul
     - @nearby_applications.each do |app|
       %li

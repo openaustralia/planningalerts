@@ -17,7 +17,8 @@ class ApplicationsController < ApplicationController
     # TODO: Display date received and date scraped
     
     # Find other applications nearby (within 10km area)
-    search_area = Area.centre_and_size(@application.location, 10000)
+    @nearby_distance = 10000
+    search_area = Area.centre_and_size(@application.location, @nearby_distance)
     @nearby_applications = Application.within(search_area).find(:all, :order => "date_scraped DESC", :limit => 10)
     # Don't include the current application
     @nearby_applications.delete(@application)
