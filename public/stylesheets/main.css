@@ -1,10 +1,5 @@
 /* @override http://dev.planningalerts.org.au/stylesheets/main.css */
 
-@font-face {
-  font-family: "Junction";
-  src: url("/fonts/junction.eot");
-  src: local("Junction"), url("/fonts/junction.otf") format("opentype"); }
-
 body {font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif; text-align:center;line-height:1.7em;margin:0;
 	color:#0f0f0f;}	
 #divPage {width:580px; margin:0 auto;background:white;text-align:left;}
