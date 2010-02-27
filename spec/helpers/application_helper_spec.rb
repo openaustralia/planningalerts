@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SignupHelper do
+describe ApplicationHelper do
 
   it "should convert a distance in metres to simple concise text" do
     helper.meters_in_words(2000).should == "2 km"
