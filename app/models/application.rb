@@ -8,6 +8,11 @@ class Application < ActiveRecord::Base
     { :conditions => ['lat > ? AND lng > ? AND lat < ? AND lng < ?', a.lower_left.lat, a.lower_left.lng, a.upper_right.lat, a.upper_right.lng] }
   }
   
+  # TODO: factor out common location accessor between Application and Alert
+  def location
+    Location.new(lat, lng) if lat && lng
+  end
+  
   # Optionally pass a logger which is just used for sending informational messages to do with this long-running job to
   def self.collect_applications(info_logger = logger)
     start_date = Date.today - Configuration::SCRAPE_DELAY

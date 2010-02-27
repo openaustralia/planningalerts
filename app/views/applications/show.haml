@@ -7,3 +7,11 @@
 %p
   = link_to "More information", @application.info_url
   = link_to "What do you think?", @application.comment_url
+
+- unless @nearby_applications.empty?
+  %h3 Other recent applications nearby (within 10km)
+  %ul
+    - @nearby_applications.each do |app|
+      %li
+        = link_to app.address, application_path(app)
+        %p= app.description

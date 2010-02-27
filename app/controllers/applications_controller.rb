@@ -15,11 +15,20 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     @page_title = @application.address
     
+    # TODO: Since this is really to do with presentation this should be in a helper
     @map = Mapstraction.new("map_div",:google)
     @map.control_init(:small => true)
     @map.center_zoom_init([@application.lat, @application.lng], 14)
     @map.marker_init(Marker.new([@application.lat, @application.lng],:label => @application.address,
       :info_bubble => "<b>#{@application.address}</b><p>#{@application.description}</p>"))
+    
+    # TODO: Display date received and date scraped
+    
+    # Find other applications nearby (within 10km area)
+    search_area = Area.centre_and_size(@application.location, 10000)
+    @nearby_applications = Application.within(search_area).find(:all, :order => "date_scraped DESC", :limit => 10)
+    # Don't include the current application
+    @nearby_applications.delete(@application)
   end
 
   private
