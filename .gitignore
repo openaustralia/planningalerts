@@ -12,3 +12,5 @@ public/api/*.html
 public/faq.html
 public/getinvolved.html
 public/index.html
+public/stylesheets/*.css
+tmp/sass-cache
