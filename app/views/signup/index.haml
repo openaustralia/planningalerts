@@ -40,8 +40,8 @@
               My suburb  (about #{meters_in_words(@zone_sizes['l'])})
             %small
               = link_to "view on a map (new window)", "javascript:previewMap('#{@zone_sizes['l']}');"
-          %li
-            %noscript
+          %noscript
+            %li
               %fieldset Note: viewing the alert area on a map requires javascript
     %input.button{ :value => "Create alert >>", :type => "submit" }
     %p#privacy
