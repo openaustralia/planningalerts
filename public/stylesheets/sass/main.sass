@@ -1,11 +1,10 @@
 !almostblack = #0f0f0f
-!grey1 = #989898
-!grey2 = #666
-!grey3 = #8e8e8e
-!grey4 = #808080
+!grey = #989898
+!almostwhite = #fafafa
 !darkblue = #22579C
 !orange = #ff8c00
 !yellow = #f4f323
+!transparentyellow = rgba(244,243,35,0.5)
 
 body
   font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif
@@ -52,15 +51,15 @@ h3, h4
 
 #stats
   margin: 0
-  color= !grey1
+  color= !grey
   font-size: 0.8em
   line-height: 1em
-  background: #feffff
+  background: white
   padding: 5px
 
   a
     text-decoration: none
-    color= !grey1
+    color= !grey
 
 #header
   margin: auto
@@ -91,7 +90,7 @@ h3, h4
     
 /* Menu */
 #menu
-  background= !grey1
+  background= !grey
   height: 2.5em
   font-size: 0.7em
   margin-bottom: 2em
@@ -117,7 +116,7 @@ h3, h4
 /* Privacy note */
 #privacy
   font-size: 0.8em
-  color= !grey2
+  color= !grey
   line-height: 1.4em
 
   em
@@ -127,7 +126,7 @@ h3, h4
 /* Beta note */
 #spnBeta
   font-size: 0.8em
-  color= !grey2
+  color= !grey
   line-height: 1.4em
 
 /* Warnings & errors */
@@ -184,7 +183,7 @@ input.textbox
     position: relative
     float: left
     top: 0.4em
-    color= !grey3
+    color= !grey
 
 #pAlertArea
   margin-bottom: 0
@@ -226,8 +225,8 @@ dl.faq
 
 /* api */
 div.apiitem
-  border= "dotted" "1px" !grey4
-  background: #fafafa
+  border= "dotted" "1px" !grey
+  background= !almostwhite
   padding: 10px
   margin-top: 1em
 
@@ -235,11 +234,11 @@ div.apiitem
     background: white
     display: block
     padding: 10px
-    border= "solid" "1px" !grey4
+    border= "solid" "1px" !grey
     word-wrap: break-word
 
     em
-      color= !grey4
+      color= !grey
 
   p
     font-size: 0.8em
@@ -259,7 +258,7 @@ p.apiexamples
 
 /* highlight */
 span.highlight
-  background: rgba(244,243,35,0.5)
+  background= !transparentyellow
 
 /* Links */
 a
@@ -272,7 +271,7 @@ a
   position: relative
 
   ul
-    border-top= "dotted" "1px" !grey4
+    border-top= "dotted" "1px" !grey
     padding-top: 4px
     padding-bottom: 20px
 
