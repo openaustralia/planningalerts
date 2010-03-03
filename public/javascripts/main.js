@@ -98,7 +98,7 @@ function showWarning (sWarnings) {
 	   sWarningHtml = sWarnings;
 	}
     var oWarning;
-    oWarning = document.getElementById('divWarning');
+    oWarning = document.getElementById('warning');
     
     oWarning.innerHTML = sWarningHtml;
     window.scroll(0,0);    
@@ -107,7 +107,7 @@ function showWarning (sWarnings) {
 }
 
 function hideWarning(){
-	oWarning = document.getElementById('divWarning');
+	oWarning = document.getElementById('warning');
 	oWarning.innerHTML = "";
 	oWarning.style.display = "none";
 }
