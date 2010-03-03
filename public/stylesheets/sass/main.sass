@@ -1,9 +1,20 @@
+!almostblack = #0f0f0f
+!grey1 = #989898
+!grey2 = #666
+!grey3 = #8e8e8e
+!grey4 = #808080
+!darkblue1 = #456FB1
+!darkblue2 = #22579C
+!orange = #ff8c00
+!green = #96ca2f
+!yellow = #f4f323
+
 body
   font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif
   text-align: center
   line-height: 1.7em
   margin: 0
-  color: #0f0f0f
+  color= !almostblack
 
 #page
   width: 580px
@@ -19,24 +30,24 @@ h1
   padding-top: 0.1em
 
   a
-    color: #456FB1
+    color= !darkblue1
     text-decoration: none
 
   span
-    color: #ff8c00
+    color= !orange
 
   sup
     font-size: 0.3em
     text-transform: uppercase
-    color: #ff8c00
+    color= !orange
 
 h2
   font-weight: normal
   font-size: 1em
-  border-bottom: dotted 1px #808080
+  border-bottom= "dotted" "1px" !grey4
   padding-left: 115px
   padding-bottom: 1.5em
-  color: #96ca2f
+  color= !green
   font-style: italic
   font-size: 1.15em
 
@@ -44,7 +55,7 @@ h2
     text-decoration: underline
 
 h3, h4
-  color: #ff8c00
+  color= !orange
   font-style: italic
   font-weight: normal
 
@@ -57,7 +68,7 @@ h3, h4
 
 #stats
   margin: 0
-  color: #989898
+  color= !grey1
   font-size: 0.8em
   line-height: 1em
   background: #feffff
@@ -65,7 +76,7 @@ h3, h4
 
   a
     text-decoration: none
-    color: #989898
+    color= !grey1
 
 #header
   margin: auto
@@ -78,18 +89,18 @@ h3, h4
     padding: 20px 240px 0 0
 
     a
-      color: #f4f323
+      color= !yellow
 
   h2
     border-bottom-style: none
-    color: #ff8c00
+    color= !orange
     white-space: nowrap
     top: 0
     padding: 53px 0 0 240px
 
 /* Menu */
 #menu
-  background: #989898
+  background= !grey1
   height: 2.5em
   font-size: 0.7em
   margin-bottom: 2em
@@ -109,13 +120,13 @@ h3, h4
         text-decoration: none
 
       &.selected
-        background: #ff8c00
+        background= !orange
         height: 2.5em
 
 /* Privacy note */
 #privacy
   font-size: 0.8em
-  color: #666
+  color= !grey2
   line-height: 1.4em
 
   em
@@ -125,18 +136,18 @@ h3, h4
 /* Beta note */
 #spnBeta
   font-size: 0.8em
-  color: #666
+  color= !grey2
   line-height: 1.4em
 
 /* Warnings & errors */
 #warning
-  background: #f4f323
+  background= !yellow
   font-size: 0.9em
   text-align: center
   margin-bottom: 1em
 
 input.error
-  background: #f4f323
+  background= !yellow
 
 /* Signup form */
 span.number
@@ -144,7 +155,7 @@ span.number
   float: left
   display: block
   text-align: left
-  color: #ff8c00
+  color= !orange
   width: 1.3em
 
 input.textbox
@@ -182,7 +193,7 @@ input.textbox
     position: relative
     float: left
     top: 0.4em
-    color: #8e8e8e
+    color= !grey3
 
 #pAlertArea
   margin-bottom: 0
@@ -210,12 +221,12 @@ div.attention
     font-size: 2em
     padding-bottom: 0.3em
     font-style: normal
-    color: #456FB1
+    color= !darkblue1
 
 /* Faqs */
 dl.faq
   dt
-    color: #ff8c00
+    color= !orange
     font-style: italic
 
   dd
@@ -224,7 +235,7 @@ dl.faq
 
 /* api */
 div.apiitem
-  border: dotted 1px #808080
+  border= "dotted" "1px" !grey4
   background: #fafafa
   padding: 10px
   margin-top: 1em
@@ -233,11 +244,11 @@ div.apiitem
     background: white
     display: block
     padding: 10px
-    border: solid 1px #808080
+    border= "solid" "1px" !grey4
     word-wrap: break-word
 
     em
-      color: #808080
+      color= !grey4
 
   p
     font-size: 0.8em
@@ -261,7 +272,7 @@ span.highlight
 
 /* Links */
 a
-  color: #22579C
+  color= !darkblue2
 
 /* Footer */
 #footer
@@ -270,7 +281,7 @@ a
   position: relative
 
   ul
-    border-top: dotted 1px #808080
+    border-top= "dotted" "1px" !grey4
     padding-top: 4px
     padding-bottom: 20px
 
@@ -287,7 +298,7 @@ a
 
 /* Buttons */
 input.button
-  background-color: #f4f323
+  background-color= !yellow
   font-size: 1em
   border-style: solid
   border-width: 1px
