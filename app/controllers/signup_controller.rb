@@ -39,6 +39,10 @@ class SignupController < ApplicationController
     @page_title = "Now check your email"
   end
   
+  def old_confirmed
+    redirect_to :action => "confirmed"
+  end
+  
   def confirmed
     @page_title = "Confirmed"
     
