@@ -1,6 +1,16 @@
 require 'spec_helper'
 
 describe ApplicationsController do
+  describe "index" do
+    it "should find recent 100 applications with the most recently scraped first" do
+      result = mock
+      Application.should_receive(:find).with(:all, {:limit=>100, :order=>"date_scraped DESC"}).and_return(result)
+      get :index, :format => "rss"
+      assigns[:applications].should == result
+      assigns[:description].should == "Recent applications"
+    end
+  end
+  
   describe "search by address" do
     it "should find recent 100 applications near the address with the most recently scraped first" do
       location, area, scope, result = mock, mock, mock, mock
