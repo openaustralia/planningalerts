@@ -13,7 +13,7 @@ class ApplicationsController < ApplicationController
           location_text = params[:address]
         elsif params[:lat] && params[:lng]
           location = Location.new(params[:lat].to_f, params[:lng].to_f)
-          location_text = "#{params[:lat]}, #{params[:lng]}"
+          location_text = location.to_s
         else
           raise "unexpected parameters"
         end
@@ -23,7 +23,7 @@ class ApplicationsController < ApplicationController
         lower_left = Location.new(params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f)
         upper_right = Location.new(params[:top_right_lat].to_f, params[:top_right_lng].to_f)
         search_area = Area.lower_left_and_upper_right(lower_left, upper_right)
-        @description << "the area (#{params[:bottom_left_lat]}, #{params[:bottom_left_lng]}) (#{params[:top_right_lat]}, #{params[:top_right_lng]})"
+        @description << "the area (#{lower_left}) (#{upper_right})"
       else
         raise "unexpected parameters"
       end

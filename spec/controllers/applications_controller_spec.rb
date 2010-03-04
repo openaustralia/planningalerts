@@ -25,7 +25,7 @@ describe ApplicationsController do
       
       get :index, :format => "rss", :lat => 1.0, :lng => 2.0, :area_size => 4000
       assigns[:applications].should == result
-      assigns[:description].should == "Recent applications within 4 km of 1.0, 2.0"
+      assigns[:description].should == "Recent applications within 4 km of 1.0,2.0"
     end
   end
   
@@ -40,7 +40,7 @@ describe ApplicationsController do
       get :index, :format => "rss", :bottom_left_lat => 1.0, :bottom_left_lng => 2.0,
         :top_right_lat => 3.0, :top_right_lng => 4.0
       assigns[:applications].should == result
-      assigns[:description].should == "Recent applications within the area (1.0, 2.0) (3.0, 4.0)"
+      assigns[:description].should == "Recent applications within the area (1.0,2.0) (3.0,4.0)"
     end
   end
   
