@@ -1,5 +1,5 @@
 #application
-  = image_tag static_google_map_url(:size => "300x300", :address => @application.address), :size => "300x300", :class => "map"
+  = @map.div(:width => 300, :height => 300, :class => "map")
 
   %h3= @application.address
   %p= @application.description

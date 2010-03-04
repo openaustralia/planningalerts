@@ -16,6 +16,9 @@
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
       })();
+    - if @map
+      = Mapstraction.header(:google)
+      = @map.to_html
   %body
     #header
       %h1
