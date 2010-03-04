@@ -1,13 +1,22 @@
 class ApplicationsController < ApplicationController
   def index
+    @description = "Recent applications within "
     if params[:authority_id]
       # TODO Handle the situation where the authority name isn't found
       authority = Authority.find_by_short_name(params[:authority_id])
       @applications = authority.applications(:order => "date_scraped DESC", :limit => 100)
+      @description << authority.full_name
     else
-      # TODO: Move the template over to using an xml builder
       @applications = Application.within(search_area).find(:all, :order => "date_scraped DESC", :limit => 100)
+      if params[:area_size] && params[:address]
+        @description << "#{help.meters_in_words(params[:area_size].to_i)} of #{params[:address]}"
+      elsif params[:area_size] && params[:lat] && params[:lng]
+        @description << "#{help.meters_in_words(params[:area_size].to_i)} of #{params[:lat]}, #{params[:lng]}"
+      elsif params[:bottom_left_lat] && params[:bottom_left_lng] && params[:top_right_lat] && params[:top_right_lng]
+        @description << "the area (#{params[:bottom_left_lat]}, #{params[:bottom_left_lng]}) (#{params[:top_right_lat]}, #{params[:top_right_lng]})"
+      end
     end
+    # TODO: Move the template over to using an xml builder
     render "shared/applications.rss", :layout => false, :content_type => Mime::XML
   end
   
@@ -51,5 +60,14 @@ class ApplicationsController < ApplicationController
     else
       raise "unexpected parameters"
     end
+  end
+
+  def help
+    Helper.instance
+  end
+
+  class Helper
+    include Singleton
+    include ApplicationHelper
   end
 end

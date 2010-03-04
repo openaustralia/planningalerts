@@ -3,7 +3,7 @@
 	<channel>
 		<title>PlanningAlerts.org.au</title>
 		<link><%= root_url %></link>
-		<description></description>
+		<description><%= @description %></description>
         <% @applications.each do |application| -%>
             <item>
                 <title><![CDATA[<%= application.address %>]]></title>
