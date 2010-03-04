@@ -7,14 +7,28 @@ class ApplicationsController < ApplicationController
       @applications = authority.applications(:order => "date_scraped DESC", :limit => 100)
       @description << authority.full_name
     else
-      @applications = Application.within(search_area).find(:all, :order => "date_scraped DESC", :limit => 100)
-      if params[:area_size] && params[:address]
-        @description << "#{help.meters_in_words(params[:area_size].to_i)} of #{params[:address]}"
-      elsif params[:area_size] && params[:lat] && params[:lng]
-        @description << "#{help.meters_in_words(params[:area_size].to_i)} of #{params[:lat]}, #{params[:lng]}"
+      if params[:area_size]
+        if params[:address]
+          location = Location.geocode(params[:address])
+          location_text = params[:address]
+        elsif params[:lat] && params[:lng]
+          location = Location.new(params[:lat].to_f, params[:lng].to_f)
+          location_text = "#{params[:lat]}, #{params[:lng]}"
+        else
+          raise "unexpected parameters"
+        end
+        search_area = Area.centre_and_size(location, params[:area_size].to_i)
+        @description << "#{help.meters_in_words(params[:area_size].to_i)} of #{location_text}"
       elsif params[:bottom_left_lat] && params[:bottom_left_lng] && params[:top_right_lat] && params[:top_right_lng]
+        lower_left = Location.new(params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f)
+        upper_right = Location.new(params[:top_right_lat].to_f, params[:top_right_lng].to_f)
+        search_area = Area.lower_left_and_upper_right(lower_left, upper_right)
         @description << "the area (#{params[:bottom_left_lat]}, #{params[:bottom_left_lng]}) (#{params[:top_right_lat]}, #{params[:top_right_lng]})"
+      else
+        raise "unexpected parameters"
       end
+
+      @applications = Application.within(search_area).find(:all, :order => "date_scraped DESC", :limit => 100)
     end
     respond_to do |format|
       format.html
@@ -46,25 +60,6 @@ class ApplicationsController < ApplicationController
 
   private
   
-  def search_area
-    if params[:area_size]
-      if params[:address]
-        location = Location.geocode(params[:address])
-      elsif params[:lat] && params[:lng]
-        location = Location.new(params[:lat].to_f, params[:lng].to_f)
-      else
-        raise "unexpected parameters"
-      end
-      Area.centre_and_size(location, params[:area_size].to_i)
-    elsif params[:bottom_left_lat] && params[:bottom_left_lng] && params[:top_right_lat] && params[:top_right_lng]
-      lower_left = Location.new(params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f)
-      upper_right = Location.new(params[:top_right_lat].to_f, params[:top_right_lng].to_f)
-      Area.lower_left_and_upper_right(lower_left, upper_right)
-    else
-      raise "unexpected parameters"
-    end
-  end
-
   def help
     Helper.instance
   end
