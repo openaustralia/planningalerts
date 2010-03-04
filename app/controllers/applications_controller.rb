@@ -33,7 +33,7 @@ class ApplicationsController < ApplicationController
     respond_to do |format|
       format.html
       # TODO: Move the template over to using an xml builder
-      format.rss { render "shared/applications.rss", :layout => false, :content_type => Mime::XML }
+      format.rss { render "index.rss", :layout => false, :content_type => Mime::XML }
     end
   end
   
