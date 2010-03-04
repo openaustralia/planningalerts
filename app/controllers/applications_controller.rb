@@ -16,8 +16,11 @@ class ApplicationsController < ApplicationController
         @description << "the area (#{params[:bottom_left_lat]}, #{params[:bottom_left_lng]}) (#{params[:top_right_lat]}, #{params[:top_right_lng]})"
       end
     end
-    # TODO: Move the template over to using an xml builder
-    render "shared/applications.rss", :layout => false, :content_type => Mime::XML
+    respond_to do |format|
+      format.html
+      # TODO: Move the template over to using an xml builder
+      format.rss { render "shared/applications.rss", :layout => false, :content_type => Mime::XML }
+    end
   end
   
   def show
