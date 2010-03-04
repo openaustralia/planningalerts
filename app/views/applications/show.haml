@@ -1,9 +1,9 @@
 #application
   = @map.div(:width => 330, :height => 330, :class => "map")
 
-  %h3= @application.address
-  %p= @application.description
-  %p Council reference: #{@application.council_reference}
+  %h3.address= @application.address
+  %p.description= @application.description
+  %p.council-reference Council reference: #{@application.council_reference}
 
   %ul
     %li= link_to "Look at the original application", @application.info_url
@@ -16,4 +16,4 @@
       - @nearby_applications.each do |app|
         %li
           = link_to app.address, application_path(app)
-          %p= app.description
+          %p.description= app.description
