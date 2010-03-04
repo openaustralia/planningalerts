@@ -17,10 +17,10 @@ class ApplicationsController < ApplicationController
     
     # TODO: Since this is really to do with presentation this should be in a helper
     @map = Mapstraction.new("map_div",:google)
-    @map.control_init(:small => true)
-    @map.center_zoom_init([@application.lat, @application.lng], 14)
-    @map.marker_init(Marker.new([@application.lat, @application.lng],:label => @application.address,
-      :info_bubble => "<b>#{@application.address}</b><p>#{@application.description}</p>"))
+    # Disable dragging of the map. Hmmm.. not quite sure if this is the most concise way of doing this
+    @map.record_init(@map.dragging(false))
+    @map.center_zoom_init([@application.lat, @application.lng], 16)
+    @map.marker_init(Marker.new([@application.lat, @application.lng],:label => @application.address))
     
     # TODO: Display date received and date scraped
     
