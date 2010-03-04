@@ -1,17 +1,19 @@
-%h3= @application.address
-%p= @application.description
-%p Council reference: #{@application.council_reference}
+#application
+  = image_tag static_google_map_url(:size => "300x300", :address => @application.address), :size => "300x300", :class => "map"
 
-= image_tag static_google_map_url(:size => "512x512", :address => @application.address), :size => "512x512"
+  %h3= @application.address
+  %p= @application.description
+  %p Council reference: #{@application.council_reference}
 
-%p
-  = link_to "More information", @application.info_url
-  = link_to "What do you think?", @application.comment_url
+  %ul
+    %li= link_to "Look at the original application", @application.info_url
+    %li= link_to "Support or object to this application", @application.comment_url
 
 - unless @nearby_applications.empty?
-  %h3 Other recent applications nearby (within #{meters_in_words(@nearby_distance)})
-  %ul
-    - @nearby_applications.each do |app|
-      %li
-        = link_to app.address, application_path(app)
-        %p= app.description
+  #nearby-applications
+    %h3 Other recent applications nearby (within #{meters_in_words(@nearby_distance)})
+    %ul
+      - @nearby_applications.each do |app|
+        %li
+          = link_to app.address, application_path(app)
+          %p= app.description
