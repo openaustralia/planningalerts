@@ -15,7 +15,15 @@ class Location < SimpleDelegator
   def self.geocode(address)
     Location.new(Geokit::Geocoders::GoogleGeocoder.geocode(address, :bias => "au"))
   end
+
+  def suburb
+    city
+  end
   
+  def postcode
+    zip
+  end
+
   # Distance given is in metres
   def endpoint(bearing, distance)
     Location.new(__getobj__.endpoint(bearing, distance / 1000.0, :units => :kms))

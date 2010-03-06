@@ -94,11 +94,14 @@ class Application < ActiveRecord::Base
   # TODO: Optimisation is to make sure that this doesn't get called again on save when the address hasn't changed
   def geocode
     # Only geocode if location hasn't been set
-    if self.lat.nil? && self.lng.nil?
+    if self.lat.nil? || self.lng.nil? || self.suburb.nil? || self.state.nil? || self.postcode.nil?
       r = Location.geocode(address)
       if r.success
         self.lat = r.lat
         self.lng = r.lng
+        self.suburb = r.suburb
+        self.state = r.state
+        self.postcode = r.postcode
       else
         logger.error "Couldn't geocode address: #{address}"
       end
