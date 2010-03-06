@@ -2,7 +2,7 @@ require 'open-uri'
 
 class Application < ActiveRecord::Base
   belongs_to :authority
-  before_save :lookup_comment_tinyurl, :lookup_info_tinyurl, :set_date_scraped, :geocode, :set_map_url
+  before_save :lookup_comment_tinyurl, :lookup_info_tinyurl, :set_date_scraped, :geocode
   
   named_scope :within, lambda { |a|
     { :conditions => ['lat > ? AND lng > ? AND lat < ? AND lng < ?', a.lower_left.lat, a.lower_left.lng, a.upper_right.lat, a.upper_right.lng] }
@@ -60,16 +60,13 @@ class Application < ActiveRecord::Base
     end
   end
   
-  private
-  
   # TODO: This is very similar to the method in the api_howto_helper. Maybe they should be together?
-  def googlemap_url_from_address(address, zoom = 15)
-      return "http://maps.google.com/maps?q=#{CGI.escape(address)}&z=#{zoom}";
+  def map_url
+    zoom = 15
+    "http://maps.google.com/maps?q=#{CGI.escape(address)}&z=#{zoom}";
   end
 
-  def set_map_url
-    self.map_url = googlemap_url_from_address(address)
-  end
+  private
   
   # TODO: rename date_scraped column to updated_at so that we can use rails "magic fields"
   def set_date_scraped

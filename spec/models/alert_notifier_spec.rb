@@ -39,9 +39,9 @@ describe AlertNotifier do
       @original_emails_sent = Stat.emails_sent
       @original_applications_sent = Stat.applications_sent
       @a1 = Application.new(:address => "Foo Street, Bar", :council_reference => "a1", :description => "Knock something down",
-        :info_tinyurl => "tinyurl1", :map_url => "map1", :comment_tinyurl => "tinyurl2")
+        :info_tinyurl => "tinyurl1", :comment_tinyurl => "tinyurl2")
       @a2 = Application.new(:address => "Bar Street, Foo", :council_reference => "a2", :description => "Put something up",
-        :info_tinyurl => "tinyurl3", :map_url => "map2", :comment_tinyurl => "tinyurl4")
+        :info_tinyurl => "tinyurl3", :comment_tinyurl => "tinyurl4")
       @email = AlertNotifier.create_alert(@alert, [@a1, @a2])
     end
     
