@@ -363,9 +363,9 @@ function scrape_applications_islington ($search_url, $info_url_base, $comment_ur
     //Send a text email
     function send_text_email($to, $from_name, $from_email, $subject, $body){
         
-    	$headers  = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'Content-type: text/plain; charset=iso-8859-1' . "\r\n";
-		$headers .= 'From: ' . $from_name. ' <' . $from_email . ">\r\n";
+    	$headers  = 'MIME-Version: 1.0' . "\n";
+		$headers .= 'Content-type: text/plain; charset=iso-8859-1' . "\n";
+		$headers .= 'From: ' . $from_name. ' <' . $from_email . ">\n";
 		    
 		mail($to, $subject, $body, $headers);
 
