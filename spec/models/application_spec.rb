@@ -5,17 +5,30 @@ describe Application do
     Authority.delete_all
     @auth = Authority.create!(:full_name => "Fiddlesticks", :short_name => "Fiddle")
     # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
-    Location.stub!(:geocode).and_return(mock(:lat => 1.0, :lng => 2.0, :success => true))
+    Location.stub!(:geocode).and_return(mock(:lat => 1.0, :lng => 2.0, :suburb => "Glenbrook", :state => "NSW",
+      :postcode => "2773", :success => true))
     # Stub out the URL shortener so that by default the tests don't require a network connection
     Application.stub!(:shorten_url).and_return(nil)
   end
   
   describe "within" do
     it "should limit the results to those within the given area" do
-      a1 = @auth.applications.create!(:lat => 2.0, :lng => 3.0, :council_reference => "r1") # Within the box
-      a2 = @auth.applications.create!(:lat => 4.0, :lng => 3.0, :council_reference => "r2") # Outside the box
-      a3 = @auth.applications.create!(:lat => 2.0, :lng => 1.0, :council_reference => "r3") # Outside the box
-      a4 = @auth.applications.create!(:lat => 1.5, :lng => 3.5, :council_reference => "r4") # Within the box
+      a1 = @auth.applications.create!(:council_reference => "r1") # Within the box
+      a1.lat = 2.0
+      a1.lng = 3.0
+      a1.save!
+      a2 = @auth.applications.create!(:council_reference => "r2") # Outside the box
+      a2.lat = 4.0
+      a2.lng = 3.0
+      a2.save!
+      a3 = @auth.applications.create!(:council_reference => "r3") # Outside the box
+      a3.lat = 2.0
+      a3.lng = 1.0
+      a3.save!
+      a4 = @auth.applications.create!(:council_reference => "r4") # Within the box
+      a4.lat = 1.5
+      a4.lng = 3.5
+      a4.save!
       r = Application.within(Area.lower_left_and_upper_right(Location.new(1.0, 2.0), Location.new(3.0, 4.0)))
       r.count.should == 2
       r[0].should == a1
@@ -47,7 +60,8 @@ describe Application do
     end
     
     it "should geocode the address" do
-      loc = mock("Location", :lat => -33.772609, :lng => 150.624263, :success => true)
+      loc = mock("Location", :lat => -33.772609, :lng => 150.624263, :suburb => "Glenbrook", :state => "NSW",
+        :postcode => "2773", :success => true)
       Location.should_receive(:geocode).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
       a = @auth.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1")
       a.lat.should == loc.lat
