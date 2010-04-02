@@ -1,0 +1,21 @@
+#application
+  = @map.div(:width => 330, :height => 330, :class => "map")
+
+  %h3.address= @application.address
+  %p.description= @application.description
+  %p.council-reference Council reference: #{@application.council_reference}
+
+  %ul
+    %li
+      Source:
+      = link_to @application.authority.full_name, @application.info_url
+    %li= link_to "Support or object to this application", @application.comment_url
+
+- unless @nearby_applications.empty?
+  #nearby-applications
+    %h3 Other recent applications nearby (within #{meters_in_words(@nearby_distance)})
+    %ul
+      - @nearby_applications.each do |app|
+        %li
+          = link_to app.address, application_path(app)
+          %p.description= app.description
