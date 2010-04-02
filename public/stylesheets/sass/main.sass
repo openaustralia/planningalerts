@@ -6,6 +6,9 @@
 !yellow = #f4f323
 !transparentyellow = rgba(244,243,35,0.5)
 
+!text_box_width = 400px
+!page_width = 770px
+
 body
   font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif
   text-align: center
@@ -14,7 +17,7 @@ body
   color= !almostblack
 
 #page
-  width: 580px
+  width= !page_width
   margin: 0 auto
   background: white
   text-align: left
@@ -96,7 +99,7 @@ h3, h4
   margin-bottom: 2em
 
   ul
-    width: 500px
+    width= !page_width
     margin: 0 auto
 
     li
@@ -171,13 +174,13 @@ input.textbox
   margin-bottom: 1em
 
   input.textbox
-    width: 270px
+    width= !text_box_width
 
 #liAddress
   height: 3.7em
 
   input.textbox
-    width: 270px
+    width= !text_box_width
 
   small
     position: relative
