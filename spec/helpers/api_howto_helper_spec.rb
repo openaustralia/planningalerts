@@ -9,8 +9,7 @@ describe ApiHowtoHelper do
     helper.api_example_address_url.should == "http://test.host/applications.rss?address=24+Bruce+Road+Glenbrook%2C+NSW+2773&amp;area_size=4000"
     helper.api_example_latlong_url.should == "http://test.host/applications.rss?area_size=4000&amp;lat=-33.772609&amp;lng=150.624263"
     helper.api_example_area_url.should == "http://test.host/applications.rss?bottom_left_lat=-38.556757&amp;bottom_left_lng=140.83374&amp;top_right_lat=-29.113775&amp;top_right_lng=153.325195"
-    # TODO: Make the authority name in the url look something like "blue_mountains" rather than "Blue Mountains"
-    helper.api_example_authority_url.should == "http://test.host/authorities/Blue%20Mountains/applications.rss"
+    helper.api_example_authority_url.should == "http://test.host/authorities/blue_mountains/applications.rss"
   end
   
   it "should display the example urls nicely" do

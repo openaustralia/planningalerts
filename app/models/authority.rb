@@ -27,8 +27,13 @@ class Authority < ActiveRecord::Base
     feed_url.sub("{year}", date.year.to_s).sub("{month}", date.month.to_s).sub("{day}", date.day.to_s)
   end
   
-  def short_name_encoded
+  # So that the encoding function can be used elsewhere
+  def self.short_name_encoded(short_name)
     short_name.downcase.gsub(' ', '_').gsub(/\W/, '')
+  end
+  
+  def short_name_encoded
+    Authority.short_name_encoded(short_name)
   end
   
   def self.find_by_short_name_encoded(n)

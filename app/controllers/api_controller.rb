@@ -13,7 +13,7 @@ class ApiController < ApplicationController
         :bottom_left_lat => params[:bottom_left_lat], :bottom_left_lng => params[:bottom_left_lng],
         :top_right_lat => params[:top_right_lat], :top_right_lng => params[:top_right_lng])
     when "authority"
-      redirect_to authority_applications_url(:format => "rss", :authority_id => params[:authority])
+      redirect_to authority_applications_url(:format => "rss", :authority_id => Authority.short_name_encoded(params[:authority]))
     else
       raise "unexpected value for :call"
     end

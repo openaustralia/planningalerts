@@ -58,11 +58,11 @@ describe ApplicationsController do
     it "should find recent 100 applications for an authority with the most recently scraped first" do
       authority, result = mock, mock
 
-      Authority.should_receive(:find_by_short_name).with("Blue Mountains").and_return(authority)
+      Authority.should_receive(:find_by_short_name_encoded).with("blue_mountains").and_return(authority)
       authority.should_receive(:applications).with(:limit=>100, :order=>"date_scraped DESC").and_return(result)
       authority.should_receive(:full_name).and_return("Blue Mountains City Council")
 
-      get :index, :format => "rss", :authority_id => "Blue Mountains"
+      get :index, :format => "rss", :authority_id => "blue_mountains"
       assigns[:applications].should == result
       assigns[:description].should == "Recent applications within Blue Mountains City Council"
     end

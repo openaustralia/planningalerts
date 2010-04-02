@@ -3,7 +3,7 @@ class ApplicationsController < ApplicationController
     @description = "Recent applications"
     if params[:authority_id]
       # TODO Handle the situation where the authority name isn't found
-      authority = Authority.find_by_short_name(params[:authority_id])
+      authority = Authority.find_by_short_name_encoded(params[:authority_id])
       @applications = authority.applications(:order => "date_scraped DESC", :limit => 100)
       @description << " within #{authority.full_name}"
     else

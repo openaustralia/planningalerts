@@ -27,7 +27,7 @@ module Configuration
   # Values used in the API examples
   API_EXAMPLE_ADDRESS = "24 Bruce Road Glenbrook, NSW 2773"
   API_EXAMPLE_SIZE = 4000
-  API_EXAMPLE_AUTHORITY = "Blue Mountains"
+  API_EXAMPLE_AUTHORITY = "blue_mountains"
 
   # This lat/lng is for 24 Bruce Road as well
   API_EXAMPLE_LAT = -33.772609
