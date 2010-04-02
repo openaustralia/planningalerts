@@ -26,4 +26,13 @@ class Authority < ActiveRecord::Base
   def feed_url_for_date(date)
     feed_url.sub("{year}", date.year.to_s).sub("{month}", date.month.to_s).sub("{day}", date.day.to_s)
   end
+  
+  def short_name_encoded
+    short_name.downcase.gsub(' ', '_').gsub(/\W/, '')
+  end
+  
+  def self.find_by_short_name_encoded(n)
+    # TODO: Potentially not very efficient when number of authorities is high. Loads all authorities into memory
+    find(:all).find{|a| a.short_name_encoded == n}
+  end
 end

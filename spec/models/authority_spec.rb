@@ -43,4 +43,24 @@ describe Authority do
     date = Date.new(2009, 2, 1)
     a.feed_url_for_date(date).should == "http://example.org?year=2009&month=2&day=1"
   end
+  
+  describe "short name encoded" do
+    before :each do
+      @a1 = Authority.create!(:short_name => "Blue Mountains", :full_name => "Blue Mountains City Council")
+      @a2 = Authority.create!(:short_name => "Blue Mountains (new one)", :full_name => "Blue Mountains City Council (fictional new one)")
+    end
+    
+    it "should be constructed by replacing space by underscores and making it all lowercase" do
+      @a1.short_name_encoded.should == "blue_mountains"
+    end
+    
+    it "should remove any non-word characters (except for underscore)" do
+      @a2.short_name_encoded.should == "blue_mountains_new_one"
+    end
+    
+    it "should find a authority by the encoded name" do
+      Authority.find_by_short_name_encoded("blue_mountains").should == @a1
+      Authority.find_by_short_name_encoded("blue_mountains_new_one").should == @a2
+    end
+  end
 end
