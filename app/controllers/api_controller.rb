@@ -15,7 +15,7 @@ class ApiController < ApplicationController
     when "authority"
       redirect_to authority_applications_url(:format => "rss", :authority_id => Authority.short_name_encoded(params[:authority]))
     else
-      raise "unexpected value for :call"
+      render :text => "unexpected value for parameter call. Accepted values: address, point, area and authority"
     end
   end
   
