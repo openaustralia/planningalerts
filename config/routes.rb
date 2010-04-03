@@ -37,6 +37,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'faq.php', :controller => 'static', :action => 'old_faq'
   map.connect 'getinvolved.php', :controller => 'static', :action => 'old_get_involved'
   map.connect 'api.php', :controller => 'api', :action => 'old_index'
+  map.connect 'api', :controller => 'api', :action => 'old_index'
   map.connect 'confirmed.php', :controller => 'signup', :action => 'old_confirmed'
   map.connect 'unsubscribe.php', :controller => 'signup', :action => 'old_unsubscribe'
   
