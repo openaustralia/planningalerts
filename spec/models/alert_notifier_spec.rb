@@ -73,11 +73,11 @@ describe AlertNotifier do
     end
     
     it "should include a link to the georss feed" do
-      @email.body.should include_text("http://dev.planningalerts.org.au/api?address=24+Bruce+Rd%2C+Glenbrook+NSW+2773&area_size=800&call=address")
+      @email.body.should include_text("http://dev.planningalerts.org.au/applications.rss?address=24+Bruce+Rd%2C+Glenbrook+NSW+2773&area_size=800")
     end
     
     it "should include a link to the maps version of the georss feed" do
-      @email.body.should include_text("http://maps.google.com.au/maps?q=http%3A%2F%2Fdev.planningalerts.org.au%2Fapi%3Faddress%3D24%2BBruce%2BRd%252C%2BGlenbrook%2BNSW%2B2773%26area_size%3D800%26call%3Daddress")
+      @email.body.should include_text("http://maps.google.com.au/maps?q=http%3A%2F%2Fdev.planningalerts.org.au%2Fapplications.rss%3Faddress%3D24%2BBruce%2BRd%252C%2BGlenbrook%2BNSW%2B2773%26area_size%3D800")
     end
     
     it "should include a link to the unsubscribe url" do
