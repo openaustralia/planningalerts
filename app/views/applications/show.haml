@@ -14,8 +14,7 @@
 - unless @nearby_applications.empty?
   #nearby-applications
     %h3 Other recent applications nearby (within #{meters_in_words(@nearby_distance)})
-    %ul
+    %dl
       - @nearby_applications.each do |app|
-        %li
-          = link_to app.address, application_path(app)
-          %p.description= app.description
+        %dt.address= link_to app.address, application_path(app)
+        %dd.description= app.description

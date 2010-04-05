@@ -1,6 +1,5 @@
 %h3= @description
-%ul
+%dl
   - @applications.each do |app|
-    %li
-      = link_to app.address, application_path(app)
-      %p.description= app.description
+    %dt.address= link_to app.address, application_path(app)
+    %dd.description= app.description
