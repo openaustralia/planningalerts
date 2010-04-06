@@ -5,7 +5,12 @@
   %h3.address= @application.address
   %p.description= @application.description
   %p.council-reference Council reference: #{@application.council_reference}
-
+  %p.dates
+    We found this application for you on the planning authority's website #{time_ago_in_words(@application.date_scraped)} ago.
+    - if @application.date_recieved
+      It was received by them #{distance_of_time_in_words(@application.date_recieved, @application.date_scraped)} earlier.
+    - else
+      The date it was received by them was not recorded.
   %ul
     %li
       Source:
