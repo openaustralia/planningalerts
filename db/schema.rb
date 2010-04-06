@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100306203710) do
+ActiveRecord::Schema.define(:version => 20100406072024) do
 
   create_table "alerts", :force => true do |t|
     t.string   "email",            :limit => 120, :null => false
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20100306203710) do
     t.float    "lat"
     t.float    "lng"
     t.datetime "date_scraped",                      :null => false
-    t.date     "date_recieved"
+    t.date     "date_received"
     t.string   "suburb",            :limit => 50
     t.string   "state",             :limit => 10
     t.string   "postcode",          :limit => 4

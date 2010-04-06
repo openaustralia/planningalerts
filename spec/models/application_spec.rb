@@ -132,7 +132,7 @@ describe Application do
       r1.description.should == "Knocking a house down"
       r1.info_url.should == "http://fiddle.gov.au/info/R1"
       r1.comment_url.should == "http://fiddle.gov.au/comment/R1"
-      r1.date_recieved.should == @date
+      r1.date_received.should == @date
     end
     
     it "should not create new applications when they already exist" do
