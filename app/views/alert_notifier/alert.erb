@@ -5,9 +5,7 @@ The following new planning applications have been found near <%= @alert.address 
 
 <%= app.description %>
 
-MORE INFORMATION: <%= app.info_tinyurl %>
-MAP: <%= app.map_url %>
-WHAT DO YOU THINK?: <%= app.comment_tinyurl %>
+For more information: <%= application_url(:host => @host, :id => app.id) %>
 
 =============================
 

@@ -38,9 +38,9 @@ describe AlertNotifier do
     before :each do
       @original_emails_sent = Stat.emails_sent
       @original_applications_sent = Stat.applications_sent
-      @a1 = Application.new(:address => "Foo Street, Bar", :council_reference => "a1", :description => "Knock something down",
+      @a1 = mock_model(Application, :address => "Foo Street, Bar", :council_reference => "a1", :description => "Knock something down",
         :info_tinyurl => "tinyurl1", :comment_tinyurl => "tinyurl2")
-      @a2 = Application.new(:address => "Bar Street, Foo", :council_reference => "a2", :description => "Put something up",
+      @a2 = mock_model(Application, :address => "Bar Street, Foo", :council_reference => "a2", :description => "Put something up",
         :info_tinyurl => "tinyurl3", :comment_tinyurl => "tinyurl4")
       @email = AlertNotifier.create_alert(@alert, [@a1, @a2])
     end
@@ -67,9 +67,7 @@ describe AlertNotifier do
     end
     
     it "should include useful links for the application" do
-      @email.body.should include_text("MORE INFORMATION: #{@a1.info_tinyurl}")
-      @email.body.should include_text("MAP: #{@a1.map_url}")
-      @email.body.should include_text("WHAT DO YOU THINK?: #{@a1.comment_tinyurl}")
+      @email.body.should include_text("For more information: http://dev.planningalerts.org.au/applications/#{@a1.id}")
     end
     
     it "should include a link to the georss feed" do

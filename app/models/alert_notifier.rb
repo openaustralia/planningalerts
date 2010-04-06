@@ -13,6 +13,7 @@ class AlertNotifier < ActionMailer::Base
     @alert = alert
     @applications = applications
 
+    @host = Configuration::HOST
     @georss_url = applications_url(:format => "rss", :host => Configuration::HOST, :address => @alert.address, :area_size => @alert.area_size_meters)
     @unsubscribe_url = unsubscribe_url(:host => Configuration::HOST, :cid => @alert.confirm_id)
     
