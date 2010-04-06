@@ -1,6 +1,6 @@
 #application
-  = link_to @map.div(:width => 330, :height => 330, :class => "map"), @application.map_url
-  = @map.to_html
+  = link_to map(@application).div(:width => 330, :height => 330, :class => "map"), @application.map_url
+  = map(@application).to_html
 
   %h3.address= @application.address
   %p.description= @application.description
