@@ -2,7 +2,7 @@ require 'open-uri'
 
 class Application < ActiveRecord::Base
   belongs_to :authority
-  before_save :lookup_comment_tinyurl, :lookup_info_tinyurl, :set_date_scraped, :geocode
+  before_save :lookup_comment_tinyurl, :lookup_info_tinyurl, :geocode
   
   named_scope :within, lambda { |a|
     { :conditions => ['lat > ? AND lng > ? AND lat < ? AND lng < ?', a.lower_left.lat, a.lower_left.lng, a.upper_right.lat, a.upper_right.lng] }
@@ -54,7 +54,8 @@ class Application < ActiveRecord::Base
           :info_url => a.at('info_url').inner_text,
           :comment_url => a.at('comment_url').inner_text,
           # TODO date_recieved attribute is misspelled!
-          :date_recieved => a.at('date_received').inner_text)
+          :date_recieved => a.at('date_received').inner_text,
+          :date_scraped => DateTime.now)
         info_logger.info "Saving application #{council_reference}"
       end
     end
@@ -67,11 +68,6 @@ class Application < ActiveRecord::Base
   end
 
   private
-  
-  # TODO: rename date_scraped column to updated_at so that we can use rails "magic fields"
-  def set_date_scraped
-    self.date_scraped = DateTime.now
-  end
   
   # Very thin wrapper around ShortURL gem
   def self.shorten_url(url)

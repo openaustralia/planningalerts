@@ -13,19 +13,19 @@ describe Application do
   
   describe "within" do
     it "should limit the results to those within the given area" do
-      a1 = @auth.applications.create!(:council_reference => "r1") # Within the box
+      a1 = @auth.applications.create!(:council_reference => "r1", :date_scraped => Time.now) # Within the box
       a1.lat = 2.0
       a1.lng = 3.0
       a1.save!
-      a2 = @auth.applications.create!(:council_reference => "r2") # Outside the box
+      a2 = @auth.applications.create!(:council_reference => "r2", :date_scraped => Time.now) # Outside the box
       a2.lat = 4.0
       a2.lng = 3.0
       a2.save!
-      a3 = @auth.applications.create!(:council_reference => "r3") # Outside the box
+      a3 = @auth.applications.create!(:council_reference => "r3", :date_scraped => Time.now) # Outside the box
       a3.lat = 2.0
       a3.lng = 1.0
       a3.save!
-      a4 = @auth.applications.create!(:council_reference => "r4") # Within the box
+      a4 = @auth.applications.create!(:council_reference => "r4", :date_scraped => Time.now) # Within the box
       a4.lat = 1.5
       a4.lng = 3.5
       a4.save!
@@ -37,25 +37,18 @@ describe Application do
   end
   
   describe "on saving" do
-    it "should set the date_scraped to the current time and date" do
-      date = DateTime.civil(2009,1,1)
-      DateTime.should_receive(:now).and_return(date)
-      a = @auth.applications.create!(:council_reference => "r1")
-      a.date_scraped.utc.should == date
-    end
-    
     it "should make a tinyurl version of the comment_url" do
       # Mocking Application.shorten_url rather than ShortURL.shorten so that we can easily check if the real url
       # shortener is being called during the tests (which we don't want so that our tests don't depend on
       # a network connection)
       Application.should_receive(:shorten_url).with("http://example.org/comment").and_return("http://tinyurl.com/abcdef")
-      a = @auth.applications.create!(:comment_url => "http://example.org/comment", :council_reference => "r1")
+      a = @auth.applications.create!(:comment_url => "http://example.org/comment", :council_reference => "r1", :date_scraped => Time.now)
       a.comment_tinyurl.should == "http://tinyurl.com/abcdef"
     end
     
     it "should make a tinyurl version of the info_url" do
       Application.should_receive(:shorten_url).with("http://example.org/info").and_return("http://tinyurl.com/1234")
-      a = @auth.applications.create!(:info_url => "http://example.org/info", :council_reference => "r1")
+      a = @auth.applications.create!(:info_url => "http://example.org/info", :council_reference => "r1", :date_scraped => Time.now)
       a.info_tinyurl.should == "http://tinyurl.com/1234"      
     end
     
@@ -63,7 +56,7 @@ describe Application do
       loc = mock("Location", :lat => -33.772609, :lng => 150.624263, :suburb => "Glenbrook", :state => "NSW",
         :postcode => "2773", :success => true)
       Location.should_receive(:geocode).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
-      a = @auth.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1")
+      a = @auth.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1", :date_scraped => Time.now)
       a.lat.should == loc.lat
       a.lng.should == loc.lng
     end
@@ -75,7 +68,7 @@ describe Application do
       # Ignore the warning message (from the tinyurl'ing)
       logger.stub!(:warn)
 
-      a = @auth.applications.new(:address => "dfjshd", :council_reference => "r1")
+      a = @auth.applications.new(:address => "dfjshd", :council_reference => "r1", :date_scraped => Time.now)
       a.stub!(:logger).and_return(logger)
       
       a.save!
@@ -84,7 +77,7 @@ describe Application do
     end
     
     it "should set the url for showing the address on a google map" do
-      a = @auth.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1")
+      a = @auth.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1", :date_scraped => Time.now)
       a.map_url.should == "http://maps.google.com/maps?q=24+Bruce+Road%2C+Glenbrook%2C+NSW&z=15"
     end
   end
