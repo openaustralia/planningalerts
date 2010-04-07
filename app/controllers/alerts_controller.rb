@@ -67,4 +67,20 @@ class AlertsController < ApplicationController
     @alert = Alert.find_by_confirm_id(params[:cid])
     @alert.delete
   end
+  
+  def area
+    @zone_sizes = {'s' => Configuration::SMALL_ZONE_SIZE,
+      'm' => Configuration::MEDIUM_ZONE_SIZE,
+      'l' => Configuration::LARGE_ZONE_SIZE}
+
+    alert = Alert.find_by_confirm_id(params[:cid])
+    if request.get?
+      @size = @zone_sizes.invert[alert.area_size_meters]
+    else
+      @size = params[:size]
+      alert.area_size_meters = @zone_sizes[@size]
+      alert.save!
+      flash[:notice] = "Your alert size area has been updated"
+    end
+  end
 end

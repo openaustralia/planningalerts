@@ -12,13 +12,20 @@ When /^I fill in the street address with "([^\"]*)"$/ do |value|
   fill_in("txtAddress", :with => value)
 end
 
-When /^I click on the unsubscribe link in the email alert for "([^\"]*)"$/ do |address|
-  u = Alert.find_by_address(address)
-  visit unsubscribe_url(:cid => u.confirm_id)
+When /^I click the "([^\"]*)" link in the email alert for "([^\"]*)"$/ do |link, address|
+  alert = Alert.find_by_address(address)
+  case link
+  when "unsubscribe"
+    visit unsubscribe_url(:cid => alert.confirm_id)
+  when "change alert size"
+    visit alert_area_url(:cid => alert.confirm_id)    
+  else
+    pending
+  end
 end
 
-Then /^I should receive email alerts for the street address "([^\"]*)"$/ do |address|
-  Alert.find(:first, :conditions => {:address => address, :email => current_email_address, :confirmed => true}).should_not be_nil
+Then /^I should receive email alerts for the street address "([^\"]*)" with a size of "([^\"]*)"$/ do |address, size|
+  Alert.find(:first, :conditions => {:address => address, :area_size_meters => size, :email => current_email_address, :confirmed => true}).should_not be_nil
 end
 
 Then /^I should not receive email alerts for the street address "([^\"]*)"$/ do |address|
