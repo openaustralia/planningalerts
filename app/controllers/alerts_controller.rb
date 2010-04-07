@@ -3,9 +3,7 @@ class AlertsController < ApplicationController
 
   def signup
     @page_title = "Email alerts of planning applications near you"
-    @zone_sizes = {'s' => Configuration::SMALL_ZONE_SIZE,
-      'm' => Configuration::MEDIUM_ZONE_SIZE,
-      'l' => Configuration::LARGE_ZONE_SIZE}
+    @zone_sizes = zone_sizes
     if request.get?
       @alert_area_size = "m"
       @email = ""
@@ -69,9 +67,7 @@ class AlertsController < ApplicationController
   end
   
   def area
-    @zone_sizes = {'s' => Configuration::SMALL_ZONE_SIZE,
-      'm' => Configuration::MEDIUM_ZONE_SIZE,
-      'l' => Configuration::LARGE_ZONE_SIZE}
+    @zone_sizes = zone_sizes
 
     @alert = Alert.find_by_confirm_id(params[:cid])
     if request.get?
@@ -82,5 +78,13 @@ class AlertsController < ApplicationController
       @alert.save!
       flash[:notice] = "Your alert size area has been updated"
     end
+  end
+  
+  private
+  
+  def zone_sizes
+    {'s' => Configuration::SMALL_ZONE_SIZE,
+      'm' => Configuration::MEDIUM_ZONE_SIZE,
+      'l' => Configuration::LARGE_ZONE_SIZE}
   end
 end
