@@ -4,9 +4,13 @@
   .attention
     %h3 Thanks, your alert has been activated
     %p
-      You will now receive email alerts for any planning applications we find near
-      %strong= @alert.address
-      (within approximately #{meters_in_words(@alert.area_size_meters)}).
-      If this alert doesn't cover everywhere you are interested in
-      %span.highlight
-        = link_to "you can sign up for multiple alerts", signup_path
+      You will now receive email alerts for any planning applications we find near <strong>#{@alert.address}</strong>
+      within an area of approximately <strong>#{meters_in_words(@alert.area_size_meters)}</strong>.
+  %p
+    You will receive an email alert whenever we find out about a new planning application within a #{meters_in_words(@alert.area_size_meters)} area of the address.
+    If you want to <span class="highlight">change the size of this area #{link_to "click here", alert_area_url(:cid => @alert.confirm_id)}</span>.
+    You can also do this at a later date by following the link in an email alert.
+  %p
+    If you want alerts around another address as well
+    %span.highlight
+      = link_to "you can sign up for multiple alerts", signup_path
