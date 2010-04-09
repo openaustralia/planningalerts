@@ -1,7 +1,7 @@
 class AlertsController < ApplicationController
   caches_page :index, :check_mail
 
-  def index
+  def signup
     @page_title = "Email alerts of planning applications near you"
     @zone_sizes = {'s' => Configuration::SMALL_ZONE_SIZE,
       'm' => Configuration::MEDIUM_ZONE_SIZE,

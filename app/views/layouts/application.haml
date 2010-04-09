@@ -41,7 +41,7 @@
         = li_selected(:controller => "static", :action => "faq") do
           - link_to faq_path do
             %acronym{ :title => "Frequently asked questions"} FAQ
-        = li_selected(:controller => "alerts", :action => ["index", "check_mail"]) do
+        = li_selected(:controller => "alerts", :action => ["signup", "check_mail"]) do
           - link_to 'Sign Up', signup_path
     #page
       #content

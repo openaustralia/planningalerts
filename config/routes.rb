@@ -43,7 +43,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'unsubscribe.php', :controller => 'alerts', :action => 'old_unsubscribe'
   map.connect 'unsubscribe', :controller => 'alerts', :action => 'old_unsubscribe'
   
-  map.signup '', :controller => "alerts"
+  map.signup '', :controller => "alerts", :action => "signup"
   map.root :signup
   map.connect 'alerts/preview', :controller => 'alerts', :action => 'preview'
   map.check_mail 'alerts/checkmail', :controller => 'alerts', :action => 'check_mail'
