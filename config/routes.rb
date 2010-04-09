@@ -39,14 +39,16 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'api.php', :controller => 'api', :action => 'old_index'
   map.connect 'api', :controller => 'api', :action => 'old_index'
   map.connect 'confirmed.php', :controller => 'signup', :action => 'old_confirmed'
+  map.connect 'confirmed', :controller => 'signup', :action => 'old_confirmed'
   map.connect 'unsubscribe.php', :controller => 'signup', :action => 'old_unsubscribe'
+  map.connect 'unsubscribe', :controller => 'signup', :action => 'old_unsubscribe'
   
   map.signup '', :controller => "signup"
   map.root :signup
-  map.connect 'preview', :controller => 'signup', :action => 'preview'
-  map.check_mail 'checkmail', :controller => 'signup', :action => 'check_mail'
-  map.confirmed 'confirmed', :controller => 'signup', :action => 'confirmed'
-  map.unsubscribe 'unsubscribe', :controller => 'signup', :action => 'unsubscribe'
+  map.connect 'alerts/preview', :controller => 'signup', :action => 'preview'
+  map.check_mail 'alerts/checkmail', :controller => 'signup', :action => 'check_mail'
+  map.confirmed 'alerts/:cid/confirmed', :controller => 'signup', :action => 'confirmed'
+  map.unsubscribe 'alerts/:cid/unsubscribe', :controller => 'signup', :action => 'unsubscribe'
 
   map.api_howto 'api/howto', :controller => 'api', :action => 'howto'
   map.api 'api', :controller => 'api', :action => 'index'

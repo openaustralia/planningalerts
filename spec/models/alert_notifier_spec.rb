@@ -26,7 +26,7 @@ describe AlertNotifier do
     end
   
     it "should include a confirmation url" do
-      @email.body.should include_text("http://dev.planningalerts.org.au/confirmed?cid=abcdef")
+      @email.body.should include_text("http://dev.planningalerts.org.au/alerts/abcdef/confirmed")
     end
   
     it "should include the address for the alert" do
@@ -79,7 +79,7 @@ describe AlertNotifier do
     end
     
     it "should include a link to the unsubscribe url" do
-      @email.body.should include_text("http://dev.planningalerts.org.au/unsubscribe?cid=abcdef")
+      @email.body.should include_text("http://dev.planningalerts.org.au/alerts/abcdef/unsubscribe")
     end
     
     it "should update the statistics" do

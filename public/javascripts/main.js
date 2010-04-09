@@ -18,7 +18,7 @@ function previewMap(sAreaSize) {
 		document.getElementById('txtAddress').className = document.getElementById('txtAddress').className.replace(" error","");
 		
 		//build url and open new window
-    	var sUrl = 'preview?address=' + sAddress + '&area_size=' + sAreaSize;
+    	var sUrl = 'alerts/preview?address=' + sAddress + '&area_size=' + sAreaSize;
 		document.open(sUrl,'name', 'width=515,height=490');
 	}else{
 		showWarning(sWarnings);
