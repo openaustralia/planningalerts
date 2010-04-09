@@ -40,7 +40,7 @@ class SignupController < ApplicationController
   end
   
   def old_confirmed
-    redirect_to :action => "confirmed"
+    redirect_to :action => "confirmed", :cid => params[:cid]
   end
   
   def confirmed
@@ -58,7 +58,7 @@ class SignupController < ApplicationController
   end
   
   def old_unsubscribe
-    redirect_to :action => "unsubscribe"
+    redirect_to :action => "unsubscribe", :cid => params[:cid]
   end
   
   def unsubscribe
