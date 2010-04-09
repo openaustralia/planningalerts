@@ -1,4 +1,4 @@
-class SignupController < ApplicationController
+class AlertsController < ApplicationController
   caches_page :index, :check_mail
 
   def index

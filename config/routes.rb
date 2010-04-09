@@ -38,17 +38,17 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'getinvolved.php', :controller => 'static', :action => 'old_get_involved'
   map.connect 'api.php', :controller => 'api', :action => 'old_index'
   map.connect 'api', :controller => 'api', :action => 'old_index'
-  map.connect 'confirmed.php', :controller => 'signup', :action => 'old_confirmed'
-  map.connect 'confirmed', :controller => 'signup', :action => 'old_confirmed'
-  map.connect 'unsubscribe.php', :controller => 'signup', :action => 'old_unsubscribe'
-  map.connect 'unsubscribe', :controller => 'signup', :action => 'old_unsubscribe'
+  map.connect 'confirmed.php', :controller => 'alerts', :action => 'old_confirmed'
+  map.connect 'confirmed', :controller => 'alerts', :action => 'old_confirmed'
+  map.connect 'unsubscribe.php', :controller => 'alerts', :action => 'old_unsubscribe'
+  map.connect 'unsubscribe', :controller => 'alerts', :action => 'old_unsubscribe'
   
-  map.signup '', :controller => "signup"
+  map.signup '', :controller => "alerts"
   map.root :signup
-  map.connect 'alerts/preview', :controller => 'signup', :action => 'preview'
-  map.check_mail 'alerts/checkmail', :controller => 'signup', :action => 'check_mail'
-  map.confirmed 'alerts/:cid/confirmed', :controller => 'signup', :action => 'confirmed'
-  map.unsubscribe 'alerts/:cid/unsubscribe', :controller => 'signup', :action => 'unsubscribe'
+  map.connect 'alerts/preview', :controller => 'alerts', :action => 'preview'
+  map.check_mail 'alerts/checkmail', :controller => 'alerts', :action => 'check_mail'
+  map.confirmed 'alerts/:cid/confirmed', :controller => 'alerts', :action => 'confirmed'
+  map.unsubscribe 'alerts/:cid/unsubscribe', :controller => 'alerts', :action => 'unsubscribe'
 
   map.api_howto 'api/howto', :controller => 'api', :action => 'howto'
   map.api 'api', :controller => 'api', :action => 'index'
