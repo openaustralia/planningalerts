@@ -31,5 +31,5 @@ Feature: Manage alerts
     And the "My suburb (about 2 km)" checkbox should be checked
     When I choose "My neighbourhood (about 800 m)"
     And I press "Update alert size"
-    Then I should see "Your alert size area has been updated"
+    Then I should see "your alert size area has been updated"
     And I should receive email alerts for the street address "24 Bruce Rd, Glenbrook" with a size of "800"

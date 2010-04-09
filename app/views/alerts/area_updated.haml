@@ -1,0 +1,11 @@
+.attention
+  %h3 Thanks, your alert size area has been updated
+  %p
+    You will now receive email alerts for any planning applications we find near
+    <strong>#{@alert.address}</strong> within an area of approximately
+    <strong>#{meters_in_words(@alert.area_size_meters)}</strong>.
+
+%p
+  Remember, if this alert doesn't cover everywhere you are interested in
+  %span.highlight
+    = link_to "you can sign up for multiple alerts", signup_path
