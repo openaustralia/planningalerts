@@ -16,33 +16,6 @@
       - else
         %input#txtAddress.textbox{ :name => "txtAddress", :type => "text", :value => @address }
       %small e.g. 1 Sowerby St, Goulburn, NSW 2580
-    %li#liAlertArea
-      %p#pAlertArea
-        %span.number> 3
-        What size area would you like to receive alerts for?
-      %fieldset
-        %ul#ulAlertArea.form.nobullets
-          %li
-            %input#radAlertAreaSize_street{ :type => "radio", :name => "radAlertAreaSize", :value => "s", :checked => ("checked" if @alert_area_size == "s") }
-            %label{ :for => "radAlertAreaSize_street" }
-              My street (about #{meters_in_words(@zone_sizes['s'])})
-            %small
-              = link_to "view on a map (new window)", "javascript:previewMap('#{@zone_sizes['s']}');"
-          %li
-            %input#radAlertAreaSize_neihgbourhood{ :type => "radio", :name => "radAlertAreaSize", :value => "m", :checked => ("checked" if @alert_area_size == "m")}
-            %label{ :for => "radAlertAreaSize_neihgbourhood" }
-              My neighbourhood  (about #{meters_in_words(@zone_sizes['m'])})
-            %small
-              = link_to "view on a map (new window)", "javascript:previewMap('#{@zone_sizes['m']}');"
-          %li
-            %input#radAlertAreaSize_town{ :type => "radio", :name => "radAlertAreaSize", :value => "l", :checked => ("checked" if @alert_area_size == "l") }
-            %label{ :for => "radAlertAreaSize_town" }
-              My suburb  (about #{meters_in_words(@zone_sizes['l'])})
-            %small
-              = link_to "view on a map (new window)", "javascript:previewMap('#{@zone_sizes['l']}');"
-          %noscript
-            %li
-              %fieldset Note: viewing the alert area on a map requires javascript
     %input.button{ :value => "Create alert >>", :type => "submit" }
     %p#privacy
       Our

@@ -15,7 +15,7 @@ Feature: Manage alerts
     When I click the first link in the email
     Then I should see "your alert has been activated"
     And I should see "24 Bruce Rd, Glenbrook NSW 2773"
-    And I should receive email alerts for the street address "24 Bruce Rd, Glenbrook NSW 2773" with a size of "800"
+    And I should receive email alerts for the street address "24 Bruce Rd, Glenbrook NSW 2773" with a size of "2000"
 
   Scenario: Unsubscribe from an email alert
     Given I have received an email alert for "24 Bruce Rd, Glenbrook" with a size of "2000"
