@@ -23,3 +23,4 @@
     = submit_tag("Update size >>", :class => "button")
 
 = javascript_include_tag "preview"
+= javascript_tag "window.onload = addCodeToFunction(window.onload,function() {#{draw_box_javascript(@size)}});"
