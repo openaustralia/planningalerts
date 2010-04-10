@@ -3,7 +3,7 @@
   %head
     %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "content-type" }
     %title PlanningAlerts.org.au | Alert area preview
-    %script{ :src => "http://maps.google.com/maps?file=api&amp;v=2&amp;key=#{Configuration::GOOGLE_MAPS_KEY}", :type => "text/javascript" }
-    %script{ :src => "/javascripts/preview.js", :type => "text/javascript" }
-  %body{ :onunload => "GUnload()", :onload => "load(#{@area.centre.lng}, #{@area.centre.lat}, #{@area.lower_left.lng}, #{@area.lower_left.lat}, #{@area.upper_right.lng}, #{@area.upper_right.lat})" }
-    #map{ :style => "width: 500px; height: 500px" }
+    = Mapstraction.header(:google)
+  %body
+    = @map.div(:width => 500, :height => 500)
+    = @map.to_html
