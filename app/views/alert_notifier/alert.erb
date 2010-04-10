@@ -9,4 +9,5 @@ You can subscribe to a geoRSS feed of applications for <%= @alert.address %> her
 
 GeoRSS can be used to display planning applications on a map. For example, on Google Maps: http://maps.google.com.au/maps?q=<%= CGI.escape(@georss_url) %>
 
-To stop receiving these emails click here: <%= @unsubscribe_url %>
+To change the size of the area covered by the alerts: <%= alert_area_url(:host => @host, :cid => @alert.confirm_id) %>
+To stop receiving these emails: <%= @unsubscribe_url %>
