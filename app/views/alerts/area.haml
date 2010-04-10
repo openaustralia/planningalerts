@@ -1,7 +1,8 @@
-<p>What size area near #{@alert.address} would you like to receive alerts for?</p>
-
 = @map.div(:width => 400, :height => 400)
 = @map.to_html
+
+%p
+  What size area near #{@alert.address} would you like to receive alerts for?
 
 - form_tag do
   %ul.nobullets
