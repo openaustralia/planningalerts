@@ -1,9 +1,0 @@
-!!! Strict
-%html{ :xmlns => "http://www.w3.org/1999/xhtml" }
-  %head
-    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "content-type" }
-    %title PlanningAlerts.org.au | Alert area preview
-    = Mapstraction.header(:google)
-  %body
-    = preview_map(@area).div(:width => 500, :height => 500)
-    = preview_map(@area).to_html

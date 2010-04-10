@@ -24,12 +24,6 @@ class AlertsController < ApplicationController
     @set_focus_control = "txtEmail"
   end
   
-  def preview
-    @area = Area.centre_and_size(Location.geocode(params[:address]), params[:area_size].to_i)
-
-    render :layout => false
-  end
-  
   def check_mail
     @page_title = "Now check your email"
   end
