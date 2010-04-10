@@ -6,17 +6,14 @@
 - form_tag do
   %ul.nobullets
     %li
-      = radio_button_tag(:size, "s", @size == "s")
+      = radio_button_tag(:size, "s", @size == "s", :onclick => open_preview_window('s'))
       = label_tag(:size_s, "My street (about #{meters_in_words(@zone_sizes['s'])})")
-      %small= link_to "view on a map (new window)", open_preview_window('s')
     %li
-      = radio_button_tag(:size, "m", @size == "m")
+      = radio_button_tag(:size, "m", @size == "m", :onclick => open_preview_window('m'))
       = label_tag(:size_m, "My neighbourhood (about #{meters_in_words(@zone_sizes['m'])})")
-      %small= link_to "view on a map (new window)", open_preview_window('m')
     %li
-      = radio_button_tag(:size, "l", @size == "l")
+      = radio_button_tag(:size, "l", @size == "l", :onclick => open_preview_window('l'))
       = label_tag(:size_l, "My suburb (about #{meters_in_words(@zone_sizes['l'])})")
-      %small= link_to "view on a map (new window)", open_preview_window('l')
     %noscript
       %li
         Note: viewing the alert area on a map requires javascript
