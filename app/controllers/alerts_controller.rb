@@ -71,6 +71,9 @@ class AlertsController < ApplicationController
     @alert = Alert.find_by_confirm_id(params[:cid])
     if request.get?
       @size = @zone_sizes.invert[@alert.area_size_meters]
+      @map = Mapstraction.new("map_div",:google)
+      @map.control_init(:small => true)
+      @map.center_zoom_init([@alert.lat, @alert.lng], 13)
     else
       @alert.area_size_meters = @zone_sizes[params[:size]]
       @alert.save!

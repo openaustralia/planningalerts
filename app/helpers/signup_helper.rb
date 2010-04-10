@@ -1,6 +1,6 @@
 module SignupHelper
   def open_preview_window(size)
-    url = preview_url(:address => @alert.address, :area_size => @zone_sizes[size])
-    "javascript:document.open('#{url}', 'name', 'width=525,height=570');"
+    area = Area.centre_and_size(@alert.location, @zone_sizes[size])    
+    "javascript:preview(#{area.lower_left.lat}, #{area.lower_left.lng}, #{area.upper_right.lat}, #{area.upper_right.lng});"
   end
 end
