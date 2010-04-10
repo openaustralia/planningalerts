@@ -5,5 +5,5 @@
     %title PlanningAlerts.org.au | Alert area preview
     = Mapstraction.header(:google)
   %body
-    = @map.div(:width => 500, :height => 500)
-    = @map.to_html
+    = preview_map(@area).div(:width => 500, :height => 500)
+    = preview_map(@area).to_html
