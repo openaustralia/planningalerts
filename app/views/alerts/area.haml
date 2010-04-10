@@ -1,7 +1,4 @@
-- if flash[:notice]
-  %div#warning= flash[:notice]
-
-<h3>Change the size area around 24 Bruce Rd, Glenbrook you would like to receive alerts for</h3>
+<p>What size area near #{@alert.address} would you like to receive alerts for?</p>
 
 - form_tag do
   %ul.nobullets
@@ -21,4 +18,5 @@
       %li
         Note: viewing the alert area on a map requires javascript
     
-  = submit_tag("Update alert size >>", :class => "button")
+  %p
+    = submit_tag("Update size >>", :class => "button")
