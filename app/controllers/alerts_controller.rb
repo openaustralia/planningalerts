@@ -73,7 +73,7 @@ class AlertsController < ApplicationController
       @size = @zone_sizes.invert[@alert.area_size_meters]
       @map = Mapstraction.new("map_div",:google)
       @map.control_init(:small => true)
-      @map.center_zoom_init([@alert.lat, @alert.lng], 13)
+      @map.center_zoom_init([@alert.lat, @alert.lng], 14)
     else
       @alert.area_size_meters = @zone_sizes[params[:size]]
       @alert.save!
