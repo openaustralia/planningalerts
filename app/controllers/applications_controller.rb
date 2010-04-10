@@ -6,6 +6,18 @@ class ApplicationsController < ApplicationController
       authority = Authority.find_by_short_name_encoded(params[:authority_id])
       @applications = authority.applications(:order => "date_scraped DESC", :limit => 100)
       @description << " within #{authority.full_name}"
+    elsif params[:postcode]
+      # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
+      @applications = Application.find_all_by_postcode(params[:postcode], :limit => 100)
+      @description << " within postcode #{params[:postcode]}"
+    elsif params[:suburb]
+      if params[:state]
+        @applications = Application.find_all_by_suburb_and_state(params[:suburb], params[:state], :limit => 100)
+        @description << " within #{params[:suburb]}, #{params[:state]}"
+      else
+        @applications = Application.find_all_by_suburb(params[:suburb], :limit => 100)
+        @description << " within #{params[:suburb]}"
+      end
     else
       if params[:area_size]
         if params[:address]

@@ -67,4 +67,34 @@ describe ApplicationsController do
       assigns[:description].should == "Recent applications within Blue Mountains City Council"
     end
   end
+  
+  describe "search by postcode" do
+    it "should find recent 100 applications for a postcode with the most recently scraped first" do
+      result = mock
+      Application.should_receive(:find_all_by_postcode).with("2780", :limit => 100).and_return(result)
+      get :index, :format => "rss", :postcode => "2780"
+      assigns[:applications].should == result
+      assigns[:description].should == "Recent applications within postcode 2780"
+    end
+  end
+  
+  describe "search by suburb" do
+    it "should find recent 100 applications for a suburb with the most recently scraped first" do
+      result = mock
+      Application.should_receive(:find_all_by_suburb).with("Katoomba", :limit => 100).and_return(result)
+      get :index, :format => "rss", :suburb => "Katoomba"
+      assigns[:applications].should == result
+      assigns[:description].should == "Recent applications within Katoomba"
+    end
+  end
+  
+  describe "search by suburb and state" do
+    it "should find recent 100 applications for a suburb and state with the most recently scraped first" do
+      result = mock
+      Application.should_receive(:find_all_by_suburb_and_state).with("Katoomba", "NSW", :limit => 100).and_return(result)
+      get :index, :format => "rss", :suburb => "Katoomba", :state => "NSW"
+      assigns[:applications].should == result
+      assigns[:description].should == "Recent applications within Katoomba, NSW"
+    end
+  end
 end
