@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100406072024) do
+ActiveRecord::Schema.define(:version => 20100411003409) do
 
   create_table "alerts", :force => true do |t|
     t.string   "email",            :limit => 120, :null => false
@@ -41,6 +41,12 @@ ActiveRecord::Schema.define(:version => 20100406072024) do
   end
 
   add_index "applications", ["authority_id"], :name => "authority_id"
+  add_index "applications", ["date_scraped"], :name => "index_applications_on_date_scraped"
+  add_index "applications", ["lat"], :name => "index_applications_on_lat"
+  add_index "applications", ["lng"], :name => "index_applications_on_lng"
+  add_index "applications", ["postcode"], :name => "index_applications_on_postcode"
+  add_index "applications", ["state"], :name => "index_applications_on_state"
+  add_index "applications", ["suburb"], :name => "index_applications_on_suburb"
 
   create_table "authorities", :force => true do |t|
     t.string  "full_name",  :limit => 200, :null => false
