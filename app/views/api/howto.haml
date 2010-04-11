@@ -49,6 +49,27 @@
       %p.apiexamples
         = link_to "view example", api_example_authority_url
         = link_to "view on a map", mapify(api_example_authority_url, 11)
+    -#.apiitem
+    -#  %h5
+    -#    Postcode
+    -#  %p.apidefinition
+    -#    Return applications for a specific postcode area
+    -#  %code
+    -#    #{api_example_postcode_url_html}
+    -#  %p.apiexamples
+    -#    = link_to "view example", api_example_postcode_url
+    -#    = link_to "view on a map", mapify(api_example_postcode_url, 11)
+    -#.apiitem
+    -#  %h5
+    -#    Suburb
+    -#  %p.apidefinition
+    -#    Return applications in a suburb. Including "state" in the search is optional.
+    -#  %code
+    -#    #{api_example_suburb_and_state_url_html}
+    -#  %p.apiexamples
+    -#    = link_to "view example", api_example_suburb_and_state_url
+    -#    = link_to "view on a map", mapify(api_example_suburb_and_state_url, 11)
+
     %h4#hLicenseInfo
       License information
     %p

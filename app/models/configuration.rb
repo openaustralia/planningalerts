@@ -28,6 +28,9 @@ module Configuration
   API_EXAMPLE_ADDRESS = "24 Bruce Road Glenbrook, NSW 2773"
   API_EXAMPLE_SIZE = 4000
   API_EXAMPLE_AUTHORITY = "blue_mountains"
+  API_EXAMPLE_POSTCODE = "2780"
+  API_EXAMPLE_SUBURB = "Katoomba"
+  API_EXAMPLE_STATE = "NSW"
 
   # This lat/lng is for 24 Bruce Road as well
   API_EXAMPLE_LAT = -33.772609

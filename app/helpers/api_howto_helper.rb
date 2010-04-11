@@ -31,6 +31,14 @@ module ApiHowtoHelper
     authority_applications_url(:format => "rss", :authority_id => authority)
   end
   
+  def api_example_postcode_url(postcode = Configuration::API_EXAMPLE_POSTCODE)
+    applications_url(:format => "rss", :postcode => postcode)
+  end
+  
+  def api_example_suburb_and_state_url(suburb = Configuration::API_EXAMPLE_SUBURB, state = Configuration::API_EXAMPLE_STATE)
+    applications_url(:format => "rss", :suburb => suburb, :state => state)
+  end
+  
   def api_example_address_url_html
     # Doing this hackery with 11's and 22's so that we don't escape "[" and "]"
     htmlify(api_example_address_url("11", "22").sub("11", "[address]").sub("22", "[size_in_metres]"))
@@ -46,5 +54,13 @@ module ApiHowtoHelper
   
   def api_example_authority_url_html
     htmlify(api_example_authority_url("11").sub("11", "[name]"))
+  end
+
+  def api_example_postcode_url_html
+    htmlify(api_example_postcode_url("11").sub("11", "[postcode]"))
+  end
+
+  def api_example_suburb_and_state_url_html
+    htmlify(api_example_suburb_and_state_url("11", "22").sub("11", "[suburb]").sub("22", "[state]"))
   end
 end
