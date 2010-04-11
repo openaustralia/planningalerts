@@ -21,6 +21,7 @@ describe ApplicationsController do
       scope.should_receive(:find).with(:all, {:limit=>100, :order=>"date_scraped DESC"}).and_return(result)
       get :index, :format => "rss", :address => "24 Bruce Road Glenbrook, NSW 2773", :area_size => 4000
       assigns[:applications].should == result
+      # TODO: This wording is misleading. Fix this.
       assigns[:description].should == "Recent applications within 4 km of 24 Bruce Road Glenbrook, NSW 2773"
     end
   end
@@ -35,6 +36,7 @@ describe ApplicationsController do
       
       get :index, :format => "rss", :lat => 1.0, :lng => 2.0, :area_size => 4000
       assigns[:applications].should == result
+      # TODO: This wording is misleading. Fix this.
       assigns[:description].should == "Recent applications within 4 km of 1.0,2.0"
     end
   end
@@ -50,7 +52,7 @@ describe ApplicationsController do
       get :index, :format => "rss", :bottom_left_lat => 1.0, :bottom_left_lng => 2.0,
         :top_right_lat => 3.0, :top_right_lng => 4.0
       assigns[:applications].should == result
-      assigns[:description].should == "Recent applications within the area (1.0,2.0) (3.0,4.0)"
+      assigns[:description].should == "Recent applications in the area (1.0,2.0) (3.0,4.0)"
     end
   end
   
@@ -64,7 +66,7 @@ describe ApplicationsController do
 
       get :index, :format => "rss", :authority_id => "blue_mountains"
       assigns[:applications].should == result
-      assigns[:description].should == "Recent applications within Blue Mountains City Council"
+      assigns[:description].should == "Recent applications in Blue Mountains City Council"
     end
   end
   
@@ -74,7 +76,7 @@ describe ApplicationsController do
       Application.should_receive(:find_all_by_postcode).with("2780", :limit => 100).and_return(result)
       get :index, :format => "rss", :postcode => "2780"
       assigns[:applications].should == result
-      assigns[:description].should == "Recent applications within postcode 2780"
+      assigns[:description].should == "Recent applications in 2780"
     end
   end
   
@@ -84,7 +86,7 @@ describe ApplicationsController do
       Application.should_receive(:find_all_by_suburb).with("Katoomba", :limit => 100).and_return(result)
       get :index, :format => "rss", :suburb => "Katoomba"
       assigns[:applications].should == result
-      assigns[:description].should == "Recent applications within Katoomba"
+      assigns[:description].should == "Recent applications in Katoomba"
     end
   end
   
@@ -94,7 +96,7 @@ describe ApplicationsController do
       Application.should_receive(:find_all_by_suburb_and_state).with("Katoomba", "NSW", :limit => 100).and_return(result)
       get :index, :format => "rss", :suburb => "Katoomba", :state => "NSW"
       assigns[:applications].should == result
-      assigns[:description].should == "Recent applications within Katoomba, NSW"
+      assigns[:description].should == "Recent applications in Katoomba, NSW"
     end
   end
 end
