@@ -30,9 +30,9 @@ describe Application do
       a4.lng = 3.5
       a4.save!
       r = Application.within(Area.lower_left_and_upper_right(Location.new(1.0, 2.0), Location.new(3.0, 4.0)))
-      r.count.should == 2
-      r[0].should == a1
-      r[1].should == a4
+      r.should have(2).items
+      r.should include(a1)
+      r.should include(a4)
     end
   end
   
