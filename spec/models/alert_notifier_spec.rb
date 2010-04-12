@@ -38,10 +38,8 @@ describe AlertNotifier do
     before :each do
       @original_emails_sent = Stat.emails_sent
       @original_applications_sent = Stat.applications_sent
-      @a1 = mock_model(Application, :address => "Foo Street, Bar", :council_reference => "a1", :description => "Knock something down",
-        :info_tinyurl => "tinyurl1", :comment_tinyurl => "tinyurl2")
-      @a2 = mock_model(Application, :address => "Bar Street, Foo", :council_reference => "a2", :description => "Put something up",
-        :info_tinyurl => "tinyurl3", :comment_tinyurl => "tinyurl4")
+      @a1 = mock_model(Application, :address => "Foo Street, Bar", :council_reference => "a1", :description => "Knock something down")
+      @a2 = mock_model(Application, :address => "Bar Street, Foo", :council_reference => "a2", :description => "Put something up")
       @email = AlertNotifier.create_alert(@alert, [@a1, @a2])
     end
     

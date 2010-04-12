@@ -22,7 +22,6 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem "haml"
   config.gem "geokit"
-  config.gem "shorturl"
   config.gem "nokogiri"
   # For some reason putting config.gem 'email_spec' in environments/test.rb didn't work when
   # running "cucumber". So, putting it here so that we don't have to have the plugin installed in vendor.
