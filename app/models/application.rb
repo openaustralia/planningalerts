@@ -28,7 +28,6 @@ class Application < ActiveRecord::Base
   
   def self.collect_applications_for_authority(auth, date, info_logger = logger)
     url = auth.feed_url_for_date(date)
-    info_logger.info "Scraping authority #{auth.full_name} from #{url}"
     begin
       feed_data = open(url).read
     rescue Exception => e
@@ -37,16 +36,17 @@ class Application < ActiveRecord::Base
     end
     feed = Nokogiri::XML(feed_data)
     applications = feed.search('application')
-    info_logger.info "Found #{applications.count} applications for #{auth.full_name}"
     
+    count_new, count_old = 0, 0
     applications.each do |a|
       council_reference = a.at('council_reference').inner_text
       # TODO Consider if it would be better to overwrite applications with new data if they already exists
       # This would allow for the possibility that the application information was incorrectly entered at source
       # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
       if auth.applications.find_by_council_reference(council_reference)
-        info_logger.info "Application already exists in database #{council_reference}"
+        count_old += 1
       else
+        count_new += 1
         auth.applications.create!(
           :council_reference => council_reference,
           :address => a.at('address').inner_text,
@@ -55,8 +55,13 @@ class Application < ActiveRecord::Base
           :comment_url => a.at('comment_url').inner_text,
           :date_received => a.at('date_received').inner_text,
           :date_scraped => DateTime.now)
-        info_logger.info "Saving application #{council_reference}"
       end
+    end
+    
+    if count_old == 0
+      info_logger.info "#{count_new} new applications found for #{auth.full_name}"
+    else
+      info_logger.info "#{count_new} new and #{count_old} old applications found for #{auth.full_name}"
     end
   end
   

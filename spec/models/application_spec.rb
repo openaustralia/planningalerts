@@ -102,10 +102,7 @@ describe Application do
     it "should collect the correct applications" do
       logger = mock
       Application.stub!(:logger).and_return(logger)
-      logger.should_receive(:info).with("Scraping authority Fiddlesticks from http://example.org?year=2009&month=1&day=1")
-      logger.should_receive(:info).with("Found 2 applications for Fiddlesticks")
-      logger.should_receive(:info).with("Saving application R1")
-      logger.should_receive(:info).with("Saving application R2")
+      logger.should_receive(:info).with("2 new applications found for Fiddlesticks")
       
       Application.collect_applications_for_authority(@auth, @date)
       Application.count.should == 2
@@ -121,12 +118,8 @@ describe Application do
     it "should not create new applications when they already exist" do
       logger = mock
       Application.stub!(:logger).and_return(logger)
-      logger.should_receive(:info).twice.with("Scraping authority Fiddlesticks from http://example.org?year=2009&month=1&day=1")
-      logger.should_receive(:info).twice.with("Found 2 applications for Fiddlesticks")
-      logger.should_receive(:info).with("Saving application R1")
-      logger.should_receive(:info).with("Saving application R2")
-      logger.should_receive(:info).with("Application already exists in database R1")
-      logger.should_receive(:info).with("Application already exists in database R2")
+      logger.should_receive(:info).with("2 new applications found for Fiddlesticks")
+      logger.should_receive(:info).with("0 new and 2 old applications found for Fiddlesticks")
 
       # Getting the feed twice with the same content
       Application.collect_applications_for_authority(@auth, @date)
