@@ -103,6 +103,13 @@ describe Alert do
       u.should_not be_valid
       u.errors.on(:email_address).should == "isn't valid"    
     end
+
+    it "should have an '@' in it" do
+      @attributes[:email] = "diddle"
+      u = Alert.new(@attributes)
+      u.should_not be_valid
+      u.errors.on(:email_address).should == "isn't valid"    
+    end
   end
   
   it "should be able to store the attribute location" do

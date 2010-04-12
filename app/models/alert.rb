@@ -85,6 +85,8 @@ class Alert < ActiveRecord::Base
   def validate_email
     if email == ""
       errors.add(:email_address, "can't be empty")
+    elsif !email.include?('@')
+      errors.add(:email_address, "isn't valid")      
     else
       begin
         TMail::Address.parse(email)
