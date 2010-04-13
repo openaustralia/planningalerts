@@ -1,15 +1,6 @@
 The following new planning applications have been found near <%= @alert.address %>:
 
-<% @applications.each do |app| -%>
-<%= app.address.upcase %> (<%= app.council_reference.upcase %>)
-
-<%= app.description %>
-
-For more information: <%= application_url(:host => @host, :id => app.id) %>
-
-=============================
-
-<% end -%>
+<%= render :partial => "application", :collection => @applications -%>
 
 ------------------------------------------------------------
 
