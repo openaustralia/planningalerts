@@ -83,8 +83,6 @@ Put something up
 
 For more information: http://dev.planningalerts.org.au/applications/2
 
-=============================
-
 
 ------------------------------------------------------------
 
