@@ -42,6 +42,7 @@ class ApplicationsController < ApplicationController
         @applications = Application.recent
       end
     end
+    @page_title = @description
     respond_to do |format|
       format.html
       # TODO: Move the template over to using an xml builder
