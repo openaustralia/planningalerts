@@ -4,18 +4,18 @@ class ApplicationsController < ApplicationController
     if params[:authority_id]
       # TODO Handle the situation where the authority name isn't found
       authority = Authority.find_by_short_name_encoded(params[:authority_id])
-      @applications = authority.applications(:order => "date_scraped DESC", :limit => 100)
+      @applications = authority.applications.recent
       @description << " in #{authority.full_name}"
     elsif params[:postcode]
       # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
-      @applications = Application.find_all_by_postcode(params[:postcode], :order => "date_scraped DESC", :limit => 100)
+      @applications = Application.recent.find_all_by_postcode(params[:postcode])
       @description << " in #{params[:postcode]}"
     elsif params[:suburb]
       if params[:state]
-        @applications = Application.find_all_by_suburb_and_state(params[:suburb], params[:state], :order => "date_scraped DESC", :limit => 100)
+        @applications = Application.recent.find_all_by_suburb_and_state(params[:suburb], params[:state])
         @description << " in #{params[:suburb]}, #{params[:state]}"
       else
-        @applications = Application.find_all_by_suburb(params[:suburb], :order => "date_scraped DESC", :limit => 100)
+        @applications = Application.recent.find_all_by_suburb(params[:suburb])
         @description << " in #{params[:suburb]}"
       end
     else
@@ -31,15 +31,15 @@ class ApplicationsController < ApplicationController
         end
         search_area = Area.centre_and_size(location, params[:area_size].to_i)
         @description << " within #{help.meters_in_words(params[:area_size].to_i)} of #{location_text}"
-        @applications = Application.within(search_area).find(:all, :order => "date_scraped DESC", :limit => 100)
+        @applications = Application.within(search_area).recent
       elsif params[:bottom_left_lat] && params[:bottom_left_lng] && params[:top_right_lat] && params[:top_right_lng]
         lower_left = Location.new(params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f)
         upper_right = Location.new(params[:top_right_lat].to_f, params[:top_right_lng].to_f)
         search_area = Area.lower_left_and_upper_right(lower_left, upper_right)
         @description << " in the area (#{lower_left}) (#{upper_right})"
-        @applications = Application.within(search_area).find(:all, :order => "date_scraped DESC", :limit => 100)
+        @applications = Application.within(search_area).recent
       else
-        @applications = Application.find(:all, :order => "date_scraped DESC", :limit => 100)
+        @applications = Application.recent
       end
     end
     respond_to do |format|
@@ -58,7 +58,7 @@ class ApplicationsController < ApplicationController
     # Find other applications nearby (within 10km area)
     @nearby_distance = 10000
     search_area = Area.centre_and_size(@application.location, @nearby_distance)
-    @nearby_applications = Application.within(search_area).find(:all, :order => "date_scraped DESC", :limit => 10)
+    @nearby_applications = Application.within(search_area).recent
     # Don't include the current application
     @nearby_applications.delete(@application)
   end

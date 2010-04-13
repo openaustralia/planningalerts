@@ -7,6 +7,7 @@ class Application < ActiveRecord::Base
   named_scope :within, lambda { |a|
     { :conditions => ['lat > ? AND lng > ? AND lat < ? AND lng < ?', a.lower_left.lat, a.lower_left.lng, a.upper_right.lat, a.upper_right.lng] }
   }
+  named_scope :recent, :order => "date_scraped DESC", :limit => 100
   
   # TODO: factor out common location accessor between Application and Alert
   def location
