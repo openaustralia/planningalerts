@@ -20,7 +20,7 @@ class Application < ActiveRecord::Base
     # Go through the dates in reverse chronological order
     (start_date..(Date.today)).to_a.reverse.each do |date|
       authorities = Authority.active
-      info_logger.info "Scraping #{authorities.count} authorities"
+      info_logger.info "Scraping #{authorities.count} authorities with date #{date}"
       authorities.each do |auth|
         collect_applications_for_authority(auth, date, info_logger)
       end

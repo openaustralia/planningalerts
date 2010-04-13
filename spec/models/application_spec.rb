@@ -129,10 +129,12 @@ describe Application do
     
     it "should collect all the applications from all the authorities over the last n days" do
       auth2 = Authority.create!(:full_name => "Wombat City Council", :short_name => "Wombat")
+      Date.stub!(:today).and_return(Date.new(2010, 1, 10))
       # TODO Overwriting a constant here. Ugh. Do this better
       Configuration::SCRAPE_DELAY = 1
       logger = mock
-      logger.should_receive(:info).twice.with("Scraping 2 authorities")
+      logger.should_receive(:info).with("Scraping 2 authorities with date 2010-01-10")
+      logger.should_receive(:info).with("Scraping 2 authorities with date 2010-01-09")
       Application.should_receive(:collect_applications_for_authority).with(@auth, Date.today, logger)
       Application.should_receive(:collect_applications_for_authority).with(auth2, Date.today, logger)
       Application.should_receive(:collect_applications_for_authority).with(@auth, Date.today - 1, logger)
