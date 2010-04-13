@@ -8,14 +8,14 @@ class ApplicationsController < ApplicationController
       @description << " in #{authority.full_name}"
     elsif params[:postcode]
       # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
-      @applications = Application.find_all_by_postcode(params[:postcode], :limit => 100)
+      @applications = Application.find_all_by_postcode(params[:postcode], :order => "date_scraped DESC", :limit => 100)
       @description << " in #{params[:postcode]}"
     elsif params[:suburb]
       if params[:state]
-        @applications = Application.find_all_by_suburb_and_state(params[:suburb], params[:state], :limit => 100)
+        @applications = Application.find_all_by_suburb_and_state(params[:suburb], params[:state], :order => "date_scraped DESC", :limit => 100)
         @description << " in #{params[:suburb]}, #{params[:state]}"
       else
-        @applications = Application.find_all_by_suburb(params[:suburb], :limit => 100)
+        @applications = Application.find_all_by_suburb(params[:suburb], :order => "date_scraped DESC", :limit => 100)
         @description << " in #{params[:suburb]}"
       end
     else
