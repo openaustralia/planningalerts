@@ -1,5 +1,3 @@
 %h3= @description
 %dl
-  - @applications.each do |app|
-    %dt.address= link_to app.address, application_path(app)
-    %dd.description= app.description
+  = render :partial => "application", :collection => @applications

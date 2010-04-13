@@ -21,6 +21,4 @@
   #nearby-applications
     %h3 Other recent applications nearby (within #{meters_in_words(@nearby_distance)})
     %dl
-      - @nearby_applications.each do |app|
-        %dt.address= link_to app.address, application_path(app)
-        %dd.description= app.description
+      = render :partial => "application", :collection => @nearby_applications
