@@ -1,2 +1,5 @@
 %dt.address= link_to application.address, application_path(application)
-%dd.description= application.description
+%dd
+  .datescraped
+    #{time_ago_in_words(application.date_scraped)} ago
+  .description= application.description
