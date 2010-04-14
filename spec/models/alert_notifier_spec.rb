@@ -83,7 +83,6 @@ Put something up
 
 For more information: http://dev.planningalerts.org.au/applications/2
 
-
 ============================================================
 
 PlanningAlerts.org.au is a free service run by the charity OpenAustralia Foundation.
