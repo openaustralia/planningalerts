@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
   
   before_filter :load_configuration
 
+  private
+  
   def load_configuration
     @alert_count = Stat.applications_sent
     @authority_count = Authority.active.count
