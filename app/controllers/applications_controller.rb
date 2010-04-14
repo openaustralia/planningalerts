@@ -1,6 +1,7 @@
 class ApplicationsController < ApplicationController
   def index
     @description = "Recent applications"
+    @rss = applications_url(params.merge(:format => "rss"))
     if params[:authority_id]
       # TODO Handle the situation where the authority name isn't found
       authority = Authority.find_by_short_name_encoded(params[:authority_id])

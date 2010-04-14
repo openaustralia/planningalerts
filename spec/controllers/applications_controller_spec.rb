@@ -7,6 +7,18 @@ describe ApplicationsController do
     end
   end
   
+  describe "rss feed" do
+    it "should provide a link for all applications" do
+      get :index
+      assigns[:rss].should == "http://test.host/applications.rss"
+    end
+
+    it "should provide a link to the search by address" do
+      get :index, :address => "24 Bruce Road Glenbrook, NSW 2773", :area_size => 4000
+      assigns[:rss].should == "http://test.host/applications.rss?address=24+Bruce+Road+Glenbrook%2C+NSW+2773&area_size=4000"
+    end
+  end
+  
   describe "index" do
     it "should find recent applications" do
       result = mock
