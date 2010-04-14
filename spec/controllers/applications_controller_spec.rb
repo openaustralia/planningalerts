@@ -85,7 +85,7 @@ describe ApplicationsController do
       scope.should_receive(:find_all_by_postcode).with("2780").and_return(result)
       get :index, :format => "rss", :postcode => "2780"
       assigns[:applications].should == result
-      assigns[:description].should == "Recent applications in 2780"
+      assigns[:description].should == "Recent applications in postcode 2780"
     end
   end
   

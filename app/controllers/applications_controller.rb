@@ -9,7 +9,7 @@ class ApplicationsController < ApplicationController
     elsif params[:postcode]
       # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
       @applications = Application.recent.find_all_by_postcode(params[:postcode])
-      @description << " in #{params[:postcode]}"
+      @description << " in postcode #{params[:postcode]}"
     elsif params[:suburb]
       if params[:state]
         @applications = Application.recent.find_all_by_suburb_and_state(params[:suburb], params[:state])
