@@ -16,6 +16,7 @@
       Source:
       = link_to @application.authority.full_name, @application.info_url
     %li= link_to "Support or object to this application", @application.comment_url
+  %p= addthis_bookmark_button
 
 - unless @nearby_applications.empty?
   #nearby-applications

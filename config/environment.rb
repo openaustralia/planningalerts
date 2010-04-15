@@ -27,6 +27,7 @@ Rails::Initializer.run do |config|
   # running "cucumber". So, putting it here so that we don't have to have the plugin installed in vendor.
   config.gem 'email_spec', :lib => 'email_spec'
   config.gem "matthuhiggins-foreigner", :lib => "foreigner", :source => "http://gemcutter.org"
+  config.gem 'jaap3-addthis', :lib => 'addthis', :source => 'http://gems.github.com'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
