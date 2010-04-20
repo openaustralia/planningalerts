@@ -17,4 +17,10 @@ namespace :planningalerts do
       Alert.send_alerts(Logger.new(STDOUT))
     end
   end
+  
+  desc "Generate XML sitemap and notify Google, Yahoo, etc.."
+  task :sitemap => :environment do
+    s = PlanningAlertsSitemap.new
+    s.generate_and_notify
+  end
 end
