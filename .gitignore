@@ -14,5 +14,5 @@ public/getinvolved.html
 public/index.html
 public/stylesheets/*.css
 public/sitemap.xml
-public/sitemaps/*
+public/sitemap*.xml.gz
 tmp/sass-cache
