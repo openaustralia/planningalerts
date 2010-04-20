@@ -60,6 +60,7 @@ class Sitemap
 	end
 	
 	def start_sitemap
+	  sitemap_path = "#{root_path}/#{sitemap_relative_path}" 
 		puts "Writing sitemap file (#{sitemap_path})..."
 		@sitemap_file = CountedFile.open(sitemap_path)
 		@sitemap_file << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
@@ -69,7 +70,7 @@ class Sitemap
   end
 	
 	def start_index
-	  @index_file = File.open(sitemap_index_path, 'w')
+	  @index_file = File.open("#{@root_path}/#{sitemap_index_relative_path}", 'w')
 		@index_file << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
 		@index_file << "<sitemapindex xmlns=\"#{SITEMAP_XMLNS}\">"
   end
@@ -84,7 +85,7 @@ class Sitemap
 	  @sitemap_file.close
 	  # Update the sitemap index
     @index_file << "<sitemap>"
-    @index_file << "<loc>#{sitemap_url}</loc>"
+    @index_file << "<loc>#{root_url}/#{sitemap_relative_path}</loc>"
 		@index_file << "<lastmod>#{Sitemap.w3c_date(@lastmod)}</lastmod>"
     @index_file << "</sitemap>"
   end
@@ -122,36 +123,20 @@ class Sitemap
 		date.utc.strftime("%Y-%m-%dT%H:%M:%S+00:00") if date
 	end 
 	
+	# Path on the filesystem (relative to root_path) to the sitemap index file
+	# This needs to be at the root of the web path to include all the urls below it
 	def sitemap_index_relative_path
 	  "sitemap.xml"
   end
   
-	# Path on the filesystem to the sitemap index file
-	# This needs to be at the root of the web path to include all the urls below it
-	def sitemap_index_path
-		"#{@root_path}/#{sitemap_index_relative_path}"
-	end
-	
-	def sitemap_index_url
-		"#{root_url}/#{sitemap_index_relative_path}"
-	end
-	
 	def sitemap_relative_path
 	  "sitemaps/sitemap#{@index + 1}.xml.gz"
   end
   
-	def sitemap_url
-		"#{root_url}/#{sitemap_relative_path}"
-	end
-	
-	def sitemap_path
-		"#{root_path}/#{sitemap_relative_path}"
-	end
-	
 	# Notify the search engines (like Google, Yahoo, etc..) of the new sitemap
 	def notify_search_engines
 		# API Ping URL
-		pingmymap_api_url = "http://api.pingmymap.com/v1/?url=#{sitemap_index_url}&key=#{MySociety::Config.get('PINGMYMAP_API_KEY')}"
+		pingmymap_api_url = "http://api.pingmymap.com/v1/?url=#{root_url}/#{sitemap_index_relative_path}&key=#{MySociety::Config.get('PINGMYMAP_API_KEY')}"
 		# Make HTTP request to API URL
 		response = Net::HTTP.get_response(URI.parse(pingmymap_api_url))
 

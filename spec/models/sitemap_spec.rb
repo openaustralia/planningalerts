@@ -44,8 +44,6 @@ describe Sitemap do
     public = Rails.root.join('public').to_s
     s = Sitemap.new("http://domain.org", public)
     s.sitemap_relative_path.should == "sitemaps/sitemap1.xml.gz"
-    s.sitemap_url.should == "#{s.root_url}/#{s.sitemap_relative_path}"
-    s.sitemap_path.should == "#{s.root_path}/#{s.sitemap_relative_path}"
     s.finish
   end
   
@@ -53,8 +51,6 @@ describe Sitemap do
     public = Rails.root.join('public').to_s
     s = Sitemap.new("http://domain.org", public)
     s.sitemap_index_relative_path.should == "sitemap.xml"
-    s.sitemap_index_url.should == "#{s.root_url}/#{s.sitemap_index_relative_path}"
-    s.sitemap_index_path.should == "#{s.root_path}/#{s.sitemap_index_relative_path}"
     s.finish
   end
 end
