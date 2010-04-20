@@ -43,7 +43,7 @@ describe Sitemap do
   it "should have the path to one of the sitemaps" do
     public = Rails.root.join('public').to_s
     s = Sitemap.new("http://domain.org", public)
-    s.sitemap_relative_path.should == "sitemaps/sitemap1.xml.gz"
+    s.sitemap_relative_path.should == "sitemap1.xml.gz"
     s.finish
   end
   
