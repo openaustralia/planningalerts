@@ -39,6 +39,8 @@ class CountedFile
 end
 
 class Sitemap
+  attr_reader :root_url, :root_path
+
 	# These are limits that are imposed on a single sitemap file by the specification
 	MAX_URLS_PER_FILE = 50000
 	# This is the uncompressed size of a single sitemap file
@@ -46,10 +48,10 @@ class Sitemap
 	
 	SITEMAP_XMLNS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 	
-	def initialize(domain, path, web_path)
-		@domain, @path, @web_path = domain, path, web_path
+	def initialize(root_url, root_path)
+		@root_url, @root_path = root_url, root_path
 
-	  FileUtils.mkdir_p "#{@path}sitemaps"
+	  FileUtils.mkdir_p "#{@root_path}/sitemaps"
 
 		# Index of current sitemap file
 		@index = 0
@@ -91,7 +93,7 @@ class Sitemap
 	  url = SitemapUrl.new(loc, options)
 	  # Now build up the bit of XML that we're going to add (as a string)
 	  t = "<url>"
-	  t << "<loc>http://#{@domain}#{url.loc}</loc>"
+	  t << "<loc>#{root_url}#{url.loc}</loc>"
 	  t << "<changefreq>#{url.changefreq}</changefreq>" if url.changefreq
 	  t << "<lastmod>#{Sitemap.w3c_date(url.lastmod)}</lastmod>" if url.lastmod
 		t << "</url>"
@@ -127,7 +129,7 @@ class Sitemap
 	# Path on the filesystem to the sitemap index file
 	# This needs to be at the root of the web path to include all the urls below it
 	def sitemap_index_path
-		"#{@path}/#{sitemap_index_relative_path}"
+		"#{@root_path}/#{sitemap_index_relative_path}"
 	end
 	
 	def sitemap_index_url
@@ -136,14 +138,6 @@ class Sitemap
 	
 	def sitemap_relative_path
 	  "sitemaps/sitemap#{@index + 1}.xml.gz"
-  end
-  
-  def root_url
-    "http://#{@domain}#{@web_path}"
-  end
-  
-  def root_path
-    @path
   end
   
 	def sitemap_url
