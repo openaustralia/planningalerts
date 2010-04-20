@@ -31,4 +31,20 @@ describe Sitemap do
     s.finish
     #s.notify_search_engines
   end
+  
+  it "should have the path to one of the sitemaps" do
+    public = Rails.root.join('public').to_s
+    s = Sitemap.new("domain.org", public + "/", "/")
+    s.sitemap_url.should == "http://domain.org/sitemaps/sitemap1.xml.gz"
+    s.sitemap_path.should == "#{public}/sitemaps/sitemap1.xml.gz"
+    s.finish
+  end
+  
+  it "should have the path to the sitemap index" do
+    public = Rails.root.join('public').to_s
+    s = Sitemap.new("domain.org", public + "/", "/")
+    s.sitemap_index_url.should == "http://domain.org/sitemap.xml"
+    s.sitemap_index_path.should == "#{public}/sitemap.xml"
+    s.finish
+  end
 end

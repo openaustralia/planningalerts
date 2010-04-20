@@ -117,7 +117,7 @@ class Sitemap
   end
   
 	def Sitemap.w3c_date(date)
-		date.utc.strftime("%Y-%m-%dT%H:%M:%S+00:00")
+		date.utc.strftime("%Y-%m-%dT%H:%M:%S+00:00") if date
 	end 
 		
 	# Path on the filesystem to the sitemap index file
