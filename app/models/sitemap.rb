@@ -127,11 +127,11 @@ class Sitemap
 	end
 	
 	def sitemap_index_url
-		"http://#{@domain}#{@web_path}sitemap.xml"
+		"http://#{@domain}#{@web_path}/sitemap.xml"
 	end
 	
 	def sitemap_url
-		"http://#{@domain}#{@web_path}sitemaps/sitemap#{@index + 1}.xml.gz"
+		"http://#{@domain}#{@web_path}/sitemaps/sitemap#{@index + 1}.xml.gz"
 	end
 	
 	def sitemap_path

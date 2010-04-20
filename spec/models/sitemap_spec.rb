@@ -24,7 +24,7 @@ describe Sitemap do
     file2.should_receive(:<<).with("</urlset>")
     file2.should_receive(:close)
 
-    s = Sitemap.new("domain.org", public, "/")
+    s = Sitemap.new("domain.org", public, "")
 
     s.add_url "/", :changefreq => :hourly, :lastmod => DateTime.new(2010, 2, 1)
     s.add_url "/foo", :changefreq => :daily, :lastmod => DateTime.new(2010, 1, 1)
@@ -34,7 +34,7 @@ describe Sitemap do
   
   it "should have the path to one of the sitemaps" do
     public = Rails.root.join('public').to_s
-    s = Sitemap.new("domain.org", public, "/")
+    s = Sitemap.new("domain.org", public, "")
     s.sitemap_url.should == "http://domain.org/sitemaps/sitemap1.xml.gz"
     s.sitemap_path.should == "#{public}/sitemaps/sitemap1.xml.gz"
     s.finish
@@ -42,7 +42,7 @@ describe Sitemap do
   
   it "should have the path to the sitemap index" do
     public = Rails.root.join('public').to_s
-    s = Sitemap.new("domain.org", public, "/")
+    s = Sitemap.new("domain.org", public, "")
     s.sitemap_index_url.should == "http://domain.org/sitemap.xml"
     s.sitemap_index_path.should == "#{public}/sitemap.xml"
     s.finish
