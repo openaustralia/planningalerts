@@ -119,23 +119,39 @@ class Sitemap
 	def Sitemap.w3c_date(date)
 		date.utc.strftime("%Y-%m-%dT%H:%M:%S+00:00") if date
 	end 
-		
+	
+	def sitemap_index_relative_path
+	  "sitemap.xml"
+  end
+  
 	# Path on the filesystem to the sitemap index file
 	# This needs to be at the root of the web path to include all the urls below it
 	def sitemap_index_path
-		"#{@path}/sitemap.xml"
+		"#{@path}/#{sitemap_index_relative_path}"
 	end
 	
 	def sitemap_index_url
-		"http://#{@domain}#{@web_path}/sitemap.xml"
+		"#{root_url}/#{sitemap_index_relative_path}"
 	end
 	
+	def sitemap_relative_path
+	  "sitemaps/sitemap#{@index + 1}.xml.gz"
+  end
+  
+  def root_url
+    "http://#{@domain}#{@web_path}"
+  end
+  
+  def root_path
+    @path
+  end
+  
 	def sitemap_url
-		"http://#{@domain}#{@web_path}/sitemaps/sitemap#{@index + 1}.xml.gz"
+		"#{root_url}/#{sitemap_relative_path}"
 	end
 	
 	def sitemap_path
-		"#{@path}/sitemaps/sitemap#{@index + 1}.xml.gz"
+		"#{root_path}/#{sitemap_relative_path}"
 	end
 	
 	# Notify the search engines (like Google, Yahoo, etc..) of the new sitemap

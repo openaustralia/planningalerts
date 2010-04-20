@@ -32,19 +32,29 @@ describe Sitemap do
     #s.notify_search_engines
   end
   
+  it "should know the web root and the file path root" do
+    public = Rails.root.join('public').to_s
+    s = Sitemap.new("domain.org", public, "")
+    s.root_url.should == "http://domain.org"
+    s.root_path.should == public
+    s.finish
+  end
+  
   it "should have the path to one of the sitemaps" do
     public = Rails.root.join('public').to_s
     s = Sitemap.new("domain.org", public, "")
-    s.sitemap_url.should == "http://domain.org/sitemaps/sitemap1.xml.gz"
-    s.sitemap_path.should == "#{public}/sitemaps/sitemap1.xml.gz"
+    s.sitemap_relative_path.should == "sitemaps/sitemap1.xml.gz"
+    s.sitemap_url.should == "#{s.root_url}/#{s.sitemap_relative_path}"
+    s.sitemap_path.should == "#{s.root_path}/#{s.sitemap_relative_path}"
     s.finish
   end
   
   it "should have the path to the sitemap index" do
     public = Rails.root.join('public').to_s
     s = Sitemap.new("domain.org", public, "")
-    s.sitemap_index_url.should == "http://domain.org/sitemap.xml"
-    s.sitemap_index_path.should == "#{public}/sitemap.xml"
+    s.sitemap_index_relative_path.should == "sitemap.xml"
+    s.sitemap_index_url.should == "#{s.root_url}/#{s.sitemap_index_relative_path}"
+    s.sitemap_index_path.should == "#{s.root_path}/#{s.sitemap_index_relative_path}"
     s.finish
   end
 end
