@@ -16,10 +16,9 @@ describe Sitemap do
     file1.should_receive(:close)
 
     file2 = mock("file2")
-    CountedFile.should_receive(:open).with("#{public}/sitemaps/sitemap1.xml.gz").and_return(file2)
+    Zlib::GzipWriter.should_receive(:open).with("#{public}/sitemaps/sitemap1.xml.gz").and_return(file2)
     file2.should_receive(:<<).with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
     file2.should_receive(:<<).with("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")
-    file2.should_receive(:size).twice.and_return(0)
     file2.should_receive(:<<).with("<url><loc>http://domain.org/</loc><changefreq>hourly</changefreq><lastmod>2010-02-01T00:00:00+00:00</lastmod></url>")
     file2.should_receive(:<<).with("<url><loc>http://domain.org/foo</loc><changefreq>daily</changefreq><lastmod>2010-01-01T00:00:00+00:00</lastmod></url>")
     file2.should_receive(:<<).with("</urlset>")

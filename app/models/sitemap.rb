@@ -16,17 +16,25 @@ class SitemapUrl
 end
 
 # Like a Zlib::GzipWriter class but also counts the number of bytes (uncompressed) written out
-class CountedFile < Zlib::GzipWriter
+class CountedFile
   attr_reader :size
   
   def initialize(filename)
+    @writer = Zlib::GzipWriter.open(filename)
     @size = 0
-    super
   end
   
   def <<(text)
-    @size = @size + text.size
-    super
+    @writer << text
+    @size += text.size
+  end
+  
+  def self.open(filename)
+    self.new(filename)
+  end
+  
+  def close
+    @writer.close
   end
 end
 
