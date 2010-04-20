@@ -123,7 +123,7 @@ class Sitemap
 	# Path on the filesystem to the sitemap index file
 	# This needs to be at the root of the web path to include all the urls below it
 	def sitemap_index_path
-		"#{@path}sitemap.xml"
+		"#{@path}/sitemap.xml"
 	end
 	
 	def sitemap_index_url
@@ -135,7 +135,7 @@ class Sitemap
 	end
 	
 	def sitemap_path
-		"#{@path}sitemaps/sitemap#{@index + 1}.xml.gz"
+		"#{@path}/sitemaps/sitemap#{@index + 1}.xml.gz"
 	end
 	
 	# Notify the search engines (like Google, Yahoo, etc..) of the new sitemap
