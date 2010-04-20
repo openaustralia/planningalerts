@@ -48,8 +48,8 @@ class Sitemap
 	
 	SITEMAP_XMLNS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 	
-	def initialize(root_url, root_path)
-		@root_url, @root_path = root_url, root_path
+	def initialize(root_url, root_path, logger = Logger.new(STDOUT))
+		@root_url, @root_path, @logger = root_url, root_path, logger
 
 	  #FileUtils.mkdir_p "#{@root_path}/sitemaps"
 
@@ -61,7 +61,7 @@ class Sitemap
 	
 	def start_sitemap
 	  sitemap_path = "#{root_path}/#{sitemap_relative_path}" 
-		puts "Writing sitemap file (#{sitemap_path})..."
+		@logger.info "Writing sitemap file (#{sitemap_path})..."
 		@sitemap_file = CountedFile.open(sitemap_path)
 		@sitemap_file << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
 		@sitemap_file << "<urlset xmlns=\"#{SITEMAP_XMLNS}\">"
@@ -143,7 +143,7 @@ class Sitemap
 		# Check response for any errors
 		if response.body and response.code == '200'
 			# Display success message
-			puts 'Successfully called PingMyMap API!'
+			@logger.info 'Successfully called PingMyMap API!'
 
 			# Parse JSON response
 			parsed_response = JSON.parse(response.body)
@@ -151,7 +151,7 @@ class Sitemap
 			# Output JSON response
 			y parsed_response
 		else
-			puts "Error calling PingMyMap API with #{pingmymap_api_url}"
+			@logger.error "Error calling PingMyMap API with #{pingmymap_api_url}"
 		end
 	end
 end

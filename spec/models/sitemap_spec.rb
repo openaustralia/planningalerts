@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe Sitemap do
+  before :each do
+    # Make the logging more silent during testing. Only display errors not general chit-chat.
+    @logger = Logger.new(STDOUT)
+    @logger.level = Logger::ERROR
+  end
+
   it "should output an xml sitemap" do
     public = Rails.root.join('public').to_s
     
@@ -24,7 +30,7 @@ describe Sitemap do
     file2.should_receive(:<<).with("</urlset>")
     file2.should_receive(:close)
 
-    s = Sitemap.new("http://domain.org", public)
+    s = Sitemap.new("http://domain.org", public, @logger)
 
     s.add_url "/", :changefreq => :hourly, :lastmod => DateTime.new(2010, 2, 1)
     s.add_url "/foo", :changefreq => :daily, :lastmod => DateTime.new(2010, 1, 1)
@@ -34,7 +40,7 @@ describe Sitemap do
   
   it "should know the web root and the file path root" do
     public = Rails.root.join('public').to_s
-    s = Sitemap.new("http://domain.org", public)
+    s = Sitemap.new("http://domain.org", public, @logger)
     s.root_url.should == "http://domain.org"
     s.root_path.should == public
     s.finish
@@ -42,14 +48,14 @@ describe Sitemap do
   
   it "should have the path to one of the sitemaps" do
     public = Rails.root.join('public').to_s
-    s = Sitemap.new("http://domain.org", public)
+    s = Sitemap.new("http://domain.org", public, @logger)
     s.sitemap_relative_path.should == "sitemap1.xml.gz"
     s.finish
   end
   
   it "should have the path to the sitemap index" do
     public = Rails.root.join('public').to_s
-    s = Sitemap.new("http://domain.org", public)
+    s = Sitemap.new("http://domain.org", public, @logger)
     s.sitemap_index_relative_path.should == "sitemap.xml"
     s.finish
   end
