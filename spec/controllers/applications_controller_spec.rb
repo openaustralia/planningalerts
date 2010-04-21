@@ -122,4 +122,17 @@ describe ApplicationsController do
       assigns[:description].should == "Recent applications in Katoomba, NSW"
     end
   end
+  
+  describe "show" do
+    it "should gracefully handle an application without any geocoded information" do
+      app = mock_model(Application, :address => "An address that can't be geocoded", :location => nil)
+      Application.should_receive(:find).with("1").and_return(app)
+      get :show, :id => 1
+      
+      assigns[:application].should == app
+      assigns[:page_title].should == "An address that can't be geocoded"
+      assigns[:nearby_distance].should == 10000
+      assigns[:nearby_applications].should == []
+    end
+  end
 end

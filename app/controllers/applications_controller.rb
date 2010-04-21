@@ -59,10 +59,14 @@ class ApplicationsController < ApplicationController
     
     # Find other applications nearby (within 10km area)
     @nearby_distance = 10000
-    search_area = Area.centre_and_size(@application.location, @nearby_distance)
-    @nearby_applications = Application.within(search_area).recent
-    # Don't include the current application
-    @nearby_applications.delete(@application)
+    if @application.location
+      search_area = Area.centre_and_size(@application.location, @nearby_distance)
+      @nearby_applications = Application.within(search_area).recent
+      # Don't include the current application
+      @nearby_applications.delete(@application)
+    else
+      @nearby_applications = []
+    end
   end
 
   private
