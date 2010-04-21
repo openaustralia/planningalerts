@@ -12,6 +12,20 @@
       It was received by them #{distance_of_time_in_words(@application.date_received, @application.date_scraped)} earlier.
     - else
       The date it was received by them was not recorded.
+  - if @application.on_notice_to
+    %p.on_notice
+      - if @application.on_notice_from
+        - if @application.on_notice_from.future?
+          The period for officially responding to this application starts in #{distance_of_time_in_words(Time.now, @application.on_notice_from)} and finishes #{distance_of_time_in_words(@application.on_notice_from, @application.on_notice_to)} later.
+        - elsif @application.on_notice_to.future?
+          You have #{distance_of_time_in_words(Time.now, @application.on_notice_to)} left to officially respond to this application. The period for comment started #{time_ago_in_words(@application.on_notice_from)} ago.
+        - else
+          The period for officially commenting on this application finished #{time_ago_in_words(@application.on_notice_to)} ago. It lasted for #{distance_of_time_in_words(@application.on_notice_from, @application.on_notice_to)}.
+      - else
+        - if @application.on_notice_to.future?
+          You have #{distance_of_time_in_words(Time.now, @application.on_notice_to)} left to officially respond to this application.
+        - else
+          The period for officially commenting on this application finished #{time_ago_in_words(@application.on_notice_to)} ago.
   %ul
     %li
       Source:

@@ -4,7 +4,8 @@ describe ApplicationsController do
   before :each do
     authority = mock_model(Authority, :full_name => "An authority", :short_name => "Blue Mountains")
     assigns[:application] = mock_model(Application, :map_url => "http://a.map.url",
-      :description => "A planning application", :council_reference => "A1", :authority => authority, :info_url => "http://info.url", :comment_url => "http://comment.url")
+      :description => "A planning application", :council_reference => "A1", :authority => authority, :info_url => "http://info.url", :comment_url => "http://comment.url",
+      :on_notice_from => nil, :on_notice_to => nil)
     assigns[:nearby_applications] = []
   end
   
@@ -35,6 +36,55 @@ describe ApplicationsController do
       assigns[:application].stub!(:date_scraped).and_return(Time.now)
       render "applications/show"
       response.should have_tag("div#map_div")      
+    end
+    
+    describe "on notice" do
+      before :each do
+        assigns[:application].stub!(:date_received).and_return(nil)
+        assigns[:application].stub!(:date_scraped).and_return(Time.now)
+      end
+      
+      it "should say when the application is on notice (and hasn't started yet)" do
+        assigns[:application].stub!(:on_notice_from).and_return(2.days.from_now)
+        assigns[:application].stub!(:on_notice_to).and_return(16.days.from_now)
+        render "applications/show"
+        response.should have_tag("p.on_notice", "The period for officially responding to this application starts in 2 days and finishes 14 days later.")
+      end
+    
+      it "should say when the application is on notice (and is in progress)" do
+        assigns[:application].stub!(:on_notice_from).and_return(2.days.ago)
+        assigns[:application].stub!(:on_notice_to).and_return(12.days.from_now)
+        render "applications/show"
+        response.should have_tag("p.on_notice", "You have 12 days left to officially respond to this application. The period for comment started 2 days ago.")
+      end
+      
+      it "should say when the application is on notice (and is finished)" do
+        assigns[:application].stub!(:on_notice_from).and_return(16.days.ago)
+        assigns[:application].stub!(:on_notice_to).and_return(2.days.ago)
+        render "applications/show"
+        response.should have_tag("p.on_notice", "The period for officially commenting on this application finished 2 days ago. It lasted for 14 days.")
+      end
+      
+      it "should only say when on notice to if there is no on notice from information (and is in progress)" do
+        assigns[:application].stub!(:on_notice_from).and_return(nil)
+        assigns[:application].stub!(:on_notice_to).and_return(12.days.from_now)
+        render "applications/show"
+        response.should have_tag("p.on_notice", "You have 12 days left to officially respond to this application.")      
+      end
+      
+      it "should only say when on notice to if there is no on notice from information (and is finished)" do
+        assigns[:application].stub!(:on_notice_from).and_return(nil)
+        assigns[:application].stub!(:on_notice_to).and_return(2.days.ago)
+        render "applications/show"
+        response.should have_tag("p.on_notice", "The period for officially commenting on this application finished 2 days ago.")      
+      end
+      
+      it "should say nothing about notice period when there is no information" do
+        assigns[:application].stub!(:on_notice_from).and_return(nil)
+        assigns[:application].stub!(:on_notice_to).and_return(nil)
+        render "applications/show"
+        response.should_not have_tag("p.on_notice")
+      end
     end
   end
   
