@@ -80,6 +80,8 @@ describe Application do
             <info_url>http://fiddle.gov.au/info/R1</info_url>
             <comment_url>http://fiddle.gov.au/comment/R1</comment_url>
             <date_received>2009-01-01</date_received>
+            <on_notice_from>2009-01-05</on_notice_from>
+            <on_notice_to>2009-01-19</on_notice_to>
           </application>
           <application>
             <council_reference>R2</council_reference>
@@ -113,6 +115,8 @@ describe Application do
       r1.info_url.should == "http://fiddle.gov.au/info/R1"
       r1.comment_url.should == "http://fiddle.gov.au/comment/R1"
       r1.date_received.should == @date
+      r1.on_notice_from.should == Date.new(2009,1,5)
+      r1.on_notice_to.should == Date.new(2009,1,19)
     end
     
     it "should not create new applications when they already exist" do

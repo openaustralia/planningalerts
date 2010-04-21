@@ -48,6 +48,9 @@ class Application < ActiveRecord::Base
         count_old += 1
       else
         count_new += 1
+        # on_notice_from and on_notice_to tags are optional
+        on_notice_from = a.at('on_notice_from').inner_text if a.at('on_notice_from')
+        on_notice_to = a.at('on_notice_to').inner_text if a.at('on_notice_to')
         auth.applications.create!(
           :council_reference => council_reference,
           :address => a.at('address').inner_text,
@@ -55,7 +58,9 @@ class Application < ActiveRecord::Base
           :info_url => a.at('info_url').inner_text,
           :comment_url => a.at('comment_url').inner_text,
           :date_received => a.at('date_received').inner_text,
-          :date_scraped => DateTime.now)
+          :date_scraped => DateTime.now,
+          :on_notice_from => on_notice_from,
+          :on_notice_to => on_notice_to)
       end
     end
     
