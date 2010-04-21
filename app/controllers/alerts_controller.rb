@@ -58,6 +58,7 @@ class AlertsController < ApplicationController
   end
   
   def area
+    @page_title = "Change the size of your alert"
     @zone_sizes = zone_sizes
     @alert = Alert.find_by_confirm_id(params[:cid])
     if request.get?
