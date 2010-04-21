@@ -21,7 +21,7 @@
         - if @application.on_notice_from
           The period for comment started #{time_ago_in_words(@application.on_notice_from)} ago.
       - else
-        The period for officially commenting on this application finished #{time_ago_in_words(@application.on_notice_to)} ago.
+        You're too late! The period for officially commenting on this application finished #{time_ago_in_words(@application.on_notice_to)} ago.
         - if @application.on_notice_from
           It lasted for #{distance_of_time_in_words(@application.on_notice_from, @application.on_notice_to)}.
   %ul
