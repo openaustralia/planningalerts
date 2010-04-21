@@ -50,33 +50,41 @@ describe ApplicationsController do
         render "applications/show"
         response.should have_tag("p.on_notice", "The period for officially responding to this application starts in 2 days and finishes 14 days later.")
       end
-    
-      it "should say when the application is on notice (and is in progress)" do
-        assigns[:application].stub!(:on_notice_from).and_return(2.days.ago)
-        assigns[:application].stub!(:on_notice_to).and_return(12.days.from_now)
-        render "applications/show"
-        response.should have_tag("p.on_notice", "You have 12 days left to officially respond to this application. The period for comment started 2 days ago.")
+
+      describe "period is in progress" do
+        before :each do
+          assigns[:application].stub!(:on_notice_from).and_return(2.days.ago)
+          assigns[:application].stub!(:on_notice_to).and_return(12.days.from_now)
+        end
+        
+        it "should say when the application is on notice" do
+          render "applications/show"
+          response.should have_tag("p.on_notice", "You have 12 days left to officially respond to this application. The period for comment started 2 days ago.")
+        end
+      
+        it "should only say when on notice to if there is no on notice from information" do
+          assigns[:application].stub!(:on_notice_from).and_return(nil)
+          render "applications/show"
+          response.should have_tag("p.on_notice", "You have 12 days left to officially respond to this application.")      
+        end
       end
       
-      it "should say when the application is on notice (and is finished)" do
-        assigns[:application].stub!(:on_notice_from).and_return(16.days.ago)
-        assigns[:application].stub!(:on_notice_to).and_return(2.days.ago)
-        render "applications/show"
-        response.should have_tag("p.on_notice", "The period for officially commenting on this application finished 2 days ago. It lasted for 14 days.")
-      end
+      describe "period is finished" do
+        before :each do
+          assigns[:application].stub!(:on_notice_from).and_return(16.days.ago)
+          assigns[:application].stub!(:on_notice_to).and_return(2.days.ago)
+        end
+        
+        it "should say when the application is on notice" do
+          render "applications/show"
+          response.should have_tag("p.on_notice", "The period for officially commenting on this application finished 2 days ago. It lasted for 14 days.")
+        end
       
-      it "should only say when on notice to if there is no on notice from information (and is in progress)" do
-        assigns[:application].stub!(:on_notice_from).and_return(nil)
-        assigns[:application].stub!(:on_notice_to).and_return(12.days.from_now)
-        render "applications/show"
-        response.should have_tag("p.on_notice", "You have 12 days left to officially respond to this application.")      
-      end
-      
-      it "should only say when on notice to if there is no on notice from information (and is finished)" do
-        assigns[:application].stub!(:on_notice_from).and_return(nil)
-        assigns[:application].stub!(:on_notice_to).and_return(2.days.ago)
-        render "applications/show"
-        response.should have_tag("p.on_notice", "The period for officially commenting on this application finished 2 days ago.")      
+        it "should only say when on notice to if there is no on notice from information" do
+          assigns[:application].stub!(:on_notice_from).and_return(nil)
+          render "applications/show"
+          response.should have_tag("p.on_notice", "The period for officially commenting on this application finished 2 days ago.")      
+        end
       end
       
       it "should say nothing about notice period when there is no information" do
