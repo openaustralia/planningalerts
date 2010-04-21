@@ -4,6 +4,9 @@
 class ApplicationController < ActionController::Base
   # Enables exception notification by email for all controllers
   include ExceptionNotification::Notifiable
+  rescue_from ActionController::RoutingError, :with => :render_404
+  rescue_from ActionController::UnknownAction, :with => :render_404
+  rescue_from ActiveRecord::RecordNotFound, :with => :render_404
   
   helper :all # include all helpers, all the time
   # TODO: Reenable protect_from_forgery but will need to change the form submission
@@ -19,5 +22,9 @@ class ApplicationController < ActionController::Base
   def load_configuration
     @alert_count = Stat.applications_sent
     @authority_count = Authority.active.count
+  end
+  
+  def render_404
+    render "static/404", :status => :not_found
   end
 end
