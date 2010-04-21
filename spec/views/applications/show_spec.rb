@@ -59,7 +59,7 @@ describe ApplicationsController do
         
         it "should say when the application is on notice" do
           render "applications/show"
-          response.should have_tag("p.on_notice", "You have 12 days left to officially respond to this application. The period for comment started 2 days ago.")
+          response.should have_tag("p.on_notice", "You have 12 days left to officially respond to this application.\n    The period for comment started 2 days ago.")
         end
       
         it "should only say when on notice to if there is no on notice from information" do
@@ -77,7 +77,7 @@ describe ApplicationsController do
         
         it "should say when the application is on notice" do
           render "applications/show"
-          response.should have_tag("p.on_notice", "The period for officially commenting on this application finished 2 days ago. It lasted for 14 days.")
+          response.should have_tag("p.on_notice", "The period for officially commenting on this application finished 2 days ago.\n    It lasted for 14 days.")
         end
       
         it "should only say when on notice to if there is no on notice from information" do
