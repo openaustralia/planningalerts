@@ -119,7 +119,7 @@ describe Application do
       logger = mock
       Application.stub!(:logger).and_return(logger)
       logger.should_receive(:info).with("2 new applications found for Fiddlesticks")
-      logger.should_receive(:info).with("0 new and 2 old applications found for Fiddlesticks")
+      # It shouldn't log anything if there are no new applications
 
       # Getting the feed twice with the same content
       Application.collect_applications_for_authority(@auth, @date)
