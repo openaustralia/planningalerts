@@ -20,7 +20,6 @@ class AlertsController < ApplicationController
         @address_warn = !u.errors.on(:street_address).nil?
       end
     end
-    @form_action = ""
     @set_focus_control = "txtEmail"
   end
   
@@ -35,8 +34,6 @@ class AlertsController < ApplicationController
   def confirmed
     @page_title = "Confirmed"
     
-    # TODO: Get rid of this @form_action
-    @form_action = confirmed_path
     @alert = Alert.find_by_confirm_id(params[:cid])
     if @alert
       @alert.confirmed = true
