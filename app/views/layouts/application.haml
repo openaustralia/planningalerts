@@ -46,8 +46,6 @@
           - link_to 'Sign Up', signup_path
     #page
       #content
-        #warning{ :class => ("hide" if @warnings.nil?) }
-          = @warnings
         = yield
       #footer
         %ul.inline
