@@ -9,8 +9,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
   
   helper :all # include all helpers, all the time
-  # TODO: Reenable protect_from_forgery but will need to change the form submission
-  #protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
