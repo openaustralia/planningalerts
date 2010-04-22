@@ -1,22 +1,22 @@
-%form{ :method => "post", :action => @form_action }
+%form(method="post" action=@form_action)
   %fieldset
-    %input{ :name => "_is_postback", :value => "1", :type => "hidden" }
+    %input(name="_is_postback" value="1" type="hidden")
   %ul#ulSignup.form.nobullets
     %li#liEmail
-      %label{ :for => "txtEmail" }
+      %label(for="txtEmail")
         %span.number 1
         Enter your email address
-      %input#txtEmail.textbox{ :class => ("error" if @email_warn), :name => "txtEmail", :type => "text", :value => @email }
+      %input#txtEmail.textbox(name="txtEmail" type="text" value=@email){:class => ("error" if @email_warn)}
     %li#liAddress
-      %label{ :for => "txtAddress" }
+      %label(for="txtAddress")
         %span.number 2
         Enter a street address
       - if @address_warn
-        %input#txtAddress.textbox.error{ :name => "txtAddress", :type => "text", :value => @address }
+        %input#txtAddress.textbox.error(name="txtAddress" type="text" value=@address)
       - else
-        %input#txtAddress.textbox{ :name => "txtAddress", :type => "text", :value => @address }
+        %input#txtAddress.textbox(name="txtAddress" type="text" value=@address)
       %small e.g. 1 Sowerby St, Goulburn, NSW 2580
-    %input.button{ :value => "Create alert >>", :type => "submit" }
+    %input.button(value="Create alert >>" type="submit")
     %p#privacy
       Our
       %em Privacy Policy

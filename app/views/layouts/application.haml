@@ -1,13 +1,13 @@
 !!! Strict
-%html{ "xml:lang" => "en", :lang => "en", :xmlns => "http://www.w3.org/1999/xhtml" }
+%html(xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml")
   %head
-    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
+    %meta(content="text/html; charset=utf-8" http-equiv="Content-Type")
     %title PlanningAlerts.org.au | #{@page_title}
     - if @rss
-      %link{ :rel => "alternate", :type => "application/rss+xml", :title => "RSS", :href => @rss}
+      %link(rel="alternate" type="application/rss+xml" title="RSS" href=@rss)
     = stylesheet_link_tag "memespring", "main", :media => "all"
     = javascript_include_tag "main"
-    %script{ :type => "text/javascript" }
+    %script(type="text/javascript")
 
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', '#{Configuration::GOOGLE_ANALYTICS_KEY}']);
@@ -36,12 +36,12 @@
           - link_to 'About', about_path
         = li_selected(:controller => "api", :action => "howto") do
           - link_to api_howto_path do
-            %acronym{ :title => "Application programming interface" } API
+            %acronym(title="Application programming interface") API
         = li_selected(:controller => "static", :action => "get_involved") do
           - link_to 'Get Involved', get_involved_path
         = li_selected(:controller => "static", :action => "faq") do
           - link_to faq_path do
-            %acronym{ :title => "Frequently asked questions"} FAQ
+            %acronym(title="Frequently asked questions") FAQ
         = li_selected(:controller => "alerts", :action => ["signup", "check_mail"]) do
           - link_to 'Sign Up', signup_path
     #page
@@ -56,9 +56,9 @@
           %li= link_to "Twitter", "http://twitter.com/planningalerts"
         %span#oaf An <a href="http://openaustraliafoundation.org.au">OpenAustralia Foundation</a> Project
     - if @set_focus_control
-      %script{ :type => "text/javascript", :defer => "defer" }<
+      %script(type="text/javascript" defer="defer")<
         setFocus('#{@set_focus_control}');;
-    %script{ :type => "text/javascript"}
+    %script(type="text/javascript")
       var uservoiceOptions = {key: 'planningalerts', host: 'planningalerts.uservoice.com', forum: '49635', alignment: 'right', background_color:'#F4F322', text_color: 'black',
       hover_color: '#FF8C00', lang: 'en', showTab: true};
       function _loadUserVoice() {
