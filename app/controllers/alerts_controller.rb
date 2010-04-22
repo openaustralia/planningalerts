@@ -4,23 +4,18 @@ class AlertsController < ApplicationController
   def signup
     @page_title = "Email alerts of planning applications near you"
     @zone_sizes = zone_sizes
-    if request.get?
-      @email = ""
-      @address = ""
-    else
-      @address = params[:txtAddress]
-      @email = params[:txtEmail]
-      u = Alert.new(:address => @address, :email => @email, :area_size_meters => @zone_sizes['l'])
-      if u.save
-        AlertNotifier.deliver_confirm(u)
+    unless request.get?
+      @alert = Alert.new(:address => params[:alert][:address], :email => params[:alert][:email], :area_size_meters => @zone_sizes['l'])
+      if @alert.save
+        AlertNotifier.deliver_confirm(@alert)
         redirect_to check_mail_url
       else
-        @warnings = u.errors.full_messages.join("<br>")
-        @email_warn = !u.errors.on(:email_address).nil?
-        @address_warn = !u.errors.on(:street_address).nil?
+        @warnings = @alert.errors.full_messages.join("<br>")
+        @email_warn = !@alert.errors.on(:email_address).nil?
+        @address_warn = !@alert.errors.on(:street_address).nil?
       end
     end
-    @set_focus_control = "txtEmail"
+    @set_focus_control = "alert_email"
   end
   
   def check_mail

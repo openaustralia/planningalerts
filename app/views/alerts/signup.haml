@@ -1,13 +1,13 @@
 #warning{ :class => ("hide" if @warnings.nil?) }
   = @warnings
-- form_tag do
+- form_for :alert, @alert do |f|
   %ul#ulSignup.form.nobullets
     %li#liEmail
-      = label_tag(:txtEmail, '<span class="number">1</span> Enter your email address')
-      = text_field_tag(:txtEmail, @email, :class => (@email_warn ? "textbox error" : "textbox"))
+      = f.label(:email, '<span class="number">1</span> Enter your email address')
+      = f.text_field(:email, :class => (@email_warn ? "textbox error" : "textbox"))
     %li#liAddress
-      = label_tag(:txtAddress, '<span class="number">2</span> Enter a street address')
-      = text_field_tag(:txtAddress, @address, :class => (@address_warn ? "textbox error" : "textbox"))
+      = f.label(:address, '<span class="number">2</span> Enter a street address')
+      = f.text_field(:address, :class => (@address_warn ? "textbox error" : "textbox"))
       %small e.g. 1 Sowerby St, Goulburn, NSW 2580
     = submit_tag "Create alert >>", :class => "button"
     %p#privacy
