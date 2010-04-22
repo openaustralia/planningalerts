@@ -5,11 +5,11 @@ Given /^I have received an email alert for "([^\"]*)" with a size of "([^\"]*)"$
 end
 
 When /^I fill in the email adress with "([^\"]*)"$/ do |value|
-  fill_in("alert[email]", :with => value)
+  fill_in("alert_email", :with => value)
 end
 
 When /^I fill in the street address with "([^\"]*)"$/ do |value|
-  fill_in("alert[address]", :with => value)
+  fill_in("alert_address", :with => value)
 end
 
 When /^I click the "([^\"]*)" link in the email alert for "([^\"]*)"$/ do |link, address|
