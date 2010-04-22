@@ -67,7 +67,7 @@ describe AlertNotifier do
     
     it "should nicely format a list of multiple planning applications" do
       @email.body.should == <<-EOF
-The following new planning applications have been found near 24 Bruce Rd, Glenbrook NSW 2773:
+The following new planning applications have been found near 24 Bruce Rd, Glenbrook NSW 2773 within about 800 m:
 
 FOO STREET, BAR (A1)
 
