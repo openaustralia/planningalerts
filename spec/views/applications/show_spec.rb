@@ -21,14 +21,14 @@ describe ApplicationsController do
       assigns[:application].stub!(:date_received).and_return(20.days.ago)
       assigns[:application].stub!(:date_scraped).and_return(18.days.ago)
       render "applications/show"
-      response.should have_tag("p.dates", "We found this application for you on the planning authority's website 18 days ago.\n    It was received by them 2 days earlier.")
+      response.should have_tag("p.dates", "We found this application for you on the planning authority's website 18 days ago. It was received by them 2 days earlier.")
     end
   
     it "should say something appropriate when the received date is not known" do
       assigns[:application].stub!(:date_received).and_return(nil)
       assigns[:application].stub!(:date_scraped).and_return(18.days.ago)
       render "applications/show"
-      response.should have_tag("p.dates", "We found this application for you on the planning authority's website 18 days ago.\n    The date it was received by them was not recorded.")
+      response.should have_tag("p.dates", "We found this application for you on the planning authority's website 18 days ago. The date it was received by them was not recorded.")
     end
     
     it "should display the map" do
@@ -59,7 +59,7 @@ describe ApplicationsController do
         
         it "should say when the application is on notice" do
           render "applications/show"
-          response.should have_tag("p.on_notice", "You have 12 days left to officially respond to this application.\n    The period for comment started 2 days ago.")
+          response.should have_tag("p.on_notice", "You have 12 days left to officially respond to this application. The period for comment started 2 days ago.")
         end
       
         it "should only say when on notice to if there is no on notice from information" do
@@ -77,7 +77,7 @@ describe ApplicationsController do
         
         it "should say when the application is on notice" do
           render "applications/show"
-          response.should have_tag("p.on_notice", "You're too late! The period for officially commenting on this application finished 2 days ago.\n    It lasted for 14 days.")
+          response.should have_tag("p.on_notice", "You're too late! The period for officially commenting on this application finished 2 days ago. It lasted for 14 days.")
         end
       
         it "should only say when on notice to if there is no on notice from information" do
