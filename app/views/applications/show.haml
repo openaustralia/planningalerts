@@ -1,7 +1,15 @@
 #application
   - if @application.location
-    = link_to map(@application).div(:width => 330, :height => 330, :class => "map"), @application.map_url
-    = map(@application).to_html
+    - link_to @application.map_url do
+      #map_div(style="width:330px;height:330px")
+    :javascript
+      var map;
+      window.onload = addCodeToFunction(window.onload,function() {
+        map = new Mapstraction("map_div","google");
+        map.setCenterAndZoom(new LatLonPoint(#{@application.lat},#{@application.lng}),16);
+        map.dragging(false);
+        map.addMarker(addDataToMarker(new Marker(new LatLonPoint(#{@application.lat},#{@application.lng})),{label : "#{@application.address}"}));
+      });
 
   %h3.address= @application.address
   %p.description= @application.description

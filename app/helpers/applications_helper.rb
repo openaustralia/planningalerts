@@ -3,15 +3,6 @@ module ApplicationsHelper
     "http://maps.google.com/maps/api/staticmap?center=#{CGI.escape(options[:address])}&zoom=14&size=#{options[:size]}&maptype=roadmap&markers=color:blue|label:#{CGI.escape(options[:address])}|#{CGI.escape(options[:address])}&sensor=false"
   end
   
-  def map(application)
-    map = Mapstraction.new("map_div",:google)
-    # Disable dragging of the map. Hmmm.. not quite sure if this is the most concise way of doing this
-    map.record_init(map.dragging(false))
-    map.center_zoom_init([application.lat, application.lng], 16)
-    map.marker_init(Marker.new([application.lat, application.lng],:label => application.address))
-    map
-  end
-  
   def scraped_and_received_text(application)
     text = "We found this application for you on the planning authority's website #{time_ago_in_words(application.date_scraped)} ago. "
     if application.date_received
