@@ -2,7 +2,13 @@
   - if @application.location
     - link_to @application.map_url do
       #map_div(style="width:330px;height:330px")
-
+    #pano(style="width:330px;height:330px")
+    :javascript
+      var myPano;
+      $(document).ready(function(){
+        var location = new GLatLng(#{@application.lat},#{@application.lng});
+        myPano = new GStreetviewPanorama(document.getElementById("pano"), { latlng:location });
+      })
   %h3.address= @application.address
   %p.description= @application.description
   %p.council-reference Council reference: #{@application.council_reference}
