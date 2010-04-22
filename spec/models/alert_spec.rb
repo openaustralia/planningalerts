@@ -57,7 +57,7 @@ describe Alert do
       @attributes[:address] = ""
       u = Alert.new(@attributes)
       u.should_not be_valid
-      u.errors.on(:street_address).should == "can't be empty"
+      u.errors.on(:address).should == "can't be empty"
     end
     
     it "should error if the street address is not in australia" do
@@ -65,7 +65,7 @@ describe Alert do
       @attributes[:address] = "New York"
       u = Alert.new(@attributes)
       u.should_not be_valid
-      u.errors.on(:street_address).should == "isn't in Australia"
+      u.errors.on(:address).should == "isn't in Australia"
     end
 
     it "should error if there are multiple matches from the geocoder" do
@@ -75,7 +75,7 @@ describe Alert do
       @attributes[:address] = "Bruce Road"
       u = Alert.new(@attributes)
       u.should_not be_valid
-      u.errors.on(:street_address).should == "isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"
+      u.errors.on(:address).should == "isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"
     end
 
     it "should error if the address is not a full street address but rather a suburb name or similar" do
@@ -85,7 +85,7 @@ describe Alert do
       @attributes[:address] = "Glenbrook, NSW"
       u = Alert.new(@attributes)
       u.should_not be_valid
-      u.errors.on(:street_address).should == "isn't complete. We saw that address as \"Glenbrook NSW\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state"
+      u.errors.on(:address).should == "isn't complete. We saw that address as \"Glenbrook NSW\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state"
     end
     
     it "should replace the address with the full resolved address obtained by geocoding" do
@@ -101,14 +101,14 @@ describe Alert do
       @attributes[:email] = "diddle@"
       u = Alert.new(@attributes)
       u.should_not be_valid
-      u.errors.on(:email_address).should == "isn't valid"    
+      u.errors.on(:email).should == "isn't valid"    
     end
 
     it "should have an '@' in it" do
       @attributes[:email] = "diddle"
       u = Alert.new(@attributes)
       u.should_not be_valid
-      u.errors.on(:email_address).should == "isn't valid"    
+      u.errors.on(:email).should == "isn't valid"    
     end
   end
   

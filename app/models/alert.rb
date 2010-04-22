@@ -69,29 +69,29 @@ class Alert < ActiveRecord::Base
     # Only validate the street address if we used the geocoder
     if @geocode_result
       if address == ""
-        errors.add(:street_address, "can't be empty")
+        errors.add(:address, "can't be empty")
       elsif location.nil?
-        errors.add(:street_address, "isn't valid")
+        errors.add(:address, "isn't valid")
       elsif @geocode_result.country_code != "AU"
-        errors.add(:street_address, "isn't in Australia")
+        errors.add(:address, "isn't in Australia")
       elsif @geocode_result.all.size > 1
-        errors.add(:street_address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
+        errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
       elsif @geocode_result.accuracy < 6
-        errors.add(:street_address, "isn't complete. We saw that address as \"#{@geocode_result.full_address}\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state")
+        errors.add(:address, "isn't complete. We saw that address as \"#{@geocode_result.full_address}\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state")
       end
     end
   end
   
   def validate_email
     if email == ""
-      errors.add(:email_address, "can't be empty")
+      errors.add(:email, "can't be empty")
     elsif !email.include?('@')
-      errors.add(:email_address, "isn't valid")      
+      errors.add(:email, "isn't valid")      
     else
       begin
         TMail::Address.parse(email)
       rescue
-        errors.add(:email_address, "isn't valid")
+        errors.add(:email, "isn't valid")
       end
     end
   end

@@ -5,10 +5,10 @@
   %ul#ulSignup.form.nobullets
     %li#liEmail
       = f.label(:email, '<span class="number">1</span> Enter your email address')
-      = f.text_field(:email, :class => (@alert && @alert.errors.on(:email_address) ? "textbox error" : "textbox"))
+      = f.text_field(:email, :class => (@alert && @alert.errors.on(:email) ? "textbox error" : "textbox"))
     %li#liAddress
       = f.label(:address, '<span class="number">2</span> Enter a street address')
-      = f.text_field(:address, :class => (@alert && @alert.errors.on(:street_address) ? "textbox error" : "textbox"))
+      = f.text_field(:address, :class => (@alert && @alert.errors.on(:address) ? "textbox error" : "textbox"))
       %small e.g. 1 Sowerby St, Goulburn, NSW 2580
     = submit_tag "Create alert >>", :class => "button"
     %p#privacy
