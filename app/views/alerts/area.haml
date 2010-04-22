@@ -1,5 +1,11 @@
-= @map.div(:width => 330, :height => 330)
-= @map.to_html
+#map_div(style="width:330px;height:330px")
+:javascript
+  var map;
+  window.onload = addCodeToFunction(window.onload,function() {
+    map = new Mapstraction("map_div","google");
+    map.setCenterAndZoom(new LatLonPoint(#{@alert.lat},#{@alert.lng}),14);
+    map.addSmallControls();
+  });
 
 %p
   What size area near #{@alert.address} would you like to receive alerts for?
