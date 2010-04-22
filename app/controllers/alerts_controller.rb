@@ -9,10 +9,6 @@ class AlertsController < ApplicationController
       if @alert.save
         AlertNotifier.deliver_confirm(@alert)
         redirect_to check_mail_url
-      else
-        @warnings = @alert.errors.full_messages.join("<br>")
-        @email_warn = !@alert.errors.on(:email_address).nil?
-        @address_warn = !@alert.errors.on(:street_address).nil?
       end
     end
     @set_focus_control = "alert_email"
