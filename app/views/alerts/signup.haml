@@ -9,7 +9,7 @@
       = label_tag(:txtAddress, '<span class="number">2</span> Enter a street address')
       = text_field_tag(:txtAddress, @address, :class => (@address_warn ? "textbox error" : "textbox"))
       %small e.g. 1 Sowerby St, Goulburn, NSW 2580
-    %input.button(value="Create alert >>" type="submit")
+    = submit_tag "Create alert >>", :class => "button"
     %p#privacy
       Our
       %em Privacy Policy
