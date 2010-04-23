@@ -3,8 +3,8 @@
 :javascript
   var map;
   $(document).ready(function(){
-    map = new Mapstraction("map_div","google");
-    map.setCenterAndZoom(new LatLonPoint(#{@alert.lat},#{@alert.lng}),14);
+    map = new mxn.Mapstraction("map_div","google");
+    map.setCenterAndZoom(new mxn.LatLonPoint(#{@alert.lat},#{@alert.lng}),14);
     map.addSmallControls();
     #{draw_box_javascript(@size)}
   });

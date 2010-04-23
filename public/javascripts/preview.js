@@ -1,14 +1,13 @@
 function preview(lower_left_lat, lower_left_lng, upper_right_lat, upper_right_lng) {
   map.removeAllPolylines();
-    var myPoly = new Polyline([
-    new LatLonPoint(lower_left_lat, lower_left_lng),
-    new LatLonPoint(lower_left_lat, upper_right_lng),
-    new LatLonPoint(upper_right_lat, upper_right_lng),
-    new LatLonPoint(upper_right_lat, lower_left_lng),
-    new LatLonPoint(lower_left_lat, lower_left_lng)
+    var myPoly = new mxn.Polyline([
+    new mxn.LatLonPoint(lower_left_lat, lower_left_lng),
+    new mxn.LatLonPoint(lower_left_lat, upper_right_lng),
+    new mxn.LatLonPoint(upper_right_lat, upper_right_lng),
+    new mxn.LatLonPoint(upper_right_lat, lower_left_lng)
   ]);
-  myPoly.setWidth(5);
-  myPoly.setOpacity(0.7);
-  myPoly.setColor("#EF2C2C");
+  myPoly.setWidth(0);
+  myPoly.setOpacity(0.2);
+  myPoly.setClosed(true);
   map.addPolyline(myPoly);
 };

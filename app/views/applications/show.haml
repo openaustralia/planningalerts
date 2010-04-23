@@ -5,11 +5,11 @@
     :javascript
       var map;
       $(document).ready(function(){
-        map = new Mapstraction("map_div","google");
-        point = new LatLonPoint(#{@application.lat},#{@application.lng});
+        map = new mxn.Mapstraction("map_div","google");
+        point = new mxn.LatLonPoint(#{@application.lat},#{@application.lng});
         map.setCenterAndZoom(point,16);
         map.dragging(false);
-        marker = new Marker(point)
+        marker = new mxn.Marker(point)
         marker.setLabel("#{@application.address}");
         map.addMarker(marker);
       });
