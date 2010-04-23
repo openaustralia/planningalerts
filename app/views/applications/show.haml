@@ -10,7 +10,7 @@
         map.setCenterAndZoom(point,16);
         map.dragging(false);
         marker = new mxn.Marker(point)
-        marker.setLabel("#{@application.address}");
+        marker.setLabel("#{escape_javascript(@application.address)}");
         map.addMarker(marker);
       });
 
