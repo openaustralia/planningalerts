@@ -4,7 +4,7 @@
   var map;
   $(document).ready(function(){
     map = new mxn.Mapstraction("map_div","google");
-    map.setCenterAndZoom(new mxn.LatLonPoint(#{@alert.lat},#{@alert.lng}),14);
+    map.setCenterAndZoom(new mxn.LatLonPoint(#{@alert.lat},#{@alert.lng}),13);
     map.addSmallControls();
     #{draw_box_javascript(@size)}
     $('#size_s').click(function(){ #{draw_box_javascript('s')} });
