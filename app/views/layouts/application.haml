@@ -17,7 +17,12 @@
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
       })();
-    = Mapstraction.header(:google)
+    %script(src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=#{Configuration::GOOGLE_MAPS_KEY}" type="text/javascript")
+    %style(type="text/css")
+      v:* { behavior:url(#default#VML);}
+    = javascript_include_tag "mapstraction"
+    = javascript_include_tag "mapstraction-route"
+    = javascript_include_tag "ym4r-mapstraction"
   %body
     #header
       %h1
