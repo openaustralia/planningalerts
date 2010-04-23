@@ -4,11 +4,14 @@
       #map_div(style="width:330px;height:330px")
     :javascript
       var map;
-      window.onload = addCodeToFunction(window.onload,function() {
+      $(document).ready(function(){
         map = new Mapstraction("map_div","google");
-        map.setCenterAndZoom(new LatLonPoint(#{@application.lat},#{@application.lng}),16);
+        point = new LatLonPoint(#{@application.lat},#{@application.lng});
+        map.setCenterAndZoom(point,16);
         map.dragging(false);
-        map.addMarker(addDataToMarker(new Marker(new LatLonPoint(#{@application.lat},#{@application.lng})),{label : "#{@application.address}"}));
+        marker = new Marker(point)
+        marker.setLabel("#{@application.address}");
+        map.addMarker(marker);
       });
 
   %h3.address= @application.address

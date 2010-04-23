@@ -1,12 +1,14 @@
 #map_div(style="width:330px;height:330px")
+= javascript_include_tag "preview"
 :javascript
   var map;
-  window.onload = addCodeToFunction(window.onload,function() {
+  $(document).ready(function(){
     map = new Mapstraction("map_div","google");
     map.setCenterAndZoom(new LatLonPoint(#{@alert.lat},#{@alert.lng}),14);
     map.addSmallControls();
+    #{draw_box_javascript(@size)}
   });
-
+  
 %p
   What size area near #{@alert.address} would you like to receive alerts for?
 
@@ -28,5 +30,3 @@
   %p
     = submit_tag("Update size >>", :class => "button")
 
-= javascript_include_tag "preview"
-= javascript_tag "window.onload = addCodeToFunction(window.onload,function() {#{draw_box_javascript(@size)}});"
