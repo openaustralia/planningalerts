@@ -5,7 +5,7 @@ class AlertsController < ApplicationController
     @page_title = "Email alerts of planning applications near you"
     @zone_sizes = zone_sizes
     unless request.get?
-      @alert = Alert.new(:address => params[:alert][:address], :email => params[:alert][:email], :area_size_meters => @zone_sizes['l'])
+      @alert = Alert.new(:address => params[:alert][:address], :email => params[:alert][:email], :radius_meters => @zone_sizes['l'])
       if @alert.save
         AlertNotifier.deliver_confirm(@alert)
         redirect_to check_mail_url
@@ -50,9 +50,9 @@ class AlertsController < ApplicationController
     @zone_sizes = zone_sizes
     @alert = Alert.find_by_confirm_id(params[:cid])
     if request.get?
-      @size = @zone_sizes.invert[@alert.area_size_meters]
+      @size = @zone_sizes.invert[@alert.radius_meters]
     else
-      @alert.area_size_meters = @zone_sizes[params[:size]]
+      @alert.radius_meters = @zone_sizes[params[:size]]
       @alert.save!
       render "area_updated"
     end

@@ -9,17 +9,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100421063127) do
+ActiveRecord::Schema.define(:version => 20100424042906) do
 
   create_table "alerts", :force => true do |t|
-    t.string   "email",            :limit => 120, :null => false
-    t.string   "address",          :limit => 120, :null => false
+    t.string   "email",         :limit => 120, :null => false
+    t.string   "address",       :limit => 120, :null => false
     t.datetime "last_sent"
-    t.float    "lat",                             :null => false
-    t.float    "lng",                             :null => false
-    t.string   "confirm_id",       :limit => 20
+    t.float    "lat",                          :null => false
+    t.float    "lng",                          :null => false
+    t.string   "confirm_id",    :limit => 20
     t.boolean  "confirmed"
-    t.integer  "area_size_meters",                :null => false
+    t.integer  "radius_meters",                :null => false
   end
 
   create_table "applications", :force => true do |t|

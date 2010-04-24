@@ -1,7 +1,7 @@
 .attention
   %h3 Thanks, your alert has been activated
   %p
-    You will now receive email alerts for any planning applications we find within <strong>#{meters_in_words(@alert.area_size_meters)}</strong>
+    You will now receive email alerts for any planning applications we find within <strong>#{meters_in_words(@alert.radius_meters)}</strong>
     of <strong>#{@alert.address}</strong>.
 %p
   You can

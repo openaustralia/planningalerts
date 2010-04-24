@@ -1,5 +1,5 @@
 class Alert < ActiveRecord::Base
-  validates_numericality_of :area_size_meters, :greater_than => 0, :message => "isn't selected"
+  validates_numericality_of :radius_meters, :greater_than => 0, :message => "isn't selected"
   validate :validate_email, :validate_address
   
   before_validation :geocode
@@ -23,7 +23,7 @@ class Alert < ActiveRecord::Base
   end
   
   def radius_km
-    area_size_meters / 1000.0
+    radius_meters / 1000.0
   end
   
   # This is a long-running method. Call with care

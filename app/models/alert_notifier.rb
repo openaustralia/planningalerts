@@ -16,7 +16,7 @@ class AlertNotifier < ActionMailer::Base
     @applications = applications
 
     @host = Configuration::HOST
-    @georss_url = applications_url(:format => "rss", :host => Configuration::HOST, :address => @alert.address, :area_size => @alert.area_size_meters)
+    @georss_url = applications_url(:format => "rss", :host => Configuration::HOST, :address => @alert.address, :area_size => @alert.radius_meters)
     @unsubscribe_url = unsubscribe_url(:host => Configuration::HOST, :cid => @alert.confirm_id)
     
     # Update statistics. Is this a good place to do them or would it make more sense to do it after the mailing has

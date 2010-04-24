@@ -1,6 +1,6 @@
 Given /^I have received an email alert for "([^\"]*)" with a size of "([^\"]*)"$/ do |address, size|
   # Adding arbitrary coordinates so that geocoding is not carried out
-  Alert.create!(:address => address, :email => current_email_address, :area_size_meters => size, :lat => 1.0, :lng => 1.0,
+  Alert.create!(:address => address, :email => current_email_address, :radius_meters => size, :lat => 1.0, :lng => 1.0,
     :confirmed => true)
 end
 
@@ -25,7 +25,7 @@ When /^I click the "([^\"]*)" link in the email alert for "([^\"]*)"$/ do |link,
 end
 
 Then /^I should receive email alerts for the street address "([^\"]*)" with a size of "([^\"]*)"$/ do |address, size|
-  Alert.find(:first, :conditions => {:address => address, :area_size_meters => size, :email => current_email_address, :confirmed => true}).should_not be_nil
+  Alert.find(:first, :conditions => {:address => address, :radius_meters => size, :email => current_email_address, :confirmed => true}).should_not be_nil
 end
 
 Then /^I should not receive email alerts for the street address "([^\"]*)"$/ do |address|

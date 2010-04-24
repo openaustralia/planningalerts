@@ -4,7 +4,7 @@ describe Alert do
   before :each do
     @address = "24 Bruce Road, Glenbrook, NSW"
     @attributes = {:email => "matthew@openaustralia.org", :address => @address,
-      :area_size_meters => 200}
+      :radius_meters => 200}
     # Unless we override this elsewhere just stub the geocoder to return coordinates of address above
     @loc = Location.new(-33.772609, 150.624263)
     @loc.stub!(:country_code).and_return("AU")
@@ -22,17 +22,17 @@ describe Alert do
   # In order to stop frustrating multiple alerts
   it "should only have one alert active for a particular street address / email address combination at one time" do
     email = "foo@foo.org"
-    u1 = Alert.create!(:email => email, :address => "A street address", :area_size_meters => 200, :lat => 1.0, :lng => 2.0)
-    u2 = Alert.create!(:email => email, :address => "A street address", :area_size_meters => 800, :lat => 1.0, :lng => 2.0)
+    u1 = Alert.create!(:email => email, :address => "A street address", :radius_meters => 200, :lat => 1.0, :lng => 2.0)
+    u2 = Alert.create!(:email => email, :address => "A street address", :radius_meters => 800, :lat => 1.0, :lng => 2.0)
     alerts = Alert.find_all_by_email(email) 
     alerts.count.should == 1
-    alerts.first.area_size_meters.should == u2.area_size_meters
+    alerts.first.radius_meters.should == u2.radius_meters
   end
   
   it "should allow multiple alerts for different street addresses but the same email address" do
     email = "foo@foo.org"
-    Alert.create!(:email => email, :address => "A street address", :area_size_meters => 200, :lat => 1.0, :lng => 2.0)
-    Alert.create!(:email => email, :address => "Another street address", :area_size_meters => 800, :lat => 1.0, :lng => 2.0)
+    Alert.create!(:email => email, :address => "A street address", :radius_meters => 200, :lat => 1.0, :lng => 2.0)
+    Alert.create!(:email => email, :address => "Another street address", :radius_meters => 800, :lat => 1.0, :lng => 2.0)
     Alert.find_all_by_email(email).count.should == 2
   end
   
@@ -129,19 +129,19 @@ describe Alert do
     u.location.should be_nil
   end
   
-  describe "area_size_meters" do
+  describe "radius_meters" do
     it "should have a number" do
-      @attributes[:area_size_meters] = "a"
+      @attributes[:radius_meters] = "a"
       u = Alert.new(@attributes)
       u.should_not be_valid
-      u.errors.on(:area_size_meters).should == "isn't selected"
+      u.errors.on(:radius_meters).should == "isn't selected"
     end
   
     it "should be greater than zero" do
-      @attributes[:area_size_meters] = "0"
+      @attributes[:radius_meters] = "0"
       u = Alert.new(@attributes)
       u.should_not be_valid
-      u.errors.on(:area_size_meters).should == "isn't selected"    
+      u.errors.on(:radius_meters).should == "isn't selected"    
     end
   end
 
@@ -186,7 +186,7 @@ describe Alert do
   
   describe "recent applications for this user" do
     before :each do
-      @alert = Alert.create!(:email => "matthew@openaustralia.org", :address => @address, :area_size_meters => 2000)
+      @alert = Alert.create!(:email => "matthew@openaustralia.org", :address => @address, :radius_meters => 2000)
       # Position test application around the point of the alert
       p1 = @alert.location.endpoint(0, 501) # 501 m north of alert
       p2 = @alert.location.endpoint(0, 499) # 499 m north of alert
@@ -201,7 +201,7 @@ describe Alert do
     
     it "should return applications that have been scraped since the last time the user was sent an alert" do
       @alert.last_sent = 3.days.ago
-      @alert.area_size_meters = 2000
+      @alert.radius_meters = 2000
       @alert.save!
       @alert.recent_applications.should have(3).items
       @alert.recent_applications.should include(@app1)
@@ -211,7 +211,7 @@ describe Alert do
     
     it "should return applications within the user's search area" do
       @alert.last_sent = 5.days.ago
-      @alert.area_size_meters = 500
+      @alert.radius_meters = 500
       @alert.save!
       @alert.recent_applications.should have(2).items
       @alert.recent_applications.should include(@app2)
@@ -220,7 +220,7 @@ describe Alert do
     
     it "should return applications that have been scraped in the last twenty four hours if the user has never had an alert" do
       @alert.last_sent = nil
-      @alert.area_size_meters = 2000
+      @alert.radius_meters = 2000
       @alert.save!
       @alert.recent_applications.should have(2).items
       @alert.recent_applications.should include(@app1)
