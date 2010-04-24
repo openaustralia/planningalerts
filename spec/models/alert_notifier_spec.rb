@@ -87,9 +87,9 @@ For more information: http://dev.planningalerts.org.au/applications/2
 
 PlanningAlerts.org.au is a free service run by the charity OpenAustralia Foundation.
 
-You can subscribe to a geoRSS feed of applications for 24 Bruce Rd, Glenbrook NSW 2773 here: http://dev.planningalerts.org.au/applications.rss?address=24+Bruce+Rd%2C+Glenbrook+NSW+2773&area_size=800
+You can subscribe to a geoRSS feed of applications for 24 Bruce Rd, Glenbrook NSW 2773 here: http://dev.planningalerts.org.au/applications.rss?address=24+Bruce+Rd%2C+Glenbrook+NSW+2773&radius=800
 
-GeoRSS can be used to display planning applications on a map. For example, on Google Maps: http://maps.google.com.au/maps?q=http%3A%2F%2Fdev.planningalerts.org.au%2Fapplications.rss%3Faddress%3D24%2BBruce%2BRd%252C%2BGlenbrook%2BNSW%2B2773%26area_size%3D800
+GeoRSS can be used to display planning applications on a map. For example, on Google Maps: http://maps.google.com.au/maps?q=http%3A%2F%2Fdev.planningalerts.org.au%2Fapplications.rss%3Faddress%3D24%2BBruce%2BRd%252C%2BGlenbrook%2BNSW%2B2773%26radius%3D800
 
 To change the size of the area covered by the alerts: http://dev.planningalerts.org.au/alerts/abcdef/area
 To stop receiving these emails: http://dev.planningalerts.org.au/alerts/abcdef/unsubscribe

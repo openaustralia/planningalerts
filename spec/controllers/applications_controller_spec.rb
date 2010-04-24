@@ -14,8 +14,8 @@ describe ApplicationsController do
     end
 
     it "should provide a link to the search by address" do
-      get :index, :address => "24 Bruce Road Glenbrook, NSW 2773", :area_size => 4000
-      assigns[:rss].should == "http://test.host/applications.rss?address=24+Bruce+Road+Glenbrook%2C+NSW+2773&area_size=4000"
+      get :index, :address => "24 Bruce Road Glenbrook, NSW 2773", :radius => 4000
+      assigns[:rss].should == "http://test.host/applications.rss?address=24+Bruce+Road+Glenbrook%2C+NSW+2773&radius=4000"
     end
   end
   

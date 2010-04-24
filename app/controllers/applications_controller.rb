@@ -32,7 +32,7 @@ class ApplicationsController < ApplicationController
           raise "unexpected parameters"
         end
         @description << " within #{help.meters_in_words(radius.to_i)} of #{location_text}"
-        # TODO: More concise form Application.recent(:origin => [location.lat, location.lng], :within => params[:area_size].to_f / 1000) doesn't work
+        # TODO: More concise form Application.recent(:origin => [location.lat, location.lng], :within => radius.to_f / 1000) doesn't work
         # http://www.binarylogic.com/2010/01/09/using-geokit-with-searchlogic/ might provide the answer
         @applications = Application.recent.find(:all, :origin => [location.lat, location.lng], :within => radius.to_f / 1000)
       elsif params[:bottom_left_lat] && params[:bottom_left_lng] && params[:top_right_lat] && params[:top_right_lng]

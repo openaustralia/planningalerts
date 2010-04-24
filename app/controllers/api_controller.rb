@@ -4,10 +4,10 @@ class ApiController < ApplicationController
   def old_index
     case params[:call]
     when "address"
-      redirect_to applications_url(:format => "rss", :address => params[:address], :area_size => params[:area_size])
+      redirect_to applications_url(:format => "rss", :address => params[:address], :radius => params[:area_size])
     when "point"
       redirect_to applications_url(:format => "rss", :lat => params[:lat], :lng => params[:lng],
-        :area_size => params[:area_size])
+        :radius => params[:area_size])
     when "area"
       redirect_to applications_url(:format => "rss",
         :bottom_left_lat => params[:bottom_left_lat], :bottom_left_lng => params[:bottom_left_lng],

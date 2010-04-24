@@ -9,13 +9,13 @@ module ApiHowtoHelper
   end
   
   def api_example_address_url(address = Configuration::API_EXAMPLE_ADDRESS,
-    area_size = Configuration::API_EXAMPLE_SIZE)
-    applications_url(:format => "rss", :address => address, :radius => area_size)
+    radius = Configuration::API_EXAMPLE_SIZE)
+    applications_url(:format => "rss", :address => address, :radius => radius)
   end
   
   def api_example_latlong_url(lat = Configuration::API_EXAMPLE_LAT, lng = Configuration::API_EXAMPLE_LNG, 
-    area_size = Configuration::API_EXAMPLE_SIZE)
-    applications_url(:format => "rss", :lat => lat, :lng => lng, :radius => area_size)
+    radius = Configuration::API_EXAMPLE_SIZE)
+    applications_url(:format => "rss", :lat => lat, :lng => lng, :radius => radius)
   end
   
   def api_example_area_url(bottom_left_lat = Configuration::API_EXAMPLE_BOTTOM_LEFT_LAT,
