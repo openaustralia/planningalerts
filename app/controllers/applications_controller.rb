@@ -30,9 +30,10 @@ class ApplicationsController < ApplicationController
         else
           raise "unexpected parameters"
         end
-        search_area = Area.centre_and_size(location, params[:area_size].to_i)
         @description << " within #{help.meters_in_words(params[:area_size].to_i)} of #{location_text}"
-        @applications = Application.within(search_area).recent
+        # TODO: More concise form Application.recent(:origin => [location.lat, location.lng], :within => params[:area_size].to_f / 1000) doesn't work
+        # http://www.binarylogic.com/2010/01/09/using-geokit-with-searchlogic/ might provide the answer
+        @applications = Application.recent.find(:all, :origin => [location.lat, location.lng], :within => params[:area_size].to_f / 1000)
       elsif params[:bottom_left_lat] && params[:bottom_left_lng] && params[:top_right_lat] && params[:top_right_lng]
         lower_left = Location.new(params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f)
         upper_right = Location.new(params[:top_right_lat].to_f, params[:top_right_lng].to_f)

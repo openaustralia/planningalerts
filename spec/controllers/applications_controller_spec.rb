@@ -31,30 +31,27 @@ describe ApplicationsController do
   
   describe "search by address" do
     it "should find recent applications near the address" do
-      location, area, scope, result = mock, mock, mock, mock
-      
+      location = mock(:lat => 1.0, :lng => 2.0)
+      scope, result = mock, mock
+
       Location.should_receive(:geocode).with("24 Bruce Road Glenbrook, NSW 2773").and_return(location)
-      Area.should_receive(:centre_and_size).with(location, 4000).and_return(area)
-      Application.should_receive(:within).with(area).and_return(scope)
-      scope.should_receive(:recent).and_return(result)
+      Application.should_receive(:recent).and_return(scope)
+      scope.should_receive(:find).with(:all, :origin => [location.lat, location.lng], :within => 4).and_return(result)
       get :index, :format => "rss", :address => "24 Bruce Road Glenbrook, NSW 2773", :area_size => 4000
       assigns[:applications].should == result
-      # TODO: This wording is misleading. Fix this.
       assigns[:description].should == "Recent applications within 4 km of 24 Bruce Road Glenbrook, NSW 2773"
     end
   end
   
   describe "search by point" do
     it "should find recent applications near the point" do
-      area, scope, result = mock, mock, mock
+      scope, result = mock, mock
 
-      Area.should_receive(:centre_and_size).with(Location.new(1.0, 2.0), 4000).and_return(area)
-      Application.should_receive(:within).with(area).and_return(scope)
-      scope.should_receive(:recent).and_return(result)
+      Application.should_receive(:recent).and_return(scope)
+      scope.should_receive(:find).with(:all, :origin => [1.0, 2.0], :within => 4).and_return(result)
       
       get :index, :format => "rss", :lat => 1.0, :lng => 2.0, :area_size => 4000
       assigns[:applications].should == result
-      # TODO: This wording is misleading. Fix this.
       assigns[:description].should == "Recent applications within 4 km of 1.0,2.0"
     end
   end
