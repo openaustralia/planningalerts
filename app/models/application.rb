@@ -63,7 +63,7 @@ class Application < ActiveRecord::Base
     end
     
     if count_new > 0
-      info_logger.info "#{count_new} new applications found for #{auth.full_name}"
+      info_logger.info "#{count_new} new applications found for #{auth.full_name_and_state}"
     end
   end
   

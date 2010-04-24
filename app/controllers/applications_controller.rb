@@ -6,7 +6,7 @@ class ApplicationsController < ApplicationController
       # TODO Handle the situation where the authority name isn't found
       authority = Authority.find_by_short_name_encoded(params[:authority_id])
       @applications = authority.applications.recent
-      @description << " in #{authority.full_name}"
+      @description << " in #{authority.full_name_and_state}"
     elsif params[:postcode]
       # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
       @applications = Application.recent.find_all_by_postcode(params[:postcode])

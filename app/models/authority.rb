@@ -4,6 +4,10 @@ class Authority < ActiveRecord::Base
   has_many :applications
   named_scope :active, :conditions => 'disabled = 0 or disabled is null'
   
+  def full_name_and_state
+    full_name
+  end
+  
   def self.load_from_web_service(info_logger = logger)
     page = Nokogiri::XML(open(Configuration::INTERNAL_SCRAPERS_INDEX_URL).read)
     page.search('scraper').each do |scraper|

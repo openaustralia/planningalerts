@@ -32,10 +32,10 @@ describe Authority do
       Authority.load_from_web_service
       Authority.count.should == 2
       r = Authority.find_by_short_name("Blue Mountains")
-      r.full_name.should == "Blue Mountains City Council, NSW"
+      r.full_name_and_state.should == "Blue Mountains City Council, NSW"
       r.feed_url == "http://localhost:4567/blue_mountains?year={year}&month={month}&day={day}"
       r = Authority.find_by_short_name("Brisbane")
-      r.full_name.should == "Brisbane City Council, QLD"
+      r.full_name_and_state.should == "Brisbane City Council, QLD"
       r.feed_url == "http://localhost:4567/brisbane?year={year}&month={month}&day={day}"
     end
   end

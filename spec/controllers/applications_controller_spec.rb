@@ -94,7 +94,7 @@ describe ApplicationsController do
       Authority.should_receive(:find_by_short_name_encoded).with("blue_mountains").and_return(authority)
       authority.should_receive(:applications).and_return(scope)
       scope.should_receive(:recent).and_return(result)
-      authority.should_receive(:full_name).and_return("Blue Mountains City Council")
+      authority.should_receive(:full_name_and_state).and_return("Blue Mountains City Council")
 
       get :index, :format => "rss", :authority_id => "blue_mountains"
       assigns[:applications].should == result
