@@ -10,12 +10,12 @@ module ApiHowtoHelper
   
   def api_example_address_url(address = Configuration::API_EXAMPLE_ADDRESS,
     area_size = Configuration::API_EXAMPLE_SIZE)
-    applications_url(:format => "rss", :address => address, :area_size => area_size)
+    applications_url(:format => "rss", :address => address, :radius => area_size)
   end
   
   def api_example_latlong_url(lat = Configuration::API_EXAMPLE_LAT, lng = Configuration::API_EXAMPLE_LNG, 
     area_size = Configuration::API_EXAMPLE_SIZE)
-    applications_url(:format => "rss", :lat => lat, :lng => lng, :area_size => area_size)
+    applications_url(:format => "rss", :lat => lat, :lng => lng, :radius => area_size)
   end
   
   def api_example_area_url(bottom_left_lat = Configuration::API_EXAMPLE_BOTTOM_LEFT_LAT,
@@ -41,11 +41,11 @@ module ApiHowtoHelper
   
   def api_example_address_url_html
     # Doing this hackery with 11's and 22's so that we don't escape "[" and "]"
-    htmlify(api_example_address_url("11", "22").sub("11", "[address]").sub("22", "[size_in_metres]"))
+    htmlify(api_example_address_url("11", "22").sub("11", "[address]").sub("22", "[distance_in_metres]"))
   end
   
   def api_example_latlong_url_html
-    htmlify(api_example_latlong_url("11", "22", "33").sub("11", "[latitude]").sub("22", "[longitude]").sub("33", "[size_in_metres]"))
+    htmlify(api_example_latlong_url("11", "22", "33").sub("11", "[latitude]").sub("22", "[longitude]").sub("33", "[distance_in_metres]"))
   end
   
   def api_example_area_url_html

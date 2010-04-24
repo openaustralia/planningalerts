@@ -20,7 +20,8 @@ class ApplicationsController < ApplicationController
         @description << " in #{params[:suburb]}"
       end
     else
-      if params[:area_size]
+      radius = params[:radius] || params[:area_size]
+      if radius
         if params[:address]
           location = Location.geocode(params[:address])
           location_text = params[:address]
@@ -30,10 +31,10 @@ class ApplicationsController < ApplicationController
         else
           raise "unexpected parameters"
         end
-        @description << " within #{help.meters_in_words(params[:area_size].to_i)} of #{location_text}"
+        @description << " within #{help.meters_in_words(radius.to_i)} of #{location_text}"
         # TODO: More concise form Application.recent(:origin => [location.lat, location.lng], :within => params[:area_size].to_f / 1000) doesn't work
         # http://www.binarylogic.com/2010/01/09/using-geokit-with-searchlogic/ might provide the answer
-        @applications = Application.recent.find(:all, :origin => [location.lat, location.lng], :within => params[:area_size].to_f / 1000)
+        @applications = Application.recent.find(:all, :origin => [location.lat, location.lng], :within => radius.to_f / 1000)
       elsif params[:bottom_left_lat] && params[:bottom_left_lng] && params[:top_right_lat] && params[:top_right_lng]
         lat0, lng0 = params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f
         lat1, lng1 = params[:top_right_lat].to_f, params[:top_right_lng].to_f

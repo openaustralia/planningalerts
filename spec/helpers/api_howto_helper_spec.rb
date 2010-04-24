@@ -6,8 +6,8 @@ describe ApiHowtoHelper do
   end
   
   it "should provide urls of examples of use of the api" do
-    helper.api_example_address_url.should == "http://test.host/applications.rss?address=24+Bruce+Road+Glenbrook%2C+NSW+2773&amp;area_size=4000"
-    helper.api_example_latlong_url.should == "http://test.host/applications.rss?area_size=4000&amp;lat=-33.772609&amp;lng=150.624263"
+    helper.api_example_address_url.should == "http://test.host/applications.rss?address=24+Bruce+Road+Glenbrook%2C+NSW+2773&amp;radius=4000"
+    helper.api_example_latlong_url.should == "http://test.host/applications.rss?lat=-33.772609&amp;lng=150.624263&amp;radius=4000"
     helper.api_example_area_url.should == "http://test.host/applications.rss?bottom_left_lat=-38.556757&amp;bottom_left_lng=140.83374&amp;top_right_lat=-29.113775&amp;top_right_lng=153.325195"
     helper.api_example_authority_url.should == "http://test.host/authorities/blue_mountains/applications.rss"
     helper.api_example_postcode_url.should == "http://test.host/applications.rss?postcode=2780"
@@ -15,8 +15,8 @@ describe ApiHowtoHelper do
   end
   
   it "should display the example urls nicely" do
-    helper.api_example_address_url_html.should == "http://test.host/applications.rss?<strong>address</strong>=[address]&amp;<strong>area_size</strong>=[size_in_metres]"
-    helper.api_example_latlong_url_html.should == "http://test.host/applications.rss?<strong>area_size</strong>=[size_in_metres]&amp;<strong>lat</strong>=[latitude]&amp;<strong>lng</strong>=[longitude]"
+    helper.api_example_address_url_html.should == "http://test.host/applications.rss?<strong>address</strong>=[address]&amp;<strong>radius</strong>=[distance_in_metres]"
+    helper.api_example_latlong_url_html.should == "http://test.host/applications.rss?<strong>lat</strong>=[latitude]&amp;<strong>lng</strong>=[longitude]&amp;<strong>radius</strong>=[distance_in_metres]"
     helper.api_example_area_url_html.should == "http://test.host/applications.rss?<strong>bottom_left_lat</strong>=[latitude]&amp;<strong>bottom_left_lng</strong>=[longitude]&amp;<strong>top_right_lat</strong>=[latitude]&amp;<strong>top_right_lng</strong>=[longitude]"
     helper.api_example_authority_url_html.should == "http://test.host/authorities/[name]/applications.rss"
     helper.api_example_postcode_url_html.should == "http://test.host/applications.rss?<strong>postcode</strong>=[postcode]"

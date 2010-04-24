@@ -30,28 +30,45 @@ describe ApplicationsController do
   end
   
   describe "search by address" do
-    it "should find recent applications near the address" do
+    before :each do
       location = mock(:lat => 1.0, :lng => 2.0)
-      scope, result = mock, mock
+      scope, @result = mock, mock
 
       Location.should_receive(:geocode).with("24 Bruce Road Glenbrook, NSW 2773").and_return(location)
       Application.should_receive(:recent).and_return(scope)
-      scope.should_receive(:find).with(:all, :origin => [location.lat, location.lng], :within => 4).and_return(result)
+      scope.should_receive(:find).with(:all, :origin => [location.lat, location.lng], :within => 4).and_return(@result)
+    end
+    
+    it "should find recent applications near the address" do
+      get :index, :format => "rss", :address => "24 Bruce Road Glenbrook, NSW 2773", :radius => 4000
+      assigns[:applications].should == @result
+      assigns[:description].should == "Recent applications within 4 km of 24 Bruce Road Glenbrook, NSW 2773"
+    end
+
+    it "should find recent applications near the address using the old parameter name" do
       get :index, :format => "rss", :address => "24 Bruce Road Glenbrook, NSW 2773", :area_size => 4000
-      assigns[:applications].should == result
+      assigns[:applications].should == @result
       assigns[:description].should == "Recent applications within 4 km of 24 Bruce Road Glenbrook, NSW 2773"
     end
   end
   
   describe "search by point" do
-    it "should find recent applications near the point" do
-      scope, result = mock, mock
+    before :each do
+      scope, @result = mock, mock
 
       Application.should_receive(:recent).and_return(scope)
-      scope.should_receive(:find).with(:all, :origin => [1.0, 2.0], :within => 4).and_return(result)
-      
+      scope.should_receive(:find).with(:all, :origin => [1.0, 2.0], :within => 4).and_return(@result)
+    end
+
+    it "should find recent applications near the point" do
+      get :index, :format => "rss", :lat => 1.0, :lng => 2.0, :radius => 4000
+      assigns[:applications].should == @result
+      assigns[:description].should == "Recent applications within 4 km of 1.0,2.0"
+    end
+
+    it "should find recent applications near the point using the old parameter name" do
       get :index, :format => "rss", :lat => 1.0, :lng => 2.0, :area_size => 4000
-      assigns[:applications].should == result
+      assigns[:applications].should == @result
       assigns[:description].should == "Recent applications within 4 km of 1.0,2.0"
     end
   end
