@@ -17,13 +17,9 @@ class Alert < ActiveRecord::Base
     Location.new(lat, lng) if lat && lng
   end
   
-  def search_area
-    Area.centre_and_size(location, area_size_meters)
-  end
-  
   # Applications that have been scraped since the last time the user was sent an alert
   def recent_applications
-    Application.within(search_area).find(:all, :conditions => ['date_scraped > ?', last_sent || Date.yesterday])
+    Application.within(Area.centre_and_size(location, area_size_meters)).find(:all, :conditions => ['date_scraped > ?', last_sent || Date.yesterday])
   end
   
   # This is a long-running method. Call with care
