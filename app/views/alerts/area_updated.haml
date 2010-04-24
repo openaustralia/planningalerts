@@ -1,9 +1,8 @@
 .attention
   %h3 Thanks, your alert size area has been updated
   %p
-    Your email alerts will now be for any planning applications we find near
-    #{@alert.address} within an area of approximately
-    <strong>#{meters_in_words(@alert.area_size_meters)}</strong>.
+    Your email alerts will now be for any planning applications we find
+    within <strong>#{meters_in_words(@alert.area_size_meters)}</strong> of #{@alert.address}.
 
 %p
   Remember, if this alert doesn't cover everywhere you are interested in
