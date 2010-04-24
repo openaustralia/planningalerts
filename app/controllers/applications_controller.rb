@@ -56,8 +56,6 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     @page_title = @application.address
     
-    # TODO: Display date received and date scraped
-    
     # Find other applications nearby (within 10km area)
     @nearby_distance = 10000
     if @application.location
