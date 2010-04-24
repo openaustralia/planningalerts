@@ -5,7 +5,7 @@ class Authority < ActiveRecord::Base
   named_scope :active, :conditions => 'disabled = 0 or disabled is null'
   
   def full_name_and_state
-    full_name
+    full_name + ", " + state
   end
   
   def self.load_from_web_service(info_logger = logger)
@@ -19,7 +19,8 @@ class Authority < ActiveRecord::Base
       else
         info_logger.info "Updating authority: #{short_name}"
       end
-      authority.full_name = scraper.at('authority_name').inner_text + ", " + scraper.at('state').inner_text
+      authority.full_name = scraper.at('authority_name').inner_text
+      authority.state = scraper.at('state').inner_text
       authority.feed_url = scraper.at('url').inner_text
       authority.disabled = 0
 

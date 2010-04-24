@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Application do
   before :each do
     Authority.delete_all
-    @auth = Authority.create!(:full_name => "Fiddlesticks", :short_name => "Fiddle")
+    @auth = Authority.create!(:full_name => "Fiddlesticks", :state => "NSW", :short_name => "Fiddle")
     # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
     Location.stub!(:geocode).and_return(mock(:lat => 1.0, :lng => 2.0, :suburb => "Glenbrook", :state => "NSW",
       :postcode => "2773", :success => true))
@@ -79,7 +79,7 @@ describe Application do
     it "should collect the correct applications" do
       logger = mock
       Application.stub!(:logger).and_return(logger)
-      logger.should_receive(:info).with("2 new applications found for Fiddlesticks")
+      logger.should_receive(:info).with("2 new applications found for Fiddlesticks, NSW")
       
       Application.collect_applications_for_authority(@auth, @date)
       Application.count.should == 2
@@ -97,7 +97,7 @@ describe Application do
     it "should not create new applications when they already exist" do
       logger = mock
       Application.stub!(:logger).and_return(logger)
-      logger.should_receive(:info).with("2 new applications found for Fiddlesticks")
+      logger.should_receive(:info).with("2 new applications found for Fiddlesticks, NSW")
       # It shouldn't log anything if there are no new applications
 
       # Getting the feed twice with the same content

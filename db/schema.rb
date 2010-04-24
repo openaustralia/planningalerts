@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100424042906) do
+ActiveRecord::Schema.define(:version => 20100424064457) do
 
   create_table "alerts", :force => true do |t|
     t.string   "email",         :limit => 120, :null => false
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20100424042906) do
     t.string  "short_name", :limit => 100, :null => false
     t.string  "feed_url"
     t.boolean "disabled"
+    t.string  "state",      :limit => 20
   end
 
   add_index "authorities", ["short_name"], :name => "short_name_unique", :unique => true
