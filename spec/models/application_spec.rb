@@ -9,31 +9,6 @@ describe Application do
       :postcode => "2773", :success => true))
   end
   
-  describe "within" do
-    it "should limit the results to those within the given area" do
-      a1 = @auth.applications.create!(:council_reference => "r1", :date_scraped => Time.now) # Within the box
-      a1.lat = 2.0
-      a1.lng = 3.0
-      a1.save!
-      a2 = @auth.applications.create!(:council_reference => "r2", :date_scraped => Time.now) # Outside the box
-      a2.lat = 4.0
-      a2.lng = 3.0
-      a2.save!
-      a3 = @auth.applications.create!(:council_reference => "r3", :date_scraped => Time.now) # Outside the box
-      a3.lat = 2.0
-      a3.lng = 1.0
-      a3.save!
-      a4 = @auth.applications.create!(:council_reference => "r4", :date_scraped => Time.now) # Within the box
-      a4.lat = 1.5
-      a4.lng = 3.5
-      a4.save!
-      r = Application.within(Area.lower_left_and_upper_right(Location.new(1.0, 2.0), Location.new(3.0, 4.0)))
-      r.should have(2).items
-      r.should include(a1)
-      r.should include(a4)
-    end
-  end
-  
   describe "on saving" do
     it "should geocode the address" do
       loc = mock("Location", :lat => -33.772609, :lng => 150.624263, :suburb => "Glenbrook", :state => "NSW",
