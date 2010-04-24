@@ -211,11 +211,10 @@ describe Alert do
     
     it "should return applications within the user's search area" do
       @alert.last_sent = 5.days.ago
-      @alert.area_size_meters = 1000
+      @alert.area_size_meters = 500
       @alert.save!
-      @alert.recent_applications.should have(3).items
+      @alert.recent_applications.should have(2).items
       @alert.recent_applications.should include(@app2)
-      @alert.recent_applications.should include(@app3)
       @alert.recent_applications.should include(@app4)
     end
     
