@@ -61,8 +61,7 @@ class ApplicationsController < ApplicationController
     # Find other applications nearby (within 10km area)
     @nearby_distance = 10000
     if @application.location
-      search_area = Area.centre_and_size(@application.location, @nearby_distance)
-      @nearby_applications = Application.within(search_area).recent
+      @nearby_applications = Application.recent.find(:all, :origin => [@application.location.lat, @application.location.lng], :within => @nearby_distance / 1000.0)
       # Don't include the current application
       @nearby_applications.delete(@application)
     else
