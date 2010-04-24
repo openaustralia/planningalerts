@@ -58,11 +58,10 @@ describe ApplicationsController do
   
   describe "search by area" do
     it "should find recent applications in an area" do
-      area, scope, result = mock, mock, mock
+      scope, result = mock, mock
 
-      Area.should_receive(:lower_left_and_upper_right).with(Location.new(1.0, 2.0), Location.new(3.0, 4.0)).and_return(area)
-      Application.should_receive(:within).with(area).and_return(scope)
-      scope.should_receive(:recent).and_return(result)
+      Application.should_receive(:recent).and_return(scope)
+      scope.should_receive(:find).with(:all, :bounds => [[1.0, 2.0], [3.0, 4.0]]).and_return(result)
 
       get :index, :format => "rss", :bottom_left_lat => 1.0, :bottom_left_lng => 2.0,
         :top_right_lat => 3.0, :top_right_lng => 4.0

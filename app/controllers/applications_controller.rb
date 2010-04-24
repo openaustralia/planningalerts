@@ -35,11 +35,10 @@ class ApplicationsController < ApplicationController
         # http://www.binarylogic.com/2010/01/09/using-geokit-with-searchlogic/ might provide the answer
         @applications = Application.recent.find(:all, :origin => [location.lat, location.lng], :within => params[:area_size].to_f / 1000)
       elsif params[:bottom_left_lat] && params[:bottom_left_lng] && params[:top_right_lat] && params[:top_right_lng]
-        lower_left = Location.new(params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f)
-        upper_right = Location.new(params[:top_right_lat].to_f, params[:top_right_lng].to_f)
-        search_area = Area.lower_left_and_upper_right(lower_left, upper_right)
-        @description << " in the area (#{lower_left}) (#{upper_right})"
-        @applications = Application.within(search_area).recent
+        lat0, lng0 = params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f
+        lat1, lng1 = params[:top_right_lat].to_f, params[:top_right_lng].to_f
+        @description << " in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
+        @applications = Application.recent.find(:all, :bounds => [[lat0, lng0], [lat1, lng1]])
       else
         @applications = Application.recent
       end
