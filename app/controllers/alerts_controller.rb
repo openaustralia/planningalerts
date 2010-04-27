@@ -58,6 +58,17 @@ class AlertsController < ApplicationController
     end
   end
   
+  def statistics
+    alerts = Alert.find(:all)
+    @no_alerts_in_active_areas = 0
+    # TODO: Much rather do this in the database
+    alerts.each do |alert|
+      @no_alerts_in_active_areas += 1 if alert.in_active_area?
+    end
+    @no_confirmed_alerts = Alert.confirmed.count
+    @no_alerts = Alert.count
+  end
+  
   private
   
   def zone_sizes

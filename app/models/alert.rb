@@ -6,11 +6,17 @@ class Alert < ActiveRecord::Base
   before_create :set_confirm_info
   before_create :remove_other_alerts_for_this_address
   
+  named_scope :confirmed, :conditions => {:confirmed => true}
+
   def location=(l)
     if l
       self.lat = l.lat
       self.lng = l.lng
     end
+  end
+  
+  def in_active_area?
+    Application.find(:first, :origin => [location.lat, location.lng], :within => 2) != nil
   end
   
   def location
