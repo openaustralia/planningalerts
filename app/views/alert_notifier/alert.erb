@@ -1,4 +1,4 @@
-The following new planning applications have been found near <%= @alert.address %> within about <%= meters_in_words(@alert.radius_meters) %>:
+The following new planning applications have been found near <%= @alert.address %> within <%= meters_in_words(@alert.radius_meters) %>:
 
 <%= render :partial => "application", :collection => @applications, :spacer_template => "spacer" -%>
 ============================================================
