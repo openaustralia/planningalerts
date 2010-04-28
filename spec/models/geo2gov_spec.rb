@@ -27,6 +27,10 @@ describe Geo2gov do
     it "should return the LGA jurisdiction" do
       @g.lga_jurisdiction.should == "NSW:Blue_Mountains"
     end
+    
+    it "should return the name of the LGA (without the state) in a human readable form" do
+      @g.lga_name.should == "Blue Mountains"
+    end
   end
 
   describe "Invalid point" do
@@ -39,6 +43,7 @@ describe Geo2gov do
       @g.lga_code.should be_nil
       @g.jurisdictions.should == []
       @g.lga_jurisdiction.should be_nil
+      @g.lga_name.should be_nil
     end
   end
 end

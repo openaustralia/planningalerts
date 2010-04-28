@@ -32,4 +32,9 @@ class Geo2gov
     raise "Can't figure out the local government area" if local.count > 1
     local.first
   end
+  
+  def lga_name
+    j = lga_jurisdiction
+    j.split(":").last.gsub('_', ' ') if j
+  end
 end
