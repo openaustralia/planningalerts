@@ -21,7 +21,8 @@ class Alert < ActiveRecord::Base
   
   # Name of the local government authority
   def lga_name
-    Geo2gov.new(lat, lng).lga_name
+    # Cache value
+    @lga_name ||= Geo2gov.new(lat, lng).lga_name
   end
   
   # Given a list of alerts (with locations), find which LGAs (Local Government Authorities) they are in and

@@ -233,4 +233,21 @@ describe Alert do
       Alert.frequency_distribution(["a", "b", "c", "a", "a", "c", "a"]).should == [["a", 4], ["c", 2], ["b", 1]]
     end
   end
+  
+  describe "lga_name" do
+    it "should return the local government authority name" do
+      Geo2gov.should_receive(:new).with(1.0, 2.0).and_return(mock(:lga_name => "Blue Mountains"))
+
+      a = Alert.new(:lat => 1.0, :lng => 2.0)
+      a.lga_name.should == "Blue Mountains"      
+    end
+    
+    it "should cache the value" do
+      Geo2gov.should_receive(:new).once.with(1.0, 2.0).and_return(mock(:lga_name => "Blue Mountains"))
+
+      a = Alert.new(:lat => 1.0, :lng => 2.0)
+      a.lga_name.should == "Blue Mountains"
+      a.lga_name.should == "Blue Mountains"
+    end
+  end
 end
