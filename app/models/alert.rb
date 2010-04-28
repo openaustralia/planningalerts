@@ -19,6 +19,12 @@ class Alert < ActiveRecord::Base
     find(:all).find_all{|a| !a.in_active_area?}
   end
   
+  # Given a list of alerts (with locations), find which LGAs (Local Government Authorities) they are in and
+  # return the distribution (i.e. count) of authorities.
+  def self.distribution_of_lgas(alerts)
+    frequency_distribution(alerts.map {|alert| Geo2gov.new(alert.lat, alert.lng).lga_code})
+  end
+  
   # Pass an array of objects. Count the distribution of objects and return as a hash of :object => :count
   def self.frequency_distribution(a)
     freq = {}

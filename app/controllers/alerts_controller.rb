@@ -62,6 +62,7 @@ class AlertsController < ApplicationController
     @no_confirmed_alerts = Alert.confirmed.count
     @no_alerts = Alert.count
     @no_alerts_in_active_areas = @no_alerts - Alert.alerts_in_inactive_areas.count    
+    @freq = Alert.distribution_of_lgas(Alert.alerts_in_inactive_areas)
   end
   
   private

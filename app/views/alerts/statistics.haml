@@ -1,3 +1,11 @@
 %ul
   %li number confirmed alerts / total alerts: #{@no_confirmed_alerts} / #{@no_alerts}
   %li number alerts in active areas / total alerts: #{@no_alerts_in_active_areas} / #{@no_alerts}
+%table
+  %tr
+    %th LGA code
+    %th count
+  - @freq.each do |lga_code, count|
+    %tr
+      %td= lga_code
+      %td= count
