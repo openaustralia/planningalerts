@@ -35,7 +35,7 @@ class Alert < ActiveRecord::Base
   # Given a list of alerts (with locations), find which LGAs (Local Government Authorities) they are in and
   # return the distribution (i.e. count) of authorities.
   def self.distribution_of_lgas(alerts)
-    frequency_distribution(alerts.map {|alert| alert.lga_name + ", " + alert.state})
+    frequency_distribution(alerts.map {|alert| alert.lga_name})
   end
   
   # Pass an array of objects. Count the distribution of objects and return as a hash of :object => :count
