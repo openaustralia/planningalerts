@@ -22,7 +22,14 @@ class Alert < ActiveRecord::Base
   # Name of the local government authority
   def lga_name
     # Cache value
-    @lga_name ||= Geo2gov.new(lat, lng).lga_name
+    lga_name = read_attribute(:lga_name)
+    unless lga_name
+      lga_name = Geo2gov.new(lat, lng).lga_name
+      write_attribute(:lga_name, lga_name)
+      # TODO: Kind of wrong to do a save! here in what appears to the outside world like a simple accessor method
+      save!
+    end
+    lga_name
   end
   
   # Given a list of alerts (with locations), find which LGAs (Local Government Authorities) they are in and

@@ -238,16 +238,17 @@ describe Alert do
     it "should return the local government authority name" do
       Geo2gov.should_receive(:new).with(1.0, 2.0).and_return(mock(:lga_name => "Blue Mountains"))
 
-      a = Alert.new(:lat => 1.0, :lng => 2.0)
+      a = Alert.new(:lat => 1.0, :lng => 2.0, :email => "foo@bar.com", :radius_meters => 200, :address => "")
       a.lga_name.should == "Blue Mountains"      
     end
     
-    it "should cache the value" do
+    it "should cache the value in the database" do
       Geo2gov.should_receive(:new).once.with(1.0, 2.0).and_return(mock(:lga_name => "Blue Mountains"))
 
-      a = Alert.new(:lat => 1.0, :lng => 2.0)
+      a = Alert.create!(:id => 1, :lat => 1.0, :lng => 2.0, :email => "foo@bar.com", :radius_meters => 200, :address => "")
       a.lga_name.should == "Blue Mountains"
-      a.lga_name.should == "Blue Mountains"
+      b = Alert.find(:first)
+      b.lga_name.should == "Blue Mountains"
     end
   end
 end
