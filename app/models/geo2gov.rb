@@ -8,11 +8,17 @@ class Geo2gov
   end
   
   def lga_code
-    @response["Census"].first["LGA"]
+    census = @response["Census"]
+    census.first["LGA"] if census
   end
   
   def jurisdictions
-    @response["Response"].map{|r| r["Jurisdiction"]}.uniq
+    response = @response["Response"]
+    if response
+      response.map{|r| r["Jurisdiction"]}.uniq
+    else
+      []
+    end
   end
   
   # Return the local government jurisdiction.
@@ -23,7 +29,7 @@ class Geo2gov
     %w(Federal ACT NSW QLD SA TAS VIC WA).each do |a|
       local.delete(a)
     end
-    raise "Can't figure out the local government area" unless local.count == 1
+    raise "Can't figure out the local government area" if local.count > 1
     local.first
   end
 end
