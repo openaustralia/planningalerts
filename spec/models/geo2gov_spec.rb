@@ -28,8 +28,8 @@ describe Geo2gov do
       @g.lga_jurisdiction.should == "NSW:Blue_Mountains"
     end
     
-    it "should return the name of the LGA (without the state) in a human readable form" do
-      @g.lga_name.should == "Blue Mountains"
+    it "should return the name of the LGA (with the state) in a human readable form" do
+      @g.lga_name.should == "Blue Mountains, NSW"
     end
   end
 

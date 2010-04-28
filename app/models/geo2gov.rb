@@ -35,6 +35,6 @@ class Geo2gov
   
   def lga_name
     j = lga_jurisdiction
-    j.split(":").last.gsub('_', ' ') if j
+    j.split(":").last.gsub('_', ' ') + ", " + j.split(":").first if j
   end
 end
