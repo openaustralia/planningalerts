@@ -25,7 +25,7 @@
   %ul
     %li
       Source:
-      = link_to @application.authority.full_name_and_state, @application.info_url
+      = link_to @application.authority.full_name, @application.info_url
     %li= link_to "Support or object to this application", @application.comment_url
   %p= addthis_bookmark_button
 
