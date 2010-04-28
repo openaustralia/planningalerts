@@ -15,6 +15,10 @@ class Alert < ActiveRecord::Base
     end
   end
   
+  def self.alerts_in_inactive_areas
+    find(:all).find_all{|a| !a.in_active_area?}
+  end
+  
   # Pass an array of objects. Count the distribution of objects and return as a hash of :object => :count
   def self.frequency_distribution(a)
     freq = {}
