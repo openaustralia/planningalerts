@@ -15,6 +15,15 @@ class Alert < ActiveRecord::Base
     end
   end
   
+  # Pass an array of objects. Count the distribution of objects and return as a hash of :object => :count
+  def self.frequency_distribution(a)
+    freq = {}
+    a.each do |a|
+      freq[a] = (freq[a] || 0) + 1
+    end
+    freq.to_a.sort {|a, b| -(a[1] <=> b[1])}
+  end
+  
   def in_active_area?
     Application.find(:first, :origin => [location.lat, location.lng], :within => 2) != nil
   end

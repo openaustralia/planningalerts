@@ -227,4 +227,10 @@ describe Alert do
       @alert.recent_applications.should include(@app2)      
     end
   end
+  
+  describe "frequency_distribution" do
+    it "should return a frequency distribution of objects as an array sorted by count" do
+      Alert.frequency_distribution(["a", "b", "c", "a", "a", "c", "a"]).should == [["a", 4], ["c", 2], ["b", 1]]
+    end
+  end
 end
