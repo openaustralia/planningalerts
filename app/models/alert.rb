@@ -16,7 +16,7 @@ class Alert < ActiveRecord::Base
   end
   
   def self.alerts_in_inactive_areas
-    find(:all).find_all{|a| !a.in_active_area?}
+    find(:all).find_all{|a| a.location && !a.in_active_area?}
   end
   
   # Given a list of alerts (with locations), find which LGAs (Local Government Authorities) they are in and
@@ -35,7 +35,7 @@ class Alert < ActiveRecord::Base
   end
   
   def in_active_area?
-    Application.find(:first, :origin => [location.lat, location.lng], :within => 2) != nil
+    location && Application.find(:first, :origin => [lat, lng], :within => 2) != nil
   end
   
   def location
