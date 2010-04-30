@@ -22,7 +22,7 @@ describe ApplicationsController do
   describe "index" do
     it "should find recent applications" do
       result = mock
-      Application.should_receive(:recent).and_return(result)
+      Application.should_receive(:paginate).with(:page => nil, :order => "date_scraped DESC").and_return(result)
       get :index, :format => "rss"
       assigns[:applications].should == result
       assigns[:description].should == "Recent applications"
@@ -32,11 +32,10 @@ describe ApplicationsController do
   describe "search by address" do
     before :each do
       location = mock(:lat => 1.0, :lng => 2.0)
-      scope, @result = mock, mock
+      @result = mock
 
       Location.should_receive(:geocode).with("24 Bruce Road Glenbrook, NSW 2773").and_return(location)
-      Application.should_receive(:recent).and_return(scope)
-      scope.should_receive(:find).with(:all, :origin => [location.lat, location.lng], :within => 4).and_return(@result)
+      Application.should_receive(:paginate).with(:origin => [location.lat, location.lng], :within => 4, :page => nil, :order => "date_scraped DESC").and_return(@result)
     end
     
     it "should find recent applications near the address" do
@@ -54,10 +53,9 @@ describe ApplicationsController do
   
   describe "search by point" do
     before :each do
-      scope, @result = mock, mock
+      @result = mock
 
-      Application.should_receive(:recent).and_return(scope)
-      scope.should_receive(:find).with(:all, :origin => [1.0, 2.0], :within => 4).and_return(@result)
+      Application.should_receive(:paginate).with(:origin => [1.0, 2.0], :within => 4, :page => nil, :order => "date_scraped DESC").and_return(@result)
     end
 
     it "should find recent applications near the point" do
@@ -75,10 +73,9 @@ describe ApplicationsController do
   
   describe "search by area" do
     it "should find recent applications in an area" do
-      scope, result = mock, mock
+      result = mock
 
-      Application.should_receive(:recent).and_return(scope)
-      scope.should_receive(:find).with(:all, :bounds => [[1.0, 2.0], [3.0, 4.0]]).and_return(result)
+      Application.should_receive(:paginate).with(:bounds => [[1.0, 2.0], [3.0, 4.0]], :page => nil, :order => "date_scraped DESC").and_return(result)
 
       get :index, :format => "rss", :bottom_left_lat => 1.0, :bottom_left_lng => 2.0,
         :top_right_lat => 3.0, :top_right_lng => 4.0
@@ -93,7 +90,7 @@ describe ApplicationsController do
       
       Authority.should_receive(:find_by_short_name_encoded).with("blue_mountains").and_return(authority)
       authority.should_receive(:applications).and_return(scope)
-      scope.should_receive(:recent).and_return(result)
+      scope.should_receive(:paginate).with(:page => nil, :order => "date_scraped DESC").and_return(result)
       authority.should_receive(:full_name_and_state).and_return("Blue Mountains City Council")
 
       get :index, :format => "rss", :authority_id => "blue_mountains"
@@ -104,10 +101,9 @@ describe ApplicationsController do
   
   describe "search by postcode" do
     it "should find recent applications for a postcode" do
-      result, scope = mock, mock
+      result = mock
 
-      Application.should_receive(:recent).and_return(scope)
-      scope.should_receive(:find_all_by_postcode).with("2780").and_return(result)
+      Application.should_receive(:paginate).with(:conditions => {:postcode => "2780"}, :page => nil, :order => "date_scraped DESC").and_return(result)
       get :index, :format => "rss", :postcode => "2780"
       assigns[:applications].should == result
       assigns[:description].should == "Recent applications in postcode 2780"
@@ -116,9 +112,8 @@ describe ApplicationsController do
   
   describe "search by suburb" do
     it "should find recent applications for a suburb" do
-      result, scope = mock, mock
-      Application.should_receive(:recent).and_return(scope)
-      scope.should_receive(:find_all_by_suburb).with("Katoomba").and_return(result)
+      result = mock
+      Application.should_receive(:paginate).with(:conditions => {:suburb => "Katoomba"}, :page => nil, :order => "date_scraped DESC").and_return(result)
       get :index, :format => "rss", :suburb => "Katoomba"
       assigns[:applications].should == result
       assigns[:description].should == "Recent applications in Katoomba"
@@ -127,9 +122,8 @@ describe ApplicationsController do
   
   describe "search by suburb and state" do
     it "should find recent applications for a suburb and state" do
-      result, scope = mock, mock
-      Application.should_receive(:recent).and_return(scope)
-      scope.should_receive(:find_all_by_suburb_and_state).with("Katoomba", "NSW").and_return(result)
+      result = mock
+      Application.should_receive(:paginate).with(:conditions => {:suburb => "Katoomba", :state => "NSW"}, :page => nil, :order => "date_scraped DESC").and_return(result)
       get :index, :format => "rss", :suburb => "Katoomba", :state => "NSW"
       assigns[:applications].should == result
       assigns[:description].should == "Recent applications in Katoomba, NSW"
