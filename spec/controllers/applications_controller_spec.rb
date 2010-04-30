@@ -17,6 +17,11 @@ describe ApplicationsController do
       get :index, :address => "24 Bruce Road Glenbrook, NSW 2773", :radius => 4000
       assigns[:rss].should == "http://test.host/applications.rss?address=24+Bruce+Road+Glenbrook%2C+NSW+2773&radius=4000"
     end
+    
+    it "should not put the page parameter in the rss feed" do
+      get :index, :address => "24 Bruce Road Glenbrook, NSW 2773", :radius => 4000, :page => 2
+      assigns[:rss].should == "http://test.host/applications.rss?address=24+Bruce+Road+Glenbrook%2C+NSW+2773&radius=4000"      
+    end
   end
   
   describe "index" do
