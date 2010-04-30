@@ -4,6 +4,9 @@
   Planning application data is available programmatically as <a href="http://georss.org/">GeoRSS</a> feeds which can
   be used in most web mapping APIs and desktop GIS software like <a href="http://mapufacture.com">mapufacture</a>
   and <a href="http://pipes.yahoo.com/">Yahoo Pipes</a>. Details of the API are listed below.
+%p
+  All the API calls listed below return planning application sorted by the date they were scraped from the planning authority website with the most
+  recent listed first. They will return a maximum of #{Application.per_page} results. To retrieve more results simply append "&amp;<strong>page</strong>=[2,3,etc..]" to the url.
   %p
     %h4
       API documentation
