@@ -1,3 +1,4 @@
 %h3= @description
 %dl
   = render :partial => "application", :collection => @applications
+= will_paginate @applications, :previous_label => "« Newer", :next_label => "Older »"
