@@ -7,6 +7,10 @@ class Application < ActiveRecord::Base
   
   named_scope :recent, :order => "date_scraped DESC", :limit => 100
   
+  # For the benefit of will_paginate
+  cattr_reader :per_page
+  @@per_page = 100
+    
   # TODO: factor out common location accessor between Application and Alert
   def location
     Location.new(lat, lng) if lat && lng

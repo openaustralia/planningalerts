@@ -29,6 +29,7 @@ Rails::Initializer.run do |config|
   config.gem "matthuhiggins-foreigner", :lib => "foreigner", :source => "http://gemcutter.org"
   config.gem 'jaap3-addthis', :lib => 'addthis', :source => 'http://gems.github.com'
   config.gem 'httparty'
+  config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
