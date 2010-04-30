@@ -24,9 +24,12 @@
       = on_notice_text(@application)
   %ul
     %li
-      Source:
-      = link_to @application.authority.full_name, @application.info_url
-    %li= link_to "Support or object to this application", @application.comment_url
+      = link_to "More information", @application.info_url
+      about this application
+    %li
+      = link_to "Support or object", @application.comment_url
+      to this application
+  %p (Source: #{@application.authority.full_name})
   %p= addthis_bookmark_button
 
 - unless @nearby_applications.empty?
