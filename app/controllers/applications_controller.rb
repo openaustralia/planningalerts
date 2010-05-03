@@ -55,6 +55,7 @@ class ApplicationsController < ApplicationController
       format.html
       # TODO: Move the template over to using an xml builder
       format.rss { render "index.rss", :layout => false, :content_type => Mime::XML }
+      format.js { render :json => @applications}
     end
   end
   
