@@ -56,6 +56,20 @@ describe ApplicationsController do
     end
   end
   
+  describe "search by address no radius" do
+    it "should use a search radius of 2000 when none is specified" do
+      location = mock(:lat => 1.0, :lng => 2.0)
+      result = mock
+
+      Location.should_receive(:geocode).with("24 Bruce Road Glenbrook, NSW 2773").and_return(location)
+      Application.should_receive(:paginate).with(:origin => [location.lat, location.lng], :within => 2, :page => nil, :order => "date_scraped DESC").and_return(result)
+
+      get :index, :address => "24 Bruce Road Glenbrook, NSW 2773"
+      assigns[:applications].should == result
+      assigns[:description].should == "Recent applications within 2 km of 24 Bruce Road Glenbrook, NSW 2773"      
+    end
+  end
+  
   describe "search by point" do
     before :each do
       @result = mock

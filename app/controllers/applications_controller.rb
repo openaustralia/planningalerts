@@ -24,16 +24,14 @@ class ApplicationsController < ApplicationController
         @description << " in #{params[:suburb]}"
       end
     else
-      radius = params[:radius] || params[:area_size]
-      if radius
+      if params[:address] || (params[:lat] && params[:lng])
+        radius = params[:radius] || params[:area_size] || 2000
         if params[:address]
           location = Location.geocode(params[:address])
           location_text = params[:address]
-        elsif params[:lat] && params[:lng]
+        else
           location = Location.new(params[:lat].to_f, params[:lng].to_f)
           location_text = location.to_s
-        else
-          raise "unexpected parameters"
         end
         @description << " within #{help.meters_in_words(radius.to_i)} of #{location_text}"
         # TODO: More concise form Application.recent(:origin => [location.lat, location.lng], :within => radius.to_f / 1000) doesn't work
