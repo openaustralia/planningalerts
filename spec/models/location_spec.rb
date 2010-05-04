@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe "Location" do
   describe "valid location" do
     before :each do
-      @result = mock(:lat => -33.772609, :lng => 150.624263, :country_code => "AU", :all => mock(:size => 1),
+      @result = mock(:lat => -33.772609, :lng => 150.624263, :country_code => "AU", :all => [mock(:country_code => "AU")],
         :accuracy => 6)
       Geokit::Geocoders::GoogleGeocoder.should_receive(:geocode).with("24 Bruce Road, Glenbrook, NSW 2773", :bias => "au").and_return(@result)
       @loc = Location.geocode("24 Bruce Road, Glenbrook, NSW 2773")
@@ -65,7 +65,7 @@ describe "Location" do
   
   it "should error if there are multiple matches from the geocoder" do
     Geokit::Geocoders::GoogleGeocoder.stub!(:geocode).and_return(mock(:lat => 1, :lng => 2, :country_code => "AU",
-      :all => mock(:size => 2), :full_address => "Bruce Rd, VIC 3885, Australia"))
+      :all => [mock(:country_code => "AU"), mock(:country_code => "AU")], :full_address => "Bruce Rd, VIC 3885, Australia"))
 
     l = Location.geocode("Bruce Road")
     l.error.should == "isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"
@@ -73,9 +73,31 @@ describe "Location" do
   
   it "should error if the address is not a full street address but rather a suburb name or similar" do
     Geokit::Geocoders::GoogleGeocoder.stub!(:geocode).and_return(mock(:lat => 1, :lng => 2, :country_code => "AU",
-      :all => mock(:size => 1), :full_address => "Glenbrook NSW, Australia", :accuracy => 5))
+      :all => [mock(:country_code => "AU")], :full_address => "Glenbrook NSW, Australia", :accuracy => 5))
 
     l = Location.geocode("Glenbrook, NSW")
     l.error.should == "isn't complete. We saw that address as \"Glenbrook NSW\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state"
+  end
+  
+  it "should list potential matches and they should be in Australia" do
+    all = [
+      mock(:full_address => "Bathurst Rd, Orange NSW 2800, Australia", :country_code => "AU"),
+      mock(:full_address => "Bathurst Rd, Katoomba NSW 2780, Australia", :country_code => "AU"),
+      mock(:full_address => "Bathurst Rd, Staplehurst, Kent TN12 0, UK", :country_code => "UK"),
+      mock(:full_address => "Bathurst Rd, Cape Town 7708, South Africa", :country_code => "ZA"),
+      mock(:full_address => "Bathurst Rd, Winnersh, Wokingham RG41 5, UK", :country_code => "UK"),
+      mock(:full_address => "Bathurst Rd, Catonsville, MD 21228, USA", :country_code => "US"),
+      mock(:full_address => "Bathurst Rd, Durban South 4004, South Africa", :country_code => "ZA"),
+      mock(:full_address => "Bathurst Rd, Port Kennedy WA 6172, Australia", :country_code => "AU"),
+      mock(:full_address => "Bathurst Rd, Campbell River, BC V9W, Canada", :country_code => "CA"),
+      mock(:full_address => "Bathurst Rd, Riverside, CA, USA", :country_code => "US"),
+    ]
+    Geokit::Geocoders::GoogleGeocoder.stub!(:geocode).and_return(mock(:all => all))
+    l = Location.geocode("Bathurst Rd")
+    all = l.all
+    all.count.should == 3
+    all[0].full_address.should == "Bathurst Rd, Orange NSW 2800"
+    all[1].full_address.should == "Bathurst Rd, Katoomba NSW 2780"
+    all[2].full_address.should == "Bathurst Rd, Port Kennedy WA 6172"
   end
 end

@@ -56,6 +56,10 @@ class Location < SimpleDelegator
     __getobj__.full_address.sub(", Australia", "")
   end
   
+  def all
+    __getobj__.all.find_all{|l| l.country_code == "AU"}.map{|l| Location.new(l)}
+  end
+  
   def ==(a)
     lat == a.lat && lng == a.lng
   end
