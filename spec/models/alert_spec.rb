@@ -59,6 +59,13 @@ describe Alert do
       u.should_not be_valid
       u.errors.on(:address).should == "some error message"
     end
+    
+    it "should error if there are multiple matches from the geocoder" do
+      Location.stub!(:geocode).and_return(mock(:lat => 1, :lng => 2, :full_address => "Bruce Rd, VIC 3885", :error => nil, :all => [nil, nil]))
+      u = Alert.new(:address => "Bruce Road", :email => "matthew@openaustralia.org")
+      u.should_not be_valid
+      u.errors.on(:address).should == "isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"
+    end
 
     it "should replace the address with the full resolved address obtained by geocoding" do
       @attributes[:address] = "24 Bruce Road, Glenbrook"

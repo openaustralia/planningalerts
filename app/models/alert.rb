@@ -105,8 +105,12 @@ class Alert < ActiveRecord::Base
   
   def validate_address
     # Only validate the street address if we used the geocoder
-    if @geocode_result && @geocode_result.error
-      errors.add(:address, @geocode_result.error)
+    if @geocode_result
+      if @geocode_result.error
+        errors.add(:address, @geocode_result.error)
+      elsif @geocode_result.all.size > 1
+        errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
+      end
     end
   end
   

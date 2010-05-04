@@ -29,16 +29,17 @@ class Location < SimpleDelegator
   end
 
   def error
-    if original_address == ""
-      "can't be empty"
-    elsif lat.nil? || lng.nil?
-      "isn't valid"
-    elsif country_code != "AU"
-      "isn't in Australia"
-    elsif all.size > 1
-      "isn't complete. Please enter a full street address, including suburb and state, e.g. #{full_address}"
-    elsif accuracy < 6
-      "isn't complete. We saw that address as \"#{full_address}\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state"
+    # Only checking for errors on geocoding
+    if original_address
+      if original_address == ""
+        "can't be empty"
+      elsif lat.nil? || lng.nil?
+        "isn't valid"
+      elsif country_code != "AU"
+        "isn't in Australia"
+      elsif accuracy < 6
+        "isn't complete. We saw that address as \"#{full_address}\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state"
+      end
     end
   end
   

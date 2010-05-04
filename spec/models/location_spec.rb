@@ -63,12 +63,12 @@ describe "Location" do
     l.error.should == "isn't in Australia"
   end
   
-  it "should error if there are multiple matches from the geocoder" do
+  it "should not error if there are multiple matches from the geocoder" do
     Geokit::Geocoders::GoogleGeocoder.stub!(:geocode).and_return(mock(:lat => 1, :lng => 2, :country_code => "AU",
-      :all => [mock(:country_code => "AU"), mock(:country_code => "AU")], :full_address => "Bruce Rd, VIC 3885, Australia"))
+      :all => [mock(:country_code => "AU"), mock(:country_code => "AU")], :full_address => "Bruce Rd, VIC 3885, Australia", :accuracy => 6))
 
     l = Location.geocode("Bruce Road")
-    l.error.should == "isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"
+    l.error.should be_nil
   end
   
   it "should error if the address is not a full street address but rather a suburb name or similar" do
