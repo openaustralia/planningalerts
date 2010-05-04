@@ -2,6 +2,8 @@
 # geokit vanilla is that the distances are all in meters and the geocoding is biased towards Australian addresses
 
 class Location < SimpleDelegator
+  attr_accessor :original_address
+
   def initialize(*params)
     if params.count == 2
       super(Geokit::LatLng.new(*params))
@@ -13,7 +15,9 @@ class Location < SimpleDelegator
   end
 
   def self.geocode(address)
-    Location.new(Geokit::Geocoders::GoogleGeocoder.geocode(address, :bias => "au"))
+    l = Location.new(Geokit::Geocoders::GoogleGeocoder.geocode(address, :bias => "au"))
+    l.original_address = address
+    l
   end
 
   def suburb
@@ -24,6 +28,20 @@ class Location < SimpleDelegator
     zip
   end
 
+  def error
+    if original_address == ""
+      "can't be empty"
+    elsif lat.nil? || lng.nil?
+      "isn't valid"
+    elsif country_code != "AU"
+      "isn't in Australia"
+    elsif all.size > 1
+      "isn't complete. Please enter a full street address, including suburb and state, e.g. #{full_address}"
+    elsif accuracy < 6
+      "isn't complete. We saw that address as \"#{full_address}\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state"
+    end
+  end
+  
   # Distance given is in metres
   def endpoint(bearing, distance)
     Location.new(__getobj__.endpoint(bearing, distance / 1000.0, :units => :kms))

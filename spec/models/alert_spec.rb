@@ -50,44 +50,16 @@ describe Alert do
       alert = Alert.create!(@attributes)
       alert.lat.should == @loc.lat
       alert.lng.should == @loc.lng
-    end
-
-    it "should error if the address is empty" do
-      Location.stub!(:geocode).and_return(mock(:lat => nil, :lng => nil, :full_address => ""))
-      @attributes[:address] = ""
-      u = Alert.new(@attributes)
-      u.should_not be_valid
-      u.errors.on(:address).should == "can't be empty"
+      alert.should be_valid
     end
     
-    it "should error if the street address is not in australia" do
-      @loc.stub!(:country_code).and_return("US")
-      @attributes[:address] = "New York"
-      u = Alert.new(@attributes)
+    it "should set an error on the address if there is an error on geocoding" do
+      Location.stub!(:geocode).and_return(mock(:error => "some error message", :lat => nil, :lng => nil, :full_address => nil))
+      u = Alert.new(:email => "matthew@openaustralia.org")
       u.should_not be_valid
-      u.errors.on(:address).should == "isn't in Australia"
+      u.errors.on(:address).should == "some error message"
     end
 
-    it "should error if there are multiple matches from the geocoder" do
-      @loc.stub!(:all).and_return([@loc, nil])
-      @loc.stub!(:full_address).and_return("Bruce Rd, VIC 3885, Australia")
-
-      @attributes[:address] = "Bruce Road"
-      u = Alert.new(@attributes)
-      u.should_not be_valid
-      u.errors.on(:address).should == "isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"
-    end
-
-    it "should error if the address is not a full street address but rather a suburb name or similar" do
-      @loc.stub!(:accuracy).and_return(5)
-      @loc.stub!(:full_address).and_return("Glenbrook NSW")
-
-      @attributes[:address] = "Glenbrook, NSW"
-      u = Alert.new(@attributes)
-      u.should_not be_valid
-      u.errors.on(:address).should == "isn't complete. We saw that address as \"Glenbrook NSW\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state"
-    end
-    
     it "should replace the address with the full resolved address obtained by geocoding" do
       @attributes[:address] = "24 Bruce Road, Glenbrook"
       u = Alert.new(@attributes)
