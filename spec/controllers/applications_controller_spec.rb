@@ -36,37 +36,38 @@ describe ApplicationsController do
   
   describe "search by address" do
     before :each do
-      location = mock(:lat => 1.0, :lng => 2.0)
+      location = mock(:lat => 1.0, :lng => 2.0, :full_address => "24 Bruce Road, Glenbrook NSW 2773")
       @result = mock
 
-      Location.should_receive(:geocode).with("24 Bruce Road Glenbrook, NSW 2773").and_return(location)
+      Location.should_receive(:geocode).with("24 Bruce Road Glenbrook").and_return(location)
       Application.should_receive(:paginate).with(:origin => [location.lat, location.lng], :within => 4, :page => nil, :order => "date_scraped DESC").and_return(@result)
     end
     
     it "should find recent applications near the address" do
-      get :index, :format => "rss", :address => "24 Bruce Road Glenbrook, NSW 2773", :radius => 4000
+      get :index, :format => "rss", :address => "24 Bruce Road Glenbrook", :radius => 4000
       assigns[:applications].should == @result
-      assigns[:description].should == "Recent applications within 4 km of 24 Bruce Road Glenbrook, NSW 2773"
+      # Should use the normalised form of the address in the description
+      assigns[:description].should == "Recent applications within 4 km of 24 Bruce Road, Glenbrook NSW 2773"
     end
 
     it "should find recent applications near the address using the old parameter name" do
-      get :index, :format => "rss", :address => "24 Bruce Road Glenbrook, NSW 2773", :area_size => 4000
+      get :index, :format => "rss", :address => "24 Bruce Road Glenbrook", :area_size => 4000
       assigns[:applications].should == @result
-      assigns[:description].should == "Recent applications within 4 km of 24 Bruce Road Glenbrook, NSW 2773"
+      assigns[:description].should == "Recent applications within 4 km of 24 Bruce Road, Glenbrook NSW 2773"
     end
   end
   
   describe "search by address no radius" do
     it "should use a search radius of 2000 when none is specified" do
-      location = mock(:lat => 1.0, :lng => 2.0)
+      location = mock(:lat => 1.0, :lng => 2.0, :full_address => "24 Bruce Road, Glenbrook NSW 2773")
       result = mock
 
-      Location.should_receive(:geocode).with("24 Bruce Road Glenbrook, NSW 2773").and_return(location)
+      Location.should_receive(:geocode).with("24 Bruce Road Glenbrook").and_return(location)
       Application.should_receive(:paginate).with(:origin => [location.lat, location.lng], :within => 2, :page => nil, :order => "date_scraped DESC").and_return(result)
 
-      get :index, :address => "24 Bruce Road Glenbrook, NSW 2773"
+      get :index, :address => "24 Bruce Road Glenbrook"
       assigns[:applications].should == result
-      assigns[:description].should == "Recent applications within 2 km of 24 Bruce Road Glenbrook, NSW 2773"      
+      assigns[:description].should == "Recent applications within 2 km of 24 Bruce Road, Glenbrook NSW 2773"      
     end
   end
   

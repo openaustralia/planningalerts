@@ -28,7 +28,7 @@ class ApplicationsController < ApplicationController
         radius = params[:radius] || params[:area_size] || 2000
         if params[:address]
           location = Location.geocode(params[:address])
-          location_text = params[:address]
+          location_text = location.full_address
         else
           location = Location.new(params[:lat].to_f, params[:lng].to_f)
           location_text = location.to_s
