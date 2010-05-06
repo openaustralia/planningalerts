@@ -15,7 +15,9 @@ class Location < SimpleDelegator
   end
 
   def self.geocode(address)
-    l = Location.new(Geokit::Geocoders::GoogleGeocoder.geocode(address, :bias => "au"))
+    r = Geokit::Geocoders::GoogleGeocoder.geocode(address, :bias => "au")
+    r = r.all.find{|l| l.country_code == "AU"} || r
+    l = Location.new(r)
     l.original_address = address
     l
   end
