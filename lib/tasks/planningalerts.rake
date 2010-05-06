@@ -7,8 +7,8 @@ namespace :planningalerts do
   end
   
   namespace :applications do
-    desc "Scrape new applications and send emails"
-    task :scrape_and_email => [:scrape, :email]
+    desc "Scrape new applications, send emails and generate XML sitemap"
+    task :scrape_and_email => [:scrape, :email, :sitemap]
     
     desc "Scrape all the applications for the last few days for all the loaded authorities"
     task :scrape => :environment do
