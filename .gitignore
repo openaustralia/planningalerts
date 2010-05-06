@@ -12,7 +12,8 @@ public/api/*.html
 public/faq.html
 public/getinvolved.html
 public/index.html
-public/stylesheets/*.css
+public/stylesheets/main.css
+public/stylesheets/memespring.css
 public/sitemap.xml
 public/sitemap*.xml.gz
 tmp/sass-cache
