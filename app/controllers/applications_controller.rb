@@ -70,6 +70,11 @@ class ApplicationsController < ApplicationController
     else
       @nearby_applications = []
     end
+    
+    respond_to do |format|
+      format.html
+      format.mobile { render "show_mobile", :layout => false }
+    end
   end
 
   private

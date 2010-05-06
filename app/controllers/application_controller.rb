@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
   
   before_filter :load_configuration
+  
+  has_mobile_fu
 
   private
   

@@ -1,0 +1,23 @@
+!!! Strict
+%html{ :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
+    %title
+      PlanningAlerts.org.au
+    %link{ :href => "/stylesheets/mobile.css", :rel => "stylesheet" }
+  %body
+    .page
+      .head
+        %h1.logo
+          %a{ :href => "" } PlanningAlerts.org.au
+      .body
+        .info
+          %h1= @application.address
+          %h2= @application.description
+          %p Council reference: #{@application.council_reference}
+        .highlight
+          %p= scraped_and_received_text(@application)
+          - if @application.on_notice_to
+            %p= on_notice_text(@application)
+          %p (Source: #{@application.authority.full_name})
+      .foot
