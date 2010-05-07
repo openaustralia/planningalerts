@@ -162,4 +162,23 @@ describe ApplicationsController do
       assigns[:nearby_applications].should == []
     end
   end
+  
+  describe "mobile support" do
+    it "should have a mobile optimised show page" do
+      get :show, :id => 1
+      assigns[:mobile_optimised].should == true
+    end
+    
+    it "should disable mobile view" do
+      get :show, :id => 1, :mobile => "false"
+      session[:mobile_view].should be_false
+      response.should redirect_to(:action => :show, :id => 1)
+    end
+
+    it "should enable mobile view" do
+      get :show, :id => 1, :mobile => "true"
+      session[:mobile_view].should be_true
+      response.should redirect_to(:action => :show, :id => 1)
+    end
+  end
 end
