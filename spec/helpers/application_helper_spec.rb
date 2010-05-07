@@ -34,6 +34,14 @@ describe ApplicationHelper do
     helper.significant_figure(164, 1).should == 200
     helper.significant_figure(1640, 1).should == 2000
   end
+  
+  it "should round zero without freaking out" do
+    helper.significant_figure(0, 1).should == 0
+  end
+  
+  it "should round negative numbers" do
+    helper.significant_figure(-2.34, 2).should == -2.3
+  end
 
   describe "mobile_switcher_links" do
     it "should not be visible when a mobile-optimised page is viewed from a normal web browser (not a mobile)" do

@@ -33,8 +33,14 @@ module ApplicationHelper
 
   # Round the number a to s significant figures
   def significant_figure(a, s)
-    m = 10 ** (Math.log10(a).ceil - s)
-    ((a.to_f / m).round * m).to_f
+    if a > 0
+      m = 10 ** (Math.log10(a).ceil - s)
+      ((a.to_f / m).round * m).to_f
+    elsif a < 0
+      -significant_figure(-a, s)
+    else
+      0
+    end
   end
   
   def km_in_words(km)
