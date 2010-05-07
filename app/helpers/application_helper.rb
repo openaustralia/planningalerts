@@ -37,6 +37,10 @@ module ApplicationHelper
     ((a.to_f / m).round * m).to_f
   end
   
+  def km_in_words(km)
+    meters_in_words(km * 1000)
+  end
+  
   def is_mobile_optimised?
     @mobile_optimised == true
   end

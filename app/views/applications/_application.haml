@@ -1,5 +1,8 @@
 %dt.address= link_to application.address, application_path(application)
 %dd
-  .datescraped
-    #{time_ago_in_words(application.date_scraped)} ago
+  .appinfo
+    - if application.respond_to? :distance
+      #{time_ago_in_words(application.date_scraped)} ago, #{km_in_words(application.distance.to_f)} away
+    - else
+      #{time_ago_in_words(application.date_scraped)} ago
   .description= application.description
