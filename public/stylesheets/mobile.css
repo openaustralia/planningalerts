@@ -261,3 +261,8 @@ a.sml {
 .c {
 	text-align: center;
 }
+
+.mobile {
+  text-align: center;
+  margin: 13px;
+}

@@ -21,5 +21,6 @@
           - if @application.on_notice_to
             %p= on_notice_text(@application)
           %p (Source: #{@application.authority.full_name})
-      .foot.c
-        = mobile_switcher_links
+      .foot
+        .mobile
+          = mobile_switcher_links
