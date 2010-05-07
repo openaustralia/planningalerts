@@ -25,4 +25,14 @@ module ApplicationHelper
   def meters_in_words(meters)
     meters_in_words_as_array(meters).join(" ")
   end
+  
+  def is_mobile_optimised?
+    @mobile_optimised == true
+  end
+  
+  def mobile_switcher_links
+    if is_mobile_optimised? && is_mobile_device?
+      link_to_unless(in_mobile_view?, "Mobile", :mobile => "true") + " | " + link_to_unless(!in_mobile_view?, "Classic", :mobile => "false")
+    end
+  end
 end
