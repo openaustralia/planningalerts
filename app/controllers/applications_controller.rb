@@ -1,4 +1,6 @@
 class ApplicationsController < ApplicationController
+  before_filter :mobile_optimise_switching, :only => [:show]
+  
   def index
     @description = "Recent applications"
     # Don't want the RSS feed to match the paging
@@ -60,18 +62,6 @@ class ApplicationsController < ApplicationController
   end
   
   def show
-    # Let's the view know whether this page can be mobile optimised
-    @mobile_optimised = true
-    if params[:mobile] == "false"
-      session[:mobile_view] = false
-      redirect_to :mobile => nil
-      return
-    elsif params[:mobile] == "true"
-      session[:mobile_view] = true
-      redirect_to :mobile => nil
-      return
-    end
-    
     @application = Application.find(params[:id])
     @page_title = @application.address
     

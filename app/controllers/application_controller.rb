@@ -29,4 +29,16 @@ class ApplicationController < ActionController::Base
     @page_title = "404 - Not Found"
     render "static/404", :status => :not_found
   end
+  
+  def mobile_optimise_switching
+    # Let's the view know whether this page can be mobile optimised
+    @mobile_optimised = true
+    if params[:mobile] == "false"
+      session[:mobile_view] = false
+      redirect_to :mobile => nil
+    elsif params[:mobile] == "true"
+      session[:mobile_view] = true
+      redirect_to :mobile => nil
+    end
+  end
 end
