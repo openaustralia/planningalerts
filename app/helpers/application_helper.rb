@@ -16,16 +16,25 @@ module ApplicationHelper
 
   def meters_in_words(meters)
     if meters < 1000
-      "#{meters} m"
+      "#{significant_figure_remove_trailing_zero(meters, 2)} m"
     else
-      km = meters / 1000.0
-      text = "%.1f" % km
-      # Make 2000 m appear as 2 km rather than 2.0 km
-      if text [-2..-1] == ".0"
-        text = text[0..-3]
-      end
-      "#{text} km"
+      "#{significant_figure_remove_trailing_zero(meters / 1000.0, 2)} km"
     end
+  end
+  
+  def significant_figure_remove_trailing_zero(a, s)
+    text = significant_figure(a, s).to_s
+    if text [-2..-1] == ".0"
+      text[0..-3]
+    else
+      text
+    end
+  end
+
+  # Round the number a to s significant figures
+  def significant_figure(a, s)
+    m = 10 ** (Math.log10(a).ceil - s)
+    ((a.to_f / m).round * m).to_f
   end
   
   def is_mobile_optimised?
