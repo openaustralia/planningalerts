@@ -7,6 +7,10 @@ describe ApplicationHelper do
     helper.meters_in_words(500).should == "500 m"
   end
   
+  it "should round distances in km to the nearest 100m" do
+    helper.meters_in_words(2345).should == "2.3 km"
+  end
+  
   describe "mobile_switcher_links" do
     it "should not be visible when a mobile-optimised page is viewed from a normal web browser (not a mobile)" do
       helper.stub!(:is_mobile_optimised?).and_return(true)

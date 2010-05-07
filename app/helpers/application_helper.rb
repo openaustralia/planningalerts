@@ -18,7 +18,13 @@ module ApplicationHelper
     if meters < 1000
       "#{meters} m"
     else
-      "#{meters / 1000} km"
+      km = meters / 1000.0
+      text = "%.1f" % km
+      # Make 2000 m appear as 2 km rather than 2.0 km
+      if text [-2..-1] == ".0"
+        text = text[0..-3]
+      end
+      "#{text} km"
     end
   end
   
