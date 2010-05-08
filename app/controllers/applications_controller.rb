@@ -70,7 +70,7 @@ class ApplicationsController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.mobile { render "show_mobile", :layout => false }
+      format.mobile { render "show_mobile", :layout => "mobile" }
     end
   end
 

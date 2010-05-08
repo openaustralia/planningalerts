@@ -1,26 +1,10 @@
-!!! Strict
-%html{ :xmlns => "http://www.w3.org/1999/xhtml" }
-  %head
-    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
-    %meta(name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0")
-    %title PlanningAlerts | #{@page_title || "Email alerts of planning applications near you"}
-    = stylesheet_link_tag "mobile"
-  %body
-    .page
-      .head
-        %h1.logo
-          = link_to "PlanningAlerts.org.au", root_url
-      .body
-        .info
-          %h1= @application.address
-          %h2= @application.description
-          %p Council reference: #{@application.council_reference}
-        .highlight
-          %p= scraped_and_received_text(@application)
-          - if @application.on_notice_to
-            %p= on_notice_text(@application)
-          %p (Source: #{@application.authority.full_name})
-        .info= link_to("Other applications nearby", applications_url(:address => @application.address))
-      .foot
-        .mobile
-          = mobile_switcher_links
+.info
+  %h1= @application.address
+  %h2= @application.description
+  %p Council reference: #{@application.council_reference}
+.highlight
+  %p= scraped_and_received_text(@application)
+  - if @application.on_notice_to
+    %p= on_notice_text(@application)
+  %p (Source: #{@application.authority.full_name})
+.info= link_to("Other applications nearby", applications_url(:address => @application.address))
