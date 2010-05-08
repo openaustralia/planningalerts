@@ -1,5 +1,5 @@
 class ApplicationsController < ApplicationController
-  before_filter :mobile_optimise_switching, :only => [:show]
+  before_filter :mobile_optimise_switching, :only => [:show, :index]
   
   def index
     @description = "Recent applications"
