@@ -54,17 +54,27 @@ h4 {
 	background: #fcfbbd;
 	padding: 0 16px;
 }
-.nav.back {
-	background: url(../images/mobile/back.png) no-repeat 16px center,
-		url(../images/mobile/nav.png) repeat-x 0 0;
+
+.pagination {
 	line-height: 33px;
-	padding: 0 16px 0 32px;
-	display: block;
-	color: #333;
 	font-size: 14px;
 	font-weight: bold;
+	display: block;	
+	color: #333;
+	background: url(../images/mobile/nav.png) repeat-x 0 0;
 }
 
+.prev_page {
+	padding: 0 16px 0 32px;
+	background: url(../images/mobile/back.png) no-repeat 16px center
+}
+
+.next_page {
+	padding: 0 32px 0 16px;
+	background: url(../images/mobile/next.png) no-repeat 62px center;
+	right: 0;
+	position: absolute;
+}
 
 .page {}
 .head {

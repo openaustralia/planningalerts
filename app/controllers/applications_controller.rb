@@ -53,8 +53,7 @@ class ApplicationsController < ApplicationController
     @page_title = @description
     respond_to do |format|
       format.html
-      # TODO Make a mobile optimised version of the list of applications
-      format.mobile
+      format.mobile { render "index_mobile", :layout => "mobile" }
       # TODO: Move the template over to using an xml builder
       format.rss { render "index.rss", :layout => false, :content_type => Mime::XML }
       format.js { render :json => @applications.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance]) }
