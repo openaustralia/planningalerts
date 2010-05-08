@@ -34,6 +34,7 @@
 
 - unless @nearby_applications.empty?
   #nearby-applications
-    %h3 Other recent applications nearby (within #{meters_in_words(@nearby_distance)})
+    %h3 Selection of other recent or nearby applications
     %dl
       = render :partial => "application", :collection => @nearby_applications
+    = link_to("more applications nearby&hellip;", applications_url(:address => @application.address))

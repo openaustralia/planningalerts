@@ -76,6 +76,29 @@ class Application < ActiveRecord::Base
     zoom = 15
     "http://maps.google.com/maps?q=#{CGI.escape(address)}&z=#{zoom}";
   end
+  
+  # Find applications that are near the current application location and/or recently scraped. We use
+  # a 4d distance metric to sort the applications. The weighting of spatial distance and time is done
+  # with the "max_distance" (in kilometres) and the "max_age" (in seconds) parameters.
+  # "max_distance" and "max_age" also specify an upper bound on the values that are returned.
+  # For instance we might consider an application that just now been lodged that's 10 km away to be
+  # just as important as an application that was lodged next door 2 months ago. In this case,
+  # suitable values for "max_distance" would be 10 and "max_age" would be 2 * 4 * 7 * 24 * 60 * 60.
+  # "limit" is the maximum number of applications to return
+  def find_all_nearest_or_recent(max_distance, max_age, limit)
+    if location
+      # TODO: Do the sort with SQL so that we can limit the data transferred
+      apps = Application.find(:all, :origin => [location.lat, location.lng], :within => max_distance, :conditions => ['date_scraped > ?', max_age.seconds.ago])
+      apps = apps.sort do |a,b|
+        ((a.distance.to_f / max_distance) ** 2 + ((Time.now - a.date_scraped) / max_age) ** 2) <=> ((b.distance.to_f / max_distance) ** 2 + ((Time.now - b.date_scraped) / max_age) ** 2)
+      end
+      # Don't include the current application
+      apps.delete(self)
+      apps[0...limit]
+    else
+      []
+    end
+  end
 
   private
   

@@ -65,15 +65,8 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     @page_title = @application.address
     
-    # Find other applications nearby (within 10km area)
-    @nearby_distance = 10000
-    if @application.location
-      @nearby_applications = Application.recent.find(:all, :origin => [@application.location.lat, @application.location.lng], :within => @nearby_distance / 1000.0)
-      # Don't include the current application
-      @nearby_applications.delete(@application)
-    else
-      @nearby_applications = []
-    end
+    # An application that just now been lodged that's 2 km away is about as important as an application that was lodged next door 2 months ago.
+    @nearby_applications = @application.find_all_nearest_or_recent(2, 2 * 4 * 7 * 24 * 60 * 60, 5)
     
     respond_to do |format|
       format.html
