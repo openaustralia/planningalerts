@@ -77,6 +77,14 @@ class Application < ActiveRecord::Base
     "http://maps.google.com/maps?q=#{CGI.escape(address)}&z=#{zoom}";
   end
   
+  def description
+    # PA-163 Capitalise the first letter of the description field
+    description = read_attribute(:description)
+    if not description == ""
+      description = description[0..0].upcase + description[1..-1]
+    end 
+  end
+  
   # The value (the "fourth" dimension) needs to be scaled to the same units as the distance (km) for
   # this to be meaningful
   def fourd_distance_squared(scaled_value)

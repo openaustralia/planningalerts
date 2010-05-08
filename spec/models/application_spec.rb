@@ -9,6 +9,17 @@ describe Application do
       :postcode => "2773", :success => true))
   end
   
+  describe "getting DA descriptions" do
+    it "should allow applications to be blank" do
+      a = Application.new(:description => "")
+      a.description.should == nil
+    end
+    it "should start descriptions with a capital letter" do
+      a = Application.new(:description => "a description")
+      a.description.should == "A description" 
+    end
+  end
+  
   describe "on saving" do
     it "should geocode the address" do
       loc = mock("Location", :lat => -33.772609, :lng => 150.624263, :suburb => "Glenbrook", :state => "NSW",
