@@ -20,6 +20,7 @@
           - if @application.on_notice_to
             %p= on_notice_text(@application)
           %p (Source: #{@application.authority.full_name})
+        .info= link_to("Other applications nearby", applications_url(:address => @application.address))
       .foot
         .mobile
           = mobile_switcher_links
