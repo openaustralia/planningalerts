@@ -78,11 +78,14 @@ class Application < ActiveRecord::Base
   end
   
   def description
-    # PA-163 Capitalise the first letter of the description field
+    # Capitalise the first letter of the description field
     description = read_attribute(:description)
-    if not description == ""
-      description = description[0..0].upcase + description[1..-1]
-    end 
+    if description && description.size > 0
+      description[0..0].upcase + description[1..-1]
+    else
+      # Leave the output unchanged
+      description
+    end
   end
   
   # The value (the "fourth" dimension) needs to be scaled to the same units as the distance (km) for

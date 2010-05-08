@@ -12,8 +12,14 @@ describe Application do
   describe "getting DA descriptions" do
     it "should allow applications to be blank" do
       a = Application.new(:description => "")
-      a.description.should == nil
+      a.description.should == ""
     end
+    
+    it "should allow the application description to be nil" do
+      a = Application.new(:description => nil)
+      a.description.should be_nil
+    end
+
     it "should start descriptions with a capital letter" do
       a = Application.new(:description => "a description")
       a.description.should == "A description" 
