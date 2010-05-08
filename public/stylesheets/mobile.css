@@ -49,10 +49,9 @@ h4 {
 }
 
 .title {
-	height: 44px;
-	line-height: 44px;
+	line-height: 20px;
 	background: #fcfbbd;
-	padding: 0 16px;
+	padding: 12px 16px;
 }
 
 .pagination {
