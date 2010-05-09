@@ -15,4 +15,6 @@ public/index.html
 public/stylesheets/*.css
 public/sitemap.xml
 public/sitemap*.xml.gz
+public/javascripts/all.js
+public/javascripts/mxn_bundle.js
 tmp/sass-cache
