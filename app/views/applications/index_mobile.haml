@@ -1,8 +1,9 @@
 %h2.title= @description
 - paginated_section @applications, :previous_label => "Newer", :next_label => "Older", :inner_window => 1, :outer_window => 0 do
-  %ul.list
+  .list
     - @applications.each do |application|
-      %li
-        %h4= link_to application.address, url_for(application)
-        %strong= application.description
-        = "(" + time_ago_in_words(application.date_scraped) + " ago)"
+      - link_to application do
+        .listitem
+          %h4= application.address
+          %strong= application.description
+          = "(" + time_ago_in_words(application.date_scraped) + " ago)"

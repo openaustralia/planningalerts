@@ -117,13 +117,15 @@ h4 {
 .list {
 	list-style: none;
 }
-.list li {
+.list .listitem {
 	padding: 13px 15px;
 	border-bottom: solid 1px #e8e8e8;
+	color: #333;
 }
-.list li:last-child {
-	border-bottom: 0
+.listitem h4 {
+  color: #f2630c
 }
+
 
 /* green arrow bullet */
 .arrow {
