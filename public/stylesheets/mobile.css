@@ -71,8 +71,7 @@ h4 {
 .next_page {
 	padding: 0 32px 0 16px;
 	background: url(../images/mobile/next.png) no-repeat 62px center;
-	right: 0;
-	position: absolute;
+	float: right;
 }
 
 .page {}
