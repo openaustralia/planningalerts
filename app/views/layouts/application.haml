@@ -6,7 +6,7 @@
     %title PlanningAlerts | #{@page_title || "Email alerts of planning applications near you"}
     - if @rss
       %link(rel="alternate" type="application/rss+xml" title="RSS" href=@rss)
-    = stylesheet_link_tag "memespring", "main", :media => "all", :cache => true
+    = stylesheet_link_tag "memespring", "main", :media => "all"
     %script(type="text/javascript")
 
       var _gaq = _gaq || [];
@@ -22,7 +22,9 @@
     %style(type="text/css")
       v:* { behavior:url(#default#VML);}
     = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"
-    = javascript_include_tag "mxn.js", "mxn.core.js", "mxn.google.core.js", :cache => "mxn_bundle"
+    = javascript_include_tag "mxn.js"
+    = javascript_include_tag "mxn.core.js"
+    = javascript_include_tag "mxn.google.core.js"
   %body
     #header
       %h1
