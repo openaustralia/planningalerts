@@ -5,5 +5,9 @@
       - link_to application do
         .listitem
           %h4= application.address
+          %p
+            - if application.respond_to? :distance
+              #{time_ago_in_words(application.date_scraped)} ago, #{km_in_words(application.distance.to_f)} away
+            - else
+              #{time_ago_in_words(application.date_scraped)} ago
           %strong= application.description
-          = "(" + time_ago_in_words(application.date_scraped) + " ago)"
