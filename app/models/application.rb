@@ -6,7 +6,6 @@ class Application < ActiveRecord::Base
   acts_as_mappable :default_units => :kms
   
   default_scope :order => "date_scraped DESC"
-  named_scope :recent, :order => "date_scraped DESC", :limit => 100
   
   # For the benefit of will_paginate
   cattr_reader :per_page

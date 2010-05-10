@@ -36,7 +36,7 @@ class ApplicationsController < ApplicationController
           location_text = location.to_s
         end
         @description << " within #{help.meters_in_words(radius.to_i)} of #{location_text}"
-        # TODO: More concise form Application.recent(:origin => [location.lat, location.lng], :within => radius.to_f / 1000) doesn't work
+        # TODO: More concise form using chained scope doesn't work
         # http://www.binarylogic.com/2010/01/09/using-geokit-with-searchlogic/ might provide the answer
         @applications = Application.paginate :origin => [location.lat, location.lng], :within => radius.to_f / 1000,
           :page => params[:page]

@@ -1,12 +1,6 @@
 require 'spec_helper'
 
 describe ApplicationsController do
-  describe "named_scope recent" do
-    it "should scope the query to return the most recent 100 applications" do
-      Application.recent.proxy_options.should == {:limit => 100, :order => "date_scraped DESC"}
-    end
-  end
-  
   describe "rss feed" do
     it "should provide a link for all applications" do
       get :index
