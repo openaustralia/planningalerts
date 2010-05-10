@@ -53,7 +53,7 @@ module ApplicationHelper
   
   def mobile_switcher_links
     if is_mobile_optimised? && is_mobile_device?
-      link_to_unless(in_mobile_view?, "Mobile", :mobile => "true") + " | " + link_to_unless(!in_mobile_view?, "Classic", :mobile => "false")
+      link_to_unless(in_mobile_view?, "Mobile", :mobile => "true") + " | " + link_to_unless(!in_mobile_view?, "Desktop", :mobile => "false")
     end
   end
 end

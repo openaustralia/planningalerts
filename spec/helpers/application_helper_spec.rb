@@ -60,7 +60,7 @@ describe ApplicationHelper do
       helper.stub!(:is_mobile_optimised?).and_return(true)
       helper.stub!(:is_mobile_device?).and_return(true)
       helper.stub!(:in_mobile_view?).and_return(true)
-      helper.mobile_switcher_links.should == 'Mobile | <a href="/foo/bar?mobile=false">Classic</a>'
+      helper.mobile_switcher_links.should == 'Mobile | <a href="/foo/bar?mobile=false">Desktop</a>'
     end
 
     it "should disable the classic link and enable the mobile link when we're currently in the classic view" do
@@ -68,7 +68,7 @@ describe ApplicationHelper do
       helper.stub!(:is_mobile_optimised?).and_return(true)
       helper.stub!(:is_mobile_device?).and_return(true)
       helper.stub!(:in_mobile_view?).and_return(false)
-      helper.mobile_switcher_links.should == '<a href="/foo/bar?mobile=true">Mobile</a> | Classic'
+      helper.mobile_switcher_links.should == '<a href="/foo/bar?mobile=true">Mobile</a> | Desktop'
     end
   end
 end
