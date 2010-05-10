@@ -2,17 +2,6 @@
   - if @application.location
     - link_to @application.map_url do
       #map_div(style="width:330px;height:330px")
-    :javascript
-      var map;
-      $(document).ready(function(){
-        map = new mxn.Mapstraction("map_div","google");
-        point = new mxn.LatLonPoint(#{@application.lat},#{@application.lng});
-        map.setCenterAndZoom(point,16);
-        map.dragging(false);
-        marker = new mxn.Marker(point)
-        marker.setLabel("#{escape_javascript(@application.address)}");
-        map.addMarker(marker);
-      });
 
   %h3.address= @application.address
   %p.description= @application.description
@@ -38,3 +27,16 @@
     %dl
       = render :partial => "application", :collection => @nearby_applications
     = link_to("more applications nearby&hellip;", applications_url(:address => @application.address))
+
+- if @application.location
+  :javascript
+    var map;
+    $(document).ready(function(){
+      map = new mxn.Mapstraction("map_div","google");
+      point = new mxn.LatLonPoint(#{@application.lat},#{@application.lng});
+      map.setCenterAndZoom(point,16);
+      map.dragging(false);
+      marker = new mxn.Marker(point)
+      marker.setLabel("#{escape_javascript(@application.address)}");
+      map.addMarker(marker);
+    });

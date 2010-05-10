@@ -7,23 +7,9 @@
     - if @rss
       %link(rel="alternate" type="application/rss+xml" title="RSS" href=@rss)
     = stylesheet_link_tag "memespring", "main", :media => "all", :cache => true
-    %script(type="text/javascript")
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '#{Configuration::GOOGLE_ANALYTICS_KEY}']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
-      })();
     %style(type="text/css")
       v:* { behavior:url(#default#VML);}
     = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"
-    - if @map
-      %script(src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=#{Configuration::GOOGLE_MAPS_KEY}" type="text/javascript")
-      = javascript_include_tag "mxn.js", "mxn.core.js", "mxn.google.core.js", :cache => "mxn_bundle"
   %body
     #header
       %h1
@@ -62,7 +48,17 @@
     - if @set_focus_control
       %script(type="text/javascript" defer="defer")
         document.getElementById('#{@set_focus_control}').focus();
-    %script(type="text/javascript")
+    :javascript
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '#{Configuration::GOOGLE_ANALYTICS_KEY}']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+      })();
+
       var uservoiceOptions = {key: 'planningalerts', host: 'planningalerts.uservoice.com', forum: '49635', alignment: 'right', background_color:'#F4F322', text_color: 'black',
       hover_color: '#FF8C00', lang: 'en', showTab: true};
       function _loadUserVoice() {
@@ -72,4 +68,7 @@
       }
       _loadSuper = window.onload;
       window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+    - if @map
+      %script(src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=#{Configuration::GOOGLE_MAPS_KEY}" type="text/javascript")
+      = javascript_include_tag "mxn.js", "mxn.core.js", "mxn.google.core.js", :cache => "mxn_bundle"
     
