@@ -18,11 +18,12 @@
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
       })();
-    %script(src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=#{Configuration::GOOGLE_MAPS_KEY}" type="text/javascript")
     %style(type="text/css")
       v:* { behavior:url(#default#VML);}
     = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"
-    = javascript_include_tag "mxn.js", "mxn.core.js", "mxn.google.core.js", :cache => "mxn_bundle"
+    - if @map
+      %script(src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=#{Configuration::GOOGLE_MAPS_KEY}" type="text/javascript")
+      = javascript_include_tag "mxn.js", "mxn.core.js", "mxn.google.core.js", :cache => "mxn_bundle"
   %body
     #header
       %h1

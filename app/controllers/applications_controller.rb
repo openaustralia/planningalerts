@@ -61,6 +61,7 @@ class ApplicationsController < ApplicationController
   end
   
   def show
+    @map = true
     @application = Application.find(params[:id])
     @page_title = @application.address
     
