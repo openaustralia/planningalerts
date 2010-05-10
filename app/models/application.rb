@@ -5,6 +5,7 @@ class Application < ActiveRecord::Base
   before_save :geocode
   acts_as_mappable :default_units => :kms
   
+  default_scope :order => "date_scraped DESC"
   named_scope :recent, :order => "date_scraped DESC", :limit => 100
   
   # For the benefit of will_paginate
