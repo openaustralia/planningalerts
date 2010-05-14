@@ -17,6 +17,8 @@ class ApplicationsController < ApplicationController
     if params[:authority_id]
       # TODO Handle the situation where the authority name isn't found
       authority = Authority.find_by_short_name_encoded(params[:authority_id])
+      # In production environment raising RecordNotFound will produce an error code 404
+      raise ActiveRecord::RecordNotFound if authority.nil?
       @applications = authority.applications.paginate :page => params[:page], :per_page => per_page
       @description << " in #{authority.full_name_and_state}"
     elsif params[:postcode]

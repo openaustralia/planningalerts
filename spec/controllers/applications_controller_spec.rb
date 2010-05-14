@@ -111,6 +111,12 @@ describe ApplicationsController do
       assigns[:applications].should == result
       assigns[:description].should == "Recent applications in Blue Mountains City Council"
     end
+    
+    it "should give a 404 when an invalid authority_id is used" do
+      Authority.should_receive(:find_by_short_name_encoded).with("this_authority_does_not_exist").and_return(nil)
+      get :index, :authority_id => "this_authority_does_not_exist"
+      response.response_code.should == 404
+    end
   end
   
   describe "search by postcode" do
