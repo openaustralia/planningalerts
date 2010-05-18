@@ -22,10 +22,10 @@
     <span class="highlight">New authorities are being added all the time, so if your local authority isn't listed below
     #{link_to "sign up any way", signup_path} and you'll start receiving alerts once it has been included</span>.
 %p
-  =@authorities.map{|a| link_to a.first, :anchor => a.first}.join(" | ")
+  =@authorities.map{|a| link_to a.first, :anchor => a.first.downcase}.join(" | ")
 %ul.nobullets
   - @authorities.each do |state, authorities|
-    %a(name=state)
+    %a{:name => state.downcase}
       %h4= state
     - authorities.each do |authority|
       %li= link_to authority.full_name, authority_applications_url(authority.short_name_encoded)
