@@ -74,7 +74,7 @@ class ApplicationsController < ApplicationController
   def show
     @map = true
     @application = Application.find(params[:id])
-    @page_title = @application.address
+    @page_title = "#{@application.address} | #{@application.date_scraped.to_date.to_formatted_s(:rfc822)}"
     @meta_description = "Planning application: #{@application.description} Address: #{@application.address}"
     
     # An application that just now been lodged that's 2 km away is about as important as an application that was lodged next door 2 months ago.
