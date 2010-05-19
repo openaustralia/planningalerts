@@ -3,46 +3,6 @@
     - link_to @application.map_url do
       #map_div(style="width:330px;height:330px")
     #pano(style="width:330px;height:165px")
-    :javascript
-      var myPano;
-      var panoClient;
-      var pointToLookAt;
-      $(document).ready(function(){
-        panoClient = new GStreetviewClient(); 
-        myPano = new GStreetviewPanorama(document.getElementById("pano"));
-        pointToLookAt = new GLatLng(#{@application.lat},#{@application.lng});
-        panoClient.getNearestPanorama(pointToLookAt, showPanoData);
-      })
-      
-      function showPanoData(panoData) {
-        if (panoData.code != 200) {
-          return;
-        }
-        var angle = computeAngle(pointToLookAt, panoData.location.latlng);
-        myPano.setLocationAndPOV(panoData.location.latlng, {yaw: angle});
-      }
-      
-      function computeAngle(endLatLng, startLatLng) {
-        var DEGREE_PER_RADIAN = 57.2957795;
-        var RADIAN_PER_DEGREE = 0.017453;
-      
-        var dlat = endLatLng.lat() - startLatLng.lat();
-        var dlng = endLatLng.lng() - startLatLng.lng();
-        // We multiply dlng with cos(endLat), since the two points are very closeby,
-        // so we assume their cos values are approximately equal.
-        var yaw = Math.atan2(dlng * Math.cos(endLatLng.lat() * RADIAN_PER_DEGREE), dlat)
-              * DEGREE_PER_RADIAN;
-        return wrapAngle(yaw);
-      }
-      
-      function wrapAngle(angle) {
-        if (angle >= 360) {
-          angle -= 360;
-        } else if (angle < 0) {
-          angle += 360;
-        }
-        return angle;
-      }
   
   %h3.address= @application.address
   %p.description= @application.description
@@ -72,6 +32,9 @@
 - if @application.location
   :javascript
     var map;
+    var myPano;
+    var panoClient;
+    var pointToLookAt;
     $(document).ready(function(){
       map = new mxn.Mapstraction("map_div","google");
       point = new mxn.LatLonPoint(#{@application.lat},#{@application.lng});
@@ -80,4 +43,39 @@
       marker = new mxn.Marker(point)
       marker.setLabel("#{escape_javascript(@application.address)}");
       map.addMarker(marker);
-    });
+
+      panoClient = new GStreetviewClient(); 
+      myPano = new GStreetviewPanorama(document.getElementById("pano"));
+      pointToLookAt = new GLatLng(#{@application.lat},#{@application.lng});
+      panoClient.getNearestPanorama(pointToLookAt, showPanoData);
+    })
+    
+    function showPanoData(panoData) {
+      if (panoData.code != 200) {
+        return;
+      }
+      var angle = computeAngle(pointToLookAt, panoData.location.latlng);
+      myPano.setLocationAndPOV(panoData.location.latlng, {yaw: angle});
+    }
+    
+    function computeAngle(endLatLng, startLatLng) {
+      var DEGREE_PER_RADIAN = 57.2957795;
+      var RADIAN_PER_DEGREE = 0.017453;
+    
+      var dlat = endLatLng.lat() - startLatLng.lat();
+      var dlng = endLatLng.lng() - startLatLng.lng();
+      // We multiply dlng with cos(endLat), since the two points are very closeby,
+      // so we assume their cos values are approximately equal.
+      var yaw = Math.atan2(dlng * Math.cos(endLatLng.lat() * RADIAN_PER_DEGREE), dlat)
+            * DEGREE_PER_RADIAN;
+      return wrapAngle(yaw);
+    }
+    
+    function wrapAngle(angle) {
+      if (angle >= 360) {
+        angle -= 360;
+      } else if (angle < 0) {
+        angle += 360;
+      }
+      return angle;
+    }
