@@ -152,13 +152,24 @@ describe ApplicationsController do
   
   describe "show" do
     it "should gracefully handle an application without any geocoded information" do
-      app = mock_model(Application, :address => "An address that can't be geocoded", :location => nil, :find_all_nearest_or_recent => [])
+      app = mock_model(Application, :address => "An address that can't be geocoded", :description => "foo", :location => nil, :find_all_nearest_or_recent => [])
       Application.should_receive(:find).with("1").and_return(app)
       get :show, :id => 1
       
       assigns[:application].should == app
       assigns[:page_title].should == "An address that can't be geocoded"
       assigns[:nearby_applications].should == []
+    end
+  end
+  
+  describe "search engine optimisation" do
+    it "should provide a meta tag description so that the search results from search engines are more helpful and readable" do
+      app = mock_model(Application, :address => "12 Foo Street", :description => "Cutting a hedge.", :find_all_nearest_or_recent => [])
+      Application.should_receive(:find).with("1").and_return(app)
+      get :show, :id => 1
+
+      assigns[:page_title].should == "12 Foo Street"
+      assigns[:meta_description].should == "Planning application: Cutting a hedge. Address: 12 Foo Street"
     end
   end
   
