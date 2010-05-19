@@ -13,4 +13,12 @@ describe AlertsController, "confirming" do
     get :confirmed, :cid => "1111"
     response.code.should == "404"
   end
+  
+  describe "search engine optimisation" do
+    it "should provide a sensible title and meta description to make search results useful to people" do
+      get :signup
+      assigns[:page_title].should == "Email alerts of planning applications near you"
+      assigns[:meta_description].should == "A free service which searches Australian planning authority websites and emails you details of applications near you"
+    end
+  end
 end
