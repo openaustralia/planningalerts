@@ -21,6 +21,9 @@
       to this application
   %p (Source: #{@application.authority.full_name})
   %p= addthis_bookmark_button
+  %p
+    =link_to "Email me whenever there is new application near here", signup_url(:alert => {:address => @application.address})
+    (No more than once per day)
 
 - unless @nearby_applications.empty?
   #nearby-applications

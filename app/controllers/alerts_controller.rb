@@ -5,8 +5,10 @@ class AlertsController < ApplicationController
     @page_title = "Email alerts of planning applications near you"
     @meta_description = "A free service which searches Australian planning authority websites and emails you details of applications near you"
     @zone_sizes = zone_sizes
-    unless request.get?
+    if params[:alert]
       @alert = Alert.new(:address => params[:alert][:address], :email => params[:alert][:email], :radius_meters => @zone_sizes['l'])
+    end
+    unless request.get?
       if @alert.save
         AlertNotifier.deliver_confirm(@alert)
         redirect_to check_mail_url
