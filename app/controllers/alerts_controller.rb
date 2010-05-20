@@ -1,5 +1,5 @@
 class AlertsController < ApplicationController
-  caches_page :signup, :check_mail, :statistics
+  caches_page :check_mail, :statistics
 
   def signup
     @page_title = "Email alerts of planning applications near you"
