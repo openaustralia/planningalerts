@@ -36,30 +36,28 @@ class ApplicationsController < ApplicationController
           :page => params[:page], :per_page => per_page
         @description << " in #{params[:suburb]}"
       end
-    else
-      if params[:address] || (params[:lat] && params[:lng])
-        radius = params[:radius] || params[:area_size] || 2000
-        if params[:address]
-          location = Location.geocode(params[:address])
-          location_text = location.full_address
-        else
-          location = Location.new(params[:lat].to_f, params[:lng].to_f)
-          location_text = location.to_s
-        end
-        @description << " within #{help.meters_in_words(radius.to_i)} of #{location_text}"
-        # TODO: More concise form using chained scope doesn't work
-        # http://www.binarylogic.com/2010/01/09/using-geokit-with-searchlogic/ might provide the answer
-        @applications = Application.paginate :origin => [location.lat, location.lng], :within => radius.to_f / 1000,
-          :page => params[:page], :per_page => per_page
-      elsif params[:bottom_left_lat] && params[:bottom_left_lng] && params[:top_right_lat] && params[:top_right_lng]
-        lat0, lng0 = params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f
-        lat1, lng1 = params[:top_right_lat].to_f, params[:top_right_lng].to_f
-        @description << " in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
-        @applications = Application.paginate :bounds => [[lat0, lng0], [lat1, lng1]],
-          :page => params[:page], :per_page => per_page
+    elsif params[:address] || (params[:lat] && params[:lng])
+      radius = params[:radius] || params[:area_size] || 2000
+      if params[:address]
+        location = Location.geocode(params[:address])
+        location_text = location.full_address
       else
-        @applications = Application.paginate :page => params[:page], :per_page => per_page
+        location = Location.new(params[:lat].to_f, params[:lng].to_f)
+        location_text = location.to_s
       end
+      @description << " within #{help.meters_in_words(radius.to_i)} of #{location_text}"
+      # TODO: More concise form using chained scope doesn't work
+      # http://www.binarylogic.com/2010/01/09/using-geokit-with-searchlogic/ might provide the answer
+      @applications = Application.paginate :origin => [location.lat, location.lng], :within => radius.to_f / 1000,
+        :page => params[:page], :per_page => per_page
+    elsif params[:bottom_left_lat] && params[:bottom_left_lng] && params[:top_right_lat] && params[:top_right_lng]
+      lat0, lng0 = params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f
+      lat1, lng1 = params[:top_right_lat].to_f, params[:top_right_lng].to_f
+      @description << " in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
+      @applications = Application.paginate :bounds => [[lat0, lng0], [lat1, lng1]],
+        :page => params[:page], :per_page => per_page
+    else
+      @applications = Application.paginate :page => params[:page], :per_page => per_page
     end
     @page_title = @description
     respond_to do |format|
