@@ -5,4 +5,5 @@
       #{time_ago_in_words(application.date_scraped)} ago, #{km_in_words(application.distance.to_f)} away
     - else
       #{time_ago_in_words(application.date_scraped)} ago
-  .description= application.description
+  .description
+    = application.respond_to?(:excerpts) ? application.excerpts.description : application.description
