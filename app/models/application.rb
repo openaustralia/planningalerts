@@ -10,6 +10,10 @@ class Application < ActiveRecord::Base
   # For the benefit of will_paginate
   cattr_reader :per_page
   @@per_page = 100
+  
+  define_index do
+    indexes description
+  end
     
   # TODO: factor out common location accessor between Application and Alert
   def location

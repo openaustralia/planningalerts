@@ -3,9 +3,14 @@ log/production.log
 log/server.log
 log/test.log
 log/cucumber.log
+log/searchd.development.pid
+log/searchd.log
+log/searchd.query.log
 config/database.yml
+config/development.sphinx.conf
 db/development.sqlite3
 db/test.sqlite3
+db/sphinx/development/*
 rerun.txt
 public/about.html
 public/api/*.html
