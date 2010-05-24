@@ -56,6 +56,9 @@ class ApplicationsController < ApplicationController
       @description << " in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
       @applications = Application.paginate :bounds => [[lat0, lng0], [lat1, lng1]],
         :page => params[:page], :per_page => per_page
+    elsif params[:search]
+      @description << " with &ldquo;#{params[:search]}&rdquo;"
+      @applications = Application.search params[:search], :order => :date_scraped, :sort_mode => :desc, :page => params[:page], :per_page => per_page
     else
       @applications = Application.paginate :page => params[:page], :per_page => per_page
     end

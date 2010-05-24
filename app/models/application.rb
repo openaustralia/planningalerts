@@ -13,6 +13,7 @@ class Application < ActiveRecord::Base
   
   define_index do
     indexes description
+    has date_scraped
   end
     
   # TODO: factor out common location accessor between Application and Alert
