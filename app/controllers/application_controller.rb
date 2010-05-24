@@ -4,10 +4,11 @@
 class ApplicationController < ActionController::Base
   # Enables exception notification by email for all controllers
   include ExceptionNotification::Notifiable
-  rescue_from ActionController::RoutingError, :with => :render_404
-  rescue_from ActionController::UnknownAction, :with => :render_404
-  rescue_from ActiveRecord::RecordNotFound, :with => :render_404
-  
+  unless ActionController::Base.consider_all_requests_local
+    rescue_from ActionController::RoutingError, :with => :render_404
+    rescue_from ActionController::UnknownAction, :with => :render_404
+    rescue_from ActiveRecord::RecordNotFound, :with => :render_404
+  end
   helper :all # include all helpers, all the time
   #protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
