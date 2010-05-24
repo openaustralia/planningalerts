@@ -1,13 +1,4 @@
 %h2.title= @description
 - paginated_section @applications, :previous_label => "Newer", :next_label => "Older", :inner_window => 1, :outer_window => 0 do
   .list
-    - @applications.each do |application|
-      - link_to application do
-        .listitem
-          %h4= application.address
-          %p
-            - if application.respond_to? :distance
-              #{time_ago_in_words(application.date_scraped)} ago, #{km_in_words(application.distance.to_f)} away
-            - else
-              #{time_ago_in_words(application.date_scraped)} ago
-          %strong= application.description
+    = render :partial => "application_mobile", :collection => @applications
