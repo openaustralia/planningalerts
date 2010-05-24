@@ -56,9 +56,6 @@ class ApplicationsController < ApplicationController
       @description << " in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
       @applications = Application.paginate :bounds => [[lat0, lng0], [lat1, lng1]],
         :page => params[:page], :per_page => per_page
-    elsif params[:search]
-      @description << " with &ldquo;#{params[:search]}&rdquo;"
-      @applications = Application.search params[:search], :order => :date_scraped, :sort_mode => :desc, :page => params[:page], :per_page => per_page
     else
       @applications = Application.paginate :page => params[:page], :per_page => per_page
     end
@@ -69,6 +66,15 @@ class ApplicationsController < ApplicationController
       # TODO: Move the template over to using an xml builder
       format.rss { render "index.rss", :layout => false, :content_type => Mime::XML }
       format.js { render :json => @applications.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance]) }
+    end
+  end
+  
+  def search
+    @q = params[:q]
+    @page_title = "Search"
+    if @q
+      @page_title << ": #{@q}"
+      @applications = Application.search @q, :order => :date_scraped, :sort_mode => :desc, :page => params[:page]
     end
   end
   
