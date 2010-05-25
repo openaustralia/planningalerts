@@ -114,8 +114,8 @@ describe ApplicationsController do
     
     it "should give a 404 when an invalid authority_id is used" do
       Authority.should_receive(:find_by_short_name_encoded).with("this_authority_does_not_exist").and_return(nil)
-      get :index, :authority_id => "this_authority_does_not_exist"
-      response.response_code.should == 404
+      
+      lambda{get :index, :authority_id => "this_authority_does_not_exist"}.should raise_error ActiveRecord::RecordNotFound
     end
   end
   
@@ -178,6 +178,9 @@ describe ApplicationsController do
   
   describe "mobile support" do
     it "should have a mobile optimised show page" do
+      app = mock_model(Application, :address => "12 Foo Street", :date_scraped => Date.new(2010, 5, 13),
+        :description => "Cutting a hedge.", :find_all_nearest_or_recent => [])
+      Application.should_receive(:find).with("1").and_return(app)
       get :show, :id => 1
       assigns[:mobile_optimised].should == true
     end
