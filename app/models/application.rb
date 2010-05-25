@@ -65,7 +65,7 @@ class Application < ActiveRecord::Base
           :info_url => a.at('info_url').inner_text,
           :comment_url => a.at('comment_url').inner_text,
           :date_received => a.at('date_received').inner_text,
-          :date_scraped => DateTime.now,
+          :date_scraped => Time.now,
           :on_notice_from => on_notice_from,
           :on_notice_to => on_notice_to)
       end
