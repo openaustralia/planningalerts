@@ -14,7 +14,7 @@ class AlertsController < ApplicationController
         redirect_to check_mail_url
       end
     end
-    @set_focus_control = "alert_email"
+    @set_focus_control = "alert_address"
   end
   
   def check_mail
