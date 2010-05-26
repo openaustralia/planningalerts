@@ -1,5 +1,5 @@
 class ApplicationsController < ApplicationController
-  before_filter :mobile_optimise_switching, :only => [:show, :index]
+  before_filter :mobile_optimise_switching, :only => [:show, :index, :nearby]
   
   def index
     # TODO: Fix this hacky ugliness
@@ -94,14 +94,26 @@ class ApplicationsController < ApplicationController
   end
   
   def nearby
+    # TODO: Fix this hacky ugliness
+    if in_mobile_view?
+      per_page = 10
+    elsif request.format == Mime::HTML
+      per_page = 30
+    else
+      per_page = Application.per_page
+    end
+
     months = 2
     km = 2
     application = Application.find(params[:id])
     # TODO: Make @description and @page_title the same in the view
     @description = "Other applications in the last #{months} months within #{km} km of #{application.address}" 
     @page_title = @description
-    @applications = application.find_all_nearest_or_recent(km, months * 4 * 7 * 24 * 60 * 60).paginate :page => params[:page], :per_page => 30
-    render "index"
+    @applications = application.find_all_nearest_or_recent(km, months * 4 * 7 * 24 * 60 * 60).paginate :page => params[:page], :per_page => per_page
+    respond_to do |format|
+      format.html { render "index" }
+      format.mobile { render "index_mobile", :layout => "mobile" }
+    end
   end
 
   private
