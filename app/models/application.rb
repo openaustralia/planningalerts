@@ -107,7 +107,7 @@ class Application < ActiveRecord::Base
   # just as important as an application that was lodged next door 2 months ago. In this case,
   # suitable values for "max_distance" would be 2 and "max_age" would be 2 * 4 * 7 * 24 * 60 * 60.
   # "limit" is the maximum number of applications to return
-  def find_all_nearest_or_recent(max_distance, max_age, limit)
+  def find_all_nearest_or_recent(max_distance = 2, max_age = 2 * 4 * 7 * 24 * 60 * 60)
     if location
       # TODO: Do the sort with SQL so that we can limit the data transferred
       apps = Application.find(:all, :origin => [location.lat, location.lng], :within => max_distance, :conditions => ['date_scraped > ?', max_age.seconds.ago])
@@ -119,7 +119,7 @@ class Application < ActiveRecord::Base
       end
       # Don't include the current application
       apps.delete(self)
-      apps[0...limit]
+      apps
     else
       []
     end

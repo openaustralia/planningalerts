@@ -85,7 +85,7 @@ class ApplicationsController < ApplicationController
     @meta_description = "Planning application: #{@application.description} Address: #{@application.address}"
     
     # An application that just now been lodged that's 2 km away is about as important as an application that was lodged next door 2 months ago.
-    @nearby_applications = @application.find_all_nearest_or_recent(2, 2 * 4 * 7 * 24 * 60 * 60, 5)
+    @nearby_applications = @application.find_all_nearest_or_recent[0...5]
     
     respond_to do |format|
       format.html
