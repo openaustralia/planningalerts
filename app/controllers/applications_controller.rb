@@ -92,6 +92,17 @@ class ApplicationsController < ApplicationController
       format.mobile { render "show_mobile", :layout => "mobile" }
     end
   end
+  
+  def nearby
+    months = 2
+    km = 2
+    application = Application.find(params[:id])
+    # TODO: Make @description and @page_title the same in the view
+    @description = "Other applications in the last #{months} months within #{km} km of #{application.address}" 
+    @page_title = @description
+    @applications = application.find_all_nearest_or_recent(km, months * 4 * 7 * 24 * 60 * 60).paginate :page => params[:page], :per_page => 30
+    render "index"
+  end
 
   private
   

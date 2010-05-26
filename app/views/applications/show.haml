@@ -30,7 +30,7 @@
     %h3 Selection of other recent or nearby applications
     %dl
       = render :partial => "application", :collection => @nearby_applications
-    = link_to("more applications nearby&hellip;", applications_url(:address => @application.address))
+    = link_to("more applications nearby&hellip;", nearby_application_url(@application))
 
 - if @application.location
   :javascript
