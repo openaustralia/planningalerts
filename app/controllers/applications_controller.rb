@@ -69,6 +69,24 @@ class ApplicationsController < ApplicationController
     end
   end
   
+  def address
+    @q = params[:q]
+    @radius = params[:radius] || 2000
+    per_page = 30
+    if @q
+      location = Location.geocode(@q)
+      if location.error
+        @other_addresses = []
+        @error = "Address #{location.error}"
+      else
+        @q = location.full_address
+        @other_addresses = location.all[1..-1].map{|l| l.full_address}
+        @applications = Application.paginate :origin => [location.lat, location.lng], :within => @radius.to_f / 1000,
+          :page => params[:page], :per_page => per_page
+      end
+    end
+  end
+  
   def search
     @q = params[:q]
     @page_title = "Search"

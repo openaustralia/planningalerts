@@ -58,7 +58,7 @@ ActionController::Routing::Routes.draw do |map|
   map.faq 'faq', :controller => 'static', :action => 'faq'
   map.get_involved 'getinvolved', :controller => 'static', :action => 'get_involved'
 
-  map.resources 'applications', :only => [:index, :show], :collection => {:search => :get}, :member => {:nearby => :get}
+  map.resources 'applications', :only => [:index, :show], :collection => {:search => :get, :address => :get}, :member => {:nearby => :get}
   map.resources 'authorities', :only => [] do |authority|
     authority.resources :applications, :only => :index
   end
