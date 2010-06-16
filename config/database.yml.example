@@ -18,7 +18,7 @@ development:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: planningalerts
+  database: pa_development
   pool: 5
   username: planningalerts
   password: 
@@ -31,17 +31,7 @@ test:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: planningalerts
-  pool: 5
-  username: planningalerts
-  password: 
-  socket: /var/run/mysqld/mysqld.sock
-
-production:
-  adapter: mysql
-  encoding: utf8
-  reconnect: false
-  database: planningalerts
+  database: pa_test
   pool: 5
   username: planningalerts
   password: 
