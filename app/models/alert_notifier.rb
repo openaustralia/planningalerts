@@ -19,6 +19,8 @@ class AlertNotifier < ActionMailer::Base
     @georss_url = applications_url(:format => "rss", :host => Configuration::HOST, :address => @alert.address, :radius => @alert.radius_meters)
     @unsubscribe_url = unsubscribe_url(:host => Configuration::HOST, :cid => @alert.confirm_id)
     
+    @headers = {"return-path" => Configuration::BOUNCE_EMAIL_ADDRESS}
+    
     # Update statistics. Is this a good place to do them or would it make more sense to do it after the mailing has
     # happened and we can check whether is was sucessful?
     # TODO: Once we put caching in place this will mean that the stats will be updated frequently during the sending
