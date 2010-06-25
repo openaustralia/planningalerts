@@ -45,7 +45,7 @@ class AlertsController < ApplicationController
     @page_title = "Unsubscribed"
 
     @alert = Alert.find_by_confirm_id(params[:cid])
-    @alert.delete
+    @alert.delete if @alert
   end
   
   def area

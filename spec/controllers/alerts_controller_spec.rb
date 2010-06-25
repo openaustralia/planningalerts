@@ -15,6 +15,21 @@ describe AlertsController do
       response.code.should == "404"
     end
   end
+  
+  describe "unsubscribing" do
+    it "should delete the alert when unsubscribing" do
+      alert = mock_model(Alert)
+      Alert.should_receive(:find_by_confirm_id).with("1234").and_return(alert)
+      alert.should_receive(:delete)
+      get :unsubscribe, :cid => "1234"
+    end
+    
+    # In order to avoid confusion when clicking on unsubscribe link twice -
+    it "should allow unsubscribing for non-existent alerts" do
+      get :unsubscribe, :cid => "1111"
+      response.should be_success
+    end
+  end
 
   describe "search engine optimisation" do
     it "should provide a sensible title and meta description to make search results useful to people" do
