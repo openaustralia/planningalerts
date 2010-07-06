@@ -136,7 +136,7 @@ describe Application do
       Application.should_receive(:collect_applications_for_authority).with(@auth, Date.today - 1, logger)
       Application.should_receive(:collect_applications_for_authority).with(auth2, Date.today - 1, logger)
 
-      Application.collect_applications(logger)
+      Application.collect_applications(Authority.active, logger)
     end
   end
 end

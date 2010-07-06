@@ -11,8 +11,9 @@ namespace :planningalerts do
     task :scrape_and_email => [:scrape, :email, :sitemap]
     
     desc "Scrape all the applications for the last few days for all the loaded authorities"
-    task :scrape => :environment do
-      Application.collect_applications(Logger.new(STDOUT))
+    task :scrape, :authority_short_name, :needs => :environment do |t, args|
+      authorities = args[:authority_short_name] ? [Authority.find_by_short_name_encoded(args[:authority_short_name])] : Authority.active
+      Application.collect_applications(authorities, Logger.new(STDOUT))
     end
     
     desc "Send planning alerts"
