@@ -2,7 +2,7 @@
 module Configuration
   # URL Stuff
   HOST = 'dev.planningalerts.org.au'
-  INTERNAL_SCRAPERS_INDEX_URL = 'http://dev.planningalerts.org.au:4567/'
+  INTERNAL_SCRAPERS_INDEX_URL = 'http://localhost:4567/'
   
   # Size of alert areas
   SMALL_ZONE_SIZE = 200
