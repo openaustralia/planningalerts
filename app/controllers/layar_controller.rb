@@ -1,0 +1,2 @@
+class LayarController < ApplicationController
+end
