@@ -62,6 +62,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources 'authorities', :only => [] do |authority|
     authority.resources :applications, :only => :index
   end
+  
+  map.connect 'layar/:action', :controller => 'layar'
 
   # See how all your routes lay out with "rake routes"
 
