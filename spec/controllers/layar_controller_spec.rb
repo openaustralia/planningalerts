@@ -21,6 +21,6 @@ describe LayarController do
       "line4" => "1234567890 2345678 012345678 012...",
     }
     JSON.parse(response.body).should == {"hotspots" => [expected_layar], "nextPageKey" => 2, "morePages" => true,
-      "layer" => "planningalertsaustralia", "errorCode" => 0, "radius" => 3000}
+      "layer" => "planningalertsaustralia", "errorCode" => 0, "errorString" => nil, "radius" => 3000}
   end
 end

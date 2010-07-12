@@ -24,7 +24,7 @@ class LayarController < ApplicationController
       }
     end
     # TODO: Make layer name configurable
-    result = {:hotspots => layar_applications, :radius => params[:radius].to_i, :errorCode => 0, :layer => "planningalertsaustralia"}
+    result = {:hotspots => layar_applications, :radius => params[:radius].to_i, :errorCode => 0, :errorString => nil, :layer => "planningalertsaustralia"}
     if @applications.current_page < @applications.total_pages
       result[:morePages] = true
       result[:nextPageKey] = @applications.current_page + 1
