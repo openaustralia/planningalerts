@@ -14,7 +14,7 @@ class LayarController < ApplicationController
         :line2 => nil,
         :line3 => nil,
         :line4 => nil,
-        :title => nil,
+        :title => a.address.squish,
         :type => 0
       }
     end
