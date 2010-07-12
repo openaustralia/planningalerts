@@ -24,6 +24,10 @@ class LayarController < ApplicationController
       }
     end
     result = {:hotspots => layar_applications}
+    if @applications.current_page < @applications.total_pages
+      result[:morePages] = true
+      result[:nextPageKey] = @applications.current_page + 1
+    end
     render :json => result
   end
 end
