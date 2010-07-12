@@ -1,8 +1,13 @@
 class LayarController < ApplicationController
+  # Ugly polluting namespace kind of nastiness
+  include ActionView::Helpers::TextHelper
+  
   def getpoi
     @applications = Application.paginate :origin => [params[:lat].to_f, params[:lon].to_f], :within => params[:radius].to_f / 1000,
       :page => params[:pageKey], :per_page => 10
     layar_applications = @applications.map do |a|
+      lines = word_wrap(a.description, :line_width => 35).split("\n")
+      line4 = truncate(lines[2..-1].join(" "), :length => 35) if lines[2..-1]
       {
         :actions => [],
         :attribution => nil,
@@ -11,9 +16,9 @@ class LayarController < ApplicationController
         :imageURL => nil,
         :lat => a.lat,
         :lon => a.lng,
-        :line2 => nil,
-        :line3 => nil,
-        :line4 => nil,
+        :line2 => lines[0],
+        :line3 => lines[1],
+        :line4 => line4,
         :title => a.address.squish,
         :type => 0
       }

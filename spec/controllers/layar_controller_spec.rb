@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe LayarController do
   it "should provide a rest api to serve the layar points of interest" do
-    result = [mock(:distance => 2, :lat => 1.0, :lng => 2.0, :id => 1, :address => " 1 Foo St\n Fooville")]
+    result = [mock(:distance => 2, :lat => 1.0, :lng => 2.0, :id => 1, :address => " 1 Foo St\n Fooville",
+      :description => "1234 678901234 67890123 56789 12345 1234567 90123456789 123456 89\n1234567890 2345678 012345678 01234512345")]
     Application.should_receive(:paginate).with(:origin => [1.0, 2.0], :within => 3.0, :page => "2", :per_page => 10).and_return(result)
 
     get :getpoi, :lat => 1.0, :lon => 2.0, :radius => 3000, :pageKey => "2"
@@ -11,7 +12,10 @@ describe LayarController do
       "id" => 1, "type" => 0,
       "lat" => 1.0, "lon" => 2.0, "distance" => 2000.0, 
       "actions" => [], "imageURL" => nil, "attribution" => nil,
-      "title" => "1 Foo St Fooville", "line2" => nil, "line3" => nil, "line4" => nil,
+      "title" => "1 Foo St Fooville",
+      "line2" => "1234 678901234 67890123 56789 12345",
+      "line3" => "1234567 90123456789 123456 89",
+      "line4" => "1234567890 2345678 012345678 012...",
     }
     JSON.parse(response.body).should == {"hotspots" => [expected_layar]}
   end
