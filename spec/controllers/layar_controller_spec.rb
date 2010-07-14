@@ -12,7 +12,7 @@ describe LayarController do
     get :getpoi, :lat => 1.0, :lon => 2.0, :radius => 3000, :pageKey => "2"
     assigns[:applications].should == result
     expected_layar = {
-      "id" => 101, "type" => 0,
+      "id" => 101, "type" => 1,
       "lat" => 1000000, "lon" => 2000000, "distance" => 2000.0, 
       "actions" => [], "imageURL" => nil, "attribution" => nil,
       "title" => "1 Foo St Fooville",

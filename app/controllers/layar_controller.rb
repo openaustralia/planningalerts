@@ -20,7 +20,8 @@ class LayarController < ApplicationController
         :line3 => lines[1],
         :line4 => line4,
         :title => a.address.squish,
-        :type => 0
+        # We're using a custom icon for the spots
+        :type => 1
       }
     end
     # TODO: Make layer name configurable
