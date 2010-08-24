@@ -25,7 +25,8 @@ Rails::Initializer.run do |config|
   config.gem "nokogiri"
   # For some reason putting config.gem 'email_spec' in environments/test.rb didn't work when
   # running "cucumber". So, putting it here so that we don't have to have the plugin installed in vendor.
-  config.gem 'email_spec', :lib => 'email_spec'
+  # Version 1.0.0 is for Rails 3 so can't use that yet
+  config.gem 'email_spec', :lib => 'email_spec', :version => '< 1.0.0'
   config.gem "matthuhiggins-foreigner", :lib => "foreigner", :source => "http://gemcutter.org"
   config.gem 'jaap3-addthis', :lib => 'addthis', :source => 'http://gems.github.com'
   config.gem 'httparty'
