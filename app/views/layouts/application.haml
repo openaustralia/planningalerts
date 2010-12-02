@@ -8,10 +8,11 @@
     %title PlanningAlerts | #{@page_title || "Email alerts of planning applications near you"}
     - if @rss
       %link(rel="alternate" type="application/rss+xml" title="RSS" href=@rss)
-    = stylesheet_link_tag "memespring", "main", :media => "all", :cache => true
+    = stylesheet_link_tag "memespring", "main", "boastful", :media => "all", :cache => true
     %style(type="text/css")
       v:* { behavior:url(#default#VML);}
     = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"
+    = javascript_include_tag "/javascripts/jquery.boastful.js"
   %body
     #header
       %h1
@@ -60,6 +61,10 @@
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
       })();
+
+      $(document).ready(function() {
+      $('#boastful').boastful();
+      });
 
       var uservoiceOptions = {key: 'planningalerts', host: 'planningalerts.uservoice.com', forum: '49635', alignment: 'right', background_color:'#F4F322', text_color: 'black',
       hover_color: '#FF8C00', lang: 'en', showTab: true};

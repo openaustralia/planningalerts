@@ -25,6 +25,9 @@
     =link_to "Email me whenever there is new application near here", signup_url(:alert => {:address => @application.address})
     (No more than once per day)
 
+%h3 Tweets mentioning this planning application
+#boastful
+
 - unless @nearby_applications.empty?
   #nearby-applications
     %h3 Selection of other recent or nearby applications
