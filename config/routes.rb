@@ -43,8 +43,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'unsubscribe.php', :controller => 'alerts', :action => 'old_unsubscribe'
   map.connect 'unsubscribe', :controller => 'alerts', :action => 'old_unsubscribe'
   
-  map.signup '', :controller => "alerts", :action => "signup"
-  map.root :signup
+  map.signup '/alerts/signup', :controller => "alerts", :action => "signup"
   map.check_mail 'alerts/checkmail', :controller => 'alerts', :action => 'check_mail'
   map.confirmed 'alerts/:cid/confirmed', :controller => 'alerts', :action => 'confirmed'
   map.unsubscribe 'alerts/:cid/unsubscribe', :controller => 'alerts', :action => 'unsubscribe'
@@ -58,12 +57,15 @@ ActionController::Routing::Routes.draw do |map|
   map.faq 'faq', :controller => 'static', :action => 'faq'
   map.get_involved 'getinvolved', :controller => 'static', :action => 'get_involved'
 
-  map.resources 'applications', :only => [:index, :show], :collection => {:search => :get, :address => :get}, :member => {:nearby => :get}
+  map.address_applications '', :controller => 'applications', :action => 'address'
+
+  map.resources 'applications', :only => [:index, :show], :collection => {:search => :get}, :member => {:nearby => :get}
   map.resources 'authorities', :only => [] do |authority|
     authority.resources :applications, :only => :index
   end
   
   map.connect 'layar/:action', :controller => 'layar'
+  map.root :address_applications
 
   # See how all your routes lay out with "rake routes"
 

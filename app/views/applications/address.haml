@@ -38,3 +38,13 @@
       %h3 Recent applications within #{meters_in_words(@radius)} of #{@q}
       - paginated_section @applications, :previous_label => "« Newer", :next_label => "Older »" do
         %dl= render :partial => "application", :collection => @applications
+- else
+  %hr
+  .attention
+    %h4 New!
+    %p
+      For some shiny, try the new <a href="http://m.layar.com/open/planningalertsaustralia">PlanningAlerts</a> <a href="http://www.layar.com">Layar</a> for iPhone 3GS and Android phones and see <a href="http://m.layar.com/open/planningalertsaustralia">development applications
+      in beautiful and fun<sup>&lowast;</sup> augmented reality</a>. And it's free.
+    = link_to image_tag("layar/screenshot_with_iphone.png"), "http://m.layar.com/open/planningalertsaustralia"
+    %p.disclaimer
+      &lowast; Look both ways when crossing the road and try to return home before it gets dark.

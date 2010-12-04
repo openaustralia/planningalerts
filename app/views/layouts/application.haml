@@ -38,6 +38,8 @@
             %acronym(title="Frequently asked questions") FAQ
         = li_selected(:controller => "alerts", :action => ["signup", "check_mail"]) do
           - link_to 'Sign Up', signup_path
+        = li_selected(:controller => "applications", :action => "address") do
+          - link_to 'Search', address_applications_path
     #page
       #content
         = yield
