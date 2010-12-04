@@ -85,6 +85,7 @@ class ApplicationsController < ApplicationController
           :page => params[:page], :per_page => per_page
       end
     end
+    @set_focus_control = "q"
   end
   
   def search

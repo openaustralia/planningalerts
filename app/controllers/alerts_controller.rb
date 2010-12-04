@@ -14,7 +14,11 @@ class AlertsController < ApplicationController
         redirect_to check_mail_url
       end
     end
-    @set_focus_control = "alert_address"
+    if params[:alert] && params[:alert][:address] && !params[:alert][:email]
+      @set_focus_control = "alert_email"
+    else
+      @set_focus_control = "alert_address"
+    end
   end
   
   def check_mail
