@@ -3,7 +3,7 @@ Feature: Manage alerts
   I want to sign up for an email alert
   
   Scenario: Sign up for email alert
-    Given I am on the home page
+    Given I am on the signup page
     When I fill in the email adress with "example@example.com"
     And I fill in the street address with "24 Bruce Road, Glenbrook"
     And I press "Create Alert"
