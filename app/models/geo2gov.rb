@@ -27,7 +27,7 @@ class Geo2gov
   def lga_jurisdiction
     local = jurisdictions
     # NSW, QLD, VIC, SA, WA, Tasmania, NT, ACT
-    %w(Federal ACT NSW QLD SA TAS VIC WA).each do |a|
+    %w(Federal ACT NSW QLD SA TAS VIC WA NT).each do |a|
       local.delete(a)
     end
     raise "Can't figure out the local government area for lat, lng: #{@lat}, #{@lng}" if local.count > 1
