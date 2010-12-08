@@ -4,6 +4,7 @@ class Geo2gov
   base_uri 'geo2gov.com.au'
   
   def initialize(lat, lng)
+    @lat, @lng = lat, lng
     @response = self.class.get "http://geo2gov.com.au/json?location=#{lng}+#{lat}"
   end
   
@@ -29,7 +30,7 @@ class Geo2gov
     %w(Federal ACT NSW QLD SA TAS VIC WA).each do |a|
       local.delete(a)
     end
-    raise "Can't figure out the local government area" if local.count > 1
+    raise "Can't figure out the local government area for lat, lng: #{@lat}, #{@lng}" if local.count > 1
     local.first
   end
   
