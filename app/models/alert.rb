@@ -49,12 +49,17 @@ class Alert < ActiveRecord::Base
   
   def in_inactive_area?
     radius = 2
-    origin = GeoKit::LatLng.new(lat, lng)
-    bounds = GeoKit::Bounds.from_point_and_radius(origin, radius)
+    point = GeoKit::LatLng.new(lat, lng)
+    
+    p0=point.endpoint(0,radius)
+    p90=point.endpoint(90,radius)
+    p180=point.endpoint(180,radius)
+    p270=point.endpoint(270,radius)
+    
     Application.find_by_sql([
       "SELECT * FROM `applications` WHERE ((lat IS NOT NULL AND lng IS NOT NULL AND lat>? AND lat<? AND lng>? AND lng<?) AND (" +
-      Application.distance_sql(origin) + "<= ?)) LIMIT 1",
-      bounds.sw.lat, bounds.ne.lat, bounds.sw.lng, bounds.ne.lng, radius]).empty?
+      Application.distance_sql(point) + "<= ?)) LIMIT 1",
+      p180.lat, p0.lat, p270.lng, p90.lng, radius]).empty?
   end
   
   def location
