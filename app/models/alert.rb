@@ -51,15 +51,30 @@ class Alert < ActiveRecord::Base
     radius = 2
     point = GeoKit::LatLng.new(lat, lng)
     
-    p0=point.endpoint(0,radius)
-    p90=point.endpoint(90,radius)
-    p180=point.endpoint(180,radius)
-    p270=point.endpoint(270,radius)
+    lat_rad = lat / 180.0 * Math::PI
+    lng_rad = lng / 180.0 * Math::PI
+    c = Math.cos(radius/GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
+    s = Math.sin(radius/GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
+  
+    p180_lat_rad = Math.asin(Math.sin(lat_rad)*c - Math.cos(lat_rad)*s)
+    p180_lat = p180_lat_rad / Math::PI * 180.0
+    
+    p0_lat_rad = Math.asin(Math.sin(lat_rad)*c + Math.cos(lat_rad)*s)
+    p0_lat = p0_lat_rad / Math::PI * 180.0
+    
+    p270_lat_rad = Math.asin(Math.sin(lat_rad)*c)
+    p90_lat_rad = p270_lat_rad
+    
+    p270_lng_rad = lng_rad+Math.atan2(-s*Math.cos(lat_rad), c-Math.sin(lat_rad)*Math.sin(p270_lat_rad))
+    p270_lng = p270_lng_rad / Math::PI * 180.0
+    
+    p90_lng_rad = lng_rad+Math.atan2(s*Math.cos(lat_rad), c-Math.sin(lat_rad)*Math.sin(p90_lat_rad))
+    p90_lng = p90_lng_rad / Math::PI * 180
     
     Application.find_by_sql([
       "SELECT * FROM `applications` WHERE ((lat IS NOT NULL AND lng IS NOT NULL AND lat>? AND lat<? AND lng>? AND lng<?) AND (" +
       Application.distance_sql(point) + "<= ?)) LIMIT 1",
-      p180.lat, p0.lat, p270.lng, p90.lng, radius]).empty?
+      p180_lat, p0_lat, p270_lng, p90_lng, radius]).empty?
   end
   
   def location
