@@ -54,18 +54,17 @@ class Alert < ActiveRecord::Base
     c = Math.cos(radius/GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
     s = Math.sin(radius/GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
   
-    Application.find_by_sql([
-      "SELECT * FROM `applications` WHERE ((lat IS NOT NULL AND lng IS NOT NULL" +
-      " AND lat>DEGREES(ASIN(SIN(RADIANS(?))*? - COS(RADIANS(?))*?))" +
-      " AND lat<DEGREES(ASIN(SIN(RADIANS(?))*? + COS(RADIANS(?))*?))" +
-      " AND lng>? - DEGREES(ATAN2(?, ? * COS(RADIANS(?))))" +
-      " AND lng<? + DEGREES(ATAN2(?, ? * COS(RADIANS(?)))))" +
-      " AND (" + Application.distance_sql(point) + "<= ?)) LIMIT 1",
-      lat, c, lat, s,
-      lat, c, lat, s,
-      lng, s, c, lat,
-      lng, s, c, lat,
-      radius]).empty?
+    Application.find_by_sql(
+      %|
+        SELECT * FROM `applications` WHERE ((lat IS NOT NULL AND lng IS NOT NULL
+         AND lat>DEGREES(ASIN(SIN(RADIANS(#{lat}))*#{c} - COS(RADIANS(#{lat}))*#{s}))
+         AND lat<DEGREES(ASIN(SIN(RADIANS(#{lat}))*#{c} + COS(RADIANS(#{lat}))*#{s}))
+         AND lng>#{lng} - DEGREES(ATAN2(#{s}, #{c} * COS(RADIANS(#{lat}))))
+         AND lng<#{lng} + DEGREES(ATAN2(#{s}, #{c} * COS(RADIANS(#{lat})))))
+      | +
+      " AND (" +
+      Application.distance_sql(point) +
+      "<= #{radius})) LIMIT 1").empty?
   end
   
   def location
