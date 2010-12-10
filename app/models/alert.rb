@@ -47,18 +47,14 @@ class Alert < ActiveRecord::Base
     freq.to_a.sort {|a, b| -(a[1] <=> b[1])}
   end
   
-  def in_active_area_temp
+  def in_active_area?
     radius = 2
     origin = GeoKit::LatLng.new(lat, lng)
     bounds = GeoKit::Bounds.from_point_and_radius(origin, radius)
     Application.find_by_sql([
       "SELECT * FROM `applications` WHERE ((lat IS NOT NULL AND lng IS NOT NULL AND lat>? AND lat<? AND lng>? AND lng<?) AND (" +
       Application.distance_sql(origin) + "<= ?)) LIMIT 1",
-      bounds.sw.lat, bounds.ne.lat, bounds.sw.lng, bounds.ne.lng, radius]).first
-  end
-  
-  def in_active_area?
-    in_active_area_temp != nil
+      bounds.sw.lat, bounds.ne.lat, bounds.sw.lng, bounds.ne.lng, radius]).first != nil
   end
   
   def location
