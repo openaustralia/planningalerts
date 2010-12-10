@@ -47,8 +47,21 @@ class Alert < ActiveRecord::Base
     freq.to_a.sort {|a, b| -(a[1] <=> b[1])}
   end
   
+  def in_active_area_temp
+    radius = 2
+    origin = GeoKit::LatLng.new(lat, lng)
+    bounds = GeoKit::Bounds.from_point_and_radius(origin, radius)
+    Application.find_by_sql(["SELECT *, " +
+      Application.distance_sql(origin) +
+     "AS distance FROM `applications` WHERE (((applications.lat>? AND applications.lat<? AND applications.lng>? AND applications.lng<?)) AND (" +
+      Application.distance_sql(origin) +
+     "<= ?)) ORDER BY date_scraped DESC LIMIT 1", bounds.sw.lat, bounds.ne.lat, bounds.sw.lng, bounds.ne.lng, radius]).first
+    # The code above is equivalent to this below
+    #Application.find(:first, :origin => [lat, lng], :within => 2)
+  end
+  
   def in_active_area?
-    location && Application.find(:first, :origin => [lat, lng], :within => 2) != nil
+    location && in_active_area_temp != nil
   end
   
   def location
