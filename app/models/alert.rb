@@ -51,17 +51,14 @@ class Alert < ActiveRecord::Base
     radius = 2
     origin = GeoKit::LatLng.new(lat, lng)
     bounds = GeoKit::Bounds.from_point_and_radius(origin, radius)
-    Application.find_by_sql(["SELECT *, " +
-      Application.distance_sql(origin) +
-     "AS distance FROM `applications` WHERE (((applications.lat>? AND applications.lat<? AND applications.lng>? AND applications.lng<?)) AND (" +
-      Application.distance_sql(origin) +
-     "<= ?)) ORDER BY date_scraped DESC LIMIT 1", bounds.sw.lat, bounds.ne.lat, bounds.sw.lng, bounds.ne.lng, radius]).first
-    # The code above is equivalent to this below
-    #Application.find(:first, :origin => [lat, lng], :within => 2)
+    Application.find_by_sql([
+      "SELECT * FROM `applications` WHERE ((lat IS NOT NULL AND lng IS NOT NULL AND lat>? AND lat<? AND lng>? AND lng<?) AND (" +
+      Application.distance_sql(origin) + "<= ?)) LIMIT 1",
+      bounds.sw.lat, bounds.ne.lat, bounds.sw.lng, bounds.ne.lng, radius]).first
   end
   
   def in_active_area?
-    location && in_active_area_temp != nil
+    in_active_area_temp != nil
   end
   
   def location
