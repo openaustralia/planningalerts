@@ -57,24 +57,14 @@ class Alert < ActiveRecord::Base
     s = Math.sin(radius/GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
   
     p180_lat_rad = Math.asin(Math.sin(lat_rad)*c - Math.cos(lat_rad)*s)
-    p180_lat = p180_lat_rad / Math::PI * 180.0
-    
     p0_lat_rad = Math.asin(Math.sin(lat_rad)*c + Math.cos(lat_rad)*s)
-    p0_lat = p0_lat_rad / Math::PI * 180.0
-    
-    p270_lat_rad = Math.asin(Math.sin(lat_rad)*c)
-    p90_lat_rad = p270_lat_rad
-    
-    p270_lng_rad = lng_rad+Math.atan2(-s*Math.cos(lat_rad), c-Math.sin(lat_rad)*Math.sin(p270_lat_rad))
-    p270_lng = p270_lng_rad / Math::PI * 180.0
-    
-    p90_lng_rad = lng_rad+Math.atan2(s*Math.cos(lat_rad), c-Math.sin(lat_rad)*Math.sin(p90_lat_rad))
-    p90_lng = p90_lng_rad / Math::PI * 180
+    p270_lng_rad = lng_rad - Math.atan2(s, c * Math.cos(lat_rad))
+    p90_lng_rad = lng_rad + Math.atan2(s, c * Math.cos(lat_rad))
     
     Application.find_by_sql([
-      "SELECT * FROM `applications` WHERE ((lat IS NOT NULL AND lng IS NOT NULL AND lat>? AND lat<? AND lng>? AND lng<?) AND (" +
+      "SELECT * FROM `applications` WHERE ((lat IS NOT NULL AND lng IS NOT NULL AND lat>DEGREES(?) AND lat<DEGREES(?) AND lng>DEGREES(?) AND lng<DEGREES(?)) AND (" +
       Application.distance_sql(point) + "<= ?)) LIMIT 1",
-      p180_lat, p0_lat, p270_lng, p90_lng, radius]).empty?
+      p180_lat_rad, p0_lat_rad, p270_lng_rad, p90_lng_rad, radius]).empty?
   end
   
   def location
