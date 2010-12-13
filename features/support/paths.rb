@@ -12,7 +12,8 @@ module NavigationHelpers
       '/'
     when /signup/
       '/alerts/signup'
-    
+    when /the alerts statistics page/
+      statistics_alerts_path
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

@@ -31,3 +31,9 @@ end
 Then /^I should not receive email alerts for the street address "([^\"]*)"$/ do |address|
   Alert.find(:first, :conditions => {:address => address, :email => current_email_address, :confirmed => true}).should be_nil
 end
+
+Given /^the following email alerts:$/ do |table|
+  table.hashes.each do |hash|
+    Alert.create!(hash)
+  end
+end
