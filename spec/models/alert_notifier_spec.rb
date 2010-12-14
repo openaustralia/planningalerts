@@ -73,7 +73,7 @@ FOO STREET, BAR (A1)
 
 Knock something down
 
-For more information: http://dev.planningalerts.org.au/applications/1
+http://dev.planningalerts.org.au/applications/1?utm_medium=email&utm_source=alerts
 
 -----------------------------
 
@@ -81,7 +81,7 @@ BAR STREET, FOO (A2)
 
 Put something up
 
-For more information: http://dev.planningalerts.org.au/applications/2
+http://dev.planningalerts.org.au/applications/2?utm_medium=email&utm_source=alerts
 
 ============================================================
 

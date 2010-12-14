@@ -2,5 +2,5 @@
 
 <%= application.description %>
 
-For more information: <%= application_url(:host => @host, :id => application.id) %>
+<%= application_url(:host => @host, :id => application.id, :utm_source => 'alerts', :utm_medium => 'email', :escape => false) %>
 
