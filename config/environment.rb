@@ -15,22 +15,6 @@ Rails::Initializer.run do |config|
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
   config.load_paths << "#{RAILS_ROOT}/app/sweepers"
 
-  # Specify gems that this application depends on and have them installed with rake gems:install
-  # config.gem "bj"
-  # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
-  # config.gem "sqlite3-ruby", :lib => "sqlite3"
-  # config.gem "aws-s3", :lib => "aws/s3"
-  config.gem "haml"
-  config.gem "geokit"
-  config.gem "nokogiri"
-  config.gem "matthuhiggins-foreigner", :lib => "foreigner", :source => "http://gemcutter.org"
-  config.gem 'jaap3-addthis', :lib => 'addthis', :source => 'http://gems.github.com'
-  config.gem 'httparty'
-  config.gem 'will_paginate', :version => '~> 2.3.11', :source => 'http://gemcutter.org'
-  # For minifying javascript and css
-  config.gem 'smurf', :source => 'http://gemcutter.org'
-  config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :version => '~> 1.3.11'
-
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
