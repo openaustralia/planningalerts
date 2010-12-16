@@ -26,6 +26,8 @@ end
 
 group :cucumber, :test do
   gem 'rspec-rails', '~> 1.3.2'
+  # This is the latest version of the gem that is compatible with Rails 2
+  gem 'factory_girl', '1.2.4'
   # Version 1.0.0 is for Rails 3 so can't use that yet
   gem 'email_spec', '< 1.0.0', :require => 'email_spec' 
 end

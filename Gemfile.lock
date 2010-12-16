@@ -30,6 +30,7 @@ GEM
     email_spec (0.6.4)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    factory_girl (1.2.4)
     foreigner (0.9.1)
     geokit (1.5.0)
     gherkin (2.3.2)
@@ -79,6 +80,7 @@ DEPENDENCIES
   database_cleaner (>= 0.4.3)
   email_spec (< 1.0.0)
   erubis
+  factory_girl (= 1.2.4)
   foreigner
   geokit
   haml
