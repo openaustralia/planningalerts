@@ -14,6 +14,8 @@ module NavigationHelpers
       '/alerts/signup'
     when /the alerts statistics page/
       statistics_alerts_path
+    when /^application page "(\d+)"$/
+      application_path(Application.find($1))
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
