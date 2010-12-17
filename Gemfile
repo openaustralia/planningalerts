@@ -21,6 +21,7 @@ gem 'erubis'
 # of i18n. Also, forcing the install of i18n so that it doesn't break things in the meantime
 # We'll be able to get rid of these once we upgrade to Rails 3
 gem 'i18n', '>= 0.4.0'
+gem 'formtastic', '~> 1.1.0'
 
 group :cucumber do
   gem 'cucumber-rails',   '>=0.2.4'
