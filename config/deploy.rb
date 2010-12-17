@@ -1,3 +1,5 @@
+require "bundler/capistrano"
+
 set :application, "planningalerts.org.au/app"
 set :repository,  "git://git.openaustralia.org/planningalerts-app.git"
 
