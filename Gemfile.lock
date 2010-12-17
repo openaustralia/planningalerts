@@ -39,6 +39,7 @@ GEM
     haml (3.0.24)
     httparty (0.6.1)
       crack (= 0.1.8)
+    i18n (0.5.0)
     jaap3-addthis (0.8.0)
     json (1.4.6)
     mysql (2.8.1)
@@ -85,6 +86,7 @@ DEPENDENCIES
   geokit
   haml
   httparty
+  i18n (>= 0.4.0)
   jaap3-addthis
   mysql
   nokogiri
