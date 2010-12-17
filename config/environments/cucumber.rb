@@ -26,4 +26,6 @@ config.gem 'database_cleaner', :lib => false, :version => '>=0.4.3' unless File.
 config.gem 'webrat',           :lib => false, :version => '>=0.6.0' unless File.directory?(File.join(Rails.root, 'vendor/plugins/webrat'))
 config.gem 'rspec',            :lib => false, :version => '~>1.3.0' unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec'))
 config.gem 'rspec-rails',      :lib => false, :version => '~>1.3.2' unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
+# Version 1.0.0 is for Rails 3 so can't use that yet
+config.gem 'email_spec', :lib => 'email_spec', :version => '< 1.0.0'
 
