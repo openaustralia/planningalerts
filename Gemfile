@@ -2,10 +2,10 @@ source "http://gemcutter.org"
 source "http://gems.github.com"
 
 gem "rails", '2.3.5'
+gem "mysql"
 gem "haml"
 gem "geokit"
 gem "nokogiri"
-
 gem "foreigner"
 gem 'jaap3-addthis', :require => 'addthis'
 gem 'httparty'
