@@ -94,6 +94,7 @@ class ApplicationsController < ApplicationController
   
   def show
     @application = Application.find(params[:id])
+    @comment = Comment.new
     
     respond_to do |format|
       format.html
