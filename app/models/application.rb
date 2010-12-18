@@ -2,6 +2,7 @@ require 'open-uri'
 
 class Application < ActiveRecord::Base
   belongs_to :authority
+  has_many :comments
   before_save :geocode
   acts_as_mappable :default_units => :kms
   

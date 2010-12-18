@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101213012313) do
+ActiveRecord::Schema.define(:version => 20101217234502) do
 
   create_table "alerts", :force => true do |t|
     t.string   "email",         :limit => 120, :null => false
@@ -24,21 +24,21 @@ ActiveRecord::Schema.define(:version => 20101213012313) do
   end
 
   create_table "applications", :force => true do |t|
-    t.string   "council_reference", :limit => 50,   :null => false
-    t.text     "address",                           :null => false
-    t.text     "description"
-    t.string   "info_url",          :limit => 1024
-    t.string   "comment_url",       :limit => 1024
-    t.integer  "authority_id",                      :null => false
-    t.float    "lat"
-    t.float    "lng"
-    t.datetime "date_scraped",                      :null => false
-    t.date     "date_received"
-    t.string   "suburb",            :limit => 50
-    t.string   "state",             :limit => 10
-    t.string   "postcode",          :limit => 4
-    t.date     "on_notice_from"
-    t.date     "on_notice_to"
+    t.string    "council_reference", :limit => 50,   :null => false
+    t.text      "address",                           :null => false
+    t.text      "description"
+    t.string    "info_url",          :limit => 1024
+    t.string    "comment_url",       :limit => 1024
+    t.integer   "authority_id",                      :null => false
+    t.float     "lat"
+    t.float     "lng"
+    t.timestamp "date_scraped",                      :null => false
+    t.date      "date_received"
+    t.string    "suburb",            :limit => 50
+    t.string    "state",             :limit => 10
+    t.string    "postcode",          :limit => 4
+    t.date      "on_notice_from"
+    t.date      "on_notice_to"
   end
 
   add_index "applications", ["authority_id"], :name => "authority_id"
@@ -59,6 +59,17 @@ ActiveRecord::Schema.define(:version => 20101213012313) do
   end
 
   add_index "authorities", ["short_name"], :name => "short_name_unique", :unique => true
+
+  create_table "comments", :force => true do |t|
+    t.text     "text"
+    t.string   "email"
+    t.string   "name"
+    t.integer  "application_id"
+    t.string   "confirm_id"
+    t.boolean  "confirmed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "stats", :force => true do |t|
     t.string  "key",   :limit => 25, :null => false
