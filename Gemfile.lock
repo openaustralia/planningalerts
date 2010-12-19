@@ -71,6 +71,7 @@ GEM
       activerecord (>= 1.15.6, < 3.0.0)
       after_commit (>= 1.0.6)
       riddle (>= 1.0.10)
+    validates_email_format_of (1.4.3)
     webrat (0.7.2)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
@@ -100,5 +101,6 @@ DEPENDENCIES
   rspec-rails (~> 1.3.2)
   smurf
   thinking-sphinx (~> 1.3.11)
+  validates_email_format_of
   webrat (>= 0.6.0)
   will_paginate (~> 2.3.11)

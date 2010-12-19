@@ -22,6 +22,7 @@ gem 'erubis'
 # We'll be able to get rid of these once we upgrade to Rails 3
 gem 'i18n', '>= 0.4.0'
 gem 'formtastic', '~> 1.1.0'
+gem 'validates_email_format_of'
 
 group :cucumber do
   gem 'cucumber-rails',   '>=0.2.4'

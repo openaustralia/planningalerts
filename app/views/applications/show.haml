@@ -50,7 +50,7 @@
   #nearby-applications
     %h3 Selection of other recent or nearby applications
     %dl
-      = render :partial => "application", :collection => @application.find_all_nearest_or_recent[0...5]
+      = render :partial => "applications/application", :collection => @application.find_all_nearest_or_recent[0...5]
     = link_to("more applications nearby&hellip;".html_safe, nearby_application_url(@application))
 
 - if @application.location
