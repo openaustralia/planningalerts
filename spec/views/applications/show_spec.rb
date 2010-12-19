@@ -5,7 +5,9 @@ describe ApplicationsController do
     authority = mock_model(Authority, :full_name => "An authority", :short_name => "Blue Mountains")
     assigns[:application] = mock_model(Application, :map_url => "http://a.map.url",
       :description => "A planning application", :council_reference => "A1", :authority => authority, :info_url => "http://info.url", :comment_url => "http://comment.url",
-      :on_notice_from => nil, :on_notice_to => nil, :find_all_nearest_or_recent => [])
+      :on_notice_from => nil, :on_notice_to => nil, :find_all_nearest_or_recent => [], :comments => [])
+    errors = mock('Errors', :[] => nil)
+    assigns[:comment] = mock_model(Comment, :errors => errors, :text => nil, :name => nil, :email => nil)
   end
   
   describe "show" do
