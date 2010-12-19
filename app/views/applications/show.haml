@@ -1,5 +1,6 @@
 - content_for :page_title, page_title(@application)
 - content_for :meta_description, "Planning application: #{@application.description} Address: #{@application.address}"
+- content_for :map, true
 #application
   - if @application.location
     - link_to @application.map_url do

@@ -49,7 +49,6 @@ class AlertsController < ApplicationController
     @zone_sizes = zone_sizes
     @alert = Alert.find_by_confirm_id(params[:cid])
     if request.get?
-      @map = true
       @size = @zone_sizes.invert[@alert.radius_meters]
     else
       @alert.radius_meters = @zone_sizes[params[:size]]
