@@ -2,7 +2,6 @@ class AlertsController < ApplicationController
   caches_page :check_mail, :statistics
 
   def signup
-    @meta_description = "A free service which searches Australian planning authority websites and emails you details of applications near you"
     @zone_sizes = zone_sizes
     if params[:alert]
       @alert = Alert.new(:address => params[:alert][:address], :email => params[:alert][:email], :radius_meters => @zone_sizes['l'])

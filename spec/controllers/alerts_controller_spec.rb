@@ -30,11 +30,4 @@ describe AlertsController do
       response.should be_success
     end
   end
-
-  describe "search engine optimisation" do
-    it "should provide a sensible title and meta description to make search results useful to people" do
-      get :signup
-      assigns[:meta_description].should == "A free service which searches Australian planning authority websites and emails you details of applications near you"
-    end
-  end
 end

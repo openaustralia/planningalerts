@@ -2,8 +2,8 @@
 %html(xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml")
   %head
     %meta(content="text/html; charset=utf-8" http-equiv="Content-Type")
-    - if @meta_description
-      %meta(name="Description" content=@meta_description)
+    - if yield(:meta_description)
+      %meta{:name => "Description", :content => yield(:meta_description)} 
     %meta(name="viewport" content="width=900, initial-scale=0.35")
     %title PlanningAlerts | #{yield(:page_title) || "Email alerts of planning applications near you"}
     - if @rss

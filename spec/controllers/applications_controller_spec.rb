@@ -162,17 +162,6 @@ describe ApplicationsController do
     end
   end
   
-  describe "search engine optimisation" do
-    it "should provide a meta tag description so that the search results from search engines are more helpful and readable" do
-      app = mock_model(Application, :address => "12 Foo Street", :date_scraped => Date.new(2010, 5, 13),
-        :description => "Cutting a hedge.", :find_all_nearest_or_recent => [])
-      Application.should_receive(:find).with("1").and_return(app)
-      get :show, :id => 1
-
-      assigns[:meta_description].should == "Planning application: Cutting a hedge. Address: 12 Foo Street"
-    end
-  end
-  
   describe "mobile support" do
     it "should have a mobile optimised show page" do
       app = mock_model(Application, :address => "12 Foo Street", :date_scraped => Date.new(2010, 5, 13),
