@@ -16,8 +16,6 @@ class StaticController < ApplicationController
   end
   
   def about
-    @page_title = "About"
-    
     # map from state name to authorities in that state
     states = Authority.active.find(:all, :group => "state", :order => "state").map{|a| a.state}
     @authorities = states.map do |state|
@@ -26,10 +24,8 @@ class StaticController < ApplicationController
   end
   
   def faq
-    @page_title = "Frequently asked questions"
   end
   
   def get_involved
-    @page_title = "Get involved"
   end
 end

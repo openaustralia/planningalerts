@@ -27,7 +27,6 @@ class ApplicationController < ActionController::Base
   end
   
   def render_404
-    @page_title = "404 - Not Found"
     render "static/404", :status => :not_found
   end
   

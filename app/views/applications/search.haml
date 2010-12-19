@@ -1,3 +1,4 @@
+- content_for :page_title, (@q ? "Search: #{@q}" : "Search")
 - form_tag search_applications_path, :method => :get do |f|
   = text_field_tag(:q, @q, :class => "textbox")
   = submit_tag "Search >>", :class => "button", :name => nil

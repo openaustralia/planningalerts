@@ -59,7 +59,6 @@ class ApplicationsController < ApplicationController
     else
       @applications = Application.paginate :page => params[:page], :per_page => per_page
     end
-    @page_title = @description
     respond_to do |format|
       format.html
       format.mobile { render "index_mobile", :layout => "mobile" }
@@ -90,17 +89,12 @@ class ApplicationsController < ApplicationController
   
   def search
     @q = params[:q]
-    @page_title = "Search"
-    if @q
-      @page_title << ": #{@q}"
-      @applications = Application.search @q, :order => :date_scraped, :sort_mode => :desc, :page => params[:page]
-    end
+    @applications = Application.search @q, :order => :date_scraped, :sort_mode => :desc, :page => params[:page] if @q
   end
   
   def show
     @map = true
     @application = Application.find(params[:id])
-    @page_title = "#{@application.address} | #{@application.date_scraped.to_date.to_formatted_s(:rfc822)}"
     @meta_description = "Planning application: #{@application.description} Address: #{@application.address}"
     
     # An application that just now been lodged that's 2 km away is about as important as an application that was lodged next door 2 months ago.
@@ -125,9 +119,7 @@ class ApplicationsController < ApplicationController
     months = 2
     km = 2
     application = Application.find(params[:id])
-    # TODO: Make @description and @page_title the same in the view
     @description = "Other applications in the last #{months} months within #{km} km of #{application.address}" 
-    @page_title = @description
     @applications = application.find_all_nearest_or_recent(km, months * 4 * 7 * 24 * 60 * 60).paginate :page => params[:page], :per_page => per_page
     respond_to do |format|
       format.html { render "index" }

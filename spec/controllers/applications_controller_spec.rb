@@ -158,7 +158,6 @@ describe ApplicationsController do
       get :show, :id => 1
       
       assigns[:application].should == app
-      assigns[:page_title].should == "An address that can't be geocoded |  1 Jan 2010"
       assigns[:nearby_applications].should == []
     end
   end
@@ -170,8 +169,6 @@ describe ApplicationsController do
       Application.should_receive(:find).with("1").and_return(app)
       get :show, :id => 1
 
-      # Include the scraping date in the title so that multiple applications from the same address have different titles
-      assigns[:page_title].should == "12 Foo Street | 13 May 2010"
       assigns[:meta_description].should == "Planning application: Cutting a hedge. Address: 12 Foo Street"
     end
   end

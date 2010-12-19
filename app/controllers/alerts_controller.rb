@@ -2,7 +2,6 @@ class AlertsController < ApplicationController
   caches_page :check_mail, :statistics
 
   def signup
-    @page_title = "Email alerts of planning applications near you"
     @meta_description = "A free service which searches Australian planning authority websites and emails you details of applications near you"
     @zone_sizes = zone_sizes
     if params[:alert]
@@ -22,7 +21,6 @@ class AlertsController < ApplicationController
   end
   
   def check_mail
-    @page_title = "Now check your email"
   end
   
   def old_confirmed
@@ -30,8 +28,6 @@ class AlertsController < ApplicationController
   end
   
   def confirmed
-    @page_title = "Confirmed"
-    
     @alert = Alert.find_by_confirm_id(params[:cid])
     if @alert
       @alert.confirmed = true
@@ -46,14 +42,11 @@ class AlertsController < ApplicationController
   end
   
   def unsubscribe
-    @page_title = "Unsubscribed"
-
     @alert = Alert.find_by_confirm_id(params[:cid])
     @alert.delete if @alert
   end
   
   def area
-    @page_title = "Change the size of your alert"
     @zone_sizes = zone_sizes
     @alert = Alert.find_by_confirm_id(params[:cid])
     if request.get?
@@ -67,7 +60,6 @@ class AlertsController < ApplicationController
   end
   
   def statistics
-    @page_title = "Alert statistics"
     @no_confirmed_alerts = Alert.confirmed.count
     @no_alerts = Alert.count
     # Hmmm... Temporary variable because we're calling a very slow method. Not good.

@@ -25,4 +25,9 @@ module ApplicationsHelper
     end
     text
   end
+  
+  def page_title(application)
+    # Include the scraping date in the title so that multiple applications from the same address have different titles
+    "#{@application.address} | #{@application.date_scraped.to_date.to_formatted_s(:rfc822)}"
+  end
 end

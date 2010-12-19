@@ -5,7 +5,7 @@
     - if @meta_description
       %meta(name="Description" content=@meta_description)
     %meta(name="viewport" content="width=900, initial-scale=0.35")
-    %title PlanningAlerts | #{@page_title || "Email alerts of planning applications near you"}
+    %title PlanningAlerts | #{yield(:page_title) || "Email alerts of planning applications near you"}
     - if @rss
       %link(rel="alternate" type="application/rss+xml" title="RSS" href=@rss)
     = stylesheet_link_tag "memespring", "main", "boastful", :media => "all", :cache => true

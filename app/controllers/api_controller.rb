@@ -24,6 +24,5 @@ class ApiController < ApplicationController
   end
   
   def howto
-    @page_title = "API"
   end  
 end
