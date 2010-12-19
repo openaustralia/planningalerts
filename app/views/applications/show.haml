@@ -30,11 +30,11 @@
 %h3 Tweets mentioning this planning application
 #boastful
 
-- unless @nearby_applications.empty?
+- unless @application.find_all_nearest_or_recent.empty?
   #nearby-applications
     %h3 Selection of other recent or nearby applications
     %dl
-      = render :partial => "application", :collection => @nearby_applications
+      = render :partial => "application", :collection => @application.find_all_nearest_or_recent[0...5]
     = link_to("more applications nearby&hellip;", nearby_application_url(@application))
 
 - if @application.location

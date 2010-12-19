@@ -158,7 +158,6 @@ describe ApplicationsController do
       get :show, :id => 1
       
       assigns[:application].should == app
-      assigns[:nearby_applications].should == []
     end
   end
   

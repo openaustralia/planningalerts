@@ -96,9 +96,6 @@ class ApplicationsController < ApplicationController
     @map = true
     @application = Application.find(params[:id])
     
-    # An application that just now been lodged that's 2 km away is about as important as an application that was lodged next door 2 months ago.
-    @nearby_applications = @application.find_all_nearest_or_recent[0...5]
-    
     respond_to do |format|
       format.html
       format.mobile { render "show_mobile", :layout => "mobile" }
