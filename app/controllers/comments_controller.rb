@@ -5,9 +5,13 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     @comment.application_id = @application.id
     if @comment.save
-      redirect_to @application
+      redirect_to checkmail_application_comment_url(@application, @comment)
     else
       render 'applications/show'
     end
+  end
+  
+  def checkmail
+    @application = Application.find(params[:application_id])
   end
 end

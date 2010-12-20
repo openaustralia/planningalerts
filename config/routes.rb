@@ -56,7 +56,7 @@ ActionController::Routing::Routes.draw do |map|
   map.address_applications '', :controller => 'applications', :action => 'address'
 
   map.resources 'applications', :only => [:index, :show], :collection => {:search => :get}, :member => {:nearby => :get} do |application|
-    application.resources 'comments'
+    application.resources 'comments', :member => {:checkmail => :get}
   end
   map.resources 'authorities', :only => [] do |authority|
     authority.resources :applications, :only => :index
