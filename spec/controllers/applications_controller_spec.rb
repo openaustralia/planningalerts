@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe ApplicationsController do
   describe "rss feed" do
+    before :each do
+      Location.stub!(:geocode).and_return(mock(:lat => 1.0, :lng => 2.0, :full_address => "24 Bruce Road, Glenbrook NSW 2773"))
+    end
+
     it "should provide a link for all applications" do
       get :index
       assigns[:rss].should == "http://test.host/applications.rss"
