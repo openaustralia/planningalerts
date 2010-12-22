@@ -23,7 +23,7 @@ class AlertsController < ApplicationController
   end
   
   def old_confirmed
-    redirect_to :action => "confirmed", :id => params[:cid]
+    redirect_to confirmed_alert_url(:id => params[:cid])
   end
   
   def confirmed
@@ -37,7 +37,7 @@ class AlertsController < ApplicationController
   end
   
   def old_unsubscribe
-    redirect_to :action => "unsubscribe", :id => params[:cid]
+    redirect_to unsubscribe_alert_url(:id => params[:cid])
   end
   
   def unsubscribe

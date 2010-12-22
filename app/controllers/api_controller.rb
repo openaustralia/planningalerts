@@ -20,7 +20,7 @@ class ApiController < ApplicationController
   end
   
   def old_howto
-    redirect_to :action => :howto
+    redirect_to api_howto_url
   end
   
   def howto
