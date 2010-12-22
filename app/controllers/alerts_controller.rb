@@ -9,7 +9,7 @@ class AlertsController < ApplicationController
     unless request.get?
       if @alert.save
         AlertNotifier.deliver_confirm(@alert)
-        redirect_to check_mail_url
+        redirect_to checkmail_alerts_url
       end
     end
     if params[:alert] && params[:alert][:address] && !params[:alert][:email]
