@@ -16,6 +16,8 @@ module NavigationHelpers
       statistics_alerts_path
     when /^application page "(\d+)"$/
       application_path(Application.find($1))
+    when /^the confirm page for comment "([^"]*)"$/
+      confirmed_comment_path(:id => Comment.find_by_text($1).confirm_id)
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

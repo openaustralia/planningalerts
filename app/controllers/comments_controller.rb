@@ -21,6 +21,7 @@ class CommentsController < ApplicationController
     if @comment
       @comment.confirmed = true
       @comment.save!
+      CommentNotifier.deliver_notify(@comment)
     else
       render :text => "", :status => 404
     end

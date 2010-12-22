@@ -19,3 +19,7 @@ end
 Given /^an unconfirmed comment "([^"]*)" on application "([^"]*)"$/ do |comment, application_id|
   Factory(:comment, :confirmed => false, :text => comment, :application => Application.find(application_id))
 end
+
+Then /^I should see a link to application page "([^"]*)"$/ do |application_id|
+  Then %{I should see "#{application_url(Application.find(application_id), :host => Configuration::HOST)}"}
+end

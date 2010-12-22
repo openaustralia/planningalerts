@@ -32,14 +32,15 @@ Feature: Give feedback to Council
     When I go to application page "1"
     Then I should not see "I think this is a really good ideas"
 
-  @wip
   Scenario: Confirming the comment
-    Given an unconfirmed comment "I think this is a really good ideas" on application "1"
-    When I visit the confirm page for my comment
-    Then I should see "Thank you for confirming your comment."
-    And I should see "Your comment has been sent off to Foo Council and is now visible on the application page"
-    And I should see a link to the application page
-    And "Foo Council" should receive an email
-    And they should see "I think this is a really good ideas" in the email body
-    When I go to the application page
+    Given a planning authority "Foo" with a feedback email "feedback@foo.gov.au"
+    And an application "1" in planning authority "Foo"
+    And an unconfirmed comment "I think this is a really good ideas" on application "1"
+    When I go to the confirm page for comment "I think this is a really good ideas"
+    Then I should see "Thanks, your comment has been confirmed and sent"
+    And I should see "Your comment has been sent to Foo and is visible on the application page"
+    And "feedback@foo.gov.au" should receive an email
+    When "feedback@foo.gov.au" opens the email
+    Then they should see "I think this is a really good ideas" in the email body
+    When I follow "the application page"
     Then I should see "I think this is a really good ideas"
