@@ -1,1 +1,15 @@
-Nothing here right now
+Please click on the link below to confirm your comment. Only then, will your comment be visible to others and be sent off to <%= @comment.application.authority.full_name %>
+
+<%= confirmed_comment_url(:host => Configuration::HOST, :id => @comment.confirm_id) %>
+
+If your email program does not let you click on this link, just copy and paste it into your web browser and hit return.
+
+Your comment:
+<%= @comment.text %>
+
+On the application:
+<%= @comment.application.address %> (<%= @comment.application.council_reference %>)
+
+<%= @comment.application.description %>
+
+
