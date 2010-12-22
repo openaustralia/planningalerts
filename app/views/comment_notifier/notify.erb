@@ -1,0 +1,15 @@
+Application:          <%= @comment.application.council_reference %>
+Address:              <%= @comment.application.address %>
+Description:          <%= @comment.application.description %>
+Comment submitted by: <%= @comment.name %>
+Email:                <%= @comment.email %>
+
+<%= @comment.text %>
+
+=============================================================================
+This comment was submitted via PlanningAlerts.org.au, a free service
+run by the OpenAustralia Foundation for the public good.
+See <%= application_url(@comment.application, :host => Configuration::HOST) %> for more information
+
+http://www.openaustraliafoundation.org.au
+=============================================================================
