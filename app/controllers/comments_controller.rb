@@ -15,4 +15,14 @@ class CommentsController < ApplicationController
   def checkmail
     @application = Application.find(params[:application_id])
   end
+  
+  def confirmed
+    @comment = Comment.find_by_confirm_id(params[:id])
+    if @comment
+      @comment.confirmed = true
+      @comment.save!
+    else
+      render :text => "", :status => 404
+    end
+  end
 end
