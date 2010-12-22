@@ -1,7 +1,7 @@
 class AlertsController < ApplicationController
   caches_page :check_mail, :statistics
 
-  def signup
+  def new
     @zone_sizes = zone_sizes
     if params[:alert]
       @alert = Alert.new(:address => params[:alert][:address], :email => params[:alert][:email], :radius_meters => @zone_sizes['l'])
