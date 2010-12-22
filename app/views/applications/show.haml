@@ -19,24 +19,26 @@
     %li
       = link_to "More information", @application.info_url
       about this application
-    %li
-      = link_to "Support or object", @application.comment_url
-      to this application
-  %p (Source: #{@application.authority.full_name})
-  %h3 Comments
-  %ol
-    - @application.comments.each do |comment|
+    - unless @application.authority.contactable?
       %li
-        .text= comment.text
-        .author
-          by #{comment.name} #{time_ago_in_words(comment.updated_at)} ago
-  %p
-    - semantic_form_for [@application, @comment] do |f|
-      - f.inputs do
-        = f.input :text, :label => 'Comment'
-        = f.input :name, :label => 'Name'
-        = f.input :email, :label => 'Email', :hint => "We never show your email address"
-      = f.buttons
+        = link_to "Support or object", @application.comment_url
+        to this application
+  %p (Source: #{@application.authority.full_name})
+  - if @application.authority.contactable?
+    %h3 Comments
+    %ol
+      - @application.comments.each do |comment|
+        %li
+          .text= comment.text
+          .author
+            by #{comment.name} #{time_ago_in_words(comment.updated_at)} ago
+    %p
+      - semantic_form_for [@application, @comment] do |f|
+        - f.inputs do
+          = f.input :text, :label => 'Comment'
+          = f.input :name, :label => 'Name'
+          = f.input :email, :label => 'Email', :hint => "We never show your email address"
+        = f.buttons
   
   %p= addthis_bookmark_button.html_safe
   %p

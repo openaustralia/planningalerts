@@ -10,11 +10,10 @@ Feature: Give feedback to Council
     Then I should see "Support or object to this application"
     
   Scenario: Adding a comment
-    #Given a planning authority "Foo" with a feedback email
-    Given a planning authority "Foo"
+    Given a planning authority "Foo" with a feedback email "feedback@foo.gov.au"
     And an application "1" in planning authority "Foo"
     When I go to application page "1"
-    #Then I should not see "Support or object to this application"
+    Then I should not see "Support or object to this application"
     When I fill in "Comment" with "I think this is a really good ideas"
     And I fill in "Name" with "Matthew Landauer"
     And I fill in "Email" with "example@example.com"
