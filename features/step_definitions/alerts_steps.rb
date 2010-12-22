@@ -16,9 +16,9 @@ When /^I click the "([^\"]*)" link in the email alert for "([^\"]*)"$/ do |link,
   alert = Alert.find_by_address(address)
   case link
   when "unsubscribe"
-    visit unsubscribe_url(:cid => alert.confirm_id)
+    visit unsubscribe_url(:id => alert.confirm_id)
   when "change alert size"
-    visit area_alert_url(:cid => alert.confirm_id)    
+    visit area_alert_url(:id => alert.confirm_id)    
   else
     pending
   end

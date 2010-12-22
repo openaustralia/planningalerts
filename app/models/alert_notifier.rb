@@ -17,7 +17,7 @@ class AlertNotifier < ActionMailer::Base
 
     @host = Configuration::HOST
     @georss_url = applications_url(:format => "rss", :host => Configuration::HOST, :address => @alert.address, :radius => @alert.radius_meters)
-    @unsubscribe_url = unsubscribe_url(:host => Configuration::HOST, :cid => @alert.confirm_id)
+    @unsubscribe_url = unsubscribe_url(:host => Configuration::HOST, :id => @alert.confirm_id)
     
     @headers = {"return-path" => Configuration::BOUNCE_EMAIL_ADDRESS}
     

@@ -23,11 +23,11 @@ class AlertsController < ApplicationController
   end
   
   def old_confirmed
-    redirect_to :action => "confirmed", :cid => params[:cid]
+    redirect_to :action => "confirmed", :id => params[:cid]
   end
   
   def confirmed
-    @alert = Alert.find_by_confirm_id(params[:cid])
+    @alert = Alert.find_by_confirm_id(params[:id])
     if @alert
       @alert.confirmed = true
       @alert.save!
@@ -37,17 +37,17 @@ class AlertsController < ApplicationController
   end
   
   def old_unsubscribe
-    redirect_to :action => "unsubscribe", :cid => params[:cid]
+    redirect_to :action => "unsubscribe", :id => params[:cid]
   end
   
   def unsubscribe
-    @alert = Alert.find_by_confirm_id(params[:cid])
+    @alert = Alert.find_by_confirm_id(params[:id])
     @alert.delete if @alert
   end
   
   def area
     @zone_sizes = zone_sizes
-    @alert = Alert.find_by_confirm_id(params[:cid])
+    @alert = Alert.find_by_confirm_id(params[:id])
     if request.get?
       @size = @zone_sizes.invert[@alert.radius_meters]
     else

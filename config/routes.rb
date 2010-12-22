@@ -45,9 +45,9 @@ ActionController::Routing::Routes.draw do |map|
   
   map.new_alert '/alerts/signup', :controller => "alerts", :action => "signup"
   map.checkmail_alerts 'alerts/checkmail', :controller => 'alerts', :action => 'check_mail'
-  map.confirmed_alert 'alerts/:cid/confirmed', :controller => 'alerts', :action => 'confirmed'
-  map.unsubscribe 'alerts/:cid/unsubscribe', :controller => 'alerts', :action => 'unsubscribe'
-  map.area_alert 'alerts/:cid/area', :controller => 'alerts', :action => 'area'
+  map.confirmed_alert 'alerts/:id/confirmed', :controller => 'alerts', :action => 'confirmed'
+  map.unsubscribe 'alerts/:id/unsubscribe', :controller => 'alerts', :action => 'unsubscribe'
+  map.area_alert 'alerts/:id/area', :controller => 'alerts', :action => 'area'
   map.statistics_alerts 'alerts/statistics', :controller => 'alerts', :action => 'statistics'
 
   map.api_howto 'api/howto', :controller => 'api', :action => 'howto'
