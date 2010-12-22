@@ -43,15 +43,9 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'unsubscribe.php', :controller => 'alerts', :action => 'old_unsubscribe'
   map.connect 'unsubscribe', :controller => 'alerts', :action => 'old_unsubscribe'
   
-  map.new_alert '/alerts/signup', :controller => "alerts", :action => "new"
-  map.checkmail_alerts 'alerts/checkmail', :controller => 'alerts', :action => 'checkmail'
-  map.confirmed_alert 'alerts/:id/confirmed', :controller => 'alerts', :action => 'confirmed'
-  map.unsubscribe_alert 'alerts/:id/unsubscribe', :controller => 'alerts', :action => 'unsubscribe'
-  map.area_alert 'alerts/:id/area', :controller => 'alerts', :action => 'area'
-  map.statistics_alerts 'alerts/statistics', :controller => 'alerts', :action => 'statistics'
+  map.resources 'alerts', :only => [:new, :create], :collection => {:checkmail => :get, :statistics => :get},
+    :member => {:confirmed => :get, :area => [:get, :post], :unsubscribe => :get}, :path_names => {:new => 'signup'}
 
-  map.resources 'alerts', :only => [:create]
-  
   map.api_howto 'api/howto', :controller => 'api', :action => 'howto'
   map.api 'api', :controller => 'api', :action => 'index'
   
