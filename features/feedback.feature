@@ -24,7 +24,14 @@ Feature: Give feedback to Council
     When I open the email
     Then I should see "Please confirm your comment" in the email subject
     And the email body should contain a link to the confirmation page for the comment "I think this is a really good ideas"
-    
+  
+  Scenario: Unconfirmed comment should not be shown
+    Given a planning authority "Foo" with a feedback email "feedback@foo.gov.au"
+    And an application "1" in planning authority "Foo"
+    And an unconfirmed comment "I think this is a really good ideas" on application "1"
+    When I go to application page "1"
+    Then I should not see "I think this is a really good ideas"
+
   @wip
   Scenario: Confirming the comment
     Given an unconfirmed comment "I think this is a really good ideas" on application "1"

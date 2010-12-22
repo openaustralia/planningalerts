@@ -3,6 +3,7 @@ class Comment < ActiveRecord::Base
   validates_presence_of :email, :name, :text
   validates_email_format_of :email
   
+  named_scope :confirmed, :conditions => {:confirmed => true}
   before_create :set_confirm_info
   
   private

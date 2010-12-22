@@ -8,3 +8,10 @@ Factory.define :application do |a|
   a.council_reference "001"
   a.date_scraped {|b| 10.minutes.ago}
 end
+
+Factory.define :comment do |c|
+  c.email "matthew@openaustralia.org"
+  c.name "Matthew Landauer"
+  c.text "a comment"
+  c.association :application
+end

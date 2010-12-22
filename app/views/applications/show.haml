@@ -27,7 +27,7 @@
   - if @application.authority.contactable?
     %h3 Comments
     %ol
-      - @application.comments.each do |comment|
+      - @application.comments.confirmed.each do |comment|
         %li
           .text= comment.text
           .author
