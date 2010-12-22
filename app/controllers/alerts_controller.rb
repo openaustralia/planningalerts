@@ -1,5 +1,5 @@
 class AlertsController < ApplicationController
-  caches_page :check_mail, :statistics
+  caches_page :checkmail, :statistics
 
   def new
     @zone_sizes = zone_sizes
@@ -19,7 +19,7 @@ class AlertsController < ApplicationController
     end
   end
   
-  def check_mail
+  def checkmail
   end
   
   def old_confirmed
