@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     @comment.application_id = @application.id
     if @comment.save
+      CommentNotifier.deliver_confirm(@comment)
       redirect_to checkmail_application_comment_url(@application, @comment)
     else
       render 'applications/show'

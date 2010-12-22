@@ -9,21 +9,22 @@ Feature: Give feedback to Council
     When I go to application page "1"
     Then I should see "Support or object to this application"
     
-  @wip
   Scenario: Adding a comment
-    Given a planning authority "Foo" with a feedback email
+    #Given a planning authority "Foo" with a feedback email
+    Given a planning authority "Foo"
     And an application "1" in planning authority "Foo"
     When I go to application page "1"
-    Then I should not see "Support or object to this application"
+    #Then I should not see "Support or object to this application"
     When I fill in "Comment" with "I think this is a really good ideas"
     And I fill in "Name" with "Matthew Landauer"
-    And I fill in "Email" with "matthew@openaustralia.org"
+    And I fill in "Email" with "example@example.com"
     And I press "Create Comment"
-    Then I should see "Now, check your email. You will need to confirm your feedback"
+    Then I should see "Now check your email"
+    And I should see "Click on the link in the email to confirm your comment"
     And I should receive an email
     When I open the email
-    Then I should see "PlanningAlerts.org.au: Confirm your feedback" in the email subject
-    And the link in the email body should link to the confirmation page 
+    Then I should see "Please confirm your comment" in the email subject
+    And the email body should contain a link to the confirmation page for the comment "I think this is a really good ideas"
     
   @wip
   Scenario: Confirming the comment
