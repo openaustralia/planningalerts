@@ -30,11 +30,11 @@
       %p
         To see an example of what the results would look like once your area is included see #{link_to "Bourke Street in Melbourne", address_applications_path(:q => "Bourke St, Melbourne 3000")}.
       %p
-        If you #{link_to "sign up for email alerts", signup_url(:alert => {:address => @q})} anyway, you will receive new applications when they become available. 
+        If you #{link_to "sign up for email alerts", new_alert_path(:alert => {:address => @q})} anyway, you will receive new applications when they become available. 
         The more people that sign up for your area, the sooner we'll add your area to PlanningAlerts. So, get your friends and neighbours to sign up too!
     - else
       %p
-        =link_to "Email me whenever there is new application near #{@q}", signup_url(:alert => {:address => @q})
+        =link_to "Email me whenever there is new application near #{@q}", new_alert_path(:alert => {:address => @q})
         (No more than once per day)
       %h3 Recent applications within #{meters_in_words(@radius)} of #{@q}
       - paginated_section @applications, :previous_label => "« Newer", :next_label => "Older »" do
