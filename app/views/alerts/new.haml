@@ -2,7 +2,7 @@
 - if @alert && @alert.errors
   #warning
     = @alert.errors.full_messages.join("<br>")
-- form_for :alert, @alert do |f|
+- form_for :alert, @alert, :url => {:action => 'create'} do |f|
   %ul#ulSignup.form.nobullets
     %li#liAddress
       = f.label(:address, '<span class="number">1</span> Enter a street address')

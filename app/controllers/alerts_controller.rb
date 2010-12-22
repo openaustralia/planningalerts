@@ -3,19 +3,22 @@ class AlertsController < ApplicationController
 
   def new
     @zone_sizes = zone_sizes
+    @set_focus_control = "alert_address"
     if params[:alert]
       @alert = Alert.new(:address => params[:alert][:address], :email => params[:alert][:email], :radius_meters => @zone_sizes['l'])
-    end
-    unless request.get?
-      if @alert.save
-        AlertNotifier.deliver_confirm(@alert)
-        redirect_to checkmail_alerts_url
+      if @alert.address && !@alert.email
+        @set_focus_control = "alert_email"
       end
-    end
-    if params[:alert] && params[:alert][:address] && !params[:alert][:email]
-      @set_focus_control = "alert_email"
+    end    
+  end
+  
+  def create
+    @alert = Alert.new(:address => params[:alert][:address], :email => params[:alert][:email], :radius_meters => zone_sizes['l'])
+    if @alert.save
+      AlertNotifier.deliver_confirm(@alert)
+      redirect_to checkmail_alerts_url
     else
-      @set_focus_control = "alert_address"
+      render 'new'
     end
   end
   

@@ -50,6 +50,8 @@ ActionController::Routing::Routes.draw do |map|
   map.area_alert 'alerts/:id/area', :controller => 'alerts', :action => 'area'
   map.statistics_alerts 'alerts/statistics', :controller => 'alerts', :action => 'statistics'
 
+  map.resources 'alerts', :only => [:create]
+  
   map.api_howto 'api/howto', :controller => 'api', :action => 'howto'
   map.api 'api', :controller => 'api', :action => 'index'
   
