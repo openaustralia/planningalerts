@@ -47,7 +47,9 @@
     <span class="highlight">New authorities are being added all the time, so if your local authority isn't listed below
     #{link_to "sign up any way", new_alert_path} and you'll start receiving alerts once it has been included</span>.
 %p
-  =@authorities.map{|a| link_to a.first, :anchor => a.first.downcase}.join(" | ")
+  - @authorities.each_with_index do |a, i|
+    = "|" unless i == 0
+    = link_to a.first, :anchor => a.first.downcase
 %ul.nobullets
   - @authorities.each do |state, authorities|
     %a{:name => state.downcase}

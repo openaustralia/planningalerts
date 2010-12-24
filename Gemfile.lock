@@ -2,6 +2,7 @@ GEM
   remote: http://gemcutter.org/
   remote: http://gems.github.com/
   specs:
+    abstract (1.0.0)
     actionmailer (2.3.8)
       actionpack (= 2.3.8)
     actionpack (2.3.8)
@@ -27,6 +28,8 @@ GEM
     database_cleaner (0.6.0)
     diff-lcs (1.1.2)
     email_spec (0.6.4)
+    erubis (2.6.6)
+      abstract (>= 1.0.0)
     foreigner (0.9.1)
     geokit (1.5.0)
     gherkin (2.3.2)
@@ -49,6 +52,7 @@ GEM
       activeresource (= 2.3.8)
       activesupport (= 2.3.8)
       rake (>= 0.8.3)
+    rails_xss (0.1.3)
     rake (0.8.7)
     riddle (1.2.1)
     rspec (1.3.1)
@@ -74,6 +78,7 @@ DEPENDENCIES
   cucumber-rails (>= 0.2.4)
   database_cleaner (>= 0.4.3)
   email_spec (< 1.0.0)
+  erubis
   foreigner
   geokit
   haml
@@ -82,6 +87,7 @@ DEPENDENCIES
   mysql
   nokogiri
   rails (= 2.3.8)
+  rails_xss
   rspec-rails (~> 1.3.2)
   smurf
   thinking-sphinx (~> 1.3.11)

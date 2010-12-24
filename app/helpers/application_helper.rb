@@ -8,10 +8,8 @@ module ApplicationHelper
     end
   end
   
-  def li_selected(m)
-    content_tag(:li, :class => ("selected" if page_matches?(m))) do
-      yield
-    end
+  def li_selected(m, &block)
+    content_tag(:li, capture(&block), :class => ("selected" if page_matches?(m)))
   end
 
   def meters_in_words(meters)

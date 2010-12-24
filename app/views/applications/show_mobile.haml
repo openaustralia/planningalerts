@@ -14,4 +14,4 @@
     %h3.info Selection of other recent or nearby applications
     .list
       = render :partial => "application_mobile", :collection => @application.find_all_nearest_or_recent[0...5]
-    .info= link_to("more&hellip;", nearby_application_url(@application))
+    .info= link_to("more&hellip;".html_safe, nearby_application_url(@application))

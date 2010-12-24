@@ -13,6 +13,10 @@ gem 'will_paginate', '~> 2.3.11'
 # For minifying javascript and css
 gem 'smurf'
 gem 'thinking-sphinx', '~> 1.3.11', :require => 'thinking_sphinx'
+# We won't need this plugin once we upgrade to Rails 3. It's baked in.
+# Added erubis because required by rails_xss but not included in gem dependency
+gem 'rails_xss'
+gem 'erubis'
 
 group :cucumber do
   gem 'cucumber-rails',   '>=0.2.4'
