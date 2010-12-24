@@ -11,12 +11,12 @@
     %li#liEmail
       = f.label(:email, '<span class="number">2</span> Enter your email address'.html_safe)
       = text_field_tag 'alert[email]', (@alert.email if @alert), :type => 'email', :class => (@alert && @alert.errors.on(:email) ? "textbox error" : "textbox")
-    = submit_tag "Create alert >>", :class => "button"
-    %p#privacy
-      Our
-      %em Privacy Policy
-      is very simple: We will not sell or distribute any personal information
-      you share with us - at all, ever.
-    %p#spnBeta
-      It's early days for this service so your local authority may not be included yet. Sign up
-      anyway and you'll receive alerts as soon as they're available.
+  = submit_tag "Create alert >>", :class => "button"
+%p#privacy
+  Our
+  %em Privacy Policy
+  is very simple: We will not sell or distribute any personal information
+  you share with us - at all, ever.
+%p#spnBeta
+  It's early days for this service so your local authority may not be included yet. Sign up
+  anyway and you'll receive alerts as soon as they're available.

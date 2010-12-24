@@ -1,4 +1,4 @@
-!!! Strict
+!!! 5
 %html(xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml")
   %head
     %meta(content="text/html; charset=utf-8" http-equiv="Content-Type")
@@ -35,12 +35,12 @@
           = link_to 'About', about_path
         = li_selected(:controller => "api", :action => "howto") do
           - link_to api_howto_path do
-            %acronym(title="Application programming interface") API
+            %abbr(title="Application programming interface") API
         = li_selected(:controller => "static", :action => "get_involved") do
           = link_to 'Get Involved', get_involved_path
         = li_selected(:controller => "static", :action => "faq") do
           - link_to faq_path do
-            %acronym(title="Frequently asked questions") FAQ
+            %abbr(title="Frequently asked questions") FAQ
         = li_selected(:controller => "alerts", :action => ["new", "checkmail"]) do
           = link_to 'Sign Up', new_alert_path
         = li_selected(:controller => "applications", :action => "address") do
@@ -56,7 +56,7 @@
         #mobile= mobile_switcher_links
         %span#oaf An <a href="http://openaustraliafoundation.org.au">OpenAustralia Foundation</a> Project
     - if @set_focus_control
-      %script(type="text/javascript" defer="defer")
+      %script(type="text/javascript")
         document.getElementById('#{@set_focus_control}').focus();
     :javascript
       var _gaq = _gaq || [];

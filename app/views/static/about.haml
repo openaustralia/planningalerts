@@ -19,25 +19,25 @@
   Duncan Parkes, Tom Hughes and Andy Armstrong.
 %p
   PlanningAlerts.org.au keeps getting better thanks to the contributions from the volunteers:
-  %ul.nobullets
-    %li
-      = image_tag("http://www.gravatar.com/avatar/b30d37e67e4c4584a71d977763651513?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Henare Degan")
-      Henare Degan
-    %li
-      = image_tag("http://www.gravatar.com/avatar/7284ad488e18a2b052a9c7b8fe1e3922?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Andrew Harvey")
-      Andrew Harvey
-    %li
-      = image_tag("http://www.gravatar.com/avatar/5a600494d91ea4223e7256989155f687?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Matthew Landauer")
-      Matthew Landauer
-    %li
-      = image_tag("http://www.gravatar.com/avatar/fab3189512311073ccf49928112c98fa?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Adrian Miller")
-      Adrian Miller
-    %li
-      = image_tag("http://www.gravatar.com/avatar/00477410c5069d49fad6eedaea32fd61?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Peter Neish")
-      Peter Neish
-    %li
-      = image_tag("http://www.gravatar.com/avatar/353d83d3677b142520987e1936fd093c?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Daniel O'Connor")
-      Daniel O'Connor
+%ul.nobullets
+  %li
+    = image_tag("http://www.gravatar.com/avatar/b30d37e67e4c4584a71d977763651513?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Henare Degan")
+    Henare Degan
+  %li
+    = image_tag("http://www.gravatar.com/avatar/7284ad488e18a2b052a9c7b8fe1e3922?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Andrew Harvey")
+    Andrew Harvey
+  %li
+    = image_tag("http://www.gravatar.com/avatar/5a600494d91ea4223e7256989155f687?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Matthew Landauer")
+    Matthew Landauer
+  %li
+    = image_tag("http://www.gravatar.com/avatar/fab3189512311073ccf49928112c98fa?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Adrian Miller")
+    Adrian Miller
+  %li
+    = image_tag("http://www.gravatar.com/avatar/00477410c5069d49fad6eedaea32fd61?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Peter Neish")
+    Peter Neish
+  %li
+    = image_tag("http://www.gravatar.com/avatar/353d83d3677b142520987e1936fd093c?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Daniel O'Connor")
+    Daniel O'Connor
 %p
   If you #{link_to "contribute", get_involved_path} to the project you will get to be on this list.
 
@@ -50,10 +50,9 @@
   - @authorities.each_with_index do |a, i|
     = "|" unless i == 0
     = link_to a.first, :anchor => a.first.downcase
-%ul.nobullets
-  - @authorities.each do |state, authorities|
-    %a{:name => state.downcase}
-      %h4= state
+- @authorities.each do |state, authorities|
+  %h4{:id => state.downcase}= state
+  %ul.nobullets
     - authorities.each do |authority|
       %li= link_to authority.full_name, authority_applications_url(authority.short_name_encoded)
 %p

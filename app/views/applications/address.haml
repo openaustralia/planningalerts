@@ -7,7 +7,7 @@
       = label_tag(:q, 'Enter a street address')
       = text_field_tag(:q, @q, :class => (@error ? "textbox error" : "textbox"))
       %small e.g. 1 Sowerby St, Goulburn, NSW 2580
-    = submit_tag "Search", :class => "button", :name => nil
+  = submit_tag "Search", :class => "button", :name => nil
 - if @q
   - unless @other_addresses.empty?
     %p Or did you want?
