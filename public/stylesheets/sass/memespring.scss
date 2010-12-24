@@ -1,0 +1,118 @@
+/* This file is for usefull reusable css */
+
+/* lists */
+ul {
+  &.form {
+    label {
+      display: block;
+      float: left;
+      width: 170px;
+      padding-top: 4px;
+      &.radiolabel {
+        display: inline;
+        float: none; } }
+    span.fauxlabel {
+      display: block;
+      float: left;
+      width: 160px; }
+    li {
+      margin: 5px 0;
+      padding-bottom: 6px !important; }
+    input.textbox {
+      width: 165px; }
+    select {
+      width: 175px; }
+    input.textbox.small, select.small {
+      width: 80px; }
+    input.textbox.verysmall {
+      width: 30px; }
+    select.verysmall {
+      width: 45px; }
+    input.textbox.right {
+      text-align: right;
+      padding-right: 0.2em; } }
+  &.collapse {
+    margin: 0;
+    padding: 0; } }
+
+ol.collapse {
+  margin: 0;
+  padding: 0; }
+
+ul.collapse li, ol.collapse li {
+  margin: 0;
+  padding: 0;
+  float: left; }
+
+ul.collapse li, ol.collapse {
+  list-style-type: none; }
+
+ul {
+  &.inline {
+    margin: 0;
+    padding: 0;
+    li {
+      display: inline;
+      margin: 0;
+      padding: 0; } }
+  &.nobullets {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+      margin: 0;
+      padding: 0; } } }
+
+/* image replacement */
+.hide {
+  display: none; }
+
+/* clear */
+br.clear {
+  clear: both; }
+
+/* controls */
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0; }
+
+/* links */
+a img {
+  border: none; }
+
+/* headings */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0; }
+
+/* form elements */
+input {
+  &.textbox.autopostback {
+    background: white url(../images/return.png) no-repeat right 50%; }
+  select {
+    background: white; } }
+
+textarea {
+  background: white; }
+
+input.textbox {
+  width: 180px;
+  &.small, &.verysmall {
+    width: 80px; }
+  &.right {
+    text-align: right;
+    padding-right: 0.2em; } }
+
+/* alignment */
+.alignright {
+  text-align: right; }
+
+/* tables */
+table {
+  border-collapse: collapse; }
+
+/* buttons */
+div.buttons {
+  text-align: right;
+  padding: 1em; }
