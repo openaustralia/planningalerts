@@ -1,7 +1,7 @@
 - content_for :meta_description, "A free service which searches Australian planning authority websites and emails you details of applications near you"
 - if @alert && @alert.errors
   #warning
-    = @alert.errors.full_messages.join("<br>")
+    = @alert.errors.full_messages.join("<br>").html_safe
 - form_for :alert, @alert, :url => {:action => 'create'} do |f|
   %ul#ulSignup.form.nobullets
     %li#liAddress
