@@ -225,6 +225,25 @@ dl.faq dt {
   color: $orange;
 }
 
+ul#subscribe {
+  @include no-bullets;
+  padding: 0.5em 0.5em 0 0.5em;
+  margin-right: 0;
+  background: $almostwhite;
+  border: solid 1px $grey;
+  img {
+    vertical-align: middle;
+    margin-right: 0.5em;
+  }
+  li {
+    margin-bottom: 0.5em;
+  }
+}
+
+#application ul#subscribe {
+  clear: both;
+}
+
 // Not semantic. Ugh.
 
 .nobullets {

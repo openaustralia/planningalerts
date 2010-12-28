@@ -41,9 +41,16 @@
         = f.buttons
   
   %p= addthis_bookmark_button.html_safe
-  %p
-    =link_to "Email me whenever there is new application near here", new_alert_path(:alert => {:address => @application.address})
-    (No more than once per day)
+  %ul#subscribe
+    %li
+      - link_to new_alert_path(:alert => {:address => @application.address}) do
+        = image_tag "email.png", :size => "28x28"
+        Email me whenever there are new applications near here
+      (No more than once per day)
+    %li
+      - link_to applications_path(:format => 'rss', :address => @application.address, :radius => 2000) do
+        = image_tag "rss.png", :size => "28x28"
+        Subscribe to an RSS feed for all applications near here
 
 %h3 Tweets mentioning this planning application
 #boastful

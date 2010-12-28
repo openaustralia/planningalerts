@@ -22,8 +22,8 @@
           = link_to a, :q => a
 
   - unless @error
-    %hr
     - if @applications.empty?
+      %hr
       %p
         Unfortunately, we don't know of any applications near #{@q}.
         This is most likely because we haven't yet been able to add your local planning authority.
@@ -38,9 +38,16 @@
         If you #{link_to "sign up for email alerts", new_alert_path(:alert => {:address => @q})} anyway, you will receive new applications when they become available. 
         The more people that sign up for your area, the sooner we'll add your area to PlanningAlerts. So, get your friends and neighbours to sign up too!
     - else
-      %p
-        =link_to "Email me whenever there is new application near #{@q}", new_alert_path(:alert => {:address => @q})
-        (No more than once per day)
+      %ul#subscribe
+        %li
+          - link_to new_alert_path(:alert => {:address => @q}) do
+            = image_tag "email.png", :size => "28x28"
+            Email me whenever there are new applications near here
+          (No more than once per day)
+        %li
+          - link_to @rss do
+            = image_tag "rss.png", :size => "28x28"
+            Subscribe to an RSS feed for applications near here
       %h3 Recent applications within #{meters_in_words(@radius)} of #{@q}
       - paginated_section @applications, :previous_label => "« Newer", :next_label => "Older »" do
         %dl= render :partial => "application", :collection => @applications

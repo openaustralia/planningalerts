@@ -82,6 +82,7 @@ class ApplicationsController < ApplicationController
         @other_addresses = location.all[1..-1].map{|l| l.full_address}
         @applications = Application.paginate :origin => [location.lat, location.lng], :within => @radius.to_f / 1000,
           :page => params[:page], :per_page => per_page
+        @rss = applications_path(:format => 'rss', :address => @q, :radius => @radius)
       end
     end
     @set_focus_control = "q"
