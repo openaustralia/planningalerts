@@ -28,6 +28,8 @@
   //@include showgrid;
 }
 
-#header, #menu, #page {
-  @include column(24);
+#header, #menu, #page, #footer {
+  @include prepend(1);
+  @include column(22, true);
+  @include append(1);
 }

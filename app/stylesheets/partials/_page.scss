@@ -18,6 +18,14 @@ body {
 
 @import "compass/utilities/lists/horizontal-list";
 
+body {
+  background: #ddd;
+}
+
+#container {
+  background: white;
+}
+
 // Layout elements - i.e. those on every page
 #header {
   //margin: auto;
@@ -26,7 +34,7 @@ body {
   //position: relative;
   #banner {
     @include float-left;
-    margin-left: 10px;
+    //margin-left: 10px;
     margin-top: 6px;
     h1 {
       margin-bottom: 0;
@@ -64,7 +72,7 @@ body {
   padding-left: 73px;
   background: url(/images/plane.png) no-repeat 0 center; 
   @include float-right;
-  margin-right: 10px;
+  //margin-right: 10px;
   margin-top: 25px;
 }
 
@@ -109,7 +117,8 @@ body {
 
 #footer {
   border-top: dotted 1px $grey;
-  //padding-top: 0.5em;
+  padding-top: 1em;
+  margin-bottom: 1em;
   margin-top: 2em;
   font-size: 0.9em;
   ul {
@@ -157,8 +166,8 @@ div.attention {
 
 #privacy, #spnBeta {
 //text-align: center;
-padding-left: 125px;
-padding-right: 125px;
+padding-left: 75px;
+padding-right: 75px;
   font-size: 0.8em;
   @include quiet;
   //line-height: 1.4em;
