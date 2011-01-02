@@ -12,10 +12,17 @@ module EmailConfirmable
       validates_email_format_of :email
       before_create :set_confirm_info
       named_scope :confirmed, :conditions => {:confirmed => true}
+      define_callbacks :after_confirm
     end
   end
   
   module InstanceMethods
+    def confirm!
+      self.confirmed = true
+      save!
+      run_callbacks(:after_confirm)
+    end
+  
     protected
     
     def set_confirm_info
