@@ -1,13 +1,11 @@
 class Alert < ActiveRecord::Base
   validates_numericality_of :radius_meters, :greater_than => 0, :message => "isn't selected"
-  validate :validate_email, :validate_address
+  validate :validate_address
   
   before_validation :geocode
-  before_create :set_confirm_info
   before_create :remove_other_alerts_for_this_address
+  acts_as_email_confirmable
   
-  named_scope :confirmed, :conditions => {:confirmed => true}
-
   def location=(l)
     if l
       self.lat = l.lat
@@ -129,11 +127,6 @@ class Alert < ActiveRecord::Base
     Alert.delete_all(:email => email, :address => address)
   end
   
-  def set_confirm_info
-    # TODO: Should check that this is unique across all alerts and if not try again
-    self.confirm_id = Digest::MD5.hexdigest(rand.to_s + Time.now.to_s)[0...20]
-  end
-
   def geocode
     # Only geocode if location hasn't been set
     if self.lat.nil? && self.lng.nil?
@@ -150,20 +143,6 @@ class Alert < ActiveRecord::Base
         errors.add(:address, @geocode_result.error)
       elsif @geocode_result.all.size > 1
         errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
-      end
-    end
-  end
-  
-  def validate_email
-    if email == ""
-      errors.add(:email, "can't be empty")
-    elsif !email.include?('@')
-      errors.add(:email, "isn't valid")      
-    else
-      begin
-        TMail::Address.parse(email)
-      rescue
-        errors.add(:email, "isn't valid")
       end
     end
   end
