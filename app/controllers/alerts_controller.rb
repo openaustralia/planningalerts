@@ -1,5 +1,5 @@
 class AlertsController < ApplicationController
-  caches_page :checkmail, :statistics
+  caches_page :statistics
 
   def new
     @zone_sizes = zone_sizes
@@ -16,13 +16,9 @@ class AlertsController < ApplicationController
     @alert = Alert.new(:address => params[:alert][:address], :email => params[:alert][:email], :radius_meters => zone_sizes['l'])
     if @alert.save
       AlertNotifier.deliver_confirm(@alert)
-      redirect_to checkmail_alerts_url
     else
       render 'new'
     end
-  end
-  
-  def checkmail
   end
   
   def confirmed

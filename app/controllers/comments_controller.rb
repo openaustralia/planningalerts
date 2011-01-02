@@ -6,14 +6,9 @@ class CommentsController < ApplicationController
     @comment.application_id = @application.id
     if @comment.save
       CommentNotifier.deliver_confirm(@comment)
-      redirect_to checkmail_application_comment_url(@application, @comment)
     else
       render 'applications/show'
     end
-  end
-  
-  def checkmail
-    @application = Application.find(params[:application_id])
   end
   
   def confirmed

@@ -39,7 +39,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'api.php', :controller => 'api', :action => 'old_index'
   map.connect 'api', :controller => 'api', :action => 'old_index'
   
-  map.resources 'alerts', :only => [:new, :create], :collection => {:checkmail => :get, :statistics => :get},
+  map.resources 'alerts', :only => [:new, :create], :collection => {:statistics => :get},
     :member => {:confirmed => :get, :area => [:get, :post], :unsubscribe => :get}, :path_names => {:new => 'signup'}
 
   map.api_howto 'api/howto', :controller => 'api', :action => 'howto'
@@ -52,7 +52,7 @@ ActionController::Routing::Routes.draw do |map|
   map.address_applications '', :controller => 'applications', :action => 'address'
 
   map.resources 'applications', :only => [:index, :show], :collection => {:search => :get}, :member => {:nearby => :get} do |application|
-    application.resources 'comments', :only => [:create, :show], :member => {:checkmail => :get}
+    application.resources 'comments', :only => [:create, :show]
   end
   map.resources 'comments', :only => [], :member => {:confirmed => :get}
   
