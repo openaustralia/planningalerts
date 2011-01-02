@@ -14,9 +14,7 @@ class AlertsController < ApplicationController
   
   def create
     @alert = Alert.new(:address => params[:alert][:address], :email => params[:alert][:email], :radius_meters => zone_sizes['l'])
-    if @alert.save
-      AlertNotifier.deliver_confirm(@alert)
-    else
+    if !@alert.save
       render 'new'
     end
   end
@@ -24,8 +22,7 @@ class AlertsController < ApplicationController
   def confirmed
     @alert = Alert.find_by_confirm_id(params[:id])
     if @alert
-      @alert.confirmed = true
-      @alert.save!
+      @alert.confirm!
     else
       render :text => "", :status => 404
     end
