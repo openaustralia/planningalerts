@@ -19,15 +19,6 @@ class AlertsController < ApplicationController
     end
   end
   
-  def confirmed
-    @alert = Alert.find_by_confirm_id(params[:id])
-    if @alert
-      @alert.confirm!
-    else
-      render :text => "", :status => 404
-    end
-  end
-  
   def unsubscribe
     @alert = Alert.find_by_confirm_id(params[:id])
     @alert.delete if @alert

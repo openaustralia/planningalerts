@@ -40,7 +40,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'api', :controller => 'api', :action => 'old_index'
   
   map.resources 'alerts', :only => [:new, :create], :collection => {:statistics => :get},
-    :member => {:confirmed => :get, :area => [:get, :post], :unsubscribe => :get}, :path_names => {:new => 'signup'}
+    :member => {:area => [:get, :post], :unsubscribe => :get}, :path_names => {:new => 'signup'}
 
   map.api_howto 'api/howto', :controller => 'api', :action => 'howto'
   map.api 'api', :controller => 'api', :action => 'index'
@@ -54,13 +54,16 @@ ActionController::Routing::Routes.draw do |map|
   map.resources 'applications', :only => [:index, :show], :collection => {:search => :get}, :member => {:nearby => :get} do |application|
     application.resources 'comments', :only => [:create, :show]
   end
-  map.resources 'comments', :only => [], :member => {:confirmed => :get}
   
   map.resources 'authorities', :only => [] do |authority|
     authority.resources :applications, :only => :index
   end
   
   map.connect 'layar/:action', :controller => 'layar'
+
+  map.confirmed_comment 'comments/:id/confirmed', :controller => 'confirm', :action => 'comment'
+  map.confirmed_alert 'alerts/:id/confirmed', :controller => 'confirm', :action => 'alert'
+
   map.root :address_applications
 
   # See how all your routes lay out with "rake routes"
