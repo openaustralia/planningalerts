@@ -38,10 +38,6 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'getinvolved.php', :controller => 'static', :action => 'old_get_involved'
   map.connect 'api.php', :controller => 'api', :action => 'old_index'
   map.connect 'api', :controller => 'api', :action => 'old_index'
-  map.connect 'confirmed.php', :controller => 'alerts', :action => 'old_confirmed'
-  map.connect 'confirmed', :controller => 'alerts', :action => 'old_confirmed'
-  map.connect 'unsubscribe.php', :controller => 'alerts', :action => 'old_unsubscribe'
-  map.connect 'unsubscribe', :controller => 'alerts', :action => 'old_unsubscribe'
   
   map.resources 'alerts', :only => [:new, :create], :collection => {:checkmail => :get, :statistics => :get},
     :member => {:confirmed => :get, :area => [:get, :post], :unsubscribe => :get}, :path_names => {:new => 'signup'}

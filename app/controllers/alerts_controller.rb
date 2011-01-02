@@ -25,10 +25,6 @@ class AlertsController < ApplicationController
   def checkmail
   end
   
-  def old_confirmed
-    redirect_to confirmed_alert_url(:id => params[:cid])
-  end
-  
   def confirmed
     @alert = Alert.find_by_confirm_id(params[:id])
     if @alert
@@ -37,10 +33,6 @@ class AlertsController < ApplicationController
     else
       render :text => "", :status => 404
     end
-  end
-  
-  def old_unsubscribe
-    redirect_to unsubscribe_alert_url(:id => params[:cid])
   end
   
   def unsubscribe
