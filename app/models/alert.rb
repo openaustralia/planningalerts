@@ -8,7 +8,7 @@ class Alert < ActiveRecord::Base
   after_create :send_confirmation_email
   
   def send_confirmation_email
-    AlertNotifier.deliver_confirm(self)
+    ConfirmNotifier.deliver_alert(self)
   end
   
   def location=(l)

@@ -1,13 +1,6 @@
 class AlertNotifier < ActionMailer::Base
   helper :application
 
-  def confirm(alert)
-    @recipients = alert.email
-    @from = "#{Configuration::EMAIL_FROM_NAME} <#{Configuration::EMAIL_FROM_ADDRESS}>"
-    @subject = "Please confirm your planning alert"
-    @alert = alert
-  end
-  
   def alert(alert, applications)
     @recipients = alert.email
     @from = "#{Configuration::EMAIL_FROM_NAME} <#{Configuration::EMAIL_FROM_ADDRESS}>"
