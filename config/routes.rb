@@ -61,8 +61,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.connect 'layar/:action', :controller => 'layar'
 
-  map.confirmed_comment 'comments/:id/confirmed', :controller => 'confirm', :action => 'confirmed', :resource => 'comments'
-  map.confirmed_alert 'alerts/:id/confirmed', :controller => 'confirm', :action => 'confirmed', :resource => 'alerts'
+  map.confirmed_comment 'comments/:id/confirmed', :controller => 'email_confirmable/confirm', :action => 'confirmed', :resource => 'comments'
+  map.confirmed_alert 'alerts/:id/confirmed', :controller => 'email_confirmable/confirm', :action => 'confirmed', :resource => 'alerts'
 
   map.root :address_applications
 

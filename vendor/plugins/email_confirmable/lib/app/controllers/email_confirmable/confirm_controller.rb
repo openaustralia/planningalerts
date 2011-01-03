@@ -1,4 +1,4 @@
-class ConfirmController < ApplicationController
+class EmailConfirmable::ConfirmController < ApplicationController
   def confirmed
     object = params[:resource].classify.constantize.find_by_confirm_id(params[:id])
     if object

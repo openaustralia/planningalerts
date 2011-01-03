@@ -32,19 +32,19 @@
     .hide= link_to "Skip navigation", "#content"
     #menu
       %ul.collapse
-        = li_selected(:controller => "static", :action => "about") do
+        = li_selected(:controller => "/static", :action => "about") do
           = link_to 'About', about_path
-        = li_selected(:controller => "api", :action => "howto") do
+        = li_selected(:controller => "/api", :action => "howto") do
           - link_to api_howto_path do
             %abbr(title="Application programming interface") API
-        = li_selected(:controller => "static", :action => "get_involved") do
+        = li_selected(:controller => "/static", :action => "get_involved") do
           = link_to 'Get Involved', get_involved_path
-        = li_selected(:controller => "static", :action => "faq") do
+        = li_selected(:controller => "/static", :action => "faq") do
           - link_to faq_path do
             %abbr(title="Frequently asked questions") FAQ
-        = li_selected(:controller => "alerts", :action => ["new", "create"]) do
+        = li_selected(:controller => "/alerts", :action => ["new", "create"]) do
           = link_to 'Sign Up', new_alert_path
-        = li_selected(:controller => "applications", :action => "address") do
+        = li_selected(:controller => "/applications", :action => "address") do
           = link_to 'Search', address_applications_path
     #page
       #content

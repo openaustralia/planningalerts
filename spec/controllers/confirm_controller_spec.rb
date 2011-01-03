@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ConfirmController do
+describe EmailConfirmable::ConfirmController do
   describe "confirming" do
     it "should set the alert to be confirmed" do
       alert = mock_model(Alert)
