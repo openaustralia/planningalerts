@@ -1,0 +1,49 @@
+#boastful {
+  height: 62px;
+  line-height: 62px; }
+
+.boastful {
+  display: inline; }
+
+.boastful {
+  img {
+    width: 48px;
+    height: 48px;
+    margin: 3px;
+    border: 0;
+    -webkit-border-top-left-radius: 7px;
+    -webkit-border-bottom-right-radius: 7px;
+    -moz-border-radius-topleft: 7px;
+    -moz-border-radius-bottomright: 7px; } }
+
+.boastful .boastful_pointer {
+  position: absolute;
+  z-index: 999;
+  left: -9999px;
+  opacity: 0.7;
+  display: none;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid black;
+  border-top: 0; }
+
+.boastful .boastful_tweet {
+  position: absolute;
+  z-index: 999;
+  left: -9999px;
+  background-color: #222222;
+  opacity: 0.8;
+  padding: 5px;
+  width: 250px;
+  font-size: 11px;
+  line-height: 1.5em;
+  text-shadow: 1px 1px 0 black;
+  color: #eeeeee;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px; }
+
+.boastful .boastful_handle {
+  font-size: 13px;
+  font-weight: bold; }

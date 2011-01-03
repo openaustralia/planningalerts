@@ -33,6 +33,8 @@ GEM
     erubis (2.6.6)
       abstract (>= 1.0.0)
     factory_girl (1.2.4)
+    fancy-buttons (1.0.4)
+      compass (>= 0.10.6)
     foreigner (0.9.1)
     formtastic (1.1.0)
       actionpack (>= 2.3.0)
@@ -90,6 +92,7 @@ DEPENDENCIES
   email_spec (< 1.0.0)
   erubis
   factory_girl (= 1.2.4)
+  fancy-buttons
   foreigner
   formtastic (~> 1.1.0)
   geokit

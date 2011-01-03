@@ -1,17 +1,10 @@
 - content_for :meta_description, "A free service which searches Australian planning authority websites and emails you details of applications near you"
-- if @alert && @alert.errors
-  #warning
-    = @alert.errors.full_messages.join("<br>").html_safe
-- form_for :alert, @alert, :url => {:action => 'create'} do |f|
-  %ul#ulSignup.form.nobullets
-    %li#liAddress
-      = f.label(:address, '<span class="number">1</span> Enter a street address'.html_safe)
-      = f.text_field(:address, :class => (@alert && @alert.errors.on(:address) ? "textbox error" : "textbox"))
-      %small e.g. 1 Sowerby St, Goulburn, NSW 2580
-    %li#liEmail
-      = f.label(:email, '<span class="number">2</span> Enter your email address'.html_safe)
-      = text_field_tag 'alert[email]', (@alert.email if @alert), :type => 'email', :class => (@alert && @alert.errors.on(:email) ? "textbox error" : "textbox")
-  = submit_tag "Create alert >>", :class => "button"
+- semantic_form_for :alert, @alert, :url => {:action => 'create'} do |f|
+  - f.inputs do
+    = f.input :address, :label => "Enter a street address", :hint => "e.g. 1 Sowerby St, Goulburn, NSW 2580"
+    = f.input :email, :label => "Enter your email address"
+  - f.buttons do
+    = f.commit_button "Create alert"
 %p#privacy
   Our
   %em Privacy Policy

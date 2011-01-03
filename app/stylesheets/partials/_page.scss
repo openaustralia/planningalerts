@@ -6,7 +6,7 @@
 // This makes it easier to have pages without blueprint styles
 // when you're using a single/combined stylesheet.
 
-body.bp {
+body {
   @include blueprint-typography(true);
   @include blueprint-utilities;
   @include blueprint-debug;
@@ -14,4 +14,210 @@ body.bp {
 
 // Remove the scaffolding when you're ready to start doing visual design.
 // Or leave it in if you're happy with how blueprint looks out-of-the-box
-@include blueprint-scaffolding("body.bp");
+//@include blueprint-scaffolding("body");
+
+@import "compass/utilities/lists/horizontal-list";
+
+// Layout elements - i.e. those on every page
+#header {
+  //margin: auto;
+  height: 125px;
+  background: url(/images/banner.png) repeat-x center 0;
+  //position: relative;
+  #banner {
+    @include float-left;
+    margin-left: 10px;
+    margin-top: 6px;
+    h1 {
+      margin-bottom: 0;
+      //white-space: nowrap;
+      //padding: 20px 240px 0 0;
+      font-size: 2.5em;
+      a {
+        color: $yellow;
+        text-decoration: none;
+      } 
+      span {
+        color: $orange; }
+        sup {
+          font-size: 0.3em;
+          text-transform: uppercase;
+        } 
+      }
+      h2 {
+        font-style: italic;
+        font-size: 1.15em;
+    //  border-bottom-style: none;
+    //  white-space: nowrap;
+    //  top: 0;
+    //  padding: 53px 0 0 240px;
+        em {
+          text-decoration: underline; } 
+        }
+  }
+}
+
+#statsbanner {
+//position: absolute;
+//right: 30px;
+//top: 30px;
+  padding-left: 73px;
+  background: url(/images/plane.png) no-repeat 0 center; 
+  @include float-right;
+  margin-right: 10px;
+  margin-top: 25px;
+}
+
+#stats {
+  margin: 0;
+  @include quiet;
+  font-size: 0.9em;
+  //line-height: 1em;
+  background: white;
+  padding-left: 5px;
+  padding-right: 5px;
+  a {
+      text-decoration: none;
+      @include quiet;
+    }
+}
+
+#menu {
+  background: $grey;
+  margin-bottom: 3em;
+  font-size: 0.9em; 
+  ul {
+    @include horizontal-list;
+    @include float-right;
+    //width: $page_width;
+    //margin: 0 auto;
+    li {
+      padding-top: 0.25em;
+      padding-bottom: 0.25em;
+      a {
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+        color: white;
+        text-decoration: none; 
+      }
+      &.selected {
+        background: $orange;
+      } 
+    } 
+  } 
+}
+
+#footer {
+  border-top: dotted 1px $grey;
+  //padding-top: 0.5em;
+  margin-top: 2em;
+  font-size: 0.9em;
+  ul {
+    @include horizontal-list;
+    @include float-left;
+  }
+  #oaf {
+    @include float-right;
+  }
+  #mobile {
+    text-align: center;
+    clear: both;
+  }
+}
+
+// Content
+
+@import "compass/utilities/general/min";
+@import "compass/utilities/links/hover-link";
+
+p a, li a, span a, dd a, dt a, div a {
+  @include hover-link;
+}
+
+.disclaimer {
+  @include quiet;
+  font-size: 0.8em; }
+
+#content {
+  @include min-height(500px);
+  //min-height: 500px; 
+}
+
+#map_div, #pano {
+  @include float-right;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  clear: right;
+}
+
+/* Attention grabbers */
+div.attention {
+  text-align: center;
+}
+
+#privacy, #spnBeta {
+//text-align: center;
+padding-left: 125px;
+padding-right: 125px;
+  font-size: 0.8em;
+  @include quiet;
+  //line-height: 1.4em;
+  em {
+    font-weight: bold;
+    font-style: normal; 
+  } 
+}
+
+.appinfo {
+  @include quiet;
+  font-size: 0.8em;
+  line-height: 1.3em; 
+}
+
+.pagination {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+/* api */
+div.apiitem {
+  border: dotted 1px $grey;
+  background: $almostwhite;
+  padding: 0.5em;
+  margin-top: 1em;
+  code {
+    background: white;
+    display: block;
+    padding: 10px;
+    border: solid 1px $grey;
+  }
+  p {
+    font-size: 0.8em;
+  } 
+}
+
+p.apiexamples {
+  position: relative;
+  top: 1em; 
+}
+
+#hLicenseInfo {
+  background: url(/images/salicense.png) no-repeat right 1em;
+  padding-top: 1em;
+  padding-bottom: 8px; 
+}
+
+body dl dt {
+  margin-top: 0.5em;
+  font-weight: normal;
+}
+
+dl.faq dt {
+  color: $orange;
+}
+
+// Not semantic. Ugh.
+
+.nobullets {
+  @include no-bullets;
+}

@@ -2,5 +2,58 @@
 // a class of "bp". This makes it easier to style
 // forms from scratch if you need to.
 
-form.bp {
-  @include blueprint-form; }
+//form {
+//  @include blueprint-form; }
+
+@import "formtastic_base";
+@import "fancy-buttons";
+
+//$fb-light-text: $font-color;
+$fb-gradient-style: matte;
+$fb-font-size: 1.3em;
+$fb-line-height: 1em;
+
+.commit input { 
+  margin-top: 1em;
+  @include fancy-button($orange); 
+  font-weight: normal;
+}
+
+$floated_total_width: 710px;
+$floated_input_width: 500px;
+$floated_label_width: 200px;
+
+.formtastic {
+  @include float-form;
+  margin-top: 2em;
+  margin-left: 125px;
+  margin-bottom: 2em;
+  li {
+    margin-bottom: 0.5em;
+    &.error {
+      background: inherit;
+      border: inherit;
+      color: inherit;
+      input {
+        background: $yellow;
+      }
+    }
+  }
+  .inline-hints {
+    @include quiet;
+    font-size: 0.8em;
+  }
+  .inline-errors {
+    color: $orange;
+  }
+  li.string input {
+    font-size: 1.3em;
+  }
+}
+
+.formtastic.alert {
+  abbr {
+    display: none;
+  }
+}
+

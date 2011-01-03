@@ -1,13 +1,18 @@
 - content_for :meta_description, "A free service which searches Australian planning authority websites and emails you details of applications near you"
-- if @error
-  #warning= @error
-- form_tag({}, :method => :get) do
-  %ul#ulSignup.form.nobullets
-    %li#liAddress
-      = label_tag(:q, 'Enter a street address')
-      = text_field_tag(:q, @q, :class => (@error ? "textbox error" : "textbox"))
-      %small e.g. 1 Sowerby St, Goulburn, NSW 2580
-  = submit_tag "Search", :class => "button", :name => nil
+- form_tag({}, :method => :get, :class => "formtastic") do
+  %fieldset.inputs
+    %ol
+      %li#q_input.string{:class => ("error" if @error)}
+        = label_tag(:q, "Enter a street address")
+        = text_field_tag(:q, @q)
+        %p.inline-hints e.g. 1 Sowerby St, Goulburn, NSW 2580
+        - if @error
+          %p.inline-errors= @error
+  %fieldset.buttons
+    %ol
+      %li.commit
+        = submit_tag "Search", :name => nil
+
 - if @q
   - unless @other_addresses.empty?
     %p Or did you want?

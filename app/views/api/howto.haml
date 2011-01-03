@@ -1,6 +1,5 @@
 - content_for :page_title, "API"
-%h3
-  PlanningAlerts.org.au API
+%h3= yield :page_title
 %p
   Planning application data is available programmatically as <a href="http://georss.org/">GeoRSS</a> feeds which can
   be used in most web mapping APIs and desktop GIS software like <a href="http://mapufacture.com">mapufacture</a>

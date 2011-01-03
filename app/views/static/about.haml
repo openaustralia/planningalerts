@@ -1,4 +1,5 @@
 - content_for :page_title, "About"
+%h3 About PlanningAlerts
 %p
   You'd probably know if your next door neighbour was going to knock their house down (you'd get a letter through
   the door telling you they had applied for planning permission and asking you what you thought about it). But you'd
@@ -41,11 +42,10 @@
 %p
   If you #{link_to "contribute", get_involved_path} to the project you will get to be on this list.
 
-%h3#authorities Planning authorities currently covered by the service
+%h4#authorities Planning authorities currently covered by the service
 %p
-  %small
-    <span class="highlight">New authorities are being added all the time, so if your local authority isn't listed below
-    #{link_to "sign up any way", new_alert_path} and you'll start receiving alerts once it has been included</span>.
+  <span class="highlight">New authorities are being added all the time, so if your local authority isn't listed below
+  #{link_to "sign up any way", new_alert_path} and you'll start receiving alerts once it has been included</span>.
 %p
   - @authorities.each_with_index do |a, i|
     = "|" unless i == 0
@@ -58,7 +58,7 @@
 %p
   If you are a programmer and would like to write a scraper for your local authority, or work for a local authority
   and would like to make your data available, #{link_to "find out how you can get involved", get_involved_path}.
-%h3#contact
+%h4#contact
   Contact
 %p
   You can get in touch at
