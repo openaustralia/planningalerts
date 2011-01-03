@@ -22,7 +22,7 @@ describe LayarController do
       "actions" => [
         {
           "label" => "More info",
-          "uri" => "http://dev.planningalerts.org.au/applications/101"
+          "uri" => "http://localhost:3000/applications/101"
         }
       ]
     }

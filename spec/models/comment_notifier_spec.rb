@@ -38,7 +38,7 @@ A good thing
 =============================================================================
 This comment was submitted via PlanningAlerts.org.au, a free service
 run by the OpenAustralia Foundation for the public good.
-See http://dev.planningalerts.org.au/applications/123 for more information
+See http://localhost:3000/applications/123 for more information
 
 http://www.openaustraliafoundation.org.au
 =============================================================================

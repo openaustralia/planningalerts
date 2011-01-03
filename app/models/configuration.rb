@@ -1,7 +1,7 @@
 # Stores application configuration settings
 module Configuration
   # URL Stuff
-  HOST = 'dev.planningalerts.org.au'
+  HOST = 'localhost:3000'
   INTERNAL_SCRAPERS_INDEX_URL = 'http://localhost:4567/'
   
   # Size of alert areas
