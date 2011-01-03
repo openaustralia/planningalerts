@@ -1,4 +1,4 @@
-class ConfirmNotifier < ActionMailer::Base
+class EmailConfirmable::Notifier < ActionMailer::Base
   def confirm(object)
     class_name = object.class.name.underscore
     @recipients = object.email
