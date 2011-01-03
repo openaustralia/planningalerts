@@ -16,6 +16,8 @@ GEM
     after_commit (1.0.8)
       activerecord (< 3.0.0)
     builder (3.0.0)
+    compass (0.10.6)
+      haml (>= 3.0.4)
     crack (0.1.8)
     cucumber (0.10.0)
       builder (>= 2.1.2)
@@ -82,6 +84,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  compass (>= 0.10.6)
   cucumber-rails (>= 0.2.4)
   database_cleaner (>= 0.4.3)
   email_spec (< 1.0.0)

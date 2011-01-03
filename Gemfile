@@ -23,6 +23,7 @@ gem 'erubis'
 gem 'i18n', '>= 0.4.0'
 gem 'formtastic', '~> 1.1.0'
 gem 'validates_email_format_of'
+gem "compass", ">= 0.10.6"
 
 group :cucumber do
   gem 'cucumber-rails',   '>=0.2.4'
