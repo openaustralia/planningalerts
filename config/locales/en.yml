@@ -166,6 +166,8 @@
       even: "must be even"
 
   activerecord:
+    models:
+      alert: "Planning Alert"
     errors:
       template:
         header:
