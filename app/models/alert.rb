@@ -5,11 +5,6 @@ class Alert < ActiveRecord::Base
   before_validation :geocode
   before_create :remove_other_alerts_for_this_address
   acts_as_email_confirmable
-  after_create :send_confirmation_email
-  
-  def send_confirmation_email
-    ConfirmNotifier.deliver_confirm(self)
-  end
   
   def location=(l)
     if l

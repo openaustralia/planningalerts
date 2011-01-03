@@ -11,6 +11,8 @@ module EmailConfirmable
       validates_presence_of :email
       validates_email_format_of :email
       before_create :set_confirm_info
+      after_create :send_confirmation_email
+
       named_scope :confirmed, :conditions => {:confirmed => true}
       define_callbacks :after_confirm
     end
@@ -21,6 +23,10 @@ module EmailConfirmable
       self.confirmed = true
       save!
       run_callbacks(:after_confirm)
+    end
+  
+    def send_confirmation_email
+      ConfirmNotifier.deliver_confirm(self)
     end
   
     protected
