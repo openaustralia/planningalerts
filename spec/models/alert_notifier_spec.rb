@@ -39,7 +39,7 @@ describe AlertNotifier do
       @email.body.should == <<-EOF
 The following new planning applications have been found near 24 Bruce Rd, Glenbrook NSW 2773 within 800 m:
 
-FOO STREET, BAR (A1)
+Foo Street, Bar (a1)
 
 Knock something down
 
@@ -47,7 +47,7 @@ http://localhost:3000/applications/1?utm_medium=email&utm_source=alerts
 
 -----------------------------
 
-BAR STREET, FOO (A2)
+Bar Street, Foo (a2)
 
 Put something up
 
