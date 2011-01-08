@@ -83,14 +83,15 @@ class Application < ActiveRecord::Base
   end
   
   def description
-    # Capitalise the first letter of the description field
     description = read_attribute(:description)
-    if description && description.size > 0
-      description[0..0].upcase + description[1..-1]
+    # Fix up the capitilisation if the description is all upper case or all lower case
+    if description && ((description.upcase == description) || (description.downcase == description))
+      description.split('. ').map {|a| a.capitalize}.join('. ')
     else
       # Leave the output unchanged
       description
     end
+    #description
   end
   
   def address

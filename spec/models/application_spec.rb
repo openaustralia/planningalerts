@@ -11,18 +11,27 @@ describe Application do
   
   describe "getting DA descriptions" do
     it "should allow applications to be blank" do
-      a = Application.new(:description => "")
-      a.description.should == ""
+      Application.new(:description => "").description.should == ""
     end
     
     it "should allow the application description to be nil" do
-      a = Application.new(:description => nil)
-      a.description.should be_nil
+      Application.new(:description => nil).description.should be_nil
     end
 
     it "should start descriptions with a capital letter" do
-      a = Application.new(:description => "a description")
-      a.description.should == "A description" 
+      Application.new(:description => "a description").description.should == "A description" 
+    end
+    
+    it "should fix capitilisation of descriptions all in caps" do
+      Application.new(:description => "DWELLING").description.should == "Dwelling"
+    end
+    
+    it "should not capitalise descriptions that are partially in lowercase" do
+      Application.new(:description => "To merge Owners Corporation").description.should == "To merge Owners Corporation"
+    end
+    
+    it "should capitalise the first word of each sentence" do
+      Application.new(:description => "A SENTENCE. ANOTHER SENTENCE").description.should == "A sentence. Another sentence"
     end
   end
   
