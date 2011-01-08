@@ -26,6 +26,36 @@ describe Application do
     end
   end
   
+  describe "getting addresses" do
+    it "should convert words to first letter capitalised form" do
+      Application.new(:address => "1 KINGSTON AVENUE, PAKENHAM").address.should == "1 Kingston Avenue, Pakenham"
+    end
+    
+    it "should not convert words that are not already all in upper case" do
+      Application.new(:address => "In the paddock next to the radio telescope").address.should == "In the paddock next to the radio telescope"
+    end
+    
+    it "should handle a mixed bag of lower and upper case" do
+      Application.new(:address => "63 Kimberley drive, SHAILER PARK").address.should == "63 Kimberley drive, Shailer Park"
+    end
+    
+    it "should not affect dashes in the address" do
+      Application.new(:address => "63-81").address.should == "63-81"        
+    end
+    
+    it "should not affect abbreviations like the state names" do
+      Application.new(:address => "1 KINGSTON AVENUE, PAKENHAM VIC 3810").address.should == "1 Kingston Avenue, Pakenham VIC 3810"
+    end
+    
+    it "should not affect the state names" do
+      Application.new(:address => "QLD VIC NSW SA ACT TAS WA NT").address.should == "QLD VIC NSW SA ACT TAS WA NT"
+    end
+    
+    it "should not affect codes" do
+      Application.new(:address => "R79813 24X").address.should == "R79813 24X"
+    end
+  end
+  
   describe "on saving" do
     it "should geocode the address" do
       loc = mock("Location", :lat => -33.772609, :lng => 150.624263, :suburb => "Glenbrook", :state => "NSW",

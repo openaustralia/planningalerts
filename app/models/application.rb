@@ -93,6 +93,19 @@ class Application < ActiveRecord::Base
     end
   end
   
+  def address
+    address = read_attribute(:address)
+    exceptions = %w{QLD VIC NSW SA ACT TAS WA NT}
+
+    address.split(' ').map do |word|
+      if word != word.upcase || exceptions.include?(word) || word =~ /\d/
+        word
+      else
+        word.capitalize
+      end
+    end.join(' ')
+  end
+  
   # The value (the "fourth" dimension) needs to be scaled to the same units as the distance (km) for
   # this to be meaningful
   def fourd_distance_squared(scaled_value)
