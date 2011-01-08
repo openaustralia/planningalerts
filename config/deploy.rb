@@ -4,6 +4,7 @@ set :application, "planningalerts.org.au/app"
 set :repository,  "git://git.openaustralia.org/planningalerts-app.git"
 
 role :web, "kedumba.openaustraliafoundation.org.au"
+role :db, "kedumba.openaustraliafoundation.org.au", :primary => true
 
 set :use_sudo, false
 set :user, "deploy"
