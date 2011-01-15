@@ -52,8 +52,9 @@ class Authority < ActiveRecord::Base
   end
 
   def latest_application
-    if applications.first
-      applications.first.date_scraped
+    latest = applications.all(:order => 'date_scraped', :limit => 1).first
+    if latest
+      latest.date_scraped
     end
   end
 end
