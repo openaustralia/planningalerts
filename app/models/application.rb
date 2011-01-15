@@ -84,14 +84,16 @@ class Application < ActiveRecord::Base
   
   def description
     description = read_attribute(:description)
-    # Fix up the capitilisation if the description is all upper case or all lower case
-    if description && ((description.upcase == description) || (description.downcase == description))
-      description.split('. ').map {|a| a.capitalize}.join('. ')
-    else
-      # Leave the output unchanged
-      description
+    if description
+      # If whole description is in upper case switch the whole description to lower case
+      description = description.downcase if description.upcase == description  
+      description.split('. ').map do |sentence|
+        words = sentence.split(' ')
+        # Capitalise the first word of the sentence if it's all lowercase
+        words[0] = words[0].capitalize if words[0].downcase == words[0]
+        words.join(' ')
+      end.join('. ')
     end
-    #description
   end
   
   def address

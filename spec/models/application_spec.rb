@@ -33,6 +33,10 @@ describe Application do
     it "should capitalise the first word of each sentence" do
       Application.new(:description => "A SENTENCE. ANOTHER SENTENCE").description.should == "A sentence. Another sentence"
     end
+    
+    it "should only capitalise the word if it's all lower case" do
+      Application.new(:description => 'ab sentence. AB SENTENCE. aB sentence. Ab sentence').description.should ==  'Ab sentence. AB SENTENCE. aB sentence. Ab sentence'
+    end
   end
   
   describe "getting addresses" do
