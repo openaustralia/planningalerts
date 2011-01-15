@@ -50,4 +50,10 @@ class Authority < ActiveRecord::Base
   def contactable?
     !!email
   end
+
+  def latest_application
+    if applications.first
+      applications.first.date_scraped
+    end
+  end
 end

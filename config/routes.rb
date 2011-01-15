@@ -58,6 +58,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources 'authorities', :only => [] do |authority|
     authority.resources :applications, :only => :index
   end
+
+  map.broken_scrapers 'authorities/broken', :controller => 'applications', :action => 'broken_scrapers'
   
   map.connect 'layar/:action', :controller => 'layar'
 
