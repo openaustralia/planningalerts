@@ -13,7 +13,13 @@ class ApplicationsController < ApplicationController
     
     @description = "Recent applications"
     # Don't want the RSS feed to match the paging
-    @rss = applications_url(params.merge(:format => "rss", :page => nil))
+    if params[:authority_id]
+      # Provide a prettier form of the rss url
+      @rss = authority_applications_url(params.merge(:format => "rss", :page => nil))
+    else
+      @rss = applications_url(params.merge(:format => "rss", :page => nil))
+    end
+    
     if params[:authority_id]
       # TODO Handle the situation where the authority name isn't found
       authority = Authority.find_by_short_name_encoded(params[:authority_id])
