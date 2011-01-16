@@ -55,11 +55,9 @@ ActionController::Routing::Routes.draw do |map|
     application.resources 'comments', :only => [:create, :show]
   end
   
-  map.resources 'authorities', :only => [] do |authority|
+  map.resources 'authorities', :only => [], :collection => {:broken => :get} do |authority|
     authority.resources :applications, :only => :index
   end
-
-  map.broken_scrapers 'authorities/broken', :controller => 'authorities', :action => 'broken_scrapers'
   
   map.connect 'layar/:action', :controller => 'layar'
 

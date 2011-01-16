@@ -1,5 +1,5 @@
 class AuthoritiesController < ApplicationController
-  def broken_scrapers
+  def broken
     @authorities = []
     Authority.all.each do |a|
       if a.latest_application
