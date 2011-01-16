@@ -52,7 +52,8 @@ class Authority < ActiveRecord::Base
   end
 
   def latest_application
-    latest = applications.all(:order => 'date_scraped', :limit => 1).first
+    # The applications are sorted by default by the date_scraped because of the default scope on the model
+    latest = applications.find(:first)
     if latest
       latest.date_scraped
     end
