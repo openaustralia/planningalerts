@@ -6,5 +6,6 @@ class AuthoritiesController < ApplicationController
         @authorities << a
       end
     end
+    @authorities.sort! { |a,b| a.latest_application <=> b.latest_application }
   end
 end
