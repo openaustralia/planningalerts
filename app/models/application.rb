@@ -153,6 +153,9 @@ class Application < ActiveRecord::Base
         self.lng = r.lng
         self.suburb = r.suburb
         self.state = r.state
+        # Hack - workaround for inconsistent returned state name (as of 21 Jan 2011)
+        # from Google Geocoder
+        self.state = "NSW" if self.state == "New South Wales"
         self.postcode = r.postcode
       else
         logger.error "Couldn't geocode address: #{address}"
