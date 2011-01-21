@@ -244,6 +244,10 @@ ul#subscribe {
   clear: both;
 }
 
+.match {
+  @include highlight;
+}
+
 // Not semantic. Ugh.
 
 .nobullets {
