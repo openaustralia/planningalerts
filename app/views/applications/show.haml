@@ -64,6 +64,11 @@
 
 - if @application.location
   :javascript
+    $(document).ready(function() {
+      // Strip any parameters off the end of the url
+      $('#boastful').boastful({limit: '14', location: location.href.split('?')[0]});
+    });
+
     $(document).ready(function(){
       var map = new mxn.Mapstraction("map_div","google");
       point = new mxn.LatLonPoint(#{@application.lat},#{@application.lng});
