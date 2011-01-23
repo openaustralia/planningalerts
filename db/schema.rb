@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101222052304) do
+ActiveRecord::Schema.define(:version => 20110123120310) do
 
   create_table "alerts", :force => true do |t|
     t.string   "email",         :limit => 120, :null => false
@@ -75,6 +75,20 @@ ActiveRecord::Schema.define(:version => 20101222052304) do
   create_table "stats", :force => true do |t|
     t.string  "key",   :limit => 25, :null => false
     t.integer "value",               :null => false
+  end
+
+  create_table "typus_users", :force => true do |t|
+    t.string   "first_name",       :default => "",    :null => false
+    t.string   "last_name",        :default => "",    :null => false
+    t.string   "role",                                :null => false
+    t.string   "email",                               :null => false
+    t.boolean  "status",           :default => false
+    t.string   "token",                               :null => false
+    t.string   "salt",                                :null => false
+    t.string   "crypted_password",                    :null => false
+    t.string   "preferences"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_foreign_key "applications", "authorities", :name => "applications_authority_id_fk"
