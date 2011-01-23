@@ -3,8 +3,6 @@
 # Use the README file as a reference to customize settings.
 
 admin:
-  Alert: create, read, update, delete
-  Application: create, read, update, delete
-  Authority: create, read, update, delete
-  Comment: create, read, update, delete
-  Stat: create, read, update, delete
+  Alert: read
+  Authority: create, read, update
+  Comment: read, update

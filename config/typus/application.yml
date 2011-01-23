@@ -5,55 +5,36 @@
 Alert:
   fields:
     default: email, address, last_sent, lat, lng, confirm_id, confirmed, radius_meters, lga_name
-    list: email, address, last_sent, lat, lng, confirm_id, confirmed, radius_meters, lga_name
+    list: email, address, last_sent, confirmed, radius_meters
     form: email, address, last_sent, lat, lng, confirm_id, confirmed, radius_meters, lga_name
   order_by: 
   relationships: 
   filters: 
-  search: 
-  application: planningalerts-app
-
-Application:
-  fields:
-    default: council_reference, info_url, comment_url, lat, lng, date_scraped, date_received, suburb, state, postcode, on_notice_from, on_notice_to, authority
-    list: council_reference, info_url, comment_url, lat, lng, date_scraped, date_received, suburb, state, postcode, on_notice_from, on_notice_to, authority
-    form: council_reference, address, description, info_url, comment_url, lat, lng, date_scraped, date_received, suburb, state, postcode, on_notice_from, on_notice_to, authority
-  order_by: 
-  relationships: authority, comments
-  filters: 
-  search: 
-  application: planningalerts-app
+  search: email, address
+  application: PlanningAlerts
 
 Authority:
   fields:
     default: full_name, short_name, feed_url, disabled, state, email
-    list: full_name, short_name, feed_url, disabled, state, email
-    form: full_name, short_name, feed_url, disabled, state, email
+    list: full_name, disabled, state, email
+    form: full_name, short_name, state, feed_url, email, disabled
+    options:
+      read_only: full_name, short_name, feed_url, state
   order_by: 
   relationships: applications
   filters: 
-  search: 
-  application: planningalerts-app
+  search: full_name
+  application: PlanningAlerts
 
 Comment:
   fields:
-    default: email, name, confirm_id, confirmed, application
-    list: email, name, confirm_id, confirmed, application
-    form: text, email, name, confirm_id, confirmed, application
-  order_by: 
-  relationships: application
+    default: email, name, confirm_id, confirmed
+    list: email, name, confirmed, text
+    form: text, email, name, confirm_id, confirmed
+    options:
+      read_only: text, email, name, application, confirm_id, confirmed
+  order_by:
+  relationships:
   filters: 
-  search: name
-  application: planningalerts-app
-
-Stat:
-  fields:
-    default: key, value
-    list: key, value
-    form: key, value
-  order_by: 
-  relationships: 
-  filters: 
-  search: 
-  application: planningalerts-app
-
+  search: text, email
+  application: PlanningAlerts
