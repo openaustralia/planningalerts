@@ -9,7 +9,7 @@ class Authority < ActiveRecord::Base
   end
   
   def self.load_from_web_service(info_logger = logger)
-    page = Nokogiri::XML(open(Configuration::INTERNAL_SCRAPERS_INDEX_URL).read)
+    page = Nokogiri::XML(open(::Configuration::INTERNAL_SCRAPERS_INDEX_URL).read)
     page.search('scraper').each do |scraper|
       short_name = scraper.at('authority_short_name').inner_text
       authority = Authority.find_by_short_name(short_name)

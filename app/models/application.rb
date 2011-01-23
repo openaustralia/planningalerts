@@ -24,7 +24,7 @@ class Application < ActiveRecord::Base
   
   # Optionally pass a logger which is just used for sending informational messages to do with this long-running job to
   def self.collect_applications(authorities, info_logger = logger)
-    start_date = Date.today - Configuration::SCRAPE_DELAY
+    start_date = Date.today - ::Configuration::SCRAPE_DELAY
     # Go through the dates in reverse chronological order
     (start_date..(Date.today)).to_a.reverse.each do |date|
       info_logger.info "Scraping #{authorities.count} authorities with date #{date}"
