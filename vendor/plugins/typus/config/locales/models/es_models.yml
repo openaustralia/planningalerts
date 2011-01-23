@@ -1,0 +1,13 @@
+es:
+  activerecord:
+    models:
+      typus_user: Usuario
+    attributes:
+      typus_user:
+        email: "Correo electronico"
+        first_name: "Nombre"
+        last_name: "Apellidos"
+        password: "Contraseña"
+        password_confirmation: "Confirmar contraseña"
+        status: "Estado"
+        role: "Rol"

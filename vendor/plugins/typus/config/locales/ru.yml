@@ -1,0 +1,118 @@
+# Russian (ru) translations for Typus
+# by Alexey Noskov <http://github.com/alno>
+
+ru:
+
+  "A valid token is required": "Необходим корректный ключ"
+  "Actions": "Действия"
+  "Active": "Активный"
+  "Add": "Добавить"
+  "Add new": "Добавить новый"
+  "Are you sure?":  "Вы уверены?"
+  "Are you sure you want to leave this page?": "Вы уверены, что хотите покинуть страницу?"
+  "Are you sure you want to sign out and end your session?":  "Вы уверены, что хотите выйти и завершить сессию?"
+  "As you're not the admin or the owner of this record you cannot edit it": "Вы не администратор и не владелец записи и не можете ее редактировать"
+
+  "Change password": "Сменить пароль"
+  "Change %{attribute}?": "Изменить %{attribute}?"
+  "Checked if active": "Отмечено, если активно"
+  "Click OK to continue, or click Cancel to stay on this page": "нажмите Ок, чтобы продолжить или Отмена, чтобы остаться на этой странице."
+  "Create %{resource}": "Создать %{resource}"
+
+  "Dashboard": "Обзор"
+  "Do you want to cancel it?": "Вы хотите отменить это?"
+  "Documentation": "Документация"
+  "Down": "Вниз"
+
+  "Edit": "Изменить"
+  "Enter your email below to create the first user": 
+  "Error! Typus User or role doesn't exist": 
+
+  "False": 
+  "Filter": "фильтр"
+  "Filter by": "фильтр по"
+
+  "Go to": "Перейти к"
+
+  "I remember my password": "Запомнить пароль"
+  "If you didn't request a password update, you can ignore this message": "Если Вы не запрашивали обновление пароля, Вы можете проигнорировать это сообщение."
+  "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost": "Если вы сделали какие-то изменения, не кликая на Обновить/Сохранить, то они будут утеряны."
+  "Inactive": "Неактивный"
+
+  "Last few days": "Последние дней"
+  "Last 7 days": "Последние 7 дней"
+  "Last 30 days": "Последние 30 дней"
+  "License": "Лицензия"
+  "Logged as": "Вы вошли как"
+  "Login": "Редактировать"
+
+  "New": "Новый"
+  "Next": "Следующий"
+
+  "Options": "Опции"
+
+  "Password recovery link sent to your email": "Ссылка для восставновления пароля выслана по указанному E-Mail"
+  "Previous": "Предыдующий"
+
+  "Record moved %{to}": "Запись перемещена в %{to}."
+  "Recover password": "Восстановить пароль"
+  "Remove": "Удалить"
+  "Remove %{attribute}": "Удалить %{attribute}"
+  "Remove filter": "Удалить фильтр"
+  "Reset password": "Сбросить пароль"
+  "Resources": "Ресурсы"
+
+  "Save %{resource}":  "Сохранить"
+  "Search": "Поиск"
+  "Search by": "Искать по"
+  "Send us feedback":  "Обратная связь"
+  "Setup": "Установки"
+  "Show": "Показать"
+  "Sign in": "Войти"
+  "Sign out": "Выйти"
+  "Sign up": "Зарегистрироваться"
+  "Submit a bug report": 
+  "System Users Administration": "Администрирование системных пользователей"
+
+  "That doesn't seem like a valid email address": "E-Mail некорректен"
+  "The email and/or password you entered is invalid": "E-Mail или пароль введены неверно"
+  "There are no %{records}": "%{records} не найдены"
+  "There are no %{records} under this filter": "%{records} по такому фильтру не найдены"
+  "There are not defined applications in config/typus/*.yml": "Ни одного приложения не определено в config/typus/*.yml"
+  "Today": "Сегодня"
+  "Toggle is disabled": "Переключение отключено"
+  "True": "ВЕРНО"
+
+  "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "Отсоединить %{unrelate_model} от %{unrelate_model_from}?"
+  "Up": "Вверх"
+
+  "View %{attribute}": 
+  "View site": "Перейти к сайту"
+
+  "You can update your password at": "Вы можете установить свой пароль на"
+  "You can't change your role": "Вы не можете менять свою собственную роль"
+  "You can't remove yourself": "Вы не можете удалить себя"
+  "You can't toggle your status": "Вы не можете менять свой статус"
+  "Your new password is %{password}": "Ваш новый пароль: %{password}."
+  "You're adding a new %{resource_from}": "Вы добавляете новый %{resource_from}."
+  "You're adding a new %{resource_from} to %{resource_to}": "Вы добавляете новый %{resource_from} для %{resource_to}."
+  "You're updating a %{resource_from}": "Вы редактируете %{resource_from}."
+  "You're updating a %{resource_from} for %{resource_to}": "Вы редактируете %{resource_from} для %{resource_to}."
+  "You're not allowed to remove Typus Users": "Вам не позволено удалять системных пользователей"
+  "You're not allowed to toggle status": "Вам не позволено менять статус"
+  "You are about to delete a %{model}.\nAre you sure you want to continue?": 
+
+  "%{attachment} can't be removed": "%{attachment} не может быть удалено"
+  "%{attachment} removed": "%{attachment} удалено"
+  "%{model} filtered by %{filtered_by}": "%{model}, фильтрация по %{filtered_by}"
+  "%{current_user_role} can't delete this item": "%{current_user_role} не может удалить эту запись"
+  "%{current_user_role} can't display items": "%{current_user_role} не может отобразить записи"
+  "%{current_user_role} can't go to %{action} on %{controller}":  "%{current_user_role} не может перейти к %{action} в %{controller}."
+  "%{current_user_role} can't perform action. (%{action})": "%{current_user_role} не может выполнить действие. (%{action})"
+  "%{model} successfully created": "%{model} создан"
+  "%{model} successfully removed": "%{model} удален"
+  "%{model} successfully updated": "%{model} успешно обновлен"
+  "%{model} %{attribute} changed": "%{model} %{attribute} изменен"
+  "%{model_a} related to %{model_b}": "%{model_a} присоединен с %{model_b}."
+  "%{model_a} successfully assigned to %{model_b}": "%{model_a} добавлен к %{model_b}."
+  "%{model_a} unrelated from %{model_b}": "%{model_a} отсоединен от %{model_b}."

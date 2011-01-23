@@ -1,0 +1,11 @@
+first:
+  id: 1
+  caption: This is the caption.
+  resource_type: Post
+  resource_id: 1
+
+second:
+  id: 2
+  caption: This is the second caption.
+  resource_type: Post
+  resource_id: 1

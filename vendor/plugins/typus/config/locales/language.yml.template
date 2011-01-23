@@ -1,0 +1,118 @@
+# <language> translations for Typus (template)
+# by <your_name> <contact_form>
+
+<language>:
+
+  "A valid token is required": 
+  "Actions": 
+  "Active": 
+  "Add": 
+  "Add new": 
+  "Are you sure?": 
+  "Are you sure you want to leave this page?": 
+  "Are you sure you want to sign out and end your session?": 
+  "As you're not the admin or the owner of this record you cannot edit it": 
+
+  "Change %{attribute}?": 
+  "Change password": 
+  "Checked if active": 
+  "Click OK to continue, or click Cancel to stay on this page": 
+  "Create %{resource}": 
+
+  "Dashboard": 
+  "Do you want to cancel it?": 
+  "Documentation": 
+  "Down": 
+
+  "Edit": 
+  "Enter your email below to create the first user": 
+  "Error! Typus User or role doesn't exist": 
+
+  "False": 
+  "Filter": 
+  "Filter by": 
+
+  "Go to": 
+
+  "I remember my password": 
+  "If you didn't request a password update, you can ignore this message": 
+  "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost": 
+  "Inactive": 
+
+  "Last few days": 
+  "Last 30 days": 
+  "Last 7 days": 
+  "License": 
+  "Logged as": 
+  "Login": 
+
+  "New": 
+  "Next": 
+
+  "Options": 
+
+  "Password recovery link sent to your email": 
+  "Previous": 
+
+  "Record moved %{to}": 
+  "Recover password": 
+  "Remove": 
+  "Remove %{attribute}": 
+  "Remove filter": 
+  "Reset password": 
+  "Resources": 
+
+  "Save %{resource}": 
+  "Search": 
+  "Search by": 
+  "Send us feedback": 
+  "Setup": 
+  "Show": 
+  "Sign in": 
+  "Sign out": 
+  "Sign up": 
+  "Submit a bug report": 
+  "System Users Administration": 
+
+  "That doesn't seem like a valid email address": 
+  "The email and/or password you entered is invalid": 
+  "There are no %{records}": 
+  "There are no %{records} under this filter": 
+  "There are not defined applications in config/typus/*.yml": 
+  "Today": 
+  "Toggle is disabled": 
+  "True": 
+
+  "Unrelate %{unrelate_model} from %{unrelate_model_from}?": 
+  "Up": 
+
+  "View %{attribute}": 
+  "View site": 
+
+  "You're adding a new %{resource_from}": 
+  "You're adding a new %{resource_from} to %{resource_to}": 
+  "You're not allowed to toggle status": 
+  "You're not allowed to remove Typus Users": 
+  "You're updating a %{resource_from}": 
+  "You're updating a %{resource_from} for %{resource_to}": 
+  "You are about to delete a %{model}.\nAre you sure you want to continue?": 
+  "You can update your password at": 
+  "You can't change your role": 
+  "You can't remove yourself": 
+  "You can't toggle your status": 
+  "Your new password is %{password}": 
+
+  "%{attachment} can't be removed": 
+  "%{attachment} removed": 
+  "%{current_user_role} can't delete this item": 
+  "%{current_user_role} can't display items": 
+  "%{current_user_role} can't go to %{action} on %{controller}": 
+  "%{current_user_role} can't perform action. (%{action})": 
+  "%{model} filtered by %{filtered_by}": 
+  "%{model} successfully created": 
+  "%{model} successfully removed": 
+  "%{model} successfully updated": 
+  "%{model} %{attribute} changed": 
+  "%{model_a} related to %{model_b}": 
+  "%{model_a} successfully assigned to %{model_b}": 
+  "%{model_a} unrelated from %{model_b}": 

@@ -1,0 +1,26 @@
+<%
+  if params[filter.to_s].is_a?(Hash)
+    date_from = params[filter.to_s]["from"]
+    date_to = params[filter.to_s]["to"]
+  else
+    date_from = ""
+    date_to = ""
+  end
+
+  date_format = Date::DATE_FORMATS[@resource[:class].typus_date_format(filter)]
+%>
+
+<h2><%= @resource[:class].human_attribute_name(filter) %></h2>
+<ul>
+<% form_tag url_for(:controller => params[:controller], :action => params[:action]), :method => :get do %>
+  <li>
+    <%= text_field_tag "#{filter}[from]", date_from, :size => 10, :class => :date_input, :date_format => date_format %>
+    -
+    <%= text_field_tag "#{filter}[to]", date_to, :size => 10, :class => :date_input, :date_format => date_format %>
+  </li>
+  <li>
+    <%= hidden_params.sort.join("\n") %>
+    <%= submit_tag _("Filter") %>
+  </li>
+<% end %>
+</ul>

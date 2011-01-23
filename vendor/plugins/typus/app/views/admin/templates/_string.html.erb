@@ -1,0 +1,22 @@
+<%
+
+  # Read only fields.
+  if @resource[:class].typus_field_options_for(:read_only).to_s.include?(attribute)
+    custom = { :readonly => 'readonly' }
+    label_text << " <small>#{_("Read only")}</small>"
+  end
+
+  # Auto generated fields.
+  if @resource[:class].typus_field_options_for(:auto_generated).include?(attribute)
+    custom = { :auto_generated => true }
+    label_text << " <small>#{_("Auto generated")}</small>"
+  end
+
+  options.merge!(custom) if custom
+
+%>
+
+<li>
+  <%= form.label attribute, label_text %>
+  <%= form.text_field attribute, options %>
+</li>

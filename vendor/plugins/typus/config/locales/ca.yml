@@ -1,0 +1,118 @@
+# Catalan translations for Typus
+# by Lleïr Borràs <http://github.com/lleirborras>
+
+ca:
+
+  "A valid token is required": "Es necessita un token vàlid."
+  "Actions": "Accions"
+  "Active": "Actiu"
+  "Add": "Afegir"
+  "Add new": "Afegir nou"
+  "Are you sure?": "Estàs segur?"
+  "Are you sure you want to leave this page?": "Estàs segur que vols abandonar aquesta pàgina?"
+  "Are you sure you want to sign out and end your session?": "Estàs segur que vols sortir i tancar la sessió?"
+  "As you're not the admin or the owner of this record you cannot edit it": "Com que no ets l'administrador o el propietari d'aquest registre no el pots editar."
+
+  "Change password": "Canviar contrassenya"
+  "Change %{attribute}?": "Canviar %{attribute}?"
+  "Checked if active": "Marca-ho per activar"
+  "Click OK to continue, or click Cancel to stay on this page": "Prem OK per continuar, o prem Cancel·lar per romandre en aquesta página."
+  "Create %{resource}": "Crear %{resource}"
+
+  "Dashboard": "Panell de control"
+  "Do you want to cancel it?": "Vols cancel·lar-lo?"
+  "Documentation": "Documentació"
+  "Down": "Baixar"
+
+  "Edit": "Editar"
+  "Enter your email below to create the first user": "Introdueix el teu email per crear el primer usuari."
+  "Error! Typus User or role doesn't exist": "Error! Typus User o el rol no existixen."
+
+  "False": "Fals"
+  "Filter": "Filtrar"
+  "Filter by": "Filtrar per"
+
+  "Go to": "Anar a"
+
+  "I remember my password": "Recordo la meva contrassenya"
+  "If you didn't request a password update, you can ignore this message": "Si no has demanat una actualització de la teva contrassenya, pots ignorar aquest missatge."
+  "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost": "Si has realitzat algun canvi en els camps sense premer el botó Guardar/Actualitzar, els teus canvis es perdran."
+  "Inactive": "Inactiu"
+
+  "Last few days": "Últims dies"
+  "Last 30 days": "Últims 30 dies"
+  "Last 7 days": "Últims 7 dies"
+  "License": "Llicència"
+  "Logged as": "Identificat com"
+  "Login": "Login"
+
+  "New": "Nou"
+  "Next": "Següent"
+
+  "Options": "Opcions"
+
+  "Password recovery link sent to your email": "L'enllaç de recuperació de contrassenya enviat al teu correu electrònic."
+  "Previous": "Anterior"
+
+  "Record moved %{to}": "Registre desplaçat %{to}."
+  "Recover password": "Recuperar contrassenya"
+  "Remove": "Esborrar"
+  "Remove %{attribute}": "Esborrar %{attribute}"
+  "Remove filter": "Treure filtre"
+  "Reset password": "Canviar contrassenya"
+  "Resources": "Recursos"
+
+  "Save %{resource}": "Guardar %{resource}"
+  "Search": "Cercar"
+  "Search by": "Cercar per"
+  "Setup": "Configurar"
+  "Send us feedback": "Envians comentaris"
+  "Show": "Mostrar"
+  "Sign in": "Entrar"
+  "Sign out": "Sortir"
+  "Sign up": "Crear compte"
+  "Submit a bug report": "Informar d'un error"
+  "System Users Administration": "Administrar usuaris del sistema"
+
+  "That doesn't seem like a valid email address": "Això no sembla ser una adreça de correu electrònic vàlida."
+  "The email and/or password you entered is invalid": "El correu i/o la contrasenya proporcionats no són vàlids."
+  "There are not defined applications in config/typus/*.yml": "No hi ha aplicacions definides a config/typus/*.yml"
+  "There are no %{records}": "No hi han %{records}."
+  "There are no %{records} under this filter": "No hi han %{records} amb aquest filtre."
+  "Today": "Avui"
+  "Toggle is disabled": "Alternar està desactivat."
+  "True": "Cert"
+
+  "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "Deslligat %{unrelate_model} de %{unrelate_model_from}?"
+  "Up": "Pujar"
+
+  "You're adding a new %{resource_from}": "Estàs afegint un nou %{resource_from}."
+  "You're adding a new %{resource_from} to %{resource_to}": "Estàs afegint un nou %{resource_from} a %{resource_to}."
+  "You're not allowed to remove Typus Users": "No pots esborrar usuaris de typus."
+  "You're not allowed to toggle status": "No pots canviar el teu estat."
+  "You are about to delete a %{model}.\nAre you sure you want to continue?": 
+  "You can update your password at": "Pots actualitzar la teva contrassenya a "
+  "You can't change your role": "No pots canviar-te tu mateix el rol."
+  "You can't remove yourself": "No et pots eliminar a tu mateix."
+  "You can't toggle your status": "No pots canviar-te l'estat."
+  "You're updating a %{resource_from}": "Estàs actualitzant un %{resource_from}."
+  "You're updating a %{resource_from} for %{resource_to}": "Estàs actualitzant un %{resource_from} de %{resource_to}."
+  "Your new password is %{password}": "La teva nova contrassenya és %{password}."
+
+  "View %{attribute}": "Veure %{attribute}"
+  "View site": "Veure la web"
+
+  "%{attachment} can't be removed": "%{attachment} no es pot esborrar."
+  "%{attachment} removed": "%{attachment} esborrat."
+  "%{current_user_role} can't delete this item": "%{current_user_role} no pot esborrar aquest element."
+  "%{current_user_role} can't display items": "%{current_user_role} no pot mostrar els elements."
+  "%{current_user_role} can't go to %{action} on %{controller}":  "%{current_user_role} no pot visitar %{action} a %{controller}."
+  "%{current_user_role} can't perform action. (%{action})": "%{current_user_role} no pot realitzar l'acció. (%{action})"
+  "%{model} filtered by %{filtered_by}": "%{model} filtrats per %{filtered_by}"
+  "%{model} successfully created": "%{model} satisfactòriament creat."
+  "%{model} successfully updated": "%{model} satisfactòriament actualitzat."
+  "%{model} successfully removed": "%{model} satisfactòriament eliminat."
+  "%{model} %{attribute} changed": "%{model} %{attribute} canviat."
+  "%{model_a} related to %{model_b}": "%{model_a} relacionat amb %{model_b}."
+  "%{model_a} successfully assigned to %{model_b}": "%{model_a} assignat satisfactòriament a %{model_b}."
+  "%{model_a} unrelated from %{model_b}": "%{model_a} no està relacionat amb %{model_b}."

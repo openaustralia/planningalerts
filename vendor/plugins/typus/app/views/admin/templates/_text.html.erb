@@ -1,0 +1,9 @@
+<%
+  custom = { :rows => @resource[:class].typus_options_for(:form_rows) }
+  options = options.merge!(custom)
+%>
+
+<li>
+  <%= form.label attribute, label_text %>
+  <%= form.text_area attribute, options %>
+</li>

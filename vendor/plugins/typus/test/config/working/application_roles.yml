@@ -1,0 +1,25 @@
+admin:
+  Asset: create, read, update, delete
+  Category: create, read, update, delete
+  Comment: create, read, update, delete
+  Delayed::Task: all
+  Git: index, commit
+  Order:
+  Page: create, read, update, delete, rebuild, rebuild_all
+  Post: create, read, update, delete
+  Status: index
+  WatchDog: index, cleanup
+  View: create, read, update, delete
+
+editor:
+  Category: create, read, update
+  Comment: read, update, delete
+  Git: index
+  Post: create, read, update
+  TypusUser: read, update
+  View: create, read, update, delete
+
+designer:
+  Category: read, update
+  Comment: read
+  Post: read, update

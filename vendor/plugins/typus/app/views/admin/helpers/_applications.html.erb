@@ -1,0 +1,39 @@
+<% applications.each do |app, models| %>
+
+  <table class="typus">
+
+    <tr>
+      <th colspan="2"><%= _(app) %></th>
+    </tr>
+
+    <% models.each do |model| %>
+
+      <%
+
+        klass = model.constantize
+        klass_resource = klass.name.tableize
+        klass_human_name = klass.pluralized_human_name
+
+        admin_items_path = { :controller => "admin/#{klass_resource}" }
+        new_admin_item_path = { :controller => "admin/#{klass_resource}", :action => 'new'}
+
+      %>
+
+      <tr class="<%= cycle('even', 'odd') %>">
+
+        <td>
+          <%= link_to klass_human_name, admin_items_path %><br />
+          <small><%= _(klass.typus_description) if !klass.typus_description.nil? %></small>
+        </td>
+
+        <td class="right">
+          <small><%= link_to_if @current_user.can?('create', klass), _("Add"), new_admin_item_path %></small>
+        </td>
+
+      </tr>
+
+    <% end %>
+
+  </table>
+
+<% end %>

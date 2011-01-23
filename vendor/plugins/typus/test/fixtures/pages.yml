@@ -1,0 +1,41 @@
+published:
+  id: 1
+  title: Published Page
+  body: Content of the published page.
+  is_published: true
+  parent_id:
+
+unpublished:
+  id: 2
+  title: Unpublished Page
+  body: Content of the unpublished page.
+  is_published: false
+  parent_id: 1
+
+section:
+  id: 3
+  title: Section
+  body: This is a section.
+  is_published: true
+  parent_id: 
+
+subsection_1:
+  id: 4
+  title: Subsection 1
+  body: This is a subsection.
+  is_published: true
+  parent_id: 3
+
+subsection_2:
+  id: 5
+  title: Subsection 2
+  body: This is a subsection.
+  is_published: true
+  parent_id: 3
+
+subsubsection:
+  id: 6
+  title: Subsubsection
+  body: This is a subsubsection.
+  is_published: true
+  parent_id: 5

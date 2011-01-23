@@ -1,0 +1,3 @@
+require 'typus'
+
+Typus.boot!

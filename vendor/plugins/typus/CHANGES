@@ -1,0 +1,68 @@
+= 0.9.40 / 2010-02-??
+
+[X] Refactor all forms to be able to use formtastic.
+[X] Cleanup translation files.
+[X] Removed FIXME tests.
+[X] Pass attribute as symbol.
+[X] Simplify configuration files.
+[X] Added '/' to admin_edit_typus_user_path because was not linking to 
+    the right path on the namespaced models.
+[X] Updated generator defaults.
+[X] Write CSV file to disk and then send_file.
+[X] Replaced CSV separator. Now uses ';' instead of ','.
+[X] Do not show selector on habtm if there are more than 500 records.
+[X] Paginate habtm relationships. Was implemented in the has_many.
+[X] Fixed unrelate action. Was not working properly when not using 
+    Rails default table names.
+[X] Do not humanize fields on the csv generator. We want to keep the 
+    real field name.
+[X] Recover password functionality now only needs the email to be defined.
+[X] Added json export format.
+[X] Added default route with conditions. (Ben Scofield)
+[X] We should be able to set preferences and store them on the database.
+[X] Fixed stylesheet and search to be able to use `relative_url_root`.
+[X] Cleanup `display_link_to_previous` helper.
+[X] Cleanup `build_typus_list` helper.
+[X] Fix back_to when using `relative_url_root`.
+[X] Remove toggle option. We always enable it so it's a good default.
+[X] When displaying an item with multiple attachments fancybox preview 
+    was not working properly because there where multiple items with the 
+    same id.
+[X] Move partial helpers to `app/views/admin/helpers`.
+[X] Do not set ActionMailer::Base.default_url_options[:host] on the 
+    controller.
+[X] Cleanup `applications` & `resources`.
+[-] Allow users to download the demo hosted at heroku.com
+[-] Move html code from helpers to partials.
+[ ] Add API authentication.
+[ ] Fix problems on routes.rb when using namespaced models.
+[ ] Show the right content on the selectors when listing records on tables.
+[ ] Update fancybox to the latest version. Fix paths to make it work when
+    `relative_url_root` is active. (and make a donation)
+[ ] Add has_many through relationships.
+[ ] Test default typus forms and remove old tests.
+[ ] Fixed and tested read-only fields.
+[ ] Fixed and tested auto-generated fields.
+[ ] Fixed and tested trees.
+[ ] Fix all fixme tests.
+[ ] Test _form.html.erb can be overwrited by model.
+[ ] Show auto_generated, read_only on string fields. (_string.html.erb)
+[ ] Pass options hash to form fields.
+[ ] Fix css to display correctly "select" fields in relationships.
+[ ] Make tests work again.
+[ ] Remove Typus "blue" color and use something more neutral.
+[ ] Ajax pagination. (?)
+[ ] Generate views for custom actions on the controllers/models. This should 
+    verify the view doesn't exist and create it.
+[ ] Support for XSS.
+[X] Replace "render :partial => 'template', :locals => {}", by 
+    "render 'template', :local => 'local'".
+[X] Add support for custom typus_user on the generator.
+[ ] Shorten sidebar selectors. (AFS)
+[ ] Add test for `typus_table_selector`.
+[X] Clicking on a filter removes is. (Gaston Kleiman)
+[X] Possibility to filter by date ranges. (Gaston Kleiman)
+[ ] Use `inherit_views` code to `inherit_views`.
+[ ] Forever loop when schema has not been migrated.
+[ ] Pagination doesn't work properly when having multiple paginators on edit page
+[ ] Add support for 'has_one' relationships.

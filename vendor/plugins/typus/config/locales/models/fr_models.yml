@@ -1,0 +1,13 @@
+fr:
+  activerecord:
+    models:
+      typus_user: "Utilisateur admin"
+    attributes:
+      typus_user:
+        email: 
+        first_name: "Prénom"
+        last_name: "Nom de famille"
+        password: "Mot de passe"
+        password_confirmation: "Confirmation du mot de passe"
+        status: "État"
+        role: 

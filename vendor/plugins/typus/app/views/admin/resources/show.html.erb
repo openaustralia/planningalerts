@@ -1,0 +1,45 @@
+<% content_for :sidebar do %>
+  <%= typus_block :location => @resource[:self], :partial => 'sidebar' %>
+  <%= actions %>
+  <%= search %>
+<% end %>
+
+<h2><%= link_to @resource[:pluralized], :action => 'index' %> &rsaquo; 
+    <%= _("Show") %></h2>
+
+<%= typus_block :location => @resource[:self], :partial => 'show' %>
+
+<dl>
+<%- @fields.each do |field| -%>
+  <dt><%=h @resource[:class].human_attribute_name(field.first) %></dt>
+  <%-
+    data_type = field.last
+    raw_data = @item.send(field.first)
+    data = case data_type
+           when :boolean
+             boolean_hash = @resource[:class].typus_boolean(field.first)
+             !raw_data.nil? ? boolean_hash["#{raw_data}".to_sym] : @resource[:class].typus_options_for(:nil)
+           when :belongs_to
+             if !raw_data.nil?
+               controller = raw_data.class.name.extract_resource.pluralize
+               action = raw_data.class.typus_options_for(:default_action_on_item)
+               options = { :controller => controller, :action => action, :id => raw_data }
+               link_to raw_data.to_label, options
+             else
+               h(raw_data)
+             end
+           when :file
+             typus_preview(@item, field.first)
+           when :text
+             defined?(RDiscount) ? markdown(raw_data) : simple_format(h(raw_data))
+           when :selector
+             @item.mapping(field.first)
+           else
+             h(raw_data)
+           end
+  -%>
+  <dd><%= !data.blank? ? data : ('&#151;').html_safe %></dd>
+<%- end -%>
+</dl>
+
+<%= typus_relationships %>

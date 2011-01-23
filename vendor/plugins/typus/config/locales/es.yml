@@ -1,0 +1,118 @@
+# Spanish translations for Typus
+# by Felipe Talavera <http://github.com/flype>
+
+es:
+
+  "A valid token is required": "Se requiere un token válido."
+  "Actions": "Acciones"
+  "Active": "Activo"
+  "Add": "Añadir"
+  "Add new": "Añadir nuevo"
+  "Are you sure?": "¿Estás seguro?"
+  "Are you sure you want to leave this page?": "¿Estás seguro que quieres abandonar esta página?"
+  "Are you sure you want to sign out and end your session?": "¿Estás seguro que quieres salir y cerrar la sessión?"
+  "As you're not the admin or the owner of this record you cannot edit it": "Como no eres el admin o el propietario de este registro no puedes editarlo."
+
+  "Change password": "Cambiar contraseña"
+  "Change %{attribute}?": "Cambiar %{attribute}?"
+  "Checked if active": "Marca para activar"
+  "Click OK to continue, or click Cancel to stay on this page": "Pulse OK para continuar, o pulse Cancelar para permanecer en esta página."
+  "Create %{resource}": "Crear %{resource}"
+
+  "Dashboard": "Panel de control"
+  "Do you want to cancel it?": "¿Quieres cancelarlo?"
+  "Documentation": "Documentación"
+  "Down": "Bajar"
+
+  "Edit": "Editar"
+  "Enter your email below to create the first user": "Introduce tu email para crear el primer usuario."
+  "Error! Typus User or role doesn't exist": "Error! Typus User o el role no existen."
+
+  "False": "Falso"
+  "Filter": "Filtrar"
+  "Filter by": "Filtrar por"
+
+  "Go to": "Ir a"
+
+  "I remember my password": "Recuerdo mi contraseña"
+  "If you didn't request a password update, you can ignore this message": "Si no pediste una actualización de tu contraseña, puedes ignorar este mensaje."
+  "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost": "Si has relizado algún cambio en los campos sin pulsar en el botón de Guardar/Actualizar, tus cambios se perderán."
+  "Inactive": "Inactivo"
+
+  "Last few days": "Últimos dias"
+  "Last 30 days": "Últimos 30 dias"
+  "Last 7 days": "Últimos 7 dias"
+  "License": "Licencia"
+  "Logged as": "Autenticado como"
+  "Login": "Login"
+
+  "New": "Nuevo"
+  "Next": "Siguiente"
+
+  "Options": "Opciones"
+
+  "Password recovery link sent to your email": "Enlace de recuperación de contraseña enviado a tu correo electrónico."
+  "Previous": "Anterior"
+
+  "Record moved %{to}": "Record moved %{to}."
+  "Recover password": "Recuperar contraseña"
+  "Remove": "Eliminar"
+  "Remove %{attribute}": "Borrar %{attribute}"
+  "Remove filter": "Quitar filtro"
+  "Reset password": "Cambiar contraseña"
+  "Resources": "Recursos"
+
+  "Save %{resource}": "Guardar %{resource}"
+  "Search": "Búsqueda"
+  "Search by": "Buscar por"
+  "Setup": "Configurar"
+  "Send us feedback": "Envianos tu comentarios"
+  "Show": "Mostrar"
+  "Sign in": "Entrar"
+  "Sign out": "Salir"
+  "Sign up": "Crear cuenta"
+  "Submit a bug report": "Reporta un error"
+  "System Users Administration": "Administrar usuarios del sistema"
+
+  "That doesn't seem like a valid email address": "Eso no parecia una dirección válida de correo electrónico."
+  "The email and/or password you entered is invalid": "El correo y/o la contraseña proporcionadas no son válidas."
+  "There are not defined applications in config/typus/*.yml": "No hay aplicaciones definidas en config/typus/*.yml"
+  "There are no %{records}": "No hay %{records}."
+  "There are no %{records} under this filter": "No hay %{records} con este filtro."
+  "Today": "Hoy"
+  "Toggle is disabled": "Alternat està desactivado."
+  "True": "Verdadero"
+
+  "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "Desvincular %{unrelate_model} de %{unrelate_model_from}?"
+  "Up": "Subir"
+
+  "You're adding a new %{resource_from}": "Estás añadiendo un nuevo %{resource_from}."
+  "You're adding a new %{resource_from} to %{resource_to}": "Estás añadiendo un nuevo %{resource_from} a %{resource_to}."
+  "You're not allowed to remove Typus Users": "No se te permite borrar usuarios de typus."
+  "You're not allowed to toggle status": "No se te permite cambiar tu estado."
+  "You are about to delete a %{model}.\nAre you sure you want to continue?": "Estás a punto de eliminar un %{model}.\n¿Seguro que deseas continuar?"
+  "You can update your password at": "Puedes actualizar tu contraseña en"
+  "You can't change your role": "No puedes cambiar tu propio rol."
+  "You can't remove yourself": "No te puedes eliminar a ti mismo."
+  "You can't toggle your status": "No puedes cambiar tu estado."
+  "You're updating a %{resource_from}": "Estás actualizando un %{resource_from}."
+  "You're updating a %{resource_from} for %{resource_to}": "Estás actualizando un %{resource_from} de %{resource_to}."
+  "Your new password is %{password}": "Tu nueva contraseña es %{password}."
+
+  "View %{attribute}": 
+  "View site": "Ver web"
+
+  "%{attachment} can't be removed": "%{attachment} no puede ser borrado."
+  "%{attachment} removed": "%{attachment} borrado."
+  "%{current_user_role} can't delete this item": "%{current_user_role} no puede borrar este elemento."
+  "%{current_user_role} can't display items": "%{current_user_role} no puede mostrar los elementos."
+  "%{current_user_role} can't go to %{action} on %{controller}":  "%{current_user_role} no pude ir a %{action} en %{controller}."
+  "%{current_user_role} can't perform action. (%{action})": "%{current_user_role} no puede realizar la acción. (%{action})"
+  "%{model} filtered by %{filtered_by}": "%{model} filtrados por %{filtered_by}"
+  "%{model} successfully created": "%{model} satisfactoriamente creado."
+  "%{model} successfully updated": "%{model} satisfactoriamente actualizado."
+  "%{model} successfully removed": "%{model} satisfactoriamente eliminado."
+  "%{model} %{attribute} changed": "%{model} %{attribute} cambiado."
+  "%{model_a} related to %{model_b}": "%{model_a} relacionado con %{model_b}."
+  "%{model_a} successfully assigned to %{model_b}": "%{model_a} asignado satisfactoriamente a %{model_b}."
+  "%{model_a} unrelated from %{model_b}": "%{model_a} no esta relacionado con %{model_b}."

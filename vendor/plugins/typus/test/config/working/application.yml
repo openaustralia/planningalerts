@@ -1,0 +1,92 @@
+Asset:
+  fields:
+    list: caption
+    form: caption
+  application: Site
+  options:
+
+Category:
+  fields:
+    list: name, position
+    form: name, permalink, position
+  order_by: position
+  module: Post
+
+Comment:
+  fields:
+    list: email, post, post_id
+    form: email, post
+    csv: email, post_id
+  export: csv
+  filters: post
+  search: email, body
+  application: Blog
+
+Delayed::Task:
+  fields:
+    list: name
+    form: name
+  search: name
+  application: System
+
+Page:
+  fields:
+    # Body field is overwrited from a Page class method.
+    list: title, is_published?
+    form: title, body, is_published?
+    options:
+      booleans:
+        is_published: ["Yes, it is", "No, it isn't"]
+  actions:
+    index: rebuild_all
+    edit: rebuild
+  application: Site
+  filters: is_published?
+  options:
+    form_rows: 25
+    on_header: true
+
+Post:
+  fields:
+    list: title, created_at, status
+    form: title, body, created_at, status, published_at
+    relationship: title, created_at
+    csv: title, status
+    xml: title, status
+    options:
+      selectors: status
+      read_only: permalink
+      auto_generated: created_at
+      date_formats:
+        created_at: post_short
+      templates:
+        published_at: datepicker
+  relationships: assets, categories, comments, views
+  actions:
+    index: cleanup
+    edit: send_as_newsletter, preview
+  filters: status, created_at, user, user_id
+  search: title
+  order_by: title, -created_at
+  application: Blog
+  export: csv, xml
+
+Picture:
+  fields:
+    list: title, created_at
+    form: title, picture
+    show: title, picture
+  order_by: 
+  relationships: 
+  filters: 
+  search: title
+  application: Blog
+
+CustomUser:
+  fields:
+    list: first_name, last_name, email
+
+View:
+  fields:
+    list: ip, post
+    form: ip, post

@@ -1,0 +1,118 @@
+# French translations for Typus
+# by Ned Baldessin <http://github.com/nedbaldessin>
+
+fr:
+
+  "A valid token is required": "Un token valide est nécessaire"
+  "Actions": 
+  "Active": 
+  "Add": "Ajouter"
+  "Add new": "Ajouter nouveau"
+  "Are you sure?": 
+  "Are you sure you want to leave this page?": "Êtes-vous certain de vouloir quitter cette page?"
+  "Are you sure you want to sign out and end your session?": 
+  "As you're not the admin or the owner of this record you cannot edit it": "Vous n'êtes pas le propriétaire de cette entrée, ou un administrateur, par conséquent vous ne pouvez pas le modifier"
+
+  "Change password": "Modifier le mot de passe"
+  "Change %{attribute}?": "Changer %{attribute}?"
+  "Checked if active": "Coché si actif"
+  "Click OK to continue, or click Cancel to stay on this page": "Cliquez sur Ok pour continuer, ou Annuler pour rester sur cette page."
+  "Create %{resource}": "Créer %{resource}"
+
+  "Dashboard": "Tableau de bord"
+  "Do you want to cancel it?": "Voulez-vous annuler?"
+  "Documentation": 
+  "Down": "Descendre"
+
+  "Edit": "Éditer"
+  "Enter your email below to create the first user": "Entrez votre adresse email pour créer le premier utilisateur"
+  "Error! Typus User or role doesn't exist": "Une erreur est survenue. L'utilisateur ou le rôle sont inconnus."
+
+  "False": 
+  "Filter": "Filtrer"
+  "Filter by": "Filtrer par"
+
+  "Go to": "Aller"
+
+  "I remember my password": "Je me souviens du mot de passe"
+  "If you didn't request a password update, you can ignore this message": "Si vous n'avez pas demandé à mettre à jour votre mot de passe, vous pouvez ignorer ce message"
+  "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost": "Si vous avez effectué des modifications sans cliquer sur le bouton Enregistrer ou Mettre à jour, ces modifications seront perdues."
+  "Inactive": 
+
+  "Last few days": 
+  "Last 30 days": 
+  "Last 7 days": 
+  "License": 
+  "Logged as": "Identifié comme"
+  "Login": "Identification"
+
+  "New": "Nouveau"
+  "Next": "Suivant"
+
+  "Options": "Options"
+
+  "Password recovery link sent to your email": 
+  "Previous": "Précédent"
+
+  "Record moved %{to}": "Entrées réordonnées"
+  "Recover password": 
+  "Remove": "Supprimer"
+  "Remove %{attribute}": "Supprimer %{attribute}"
+  "Remove filter": "Supprimer le filtre"
+  "Reset password": "Renouveler le mot de passe"
+  "Resources": "Ressources"
+
+  "Save %{resource}": 
+  "Search": "Recherche"
+  "Search by": "Rechercher par"
+  "Send us feedback": 
+  "Setup": "Configurer"
+  "Show": "Voir"
+  "Sign in": "Entrer"
+  "Sign out": "Déconnexion"
+  "Sign up": "Ouvrir un compte"
+  "Submit a bug report": 
+  "System Users Administration": "Modifier les utilisateurs de l'admin"
+
+  "That doesn't seem like a valid email address": "L'adresse email ne semble pas valide"
+  "The email and/or password you entered is invalid": 
+  "There are no %{records}": "Il n'y aucun(e) %{records}."
+  "There are no %{records} under this filter": "Il n'y a aucun(e) %{records} avec ce filtre."
+  "There are not defined applications in config/typus/*.yml": 
+  "Today": 
+  "Toggle is disabled": "Le basculement est désactivé"
+  "True": 
+
+  "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "Dissocier %{unrelate_model} de %{unrelate_model_from}?"
+  "Up": "Monter"
+
+  "View %{attribute}": 
+  "View site": "Voir le site"
+
+  "You can update your password at": "Vous pouvez modifier votre mot de passe ici"
+  "You can't change your role": "Vous ne pouvez pas changer votre propre rôle."
+  "You can't remove yourself": "Vous ne pouvez pas supprimer votre propre compte"
+  "You can't toggle your status": "Vous ne pouvez pas basculer votre statut"
+  "Your new password is %{password}": "Votre nouveau mot-de-passe est %{password}."
+  "You're adding a new %{resource_from}": "Vous ajoutez un nouveau %{resource_from}."
+  "You're adding a new %{resource_from} to %{resource_to}": "Vous ajoutez un(e) %{resource_from} à un(e) %{resource_to}."
+  "You're not allowed to remove Typus Users": "Vous n'avez pas le droit de supprimer des utilisateurs de l'administration"
+  "You're not allowed to toggle status": "Vous n'êtes pas autorisé à basculer votre statut"
+  "You're updating a %{resource_from}": "Vous mettez-à-jour un(e) %{resource_from}."
+  "You're updating a %{resource_from} for %{resource_to}": "Vous mettez-à-jour un(e) %{resource_from} pour un(e) %{resource_to}."
+  "You are about to delete a %{model}.\nAre you sure you want to continue?": 
+
+  "%{attachment} removed": 
+  "%{attachment} can't be removed": 
+  "%{model} successfully created": "%{model} correctement créé(e)."
+  "%{model} successfully removed": "%{model} correctement supprimé(e)."
+  "%{model} successfully updated": "%{model} correctement mis(e)-à-jour."
+  "%{model} %{attribute} changed": "%{model} %{attribute} modifié."
+  "%{model_a} related to %{model_b}": "%{model_a} associé à %{model_b}."
+  "%{model_a} successfully assigned to %{model_b}": "%{model_a} associé à %{model_b}."
+  "%{model_a} unrelated from %{model_b}": "%{model_a} dissocié de %{model_b}."
+  "%{current_user_role} can't display items": "Un utilisateur de rôle %{current_user_role} ne peut pas afficher ces éléments."
+  "%{current_user_role} can't delete this item": "%{current_user_role} ne peut supprimer cette entrée"
+  "%{current_user_role} can't go to %{action} on %{controller}":  "%{current_user_role} ne peut effectuer %{action} sur %{controller}"
+  "%{current_user_role} can't perform action. (%{action})": "%{current_user_role} ne peut effectuer l'action (%{action})"
+  "%{current_user_role} can't perform action (%{action})": "%{current_user_role} ne peut effectuer l'action (%{action})"

@@ -1,0 +1,6 @@
+admin:
+
+designer:
+  Category: read, update
+  Comment: read
+  Post: read

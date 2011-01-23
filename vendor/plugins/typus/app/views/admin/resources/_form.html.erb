@@ -1,0 +1,12 @@
+<% form_for @item, :url  => options, :builder => ActionView::Helpers::FormBuilder, :html => { :multipart => true } do |form| %>
+  <fieldset class="inputs">
+    <ol>
+      <%= build_form(@fields, form) %>
+    </ol>
+  </fieldset>
+  <fieldset class="buttons">
+    <ol>
+      <li><%= submit_tag button , :class => 'commit' %></li>
+    </ol>
+  </fieldset>
+<% end %>

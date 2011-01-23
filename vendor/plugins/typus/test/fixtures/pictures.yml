@@ -1,0 +1,15 @@
+first:
+  id: 1
+  title: Some picture
+  picture_file_name: dog.jpg
+  picture_content_type: image/jpeg
+  picture_file_size: 175938
+  picture_updated_at: <%= 3.days.ago.to_s(:db) %>
+
+second:
+  id: 2
+  title: Another picture
+  picture_file_name: cat.jpg
+  picture_content_type: image/jpeg
+  picture_file_size: 198475
+  picture_updated_at: <%= 2.days.ago.to_s(:db) %>

@@ -1,0 +1,71 @@
+# Models
+
+This is an example of a **Typus** enabled model with all available 
+options. You can use this example to customize your YAML files which 
+only have set the most common settings.
+
+    Post:
+      fields:
+        list: id, title, category_id, created_at, is_published?
+        form: title, body, is_published?, created_at
+        show: title, category, is_published?
+        relationship: title, status
+        options:
+          auto_generated:
+          booleans:
+            is_published: ["Yes, it is", "No, it isn't"]
+          date_formats:
+            created_at: post_long
+          selectors:
+          read_only:
+          filter_by_date_range: valid_until
+          templates:
+            body: rich_text
+      actions:
+        index: cleanup
+        edit: send_as_newsletter
+        show: rebuild
+      export: csv, xml, pdf
+      order_by: created_at
+      relationships:
+      filters: is_published?, created_at, category_id
+      search: title, body
+      application: Application
+      description: Some text to describe the model
+      options:
+        default_action_on_item: show
+        end_year: 2015
+        form_rows: 25
+        index_after_save: false
+        minute_step: 15
+        nil: 'nil'
+        on_header: true
+        only_user_items: true
+        per_page: 5
+        sidebar_selector: 5
+        start_year: 1990
+
+Note: To define namespace models use :: as a separator. (i.e. Delayed::Job)
+
+# Roles
+
+In this file you can configure the actions available for each of 
+your models on the application. You can also use the 'all' shortcut 
+to allow the user the access to all actions.
+
+    admin:
+      Post: create, read, update, delete
+      Category: create, read, update, delete
+      TypusUser: all
+
+    editor:
+      Post: create, read, update
+      Category: read, update
+
+You can also define `resources` which are not related to a model, 
+for example to control MemCached or see the Starling queue 
+statistics.
+
+    admin:
+      Starling: index
+      MemCached: index, cleanup

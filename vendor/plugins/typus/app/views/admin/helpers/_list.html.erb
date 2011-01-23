@@ -1,0 +1,11 @@
+<%= content_tag('h2', header) if header %>
+
+<% unless options[:selector] %>
+
+  <ul>
+    <% items.each do |item| %>
+      <li><%= item %></li>
+    <% end %>
+  </ul>
+
+<% end %>

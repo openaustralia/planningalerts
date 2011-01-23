@@ -1,0 +1,44 @@
+= Customizing Typus
+
+You can overwrite and extend Admin::MasterController with your methods.
+
+Actions have to be defined in <tt>config/typus/application.yml</tt>:
+
+    Post:
+      actions:
+        index: custom_action
+        edit: custom_action_for_an_item
+
+And you have to add permissions on <tt>config/typus/application_roles.yml</tt> 
+to have access to them.
+
+    admin:
+      Post: create, read, update, destroy, custom_action
+
+    editor:
+      Post: create, read, update, custom_action_for_an_item
+
+And your controller should look like this ...
+
+    class Admin::PostsController < MasterController
+
+      def index
+      end
+
+      def custom_action
+      end
+
+      def custom_action_for_an_item
+      end
+
+    end
+
+# TODO: Instructions on the tableless resources.
+
+# This controller was generated because you have defined a resource 
+# on <tt>config/typus/XXXXXX_roles.yml</tt> which is a tableless model.
+#
+#     admin:
+#       <%= resource %>: index
+#
+

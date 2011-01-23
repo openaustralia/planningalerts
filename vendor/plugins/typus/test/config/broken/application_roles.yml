@@ -1,0 +1,20 @@
+admin:
+  Asset: create, read, update, delete
+  Category: create, read, update, delete
+  Comment: create, read, update, delete
+  TypusUser: create, read, update, delete
+  Page: create, read, update, delete
+  Post: create, read, update, delete
+  Status: index
+  Order:
+
+editor:
+  Category: create, read, update
+  Comment: read, update, delete
+  Post: create, read, update
+  TypusUser: read, update
+
+designer:
+  Category: read, update
+  Comment: read
+  Post: read

@@ -1,0 +1,59 @@
+admin:
+  id: 1
+  first_name: Admin
+  last_name: Example
+  role: admin
+  email: admin@example.com
+  status: true
+  token: 1A2B3C4D5E6F
+  salt: admin
+  crypted_password: <%= Digest::SHA1.hexdigest("--admin--#{12345678}") %>
+  preferences: { :locale => :en }
+
+editor:
+  id: 2
+  first_name: Editor
+  last_name: Example
+  role: editor
+  email: editor@example.com
+  status: true
+  token: A2B3C4D5E6F1
+  salt: editor
+  crypted_password: <%= Digest::SHA1.hexdigest("--editor--#{12345678}") %>
+  preferences: { :locale => :en }
+
+disabled_user:
+  id: 3
+  first_name: Typus
+  last_name: User
+  role: editor
+  email: disabled_user@example.com
+  status: false
+  token: 2B3C4D5E6F1A
+  salt: disabled_user
+  crypted_password: <%= Digest::SHA1.hexdigest("--disabled_user--#{12345678}") %>
+  preferences: { :locale => :en }
+
+designer:
+  id: 4
+  first_name: Designer
+  last_name: Example
+  role: designer
+  email: designer@example.com
+  status: true
+  token: B3C4D5E6F1A2
+  salt: designer
+  crypted_password: <%= Digest::SHA1.hexdigest("--designer--#{12345678}") %>
+  preferences: { :locale => :en }
+
+removed_role:
+  id: 5
+  first_name: Removed
+  last_name: Example
+  role: removed
+  email: removed@example.com
+  status: true
+  token: 3C4D5E6F1A2B
+  salt: removed_role
+  crypted_password: <%= Digest::SHA1.hexdigest("--removed_role--#{12345678}") %>
+  preferences: { :locale => :en }

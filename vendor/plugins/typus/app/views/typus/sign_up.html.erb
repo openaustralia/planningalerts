@@ -1,0 +1,16 @@
+<% form_for :typus_user, :url => { :action => :sign_up } do |form| %>
+
+  <ul>
+
+    <li>
+      <%= form.label :email, Typus.user_class.human_attribute_name(:email) %>
+      <%= form.text_field :email, :size => 20, :class => 'text' %>
+    </li>
+
+    <li>
+      <%= submit_tag _("Sign up"), :class => 'button' %>
+    </li>
+
+  </ul>
+
+<% end %>

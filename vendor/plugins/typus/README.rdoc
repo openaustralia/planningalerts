@@ -1,0 +1,61 @@
+= Typus: Admin interface for Rails applications
+
+Typus is designed for a single activity:
+
+    Trusted users editing structured content.
+
+Typus doesn't try to be all the things to all the people but it's extensible 
+enough to match lots of use cases.
+
+== Key Features
+
+- Authentication by session or http.
+- Access control by users and roles (only on session authentication).
+- Show, search, edit and create data on a clean interface.
+- Internationalized interface with xtensible and overwritable templates.
+- Boolean filtering.
+- Supports ActiveRecord.
+- Supports Rails 3 and is Ruby 1.9 compatible.
+- Tested with SQLite, MySQL, and PostgreSQL.
+- MIT License.
+
+== Links
+
+- {Project page}[http://labs.intraducibles.com/projects/typus]
+- {Documentation}[http://typus.intraducibles.com/]
+- {Plugin source code}[http://github.com/fesplugas/typus]
+- {Mailing list}[http://groups.google.com/group/typus]
+- {Bug reports}[http://github.com/fesplugas/typus/issues]
+- {Gems}[http://gemcutter.org/gems/typus]
+- {Contributors}[http://github.com/fesplugas/typus/contributors]
+
+== Installing
+
+Install from GitHub the latest version which it's compatible with 
+<tt>Rails 2.3.10</tt>.
+
+    $ script/plugin install git://github.com/fesplugas/typus.git -r 2-3-stable
+
+Once `typus` is installed, run the generator to create required files and 
+migrate your database.
+
+    $ script/generate typus
+    $ rake db:migrate
+
+Start the application server and go to {http://0.0.0.0:3000/admin}[http://0.0.0.0:3000/admin].
+
+== Requirements
+
+As a requirement you need to install <tt>rails_xss</tt> plugin:
+
+    $ script/plugin install https://github.com/rails/rails_xss
+
+Other optional stuff is <tt>paperclip</tt>, <tt>acts_as_list</tt> and
+<tt>acts_as_tree</tt>. Once typus is installed you can use the provided
+task to install all plugins:
+
+    $ rake typus:misc
+
+== License
+
+Copyright &copy; 2007-2011 Francesc Esplugas, released under the MIT license.

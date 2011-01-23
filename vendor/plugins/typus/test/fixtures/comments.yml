@@ -1,0 +1,27 @@
+first:
+  id: 1
+  name: John
+  email: john@example.com
+  body: Body of the comment
+  post_id: 1
+
+second:
+  id: 2
+  name: Me
+  email: me@example.com
+  body: Body of the comment
+  post_id: 1
+
+without_post_id:
+  id: 3
+  name: John
+  email: john@example.com
+  body: Body of the comment
+  post_id: 
+
+with_post_id:
+  id: 4
+  name: Me
+  email: me@example.com
+  body: Body of the comment
+  post_id: 1

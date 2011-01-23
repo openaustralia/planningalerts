@@ -1,0 +1,6 @@
+# Typus Roles Configuration File
+#
+# Use the README file as a reference to customize settings.
+
+admin:
+<%= configuration[:roles] %>

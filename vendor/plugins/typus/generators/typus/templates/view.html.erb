@@ -1,0 +1,11 @@
+<!-- Sidebar -->
+
+<% content_for :sidebar do %>
+<%= typus_block :location => 'dashboard', :partial => 'sidebar' %>
+<% end %>
+
+<!-- Content -->
+
+<h2><%= params[:controller].split('/').last.titleize.capitalize %></h2>
+
+<p>Find me in app/views/<%= params[:controller] %>/index.html.erb</p>

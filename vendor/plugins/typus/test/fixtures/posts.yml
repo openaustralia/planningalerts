@@ -1,0 +1,37 @@
+# Belongs to admin.
+published:
+  id: 1
+  title: Title One
+  body: This is the body.
+  created_at: <%= 7.days.ago.to_s(:db) %>
+  updated_at: <%= 7.days.ago.to_s(:db) %>
+  status: published
+  typus_user_id: 1
+
+# Belongs to editor.
+unpublished:
+  id: 2
+  title: Title Two
+  body: This is the body.
+  created_at: <%= 6.days.ago.to_s(:db) %>
+  updated_at: <%= 6.days.ago.to_s(:db) %>
+  status: unpublished
+  typus_user_id: 1
+
+owned_by_admin:
+  id: 3
+  title: Owned by admin
+  body: This is the body.
+  created_at: <%= 5.days.ago.to_s(:db) %>
+  updated_at: <%= 5.days.ago.to_s(:db) %>
+  status: unpublished
+  typus_user_id: 1
+
+owned_by_editor:
+  id: 4
+  title: Owned by editor
+  body: This is the body.
+  created_at: <%= 4.days.ago.to_s(:db) %>
+  updated_at: <%= 4.days.ago.to_s(:db) %>
+  status: unpublished
+  typus_user_id: 2
