@@ -1,7 +1,7 @@
 source "http://gemcutter.org"
 source "http://gems.github.com"
 
-gem "rails", '2.3.8'
+gem "rails", '2.3.10'
 gem "mysql"
 gem "haml"
 gem "geokit"
