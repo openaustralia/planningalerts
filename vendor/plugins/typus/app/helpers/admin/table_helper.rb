@@ -243,7 +243,7 @@ module Admin::TableHelper
 
     boolean_hash = item.class.typus_boolean(attribute)
     status = item.send(attribute)
-    link_text = boolean_hash["#{status}".to_sym]
+    link_text = !item.send(attribute).nil? ? boolean_hash["#{status}".to_sym] : item.class.typus_options_for(:nil)
 
     options = { :controller => "admin/#{item.class.name.tableize}", 
                 :action => 'toggle', 
