@@ -128,7 +128,7 @@ module Admin::TableHelper
                   order_by = model.reflect_on_association(key.to_sym).primary_key_name rescue key
                   switch = sort_order.last if params[:order_by].eql?(order_by)
                   options = { :order_by => order_by, :sort_order => sort_order.first }
-                  content = link_to "#{content} #{switch}", params.merge(options)
+                  content = link_to "#{content} #{switch}".html_safe, params.merge(options)
                 end
 
                 content
