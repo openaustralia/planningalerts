@@ -38,7 +38,7 @@ describe ApplicationsController do
       @result = mock
 
       Location.should_receive(:geocode).with("24 Bruce Road Glenbrook").and_return(location)
-      Application.should_receive(:paginate).with(:origin => [location.lat, location.lng], :within => 4, :page => nil, :per_page => 100).and_return(@result)
+      Application.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(@result)
     end
     
     it "should find recent applications near the address" do
@@ -61,7 +61,7 @@ describe ApplicationsController do
       result = mock
 
       Location.should_receive(:geocode).with("24 Bruce Road Glenbrook").and_return(location)
-      Application.should_receive(:paginate).with(:origin => [location.lat, location.lng], :within => 2, :page => nil, :per_page => 100).and_return(result)
+      Application.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
 
       get :index, :address => "24 Bruce Road Glenbrook"
       assigns[:applications].should == result
@@ -73,7 +73,7 @@ describe ApplicationsController do
     before :each do
       @result = mock
 
-      Application.should_receive(:paginate).with(:origin => [1.0, 2.0], :within => 4, :page => nil, :per_page => 100).and_return(@result)
+      Application.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(@result)
     end
 
     it "should find recent applications near the point" do

@@ -4,7 +4,7 @@ class Application < ActiveRecord::Base
   belongs_to :authority
   has_many :comments
   before_save :geocode
-  acts_as_mappable :default_units => :kms
+  geocoded_by :address, :latitude  => :lat, :longitude => :lng
   
   default_scope :order => "date_scraped DESC"
   
@@ -126,7 +126,7 @@ class Application < ActiveRecord::Base
   def find_all_nearest_or_recent(max_distance = 2, max_age = 2 * 4 * 7 * 24 * 60 * 60)
     if location
       # TODO: Do the sort with SQL so that we can limit the data transferred
-      apps = Application.find(:all, :origin => [location.lat, location.lng], :within => max_distance, :conditions => ['date_scraped > ?', max_age.seconds.ago])
+      apps = Application.near([location.lat, location.lng], max_distance, :units => :km).find(:all, :conditions => ['date_scraped > ?', max_age.seconds.ago])
 
       now = Time.now
       ratio = max_distance / max_age

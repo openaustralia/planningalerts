@@ -52,10 +52,7 @@ class ApplicationsController < ApplicationController
         location_text = location.to_s
       end
       @description << " within #{help.meters_in_words(radius.to_i)} of #{location_text}"
-      # TODO: More concise form using chained scope doesn't work
-      # http://www.binarylogic.com/2010/01/09/using-geokit-with-searchlogic/ might provide the answer
-      @applications = Application.paginate :origin => [location.lat, location.lng], :within => radius.to_f / 1000,
-        :page => params[:page], :per_page => per_page
+      @applications = Application.near([location.lat, location.lng], radius.to_f / 1000, :units => :km).paginate(:page => params[:page], :per_page => per_page)
     elsif params[:bottom_left_lat] && params[:bottom_left_lng] && params[:top_right_lat] && params[:top_right_lng]
       lat0, lng0 = params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f
       lat1, lng1 = params[:top_right_lat].to_f, params[:top_right_lng].to_f
@@ -86,8 +83,7 @@ class ApplicationsController < ApplicationController
       else
         @q = location.full_address
         @other_addresses = location.all[1..-1].map{|l| l.full_address}
-        @applications = Application.paginate :origin => [location.lat, location.lng], :within => @radius.to_f / 1000,
-          :page => params[:page], :per_page => per_page
+        @applications = Application.near([location.lat, location.lng], @radius.to_f / 1000, :units => :km).paginate(:page => params[:page], :per_page => per_page)
         @rss = applications_path(:format => 'rss', :address => @q, :radius => @radius)
       end
     end

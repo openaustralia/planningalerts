@@ -3,7 +3,7 @@
     %h4= application_mobile.address
     %p
       - if application_mobile.respond_to? :distance
-        #{time_ago_in_words(application_mobile.date_scraped)} ago, #{km_in_words(application_mobile.distance.to_f)} away
+        #{time_ago_in_words(application_mobile.date_scraped)} ago, #{km_in_words(application_mobile.distance.to_f / 0.621371192)} away
       - else
         #{time_ago_in_words(application_mobile.date_scraped)} ago
     %strong= application_mobile.description

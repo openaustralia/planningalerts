@@ -2,7 +2,7 @@
 %dd
   .appinfo
     - if application.respond_to? :distance
-      #{time_ago_in_words(application.date_scraped)} ago, #{km_in_words(application.distance.to_f)} away
+      #{time_ago_in_words(application.date_scraped)} ago, #{km_in_words(application.distance.to_f / 0.621371192)} away
     - else
       #{time_ago_in_words(application.date_scraped)} ago
   .description

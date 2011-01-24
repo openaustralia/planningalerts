@@ -3,15 +3,14 @@ class LayarController < ApplicationController
   include ActionView::Helpers::TextHelper
   
   def getpoi
-    @applications = Application.paginate :origin => [params[:lat].to_f, params[:lon].to_f], :within => params[:radius].to_f / 1000,
-      :page => params[:pageKey], :per_page => 10
+    @applications = Application.near([params[:lat].to_f, params[:lon].to_f], params[:radius].to_f / 1000, :units => :km).paginate(:page => params[:pageKey], :per_page => 10)
     layar_applications = @applications.map do |a|
       lines = word_wrap(a.description, :line_width => 35).split("\n")
       line4 = truncate(lines[2..-1].join(" "), :length => 35) if lines[2..-1]
       {
         :actions => [{:label => "More info", :uri => application_url(:host => Configuration::HOST, :utm_medium => 'ar', :utm_source => 'layar', :id => a.id)}],
         :attribution => nil,
-        :distance => a.distance.to_f * 1000,
+        :distance => a.distance.to_f / 0.621371192 * 1000,
         :id => a.id,
         :imageURL => nil,
         :lat => a.lat * 1000000,

@@ -2,12 +2,13 @@ require 'spec_helper'
 
 describe LayarController do
   it "should provide a rest api to serve the layar points of interest" do
-    application = mock(:distance => 2, :lat => 1.0, :lng => 2.0, :id => 101, :address => " 1 Foo St\n Fooville",
+    # TODO Silly bug in "geocoder" gem means that distances are returned in miles even when the units are set to kilometres
+    application = mock(:distance => 2 * 0.621371192, :lat => 1.0, :lng => 2.0, :id => 101, :address => " 1 Foo St\n Fooville",
       :description => "1234 678901234 67890123 56789 12345 1234567 90123456789 123456 89\n1234567890 2345678 012345678 01234512345")
     result = [application]
     result.stub!(:current_page).and_return(1)
     result.stub!(:total_pages).and_return(2)
-    Application.should_receive(:paginate).with(:origin => [1.0, 2.0], :within => 3.0, :page => "2", :per_page => 10).and_return(result)
+    Application.should_receive(:paginate).with(:page => "2", :per_page => 10).and_return(result)
 
     get :getpoi, :lat => 1.0, :lon => 2.0, :radius => 3000, :pageKey => "2"
     assigns[:applications].should == result
