@@ -1,7 +1,8 @@
+#source 'http://rubygems.org'
 source "http://gemcutter.org"
 source "http://gems.github.com"
 
-gem "rails", '2.3.10'
+gem 'rails', '3.0.3'
 gem "mysql"
 gem "haml"
 gem "geokit"
