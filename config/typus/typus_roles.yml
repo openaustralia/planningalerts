@@ -3,4 +3,4 @@
 # Use the README file as a reference to customize settings.
 
 admin:
-  TypusUser: all
+  AdminUser: all

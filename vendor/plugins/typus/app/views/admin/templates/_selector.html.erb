@@ -1,9 +1,0 @@
-<%
-  values = @resource[:class]::const_get("#{attribute.upcase}")
-  values = values.invert if values.kind_of?(Hash)
-%>
-
-<li>
-  <%= form.label attribute, label_text %>
-  <%= form.select attribute, values, options, html_options %>
-</li>

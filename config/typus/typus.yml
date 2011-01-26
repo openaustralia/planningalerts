@@ -2,16 +2,16 @@
 #
 # Use the README file as a reference to customize settings.
 
-TypusUser:
+AdminUser:
   fields:
-    default: first_name, last_name, email, role, status
+    default: first_name, last_name, role, email, locale
     list: email, role, status
-    form: first_name, last_name, role, email, password, password_confirmation, language
+    form: first_name, last_name, role, email, password, password_confirmation, locale
     options:
-      selectors: role, language
+      selectors: role, locale
       booleans:
         status: Active, Inactive
   filters: status, role
-  search: first_name, last_name, email, role
-  application: Admin Panel
-  description: Admin Panel Users Administration
+  search: first_name, last_name, email
+  application: Admin
+  description: Users Administration

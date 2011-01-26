@@ -10,7 +10,7 @@ gem "nokogiri"
 gem "foreigner"
 gem 'jaap3-addthis', :require => 'addthis'
 gem 'httparty'
-gem 'will_paginate', '~> 2.3.11'
+gem "will_paginate", "~> 3.0.pre2"
 # For minifying javascript and css
 gem 'smurf'
 gem 'thinking-sphinx', '~> 1.3.11', :require => 'thinking_sphinx'
@@ -26,6 +26,7 @@ gem 'formtastic', '~> 1.1.0'
 gem 'validates_email_format_of'
 gem "compass", ">= 0.10.6"
 gem 'fancy-buttons'
+gem 'typus', :git => 'https://github.com/fesplugas/typus.git'
 gem "rails-geocoder", :require => "geocoder"
 
 group :test do
