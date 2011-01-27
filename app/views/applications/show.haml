@@ -43,7 +43,7 @@
   %p= addthis_bookmark_button.html_safe
   %ul#subscribe
     %li
-      - link_to new_alert_path(:alert => {:address => @application.address}) do
+      - link_to new_alert_path(:address => @application.address) do
         = image_tag "email.png", :size => "28x28"
         Email me whenever there are new applications near here
       (No more than once per day)

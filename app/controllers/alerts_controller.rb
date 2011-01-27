@@ -2,15 +2,8 @@ class AlertsController < ApplicationController
   caches_page :statistics
 
   def new
-    @set_focus_control = "alert_address"
-    if params[:alert]
-      @alert = Alert.new(:address => params[:alert][:address], :email => params[:alert][:email], :radius_meters => zone_sizes['l'])
-      if @alert.address && !@alert.email
-        @set_focus_control = "alert_email"
-      end
-    else
-      @alert = Alert.new
-    end
+    @alert = Alert.new(:address => params[:address], :email => params[:email])
+    @set_focus_control = params[:address] ? "alert_email" : "alert_address"
   end
   
   def create
