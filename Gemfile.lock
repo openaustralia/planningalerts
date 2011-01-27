@@ -78,7 +78,6 @@ GEM
     httparty (0.7.3)
       crack (= 0.1.8)
     i18n (0.5.0)
-    jaap3-addthis (0.8.0)
     json (1.4.6)
     mail (2.2.15)
       activesupport (>= 2.3.6)
@@ -161,7 +160,6 @@ DEPENDENCIES
   haml
   httparty
   i18n (>= 0.4.0)
-  jaap3-addthis
   mysql
   nokogiri
   rails (= 3.0.3)
