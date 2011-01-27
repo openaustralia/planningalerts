@@ -15,7 +15,7 @@
   %p.apidefinition
     Return applications near a given street address. The area included is a circle with a radius of the given size (in metres)
     with the address at its center. Suggested sizes are 400, 800 or 4000 metres.
-  %code= api_example_address_url_html
+  %code= raw api_example_address_url_html
   %p.apiexamples
     = link_to "view example", api_example_address_url
     = link_to "view on a map", mapify(api_example_address_url, 14)
@@ -25,7 +25,7 @@
   %p.apidefinition
     Return applications near a given longitude/latitude. The area included is a circle with a radius of the given size (in metres)
     with the longitude/latitude at its center. Suggested sizes are 400, 800 or 4000 metres.
-  %code= api_example_latlong_url_html
+  %code= raw api_example_latlong_url_html
   %p.apiexamples
     = link_to "view example", api_example_latlong_url
     = link_to "view on a map", mapify(api_example_latlong_url, 14)
@@ -34,7 +34,7 @@
     Area by longitude/latitude
   %p.apidefinition
     Return applications within a rectangle defined by longitude/latitude.
-  %code= api_example_area_url_html
+  %code= raw api_example_area_url_html
   %p.apiexamples
     = link_to "view example", api_example_area_url
     = link_to "view on a map", mapify(api_example_area_url, 6)
@@ -43,7 +43,7 @@
     Planning authority
   %p.apidefinition
     Return applications for a specific planning authority (e.g. a local council) by authority short name.
-  %code= api_example_authority_url_html
+  %code= raw api_example_authority_url_html
   %p.apiexamples
     = link_to "view example", api_example_authority_url
     = link_to "view on a map", mapify(api_example_authority_url, 11)
@@ -52,7 +52,7 @@
     Postcode
   %p.apidefinition
     Return applications for a specific postcode area
-  %code= api_example_postcode_url_html
+  %code= raw api_example_postcode_url_html
   %p.apiexamples
     = link_to "view example", api_example_postcode_url
     = link_to "view on a map", mapify(api_example_postcode_url, 13)
@@ -61,7 +61,7 @@
     Suburb
   %p.apidefinition
     Return applications in a suburb. Including "state" in the search is optional.
-  %code= api_example_suburb_and_state_url_html
+  %code= raw api_example_suburb_and_state_url_html
   %p.apiexamples
     = link_to "view example", api_example_suburb_and_state_url
     = link_to "view on a map", mapify(api_example_suburb_and_state_url, 13)

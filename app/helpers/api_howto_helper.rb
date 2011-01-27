@@ -5,7 +5,7 @@ module ApiHowtoHelper
   end
   
   def htmlify(url)
-    url.gsub(/(\?|&|&amp;)([a-z_]+)=/, '\1<strong>\2</strong>=')
+    url.gsub(/(\?|&|&amp;)([a-z_]+)=/, '\1<strong>\2</strong>=').gsub('&', '&amp;')
   end
   
   def api_example_address_url(address = Configuration::API_EXAMPLE_ADDRESS,

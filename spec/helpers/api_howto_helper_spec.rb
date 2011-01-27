@@ -6,12 +6,12 @@ describe ApiHowtoHelper do
   end
   
   it "should provide urls of examples of use of the api" do
-    helper.api_example_address_url.should == "http://test.host/applications.rss?address=24+Bruce+Road+Glenbrook%2C+NSW+2773&amp;radius=4000"
-    helper.api_example_latlong_url.should == "http://test.host/applications.rss?lat=-33.772609&amp;lng=150.624263&amp;radius=4000"
-    helper.api_example_area_url.should == "http://test.host/applications.rss?bottom_left_lat=-38.556757&amp;bottom_left_lng=140.83374&amp;top_right_lat=-29.113775&amp;top_right_lng=153.325195"
+    helper.api_example_address_url.should == "http://test.host/applications.rss?address=24+Bruce+Road+Glenbrook%2C+NSW+2773&radius=4000"
+    helper.api_example_latlong_url.should == "http://test.host/applications.rss?lat=-33.772609&lng=150.624263&radius=4000"
+    helper.api_example_area_url.should == "http://test.host/applications.rss?bottom_left_lat=-38.556757&bottom_left_lng=140.83374&top_right_lat=-29.113775&top_right_lng=153.325195"
     helper.api_example_authority_url.should == "http://test.host/authorities/blue_mountains/applications.rss"
     helper.api_example_postcode_url.should == "http://test.host/applications.rss?postcode=2780"
-    helper.api_example_suburb_and_state_url.should == "http://test.host/applications.rss?state=NSW&amp;suburb=Katoomba"
+    helper.api_example_suburb_and_state_url.should == "http://test.host/applications.rss?state=NSW&suburb=Katoomba"
   end
   
   it "should display the example urls nicely" do
