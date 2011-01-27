@@ -1,1 +1,3 @@
-require File.join(File.dirname(__FILE__), %w(rails init))
+require 'addthis'
+
+ActionView::Base.send :include, Jaap3::Addthis::Helper
