@@ -19,10 +19,6 @@ class ApiController < ApplicationController
     end
   end
   
-  def old_howto
-    redirect_to api_howto_url
-  end
-  
   def howto
   end  
 end

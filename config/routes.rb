@@ -1,10 +1,11 @@
 PlanningalertsApp::Application.routes.draw do
   # Redirect old urls
-  # TODO: Once we have moved to Rails 3 we can do redirection directly inside here
-  match 'apihowto.php' => 'api#old_howto'
-  match 'about.php' => 'static#old_about'
-  match 'faq.php' => 'static#old_faq'
-  match 'getinvolved.php' => 'static#old_get_involved'
+  match 'apihowto.php' => redirect('/api/howto')
+  match 'about.php' => redirect('/about')
+  match 'faq.php' => redirect('/faq')
+  match 'getinvolved.php' => redirect('/getinvolved')
+  # Can't do the redirects in the routing as above because the redirect depends
+  # on the passed parameters
   match 'api.php' => 'api#old_index'
   match 'api' => 'api#old_index'
   
