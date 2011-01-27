@@ -38,7 +38,7 @@ describe ApplicationsController do
       @result = mock
 
       Location.should_receive(:geocode).with("24 Bruce Road Glenbrook").and_return(location)
-      Application.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(@result)
+      Application.stub_chain(:near, :paginate).and_return(@result)
     end
     
     it "should find recent applications near the address" do
@@ -61,7 +61,7 @@ describe ApplicationsController do
       result = mock
 
       Location.should_receive(:geocode).with("24 Bruce Road Glenbrook").and_return(location)
-      Application.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
+      Application.stub_chain(:near, :paginate).and_return(result)
 
       get :index, :address => "24 Bruce Road Glenbrook"
       assigns[:applications].should == result
@@ -73,7 +73,7 @@ describe ApplicationsController do
     before :each do
       @result = mock
 
-      Application.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(@result)
+      Application.stub_chain(:near, :paginate).and_return(@result)
     end
 
     it "should find recent applications near the point" do
@@ -158,7 +158,7 @@ describe ApplicationsController do
     it "should gracefully handle an application without any geocoded information" do
       app = mock_model(Application, :address => "An address that can't be geocoded", :date_scraped => Date.new(2010,1,1),
         :description => "foo", :location => nil, :find_all_nearest_or_recent => [])
-      Application.should_receive(:find).with("1").and_return(app)
+      Application.should_receive(:find).with(1).and_return(app)
       get :show, :id => 1
       
       assigns[:application].should == app
@@ -169,7 +169,7 @@ describe ApplicationsController do
     it "should have a mobile optimised show page" do
       app = mock_model(Application, :address => "12 Foo Street", :date_scraped => Date.new(2010, 5, 13),
         :description => "Cutting a hedge.", :find_all_nearest_or_recent => [])
-      Application.should_receive(:find).with("1").and_return(app)
+      Application.should_receive(:find).with(1).and_return(app)
       get :show, :id => 1
       assigns[:mobile_optimised].should == true
     end

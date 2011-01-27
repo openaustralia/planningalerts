@@ -4,10 +4,8 @@ class Comment < ActiveRecord::Base
   
   acts_as_email_confirmable
   
-  after_confirm :email_authority
-
   # Send the comment to the planning authority
-  def email_authority
+  def after_confirm
     CommentNotifier.deliver_notify(self)
   end
 end

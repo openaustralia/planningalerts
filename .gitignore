@@ -1,15 +1,11 @@
-log/development.log
-log/production.log
-log/server.log
-log/test.log
-log/cucumber.log
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+
 log/searchd.development.pid
-log/searchd.log
-log/searchd.query.log
 config/database.yml
 config/development.sphinx.conf
-db/development.sqlite3
-db/test.sqlite3
 db/sphinx/development/*
 rerun.txt
 public/about.html
@@ -26,4 +22,4 @@ public/sitemap.xml
 public/sitemap*.xml.gz
 public/javascripts/all.js
 public/javascripts/mxn_bundle.js
-tmp/sass-cache
+webrat.log

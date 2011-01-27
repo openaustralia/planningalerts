@@ -8,8 +8,7 @@ describe LayarController do
     result = [application]
     result.stub!(:current_page).and_return(1)
     result.stub!(:total_pages).and_return(2)
-    Application.should_receive(:paginate).with(:page => "2", :per_page => 10).and_return(result)
-
+    Application.stub_chain(:near, :paginate).and_return(result)
     get :getpoi, :lat => 1.0, :lon => 2.0, :radius => 3000, :pageKey => "2"
     assigns[:applications].should == result
     expected_layar = {
