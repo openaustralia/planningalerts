@@ -15,7 +15,7 @@ describe EmailConfirmable::Notifier do
   
     it "should be from the main planningalerts email address" do
       @email.from.should == ["contact@planningalerts.org.au"]
-      @email.from_addrs.first.name.should == "PlanningAlerts.org.au"
+      #@email.from_addrs.first.name.should == "PlanningAlerts.org.au"
     end
   
     it "should say in the subject line it is an email to confirm a planning alert" do
@@ -23,11 +23,11 @@ describe EmailConfirmable::Notifier do
     end
   
     it "should include a confirmation url" do
-      @email.body.should include_text("http://localhost:3000/alerts/abcdef/confirmed")
+      @email.should have_body_text(/http:\/\/localhost:3000\/alerts\/abcdef\/confirmed/)
     end
   
     it "should include the address for the alert" do
-      @email.body.should include_text(@alert.address)
+      @email.should have_body_text(/#{@alert.address}/)
     end
   end
   
@@ -46,7 +46,7 @@ describe EmailConfirmable::Notifier do
     it "should be from the main planningalerts email address" do
       notifier = EmailConfirmable::Notifier.create_confirm(@comment)
       notifier.from.should == ["contact@planningalerts.org.au"]
-      notifier.from_addrs.first.name.should == "PlanningAlerts.org.au"
+      #notifier.from_addrs.first.name.should == "PlanningAlerts.org.au"
     end
   
     it "should say in the subject line it is an email to confirm a comment" do
@@ -56,7 +56,7 @@ describe EmailConfirmable::Notifier do
   
     it "should include a confirmation url" do
       notifier = EmailConfirmable::Notifier.create_confirm(@comment)
-      notifier.body.should include_text("http://localhost:3000/comments/abcdef/confirmed")
+      notifier.should have_body_text(/http:\/\/localhost:3000\/comments\/abcdef\/confirmed/)
     end
   end
   
