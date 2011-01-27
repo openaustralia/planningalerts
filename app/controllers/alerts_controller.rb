@@ -8,7 +8,9 @@ class AlertsController < ApplicationController
       if @alert.address && !@alert.email
         @set_focus_control = "alert_email"
       end
-    end    
+    else
+      @alert = Alert.new
+    end
   end
   
   def create
