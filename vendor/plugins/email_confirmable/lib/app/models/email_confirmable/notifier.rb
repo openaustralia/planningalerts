@@ -3,7 +3,7 @@ class EmailConfirmable::Notifier < ActionMailer::Base
     class_name = object.class.name.underscore
     @recipients = object.email
     @from = EmailConfirmable.from
-    @subject = "Please confirm your #{object.class.human_name.downcase}"
+    @subject = "Please confirm your #{object.class.model_name.human.downcase}"
     # This seems a bit long-winded. Is there a better way?
     instance_variable_set(("@" + class_name).to_sym, object)
     template class_name

@@ -23,7 +23,7 @@ describe "applications/show" do
       @application.stub!(:date_scraped).and_return(Time.now)
       assigns[:application] = @application
       render
-      response.should have_selector("div#map_div")      
+      rendered.should have_selector("div#map_div")      
     end
     
     it "should say nothing about notice period when there is no information" do
@@ -33,7 +33,7 @@ describe "applications/show" do
       @application.stub!(:on_notice_to).and_return(nil)
       assigns[:application] = @application
       render
-      response.should_not have_selector("p.on_notice")
+      rendered.should_not have_selector("p.on_notice")
     end
   end
   
@@ -48,7 +48,7 @@ describe "applications/show" do
       assigns[:application] = @application
         
       render
-      response.should_not have_selector("div#map_div")
+      rendered.should_not have_selector("div#map_div")
     end
   end
 end

@@ -6,7 +6,7 @@ describe "static/about.haml" do
     a2 = mock_model(Authority, :full_name => "Kangaroo City Council", :short_name_encoded => "kangaroo")
     assign(:authorities, [["NSW", [a1, a2]]]) 
     render
-    response.should contain(a1.full_name)
-    response.should contain(a2.full_name)
+    rendered.should contain(a1.full_name)
+    rendered.should contain(a2.full_name)
   end
 end

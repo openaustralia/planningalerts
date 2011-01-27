@@ -1,5 +1,5 @@
 class PlanningAlertsSitemap
-  include ActionController::UrlWriter
+  include Rails.application.routes.url_helpers
   
   def generate_and_notify
     s = Sitemap.new(root_url(:host => Configuration::HOST)[0..-2], Rails.root.join('public'))

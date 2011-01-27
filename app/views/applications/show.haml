@@ -3,7 +3,7 @@
 - content_for :map, true
 #application
   - if @application.location
-    - link_to @application.map_url do
+    = link_to @application.map_url do
       #map_div(style="width:350px;height:200px")
     #pano(style="width:350px;height:200px")
   
@@ -33,8 +33,8 @@
           .author
             by #{comment.name} #{time_ago_in_words(comment.updated_at)} ago
     %p
-      - semantic_form_for [@application, @comment] do |f|
-        - f.inputs do
+      = semantic_form_for [@application, @comment] do |f|
+        = f.inputs do
           = f.input :text, :label => 'Comment'
           = f.input :name, :label => 'Name'
           = f.input :email, :label => 'Email', :hint => "We never show your email address"
@@ -43,12 +43,12 @@
   %p= addthis_bookmark_button.html_safe
   %ul#subscribe
     %li
-      - link_to new_alert_path(:address => @application.address) do
+      = link_to new_alert_path(:address => @application.address) do
         = image_tag "email.png", :size => "28x28"
         Email me whenever there are new applications near here
       (No more than once per day)
     %li
-      - link_to applications_path(:format => 'rss', :address => @application.address, :radius => 2000) do
+      = link_to applications_path(:format => 'rss', :address => @application.address, :radius => 2000) do
         = image_tag "rss.png", :size => "28x28"
         Subscribe to an RSS feed for all applications near here
 

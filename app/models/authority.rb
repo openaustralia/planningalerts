@@ -2,7 +2,7 @@ require 'open-uri'
 
 class Authority < ActiveRecord::Base
   has_many :applications
-  named_scope :active, :conditions => 'disabled = 0 or disabled is null'
+  scope :active, :conditions => 'disabled = 0 or disabled is null'
   
   def full_name_and_state
     full_name + ", " + state

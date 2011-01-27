@@ -6,6 +6,6 @@ class Comment < ActiveRecord::Base
   
   # Send the comment to the planning authority
   def after_confirm
-    CommentNotifier.deliver_notify(self)
+    CommentNotifier.notify(self).deliver
   end
 end

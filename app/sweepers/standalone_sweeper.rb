@@ -1,5 +1,5 @@
 class StandaloneSweeper < ActionController::Caching::Sweeper
-  include ActionController::UrlWriter
+  include Rails.application.routes.url_helpers
 
   protected
   

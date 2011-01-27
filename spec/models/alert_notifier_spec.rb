@@ -10,7 +10,7 @@ describe AlertNotifier do
       @original_applications_sent = Stat.applications_sent
       @a1 = mock_model(Application, :address => "Foo Street, Bar", :council_reference => "a1", :description => "Knock something down", :id => 1)
       @a2 = mock_model(Application, :address => "Bar Street, Foo", :council_reference => "a2", :description => "Put something up", :id => 2)
-      @email = AlertNotifier.create_alert(@alert, [@a1, @a2])
+      @email = AlertNotifier.alert(@alert, [@a1, @a2])
     end
     
     it "should be sent to the user's email address" do

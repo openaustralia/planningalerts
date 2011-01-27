@@ -15,7 +15,7 @@ module EmailConfirmable
       before_create :set_confirm_info
       after_create :send_confirmation_email
 
-      named_scope :confirmed, :conditions => {:confirmed => true}
+      scope :confirmed, :conditions => {:confirmed => true}
     end
   end
   
@@ -27,7 +27,7 @@ module EmailConfirmable
     end
   
     def send_confirmation_email
-      Notifier.deliver_confirm(self)
+      Notifier.confirm(self).deliver
     end
   
     protected

@@ -9,23 +9,23 @@ describe CommentNotifier do
     end
   
     it "should be sent to the planning authority's feedback email address" do
-      notifier = CommentNotifier.create_notify(@comment)
+      notifier = CommentNotifier.notify(@comment)
       notifier.to.should == [@comment.application.authority.email]
     end
     
     it "should be from the email address of the person who made the comment" do
-      notifier = CommentNotifier.create_notify(@comment)
+      notifier = CommentNotifier.notify(@comment)
       notifier.from.should == [@comment.email]
       #notifier.from_addrs.first.name.should == @comment.name
     end
 
     it "should say in the subject line it is a comment on a development application" do
-      notifier = CommentNotifier.create_notify(@comment)
+      notifier = CommentNotifier.notify(@comment)
       notifier.subject.should == "Comment on application X/001"
     end
     
     it "should have specific information in the body of the email" do
-      notifier = CommentNotifier.create_notify(@comment)
+      notifier = CommentNotifier.notify(@comment)
       notifier.body.should == <<-EOF
 Application:          X/001
 Address:              12 Foo Rd

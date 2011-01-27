@@ -1,9 +1,9 @@
 - content_for :meta_description, "A free service which searches Australian planning authority websites and emails you details of applications near you"
-- semantic_form_for @alert, :url => {:action => 'create'} do |f|
-  - f.inputs do
+= semantic_form_for @alert, :url => {:action => 'create'} do |f|
+  = f.inputs do
     = f.input :address, :label => "Enter a street address", :hint => "e.g. 1 Sowerby St, Goulburn, NSW 2580"
     = f.input :email, :label => "Enter your email address"
-  - f.buttons do
+  = f.buttons do
     = f.commit_button "Create alert"
 %p#privacy
   Our

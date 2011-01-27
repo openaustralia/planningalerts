@@ -6,7 +6,7 @@ describe EmailConfirmable::Notifier do
       @alert = Alert.create!(:email => "matthew@openaustralia.org", :address => "24 Bruce Rd, Glenbrook NSW 2773",
         :lat => 1.0, :lng => 2.0, :radius_meters => 800)
       @alert.stub!(:confirm_id).and_return("abcdef")
-      @email = EmailConfirmable::Notifier.create_confirm(@alert)
+      @email = EmailConfirmable::Notifier.confirm(@alert)
     end
 
     it "should be sent to the user's email address" do
@@ -39,23 +39,23 @@ describe EmailConfirmable::Notifier do
     end
     
     it "should be sent to the user's email address" do
-      notifier = EmailConfirmable::Notifier.create_confirm(@comment)
+      notifier = EmailConfirmable::Notifier.confirm(@comment)
       notifier.to.should == [@comment.email]
     end
   
     it "should be from the main planningalerts email address" do
-      notifier = EmailConfirmable::Notifier.create_confirm(@comment)
+      notifier = EmailConfirmable::Notifier.confirm(@comment)
       notifier.from.should == ["contact@planningalerts.org.au"]
       #notifier.from_addrs.first.name.should == "PlanningAlerts.org.au"
     end
   
     it "should say in the subject line it is an email to confirm a comment" do
-      notifier = EmailConfirmable::Notifier.create_confirm(@comment)
+      notifier = EmailConfirmable::Notifier.confirm(@comment)
       notifier.subject.should == "Please confirm your comment"
     end
   
     it "should include a confirmation url" do
-      notifier = EmailConfirmable::Notifier.create_confirm(@comment)
+      notifier = EmailConfirmable::Notifier.confirm(@comment)
       notifier.should have_body_text(/http:\/\/localhost:3000\/comments\/abcdef\/confirmed/)
     end
   end

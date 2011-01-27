@@ -57,14 +57,14 @@ describe Alert do
       Location.stub!(:geocode).and_return(mock(:error => "some error message", :lat => nil, :lng => nil, :full_address => nil))
       u = Alert.new(:email => "matthew@openaustralia.org")
       u.should_not be_valid
-      u.errors.on(:address).should == "some error message"
+      u.errors[:address].should == ["some error message"]
     end
     
     it "should error if there are multiple matches from the geocoder" do
       Location.stub!(:geocode).and_return(mock(:lat => 1, :lng => 2, :full_address => "Bruce Rd, VIC 3885", :error => nil, :all => [nil, nil]))
       u = Alert.new(:address => "Bruce Road", :email => "matthew@openaustralia.org")
       u.should_not be_valid
-      u.errors.on(:address).should == "isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"
+      u.errors[:address].should == ["isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"]
     end
 
     it "should replace the address with the full resolved address obtained by geocoding" do
@@ -80,14 +80,14 @@ describe Alert do
       @attributes[:email] = "diddle@"
       u = Alert.new(@attributes)
       u.should_not be_valid
-      u.errors.on(:email).should == "does not appear to be a valid e-mail address"    
+      u.errors[:email].should == ["does not appear to be a valid e-mail address"]    
     end
 
     it "should have an '@' in it" do
       @attributes[:email] = "diddle"
       u = Alert.new(@attributes)
       u.should_not be_valid
-      u.errors.on(:email).should == "does not appear to be a valid e-mail address"    
+      u.errors[:email].should == ["does not appear to be a valid e-mail address"]    
     end
   end
   
@@ -113,14 +113,14 @@ describe Alert do
       @attributes[:radius_meters] = "a"
       u = Alert.new(@attributes)
       u.should_not be_valid
-      u.errors.on(:radius_meters).should == "isn't selected"
+      u.errors[:radius_meters].should == ["isn't selected"]
     end
   
     it "should be greater than zero" do
       @attributes[:radius_meters] = "0"
       u = Alert.new(@attributes)
       u.should_not be_valid
-      u.errors.on(:radius_meters).should == "isn't selected"    
+      u.errors[:radius_meters].should == ["isn't selected"]    
     end
   end
 

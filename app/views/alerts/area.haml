@@ -5,7 +5,7 @@
 %p
   What size area near #{@alert.address} would you like to receive alerts for?
 
-- form_tag do
+= form_tag do
   %ul.nobullets
     %li
       = radio_button_tag(:size, "s", @size == "s")
