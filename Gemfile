@@ -20,7 +20,6 @@ gem 'formtastic', '~> 1.1.0'
 gem 'validates_email_format_of', :git => 'git://github.com/alexdunae/validates_email_format_of.git'
 gem "compass", ">= 0.10.6"
 gem 'fancy-buttons'
-gem 'typus', :git => 'https://github.com/fesplugas/typus.git'
 gem "rails-geocoder", :require => "geocoder"
 
 group :test do

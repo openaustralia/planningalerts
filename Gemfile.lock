@@ -4,15 +4,6 @@ GIT
   specs:
     validates_email_format_of (1.4.4)
 
-GIT
-  remote: https://github.com/fesplugas/typus.git
-  revision: fd6be67d240d276984966a814537d407d8312457
-  specs:
-    typus (3.0.4)
-      fastercsv (~> 1.5)
-      render_inheritable
-      will_paginate (~> 3.0.pre2)
-
 GEM
   remote: http://gemcutter.org/
   remote: http://gems.github.com/
@@ -75,7 +66,6 @@ GEM
       railties (>= 3.0.0)
     fancy-buttons (1.0.6)
       compass (= 0.10.6)
-    fastercsv (1.5.4)
     foreigner (0.9.1)
     formtastic (1.1.0)
       actionpack (>= 2.3.0)
@@ -126,8 +116,6 @@ GEM
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.8.7)
-    render_inheritable (1.0.0)
-      rails (~> 3.0)
     riddle (1.2.2)
     rspec (2.4.0)
       rspec-core (~> 2.4.0)
@@ -181,7 +169,6 @@ DEPENDENCIES
   rspec-rails (~> 2.4)
   smurf
   thinking-sphinx (= 2.0.0)
-  typus!
   validates_email_format_of!
   webrat
   will_paginate (~> 3.0.pre2)

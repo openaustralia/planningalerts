@@ -1,8 +1,0 @@
-# Typus Roles Configuration File
-#
-# Use the README file as a reference to customize settings.
-
-admin:
-  Alert: read
-  Authority: create, read, update
-  Comment: read, update
