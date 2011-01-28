@@ -52,6 +52,10 @@
             = link_to 'About', about_path
       #page
         #content
+          - if notice
+            %p.notice= notice
+          - if alert
+            %p.alert= alert
           = yield
       #footer
         %ul.inline

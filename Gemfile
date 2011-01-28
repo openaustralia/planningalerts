@@ -21,6 +21,8 @@ gem 'validates_email_format_of', :git => 'git://github.com/alexdunae/validates_e
 gem "compass", ">= 0.10.6"
 gem 'fancy-buttons'
 gem "rails-geocoder", :require => "geocoder"
+gem 'devise' # Devise must be required before RailsAdmin
+gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 
 group :test do
   gem 'cucumber-rails'
