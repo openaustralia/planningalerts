@@ -24,6 +24,19 @@
         = link_to "Support or object", @application.comment_url
         to this application
   %p (Source: #{@application.authority.full_name})
+  %p= addthis_bookmark_button.html_safe
+
+  %ul#subscribe
+    %li
+      = link_to new_alert_path(:address => @application.address) do
+        = image_tag "email.png", :size => "28x28"
+        Email me whenever there are new applications near here
+      (No more than once per day)
+    %li
+      = link_to applications_path(:format => 'rss', :address => @application.address, :radius => 2000) do
+        = image_tag "rss.png", :size => "28x28"
+        Subscribe to an RSS feed for all applications near here
+
   - if @application.authority.contactable?
     %h3 Comments
     %ol
@@ -39,18 +52,6 @@
           = f.input :name, :label => 'Name'
           = f.input :email, :label => 'Email', :hint => "We never show your email address"
         = f.buttons
-  
-  %p= addthis_bookmark_button.html_safe
-  %ul#subscribe
-    %li
-      = link_to new_alert_path(:address => @application.address) do
-        = image_tag "email.png", :size => "28x28"
-        Email me whenever there are new applications near here
-      (No more than once per day)
-    %li
-      = link_to applications_path(:format => 'rss', :address => @application.address, :radius => 2000) do
-        = image_tag "rss.png", :size => "28x28"
-        Subscribe to an RSS feed for all applications near here
 
 %h3 Tweets mentioning this planning application
 #boastful
