@@ -5,7 +5,12 @@
     - if yield(:meta_description)
       %meta{:name => "Description", :content => yield(:meta_description)} 
     %meta(name="viewport" content="width=900, initial-scale=0.35")
-    %title #{yield(:page_title) || "Email alerts of planning applications near you"} | PlanningAlerts
+    %title
+      - if yield(:page_title) != ""
+        = yield(:page_title)
+      - else
+        Email alerts of planning applications near you
+      | PlanningAlerts
     - if @rss
       %link(rel="alternate" type="application/rss+xml" title="RSS" href=@rss)
     = stylesheet_link_tag 'compiled/screen.css', :media => 'screen, projection'
