@@ -1,6 +1,6 @@
 <%= application.address %> (<%= application.council_reference %>)
 
-<%= application.description %>
+<%= raw application.description %>
 
 <%= raw application_url(:host => @host, :id => application.id, :utm_source => 'alerts', :utm_medium => 'email', :escape => false) %>
 
