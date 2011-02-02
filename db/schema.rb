@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110123120310) do
+ActiveRecord::Schema.define(:version => 20110202043210) do
 
   create_table "alerts", :force => true do |t|
     t.string   "email",         :limit => 120, :null => false
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(:version => 20110123120310) do
     t.boolean  "confirmed"
     t.integer  "radius_meters",                :null => false
     t.string   "lga_name",      :limit => 50
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "applications", :force => true do |t|
