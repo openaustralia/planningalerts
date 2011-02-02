@@ -69,7 +69,10 @@ class ApplicationsController < ApplicationController
       format.html
       format.mobile { render "index_mobile", :layout => "mobile" }
       # TODO: Move the template over to using an xml builder
-      format.rss { render "index.rss", :layout => false, :content_type => Mime::XML }
+      format.rss do
+        render params[:style] == "html" ? "index.html_rss" : "index.rss",
+          :layout => false, :content_type => Mime::XML
+      end
       format.js { render :json => @applications.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance]) }
     end
   end
