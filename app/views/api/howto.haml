@@ -1,7 +1,7 @@
 - content_for :page_title, "API"
 %h3= yield :page_title
 %p
-  Planning application data is available programmatically as <a href="http://georss.org/">GeoRSS</a> feeds which can
+  Planning application data is available programmatically as feeds which can
   be used in most web mapping APIs and desktop GIS software like <a href="http://mapufacture.com">mapufacture</a>
   and <a href="http://pipes.yahoo.com/">Yahoo Pipes</a>. Details of the API are listed below.
 %p
@@ -11,6 +11,10 @@
   By appending "&amp;<strong>style</strong>=html" to the end of the url it will return an html formatted
   description in the georss feed rather than the default plain text. This is especially
   useful when a georss feed is embedded in a map as in the examples below.
+%p
+  The API can return different formats including <a href="http://www.georss.org/">GeoRSS</a>, <a href="http://www.json.org/">JSON</a> and human readable HTML. The examples below all return
+  GeoRSS. To get JSON instead simply replace ".rss" in the URL with ".js". To return HTML simply
+  remove the ".rss" suffix completely.
 %h4
   API documentation
 .apiitem
