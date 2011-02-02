@@ -7,6 +7,10 @@
 %p
   All the API calls listed below return planning application sorted by the date they were scraped from the planning authority website with the most
   recent listed first. They will return a maximum of #{Application.per_page} results. To retrieve more results simply append "&amp;<strong>page</strong>=[2,3,etc..]" to the url.
+%p
+  By appending "&amp;<strong>style</strong>=html" to the end of the url it will return an html formatted
+  description in the georss feed rather than the default plain text. This is especially
+  useful when a georss feed is embedded in a map as in the examples below.
 %h4
   API documentation
 .apiitem
@@ -19,7 +23,7 @@
   %p.apiexamples
     = link_to "view example", api_example_address_url
     |
-    = link_to "view on a map", mapify(api_example_address_url, 14)
+    = link_to "view on a map", mapify(api_example_address_url + "&style=html", 14)
 .apiitem
   %h5
     Single Location by longitude/latitude
@@ -30,7 +34,7 @@
   %p.apiexamples
     = link_to "view example", api_example_latlong_url
     |
-    = link_to "view on a map", mapify(api_example_latlong_url, 14)
+    = link_to "view on a map", mapify(api_example_latlong_url + "&style=html", 14)
 .apiitem
   %h5
     Area by longitude/latitude
@@ -40,7 +44,7 @@
   %p.apiexamples
     = link_to "view example", api_example_area_url
     |
-    = link_to "view on a map", mapify(api_example_area_url, 6)
+    = link_to "view on a map", mapify(api_example_area_url + "&style=html", 6)
 .apiitem
   %h5
     Planning authority
@@ -50,7 +54,7 @@
   %p.apiexamples
     = link_to "view example", api_example_authority_url
     |
-    = link_to "view on a map", mapify(api_example_authority_url, 11)
+    = link_to "view on a map", mapify(api_example_authority_url + "&style=html", 11)
 .apiitem
   %h5
     Postcode
@@ -60,7 +64,7 @@
   %p.apiexamples
     = link_to "view example", api_example_postcode_url
     |
-    = link_to "view on a map", mapify(api_example_postcode_url, 13)
+    = link_to "view on a map", mapify(api_example_postcode_url + "&style=html", 13)
 .apiitem
   %h5
     Suburb
@@ -70,7 +74,7 @@
   %p.apiexamples
     = link_to "view example", api_example_suburb_and_state_url
     |
-    = link_to "view on a map", mapify(api_example_suburb_and_state_url, 13)
+    = link_to "view on a map", mapify(api_example_suburb_and_state_url + "&style=html", 13)
 
 %h4#hLicenseInfo
   License information
