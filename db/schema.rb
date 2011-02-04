@@ -1,6 +1,6 @@
-# This file is auto-generated from the current state of the database. Instead
-# of editing this file, please use the migrations feature of Active Record to
-# incrementally modify your database, and then regenerate this schema definition.
+# This file is auto-generated from the current state of the database. Instead of editing this file, 
+# please use the migrations feature of Active Record to incrementally modify your database, and
+# then regenerate this schema definition.
 #
 # Note that this schema.rb definition is the authoritative source for your
 # database schema. If you need to create the application database on another
@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110128045845) do
+ActiveRecord::Schema.define(:version => 20110202043210) do
 
   create_table "alerts", :force => true do |t|
     t.string   "email",         :limit => 120, :null => false
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(:version => 20110128045845) do
     t.boolean  "confirmed"
     t.integer  "radius_meters",                :null => false
     t.string   "lga_name",      :limit => 50
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "applications", :force => true do |t|
