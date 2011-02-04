@@ -5,7 +5,7 @@ class AddTimestampsToAlerts < ActiveRecord::Migration
   end
 
   def self.down
-    drop_column :alerts, :created_at
-    drop_column :alerts, :updated_at
+    remove_column :alerts, :created_at
+    remove_column :alerts, :updated_at
   end
 end
