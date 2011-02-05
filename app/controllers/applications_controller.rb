@@ -109,6 +109,8 @@ class ApplicationsController < ApplicationController
   end
   
   def nearby
+    @rss = nearby_application_url(params.merge(:format => "rss", :page => nil))
+    
     # TODO: Fix this hacky ugliness
     if in_mobile_view?
       per_page = 10
@@ -126,6 +128,7 @@ class ApplicationsController < ApplicationController
     respond_to do |format|
       format.html { render "index" }
       format.mobile { render "index_mobile", :layout => "mobile" }
+      format.rss { render "index.rss", :layout => false, :content_type => Mime::XML }
     end
   end
 
