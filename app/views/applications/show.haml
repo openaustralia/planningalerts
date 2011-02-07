@@ -45,6 +45,7 @@
           .text= comment.text
           .author
             by #{comment.name} #{time_ago_in_words(comment.updated_at)} ago
+          = link_to "Report abuse", new_comment_report_path(comment)
     %p
       All the information you provide in your comment below will be sent to
       <strong>#{@application.authority.full_name}</strong> and will influence whether the application
