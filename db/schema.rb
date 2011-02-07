@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110202043210) do
+ActiveRecord::Schema.define(:version => 20110207022832) do
 
   create_table "alerts", :force => true do |t|
     t.string   "email",         :limit => 120, :null => false
@@ -87,6 +87,15 @@ ActiveRecord::Schema.define(:version => 20110202043210) do
   end
 
   add_index "histories", ["item", "table", "month", "year"], :name => "index_histories_on_item_and_table_and_month_and_year"
+
+  create_table "reports", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.text     "details"
+    t.integer  "comment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "stats", :force => true do |t|
     t.string  "key",   :limit => 25, :null => false
