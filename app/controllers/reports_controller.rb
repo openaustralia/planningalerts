@@ -7,7 +7,9 @@ class ReportsController < ApplicationController
   def create
     @comment = Comment.find(params[:comment_id])
     @report = @comment.reports.build(:name => params[:report][:name], :email => params[:report][:email], :details => params[:report][:details])
-    unless @report.save
+    if @report.save
+      ReportNotifier.notify(@report).deliver
+    else
       render 'new'
     end
   end

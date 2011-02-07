@@ -29,5 +29,5 @@ Then /^I should see a link to application page "([^"]*)"$/ do |application_id|
 end
 
 Given /^a moderator email of "([^"]*)"$/ do |email|
-  Configuration::EMAIL_MODERATOR = email
+  Kernel::silence_warnings { Configuration::EMAIL_MODERATOR = email }
 end
