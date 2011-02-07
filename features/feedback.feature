@@ -44,3 +44,33 @@ Feature: Give feedback to Council
     Then they should see "I think this is a really good ideas" in the email body
     When I follow "the application page"
     Then I should see "I think this is a really good ideas"
+
+  @wip
+  Scenario: Reporting abuse on a confirmed comment
+    Given a moderator email of "moderator@planningalerts.org.au"
+    And a confirmed comment "I'm saying something abusive" by "Jack Rude" with email "rude@foo.com" and id "23"
+    When I go to report comment "23"
+    And I fill in "Name" with "Joe Reporter"
+    And I fill in "Email" with "reporter@foo.com"
+    And I fill in "Details" with "You can't be rude to people!"
+    And I press "Send report"
+    Then I should see "The comment has been reported and a moderator will look into it as soon as possible."
+    And I should see "Thanks for taking the time let us know about this."
+    And "moderator@planningalerts.org.au" should receive an email
+    When they open the email
+    Then they should see "PlanningAlerts.org.au: Abuse report" in the email subject
+    And they should see the email delivered from "contact@planningalerts.org.au"
+    And they should receive an email with the following body:
+      | An abuse report has been filled out for the comment:       |
+      | I'm saying something abusive                               |
+      |                                                            |
+      | Author: Jack Rude (rude@foo.com)                           |
+      | Reported by: Joe Reporter (reporter@foo.com)               |
+      |                                                            |
+      | The original comment can be found at:                      |
+      | http://dev.planningalerts.org.au/applications/2#comment_23 |
+      |                                                            |
+      | To edit/hide/delete this comment:                          |
+      | http://dev.planningalerts.org.au/admin/comments/23/edit    |
+    
+    
