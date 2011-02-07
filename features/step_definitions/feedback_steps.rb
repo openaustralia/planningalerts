@@ -20,6 +20,14 @@ Given /^an unconfirmed comment "([^"]*)" on application "([^"]*)"$/ do |comment,
   Factory(:comment, :confirmed => false, :text => comment, :application => Application.find(application_id))
 end
 
+Given /^a confirmed comment "([^"]*)" by "([^"]*)" with email "([^"]*)" and id "([^"]*)"$/ do |text, name, email, id|
+  Factory(:comment, :confirmed => true, :text => text, :name => name, :email => email, :id => id)
+end
+
 Then /^I should see a link to application page "([^"]*)"$/ do |application_id|
   Then %{I should see "#{application_url(Application.find(application_id), :host => Configuration::HOST)}"}
+end
+
+Given /^a moderator email of "([^"]*)"$/ do |email|
+  Configuration::EMAIL_MODERATOR = email
 end

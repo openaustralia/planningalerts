@@ -15,6 +15,8 @@ module Configuration
   EMAIL_FROM_NAME = 'PlanningAlerts.org.au'
   # Email that bounced emails go to (sets Return-Path header in outgoing email)
   BOUNCE_EMAIL_ADDRESS = EMAIL_FROM_ADDRESS
+  # The email that abuse reports are sent to
+  EMAIL_MODERATOR = EMAIL_FROM_ADDRESS
 
   # Scraper params
   SCRAPE_DELAY = 5

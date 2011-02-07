@@ -49,9 +49,9 @@ Feature: Give feedback to Council
   Scenario: Reporting abuse on a confirmed comment
     Given a moderator email of "moderator@planningalerts.org.au"
     And a confirmed comment "I'm saying something abusive" by "Jack Rude" with email "rude@foo.com" and id "23"
-    When I go to report comment "23"
-    And I fill in "Name" with "Joe Reporter"
-    And I fill in "Email" with "reporter@foo.com"
+    When I go to the report page for comment "I'm saying something abusive"
+    And I fill in "Your name" with "Joe Reporter"
+    And I fill in "Your email" with "reporter@foo.com"
     And I fill in "Details" with "You can't be rude to people!"
     And I press "Send report"
     Then I should see "The comment has been reported and a moderator will look into it as soon as possible."
