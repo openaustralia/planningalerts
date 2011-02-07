@@ -1,8 +1,8 @@
-An abuse report has been filled out for the comment:
-<%= @comment.text %>
+The abuse report was completed by <%= @report.name %> (<%= @report.email %>) who said:
+<%= @report.details %>
 
-Author: <%= @comment.name%> (<%= @comment.email %>)
-Reported by: <%= @report.name %> (<%= @report.email %>)
+The original comment was written by <%= @comment.name%> (<%= @comment.email %>) who said:
+<%= @comment.text %>
 
 The original comment can be found at:
 <%= application_url(@comment.application, :anchor => "comment#{@comment.id}") %>

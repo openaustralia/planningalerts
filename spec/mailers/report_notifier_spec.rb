@@ -5,7 +5,8 @@ describe ReportNotifier do
     @application = mock_model(Application, :id => "2")
     @comment = mock_model(Comment, :application => @application, :text => "I'm saying something abusive",
       :name => "Jack Rude", :email => "rude@foo.com", :id => "23")
-    @report = mock_model(Report, :name => "Joe Reporter", :email => "reporter@foo.com", :comment => @comment)
+    @report = mock_model(Report, :name => "Joe Reporter", :email => "reporter@foo.com", :comment => @comment,
+      :details => "This is very rude!")
     @notifier = ReportNotifier.notify(@report)
   end
   
@@ -23,11 +24,11 @@ describe ReportNotifier do
   
   it "should tell the moderator everything they need to know to decide on what to do with the report" do
     @notifier.body.should == <<-EOF
-An abuse report has been filled out for the comment:
-I'm saying something abusive
+The abuse report was completed by Joe Reporter (reporter@foo.com) who said:
+This is very rude!
 
-Author: Jack Rude (rude@foo.com)
-Reported by: Joe Reporter (reporter@foo.com)
+The original comment was written by Jack Rude (rude@foo.com) who said:
+I'm saying something abusive
 
 The original comment can be found at:
 http://dev.planningalerts.org.au/applications/2#comment23
