@@ -41,7 +41,7 @@
     %h3 Comments
     %ol
       - @application.comments.confirmed.each do |comment|
-        %li
+        %li{:id => "comment#{comment.id}"}
           .text= comment.text
           .author
             by #{comment.name} #{time_ago_in_words(comment.updated_at)} ago
