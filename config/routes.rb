@@ -31,6 +31,10 @@ PlanningalertsApp::Application.routes.draw do
     end
     resources :comments, :only => [:create, :show]
   end
+  
+  resources :comments, :only => [] do
+    resources :reports, :only => [:new, :create]
+  end
 
   resources :authorities, :only => [] do
     collection do

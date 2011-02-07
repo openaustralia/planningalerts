@@ -1,0 +1,12 @@
+- content_for :page_title, "Report abuse on comment"
+%h3= yield :page_title
+.text= @comment.text
+.author
+  by #{@comment.name} #{time_ago_in_words(@comment.updated_at)} ago
+= semantic_form_for [@comment, @report] do |f|
+  = f.inputs do
+    = f.input :name, :label => "Your name"
+    = f.input :email, :label => "Your email"
+    = f.input :details, :as => :text
+  = f.buttons do
+    = f.commit_button :label => "Send report"
