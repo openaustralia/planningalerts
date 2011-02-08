@@ -38,7 +38,8 @@
         Subscribe to an RSS feed for all applications near here
 
   - if @application.authority.contactable?
-    %h3 Comments
+    - unless @application.comments.confirmed.empty?
+      %h4 Comments
     %ol
       - @application.comments.confirmed.each do |comment|
         %li{:id => "comment#{comment.id}"}
@@ -46,6 +47,7 @@
           .author
             by #{comment.name} #{time_ago_in_words(comment.updated_at)} ago
           = link_to "Report abuse", new_comment_report_path(comment)
+    %h4 Add your own comment
     %p
       All the information you provide in your comment below will be sent to
       <strong>#{@application.authority.full_name}</strong> and will influence whether the application
@@ -66,12 +68,12 @@
               Please ensure you do the right thing. 
         = f.buttons
 
-%h3 Tweets mentioning this planning application
+%h4 Tweets mentioning this planning application
 #boastful
 
 - unless @application.find_all_nearest_or_recent.empty?
   #nearby-applications
-    %h3 Selection of other recent or nearby applications
+    %h4 Selection of other recent or nearby applications
     %dl
       = render :partial => "applications/application", :collection => @application.find_all_nearest_or_recent[0...5]
     = link_to("more applications nearby&hellip;".html_safe, nearby_application_url(@application))
