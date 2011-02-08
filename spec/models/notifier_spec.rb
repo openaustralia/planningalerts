@@ -23,7 +23,7 @@ describe EmailConfirmable::Notifier do
     end
   
     it "should include a confirmation url" do
-      @email.should have_body_text(/http:\/\/localhost:3000\/alerts\/abcdef\/confirmed/)
+      @email.should have_body_text(/http:\/\/dev.planningalerts.org.au\/alerts\/abcdef\/confirmed/)
     end
   
     it "should include the address for the alert" do
@@ -56,7 +56,7 @@ describe EmailConfirmable::Notifier do
   
     it "should include a confirmation url" do
       notifier = EmailConfirmable::Notifier.confirm(@comment)
-      notifier.should have_body_text(/http:\/\/localhost:3000\/comments\/abcdef\/confirmed/)
+      notifier.should have_body_text(/http:\/\/dev.planningalerts.org.au\/comments\/abcdef\/confirmed/)
     end
   end
   

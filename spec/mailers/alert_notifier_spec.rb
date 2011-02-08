@@ -43,7 +43,7 @@ Foo Street, Bar (a1)
 
 Knock something down
 
-http://localhost:3000/applications/1?utm_medium=email&utm_source=alerts
+http://dev.planningalerts.org.au/applications/1?utm_medium=email&utm_source=alerts
 
 -----------------------------
 
@@ -51,18 +51,18 @@ Bar Street, Foo (a2)
 
 Put something up
 
-http://localhost:3000/applications/2?utm_medium=email&utm_source=alerts
+http://dev.planningalerts.org.au/applications/2?utm_medium=email&utm_source=alerts
 
 ============================================================
 
 PlanningAlerts.org.au is a free service run by the charity OpenAustralia Foundation.
 
-You can subscribe to a geoRSS feed of applications for 24 Bruce Rd, Glenbrook NSW 2773 here: http://localhost:3000/applications.rss?address=24+Bruce+Rd%2C+Glenbrook+NSW+2773&radius=800
+You can subscribe to a geoRSS feed of applications for 24 Bruce Rd, Glenbrook NSW 2773 here: http://dev.planningalerts.org.au/applications.rss?address=24+Bruce+Rd%2C+Glenbrook+NSW+2773&radius=800
 
-GeoRSS can be used to display planning applications on a map. For example, on Google Maps: http://maps.google.com.au/maps?q=http%3A%2F%2Flocalhost%3A3000%2Fapplications.rss%3Faddress%3D24%2BBruce%2BRd%252C%2BGlenbrook%2BNSW%2B2773%26radius%3D800
+GeoRSS can be used to display planning applications on a map. For example, on Google Maps: http://maps.google.com.au/maps?q=http%3A%2F%2Fdev.planningalerts.org.au%2Fapplications.rss%3Faddress%3D24%2BBruce%2BRd%252C%2BGlenbrook%2BNSW%2B2773%26radius%3D800
 
-To change the size of the area covered by the alerts: http://localhost:3000/alerts/abcdef/area
-To stop receiving these emails: http://localhost:3000/alerts/abcdef/unsubscribe
+To change the size of the area covered by the alerts: http://dev.planningalerts.org.au/alerts/abcdef/area
+To stop receiving these emails: http://dev.planningalerts.org.au/alerts/abcdef/unsubscribe
       EOF
     end
   end

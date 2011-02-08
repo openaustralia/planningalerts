@@ -22,7 +22,7 @@ describe LayarController do
       "actions" => [
         {
           "label" => "More info",
-          "uri" => "http://localhost:3000/applications/101?utm_medium=ar&utm_source=layar"
+          "uri" => "http://test.host/applications/101?utm_medium=ar&utm_source=layar"
         }
       ]
     }

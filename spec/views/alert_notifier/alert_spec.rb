@@ -8,7 +8,6 @@ describe "alert_notifier/alert" do
       :description => "Alterations & additions", :council_reference => "007")
     assign(:applications, [application])
     assign(:georss_url, "blah")
-    assign(:host, 'dev.planningalerts.org.au')
     render
     rendered.should contain("Alterations & additions")      
   end

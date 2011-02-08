@@ -2,5 +2,5 @@
 
 <%= raw application.description %>
 
-<%= raw application_url(:host => @host, :id => application.id, :utm_source => 'alerts', :utm_medium => 'email', :escape => false) %>
+<%= raw application_url(:id => application.id, :utm_source => 'alerts', :utm_medium => 'email', :escape => false) %>
 

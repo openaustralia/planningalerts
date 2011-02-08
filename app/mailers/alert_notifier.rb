@@ -6,9 +6,8 @@ class AlertNotifier < ActionMailer::Base
     @alert = alert
     @applications = applications
 
-    @host = Configuration::HOST
-    @georss_url = applications_url(:format => "rss", :host => Configuration::HOST, :address => @alert.address, :radius => @alert.radius_meters)
-    @unsubscribe_url = unsubscribe_alert_url(:host => Configuration::HOST, :id => @alert.confirm_id)
+    @georss_url = applications_url(:format => "rss", :address => @alert.address, :radius => @alert.radius_meters)
+    @unsubscribe_url = unsubscribe_alert_url(:id => @alert.confirm_id)
     
     # Update statistics. Is this a good place to do them or would it make more sense to do it after the mailing has
     # happened and we can check whether is was sucessful?
