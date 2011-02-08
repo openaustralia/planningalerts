@@ -1,18 +1,14 @@
 class AlertNotifier < ActionMailer::Base
+  default :from => "#{Configuration::EMAIL_FROM_NAME} <#{Configuration::EMAIL_FROM_ADDRESS}>"
   helper :application
 
   def alert(alert, applications)
-    @recipients = alert.email
-    @from = "#{Configuration::EMAIL_FROM_NAME} <#{Configuration::EMAIL_FROM_ADDRESS}>"
-    @subject = "Planning applications near #{alert.address}"
     @alert = alert
     @applications = applications
 
     @host = Configuration::HOST
     @georss_url = applications_url(:format => "rss", :host => Configuration::HOST, :address => @alert.address, :radius => @alert.radius_meters)
     @unsubscribe_url = unsubscribe_alert_url(:host => Configuration::HOST, :id => @alert.confirm_id)
-    
-    @headers = {"return-path" => Configuration::BOUNCE_EMAIL_ADDRESS}
     
     # Update statistics. Is this a good place to do them or would it make more sense to do it after the mailing has
     # happened and we can check whether is was sucessful?
@@ -24,5 +20,8 @@ class AlertNotifier < ActionMailer::Base
     # TODO: Like the comment above, is this really a good place to update the model?
     alert.last_sent = Time.now
     alert.save!
+    
+    mail(:to => alert.email, :subject => "Planning applications near #{alert.address}",
+      "return-path" => Configuration::BOUNCE_EMAIL_ADDRESS)
   end
 end
