@@ -12,17 +12,9 @@
   %p.council-reference Council reference: #{@application.council_reference}
   %p.dates
     = scraped_and_received_text(@application)
-  - if @application.on_notice_to
-    %p.on_notice
-      = on_notice_text(@application)
-  %ul
-    %li
-      = link_to "More information", @application.info_url
-      about this application
-    - unless @application.authority.contactable?
-      %li
-        = link_to "Support or object", @application.comment_url
-        to this application
+  %p
+    = link_to "Read more information", @application.info_url
+    about this application
   %p (Source: #{@application.authority.full_name})
   %p= addthis_bookmark_button.html_safe
 
@@ -45,7 +37,10 @@
         %li{:id => "comment#{comment.id}"}
           = render :partial => 'comments/comment', :locals => {:comment => comment}
           = link_to "Report comment", new_comment_report_path(comment)
-    %h4 Add your own comment
+  %h4 Add your own comment
+  - if @application.authority.contactable?  
+    - if @application.on_notice_to
+      %p= on_notice_text(@application)
     %p
       All the information you provide in your comment below will be sent to
       <strong>#{@application.authority.full_name}</strong> and will influence whether the application
@@ -65,7 +60,12 @@
               commenting on applications. We’ll have information on this soon.
               Please ensure you do the right thing. 
         = f.buttons
-
+  - else
+    %p
+      = link_to "How to comment", @application.comment_url
+      on this application (from #{@application.authority.full_name}).
+      - if @application.on_notice_to
+        = on_notice_text(@application)
 %h4 Tweets mentioning this planning application
 #boastful
 

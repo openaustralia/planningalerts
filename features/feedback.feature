@@ -7,7 +7,7 @@ Feature: Give feedback to Council
     Given a planning authority "Foo" without a feedback email
     And an application "1" in planning authority "Foo"
     When I go to application page "1"
-    Then I should see "Support or object to this application"
+    Then I should see "How to comment on this application"
     
   Scenario: Adding a comment
     Given a planning authority "Foo" with a feedback email "feedback@foo.gov.au"
