@@ -2,7 +2,7 @@
 source "http://gemcutter.org"
 source "http://gems.github.com"
 
-gem 'rails', '3.0.3'
+gem 'rails', '3.0.4'
 
 gem "capistrano"
 gem "mysql"
