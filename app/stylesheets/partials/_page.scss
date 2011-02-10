@@ -240,6 +240,28 @@ ul#subscribe {
   }
 }
 
+ol#comments {
+  @include no-bullets;
+  padding-left: 0;
+  li {
+    margin-bottom: 1em;
+  }
+}
+
+.comment {
+  .author {
+    @include quiet;
+  }
+  .report {
+    @include float-right;
+  }
+}
+
+body h4 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
 #application ul#subscribe {
   clear: both;
 }
