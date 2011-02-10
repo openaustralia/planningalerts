@@ -19,14 +19,9 @@ $fb-line-height: 1em;
   font-weight: normal;
 }
 
-$floated_total_width: 710px;
-$floated_input_width: 500px;
-$floated_label_width: 200px;
-
 .formtastic {
-  @include float-form;
+  @include float-form(100%, 25%, 70%);
   margin-top: 2em;
-  margin-left: 75px;
   margin-bottom: 2em;
   li {
     margin-bottom: 0.5em;
@@ -54,6 +49,16 @@ $floated_label_width: 200px;
 .formtastic.alert {
   abbr {
     display: none;
+  }
+}
+
+// Special formatting for specific forms
+
+.formtastic#new_comment, .formtastic#new_report {
+  @include float-form(100%, 20%, 75%);
+  textarea, input {
+    font-family: $blueprint-font-family;
+    font-size: 100%;
   }
 }
 
