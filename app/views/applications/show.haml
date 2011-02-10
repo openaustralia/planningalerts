@@ -44,21 +44,19 @@
       All the information you provide in your comment below will be sent to
       <strong>#{@application.authority.full_name}</strong> and will influence whether the application
       is approved or not. The text of your comment and your name will be public.
-    %p
-      = semantic_form_for [@application, @comment] do |f|
-        = f.inputs do
-          = f.input :text, :label => 'Comment'
-          = f.input :name, :label => 'Name'
-          = f.input :email, :label => 'Email', :hint => "We never display your email address"
-        %p
-          Please note:
-          %ul
-            %li Be polite, concise and to the point.
-            %li
-              By law some states require additional information from you when
-              commenting on applications. We’ll have information on this soon.
-              Please ensure you do the right thing. 
-        = f.buttons
+    = semantic_form_for [@application, @comment] do |f|
+      = f.inputs do
+        = f.input :text, :label => 'Comment'
+        = f.input :name, :label => 'Name'
+        = f.input :email, :label => 'Email', :hint => "We never display your email address"
+      Please note:
+      %ul
+        %li Be polite, concise and to the point.
+        %li
+          By law some states require additional information from you when
+          commenting on applications. We’ll have information on this soon.
+          Please ensure you do the right thing. 
+      = f.buttons
   - else
     %p
       = link_to "How to comment", @application.comment_url

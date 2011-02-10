@@ -243,12 +243,10 @@ ul#subscribe {
 ol#comments {
   @include no-bullets;
   padding-left: 0;
-  li {
-    margin-bottom: 1em;
-  }
 }
 
 .comment {
+  margin-bottom: 1em;
   .author {
     @include quiet;
   }
