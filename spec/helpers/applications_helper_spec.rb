@@ -45,7 +45,7 @@ describe ApplicationsHelper do
       @application.stub!(:on_notice_from).and_return(2.days.from_now)
       @application.stub!(:on_notice_to).and_return(16.days.from_now)
       helper.on_notice_text(@application).should ==
-        "The period for officially responding to this application starts in 2 days and finishes 14 days later."
+        "The period for officially responding to this application starts in <strong>2 days</strong> and finishes 14 days later."
     end
     
     describe "period is in progress" do
@@ -56,13 +56,13 @@ describe ApplicationsHelper do
       
       it "should say when the application is on notice" do
         helper.on_notice_text(@application).should ==
-          "You have 12 days left to officially respond to this application. The period for comment started 2 days ago."
+          "You have <strong>12 days</strong> left to officially respond to this application. The period for comment started 2 days ago."
       end
     
       it "should only say when on notice to if there is no on notice from information" do
         @application.stub!(:on_notice_from).and_return(nil)
         helper.on_notice_text(@application).should ==
-          "You have 12 days left to officially respond to this application."
+          "You have <strong>12 days</strong> left to officially respond to this application."
       end
     end
     
@@ -74,13 +74,13 @@ describe ApplicationsHelper do
       
       it "should say when the application is on notice" do
         helper.on_notice_text(@application).should ==
-          "You're too late! The period for officially commenting on this application finished 2 days ago. It lasted for 14 days."
+          "You're too late! The period for officially commenting on this application finished <strong>2 days</strong> ago. It lasted for 14 days."
       end
     
       it "should only say when on notice to if there is no on notice from information" do
         @application.stub!(:on_notice_from).and_return(nil)
         helper.on_notice_text(@application).should ==
-          "You're too late! The period for officially commenting on this application finished 2 days ago."
+          "You're too late! The period for officially commenting on this application finished <strong>2 days</strong> ago."
       end
     end
   end
