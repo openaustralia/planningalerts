@@ -61,6 +61,8 @@
             %p.notice= notice
           - if alert
             %p.alert= alert
+          - if flash[:error]
+            %p.error= flash[:error]
           = yield
       #footer
         %ul.inline

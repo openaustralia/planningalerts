@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(params[:comment])
     @comment.application_id = @application.id
     if !@comment.save
+      flash.now[:error] = "Some of the comment wasn't filled out completely. See below."
       render 'applications/show'
     end
   end
