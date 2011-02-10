@@ -271,8 +271,6 @@ body h4 {
   @include highlight;
 }
 
-// Not semantic. Ugh.
-
-.nobullets {
+.contributors, .authorities, .sizes {
   @include no-bullets;
 }

@@ -6,7 +6,7 @@
   What size area near #{@alert.address} would you like to receive alerts for?
 
 = form_tag do
-  %ul.nobullets
+  %ul.sizes
     %li
       = radio_button_tag(:size, "s", @size == "s")
       = label_tag(:size_s, "My street (within #{meters_in_words(@zone_sizes['s'])})")
