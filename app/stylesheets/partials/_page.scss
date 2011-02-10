@@ -247,6 +247,9 @@ ol#comments {
 
 .comment {
   margin-bottom: 1em;
+  p:last-child {
+    margin-bottom: 0;
+  }
   .author {
     @include quiet;
   }
