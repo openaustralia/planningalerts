@@ -29,7 +29,7 @@ $fb-line-height: 1em;
       background: inherit;
       border: inherit;
       color: inherit;
-      input {
+      input, textarea, select {
         background: $yellow;
       }
     }
