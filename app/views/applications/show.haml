@@ -46,8 +46,8 @@
       is approved or not. The text of your comment and your name will be public.
     = semantic_form_for [@application, @comment] do |f|
       = f.inputs do
-        = f.input :text, :label => 'Comment'
-        = f.input :name, :label => 'Name'
+        = f.input :text, :label => 'Comment', :hint => "Explain why you think this application should be approved or not"
+        = f.input :name, :label => 'Name', :hint => "Please use your real full name if possible."
         = f.input :email, :label => 'Email', :hint => "We never display your email address"
       Please note:
       %ul
