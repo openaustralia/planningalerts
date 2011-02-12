@@ -53,7 +53,10 @@
   %h5
     Planning authority
   %p.apidefinition
-    Return applications for a specific planning authority (e.g. a local council) by authority short name.
+    Return applications for a specific planning authority (e.g. a local council) by authority short name. To discover the authority short name
+    to use here, find the planning authority on the
+    = link_to "list of authorities", about_path(:anchor => "authorities")
+    and follow the link. The url has the authority short name in it.
   %code= raw api_example_authority_url_html
   %p.apiexamples
     = link_to "view example", api_example_authority_url
