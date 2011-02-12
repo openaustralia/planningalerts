@@ -31,6 +31,7 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'email_spec'
+  gem 'metric_fu'
 end
   
 group :test, :development do
