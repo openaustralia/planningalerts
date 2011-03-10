@@ -94,8 +94,22 @@ class ApplicationsController < ApplicationController
   end
   
   def search
+    # TODO: Fix this hacky ugliness
+    if request.format == Mime::HTML
+      per_page = 30
+    else
+      per_page = Application.per_page
+    end
+
     @q = params[:q]
-    @applications = Application.search @q, :order => :date_scraped, :sort_mode => :desc, :page => params[:page] if @q
+    @applications = Application.search @q, :order => :date_scraped, :sort_mode => :desc, :page => params[:page], :per_page => per_page if @q
+    @rss = search_applications_path(:format => "rss", :q => @q, :page => nil) if @q
+    @description = @q ? "Search: #{@q}" : "Search"
+
+    respond_to do |format|
+      format.html
+      format.rss { render "index.rss", :layout => false, :content_type => Mime::XML }
+    end
   end
   
   def show
