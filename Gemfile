@@ -23,6 +23,7 @@ gem 'fancy-buttons'
 gem "rails-geocoder", :require => "geocoder"
 gem 'devise' # Devise must be required before RailsAdmin
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+gem 'metric_fu'
 
 group :test do
   gem 'cucumber-rails'
@@ -31,7 +32,6 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'email_spec'
-  gem 'metric_fu'
 end
   
 group :test, :development do
