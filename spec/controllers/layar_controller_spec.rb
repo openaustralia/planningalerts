@@ -13,7 +13,7 @@ describe LayarController do
     assigns[:applications].should == result
     expected_layar = {
       "id" => 101, "type" => 1,
-      "lat" => 1000000, "lon" => 2000000, "distance" => 2000.0, "relativeAlt" => 0,
+      "lat" => 1000000, "lon" => 2000000, "distance" => 2000.0, "alt" => 0,
       "actions" => [], "imageURL" => nil, "attribution" => nil,
       "title" => "1 Foo St Fooville",
       "line2" => "1234 678901234 67890123 56789 12345",
