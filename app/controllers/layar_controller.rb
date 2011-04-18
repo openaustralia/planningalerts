@@ -12,7 +12,8 @@ class LayarController < ApplicationController
         :attribution => nil,
         :distance => a.distance.to_f / 0.621371192 * 1000,
         :id => a.id,
-        :imageURL => nil,
+        # TODO: Fix the hardwired domain name and path
+        :imageURL => "http://www.planningalerts.org.au/images/layar/icon_100x75.png",
         :lat => a.lat * 1000000,
         :lon => a.lng * 1000000,
         :line2 => lines[0],
