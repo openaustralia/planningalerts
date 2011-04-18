@@ -11,8 +11,8 @@ class LayarController < ApplicationController
         :actions => [{:label => "More info", :uri => application_url(:utm_medium => 'ar', :utm_source => 'layar', :id => a.id)}],
         :attribution => nil,
         :distance => a.distance.to_f / 0.621371192 * 1000,
-        # Setting altitude to zero for the benefit of Layar Player (because there's a bug)
-        :alt => 0,
+        # Setting altitude relative to user to zero for the benefit of Layar Player (because there's a bug)
+        :relativeAlt => 0,
         :id => a.id,
         :imageURL => nil,
         :lat => a.lat * 1000000,
