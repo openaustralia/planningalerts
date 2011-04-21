@@ -56,14 +56,15 @@
         %dl= render :partial => "application", :collection => @applications
 - else
   %hr
-  .news
-    .blog-feed
-      %h4
-        News via the blog
-      = render_rss_feed("http://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/feed/")
-      = link_to "More&hellip;".html_safe, "http://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/"
-    .twitter-feed
-      %h4
-        and via Twitter
-      = render_twitter_feed(97544430)
-      = link_to "More&hellip;".html_safe, "http://twitter.com/PlanningAlerts"
+  - cache 'news', 1.hour.from_now do
+    .news
+      .blog-feed
+        %h4
+          News via the blog
+        = render_rss_feed("http://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/feed/")
+        = link_to "More&hellip;".html_safe, "http://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/"
+      .twitter-feed
+        %h4
+          and via Twitter
+        = render_twitter_feed(97544430)
+        = link_to "More&hellip;".html_safe, "http://twitter.com/PlanningAlerts"

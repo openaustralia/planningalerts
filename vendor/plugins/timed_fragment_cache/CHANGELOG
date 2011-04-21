@@ -1,0 +1,12 @@
+*0.2* (2008.07.26, Steffen Rusitschka)
+
+* Port to Rails 2.1
+
+*0.1.1* (2006.09.03) 
+
+* Added License
+* Added expiry_time to get time the fragment is set to expire
+
+*0.1* 
+
+* Initial version

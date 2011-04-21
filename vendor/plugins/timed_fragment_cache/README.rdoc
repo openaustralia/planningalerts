@@ -1,0 +1,25 @@
+=timed_fragment_cache
+
+  git clone git://github.com/kshaikh/timed_fragment_cache.git
+  in your vendors/plugin directory
+
+or 
+
+  script/plugin install git://github.com/kshaikh/timed_fragment_cache.git
+
+In your controller
+
+  when_fragment_expired 'some_posts', 1.hour.from_now do
+    @posts = Post.find( :all )
+  end
+
+In your view
+
+  <%- cache 'some_posts' -%>
+    <%- @posts.each do |post| -%>
+      <%= @post.title %>
+    <%- end -%>
+  <%- end -%>
+
+Khalid Shaikh
+khalid.j.shaikh@gmail.com
