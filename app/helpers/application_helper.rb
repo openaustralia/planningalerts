@@ -1,3 +1,6 @@
+require 'rss/1.0'
+require 'rss/2.0'
+
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   def page_matches?(options)
@@ -53,5 +56,27 @@ module ApplicationHelper
     if is_mobile_optimised? && is_mobile_device?
       (link_to_unless(in_mobile_view?, "Mobile", :mobile => "true") + " | " + link_to_unless(!in_mobile_view?, "Desktop", :mobile => "false")).html_safe
     end
+  end
+  
+  def rss_feed_items(url)
+    content = ""
+    open(url, 0) do |s| content = s.read end
+    feed = RSS::Parser.parse(content, false)
+    feed.channel.items[0..4] # just use the first five items
+  end
+  
+  def render_rss_feed(url)
+    @items = rss_feed_items(url)
+    render :partial => 'applications/rss'
+  end
+  
+  def render_twitter_feed(user_id)
+    @items = rss_feed_items("http://twitter.com/statuses/user_timeline/#{user_id}.rss").map do |item|
+      # Remove the twitter handle from the start of the title
+      item.title =~ /^[^:]+:(.*)$/
+      item.title = $~[1]
+      item
+    end
+    render :partial => 'applications/rss'
   end
 end

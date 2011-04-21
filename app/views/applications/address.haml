@@ -56,11 +56,14 @@
         %dl= render :partial => "application", :collection => @applications
 - else
   %hr
-  .attention
-    %h4 New!
-    %p
-      For some shiny, try the new <a href="http://m.layar.com/open/planningalertsaustralia">PlanningAlerts</a> <a href="http://www.layar.com">Layar</a> for iPhone 3GS and Android phones and see <a href="http://m.layar.com/open/planningalertsaustralia">development applications
-      in beautiful and fun<sup>&lowast;</sup> augmented reality</a>. And it's free.
-    = link_to image_tag("layar/screenshot_with_iphone.png"), "http://m.layar.com/open/planningalertsaustralia"
-    %p.disclaimer
-      &lowast; Look both ways when crossing the road and try to return home before it gets dark.
+  .news
+    .blog-feed
+      %h4
+        News via the blog
+      = render_rss_feed("http://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/feed/")
+      = link_to "More&hellip;".html_safe, "http://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/"
+    .twitter-feed
+      %h4
+        and via Twitter
+      = render_twitter_feed(97544430)
+      = link_to "More&hellip;".html_safe, "http://twitter.com/PlanningAlerts"

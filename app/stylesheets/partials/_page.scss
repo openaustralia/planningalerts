@@ -274,3 +274,25 @@ body h4 {
 .contributors, .authorities, .sizes {
   @include no-bullets;
 }
+
+.news {
+  @include no-bullets;
+  ul {
+    padding-left: 0;
+  }
+  li {
+    padding-bottom: 0.5em;
+  }
+  .blog-feed {
+    @include column(10);
+  }
+  .twitter-feed {
+    @include prepend(2);
+    @include column(10, true);
+  }
+  .date {
+    @include quiet;
+    font-size: 0.8em;
+  }
+}
+
