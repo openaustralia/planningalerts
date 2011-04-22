@@ -56,7 +56,7 @@
         %dl= render :partial => "application", :collection => @applications
 - else
   %hr
-  - cache 'news', 1.hour.from_now do
+  - cache 'news', :expires_in => 1.hour do
     .news
       .blog-feed
         %h4
