@@ -1,7 +1,9 @@
 .bundle
 db/*.sqlite3
 log/*.log
-tmp/**/*
+tmp/cache
+tmp/pids
+tmp/sass-cache
 
 log/searchd.development.pid
 config/database.yml
