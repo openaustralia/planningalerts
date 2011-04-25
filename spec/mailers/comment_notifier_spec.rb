@@ -5,7 +5,7 @@ describe CommentNotifier do
     before :each do
       authority = mock_model(Authority, :full_name => "Foo Council", :email => "foo@bar.gov.au")
       application = mock_model(Application, :authority => authority, :address => "12 Foo Rd", :council_reference => "X/001", :description => "Building something", :id => 123)
-      @comment = mock_model(Comment, :email => "foo@bar.com", :name => "Matthew", :application => application, :confirm_id => "abcdef", :text => "A good thing")
+      @comment = mock_model(Comment, :email => "foo@bar.com", :name => "Matthew", :application => application, :confirm_id => "abcdef", :text => "A good thing", :address => "1 Bar Street")
     end
   
     it "should be sent to the planning authority's feedback email address" do
@@ -26,12 +26,13 @@ describe CommentNotifier do
     
     it "should have specific information in the body of the email" do
       notifier = CommentNotifier.notify(@comment)
-      notifier.body.should == <<-EOF
+      notifier.body.to_s.should == <<-EOF
 Application:          X/001
 Address:              12 Foo Rd
 Description:          Building something
-Comment submitted by: Matthew
-Email:                foo@bar.com
+Name of commenter:    Matthew
+Address of commenter: 1 Bar Street
+Email of commenter:   foo@bar.com
 
 A good thing
 
