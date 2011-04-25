@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110424232141) do
+ActiveRecord::Schema.define(:version => 20110425012520) do
 
   create_table "alerts", :force => true do |t|
     t.string   "email",         :limit => 120, :null => false
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(:version => 20110424232141) do
     t.string   "address"
   end
 
-  create_table "histories", :force => true do |t|
+  create_table "rails_admin_histories", :force => true do |t|
     t.string   "message"
     t.string   "username"
     t.integer  "item"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(:version => 20110424232141) do
     t.datetime "updated_at"
   end
 
-  add_index "histories", ["item", "table", "month", "year"], :name => "index_histories_on_item_and_table_and_month_and_year"
+  add_index "rails_admin_histories", ["item", "table", "month", "year"], :name => "index_histories_on_item_and_table_and_month_and_year"
 
   create_table "reports", :force => true do |t|
     t.string   "name"
