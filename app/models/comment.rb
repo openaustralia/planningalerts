@@ -1,7 +1,7 @@
 class Comment < ActiveRecord::Base
   belongs_to :application
   has_many :reports
-  validates_presence_of :name, :text
+  validates_presence_of :name, :text, :address
   
   acts_as_email_confirmable
   

@@ -17,6 +17,7 @@ Feature: Give feedback to Council
     When I fill in "Comment" with "I think this is a really good ideas"
     And I fill in "Name" with "Matthew Landauer"
     And I fill in "Email" with "example@example.com"
+    And I fill in "Address" with "11 Foo Street"
     And I press "Create Comment"
     Then I should see "Now check your email"
     And I should see "Click on the link in the email to confirm your comment"

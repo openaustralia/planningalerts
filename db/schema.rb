@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110207022832) do
+ActiveRecord::Schema.define(:version => 20110424232141) do
 
   create_table "alerts", :force => true do |t|
     t.string   "email",         :limit => 120, :null => false
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20110207022832) do
     t.boolean  "confirmed"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "address"
   end
 
   create_table "histories", :force => true do |t|

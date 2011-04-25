@@ -13,5 +13,6 @@ Factory.define :comment do |c|
   c.email "matthew@openaustralia.org"
   c.name "Matthew Landauer"
   c.text "a comment"
+  c.address "12 Foo Street"
   c.association :application
 end
