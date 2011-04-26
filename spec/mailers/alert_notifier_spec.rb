@@ -36,7 +36,7 @@ describe AlertNotifier do
     end
     
     it "should nicely format a list of multiple planning applications" do
-      @email.body.should == <<-EOF
+      @email.body.to_s.should == <<-EOF
 The following new planning applications have been found near 24 Bruce Rd, Glenbrook NSW 2773 within 800 m:
 
 Foo Street, Bar (a1)
@@ -56,12 +56,11 @@ http://dev.planningalerts.org.au/applications/2?utm_medium=email&utm_source=aler
 ============================================================
 
 PlanningAlerts.org.au is a free service run by the charity OpenAustralia Foundation.
-
-You can subscribe to a geoRSS feed of applications for 24 Bruce Rd, Glenbrook NSW 2773 here: http://dev.planningalerts.org.au/applications.rss?address=24+Bruce+Rd%2C+Glenbrook+NSW+2773&radius=800
-
-GeoRSS can be used to display planning applications on a map. For example, on Google Maps: http://maps.google.com.au/maps?q=http%3A%2F%2Fdev.planningalerts.org.au%2Fapplications.rss%3Faddress%3D24%2BBruce%2BRd%252C%2BGlenbrook%2BNSW%2B2773%26radius%3D800
+This service depends on donations from people like you for its survival.
+If you use this service please consider donating: http://www.openaustraliafoundation.org.au/donate/?utm_medium=email&utm_source=alerts
 
 To change the size of the area covered by the alerts: http://dev.planningalerts.org.au/alerts/abcdef/area
+
 To stop receiving these emails: http://dev.planningalerts.org.au/alerts/abcdef/unsubscribe
       EOF
     end
