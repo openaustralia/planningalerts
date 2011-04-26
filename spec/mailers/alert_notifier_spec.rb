@@ -1,15 +1,28 @@
 require 'spec_helper'
 
 describe AlertNotifier do
-  describe "when sending a planning alert" do
+  before :each do
+    @alert = Alert.create!(:email => "matthew@openaustralia.org", :address => "24 Bruce Rd, Glenbrook NSW 2773",
+      :lat => 1.0, :lng => 2.0, :radius_meters => 800)
+    @alert.stub!(:confirm_id).and_return("abcdef")
+    @original_emails_sent = Stat.emails_sent
+    @original_applications_sent = Stat.applications_sent
+    @a1 = mock_model(Application, :address => "Foo Street, Bar", :council_reference => "a1", :description => "Knock something down", :id => 1)
+    @a2 = mock_model(Application, :address => "Bar Street, Foo", :council_reference => "a2", :description => "Put something up", :id => 2)
+  end
+
+  describe "when sending a planning alert with one new planning application" do
     before :each do
-      @alert = Alert.create!(:email => "matthew@openaustralia.org", :address => "24 Bruce Rd, Glenbrook NSW 2773",
-        :lat => 1.0, :lng => 2.0, :radius_meters => 800)
-      @alert.stub!(:confirm_id).and_return("abcdef")
-      @original_emails_sent = Stat.emails_sent
-      @original_applications_sent = Stat.applications_sent
-      @a1 = mock_model(Application, :address => "Foo Street, Bar", :council_reference => "a1", :description => "Knock something down", :id => 1)
-      @a2 = mock_model(Application, :address => "Bar Street, Foo", :council_reference => "a2", :description => "Put something up", :id => 2)
+      @email = AlertNotifier.alert(@alert, [@a1])
+    end
+
+    it "should use the singular (application) in the subject line" do
+      @email.subject.should == "1 new planning application near #{@alert.address}"
+    end
+  end
+  
+  describe "when sending a planning alert with two new planning applications" do
+    before :each do
       @email = AlertNotifier.alert(@alert, [@a1, @a2])
     end
     
@@ -23,7 +36,7 @@ describe AlertNotifier do
     end
     
     it "should have a sensible subject line" do
-      @email.subject.should == "Planning applications near #{@alert.address}"
+      @email.subject.should == "2 new planning applications near #{@alert.address}"
     end
     
     it "should update the statistics" do
