@@ -49,7 +49,8 @@
         = f.input :text, :label => 'Comment', :hint => "Explain why you think this application should be approved or not"
         = f.input :name, :label => 'Name', :hint => "Please use your real full name if possible."
         = f.input :email, :label => 'Email', :hint => "We never display your email address"
-        = f.input :address, :label => 'Address', :hint => "e.g. 1 Sowerby St, Goulburn (we never display this)."
+        = f.input :address, :label => 'Address',
+          :hint => "e.g. 1 Sowerby St, Goulburn (we never display this). ".html_safe + link_to("Why do you need my address?", faq_path(:anchor => "address", :comment => true))
       Please note:
       %ul
         %li Be polite, concise and to the point.
