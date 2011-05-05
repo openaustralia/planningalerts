@@ -3,9 +3,9 @@
 = render :partial => 'comments/comment', :locals => {:comment => @comment}
 %p
   This form is for reporting comments that should be removed. Reasons can include that
-  the comment is spam, is abusive, unlawful, harrasing &mdash; in other words, where people are going
-  out of their way to cause harm and trouble. Below, please explain clearly your reason why
-  the comment should be removed.
+  the comment is spam, abusive, unlawful or harrasing &mdash; in other words, where people are going
+  out of their way to cause harm. Please explain clearly why
+  you think the comment should be removed.
 = semantic_form_for [@comment, @report] do |f|
   = f.inputs do
     = f.input :name, :label => "Your name"
