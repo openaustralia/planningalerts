@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110425012520) do
+ActiveRecord::Schema.define(:version => 20110505115209) do
 
   create_table "alerts", :force => true do |t|
     t.string   "email",         :limit => 120, :null => false
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20110425012520) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "address"
+    t.boolean  "hidden",         :default => false, :null => false
   end
 
   create_table "rails_admin_histories", :force => true do |t|
