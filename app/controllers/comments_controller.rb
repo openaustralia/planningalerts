@@ -9,4 +9,13 @@ class CommentsController < ApplicationController
       render 'applications/show'
     end
   end
+  
+  def confirmed
+    @comment = Comment.find_by_confirm_id(params[:id])
+    if @comment
+      @comment.confirm!
+    else
+      render :text => "", :status => 404
+    end
+  end
 end
