@@ -6,7 +6,7 @@ Feature: Manage alerts
     Given I am on the signup page
     When I fill in the email adress with "example@example.com"
     And I fill in the street address with "24 Bruce Road, Glenbrook"
-    And I press "Create Alert"
+    And I press "Create alert"
     Then I should see "Now check your email"
     And I should receive an email
     When I open the email

@@ -27,8 +27,8 @@ gem 'metric_fu'
 
 group :test do
   gem 'cucumber-rails'
-  #gem 'capybara'
-  gem 'webrat'
+  gem 'capybara'
+  #gem 'webrat'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'email_spec'
