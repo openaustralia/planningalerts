@@ -38,7 +38,7 @@ Feature: Give feedback to Council
     And an application "1" in planning authority "Foo"
     And an unconfirmed comment "I think this is a really good ideas" on application "1"
     When I go to the confirm page for comment "I think this is a really good ideas"
-    Then I should see "Thanks, your comment has been confirmed and sent to Foo"
+    Then I should see "Thanks. Your comment has been sent to Foo and is now visible on this page."
     And I should see "I think this is a really good ideas"
     And "feedback@foo.gov.au" should receive an email
     When "feedback@foo.gov.au" opens the email
