@@ -38,13 +38,11 @@ Feature: Give feedback to Council
     And an application "1" in planning authority "Foo"
     And an unconfirmed comment "I think this is a really good ideas" on application "1"
     When I go to the confirm page for comment "I think this is a really good ideas"
-    Then I should see "Thanks, your comment has been confirmed and sent"
-    And I should see "Your comment has been sent to Foo and is visible on the application page"
+    Then I should see "Thanks, your comment has been confirmed and sent to Foo"
+    And I should see "I think this is a really good ideas"
     And "feedback@foo.gov.au" should receive an email
     When "feedback@foo.gov.au" opens the email
     Then they should see "I think this is a really good ideas" in the email body
-    When I follow "the application page"
-    Then I should see "I think this is a really good ideas"
 
   Scenario: Reporting abuse on a confirmed comment
     Given a moderator email of "moderator@planningalerts.org.au"
@@ -59,5 +57,3 @@ Feature: Give feedback to Council
     And "moderator@planningalerts.org.au" should receive an email
     When they open the email
     Then they should see "PlanningAlerts.org.au: Abuse report" in the email subject
-    
-    
