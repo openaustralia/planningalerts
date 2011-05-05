@@ -38,6 +38,9 @@ $fb-line-height: 1em;
     @include quiet;
     font-size: 0.8em;
   }
+  div.inline-hints p {
+    padding-top: 0.5em;
+  }
   .inline-errors {
     color: $orange;
   }
@@ -59,6 +62,9 @@ $fb-line-height: 1em;
   textarea, input {
     font-family: $blueprint-font-family;
     font-size: 100%;
+  }
+  div.inline-hints p {
+    padding-top: 0.5em;
   }
 }
 

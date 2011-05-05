@@ -50,8 +50,14 @@
           :hint => "Explain why you think this application should be approved or not. Please be polite, concise and to the point."
         = f.input :name, :label => 'Name', :hint => "Please use your real full name if possible."
         = f.input :email, :label => 'Email', :hint => "We never display your email address"
-        = f.input :address, :label => 'Address',
-          :hint => "e.g. 1 Sowerby St, Goulburn (we never display this). ".html_safe + link_to("Why do you need my address?", faq_path(:anchor => "address", :comment => true))
+        %li#comment_address_input.string.required
+          = f.label 'address', :required => true
+          = f.text_field 'address'
+          %p.inline-hints
+            e.g. 1 Sowerby St, Goulburn (we never display this).
+            = link_to("Why do you need my address?", faq_path(:anchor => "address", :comment => true))
+          %div#faq_commenting_address.inline-hints.hidden
+            = render :partial => 'static/faq_commenting_address'
       = f.buttons
   - else
     %p
@@ -122,4 +128,5 @@
     }
     
 = javascript_include_tag "/javascripts/jquery.boastful.js"
+= javascript_include_tag "/javascripts/applications.js"
 
