@@ -4,6 +4,7 @@ class Comment < ActiveRecord::Base
   validates_presence_of :name, :text, :address
   
   acts_as_email_confirmable
+  scope :visible, :conditions => {:confirmed => true, :hidden => false}
   
   # Send the comment to the planning authority
   def after_confirm
