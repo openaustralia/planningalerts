@@ -27,8 +27,10 @@ gem 'metric_fu'
 
 group :test do
   gem 'cucumber-rails'
+  # Using Capybara for integration testing. Also including Webrat so we have
+  # access to the matchers in view tests.
   gem 'capybara'
-  #gem 'webrat'
+  gem 'webrat'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'email_spec'
