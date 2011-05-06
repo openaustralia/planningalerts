@@ -27,6 +27,7 @@ class ApplicationsController < ApplicationController
       raise ActiveRecord::RecordNotFound if authority.nil?
       @applications = authority.applications.paginate :page => params[:page], :per_page => per_page
       @description << " in #{authority.full_name_and_state}"
+      @broken_scraper = authority.latest_application if authority.broken?
     elsif params[:postcode]
       # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
       @applications = Application.paginate :conditions => {:postcode => params[:postcode]},

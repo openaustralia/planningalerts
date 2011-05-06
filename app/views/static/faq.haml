@@ -27,6 +27,13 @@
     #{link_to "here", about_path(:anchor => "authorities")}. Not every planning authority publishes their planning data
     online so some places will always be missing. If your local authority is missing, you could always
     #{link_to "help out by writing a screen scraper to search their website.", about_path(:anchor => "contact")}
+  %dt#broken_scraper
+    The data in my local area seems out of date. What's going on?
+  %dd
+    We use <a href="http://en.wikipedia.org/wiki/Screen_scraping">screen scrapers</a> to gather planning data from
+    local councils and from time to time their website may change and break our scraper. You can help by providing
+    a <a href="http://www.openaustraliafoundation.org.au/donate/">donation</a> or
+    #{link_to "volunteering", get_involved_path} to help us fix it.
   %dt
     Can I help?
   %dd
