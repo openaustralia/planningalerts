@@ -1,7 +1,7 @@
 - content_for :page_title, @description
 %h3= @description
 - if @authority.broken?
-  %span.highlight= "This scraper may be broken. The latest application was received #{time_ago_in_words(@authority.latest_application)} ago."
+  %span.highlight It looks like something might be wrong. The latest application was received #{time_ago_in_words(@authority.latest_application)} ago.
   = link_to "Why?", faq_path(:anchor => "broken_scraper")
 - paginated_section @applications, :previous_label => "« Newer", :next_label => "Older »" do
   %dl= render :partial => "application", :collection => @applications
