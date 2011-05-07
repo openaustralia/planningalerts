@@ -48,10 +48,10 @@ describe Authority do
   
   describe "detecting authorities with old applications" do
     before :each do
-      @a1 = Authority.create!(:short_name => "Blue Mountains", :full_name => "Blue Mountains City Council")
-      @a2 = Authority.create!(:short_name => "Blue Mountains (new one)", :full_name => "Blue Mountains City Council (fictional new one)")
-      @a1.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1", :date_scraped => Time.now - 3.weeks)
-      @a2.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1", :date_scraped => Time.now)
+      @a1 = Factory(:authority, :full_name => "Blue Mountains City Council")
+      @a2 = Factory(:authority, :full_name => "Marrickville City Council")
+      Factory(:application, :authority => @a1, :date_scraped => 3.weeks.ago)
+      Factory(:application, :authority => @a2)
     end
 
     it "should report that a scraper is broken if it hasn't received a DA in over two weeks" do
