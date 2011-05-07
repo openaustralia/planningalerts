@@ -46,6 +46,23 @@ describe Authority do
     a.feed_url_for_date(date).should == "http://example.org?year=2009&month=2&day=1"
   end
   
+  describe "detecting authorities with old applications" do
+    before :each do
+      @a1 = Authority.create!(:short_name => "Blue Mountains", :full_name => "Blue Mountains City Council")
+      @a2 = Authority.create!(:short_name => "Blue Mountains (new one)", :full_name => "Blue Mountains City Council (fictional new one)")
+      @a1.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1", :date_scraped => Time.now - 3.weeks)
+      @a2.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1", :date_scraped => Time.now)
+    end
+
+    it "should report that a scraper is broken if it hasn't received a DA in over two weeks" do
+      @a1.broken?.should == true
+    end
+
+    it "should not report that a scraper is broken if it has received a DA in less than two weeks" do
+      @a2.broken?.should == false
+    end
+  end
+
   describe "short name encoded" do
     before :each do
       @a1 = Authority.create!(:short_name => "Blue Mountains", :full_name => "Blue Mountains City Council")
