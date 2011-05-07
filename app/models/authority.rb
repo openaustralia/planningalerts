@@ -62,10 +62,6 @@ class Authority < ActiveRecord::Base
   # If the latest application is over two weeks old, the scraper's probably broken
   def broken?
     return false if !self.latest_application
-    if self.latest_application < Time.now - 14.days
-      true
-    else
-      false
-    end
+    self.latest_application < Time.now - 14.days
   end
 end
