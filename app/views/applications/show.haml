@@ -5,7 +5,9 @@
   - if @application.location
     = link_to @application.map_url do
       #map_div(style="width:350px;height:200px")
+        %noscript Please enable Javascript in your browser settings to view this map.
     #pano(style="width:350px;height:200px")
+      %noscript Please enable Javascript in your browser settings to view this StreetView image.
   
   %h3.address= @application.address
   %p.description= @application.description
@@ -67,6 +69,7 @@
         = on_notice_text(@application)
 %h4 Tweets mentioning this planning application
 #boastful
+  %noscript Please enable Javascript in your browser settings to show any tweets.
 
 - unless @application.find_all_nearest_or_recent.empty?
   #nearby-applications
