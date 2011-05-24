@@ -113,7 +113,7 @@ describe ApplicationsController do
 
       get :index, :format => "rss", :authority_id => "blue_mountains"
       assigns[:applications].should == result
-      assigns[:description].should == "Recent applications in Blue Mountains City Council"
+      assigns[:description].should == "Recent applications from Blue Mountains City Council"
     end
     
     it "should give a 404 when an invalid authority_id is used" do

@@ -26,7 +26,7 @@ class ApplicationsController < ApplicationController
       # In production environment raising RecordNotFound will produce an error code 404
       raise ActiveRecord::RecordNotFound if @authority.nil?
       @applications = @authority.applications.paginate :page => params[:page], :per_page => per_page
-      @description << " in #{@authority.full_name_and_state}"
+      @description << " from #{@authority.full_name_and_state}"
     elsif params[:postcode]
       # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
       @applications = Application.paginate :conditions => {:postcode => params[:postcode]},
