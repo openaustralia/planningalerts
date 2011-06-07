@@ -50,6 +50,16 @@ describe AlertNotifier do
     
     it "should nicely format a list of multiple planning applications" do
       @email.body.to_s.should == <<-EOF
+New Feature:
+Did you know that when you click on a development application, you can now make a submission to council
+right on the page for the application? You can also see what other people are saying.
+We will be rolling this feature out council by council over the next couple of weeks.
+
+To learn more:
+http://www.openaustraliafoundation.org.au/2011/06/07/planningalerts-closes-the-loop/
+
+============================================================
+
 The following new planning applications have been found near 24 Bruce Rd, Glenbrook NSW 2773 within 800 m:
 
 Foo Street, Bar
