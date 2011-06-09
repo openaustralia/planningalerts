@@ -1,6 +1,9 @@
 # Controller for (mostly) static content
 class StaticController < ApplicationController
-  caches_page :about, :faq, :get_involved
+  
+  # Reinstate caching of faq page when all authorities have commenting feature
+  #caches_page :about, :faq, :get_involved
+  caches_page :about, :get_involved
 
   def about
     # map from state name to authorities in that state
