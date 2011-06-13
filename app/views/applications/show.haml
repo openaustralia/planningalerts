@@ -11,13 +11,12 @@
   
   %h3.address= @application.address
   %p.description= @application.description
-  %p.council-reference Council reference: #{@application.council_reference}
   %p.dates
     = scraped_and_received_text(@application)
   %p
     = link_to "Read more information", @application.info_url
     about this application
-  %p (Source: #{@application.authority.full_name})
+  %p (Source: #{@application.authority.full_name}, reference #{@application.council_reference})
   %p= addthis_bookmark_button.html_safe
 
   %ul#subscribe

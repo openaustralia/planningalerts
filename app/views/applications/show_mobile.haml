@@ -3,12 +3,11 @@
 .info
   %h1= @application.address
   %h2= @application.description
-  %p Council reference: #{@application.council_reference}
 .highlight
   %p= scraped_and_received_text(@application)
   - if @application.on_notice_to
     %p= on_notice_text(@application)
-  %p (Source: #{@application.authority.full_name})
+  %p (Source: #{@application.authority.full_name}, reference #{@application.council_reference})
 - unless @application.find_all_nearest_or_recent.empty?
   #nearby-applications
     %h3.info Selection of other recent or nearby applications
