@@ -8,32 +8,32 @@ describe Application do
     Location.stub!(:geocode).and_return(mock(:lat => 1.0, :lng => 2.0, :suburb => "Glenbrook", :state => "NSW",
       :postcode => "2773", :success => true))
   end
-  
+
   describe "getting DA descriptions" do
     it "should allow applications to be blank" do
       Application.new(:description => "").description.should == ""
     end
-    
+
     it "should allow the application description to be nil" do
       Application.new(:description => nil).description.should be_nil
     end
 
     it "should start descriptions with a capital letter" do
-      Application.new(:description => "a description").description.should == "A description" 
+      Application.new(:description => "a description").description.should == "A description"
     end
-    
+
     it "should fix capitilisation of descriptions all in caps" do
       Application.new(:description => "DWELLING").description.should == "Dwelling"
     end
-    
+
     it "should not capitalise descriptions that are partially in lowercase" do
       Application.new(:description => "To merge Owners Corporation").description.should == "To merge Owners Corporation"
     end
-    
+
     it "should capitalise the first word of each sentence" do
       Application.new(:description => "A SENTENCE. ANOTHER SENTENCE").description.should == "A sentence. Another sentence"
     end
-    
+
     it "should only capitalise the word if it's all lower case" do
       Application.new(:description => 'ab sentence. AB SENTENCE. aB sentence. Ab sentence').description.should ==  'Ab sentence. AB SENTENCE. aB sentence. Ab sentence'
     end
@@ -42,37 +42,37 @@ describe Application do
       Application.new(:description => "A poorly.    . formed sentence . \n").description.should ==  "A poorly. . Formed sentence. "
     end
   end
-  
+
   describe "getting addresses" do
     it "should convert words to first letter capitalised form" do
       Application.new(:address => "1 KINGSTON AVENUE, PAKENHAM").address.should == "1 Kingston Avenue, Pakenham"
     end
-    
+
     it "should not convert words that are not already all in upper case" do
       Application.new(:address => "In the paddock next to the radio telescope").address.should == "In the paddock next to the radio telescope"
     end
-    
+
     it "should handle a mixed bag of lower and upper case" do
       Application.new(:address => "63 Kimberley drive, SHAILER PARK").address.should == "63 Kimberley drive, Shailer Park"
     end
-    
+
     it "should not affect dashes in the address" do
-      Application.new(:address => "63-81").address.should == "63-81"        
+      Application.new(:address => "63-81").address.should == "63-81"
     end
-    
+
     it "should not affect abbreviations like the state names" do
       Application.new(:address => "1 KINGSTON AVENUE, PAKENHAM VIC 3810").address.should == "1 Kingston Avenue, Pakenham VIC 3810"
     end
-    
+
     it "should not affect the state names" do
       Application.new(:address => "QLD VIC NSW SA ACT TAS WA NT").address.should == "QLD VIC NSW SA ACT TAS WA NT"
     end
-    
+
     it "should not affect codes" do
       Application.new(:address => "R79813 24X").address.should == "R79813 24X"
     end
   end
-  
+
   describe "on saving" do
     it "should geocode the address" do
       loc = mock("Location", :lat => -33.772609, :lng => 150.624263, :suburb => "Glenbrook", :state => "NSW",
@@ -82,7 +82,7 @@ describe Application do
       a.lat.should == loc.lat
       a.lng.should == loc.lng
     end
-    
+
     it "should log an error if the geocoder can't make sense of the address" do
       Location.should_receive(:geocode).with("dfjshd").and_return(mock("Location", :success => false))
       logger = mock("Logger")
@@ -92,18 +92,18 @@ describe Application do
 
       a = @auth.applications.new(:address => "dfjshd", :council_reference => "r1", :date_scraped => Time.now)
       a.stub!(:logger).and_return(logger)
-      
+
       a.save!
       a.lat.should be_nil
       a.lng.should be_nil
     end
-    
+
     it "should set the url for showing the address on a google map" do
       a = @auth.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1", :date_scraped => Time.now)
       a.map_url.should == "http://maps.google.com/maps?q=24+Bruce+Road%2C+Glenbrook%2C+NSW&z=15"
     end
   end
-  
+
   describe "collecting applications from the scraper web service urls" do
     before :each do
       @feed_xml = <<-EOF
@@ -139,12 +139,12 @@ describe Application do
       Application.delete_all
       Application.stub!(:open).and_return(mock(:read => @feed_xml))
     end
-    
+
     it "should collect the correct applications" do
       logger = mock
       Application.stub!(:logger).and_return(logger)
       logger.should_receive(:info).with("2 new applications found for Fiddlesticks, NSW")
-      
+
       Application.collect_applications_for_authority(@auth, @date)
       Application.count.should == 2
       r1 = Application.find_by_council_reference("R1")
@@ -157,7 +157,7 @@ describe Application do
       r1.on_notice_from.should == Date.new(2009,1,5)
       r1.on_notice_to.should == Date.new(2009,1,19)
     end
-    
+
     it "should not create new applications when they already exist" do
       logger = mock
       Application.stub!(:logger).and_return(logger)
@@ -169,7 +169,7 @@ describe Application do
       Application.collect_applications_for_authority(@auth, @date)
       Application.count.should == 2
     end
-    
+
     it "should collect all the applications from all the authorities over the last n days" do
       auth2 = Authority.create!(:full_name => "Wombat City Council", :short_name => "Wombat")
       Date.stub!(:today).and_return(Date.new(2010, 1, 10))
