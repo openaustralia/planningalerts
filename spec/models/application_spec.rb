@@ -37,6 +37,10 @@ describe Application do
     it "should only capitalise the word if it's all lower case" do
       Application.new(:description => 'ab sentence. AB SENTENCE. aB sentence. Ab sentence').description.should ==  'Ab sentence. AB SENTENCE. aB sentence. Ab sentence'
     end
+
+    it "should allow blank sentences" do
+      Application.new(:description => "A poorly.    . formed sentence . \n").description.should ==  "A poorly. . Formed sentence. "
+    end
   end
   
   describe "getting addresses" do

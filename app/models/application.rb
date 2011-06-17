@@ -90,7 +90,7 @@ class Application < ActiveRecord::Base
       description.split('. ').map do |sentence|
         words = sentence.split(' ')
         # Capitalise the first word of the sentence if it's all lowercase
-        words[0] = words[0].capitalize if words[0].downcase == words[0]
+        words[0] = words[0].capitalize if !words[0].nil? && words[0].downcase == words[0]
         words.join(' ')
       end.join('. ')
     end
