@@ -1,4 +1,8 @@
 class CommentsController < ApplicationController
+  def index
+    @comments = Comment.visible.paginate :page => params[:page]
+  end
+  
   def create
     @application = Application.find(params[:application_id])
     # TODO: Put controls on model so that hash assignment below can't be abused

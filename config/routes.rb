@@ -32,7 +32,7 @@ PlanningalertsApp::Application.routes.draw do
     resources :comments, :only => [:create, :show]
   end
   
-  resources :comments, :only => [] do
+  resources :comments, :only => [:index] do
     resources :reports, :only => [:new, :create]
   end
 
