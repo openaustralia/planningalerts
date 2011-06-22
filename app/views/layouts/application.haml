@@ -36,7 +36,7 @@
           %h2 Email alerts of planning applications <em>near you</em>
         #statsbanner
           %p#stats
-            #{@alert_count} applications sent for
+            #{number_to_human @alert_count} applications sent for
             = link_to "#{@authority_count} authorities", about_path(:anchor => "authorities")
       .hide= link_to "Skip navigation", "#content"
       #menu
