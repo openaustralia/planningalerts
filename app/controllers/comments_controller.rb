@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   def index
-    @comments = Comment.visible.paginate :page => params[:page]
+    @comments = Comment.visible.order("updated_at DESC").paginate :page => params[:page]
   end
   
   def create
