@@ -36,7 +36,7 @@ PlanningalertsApp::Application.routes.draw do
     resources :reports, :only => [:new, :create]
   end
 
-  resources :authorities, :only => [] do
+  resources :authorities, :only => [:index] do
     collection do
       get :broken
     end

@@ -42,22 +42,6 @@
 %p
   If you #{link_to "contribute", get_involved_path} to the project you will get to be on this list.
 
-%h4#authorities Planning authorities currently covered by the service
-%p
-  <span class="highlight">New authorities are being added all the time, so if your local authority isn't listed below
-  #{link_to "sign up any way", new_alert_path} and you'll start receiving alerts once it has been included</span>.
-%p
-  - @authorities.each_with_index do |a, i|
-    = "|" unless i == 0
-    = link_to a.first, :anchor => a.first.downcase
-- @authorities.each do |state, authorities|
-  %h4{:id => state.downcase}= state
-  %ul.authorities
-    - authorities.each do |authority|
-      %li= link_to authority.full_name, authority_applications_url(authority.short_name_encoded)
-%p
-  If you are a programmer and would like to write a scraper for your local authority, or work for a local authority
-  and would like to make your data available, #{link_to "find out how you can get involved", get_involved_path}.
 %h4#contact
   Contact
 %p

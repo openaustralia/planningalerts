@@ -37,7 +37,7 @@
         #statsbanner
           %p#stats
             #{number_to_human(@alert_count).downcase} applications sent for
-            = link_to "#{@authority_count} authorities", about_path(:anchor => "authorities")
+            = link_to "#{@authority_count} authorities", authorities_path
       .hide= link_to "Skip navigation", "#content"
       #menu
         %ul.collapse
@@ -48,6 +48,8 @@
           = li_selected(:controller => "/static", :action => "faq") do
             = link_to faq_path do
               %abbr(title="Frequently asked questions") FAQ
+          = li_selected(:controller => "/authorities", :action => "index") do
+            = link_to 'Coverage', authorities_path
           = li_selected(:controller => "/static", :action => "get_involved") do
             = link_to 'Get Involved', get_involved_path
           = li_selected(:controller => "/api", :action => "howto") do
