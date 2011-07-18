@@ -23,7 +23,9 @@ module Configuration
   LOG_EMAIL = 'matthew@openaustralia.org'
 
   # Google maps key
-  GOOGLE_MAPS_KEY = 'ABQIAAAAo-lZBjwKTxZxJsD-PJnp8RSar6C2u_L4pWCtZvTKzbAvP1AIvRSM06g5G1CDCy9niXlYd7l_YqMpVg'
+  # Use the following maps API key if you are running your development instance at http://planningalerts-app.dev
+  # This will be the case if you are using pow (http://pow.cx/)
+  GOOGLE_MAPS_KEY = 'ABQIAAAAo-lZBjwKTxZxJsD-PJnp8RTctXwaglzRZcFAUhNsPfHMAK74xRSSE3HhjcyVtlJHXKjyRyk_3L4CYA'
 
   # Google Analytics key
   GOOGLE_ANALYTICS_KEY = "UA-3107958-5"
