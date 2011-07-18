@@ -265,6 +265,7 @@ DEPENDENCIES
   rails (= 3.0.7)
   rails-geocoder
   rails_admin!
+  rake (= 0.8.7)
   rspec-rails (~> 2.4)
   smurf
   thinking-sphinx (= 2.0.0)
