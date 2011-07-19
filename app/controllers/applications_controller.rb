@@ -64,10 +64,10 @@ class ApplicationsController < ApplicationController
     end
     respond_to do |format|
       format.html
-      format.mobile { render "index_mobile", :layout => "mobile" }
+      format.mobile { render "index.mobile", :layout => "application.mobile" }
       # TODO: Move the template over to using an xml builder
       format.rss do
-        render params[:style] == "html" ? "index.html_rss" : "index.rss",
+        render params[:style] == "html" ? "index_html.rss" : "index.rss",
           :layout => false, :content_type => Mime::XML
       end
       format.js { render :json => @applications.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance]) }
@@ -118,7 +118,7 @@ class ApplicationsController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.mobile { render "show_mobile", :layout => "mobile" }
+      format.mobile { render "show.mobile", :layout => "application.mobile" }
     end
   end
   
@@ -141,7 +141,7 @@ class ApplicationsController < ApplicationController
     @applications = application.find_all_nearest_or_recent(km, months * 4 * 7 * 24 * 60 * 60).paginate :page => params[:page], :per_page => per_page
     respond_to do |format|
       format.html { render "index" }
-      format.mobile { render "index_mobile", :layout => "mobile" }
+      format.mobile { render "index.mobile", :layout => "application.mobile" }
       format.rss { render "index.rss", :layout => false, :content_type => Mime::XML }
     end
   end
