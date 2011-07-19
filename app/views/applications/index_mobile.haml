@@ -2,4 +2,4 @@
 %h2.title= @description
 - paginated_section @applications, :previous_label => "Newer", :next_label => "Older", :inner_window => 1, :outer_window => 0 do
   .list
-    = render :partial => "application_mobile", :collection => @applications
+    = render :partial => "application_mobile", :as => :application, :collection => @applications
