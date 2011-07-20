@@ -64,7 +64,7 @@ class ApplicationsController < ApplicationController
     end
     respond_to do |format|
       format.html
-      format.mobile { render "index.mobile", :layout => "application.mobile" }
+      format.mobile { render "index.mobile2", :layout => nil }
       # TODO: Move the template over to using an xml builder
       format.rss do
         render params[:style] == "html" ? "index_html.rss" : "index.rss",

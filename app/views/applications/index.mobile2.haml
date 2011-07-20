@@ -1,0 +1,30 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %title= @description
+    %link{:href => "http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css", :rel => "stylesheet"}/
+    %link{:href => "/stylesheets/jquery-mobile-test.css", :rel => "stylesheet"}/
+    %script{:src => "http://code.jquery.com/jquery-1.6.1.min.js", :type => "text/javascript"}
+    %script{:src => "http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js", :type => "text/javascript"}
+  %body
+    %div{"data-role" => "page"}
+      %div{"data-role" => "header"}
+        %h1= @description
+        - if @applications.current_page > 1
+          = link_to "Newer", {:format => "mobile", :page => @applications.previous_page}, {"data-icon" => "arrow-l", "data-transition" => "none"}
+        - if @applications.current_page < @applications.total_pages
+          = link_to "Older", {:format => "mobile", :page => @applications.next_page}, {:class => "ui-btn-right", "data-icon" => "arrow-r", "data-iconpos" => "right", "data-transition" => "none"}
+      %div{"data-role" => "content"}
+        %h4 Page #{@applications.current_page}
+        %ul(data-role="listview")
+          - @applications.each do |application|
+            %li
+              = link_to application_path(application, :format => "mobile") do
+                %h4= application.address
+                %p #{time_ago_in_words(application.date_scraped)} ago
+                %p= application.description
+        .foot
+          .mobile
+      %div{"data-role" => "footer"}
+        = link_to "Older", {:format => "mobile", :page => @applications.next_page}, {:class => "ui-btn-right", "data-icon" => "arrow-r", "data-iconpos" => "right", "data-transition" => "none"}
