@@ -48,8 +48,14 @@ describe AlertNotifier do
       (Time.now - @alert.last_sent).abs.should < 1
     end
     
-    it "should nicely format a list of multiple planning applications" do
-      @email.body.to_s.should == <<-EOF
+    it "should be a multipart email" do
+      @email.body.parts.length.should eq(2)
+    end
+
+    context "Text email" do
+
+      it "should nicely format a list of multiple planning applications" do
+        get_message_part(@email, /plain/).should == <<-EOF
 The following new planning applications have been found near 24 Bruce Rd, Glenbrook NSW 2773 within 800 m:
 
 Foo Street, Bar
@@ -75,7 +81,35 @@ If you use this service please consider donating: http://www.openaustraliafounda
 To change the size of the area covered by the alerts: http://dev.planningalerts.org.au/alerts/abcdef/area
 
 To stop receiving these emails: http://dev.planningalerts.org.au/alerts/abcdef/unsubscribe
-      EOF
+        EOF
+      end
+
     end
+
+    context "HTML emails" do
+      before :each do
+        @html_body = get_message_part(@email, /html/)
+      end
+
+      it 'should contain links to the applications' do
+        contains_link(@html_body, "http://dev.planningalerts.org.au/applications/1?utm_medium=email&utm_source=alerts", "Foo Street, Bar")
+        contains_link(@html_body, "http://dev.planningalerts.org.au/applications/2?utm_medium=email&utm_source=alerts", "Bar Street, Foo")
+      end
+
+
+      it 'should contain application descriptions' do
+        @html_body.should contain "Knock something down"
+        @html_body.should contain "Put something up"
+      end
+    end
+
+    def get_message_part (mail, content_type)
+      mail.body.parts.find { |p| p.content_type.match content_type }.body.raw_source
+    end
+
+    def contains_link(html, url, text)
+      html.should match /<a href="#{url.gsub(/\//, '\/').gsub(/&/, '&amp;').gsub(/\?/, '\?')}"[^>]*>#{text}<\/a>/
+    end
+
   end
 end
