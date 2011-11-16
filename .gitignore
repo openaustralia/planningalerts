@@ -21,3 +21,4 @@ public/sitemap*.xml.gz
 public/javascripts/all.js
 public/javascripts/mxn_bundle.js
 webrat.log
+.DS_Store
