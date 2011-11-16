@@ -11,6 +11,64 @@ This code is free and open-source and is licensed under the GPL v2.
 
 PlanningAlerts.org.au is brought to you by the "OpenAustralia Foundation":http://www.openaustraliafoundation.org.au with financial assistance from the Australian "Government 2.0 Taskforce":http://gov2.net.au/blog/2009/09/22/allocating-the-project-fund-we-want-your-ideas/#comment-4672. It was adapted for Australia by Matthew Landauer and Katherine Szuminska, and is based on the UK site "PlanningAlerts.com":http://www.planningalerts.com, built by Richard Pope, Mikel Maron, Sam Smith, Duncan Parkes, Tom Hughes and Andy Armstrong.
 
+h3. Setting up a dev environment
+
+*Install Dependencies*
+ * Install MySql - On OSX download dmg from "http://dev.mysql.com/downloads/":http://dev.mysql.com/downloads/
+ * Install Sphinx - @brew install sphinx@
+
+*Checkout The Project*
+ * Fork the project on Github
+ * Checkout the project
+
+*Install Ruby Dependencies*
+ * Install bundler - @gem install bundler@
+ * Install dependencies - @bundle install@
+
+*Setup The Database*
+ * Create your own database config file - @cp config/database.yml.example config/database.yml@
+ * Update the config/database.yml with your root mysql credentials
+ * If you are on OSX change the socket to /tmp/mysql.sock
+ * Create the databases - @rake db:create@
+ * Load the database schema - @rake db:schema:load@
+
+*Run The Tests*
+ * Run the test suite - @rake@
+
+h4. Scraping and sending emails in your dev environment
+
+*Step 1 - Seed authorities table*
+ * Change @INTERNAL_SCRAPERS_INDEX_URL@ in app/models/configuration.rb to point to : "http://www.planningalerts.org.au/scrapers/":http://www.planningalerts.org.au/scrapers/
+ * The load the authorities - @rake planningalerts:authorities:load@
+
+*Step 2 - Scrap DA's*
+ * Run - @rake planningalerts:applications:scrape['marrickville']@
+
+*Step 3 - Setup an Alert*
+ * Start the rails server - @rails s@
+ * Hit the home page - "http://localhost:3000":http://localhost:3000
+ * Enter an address e.g. 638 King St, Newtown NSW 2042
+ * Click the "Email me" link and setup an alert
+ * Fish the email confirmation link from the logs and hit the link.  It should look something like http://localhost:3000/alerts/f2c772161467b30a1bb8/confirmed
+
+*Step 4 - Send email alerts*
+ * Setup a gmail account for sending emails
+ * Edit your config/environments/development.rb and add the following lines:
+
+bc.   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :domain               => 'gmail.com',
+    :user_name            => 'TEST_ACCOUNT_USERNAME@gmail.com',
+    :password             => 'TEST_ACCOUNT_PASSWORD',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true
+  }
+
+ * Run - @rake planningalerts:applications:email@
+ * If you want to send the email again set the last_sent column in the alerts table to null and run the rake command again
+
 h3. Contact
 
 You can get in touch at "contact@planningalerts.org.au":mailto:contact@planningalerts.org.au
