@@ -41,7 +41,7 @@ h4. Scraping and sending emails in your dev environment
  * Change @INTERNAL_SCRAPERS_INDEX_URL@ in app/models/configuration.rb to point to : "http://www.planningalerts.org.au/scrapers/":http://www.planningalerts.org.au/scrapers/
  * Load the authorities - @rake planningalerts:authorities:load@
 
-*Step 2 - Scrap DA's*
+*Step 2 - Scrape DAs*
  * Run - @rake planningalerts:applications:scrape['marrickville']@
 
 *Step 3 - Setup an Alert*
