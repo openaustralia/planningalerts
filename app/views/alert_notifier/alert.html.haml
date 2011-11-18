@@ -4,7 +4,7 @@
     %div{:style => "background: #878787; padding: 5px 0 5px 10px; margin-bottom:5px"}
       %a{:href => "http://www.planningalerts.org.au/", :style => "color: white; font-weight:bold; font-size: 20px; text-decoration:none;"}
         PlanningAlerts
-    %div{:style => " margin: 6px 11px 25px; padding: 15px; background: #fcfbbd; -moz-border-radius: 10px; -khtml-border-radius: 10px; -webkit-border-radius: 10px;"}
+    %div{:style => "margin: 6px 11px 25px; padding: 15px; background: #fcfbbd; -moz-border-radius: 10px; -khtml-border-radius: 10px; -webkit-border-radius: 10px;"}
       The following new planning applications have been found within #{meters_in_words(@alert.radius_meters)} of
       %strong= @alert.address
     - @applications.each do |application|
@@ -18,7 +18,7 @@
           %td{:style => "padding: 5px;"}
             %img{:height => "150", :src => "http://maps.googleapis.com/maps/api/streetview?size=150x150&location=#{url_encode application.address}&fov=60&sensor=false", :width => "150"}/
         %tr
-          %td{:colspan => "2", :style => "vertical-align:top;"}
+          %td{:colspan => "2", :style => "vertical-align: top;"}
             = application.description
     %div{:style => "border-top: solid 3px #F2630C;"}
       %div{:style => "padding-left: 15px; padding-top: 5px;"}
