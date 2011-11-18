@@ -1,0 +1,42 @@
+!!!
+%html
+  %body
+    %div{:style => "background: #FF7029;padding: 5px 0 5px 10px;margin-bottom:5px"}
+      %a{:href => "http://www.planningalerts.org.au/", :style => "color: white;font-weight:bold;font-size: 20px;font-family:sans-serif;text-decoration:none;"}
+        PlanningAlert.com.au
+    %div{:style => " margin: 6px 11px 25px; padding: 15px; background: #fcfbbd; -moz-border-radius: 10px; -khtml-border-radius: 10px; -webkit-border-radius: 10px;"}
+      The following new planning applications have been found within #{meters_in_words(@alert.radius_meters)} of
+      %b= @alert.address
+    - @applications.each do |application|
+      %table{:style => "padding-left: 15px;padding-bottom: 15px;"}
+        %tr
+          %td{:colspan => "2", :style => "padding-bottom: 5px;"}
+            = link_to application.address, application_url(:id => application.id, :utm_source => 'alerts', :utm_medium => 'email'), |
+              :style => "font-size: 18px; font-weight: bold; color: #f2630c;"                                                       |
+        %tr
+          %td{:style => "padding: 5px; width: 155px;"}
+            %img{:height => "150", :src => "http://maps.googleapis.com/maps/api/staticmap?zoom=14&size=150x150&maptype=roadmap&markers=color:red%7C#{url_encode application.address}&sensor=false", :width => "150"}/
+          %td{:style => "padding: 5px;"}
+            %img{:height => "150", :src => "http://maps.googleapis.com/maps/api/streetview?size=150x150&location=#{url_encode application.address}&fov=60&sensor=false", :width => "150"}/
+        %tr
+          %td{:colspan => "2", :style => "vertical-align:top;"}
+            = application.description
+    %div{:style => "border-top: solid 3px #F2630C;"}
+      %div{:style => "padding-left: 15px;padding-top: 5px;"}
+        %p
+          %a{:href => "http://www.planningalerts.org.au/", :style => "color: #f2630c;"} PlanningAlerts.org.au
+          is a free service run by the charity
+          = succeed "." do
+            %b
+              %a{:href => "http://openaustraliafoundation.org.au/", :style => "color: #f2630c;"} OpenAustralia Foundation
+        %p
+          %b This service depends on donations from people like you for its survival.
+          %br/
+          %a{:href => "http://www.openaustraliafoundation.org.au/donate/?utm_medium=email&amp;utm_source=alerts", :style => "color: #f2630c;"}
+            If you use this service please consider donating
+        %p
+          = link_to 'Click here to change the size of the area covered by the alerts.', area_alert_url(:id => @alert.confirm_id), |
+            :style => 'color: #f2630c;'                                                                                           |
+          %br/
+          = link_to 'Click here to stop receiving these emails.', unsubscribe_alert_url(:id => @alert.confirm_id), |
+            :style => 'color: #f2630c;'                                                                            |
