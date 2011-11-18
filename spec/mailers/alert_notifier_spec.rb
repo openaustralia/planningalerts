@@ -53,7 +53,6 @@ describe AlertNotifier do
     end
 
     context "Text email" do
-
       it "should nicely format a list of multiple planning applications" do
         get_message_part(@email, /plain/).should == <<-EOF
 The following new planning applications have been found near 24 Bruce Rd, Glenbrook NSW 2773 within 800 m:
@@ -83,7 +82,6 @@ To change the size of the area covered by the alerts: http://dev.planningalerts.
 To stop receiving these emails: http://dev.planningalerts.org.au/alerts/abcdef/unsubscribe
         EOF
       end
-
     end
 
     context "HTML emails" do
@@ -95,7 +93,6 @@ To stop receiving these emails: http://dev.planningalerts.org.au/alerts/abcdef/u
         contains_link(@html_body, "http://dev.planningalerts.org.au/applications/1?utm_medium=email&utm_source=alerts", "Foo Street, Bar")
         contains_link(@html_body, "http://dev.planningalerts.org.au/applications/2?utm_medium=email&utm_source=alerts", "Bar Street, Foo")
       end
-
 
       it 'should contain application descriptions' do
         @html_body.should contain "Knock something down"
@@ -110,6 +107,5 @@ To stop receiving these emails: http://dev.planningalerts.org.au/alerts/abcdef/u
     def contains_link(html, url, text)
       html.should match /<a href="#{url.gsub(/\//, '\/').gsub(/&/, '&amp;').gsub(/\?/, '\?')}"[^>]*>#{text}<\/a>/
     end
-
   end
 end
