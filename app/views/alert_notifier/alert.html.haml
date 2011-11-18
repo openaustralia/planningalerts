@@ -6,7 +6,7 @@
         PlanningAlerts
     %div{:style => " margin: 6px 11px 25px; padding: 15px; background: #fcfbbd; -moz-border-radius: 10px; -khtml-border-radius: 10px; -webkit-border-radius: 10px;"}
       The following new planning applications have been found within #{meters_in_words(@alert.radius_meters)} of
-      %b= @alert.address
+      %strong= @alert.address
     - @applications.each do |application|
       %table{:style => "padding-left: 15px; padding-bottom: 15px;"}
         %tr
