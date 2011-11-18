@@ -1,14 +1,14 @@
 !!!
 %html
   %body{:style => "font-family:sans-serif;"}
-    %div{:style => "background: #878787;padding: 5px 0 5px 10px;margin-bottom:5px"}
-      %a{:href => "http://www.planningalerts.org.au/", :style => "color: white;font-weight:bold;font-size: 20px;text-decoration:none;"}
+    %div{:style => "background: #878787; padding: 5px 0 5px 10px; margin-bottom:5px"}
+      %a{:href => "http://www.planningalerts.org.au/", :style => "color: white; font-weight:bold; font-size: 20px; text-decoration:none;"}
         PlanningAlert.com.au
     %div{:style => " margin: 6px 11px 25px; padding: 15px; background: #fcfbbd; -moz-border-radius: 10px; -khtml-border-radius: 10px; -webkit-border-radius: 10px;"}
       The following new planning applications have been found within #{meters_in_words(@alert.radius_meters)} of
       %b= @alert.address
     - @applications.each do |application|
-      %table{:style => "padding-left: 15px;padding-bottom: 15px;"}
+      %table{:style => "padding-left: 15px; padding-bottom: 15px;"}
         %tr
           %td{:colspan => "2", :style => "padding-bottom: 5px;"}
             = link_to application.address, application_url(:id => application.id, :utm_source => 'alerts', :utm_medium => 'email'), |
@@ -22,7 +22,7 @@
           %td{:colspan => "2", :style => "vertical-align:top;"}
             = application.description
     %div{:style => "border-top: solid 3px #F2630C;"}
-      %div{:style => "padding-left: 15px;padding-top: 5px;"}
+      %div{:style => "padding-left: 15px; padding-top: 5px;"}
         %p
           %a{:href => "http://www.planningalerts.org.au/", :style => "color: #f2630c;"} PlanningAlerts.org.au
           is a free service run by the charity
