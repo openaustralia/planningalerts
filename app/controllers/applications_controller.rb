@@ -1,6 +1,8 @@
 class ApplicationsController < ApplicationController
   before_filter :mobile_optimise_switching, :only => [:show, :index, :nearby]
-  
+  skip_before_filter :set_mobile_format, :except => [:show, :index, :nearby]
+  skip_before_filter :force_mobile_format, :except => [:show, :index, :nearby]
+
   def index
     # TODO: Fix this hacky ugliness
     if in_mobile_view?

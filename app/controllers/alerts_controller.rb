@@ -1,4 +1,7 @@
 class AlertsController < ApplicationController
+  skip_before_filter :set_mobile_format
+  skip_before_filter :force_mobile_format
+
   caches_page :statistics
 
   def new

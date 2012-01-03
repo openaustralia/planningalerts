@@ -1,4 +1,7 @@
 class ReportsController < ApplicationController
+  skip_before_filter :set_mobile_format
+  skip_before_filter :force_mobile_format
+
   def new
     @comment = Comment.visible.find(params[:comment_id])
     @report = Report.new
