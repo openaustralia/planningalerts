@@ -1,7 +1,7 @@
 require "bundler/capistrano"
 
 set :application, "planningalerts.org.au/app"
-set :repository,  "git://github.com:openaustralia/planningalerts-app.git"
+set :repository,  "git://github.com/openaustralia/planningalerts-app.git"
 
 role :web, "kedumba.openaustraliafoundation.org.au"
 role :db, "kedumba.openaustraliafoundation.org.au", :primary => true
