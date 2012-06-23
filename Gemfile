@@ -27,7 +27,7 @@ gem 'metric_fu'
 gem "rake"
 
 group :test do
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', :require => false
   # Using Capybara for integration testing. Also including Webrat so we have
   # access to the matchers in view tests.
   gem 'capybara'
