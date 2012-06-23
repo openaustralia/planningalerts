@@ -3,7 +3,7 @@ rvm:
   - 1.8.7
 
 before_script:
-  - mysql -e 'create database pa_test;'
   - cp config/database.yml.example config/database.yml
+  - rake db:setup
 
 script: bundle exec rake --trace
