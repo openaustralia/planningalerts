@@ -33,7 +33,7 @@ test: &TEST
   reconnect: false
   database: pa_test
   pool: 5
-  username: planningalerts
+  username: root
   password: 
   socket: /var/run/mysqld/mysqld.sock
 
