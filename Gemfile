@@ -24,8 +24,7 @@ gem "rails-geocoder", :require => "geocoder"
 gem 'devise' # Devise must be required before RailsAdmin
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'metric_fu'
-# See http://stackoverflow.com/questions/6199301/global-access-to-rake-dsl-methods-is-deprecated
-gem "rake", "0.8.7"
+gem "rake"
 
 group :test do
   gem 'cucumber-rails'
