@@ -5,5 +5,3 @@ rvm:
 before_script:
   - cp config/database.yml.example config/database.yml
   - rake db:setup
-
-script: bundle exec rake --trace
