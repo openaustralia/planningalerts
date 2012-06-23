@@ -13,7 +13,7 @@ end
 
 Then /^the email body should contain a link to the confirmation page for the comment "([^"]*)"$/ do |text|
   comment = Comment.find_by_text(text)
-  Then %{I should see "#{confirmed_comment_url(:id => comment.confirm_id, :host => 'dev.planningalerts.org.au')}" in the email body}
+  step %{I should see "#{confirmed_comment_url(:id => comment.confirm_id, :host => 'dev.planningalerts.org.au')}" in the email body}
 end
 
 Given /^an unconfirmed comment "([^"]*)" on application "([^"]*)"$/ do |comment, application_id|
