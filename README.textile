@@ -52,22 +52,10 @@ h4. Scraping and sending emails in your dev environment
  * Fish the email confirmation link from the logs and hit the link.  It should look something like http://localhost:3000/alerts/f2c772161467b30a1bb8/confirmed
 
 *Step 4 - Send email alerts*
- * Setup a gmail account for sending emails
- * Edit your config/environments/development.rb and add the following lines:
-
-bc.   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :domain               => 'gmail.com',
-    :user_name            => 'TEST_ACCOUNT_USERNAME@gmail.com',
-    :password             => 'TEST_ACCOUNT_PASSWORD',
-    :authentication       => 'plain',
-    :enable_starttls_auto => true
-  }
-
+ * Install "MailCatcher":https://github.com/sj26/mailcatcher - @gem install mailcatcher@
+ * Start MailCatcher - @mailcatcher@
  * Run - @rake planningalerts:applications:email@
- * If you want to send the email again set the last_sent column in the alerts table to null and run the rake command again
+ * Check the email in your browser: "http://localhost:1080/":http://localhost:1080/
 
 h3. Contact
 
