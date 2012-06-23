@@ -1,4 +1,4 @@
-class AlertsController < ApplicationController
+class AlertsController < EmailConfirmable::ConfirmController
   skip_before_filter :set_mobile_format
   skip_before_filter :force_mobile_format
 

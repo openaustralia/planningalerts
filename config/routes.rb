@@ -19,6 +19,7 @@ PlanningalertsApp::Application.routes.draw do
       get :area
 	    post :area
       get :unsubscribe
+      get :confirmed, :resource => 'alerts'
     end
   end
 
@@ -55,7 +56,6 @@ PlanningalertsApp::Application.routes.draw do
   match 'layar/getpoi' => 'layar#getpoi'
 
   match 'comments/:id/confirmed' => 'comments#confirmed', :as => :confirmed_comment
-  match 'alerts/:id/confirmed' => 'email_confirmable/confirm#confirmed', :as => :confirmed_alert, :resource => 'alerts'
 
   root :to => 'applications#address'
 end
