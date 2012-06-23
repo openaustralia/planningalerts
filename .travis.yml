@@ -5,3 +5,5 @@ rvm:
 before_script:
   - mysql -e 'create database pa_test;'
   - cp config/database.yml.example config/database.yml
+
+script: bundle exec rake --trace
