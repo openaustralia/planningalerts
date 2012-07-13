@@ -57,4 +57,4 @@ Feature: Give feedback to Council
     And "moderator@planningalerts.org.au" should receive an email
     When they open the email
     Then they should see the email delivered from "Joe Reporter <reporter@foo.com>"
-    And they should see "PlanningAlerts.org.au: Abuse report" in the email subject
+    And they should see "PlanningAlerts: Abuse report" in the email subject

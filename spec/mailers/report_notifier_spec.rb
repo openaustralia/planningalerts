@@ -19,7 +19,7 @@ describe ReportNotifier do
   end
   
   it "should tell the moderator what the email is about" do
-    @notifier.subject.should == "PlanningAlerts.org.au: Abuse report"
+    @notifier.subject.should == "PlanningAlerts: Abuse report"
   end
   
   it "should tell the moderator everything they need to know to decide on what to do with the report" do
