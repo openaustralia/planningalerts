@@ -10,8 +10,8 @@ describe ReportNotifier do
     @notifier = ReportNotifier.notify(@report)
   end
   
-  it "should come from the same email address as the email alerts come from" do
-    @notifier.from.should == ["contact@planningalerts.org.au"]
+  it "should come from the reporter's email address" do
+    @notifier.from.should == ["reporter@foo.com"]
   end
   
   it "should go to the moderator email address" do

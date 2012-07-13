@@ -56,4 +56,5 @@ Feature: Give feedback to Council
     And I should see "Thanks for taking the time let us know about this."
     And "moderator@planningalerts.org.au" should receive an email
     When they open the email
-    Then they should see "PlanningAlerts.org.au: Abuse report" in the email subject
+    Then they should see the email delivered from "Joe Reporter <reporter@foo.com>"
+    And they should see "PlanningAlerts.org.au: Abuse report" in the email subject
