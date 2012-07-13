@@ -25,6 +25,7 @@ gem 'devise' # Devise must be required before RailsAdmin
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem 'metric_fu'
 gem "rake"
+gem 'exception_notification'
 
 group :test do
   gem 'cucumber-rails', :require => false
