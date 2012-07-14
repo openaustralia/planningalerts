@@ -1,4 +1,5 @@
 class ApplicationsController < ApplicationController
+  has_mobile_fu
   before_filter :mobile_optimise_switching, :only => [:show, :index, :nearby]
   skip_before_filter :set_mobile_format, :except => [:show, :index, :nearby]
   skip_before_filter :force_mobile_format, :except => [:show, :index, :nearby]

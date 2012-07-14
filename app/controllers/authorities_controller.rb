@@ -1,7 +1,4 @@
 class AuthoritiesController < ApplicationController
-  skip_before_filter :set_mobile_format
-  skip_before_filter :force_mobile_format
-
   def broken
     @authorities = []
     Authority.active.each do |a|

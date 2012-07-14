@@ -1,7 +1,4 @@
 class CommentsController < ApplicationController
-  skip_before_filter :set_mobile_format
-  skip_before_filter :force_mobile_format
-
   def index
     @comments = Comment.visible.order("updated_at DESC").paginate :page => params[:page]
   end

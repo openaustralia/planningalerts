@@ -15,8 +15,6 @@ class ApplicationController < ActionController::Base
   
   before_filter :load_configuration
   
-  has_mobile_fu
-
   private
   
   def load_configuration
