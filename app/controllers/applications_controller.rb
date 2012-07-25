@@ -74,7 +74,10 @@ class ApplicationsController < ApplicationController
         render params[:style] == "html" ? "index_html.rss" : "index.rss",
           :layout => false, :content_type => Mime::XML
       end
-      format.js { render :json => @applications.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance]) }
+      format.js do
+        ApiStatistic.log(request)
+        render :json => @applications.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance])
+      end
     end
   end
   
