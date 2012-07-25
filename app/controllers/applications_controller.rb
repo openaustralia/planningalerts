@@ -70,6 +70,7 @@ class ApplicationsController < ApplicationController
       format.mobile { render "index.mobile", :layout => "application.mobile" }
       # TODO: Move the template over to using an xml builder
       format.rss do
+        ApiStatistic.log(request)
         render params[:style] == "html" ? "index_html.rss" : "index.rss",
           :layout => false, :content_type => Mime::XML
       end
