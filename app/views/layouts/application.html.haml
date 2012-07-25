@@ -76,17 +76,8 @@
       - if @set_focus_control
         %script(type="text/javascript")
           document.getElementById('#{@set_focus_control}').focus();
+    = render "shared/analytics"
     :javascript
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '#{Configuration::GOOGLE_ANALYTICS_KEY}']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
-      })();
-
       var uservoiceOptions = {key: 'planningalerts', host: 'planningalerts.uservoice.com', forum: '49635', alignment: 'right', background_color:'#F4F322', text_color: 'black',
       hover_color: '#FF8C00', lang: 'en', showTab: true};
       function _loadUserVoice() {
