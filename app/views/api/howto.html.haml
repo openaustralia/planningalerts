@@ -5,6 +5,9 @@
   be used in most web mapping APIs and desktop GIS software like <a href="http://mapufacture.com">mapufacture</a>
   and <a href="http://pipes.yahoo.com/">Yahoo Pipes</a>. Details of the API are listed below.
 %p
+  Non-commercial, low-volume use of this service is free.
+  = link_to "Read more.", :anchor => "hLicenseInfo"
+%p
   All the API calls listed below return planning application sorted by the date they were scraped from the planning authority website with the most
   recent listed first. They will return a maximum of #{Application.per_page} results. To retrieve more results simply append "&amp;<strong>page</strong>=[2,3,etc..]" to the url.
 %p
@@ -84,7 +87,17 @@
     = link_to "view on a map", mapify(api_example_suburb_and_state_url + "&style=html", 13)
 
 %h4#hLicenseInfo
-  License information
+  Usage & License
 %p
-  Data via the api is licensed under the
+  Data is licensed under the
   <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0 license</a>.
+%p
+  Low volume, <strong>non-commercial</strong> use of the API service is free. We ask that personal and non-profit use of this service attribute the OpenAustralia Foundation on your website or application.
+
+%p
+  Please
+  = mail_to "contact@planningalerts.org.au", "contact us"
+  for <strong>commercial</strong> use, or if you intend to use the service on a large scale. Commercial users may include Real Estate Agencies, Architects, Planners or Builders.
+%p
+  We offer a range of paid options, from rate-limited to unlimited use of this service.
+
