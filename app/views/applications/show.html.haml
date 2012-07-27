@@ -13,10 +13,10 @@
   %p.description= @application.description
   %p.dates
     = scraped_and_received_text(@application)
-  %p
+  %p.more
     = link_to "Read more information", @application.info_url
     about this application
-  %p (Source: #{@application.authority.full_name}, reference #{@application.council_reference})
+  %p.source (Source: #{@application.authority.full_name}, reference #{@application.council_reference})
   %p= addthis_bookmark_button.html_safe
 
   %ul#subscribe

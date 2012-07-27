@@ -263,8 +263,14 @@ body h4 {
   margin-bottom: 0.5em;
 }
 
-#application ul#subscribe {
-  clear: both;
+#application {
+  ul#subscribe {
+    clear: both;
+  }
+
+  p.dates, p.more, p.source {
+    color: #777;
+  }
 }
 
 .match {
