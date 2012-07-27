@@ -246,10 +246,13 @@ ol#comments {
   margin-right: 0;
 }
 
+div.comment {
+  padding: 1em;
+  background: #fafafa;  
+}
+
 .comment {
   margin-bottom: 1em;
-  padding: 1em;
-  background: #fafafa;
 
   p:last-child {
     margin-bottom: 0;
