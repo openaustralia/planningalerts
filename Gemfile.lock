@@ -168,6 +168,8 @@ GEM
       rack (>= 1.0.0)
     rack-test (0.5.7)
       rack (>= 1.0)
+    rack-throttle (0.3.0)
+      rack (>= 1.0.0)
     rails (3.0.16)
       actionmailer (= 3.0.16)
       actionpack (= 3.0.16)
@@ -269,6 +271,7 @@ DEPENDENCIES
   metric_fu
   mysql
   nokogiri
+  rack-throttle
   rails (= 3.0.16)
   rails-geocoder
   rails_admin!
