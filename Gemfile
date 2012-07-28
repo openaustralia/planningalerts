@@ -27,6 +27,7 @@ gem 'metric_fu'
 gem "rake"
 gem 'exception_notification'
 gem 'rack-throttle'
+gem 'memcached'
 
 group :test do
   gem 'cucumber-rails', :require => false

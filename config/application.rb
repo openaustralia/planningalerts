@@ -44,6 +44,6 @@ module PlanningalertsApp
     config.filter_parameters += [:password]
     
     # We are using some rack middleware to throttle people that make too many API requests
-    config.middleware.use Rack::Throttle::Interval, :min => 3.0
+    config.middleware.use Rack::Throttle::Interval, :cache => Memcached.new, :min => 3.0
   end
 end

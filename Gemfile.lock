@@ -141,6 +141,7 @@ GEM
     main (4.4.0)
       arrayfields (>= 4.7.4)
       fattr (>= 2.1.0)
+    memcached (1.4.3)
     metric_fu (2.0.1)
       Saikuro (>= 1.1.0)
       activesupport (>= 2.0.0)
@@ -268,6 +269,7 @@ DEPENDENCIES
   geokit
   haml
   httparty
+  memcached
   metric_fu
   mysql
   nokogiri
