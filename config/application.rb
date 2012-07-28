@@ -2,6 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 require 'rack/throttle'
+require 'lib/throttle_configurable'
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
@@ -45,6 +46,7 @@ module PlanningalertsApp
     config.filter_parameters += [:password]
     
     # We are using some rack middleware to throttle people that make too many API requests
-    config.middleware.use Rack::Throttle::Interval, :cache => Memcached.new, :min => 3.0
+    config.middleware.use ThrottleConfigurable, :cache => Memcached.new,
+        :strategies => YAML.load_file("#{config.root}/config/throttling.yml")
   end
 end
