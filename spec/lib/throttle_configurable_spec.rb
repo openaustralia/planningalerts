@@ -53,6 +53,12 @@ describe ThrottleConfigurable do
       )}.should raise_error "Invalid ip address used: 257.2.3.4"
   end
 
+  it "should check that an ip address isn't under multiple strategies" do
+    lambda {ThrottleConfigurable.new(nil,
+      :strategies => {"hourly" => {100 => "1.2.3.4"}, "unlimited" => "1.2.3.4"}
+      )}.should raise_error "ip address can not be used multiple times: 1.2.3.4"
+  end
+
   it "should check that there is a default setting" do
     lambda {ThrottleConfigurable.new(nil,
       :strategies => {"hourly" => {100 => "1.2.3.4"}}

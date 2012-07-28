@@ -26,6 +26,7 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
           hosts = [hosts] unless hosts.respond_to?(:each)
           hosts.each do |host|
             raise "Invalid ip address used: #{host}" unless valid_ip?(host)
+            raise "ip address can not be used multiple times: #{host}" if @ip_lookup.has_key?(host)
             @ip_lookup[host] = [strategy, m]
           end
         end
@@ -33,6 +34,7 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
         value = [value] unless value.respond_to?(:each)
         value.each do |host|
           raise "Invalid ip address used: #{host}" unless valid_ip?(host)
+          raise "ip address can not be used multiple times: #{host}" if @ip_lookup.has_key?(host)
           @ip_lookup[host] = [strategy, nil]
         end
       else
