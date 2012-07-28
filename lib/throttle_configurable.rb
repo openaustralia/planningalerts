@@ -13,6 +13,8 @@ end
 # A throttling strategy that is highly configurable per IP address.
 # Different IP addresses can have different strategies
 class ThrottleConfigurable < Rack::Throttle::Limiter
+  attr_reader :strategies
+
   #:strategies => {
   #  "hourly" => {
   #    100 => "default",
@@ -30,25 +32,25 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     # Turn the more human readable lookup in the strategies option of blocks
     # of ip addresses with similar throttling into a lookup table of what to do
     # with each ip
-    @ip_lookup = {}
+    @strategies = {}
     options[:strategies].each do |strategy, value|
       case strategy
       when "hourly", "daily"
         value.each do |m, hosts|
           raise "Invalid max count used: #{m}" unless m.kind_of?(Integer)
-          add_hosts_to_ip_lookup(hosts, strategy_factory(strategy, m))
+          add_hosts_to_strategies(hosts, strategy_factory(strategy, m))
         end
       when "unlimited", "blocked"
-        add_hosts_to_ip_lookup(value, strategy_factory(strategy))
+        add_hosts_to_strategies(value, strategy_factory(strategy))
       else
         raise "Invalid strategy name used: #{strategy}"
       end
     end
-    raise "No default setting" if @ip_lookup["default"].nil?
+    raise "No default setting" if @strategies["default"].nil?
   end
 
   def strategy(ip)
-    @ip_lookup[ip] || @ip_lookup["default"]
+    strategies[ip] || strategies["default"]
   end
 
   def allowed?(request)
@@ -75,12 +77,12 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     (n.count == 4 && n.all? {|m| m.to_i >= 0 && m.to_i <= 255}) || (ip == "default")
   end
 
-  def add_hosts_to_ip_lookup(hosts, strategy)
+  def add_hosts_to_strategies(hosts, strategy)
     hosts = [hosts] unless hosts.respond_to?(:each)
     hosts.each do |host|
       raise "Invalid ip address used: #{host}" unless valid_ip?(host)
-      raise "ip address can not be used multiple times: #{host}" if @ip_lookup.has_key?(host)
-      @ip_lookup[host] = strategy
+      raise "ip address can not be used multiple times: #{host}" if @strategies.has_key?(host)
+      @strategies[host] = strategy
     end
   end
 end
