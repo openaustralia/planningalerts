@@ -35,20 +35,10 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
       if strategy == "hourly" || strategy == "daily"
         value.each do |m, hosts|
           raise "Invalid max count used: #{m}" unless m.kind_of?(Integer)
-          hosts = [hosts] unless hosts.respond_to?(:each)
-          hosts.each do |host|
-            raise "Invalid ip address used: #{host}" unless valid_ip?(host)
-            raise "ip address can not be used multiple times: #{host}" if @ip_lookup.has_key?(host)
-            @ip_lookup[host] = [strategy, m]
-          end
+          add_hosts_to_ip_lookup(hosts, strategy, m)
         end
       elsif strategy == "unlimited" || strategy == "blocked"
-        value = [value] unless value.respond_to?(:each)
-        value.each do |host|
-          raise "Invalid ip address used: #{host}" unless valid_ip?(host)
-          raise "ip address can not be used multiple times: #{host}" if @ip_lookup.has_key?(host)
-          @ip_lookup[host] = [strategy, nil]
-        end
+        add_hosts_to_ip_lookup(value, strategy, nil)
       else
         raise "Invalid strategy name used: #{strategy}"
       end
@@ -91,4 +81,15 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
   def max(ip)
     strategy_config(ip)[1]
   end
+
+  private
+
+  def add_hosts_to_ip_lookup(hosts, strategy, m)
+    hosts = [hosts] unless hosts.respond_to?(:each)
+    hosts.each do |host|
+      raise "Invalid ip address used: #{host}" unless valid_ip?(host)
+      raise "ip address can not be used multiple times: #{host}" if @ip_lookup.has_key?(host)
+      @ip_lookup[host] = [strategy, m]
+    end
+  end  
 end
