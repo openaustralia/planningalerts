@@ -32,12 +32,13 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     # with each ip
     @ip_lookup = {}
     options[:strategies].each do |strategy, value|
-      if strategy == "hourly" || strategy == "daily"
+      case strategy
+      when "hourly", "daily"
         value.each do |m, hosts|
           raise "Invalid max count used: #{m}" unless m.kind_of?(Integer)
           add_hosts_to_ip_lookup(hosts, strategy_factory(strategy, m))
         end
-      elsif strategy == "unlimited" || strategy == "blocked"
+      when "unlimited", "blocked"
         add_hosts_to_ip_lookup(value, strategy_factory(strategy, nil))
       else
         raise "Invalid strategy name used: #{strategy}"
