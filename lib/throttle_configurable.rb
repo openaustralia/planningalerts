@@ -43,9 +43,18 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
   end
 
   def allowed?(request)
-    if strategy(client_identifier(request)) == "blocked"
+    s = strategy(client_identifier(request))
+    m = max(client_identifier(request))
+    case(s)
+    when "blocked"
       false
-    else
+    when "hourly"
+      t = Rack::Throttle::Hourly.new(nil, :cache => cache, :max => m)
+      t.allowed?(request)
+    when "daily"
+      t = Rack::Throttle::Daily.new(nil, :cache => cache, :max => m)
+      t.allowed?(request)      
+    when "unlimited"
       true
     end
   end

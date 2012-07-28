@@ -8,10 +8,10 @@ describe ThrottleConfigurable do
     ThrottleConfigurable.new(nil, :strategies => {
       "hourly" => {
         100 => "default",
-        200 => ["1.2.3.7", "1.2.3.8"],
+        3 => ["1.2.3.7", "1.2.3.8"],
       },
       "daily" => {
-        60000 => "1.2.3.4"
+        2 => "1.2.3.4"
       },
       "unlimited" => "1.2.3.5",
       "blocked" => "1.2.3.6",
@@ -28,10 +28,10 @@ describe ThrottleConfigurable do
   end
 
   it "should be able to extract the maximum hits for a particular ip address" do
-    t.max("1.2.3.4").should == 60000
+    t.max("1.2.3.4").should == 2
     t.max("1.2.3.5").should be_nil
-    t.max("1.2.3.7").should == 200
-    t.max("1.2.3.8").should == 200
+    t.max("1.2.3.7").should == 3
+    t.max("1.2.3.8").should == 3
     t.max("1.2.3.9").should == 100
   end
 
@@ -66,6 +66,21 @@ describe ThrottleConfigurable do
 
   it "should never allow the request when an ip is blocked" do
     request = mock(:request, :ip => "1.2.3.6")
+    t.allowed?(request).should be_false
+  end
+
+  it "should limit request to the max count in the hourly strategy" do
+    request = mock(:request, :ip => "1.2.3.7")
+    t.allowed?(request).should be_true
+    t.allowed?(request).should be_true
+    t.allowed?(request).should be_true
+    t.allowed?(request).should be_false
+  end
+
+  it "should limit requests to the max count in the daily strategy too" do
+    request = mock(:request, :ip => "1.2.3.4")
+    t.allowed?(request).should be_true
+    t.allowed?(request).should be_true
     t.allowed?(request).should be_false
   end
 end
