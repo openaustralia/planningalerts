@@ -75,12 +75,12 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     (n.count == 4 && n.all? {|m| m.to_i >= 0 && m.to_i <= 255}) || (ip == "default")
   end
 
-  def add_hosts_to_ip_lookup(hosts, s)
+  def add_hosts_to_ip_lookup(hosts, strategy)
     hosts = [hosts] unless hosts.respond_to?(:each)
     hosts.each do |host|
       raise "Invalid ip address used: #{host}" unless valid_ip?(host)
       raise "ip address can not be used multiple times: #{host}" if @ip_lookup.has_key?(host)
-      @ip_lookup[host] = s
+      @ip_lookup[host] = strategy
     end
   end
 end
