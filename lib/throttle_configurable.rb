@@ -47,6 +47,16 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     raise "No default setting" if @ip_lookup["default"].nil?
   end
 
+  def strategy(ip)
+    @ip_lookup[ip] || @ip_lookup["default"]
+  end
+
+  def allowed?(request)
+    strategy(client_identifier(request)).allowed?(request)
+  end
+
+  private
+
   def strategy_factory(name, max = nil)
     case(name)
     when "blocked"
@@ -60,21 +70,10 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     end
   end
 
-  def strategy_object(ip)
-    @ip_lookup[ip] || @ip_lookup["default"]
-  end
-
-  def allowed?(request)
-    t = strategy_object(client_identifier(request))
-    t.allowed?(request)
-  end
-
   def valid_ip?(ip)
     n = ip.split(".")
     (n.count == 4 && n.all? {|m| m.to_i >= 0 && m.to_i <= 255}) || (ip == "default")
   end
-
-  private
 
   def add_hosts_to_ip_lookup(hosts, s)
     hosts = [hosts] unless hosts.respond_to?(:each)

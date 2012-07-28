@@ -19,19 +19,19 @@ describe ThrottleConfigurable do
   end
 
   it "should be able to extract the strategy setting for a particular ip address" do
-    t.strategy_object("1.2.3.4").should be_kind_of Rack::Throttle::Daily
-    t.strategy_object("1.2.3.5").should be_kind_of Rack::Throttle::Unlimited
-    t.strategy_object("1.2.3.6").should be_kind_of Rack::Throttle::Blocked
-    t.strategy_object("1.2.3.7").should be_kind_of Rack::Throttle::Hourly
-    t.strategy_object("1.2.3.8").should be_kind_of Rack::Throttle::Hourly
-    t.strategy_object("1.2.3.9").should be_kind_of Rack::Throttle::Hourly
+    t.strategy("1.2.3.4").should be_kind_of Rack::Throttle::Daily
+    t.strategy("1.2.3.5").should be_kind_of Rack::Throttle::Unlimited
+    t.strategy("1.2.3.6").should be_kind_of Rack::Throttle::Blocked
+    t.strategy("1.2.3.7").should be_kind_of Rack::Throttle::Hourly
+    t.strategy("1.2.3.8").should be_kind_of Rack::Throttle::Hourly
+    t.strategy("1.2.3.9").should be_kind_of Rack::Throttle::Hourly
   end
 
   it "should be able to extract the maximum hits for a particular ip address" do
-    t.strategy_object("1.2.3.4").max_per_day.should == 2
-    t.strategy_object("1.2.3.7").max_per_hour.should == 3
-    t.strategy_object("1.2.3.8").max_per_hour.should == 3
-    t.strategy_object("1.2.3.9").max_per_hour.should == 100
+    t.strategy("1.2.3.4").max_per_day.should == 2
+    t.strategy("1.2.3.7").max_per_hour.should == 3
+    t.strategy("1.2.3.8").max_per_hour.should == 3
+    t.strategy("1.2.3.9").max_per_hour.should == 100
   end
 
   it "should check that the strategy names are valid" do
