@@ -42,6 +42,14 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     raise "No default setting" if @ip_lookup["default"].nil?
   end
 
+  def allowed?(request)
+    if strategy(client_identifier(request)) == "blocked"
+      false
+    else
+      true
+    end
+  end
+
   def valid_ip?(ip)
     n = ip.split(".")
     (n.count == 4 && n.all? {|m| m.to_i >= 0 && m.to_i <= 255}) || (ip == "default")

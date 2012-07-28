@@ -58,4 +58,14 @@ describe ThrottleConfigurable do
       :strategies => {"hourly" => {100 => "1.2.3.4"}}
       )}.should raise_error "No default setting"
   end
+
+  it "should not do any throttling with the unlimited strategy" do
+    request = mock(:request, :ip => "1.2.3.5")
+    t.allowed?(request).should be_true
+  end
+
+  it "should never allow the request when an ip is blocked" do
+    request = mock(:request, :ip => "1.2.3.6")
+    t.allowed?(request).should be_false
+  end
 end
