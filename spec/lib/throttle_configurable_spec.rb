@@ -34,4 +34,28 @@ describe ThrottleConfigurable do
     t.max("1.2.3.8").should == 200
     t.max("1.2.3.9").should == 100
   end
+
+  it "should check that the strategy names are valid" do
+    lambda {ThrottleConfigurable.new(nil,
+      :strategies => {"foo" => "1.2.3.4"}
+      )}.should raise_error "Invalid strategy name used: foo"
+  end
+
+  it "should check that the max count is valid" do
+    lambda {ThrottleConfigurable.new(nil,
+      :strategies => {"hourly" => {"foo" => "1.2.3.4"}}
+      )}.should raise_error "Invalid max count used: foo"
+  end
+
+  it "should check that the ip addresses are potentially sane" do
+    lambda {ThrottleConfigurable.new(nil,
+      :strategies => {"hourly" => {100 => "257.2.3.4"}}
+      )}.should raise_error "Invalid ip address used: 257.2.3.4"
+  end
+
+  it "should check that there is a default setting" do
+    lambda {ThrottleConfigurable.new(nil,
+      :strategies => {"hourly" => {100 => "1.2.3.4"}}
+      )}.should raise_error "No default setting"
+  end
 end

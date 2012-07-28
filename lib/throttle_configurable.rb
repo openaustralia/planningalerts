@@ -22,20 +22,40 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     options[:strategies].each do |strategy, value|
       if strategy == "hourly" || strategy == "daily"
         value.each do |m, hosts|
+          raise "Invalid max count used: #{m}" unless m.kind_of?(Integer)
           hosts = [hosts] unless hosts.respond_to?(:each)
           hosts.each do |host|
+            raise "Invalid ip address used: #{host}" unless valid_ip?(host)
             @ip_lookup[host] = [strategy, m]
           end
         end
       elsif strategy == "unlimited" || strategy == "blocked"
         value = [value] unless value.respond_to?(:each)
         value.each do |host|
+          raise "Invalid ip address used: #{host}" unless valid_ip?(host)
           @ip_lookup[host] = [strategy, nil]
         end
       else
-        raise "Unexpected value for strategy: #{strategy}"
+        raise "Invalid strategy name used: #{strategy}"
       end
-    end    
+    end
+    raise "No default setting" if @ip_lookup["default"].nil?
+  end
+
+  def valid_ip?(ip)
+    if ip == "default"
+      return true
+    end
+    n = ip.split(".")
+    if n.count != 4
+      return false
+    end
+    n.each do |m|
+      if m.to_i < 0 || m.to_i > 255
+        return false
+      end
+    end
+    true
   end
 
   def strategy_config(ip)
