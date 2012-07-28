@@ -47,7 +47,7 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
   end
 
   def strategy_object(ip)
-    s, m = strategy_config(ip)
+    s, m = @ip_lookup[ip] || @ip_lookup["default"]
     case(s)
     when "blocked"
       Rack::Throttle::Blocked.new(nil)
@@ -68,10 +68,6 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
   def valid_ip?(ip)
     n = ip.split(".")
     (n.count == 4 && n.all? {|m| m.to_i >= 0 && m.to_i <= 255}) || (ip == "default")
-  end
-
-  def strategy_config(ip)
-    @ip_lookup[ip] || @ip_lookup["default"]
   end
 
   private
