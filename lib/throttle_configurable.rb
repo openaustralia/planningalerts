@@ -15,6 +15,9 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
   def initialize(app, options = {})
     super
 
+    # Turn the more human readable lookup in the strategies option of blocks
+    # of ip addresses with similar throttling into a lookup table of what to do
+    # with each ip
     @ip_lookup = {}
     options[:strategies].each do |strategy, value|
       if strategy == "hourly" || strategy == "daily"
