@@ -1,3 +1,15 @@
+class Rack::Throttle::Blocked < Rack::Throttle::Limiter
+  def allowed?(request)
+    false
+  end
+end
+
+class Rack::Throttle::Unlimited < Rack::Throttle::Limiter
+  def allowed?(request)
+    true
+  end
+end
+
 # A throttling strategy that is highly configurable per IP address.
 # Different IP addresses can have different strategies
 class ThrottleConfigurable < Rack::Throttle::Limiter
@@ -44,21 +56,23 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     raise "No default setting" if @ip_lookup["default"].nil?
   end
 
-  def allowed?(request)
-    s = strategy(client_identifier(request))
-    m = max(client_identifier(request))
+  def strategy_object(ip)
+    s, m = strategy_config(ip)
     case(s)
     when "blocked"
-      false
+      Rack::Throttle::Blocked.new(nil)
     when "hourly"
-      t = Rack::Throttle::Hourly.new(nil, :cache => cache, :max => m)
-      t.allowed?(request)
+      Rack::Throttle::Hourly.new(nil, :cache => cache, :max => m)
     when "daily"
-      t = Rack::Throttle::Daily.new(nil, :cache => cache, :max => m)
-      t.allowed?(request)      
+      Rack::Throttle::Daily.new(nil, :cache => cache, :max => m)
     when "unlimited"
-      true
+      Rack::Throttle::Unlimited.new(nil)
     end
+  end
+
+  def allowed?(request)
+    t = strategy_object(client_identifier(request))
+    t.allowed?(request)
   end
 
   def valid_ip?(ip)
