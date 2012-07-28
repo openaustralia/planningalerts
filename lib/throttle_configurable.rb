@@ -36,5 +36,21 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
   end
 
   def max(ip)
+    options[:strategies].each do |strategy, value|
+      if strategy == "hourly" || strategy == "daily"
+        value.each do |m, hosts|
+          if hosts == ip || hosts.include?(ip)
+            return m
+          end
+        end
+      elsif strategy == "unlimited" || strategy == "blocked"
+        if value == ip || value.include?(ip)
+          return nil
+        end
+      else
+        raise "Unexpected value for strategy: #{strategy}"
+      end
+    end
+    max("default")
   end
 end

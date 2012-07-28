@@ -27,11 +27,11 @@ describe ThrottleConfigurable do
     t.strategy("1.2.3.9").should == "hourly"
   end
 
-  #it "should be able to extract the maximum hits for a particular ip address" do
-  #  t.max("1.2.3.4").should == 60000
-  #  t.max("1.2.3.5").should be_nil
-  #  t.max("1.2.3.7").should == 200
-  #  t.max("1.2.3.8").should == 200
-  #  t.max("1.2.3.9").should == 100
-  #end
+  it "should be able to extract the maximum hits for a particular ip address" do
+    t.max("1.2.3.4").should == 60000
+    t.max("1.2.3.5").should be_nil
+    t.max("1.2.3.7").should == 200
+    t.max("1.2.3.8").should == 200
+    t.max("1.2.3.9").should == 100
+  end
 end
