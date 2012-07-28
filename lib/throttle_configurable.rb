@@ -74,14 +74,6 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     @ip_lookup[ip] || @ip_lookup["default"]
   end
 
-  def strategy(ip)
-    strategy_config(ip)[0]
-  end
-
-  def max(ip)
-    strategy_config(ip)[1]
-  end
-
   private
 
   def add_hosts_to_ip_lookup(hosts, strategy, m)
