@@ -46,9 +46,8 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     raise "No default setting" if @ip_lookup["default"].nil?
   end
 
-  def strategy_object(ip)
-    s, m = @ip_lookup[ip] || @ip_lookup["default"]
-    case(s)
+  def strategy_object2(strategy, m)
+    case(strategy)
     when "blocked"
       Rack::Throttle::Blocked.new(nil)
     when "hourly"
@@ -58,6 +57,10 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     when "unlimited"
       Rack::Throttle::Unlimited.new(nil)
     end
+  end
+
+  def strategy_object(ip)
+    @ip_lookup[ip] || @ip_lookup["default"]
   end
 
   def allowed?(request)
@@ -77,7 +80,7 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     hosts.each do |host|
       raise "Invalid ip address used: #{host}" unless valid_ip?(host)
       raise "ip address can not be used multiple times: #{host}" if @ip_lookup.has_key?(host)
-      @ip_lookup[host] = [strategy, m]
+      @ip_lookup[host] = strategy_object2(strategy, m)
     end
   end  
 end
