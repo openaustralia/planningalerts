@@ -43,19 +43,8 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
   end
 
   def valid_ip?(ip)
-    if ip == "default"
-      return true
-    end
     n = ip.split(".")
-    if n.count != 4
-      return false
-    end
-    n.each do |m|
-      if m.to_i < 0 || m.to_i > 255
-        return false
-      end
-    end
-    true
+    (n.count == 4 && n.all? {|m| m.to_i >= 0 && m.to_i <= 255}) || (ip == "default")
   end
 
   def strategy_config(ip)
