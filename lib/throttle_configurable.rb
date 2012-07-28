@@ -64,9 +64,9 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     when "blocked"
       Rack::Throttle::Blocked.new(nil)
     when "hourly"
-      Rack::Throttle::Hourly.new(nil, :cache => cache, :max => max)
+      Rack::Throttle::Hourly.new(nil, options.merge(:max => max))
     when "daily"
-      Rack::Throttle::Daily.new(nil, :cache => cache, :max => max)
+      Rack::Throttle::Daily.new(nil, options.merge(:max => max))
     when "unlimited"
       Rack::Throttle::Unlimited.new(nil)
     end

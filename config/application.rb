@@ -48,6 +48,7 @@ module PlanningalertsApp
     # We are using some rack middleware to throttle people that make too many API requests
     config.middleware.use ThrottleConfigurable,:cache => Memcached.new,
         :strategies => YAML.load_file("#{config.root}/config/throttling.yml"),
+        :key_prefix => :throttle,
         :message => "Rate Limit Exceeded. See http://www.planningalerts.org.au/api/howto#hLicenseInfo for more information"
   end
 end
