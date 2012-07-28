@@ -35,10 +35,10 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
       if strategy == "hourly" || strategy == "daily"
         value.each do |m, hosts|
           raise "Invalid max count used: #{m}" unless m.kind_of?(Integer)
-          add_hosts_to_ip_lookup(hosts, strategy_object2(strategy, m))
+          add_hosts_to_ip_lookup(hosts, strategy_factory(strategy, m))
         end
       elsif strategy == "unlimited" || strategy == "blocked"
-        add_hosts_to_ip_lookup(value, strategy_object2(strategy, nil))
+        add_hosts_to_ip_lookup(value, strategy_factory(strategy, nil))
       else
         raise "Invalid strategy name used: #{strategy}"
       end
@@ -46,14 +46,14 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     raise "No default setting" if @ip_lookup["default"].nil?
   end
 
-  def strategy_object2(strategy, m)
-    case(strategy)
+  def strategy_factory(name, max)
+    case(name)
     when "blocked"
       Rack::Throttle::Blocked.new(nil)
     when "hourly"
-      Rack::Throttle::Hourly.new(nil, :cache => cache, :max => m)
+      Rack::Throttle::Hourly.new(nil, :cache => cache, :max => max)
     when "daily"
-      Rack::Throttle::Daily.new(nil, :cache => cache, :max => m)
+      Rack::Throttle::Daily.new(nil, :cache => cache, :max => max)
     when "unlimited"
       Rack::Throttle::Unlimited.new(nil)
     end
