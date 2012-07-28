@@ -39,7 +39,7 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
           add_hosts_to_ip_lookup(hosts, strategy_factory(strategy, m))
         end
       when "unlimited", "blocked"
-        add_hosts_to_ip_lookup(value, strategy_factory(strategy, nil))
+        add_hosts_to_ip_lookup(value, strategy_factory(strategy))
       else
         raise "Invalid strategy name used: #{strategy}"
       end
@@ -47,7 +47,7 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     raise "No default setting" if @ip_lookup["default"].nil?
   end
 
-  def strategy_factory(name, max)
+  def strategy_factory(name, max = nil)
     case(name)
     when "blocked"
       Rack::Throttle::Blocked.new(nil)
