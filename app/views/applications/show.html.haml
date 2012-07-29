@@ -69,10 +69,6 @@
       on this application (from #{@application.authority.full_name}).
       - if @application.on_notice_to
         = on_notice_text(@application)
-%h4 Tweets mentioning this planning application
-#boastful
-  %noscript Please enable Javascript in your browser settings to show any tweets.
-
 - unless @application.find_all_nearest_or_recent.empty?
   #nearby-applications
     %h4 Selection of other recent or nearby applications
@@ -82,11 +78,6 @@
 
 - if @application.location
   :javascript
-    $(document).ready(function() {
-      // Strip any parameters off the end of the url
-      $('#boastful').boastful({limit: '14', location: location.href.split('?')[0]});
-    });
-
     $(document).ready(function(){
       var map = new mxn.Mapstraction("map_div","google");
       point = new mxn.LatLonPoint(#{@application.lat},#{@application.lng});
@@ -132,6 +123,5 @@
       return angle;
     }
     
-= javascript_include_tag "/javascripts/jquery.boastful.js"
 = javascript_include_tag "/javascripts/applications.js"
 
