@@ -31,7 +31,7 @@
         Subscribe to an RSS feed for all applications near here
 
   - if @application.authority.contactable?
-    - unless @application.comments.confirmed.empty?
+    - unless @application.comments.visible.empty?
       %h4 Comments
     %ol#comments
       - @application.comments.visible.each do |comment|
