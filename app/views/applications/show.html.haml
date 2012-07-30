@@ -31,12 +31,11 @@
     %li
       = link_to new_alert_path(:address => @application.address) do
         = image_tag "email.png", :size => "28x28"
-        Email me whenever there are new applications near here
-      (No more than once per day)
+        Email me when there are new applications nearby
     %li
       = link_to applications_path(:format => 'rss', :address => @application.address, :radius => 2000) do
         = image_tag "rss.png", :size => "28x28"
-        Subscribe to an RSS feed for all applications near here
+        Subscribe to an RSS feed for applications nearby
 
   - if @application.authority.contactable?
     - unless @application.comments.visible.empty?
