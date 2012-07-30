@@ -117,6 +117,10 @@ class Alert < ActiveRecord::Base
         AlertNotifier.deliver_alert(alert, applications)
         no_emails += 1
       end
+      # Update the tallies on each application.
+      applications.each do |application|
+        application.update_attribute(:no_alerted, (application.no_alerted || 0) + 1)
+      end
     end
     info_logger.info "Sent #{no_applications} applications to #{no_emails} people!"
   end
