@@ -5,12 +5,27 @@ class ApplicationsController < ApplicationController
   skip_before_filter :force_mobile_format, :except => [:show, :index, :nearby]
 
   def index
+    valid_parameter_keys = [
+      "format", "action", "controller",
+      "authority_id",
+      "page", "style",
+      "postcode",
+      "suburb", "state",
+      "address", "lat", "lng", "radius", "area_size",
+      "bottom_left_lat", "bottom_left_lng", "top_right_lat", "top_right_lng"]
+    
     # TODO: Fix this hacky ugliness
     if in_mobile_view?
       per_page = 10
     elsif request.format == Mime::HTML
       per_page = 30
     else
+      # Parameter error checking (only do it on the API calls)
+      invalid_parameter_keys = params.keys - valid_parameter_keys
+      unless invalid_parameter_keys.empty?
+        render :text => "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.join(', ')}", :status => 400
+        return
+      end
       per_page = Application.per_page
     end
     
@@ -22,7 +37,7 @@ class ApplicationsController < ApplicationController
     else
       @rss = applications_url(params.merge(:format => "rss", :page => nil))
     end
-    
+
     if params[:authority_id]
       # TODO Handle the situation where the authority name isn't found
       @authority = Authority.find_by_short_name_encoded(params[:authority_id])

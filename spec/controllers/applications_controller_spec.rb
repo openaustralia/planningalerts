@@ -60,6 +60,20 @@ describe ApplicationsController do
       a.ip_address.should == "0.0.0.0"
       a.query.should == "/applications.rss?address=24+Bruce+Road+Glenbrook&radius=4000"
     end
+
+  end
+
+  describe "error checking on parameters used" do
+    it "should error if some unknown parameters are included" do
+      get :index, :format => "rss", :address => "24 Bruce Road Glenbrook", :radius => 4000, :foo => 200, :bar => "fiddle"
+      response.body.should == "Bad request: Invalid parameter(s) used: foo, bar"
+      response.code.should == "400"
+    end
+
+    it "should not do error checking on the normal html sites" do
+      get :index, :address => "24 Bruce Road Glenbrook", :radius => 4000, :foo => 200, :bar => "fiddle"
+      response.code.should == "200"
+    end
   end
   
   describe "search by address no radius" do
