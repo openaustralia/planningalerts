@@ -112,9 +112,9 @@ describe ApplicationsController do
   
   describe "search by area" do
     it "should find recent applications in an area" do
-      result = mock
-
-      Application.should_receive(:paginate).with(:bounds => [[1.0, 2.0], [3.0, 4.0]], :page => nil, :per_page => 100).and_return(result)
+      result, scope = mock, mock
+      Application.should_receive(:where).with("lat > ? AND lng > ? AND lat < ? AND lng < ?", 1.0, 2.0, 3.0, 4.0).and_return(scope)
+      scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
 
       get :index, :format => "rss", :bottom_left_lat => 1.0, :bottom_left_lng => 2.0,
         :top_right_lat => 3.0, :top_right_lng => 4.0

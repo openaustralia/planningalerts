@@ -75,8 +75,7 @@ class ApplicationsController < ApplicationController
       lat0, lng0 = params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f
       lat1, lng1 = params[:top_right_lat].to_f, params[:top_right_lng].to_f
       @description << " in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
-      @applications = Application.paginate :bounds => [[lat0, lng0], [lat1, lng1]],
-        :page => params[:page], :per_page => per_page
+      @applications = Application.where('lat > ? AND lng > ? AND lat < ? AND lng < ?', lat0, lng0, lat1, lng1).paginate(:page => params[:page], :per_page => per_page)
     else
       @applications = Application.paginate :page => params[:page], :per_page => per_page
     end
