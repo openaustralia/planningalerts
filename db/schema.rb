@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120725061447) do
+ActiveRecord::Schema.define(:version => 20120730024221) do
 
   create_table "alerts", :force => true do |t|
     t.string   "email",         :limit => 120, :null => false
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20120725061447) do
     t.string    "postcode",          :limit => 4
     t.date      "on_notice_from"
     t.date      "on_notice_to"
+    t.integer  "no_alerted"
   end
 
   add_index "applications", ["authority_id"], :name => "authority_id"
