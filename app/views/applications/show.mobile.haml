@@ -9,8 +9,10 @@
     %p= on_notice_text(@application)
   %p (Source: #{@application.authority.full_name}, reference #{@application.council_reference})
 - unless @application.find_all_nearest_or_recent.empty?
-  #nearby-applications
-    %h3.info Selection of other recent or nearby applications
-    .list
-      = render :partial => "application.mobile", :as => :application, :collection => @application.find_all_nearest_or_recent[0...5]
-    .info= link_to("more&hellip;".html_safe, nearby_application_url(@application))
+  %p.info#nearby-applications
+    - if @application.find_all_nearest_or_recent.count == 1
+      There is
+      = link_to "1 other nearby and recent application", nearby_application_url(@application)
+    - else
+      There are
+      = link_to "#{@application.find_all_nearest_or_recent.count} other nearby and recent applications", nearby_application_url(@application)

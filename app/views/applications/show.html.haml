@@ -20,6 +20,14 @@
   %p= addthis_bookmark_button.html_safe
 
   %ul#subscribe
+    - unless @application.find_all_nearest_or_recent.empty?
+      %li#nearby-applications
+        - if @application.find_all_nearest_or_recent.count == 1
+          There is
+          = link_to "1 other nearby and recent application", nearby_application_url(@application)
+        - else
+          There are
+          = link_to "#{@application.find_all_nearest_or_recent.count} other nearby and recent applications", nearby_application_url(@application)
     %li
       = link_to new_alert_path(:address => @application.address) do
         = image_tag "email.png", :size => "28x28"
@@ -69,12 +77,6 @@
       on this application (from #{@application.authority.full_name}).
       - if @application.on_notice_to
         = on_notice_text(@application)
-- unless @application.find_all_nearest_or_recent.empty?
-  #nearby-applications
-    %h4 Selection of other recent or nearby applications
-    %dl
-      = render :partial => "applications/application", :collection => @application.find_all_nearest_or_recent[0...5]
-    = link_to("more applications nearby&hellip;".html_safe, nearby_application_url(@application))
 
 - if @application.location
   :javascript
