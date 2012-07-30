@@ -28,6 +28,7 @@ gem "rake"
 gem 'exception_notification'
 gem 'rack-throttle'
 gem 'memcached'
+gem 'sanitize'
 
 group :test do
   gem 'cucumber-rails', :require => false
