@@ -13,8 +13,7 @@ GIT
       rails (~> 3.0.6)
 
 GEM
-  remote: http://gemcutter.org/
-  remote: http://gems.github.com/
+  remote: http://rubygems.org/
   specs:
     Saikuro (1.1.0)
     abstract (1.0.0)

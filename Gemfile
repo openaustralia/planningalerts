@@ -1,6 +1,4 @@
-#source 'http://rubygems.org'
-source "http://gemcutter.org"
-source "http://gems.github.com"
+source :rubygems
 
 gem 'rails', '3.0.16'
 
