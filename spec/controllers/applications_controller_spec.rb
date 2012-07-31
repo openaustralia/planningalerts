@@ -66,7 +66,7 @@ describe ApplicationsController do
   describe "error checking on parameters used" do
     it "should error if some unknown parameters are included" do
       get :index, :format => "rss", :address => "24 Bruce Road Glenbrook", :radius => 4000, :foo => 200, :bar => "fiddle"
-      response.body.should == "Bad request: Invalid parameter(s) used: foo, bar"
+      response.body.should == "Bad request: Invalid parameter(s) used: bar, foo"
       response.code.should == "400"
     end
 

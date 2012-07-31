@@ -23,7 +23,7 @@ class ApplicationsController < ApplicationController
       # Parameter error checking (only do it on the API calls)
       invalid_parameter_keys = params.keys - valid_parameter_keys
       unless invalid_parameter_keys.empty?
-        render :text => "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.join(', ')}", :status => 400
+        render :text => "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.sort.join(', ')}", :status => 400
         return
       end
       per_page = Application.per_page
