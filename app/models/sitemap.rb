@@ -51,7 +51,7 @@ class Sitemap
 	def initialize(root_url, root_path, logger = Logger.new(STDOUT))
 		@root_url, @root_path, @logger = root_url, root_path, logger
 
-	  #FileUtils.mkdir_p "#{@root_path}/sitemaps"
+	  FileUtils.mkdir_p "#{@root_path}/sitemaps"
 
 		# Index of current sitemap file
 		@index = 0
@@ -130,7 +130,7 @@ class Sitemap
   end
   
 	def sitemap_relative_path
-	  "sitemap#{@index + 1}.xml.gz"
+	  "sitemaps/sitemap#{@index + 1}.xml.gz"
   end
   
 	# Notify the search engines (like Google, Yahoo, etc..) of the new sitemap
