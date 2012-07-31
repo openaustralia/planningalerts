@@ -27,6 +27,7 @@ gem 'exception_notification'
 gem 'rack-throttle'
 gem 'memcached'
 gem 'sanitize'
+gem 'rvm-capistrano'
 
 group :test do
   gem 'cucumber-rails', :require => false

@@ -1,4 +1,7 @@
-require "bundler/capistrano"
+require 'bundler/capistrano'
+require 'rvm/capistrano'
+
+set :rvm_ruby_string, '1.8.7'
 
 set :application, "planningalerts.org.au/app"
 set :repository,  "git://github.com/openaustralia/planningalerts-app.git"

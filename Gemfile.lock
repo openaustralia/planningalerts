@@ -227,6 +227,8 @@ GEM
     ruby_parser (2.0.5)
       sexp_processor (~> 3.0)
     rubyzip (0.9.9)
+    rvm-capistrano (1.2.5)
+      capistrano (>= 2.0.0)
     sanitize (2.0.3)
       nokogiri (>= 1.4.4, < 1.6)
     selenium-webdriver (2.25.0)
@@ -283,6 +285,7 @@ DEPENDENCIES
   rails_admin!
   rake
   rspec-rails (~> 2.4)
+  rvm-capistrano
   sanitize
   smurf
   thinking-sphinx (= 2.0.0)
