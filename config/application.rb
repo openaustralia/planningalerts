@@ -2,7 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 require 'rack/throttle'
-require 'lib/throttle_configurable'
+require File.dirname(__FILE__) + "/../lib/throttle_configurable"
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
