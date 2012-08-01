@@ -13,7 +13,7 @@ $fb-gradient-style: matte;
 $fb-font-size: 1.3em;
 $fb-line-height: 1em;
 
-.commit input { 
+.actions input { 
   margin-top: 1em;
   @include fancy-button($orange); 
   font-weight: normal;
@@ -44,7 +44,7 @@ $fb-line-height: 1em;
   .inline-errors {
     color: $orange;
   }
-  li.string input {
+  li.string input, li.email input {
     font-size: 1.3em;
   }
 }

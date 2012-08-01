@@ -69,7 +69,7 @@
             = link_to("Why do you need my address?", faq_path(:anchor => "address", :comment => true))
           %div#faq_commenting_address.inline-hints.hidden
             = render :partial => 'static/faq_commenting_address'
-      = f.buttons
+      = f.actions
   - else
     %p
       = link_to "How to comment", @application.comment_url

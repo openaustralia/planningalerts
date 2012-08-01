@@ -11,9 +11,9 @@
         %p.inline-hints e.g. 1 Sowerby St, Goulburn, NSW 2580
         - if @error
           %p.inline-errors= @error
-  %fieldset.buttons
+  %fieldset.actions
     %ol
-      %li.commit
+      %li.submit
         = submit_tag "Search", :name => nil
 
 - if @q

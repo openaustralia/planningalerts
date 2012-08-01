@@ -201,7 +201,7 @@
   .inputs
     :z-index 99
   // Float Submit Buttons
-  .buttons li
+  .actions li
     :float left
   // Reset Nested Fieldset & Legends
   li
@@ -284,7 +284,7 @@
       :width = !stacked_input
   .errors li
     :display list-item
-  .buttons
+  .actions
     ol
       :padding-left = !stacked_padding
       :padding-right = !stacked_padding
@@ -366,7 +366,7 @@
       :clear both
     input
       :border none
-  .buttons
+  .actions
     :padding-left = !floated_label_width
     :width = !floated_total_width - !floated_label_width
     input
@@ -586,7 +586,7 @@
       &.boolean label
         :padding-left = !label_width
   fieldset
-    &.buttons
+    &.actions
       @if !label_float == "clear"
         :width = !total_width
       @else

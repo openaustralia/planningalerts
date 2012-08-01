@@ -11,5 +11,5 @@
     = f.input :name, :label => "Your name"
     = f.input :email, :label => "Your email"
     = f.input :details, :as => :text
-  = f.buttons do
-    = f.commit_button :label => "Send report"
+  = f.actions do
+    = f.action :submit, :label => "Send report"
