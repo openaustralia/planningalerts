@@ -5,4 +5,4 @@ rvm:
 
 before_script:
   - cp config/database.yml.example config/database.yml
-  - rake db:setup
+  - bundle exec rake db:setup
