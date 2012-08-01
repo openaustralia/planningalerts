@@ -13,7 +13,7 @@ gem 'httparty'
 gem "will_paginate", "~> 3.0.pre2"
 # For minifying javascript and css
 gem 'smurf'
-gem 'thinking-sphinx', '2.0.0', :require => 'thinking_sphinx'
+gem 'thinking-sphinx', :require => 'thinking_sphinx'
 gem 'formtastic', '~> 1.1.0'
 gem 'validates_email_format_of', :git => 'git://github.com/alexdunae/validates_email_format_of.git'
 gem "compass", ">= 0.10.6"
