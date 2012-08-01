@@ -10,7 +10,7 @@ gem "nokogiri"
 gem "foreigner"
 #gem 'addthis', :git => 'git://github.com/jaap3/addthis.git'
 gem 'httparty'
-gem "will_paginate", "~> 3.0.pre2"
+gem "will_paginate"
 # For minifying javascript and css
 gem 'smurf'
 gem 'thinking-sphinx', :require => 'thinking_sphinx'
