@@ -68,3 +68,13 @@ $fb-line-height: 1em;
   }
 }
 
+// Override things set by compass I think
+// Bit of a nasty hack
+body form.alert {
+  background: inherit;
+  border-color: inherit;
+  padding: inherit;
+  margin-bottom: 2em;
+  border: inherit;
+}
+
