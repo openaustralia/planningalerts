@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/alexdunae/validates_email_format_of.git
-  revision: c060fc48255238c78c6b8ce89b321920372b2c86
+  revision: 46b832f7c778cc73f45ebc84cffba03c33294928
   specs:
-    validates_email_format_of (1.4.4)
+    validates_email_format_of (1.5.3)
 
 GIT
   remote: git://github.com/sferik/rails_admin.git
