@@ -101,6 +101,7 @@ GEM
       railties (>= 3.0.0)
     fancy-buttons (1.2.0)
       compass (>= 0.11)
+    fastercsv (1.5.5)
     ffi (1.1.2)
     foreigner (0.9.1)
     formtastic (2.2.1)
@@ -219,6 +220,7 @@ DEPENDENCIES
   exception_notification
   factory_girl_rails
   fancy-buttons
+  fastercsv
   foreigner
   formtastic
   geokit
