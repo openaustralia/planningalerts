@@ -1,4 +1,4 @@
 - content_for :page_title, "Recent comments"
 %h3 Recent comments
-- paginated_section @comments, :previous_label => "« Newer", :next_label => "Older »" do
+= paginated_section @comments, :previous_label => "« Newer", :next_label => "Older »" do
   = render @comments

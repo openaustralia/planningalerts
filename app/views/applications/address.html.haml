@@ -52,7 +52,7 @@
             = image_tag "rss.png", :size => "28x28"
             Subscribe to an RSS feed for applications near here
       %h3 Recent applications within #{meters_in_words(@radius)} of #{@q}
-      - paginated_section @applications, :previous_label => "« Newer", :next_label => "Older »" do
+      = paginated_section @applications, :previous_label => "« Newer", :next_label => "Older »" do
         %dl= render :partial => "application", :collection => @applications
 - else
   %hr
