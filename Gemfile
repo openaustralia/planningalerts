@@ -21,7 +21,8 @@ gem 'fancy-buttons'
 gem "rails-geocoder", :require => "geocoder"
 gem 'devise' # Devise must be required before RailsAdmin
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git', :branch => "rails-3.0"
-gem 'metric_fu'
+# Disabling metric_fu because it depends on rcov which doesn't work on Ruby 1.9
+#gem 'metric_fu'
 gem "rake"
 gem 'exception_notification'
 gem 'rack-throttle'
