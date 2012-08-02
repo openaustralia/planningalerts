@@ -20,7 +20,7 @@ gem "compass-rails"
 gem 'fancy-buttons'
 gem "rails-geocoder", :require => "geocoder"
 gem 'devise' # Devise must be required before RailsAdmin
-gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git', :branch => "rails-3.0"
 gem 'metric_fu'
 gem "rake"
 gem 'exception_notification'
