@@ -336,3 +336,12 @@ body h4 {
     color: $link_color !important;
   }
 }
+
+// Social buttons
+#social {
+  margin-bottom: 1.5em;
+  height: 65px;
+  .twitter-share-button {
+    vertical-align: text-bottom;
+  }
+}
