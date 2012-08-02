@@ -218,6 +218,7 @@ DEPENDENCIES
   devise
   email_spec
   exception_notification
+  factory_girl (< 3.0)
   factory_girl_rails
   fancy-buttons
   fastercsv

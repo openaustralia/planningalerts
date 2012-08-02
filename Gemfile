@@ -40,6 +40,8 @@ group :test do
   gem 'webrat'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
+  # factory_girl 3.x requires Ruby 1.9
+  gem 'factory_girl', '< 3.0'
   gem 'email_spec'
 end
   
