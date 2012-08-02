@@ -107,6 +107,7 @@ GEM
     formtastic (2.2.1)
       actionpack (>= 3.0)
     fssm (0.2.9)
+    geocoder (1.1.2)
     geokit (1.5.0)
     gherkin (2.11.0)
       json (>= 1.4.6)
@@ -151,7 +152,6 @@ GEM
       activesupport (= 3.0.16)
       bundler (~> 1.0)
       railties (= 3.0.16)
-    rails-geocoder (0.9.8)
     railties (3.0.16)
       actionpack (= 3.0.16)
       activesupport (= 3.0.16)
@@ -224,6 +224,7 @@ DEPENDENCIES
   fastercsv
   foreigner
   formtastic
+  geocoder
   geokit
   haml
   httparty
@@ -232,7 +233,6 @@ DEPENDENCIES
   nokogiri
   rack-throttle
   rails (= 3.0.16)
-  rails-geocoder
   rails_admin!
   rake
   rspec-rails (~> 2.4)

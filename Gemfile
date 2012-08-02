@@ -18,7 +18,7 @@ gem 'formtastic'
 gem 'validates_email_format_of', :git => 'git://github.com/alexdunae/validates_email_format_of.git'
 gem "compass-rails"
 gem 'fancy-buttons'
-gem "rails-geocoder", :require => "geocoder"
+gem "geocoder", :require => "geocoder"
 gem 'devise' # Devise must be required before RailsAdmin
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git', :branch => "rails-3.0"
 # Apparently rails_admin requires fastercsv gem but it's not included in its dependencies
