@@ -1,3 +1,5 @@
+require 'will_paginate/array'
+
 class ApplicationsController < ApplicationController
   has_mobile_fu
   before_filter :mobile_optimise_switching, :only => [:show, :index, :nearby]
