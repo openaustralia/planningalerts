@@ -15,4 +15,12 @@ describe AlertsController do
       response.should be_success
     end
   end
+
+  describe "area" do
+    it "should 404 if the alert can't be found" do
+      lambda {
+        get :area, :id => 'non_existent_id'
+      }.should raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
 end

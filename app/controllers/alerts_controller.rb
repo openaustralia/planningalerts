@@ -21,6 +21,7 @@ class AlertsController < ApplicationController
   def area
     @zone_sizes = zone_sizes
     @alert = Alert.find_by_confirm_id(params[:id])
+    raise ActiveRecord::RecordNotFound if @alert.nil?
     if request.get?
       @size = @zone_sizes.invert[@alert.radius_meters]
     else
