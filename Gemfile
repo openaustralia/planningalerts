@@ -15,7 +15,7 @@ gem "will_paginate"
 gem 'smurf'
 gem 'thinking-sphinx', :require => 'thinking_sphinx'
 gem 'formtastic'
-gem 'validates_email_format_of', :git => 'git://github.com/alexdunae/validates_email_format_of.git'
+gem 'validates_email_format_of'
 gem "compass-rails"
 gem 'fancy-buttons'
 gem "geocoder", :require => "geocoder"

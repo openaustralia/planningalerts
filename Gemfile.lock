@@ -1,10 +1,4 @@
 GIT
-  remote: git://github.com/alexdunae/validates_email_format_of.git
-  revision: 46b832f7c778cc73f45ebc84cffba03c33294928
-  specs:
-    validates_email_format_of (1.5.3)
-
-GIT
   remote: git://github.com/sferik/rails_admin.git
   revision: 4af3fc415456ac00aeaa1c56bf1869234524b50f
   branch: rails-3.0
@@ -196,6 +190,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.33)
+    validates_email_format_of (1.5.3)
     warden (1.0.3)
       rack (>= 1.0.0)
     webrat (0.7.3)
@@ -240,6 +235,6 @@ DEPENDENCIES
   sanitize
   smurf
   thinking-sphinx
-  validates_email_format_of!
+  validates_email_format_of
   webrat
   will_paginate
