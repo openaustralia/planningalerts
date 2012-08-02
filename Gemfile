@@ -16,7 +16,7 @@ gem 'smurf'
 gem 'thinking-sphinx', :require => 'thinking_sphinx'
 gem 'formtastic'
 gem 'validates_email_format_of', :git => 'git://github.com/alexdunae/validates_email_format_of.git'
-gem "compass", ">= 0.10.6"
+gem "compass-rails"
 gem 'fancy-buttons'
 gem "rails-geocoder", :require => "geocoder"
 gem 'devise' # Devise must be required before RailsAdmin
