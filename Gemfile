@@ -21,7 +21,8 @@ gem 'fancy-buttons'
 gem "rails-geocoder", :require => "geocoder"
 gem 'devise' # Devise must be required before RailsAdmin
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
-gem 'metric_fu'
+# Temporarily comment out metric_fu so we can upgrade haml easily
+#gem 'metric_fu'
 gem "rake"
 gem 'exception_notification'
 gem 'rack-throttle'
