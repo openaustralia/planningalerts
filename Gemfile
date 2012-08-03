@@ -3,7 +3,8 @@ source :rubygems
 gem 'rails', '3.0.16'
 
 gem "capistrano"
-gem "activerecord-mysql2-adapter"
+# Need to use older version of mysql2 because we're on Rails 3.0
+gem "mysql2", "~> 0.2.7"
 gem "haml"
 gem "geokit"
 gem "nokogiri"
