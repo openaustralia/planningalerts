@@ -8,9 +8,8 @@
 
 #application
   - if @application.location
-    = link_to @application.map_url do
-      #map_div(style="width:350px;height:200px")
-        %noscript Please enable Javascript in your browser settings to view this map.
+    #map_div(style="width:350px;height:200px")
+      %noscript Please enable Javascript in your browser settings to view this map.
     #pano(style="width:350px;height:200px")
       %noscript Please enable Javascript in your browser settings to view this StreetView image.
   
@@ -95,7 +94,7 @@
       var map = new mxn.Mapstraction("map_div","google");
       point = new mxn.LatLonPoint(#{@application.lat},#{@application.lng});
       map.setCenterAndZoom(point,16);
-      map.dragging(false);
+      map.addControls({ zoom: 'small' });
       marker = new mxn.Marker(point)
       marker.setLabel("#{escape_javascript(@application.address)}");
       map.addMarker(marker);
