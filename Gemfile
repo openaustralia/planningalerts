@@ -3,7 +3,7 @@ source :rubygems
 gem 'rails', '3.0.16'
 
 gem "capistrano"
-gem "mysql"
+gem "activerecord-mysql2-adapter"
 gem "haml"
 gem "geokit"
 gem "nokogiri"
