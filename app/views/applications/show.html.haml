@@ -2,6 +2,10 @@
 - content_for :meta_description, "Planning application: #{@application.description} Address: #{@application.address}"
 - content_for :map, true
 = render :partial => "facebook"
+#social
+  = render :partial => "facebook_share_button", :locals => {:application => @application}
+  = render :partial => "twitter_share_button", :locals => {:application => @application}
+
 #application
   - if @application.location
     = link_to @application.map_url do
@@ -18,9 +22,6 @@
     = link_to "Read more information", @application.info_url
     about this application
   %p.source (Source: #{@application.authority.full_name}, reference #{@application.council_reference})
-  #social
-    = render :partial => "facebook_share_button", :locals => {:application => @application}
-    = render :partial => "twitter_share_button", :locals => {:application => @application}
   = render :partial => "twitter"
   - if @application.no_alerted
     %p.no_alerted

@@ -339,9 +339,12 @@ body h4 {
 
 // Social buttons
 #social {
-  margin-bottom: 1.5em;
-  height: 65px;
-  .twitter-share-button {
-    vertical-align: text-bottom;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  height: 149px;
+  width: 55px;
+  float: left;
+  .fb-like {
+    margin-bottom: 1em;
   }
 }
