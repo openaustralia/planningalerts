@@ -158,6 +158,9 @@ GEM
     rake (0.9.2.2)
     rdoc (3.12)
       json (~> 1.4)
+    redis (2.2.2)
+    redis-namespace (1.0.3)
+      redis (< 3.0.0)
     riddle (1.5.2)
     rspec (2.11.0)
       rspec-core (~> 2.11.0)
@@ -194,6 +197,9 @@ GEM
       polyglot (>= 0.3.1)
     tzinfo (0.3.33)
     validates_email_format_of (1.5.3)
+    vanity (1.8.0)
+      redis (~> 2.0)
+      redis-namespace (~> 1.0.0)
     warden (1.2.1)
       rack (>= 1.0)
     webrat (0.7.3)
@@ -239,5 +245,6 @@ DEPENDENCIES
   smurf
   thinking-sphinx
   validates_email_format_of
+  vanity
   webrat
   will_paginate

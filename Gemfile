@@ -32,6 +32,7 @@ gem 'rack-throttle'
 gem 'memcached'
 gem 'sanitize'
 gem 'rvm-capistrano'
+gem 'vanity'
 
 group :test do
   gem 'cucumber-rails', :require => false

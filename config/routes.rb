@@ -57,5 +57,7 @@ PlanningalertsApp::Application.routes.draw do
   match 'comments/:id/confirmed' => 'comments#confirmed', :as => :confirmed_comment
   match 'alerts/:id/confirmed' => 'email_confirmable/confirm#confirmed', :as => :confirmed_alert, :resource => 'alerts'
 
+  match '/vanity(/:action(/:id(.:format)))', :controller=>:vanity
+
   root :to => 'applications#address'
 end
