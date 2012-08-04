@@ -28,4 +28,4 @@ PlanningalertsApp::Application.configure do
 end
 
 # Uncomment the line below to turn on A/B data collection in development mode
-#Vanity.playground.collecting = true
+Vanity.playground.collecting = true
