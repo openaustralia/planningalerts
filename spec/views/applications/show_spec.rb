@@ -8,6 +8,7 @@ describe "applications/show" do
       :on_notice_from => nil, :on_notice_to => nil, :find_all_nearest_or_recent => [], :comments => [])
     errors = mock('Errors', :[] => nil)
     assigns[:comment] = mock_model(Comment, :errors => errors, :text => nil, :name => nil, :email => nil)
+    Vanity.context = Struct.new(:vanity_identity).new('1')
   end
   
   describe "show" do
