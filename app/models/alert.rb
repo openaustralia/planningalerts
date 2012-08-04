@@ -5,6 +5,8 @@ class Alert < ActiveRecord::Base
   before_validation :geocode
   before_create :remove_other_alerts_for_this_address
   acts_as_email_confirmable
+
+  scope :active, :conditions => {:confirmed => true, :unsubscribed => false}
   
   def location=(l)
     if l
@@ -108,8 +110,8 @@ class Alert < ActiveRecord::Base
     # Only send alerts to confirmed users
     no_emails = 0
     no_applications = 0
-    alerts = Alert.find_all_by_confirmed(true)
-    info_logger.info "Checking #{alerts.count} confirmed users"
+    alerts = Alert.active.all
+    info_logger.info "Checking #{alerts.count} active alerts"
     alerts.each do |alert|
       applications = alert.recent_applications
       no_applications += applications.size

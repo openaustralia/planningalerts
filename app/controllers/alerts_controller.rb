@@ -15,7 +15,7 @@ class AlertsController < ApplicationController
   
   def unsubscribe
     @alert = Alert.find_by_confirm_id(params[:id])
-    @alert.delete if @alert
+    @alert.update_attribute(:unsubscribed, true) if @alert
   end
   
   def area

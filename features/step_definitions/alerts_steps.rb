@@ -25,11 +25,11 @@ When /^I click the "([^\"]*)" link in the email alert for "([^\"]*)"$/ do |link,
 end
 
 Then /^I should receive email alerts for the street address "([^\"]*)" with a size of "([^\"]*)"$/ do |address, size|
-  Alert.find(:first, :conditions => {:address => address, :radius_meters => size, :email => current_email_address, :confirmed => true}).should_not be_nil
+  Alert.active.find(:first, :conditions => {:address => address, :radius_meters => size, :email => current_email_address}).should_not be_nil
 end
 
 Then /^I should not receive email alerts for the street address "([^\"]*)"$/ do |address|
-  Alert.find(:first, :conditions => {:address => address, :email => current_email_address, :confirmed => true}).should be_nil
+  Alert.active.find(:first, :conditions => {:address => address, :email => current_email_address}).should be_nil
 end
 
 Given /^the following email alerts:$/ do |table|

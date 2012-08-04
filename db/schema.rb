@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120803220510) do
+ActiveRecord::Schema.define(:version => 20120804002636) do
 
   create_table "alerts", :force => true do |t|
     t.string   "email",         :limit => 120, :null => false
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20120803220510) do
     t.string   "lga_name",      :limit => 50
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "unsubscribed",                 :default => false, :null => false
   end
 
   create_table "api_statistics", :force => true do |t|
