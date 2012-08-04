@@ -52,3 +52,7 @@ module PlanningalertsApp
         :message => "Rate Limit Exceeded. See http://www.planningalerts.org.au/api/howto#hLicenseInfo for more information"
   end
 end
+
+# Use javascript to add participants to the A/B testing to avoid robots and spiders
+Vanity.playground.use_js!
+Vanity.playground.add_participant_path = "/vanity/add_participant"
