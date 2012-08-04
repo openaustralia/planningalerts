@@ -1,0 +1,4 @@
+development:
+  adapter: active_record
+production:
+  adapter: active_record
