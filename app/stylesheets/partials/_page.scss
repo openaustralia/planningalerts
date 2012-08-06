@@ -240,6 +240,29 @@ ul#subscribe {
   }
 }
 
+#application .alert {
+  width: 450px;
+  p {
+    margin-bottom: 1em;
+  }
+  font-size: 75%;
+  background: $almostwhite;
+  padding: 1em;
+  border: solid 1px $grey;
+  .label {
+    display: none;
+  }
+  .actions {
+    padding-left: 0;
+  }
+  .inline-hints {
+    margin-left: 0;
+  }
+  #alert_address, #alert_email {
+    width: 440px;
+  }
+}
+
 ol#comments {
   @include no-bullets;
   padding-left: 0;

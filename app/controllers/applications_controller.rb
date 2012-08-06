@@ -138,7 +138,9 @@ class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
     @comment = Comment.new
-    
+    # Required for new email alert signup form
+    @alert = Alert.new(:address => @application.address)
+
     respond_to do |format|
       format.html
       format.mobile { render "show.mobile", :layout => "application.mobile" }
