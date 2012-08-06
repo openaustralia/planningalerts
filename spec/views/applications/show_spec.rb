@@ -9,6 +9,7 @@ describe "applications/show" do
     errors = mock('Errors', :[] => nil)
     assigns[:comment] = mock_model(Comment, :errors => errors, :text => nil, :name => nil, :email => nil)
     Vanity.context = Struct.new(:vanity_identity).new('1')
+    Vanity.playground.experiment(:signup_form_on_detail).chooses(false)
   end
   
   describe "show" do
