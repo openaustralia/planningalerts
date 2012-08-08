@@ -10,6 +10,8 @@ class CommentsController < ApplicationController
     @comment.application_id = @application.id
     if !@comment.save
       flash.now[:error] = "Some of the comment wasn't filled out completely. See below."
+      # HACK: Required for new email alert signup form
+      @alert = Alert.new(:address => @application.address)
       render 'applications/show'
     end
   end
