@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe LayarController do
   it "should provide a rest api to serve the layar points of interest" do
-    # TODO Silly bug in "geocoder" gem means that distances are returned in miles even when the units are set to kilometres
-    application = mock(:distance => 2 * 0.621371192, :lat => 1.0, :lng => 2.0, :id => 101, :address => " 1 Foo St\n Fooville",
+    application = mock(:distance => 2, :lat => 1.0, :lng => 2.0, :id => 101, :address => " 1 Foo St\n Fooville",
       :description => "1234 678901234 67890123 56789 12345 1234567 90123456789 123456 89\n1234567890 2345678 012345678 01234512345")
     result = [application]
     result.stub!(:current_page).and_return(1)

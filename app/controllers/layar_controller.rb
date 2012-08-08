@@ -10,7 +10,7 @@ class LayarController < ApplicationController
       {
         :actions => [{:label => "More info", :uri => application_url(:utm_medium => 'ar', :utm_source => 'layar', :id => a.id)}],
         :attribution => nil,
-        :distance => a.distance.to_f / 0.621371192 * 1000,
+        :distance => a.distance.to_f * 1000,
         :id => a.id,
         # TODO: Fix the hardwired domain name and path
         :imageURL => "http://www.planningalerts.org.au/images/layar/icon_100x75.png",
