@@ -263,6 +263,17 @@ ul#subscribe {
   }
 }
 
+#application .alert.sidebar {
+  clear: right;
+  float: right;
+  width: 326px;
+  padding: 12px;
+  #alert_address, #alert_email {
+    width: 320px;
+  }
+  margin: 0 0 10px 10px;
+}
+
 ol#comments {
   @include no-bullets;
   padding-left: 0;
