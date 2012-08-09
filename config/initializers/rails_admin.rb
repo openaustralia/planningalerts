@@ -15,6 +15,7 @@ RailsAdmin.config do |config|
     list do    
       field :full_name
       field :state
+      field :email
       field :disabled
     end
     
