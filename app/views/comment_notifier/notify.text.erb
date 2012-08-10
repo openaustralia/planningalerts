@@ -7,7 +7,7 @@ Name of commenter:    <%= @comment.name %>
 Address of commenter: <%= @comment.address %>
 Email of commenter:   <%= @comment.email %>
 
-<%= @comment.text %>
+<%= @comment.text.html_safe %>
 
 =============================================================================
 This comment was submitted via PlanningAlerts.org.au, a free service

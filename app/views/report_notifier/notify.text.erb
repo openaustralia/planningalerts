@@ -1,5 +1,5 @@
 The abuse report was completed by <%= @report.name %> (<%= @report.email %>) who said:
-<%= @report.details %>
+<%= @report.details.html_safe %>
 
 The original comment was written by <%= @comment.name%> (<%= @comment.email %>) who said:
 <%= @comment.text.html_safe %>
