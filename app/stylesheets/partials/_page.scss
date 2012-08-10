@@ -274,6 +274,15 @@ ul#subscribe {
   margin: 0 0 10px 10px;
 }
 
+.alert.home {
+  background: $almostwhite;
+  border: solid 1px $grey;
+  padding: 1em;
+  p {
+    margin-bottom: 1em;
+  }
+}
+
 ol#comments {
   @include no-bullets;
   padding-left: 0;

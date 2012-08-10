@@ -108,6 +108,7 @@ class ApplicationsController < ApplicationController
         @error = "Address #{location.error}"
       else
         @q = location.full_address
+        @alert = Alert.new(:address => @q)
         @other_addresses = location.all[1..-1].map{|l| l.full_address}
         @applications = Application.near([location.lat, location.lng], @radius.to_f / 1000, :units => :km).paginate(:page => params[:page], :per_page => per_page)
         @rss = applications_path(:format => 'rss', :address => @q, :radius => @radius)
