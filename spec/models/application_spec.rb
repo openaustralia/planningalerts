@@ -174,7 +174,7 @@ describe Application do
       auth2 = Authority.create!(:full_name => "Wombat City Council", :short_name => "Wombat")
       Date.stub!(:today).and_return(Date.new(2010, 1, 10))
       # Overwriting a constant here. Normally generates a warning. Silence it!
-      Kernel::silence_warnings { Configuration::SCRAPE_DELAY = 1 }
+      Kernel::silence_warnings { ::Configuration::SCRAPE_DELAY = 1 }
       logger = mock
       logger.should_receive(:info).with("Scraping 2 authorities with date 2010-01-10")
       logger.should_receive(:info).with("Scraping 2 authorities with date 2010-01-09")

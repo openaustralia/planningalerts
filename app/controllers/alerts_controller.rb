@@ -42,8 +42,8 @@ class AlertsController < ApplicationController
   private
   
   def zone_sizes
-    {'s' => Configuration::SMALL_ZONE_SIZE,
-      'm' => Configuration::MEDIUM_ZONE_SIZE,
-      'l' => Configuration::LARGE_ZONE_SIZE}
+    {'s' => ::Configuration::SMALL_ZONE_SIZE,
+      'm' => ::Configuration::MEDIUM_ZONE_SIZE,
+      'l' => ::Configuration::LARGE_ZONE_SIZE}
   end
 end
