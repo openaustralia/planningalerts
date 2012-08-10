@@ -2,7 +2,7 @@ The abuse report was completed by <%= @report.name %> (<%= @report.email %>) who
 <%= @report.details %>
 
 The original comment was written by <%= @comment.name%> (<%= @comment.email %>) who said:
-<%= @comment.text %>
+<%= @comment.text.html_safe %>
 
 The original comment can be found at:
 <%= application_url(@comment.application, :anchor => "comment#{@comment.id}") %>
