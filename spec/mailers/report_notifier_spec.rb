@@ -23,7 +23,7 @@ describe ReportNotifier do
   end
   
   it "should tell the moderator everything they need to know to decide on what to do with the report" do
-    @notifier.body.should == <<-EOF
+    @notifier.body.to_s.should == <<-EOF
 The abuse report was completed by Joe Reporter (reporter@foo.com) who said:
 This is very rude!
 
