@@ -7,3 +7,7 @@
   js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=335651659855671";
   fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
+
+  FB.Event.subscribe('edge.create', function(targetUrl) {
+    _gaq.push(['_trackSocial', 'facebook', 'like', targetUrl]);
+  });
