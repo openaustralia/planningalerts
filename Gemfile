@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '3.0.16'
+gem 'rails', '3.0.17'
 
 gem "capistrano"
 # Need to use older version of mysql2 because we're on Rails 3.0
