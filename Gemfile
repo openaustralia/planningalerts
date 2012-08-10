@@ -9,7 +9,6 @@ gem "haml"
 gem "geokit"
 gem "nokogiri"
 gem "foreigner"
-#gem 'addthis', :git => 'git://github.com/jaap3/addthis.git'
 gem 'httparty'
 gem "will_paginate"
 # For minifying javascript and css
