@@ -97,7 +97,25 @@ class Alert < ActiveRecord::Base
   
   # Applications that have been scraped since the last time the user was sent an alert
   def recent_applications
-    Application.near([location.lat, location.lng], radius_km, :units => :km).find(:all, :conditions => ['date_scraped > ?', last_sent || Date.yesterday])
+    Application.near([location.lat, location.lng], radius_km, :units => :km).find(:all, :conditions => ['date_scraped > ?', cutoff_time])
+  end
+
+  # Applications in the area of interest which have new comments made since we were last alerted
+  def applications_with_new_comments
+    Application.near([location.lat, location.lng], radius_km, :units => :km).joins(:comments).where('comments.updated_at > ?', cutoff_time).where('comments.confirmed' => true).where('comments.hidden' => false)
+  end
+
+  def new_comments
+    comments = []
+    # Doing this in this roundabout way because I'm not sure how to use "near" together with joins
+    applications_with_new_comments.each do |application|
+      comments += application.comments.visible.where('comments.updated_at > ?', cutoff_time)
+    end
+    comments
+  end
+
+  def cutoff_time
+    last_sent || Date.yesterday
   end
   
   def radius_km
