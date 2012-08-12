@@ -1,6 +1,5 @@
 %div(style="margin-left: 15px; margin-right: 15px; background: #fafafa")
-  %p
-    = Sanitize.clean(simple_format(truncate(comment.text, :length => 700)), Sanitize::Config::BASIC).html_safe
+  = Sanitize.clean(ApplicationController.helpers.simple_format(truncate(comment.text, :length => 700)), Sanitize::Config::BASIC).html_safe
   %p
     %span(style="color: #989898")
       by

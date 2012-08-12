@@ -6,11 +6,16 @@
         PlanningAlerts
     - unless @comments.empty?
       %div{:style => "margin: 6px 11px 25px; padding: 15px; background: #fcfbbd; -moz-border-radius: 10px; -khtml-border-radius: 10px; -webkit-border-radius: 10px;"}
-        The following new comment has been made on a planning application within #{meters_in_words(@alert.radius_meters)} of
+        - if @comments.count == 1
+          The following new comment has been made on a planning application
+        - else
+          The following new comments have been made on planning applications
+        within #{meters_in_words(@alert.radius_meters)} of
         %strong= @alert.address
       = render :partial => "comment", :collection => @comments
-    %div{:style => "margin: 6px 11px 25px; padding: 15px; background: #fcfbbd; -moz-border-radius: 10px; -khtml-border-radius: 10px; -webkit-border-radius: 10px;"}
-      The following new planning applications have been found within #{meters_in_words(@alert.radius_meters)} of
-      %strong= @alert.address
-    = render :partial => "application", :collection => @applications
+    - unless @applications.empty?
+      %div{:style => "margin: 6px 11px 25px; padding: 15px; background: #fcfbbd; -moz-border-radius: 10px; -khtml-border-radius: 10px; -webkit-border-radius: 10px;"}
+        The following new planning applications have been found within #{meters_in_words(@alert.radius_meters)} of
+        %strong= @alert.address
+      = render :partial => "application", :collection => @applications
     = render :partial => "footer"
