@@ -19,6 +19,14 @@ describe AlertNotifier do
     end
   end
 
+  describe "when sending a planning alert with two new comments" do
+    let(:email) { AlertNotifier.alert(@alert, [], [@c1, @c2])}
+
+    it "should use the plural in the comment line" do
+      email.subject.should == "2 new comments on planning applications near #{@alert.address}"
+    end
+  end
+
   describe "when sending a planning alert with one new planning application" do
     before :each do
       @email = AlertNotifier.alert(@alert, [@a1])

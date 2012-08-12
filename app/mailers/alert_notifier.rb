@@ -23,7 +23,7 @@ class AlertNotifier < ActionMailer::Base
     alert.save!
     
     if applications.empty?
-      subject = "1 new comment on planning applications near #{alert.address}"
+      subject = pluralize(comments.count, "new comment") + " on planning applications near #{alert.address}"
     else
       subject = pluralize(applications.count, "new planning application") + " near #{alert.address}"
     end
