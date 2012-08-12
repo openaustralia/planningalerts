@@ -13,4 +13,8 @@ class StaticController < ApplicationController
   
   def get_involved
   end
+
+  def error_404
+    render :status => :not_found
+  end
 end

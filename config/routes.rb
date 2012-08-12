@@ -60,4 +60,8 @@ PlanningalertsApp::Application.routes.draw do
   match '/vanity(/:action(/:id(.:format)))', :controller=>:vanity
 
   root :to => 'applications#address'
+
+  unless Rails.application.config.consider_all_requests_local
+    match '*not_found', :to => 'static#error_404'
+  end
 end
