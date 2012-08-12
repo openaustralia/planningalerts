@@ -1,0 +1,8 @@
+%p(style="padding-left:15px")
+  = Sanitize.clean(simple_format(truncate(comment.text, :length => 700)), Sanitize::Config::BASIC).html_safe
+  %br
+  %span(style="color: #989898")
+    by
+    = comment.name
+    on
+  = link_to comment.application.address, application_url(comment.application, :anchor => "comment#{comment.id}", :utm_medium => "email", :utm_source => "alerts"), :style => "color: #f2630c; font-weight: bold;"
