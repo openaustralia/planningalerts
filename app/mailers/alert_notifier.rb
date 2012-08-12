@@ -2,8 +2,6 @@
 class AlertNotifier < ActionMailer::Base
   default :from => "#{::Configuration::EMAIL_FROM_NAME} <#{::Configuration::EMAIL_FROM_ADDRESS}>"
   helper :application
-  # So that we can use "pluralize"
-  include ActionView::Helpers::TextHelper
 
   def alert(alert, applications, comments = [])
     @alert = alert
