@@ -1,12 +1,19 @@
 <% unless @comments.empty? %>
+<% if @comments.count == 1 %>
 The following new comment has been made on a planning application within <%= meters_in_words(@alert.radius_meters) %> of <%= @alert.address %>:
+<% else %>
+The following new comments have been made on planning applications within <%= meters_in_words(@alert.radius_meters) %> of <%= @alert.address %>:
+<% end %>
 
-<%= render :partial => "comment", :object => @comments.first -%>
-
+<%= render :partial => "comment", :collection => @comments, :spacer_template => "spacer" -%>
+<% unless @applications.empty? %>
 ============================================================
 
 <% end %>
+<% end %>
+<% unless @applications.empty? %>
 The following new planning applications have been found within <%= meters_in_words(@alert.radius_meters) %> of <%= @alert.address %>:
 
 <%= render :partial => "application", :collection => @applications, :spacer_template => "spacer" -%>
+<% end %>
 <%= render :partial => "footer" %>

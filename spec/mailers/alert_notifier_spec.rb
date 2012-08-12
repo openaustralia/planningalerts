@@ -11,6 +11,7 @@ describe AlertNotifier do
     @a2 = mock_model(Application, :address => "Bar Street, Foo", :council_reference => "a2", :description => "Put something up", :id => 2)
     @a3 = mock_model(Application, :address => "2 Foo Parade, Glenbrook NSW 2773", :id => 3)
     @c1 = mock_model(Comment, :text => "I think this is a great idea", :name => "Matthew Landauer", :application => @a3, :id => 1)
+    @c2 = mock_model(Comment, :text => "Another comment", :name => "Jack Smith", :application => @a3, :id => 2)
   end
 
   describe "when sending a planning alert with one new comment" do
@@ -26,6 +27,10 @@ describe AlertNotifier do
 
     it "should use the plural in the comment line" do
       email.subject.should == "2 new comments on planning applications near #{@alert.address}"
+    end
+
+    it "should nicely format (in text) a list of multiple planning applications" do
+      get_message_part(email, /plain/).should == Rails.root.join("spec/mailers/regression/email3.txt").read
     end
   end
 
