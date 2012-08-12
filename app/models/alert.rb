@@ -104,6 +104,18 @@ class Alert < ActiveRecord::Base
     radius_meters / 1000.0
   end
   
+  # Process this email alert and send out an email if necessary. Returns number of applications sent.
+  def process
+    applications = alert.recent_applications
+    AlertNotifier.deliver_alert(alert, applications) unless applications.empty?
+    # Update the tallies on each application.
+    applications.each do |application|
+      application.update_attribute(:no_alerted, (application.no_alerted || 0) + 1)
+    end
+    # Return number of applications sent
+    applications.size
+  end
+
   # This is a long-running method. Call with care
   # TODO: Untested method
   def self.send_alerts(info_logger = logger)
@@ -113,15 +125,9 @@ class Alert < ActiveRecord::Base
     alerts = Alert.active.all
     info_logger.info "Checking #{alerts.count} active alerts"
     alerts.each do |alert|
-      applications = alert.recent_applications
-      no_applications += applications.size
-      unless applications.empty?
-        AlertNotifier.deliver_alert(alert, applications)
+      if process > 0
+        no_applications += number
         no_emails += 1
-      end
-      # Update the tallies on each application.
-      applications.each do |application|
-        application.update_attribute(:no_alerted, (application.no_alerted || 0) + 1)
       end
     end
     info_logger.info "Sent #{no_applications} applications to #{no_emails} people!"
