@@ -7,19 +7,7 @@
     %div{:style => "margin: 6px 11px 25px; padding: 15px; background: #fcfbbd; -moz-border-radius: 10px; -khtml-border-radius: 10px; -webkit-border-radius: 10px;"}
       The following new planning applications have been found within #{meters_in_words(@alert.radius_meters)} of
       %strong= @alert.address
-    - @applications.each do |application|
-      %table{:style => "padding-left: 15px; padding-bottom: 15px;"}
-        %tr
-          %td{:colspan => "2", :style => "padding-bottom: 5px;"}
-            = link_to application.address, application_url(:id => application.id, :utm_source => 'alerts', :utm_medium => 'email'), :style => "font-size: 18px; font-weight: bold; color: #f2630c;"
-        %tr
-          %td{:style => "padding: 5px; width: 155px;"}
-            %img{:height => "150", :src => "http://maps.googleapis.com/maps/api/staticmap?zoom=14&size=150x150&maptype=roadmap&markers=color:red%7C#{url_encode application.address}&sensor=false", :width => "150"}/
-          %td{:style => "padding: 5px;"}
-            %img{:height => "150", :src => "http://maps.googleapis.com/maps/api/streetview?size=150x150&location=#{url_encode application.address}&fov=60&sensor=false", :width => "150"}/
-        %tr
-          %td{:colspan => "2", :style => "vertical-align: top;"}
-            = application.description
+    = render :partial => "application", :collection => @applications
     %div{:style => "border-top: solid 3px #F2630C;"}
       %div{:style => "padding-left: 15px; padding-top: 5px;"}
         %p
