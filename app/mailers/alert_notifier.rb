@@ -5,7 +5,7 @@ class AlertNotifier < ActionMailer::Base
   # So that we can use "pluralize"
   include ActionView::Helpers::TextHelper
 
-  def alert(alert, applications)
+  def alert(alert, applications, comments = [])
     @alert = alert
     @applications = applications
 
@@ -22,7 +22,12 @@ class AlertNotifier < ActionMailer::Base
     alert.last_sent = Time.now
     alert.save!
     
-    mail(:to => alert.email, :subject => pluralize(applications.count, "new planning application") + " near #{alert.address}",
-      "return-path" => ::Configuration::BOUNCE_EMAIL_ADDRESS)
+    if applications.empty?
+      subject = "1 new comment on planning applications near #{alert.address}"
+    else
+      subject = pluralize(applications.count, "new planning application") + " near #{alert.address}"
+    end
+
+    mail(:to => alert.email, :subject => subject, "return-path" => ::Configuration::BOUNCE_EMAIL_ADDRESS)
   end
 end

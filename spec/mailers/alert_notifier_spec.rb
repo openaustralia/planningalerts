@@ -11,6 +11,14 @@ describe AlertNotifier do
     @a2 = mock_model(Application, :address => "Bar Street, Foo", :council_reference => "a2", :description => "Put something up", :id => 2)
   end
 
+  describe "when sending a planning alert with one new comment" do
+    let(:email) { AlertNotifier.alert(@alert, [], [@c1])}
+
+    it "should use the singular in the comment line" do
+      email.subject.should == "1 new comment on planning applications near #{@alert.address}"
+    end
+  end
+
   describe "when sending a planning alert with one new planning application" do
     before :each do
       @email = AlertNotifier.alert(@alert, [@a1])
