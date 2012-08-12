@@ -27,6 +27,14 @@ describe AlertNotifier do
     end
   end
 
+  describe "when send a planning alert with one new comment and two new planning applications" do
+    let(:email) { AlertNotifier.alert(@alert, [@a1, @a2], [@c1])}
+
+    it "should tell you about both in the comment line" do
+      email.subject.should == "1 new comment and 2 new planning applications near #{@alert.address}"
+    end
+  end
+
   describe "when sending a planning alert with one new planning application" do
     before :each do
       @email = AlertNotifier.alert(@alert, [@a1])
