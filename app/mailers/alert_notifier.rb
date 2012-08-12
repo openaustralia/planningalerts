@@ -22,17 +22,9 @@ class AlertNotifier < ActionMailer::Base
     alert.last_sent = Time.now
     alert.save!
     
-    application_text = pluralize(applications.count, "new planning application")
-    comment_text = pluralize(comments.count, "new comment")
-    if !applications.empty? && comments.empty?
-      subject = application_text
-    elsif applications.empty? && !comments.empty?
-      subject = comment_text + " on planning applications"
-    elsif !applications.empty? && !comments.empty?
-      subject = comment_text + " and " + application_text
-    end
-    subject += " near #{alert.address}"
-
-    mail(:to => alert.email, :subject => subject, "return-path" => ::Configuration::BOUNCE_EMAIL_ADDRESS)
+    mail(:to => alert.email,
+      :subject => render_to_string(:partial => "subject",
+        :locals => {:applications => applications, :comments => comments, :alert => alert}).strip,
+      "return-path" => ::Configuration::BOUNCE_EMAIL_ADDRESS)
   end
 end
