@@ -8,17 +8,4 @@
       The following new planning applications have been found within #{meters_in_words(@alert.radius_meters)} of
       %strong= @alert.address
     = render :partial => "application", :collection => @applications
-    %div{:style => "border-top: solid 3px #F2630C;"}
-      %div{:style => "padding-left: 15px; padding-top: 5px;"}
-        %p
-          %a{:href => "http://www.planningalerts.org.au/?utm_medium=email&utm_source=alerts", :style => "color: #f2630c;"} PlanningAlerts
-          is a free service run by the charity <a href="http://openaustraliafoundation.org.au/?utm_medium=email&utm_source=alerts" style="color: #f2630c;">OpenAustralia Foundation</a>.
-        %p
-          %strong This service depends on donations from people like you for its survival.
-          If you use this service <a href="http://www.openaustraliafoundation.org.au/donate/?utm_medium=email&utm_source=alerts" style="color: #f2630c;">please consider donating</a>.
-        %p
-          You can
-          = link_to 'change the size', area_alert_url(:id => @alert.confirm_id), :style => 'color: #f2630c;'
-          of the area covered by this alert or
-          = link_to 'unsubscribe', unsubscribe_alert_url(:id => @alert.confirm_id), :style => 'color: #f2630c;'
-          and stop receiving these emails.
+    = render :partial => "footer"
