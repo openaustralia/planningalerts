@@ -7,6 +7,7 @@ describe "alert_notifier/alert" do
     application = mock_model(Application, :address => "Bar Street",
       :description => "Alterations & additions", :council_reference => "007")
     assign(:applications, [application])
+    assign(:comments, [])
     assign(:georss_url, "blah")
     render
     rendered.should contain("Alterations & additions")      
