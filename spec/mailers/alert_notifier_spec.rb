@@ -9,6 +9,8 @@ describe AlertNotifier do
     @original_applications_sent = Stat.applications_sent
     @a1 = mock_model(Application, :address => "Foo Street, Bar", :council_reference => "a1", :description => "Knock something down", :id => 1)
     @a2 = mock_model(Application, :address => "Bar Street, Foo", :council_reference => "a2", :description => "Put something up", :id => 2)
+    @a3 = mock_model(Application, :address => "2 Foo Parade, Glenbrook NSW 2773", :id => 3)
+    @c1 = mock_model(Comment, :text => "I think this is a great idea", :name => "Matthew Landauer", :application => @a3, :id => 1)
   end
 
   describe "when sending a planning alert with one new comment" do
@@ -32,6 +34,10 @@ describe AlertNotifier do
 
     it "should tell you about both in the comment line" do
       email.subject.should == "1 new comment and 2 new planning applications near #{@alert.address}"
+    end
+    
+    it "should nicely format (in text) a list of multiple planning applications" do
+      get_message_part(email, /plain/).should == Rails.root.join("spec/mailers/regression/email2.txt").read
     end
   end
 
@@ -102,12 +108,12 @@ describe AlertNotifier do
       end
     end
 
-    def get_message_part (mail, content_type)
-      mail.body.parts.find { |p| p.content_type.match content_type }.body.raw_source
-    end
-
     def contains_link(html, url, text)
       html.should match /<a href="#{url.gsub(/\//, '\/').gsub(/&/, '&amp;').gsub(/\?/, '\?')}"[^>]*>#{text}<\/a>/
     end
+  end
+
+  def get_message_part (mail, content_type)
+    mail.body.parts.find { |p| p.content_type.match content_type }.body.raw_source
   end
 end

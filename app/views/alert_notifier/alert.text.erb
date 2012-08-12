@@ -1,3 +1,11 @@
+<% unless @comments.empty? %>
+The following new comment has been made on a planning application within <%= meters_in_words(@alert.radius_meters) %> of <%= @alert.address %>:
+
+<%= render :partial => "comment", :object => @comments.first -%>
+
+============================================================
+
+<% end %>
 The following new planning applications have been found within <%= meters_in_words(@alert.radius_meters) %> of <%= @alert.address %>:
 
 <%= render :partial => "application", :collection => @applications, :spacer_template => "spacer" -%>

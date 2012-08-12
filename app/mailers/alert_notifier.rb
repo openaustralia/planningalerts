@@ -4,8 +4,7 @@ class AlertNotifier < ActionMailer::Base
   helper :application
 
   def alert(alert, applications, comments = [])
-    @alert = alert
-    @applications = applications
+    @alert, @applications, @comments = alert, applications, comments
 
     @georss_url = applications_url(:format => "rss", :address => @alert.address, :radius => @alert.radius_meters)
     
