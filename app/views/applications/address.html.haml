@@ -41,25 +41,13 @@
         If you #{link_to "sign up for email alerts", new_alert_path(:address => @q)} anyway, you will receive new applications when they become available. 
         The more people that sign up for your area, the sooner we'll add your area to PlanningAlerts. So, get your friends and neighbours to sign up too!
     - else
-      - if ab_test(:enter_email_on_home_page)
-        = semantic_form_for @alert, :html => {:class => "home"} do |f|
-          %p Find out what's happening in your area. Get alerts of new applications near here straight in your email. It's free!
-          = f.inputs do
-            = f.input :address, :as => :hidden
-            = f.input :email, :label => "Enter your email address", :placeholder => "your@email.com"
-          = f.actions do
-            = f.action :submit, :label => "Create alert"
-      - else
-        %ul#subscribe
-          %li
-            - link_to new_alert_path(:address => @q) do
-              = image_tag "email.png", :size => "28x28"
-              Email me whenever there are new applications near here
-            (No more than once per day)
-          %li
-            - link_to @rss do
-              = image_tag "rss.png", :size => "28x28"
-              Subscribe to an RSS feed for applications near here
+      = semantic_form_for @alert, :html => {:class => "home"} do |f|
+        %p Find out what's happening in your area. Get alerts of new applications near here straight in your email. It's free!
+        = f.inputs do
+          = f.input :address, :as => :hidden
+          = f.input :email, :label => "Enter your email address", :placeholder => "your@email.com"
+        = f.actions do
+          = f.action :submit, :label => "Create alert"
       %h3 Recent applications within #{meters_in_words(@radius)} of #{@q}
       = paginated_section @applications, :previous_label => "« Newer", :next_label => "Older »" do
         %dl= render :partial => "application", :collection => @applications
