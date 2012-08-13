@@ -124,9 +124,9 @@ class Alert < ActiveRecord::Base
   
   # Process this email alert and send out an email if necessary. Returns number of applications and comments sent.
   def process
-    applications = alert.recent_applications
-    comments = alert.new_comments
-    AlertNotifier.deliver_alert(alert, applications, comments) unless applications.empty? && comments.empty?
+    applications = recent_applications
+    comments = new_comments
+    AlertNotifier.deliver_alert(self, applications, comments) unless applications.empty? && comments.empty?
     # Update the tallies on each application.
     applications.each do |application|
       application.update_attribute(:no_alerted, (application.no_alerted || 0) + 1)
@@ -145,7 +145,7 @@ class Alert < ActiveRecord::Base
     alerts = Alert.active.all
     info_logger.info "Checking #{alerts.count} active alerts"
     alerts.each do |alert|
-      no_applications, no_comments = process
+      no_applications, no_comments = alert.process
       if no_applications > 0 || no_comments > 0
         total_no_applications += no_applications
         total_no_comments += no_comments
