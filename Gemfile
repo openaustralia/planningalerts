@@ -14,12 +14,14 @@ gem "will_paginate"
 # For minifying javascript and css
 gem 'smurf'
 gem 'thinking-sphinx', :require => 'thinking_sphinx'
-gem 'formtastic'
+# Locking version of formtastic to sidestep bug in activeadmin
+gem "formtastic", "~> 2.1.1"
 gem 'validates_email_format_of'
 gem "compass-rails"
 gem 'fancy-buttons'
 gem "geocoder", :require => "geocoder"
 gem 'devise' # Devise must be required before RailsAdmin
+gem 'activeadmin'
 #gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git', :branch => "rails-3.0"
 # Apparently rails_admin requires fastercsv gem but it's not included in its dependencies
 gem 'fastercsv'

@@ -1,5 +1,7 @@
 PlanningalertsApp::Application.routes.draw do
-  devise_for :users
+  ActiveAdmin.routes(self)
+
+  devise_for :users, ActiveAdmin::Devise.config
 
   # Redirect old urls
   match 'apihowto.php' => redirect('/api/howto')
