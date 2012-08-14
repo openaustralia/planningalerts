@@ -42,7 +42,7 @@
         The more people that sign up for your area, the sooner we'll add your area to PlanningAlerts. So, get your friends and neighbours to sign up too!
     - else
       = semantic_form_for @alert, :html => {:class => "home"} do |f|
-        %p Find out what's happening in your area. Get alerts of new applications near here straight in your email. It's free!
+        = render :partial => "alerts/signup_introduction"
         = f.inputs do
           = f.input :address, :as => :hidden
           = f.input :email, :label => "Enter your email address", :placeholder => "your@email.com"

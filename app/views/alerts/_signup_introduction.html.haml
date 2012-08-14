@@ -1,0 +1,7 @@
+- if ab_test(:social_proof_signup)
+  %p
+    %strong= number_with_delimiter(Alert.active.count)
+    people get alerts of new applications straight to their email.
+  %p Join them. Get alerts of new applications near here. It's free!
+- else
+  %p Find out what's happening in your area. Get alerts of new applications near here straight in your email. It's free!
