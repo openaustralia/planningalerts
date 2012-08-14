@@ -38,7 +38,7 @@
       - else
         There are
         = link_to "#{@application.find_all_nearest_or_recent.count} other nearby and recent applications", nearby_application_url(@application)
-  = semantic_form_for @alert, :html => {:class => ab_test(:alert_sidebar) ? "sidebar" : ""} do |f|
+  = semantic_form_for @alert, :html => {:class => "sidebar"} do |f|
     %p Find out what's happening in your area. Get alerts of new applications near here straight in your email. It's free!
     = f.inputs do
       = f.input :address, :label => "Enter a street address", :hint => "Or enter another street address - for example, your home address", :placeholder => "Enter a street address"
