@@ -72,11 +72,28 @@
     #footer-wrapper
       .container
         #footer
-          %ul.inline
-            %li= link_to "Contact", about_path(:anchor => "contact")
-            %li= link_to "Blog", "http://blog.openaustralia.org"
-            %li= link_to "Twitter", "http://twitter.com/planningalerts"
-          %span#oaf An <a href="http://openaustraliafoundation.org.au">OpenAustralia Foundation</a> Project
+          .keepintouch
+            %p
+              Email us at
+              %br
+              = mail_to "contact@planningalerts.org.au"
+            %p
+              Chat with us on Twitter
+              %br
+              = link_to "@PlanningAlerts", "http://twitter.com/planningalerts"
+              %br
+              = link_to "@OpenAustralia", "http://twitter.com/openaustralia"
+            %p
+              Read our blog
+              %br
+              = link_to "openaustraliafoundation.org.au/blog", "http://www.openaustraliafoundation.org.au/blog"
+          .oaf
+            %p
+              An <a href="http://openaustraliafoundation.org.au">OpenAustralia Foundation</a> Project
+            %h5 Other wonderful projects from us
+            %ul
+              %li= link_to "OpenAustralia.org", "http://www.openaustralia.org"
+              %li= link_to "ElectionLeaflets.org.au", "http://www.electionleaflets.org.au"
           #mobile= mobile_switcher_links
         - if @set_focus_control
           %script(type="text/javascript")

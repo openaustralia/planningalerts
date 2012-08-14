@@ -117,28 +117,42 @@ body {
 #footer-wrapper {
   background: #b0b0b0;
   margin-top: 2em;
-  padding-bottom: 2em;
 }
 
 #footer {
   a {
     color: black;
   }
+  h5 {
+    font-weight: normal;
+    color: #333;
+    margin-bottom: 0;
+  }
   padding-top: 1em;
   margin-bottom: 1em;
   font-size: 0.9em;
   ul {
-    @include horizontal-list;
-    @include float-left;
-  }
-  #oaf {
-    @include float-right;
+    @include no-bullets;
+    padding-left: 0;
+    margin-right: 0;
+    /* @include horizontal-list; */
+    /* @include float-left; */
   }
   #mobile {
     text-align: center;
     clear: both;
   }
+  .keepintouch {
+    @include column(8);
+  }
+
+  .oaf {
+    text-align: right;
+    @include prepend(8);
+    @include column(8, true);
+  }
 }
+
 
 // Content
 
