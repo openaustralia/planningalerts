@@ -344,8 +344,18 @@ body h4 {
   @include highlight;
 }
 
-.contributors, .authorities, .sizes {
+.authorities, .sizes {
   @include no-bullets;
+}
+
+.contributors {
+  @include no-bullets;  
+  padding-left: 0;
+  li {
+    width: 225px;
+    display: inline-block;
+    margin-bottom: 5px;
+  }
 }
 
 .news {
