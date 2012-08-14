@@ -26,7 +26,7 @@
     No, but we are working on it. There is a list of the planning authorities we currently cover
     #{link_to "here", authorities_path}. Not every planning authority publishes their planning data
     online so some places will always be missing. If your local authority is missing, you could always
-    #{link_to "help out by writing a screen scraper to search their website.", about_path(:anchor => "contact")}
+    #{mail_to "contact@planningalerts.org.au", "help out by writing a screen scraper to search their website."}
   %dt#broken_scraper
     The data in my local area seems out of date. What's going on?
   %dd
@@ -39,7 +39,7 @@
   %dd
     Yes please! To be able to cover the whole country we need help in writing screen scrapers to search the websites of
     every planning authority in the country. If you'd like to write one for your local planning authority
-    #{link_to "get in touch", about_path(:anchor => "contact")}.
+    #{mail_to "contact@planningalerts.org.au", "get in touch"}.
   %dt
     Can I have a copy of your data?
   %dd
