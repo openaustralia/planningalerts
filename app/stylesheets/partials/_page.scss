@@ -349,10 +349,11 @@ body h4 {
 }
 
 .contributors {
-  @include no-bullets;  
+  @include no-bullets;
+  margin-right: 0;
   padding-left: 0;
   li {
-    width: 225px;
+    width: 232px;
     display: inline-block;
     margin-bottom: 5px;
   }
