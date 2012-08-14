@@ -28,14 +28,14 @@ ActiveRecord::Schema.define(:version => 20120814012059) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
 
   create_table "alerts", :force => true do |t|
-    t.string   "email",         :limit => 120, :null => false
-    t.string   "address",       :limit => 120, :null => false
+    t.string   "email",         :limit => 120,                    :null => false
+    t.string   "address",       :limit => 120,                    :null => false
     t.datetime "last_sent"
-    t.float    "lat",                          :null => false
-    t.float    "lng",                          :null => false
+    t.float    "lat",                                             :null => false
+    t.float    "lng",                                             :null => false
     t.string   "confirm_id",    :limit => 20
     t.boolean  "confirmed"
-    t.integer  "radius_meters",                :null => false
+    t.integer  "radius_meters",                                   :null => false
     t.string   "lga_name",      :limit => 50
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -50,21 +50,21 @@ ActiveRecord::Schema.define(:version => 20120814012059) do
   end
 
   create_table "applications", :force => true do |t|
-    t.string    "council_reference", :limit => 50,   :null => false
-    t.text      "address",                           :null => false
-    t.text      "description"
-    t.string    "info_url",          :limit => 1024
-    t.string    "comment_url",       :limit => 1024
-    t.integer   "authority_id",                      :null => false
-    t.float     "lat"
-    t.float     "lng"
     t.timestamp "date_scraped",                      :null => false
-    t.date      "date_received"
-    t.string    "suburb",            :limit => 50
-    t.string    "state",             :limit => 10
-    t.string    "postcode",          :limit => 4
-    t.date      "on_notice_from"
-    t.date      "on_notice_to"
+    t.string   "council_reference", :limit => 50,   :null => false
+    t.text     "address",                           :null => false
+    t.text     "description"
+    t.string   "info_url",          :limit => 1024
+    t.string   "comment_url",       :limit => 1024
+    t.integer  "authority_id",                      :null => false
+    t.float    "lat"
+    t.float    "lng"
+    t.date     "date_received"
+    t.string   "suburb",            :limit => 50
+    t.string   "state",             :limit => 10
+    t.string   "postcode",          :limit => 4
+    t.date     "on_notice_from"
+    t.date     "on_notice_to"
     t.integer  "no_alerted"
   end
 
