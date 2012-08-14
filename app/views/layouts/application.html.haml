@@ -22,40 +22,44 @@
     = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"
     = csrf_meta_tag
   %body
-    #container
-      #header
-        #banner
-          %h1
-            = link_to root_path do
-              PlanningAlerts
-              %span<> .
-              org
-              %span<> .
-              au
-          %h2 Email alerts of planning applications <em>near you</em>
-        #statsbanner
-          %p#stats
-            #{number_to_human(@alert_count).downcase} applications sent for
-            = link_to "#{@authority_count} authorities", authorities_path
-      .hide= link_to "Skip navigation", "#content"
-      #menu
-        %ul.collapse
-          = li_selected(:controller => "/applications", :action => "address") do
-            = link_to 'Search', address_applications_path
-          = li_selected(:controller => "/alerts", :action => ["new", "create"]) do
-            = link_to 'Sign Up', new_alert_path
-          = li_selected(:controller => "/static", :action => "faq") do
-            = link_to faq_path do
-              %abbr(title="Frequently asked questions") FAQ
-          = li_selected(:controller => "/authorities", :action => "index") do
-            = link_to 'Coverage', authorities_path
-          = li_selected(:controller => "/static", :action => "get_involved") do
-            = link_to 'Get Involved', get_involved_path
-          = li_selected(:controller => "/api", :action => "howto") do
-            = link_to api_howto_path do
-              Get the Data
-          = li_selected(:controller => "/static", :action => "about") do
-            = link_to 'About', about_path
+    #header-wrapper
+      .container
+        #header
+          #banner
+            %h1
+              = link_to root_path do
+                PlanningAlerts
+                %span<> .
+                org
+                %span<> .
+                au
+            %h2 Email alerts of planning applications <em>near you</em>
+          #statsbanner
+            %p#stats
+              #{number_to_human(@alert_count).downcase} applications sent for
+              = link_to "#{@authority_count} authorities", authorities_path
+    #menu-wrapper
+      .container      
+        .hide= link_to "Skip navigation", "#content"
+        #menu
+          %ul.collapse
+            = li_selected(:controller => "/applications", :action => "address") do
+              = link_to 'Search', address_applications_path
+            = li_selected(:controller => "/alerts", :action => ["new", "create"]) do
+              = link_to 'Sign Up', new_alert_path
+            = li_selected(:controller => "/static", :action => "faq") do
+              = link_to faq_path do
+                %abbr(title="Frequently asked questions") FAQ
+            = li_selected(:controller => "/authorities", :action => "index") do
+              = link_to 'Coverage', authorities_path
+            = li_selected(:controller => "/static", :action => "get_involved") do
+              = link_to 'Get Involved', get_involved_path
+            = li_selected(:controller => "/api", :action => "howto") do
+              = link_to api_howto_path do
+                Get the Data
+            = li_selected(:controller => "/static", :action => "about") do
+              = link_to 'About', about_path
+    .container
       #page
         #content
           - if notice

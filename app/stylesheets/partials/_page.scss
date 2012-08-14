@@ -18,19 +18,19 @@ body {
 
 @import "compass/utilities/lists/horizontal-list";
 
-body {
-  background: #ddd;
+#header-wrapper {
+  background: url(/images/banner.png) repeat-x center 0;
 }
 
-#container {
-  background: white;
+#menu-wrapper {
+  margin-bottom: 3em;  
+  background: #989898;
 }
 
 // Layout elements - i.e. those on every page
 #header {
   //margin: auto;
   height: 125px;
-  background: url(/images/banner.png) repeat-x center 0;
   //position: relative;
   #banner {
     @include float-left;
@@ -92,7 +92,6 @@ body {
 
 #menu {
   background: $grey;
-  margin-bottom: 3em;
   font-size: 0.9em; 
   ul {
     @include horizontal-list;
@@ -354,11 +353,11 @@ body h4 {
     padding-bottom: 0.5em;
   }
   .blog-feed {
-    @include column(10);
+    @include column(11);
   }
   .twitter-feed {
     @include prepend(2);
-    @include column(10, true);
+    @include column(11, true);
   }
   .date {
     @include quiet;
