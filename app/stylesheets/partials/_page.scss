@@ -241,13 +241,16 @@ ul#subscribe {
 }
 
 #application .alert {
-  width: 450px;
+  clear: right;
+  float: right;
+  width: 326px;
+  margin: 0 0 10px 10px;
   p {
     margin-bottom: 1em;
   }
   font-size: 75%;
   background: $almostwhite;
-  padding: 1em;
+  padding: 12px;
   border: solid 1px $grey;
   .label {
     display: none;
@@ -259,19 +262,8 @@ ul#subscribe {
     margin-left: 0;
   }
   #alert_address, #alert_email {
-    width: 440px;
-  }
-}
-
-#application .alert.sidebar {
-  clear: right;
-  float: right;
-  width: 326px;
-  padding: 12px;
-  #alert_address, #alert_email {
     width: 320px;
   }
-  margin: 0 0 10px 10px;
 }
 
 .alert.home {
