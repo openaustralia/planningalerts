@@ -20,11 +20,7 @@ gem 'validates_email_format_of'
 gem "compass-rails"
 gem 'fancy-buttons'
 gem "geocoder", :require => "geocoder"
-gem 'devise' # Devise must be required before RailsAdmin
 gem 'activeadmin'
-#gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git', :branch => "rails-3.0"
-# Apparently rails_admin requires fastercsv gem but it's not included in its dependencies
-gem 'fastercsv'
 # Disabling metric_fu because it depends on rcov which doesn't work on Ruby 1.9
 #gem 'metric_fu'
 gem "rake"
