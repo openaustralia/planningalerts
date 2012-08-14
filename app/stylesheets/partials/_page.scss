@@ -151,11 +151,15 @@ p a, li a, span a, dd a, dt a, div a {
   //min-height: 500px; 
 }
 
-#map_div, #pano, #application .alert {
-  @include float-right;
+#map_div, #pano {
   margin-bottom: 10px;
-  margin-left: 10px;
-  clear: right;
+}
+
+#side {
+  @include float-right;
+  background: white;
+  padding-bottom: 10px;
+  padding-left: 10px;
 }
 
 /* Attention grabbers */

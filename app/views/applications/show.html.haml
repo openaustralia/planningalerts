@@ -8,11 +8,19 @@
 = render :partial => "applications/twitter"
 
 #application
-  - if @application.location
-    #map_div(style="width:350px;height:200px")
-      %noscript Please enable Javascript in your browser settings to view this map.
-    #pano(style="width:350px;height:200px")
-      %noscript Please enable Javascript in your browser settings to view this StreetView image.
+  #side
+    - if @application.location
+      #map_div(style="width:350px;height:200px")
+        %noscript Please enable Javascript in your browser settings to view this map.
+      #pano(style="width:350px;height:200px")
+        %noscript Please enable Javascript in your browser settings to view this StreetView image.
+    = semantic_form_for @alert do |f|
+      = render :partial => "alerts/signup_introduction"
+      = f.inputs do
+        = f.input :address, :label => "Enter a street address", :hint => "Or enter another street address - for example, your home address", :placeholder => "Enter a street address"
+        = f.input :email, :label => "Enter your email address", :placeholder => "Enter your email address"
+      = f.actions do
+        = f.action :submit, :label => "Create alert"
   
   %h3.address= @application.address
   %p.description= @application.description
@@ -38,13 +46,6 @@
       - else
         There are
         = link_to "#{@application.find_all_nearest_or_recent.count} other nearby and recent applications", nearby_application_url(@application)
-  = semantic_form_for @alert do |f|
-    = render :partial => "alerts/signup_introduction"
-    = f.inputs do
-      = f.input :address, :label => "Enter a street address", :hint => "Or enter another street address - for example, your home address", :placeholder => "Enter a street address"
-      = f.input :email, :label => "Enter your email address", :placeholder => "Enter your email address"
-    = f.actions do
-      = f.action :submit, :label => "Create alert"
 
   - if @application.authority.contactable?
     - unless @application.comments.visible.empty?
