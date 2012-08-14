@@ -332,7 +332,8 @@ body h4 {
   }
 
   p.dates, p.more, p.source, p.no_alerted {
-    color: #777;
+    @include quiet;
+    font-size: 0.8em;
   }
 }
 
