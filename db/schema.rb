@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120814012059) do
+ActiveRecord::Schema.define(:version => 20120814015728) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -100,6 +100,10 @@ ActiveRecord::Schema.define(:version => 20120814012059) do
     t.string   "address"
     t.boolean  "hidden",         :default => false, :null => false
   end
+
+  add_index "comments", ["confirm_id"], :name => "index_comments_on_confirm_id"
+  add_index "comments", ["confirmed"], :name => "index_comments_on_confirmed"
+  add_index "comments", ["hidden"], :name => "index_comments_on_hidden"
 
   create_table "reports", :force => true do |t|
     t.string   "name"
