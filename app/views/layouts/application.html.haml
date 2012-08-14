@@ -69,16 +69,18 @@
           - if flash[:error]
             %p.error= flash[:error]
           = yield
-      #footer
-        %ul.inline
-          %li= link_to "Contact", about_path(:anchor => "contact")
-          %li= link_to "Blog", "http://blog.openaustralia.org"
-          %li= link_to "Twitter", "http://twitter.com/planningalerts"
-        %span#oaf An <a href="http://openaustraliafoundation.org.au">OpenAustralia Foundation</a> Project
-        #mobile= mobile_switcher_links
-      - if @set_focus_control
-        %script(type="text/javascript")
-          document.getElementById('#{@set_focus_control}').focus();
+    #footer-wrapper
+      .container
+        #footer
+          %ul.inline
+            %li= link_to "Contact", about_path(:anchor => "contact")
+            %li= link_to "Blog", "http://blog.openaustralia.org"
+            %li= link_to "Twitter", "http://twitter.com/planningalerts"
+          %span#oaf An <a href="http://openaustraliafoundation.org.au">OpenAustralia Foundation</a> Project
+          #mobile= mobile_switcher_links
+        - if @set_focus_control
+          %script(type="text/javascript")
+            document.getElementById('#{@set_focus_control}').focus();
     = render "shared/analytics"
     :javascript
       var uservoiceOptions = {key: 'planningalerts', host: 'planningalerts.uservoice.com', forum: '49635', alignment: 'right', background_color:'#F4F322', text_color: 'black',

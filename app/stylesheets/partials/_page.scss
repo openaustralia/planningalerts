@@ -114,11 +114,18 @@ body {
   } 
 }
 
+#footer-wrapper {
+  background: #b0b0b0;
+  margin-top: 2em;
+  padding-bottom: 2em;
+}
+
 #footer {
-  border-top: dotted 1px $grey;
+  a {
+    color: black;
+  }
   padding-top: 1em;
   margin-bottom: 1em;
-  margin-top: 2em;
   font-size: 0.9em;
   ul {
     @include horizontal-list;
