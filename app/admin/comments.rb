@@ -7,7 +7,7 @@ ActiveAdmin.register Comment, :as => "ApplicationComment" do
   scope :all
 
   index :title => :comments do
-    column :text
+    column :text, :sortable => false
     column :email
     column :name
     column :application
