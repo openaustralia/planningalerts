@@ -13,4 +13,8 @@ ActiveAdmin.register Comment, :as => "ApplicationComment" do
     column :application
     default_actions
   end
+
+  filter :text
+  filter :email
+  filter :name
 end
