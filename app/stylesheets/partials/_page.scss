@@ -151,7 +151,7 @@ p a, li a, span a, dd a, dt a, div a {
   //min-height: 500px; 
 }
 
-#map_div, #pano {
+#map_div, #pano, #application .alert {
   @include float-right;
   margin-bottom: 10px;
   margin-left: 10px;
@@ -240,10 +240,9 @@ ul#subscribe {
 }
 
 #application .alert {
-  clear: right;
-  float: right;
+  margin-top: 0;
+  margin-right: 0;
   width: 326px;
-  margin: 0 0 10px 10px;
   p {
     margin-bottom: 1em;
   }
