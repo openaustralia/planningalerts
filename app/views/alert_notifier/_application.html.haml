@@ -5,9 +5,9 @@
   - if application.location
     %tr
       %td{:style => "padding: 5px; width: 155px;"}
-        = google_static_map(application, :zoom => 14, :size => "150x150")
+        = google_static_map(application, :size => "150x150")
       %td{:style => "padding: 5px;"}
-        = google_static_streetview(application, :fov => 60, :size => "150x150")
+        = google_static_streetview(application, :size => "150x150")
   %tr
     %td{:colspan => "2", :style => "vertical-align: top;"}
       = application.description
