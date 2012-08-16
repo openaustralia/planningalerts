@@ -7,10 +7,12 @@ describe AlertNotifier do
     @alert.stub!(:confirm_id).and_return("abcdef")
     @original_emails_sent = Stat.emails_sent
     @original_applications_sent = Stat.applications_sent
+    location1 = mock("Location", :lat => 0.1, :lng => 0.2)
     @a1 = mock_model(Application, :address => "Foo Street, Bar", :council_reference => "a1", :description => "Knock something down", :id => 1,
-        :lat => 0.1, :lng => 0.2)
+        :lat => location1.lat, :lng => location1.lng, :location => location1)
+    location2 = mock("Location", :lat => 0.3, :lng => 0.4)
     @a2 = mock_model(Application, :address => "Bar Street, Foo", :council_reference => "a2", :description => "Put something up", :id => 2,
-        :lat => 0.3, :lng => 0.4)
+        :lat => location2.lat, :lng => location2.lng, :location => location2)
     @a3 = mock_model(Application, :address => "2 Foo Parade, Glenbrook NSW 2773", :id => 3)
     @c1 = mock_model(Comment, :text => "I think this is a great idea", :name => "Matthew Landauer", :application => @a3, :id => 1)
     @c2 = mock_model(Comment, :name => "Jack Smith", :application => @a3, :id => 2, :text => <<-EOF
