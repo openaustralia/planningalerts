@@ -1,7 +1,7 @@
 
 class AlertNotifier < ActionMailer::Base
   default :from => "#{::Configuration::EMAIL_FROM_NAME} <#{::Configuration::EMAIL_FROM_ADDRESS}>"
-  helper :application
+  helper :application, :applications
 
   def alert(alert, applications, comments = [])
     @alert, @applications, @comments = alert, applications, comments
