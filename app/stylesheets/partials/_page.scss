@@ -331,6 +331,10 @@ div.comment:hover {
   }  
 }
 
+form#new_comment {
+  clear: right;
+}
+
 .comment {
   margin-bottom: 1em;
 
