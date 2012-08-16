@@ -11,9 +11,9 @@
   #side
     - if @application.location
       #map_div(style="width:350px;height:200px")
-        %noscript= image_tag("http://maps.googleapis.com/maps/api/staticmap?zoom=16&size=350x200&maptype=roadmap&markers=color:red%7C#{@application.lat},#{@application.lng}&sensor=false", :size => "350x200")
+        %noscript= google_static_map(@application, :zoom => 16, :size => "350x200")
       #pano(style="width:350px;height:200px")
-        %noscript= image_tag("http://maps.googleapis.com/maps/api/streetview?size=350x200&location=#{@application.lat},#{@application.lng}&fov=90&sensor=false", :size => "350x200")
+        %noscript= google_static_streetview(@application, :fov => 90, :size => "350x200")
     = semantic_form_for @alert do |f|
       = render :partial => "alerts/signup_introduction"
       = f.inputs do

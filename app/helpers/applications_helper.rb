@@ -30,4 +30,16 @@ module ApplicationsHelper
     # Include the scraping date in the title so that multiple applications from the same address have different titles
     "#{@application.address} | #{@application.date_scraped.to_date.to_formatted_s(:rfc822)}"
   end
+
+  def google_static_map(application, options)
+    zoom = options[:zoom] || 16
+    size = options[:size] || "350x200"
+    image_tag("http://maps.googleapis.com/maps/api/staticmap?zoom=#{zoom}&size=#{size}&maptype=roadmap&markers=color:red%7C#{application.lat},#{application.lng}&sensor=false".html_safe, :size => size, :alt => "Map")
+  end
+
+  def google_static_streetview(application, options)
+    size = options[:size] || "350x200"
+    fov = options[:fov] || 90
+    image_tag("http://maps.googleapis.com/maps/api/streetview?size=#{size}&location=#{application.lat},#{application.lng}&fov=#{fov}&sensor=false".html_safe, :size => size, :alt => "Streetview")
+  end
 end

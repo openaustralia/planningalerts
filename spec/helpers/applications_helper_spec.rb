@@ -83,5 +83,23 @@ describe ApplicationsHelper do
           "You're too late! The period for officially commenting on this application finished <strong>2 days</strong> ago."
       end
     end
+
+    describe "static maps" do
+      it "should generate a static google map api image" do
+        helper.google_static_map(@application, :size => "350x200", :zoom => 16).should ==
+          "<img alt=\"Map\" height=\"200\" src=\"http://maps.googleapis.com/maps/api/staticmap?zoom=16&size=350x200&maptype=roadmap&markers=color:red%7C1.0,2.0&sensor=false\" width=\"350\" />"
+        helper.google_static_map(@application, :size => "100x100", :zoom => 14).should ==
+          "<img alt=\"Map\" height=\"100\" src=\"http://maps.googleapis.com/maps/api/staticmap?zoom=14&size=100x100&maptype=roadmap&markers=color:red%7C1.0,2.0&sensor=false\" width=\"100\" />"
+      end
+    end
+
+    describe "static streetview" do
+      it "should generate a static google streetview image" do
+        helper.google_static_streetview(@application, :size => "350x200", :fov => 90).should ==
+          "<img alt=\"Streetview\" height=\"200\" src=\"http://maps.googleapis.com/maps/api/streetview?size=350x200&location=1.0,2.0&fov=90&sensor=false\" width=\"350\" />"
+        helper.google_static_streetview(@application, :size => "100x100", :fov => 60).should ==
+          "<img alt=\"Streetview\" height=\"100\" src=\"http://maps.googleapis.com/maps/api/streetview?size=100x100&location=1.0,2.0&fov=60&sensor=false\" width=\"100\" />"
+      end
+    end
   end
 end
