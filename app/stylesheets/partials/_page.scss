@@ -99,16 +99,15 @@ body {
     //width: $page_width;
     //margin: 0 auto;
     li {
-      padding-top: 0.25em;
-      padding-bottom: 0.25em;
+      padding: 0;
       a {
-        margin-left: 0.5em;
-        margin-right: 0.5em;
+        padding: 0.5em 1em;
         color: white;
         text-decoration: none; 
         &:hover {
           color: $yellow;
         }
+        display: block;
       }
       &.selected {
         background: $orange;
