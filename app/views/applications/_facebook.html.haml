@@ -8,6 +8,9 @@
   fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
-  FB.Event.subscribe('edge.create', function(targetUrl) {
-    _gaq.push(['_trackSocial', 'facebook', 'like', targetUrl]);
-  });
+  window.fbAsyncInit = function() {
+    FB.Event.subscribe('edge.create', function(targetUrl) {
+      _gaq.push(['_trackSocial', 'facebook', 'like', targetUrl]);
+    });
+  };
+
