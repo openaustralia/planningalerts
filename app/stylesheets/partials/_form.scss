@@ -58,7 +58,7 @@ $fb-line-height: 1em;
 // Special formatting for specific forms
 
 .formtastic#new_comment, .formtastic#new_report {
-  @include float-form(100%, 20%, 75%);
+  @include float-form(950px, 190px, 754px);
   textarea, input {
     font-family: $blueprint-font-family;
     font-size: 100%;
