@@ -278,7 +278,9 @@ ul#subscribe {
   padding: 12px;
   border: solid 1px $grey;
   .label {
-    display: none;
+    /* Use seriously old-school way of hiding these labels so that placeholder polyfill can still work */
+    left: -999em;
+    position: absolute;
   }
   .actions {
     padding-left: 0;
