@@ -7,7 +7,7 @@ xml.rss :version => '2.0', 'xmlns:georss' => 'http://www.georss.org/georss' do
 
     @comments.each do |comment|
       xml.item do
-        xml.title "Comment on application #{comment.application.council_reference} by #{comment.name}"
+        xml.title "Comment on application #{comment.application.council_reference} at #{comment.application.address} by #{comment.name}"
         xml.description comment.text
         xml.pubDate comment.updated_at.to_s(:rfc822)
         xml.link application_url(comment.application, :anchor => "comment#{comment.id}")
