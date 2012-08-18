@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   def index
     @comments = Comment.visible.order("updated_at DESC").paginate :page => params[:page]
+    @rss = comments_url(params.merge(:format => "rss", :page => nil))
   end
   
   def create
