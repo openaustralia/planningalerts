@@ -18,57 +18,25 @@
   Duncan Parkes, Tom Hughes and Andy Armstrong.
 %p
   PlanningAlerts.org.au keeps getting better thanks to the contributions from the volunteers:
-%ul.contributors
-  %li
-    = image_tag("http://www.gravatar.com/avatar/dd6c985d22e3bf6ea849e8d2e6750d76?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Roger Barnes")
-    Roger Barnes
-  %li
-    = image_tag("http://www.gravatar.com/avatar/64afebb884d0f21f860076f4b8a92f50?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Sam Cavenagh")
-    Sam Cavenagh
-  %li
-    = image_tag("http://www.gravatar.com/avatar/b30d37e67e4c4584a71d977763651513?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Henare Degan")
-    Henare Degan
-  %li
-    = image_tag("http://www.gravatar.com/avatar/7289b45ea6e9ac313bd4c34d7f4e461b?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Nick Evershed")
-    Nick Evershed
-  %li
-    = image_tag("http://www.gravatar.com/avatar/7284ad488e18a2b052a9c7b8fe1e3922?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Andrew Harvey")
-    Andrew Harvey
-  %li
-    = image_tag("http://www.gravatar.com/avatar/1aac9f1adece54cc394b8cf6d8c84a1a?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Mark Kinkade")
-    Mark Kinkade
-  %li
-    = image_tag("http://www.gravatar.com/avatar/5a600494d91ea4223e7256989155f687?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Matthew Landauer")
-    Matthew Landauer
-  %li
-    = image_tag("http://www.gravatar.com/avatar/fab3189512311073ccf49928112c98fa?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Adrian Miller")
-    Adrian Miller
-  %li
-    = image_tag("http://www.gravatar.com/avatar/00477410c5069d49fad6eedaea32fd61?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Peter Neish")
-    Peter Neish
-  %li
-    = image_tag("http://www.gravatar.com/avatar/353d83d3677b142520987e1936fd093c?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Daniel O'Connor")
-    Daniel O'Connor
-  %li
-    = image_tag("http://www.gravatar.com/avatar/7d329af0dcfe18c8797f542938286e46?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Andrew Perry")
-    Andrew Perry
-  %li
-    = image_tag("http://www.gravatar.com/avatar/06a0058c9d6dc0eac55c3311a99beeda?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for James Polley")
-    James Polley
-  %li
-    = image_tag("http://www.gravatar.com/avatar/5944d4aed96852cb4ce78db3d74edec?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Alex (Maxious) Sadleir")
-    Alex (Maxious) Sadleir
-  %li
-    = image_tag("http://www.gravatar.com/avatar/d330c3271cdd9aab9e9e5c360235b6dc?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Kris Splittgerber")
-    Kris Splittgerber
-  %li
-    = image_tag("http://www.gravatar.com/avatar/f1b38bb55fedf270d3cd7c049176c09e?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Adam Stiskala")
-    Adam Stiskala
-  %li
-    = image_tag("http://www.gravatar.com/avatar/23d3fa4bbac53c44edef4ff672b9816a?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Katherine Szuminska")
-    Katherine Szuminska
-  %li
-    = image_tag("http://www.gravatar.com/avatar/3c1983a3371799ba1a78606dc62655db?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for Justin Wells")
-    Justin Wells
+- contributors = [ |
+    {:name => "Roger Barnes", :email_md5 => "dd6c985d22e3bf6ea849e8d2e6750d76"}, |
+    {:name => "Sam Cavenagh", :email_md5 => "64afebb884d0f21f860076f4b8a92f50"}, |
+    {:name => "Henare Degan", :email_md5 => "b30d37e67e4c4584a71d977763651513"}, |
+    {:name => "Nick Evershed", :email_md5 => "7289b45ea6e9ac313bd4c34d7f4e461b"}, |
+    {:name => "Andrew Harvey", :email_md5 => "7284ad488e18a2b052a9c7b8fe1e3922"}, |
+    {:name => "Mark Kinkade", :email_md5 => "1aac9f1adece54cc394b8cf6d8c84a1a"}, |
+    {:name => "Matthew Landauer", :email_md5 => "5a600494d91ea4223e7256989155f687"}, |
+    {:name => "Adrian Miller", :email_md5 => "fab3189512311073ccf49928112c98fa"}, |
+    {:name => "Peter Neish", :email_md5 => "00477410c5069d49fad6eedaea32fd61"}, |
+    {:name => "Daniel O'Connor", :email_md5 => "353d83d3677b142520987e1936fd093c"}, |
+    {:name => "Andrew Perry", :email_md5 => "7d329af0dcfe18c8797f542938286e46"}, |
+    {:name => "James Polley", :email_md5 => "06a0058c9d6dc0eac55c3311a99beeda"}, |
+    {:name => "Alex (Maxious) Sadleir", :email_md5 => "5944d4aed96852cb4ce78db3d74edec"}, |
+    {:name => "Kris Splittgerber", :email_md5 => "d330c3271cdd9aab9e9e5c360235b6dc"}, |
+    {:name => "Adam Stiskala", :email_md5 => "f1b38bb55fedf270d3cd7c049176c09e"}, |
+    {:name => "Katherine Szuminska", :email_md5 => "23d3fa4bbac53c44edef4ff672b9816a"}, |
+    {:name => "Justin Wells", :email_md5 => "3c1983a3371799ba1a78606dc62655db"}, |
+  ]
+%ul.contributors= render :partial => "contributor", :collection => contributors
 %p
   If you #{link_to "contribute", get_involved_path} to the project you will get to be on this list.
