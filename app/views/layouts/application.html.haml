@@ -4,7 +4,6 @@
     %meta(content="text/html; charset=utf-8" http-equiv="Content-Type")
     - if yield(:meta_description)
       %meta{:name => "Description", :content => yield(:meta_description)} 
-    %meta(name="viewport" content="width=900, initial-scale=0.35")
     %title
       - if yield(:page_title) != ""
         = yield(:page_title)
