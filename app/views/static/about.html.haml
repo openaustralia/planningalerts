@@ -37,6 +37,6 @@
     {:name => "Katherine Szuminska", :email_md5 => "23d3fa4bbac53c44edef4ff672b9816a"}, |
     {:name => "Justin Wells", :email_md5 => "3c1983a3371799ba1a78606dc62655db"}, |
   ]
-%ul.contributors= render :partial => "contributor", :collection => contributors
+%ul.contributors= render :partial => "contributor", :collection => shuffle(contributors)
 %p
   If you #{link_to "contribute", get_involved_path} to the project you will get to be on this list.

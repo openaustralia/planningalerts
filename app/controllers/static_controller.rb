@@ -2,7 +2,8 @@
 class StaticController < ApplicationController
   # Reinstate caching of faq page when all authorities have commenting feature
   #caches_page :about, :faq, :get_involved
-  caches_page :about, :get_involved
+  # Don't cache about page because we randomly rearrange the list of contributors on each request
+  caches_page :get_involved
 
   def about
   end
