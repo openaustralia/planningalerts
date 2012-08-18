@@ -20,11 +20,6 @@
       v:* { behavior:url(#default#VML);}
     = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"
     = stylesheet_link_tag "placeholder_polyfill.min.css"
-    :javascript
-      placeHolderConfig = {
-        // apply the polyfill even for browser with native support
-        forceApply : true 
-      };
     = javascript_include_tag "placeholder_polyfill.jquery.min.combo.js"
     = csrf_meta_tag
   %body
