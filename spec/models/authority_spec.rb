@@ -12,12 +12,14 @@ describe Authority do
             <authority_name>Blue Mountains City Council</authority_name> 
             <authority_short_name>Blue Mountains</authority_short_name>
             <state>NSW</state>
+            <scraperwiki_name></scraperwiki_name>
             <url>http://localhost:4567/blue_mountains?year={year}&amp;month={month}&amp;day={day}</url> 
           </scraper> 
           <scraper> 
             <authority_name>Brisbane City Council</authority_name> 
             <authority_short_name>Brisbane</authority_short_name> 
             <state>QLD</state>
+            <scraperwiki_name></scraperwiki_name>
             <url>http://localhost:4567/brisbane?year={year}&amp;month={month}&amp;day={day}</url> 
           </scraper> 
         <scrapers>
