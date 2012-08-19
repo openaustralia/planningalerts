@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120814015728) do
+ActiveRecord::Schema.define(:version => 20120819091645) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20120814015728) do
     t.boolean "disabled"
     t.string  "state",      :limit => 20
     t.string  "email"
+    t.string  "scraperwiki_name"
   end
 
   add_index "authorities", ["short_name"], :name => "short_name_unique", :unique => true
