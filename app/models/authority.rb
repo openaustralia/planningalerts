@@ -28,6 +28,10 @@ class Authority < ActiveRecord::Base
       authority.save!
     end
   end
+
+  def scraperwiki_url
+    "https://scraperwiki.com/scrapers/#{scraperwiki_name}/" if scraperwiki_name
+  end
   
   def feed_url_for_date(date)
     feed_url.sub("{year}", date.year.to_s).sub("{month}", date.month.to_s).sub("{day}", date.day.to_s)

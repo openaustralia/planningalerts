@@ -25,5 +25,9 @@
       %li
         = link_to authority.full_name, authority_applications_url(authority.short_name_encoded)
         - if authority.broken?
-          %span.highlight possibly broken
+          %span.highlight
+            - if authority.scraperwiki_url
+              = link_to "possibly broken", authority.scraperwiki_url
+            - else
+              possibly broken
 
