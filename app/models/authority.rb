@@ -30,7 +30,7 @@ class Authority < ActiveRecord::Base
   end
 
   def scraperwiki_url
-    "https://scraperwiki.com/scrapers/#{scraperwiki_name}/" if scraperwiki_name
+    "https://scraperwiki.com/scrapers/#{scraperwiki_name}/" unless scraperwiki_name == ""
   end
   
   def feed_url_for_date(date)
