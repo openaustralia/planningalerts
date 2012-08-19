@@ -39,9 +39,6 @@ PlanningalertsApp::Application.routes.draw do
   end
 
   resources :authorities, :only => [:index] do
-    collection do
-      get :broken
-    end
     resources :applications, :only => [:index]
   end
 
