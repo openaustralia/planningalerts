@@ -48,6 +48,8 @@ end
 group :development do
   gem 'guard'
   gem 'guard-rspec'
+  gem 'guard-livereload'
+  gem 'rack-livereload'
 end
   
 group :test, :development do

@@ -25,6 +25,9 @@ PlanningalertsApp::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
+
+  # Insert livereload js
+  config.middleware.insert_before(Rack::Lock, Rack::LiveReload)
 end
 
 # Uncomment the line below to turn on A/B data collection in development mode
