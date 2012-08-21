@@ -17,5 +17,6 @@
 #  - 1.2.3.7
 #  - 1.2.3.8
 
-# For no throttling anywhere
-unlimited: default
+# By default throttle API requests to 1200 requests per day. That's an average of 50 / hour.
+daily:
+  1200: default
