@@ -1,5 +1,5 @@
 - content_for :page_title, page_title(@application)
-- content_for :meta_description, "Planning application: #{@application.description} Address: #{@application.address}"
+- content_for :meta_description, @application.description
 - content_for :map, true
 = render :partial => "applications/facebook"
 #social
