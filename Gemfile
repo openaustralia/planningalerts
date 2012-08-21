@@ -44,6 +44,11 @@ group :test do
   gem 'factory_girl', '< 3.0'
   gem 'email_spec'
 end
+
+group :development do
+  gem 'guard'
+  gem 'guard-rspec'
+end
   
 group :test, :development do
   gem 'rspec-rails', '~> 2.4'
