@@ -29,5 +29,5 @@
 }
 
 #header, #menu, #page, #footer {
-  @include column(24, true);
+  @include span-columns(24 omega, 24);
 }

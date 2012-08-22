@@ -1,5 +1,5 @@
 // Import the non-default scaffolding module to help us get started.
-@import "blueprint/scaffolding";
+//@import "blueprint/scaffolding";
 
 // This configuration will only apply the
 // blueprint styles to pages with a body class of "bp"
@@ -9,8 +9,8 @@
 body {
   @include blueprint-typography(true);
   @include blueprint-utilities;
-  @include blueprint-debug;
-  @include blueprint-interaction; }
+  @include blueprint-interaction;
+}
 
 // Remove the scaffolding when you're ready to start doing visual design.
 // Or leave it in if you're happy with how blueprint looks out-of-the-box
@@ -145,13 +145,13 @@ body {
     clear: both;
   }
   .keepintouch {
-    @include column(8);
+    @include span-columns(8,24);
   }
 
   .oaf {
     text-align: right;
-    @include prepend(8);
-    @include column(8, true);
+    @include pre(8);
+    @include span-columns(8 omega, 24);
   }
 }
 
@@ -400,11 +400,11 @@ body h4 {
     padding-bottom: 0.5em;
   }
   .blog-feed {
-    @include column(11);
+    @include span-columns(11, 24);
   }
   .twitter-feed {
-    @include prepend(2);
-    @include column(11, true);
+    @include pre(2);
+    @include span-columns(11 omega, 24);
   }
   .date {
     @include quiet;
