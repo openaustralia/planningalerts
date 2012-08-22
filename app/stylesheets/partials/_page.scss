@@ -429,3 +429,38 @@ body h4 {
     margin-bottom: 1em;
   }
 }
+
+// Prototype of possible widget for signing up to email alerts
+.widget-prototype {
+  width: 700px;
+  background: #f8f8f8;
+  padding: 1em;
+  border: 1px solid;
+  #privacy {
+    padding-left: 0;
+  }
+  .formtastic {
+    margin-top: 0;
+    margin-bottom: 0;
+    .inline-hints {
+      margin-left: 0;
+    }
+    padding-left: 0;
+    .actions {
+      padding-left: 0;
+    }
+    border: none;
+    li label {
+      display: none;
+    }
+    input {
+      width: 100%;
+    }
+  }
+  h3 {
+    margin-bottom: 0.5em;
+  }
+  p {
+    margin-bottom: 0;
+  }
+}

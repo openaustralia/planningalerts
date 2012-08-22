@@ -16,6 +16,7 @@ PlanningalertsApp::Application.routes.draw do
   resources :alerts, :only => [:new, :create], :path_names => {:new => 'signup'} do
     collection do
       get :statistics
+      get :widget_prototype
     end
     member do
       get :area
