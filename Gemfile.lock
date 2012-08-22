@@ -234,6 +234,9 @@ GEM
       multi_json (~> 1.0)
       rubyzip
     smurf (1.0.8)
+    susy (1.0)
+      compass (>= 0.12.2)
+      sass (>= 3.2.0)
     thinking-sphinx (2.0.13)
       activerecord (>= 3.0.3)
       builder (>= 2.1.2)
@@ -293,6 +296,7 @@ DEPENDENCIES
   rvm-capistrano
   sanitize
   smurf
+  susy
   thinking-sphinx
   validates_email_format_of
   vanity

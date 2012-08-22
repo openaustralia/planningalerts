@@ -31,6 +31,7 @@ gem 'sanitize'
 gem 'rvm-capistrano'
 gem 'vanity'
 gem 'rabl'
+gem "susy"
 
 group :test do
   gem 'cucumber-rails', :require => false

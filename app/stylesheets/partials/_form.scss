@@ -20,7 +20,7 @@ $fb-line-height: 1em;
 }
 
 .formtastic {
-  @include float-form(100%, 25%, 70%);
+  @include float-form(100%, 25%, 70%, 0, "buttons-left", "left", "select-auto");
   margin-top: 2em;
   margin-bottom: 2em;
   li {
@@ -58,7 +58,7 @@ $fb-line-height: 1em;
 // Special formatting for specific forms
 
 .formtastic#new_comment, .formtastic#new_report {
-  @include float-form(950px, 190px, 754px);
+  @include float-form(950px, 190px, 754px, 0, "buttons-left", "left", "select-auto");
   textarea, input {
     font-family: $blueprint-font-family;
     font-size: 100%;
