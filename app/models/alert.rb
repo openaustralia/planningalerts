@@ -97,7 +97,7 @@ class Alert < ActiveRecord::Base
   
   # Applications that have been scraped since the last time the user was sent an alert
   def recent_applications
-    Application.near([location.lat, location.lng], radius_km, :units => :km).find(:all, :conditions => ['date_scraped > ?', cutoff_time])
+    Application.order("date_received DESC").near([location.lat, location.lng], radius_km, :units => :km).where('date_scraped > ?', cutoff_time).all
   end
 
   # Applications in the area of interest which have new comments made since we were last alerted
