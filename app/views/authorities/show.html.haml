@@ -12,6 +12,56 @@
 %p
   = link_to "Browse all recent applications", authority_applications_path(@authority.short_name_encoded)
 
+#bargraph
+<script src="http://d3js.org/d3.v2.js"></script>
+:javascript
+  url = "#{per_day_authority_applications_url(@authority.short_name_encoded, :format => 'js')}"
+  d3.json(url, function(foo) {
+    var data = d3.entries(foo);
+
+    data.forEach(function(d, i) {
+      d.key = new Date(d.key);
+    });
+
+    var width = "100%";
+    var barWidth = 2;
+
+    var height = 200;
+
+    var x = d3.time.scale().domain(d3.extent(data, function(datum) { return datum.key})).range([0, width]);
+    var y = d3.scale.linear().domain([0, d3.max(data, function(datum) { return datum.value; })]).
+      rangeRound([0, height]);
+
+    // add the canvas to the DOM
+    var barDemo = d3.select("#bargraph")
+      .append("svg:svg")
+      .attr("width", width)
+      .attr("height", height + 15)
+      .append("g")
+      .attr("transform", "translate(0,15)");
+
+    barDemo.selectAll("rect").
+      data(data).
+      enter().
+      append("svg:rect").
+      attr("x", function(datum) { return x(datum.key); }).
+      attr("y", function(datum) { return height - y(datum.value); }).
+      attr("height", function(datum) { return y(datum.value); }).
+      attr("width", barWidth).
+      attr("fill", "#2d578b");
+
+    barDemo.selectAll(".rule")
+      .data(x.ticks(5))
+      .enter().append("text")
+      .attr("class", "rule")
+      .attr("x", x)
+      .attr("y", 0)
+      .attr("dy", -3)
+      .attr("text-anchor", "middle")
+      .text(x.tickFormat(5));
+  });
+
+
 - if @authority.scraperwiki_url
   %p
     Are you a developer? See (and edit) the code that gets the data: #{link_to @authority.scraperwiki_url, @authority.scraperwiki_url}
