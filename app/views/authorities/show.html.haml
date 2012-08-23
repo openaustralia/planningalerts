@@ -61,7 +61,7 @@
       .attr("text-anchor", "middle")
       .text(x.tickFormat(5));
     barDemo.selectAll(".xTicks").
-      data(x.ticks(5)).
+      data(x.ticks(d3.time.months.utc, 1)).
       enter().append("svg:line").
       attr("x1", x).
       attr("y1", -5).
