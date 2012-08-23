@@ -40,7 +40,11 @@ PlanningalertsApp::Application.routes.draw do
   end
 
   resources :authorities, :only => [:index, :show] do
-    resources :applications, :only => [:index]
+    resources :applications, :only => [:index] do
+      collection do
+        get :per_day
+      end
+    end
   end
 
   match 'api/howto' => 'api#howto', :as => :api_howto

@@ -96,6 +96,16 @@ class ApplicationsController < ApplicationController
       end
     end
   end
+
+  # JSON api for returning the number of scraped applications per day
+  def per_day
+    authority = Authority.find_by_short_name_encoded(params[:authority_id])
+    respond_to do |format|
+      format.js do
+        render :json => authority.applications.group("CAST(date_scraped AS DATE)").count
+      end
+    end
+  end
   
   def address
     @q = params[:q]
