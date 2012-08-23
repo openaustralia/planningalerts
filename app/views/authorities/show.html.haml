@@ -14,7 +14,7 @@
 
 - if @authority.scraperwiki_url
   %p
-    Are you a developer? See (and edit) the code that gets the data: #{link_to @authority.scraperwiki_url}
+    Are you a developer? See (and edit) the code that gets the data: #{link_to @authority.scraperwiki_url, @authority.scraperwiki_url}
   %p
     via
     = link_to "ScraperWiki", "http://scraperwiki.com"
