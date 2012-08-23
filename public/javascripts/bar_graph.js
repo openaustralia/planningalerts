@@ -32,14 +32,14 @@ function barGraph(selector, url) {
       .rangeRound([height, 0]);
 
     // add the canvas to the DOM
-    var barDemo = d3.select(selector)
+    var chart = d3.select(selector)
       .append("svg:svg")
       .attr("width", width)
       .attr("height", height + 15)
       .append("g")
       .attr("transform", "translate(0,15)");
 
-    barDemo.selectAll(".rule")
+    chart.selectAll(".rule")
       .data(x.ticks(5))
       .enter().append("text")
       .attr("class", "rule")
@@ -49,7 +49,7 @@ function barGraph(selector, url) {
       .attr("text-anchor", "middle")
       .text(x.tickFormat(5));
 
-    barDemo.selectAll(".xTicks")
+    chart.selectAll(".xTicks")
       .data(x.ticks(d3.time.months.utc, 1))
       .enter().append("svg:line")
       .attr("x1", x)
@@ -65,20 +65,10 @@ function barGraph(selector, url) {
       y1(function(d) { return y(d.values); }).
       interpolate("basis");
 
-    barDemo.
+    chart.
       append("svg:path").
       attr("d", l(data)).
       attr("fill", "steelblue");
-
-    //barDemo.selectAll("rect")
-    //  .data(data)
-    //  .enter()
-    //  .append("svg:rect")
-    //  .attr("x", function(datum) { return x(datum.key); })
-    //  .attr("y", function(datum) { return height - y(datum.values); })
-    //  .attr("height", function(datum) { return y(datum.values); })
-    //  .attr("width", barWidth)
-    //  .attr("fill", "#2d578b");
   });
 
 }
