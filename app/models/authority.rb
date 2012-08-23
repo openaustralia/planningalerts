@@ -29,6 +29,12 @@ class Authority < ActiveRecord::Base
     end
   end
 
+  # When this authority started on PlanningAlerts. Just the date of the earliest scraped application
+  def earliest_date
+    earliest_application = applications.order("date_scraped").first
+    earliest_application.date_scraped if earliest_application
+  end
+
   def scraperwiki_url
     "https://scraperwiki.com/scrapers/#{scraperwiki_name}/" unless scraperwiki_name == ""
   end

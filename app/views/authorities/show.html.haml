@@ -1,0 +1,17 @@
+- content_for :page_title, @authority.full_name
+%h3= yield :page_title
+
+%p
+  On PlanningAlerts since #{@authority.earliest_date.strftime("%-d %b %Y")}, approximately #{time_ago_in_words(@authority.earliest_date)}.
+
+- if @authority.scraperwiki_url
+  %p
+    Are you a developer? See (and edit) the
+    = link_to "code that gets the data", @authority.scraperwiki_url
+    for this authority (on #{link_to "ScraperWiki", "http://scraperwiki.com"}).
+%p
+  #{@authority.applications.count} applications have been collected.
+  
+%p
+  Browse all
+  = link_to "recent applications", authority_applications_path(@authority.short_name_encoded)

@@ -6,4 +6,8 @@ class AuthoritiesController < ApplicationController
       [state, Authority.active.find_all_by_state(state, :order => "full_name")]
     end
   end
+
+  def show
+    @authority = Authority.find_by_short_name_encoded(params[:id])
+  end
 end

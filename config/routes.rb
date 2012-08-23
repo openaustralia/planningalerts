@@ -39,7 +39,7 @@ PlanningalertsApp::Application.routes.draw do
     resources :reports, :only => [:new, :create]
   end
 
-  resources :authorities, :only => [:index] do
+  resources :authorities, :only => [:index, :show] do
     resources :applications, :only => [:index]
   end
 
