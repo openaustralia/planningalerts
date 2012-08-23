@@ -1,12 +1,15 @@
 function barGraph(selector, url) {
-  d3.json(url, function(foo) {
-    var data = d3.entries(foo);
+  d3.json(url, function(data) {
+
+    data = data.map(function(d, i) {
+      return {key: new Date(d[0]), value: d[1]};
+    });
 
     // Data comes in grouped by day but we want it grouped by week
     data = d3.nest()
       .key(function(d) {
         // Use the date of the beginning of the week
-        date = new Date(d.key);
+        date = d.key;
         return new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
       })
       .rollup(function(d) {
@@ -18,7 +21,7 @@ function barGraph(selector, url) {
       d.key = new Date(d.key);
     });
 
-    var width = "100%";
+    var width = 800;
     var barWidth = 5;
 
     var height = 200;
@@ -26,7 +29,7 @@ function barGraph(selector, url) {
     var x = d3.time.scale().domain(d3.extent(data, function(datum) { return datum.key})).range([0, width]);
     var y = d3.scale.linear()
       .domain([0, d3.max(data, function(datum) { return datum.values; })])
-      .rangeRound([0, height]);
+      .rangeRound([height, 0]);
 
     // add the canvas to the DOM
     var barDemo = d3.select(selector)
@@ -56,15 +59,26 @@ function barGraph(selector, url) {
       .attr("stroke", "lightgray")
       .attr("class", "xTicks");
 
-    barDemo.selectAll("rect")
-      .data(data)
-      .enter()
-      .append("svg:rect")
-      .attr("x", function(datum) { return x(datum.key); })
-      .attr("y", function(datum) { return height - y(datum.values); })
-      .attr("height", function(datum) { return y(datum.values); })
-      .attr("width", barWidth)
-      .attr("fill", "#2d578b");
+    var l = d3.svg.area().
+      x(function(d) { return x(d.key); }).
+      y0(height).
+      y1(function(d) { return y(d.values); }).
+      interpolate("basis");
+
+    barDemo.
+      append("svg:path").
+      attr("d", l(data)).
+      attr("fill", "steelblue");
+
+    //barDemo.selectAll("rect")
+    //  .data(data)
+    //  .enter()
+    //  .append("svg:rect")
+    //  .attr("x", function(datum) { return x(datum.key); })
+    //  .attr("y", function(datum) { return height - y(datum.values); })
+    //  .attr("height", function(datum) { return y(datum.values); })
+    //  .attr("width", barWidth)
+    //  .attr("fill", "#2d578b");
   });
 
 }

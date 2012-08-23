@@ -100,9 +100,14 @@ class ApplicationsController < ApplicationController
   # JSON api for returning the number of scraped applications per day
   def per_day
     authority = Authority.find_by_short_name_encoded(params[:authority_id])
+    h = authority.applications.group("CAST(date_scraped AS DATE)").count
+    # For any dates not in h fill them in with zeros
+    (h.keys.min..h.keys.max).each do |date|
+      h[date] = 0 unless h.has_key?(date)
+    end
     respond_to do |format|
       format.js do
-        render :json => authority.applications.group("CAST(date_scraped AS DATE)").count
+        render :json => h.sort
       end
     end
   end
