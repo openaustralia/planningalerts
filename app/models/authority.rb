@@ -31,7 +31,8 @@ class Authority < ActiveRecord::Base
 
   # When this authority started on PlanningAlerts. Just the date of the earliest scraped application
   def earliest_date
-    earliest_application = applications.order("date_scraped").first
+    # Removing default scoping by using "unscoped". Hmmm. Maybe get rid of default scoping entirely?
+    earliest_application = applications.unscoped.order("date_scraped").first
     earliest_application.date_scraped if earliest_application
   end
 
