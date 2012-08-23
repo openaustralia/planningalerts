@@ -29,8 +29,9 @@
     var height = 200;
 
     var x = d3.time.scale().domain(d3.extent(data, function(datum) { return datum.key})).range([0, width]);
-    var y = d3.scale.linear().domain([0, d3.max(data, function(datum) { return datum.value; })]).
-      rangeRound([0, height]);
+    var y = d3.scale.linear()
+      .domain([0, d3.max(data, function(datum) { return datum.value; })])
+      .rangeRound([0, height]);
 
     // add the canvas to the DOM
     var barDemo = d3.select("#bargraph")
@@ -40,15 +41,15 @@
       .append("g")
       .attr("transform", "translate(0,15)");
 
-    barDemo.selectAll("rect").
-      data(data).
-      enter().
-      append("svg:rect").
-      attr("x", function(datum) { return x(datum.key); }).
-      attr("y", function(datum) { return height - y(datum.value); }).
-      attr("height", function(datum) { return y(datum.value); }).
-      attr("width", barWidth).
-      attr("fill", "#2d578b");
+    barDemo.selectAll("rect")
+      .data(data)
+      .enter()
+      .append("svg:rect")
+      .attr("x", function(datum) { return x(datum.key); })
+      .attr("y", function(datum) { return height - y(datum.value); })
+      .attr("height", function(datum) { return y(datum.value); })
+      .attr("width", barWidth)
+      .attr("fill", "#2d578b");
 
     barDemo.selectAll(".rule")
       .data(x.ticks(5))
@@ -59,6 +60,15 @@
       .attr("dy", -3)
       .attr("text-anchor", "middle")
       .text(x.tickFormat(5));
+    barDemo.selectAll(".xTicks").
+      data(x.ticks(5)).
+      enter().append("svg:line").
+      attr("x1", x).
+      attr("y1", -5).
+      attr("x2", x).
+      attr("y2", height+5).
+      attr("stroke", "lightgray").
+      attr("class", "xTicks");
   });
 
 
