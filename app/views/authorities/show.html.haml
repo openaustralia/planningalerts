@@ -17,7 +17,7 @@
 <script src="http://d3js.org/d3.v2.js"></script>
 = javascript_include_tag "bar_graph"
 :javascript
-  barGraph("#chart", "#{per_day_authority_applications_url(@authority.short_name_encoded, :format => 'js')}");
+  barGraph("#chart", "#{per_week_authority_applications_url(@authority.short_name_encoded, :format => 'js')}");
 
 
 - if @authority.scraperwiki_url

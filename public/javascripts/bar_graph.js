@@ -2,23 +2,7 @@ function barGraph(selector, url) {
   d3.json(url, function(data) {
 
     data = data.map(function(d, i) {
-      return {key: new Date(d[0]), value: d[1]};
-    });
-
-    // Data comes in grouped by day but we want it grouped by week
-    data = d3.nest()
-      .key(function(d) {
-        // Use the date of the beginning of the week
-        date = d.key;
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
-      })
-      .rollup(function(d) {
-        return d3.sum(d, function(d2) { return d2.value; });
-      })
-      .entries(data);
-
-    data.forEach(function(d, i) {
-      d.key = new Date(d.key);
+      return {key: new Date(d[0]), values: d[1]};
     });
 
     var width = 800;

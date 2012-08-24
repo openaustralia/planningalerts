@@ -43,6 +43,7 @@ PlanningalertsApp::Application.routes.draw do
     resources :applications, :only => [:index] do
       collection do
         get :per_day
+        get :per_week
       end
     end
   end

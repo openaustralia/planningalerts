@@ -106,6 +106,15 @@ class ApplicationsController < ApplicationController
       end
     end
   end
+
+  def per_week
+    authority = Authority.find_by_short_name_encoded(params[:authority_id])
+    respond_to do |format|
+      format.js do
+        render :json => authority.applications_per_week
+      end
+    end
+  end
   
   def address
     @q = params[:q]

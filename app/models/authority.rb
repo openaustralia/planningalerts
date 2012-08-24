@@ -39,6 +39,18 @@ class Authority < ActiveRecord::Base
     h.sort
   end
 
+  def applications_per_week
+    # Sunday is the beginning of the week (and the date returned here)
+    # Have to compensate for MySQL which treats Monday as the beginning of the week
+    h = applications.group("CAST(SUBDATE(date_scraped, WEEKDAY(date_scraped) + 1) AS DATE)").count
+    min = h.keys.min
+    max = Date.today - Date.today.wday
+    (min..max).step(7) do |date|
+      h[date] = 0 unless h.has_key?(date)
+    end
+    h.sort
+  end
+
   # When this authority started on PlanningAlerts. Just the date of the earliest scraped application
   def earliest_date
     # Removing default scoping by using "unscoped". Hmmm. Maybe get rid of default scoping entirely?
