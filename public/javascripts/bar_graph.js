@@ -23,8 +23,8 @@ function barGraph(selector, url) {
 
     var width = 800;
     var barWidth = 5;
-
     var height = 200;
+    var margin = 40;
 
     var x = d3.time.scale().domain(d3.extent(data, function(datum) { return datum.key})).range([0, width]);
     var y = d3.scale.linear()
@@ -34,30 +34,62 @@ function barGraph(selector, url) {
     // add the canvas to the DOM
     var chart = d3.select(selector)
       .append("svg:svg")
-      .attr("width", width)
-      .attr("height", height + 15)
-      .append("g")
-      .attr("transform", "translate(0,15)");
+      .attr("width", width + 2 * margin)
+      .attr("height", height + 2 * margin);
 
-    chart.selectAll(".rule")
+    var axisGroup = chart
+      .append("g")
+      .attr("transform", "translate(" + margin + "," + margin + ")");
+
+    axisGroup
+      .append("svg:rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", width)
+      .attr("height", height)
+      .attr("stroke", "lightgray")
+      .attr("fill", "none");
+
+    axisGroup.selectAll(".xTicks")
+      .data(x.ticks(d3.time.months.utc, 1))
+      .enter().append("svg:line")
+      .attr("class", "xTicks")
+      .attr("x1", x)
+      .attr("y1", 0)
+      .attr("x2", x)
+      .attr("y2", height)
+      .attr("stroke", "lightgray");
+
+    axisGroup.selectAll(".yTicks")
+      .data(y.ticks(10))
+      .enter().append("svg:line")
+      .attr("class", "yTicks")
+      .attr("x1", 0)
+      .attr("y1", y)
+      .attr("x2", width)
+      .attr("y2", y)
+      .attr("stroke", "lightgray");
+
+    axisGroup.selectAll("text.xAxis")
       .data(x.ticks(5))
       .enter().append("text")
-      .attr("class", "rule")
+      .attr("class", "xAxis")
       .attr("x", x)
-      .attr("y", 0)
-      .attr("dy", -3)
+      .attr("y", height)
+      .attr("dy", "20")
       .attr("text-anchor", "middle")
       .text(x.tickFormat(5));
 
-    chart.selectAll(".xTicks")
-      .data(x.ticks(d3.time.months.utc, 1))
-      .enter().append("svg:line")
-      .attr("x1", x)
-      .attr("y1", -5)
-      .attr("x2", x)
-      .attr("y2", height+5)
-      .attr("stroke", "lightgray")
-      .attr("class", "xTicks");
+    axisGroup.selectAll("text.yAxis")
+      .data(y.ticks(5))
+      .enter().append("text")
+      .attr("class", "yAxis")
+      .attr("x", 0)
+      .attr("y", y)
+      .attr("dx", "-10")
+      .attr("dy", "5")
+      .attr("text-anchor", "end")
+      .text(y.tickFormat(5));
 
     var l = d3.svg.area().
       x(function(d) { return x(d.key); }).
@@ -65,7 +97,7 @@ function barGraph(selector, url) {
       y1(function(d) { return y(d.values); }).
       interpolate("basis");
 
-    chart.
+    axisGroup.
       append("svg:path").
       attr("d", l(data)).
       attr("fill", "steelblue");
