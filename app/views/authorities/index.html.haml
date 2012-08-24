@@ -23,7 +23,7 @@
   %ul.authorities
     - authorities.each do |authority|
       %li
-        = link_to authority.full_name, authority_applications_url(authority.short_name_encoded)
+        = link_to authority.full_name, authority_url(authority.short_name_encoded)
         - if authority.broken?
           %span.highlight
             - if authority.scraperwiki_url

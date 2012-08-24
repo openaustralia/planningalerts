@@ -29,7 +29,7 @@
   %p.more
     = link_to "Read more information", @application.info_url
     about this application
-  %p.source (Source: #{@application.authority.full_name}, reference #{@application.council_reference})
+  %p.source (Source: #{link_to @application.authority.full_name, authority_path(@application.authority.short_name_encoded)}, reference #{@application.council_reference})
   - if @application.no_alerted
     %p.no_alerted
       - if @application.no_alerted == 1
