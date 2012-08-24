@@ -29,6 +29,16 @@ class Authority < ActiveRecord::Base
     end
   end
 
+  # Returns an array of arrays [date, number_of_applications_that_date]
+  def applications_per_day
+    h = applications.group("CAST(date_scraped AS DATE)").count
+    # For any dates not in h fill them in with zeros
+    (h.keys.min..Date.today).each do |date|
+      h[date] = 0 unless h.has_key?(date)
+    end
+    h.sort
+  end
+
   # When this authority started on PlanningAlerts. Just the date of the earliest scraped application
   def earliest_date
     # Removing default scoping by using "unscoped". Hmmm. Maybe get rid of default scoping entirely?
