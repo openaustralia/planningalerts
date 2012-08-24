@@ -24,7 +24,7 @@ function barGraph(selector, url) {
     var width = 800;
     var barWidth = 5;
     var height = 200;
-    var margin = 40;
+    var margin = 30;
 
     var x = d3.time.scale().domain(d3.extent(data, function(datum) { return datum.key})).range([0, width]);
     var y = d3.scale.linear()
@@ -41,44 +41,45 @@ function barGraph(selector, url) {
       .append("g")
       .attr("transform", "translate(" + margin + "," + margin + ")");
 
-    axisGroup
-      .append("svg:rect")
-      .attr("x", 0)
-      .attr("y", 0)
-      .attr("width", width)
-      .attr("height", height)
-      .attr("stroke", "lightgray")
-      .attr("fill", "none");
-
     axisGroup.selectAll(".xTicks")
       .data(x.ticks(d3.time.months.utc, 1))
       .enter().append("svg:line")
       .attr("class", "xTicks")
       .attr("x1", x)
-      .attr("y1", 0)
+      .attr("y1", height)
       .attr("x2", x)
-      .attr("y2", height)
+      .attr("y2", height + 5)
       .attr("stroke", "lightgray");
 
     axisGroup.selectAll(".yTicks")
       .data(y.ticks(10))
       .enter().append("svg:line")
       .attr("class", "yTicks")
-      .attr("x1", 0)
+      .attr("x1", -5)
       .attr("y1", y)
-      .attr("x2", width)
+      .attr("x2", 0)
       .attr("y2", y)
       .attr("stroke", "lightgray");
 
-    axisGroup.selectAll("text.xAxis")
-      .data(x.ticks(5))
+    axisGroup.selectAll("text.xAxisMonth")
+      .data(x.ticks(d3.time.months.utc, 2))
       .enter().append("text")
-      .attr("class", "xAxis")
+      .attr("class", "xAxisMonth")
       .attr("x", x)
       .attr("y", height)
+      .attr("dy", "15")
+      .attr("text-anchor", "middle")
+      .text(d3.time.format("%b"));
+
+    axisGroup.selectAll("text.xAxisYear")
+      .data(x.ticks(d3.time.years.utc, 1))
+      .enter().append("text")
+      .attr("class", "xAxisYear")
+      .attr("x", x)
+      .attr("y", height + 8)
       .attr("dy", "20")
       .attr("text-anchor", "middle")
-      .text(x.tickFormat(5));
+      .text(d3.time.format("%Y"));
 
     axisGroup.selectAll("text.yAxis")
       .data(y.ticks(5))
@@ -86,8 +87,8 @@ function barGraph(selector, url) {
       .attr("class", "yAxis")
       .attr("x", 0)
       .attr("y", y)
-      .attr("dx", "-10")
-      .attr("dy", "5")
+      .attr("dx", "-8")
+      .attr("dy", "3")
       .attr("text-anchor", "end")
       .text(y.tickFormat(5));
 

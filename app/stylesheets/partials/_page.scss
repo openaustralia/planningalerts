@@ -430,6 +430,15 @@ body h4 {
   }
 }
 
+// Style chart on authority detail page
+
+#chart {
+  text {
+    fill: gray;
+    font-size: 10px;
+  }
+}
+
 // Prototype of possible widget for signing up to email alerts
 .widget-prototype {
   width: 700px;

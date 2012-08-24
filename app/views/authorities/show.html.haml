@@ -13,11 +13,11 @@
   = link_to "Browse all recent applications", authority_applications_path(@authority.short_name_encoded)
 
 %h4 Number of applications scraped each week
-#bargraph
+#chart
 <script src="http://d3js.org/d3.v2.js"></script>
 = javascript_include_tag "bar_graph"
 :javascript
-  barGraph("#bargraph", "#{per_day_authority_applications_url(@authority.short_name_encoded, :format => 'js')}");
+  barGraph("#chart", "#{per_day_authority_applications_url(@authority.short_name_encoded, :format => 'js')}");
 
 
 - if @authority.scraperwiki_url
