@@ -7,7 +7,9 @@
     = link_to "Why?", faq_path(:anchor => "broken_scraper")
 
 %p
-  For #{@authority.full_name} #{@authority.applications.where("date_scraped >= ?", 1.week.ago).count} applications have been collected in the last week, #{@authority.applications.where("date_scraped >= ?", 1.month.ago).count} in the last month and #{@authority.applications.count} since #{@authority.earliest_date.strftime("%-d %b %Y")}, when this authority was first added to PlanningAlerts.
+  For #{@authority.full_name} #{@authority.applications.where("date_scraped >= ?", 1.week.ago).count} applications have been collected in the last week, #{@authority.applications.where("date_scraped >= ?", 1.month.ago).count} in the last month and #{@authority.applications.count} since #{@authority.earliest_date.strftime("%-d %b %Y")}, when this authority was first added to PlanningAlerts. That's a
+  = link_to "median", "http://en.wikipedia.org/wiki/Median"
+  of #{@authority.median_applications_per_week} applications per week.
 
 %p
   = link_to "Browse all recent applications", authority_applications_path(@authority.short_name_encoded)

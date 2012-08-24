@@ -39,6 +39,11 @@ class Authority < ActiveRecord::Base
     h.sort
   end
 
+  def median_applications_per_week
+    v = applications_per_week.map{|a| a[1]}.sort
+    v[v.count / 2]
+  end
+
   def applications_per_week
     # Sunday is the beginning of the week (and the date returned here)
     # Have to compensate for MySQL which treats Monday as the beginning of the week
