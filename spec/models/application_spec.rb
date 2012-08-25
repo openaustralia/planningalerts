@@ -202,7 +202,7 @@ describe Application do
       @auth.stub!(:logger).and_return(logger)
       logger.should_receive(:info).with("2 new applications found for Fiddlesticks, NSW")
 
-      @auth.collect_applications(@date)
+      @auth.collect_applications_date_range(@date, @date)
       Application.count.should == 2
       r1 = Application.find_by_council_reference("R1")
       r1.authority.should == @auth
@@ -222,8 +222,8 @@ describe Application do
       # It shouldn't log anything if there are no new applications
 
       # Getting the feed twice with the same content
-      @auth.collect_applications(@date)
-      @auth.collect_applications(@date)
+      @auth.collect_applications_date_range(@date, @date)
+      @auth.collect_applications_date_range(@date, @date)
       Application.count.should == 2
     end
 
@@ -234,10 +234,8 @@ describe Application do
       Kernel::silence_warnings { ::Configuration::SCRAPE_DELAY = 1 }
       logger = mock
       logger.should_receive(:info).with("Scraping 2 authorities with date from 2010-01-09 to 2010-01-10")
-      @auth.should_receive(:collect_applications).with(Date.today, logger)
-      auth2.should_receive(:collect_applications).with(Date.today, logger)
-      @auth.should_receive(:collect_applications).with(Date.today - 1, logger)
-      auth2.should_receive(:collect_applications).with(Date.today - 1, logger)
+      @auth.should_receive(:collect_applications_date_range).with(Date.today - 1, Date.today, logger)
+      auth2.should_receive(:collect_applications_date_range).with(Date.today - 1, Date.today, logger)
 
       Application.collect_applications([@auth, auth2], logger)
     end

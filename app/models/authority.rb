@@ -63,27 +63,23 @@ class Authority < ActiveRecord::Base
   end
 
   # Collect all the applications for this authority by scraping
-  def collect_applications(date, info_logger = logger)
-    count = 0
-    scraper_data(date, info_logger).each do |attributes|
-      # TODO Consider if it would be better to overwrite applications with new data if they already exists
-      # This would allow for the possibility that the application information was incorrectly entered at source
-      # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
-      unless applications.find_by_council_reference(attributes[:council_reference])
-        count += 1
-        applications.create!(attributes)
-      end
-    end
-    
-    if count > 0
-      info_logger.info "#{count} new applications found for #{full_name_and_state}"
-    end
-  end
-
-  def collect_applications_date_range(start_date, end_date, info_logger)
+  def collect_applications_date_range(start_date, end_date, info_logger = logger)
     # Go through the dates in reverse chronological order
     (start_date..end_date).to_a.reverse.each do |date|
-      collect_applications(date, info_logger)
+      count = 0
+      scraper_data(date, info_logger).each do |attributes|
+        # TODO Consider if it would be better to overwrite applications with new data if they already exists
+        # This would allow for the possibility that the application information was incorrectly entered at source
+        # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
+        unless applications.find_by_council_reference(attributes[:council_reference])
+          count += 1
+          applications.create!(attributes)
+        end
+      end
+      
+      if count > 0
+        info_logger.info "#{count} new applications found for #{full_name_and_state}"
+      end
     end
   end
 
