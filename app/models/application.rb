@@ -34,25 +34,22 @@ class Application < ActiveRecord::Base
     end
   end
   
-  # Translate a snippet of xml from the feed into a hash of attributes for creating an application
-  def self.translate_feed_data_chunk(a)
-    {
-      :council_reference => a.at('council_reference').inner_text,
-      :address => a.at('address').inner_text,
-      :description => a.at('description').inner_text,
-      :info_url => a.at('info_url').inner_text,
-      :comment_url => a.at('comment_url').inner_text,
-      :date_received => a.at('date_received').inner_text,
-      :date_scraped => Time.now,
-      # on_notice_from and on_notice_to tags are optional
-      :on_notice_from => (a.at('on_notice_from').inner_text if a.at('on_notice_from')),
-      :on_notice_to => (a.at('on_notice_to').inner_text if a.at('on_notice_to'))
-    }
-  end
-
   # Translate xml data (as a string) into an array of attribute hashes that can used to create applications
   def self.translate_feed_data(feed_data)
-    Nokogiri::XML(feed_data).search('application').map{|a| translate_feed_data_chunk(a)}
+    Nokogiri::XML(feed_data).search('application').map do |a|
+      {
+        :council_reference => a.at('council_reference').inner_text,
+        :address => a.at('address').inner_text,
+        :description => a.at('description').inner_text,
+        :info_url => a.at('info_url').inner_text,
+        :comment_url => a.at('comment_url').inner_text,
+        :date_received => a.at('date_received').inner_text,
+        :date_scraped => Time.now,
+        # on_notice_from and on_notice_to tags are optional
+        :on_notice_from => (a.at('on_notice_from').inner_text if a.at('on_notice_from')),
+        :on_notice_to => (a.at('on_notice_to').inner_text if a.at('on_notice_to'))
+      }
+    end
   end
 
   def self.collect_applications_for_authority(auth, date, info_logger = logger)
