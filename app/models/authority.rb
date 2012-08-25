@@ -97,7 +97,7 @@ class Authority < ActiveRecord::Base
 
   # Does this authority use scraperwiki to get its data?
   def scraperwiki?
-    scraperwiki_name && scraper_wiki_name != ""
+    scraperwiki_name && scraperwiki_name != ""
   end
 
   def scraperwiki_url
