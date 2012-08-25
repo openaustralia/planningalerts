@@ -29,10 +29,7 @@ class Application < ActiveRecord::Base
 
     info_logger.info "Scraping #{authorities.count} authorities with date from #{start_date} to #{end_date}"
     authorities.each do |auth|
-      # Go through the dates in reverse chronological order
-      (start_date..end_date).to_a.reverse.each do |date|
-        auth.collect_applications(date, info_logger)
-      end
+      auth.collect_applications_date_range(start_date, end_date, info_logger)
     end
   end
 

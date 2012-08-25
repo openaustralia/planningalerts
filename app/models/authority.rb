@@ -80,6 +80,13 @@ class Authority < ActiveRecord::Base
     end
   end
 
+  def collect_applications_date_range(start_date, end_date, info_logger)
+    # Go through the dates in reverse chronological order
+    (start_date..end_date).to_a.reverse.each do |date|
+      collect_applications(date, info_logger)
+    end
+  end
+
   # Returns an array of arrays [date, number_of_applications_that_date]
   def applications_per_day
     h = applications.group("CAST(date_scraped AS DATE)").count
