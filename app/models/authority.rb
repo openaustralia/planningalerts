@@ -95,8 +95,13 @@ class Authority < ActiveRecord::Base
     earliest_application.date_scraped if earliest_application
   end
 
+  # Does this authority use scraperwiki to get its data?
+  def scraperwiki?
+    scraperwiki_name && scraper_wiki_name != ""
+  end
+
   def scraperwiki_url
-    "https://scraperwiki.com/scrapers/#{scraperwiki_name}/" unless scraperwiki_name == ""
+    "https://scraperwiki.com/scrapers/#{scraperwiki_name}/" if scraperwiki?
   end
   
   def feed_url_for_date(date)
