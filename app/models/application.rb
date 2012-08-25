@@ -29,7 +29,7 @@ class Application < ActiveRecord::Base
     (start_date..(Date.today)).to_a.reverse.each do |date|
       info_logger.info "Scraping #{authorities.count} authorities with date #{date}"
       authorities.each do |auth|
-        collect_applications_for_authority(auth, date, info_logger)
+        auth.collect_applications(date, info_logger)
       end
     end
   end
@@ -52,10 +52,6 @@ class Application < ActiveRecord::Base
     end
   end
 
-  def self.collect_applications_for_authority(auth, date, info_logger = logger)
-    auth.collect_applications(date, info_logger)
-  end
-  
   # TODO: This is very similar to the method in the api_howto_helper. Maybe they should be together?
   def map_url
     zoom = 15

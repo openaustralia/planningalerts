@@ -142,10 +142,10 @@ describe Application do
 
     it "should collect the correct applications" do
       logger = mock
-      Application.stub!(:logger).and_return(logger)
+      @auth.stub!(:logger).and_return(logger)
       logger.should_receive(:info).with("2 new applications found for Fiddlesticks, NSW")
 
-      Application.collect_applications_for_authority(@auth, @date)
+      @auth.collect_applications(@date)
       Application.count.should == 2
       r1 = Application.find_by_council_reference("R1")
       r1.authority.should == @auth
@@ -160,13 +160,13 @@ describe Application do
 
     it "should not create new applications when they already exist" do
       logger = mock
-      Application.stub!(:logger).and_return(logger)
+      @auth.stub!(:logger).and_return(logger)
       logger.should_receive(:info).with("2 new applications found for Fiddlesticks, NSW")
       # It shouldn't log anything if there are no new applications
 
       # Getting the feed twice with the same content
-      Application.collect_applications_for_authority(@auth, @date)
-      Application.collect_applications_for_authority(@auth, @date)
+      @auth.collect_applications(@date)
+      @auth.collect_applications(@date)
       Application.count.should == 2
     end
 
@@ -178,12 +178,12 @@ describe Application do
       logger = mock
       logger.should_receive(:info).with("Scraping 2 authorities with date 2010-01-10")
       logger.should_receive(:info).with("Scraping 2 authorities with date 2010-01-09")
-      Application.should_receive(:collect_applications_for_authority).with(@auth, Date.today, logger)
-      Application.should_receive(:collect_applications_for_authority).with(auth2, Date.today, logger)
-      Application.should_receive(:collect_applications_for_authority).with(@auth, Date.today - 1, logger)
-      Application.should_receive(:collect_applications_for_authority).with(auth2, Date.today - 1, logger)
+      @auth.should_receive(:collect_applications).with(Date.today, logger)
+      auth2.should_receive(:collect_applications).with(Date.today, logger)
+      @auth.should_receive(:collect_applications).with(Date.today - 1, logger)
+      auth2.should_receive(:collect_applications).with(Date.today - 1, logger)
 
-      Application.collect_applications(Authority.active, logger)
+      Application.collect_applications([@auth, auth2], logger)
     end
   end
 end
