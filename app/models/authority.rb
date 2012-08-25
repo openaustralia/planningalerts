@@ -62,13 +62,30 @@ class Authority < ActiveRecord::Base
     scraperwiki? ? Application.translate_scraperwiki_feed_data(feed_data) : Application.translate_feed_data(feed_data)
   end
 
-  def scraper_data_date_range(start_date, end_date, info_logger)
+  def scraper_data_original_style(start_date, end_date, info_logger)
     feed_data = []
     # Go through the dates in reverse chronological order
     (start_date..end_date).to_a.reverse.each do |date|
       feed_data += scraper_data(date, info_logger)
     end
     feed_data
+  end
+
+  def scraper_data_scraperwiki_style(start_date, end_date, info_logger)
+    feed_data = []
+    # Go through the dates in reverse chronological order
+    (start_date..end_date).to_a.reverse.each do |date|
+      feed_data += scraper_data(date, info_logger)
+    end
+    feed_data    
+  end
+
+  def scraper_data_date_range(start_date, end_date, info_logger)
+    if scraperwiki?
+      scraper_data_scraperwiki_style(start_date, end_date, info_logger)
+    else
+      scraper_data_original_style(start_date, end_date, info_logger)
+    end
   end
 
   # Collect all the applications for this authority by scraping
