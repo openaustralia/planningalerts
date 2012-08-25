@@ -107,6 +107,10 @@ class Authority < ActiveRecord::Base
   def feed_url_for_date(date)
     feed_url.sub("{year}", date.year.to_s).sub("{month}", date.month.to_s).sub("{day}", date.day.to_s)
   end
+
+  def scraperwiki_feed_url_for_date(date)
+    "https://api.scraperwiki.com/api/1.0/datastore/sqlite?format=jsondict&name=#{scraperwiki_name}&query=select%20*%20from%20swdata%20where%20%60date_scraped%60%3D'#{date}'"
+  end
   
   # So that the encoding function can be used elsewhere
   def self.short_name_encoded(short_name)

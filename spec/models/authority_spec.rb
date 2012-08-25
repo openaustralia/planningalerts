@@ -47,6 +47,12 @@ describe Authority do
     date = Date.new(2009, 2, 1)
     a.feed_url_for_date(date).should == "http://example.org?year=2009&month=2&day=1"
   end
+
+  it "should know the scraperwiki feed url" do
+    a = Authority.new(:scraperwiki_name => "my_council_scraper")
+    date = Date.new(2009, 2, 1)
+    a.scraperwiki_feed_url_for_date(date).should == "https://api.scraperwiki.com/api/1.0/datastore/sqlite?format=jsondict&name=my_council_scraper&query=select%20*%20from%20swdata%20where%20%60date_scraped%60%3D'2009-02-01'"
+  end
   
   describe "detecting authorities with old applications" do
     before :each do
