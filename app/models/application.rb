@@ -52,6 +52,23 @@ class Application < ActiveRecord::Base
     end
   end
 
+  def self.translate_scraperwiki_feed_data(feed_data)
+    JSON.parse(feed_data).map do |a|
+      {
+        :council_reference => a['council_reference'],
+        :address => a['address'],
+        :description => a['description'],
+        :info_url => a['info_url'],
+        :comment_url => a['comment_url'],
+        :date_received => a['date_received'],
+        :date_scraped => Time.now,
+        # on_notice_from and on_notice_to tags are optional
+        :on_notice_from => a['on_notice_from'],
+        :on_notice_to => a['on_notice_to']
+      }
+    end
+  end
+
   # TODO: This is very similar to the method in the api_howto_helper. Maybe they should be together?
   def map_url
     zoom = 15
