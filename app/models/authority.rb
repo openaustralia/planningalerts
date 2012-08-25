@@ -32,7 +32,8 @@ class Authority < ActiveRecord::Base
   # Get all the scraper data for this authority and date in an array of attributes that can be used
   # creating applications
   def scraper_data(date, info_logger = logger)
-    url = feed_url_for_date(date)
+    url = scraperwiki? ? scraperwiki_feed_url_for_date(date) : feed_url_for_date(date)
+
     begin
       feed_data = open(url).read
     rescue Exception => e
@@ -40,7 +41,7 @@ class Authority < ActiveRecord::Base
       return []
     end
 
-    Application.translate_feed_data(feed_data)    
+    scraperwiki? ? Application.translate_scraperwiki_feed_data(feed_data) : Application.translate_feed_data(feed_data)
   end
 
   # Collect all the applications for this authority by scraping
