@@ -129,7 +129,7 @@ class Authority < ActiveRecord::Base
   
   # Is this authority contactable through PlanningAlerts? i.e. do we have an email address on record?
   def contactable?
-    !!email
+    email && email != ""
   end
 
   def latest_application
