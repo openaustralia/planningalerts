@@ -29,18 +29,24 @@ class Authority < ActiveRecord::Base
     end
   end
 
-  # Collect all the applications for this authority by scraping
-  def collect_applications(date, info_logger = logger)
+  # Get all the scraper data for this authority and date in an array of attributes that can be used
+  # creating applications
+  def scraper_data(date, info_logger = logger)
     url = feed_url_for_date(date)
     begin
       feed_data = open(url).read
     rescue Exception => e
       info_logger.error "Error #{e} while getting data from url #{url}. So, skipping"
-      return
+      return []
     end
 
+    Application.translate_feed_data(feed_data)    
+  end
+
+  # Collect all the applications for this authority by scraping
+  def collect_applications(date, info_logger = logger)
     count = 0
-    Application.translate_feed_data(feed_data).each do |attributes|
+    scraper_data(date, info_logger).each do |attributes|
       # TODO Consider if it would be better to overwrite applications with new data if they already exists
       # This would allow for the possibility that the application information was incorrectly entered at source
       # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
