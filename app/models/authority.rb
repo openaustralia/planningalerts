@@ -39,21 +39,19 @@ class Authority < ActiveRecord::Base
       return
     end
 
-    count_new, count_old = 0, 0
+    count = 0
     Application.translate_feed_data(feed_data).each do |attributes|
       # TODO Consider if it would be better to overwrite applications with new data if they already exists
       # This would allow for the possibility that the application information was incorrectly entered at source
       # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
-      if applications.find_by_council_reference(attributes[:council_reference])
-        count_old += 1
-      else
-        count_new += 1
+      unless applications.find_by_council_reference(attributes[:council_reference])
+        count += 1
         applications.create!(attributes)
       end
     end
     
-    if count_new > 0
-      info_logger.info "#{count_new} new applications found for #{full_name_and_state}"
+    if count > 0
+      info_logger.info "#{count} new applications found for #{full_name_and_state}"
     end
   end
 
