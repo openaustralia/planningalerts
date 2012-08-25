@@ -29,6 +29,24 @@ class Authority < ActiveRecord::Base
     end
   end
 
+  # Hardcoded total population of Australia (2011 estimate)
+  # From http://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/3218.02011?OpenDocument#Data
+  def self.total_population_2011
+    22323933
+  end
+
+  def self.total_population_covered_by_all_active_authorities
+    sum = 0
+    Authority.active.each do |a|
+      sum += a.population_2011 if a.population_2011
+    end
+    sum
+  end
+
+  def self.percentage_population_covered_by_all_active_authorities
+    (total_population_covered_by_all_active_authorities.to_f / total_population_2011) * 100
+  end
+
   # Get all the scraper data for this authority and date in an array of attributes that can be used
   # creating applications
   def scraper_data(date, info_logger = logger)
