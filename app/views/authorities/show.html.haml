@@ -3,7 +3,7 @@
 
 - if @authority.population_2011
   %p
-    Population #{@authority.population_2011} (2011 estimate)
+    Population #{number_with_delimiter @authority.population_2011} (2011 estimate)
 
 - if @authority && @authority.broken?
   %p
