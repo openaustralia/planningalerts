@@ -233,8 +233,7 @@ describe Application do
       # Overwriting a constant here. Normally generates a warning. Silence it!
       Kernel::silence_warnings { ::Configuration::SCRAPE_DELAY = 1 }
       logger = mock
-      logger.should_receive(:info).with("Scraping 2 authorities with date 2010-01-10")
-      logger.should_receive(:info).with("Scraping 2 authorities with date 2010-01-09")
+      logger.should_receive(:info).with("Scraping 2 authorities with date from 2010-01-09 to 2010-01-10")
       @auth.should_receive(:collect_applications).with(Date.today, logger)
       auth2.should_receive(:collect_applications).with(Date.today, logger)
       @auth.should_receive(:collect_applications).with(Date.today - 1, logger)

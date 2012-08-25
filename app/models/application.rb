@@ -24,16 +24,18 @@ class Application < ActiveRecord::Base
   
   # Optionally pass a logger which is just used for sending informational messages to do with this long-running job to
   def self.collect_applications(authorities, info_logger = logger)
-    start_date = Date.today - ::Configuration::SCRAPE_DELAY
-    # Go through the dates in reverse chronological order
-    (start_date..(Date.today)).to_a.reverse.each do |date|
-      info_logger.info "Scraping #{authorities.count} authorities with date #{date}"
-      authorities.each do |auth|
+    end_date = Date.today
+    start_date = end_date - ::Configuration::SCRAPE_DELAY
+
+    info_logger.info "Scraping #{authorities.count} authorities with date from #{start_date} to #{end_date}"
+    authorities.each do |auth|
+      # Go through the dates in reverse chronological order
+      (start_date..end_date).to_a.reverse.each do |date|
         auth.collect_applications(date, info_logger)
       end
     end
   end
-  
+
   # Translate xml data (as a string) into an array of attribute hashes that can used to create applications
   def self.translate_feed_data(feed_data)
     Nokogiri::XML(feed_data).search('application').map do |a|
