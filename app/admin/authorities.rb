@@ -1,5 +1,5 @@
 ActiveAdmin.register Authority do
-  actions :all, :except => [:destroy, :new, :create]
+  actions :all, :except => [:destroy]
 
   scope :active, :default => true
   scope :all
