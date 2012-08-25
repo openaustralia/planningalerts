@@ -35,7 +35,7 @@ class Application < ActiveRecord::Base
   end
   
   # Translate a snippet of xml from the feed into a hash of attributes for creating an application
-  def self.translate_feed_data(a)
+  def self.translate_feed_data_chunk(a)
     {
       :council_reference => a.at('council_reference').inner_text,
       :address => a.at('address').inner_text,
@@ -50,6 +50,11 @@ class Application < ActiveRecord::Base
     }
   end
 
+  # Translate xml data (as a string) into an array of attribute hashes that can used to create applications
+  def self.translate_feed_data(feed_data)
+    Nokogiri::XML(feed_data).search('application').map{|a| translate_feed_data_chunk(a)}
+  end
+
   def self.collect_applications_for_authority(auth, date, info_logger = logger)
     url = auth.feed_url_for_date(date)
     begin
@@ -58,13 +63,9 @@ class Application < ActiveRecord::Base
       info_logger.error "Error #{e} while getting data from url #{url}. So, skipping"
       return
     end
-    feed = Nokogiri::XML(feed_data)
-    applications = feed.search('application')
     
     count_new, count_old = 0, 0
-    applications.each do |a|
-      attributes = translate_feed_data(a)
-
+    translate_feed_data(feed_data).each do |attributes|
       # TODO Consider if it would be better to overwrite applications with new data if they already exists
       # This would allow for the possibility that the application information was incorrectly entered at source
       # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
