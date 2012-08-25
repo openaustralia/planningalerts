@@ -34,6 +34,22 @@ class Application < ActiveRecord::Base
     end
   end
   
+  # Translate a snippet of xml from the feed into a hash of attributes for creating an application
+  def self.translate_feed_data(a)
+    {
+      :council_reference => a.at('council_reference').inner_text,
+      :address => a.at('address').inner_text,
+      :description => a.at('description').inner_text,
+      :info_url => a.at('info_url').inner_text,
+      :comment_url => a.at('comment_url').inner_text,
+      :date_received => a.at('date_received').inner_text,
+      :date_scraped => Time.now,
+      # on_notice_from and on_notice_to tags are optional
+      :on_notice_from => (a.at('on_notice_from').inner_text if a.at('on_notice_from')),
+      :on_notice_to => (a.at('on_notice_to').inner_text if a.at('on_notice_to'))
+    }
+  end
+
   def self.collect_applications_for_authority(auth, date, info_logger = logger)
     url = auth.feed_url_for_date(date)
     begin
@@ -47,27 +63,16 @@ class Application < ActiveRecord::Base
     
     count_new, count_old = 0, 0
     applications.each do |a|
-      council_reference = a.at('council_reference').inner_text
+      attributes = translate_feed_data(a)
+
       # TODO Consider if it would be better to overwrite applications with new data if they already exists
       # This would allow for the possibility that the application information was incorrectly entered at source
       # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
-      if auth.applications.find_by_council_reference(council_reference)
+      if auth.applications.find_by_council_reference(attributes[:council_reference])
         count_old += 1
       else
         count_new += 1
-        # on_notice_from and on_notice_to tags are optional
-        on_notice_from = a.at('on_notice_from').inner_text if a.at('on_notice_from')
-        on_notice_to = a.at('on_notice_to').inner_text if a.at('on_notice_to')
-        auth.applications.create!(
-          :council_reference => council_reference,
-          :address => a.at('address').inner_text,
-          :description => a.at('description').inner_text,
-          :info_url => a.at('info_url').inner_text,
-          :comment_url => a.at('comment_url').inner_text,
-          :date_received => a.at('date_received').inner_text,
-          :date_scraped => Time.now,
-          :on_notice_from => on_notice_from,
-          :on_notice_to => on_notice_to)
+        auth.applications.create!(attributes)
       end
     end
     
