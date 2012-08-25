@@ -1,6 +1,10 @@
 - content_for :page_title, @authority.full_name
 %h3= yield :page_title
 
+- if @authority.population_2011
+  %p
+    Population #{@authority.population_2011} (2011 estimate)
+
 - if @authority && @authority.broken?
   %p
     %span.highlight It looks like something might be wrong. The latest application was received #{time_ago_in_words(@authority.latest_application)} ago.
