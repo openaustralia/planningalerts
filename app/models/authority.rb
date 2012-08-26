@@ -154,7 +154,8 @@ class Authority < ActiveRecord::Base
   end
 
   def scraperwiki_feed_url_for_date(date)
-    "https://api.scraperwiki.com/api/1.0/datastore/sqlite?format=jsondict&name=#{scraperwiki_name}&query=select%20*%20from%20swdata%20where%20%60date_scraped%60%3D'#{date}'"
+    query = CGI.escape("select * from swdata where `date_scraped`='#{date}'")
+    "https://api.scraperwiki.com/api/1.0/datastore/sqlite?format=jsondict&name=#{scraperwiki_name}&query=#{query}"
   end
   
   # So that the encoding function can be used elsewhere
