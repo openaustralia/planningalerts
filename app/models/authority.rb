@@ -53,13 +53,13 @@ class Authority < ActiveRecord::Base
     url = scraperwiki? ? scraperwiki_feed_url_for_date(date) : feed_url_for_date(date)
 
     begin
-      feed_data = open(url).read
+      text = open(url).read
     rescue Exception => e
       info_logger.error "Error #{e} while getting data from url #{url}. So, skipping"
       return []
     end
 
-    scraperwiki? ? Application.translate_scraperwiki_feed_data(feed_data) : Application.translate_feed_data(feed_data)
+    scraperwiki? ? Application.translate_scraperwiki_feed_data(text) : Application.translate_feed_data(text)
   end
 
   def scraper_data_original_style(start_date, end_date, info_logger)
