@@ -3,7 +3,7 @@ class StaticController < ApplicationController
   # Reinstate caching of faq page when all authorities have commenting feature
   #caches_page :about, :faq, :get_involved
   # Don't cache about page because we randomly rearrange the list of contributors on each request
-  caches_page :get_involved
+  caches_page :get_involved, :how_to_write_a_scraper
 
   def about
   end
@@ -13,6 +13,9 @@ class StaticController < ApplicationController
   end
   
   def get_involved
+  end
+
+  def how_to_write_a_scraper
   end
 
   def error_404
