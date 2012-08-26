@@ -72,23 +72,20 @@ class Authority < ActiveRecord::Base
   # Get all the scraper data for this authority and date in an array of attributes that can be used
   # creating applications
   def scraper_data_scraperwiki_style(start_date, end_date, info_logger)
-    feed_data = []
-    # Go through the dates in reverse chronological order
-    (start_date..end_date).to_a.reverse.each do |date|
-      url = scraperwiki_feed_url_for_date(date)
+    url = scraperwiki_feed_url_for_date_range(start_date, end_date)
 
-      text = begin
-        open(url).read
-      rescue Exception => e
-        info_logger.error "Error #{e} while getting data from url #{url}. So, skipping"
-        nil
-      end
-
-      if text
-        feed_data += Application.translate_scraperwiki_feed_data(text)
-      end
+    text = begin
+      open(url).read
+    rescue Exception => e
+      info_logger.error "Error #{e} while getting data from url #{url}. So, skipping"
+      nil
     end
-    feed_data    
+
+    if text
+      Application.translate_scraperwiki_feed_data(text)
+    else
+      []
+    end
   end
 
   def scraper_data_date_range(start_date, end_date, info_logger)
