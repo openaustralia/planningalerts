@@ -55,7 +55,7 @@ PlanningalertsApp::Application.routes.draw do
   match 'faq' => 'static#faq', :as => :faq
   match 'getinvolved' => 'static#get_involved', :as => :get_involved
   match 'how_to_write_a_scraper' => 'static#how_to_write_a_scraper'
-  match 'how_to_lobby_your_local_authority' => 'static#how_to_lobby_your_local_authority'
+  match 'how_to_lobby_your_local_council' => 'static#how_to_lobby_your_local_council'
 
   match '/' => 'applications#address', :as => :address_applications
   
