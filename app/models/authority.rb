@@ -161,13 +161,8 @@ class Authority < ActiveRecord::Base
     feed_url.sub("{year}", date.year.to_s).sub("{month}", date.month.to_s).sub("{day}", date.day.to_s)
   end
 
-  def scraperwiki_feed_url_for_date(date)
-    query = CGI.escape("select * from swdata where `date_scraped`='#{date}'")
-    "https://api.scraperwiki.com/api/1.0/datastore/sqlite?format=jsondict&name=#{scraperwiki_name}&query=#{query}"
-  end
-
   def scraperwiki_feed_url_for_date_range(start_date, end_date)
-    query = CGI.escape("select * from swdata where `date_scraped`=>'#{start_date}' and `date_scraped`<='#{end_date}'")
+    query = CGI.escape("select * from `swdata` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
     "https://api.scraperwiki.com/api/1.0/datastore/sqlite?format=jsondict&name=#{scraperwiki_name}&query=#{query}"
   end
   
