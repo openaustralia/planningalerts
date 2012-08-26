@@ -9,11 +9,38 @@
   I am a programmer and want to add my local planning authority
 %p
   You can help by writing a <a href="http://en.wikipedia.org/wiki/Screen_scraping">screen scraper</a>
-  for your local planning authority, all without leaving your web browser, in any one of your favorite languages: Ruby, Python or PHP. #{link_to "Read our step-by-step instructions", how_to_write_a_scraper_path}.
+  for your local planning authority, all without leaving your web browser, in any one of your favorite languages: Ruby, Python or PHP.
+%p= link_to "Read our step-by-step instructions", how_to_write_a_scraper_path
+
+%h4
+  I'm not technical and I want to get my local authority on to PlanningAlerts. What can I do?
+%p
+  You can lobby your local authority to publish its planning data in a machine readable format. Email the planning department. Contact your councillors and get them to support your mission.
+%p
+  Use Mosman Council as an example of what good local authorities can do. See #{link_to "this link", "http://portal.mosman.nsw.gov.au/pages/xc.track/ChooseFeed.aspx"}. They provide a list of machine readable feeds which are licensed under a Creative Commons license.
+%p
+  In NSW,
+  = link_to "The Government Information (Public Access) Act 2009", "http://www.legislation.nsw.gov.au/viewtop/inforce/act+52+2009+FIRST+0+N/"
+  (the GIPA Act), place requirements on local councils to publish the information they hold about development applications on their websites. See
+  = link_to "this report", "http://www.oic.nsw.gov.au/agdbasev7wr/_assets/oic/m150001l2/consultation%20report%20-%20untangling%20the%20web.pdf#xml=http://PRODMWI15-0/isysquery/a046336b-68b9-45f5-846e-d81d8183673a/2/hilite/"
+  from the Office of the Information Commissioner, NSW.
+%p
+  For further arguments you can use see the Federal Government's
+  "#{link_to "Declaration of Open Government", "http://www.finance.gov.au/e-government/strategy-and-governance/gov2/declaration-of-open-government.html"}"
+  of 2010 in which it was stated that the government supports the "strengthening citizen’s rights of access to information, establishing a pro-disclosure culture across Australian Government agencies including through online innovation, and making government information more accessible and usable".
+
+%h4
+  I don't have the time or I don't have the skills. How can I help?
+%p
+  You value the service provided by PlanningAlerts but you simple don't have the time or the specialist skills to help out personally. The best thing that you can do is to give a donation to the OpenAustralia Foundation, the charity behind PlanningAlerts. Your money will go to improving the service.
 
 %h4
   I work for a local council or planning authority and would like to make our data available
 %p
   The most important thing you can do is publish your data in a simple format that is freely available on the internet.
-  Something <a href="/brisbane.xml">like this</a> is good but we can work with most formats. Please
-  #{mail_to "contact@planningalerts.org.au", "get in touch"} if you would like to discuss how you can help.
+  Something <a href="/brisbane.xml">like this</a> is good but we can work with most formats.
+
+%p
+  Please
+  = mail_to "contact@planningalerts.org.au", "get in touch"
+  if you would like to discuss how you can help.
