@@ -68,25 +68,30 @@
 
 %h5 date_scraped (Required)
 %p
+  The date that your scraper is collecting this data (i.e. now). Should be in
+  = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
+  format.
+%p
   Use the following Ruby code:
   %code Date.today.to_s
-%p
-  (make sure you add
-  %code require "date"
-  at the top)
 
 %h5 date_received (Optional)
 %p
-  The date this application was received by council.
+  The date this application was received by council. Should be in
+  = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
+  format.
 
 %h5 on_notice_from (Optional)
 %p
-  The date from when public submissions can be made about this application.
+  The date from when public submissions can be made about this application. Should be in
+  = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
+  format.
 
 %h5 on_notice_to (Optional)
 %p
-  The date until when public submissions can be made about this application.
-
+  The date until when public submissions can be made about this application. Should be in
+  = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
+  format.
 %p
   To ensure the date_scraped field isn't overwritten on subsequent scrapes add code similar to this to
   save your planning application to the ScraperWiki datastore:
