@@ -49,37 +49,44 @@ class Authority < ActiveRecord::Base
 
   # Get all the scraper data for this authority and date in an array of attributes that can be used
   # creating applications
-  def scraper_data(date, info_logger = logger)
-    url = scraperwiki? ? scraperwiki_feed_url_for_date(date) : feed_url_for_date(date)
-
-    text = begin
-      open(url).read
-    rescue Exception => e
-      info_logger.error "Error #{e} while getting data from url #{url}. So, skipping"
-      nil
-    end
-
-    if text
-      scraperwiki? ? Application.translate_scraperwiki_feed_data(text) : Application.translate_feed_data(text)
-    else
-      []
-    end
-  end
-
   def scraper_data_original_style(start_date, end_date, info_logger)
     feed_data = []
     # Go through the dates in reverse chronological order
     (start_date..end_date).to_a.reverse.each do |date|
-      feed_data += scraper_data(date, info_logger)
+      url = feed_url_for_date(date)
+
+      text = begin
+        open(url).read
+      rescue Exception => e
+        info_logger.error "Error #{e} while getting data from url #{url}. So, skipping"
+        nil
+      end
+
+      if text
+        feed_data += Application.translate_feed_data(text)
+      end
     end
     feed_data
   end
 
+  # Get all the scraper data for this authority and date in an array of attributes that can be used
+  # creating applications
   def scraper_data_scraperwiki_style(start_date, end_date, info_logger)
     feed_data = []
     # Go through the dates in reverse chronological order
     (start_date..end_date).to_a.reverse.each do |date|
-      feed_data += scraper_data(date, info_logger)
+      url = scraperwiki_feed_url_for_date(date)
+
+      text = begin
+        open(url).read
+      rescue Exception => e
+        info_logger.error "Error #{e} while getting data from url #{url}. So, skipping"
+        nil
+      end
+
+      if text
+        feed_data += Application.translate_scraperwiki_feed_data(text)
+      end
     end
     feed_data    
   end
