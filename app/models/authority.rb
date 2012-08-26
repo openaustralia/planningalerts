@@ -82,18 +82,12 @@ class Authority < ActiveRecord::Base
     end
   end
 
-  def scraper_data_date_range(start_date, end_date, info_logger)
-    if scraperwiki?
-      scraper_data_scraperwiki_style(start_date, end_date, info_logger)
-    else
-      scraper_data_original_style(start_date, end_date, info_logger)
-    end
-  end
-
   # Collect all the applications for this authority by scraping
   def collect_applications_date_range(start_date, end_date, info_logger = logger)
     count = 0
-    scraper_data_date_range(start_date, end_date, info_logger).each do |attributes|
+    d = scraperwiki? ? scraper_data_scraperwiki_style(start_date, end_date, info_logger) :
+      scraper_data_original_style(start_date, end_date, info_logger)
+    d.each do |attributes|
       # TODO Consider if it would be better to overwrite applications with new data if they already exists
       # This would allow for the possibility that the application information was incorrectly entered at source
       # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
