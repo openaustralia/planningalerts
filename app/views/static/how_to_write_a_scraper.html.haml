@@ -22,13 +22,22 @@
   = link_to "crowd-sourced list of councils", "https://docs.google.com/spreadsheet/ccc?key=0AmvYMal8CGUsdG1tM0lEWUctR194eGN6bUh0VGFfc1E"
   and have a look at their published DAs. Quickly double-check that the council isn't #{link_to "covered already", authorities_path}.
 
-%h4 Now it's time to scrape
+%h4 An introduction to scraping with ScraperWiki
+%p
+  Even if you've never done any scraping, you'll quickly get up and running with some straightforward tutorials available on the Scraperwiki site.
 %p
   With ScraperWiki, you can choose to write your scraper in Ruby, Python or PHP so there's a good chance
   you're already familiar an available programming language.
 %p
-  Once you've decided on a language, create your own ScraperWiki account and create a new scraper that
-  downloads and saves the following information:
+  Read tutorials on scraping with ScraperWiki for #{link_to "Ruby", "https://scraperwiki.com/docs/ruby/"},
+  #{link_to "Python", "https://scraperwiki.com/docs/python/"} or #{link_to "PHP", "https://scraperwiki.com/docs/php/"}.
+
+%h4 Now it's time to scrape
+%p
+  = link_to "Create your own ScraperWiki account", "https://scraperwiki.com/login/#signup"
+  and
+  = link_to "create a new scraper", "https://scraperwiki.com"
+  that downloads and saves the following information:
 
 %h5 council_reference (Required)
 %p
