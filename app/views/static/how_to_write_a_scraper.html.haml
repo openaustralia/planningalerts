@@ -1,18 +1,108 @@
 - content_for :page_title, "How to write a scraper"
 %h3= yield :page_title
+
+%h4 What are scrapers?
 %p
-  There are only 2 criteria for the
-  screen scraper:
-%ol
-  %li
-    That it can output data in the following format: <a href="/brisbane.xml">brisbane.xml</a>
-  %li
-    That it can accept a query string in the format day=X&amp;month=Y&amp;year=Z
+  To be able to display and send alerts for development applications (DAs), PlanningAlerts needs to download DAs from as many councils as possible. As the vast majority of councils don't supply DA data in a reusable,
+  machine-readable format we need to write
+  = link_to "web scrapers", "https://secure.wikimedia.org/wikipedia/en/wiki/Web_scraping"
+  for each local government authority.
 %p
-  Other than that it's up to you. It can be in any language. You can host them yourself or we can host it for you.
+  These scrapers fetch the data from council web pages and present it in a structured format so we can load it into
+  the PlanningAlerts database.
+
+%h4 How can I help?
 %p
-  %span.highlight
-    Please go ahead and grab the code for <a href="http://github.com/openaustralia/planningalerts-app">this site</a>,
-    <a href="http://github.com/openaustralia/planningalerts-parsers">the scrapers</a>,
-    <a href="http://tickets.planningalerts.org.au/">view some development tickets</a>
-    and join the <a href="http://groups.google.com/group/openaustralia-dev">OpenAustralia Community mailing list</a>.
+  If you have some computer programming experience, you should be able to work out how to prepare a scraper for
+  PlanningAlerts. By using our preferred scraping technology,
+  #{link_to "ScraperWiki", "https://scraperwiki.com/"}, you can write a scraper using nothing but your web browser.
+%p
+  The next thing to do is to decide what council to scrape. There's a list of broken scrapers you could fix
+  and a list of the most sought after scrapers on PlanningAlerts. Once you&rsquo;ve picked one, look it up on
+  our crowd-sourced list of councils and have a look at their published DAs.
+
+%h4 Now it's time to scrape
+%p
+  With ScraperWiki, you can choose to write your scraper in Ruby, Python or PHP so there's a good chance
+  you're already familiar an available programming language.
+%p
+  Once you've decided on a language, create your own ScraperWiki account and create a new scraper that
+  downloads and saves the following information:
+
+%h5 council_reference (Required)
+%p
+  The ID that the council has given the development application. This also must be the unique key for this data
+  set.
+
+%h5 address (Required)
+%p
+  The physical address that this application relates to. This will be geocoded so doesn't need to be a specific format but obviously the more explicit it is the more likely it will be successfully geo-coded.
+
+%h5 description (Required)
+%p
+  A text description of what the development application seeks to carry out.
+
+%h5 info_url (Required)
+%p
+  A URL that provides more information about the development application.
+%p
+  This should be a persistent URL that preferably is specific to this particular DA. In many cases councils force
+  users to click through a license to access DAs, in this case be careful about what URL you provide. Test clicking the link in a browser that hasn't established a session with the council's site to ensure users of PlanningAlerts will be able to click the link and not be presented with an error.
+
+%h5 comment_url (Required)
+%p
+  A URL where users can provide a response to council about this particular DA.
+%p
+  As in info_url this needs to be a persistent URL and should be specific to this particular DA if possible.
+  Email mailto links are also valid in this field.
+
+%h5 date_scraped (Required)
+%p
+  Use the following Ruby code:
+  %code Date.today.to_s
+%p
+  (make sure you add
+  %code require "date"
+  at the top)
+
+%h5 date_received (Optional)
+%p
+  The date this application was received by council.
+
+%h5 on_notice_from (Optional)
+%p
+  The date from when public submissions can be made about this development application.
+
+%h5 on_notice_to (Optional)
+%p
+  The date until when public submissions can be made about this development application.
+
+%p
+  To ensure the date_scraped field isn't overwritten on subsequent scrapes add code similar to this to
+  save your DAs to the ScraperWiki datastore:
+
+%pre
+  :preserve
+    if (ScraperWiki.select("* from swdata where
+    `council_reference`='\#{record['council_reference']}'").empty? rescue true)
+      ScraperWiki.save_sqlite(['council_reference'], record)
+    else
+      puts "Skipping already saved record " + record['council_reference']
+    end
+
+%p
+  If you get stuck, have a look at
+  = link_to "the scrapers already written for PlanningAlerts", "https://scraperwiki.com/tags/planningalerts"
+  and email
+  = link_to "community mailing list", "http://groups.google.com/group/openaustralia-dev"
+  if you have any questions.
+
+%h4 Finishing up
+%p
+  Once you've finished your scraper and it's successfully downloading development applications, simply
+  email the OpenAustralia Community mailing list or
+  = mail_to "contact@planningalerts.org.au", "contact@planningalerts.org.au"
+  and we'll add it to the next run.
+%p
+  The last thing to do is look up on Wikipedia how many people live in the LGA you've just covered so you can
+  pat yourself on the back knowing that you've just helped tens of thousands of people get PlanningAlerts.
