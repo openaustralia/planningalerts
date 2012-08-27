@@ -17,38 +17,19 @@
   <a href="http://www.openaustraliafoundation.org.au/donate/">donation</a> or
   #{link_to "volunteering", get_involved_path} to help us fix it.
 %p
-  Order by 
-  = link_to_unless @sort == "name", "name", :sort => nil
-  |
-  = link_to_unless @sort == "population", "population", :sort => "population"
-- if @sort == "name"
-  %p
-    - @authorities.each_with_index do |a, i|
-      = "|" unless i == 0
-      = link_to a.first, :anchor => a.first.downcase
-  - @authorities.each do |state, authorities|
-    %h4{:id => state.downcase}= state
-    %ul.authorities
-      - authorities.each do |authority|
-        %li
-          = link_to authority.full_name, authority_url(authority.short_name_encoded)
-          - if authority.broken?
-            %span.highlight
-              - if authority.scraperwiki_url
-                = link_to "possibly broken", authority.scraperwiki_url
-              - else
-                possibly broken
-- else
+  - @authorities.each_with_index do |a, i|
+    = "|" unless i == 0
+    = link_to a.first, :anchor => a.first.downcase
+- @authorities.each do |state, authorities|
+  %h4{:id => state.downcase}= state
   %ul.authorities
-    - @authorities.each do |authority|
+    - authorities.each do |authority|
       %li
         = link_to authority.full_name, authority_url(authority.short_name_encoded)
-        = authority.state
         - if authority.broken?
           %span.highlight
             - if authority.scraperwiki_url
               = link_to "possibly broken", authority.scraperwiki_url
             - else
-              possibly broken      
-    end
+              possibly broken
 
