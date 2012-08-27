@@ -39,6 +39,7 @@ PlanningalertsApp::Application.routes.draw do
     resources :reports, :only => [:new, :create]
   end
 
+  get 'authorities(/:sort)' => 'authorities#index', :as => :authorities
   resources :authorities, :only => [:index, :show] do
     resources :applications, :only => [:index] do
       collection do
