@@ -32,7 +32,7 @@ class Application < ActiveRecord::Base
       time = Benchmark.ms do
         auth.collect_applications_date_range(start_date, end_date, info_logger)
       end
-      puts "Took #{(time / 1000).to_i} s to collect applications from #{auth.full_name_and_state}"
+      info_logger.info "Took #{(time / 1000).to_i} s to collect applications from #{auth.full_name_and_state}"
     end
   end
 
