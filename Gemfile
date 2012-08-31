@@ -32,6 +32,7 @@ gem 'rvm-capistrano'
 gem 'vanity'
 gem 'rabl'
 gem "susy"
+gem 'newrelic_rpm'
 
 group :test do
   gem 'cucumber-rails', :require => false
