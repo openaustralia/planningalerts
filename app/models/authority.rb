@@ -48,7 +48,7 @@ class Authority < ActiveRecord::Base
   end
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
-  def open_url_safe(url)
+  def open_url_safe(url, info_logger)
     begin
       open(url).read
     rescue Exception => e
@@ -63,7 +63,7 @@ class Authority < ActiveRecord::Base
     feed_data = []
     # Go through the dates in reverse chronological order
     (start_date..end_date).to_a.reverse.each do |date|
-      text = open_url_safe(feed_url_for_date(date))
+      text = open_url_safe(feed_url_for_date(date), info_logger)
       if text
         feed_data += Application.translate_feed_data(text)
       end
@@ -74,7 +74,7 @@ class Authority < ActiveRecord::Base
   # Get all the scraper data for this authority and date in an array of attributes that can be used
   # creating applications
   def scraper_data_scraperwiki_style(start_date, end_date, info_logger)
-    text = open_url_safe(scraperwiki_feed_url_for_date_range(start_date, end_date))
+    text = open_url_safe(scraperwiki_feed_url_for_date_range(start_date, end_date), info_logger)
     if text
       Application.translate_scraperwiki_feed_data(text)
     else
