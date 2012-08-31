@@ -228,12 +228,14 @@ describe Application do
     end
 
     it "should collect all the applications from all the authorities over the last n days" do
-      auth2 = Authority.create!(:full_name => "Wombat City Council", :short_name => "Wombat")
+      auth2 = Authority.create!(:full_name => "Wombat City Council", :short_name => "Wombat", :state => "NSW")
       Date.stub!(:today).and_return(Date.new(2010, 1, 10))
       # Overwriting a constant here. Normally generates a warning. Silence it!
       Kernel::silence_warnings { ::Configuration::SCRAPE_DELAY = 1 }
       logger = mock
       logger.should_receive(:info).with("Scraping 2 authorities with date from 2010-01-09 to 2010-01-10")
+      logger.should_receive(:info).with("Took 0 s to collect applications from Fiddlesticks, NSW")
+      logger.should_receive(:info).with("Took 0 s to collect applications from Wombat City Council, NSW")
       @auth.should_receive(:collect_applications_date_range).with(Date.today - 1, Date.today, logger)
       auth2.should_receive(:collect_applications_date_range).with(Date.today - 1, Date.today, logger)
 
