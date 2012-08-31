@@ -93,7 +93,11 @@ class Authority < ActiveRecord::Base
       # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
       unless applications.find_by_council_reference(attributes[:council_reference])
         count += 1
-        applications.create!(attributes)
+        begin
+          applications.create!(attributes)
+        rescue Exception => e
+          info_logger.error "Error #{e} while trying to save application #{attributes.inspect}. So, skipping"
+        end
       end
     end
 
