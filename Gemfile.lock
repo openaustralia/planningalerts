@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/mlandauer/geocoder.git
+  revision: 4cec016ee391c484e7ae41d7c0f9196990261b27
+  branch: bounding_box
+  specs:
+    geocoder (1.1.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -107,7 +114,6 @@ GEM
     formtastic (2.1.1)
       actionpack (~> 3.0)
     fssm (0.2.9)
-    geocoder (1.1.2)
     geokit (1.6.5)
       multi_json
     gherkin (2.11.2)
@@ -278,7 +284,7 @@ DEPENDENCIES
   fancy-buttons
   foreigner
   formtastic (~> 2.1.1)
-  geocoder
+  geocoder!
   geokit
   guard
   guard-livereload
