@@ -50,22 +50,22 @@ ActiveRecord::Schema.define(:version => 20120901030029) do
   end
 
   create_table "applications", :force => true do |t|
+    t.string    "council_reference", :limit => 50,   :null => false
+    t.text      "address",                           :null => false
+    t.text      "description"
+    t.string    "info_url",          :limit => 1024
+    t.string    "comment_url",       :limit => 1024
+    t.integer   "authority_id",                      :null => false
+    t.float     "lat"
+    t.float     "lng"
     t.timestamp "date_scraped",                      :null => false
-    t.string   "council_reference", :limit => 50,   :null => false
-    t.text     "address",                           :null => false
-    t.text     "description"
-    t.string   "info_url",          :limit => 1024
-    t.string   "comment_url",       :limit => 1024
-    t.integer  "authority_id",                      :null => false
-    t.float    "lat"
-    t.float    "lng"
-    t.date     "date_received"
-    t.string   "suburb",            :limit => 50
-    t.string   "state",             :limit => 10
-    t.string   "postcode",          :limit => 4
-    t.date     "on_notice_from"
-    t.date     "on_notice_to"
-    t.integer  "no_alerted"
+    t.date      "date_received"
+    t.string    "suburb",            :limit => 50
+    t.string    "state",             :limit => 10
+    t.string    "postcode",          :limit => 4
+    t.date      "on_notice_from"
+    t.date      "on_notice_to"
+    t.integer   "no_alerted"
   end
 
   add_index "applications", ["authority_id"], :name => "authority_id"
@@ -76,11 +76,11 @@ ActiveRecord::Schema.define(:version => 20120901030029) do
   add_index "applications", ["suburb"], :name => "index_applications_on_suburb"
 
   create_table "authorities", :force => true do |t|
-    t.string  "full_name",  :limit => 200, :null => false
-    t.string  "short_name", :limit => 100, :null => false
+    t.string  "full_name",        :limit => 200, :null => false
+    t.string  "short_name",       :limit => 100, :null => false
     t.string  "feed_url"
     t.boolean "disabled"
-    t.string  "state",      :limit => 20
+    t.string  "state",            :limit => 20
     t.string  "email"
     t.string  "scraperwiki_name"
     t.integer "population_2011"
