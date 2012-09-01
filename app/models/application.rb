@@ -136,6 +136,17 @@ class Application < ActiveRecord::Base
     end
   end
 
+  # Equivalent to find_all_nearest_or_recent.count
+  # but less stupidly slow
+  def find_all_nearest_or_recent_count(max_distance = 2, max_age = 2 * 4 * 7 * 24 * 60 * 60)
+    if location
+      # Don't include the current application in the count
+      Application.near([location.lat, location.lng], max_distance, :units => :km).where(['date_scraped > ?', max_age.seconds.ago]).count - 1
+    else
+      0
+    end
+  end
+
   private
   
   # TODO: Optimisation is to make sure that this doesn't get called again on save when the address hasn't changed
