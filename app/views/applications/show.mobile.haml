@@ -8,11 +8,11 @@
   - if @application.on_notice_to
     %p= on_notice_text(@application)
   %p (Source: #{@application.authority.full_name}, reference #{@application.council_reference})
-- unless @application.find_all_nearest_or_recent.empty?
+- unless @nearby_count == 0
   %p.info#nearby-applications
-    - if @application.find_all_nearest_or_recent.count == 1
+    - if @nearby_count == 1
       There is
       = link_to "1 other nearby and recent application", nearby_application_url(@application)
     - else
       There are
-      = link_to "#{@application.find_all_nearest_or_recent.count} other nearby and recent applications", nearby_application_url(@application)
+      = link_to "#{@nearby_count} other nearby and recent applications", nearby_application_url(@application)
