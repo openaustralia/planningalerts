@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120901000314) do
+ActiveRecord::Schema.define(:version => 20120901030029) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -71,8 +71,6 @@ ActiveRecord::Schema.define(:version => 20120901000314) do
   add_index "applications", ["authority_id"], :name => "authority_id"
   add_index "applications", ["date_scraped"], :name => "index_applications_on_date_scraped"
   add_index "applications", ["lat", "lng"], :name => "index_applications_on_lat_and_lng"
-  add_index "applications", ["lat"], :name => "index_applications_on_lat"
-  add_index "applications", ["lng"], :name => "index_applications_on_lng"
   add_index "applications", ["postcode"], :name => "index_applications_on_postcode"
   add_index "applications", ["state"], :name => "index_applications_on_state"
   add_index "applications", ["suburb"], :name => "index_applications_on_suburb"
