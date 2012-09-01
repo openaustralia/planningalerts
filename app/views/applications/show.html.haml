@@ -45,7 +45,7 @@
         = link_to "1 other nearby and recent application", nearby_application_url(@application)
       - else
         There are
-        = link_to "#{@application.find_all_nearest_or_recent.count} other nearby and recent applications", nearby_application_url(@application)
+        = link_to "#{@application.find_all_nearest_or_recent_count} other nearby and recent applications", nearby_application_url(@application)
 
   - if @application.authority.contactable?
     - unless @application.comments.visible.empty?
