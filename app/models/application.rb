@@ -119,10 +119,6 @@ class Application < ActiveRecord::Base
     end
   end
 
-  def find_all_nearest_or_recent_count(max_distance = 2, max_age = 2 * 4 * 7 * 24 * 60 * 60)
-    find_all_nearest_or_recent(max_distance, max_age).count
-  end
-
   private
   
   # TODO: Optimisation is to make sure that this doesn't get called again on save when the address hasn't changed
