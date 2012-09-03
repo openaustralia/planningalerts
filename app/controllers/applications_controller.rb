@@ -180,11 +180,9 @@ class ApplicationsController < ApplicationController
       per_page = Application.per_page
     end
 
-    months = 2
-    km = 2
     application = Application.find(params[:id])
-    @description = "Other applications in the last #{months} months within #{km} km of #{application.address}" 
-    @applications = application.find_all_nearest_or_recent(km, months * 4 * 7 * 24 * 60 * 60).paginate :page => params[:page], :per_page => per_page
+    @description = "Other applications in the last #{application.nearby_and_recent_max_age_months} months within #{application.nearby_and_recent_max_distance_km} km of #{application.address}" 
+    @applications = application.find_all_nearest_or_recent.paginate :page => params[:page], :per_page => per_page
     respond_to do |format|
       format.html { render "index" }
       format.mobile { render "index.mobile", :layout => "application.mobile" }

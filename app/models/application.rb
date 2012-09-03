@@ -110,10 +110,20 @@ class Application < ActiveRecord::Base
     (distance.to_f ** 2 + scaled_value ** 2)
   end
   
+  # Default values for what we consider nearby and recent
+  def nearby_and_recent_max_distance_km
+    2
+  end
+
+  # Default values for what we consider nearby and recent
+  def nearby_and_recent_max_age_months
+    2
+  end
+
   # Find applications that are near the current application location and/or recently scraped
-  def find_all_nearest_or_recent(max_distance = 2, max_age = 2 * 4 * 7 * 24 * 60 * 60)
+  def find_all_nearest_or_recent
     if location
-      nearbys(max_distance, :units => :km).where('date_scraped > ?', max_age.seconds.ago)
+      nearbys(nearby_and_recent_max_distance_km, :units => :km).where('date_scraped > ?', nearby_and_recent_max_age_months.months.ago)
     else
       []
     end
