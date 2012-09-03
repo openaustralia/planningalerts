@@ -1,0 +1,14 @@
+- content_for :page_title, @description
+%h3= @description
+%p
+  = link_to_unless @sort == "time", "Most recent first", :sort => "time", :page => nil
+  |
+  = link_to_unless @sort == "distance", "Closest first", :sort => "distance", :page => nil
+
+- if @sort == "time"
+  - p, n = "Newer", "Older"
+- else
+  - p, n = "Closer", "Further"
+
+= paginated_section @applications, :previous_label => "« " + p, :next_label => n + " »" do
+  %dl= render :partial => "application", :collection => @applications

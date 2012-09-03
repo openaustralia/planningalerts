@@ -169,6 +169,7 @@ class ApplicationsController < ApplicationController
   end
   
   def nearby
+    @sort = params[:sort]
     @rss = nearby_application_url(params.merge(:format => "rss", :page => nil))
     
     # TODO: Fix this hacky ugliness
@@ -182,10 +183,21 @@ class ApplicationsController < ApplicationController
 
     application = Application.find(params[:id])
     @description = "Other applications in the last #{application.nearby_and_recent_max_age_months} months within #{application.nearby_and_recent_max_distance_km} km of #{application.address}" 
-    @applications = application.find_all_nearest_or_recent.paginate :page => params[:page], :per_page => per_page
+    case(@sort)
+    when "time"
+      @applications = application.find_all_nearest_or_recent.paginate :page => params[:page], :per_page => per_page
+    when "distance"
+      @applications = Application.unscoped do
+        application.find_all_nearest_or_recent.paginate :page => params[:page], :per_page => per_page
+      end
+    else
+      redirect_to :sort => "time"
+      return
+    end
+
     respond_to do |format|
-      format.html { render "index" }
-      format.mobile { render "index.mobile", :layout => "application.mobile" }
+      format.html { render "nearby" }
+      format.mobile { render "nearby.mobile", :layout => "application.mobile" }
       format.rss { render "index.rss", :layout => false, :content_type => Mime::XML }
     end
   end
