@@ -25,10 +25,10 @@ describe ApplicationsController do
   describe "index" do
     it "should find recent applications" do
       result = mock
-      Application.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
+      Application.stub_chain(:where, :paginate).and_return(result)
       get :index, :format => "rss"
       assigns[:applications].should == result
-      assigns[:description].should == "Recent applications"
+      assigns[:description].should == "Recent applications within the last 2 months"
     end
   end
   

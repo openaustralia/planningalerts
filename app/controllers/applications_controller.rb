@@ -79,7 +79,8 @@ class ApplicationsController < ApplicationController
       @description << " in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
       @applications = Application.where('lat > ? AND lng > ? AND lat < ? AND lng < ?', lat0, lng0, lat1, lng1).paginate(:page => params[:page], :per_page => per_page)
     else
-      @applications = Application.paginate :page => params[:page], :per_page => per_page
+      @description << " within the last #{Application.nearby_and_recent_max_age_months} months"
+      @applications = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago).paginate :page => params[:page], :per_page => per_page
     end
     respond_to do |format|
       format.html
