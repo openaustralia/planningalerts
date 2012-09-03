@@ -110,41 +110,17 @@ class Application < ActiveRecord::Base
     (distance.to_f ** 2 + scaled_value ** 2)
   end
   
-  # Find applications that are near the current application location and/or recently scraped. We use
-  # a 4d distance metric to sort the applications. The weighting of spatial distance and time is done
-  # with the "max_distance" (in kilometres) and the "max_age" (in seconds) parameters.
-  # "max_distance" and "max_age" also specify an upper bound on the values that are returned.
-  # For instance we might consider an application that just now been lodged that's 2 km away to be
-  # just as important as an application that was lodged next door 2 months ago. In this case,
-  # suitable values for "max_distance" would be 2 and "max_age" would be 2 * 4 * 7 * 24 * 60 * 60.
-  # "limit" is the maximum number of applications to return
+  # Find applications that are near the current application location and/or recently scraped
   def find_all_nearest_or_recent(max_distance = 2, max_age = 2 * 4 * 7 * 24 * 60 * 60)
     if location
-      # TODO: Do the sort with SQL so that we can limit the data transferred
-      apps = Application.near([location.lat, location.lng], max_distance, :units => :km).find(:all, :conditions => ['date_scraped > ?', max_age.seconds.ago])
-
-      now = Time.now
-      ratio = max_distance / max_age
-      apps = apps.sort do |a,b|
-        a.fourd_distance_squared((now - a.date_scraped) * ratio) <=> b.fourd_distance_squared((now - b.date_scraped) * ratio)
-      end
-      # Don't include the current application
-      apps.delete(self)
-      apps
+      nearbys(max_distance, :units => :km).where('date_scraped > ?', max_age.seconds.ago)
     else
       []
     end
   end
 
-  # Equivalent to find_all_nearest_or_recent.count
-  # but less stupidly slow
   def find_all_nearest_or_recent_count(max_distance = 2, max_age = 2 * 4 * 7 * 24 * 60 * 60)
-    if location
-      # Don't include the current application in the count
-      Application.near([location.lat, location.lng], max_distance, :units => :km).where(['date_scraped > ?', max_age.seconds.ago]).count - 1
-    else
-      0
-    end
+    find_all_nearest_or_recent(max_distance, max_age).count
   end
 
   private
