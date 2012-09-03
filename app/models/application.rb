@@ -112,11 +112,19 @@ class Application < ActiveRecord::Base
   
   # Default values for what we consider nearby and recent
   def nearby_and_recent_max_distance_km
-    2
+    Application.nearby_and_recent_max_distance_km
   end
 
   # Default values for what we consider nearby and recent
   def nearby_and_recent_max_age_months
+    Application.nearby_and_recent_max_age_months
+  end
+
+  def self.nearby_and_recent_max_distance_km
+    2
+  end
+
+  def self.nearby_and_recent_max_age_months
     2
   end
 
