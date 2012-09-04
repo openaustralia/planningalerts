@@ -230,4 +230,23 @@ describe Alert do
       b.lga_name.should == "Blue Mountains"
     end
   end
+
+  describe "comments" do
+    it "should see a new comment when there is a new comments on an application" do
+      alert = Alert.create!(:email => "matthew@openaustralia.org", :address => @address, :radius_meters => 2000)
+      p1 = alert.location.endpoint(0, 501) # 501 m north of alert
+      application = Factory.create(:application, :lat => p1.lat, :lng => p1.lng, :suburb => "", :state => "", :postcode => "")
+      comment1 = application.comments.create!(:text => "This is a comment", :name => "Matthew", :email => "matthew@openaustralia.org", :address => "Foo street", :confirmed => true)
+      alert.new_comments.should == [comment1]
+    end
+
+    it "should only see two new comments when there are two new comments on a single application" do
+      alert = Alert.create!(:email => "matthew@openaustralia.org", :address => @address, :radius_meters => 2000)
+      p1 = alert.location.endpoint(0, 501) # 501 m north of alert
+      application = Factory.create(:application, :lat => p1.lat, :lng => p1.lng, :suburb => "", :state => "", :postcode => "")
+      comment1 = application.comments.create!(:text => "This is a comment", :name => "Matthew", :email => "matthew@openaustralia.org", :address => "Foo street", :confirmed => true)
+      comment2 = application.comments.create!(:text => "This is a comment", :name => "Matthew", :email => "matthew@openaustralia.org", :address => "Foo street", :confirmed => true)
+      alert.new_comments.should == [comment1, comment2]
+    end
+  end
 end
