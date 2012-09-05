@@ -45,21 +45,18 @@ class ApplicationsController < ApplicationController
       @authority = Authority.find_by_short_name_encoded(params[:authority_id])
       # In production environment raising RecordNotFound will produce an error code 404
       raise ActiveRecord::RecordNotFound if @authority.nil?
-      @applications = @authority.applications.paginate :page => params[:page], :per_page => per_page
+      apps = @authority.applications
       @description << " from #{@authority.full_name_and_state}"
     elsif params[:postcode]
       # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
-      @applications = Application.paginate :conditions => {:postcode => params[:postcode]},
-        :page => params[:page], :per_page => per_page
+      apps = Application.where(:postcode => params[:postcode])
       @description << " in postcode #{params[:postcode]}"
     elsif params[:suburb]
       if params[:state]
-        @applications = Application.paginate :conditions => {:suburb => params[:suburb], :state => params[:state]},
-          :page => params[:page], :per_page => per_page
+        apps = Application.where(:suburb => params[:suburb], :state => params[:state])
         @description << " in #{params[:suburb]}, #{params[:state]}"
       else
-        @applications = Application.paginate :conditions => {:suburb => params[:suburb]},
-          :page => params[:page], :per_page => per_page
+        apps = Application.where(:suburb => params[:suburb])
         @description << " in #{params[:suburb]}"
       end
     elsif params[:address] || (params[:lat] && params[:lng])
@@ -72,16 +69,19 @@ class ApplicationsController < ApplicationController
         location_text = location.to_s
       end
       @description << " within #{help.meters_in_words(radius.to_i)} of #{location_text}"
-      @applications = Application.near([location.lat, location.lng], radius.to_f / 1000, :units => :km).paginate(:page => params[:page], :per_page => per_page)
+      apps = Application.near([location.lat, location.lng], radius.to_f / 1000, :units => :km)
     elsif params[:bottom_left_lat] && params[:bottom_left_lng] && params[:top_right_lat] && params[:top_right_lng]
       lat0, lng0 = params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f
       lat1, lng1 = params[:top_right_lat].to_f, params[:top_right_lng].to_f
       @description << " in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
-      @applications = Application.where('lat > ? AND lng > ? AND lat < ? AND lng < ?', lat0, lng0, lat1, lng1).paginate(:page => params[:page], :per_page => per_page)
+      apps = Application.where('lat > ? AND lng > ? AND lat < ? AND lng < ?', lat0, lng0, lat1, lng1)
     else
       @description << " within the last #{Application.nearby_and_recent_max_age_months} months"
-      @applications = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago).paginate :page => params[:page], :per_page => per_page
+      apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
     end
+
+    @applications = apps.paginate(:page => params[:page], :per_page => per_page)
+
     respond_to do |format|
       format.html
       format.mobile { render "index.mobile", :layout => "application.mobile" }

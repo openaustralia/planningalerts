@@ -146,9 +146,9 @@ describe ApplicationsController do
   
   describe "search by postcode" do
     it "should find recent applications for a postcode" do
-      result = mock
-
-      Application.should_receive(:paginate).with(:conditions => {:postcode => "2780"}, :page => nil, :per_page => 100).and_return(result)
+      result, scope = mock, mock
+      Application.should_receive(:where).with(:postcode => "2780").and_return(scope)
+      scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
       get :index, :format => "rss", :postcode => "2780"
       assigns[:applications].should == result
       assigns[:description].should == "Recent applications in postcode 2780"
@@ -157,8 +157,9 @@ describe ApplicationsController do
   
   describe "search by suburb" do
     it "should find recent applications for a suburb" do
-      result = mock
-      Application.should_receive(:paginate).with(:conditions => {:suburb => "Katoomba"}, :page => nil, :per_page => 100).and_return(result)
+      result, scope = mock, mock
+      Application.should_receive(:where).with(:suburb => "Katoomba").and_return(scope)
+      scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
       get :index, :format => "rss", :suburb => "Katoomba"
       assigns[:applications].should == result
       assigns[:description].should == "Recent applications in Katoomba"
@@ -167,8 +168,9 @@ describe ApplicationsController do
   
   describe "search by suburb and state" do
     it "should find recent applications for a suburb and state" do
-      result = mock
-      Application.should_receive(:paginate).with(:conditions => {:suburb => "Katoomba", :state => "NSW"}, :page => nil, :per_page => 100).and_return(result)
+      result, scope = mock, mock
+      Application.should_receive(:where).with(:suburb => "Katoomba", :state => "NSW").and_return(scope)
+      scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
       get :index, :format => "rss", :suburb => "Katoomba", :state => "NSW"
       assigns[:applications].should == result
       assigns[:description].should == "Recent applications in Katoomba, NSW"
