@@ -1,6 +1,6 @@
 PlanningalertsApp::Application.routes.draw do
   # Redirect everything from api. to www.
-  constraints :subdomain => "api", :format => "html" do
+  scope :format => true, :constraints => {:subdomain => "api", :format => "html"} do
     match "(*path)" => redirect {|p,r| "http://www.#{r.domain(2)}/#{p[:path]}"}
   end
 
