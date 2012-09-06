@@ -1,9 +1,4 @@
 PlanningalertsApp::Application.routes.draw do
-  # Redirect everything from api. to www.
-  scope :format => true, :constraints => {:subdomain => "api", :format => "html"} do
-    match "(*path)" => redirect {|p,r| "http://www.#{r.domain(2)}/#{p[:path]}"}
-  end
-
   ActiveAdmin.routes(self)
 
   devise_for :users, ActiveAdmin::Devise.config
