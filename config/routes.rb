@@ -25,7 +25,18 @@ PlanningalertsApp::Application.routes.draw do
     end
   end
 
-  resources :applications, :only => [:index, :show] do
+  # API routes
+  resources :applications, :only => :index
+  resources :authorities, :only => [] do
+    resources :applications, :only => :index do
+      collection do
+        get :per_day
+        get :per_week
+      end
+    end
+  end
+
+  resources :applications, :only => :show do
     member do
       get :nearby
     end
@@ -39,14 +50,7 @@ PlanningalertsApp::Application.routes.draw do
     resources :reports, :only => [:new, :create]
   end
 
-  resources :authorities, :only => [:index, :show] do
-    resources :applications, :only => [:index] do
-      collection do
-        get :per_day
-        get :per_week
-      end
-    end
-  end
+  resources :authorities, :only => [:index, :show]
 
   match 'api/howto' => 'api#howto', :as => :api_howto
   match 'api' => 'api#index', :as => :api
