@@ -1,4 +1,8 @@
 PlanningalertsApp::Application.routes.draw do
+  constraints :subdomain => "api" do
+    match "/" => redirect("http://www.planningalerts.org.au")
+  end
+
   ActiveAdmin.routes(self)
 
   devise_for :users, ActiveAdmin::Devise.config
