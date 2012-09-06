@@ -1,6 +1,6 @@
 PlanningalertsApp::Application.routes.draw do
   constraints :subdomain => "api" do
-    match "/" => redirect("http://www.planningalerts.org.au")
+    match "(*path)" => redirect{|r,p| "http://www.planningalerts.org.au/#{p[:path]}"}
   end
 
   ActiveAdmin.routes(self)
