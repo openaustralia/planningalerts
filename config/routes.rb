@@ -1,20 +1,4 @@
 PlanningalertsApp::Application.routes.draw do
-  # API routes
-  resources :applications, :only => :index
-  resources :authorities, :only => [] do
-    resources :applications, :only => :index do
-      collection do
-        get :per_day
-        get :per_week
-      end
-    end
-  end
-
-  # Everything after here will get redirected if accessed on the api subdomain
-  constraints :subdomain => "api" do
-    match "(*path)" => redirect {|p,r| "http://www.#{r.domain(2)}/#{p[:path]}"}
-  end
-
   ActiveAdmin.routes(self)
 
   devise_for :users, ActiveAdmin::Devise.config
@@ -41,7 +25,7 @@ PlanningalertsApp::Application.routes.draw do
     end
   end
 
-  resources :applications, :only => :show do
+  resources :applications, :only => [:index, :show] do
     member do
       get :nearby
     end
@@ -55,7 +39,14 @@ PlanningalertsApp::Application.routes.draw do
     resources :reports, :only => [:new, :create]
   end
 
-  resources :authorities, :only => [:index, :show]
+  resources :authorities, :only => [:index, :show] do
+    resources :applications, :only => [:index] do
+      collection do
+        get :per_day
+        get :per_week
+      end
+    end
+  end
 
   match 'api/howto' => 'api#howto', :as => :api_howto
   match 'api' => 'api#index', :as => :api
