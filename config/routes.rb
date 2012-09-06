@@ -1,4 +1,15 @@
 PlanningalertsApp::Application.routes.draw do
+  # Surround blocks that should only be available on the www subdomain with this
+  def web
+    if Rails.env.development?
+      yield
+    else
+      constraints :subdomain => "www" do
+        yield
+      end
+    end
+  end
+  
   ActiveAdmin.routes(self)
 
   devise_for :users, ActiveAdmin::Devise.config
@@ -52,7 +63,9 @@ PlanningalertsApp::Application.routes.draw do
   match 'api' => 'api#index', :as => :api
 
   match 'about' => 'static#about', :as => :about
-  match 'faq' => 'static#faq', :as => :faq
+  web do
+    match 'faq' => 'static#faq', :as => :faq
+  end
   match 'getinvolved' => 'static#get_involved', :as => :get_involved
   match 'how_to_write_a_scraper' => 'static#how_to_write_a_scraper'
   match 'how_to_lobby_your_local_council' => 'static#how_to_lobby_your_local_council'
