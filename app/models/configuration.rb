@@ -12,7 +12,7 @@ module Configuration
 
   # Email setup
   EMAIL_FROM_ADDRESS = 'contact@planningalerts.org.au'
-  EMAIL_FROM_NAME = 'PlanningAlerts.org.au'
+  EMAIL_FROM_NAME = 'PlanningAlerts'
   # Email that bounced emails go to (sets Return-Path header in outgoing email)
   BOUNCE_EMAIL_ADDRESS = EMAIL_FROM_ADDRESS
   # The email that abuse reports are sent to

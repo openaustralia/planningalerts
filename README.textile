@@ -1,4 +1,4 @@
-PlanningAlerts.org.au - a free service which searches as many planning authority websites as it can find and emails
+PlanningAlerts - a free service which searches as many planning authority websites as it can find and emails
 you details of applications near you
 
 Copyright (C) 2009, 2010 OpenAustralia Foundation Limited and original contributors to PlanningAlerts.com
@@ -9,7 +9,7 @@ This is the code for the web application side of things written using Ruby on Ra
   
 This code is free and open-source and is licensed under the GPL v2.
 
-PlanningAlerts.org.au is brought to you by the "OpenAustralia Foundation":http://www.openaustraliafoundation.org.au. It was adapted for Australia by Matthew Landauer and Katherine Szuminska, and is based on the UK site "PlanningAlerts.com":http://www.planningalerts.com, built by Richard Pope, Mikel Maron, Sam Smith, Duncan Parkes, Tom Hughes and Andy Armstrong.
+PlanningAlerts is brought to you by the "OpenAustralia Foundation":http://www.openaustraliafoundation.org.au. It was adapted for Australia by Matthew Landauer and Katherine Szuminska, and is based on the UK site "PlanningAlerts.com":http://www.planningalerts.com, built by Richard Pope, Mikel Maron, Sam Smith, Duncan Parkes, Tom Hughes and Andy Armstrong.
 
 h3. Setting up a dev environment !https://secure.travis-ci.org/openaustralia/planningalerts-app.png?branch=master(Build Status)!:http://travis-ci.org/openaustralia/planningalerts-app !https://gemnasium.com/openaustralia/planningalerts-app.png(Dependency Status)!:https://gemnasium.com/openaustralia/planningalerts-app
 
