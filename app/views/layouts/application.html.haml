@@ -27,13 +27,7 @@
       .container
         #header
           #banner
-            %h1
-              = link_to root_path do
-                PlanningAlerts
-                %span<> .
-                org
-                %span<> .
-                au
+            %h1= link_to 'PlanningAlerts', root_path
             %h2 Email alerts of planning applications <em>near you</em>
           #statsbanner
             %p#stats
