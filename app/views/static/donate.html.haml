@@ -23,8 +23,8 @@
     %input(type="hidden" name="tax" value="0")
     %input(type="hidden" name="lc" value="AU")
     %input(type="hidden" name="bn" value="PP-DonationsBF")
-    %input(type="hidden" name="return" value="http://blog.openaustralia.org/how-can-i-help/thanks")
-    %input(type="hidden" name="cancel_return" value="http://blog.openaustralia.org/how-can-i-help/cancel")
+    %input{:type => "hidden", :name => "return", :value => donate_thanks_url}
+    %input{:type => "hidden", :name => "cancel_return", :value => donate_cancel_url}
     %input(type="hidden" name="cn" value="Please tell us why you're donating")
     %input(id="amount_donate" type="text" name="amount" size="10")
     Australian Dollars (AUD)

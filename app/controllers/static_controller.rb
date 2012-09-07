@@ -24,6 +24,12 @@ class StaticController < ApplicationController
   def donate
   end
 
+  def donate_thanks
+  end
+
+  def donate_cancel
+  end
+
   def error_404
     render :status => :not_found
   end
