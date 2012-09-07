@@ -9,6 +9,7 @@ set :repository,  "git://github.com/openaustralia/planningalerts-app.git"
 
 role :web, "kedumba.openaustraliafoundation.org.au"
 role :db, "kedumba.openaustraliafoundation.org.au", :primary => true
+role :app, "kedumba.openaustraliafoundation.org.au"
 
 set :use_sudo, false
 set :user, "deploy"
