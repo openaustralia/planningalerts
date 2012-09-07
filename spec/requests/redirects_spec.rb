@@ -17,6 +17,11 @@ describe "redirects" do
         get "http://api.planningalerts.org.au/applications?foo=bar"
         response.should redirect_to "http://www.planningalerts.org.au/applications"
       end
+
+      it "to the applications index page for js should not redirect" do
+        get "http://api.planningalerts.org.au/applications.js"
+        response.should_not be_redirect
+      end      
     end
   end
 end

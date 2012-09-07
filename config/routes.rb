@@ -1,6 +1,19 @@
+# Because of the way rails 3.0 (this has changes for more recent versions) parses globs in routing
+# we have to manually extract the format from the path
+class FormatConstraint
+  def matches?(request)
+    path = request.path_parameters[:path]
+    # This matches if the last segment of the path does not include a "." which means that the format
+    # of this request is html
+    path.nil? || !path.split("/")[-1].include?(".")
+  end
+end
+
 PlanningalertsApp::Application.routes.draw do
   constraints :subdomain => "api" do
-    match "(*path)" => redirect{|r,p| "http://www.planningalerts.org.au/#{p[:path]}"}
+    constraints FormatConstraint.new do
+      match "(*path)" => redirect{|r,p| "http://www.planningalerts.org.au/#{p[:path]}"}
+    end
   end
 
   ActiveAdmin.routes(self)
