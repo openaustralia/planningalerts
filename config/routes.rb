@@ -12,7 +12,7 @@ end
 PlanningalertsApp::Application.routes.draw do
   constraints :subdomain => "api" do
     constraints FormatConstraint.new do
-      match "(*path)" => redirect{|r,p| "http://www.planningalerts.org.au/#{p[:path]}"}
+      match "(*path)" => redirect{|p,r| "http://www.#{r.domain(2)}/#{p[:path]}"}
     end
   end
 
