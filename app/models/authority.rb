@@ -173,6 +173,13 @@ class Authority < ActiveRecord::Base
     # TODO: Potentially not very efficient when number of authorities is high. Loads all authorities into memory
     find(:all).find{|a| a.short_name_encoded == n}
   end
+
+  def self.find_by_short_name_encoded!(n)
+    r = find_by_short_name_encoded(n)
+    # In production environment raising RecordNotFound will produce an error code 404
+    raise ActiveRecord::RecordNotFound if r.nil?
+    r
+  end
   
   # Is this authority contactable through PlanningAlerts? i.e. do we have an email address on record?
   def contactable?

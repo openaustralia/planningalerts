@@ -10,6 +10,6 @@ class AuthoritiesController < ApplicationController
   end
 
   def show
-    @authority = Authority.find_by_short_name_encoded(params[:id])
+    @authority = Authority.find_by_short_name_encoded!(params[:id])
   end
 end

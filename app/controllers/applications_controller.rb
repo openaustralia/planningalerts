@@ -42,9 +42,7 @@ class ApplicationsController < ApplicationController
 
     if params[:authority_id]
       # TODO Handle the situation where the authority name isn't found
-      @authority = Authority.find_by_short_name_encoded(params[:authority_id])
-      # In production environment raising RecordNotFound will produce an error code 404
-      raise ActiveRecord::RecordNotFound if @authority.nil?
+      @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
       apps = @authority.applications
       @description << " from #{@authority.full_name_and_state}"
     elsif params[:postcode]
@@ -100,7 +98,7 @@ class ApplicationsController < ApplicationController
 
   # JSON api for returning the number of scraped applications per day
   def per_day
-    authority = Authority.find_by_short_name_encoded(params[:authority_id])
+    authority = Authority.find_by_short_name_encoded!(params[:authority_id])
     respond_to do |format|
       format.js do
         render :json => authority.applications_per_day
@@ -109,7 +107,7 @@ class ApplicationsController < ApplicationController
   end
 
   def per_week
-    authority = Authority.find_by_short_name_encoded(params[:authority_id])
+    authority = Authority.find_by_short_name_encoded!(params[:authority_id])
     respond_to do |format|
       format.js do
         render :json => authority.applications_per_week
