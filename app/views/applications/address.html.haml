@@ -33,7 +33,11 @@
         There is a list of the planning authorities we currently cover
         #{link_to "here", authorities_path}. We're working on covering the whole country but we're not there yet.        
       .attention
-        <span class="highlight">You can help</span>! <a href="http://www.openaustraliafoundation.org.au/donate/"><span class="highlight">Donate</span> to the OpenAustralia Foundation</a> which will allow us to add more local authorities, including yours!
+        <span class="highlight">You can help</span>!
+        = link_to donate_path do
+          %span(class="highlight") Donate
+          to the OpenAustralia Foundation
+        which will allow us to add more local authorities, including yours!
         Or, if you're a programmer you can help directly by #{link_to "writing a screen scraper", get_involved_path}.
       %p
         To see an example of what the results would look like once your area is included see #{link_to "Bourke Street in Melbourne", address_applications_path(:q => "Bourke St, Melbourne 3000")}.

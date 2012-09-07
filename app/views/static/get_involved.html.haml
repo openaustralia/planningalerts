@@ -2,8 +2,9 @@
 %h3= yield :page_title
 %p
   PlanningAlerts is run by the charity <a href="http://www.openaustraliafoundation.org.au">OpenAustralia Foundation</a>,
-  and relies on the support of volunteers and <a href="http://www.openaustraliafoundation.org.au/donate/">donations</a> from people
-  like you. If you would like to get involved we'd love to hear from you:
+  and relies on the support of volunteers and
+  = link_to "donations", donate_path
+  from people like you. If you would like to get involved we'd love to hear from you:
 
 %h4
   I am a programmer and want to add my local planning authority
@@ -24,7 +25,7 @@
 %p
   If you value the service provided by PlanningAlerts but simply don't have the time or
   the specialist skills to help out personally then the best thing that you can do is
-  to #{link_to "donate to the OpenAustralia Foundation", "http://www.openaustraliafoundation.org.au/donate/"},
+  to #{link_to "donate to the OpenAustralia Foundation", donate_path},
   the charity behind PlanningAlerts.
 %p
   Your donation will go to improving the service.
