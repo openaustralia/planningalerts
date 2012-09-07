@@ -52,6 +52,8 @@
             = li_selected(:controller => "/api", :action => "howto") do
               = link_to api_howto_path do
                 Get the Data
+            = li_selected(:controller => "/static", :action => "donate") do
+              = link_to 'Donate', donate_path
             = li_selected(:controller => "/static", :action => "about") do
               = link_to 'About', about_path
     .container
