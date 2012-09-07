@@ -1,3 +1,4 @@
+require 'new_relic/recipes'
 require 'bundler/capistrano'
 require 'rvm/capistrano'
 
@@ -20,6 +21,10 @@ elsif stage == "test"
   set :deploy_to, "/srv/www/test.#{application}"
   #set :branch, "test"
 end
+
+# We need to run this after our collector mongrels are up and running
+# This goes out even if the deploy fails, sadly 
+after "deploy:update", "newrelic:notice_deployment"
 
 namespace :deploy do
   desc "After a code update, we link additional config and the scrapers"
