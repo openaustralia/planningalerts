@@ -78,3 +78,17 @@ body form.alert {
   border: inherit;
 }
 
+form.donate {
+  input[type="submit"] {
+    @include fancy-button($orange); 
+    font-weight: normal;
+    margin-left: 1em;
+  }
+  input#amount_donate, label, span {
+    font-size: 1.3em;
+  }
+  label {
+    //margin-left: 1em;
+  }
+}
+

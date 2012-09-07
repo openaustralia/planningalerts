@@ -15,7 +15,7 @@
   Make your donation by Paypal (a cost effective and secure way to donate online) here - Credit Cards or Paypal account accepted
 
 %p
-  %form(action="https://www.paypal.com/cgi-bin/webscr" method="post")
+  %form.donate(action="https://www.paypal.com/cgi-bin/webscr" method="post")
     %input(type="hidden" name="cmd" value="_xclick")
     %input(type="hidden" name="business" value="matthew@openaustralia.org")
     %input(type="hidden" name="item_name" value="Donation to OpenAustralia Foundation")
@@ -28,8 +28,11 @@
     %input{:type => "hidden", :name => "return", :value => donate_thanks_url}
     %input{:type => "hidden", :name => "cancel_return", :value => donate_cancel_url}
     %input(type="hidden" name="cn" value="Please tell us why you're donating")
-    %input(id="amount_donate" type="text" name="amount" size="10")
-    Australian Dollars (AUD)
+    %span
+      $
+    %input(id="amount_donate" type="text" name="amount" size="5")
+    %label(for="amount_donate")
+      AUD
     %input(type="submit" value="Donate")
 
 %p
