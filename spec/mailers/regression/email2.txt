@@ -27,7 +27,7 @@ http://dev.planningalerts.org.au/applications/2?utm_medium=email&utm_source=aler
 
 PlanningAlerts is a free service run by the charity OpenAustralia Foundation.
 This service depends on donations from people like you for its survival.
-If you use this service please consider donating: http://www.openaustraliafoundation.org.au/donate/?utm_medium=email&utm_source=alerts
+If you use this service please consider donating: http://dev.planningalerts.org.au/donate?utm_medium=email&utm_source=alerts
 
 To change the size of the area covered by the alerts: http://dev.planningalerts.org.au/alerts/abcdef/area
 
