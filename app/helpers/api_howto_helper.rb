@@ -7,36 +7,40 @@ module ApiHowtoHelper
   def htmlify(url)
     url.gsub(/(\?|&|&amp;)([a-z_]+)=/, '\1<strong>\2</strong>=').gsub('&', '&amp;')
   end
+
+  def api_host
+    "api.planningalerts.org.au"
+  end
   
   def api_example_address_url(format, address = ::Configuration::API_EXAMPLE_ADDRESS,
     radius = ::Configuration::API_EXAMPLE_SIZE)
-    applications_url(:format => format, :address => address, :radius => radius)
+    applications_url(:host => api_host, :format => format, :address => address, :radius => radius)
   end
   
   def api_example_latlong_url(format, lat = ::Configuration::API_EXAMPLE_LAT, lng = ::Configuration::API_EXAMPLE_LNG, 
     radius = ::Configuration::API_EXAMPLE_SIZE)
-    applications_url(:format => format, :lat => lat, :lng => lng, :radius => radius)
+    applications_url(:host => api_host, :format => format, :lat => lat, :lng => lng, :radius => radius)
   end
   
   def api_example_area_url(format, bottom_left_lat = ::Configuration::API_EXAMPLE_BOTTOM_LEFT_LAT,
     bottom_left_lng = ::Configuration::API_EXAMPLE_BOTTOM_LEFT_LNG,
     top_right_lat = ::Configuration::API_EXAMPLE_TOP_RIGHT_LAT,
     top_right_lng = ::Configuration::API_EXAMPLE_TOP_RIGHT_LNG)
-    applications_url(:format => format,
+    applications_url(:host => api_host, :format => format,
       :bottom_left_lat => bottom_left_lat, :bottom_left_lng => bottom_left_lng,
       :top_right_lat => top_right_lat, :top_right_lng => top_right_lng)
   end
   
   def api_example_authority_url(format, authority = ::Configuration::API_EXAMPLE_AUTHORITY)
-    authority_applications_url(:format => format, :authority_id => authority)
+    authority_applications_url(:host => api_host, :format => format, :authority_id => authority)
   end
   
   def api_example_postcode_url(format, postcode = ::Configuration::API_EXAMPLE_POSTCODE)
-    applications_url(:format => format, :postcode => postcode)
+    applications_url(:host => api_host, :format => format, :postcode => postcode)
   end
   
   def api_example_suburb_and_state_url(format, suburb = ::Configuration::API_EXAMPLE_SUBURB, state = ::Configuration::API_EXAMPLE_STATE)
-    applications_url(:format => format, :suburb => suburb, :state => state)
+    applications_url(:host => api_host, :format => format, :suburb => suburb, :state => state)
   end
   
   def api_example_address_url_html(format)
