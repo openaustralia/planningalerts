@@ -21,6 +21,9 @@ class StaticController < ApplicationController
   def how_to_lobby_your_local_council
   end
 
+  def donate
+  end
+
   def error_404
     render :status => :not_found
   end
