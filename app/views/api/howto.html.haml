@@ -15,8 +15,8 @@
   description in the georss feed rather than the default plain text. This is especially
   useful when a georss feed is embedded in a map as in the examples below.
 %p
-  The API can return different formats including <a href="http://www.georss.org/">GeoRSS</a> and <a href="http://www.json.org/">JSON</a>. The examples below all return
-  GeoRSS. To get JSON instead simply replace ".rss" in the URL with ".js".
+  The API can return different formats including <a href="http://www.georss.org/">GeoRSS</a> and <a href="http://www.json.org/">JSON</a>. The examples below return
+  JSON. To get GeoRSS instead simply replace ".js" in the URL with ".rss".
 %h4
   API documentation
 .apiitem
@@ -25,32 +25,32 @@
   %p.apidefinition
     Return applications near a given street address. The area included is a circle with a radius of the given size (in metres)
     with the address at its center. Suggested sizes are 400, 800 or 4000 metres.
-  %code= raw api_example_address_url_html
+  %code= raw api_example_address_url_html("js")
   %p.apiexamples
-    = link_to "view example", api_example_address_url
+    = link_to "view example", api_example_address_url("js")
     |
-    = link_to "view on a map", mapify(api_example_address_url + "&style=html", 14)
+    = link_to "view on a map", mapify(api_example_address_url("rss") + "&style=html", 14)
 .apiitem
   %h5
     Single Location by longitude/latitude
   %p.apidefinition
     Return applications near a given longitude/latitude. The area included is a circle with a radius of the given size (in metres)
     with the longitude/latitude at its center. Suggested sizes are 400, 800 or 4000 metres.
-  %code= raw api_example_latlong_url_html
+  %code= raw api_example_latlong_url_html("js")
   %p.apiexamples
-    = link_to "view example", api_example_latlong_url
+    = link_to "view example", api_example_latlong_url("js")
     |
-    = link_to "view on a map", mapify(api_example_latlong_url + "&style=html", 14)
+    = link_to "view on a map", mapify(api_example_latlong_url("rss") + "&style=html", 14)
 .apiitem
   %h5
     Area by longitude/latitude
   %p.apidefinition
     Return applications within a rectangle defined by longitude/latitude.
-  %code= raw api_example_area_url_html
+  %code= raw api_example_area_url_html("js")
   %p.apiexamples
-    = link_to "view example", api_example_area_url
+    = link_to "view example", api_example_area_url("js")
     |
-    = link_to "view on a map", mapify(api_example_area_url + "&style=html", 6)
+    = link_to "view on a map", mapify(api_example_area_url("rss") + "&style=html", 6)
 .apiitem
   %h5
     Planning authority
@@ -59,31 +59,31 @@
     to use here, find the planning authority on the
     = link_to "list of authorities", authorities_path
     and follow the link. The url has the authority short name in it.
-  %code= raw api_example_authority_url_html
+  %code= raw api_example_authority_url_html("js")
   %p.apiexamples
-    = link_to "view example", api_example_authority_url
+    = link_to "view example", api_example_authority_url("js")
     |
-    = link_to "view on a map", mapify(api_example_authority_url + "&style=html", 11)
+    = link_to "view on a map", mapify(api_example_authority_url("rss") + "&style=html", 11)
 .apiitem
   %h5
     Postcode
   %p.apidefinition
     Return applications for a specific postcode area
-  %code= raw api_example_postcode_url_html
+  %code= raw api_example_postcode_url_html("js")
   %p.apiexamples
-    = link_to "view example", api_example_postcode_url
+    = link_to "view example", api_example_postcode_url("js")
     |
-    = link_to "view on a map", mapify(api_example_postcode_url + "&style=html", 13)
+    = link_to "view on a map", mapify(api_example_postcode_url("rss") + "&style=html", 13)
 .apiitem
   %h5
     Suburb
   %p.apidefinition
     Return applications in a suburb. Including "state" in the search is optional.
-  %code= raw api_example_suburb_and_state_url_html
+  %code= raw api_example_suburb_and_state_url_html("js")
   %p.apiexamples
-    = link_to "view example", api_example_suburb_and_state_url
+    = link_to "view example", api_example_suburb_and_state_url("js")
     |
-    = link_to "view on a map", mapify(api_example_suburb_and_state_url + "&style=html", 13)
+    = link_to "view on a map", mapify(api_example_suburb_and_state_url("rss") + "&style=html", 13)
 
 %h4#hLicenseInfo
   Usage & License
