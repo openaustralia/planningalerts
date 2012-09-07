@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
   
   def render_404
-    render "static/error_404", :status => :not_found
+    render "static/error_404.html", :status => :not_found
   end
   
   def mobile_optimise_switching
