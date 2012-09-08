@@ -10,20 +10,24 @@
     %span.highlight It looks like something might be wrong. The latest application was received #{time_ago_in_words(@authority.latest_application)} ago.
     = link_to "Why?", faq_path(:anchor => "broken_scraper")
 
-%p
-  For #{@authority.full_name} #{@authority.applications.where("date_scraped >= ?", 1.week.ago).count} applications have been collected in the last week, #{@authority.applications.where("date_scraped >= ?", 1.month.ago).count} in the last month and #{@authority.applications.count} since #{@authority.earliest_date.strftime("%-d %b %Y")}, when this authority was first added to PlanningAlerts. That's a
-  = link_to "median", "http://en.wikipedia.org/wiki/Median"
-  of #{@authority.median_applications_per_week} applications per week.
+- if @authority.applications.count == 0
+  %p
+    For #{@authority.full_name} no applications have yet been collected.
+- else
+  %p
+    For #{@authority.full_name} #{@authority.applications.where("date_scraped >= ?", 1.week.ago).count} applications have been collected in the last week, #{@authority.applications.where("date_scraped >= ?", 1.month.ago).count} in the last month and #{@authority.applications.count} since #{@authority.earliest_date.strftime("%-d %b %Y")}, when this authority was first added to PlanningAlerts. That's a
+    = link_to "median", "http://en.wikipedia.org/wiki/Median"
+    of #{@authority.median_applications_per_week} applications per week.
 
-%p
-  = link_to "Browse all recent applications", authority_applications_path(@authority.short_name_encoded)
+  %p
+    = link_to "Browse all recent applications", authority_applications_path(@authority.short_name_encoded)
 
-%h4 Number of applications scraped each week
-#chart
-<script src="http://d3js.org/d3.v2.js"></script>
-= javascript_include_tag "bar_graph"
-:javascript
-  barGraph("#chart", "#{per_week_authority_applications_url(@authority.short_name_encoded, :format => 'js')}");
+  %h4 Number of applications scraped each week
+  #chart
+  <script src="http://d3js.org/d3.v2.js"></script>
+  = javascript_include_tag "bar_graph"
+  :javascript
+    barGraph("#chart", "#{per_week_authority_applications_url(@authority.short_name_encoded, :format => 'js')}");
 
 
 - if @authority.scraperwiki_url
