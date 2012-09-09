@@ -124,7 +124,7 @@ class Authority < ActiveRecord::Base
       end
     end
 
-    info_logger.info "#{count} new applications found for #{full_name_and_state}"
+    info_logger.info "#{count} new applications found for #{full_name_and_state} with date from #{start_date} to #{end_date}"
   end
 
   # Returns an array of arrays [date, number_of_applications_that_date]

@@ -24,12 +24,9 @@ class Application < ActiveRecord::Base
   
   # Optionally pass a logger which is just used for sending informational messages to do with this long-running job to
   def self.collect_applications(authorities, info_logger = logger)
-    end_date = Date.today
-    start_date = end_date - ::Configuration::SCRAPE_DELAY
-
-    info_logger.info "Scraping #{authorities.count} authorities with date from #{start_date} to #{end_date}"
+    info_logger.info "Scraping #{authorities.count} authorities"
     authorities.each do |auth|
-      auth.collect_applications_date_range_with_timing(start_date, end_date, info_logger)
+      auth.collect_applications_date_range_with_timing(Date.today - ::Configuration::SCRAPE_DELAY, Date.today, info_logger)
     end
   end
 
