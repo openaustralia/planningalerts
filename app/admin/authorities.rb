@@ -10,6 +10,8 @@ ActiveAdmin.register Authority do
     default_actions
   end
 
+  show :title => :full_name
+
   action_item :only => :show do
     button_to('Scrape', scrape_admin_authority_path)
   end
