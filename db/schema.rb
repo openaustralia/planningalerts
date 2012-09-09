@@ -76,11 +76,11 @@ ActiveRecord::Schema.define(:version => 20120909011626) do
   add_index "applications", ["suburb"], :name => "index_applications_on_suburb"
 
   create_table "authorities", :force => true do |t|
-    t.string  "full_name",        :limit => 200, :null => false
-    t.string  "short_name",       :limit => 100, :null => false
+    t.string  "full_name",            :limit => 200, :null => false
+    t.string  "short_name",           :limit => 100, :null => false
     t.string  "feed_url"
     t.boolean "disabled"
-    t.string  "state",            :limit => 20
+    t.string  "state",                :limit => 20
     t.string  "email"
     t.string  "scraperwiki_name"
     t.integer "population_2011"
