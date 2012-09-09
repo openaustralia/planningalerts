@@ -35,6 +35,7 @@ gem 'rabl'
 gem "susy"
 gem 'newrelic_rpm'
 gem 'delayed_job_active_record'
+gem 'daemons'
 
 group :test do
   gem 'cucumber-rails', :require => false
