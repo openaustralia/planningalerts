@@ -10,7 +10,22 @@ ActiveAdmin.register Authority do
     default_actions
   end
 
-  show :title => :full_name
+  show :title => :full_name do |a|
+    attributes_table do
+      row :full_name
+      row :short_name
+      row :state
+      row :email
+      row :population_2011
+      row :scraperwiki_name
+      row :disabled
+    end
+
+    h3 "Last scraper run log"
+    div do
+      simple_format a.last_scraper_run_log
+    end
+  end
 
   form do |f|
     f.inputs "Name" do
