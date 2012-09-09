@@ -95,7 +95,10 @@ class Authority < ActiveRecord::Base
     end
   end
 
-  def collect_applications_date_range_with_timing(start_date, end_date, info_logger = logger)
+  def collect_applications_date_range_with_timing(start_date, end_date, other_info_logger = logger)
+    # Also log to the authority database as well so we have easy access to this for the user
+    info_logger = AuthorityLogger.new(self, other_info_logger)
+
     time = Benchmark.ms do
       collect_applications_date_range(start_date, end_date, info_logger)
     end
@@ -103,10 +106,7 @@ class Authority < ActiveRecord::Base
   end
 
   # Collect all the applications for this authority by scraping
-  def collect_applications_date_range(start_date, end_date, other_info_logger = logger)
-    # Also log to the authority database as well so we have easy access to this for the user
-    info_logger = AuthorityLogger.new(self, other_info_logger)
-
+  def collect_applications_date_range(start_date, end_date, info_logger = logger)
     count = 0
     d = scraperwiki? ? scraper_data_scraperwiki_style(start_date, end_date, info_logger) :
       scraper_data_original_style(start_date, end_date, info_logger)
