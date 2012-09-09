@@ -95,6 +95,13 @@ class Authority < ActiveRecord::Base
     end
   end
 
+  def collect_applications_date_range_with_timing(start_date, end_date, info_logger = logger)
+    time = Benchmark.ms do
+      collect_applications_date_range(start_date, end_date, info_logger)
+    end
+    info_logger.info "Took #{(time / 1000).to_i} s to collect applications from #{full_name_and_state}"
+  end
+
   # Collect all the applications for this authority by scraping
   def collect_applications_date_range(start_date, end_date, other_info_logger = logger)
     # Also log to the authority database as well so we have easy access to this for the user

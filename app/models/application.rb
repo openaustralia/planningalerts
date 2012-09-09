@@ -29,10 +29,7 @@ class Application < ActiveRecord::Base
 
     info_logger.info "Scraping #{authorities.count} authorities with date from #{start_date} to #{end_date}"
     authorities.each do |auth|
-      time = Benchmark.ms do
-        auth.collect_applications_date_range(start_date, end_date, info_logger)
-      end
-      info_logger.info "Took #{(time / 1000).to_i} s to collect applications from #{auth.full_name_and_state}"
+      auth.collect_applications_date_range_with_timing(start_date, end_date, info_logger)
     end
   end
 
