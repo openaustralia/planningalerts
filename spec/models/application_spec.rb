@@ -200,7 +200,7 @@ describe Application do
     it "should collect the correct applications" do
       logger = mock
       @auth.stub!(:logger).and_return(logger)
-      logger.should_receive(:add).with(1, nil, "2 new applications found for Fiddlesticks, NSW")
+      logger.should_receive(:info).with("2 new applications found for Fiddlesticks, NSW")
 
       @auth.collect_applications_date_range(@date, @date)
       Application.count.should == 2
@@ -218,8 +218,8 @@ describe Application do
     it "should not create new applications when they already exist" do
       logger = mock
       @auth.stub!(:logger).and_return(logger)
-      logger.should_receive(:add).with(1, nil, "2 new applications found for Fiddlesticks, NSW")
-      logger.should_receive(:add).with(1, nil, "0 new applications found for Fiddlesticks, NSW")
+      logger.should_receive(:info).with("2 new applications found for Fiddlesticks, NSW")
+      logger.should_receive(:info).with("0 new applications found for Fiddlesticks, NSW")
 
       # Getting the feed twice with the same content
       @auth.collect_applications_date_range(@date, @date)
@@ -234,10 +234,10 @@ describe Application do
       Kernel::silence_warnings { ::Configuration::SCRAPE_DELAY = 1 }
       logger = mock
       logger.should_receive(:info).with("Scraping 2 authorities with date from 2010-01-09 to 2010-01-10")
-      logger.should_receive(:info).with("Took 0 s to collect applications from Fiddlesticks, NSW")
-      logger.should_receive(:info).with("Took 0 s to collect applications from Wombat City Council, NSW")
-      @auth.should_receive(:collect_applications_date_range).with(Date.today - 1, Date.today, logger)
-      auth2.should_receive(:collect_applications_date_range).with(Date.today - 1, Date.today, logger)
+      #logger.should_receive(:add).with(1, nil, "Took 0 s to collect applications from Fiddlesticks, NSW")
+      #logger.should_receive(:add).with(1, nil, "Took 0 s to collect applications from Wombat City Council, NSW")
+      @auth.should_receive(:collect_applications_date_range_with_timing).with(Date.today - 1, Date.today, logger)
+      auth2.should_receive(:collect_applications_date_range_with_timing).with(Date.today - 1, Date.today, logger)
 
       Application.collect_applications([@auth, auth2], logger)
     end
