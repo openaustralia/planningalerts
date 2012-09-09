@@ -12,6 +12,23 @@ ActiveAdmin.register Authority do
 
   show :title => :full_name
 
+  form do |f|
+    f.inputs "Name" do
+      f.input :full_name
+      f.input :short_name
+    end
+    f.inputs "Details" do
+      f.input :state
+      f.input :email
+      f.input :population_2011
+    end
+    f.inputs "Scraping" do
+      f.input :scraperwiki_name
+      f.input :disabled
+    end
+    f.buttons
+  end
+
   action_item :only => :show do
     button_to('Scrape', scrape_admin_authority_path)
   end
