@@ -96,16 +96,12 @@ class Authority < ActiveRecord::Base
   end
 
   # Collect applications over the default date range
-  def collect_applications(info_logger = logger)
-    collect_applications_date_range_with_timing(Date.today - ::Configuration::SCRAPE_DELAY, Date.today, info_logger)
-  end
-
-  def collect_applications_date_range_with_timing(start_date, end_date, other_info_logger = logger)
+  def collect_applications(other_info_logger = logger)
     # Also log to the authority database as well so we have easy access to this for the user
     info_logger = AuthorityLogger.new(self, other_info_logger)
 
     time = Benchmark.ms do
-      collect_applications_date_range(start_date, end_date, info_logger)
+      collect_applications_date_range(Date.today - ::Configuration::SCRAPE_DELAY, Date.today, info_logger)
     end
     info_logger.info "Took #{(time / 1000).to_i} s to collect applications from #{full_name_and_state}"
   end

@@ -236,8 +236,8 @@ describe Application do
       logger.should_receive(:info).with("Scraping 2 authorities")
       #logger.should_receive(:add).with(1, nil, "Took 0 s to collect applications from Fiddlesticks, NSW")
       #logger.should_receive(:add).with(1, nil, "Took 0 s to collect applications from Wombat City Council, NSW")
-      @auth.should_receive(:collect_applications_date_range_with_timing).with(Date.today - 1, Date.today, logger)
-      auth2.should_receive(:collect_applications_date_range_with_timing).with(Date.today - 1, Date.today, logger)
+      @auth.should_receive(:collect_applications).with(logger)
+      auth2.should_receive(:collect_applications).with(logger)
 
       Application.collect_applications([@auth, auth2], logger)
     end
