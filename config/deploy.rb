@@ -1,6 +1,7 @@
 require 'new_relic/recipes'
 require 'bundler/capistrano'
 require 'rvm/capistrano'
+require 'delayed/recipes'
 
 set :rvm_ruby_string, '1.8.7'
 
@@ -15,6 +16,7 @@ set :use_sudo, false
 set :user, "deploy"
 set :scm, :git
 set :stage, "test" unless exists? :stage
+set :rails_env, "production" #added for delayed job
 
 if stage == "production"
   set :deploy_to, "/srv/www/www.#{application}"
