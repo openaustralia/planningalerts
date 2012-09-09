@@ -1,5 +1,18 @@
 require 'open-uri'
 
+class AuthorityLogger < Logger
+  def initialize(authority, other_logger)
+    @authority, @other_logger = authority, other_logger
+    # We're starting a new run of the logger & scraper so clear out the old so we're ready for the new
+    @authority.update_attribute(:last_scraper_run_log, "")
+  end
+
+  def add(severity, message = nil, progname = nil)
+    @other_logger.add(severity, message, progname)
+    @authority.update_attribute(:last_scraper_run_log, @authority.last_scraper_run_log + progname + "\n")
+  end
+end
+
 class Authority < ActiveRecord::Base
   has_many :applications
   scope :active, :conditions => 'disabled = 0 or disabled is null'
@@ -83,7 +96,10 @@ class Authority < ActiveRecord::Base
   end
 
   # Collect all the applications for this authority by scraping
-  def collect_applications_date_range(start_date, end_date, info_logger = logger)
+  def collect_applications_date_range(start_date, end_date, other_info_logger = logger)
+    # Also log to the authority database as well so we have easy access to this for the user
+    info_logger = AuthorityLogger.new(self, other_info_logger)
+
     count = 0
     d = scraperwiki? ? scraper_data_scraperwiki_style(start_date, end_date, info_logger) :
       scraper_data_original_style(start_date, end_date, info_logger)

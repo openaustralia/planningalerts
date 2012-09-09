@@ -200,7 +200,7 @@ describe Application do
     it "should collect the correct applications" do
       logger = mock
       @auth.stub!(:logger).and_return(logger)
-      logger.should_receive(:info).with("2 new applications found for Fiddlesticks, NSW")
+      logger.should_receive(:add).with(1, nil, "2 new applications found for Fiddlesticks, NSW")
 
       @auth.collect_applications_date_range(@date, @date)
       Application.count.should == 2
@@ -218,7 +218,7 @@ describe Application do
     it "should not create new applications when they already exist" do
       logger = mock
       @auth.stub!(:logger).and_return(logger)
-      logger.should_receive(:info).with("2 new applications found for Fiddlesticks, NSW")
+      logger.should_receive(:add).with(1, nil, "2 new applications found for Fiddlesticks, NSW")
       # It shouldn't log anything if there are no new applications
 
       # Getting the feed twice with the same content
