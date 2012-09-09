@@ -219,7 +219,7 @@ describe Application do
       logger = mock
       @auth.stub!(:logger).and_return(logger)
       logger.should_receive(:add).with(1, nil, "2 new applications found for Fiddlesticks, NSW")
-      # It shouldn't log anything if there are no new applications
+      logger.should_receive(:add).with(1, nil, "0 new applications found for Fiddlesticks, NSW")
 
       # Getting the feed twice with the same content
       @auth.collect_applications_date_range(@date, @date)
