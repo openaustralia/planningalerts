@@ -25,9 +25,7 @@ class Application < ActiveRecord::Base
   # Optionally pass a logger which is just used for sending informational messages to do with this long-running job to
   def self.collect_applications(authorities, info_logger = logger)
     info_logger.info "Scraping #{authorities.count} authorities"
-    authorities.each do |auth|
-      auth.collect_applications_date_range_with_timing(Date.today - ::Configuration::SCRAPE_DELAY, Date.today, info_logger)
-    end
+    authorities.each {|auth| auth.collect_applications(info_logger)}
   end
 
   # Translate xml data (as a string) into an array of attribute hashes that can used to create applications
