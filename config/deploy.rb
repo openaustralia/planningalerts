@@ -27,6 +27,11 @@ end
 # This goes out even if the deploy fails, sadly 
 after "deploy:update", "newrelic:notice_deployment"
 
+# Hooks for starting/stopping/restarting delayed_job
+after "deploy:stop",    "delayed_job:stop"
+after "deploy:start",   "delayed_job:start"
+after "deploy:restart", "delayed_job:restart"
+
 namespace :deploy do
   desc "After a code update, we link additional config and the scrapers"
   after "deploy:update_code" do
