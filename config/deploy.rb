@@ -8,9 +8,7 @@ set :rvm_ruby_string, '1.8.7'
 set :application, "planningalerts.org.au/app"
 set :repository,  "git://github.com/openaustralia/planningalerts-app.git"
 
-role :web, "kedumba.openaustraliafoundation.org.au"
-role :db, "kedumba.openaustraliafoundation.org.au", :primary => true
-role :app, "kedumba.openaustraliafoundation.org.au"
+server "kedumba.openaustraliafoundation.org.au", :app, :web, :db, :primary => true
 
 set :use_sudo, false
 set :user, "deploy"
