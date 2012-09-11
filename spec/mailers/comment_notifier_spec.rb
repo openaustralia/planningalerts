@@ -13,10 +13,14 @@ describe CommentNotifier do
       notifier.to.should == [@comment.application.authority.email]
     end
     
+    it "should have the sender as the main planningalerts email address" do
+      notifier = CommentNotifier.notify(@comment)
+      notifier.sender.should == "contact@planningalerts.org.au"
+    end
+
     it "should be from the email address of the person who made the comment" do
       notifier = CommentNotifier.notify(@comment)
       notifier.from.should == [@comment.email]
-      #notifier.from_addrs.first.name.should == @comment.name
     end
 
     it "should say in the subject line it is a comment on a development application" do
