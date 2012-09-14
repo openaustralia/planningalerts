@@ -171,6 +171,7 @@ p a, li a, span a, dd a, dt a, div a {
 
 #content {
   @include min-height(500px);
+  position: relative;
   //min-height: 500px; 
 }
 
@@ -420,12 +421,11 @@ body h4 {
 
 // Social buttons
 #social {
-  margin-right: 1em;
-  margin-bottom: 1em;
-  height: 149px;
-  width: 55px;
-  float: left;
-  .fb-like {
+  width: 70px;
+  position: absolute;
+  left: -95px;
+  .fb-like,  .twitter-share-button {
+    float: right;
     margin-bottom: 1em;
   }
 }
