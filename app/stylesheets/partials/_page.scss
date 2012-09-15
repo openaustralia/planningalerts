@@ -180,13 +180,6 @@ p a, li a, span a, dd a, dt a, div a {
   display: inline-block;
 }
 
-#side {
-  @include float-right;
-  background: white;
-  padding-bottom: 10px;
-  padding-left: 10px;
-}
-
 /* Attention grabbers */
 div.attention {
   text-align: center;
