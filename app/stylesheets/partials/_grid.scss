@@ -14,3 +14,23 @@
 #sidebar {
   @include span-columns(6 omega, 24)
 }
+
+.news {
+  .blog-feed {
+    @include span-columns(11, 24);
+  }  
+  .twitter-feed {
+    @include pre(2);
+    @include span-columns(11 omega, 24);
+  }
+}
+
+#footer {
+  .keepintouch {
+    @include span-columns(8,24);
+  }
+  .oaf {
+    @include pre(8);
+    @include span-columns(8 omega, 24);    
+  }
+}

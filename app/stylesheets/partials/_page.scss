@@ -144,17 +144,10 @@ body {
     text-align: center;
     clear: both;
   }
-  .keepintouch {
-    @include span-columns(8,24);
-  }
-
   .oaf {
     text-align: right;
-    @include pre(8);
-    @include span-columns(8 omega, 24);
   }
 }
-
 
 // Content
 
@@ -371,13 +364,6 @@ body h4 {
   }
   li {
     padding-bottom: 0.5em;
-  }
-  .blog-feed {
-    @include span-columns(11, 24);
-  }
-  .twitter-feed {
-    @include pre(2);
-    @include span-columns(11 omega, 24);
   }
   .date {
     @include quiet;
