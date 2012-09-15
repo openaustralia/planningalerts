@@ -337,6 +337,14 @@ body h4 {
   }
 }
 
+#application-stats {
+  background: $almostwhite;
+  padding: 12px;
+  p:last-child {
+    margin-bottom: 0.5em;
+  };
+}
+
 .match {
   @include highlight;
 }
