@@ -7,13 +7,82 @@
   = render :partial => "applications/twitter_share_button", :locals => {:application => @application}
 = render :partial => "applications/twitter"
 
-#application
-  #side
-    - if @application.location
-      #map_div(style="width:350px;height:200px")
-        %noscript= google_static_map(@application, :size => "350x200")
-      #pano(style="width:350px;height:200px")
-        %noscript= google_static_streetview(@application, :size => "350x200")
+#main
+  #application
+    #application-info
+      %h3.address= @application.address
+      - if @application.location
+        #map_div(style="width:350px;height:200px")
+          %noscript= google_static_map(@application, :size => "350x200")
+        #pano(style="width:350px;height:200px")
+          %noscript= google_static_streetview(@application, :size => "350x200")
+      %p.description= @application.description
+      %p.dates
+        = scraped_and_received_text(@application)
+      %p.more
+        = link_to "Read more information", @application.info_url
+        about this application
+      %p.source (Source: #{link_to @application.authority.full_name, authority_path(@application.authority.short_name_encoded)}, reference #{@application.council_reference})
+      - if @application.no_alerted
+        %p.no_alerted
+          - if @application.no_alerted == 1
+            1 person was
+          - else
+            #{@application.no_alerted} people were
+          notified of this application via
+          = link_to "email alerts", new_alert_path
+      - unless @nearby_count == 0
+        %p#nearby-applications
+          - if @nearby_count == 1
+            There is
+            = link_to "1 other nearby and recent application", nearby_application_url(@application, :sort => "time")
+          - else
+            There are
+            = link_to "#{@nearby_count} other nearby and recent applications", nearby_application_url(@application, :sort => "time")
+
+    #comments-area
+      - if @application.authority.contactable?
+        - unless @application.comments.visible.empty?
+          %h4 Comments
+        %ol#comments
+          - @application.comments.visible.each do |comment|
+            %li{:id => "comment#{comment.id}"}
+              = render :partial => 'comments/comment', :locals => {:comment => comment}
+      %h4 Add your own comment
+      - if @application.authority.contactable?  
+        - if @application.on_notice_to
+          %p= on_notice_text(@application)
+        %p
+          All the information you provide in your comment below will be sent to
+          <strong>#{@application.authority.full_name}</strong> and will influence whether the application
+          is approved or not. The text of your comment and your name will be public.
+        %p
+          If you have made a donation to a Councillor and/or gift to a Councillor or Council employee you may
+          #{link_to("need to disclose this", faq_path(:anchor => "disclosure", :comment => true))}.
+        = semantic_form_for [@application, @comment] do |f|
+          = f.inputs do
+            = f.input :text, :label => 'Comment',
+              :hint => "Explain why you think this application should be approved or not. Please be polite, concise and to the point."
+            = f.input :name, :label => 'Name', :hint => "Please use your real full name if possible."
+            = f.input :email, :label => 'Email', :hint => "We never display your email address"
+            %li#comment_address_input.string.required
+              = f.label 'address', :required => true
+              = f.text_field 'address'
+              %p.inline-hints
+                e.g. 1 Sowerby St, Goulburn (we never display this).
+                = link_to("Why do you need my address?", faq_path(:anchor => "address", :comment => true))
+              %div#faq_commenting_address.inline-hints.hidden
+                = render :partial => 'static/faq_commenting_address'
+          = f.actions
+      - else
+        %p
+          = link_to "How to comment", @application.comment_url
+          on this application (from #{@application.authority.full_name}).
+          - if @application.on_notice_to
+            = on_notice_text(@application)
+
+#sidebar
+  #alert      
     = semantic_form_for @alert do |f|
       = render :partial => "alerts/signup_introduction"
       = f.inputs do
@@ -21,71 +90,6 @@
         = f.input :email, :label => "Enter your email address", :placeholder => "Enter your email address"
       = f.actions do
         = f.action :submit, :label => "Create Alert"
-  
-  %h3.address= @application.address
-  %p.description= @application.description
-  %p.dates
-    = scraped_and_received_text(@application)
-  %p.more
-    = link_to "Read more information", @application.info_url
-    about this application
-  %p.source (Source: #{link_to @application.authority.full_name, authority_path(@application.authority.short_name_encoded)}, reference #{@application.council_reference})
-  - if @application.no_alerted
-    %p.no_alerted
-      - if @application.no_alerted == 1
-        1 person was
-      - else
-        #{@application.no_alerted} people were
-      notified of this application via
-      = link_to "email alerts", new_alert_path
-  - unless @nearby_count == 0
-    %p#nearby-applications
-      - if @nearby_count == 1
-        There is
-        = link_to "1 other nearby and recent application", nearby_application_url(@application, :sort => "time")
-      - else
-        There are
-        = link_to "#{@nearby_count} other nearby and recent applications", nearby_application_url(@application, :sort => "time")
-
-  - if @application.authority.contactable?
-    - unless @application.comments.visible.empty?
-      %h4 Comments
-    %ol#comments
-      - @application.comments.visible.each do |comment|
-        %li{:id => "comment#{comment.id}"}
-          = render :partial => 'comments/comment', :locals => {:comment => comment}
-  %h4 Add your own comment
-  - if @application.authority.contactable?  
-    - if @application.on_notice_to
-      %p= on_notice_text(@application)
-    %p
-      All the information you provide in your comment below will be sent to
-      <strong>#{@application.authority.full_name}</strong> and will influence whether the application
-      is approved or not. The text of your comment and your name will be public.
-    %p
-      If you have made a donation to a Councillor and/or gift to a Councillor or Council employee you may
-      #{link_to("need to disclose this", faq_path(:anchor => "disclosure", :comment => true))}.
-    = semantic_form_for [@application, @comment] do |f|
-      = f.inputs do
-        = f.input :text, :label => 'Comment',
-          :hint => "Explain why you think this application should be approved or not. Please be polite, concise and to the point."
-        = f.input :name, :label => 'Name', :hint => "Please use your real full name if possible."
-        = f.input :email, :label => 'Email', :hint => "We never display your email address"
-        %li#comment_address_input.string.required
-          = f.label 'address', :required => true
-          = f.text_field 'address'
-          %p.inline-hints
-            e.g. 1 Sowerby St, Goulburn (we never display this).
-            = link_to("Why do you need my address?", faq_path(:anchor => "address", :comment => true))
-          %div#faq_commenting_address.inline-hints.hidden
-            = render :partial => 'static/faq_commenting_address'
-      = f.actions
-  - else
-    %p
-      = link_to "How to comment", @application.comment_url
-      on this application (from #{@application.authority.full_name}).
-      - if @application.on_notice_to
-        = on_notice_text(@application)
 
 - if @application.location
   :javascript

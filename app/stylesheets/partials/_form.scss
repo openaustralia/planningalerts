@@ -57,8 +57,15 @@ $fb-line-height: 1em;
 
 // Special formatting for specific forms
 
-.formtastic#new_comment, .formtastic#new_report {
+.formtastic#new_comment {
+  @include float-form(100%, 15%, 84%, 0, "buttons-left", "left", "select-auto");
+}
+
+.formtastic#new_report {
   @include float-form(950px, 190px, 754px, 0, "buttons-left", "left", "select-auto");
+}
+
+.formtastic#new_comment, .formtastic#new_report {
   textarea, input {
     font-family: $blueprint-font-family;
     font-size: 100%;
@@ -91,4 +98,36 @@ form.donate {
     //margin-left: 1em;
   }
 }
+
+#sidebar .formtastic.alert {
+  @include float-form(100%, 25%, 100%, 0, "buttons-left", "left", "select-auto");
+  margin-top: 0;
+  font-size: 75%;
+  background: $almostwhite;
+  //border: solid 1px $grey;
+  // Make text field sit nicely at the expected full width
+  input {
+    box-sizing:border-box;
+  }
+  .label {
+    /* Use seriously old-school way of hiding these labels so that placeholder polyfill can still work */
+    left: -999em;
+    position: absolute;
+    /* This is only used when the placeholder polyfill is active */
+    span.placeholder {
+      font-size: 1.3em;
+    }
+  }
+  .actions {
+    padding-left: 0;
+  }
+  .inline-hints {
+    margin-left: 0;
+  }
+  padding: 12px;
+  p {
+    margin-bottom: 1em;
+  }
+}
+
 

@@ -31,3 +31,11 @@
 #header, #menu, #page, #footer {
   @include span-columns(24 omega, 24);
 }
+
+#main {
+  @include span-columns(18, 24);
+}
+
+#sidebar {
+  @include span-columns(6 omega, 24)
+}

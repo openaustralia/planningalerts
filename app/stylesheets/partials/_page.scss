@@ -176,7 +176,8 @@ p a, li a, span a, dd a, dt a, div a {
 }
 
 #map_div, #pano {
-  margin-bottom: 10px;
+  margin-bottom: 1em;
+  display: inline-block;
 }
 
 #side {
@@ -264,36 +265,6 @@ ul#subscribe {
   }
   li {
     margin-bottom: 0.5em;
-  }
-}
-
-#application .alert {
-  margin: 0;
-  width: 326px;
-  p {
-    margin-bottom: 1em;
-  }
-  font-size: 75%;
-  background: $almostwhite;
-  padding: 12px;
-  border: solid 1px $grey;
-  .label {
-    /* Use seriously old-school way of hiding these labels so that placeholder polyfill can still work */
-    left: -999em;
-    position: absolute;
-    /* This is only used when the placeholder polyfill is active */
-    span.placeholder {
-      font-size: 1.3em;
-    }
-  }
-  .actions {
-    padding-left: 0;
-  }
-  .inline-hints {
-    margin-left: 0;
-  }
-  #alert_address, #alert_email {
-    width: 320px;
   }
 }
 
