@@ -58,9 +58,13 @@ $fb-line-height: 1em;
 // Special formatting for specific forms
 
 .formtastic#new_comment {
-  @include float-form(100%, 15%, 85%, 0, "buttons-left", "left", "select-auto");
+  @include float-form(100%, 0%, 100%, 0, "buttons-left", "left", "select-auto");
   input, textarea {
     @include box-sizing(border-box);
+  }
+  /* This is only used when the placeholder polyfill is active */
+  .label span.placeholder {
+    font-size: 1em;
   }
 }
 
