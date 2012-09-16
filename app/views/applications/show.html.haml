@@ -12,9 +12,9 @@
     #application-info
       %h3.address= @application.address
       - if @application.location
-        #map_div(style="width:350px;height:200px")
+        #map_div
           %noscript= google_static_map(@application, :size => "350x200")
-        #pano(style="width:350px;height:200px")
+        #pano
           %noscript= google_static_streetview(@application, :size => "350x200")
       %p.description= @application.description
       %p.dates
