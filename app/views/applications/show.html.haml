@@ -81,23 +81,24 @@
         = f.input :email, :label => "Enter your email address", :placeholder => "Enter your email address"
       = f.actions do
         = f.action :submit, :label => "Create Alert"
-  #application-stats
-    - if @application.no_alerted
-      %p.no_alerted
-        - if @application.no_alerted == 1
-          1 person was
-        - else
-          #{@application.no_alerted} people were
-        notified of this application via
-        = link_to "email alerts", new_alert_path
-    - unless @nearby_count == 0
-      %p#nearby-applications
-        - if @nearby_count == 1
-          There is
-          = link_to "1 other nearby and recent application", nearby_application_url(@application, :sort => "time")
-        - else
-          There are
-          = link_to "#{@nearby_count} other nearby and recent applications", nearby_application_url(@application, :sort => "time")
+  - if @application.no_alerted || @nearby_count > 0
+    #application-stats
+      - if @application.no_alerted
+        %p.no_alerted
+          - if @application.no_alerted == 1
+            1 person was
+          - else
+            #{@application.no_alerted} people were
+          notified of this application via
+          = link_to "email alerts", new_alert_path
+      - if @nearby_count > 0
+        %p#nearby-applications
+          - if @nearby_count == 1
+            There is
+            = link_to "1 other nearby and recent application", nearby_application_url(@application, :sort => "time")
+          - else
+            There are
+            = link_to "#{@nearby_count} other nearby and recent applications", nearby_application_url(@application, :sort => "time")
 
 - if @application.location
   :javascript
