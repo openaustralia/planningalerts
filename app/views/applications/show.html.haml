@@ -2,9 +2,6 @@
 - content_for :meta_description, @application.description
 - content_for :map, true
 = render :partial => "applications/facebook"
-#social
-  = render :partial => "applications/facebook_share_button", :locals => {:application => @application}
-  = render :partial => "applications/twitter_share_button", :locals => {:application => @application}
 = render :partial => "applications/twitter"
 
 #main
@@ -99,6 +96,9 @@
           - else
             There are
             = link_to "#{@nearby_count} other nearby and recent applications", nearby_application_url(@application, :sort => "time")
+  #social
+    = render :partial => "applications/twitter_share_button", :locals => {:application => @application}
+    = render :partial => "applications/facebook_share_button", :locals => {:application => @application}
 
 - if @application.location
   :javascript
