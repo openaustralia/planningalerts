@@ -20,7 +20,11 @@ $fb-line-height: 1em;
 }
 
 .formtastic {
-  @include float-form(100%, 25%, 70%, 0, "buttons-left", "left", "select-auto");
+  @include float-form(100%, 25%, 75%, 0, "buttons-left", "left", "select-auto");
+  // Make text field sit nicely at the expected full width
+  input, textarea {
+    @include box-sizing(border-box);
+  }
   margin-top: 2em;
   margin-bottom: 2em;
   li {
@@ -59,9 +63,6 @@ $fb-line-height: 1em;
 
 .formtastic#new_comment {
   @include float-form(100%, 0%, 100%, 0, "buttons-left", "left", "select-auto");
-  input, textarea {
-    @include box-sizing(border-box);
-  }
   /* This is only used when the placeholder polyfill is active */
   .label span.placeholder {
     font-size: 1em;
@@ -112,10 +113,6 @@ form.donate {
   font-size: 75%;
   background: $almostwhite;
   //border: solid 1px $grey;
-  // Make text field sit nicely at the expected full width
-  input {
-    @include box-sizing(border-box);
-  }
   .label {
     /* Use seriously old-school way of hiding these labels so that placeholder polyfill can still work */
     left: -999em;
