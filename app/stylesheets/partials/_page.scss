@@ -306,10 +306,6 @@ div.comment:hover {
   }  
 }
 
-form#new_comment {
-  clear: right;
-}
-
 .comment {
   margin-bottom: 1em;
 
@@ -330,10 +326,6 @@ body h4 {
 }
 
 #application {
-  ul#subscribe {
-    clear: both;
-  }
-
   p.dates, p.more, p.source {
     @include quiet;
     font-size: 0.8em;
