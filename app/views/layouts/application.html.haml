@@ -56,16 +56,17 @@
               = link_to 'Donate', donate_path
             = li_selected(:controller => "/static", :action => "about") do
               = link_to 'About', about_path
-    .container
-      #page
-        #content
-          - if notice
-            %p.notice= notice
-          - if alert
-            %p.alert= alert
-          - if flash[:error]
-            %p.error= flash[:error]
-          = yield
+    #page-wrapper
+      .container
+        #page
+          #content
+            - if notice
+              %p.notice= notice
+            - if alert
+              %p.alert= alert
+            - if flash[:error]
+              %p.error= flash[:error]
+            = yield
     #footer-wrapper
       .container
         #footer

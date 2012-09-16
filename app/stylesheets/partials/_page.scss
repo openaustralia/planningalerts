@@ -12,6 +12,15 @@ body {
   @include blueprint-interaction;
 }
 
+body {
+  background: #b0b0b0;
+}
+
+#page-wrapper {
+  background: white;
+  padding-top: 3em;  
+  padding-bottom: 2em;
+}
 // Remove the scaffolding when you're ready to start doing visual design.
 // Or leave it in if you're happy with how blueprint looks out-of-the-box
 //@include blueprint-scaffolding("body");
@@ -23,7 +32,6 @@ body {
 }
 
 #menu-wrapper {
-  margin-bottom: 3em;  
   background: #989898;
 }
 
@@ -118,7 +126,6 @@ body {
 
 #footer-wrapper {
   background: #b0b0b0;
-  margin-top: 2em;
 }
 
 #footer {
