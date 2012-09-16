@@ -107,7 +107,7 @@ form.donate {
   //border: solid 1px $grey;
   // Make text field sit nicely at the expected full width
   input {
-    box-sizing:border-box;
+    @include box-sizing(border-box);
   }
   .label {
     /* Use seriously old-school way of hiding these labels so that placeholder polyfill can still work */
