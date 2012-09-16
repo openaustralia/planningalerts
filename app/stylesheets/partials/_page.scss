@@ -215,6 +215,7 @@ div.apiitem {
     display: block;
     padding: 10px;
     border: solid 1px $grey;
+    word-wrap: break-word;
   }
   p {
     font-size: 0.8em;
