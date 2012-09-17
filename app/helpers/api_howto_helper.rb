@@ -35,8 +35,8 @@ module ApiHowtoHelper
     authority_applications_url(:host => api_host, :format => format, :authority_id => authority)
   end
   
-  def api_example_postcode_url(format, postcode = ::Configuration::API_EXAMPLE_POSTCODE)
-    applications_url(:host => api_host, :format => format, :postcode => postcode)
+  def api_example_postcode_url(format, postcode = ::Configuration::API_EXAMPLE_POSTCODE, extra_params = {})
+    applications_url({:host => api_host, :format => format, :postcode => postcode}.merge(extra_params))
   end
   
   def api_example_suburb_and_state_url(format, suburb = ::Configuration::API_EXAMPLE_SUBURB, state = ::Configuration::API_EXAMPLE_STATE)

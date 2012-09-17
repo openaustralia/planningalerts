@@ -9,11 +9,7 @@
   = link_to "Read more.", :anchor => "hLicenseInfo"
 %p
   All the API calls listed below return planning application sorted by the date they were scraped from the planning authority website with the most
-  recent listed first. They will return a maximum of #{Application.per_page} results. To retrieve more results simply append "&amp;<strong>page</strong>=[2,3,etc..]" to the url.
-%p
-  By appending "&amp;<strong>style</strong>=html" to the end of the url it will return an html formatted
-  description in the georss feed rather than the default plain text. This is especially
-  useful when a georss feed is embedded in a map as in the examples below.
+  recent listed first.
 %p
   The API can return different formats including <a href="http://www.georss.org/">GeoRSS</a>, <a href="http://www.json.org/">JSON</a> and <a href="http://en.wikipedia.org/wiki/JSONP">JSONP</a>. The examples below return
   JSON. To get GeoRSS instead simply replace ".js" in the URL with ".rss". To get JSONP add the query parameter "callback".
@@ -84,6 +80,31 @@
     = link_to "view example", api_example_suburb_and_state_url("js")
     |
     = link_to "view on a map", mapify(api_example_suburb_and_state_url("rss") + "&style=html", 13)
+
+%h4 Extra query parameters
+%p
+  There are several parameters that can be applied to each of the above queries for extra usefulness.
+.apiitem
+  %h5 page
+  %p.apidefinition
+    API calls return a maximum of #{Application.per_page} results. To retrieve more results simply do another request with page
+    set to 2, 3, etc... Not setting the page parameter is the same as requesting page 1.
+  %code= raw api_example_postcode_url("js", 2780, :page => 2)
+.apiitem
+  %h5 count
+  %p.apidefinition
+    API calls by default return a maximum of #{Application.per_page} results. To return less than that per page simply set the count parameter to the maximum number you want to return.
+  %code= raw api_example_postcode_url("js", 2780, :count => 10)
+.apiitem
+  %h5 style
+  %p.apidefinition
+    For georss, by setting "style" to "html" it will return an html formatted description in the georss feed rather than the default plain text. This is especially useful when a georss feed is embedded in a map as in some of the examples above.
+  %code= raw api_example_postcode_url("rss", 2780, :style => "html")
+.apiitem
+  %h5 callback
+  %p.apidefinition
+    To return JSONP set "callback" to the name of your javascript callback function.
+  %code= raw api_example_postcode_url("js", 2780, :callback => "my_callback")
 
 %h4#hLicenseInfo
   Usage & License
