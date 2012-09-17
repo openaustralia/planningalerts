@@ -15,7 +15,7 @@ class ApplicationsController < ApplicationController
       "suburb", "state",
       "address", "lat", "lng", "radius", "area_size",
       "bottom_left_lat", "bottom_left_lng", "top_right_lat", "top_right_lng",
-      "callback", "count"]
+      "callback", "count", "v"]
     
     # TODO: Fix this hacky ugliness
     if in_mobile_view?
@@ -97,7 +97,12 @@ class ApplicationsController < ApplicationController
       end
       format.js do
         ApiStatistic.log(request)
-        render :json => @applications.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance]), :callback => params[:callback]
+        if params[:v] == "2"
+          s = {:applications => @applications, :application_count => @applications.count, :page_count => @applications.total_pages}
+        else
+          s = @applications
+        end
+        render :json => s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance]), :callback => params[:callback]
       end
     end
   end
