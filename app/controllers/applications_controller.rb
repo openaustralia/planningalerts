@@ -15,7 +15,7 @@ class ApplicationsController < ApplicationController
       "suburb", "state",
       "address", "lat", "lng", "radius", "area_size",
       "bottom_left_lat", "bottom_left_lng", "top_right_lat", "top_right_lng",
-      "callback"]
+      "callback", "count"]
     
     # TODO: Fix this hacky ugliness
     if in_mobile_view?
@@ -29,7 +29,12 @@ class ApplicationsController < ApplicationController
         render :text => "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.sort.join(', ')}", :status => 400
         return
       end
-      per_page = Application.per_page
+      # Allow to set number of returned applications up to a maximum
+      if params[:count] && params[:count].to_i <= Application.per_page
+        per_page = params[:count].to_i
+      else
+        per_page = Application.per_page
+      end
     end
     
     @description = "Recent applications"
