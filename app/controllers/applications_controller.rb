@@ -102,7 +102,9 @@ class ApplicationsController < ApplicationController
         else
           s = @applications
         end
-        render :json => s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance]), :callback => params[:callback]
+        j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
+          :include => {:authority => {:only => [:full_name]}})
+        render :json => j, :callback => params[:callback]
       end
     end
   end
