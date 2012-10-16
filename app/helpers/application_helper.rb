@@ -75,8 +75,8 @@ module ApplicationHelper
     render :partial => 'applications/rss'
   end
   
-  def render_twitter_feed(user_id)
-    @items = rss_feed_items("http://twitter.com/statuses/user_timeline/#{user_id}.rss").map do |item|
+  def render_twitter_feed(screen_name)
+    @items = rss_feed_items("https://api.twitter.com/1/statuses/user_timeline.rss?screen_name=#{screen_name}").map do |item|
       # Remove the twitter handle from the start of the title
       item.title =~ /^[^:]+:(.*)$/
       item.title = $~[1].html_safe
