@@ -6,7 +6,10 @@ gem "capistrano"
 # Need to use older version of mysql2 because we're on Rails 3.0
 gem "mysql2", "~> 0.2.7"
 gem "haml"
-gem "geokit"
+# Latest release of geokit at this time (1.6.5) doesn't yet contain support for Google Maps Business API
+# and HEAD of the project has broken Ruby 1.8 support so backported the Google Maps Business API changes
+# on to geokit 1.6.5.
+gem "geokit", :git => "https://github.com/mlandauer/geokit.git", :branch => "back_port_google_maps_business_api"
 gem "nokogiri"
 gem "foreigner"
 gem 'httparty'

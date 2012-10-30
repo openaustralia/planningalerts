@@ -5,6 +5,14 @@ GIT
   specs:
     geocoder (1.1.3)
 
+GIT
+  remote: https://github.com/mlandauer/geokit.git
+  revision: a541ba216b8004e82e66d57b68dca2e27cf47ab7
+  branch: back_port_google_maps_business_api
+  specs:
+    geokit (1.6.5)
+      multi_json
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -120,8 +128,6 @@ GEM
     formtastic (2.1.1)
       actionpack (~> 3.0)
     fssm (0.2.9)
-    geokit (1.6.5)
-      multi_json
     gherkin (2.11.2)
       json (>= 1.4.6)
     guard (1.3.2)
@@ -293,7 +299,7 @@ DEPENDENCIES
   foreigner
   formtastic (~> 2.1.1)
   geocoder!
-  geokit
+  geokit!
   guard
   guard-livereload
   guard-rspec
