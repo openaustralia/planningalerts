@@ -15,7 +15,7 @@ class Location < SimpleDelegator
   end
 
   def self.geocode(address)
-    r = Geokit::Geocoders::GoogleGeocoder.geocode(address, :bias => "au")
+    r = Geokit::Geocoders::GoogleGeocoder3.geocode(address, :bias => "au")
     r = r.all.find{|l| Location.new(l).in_correct_country?} || r
     l = Location.new(r)
     l.original_address = address
@@ -43,7 +43,7 @@ class Location < SimpleDelegator
         "isn't valid"
       elsif !in_correct_country?
         "isn't in Australia"
-      elsif accuracy < 6
+      elsif accuracy < 5
         "isn't complete. We saw that address as \"#{full_address}\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state"
       end
     end
