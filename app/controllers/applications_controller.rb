@@ -91,12 +91,12 @@ class ApplicationsController < ApplicationController
       format.mobile { render "index.mobile", :layout => "application.mobile" }
       # TODO: Move the template over to using an xml builder
       format.rss do
-        ApiStatistic.log(request)
+        #ApiStatistic.log(request)
         render params[:style] == "html" ? "index_html.rss" : "index.rss",
           :layout => false, :content_type => Mime::XML
       end
       format.js do
-        ApiStatistic.log(request)
+        #ApiStatistic.log(request)
         if params[:v] == "2"
           s = {:applications => @applications, :application_count => @applications.count, :page_count => @applications.total_pages}
         else

@@ -54,12 +54,12 @@ describe ApplicationsController do
       assigns[:description].should == "Recent applications within 4 km of 24 Bruce Road, Glenbrook NSW 2773"
     end
 
-    it "should log the api call" do
-      get :index, :format => "rss", :address => "24 Bruce Road Glenbrook", :radius => 4000
-      a = ApiStatistic.first
-      a.ip_address.should == "0.0.0.0"
-      a.query.should == "/applications.rss?address=24+Bruce+Road+Glenbrook&radius=4000"
-    end
+    #it "should log the api call" do
+    #  get :index, :format => "rss", :address => "24 Bruce Road Glenbrook", :radius => 4000
+    #  a = ApiStatistic.first
+    #  a.ip_address.should == "0.0.0.0"
+    #  a.query.should == "/applications.rss?address=24+Bruce+Road+Glenbrook&radius=4000"
+    #end
 
   end
 
