@@ -1,4 +1,4 @@
-You like finding our what's happening in your local area
+You like finding out what's happening in your local area
 but what about what's happening in Government? That's
 exactly what our latest project lets you do:
 
@@ -32,3 +32,4 @@ If you use this service please consider donating: http://dev.planningalerts.org.
 To change the size of the area covered by the alerts: http://dev.planningalerts.org.au/alerts/abcdef/area
 
 To stop receiving these emails: http://dev.planningalerts.org.au/alerts/abcdef/unsubscribe
+
