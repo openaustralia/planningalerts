@@ -41,3 +41,4 @@ If you use this service please consider donating: http://dev.planningalerts.org.
 To change the size of the area covered by the alerts: http://dev.planningalerts.org.au/alerts/abcdef/area
 
 To stop receiving these emails: http://dev.planningalerts.org.au/alerts/abcdef/unsubscribe
+
