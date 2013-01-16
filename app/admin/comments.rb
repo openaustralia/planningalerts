@@ -19,4 +19,21 @@ ActiveAdmin.register Comment, :as => "ApplicationComment" do
   filter :text
   filter :email
   filter :name
+
+  form do |f|
+    f.inputs "Text" do
+      f.input :text
+    end
+    f.inputs "Person details" do
+      f.input :email
+      f.input :name
+      f.input :address
+    end
+    f.inputs "Comment Properties" do
+      f.input :confirmed
+      f.input :hidden
+    end
+    f.buttons
+  end
+
 end
