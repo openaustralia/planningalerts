@@ -50,6 +50,9 @@ module PlanningalertsApp
         :strategies => YAML.load_file("#{config.root}/config/throttling.yml"),
         :key_prefix => :throttle,
         :message => "Rate Limit Exceeded. See http://www.planningalerts.org.au/api/howto#hLicenseInfo for more information"
+
+    config.assets.enabled = true
+    config.assets.version = '1.0'
   end
 end
 

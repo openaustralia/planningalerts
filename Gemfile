@@ -1,10 +1,19 @@
 source :rubygems
 
-gem 'rails', '3.0.20'
+gem 'rails', '= 3.1.3'
+gem 'mysql2', '> 0.3'
+ 
+# Needed for the new asset pipeline
+group :assets do
+  gem 'sass-rails',   "~> 3.1.5"
+  gem 'coffee-rails', "~> 3.1.1"
+  gem 'uglifier',     ">= 1.0.3"
+end
+ 
+# jQuery is the default JavaScript library in Rails 3.1
+gem 'jquery-rails'
 
 gem "capistrano"
-# Need to use older version of mysql2 because we're on Rails 3.0
-gem "mysql2", "~> 0.2.7"
 gem "haml"
 # Latest release of geokit at this time (1.6.5) doesn't yet contain support for Google Maps Business API
 # and HEAD of the project has broken Ruby 1.8 support so backported the Google Maps Business API changes
@@ -15,8 +24,8 @@ gem "foreigner"
 gem 'httparty'
 gem "will_paginate"
 # For minifying javascript and css
-gem 'smurf'
-gem 'thinking-sphinx', :require => 'thinking_sphinx'
+#gem 'smurf'
+gem 'thinking-sphinx', "~> 2.0", :require => 'thinking_sphinx'
 # Locking version of formtastic to sidestep bug in activeadmin
 gem "formtastic", "~> 2.1.1"
 gem 'validates_email_format_of'
