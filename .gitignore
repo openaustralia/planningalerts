@@ -22,3 +22,8 @@ public/javascripts/all.js
 public/javascripts/mxn_bundle.js
 webrat.log
 .DS_Store
+
+#IntelliJ
+*.iml
+.generators
+.rakeTasks
