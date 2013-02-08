@@ -23,4 +23,17 @@ feature "Manage alerts" do
     page.should have_content("24 Bruce Road, Glenbrook NSW 2773")
     Alert.active.find(:first, :conditions => {:address => "24 Bruce Road, Glenbrook NSW 2773", :radius_meters => "2000", :email => current_email_address}).should_not be_nil
   end
+
+  scenario "Unsubscribe from an email alert" do
+    # Adding arbitrary coordinates so that geocoding is not carried out
+    alert = Alert.create!(:address => "24 Bruce Rd, Glenbrook", :email => "example@example.com",
+      :radius_meters => "2000", :lat => 1.0, :lng => 1.0, :confirmed => true)
+    visit unsubscribe_alert_url(:id => alert.confirm_id)
+
+    page.should have_content("You have been unsubscribed")
+    page.should have_content("24 Bruce Rd, Glenbrook (within 2 km)")
+    Alert.active.find(:first, :conditions => {:address => "24 Bruce Rd, Glenbrook",
+      :email => "example@example.com"}).should be_nil
+  end
+
 end

@@ -2,13 +2,6 @@ Feature: Manage alerts
   In order to see new development applications in my suburb
   I want to sign up for an email alert
   
-  Scenario: Unsubscribe from an email alert
-    Given I have received an email alert for "24 Bruce Rd, Glenbrook" with a size of "2000"
-    When I click the "unsubscribe" link in the email alert for "24 Bruce Rd, Glenbrook"
-    Then I should see "You have been unsubscribed"
-    And I should see "24 Bruce Rd, Glenbrook (within 2 km)"
-    And I should not receive email alerts for the street address "24 Bruce Rd, Glenbrook"
-    
   Scenario: Change size of email alert
     Given I have received an email alert for "24 Bruce Rd, Glenbrook" with a size of "2000"
     When I click the "change alert size" link in the email alert for "24 Bruce Rd, Glenbrook"
