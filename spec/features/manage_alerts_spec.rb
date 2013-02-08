@@ -36,4 +36,17 @@ feature "Manage alerts" do
       :email => "example@example.com"}).should be_nil
   end
 
+  scenario "Change size of email alert" do
+    alert = Alert.create!(:address => "24 Bruce Rd, Glenbrook", :email => "example@example.com",
+      :radius_meters => "2000", :lat => 1.0, :lng => 1.0, :confirmed => true)
+    visit area_alert_url(:id => alert.confirm_id)
+
+    page.should have_content("What size area near 24 Bruce Rd, Glenbrook would you like to receive alerts for?")
+    find_field("My suburb (within 2 km)")['checked'].should be_true
+    choose("My neighbourhood (within 800 m)")
+    click_button("Update size")
+
+    page.should have_content("your alert size area has been updated")
+    Alert.active.find(:first, :conditions => {:address => "24 Bruce Rd, Glenbrook", :radius_meters => "800", :email => "example@example.com"}).should_not be_nil
+  end
 end
