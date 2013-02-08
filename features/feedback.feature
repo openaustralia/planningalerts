@@ -3,12 +3,6 @@ Feature: Give feedback to Council
   As a citizen
   I want to send feedback on a development application directly to the planning authority
     
-  Scenario: Giving feedback for an authority without a feedback email
-    Given a planning authority "Foo" without a feedback email
-    And an application "1" in planning authority "Foo"
-    When I go to application page "1"
-    Then I should see "How to comment on this application"
-    
   Scenario: Adding a comment
     Given a planning authority "Foo" with a feedback email "feedback@foo.gov.au"
     And an application "1" in planning authority "Foo"
