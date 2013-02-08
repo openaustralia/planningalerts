@@ -3,13 +3,6 @@ Feature: Give feedback to Council
   As a citizen
   I want to send feedback on a development application directly to the planning authority
     
-  Scenario: Unconfirmed comment should not be shown
-    Given a planning authority "Foo" with a feedback email "feedback@foo.gov.au"
-    And an application "1" in planning authority "Foo"
-    And an unconfirmed comment "I think this is a really good ideas" on application "1"
-    When I go to application page "1"
-    Then I should not see "I think this is a really good ideas"
-
   Scenario: Confirming the comment
     Given a planning authority "Foo" with a feedback email "feedback@foo.gov.au"
     And an application "1" in planning authority "Foo"

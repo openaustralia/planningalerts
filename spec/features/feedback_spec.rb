@@ -35,4 +35,12 @@ feature "Give feedback to Council" do
     current_email.default_part_body.to_s.should include(confirmed_comment_url(:id => comment.confirm_id, :host => 'dev.planningalerts.org.au'))
   end
 
+  scenario "Unconfirmed comment should not be shown" do
+    authority = Factory(:authority, :full_name => "Foo", :email => "feedback@foo.gov.au")
+    application = Factory(:application, :id => "1", :authority_id => authority.id)
+    Factory(:comment, :confirmed => false, :text => "I think this is a really good ideas", :application => application)
+    visit(application_path(application))
+
+    page.should_not have_content("I think this is a really good ideas")
+  end
 end
