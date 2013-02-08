@@ -11,7 +11,6 @@ PlanningalertsApp::Application.configure do
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
-  config.action_view.debug_rjs             = true
   config.action_controller.perform_caching = false
 
   # Send mail via Mailcatcher and raise an error if there is a problem
@@ -28,6 +27,12 @@ PlanningalertsApp::Application.configure do
 
   # Insert livereload js
   config.middleware.insert_before(Rack::Lock, Rack::LiveReload)
+
+  # Do not compress assets
+  config.assets.compress = false
+   
+  # Expands the lines which load the assets
+  config.assets.debug = true
 end
 
 # Uncomment the line below to turn on A/B data collection in development mode
