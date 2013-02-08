@@ -26,8 +26,7 @@ gem "will_paginate"
 # For minifying javascript and css
 #gem 'smurf'
 gem 'thinking-sphinx', "~> 2.0", :require => 'thinking_sphinx'
-# Locking version of formtastic to sidestep bug in activeadmin
-gem "formtastic", "~> 2.1.1"
+gem "formtastic"
 gem 'validates_email_format_of'
 gem "compass-rails"
 gem 'fancy-buttons'
