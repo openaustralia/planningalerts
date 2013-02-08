@@ -68,3 +68,9 @@ end
 group :test, :development do
   gem 'rspec-rails', '~> 2.4'
 end
+
+group :production do
+  # Javascript runtime (required for precompiling assets in production)
+  gem 'therubyracer'
+end
+
