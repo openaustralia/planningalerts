@@ -53,6 +53,8 @@ module PlanningalertsApp
 
     config.assets.enabled = true
     config.assets.version = '1.0'
+
+    config.action_dispatch.tld_length = 2
   end
 end
 
