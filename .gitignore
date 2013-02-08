@@ -15,10 +15,7 @@ public/api/*.html
 public/faq.html
 public/getinvolved.html
 public/index.html
-public/stylesheets/compiled
 public/sitemap.xml
 public/sitemaps/sitemap*.xml.gz
-public/javascripts/all.js
-public/javascripts/mxn_bundle.js
 webrat.log
 .DS_Store
