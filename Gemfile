@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'rails', '= 3.1.10'
+gem 'rails', '= 3.2.11'
 gem 'mysql2', '> 0.3'
  
 # Needed for the new asset pipeline
