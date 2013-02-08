@@ -143,8 +143,8 @@ GEM
     ffi (1.3.1)
     foreigner (1.3.0)
       activerecord (>= 3.0.0)
-    formtastic (2.1.1)
-      actionpack (~> 3.0)
+    formtastic (2.2.1)
+      actionpack (>= 3.0)
     fssm (0.2.10)
     fssm (0.2.9)
     gherkin (2.11.6)
@@ -347,7 +347,7 @@ DEPENDENCIES
   factory_girl_rails
   fancy-buttons
   foreigner
-  formtastic (~> 2.1.1)
+  formtastic
   geocoder!
   geokit!
   guard
