@@ -43,4 +43,18 @@ feature "Give feedback to Council" do
 
     page.should_not have_content("I think this is a really good ideas")
   end
+
+  scenario "Confirming the comment" do
+    authority = Factory(:authority, :full_name => "Foo", :email => "feedback@foo.gov.au")
+    application = Factory(:application, :id => "1", :authority_id => authority.id)
+    comment = Factory(:comment, :confirmed => false, :text => "I think this is a really good ideas", :application => application)
+    visit(confirmed_comment_path(:id => comment.confirm_id))
+
+    page.should have_content("Thanks. Your comment has been sent to Foo and is now visible on this page.")
+    page.should have_content("I think this is a really good ideas")
+    
+    unread_emails_for("feedback@foo.gov.au").size.should == 1
+    open_email("feedback@foo.gov.au")
+    current_email.default_part_body.to_s.should include("I think this is a really good ideas")
+  end
 end
