@@ -49,7 +49,8 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 
 group :test do
-  gem 'capybara'
+  # Apparently capybara 2 only works with Ruby 1.9
+  gem 'capybara', '< 2.0'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   # factory_girl 3.x requires Ruby 1.9
