@@ -11,6 +11,6 @@ describe "alert_notifier/alert" do
     assign(:comments, [])
     assign(:georss_url, "blah")
     render
-    rendered.should contain("Alterations & additions")      
+    rendered.should have_content("Alterations & additions")      
   end
 end
