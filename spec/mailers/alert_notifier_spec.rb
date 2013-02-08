@@ -121,8 +121,8 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
       end
 
       it 'should contain application descriptions' do
-        @html_body.should contain "Knock something down"
-        @html_body.should contain "Put something up"
+        @html_body.should have_content "Knock something down"
+        @html_body.should have_content "Put something up"
       end
 
       it "should have a specific layout" do

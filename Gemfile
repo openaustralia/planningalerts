@@ -49,11 +49,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 
 group :test do
-  gem 'cucumber-rails', :require => false
-  # Using Capybara for integration testing. Also including Webrat so we have
-  # access to the matchers in view tests.
   gem 'capybara'
-  gem 'webrat'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   # factory_girl 3.x requires Ruby 1.9

@@ -139,7 +139,7 @@ class Authority < ActiveRecord::Base
   end
 
   def median_applications_per_week
-    v = applications_per_week.map{|a| a[1]}.sort
+    v = applications_per_week.select{|a| a[1] > 0}.map{|a| a[1]}.sort
     v[v.count / 2]
   end
 

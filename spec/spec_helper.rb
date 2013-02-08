@@ -3,6 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
+require "email_spec"
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -37,4 +38,10 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  # This is a workaround for a strange thing where ActionMailer::Base.deliveries isn't being
+  # cleared out correctly in feature specs. So, do it here for everything.
+  config.before(:each) do
+    ActionMailer::Base.deliveries = []
+  end
 end

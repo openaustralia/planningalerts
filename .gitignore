@@ -19,3 +19,8 @@ public/sitemap.xml
 public/sitemaps/sitemap*.xml.gz
 webrat.log
 .DS_Store
+
+#IntelliJ
+*.iml
+.generators
+.rakeTasks
