@@ -3,6 +3,9 @@ require 'bundler/capistrano'
 require 'rvm/capistrano'
 require 'delayed/recipes'
 
+# This adds a task that precompiles assets for the asset pipeline
+load 'deploy/assets'
+
 set :rvm_ruby_string, '1.8.7'
 
 set :application, "planningalerts.org.au/app"
@@ -34,7 +37,7 @@ after "deploy:restart", "delayed_job:restart"
 
 namespace :deploy do
   desc "After a code update, we link additional config and the scrapers"
-  after "deploy:update_code" do
+  before "deploy:assets:precompile" do
     links = {
             "#{release_path}/config/database.yml"           => "#{shared_path}/database.yml",
             "#{release_path}/config/throttling.yml"         => "#{shared_path}/throttling.yml",
@@ -44,6 +47,7 @@ namespace :deploy do
             "#{release_path}/public/scrapers"               => "#{deploy_to}/../parsers/current/public",
             "#{release_path}/public/sitemap.xml"            => "#{shared_path}/sitemap.xml",
             "#{release_path}/public/sitemaps"               => "#{shared_path}/sitemaps",
+            "#{release_path}/public/assets"                 => "#{shared_path}/assets",
     }
 
     # "ln -sf <a> <b>" creates a symbolic link but deletes <b> if it already exists
