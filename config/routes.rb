@@ -85,6 +85,6 @@ PlanningalertsApp::Application.routes.draw do
   root :to => 'applications#address'
 
   unless Rails.application.config.consider_all_requests_local
-    match '*not_found', :to => 'static#error_404'
+    match '*not_found', :to => 'static#error_404', :format => :html
   end
 end
