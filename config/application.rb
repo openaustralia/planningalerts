@@ -55,6 +55,8 @@ module PlanningalertsApp
     config.assets.version = '1.0'
 
     config.action_dispatch.tld_length = 2
+
+    config.exceptions_app = self.routes
   end
 end
 
