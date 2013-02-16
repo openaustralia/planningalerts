@@ -11,7 +11,6 @@ PlanningalertsApp::Application.configure do
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
-  config.action_view.debug_rjs             = true
   config.action_controller.perform_caching = false
 
   # Send mail via Mailcatcher and raise an error if there is a problem
@@ -28,6 +27,19 @@ PlanningalertsApp::Application.configure do
 
   # Insert livereload js
   config.middleware.insert_before(Rack::Lock, Rack::LiveReload)
+
+  # Do not compress assets
+  config.assets.compress = false
+   
+  # Expands the lines which load the assets
+  config.assets.debug = true
+
+  # Raise exception on mass assignment protection for Active Record models
+  config.active_record.mass_assignment_sanitizer = :strict
+   
+  # Log the query plan for queries taking more than this (works
+  # with SQLite, MySQL, and PostgreSQL)
+  config.active_record.auto_explain_threshold_in_seconds = 0.5
 end
 
 # Uncomment the line below to turn on A/B data collection in development mode

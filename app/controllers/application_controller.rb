@@ -4,12 +4,6 @@
 class ApplicationController < ActionController::Base
   use_vanity
 
-  unless Rails.application.config.consider_all_requests_local
-    rescue_from ActionController::RoutingError, :with => :render_404
-    rescue_from ActionController::UnknownAction, :with => :render_404
-    rescue_from ActiveRecord::RecordNotFound, :with => :render_404
-  end
-
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
@@ -23,10 +17,6 @@ class ApplicationController < ActionController::Base
   def load_configuration
     @alert_count = Stat.applications_sent
     @authority_count = Authority.active.count
-  end
-  
-  def render_404
-    render "static/error_404.html", :status => :not_found
   end
   
   def mobile_optimise_switching
