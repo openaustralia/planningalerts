@@ -53,7 +53,17 @@
         = f.actions do
           = f.action :submit, :label => "Create alert"
       %h3 Recent applications within #{meters_in_words(@radius)} of #{@q}
-      = paginated_section @applications, :previous_label => "« Newer", :next_label => "Older »" do
+      %p
+        = link_to_unless @sort == "time", "Most recent first", :sort => "time", :q => @q, :page => nil
+        |
+        = link_to_unless @sort == "distance", "Closest first", :sort => "distance", :q => @q, :page => nil
+
+      - if @sort == "distance"
+        - p, n = "Closer", "Further"
+      - else
+        - p, n = "Newer", "Older"
+
+      = paginated_section @applications, :previous_label => "« #{p}", :next_label => "#{n} »" do
         %dl= render :partial => "application", :collection => @applications
 - else
   %hr
