@@ -12,15 +12,40 @@ module ApplicationsHelper
     end
     text
   end
-  
-  def on_notice_text(application)
-    if application.on_notice_from && application.on_notice_from.future?
-      text = "The period for officially responding to this application starts in <strong>#{distance_of_time_in_words(Time.now, application.on_notice_from)}</strong> and finishes #{distance_of_time_in_words(application.on_notice_from, application.on_notice_to)} later."
-    elsif application.on_notice_to.future?
-      text = "You have <strong>#{distance_of_time_in_words(Time.now, application.on_notice_to)}</strong> left to officially respond to this application."
-      text << " The period for comment started #{time_ago_in_words(application.on_notice_from)} ago." if application.on_notice_from
+
+  def days_ago_in_words(date)
+    case date
+    when Date.today
+      "today"
+    when Date.today - 1.day
+      "yesterday"
     else
-      text = "You're too late! The period for officially commenting on this application finished <strong>#{time_ago_in_words(application.on_notice_to)}</strong> ago."
+      "#{distance_of_time_in_words(date, Date.today)} ago"
+    end
+  end
+
+  def days_in_future_in_words(date)
+    case date
+    when Date.today
+      "today"
+    when Date.today + 1.day
+      "tomorrow"
+    else
+      "in #{distance_of_time_in_words(Date.today, date)}"
+    end
+  end
+
+  def on_notice_text(application)
+    if application.on_notice_from && (Date.today < application.on_notice_from)
+      text = "The period for officially responding to this application starts <strong>#{days_in_future_in_words(application.on_notice_from)}</strong> and finishes #{distance_of_time_in_words(application.on_notice_from, application.on_notice_to)} later."
+    elsif Date.today == application.on_notice_to
+      text = "<strong>Today</strong> is the last day to officially respond to this application."
+      text << " The period for comment started #{days_ago_in_words(application.on_notice_from)}." if application.on_notice_from
+    elsif Date.today < application.on_notice_to
+      text = "You have <strong>#{distance_of_time_in_words(Date.today, application.on_notice_to)}</strong> left to officially respond to this application."
+      text << " The period for comment started #{days_ago_in_words(application.on_notice_from)}." if application.on_notice_from
+    else
+      text = "You're too late! The period for officially commenting on this application finished <strong>#{days_ago_in_words(application.on_notice_to)}</strong>."
       text << " It lasted for #{distance_of_time_in_words(application.on_notice_from, application.on_notice_to)}." if application.on_notice_from
     end
     text.html_safe
