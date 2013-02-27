@@ -47,6 +47,7 @@ gem "susy"
 gem 'newrelic_rpm'
 gem 'delayed_job_active_record'
 gem 'daemons'
+gem 'mobile-fu', :git => "https://github.com/openaustralia/mobile-fu.git"
 
 group :test do
   # Apparently capybara 2 only works with Ruby 1.9
