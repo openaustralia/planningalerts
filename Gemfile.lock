@@ -197,7 +197,7 @@ GEM
     net-ssh (2.6.5)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    newrelic_rpm (3.5.6.46)
+    newrelic_rpm (3.5.7.59)
     nokogiri (1.5.6)
     orm_adapter (0.4.0)
     polyamorous (0.5.0)
