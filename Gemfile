@@ -48,7 +48,6 @@ gem 'newrelic_rpm'
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'mobile-fu', :git => "https://github.com/openaustralia/mobile-fu.git"
-gem 'coveralls', :require => false
 
 group :test do
   # Apparently capybara 2 only works with Ruby 1.9
@@ -58,6 +57,7 @@ group :test do
   # factory_girl 3.x requires Ruby 1.9
   gem 'factory_girl', '< 3.0'
   gem 'email_spec'
+  gem 'coveralls', :require => false
 end
 
 group :development do
