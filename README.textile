@@ -11,7 +11,7 @@ This code is free and open-source and is licensed under the GPL v2.
 
 PlanningAlerts is brought to you by the "OpenAustralia Foundation":http://www.openaustraliafoundation.org.au. It was adapted for Australia by Matthew Landauer and Katherine Szuminska, and is based on the UK site "PlanningAlerts.com":http://www.planningalerts.com, built by Richard Pope, Mikel Maron, Sam Smith, Duncan Parkes, Tom Hughes and Andy Armstrong.
 
-h3. Setting up a dev environment !https://secure.travis-ci.org/openaustralia/planningalerts-app.png?branch=master(Build Status)!:http://travis-ci.org/openaustralia/planningalerts-app !https://gemnasium.com/openaustralia/planningalerts-app.png(Dependency Status)!:https://gemnasium.com/openaustralia/planningalerts-app!https://coveralls.io/repos/openaustralia/planningalerts-app/badge.png?branch=master(Coverage Status)!:https://coveralls.io/r/openaustralia/planningalerts-app !https://coveralls.io/repos/openaustralia/planningalerts-app/badge.png?branch=master(Coverage Status)!:https://coveralls.io/r/openaustralia/planningalerts-app
+h3. Setting up a dev environment !https://secure.travis-ci.org/openaustralia/planningalerts-app.png?branch=master(Build Status)!:http://travis-ci.org/openaustralia/planningalerts-app !https://gemnasium.com/openaustralia/planningalerts-app.png(Dependency Status)!:https://gemnasium.com/openaustralia/planningalerts-app !https://coveralls.io/repos/openaustralia/planningalerts-app/badge.png?branch=master(Coverage Status)!:https://coveralls.io/r/openaustralia/planningalerts-app
 
 *Install Dependencies*
  * Install MySql - On OSX download dmg from "http://dev.mysql.com/downloads/":http://dev.mysql.com/downloads/
