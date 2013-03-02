@@ -4,7 +4,7 @@ log/*.log
 tmp/cache
 tmp/pids
 tmp/sass-cache
-
+coverage
 log/searchd.development.pid
 config/database.yml
 config/development.sphinx.conf
