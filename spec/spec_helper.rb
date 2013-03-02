@@ -1,7 +1,11 @@
 require 'simplecov'
 require 'coveralls'
 
-SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+# Generate coverage locally in html as well as in coveralls.io
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
 SimpleCov.start('rails') do
   add_filter 'app/admin'
 end
