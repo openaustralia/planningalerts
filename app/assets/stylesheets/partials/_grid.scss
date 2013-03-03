@@ -1,21 +1,74 @@
-.container {
-  @include container;
-  //@include susy-grid-background;
+@include at-breakpoint(6 32.5em) {
+  $container-style: fluid;
+
+  .container {
+    @include container;
+  }
+
+  #header, #menu, #page, #footer, #main, #sidebar,
+  .blog-feed, .twitter-feed, .keepintouch, .oaf {
+    @include span-columns(6 omega, 6);
+  }
 }
 
-#header, #menu, #page, #footer {
-  @include span-columns(24 omega, 24);
+@include at-breakpoint(32.5em 12 60em) {
+  $container-style: fluid;
+
+  .container {
+    @include container;
+  }
+
+  #header, #menu, #page, #footer {
+    @include span-columns(12 omega, 12);
+  }
+
+  #main {
+    @include span-columns(9, 12);
+  }
+
+  #sidebar {
+    @include span-columns(3 omega, 12)
+  }
+
+  // news
+  .blog-feed {
+    @include span-columns(5, 12);
+  }  
+  .twitter-feed {
+    @include pre(2);
+    @include span-columns(5 omega, 12);
+  }
+
+  // #footer
+  .keepintouch {
+    @include span-columns(4, 12);
+  }
+  .oaf {
+    @include pre(4);
+    @include span-columns(4 omega,  12);    
+  }
 }
 
-#main {
-  @include span-columns(18, 24);
-}
+@include at-breakpoint(60em 24) {
+  $container-style: static;
 
-#sidebar {
-  @include span-columns(6 omega, 24)
-}
+  .container {
+    @include container;
+  }
 
-.news {
+  #header, #menu, #page, #footer {
+    @include span-columns(24 omega, 24);
+  }
+
+  #main {
+    @include span-columns(18, 24);
+  }
+
+  #sidebar {
+    @include span-columns(6 omega, 24)
+  }
+
+  // news
   .blog-feed {
     @include span-columns(11, 24);
   }  
@@ -23,9 +76,8 @@
     @include pre(2);
     @include span-columns(11 omega, 24);
   }
-}
 
-#footer {
+  // #footer
   .keepintouch {
     @include span-columns(8,24);
   }
