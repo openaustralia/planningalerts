@@ -5,8 +5,9 @@ gem 'mysql2', '> 0.3'
  
 # Needed for the new asset pipeline
 group :assets do
-  gem 'sass-rails'
   gem 'coffee-rails'
+  gem "compass-rails"
+  gem 'sass-rails'
   gem 'uglifier'
 end
  
@@ -28,7 +29,6 @@ gem "will_paginate"
 gem 'thinking-sphinx', "~> 2.0", :require => 'thinking_sphinx'
 gem "formtastic"
 gem 'validates_email_format_of'
-gem "compass-rails"
 gem 'fancy-buttons'
 # Use Matthew's fork that includes bounding box optimisation for distance queries
 gem "geocoder", :require => "geocoder", :git => "https://github.com/mlandauer/geocoder.git", :branch => "bounding_box"
