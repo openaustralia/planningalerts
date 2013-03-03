@@ -1,5 +1,6 @@
-// Import the non-default scaffolding module to help us get started.
-//@import "blueprint/scaffolding";
+@import "compass/utilities/general/min";
+@import "compass/utilities/links/hover-link";
+@import "compass/utilities/lists/horizontal-list";
 
 // This configuration will only apply the
 // blueprint styles to pages with a body class of "bp"
@@ -21,11 +22,6 @@ body {
   padding-top: 3em;  
   padding-bottom: 2em;
 }
-// Remove the scaffolding when you're ready to start doing visual design.
-// Or leave it in if you're happy with how blueprint looks out-of-the-box
-//@include blueprint-scaffolding("body");
-
-@import "compass/utilities/lists/horizontal-list";
 
 #header-wrapper {
   background: #878787 url(/images/banner.png) repeat-x center 0;
@@ -153,9 +149,6 @@ body {
 }
 
 // Content
-
-@import "compass/utilities/general/min";
-@import "compass/utilities/links/hover-link";
 
 p a, li a, span a, dd a, dt a, div a {
   @include hover-link;
