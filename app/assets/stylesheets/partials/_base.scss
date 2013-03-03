@@ -1,15 +1,14 @@
 // Here is where you can define your constants for your application and to configure the blueprint framework.
 // Feel free to delete these if you want keep the defaults:
 
-$blueprint-font-size: 16px;
+$base-font-size: 16px;
+$blueprint-font-size: $base-font-size;
 
 // Susy grid settings
 
-$total-columns  : 24;
-$column-width   : 30px;
-$gutter-width   : 10px;
+$column-width   : 1.875em;
+$gutter-width   : 0.625em;
 $grid-padding   : $gutter-width;
-$container-style: static;
 
 // Colours
 
