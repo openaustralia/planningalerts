@@ -46,7 +46,6 @@ gem "susy"
 gem 'newrelic_rpm'
 gem 'delayed_job_active_record'
 gem 'daemons'
-gem 'mobile-fu', :git => "https://github.com/openaustralia/mobile-fu.git"
 gem "validate_url"
 gem "twitter"
 

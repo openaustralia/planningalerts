@@ -6,12 +6,6 @@ GIT
     geokit (1.6.5)
       multi_json
 
-GIT
-  remote: https://github.com/openaustralia/mobile-fu.git
-  revision: 5dca62b3a53e29df63c3af2314ae8b7a17e14088
-  specs:
-    mobile-fu (0.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -361,7 +355,6 @@ DEPENDENCIES
   haml
   httparty
   jquery-rails
-  mobile-fu!
   mysql2 (> 0.3)
   newrelic_rpm
   nokogiri

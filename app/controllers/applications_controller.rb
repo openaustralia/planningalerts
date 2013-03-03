@@ -1,10 +1,6 @@
 require 'will_paginate/array'
 
 class ApplicationsController < ApplicationController
-  has_mobile_fu
-  before_filter :mobile_optimise_switching, :only => [:show, :index, :nearby]
-  skip_before_filter :set_mobile_format, :except => [:show, :index, :nearby]
-  skip_before_filter :force_mobile_format, :except => [:show, :index, :nearby]
 
   def index
     valid_parameter_keys = [
@@ -18,9 +14,7 @@ class ApplicationsController < ApplicationController
       "callback", "count", "v"]
     
     # TODO: Fix this hacky ugliness
-    if in_mobile_view?
-      per_page = 10
-    elsif request.format == Mime::HTML
+    if request.format == Mime::HTML
       per_page = 30
     else
       # Parameter error checking (only do it on the API calls)
@@ -88,7 +82,6 @@ class ApplicationsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.mobile { render "index.mobile", :layout => "application.mobile" }
       # TODO: Move the template over to using an xml builder
       format.rss do
         #ApiStatistic.log(request)
@@ -189,7 +182,6 @@ class ApplicationsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.mobile { render "show.mobile", :layout => "application.mobile" }
     end
   end
   
@@ -205,9 +197,7 @@ class ApplicationsController < ApplicationController
     @rss = nearby_application_url(params.merge(:format => "rss", :page => nil))
     
     # TODO: Fix this hacky ugliness
-    if in_mobile_view?
-      per_page = 10
-    elsif request.format == Mime::HTML
+    if request.format == Mime::HTML
       per_page = 30
     else
       per_page = Application.per_page
@@ -229,7 +219,6 @@ class ApplicationsController < ApplicationController
 
     respond_to do |format|
       format.html { render "nearby" }
-      format.mobile { render "nearby.mobile", :layout => "application.mobile" }
       format.rss { render "index", :format => :rss, :layout => false, :content_type => Mime::XML }
     end
   end
