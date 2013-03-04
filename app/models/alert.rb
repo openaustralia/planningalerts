@@ -126,7 +126,7 @@ class Alert < ActiveRecord::Base
   def process
     applications = recent_applications
     comments = new_comments
-    AlertNotifier.deliver_alert(self, applications, comments) unless applications.empty? && comments.empty?
+    AlertNotifier.alert(self, applications, comments).deliver unless applications.empty? && comments.empty?
     # Update the tallies on each application.
     applications.each do |application|
       application.update_attribute(:no_alerted, (application.no_alerted || 0) + 1)

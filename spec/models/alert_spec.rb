@@ -249,4 +249,54 @@ describe Alert do
       alert.new_comments.should == [comment1, comment2]
     end
   end
+
+  describe "#process" do
+    context "an alert with no new comments" do
+      let(:alert) { Alert.create!(:email => "matthew@openaustralia.org", :address => @address, :radius_meters => 2000) }
+      before :each do
+        alert.stub!(:recent_comments).and_return([])
+        # Don't know why this isn't cleared out automatically
+        ActionMailer::Base.deliveries = []
+      end
+
+      context "and a new application nearby" do
+        let(:application) do
+          Factory(:application, :lat => 1.0, :lng => 2.0, :address => "24 Bruce Road, Glenbrook, NSW",
+            :suburb => "Glenbrook", :state => "NSW", :postcode => "2773", :no_alerted => 3)
+        end
+
+        before :each do
+          alert.stub!(:recent_applications).and_return([application])
+        end
+
+        it "should return the number of applications and comments sent" do
+          alert.process.should == [1, 0]
+        end
+
+        it "should send an email" do
+          alert.process
+
+          ActionMailer::Base.deliveries.size.should == 1
+        end
+
+        it "should update the tally" do
+          alert.process
+
+          application.no_alerted.should == 4
+        end
+      end
+
+      context "and no new applications nearby" do
+        before :each do
+          alert.stub!(:recent_applications).and_return([])
+        end
+
+        it "should not send an email" do
+          alert.process
+
+          ActionMailer::Base.deliveries.should be_empty
+        end
+      end
+    end
+  end
 end
