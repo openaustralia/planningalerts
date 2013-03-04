@@ -19,6 +19,7 @@ public/sitemap.xml
 public/sitemaps/sitemap*.xml.gz
 webrat.log
 .DS_Store
+planningalerts-app.sublime-workspace
 
 #IntelliJ
 *.iml
