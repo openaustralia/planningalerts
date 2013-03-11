@@ -31,6 +31,96 @@ describe ApplicationsController do
       assigns[:description].should == "Recent applications within the last 2 months"
     end
   end
+
+  describe "json api" do
+    it "should find recent applications" do
+      result = Factory(:application, :id => 10, :date_scraped => Date.new(2001,1,1))
+      Application.stub_chain(:where, :paginate).and_return([result])
+      get :index, :format => "js"
+      JSON.parse(response.body).should == [{
+        "application" => {
+          "id" => 10,
+          "council_reference" => "001",
+          "address" => "",
+          "on_notice_from" => nil,
+          "on_notice_to" => nil,
+          "authority" => {
+            "full_name" => "Acme Local Planning Authority"
+          },
+          "no_alerted" => nil,
+          "description" => nil,
+          "comment_url" => nil,
+          "info_url" => nil,
+          "date_received" => nil,
+          "lat" => nil,
+          "lng" => nil,
+          "date_scraped" => "2000-12-31T13:00:00Z",
+        }
+      }]
+    end
+
+    it "should support jsonp" do
+      result = Factory(:application, :id => 10, :date_scraped => Date.new(2001,1,1))
+      Application.stub_chain(:where, :paginate).and_return([result])
+      get :index, :format => "js", :callback => "foobar"
+      response.body[0..6].should == "foobar("
+      response.body[-1..-1].should == ")"
+      JSON.parse(response.body[7..-2]).should == [{
+        "application" => {
+          "id" => 10,
+          "council_reference" => "001",
+          "address" => "",
+          "on_notice_from" => nil,
+          "on_notice_to" => nil,
+          "authority" => {
+            "full_name" => "Acme Local Planning Authority"
+          },
+          "no_alerted" => nil,
+          "description" => nil,
+          "comment_url" => nil,
+          "info_url" => nil,
+          "date_received" => nil,
+          "lat" => nil,
+          "lng" => nil,
+          "date_scraped" => "2000-12-31T13:00:00Z",
+        }
+      }]
+    end
+  end
+
+  describe "json api version 2" do
+    it "should find recent applications" do
+      application = Factory(:application, :id => 10, :date_scraped => Date.new(2001,1,1))
+      result = [application]
+      result.stub!(:total_pages).and_return(5)
+      Application.stub_chain(:where, :paginate).and_return(result)
+      get :index, :format => "js", :v => "2"
+      JSON.parse(response.body).should == {
+        "application_count" => 1,
+        "page_count" => 5,
+        "applications" => [{
+          "application" => {
+            "id" => 10,
+            "council_reference" => "001",
+            "address" => "",
+            "on_notice_from" => nil,
+            "on_notice_to" => nil,
+            "authority" => {
+              "full_name" => "Acme Local Planning Authority"
+            },
+            "no_alerted" => nil,
+            "description" => nil,
+            "comment_url" => nil,
+            "info_url" => nil,
+            "date_received" => nil,
+            "lat" => nil,
+            "lng" => nil,
+            "date_scraped" => "2000-12-31T13:00:00Z",
+          }
+        }]
+      }
+    end
+  end
   
   describe "search by address" do
     before :each do
