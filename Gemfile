@@ -37,7 +37,7 @@ gem 'activeadmin'
 gem "rake"
 gem 'exception_notification'
 gem 'rack-throttle'
-gem 'memcached'
+gem 'dalli'
 gem 'sanitize'
 gem 'rvm-capistrano'
 gem 'vanity'
