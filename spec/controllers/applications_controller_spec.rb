@@ -299,4 +299,61 @@ describe ApplicationsController do
       end
     end
   end
+
+  describe "#address" do
+    context "without a query" do
+      it "should not do a whole lot" do
+        get :address
+        response.should be_success
+      end
+    end
+
+    context "with a query for a partially complete address" do
+      before :each do
+        location1 = mock(Location, :error => false, :full_address => "25 Govett Street, Katoomba NSW 2780",
+          :lat => 1.0, :lng => 2.0)
+        location2 = mock(Location, :full_address => "25 Govett Place, Weston Creek ACT 2611")
+        location3 = mock(Location, :full_address => "25 Govett Street, Randwick NSW 2031")
+        location1.stub!(:all).and_return([location1, location2, location3])
+        Location.should_receive(:geocode).with("25 Govett").and_return(location1)
+      end
+
+      it "should set the normalised address" do
+        get :address, :q => "25 Govett"
+        assigns[:q].should == "25 Govett Street, Katoomba NSW 2780"
+      end
+
+      it "should set an alert based on the normalised address" do
+        get :address, :q => "25 Govett"
+        assigns[:alert].address.should == "25 Govett Street, Katoomba NSW 2780"
+      end
+
+      it "should set alternate addresses too" do
+        get :address, :q => "25 Govett"
+        assigns[:other_addresses].should == [
+          "25 Govett Place, Weston Creek ACT 2611",
+          "25 Govett Street, Randwick NSW 2031"]
+      end
+
+      it "should return nearby applications sorted by the date they were scraped" do
+        a = mock
+        result = mock
+        Application.should_receive(:near).with([1.0, 2.0], 2.0, :units => :km).and_return(a)
+        a.should_receive(:paginate).with(:page => nil, :per_page => 30).and_return(result)
+        get :address, :q => "25 Govett"
+        assigns[:applications].should == result
+      end
+
+      it "should return nearby applications sorted by distance" do
+        a = mock
+        b = mock
+        result = mock
+        Application.should_receive(:near).with([1.0, 2.0], 2.0, :units => :km).and_return(a)
+        a.should_receive(:reorder).with("distance").and_return(b)
+        b.should_receive(:paginate).with(:page => nil, :per_page => 30).and_return(result)
+        get :address, :q => "25 Govett", :sort => "distance"
+        assigns[:applications].should == result
+      end
+    end
+  end
 end
