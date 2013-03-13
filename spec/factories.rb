@@ -7,6 +7,9 @@ Factory.define :application do |a|
   a.association :authority
   a.council_reference "001"
   a.date_scraped {|b| 10.minutes.ago}
+  a.address "A test address"
+  a.description "pretty"
+  a.info_url "http://foo.com"
 end
 
 Factory.define :comment do |c|

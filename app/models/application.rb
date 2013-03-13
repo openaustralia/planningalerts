@@ -5,9 +5,32 @@ class Application < ActiveRecord::Base
   has_many :comments
   before_save :geocode
   geocoded_by :address, :latitude  => :lat, :longitude => :lng
-  
+
+  validates :date_scraped, :council_reference, :address, :description, :presence => true
+  validates :info_url, :url => true
+  validates :comment_url, :url => {:allow_nil => true, :schemes => ["http", "https", "mailto"]}
+  validate :date_received_can_not_be_in_the_future, :validate_on_notice_period
+
   default_scope :order => "date_scraped DESC"
   
+  def date_received_can_not_be_in_the_future
+    if date_received && date_received > Date.today
+      errors.add(:date_received, 'can not be in the future')
+    end
+  end
+
+  def validate_on_notice_period
+    if on_notice_from || on_notice_to
+      if on_notice_from.nil?
+        errors.add(:on_notice_from, "can not be empty if end of on notice period is set")
+      elsif on_notice_to.nil?
+        errors.add(:on_notice_to, "can not be empty if start of on notice period is set")
+      elsif on_notice_from > on_notice_to
+        errors.add(:on_notice_to, "can not be earlier than the start of the on notice period")
+      end
+    end
+  end
+
   # For the benefit of will_paginate
   cattr_reader :per_page
   @@per_page = 100

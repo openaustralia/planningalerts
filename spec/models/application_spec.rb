@@ -9,6 +9,58 @@ describe Application do
       :postcode => "2773", :success => true))
   end
 
+  describe "validation" do
+    describe "date_scraped" do
+      it { Factory.build(:application, :date_scraped => nil).should_not be_valid }
+    end
+
+    describe "council_reference" do
+      it { Factory.build(:application, :council_reference => "").should_not be_valid }
+    end
+
+    describe "address" do
+      it { Factory.build(:application, :address => "").should_not be_valid }
+    end
+
+    describe "description" do
+      it { Factory.build(:application, :description => "").should_not be_valid }
+    end
+
+    describe "info_url" do
+      it { Factory.build(:application, :info_url => "").should_not be_valid }
+      it { Factory.build(:application, :info_url => "http://blah.com?p=1").should be_valid }
+      it { Factory.build(:application, :info_url => "foo").should_not be_valid }
+    end
+
+    describe "comment_url" do
+      it { Factory.build(:application, :comment_url => nil).should be_valid }
+      it { Factory.build(:application, :comment_url => "").should_not be_valid }
+      it { Factory.build(:application, :comment_url => "http://blah.com?p=1").should be_valid }
+      it { Factory.build(:application, :comment_url => "mailto:m@foo.com?subject=hello+sir").should be_valid }
+      it { Factory.build(:application, :comment_url => "foo").should_not be_valid }
+    end
+
+    describe "date_received" do
+      it { Factory.build(:application, :date_received => nil).should be_valid }
+
+      context "the date today is 1 january 2001" do
+        before :each do
+          Date.stub!(:today).and_return(Date.new(2001,1,1))
+        end
+        it { Factory.build(:application, :date_received => Date.new(2002,1,1)).should_not be_valid }
+        it { Factory.build(:application, :date_received => Date.new(2000,1,1)).should be_valid }
+      end
+    end
+
+    describe "on_notice" do
+      it { Factory.build(:application, :on_notice_from => nil, :on_notice_to => nil).should be_valid }
+      it { Factory.build(:application, :on_notice_from => Date.new(2001,1,1), :on_notice_to => Date.new(2001,2,1)).should be_valid }
+      it { Factory.build(:application, :on_notice_from => nil, :on_notice_to => Date.new(2001,2,1)).should_not be_valid }
+      it { Factory.build(:application, :on_notice_from => Date.new(2001,1,1), :on_notice_to => nil).should_not be_valid }
+      it { Factory.build(:application, :on_notice_from => Date.new(2001,2,1), :on_notice_to => Date.new(2001,1,1)).should_not be_valid }
+    end
+  end
+
   describe "getting DA descriptions" do
     it "should allow applications to be blank" do
       Application.new(:description => "").description.should == ""
@@ -78,7 +130,7 @@ describe Application do
       loc = mock("Location", :lat => -33.772609, :lng => 150.624263, :suburb => "Glenbrook", :state => "NSW",
         :postcode => "2773", :success => true)
       Location.should_receive(:geocode).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
-      a = @auth.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1", :date_scraped => Time.now)
+      a = Factory(:application, :address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1", :date_scraped => Time.now)
       a.lat.should == loc.lat
       a.lng.should == loc.lng
     end
@@ -90,7 +142,7 @@ describe Application do
       # Ignore the warning message (from the tinyurl'ing)
       logger.stub!(:warn)
 
-      a = @auth.applications.new(:address => "dfjshd", :council_reference => "r1", :date_scraped => Time.now)
+      a = Factory.build(:application, :address => "dfjshd", :council_reference => "r1", :date_scraped => Time.now)
       a.stub!(:logger).and_return(logger)
 
       a.save!
@@ -99,7 +151,7 @@ describe Application do
     end
 
     it "should set the url for showing the address on a google map" do
-      a = @auth.applications.create!(:address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1", :date_scraped => Time.now)
+      a = Factory.build(:application, :address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1", :date_scraped => Time.now)
       a.map_url.should == "http://maps.google.com/maps?q=24+Bruce+Road%2C+Glenbrook%2C+NSW&z=15"
     end
   end

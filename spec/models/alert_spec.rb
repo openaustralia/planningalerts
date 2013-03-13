@@ -172,10 +172,10 @@ describe Alert do
       p3 = @alert.location.endpoint(45, 499 * Math.sqrt(2)) # Just inside the NE corner of a box centred on the alert (of size 2 * 499m)
       p4 = @alert.location.endpoint(90, 499) # 499 m east of alert
       auth = Authority.create!(:full_name => "", :short_name => "")
-      @app1 = Application.create!(:lat => p1.lat, :lng => p1.lng, :date_scraped => 5.minutes.ago, :council_reference => "A1", :suburb => "", :state => "", :postcode => "", :authority => auth)
-      @app2 = Application.create!(:lat => p2.lat, :lng => p2.lng, :date_scraped => 12.hours.ago, :council_reference => "A2", :suburb => "", :state => "", :postcode => "", :authority => auth)
-      @app3 = Application.create!(:lat => p3.lat, :lng => p3.lng, :date_scraped => 2.days.ago, :council_reference => "A3", :suburb => "", :state => "", :postcode => "", :authority => auth)
-      @app4 = Application.create!(:lat => p4.lat, :lng => p4.lng, :date_scraped => 4.days.ago, :council_reference => "A4", :suburb => "", :state => "", :postcode => "", :authority => auth)
+      @app1 = Factory(:application, :lat => p1.lat, :lng => p1.lng, :date_scraped => 5.minutes.ago, :council_reference => "A1", :suburb => "", :state => "", :postcode => "", :authority => auth)
+      @app2 = Factory(:application, :lat => p2.lat, :lng => p2.lng, :date_scraped => 12.hours.ago, :council_reference => "A2", :suburb => "", :state => "", :postcode => "", :authority => auth)
+      @app3 = Factory(:application, :lat => p3.lat, :lng => p3.lng, :date_scraped => 2.days.ago, :council_reference => "A3", :suburb => "", :state => "", :postcode => "", :authority => auth)
+      @app4 = Factory(:application, :lat => p4.lat, :lng => p4.lng, :date_scraped => 4.days.ago, :council_reference => "A4", :suburb => "", :state => "", :postcode => "", :authority => auth)
     end
     
     it "should return applications that have been scraped since the last time the user was sent an alert" do

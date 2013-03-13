@@ -40,16 +40,16 @@ describe ApplicationsController do
           "application" => {
             "id" => 10,
             "council_reference" => "001",
-            "address" => "",
+            "address" => "A test address",
             "on_notice_from" => nil,
             "on_notice_to" => nil,
             "authority" => {
               "full_name" => "Acme Local Planning Authority"
             },
             "no_alerted" => nil,
-            "description" => nil,
+            "description" => "Pretty",
             "comment_url" => nil,
-            "info_url" => nil,
+            "info_url" => "http://foo.com",
             "date_received" => nil,
             "lat" => nil,
             "lng" => nil,
@@ -68,16 +68,16 @@ describe ApplicationsController do
           "application" => {
             "id" => 10,
             "council_reference" => "001",
-            "address" => "",
+            "address" => "A test address",
             "on_notice_from" => nil,
             "on_notice_to" => nil,
             "authority" => {
               "full_name" => "Acme Local Planning Authority"
             },
             "no_alerted" => nil,
-            "description" => nil,
+            "description" => "Pretty",
             "comment_url" => nil,
-            "info_url" => nil,
+            "info_url" => "http://foo.com",
             "date_received" => nil,
             "lat" => nil,
             "lng" => nil,
@@ -101,16 +101,16 @@ describe ApplicationsController do
             "application" => {
               "id" => 10,
               "council_reference" => "001",
-              "address" => "",
+              "address" => "A test address",
               "on_notice_from" => nil,
               "on_notice_to" => nil,
               "authority" => {
                 "full_name" => "Acme Local Planning Authority"
               },
               "no_alerted" => nil,
-              "description" => nil,
+              "description" => "Pretty",
               "comment_url" => nil,
-              "info_url" => nil,
+              "info_url" => "http://foo.com",
               "date_received" => nil,
               "lat" => nil,
               "lng" => nil,
