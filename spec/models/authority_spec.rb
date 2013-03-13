@@ -91,4 +91,22 @@ describe Authority do
       Authority.find_by_short_name_encoded("blue_mountains_new_one").should == @a2
     end
   end
+
+  describe "#scraper_data_original_style" do
+    context "authority with an xml feed with a date in the url" do
+      let (:authority) { Factory.build(:authority, :feed_url => "http://foo.com?year={year}&month={month}&day={day}") }
+      it "should get the feed date once for each day in the date range" do
+        authority.should_receive(:open_url_safe).exactly(3).times
+        authority.scraper_data_original_style(Date.new(2001,1,1), Date.new(2001,1,3), mock)
+      end
+    end
+
+    context "authority with an xml feed with no date in the url" do
+      let (:authority) { Factory.build(:authority, :feed_url => "http://foo.com") }
+      it "should get the feed date only once" do
+        authority.should_receive(:open_url_safe).once
+        authority.scraper_data_original_style(Date.new(2001,1,1), Date.new(2001,1,3), mock)
+      end
+    end
+  end
 end
