@@ -106,19 +106,26 @@ class Authority < ActiveRecord::Base
     info_logger.info "Took #{(time / 1000).to_i} s to collect applications from #{full_name_and_state}"
   end
 
+  # Same as collection_applications_data_range except the applications are returned rather than saved
+  def collect_unsaved_applications_date_range(start_date, end_date, info_logger = logger)
+    d = scraperwiki? ? scraper_data_scraperwiki_style(start_date, end_date, info_logger) :
+      scraper_data_original_style(start_date, end_date, info_logger)
+    d.map do |attributes|
+      applications.build(attributes)
+    end
+  end
+
   # Collect all the applications for this authority by scraping
   def collect_applications_date_range(start_date, end_date, info_logger = logger)
     count = 0
-    d = scraperwiki? ? scraper_data_scraperwiki_style(start_date, end_date, info_logger) :
-      scraper_data_original_style(start_date, end_date, info_logger)
-    d.each do |attributes|
+    collect_unsaved_applications_date_range(start_date, end_date, info_logger).each do |application|
       # TODO Consider if it would be better to overwrite applications with new data if they already exists
       # This would allow for the possibility that the application information was incorrectly entered at source
       # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
-      unless applications.find_by_council_reference(attributes[:council_reference])
+      unless applications.find_by_council_reference(application.council_reference)
         count += 1
         begin
-          applications.create!(attributes)
+          application.save!
         rescue Exception => e
           info_logger.error "Error #{e} while trying to save application #{attributes.inspect}. So, skipping"
         end
