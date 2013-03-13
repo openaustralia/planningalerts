@@ -58,6 +58,9 @@ PlanningalertsApp::Application.routes.draw do
         get :per_week
       end
     end
+    collection do
+      get :test_feed
+    end
   end
 
   match 'api/howto' => 'api#howto', :as => :api_howto
