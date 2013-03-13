@@ -92,8 +92,8 @@ class ApplicationsController < ApplicationController
       # TODO: Move the template over to using an xml builder
       format.rss do
         #ApiStatistic.log(request)
-        render params[:style] == "html" ? "index_html.rss" : "index.rss",
-          :layout => false, :content_type => Mime::XML
+        render params[:style] == "html" ? "index_html" : "index",
+          :format => :rss, :layout => false, :content_type => Mime::XML
       end
       format.js do
         #ApiStatistic.log(request)
@@ -169,7 +169,7 @@ class ApplicationsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.rss { render "index.rss", :layout => false, :content_type => Mime::XML }
+      format.rss { render "index", :format => :rss, :layout => false, :content_type => Mime::XML }
     end
   end
   
@@ -216,7 +216,7 @@ class ApplicationsController < ApplicationController
     respond_to do |format|
       format.html { render "nearby" }
       format.mobile { render "nearby.mobile", :layout => "application.mobile" }
-      format.rss { render "index.rss", :layout => false, :content_type => Mime::XML }
+      format.rss { render "index", :format => :rss, :layout => false, :content_type => Mime::XML }
     end
   end
 
