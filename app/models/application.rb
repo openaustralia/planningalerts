@@ -96,12 +96,6 @@ class Application < ActiveRecord::Base
     end.join(' ')
   end
   
-  # The value (the "fourth" dimension) needs to be scaled to the same units as the distance (km) for
-  # this to be meaningful
-  def fourd_distance_squared(scaled_value)
-    (distance.to_f ** 2 + scaled_value ** 2)
-  end
-  
   # Default values for what we consider nearby and recent
   def nearby_and_recent_max_distance_km
     Application.nearby_and_recent_max_distance_km
