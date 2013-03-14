@@ -115,13 +115,15 @@ class Application < ActiveRecord::Base
     address = read_attribute(:address)
     exceptions = %w{QLD VIC NSW SA ACT TAS WA NT}
 
-    address.split(' ').map do |word|
-      if word != word.upcase || exceptions.include?(word) || word =~ /\d/
-        word
-      else
-        word.capitalize
-      end
-    end.join(' ')
+    if address
+      address.split(' ').map do |word|
+        if word != word.upcase || exceptions.include?(word) || word =~ /\d/
+          word
+        else
+          word.capitalize
+        end
+      end.join(' ')
+    end
   end
   
   # Default values for what we consider nearby and recent
