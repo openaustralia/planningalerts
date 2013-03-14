@@ -22,9 +22,9 @@ class Application < ActiveRecord::Base
   def validate_on_notice_period
     if on_notice_from || on_notice_to
       if on_notice_from.nil?
-        errors.add(:on_notice_from, "can not be empty if end of on notice period is set")
+        #errors.add(:on_notice_from, "can not be empty if end of on notice period is set")
       elsif on_notice_to.nil?
-        errors.add(:on_notice_to, "can not be empty if start of on notice period is set")
+        #errors.add(:on_notice_to, "can not be empty if start of on notice period is set")
       elsif on_notice_from > on_notice_to
         errors.add(:on_notice_to, "can not be earlier than the start of the on notice period")
       end

@@ -55,8 +55,8 @@ describe Application do
     describe "on_notice" do
       it { Factory.build(:application, :on_notice_from => nil, :on_notice_to => nil).should be_valid }
       it { Factory.build(:application, :on_notice_from => Date.new(2001,1,1), :on_notice_to => Date.new(2001,2,1)).should be_valid }
-      it { Factory.build(:application, :on_notice_from => nil, :on_notice_to => Date.new(2001,2,1)).should_not be_valid }
-      it { Factory.build(:application, :on_notice_from => Date.new(2001,1,1), :on_notice_to => nil).should_not be_valid }
+      it { Factory.build(:application, :on_notice_from => nil, :on_notice_to => Date.new(2001,2,1)).should be_valid }
+      it { Factory.build(:application, :on_notice_from => Date.new(2001,1,1), :on_notice_to => nil).should be_valid }
       it { Factory.build(:application, :on_notice_from => Date.new(2001,2,1), :on_notice_to => Date.new(2001,1,1)).should_not be_valid }
     end
   end
