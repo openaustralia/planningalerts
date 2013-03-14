@@ -9,7 +9,11 @@ class AuthorityLogger < Logger
 
   def add(severity, message = nil, progname = nil)
     @other_logger.add(severity, message, progname)
-    @authority.update_attribute(:last_scraper_run_log, @authority.last_scraper_run_log + progname + "\n")
+    # Put a maximum limit on how long the log can get
+    e = @authority.last_scraper_run_log + progname + "\n"
+    if e.size < 5000
+      @authority.update_attribute(:last_scraper_run_log, e)
+    end
   end
 end
 
@@ -134,7 +138,7 @@ class Authority < ActiveRecord::Base
         begin
           application.save!
         rescue Exception => e
-          info_logger.error "Error #{e} while trying to save application #{attributes.inspect}. So, skipping"
+          info_logger.error "Error #{e} while trying to save application #{application.council_reference}. So, skipping"
         end
       end
     end
