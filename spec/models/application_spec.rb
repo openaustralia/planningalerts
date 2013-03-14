@@ -15,7 +15,20 @@ describe Application do
     end
 
     describe "council_reference" do
+      let (:auth1) { Factory(:authority) }
+
       it { Factory.build(:application, :council_reference => "").should_not be_valid }
+
+      context "one application already exists" do
+        before :each do
+          Factory.create(:application, :council_reference => "A01", :authority => auth1)
+        end
+        let(:auth2) { Factory(:authority, :full_name => "A second authority") }
+
+        it { Factory.build(:application, :council_reference => "A01", :authority => auth1).should_not be_valid }
+        it { Factory.build(:application, :council_reference => "A02", :authority => auth1).should be_valid }
+        it { Factory.build(:application, :council_reference => "A01", :authority => auth2).should be_valid }
+      end
     end
 
     describe "address" do

@@ -10,6 +10,7 @@ class Application < ActiveRecord::Base
   validates :info_url, :url => true
   validates :comment_url, :url => {:allow_nil => true, :schemes => ["http", "https", "mailto"]}
   validate :date_received_can_not_be_in_the_future, :validate_on_notice_period
+  validates :council_reference, :uniqueness => { :scope => :authority_id }
 
   default_scope :order => "date_scraped DESC"
   
