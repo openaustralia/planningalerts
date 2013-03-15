@@ -177,10 +177,10 @@ class ApplicationsController < ApplicationController
     # First check if there is a redirect
     redirect = ApplicationRedirect.find_by_application_id(params[:id])
     if redirect
-      redirect_to application_url(:id => redirect.redirect_application_id)
+      redirect_to :id => redirect.redirect_application_id
       return
     end
-    
+
     @application = Application.find(params[:id])
     @nearby_count = @application.find_all_nearest_or_recent.count
     @comment = Comment.new
@@ -194,6 +194,13 @@ class ApplicationsController < ApplicationController
   end
   
   def nearby
+    # First check if there is a redirect
+    redirect = ApplicationRedirect.find_by_application_id(params[:id])
+    if redirect
+      redirect_to :id => redirect.redirect_application_id
+      return
+    end
+
     @sort = params[:sort]
     @rss = nearby_application_url(params.merge(:format => "rss", :page => nil))
     
