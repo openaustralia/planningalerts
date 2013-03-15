@@ -174,6 +174,13 @@ class ApplicationsController < ApplicationController
   end
   
   def show
+    # First check if there is a redirect
+    redirect = ApplicationRedirect.find_by_application_id(params[:id])
+    if redirect
+      redirect_to application_url(:id => redirect.redirect_application_id)
+      return
+    end
+    
     @application = Application.find(params[:id])
     @nearby_count = @application.find_all_nearest_or_recent.count
     @comment = Comment.new
