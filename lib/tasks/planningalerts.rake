@@ -30,6 +30,7 @@ namespace :planningalerts do
 
   # A response to something bad
   namespace :emergency do
+    # TODO: Move comments of destroyed applications to the redirected application
     desc "Applications for an authority shouldn't have duplicate values of council_reference and so this removes duplicates."
     task :fix_duplicate_council_references => :environment do
       # First find all duplicates
