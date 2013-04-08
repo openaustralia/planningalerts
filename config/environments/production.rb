@@ -34,10 +34,6 @@ PlanningalertsApp::Application.configure do
   # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
 
-  # Send mails to the locally running instance of Cuttlefish
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { :address => "localhost", :port => 2525 }
-  
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { :host => 'www.planningalerts.org.au' }
@@ -52,8 +48,10 @@ PlanningalertsApp::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
   
-  config.action_mailer.delivery_method = :sendmail
-
+  # Send mails to the locally running instance of Cuttlefish
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 2525 }
+  
   config.middleware.use ExceptionNotifier,
     :email_prefix => "[PlanningAlerts Bug] ",
     :sender_address => "PlanningAlerts <contact@planningalerts.org.au>",
