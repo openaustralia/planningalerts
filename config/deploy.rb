@@ -6,7 +6,7 @@ require 'delayed/recipes'
 # This adds a task that precompiles assets for the asset pipeline
 load 'deploy/assets'
 
-set :rvm_ruby_string, '1.8.7'
+set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
 
 set :application, "planningalerts.org.au/app"
 set :repository,  "git://github.com/openaustralia/planningalerts-app.git"
