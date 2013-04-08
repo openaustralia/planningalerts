@@ -35,6 +35,7 @@ PlanningalertsApp::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Send mails to the locally running instance of Cuttlefish
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { :address => "localhost", :port => 2525 }
   
   # Disable delivery errors, bad email addresses will be ignored
