@@ -48,8 +48,10 @@ PlanningalertsApp::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
   
-  config.action_mailer.delivery_method = :sendmail
-
+  # Send mails to the locally running instance of Cuttlefish
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 2525 }
+  
   config.middleware.use ExceptionNotifier,
     :email_prefix => "[PlanningAlerts Bug] ",
     :sender_address => "PlanningAlerts <contact@planningalerts.org.au>",
