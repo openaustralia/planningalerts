@@ -30,7 +30,7 @@ describe CommentNotifier do
     
     it "should have specific information in the body of the email" do
       notifier = CommentNotifier.notify(@comment)
-      notifier.body.to_s.should == <<-EOF
+      notifier.text_part.body.to_s.should == <<-EOF
 For the attention of the General Manager / Planning Manager / Planning Department:
 
 Application:          X/001
