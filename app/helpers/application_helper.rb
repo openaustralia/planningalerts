@@ -76,10 +76,22 @@ module ApplicationHelper
   end
   
   def render_twitter_feed(screen_name)
-    @items = rss_feed_items("https://api.twitter.com/1/statuses/user_timeline.rss?screen_name=#{screen_name}").map do |item|
-      # Remove the twitter handle from the start of the title
-      item.title =~ /^[^:]+:(.*)$/
-      item.title = $~[1].html_safe
+    Twitter.configure do |config|
+      config.consumer_key = Configuration::TWITTER_CONSUMER_KEY
+      config.consumer_secret = Configuration::TWITTER_CONSUMER_SECRET
+      config.oauth_token = Configuration::TWITTER_OAUTH_TOKEN
+      config.oauth_token_secret = Configuration::TWITTER_OAUTH_TOKEN_SECRET
+    end
+    begin
+      @items = Twitter.user_timeline(screen_name)[0..4]
+    rescue
+      @items = []
+    end
+    @items = @items.map do |tweet|
+      item = OpenStruct.new
+      item.title = tweet.text.html_safe
+      item.date = tweet.created_at
+      item.link = "https://twitter.com/#{screen_name}/status/#{tweet.id}"
       item
     end
     render :partial => 'applications/rss'

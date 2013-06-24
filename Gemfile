@@ -48,6 +48,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'mobile-fu', :git => "https://github.com/openaustralia/mobile-fu.git"
 gem "validate_url"
+gem "twitter"
 
 group :test do
   # Apparently capybara 2 only works with Ruby 1.9
