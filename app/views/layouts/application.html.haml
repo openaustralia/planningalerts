@@ -22,6 +22,7 @@
     = stylesheet_link_tag "placeholder_polyfill.min.css"
     = javascript_include_tag "placeholder_polyfill.jquery.min.combo.js"
     = csrf_meta_tag
+    = yield :extra_meta_tags
   %body
     #header-wrapper
       .container

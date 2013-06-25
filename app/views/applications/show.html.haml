@@ -1,6 +1,13 @@
 - content_for :page_title, page_title(@application)
 - content_for :meta_description, @application.description
 - content_for :map, true
+- content_for :extra_meta_tags do
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@PlanningAlerts">
+  <meta name="twitter:title" content="#{@application.address}">
+  <meta name="twitter:description" content="#{@application.description[0..199]}">
+  <meta name="twitter:image:src" content="#{google_static_streetview_url(@application, :size => "350x200")}">
+
 = render :partial => "applications/facebook"
 = render :partial => "applications/twitter"
 
