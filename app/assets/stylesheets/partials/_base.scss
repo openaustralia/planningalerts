@@ -5,10 +5,24 @@ $base-font-size: 16px;
 $blueprint-font-size: $base-font-size;
 
 // Susy grid settings
+// ---------------------------------------------------------------------------
 
+@import "susy";
+
+// ---------------------------------------------------------------------------
+// Basic Grid
+
+$total-columns  : 24;
+// $column-width   : 4em;
+// $gutter-width   : 1em;
+// $grid-padding   : $gutter-width;
+
+// NOTE Previously...
 $column-width   : 1.875em;
 $gutter-width   : 0.625em;
 $grid-padding   : $gutter-width;
+
+$show-grid-backgrounds: false;
 
 // Colours
 

@@ -8,6 +8,7 @@ group :assets do
   gem 'coffee-rails'
   gem "compass-rails"
   gem 'sass-rails'
+  gem "susy"
   gem 'uglifier'
 end
  
@@ -41,7 +42,6 @@ gem 'sanitize'
 gem 'rvm-capistrano'
 gem 'vanity'
 gem 'rabl'
-gem "susy"
 gem 'newrelic_rpm'
 gem 'delayed_job_active_record'
 gem 'daemons'
