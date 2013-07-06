@@ -1,8 +1,11 @@
+.container {
+  @include container;
+}
+
 @include at-breakpoint(6 32.5em) {
-  $container-style: fluid;
 
   .container {
-    @include container;
+    @include set-container-width;
   }
 
   #header, #menu, #page, #footer, #main, #sidebar,
@@ -12,10 +15,9 @@
 }
 
 @include at-breakpoint(32.5em 12 60em) {
-  $container-style: fluid;
 
   .container {
-    @include container;
+    @include set-container-width;
   }
 
   #header, #menu, #page, #footer {
@@ -50,10 +52,9 @@
 }
 
 @include at-breakpoint(60em 24) {
-  $container-style: static;
 
   .container {
-    @include container;
+    @include set-container-width;
   }
 
   #header, #menu, #page, #footer {

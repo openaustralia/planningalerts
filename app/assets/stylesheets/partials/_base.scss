@@ -12,15 +12,17 @@ $blueprint-font-size: $base-font-size;
 // ---------------------------------------------------------------------------
 // Basic Grid
 
-$total-columns  : 24;
-// $column-width   : 4em;
-// $gutter-width   : 1em;
-// $grid-padding   : $gutter-width;
+/*$total-columns  : 24;
+$column-width   : 4em;
+$gutter-width   : 1em;
+$grid-padding   : $gutter-width;*/
 
 // NOTE Previously...
 $column-width   : 1.875em;
 $gutter-width   : 0.625em;
 $grid-padding   : $gutter-width;
+
+$container-style: magic;
 
 $show-grid-backgrounds: false;
 

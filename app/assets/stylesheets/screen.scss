@@ -16,14 +16,6 @@ body {
   @include blueprint-interaction;
 }
 
-/* -------------------------------------------------------------------------*/
-/* Layout */
-
-.container {
-  @include container;
-  @include susy-grid-background;
-}
-
 // Combine the partials into a single screen stylesheet.
 @import "partials/page";
 @import "partials/form";
