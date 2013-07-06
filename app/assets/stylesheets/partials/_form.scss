@@ -6,7 +6,6 @@
 //  @include blueprint-form; }
 
 @import "formtastic_base";
-@import "fancy-buttons";
 
 //$fb-light-text: $font-color;
 $fb-gradient-style: matte;
@@ -15,7 +14,6 @@ $fb-line-height: 1em;
 
 .actions input { 
   margin-top: 1em;
-  @include fancy-button($orange); 
   font-weight: normal;
 }
 
@@ -95,7 +93,6 @@ body form.alert {
 
 form.donate {
   input[type="submit"] {
-    @include fancy-button($orange); 
     font-weight: normal;
     margin-left: 1em;
   }

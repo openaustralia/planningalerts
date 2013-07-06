@@ -29,7 +29,6 @@ gem "will_paginate"
 gem 'thinking-sphinx', "~> 2.0", :require => 'thinking_sphinx'
 gem "formtastic"
 gem 'validates_email_format_of'
-gem 'fancy-buttons'
 gem "geocoder", :require => "geocoder"
 gem 'activeadmin'
 # Disabling metric_fu because it depends on rcov which doesn't work on Ruby 1.9
