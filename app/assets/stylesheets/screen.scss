@@ -5,7 +5,9 @@
 @import "partials/base";
 
 // Import all the default blueprint modules so that we can access their mixins.
-@import "blueprint";
+@import "blueprint/typography";
+@import "blueprint/utilities";
+@import "blueprint/interaction";
 
 // If you are doing a lot of stylesheet concatenation, it is suggested
 // that you scope your blueprint styles, so that you can better control

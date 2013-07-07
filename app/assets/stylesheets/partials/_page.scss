@@ -3,91 +3,69 @@
 @import "compass/utilities/lists/horizontal-list";
 
 body {
-  background: #b0b0b0;
+  background: $almostwhite;
 }
 
-#page-wrapper {
-  background: white;
-  padding-top: 3em;  
-  padding-bottom: 2em;
-}
-
-#header-wrapper {
-  background: #878787 url(/images/banner.png) repeat-x center 0;
-}
-
-#menu-wrapper {
-  background: #989898;
+.container {
+  background: #fff;
 }
 
 // Layout elements - i.e. those on every page
 #header {
-  //margin: auto;
-  height: 125px;
-  //position: relative;
-  #banner {
-    @include float-left;
-    //margin-left: 10px;
-    margin-top: 6px;
-    h1 {
-      margin-bottom: 0;
-      //white-space: nowrap;
-      //padding: 20px 240px 0 0;
-      font-size: 2.5em;
-      a {
-        color: $yellow;
-        text-decoration: none;
-      } 
-      span {
-        color: $orange; }
-        sup {
-          font-size: 0.3em;
-          text-transform: uppercase;
-        } 
+  background: #878787 url(/images/banner.png) repeat-x center .25em;
+  position: relative;
+
+  h1 {
+    margin: .25em 0 0 .25em;
+    font-size: 1.75em;
+
+    a {
+      text-decoration: none;
+
+      &:link, &:visited {
+        color: #fff;
       }
-      h2 {
-        font-style: italic;
-        font-size: 1.15em;
+      &:active, &:hover, &:focus {
+        color: $orange;
       }
+    } 
   }
-}
+  h2 {
+    color: #fff;
+    font-size: 1em;
+    margin: 0 0 1.75em .5em;
+  }
+  #stats {
+    font-size: 0.9em;
+    background: #fff;
+    padding: .25em .75em;
 
-#statsbanner {
-  padding-left: 73px;
-  background: url(/images/plane.png) no-repeat 0 center; 
-  @include float-right;
-  margin-top: 25px;
-}
-
-#stats {
-  margin: 0;
-  @include quiet;
-  font-size: 0.9em;
-  background: white;
-  padding-left: 5px;
-  padding-right: 5px;
-  a {
-    text-decoration: none;
-    @include quiet;
+    a {
+      text-decoration: none;
+    }
   }
 }
 
 #menu {
-  background: $grey;
-  font-size: 0.9em; 
+  border-bottom: 1px solid #ededed;
+
   ul {
     @include horizontal-list;
-    @include float-right;
+
     li {
       padding: 0;
+
       a {
-        padding: 0.5em 1em;
-        color: white;
+        padding: .5em .75em;
         text-decoration: none; 
+        display: inline-block;
+
+        &:link, &:visited {
+          color: $darkgrey;
+        }
         &:active, &:hover, &:focus {
           background: $orange;
         }
-        display: block;
       }
       &.selected {
         background: $orange;
@@ -96,33 +74,45 @@ body {
   } 
 }
 
-#footer-wrapper {
-  background: #b0b0b0;
+#content {
+  clear: both;
+  position: relative;
+  padding: 1.5em 0;
 }
 
 #footer {
+  border-top: 1px solid #ededed;
+  padding-top: 1.5em;
+
   a {
-    color: black;
+    color: #000;
+  }
+  h4, h5 {
+    color: #333;
+  }
+  h4 {
+    margin-top: 0;
   }
   h5 {
-    font-weight: normal;
-    color: #333;
     margin-bottom: 0;
   }
-  padding-top: 1em;
-  margin-bottom: 1em;
-  font-size: 0.9em;
   ul {
     @include no-bullets;
     padding-left: 0;
     margin-right: 0;
-  }
-  .oaf {
-    text-align: right;
+
+    &.keepintouch {
+      li {
+        margin-bottom: 1.5em;
+      }
+      a {
+        display: block;
+      }
+    }
   }
 }
 
-// Content
+// Within content
 
 p a, li a, span a, dd a, dt a, div a {
   @include hover-link;
@@ -130,11 +120,7 @@ p a, li a, span a, dd a, dt a, div a {
 
 .disclaimer {
   @include quiet;
-  font-size: 0.8em; }
-
-#content {
-  @include min-height(500px);
-  position: relative;
+  font-size: 0.8em; 
 }
 
 #map_div, #pano {
@@ -150,9 +136,8 @@ div.attention {
 }
 
 #privacy, #spnBeta, .explanation {
-//text-align: center;
-padding-left: 75px;
-padding-right: 75px;
+  padding-left: 75px;
+  padding-right: 75px;
   font-size: 0.8em;
   @include quiet;
   em {
@@ -319,8 +304,10 @@ body h4 {
 }
 
 .news {
-  @include no-bullets;
+  @include clearfix;
+
   ul {
+    @include no-bullets;
     padding-left: 0;
   }
   li {

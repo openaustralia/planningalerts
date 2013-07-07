@@ -25,79 +25,75 @@
     = csrf_meta_tag
     = yield :extra_meta_tags
   %body
-    #header-wrapper
-      .container
-        #header
-          #banner
-            %h1= link_to 'PlanningAlerts', root_path
-            %h2 Email alerts of planning applications <em>near you</em>
-          #statsbanner
-            %p#stats
-              #{number_to_human(@alert_count).downcase} applications sent for
-              = link_to "#{@authority_count} authorities", authorities_path
-    #menu-wrapper
-      .container      
-        .hide= link_to "Skip navigation", "#content"
-        #menu
-          %ul.collapse
-            = li_selected(:controller => "/applications", :action => "address") do
-              = link_to 'Search', address_applications_path
-            = li_selected(:controller => "/alerts", :action => ["new", "create"]) do
-              = link_to 'Sign Up', new_alert_path
-            = li_selected(:controller => "/static", :action => "faq") do
-              = link_to faq_path do
-                %abbr(title="Frequently asked questions") FAQ
-            = li_selected(:controller => "/authorities", :action => "index") do
-              = link_to 'Coverage', authorities_path
-            = li_selected(:controller => "/static", :action => "get_involved") do
-              = link_to 'Get Involved', get_involved_path
-            = li_selected(:controller => "/api", :action => "howto") do
-              = link_to api_howto_path do
-                Get the Data
-            = li_selected(:controller => "/static", :action => "donate") do
-              = link_to 'Donate', donate_path
-            = li_selected(:controller => "/static", :action => "about") do
-              = link_to 'About', about_path
-    #page-wrapper
-      .container
-        #page
-          #content
-            - if notice
-              %p.notice= notice
-            - if alert
-              %p.alert= alert
-            - if flash[:error]
-              %p.error= flash[:error]
-            = yield
-    #footer-wrapper
-      .container
-        #footer
-          .keepintouch
-            %p
-              Email us at
-              %br
-              = mail_to "contact@planningalerts.org.au"
-            %p
-              Chat with us on Twitter
-              %br
-              = link_to "@PlanningAlerts", "http://twitter.com/planningalerts"
-              %br
-              = link_to "@OpenAustralia", "http://twitter.com/openaustralia"
-            %p
-              Read our blog
-              %br
-              = link_to "openaustraliafoundation.org.au/blog", "http://www.openaustraliafoundation.org.au/blog"
-          .oaf
-            %p
-              An <a href="http://openaustraliafoundation.org.au">OpenAustralia Foundation</a> Project
-            %h5 Other wonderful projects from us
-            %ul
-              %li= link_to "Right To Know", "http://www.righttoknow.org.au/"
-              %li= link_to "OpenAustralia.org", "http://www.openaustralia.org/"
-              %li= link_to "Election Leaflets", "http://www.electionleaflets.org.au/"
-        - if @set_focus_control
-          %script(type="text/javascript")
-            document.getElementById('#{@set_focus_control}').focus();
+    .container
+      #header
+        #statsbanner
+          #stats
+            #{number_to_human(@alert_count).downcase} applications sent for
+            = link_to "#{@authority_count} authorities", authorities_path
+        %h1= link_to 'Planning Alerts', root_path
+        %h2 
+          Email alerts of planning applications 
+          %em near you
+
+      .hide= link_to "Skip navigation", "#content"
+      #menu
+        %ul.collapse
+          = li_selected(:controller => "/applications", :action => "address") do
+            = link_to 'Search', address_applications_path
+          = li_selected(:controller => "/alerts", :action => ["new", "create"]) do
+            = link_to 'Sign Up', new_alert_path
+          = li_selected(:controller => "/static", :action => "faq") do
+            = link_to faq_path do
+              %abbr(title="Frequently asked questions") FAQ
+          = li_selected(:controller => "/authorities", :action => "index") do
+            = link_to 'Coverage', authorities_path
+          = li_selected(:controller => "/static", :action => "get_involved") do
+            = link_to 'Get Involved', get_involved_path
+          = li_selected(:controller => "/api", :action => "howto") do
+            = link_to api_howto_path do
+              Get the Data
+          = li_selected(:controller => "/static", :action => "donate") do
+            = link_to 'Donate', donate_path
+          = li_selected(:controller => "/static", :action => "about") do
+            = link_to 'About', about_path
+
+      #content
+        - if notice
+          %p.notice= notice
+        - if alert
+          %p.alert= alert
+        - if flash[:error]
+          %p.error= flash[:error]
+        = yield
+
+      #footer
+        %ul.keepintouch
+          %li
+            Email us at
+            = mail_to "contact@planningalerts.org.au"
+          %li
+            Chat with us on Twitter
+            = link_to "@PlanningAlerts", "http://twitter.com/planningalerts"
+            = link_to "@OpenAustralia", "http://twitter.com/openaustralia"
+          %li
+            Read our blog
+            = link_to "openaustraliafoundation.org.au/blog", "http://www.openaustraliafoundation.org.au/blog"
+        .oaf
+          %h4
+            An
+            %a(href="http://openaustraliafoundation.org.au" title="The OpenAustralia Foundation") OpenAustralia Foundation
+            Project
+          %h5 Other wonderful projects from us
+          %ul
+            %li= link_to "Right To Know", "http://www.righttoknow.org.au/"
+            %li= link_to "OpenAustralia.org", "http://www.openaustralia.org/"
+            %li= link_to "Election Leaflets", "http://www.electionleaflets.org.au/"
+
+      - if @set_focus_control
+        %script(type="text/javascript")
+          document.getElementById('#{@set_focus_control}').focus();
+
     = render "shared/analytics"
     :javascript
       var uservoiceOptions = {key: 'planningalerts', host: 'planningalerts.uservoice.com', forum: '49635', alignment: 'right', background_color:'#F4F322', text_color: 'black',
