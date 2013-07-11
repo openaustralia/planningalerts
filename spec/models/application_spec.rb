@@ -224,6 +224,10 @@ describe Application do
         }
       ]
     end
+
+    it "should handle a malformed response" do
+      Application.translate_scraperwiki_feed_data('[["An invalid scraperwiki API response"]]').should == []
+    end
   end
 
   describe "collecting applications from the scraper web service urls" do
