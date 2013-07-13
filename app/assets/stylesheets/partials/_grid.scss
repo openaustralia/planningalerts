@@ -13,8 +13,6 @@
     @include span-columns(6 omega);
   }
 
-  // Form fields need to go back to label-above-input
-
 }
 
 // Until we get to our largest size
@@ -108,6 +106,7 @@
     } 
     h2 {
       font-size: 1.25em;
+      margin-bottom: 1.75em;
     }
   }
 
@@ -118,6 +117,15 @@
     position: absolute;
     top: 1em;
     right: 1em;
+  }
+
+  // Navigation can be a bit larger
+  #menu {
+    font-size: 1em;
+
+    a {
+      padding: .5em .75em;
+    }
   }
 
   #main {
