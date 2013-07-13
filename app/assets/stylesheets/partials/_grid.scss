@@ -66,21 +66,15 @@
     @include span-columns(3 omega, 12)
   }
 
-  // news
-  .blog-feed {
+  // news and footer
+  .blog-feed, .keepintouch {
     @include span-columns(6, 12);
   }  
-  .twitter-feed {
+  .twitter-feed, .oaf {
     @include span-columns(6 omega, 12);
   }
 
-  // #footer
-  .keepintouch {
-    @include span-columns(4, 12);
-  }
   .oaf {
-    @include pre(4);
-    @include span-columns(4 omega,  12);    
     text-align: right;
   }
 }
@@ -147,11 +141,10 @@
 
   // #footer
   .keepintouch {
-    @include span-columns(11,24);
+    @include span-columns(12,24);
   }
   .oaf {
-    @include pre(2);
-    @include span-columns(11 omega, 24);    
+    @include span-columns(12 omega, 24);    
     text-align: right;
   }
 
