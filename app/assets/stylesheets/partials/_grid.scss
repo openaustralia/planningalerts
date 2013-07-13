@@ -24,9 +24,13 @@
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+    padding: 0;
+    margin-top: 0;
 
     label {
       float: none;
+      font-size: 1.1em;
+      margin-bottom: .5em;
     }
     label, li.stringish input, li.string input, .inline-hints {
       text-align: center;
