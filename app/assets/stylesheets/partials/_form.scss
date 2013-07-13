@@ -131,4 +131,16 @@ form.donate {
   }
 }
 
-
+// Homepage's address search form
+.address-search {
+  label {
+    text-align: right;
+    font-size: 1.1em;
+    width: 23%;
+    padding: .5em 2% 0 0;
+  }
+  li.string input {
+    font-size: 1.1em;
+    padding: .5em;
+  }
+}

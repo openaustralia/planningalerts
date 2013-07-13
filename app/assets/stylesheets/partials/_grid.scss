@@ -17,6 +17,38 @@
 
 }
 
+// Until we get to our largest size
+@include at-breakpoint(1em 60em) {
+
+  // Home page search form should be tweaked
+  .address-search {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+
+    label {
+      float: none;
+    }
+    label, li.string input, .inline-hints {
+      text-align: center;
+      width: 100%;
+    }
+    .inline-hints {
+      margin-left: 0;
+    }
+    .actions {
+      width: 100%;
+      padding-left: 0;
+
+      .submit {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+
+}
+
 @include at-breakpoint(30em 12 60em) {
 
   .container {
@@ -114,4 +146,5 @@
     @include span-columns(11 omega, 24);    
     text-align: right;
   }
+
 }
