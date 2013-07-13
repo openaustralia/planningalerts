@@ -137,10 +137,12 @@ div.attention {
 }
 
 #privacy, #spnBeta, .explanation {
-  padding-left: 75px;
-  padding-right: 75px;
-  font-size: 0.8em;
   @include quiet;
+  font-size: 0.8em;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+
   em {
     font-weight: bold;
     font-style: normal; 
@@ -202,6 +204,7 @@ ul#subscribe {
   margin-right: 0;
   background: $almostwhite;
   border: solid 1px $grey;
+
   img {
     vertical-align: middle;
     margin-right: 0.5em;
@@ -215,6 +218,7 @@ ul#subscribe {
   background: $almostwhite;
   border: solid 1px $grey;
   padding: 1em;
+
   p {
     margin-bottom: 1em;
   }
@@ -229,26 +233,27 @@ ol#comments {
 div.comment {
   padding: 1em;
   background: #fafafa;
+
   .report {
     opacity: 0;
   }
-}
+  &:hover {
+    background: #f0f0f0;
+    -webkit-transition: background .1s linear;  
+    -moz-transition: background .1s linear;  
+    -o-transition: background .1s linear;  
+    -ms-transition: background .1s linear;  
+    transition: background .1s linear;
 
-div.comment:hover {
-  background: #f0f0f0;
-  -webkit-transition: background .1s linear;  
-  -moz-transition: background .1s linear;  
-  -o-transition: background .1s linear;  
-  -ms-transition: background .1s linear;  
-  transition: background .1s linear;
-  .report {
-    opacity: 100;
-    -webkit-transition: opacity .1s linear;  
-    -moz-transition: opacity .1s linear;  
-    -o-transition: opacity .1s linear;  
-    -ms-transition: opacity .1s linear;  
-    transition: opacity .1s linear;
-  }  
+    .report {
+      opacity: 100;
+      -webkit-transition: opacity .1s linear;  
+      -moz-transition: opacity .1s linear;  
+      -o-transition: opacity .1s linear;  
+      -ms-transition: opacity .1s linear;  
+      transition: opacity .1s linear;
+    }  
+  }
 }
 
 .comment {
@@ -280,9 +285,10 @@ body h4 {
 #application-stats {
   background: $almostwhite;
   padding: 12px;
+
   p:last-child {
     margin-bottom: 0.5em;
-  };
+  }
 }
 
 .match {
@@ -297,6 +303,7 @@ body h4 {
   @include no-bullets;
   margin-right: 0;
   padding-left: 0;
+
   li {
     width: 232px;
     display: inline-block;
@@ -320,27 +327,26 @@ body h4 {
   }
 }
 
-.notice {
-  a {
-    color: $link_color !important;
-  }
+.notice a {
+  color: $link_color !important;
 }
 
 // Social buttons
 #social {
   text-align: center;
-  .fb-like {
+
+  .fb-like, .twitter-share-button {
     display: block;
+  }
+  .fb-like {
     margin-top: 1em;
   }
   .twitter-share-button {
-    display: block;
     margin: 2em auto 0 auto;
   }
 }
 
 // Style chart on authority detail page
-
 #chart {
   text {
     fill: gray;
@@ -354,20 +360,22 @@ body h4 {
   background: #f8f8f8;
   padding: 1em;
   border: 1px solid;
+
   #privacy {
     padding-left: 0;
   }
   .formtastic {
     margin-top: 0;
     margin-bottom: 0;
+    padding-left: 0;
+    border: none;
+
     .inline-hints {
       margin-left: 0;
     }
-    padding-left: 0;
     .actions {
       padding-left: 0;
     }
-    border: none;
     li label {
       display: none;
     }
@@ -386,6 +394,7 @@ body h4 {
 table.scraper_fields {
   font-size: 0.9em;
   table-layout: fixed;
+
   th {
     background: #e8e8e8;
   }
@@ -395,6 +404,7 @@ table.scraper_fields {
   }
   td {
     background: #f8f8f8;
+
     p:last-child {
       margin-bottom: 0;
     }

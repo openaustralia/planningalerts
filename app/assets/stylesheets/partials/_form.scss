@@ -51,12 +51,6 @@ $fb-line-height: 1em;
   }
 }
 
-.formtastic.alert {
-  abbr {
-    display: none;
-  }
-}
-
 // Special formatting for specific forms
 
 .formtastic#new_comment {
@@ -81,14 +75,14 @@ $fb-line-height: 1em;
   }
 }
 
-// Override things set by compass I think
-// Bit of a nasty hack
+// .alert is a popular class name... override compass stuff
 body form.alert {
   background: inherit;
   border-color: inherit;
-  padding: inherit;
-  margin-bottom: 2em;
   border: inherit;
+
+  padding: 0;
+  margin-top: 0;
 }
 
 form.donate {
@@ -99,9 +93,6 @@ form.donate {
   input#amount_donate, label, span {
     font-size: 1.3em;
   }
-  label {
-    //margin-left: 1em;
-  }
 }
 
 #sidebar .formtastic.alert {
@@ -109,11 +100,13 @@ form.donate {
   margin-top: 0;
   font-size: 75%;
   background: $almostwhite;
-  //border: solid 1px $grey;
+  padding: 12px;
+
   .label {
     /* Use seriously old-school way of hiding these labels so that placeholder polyfill can still work */
     left: -999em;
     position: absolute;
+
     /* This is only used when the placeholder polyfill is active */
     span.placeholder {
       font-size: 1.3em;
@@ -125,7 +118,6 @@ form.donate {
   .inline-hints {
     margin-left: 0;
   }
-  padding: 12px;
   p {
     margin-bottom: 1em;
   }
