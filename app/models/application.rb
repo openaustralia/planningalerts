@@ -76,19 +76,26 @@ class Application < ActiveRecord::Base
   end
 
   def self.translate_scraperwiki_feed_data(feed_data)
-    JSON.parse(feed_data).map do |a|
-      {
-        :council_reference => a['council_reference'],
-        :address => a['address'],
-        :description => a['description'],
-        :info_url => a['info_url'],
-        :comment_url => a['comment_url'],
-        :date_received => a['date_received'],
-        :date_scraped => Time.now,
-        # on_notice_from and on_notice_to tags are optional
-        :on_notice_from => a['on_notice_from'],
-        :on_notice_to => a['on_notice_to']
-      }
+    j = JSON.parse(feed_data)
+    # Do a sanity check on the structure of the feed data
+    if j.kind_of?(Array) && j.all?{|a| a.kind_of?(Hash)}
+      j.map do |a|
+        {
+          :council_reference => a['council_reference'],
+          :address => a['address'],
+          :description => a['description'],
+          :info_url => a['info_url'],
+          :comment_url => a['comment_url'],
+          :date_received => a['date_received'],
+          :date_scraped => Time.now,
+          # on_notice_from and on_notice_to tags are optional
+          :on_notice_from => a['on_notice_from'],
+          :on_notice_to => a['on_notice_to']
+        }
+      end
+    else
+      logger.error "Unexpected result from scraperwiki API: #{feed_data}"
+      []
     end
   end
 
