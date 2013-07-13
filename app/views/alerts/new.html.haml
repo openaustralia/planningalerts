@@ -7,7 +7,7 @@
     = f.input :address, :label => "Enter a street address", :hint => "e.g. 1 Sowerby St, Goulburn, NSW 2580"
     = f.input :email, :label => "Enter your email address"
   = f.actions do
-    = f.action :submit, :label => "Create alert"
+    = f.action :submit, :label => "Create alert", :button_html => { :class => "button button-rounded button-highlight button-large" }
 
 %p.explanation
   You will receive email only when there are new applications nearby and no more than once per day.
