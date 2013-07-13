@@ -68,11 +68,10 @@
 
   // news
   .blog-feed {
-    @include span-columns(5, 12);
+    @include span-columns(6, 12);
   }  
   .twitter-feed {
-    @include pre(2);
-    @include span-columns(5 omega, 12);
+    @include span-columns(6 omega, 12);
   }
 
   // #footer
