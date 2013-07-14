@@ -4,11 +4,13 @@
 
 body {
   font-weight: 400;
-  background: $grey;
+  background: image-url("background.jpg") center center no-repeat;
+  background-size: cover;
 }
 
 .main {
   background: #fff;
+  margin-bottom: 1.5em;
 }
 
 // Layout elements - i.e. those on every page
@@ -25,20 +27,21 @@ body {
       text-decoration: none;
 
       &:link, &:visited {
-        color: $darkgrey;
+        color: $almostwhite;
       }
       &:active, &:hover, &:focus {
-        color: $grey;
+        color: #fff;
       }
     } 
   }
   h2 {
-    color: $darkgrey;
+    color: $almostwhite;
     font-size: .9em;
   }
   #stats {
     font-size: 0.9em;
-    background: #fff;
+    background-color: #fff;
+    background-color: rgba(255,255,255,0.9);
     padding: .5em .75em;
 
     a {
@@ -65,9 +68,10 @@ body {
     border-top-right-radius: .25em;
 
     &:link, &:visited {
-      color: $darkgrey;
+      color: $almostwhite;
     }
     &:active, &:hover, &:focus {
+      color: #fff;
       background: rgba(0,0,0,0.1);
     }
   }
