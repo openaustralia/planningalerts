@@ -18,34 +18,37 @@
 // Until we get to our largest size
 @include at-breakpoint(1em 60em) {
 
-  // Home page search form should be tweaked
-  // Also alert sign up form
-  form.alert, .address-search {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
-    margin-top: 0;
+  .container {
+    // Home page search form should be tweaked
+    // Also alert sign up form
+    form.alert, .address-search {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0;
+      margin-top: 0;
 
-    label {
-      float: none;
-      font-size: 1.1em;
-      margin-bottom: .5em;
-    }
-    label, li.stringish input, li.string input, .inline-hints {
-      text-align: center;
-      width: 100%;
-    }
-    .inline-hints {
-      margin-left: 0;
-    }
-    .actions {
-      width: 100%;
-      padding-left: 0;
-
-      .action, .submit {
-        width: 100%;
+      label {
+        float: none;
+        font-size: 1.1em;
+        margin-bottom: .5em;
+      }
+      #{nest("li.stringish, li.string", "label, input")}, .inline-hints  {
+        //li.stringish, li.string, .inline-hints {
         text-align: center;
+        width: 100%;
+      }
+      .inline-hints {
+        margin-left: 0;
+      }
+      .actions {
+        width: 100%;
+        padding-left: 0;
+
+        .action, .submit {
+          width: 100%;
+          text-align: center;
+        }
       }
     }
   }
