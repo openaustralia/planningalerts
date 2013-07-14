@@ -88,6 +88,12 @@
 
 @include at-breakpoint(60em 24) {
 
+  // We'll show a photo background now
+  body {
+    background: image-url("background.jpg") top center no-repeat;
+    background-size: cover;
+  }
+
   $container-style: static;
 
   .container {
@@ -195,6 +201,12 @@
     @include background-clip( padding-box);
     border: .5em solid $background-overlay;
     border-top: none;
+    padding-bottom: none;
+    margin-bottom: 1.5em;
+
+    a:active, a:hover, a:focus {
+      color: $warm-highlight;
+    }
   }
   .keepintouch {
     @include span-columns(12,24);

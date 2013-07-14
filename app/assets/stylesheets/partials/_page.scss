@@ -3,9 +3,8 @@
 @import "compass/utilities/lists/horizontal-list";
 
 body {
+  background-color: $dark;
   font-weight: 400;
-  background: image-url("background.jpg") top center no-repeat;
-  background-size: cover;
 }
 
 .main {
@@ -109,16 +108,17 @@ body {
 }
 
 #footer {
-  padding-top: 1px;
-  margin-bottom: 1.5em;
+  padding-top: 1em;
+  padding-bottom: 1em;
   color: $lightest;
+  background-color: $warm-highlight;
 
   a {
     &:link, &:visited {
       color: $light;
     }
     &:active, &:hover, &:focus {
-      color: $warm-highlight;
+      color: $dark;
     }
   }
   h4, h5, {
