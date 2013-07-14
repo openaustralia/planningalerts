@@ -19,20 +19,24 @@ $fb-line-height: 1em;
 
 .formtastic {
   @include float-form(100%, 25%, 75%, 0, "buttons-left", "left", "select-auto");
+  margin-top: 2em;
+  margin-bottom: 2em;
+
   // Make text field sit nicely at the expected full width
   input, textarea {
     @include box-sizing(border-box);
   }
-  margin-top: 2em;
-  margin-bottom: 2em;
+
   li {
     margin-bottom: 0.5em;
+
     &.error {
       background: inherit;
       border: inherit;
       color: inherit;
+
       input, textarea, select {
-        background: $yellow;
+        background: $almostwhite;
       }
     }
   }
@@ -44,7 +48,7 @@ $fb-line-height: 1em;
     padding-top: 0.5em;
   }
   .inline-errors {
-    color: $orange;
+    color: $error-color;
   }
   li.string input, li.email input {
     font-size: 1.3em;
@@ -125,6 +129,7 @@ form.donate {
   label {
     text-align: right;
     font-size: 1.1em;
+    font-weight: 700;
     width: 23%;
     padding: .5em 2% 0 0;
   }
