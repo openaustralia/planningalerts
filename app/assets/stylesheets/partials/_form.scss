@@ -25,6 +25,7 @@ $fb-line-height: 1em;
   // Make text field sit nicely at the expected full width
   input, textarea {
     @include box-sizing(border-box);
+    color: $cool-highlight;
   }
 
   li {
@@ -50,8 +51,19 @@ $fb-line-height: 1em;
   .inline-errors {
     color: $error-color;
   }
-  li.string input, li.email input {
-    font-size: 1.3em;
+  li.string, li.stringish, li.email {
+    label {
+      text-align: right;
+      font-size: 1.1em;
+      font-weight: 700;
+      width: 23%;
+      padding: .5em 2% 0 0;
+      color: $cool-highlight;
+    }
+    input, textarea {
+      font-size: 1.1em;
+      padding: .5em;
+    }
   }
 }
 
@@ -121,20 +133,5 @@ form.donate {
   }
   p {
     margin-bottom: 1em;
-  }
-}
-
-// Homepage's address search form
-.address-search {
-  label {
-    text-align: right;
-    font-size: 1.1em;
-    font-weight: 700;
-    width: 23%;
-    padding: .5em 2% 0 0;
-  }
-  li.string input {
-    font-size: 1.1em;
-    padding: .5em;
   }
 }
