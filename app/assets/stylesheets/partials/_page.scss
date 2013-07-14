@@ -68,8 +68,7 @@ a {
     padding: .5em;
     text-decoration: none; 
     display: inline-block;
-    border-top-left-radius: .25em;
-    border-top-right-radius: .25em;
+    @include border-top-radius(.25em);
     @include single-transition(background-color, .5s);
 
     &:link, &:visited {

@@ -117,8 +117,7 @@
 
   .main {
     background-color: transparent;
-    border-top-left-radius: .5em;
-    border-top-right-radius: .5em;
+    @include border-top-radius(.5em);
     border: .5em solid $background-overlay;
     background-color: $background-overlay;
     @include background-clip( padding-box);
@@ -164,7 +163,7 @@
   }
   #stats {
     @include animation(gettowed 3s ease infinite alternate);
-    border-radius: 2px;
+    @include border-radius(2px);
   }
 
   // Navigation can be a bit larger
@@ -195,8 +194,7 @@
 
   // #footer
   #footer {
-    border-bottom-left-radius: .5em;
-    border-bottom-right-radius: .5em;
+    @include border-bottom-radius(.5em);
     background-color: $background-overlay;
     @include background-clip( padding-box);
     border: .5em solid $background-overlay;
