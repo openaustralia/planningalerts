@@ -58,6 +58,7 @@ body {
 
     li {
       padding: 0;
+      margin-right: .2em;
     }
   }
   a {
@@ -70,11 +71,11 @@ body {
     &:link, &:visited {
       color: #fff;
     }
+    &:active, &:hover, &:focus {
+      color: $lightest;
+      background: rgba(0,0,0,0.1);
+    } 
   }
-  &.selected, a:active, a:hover, a:focus {
-    color: $lightest;
-    background: rgba(0,0,0,0.1);
-  } 
   abbr {
     border: none;
   }
