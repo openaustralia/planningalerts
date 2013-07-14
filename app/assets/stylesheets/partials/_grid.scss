@@ -110,10 +110,22 @@
   }
 
   .main {
+    background-color: transparent;
     border-top-left-radius: .5em;
     border-top-right-radius: .5em;
     border: .5em solid $background-overlay;
-    background-clip: padding-box;
+    background-color: $background-overlay;
+    @include background-clip( padding-box);
+    padding-left: 0;
+    padding-right: 0;
+    width: 61.3em;
+  }
+
+  #content {
+    padding-left: $grid-padding;
+    padding-right: $grid-padding;
+    background-color: $content-background;
+    @include border-radius(.35em);
   }
 
   // Header's plane banner can be presented fancily
@@ -180,7 +192,7 @@
     border-bottom-left-radius: .5em;
     border-bottom-right-radius: .5em;
     background-color: $background-overlay;
-    background-clip: padding-box;
+    @include background-clip( padding-box);
     border: .5em solid $background-overlay;
     border-top: none;
   }
