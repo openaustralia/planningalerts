@@ -116,12 +116,36 @@
   }
 
   // Header's plane banner can be presented fancily
+  // We're animating this... :)
+  @include keyframes(fly) {
+    from {
+      background-position: 0 7px;
+    }
+    to {
+      background-position: 0 9px;
+    }
+  }
+  @include keyframes(gettowed) {
+    from {
+      @include rotate(-1deg);
+      background-color: rgba(255,255,255,0.9);
+    }
+    to {
+      @include rotate(1deg);
+      background-color: rgba(255,255,255,0.8);
+    }
+  }
   #statsbanner {
     padding-left: 73px;
-    background: url(/images/plane.png) no-repeat 0 center; 
+    background: url(/images/plane.png) no-repeat 0 8px;
     position: absolute;
     top: 1em;
     right: 1em;
+    @include animation(fly 3s ease infinite alternate);
+  }
+  #stats {
+    @include animation(gettowed 3s ease infinite alternate);
+    border-radius: 2px;
   }
 
   // Navigation can be a bit larger
