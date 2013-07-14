@@ -4,7 +4,7 @@
 
 body {
   font-weight: 400;
-  background: image-url("background.jpg") center center no-repeat;
+  background: image-url("background.jpg") top center no-repeat;
   background-size: cover;
 }
 
@@ -27,15 +27,15 @@ body {
       text-decoration: none;
 
       &:link, &:visited {
-        color: $almostwhite;
+        color: $warm-highlight;
       }
       &:active, &:hover, &:focus {
-        color: #fff;
+        color: $light;
       }
     } 
   }
   h2 {
-    color: $almostwhite;
+    color: $lightest;
     font-size: .9em;
   }
   #stats {
@@ -68,15 +68,12 @@ body {
     border-top-right-radius: .25em;
 
     &:link, &:visited {
-      color: $almostwhite;
-    }
-    &:active, &:hover, &:focus {
-      color: #fff;
-      background: rgba(0,0,0,0.1);
+      color: $lightest;
     }
   }
-  &.selected {
-    background: $almostwhite;
+  &.selected, a:active, a:hover, a:focus {
+    color: $light;
+    background: rgba(0,0,0,0.1);
   } 
   abbr {
     border: none;
@@ -177,15 +174,15 @@ div.attention {
 
 /* api */
 div.apiitem {
-  border: dotted 1px $grey;
-  background: $almostwhite;
+  border: dotted 1px $cool-highlight;
   padding: 0.5em;
   margin-top: 1em;
+
   code {
     background: white;
     display: block;
     padding: 10px;
-    border: solid 1px $grey;
+    border: solid 1px $cool-highlight;
     word-wrap: break-word;
   }
   p {
@@ -210,15 +207,14 @@ body dl dt {
 }
 
 dl.faq dt {
-  color: $darkgrey;
+  color: $cool-highlight;
 }
 
 ul#subscribe {
   @include no-bullets;
   padding: 0.5em 0.5em 0 0.5em;
   margin-right: 0;
-  background: $almostwhite;
-  border: solid 1px $grey;
+  border: solid 1px $cool-highlight;
 
   img {
     vertical-align: middle;
@@ -230,8 +226,7 @@ ul#subscribe {
 }
 
 .alert.home {
-  background: $almostwhite;
-  border: solid 1px $grey;
+  border: solid 1px $cool-highlight;
   padding: 1em;
 
   p {
@@ -298,7 +293,6 @@ body h4 {
 }
 
 #application-stats {
-  background: $almostwhite;
   padding: 12px;
 
   p:last-child {
@@ -429,7 +423,7 @@ table.scraper_fields {
     vertical-align: top;
   }
   td.field {
-    color: $darkgrey;    
+    color: $dark;    
   }
   .field {
     width: 15%;

@@ -36,7 +36,7 @@ $fb-line-height: 1em;
       color: inherit;
 
       input, textarea, select {
-        background: $almostwhite;
+        background: $lightest;
       }
     }
   }
@@ -100,7 +100,7 @@ form.donate {
   @include float-form(100%, 25%, 100%, 0, "buttons-left", "left", "select-auto");
   margin-top: 0;
   font-size: 75%;
-  background: $almostwhite;
+  background: $lightest;
   padding: 12px;
 
   .label {

@@ -23,18 +23,20 @@ $show-grid-backgrounds: false;
 
 // Colours
 
-$almostblack: #0f0f0f;
-$grey: #989898;
-$darkgrey: #333;
-$almostwhite: #fafafa;
+$lightest: #ebf1d6;
+$light: #fae08b;
+$dark: #1b3444;
+$darkest: #071726;
+$warm-highlight: #d36e38;
+$cool-highlight: #426357;
 
-$link-color: $darkgrey;
-$link-hover-color: $almostblack;
-$link-active-color: $almostblack;
-$link-visited-color: $grey;
-$link-focus-color: $almostblack;
-$font-color: $darkgrey;
-$quiet-color: $grey;
+$font-color: $darkest;
+$link-color: $dark;
+$link-active-color: $cool-highlight;
+$link-hover-color: $darkest;
+$link-visited-color: $darkest;
+$link-focus-color: $darkest;
+$quiet-color: $cool-highlight;
 $error-bg-color: #fbb;
 $error-color: $font-color;
-$highlight-color: $almostblack;
+$highlight-color: $warm-highlight;
