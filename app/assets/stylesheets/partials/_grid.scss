@@ -8,7 +8,7 @@
     @include set-container-width;
   }
 
-  #menu, #footer, #main, #sidebar,
+  #menu, #main, #sidebar,
   .blog-feed, .twitter-feed, .keepintouch, .oaf {
     @include span-columns(6 omega);
   }
@@ -61,7 +61,7 @@
     @include set-container-width;
   }
 
-  #menu, #footer {
+  #menu {
     @include span-columns(12 omega, 12);
   }
 
@@ -96,7 +96,7 @@
     @include set-container-width;
   }
 
-  #menu, #footer {
+  #menu {
     @include span-columns(24 omega, 24);
   }
 
@@ -110,8 +110,9 @@
   }
 
   .main {
-    border-radius: .5em;
-    border: .5em solid rgba(0,0,0,0.1);
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
+    border: .5em solid $background-overlay;
     background-clip: padding-box;
   }
 
@@ -175,6 +176,14 @@
   }
 
   // #footer
+  #footer {
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
+    background-color: $background-overlay;
+    background-clip: padding-box;
+    border: .5em solid $background-overlay;
+    border-top: none;
+  }
   .keepintouch {
     @include span-columns(12,24);
   }

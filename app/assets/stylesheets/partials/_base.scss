@@ -33,6 +33,8 @@ $darkest: #071726;
 $warm-highlight: #d36e38;
 $cool-highlight: #426357;
 
+$background-overlay: transparentize($darkest,0.8);
+
 $font-color: $darkest;
 $link-color: $dark;
 $link-active-color: $cool-highlight;

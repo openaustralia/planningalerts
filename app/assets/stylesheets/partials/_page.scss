@@ -10,7 +10,6 @@ body {
 
 .main {
   background: #fff;
-  margin-bottom: 1.5em;
 }
 
 // Transition links by colour
@@ -79,7 +78,7 @@ a {
     }
     &:active, &:hover, &:focus {
       color: $lightest;
-      background-color: rgba(0,0,0,0.1);
+      background-color: $background-overlay;
     } 
   }
   abbr {
@@ -98,7 +97,7 @@ body {
   &.c-static.a-about .about-link {
     a {
       color: $lightest;
-      background: rgba(0,0,0,0.1);
+      background: $background-overlay;
     }
   }
 }
@@ -110,8 +109,23 @@ body {
 }
 
 #footer {
-  padding-top: 1.5em;
+  padding-top: 1px;
+  margin-bottom: 1.5em;
+  color: $lightest;
 
+  a {
+    &:link, &:visited {
+      color: $light;
+    }
+    &:active, &:hover, &:focus {
+      color: $warm-highlight;
+    }
+  }
+  h4, h5, {
+    &, a:link {
+      color: $lightest;
+    }
+  }
   h4 {
     margin-top: 0;
   }
@@ -121,7 +135,7 @@ body {
   ul {
     @include no-bullets;
     padding-left: 0;
-    margin-right: 0;
+    margin: 0;
 
     &.keepintouch {
       li {
