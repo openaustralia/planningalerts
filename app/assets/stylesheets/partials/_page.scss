@@ -68,11 +68,11 @@ body {
     border-top-right-radius: .25em;
 
     &:link, &:visited {
-      color: $lightest;
+      color: #fff;
     }
   }
   &.selected, a:active, a:hover, a:focus {
-    color: $light;
+    color: $lightest;
     background: rgba(0,0,0,0.1);
   } 
   abbr {
@@ -89,12 +89,6 @@ body {
 #footer {
   padding-top: 1.5em;
 
-  a {
-    color: #000;
-  }
-  h4, h5 {
-    color: #333;
-  }
   h4 {
     margin-top: 0;
   }
@@ -280,9 +274,14 @@ div.comment {
   }
 }
 
-body h4 {
-  margin-top: 1em;
-  margin-bottom: 0.5em;
+body {
+  h3, h4, h5, & a:link, & a:visited {
+    color: $cool-highlight;
+  }
+  h4 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+  }
 }
 
 #application {
@@ -333,9 +332,13 @@ body h4 {
   li {
     padding-bottom: 0.5em;
   }
+  a:link {
+    text-decoration: none;
+    color: $darkest;
+  }
   .date {
-    @include quiet;
     font-size: 0.8em;
+    color: $dark;
   }
 }
 
