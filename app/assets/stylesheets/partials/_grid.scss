@@ -8,7 +8,7 @@
     @include set-container-width;
   }
 
-  #header, #menu, #footer, #main, #sidebar,
+  #menu, #footer, #main, #sidebar,
   .blog-feed, .twitter-feed, .keepintouch, .oaf {
     @include span-columns(6 omega);
   }
@@ -58,7 +58,7 @@
     @include set-container-width;
   }
 
-  #header, #menu, #footer {
+  #menu, #footer {
     @include span-columns(12 omega, 12);
   }
 
@@ -93,7 +93,7 @@
     @include set-container-width;
   }
 
-  #header, #menu, #footer {
+  #menu, #footer {
     @include span-columns(24 omega, 24);
   }
 
@@ -104,6 +104,12 @@
     h2 {
       font-size: 1.25em;
     }
+  }
+
+  .main {
+    border-radius: .5em;
+    border: .5em solid rgba(0,0,0,0.1);
+    background-clip: padding-box;
   }
 
   // Header's plane banner can be presented fancily

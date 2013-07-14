@@ -42,16 +42,15 @@
 
     = yield :extra_meta_tags
   %body
-    .container
-      #header
-        #statsbanner
-          #stats
-            #{number_to_human(@alert_count).downcase} applications sent for
-            = link_to "#{@authority_count} authorities", authorities_path
-        %h1= link_to 'Planning Alerts', root_path
-        %h2 
-          Email alerts of planning applications 
-          %em near you
+    .container#header
+      #statsbanner
+        #stats
+          #{number_to_human(@alert_count).downcase} applications sent for
+          = link_to "#{@authority_count} authorities", authorities_path
+      %h1= link_to 'Planning Alerts', root_path
+      %h2 
+        Email alerts of planning applications 
+        %em near you
 
       .hide= link_to "Skip navigation", "#content"
       #menu
@@ -75,6 +74,7 @@
           = li_selected(:controller => "/static", :action => "about") do
             = link_to 'About', about_path
 
+    .container.main
       #content
         - if notice
           %p.notice= notice

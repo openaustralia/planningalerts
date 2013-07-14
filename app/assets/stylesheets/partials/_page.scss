@@ -4,10 +4,10 @@
 
 body {
   font-weight: 400;
-  background: $almostwhite;
+  background: $grey;
 }
 
-.container {
+.main {
   background: #fff;
 }
 
@@ -16,10 +16,10 @@ body {
   position: relative;
 
   h1 {
-    margin: .25em 0 0 .25em;
     font-size: 1.5em;
     font-weight: 700;
-
+    margin-bottom: 0;
+    margin-top: .5em;
 
     a {
       text-decoration: none;
@@ -35,7 +35,6 @@ body {
   h2 {
     color: $darkgrey;
     font-size: .9em;
-    margin: 0 0 0 .5em;
   }
   #stats {
     font-size: 0.9em;
@@ -62,12 +61,14 @@ body {
     padding: .5em;
     text-decoration: none; 
     display: inline-block;
+    border-top-left-radius: .25em;
+    border-top-right-radius: .25em;
 
     &:link, &:visited {
       color: $darkgrey;
     }
     &:active, &:hover, &:focus {
-      background: $almostwhite;
+      background: rgba(0,0,0,0.1);
     }
   }
   &.selected {
