@@ -41,42 +41,11 @@ module ApplicationHelper
     meters_in_words(km * 1000)
   end
   
-  def rss_feed_items(url)
-    content = ""
-    begin
-      open(url, 0) do |s| content = s.read end
-      feed = RSS::Parser.parse(content, false)
-      return feed.channel.items[0..4] # just use the first five items
-    rescue
-      # This happens when the DB is empty
-      return []
-    end
+  def render_rss_feed
+    render :partial => 'applications/rss', :locals => { :items => PlanningAlertsRSS.recent }
   end
   
-  def render_rss_feed(url)
-    @items = rss_feed_items(url)
-    render :partial => 'applications/rss'
-  end
-  
-  def render_twitter_feed(screen_name)
-    Twitter.configure do |config|
-      config.consumer_key = Configuration::TWITTER_CONSUMER_KEY
-      config.consumer_secret = Configuration::TWITTER_CONSUMER_SECRET
-      config.oauth_token = Configuration::TWITTER_OAUTH_TOKEN
-      config.oauth_token_secret = Configuration::TWITTER_OAUTH_TOKEN_SECRET
-    end
-    begin
-      @items = Twitter.user_timeline(screen_name)[0..4]
-    rescue
-      @items = []
-    end
-    @items = @items.map do |tweet|
-      item = OpenStruct.new
-      item.title = tweet.text.html_safe
-      item.date = tweet.created_at
-      item.link = "https://twitter.com/#{screen_name}/status/#{tweet.id}"
-      item
-    end
-    render :partial => 'applications/rss'
+  def render_twitter_feed(username)
+    render :partial => 'applications/rss', :locals => { :items => TwitterFeed.new(username).items }
   end
 end
