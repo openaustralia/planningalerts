@@ -6,20 +6,23 @@
   = link_to "donations", donate_path
   from people like you. If you would like to get involved we'd love to hear from you:
 
+%hr
 %h4
   I am a programmer and want to add my local planning authority
 %p
   You can help by writing a <a href="http://en.wikipedia.org/wiki/Screen_scraping">screen scraper</a>
   for your local planning authority, all without leaving your web browser, in any one of your favorite languages: Ruby, Python or PHP.
-%p= link_to "Read our step-by-step instructions", how_to_write_a_scraper_path
+%p.cta= link_to "Read our step-by-step instructions", how_to_write_a_scraper_path
 
+%hr
 %h4
   I'm not technical and I want to get my local council on to PlanningAlerts. What can I do?
 %p
   You can lobby your local council to publish its planning data in a machine readable format. Email the council planning department and General Manager. Contact your councillors and get them to support your mission.
-%p
+%p.cta
   Here is our #{link_to "quick guide on how to lobby your local council", how_to_lobby_your_local_council_path}.
 
+%hr
 %h4
   I don't have the time or I don't have the skills. How can I help?
 %p
@@ -27,16 +30,17 @@
   the specialist skills to help out personally then the best thing that you can do is
   to #{link_to "donate to the OpenAustralia Foundation", donate_path},
   the charity behind PlanningAlerts.
-%p
+%p.cta
   Your donation will go to improving the service.
 
+%hr
 %h4
   I work for a local council or planning authority and would like to make our data available
 %p
   The most important thing you can do is publish your data in a simple format that is freely available on the internet.
   Something <a href="/brisbane.xml">like this</a> is good but we can work with most formats.
 
-%p
+%p.cta
   Please
   = mail_to "contact@planningalerts.org.au", "get in touch"
   if you would like to discuss how you can help.

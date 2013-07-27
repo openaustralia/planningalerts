@@ -103,7 +103,7 @@ body {
 #content {
   clear: both;
   position: relative;
-  padding: 1.5em 0;
+  padding: 2em 0 1.5em 0;
 }
 
 #footer {
@@ -153,8 +153,25 @@ p a, li a, span a, dd a, dt a, div a {
   @include hover-link;
 }
 
+// On the get involved page there are some call to action links, underline them
+.cta a {
+  &:link, &:visited {
+    text-decoration: underline;
+  }
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid $light-cool-highlight;
+  margin: 1em 0;
+  padding: 0;
+}
+
 .container .button {
   font-family: $blueprint-font-family;
+  text-decoration: none;
 }
 
 .container dd {
@@ -181,9 +198,6 @@ div.attention {
 #privacy, #spnBeta, .explanation {
   @include quiet;
   font-size: 0.8em;
-  margin-left: auto;
-  margin-right: auto;
-  width: 90%;
 
   em {
     font-weight: bold;
@@ -204,25 +218,22 @@ div.attention {
 
 /* api */
 div.apiitem {
-  border: dotted 1px $cool-highlight;
-  padding: 0.5em;
-  margin-top: 1em;
+  margin-bottom: 1.5em;
 
+  h5 {
+    margin-bottom: 1em;
+  }
   code {
-    background: white;
     display: block;
     padding: 10px;
-    border: solid 1px $cool-highlight;
     word-wrap: break-word;
+    background-color: $lightest-cool-highlight;
+    color: $cool-highlight;
+    @include border-radius(.5em);
   }
-  p {
-    font-size: 0.8em;
-  } 
-}
-
-p.apiexamples {
-  position: relative;
-  top: 1em; 
+  code, p {
+    margin-bottom: 1em;
+  }
 }
 
 #hLicenseInfo {
@@ -316,7 +327,6 @@ body {
   }
   h4 {
     margin-top: 1em;
-    margin-bottom: 0.5em;
   }
 }
 
