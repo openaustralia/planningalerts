@@ -1,7 +1,5 @@
 .container {
   @include container;
-  padding-left: 0;
-  padding-right: 0;
 }
 
 @include at-breakpoint(6 30em) {
@@ -101,6 +99,8 @@
   .container {
     margin-left: auto;
     margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
     @include set-container-width;
   }
 
@@ -202,6 +202,8 @@
     border: .5em solid $background-overlay;
     border-top: none;
     padding-bottom: none;
+    padding-left: .7em;
+    padding-right: .7em;
     margin-bottom: 1.5em;
 
     a:active, a:hover, a:focus {
