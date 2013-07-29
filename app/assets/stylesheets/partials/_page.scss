@@ -405,8 +405,11 @@ form.address-search {
   .cta {
     display: block;
     text-align: right;
-    text-decoration: underline;
     margin-top: .25em;
+
+    &:link {
+      text-decoration: underline;
+    }
   }
 }
 .news {
