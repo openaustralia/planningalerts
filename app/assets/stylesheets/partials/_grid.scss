@@ -9,7 +9,7 @@
   }
 
   #menu, #main, #sidebar,
-  .blog-feed, .twitter-feed, .keepintouch, .oaf {
+  .news, .keepintouch, .oaf {
     @include span-columns(6 omega);
   }
 
@@ -70,14 +70,18 @@
   }
 
   #sidebar {
-    @include span-columns(3 omega, 12)
+    @include span-columns(3 omega, 12);
   }
 
-  // news and footer
-  .blog-feed, .keepintouch {
+  // news 
+  .news {
+    @include span-columns(12 omega, 12);
+  }
+  // footer
+  .keepintouch {
     @include span-columns(6, 12);
   }  
-  .twitter-feed, .oaf {
+  .oaf {
     @include span-columns(6 omega, 12);
   }
 
@@ -181,18 +185,17 @@
     @include span-columns(18, 24)
   }
 
+  #content {
+    @include clearfix;
+  }
+
   #sidebar {
     @include span-columns(6 omega, 24)
   }
 
-  // news
-  .blog-feed {
-    @include span-columns(11, 24);
+  .news {
+    @include span-columns(24 omega, 24);
   }  
-  .twitter-feed {
-    @include pre(2);
-    @include span-columns(11 omega, 24);
-  }
 
   // #footer
   #footer {

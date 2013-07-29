@@ -94,14 +94,18 @@ body {
 }
 
 #content {
+  @include clearfix;
   clear: both;
   position: relative;
   padding: 2em 0 1.5em 0;
 }
 
-#footer {
+.tweets, #footer {
   padding-top: 1em;
   padding-bottom: 1em;
+}
+
+#footer {
   color: $lightest;
   background-color: $warm-highlight;
 
@@ -358,26 +362,63 @@ body {
   }
 }
 
-.news {
-  @include clearfix;
+form.address-search {
+  margin-bottom: 1em;
+}
 
+.news, .tweets {
+  a {
+    &:link, &:visited {
+      .body {
+        color: $dark;
+      }
+    }
+    &:active, &:hover, &:focus {
+      text-decoration: none;
+
+      .body {
+        color: $darkest;
+      }
+    }
+  }
   h4 {
     font-weight: 700;
+    margin: 0;
   }
   ul {
     @include no-bullets;
     padding-left: 0;
-  }
-  li {
-    padding-bottom: 0.5em;
-  }
-  a:link {
-    text-decoration: none;
-    color: $darkest;
+    margin: 0;
   }
   .date {
     font-size: 0.8em;
-    color: $dark;
+    color: $cool-highlight;
+  }
+  li {
+    border-bottom: 1px solid $lightest-cool-highlight;
+    padding: .75em 0;
+
+    &:last-child {
+      border: none;
+    }
+  }
+  .cta {
+    display: block;
+    text-align: right;
+    text-decoration: underline;
+    margin-top: .25em;
+  }
+}
+.news {
+  border-top: 1px solid $lightest-cool-highlight;
+  padding-top: 1em;
+}
+
+.tweets {
+  background-color: $lightest-cool-highlight;
+
+  li {
+    border-color: #fff;
   }
 }
 

@@ -42,10 +42,10 @@ module ApplicationHelper
   end
   
   def render_rss_feed
-    render :partial => 'applications/rss', :locals => { :items => PlanningAlertsRSS.recent }
+    render :partial => 'shared/rss_item', :collection => PlanningAlertsRSS.recent
   end
   
   def render_twitter_feed(username)
-    render :partial => 'applications/rss', :locals => { :items => TwitterFeed.new(username).items }
+    render :partial => 'shared/tweet', :collection => TwitterFeed.new(username).items
   end
 end
