@@ -18,7 +18,7 @@ $blueprint-font-family: "ff-meta-web-pro", sans-serif;
 
 $column-width   : 1.825em;
 $gutter-width   : 0.7em;
-$grid-padding   : $gutter-width;
+$grid-padding   : $gutter-width * 2;
 
 $container-style: fluid;
 
