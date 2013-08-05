@@ -6,7 +6,7 @@ class PlanningAlertsRSS
     begin
       content = HTTParty.get(URL).body
       feed    = RSS::Parser.parse(content, false)
-      feed.channel.items[0..4] # just use the first five items
+      feed.channel.items[0...4] # just use the first five items
     rescue # TODO rescue a particular exception
       # This happens when the DB is empty
       []
