@@ -41,9 +41,10 @@ a {
     color: $lightest;
     font-size: .9em;
   }
-  #stats {
-    display: none;
-  }
+}
+// Don't show stats by default
+#stats {
+  display: none;
 }
 
 #menu {

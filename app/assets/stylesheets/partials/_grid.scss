@@ -170,6 +170,9 @@
   #stats {
     @include animation(gettowed 3s ease infinite alternate);
     @include border-radius(2px);
+    display: block;
+    padding: .35em .5em;
+    font-size: 0.9em;
   }
 
   // Navigation can be a bit larger
