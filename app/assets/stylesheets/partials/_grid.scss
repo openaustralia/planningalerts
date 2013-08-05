@@ -196,20 +196,42 @@
     @include span-columns(6 omega, 24)
   }
 
-  .news {
-    @include span-columns(24 omega, 24);
-  }  
-
-  // #footer
-  #footer {
-    @include border-bottom-radius(.5em);
+  .tweets, #footer {
     background-color: $background-overlay;
     @include background-clip( padding-box);
     border: .5em solid $background-overlay;
     border-top: none;
-    padding-bottom: none;
     padding-left: .7em;
     padding-right: .7em;
+  }
+
+  .tweets {
+    border-bottom: none;
+
+    li {
+      border-color: $dark-overlay;
+    }
+    .date, h4 {
+      color: $light;
+    }
+    a {
+      &:link, &:visited {
+        &, .body {
+          color: $lightest;
+        }
+      }
+      &:active, &:hover, &:focus {
+        &, .body {
+          color: $warm-highlight;
+        }
+      }
+    }
+  }
+
+  // #footer
+  #footer {
+    @include border-bottom-radius(.5em);
+    padding-bottom: none;
     margin-bottom: 1.5em;
 
     a:active, a:hover, a:focus {

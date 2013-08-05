@@ -37,6 +37,7 @@ $lightest-cool-highlight: #e7efec;
 
 $content-background: #fcfdfc;
 $background-overlay: transparentize($darkest,0.8);
+$dark-overlay: transparentize($darkest,0.2);
 
 $font-color: $darkest;
 $link-color: $dark;
