@@ -121,24 +121,6 @@
     }
   }
 
-  .main {
-    background-color: transparent;
-    @include border-top-radius(.5em);
-    border: .5em solid $background-overlay;
-    background-color: $background-overlay;
-    @include background-clip( padding-box);
-    padding-left: 0;
-    padding-right: 0;
-    width: 61.3em;
-  }
-
-  #content {
-    padding-left: $grid-padding;
-    padding-right: $grid-padding;
-    background-color: $content-background;
-    @include border-radius(.35em);
-  }
-
   // Header's plane banner can be presented fancily
   // We're animating this... :)
   @include keyframes(fly) {
@@ -184,55 +166,83 @@
     }
   }
 
+  .main, .tweets {
+    border: .5em solid $background-overlay;
+    @include background-clip( padding-box);
+    width: 61.3em;
+  }
+  .main {
+    @include border-top-radius(.5em);
+    border-bottom: none;
+    background-color: $background-overlay;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #content, .tweets > div {
+    padding-left: $grid-padding;
+    padding-right: $grid-padding;
+  }
+
   #main {
     @include span-columns(18, 24)
   }
 
   #content {
     @include clearfix;
+    background-color: $content-background;
   }
 
   #sidebar {
     @include span-columns(6 omega, 24)
   }
 
-  .tweets, #footer {
-    background-color: $background-overlay;
-    @include background-clip( padding-box);
-    border: .5em solid $background-overlay;
-    border-top: none;
-    padding-left: .7em;
-    padding-right: .7em;
-  }
-
   .tweets {
+    background: transparent;
+    border-top: none;
     border-bottom: none;
+    padding: 0;
 
+    > div {
+      @include border-bottom-radius(.35em);
+      background-color: $lightest-cool-highlight;
+      border-top: 1px solid darken($lightest-cool-highlight, 5%);
+      //@include background(linear-gradient($light-cool-highlight 20%, $lightest-cool-highlight));
+      padding-top: 1em;
+      padding-bottom: 1em;
+    }
     li {
-      border-color: $dark-overlay;
-    }
-    .date, h4 {
-      color: $light;
-    }
-    a {
-      &:link, &:visited {
-        &, .body {
-          color: $lightest;
-        }
+      border-bottom: none;
+      padding: 0;
+      width: 50%;
+      @include inline-block;
+      float: left;
+
+      a {
+        min-height: 72px;
       }
-      &:active, &:hover, &:focus {
-        &, .body {
-          color: $warm-highlight;
-        }
+      &:first-child a {
+        border-right: 1px solid #fff;
+        padding-right: .75em;
       }
+      &:last-child a {
+        padding-left: .75em;
+      }
+    }
+    .cta {
+      clear: both;
     }
   }
 
   // #footer
   #footer {
-    @include border-bottom-radius(.5em);
-    padding-bottom: none;
+    padding: 1.5em .7em 0 .7em;
     margin-bottom: 1.5em;
+    background-color: $background-overlay;
+    @include background-clip( padding-box);
+    @include border-bottom-radius(.5em);
+    border: .5em solid $background-overlay;
+    border-top: none;
 
     a:active, a:hover, a:focus {
       color: $warm-highlight;

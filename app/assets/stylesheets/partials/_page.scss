@@ -391,17 +391,20 @@ form.address-search {
     padding-left: 0;
     margin: 0;
   }
-  .date {
-    font-size: 0.8em;
-    color: $cool-highlight;
-  }
   li {
     border-bottom: 1px solid $lightest-cool-highlight;
-    padding: .75em 0;
 
+    a {
+      display: block;
+      padding: .75em 0;
+    }
     &:last-child {
       border: none;
     }
+  }
+  .date {
+    font-size: 0.8em;
+    color: $cool-highlight;
   }
   .cta {
     display: block;
