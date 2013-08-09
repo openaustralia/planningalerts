@@ -45,7 +45,9 @@
 
     - else
 
-      %h3 Recent applications within #{meters_in_words(@radius)} of #{@q}
+      %hr
+      %h3 Recent applications
+      %h4 Within #{meters_in_words(@radius)} of #{@q}
 
       = semantic_form_for @alert, :html => {:class => "attention"} do |f|
         = render "alerts/signup_introduction"
@@ -55,10 +57,11 @@
         = f.actions do
           = f.action :submit, :label => "Create alert", :button_html => { :class => "button button-rounded button-action" }
 
-      %p
-        = link_to_unless @sort == "time", "Most recent first", :sort => "time", :q => @q, :page => nil
-        |
-        = link_to_unless @sort == "distance", "Closest first", :sort => "distance", :q => @q, :page => nil
+      %ul.list-options
+        %li
+          %b Sort results
+        %li= link_to "Most recent first", { :sort => "time", :q => @q, :page => nil }, :class => "button button-pill button-small #{"button-active" if @sort == "time"}"
+        %li= link_to "Closest first", { :sort => "distance", :q => @q, :page => nil }, :class => "button button-pill button-small #{"button-active" if @sort == "distance"}"
 
       - if @sort == "distance"
         - p, n = "Closer", "Further"

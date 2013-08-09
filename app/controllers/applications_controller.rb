@@ -203,14 +203,13 @@ class ApplicationsController < ApplicationController
       per_page = Application.per_page
     end
 
-    application = Application.find(params[:id])
-    @description = "Other applications in the last #{application.nearby_and_recent_max_age_months} months within #{application.nearby_and_recent_max_distance_km} km of #{application.address}" 
+    @application = Application.find(params[:id])
     case(@sort)
     when "time"
-      @applications = application.find_all_nearest_or_recent.paginate :page => params[:page], :per_page => per_page
+      @applications = @application.find_all_nearest_or_recent.paginate :page => params[:page], :per_page => per_page
     when "distance"
       @applications = Application.unscoped do
-        application.find_all_nearest_or_recent.paginate :page => params[:page], :per_page => per_page
+        @application.find_all_nearest_or_recent.paginate :page => params[:page], :per_page => per_page
       end
     else
       redirect_to :sort => "time"
