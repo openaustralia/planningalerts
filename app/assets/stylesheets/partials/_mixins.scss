@@ -19,3 +19,11 @@
 @mixin animation($content) {
   @include experimental(animation, $content, -webkit, -moz, not -o, not -ms, official);
 }
+
+@mixin boxed-content {
+  display: block;
+  padding: 10px;
+  background-color: $lightest-cool-highlight;
+  color: $cool-highlight;
+  @include border-radius(.5em);
+}

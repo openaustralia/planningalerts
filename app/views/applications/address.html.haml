@@ -15,12 +15,11 @@
           %p.inline-errors= @error
   %fieldset.actions
     %ol
-      %li.submit
-        = submit_tag "Search", :name => nil, :class => "button button-rounded button-large"
+      %li.submit= submit_tag "Search", :name => nil, :class => "button button-rounded button-large"
 
 - if @q
   - unless @other_addresses.empty?
-    %p Or did you want?
+    %h4 Or did you want?
     %ul
       - @other_addresses.each do |a|
         %li= link_to a, :q => a
@@ -32,14 +31,12 @@
         This is most likely because we haven't yet been able to add your local planning authority.
         There is a list of the planning authorities we currently cover
         #{link_to "here", authorities_path}. We're working on covering the whole country but we're not there yet.        
+
       .attention
-        %span.highlight> You can help
-        !
-        = link_to donate_path do
-          %span.highlight Donate
-          to the OpenAustralia Foundation
-        which will allow us to add more local authorities, including yours!
-        Or, if you're a programmer you can help directly by #{link_to "writing a screen scraper", get_involved_path}.
+        %h4 You can help!
+        %p Donations allow us to add more local authorities, including yours! Or, if you're a programmer you can help directly by #{link_to "writing a screen scraper", get_involved_path}.
+        = link_to "Donate to the OpenAustralia Foundation", donate_path, :class => "button button-rounded button-action"
+
       %p
         To see an example of what the results would look like once your area is included see #{link_to "Bourke Street in Melbourne", address_applications_path(:q => "Bourke St, Melbourne 3000")}.
       %p
@@ -48,15 +45,16 @@
 
     - else
 
-      = semantic_form_for @alert, :html => {:class => "home"} do |f|
-        = render :partial => "alerts/signup_introduction"
+      %h3 Recent applications within #{meters_in_words(@radius)} of #{@q}
+
+      = semantic_form_for @alert, :html => {:class => "attention"} do |f|
+        = render "alerts/signup_introduction"
         = f.inputs do
           = f.input :address, :as => :hidden
           = f.input :email, :label => "Enter your email address", :placeholder => "your@email.com"
         = f.actions do
-          = f.action :submit, :label => "Create alert"
+          = f.action :submit, :label => "Create alert", :button_html => { :class => "button button-rounded button-action" }
 
-      %h3 Recent applications within #{meters_in_words(@radius)} of #{@q}
       %p
         = link_to_unless @sort == "time", "Most recent first", :sort => "time", :q => @q, :page => nil
         |
@@ -68,7 +66,7 @@
         - p, n = "Newer", "Older"
 
       = paginated_section @applications, :previous_label => "« #{p}", :next_label => "#{n} »" do
-        %dl= render :partial => "application", :collection => @applications
+        = render "applications", :applications => @applications
 
 - else
   = render "shared/news"

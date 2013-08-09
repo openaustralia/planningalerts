@@ -167,13 +167,17 @@ hr {
   padding: 0;
 }
 
-.container .button {
-  font-family: $blueprint-font-family;
-  text-decoration: none;
-}
-
-.container dd {
-  margin-left: 0;
+.container {
+  .button {
+    font-family: $blueprint-font-family;
+    text-decoration: none;
+  }
+  a.button-action, input.button-action {
+    color: #fff;
+  }
+  dd {
+    margin-left: 0;
+  }
 }
 
 .disclaimer {
@@ -189,8 +193,14 @@ hr {
 }
 
 /* Attention grabbers */
-div.attention {
-  text-align: center;
+body .container .attention {
+  @include boxed-content;
+  padding: 1em;
+  margin-bottom: 1em;
+
+  h4 {
+    margin-top: 0;
+  }
 }
 
 #privacy, #spnBeta, .explanation {
@@ -203,10 +213,26 @@ div.attention {
   } 
 }
 
+.applications {
+  @include no-bullets;
+  padding-left: 0;
+  margin: 0;
+  border-top: 1px solid $lightest-cool-highlight;
+
+  li {
+    border-bottom: 1px solid $lightest-cool-highlight;
+    padding: 1em 0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+.application {
+}
 .appinfo {
-  @include quiet;
   font-size: 0.8em;
-  line-height: 1.3em; 
+  color: $cool-highlight;
 }
 
 .pagination {
@@ -222,12 +248,8 @@ div.apiitem {
     margin-bottom: 1em;
   }
   code {
-    display: block;
-    padding: 10px;
+    @include boxed-content;
     word-wrap: break-word;
-    background-color: $lightest-cool-highlight;
-    color: $cool-highlight;
-    @include border-radius(.5em);
   }
   code, p {
     margin-bottom: 1em;
@@ -261,15 +283,6 @@ ul#subscribe {
   }
   li {
     margin-bottom: 0.5em;
-  }
-}
-
-.alert.home {
-  border: solid 1px $cool-highlight;
-  padding: 1em;
-
-  p {
-    margin-bottom: 1em;
   }
 }
 
@@ -347,8 +360,12 @@ body {
   @include highlight;
 }
 
-.authorities, .sizes {
+.sizes {
   @include no-bullets;
+}
+
+ul li {
+  color: $light-cool-highlight; // Colour the bullets
 }
 
 .contributors {
