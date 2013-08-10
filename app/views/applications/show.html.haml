@@ -11,8 +11,8 @@
     <meta name="twitter:description" content="">
   <meta name="twitter:image" content="#{google_static_streetview_url(@application, :size => "120x120")}">
 
-= render :partial => "applications/facebook"
-= render :partial => "applications/twitter"
+= render "applications/facebook"
+= render "applications/twitter"
 
 #main
   #application
@@ -24,11 +24,8 @@
         #pano
           %noscript= google_static_streetview(@application, :size => "350x200")
       %p.description= @application.description
-      %p.dates
-        = scraped_and_received_text(@application)
-      %p.more
-        = link_to "Read more information", @application.info_url
-        about this application
+      = link_to "Read more information", @application.info_url, :class => "button button-rounded"
+      %p.dates= scraped_and_received_text(@application)
       %p.source (Source: #{link_to @application.authority.full_name, authority_path(@application.authority.short_name_encoded)}, reference #{@application.council_reference})
 
     #comments-area
@@ -45,7 +42,8 @@
           %p= on_notice_text(@application)
         %p
           All the information you provide in your comment below will be sent to
-          <strong>#{@application.authority.full_name}</strong> and will influence whether the application
+          %strong= @application.authority.full_name
+          and will influence whether the application
           is approved or not. The text of your comment and your name will be public.
         %p
           If you have made a donation to a Councillor and/or gift to a Councillor or Council employee you may
@@ -73,12 +71,13 @@
 #sidebar
   #alert      
     = semantic_form_for @alert do |f|
-      = render :partial => "alerts/signup_introduction"
+      = render "alerts/signup_introduction"
       = f.inputs do
         = f.input :address, :label => "Enter a street address", :hint => "Or enter another street address - for example, your home address", :placeholder => "Enter a street address"        
         = f.input :email, :label => "Enter your email address", :placeholder => "Enter your email address"
       = f.actions do
-        = f.action :submit, :label => "Create Alert"
+        = f.action :submit, :label => "Create Alert", :button_html => { :class => "button button-rounded button-action" }
+
   - if @application.no_alerted || @nearby_count != 0
     #application-stats
       - if @application.no_alerted
@@ -90,16 +89,11 @@
           notified of this application via
           = link_to "email alerts", new_alert_path
       - if @nearby_count != 0
-        %p#nearby-applications
-          - if @nearby_count == 1
-            There is
-            = link_to "1 other nearby and recent application", nearby_application_url(@application, :sort => "time")
-          - else
-            There are
-            = link_to "#{@nearby_count} other nearby and recent applications", nearby_application_url(@application, :sort => "time")
+        = link_to pluralize(@nearby_count, "other nearby and recent application"), nearby_application_url(@application, :sort => "time"), :class => "nearby-applications"
+
   #social
-    = render :partial => "applications/twitter_share_button", :locals => {:application => @application}
-    = render :partial => "applications/facebook_share_button", :locals => {:application => @application}
+    = render "applications/twitter_share_button", :application => @application
+    = render "applications/facebook_share_button", :application => @application
 
 - if @application.location
   :javascript
@@ -107,6 +101,5 @@
       initialiseMaps(#{@application.lat}, #{@application.lng}, "#{escape_javascript(@application.address)}");
     })
 
-= javascript_include_tag "maps.js"
-= javascript_include_tag "applications.js"
-
+= javascript_include_tag "maps"
+= javascript_include_tag "applications"
