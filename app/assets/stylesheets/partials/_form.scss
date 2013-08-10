@@ -108,11 +108,8 @@ form.donate {
 }
 
 #sidebar .formtastic.alert {
-  @include float-form(100%, 25%, 100%, 0, "buttons-left", "left", "select-auto");
+  @include boxed-content;
   margin-top: 0;
-  font-size: 75%;
-  background: $lightest;
-  padding: 12px;
 
   .label {
     /* Use seriously old-school way of hiding these labels so that placeholder polyfill can still work */
@@ -124,13 +121,27 @@ form.donate {
       font-size: 1.3em;
     }
   }
-  .actions {
-    padding-left: 0;
-  }
   .inline-hints {
     margin-left: 0;
   }
+  p, .stringish input {
+    font-size: 0.9em;
+  }
   p {
     margin-bottom: 1em;
+  }
+  input, textarea {
+    width: 100%;
+  }
+  .actions {
+    padding: 0;
+
+    &, li {
+      width: 100%;
+    }
+    li {
+      display: block;
+      float: none;
+    }
   }
 }

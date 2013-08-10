@@ -184,8 +184,13 @@
     padding-right: $grid-padding;
   }
 
+  #main, #sidebar {
+    @include inline-block;
+    float: left;
+  }
   #main {
-    @include span-columns(18, 24)
+    width: 70%;
+    margin-right: 2%; 
   }
 
   #content {
@@ -193,8 +198,15 @@
     background-color: $content-background;
   }
 
+  #map_div, #pano {
+    @include inline-block;
+    float: left;
+    width: 50%;
+    height: 10em;
+  }
+
   #sidebar {
-    @include span-columns(6 omega, 24)
+    width: 28%;
   }
 
   .tweets {

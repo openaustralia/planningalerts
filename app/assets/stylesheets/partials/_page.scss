@@ -190,9 +190,6 @@ hr {
 
 #map_div, #pano {
   margin-bottom: 1em;
-  display: inline-block;
-  width: 350px;
-  height: 200px;
 }
 
 /* Attention grabbers */
@@ -363,10 +360,8 @@ body {
 }
 
 #application-stats {
-  padding: 12px;
-
-  p:last-child {
-    margin-bottom: 0.5em;
+  .button {
+    display: block; // Fill the column
   }
 }
 
