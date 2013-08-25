@@ -13,6 +13,14 @@
     @include span-columns(6 omega);
   }
 
+  #map_div {
+    height: 330px;
+  }
+  #map_div, .map-settings {
+    @include span-columns(6 omega);
+  }
+
+
   // Hmm mobile-1st-wise, this should work in page.scss
   // But I was having trouble overriding it, and didn't have patience
   #menu li {
@@ -35,6 +43,9 @@
       padding: 0;
       margin-top: 0;
 
+      &.attention {
+        padding: 1em;
+      }
       label {
         float: none;
         font-size: 1.1em;
@@ -70,6 +81,14 @@
 
   #menu {
     @include span-columns(12 omega, 12);
+  }
+
+  #map_div {
+    @include span-columns(6, 12);
+    height: 330px;
+  }
+  .map-settings {
+    @include span-columns(6 omega, 12);
   }
 
   #main {
@@ -232,11 +251,19 @@
     background-color: $content-background;
   }
 
-  #map_div, #pano {
+  #pano {
     @include inline-block;
     float: left;
     width: 50%;
     height: 10em;
+  }
+
+  #map_div {
+    @include span-columns(8, 24);
+    height: 330px;
+  }
+  .map-settings {
+    @include span-columns(15 omega, 24);
   }
 
   #sidebar {
