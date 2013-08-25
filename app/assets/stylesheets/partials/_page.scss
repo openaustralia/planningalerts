@@ -28,6 +28,7 @@ a {
 
     a {
       text-decoration: none;
+      text-shadow: -1px -1px 2px $dark;
 
       &:link, &:visited {
         color: $warm-highlight;
@@ -40,6 +41,7 @@ a {
   h2 {
     color: $lightest;
     font-size: .9em;
+    text-shadow: -1px -1px 1px $dark;
   }
 }
 // Don't show stats by default
@@ -63,6 +65,7 @@ a {
     display: block;
     text-decoration: none; 
     @include single-transition(background-color, .5s);
+    text-shadow: -1px 0 2px $dark;
 
     &:link, &:visited {
       color: #fff;
