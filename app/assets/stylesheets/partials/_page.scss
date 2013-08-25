@@ -216,10 +216,16 @@ body .container .attention {
 .list-options {
   @include no-bullets;
   padding-left: 0;
-  margin: 0 0 1em 0;
+  margin: 0 0 1.5em 0;
 
   li {
     display: inline;
+
+    // Label for the options
+    &:first-child {
+      display: block;
+      margin-bottom: .75em;
+    }
   }
   b {
     color: $warm-highlight;
@@ -258,13 +264,21 @@ div.apiitem {
   h5 {
     margin-bottom: 1em;
   }
-  code {
-    @include boxed-content;
-    word-wrap: break-word;
-  }
-  code, p {
+  p {
     margin-bottom: 1em;
   }
+}
+code {
+  @include boxed-content;
+  word-wrap: break-word;
+  margin-bottom: 1em;
+
+  pre {
+    margin: 0;
+  }
+}
+code.long-lines {
+  font-size: .9em;
 }
 
 #hLicenseInfo {
@@ -280,6 +294,7 @@ body dl dt {
 
 dl.faq dt {
   color: $cool-highlight;
+  font-weight: bold;
 }
 
 ul#subscribe {
@@ -363,6 +378,16 @@ body {
   .button {
     display: block; // Fill the column
   }
+}
+
+body blockquote {
+  margin: 1em 0;
+  padding: 1em;
+  border: 3px solid lighten($warm-highlight, 40%);
+  border-left: none;
+  border-right: none;
+  color: $cool-highlight;
+  line-height: 1.6em;
 }
 
 .match {

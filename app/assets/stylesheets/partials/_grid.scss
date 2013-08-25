@@ -90,6 +90,22 @@
   }
 }
 
+// From tablet (mid) upwards
+@include at-breakpoint(30em) {
+  // Several state select buttons. They can fit on 1 line now
+  .list-options li:first-child {
+    display: inline;
+    margin-bottom: 0;
+  }
+  // Blockquotes (only on how to lobby) can be different
+  body blockquote {
+    border: none;
+    border-left: 3px solid lighten($warm-highlight, 40%);
+    padding-left: 2em;
+    font-size: 1.1em;
+  }
+}
+
 @include at-breakpoint(60em 24) {
 
   // We'll show a photo background now
