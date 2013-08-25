@@ -55,14 +55,13 @@ a {
 
     li {
       padding: 0;
-      margin-right: .2em;
+      @include inline-block;
     }
   }
   a {
-    padding: .5em;
+    padding: .5em 0;
+    display: block;
     text-decoration: none; 
-    display: inline-block;
-    @include border-top-radius(.25em);
     @include single-transition(background-color, .5s);
 
     &:link, &:visited {

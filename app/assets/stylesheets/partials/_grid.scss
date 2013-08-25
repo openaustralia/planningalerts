@@ -13,6 +13,13 @@
     @include span-columns(6 omega);
   }
 
+  // Hmm mobile-1st-wise, this should work in page.scss
+  // But I was having trouble overriding it, and didn't have patience
+  #menu li {
+    width: 49%;
+    text-align: center;
+  }
+
 }
 
 // Until we get to our largest size
@@ -92,6 +99,17 @@
 
 // From tablet (mid) upwards
 @include at-breakpoint(30em) {
+  // Move from having a mobile-focused global nav
+  #menu {
+    li {
+      margin-right: .2em;
+    }
+    a {
+      padding: .5em;
+      @include inline-block;
+      @include border-top-radius(.25em);
+    }
+  }
   // Several state select buttons. They can fit on 1 line now
   .list-options li:first-child {
     display: inline;
