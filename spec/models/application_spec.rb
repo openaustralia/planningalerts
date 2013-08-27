@@ -254,7 +254,8 @@ describe Application do
             <description>Putting a house up</description>
             <info_url>http://fiddle.gov.au/info/R2</info_url>
             <comment_url>http://fiddle.gov.au/comment/R2</comment_url>
-            <date_received>2009-01-01</date_received>
+            <date_received/>
+            <on_notice_from></on_notice_from>
           </application>
         </applications>
       </planning>
