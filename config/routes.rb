@@ -60,6 +60,7 @@ PlanningalertsApp::Application.routes.draw do
     end
     collection do
       get :test_feed
+      get :atdis_test_feed
     end
   end
 

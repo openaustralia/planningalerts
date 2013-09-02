@@ -34,4 +34,7 @@ class AuthoritiesController < ApplicationController
       end
     end
   end
+
+  def atdis_test_feed
+  end
 end

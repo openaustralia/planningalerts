@@ -1,0 +1,14 @@
+- content_for :page_title, "Test your ATDIS feed"
+
+%h2= yield :page_title
+
+%form.formtastic{:action => url_for({}), :method => "get"}
+  %fieldset.inputs
+    %ol
+      %li
+        = label_tag 'url', 'ATDIS Feed URL'
+        = url_field_tag 'url', @url
+  %fieldset.actions
+    %ol
+      %li
+        = submit_tag "Test feed", :name => nil
