@@ -37,4 +37,50 @@ class AuthoritiesController < ApplicationController
 
   def atdis_test_feed
   end
+
+  # Available at http://localhost:3000/atdis/1.0/applications.json
+  def atdis_test_data
+    # Make some test 
+    render :json => {
+      :response => [
+        {
+          :application => {
+            :info => {
+              :dat_id => "DA2013-0381",
+              :description => "New pool plus deck",
+              :authority => "Example Council Shire Council",
+              :lodgement_date => "2013-04-20T02:01:07Z",
+              :determination_date => "2013-06-20T02:01:07Z",
+              :notification_start_date => "2013-04-20T02:01:07Z",
+              :notification_end_date => "2013-05-20T02:01:07Z",
+              :status => "OPEN"
+            },
+            :reference => {
+              :more_info_url => "http://www.examplecouncil.nsw.gov.au/atdis/1.0/applications/DA2013-0381"
+            },
+            :location => {
+              :address => "123 Fourfivesix Street Neutral Bay NSW 2089",
+              :land_title_ref => {
+                :lot => "10",
+                :section => "ABC",
+                :dpsp_id => "DP2013-0381"
+              }
+            }
+          }
+        },
+        {
+          :application => {}
+        }
+      ],
+      :count => 2,
+      :pagination => {
+        :previous => nil,
+        :next => nil,
+        :current => 1,
+        :per_page => 25,
+        :count => 100,
+        :pages => 1
+      }
+    }
+  end
 end

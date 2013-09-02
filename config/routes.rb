@@ -64,6 +64,8 @@ PlanningalertsApp::Application.routes.draw do
     end
   end
 
+  match 'atdis/1.0/applications.json' => 'authorities#atdis_test_data'
+
   match 'api/howto' => 'api#howto', :as => :api_howto
   match 'api' => 'api#index', :as => :api
 
