@@ -12,6 +12,15 @@ GIT
   specs:
     mobile-fu (0.1)
 
+PATH
+  remote: /Users/matthew/git/atdis
+  specs:
+    atdis (0.0.1)
+      activemodel (~> 3)
+      multi_json (~> 1.7)
+      rest-client
+      rgeo-geojson
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -192,7 +201,7 @@ GEM
       activesupport (~> 3.1)
       polyamorous (~> 0.5.0)
     method_source (0.8.1)
-    mime-types (1.21)
+    mime-types (1.25)
     multi_json (1.7.9)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
@@ -253,6 +262,9 @@ GEM
       railties (~> 3.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rgeo (0.3.20)
+    rgeo-geojson (0.2.3)
+      rgeo (>= 0.3.7)
     riddle (1.5.5)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
@@ -337,6 +349,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  atdis!
   capistrano
   capybara (< 2.0)
   coffee-rails
