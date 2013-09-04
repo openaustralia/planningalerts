@@ -28,7 +28,7 @@
           %span.highlight= @errored_application.errors[name].join(", ")
 
 - if @applications
-  %h3 WOOHOO How the applications get loaded
+  %h3 How the applications get loaded
   - @applications.each do |application|
     %table.scraper_fields
       - ATDIS::Application.attribute_names.each do |name|
