@@ -42,6 +42,14 @@
         },
         "reference": {
           "more_info_url": "https://www2.bmcc.nsw.gov.au/datracking/Modules/applicationmaster/default.aspx?page=wrapper&key=411183"
+        },
+        "location": {
+          "address": "30 Centre Crescent, Blaxland, NSW",
+          "land_title_ref": {
+            "lot": "43",
+            "section": "767",
+            "dpsp_id": "BM2013-767"
+          }
         }
       }
     }
