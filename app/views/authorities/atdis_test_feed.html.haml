@@ -18,20 +18,9 @@
 %ul
   %li= link_to "http://localhost:3000", atdis_test_feed_authorities_path(:url => "http://localhost:3000")
 
-- if @errored_application
-  %h3 Application which errored
-  %table
-    %tr
-      %th Field
-      %th Value
-      %th Errors
-    - ATDIS::Application.attribute_names.each do |name|
-      %tr
-        %td= name
-        %td= @errored_application.attributes[name]
-        %td
-          %span.highlight= @errored_application.errors[name].join(", ")
-
-- if @page
+- if @page.valid?
   %h3 How the applications get loaded
   = attribute_table(@page)
+- else
+  %h3 Errors
+  = attribute_error_table(@page)

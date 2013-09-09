@@ -48,14 +48,6 @@ class AuthoritiesController < ApplicationController
         page = feed.applications
       end
       @page = page
-      # Try validating the applications and return all the errors for the first non-validating application
-      @page.results.each do |application|
-        unless application.valid?
-          @errored_application = application
-          @page = nil
-          break
-        end
-      end
     end
   end
 end
