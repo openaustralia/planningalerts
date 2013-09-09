@@ -37,13 +37,28 @@ class AuthoritiesController < ApplicationController
 
   def atdis_test_feed
     @url = params[:url]
+    @page = params[:page]
+    if @page.blank?
+      @page = 1
+    else
+      @page = @page.to_i
+    end
+
     if @url
       if @url == "http://localhost:3000"
-        j = File.read(Rails.root.join("spec/atdis_json_examples/example1.json"))
+        file = case @page
+        when 1
+          "example1.json"
+        when 2
+          "example2.json"
+        else
+          raise
+        end
+        j = File.read(Rails.root.join("spec/atdis_json_examples/#{file}"))
         page = ATDIS::Page.read_json(j)
       else
         # Process feed using atdis gem
-        feed = ATDIS::Feed.new(@url)
+        feed = ATDIS::Feed.new(@url, @page)
         # Just grabs the first page of results
         page = feed.applications
       end

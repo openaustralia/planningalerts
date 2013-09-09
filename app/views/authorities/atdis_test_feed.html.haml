@@ -20,6 +20,11 @@
 
 - if @page.valid?
   %h3 How the applications get loaded
+  %p
+    - if @page.previous_page_no
+      = link_to "Test previous page", :url => @url, :page => @page.previous_page_no
+    - if @page.next_page_no
+      = link_to "Test next page", :url => @url, :page => @page.next_page_no
   = attribute_table(@page)
 - else
   %h3 Errors

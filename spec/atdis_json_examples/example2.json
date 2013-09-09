@@ -56,9 +56,9 @@
   ],
   "count": 2,
   "pagination": {
-    "previous": null,
-    "next": 2,
-    "current": 1,
+    "previous": 1,
+    "next": null,
+    "current": 2,
     "per_page": 2,
     "count": 4,
     "pages": 2

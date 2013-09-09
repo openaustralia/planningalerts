@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/openaustralia/atdis.git
-  revision: 5a207003b8cfb2e1f9d58afa12f1bec07824b62b
+  revision: 261e33f3e82bf68606c86d73e7f427ad593cc5fb
   specs:
     atdis (0.0.1)
       activemodel (~> 3)
@@ -203,7 +203,7 @@ GEM
       polyamorous (~> 0.5.0)
     method_source (0.8.1)
     mime-types (1.25)
-    multi_json (1.7.9)
+    multi_json (1.8.0)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
     mysql2 (0.3.11)
