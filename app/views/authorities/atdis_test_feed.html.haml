@@ -13,6 +13,11 @@
       %li
         = submit_tag "Test feed", :name => nil
 
+%h3 Example feeds to test
+
+%ul
+  %li= link_to "http://localhost:3000", atdis_test_feed_authorities_path(:url => "http://localhost:3000")
+
 - if @errored_application
   %h3 Application which errored
   %table
