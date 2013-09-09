@@ -7,19 +7,20 @@ GIT
       multi_json
 
 GIT
-  remote: https://github.com/openaustralia/mobile-fu.git
-  revision: 5dca62b3a53e29df63c3af2314ae8b7a17e14088
-  specs:
-    mobile-fu (0.1)
-
-PATH
-  remote: /Users/matthew/git/atdis
+  remote: https://github.com/openaustralia/atdis.git
+  revision: 5a207003b8cfb2e1f9d58afa12f1bec07824b62b
   specs:
     atdis (0.0.1)
       activemodel (~> 3)
       multi_json (~> 1.7)
       rest-client
       rgeo-geojson
+
+GIT
+  remote: https://github.com/openaustralia/mobile-fu.git
+  revision: 5dca62b3a53e29df63c3af2314ae8b7a17e14088
+  specs:
+    mobile-fu (0.1)
 
 GEM
   remote: https://rubygems.org/
