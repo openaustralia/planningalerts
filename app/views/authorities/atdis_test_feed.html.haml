@@ -32,7 +32,6 @@
         %td
           %span.highlight= @errored_application.errors[name].join(", ")
 
-- if @applications
+- if @page
   %h3 How the applications get loaded
-  - @applications.each do |application|
-    = attribute_table(application)
+  = attribute_table(@page)

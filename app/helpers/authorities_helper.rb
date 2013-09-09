@@ -1,6 +1,8 @@
 module AuthoritiesHelper
   def attribute_value(value)
-    if value.class.respond_to?(:attribute_names)
+    if value.kind_of?(Array)
+      value.map{|v| attribute_value(v)}.join.html_safe
+    elsif value.class.respond_to?(:attribute_names)
       attribute_table(value)
     else
       h(value)

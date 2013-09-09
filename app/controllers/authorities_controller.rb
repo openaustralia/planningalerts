@@ -47,12 +47,12 @@ class AuthoritiesController < ApplicationController
         # Just grabs the first page of results
         page = feed.applications
       end
-      @applications = page.results
+      @page = page
       # Try validating the applications and return all the errors for the first non-validating application
-      @applications.each do |application|
+      @page.results.each do |application|
         unless application.valid?
           @errored_application = application
-          @applications = nil
+          @page = nil
           break
         end
       end
