@@ -35,16 +35,4 @@
 - if @applications
   %h3 How the applications get loaded
   - @applications.each do |application|
-    %table.scraper_fields
-      - ATDIS::Application.attribute_names.each do |name|
-        %tr
-          %td.field= name
-          %td
-            - if application.attributes[name].class.respond_to?(:attribute_names)
-              %table.scraper_fields
-                - application.attributes[name].class.attribute_names.each do |name2|
-                  %tr
-                    %td.field= name2
-                    %td= application.attributes[name].attributes[name2]
-            - else
-              = application.attributes[name]
+    = attribute_table(application)
