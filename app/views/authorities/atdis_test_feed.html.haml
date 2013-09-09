@@ -39,4 +39,12 @@
       - ATDIS::Application.attribute_names.each do |name|
         %tr
           %td.field= name
-          %td= application.attributes[name]
+          %td
+            - if application.attributes[name].class.respond_to?(:attribute_names)
+              %table.scraper_fields
+                - application.attributes[name].class.attribute_names.each do |name2|
+                  %tr
+                    %td.field= name2
+                    %td= application.attributes[name].attributes[name2]
+            - else
+              = application.attributes[name]
