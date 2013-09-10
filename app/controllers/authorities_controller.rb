@@ -39,7 +39,8 @@ class AuthoritiesController < ApplicationController
     @url = params[:url]
     if @url
       u = URI.parse(@url)
-      if u.host == "localhost" && u.port == 3000 && u.path == "/atdis_test_feed/1/atdis/1.0/applications.json"
+      u2 = URI.parse(atdis_test_feed_example_url)
+      if u.host == u2.host && u.port == u2.port && u.path == u2.path
         if u.query.nil? || u.query == "page=1"
           page = 1
         elsif u.query == "page=2"
