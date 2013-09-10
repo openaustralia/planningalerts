@@ -2,16 +2,17 @@
 
 %h2= yield :page_title
 
-%p
-  The Application Tracking Data Interchange Specification (ATDIS) is a modern, straightforward specification for publishing development
-  applications online in a consistent machine readable format. It has been developed by the
-  = link_to "NSW Department of Planning & Infrastructure", "http://www.planning.nsw.gov.au/"
-  and
-  = link_to "Carpadium Pty Ltd", "http://www.carpadium.com/"
-  in cooperation with a number of software vendors and
-  #{link_to "the OpenAustralia Foundation", "http://www.openaustraliafoundation.org.au"}.
-%p
-  This page allows software vendors to automatically check that their ATDIS feed is compliant with the specification.
+- if @url.nil?
+  %p
+    The Application Tracking Data Interchange Specification (ATDIS) is a modern, straightforward specification for publishing development
+    applications online in a consistent machine readable format. It has been developed by the
+    = link_to "NSW Department of Planning & Infrastructure", "http://www.planning.nsw.gov.au/"
+    and
+    = link_to "Carpadium Pty Ltd", "http://www.carpadium.com/"
+    in cooperation with a number of software vendors and
+    #{link_to "the OpenAustralia Foundation", "http://www.openaustraliafoundation.org.au"}.
+  %p
+    This page allows software vendors to automatically check that their ATDIS feed is compliant with the specification.
 %p
   Warning - This is <strong>alpha</strong> software. Most of the core validation functionality is available but the user
   interface is still in a very early stage of development. Also, there might be unexpected bugs. Beware!
@@ -34,14 +35,6 @@
     = link_to atdis_test_feed_example_url, atdis_test_feed_authorities_path(:url => atdis_test_feed_example_url)
     (#{link_to "view json", atdis_test_feed_example_url})
 
-%h3 About this service
-%p
-  This ATDIS test service was developed by
-  = link_to "the OpenAustralia Foundation", "http://www.openaustraliafoundation.org.au"
-  for the #{link_to "NSW Department of Planning & Infrastructure", "http://www.planning.nsw.gov.au/"}.
-  Most of the heavy validation and parsing lifting is done by a standalone
-  #{link_to "open-source (MIT) Ruby gem atdis", "https://github.com/openaustralia/atdis"}.
-
 - if @page
   - if @page.valid?
     %h3 How the applications get loaded
@@ -54,3 +47,11 @@
   - else
     %h3 Errors
     = attribute_error_table(@page)
+
+%h3 About this service
+%p
+  This ATDIS test service was developed by
+  = link_to "the OpenAustralia Foundation", "http://www.openaustraliafoundation.org.au"
+  for the #{link_to "NSW Department of Planning & Infrastructure", "http://www.planning.nsw.gov.au/"}.
+  Most of the heavy validation and parsing lifting is done by a standalone
+  #{link_to "open-source (MIT) Ruby gem atdis", "https://github.com/openaustralia/atdis"}.
