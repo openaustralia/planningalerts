@@ -33,9 +33,6 @@
           "description": "An inground swimming pool",
           "authority": "Example Council Shire Council",
           "lodgement_date": "2013-09-01",
-          // Determination date doesn't make sense if the application hasn't yet been
-          // determined. Currently this is a mandatory field. So, to reconcile this
-          // we'll fill it with some dummy value (from the future) for the time being. 
           "determination_date": "2013-10-01",
           "status": "OPEN",
           "last_modified_date": "2013-09-04"

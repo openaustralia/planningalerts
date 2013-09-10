@@ -38,19 +38,36 @@ class AuthoritiesController < ApplicationController
   def atdis_test_feed
     @url = params[:url]
     if @url
-      puts "URL: #{@url}"
-      if @url == "http://localhost:3000/atdis_test_feed/1/atdis/1.0/applications.json" || @url == "http://localhost:3000/atdis/1.0/applications.json?page=1"
-        j = File.read(Rails.root.join("spec/atdis_json_examples/example1.json"))
-        page = ATDIS::Page.read_json(j)
-        page.url = @url
-      elsif @url == "http://localhost:3000/atdis_test_feed/1/atdis/1.0/applications.json?page=2"
-        j = File.read(Rails.root.join("spec/atdis_json_examples/example2.json"))
+      u = URI.parse(@url)
+      if u.host == "localhost" && u.port == 3000 && u.path == "/atdis_test_feed/1/atdis/1.0/applications.json"
+        if u.query.nil? || u.query == "page=1"
+          page = 1
+        elsif u.query == "page=2"
+          page = 2
+        end
+        file = example_path(page)
+        j = File.read(file)
         page = ATDIS::Page.read_json(j)
         page.url = @url
       else
         page = ATDIS::Page.read_url(@url)
       end
       @page = page
+    end
+  end
+
+  def atdis_test_feed_example
+    page = (params[:page] || "1").to_i
+    render :file  => example_path(page), :content_type => "text/javascript", :layout => false
+  end
+
+  private
+
+  def example_path(page)
+    if page == 1
+      Rails.root.join("spec/atdis_json_examples/example1.json")
+    elsif page == 2
+      Rails.root.join("spec/atdis_json_examples/example2.json")
     end
   end
 end
