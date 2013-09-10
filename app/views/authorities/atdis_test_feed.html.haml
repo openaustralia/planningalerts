@@ -6,7 +6,7 @@
   %fieldset.inputs
     %ol
       %li
-        = label_tag 'url', 'ATDIS Base URL'
+        = label_tag 'url', 'ATDIS Feed URL'
         = url_field_tag 'url', @url
   %fieldset.actions
     %ol
@@ -16,16 +16,17 @@
 %h3 Example feeds to test
 
 %ul
-  %li= link_to "http://localhost:3000", atdis_test_feed_authorities_path(:url => "http://localhost:3000")
+  %li= link_to "http://localhost:3000/atdis/1.0/applications.json", atdis_test_feed_authorities_path(:url => "http://localhost:3000/atdis/1.0/applications.json")
 
-- if @page.valid?
-  %h3 How the applications get loaded
-  %p
-    - if @page.previous_page_no
-      = link_to "Test previous page", :url => @url, :page => @page.previous_page_no
-    - if @page.next_page_no
-      = link_to "Test next page", :url => @url, :page => @page.next_page_no
-  = attribute_table(@page)
-- else
-  %h3 Errors
-  = attribute_error_table(@page)
+- if @page
+  - if @page.valid?
+    %h3 How the applications get loaded
+    %p
+      - if @page.previous_url
+        = link_to "Test previous page", :url => @page.previous_url
+      - if @page.next_url
+        = link_to "Test next page", :url => @page.next_url
+    = attribute_table(@page)
+  - else
+    %h3 Errors
+    = attribute_error_table(@page)
