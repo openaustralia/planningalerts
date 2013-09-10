@@ -39,11 +39,11 @@ class AuthoritiesController < ApplicationController
     @url = params[:url]
     if @url
       puts "URL: #{@url}"
-      if @url == "http://localhost:3000/atdis/1.0/applications.json" || @url == "http://localhost:3000/atdis/1.0/applications.json?page=1"
+      if @url == "http://localhost:3000/atdis_test_feed/1/atdis/1.0/applications.json" || @url == "http://localhost:3000/atdis/1.0/applications.json?page=1"
         j = File.read(Rails.root.join("spec/atdis_json_examples/example1.json"))
         page = ATDIS::Page.read_json(j)
         page.url = @url
-      elsif @url == "http://localhost:3000/atdis/1.0/applications.json?page=2"
+      elsif @url == "http://localhost:3000/atdis_test_feed/1/atdis/1.0/applications.json?page=2"
         j = File.read(Rails.root.join("spec/atdis_json_examples/example2.json"))
         page = ATDIS::Page.read_json(j)
         page.url = @url
