@@ -32,8 +32,12 @@
 
 %ul
   %li
-    = link_to atdis_test_feed_example_url, atdis_test_feed_authorities_path(:url => atdis_test_feed_example_url)
-    (#{link_to "view json", atdis_test_feed_example_url})
+    = link_to atdis_test_feed_example_url(:number => 1), atdis_test_feed_authorities_path(:url => atdis_test_feed_example_url(:number => 1))
+    (#{link_to "view json", atdis_test_feed_example_url(:number => 1)})
+  %li
+    = link_to atdis_test_feed_example_url(:number => 2), atdis_test_feed_authorities_path(:url => atdis_test_feed_example_url(:number => 2))
+    (#{link_to "view json", atdis_test_feed_example_url(:number => 1)})
+    <em>This feed has intentional errors</em>
 
 - if @page
   - if @page.valid?
