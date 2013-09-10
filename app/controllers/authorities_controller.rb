@@ -40,7 +40,8 @@ class AuthoritiesController < ApplicationController
     if @url
       u = URI.parse(@url)
       u2 = URI.parse(atdis_test_feed_example_url)
-      if u.host == u2.host && u.port == u2.port && u.path == u2.path
+      # In development we don't have a multithreaded web server so we have to fake the serving of the data
+      if Rails.env.development? && u.host == u2.host && u.port == u2.port && u.path == u2.path
         if u.query.nil? || u.query == "page=1"
           page = 1
         elsif u.query == "page=2"
