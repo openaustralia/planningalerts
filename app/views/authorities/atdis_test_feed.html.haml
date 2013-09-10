@@ -2,6 +2,10 @@
 
 %h2= yield :page_title
 
+%p
+  Warning - This is <strong>alpha</strong> software. Most of the core validation functionality is there but the user interface is still in a
+  very early stage of development. Also, there might be unexpected bugs. Beware!
+
 %form.formtastic{:action => url_for({}), :method => "get"}
   %fieldset.inputs
     %ol
