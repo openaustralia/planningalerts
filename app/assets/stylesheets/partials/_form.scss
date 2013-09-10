@@ -15,7 +15,7 @@ $fb-line-height: 1em;
 
 .actions input, .btn { 
   margin-top: 1em;
-  @include fancy-button($orange); 
+  @include fancy-button-allow-disable($orange); 
   font-weight: normal;
 }
 

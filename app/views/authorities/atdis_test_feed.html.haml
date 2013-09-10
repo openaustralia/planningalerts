@@ -40,9 +40,13 @@
     %h3 How the applications get loaded
     %p
       - if @page.previous_url
-        = link_to "Test previous page", :url => @page.previous_url
+        = link_to "Test previous page", {:url => @page.previous_url}, :class => "btn"
+      - else
+        %span.btn.disabled Test previous page
       - if @page.next_url
-        = link_to "Test next page", :url => @page.next_url
+        = link_to "Test next page", {:url => @page.next_url}, :class => "btn"
+      - else
+        %span.btn.disabled Test next page
     = attribute_table(@page)
   - else
     %h3 Errors
