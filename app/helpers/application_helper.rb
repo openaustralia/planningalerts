@@ -59,15 +59,9 @@ module ApplicationHelper
   end
   
   def rss_feed_items(url)
-    content = ""
-    begin
-      open(url, 0) do |s| content = s.read end
-      feed = RSS::Parser.parse(content, false)
-      return feed.channel.items[0..4] # just use the first five items
-    rescue
-      # This happens when the DB is empty
-      return []
-    end
+    content = HTTParty.get(url).body
+    feed = RSS::Parser.parse(content, false)
+    feed.channel.items[0..4] # just use the first five items
   end
   
   def render_rss_feed(url)
