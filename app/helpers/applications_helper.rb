@@ -57,9 +57,17 @@ module ApplicationsHelper
   end
 
   def google_static_map(application, options)
+    google_static_map2(options.merge(:lat => application.lat, :lng => application.lng, :label => "Map of #{application.address}"))
+  end
+
+  # Version of google_static_map above that isn't tied into the implementation of Application
+  def google_static_map2(options)
     zoom = options[:zoom] || 16
     size = options[:size] || "350x200"
-    image_tag("http://maps.googleapis.com/maps/api/staticmap?zoom=#{zoom}&size=#{size}&maptype=roadmap&markers=color:red%7C#{application.lat},#{application.lng}&sensor=false".html_safe, :size => size, :alt => "Map of #{application.address}")
+    lat = options[:lat]
+    lng = options[:lng]
+    label = options[:label] || "Map"
+    image_tag("http://maps.googleapis.com/maps/api/staticmap?zoom=#{zoom}&size=#{size}&maptype=roadmap&markers=color:red%7C#{lat},#{lng}&sensor=false".html_safe, :size => size, :alt => label)
   end
 
   def google_static_streetview_url(application, options)

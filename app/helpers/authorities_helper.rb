@@ -8,6 +8,11 @@ module AuthoritiesHelper
       time_tag(value) + " (" + time_ago_in_words(value) + " ago)"
     elsif value.kind_of?(URI)
       link_to(value.to_s, value.to_s)
+    elsif value.kind_of?(RGeo::Cartesian::PointImpl)
+      h(value) + content_tag(:p, google_static_map2(:lat => value.y, :lng => value.x, :zoom => 12, :size => "300x150"))
+    # TODO: Nice display for bounded areas too
+    elsif value.kind_of?(NilClass)
+      content_tag(:p, "empty", :class => "quiet")
     else
       h(value)
     end
