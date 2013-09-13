@@ -50,7 +50,18 @@
             "dpsp_id": "BM2013-767"
           }
         },
-        "events": [],
+        "events": [
+          {
+            "id": "283473-1",
+            "date": "2013-09-01T02:01:00Z",
+            "description": "Application lodged"
+          },
+          {
+            "id": "283473-2"
+            "date": "2013-09-01T02:01:00Z",
+            "description": "First review"
+          }
+        ],
         "documents": []
       }
     }

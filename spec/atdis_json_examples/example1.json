@@ -24,7 +24,18 @@
             "dpsp_id": "DP2013-0381"
           }
         },
-        "events": [],
+        "events": [
+          {
+            "id": "283473-1",
+            "date": "2013-09-01T02:01:00Z",
+            "description": "Application lodged"
+          },
+          {
+            "id": "283473-2",
+            "date": "2013-09-01T02:01:00Z",
+            "description": "First review"
+          }
+        ],
         "documents": []
       }
     },
@@ -55,7 +66,23 @@
           }
         },
         "events": [],
-        "documents": []
+        "documents": [
+          {
+            "ref": "13/145737",
+            "title": "Pool & site plan - 1b 3 - redacted",
+            "document_url": "https://www2.bmcc.nsw.gov.au/datracking/Cache/_trimprod_BM_1_5t_c0018xlk.pdf"
+          },
+          {
+            "ref": "13/145738",
+            "title": "Section plan - 2b 3 - redacted",
+            "document_url": "https://www2.bmcc.nsw.gov.au/datracking/Cache/_trimprod_BM_1_5t_c0018xll.pdf"
+          },
+          {
+            "ref": "13/145739",
+            "title": "Section plan - 3 3 - redacted",
+            "document_url": "https://www2.bmcc.nsw.gov.au/datracking/Cache/_trimprod_BM_1_5t_c0018xlm.pdf"
+          }
+        ]
       }
     }
   ],
