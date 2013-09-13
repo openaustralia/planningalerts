@@ -46,6 +46,10 @@
             "lot": "43",
             "section": "767",
             "dpsp_id": "BM2013-767"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [150.485498, -33.742335]
           }
         }
       }
