@@ -23,7 +23,9 @@
             "section": "ABC",
             "dpsp_id": "DP2013-0381"
           }
-        }
+        },
+        "events": [],
+        "documents": []
       }
     },
     {
@@ -51,7 +53,9 @@
             "type": "Point",
             "coordinates": [150.485498, -33.742335]
           }
-        }
+        },
+        "events": [],
+        "documents": []
       }
     }
   ],

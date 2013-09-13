@@ -8,9 +8,9 @@ GIT
 
 GIT
   remote: https://github.com/openaustralia/atdis.git
-  revision: 3f52599687d87e031e9e0e1979501a631601fdb1
+  revision: 6d74a4ee10d85a29752932f60c95ac1427923241
   specs:
-    atdis (0.1)
+    atdis (0.2)
       activemodel (~> 3)
       multi_json (~> 1.7)
       rest-client
