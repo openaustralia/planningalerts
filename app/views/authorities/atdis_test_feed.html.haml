@@ -28,6 +28,17 @@
       %li
         = submit_tag "Test feed", :name => nil
 
+- if @page
+  %p
+    - if @page.previous_url
+      = link_to "Test previous page", {:url => @page.previous_url}, :class => "btn"
+    - else
+      %span.btn.disabled Test previous page
+    - if @page.next_url
+      = link_to "Test next page", {:url => @page.next_url}, :class => "btn"
+    - else
+      %span.btn.disabled Test next page
+
 %h3 Example feeds to test
 
 %ul
@@ -40,19 +51,20 @@
     <em>This feed has intentional errors</em>
 
 - if @page
+  %h3 Test Results
   - if @page.valid?
+    %p
+      %strong Success!
+      We've not found any errors on this page. It's worth looking through the information below to see how the data is actually loaded to make sure and double check that everything is as expected.
     %h3 How the applications get loaded
     %p
-      - if @page.previous_url
-        = link_to "Test previous page", {:url => @page.previous_url}, :class => "btn"
-      - else
-        %span.btn.disabled Test previous page
-      - if @page.next_url
-        = link_to "Test next page", {:url => @page.next_url}, :class => "btn"
-      - else
-        %span.btn.disabled Test next page
+      Note that the field names (and some of the block level indentation) here is different than the json and this is showing all L1, L2 and L3 parameters, irrespective of whether they were actually used or not.
     = attribute_table(@page)
   - else
+    %p
+      %strong Errors found.
+      = link_to "This page", @url
+      does not validate. See the errors below.
     %h3 Errors
     = attribute_error_table(@page)
 
