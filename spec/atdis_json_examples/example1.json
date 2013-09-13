@@ -46,7 +46,7 @@
           "description": "An inground swimming pool",
           "authority": "Example Council Shire Council",
           "lodgement_date": "2013-09-01",
-          "determination_date": "2013-10-01",
+          "determination_date": "none",
           "status": "OPEN",
           "last_modified_date": "2013-09-04"
         },
