@@ -4,6 +4,8 @@ module AuthoritiesHelper
       value.map{|v| attribute_value(v)}.join.html_safe
     elsif value.class.respond_to?(:attribute_names)
       attribute_table(value)
+    elsif value.kind_of?(DateTime)
+      time_tag(value) + " (" + time_ago_in_words(value) + " ago)"
     else
       h(value)
     end
