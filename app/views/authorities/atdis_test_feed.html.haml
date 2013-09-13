@@ -59,7 +59,7 @@
     %h3 How the applications get loaded
     %p
       Note that the field names (and some of the block level indentation) here is different than the json and this is showing all L1, L2 and L3 parameters, irrespective of whether they were actually used or not.
-    = attribute_table(@page)
+    = attribute_value(@page.results)
   - else
     %p
       %strong Errors found.
