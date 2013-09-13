@@ -6,6 +6,8 @@ module AuthoritiesHelper
       attribute_table(value)
     elsif value.kind_of?(DateTime)
       time_tag(value) + " (" + time_ago_in_words(value) + " ago)"
+    elsif value.kind_of?(URI)
+      link_to(value.to_s, value.to_s)
     else
       h(value)
     end
