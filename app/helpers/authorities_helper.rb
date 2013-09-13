@@ -37,11 +37,11 @@ module AuthoritiesHelper
   def attribute_error_table(model)
     content_tag(:table, :class => "scraper_fields") do
       content_tag(:tr) do
-        content_tag(:th, "Field", :class => "field") + content_tag(:th, "Errors", :class => "error")
+        content_tag(:th, "JSON parameters") + content_tag(:th, "Errors", :class => "error")
       end + 
       model.json_errors.map do |attr, errors|
         content_tag(:tr) do
-          content_tag(:td, h(MultiJson.dump(attr)), :class => "field") +
+          content_tag(:td, content_tag(:pre, h(MultiJson.dump(attr, :pretty => true)))) +
             content_tag(:td, content_tag(:span, errors.join(", "), :class => "highlight"))
         end
       end.join.html_safe

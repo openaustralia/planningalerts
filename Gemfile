@@ -51,6 +51,7 @@ gem "validate_url"
 gem "twitter"
 #gem "atdis", :path => '/Users/matthew/git/atdis'
 gem "atdis", :git => "https://github.com/openaustralia/atdis.git"
+gem "oj"
 
 group :test do
   # Apparently capybara 2 only works with Ruby 1.9
