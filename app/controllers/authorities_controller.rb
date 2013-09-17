@@ -76,6 +76,8 @@ class AuthoritiesController < ApplicationController
       n = 2
     elsif number == 2 && page == 1
       n = 3
+    elsif number == 3 && page == 1
+      n = 4
     end
     Rails.root.join("spec/atdis_json_examples/example#{n}.json")
   end
