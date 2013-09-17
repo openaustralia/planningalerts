@@ -17,8 +17,10 @@ module AuthoritiesHelper
     # TODO: Nice display for bounded areas too
     elsif value.kind_of?(NilClass)
       content_tag(:p, "empty", :class => "quiet")
-    else
+    elsif value.kind_of?(String)
       h(value)
+    else
+      h(value.inspect)
     end
   end
 
