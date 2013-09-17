@@ -20,9 +20,9 @@
 %form.formtastic{:action => url_for({}), :method => "get"}
   %fieldset.inputs
     %ol
-      %li
+      %li.string
         = label_tag 'url', 'ATDIS Feed URL'
-        = url_field_tag 'url', @url
+        = url_field_tag 'url', @url, :placeholder => "http://www.council.nsw.gov.au/atdis/1.0/applications.json"
   %fieldset.actions
     %ol
       %li
