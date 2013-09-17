@@ -43,18 +43,20 @@
 
 %ul
   %li
-    = link_to atdis_test_feed_example_url(:number => 1), atdis_test_feed_authorities_path(:url => atdis_test_feed_example_url(:number => 1))
-    (#{link_to "view json", atdis_test_feed_example_url(:number => 1)})
+    = link_to "Example with 2 pages", atdis_test_feed_authorities_path(:url => atdis_test_feed_example_url(:number => 1))
+    (<strong>#{link_to "view source", atdis_test_feed_example_url(:number => 1)}</strong>)
   %li
-    = link_to atdis_test_feed_example_url(:number => 2), atdis_test_feed_authorities_path(:url => atdis_test_feed_example_url(:number => 2))
-    (#{link_to "view json", atdis_test_feed_example_url(:number => 2)})
-    <em>This feed has intentional errors</em>
+    = link_to "Example with errors", atdis_test_feed_authorities_path(:url => atdis_test_feed_example_url(:number => 2))
+    (<strong>#{link_to "view source", atdis_test_feed_example_url(:number => 2)}</strong>)
   %li
-    = link_to atdis_test_feed_example_url(:number => 3), atdis_test_feed_authorities_path(:url => atdis_test_feed_example_url(:number => 3))
-    (#{link_to "view json", atdis_test_feed_example_url(:number => 3)})
+    = link_to "Example with L3 parameter extended", atdis_test_feed_authorities_path(:url => atdis_test_feed_example_url(:number => 3))
+    (<strong>#{link_to "view source", atdis_test_feed_example_url(:number => 3)}</strong>)
   %li
-    = link_to atdis_test_feed_example_url(:number => 4), atdis_test_feed_authorities_path(:url => atdis_test_feed_example_url(:number => 4))
-    (#{link_to "view json", atdis_test_feed_example_url(:number => 4)})
+    = link_to "Example only using L1 features", atdis_test_feed_authorities_path(:url => atdis_test_feed_example_url(:number => 4))
+    (<strong>#{link_to "view source", atdis_test_feed_example_url(:number => 4)}</strong>)
+  %li
+    = link_to "Example with invalid json", atdis_test_feed_authorities_path(:url => atdis_test_feed_example_url(:number => 5))
+    (<strong>#{link_to "view source", atdis_test_feed_example_url(:number => 5)}</strong>)
 
 - if @page
   %h3 Test Results
