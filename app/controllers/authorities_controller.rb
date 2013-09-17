@@ -37,7 +37,7 @@ class AuthoritiesController < ApplicationController
 
   def atdis_test_feed
     @url = params[:url]
-    if @url
+    if !@url.blank?
       u = URI.parse(@url)
       u2 = URI.parse(atdis_test_feed_example_url(:number => 1))
       p = Rails.application.routes.recognize_path(u.path)
