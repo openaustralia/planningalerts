@@ -70,15 +70,6 @@ class AuthoritiesController < ApplicationController
   private
 
   def example_path(number, page)
-    if number == 1 && page == 1
-      n = 1
-    elsif number == 1 && page == 2
-      n = 2
-    elsif number == 2 && page == 1
-      n = 3
-    elsif number == 3 && page == 1
-      n = 4
-    end
-    Rails.root.join("spec/atdis_json_examples/example#{n}.json")
+    Rails.root.join("spec/atdis_json_examples/example#{number}_page#{page}.json")
   end
 end
