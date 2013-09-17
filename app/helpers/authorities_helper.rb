@@ -1,4 +1,8 @@
 module AuthoritiesHelper
+  def yes_no(v)
+    v ? "yes" : "no"
+  end
+
   def attribute_value(value)
     if value.kind_of?(Array)
       value.map{|v| attribute_value(v)}.join.html_safe
