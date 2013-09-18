@@ -63,8 +63,10 @@ PlanningalertsApp::Application.routes.draw do
     end
   end
 
-  get '/atdis/test' => 'atdis#test', :as => :atdis_test
-  get '/atdis/feed/:number/atdis/1.0/applications.json' => 'atdis#feed', :as => :atdis_feed
+  namespace :atdis do
+    get :test
+    get 'feed/:number/atdis/1.0/applications.json', :action => 'feed', :as => :feed
+  end
 
   match 'api/howto' => 'api#howto', :as => :api_howto
   match 'api' => 'api#index', :as => :api
