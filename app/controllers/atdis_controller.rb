@@ -1,0 +1,2 @@
+class AtdisController < ApplicationController
+end

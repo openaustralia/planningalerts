@@ -1,0 +1,2 @@
+module AtdisHelper
+end
