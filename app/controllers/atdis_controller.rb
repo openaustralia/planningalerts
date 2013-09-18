@@ -1,5 +1,5 @@
 class AtdisController < ApplicationController
-  def atdis_test_feed
+  def test
     @url = params[:url]
     if !@url.blank?
       u = URI.parse(@url)
@@ -7,7 +7,7 @@ class AtdisController < ApplicationController
       p = Rails.application.routes.recognize_path(u.path)
       # In development we don't have a multithreaded web server so we have to fake the serving of the data
       # This is icky. Make this less icky.
-      if Rails.env.development? && u.host == u2.host && u.port == u2.port && p[:controller] == "atdis" && p[:action] == "atdis_test_feed_example"
+      if Rails.env.development? && u.host == u2.host && u.port == u2.port && p[:controller] == "atdis" && p[:action] == "feed"
         number = p[:number].to_i
         if u.query.nil? || u.query == "page=1"
           page = 1
@@ -25,7 +25,7 @@ class AtdisController < ApplicationController
     end
   end
 
-  def atdis_test_feed_example
+  def feed
     page = (params[:page] || "1").to_i
     number = params[:number].to_i
     render :file  => example_path(number, page), :content_type => "text/javascript", :layout => false
