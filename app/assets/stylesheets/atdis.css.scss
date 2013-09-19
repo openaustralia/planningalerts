@@ -1,3 +1,26 @@
 // Place all the styles related to the atdis controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.atdis-specification {
+  table {
+    font-size: 0.9em;
+    th {
+      background: #e8e8e8;
+    }
+    td, th {
+      border: 1px solid #ddd;     
+      padding: 0.5em;
+    }
+    td {
+      background: #f8f8f8;
+      p:last-child {
+        margin-bottom: 0;
+      }
+      vertical-align: top;
+    }
+    td.field {
+      color: $orange;    
+    }
+  }
+}
