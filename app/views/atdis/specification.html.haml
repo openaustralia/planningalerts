@@ -83,10 +83,9 @@
 
     ####4.3.1   Info [L1]
 
-    The *info* record is the top-level block that contains unique identifying information about a single development application. In conjunction with the *reference* block, this represents the minimum *Level 1 Mandatory* requirements for a feed compliant with the ATDIS-1.0.7 specification.
+    The `info` record is the top-level block that contains unique identifying information about a single development application. In conjunction with the `reference` block, this represents the minimum *Level 1 Mandatory* requirements for a feed compliant with the ATDIS-1.0.7 specification.
 
-    The info record must contain the following fields:
-
+    The `info` record must contain the following fields:
 
     <table>
     <tr>
@@ -131,14 +130,13 @@
 
     ###4.3.2. Reference [L1]
 
-    The *reference* record contains links to the original source material for the application at the Complying Authority. It can optionally contain a link for where Residents can comment on the application at the Complying Authority. In conjunction with the *info* block, this represents the minimum *Level 1 Mandatory* requirements for a feed compliant with the ATDIS-1.0.7 specification.
+    The `reference` record contains links to the original source material for the application at the Complying Authority. It can optionally contain a link for where Residents can comment on the application at the Complying Authority. In conjunction with the `info` block, this represents the minimum *Level 1 Mandatory* requirements for a feed compliant with the ATDIS-1.0.7 specification.
 
-    In both cases, the links to URLs captured in the *reference* block would take the user to another location on the Complying Authority's web site. 
+    In both cases, the links to URLs captured in the `reference` block would take the user to another location on the Complying Authority's web site. 
 
     The content behind the `more_info_url` and `comments_url` values must link to an endpoint that directly shows the information for the specific development application. The underlying content must be directly accessible without authentication, cookies or other limiting requirements for the consuming system. The data and behaviour of the pages at these links is beyond the scope of the ATDIS-1.0.7 Specification.
 
-    The *reference* record must contain the following fields:
-
+    The `reference` record must contain the following fields:
 
     <table> 
     <tr><th>M/O</th><th class="field">Field</th><th>Notes</th>
@@ -150,10 +148,9 @@
 
     ####4.3.3 Location [L1]
 
-    The *location* record is designed to provide consumers with information about the geographic location of the development application. Because not all Authorities have access to geographic information for their development applications, parts of this record are optional. If a feed includes the location record at all, it must include the address and land_title_ref attributes within the record.
+    The `location` record is designed to provide consumers with information about the geographic location of the development application. Because not all Authorities have access to geographic information for their development applications, parts of this record are optional. If a feed includes the location record at all, it must include the `address` and `land_title_ref` attributes within the record.
 
     It is mandatory that feeds provide the location record with the `address` and `land_title_ref` fields, and it is anticipated that future versions of the Specification will promote the coordinates field into mandatory compliance.
-
 
     <table> 
     <tr><th>M/O</th><th class="field">Field</th><th>Notes</th>
@@ -192,7 +189,7 @@
 
     ####4.3.4 Events [L2]
 
-    The *events* record contains a list of events that have occurred against the application since lodgement. In this version of the specification, the *events* block has been promoted to *Level 1 Mandatory*. The *events* record must include a list of events, where each event has an `id`, `date` and `description`. Inclusion of an `event_type` and `status` is optional.
+    The `events` record contains a list of events that have occurred against the application since lodgement. In this version of the specification, the `events` block has been promoted to *Level 1 Mandatory*. The `events` record must include a list of events, where each event has an `id`, `date` and `description`. Inclusion of an `event_type` and `status` is optional.
 
     <table> 
     <tr><th>M/O</th><th class="field">Field</th><th>Notes</th>
@@ -214,12 +211,12 @@
 
     **Notes**
 
-    * This version of the specification does not define a list of valid event_types, so the contents of this field can be Vendor or Council specific.
+    * This version of the specification does not define a list of valid `event_type`s, so the contents of this field can be Vendor or Council specific.
     * The value for `id` should be a string. The value should be unique from the perspective of the authority such that it can be used as a reference for the underlying event.
 
     ####4.3.5  Documents [L2]
 
-    The *documents* record contains a list of references (as links) to documents that relate to the application. In this version of the Specification, the *documents* block has been promoted to *Level 1 Mandatory*. The *documents* record must include a list of documents, where each document has a `ref`, `title` and a link (in the form of a URL) to the location where the document can be downloaded.
+    The `documents` record contains a list of references (as links) to documents that relate to the application. In this version of the Specification, the `documents` block has been promoted to *Level 1 Mandatory*. The `documents` record must include a list of documents, where each document has a `ref`, `title` and a link (in the form of a URL) to the location where the document can be downloaded.
 
     <table> 
     <tr><th>M/O</th><th class="field">Field</th><th>Notes</th>
@@ -237,7 +234,7 @@
 
     ####4.3.6  People [L2]
 
-    The *people* record contains a list of people that relate to the application. As an extended data item, this record is only required for *Level 2 Optional* compliance. However, if it the people record is included at all, then it is assumed to include a list of people, where each person has a `name` and a `role` indicating their responsibility with the application. Optionally, the person record can include contact information.
+    The `people` record contains a list of people that relate to the application. As an extended data item, this record is only required for *Level 2 Optional* compliance. However, if it the people record is included at all, then it is assumed to include a list of people, where each person has a `name` and a `role` indicating their responsibility with the application. Optionally, the person record can include contact information.
 
     <table> 
     <tr><th>M/O</th><th class="field">Field</th><th>Notes</th>
@@ -253,7 +250,7 @@
      
     ####4.3.7 Extended [L3]
 
-    The *extended* record is specifically designed to allow ATDIS-1.0.7 compliant feeds to include any additional information that might be relevant to an application. The contents of the extended record is not specified, and left up to the ATDIS Vendor and Complying Authority to populate as they see fit. There are no mandatory or optional fields for the extended record. Consuming systems should expect its existence, but are not required to do anything with data contained within it.
+    The `extended` record is specifically designed to allow ATDIS-1.0.7 compliant feeds to include any additional information that might be relevant to an application. The contents of the `extended` record is not specified, and left up to the ATDIS Vendor and Complying Authority to populate as they see fit. There are no mandatory or optional fields for the `extended` record. Consuming systems should expect its existence, but are not required to do anything with data contained within it.
 
     <table> 
     <tr><th>M/O</th><th class="field">Field</th><th>Notes</th>
