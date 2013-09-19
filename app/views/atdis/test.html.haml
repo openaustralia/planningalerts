@@ -2,9 +2,11 @@
 
 %h2= yield :page_title
 
-- if @url.nil?
+- if @page.nil?
   %p
-    The Application Tracking Data Interchange Specification (ATDIS) is a modern, straightforward specification for publishing development
+    The
+    = link_to "Application Tracking Data Interchange Specification", atdis_specification_path
+    (ATDIS) is a modern, straightforward specification for publishing development
     applications online in a consistent machine readable format. It has been developed by the
     = link_to "NSW Department of Planning & Infrastructure", "http://www.planning.nsw.gov.au/"
     and
