@@ -31,6 +31,9 @@ class AtdisController < ApplicationController
     render :file  => example_path(number, page), :content_type => "text/javascript", :layout => false
   end
 
+  def specification
+  end
+
   private
 
   def example_path(number, page)

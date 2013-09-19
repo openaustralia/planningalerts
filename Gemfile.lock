@@ -256,6 +256,7 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    redcarpet (2.3.0)
     redis (2.2.2)
     redis-namespace (1.0.3)
       redis (< 3.0.0)
@@ -386,6 +387,7 @@ DEPENDENCIES
   rack-throttle
   rails (= 3.2.13)
   rake
+  redcarpet (= 2.3.0)
   rspec-rails (~> 2.4)
   rvm-capistrano
   sanitize
