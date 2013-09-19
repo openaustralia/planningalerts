@@ -13,9 +13,9 @@
 
 .atdis-specification
   :markdown
-    ###4 ATDIS-1.0.7 Application Tracking Data Interchange Specification
+    <h3 id="#section4">4 ATDIS-1.0.7 Application Tracking Data Interchange Specification</h3>
 
-    ###4.1 Components of the specification
+    <h3 id="#section4.1">4.1 Components of the specification</h3>
 
     Figure 2 presents the four high-level components of the Specification:
 
@@ -30,7 +30,7 @@
     * **Use cases**: defines the agreed use cases for which ATDIS data can participate. Examples include "enquiries" and "subscriptions".
     * **Channels**: defines the channels over which ATDIS data can be delivered. Examples include RSS, REST/[JSON, XML] and Browser.
 
-    ###4.2 Feed
+    <h3 id="section4.2">4.2 Feed</h3>
 
     Any compliant source of application tracking data is referred to as a *feed*. A feed is defined by a standard web address of the form:
 
@@ -53,7 +53,7 @@
     * Given a version of the specification of the form *MAJOR.minor.patch*, it is assumed that all *patch *versions of the same major/minor version remain semantically and syntactically compatible with each other. Minor may introduce new items but will not remove any existing items. Major versions may make changes to the schema that are not backwards compatible.
 
 
-    ###4.3 Schema
+    <h3 id="section4.3">4.3 Schema</h3>
 
 
     The *schema* defines the specific data elements that are published in a compliant ATDIS-1.0.7 *feed*. The schema has a defined structure, broken down into one or more *application* records, which are further decomposed into *blocks* and *fields*.
@@ -83,7 +83,7 @@
 
     The following sections describe the semantics of each of the seven record types that make up the Specification. For each record type, the Specification indicates in which compliance level (L1, L2 or L3) the record belongs.
 
-    ####4.3.1   Info [L1]
+    <h4 id="section4.3.1">4.3.1   Info [L1]</h4>
 
     The `info` record is the top-level block that contains unique identifying information about a single development application. In conjunction with the `reference` block, this represents the minimum *Level 1 Mandatory* requirements for a feed compliant with the ATDIS-1.0.7 specification.
 
@@ -130,7 +130,7 @@
     * If the application does not have a notification period at all, the value `"none"` should be specified for the `notification_start_date` and `notification_end_date` fields.
     * The contents of `estimated_cost` should be a formatted currency string in Australian Dollars, of the form `"$300,000"`.
 
-    ###4.3.2. Reference [L1]
+    <h4 id="section4.3.2">4.3.2. Reference [L1]</h4>
 
     The `reference` record contains links to the original source material for the application at the Complying Authority. It can optionally contain a link for where Residents can comment on the application at the Complying Authority. In conjunction with the `info` block, this represents the minimum *Level 1 Mandatory* requirements for a feed compliant with the ATDIS-1.0.7 specification.
 
@@ -148,7 +148,7 @@
     <td>O</td><td><code>comments_url</code></td><td>Web address for commenting on this application</td></tr>
     </table>
 
-    ####4.3.3 Location [L1]
+    <h4 id="section4.3.3">4.3.3 Location [L1]</h4>
 
     The `location` record is designed to provide consumers with information about the geographic location of the development application. Because not all Authorities have access to geographic information for their development applications, parts of this record are optional. If a feed includes the location record at all, it must include the `address` and `land_title_ref` attributes within the record.
 
@@ -189,7 +189,7 @@
     * If the `section` value in `land_title_ref` is not available, then it should be populated with the value `"none"`.
 
 
-    ####4.3.4 Events [L2]
+    <h4 id="section4.3.4">4.3.4 Events [L2]</h4>
 
     The `events` record contains a list of events that have occurred against the application since lodgement. In this version of the specification, the `events` block has been promoted to *Level 1 Mandatory*. The `events` record must include a list of events, where each event has an `id`, `date` and `description`. Inclusion of an `event_type` and `status` is optional.
 
@@ -216,7 +216,7 @@
     * This version of the specification does not define a list of valid `event_type`s, so the contents of this field can be Vendor or Council specific.
     * The value for `id` should be a string. The value should be unique from the perspective of the authority such that it can be used as a reference for the underlying event.
 
-    ####4.3.5  Documents [L2]
+    <h4 id="section4.3.5">4.3.5  Documents [L2]</h4>
 
     The `documents` record contains a list of references (as links) to documents that relate to the application. In this version of the Specification, the `documents` block has been promoted to *Level 1 Mandatory*. The `documents` record must include a list of documents, where each document has a `ref`, `title` and a link (in the form of a URL) to the location where the document can be downloaded.
 
@@ -234,7 +234,7 @@
      
      
 
-    ####4.3.6  People [L2]
+    <h4 id="section4.3.6">4.3.6  People [L2]</h4>
 
     The `people` record contains a list of people that relate to the application. As an extended data item, this record is only required for *Level 2 Optional* compliance. However, if it the people record is included at all, then it is assumed to include a list of people, where each person has a `name` and a `role` indicating their responsibility with the application. Optionally, the person record can include contact information.
 
@@ -250,7 +250,7 @@
      <tr><td>O</td><td></td><td><code>contact</code></td><td>Authority-specific contact information for the related person</td><tr>
      </table>
      
-    ####4.3.7 Extended [L3]
+    <h4 id="section4.3.7">4.3.7 Extended [L3]</h4>
 
     The `extended` record is specifically designed to allow ATDIS-1.0.7 compliant feeds to include any additional information that might be relevant to an application. The contents of the `extended` record is not specified, and left up to the ATDIS Vendor and Complying Authority to populate as they see fit. There are no mandatory or optional fields for the `extended` record. Consuming systems should expect its existence, but are not required to do anything with data contained within it.
 
@@ -261,12 +261,12 @@
     </tr></table>
 
 
-    ####4.3.8 Date Formats [L1]
+    <h4 id="section4.3.8">4.3.8 Date Formats [L1]</h4>
 
     Any field within the schema of the form `*_date` should be treated as an ISO-8601 date format. See: [http://www.w3.org/TR/NOTE-datetime](http://www.w3.org/TR/NOTE-datetime) for details.
 
-    ###4.4 Other Technical Considerations
+    <h3 id="section4.4">4.4 Other Technical Considerations</h3>
 
-    ####4.4.1 Encoding
+    <h4 id="section4.4.1">4.4.1 Encoding</h4>
 
     All data in ATDIS requests should be encoded using UTF-8, and all data returned by ATDIS-compatible systems should be returned in UTF-8 encoding. See [http://en.wikipedia.org/wiki/UTF-8](http://en.wikipedia.org/wiki/UTF-8) for details.
