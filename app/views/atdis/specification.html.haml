@@ -9,49 +9,43 @@
 %p A few words of warning: Please do not use this page as the definitive reference of the specification. We've made every attempt to make this version an accurate copy of the original but there is always a possibility that there is a mistake or that this version is not up to date.
 
 :markdown
-  ###4. ATDIS-1.0.4 Application Tracking Data Interchange Specification
+  ###4 ATDIS-1.0.4 Application Tracking Data Interchange Specification
 
   ###4.1 Components of the specification
 
   Figure 2 presents the four high-level components of the Specification:
 
-  ![image alt text](/assets/atdis/image_1.png)
+  ![Components of the specification](/assets/atdis/image_1.png)
 
-  <div align "center">Figure 2: Components of the specification
-  </div>
+  <p align="center">
+  Figure 2: Components of the specification
+  </p>
 
   * **Feed**: defines a publicly available source of application tracking data. For example, each complying Council would provide a single feed for application tracking data.
-
   * **Schema**: defines the data elements that make up individual application tracking records. Examples include "date", "location" and "reference".
-
   * **Use cases**: defines the agreed use cases for which ATDIS data can participate. Examples include "enquiries" and "subscriptions".
-
   * **Channels**: defines the channels over which ATDIS data can be delivered. Examples include RSS, REST/[JSON, XML] and Browser.
 
-      14. Feed
+  ###4.2 Feed
 
   Any compliant source of application tracking data is referred to as a *feed*. A feed is defined by a standard web address of the form:
 
   ![image alt text](/assets/atdis/image_2.png)
 
-  <div align="center">
+  <p align="center">
   Figure 3: Feed web address format
-  </div>
+  </p>
 
   **Where**
 
   * Protocol: assume HTTP.
-
   * Web address: the fully qualified web host name for the Complying Authority. By convention, this should be the same as the URL used to access the Council's publicly available web site.
-
   * Feed prefix: component of the URI that indicates a complying feed.
-
   * Schema version: component of the feed prefix that indicates the version of the schema offered by the feed.
 
   **Notes**
 
   * There are some options for how the schema version number might be encoded into the feed URL. The above format (where the version is encoded into the URI) is the simplest mechanism, but it is also possible to encode version number with an HTTP header variable, with a query string parameter, or by using content negotiation. There is a vibrant and passionate debate about the best way to version URLs for access to resources that shows no prospect of being settled soon. Therefore, for the purposes of ATDIS-1.0.4, a simple URI-encoded version string is proposed. If content negotiation becomes the preferred standard, then this it is relatively easy to change the prefix in a future release.
-
   * Given a version of the specification of the form *MAJOR.minor.patch*, it is assumed that all *patch *versions of the same major/minor version remain semantically and syntactically compatible with each other. Minor may introduce new items but will not remove any existing items. Major versions may make changes to the schema that are not backwards compatible.
 
 
@@ -68,25 +62,19 @@
 
   ![image alt text](/assets/atdis/image_3.png)
 
-  <div align="center">
+  <p align="center">
    Figure 4: Feed structure
-  </div>
+  </p>
 
 
   There are *seven* record types defined by the Specification:
 
   1. Info
-
   2. Reference
-
   3. Location
-
   4. Events
-
   5. Documents
-
   6. People
-
   7. Extended
 
   The following sections describe the semantics of each of the seven record types that make up the Specification. For each record type, the Specification indicates in which compliance level (L1, L2 or L3) the record belongs.
@@ -99,6 +87,9 @@
 
 
   <table>
+  <tr>
+    <th>M/O</th><th>Field</th><th>Notes</th>
+  </tr>
   <tr>
   <td>M</td><td>dat_id</td><td>An id that uniquely identifies the application within this feed</td>
   </tr>
@@ -122,16 +113,17 @@
 
   **Notes**
 
-  * The field last_modified_date captures the date at which the authority last modified the record. This allows consuming systems to know if an application changes over time.
-
+  * The field `last_modified_date` captures the date at which the authority last modified the record. This allows consuming systems to know if an application changes over time.
   * Dates can be specified with or without time information. For example, the following are both valid date values (see also 4.3.8):
+    ```
+    "determination_date": "2013-06-20T02:01:07Z" 
+    ```
 
-  ```
-  "determination_date": "2013-06-20T02:01:07Z" 
-  ```
-      "determination_date": "2013-06-20" 
+    ```
+    "determination_date": "2013-06-20" 
+    ```
 
-  * If the application does not have a notification period at all, the value "none" should be specified for the notification_start_date and notification_end_date fields.
+  * If the application does not have a notification period at all, the value `"none"` should be specified for the `notification_start_date` and `notification_end_date` fields.
 
   ###4.3.2. Reference [L1]
 
@@ -139,30 +131,28 @@
 
   In both cases, the links to URLs captured in the *reference* block would take the user to another location on the Complying Authority's web site. 
 
-  The content behind the more_info_url and comments_url values must link to an endpoint that directly shows the information for the specific development application. The underlying content must be directly accessible without authentication, cookies or other limiting requirements for the consuming system. The data and behaviour of the pages at these links is beyond the scope of the ATDIS-1.0.4 Specification.
+  The content behind the `more_info_url` and `comments_url` values must link to an endpoint that directly shows the information for the specific development application. The underlying content must be directly accessible without authentication, cookies or other limiting requirements for the consuming system. The data and behaviour of the pages at these links is beyond the scope of the ATDIS-1.0.4 Specification.
 
   The *reference* record must contain the following fields:
 
 
   <table> 
-  <tr><td>M/O</td><td>Field</td><td>Notes</td>
+  <tr><th>M/O</th><th>Field</th><th>Notes</th>
   </tr>
   <tr><td>M</td><td>more_info_url</td><td>Web address for more information about this application</td>
   </tr>
   <td>O</td><td>comments_url</td><td>Web address for commenting on this application</td></tr>
   </table>
 
-
-
   ####4.3.3 Location [L1]
 
   The *location* record is designed to provide consumers with information about the geographic location of the development application. Because not all Authorities have access to geographic information for their development applications, parts of this record are optional. If a feed includes the location record at all, it must include the address and land_title_ref attributes within the record.
 
-  It is mandatory that feeds provide the location record with the address and land_title_ref fields, and it is anticipated that future versions of the Specification will promote the coordinates field into mandatory compliance.
+  It is mandatory that feeds provide the location record with the `address` and `land_title_ref` fields, and it is anticipated that future versions of the Specification will promote the coordinates field into mandatory compliance.
 
 
   <table> 
-  <tr><td>M/O</td><td>Field</td><td>Notes</td>
+  <tr><th>M/O</th><th>Field</th><th>Notes</th>
   </tr>
   <tr><td>M </td><td> address   </td><td>Human readable street address for the application</td>
   </tr>
@@ -182,24 +172,23 @@
   **Notes**
 
   * When used, GPS coordinates must make use of the WGS84 datum as per *"Earth Gravitational Model 2008 (EGM2008)"*. See: [http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm2008/index.html](http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm2008/index.html) for details.
-
   * The format for geographic coordinates must use the GeoJSON specification as per: [http://geojson.org/geojson-spec.html#geojson-objects](http://geojson.org/geojson-spec.html#geojson-objects) 
-
   * The simplest compliant version of a geometry instance would be a *Point* of the form:
-  ```
-  { "type": "Point", "coordinates": [100.0, 0.0] }
-  ```
-  Point coordinates are in x, y order (easting, northing for projected coordinates, longitude, latitude for geographic coordinates). For more advanced geometric types, please refer to the GeoJSON specification.
 
-  * As geometry is optional for the Location block in ATDIS-1.0.4, there is no requirement to specify the kinds of geometric data for an application. However, if a feed is supplying geometric data, then it must be formatted according to the GeoJSON specification.
+    ```
+    { "type": "Point", "coordinates": [100.0, 0.0] }
+    ```
+    
+    Point coordinates are in x, y order (easting, northing for projected coordinates, longitude, latitude for geographic coordinates). For more advanced geometric types, please refer to the GeoJSON specification.
+  * As `geometry` is optional for the Location block in ATDIS-1.0.4, there is no requirement to specify the kinds of geometric data for an application. However, if a feed is supplying geometric data, then it must be formatted according to the GeoJSON specification.
 
 
   ####4.3.4 Events [L2]
 
-  The *event* record contains a list of events that have occurred against the application since lodgement. As the nature of the events will be specific to the Complying Authority, this is only necessary for *Level 2 Optional* compliance. However, if the events record is included at all, then it is assumed to include a list of events, where each event has an id, date and description. Inclusion of an event_type and status is optional.
+  The *event* record contains a list of events that have occurred against the application since lodgement. As the nature of the events will be specific to the Complying Authority, this is only necessary for *Level 2 Optional* compliance. However, if the events record is included at all, then it is assumed to include a list of events, where each event has an `id`, `date` and `description`. Inclusion of an `event_type` and `status` is optional.
 
   <table> 
-  <tr><td>M/O</td><td>Field</td><td>Notes</td>
+  <tr><th>M/O</th><th>Field</th><th>Notes</th>
   </tr>
   <tr><td>M </td><td>events</td><td>Composite record containing a list of events for the application</td>
   </tr>
@@ -225,7 +214,7 @@
   The *documents* record contains a list of references (as links) to documents that relate to the application. As an extended data item, this record is only required for *Level 2 Optional* compliance. However, if it the documents record is included at all, then it is assumed to include a list of documents, where each document has a ref, title and a link (in the form of a URL) to the location where the document can be downloaded.
 
   <table> 
-  <tr><td>M/O</td><td>Field</td><td>Notes</td>
+  <tr><th>M/O</th><th>Field</th><th>Notes</th>
   </tr>
   <tr><td>M </td><td>documents</td><td>Composite record containing a list of documents for the application</td>
   </tr>
@@ -240,10 +229,10 @@
 
   ####4.3.6  People [L2]
 
-  The *people *record contains a list of people that relate to the application. As an extended data item, this record is only required for *Level 2 Optional* compliance. However, if it the people record is included at all, then it is assumed to include a list of people, where each person has a name and a role indicating their responsibility with the application. Optionally, the person record can include contact information.
+  The *people* record contains a list of people that relate to the application. As an extended data item, this record is only required for *Level 2 Optional* compliance. However, if it the people record is included at all, then it is assumed to include a list of people, where each person has a `name` and a `role` indicating their responsibility with the application. Optionally, the person record can include contact information.
 
   <table> 
-  <tr><td>M/O</td><td>Field</td><td>Notes</td>
+  <tr><th>M/O</th><th>Field</th><th>Notes</th>
   </tr>
   <tr><td>M </td><td>people</td><td>Composite record containing a list of people related to the app</td>
   </tr>
@@ -259,7 +248,7 @@
   The *extended* record is specifically designed to allow ATDIS-1.0.4 compliant feeds to include any additional information that might be relevant to an application. The contents of the extended record is not specified, and left up to the ATDIS Vendor and Complying Authority to populate as they see fit. There are no mandatory or optional fields for the extended record. Consuming systems should expect its existence, but are not required to do anything with data contained within it.
 
   <table> 
-  <tr><td>M/O</td><td>Field</td><td>Notes</td>
+  <tr><th>M/O</th><th>Field</th><th>Notes</th>
   </tr>
   <tr><td>Not Specified </td><td></td><td></td>
   </tr></table>
@@ -267,5 +256,5 @@
 
   ####4.3.8 Date Formats [L1]
 
-  Any field within the schema of the form *_date should be treated as an ISO-8601 date format. See: [http://www.w3.org/TR/NOTE-datetime](http://www.w3.org/TR/NOTE-datetime) for details.
+  Any field within the schema of the form `*_date` should be treated as an ISO-8601 date format. See: [http://www.w3.org/TR/NOTE-datetime](http://www.w3.org/TR/NOTE-datetime) for details.
 
