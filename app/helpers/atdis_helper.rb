@@ -57,8 +57,12 @@ module AtdisHelper
       end + 
       model.json_errors.map do |attr, errors|
         content_tag(:tr) do
+          error_html = errors.map do |e|
+            content_tag(:span, e.message, :class => "highlight") + " &mdash; see ".html_safe +
+              link_to("section #{e.spec_section} of specification.", atdis_specification_path(:anchor => "section#{e.spec_section}"))
+          end.join(" ").html_safe
           content_tag(:td, content_tag(:pre, h(MultiJson.dump(attr, :pretty => true)))) +
-            content_tag(:td, content_tag(:span, errors.join(", "), :class => "highlight"))
+            content_tag(:td, error_html)
         end
       end.join.html_safe
     end
