@@ -110,6 +110,8 @@ GEM
       rest-client
       simplecov (>= 0.7)
       thor
+    crack (0.4.1)
+      safe_yaml (~> 0.9.0)
     daemons (1.1.9)
     dalli (2.6.2)
     database_cleaner (0.9.1)
@@ -287,6 +289,7 @@ GEM
     rubyzip (0.9.9)
     rvm-capistrano (1.2.7)
       capistrano (>= 2.0.0)
+    safe_yaml (0.9.7)
     sanitize (2.0.3)
       nokogiri (>= 1.4.4, < 1.6)
     sass (3.2.6)
@@ -340,8 +343,12 @@ GEM
     vanity (1.8.0)
       redis (~> 2.0)
       redis-namespace (~> 1.0.0)
+    vcr (2.5.0)
     warden (1.2.3)
       rack (>= 1.0)
+    webmock (1.13.0)
+      addressable (>= 2.2.7)
+      crack (>= 0.3.2)
     websocket (1.0.7)
     will_paginate (3.0.4)
     xpath (0.1.4)
@@ -400,4 +407,6 @@ DEPENDENCIES
   validate_url
   validates_email_format_of
   vanity
+  vcr
+  webmock
   will_paginate

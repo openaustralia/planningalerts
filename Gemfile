@@ -64,6 +64,8 @@ group :test do
   gem 'factory_girl', '< 3.0'
   gem 'email_spec'
   gem 'coveralls', :require => false
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do
