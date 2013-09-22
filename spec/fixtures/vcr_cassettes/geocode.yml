@@ -1,0 +1,91 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://maps.google.com/maps/api/geocode/json?address=A%20test%20address&region=au&sensor=false
+    body: 
+      string: ""
+    headers: 
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Date: 
+      - Sun, 22 Sep 2013 19:44:34 GMT
+      Alternate-Protocol: 
+      - 80:quic
+      Transfer-Encoding: 
+      - chunked
+      Content-Type: 
+      - application/json; charset=UTF-8
+      Expires: 
+      - Mon, 23 Sep 2013 19:44:34 GMT
+      Access-Control-Allow-Origin: 
+      - "*"
+      X-Xss-Protection: 
+      - 1; mode=block
+      Cache-Control: 
+      - public, max-age=86400
+      Server: 
+      - mafe
+      Vary: 
+      - Accept-Language
+      X-Frame-Options: 
+      - SAMEORIGIN
+    body: 
+      string: |
+        {
+           "results" : [],
+           "status" : "ZERO_RESULTS"
+        }
+
+    http_version: 
+  recorded_at: Sun, 22 Sep 2013 19:44:34 GMT
+- request: 
+    method: get
+    uri: http://maps.google.com/maps/api/geocode/json?address=A%20test%20address&region=au&sensor=false
+    body: 
+      string: ""
+    headers: 
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Date: 
+      - Sun, 22 Sep 2013 19:44:34 GMT
+      Alternate-Protocol: 
+      - 80:quic
+      Transfer-Encoding: 
+      - chunked
+      Content-Type: 
+      - application/json; charset=UTF-8
+      Expires: 
+      - Mon, 23 Sep 2013 19:44:34 GMT
+      Access-Control-Allow-Origin: 
+      - "*"
+      X-Xss-Protection: 
+      - 1; mode=block
+      Cache-Control: 
+      - public, max-age=86400
+      Server: 
+      - mafe
+      Vary: 
+      - Accept-Language
+      X-Frame-Options: 
+      - SAMEORIGIN
+    body: 
+      string: |
+        {
+           "results" : [],
+           "status" : "ZERO_RESULTS"
+        }
+
+    http_version: 
+  recorded_at: Sun, 22 Sep 2013 19:44:34 GMT
+recorded_with: VCR 2.5.0

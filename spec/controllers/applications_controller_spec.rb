@@ -33,8 +33,10 @@ describe ApplicationsController do
 
     describe "json api" do
       it "should find recent applications" do
-        result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
-        Application.stub_chain(:where, :paginate).and_return([result])
+        VCR.use_cassette('planningalerts') do
+          result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+          Application.stub_chain(:where, :paginate).and_return([result])
+        end
         get :index, :format => "js"
         JSON.parse(response.body).should == [{
           "application" => {
@@ -59,8 +61,10 @@ describe ApplicationsController do
       end
 
       it "should support jsonp" do
-        result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
-        Application.stub_chain(:where, :paginate).and_return([result])
+        VCR.use_cassette('planningalerts') do
+          result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+          Application.stub_chain(:where, :paginate).and_return([result])
+        end
         get :index, :format => "js", :callback => "foobar"
         response.body[0..6].should == "foobar("
         response.body[-1..-1].should == ")"
@@ -89,10 +93,12 @@ describe ApplicationsController do
 
     describe "json api version 2" do
       it "should find recent applications" do
-        application = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
-        result = [application]
-        result.stub!(:total_pages).and_return(5)
-        Application.stub_chain(:where, :paginate).and_return(result)
+        VCR.use_cassette('planningalerts') do
+          application = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+          result = [application]
+          result.stub!(:total_pages).and_return(5)
+          Application.stub_chain(:where, :paginate).and_return(result)
+        end
         get :index, :format => "js", :v => "2"
         JSON.parse(response.body).should == {
           "application_count" => 1,
@@ -159,7 +165,9 @@ describe ApplicationsController do
       end
 
       it "should not do error checking on the normal html sites" do
-        get :index, :address => "24 Bruce Road Glenbrook", :radius => 4000, :foo => 200, :bar => "fiddle"
+        VCR.use_cassette('planningalerts') do
+          get :index, :address => "24 Bruce Road Glenbrook", :radius => 4000, :foo => 200, :bar => "fiddle"
+        end
         response.code.should == "200"
       end
     end

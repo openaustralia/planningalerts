@@ -59,8 +59,10 @@ describe Authority do
     before :each do
       @a1 = Factory(:authority, :full_name => "Blue Mountains City Council")
       @a2 = Factory(:authority, :full_name => "Marrickville City Council")
-      Factory(:application, :authority => @a1, :date_scraped => 3.weeks.ago)
-      Factory(:application, :authority => @a2)
+      VCR.use_cassette('geocode', :record => :new_episodes) do
+        Factory(:application, :authority => @a1, :date_scraped => 3.weeks.ago)
+        Factory(:application, :authority => @a2)
+      end
     end
 
     it "should report that a scraper is broken if it hasn't received a DA in over two weeks" do

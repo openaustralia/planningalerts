@@ -3,7 +3,9 @@ require 'spec_helper'
 describe "redirects" do
   describe "api redirects" do
     it "should not redirect the normal home page on the normal subdomain" do
-      get "http://www.planningalerts.org.au"
+      VCR.use_cassette('planningalerts') do
+        get "http://www.planningalerts.org.au"
+      end
       response.should_not be_redirect
     end
 

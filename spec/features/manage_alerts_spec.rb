@@ -5,11 +5,13 @@ feature "Manage alerts" do
   # I want to sign up for an email alert
   
   scenario "Sign up for email alert" do
-    visit '/alerts/signup'
+    VCR.use_cassette('planningalerts') do
+      visit '/alerts/signup'
 
-    fill_in("alert_email", :with => "example@example.com")
-    fill_in("alert_address", :with => "24 Bruce Road, Glenbrook")
-    click_button("Create alert")
+      fill_in("alert_email", :with => "example@example.com")
+      fill_in("alert_address", :with => "24 Bruce Road, Glenbrook")
+      click_button("Create alert")
+    end
 
     page.should have_content("Now check your email")
 
