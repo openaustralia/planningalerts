@@ -59,7 +59,7 @@ describe Authority do
     before :each do
       @a1 = Factory(:authority, :full_name => "Blue Mountains City Council")
       @a2 = Factory(:authority, :full_name => "Marrickville City Council")
-      VCR.use_cassette('geocode', :record => :new_episodes) do
+      VCR.use_cassette('planningalerts') do
         Factory(:application, :authority => @a1, :date_scraped => 3.weeks.ago)
         Factory(:application, :authority => @a2)
       end
