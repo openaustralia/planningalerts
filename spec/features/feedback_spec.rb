@@ -8,11 +8,21 @@ feature "Give feedback to Council" do
   scenario "Giving feedback for an authority without a feedback email" do
     authority = Factory(:authority, :full_name => "Foo")
     VCR.use_cassette('planningalerts') do
-      application = Factory(:application, :id => "1", :authority_id => authority.id)
+      application = Factory(:application, :id => "1", :authority_id => authority.id, :comment_url => 'mailto:foo@bar.com')
       visit(application_path(application))
     end
 
     page.should have_content("How to comment on this application")
+  end
+
+  scenario "Hide feedback form where there is no feedback email or comment_url" do
+    authority = Factory(:authority, :full_name => "Foo")
+    VCR.use_cassette('planningalerts') do
+      application = Factory(:application, :id => "1", :authority_id => authority.id)
+      visit(application_path(application))
+    end
+
+    page.should_not have_content("How to comment on this application")
   end
 
   scenario "Adding a comment" do

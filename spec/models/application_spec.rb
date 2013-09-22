@@ -47,7 +47,6 @@ describe Application do
 
     describe "comment_url" do
       it { Factory.build(:application, :comment_url => nil).should be_valid }
-      it { Factory.build(:application, :comment_url => "").should_not be_valid }
       it { Factory.build(:application, :comment_url => "http://blah.com?p=1").should be_valid }
       it { Factory.build(:application, :comment_url => "mailto:m@foo.com?subject=hello+sir").should be_valid }
       it { Factory.build(:application, :comment_url => "foo").should_not be_valid }
