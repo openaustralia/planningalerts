@@ -88,7 +88,7 @@
       = link_to "This page", @url
       does not validate. See the errors below.
     %h3 Errors
-    = attribute_error_table(@page)
+    = render :partial => "attribute_error_table", :locals => {:model => @page}
 
 %h3 About this service
 %p
