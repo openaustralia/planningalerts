@@ -63,7 +63,7 @@
             %div#faq_commenting_address.inline-hints.hidden
               = render :partial => 'static/faq_commenting_address'
           = f.actions
-      - else
+      - elsif !@application.comment_url.blank?
         %p
           = link_to "How to comment", @application.comment_url
           on this application (from #{@application.authority.full_name}).
