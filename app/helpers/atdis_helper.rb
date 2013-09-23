@@ -7,7 +7,7 @@ module AtdisHelper
     if value.kind_of?(Array)
       value.map{|v| attribute_value(v)}.join.html_safe
     elsif value.class.respond_to?(:attribute_names)
-      attribute_table(value)
+      render :partial => "attribute_table", :locals => {:model => value}
     elsif value.kind_of?(DateTime)
       time_tag(value) + " (" + time_ago_in_words(value) + " ago)"
     elsif value.kind_of?(URI)
@@ -22,16 +22,6 @@ module AtdisHelper
       h(value)
     else
       h(value.inspect)
-    end
-  end
-
-  def attribute_table(model)
-    content_tag(:table, :class => "scraper_fields") do
-      model.class.attribute_names.map do |name|
-        content_tag(:tr) do
-          content_tag(:td, h(name), :class => "field") + content_tag(:td, attribute_value(model.attributes[name]))
-        end
-      end.join.html_safe
     end
   end
 end
