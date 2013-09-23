@@ -66,7 +66,7 @@ module AtdisHelper
             end
             t
           end.join(" ").html_safe
-          content_tag(:td, content_tag(:pre, h(MultiJson.dump(attr, :pretty => true)))) +
+          content_tag(:td, content_tag(:pre, h(truncate(MultiJson.dump(attr, :pretty => true), :length => 500)))) +
             content_tag(:td, error_html)
         end
       end.join.html_safe
