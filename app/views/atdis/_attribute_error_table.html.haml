@@ -5,7 +5,8 @@
   - model.json_errors.map do |attr, errors|
     %tr
       %td
-        %pre= truncate(MultiJson.dump(attr, :pretty => true), :length => 500)
+        - if attr
+          %pre= truncate(MultiJson.dump(attr, :pretty => true), :length => 500)
       %td
         - errors.each do |e|
           %span.highlight= e.message
