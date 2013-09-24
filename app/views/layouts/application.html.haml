@@ -32,8 +32,7 @@
             %h2 Email alerts of planning applications <em>near you</em>
           #statsbanner
             %p#stats
-              #{number_to_human(@alert_count).downcase} applications sent for
-              = link_to "#{@authority_count} authorities", authorities_path
+              #{number_to_human(@alert_count).downcase} applications sent across Australia
     #menu-wrapper
       .container      
         .hide= link_to "Skip navigation", "#content"
