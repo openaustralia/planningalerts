@@ -76,7 +76,7 @@
         new applications
       .stat
         you received
-        .number not yet
+        .number= EmailBatch.where("created_at > ?", 7.days.ago).sum(:no_emails)
         email alerts
       .stat
         you signed up for
