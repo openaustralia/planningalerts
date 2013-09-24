@@ -152,6 +152,8 @@ class Alert < ActiveRecord::Base
         total_no_emails += 1
       end
     end
+    EmailBatch.create!(:no_emails => total_no_emails, :no_applications => total_no_applications,
+      :no_comments => total_no_comments)
     info_logger.info "Sent #{total_no_applications} applications and #{total_no_comments} comments to #{total_no_emails} people!"
   end
   
