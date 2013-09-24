@@ -74,10 +74,11 @@
         we collected
         .number= Application.where("date_scraped > ?", 7.days.ago).count
         new applications
-      .stat
-        you received
-        .number= EmailBatch.where("created_at > ?", 7.days.ago).sum(:no_emails)
-        email alerts
+      -#
+        .stat
+          you received
+          .number= EmailBatch.where("created_at > ?", 7.days.ago).sum(:no_emails)
+          email alerts
       .stat
         you signed up for
         .number= Alert.where("created_at > ?", 7.days.ago).count
