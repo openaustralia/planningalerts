@@ -25,6 +25,20 @@
   }
 }
 
+.statbox {
+  @include span-columns(24 omega, 24);
+}
+.stat.header {
+  @include span-columns(7, 24)
+}
+.stat {
+  @include span-columns(4, 24);
+}
+
+.stat.last {
+  @include span-columns(4, 24);
+}
+
 #footer {
   .keepintouch {
     @include span-columns(8,24);

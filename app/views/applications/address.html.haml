@@ -16,6 +16,27 @@
       %li.submit
         = submit_tag "Search", :name => nil
 
+.statbox
+  .stat.header
+    %h3 This week
+  .stat
+    we collected
+    .number 1023
+    new applications
+  .stat
+    you received
+    .number 6000
+    email alerts
+  .stat
+    you signed up for
+    .number 52
+    email alerts
+  .stat.last
+    you made
+    .number 42
+    new comments
+
+
 - if @q
   - unless @other_addresses.empty?
     %p Or did you want?
@@ -66,7 +87,6 @@
       = paginated_section @applications, :previous_label => "« #{p}", :next_label => "#{n} »" do
         %dl= render :partial => "application", :collection => @applications
 - else
-  %hr
   - cache 'news', :expires_in => 1.hour do
     .news
       .blog-feed

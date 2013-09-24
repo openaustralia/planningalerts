@@ -474,3 +474,22 @@ body pre {
 td pre {
   margin: 0 0;
 }
+
+.statbox {
+  background: #eeeeee;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-top: 1em;
+  margin-bottom: 3em;
+}
+
+.stat {
+  text-align: center;
+  h3 {
+    padding-top: 2em;
+  }
+  .number {
+    color: $orange;
+    font-size: 300%;
+  }
+}
