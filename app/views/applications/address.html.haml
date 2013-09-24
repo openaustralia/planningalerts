@@ -71,19 +71,19 @@
       %h3 This week
     .stat
       we collected
-      .number 1023
+      .number= Application.where("date_scraped > ?", 7.days.ago).count
       new applications
     .stat
       you received
-      .number 6000
+      .number not yet
       email alerts
     .stat
       you signed up for
-      .number 52
+      .number= Alert.where("created_at > ?", 7.days.ago).count
       new email alerts
     .stat.last
       you made
-      .number 42
+      .number= Comment.visible.where("created_at > ?", 7.days.ago).count
       new comments
   - cache 'news', :expires_in => 1.hour do
     .news
