@@ -66,25 +66,26 @@
       = paginated_section @applications, :previous_label => "« #{p}", :next_label => "#{n} »" do
         %dl= render :partial => "application", :collection => @applications
 - else
-  .statbox
-    .stat.header
-      %h3 This week
-    .stat
-      we collected
-      .number= Application.where("date_scraped > ?", 7.days.ago).count
-      new applications
-    .stat
-      you received
-      .number not yet
-      email alerts
-    .stat
-      you signed up for
-      .number= Alert.where("created_at > ?", 7.days.ago).count
-      new email alerts
-    .stat.last
-      you made
-      .number= Comment.visible.where("created_at > ?", 7.days.ago).count
-      new comments
+  - cache 'stats', :expires_in => 1.hour do
+    .statbox
+      .stat.header
+        %h3 This week
+      .stat
+        we collected
+        .number= Application.where("date_scraped > ?", 7.days.ago).count
+        new applications
+      .stat
+        you received
+        .number not yet
+        email alerts
+      .stat
+        you signed up for
+        .number= Alert.where("created_at > ?", 7.days.ago).count
+        new email alerts
+      .stat.last
+        you made
+        .number= Comment.visible.where("created_at > ?", 7.days.ago).count
+        new comments
   - cache 'news', :expires_in => 1.hour do
     .news
       .blog-feed
