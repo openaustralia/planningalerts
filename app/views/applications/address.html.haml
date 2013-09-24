@@ -68,25 +68,29 @@
 - else
   - cache 'stats', :expires_in => 1.hour do
     .statbox
-      .stat.header
+      .stat-header
         %h3 This week
-      .stat
-        we collected
-        .number= Application.where("date_scraped > ?", 7.days.ago).count
-        new applications
-      -#
+      = link_to applications_path do
         .stat
-          you received
-          .number= EmailBatch.where("created_at > ?", 7.days.ago).sum(:no_emails)
-          email alerts
-      .stat
-        you signed up for
-        .number= Alert.where("created_at > ?", 7.days.ago).count
-        new email alerts
-      .stat.last
-        you made
-        .number= Comment.visible.where("created_at > ?", 7.days.ago).count
-        new comments
+          we collected
+          .number= Application.where("date_scraped > ?", 7.days.ago).count
+          new applications
+      -#
+        = link_to new_alert_path do
+          .stat
+            you received
+            .number= EmailBatch.where("created_at > ?", 7.days.ago).sum(:no_emails)
+            email alerts
+      = link_to new_alert_path do
+        .stat
+          you signed up for
+          .number= Alert.where("created_at > ?", 7.days.ago).count
+          new email alerts
+      = link_to comments_path do
+        .stat.last
+          you made
+          .number= Comment.visible.where("created_at > ?", 7.days.ago).count
+          new comments
   - cache 'news', :expires_in => 1.hour do
     .news
       .blog-feed

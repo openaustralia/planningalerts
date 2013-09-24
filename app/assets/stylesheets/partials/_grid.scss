@@ -28,7 +28,7 @@
 .statbox {
   @include span-columns(24 omega, 24);
 }
-.stat.header {
+.stat-header {
   @include span-columns(7, 24)
 }
 .stat {
