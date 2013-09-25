@@ -45,8 +45,8 @@
           %p= on_notice_text(@application)
         %p
           All the information you provide in your comment below will be sent to
-          <strong>#{@application.authority.full_name}</strong> and will influence whether the application
-          is approved or not. The text of your comment and your name will be public.
+          <strong>#{@application.authority.full_name}</strong> where it will be taken into account and may
+          influence whether the application is approved or not. The text of your comment and your name will be public.
         %p
           If you have made a donation to a Councillor and/or gift to a Councillor or Council employee you may
           #{link_to("need to disclose this", faq_path(:anchor => "disclosure", :comment => true))}.
