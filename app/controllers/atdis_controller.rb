@@ -21,7 +21,7 @@ class AtdisController < ApplicationController
       else
         page = ATDIS::Page.read_url(@url)
       end
-      @page = page
+      @page_object = page
     end
   end
 
