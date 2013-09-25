@@ -44,6 +44,13 @@
       %li.string
         = label_tag 'url', 'ATDIS Feed URL'
         = url_field_tag 'url', @url, :placeholder => "http://www.council.nsw.gov.au/atdis/1.0/applications.json"
+
+  %fieldset.inputs.optional
+    %ol
+      %li#feed_page_input.number.input.required.numeric.stringish
+        = label_tag 'page', "Page Number"
+        = number_field_tag 'page', @page, :id => "page_no"
+
   %fieldset.actions
     %ol
       %li
@@ -51,6 +58,10 @@
 
 - if @page_object
   %h3 Test Results
+  %p
+    URL for this page:
+    = link_to @page_object.url, @page_object.url
+
   %ul
     %li
       L1 used:
@@ -70,11 +81,11 @@
       Also, to check that the whole feed is working you need to check that the other pages are working. Use the buttons below to test other pages.
     %p
       - if @page_object.previous_url
-        = link_to "Test previous page", {:url => @page_object.previous_url}, :class => "btn"
+        = link_to "Test previous page", {:url => @feed.base_url, :page => @page_object.previous_page_no}, :class => "btn"
       - else
         %span.btn.disabled Test previous page
       - if @page_object.next_url
-        = link_to "Test next page", {:url => @page_object.next_url}, :class => "btn"
+        = link_to "Test next page", {:url => @feed.base_url, :page => @page_object.next_page_no}, :class => "btn"
       - else
         %span.btn.disabled Test next page
 

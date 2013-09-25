@@ -1,34 +1,40 @@
 class AtdisController < ApplicationController
   def test
     @url = params[:url]
+    @page = (params[:page] || "1").to_i
+
     if !@url.blank?
+      @feed = ATDIS::Feed.new(@url)
+      feed_options = {:page => @page}
+      feed_options.delete(:page) if feed_options[:page] == 1
+
       u = URI.parse(@url)
       u2 = URI.parse(atdis_feed_url(:number => 1))
       p = Rails.application.routes.recognize_path(u.path)
       # In development we don't have a multithreaded web server so we have to fake the serving of the data
       # This is icky. Make this less icky.
       if Rails.env.development? && u.host == u2.host && u.port == u2.port && p[:controller] == "atdis" && p[:action] == "feed"
-        number = p[:number].to_i
-        if u.query.nil? || u.query == "page=1"
-          page = 1
-        elsif u.query == "page=2"
-          page = 2
+        file = example_path(p[:number].to_i, @page)
+        if File.exists?(file)
+          page = ATDIS::Page.read_json(File.read(file))
+          page.url = @feed.url(feed_options)
+        else
+          page = nil
         end
-        file = example_path(number, page)
-        j = File.read(file)
-        page = ATDIS::Page.read_json(j)
-        page.url = @url
       else
-        page = ATDIS::Page.read_url(@url)
+        page = @feed.applications(feed_options)
       end
       @page_object = page
     end
   end
 
   def feed
-    page = (params[:page] || "1").to_i
-    number = params[:number].to_i
-    render :file  => example_path(number, page), :content_type => "text/javascript", :layout => false
+    file = example_path(params[:number].to_i, (params[:page] || "1").to_i)
+    if File.exists?(file)
+      render :file  => file, :content_type => "text/javascript", :layout => false
+    else
+      render :text => "not available", :status => 404
+    end
   end
 
   def specification

@@ -52,8 +52,11 @@ a.btn:hover {
   .inline-errors {
     color: $orange;
   }
-  li.string input, li.email input {
+  li.string input, li.email input, li.number input {
     font-size: 1.3em;
+  }
+  li.number input {
+    width: 3em;
   }
 }
 
