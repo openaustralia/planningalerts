@@ -38,7 +38,7 @@
     = link_to "Example with invalid json", atdis_test_path(:url => atdis_feed_url(:number => 5))
     (<strong>#{link_to "view source", atdis_feed_url(:number => 5)}</strong>)
 
-%form.formtastic{:action => url_for({}), :method => "get"}
+%form.formtastic{:action => url_for({}), :method => :post}
   %fieldset.inputs
     %ol
       %li.string
@@ -84,11 +84,11 @@
       Also, to check that the whole feed is working you need to check that the other pages are working. Use the buttons below to test other pages.
     %p
       - if @page_object.previous_url
-        = link_to "Test previous page", {:url => @feed.base_url, :page => @page_object.previous_page_no, :postcode => @postcode}, :class => "btn"
+        = link_to "Test previous page", {:url => @page_object.previous_url}, :class => "btn"
       - else
         %span.btn.disabled Test previous page
       - if @page_object.next_url
-        = link_to "Test next page", {:url => @feed.base_url, :page => @page_object.next_page_no, :postcode => @postcode}, :class => "btn"
+        = link_to "Test next page", {:url => @page_object.next_url}, :class => "btn"
       - else
         %span.btn.disabled Test next page
 

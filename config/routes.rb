@@ -65,6 +65,7 @@ PlanningalertsApp::Application.routes.draw do
 
   namespace :atdis do
     get :test
+    post :test, :action => 'test_redirect'
     get 'feed/:number/atdis/1.0/applications.json', :action => 'feed', :as => :feed
     get :specification
   end
