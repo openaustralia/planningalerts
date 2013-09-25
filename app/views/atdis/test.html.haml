@@ -38,26 +38,15 @@
     = link_to "Example with invalid json", atdis_test_path(:url => atdis_feed_url(:number => 5))
     (<strong>#{link_to "view source", atdis_feed_url(:number => 5)}</strong>)
 
-%form.formtastic{:action => url_for({}), :method => :post}
-  %fieldset.inputs
-    %ol
-      %li.string
-        = label_tag 'url', 'ATDIS Base URL'
-        = url_field_tag 'url', @url, :placeholder => "http://www.council.nsw.gov.au/atdis/1.0/applications.json"
-  %fieldset.inputs.optional
-    %ol
-      %li.number.input.numeric.stringish
-        = label_tag 'page', "Page Number"
-        = number_field_tag 'page', @page, :id => "page_no"
-      %li.string
-        = label_tag 'postcode', "Postcode"
-        = text_field_tag 'postcode', @postcode, :placeholder => "2000,2780"
-        %p.inline-hints Restrict results to just those in the given postcodes
-
-  %fieldset.actions
-    %ol
-      %li
-        = submit_tag "Test this page", :name => nil
+= semantic_form_for 'feed' do |f|
+  = f.inputs do
+    = f.input :url, :label => "ATDIS Base URL", :placeholder => "http://www.council.nsw.gov.au/atdis/1.0/applications.json", :input_html => {:value => @url}
+  = f.inputs do
+    = f.input :page, :label => "Page Number", :as => :number, :input_html => {:value => @page}
+    = f.input :postcode, :placeholder => "2000,2780", :required => false, :hint => "Restrict results to just those in the given postcodes",
+      :input_html => {:value => @postcode}
+  = f.actions do
+    = f.action :submit, :label => "Test"
 
 - if @page_object
   %h3 Test Results
