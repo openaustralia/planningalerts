@@ -2,11 +2,13 @@ class AtdisController < ApplicationController
   def test
     @url = params[:url]
     @page = (params[:page] || "1").to_i
+    @postcode = params[:postcode]
 
     if !@url.blank?
       @feed = ATDIS::Feed.new(@url)
       feed_options = {:page => @page}
       feed_options.delete(:page) if feed_options[:page] == 1
+      feed_options[:postcode] = @postcode unless @postcode.blank?
 
       u = URI.parse(@url)
       u2 = URI.parse(atdis_feed_url(:number => 1))
