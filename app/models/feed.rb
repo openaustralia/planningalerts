@@ -8,7 +8,7 @@ class Feed
 
   def initialize(options = {})
     @base_url = options[:base_url]
-    @page = options[:page]
+    @page = options[:page] || 1
     @postcode = options[:postcode]
   end
 
