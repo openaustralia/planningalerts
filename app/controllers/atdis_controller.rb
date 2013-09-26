@@ -1,14 +1,14 @@
 class AtdisController < ApplicationController
   def test
-    @page = 1
+    page_no = 1
 
     if !params[:url].blank?
       feed_options = ATDIS::Feed.options_from_url(params[:url])
       base_url = ATDIS::Feed.base_url_from_url(params[:url])
 
-      @page = (feed_options[:page] || "1").to_i
-      @postcode = feed_options[:postcode]
-      @feed = Feed.new(:base_url => base_url, :page => @page, :postcode => @postcode)
+      page_no = (feed_options[:page] || "1").to_i
+      postcode = feed_options[:postcode]
+      @feed = Feed.new(:base_url => base_url, :page => page_no, :postcode => postcode)
       feed = ATDIS::Feed.new(base_url)
 
       u = URI.parse(base_url)
@@ -18,7 +18,7 @@ class AtdisController < ApplicationController
       if Rails.env.development? && u.host == u2.host && u.port == u2.port
         p = Rails.application.routes.recognize_path(u.path)
         if p[:controller] == "atdis" && p[:action] == "feed"
-          file = example_path(p[:number].to_i, @page)
+          file = example_path(p[:number].to_i, page_no)
           if File.exists?(file)
             page = ATDIS::Page.read_json(File.read(file))
             page.url = feed.url(feed_options)
