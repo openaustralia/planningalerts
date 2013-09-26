@@ -31,7 +31,7 @@ class Feed
     # Assume if the url is local it's actually for one of the test data sets. We could be more careful but
     # there is little point.
     if Rails.env.development? && u.host == "localhost"
-      file = example_path(Rails.application.routes.recognize_path(u.path)[:number].to_i, page)
+      file = Feed.example_path(Rails.application.routes.recognize_path(u.path)[:number].to_i, page)
       if File.exists?(file)
         page = ATDIS::Page.read_json(File.read(file))
         page.url = url
@@ -48,11 +48,11 @@ class Feed
     false
   end
 
-  private
-
-  def example_path(number, page)
+  def Feed.example_path(number, page)
     Rails.root.join("spec/atdis_json_examples/example#{number}_page#{page}.json")
   end
+
+  private
 
   def feed_options
     options = {}

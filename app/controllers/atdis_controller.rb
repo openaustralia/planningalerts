@@ -33,7 +33,7 @@ class AtdisController < ApplicationController
   end
 
   def feed
-    file = example_path(params[:number].to_i, (params[:page] || "1").to_i)
+    file = Feed.example_path(params[:number].to_i, (params[:page] || "1").to_i)
     if File.exists?(file)
       render :file  => file, :content_type => "text/javascript", :layout => false
     else
