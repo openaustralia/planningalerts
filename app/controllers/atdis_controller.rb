@@ -17,6 +17,7 @@ class AtdisController < ApplicationController
           page = ATDIS::Page.read_json(File.read(file))
           page.url = @feed.url
         else
+          @error = "That example data does not exist"
           page = nil
         end
       else
