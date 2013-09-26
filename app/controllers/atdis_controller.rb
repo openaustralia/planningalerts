@@ -7,19 +7,15 @@ class AtdisController < ApplicationController
       @feed = Feed.new(:base_url => base_url, :page => feed_options[:page], :postcode => feed_options[:postcode])
 
       u = URI.parse(@feed.base_url)
-      u2 = URI.parse(atdis_feed_url(:number => 1))
       # In development we don't have a multithreaded web server so we have to fake the serving of the data
-      # This is icky. Make this less icky.
-      if Rails.env.development? && u.host == u2.host && u.port == u2.port
+      # Assume if the url is local it's actually for one of the test data sets. We could be more careful but
+      # there is little point.
+      if Rails.env.development? && u.host == "localhost"
         p = Rails.application.routes.recognize_path(u.path)
-        if p[:controller] == "atdis" && p[:action] == "feed"
-          file = example_path(p[:number].to_i, @feed.page)
-          if File.exists?(file)
-            page = ATDIS::Page.read_json(File.read(file))
-            page.url = @feed.url
-          else
-            page = nil
-          end
+        file = example_path(p[:number].to_i, @feed.page)
+        if File.exists?(file)
+          page = ATDIS::Page.read_json(File.read(file))
+          page.url = @feed.url
         else
           page = nil
         end
