@@ -37,16 +37,4 @@ class AtdisController < ApplicationController
 
   def specification
   end
-
-  private
-
-  def extract_date(params, prefix)
-    v1 = params["#{prefix}(1i)"]
-    v2 = params["#{prefix}(2i)"]
-    v3 = params["#{prefix}(3i)"]
-    if v1.present? && v2.present? && v3.present?
-      Date.new(v1.to_i, v2.to_i, v3.to_i)
-    end
-  end
-
 end
