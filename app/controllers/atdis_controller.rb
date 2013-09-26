@@ -1,7 +1,5 @@
 class AtdisController < ApplicationController
   def test
-    page_no = 1
-
     if !params[:url].blank?
       feed_options = ATDIS::Feed.options_from_url(params[:url])
       base_url = ATDIS::Feed.base_url_from_url(params[:url])
