@@ -141,4 +141,9 @@ form.donate {
   }
 }
 
+// Override default styling to redisplay labels for date fields
+.formtastic .date legend label {
+  display: block;
+}
+
 

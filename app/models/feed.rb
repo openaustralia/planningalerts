@@ -5,18 +5,20 @@ class Feed
   extend ActiveModel::Naming
   include ActiveModel::Conversion
 
-  attr_reader :base_url, :page, :postcode
+  attr_reader :base_url, :page, :postcode, :lodgement_date_start, :lodgement_date_end
 
   def initialize(options = {})
     @base_url = options[:base_url]
     @page = options[:page] || 1
     @postcode = options[:postcode]
+    @lodgement_date_start = options[:lodgement_date_start]
+    @lodgement_date_end = options[:lodgement_date_end]
   end
 
   def self.create_from_url(url)
     feed_options = ATDIS::Feed.options_from_url(url)
     base_url = ATDIS::Feed.base_url_from_url(url)
-    Feed.new(:base_url => base_url, :page => feed_options[:page], :postcode => feed_options[:postcode])
+    Feed.new(feed_options.merge(:base_url => base_url))
   end
 
   def url
@@ -56,6 +58,8 @@ class Feed
     options = {}
     options[:page] = page if page != 1
     options[:postcode] = postcode if postcode
+    options[:lodgement_date_start] = lodgement_date_start if lodgement_date_start
+    options[:lodgement_date_end] = lodgement_date_end if lodgement_date_end
     options
   end
 end
