@@ -12,6 +12,22 @@ class Feed
     @postcode = options[:postcode]
   end
 
+  def url
+    f = ATDIS::Feed.new(base_url)
+    options = {}
+    options[:page] = page if page != 1
+    options[:postcode] = postcode if postcode
+    f.url(options)
+  end
+
+  def applications
+    f = ATDIS::Feed.new(base_url)
+    options = {}
+    options[:page] = page if page != 1
+    options[:postcode] = postcode if postcode
+    f.applications(options)    
+  end
+
   def persisted?
     false
   end

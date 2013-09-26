@@ -5,7 +5,6 @@ class AtdisController < ApplicationController
       base_url = ATDIS::Feed.base_url_from_url(params[:url])
 
       @feed = Feed.new(:base_url => base_url, :page => feed_options[:page], :postcode => feed_options[:postcode])
-      feed = ATDIS::Feed.new(@feed.base_url)
 
       u = URI.parse(@feed.base_url)
       u2 = URI.parse(atdis_feed_url(:number => 1))
@@ -17,7 +16,7 @@ class AtdisController < ApplicationController
           file = example_path(p[:number].to_i, @feed.page)
           if File.exists?(file)
             page = ATDIS::Page.read_json(File.read(file))
-            page.url = feed.url(feed_options)
+            page.url = @feed.url
           else
             page = nil
           end
@@ -26,7 +25,7 @@ class AtdisController < ApplicationController
         end
       else
         begin
-          page = feed.applications(feed_options)
+          page = @feed.applications
         rescue RestClient::ResourceNotFound => e
           # TODO Show some kind of error message
           @error = "Could not load data - #{e}"
