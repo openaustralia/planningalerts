@@ -24,7 +24,22 @@ class Feed
   end
 
   def applications
-    ATDIS::Feed.new(base_url).applications(feed_options)    
+    u = URI.parse(base_url)
+    # In development we don't have a multithreaded web server so we have to fake the serving of the data
+    # Assume if the url is local it's actually for one of the test data sets. We could be more careful but
+    # there is little point.
+    if Rails.env.development? && u.host == "localhost"
+      file = example_path(Rails.application.routes.recognize_path(u.path)[:number].to_i, page)
+      if File.exists?(file)
+        page = ATDIS::Page.read_json(File.read(file))
+        page.url = url
+        page
+      else
+        raise RestClient::ResourceNotFound
+      end
+    else
+      ATDIS::Feed.new(base_url).applications(feed_options)    
+    end
   end
 
   def persisted?
@@ -32,6 +47,10 @@ class Feed
   end
 
   private
+
+  def example_path(number, page)
+    Rails.root.join("spec/atdis_json_examples/example#{number}_page#{page}.json")
+  end
 
   def feed_options
     options = {}

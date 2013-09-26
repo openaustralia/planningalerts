@@ -2,25 +2,13 @@ class AtdisController < ApplicationController
   def test
     if !params[:url].blank?
       @feed = Feed.create_from_url(params[:url])
-      u = URI.parse(@feed.base_url)
-      # In development we don't have a multithreaded web server so we have to fake the serving of the data
-      # Assume if the url is local it's actually for one of the test data sets. We could be more careful but
-      # there is little point.
-      if Rails.env.development? && u.host == "localhost"
-        file = example_path(Rails.application.routes.recognize_path(u.path)[:number].to_i, @feed.page)
-        if File.exists?(file)
-          @page = ATDIS::Page.read_json(File.read(file))
-          @page.url = @feed.url
-        else
-          @error = "That example data does not exist"
-        end
-      else
-        begin
-          @page = @feed.applications
-        rescue RestClient::ResourceNotFound => e
-          @error = "Could not load data - #{e}"
-        end
+      begin
+        @page = @feed.applications
+      rescue RestClient::ResourceNotFound => e
+        @error = "Could not load data - #{e}"
       end
+    else
+      @feed = Feed.new
     end
   end
 
@@ -45,9 +33,4 @@ class AtdisController < ApplicationController
   def specification
   end
 
-  private
-
-  def example_path(number, page)
-    Rails.root.join("spec/atdis_json_examples/example#{number}_page#{page}.json")
-  end
 end
