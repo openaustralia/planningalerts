@@ -13,22 +13,19 @@ class AtdisController < ApplicationController
       if Rails.env.development? && u.host == "localhost"
         file = example_path(Rails.application.routes.recognize_path(u.path)[:number].to_i, @feed.page)
         if File.exists?(file)
-          page = ATDIS::Page.read_json(File.read(file))
-          page.url = @feed.url
+          @page_object = ATDIS::Page.read_json(File.read(file))
+          @page_object.url = @feed.url
         else
           @error = "That example data does not exist"
-          page = nil
         end
       else
         begin
-          page = @feed.applications
+          @page_object = @feed.applications
         rescue RestClient::ResourceNotFound => e
           # TODO Show some kind of error message
           @error = "Could not load data - #{e}"
-          page = nil
         end
       end
-      @page_object = page
     end
   end
 
