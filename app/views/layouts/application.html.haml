@@ -100,6 +100,7 @@
           %script(type="text/javascript")
             document.getElementById('#{@set_focus_control}').focus();
     = render "shared/analytics"
+    = javascript_include_tag "application"
     :javascript
       var uservoiceOptions = {key: 'planningalerts', host: 'planningalerts.uservoice.com', forum: '49635', alignment: 'right', background_color:'#F4F322', text_color: 'black',
       hover_color: '#FF8C00', lang: 'en', showTab: true};

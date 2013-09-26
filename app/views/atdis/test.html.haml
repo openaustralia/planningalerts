@@ -47,10 +47,10 @@
   = f.inputs do
     = f.input :page, :label => "Page Number", :as => :number, :min => 1
     = f.input :postcode, :placeholder => "2000,2780", :required => false, :hint => "Restrict results to those applications in the given postcodes"
-    = f.input :lodgement_date_start, :as => :date, :required => false
-    = f.input :lodgement_date_end, :as => :date, :required => false, :hint => "Restrict results to those applications lodged between these dates"
-    = f.input :last_modified_date_start, :as => :date, :required => false
-    = f.input :last_modified_date_end, :as => :date, :required => false, :hint => "Restrict results to those applications modified between these dates"
+    = f.input :lodgement_date_start, :required => false
+    = f.input :lodgement_date_end, :required => false, :hint => "Restrict results to those applications lodged between these dates"
+    = f.input :last_modified_date_start, :required => false
+    = f.input :last_modified_date_end, :required => false, :hint => "Restrict results to those applications modified between these dates"
   = f.actions do
     = f.action :submit, :label => "Test"
 
