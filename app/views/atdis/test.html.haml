@@ -48,7 +48,7 @@
     = f.input :page, :label => "Page Number", :as => :number
     = f.input :postcode, :placeholder => "2000,2780", :required => false, :hint => "Restrict results to just those in the given postcodes"
     = f.input :lodgement_date_start, :as => :date, :required => false
-    = f.input :lodgement_date_end, :as => :date, :required => false
+    = f.input :lodgement_date_end, :as => :date, :required => false, :hint => "Optionally only return results lodged between these dates"
   = f.actions do
     = f.action :submit, :label => "Test"
 
