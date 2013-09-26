@@ -41,13 +41,12 @@
 - if @error
   %p.error= @error
 
-= semantic_form_for 'feed' do |f|
+= semantic_form_for @feed, :url => atdis_test_path do |f|
   = f.inputs do
-    = f.input :base_url, :label => "ATDIS Base URL", :placeholder => "http://www.council.nsw.gov.au/atdis/1.0/applications.json", :input_html => {:value => @url}
+    = f.input :base_url, :label => "ATDIS Base URL", :placeholder => "http://www.council.nsw.gov.au/atdis/1.0/applications.json"
   = f.inputs do
-    = f.input :page, :label => "Page Number", :as => :number, :input_html => {:value => @page}
-    = f.input :postcode, :placeholder => "2000,2780", :required => false, :hint => "Restrict results to just those in the given postcodes",
-      :input_html => {:value => @postcode}
+    = f.input :page, :label => "Page Number", :as => :number
+    = f.input :postcode, :placeholder => "2000,2780", :required => false, :hint => "Restrict results to just those in the given postcodes"
   = f.actions do
     = f.action :submit, :label => "Test"
 

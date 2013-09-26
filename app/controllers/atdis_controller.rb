@@ -8,6 +8,7 @@ class AtdisController < ApplicationController
 
       @page = (feed_options[:page] || "1").to_i
       @postcode = feed_options[:postcode]
+      @feed = Feed.new(:base_url => @url, :page => @page, :postcode => @postcode)
       feed = ATDIS::Feed.new(@url)
 
       u = URI.parse(@url)
