@@ -4,14 +4,14 @@ class AtdisController < ApplicationController
 
     if !params[:url].blank?
       feed_options = ATDIS::Feed.options_from_url(params[:url])
-      @url = ATDIS::Feed.base_url_from_url(params[:url])
+      base_url = ATDIS::Feed.base_url_from_url(params[:url])
 
       @page = (feed_options[:page] || "1").to_i
       @postcode = feed_options[:postcode]
-      @feed = Feed.new(:base_url => @url, :page => @page, :postcode => @postcode)
-      feed = ATDIS::Feed.new(@url)
+      @feed = Feed.new(:base_url => base_url, :page => @page, :postcode => @postcode)
+      feed = ATDIS::Feed.new(base_url)
 
-      u = URI.parse(@url)
+      u = URI.parse(base_url)
       u2 = URI.parse(atdis_feed_url(:number => 1))
       # In development we don't have a multithreaded web server so we have to fake the serving of the data
       # This is icky. Make this less icky.
