@@ -12,6 +12,7 @@ end
  
 # jQuery is the default JavaScript library in Rails 3.1
 gem 'jquery-rails'
+gem "jquery-ui-rails"
 
 gem "capistrano"
 gem "haml"
