@@ -14,7 +14,7 @@ class AtdisController < ApplicationController
       u2 = URI.parse(atdis_feed_url(:number => 1))
       # In development we don't have a multithreaded web server so we have to fake the serving of the data
       # This is icky. Make this less icky.
-      if Rails.env.development? && u.host == u2.host && u.port == u2.port && p[:controller] == "atdis" && p[:action] == "feed"
+      if Rails.env.development? && u.host == u2.host && u.port == u2.port
         p = Rails.application.routes.recognize_path(u.path)
         if p[:controller] == "atdis" && p[:action] == "feed"
           file = example_path(p[:number].to_i, @page)
