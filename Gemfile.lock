@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/openaustralia/atdis.git
-  revision: 5c2aa075493f1224a8e1e986e5da4530921c9b3b
+  revision: 9122c9dd4d930ad2deee1da5df5f10cc7700b888
   specs:
     atdis (0.2)
       activemodel (~> 3)
