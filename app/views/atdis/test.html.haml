@@ -2,7 +2,7 @@
 
 %h2= yield :page_title
 
-- if @page_object.nil?
+- if @page.nil?
   %p
     The
     = link_to "Application Tracking Data Interchange Specification", atdis_specification_path
@@ -50,50 +50,50 @@
   = f.actions do
     = f.action :submit, :label => "Test"
 
-- if @page_object
+- if @page
   %h3 Test Results
   %p
     URL for this page:
-    = link_to @page_object.url, @page_object.url
+    = link_to @page.url, @page.url
 
   %ul
     %li
       L1 used:
-      = yes_no(@page_object.level_used?(1))
+      = yes_no(@page.level_used?(1))
     %li
       L2 used:
-      = yes_no(@page_object.level_used?(2))
+      = yes_no(@page.level_used?(2))
     %li
       L3 used:
-      = yes_no(@page_object.level_used?(3))
+      = yes_no(@page.level_used?(3))
 
-  - if @page_object.valid?
+  - if @page.valid?
     %p
       %strong Success!
       We've not found any errors on this page. It's worth looking through the information below to see how the data is actually loaded to double check that everything is as expected.
     %p
       Also, to check that the whole feed is working you need to check that the other pages are working. Use the buttons below to test other pages.
     %p
-      - if @page_object.previous_url
-        = link_to "Test previous page", {:url => @page_object.previous_url}, :class => "btn"
+      - if @page.previous_url
+        = link_to "Test previous page", {:url => @page.previous_url}, :class => "btn"
       - else
         %span.btn.disabled Test previous page
-      - if @page_object.next_url
-        = link_to "Test next page", {:url => @page_object.next_url}, :class => "btn"
+      - if @page.next_url
+        = link_to "Test next page", {:url => @page.next_url}, :class => "btn"
       - else
         %span.btn.disabled Test next page
 
     %h3 How the applications get loaded
     %p
       Note that the field names (and some of the block level indentation) here is different than the json and this is showing all L1, L2 and L3 parameters, irrespective of whether they were actually used or not.
-    = attribute_value(@page_object.results)
+    = attribute_value(@page.results)
   - else
     %p
       %strong Errors found.
-      = link_to "This page", @page_object.url
+      = link_to "This page", @page.url
       does not validate. See the errors below.
     %h3 Errors
-    = render :partial => "attribute_error_table", :locals => {:model => @page_object}
+    = render :partial => "attribute_error_table", :locals => {:model => @page}
 
 %h3 About this service
 %p
