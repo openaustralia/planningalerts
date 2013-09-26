@@ -1,4 +1,5 @@
-# Only used in the ATDIS test harness.
+# Only used in the ATDIS test harness. It acts as a shim between
+# ActiveModel and ATDIS::Feed
 # TODO: Should probably have a better name that is less generic
 class Feed
   extend ActiveModel::Naming
@@ -13,22 +14,23 @@ class Feed
   end
 
   def url
-    f = ATDIS::Feed.new(base_url)
-    options = {}
-    options[:page] = page if page != 1
-    options[:postcode] = postcode if postcode
-    f.url(options)
+    ATDIS::Feed.new(base_url).url(feed_options)
   end
 
   def applications
-    f = ATDIS::Feed.new(base_url)
-    options = {}
-    options[:page] = page if page != 1
-    options[:postcode] = postcode if postcode
-    f.applications(options)    
+    ATDIS::Feed.new(base_url).applications(feed_options)    
   end
 
   def persisted?
     false
+  end
+
+  private
+
+  def feed_options
+    options = {}
+    options[:page] = page if page != 1
+    options[:postcode] = postcode if postcode
+    options
   end
 end
