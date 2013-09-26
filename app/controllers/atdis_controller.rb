@@ -22,7 +22,6 @@ class AtdisController < ApplicationController
         begin
           @page = @feed.applications
         rescue RestClient::ResourceNotFound => e
-          # TODO Show some kind of error message
           @error = "Could not load data - #{e}"
         end
       end
