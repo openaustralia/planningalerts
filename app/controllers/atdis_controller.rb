@@ -28,7 +28,13 @@ class AtdisController < ApplicationController
           page = nil
         end
       else
-        page = feed.applications(feed_options)
+        begin
+          page = feed.applications(feed_options)
+        rescue RestClient::ResourceNotFound => e
+          # TODO Show some kind of error message
+          @error = "Could not load data - #{e}"
+          page = nil
+        end
       end
       @page_object = page
     end
