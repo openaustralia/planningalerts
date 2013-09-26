@@ -42,7 +42,7 @@ class AtdisController < ApplicationController
 
   # The job here is to take ugly posted parameters and redirect to a much simpler url
   def test_redirect
-    feed = ATDIS::Feed.new(params[:feed][:url])
+    feed = ATDIS::Feed.new(params[:feed][:base_url])
     options = {}
     options[:page] = params[:feed][:page] if params[:feed][:page].present? && params[:feed][:page] != "1"
     options[:postcode] = params[:feed][:postcode] if params[:feed][:postcode].present?
