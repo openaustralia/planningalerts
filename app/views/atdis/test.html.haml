@@ -91,7 +91,7 @@
   - else
     %p
       %strong Errors found.
-      = link_to "This page", @url
+      = link_to "This page", @page_object.url
       does not validate. See the errors below.
     %h3 Errors
     = render :partial => "attribute_error_table", :locals => {:model => @page_object}
