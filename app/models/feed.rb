@@ -13,6 +13,12 @@ class Feed
     @postcode = options[:postcode]
   end
 
+  def self.create_from_url(url)
+    feed_options = ATDIS::Feed.options_from_url(url)
+    base_url = ATDIS::Feed.base_url_from_url(url)
+    Feed.new(:base_url => base_url, :page => feed_options[:page], :postcode => feed_options[:postcode])
+  end
+
   def url
     ATDIS::Feed.new(base_url).url(feed_options)
   end
