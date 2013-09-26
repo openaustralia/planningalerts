@@ -19,7 +19,9 @@ class AtdisController < ApplicationController
       :page => params[:feed][:page].to_i,
       :postcode => (params[:feed][:postcode] if params[:feed][:postcode].present?),
       :lodgement_date_start => extract_date(params[:feed], "lodgement_date_start"),
-      :lodgement_date_end => extract_date(params[:feed], "lodgement_date_end")
+      :lodgement_date_end => extract_date(params[:feed], "lodgement_date_end"),
+      :last_modified_date_start => extract_date(params[:feed], "last_modified_date_start"),
+      :last_modified_date_end => extract_date(params[:feed], "last_modified_date_end")
     )
     redirect_to atdis_test_url(:url => feed.url)
   end

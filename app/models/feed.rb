@@ -5,7 +5,8 @@ class Feed
   extend ActiveModel::Naming
   include ActiveModel::Conversion
 
-  attr_reader :base_url, :page, :postcode, :lodgement_date_start, :lodgement_date_end
+  attr_reader :base_url, :page, :postcode, :lodgement_date_start, :lodgement_date_end,
+    :last_modified_date_start, :last_modified_date_end
 
   def initialize(options = {})
     @base_url = options[:base_url]
@@ -13,6 +14,8 @@ class Feed
     @postcode = options[:postcode]
     @lodgement_date_start = options[:lodgement_date_start]
     @lodgement_date_end = options[:lodgement_date_end]
+    @last_modified_date_start = options[:last_modified_date_start]
+    @last_modified_date_end = options[:last_modified_date_end]
   end
 
   def self.create_from_url(url)
@@ -60,6 +63,8 @@ class Feed
     options[:postcode] = postcode if postcode
     options[:lodgement_date_start] = lodgement_date_start if lodgement_date_start
     options[:lodgement_date_end] = lodgement_date_end if lodgement_date_end
+    options[:last_modified_date_start] = last_modified_date_start if last_modified_date_start
+    options[:last_modified_date_end] = last_modified_date_end if last_modified_date_end
     options
   end
 end
