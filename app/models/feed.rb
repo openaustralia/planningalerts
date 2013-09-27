@@ -4,11 +4,15 @@
 class Feed
   extend ActiveModel::Naming
   include ActiveModel::Conversion
+  include ActiveModel::Validations
 
   attr_reader :base_url, :page, :postcode, :lodgement_date_start, :lodgement_date_end,
     :last_modified_date_start, :last_modified_date_end
   attr_reader :lodgement_date_start_before_type_cast, :lodgement_date_end_before_type_cast,
     :last_modified_date_start_before_type_cast, :last_modified_date_end_before_type_cast
+
+  validates :lodgement_date_start, :lodgement_date_end,
+    :last_modified_date_start, :last_modified_date_end, :date => true, :allow_blank => true
 
   def initialize(options = {})
     base_url = options[:base_url]
@@ -20,7 +24,7 @@ class Feed
     last_modified_date_end = options[:last_modified_date_end]
   end
 
-  def base_url(value)
+  def base_url=(value)
     @base_url = value
   end
 
