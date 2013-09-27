@@ -19,6 +19,7 @@ class Feed
   attr_reader :base_url, :page, :postcode, :lodgement_date_start, :lodgement_date_end,
     :last_modified_date_start, :last_modified_date_end
 
+  validates :base_url, :url => true
   validates :lodgement_date_start, :lodgement_date_end,
     :last_modified_date_start, :last_modified_date_end, :date => true, :allow_blank => true
 
