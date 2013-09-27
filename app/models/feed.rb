@@ -10,12 +10,12 @@ class Feed
 
   def initialize(options = {})
     @base_url = options[:base_url]
-    @page = options[:page] || 1
-    @postcode = options[:postcode]
-    @lodgement_date_start = options[:lodgement_date_start]
-    @lodgement_date_end = options[:lodgement_date_end]
-    @last_modified_date_start = options[:last_modified_date_start]
-    @last_modified_date_end = options[:last_modified_date_end]
+    @page = options[:page] ? options[:page].to_i : 1
+    @postcode = options[:postcode] if options[:postcode].present?
+    @lodgement_date_start = cast_to_date(options[:lodgement_date_start])
+    @lodgement_date_end = cast_to_date(options[:lodgement_date_end])
+    @last_modified_date_start = cast_to_date(options[:last_modified_date_start])
+    @last_modified_date_end = cast_to_date(options[:last_modified_date_end])
   end
 
   def self.create_from_url(url)
@@ -56,6 +56,14 @@ class Feed
   end
 
   private
+
+  def cast_to_date(value)
+    if value.kind_of?(Date)
+      value
+    elsif value.present?
+      Date.parse(value)
+    end
+  end
 
   def feed_options
     options = {}

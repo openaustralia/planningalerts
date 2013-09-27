@@ -16,12 +16,12 @@ class AtdisController < ApplicationController
   def test_redirect
     feed = Feed.new(
       :base_url => params[:feed][:base_url],
-      :page => params[:feed][:page].to_i,
-      :postcode => (params[:feed][:postcode] if params[:feed][:postcode].present?),
-      :lodgement_date_start => (Date.parse(params[:feed][:lodgement_date_start]) if params[:feed][:lodgement_date_start].present?),
-      :lodgement_date_end => (Date.parse(params[:feed][:lodgement_date_end]) if params[:feed][:lodgement_date_end].present?),
-      :last_modified_date_start => (Date.parse(params[:feed][:last_modified_date_start]) if params[:feed][:last_modified_date_start].present?),
-      :last_modified_date_end => (Date.parse(params[:feed][:last_modified_date_end]) if params[:feed][:last_modified_date_end].present?)
+      :page => params[:feed][:page],
+      :postcode => params[:feed][:postcode],
+      :lodgement_date_start => params[:feed][:lodgement_date_start],
+      :lodgement_date_end => params[:feed][:lodgement_date_end],
+      :last_modified_date_start => params[:feed][:last_modified_date_start],
+      :last_modified_date_end => params[:feed][:last_modified_date_end]
     )
     redirect_to atdis_test_url(:url => feed.url)
   end
