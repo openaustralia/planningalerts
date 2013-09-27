@@ -14,16 +14,12 @@ class AtdisController < ApplicationController
 
   # The job here is to take ugly posted parameters and redirect to a much simpler url
   def test_redirect
-    feed = Feed.new(
-      :base_url => params[:feed][:base_url],
-      :page => params[:feed][:page],
-      :postcode => params[:feed][:postcode],
-      :lodgement_date_start => params[:feed][:lodgement_date_start],
-      :lodgement_date_end => params[:feed][:lodgement_date_end],
-      :last_modified_date_start => params[:feed][:last_modified_date_start],
-      :last_modified_date_end => params[:feed][:last_modified_date_end]
-    )
-    redirect_to atdis_test_url(:url => feed.url)
+    @feed = Feed.new(params[:feed])
+    if @feed.valid?
+      redirect_to atdis_test_url(:url => @feed.url)
+    else
+      render "test"
+    end
   end
 
   def feed

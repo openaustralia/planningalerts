@@ -27,8 +27,16 @@ $(function() {
     }
   });
 
-  $("#feed_lodgement_date_start").datepicker("option", "maxDate", $("#feed_lodgement_date_end").datepicker("getDate"));
-  $("#feed_lodgement_date_end").datepicker("option", "minDate", $("#feed_lodgement_date_start").datepicker("getDate"));
-  $("#feed_last_modified_date_start").datepicker("option", "maxDate", $("#feed_last_modified_date_end").datepicker("getDate"));
-  $("#feed_last_modified_date_end").datepicker("option", "minDate", $("#feed_last_modified_date_start").datepicker("getDate"));
+  if ($("#feed_lodgement_date_start").datepicker("getDate") != null) {
+    $("#feed_lodgement_date_end").datepicker("option", "minDate", $("#feed_lodgement_date_start").datepicker("getDate"));
+  }
+  if ($("#feed_lodgement_date_end").datepicker("getDate") != null) {
+    $("#feed_lodgement_date_start").datepicker("option", "maxDate", $("#feed_lodgement_date_end").datepicker("getDate"));
+  }
+  if ($("#feed_last_modified_date_start").datepicker("getDate") != null) {
+    $("#feed_last_modified_date_end").datepicker("option", "minDate", $("#feed_last_modified_date_start").datepicker("getDate"));
+  }
+  if ($("#feed_last_modified_date_end").datepicker("getDate") != null) {
+    $("#feed_last_modified_date_start").datepicker("option", "maxDate", $("#feed_last_modified_date_end").datepicker("getDate"));
+  }
 })

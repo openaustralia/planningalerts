@@ -1,3 +1,13 @@
+class DateValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    begin
+      Date.parse(value)
+    rescue ArgumentError
+      record.errors.add(attribute, "is not a correctly formatted date")
+    end
+  end
+end
+
 # Only used in the ATDIS test harness. It acts as a shim between
 # ActiveModel and ATDIS::Feed
 # TODO: Should probably have a better name that is less generic
@@ -8,20 +18,18 @@ class Feed
 
   attr_reader :base_url, :page, :postcode, :lodgement_date_start, :lodgement_date_end,
     :last_modified_date_start, :last_modified_date_end
-  attr_reader :lodgement_date_start_before_type_cast, :lodgement_date_end_before_type_cast,
-    :last_modified_date_start_before_type_cast, :last_modified_date_end_before_type_cast
 
   validates :lodgement_date_start, :lodgement_date_end,
     :last_modified_date_start, :last_modified_date_end, :date => true, :allow_blank => true
 
   def initialize(options = {})
-    base_url = options[:base_url]
-    page = options[:page]
-    postcode = options[:postcode]
-    lodgement_date_start = options[:lodgement_date_start]
-    lodgement_date_end = options[:lodgement_date_end]
-    last_modified_date_start = options[:last_modified_date_start]
-    last_modified_date_end = options[:last_modified_date_end]
+    self.base_url = options[:base_url]
+    self.page = options[:page]
+    self.postcode = options[:postcode]
+    self.lodgement_date_start = options[:lodgement_date_start]
+    self.lodgement_date_end = options[:lodgement_date_end]
+    self.last_modified_date_start = options[:last_modified_date_start]
+    self.last_modified_date_end = options[:last_modified_date_end]
   end
 
   def base_url=(value)
@@ -37,23 +45,19 @@ class Feed
   end
 
   def lodgement_date_start=(value)
-    @lodgement_date_start_before_type_cast = value
-    @lodgement_date_start = cast_to_date(value)
+    @lodgement_date_start = value
   end
 
   def lodgement_date_end=(value)
-    @lodgement_date_end_before_type_cast = value
-    @lodgement_date_end = cast_to_date(value)
+    @lodgement_date_end = value
   end
 
   def last_modified_date_start=(value)
-    @last_modified_date_start_before_type_cast = value
-    @last_modified_date_start = cast_to_date(value)
+    @last_modified_date_start = value
   end
 
   def last_modified_date_end=(value)
-    @last_modified_date_end_before_type_cast = value
-    @last_modified_date_end = cast_to_date(value)
+    @last_modified_date_end = value
   end
 
   def self.create_from_url(url)
@@ -94,18 +98,6 @@ class Feed
   end
 
   private
-
-  def cast_to_date(value)
-    if value.kind_of?(Date)
-      value
-    elsif value.present?
-      begin
-        Date.parse(value)
-      rescue ArgumentError
-        nil
-      end
-    end
-  end
 
   def feed_options
     options = {}
