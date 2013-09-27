@@ -141,9 +141,35 @@ form.donate {
   }
 }
 
-// Override default styling to redisplay labels for date fields
-.formtastic .date legend label {
-  display: block;
+.formtastic {
+  fieldset.daterange {
+    legend {
+      width: 25%;
+      float: left;
+    }
+    ol {
+      display: inline-block;
+    }
+    input {
+      width: 9em;
+    }
+    li {
+      margin-right: 1em;
+      display: inline-block;
+      float: left;
+    }
+    label {
+      display: none;
+    }
+    .inline-errors {
+      margin-left: 0;
+    }
+    .error {
+      padding-top: 0;
+    }
+  }
 }
+
+
 
 
