@@ -23,41 +23,13 @@ class Feed
     :last_modified_date_start, :last_modified_date_end, :date => true, :allow_blank => true
 
   def initialize(options = {})
-    self.base_url = options[:base_url]
-    self.page = options[:page]
-    self.postcode = options[:postcode]
-    self.lodgement_date_start = options[:lodgement_date_start]
-    self.lodgement_date_end = options[:lodgement_date_end]
-    self.last_modified_date_start = options[:last_modified_date_start]
-    self.last_modified_date_end = options[:last_modified_date_end]
-  end
-
-  def base_url=(value)
-    @base_url = value
-  end
-
-  def page=(value)
-    @page = value ? value.to_i : 1
-  end
-
-  def postcode=(value)
-    @postcode = value if value.present?
-  end
-
-  def lodgement_date_start=(value)
-    @lodgement_date_start = value
-  end
-
-  def lodgement_date_end=(value)
-    @lodgement_date_end = value
-  end
-
-  def last_modified_date_start=(value)
-    @last_modified_date_start = value
-  end
-
-  def last_modified_date_end=(value)
-    @last_modified_date_end = value
+    @base_url = options[:base_url]
+    @page = options[:page] ? options[:page].to_i : 1
+    @postcode = options[:postcode] if options[:postcode].present?
+    @lodgement_date_start = options[:lodgement_date_start]
+    @lodgement_date_end = options[:lodgement_date_end]
+    @last_modified_date_start = options[:last_modified_date_start]
+    @last_modified_date_end = options[:last_modified_date_end]
   end
 
   def self.create_from_url(url)
