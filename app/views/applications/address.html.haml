@@ -75,12 +75,11 @@
           we collected
           .number= Application.where("date_scraped > ?", 7.days.ago).count
           new applications
-      -#
-        = link_to new_alert_path do
-          .stat
-            you received
-            .number= EmailBatch.where("created_at > ?", 7.days.ago).sum(:no_emails)
-            email alerts
+      = link_to new_alert_path do
+        .stat
+          you received
+          .number= EmailBatch.where("created_at > ?", 7.days.ago).sum(:no_emails)
+          email alerts
       = link_to new_alert_path do
         .stat
           you signed up for
