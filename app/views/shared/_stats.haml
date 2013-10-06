@@ -1,15 +1,20 @@
 - cache 'stats', :expires_in => 1.hour do
   .stats
     %h4 This week
-    = link_to applications_path do
-      %span.number= number_with_delimiter(Application.in_past_week.count)
-      new applications collected
-    = link_to new_alert_path do
-      %span.number= number_with_delimiter(EmailBatch.total_sent_in_past_week)
-      email alerts received
-    = link_to new_alert_path do
-      %span.number= number_with_delimiter(Alert.in_past_week.count)
-      new email alerts signed up for
-    = link_to comments_path do
-      %span.number= number_with_delimiter(Comment.visible.in_past_week.count)
-      new comments made
+    %ul
+      %li
+        = link_to applications_path do
+          %span.number= number_with_delimiter(Application.in_past_week.count)
+          new applications collected
+      %li
+        = link_to new_alert_path do
+          %span.number= number_with_delimiter(EmailBatch.total_sent_in_past_week)
+          email alerts received
+      %li
+        = link_to new_alert_path do
+          %span.number= number_with_delimiter(Alert.in_past_week.count)
+          new email alerts signed up for
+      %li
+        = link_to comments_path do
+          %span.number= number_with_delimiter(Comment.visible.in_past_week.count)
+          new comments made

@@ -420,7 +420,7 @@ form.address-search {
   margin-bottom: 1em;
 }
 
-.news, .tweets {
+.news, .tweets, .stats {
   a {
     &:link, &:visited {
       .body {
@@ -469,7 +469,7 @@ form.address-search {
     }
   }
 }
-.news {
+.news, .stats {
   border-top: 1px solid $lightest-cool-highlight;
   padding-top: 1em;
 }
@@ -587,33 +587,15 @@ td pre {
   margin: 0 0;
 }
 
-.statbox {
-  background: #eee;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  margin-top: 1em;
-  margin-bottom: 3em;
+.stats {
   a {
     text-decoration: none;
   }
-  a, a:visited {
-    color: #333;
-  }
-  .stat:hover {
-    background: #ddd;
-  }
-  .stat-header {
-    text-align: center;
-    h3 {
-      padding-top: 2em;
-    }
-  }
-  .stat {
-    text-align: center;
-    .number {
-      color: $warm-highlight;
-      font-size: 300%;
-    }
+  .number {
+    @include border-radius(.25em);
+    padding: .15em .35em;
+    background-color: $lightest-cool-highlight;
+    font-weight: bold;
   }
 }
 

@@ -9,7 +9,7 @@
   }
 
   #menu, #main, #sidebar,
-  .news, .keepintouch, .oaf {
+  .news, .stats, .keepintouch, .oaf {
     @include span-columns(6 omega);
   }
 
@@ -99,10 +99,11 @@
     @include span-columns(3 omega, 12);
   }
 
-  // news 
-  .news {
+  // news n stats
+  .news, .stats {
     @include span-columns(12 omega, 12);
   }
+
   // footer
   .keepintouch {
     @include span-columns(6, 12);
@@ -251,6 +252,13 @@
     background-color: $content-background;
   }
 
+  .news {
+    @include span-columns(12, 24);
+  }
+  .stats {
+    @include span-columns(11 omega, 24);
+  }
+
   #pano {
     @include inline-block;
     float: left;
@@ -329,18 +337,3 @@
     }
   }
 }
-
-.statbox {
-  @include span-columns(24 omega, 24);
-}
-.stat-header {
-  @include span-columns(4, 24)
-}
-.stat {
-  @include span-columns(5, 24);
-}
-
-.stat.last {
-  @include span-columns(5 omega, 24);
-}
-
