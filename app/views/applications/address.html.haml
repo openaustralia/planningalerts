@@ -73,28 +73,4 @@
 
 - else
   = render "shared/news"
-
-  - cache 'stats', :expires_in => 1.hour do
-    .statbox
-      .stat-header
-        %h3 This week
-      = link_to applications_path do
-        .stat
-          we collected
-          .number= number_with_delimiter(Application.where("date_scraped > ?", 7.days.ago).count)
-          new applications
-      = link_to new_alert_path do
-        .stat
-          you received
-          .number= number_with_delimiter(EmailBatch.where("created_at > ?", 7.days.ago).sum(:no_emails))
-          email alerts
-      = link_to new_alert_path do
-        .stat
-          you signed up for
-          .number= number_with_delimiter(Alert.where("created_at > ?", 7.days.ago).count)
-          new email alerts
-      = link_to comments_path do
-        .stat.last
-          you made
-          .number= number_with_delimiter(Comment.visible.where("created_at > ?", 7.days.ago).count)
-          new comments
+  = render "shared/stats"

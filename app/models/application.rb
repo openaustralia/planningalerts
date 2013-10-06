@@ -13,6 +13,8 @@ class Application < ActiveRecord::Base
   validates :council_reference, :uniqueness => { :scope => :authority_id }
 
   default_scope :order => "date_scraped DESC"
+
+  scope :in_past_week, where("date_scraped > ?", 7.days.ago)
   
   def date_received_can_not_be_in_the_future
     if date_received && date_received > Date.today

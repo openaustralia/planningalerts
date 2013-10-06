@@ -5,6 +5,7 @@ class Comment < ActiveRecord::Base
   
   acts_as_email_confirmable
   scope :visible, :conditions => {:confirmed => true, :hidden => false}
+  scope :in_past_week, where("created_at > ?", 7.days.ago)
   
   # Send the comment to the planning authority
   def after_confirm
