@@ -1,0 +1,5 @@
+%table.scraper_fields
+  - model.class.attribute_names.each do |name|
+    %tr
+      %td.field= name
+      %td= attribute_value(model.attributes[name])

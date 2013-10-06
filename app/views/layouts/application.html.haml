@@ -33,6 +33,8 @@
     %style(type="text/css")
       v:* { behavior:url(#default#VML);}
 
+    -# Can't move jquery out of the header because we have inlined javascript in some of the pages
+    -# that use jquery. Ugh.
     = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"
 
     = stylesheet_link_tag "placeholder_polyfill.min.css"
@@ -45,8 +47,7 @@
     .container#header
       #statsbanner
         #stats
-          #{number_to_human(@alert_count).downcase} applications sent for
-          = link_to "#{@authority_count} authorities", authorities_path
+          #{number_to_human(@alert_count).downcase} applications sent across Australia
       %h1= link_to 'Planning Alerts', root_path
       %h2 
         Email alerts of planning applications 
@@ -107,6 +108,7 @@
           document.getElementById('#{@set_focus_control}').focus();
 
     = render "shared/analytics"
+    = javascript_include_tag "application"
     :javascript
       var uservoiceOptions = {key: 'planningalerts', host: 'planningalerts.uservoice.com', forum: '49635', alignment: 'right', background_color:'#F4F322', text_color: 'black',
       hover_color: '#FF8C00', lang: 'en', showTab: true};

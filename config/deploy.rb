@@ -57,7 +57,10 @@ namespace :deploy do
 
   task :restart, :except => { :no_release => true } do
     run "touch #{File.join(current_path,'tmp','restart.txt')}"
-    # Run Sphinx searchd daemon
-    run "cd #{current_path}; bundle exec rake ts:run RAILS_ENV=production"
+
+    if stage == 'production'
+      # Run Sphinx searchd daemon
+      run "cd #{current_path}; bundle exec rake ts:run RAILS_ENV=production"
+    end
   end
 end

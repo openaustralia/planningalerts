@@ -47,7 +47,6 @@ describe Application do
 
     describe "comment_url" do
       it { Factory.build(:application, :comment_url => nil).should be_valid }
-      it { Factory.build(:application, :comment_url => "").should_not be_valid }
       it { Factory.build(:application, :comment_url => "http://blah.com?p=1").should be_valid }
       it { Factory.build(:application, :comment_url => "mailto:m@foo.com?subject=hello+sir").should be_valid }
       it { Factory.build(:application, :comment_url => "foo").should_not be_valid }
@@ -254,7 +253,8 @@ describe Application do
             <description>Putting a house up</description>
             <info_url>http://fiddle.gov.au/info/R2</info_url>
             <comment_url>http://fiddle.gov.au/comment/R2</comment_url>
-            <date_received>2009-01-01</date_received>
+            <date_received/>
+            <on_notice_from></on_notice_from>
           </application>
         </applications>
       </planning>

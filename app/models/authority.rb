@@ -38,7 +38,6 @@ class Authority < ActiveRecord::Base
       end
       authority.full_name = scraper.at('authority_name').inner_text
       authority.state = scraper.at('state').inner_text
-      authority.scraperwiki_name = scraper.at('scraperwiki_name').inner_text
       authority.feed_url = scraper.at('url').inner_text
       authority.disabled = 0
 

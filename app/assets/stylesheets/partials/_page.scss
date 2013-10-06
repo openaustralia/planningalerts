@@ -571,6 +571,9 @@ table.scraper_fields {
   .field {
     width: 15%;
   }
+  .error {
+    width: 15%
+  }
   .example {
     width: 30%;
   }
@@ -579,3 +582,38 @@ table.scraper_fields {
 body pre {
   white-space: pre-wrap;
 }
+
+td pre {
+  margin: 0 0;
+}
+
+.statbox {
+  background: #eee;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-top: 1em;
+  margin-bottom: 3em;
+  a {
+    text-decoration: none;
+  }
+  a, a:visited {
+    color: #333;
+  }
+  .stat:hover {
+    background: #ddd;
+  }
+  .stat-header {
+    text-align: center;
+    h3 {
+      padding-top: 2em;
+    }
+  }
+  .stat {
+    text-align: center;
+    .number {
+      color: $warm-highlight;
+      font-size: 300%;
+    }
+  }
+}
+

@@ -6,6 +6,16 @@ GIT
     geokit (1.6.5)
       multi_json
 
+GIT
+  remote: https://github.com/openaustralia/atdis.git
+  revision: 9122c9dd4d930ad2deee1da5df5f10cc7700b888
+  specs:
+    atdis (0.2)
+      activemodel (~> 3)
+      multi_json (~> 1.7)
+      rest-client
+      rgeo-geojson
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -94,6 +104,8 @@ GEM
       rest-client
       simplecov (>= 0.7)
       thor
+    crack (0.4.1)
+      safe_yaml (~> 0.9.0)
     daemons (1.1.9)
     dalli (2.6.2)
     database_cleaner (0.9.1)
@@ -165,6 +177,8 @@ GEM
     jquery-rails (2.2.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-rails (4.0.5)
+      railties (>= 3.1.0)
     json (1.8.0)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
@@ -184,8 +198,8 @@ GEM
       activesupport (~> 3.1)
       polyamorous (~> 0.5.0)
     method_source (0.8.1)
-    mime-types (1.21)
-    multi_json (1.7.9)
+    mime-types (1.25)
+    multi_json (1.8.0)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
     mysql2 (0.3.11)
@@ -198,6 +212,7 @@ GEM
       net-ssh (>= 2.6.5)
     newrelic_rpm (3.5.8.72)
     nokogiri (1.5.6)
+    oj (2.1.4)
     orm_adapter (0.4.0)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
@@ -237,6 +252,7 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    redcarpet (2.3.0)
     redis (2.2.2)
     redis-namespace (1.0.3)
       redis (< 3.0.0)
@@ -245,6 +261,9 @@ GEM
       railties (~> 3.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rgeo (0.3.20)
+    rgeo-geojson (0.2.3)
+      rgeo (>= 0.3.7)
     riddle (1.5.5)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
@@ -264,6 +283,7 @@ GEM
     rubyzip (0.9.9)
     rvm-capistrano (1.2.7)
       capistrano (>= 2.0.0)
+    safe_yaml (0.9.7)
     sanitize (2.0.3)
       nokogiri (>= 1.4.4, < 1.6)
     sass (3.2.9)
@@ -317,8 +337,12 @@ GEM
     vanity (1.8.0)
       redis (~> 2.0)
       redis-namespace (~> 1.0.0)
+    vcr (2.5.0)
     warden (1.2.3)
       rack (>= 1.0)
+    webmock (1.13.0)
+      addressable (>= 2.2.7)
+      crack (>= 0.3.2)
     websocket (1.0.7)
     will_paginate (3.0.4)
     xpath (0.1.4)
@@ -329,6 +353,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  atdis!
   capistrano
   capybara (< 2.0)
   coffee-rails
@@ -351,15 +376,18 @@ DEPENDENCIES
   guard-rspec
   haml
   httparty
-  jquery-rails
+  jquery-rails (= 2.2.1)
+  jquery-ui-rails
   mysql2 (> 0.3)
   newrelic_rpm
   nokogiri
+  oj
   rabl
   rack-livereload
   rack-throttle
   rails (= 3.2.13)
   rake
+  redcarpet (= 2.3.0)
   rspec-rails (~> 2.4)
   rvm-capistrano
   sanitize
@@ -372,4 +400,6 @@ DEPENDENCIES
   validate_url
   validates_email_format_of
   vanity
+  vcr
+  webmock
   will_paginate

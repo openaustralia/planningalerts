@@ -13,7 +13,10 @@ group :assets do
 end
  
 # jQuery is the default JavaScript library in Rails 3.1
-gem 'jquery-rails'
+# Locking jquery-rails to 2.2.1 so that activeadmin can find jquery-ui when it's precompiling its assets
+# Probably can get rid of this by updating activeadmin
+gem 'jquery-rails', "2.2.1"
+gem "jquery-ui-rails"
 
 gem "capistrano"
 gem "haml"
@@ -47,6 +50,11 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem "validate_url"
 gem "twitter"
+#gem "atdis", :path => '/Users/matthew/git/atdis'
+gem "atdis", :git => "https://github.com/openaustralia/atdis.git"
+gem "oj"
+# Need to stick with 2.3.0 to support Ruby 1.8.7
+gem "redcarpet", "2.3.0"
 
 group :test do
   # Apparently capybara 2 only works with Ruby 1.9
@@ -57,6 +65,8 @@ group :test do
   gem 'factory_girl', '< 3.0'
   gem 'email_spec'
   gem 'coveralls', :require => false
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do

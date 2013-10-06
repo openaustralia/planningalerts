@@ -8,7 +8,7 @@ class Application < ActiveRecord::Base
 
   validates :date_scraped, :council_reference, :address, :description, :presence => true
   validates :info_url, :url => true
-  validates :comment_url, :url => {:allow_nil => true, :schemes => ["http", "https", "mailto"]}
+  validates :comment_url, :url => {:allow_blank => true, :schemes => ["http", "https", "mailto"]}
   validate :date_received_can_not_be_in_the_future, :validate_on_notice_period
   validates :council_reference, :uniqueness => { :scope => :authority_id }
 

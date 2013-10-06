@@ -1,0 +1,826 @@
+--- 
+http_interactions: 
+- request: 
+    method: get
+    uri: http://maps.google.com/maps/api/geocode/json?address=A%20test%20address&region=au&sensor=false
+    body: 
+      string: ""
+    headers: 
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      X-Frame-Options: 
+      - SAMEORIGIN
+      Expires: 
+      - Mon, 23 Sep 2013 19:09:07 GMT
+      Cache-Control: 
+      - public, max-age=86400
+      Content-Type: 
+      - application/json; charset=UTF-8
+      Server: 
+      - mafe
+      X-Xss-Protection: 
+      - 1; mode=block
+      Access-Control-Allow-Origin: 
+      - "*"
+      Transfer-Encoding: 
+      - chunked
+      Date: 
+      - Sun, 22 Sep 2013 19:09:07 GMT
+      Alternate-Protocol: 
+      - 80:quic
+      Vary: 
+      - Accept-Language
+    body: 
+      string: |
+        {
+           "results" : [],
+           "status" : "ZERO_RESULTS"
+        }
+
+    http_version: 
+  recorded_at: Sun, 22 Sep 2013 19:09:07 GMT
+- request: 
+    method: get
+    uri: http://maps.google.com/maps/api/geocode/json?address=24%20Bruce%20Road%20Glenbrook&region=au&sensor=false
+    body: 
+      string: ""
+    headers: 
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      X-Frame-Options: 
+      - SAMEORIGIN
+      Expires: 
+      - Mon, 23 Sep 2013 19:29:53 GMT
+      Cache-Control: 
+      - public, max-age=86400
+      Content-Type: 
+      - application/json; charset=UTF-8
+      Server: 
+      - mafe
+      X-Xss-Protection: 
+      - 1; mode=block
+      Access-Control-Allow-Origin: 
+      - "*"
+      Transfer-Encoding: 
+      - chunked
+      Date: 
+      - Sun, 22 Sep 2013 19:29:53 GMT
+      Alternate-Protocol: 
+      - 80:quic
+      Vary: 
+      - Accept-Language
+    body: 
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "24",
+                       "short_name" : "24",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Glenbrook",
+                       "short_name" : "Glenbrook",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2773",
+                       "short_name" : "2773",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "24 Bruce Road, Glenbrook NSW 2773, Australia",
+                 "geometry" : {
+                    "location" : {
+                       "lat" : -33.772607,
+                       "lng" : 150.624245
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.7712580197085,
+                          "lng" : 150.6255939802915
+                       },
+                       "southwest" : {
+                          "lat" : -33.7739559802915,
+                          "lng" : 150.6228960197085
+                       }
+                    }
+                 },
+                 "types" : [ "street_address" ]
+              }
+           ],
+           "status" : "OK"
+        }
+
+    http_version: 
+  recorded_at: Sun, 22 Sep 2013 19:29:53 GMT
+- request: 
+    method: get
+    uri: http://maps.google.com/maps/api/geocode/json?address=24%20Bruce%20Road,%20Glenbrook&region=au&sensor=false
+    body: 
+      string: ""
+    headers: 
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      X-Frame-Options: 
+      - SAMEORIGIN
+      Expires: 
+      - Mon, 23 Sep 2013 19:39:37 GMT
+      Cache-Control: 
+      - public, max-age=86400
+      Content-Type: 
+      - application/json; charset=UTF-8
+      Server: 
+      - mafe
+      X-Xss-Protection: 
+      - 1; mode=block
+      Access-Control-Allow-Origin: 
+      - "*"
+      Transfer-Encoding: 
+      - chunked
+      Date: 
+      - Sun, 22 Sep 2013 19:39:37 GMT
+      Alternate-Protocol: 
+      - 80:quic
+      Vary: 
+      - Accept-Language
+    body: 
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "24",
+                       "short_name" : "24",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Glenbrook",
+                       "short_name" : "Glenbrook",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2773",
+                       "short_name" : "2773",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "24 Bruce Road, Glenbrook NSW 2773, Australia",
+                 "geometry" : {
+                    "location" : {
+                       "lat" : -33.772607,
+                       "lng" : 150.624245
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.7712580197085,
+                          "lng" : 150.6255939802915
+                       },
+                       "southwest" : {
+                          "lat" : -33.7739559802915,
+                          "lng" : 150.6228960197085
+                       }
+                    }
+                 },
+                 "types" : [ "street_address" ]
+              }
+           ],
+           "status" : "OK"
+        }
+
+    http_version: 
+  recorded_at: Sun, 22 Sep 2013 19:39:36 GMT
+- request: 
+    method: get
+    uri: http://maps.google.com/maps/api/geocode/json?address=A%20test%20address&region=au&sensor=false
+    body: 
+      string: ""
+    headers: 
+      Accept: 
+      - "*/*"
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      X-Frame-Options: 
+      - SAMEORIGIN
+      Expires: 
+      - Mon, 23 Sep 2013 19:41:08 GMT
+      Cache-Control: 
+      - public, max-age=86400
+      Content-Type: 
+      - application/json; charset=UTF-8
+      Server: 
+      - mafe
+      X-Xss-Protection: 
+      - 1; mode=block
+      Access-Control-Allow-Origin: 
+      - "*"
+      Transfer-Encoding: 
+      - chunked
+      Date: 
+      - Sun, 22 Sep 2013 19:41:08 GMT
+      Alternate-Protocol: 
+      - 80:quic
+      Vary: 
+      - Accept-Language
+    body: 
+      string: |
+        {
+           "results" : [],
+           "status" : "ZERO_RESULTS"
+        }
+
+    http_version: 
+  recorded_at: Sun, 22 Sep 2013 19:41:08 GMT
+- request: 
+    method: get
+    uri: https://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/feed/
+    body: 
+      string: ""
+    headers: {}
+
+  response: 
+    status: 
+      code: 200
+      message: OK
+    headers: 
+      Cache-Control: 
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Expires: 
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Set-Cookie: 
+      - PHPSESSID=mg3ebhi60ono7ft5plie93nau7; path=/
+      Etag: 
+      - "\"6efa4820af1a9ba70cdf119829823c70\""
+      X-Powered-By: 
+      - PHP/5.3.10-1ubuntu3.8
+      Content-Type: 
+      - text/xml; charset=UTF-8
+      Server: 
+      - Apache/2.2.22 (Ubuntu)
+      Connection: 
+      - close
+      Pragma: 
+      - no-cache
+      Last-Modified: 
+      - Thu, 12 Sep 2013 03:34:05 GMT
+      Via: 
+      - 1.1 www.openaustraliafoundation.org.au
+      Transfer-Encoding: 
+      - chunked
+      X-Pingback: 
+      - https://www.openaustraliafoundation.org.au/xmlrpc.php
+      Date: 
+      - Sun, 22 Sep 2013 19:42:36 GMT
+      Vary: 
+      - Accept-Encoding
+    body: 
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\
+        <rss version=\"2.0\"\n\
+        \txmlns:content=\"http://purl.org/rss/1.0/modules/content/\"\n\
+        \txmlns:wfw=\"http://wellformedweb.org/CommentAPI/\"\n\
+        \txmlns:dc=\"http://purl.org/dc/elements/1.1/\"\n\
+        \txmlns:atom=\"http://www.w3.org/2005/Atom\"\n\
+        \txmlns:sy=\"http://purl.org/rss/1.0/modules/syndication/\"\n\
+        \txmlns:slash=\"http://purl.org/rss/1.0/modules/slash/\"\n\
+        \t>\n\n\
+        <channel>\n\
+        \t<title>the OpenAustralia Foundation &#187; PlanningAlerts.org.au</title>\n\
+        \t<atom:link href=\"https://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/feed/\" rel=\"self\" type=\"application/rss+xml\" />\n\
+        \t<link>https://www.openaustraliafoundation.org.au</link>\n\
+        \t<description>Transforming democracy in Australia</description>\n\
+        \t<lastBuildDate>Thu, 12 Sep 2013 03:34:05 +0000</lastBuildDate>\n\
+        \t<language>en-US</language>\n\
+        \t<sy:updatePeriod>hourly</sy:updatePeriod>\n\
+        \t<sy:updateFrequency>1</sy:updateFrequency>\n\
+        \t\n\
+        \t\t<item>\n\
+        \t\t<title>What&#8217;s new with PlanningAlerts, part 2</title>\n\
+        \t\t<link>https://www.openaustraliafoundation.org.au/2012/09/10/whats-new-with-planningalerts-part-2/</link>\n\
+        \t\t<comments>https://www.openaustraliafoundation.org.au/2012/09/10/whats-new-with-planningalerts-part-2/#comments</comments>\n\
+        \t\t<pubDate>Mon, 10 Sep 2012 00:30:33 +0000</pubDate>\n\
+        \t\t<dc:creator>Matthew Landauer</dc:creator>\n\
+        \t\t\t\t<category><![CDATA[Development]]></category>\n\
+        \t\t<category><![CDATA[PlanningAlerts.org.au]]></category>\n\n\
+        \t\t<guid isPermaLink=\"false\">http://www.openaustraliafoundation.org.au/?p=1296</guid>\n\
+        \t\t<description><![CDATA[In part one, we covered some of the new features that we\xE2\x80\x99ve added in the last couple of months. Next, we\xE2\x80\x99ll cover the myriad of improvements, some small, some large, that we\xE2\x80\x99ve made to existing features. Most of these, as a normal person using the site, individually you might never notice the difference. Small aesthetic [&#8230;]]]></description>\n\
+        \t\t\t\t<content:encoded><![CDATA[<p>In <a title=\"What\xE2\x80\x99s new with PlanningAlerts, part 1\" href=\"http://www.openaustraliafoundation.org.au/2012/09/05/whats-new-with-planningalerts-part-1/\">part one</a>, we covered some of the new features that we\xE2\x80\x99ve added in the last couple of months. Next, we\xE2\x80\x99ll cover the myriad of improvements, some small, some large, that we\xE2\x80\x99ve made to existing features.</p>\n\
+        <p>Most of these, as a normal person using the site, individually you might never notice the difference. Small aesthetic tweaks, usability improvements, but on mass they represent some huge improvements overall.</p>\n\
+        <p>Most of the changes have been focused on the application detail page. This is where you get the map and streetview of the application and links off to nearby applications and stats about the application itself. This is actually the page where over 70% of new people arrive at PlanningAlerts, most of the time by searching for a specific address on Google that they\xE2\x80\x99re interested in.</p>\n\
+        <p>A big part of what we\xE2\x80\x99ve been trying to achieve with these changes is to take all those people that come to PlanningAlerts for the first time and firstly make PlanningAlerts really useful for them right then but more importantly try to get them to come back. The best way to keep in touch with planning applications in your area is by signing up to email alerts. You can totally forget about things until something of interest comes along and arrives in your email inbox.</p>\n\
+        <p>So, we really want to get people signing up to those email alerts, especially new people that arrive on those application detail pages.</p>\n\
+        <p>Here&#8217;s the\xC2\xA0requisite before and after screenshot.</p>\n\
+        <div id=\"attachment_1301\" class=\"wp-caption aligncenter\" style=\"width: 571px\"><img class=\"size-full wp-image-1301 \" title=\"Before\" src=\"https://www.openaustraliafoundation.org.au/wp-content/uploads/2012/09/before1.png\" alt=\"\" width=\"561\" height=\"480\" /><p class=\"wp-caption-text\">Before</p></div>\n\
+        <div id=\"attachment_1300\" class=\"wp-caption aligncenter\" style=\"width: 571px\"><a href=\"https://www.openaustraliafoundation.org.au/wp-content/uploads/2012/09/after.png\"><img class=\"size-full wp-image-1300\" title=\"After\" src=\"https://www.openaustraliafoundation.org.au/wp-content/uploads/2012/09/after.png\" alt=\"\" width=\"561\" height=\"480\" /></a><p class=\"wp-caption-text\">After</p></div>\n\
+        <h2>Improvements</h2>\n\
+        <h3>Improvements to the application detail page, including:</h3>\n\
+        <ul>\n\
+        <li>Visual tweaks on application detail page &#8211; see those before and after screenshots</li>\n\
+        <li>Make maps zoomable and draggeable</li>\n\
+        <li>Removed display of tweets on application detail page &#8211; few people were using it</li>\n\
+        <li>Remove clutter of nearby applications. Just replaced with a link</li>\n\
+        <li>Made map and streetview work without javascript &#8211; accessibility is important to us. Not everyone has javascript enabled. So, we\xE2\x80\x99ve made the map and streetview on the application detail page work even if you don\xE2\x80\x99t have javascript enabled.</li>\n\
+        <li>Added some simple hover effects to comments and some simple visual tweaks to visually separate different comments</li>\n\
+        <li>We ran a bunch of A/B experiments:\n\
+        <ul>\n\
+        <li>Remove RSS feed</li>\n\
+        <li>Put sign up form directly on the application detail page</li>\n\
+        <li>Moving sign up form to the sidebar</li>\n\
+        <li>Sign up form with email address on home page</li>\n\
+        <li>Telling people how many people signed up to alerts on form</li>\n\
+        <li>Test variation of button wording</li>\n\
+        </ul>\n\
+        </li>\n\
+        </ul>\n\
+        <h3>Improvements to the backend, including:</h3>\n\
+        <div>\n\
+        <ul>\n\
+        <li>Added Google analytics to mobile site -\xC2\xA0embarrassingly\xC2\xA0we managed to not have analytics for our mobile enabled site. Well that\xE2\x80\x99s fixed now!</li>\n\
+        <li>Began testing against Ruby 1.9.3 as well as Ruby 1.8.7 &#8211; in preparation for moving the whole site to using Ruby 1.9 which is faster and has better support for different text encoding.</li>\n\
+        <li>Bring gems up to date (heaps of changes) &#8211; we were depending on a lot of very out-of-date libraries. We\xE2\x80\x99ve brought most of them up to date.</li>\n\
+        <li>Replaced administration backend with ActiveAdmin.</li>\n\
+        <li>Added new relic monitoring &#8211; helps us understand the real performance of the site so that we could improve things for you.</li>\n\
+        <li>Added bounding box optimisation to distance queries &#8211; we used to have this. When we upgraded to Rails 3, we lost this optimisation as we changed libraries for geo database lookups. We added this optimisation into the new library and contributed the change back to the community.</li>\n\
+        <li>Various database speedups</li>\n\
+        </ul>\n\
+        <h3>Improvements related to scraping, including:</h3>\n\
+        <div>\n\
+        <ul>\n\
+        <li>The PlanningAlerts application now grabs data directly from ScraperWiki rather than going through the scraper</li>\n\
+        <li>Adding a new ScraperWiki scraper can now be done completely from the admin interface. Doesn\xE2\x80\x99t require a code deploy.</li>\n\
+        <li>Optimise scraping by collecting date range in one go &#8211; speeds things up considerably and lightens the load on ScraperWiki.</li>\n\
+        <li>Show broken scrapers on coverage page &#8211; this is part of our strategy of exposing a little more of the underlying workings of PlanningAlerts in an attempt to make it easier for people with some programming skills to contribute to the site.</li>\n\
+        <li>Improve integration of ScraperWiki and PlanningAlerts.</li>\n\
+        <li>We also consolidated all the SPEAR authorities from Victoria into a single planning authority. This makes the difference between SPEAR and the local council clearer.</li>\n\
+        </ul>\n\
+        </div>\n\
+        </div>\n\
+        <h3>A bunch of improvements related to the API, including:</h3>\n\
+        <ul>\n\
+        <li>Added logging of API calls &#8211; we weren\xE2\x80\x99t keeping tabs on the usage. We are now.</li>\n\
+        <li>Made documentation of usage of API clearer on high volume &amp; commercial use &#8211; nothing has actually changed about our policy here we just made it explicit. It used to be that we would discuss this stuff when people would get in touch with us.</li>\n\
+        <li>Added throttling to API (configurable by source IP address) &#8211; to ensure that a single API user can\xE2\x80\x99t bring the whole site down accidentally for everybody.</li>\n\
+        </ul>\n\
+        <h3>Some other improvements</h3>\n\
+        <ul>\n\
+        <li>Add vanity for A/B testing &#8211; rather than making small tweaks, hoping that it affects the change you want, we\xE2\x80\x99re now using A/B testing using a gem called vanity where we show different variants of a page to different users and see which variant is more effective.</li>\n\
+        <li>Open out the visual layout (get rid of margins at the side)</li>\n\
+        <li>Rejig of volunteers list including adding new people (Added Kat, Andrew Perry, Maxious, and Justin Wells). Laying them out in a little grid and sorting them randomly.</li>\n\
+        <li>Added new footer with direct links to other projects and contact info (twitter / email, etc..)</li>\n\
+        <li>Improve menu with hover effect and larger selection area &#8211; this makes it easier to click around.</li>\n\
+        <li>Only show the first ten applications in an email alert if there are more than 10 &#8211; this helps when we add a new planning authority with a large amount of historical data</li>\n\
+        <li>Removed beta badge &#8211; A small but significant change. We removed the beta badge because we\xE2\x80\x99re now coming up to 3 years old (in December) and hundreds of thousands of people have used the service.</li>\n\
+        </ul>\n\
+        <h2>Fixes</h2>\n\
+        <ul>\n\
+        <li>The following 20 scrapers were fixed which means that people in those areas can now use PlanningAlerts once again:\n\
+        <ul>\n\
+        <li>Penrith</li>\n\
+        <li>Lane Cove</li>\n\
+        <li>City of Greater Geelong</li>\n\
+        <li>NSW Major Projects</li>\n\
+        <li>Clarence City Council</li>\n\
+        <li>City of Melbourne</li>\n\
+        <li>Gosford</li>\n\
+        <li>Parramatta</li>\n\
+        <li>Kingston City Council</li>\n\
+        <li>Knox City Council</li>\n\
+        <li>Bankstown City Council</li>\n\
+        <li>Sunshine Coast Regional Council</li>\n\
+        <li>City of Yarra</li>\n\
+        <li>Muswellbrook Shire Council</li>\n\
+        <li>Fairfield City Council</li>\n\
+        <li>City of Onkaparringa</li>\n\
+        <li>Rockdale City Conucil</li>\n\
+        <li>The Hills Council</li>\n\
+        <li>Woollahra Municipal Council</li>\n\
+        <li>City of Burnside</li>\n\
+        </ul>\n\
+        </li>\n\
+        <li>Site problem notifications</li>\n\
+        <li>Fixed comment abuse report</li>\n\
+        <li>Fixed problem with people on mobiles not being able to confirm registering for email alerts</li>\n\
+        <li>Security update to Rails</li>\n\
+        <li>Fix bounding box API call</li>\n\
+        <li>Make XML sitemaps persistent between application deploys</li>\n\
+        <li>Fixed a caching bug</li>\n\
+        <li>Fixed distance unit bug</li>\n\
+        <li>Fixed custom 404 page</li>\n\
+        </ul>\n\
+        <p>As always let us know what you would like to see happen next!</p>\n\
+        ]]></content:encoded>\n\
+        \t\t\t<wfw:commentRss>https://www.openaustraliafoundation.org.au/2012/09/10/whats-new-with-planningalerts-part-2/feed/</wfw:commentRss>\n\
+        \t\t<slash:comments>0</slash:comments>\n\
+        \t\t</item>\n\
+        \t\t<item>\n\
+        \t\t<title>What&#8217;s new with PlanningAlerts, part 1</title>\n\
+        \t\t<link>https://www.openaustraliafoundation.org.au/2012/09/05/whats-new-with-planningalerts-part-1/</link>\n\
+        \t\t<comments>https://www.openaustraliafoundation.org.au/2012/09/05/whats-new-with-planningalerts-part-1/#comments</comments>\n\
+        \t\t<pubDate>Wed, 05 Sep 2012 05:43:58 +0000</pubDate>\n\
+        \t\t<dc:creator>Matthew Landauer</dc:creator>\n\
+        \t\t\t\t<category><![CDATA[Development]]></category>\n\
+        \t\t<category><![CDATA[PlanningAlerts.org.au]]></category>\n\n\
+        \t\t<guid isPermaLink=\"false\">http://www.openaustraliafoundation.org.au/?p=1292</guid>\n\
+        \t\t<description><![CDATA[The last couple of months have seen a mammoth development effort on PlanningAlerts. Throughout that time we\xE2\x80\x99ve posted regular updates on the PlanningAlerts Twitter feed. Follow us there if you\xE2\x80\x99re interested in the absolute latest and greatest. The purpose of this post is to bring together and summarise those changes, to make it easier to [&#8230;]]]></description>\n\
+        \t\t\t\t<content:encoded><![CDATA[<p>The last couple of months have seen a mammoth development effort on PlanningAlerts.</p>\n\
+        <p>Throughout that time we\xE2\x80\x99ve posted regular updates on the <a href=\"http://twitter.com/planningalerts\">PlanningAlerts Twitter feed</a>. Follow us there if you\xE2\x80\x99re interested in the absolute latest and greatest.</p>\n\
+        <p>The purpose of this post is to bring together and summarise those changes, to make it easier to digest and get a sense of the bigger picture changes that have been taking place.</p>\n\
+        <p>We\xE2\x80\x99ve also had a lot of technical debt to catch up on. What does that mean? PlanningAlerts has been going for coming up to 3 years and <a title=\"Bit Rot\" href=\"http://en.wikipedia.org/wiki/Bit_rot\">things inevitably break</a> in that time. Changes get made, subtle breakages happen that nobody notices but these things have small incremental effects. Also, software libraries get out-of-date and need to be updated. We&#8217;ll cover some of those fixes in the next post.</p>\n\
+        <p>But first the more interesting stuff, the new features!</p>\n\
+        <p>So without much further ceremony&#8230;</p>\n\
+        <h2>New Features</h2>\n\
+        <ul>\n\
+        <li>See how many people received a particular application via email alerts &#8211; you can see this now on the detail page of every recent application</li>\n\
+        <li>Added Twitter and Facebook share buttons &#8211; we want to make it easy for people to share applications on their networks</li>\n\
+        <li>Get email notifications of new comments &#8211; so, if someone comments on an application within the area that you\xE2\x80\x99re interested in, you\xE2\x80\x99ll get notified of them in your normal email alert.</li>\n\
+        <li>Designed a prototype email signup widget &#8211; So that third-party websites (such as local councils) can make it super-easy for their constituents to sign up to email alerts on PlanningAlerts.</li>\n\
+        <li>Each authority now has its own page including statistics (apps received last week, median apps per week, etc..), the number of applications received over time, link to ScraperWiki scraper and the authority population &#8211; This allows you to quickly get an overview of what\xE2\x80\x99s happening within a particular planning authority. Also useful for developers who want to fix or check a scraper)</li>\n\
+        <li>Added percentage of population covered. This is now automatically generated.</li>\n\
+        <li><a href=\"http://www.planningalerts.org.au/how_to_write_a_scraper\">New documentation on how to write a scraper</a> &#8211; we\xE2\x80\x99re now using ScraperWiki (http://scraperwiki.com) for any new planning authorities. This makes it really easy to get started writing a scraper. You can do everything from your web browser. You don\xE2\x80\x99t even need to set up a local development environment. Our aim here is to significantly lower the barrier of entry to someone with some basic programming skills to come along and contribute to the project.</li>\n\
+        <li><a href=\"http://www.planningalerts.org.au/how_to_lobby_your_local_council\">New documentation on how to lobby your local council</a> &#8211; we also want to make it easier for people without programming skills to contribute. So, we added a page about how you can lobby your local council to publish their planning data in a machine readable format.</li>\n\
+        </ul>\n\
+        <p>We also added 5 new planning authorities:</p>\n\
+        <ul>\n\
+        <li>Liquor License applications for Victoria</li>\n\
+        <li>City of Launceston, TAS</li>\n\
+        <li>Unley, SA</li>\n\
+        <li>Development Assesment Panels, WA</li>\n\
+        <li>City of Perth, WA</li>\n\
+        </ul>\n\
+        <p>City of Perth and the Development Assessment Panels required scraping pdf documents. Not an easy task!</p>\n\
+        <p>Next in part 2, we\xE2\x80\x99ll cover the myriad of improvements to existing features, some small, some large.</p>\n\
+        ]]></content:encoded>\n\
+        \t\t\t<wfw:commentRss>https://www.openaustraliafoundation.org.au/2012/09/05/whats-new-with-planningalerts-part-1/feed/</wfw:commentRss>\n\
+        \t\t<slash:comments>2</slash:comments>\n\
+        \t\t</item>\n\
+        \t\t<item>\n\
+        \t\t<title>And we&#8217;re back</title>\n\
+        \t\t<link>https://www.openaustraliafoundation.org.au/2012/08/27/and-were-back/</link>\n\
+        \t\t<comments>https://www.openaustraliafoundation.org.au/2012/08/27/and-were-back/#comments</comments>\n\
+        \t\t<pubDate>Mon, 27 Aug 2012 01:20:12 +0000</pubDate>\n\
+        \t\t<dc:creator>kat</dc:creator>\n\
+        \t\t\t\t<category><![CDATA[Announcement]]></category>\n\
+        \t\t<category><![CDATA[ElectionLeaflets.org.au]]></category>\n\
+        \t\t<category><![CDATA[OpenAustralia Foundation]]></category>\n\
+        \t\t<category><![CDATA[OpenAustralia.org]]></category>\n\
+        \t\t<category><![CDATA[PlanningAlerts.org.au]]></category>\n\
+        \t\t<category><![CDATA[Projects]]></category>\n\n\
+        \t\t<guid isPermaLink=\"false\">http://www.openaustraliafoundation.org.au/?p=1284</guid>\n\
+        \t\t<description><![CDATA[It\xE2\x80\x99s been a quiet kind of year for the OpenAustralia Foundation. While we\xE2\x80\x99ve seen maintenance work continue quietly in the background, upgraded OpenAustralia.org to catch up with changes at the official Federal parliamentary website aph.gov.au, ran Election Leaflets for the 2012 Queensland State Election, made Github our primary code host so we can accept more [&#8230;]]]></description>\n\
+        \t\t\t\t<content:encoded><![CDATA[<p>It\xE2\x80\x99s been a quiet kind of year for the OpenAustralia Foundation. While we\xE2\x80\x99ve seen maintenance work continue quietly in the background, upgraded OpenAustralia.org to catch up with changes at the official Federal parliamentary website aph.gov.au, ran Election Leaflets for the 2012 Queensland State Election, made Github our primary code host so we can accept more contributions via pull requests, fixed 3 PlanningAlerts scrapers, added 5 more authorities to PlanningAlerts, added continuous integration to automatically test our project&#8217;s code, kept up to date with removing retiring politicians and adding new ones, fixed error reporting on PlanningAlerts so we&#8217;re notified when there&#8217;s a problem, and answered dozens of emails from Australians that use our projects, BUT we\xE2\x80\x99ve not started any major new projects this year.</p>\n\
+        <p><strong id=\"internal-source-marker_0.4130365487653762\">That\xE2\x80\x99s all about to change. In the last couple of weeks we\xE2\x80\x99ve been picking up the pace.</strong></p>\n\
+        <p>Last week Matthew, Henare and I met up and agreed it would be good to share what we\xE2\x80\x99re doing as we go along and gathered a few statistics. But <a href=\"http://tickets.openaustraliafoundation.org.au/\">tickets on our issue tracker</a> only tell a story for the insatiably curious geek. So, rather than quote statistics, we came up with a little reporting format for our new weekly meetings and use that now as a basis to share with you what we\xE2\x80\x99ve been up to.</p>\n\
+        <p>It felt like a productive week for Henare and Matthew. Scoping was completed on a couple of new projects, a decision on which one to go ahead with was made which leads to a clear direction for the next few weeks work for all of us.</p>\n\
+        <p><strong>Planning Alerts</strong><br />\n\
+        An email came through last week alerting us to a development which has not been reported by PlanningAlerts. Normally PlanningAlerts sends alerts to people, not the other way round! Checking up on what went wrong, I quickly discover that this feed from the council was broken and so are a few others. Eek! Wasting no time, Matthew and Henare got on the case to fix 8 councils\xE2\x80\x99 data feeds almost immediately. Hurrah!<br />\n\
+        Find out more: To see which planning authorities are currently covered by PlanningAlerts go to http://www.planningalerts.org.au/authorities</p>\n\
+        <p><strong>OpenAustralia</strong><br />\n\
+        Oh no! Due to changes in the parliamentary data feed OpenAustralia.org fell over, with no updates from the House of Reps or the Senate for a big chunk of 2012. Thanks to Henare and Justin Wells this service is slap bang up to date again with all the debates to the present day.</p>\n\
+        <p>Way back in January 2009 we were the first website to bring the parliamentary register of interests online. \xC2\xA0We\xE2\x80\x99re pleased to note that following our example, the official parliament website now has the latest Registers of Interests online and discoverable for both the Senate and House of Reps. If you\xE2\x80\x99d like to help us update the collated Registers on Senators and Reps pages that we have at OpenAustralia.org, then please \xC2\xA0<a href=\"mailto:openaustralia-dev@googlegroups.com\">stick your hand up!</a></p>\n\
+        <p><strong>Secret Squirrel</strong><br />\n\
+        Last week we looked at a couple of contenders for the OpenAustralia Foundation\xE2\x80\x99s Next Big Thing. Last week Matthew and Henare took a project each and assessed the technical work to get going on the two standouts. To our delight they both look doable in very reasonable timeframes, so we\xE2\x80\x99re optimistic about completing them both. Since we\xE2\x80\x99ve spent a while now focused on local level projects, we decide our next project to be one with federal scope (at least to begin with).</p>\n\
+        <p>A lot happens behind the curtains at the OpenAustralia Foundation. Are you curious to find out more? What you&#8217;re interested in hearing about? Tell us and we&#8217;ll see if we can include it in our next update!</p>\n\
+        ]]></content:encoded>\n\
+        \t\t\t<wfw:commentRss>https://www.openaustraliafoundation.org.au/2012/08/27/and-were-back/feed/</wfw:commentRss>\n\
+        \t\t<slash:comments>0</slash:comments>\n\
+        \t\t</item>\n\
+        \t\t<item>\n\
+        \t\t<title>Little OpenAustralia Hackfest, Big Results</title>\n\
+        \t\t<link>https://www.openaustraliafoundation.org.au/2011/09/15/little-openaustralia-hackfest-big-results/</link>\n\
+        \t\t<comments>https://www.openaustraliafoundation.org.au/2011/09/15/little-openaustralia-hackfest-big-results/#comments</comments>\n\
+        \t\t<pubDate>Thu, 15 Sep 2011 06:27:54 +0000</pubDate>\n\
+        \t\t<dc:creator>Henare Degan</dc:creator>\n\
+        \t\t\t\t<category><![CDATA[Announcement]]></category>\n\
+        \t\t<category><![CDATA[Development]]></category>\n\
+        \t\t<category><![CDATA[OpenAustralia Foundation]]></category>\n\
+        \t\t<category><![CDATA[PlanningAlerts.org.au]]></category>\n\
+        \t\t<category><![CDATA[Projects]]></category>\n\
+        \t\t<category><![CDATA[Google]]></category>\n\
+        \t\t<category><![CDATA[Google Australia]]></category>\n\
+        \t\t<category><![CDATA[hackfest]]></category>\n\
+        \t\t<category><![CDATA[openaustralia]]></category>\n\
+        \t\t<category><![CDATA[planningalerts]]></category>\n\
+        \t\t<category><![CDATA[scraperwiki]]></category>\n\
+        \t\t<category><![CDATA[volunteers]]></category>\n\n\
+        \t\t<guid isPermaLink=\"false\">http://www.openaustraliafoundation.org.au/?p=1234</guid>\n\
+        \t\t<description><![CDATA[Cross-posted on the Official Google Australia Blog. A couple of weeks ago we at the OpenAustralia Foundation &#8211; Australia\xE2\x80\x99s open data, open government and civic hacking charity &#8211; asked if anyone wanted to join three of our volunteers at Google Sydney for a hackfest. The request was deliberately casual as we just wanted have a [&#8230;]]]></description>\n\
+        \t\t\t\t<content:encoded><![CDATA[<p><em>Cross-posted on <a href=\"http://google-au.blogspot.com/2011/09/little-openaustralia-hackfest-big.html\">the Official Google Australia Blog</a>.</em></p>\n\
+        <p>A couple of weeks ago we at the <a href=\"http://www.openaustraliafoundation.org.au/\">OpenAustralia Foundation</a> &#8211; Australia\xE2\x80\x99s open data, open government and civic hacking charity &#8211; asked if anyone wanted to <a href=\"../2011/08/30/openaustralia-hackfest-what-are-you-up-to-next-weekend-edition/\">join three of our volunteers at Google Sydney for a hackfest</a>. The request was deliberately casual as we just wanted have a bit of fun over a weekend sharing what we where doing and working on <a href=\"http://www.openaustraliafoundation.org.au/projects/\">the open source projects that OpenAustralia runs</a>.</p>\n\
+        <p>The hackfest started on Saturday with about a dozen volunteers coming along and listening to quick introductory talks from <a href=\"http://www.youtube.com/watch?v=6sfhvD1uHAc\">Matthew</a> and <a href=\"http://www.youtube.com/watch?v=XPsJBoYc_MU\">myself</a>. We reminded everyone of the different projects that the foundation runs: <a href=\"http://www.openaustralia.org/\">OpenAustralia.org</a>, <a href=\"http://www.electionleaflets.org.au/\">Election Leaflets</a> and <a href=\"http://www.planningalerts.org.au/\">PlanningAlerts</a>.</p>\n\
+        <p><a href=\"https://www.openaustraliafoundation.org.au/wp-content/uploads/2011/09/hackfesting.jpg\"><img class=\"aligncenter size-medium wp-image-1236\" title=\"Hackfesting\" src=\"https://www.openaustraliafoundation.org.au/wp-content/uploads/2011/09/hackfesting-300x179.jpg\" alt=\"\" width=\"300\" height=\"179\" /></a></p>\n\
+        <p>Most people decided to hack on PlanningAlerts, a project which allows people to get alerts about what is being built or knocked down in their area. Using an online tool called <a href=\"http://scraperwiki.com/\">ScraperWiki</a> you can quickly and easily contribute new planning authorities to PlanningAlerts. During the two afternoons (true hackers aren\xE2\x80\x99t morning people!) our volunteers took up the challenge to write ScraperWiki scrapers for PlanningAlerts with zeal.</p>\n\
+        <p>Seven people wrote scrapers for nineteen planning authorities like <a href=\"http://www.planningalerts.org.au/authorities/hobart/applications\">Hobart City Council</a>, <a href=\"http://www.planningalerts.org.au/authorities/redfernwaterloo/applications\">Redfern-Waterloo Authority</a> or <a href=\"http://www.planningalerts.org.au/authorities/townsville/applications\">Townsville City Council</a> all around Australia, including councils in two states we previously didn\xE2\x80\x99t cover &#8211; Western Australia and Tasmania.</p>\n\
+        <p>What does this mean in practical terms? <strong>An additional 1,823,124 Australians can now find out what\xE2\x80\x99s happening in their local community</strong> using PlanningAlerts. This is a huge result, coming from a relatively modest effort and a small group of people.</p>\n\
+        <p>A massive thank you to all of the volunteers that attended the hackfest, especially the following people that wrote scrapers: <a href=\"https://twitter.com/o_sam_o\">Sam Cavenagh</a>, <a href=\"https://twitter.com/NickEvershed\">Nick Evershed</a>, <a href=\"https://twitter.com/pagetribe\">Mark Kinkade</a>, <a href=\"https://twitter.com/matthewlandauer\">Matthew Landauer</a>, <a href=\"https://twitter.com/jamezpolley\">James Polley</a>, <a href=\"http://www.splittgerber.id.au/\">Kris Splittgerber</a> and <a href=\"https://twitter.com/nanabite\">Adam Stiskala</a>. Let\xE2\x80\x99s do this again some time.</p>\n\
+        <p>And don\xE2\x80\x99t forget to remind your friends and family to sign up for <a href=\"http://www.planningalerts.org.au/\">PlanningAlerts</a>!</p>\n\
+        ]]></content:encoded>\n\
+        \t\t\t<wfw:commentRss>https://www.openaustraliafoundation.org.au/2011/09/15/little-openaustralia-hackfest-big-results/feed/</wfw:commentRss>\n\
+        \t\t<slash:comments>0</slash:comments>\n\
+        \t\t</item>\n\
+        \t\t<item>\n\
+        \t\t<title>PlanningAlerts for my mum (and the Northern Territory)</title>\n\
+        \t\t<link>https://www.openaustraliafoundation.org.au/2011/09/09/planningalerts-for-my-mum-and-the-northern-territory/</link>\n\
+        \t\t<comments>https://www.openaustraliafoundation.org.au/2011/09/09/planningalerts-for-my-mum-and-the-northern-territory/#comments</comments>\n\
+        \t\t<pubDate>Thu, 08 Sep 2011 23:26:28 +0000</pubDate>\n\
+        \t\t<dc:creator>Henare Degan</dc:creator>\n\
+        \t\t\t\t<category><![CDATA[Announcement]]></category>\n\
+        \t\t<category><![CDATA[PlanningAlerts.org.au]]></category>\n\
+        \t\t<category><![CDATA[Australia]]></category>\n\
+        \t\t<category><![CDATA[New Zealand]]></category>\n\
+        \t\t<category><![CDATA[Northern Territory]]></category>\n\
+        \t\t<category><![CDATA[Northern Territory Lands Group]]></category>\n\
+        \t\t<category><![CDATA[openaustralia foundation]]></category>\n\
+        \t\t<category><![CDATA[planningalerts]]></category>\n\
+        \t\t<category><![CDATA[Scraper]]></category>\n\
+        \t\t<category><![CDATA[scraperwiki]]></category>\n\
+        \t\t<category><![CDATA[Sydney Airport]]></category>\n\n\
+        \t\t<guid isPermaLink=\"false\">http://www.openaustraliafoundation.org.au/?p=1223</guid>\n\
+        \t\t<description><![CDATA[My mum called me from Sydney Airport yesterday. She was stopping over from New Zealand on her way to Batchelor in the Northern Territory where her and her husband are moving. After I got off the phone to her I remembered that PlanningAlerts didn&#8217;t cover anywhere in the NT and I also remembered &#8211; what [&#8230;]]]></description>\n\
+        \t\t\t\t<content:encoded><![CDATA[<p><a href=\"https://secure.flickr.com/photos/89165847@N00/5107457518\"><img alt=\"\" src=\"https://farm2.static.flickr.com/1338/5107457518_46def6d3f5_m.jpg\" title=\"Just a Quiet Peaceful Bit of Batchelor by Michael Coghlan\" class=\"alignright\" width=\"240\" height=\"180\" /></a></p>\n\
+        <p>My mum called me from Sydney Airport yesterday. She was stopping over from New Zealand on her way to <a href=\"http://maps.google.com/maps?q=Batchelor+NT&amp;ll=-18.375379,132.363281&amp;spn=17.724786,33.815918&amp;t=h&amp;z=6&amp;vpsrc=6\">Batchelor in the Northern Territory</a> where her and her husband are moving.</p>\n\
+        <p>After I got off the phone to her I remembered that PlanningAlerts didn&#8217;t cover anywhere in the NT and I also remembered &#8211; what mother doesn&#8217;t love code written for her!</p>\n\
+        <p>So I got to work and found that there seems to be a single planning authority in the NT, the <a href=\"http://www.nt.gov.au/lands/\">Northern Territory Lands Group</a>. After an hour or so I&#8217;d been able to write <a title=\"The ScraperWiki scraper getting development applications for the NT\" href=\"https://scraperwiki.com/scrapers/northern_territory_development_applications/\">a ScraperWiki scraper</a> for this data and <a title=\"A list of recent applications from Northern Territory Lands Group, NT\" href=\"http://www.planningalerts.org.au/authorities/northern_territory/applications\">deploy it to the live site</a>, which means <a title=\"A map of all NT development applications\" href=\"http://maps.google.com.au/maps?q=http:%2F%2Fwww.planningalerts.org.au%2Fauthorities%2Fnorthern_territory%2Fapplications.rss&amp;hl=en&amp;sll=-33.906207,151.180582&amp;sspn=0.015191,0.033023&amp;vpsrc=0&amp;t=h&amp;z=6\">PlanningAlerts now covers another 229,675 people in the Territory</a>.</p>\n\
+        <p>Welcome to Australia mum and welcome to PlanningAlerts Territorians!</p>\n\
+        <p><iframe src=\"//maps.google.com.au/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=http:%2F%2Fwww.planningalerts.org.au%2Fauthorities%2Fnorthern_territory%2Fapplications.rss&amp;ie=UTF8&amp;t=h&amp;vpsrc=6&amp;ll=-19.145168,133.857422&amp;spn=28.7892,37.353516&amp;z=4&amp;output=embed\" frameborder=\"0\" marginwidth=\"0\" marginheight=\"0\" scrolling=\"no\" width=\"425\" height=\"350\"></iframe><br />\n\
+        <small><a style=\"color: #0000ff; text-align: left;\" href=\"http://maps.google.com.au/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=http:%2F%2Fwww.planningalerts.org.au%2Fauthorities%2Fnorthern_territory%2Fapplications.rss&amp;ie=UTF8&amp;t=h&amp;vpsrc=6&amp;ll=-19.145168,133.857422&amp;spn=28.7892,37.353516&amp;z=4\">View Larger Map</a></small></p>\n\
+        <p>If you live in the territory and you&#8217;ve <a title=\"Sign up for PlanningAlerts\" href=\"http://www.planningalerts.org.au/alerts/signup\">signed up for PlanningAlerts</a> you should already be getting alerts. If you have friends or family in the territory, please let them know about PlanningAlerts.</p>\n\
+        <p>Cheers,</p>\n\
+        <p><em>Henare</em><br />\n\
+        <em>OpenAustralia Foundation volunteer</em></p>\n\
+        <p>P.S. If anyone has any more information about the NT planning system that I may have missed or information about any other planning systems around Australia that might be of interest, please let us know in the comments.</p>\n\
+        <p>P.P.S. If your mum lives in an area not covered by PlanningAlerts, why not <a title=\"How you can get Involved with PlanningAlerts\" href=\"http://www.planningalerts.org.au/getinvolved\">write a scraper for her today</a>? No need to wait for Mother&#8217;s Day, mums like code all year &#8217;round :)</p>\n\
+        <p>P.P.P.S. Come to <a href=\"http://www.openaustraliafoundation.org.au/2011/08/30/openaustralia-hackfest-what-are-you-up-to-next-weekend-edition/\">our hackfest tomorrow</a> if you want to learn how to write your mum a PlanningAlerts scraper.</p>\n\
+        ]]></content:encoded>\n\
+        \t\t\t<wfw:commentRss>https://www.openaustraliafoundation.org.au/2011/09/09/planningalerts-for-my-mum-and-the-northern-territory/feed/</wfw:commentRss>\n\
+        \t\t<slash:comments>2</slash:comments>\n\
+        \t\t</item>\n\
+        \t\t<item>\n\
+        \t\t<title>OpenAustralia Hackfest &#8211; &#8220;What are you up to next weekend?&#8221; edition</title>\n\
+        \t\t<link>https://www.openaustraliafoundation.org.au/2011/08/30/openaustralia-hackfest-what-are-you-up-to-next-weekend-edition/</link>\n\
+        \t\t<comments>https://www.openaustraliafoundation.org.au/2011/08/30/openaustralia-hackfest-what-are-you-up-to-next-weekend-edition/#comments</comments>\n\
+        \t\t<pubDate>Tue, 30 Aug 2011 04:11:04 +0000</pubDate>\n\
+        \t\t<dc:creator>Henare Degan</dc:creator>\n\
+        \t\t\t\t<category><![CDATA[Announcement]]></category>\n\
+        \t\t<category><![CDATA[Development]]></category>\n\
+        \t\t<category><![CDATA[ElectionLeaflets.org.au]]></category>\n\
+        \t\t<category><![CDATA[OpenAustralia Foundation]]></category>\n\
+        \t\t<category><![CDATA[OpenAustralia.org]]></category>\n\
+        \t\t<category><![CDATA[PlanningAlerts.org.au]]></category>\n\
+        \t\t<category><![CDATA[Projects]]></category>\n\
+        \t\t<category><![CDATA[civic hacking]]></category>\n\
+        \t\t<category><![CDATA[Google]]></category>\n\
+        \t\t<category><![CDATA[hackfest]]></category>\n\
+        \t\t<category><![CDATA[oahack]]></category>\n\
+        \t\t<category><![CDATA[open data]]></category>\n\
+        \t\t<category><![CDATA[open government]]></category>\n\
+        \t\t<category><![CDATA[openaustralia foundation]]></category>\n\
+        \t\t<category><![CDATA[scraperwiki]]></category>\n\
+        \t\t<category><![CDATA[scraping]]></category>\n\
+        \t\t<category><![CDATA[Sydney]]></category>\n\
+        \t\t<category><![CDATA[Sydney Hackfest]]></category>\n\n\
+        \t\t<guid isPermaLink=\"false\">http://www.openaustraliafoundation.org.au/?p=1208</guid>\n\
+        \t\t<description><![CDATA[Come and join Henare, Tim and Matthew in their basement, er.. we mean Google Sydney, for an awesome weekend of hacking. It\xE2\x80\x99s all a bit last minute. What\xE2\x80\x99s the worst that happens? Nobody turns up and the three of us spend the weekend hacking. That\xE2\x80\x99s okay too. However, it would be much more fun if [&#8230;]]]></description>\n\
+        \t\t\t\t<content:encoded><![CDATA[<p>Come and join Henare, Tim and Matthew in their basement, er.. we mean <a title=\"Map of Google Sydney\" href=\"http://maps.google.com.au/maps?q=Google+Sydney,+48+Pirrama+Road+Pyrmont,+New+South+Wales+2009+Australia&amp;hl=en&amp;ll=-33.866995,151.195908&amp;spn=0.121298,0.264187&amp;sll=-33.904362,151.147002&amp;sspn=0.48498,1.056747&amp;vpsrc=6&amp;t=h&amp;z=13&amp;iwloc=A\">Google Sydney</a>, for an <strong>awesome weekend of hacking</strong>.</p>\n\
+        <p><a href=\"https://secure.flickr.com/photos/halans/4085432140/\"><img class=\"alignright\" title=\"OpenAustralia Hackfest 2009 by Halans\" src=\"//farm3.static.flickr.com/2797/4085432140_cf7f29abe1.jpg\" alt=\"OpenAustralia Hackfest 2009 by Halans\" width=\"300\" height=\"200\" /></a></p>\n\
+        <p>It\xE2\x80\x99s all a bit last minute. What\xE2\x80\x99s the worst that happens? Nobody turns up and the three of us spend the weekend hacking. That\xE2\x80\x99s okay too.</p>\n\
+        <p>However, it would be much more <strong>fun if you came too</strong>!</p>\n\
+        <p>We\xE2\x80\x99ve got a couple of quick talks lined up to warm you up and give you some inspiration, then a full weekend dedicated to hacking on everything OpenAustralia. <strong>Come along and learn, share and build interesting things</strong> in and around open data, open government and civic hacking.</p>\n\
+        <p>Want to reboot <a href=\"http://www.openaustralia.org/\">OpenAustralia.org</a> by fixing the scraper? How about some finishing touches to <a href=\"http://www.electionleaflets.org.au/\">Election Leaflets</a> to monitor future Australian elections? Or do you want to learn how to help tens of thousands of people get <a href=\"http://www.planningalerts.org.au/\">PlanningAlerts</a> by writing a simple scraper (anyone can do it!)? <strong>Then register here</strong>:</p>\n\
+        <p style=\"padding-left: 30px;\"><strong><a href=\"https://oa-hackfest.eventbrite.com/\">https://oa-hackfest.eventbrite.com/</a></strong></p>\n\
+        <p>This event will be hosted at <a title=\"Map of Google Sydney\" href=\"http://maps.google.com.au/maps?q=Google+Sydney,+48+Pirrama+Road+Pyrmont,+New+South+Wales+2009+Australia&amp;hl=en&amp;ll=-33.866995,151.195908&amp;spn=0.121298,0.264187&amp;sll=-33.904362,151.147002&amp;sspn=0.48498,1.056747&amp;vpsrc=6&amp;t=h&amp;z=13&amp;iwloc=A\">Google Sydney</a> next weekend <strong>the 10th and 11th of September</strong>, here\xE2\x80\x99s our plan for the weekend:</p>\n\
+        <h2>Saturday</h2>\n\
+        <p>11:30 &#8211; Doors open<br />\n\
+        12:00 &#8211; Introduction and housekeeping<br />\n\
+        12:15 &#8211; The Gears That Power the Tubes of OpenAustralia &#8211; <em>Matthew Landauer</em><br />\n\
+        12:30 &#8211; An Introduction to Guerrilla Data Liberation with ScraperWiki &#8211; <em>Henare Degan</em><br />\n\
+        12:45 &#8211; Let the hacking begin<br />\n\
+        18:00 &#8211; We\xE2\x80\x99ll order pizzas with anyone interested<br />\n\
+        22:00 &#8211; Doors close</p>\n\
+        <h2>Sunday</h2>\n\
+        <p>11:30 &#8211; Doors open / Let the hacking begin<br />\n\
+        16:00 &#8211; Stop hacking, start presentations &#8211; show us what you\xE2\x80\x99ve build, fixed or learnt!<br />\n\
+        18:00 &#8211; Doors close, optional beers at the pub</p>\n\
+        <p>Google are kindly supplying the venue, power and WiFi so all you need to do is bring along your notebook, some snacks to keep you hacking through the day and pizza money if you&#8217;re a hungry hacker come Saturday evening.</p>\n\
+        <p>Sign up to the <a href=\"http://groups.google.com/group/openaustralia-dev\">OpenAustralia Community mailing list</a> if you have any questions and don&#8217;t forget to tag your <a href=\"https://twitter.com/#!/search?q=%23oahack\">tweets</a>, <a href=\"https://secure.flickr.com/photos/tags/oahack/\">photos</a>, etc. #oahack</p>\n\
+        <p>Cheers,</p>\n\
+        <p><em>Henare, Matthew and Tim<br />\n\
+        OpenAustralia Foundation volunteers</em></p>\n\
+        ]]></content:encoded>\n\
+        \t\t\t<wfw:commentRss>https://www.openaustraliafoundation.org.au/2011/08/30/openaustralia-hackfest-what-are-you-up-to-next-weekend-edition/feed/</wfw:commentRss>\n\
+        \t\t<slash:comments>1</slash:comments>\n\
+        \t\t</item>\n\
+        \t\t<item>\n\
+        \t\t<title>PlanningAlerts closes the loop</title>\n\
+        \t\t<link>https://www.openaustraliafoundation.org.au/2011/06/07/planningalerts-closes-the-loop/</link>\n\
+        \t\t<comments>https://www.openaustraliafoundation.org.au/2011/06/07/planningalerts-closes-the-loop/#comments</comments>\n\
+        \t\t<pubDate>Tue, 07 Jun 2011 01:18:25 +0000</pubDate>\n\
+        \t\t<dc:creator>Henare Degan</dc:creator>\n\
+        \t\t\t\t<category><![CDATA[Announcement]]></category>\n\
+        \t\t<category><![CDATA[PlanningAlerts.org.au]]></category>\n\
+        \t\t<category><![CDATA[commenting]]></category>\n\
+        \t\t<category><![CDATA[comments]]></category>\n\
+        \t\t<category><![CDATA[development applications]]></category>\n\
+        \t\t<category><![CDATA[planning applications]]></category>\n\
+        \t\t<category><![CDATA[planning submissions]]></category>\n\
+        \t\t<category><![CDATA[planningalerts]]></category>\n\n\
+        \t\t<guid isPermaLink=\"false\">http://www.openaustraliafoundation.org.au/?p=1178</guid>\n\
+        \t\t<description><![CDATA[Our built environment has a huge impact on our lives. And we all have strong opinions about what it should be like. One of the major things that determines this is the planning process that our councils look after. If you\xE2\x80\x99ve ever tried to make a submission on a development application you will know that [&#8230;]]]></description>\n\
+        \t\t\t\t<content:encoded><![CDATA[<p>Our built environment has a huge impact on our lives. And we all have strong opinions about what it should be like.</p>\n\
+        <p>One of the major things that determines this is the planning process that our councils look after. If you\xE2\x80\x99ve ever tried to make a submission on a development application you will know that it can be a difficult process to understand. Chances are you\xE2\x80\x99ve not bothered because it all seemed like too much trouble.</p>\n\
+        <p>Today we want to let you know about a new PlanningAlerts feature which makes this simple. Now when you click on a development application, you\xE2\x80\x99ll be able to make a submission to council right on the PlanningAlerts page for the application &#8211; no more hunting down the right form, email address or even which council to send it to. We do the boring stuff for you automatically.</p>\n\
+        <p><a href=\"https://www.openaustraliafoundation.org.au/wp-content/uploads/2011/06/planningalerts_commenting.png\"><img src=\"https://www.openaustraliafoundation.org.au/wp-content/uploads/2011/06/planningalerts_commenting-752x1024.png\" alt=\"Commenting on a PlanningAlert\" title=\"Commenting on a PlanningAlert\" width=\"752\" height=\"1024\" class=\"aligncenter size-large wp-image-1179\" /></a></p>\n\
+        <p>This means you have the opportunity to directly affect whether an application will get approved or not. It \xE2\x80\x9Ccloses the loop\xE2\x80\x9D, so that not only do you find out about things planned near you, you can easily and directly do something about them.</p>\n\
+        <p>You also get to see what other people have said because all comments automatically go up on the site once they\xE2\x80\x99re sent to the planning authority.</p>\n\
+        <p>Over the next couple of weeks we will be rolling out the new feature, adding it council by council. When the feature has been rolled out for your council you will see the big new comment box. If it hasn\xE2\x80\x99t been rolled out yet you can help by finding the email address that submissions should go to for your council and sending that to us.  </p>\n\
+        <p>As this feature is brand new it\xE2\x80\x99s bound to have some niggling problems. So, please help by letting us know about any problems that you find or things that could be done to improve the service.</p>\n\
+        <p>To get started go to <a href=\"http://www.planningalerts.org.au/\">http://www.planningalerts.org.au/</a> and enter your street address.</p>\n\
+        <p>It\xE2\x80\x99s your neighbourhood. Make sure you have a hand in how it develops.<br />\n\
+        <em><br />\n\
+        Matthew and Henare<br />\n\
+        OpenAustralia Foundation Volunteers</em></p>\n\
+        ]]></content:encoded>\n\
+        \t\t\t<wfw:commentRss>https://www.openaustraliafoundation.org.au/2011/06/07/planningalerts-closes-the-loop/feed/</wfw:commentRss>\n\
+        \t\t<slash:comments>3</slash:comments>\n\
+        \t\t</item>\n\
+        \t\t<item>\n\
+        \t\t<title>Embedding PlanningAlerts in a map just got a whole lot nicer</title>\n\
+        \t\t<link>https://www.openaustraliafoundation.org.au/2011/02/02/embedding-planningalerts-in-a-map-just-got-a-whole-lot-nicer/</link>\n\
+        \t\t<comments>https://www.openaustraliafoundation.org.au/2011/02/02/embedding-planningalerts-in-a-map-just-got-a-whole-lot-nicer/#comments</comments>\n\
+        \t\t<pubDate>Wed, 02 Feb 2011 04:19:11 +0000</pubDate>\n\
+        \t\t<dc:creator>Matthew Landauer</dc:creator>\n\
+        \t\t\t\t<category><![CDATA[PlanningAlerts.org.au]]></category>\n\
+        \t\t<category><![CDATA[embed]]></category>\n\
+        \t\t<category><![CDATA[Google Maps]]></category>\n\
+        \t\t<category><![CDATA[RSS]]></category>\n\n\
+        \t\t<guid isPermaLink=\"false\">http://www.openaustraliafoundation.org.au/?p=1147</guid>\n\
+        \t\t<description><![CDATA[We&#8217;ve a made a pretty small change to the way that applications from PlanningAlerts can get embedded in a map that makes it much easier to use. It&#8217;s easiest to see with an example: View Larger Map When you click on one of the points on a map, as well as the description of the [&#8230;]]]></description>\n\
+        \t\t\t\t<content:encoded><![CDATA[<p>We&#8217;ve a made a pretty small change to the way that applications from PlanningAlerts can get embedded in a map that makes it much easier to use.</p>\n\
+        <p>It&#8217;s easiest to see with an example:<br />\n\
+        <iframe src=\"//maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=http:%2F%2Fwww.planningalerts.org.au%2Fapplications.rss%3Faddress%3DFitzroy%2BSt,%2BMelbourne%2BVIC%2B3065%26radius%3D1500%26style%3Dhtml&amp;aq=&amp;sll=-37.804359,144.973783&amp;sspn=0.031839,0.066047&amp;ie=UTF8&amp;ll=-37.804155,144.973998&amp;spn=0.024504,0.032499&amp;t=h&amp;output=embed\" frameborder=\"0\" marginwidth=\"0\" marginheight=\"0\" scrolling=\"no\" width=\"425\" height=\"350\"></iframe><br />\n\
+        <small><a style=\"color: #0000ff; text-align: left;\" href=\"http://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=http:%2F%2Fwww.planningalerts.org.au%2Fapplications.rss%3Faddress%3DFitzroy%2BSt,%2BMelbourne%2BVIC%2B3065%26radius%3D1500%26style%3Dhtml&amp;aq=&amp;sll=-37.804359,144.973783&amp;sspn=0.031839,0.066047&amp;ie=UTF8&amp;ll=-37.804155,144.973998&amp;spn=0.024504,0.032499&amp;t=h\">View Larger Map</a></small></p>\n\
+        <p>When you click on one of the points on a map, as well as the description of the development application, there is now a link &#8220;More Information&#8221; which takes you to the page on PlanningAlerts for that application.</p>\n\
+        <p>That simple change just made embedded maps a whole lot more useful.</p>\n\
+        <p>This is how to do it for yourself:</p>\n\
+        <ol>\n\
+        <li>Enter a street address on <a href=\"http://www.planningalerts.org.au\">www.planningalerts.org.au</a> and click Search.</li>\n\
+        <li>Copy the URL of the link to &#8220;Subscribe to an RSS feed for applications near here&#8221;</li>\n\
+        <li>Then go to <a href=\"http://maps.google.com.au/\">Google Maps</a>, paste that URL into its search box</li>\n\
+        <li>Add <em>?style=html</em> to the end of the URL in the search box. This is the new bit that adds the &#8220;More information&#8221; link.</li>\n\
+        <li>Click Search Maps</li>\n\
+        <li>Click the <em>Link</em> link to the top right of the map, and copy the <em>Paste HTML to embed in website</em> code</li>\n\
+        <li>Paste that code into your blog post, sidebar, or wherever (you can alter the code to change its size etc.)</li>\n\
+        </ol>\n\
+        ]]></content:encoded>\n\
+        \t\t\t<wfw:commentRss>https://www.openaustraliafoundation.org.au/2011/02/02/embedding-planningalerts-in-a-map-just-got-a-whole-lot-nicer/feed/</wfw:commentRss>\n\
+        \t\t<slash:comments>1</slash:comments>\n\
+        \t\t</item>\n\
+        \t\t<item>\n\
+        \t\t<title>Wonderful new features for PlanningAlerts</title>\n\
+        \t\t<link>https://www.openaustraliafoundation.org.au/2010/12/06/wonderful-new-features-for-planningalerts/</link>\n\
+        \t\t<comments>https://www.openaustraliafoundation.org.au/2010/12/06/wonderful-new-features-for-planningalerts/#comments</comments>\n\
+        \t\t<pubDate>Mon, 06 Dec 2010 04:55:25 +0000</pubDate>\n\
+        \t\t<dc:creator>Henare Degan</dc:creator>\n\
+        \t\t\t\t<category><![CDATA[Announcement]]></category>\n\
+        \t\t<category><![CDATA[PlanningAlerts.org.au]]></category>\n\
+        \t\t<category><![CDATA[Blog]]></category>\n\
+        \t\t<category><![CDATA[comments]]></category>\n\
+        \t\t<category><![CDATA[facebook]]></category>\n\
+        \t\t<category><![CDATA[new features]]></category>\n\
+        \t\t<category><![CDATA[photo]]></category>\n\
+        \t\t<category><![CDATA[search]]></category>\n\
+        \t\t<category><![CDATA[twitter]]></category>\n\n\
+        \t\t<guid isPermaLink=\"false\">http://www.openaustraliafoundation.org.au/?p=1103</guid>\n\
+        \t\t<description><![CDATA[Today, we\xE2\x80\x99re happy to announce that we\xE2\x80\x99ve added some wonderful new features to PlanningAlerts which are the start of something big. Until now, the focus of PlanningAlerts has been squarely and clearly about notifying you of new development applications in your area. That notification happens via email. We\xE2\x80\x99ve added two new big features which allow [&#8230;]]]></description>\n\
+        \t\t\t\t<content:encoded><![CDATA[<p>Today, we\xE2\x80\x99re happy to announce that we\xE2\x80\x99ve added some wonderful new features to <a href=\"http://www.planningalerts.org.au/\">PlanningAlerts</a> which are the <strong>start of something big</strong>.</p>\n\
+        <p>Until now, the focus of PlanningAlerts has been squarely and clearly about notifying you of new development applications in your area. That notification happens via email.</p>\n\
+        <p>We\xE2\x80\x99ve added two new big features which allow you to <strong>easily explore development applications and comment on them</strong>.</p>\n\
+        <h2>Commenting</h2>\n\
+        <p>Finding out about a new development application in your neighbourhood should be the start of something. If it\xE2\x80\x99s something that you agree with or disagree with the standard course of action is that you submit a comment on the development application to your local council.</p>\n\
+        <p>Really, <strong>there should be a way for the community at large to discuss these issues</strong> without the local council having to act as an intermediary. Of course, this already happens on the Internet in the form of people writing blog posts, talking on Twitter and Facebook and numerous other avenues.</p>\n\
+        <p>Wouldn&#8217;t it be great if you could see all those conversations in one place, alongside the development application itself? Then, the application page becomes a jumping off point to read what people think all over the place.</p>\n\
+        <p>To begin with, this is what we\xE2\x80\x99ve done: now whenever you <strong>tweet about a development application</strong>, and include a link to the PlanningAlerts page, <strong>it will be listed on our site</strong>:</p>\n\
+        <p><a href=\"http://www.planningalerts.org.au/applications/16318\"><img src=\"https://www.openaustraliafoundation.org.au/wp-content/uploads/2010/12/planningalerts_tweet-300x298.png\" alt=\"\" title=\"planningalerts_tweet\" width=\"300\" height=\"298\" class=\"aligncenter size-medium wp-image-1106\" /></a></p>\n\
+        <p>We&#8217;re hoping this will spark discussion and make PlanningAlerts even more useful by allowing people to provide additional information about the development application.</p>\n\
+        <p>One use of this could be <a href=\"https://twitter.com/#!/henaredegan/statuses/14656057690\">taking a photo</a> with your mobile phone (after find the location using our <a href=\"http://m.layar.com/open/planningalertsaustralia\">augmented reality mobile application</a>, of course) and tweeting about it. The link will then show up on PlanningAlerts, allowing others to see what the new development looks like.</p>\n\
+        <p>Give it a try and let us know what interesting uses you come up with by posting a comment.</p>\n\
+        <h2>Exploring</h2>\n\
+        <p>We\xE2\x80\x99ve also <strong>changed the home page</strong>. You can now enter a street address and it will <strong>immediately show you recent development applications</strong> nearby. No need to wait on receiving your first email alert.</p>\n\
+        <p>This is great for people who\xE2\x80\x99ve never used the service before. They get a taste of what it does before they commit to entering their email address:</p>\n\
+        <p><a href=\"http://www.planningalerts.org.au/?q=24+Bruce+Rd%2C+Glenbrook+New+South+Wales+2773\"><img src=\"https://www.openaustraliafoundation.org.au/wp-content/uploads/2010/12/planningalerts_search-300x234.png\" alt=\"\" title=\"planningalerts_search\" width=\"300\" height=\"234\" class=\"aligncenter size-medium wp-image-1108\" /></a></p>\n\
+        <p>We hope you enjoy these new features and don\xE2\x80\x99t forget you can help us improve them by posting a comment below, using the <a href=\"http://planningalerts.uservoice.com/\">feedback button on PlanningAlerts</a> or, even better, <a href=\"http://www.planningalerts.org.au/getinvolved\">getting involved yourself</a>.</p>\n\
+        <p><em>Henare, Kat and Matthew</em></p>\n\
+        ]]></content:encoded>\n\
+        \t\t\t<wfw:commentRss>https://www.openaustraliafoundation.org.au/2010/12/06/wonderful-new-features-for-planningalerts/feed/</wfw:commentRss>\n\
+        \t\t<slash:comments>0</slash:comments>\n\
+        \t\t</item>\n\
+        \t\t<item>\n\
+        \t\t<title>A new way of seeing</title>\n\
+        \t\t<link>https://www.openaustraliafoundation.org.au/2010/07/16/a-new-way-of-seeing/</link>\n\
+        \t\t<comments>https://www.openaustraliafoundation.org.au/2010/07/16/a-new-way-of-seeing/#comments</comments>\n\
+        \t\t<pubDate>Fri, 16 Jul 2010 00:11:53 +0000</pubDate>\n\
+        \t\t<dc:creator>Matthew Landauer</dc:creator>\n\
+        \t\t\t\t<category><![CDATA[Announcement]]></category>\n\
+        \t\t<category><![CDATA[PlanningAlerts.org.au]]></category>\n\n\
+        \t\t<guid isPermaLink=\"false\">http://blog.openaustralia.org/?p=628</guid>\n\
+        \t\t<description><![CDATA[Today, we&#8217;re happy to announce a new way of seeing planning applications from PlanningAlerts.org.au for the iPhone 3GS and Android phones. It uses an augmented reality application called Layar to display recent planning applications in real time over a live image of what your phone is pointed at. To install follow this link on your [&#8230;]]]></description>\n\
+        \t\t\t\t<content:encoded><![CDATA[<p><img class=\"alignnone\" src=\"//www.planningalerts.org.au/images/layar/screenshot.png\" alt=\"\" width=\"480\" height=\"320\" /></p>\n\
+        <p>Today, we&#8217;re happy to announce a new way of seeing planning applications from <a href=\"http://www.planningalerts.org.au\">PlanningAlerts.org.au</a> for the iPhone 3GS and Android phones. It uses an augmented reality application called <a href=\"http://www.layar.com\">Layar</a> to display recent planning applications in real time over a live image of what your phone is pointed at.</p>\n\
+        <p>To install <a href=\"http://m.layar.com/open/planningalertsaustralia\">follow this link on your mobile phone</a>. If you don&#8217;t have Layar installed it will point you at the right place and if you do it should just launch the layer.</p>\n\
+        <p>This is a new way of seeing what&#8217;s changing in your neighbourhood. It uses the same information that gets sent to you via email when you <a href=\"http://www.planningalerts.org.au\">sign up for email alerts</a>.</p>\n\
+        <p>We&#8217;ve also added some information about the layer on the <a href=\"http://www.planningalerts.org.au/\">home page</a>.</p>\n\
+        <p>We built it by integrating the layar code into the PlanningAlerts web app, but that wasn&#8217;t strictly necessary. Any developer could have built the service using our <a href=\"http://www.planningalerts.org.au/api/howto\">API</a> (Application Programming Interface) which allows direct access to the data that drives the site.</p>\n\
+        <p>This is another example of the power of open data and what can be achieved <a href=\"http://github.com/openaustralia/planningalerts-app/blob/master/app/controllers/layar_controller.rb\">fairly easily</a> if the access to the raw data is available. Local councils, who publish planning applications on their website, with but a very few exceptions don&#8217;t publish the underlying data. One of the biggest tasks that PlanningAlerts does is to get access to the underlying data by <a href=\"http://en.wikipedia.org/wiki/Web_scraping\">screen scraping</a> web pages and then republishing that data for others to enjoy.</p>\n\
+        ]]></content:encoded>\n\
+        \t\t\t<wfw:commentRss>https://www.openaustraliafoundation.org.au/2010/07/16/a-new-way-of-seeing/feed/</wfw:commentRss>\n\
+        \t\t<slash:comments>6</slash:comments>\n\
+        \t\t</item>\n\
+        \t</channel>\n\
+        </rss>\n"
+    http_version: 
+  recorded_at: Sun, 22 Sep 2013 19:43:32 GMT
+- request: 
+    method: get
+    uri: https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=PlanningAlerts
+    body: 
+      string: ""
+    headers: 
+      Authorization: 
+      - OAuth oauth_consumer_key="xxxxxxxxxxx", oauth_nonce="9b86caa361d67bb607b2985e8a11d6f5", oauth_signature="TDiNYVK1mxCbUvK9iQbGECGllzE%3D", oauth_signature_method="HMAC-SHA1", oauth_timestamp="1379879012", oauth_token="xxxxxxxxxxx", oauth_version="1.0"
+      Accept: 
+      - application/json
+      User-Agent: 
+      - Twitter Ruby Gem 4.8.1
+  response: 
+    status: 
+      code: 401
+      message: Unauthorized
+    headers: 
+      Set-Cookie: 
+      - guest_id=v1%3A137987901396271865; Domain=.twitter.com; Path=/; Expires=Tue, 22-Sep-2015 19:43:33 UTC
+      Content-Type: 
+      - application/json; charset=utf-8
+      Server: 
+      - tfe
+      Content-Length: 
+      - "61"
+      Date: 
+      - Sun, 22 Sep 2013 19:43:33 UTC
+      Strict-Transport-Security: 
+      - max-age=631138519
+    body: 
+      string: "{\"errors\":[{\"message\":\"Invalid or expired token\",\"code\":89}]}"
+    http_version: 
+  recorded_at: Sun, 22 Sep 2013 19:43:33 GMT
+recorded_with: VCR 2.5.0

@@ -7,16 +7,30 @@ feature "Give feedback to Council" do
 
   scenario "Giving feedback for an authority without a feedback email" do
     authority = Factory(:authority, :full_name => "Foo")
-    application = Factory(:application, :id => "1", :authority_id => authority.id)
-    visit(application_path(application))
+    VCR.use_cassette('planningalerts') do
+      application = Factory(:application, :id => "1", :authority_id => authority.id, :comment_url => 'mailto:foo@bar.com')
+      visit(application_path(application))
+    end
 
     page.should have_content("How to comment on this application")
   end
 
+  scenario "Hide feedback form where there is no feedback email or comment_url" do
+    authority = Factory(:authority, :full_name => "Foo")
+    VCR.use_cassette('planningalerts') do
+      application = Factory(:application, :id => "1", :authority_id => authority.id)
+      visit(application_path(application))
+    end
+
+    page.should_not have_content("How to comment on this application")
+  end
+
   scenario "Adding a comment" do
     authority = Factory(:authority, :full_name => "Foo", :email => "feedback@foo.gov.au")
-    application = Factory(:application, :id => "1", :authority_id => authority.id)
-    visit(application_path(application))
+    VCR.use_cassette('planningalerts') do
+      application = Factory(:application, :id => "1", :authority_id => authority.id)
+      visit(application_path(application))
+    end
 
     fill_in("Comment", :with => "I think this is a really good ideas")
     fill_in("Name", :with => "Matthew Landauer")
@@ -37,18 +51,22 @@ feature "Give feedback to Council" do
 
   scenario "Unconfirmed comment should not be shown" do
     authority = Factory(:authority, :full_name => "Foo", :email => "feedback@foo.gov.au")
-    application = Factory(:application, :id => "1", :authority_id => authority.id)
-    Factory(:comment, :confirmed => false, :text => "I think this is a really good ideas", :application => application)
-    visit(application_path(application))
+    VCR.use_cassette('planningalerts') do
+      application = Factory(:application, :id => "1", :authority_id => authority.id)
+      Factory(:comment, :confirmed => false, :text => "I think this is a really good ideas", :application => application)
+      visit(application_path(application))
+    end
 
     page.should_not have_content("I think this is a really good ideas")
   end
 
   scenario "Confirming the comment" do
     authority = Factory(:authority, :full_name => "Foo", :email => "feedback@foo.gov.au")
-    application = Factory(:application, :id => "1", :authority_id => authority.id)
-    comment = Factory(:comment, :confirmed => false, :text => "I think this is a really good ideas", :application => application)
-    visit(confirmed_comment_path(:id => comment.confirm_id))
+    VCR.use_cassette('planningalerts') do
+      application = Factory(:application, :id => "1", :authority_id => authority.id)
+      comment = Factory(:comment, :confirmed => false, :text => "I think this is a really good ideas", :application => application)
+      visit(confirmed_comment_path(:id => comment.confirm_id))
+    end
 
     page.should have_content("Thanks. Your comment has been sent to Foo and is now visible on this page.")
     page.should have_content("I think this is a really good ideas")
@@ -61,8 +79,10 @@ feature "Give feedback to Council" do
   scenario "Reporting abuse on a confirmed comment" do
     email_moderator = ::Configuration::EMAIL_MODERATOR
     Kernel::silence_warnings { ::Configuration::EMAIL_MODERATOR = "moderator@planningalerts.org.au" }
-    comment = Factory(:comment, :confirmed => true, :text => "I'm saying something abusive", :name => "Jack Rude", :email => "rude@foo.com", :id => "23")
-    visit(new_comment_report_path(comment))
+    VCR.use_cassette('planningalerts') do
+      comment = Factory(:comment, :confirmed => true, :text => "I'm saying something abusive", :name => "Jack Rude", :email => "rude@foo.com", :id => "23")
+      visit(new_comment_report_path(comment))
+    end
 
     fill_in("Your name", :with => "Joe Reporter")
     fill_in("Your email", :with => "reporter@foo.com")
