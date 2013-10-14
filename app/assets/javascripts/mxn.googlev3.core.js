@@ -1,17 +1,3 @@
-/*
-MAPSTRACTION   v2.0.18   http://www.mapstraction.com
-
-Copyright (c) 2012 Tom Carden, Steve Coast, Mikel Maron, Andrew Turner, Henri Bergius, Rob Moran, Derek Fowler, Gary Gale
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-
- * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
- * Neither the name of the Mapstraction nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
 mxn.register('googlev3', {	
 
 Mapstraction: {
@@ -25,9 +11,10 @@ Mapstraction: {
 				mapTypeId: google.maps.MapTypeId.ROADMAP,
 				mapTypeControl: false,
 				mapTypeControlOptions: null,
-				navigationControl: false,
-				navigationControlOptions: null,
-				scrollwheel: false
+				zoomControl: false,
+				zoomControlOptions: null,
+				scrollwheel: false,
+				disableDoubleClickZoom: true
 			};
 
 			// Background color can only be set at construction
@@ -50,12 +37,13 @@ Mapstraction: {
 			}
 			if (this.addControlsArgs) {
 				if (this.addControlsArgs.zoom) {
-					myOptions.navigationControl = true;
+					myOptions.zoomControl = true;
 					if (this.addControlsArgs.zoom == 'small') {
-						myOptions.navigationControlOptions = {style: google.maps.NavigationControlStyle.SMALL};
+						myOptions.zoomControlOptions = {style: google.maps.ZoomControlStyle.SMALL};
 					}
 					if (this.addControlsArgs.zoom == 'large') {
-						myOptions.navigationControlOptions = {style: google.maps.NavigationControlStyle.ZOOM_PAN};
+						myOptions.zoomControlOptions = {style: google.maps.ZoomControlStyle.LARGE};
+						myOptions.panControl = true;
 					}
 				}
 				if (this.addControlsArgs.map_type) {
@@ -126,9 +114,21 @@ Mapstraction: {
 		if (this.options.enableDragging) {
 			myOptions.draggable = true;
 		} 
+		else{
+			myOptions.draggable = false;
+		}
 		if (this.options.enableScrollWheelZoom){
 			myOptions.scrollwheel = true;
 		} 
+		else{
+			myOptions.scrollwheel = false;
+		}
+		if(this.options.disableDoubleClickZoom){
+			myOptions.disableDoubleClickZoom = true;
+		}
+		else{
+			myOptions.disableDoubleClickZoom = false;
+		}
 		map.setOptions(myOptions);
 	},
 
@@ -144,13 +144,17 @@ Mapstraction: {
 		var myOptions;
 		// remove old controls
 
-		// Google has a combined zoom and pan control.
-		if (args.zoom || args.pan) {
+		if (args.pan) {
+			map.setOptions({ panControl: true });
+		}
+		if (args.zoom) {
+			myOptions = { zoomControl: true };
 			if (args.zoom == 'large'){ 
-				this.addLargeControls();
+				myOptions.zoomControlOptions = {style: google.maps.ZoomControlStyle.LARGE};
 			} else { 
-				this.addSmallControls();
+				myOptions.zoomControlOptions = {style: google.maps.ZoomControlStyle.SMALL};
 			}
+			map.setOptions(myOptions);
 		}
 		if (args.scale){
 			myOptions = {
@@ -176,8 +180,8 @@ Mapstraction: {
 	addSmallControls: function() {
 		var map = this.maps[this.api];
 		var myOptions = {
-			navigationControl: true,
-			navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL}
+			zoomControl: true,
+			zoomControlOptions: {style: google.maps.ZoomControlStyle.SMALL}
 		};
 		map.setOptions(myOptions);
 
@@ -189,8 +193,9 @@ Mapstraction: {
 	addLargeControls: function() {
 		var map = this.maps[this.api];
 		var myOptions = {
-			navigationControl: true,
-			navigationControlOptions: {style:google.maps.NavigationControlStyle.DEFAULT}
+			zoomControl: true,
+			zoomControlOptions: {style:google.maps.ZoomControlStyle.LARGE},
+			panControl: true
 		};
 		map.setOptions(myOptions);
 		this.addControlsArgs.pan = true;
@@ -618,11 +623,11 @@ Polyline: {
 	},
 	
 	show: function() {
-		throw 'Not implemented';
+		this.proprietary_polyline.setVisible(true);
 	},
 
 	hide: function() {
-		throw 'Not implemented';
+		this.proprietary_polyline.setVisible(false);
 	}
 	
 }
