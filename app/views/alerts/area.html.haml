@@ -27,7 +27,7 @@
 :javascript
   var map;
   $(document).ready(function(){
-    map = new mxn.Mapstraction("map_div","google");
+    map = new mxn.Mapstraction("map_div","googlev3");
     centre = new mxn.LatLonPoint(#{@alert.lat},#{@alert.lng});
     map.setCenterAndZoom(centre,13);
     map.addSmallControls();
