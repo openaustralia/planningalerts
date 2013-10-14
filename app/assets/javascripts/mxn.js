@@ -1,5 +1,7 @@
 /*
-Copyright (c) 2010 Tom Carden, Steve Coast, Mikel Maron, Andrew Turner, Henri Bergius, Rob Moran, Derek Fowler
+MAPSTRACTION   v2.0.18   http://www.mapstraction.com
+
+Copyright (c) 2012 Tom Carden, Steve Coast, Mikel Maron, Andrew Turner, Henri Bergius, Rob Moran, Derek Fowler, Gary Gale
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -159,7 +161,7 @@ var mxn = window.mxn = /** @lends mxn */ {
 			fnCall.call(this);
 		}
 	},
-	
+
 	/**
 	 * Bulk add some named events to an object.
 	 * @function
@@ -257,7 +259,7 @@ mxn.Invoker = function(aobj, asClassName, afnApiIdGetter){
 	this.go = function(sMethodName, args, oOptions){
 		
 		// make sure args is an array
-		args = Array.prototype.slice.apply(args);
+		args = typeof(args) != 'undefined' ? Array.prototype.slice.apply(args) : [];
 		
 		if(typeof(oOptions) == 'undefined'){
 			oOptions = defOpts;
@@ -304,7 +306,7 @@ mxn.util = {
 	merge: function(oRecv, oGive){
 		for (var sPropName in oGive){
 			if (oGive.hasOwnProperty(sPropName)) {
-				if(!oRecv.hasOwnProperty(sPropName)){
+				if(!oRecv.hasOwnProperty(sPropName) || typeof(oRecv[sPropName]) !== 'object' || typeof(oGive[sPropName]) !== 'object'){
 					oRecv[sPropName] = oGive[sPropName];
 				}
 				else {
@@ -499,14 +501,28 @@ mxn.util = {
 	 */
 	stringFormat: function(strIn){
 		var replaceRegEx = /\{\d+\}/g;
-		var args = Array.slice.apply(arguments);
+		var args = Array.prototype.slice.apply(arguments);
 		args.shift();
 		return strIn.replace(replaceRegEx, function(strVal){
 			var num = strVal.slice(1, -1);
 			return args[num];
 		});
-	}	
+	},
 	
+	/**
+	 * Traverses an object graph using a series of map functions provided as arguments 
+	 * 2 to n. Map functions are only called if the working object is not undefined/null.
+	 * For usage see mxn.google.geocoder.js.
+	 */
+	traverse: function(start) {
+		var args = Array.prototype.slice.apply(arguments);
+		args.shift();
+		var working = start;
+		while(typeof(working) != 'undefined' && working !== null && args.length > 0){
+			var op = args.shift();
+			working = op(working);
+		}
+	}
 };
 
 /**
