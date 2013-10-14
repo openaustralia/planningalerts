@@ -74,7 +74,7 @@ PlanningalertsApp::Application.configure do
   config.assets.precompile += ['ie.css', 'mobile.css', 'screen.css', 'print.css',
     'placeholder_polyfill.min.css',
     'active_admin.js', 'applications.js', 'bar_graph.js', 'maps.js', 'mxn.core.js',
-    'mxn.google.core.js', 'mxn.js', 'placeholder_polyfill.jquery.min.combo.js', 'preview.js']
+    'mxn.googlev3.core.js', 'mxn.js', 'placeholder_polyfill.jquery.min.combo.js', 'preview.js']
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
