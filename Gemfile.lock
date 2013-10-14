@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/mlandauer/geokit.git
-  revision: a541ba216b8004e82e66d57b68dca2e27cf47ab7
-  branch: back_port_google_maps_business_api
-  specs:
-    geokit (1.6.5)
-      multi_json
-
-GIT
   remote: https://github.com/openaustralia/atdis.git
   revision: 9122c9dd4d930ad2deee1da5df5f10cc7700b888
   specs:
@@ -155,6 +147,8 @@ GEM
       actionpack (>= 3.0)
     fssm (0.2.10)
     geocoder (1.1.6)
+    geokit (1.6.7)
+      multi_json (>= 1.3.2)
     guard (1.6.2)
       listen (>= 0.6.0)
       lumberjack (>= 1.0.2)
@@ -207,7 +201,7 @@ GEM
       polyamorous (~> 0.5.0)
     method_source (0.8.1)
     mime-types (1.25)
-    multi_json (1.8.0)
+    multi_json (1.8.1)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
     mysql2 (0.3.11)
@@ -379,7 +373,7 @@ DEPENDENCIES
   foreigner
   formtastic
   geocoder
-  geokit!
+  geokit
   guard
   guard-livereload
   guard-rspec
