@@ -21,7 +21,7 @@
     %td= @comment.email
 
 %h2 Comment
-%p= @comment.text
+= comment_as_html(@comment.text)
 
 %hr
 

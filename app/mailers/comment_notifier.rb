@@ -1,4 +1,6 @@
 class CommentNotifier < ActionMailer::Base
+  helper :comments
+
   def notify(comment)
     @comment = comment
     
