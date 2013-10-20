@@ -143,7 +143,7 @@ class Alert < ActiveRecord::Base
 
   # This is a long-running method. Call with care
   # TODO: Untested method
-  def self.send_alerts(info_logger = logger)
+  def self.process_all_active_alerts(info_logger = logger)
     alerts = Alert.active.all
     info_logger.info "Checking #{alerts.count} active alerts"
     total_no_emails, total_no_applications, total_no_comments = send_alerts_for_alerts(alerts, info_logger)
