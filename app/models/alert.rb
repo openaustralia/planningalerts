@@ -129,8 +129,9 @@ class Alert < ActiveRecord::Base
     if !applications.empty? || !comments.empty?
       AlertNotifier.alert(self, applications, comments).deliver
       self.last_sent = Time.now
-      save!      
     end
+    self.last_processed = Time.now
+    save!
 
     # Update the tallies on each application.
     applications.each do |application|

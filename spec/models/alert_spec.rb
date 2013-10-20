@@ -287,6 +287,11 @@ describe Alert do
           alert.process!
           (alert.last_sent - Time.now).abs.should < 1
         end
+
+        it "should update the last_processed time" do
+          alert.process!
+          (alert.last_processed - Time.now).abs.should < 1
+        end
       end
 
       context "and no new applications nearby" do
@@ -302,6 +307,11 @@ describe Alert do
         it "should not update the last_sent time" do
           alert.process!
           alert.last_sent.should be_nil
+        end
+
+        it "should update the last_processed time" do
+          alert.process!
+          (alert.last_processed - Time.now).abs.should < 1
         end
       end
     end
