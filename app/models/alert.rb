@@ -144,12 +144,18 @@ class Alert < ActiveRecord::Base
   # This is a long-running method. Call with care
   # TODO: Untested method
   def self.send_alerts(info_logger = logger)
+    alerts = Alert.active.all
+    info_logger.info "Checking #{alerts.count} active alerts"
+    total_no_emails, total_no_applications, total_no_comments = send_alerts_for_alerts(alerts, info_logger)
+    info_logger.info "Sent #{total_no_applications} applications and #{total_no_comments} comments to #{total_no_emails} people!"
+  end
+  
+  # TODO: Untested method
+  def self.send_alerts_for_alerts(alerts)
     # Only send alerts to confirmed users
     total_no_emails = 0
     total_no_applications = 0
     total_no_comments = 0
-    alerts = Alert.active.all
-    info_logger.info "Checking #{alerts.count} active alerts"
     alerts.each do |alert|
       no_applications, no_comments = alert.process!
       if no_applications > 0 || no_comments > 0
@@ -165,10 +171,9 @@ class Alert < ActiveRecord::Base
     Stat.applications_sent += total_no_applications
     EmailBatch.create!(:no_emails => total_no_emails, :no_applications => total_no_applications,
       :no_comments => total_no_comments)
-
-    info_logger.info "Sent #{total_no_applications} applications and #{total_no_comments} comments to #{total_no_emails} people!"
+    [total_no_emails, total_no_applications, total_no_comments]
   end
-  
+
   private
   
   def remove_other_alerts_for_this_address
