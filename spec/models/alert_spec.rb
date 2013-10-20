@@ -284,6 +284,21 @@ describe Alert do
 
           application.no_alerted.should == 4
         end
+
+        it "should update the overall stat of emails sent" do
+          alert.process
+          Stat.emails_sent.should == 1
+        end
+
+        it "should update the overall stat of applications sent" do
+          alert.process
+          Stat.applications_sent.should == 1
+        end
+
+        it "should update the last_sent time" do
+          alert.process
+          (alert.last_sent - Time.now).abs.should < 1
+        end
       end
 
       context "and no new applications nearby" do
@@ -295,6 +310,21 @@ describe Alert do
           alert.process
 
           ActionMailer::Base.deliveries.should be_empty
+        end
+
+        it "should not update the overall stat of emails sent" do
+          alert.process
+          Stat.emails_sent.should == 0
+        end
+
+        it "should not update the overall stat of applications sent" do
+          alert.process
+          Stat.applications_sent.should == 0
+        end
+
+        it "should not update the last_sent time" do
+          alert.process
+          alert.last_sent.should be_nil
         end
       end
     end
