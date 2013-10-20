@@ -146,12 +146,12 @@ class Alert < ActiveRecord::Base
   def self.process_all_active_alerts(info_logger = logger)
     alerts = Alert.active.all
     info_logger.info "Checking #{alerts.count} active alerts"
-    total_no_emails, total_no_applications, total_no_comments = send_alerts_for_alerts(alerts, info_logger)
+    total_no_emails, total_no_applications, total_no_comments = process_alerts(alerts, info_logger)
     info_logger.info "Sent #{total_no_applications} applications and #{total_no_comments} comments to #{total_no_emails} people!"
   end
   
   # TODO: Untested method
-  def self.send_alerts_for_alerts(alerts)
+  def self.process_alerts(alerts)
     # Only send alerts to confirmed users
     total_no_emails = 0
     total_no_applications = 0
