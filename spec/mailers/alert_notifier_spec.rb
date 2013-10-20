@@ -91,15 +91,6 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
       @email.subject.should == "2 new planning applications near #{@alert.address}"
     end
     
-    it "should update the statistics" do
-      Stat.emails_sent.should == @original_emails_sent + 1
-      Stat.applications_sent.should == @original_applications_sent + 2
-    end
-    
-    it "should update last_sent to the current time" do
-      (Time.now - @alert.last_sent).abs.should < 1
-    end
-    
     it "should be a multipart email" do
       @email.body.parts.length.should eq(2)
     end

@@ -126,7 +126,20 @@ class Alert < ActiveRecord::Base
   def process
     applications = recent_applications
     comments = new_comments
-    AlertNotifier.alert(self, applications, comments).deliver unless applications.empty? && comments.empty?
+    if !applications.empty? || !comments.empty?
+      AlertNotifier.alert(self, applications, comments).deliver
+      # Update statistics. Is this a good place to do them or would it make more sense to do it after the mailing has
+      # happened and we can check whether is was sucessful?
+      # TODO: Once we put caching in place this will mean that the stats will be updated frequently during the sending
+      # out of all the email alerts. This means that the cache will be continuously dirtied during the email alerts
+      # and the performance of all the page loads will suffer (as they contain statistics)
+      Stat.emails_sent += 1
+      Stat.applications_sent += applications.count
+
+      self.last_sent = Time.now
+      save!      
+    end
+
     # Update the tallies on each application.
     applications.each do |application|
       application.update_attribute(:no_alerted, (application.no_alerted || 0) + 1)
