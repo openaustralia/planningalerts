@@ -1,0 +1,22 @@
+= render "shared/analytics"
+= javascript_include_tag "application"
+- if @set_focus_control
+  :javascript
+    document.getElementById('#{@set_focus_control}').focus();
+:javascript
+  var uservoiceOptions = {key: 'planningalerts', host: 'planningalerts.uservoice.com', forum: '49635', alignment: 'right', background_color:'#F4F322', text_color: 'black',
+  hover_color: '#FF8C00', lang: 'en', showTab: true};
+  function _loadUserVoice() {
+  var s = document.createElement('script');
+  s.src = ("https:" == document.location.protocol ? "https://" : "http://") + "uservoice.com/javascripts/widgets/tab.js";
+  document.getElementsByTagName('head')[0].appendChild(s);
+  }
+  _loadSuper = window.onload;
+  window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
+- if yield(:map) != ""
+  - if defined?(Configuration::GOOGLE_MAPS_CLIENT_ID)
+    %script(src="http://maps.googleapis.com/maps/api/js?client=#{Configuration::GOOGLE_MAPS_CLIENT_ID}&sensor=false&v=3.13" type="text/javascript")
+  - else
+    %script(src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript")
+  = javascript_include_tag "mxn.js", "mxn.core.js", "mxn.googlev3.core.js"
+= vanity_js

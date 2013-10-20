@@ -43,86 +43,16 @@
     = csrf_meta_tag
 
     = yield :extra_meta_tags
+
   %body{ :class => body_classes(controller_name, action_name) }
-    .container#header
-      #statsbanner
-        #stats
-          #{number_to_human(@alert_count).downcase} applications sent across Australia
-      %h1= link_to 'Planning Alerts', root_path
-      %h2 
-        Email alerts of planning applications 
-        %em near you
 
-      .hide= link_to "Skip navigation", "#content"
-      #menu
-        %ul.collapse
-          %li.applications-link= link_to 'Search', address_applications_path
-          %li.alerts-link= link_to 'Sign Up', new_alert_path
-          %li.faq-link
-            = link_to faq_path do
-              %abbr(title="Frequently asked questions") FAQ
-          %li.authorities-link= link_to 'Coverage', authorities_path
-          %li.get-involved-link= link_to 'Get Involved', get_involved_path
-          %li.api-link= link_to "Get the Data", api_howto_path
-          %li.donate-link= link_to 'Donate', donate_path
-          %li.about-link= link_to 'About', about_path
+    = render "application/header"
 
-    .container.main
-      #content
-        - if notice
-          %p.notice= notice
-        - if alert
-          %p.alert= alert
-        - if flash[:error]
-          %p.error= flash[:error]
+    = render "application/main"
 
-        = yield
-
+    = render "shared/stats"
     = render "shared/tweets"
 
-    #footer.container
-      %ul.keepintouch
-        %li
-          Email us at
-          = mail_to "contact@planningalerts.org.au"
-        %li
-          Chat with us on Twitter
-          = link_to "@PlanningAlerts", "http://twitter.com/planningalerts"
-          = link_to "@OpenAustralia", "http://twitter.com/openaustralia"
-        %li
-          Read our blog
-          = link_to "openaustraliafoundation.org.au/blog", "http://www.openaustraliafoundation.org.au/blog"
-      .oaf
-        %h4
-          An
-          %a(href="http://openaustraliafoundation.org.au" title="The OpenAustralia Foundation") OpenAustralia Foundation
-          Project
-        %h5 Other wonderful projects from us
-        %ul
-          %li= link_to "Right To Know", "http://www.righttoknow.org.au/"
-          %li= link_to "OpenAustralia.org", "http://www.openaustralia.org/"
-          %li= link_to "Election Leaflets", "http://www.electionleaflets.org.au/"
+    = render "application/footer"
 
-      - if @set_focus_control
-        %script(type="text/javascript")
-          document.getElementById('#{@set_focus_control}').focus();
-
-    = render "shared/analytics"
-    = javascript_include_tag "application"
-    :javascript
-      var uservoiceOptions = {key: 'planningalerts', host: 'planningalerts.uservoice.com', forum: '49635', alignment: 'right', background_color:'#F4F322', text_color: 'black',
-      hover_color: '#FF8C00', lang: 'en', showTab: true};
-      function _loadUserVoice() {
-      var s = document.createElement('script');
-      s.src = ("https:" == document.location.protocol ? "https://" : "http://") + "uservoice.com/javascripts/widgets/tab.js";
-      document.getElementsByTagName('head')[0].appendChild(s);
-      }
-      _loadSuper = window.onload;
-      window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
-    - if yield(:map) != ""
-      - if defined?(Configuration::GOOGLE_MAPS_CLIENT_ID)
-        %script(src="http://maps.googleapis.com/maps/api/js?client=#{Configuration::GOOGLE_MAPS_CLIENT_ID}&sensor=false&v=3.13" type="text/javascript")
-      - else
-        %script(src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript")
-      = javascript_include_tag "mxn.js", "mxn.core.js", "mxn.googlev3.core.js"
-    = vanity_js
+    = render "shared/end_matter"

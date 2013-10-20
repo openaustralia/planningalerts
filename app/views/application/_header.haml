@@ -1,0 +1,22 @@
+#header.container
+  #statsbanner
+    #stats
+      #{number_to_human(@alert_count).downcase} applications sent across Australia
+  %h1= link_to 'Planning Alerts', root_path
+  %h2 
+    Email alerts of planning applications 
+    %em near you
+
+  .hide= link_to "Skip navigation", "#content"
+  #menu
+    %ul.collapse
+      %li.applications-link= link_to 'Search', address_applications_path
+      %li.alerts-link= link_to 'Sign Up', new_alert_path
+      %li.faq-link
+        = link_to faq_path do
+          %abbr(title="Frequently asked questions") FAQ
+      %li.authorities-link= link_to 'Coverage', authorities_path
+      %li.get-involved-link= link_to 'Get Involved', get_involved_path
+      %li.api-link= link_to "Get the Data", api_howto_path
+      %li.donate-link= link_to 'Donate', donate_path
+      %li.about-link= link_to 'About', about_path
