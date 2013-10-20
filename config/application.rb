@@ -57,6 +57,13 @@ module PlanningalertsApp
     config.assets.enabled = true
     config.assets.version = '1.0'
 
+    # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
+    # config.assets.precompile += %w( search.js )
+    config.assets.precompile += ['ie.css', 'screen.css', 'print.css',
+      'placeholder_polyfill.min.css',
+      'active_admin.js', 'applications.js', 'bar_graph.js', 'maps.js', 'mxn.core.js',
+      'mxn.googlev3.core.js', 'mxn.js', 'placeholder_polyfill.jquery.min.combo.js', 'preview.js']
+
     config.action_dispatch.tld_length = 2
 
     config.exceptions_app = self.routes

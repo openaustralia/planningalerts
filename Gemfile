@@ -20,10 +20,7 @@ gem "jquery-ui-rails"
 
 gem "capistrano"
 gem "haml"
-# Latest release of geokit at this time (1.6.5) doesn't yet contain support for Google Maps Business API
-# and HEAD of the project has broken Ruby 1.8 support so backported the Google Maps Business API changes
-# on to geokit 1.6.5.
-gem "geokit", :git => "https://github.com/mlandauer/geokit.git", :branch => "back_port_google_maps_business_api"
+gem "geokit"
 gem "nokogiri"
 gem "foreigner"
 gem 'httparty'

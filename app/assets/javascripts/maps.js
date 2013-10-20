@@ -1,8 +1,8 @@
 function initialiseMaps(latitude, longitude, address) {
-  var map = new mxn.Mapstraction("map_div","google");
+  var map = new mxn.Mapstraction("map_div","googlev3");
   point = new mxn.LatLonPoint(latitude, longitude);
   map.setCenterAndZoom(point,16);
-  map.addControls({ zoom: 'small' });
+  map.addControls({ zoom: 'small', map_type: true });
   marker = new mxn.Marker(point)
   marker.setLabel(address);
   map.addMarker(marker);

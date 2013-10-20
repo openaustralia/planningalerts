@@ -69,13 +69,6 @@ PlanningalertsApp::Application.configure do
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
    
-  # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
-  config.assets.precompile += ['ie.css', 'screen.css', 'print.css',
-    'placeholder_polyfill.min.css',
-    'active_admin.js', 'applications.js', 'bar_graph.js', 'maps.js', 'mxn.core.js',
-    'mxn.google.core.js', 'mxn.js', 'placeholder_polyfill.jquery.min.combo.js', 'preview.js']
-
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 end
