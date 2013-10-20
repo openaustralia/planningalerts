@@ -9,7 +9,7 @@
   }
 
   #menu, #main, #sidebar,
-  .news, .stats, .keepintouch, .oaf {
+  .news, .keepintouch, .oaf {
     @include span-columns(6 omega);
   }
 
@@ -99,8 +99,8 @@
     @include span-columns(3 omega, 12);
   }
 
-  // news n stats
-  .news, .stats {
+  // news
+  .news {
     @include span-columns(12 omega, 12);
   }
 
@@ -220,7 +220,7 @@
     }
   }
 
-  .main, .tweets {
+  .main, .tweets, .stats {
     border: .5em solid $background-overlay;
     @include background-clip( padding-box);
     width: 61.3em;
@@ -233,7 +233,7 @@
     padding-right: 0;
   }
 
-  #content, .tweets > div {
+  #content, .tweets > div, .stats > div {
     padding-left: $grid-padding;
     padding-right: $grid-padding;
   }
@@ -250,13 +250,6 @@
   #content {
     @include clearfix;
     background-color: $content-background;
-  }
-
-  .news {
-    @include span-columns(12, 24);
-  }
-  .stats {
-    @include span-columns(11 omega, 24);
   }
 
   #pano {
@@ -278,14 +271,13 @@
     width: 28%;
   }
 
-  .tweets {
+  .tweets, .stats {
     background: transparent;
     border-top: none;
     border-bottom: none;
     padding: 0;
 
     > div {
-      @include border-bottom-radius(.35em);
       background-color: $lightest-cool-highlight;
       border-top: 1px solid darken($lightest-cool-highlight, 5%);
       //@include background(linear-gradient($light-cool-highlight 20%, $lightest-cool-highlight));
@@ -295,23 +287,42 @@
     li {
       border-bottom: none;
       padding: 0;
-      width: 50%;
       @include inline-block;
       float: left;
 
       a {
-        min-height: 72px;
-      }
-      &:first-child a {
         border-right: 1px solid #fff;
         padding-right: .75em;
       }
       &:last-child a {
         padding-left: .75em;
+        padding-right: 0;
+        border-right: none;
       }
     }
     .cta {
       clear: both;
+    }
+  }
+  .stats {
+    ul {
+      @include clearfix;
+    }
+    li {
+      width: 25%;
+      text-align: center;
+    }
+  }
+  .tweets {
+    > div {
+      @include border-bottom-radius(.35em);
+    }
+    li {
+      width: 50%;
+
+      a {
+        min-height: 72px;
+      }
     }
   }
 

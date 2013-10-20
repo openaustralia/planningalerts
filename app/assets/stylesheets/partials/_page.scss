@@ -103,7 +103,7 @@ body {
   padding: 2em 0 1.5em 0;
 }
 
-.tweets, #footer {
+.stats, .tweets, #footer {
   padding-top: 1em;
   padding-bottom: 1em;
 }
@@ -469,12 +469,12 @@ form.address-search {
     }
   }
 }
-.news, .stats {
+.news {
   border-top: 1px solid $lightest-cool-highlight;
   padding-top: 1em;
 }
 
-.tweets {
+.tweets, .stats {
   background-color: $lightest-cool-highlight;
 
   li {
@@ -593,8 +593,9 @@ td pre {
   }
   .number {
     @include border-radius(.25em);
+    margin-right: .3em;
     padding: .15em .35em;
-    background-color: $lightest-cool-highlight;
+    background-color: lighten($lightest-cool-highlight, 40%);
     font-weight: bold;
   }
 }
