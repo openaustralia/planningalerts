@@ -123,7 +123,7 @@ class Alert < ActiveRecord::Base
   end
   
   # Process this email alert and send out an email if necessary. Returns number of applications and comments sent.
-  def process
+  def process!
     applications = recent_applications
     comments = new_comments
     if !applications.empty? || !comments.empty?
@@ -158,7 +158,7 @@ class Alert < ActiveRecord::Base
     alerts = Alert.active.all
     info_logger.info "Checking #{alerts.count} active alerts"
     alerts.each do |alert|
-      no_applications, no_comments = alert.process
+      no_applications, no_comments = alert.process!
       if no_applications > 0 || no_comments > 0
         total_no_applications += no_applications
         total_no_comments += no_comments
