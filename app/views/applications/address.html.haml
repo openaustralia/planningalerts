@@ -92,12 +92,11 @@
           new comments
   - cache 'news', :expires_in => 1.hour do
     .news
-      -#
-        .blog-feed
-          %h4
-            News via the blog
-          = render_rss_feed("https://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/feed/")
-          = link_to "More&hellip;".html_safe, "http://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/"
+      .blog-feed
+        %h4
+          News via the blog
+        = render_rss_feed("https://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/feed/")
+        = link_to "More&hellip;".html_safe, "http://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/"
       .twitter-feed
         %h4
           and via Twitter
