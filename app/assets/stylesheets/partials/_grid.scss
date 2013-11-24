@@ -151,6 +151,9 @@
     background: image-url("background.jpg") top center no-repeat;
     background-size: cover;
   }
+  .photo-credit {
+    display: block;
+  }
 
   $container-style: static;
 
