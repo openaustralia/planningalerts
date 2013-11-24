@@ -252,6 +252,29 @@
     background-color: $content-background;
   }
 
+  .news {
+    li {
+      width: 50%;
+      @include inline-block;
+      float: left;
+
+      // Clear left introduces rows
+      // Border stuff makes lines between the rows, but no line on the top or bottom of the grid
+      &:nth-child(odd) {
+        clear: left;
+        border-top: 1px solid $lightest-cool-highlight;
+        border-bottom: none;
+
+        a {
+          padding-right: .75em;
+        }
+      }
+      &:first-child {
+        border-top: none;
+      }
+    }
+  }
+
   #pano {
     @include inline-block;
     float: left;
