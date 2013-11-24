@@ -250,7 +250,7 @@ describe Alert do
     end
   end
 
-  describe "#process" do
+  describe "#process!" do
     context "an alert with no new comments" do
       let(:alert) { Alert.create!(:email => "matthew@openaustralia.org", :address => @address, :radius_meters => 2000) }
       before :each do
@@ -270,19 +270,27 @@ describe Alert do
         end
 
         it "should return the number of applications and comments sent" do
-          alert.process.should == [1, 0]
+          alert.process!.should == [1, 0]
         end
 
         it "should send an email" do
-          alert.process
-
+          alert.process!
           ActionMailer::Base.deliveries.size.should == 1
         end
 
         it "should update the tally" do
-          alert.process
-
+          alert.process!
           application.no_alerted.should == 4
+        end
+
+        it "should update the last_sent time" do
+          alert.process!
+          (alert.last_sent - Time.now).abs.should < 1
+        end
+
+        it "should update the last_processed time" do
+          alert.process!
+          (alert.last_processed - Time.now).abs.should < 1
         end
       end
 
@@ -292,9 +300,18 @@ describe Alert do
         end
 
         it "should not send an email" do
-          alert.process
-
+          alert.process!
           ActionMailer::Base.deliveries.should be_empty
+        end
+
+        it "should not update the last_sent time" do
+          alert.process!
+          alert.last_sent.should be_nil
+        end
+
+        it "should update the last_processed time" do
+          alert.process!
+          (alert.last_processed - Time.now).abs.should < 1
         end
       end
     end

@@ -124,10 +124,16 @@ class Alert < ActiveRecord::Base
   end
   
   # Process this email alert and send out an email if necessary. Returns number of applications and comments sent.
-  def process
+  def process!
     applications = recent_applications
     comments = new_comments
-    AlertNotifier.alert(self, applications, comments).deliver unless applications.empty? && comments.empty?
+    if !applications.empty? || !comments.empty?
+      AlertNotifier.alert(self, applications, comments).deliver
+      self.last_sent = Time.now
+    end
+    self.last_processed = Time.now
+    save!
+
     # Update the tallies on each application.
     applications.each do |application|
       application.update_attribute(:no_alerted, (application.no_alerted || 0) + 1)
@@ -138,26 +144,37 @@ class Alert < ActiveRecord::Base
 
   # This is a long-running method. Call with care
   # TODO: Untested method
-  def self.send_alerts(info_logger = logger)
+  def self.process_all_active_alerts(info_logger = logger)
+    alerts = Alert.active.all
+    info_logger.info "Checking #{alerts.count} active alerts"
+    total_no_emails, total_no_applications, total_no_comments = process_alerts(alerts)
+    info_logger.info "Sent #{total_no_applications} applications and #{total_no_comments} comments to #{total_no_emails} people!"
+  end
+  
+  # TODO: Untested method
+  def self.process_alerts(alerts)
     # Only send alerts to confirmed users
     total_no_emails = 0
     total_no_applications = 0
     total_no_comments = 0
-    alerts = Alert.active.all
-    info_logger.info "Checking #{alerts.count} active alerts"
     alerts.each do |alert|
-      no_applications, no_comments = alert.process
+      no_applications, no_comments = alert.process!
       if no_applications > 0 || no_comments > 0
         total_no_applications += no_applications
         total_no_comments += no_comments
         total_no_emails += 1
       end
     end
+
+    # Update statistics. Updating the Stat at the end of each mail run has the advantage of not continiously invalidating
+    # page caches during mail runs.
+    Stat.emails_sent += total_no_emails
+    Stat.applications_sent += total_no_applications
     EmailBatch.create!(:no_emails => total_no_emails, :no_applications => total_no_applications,
       :no_comments => total_no_comments)
-    info_logger.info "Sent #{total_no_applications} applications and #{total_no_comments} comments to #{total_no_emails} people!"
+    [total_no_emails, total_no_applications, total_no_comments]
   end
-  
+
   private
   
   def remove_other_alerts_for_this_address
