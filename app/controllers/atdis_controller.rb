@@ -27,6 +27,7 @@ class AtdisController < ApplicationController
     if File.exists?(file)
       render :file  => file, :content_type => "text/javascript", :layout => false
     else
+      sdf
       render :text => "not available", :status => 404
     end
   end
