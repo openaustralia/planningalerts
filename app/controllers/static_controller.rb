@@ -33,4 +33,8 @@ class StaticController < ApplicationController
   def error_404
     render :status => :not_found, :formats => [:html]
   end
+
+  def error_500
+    render :status => 500, :formats => [:html]
+  end
 end
