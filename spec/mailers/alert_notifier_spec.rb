@@ -107,8 +107,8 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
       end
 
       it 'should contain links to the applications' do
-        contains_link(@html_body, "http://dev.planningalerts.org.au/applications/1?utm_medium=email&utm_source=alerts", "Foo Street, Bar")
-        contains_link(@html_body, "http://dev.planningalerts.org.au/applications/2?utm_medium=email&utm_source=alerts", "Bar Street, Foo")
+        @html_body.should have_link("Foo Street, Bar", href: "http://dev.planningalerts.org.au/applications/1?utm_medium=email&utm_source=alerts")
+        @html_body.should have_link("Bar Street, Foo", href: "http://dev.planningalerts.org.au/applications/2?utm_medium=email&utm_source=alerts")
       end
 
       it 'should contain application descriptions' do
@@ -119,10 +119,6 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
       it "should have a specific layout" do
         @html_body.should == Rails.root.join("spec/mailers/regression/email1.html").read
       end
-    end
-
-    def contains_link(html, url, text)
-      html.should match /<a href="#{url.gsub(/\//, '\/').gsub(/&/, '&amp;').gsub(/\?/, '\?')}"[^>]*>#{text}<\/a>/
     end
   end
 
