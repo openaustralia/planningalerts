@@ -9,7 +9,8 @@
           %pre= truncate(MultiJson.dump(attr, :pretty => true), :length => 500)
       %td
         - errors.each do |e|
-          %span.highlight= e.message
-          - if e.spec_section
-            &mdash; see
-            = link_to "section #{e.spec_section} of specification", atdis_specification_path(:anchor => "section#{e.spec_section}")
+          %p
+            %span.highlight= e.message
+            - if e.spec_section
+              &mdash; see
+              = link_to "section #{e.spec_section} of specification", atdis_specification_path(:anchor => "section#{e.spec_section}")
