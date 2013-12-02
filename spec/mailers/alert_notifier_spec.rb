@@ -99,10 +99,6 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
       it "should nicely format a list of multiple planning applications" do
         get_message_part(@email, /plain/).should include Rails.root.join("spec/mailers/regression/email1.txt").read
       end
-
-      it "should include one of the promos" do
-        pending
-      end
     end
 
     context "HTML emails" do
@@ -126,10 +122,6 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
 
       it "should have a specific header" do
         @html_body.should include Rails.root.join("spec/mailers/regression/email1_header.html").read
-      end
-
-      it "should include one of the promos" do
-        pending
       end
     end
   end
