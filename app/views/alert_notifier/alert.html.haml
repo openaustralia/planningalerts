@@ -4,7 +4,7 @@
     %div{:style => "background: #878787; padding: 5px 0 5px 10px; margin-bottom:5px"}
       %a{:href => "http://www.planningalerts.org.au/", :style => "color: white; font-weight:bold; font-size: 20px; text-decoration:none;"}
         PlanningAlerts
-    = render partial: 'promo'
+    = render partial: (%w(righttoknow_promo openaustralia_promo).shuffle.first)
     - unless @comments.empty?
       %div{:style => "margin: 6px 11px 25px; padding: 15px; background: #fcfbbd; -moz-border-radius: 10px; -khtml-border-radius: 10px; -webkit-border-radius: 10px;"}
         - if @comments.count == 1

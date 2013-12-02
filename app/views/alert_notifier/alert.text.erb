@@ -1,4 +1,4 @@
-<%= render partial: 'promo' %>
+<%= render partial: (%w(righttoknow_promo openaustralia_promo).shuffle.first) %>
 ============================================================
 <% unless @comments.empty? %>
 <% if @comments.count == 1 %>
