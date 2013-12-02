@@ -487,6 +487,9 @@ td pre {
   a, a:visited {
     color: $darkgrey;
   }
+  a:hover {
+    color: #22579c;
+  }
   .stat:hover {
     background: #dddddd;
   }
