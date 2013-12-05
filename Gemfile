@@ -73,6 +73,7 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-livereload'
   gem 'rack-livereload'
+  gem 'mailcatcher'
 end
   
 group :test, :development do

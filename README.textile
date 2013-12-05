@@ -52,7 +52,6 @@ h4. Scraping and sending emails in your dev environment
  * Fish the email confirmation link from the logs and hit the link.  It should look something like http://localhost:3000/alerts/f2c772161467b30a1bb8/confirmed
 
 *Step 4 - Send email alerts*
- * Install "MailCatcher":https://github.com/sj26/mailcatcher - @gem install mailcatcher@
  * Start MailCatcher - @mailcatcher@
  * Run - @rake planningalerts:applications:email@
  * Check the email in your browser: "http://localhost:1080/":http://localhost:1080/
