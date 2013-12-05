@@ -46,13 +46,13 @@ h4. Scraping and sending emails in your dev environment
 
 *Step 3 - Setup an Alert*
  * Start the rails server - @rails s@
+ * Start MailCatcher - @mailcatcher@
  * Hit the home page - "http://localhost:3000":http://localhost:3000
  * Enter an address e.g. 638 King St, Newtown NSW 2042
  * Click the "Email me" link and setup an alert
- * Fish the email confirmation link from the logs and hit the link.  It should look something like http://localhost:3000/alerts/f2c772161467b30a1bb8/confirmed
+ * Open MailCatcher and click the confirm link: "http://localhost:1080/":http://localhost:1080/
 
 *Step 4 - Send email alerts*
- * Start MailCatcher - @mailcatcher@
  * Run - @rake planningalerts:applications:email@
  * Check the email in your browser: "http://localhost:1080/":http://localhost:1080/
 
