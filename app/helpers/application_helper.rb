@@ -94,8 +94,4 @@ module ApplicationHelper
     end
     render :partial => 'applications/rss'
   end
-
-  def render_random_promo
-    render partial: (%w(righttoknow_promo openaustralia_promo).shuffle.first)
-  end
 end
