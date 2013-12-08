@@ -35,11 +35,13 @@
       - if @application.authority.contactable?
         - unless @application.comments.visible.empty?
           %h4= pluralize(@application.comments.visible.count, "Comment")
+          %p.small.quiet
+            Have your say by #{link_to "adding your own comment", "#add-comment"}.
         %ol#comments
           - @application.comments.visible.each do |comment|
             %li{:id => "comment#{comment.id}"}
               = render :partial => 'comments/comment', :locals => {:comment => comment}
-      %h4 Add your own comment
+      %h4#add-comment Add your own comment
       - if @application.authority.contactable?  
         - if @application.on_notice_to
           %p= on_notice_text(@application)
