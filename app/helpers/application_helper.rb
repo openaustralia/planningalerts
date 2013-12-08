@@ -63,7 +63,7 @@ module ApplicationHelper
       content = HTTParty.get(url).body
       feed = RSS::Parser.parse(content, false)
       feed.channel.items[0..4] # just use the first five items
-    rescue SocketError
+    rescue SocketError, Errno::ETIMEDOUT
       []
     end
   end
