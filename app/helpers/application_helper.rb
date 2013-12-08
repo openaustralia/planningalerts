@@ -48,16 +48,6 @@ module ApplicationHelper
     meters_in_words(km * 1000)
   end
   
-  def is_mobile_optimised?
-    @mobile_optimised == true
-  end
-  
-  def mobile_switcher_links
-    if is_mobile_optimised? && is_mobile_device?
-      (link_to_unless(in_mobile_view?, "Mobile", :mobile => "true") + " | " + link_to_unless(!in_mobile_view?, "Desktop", :mobile => "false")).html_safe
-    end
-  end
-  
   def rss_feed_items(url)
     begin
       content = HTTParty.get(url).body

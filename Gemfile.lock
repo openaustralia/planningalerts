@@ -8,12 +8,6 @@ GIT
       rest-client
       rgeo-geojson
 
-GIT
-  remote: https://github.com/openaustralia/mobile-fu.git
-  revision: 5dca62b3a53e29df63c3af2314ae8b7a17e14088
-  specs:
-    mobile-fu (0.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -404,7 +398,6 @@ DEPENDENCIES
   jquery-rails (= 2.2.1)
   jquery-ui-rails
   mailcatcher
-  mobile-fu!
   mysql2 (> 0.3)
   newrelic_rpm
   nokogiri

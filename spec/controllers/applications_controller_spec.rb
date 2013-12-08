@@ -284,28 +284,6 @@ describe ApplicationsController do
       
       assigns[:application].should == app
     end
-
-    describe "mobile support" do
-      it "should have a mobile optimised show page" do
-        app = mock_model(Application, :address => "12 Foo Street", :date_scraped => Date.new(2010, 5, 13),
-          :description => "Cutting a hedge.", :find_all_nearest_or_recent => [])
-        Application.should_receive(:find).with("1").and_return(app)
-        get :show, :id => 1
-        assigns[:mobile_optimised].should == true
-      end
-      
-      it "should disable mobile view" do
-        get :show, :id => 1, :mobile => "false"
-        session[:mobile_view].should be_false
-        response.should redirect_to(:action => :show, :id => 1)
-      end
-
-      it "should enable mobile view" do
-        get :show, :id => 1, :mobile => "true"
-        session[:mobile_view].should be_true
-        response.should redirect_to(:action => :show, :id => 1)
-      end
-    end
   end
 
   describe "#address" do
