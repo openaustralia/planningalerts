@@ -34,7 +34,7 @@
     #comments-area
       - if @application.authority.contactable?
         - unless @application.comments.visible.empty?
-          %h4 Comments
+          %h4= pluralize(@application.comments.visible.count, "Comment")
         %ol#comments
           - @application.comments.visible.each do |comment|
             %li{:id => "comment#{comment.id}"}
