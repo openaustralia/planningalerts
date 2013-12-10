@@ -2,5 +2,6 @@
 
 <%= raw application.description %>
 
-<%= raw application_url(:id => application.id, :utm_source => 'alerts', :utm_medium => 'email') %>
+Read more: <%= raw application_url(:id => application.id, :utm_source => 'alerts', :utm_medium => 'email') %>
+Add your own comment: <%= raw application_url(:id => application.id, :anchor => 'add-comment', :utm_source => 'alerts', :utm_medium => 'email', :utm_campaign => 'add-comment') %>
 
