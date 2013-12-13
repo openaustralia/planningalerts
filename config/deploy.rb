@@ -33,10 +33,7 @@ end
 # This goes out even if the deploy fails, sadly 
 after "deploy:update", "newrelic:notice_deployment"
 
-# Hooks for starting/stopping/restarting delayed_job
-after "deploy:stop",    "delayed_job:stop"
-after "deploy:start",   "delayed_job:start"
-after "deploy:restart", "delayed_job:restart"
+before "deploy:restart", "foreman:restart"
 
 namespace :deploy do
   desc "After a code update, we link additional config and the scrapers"
@@ -60,10 +57,27 @@ namespace :deploy do
 
   task :restart, :except => { :no_release => true } do
     run "touch #{File.join(current_path,'tmp','restart.txt')}"
+  end
+end
 
-    if stage == 'production'
-      # Run Sphinx searchd daemon
-      run "cd #{current_path}; bundle exec rake ts:run RAILS_ENV=production"
-    end
+namespace :foreman do
+  desc "Export the Procfile to Ubuntu's upstart scripts"
+  task :export, roles: :app do
+    run "cd #{current_path} && sudo bundle exec foreman export upstart /etc/init -u deploy -a planningalerts -f Procfile.production -l /srv/www/www.planningalerts.org.au/log --root /srv/www/www.planningalerts.org.au/app/current"
+  end
+
+  desc "Start the application services"
+  task :start, roles: :app do
+    sudo "service planningalerts start"
+  end
+
+  desc "Stop the application services"
+  task :stop, roles: :app do
+    sudo "service planningalerts stop"
+  end
+
+  desc "Restart the application services"
+  task :restart, roles: :app do
+    run "sudo service planningalerts restart"
   end
 end
