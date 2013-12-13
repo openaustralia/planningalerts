@@ -149,14 +149,14 @@ class Alert < ActiveRecord::Base
     no_batches = alerts.count / batch_size + 1
     time_between_batches = 24.hours / no_batches
     info_logger.info "Checking #{alerts.count} active alerts"
-    info_logger.info "Splitting mailing into batches of size #{batch_size} roughly every #{time_between_batches / 60} minutes"
+    info_logger.info "Splitting mailing for the next 24 hours into batches of size #{batch_size} roughly every #{time_between_batches / 60} minutes"
 
     time = Time.now
     alerts.map{|a| a.id}.shuffle.each_slice(batch_size) do |alert_ids|
       Alert.delay(:run_at => time).process_alerts(alert_ids)
       time += time_between_batches
     end
-    info_logger.info "Mailing jobs queued"
+    info_logger.info "Mailing jobs for the next 24 hours queued"
   end
   
   # TODO: Untested method
