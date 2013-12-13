@@ -144,7 +144,7 @@ class Alert < ActiveRecord::Base
   # This is a long-running method. Call with care
   # TODO: Untested method
   def self.process_all_active_alerts(info_logger = logger)
-    batch_size = 30
+    batch_size = 100
     alerts = Alert.active.all
     no_batches = alerts.count / batch_size + 1
     time_between_batches = 24.hours / no_batches
