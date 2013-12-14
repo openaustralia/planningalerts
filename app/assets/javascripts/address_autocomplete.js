@@ -14,12 +14,9 @@ $("#alert_address,#q").autocomplete({
                 var offset = prediction.matched_substrings[0].offset;
 
                 var text = prediction.description
-                if (offset == 0) {
-                    var html = "<strong>" + text.slice(0, length) + "</strong>" + text.slice(length);
-                }
-                else {
-                    var html = text;
-                }
+                var html = text.slice(0, offset) +
+                    "<strong>" + text.slice(offset, offset+length) + "</strong>" +
+                    text.slice(offset+length);
 
                 return({label: html, value: text});
             }));
