@@ -39,6 +39,7 @@ $("#alert_address,#q").autocomplete({
         });
     },
     select: function( event, ui ) {
+        $(this).val(ui.item.value);
         // If we're on the home page (which has a form with one field) make selecting an address submit the form
         $("form.one-field").submit();
     }
