@@ -37,5 +37,9 @@ $("#alert_address,#q").autocomplete({
                 return({label: html, value: text});
             }));
         });
+    },
+    select: function( event, ui ) {
+        // If we're on the home page (which has a form with one field) make selecting an address submit the form
+        $("form.one-field").submit();
     }
 });
