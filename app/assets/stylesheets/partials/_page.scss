@@ -506,3 +506,9 @@ td pre {
   }
 }
 
+// Style the autocomplete with a powered by Google logo as per the terms and conditions
+ul.ui-autocomplete {
+  background: url(../../assets/powered-by-google-on-white.png) white no-repeat bottom right;
+  padding-bottom: 10px;
+}
+
