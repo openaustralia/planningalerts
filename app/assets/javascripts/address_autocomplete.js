@@ -28,8 +28,8 @@ $("#alert_address,#q").autocomplete({
                     case "Victoria": state = "VIC"; break;
                     case "Western Australia": state = "WA"; break;
                 }
-                textArray[textArray.length - 1] = state;
-                text = textArray.join(", ");
+                // Don't use comma to separate state from rest of address to behave the same as the geocoder
+                text = textArray.slice(0,-1).join(", ") + " " + state
                 var html = text.slice(0, offset) +
                     "<strong>" + text.slice(offset, offset+length) + "</strong>" +
                     text.slice(offset+length);
