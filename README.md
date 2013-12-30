@@ -1,17 +1,14 @@
-PlanningAlerts - a free service which searches as many planning authority websites as it can find and emails
-you details of applications near you
+# PlanningAlerts
 
-Copyright (C) 2009-2013 OpenAustralia Foundation Limited and original contributors to PlanningAlerts.com
+Find out and have your say about development applications in your area.
 
-The aim of this to enable shared scrutiny of what is being built (and [knocked down](http://www.flickr.com/photos/kentjohnson/3634555801/)) in peoples' communities.
+This is the code for the [web application](http://www.planningalerts.org.au/) side of things written using Ruby on Rails. The original code from [PlanningAlerts.com](http://www.planningalerts.com), which this app is based on, was written using PHP.
 
-This is the code for the web application side of things written using Ruby on Rails. The original code from PlanningAlerts.com, which this app is based on, was written using php.
+PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.openaustraliafoundation.org.au). It was adapted for Australia by Matthew Landauer and Katherine Szuminska, and is based on the UK site PlanningAlerts.com, built by Richard Pope, Mikel Maron, Sam Smith, Duncan Parkes, Tom Hughes and Andy Armstrong.
 
-This code is free and open-source and is licensed under the GPL v2.
+## Development
 
-PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.openaustraliafoundation.org.au). It was adapted for Australia by Matthew Landauer and Katherine Szuminska, and is based on the UK site [PlanningAlerts.com](http://www.planningalerts.com), built by Richard Pope, Mikel Maron, Sam Smith, Duncan Parkes, Tom Hughes and Andy Armstrong.
-
-### Setting up a dev environment [![Build Status](https://travis-ci.org/openaustralia/planningalerts-app.png?branch=master)](https://travis-ci.org/openaustralia/planningalerts-app) [![Dependency Status](https://gemnasium.com/openaustralia/planningalerts-app.png)](https://gemnasium.com/openaustralia/planningalerts-app) [![Coverage Status](https://coveralls.io/repos/openaustralia/planningalerts-app/badge.png?branch=master)](https://coveralls.io/r/openaustralia/planningalerts-app?branch=master) [![Code Climate](https://codeclimate.com/github/openaustralia/planningalerts-app.png)](https://codeclimate.com/github/openaustralia/planningalerts-app)
+[![Build Status](https://travis-ci.org/openaustralia/planningalerts-app.png?branch=master)](https://travis-ci.org/openaustralia/planningalerts-app) [![Dependency Status](https://gemnasium.com/openaustralia/planningalerts-app.png)](https://gemnasium.com/openaustralia/planningalerts-app) [![Coverage Status](https://coveralls.io/repos/openaustralia/planningalerts-app/badge.png?branch=master)](https://coveralls.io/r/openaustralia/planningalerts-app?branch=master) [![Code Climate](https://codeclimate.com/github/openaustralia/planningalerts-app.png)](https://codeclimate.com/github/openaustralia/planningalerts-app)
 
 **Install Dependencies**
  * Install MySql - On OSX download dmg from [http://dev.mysql.com/downloads/](http://dev.mysql.com/downloads/)
@@ -35,7 +32,7 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 **Run The Tests**
  * Run the test suite - `rake`
 
-#### Scraping and sending emails in your dev environment
+### Scraping and sending emails in development
 
 **Step 1 - Seed authorities table**
  * Change `INTERNAL_SCRAPERS_INDEX_URL` in app/models/configuration.rb to point to : http://www.planningalerts.org.au/scrapers/
@@ -57,6 +54,18 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
  * Check the email in your browser: http://localhost:1080/
  * To resend alerts during testing, just set the `last_sent` attribute of your alert to *nil*
 
-### Contact
+## Contributing
 
-You can get in touch at [contact@planningalerts.org.au](mailto:contact@planningalerts.org.au)
+* Fork the project on GitHub.
+* Make a topic branch from the master branch.
+* Make your changes and write tests.
+* Commit the changes without making changes to any files that aren't related to your enhancement or fix.
+* Send a pull request against the master branch.
+
+## Credits
+
+Our awesome contributors can be found on the [PlanningAlerts site](http://www.planningalerts.org.au/about).
+
+## License
+
+GPLv2, see the LICENSE file for full details.
