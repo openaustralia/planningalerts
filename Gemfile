@@ -17,6 +17,7 @@ gem 'jquery-rails', "2.2.1"
 gem "jquery-ui-rails"
 
 gem "capistrano"
+gem "foreman"
 gem "haml"
 gem "geokit"
 gem "nokogiri"
