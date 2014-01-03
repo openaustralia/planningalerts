@@ -37,6 +37,9 @@
   %li
     = link_to "Example with invalid json", atdis_test_path(:url => atdis_feed_url(:number => 5))
     (<strong>#{link_to "view source", atdis_feed_url(:number => 5)}</strong>)
+  %li
+    = link_to "Example with a single application", atdis_test_path(:url => atdis_feed_url(:number => 6))
+    (<strong>#{link_to "view source", atdis_feed_url(:number => 6)}</strong>)
 
 - if @error
   %p.error= @error

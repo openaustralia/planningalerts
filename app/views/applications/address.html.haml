@@ -4,7 +4,7 @@
   Find out for free what is being built and knocked down in your area and receive email
   alerts when something new is planned. Start by entering an Australian street address.
 
-%form.address-search.formtastic{'accept-charset' => "UTF-8", 'action' => "/", 'method' => "get"}
+%form.address-search.formtastic.one-field{'accept-charset' => "UTF-8", 'action' => "/", 'method' => "get"}
   %fieldset.inputs
     %ol
       %li#q_input.string{:class => ("error" if @error)}

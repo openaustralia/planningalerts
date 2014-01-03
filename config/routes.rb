@@ -95,4 +95,5 @@ PlanningalertsApp::Application.routes.draw do
   root :to => 'applications#address'
 
   match '/404', :to => 'static#error_404'
+  match "/500", :to => 'static#error_500'
 end

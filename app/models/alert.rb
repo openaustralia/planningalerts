@@ -145,19 +145,28 @@ class Alert < ActiveRecord::Base
   # This is a long-running method. Call with care
   # TODO: Untested method
   def self.process_all_active_alerts(info_logger = logger)
+    batch_size = 100
     alerts = Alert.active.all
+    no_batches = alerts.count / batch_size + 1
+    time_between_batches = 24.hours / no_batches
     info_logger.info "Checking #{alerts.count} active alerts"
-    total_no_emails, total_no_applications, total_no_comments = process_alerts(alerts)
-    info_logger.info "Sent #{total_no_applications} applications and #{total_no_comments} comments to #{total_no_emails} people!"
+    info_logger.info "Splitting mailing for the next 24 hours into batches of size #{batch_size} roughly every #{time_between_batches / 60} minutes"
+
+    time = Time.now
+    alerts.map{|a| a.id}.shuffle.each_slice(batch_size) do |alert_ids|
+      Alert.delay(:run_at => time).process_alerts(alert_ids)
+      time += time_between_batches
+    end
+    info_logger.info "Mailing jobs for the next 24 hours queued"
   end
   
   # TODO: Untested method
-  def self.process_alerts(alerts)
+  def self.process_alerts(alert_ids)
     # Only send alerts to confirmed users
     total_no_emails = 0
     total_no_applications = 0
     total_no_comments = 0
-    alerts.each do |alert|
+    Alert.find(alert_ids).each do |alert|
       no_applications, no_comments = alert.process!
       if no_applications > 0 || no_comments > 0
         total_no_applications += no_applications

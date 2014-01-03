@@ -1,13 +1,17 @@
-%table{:style => "padding-left: 15px; padding-bottom: 15px;"}
-  %tr
-    %td{:colspan => "2", :style => "padding-bottom: 5px;"}
-      = link_to application.address, application_url(:id => application.id, :utm_source => 'alerts', :utm_medium => 'email'), :style => "font-size: 18px; font-weight: bold; color: #f2630c;"
-  - if application.location
+%div{:style => "margin: 6px 11px 25px; padding: 15px; background: #eeeeee;"}
+  %table
     %tr
-      %td{:style => "padding: 5px; width: 155px;"}
-        = google_static_map(application, :size => "150x150")
-      %td{:style => "padding: 5px;"}
-        = google_static_streetview(application, :size => "150x150")
-  %tr
-    %td{:colspan => "2", :style => "vertical-align: top;"}
-      = application.description
+      %td{:colspan => "2", :style => "padding-bottom: 5px;"}
+        = link_to application.address, application_url(:id => application.id, :utm_source => 'alerts', :utm_medium => 'email'), :style => "font-size: 18px; font-weight: bold; color: #f2630c;"
+    - if application.location
+      %tr
+        %td{:style => "padding: 5px; width: 155px;"}
+          = google_static_map(application, :size => "150x150")
+        %td{:style => "padding: 5px;"}
+          = google_static_streetview(application, :size => "150x150")
+    %tr
+      %td{:colspan => "2", :style => "vertical-align: top;"}
+        = application.description
+    %tr
+      %td{:colspan => "2"}
+        = link_to 'Add your own comment', application_url(:id => application.id, :anchor => 'add-comment', :utm_source => 'alerts', :utm_medium => 'email', :utm_campaign => 'add-comment'), :style => "color: #f2630c;"

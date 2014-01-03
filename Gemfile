@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem 'rails', '= 3.2.13'
+gem 'rails', '= 3.2.16'
 gem 'mysql2', '> 0.3'
  
 # Needed for the new asset pipeline
@@ -19,6 +19,7 @@ gem 'jquery-rails', "2.2.1"
 gem "jquery-ui-rails"
 
 gem "capistrano"
+gem "foreman"
 gem "haml"
 gem "geokit"
 gem "nokogiri"
@@ -71,6 +72,7 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-livereload'
   gem 'rack-livereload'
+  gem 'mailcatcher'
 end
   
 group :test, :development do
