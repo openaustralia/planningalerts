@@ -33,6 +33,14 @@ a.btn:hover {
     color: $cool-highlight;
   }
 
+  .placeholder {
+    text-align: left;
+    padding-top: .4em;
+    padding-left: .3em;
+    font-size: 1.2em;
+    font-weight: normal;
+  }
+
   li {
     margin-bottom: 0.5em;
 
@@ -84,7 +92,7 @@ a.btn:hover {
   @include float-form(100%, 0%, 100%, 0, "buttons-left", "left", "select-auto");
   /* This is only used when the placeholder polyfill is active */
   .label span.placeholder {
-    font-size: 1em;
+    // font-size: 1em;
   }
 }
 
@@ -129,7 +137,9 @@ form.donate {
 
     /* This is only used when the placeholder polyfill is active */
     span.placeholder {
-      font-size: 1.3em;
+      padding-top: .8em;
+      padding-left: .7em;
+      font-size: .8em;
     }
   }
   .inline-hints {
