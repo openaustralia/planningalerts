@@ -33,4 +33,10 @@
               = link_to "possibly broken", authority.scraperwiki_url
             - else
               possibly broken
+        &mdash;
+        - if authority.scraperwiki_url
+          = link_to "Scraperwiki scraper", authority.scraperwiki_url
+        - else
+          = link_to "internal scraper", "https://github.com/openaustralia/planningalerts-parsers"
+          
 
