@@ -4,7 +4,7 @@ Find out and have your say about development applications in your area.
 
 This is the code for the [web application](http://www.planningalerts.org.au/) side of things written using Ruby on Rails. The original code from [PlanningAlerts.com](http://www.planningalerts.com), which this app is based on, was written using PHP.
 
-If you're interested in contributing a scraper it might be best do that on [ScraperWiki](http://scraperwiki.com/) or by adding it to our [planningalerts-parsers](https://github.com/openaustralia/planningalerts-parsers) repository. Give us a shout on the [mailing list](http://groups.google.com/group/openaustralia-dev) and we'll point you in the right direction.
+If you're interested in contributing a scraper please give us a shout on the [mailing list](http://groups.google.com/group/openaustralia-dev) and we'll point you in the right direction. We're currently in the midst of changing the place that we run scrapers so it's all in a bit of a state of flux.
 
 PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.openaustraliafoundation.org.au). It was adapted for Australia by Matthew Landauer and Katherine Szuminska, and is based on the UK site PlanningAlerts.com, built by Richard Pope, Mikel Maron, Sam Smith, Duncan Parkes, Tom Hughes and Andy Armstrong.
 
