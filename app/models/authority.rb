@@ -194,6 +194,10 @@ class Authority < ActiveRecord::Base
   def scraperwiki_url
     "https://scraperwiki.com/scrapers/#{scraperwiki_name}/" if scraperwiki?
   end
+
+  def morph_url
+    "http://morph.io/#{morph_name}" unless morph_name.blank?
+  end
   
   def feed_url_has_date?
     feed_url && (feed_url.include?("{year}") || feed_url.include?("{month}") || feed_url.include?("{day}"))
