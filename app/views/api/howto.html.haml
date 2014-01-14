@@ -1,11 +1,17 @@
-- content_for :page_title, "Get the Data - API"
+- content_for :page_title, "Get the Data — API"
+
 %h3= yield :page_title
+
 %p
   Planning application data is available programmatically as feeds which can
-  be used in most web mapping APIs and desktop GIS software like <a href="http://mapufacture.com">mapufacture</a>
-  and <a href="http://pipes.yahoo.com/">Yahoo Pipes</a>. Details of the API are listed below.
+  be used in most web mapping APIs and desktop GIS software like
+  %a(href="http://mapufacture.com") mapufacture
+  and&nbsp;
+  %a(href="http://pipes.yahoo.com/")> Yahoo Pipes
+  \. Details of the API are listed below.
+
 %p
-  Non-commercial, low-volume use of this service is free.
+  Non&ndash;commercial, low&ndash;volume use of this service is free.
   = link_to "Read more.", :anchor => "hLicenseInfo"
 %p
   All the API calls listed below return planning application sorted by the date they were scraped from the planning authority website with the most
@@ -13,8 +19,9 @@
 %p
   The API can return different formats including <a href="http://www.georss.org/">GeoRSS</a>, <a href="http://www.json.org/">JSON</a> and <a href="http://en.wikipedia.org/wiki/JSONP">JSONP</a>. The examples below return
   JSON. To get GeoRSS instead simply replace ".js" in the URL with ".rss". To get JSONP add the query parameter "callback".
-%h4
-  API documentation
+
+%hr
+%h4 API documentation
 .apiitem
   %h5
     Single Location by address
@@ -22,10 +29,9 @@
     Return applications near a given street address. The area included is a circle with a radius of the given size (in metres)
     with the address at its center. Suggested sizes are 400, 800 or 4000 metres.
   %code= raw api_example_address_url_html("js")
-  %p.apiexamples
-    = link_to "view example", api_example_address_url("js")
-    |
-    = link_to "view on a map", mapify(api_example_address_url("rss") + "&style=html", 14)
+  .apiexamples
+    = link_to "Example", api_example_address_url("js"), :class => "button button-rounded"
+    = link_to "Map", mapify(api_example_address_url("rss") + "&style=html", 14), :class => "button button-rounded"
 .apiitem
   %h5
     Single Location by longitude/latitude
@@ -33,20 +39,18 @@
     Return applications near a given longitude/latitude. The area included is a circle with a radius of the given size (in metres)
     with the longitude/latitude at its center. Suggested sizes are 400, 800 or 4000 metres.
   %code= raw api_example_latlong_url_html("js")
-  %p.apiexamples
-    = link_to "view example", api_example_latlong_url("js")
-    |
-    = link_to "view on a map", mapify(api_example_latlong_url("rss") + "&style=html", 14)
+  .apiexamples
+    = link_to "Example", api_example_latlong_url("js"), :class => "button button-rounded"
+    = link_to "Map", mapify(api_example_latlong_url("rss") + "&style=html", 14), :class => "button button-rounded"
 .apiitem
   %h5
     Area by longitude/latitude
   %p.apidefinition
     Return applications within a rectangle defined by longitude/latitude.
   %code= raw api_example_area_url_html("js")
-  %p.apiexamples
-    = link_to "view example", api_example_area_url("js")
-    |
-    = link_to "view on a map", mapify(api_example_area_url("rss") + "&style=html", 6)
+  .apiexamples
+    = link_to "Example", api_example_area_url("js"), :class => "button button-rounded"
+    = link_to "Map", mapify(api_example_area_url("rss") + "&style=html", 6), :class => "button button-rounded"
 .apiitem
   %h5
     Planning authority
@@ -56,31 +60,29 @@
     = link_to "list of authorities", authorities_path
     and follow the link. The url has the authority short name in it.
   %code= raw api_example_authority_url_html("js")
-  %p.apiexamples
-    = link_to "view example", api_example_authority_url("js")
-    |
-    = link_to "view on a map", mapify(api_example_authority_url("rss") + "&style=html", 11)
+  .apiexamples
+    = link_to "Example", api_example_authority_url("js"), :class => "button button-rounded"
+    = link_to "Map", mapify(api_example_authority_url("rss") + "&style=html", 11), :class => "button button-rounded"
 .apiitem
   %h5
     Postcode
   %p.apidefinition
     Return applications for a specific postcode area
   %code= raw api_example_postcode_url_html("js")
-  %p.apiexamples
-    = link_to "view example", api_example_postcode_url("js")
-    |
-    = link_to "view on a map", mapify(api_example_postcode_url("rss") + "&style=html", 13)
+  .apiexamples
+    = link_to "Example", api_example_postcode_url("js"), :class => "button button-rounded"
+    = link_to "Map", mapify(api_example_postcode_url("rss") + "&style=html", 13), :class => "button button-rounded"
 .apiitem
   %h5
     Suburb
   %p.apidefinition
-    Return applications in a suburb. Including "state" in the search is optional.
+    Return applications in a suburb. Including &ldquo;state&rdquo; in the search is optional.
   %code= raw api_example_suburb_and_state_url_html("js")
-  %p.apiexamples
-    = link_to "view example", api_example_suburb_and_state_url("js")
-    |
-    = link_to "view on a map", mapify(api_example_suburb_and_state_url("rss") + "&style=html", 13)
+  .apiexamples
+    = link_to "Example", api_example_suburb_and_state_url("js"), :class => "button button-rounded"
+    = link_to "Map", mapify(api_example_suburb_and_state_url("rss") + "&style=html", 13), :class => "button button-rounded"
 
+%hr
 %h4 Extra query parameters
 %p
   There are several parameters that can be applied to each of the above queries for extra usefulness.
@@ -88,7 +90,7 @@
   %h5 page
   %p.apidefinition
     API calls return a maximum of #{Application.per_page} results. To retrieve more results simply do another request with page
-    set to 2, 3, etc... Not setting the page parameter is the same as requesting page 1.
+    set to 2, 3, etc&hellip; Not setting the page parameter is the same as requesting page 1.
   %code= raw api_example_postcode_url("js", 2780, :page => 2)
 .apiitem
   %h5 count
@@ -98,30 +100,36 @@
 .apiitem
   %h5 style
   %p.apidefinition
-    For georss, by setting "style" to "html" it will return an html formatted description in the georss feed rather than the default plain text. This is especially useful when a georss feed is embedded in a map as in some of the examples above.
+    For georss, by setting &ldquo;style&rdquo; to &ldquo;html&rdquo; it will return an html formatted description in the georss feed rather than the default plain text. This is especially useful when a georss feed is embedded in a map as in some of the examples above.
   %code= raw api_example_postcode_url("rss", 2780, :style => "html")
 .apiitem
   %h5 callback
   %p.apidefinition
-    To return JSONP set "callback" to the name of your javascript callback function.
+    To return JSONP, set &ldquo;callback&rdquo; to the name of your javascript callback function.
   %code= raw api_example_postcode_url("js", 2780, :callback => "my_callback")
 
+%hr
 %h4#hLicenseInfo
-  Usage & License
+  Usage &amp; License
 %p
-  Data is licensed under the
-  <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0 license</a>.
+  Data is licensed under the&nbsp;
+  %a(href="http://creativecommons.org/licenses/by-sa/3.0/")> Creative Commons Attribution&ndash;Share Alike 3.0 license
+  \.
 %p
-  Low volume, <strong>non-commercial</strong> use of the API service is free. We ask that personal and non-profit use of this service attribute the OpenAustralia Foundation on your website or application.
+  Low volume,
+  %strong non&ndash;commercial
+  use of the API service is free. We ask that personal and non&ndash;profit use of this service attribute the OpenAustralia Foundation on your website or application.
 
 %p
   Please
   = mail_to "contact@planningalerts.org.au", "contact us"
-  for <strong>commercial</strong> use. Commercial users may include Real Estate Agencies, Architects, Planners or Builders.
+  for
+  %strong commercial
+  use. Commercial users may include Real Estate Agencies, Architects, Planners or Builders.
 
 %p
   Also, please #{mail_to "contact@planningalerts.org.au", "get in touch"} if you intend to use the service on a large scale. In order to maintain quality of service for our API users, this service is rate limited by default to approximately 1000 requests per day.
 
 %p
-  We offer a range of paid options, from rate-limited to unlimited use of this service.
+  We offer a range of paid options, from rate&ndash;limited to unlimited use of this service.
 

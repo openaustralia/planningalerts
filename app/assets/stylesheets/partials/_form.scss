@@ -6,7 +6,6 @@
 //  @include blueprint-form; }
 
 @import "formtastic_base";
-@import "fancy-buttons";
 
 //$fb-light-text: $font-color;
 $fb-gradient-style: matte;
@@ -15,7 +14,7 @@ $fb-line-height: 1em;
 
 .actions input, .btn { 
   margin-top: 1em;
-  @include fancy-button-allow-disable($orange); 
+  // @include fancy-button-allow-disable($orange); 
   font-weight: normal;
 }
 
@@ -25,20 +24,33 @@ a.btn:hover {
 
 .formtastic {
   @include float-form(100%, 25%, 75%, 0, "buttons-left", "left", "select-auto");
+  margin-top: 2em;
+  margin-bottom: 2em;
+
   // Make text field sit nicely at the expected full width
   input, textarea {
     @include box-sizing(border-box);
+    color: $cool-highlight;
   }
-  margin-top: 2em;
-  margin-bottom: 2em;
+
+  .placeholder {
+    text-align: left;
+    padding-top: .4em;
+    padding-left: .3em;
+    font-size: 1.2em;
+    font-weight: normal;
+  }
+
   li {
     margin-bottom: 0.5em;
+
     &.error {
       background: inherit;
       border: inherit;
       color: inherit;
+
       input, textarea, select {
-        background: $yellow;
+        background: $lightest;
       }
     }
   }
@@ -50,13 +62,21 @@ a.btn:hover {
     padding-top: 0.5em;
   }
   .inline-errors {
-    color: $orange;
+    color: $error-color;
   }
-  li.string input, li.email input, li.number input {
-    font-size: 1.3em;
-  }
-  li.number input {
-    width: 3em;
+  li.string, li.stringish, li.email {
+    label {
+      text-align: right;
+      font-size: 1.1em;
+      font-weight: 700;
+      width: 23%;
+      padding: .5em 2% 0 0;
+      color: $cool-highlight;
+    }
+    input, textarea {
+      font-size: 1.1em;
+      padding: .5em;
+    }
   }
 }
 
@@ -72,7 +92,7 @@ a.btn:hover {
   @include float-form(100%, 0%, 100%, 0, "buttons-left", "left", "select-auto");
   /* This is only used when the placeholder polyfill is active */
   .label span.placeholder {
-    font-size: 1em;
+    // font-size: 1em;
   }
 }
 
@@ -90,54 +110,60 @@ a.btn:hover {
   }
 }
 
-// Override things set by compass I think
-// Bit of a nasty hack
 body form.alert {
   background: inherit;
   border-color: inherit;
-  padding: inherit;
-  margin-bottom: 2em;
   border: inherit;
 }
 
 form.donate {
   input[type="submit"] {
-    @include fancy-button($orange); 
     font-weight: normal;
     margin-left: 1em;
   }
   input#amount_donate, label, span {
     font-size: 1.3em;
   }
-  label {
-    //margin-left: 1em;
-  }
 }
 
 #sidebar .formtastic.alert {
-  @include float-form(100%, 25%, 100%, 0, "buttons-left", "left", "select-auto");
+  @include boxed-content;
   margin-top: 0;
-  font-size: 75%;
-  background: $almostwhite;
-  //border: solid 1px $grey;
+
   .label {
     /* Use seriously old-school way of hiding these labels so that placeholder polyfill can still work */
     left: -999em;
     position: absolute;
+
     /* This is only used when the placeholder polyfill is active */
     span.placeholder {
-      font-size: 1.3em;
+      padding-top: .8em;
+      padding-left: .7em;
+      font-size: .8em;
     }
-  }
-  .actions {
-    padding-left: 0;
   }
   .inline-hints {
     margin-left: 0;
   }
-  padding: 12px;
+  p, .stringish input {
+    font-size: 0.9em;
+  }
   p {
     margin-bottom: 1em;
+  }
+  input, textarea {
+    width: 100%;
+  }
+  .actions {
+    padding: 0;
+
+    &, li {
+      width: 100%;
+    }
+    li {
+      display: block;
+      float: none;
+    }
   }
 }
 
@@ -169,7 +195,3 @@ form.donate {
     }
   }
 }
-
-
-
-

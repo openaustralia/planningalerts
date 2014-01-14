@@ -5,8 +5,10 @@ gem 'mysql2', '> 0.3'
  
 # Needed for the new asset pipeline
 group :assets do
-  gem 'sass-rails'
   gem 'coffee-rails'
+  gem "compass-rails"
+  gem 'sass-rails'
+  gem "susy"
   gem 'uglifier'
 end
  
@@ -29,8 +31,6 @@ gem "will_paginate"
 gem 'thinking-sphinx', "~> 2.0", :require => 'thinking_sphinx'
 gem "formtastic"
 gem 'validates_email_format_of'
-gem "compass-rails"
-gem 'fancy-buttons'
 gem "geocoder", :require => "geocoder"
 gem 'activeadmin'
 # Disabling metric_fu because it depends on rcov which doesn't work on Ruby 1.9
@@ -43,11 +43,9 @@ gem 'sanitize'
 gem 'rvm-capistrano'
 gem 'vanity'
 gem 'rabl'
-gem "susy"
 gem 'newrelic_rpm'
 gem 'delayed_job_active_record'
 gem 'daemons'
-gem 'mobile-fu', :git => "https://github.com/openaustralia/mobile-fu.git"
 gem "validate_url"
 gem "twitter"
 #gem "atdis", :path => '/Users/matthew/git/atdis'

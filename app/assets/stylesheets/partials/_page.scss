@@ -1,209 +1,257 @@
-// Import the non-default scaffolding module to help us get started.
-//@import "blueprint/scaffolding";
-
-// This configuration will only apply the
-// blueprint styles to pages with a body class of "bp"
-// This makes it easier to have pages without blueprint styles
-// when you're using a single/combined stylesheet.
-
-body {
-  @include blueprint-typography(true);
-  @include blueprint-utilities;
-  @include blueprint-interaction;
-}
-
-body {
-  background: #b0b0b0;
-}
-
-#page-wrapper {
-  background: white;
-  padding-top: 3em;  
-  padding-bottom: 2em;
-}
-// Remove the scaffolding when you're ready to start doing visual design.
-// Or leave it in if you're happy with how blueprint looks out-of-the-box
-//@include blueprint-scaffolding("body");
-
+@import "compass/utilities/general/min";
+@import "compass/utilities/links/hover-link";
 @import "compass/utilities/lists/horizontal-list";
 
-#header-wrapper {
-  background: #878787 url(/images/banner.png) repeat-x center 0;
+body {
+  background-color: $dark;
+  font-weight: 400;
 }
 
-#menu-wrapper {
-  background: #989898;
+.main {
+  background: $content-background;
+}
+
+// Transition links by colour
+a {
+  @include single-transition(color, .3s);
 }
 
 // Layout elements - i.e. those on every page
 #header {
-  //margin: auto;
-  height: 125px;
-  //position: relative;
-  #banner {
-    @include float-left;
-    //margin-left: 10px;
-    margin-top: 6px;
-    h1 {
-      margin-bottom: 0;
-      //white-space: nowrap;
-      //padding: 20px 240px 0 0;
-      font-size: 2.5em;
-      a {
-        color: $yellow;
-        text-decoration: none;
-      } 
-      span {
-        color: $orange; }
-        sup {
-          font-size: 0.3em;
-          text-transform: uppercase;
-        } 
+  position: relative;
+
+  h1 {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 0;
+    margin-top: .5em;
+
+    a {
+      text-decoration: none;
+      text-shadow: -1px -1px 2px $dark;
+
+      &:link, &:visited {
+        color: $warm-highlight;
       }
-      h2 {
-        font-style: italic;
-        font-size: 1.15em;
-    //  border-bottom-style: none;
-    //  white-space: nowrap;
-    //  top: 0;
-    //  padding: 53px 0 0 240px;
-        em {
-          text-decoration: underline; } 
-        }
+      &:active, &:hover, &:focus {
+        color: $light;
+      }
+    } 
+  }
+  h2 {
+    color: $lightest;
+    font-size: .9em;
+    text-shadow: -1px -1px 1px $dark;
   }
 }
-
-#statsbanner {
-//position: absolute;
-//right: 30px;
-//top: 30px;
-  padding-left: 73px;
-  background: url(/images/plane.png) no-repeat 0 center; 
-  @include float-right;
-  //margin-right: 10px;
-  margin-top: 25px;
-}
-
+// Don't show stats by default
 #stats {
-  margin: 0;
-  @include quiet;
-  font-size: 0.9em;
-  //line-height: 1em;
-  background: white;
-  padding-left: 5px;
-  padding-right: 5px;
-  a {
-      text-decoration: none;
-      @include quiet;
-    }
+  display: none;
 }
 
 #menu {
-  background: $grey;
-  font-size: 0.9em; 
+  font-size: .9em;
+
   ul {
     @include horizontal-list;
-    @include float-right;
-    //width: $page_width;
-    //margin: 0 auto;
+
     li {
       padding: 0;
-      a {
-        padding: 0.5em 1em;
-        color: white;
-        text-decoration: none; 
-        &:hover {
-          background: $orange;
-        }
-        display: block;
-      }
-      &.selected {
-        background: $orange;
-      } 
+      @include inline-block;
+    }
+  }
+  a {
+    padding: .5em 0;
+    display: block;
+    text-decoration: none; 
+    @include single-transition(background-color, .5s);
+    text-shadow: -1px 0 2px $dark;
+
+    &:link, &:visited {
+      color: #fff;
+    }
+    &:active, &:hover, &:focus {
+      color: $lightest;
+      background-color: $background-overlay;
     } 
-  } 
+  }
+  abbr {
+    border: none;
+  }
 }
 
-#footer-wrapper {
-  background: #b0b0b0;
+body {
+  &.c-applications .applications-link,
+  &.c-alerts .alerts-link,
+  &.c-static.a-faq .faq-link,
+  &.c-authorities .authorities-link,
+  &.c-static.a-get_involved .get-involved-link,
+  &.c-api .api-link,
+  &.c-static.a-donate .donate-link,
+  &.c-static.a-about .about-link {
+    a {
+      color: $lightest;
+      background: $background-overlay;
+    }
+  }
+}
+
+#content {
+  @include clearfix;
+  clear: both;
+  position: relative;
+  padding: 2em 0 1.5em 0;
+}
+
+.stats, .tweets, #footer {
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 #footer {
+  color: $lightest;
+  background-color: $warm-highlight;
+
   a {
-    color: black;
+    &:link, &:visited {
+      color: $light;
+    }
+    &:active, &:hover, &:focus {
+      color: $dark;
+    }
+  }
+  h4, h5, {
+    &, a:link {
+      color: $lightest;
+    }
+  }
+  h4 {
+    margin-top: 0;
   }
   h5 {
-    font-weight: normal;
-    color: #333;
     margin-bottom: 0;
   }
-  padding-top: 1em;
-  margin-bottom: 1em;
-  font-size: 0.9em;
   ul {
     @include no-bullets;
     padding-left: 0;
-    margin-right: 0;
-    /* @include horizontal-list; */
-    /* @include float-left; */
+    margin: 0;
+
+    &.keepintouch {
+      li {
+        margin-bottom: 1.5em;
+      }
+      a {
+        display: block;
+      }
+    }
   }
-  #mobile {
-    text-align: center;
-    clear: both;
-  }
-  .oaf {
-    text-align: right;
+  li {
+    color: $lightest;
   }
 }
 
-// Content
-
-@import "compass/utilities/general/min";
-@import "compass/utilities/links/hover-link";
+// Within content
 
 p a, li a, span a, dd a, dt a, div a {
   @include hover-link;
 }
 
+// On the get involved page there are some call to action links, underline them
+.cta a {
+  &:link, &:visited {
+    text-decoration: underline;
+  }
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid $light-cool-highlight;
+  margin: 1em 0;
+  padding: 0;
+}
+
+.container {
+  .button {
+    font-family: $blueprint-font-family;
+    text-decoration: none;
+  }
+  a.button-action, input.button-action {
+    color: #fff;
+  }
+  dd {
+    margin-left: 0;
+  }
+}
+
 .disclaimer {
   @include quiet;
-  font-size: 0.8em; }
-
-#content {
-  @include min-height(500px);
-  position: relative;
-  //min-height: 500px; 
+  font-size: 0.8em; 
 }
 
 #map_div, #pano {
   margin-bottom: 1em;
-  display: inline-block;
-  width: 350px;
-  height: 200px;
 }
 
 /* Attention grabbers */
-div.attention {
-  text-align: center;
+body .container .attention {
+  @include boxed-content;
+  padding: 1em;
+  margin-bottom: 1em;
+
+  h4 {
+    margin-top: 0;
+  }
 }
 
 #privacy, #spnBeta, .explanation {
-//text-align: center;
-padding-left: 75px;
-padding-right: 75px;
-  font-size: 0.8em;
   @include quiet;
-  //line-height: 1.4em;
+  font-size: 0.8em;
+
   em {
     font-weight: bold;
     font-style: normal; 
   } 
 }
 
+.list-options {
+  @include no-bullets;
+  padding-left: 0;
+  margin: 0 0 1.5em 0;
+
+  li {
+    display: inline;
+
+    // Label for the options
+    &:first-child {
+      display: block;
+      margin-bottom: .75em;
+    }
+  }
+  b {
+    color: $warm-highlight;
+    margin-right: .5em;
+  }
+}
+
+.applications {
+  @include no-bullets;
+  padding-left: 0;
+  margin: 0;
+
+  li {
+    border-bottom: 1px solid $lightest-cool-highlight;
+    padding: 1em 0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
 .appinfo {
-  @include quiet;
   font-size: 0.8em;
-  line-height: 1.3em; 
+  color: $cool-highlight;
 }
 
 .pagination {
@@ -213,25 +261,26 @@ padding-right: 75px;
 
 /* api */
 div.apiitem {
-  border: dotted 1px $grey;
-  background: $almostwhite;
-  padding: 0.5em;
-  margin-top: 1em;
-  code {
-    background: white;
-    display: block;
-    padding: 10px;
-    border: solid 1px $grey;
-    word-wrap: break-word;
+  margin-bottom: 1.5em;
+
+  h5 {
+    margin-bottom: 1em;
   }
   p {
-    font-size: 0.8em;
-  } 
+    margin-bottom: 1em;
+  }
 }
+code {
+  @include boxed-content;
+  word-wrap: break-word;
+  margin-bottom: 1em;
 
-p.apiexamples {
-  position: relative;
-  top: 1em; 
+  pre {
+    margin: 0;
+  }
+}
+code.long-lines {
+  font-size: .9em;
 }
 
 #hLicenseInfo {
@@ -246,30 +295,22 @@ body dl dt {
 }
 
 dl.faq dt {
-  color: $orange;
+  color: $cool-highlight;
+  font-weight: bold;
 }
 
 ul#subscribe {
   @include no-bullets;
   padding: 0.5em 0.5em 0 0.5em;
   margin-right: 0;
-  background: $almostwhite;
-  border: solid 1px $grey;
+  border: solid 1px $cool-highlight;
+
   img {
     vertical-align: middle;
     margin-right: 0.5em;
   }
   li {
     margin-bottom: 0.5em;
-  }
-}
-
-.alert.home {
-  background: $almostwhite;
-  border: solid 1px $grey;
-  padding: 1em;
-  p {
-    margin-bottom: 1em;
   }
 }
 
@@ -282,28 +323,27 @@ ol#comments {
 div.comment {
   padding: 1em;
   background: #fafafa;
+
   .report {
-    //display: none;
     opacity: 0;
   }
-}
+  &:hover {
+    background: #f0f0f0;
+    -webkit-transition: background .1s linear;  
+    -moz-transition: background .1s linear;  
+    -o-transition: background .1s linear;  
+    -ms-transition: background .1s linear;  
+    transition: background .1s linear;
 
-div.comment:hover {
-  background: #f0f0f0;
-  -webkit-transition: background .1s linear;  
-  -moz-transition: background .1s linear;  
-  -o-transition: background .1s linear;  
-  -ms-transition: background .1s linear;  
-  transition: background .1s linear;
-  .report {
-    //display: inline;
-    opacity: 100;
-    -webkit-transition: opacity .1s linear;  
-    -moz-transition: opacity .1s linear;  
-    -o-transition: opacity .1s linear;  
-    -ms-transition: opacity .1s linear;  
-    transition: opacity .1s linear;
-  }  
+    .report {
+      opacity: 100;
+      -webkit-transition: opacity .1s linear;  
+      -moz-transition: opacity .1s linear;  
+      -o-transition: opacity .1s linear;  
+      -ms-transition: opacity .1s linear;  
+      transition: opacity .1s linear;
+    }  
+  }
 }
 
 .comment {
@@ -320,9 +360,13 @@ div.comment:hover {
   }
 }
 
-body h4 {
-  margin-top: 1em;
-  margin-bottom: 0.5em;
+body {
+  h3, h4, h5, & a:link, & a:visited {
+    color: $cool-highlight;
+  }
+  h4 {
+    margin-top: 1em;
+  }
 }
 
 #application {
@@ -333,25 +377,38 @@ body h4 {
 }
 
 #application-stats {
-  background: $almostwhite;
-  padding: 12px;
-  p:last-child {
-    margin-bottom: 0.5em;
-  };
+  .button {
+    display: block; // Fill the column
+  }
+}
+
+body blockquote {
+  margin: 1em 0;
+  padding: 1em;
+  border: 3px solid lighten($warm-highlight, 40%);
+  border-left: none;
+  border-right: none;
+  color: $cool-highlight;
+  line-height: 1.6em;
 }
 
 .match {
   @include highlight;
 }
 
-.authorities, .sizes {
+.sizes {
   @include no-bullets;
+}
+
+ul li {
+  color: $light-cool-highlight; // Colour the bullets
 }
 
 .contributors {
   @include no-bullets;
   margin-right: 0;
   padding-left: 0;
+
   li {
     width: 232px;
     display: inline-block;
@@ -359,41 +416,92 @@ body h4 {
   }
 }
 
-.news {
-  @include no-bullets;
+form.address-search {
+  margin-bottom: 1em;
+}
+
+.news, .tweets, .stats {
+  a {
+    &:link, &:visited {
+      .body {
+        color: $dark;
+      }
+    }
+    &:active, &:hover, &:focus {
+      text-decoration: none;
+
+      .body {
+        color: $darkest;
+      }
+    }
+  }
+  h4 {
+    font-weight: 700;
+    margin: 0;
+  }
   ul {
+    @include no-bullets;
     padding-left: 0;
+    margin: 0;
   }
   li {
-    padding-bottom: 0.5em;
+    border-bottom: 1px solid $lightest-cool-highlight;
+
+    a {
+      display: block;
+      padding: .75em 0;
+    }
+    &:last-child {
+      border: none;
+    }
   }
   .date {
-    @include quiet;
     font-size: 0.8em;
+    color: $cool-highlight;
+  }
+  .cta {
+    display: block;
+    text-align: right;
+    margin-top: .25em;
+
+    &:link {
+      text-decoration: underline;
+    }
+  }
+}
+.news {
+  border-top: 1px solid $lightest-cool-highlight;
+  padding-top: 1em;
+}
+
+.tweets, .stats {
+  background-color: $lightest-cool-highlight;
+
+  li {
+    border-color: #fff;
   }
 }
 
-.notice {
-  a {
-    color: $link_color !important;
-  }
+.notice a {
+  color: $link_color !important;
 }
 
 // Social buttons
 #social {
   text-align: center;
-  .fb-like {
+
+  .fb-like, .twitter-share-button {
     display: block;
+  }
+  .fb-like {
     margin-top: 1em;
   }
   .twitter-share-button {
-    display: block;
     margin: 2em auto 0 auto;
   }
 }
 
 // Style chart on authority detail page
-
 #chart {
   text {
     fill: gray;
@@ -407,20 +515,22 @@ body h4 {
   background: #f8f8f8;
   padding: 1em;
   border: 1px solid;
+
   #privacy {
     padding-left: 0;
   }
   .formtastic {
     margin-top: 0;
     margin-bottom: 0;
+    padding-left: 0;
+    border: none;
+
     .inline-hints {
       margin-left: 0;
     }
-    padding-left: 0;
     .actions {
       padding-left: 0;
     }
-    border: none;
     li label {
       display: none;
     }
@@ -439,6 +549,7 @@ body h4 {
 table.scraper_fields {
   font-size: 0.9em;
   table-layout: fixed;
+
   th {
     background: #e8e8e8;
   }
@@ -448,13 +559,14 @@ table.scraper_fields {
   }
   td {
     background: #f8f8f8;
+
     p:last-child {
       margin-bottom: 0;
     }
     vertical-align: top;
   }
   td.field {
-    color: $orange;    
+    color: $dark;    
   }
   .field {
     width: 15%;
@@ -475,35 +587,25 @@ td pre {
   margin: 0 0;
 }
 
-.statbox {
-  background: #eeeeee;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  margin-top: 1em;
-  margin-bottom: 3em;
-  a, a:hover {
+.stats {
+  a {
     text-decoration: none;
   }
-  a, a:visited {
-    color: $darkgrey;
+  .number {
+    @include border-radius(.25em);
+    margin-right: .3em;
+    padding: .15em .35em;
+    background-color: lighten($lightest-cool-highlight, 40%);
+    font-weight: bold;
   }
-  a:hover {
-    color: #22579c;
-  }
-  .stat:hover {
-    background: #dddddd;
-  }
-  .stat-header {
-    text-align: center;
-    padding-top: 2em;
-  }
-  .stat {
-    text-align: center;
-    .number {
-      color: $orange;
-      font-size: 300%;
-    }
-  }
+}
+
+// At large res there's a background image. Give credit to the photographer.
+.photo-credit {
+  display: none; // Don't show by default - show with background image inclusion
+  margin-left: .5em;
+  font-size: 80%;
+  color: $cool-highlight;
 }
 
 // Style the autocomplete with a powered by Google logo as per the terms and conditions
@@ -511,4 +613,3 @@ ul.ui-autocomplete {
   background: url(../../assets/powered-by-google-on-white.png) white no-repeat bottom right;
   padding-bottom: 10px;
 }
-

@@ -11,19 +11,18 @@
     = link_to "Why?", faq_path(:anchor => "broken_scraper")
 
 - if @authority.applications.count == 0
-  %p
-    For #{@authority.full_name} no applications have yet been collected.
+  %p For #{@authority.full_name} no applications have yet been collected.
 - else
   %p
     For #{@authority.full_name} #{@authority.applications.where("date_scraped >= ?", 1.week.ago).count} applications have been collected in the last week, #{@authority.applications.where("date_scraped >= ?", 1.month.ago).count} in the last month and #{@authority.applications.count} since #{@authority.earliest_date.strftime("%-d %b %Y")}, when this authority was first added to PlanningAlerts. That's a
     = link_to "median", "http://en.wikipedia.org/wiki/Median"
     of #{@authority.median_applications_per_week} applications per week (ignoring weeks without any applications at all).
 
-  %p
-    = link_to "Browse all recent applications", authority_applications_path(@authority.short_name_encoded)
+  = link_to "Browse all recent applications", authority_applications_path(@authority.short_name_encoded), :class => "button button-rounded button-action"
 
   %h4 Number of applications scraped each week
   #chart
+  -# TODO detect chart's presence, load d3 async and chart when loaded
   <script src="http://d3js.org/d3.v2.js"></script>
   = javascript_include_tag "bar_graph"
   :javascript
@@ -32,8 +31,7 @@
 
 - if @authority.scraperwiki_url
   %h4 Under the Hood
-  %p
-    Are you a developer? See (and edit) the code that gets the data: #{link_to @authority.scraperwiki_url, @authority.scraperwiki_url}
+  %p Are you a developer? See (and edit) the code that gets the data: #{link_to @authority.scraperwiki_url, @authority.scraperwiki_url}
   %p
     via
     = link_to "ScraperWiki", "http://scraperwiki.com"
