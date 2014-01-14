@@ -17,6 +17,7 @@ ActiveAdmin.register Authority do
       row :state
       row :email
       row :population_2011
+      row :morph_name
       row :scraperwiki_name
       row :feed_url
       row :disabled
@@ -39,6 +40,7 @@ ActiveAdmin.register Authority do
       f.input :population_2011
     end
     f.inputs "Scraping" do
+      f.input :morph_name
       f.input :scraperwiki_name
       f.input :feed_url
       f.input :disabled
