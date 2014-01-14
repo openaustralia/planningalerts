@@ -75,6 +75,12 @@ class Application < ActiveRecord::Base
     end
   end
 
+  def self.translate_morph_feed_data(feed_data)
+    # Just use the same as ScraperWiki for the time being. Note that if something
+    # goes wrong the error message will be wrong but let's ignore that for the time being
+    translate_scraperwiki_feed_data(feed_data)
+  end
+
   def self.translate_scraperwiki_feed_data(feed_data)
     j = JSON.parse(feed_data)
     # Do a sanity check on the structure of the feed data
