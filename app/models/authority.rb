@@ -214,7 +214,7 @@ class Authority < ActiveRecord::Base
   end
 
   def morph_url
-    "http://morph.io/#{morph_name}" unless morph_name.blank?
+    "https://morph.io/#{morph_name}" unless morph_name.blank?
   end
   
   def feed_url_has_date?
@@ -232,7 +232,7 @@ class Authority < ActiveRecord::Base
   
   def morph_feed_url_for_date_range(start_date, end_date)
     query = CGI.escape("select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
-    "http://api.morph.io/#{morph_name}/data.json?query=#{query}"
+    "https://api.morph.io/#{morph_name}/data.json?query=#{query}"
   end
   
   # So that the encoding function can be used elsewhere
