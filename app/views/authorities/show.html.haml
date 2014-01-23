@@ -29,13 +29,21 @@
   :javascript
     barGraph("#chart", "#{per_week_authority_applications_url(@authority.short_name_encoded, :format => 'js')}");
 
-
-- if @authority.scraperwiki_url
-  %h4 Under the Hood
+%h4 Under the Hood
+%p
+  Are you a developer?
+- if @authority.morph_url
   %p
-    Are you a developer? See (and edit) the code that gets the data: #{link_to @authority.scraperwiki_url, @authority.scraperwiki_url}
+    Our new scraping platform #{link_to "Morph", "https://morph.io"} will be live soon. You will be able to fork scrapers and collaborate
+    via git. See #{link_to @authority.morph_url, @authority.morph_url}
+- elsif @authority.scraperwiki_url
+  %p
+    See (and edit) the code that gets the data: #{link_to @authority.scraperwiki_url, @authority.scraperwiki_url}
   %p
     via
     = link_to "ScraperWiki", "http://scraperwiki.com"
     &mdash; A brilliant online platform for collaborating on writing and maintaining scrapers
+- else
+  %p
+    The data for this scraper is currently coming from our #{link_to "original internal scraping platform", "https://github.com/openaustralia/planningalerts-parsers"). We're actively working to migrate away from this. Want to help?
 
