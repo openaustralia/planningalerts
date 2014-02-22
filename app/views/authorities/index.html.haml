@@ -29,16 +29,12 @@
         = link_to authority.full_name, authority_url(authority.short_name_encoded)
         - if authority.broken?
           %span.highlight
-            - if authority.scraperwiki_url
-              = link_to "possibly broken", authority.scraperwiki_url
+            - if authority.morph_url
+              = link_to "possibly broken", authority.morph_url
             - else
               possibly broken
         &mdash;
         - if authority.morph_url
           = link_to "Morph scraper", authority.morph_url
-        - elsif authority.scraperwiki_url
-          = link_to "Scraperwiki scraper", authority.scraperwiki_url
         - else
           = link_to "internal scraper", "https://github.com/openaustralia/planningalerts-parsers"
-          
-
