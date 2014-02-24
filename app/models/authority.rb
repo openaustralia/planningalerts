@@ -64,9 +64,9 @@ class Authority < ActiveRecord::Base
   end
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
-  def open_url_safe(url, info_logger)
+  def open_url_safe(url, info_logger, options = {})
     begin
-      open(url).read
+      open(url, options).read
     rescue Exception => e
       info_logger.error "Error #{e} while getting data from url #{url}. So, skipping"
       nil
@@ -106,7 +106,9 @@ class Authority < ActiveRecord::Base
   end
 
   def scraper_data_morph_style(start_date, end_date, info_logger)
-    text = open_url_safe(morph_feed_url_for_date_range(start_date, end_date), info_logger)
+    # The morph api requires a key
+    text = open_url_safe(morph_feed_url_for_date_range(start_date, end_date), info_logger,
+      "x-api-key" => ::Configuration::MORPH_API_KEY)
     if text
       Application.translate_morph_feed_data(text)
     else
