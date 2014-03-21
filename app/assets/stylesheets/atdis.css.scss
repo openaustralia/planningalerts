@@ -9,7 +9,7 @@
       background: #e8e8e8;
     }
     td, th {
-      border: 1px solid #ddd;     
+      border: 1px solid #ddd;
       padding: 0.5em;
     }
     td {
@@ -20,12 +20,43 @@
       vertical-align: top;
     }
     code {
-      color: $orange;    
+      color: $orange;
     }
   }
   img {
     display: block;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+
+table.atdis {
+  font-size: 0.9em;
+  table-layout: fixed;
+  th {
+    background: #e8e8e8;
+  }
+  td, th {
+    border: 1px solid #ddd;
+    padding: 0.5em;
+  }
+  td {
+    background: #f8f8f8;
+    p:last-child {
+      margin-bottom: 0;
+    }
+    vertical-align: top;
+  }
+  td.field {
+    color: $orange;
+  }
+  .field {
+    width: 15%;
+  }
+  .error {
+    width: 15%
+  }
+  .example {
+    width: 30%;
   }
 }
