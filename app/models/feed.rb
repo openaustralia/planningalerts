@@ -51,7 +51,7 @@ class Feed
     if Rails.env.development? && u.host == "localhost"
       file = Feed.example_path(Rails.application.routes.recognize_path(u.path)[:number].to_i, page)
       if File.exists?(file)
-        page = ATDIS::Page.read_json(File.read(file))
+        page = ATDIS::Models::Page.read_json(File.read(file))
         page.url = url
         page
       else
