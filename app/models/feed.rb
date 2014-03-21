@@ -58,7 +58,7 @@ class Feed
         raise RestClient::ResourceNotFound
       end
     else
-      ATDIS::Feed.new(base_url).applications(feed_options)    
+      ATDIS::Feed.new(base_url).applications(feed_options)
     end
   end
 
