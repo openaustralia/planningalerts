@@ -65,17 +65,6 @@
     URL for this page:
     = link_to @page.url, @page.url
 
-  %ul
-    %li
-      L1 used:
-      = yes_no(@page.level_used?(1))
-    %li
-      L2 used:
-      = yes_no(@page.level_used?(2))
-    %li
-      L3 used:
-      = yes_no(@page.level_used?(3))
-
   - if @page.valid?
     %p
       %strong Success!
