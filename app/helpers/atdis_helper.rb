@@ -17,7 +17,7 @@ module AtdisHelper
     elsif value.kind_of?(RGeo::Cartesian::PolygonImpl)
       h(value)
     elsif value.kind_of?(NilClass)
-      content_tag(:p, "empty", :class => "quiet")
+      content_tag(:p, "absent or null", :class => "quiet")
     elsif value.kind_of?(String)
       h(value)
     else
