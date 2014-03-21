@@ -51,7 +51,7 @@ gem 'mobile-fu', :git => "https://github.com/openaustralia/mobile-fu.git"
 gem "validate_url"
 gem "twitter"
 #gem "atdis", :path => '/Users/matthew/git/atdis'
-gem "atdis", :git => "https://github.com/openaustralia/atdis.git"
+gem "atdis", :git => "https://github.com/openaustralia/atdis.git", branch: "atdis-1.0.2"
 gem "oj"
 # Need to stick with 2.3.0 to support Ruby 1.8.7
 gem "redcarpet", "2.3.0"
