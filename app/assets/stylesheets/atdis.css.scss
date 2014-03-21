@@ -38,6 +38,9 @@ table.atdis {
   }
   td, th {
     border: 1px solid #ddd;
+    padding: 0;
+  }
+  td.field, .value {
     padding: 0.5em;
   }
   td {
