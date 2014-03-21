@@ -5,6 +5,7 @@
         "info": {
           "dat_id": "DA2013-0381",
           "development_type": "Residential",
+          "application_type": "DA",
           "description": "New pool plus deck",
           "authority": {
             "ref": "http://www.council.nsw.gov.au/atdis/1.0",
@@ -26,6 +27,7 @@
             "address": {
               "street": "123 Fourfivesix Street",
               "suburb": "Neutral Bay",
+              "state": "NSW",
               "postcode": "2089"
             },
             "land_title_ref": {
@@ -64,6 +66,7 @@
         "info": {
           "dat_id": "X/614/2013",
           "development_type": "Residential",
+          "application_type": "DA",
           "description": "An inground swimming pool",
           "authority": {
             "ref": "http://www.council.nsw.gov.au/atdis/1.0",
@@ -83,6 +86,7 @@
             "address": {
               "street": "30 Centre Crescent",
               "suburb": "Blaxland",
+              "state": "NSW",
               "postcode": "2774"
             },
             "land_title_ref": {
@@ -99,7 +103,7 @@
             "id": "283473-2",
             "timestamp": "2013-09-01T02:01:00Z",
             "description": "First review"
-          }          
+          }
         ],
         "documents": [
           {
