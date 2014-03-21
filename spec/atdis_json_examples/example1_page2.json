@@ -43,8 +43,20 @@
             }
           }
         ],
-        "events": [],
-        "documents": []
+        "events": [
+          {
+            "id": "283473-2",
+            "timestamp": "2013-09-01T02:01:00Z",
+            "description": "First review"
+          }
+        ],
+        "documents": [
+          {
+            "ref": "13/145738",
+            "title": "Section plan - 2b 3 - redacted",
+            "document_url": "https://www2.bmcc.nsw.gov.au/datracking/Cache/_trimprod_BM_1_5t_c0018xll.pdf"
+          }
+        ]
       }
     },
     {
@@ -82,8 +94,20 @@
             }
           }
         ],
-        "events": [],
-        "documents": []
+        "events": [
+          {
+            "id": "283473-2",
+            "timestamp": "2013-09-01T02:01:00Z",
+            "description": "First review"
+          }          
+        ],
+        "documents": [
+          {
+            "ref": "13/145738",
+            "title": "Section plan - 2b 3 - redacted",
+            "document_url": "https://www2.bmcc.nsw.gov.au/datracking/Cache/_trimprod_BM_1_5t_c0018xll.pdf"
+          }
+        ]
       }
     }
   ],

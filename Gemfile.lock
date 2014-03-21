@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/openaustralia/atdis.git
-  revision: a8518a54ce344d74994476fd2820fdc8ea92fefc
+  revision: 6a82b46cd3c59fe0bbcba9e107994417083895f8
   branch: atdis-1.0.2
   specs:
     atdis (0.2)
