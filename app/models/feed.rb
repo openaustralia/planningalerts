@@ -16,7 +16,8 @@ class Feed
   include ActiveModel::Conversion
   include ActiveModel::Validations
 
-  attr_reader :base_url, :page, :postcode, :lodgement_date_start, :lodgement_date_end,
+  attr_reader :base_url, :page, :street, :suburb, :postcode,
+    :lodgement_date_start, :lodgement_date_end,
     :last_modified_date_start, :last_modified_date_end
 
   validates :base_url, :url => true
@@ -26,6 +27,8 @@ class Feed
   def initialize(options = {})
     @base_url = options[:base_url]
     @page = options[:page] ? options[:page].to_i : 1
+    @street = options[:street] if options[:street].present?
+    @suburb = options[:suburb] if options[:suburb].present?
     @postcode = options[:postcode] if options[:postcode].present?
     @lodgement_date_start = options[:lodgement_date_start]
     @lodgement_date_end = options[:lodgement_date_end]
@@ -75,6 +78,8 @@ class Feed
   def feed_options
     options = {}
     options[:page] = page if page != 1
+    options[:street] = street if street
+    options[:suburb] = suburb if suburb
     options[:postcode] = postcode if postcode
     options[:lodgement_date_start] = lodgement_date_start if lodgement_date_start
     options[:lodgement_date_end] = lodgement_date_end if lodgement_date_end
