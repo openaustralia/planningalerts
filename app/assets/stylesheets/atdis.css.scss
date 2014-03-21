@@ -30,6 +30,15 @@
   }
 }
 
+table.atdis.nested {
+  td, th {
+    padding: 0;
+  }
+  td.field, .value {
+    padding: 0.5em;
+  }
+}
+
 table.atdis {
   font-size: 0.9em;
   table-layout: fixed;
@@ -38,9 +47,6 @@ table.atdis {
   }
   td, th {
     border: 1px solid #ddd;
-    padding: 0;
-  }
-  td.field, .value {
     padding: 0.5em;
   }
   td {
