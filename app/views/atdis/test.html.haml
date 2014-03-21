@@ -29,7 +29,7 @@
     = link_to "Example with errors", atdis_test_path(:url => atdis_feed_url(:number => 2))
     (<strong>#{link_to "view source", atdis_feed_url(:number => 2)}</strong>)
   %li
-    = link_to "Example with L3 parameter extended", atdis_test_path(:url => atdis_feed_url(:number => 3))
+    = link_to "Example with optional extended block", atdis_test_path(:url => atdis_feed_url(:number => 3))
     (<strong>#{link_to "view source", atdis_feed_url(:number => 3)}</strong>)
   %li
     = link_to "Example with invalid json", atdis_test_path(:url => atdis_feed_url(:number => 4))
@@ -80,7 +80,7 @@
 
     %h3 How the applications get loaded
     %p
-      Note that the field names (and some of the block level indentation) here is different than the json and this is showing all L1, L2 and L3 parameters, irrespective of whether they were actually used or not.
+      Note that this is showing all parameters, irrespective of whether they are optional or mandatory and used or not.
     = attribute_value(@page.response)
   - else
     %p
