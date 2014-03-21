@@ -39,4 +39,9 @@ $(function() {
   if ($("#feed_last_modified_date_end").datepicker("getDate") != null) {
     $("#feed_last_modified_date_start").datepicker("option", "maxDate", $("#feed_last_modified_date_end").datepicker("getDate"));
   }
+
+  $("#filter-heading").click(function(){
+    $("#filters").toggle("fast");
+    return false;
+  })
 })

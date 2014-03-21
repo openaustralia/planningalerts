@@ -36,6 +36,12 @@ class Feed
     @last_modified_date_end = options[:last_modified_date_end]
   end
 
+  def filters_set?
+    @street || @suburb || @postcode ||
+      @lodgement_date_start || @lodgement_date_end ||
+      @last_modified_date_start || @last_modified_date_end
+  end
+
   def self.create_from_url(url)
     feed_options = ATDIS::Feed.options_from_url(url)
     base_url = ATDIS::Feed.base_url_from_url(url)
