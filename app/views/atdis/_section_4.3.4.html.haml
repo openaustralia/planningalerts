@@ -1,0 +1,27 @@
+:markdown
+  <h4 id="section4.3.4">4.3.4 Events [L2]</h4>
+
+  The `events` record contains a list of events that have occurred against the application since lodgement. In this version of the specification, the `events` block has been promoted to *Level 1 Mandatory*. The `events` record must include a list of events, where each event has an `id`, `date` and `description`. Inclusion of an `event_type` and `status` is optional.
+
+  <table>
+  <tr><th>M/O</th><th colspan=2>Field</th><th>Notes</th>
+  </tr>
+  <tr><td>M </td><td><code>events</code></td><td></td><td>Composite record containing a list of events for the application</td>
+  </tr>
+  <tr><td>M </td><td></td><td><code>id</code></td><td>Internal id of event raised against application</td>
+  </tr>
+  <tr><td>M </td><td></td><td><code>date</code></td><td>Date the event occurred</td>
+  </tr>
+  <tr><td>M</td><td></td><td><code>description</code></td><td>Short, human readable description of the event</td>
+  </tr>
+  <tr><td> O</td><td></td><td><code>event_type</code></td><td>Authority-specific event type</td>
+  </tr>
+  <tr><td>O</td><td></td><td><code>status</code></td></td><td>Authority-specific event status code</td>
+  </tr>
+  </table>
+
+
+  **Notes**
+
+  * This version of the specification does not define a list of valid `event_type`s, so the contents of this field can be Vendor or Council specific.
+  * The value for `id` should be a string. The value should be unique from the perspective of the authority such that it can be used as a reference for the underlying event.

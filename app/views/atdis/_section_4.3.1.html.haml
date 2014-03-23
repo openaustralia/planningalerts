@@ -1,0 +1,47 @@
+:markdown
+  <h4 id="section4.3.1">4.3.1   Info [L1]</h4>
+
+  The `info` record is the top-level block that contains unique identifying information about a single development application. In conjunction with the `reference` block, this represents the minimum *Level 1 Mandatory* requirements for a feed compliant with the ATDIS-1.0.7 specification.
+
+  The `info` record must contain the following fields:
+
+  <table>
+  <tr>
+    <th>M/O</th><th>Field</th><th>Notes</th>
+  </tr>
+  <tr>
+  <td>M</td><td><code>dat_id</code></td><td>An id that uniquely identifies the application within this authority</td>
+  </tr>
+  <tr>
+  <td>M</td><td><code>last_modified_date</code></td><td>the date of the last change to this record</td>
+  </tr>
+  <tr> <td>M</td><td><code>description</code></td><td>A short, human readable description of the application</td></tr>
+  <tr><td>M</td><td><code>authority</code></td><td>Name of the Authority</td>
+  </tr>
+  <tr><td>M</td><td><code>lodgement_date</code></td><td>Date the application was lodged with the Authority</td></tr>
+  <tr><td>M</td><td><code>determination_date</code></td><td>Date that the application was determined at the Authority</td></tr>
+
+  <tr><td>M</td><td><code>status</code></td><td>Current status of the application with the Authority<td></td></tr>
+
+  <tr><td>O</td><td><code>notification_start_date</code></td><td>Start date for notification period of application</td></tr>
+  <tr><td>O</td><td><code>notification_end_date</code></td><td>End date for notification period of application</td></tr>
+  <tr><td>O</td><td><code>name</code></td><td>Name of responsible officer from the Authority</td></tr>
+  <tr><td>O</td><td><code>estimated_cost</code></td><td>Estimated cost of the work described by the application</td></tr>
+  </table>
+
+
+  **Notes**
+
+  * The field `last_modified_date` captures the date at which the authority last modified the record. This allows consuming systems to know if an application changes over time.
+  * Dates can be specified with or without time information. For example, the following are both valid date values (see also 4.3.8):
+    ```
+    "determination_date": "2013-06-20T02:01:07Z"
+    ```
+
+    ```
+    "determination_date": "2013-06-20"
+    ```
+
+  * If the application does not have a determination date (yet, or at all), the value `"none"` should be specified for the `determination_date` field.
+  * If the application does not have a notification period at all, the value `"none"` should be specified for the `notification_start_date` and `notification_end_date` fields.
+  * The contents of `estimated_cost` should be a formatted currency string in Australian Dollars, of the form `"$300,000"`.
