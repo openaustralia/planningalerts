@@ -1,5 +1,5 @@
 :markdown
-  <h3 id="section6.5">6.5 Paging [L2]</h3>
+  <h3 id="section6.4">6.4 Paging</h3>
 
   In some circumstances, the data for a particular ATDIS query might be
   larger than is sensible to return in a single response. In this case,
@@ -25,14 +25,16 @@
               "reference": {
                 "more_info_url": "http://www.examplecouncil.nsw.gov.au/atdis/1.0/applications/DA2013-0381"
               },
-              "location": {
-                "address": "123 Fourfivesix Street Neutral Bay NSW 2089",
-                "land_title_ref": {
-                  "lot": "10",
-                  "section": "ABC",
-                  "dpsp_id": "DP2013-0381"
-                }
-              }
+              "locations": [
+                {
+                  "address": "123 Fourfivesix Street Neutral Bay NSW 2089",
+                  "land_title_ref": {
+                    "lot": "10",
+                    "section": "ABC",
+                    "dpsp_id": "DP2013-0381"
+                  }
+                }
+              ]
             }     
           },
           {
@@ -73,13 +75,13 @@
   **Notes**
 
   * Paged data is at the discretion of the feed producer.
-  * In all cases, the response block must be provided by the feed producer,
+  * In all cases, the `response` block must be provided by the feed producer,
   regardless of whether or not the feed is producing paged data.
-  * In a feed cannot handle pagination, then it can leave out the count and
-  pagination blocks
+  * In a feed cannot handle pagination, then it can leave out the `count` and
+  `pagination` blocks
 
   Because back-end systems page data in a variety of different ways,
-  specification of paging has been set at L2 for the ATDIS-1.0.7 version of the specification.
+  specification of paging has been set at L2 for the ATDIS-1.0.2 version of the specification.
   However, Vendors should be aware that the paging specification would be
   promoted to L1 for the next point release, and that all responses should
-  include the response block when returning data to the consuming system.
+  include the `response` block when returning data to the consuming system.
