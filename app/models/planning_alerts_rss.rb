@@ -1,6 +1,6 @@
 class PlanningAlertsRSS
 
-  URL = "http://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/feed/"
+  URL = "https://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/feed/"
 
   def self.recent
     begin
