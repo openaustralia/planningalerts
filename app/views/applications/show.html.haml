@@ -1,6 +1,5 @@
 - content_for :page_title, page_title(@application)
 - content_for :meta_description, @application.description
-- content_for :map, true
 - content_for :extra_meta_tags do
   %meta(name="twitter:card" content="summary")
   %meta(name="twitter:site" content="@PlanningAlerts")
@@ -106,5 +105,6 @@
       initialiseMaps(#{@application.lat}, #{@application.lng}, "#{escape_javascript(@application.address)}");
     })
 
+= javascript_include_tag "maps"
 = javascript_include_tag "maps/maps"
 = javascript_include_tag "applications"

@@ -1,7 +1,6 @@
 - content_for :page_title, "Change the size of your alert"
 %h3= yield :page_title
 
-- content_for :map, true
 #map_div
   
 .map-settings
@@ -24,6 +23,7 @@
       
     %p= submit_tag("Update size", :class => "button button-action button-rounded")
 
+= javascript_include_tag "maps"
 = javascript_include_tag "maps/preview"
 :javascript
   var map;
