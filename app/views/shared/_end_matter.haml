@@ -13,8 +13,8 @@
   _loadSuper = window.onload;
   window.onload = (typeof window.onload != 'function') ? _loadUserVoice : function() { _loadSuper(); _loadUserVoice(); };
 - if defined?(Configuration::GOOGLE_MAPS_CLIENT_ID)
-  %script(src="http://maps.googleapis.com/maps/api/js?client=#{Configuration::GOOGLE_MAPS_CLIENT_ID}&sensor=false&v=3.13" type="text/javascript")
+  %script(src="http://maps.googleapis.com/maps/api/js?client=#{Configuration::GOOGLE_MAPS_CLIENT_ID}&sensor=false&v=3.13&libraries=places" type="text/javascript")
 - else
-  %script(src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript")
+  %script(src="http://maps.google.com/maps/api/js?sensor=false&libraries=places" type="text/javascript")
 = javascript_include_tag "mxn.js", "mxn.core.js", "mxn.googlev3.core.js", "application"
 = vanity_js
