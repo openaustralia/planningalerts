@@ -6,5 +6,8 @@
   %script(src="http://maps.googleapis.com/maps/api/js?client=#{Configuration::GOOGLE_MAPS_CLIENT_ID}&sensor=false&v=3.13&libraries=places" type="text/javascript")
 - else
   %script(src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places" type="text/javascript")
-= javascript_include_tag "mapstraction", "application"
+-# We only need the mapstraction library on the pages where we actually show maps
+- if yield :map
+  = javascript_include_tag "mapstraction"
+= javascript_include_tag "application"
 = vanity_js
