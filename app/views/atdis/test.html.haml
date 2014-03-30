@@ -18,19 +18,6 @@
 %p
   = link_to "Read the ATDIS Specification", atdis_specification_path
 
-%h3 Vendor Technical Support
-%p
-  For technical support questions on the ATDIS specification and this testing service please email
-%p
-  #{mail_to "atdis-support@planningalerts.org.au"}
-%p
-  Depending on the specific nature of the questions
-  these enquiries will be handled either by
-  = link_to "Carpadium", "http://www.carpadium.com/"
-  or
-  #{link_to "OpenAustralia Foundation", "https://www.openaustraliafoundation.org.au"}.
-  If you think you've found a bug in this testing service please explain how to reproduce the error step-by-step.
-
 %h3 Example feeds to test
 
 %ul
@@ -107,6 +94,19 @@
       does not validate. See the errors below.
     %h3 Errors
     = render :partial => "attribute_error_table", :locals => {:model => @page}
+
+%h3 Vendor Technical Support
+%p
+  For technical support questions on the ATDIS specification and this testing service please email
+%p
+  #{mail_to "atdis-support@planningalerts.org.au"}
+%p
+  Depending on the specific nature of the questions
+  these enquiries will be handled either by
+  = link_to "Carpadium", "http://www.carpadium.com/"
+  or
+  #{link_to "OpenAustralia Foundation", "https://www.openaustraliafoundation.org.au"}.
+  If you think you've found a bug in this testing service please explain how to reproduce the error step-by-step.
 
 %h3 About this service
 %p
