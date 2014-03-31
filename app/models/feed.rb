@@ -49,11 +49,11 @@ class Feed
   end
 
   def url
-    ATDIS::Feed.new(base_url).url(feed_options)
+    ATDIS::Feed.new(base_url).applications_url(feed_options)
   end
 
   def applications
-    u = URI.parse(base_url)
+    u = URI.parse(url)
     # In development we don't have a multithreaded web server so we have to fake the serving of the data
     # Assume if the url is local it's actually for one of the test data sets. We could be more careful but
     # there is little point.
