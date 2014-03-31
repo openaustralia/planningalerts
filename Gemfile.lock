@@ -1,14 +1,4 @@
 GIT
-  remote: https://github.com/openaustralia/atdis.git
-  revision: 03ffb86cfc936fe58155acf04db19319ea15d6c1
-  specs:
-    atdis (0.2)
-      activemodel (~> 3)
-      multi_json (~> 1.7)
-      rest-client
-      rgeo-geojson
-
-GIT
   remote: https://github.com/openaustralia/mobile-fu.git
   revision: 5dca62b3a53e29df63c3af2314ae8b7a17e14088
   specs:
@@ -60,6 +50,11 @@ GEM
     arbre (1.0.1)
       activesupport (>= 3.0.0)
     arel (3.0.3)
+    atdis (0.3.1)
+      activemodel (~> 3)
+      multi_json (~> 1.7)
+      rest-client
+      rgeo-geojson
     bcrypt-ruby (3.1.1)
     bourbon (3.1.1)
       sass (>= 3.2.0)
@@ -381,7 +376,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
-  atdis!
+  atdis
   capistrano
   capybara (< 2.0)
   coffee-rails
