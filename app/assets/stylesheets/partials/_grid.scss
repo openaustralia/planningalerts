@@ -198,6 +198,7 @@
     position: absolute;
     top: 1em;
     right: 1em;
+    @include rotate(2deg);
   }
   #stats {
     background-color: #fff;
