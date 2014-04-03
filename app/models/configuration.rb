@@ -3,6 +3,9 @@ module Configuration
   # URL Stuff
   HOST = 'localhost:3000'
   INTERNAL_SCRAPERS_INDEX_URL = 'http://localhost:4567/'
+
+  # See https://morph.io/api
+  MORPH_API_KEY = "xxxxxxxxxxxxxxxxxxxx"
   
   # Size of alert areas
   SMALL_ZONE_SIZE = 200

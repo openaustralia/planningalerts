@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe "authorities/index.haml" do
   it "should show a list of the authorities" do
-    a1 = mock_model(Authority, :full_name => "Wombat District Council", :short_name_encoded => "wombat", :broken? => false)
-    a2 = mock_model(Authority, :full_name => "Kangaroo City Council", :short_name_encoded => "kangaroo", :broken? => false)
+    a1 = mock_model(Authority, :full_name => "Wombat District Council", :short_name_encoded => "wombat", :scraperwiki_url => nil, :morph_url =>nil, :broken? => false)
+    a2 = mock_model(Authority, :full_name => "Kangaroo City Council", :short_name_encoded => "kangaroo", :scraperwiki_url => nil, :morph_url =>nil, :broken? => false)
     assign(:authorities, [["NSW", [a1, a2]]]) 
     render
     rendered.should have_content(a1.full_name)

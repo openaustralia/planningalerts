@@ -64,9 +64,9 @@ class Authority < ActiveRecord::Base
   end
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
-  def open_url_safe(url, info_logger)
+  def open_url_safe(url, info_logger, options = {})
     begin
-      open(url).read
+      open(url, options).read
     rescue Exception => e
       info_logger.error "Error #{e} while getting data from url #{url}. So, skipping"
       nil
@@ -105,6 +105,17 @@ class Authority < ActiveRecord::Base
     end
   end
 
+  def scraper_data_morph_style(start_date, end_date, info_logger)
+    # The morph api requires a key
+    text = open_url_safe(morph_feed_url_for_date_range(start_date, end_date), info_logger,
+      "x-api-key" => ::Configuration::MORPH_API_KEY)
+    if text
+      Application.translate_morph_feed_data(text)
+    else
+      []
+    end
+  end
+
   # Collect applications over the default date range
   def collect_applications(other_info_logger = logger)
     # Also log to the authority database as well so we have easy access to this for the user
@@ -118,8 +129,13 @@ class Authority < ActiveRecord::Base
 
   # Same as collection_applications_data_range except the applications are returned rather than saved
   def collect_unsaved_applications_date_range(start_date, end_date, info_logger = logger)
-    d = scraperwiki? ? scraper_data_scraperwiki_style(start_date, end_date, info_logger) :
-      scraper_data_original_style(start_date, end_date, info_logger)
+    if morph?
+      d = scraper_data_morph_style(start_date, end_date, info_logger)
+    elsif scraperwiki?
+      d = scraper_data_scraperwiki_style(start_date, end_date, info_logger)
+    else
+      d = scraper_data_original_style(start_date, end_date, info_logger)
+    end
     d.map do |attributes|
       applications.build(attributes)
     end
@@ -188,11 +204,19 @@ class Authority < ActiveRecord::Base
 
   # Does this authority use scraperwiki to get its data?
   def scraperwiki?
-    scraperwiki_name && scraperwiki_name != ""
+    !scraperwiki_name.blank?
+  end
+
+  def morph?
+    !morph_name.blank?
   end
 
   def scraperwiki_url
     "https://scraperwiki.com/scrapers/#{scraperwiki_name}/" if scraperwiki?
+  end
+
+  def morph_url
+    "https://morph.io/#{morph_name}" unless morph_name.blank?
   end
   
   def feed_url_has_date?
@@ -206,6 +230,11 @@ class Authority < ActiveRecord::Base
   def scraperwiki_feed_url_for_date_range(start_date, end_date)
     query = CGI.escape("select * from `swdata` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
     "https://api.scraperwiki.com/api/1.0/datastore/sqlite?format=jsondict&name=#{scraperwiki_name}&query=#{query}"
+  end
+  
+  def morph_feed_url_for_date_range(start_date, end_date)
+    query = CGI.escape("select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
+    "https://api.morph.io/#{morph_name}/data.json?query=#{query}"
   end
   
   # So that the encoding function can be used elsewhere

@@ -9,19 +9,19 @@ module AtdisHelper
     elsif value.class.respond_to?(:attribute_names)
       render :partial => "attribute_table", :locals => {:model => value}
     elsif value.kind_of?(DateTime)
-      time_tag(value) + " (" + time_ago_in_words(value) + " ago)"
+      content_tag(:div, time_tag(value) + " (" + time_ago_in_words(value) + " ago)", class: "value")
     elsif value.kind_of?(URI)
-      link_to(value.to_s, value.to_s)
+      content_tag(:div, link_to(value.to_s, value.to_s), class: "value")
     elsif value.kind_of?(RGeo::Cartesian::PointImpl)
-      h(value) + content_tag(:p, google_static_map2(:lat => value.y, :lng => value.x, :zoom => 12, :size => "300x150"))
+      content_tag(:div, h(value) + content_tag(:p, google_static_map2(:lat => value.y, :lng => value.x, :zoom => 12, :size => "300x150")), class: "value")
     elsif value.kind_of?(RGeo::Cartesian::PolygonImpl)
-      h(value)
+      content_tag(:div, h(value), class: "value")
     elsif value.kind_of?(NilClass)
-      content_tag(:p, "empty", :class => "quiet")
+      content_tag(:div, content_tag(:p, "absent or null", :class => "quiet"), class: "value")
     elsif value.kind_of?(String)
-      h(value)
+      content_tag(:div, h(value), class: "value")
     else
-      h(value.inspect)
+      content_tag(:div, h(value.inspect), class: "value")
     end
   end
 end

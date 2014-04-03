@@ -1,8 +1,8 @@
 source "https://rubygems.org"
 
-gem 'rails', '= 3.2.16'
+gem 'rails', '= 3.2.17'
 gem 'mysql2', '> 0.3'
- 
+
 # Needed for the new asset pipeline
 group :assets do
   gem 'coffee-rails'
@@ -11,7 +11,7 @@ group :assets do
   gem "susy"
   gem 'uglifier'
 end
- 
+
 # jQuery is the default JavaScript library in Rails 3.1
 # Locking jquery-rails to 2.2.1 so that activeadmin can find jquery-ui when it's precompiling its assets
 # Probably can get rid of this by updating activeadmin
@@ -48,8 +48,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem "validate_url"
 gem "twitter"
-#gem "atdis", :path => '/Users/matthew/git/atdis'
-gem "atdis", :git => "https://github.com/openaustralia/atdis.git"
+gem "atdis"
 gem "oj"
 # Need to stick with 2.3.0 to support Ruby 1.8.7
 gem "redcarpet", "2.3.0"
@@ -74,7 +73,7 @@ group :development do
   gem 'rack-livereload'
   gem 'mailcatcher'
 end
-  
+
 group :test, :development do
   gem 'rspec-rails', '~> 2.4'
 end
@@ -83,4 +82,3 @@ group :production do
   # Javascript runtime (required for precompiling assets in production)
   gem 'therubyracer'
 end
-
