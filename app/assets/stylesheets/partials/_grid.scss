@@ -33,6 +33,9 @@
 // Until we get to our largest size
 @include at-breakpoint(1em 60em) {
 
+  ul.ui-autocomplete {
+    text-align: center;
+  }
   .container {
     // Home page search form should be tweaked
     // Also alert sign up form
