@@ -7,7 +7,7 @@
           = link_to applications_path do
             we collected
             %span.number= number_with_delimiter(Application.in_past_week.count)
-            news applications
+            new applications
         %li
           = link_to new_alert_path do
             you received
