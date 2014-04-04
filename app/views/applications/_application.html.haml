@@ -1,9 +1,10 @@
 %article.application
-  .address= link_to application.address, application_path(application)
-  .appinfo
-    - if application.respond_to? :distance
-      #{time_ago_in_words(application.date_scraped)} ago, #{km_in_words(application.distance.to_f)} away
-    - else
-      #{time_ago_in_words(application.date_scraped)} ago
-  .description
-    = application.respond_to?(:excerpts) && application.excerpts ? @applications.excerpt_for(html_escape(application.description)).html_safe : application.description
+  = link_to application do
+    .address= application.address
+    .appinfo
+      - if application.respond_to? :distance
+        #{time_ago_in_words(application.date_scraped)} ago, #{km_in_words(application.distance.to_f)} away
+      - else
+        #{time_ago_in_words(application.date_scraped)} ago
+    .description
+      = application.respond_to?(:excerpts) && application.excerpts ? @applications.excerpt_for(html_escape(application.description)).html_safe : application.description

@@ -259,6 +259,15 @@ body .container .attention {
   margin-bottom: 1em;
 }
 
+.application {
+  a:hover {
+    text-decoration: none;
+    .address {
+      text-decoration: underline;
+    }
+  }
+}
+
 /* api */
 div.apiitem {
   margin-bottom: 1.5em;
