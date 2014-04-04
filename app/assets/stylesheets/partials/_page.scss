@@ -601,11 +601,9 @@ td pre {
     text-decoration: none;
   }
   .number {
-    @include border-radius(.25em);
-    margin-right: .3em;
-    padding: .15em .35em;
-    background-color: lighten($lightest-cool-highlight, 40%);
+    display: block;
     font-weight: bold;
+    font-size: 2em;
   }
 }
 

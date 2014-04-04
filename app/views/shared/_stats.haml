@@ -5,17 +5,21 @@
       %ul
         %li
           = link_to applications_path do
+            we collected
             %span.number= number_with_delimiter(Application.in_past_week.count)
-            applications collected
+            news applications
         %li
           = link_to new_alert_path do
+            you received
             %span.number= number_with_delimiter(EmailBatch.total_sent_in_past_week)
-            emails sent
+            email alerts
         %li
           = link_to new_alert_path do
+            you signed up for
             %span.number= number_with_delimiter(Alert.in_past_week.count)
-            new sign ups
+            new email alerts
         %li
           = link_to comments_path do
+            you made
             %span.number= number_with_delimiter(Comment.visible.in_past_week.count)
             new comments
