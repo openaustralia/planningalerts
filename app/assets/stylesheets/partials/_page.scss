@@ -278,18 +278,18 @@ div.apiitem {
   p {
     margin-bottom: 1em;
   }
-}
-code {
-  @include boxed-content;
-  word-wrap: break-word;
-  margin-bottom: 1em;
+  code {
+    @include boxed-content;
+    word-wrap: break-word;
+    margin-bottom: 1em;
 
-  pre {
-    margin: 0;
+    pre {
+      margin: 0;
+    }
   }
-}
-code.long-lines {
-  font-size: .9em;
+  code.long-lines {
+    font-size: .9em;
+  }
 }
 
 #hLicenseInfo {
@@ -407,10 +407,6 @@ body blockquote {
 
 .sizes {
   @include no-bullets;
-}
-
-ul li {
-  color: $light-cool-highlight; // Colour the bullets
 }
 
 .contributors {
