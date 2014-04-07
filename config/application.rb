@@ -62,7 +62,8 @@ module PlanningalertsApp
     config.assets.precompile += ['ie.css', 'screen.css', 'print.css',
       'placeholder_polyfill.min.css',
       'active_admin.js', 'applications.js', 'bar_graph.js', 'maps.js', 'mxn.core.js',
-      'mxn.googlev3.core.js', 'mxn.js', 'placeholder_polyfill.jquery.min.combo.js', 'preview.js']
+      'mxn.googlev3.core.js', 'mxn.js', 'placeholder_polyfill.jquery.min.combo.js', 'preview.js',
+      'atdis.js']
 
     config.action_dispatch.tld_length = 2
 
