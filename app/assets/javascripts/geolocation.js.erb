@@ -1,6 +1,6 @@
 $(function() {
   if (navigator.geolocation) {
-    $("li#q_input").append("<a class='inline-hints' id='geolocate' href='#'>&hellip; or locate me automatically</a>");
+    $("#geolocate").css('visibility', 'visible');
   }
 
   $("#geolocate").click(function(e){
