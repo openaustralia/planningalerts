@@ -1,9 +1,12 @@
 $(function() {
   if (navigator.geolocation) {
-    $("li#q_input").append("<a class='inline-hints' id='geolocate' href='#'>... or locate me automatically</p>");
+    $("li#q_input").append("<a class='inline-hints' id='geolocate' href='#'>&hellip; or locate me automatically</a>");
   }
 
   $("#geolocate").click(function(e){
+    var link = $(this);
+    e.preventDefault();
+    link.append('<%= image_tag("spinner.gif", size: "16x16") %>');
     // TODO: Spin something
     navigator.geolocation.getCurrentPosition(function(pos) {
       var latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
