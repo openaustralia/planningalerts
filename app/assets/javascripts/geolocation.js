@@ -8,13 +8,23 @@ $(function() {
 
   $("#geolocate").click(function(e){
     // TODO: Spin something
-    alert("Hello!")
     navigator.geolocation.getCurrentPosition(function(pos) {
       var latitude = pos.coords.latitude;
       var longitude = pos.coords.longitude;
       console.log("latitude:", latitude);
       console.log("longitude:", longitude);
       // TODO: Now do a bit of reverse geocoding
+      var latlng = new google.maps.LatLng(latitude, longitude);
+      console.log(latlng);
+      geocoder = new google.maps.Geocoder();
+      geocoder.geocode({'latLng': latlng}, function(results, status){
+        if (status == google.maps.GeocoderStatus.OK) {
+          console.log(results[0].formatted_address);
+          location.href = '/?q=' + results[0].formatted_address;
+        } else {
+          alert("Reverse geocoding didn't work");
+        }
+      });
     }, function(err) {
       alert("Something errored");
     }, {enableHighAccuracy: true, timeout: 10000});
