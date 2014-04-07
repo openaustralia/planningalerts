@@ -1,21 +1,12 @@
 $(function() {
   if (navigator.geolocation) {
-    console.log("SUPPORTED");
     $("li#q_input").append("<a class='inline-hints' id='geolocate' href='#'>... or locate me automatically</p>");
-  } else {
-    console.log('not supported');
   }
 
   $("#geolocate").click(function(e){
     // TODO: Spin something
     navigator.geolocation.getCurrentPosition(function(pos) {
-      var latitude = pos.coords.latitude;
-      var longitude = pos.coords.longitude;
-      console.log("latitude:", latitude);
-      console.log("longitude:", longitude);
-      // TODO: Now do a bit of reverse geocoding
-      var latlng = new google.maps.LatLng(latitude, longitude);
-      console.log(latlng);
+      var latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
       geocoder = new google.maps.Geocoder();
       geocoder.geocode({'latLng': latlng}, function(results, status){
         if (status == google.maps.GeocoderStatus.OK) {
