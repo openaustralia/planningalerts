@@ -59,7 +59,7 @@
     = f.input :suburb, :placeholder => "Mosman,Manly", :required => false, :hint => "Restrict results to those applications in the given suburbs"
     = f.input :postcode, :placeholder => "2000,2780", :required => false, :hint => "Restrict results to those applications in the given postcodes"
   = f.actions do
-    = f.action :submit, :label => "Test"
+    = f.action :submit, :label => "Test", button_html: {class: "button button-rounded"}
 
 - if @page
   %h3 Test Results
@@ -75,13 +75,13 @@
       Also, to check that the whole feed is working you need to check that the other pages are working. Use the buttons below to test other pages.
     %p
       - if @page.previous_url
-        = link_to "Test previous page", {:url => @page.previous_url}, :class => "btn"
+        = link_to "Test previous page", {:url => @page.previous_url}, :class => "button button-rounded"
       - else
-        %span.btn.disabled Test previous page
+        %span.button.button-rounded.disabled Test previous page
       - if @page.next_url
-        = link_to "Test next page", {:url => @page.next_url}, :class => "btn"
+        = link_to "Test next page", {:url => @page.next_url}, :class => "button button-rounded"
       - else
-        %span.btn.disabled Test next page
+        %span.button.button-rounded.disabled Test next page
 
     %h3 How the applications get loaded
     %p
