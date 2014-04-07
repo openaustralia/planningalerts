@@ -1,11 +1,25 @@
 $(function() {
   if (navigator.geolocation) {
     console.log("SUPPORTED");
-    $("li#q_input").append("<a class='inline-hints' id='geolocation' href='#'>... or locate me automatically</p>");
-    //navigator.geolocation.getCurrentPosition(success, error);
+    $("li#q_input").append("<a class='inline-hints' id='geolocate' href='#'>... or locate me automatically</p>");
   } else {
     console.log('not supported');
   }
+
+  $("#geolocate").click(function(e){
+    // TODO: Spin something
+    alert("Hello!")
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      var latitude = pos.coords.latitude;
+      var longitude = pos.coords.longitude;
+      console.log("latitude:", latitude);
+      console.log("longitude:", longitude);
+      // TODO: Now do a bit of reverse geocoding
+    }, function(err) {
+      alert("Something errored");
+    }, {enableHighAccuracy: true, timeout: 10000});
+
+  });
 
   // if (geo_position_js.init()) {
   //     if ($('body.frontpage').length) {
