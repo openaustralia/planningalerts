@@ -4,3 +4,4 @@
 //= require jquery.ui.autocomplete.html.js
 //= require atdis.js
 //= require address_autocomplete.js
+//= require geolocation
