@@ -34,7 +34,9 @@
             - else
               possibly broken
         &mdash;
-        - if authority.morph_url
+        - if authority.morph?
           = link_to "Morph scraper", authority.morph_url
+        - elsif authority.direct?
+          = link_to "direct from authority", authority.feed_url_for_date(Date.today)
         - else
           = link_to "internal scraper", "https://github.com/openaustralia/planningalerts-parsers"

@@ -211,6 +211,12 @@ class Authority < ActiveRecord::Base
     !morph_name.blank?
   end
 
+  # Does the information for this authority come directly from the authority
+  # in our xml format?
+  def direct?
+    !feed_url.blank? && !(feed_url =~ /planningalerts.org.au/)
+  end
+
   def scraperwiki_url
     "https://scraperwiki.com/scrapers/#{scraperwiki_name}/" if scraperwiki?
   end
