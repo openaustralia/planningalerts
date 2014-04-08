@@ -34,7 +34,7 @@
   Are you a developer?
 - if @authority.morph_url
   %p
-    Our new scraping platform #{link_to "Morph", "https://morph.io"} will be live soon. You will be able to fork scrapers and collaborate
+    The information comes from our new scraping platform #{link_to "Morph", "https://morph.io"}. You are able to fork scrapers and collaborate
     via git. See #{link_to @authority.morph_url, @authority.morph_url}
 - elsif @authority.scraperwiki_url
   %p
@@ -46,4 +46,3 @@
 - else
   %p
     The data for this scraper is currently coming from our #{link_to "original internal scraping platform", "https://github.com/openaustralia/planningalerts-parsers"}. We're actively working to migrate away from this. Want to help?
-
