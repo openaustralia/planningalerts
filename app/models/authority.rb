@@ -188,16 +188,6 @@ class Authority < ActiveRecord::Base
     earliest_application.date_scraped if earliest_application
   end
 
-  def morph?
-    !morph_name.blank?
-  end
-
-  # Does the information for this authority come directly from the authority
-  # in our xml format?
-  def direct?
-    !feed_url.blank? && !(feed_url =~ /planningalerts\.org\.au/)
-  end
-
   def morph_url
     "https://morph.io/#{morph_name}" unless morph_name.blank?
   end
