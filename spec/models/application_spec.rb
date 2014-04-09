@@ -261,7 +261,6 @@ describe Application do
       EOF
       @date = Date.new(2009, 1, 1)
       @feed_url = "http://example.org?year=#{@date.year}&month=#{@date.month}&day=#{@date.day}"
-      @auth.stub!(:feed_url_for_date).and_return(@feed_url)
       Application.delete_all
       @auth.stub!(:open).and_return(mock(:read => @feed_xml))
     end

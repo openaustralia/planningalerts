@@ -7,21 +7,21 @@ describe Authority do
       Authority.should_receive(:open).and_return(handle)
       handle.should_receive(:read).and_return(
         <<-EOF
-        <scrapers> 
-          <scraper> 
-            <authority_name>Blue Mountains City Council</authority_name> 
+        <scrapers>
+          <scraper>
+            <authority_name>Blue Mountains City Council</authority_name>
             <authority_short_name>Blue Mountains</authority_short_name>
             <state>NSW</state>
             <scraperwiki_name></scraperwiki_name>
-            <url>http://localhost:4567/blue_mountains?year={year}&amp;month={month}&amp;day={day}</url> 
-          </scraper> 
-          <scraper> 
-            <authority_name>Brisbane City Council</authority_name> 
-            <authority_short_name>Brisbane</authority_short_name> 
+            <url>http://localhost:4567/blue_mountains?year={year}&amp;month={month}&amp;day={day}</url>
+          </scraper>
+          <scraper>
+            <authority_name>Brisbane City Council</authority_name>
+            <authority_short_name>Brisbane</authority_short_name>
             <state>QLD</state>
             <scraperwiki_name></scraperwiki_name>
-            <url>http://localhost:4567/brisbane?year={year}&amp;month={month}&amp;day={day}</url> 
-          </scraper> 
+            <url>http://localhost:4567/brisbane?year={year}&amp;month={month}&amp;day={day}</url>
+          </scraper>
         <scrapers>
         EOF
       )
@@ -41,12 +41,6 @@ describe Authority do
       r.feed_url == "http://localhost:4567/brisbane?year={year}&month={month}&day={day}"
     end
   end
-  
-  it "should substitute the date in the url" do
-    a = Authority.new(:feed_url => "http://example.org?year={year}&month={month}&day={day}")
-    date = Date.new(2009, 2, 1)
-    a.feed_url_for_date(date).should == "http://example.org?year=2009&month=2&day=1"
-  end
 
   it "should know the scraperwiki feed url" do
     a = Authority.new(:scraperwiki_name => "my_council_scraper")
@@ -54,7 +48,7 @@ describe Authority do
     end_date = Date.new(2012, 8, 26)
     a.scraperwiki_feed_url_for_date_range(start_date, end_date).should == "https://api.scraperwiki.com/api/1.0/datastore/sqlite?format=jsondict&name=my_council_scraper&query=select+%2A+from+%60swdata%60+where+%60date_scraped%60+%3E%3D+%272012-08-19%27+and+%60date_scraped%60+%3C%3D+%272012-08-26%27"
   end
-  
+
   describe "detecting authorities with old applications" do
     before :each do
       @a1 = Factory(:authority, :full_name => "Blue Mountains City Council")
@@ -79,15 +73,15 @@ describe Authority do
       @a1 = Authority.create!(:short_name => "Blue Mountains", :full_name => "Blue Mountains City Council")
       @a2 = Authority.create!(:short_name => "Blue Mountains (new one)", :full_name => "Blue Mountains City Council (fictional new one)")
     end
-    
+
     it "should be constructed by replacing space by underscores and making it all lowercase" do
       @a1.short_name_encoded.should == "blue_mountains"
     end
-    
+
     it "should remove any non-word characters (except for underscore)" do
       @a2.short_name_encoded.should == "blue_mountains_new_one"
     end
-    
+
     it "should find a authority by the encoded name" do
       Authority.find_by_short_name_encoded("blue_mountains").should == @a1
       Authority.find_by_short_name_encoded("blue_mountains_new_one").should == @a2
@@ -95,14 +89,6 @@ describe Authority do
   end
 
   describe "#scraper_data_original_style" do
-    context "authority with an xml feed with a date in the url" do
-      let (:authority) { Factory.build(:authority, :feed_url => "http://foo.com?year={year}&month={month}&day={day}") }
-      it "should get the feed date once for each day in the date range" do
-        authority.should_receive(:open_url_safe).exactly(3).times
-        authority.scraper_data_original_style(Date.new(2001,1,1), Date.new(2001,1,3), mock)
-      end
-    end
-
     context "authority with an xml feed with no date in the url" do
       let (:authority) { Factory.build(:authority, :feed_url => "http://foo.com") }
       it "should get the feed date only once" do

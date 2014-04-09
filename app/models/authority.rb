@@ -20,11 +20,11 @@ end
 class Authority < ActiveRecord::Base
   has_many :applications
   scope :active, :conditions => 'disabled = 0 or disabled is null'
-  
+
   def full_name_and_state
     full_name + ", " + state
   end
-  
+
   def self.load_from_web_service(info_logger = logger)
     page = Nokogiri::XML(open(::Configuration::INTERNAL_SCRAPERS_INDEX_URL).read)
     page.search('scraper').each do |scraper|
@@ -77,19 +77,9 @@ class Authority < ActiveRecord::Base
   # creating applications
   def scraper_data_original_style(start_date, end_date, info_logger)
     feed_data = []
-    if feed_url_has_date?
-      # Go through the dates in reverse chronological order
-      (start_date..end_date).to_a.reverse.each do |date|
-        text = open_url_safe(feed_url_for_date(date), info_logger)
-        if text
-          feed_data += Application.translate_feed_data(text)
-        end
-      end
-    else
-      text = open_url_safe(feed_url, info_logger)
-      if text
-        feed_data += Application.translate_feed_data(text)
-      end
+    text = open_url_safe(feed_url, info_logger)
+    if text
+      feed_data += Application.translate_feed_data(text)
     end
     feed_data
   end
@@ -224,34 +214,26 @@ class Authority < ActiveRecord::Base
   def morph_url
     "https://morph.io/#{morph_name}" unless morph_name.blank?
   end
-  
-  def feed_url_has_date?
-    feed_url && (feed_url.include?("{year}") || feed_url.include?("{month}") || feed_url.include?("{day}"))
-  end
-
-  def feed_url_for_date(date)
-    feed_url.sub("{year}", date.year.to_s).sub("{month}", date.month.to_s).sub("{day}", date.day.to_s)
-  end
 
   def scraperwiki_feed_url_for_date_range(start_date, end_date)
     query = CGI.escape("select * from `swdata` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
     "https://api.scraperwiki.com/api/1.0/datastore/sqlite?format=jsondict&name=#{scraperwiki_name}&query=#{query}"
   end
-  
+
   def morph_feed_url_for_date_range(start_date, end_date)
     query = CGI.escape("select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
     "https://api.morph.io/#{morph_name}/data.json?query=#{query}"
   end
-  
+
   # So that the encoding function can be used elsewhere
   def self.short_name_encoded(short_name)
     short_name.downcase.gsub(' ', '_').gsub(/\W/, '')
   end
-  
+
   def short_name_encoded
     Authority.short_name_encoded(short_name)
   end
-  
+
   def self.find_by_short_name_encoded(n)
     # TODO: Potentially not very efficient when number of authorities is high. Loads all authorities into memory
     find(:all).find{|a| a.short_name_encoded == n}
@@ -263,7 +245,7 @@ class Authority < ActiveRecord::Base
     raise ActiveRecord::RecordNotFound if r.nil?
     r
   end
-  
+
   # Is this authority contactable through PlanningAlerts? i.e. do we have an email address on record?
   def contactable?
     email && email != ""
