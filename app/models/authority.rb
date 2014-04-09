@@ -222,11 +222,6 @@ class Authority < ActiveRecord::Base
     "https://morph.io/#{morph_name}" unless morph_name.blank?
   end
 
-  def scraperwiki_feed_url_for_date_range(start_date, end_date)
-    query = CGI.escape("select * from `swdata` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
-    "https://api.scraperwiki.com/api/1.0/datastore/sqlite?format=jsondict&name=#{scraperwiki_name}&query=#{query}"
-  end
-
   def morph_feed_url_for_date_range(start_date, end_date)
     query = CGI.escape("select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
     "https://api.morph.io/#{morph_name}/data.json?query=#{query}"
