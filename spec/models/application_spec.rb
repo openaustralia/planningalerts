@@ -270,7 +270,7 @@ describe Application do
       @auth.stub!(:logger).and_return(logger)
       logger.should_receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
 
-      @auth.collect_applications_date_range(@date, @date)
+      @auth.collect_applications_date_range_original_style(@date, @date)
       Application.count.should == 2
       r1 = Application.find_by_council_reference("R1")
       r1.authority.should == @auth
@@ -290,8 +290,8 @@ describe Application do
       logger.should_receive(:info).with("0 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
 
       # Getting the feed twice with the same content
-      @auth.collect_applications_date_range(@date, @date)
-      @auth.collect_applications_date_range(@date, @date)
+      @auth.collect_applications_date_range_original_style(@date, @date)
+      @auth.collect_applications_date_range_original_style(@date, @date)
       Application.count.should == 2
     end
 
