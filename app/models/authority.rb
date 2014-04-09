@@ -25,26 +25,6 @@ class Authority < ActiveRecord::Base
     full_name + ", " + state
   end
 
-  def self.load_from_web_service(info_logger = logger)
-    page = Nokogiri::XML(open(::Configuration::INTERNAL_SCRAPERS_INDEX_URL).read)
-    page.search('scraper').each do |scraper|
-      short_name = scraper.at('authority_short_name').inner_text
-      authority = Authority.find_by_short_name(short_name)
-      if authority.nil?
-        info_logger.info "New authority: #{short_name}"
-        authority = Authority.new(:short_name => short_name)
-      else
-        info_logger.info "Updating authority: #{short_name}"
-      end
-      authority.full_name = scraper.at('authority_name').inner_text
-      authority.state = scraper.at('state').inner_text
-      authority.feed_url = scraper.at('url').inner_text
-      authority.disabled = 0
-
-      authority.save!
-    end
-  end
-
   # Hardcoded total population of Australia (2011 estimate)
   # From http://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/3218.02011?OpenDocument#Data
   def self.total_population_2011
