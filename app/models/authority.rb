@@ -55,7 +55,7 @@ class Authority < ActiveRecord::Base
 
   # Get all the scraper data for this authority and date in an array of attributes that can be used
   # creating applications
-  def scraper_data_original_style(start_date, end_date, info_logger)
+  def scraper_data_original_style(feed_url, start_date, end_date, info_logger)
     feed_data = []
     text = open_url_safe(feed_url, info_logger)
     if text
@@ -94,8 +94,8 @@ class Authority < ActiveRecord::Base
     end
   end
 
-  def collect_unsaved_applications_date_range_original_style(start_date, end_date, info_logger = logger)
-    d = scraper_data_original_style(start_date, end_date, info_logger)
+  def collect_unsaved_applications_date_range_original_style(feed_url, start_date, end_date, info_logger = logger)
+    d = scraper_data_original_style(feed_url, start_date, end_date, info_logger)
     d.map do |attributes|
       applications.build(attributes)
     end
@@ -128,10 +128,10 @@ class Authority < ActiveRecord::Base
 
   # Collect all the applications for this authority by scraping
   # TODO This is a horrible copy and paste job
-  def collect_applications_date_range_original_style(start_date, end_date, info_logger = logger)
+  def collect_applications_date_range_original_style(feed_url, start_date, end_date, info_logger = logger)
     count = 0
     error_count = 0
-    collect_unsaved_applications_date_range_original_style(start_date, end_date, info_logger).each do |application|
+    collect_unsaved_applications_date_range_original_style(feed_url, start_date, end_date, info_logger).each do |application|
       # TODO Consider if it would be better to overwrite applications with new data if they already exists
       # This would allow for the possibility that the application information was incorrectly entered at source
       # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
