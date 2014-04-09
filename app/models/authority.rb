@@ -126,32 +126,6 @@ class Authority < ActiveRecord::Base
     end
   end
 
-  # Collect all the applications for this authority by scraping
-  # TODO This is a horrible copy and paste job
-  def collect_applications_date_range_original_style(feed_url, start_date, end_date, info_logger = logger)
-    count = 0
-    error_count = 0
-    collect_unsaved_applications_date_range_original_style(feed_url, start_date, end_date, info_logger).each do |application|
-      # TODO Consider if it would be better to overwrite applications with new data if they already exists
-      # This would allow for the possibility that the application information was incorrectly entered at source
-      # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
-      unless applications.find_by_council_reference(application.council_reference)
-        begin
-          application.save!
-          count += 1
-        rescue Exception => e
-          error_count += 1
-          info_logger.error "Error #{e} while trying to save application #{application.council_reference} for #{full_name_and_state}. So, skipping"
-        end
-      end
-    end
-
-    info_logger.info "#{count} new applications found for #{full_name_and_state} with date from #{start_date} to #{end_date}"
-    if error_count > 0
-      info_logger.info "#{error_count} applications errored for #{full_name_and_state} with date from #{start_date} to #{end_date}"
-    end
-  end
-
   # Returns an array of arrays [date, number_of_applications_that_date]
   def applications_per_day
     h = applications.group("CAST(date_scraped AS DATE)").count
