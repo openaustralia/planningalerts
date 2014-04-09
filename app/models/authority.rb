@@ -89,7 +89,7 @@ class Authority < ActiveRecord::Base
   def scraper_data_scraperwiki_style(start_date, end_date, info_logger)
     text = open_url_safe(scraperwiki_feed_url_for_date_range(start_date, end_date), info_logger)
     if text
-      Application.translate_scraperwiki_feed_data(text)
+      Application.translate_morph_feed_data(text)
     else
       []
     end

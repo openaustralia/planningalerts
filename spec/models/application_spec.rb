@@ -197,7 +197,7 @@ describe Application do
       # Freeze time
       t = Time.now
       Time.stub!(:now).and_return(t)
-      Application.translate_scraperwiki_feed_data(feed_data).should ==
+      Application.translate_morph_feed_data(feed_data).should ==
       [
         {
           :date_scraped => t,
@@ -225,7 +225,7 @@ describe Application do
     end
 
     it "should handle a malformed response" do
-      Application.translate_scraperwiki_feed_data('[["An invalid scraperwiki API response"]]').should == []
+      Application.translate_morph_feed_data('[["An invalid scraperwiki API response"]]').should == []
     end
   end
 
