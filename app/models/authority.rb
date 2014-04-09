@@ -219,11 +219,6 @@ class Authority < ActiveRecord::Base
     earliest_application.date_scraped if earliest_application
   end
 
-  # Does this authority use scraperwiki to get its data?
-  def scraperwiki?
-    !scraperwiki_name.blank?
-  end
-
   def morph?
     !morph_name.blank?
   end
