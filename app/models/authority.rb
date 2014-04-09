@@ -84,17 +84,6 @@ class Authority < ActiveRecord::Base
     feed_data
   end
 
-  # Get all the scraper data for this authority and date in an array of attributes that can be used
-  # creating applications
-  def scraper_data_scraperwiki_style(start_date, end_date, info_logger)
-    text = open_url_safe(scraperwiki_feed_url_for_date_range(start_date, end_date), info_logger)
-    if text
-      Application.translate_morph_feed_data(text)
-    else
-      []
-    end
-  end
-
   def scraper_data_morph_style(start_date, end_date, info_logger)
     # The morph api requires a key
     text = open_url_safe(morph_feed_url_for_date_range(start_date, end_date), info_logger,
