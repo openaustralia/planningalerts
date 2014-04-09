@@ -21,9 +21,9 @@ class AuthoritiesController < ApplicationController
     # TODO: Warning on lack of whitespace stripping
     @url = params[:url]
     if @url
-      authority = Authority.new(:feed_url => @url)
+      authority = Authority.new
       # The loaded applications
-      @applications = authority.collect_unsaved_applications_date_range_original_style(Date.today, Date.today)
+      @applications = authority.collect_unsaved_applications_date_range_original_style(@url, Date.today, Date.today)
       # Try validating the applications and return all the errors for the first non-validating application
       @applications.each do |application|
         unless application.valid?
