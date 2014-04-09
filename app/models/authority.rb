@@ -234,10 +234,6 @@ class Authority < ActiveRecord::Base
     !feed_url.blank? && !(feed_url =~ /planningalerts\.org\.au/)
   end
 
-  def scraperwiki_url
-    "https://scraperwiki.com/scrapers/#{scraperwiki_name}/" if scraperwiki?
-  end
-
   def morph_url
     "https://morph.io/#{morph_name}" unless morph_name.blank?
   end
