@@ -19,10 +19,15 @@ end
 
 class Authority < ActiveRecord::Base
   has_many :applications
+  scope :enabled, :conditions => 'disabled = 0 or disabled is null'
   scope :active, :conditions => '(disabled = 0 or disabled is null) AND morph_name != "" AND morph_name IS NOT NULL'
 
   def full_name_and_state
     full_name + ", " + state
+  end
+
+  def covered?
+    !morph_name.blank?
   end
 
   # Hardcoded total population of Australia (2011 estimate)
