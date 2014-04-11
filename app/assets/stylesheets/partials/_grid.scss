@@ -94,6 +94,10 @@
     @include span-columns(6 omega, 12);
   }
 
+  #application-info #map_div {
+    @include span-columns(12 omega, 12);
+  }
+
   #main {
     @include span-columns(9, 12);
   }
@@ -278,18 +282,20 @@
   }
 
   #pano {
-    @include inline-block;
-    float: left;
-    width: 50%;
     height: 10em;
   }
 
-  #map_div {
+  #map_div, .details {
     @include span-columns(8, 24);
+  }
+  #map_div {
     height: 330px;
   }
   .map-settings {
     @include span-columns(15 omega, 24);
+  }
+  #application-info footer {
+    clear: left;
   }
 
   #sidebar {
