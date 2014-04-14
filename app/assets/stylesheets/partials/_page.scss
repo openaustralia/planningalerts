@@ -63,6 +63,10 @@ a {
       padding: 0;
       @include inline-block;
     }
+    li.selected a {
+      color: $dark;
+      background-color: $content-background;
+    }
   }
   a {
     padding: .5em 0;

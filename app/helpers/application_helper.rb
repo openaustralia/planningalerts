@@ -3,11 +3,22 @@ require 'rss/2.0'
 
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  def page_matches?(options)
+    if options[:action].is_a?(Array)
+      options[:action].any?{|a| current_page?(:controller => options[:controller], :action => a) }
+    else
+      current_page?(:controller => options[:controller], :action => options[:action])
+    end
+  end
+
+  def li_selected(m, &block)
+    content_tag(:li, capture(&block), :class => ("selected" if page_matches?(m)))
+  end
 
   def body_classes(controller_name, action_name)
     "c-#{controller_name} a-#{action_name}"
   end
-  
+
   def meters_in_words(meters)
     if meters < 1000
       "#{significant_figure_remove_trailing_zero(meters, 2)} m"
