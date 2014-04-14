@@ -68,7 +68,8 @@
             = f.input :address, :placeholder => "Address", :hint => hint
             %div#faq_commenting_address.inline-hints.hidden
               = render :partial => 'static/faq_commenting_address'
-          = f.actions
+          = f.actions do
+            = f.action :submit, button_html: {class: "button button-action"}
       - elsif !@application.comment_url.blank?
         %p
           = link_to "How to comment", @application.comment_url
