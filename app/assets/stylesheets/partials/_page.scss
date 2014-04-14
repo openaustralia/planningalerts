@@ -108,9 +108,12 @@ body {
   padding-bottom: 1em;
 }
 
+#footer-wrapper {
+  background-color: $warm-highlight;
+}
+
 #footer {
   color: $lightest;
-  background-color: $warm-highlight;
 
   a {
     &:link, &:visited {

@@ -342,8 +342,7 @@
   }
 
   #footer {
-    padding: 1.5em .7em 0 .7em;
-    margin-bottom: 1.5em;
+    padding: 1.5em .7em 1.5em .7em;
     .keepintouch {
       @include span-columns(12,24);
     }
