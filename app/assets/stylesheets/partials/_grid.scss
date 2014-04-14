@@ -134,7 +134,6 @@
     a {
       padding: .5em;
       @include inline-block;
-      @include border-top-radius(.25em);
     }
   }
   // Several state select buttons. They can fit on 1 line now

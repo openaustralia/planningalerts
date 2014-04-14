@@ -69,15 +69,14 @@ a {
     display: block;
     text-decoration: none; 
     @include single-transition(background-color, .5s);
-    text-shadow: -1px 0 2px $dark;
 
     &:link, &:visited {
       color: #fff;
     }
     &:active, &:hover, &:focus {
-      color: $lightest;
-      background-color: $background-overlay;
-    } 
+      color: $dark;
+      background-color: $content-background;
+    }
   }
   abbr {
     border: none;
