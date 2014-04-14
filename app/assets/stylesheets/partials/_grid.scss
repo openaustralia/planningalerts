@@ -341,19 +341,9 @@
     }
   }
 
-  // #footer
   #footer {
     padding: 1.5em .7em 0 .7em;
     margin-bottom: 1.5em;
-    background-color: $background-overlay;
-    @include background-clip( padding-box);
-    @include border-bottom-radius(.5em);
-    border: .5em solid $background-overlay;
-    border-top: none;
-
-    a:active, a:hover, a:focus {
-      color: $warm-highlight;
-    }
     .keepintouch {
       @include span-columns(12,24);
     }
