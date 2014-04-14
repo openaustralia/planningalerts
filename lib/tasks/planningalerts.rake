@@ -1,11 +1,4 @@
 namespace :planningalerts do
-  namespace :authorities do
-    desc "Load all the authorities data from the scraper web service index"
-    task :load => :environment do
-      Authority.load_from_web_service(Logger.new(STDOUT))
-    end
-  end
-  
   namespace :applications do
     desc "Scrape new applications, index them, send emails and generate XML sitemap"
     task :scrape_and_email => [:scrape, 'ts:in', :email, :sitemap]

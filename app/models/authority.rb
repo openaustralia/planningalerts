@@ -19,30 +19,15 @@ end
 
 class Authority < ActiveRecord::Base
   has_many :applications
-  scope :active, :conditions => 'disabled = 0 or disabled is null'
-  
+  scope :enabled, :conditions => 'disabled = 0 or disabled is null'
+  scope :active, :conditions => '(disabled = 0 or disabled is null) AND morph_name != "" AND morph_name IS NOT NULL'
+
   def full_name_and_state
     full_name + ", " + state
   end
-  
-  def self.load_from_web_service(info_logger = logger)
-    page = Nokogiri::XML(open(::Configuration::INTERNAL_SCRAPERS_INDEX_URL).read)
-    page.search('scraper').each do |scraper|
-      short_name = scraper.at('authority_short_name').inner_text
-      authority = Authority.find_by_short_name(short_name)
-      if authority.nil?
-        info_logger.info "New authority: #{short_name}"
-        authority = Authority.new(:short_name => short_name)
-      else
-        info_logger.info "Updating authority: #{short_name}"
-      end
-      authority.full_name = scraper.at('authority_name').inner_text
-      authority.state = scraper.at('state').inner_text
-      authority.feed_url = scraper.at('url').inner_text
-      authority.disabled = 0
 
-      authority.save!
-    end
+  def covered?
+    !morph_name.blank?
   end
 
   # Hardcoded total population of Australia (2011 estimate)
@@ -75,34 +60,13 @@ class Authority < ActiveRecord::Base
 
   # Get all the scraper data for this authority and date in an array of attributes that can be used
   # creating applications
-  def scraper_data_original_style(start_date, end_date, info_logger)
+  def scraper_data_original_style(feed_url, start_date, end_date, info_logger)
     feed_data = []
-    if feed_url_has_date?
-      # Go through the dates in reverse chronological order
-      (start_date..end_date).to_a.reverse.each do |date|
-        text = open_url_safe(feed_url_for_date(date), info_logger)
-        if text
-          feed_data += Application.translate_feed_data(text)
-        end
-      end
-    else
-      text = open_url_safe(feed_url, info_logger)
-      if text
-        feed_data += Application.translate_feed_data(text)
-      end
+    text = open_url_safe(feed_url, info_logger)
+    if text
+      feed_data += Application.translate_feed_data(text)
     end
     feed_data
-  end
-
-  # Get all the scraper data for this authority and date in an array of attributes that can be used
-  # creating applications
-  def scraper_data_scraperwiki_style(start_date, end_date, info_logger)
-    text = open_url_safe(scraperwiki_feed_url_for_date_range(start_date, end_date), info_logger)
-    if text
-      Application.translate_scraperwiki_feed_data(text)
-    else
-      []
-    end
   end
 
   def scraper_data_morph_style(start_date, end_date, info_logger)
@@ -129,13 +93,14 @@ class Authority < ActiveRecord::Base
 
   # Same as collection_applications_data_range except the applications are returned rather than saved
   def collect_unsaved_applications_date_range(start_date, end_date, info_logger = logger)
-    if morph?
-      d = scraper_data_morph_style(start_date, end_date, info_logger)
-    elsif scraperwiki?
-      d = scraper_data_scraperwiki_style(start_date, end_date, info_logger)
-    else
-      d = scraper_data_original_style(start_date, end_date, info_logger)
+    d = scraper_data_morph_style(start_date, end_date, info_logger)
+    d.map do |attributes|
+      applications.build(attributes)
     end
+  end
+
+  def collect_unsaved_applications_date_range_original_style(feed_url, start_date, end_date, info_logger = logger)
+    d = scraper_data_original_style(feed_url, start_date, end_date, info_logger)
     d.map do |attributes|
       applications.build(attributes)
     end
@@ -202,50 +167,24 @@ class Authority < ActiveRecord::Base
     earliest_application.date_scraped if earliest_application
   end
 
-  # Does this authority use scraperwiki to get its data?
-  def scraperwiki?
-    !scraperwiki_name.blank?
-  end
-
-  def morph?
-    !morph_name.blank?
-  end
-
-  def scraperwiki_url
-    "https://scraperwiki.com/scrapers/#{scraperwiki_name}/" if scraperwiki?
-  end
-
   def morph_url
     "https://morph.io/#{morph_name}" unless morph_name.blank?
   end
-  
-  def feed_url_has_date?
-    feed_url && (feed_url.include?("{year}") || feed_url.include?("{month}") || feed_url.include?("{day}"))
-  end
 
-  def feed_url_for_date(date)
-    feed_url.sub("{year}", date.year.to_s).sub("{month}", date.month.to_s).sub("{day}", date.day.to_s)
-  end
-
-  def scraperwiki_feed_url_for_date_range(start_date, end_date)
-    query = CGI.escape("select * from `swdata` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
-    "https://api.scraperwiki.com/api/1.0/datastore/sqlite?format=jsondict&name=#{scraperwiki_name}&query=#{query}"
-  end
-  
   def morph_feed_url_for_date_range(start_date, end_date)
     query = CGI.escape("select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
     "https://api.morph.io/#{morph_name}/data.json?query=#{query}"
   end
-  
+
   # So that the encoding function can be used elsewhere
   def self.short_name_encoded(short_name)
     short_name.downcase.gsub(' ', '_').gsub(/\W/, '')
   end
-  
+
   def short_name_encoded
     Authority.short_name_encoded(short_name)
   end
-  
+
   def self.find_by_short_name_encoded(n)
     # TODO: Potentially not very efficient when number of authorities is high. Loads all authorities into memory
     find(:all).find{|a| a.short_name_encoded == n}
@@ -257,7 +196,7 @@ class Authority < ActiveRecord::Base
     raise ActiveRecord::RecordNotFound if r.nil?
     r
   end
-  
+
   # Is this authority contactable through PlanningAlerts? i.e. do we have an email address on record?
   def contactable?
     email && email != ""

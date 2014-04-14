@@ -197,7 +197,7 @@ describe Application do
       # Freeze time
       t = Time.now
       Time.stub!(:now).and_return(t)
-      Application.translate_scraperwiki_feed_data(feed_data).should ==
+      Application.translate_morph_feed_data(feed_data).should ==
       [
         {
           :date_scraped => t,
@@ -225,43 +225,35 @@ describe Application do
     end
 
     it "should handle a malformed response" do
-      Application.translate_scraperwiki_feed_data('[["An invalid scraperwiki API response"]]').should == []
+      Application.translate_morph_feed_data('[["An invalid scraperwiki API response"]]').should == []
     end
   end
 
   describe "collecting applications from the scraper web service urls" do
     before :each do
       @feed_xml = <<-EOF
-      <?xml version="1.0" encoding="UTF-8"?>
-      <planning>
-        <authority_name>Fiddlesticks</authority_name>
-        <authority_short_name>Fiddle</authority_short_name>
-        <applications>
-          <application>
-            <council_reference>R1</council_reference>
-            <address>1 Smith Street, Fiddleville</address>
-            <description>Knocking a house down</description>
-            <info_url>http://fiddle.gov.au/info/R1</info_url>
-            <comment_url>http://fiddle.gov.au/comment/R1</comment_url>
-            <date_received>2009-01-01</date_received>
-            <on_notice_from>2009-01-05</on_notice_from>
-            <on_notice_to>2009-01-19</on_notice_to>
-          </application>
-          <application>
-            <council_reference>R2</council_reference>
-            <address>2 Smith Street, Fiddleville</address>
-            <description>Putting a house up</description>
-            <info_url>http://fiddle.gov.au/info/R2</info_url>
-            <comment_url>http://fiddle.gov.au/comment/R2</comment_url>
-            <date_received/>
-            <on_notice_from></on_notice_from>
-          </application>
-        </applications>
-      </planning>
+      [
+        {
+          "council_reference": "R1",
+          "address": "1 Smith Street, Fiddleville",
+          "description": "Knocking a house down",
+          "info_url": "http://fiddle.gov.au/info/R1",
+          "comment_url": "http://fiddle.gov.au/comment/R1",
+          "date_received": "2009-01-01",
+          "on_notice_from": "2009-01-05",
+          "on_notice_to": "2009-01-19"
+        },
+        {
+          "council_reference": "R2",
+          "address": "2 Smith Street, Fiddleville",
+          "description": "Putting a house up",
+          "info_url": "http://fiddle.gov.au/info/R2",
+          "comment_url": "http://fiddle.gov.au/comment/R2"
+        }
+      ]
       EOF
       @date = Date.new(2009, 1, 1)
       @feed_url = "http://example.org?year=#{@date.year}&month=#{@date.month}&day=#{@date.day}"
-      @auth.stub!(:feed_url_for_date).and_return(@feed_url)
       Application.delete_all
       @auth.stub!(:open).and_return(mock(:read => @feed_xml))
     end

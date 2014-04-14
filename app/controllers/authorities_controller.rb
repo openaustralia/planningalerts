@@ -1,11 +1,11 @@
 class AuthoritiesController < ApplicationController
   caches_page :index
-  
+
   def index
     # map from state name to authorities in that state
-    states = Authority.active.find(:all, :group => "state", :order => "state").map{|a| a.state}
+    states = Authority.enabled.find(:all, :group => "state", :order => "state").map{|a| a.state}
     @authorities = states.map do |state|
-      [state, Authority.active.find_all_by_state(state, :order => "full_name")]
+      [state, Authority.enabled.find_all_by_state(state, :order => "full_name")]
     end
   end
 
@@ -21,9 +21,9 @@ class AuthoritiesController < ApplicationController
     # TODO: Warning on lack of whitespace stripping
     @url = params[:url]
     if @url
-      authority = Authority.new(:feed_url => @url)
+      authority = Authority.new
       # The loaded applications
-      @applications = authority.collect_unsaved_applications_date_range(Date.today, Date.today)
+      @applications = authority.collect_unsaved_applications_date_range_original_style(@url, Date.today, Date.today)
       # Try validating the applications and return all the errors for the first non-validating application
       @applications.each do |application|
         unless application.valid?

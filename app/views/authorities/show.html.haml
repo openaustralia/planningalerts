@@ -5,44 +5,68 @@
   %p
     Population #{number_with_delimiter @authority.population_2011} (2011 estimate)
 
-- if @authority && @authority.broken?
+- if @authority.covered?
+  - if @authority && @authority.broken?
+    %p
+      %span.highlight It looks like something might be wrong. The latest application was received #{time_ago_in_words(@authority.latest_application)} ago.
+      = link_to "Why?", faq_path(:anchor => "broken_scraper")
+
+  - if @authority.applications.count == 0
+    %p
+      For #{@authority.full_name} no applications have yet been collected.
+  - else
+    %p
+      For #{@authority.full_name} #{@authority.applications.where("date_scraped >= ?", 1.week.ago).count} applications have been collected in the last week, #{@authority.applications.where("date_scraped >= ?", 1.month.ago).count} in the last month and #{@authority.applications.count} since #{@authority.earliest_date.strftime("%-d %b %Y")}, when this authority was first added to PlanningAlerts. That's a
+      = link_to "median", "http://en.wikipedia.org/wiki/Median"
+      of #{@authority.median_applications_per_week} applications per week (ignoring weeks without any applications at all).
+
+    %p
+      = link_to "Browse all recent applications", authority_applications_path(@authority.short_name_encoded)
+
+    %h4 Number of applications scraped each week
+    #chart
+    <script src="http://d3js.org/d3.v2.js"></script>
+    = javascript_include_tag "bar_graph"
+    :javascript
+      barGraph("#chart", "#{per_week_authority_applications_url(@authority.short_name_encoded, :format => 'js')}");
+
+  %h4 Under the Hood
   %p
-    %span.highlight It looks like something might be wrong. The latest application was received #{time_ago_in_words(@authority.latest_application)} ago.
-    = link_to "Why?", faq_path(:anchor => "broken_scraper")
-
-- if @authority.applications.count == 0
-  %p For #{@authority.full_name} no applications have yet been collected.
-- else
+    Are you a developer?
   %p
-    For #{@authority.full_name} #{@authority.applications.where("date_scraped >= ?", 1.week.ago).count} applications have been collected in the last week, #{@authority.applications.where("date_scraped >= ?", 1.month.ago).count} in the last month and #{@authority.applications.count} since #{@authority.earliest_date.strftime("%-d %b %Y")}, when this authority was first added to PlanningAlerts. That's a
-    = link_to "median", "http://en.wikipedia.org/wiki/Median"
-    of #{@authority.median_applications_per_week} applications per week (ignoring weeks without any applications at all).
-
-  = link_to "Browse all recent applications", authority_applications_path(@authority.short_name_encoded), :class => "button button-rounded button-action"
-
-  %h4 Number of applications scraped each week
-  #chart
-  -# TODO detect chart's presence, load d3 async and chart when loaded
-  <script src="http://d3js.org/d3.v2.js"></script>
-  = javascript_include_tag "bar_graph"
-  :javascript
-    barGraph("#chart", "#{per_week_authority_applications_url(@authority.short_name_encoded, :format => 'js')}");
-
-%h4 Under the Hood
-%p
-  Are you a developer?
-- if @authority.morph_url
-  %p
-    Our new scraping platform #{link_to "Morph", "https://morph.io"} will be live soon. You will be able to fork scrapers and collaborate
+    The information comes from our new scraping platform #{link_to "Morph", "https://morph.io"}. You are able to fork scrapers and collaborate
     via git. See #{link_to @authority.morph_url, @authority.morph_url}
-- elsif @authority.scraperwiki_url
-  %p
-    See (and edit) the code that gets the data: #{link_to @authority.scraperwiki_url, @authority.scraperwiki_url}
-  %p
-    via
-    = link_to "ScraperWiki", "http://scraperwiki.com"
-    &mdash; A brilliant online platform for collaborating on writing and maintaining scrapers
 - else
   %p
-    The data for this scraper is currently coming from our #{link_to "original internal scraping platform", "https://github.com/openaustralia/planningalerts-parsers"}. We're actively working to migrate away from this. Want to help?
+    This authority is
+    %strong
+      not yet covered by PlanningAlerts.
+    This is because either
+    %ul
+      %li a scraper has not yet been written for it or...
+      %li the authority doesn't publish the information in a way that a scraper can read or...
+      %li the authority doesn't publish the information online at all!
 
+  %h3 How you can help
+
+  %p
+    %strong
+      If you're a developer
+    you can help by writing a scraper. It can be in PHP, Python or Ruby. Read the
+    #{link_to "step by step guide to writing a scraper for PlanningAlerts", how_to_write_a_scraper_path}.
+  %p
+    %strong
+      If you're not a developer
+    you can ask your developer friend to help (see above) or
+    = link_to "lobby your authority", how_to_lobby_your_local_council_path
+    to make it easy for us to add their planning data to our system.
+  %p
+    %strong
+      If you work for the authority
+    you can help by publishing the data in a simple machine readable format.
+
+  %h3 Questions?
+
+  %p
+    Get in touch by
+    = link_to "emailing us", "mailto:contact@planningalerts.org.au"

@@ -42,17 +42,17 @@ class Application < ActiveRecord::Base
   # For the benefit of will_paginate
   cattr_reader :per_page
   @@per_page = 100
-  
+
   define_index do
     indexes description
     has date_scraped
   end
-    
+
   # TODO: factor out common location accessor between Application and Alert
   def location
     Location.new(lat, lng) if lat && lng
   end
-  
+
   # Optionally pass a logger which is just used for sending informational messages to do with this long-running job to
   def self.collect_applications(authorities, info_logger = logger)
     info_logger.info "Scraping #{authorities.count} authorities"
@@ -80,10 +80,6 @@ class Application < ActiveRecord::Base
   def self.translate_morph_feed_data(feed_data)
     # Just use the same as ScraperWiki for the time being. Note that if something
     # goes wrong the error message will be wrong but let's ignore that for the time being
-    translate_scraperwiki_feed_data(feed_data)
-  end
-
-  def self.translate_scraperwiki_feed_data(feed_data)
     j = JSON.parse(feed_data)
     # Do a sanity check on the structure of the feed data
     if j.kind_of?(Array) && j.all?{|a| a.kind_of?(Hash)}
@@ -112,12 +108,12 @@ class Application < ActiveRecord::Base
     zoom = 15
     "http://maps.google.com/maps?q=#{CGI.escape(address)}&z=#{zoom}";
   end
-  
+
   def description
     description = read_attribute(:description)
     if description
       # If whole description is in upper case switch the whole description to lower case
-      description = description.downcase if description.upcase == description  
+      description = description.downcase if description.upcase == description
       description.split('. ').map do |sentence|
         words = sentence.split(' ')
         # Capitalise the first word of the sentence if it's all lowercase
@@ -126,7 +122,7 @@ class Application < ActiveRecord::Base
       end.join('. ')
     end
   end
-  
+
   def address
     address = read_attribute(:address)
     exceptions = %w{QLD VIC NSW SA ACT TAS WA NT}
@@ -141,7 +137,7 @@ class Application < ActiveRecord::Base
       end.join(' ')
     end
   end
-  
+
   # Default values for what we consider nearby and recent
   def nearby_and_recent_max_distance_km
     Application.nearby_and_recent_max_distance_km
@@ -170,7 +166,7 @@ class Application < ActiveRecord::Base
   end
 
   private
-  
+
   # TODO: Optimisation is to make sure that this doesn't get called again on save when the address hasn't changed
   def geocode
     # Only geocode if location hasn't been set

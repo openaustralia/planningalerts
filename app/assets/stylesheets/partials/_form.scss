@@ -57,6 +57,10 @@ a.btn:hover {
   .inline-hints {
     @include quiet;
     font-size: 0.8em;
+    img {
+      vertical-align: middle;
+      margin-left: 5px;
+    }
   }
   div.inline-hints p {
     padding-top: 0.5em;
