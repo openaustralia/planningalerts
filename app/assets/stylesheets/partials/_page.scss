@@ -604,14 +604,6 @@ td pre {
   }
 }
 
-// At large res there's a background image. Give credit to the photographer.
-.photo-credit {
-  display: none; // Don't show by default - show with background image inclusion
-  margin-left: .5em;
-  font-size: 80%;
-  color: $cool-highlight;
-}
-
 // Style the autocomplete with a powered by Google logo as per the terms and conditions
 ul.ui-autocomplete {
   background: image_url("powered-by-google-on-white.png") white no-repeat bottom right;

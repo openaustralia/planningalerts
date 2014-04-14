@@ -153,15 +153,6 @@
 
 @include at-breakpoint(60em 24) {
 
-  // We'll show a photo background now
-  body {
-    background: image-url("background.jpg") top center no-repeat;
-    background-size: cover;
-  }
-  .photo-credit {
-    display: block;
-  }
-
   $container-style: static;
 
   .container {
