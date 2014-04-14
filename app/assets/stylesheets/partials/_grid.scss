@@ -218,14 +218,10 @@
   }
 
   .main, .tweets, .stats {
-    border: .5em solid $background-overlay;
-    @include background-clip( padding-box);
     width: 61.3em;
   }
   .main {
-    @include border-top-radius(.5em);
     border-bottom: none;
-    background-color: $background-overlay;
     padding-left: 0;
     padding-right: 0;
   }
@@ -336,9 +332,6 @@
     }
   }
   .tweets {
-    > div {
-      @include border-bottom-radius(.35em);
-    }
     li {
       width: 50%;
 
