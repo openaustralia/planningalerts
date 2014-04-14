@@ -394,6 +394,9 @@ body {
 }
 
 #application-stats {
+  .no_alerted {
+    text-align: center;
+  }
   .button {
     display: block; // Fill the column
   }
