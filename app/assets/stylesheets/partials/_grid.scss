@@ -289,6 +289,9 @@
     width: 28%;
   }
 
+  #tweets-wrapper, #stats-wrapper {
+    background-color: $lightest-cool-highlight;
+  }
   .tweets, .stats {
     background: transparent;
     border-top: none;
@@ -296,7 +299,6 @@
     padding: 0;
 
     > div {
-      background-color: $lightest-cool-highlight;
       border-top: 1px solid darken($lightest-cool-highlight, 5%);
       //@include background(linear-gradient($light-cool-highlight 20%, $lightest-cool-highlight));
       padding-top: 1em;
