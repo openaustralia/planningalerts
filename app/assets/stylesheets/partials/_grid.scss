@@ -180,13 +180,11 @@
   @include keyframes(gettowed) {
     from {
       @include transform-origin(0%);
-      @include rotate(-1deg);
-      background-color: rgba(255,255,255,0.9);
+      @include rotate(-0.5deg);
     }
     to {
       @include transform-origin(0%);
-      @include rotate(1deg);
-      background-color: rgba(255,255,255,0.8);
+      @include rotate(0.5deg);
     }
   }
   #statsbanner {
@@ -195,7 +193,7 @@
     position: absolute;
     top: 2em;
     right: 1em;
-    @include rotate(2deg);
+    @include rotate(-1deg);
   }
   #stats {
     background-color: #fff;
