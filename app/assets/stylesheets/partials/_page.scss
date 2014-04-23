@@ -69,7 +69,7 @@ a {
     }
   }
   a {
-    padding: .5em 0;
+    padding: .5em;
     display: block;
     text-decoration: none; 
     @include single-transition(background-color, .5s);
