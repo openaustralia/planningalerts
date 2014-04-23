@@ -77,6 +77,12 @@
     }
   }
 
+  .stats {
+    li {
+      width: 100%;
+      text-align: center;
+    }
+  }
 }
 
 @include at-breakpoint(30em 12 60em) {
@@ -124,6 +130,17 @@
 
   .oaf {
     text-align: right;
+  }
+  .stats {
+    li {
+      width: 50%;
+      text-align: center;
+      @include inline-block;
+      float: left;
+      &:last-child {
+        border-bottom: 1px solid white;
+      }
+    }
   }
 }
 
