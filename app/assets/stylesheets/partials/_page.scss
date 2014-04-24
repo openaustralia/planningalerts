@@ -124,10 +124,10 @@ body {
   color: $lightest;
 
   a {
-    &:link, &:visited {
+    &:link, &:hover, &:visited {
       color: $light;
     }
-    &:active, &:hover, &:focus {
+    &:active, &:focus {
       color: $dark;
     }
   }
