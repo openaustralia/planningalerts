@@ -18,6 +18,8 @@ body {
   @include blueprint-interaction;
 }
 
+@import "bourbon";
+
 // Combine the partials into a single screen stylesheet.
 @import "partials/page";
 @import "partials/form";

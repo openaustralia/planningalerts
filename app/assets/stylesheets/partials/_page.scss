@@ -184,8 +184,15 @@ hr {
 
 .container {
   .button {
-    font-family: $blueprint-font-family;
-    text-decoration: none;
+    @include button(simple, $lightest-cool-highlight);
+    font-weight: normal;
+  }
+  .button-action {
+    @include button(simple, $warm-highlight);
+    font-weight: normal;
+  }
+  .button-large {
+    font-size: 19px;
   }
   a.button-action, input.button-action {
     color: #fff;
