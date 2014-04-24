@@ -40,11 +40,11 @@ $background-overlay: transparentize($darkest,0.8);
 $dark-overlay: transparentize($darkest,0.2);
 
 $font-color: $darkest;
-$link-color: $dark;
-$link-active-color: $cool-highlight;
-$link-hover-color: $darkest;
-$link-visited-color: $darkest;
-$link-focus-color: $darkest;
+$link-color: #144b8c;
+$link-active-color: #144b8c;
+$link-hover-color: #144b8c;
+$link-visited-color: #144b8c;
+$link-focus-color: #144b8c;
 $quiet-color: $cool-highlight;
 $error-bg-color: #fbb;
 $error-color: $font-color;

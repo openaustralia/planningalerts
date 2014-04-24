@@ -390,7 +390,7 @@ div.comment {
 }
 
 body {
-  h3, h4, h5, & a:link, & a:visited {
+  h3, h4, h5 {
     color: $cool-highlight;
   }
   h4 {
@@ -451,9 +451,7 @@ form.address-search {
 .news, .tweets, .stats {
   a {
     &:link, &:visited {
-      .body {
-        color: $dark;
-      }
+        color: $darkest;
     }
     &:active, &:hover, &:focus {
       text-decoration: none;
