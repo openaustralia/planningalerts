@@ -26,7 +26,7 @@ a {
 
   h1 {
     font-size: 1.5em;
-    font-weight: 700;
+    font-weight: 300;
     margin-bottom: 0;
     padding-top: .5em;
 
@@ -44,6 +44,7 @@ a {
   }
   h2 {
     color: $lightest;
+    font-weight: 300;
     font-size: .9em;
     text-shadow: -1px -1px 1px $dark;
   }
@@ -139,6 +140,7 @@ body {
     margin-top: 0;
   }
   h5 {
+    font-weight: normal;
     margin-bottom: 0;
   }
   ul {
@@ -465,7 +467,7 @@ form.address-search {
     }
   }
   h4 {
-    font-weight: 700;
+    font-weight: 500;
     margin: 0;
   }
   ul {
