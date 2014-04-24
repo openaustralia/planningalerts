@@ -78,7 +78,8 @@ module ApplicationHelper
       { :name => "Kris Splittgerber", :email_md5 => "d330c3271cdd9aab9e9e5c360235b6dc" },
       { :name => "Adam Stiskala", :email_md5 => "f1b38bb55fedf270d3cd7c049176c09e" },
       { :name => "Katherine Szuminska", :email_md5 => "23d3fa4bbac53c44edef4ff672b9816a" },
-      { :name => "Justin Wells", :email_md5 => "3c1983a3371799ba1a78606dc62655db" }
+      { :name => "Justin Wells", :email_md5 => "3c1983a3371799ba1a78606dc62655db" },
+      { :name => "Dylan Fogarty-MacDonald", :email_md5 => "8bb01991a13de24d9620ad71d046301a" }
     ]
   end
 end
