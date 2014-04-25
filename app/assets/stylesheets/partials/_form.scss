@@ -35,10 +35,8 @@ a.btn:hover {
 
   .placeholder {
     text-align: left;
-    padding-top: .4em;
-    padding-left: .3em;
+    padding-top: 0;
     font-size: 1.2em;
-    font-weight: normal;
   }
 
   li {
@@ -100,6 +98,7 @@ a.btn:hover {
   }
   /* This is only used when the placeholder polyfill is active */
   .label span.placeholder {
+    padding-top: 0.8em;
     //font-size: 1em;
   }
 }
@@ -145,8 +144,7 @@ form.donate {
 
     /* This is only used when the placeholder polyfill is active */
     span.placeholder {
-      padding-top: .8em;
-      padding-left: .7em;
+      padding-top: .2em;
       font-size: .8em;
     }
   }
