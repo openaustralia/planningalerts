@@ -93,13 +93,14 @@ a.btn:hover {
 
 .formtastic#new_comment {
   @include float-form(100%, 0%, 100%, 0, "buttons-left", "left", "select-auto");
-  // Apply another method to hide the label
+  // Hide the labels
   li label.label {
-    display: none;
+    left: -999em;
+    position: absolute;
   }
   /* This is only used when the placeholder polyfill is active */
   .label span.placeholder {
-    // font-size: 1em;
+    //font-size: 1em;
   }
 }
 
