@@ -124,6 +124,10 @@ body form.alert {
   background: inherit;
   border-color: inherit;
   border: inherit;
+
+  p {
+    margin-bottom: 1em;
+  }
 }
 
 form.donate {
