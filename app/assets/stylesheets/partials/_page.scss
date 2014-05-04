@@ -168,13 +168,6 @@ p a, li a, span a, dd a, dt a, div a {
   @include hover-link;
 }
 
-// On the get involved page there are some call to action links, underline them
-.cta a {
-  &:link, &:visited {
-    text-decoration: underline;
-  }
-}
-
 hr {
   display: block;
   height: 1px;
