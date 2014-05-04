@@ -259,6 +259,10 @@ body .container .attention {
       border-bottom: none;
     }
   }
+  .description {
+    color: $font-color;
+    margin-bottom: 0;
+  }
 }
 .appinfo {
   font-size: 0.8em;
