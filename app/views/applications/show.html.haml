@@ -85,7 +85,7 @@
         = f.input :address, :label => "Enter a street address", :placeholder => "Enter a street address"        
         = f.input :email, :label => "Enter your email address", :placeholder => "Enter your email address"
       = f.actions do
-        = f.action :submit, :label => "Create Alert", :button_html => { :class => "button button-rounded button-action" }
+        = f.action :submit, :label => "Create Alert", :button_html => { :class => "button button-rounded button-action button-large" }
 
   - if @application.no_alerted || @nearby_count != 0
     #application-stats
