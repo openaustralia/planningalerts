@@ -186,6 +186,13 @@ hr {
     @include button(simple, $warm-highlight);
     font-weight: normal;
   }
+  .button-active {
+    $border-active:       adjust-color($lightest-cool-highlight, $saturation: 9%, $lightness: -14%);
+    $inset-shadow-active: adjust-color($lightest-cool-highlight, $saturation: 7%, $lightness: -17%);
+
+    border: 1px solid $border-active;
+    box-shadow: inset 0 0 8px 4px $inset-shadow-active, inset 0 0 8px 4px $inset-shadow-active;
+  }
   .button-large {
     font-size: 19px;
   }
