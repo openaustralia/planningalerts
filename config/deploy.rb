@@ -26,11 +26,11 @@ if stage == "production"
   set :deploy_to, "/srv/www/www.#{application}"
 elsif stage == "test"
   set :deploy_to, "/srv/www/test.#{application}"
-  #set :branch, "test"
+  set :branch, "theming"
 end
 
 # We need to run this after our collector mongrels are up and running
-# This goes out even if the deploy fails, sadly 
+# This goes out even if the deploy fails, sadly
 after "deploy:update", "newrelic:notice_deployment"
 
 before "deploy:restart", "foreman:restart"
