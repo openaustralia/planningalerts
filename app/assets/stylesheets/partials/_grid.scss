@@ -1,50 +1,415 @@
 .container {
   @include container;
-  //@include susy-grid-background;
 }
 
-#header, #menu, #page, #footer {
-  @include span-columns(24 omega, 24);
+// The things here that are not wrapped in media queries are to make the IE8
+// look almost acceptable
+.container {
+  @include set-container-width;
+}
+
+#menu {
+  @include span-columns(12 omega, 12);
+}
+
+#map_div {
+  @include span-columns(6, 12);
+  height: 330px;
+}
+.map-settings {
+  @include span-columns(6 omega, 12);
+}
+
+#map_div {
+  @include span-columns(12 omega, 12);
 }
 
 #main {
-  @include span-columns(18, 24);
+  @include span-columns(9, 12);
 }
 
 #sidebar {
-  @include span-columns(6 omega, 24)
+  @include span-columns(3 omega, 12);
 }
 
+// news
 .news {
-  .blog-feed {
-    @include span-columns(11, 24);
-  }  
-  .twitter-feed {
-    @include pre(2);
-    @include span-columns(11 omega, 24);
+  @include span-columns(12 omega, 12);
+}
+
+// footer
+.keepintouch {
+  @include span-columns(6, 12);
+}
+.oaf {
+  @include span-columns(6 omega, 12);
+}
+
+@include at-breakpoint(6 30em) {
+
+  .container {
+    @include set-container-width;
+  }
+
+  #menu, #main, #sidebar,
+  .news, .keepintouch, .oaf {
+    @include span-columns(6 omega);
+  }
+
+  #map_div {
+    height: 330px;
+  }
+  #map_div, .map-settings {
+    @include span-columns(6 omega);
+  }
+
+
+  // Hmm mobile-1st-wise, this should work in page.scss
+  // But I was having trouble overriding it, and didn't have patience
+  #menu li {
+    width: 49%;
+    text-align: center;
+  }
+
+}
+
+// Until we get to our largest size
+@include at-breakpoint(1em 60em) {
+
+  ul.ui-autocomplete {
+    text-align: center;
+  }
+  .container {
+    // Home page search form should be tweaked
+    // Also alert sign up form
+    form.alert, .address-search {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0;
+      margin-top: 0;
+
+      &.attention {
+        padding: 1em;
+      }
+      label {
+        float: none;
+        font-size: 1.1em;
+        margin-bottom: .5em;
+      }
+      #{nest("li.stringish, li.string", "label, input")}, .inline-hints  {
+        //li.stringish, li.string, .inline-hints {
+        text-align: center;
+        width: 100%;
+      }
+      #geolocate {
+        display: inline-block;
+      }
+      .inline-hints {
+        margin-left: 0;
+      }
+      .actions {
+        width: 100%;
+        padding-left: 0;
+
+        .action, .submit {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .stats {
+    li {
+      width: 100%;
+      text-align: center;
+    }
   }
 }
 
-.statbox {
-  @include span-columns(24 omega, 24);
-}
-.stat-header {
-  @include span-columns(4, 24)
-}
-.stat {
-  @include span-columns(5, 24);
-}
+@include at-breakpoint(30em 12 60em) {
 
-.stat.last {
-  @include span-columns(5 omega, 24);
-}
+  .container {
+    @include set-container-width;
+  }
 
-#footer {
+  #menu {
+    @include span-columns(12 omega, 12);
+  }
+
+  #map_div {
+    @include span-columns(6, 12);
+    height: 330px;
+  }
+  .map-settings {
+    @include span-columns(6 omega, 12);
+  }
+
+  #application-info #map_div {
+    @include span-columns(12 omega, 12);
+  }
+
+  #main {
+    @include span-columns(9, 12);
+  }
+
+  #sidebar {
+    @include span-columns(3 omega, 12);
+  }
+
+  // news
+  .news {
+    @include span-columns(12 omega, 12);
+  }
+
+  // footer
   .keepintouch {
-    @include span-columns(8,24);
-  }
+    @include span-columns(6, 12);
+  }  
   .oaf {
-    @include pre(8);
-    @include span-columns(8 omega, 24);    
+    @include span-columns(6 omega, 12);
+  }
+
+  .oaf {
+    text-align: right;
+  }
+  .stats {
+    li {
+      width: 50%;
+      text-align: center;
+      @include inline-block;
+      float: left;
+      &:last-child {
+        border-bottom: 1px solid white;
+      }
+    }
+  }
+}
+
+// From tablet (mid) upwards
+@include at-breakpoint(30em) {
+  // Move from having a mobile-focused global nav
+  #menu {
+    li {
+      margin-right: .2em;
+    }
+    a {
+      padding: .5em;
+      @include inline-block;
+    }
+  }
+  // Several state select buttons. They can fit on 1 line now
+  .list-options li:first-child {
+    display: inline;
+    margin-bottom: 0;
+  }
+  // Blockquotes (only on how to lobby) can be different
+  body blockquote {
+    border: none;
+    border-left: 3px solid lighten($warm-highlight, 40%);
+    padding-left: 2em;
+    font-size: 1.1em;
+  }
+}
+
+@include at-breakpoint(60em 24) {
+
+  $container-style: static;
+
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+    @include set-container-width;
+  }
+
+  #menu {
+    @include span-columns(24 omega, 24);
+  }
+
+  #header {
+    h1 {
+      font-size: 2.5em;
+    } 
+    h2 {
+      font-size: 1em;
+    }
+  }
+
+  // Header's plane banner can be presented fancily
+  // We're animating this... :)
+  @include keyframes(gettowed) {
+    from {
+      @include transform-origin(0%);
+      @include transform(rotate(-0.5deg));
+    }
+    to {
+      @include transform-origin(0%);
+      @include transform(rotate(0.5deg));
+    }
+  }
+  #statsbanner {
+    padding-left: 73px;
+    background: image_url("plane.png") no-repeat 0 8px;
+    position: absolute;
+    top: 2em;
+    right: 1em;
+    @include transform(rotate(-1deg));
+  }
+  #stats {
+    background-color: #fff;
+    background-color: rgba(255,255,255,0.9);
+    @include animation(gettowed 3s ease-in-out infinite alternate);
+    @include border-radius(2px);
+    display: block;
+    padding: .35em .5em;
+    font-size: 0.9em;
+  }
+
+  // Navigation can be a bit larger
+  #menu {
+    font-size: 1em;
+
+    a {
+      padding: .5em .75em;
+    }
+  }
+
+  .main, .tweets, .stats {
+    width: 61.3em;
+  }
+  .main {
+    border-bottom: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #content, .tweets > div, .stats > div {
+    padding-left: $grid-padding;
+    padding-right: $grid-padding;
+  }
+
+  #main, #sidebar {
+    @include inline-block;
+    float: left;
+  }
+  #main {
+    width: 70%;
+    margin-right: 2%; 
+  }
+
+  #content {
+    @include clearfix;
+  }
+
+  .news {
+    li {
+      width: 50%;
+      @include inline-block;
+      float: left;
+
+      // Clear left introduces rows
+      // Border stuff makes lines between the rows, but no line on the top or bottom of the grid
+      &:nth-child(odd) {
+        clear: left;
+        border-top: 1px solid $lightest-cool-highlight;
+        border-bottom: none;
+
+        a {
+          padding-right: .75em;
+        }
+      }
+      &:first-child {
+        border-top: none;
+      }
+    }
+  }
+
+  #pano {
+    height: 10em;
+  }
+
+  #map_div, .details {
+    @include span-columns(8, 24);
+  }
+  #map_div {
+    height: 330px;
+  }
+  .map-settings {
+    @include span-columns(15 omega, 24);
+  }
+  #application-info footer {
+    clear: left;
+  }
+
+  #sidebar {
+    width: 28%;
+  }
+
+  #tweets-wrapper, #stats-wrapper {
+    background-color: $lightest-cool-highlight;
+  }
+  .tweets, .stats {
+    background: transparent;
+    border-top: none;
+    border-bottom: none;
+    padding: 0;
+
+    > div {
+      border-top: 1px solid darken($lightest-cool-highlight, 5%);
+      //@include background(linear-gradient($light-cool-highlight 20%, $lightest-cool-highlight));
+      padding-top: 1em;
+      padding-bottom: 1em;
+    }
+    li {
+      border-bottom: none;
+      padding: 0;
+      @include inline-block;
+      float: left;
+
+      a {
+        border-right: 1px solid #fff;
+        padding-right: .75em;
+      }
+      &:last-child a {
+        padding-left: .75em;
+        padding-right: 0;
+        border-right: none;
+      }
+    }
+    .cta {
+      clear: both;
+    }
+  }
+  .stats {
+    ul {
+      @include clearfix;
+    }
+    li {
+      width: 25%;
+      text-align: center;
+    }
+  }
+  .tweets {
+    li {
+      width: 50%;
+
+      a {
+        min-height: 72px;
+      }
+    }
+  }
+
+  #footer {
+    padding: 1.5em .7em 1.5em .7em;
+    .keepintouch {
+      @include span-columns(12,24);
+    }
+    .oaf {
+      @include span-columns(12 omega, 24);    
+      text-align: right;
+    }
   }
 }

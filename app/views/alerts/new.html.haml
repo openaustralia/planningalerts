@@ -1,19 +1,20 @@
 - content_for :page_title, 'Sign Up'
+
 - content_for :meta_description, "A free service which searches Australian planning authority websites and emails you details of applications near you"
+
 = semantic_form_for @alert, :url => {:action => 'create'} do |f|
   = f.inputs do
     = f.input :address, :label => "Enter a street address", :placeholder => "e.g. 1 Sowerby St, Goulburn, NSW 2580"
     = f.input :email, :label => "Enter your email address", :placeholder => "your@email.com"
   = f.actions do
-    = f.action :submit, :label => "Create alert"
-%p.explanation
-  You will receive email only when there are new applications nearby and no more than once per day.
-%p#privacy
+    = f.action :submit, :label => "Create alert", :button_html => { :class => "button button-rounded button-large button-action" }
+
+%p You will receive email only when there are new applications nearby and no more than once per day.
+
+%p
   Our
-  %em Privacy Policy
+  %b Privacy Policy
   is very simple: We will not sell or distribute any personal information
-  you share with us - at all, ever.
-%p.explanation
-  It's possible your local authority may not be included yet. If you want you can
-  #{link_to "check", authorities_path}. If it isn't, please sign up
-  anyway and you'll receive alerts as soon as they're available. Also, the more people have signed up in a particular area, the harder we'll work to cover that area.
+  you share with us &mdash; at all, ever.
+
+%p It's possible your local authority may not be included yet. If you want you can #{link_to "check", authorities_path}. If it isn't, please sign up anyway and you'll receive alerts as soon as they're available. Also, the more people have signed up in a particular area, the harder we'll work to cover that area.

@@ -1,5 +1,6 @@
 - content_for :page_title, "Donate to the OpenAustralia Foundation"
 %h3= yield :page_title
+
 %p
   PlanningAlerts is brought to you by the charity the OpenAustralia Foundation. We are
   = link_to "a Charitable Institution with Deductible Gift Recipient (DGR) status", "http://abr.business.gov.au/SearchByAbn.aspx?abn=24138089942"
@@ -13,8 +14,7 @@
 
 %p
   The donation button below will take you to the secure PlanningAlerts donation page at the OpenAustralia Foundation website.
-  Thank you for your support
+  Thank you for your support!
 
 %p
-  = link_to "Donate", "https://www.openaustraliafoundation.org.au/planningalerts-donation/", :class => "btn"
-
+  = link_to "Donate", "https://www.openaustraliafoundation.org.au/planningalerts-donation/", :class => "button button-rounded button-action button-large"

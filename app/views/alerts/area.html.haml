@@ -1,29 +1,29 @@
 - content_for :page_title, "Change the size of your alert"
-- content_for :map, true
-#map_div(style="width:330px;height:330px")
+%h3= yield :page_title
+
+#map_div
   
-%p
-  What size area near #{@alert.address} would you like to receive alerts for?
+.map-settings
+  %p What size area near #{@alert.address} would you like to receive alerts for?
 
-= form_tag do
-  %ul.sizes
-    %li
-      = radio_button_tag(:size, "s", @size == "s")
-      = label_tag(:size_s, "My street (within #{meters_in_words(@zone_sizes['s'])})")
-    %li
-      = radio_button_tag(:size, "m", @size == "m")
-      = label_tag(:size_m, "My neighbourhood (within #{meters_in_words(@zone_sizes['m'])})")
-    %li
-      = radio_button_tag(:size, "l", @size == "l")
-      = label_tag(:size_l, "My suburb (within #{meters_in_words(@zone_sizes['l'])})")
-    %noscript
+  = form_tag do
+    %ul.sizes
       %li
-        Note: viewing the alert area on a map requires javascript
-    
-  %p
-    = submit_tag("Update size >>", :class => "button")
+        = radio_button_tag(:size, "s", @size == "s")
+        = label_tag(:size_s, "My street (within #{meters_in_words(@zone_sizes['s'])})")
+      %li
+        = radio_button_tag(:size, "m", @size == "m")
+        = label_tag(:size_m, "My neighbourhood (within #{meters_in_words(@zone_sizes['m'])})")
+      %li
+        = radio_button_tag(:size, "l", @size == "l")
+        = label_tag(:size_l, "My suburb (within #{meters_in_words(@zone_sizes['l'])})")
+      %noscript
+        %li
+          Note: viewing the alert area on a map requires javascript
+      
+    %p= submit_tag("Update size", :class => "button button-action button-rounded")
 
-= javascript_include_tag "preview"
+= javascript_include_tag "maps"
 :javascript
   var map;
   $(document).ready(function(){

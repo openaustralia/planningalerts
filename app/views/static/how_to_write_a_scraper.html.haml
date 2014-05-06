@@ -41,102 +41,104 @@
 
 %p The following fields are <span class="highlight">required</span>. All development applications should have these bits of information.
 %table.scraper_fields
-  %tr
-    %th.field field
-    %th.example Example value
-    %th Description
-  %tr
-    %td.field council_reference
-    %td.example TA/00323/2012
-    %td
-      %p
-        The ID that the council has given the planning application. This also must be the unique key for this data
-        set.
-  %tr
-    %td.field address
-    %td.example 1 Sowerby St, Goulburn, NSW
-    %td 
-      %p
-        The physical address that this application relates to. This will be geocoded so doesn't need to be a specific format but obviously the more explicit it is the more likely it will be successfully geo-coded. If the original address did not include the state (e.g. "QLD") at the end, then add it.
-  %tr
-    %td.field description
-    %td.example Ground floor alterations to rear and first floor addition
-    %td 
-      %p
-        A text description of what the planning application seeks to carry out.
-  %tr
-    %td.field info_url
-    %td.example http://foo.gov.au/app?key=527230
-    %td
-      %p
-        A URL that provides more information about the planning application.
-      %p
-        This should be a persistent URL that preferably is specific to this particular application. In many cases councils force
-        users to click through a license to access planning application. In this case be careful about what URL you provide. Test clicking the link in a browser that hasn't established a session with the council's site to ensure users of PlanningAlerts will be able to click the link and not be presented with an error.
-  %tr
-    %td.field comment_url
-    %td.example http://foo.gov.au/comment?key=527230
-    %td 
-      %p
-        A URL where users can provide a response to council about this particular application.
-      %p
-        As in info_url this needs to be a persistent URL and should be specific to this particular application if possible.
-        Email mailto links are also valid in this field.
-  %tr
-    %td.field date_scraped
-    %td.example 2012-08-01
-    %td
-      %p
-        The date that your scraper is collecting this data (i.e. now). Should be in
-        = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
-        format.
-      %p
-        Use the following Ruby code:
-        %code Date.today.to_s
-%p
-  The following fields are optional because not every planning authority provides them. Please do include them if data is available.
+  %tbody
+    %tr
+      %th.field field
+      %th.example Example value
+      %th Description
+    %tr
+      %td.field council_reference
+      %td.example TA/00323/2012
+      %td
+        %p
+          The ID that the council has given the planning application. This also must be the unique key for this data
+          set.
+    %tr
+      %td.field address
+      %td.example 1 Sowerby St, Goulburn, NSW
+      %td 
+        %p
+          The physical address that this application relates to. This will be geocoded so doesn't need to be a specific format but obviously the more explicit it is the more likely it will be successfully geo-coded. If the original address did not include the state (e.g. "QLD") at the end, then add it.
+    %tr
+      %td.field description
+      %td.example Ground floor alterations to rear and first floor addition
+      %td 
+        %p
+          A text description of what the planning application seeks to carry out.
+    %tr
+      %td.field info_url
+      %td.example http://foo.gov.au/app?key=527230
+      %td
+        %p
+          A URL that provides more information about the planning application.
+        %p
+          This should be a persistent URL that preferably is specific to this particular application. In many cases councils force
+          users to click through a license to access planning application. In this case be careful about what URL you provide. Test clicking the link in a browser that hasn't established a session with the council's site to ensure users of PlanningAlerts will be able to click the link and not be presented with an error.
+    %tr
+      %td.field comment_url
+      %td.example http://foo.gov.au/comment?key=527230
+      %td 
+        %p
+          A URL where users can provide a response to council about this particular application.
+        %p
+          As in info_url this needs to be a persistent URL and should be specific to this particular application if possible.
+          Email mailto links are also valid in this field.
+    %tr
+      %td.field date_scraped
+      %td.example 2012-08-01
+      %td
+        %p
+          The date that your scraper is collecting this data (i.e. now). Should be in
+          = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
+          format.
+        %p
+          Use the following Ruby code:
+          %code Date.today.to_s
+%p The following fields are optional because not every planning authority provides them. Please do include them if data is available.
 
 %table.scraper_fields
-  %tr
-    %th.field field
-    %th.example Example value
-    %th Description
-  %tr
-    %td.field date_received
-    %td.example 2012-06-23
-    %td
-      %p
-        The date this application was received by council. Should be in
-        = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
-        format.
-  %tr
-    %td.field on_notice_from
-    %td.example 2012-08-01
-    %td
-      %p
-        The date from when public submissions can be made about this application. Should be in
-        = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
-        format.
-  %tr
-    %td.field on_notice_to
-    %td.example 2012-08-14
-    %td
-      %p
-        The date until when public submissions can be made about this application. Should be in
-        = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
-        format.
+  %tbody
+    %tr
+      %th.field field
+      %th.example Example value
+      %th Description
+    %tr
+      %td.field date_received
+      %td.example 2012-06-23
+      %td
+        %p
+          The date this application was received by council. Should be in
+          = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
+          format.
+    %tr
+      %td.field on_notice_from
+      %td.example 2012-08-01
+      %td
+        %p
+          The date from when public submissions can be made about this application. Should be in
+          = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
+          format.
+    %tr
+      %td.field on_notice_to
+      %td.example 2012-08-14
+      %td
+        %p
+          The date until when public submissions can be made about this application. Should be in
+          = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
+          format.
 
 %p
   To ensure the date_scraped field isn't overwritten on subsequent scrapes add code similar to this to
   save your planning application to the ScraperWiki datastore:
 
-%pre
-  :preserve
-    if (ScraperWiki.select("* from swdata where `council_reference`='\#{record['council_reference']}'").empty? rescue true)
-      ScraperWiki.save_sqlite(['council_reference'], record)
-    else
-      puts "Skipping already saved record " + record['council_reference']
-    end
+%code.long-lines
+  %pre
+    :preserve
+      if (ScraperWiki.select("* from swdata where `council_reference`='\#{record['council_reference']}'").empty? rescue true)
+        ScraperWiki.save_sqlite(['council_reference'], record)
+      else
+        puts "Skipping already saved record " + record['council_reference']
+      end
 
 %p
   If you get stuck, have a look at

@@ -1,8 +1,10 @@
 - content_for :meta_description, "A free service which searches Australian planning authority websites and emails you details of applications near you"
+
 %p
   Find out for free what is being built and knocked down in your area and receive email
   alerts when something new is planned. Start by entering an Australian street address.
-%form.formtastic.one-field{'accept-charset' => "UTF-8", 'action' => "/", 'method' => "get"}
+
+%form.address-search.formtastic.one-field{'accept-charset' => "UTF-8", 'action' => "/", 'method' => "get"}
   %fieldset.inputs
     %ol
       %li#q_input.string{:class => ("error" if @error)}
@@ -14,50 +16,53 @@
           %p.inline-errors= @error
   %fieldset.actions
     %ol
-      %li.submit
-        = submit_tag "Search", :name => nil
+      %li.submit= submit_tag "Search", :name => nil, :class => "button button-rounded button-large button-action"
 
 - if @q
   - unless @other_addresses.empty?
-    %p Or did you want?
+    %h4 Or did you want?
     %ul
       - @other_addresses.each do |a|
-        %li
-          = link_to a, :q => a
+        %li= link_to a, :q => a
 
   - unless @error
     - if @applications.empty?
-      %hr
       %p
         Unfortunately, we don't know of any applications near #{@q}.
         This is most likely because we haven't yet been able to add your local planning authority.
         There is a list of the planning authorities we currently cover
         #{link_to "here", authorities_path}. We're working on covering the whole country but we're not there yet.        
+
       .attention
-        <span class="highlight">You can help</span>!
-        = link_to donate_path do
-          %span(class="highlight") Donate
-          to the OpenAustralia Foundation
-        which will allow us to add more local authorities, including yours!
-        Or, if you're a programmer you can help directly by #{link_to "writing a screen scraper", get_involved_path}.
+        %h4 You can help!
+        %p Donations allow us to add more local authorities, including yours! Or, if you're a programmer you can help directly by #{link_to "writing a screen scraper", get_involved_path}.
+        = link_to "Donate", donate_path, :class => "button button-rounded button-action"
+
       %p
         To see an example of what the results would look like once your area is included see #{link_to "Bourke Street in Melbourne", address_applications_path(:q => "Bourke St, Melbourne 3000")}.
       %p
         If you #{link_to "sign up for email alerts", new_alert_path(:address => @q)} anyway, you will receive new applications when they become available. 
         The more people that sign up for your area, the sooner we'll add your area to PlanningAlerts. So, get your friends and neighbours to sign up too!
+
     - else
-      = semantic_form_for @alert, :html => {:class => "home"} do |f|
-        = render :partial => "alerts/signup_introduction"
+
+      %hr
+      %h3 Recent applications
+      %h4 Within #{meters_in_words(@radius)} of #{@q}
+
+      = semantic_form_for @alert, :html => {:class => "attention"} do |f|
+        = render "alerts/signup_introduction"
         = f.inputs do
           = f.input :address, :as => :hidden
           = f.input :email, :label => "Enter your email address", :placeholder => "your@email.com"
         = f.actions do
-          = f.action :submit, :label => "Create alert"
-      %h3 Recent applications within #{meters_in_words(@radius)} of #{@q}
-      %p
-        = link_to_unless @sort == "time", "Most recent first", :sort => "time", :q => @q, :page => nil
-        |
-        = link_to_unless @sort == "distance", "Closest first", :sort => "distance", :q => @q, :page => nil
+          = f.action :submit, :label => "Create alert", :button_html => { :class => "button button-rounded button-action button-large" }
+
+      %ul.list-options
+        %li
+          %b Sort results
+        %li= link_to "Most recent first", { :sort => "time", :q => @q, :page => nil }, :class => "button button-pill button-small #{"button-active" if @sort == "time"}"
+        %li= link_to "Closest first", { :sort => "distance", :q => @q, :page => nil }, :class => "button button-pill button-small #{"button-active" if @sort == "distance"}"
 
       - if @sort == "distance"
         - p, n = "Closer", "Further"
@@ -65,36 +70,7 @@
         - p, n = "Newer", "Older"
 
       = paginated_section @applications, :previous_label => "« #{p}", :next_label => "#{n} »" do
-        %dl= render :partial => "application", :collection => @applications
+        = render "applications", :applications => @applications
+
 - else
-  - cache 'stats', :expires_in => 1.hour do
-    .statbox
-      %h3.stat-header This week
-      = link_to applications_path, class: :stat do
-        we collected
-        .number= number_with_delimiter(Application.where("date_scraped > ?", 7.days.ago).count)
-        new applications
-      = link_to new_alert_path, class: :stat do
-        you received
-        .number= number_with_delimiter(EmailBatch.where("created_at > ?", 7.days.ago).sum(:no_emails))
-        email alerts
-      = link_to new_alert_path, class: :stat do
-        you signed up for
-        .number= number_with_delimiter(Alert.where("created_at > ?", 7.days.ago).count)
-        new email alerts
-      = link_to comments_path, class: 'stat last' do
-        you made
-        .number= number_with_delimiter(Comment.visible.where("created_at > ?", 7.days.ago).count)
-        new comments
-  - cache 'news', :expires_in => 1.hour do
-    .news
-      .blog-feed
-        %h4
-          News via the blog
-        = render_rss_feed("https://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/feed/")
-        = link_to "More&hellip;".html_safe, "http://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/"
-      .twitter-feed
-        %h4
-          and via Twitter
-        = render_twitter_feed('PlanningAlerts')
-        = link_to "More&hellip;".html_safe, "http://twitter.com/PlanningAlerts"
+  = render "shared/news"

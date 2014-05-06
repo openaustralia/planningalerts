@@ -1,35 +1,51 @@
+@import "compass/css3";
+@import "mixins";
+
 // Here is where you can define your constants for your application and to configure the blueprint framework.
 // Feel free to delete these if you want keep the defaults:
 
-$blueprint-font-size: 16px;
+$base-font-size: 16px;
+$blueprint-font-size: $base-font-size;
+$blueprint-font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
 
 // Susy grid settings
+// ---------------------------------------------------------------------------
 
-$total-columns  : 24;
-$column-width   : 30px;
-$gutter-width   : 10px;
-$grid-padding   : $gutter-width;
-$container-style: static;
+@import "susy";
+
+// ---------------------------------------------------------------------------
+// Basic Grid
+
+$column-width   : 1.825em;
+$gutter-width   : 0.7em;
+$grid-padding   : $gutter-width * 2;
+
+$container-style: fluid;
+
+$show-grid-backgrounds: false;
 
 // Colours
 
-$almostblack: #0f0f0f;
-$grey: #989898;
-$darkgrey: #333;
-$almostwhite: #fafafa;
-$darkblue: #22579c;
-$orange: #ff8c00;
-$yellow: #f4f323;
-$transparentyellow: rgba(244, 243, 35, 0.5);
+$lightest: #ebf1d6;
+$light: #fae08b;
+$dark: #1d3d61;
+$darkest: #303030;
+$warm-highlight: #e3821f;
+$cool-highlight: #505050;
+$light-cool-highlight: #aac7bc;
+$lightest-cool-highlight: #e7e7e7;
 
-$link-color: $darkblue;
-$link-hover-color: $darkblue;
-$link-active-color: $darkblue;
-$link-visited-color: $darkblue;
-$link-focus-color: $darkblue;
-$header-color: $orange;
-$font-color: $darkgrey;
-$quiet-color: $grey;
-$error-bg-color: $yellow;
+$content-background: #fcfdfc;
+$background-overlay: transparentize($darkest,0.8);
+$dark-overlay: transparentize($darkest,0.2);
+
+$font-color: $darkest;
+$link-color: #144b8c;
+$link-active-color: #144b8c;
+$link-hover-color: #144b8c;
+$link-visited-color: #144b8c;
+$link-focus-color: #144b8c;
+$quiet-color: $cool-highlight;
+$error-bg-color: #fbb;
 $error-color: $font-color;
-$highlight-color: $transparentyellow;
+$highlight-color: $light; // Background

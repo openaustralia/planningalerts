@@ -4,9 +4,12 @@ require 'rails/all'
 require 'rack/throttle'
 require File.dirname(__FILE__) + "/../lib/api_throttler"
 
-# If you have a Gemfile, require the gems listed there, including any gems
-# you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env) if defined?(Bundler)
+if defined?(Bundler)
+# If you precompile assets before deploying to production, use this line
+  Bundler.require(*Rails.groups(:assets => %w(development test)))
+  # If you want your assets lazily compiled in production, use this line
+  # Bundler.require(:default, :assets, Rails.env)   
+end
 
 module PlanningalertsApp
   class Application < Rails::Application
@@ -56,10 +59,11 @@ module PlanningalertsApp
 
     # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
     # config.assets.precompile += %w( search.js )
-    config.assets.precompile += ['ie.css', 'mobile.css', 'screen.css', 'print.css',
+    config.assets.precompile += ['ie.css', 'screen.css', 'print.css',
       'placeholder_polyfill.min.css',
       'active_admin.js', 'applications.js', 'bar_graph.js', 'maps.js', 'mxn.core.js',
-      'mxn.googlev3.core.js', 'mxn.js', 'placeholder_polyfill.jquery.min.combo.js', 'preview.js']
+      'mxn.googlev3.core.js', 'mxn.js', 'placeholder_polyfill.jquery.min.combo.js', 'preview.js',
+      'atdis.js']
 
     config.action_dispatch.tld_length = 2
 
