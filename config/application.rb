@@ -68,6 +68,9 @@ module PlanningalertsApp
     config.action_dispatch.tld_length = 2
 
     config.exceptions_app = self.routes
+
+    # TODO Generalise this
+    config.assets.paths << "#{Rails.root}/lib/themes/nsw/assets/stylesheets"
   end
 end
 
