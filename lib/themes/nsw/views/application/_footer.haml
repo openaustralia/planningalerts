@@ -2,4 +2,17 @@
   #footer.container
     %ul.keepintouch
       %li
-        Some useful information (like contacts) here
+        Email us at
+        = mail_to "contact@..."
+      %li
+        Chat with us on Twitter
+        = link_to "@...", "http://twitter.com/..."
+    .oaf
+      %h5
+        NSW PlanningAlerts is brought to you by
+        #{link_to "Planning & Infrastructure, NSW Government", "http://www.planning.nsw.gov.au/"}.
+      %h5
+        It is powered by
+        #{link_to "PlanningAlerts.org.au", "http://www.planningalerts.org.au"}
+        from the
+        #{link_to "OpenAustralia Foundation", "http://openaustraliafoundation.org.au"}.
