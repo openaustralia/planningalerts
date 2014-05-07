@@ -4,7 +4,7 @@
     %meta(content="text/html; charset=utf-8" http-equiv="Content-Type")
     %meta(name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1")
     - if yield(:meta_description)
-      %meta{:name => "Description", :content => yield(:meta_description)} 
+      %meta{:name => "Description", :content => yield(:meta_description)}
 
     %title
       - if yield(:page_title) != ""
@@ -36,18 +36,12 @@
     = javascript_include_tag "placeholder_polyfill.jquery.min.combo.js"
 
     = csrf_meta_tag
-
     = yield :extra_meta_tags
 
   %body{ :class => body_classes(controller_name, action_name) }
-
     = render "application/header"
-
     = render "application/main"
-
     = render "shared/stats"
     = render "shared/tweets"
-
     = render "application/footer"
-
     = render "shared/end_matter"
