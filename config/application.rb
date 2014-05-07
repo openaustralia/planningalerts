@@ -8,7 +8,7 @@ if defined?(Bundler)
 # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
   # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)   
+  # Bundler.require(:default, :assets, Rails.env)
 end
 
 module PlanningalertsApp
@@ -21,7 +21,7 @@ module PlanningalertsApp
     # config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths << "#{config.root}/app/sweepers"
     config.autoload_paths << "#{config.root}/lib"
-    
+
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
@@ -47,7 +47,7 @@ module PlanningalertsApp
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
-    
+
     # We are using some rack middleware to throttle people that make too many API requests
     config.middleware.use ApiThrottler,:cache => Dalli::Client.new,
         :strategies => YAML.load_file("#{config.root}/config/throttling.yml"),
