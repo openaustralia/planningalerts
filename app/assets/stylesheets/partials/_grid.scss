@@ -170,7 +170,7 @@
   // footer
   .keepintouch {
     @include span-columns(6, 12);
-  }  
+  }
   .oaf {
     @include span-columns(6 omega, 12);
   }
@@ -236,7 +236,7 @@
   #header {
     h1 {
       font-size: 2.5em;
-    } 
+    }
     h2 {
       font-size: 1em;
     }
@@ -301,7 +301,7 @@
   }
   #main {
     width: 70%;
-    margin-right: 2%; 
+    margin-right: 2%;
   }
 
   #content {
@@ -412,7 +412,7 @@
       @include span-columns(12,24);
     }
     .oaf {
-      @include span-columns(12 omega, 24);    
+      @include span-columns(12 omega, 24);
       text-align: right;
     }
   }
