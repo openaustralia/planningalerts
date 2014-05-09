@@ -80,6 +80,10 @@
     text-align: center;
   }
   .container {
+    .formtastic#new_comment .actions li {
+      width: 100%;
+      text-align: center;
+    }
     // Home page search form should be tweaked
     // Also alert sign up form
     form.alert, .address-search {
