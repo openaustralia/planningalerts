@@ -145,6 +145,10 @@ class ApplicationsController < ApplicationController
       end
     end
     @set_focus_control = "q"
+    # Use a different template if there are results to display
+    if @q && @error.nil?
+      render "address_results"
+    end
   end
   
   def search
