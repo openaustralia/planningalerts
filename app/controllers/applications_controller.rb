@@ -12,7 +12,7 @@ class ApplicationsController < ApplicationController
       "address", "lat", "lng", "radius", "area_size",
       "bottom_left_lat", "bottom_left_lng", "top_right_lat", "top_right_lng",
       "callback", "count", "v"]
-    
+
     # TODO: Fix this hacky ugliness
     if request.format == Mime::HTML
       per_page = 30
@@ -30,7 +30,7 @@ class ApplicationsController < ApplicationController
     if params[:count] && params[:count].to_i <= per_page
       per_page = params[:count].to_i
     end
-    
+
     @description = "Recent applications"
     # Don't want the RSS feed to match the paging
     if params[:authority_id]
@@ -120,7 +120,7 @@ class ApplicationsController < ApplicationController
       end
     end
   end
-  
+
   def address
     @q = params[:q]
     @radius = params[:radius] || 2000
@@ -145,8 +145,12 @@ class ApplicationsController < ApplicationController
       end
     end
     @set_focus_control = "q"
+    # Use a different template if there are results to display
+    if @q && @error.nil?
+      render "address_results"
+    end
   end
-  
+
   def search
     # TODO: Fix this hacky ugliness
     if request.format == Mime::HTML
@@ -165,7 +169,7 @@ class ApplicationsController < ApplicationController
       format.rss { render "index", :format => :rss, :layout => false, :content_type => Mime::XML }
     end
   end
-  
+
   def show
     # First check if there is a redirect
     redirect = ApplicationRedirect.find_by_application_id(params[:id])
@@ -184,7 +188,7 @@ class ApplicationsController < ApplicationController
       format.html
     end
   end
-  
+
   def nearby
     # First check if there is a redirect
     redirect = ApplicationRedirect.find_by_application_id(params[:id])
@@ -195,7 +199,7 @@ class ApplicationsController < ApplicationController
 
     @sort = params[:sort]
     @rss = nearby_application_url(params.merge(:format => "rss", :page => nil))
-    
+
     # TODO: Fix this hacky ugliness
     if request.format == Mime::HTML
       per_page = 30
@@ -223,7 +227,7 @@ class ApplicationsController < ApplicationController
   end
 
   private
-  
+
   def help
     Helper.instance
   end

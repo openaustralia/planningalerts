@@ -16,7 +16,4 @@
     %ol
       %li.submit= submit_tag "Search", :name => nil, :class => "button button-rounded button-large button-action"
 
-- if @q
-  = render "address_search_results"
-- else
-  = render "shared/news"
+= render "shared/news"

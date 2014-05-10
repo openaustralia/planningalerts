@@ -26,7 +26,9 @@
             %noscript= google_static_streetview(@application, :size => "350x200")
 
         %p.description= @application.description
-        = link_to "Read more information", @application.info_url, :class => "button button-rounded"
+        = link_to @application.info_url, :class => "button button-rounded" do
+          = image_tag "external_link.png", size: "10x10"
+          Read more information
 
       %footer
         %p.dates= scraped_and_received_text(@application)
@@ -45,7 +47,7 @@
             %li{:id => "comment#{comment.id}"}
               = render :partial => 'comments/comment', :locals => {:comment => comment}
       %h4#add-comment Add your own comment
-      - if @application.authority.contactable?  
+      - if @application.authority.contactable?
         - if @application.on_notice_to
           %p= on_notice_text(@application)
         %p
@@ -78,11 +80,11 @@
             = on_notice_text(@application)
 
 #sidebar
-  #alert      
+  #alert
     = semantic_form_for @alert do |f|
       = render "alerts/signup_introduction"
       = f.inputs do
-        = f.input :address, :label => "Enter a street address", :placeholder => "Enter a street address"        
+        = f.input :address, :label => "Enter a street address", :placeholder => "Enter a street address"
         = f.input :email, :label => "Enter your email address", :placeholder => "Enter your email address"
       = f.actions do
         = f.action :submit, :label => "Create Alert", :button_html => { :class => "button button-rounded button-action button-large" }
