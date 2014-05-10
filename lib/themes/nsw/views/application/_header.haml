@@ -7,6 +7,7 @@
 
     .hide= link_to "Skip navigation", "#content"
     #menu
+      = image_tag "menu.png", size: "30x30", class: "toggle"
       %ul.collapse
         = li_selected(:controller => "/applications", :action => "address") do
           = link_to 'Search', address_applications_path
