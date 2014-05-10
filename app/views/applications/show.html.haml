@@ -26,7 +26,9 @@
             %noscript= google_static_streetview(@application, :size => "350x200")
 
         %p.description= @application.description
-        = link_to "Read more information", @application.info_url, :class => "button button-rounded"
+        = link_to @application.info_url, :class => "button button-rounded" do
+          = image_tag "external_link.png", size: "10x10"
+          Read more information
 
       %footer
         %p.dates= scraped_and_received_text(@application)
