@@ -1,22 +1,9 @@
 - content_for :meta_description, "A free service which searches Australian planning authority websites and emails you details of applications near you"
 
-%p
-  Find out for free what is being built and knocked down in your area and receive email
-  alerts when something new is planned. Start by entering an Australian street address.
+%h3 Recent applications
+%h4 Within #{meters_in_words(@radius)} of #{@q}
 
-%form.address-search.formtastic.one-field{'accept-charset' => "UTF-8", 'action' => "/", 'method' => "get"}
-  %fieldset.inputs
-    %ol
-      %li#q_input.string{:class => ("error" if @error)}
-        = label_tag(:q, "Enter a street address")
-        = text_field_tag(:q, @q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580")
-        = link_to "#", class: "inline-hints", id: "geolocate" do
-          &hellip; or locate me automatically
-        - if @error
-          %p.inline-errors= @error
-  %fieldset.actions
-    %ol
-      %li.submit= submit_tag "Search", :name => nil, :class => "button button-rounded button-large button-action"
+%p= link_to "Search again with a different address", root_path
 
 - unless @other_addresses.empty?
   %h4 Or did you want?
@@ -43,10 +30,6 @@
     The more people that sign up for your area, the sooner we'll add your area to PlanningAlerts. So, get your friends and neighbours to sign up too!
 
 - else
-
-  %hr
-  %h3 Recent applications
-  %h4 Within #{meters_in_words(@radius)} of #{@q}
 
   = semantic_form_for @alert, :html => {:class => "attention"} do |f|
     = render "alerts/signup_introduction"
