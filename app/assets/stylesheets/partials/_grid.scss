@@ -191,7 +191,7 @@
   }
 }
 
-#menu ul {
+#menu ul.hidden {
   display: none;
 }
 
@@ -203,7 +203,7 @@
       display: none;
     }
     ul {
-      display: block;
+      display: block !important;
     }
     li {
       margin-right: .2em;

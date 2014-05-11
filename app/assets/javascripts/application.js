@@ -4,5 +4,7 @@
 //= require geolocation
 
 $("#menu .toggle").click(function(){
-  $("#menu ul").slideToggle("fast");
+  $("#menu ul").slideToggle("fast", function(){
+    $("#menu ul").toggleClass("hidden").css("display", "");
+  });
 });
