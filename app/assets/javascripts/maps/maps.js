@@ -15,10 +15,10 @@ function initialiseMaps(latitude, longitude, address) {
   google.maps.event.addListener(myPano, 'position_changed', function() {
     // Orient the camera to face the position we're interested in
     var angle = computeAngle(pointToLookAt, myPano.getPosition());
-    myPano.setPov({heading:angle, pitch:0, zoom:1}); 
-  }); 
-  var panoMarker = new google.maps.Marker({position: pointToLookAt, title: address}); 
-  panoMarker.setMap(myPano); 
+    myPano.setPov({heading:angle, pitch:0, zoom:1});
+  });
+  var panoMarker = new google.maps.Marker({position: pointToLookAt, title: address});
+  panoMarker.setMap(myPano);
 }
 
 function computeAngle(endLatLng, startLatLng) {
