@@ -3,6 +3,7 @@ function initialiseMaps(latitude, longitude, address) {
   point = new mxn.LatLonPoint(latitude, longitude);
   map.setCenterAndZoom(point,16);
   map.addControls({ zoom: 'small', map_type: true });
+  map.dragging(false);
   marker = new mxn.Marker(point)
   marker.setLabel(address);
   map.addMarker(marker);
