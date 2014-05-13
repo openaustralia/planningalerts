@@ -43,7 +43,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
     end
 
     it "should nicely format (in HTML) a list of multiple planning applications" do
-      get_message_part(email, /html/).should include Rails.root.join("spec/mailers/regression/email3.html").read
+      get_message_part(email, /html/).should == Rails.root.join("spec/mailers/regression/email3.html").read
     end
   end
 
@@ -59,7 +59,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
     end
 
     it "should nicely format (in HTML) a list of multiple planning applications" do
-      get_message_part(email, /html/).should include Rails.root.join("spec/mailers/regression/email2.html").read
+      get_message_part(email, /html/).should == Rails.root.join("spec/mailers/regression/email2.html").read
     end
   end
 
@@ -116,12 +116,8 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
         @html_body.should have_content "Put something up"
       end
 
-      it "should have a specific layout body" do
-        @html_body.should include Rails.root.join("spec/mailers/regression/email1.html").read
-      end
-
-      it "should have a specific header" do
-        @html_body.should include Rails.root.join("spec/mailers/regression/email1_header.html").read
+      it "should have a specific body" do
+        @html_body.should == Rails.root.join("spec/mailers/regression/email1.html").read
       end
     end
   end

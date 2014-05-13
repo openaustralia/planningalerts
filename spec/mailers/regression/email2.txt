@@ -1,3 +1,9 @@
+Hi, did you know we make these other wonderful projects too?
+
+Right To Know: http://tinyurl.com/righttoknowpa
+OpenAustralia.org: http://tinyurl.com/openaustralia
+Election Leaflets: http://tinyurl.com/electionleaflets
+
 ============================================================
 The following new comment has been made on a planning application within 800 m of 24 Bruce Rd, Glenbrook NSW 2773:
 
@@ -35,4 +41,3 @@ If you use this service please consider donating: http://dev.planningalerts.org.
 To change the size of the area covered by the alerts: http://dev.planningalerts.org.au/alerts/abcdef/area
 
 To stop receiving these emails: http://dev.planningalerts.org.au/alerts/abcdef/unsubscribe
-
