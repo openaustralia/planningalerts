@@ -101,6 +101,18 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
       end
     end
 
+    describe "when sending a planning alert with two new planning applications in the nsw theme" do
+      before :each do
+        @email = AlertNotifier.alert("nsw", @alert, [@a1, @a2])
+      end
+
+      context "Text email" do
+        it "should nicely format a list of multiple planning applications" do
+          get_message_part(@email, /plain/).should include Rails.root.join("spec/mailers/regression/email4.txt").read
+        end
+      end
+    end
+
     context "HTML emails" do
       before :each do
         @html_body = get_message_part(@email, /html/)
