@@ -1,0 +1,7 @@
+%div{:style => "margin: 6px 11px 25px; padding: 15px; background: #fcfbbd; -moz-border-radius: 10px; -khtml-border-radius: 10px; -webkit-border-radius: 10px;"}
+  The following <strong>new planning applications</strong> have been found within #{meters_in_words(@alert.radius_meters)} of
+  %strong= @alert.address
+= render :partial => "application", :collection => @applications[0..9]
+- if @applications.size > 10
+  %p{:style => "padding-left: 15px;"}
+    But wait, there are more! Browse the full #{link_to "list of recent nearby applications", address_applications_url(:q => @alert.address)}.
