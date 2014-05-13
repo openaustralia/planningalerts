@@ -1,9 +1,7 @@
-%div{:style => "border-top: solid 3px #F2630C;"}
-  %div{:style => "padding-left: 15px; padding-top: 5px;"}
-    %p
-      PlanningAlerts is a free service run by the charity OpenAustralia Foundation.
-    %p
-      %strong This service depends on donations from people like you for its survival.
-      If you use this service
-      #{link_to "please consider donating", donate_url(:utm_medium => "email", :utm_source => "alerts"), :style => "color: #f2630c;"}.
-    = render "footer_actions"
+%p
+  PlanningAlerts is a free service run by the charity OpenAustralia Foundation.
+%p
+  %strong This service depends on donations from people like you for its survival.
+  If you use this service
+  #{link_to "please consider donating", donate_url(:utm_medium => "email", :utm_source => "alerts"), :style => "color: #f2630c;"}.
+= render "footer_actions"

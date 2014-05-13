@@ -9,4 +9,6 @@
       = render "comments"
     - unless @applications.empty?
       = render "applications"
-    = render :partial => "footer"
+    %div{:style => "border-top: solid 3px #F2630C;"}
+      %div{:style => "padding-left: 15px; padding-top: 5px;"}
+        = render :partial => "footer"
