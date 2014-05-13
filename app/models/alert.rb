@@ -1,28 +1,28 @@
 class Alert < ActiveRecord::Base
   validates_numericality_of :radius_meters, :greater_than => 0, :message => "isn't selected"
   validate :validate_address
-  
+
   before_validation :geocode
   before_create :remove_other_alerts_for_this_address
   acts_as_email_confirmable
 
   scope :active, :conditions => {:confirmed => true, :unsubscribed => false}
   scope :in_past_week, where("created_at > ?", 7.days.ago)
-  
+
   def location=(l)
     if l
       self.lat = l.lat
       self.lng = l.lng
     end
   end
-  
+
   def self.alerts_in_inactive_areas
     #find(:all).find_all{|a| a.in_inactive_area?}
-    radius = 2    
+    radius = 2
     c = Math.cos(radius/GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
     s = Math.sin(radius/GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
     multiplier = GeoKit::Mappable::EARTH_RADIUS_IN_KMS
-    command = 
+    command =
       %|
         SELECT * FROM `alerts` WHERE NOT EXISTS (
           SELECT * FROM `applications` WHERE (
@@ -39,7 +39,7 @@ class Alert < ActiveRecord::Base
       |
     Alert.find_by_sql(command)
   end
-  
+
   # Name of the local government authority
   def lga_name
     # Cache value
@@ -52,13 +52,13 @@ class Alert < ActiveRecord::Base
     end
     lga_name
   end
-  
+
   # Given a list of alerts (with locations), find which LGAs (Local Government Authorities) they are in and
   # return the distribution (i.e. count) of authorities.
   def self.distribution_of_lgas(alerts)
     frequency_distribution(alerts.map {|alert| alert.lga_name}.compact)
   end
-  
+
   # Pass an array of objects. Count the distribution of objects and return as a hash of :object => :count
   def self.frequency_distribution(a)
     freq = {}
@@ -67,11 +67,11 @@ class Alert < ActiveRecord::Base
     end
     freq.to_a.sort {|a, b| -(a[1] <=> b[1])}
   end
-  
+
   def in_inactive_area?
     radius = 2
     point = GeoKit::LatLng.new(lat, lng)
-    
+
     c = Math.cos(radius/GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
     s = Math.sin(radius/GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
     multiplier = GeoKit::Mappable::EARTH_RADIUS_IN_KMS
@@ -91,11 +91,11 @@ class Alert < ActiveRecord::Base
       |
       ).empty?
   end
-  
+
   def location
     Location.new(lat, lng) if lat && lng
   end
-  
+
   # Applications that have been scraped since the last time the user was sent an alert
   def recent_applications
     Application.order("date_received DESC").near([location.lat, location.lng], radius_km, :units => :km).where('date_scraped > ?', cutoff_time).all
@@ -118,11 +118,11 @@ class Alert < ActiveRecord::Base
   def cutoff_time
     last_sent || Date.yesterday
   end
-  
+
   def radius_km
     radius_meters / 1000.0
   end
-  
+
   # Process this email alert and send out an email if necessary. Returns number of applications and comments sent.
   def process!
     applications = recent_applications
@@ -159,7 +159,7 @@ class Alert < ActiveRecord::Base
     end
     info_logger.info "Mailing jobs for the next 24 hours queued"
   end
-  
+
   # TODO: Untested method
   def self.process_alerts(alert_ids)
     # Only send alerts to confirmed users
@@ -185,11 +185,11 @@ class Alert < ActiveRecord::Base
   end
 
   private
-  
+
   def remove_other_alerts_for_this_address
     Alert.delete_all(:email => email, :address => address)
   end
-  
+
   def geocode
     # Only geocode if location hasn't been set
     if self.lat.nil? && self.lng.nil?
@@ -198,7 +198,7 @@ class Alert < ActiveRecord::Base
       self.address = @geocode_result.full_address
     end
   end
-  
+
   def validate_address
     # Only validate the street address if we used the geocoder
     if @geocode_result

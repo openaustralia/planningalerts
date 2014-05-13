@@ -53,7 +53,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
     it "should tell you about both in the comment line" do
       email.subject.should == "1 new comment and 2 new planning applications near #{@alert.address}"
     end
-    
+
     it "should nicely format (in text) a list of multiple planning applications" do
       get_message_part(email, /plain/).should include Rails.root.join("spec/mailers/regression/email2.txt").read
     end
@@ -72,25 +72,25 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
       @email.subject.should == "1 new planning application near #{@alert.address}"
     end
   end
-  
+
   describe "when sending a planning alert with two new planning applications" do
     before :each do
       @email = AlertNotifier.alert("default", @alert, [@a1, @a2])
     end
-    
+
     it "should be sent to the user's email address" do
       @email.to.should == [@alert.email]
     end
-    
+
     it "should be from the main planningalerts email address" do
       @email.from.should == ["contact@planningalerts.org.au"]
       #@email.from_addrs.first.name.should == "PlanningAlerts.org.au"
     end
-    
+
     it "should have a sensible subject line" do
       @email.subject.should == "2 new planning applications near #{@alert.address}"
     end
-    
+
     it "should be a multipart email" do
       @email.body.parts.length.should eq(2)
     end
