@@ -1,0 +1,8 @@
+%div{:style => "margin: 6px 11px 25px; padding: 15px; background: #fcfbbd; -moz-border-radius: 10px; -khtml-border-radius: 10px; -webkit-border-radius: 10px;"}
+  - if @comments.count == 1
+    The following <strong>new comment</strong> has been made on a planning application
+  - else
+    The following <strong>new comments</strong> have been made on planning applications
+  within #{meters_in_words(@alert.radius_meters)} of
+  %strong= @alert.address
+= render :partial => "comment", :collection => @comments
