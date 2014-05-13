@@ -1,10 +1,4 @@
-Hi, did you know we make these other wonderful projects too?
-
-Right To Know: http://tinyurl.com/righttoknowpa
-OpenAustralia.org: http://tinyurl.com/openaustralia
-Election Leaflets: http://tinyurl.com/electionleaflets
-
-============================================================
+<%= render "advert" %>
 <% unless @comments.empty? %>
 <% if @comments.count == 1 %>
 The following new comment has been made on a planning application within <%= meters_in_words(@alert.radius_meters) %> of <%= @alert.address %>:
