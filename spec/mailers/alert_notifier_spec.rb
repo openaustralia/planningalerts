@@ -24,7 +24,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
   end
 
   describe "when sending a planning alert with one new comment" do
-    let(:email) { AlertNotifier.alert(@alert, [], [@c1])}
+    let(:email) { AlertNotifier.alert("default", @alert, [], [@c1])}
 
     it "should use the singular in the comment line" do
       email.subject.should == "1 new comment on planning applications near #{@alert.address}"
@@ -32,7 +32,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
   end
 
   describe "when sending a planning alert with two new comments" do
-    let(:email) { AlertNotifier.alert(@alert, [], [@c1, @c2])}
+    let(:email) { AlertNotifier.alert("default", @alert, [], [@c1, @c2])}
 
     it "should use the plural in the comment line" do
       email.subject.should == "2 new comments on planning applications near #{@alert.address}"
@@ -48,7 +48,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
   end
 
   describe "when send a planning alert with one new comment and two new planning applications" do
-    let(:email) { AlertNotifier.alert(@alert, [@a1, @a2], [@c1])}
+    let(:email) { AlertNotifier.alert("default", @alert, [@a1, @a2], [@c1])}
 
     it "should tell you about both in the comment line" do
       email.subject.should == "1 new comment and 2 new planning applications near #{@alert.address}"
@@ -65,7 +65,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
 
   describe "when sending a planning alert with one new planning application" do
     before :each do
-      @email = AlertNotifier.alert(@alert, [@a1])
+      @email = AlertNotifier.alert("default", @alert, [@a1])
     end
 
     it "should use the singular (application) in the subject line" do
@@ -75,7 +75,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
   
   describe "when sending a planning alert with two new planning applications" do
     before :each do
-      @email = AlertNotifier.alert(@alert, [@a1, @a2])
+      @email = AlertNotifier.alert("default", @alert, [@a1, @a2])
     end
     
     it "should be sent to the user's email address" do
