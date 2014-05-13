@@ -1,0 +1,24 @@
+- content_for :page_title, "Planning authorities currently covered by the service"
+%h3= yield :page_title
+%p
+  This service doesn't yet cover all of NSW, but we are working on it. If you're looking for a service
+  with national Australian coverage go to #{link_to "PlanningAlerts", "http://www.planningalerts.org.au"}.
+%p
+  New authorities are being added all the time, so if your local authority isn't listed below
+  #{link_to "sign up anyway", new_alert_path} and you'll start receiving alerts once it has been included.
+%p
+  We currently cover #{Authority.nsw_percentage_population_covered_by_all_active_authorities.to_i}% of NSW's population within #{@authorities["NSW"].count} authorities.
+%p
+  From time to time planning authorities change their websites which breaks the scrapers that gather the planning
+  data. In the list below you can also see the authorities that we haven't received planning data from for a while
+  which is a good indication that something is wrong. These are marked as
+  <span class="highlight">possibly broken</span>.
+
+%ul.authorities
+  - @authorities["NSW"].each do |authority|
+    %li
+      = link_to authority.full_name, authority_url(authority.short_name_encoded)
+      - if authority.broken?
+        %span.highlight= link_to "possibly broken", authority.morph_url
+      - elsif !authority.covered?
+        &mdash; not covered
