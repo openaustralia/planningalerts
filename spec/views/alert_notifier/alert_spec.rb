@@ -9,7 +9,8 @@ describe "alert_notifier/alert" do
       :location => mock("Location", :lat => 1.0, :lng => 2.0))
     assign(:applications, [application])
     assign(:comments, [])
+    assign(:host, "foo.com")
     render
-    rendered.should have_content("Alterations & additions")      
+    rendered.should have_content("Alterations & additions")
   end
 end
