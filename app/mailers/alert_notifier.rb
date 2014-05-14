@@ -1,14 +1,4 @@
-class AlertNotifier < ActionMailer::Base
-  helper :application, :applications
-
-  def alert(theme, alert, applications, comments = [])
-    @alert, @applications, @comments = alert, applications, comments
-
-    themed_mail(:theme => theme, :to => alert.email,
-      :subject => render_to_string(:partial => "subject",
-        :locals => {:applications => applications, :comments => comments, :alert => alert}).strip,
-      "return-path" => ::Configuration::BOUNCE_EMAIL_ADDRESS)
-  end
+module ActionMailerThemer
 
   private
 
@@ -30,5 +20,19 @@ class AlertNotifier < ActionMailer::Base
     end
 
     mail(params.merge(from: from, template_path: template_path))
+  end
+end
+
+class AlertNotifier < ActionMailer::Base
+  include ActionMailerThemer
+  helper :application, :applications
+
+  def alert(theme, alert, applications, comments = [])
+    @alert, @applications, @comments = alert, applications, comments
+
+    themed_mail(:theme => theme, :to => alert.email,
+      :subject => render_to_string(:partial => "subject",
+        :locals => {:applications => applications, :comments => comments, :alert => alert}).strip,
+      "return-path" => ::Configuration::BOUNCE_EMAIL_ADDRESS)
   end
 end
