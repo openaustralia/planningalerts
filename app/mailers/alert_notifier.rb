@@ -1,8 +1,20 @@
-
 class AlertNotifier < ActionMailer::Base
   helper :application, :applications
 
   def alert(theme, alert, applications, comments = [])
+    @alert, @applications, @comments = alert, applications, comments
+
+    themed_mail(:theme => theme, :to => alert.email,
+      :subject => render_to_string(:partial => "subject",
+        :locals => {:applications => applications, :comments => comments, :alert => alert}).strip,
+      "return-path" => ::Configuration::BOUNCE_EMAIL_ADDRESS)
+  end
+
+  private
+
+  def themed_mail(params)
+    theme = params.delete(:theme)
+
     # TODO Extract this into the theme
     if theme == "default"
       template_path = 'alert_notifier'
@@ -17,12 +29,6 @@ class AlertNotifier < ActionMailer::Base
       raise "Unknown theme #{theme}"
     end
 
-    @alert, @applications, @comments = alert, applications, comments
-
-    mail(:from => from, :to => alert.email,
-      :subject => render_to_string(:partial => "subject",
-        :locals => {:applications => applications, :comments => comments, :alert => alert}).strip,
-      "return-path" => ::Configuration::BOUNCE_EMAIL_ADDRESS,
-      template_path: template_path)
+    mail(params.merge(from: from, template_path: template_path))
   end
 end
