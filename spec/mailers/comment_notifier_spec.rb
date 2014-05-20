@@ -30,72 +30,12 @@ describe CommentNotifier do
     
     it "should have specific information in the body of the email" do
       notifier = CommentNotifier.notify(@comment)
-      notifier.text_part.body.to_s.should == <<-EOF
-For the attention of the General Manager / Planning Manager / Planning Department:
-
-Application:          X/001
-Address:              12 Foo Rd
-Description:          Building something
-Name of commenter:    Matthew
-Address of commenter: 1 Bar Street
-Email of commenter:   foo@bar.com
-
-It's a good thing.
-
-Oh yes it is.
-
-=============================================================================
-This comment was submitted via PlanningAlerts, a free service run by the
-OpenAustralia Foundation for the public good.
-See http://dev.planningalerts.org.au/applications/123 for more information
-
-http://www.openaustraliafoundation.org.au
-=============================================================================
-      EOF
+      notifier.text_part.body.to_s.should == Rails.root.join("spec/mailers/regression/comment_notifier/email1.txt").read
     end
 
     it "should format paragraphs correctly in the html version of the email" do
       notifier = CommentNotifier.notify(@comment)
-      notifier.html_part.body.to_s.should == <<-EOF
-<h1>For the attention of the General Manager / Planning Manager / Planning Department</h1>
-<table>
-<tr>
-<td>Application</td>
-<td>X/001</td>
-</tr>
-<tr>
-<td>Address</td>
-<td>12 Foo Rd</td>
-</tr>
-<tr>
-<td>Description</td>
-<td>Building something</td>
-</tr>
-<tr>
-<td>Name of commenter</td>
-<td>Matthew</td>
-</tr>
-<tr>
-<td>Address of commenter</td>
-<td>1 Bar Street</td>
-</tr>
-<tr>
-<td>Email of commenter</td>
-<td>foo@bar.com</td>
-</tr>
-</table>
-<h2>Comment</h2>
-<p>It's a good thing.</p>
-
-<p>Oh yes it is.</p>
-<hr>
-<p>
-This comment was submitted via PlanningAlerts, a free service run by
-<a href="http://www.openaustraliafoundation.org.au">the OpenAustralia Foundation</a>
-for the public good.
-<a href="http://dev.planningalerts.org.au/applications/123">View this application on PlanningAlerts</a>
-</p>
-      EOF
+      notifier.html_part.body.to_s.should == Rails.root.join("spec/mailers/regression/comment_notifier/email1.html").read
     end
   end
 end

@@ -1,0 +1,20 @@
+For the attention of the General Manager / Planning Manager / Planning Department:
+
+Application:          X/001
+Address:              12 Foo Rd
+Description:          Building something
+Name of commenter:    Matthew
+Address of commenter: 1 Bar Street
+Email of commenter:   foo@bar.com
+
+It's a good thing.
+
+Oh yes it is.
+
+=============================================================================
+This comment was submitted via PlanningAlerts, a free service run by the
+OpenAustralia Foundation for the public good.
+See http://dev.planningalerts.org.au/applications/123 for more information
+
+http://www.openaustraliafoundation.org.au
+=============================================================================
