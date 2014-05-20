@@ -15,14 +15,28 @@ class ThemeChooser
     end
   end
 
-  def email_from
+  def app_name
     if theme == "default"
-      "#{::Configuration::EMAIL_FROM_NAME} <#{::Configuration::EMAIL_FROM_ADDRESS}>"
+      ::Configuration::EMAIL_FROM_NAME
     elsif theme == "nsw"
-      "NSW PlanningAlerts <contact@planningalerts.nsw.gov.au>"
+      "NSW PlanningAlerts"
     else
       raise "Unknown theme #{theme}"
     end
+  end
+
+  def email_from_address
+    if theme == "default"
+      ::Configuration::EMAIL_FROM_ADDRESS
+    elsif theme == "nsw"
+      "contact@planningalerts.nsw.gov.au"
+    else
+      raise "Unknown theme #{theme}"
+    end
+  end
+
+  def email_from
+    "#{app_name} <#{email_from_address}>"
   end
 end
 
