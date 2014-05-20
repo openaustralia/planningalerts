@@ -24,9 +24,4 @@
 = comment_as_html(@comment.text)
 
 %hr
-
-%p
-  This comment was submitted via PlanningAlerts, a free service run by
-  = link_to "the OpenAustralia Foundation", "http://www.openaustraliafoundation.org.au"
-  for the public good.
-  = link_to "View this application on PlanningAlerts", application_url(@comment.application)
+= render "footer"

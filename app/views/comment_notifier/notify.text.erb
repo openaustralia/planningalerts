@@ -10,9 +10,5 @@ Email of commenter:   <%= @comment.email %>
 <%= @comment.text.html_safe %>
 
 =============================================================================
-This comment was submitted via PlanningAlerts, a free service run by the
-OpenAustralia Foundation for the public good.
-See <%= application_url(@comment.application) %> for more information
-
-http://www.openaustraliafoundation.org.au
+<%= render "footer" -%>
 =============================================================================

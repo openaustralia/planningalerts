@@ -32,7 +32,7 @@ describe CommentNotifier do
       end
 
       it "should format paragraphs correctly in the html version of the email" do
-        notifier.html_part.body.to_s.should == Rails.root.join("spec/mailers/regression/comment_notifier/email1.html").read
+        notifier.html_part.body.to_s.should include Rails.root.join("spec/mailers/regression/comment_notifier/email1.html").read
       end
     end
   end
