@@ -1,4 +1,4 @@
-require 'email_confirmable/acts_as_email_confirmable'
+require File.join(File.dirname(__FILE__), 'email_confirmable', 'acts_as_email_confirmable')
 
 %w{ models controllers }.each do |dir|
   path = File.join(File.dirname(__FILE__), 'app', dir)
