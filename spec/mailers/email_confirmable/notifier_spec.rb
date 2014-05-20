@@ -37,7 +37,7 @@ describe EmailConfirmable::Notifier do
       describe "confirm" do
 
         it "should come from the nsw planningalerts' normal email" do
-          notifier.from.should == ["contact@planningalerts.nsw.gov.au"]
+          notifier.from.should == ["contact@nsw.test.planningalerts.org.au"]
         end
 
         it "should go to the alert's email address" do
@@ -98,7 +98,7 @@ describe EmailConfirmable::Notifier do
 
       describe "confirm" do
         it "should come from the nsw planningalerts' normal email" do
-          notifier.from.should == ["contact@planningalerts.nsw.gov.au"]
+          notifier.from.should == ["contact@nsw.test.planningalerts.org.au"]
         end
 
         it "should go to the comment's email address" do

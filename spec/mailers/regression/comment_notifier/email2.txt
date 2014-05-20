@@ -16,5 +16,5 @@ This comment was submitted via NSW PlanningAlerts, a free service brought to
 you by Planning & Infrastructure, NSW and powered by PlanningAlerts.org.au
 from the OpenAustralia Foundation.
 
-See http://planningalerts.nsw.gov.au/applications/123 for more information
+See http://nsw.test.planningalerts.org.au/applications/123 for more information
 =============================================================================

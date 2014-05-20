@@ -38,7 +38,7 @@ class NSWTheme
   end
 
   def host
-    "planningalerts.nsw.gov.au"
+    "nsw.test.planningalerts.org.au"
   end
 
   def app_name
@@ -46,7 +46,7 @@ class NSWTheme
   end
 
   def email_from_address
-    "contact@planningalerts.nsw.gov.au"
+    "contact@nsw.test.planningalerts.org.au"
   end
 
   def email_from
