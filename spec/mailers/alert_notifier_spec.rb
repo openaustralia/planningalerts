@@ -39,11 +39,11 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
     end
 
     it "should nicely format (in text) a list of multiple planning applications" do
-      get_message_part(email, /plain/).should include Rails.root.join("spec/mailers/regression/email3.txt").read
+      get_message_part(email, /plain/).should include Rails.root.join("spec/mailers/regression/alert_notifier/email3.txt").read
     end
 
     it "should nicely format (in HTML) a list of multiple planning applications" do
-      get_message_part(email, /html/).should == Rails.root.join("spec/mailers/regression/email3.html").read
+      get_message_part(email, /html/).should == Rails.root.join("spec/mailers/regression/alert_notifier/email3.html").read
     end
   end
 
@@ -55,11 +55,11 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
     end
 
     it "should nicely format (in text) a list of multiple planning applications" do
-      get_message_part(email, /plain/).should include Rails.root.join("spec/mailers/regression/email2.txt").read
+      get_message_part(email, /plain/).should include Rails.root.join("spec/mailers/regression/alert_notifier/email2.txt").read
     end
 
     it "should nicely format (in HTML) a list of multiple planning applications" do
-      get_message_part(email, /html/).should == Rails.root.join("spec/mailers/regression/email2.html").read
+      get_message_part(email, /html/).should == Rails.root.join("spec/mailers/regression/alert_notifier/email2.html").read
     end
   end
 
@@ -97,7 +97,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
 
     context "Text email" do
       it "should nicely format a list of multiple planning applications" do
-        get_message_part(@email, /plain/).should include Rails.root.join("spec/mailers/regression/email1.txt").read
+        get_message_part(@email, /plain/).should include Rails.root.join("spec/mailers/regression/alert_notifier/email1.txt").read
       end
     end
 
@@ -113,13 +113,13 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
 
       context "Text email" do
         it "should nicely format a list of multiple planning applications" do
-          get_message_part(@email, /plain/).should include Rails.root.join("spec/mailers/regression/email4.txt").read
+          get_message_part(@email, /plain/).should include Rails.root.join("spec/mailers/regression/alert_notifier/email4.txt").read
         end
       end
 
       context "HTML email" do
         it "should have a specific body" do
-          get_message_part(@email, /html/).should == Rails.root.join("spec/mailers/regression/email4.html").read
+          get_message_part(@email, /html/).should == Rails.root.join("spec/mailers/regression/alert_notifier/email4.html").read
         end
       end
     end
@@ -140,7 +140,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
       end
 
       it "should have a specific body" do
-        @html_body.should == Rails.root.join("spec/mailers/regression/email1.html").read
+        @html_body.should == Rails.root.join("spec/mailers/regression/alert_notifier/email1.html").read
       end
     end
   end
