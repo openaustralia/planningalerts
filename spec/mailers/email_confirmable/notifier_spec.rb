@@ -18,21 +18,11 @@ describe EmailConfirmable::Notifier do
     end
 
     it do
-      notifier.body.parts.find { |p| p.content_type.match /plain/ }.body.raw_source.should == <<-EOF
-Please click on the link below to confirm you want to receive email alerts for planning applications near :
-
-http://dev.planningalerts.org.au/alerts/a237bfc/confirmed
-
-If your email program does not let you click on this link, just copy and paste it into your web browser and hit return.
-      EOF
+      notifier.body.parts.find { |p| p.content_type.match /plain/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/alert.txt").read
     end
 
     it do
-      notifier.body.parts.find { |p| p.content_type.match /html/ }.body.raw_source.should == <<-EOF
-<p>Please click on the link below to confirm you want to receive email alerts for planning applications near :</p>
-<a href="http://dev.planningalerts.org.au/alerts/a237bfc/confirmed">Confirm your alert</a>
-<p>If your email program does not let you click on this link, just copy and paste it into your web browser and hit return.</p>
-      EOF
+      notifier.body.parts.find { |p| p.content_type.match /html/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/alert.html").read
     end
   end
 
@@ -57,43 +47,11 @@ If your email program does not let you click on this link, just copy and paste i
     end
 
     it do
-      notifier.body.parts.find { |p| p.content_type.match /plain/ }.body.raw_source.should == <<-EOF
-Please click on the link below to confirm your comment. Only then will your comment be visible to others and be sent off to . If you didn't make a comment, then simply ignore this email and nothing further will happen.
-
-http://dev.planningalerts.org.au/comments/sdbfjsd3rs/confirmed
-
-If your email program does not let you click on this link, just copy and paste it into your web browser and hit return.
-
-Your comment:
-This is a comment
-
-On the application:
-10 Smith Street (27B/6)
-
-A building
-      EOF
+      notifier.body.parts.find { |p| p.content_type.match /plain/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/comment.txt").read
     end
 
     it do
-      notifier.body.parts.find { |p| p.content_type.match /html/ }.body.raw_source.should == <<-EOF
-<p>
-Please click on the link below to confirm your comment.
-Only then will your comment be visible to others and be sent off to .
-If you didn't make a comment, then simply ignore this email and nothing further will happen.
-</p>
-<a href="http://dev.planningalerts.org.au/comments/sdbfjsd3rs/confirmed">Confirm your comment</a>
-<p>If your email program does not let you click on this link, just copy and paste it into your web browser and hit return.</p>
-<p>
-Your comment:
-This is a comment
-</p>
-<p>
-On the application:
-10 Smith Street
-(27B/6)
-</p>
-<p>A building</p>
-      EOF
+      notifier.body.parts.find { |p| p.content_type.match /html/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/comment.html").read
     end
   end
 end
