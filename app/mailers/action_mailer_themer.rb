@@ -15,12 +15,12 @@ module ActionMailerThemer
       raise "Unknown theme #{theme}"
     end
 
-    @host = ThemeChooser.new(theme).host
+    @host = ThemeChooser.create(theme).host
 
     mail(params.merge(template_path: template_path))
   end
 
   def email_from(theme)
-    ThemeChooser.new(theme).email_from
+    ThemeChooser.create(theme).email_from
   end
 end
