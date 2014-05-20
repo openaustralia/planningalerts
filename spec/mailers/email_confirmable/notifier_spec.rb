@@ -5,7 +5,7 @@ describe EmailConfirmable::Notifier do
     let(:object) { mock_model(Alert, confirm_id: "a237bfc", email: "matthew@oaf.org.au") }
 
     describe "confirm alert" do
-      let(:notifier) { EmailConfirmable::Notifier.confirm(object) }
+      let(:notifier) { EmailConfirmable::Notifier.confirm("default", object) }
 
       it "should come from the planningalerts' normal email" do
         notifier.from.should == ["contact@planningalerts.org.au"]
@@ -37,7 +37,7 @@ describe EmailConfirmable::Notifier do
       application: application) }
 
     describe "confirm" do
-      let(:notifier) { EmailConfirmable::Notifier.confirm(object) }
+      let(:notifier) { EmailConfirmable::Notifier.confirm("default", object) }
 
       it "should come from the planningalerts' normal email" do
         notifier.from.should == ["contact@planningalerts.org.au"]
