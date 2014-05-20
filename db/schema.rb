@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140409040033) do
+ActiveRecord::Schema.define(:version => 20140520043430) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -29,19 +29,20 @@ ActiveRecord::Schema.define(:version => 20140409040033) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
 
   create_table "alerts", :force => true do |t|
-    t.string   "email",          :limit => 120,                    :null => false
-    t.string   "address",        :limit => 120,                    :null => false
+    t.string   "email",          :limit => 120,                        :null => false
+    t.string   "address",        :limit => 120,                        :null => false
     t.datetime "last_sent"
-    t.float    "lat",                                              :null => false
-    t.float    "lng",                                              :null => false
+    t.float    "lat",                                                  :null => false
+    t.float    "lng",                                                  :null => false
     t.string   "confirm_id",     :limit => 20
     t.boolean  "confirmed"
-    t.integer  "radius_meters",                                    :null => false
+    t.integer  "radius_meters",                                        :null => false
     t.string   "lga_name",       :limit => 50
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "unsubscribed",                  :default => false, :null => false
+    t.boolean  "unsubscribed",                  :default => false,     :null => false
     t.datetime "last_processed"
+    t.string   "theme",                         :default => "default", :null => false
   end
 
   create_table "api_statistics", :force => true do |t|
