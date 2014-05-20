@@ -7,12 +7,12 @@ module ActionMailerThemer
 
     # TODO Extract this into the theme
     if theme == "default"
-      template_path = 'alert_notifier'
+      template_path = mailer_name
       @host = ActionMailer::Base.default_url_options[:host]
       from = "#{::Configuration::EMAIL_FROM_NAME} <#{::Configuration::EMAIL_FROM_ADDRESS}>"
     elsif theme == "nsw"
-      template_path = ["../../lib/themes/nsw/views/alert_notifier", "alert_notifier"]
-      self.prepend_view_path "lib/themes/nsw/views"
+      template_path = ["../../lib/themes/#{theme}/views/#{mailer_name}", mailer_name]
+      self.prepend_view_path "lib/themes/#{theme}/views"
       @host = "planningalerts.nsw.gov.au"
       from = "NSW PlanningAlerts <contact@planningalerts.nsw.gov.au>"
     else
