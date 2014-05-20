@@ -20,7 +20,9 @@ class ApplicationController < ActionController::Base
   end
 
   def set_view_path
-    @theme = ThemeChooser.theme_from_request(request)
+    @themer = ThemeChooser.themer_from_request(request)
+    @theme = @themer.theme
+
     if @theme == "nsw"
       self.prepend_view_path "lib/themes/nsw/views"
     end
