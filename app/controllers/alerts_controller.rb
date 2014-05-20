@@ -12,7 +12,7 @@ class AlertsController < ApplicationController
   end
   
   def create
-    @alert = Alert.new(:address => params[:alert][:address], :email => params[:alert][:email], :radius_meters => zone_sizes['l'])
+    @alert = Alert.new(:address => params[:alert][:address], :email => params[:alert][:email], :radius_meters => zone_sizes['l'], :theme => @theme)
     if !@alert.save
       render 'new'
     end
