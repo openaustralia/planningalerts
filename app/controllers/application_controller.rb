@@ -20,15 +20,9 @@ class ApplicationController < ActionController::Base
   end
 
   def set_view_path
-    names = request.domain(6).split(".")
-    # Use the nsw theme with any request to something like:
-    # nsw.127.0.0.1.xip.io or nsw.10.0.0.1.xip.io or nsw.test.planningalerts.org.au
-    if (Rails.env.production? && request.domain(4) == "nsw.test.planningalerts.org.au") ||
-      (Rails.env.development? && names[0] == "nsw" && names[-2..-1] == ["xip", "io"])
-      @theme = "nsw"
+    @theme = ThemeChooser.theme_from_request(request)
+    if @theme == "nsw"
       self.prepend_view_path "lib/themes/nsw/views"
-    else
-      @theme = "default"
     end
   end
 
