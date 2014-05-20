@@ -67,28 +67,57 @@ describe EmailConfirmable::Notifier do
     let(:object) { mock_model(Comment, text: "This is a comment", confirm_id: "sdbfjsd3rs", email: "matthew@openaustralia.org",
       application: application) }
 
-    describe "confirm" do
+    context "default theme" do
       let(:notifier) { EmailConfirmable::Notifier.confirm("default", object) }
 
-      it "should come from the planningalerts' normal email" do
-        notifier.from.should == ["contact@planningalerts.org.au"]
-      end
+      describe "confirm" do
+        it "should come from the planningalerts' normal email" do
+          notifier.from.should == ["contact@planningalerts.org.au"]
+        end
 
-      it "should go to the comment's email address" do
-        notifier.to.should == ["matthew@openaustralia.org"]
-      end
+        it "should go to the comment's email address" do
+          notifier.to.should == ["matthew@openaustralia.org"]
+        end
 
-      it "should tell the person what the email is about" do
-        notifier.subject.should == "Please confirm your comment"
-      end
+        it "should tell the person what the email is about" do
+          notifier.subject.should == "Please confirm your comment"
+        end
 
-      it do
-        notifier.body.parts.find { |p| p.content_type.match /plain/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/comment.txt").read
-      end
+        it do
+          notifier.body.parts.find { |p| p.content_type.match /plain/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/comment.txt").read
+        end
 
-      it do
-        notifier.body.parts.find { |p| p.content_type.match /html/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/comment.html").read
+        it do
+          notifier.body.parts.find { |p| p.content_type.match /html/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/comment.html").read
+        end
       end
     end
+
+    context "nsw theme" do
+      let(:notifier) { EmailConfirmable::Notifier.confirm("nsw", object) }
+
+      describe "confirm" do
+        it "should come from the nsw planningalerts' normal email" do
+          notifier.from.should == ["contact@planningalerts.nsw.gov.au"]
+        end
+
+        it "should go to the comment's email address" do
+          notifier.to.should == ["matthew@openaustralia.org"]
+        end
+
+        it "should tell the person what the email is about" do
+          notifier.subject.should == "Please confirm your comment"
+        end
+
+        it do
+          notifier.body.parts.find { |p| p.content_type.match /plain/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/comment_nsw.txt").read
+        end
+
+        it do
+          notifier.body.parts.find { |p| p.content_type.match /html/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/comment_nsw.html").read
+        end
+      end
+    end
+
   end
 end
