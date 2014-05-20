@@ -1,7 +1,5 @@
 # Requires a field email, confirm_id and confirmed on model
 module EmailConfirmable
-  mattr_accessor :from
-
   def self.included(base)
     base.send :extend, ClassMethods
   end
