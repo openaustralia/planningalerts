@@ -19,4 +19,14 @@ module ActionMailerThemer
 
     mail(params.merge(template_path: template_path))
   end
+
+  def email_from(theme)
+    if theme == "default"
+      "#{::Configuration::EMAIL_FROM_NAME} <#{::Configuration::EMAIL_FROM_ADDRESS}>"
+    elsif theme == "nsw"
+      "NSW PlanningAlerts <contact@planningalerts.nsw.gov.au>"
+    else
+      raise "Unknown theme #{theme}"
+    end
+  end
 end
