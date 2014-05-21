@@ -6,7 +6,7 @@ module Configuration
 
   # See https://morph.io/api
   MORPH_API_KEY = "xxxxxxxxxxxxxxxxxxxx"
-  
+
   # Size of alert areas
   SMALL_ZONE_SIZE = 200
   MEDIUM_ZONE_SIZE = 800
@@ -37,10 +37,10 @@ module Configuration
 
   # Google Analytics key
   GOOGLE_ANALYTICS_KEY = "UA-3107958-5"
-  
+
   # API key for PingMyMap service which informs Google, Yahoo, etc of XML sitemap updates
   PINGMYMAP_API_KEY = "xxxxxxxxxxx"
-  
+
   # Values used in the API examples
   API_EXAMPLE_ADDRESS = "24 Bruce Road Glenbrook, NSW 2773"
   API_EXAMPLE_SIZE = 4000
