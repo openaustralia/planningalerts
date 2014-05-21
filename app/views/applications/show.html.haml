@@ -57,7 +57,7 @@
           influence whether the application is approved or not. The text of your comment and your name will be public.
         %p
           If you have made a donation to a Councillor and/or gift to a Councillor or Council employee you may
-          #{link_to("need to disclose this", faq_path(:anchor => "disclosure", :comment => true))}.
+          #{link_to("need to disclose this", faq_path(:anchor => "disclosure"))}.
         = semantic_form_for [@application, @comment] do |f|
           = f.inputs do
             = f.input :text, :label => 'Comment', :placeholder => "Comment",
@@ -66,7 +66,7 @@
             = f.input :email, :placeholder => "Email", :hint => "We never display your email address"
             - hint = capture do
               e.g. 1 Sowerby St, Goulburn (we never display this).
-              = link_to("Why do you need my address?", faq_path(:anchor => "address", :comment => true))
+              = link_to("Why do you need my address?", faq_path(:anchor => "address"))
             = f.input :address, :placeholder => "Address", :hint => hint
             %div#faq_commenting_address.inline-hints.hidden
               = render :partial => 'static/faq_commenting_address'

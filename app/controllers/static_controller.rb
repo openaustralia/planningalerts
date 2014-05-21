@@ -9,7 +9,6 @@ class StaticController < ApplicationController
   end
   
   def faq
-    @comment = params[:comment]
   end
   
   def get_involved
