@@ -1,4 +1,14 @@
-class DefaultTheme
+class Theme
+  def domain
+    host.split(":").first
+  end
+
+  def email_from
+    "#{app_name} <#{email_from_address}>"
+  end
+end
+
+class DefaultTheme < Theme
   def theme
     "default"
   end
@@ -18,13 +28,9 @@ class DefaultTheme
   def email_from_address
     ::Configuration::EMAIL_FROM_ADDRESS
   end
-
-  def email_from
-    "#{app_name} <#{email_from_address}>"
-  end
 end
 
-class NSWTheme
+class NSWTheme < Theme
   def theme
     "nsw"
   end
@@ -32,10 +38,6 @@ class NSWTheme
   def recognise?(request)
     tld = domain.split(".").count - 1
     request.domain(tld) == domain
-  end
-
-  def domain
-    host.split(":").first
   end
 
   # This might have a port number included
@@ -49,10 +51,6 @@ class NSWTheme
 
   def email_from_address
     "contact@nsw.test.planningalerts.org.au"
-  end
-
-  def email_from
-    "#{app_name} <#{email_from_address}>"
   end
 end
 
