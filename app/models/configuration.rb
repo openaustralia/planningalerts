@@ -16,7 +16,6 @@ module Configuration
 
   # Scraper params
   SCRAPE_DELAY = 5
-  LOG_EMAIL = 'matthew@openaustralia.org'
 
   # Google maps key
   # Use the following maps API key if you are running your development instance at http://planningalerts-app.dev
