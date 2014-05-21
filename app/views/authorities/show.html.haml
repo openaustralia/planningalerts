@@ -30,12 +30,7 @@
     :javascript
       barGraph("#chart", "#{per_week_authority_applications_url(@authority.short_name_encoded, :format => 'js')}");
 
-  %h4 Under the Hood
-  %p
-    Are you a developer?
-  %p
-    The information comes from our new scraping platform #{link_to "Morph", "https://morph.io"}. You are able to fork scrapers and collaborate
-    via git. See #{link_to @authority.morph_url, @authority.morph_url}
+  = render "under_the_hood"
 - else
   %p
     This authority is
