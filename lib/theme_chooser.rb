@@ -46,11 +46,11 @@ class NSWTheme < Theme
   end
 
   def app_name
-    "NSW PlanningAlerts"
+    ::Configuration::THEME_NSW_EMAIL_FROM_NAME
   end
 
   def email_from_address
-    "contact@nsw.test.planningalerts.org.au"
+    ::Configuration::THEME_NSW_EMAIL_FROM_ADDRESS
   end
 end
 

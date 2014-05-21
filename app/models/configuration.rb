@@ -64,4 +64,6 @@ module Configuration
 
   # Configuration for the theme
   THEME_NSW_HOST = "nsw.127.0.0.1.xip.io:3000"
+  THEME_NSW_EMAIL_FROM_ADDRESS = "contact@nsw.127.0.0.1.xip.io"
+  THEME_NSW_EMAIL_FROM_NAME = "NSW PlanningAlerts"
 end
