@@ -21,6 +21,5 @@ class PlanningAlertsSitemap
     end
 
     s.finish
-    #s.notify_search_engines(Configuration::PINGMYMAP_API_KEY)
   end
 end

@@ -132,26 +132,4 @@ class Sitemap
 	def sitemap_relative_path
 	  "sitemaps/sitemap#{@index + 1}.xml.gz"
   end
-  
-	# Notify the search engines (like Google, Yahoo, etc..) of the new sitemap
-	def notify_search_engines(pingmymap_api_key)
-		# API Ping URL
-		pingmymap_api_url = "http://api.pingmymap.com/v1/?url=#{root_url}/#{sitemap_index_relative_path}&key=#{pingmymap_api_key}"
-		# Make HTTP request to API URL
-		response = Net::HTTP.get_response(URI.parse(pingmymap_api_url))
-
-		# Check response for any errors
-		if response.body and response.code == '200'
-			# Display success message
-			@logger.info 'Successfully called PingMyMap API!'
-
-			# Parse JSON response
-			parsed_response = JSON.parse(response.body)
-
-			# Output JSON response
-			y parsed_response
-		else
-			@logger.error "Error calling PingMyMap API with #{pingmymap_api_url}"
-		end
-	end
 end
