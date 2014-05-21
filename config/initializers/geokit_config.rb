@@ -27,7 +27,11 @@ if defined? Geokit
 	# See http://www.google.com/apis/maps/signup.html
 	# and http://www.google.com/apis/maps/documentation/#Geocoding_Examples
 	#Geokit::Geocoders::google = 'REPLACE_WITH_YOUR_GOOGLE_KEY'
-  
+
+	# Hack to force loading of Configuration class. We need to do this because
+	# otherwise we can't detect whether the GOOGLE_MAPS_CLIENT_ID has been defined
+	Configuration
+
 	if defined?(Configuration::GOOGLE_MAPS_CLIENT_ID)
 		Geokit::Geocoders::google_client_id = Configuration::GOOGLE_MAPS_CLIENT_ID
 		Geokit::Geocoders::google_cryptographic_key = Configuration::GOOGLE_MAPS_CRYPTOGRAPHIC_KEY
