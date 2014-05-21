@@ -37,10 +37,21 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 ### Scraping and sending emails in development
 
 **Step 1 - Seed authorities table**
- * Change `INTERNAL_SCRAPERS_INDEX_URL` in app/models/configuration.rb to point to : http://www.planningalerts.org.au/scrapers/
- * Load the authorities - `rake planningalerts:authorities:load`
+ * Start the rails server - `rails s`
+ * Create an admin user - TODO: Explain how to do this
+ * Go to the admin console - http://localhost:3000/admin
+ * Create the authority Marrickville with the following data
+   * FULL NAME	`Marrickville Council`
+   * SHORT NAME	`Marrickville`
+   * STATE	`NSW`
+   * EMAIL	`council@marrickville.nsw.gov.au`
+   * POPULATION 2011	`81489`
+   * MORPH NAME	`planningalerts-scrapers/marrickville`
+   * DISABLED	`false`
 
 **Step 2 - Scrape DAs**
+ * Register on [morph.io](https://morph.io) and [get your api key](https://morph.io/documentation/api).
+ * Update `MORPH_API_KEY` in app/models/configuration.rb
  * Run - `rake planningalerts:applications:scrape['marrickville']`
 
 **Step 3 - Setup an Alert**
