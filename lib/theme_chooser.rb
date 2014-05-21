@@ -30,15 +30,17 @@ class NSWTheme
   end
 
   def recognise?(request)
-    names = request.domain(6).split(".")
-    # Use the nsw theme with any request to something like:
-    # nsw.127.0.0.1.xip.io or nsw.10.0.0.1.xip.io or nsw.test.planningalerts.org.au
-    (Rails.env.production? && request.domain(4) == "nsw.test.planningalerts.org.au") ||
-      (Rails.env.development? && names[0] == "nsw" && names[-2..-1] == ["xip", "io"])
+    tld = domain.split(".").count - 1
+    request.domain(tld) == domain
   end
 
+  def domain
+    host.split(":").first
+  end
+
+  # This might have a port number included
   def host
-    "nsw.test.planningalerts.org.au"
+    ::Configuration::THEME_NSW_HOST
   end
 
   def app_name

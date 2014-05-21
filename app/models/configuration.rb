@@ -64,4 +64,7 @@ module Configuration
   TWITTER_CONSUMER_SECRET = "xxxxxxxxxxx"
   TWITTER_OAUTH_TOKEN = "xxxxxxxxxxx"
   TWITTER_OAUTH_TOKEN_SECRET = "xxxxxxxxxxx"
+
+  # Configuration for the theme
+  THEME_NSW_HOST = "nsw.127.0.0.1.xip.io:3000"
 end
