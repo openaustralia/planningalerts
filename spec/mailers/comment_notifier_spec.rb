@@ -44,7 +44,7 @@ describe CommentNotifier do
       end
 
       it "should have the sender as the nsw planningalerts email address" do
-        notifier.sender.should == "contact@nsw.test.planningalerts.org.au"
+        notifier.sender.should == "contact@nsw.127.0.0.1.xip.io"
       end
 
       it "should be from the email address of the person who made the comment" do
