@@ -1,6 +1,6 @@
 class PlanningAlertsSitemap
   include Rails.application.routes.url_helpers
-  
+
   def generate_and_notify
     s = Sitemap.new(root_url(:host => ::Configuration::HOST)[0..-2], Rails.root.join('public'))
 
@@ -14,7 +14,7 @@ class PlanningAlertsSitemap
     s.add_url about_path, :changefreq => :monthly
     s.add_url faq_path, :changefreq => :monthly
     s.add_url get_involved_path, :changefreq => :monthly
-    
+
     # All the applications pages
     Application.find(:all).each do |application|
       s.add_url application_path(application), :changefreq => :monthly, :lastmod => application.date_scraped
