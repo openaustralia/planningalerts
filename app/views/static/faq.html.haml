@@ -1,73 +1,16 @@
 - content_for :page_title, "Frequently asked questions"
 %h3= yield :page_title
 %dl.faq
-  %dt
-    What does PlanningAlerts do?
-  %dd
-    It sends you emails of any planning and development applications we find based on the address you give us when you
-    sign up.
-  %dt
-    Where does the data come from?
-  %dd
-    We search as many planning authority websites as we can find and forward the data on to you.
-  %dt
-    What's a planning authority?
-  %dd
-    Your local planning authority is the part of government that assesses planning and development applications.
-    Depending on where you live, this might be your local council or territory government.
-  %dt
-    How can I stop receiving alerts?
-  %dd
-    At the bottom of each email you receive there is a link to unsubscribe from that alert. Just click on it and we'll
-    delete your alert.
-  %dt
-    Do you cover the whole country?
-  %dd
-    No, but we are working on it. There is a list of the planning authorities we currently cover
-    #{link_to "here", authorities_path}. Not every planning authority publishes their planning data
-    online so some places will always be missing. If your local authority is missing, you could always
-    #{mail_to "contact@planningalerts.org.au", "help out by writing a screen scraper to search their website."}
-  %dt#broken_scraper
-    The data in my local area seems out of date. What's going on?
-  %dd
-    We use <a href="http://en.wikipedia.org/wiki/Screen_scraping">screen scrapers</a> to gather planning data from
-    local councils and from time to time their website may change and break our scraper. You can help by providing
-    a
-    = link_to "donation", donate_path
-    or
-    #{link_to "volunteering", get_involved_path} to help us fix it.
-  %dt
-    Can I help?
-  %dd
-    Yes please! To be able to cover the whole country we need help in writing screen scrapers to search the websites of
-    every planning authority in the country. If you'd like to write one for your local planning authority
-    #{mail_to "contact@planningalerts.org.au", "get in touch"}.
-  %dt
-    Can I have a copy of your data?
-  %dd
-    Yes. You can use our #{link_to "API", api_howto_path}.
-  %dt
-    What kind of license is your data available under?
-  %dd
-    The data via the #{link_to "API", api_howto_path} is licensed under the
-    <a href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Share Alike 3.0 license</a>.
-    The license granted in relation to the 'Work' should be read broadly to relate not only copyright but all other IP
-    rights present in this dataset including, for example, any Database rights.
-  %dt
-    The link to the council development application doesn't take me directly there. What's going on?
-  %dd
-    Some council web sites require you to click an Agree button before you can view the details of the development
-    application. The problem is they often do not redirect you to your original destination after you click Agree.
-    Usually revisiting the original link again after clicking Agree should take you to the correct details page.
+  = render "static/faqs/what_does_it_do"
+  = render "static/faqs/where_does_data_come_from"
+  = render "static/faqs/what_is_a_planning_authority"
+  = render "static/faqs/how_to_stop_alerts"
+  = render "static/faqs/coverage"
+  = render "static/faqs/broken_scraper"
+  = render "static/faqs/can_i_help"
+  = render "static/faqs/can_i_copy_data"
+  = render "static/faqs/license"
+  = render "static/faqs/link_not_direct"
   - if @comment
-    %dt#disclosure
-      Why do I need to disclose if I've made a donation to a Councillor and/or gift to a Councillor or Council employee
-      when commenting on a planning application?
-    %dd
-      In NSW, for example, it is an offence if you fail to disclose this when making a submission under the
-      <a href="http://www.austlii.edu.au/au/legis/nsw/consol_act/epaaa1979389/s147.html">Environmental Planning and Assessment Act 1979</a>.
-      If this applies to you, please ensure you contact the council responsible so that you can make this disclosure.
-    %dt#address
-      Why do you need my address when I comment on an application?
-    %dd
-      = render :partial => "faq_commenting_address"
+    = render "static/faqs/disclosure"
+    = render "static/faqs/address"
