@@ -3,7 +3,7 @@ module ApiHowtoHelper
   def mapify(url, zoom = 13)
       "http://maps.google.com/maps?f=q&hl=en&layer=&ie=UTF8&z=#{zoom}&om=1&q=#{CGI.escape(url)}"
   end
-  
+
   def htmlify(url)
     url.gsub(/(\?|&|&amp;)([a-z_]+)=/, '\1<strong>\2</strong>=').gsub('&', '&amp;')
   end
@@ -42,20 +42,20 @@ module ApiHowtoHelper
   def api_example_suburb_and_state_url(format, suburb = Rails.application.config.planningalerts_api_example_suburb, state = Rails.application.config.planningalerts_api_example_state)
     applications_url(:host => api_host, :format => format, :suburb => suburb, :state => state)
   end
-  
+
   def api_example_address_url_html(format)
     # Doing this hackery with 11's and 22's so that we don't escape "[" and "]"
     htmlify(api_example_address_url(format, "11", "22").sub("11", "[address]").sub("22", "[distance_in_metres]"))
   end
-  
+
   def api_example_latlong_url_html(format)
     htmlify(api_example_latlong_url(format, "11", "22", "33").sub("11", "[latitude]").sub("22", "[longitude]").sub("33", "[distance_in_metres]"))
   end
-  
+
   def api_example_area_url_html(format)
     htmlify(api_example_area_url(format, "11", "22", "11", "22").gsub("11", "[latitude]").gsub("22", "[longitude]"))
   end
-  
+
   def api_example_authority_url_html(format)
     htmlify(api_example_authority_url(format, "11").sub("11", "[name]"))
   end
