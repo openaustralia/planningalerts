@@ -7,10 +7,10 @@ class StaticController < ApplicationController
 
   def about
   end
-  
+
   def faq
   end
-  
+
   def get_involved
   end
 
