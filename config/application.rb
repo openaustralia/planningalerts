@@ -79,6 +79,24 @@ module PlanningalertsApp
     config.planningalerts_small_zone_size = 200
     config.planningalerts_medium_zone_size = 800
     config.planningalerts_large_zone_size = 2000
+
+    # Values used in the API examples
+    config.planningalerts_api_example_address = "24 Bruce Road Glenbrook, NSW 2773"
+    config.planningalerts_api_example_size = 4000
+    config.planningalerts_api_example_authority = "blue_mountains"
+    config.planningalerts_api_example_postcode = "2780"
+    config.planningalerts_api_example_suburb = "Katoomba"
+    config.planningalerts_api_example_state = "NSW"
+
+    # This lat/lng is for 24 Bruce Road as well
+    config.planningalerts_api_example_lat = -33.772609
+    config.planningalerts_api_example_lng = 150.624263
+
+    # This covers most of Victoria and NSW
+    config.planningalerts_api_example_bottom_left_lat = -38.556757
+    config.planningalerts_api_example_bottom_left_lng = 140.833740
+    config.planningalerts_api_example_top_right_lat = -29.113775
+    config.planningalerts_api_example_top_right_lng = 153.325195
   end
 end
 
