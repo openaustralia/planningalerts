@@ -6,12 +6,6 @@ module Configuration
   # See https://morph.io/api
   MORPH_API_KEY = "xxxxxxxxxxxxxxxxxxxx"
 
-  # Size of alert areas
-  SMALL_ZONE_SIZE = 200
-  MEDIUM_ZONE_SIZE = 800
-  LARGE_ZONE_SIZE = 2000
-  ZONE_BUFFER_PERCENTAGE = 5
-
   # Email setup
   EMAIL_FROM_ADDRESS = 'contact@planningalerts.org.au'
   EMAIL_FROM_NAME = 'PlanningAlerts'

@@ -48,8 +48,8 @@ class AlertsController < ApplicationController
   private
 
   def zone_sizes
-    {'s' => ::Configuration::SMALL_ZONE_SIZE,
-      'm' => ::Configuration::MEDIUM_ZONE_SIZE,
-      'l' => ::Configuration::LARGE_ZONE_SIZE}
+    {'s' => Rails.application.config.planningalerts_small_zone_size,
+      'm' => Rails.application.config.planningalerts_medium_zone_size,
+      'l' => Rails.application.config.planningalerts_large_zone_size}
   end
 end
