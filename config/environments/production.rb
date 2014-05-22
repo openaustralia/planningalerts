@@ -37,7 +37,7 @@ PlanningalertsApp::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { :host => 'www.planningalerts.org.au' }
-  
+
   # Enable threaded mode
   # config.threadsafe!
 
@@ -47,7 +47,7 @@ PlanningalertsApp::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  
+
   # Send mails to the locally running instance of Cuttlefish
   config.action_mailer.delivery_method = :smtp
   if defined?(Configuration::CUTTLEFISH_USER_NAME) && defined?(Configuration::CUTTLEFISH_PASSWORD)
@@ -69,16 +69,16 @@ PlanningalertsApp::Application.configure do
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
-   
+
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false
-   
+
   # Generate digests for assets URLs
   config.assets.digest = true
-   
+
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
-   
+
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 end
