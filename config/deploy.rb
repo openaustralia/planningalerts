@@ -43,7 +43,6 @@ namespace :deploy do
             "#{release_path}/config/throttling.yml"             => "#{shared_path}/throttling.yml",
             "#{release_path}/app/models/configuration.rb"       => "#{shared_path}/configuration.rb",
             "#{release_path}/config/production.sphinx.conf"     => "#{shared_path}/production.sphinx.conf",
-            "#{release_path}/config/environments/production.rb" => "#{shared_path}/production.rb",
             "#{release_path}/config/sphinx.yml"                 => "#{shared_path}/sphinx.yml",
             "#{release_path}/public/sitemap.xml"                => "#{shared_path}/sitemap.xml",
             "#{release_path}/public/sitemaps"                   => "#{shared_path}/sitemaps",
