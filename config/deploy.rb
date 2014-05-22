@@ -30,7 +30,7 @@ elsif stage == "test"
 end
 
 # We need to run this after our collector mongrels are up and running
-# This goes out even if the deploy fails, sadly 
+# This goes out even if the deploy fails, sadly
 after "deploy:update", "newrelic:notice_deployment"
 
 before "deploy:restart", "foreman:restart"
