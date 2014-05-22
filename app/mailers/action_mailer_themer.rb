@@ -15,9 +15,16 @@ module ActionMailerThemer
       raise "Unknown theme #{theme}"
     end
 
-    @host = ThemeChooser.create(theme).host
+    themer = ThemeChooser.create(theme)
+    @host = themer.host
+    # Only override mail delivery options in production
+    if Rails.env.production? && theme == "nsw"
+      delivery_options = {user_name: themer.cuttlefish_user_name , password: cuttlefish_password }
+    else
+      delivery_options = {}
+    end
 
-    mail(params.merge(template_path: template_path))
+    mail(params.merge(template_path: template_path, delivery_method_options: delivery_options))
   end
 
   def email_from(theme)

@@ -52,6 +52,14 @@ class NSWTheme < Theme
   def email_from_address
     ::Configuration::THEME_NSW_EMAIL_FROM_ADDRESS
   end
+
+  def cuttlefish_user_name
+    ::Configuration::THEME_NSW_CUTTLEFISH_USER_NAME
+  end
+
+  def cuttlefish_password
+    ::Configuration::THEME_NSW_CUTTLEFISH_PASSWORD
+  end
 end
 
 class ThemeChooser
