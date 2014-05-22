@@ -19,7 +19,7 @@ module ActionMailerThemer
     @host = themer.host
     # Only override mail delivery options in production
     if Rails.env.production? && theme == "nsw"
-      delivery_options = {user_name: themer.cuttlefish_user_name , password: cuttlefish_password }
+      delivery_options = {user_name: themer.cuttlefish_user_name , password: themer.cuttlefish_password }
     else
       delivery_options = {}
     end
