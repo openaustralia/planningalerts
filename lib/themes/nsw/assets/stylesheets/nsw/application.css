@@ -6,7 +6,9 @@
 #header-wrapper {
   background-color: #d8ecf9 !important;
   background-image: url("/assets/outline_flat.png") !important;
-  background-size: cover;
+  background-position-x: center;
+  background-position-y: 70px;
+  background-repeat: repeat-x;
 }
 
 #main-wrapper, .main {
