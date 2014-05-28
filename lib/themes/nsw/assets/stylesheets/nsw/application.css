@@ -2,3 +2,13 @@
  *= require_self
  *= require screen
 */
+
+#header-wrapper {
+  background-color: #d8ecf9 !important;
+  background-image: url("/assets/outline_flat.png") !important;
+  background-size: cover;
+}
+
+#main-wrapper, .main {
+  background: #b7d9f2 !important;
+}
