@@ -1,39 +1,61 @@
 //= require_self
 //= require screen
 
+@import "susy";
+
 #header-wrapper {
   background-color: #d8ecf9 !important;
   background-image: url("/assets/outline_flat.png") !important;
   background-position-x: center;
-  background-position-y: 70px;
+  background-position-y: 10px;
   background-repeat: repeat-x;
 }
+
 
 #main-wrapper, .main {
   background: #b7d9f2 !important;
 }
 
-#logo, #name {
-  float: left;
+#header {
+  #logo, #name {
+    float: left;
+  }
+  #name {
+    margin-top: 0px;
+    margin-left: -10px;
+    h1 a {
+      color: #2c4088;
+      text-shadow: none;
+      font-weight: 500;
+    }
+
+    h2 {
+      color: #f8003c;
+      text-shadow: none;
+    }
+  }
+  #logo {
+    margin-left: -8px;
+    img {
+      height: 60px;
+    }
+  }
 }
 
-#logo {
-  margin-left: -14px;
-}
-
-#name {
-  margin-top: 30px;
-}
-
-#header #name {
-  h1 a {
-    color: #2c4088;
-    text-shadow: none;
-    font-weight: 500;
+@include at-breakpoint(60em 24) {
+  #header-wrapper {
+    background-position-y: 70px;
   }
 
-  h2 {
-    color: #f8003c;
-    text-shadow: none;
+  #header {
+    #logo {
+      margin-left: -14px;
+      img {
+        height: 150px;
+      }
+    }
+    #name {
+      margin-top: 30px;
+    }
   }
 }
