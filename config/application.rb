@@ -71,6 +71,7 @@ module PlanningalertsApp
 
     # TODO Generalise this
     config.assets.paths << "#{Rails.root}/lib/themes/nsw/assets/stylesheets"
+    config.assets.paths << "#{Rails.root}/lib/themes/nsw/assets/images"
 
     # Application configuration
     # These are things that are nice to have as configurations but unlikely really
