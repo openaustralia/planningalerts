@@ -1,8 +1,8 @@
 %p
-  This comment was submitted via NSW PlanningAlerts, a free service brought to
+  This comment was submitted via #{@themer.app_name}, a free service brought to
   you by
   = link_to "Planning & Infrastructure, NSW", "http://www.planning.nsw.gov.au"
   and powered by
   = link_to "PlanningAlerts.org.au", "http://www.planningalerts.org.au"
   from #{link_to "the OpenAustralia Foundation", "http://www.openaustraliafoundation.org.au"}.
-  = link_to "View this application on NSW PlanningAlerts", application_url(@comment.application, host: @host)
+  = link_to "View this application on #{@themer.app_name}", application_url(@comment.application, host: @host)
