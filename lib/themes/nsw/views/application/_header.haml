@@ -1,9 +1,12 @@
 #header-wrapper
   #header.container
-    %h1= link_to @themer.app_name, root_path
-    %h2
-      Email alerts of planning applications
-      %em near you
+    #logo
+      = image_tag "nsw_logo_spacebar_rounded.png", height: "150px", alt: "NSW Government Logo"
+    #name
+      %h1= link_to @themer.app_name, root_path
+      %h2
+        Powered by
+        = link_to "planningalerts.org.au", "http://www.planningalerts.org.au"
 
     .hide= link_to "Skip navigation", "#content"
     #menu

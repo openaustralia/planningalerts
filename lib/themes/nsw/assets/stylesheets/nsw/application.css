@@ -12,3 +12,7 @@
 #main-wrapper, .main {
   background: #b7d9f2 !important;
 }
+
+#logo, #name {
+  float: left;
+}
