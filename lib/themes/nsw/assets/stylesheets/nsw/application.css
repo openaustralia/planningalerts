@@ -18,3 +18,22 @@
 #logo, #name {
   float: left;
 }
+
+#logo {
+  margin-left: -14px;
+}
+
+#name {
+  margin-top: 30px;
+}
+
+#header #name h1 a {
+  color: #2c4088;
+  text-shadow: none;
+  font-weight: 500;
+}
+
+#header #name h2 {
+  color: #f8003c;
+  text-shadow: none;
+}
