@@ -1,7 +1,5 @@
-/*
- *= require_self
- *= require screen
-*/
+//= require_self
+//= require screen
 
 #header-wrapper {
   background-color: #d8ecf9 !important;
@@ -27,13 +25,15 @@
   margin-top: 30px;
 }
 
-#header #name h1 a {
-  color: #2c4088;
-  text-shadow: none;
-  font-weight: 500;
-}
+#header #name {
+  h1 a {
+    color: #2c4088;
+    text-shadow: none;
+    font-weight: 500;
+  }
 
-#header #name h2 {
-  color: #f8003c;
-  text-shadow: none;
+  h2 {
+    color: #f8003c;
+    text-shadow: none;
+  }
 }
