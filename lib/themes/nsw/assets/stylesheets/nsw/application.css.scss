@@ -6,6 +6,7 @@
 #header-wrapper {
   background-color: #d8ecf9 !important;
   background-image: url("/assets/outline_flat.png") !important;
+  background-size: cover;
   background-position-x: center;
   background-position-y: 10px;
   background-repeat: repeat-x;
@@ -45,6 +46,7 @@
 @include at-breakpoint(60em 24) {
   #header-wrapper {
     background-position-y: 70px;
+    background-size: initial;
   }
 
   #header {
