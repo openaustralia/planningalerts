@@ -1,7 +1,8 @@
-//= require_self
 //= require screen
+//= require_self
 
 @import "susy";
+@import "bourbon";
 
 #header-wrapper {
   background-color: #d8ecf9 !important;
@@ -59,5 +60,18 @@
     #name {
       margin-top: 30px;
     }
+  }
+}
+
+.container {
+  .button-action {
+    @include button(simple, #f8003c);
+    font-weight: normal;
+  }
+  .button-large {
+    font-size: 19px;
+  }
+  a.button-action, input.button-action {
+    color: #fff;
   }
 }
