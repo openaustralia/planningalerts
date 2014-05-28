@@ -18,7 +18,7 @@ Add your own comment: http://nsw.127.0.0.1.xip.io:3000/applications/2?utm_campai
 
 ============================================================
 
-NSW PlanningAlerts is brought to you by Planning & Infrastructure, NSW.
+InTouch is brought to you by Planning & Infrastructure, NSW.
 It is powered by PlanningAlerts.org.au from the OpenAustralia Foundation
 http://www.openaustraliafoundation.org.au
 
