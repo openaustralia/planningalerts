@@ -87,3 +87,24 @@
     color: #fff;
   }
 }
+
+#stats-wrapper {
+  background-color: #f6f7f9;
+}
+
+.stats a .number {
+  color: #f8003c;
+}
+
+#footer-wrapper {
+  background-color: #528dc3;
+}
+
+#footer {
+  h5, a:link, a:visited, li {
+    color: white;
+  }
+  a:link, a:visited {
+    font-weight: bold;
+  }
+}
