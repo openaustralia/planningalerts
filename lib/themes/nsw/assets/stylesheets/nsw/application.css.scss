@@ -67,6 +67,18 @@
   .button-action {
     @include button(simple, #f8003c);
     font-weight: normal;
+    background-image: none;
+    box-shadow: none;
+    text-shadow: none;
+    border: none;
+    &:hover:not(:disabled) {
+      background-image: none;
+      box-shadow: none;
+    }
+    &:active:not(:disabled) {
+      box-shadow: none;
+      border: none;
+    }
   }
   .button-large {
     font-size: 19px;
