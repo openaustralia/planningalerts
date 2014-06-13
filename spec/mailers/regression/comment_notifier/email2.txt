@@ -13,7 +13,7 @@ Oh yes it is.
 
 =============================================================================
 This comment was submitted via Application Tracking, a free service brought to
-you by Planning & Infrastructure, NSW and powered by PlanningAlerts.org.au
+you by Planning & Environment, NSW and powered by PlanningAlerts.org.au
 from the OpenAustralia Foundation.
 
 See http://nsw.127.0.0.1.xip.io:3000/applications/123 for more information
