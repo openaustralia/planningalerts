@@ -71,6 +71,7 @@
     box-shadow: none;
     text-shadow: none;
     border: none;
+    -webkit-appearance:none;
     &:hover:not(:disabled) {
       background-image: none;
       box-shadow: none;
