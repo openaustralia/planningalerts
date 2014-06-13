@@ -72,6 +72,7 @@ group :development do
   gem 'guard-livereload'
   gem 'rack-livereload'
   gem 'mailcatcher'
+  gem 'rb-fsevent'
 end
 
 group :test, :development do
