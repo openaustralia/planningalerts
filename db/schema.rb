@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(:version => 20140614070201) do
     t.datetime "updated_at",    :null => false
   end
 
+  add_index "api_keys", ["key"], :name => "index_api_keys_on_key", :unique => true
+
   create_table "api_statistics", :force => true do |t|
     t.string   "ip_address"
     t.datetime "query_time"
