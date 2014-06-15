@@ -95,7 +95,7 @@ describe ApplicationsController do
           result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
           Application.stub_chain(:where, :paginate).and_return([result])
         end
-        get :api, :format => "js", :postcode => "2780", :callback => "foobar"
+        get :api_postcode, :format => "js", :postcode => "2780", :callback => "foobar"
         response.body[0..6].should == "foobar("
         response.body[-1..-1].should == ")"
         JSON.parse(response.body[7..-2]).should == [{
@@ -276,7 +276,7 @@ describe ApplicationsController do
         result, scope = mock, mock
         Application.should_receive(:where).with(:postcode => "2780").and_return(scope)
         scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
-        get :api, :format => "rss", :postcode => "2780"
+        get :api_postcode, :format => "rss", :postcode => "2780"
         assigns[:applications].should == result
         assigns[:description].should == "Recent applications in postcode 2780"
       end

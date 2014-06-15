@@ -61,14 +61,40 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  def api_postcode
+    @description = "Recent applications"
+
+    # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
+    apps = Application.where(:postcode => params[:postcode])
+    @description << " in postcode #{params[:postcode]}"
+
+    @applications = apps.paginate(:page => params[:page], :per_page => per_page)
+
+    respond_to do |format|
+      # TODO: Move the template over to using an xml builder
+      format.rss do
+        #ApiStatistic.log(request)
+        render params[:style] == "html" ? "index_html" : "index",
+          :format => :rss, :layout => false, :content_type => Mime::XML
+      end
+      format.js do
+        #ApiStatistic.log(request)
+        if params[:v] == "2"
+          s = {:applications => @applications, :application_count => @applications.count, :page_count => @applications.total_pages}
+        else
+          s = @applications
+        end
+        j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
+          :include => {:authority => {:only => [:full_name]}})
+        render :json => j, :callback => params[:callback]
+      end
+    end
+  end
+
   def api
     @description = "Recent applications"
 
-    if params[:postcode]
-      # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
-      apps = Application.where(:postcode => params[:postcode])
-      @description << " in postcode #{params[:postcode]}"
-    elsif params[:suburb]
+    if params[:suburb]
       if params[:state]
         apps = Application.where(:suburb => params[:suburb], :state => params[:state])
         @description << " in #{params[:suburb]}, #{params[:state]}"
