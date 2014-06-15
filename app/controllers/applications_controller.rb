@@ -31,14 +31,8 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  def api_authority
-    @description = "Recent applications"
-
-    # TODO Handle the situation where the authority name isn't found
-    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
-    apps = @authority.applications
-    @description << " from #{@authority.full_name_and_state}"
-
+  # TODO don't use instance variables
+  def api_render(apps)
     @applications = apps.paginate(:page => params[:page], :per_page => per_page)
 
     respond_to do |format|
@@ -61,6 +55,17 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  def api_authority
+    @description = "Recent applications"
+
+    # TODO Handle the situation where the authority name isn't found
+    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    apps = @authority.applications
+    @description << " from #{@authority.full_name_and_state}"
+
+    api_render(apps)
+  end
+
   def api_postcode
     @description = "Recent applications"
 
@@ -68,27 +73,7 @@ class ApplicationsController < ApplicationController
     apps = Application.where(:postcode => params[:postcode])
     @description << " in postcode #{params[:postcode]}"
 
-    @applications = apps.paginate(:page => params[:page], :per_page => per_page)
-
-    respond_to do |format|
-      # TODO: Move the template over to using an xml builder
-      format.rss do
-        #ApiStatistic.log(request)
-        render params[:style] == "html" ? "index_html" : "index",
-          :format => :rss, :layout => false, :content_type => Mime::XML
-      end
-      format.js do
-        #ApiStatistic.log(request)
-        if params[:v] == "2"
-          s = {:applications => @applications, :application_count => @applications.count, :page_count => @applications.total_pages}
-        else
-          s = @applications
-        end
-        j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
-          :include => {:authority => {:only => [:full_name]}})
-        render :json => j, :callback => params[:callback]
-      end
-    end
+    api_render(apps)
   end
 
   def api
