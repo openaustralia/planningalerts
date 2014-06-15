@@ -259,7 +259,7 @@ describe ApplicationsController do
         scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
         authority.should_receive(:full_name_and_state).and_return("Blue Mountains City Council")
 
-        get :api, :format => "rss", :authority_id => "blue_mountains"
+        get :api_authority, :format => "rss", :authority_id => "blue_mountains"
         assigns[:applications].should == result
         assigns[:description].should == "Recent applications from Blue Mountains City Council"
       end

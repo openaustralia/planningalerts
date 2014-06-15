@@ -2,6 +2,60 @@ require 'will_paginate/array'
 
 class ApplicationsController < ApplicationController
 
+  def api_authority
+    valid_parameter_keys = [
+      "format", "action", "controller",
+      "authority_id",
+      "page", "style",
+      "postcode",
+      "suburb", "state",
+      "address", "lat", "lng", "radius", "area_size",
+      "bottom_left_lat", "bottom_left_lng", "top_right_lat", "top_right_lng",
+      "callback", "count", "v", "key"]
+
+    # Parameter error checking (only do it on the API calls)
+    invalid_parameter_keys = params.keys - valid_parameter_keys
+    unless invalid_parameter_keys.empty?
+      render :text => "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.sort.join(', ')}", :status => 400
+      return
+    end
+
+    # Allow to set number of returned applications up to a maximum
+    if params[:count] && params[:count].to_i <= Application.per_page
+      per_page = params[:count].to_i
+    else
+      per_page = Application.per_page
+    end
+
+    @description = "Recent applications"
+
+    # TODO Handle the situation where the authority name isn't found
+    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    apps = @authority.applications
+    @description << " from #{@authority.full_name_and_state}"
+
+    @applications = apps.paginate(:page => params[:page], :per_page => per_page)
+
+    respond_to do |format|
+      # TODO: Move the template over to using an xml builder
+      format.rss do
+        render params[:style] == "html" ? "index_html" : "index",
+          :format => :rss, :layout => false, :content_type => Mime::XML
+      end
+      format.js do
+        #ApiStatistic.log(request)
+        if params[:v] == "2"
+          s = {:applications => @applications, :application_count => @applications.count, :page_count => @applications.total_pages}
+        else
+          s = @applications
+        end
+        j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
+          :include => {:authority => {:only => [:full_name]}})
+        render :json => j, :callback => params[:callback]
+      end
+    end
+  end
+
   def api
     valid_parameter_keys = [
       "format", "action", "controller",
@@ -29,12 +83,7 @@ class ApplicationsController < ApplicationController
 
     @description = "Recent applications"
 
-    if params[:authority_id]
-      # TODO Handle the situation where the authority name isn't found
-      @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
-      apps = @authority.applications
-      @description << " from #{@authority.full_name_and_state}"
-    elsif params[:postcode]
+    if params[:postcode]
       # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
       apps = Application.where(:postcode => params[:postcode])
       @description << " in postcode #{params[:postcode]}"
