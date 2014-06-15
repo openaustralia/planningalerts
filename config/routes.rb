@@ -39,14 +39,14 @@ PlanningalertsApp::Application.routes.draw do
 
   # Route API separately
   scope :format => true do
-    get 'authorities/:authority_id/applications' => 'applications#api_authority', as: nil
-    get 'applications' => 'applications#api_postcode', postcode: true, as: nil
-    get 'applications' => 'applications#api_suburb', suburb: true, as: nil
-    get 'applications' => 'applications#api_point', address: true, as: nil
-    get 'applications' => 'applications#api_point', lat: true, lng:true, as: nil
-    get 'applications' => 'applications#api_area', bottom_left_lat: true, bottom_left_lng:true,
+    get 'authorities/:authority_id/applications' => 'api#api_authority', as: nil
+    get 'applications' => 'api#api_postcode', postcode: true, as: nil
+    get 'applications' => 'api#api_suburb', suburb: true, as: nil
+    get 'applications' => 'api#api_point', address: true, as: nil
+    get 'applications' => 'api#api_point', lat: true, lng:true, as: nil
+    get 'applications' => 'api#api_area', bottom_left_lat: true, bottom_left_lng:true,
       top_right_lat: true, top_right_lng: true, as: nil
-    get 'applications' => 'applications#api_all', as: nil
+    get 'applications' => 'api#api_all', as: nil
   end
 
   resources :applications, :only => [:index, :show] do
