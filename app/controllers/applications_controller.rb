@@ -32,13 +32,6 @@ class ApplicationsController < ApplicationController
     end
 
     @description = "Recent applications"
-    # Don't want the RSS feed to match the paging
-    if params[:authority_id]
-      # Provide a prettier form of the rss url
-      @rss = authority_applications_url(params.merge(:format => "rss", :page => nil))
-    else
-      @rss = applications_url(params.merge(:format => "rss", :page => nil))
-    end
 
     if params[:authority_id]
       # TODO Handle the situation where the authority name isn't found
@@ -77,6 +70,16 @@ class ApplicationsController < ApplicationController
       full = true
       @description << " within the last #{Application.nearby_and_recent_max_age_months} months"
       apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
+    end
+
+    # Don't want the RSS feed to match the paging
+    if full
+      @rss = nil
+    elsif params[:authority_id]
+      # Provide a prettier form of the rss url
+      @rss = authority_applications_url(params.merge(:format => "rss", :page => nil))
+    else
+      @rss = applications_url(params.merge(:format => "rss", :page => nil))
     end
 
     @applications = apps.paginate(:page => params[:page], :per_page => per_page)
