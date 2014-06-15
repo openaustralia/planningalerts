@@ -19,11 +19,12 @@ class ApplicationsController < ApplicationController
       render :text => "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.sort.join(', ')}", :status => 400
       return
     end
-    per_page = Application.per_page
 
     # Allow to set number of returned applications up to a maximum
-    if params[:count] && params[:count].to_i <= per_page
+    if params[:count] && params[:count].to_i <= Application.per_page
       per_page = params[:count].to_i
+    else
+      per_page = Application.per_page
     end
 
     @description = "Recent applications"
