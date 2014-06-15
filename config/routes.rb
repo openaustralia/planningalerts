@@ -24,7 +24,7 @@ PlanningalertsApp::Application.routes.draw do
   # on the passed parameters
   match 'api.php' => 'api#old_index'
   match 'api' => 'api#old_index'
-  
+
   resources :alerts, :only => [:new, :create], :path_names => {:new => 'signup'} do
     collection do
       get :statistics
@@ -52,7 +52,7 @@ PlanningalertsApp::Application.routes.draw do
     end
     resources :comments, :only => [:create, :show]
   end
-  
+
   resources :comments, :only => [:index] do
     resources :reports, :only => [:new, :create]
   end
@@ -90,7 +90,7 @@ PlanningalertsApp::Application.routes.draw do
   match 'donate/cancel' => 'static#donate_cancel'
 
   match '/' => 'applications#address', :as => :address_applications
-  
+
   match 'layar/getpoi' => 'layar#getpoi'
 
   match 'comments/:id/confirmed' => 'comments#confirmed', :as => :confirmed_comment
