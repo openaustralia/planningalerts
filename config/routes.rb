@@ -41,6 +41,7 @@ PlanningalertsApp::Application.routes.draw do
   scope :format => true do
     get 'authorities/:authority_id/applications' => 'applications#api_authority', authority_id: true, as: nil
     get 'applications' => 'applications#api_postcode', postcode: true, as: nil
+    get 'applications' => 'applications#api_suburb', suburb: true, as: nil
     get 'authorities/:authority_id/applications' => 'applications#api', as: nil
     get 'applications' => 'applications#api', as: nil
   end

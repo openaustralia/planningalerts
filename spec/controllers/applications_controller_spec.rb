@@ -287,7 +287,7 @@ describe ApplicationsController do
         result, scope = mock, mock
         Application.should_receive(:where).with(:suburb => "Katoomba").and_return(scope)
         scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
-        get :api, :format => "rss", :suburb => "Katoomba"
+        get :api_suburb, :format => "rss", :suburb => "Katoomba"
         assigns[:applications].should == result
         assigns[:description].should == "Recent applications in Katoomba"
       end
@@ -295,10 +295,11 @@ describe ApplicationsController do
 
     describe "search by suburb and state" do
       it "should find recent applications for a suburb and state" do
-        result, scope = mock, mock
-        Application.should_receive(:where).with(:suburb => "Katoomba", :state => "NSW").and_return(scope)
-        scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
-        get :api, :format => "rss", :suburb => "Katoomba", :state => "NSW"
+        result, scope1, scope2 = mock, mock, mock
+        Application.should_receive(:where).with(:suburb => "Katoomba").and_return(scope1)
+        scope1.should_receive(:where).with(:state => "NSW").and_return(scope2)
+        scope2.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
+        get :api_suburb, :format => "rss", :suburb => "Katoomba", :state => "NSW"
         assigns[:applications].should == result
         assigns[:description].should == "Recent applications in Katoomba, NSW"
       end

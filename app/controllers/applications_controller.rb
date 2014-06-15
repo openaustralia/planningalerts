@@ -2,7 +2,7 @@ require 'will_paginate/array'
 
 class ApplicationsController < ApplicationController
 
-  before_filter :check_api_parameters, only: [:api_authority, :api]
+  before_filter :check_api_parameters, only: [:api_authority, :api_postcode, :api_suburb, :api]
 
   def check_api_parameters
     valid_parameter_keys = [
@@ -68,18 +68,20 @@ class ApplicationsController < ApplicationController
     api_render(Application.where(:postcode => params[:postcode]))
   end
 
+  def api_suburb
+    apps = Application.where(:suburb => params[:suburb])
+    @description = "Recent applications in #{params[:suburb]}"
+    if params[:state]
+      @description += ", #{params[:state]}"
+      apps = apps.where(:state => params[:state])
+    end
+    api_render(apps)
+  end
+
   def api
     @description = "Recent applications"
 
-    if params[:suburb]
-      if params[:state]
-        apps = Application.where(:suburb => params[:suburb], :state => params[:state])
-        @description << " in #{params[:suburb]}, #{params[:state]}"
-      else
-        apps = Application.where(:suburb => params[:suburb])
-        @description << " in #{params[:suburb]}"
-      end
-    elsif params[:address] || (params[:lat] && params[:lng])
+    if params[:address] || (params[:lat] && params[:lng])
       radius = params[:radius] || params[:area_size] || 2000
       if params[:address]
         location = Location.geocode(params[:address])
