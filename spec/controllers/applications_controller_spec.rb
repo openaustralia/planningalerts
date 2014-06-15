@@ -32,12 +32,34 @@ describe ApplicationsController do
     end
 
     describe "json api" do
-      it "should find recent applications" do
+      it "should not find recent applications if no api key is given" do
         VCR.use_cassette('planningalerts') do
           result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
           Application.stub_chain(:where, :paginate).and_return([result])
         end
         get :index, :format => "js"
+        response.status.should == 401
+        response.body.should == '{"error":"not authorised"}'
+      end
+
+      it "should error if invalid api key is given" do
+        VCR.use_cassette('planningalerts') do
+          result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+          Application.stub_chain(:where, :paginate).and_return([result])
+        end
+        get :index, :key => "jsdfhsd", :format => "js"
+        response.status.should == 401
+        response.body.should == '{"error":"not authorised"}'
+      end
+
+      it "should find recent applications if api key is given" do
+        key = ApiKey.create
+        VCR.use_cassette('planningalerts') do
+          result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+          Application.stub_chain(:where, :paginate).and_return([result])
+        end
+        get :index, :key => key.key, :format => "js"
+        response.status.should == 200
         JSON.parse(response.body).should == [{
           "application" => {
             "id" => 10,
@@ -65,7 +87,7 @@ describe ApplicationsController do
           result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
           Application.stub_chain(:where, :paginate).and_return([result])
         end
-        get :index, :format => "js", :callback => "foobar"
+        get :index, :format => "js", :postcode => "2780", :callback => "foobar"
         response.body[0..6].should == "foobar("
         response.body[-1..-1].should == ")"
         JSON.parse(response.body[7..-2]).should == [{
@@ -93,13 +115,14 @@ describe ApplicationsController do
 
     describe "json api version 2" do
       it "should find recent applications" do
+        key = ApiKey.create
         VCR.use_cassette('planningalerts') do
           application = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
           result = [application]
           result.stub!(:total_pages).and_return(5)
           Application.stub_chain(:where, :paginate).and_return(result)
         end
-        get :index, :format => "js", :v => "2"
+        get :index, :format => "js", :v => "2", :key => key.key
         JSON.parse(response.body).should == {
           "application_count" => 1,
           "page_count" => 5,
