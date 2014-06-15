@@ -37,6 +37,12 @@ PlanningalertsApp::Application.routes.draw do
     end
   end
 
+  # Route API separately
+  scope :format => true do
+    get 'applications' => 'applications#api'
+    get 'authorities/:authority_id/applications' => 'applications#api'
+  end
+
   resources :applications, :only => [:index, :show] do
     member do
       get :nearby
