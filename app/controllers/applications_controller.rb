@@ -106,12 +106,9 @@ class ApplicationsController < ApplicationController
       @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
       apps = @authority.applications
       @description << " from #{@authority.full_name_and_state}"
-      # Don't want the RSS feed to match the paging
-      @rss = authority_applications_url(params.merge(:format => "rss", :page => nil))
     else
       @description << " within the last #{Application.nearby_and_recent_max_age_months} months"
       apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
-      @rss = nil
     end
 
     @applications = apps.paginate(:page => params[:page], :per_page => 30)
