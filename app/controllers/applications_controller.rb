@@ -56,24 +56,16 @@ class ApplicationsController < ApplicationController
   end
 
   def api_authority
-    @description = "Recent applications"
-
     # TODO Handle the situation where the authority name isn't found
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
-    apps = @authority.applications
-    @description << " from #{@authority.full_name_and_state}"
-
-    api_render(apps)
+    @description = "Recent applications from #{@authority.full_name_and_state}"
+    api_render(@authority.applications)
   end
 
   def api_postcode
-    @description = "Recent applications"
-
     # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
-    apps = Application.where(:postcode => params[:postcode])
-    @description << " in postcode #{params[:postcode]}"
-
-    api_render(apps)
+    @description = "Recent applications in postcode #{params[:postcode]}"
+    api_render(Application.where(:postcode => params[:postcode]))
   end
 
   def api
