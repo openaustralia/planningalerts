@@ -23,12 +23,30 @@ describe ApplicationsController do
       end
     end
 
-    it "should find recent applications" do
+    it "should not find recent applications if no api key is given" do
       result = mock
       Application.stub_chain(:where, :paginate).and_return(result)
       get :index, :format => "rss"
+      response.status.should == 401
+      response.body.should == "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<hash>\n  <error>not authorised</error>\n</hash>\n"
+    end
+
+    it "should not find recent applications if invalid api key is given" do
+      result = mock
+      Application.stub_chain(:where, :paginate).and_return(result)
+      get :index, :format => "rss", :key => "foobar"
+      response.status.should == 401
+      response.body.should == "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<hash>\n  <error>not authorised</error>\n</hash>\n"
+    end
+
+    it "should find recent applications if api key is given" do
+      key = ApiKey.create
+      result = mock
+      Application.stub_chain(:where, :paginate).and_return(result)
+      get :index, :format => "rss", :key => key.key
       assigns[:applications].should == result
       assigns[:description].should == "Recent applications within the last 2 months"
+      response.status.should == 200
     end
 
     describe "json api" do

@@ -89,8 +89,12 @@ class ApplicationsController < ApplicationController
       # TODO: Move the template over to using an xml builder
       format.rss do
         #ApiStatistic.log(request)
-        render params[:style] == "html" ? "index_html" : "index",
-          :format => :rss, :layout => false, :content_type => Mime::XML
+        if !full || ApiKey.where(key: params[:key]).exists?
+          render params[:style] == "html" ? "index_html" : "index",
+            :format => :rss, :layout => false, :content_type => Mime::XML
+        else
+          render xml: {error: "not authorised"}, status: 401
+        end
       end
       format.js do
         #ApiStatistic.log(request)
