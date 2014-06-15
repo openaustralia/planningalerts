@@ -45,33 +45,16 @@ class ApiController < ApplicationController
   end
 
   def all
-    @description = "Recent applications within the last #{Application.nearby_and_recent_max_age_months} months"
-    apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
-    @applications = apps.paginate(:page => params[:page], :per_page => per_page)
-
-    respond_to do |format|
-      # TODO: Move the template over to using an xml builder
-      format.rss do
-        #ApiStatistic.log(request)
-        if ApiKey.where(key: params[:key]).exists?
-          render params[:style] == "html" ? "index_html" : "index",
-            :format => :rss, :layout => false, :content_type => Mime::XML
-        else
+    if ApiKey.where(key: params[:key]).exists?
+      api_render(Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago),
+        "Recent applications within the last #{Application.nearby_and_recent_max_age_months} months")
+    else
+      #ApiStatistic.log(request)
+      respond_to do |format|
+        format.rss do
           render xml: {error: "not authorised"}, status: 401
         end
-      end
-      format.js do
-        #ApiStatistic.log(request)
-        if params[:v] == "2"
-          s = {:applications => @applications, :application_count => @applications.count, :page_count => @applications.total_pages}
-        else
-          s = @applications
-        end
-        j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
-          :include => {:authority => {:only => [:full_name]}})
-        if ApiKey.where(key: params[:key]).exists?
-          render :json => j, :callback => params[:callback]
-        else
+        format.js do
           render json: {error: "not authorised"}, status: 401
         end
       end
@@ -132,6 +115,7 @@ class ApiController < ApplicationController
     @applications = apps.paginate(:page => params[:page], :per_page => per_page)
     @description = description
 
+    #ApiStatistic.log(request)
     respond_to do |format|
       # TODO: Move the template over to using an xml builder
       format.rss do
@@ -139,7 +123,6 @@ class ApiController < ApplicationController
           :format => :rss, :layout => false, :content_type => Mime::XML
       end
       format.js do
-        #ApiStatistic.log(request)
         if params[:v] == "2"
           s = {:applications => @applications, :application_count => @applications.count, :page_count => @applications.total_pages}
         else
