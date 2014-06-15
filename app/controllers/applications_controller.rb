@@ -2,7 +2,8 @@ require 'will_paginate/array'
 
 class ApplicationsController < ApplicationController
 
-  before_filter :check_api_parameters, only: [:api_authority, :api_postcode, :api_suburb, :api]
+  before_filter :check_api_parameters, only: [:api_authority, :api_postcode, :api_suburb,
+    :api_address, :api]
 
   def check_api_parameters
     valid_parameter_keys = [
@@ -78,21 +79,23 @@ class ApplicationsController < ApplicationController
     api_render(apps)
   end
 
+  def api_address
+    radius = params[:radius] || params[:area_size] || 2000
+    if params[:address]
+      location = Location.geocode(params[:address])
+      location_text = location.full_address
+    else
+      location = Location.new(params[:lat].to_f, params[:lng].to_f)
+      location_text = location.to_s
+    end
+    @description = "Recent applications within #{help.meters_in_words(radius.to_i)} of #{location_text}"
+    api_render(Application.near([location.lat, location.lng], radius.to_f / 1000, :units => :km))
+  end
+
   def api
     @description = "Recent applications"
 
-    if params[:address] || (params[:lat] && params[:lng])
-      radius = params[:radius] || params[:area_size] || 2000
-      if params[:address]
-        location = Location.geocode(params[:address])
-        location_text = location.full_address
-      else
-        location = Location.new(params[:lat].to_f, params[:lng].to_f)
-        location_text = location.to_s
-      end
-      @description << " within #{help.meters_in_words(radius.to_i)} of #{location_text}"
-      apps = Application.near([location.lat, location.lng], radius.to_f / 1000, :units => :km)
-    elsif params[:bottom_left_lat] && params[:bottom_left_lng] && params[:top_right_lat] && params[:top_right_lng]
+    if params[:bottom_left_lat] && params[:bottom_left_lng] && params[:top_right_lat] && params[:top_right_lng]
       lat0, lng0 = params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f
       lat1, lng1 = params[:top_right_lat].to_f, params[:top_right_lng].to_f
       @description << " in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
