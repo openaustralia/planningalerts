@@ -22,14 +22,16 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  def api_authority
+  def per_page
     # Allow to set number of returned applications up to a maximum
     if params[:count] && params[:count].to_i <= Application.per_page
-      per_page = params[:count].to_i
+      params[:count].to_i
     else
-      per_page = Application.per_page
+      Application.per_page
     end
+  end
 
+  def api_authority
     @description = "Recent applications"
 
     # TODO Handle the situation where the authority name isn't found
@@ -60,13 +62,6 @@ class ApplicationsController < ApplicationController
   end
 
   def api
-    # Allow to set number of returned applications up to a maximum
-    if params[:count] && params[:count].to_i <= Application.per_page
-      per_page = params[:count].to_i
-    else
-      per_page = Application.per_page
-    end
-
     @description = "Recent applications"
 
     if params[:postcode]
