@@ -16,10 +16,10 @@ describe ApplicationsController do
         get :index, :address => "24 Bruce Road Glenbrook, NSW 2773", :radius => 4000
         assigns[:rss].should == "http://test.host/applications.rss?address=24+Bruce+Road+Glenbrook%2C+NSW+2773&radius=4000"
       end
-      
+
       it "should not put the page parameter in the rss feed" do
         get :index, :address => "24 Bruce Road Glenbrook, NSW 2773", :radius => 4000, :page => 2
-        assigns[:rss].should == "http://test.host/applications.rss?address=24+Bruce+Road+Glenbrook%2C+NSW+2773&radius=4000"      
+        assigns[:rss].should == "http://test.host/applications.rss?address=24+Bruce+Road+Glenbrook%2C+NSW+2773&radius=4000"
       end
     end
 
@@ -158,7 +158,7 @@ describe ApplicationsController do
         Location.should_receive(:geocode).with("24 Bruce Road Glenbrook").and_return(location)
         Application.stub_chain(:near, :paginate).and_return(@result)
       end
-      
+
       it "should find recent applications near the address" do
         get :index, :format => "rss", :address => "24 Bruce Road Glenbrook", :radius => 4000
         assigns[:applications].should == @result
@@ -194,7 +194,7 @@ describe ApplicationsController do
         response.code.should == "200"
       end
     end
-    
+
     describe "search by address no radius" do
       it "should use a search radius of 2000 when none is specified" do
         location = mock(:lat => 1.0, :lng => 2.0, :full_address => "24 Bruce Road, Glenbrook NSW 2773")
@@ -205,10 +205,10 @@ describe ApplicationsController do
 
         get :index, :address => "24 Bruce Road Glenbrook"
         assigns[:applications].should == result
-        assigns[:description].should == "Recent applications within 2 km of 24 Bruce Road, Glenbrook NSW 2773"      
+        assigns[:description].should == "Recent applications within 2 km of 24 Bruce Road, Glenbrook NSW 2773"
       end
     end
-    
+
     describe "search by point" do
       before :each do
         @result = mock
@@ -228,7 +228,7 @@ describe ApplicationsController do
         assigns[:description].should == "Recent applications within 4 km of 1.0,2.0"
       end
     end
-    
+
     describe "search by area" do
       it "should find recent applications in an area" do
         result, scope = mock, mock
@@ -241,11 +241,11 @@ describe ApplicationsController do
         assigns[:description].should == "Recent applications in the area (1.0,2.0) (3.0,4.0)"
       end
     end
-    
+
     describe "search by authority" do
       it "should find recent applications for an authority" do
         authority, result, scope = mock, mock, mock
-        
+
         Authority.should_receive(:find_by_short_name_encoded).with("blue_mountains").and_return(authority)
         authority.should_receive(:applications).and_return(scope)
         scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
@@ -255,14 +255,14 @@ describe ApplicationsController do
         assigns[:applications].should == result
         assigns[:description].should == "Recent applications from Blue Mountains City Council"
       end
-      
+
       it "should give a 404 when an invalid authority_id is used" do
         Authority.should_receive(:find_by_short_name_encoded).with("this_authority_does_not_exist").and_return(nil)
-        
+
         lambda{get :index, :authority_id => "this_authority_does_not_exist"}.should raise_error ActiveRecord::RecordNotFound
       end
     end
-    
+
     describe "search by postcode" do
       it "should find recent applications for a postcode" do
         result, scope = mock, mock
@@ -273,7 +273,7 @@ describe ApplicationsController do
         assigns[:description].should == "Recent applications in postcode 2780"
       end
     end
-    
+
     describe "search by suburb" do
       it "should find recent applications for a suburb" do
         result, scope = mock, mock
@@ -284,7 +284,7 @@ describe ApplicationsController do
         assigns[:description].should == "Recent applications in Katoomba"
       end
     end
-    
+
     describe "search by suburb and state" do
       it "should find recent applications for a suburb and state" do
         result, scope = mock, mock
@@ -295,16 +295,16 @@ describe ApplicationsController do
         assigns[:description].should == "Recent applications in Katoomba, NSW"
       end
     end
-    
+
   end
-  
+
   describe "#show" do
     it "should gracefully handle an application without any geocoded information" do
       app = mock_model(Application, :address => "An address that can't be geocoded", :date_scraped => Date.new(2010,1,1),
         :description => "foo", :location => nil, :find_all_nearest_or_recent => [])
       Application.should_receive(:find).with("1").and_return(app)
       get :show, :id => 1
-      
+
       assigns[:application].should == app
     end
   end
