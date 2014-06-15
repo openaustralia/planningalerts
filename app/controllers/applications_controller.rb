@@ -99,13 +99,6 @@ class ApplicationsController < ApplicationController
   end
 
   def index
-    per_page = 30
-
-    # Allow to set number of returned applications up to a maximum
-    if params[:count] && params[:count].to_i <= per_page
-      per_page = params[:count].to_i
-    end
-
     @description = "Recent applications"
 
     if params[:authority_id]
@@ -129,7 +122,7 @@ class ApplicationsController < ApplicationController
       @rss = applications_url(params.merge(:format => "rss", :page => nil))
     end
 
-    @applications = apps.paginate(:page => params[:page], :per_page => per_page)
+    @applications = apps.paginate(:page => params[:page], :per_page => 30)
   end
 
   # JSON api for returning the number of scraped applications per day
