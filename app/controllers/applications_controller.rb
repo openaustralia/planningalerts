@@ -3,7 +3,7 @@ require 'will_paginate/array'
 class ApplicationsController < ApplicationController
 
   before_filter :check_api_parameters, only: [:api_authority, :api_postcode, :api_suburb,
-    :api_address, :api_area, :api]
+    :api_point, :api_area, :api_all]
 
   def check_api_parameters
     valid_parameter_keys = [
@@ -79,7 +79,7 @@ class ApplicationsController < ApplicationController
     api_render(apps)
   end
 
-  def api_address
+  def api_point
     radius = params[:radius] || params[:area_size] || 2000
     if params[:address]
       location = Location.geocode(params[:address])
@@ -99,7 +99,7 @@ class ApplicationsController < ApplicationController
     api_render(Application.where('lat > ? AND lng > ? AND lat < ? AND lng < ?', lat0, lng0, lat1, lng1))
   end
 
-  def api
+  def api_all
     @description = "Recent applications"
 
     full = true
