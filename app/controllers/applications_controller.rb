@@ -3,7 +3,7 @@ require 'will_paginate/array'
 class ApplicationsController < ApplicationController
 
   before_filter :check_api_parameters, only: [:api_authority, :api_postcode, :api_suburb,
-    :api_address, :api]
+    :api_address, :api_area, :api]
 
   def check_api_parameters
     valid_parameter_keys = [
@@ -92,19 +92,19 @@ class ApplicationsController < ApplicationController
     api_render(Application.near([location.lat, location.lng], radius.to_f / 1000, :units => :km))
   end
 
+  def api_area
+    lat0, lng0 = params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f
+    lat1, lng1 = params[:top_right_lat].to_f, params[:top_right_lng].to_f
+    @description = "Recent applications in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
+    api_render(Application.where('lat > ? AND lng > ? AND lat < ? AND lng < ?', lat0, lng0, lat1, lng1))
+  end
+
   def api
     @description = "Recent applications"
 
-    if params[:bottom_left_lat] && params[:bottom_left_lng] && params[:top_right_lat] && params[:top_right_lng]
-      lat0, lng0 = params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f
-      lat1, lng1 = params[:top_right_lat].to_f, params[:top_right_lng].to_f
-      @description << " in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
-      apps = Application.where('lat > ? AND lng > ? AND lat < ? AND lng < ?', lat0, lng0, lat1, lng1)
-    else
-      full = true
-      @description << " within the last #{Application.nearby_and_recent_max_age_months} months"
-      apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
-    end
+    full = true
+    @description << " within the last #{Application.nearby_and_recent_max_age_months} months"
+    apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
 
     @applications = apps.paginate(:page => params[:page], :per_page => per_page)
 

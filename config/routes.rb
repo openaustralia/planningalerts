@@ -44,6 +44,9 @@ PlanningalertsApp::Application.routes.draw do
     get 'applications' => 'applications#api_suburb', suburb: true, as: nil
     get 'applications' => 'applications#api_address', address: true, as: nil
     get 'applications' => 'applications#api_address', lat: true, lng:true, as: nil
+    get 'applications' => 'applications#api_area', bottom_left_lat: true, bottom_left_lng:true,
+      top_right_lat: true, top_right_lng: true, as: nil
+
     get 'authorities/:authority_id/applications' => 'applications#api', as: nil
     get 'applications' => 'applications#api', as: nil
   end

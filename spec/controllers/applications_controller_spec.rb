@@ -243,7 +243,7 @@ describe ApplicationsController do
         Application.should_receive(:where).with("lat > ? AND lng > ? AND lat < ? AND lng < ?", 1.0, 2.0, 3.0, 4.0).and_return(scope)
         scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
 
-        get :api, :format => "rss", :bottom_left_lat => 1.0, :bottom_left_lng => 2.0,
+        get :api_area, :format => "rss", :bottom_left_lat => 1.0, :bottom_left_lng => 2.0,
           :top_right_lat => 3.0, :top_right_lng => 4.0
         assigns[:applications].should == result
         assigns[:description].should == "Recent applications in the area (1.0,2.0) (3.0,4.0)"
