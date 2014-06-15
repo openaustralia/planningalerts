@@ -2,7 +2,9 @@ require 'will_paginate/array'
 
 class ApplicationsController < ApplicationController
 
-  def api_authority
+  before_filter :check_api_parameters, only: [:api_authority, :api]
+
+  def check_api_parameters
     valid_parameter_keys = [
       "format", "action", "controller",
       "authority_id",
@@ -17,9 +19,10 @@ class ApplicationsController < ApplicationController
     invalid_parameter_keys = params.keys - valid_parameter_keys
     unless invalid_parameter_keys.empty?
       render :text => "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.sort.join(', ')}", :status => 400
-      return
     end
+  end
 
+  def api_authority
     # Allow to set number of returned applications up to a maximum
     if params[:count] && params[:count].to_i <= Application.per_page
       per_page = params[:count].to_i
@@ -57,23 +60,6 @@ class ApplicationsController < ApplicationController
   end
 
   def api
-    valid_parameter_keys = [
-      "format", "action", "controller",
-      "authority_id",
-      "page", "style",
-      "postcode",
-      "suburb", "state",
-      "address", "lat", "lng", "radius", "area_size",
-      "bottom_left_lat", "bottom_left_lng", "top_right_lat", "top_right_lng",
-      "callback", "count", "v", "key"]
-
-    # Parameter error checking (only do it on the API calls)
-    invalid_parameter_keys = params.keys - valid_parameter_keys
-    unless invalid_parameter_keys.empty?
-      render :text => "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.sort.join(', ')}", :status => 400
-      return
-    end
-
     # Allow to set number of returned applications up to a maximum
     if params[:count] && params[:count].to_i <= Application.per_page
       per_page = params[:count].to_i
