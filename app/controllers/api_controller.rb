@@ -2,20 +2,20 @@ class ApiController < ApplicationController
   caches_page :howto
   before_filter :check_api_parameters, except: [:old_index, :howto]
 
-  def api_authority
+  def authority
     # TODO Handle the situation where the authority name isn't found
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
     @description = "Recent applications from #{@authority.full_name_and_state}"
     api_render(@authority.applications)
   end
 
-  def api_postcode
+  def postcode
     # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
     @description = "Recent applications in postcode #{params[:postcode]}"
     api_render(Application.where(:postcode => params[:postcode]))
   end
 
-  def api_suburb
+  def suburb
     apps = Application.where(:suburb => params[:suburb])
     @description = "Recent applications in #{params[:suburb]}"
     if params[:state]
@@ -25,7 +25,7 @@ class ApiController < ApplicationController
     api_render(apps)
   end
 
-  def api_point
+  def point
     radius = params[:radius] || params[:area_size] || 2000
     if params[:address]
       location = Location.geocode(params[:address])
@@ -38,14 +38,14 @@ class ApiController < ApplicationController
     api_render(Application.near([location.lat, location.lng], radius.to_f / 1000, :units => :km))
   end
 
-  def api_area
+  def area
     lat0, lng0 = params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f
     lat1, lng1 = params[:top_right_lat].to_f, params[:top_right_lng].to_f
     @description = "Recent applications in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
     api_render(Application.where('lat > ? AND lng > ? AND lat < ? AND lng < ?', lat0, lng0, lat1, lng1))
   end
 
-  def api_all
+  def all
     @description = "Recent applications within the last #{Application.nearby_and_recent_max_age_months} months"
     apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
     @applications = apps.paginate(:page => params[:page], :per_page => per_page)
