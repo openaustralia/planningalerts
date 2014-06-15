@@ -11,16 +11,6 @@ describe ApplicationsController do
         get :index
         assigns[:rss].should be_nil
       end
-
-      it "should provide a link to the search by address" do
-        get :index, :address => "24 Bruce Road Glenbrook, NSW 2773", :radius => 4000
-        assigns[:rss].should == "http://test.host/applications.rss?address=24+Bruce+Road+Glenbrook%2C+NSW+2773&radius=4000"
-      end
-
-      it "should not put the page parameter in the rss feed" do
-        get :index, :address => "24 Bruce Road Glenbrook, NSW 2773", :radius => 4000, :page => 2
-        assigns[:rss].should == "http://test.host/applications.rss?address=24+Bruce+Road+Glenbrook%2C+NSW+2773&radius=4000"
-      end
     end
 
     it "should not find recent applications if no api key is given" do
@@ -221,7 +211,7 @@ describe ApplicationsController do
         Location.should_receive(:geocode).with("24 Bruce Road Glenbrook").and_return(location)
         Application.stub_chain(:near, :paginate).and_return(result)
 
-        get :index, :address => "24 Bruce Road Glenbrook"
+        get :api, :address => "24 Bruce Road Glenbrook", :format => "rss"
         assigns[:applications].should == result
         assigns[:description].should == "Recent applications within 2 km of 24 Bruce Road, Glenbrook NSW 2773"
       end
