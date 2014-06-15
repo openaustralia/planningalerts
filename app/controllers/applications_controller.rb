@@ -100,19 +100,15 @@ class ApplicationsController < ApplicationController
   end
 
   def api_all
-    @description = "Recent applications"
-
-    full = true
-    @description << " within the last #{Application.nearby_and_recent_max_age_months} months"
+    @description = "Recent applications within the last #{Application.nearby_and_recent_max_age_months} months"
     apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
-
     @applications = apps.paginate(:page => params[:page], :per_page => per_page)
 
     respond_to do |format|
       # TODO: Move the template over to using an xml builder
       format.rss do
         #ApiStatistic.log(request)
-        if !full || ApiKey.where(key: params[:key]).exists?
+        if ApiKey.where(key: params[:key]).exists?
           render params[:style] == "html" ? "index_html" : "index",
             :format => :rss, :layout => false, :content_type => Mime::XML
         else
@@ -128,7 +124,7 @@ class ApplicationsController < ApplicationController
         end
         j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
           :include => {:authority => {:only => [:full_name]}})
-        if !full || ApiKey.where(key: params[:key]).exists?
+        if ApiKey.where(key: params[:key]).exists?
           render :json => j, :callback => params[:callback]
         else
           render json: {error: "not authorised"}, status: 401
