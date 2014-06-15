@@ -4,25 +4,24 @@ class ApiController < ApplicationController
 
   def authority
     # TODO Handle the situation where the authority name isn't found
-    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
-    @description = "Recent applications from #{@authority.full_name_and_state}"
-    api_render(@authority.applications)
+    authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    api_render(authority.applications, "Recent applications from #{authority.full_name_and_state}")
   end
 
   def postcode
     # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
-    @description = "Recent applications in postcode #{params[:postcode]}"
-    api_render(Application.where(:postcode => params[:postcode]))
+    api_render(Application.where(:postcode => params[:postcode]),
+      "Recent applications in postcode #{params[:postcode]}")
   end
 
   def suburb
     apps = Application.where(:suburb => params[:suburb])
-    @description = "Recent applications in #{params[:suburb]}"
+    description = "Recent applications in #{params[:suburb]}"
     if params[:state]
-      @description += ", #{params[:state]}"
+      description += ", #{params[:state]}"
       apps = apps.where(:state => params[:state])
     end
-    api_render(apps)
+    api_render(apps, description)
   end
 
   def point
@@ -34,15 +33,15 @@ class ApiController < ApplicationController
       location = Location.new(params[:lat].to_f, params[:lng].to_f)
       location_text = location.to_s
     end
-    @description = "Recent applications within #{help.meters_in_words(radius.to_i)} of #{location_text}"
-    api_render(Application.near([location.lat, location.lng], radius.to_f / 1000, :units => :km))
+    api_render(Application.near([location.lat, location.lng], radius.to_f / 1000, :units => :km),
+      "Recent applications within #{help.meters_in_words(radius.to_i)} of #{location_text}")
   end
 
   def area
     lat0, lng0 = params[:bottom_left_lat].to_f, params[:bottom_left_lng].to_f
     lat1, lng1 = params[:top_right_lat].to_f, params[:top_right_lng].to_f
-    @description = "Recent applications in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
-    api_render(Application.where('lat > ? AND lng > ? AND lat < ? AND lng < ?', lat0, lng0, lat1, lng1))
+    api_render(Application.where('lat > ? AND lng > ? AND lat < ? AND lng < ?', lat0, lng0, lat1, lng1),
+      "Recent applications in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})")
   end
 
   def all
@@ -129,9 +128,9 @@ class ApiController < ApplicationController
     end
   end
 
-  # TODO don't use instance variables
-  def api_render(apps)
+  def api_render(apps, description)
     @applications = apps.paginate(:page => params[:page], :per_page => per_page)
+    @description = description
 
     respond_to do |format|
       # TODO: Move the template over to using an xml builder
