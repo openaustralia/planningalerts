@@ -55,12 +55,17 @@ class ApiController < ApplicationController
 
       # Max number of records that we'll show
       limit = 10
-      #apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
-      #applications = apps.paginate(:page => params[:page], :per_page => per_page)
+
+      applications = apps.limit(limit).to_a
+      if applications.empty?
+        max_id = Application.reorder("id").last.id
+      else
+        max_id = applications.last.id
+      end
 
       respond_to do |format|
         format.js do
-          s = {:applications => apps.limit(limit), :application_count => apps.count, :max_id => apps.limit(limit).last.id}
+          s = {:applications => applications, :application_count => apps.count, :max_id => max_id}
           j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
             :include => {:authority => {:only => [:full_name]}})
           render :json => j, :callback => params[:callback]
