@@ -46,14 +46,27 @@ class ApiController < ApplicationController
 
   def all
     if ApiKey.where(key: params[:key]).exists?
-      api_render(Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago),
-        "Recent applications within the last #{Application.nearby_and_recent_max_age_months} months")
+      apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
+      description = "Recent applications within the last #{Application.nearby_and_recent_max_age_months} months"
+      @applications = apps.paginate(:page => params[:page], :per_page => per_page)
+      @description = description
+
+      #ApiStatistic.log(request)
+      respond_to do |format|
+        format.js do
+          if params[:v] == "2"
+            s = {:applications => @applications, :application_count => @applications.count, :page_count => @applications.total_pages}
+          else
+            s = @applications
+          end
+          j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
+            :include => {:authority => {:only => [:full_name]}})
+          render :json => j, :callback => params[:callback]
+        end
+      end
     else
       #ApiStatistic.log(request)
       respond_to do |format|
-        format.rss do
-          render xml: {error: "not authorised"}, status: 401
-        end
         format.js do
           render json: {error: "not authorised"}, status: 401
         end

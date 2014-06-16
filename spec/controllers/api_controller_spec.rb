@@ -3,82 +3,62 @@ require 'spec_helper'
 describe ApiController do
   describe "#all" do
     describe "rss" do
+      it "should not support rss" do
+        key = ApiKey.create
+        get :all, :format => "rss", :key => key.key
+        response.status.should == 406
+      end
+    end
+    
+    describe "json" do
       it "should not find recent applications if no api key is given" do
-        result = mock
-        Application.stub_chain(:where, :paginate).and_return(result)
-        get :all, :format => "rss"
+        VCR.use_cassette('planningalerts') do
+          result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+          Application.stub_chain(:where, :paginate).and_return([result])
+        end
+        get :all, :format => "js"
         response.status.should == 401
-        response.body.should == "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<hash>\n  <error>not authorised</error>\n</hash>\n"
+        response.body.should == '{"error":"not authorised"}'
       end
 
-      it "should not find recent applications if invalid api key is given" do
-        result = mock
-        Application.stub_chain(:where, :paginate).and_return(result)
-        get :all, :format => "rss", :key => "foobar"
+      it "should error if invalid api key is given" do
+        VCR.use_cassette('planningalerts') do
+          result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+          Application.stub_chain(:where, :paginate).and_return([result])
+        end
+        get :all, :key => "jsdfhsd", :format => "js"
         response.status.should == 401
-        response.body.should == "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<hash>\n  <error>not authorised</error>\n</hash>\n"
+        response.body.should == '{"error":"not authorised"}'
       end
 
       it "should find recent applications if api key is given" do
         key = ApiKey.create
-        result = mock
-        Application.stub_chain(:where, :paginate).and_return(result)
-        get :all, :format => "rss", :key => key.key
-        assigns[:applications].should == result
-        assigns[:description].should == "Recent applications within the last 2 months"
+        VCR.use_cassette('planningalerts') do
+          result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+          Application.stub_chain(:where, :paginate).and_return([result])
+        end
+        get :all, :key => key.key, :format => "js"
         response.status.should == 200
-      end
-
-      describe "json" do
-        it "should not find recent applications if no api key is given" do
-          VCR.use_cassette('planningalerts') do
-            result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
-            Application.stub_chain(:where, :paginate).and_return([result])
-          end
-          get :all, :format => "js"
-          response.status.should == 401
-          response.body.should == '{"error":"not authorised"}'
-        end
-
-        it "should error if invalid api key is given" do
-          VCR.use_cassette('planningalerts') do
-            result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
-            Application.stub_chain(:where, :paginate).and_return([result])
-          end
-          get :all, :key => "jsdfhsd", :format => "js"
-          response.status.should == 401
-          response.body.should == '{"error":"not authorised"}'
-        end
-
-        it "should find recent applications if api key is given" do
-          key = ApiKey.create
-          VCR.use_cassette('planningalerts') do
-            result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
-            Application.stub_chain(:where, :paginate).and_return([result])
-          end
-          get :all, :key => key.key, :format => "js"
-          response.status.should == 200
-          JSON.parse(response.body).should == [{
-            "application" => {
-              "id" => 10,
-              "council_reference" => "001",
-              "address" => "A test address",
-              "on_notice_from" => nil,
-              "on_notice_to" => nil,
-              "authority" => {
-                "full_name" => "Acme Local Planning Authority"
-              },
-              "no_alerted" => nil,
-              "description" => "Pretty",
-              "comment_url" => nil,
-              "info_url" => "http://foo.com",
-              "date_received" => nil,
-              "lat" => nil,
-              "lng" => nil,
-              "date_scraped" => "2001-01-01T00:00:00Z",
-            }
-          }]
-        end
+        JSON.parse(response.body).should == [{
+          "application" => {
+            "id" => 10,
+            "council_reference" => "001",
+            "address" => "A test address",
+            "on_notice_from" => nil,
+            "on_notice_to" => nil,
+            "authority" => {
+              "full_name" => "Acme Local Planning Authority"
+            },
+            "no_alerted" => nil,
+            "description" => "Pretty",
+            "comment_url" => nil,
+            "info_url" => "http://foo.com",
+            "date_received" => nil,
+            "lat" => nil,
+            "lng" => nil,
+            "date_scraped" => "2001-01-01T00:00:00Z",
+          }
+        }]
       end
     end
   end
