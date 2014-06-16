@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140616054356) do
+ActiveRecord::Schema.define(:version => 20140616061712) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20140616054356) do
     t.integer  "api_key_id"
   end
 
+  add_index "api_statistics", ["api_key_id"], :name => "index_api_statistics_on_api_key_id"
   add_index "api_statistics", ["query_time"], :name => "index_api_statistics_on_query_time"
 
   create_table "application_redirects", :force => true do |t|
