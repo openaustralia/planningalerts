@@ -51,6 +51,8 @@ class ApiController < ApplicationController
     if ApiKey.where(key: params[:key]).exists?
       #ApiStatistic.log(request)
       apps = Application.reorder("id")
+      apps = apps.where("id > ?", params["since_id"]) if params["since_id"]
+
       # Max number of records that we'll show
       limit = 10
       #apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
@@ -105,7 +107,7 @@ class ApiController < ApplicationController
       "suburb", "state",
       "address", "lat", "lng", "radius", "area_size",
       "bottom_left_lat", "bottom_left_lng", "top_right_lat", "top_right_lng",
-      "callback", "count", "v", "key"]
+      "callback", "count", "v", "key", "since_id"]
 
     # Parameter error checking (only do it on the API calls)
     invalid_parameter_keys = params.keys - valid_parameter_keys
