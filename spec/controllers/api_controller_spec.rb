@@ -9,7 +9,7 @@ describe ApiController do
         response.status.should == 406
       end
     end
-    
+
     describe "json" do
       it "should not find recent applications if no api key is given" do
         VCR.use_cassette('planningalerts') do
