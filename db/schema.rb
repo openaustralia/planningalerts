@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140614070201) do
+ActiveRecord::Schema.define(:version => 20140616051124) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -62,6 +62,8 @@ ActiveRecord::Schema.define(:version => 20140614070201) do
     t.text     "query"
     t.text     "user_agent"
   end
+
+  add_index "api_statistics", ["query_time"], :name => "index_api_statistics_on_query_time"
 
   create_table "application_redirects", :force => true do |t|
     t.integer  "application_id"
