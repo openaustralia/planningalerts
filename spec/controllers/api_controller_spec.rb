@@ -41,6 +41,7 @@ describe ApiController do
         response.status.should == 200
         JSON.parse(response.body).should == {
           "application_count" => 1,
+          "max_id" => 10,
           "applications" => [{
             "application" => {
               "id" => 10,

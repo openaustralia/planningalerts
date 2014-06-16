@@ -57,11 +57,9 @@ class ApiController < ApplicationController
       limit = 1000
 
       applications = apps.limit(limit).to_a
-      if applications.empty?
-        max_id = Application.reorder("id").last.id
-      else
-        max_id = applications.last.id
-      end
+      last = applications.last
+      last = Application.reorder("id").last if last.nil?
+      max_id = last.id if last
 
       respond_to do |format|
         format.js do
