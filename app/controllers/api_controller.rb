@@ -50,12 +50,15 @@ class ApiController < ApplicationController
     # TODO Check that params page and v aren't being used
     if ApiKey.where(key: params[:key]).exists?
       #ApiStatistic.log(request)
-      apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
-      applications = apps.paginate(:page => params[:page], :per_page => per_page)
+      apps = Application.reorder("date_scraped ASC")
+      # Max number of records that we'll show
+      limit = 10
+      #apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
+      #applications = apps.paginate(:page => params[:page], :per_page => per_page)
 
       respond_to do |format|
         format.js do
-          s = {:applications => applications, :application_count => applications.count}
+          s = {:applications => apps.limit(limit), :application_count => apps.count}
           j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
             :include => {:authority => {:only => [:full_name]}})
           render :json => j, :callback => params[:callback]
