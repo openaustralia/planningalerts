@@ -47,8 +47,9 @@ class ApiController < ApplicationController
   # Note that this returns results in a slightly different format than the
   # other API calls because the paging is done differently (via scrape time rather than page number)
   def all
-    #ApiStatistic.log(request)
+    # TODO Check that params page and v aren't being used
     if ApiKey.where(key: params[:key]).exists?
+      #ApiStatistic.log(request)
       apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
       applications = apps.paginate(:page => params[:page], :per_page => per_page)
 
