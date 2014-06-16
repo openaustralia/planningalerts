@@ -39,26 +39,29 @@ describe ApiController do
         end
         get :all, :key => key.key, :format => "js"
         response.status.should == 200
-        JSON.parse(response.body).should == [{
-          "application" => {
-            "id" => 10,
-            "council_reference" => "001",
-            "address" => "A test address",
-            "on_notice_from" => nil,
-            "on_notice_to" => nil,
-            "authority" => {
-              "full_name" => "Acme Local Planning Authority"
-            },
-            "no_alerted" => nil,
-            "description" => "Pretty",
-            "comment_url" => nil,
-            "info_url" => "http://foo.com",
-            "date_received" => nil,
-            "lat" => nil,
-            "lng" => nil,
-            "date_scraped" => "2001-01-01T00:00:00Z",
-          }
-        }]
+        JSON.parse(response.body).should == {
+          "application_count" => 1,
+          "applications" => [{
+            "application" => {
+              "id" => 10,
+              "council_reference" => "001",
+              "address" => "A test address",
+              "on_notice_from" => nil,
+              "on_notice_to" => nil,
+              "authority" => {
+                "full_name" => "Acme Local Planning Authority"
+              },
+              "no_alerted" => nil,
+              "description" => "Pretty",
+              "comment_url" => nil,
+              "info_url" => "http://foo.com",
+              "date_received" => nil,
+              "lat" => nil,
+              "lng" => nil,
+              "date_scraped" => "2001-01-01T00:00:00Z",
+            }
+          }]
+        }
       end
     end
   end

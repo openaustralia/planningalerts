@@ -44,6 +44,8 @@ class ApiController < ApplicationController
       "Recent applications in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})")
   end
 
+  # Note that this returns results in a slightly different format than the
+  # other API calls because the paging is done differently (via scrape time rather than page number)
   def all
     if ApiKey.where(key: params[:key]).exists?
       apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
@@ -54,11 +56,7 @@ class ApiController < ApplicationController
       #ApiStatistic.log(request)
       respond_to do |format|
         format.js do
-          if params[:v] == "2"
-            s = {:applications => @applications, :application_count => @applications.count, :page_count => @applications.total_pages}
-          else
-            s = @applications
-          end
+          s = {:applications => @applications, :application_count => @applications.count}
           j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
             :include => {:authority => {:only => [:full_name]}})
           render :json => j, :callback => params[:callback]
