@@ -80,44 +80,6 @@ describe ApiController do
           }]
         end
       end
-
-      describe "json api version 2" do
-        it "should find recent applications" do
-          key = ApiKey.create
-          VCR.use_cassette('planningalerts') do
-            application = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
-            result = [application]
-            result.stub!(:total_pages).and_return(5)
-            Application.stub_chain(:where, :paginate).and_return(result)
-          end
-          get :all, :format => "js", :v => "2", :key => key.key
-          JSON.parse(response.body).should == {
-            "application_count" => 1,
-            "page_count" => 5,
-            "applications" => [{
-              "application" => {
-                "id" => 10,
-                "council_reference" => "001",
-                "address" => "A test address",
-                "on_notice_from" => nil,
-                "on_notice_to" => nil,
-                "authority" => {
-                  "full_name" => "Acme Local Planning Authority"
-                },
-                "no_alerted" => nil,
-                "description" => "Pretty",
-                "comment_url" => nil,
-                "info_url" => "http://foo.com",
-                "date_received" => nil,
-                "lat" => nil,
-                "lng" => nil,
-                "date_scraped" => "2001-01-01T00:00:00Z",
-              }
-            }]
-          }
-        end
-      end
-
     end
   end
 
@@ -159,6 +121,40 @@ describe ApiController do
           "date_scraped" => "2001-01-01T00:00:00Z",
         }
       }]
+    end
+
+    it "should support json api version 2" do
+      VCR.use_cassette('planningalerts') do
+        application = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+        result = [application]
+        result.stub!(:total_pages).and_return(5)
+        Application.stub_chain(:where, :paginate).and_return(result)
+      end
+      get :postcode, :format => "js", :v => "2", :postcode => "2780"
+      JSON.parse(response.body).should == {
+        "application_count" => 1,
+        "page_count" => 5,
+        "applications" => [{
+          "application" => {
+            "id" => 10,
+            "council_reference" => "001",
+            "address" => "A test address",
+            "on_notice_from" => nil,
+            "on_notice_to" => nil,
+            "authority" => {
+              "full_name" => "Acme Local Planning Authority"
+            },
+            "no_alerted" => nil,
+            "description" => "Pretty",
+            "comment_url" => nil,
+            "info_url" => "http://foo.com",
+            "date_received" => nil,
+            "lat" => nil,
+            "lng" => nil,
+            "date_scraped" => "2001-01-01T00:00:00Z",
+          }
+        }]
+      }
     end
   end
 
