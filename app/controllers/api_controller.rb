@@ -47,23 +47,20 @@ class ApiController < ApplicationController
   # Note that this returns results in a slightly different format than the
   # other API calls because the paging is done differently (via scrape time rather than page number)
   def all
+    #ApiStatistic.log(request)
     if ApiKey.where(key: params[:key]).exists?
       apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
-      description = "Recent applications within the last #{Application.nearby_and_recent_max_age_months} months"
-      @applications = apps.paginate(:page => params[:page], :per_page => per_page)
-      @description = description
+      applications = apps.paginate(:page => params[:page], :per_page => per_page)
 
-      #ApiStatistic.log(request)
       respond_to do |format|
         format.js do
-          s = {:applications => @applications, :application_count => @applications.count}
+          s = {:applications => applications, :application_count => applications.count}
           j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
             :include => {:authority => {:only => [:full_name]}})
           render :json => j, :callback => params[:callback]
         end
       end
     else
-      #ApiStatistic.log(request)
       respond_to do |format|
         format.js do
           render json: {error: "not authorised"}, status: 401
