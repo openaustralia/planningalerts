@@ -4,6 +4,18 @@ class FormatConstraint
   end
 end
 
+# Given query parameters, constraint passes
+# if all the parameters are present
+class QueryParamsPresentConstraint
+  def initialize(*params)
+    @params = params
+  end
+
+  def matches?(request)
+    @params.all?{|p| request.query_parameters[p.to_s].present?}
+  end
+end
+
 PlanningalertsApp::Application.routes.draw do
   constraints :subdomain => "api" do
     constraints FormatConstraint.new do
@@ -40,25 +52,17 @@ PlanningalertsApp::Application.routes.draw do
   # Route API separately
   scope :format => true do
     get 'authorities/:authority_id/applications' => 'api#authority', as: nil
-    get 'applications' => 'api#postcode', as: nil, constraints: lambda {|request|
-      request.query_parameters["postcode"].present?
-    }
-    get 'applications' => 'api#suburb', as: nil, constraints: lambda {|request|
-      request.query_parameters["suburb"].present?
-    }
-    get 'applications' => 'api#point', as: nil, constraints: lambda {|request|
-      request.query_parameters["address"].present?
-    }
-    get 'applications' => 'api#point', as: nil, constraints: lambda {|request|
-      request.query_parameters["lat"].present? &&
-        request.query_parameters["lng"].present?
-    }
-    get 'applications' => 'api#area', as: nil, constraints: lambda {|request|
-        request.query_parameters["bottom_left_lat"].present? &&
-          request.query_parameters["bottom_left_lng"].present? &&
-          request.query_parameters["top_right_lat"].present? &&
-          request.query_parameters["top_right_lng"].present?
-      }
+    get 'applications' => 'api#postcode', as: nil,
+      constraints: QueryParamsPresentConstraint.new(:postcode)
+    get 'applications' => 'api#suburb', as: nil,
+      constraints: QueryParamsPresentConstraint.new(:suburb)
+    get 'applications' => 'api#point', as: nil,
+      constraints: QueryParamsPresentConstraint.new(:address)
+    get 'applications' => 'api#point', as: nil,
+      constraints: QueryParamsPresentConstraint.new(:lat, :lng)
+    get 'applications' => 'api#area', as: nil,
+      constraints: QueryParamsPresentConstraint.new(:bottom_left_lat, :bottom_left_lng,
+        :top_right_lat, :top_right_lng)
     get 'applications' => 'api#all', as: nil
   end
 
