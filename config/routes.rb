@@ -40,12 +40,25 @@ PlanningalertsApp::Application.routes.draw do
   # Route API separately
   scope :format => true do
     get 'authorities/:authority_id/applications' => 'api#authority', as: nil
-    get 'applications' => 'api#postcode', postcode: true, as: nil
-    get 'applications' => 'api#suburb', suburb: true, as: nil
-    get 'applications' => 'api#point', address: true, as: nil
-    get 'applications' => 'api#point', lat: true, lng:true, as: nil
-    get 'applications' => 'api#area', bottom_left_lat: true, bottom_left_lng:true,
-      top_right_lat: true, top_right_lng: true, as: nil
+    get 'applications' => 'api#postcode', as: nil, constraints: lambda {|request|
+      request.query_parameters["postcode"].present?
+    }
+    get 'applications' => 'api#suburb', as: nil, constraints: lambda {|request|
+      request.query_parameters["suburb"].present?
+    }
+    get 'applications' => 'api#point', as: nil, constraints: lambda {|request|
+      request.query_parameters["address"].present?
+    }
+    get 'applications' => 'api#point', as: nil, constraints: lambda {|request|
+      request.query_parameters["lat"].present? &&
+        request.query_parameters["lng"].present?
+    }
+    get 'applications' => 'api#area', as: nil, constraints: lambda {|request|
+        request.query_parameters["bottom_left_lat"].present? &&
+          request.query_parameters["bottom_left_lng"].present? &&
+          request.query_parameters["top_right_lat"].present? &&
+          request.query_parameters["top_right_lng"].present?
+      }
     get 'applications' => 'api#all', as: nil
   end
 
