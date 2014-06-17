@@ -2,8 +2,6 @@
 
 %h3 Applications within #{meters_in_words(@radius)} of #{@q}
 
-%p= link_to "Search again with a different address", root_path
-
 - unless @other_addresses.empty?
   %h4 Or did you want?
   %ul
