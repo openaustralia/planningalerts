@@ -45,7 +45,15 @@
   }
 }
 
+body.c-applications.a-address p {
+  text-align: center;
+}
+
 @include at-breakpoint(60em 24) {
+  body.c-applications.a-address p {
+    text-align: left;
+  }
+
   #header-wrapper {
     background-position-y: 70px;
     background-size: initial;
