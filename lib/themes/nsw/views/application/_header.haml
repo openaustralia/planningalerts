@@ -1,7 +1,8 @@
 #header-wrapper
   #header.container
     #logo
-      = image_tag "nsw_logo_spacebar_rounded.png", alt: "NSW Government Logo"
+      = link_to root_path do
+        = image_tag "nsw_logo_spacebar_rounded.png", alt: "NSW Government Logo"
     #name
       %h1= link_to @themer.app_name, root_path
       %h2
