@@ -49,12 +49,12 @@
   padding-top: 0.5em;
 }
 
-body.c-applications.a-address p {
+p.search-preamble {
   text-align: center;
 }
 
 @include at-breakpoint(60em 24) {
-  body.c-applications.a-address p {
+  p.search-preamble {
     text-align: left;
   }
 
