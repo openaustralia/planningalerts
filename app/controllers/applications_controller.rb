@@ -42,6 +42,7 @@ class ApplicationsController < ApplicationController
     @radius = params[:radius] || 2000
     @sort = params[:sort] || 'time'
     per_page = 30
+    @page = params[:page]
     if @q
       location = Location.geocode(@q)
       if location.error

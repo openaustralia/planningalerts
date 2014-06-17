@@ -47,5 +47,8 @@
   - else
     - p, n = "Newer", "Older"
 
-  = paginated_section @applications, :previous_label => "« #{p}", :next_label => "#{n} »" do
-    = render "applications", :applications => @applications
+  -# Only show the top pagination links beyond the first page
+  - if @page.to_i > 1
+    = will_paginate @applications, :previous_label => "« #{p}", :next_label => "#{n} »"
+  = render "applications", :applications => @applications
+  = will_paginate @applications, :previous_label => "« #{p}", :next_label => "#{n} »"
