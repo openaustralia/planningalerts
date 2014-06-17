@@ -45,6 +45,10 @@
   }
 }
 
+#content {
+  padding-top: 0.5em;
+}
+
 body.c-applications.a-address p {
   text-align: center;
 }
@@ -52,6 +56,10 @@ body.c-applications.a-address p {
 @include at-breakpoint(60em 24) {
   body.c-applications.a-address p {
     text-align: left;
+  }
+
+  #content {
+    padding-top: 2em;
   }
 
   #header-wrapper {
