@@ -26,7 +26,7 @@
             %noscript= google_static_streetview(@application, :size => "350x200")
 
         %p.description= @application.description
-        = link_to @application.info_url, :class => "button button-rounded" do
+        = link_to @application.info_url, :class => "button button-rounded", :target => "_blank" do
           = image_tag "external_link.png", size: "10x10"
           Read more information
 
