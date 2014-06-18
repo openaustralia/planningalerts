@@ -7,3 +7,7 @@
     %span.highlight Click on the link in the email
     to confirm and start receiving planning alerts.
   %p If you don't get an email in the next few minutes, try checking your spam filter.
+
+%p
+  Return to
+  = link_to "applications near #{@address}", root_path(q: @address) 
