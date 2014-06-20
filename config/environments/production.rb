@@ -58,11 +58,6 @@ PlanningalertsApp::Application.configure do
      :authentication => :plain
   }
 
-  config.middleware.use ExceptionNotifier,
-    :email_prefix => "[PlanningAlerts Bug] ",
-    :sender_address => "PlanningAlerts <contact@planningalerts.org.au>",
-    :exception_recipients => 'web-administrators@openaustralia.org'
-
   # Compress JavaScripts and CSS
   config.assets.compress = true
 
