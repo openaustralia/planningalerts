@@ -4,4 +4,7 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
+# Load configuration so the Honeybadger API key is available
+require File.expand_path('../app/models/configuration', __FILE__)
+
 PlanningalertsApp::Application.load_tasks
