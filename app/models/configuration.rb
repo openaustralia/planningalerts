@@ -47,4 +47,6 @@ module Configuration
 
   THEME_NSW_CUTTLEFISH_USER_NAME = "xxxxxxxxxxxxxxxxx"
   THEME_NSW_CUTTLEFISH_PASSWORD = "xxxxxxxxxxxxxxxxxxxx"
+
+  HONEYBADGER_API_KEY = 'xxxxxxxx'
 end

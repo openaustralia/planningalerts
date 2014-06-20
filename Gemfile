@@ -52,6 +52,7 @@ gem "atdis"
 gem "oj"
 # Need to stick with 2.3.0 to support Ruby 1.8.7
 gem "redcarpet", "2.3.0"
+gem 'honeybadger'
 
 group :test do
   # Apparently capybara 2 only works with Ruby 1.9

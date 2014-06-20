@@ -158,6 +158,8 @@ GEM
     has_scope (0.5.1)
     highline (1.6.20)
     hike (1.2.3)
+    honeybadger (1.13.0)
+      json
     http_parser.rb (0.5.3)
     httparty (0.10.2)
       multi_json (~> 1.0)
@@ -392,6 +394,7 @@ DEPENDENCIES
   guard-livereload
   guard-rspec
   haml
+  honeybadger
   httparty
   jquery-rails (= 2.2.1)
   jquery-ui-rails
