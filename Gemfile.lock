@@ -156,7 +156,7 @@ GEM
     has_scope (0.5.1)
     highline (1.6.20)
     hike (1.2.3)
-    honeybadger (1.13.0)
+    honeybadger (1.15.3)
       json
     http_parser.rb (0.5.3)
     httparty (0.10.2)
