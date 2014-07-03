@@ -218,7 +218,7 @@ class Authority < ActiveRecord::Base
     email && email != ""
   end
 
-  def latest_application
+  def latest_application_date
     # The applications are sorted by default by the date_scraped because of the default scope on the model
     latest = applications.find(:first)
     if latest
@@ -228,7 +228,7 @@ class Authority < ActiveRecord::Base
 
   # If the latest application is over two weeks old, the scraper's probably broken
   def broken?
-    return false if !self.latest_application
-    self.latest_application < Time.now - 14.days
+    return false if !self.latest_application_date
+    self.latest_application_date < Time.now - 14.days
   end
 end

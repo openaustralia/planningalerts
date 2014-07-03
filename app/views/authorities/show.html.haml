@@ -8,7 +8,7 @@
 - if @authority.covered?
   - if @authority && @authority.broken?
     %p
-      %span.highlight It looks like something might be wrong. The latest application was received #{time_ago_in_words(@authority.latest_application)} ago.
+      %span.highlight It looks like something might be wrong. The latest application was received #{time_ago_in_words(@authority.latest_application_date)} ago.
       = link_to "Why?", faq_path(:anchor => "broken_scraper")
 
   - if @authority.applications.count == 0
