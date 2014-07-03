@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140616061712) do
+ActiveRecord::Schema.define(:version => 20140703052312) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20140616061712) do
     t.integer   "no_alerted"
   end
 
+  add_index "applications", ["authority_id", "date_scraped"], :name => "index_applications_on_authority_id_and_date_scraped"
   add_index "applications", ["authority_id"], :name => "authority_id"
   add_index "applications", ["date_scraped"], :name => "index_applications_on_date_scraped"
   add_index "applications", ["lat", "lng", "date_scraped"], :name => "index_applications_on_lat_and_lng_and_date_scraped"
