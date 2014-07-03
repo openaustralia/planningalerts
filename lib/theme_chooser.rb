@@ -32,6 +32,11 @@ class DefaultTheme < Theme
   def google_maps_client_id
     ::Configuration::GOOGLE_MAPS_CLIENT_ID if defined?(::Configuration::GOOGLE_MAPS_CLIENT_ID)
   end
+
+# TODO Put this in the config
+  def default_meta_description
+    "A free service which searches Australian planning authority websites and emails you details of applications near you"
+  end
 end
 
 class NSWTheme < Theme
@@ -67,6 +72,11 @@ class NSWTheme < Theme
 
   def google_maps_client_id
     nil
+  end
+
+  # TODO Put this in the config
+  def default_meta_description
+    "Discover what's happening in your local area in NSW. Find out about new building work. Get alerted by email."
   end
 end
 
