@@ -2,8 +2,8 @@
 - if @set_focus_control
   :javascript
     document.getElementById('#{@set_focus_control}').focus();
-- if defined?(Configuration::GOOGLE_MAPS_CLIENT_ID)
-  %script(src="http://maps.googleapis.com/maps/api/js?client=#{Configuration::GOOGLE_MAPS_CLIENT_ID}&sensor=false&v=3.13&libraries=places" type="text/javascript")
+- if @themer.google_maps_client_id
+  %script(src="http://maps.googleapis.com/maps/api/js?client=#{@themer.google_maps_client_id}&sensor=false&v=3.13&libraries=places" type="text/javascript")
 - else
   %script(src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places" type="text/javascript")
 = javascript_include_tag "application"

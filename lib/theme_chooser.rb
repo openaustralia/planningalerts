@@ -28,6 +28,10 @@ class DefaultTheme < Theme
   def email_from_address
     ::Configuration::EMAIL_FROM_ADDRESS
   end
+
+  def google_maps_client_id
+    ::Configuration::GOOGLE_MAPS_CLIENT_ID if defined?(::Configuration::GOOGLE_MAPS_CLIENT_ID)
+  end
 end
 
 class NSWTheme < Theme
@@ -59,6 +63,10 @@ class NSWTheme < Theme
 
   def cuttlefish_password
     ::Configuration::THEME_NSW_CUTTLEFISH_PASSWORD
+  end
+
+  def google_maps_client_id
+    nil
   end
 end
 
