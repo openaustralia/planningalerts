@@ -1,6 +1,4 @@
 class AuthoritiesController < ApplicationController
-  caches_page :index
-
   def index
     # map from state name to authorities in that state
     states = Authority.enabled.find(:all, :group => "state", :order => "state").map{|a| a.state}
