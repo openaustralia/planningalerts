@@ -1,7 +1,7 @@
 class PlanningAlertsSitemap
   include Rails.application.routes.url_helpers
 
-  def generate_and_notify
+  def generate
     s = Sitemap.new(root_url(:host => ::Configuration::HOST)[0..-2], Rails.root.join('public'))
 
     # TODO: There is some redundancy between what is going on here and what is listed in the routes.rb

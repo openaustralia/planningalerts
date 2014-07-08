@@ -18,7 +18,7 @@ namespace :planningalerts do
   desc "Generate XML sitemap and notify Google, Yahoo, etc.."
   task :sitemap => :environment do
     s = PlanningAlertsSitemap.new
-    s.generate_and_notify
+    s.generate
   end
 
   # A response to something bad
