@@ -8,6 +8,8 @@ class AtdisController < ApplicationController
         @error = "Could not load data - #{e}"
       rescue RestClient::InternalServerError => e
         @error = "Remote server returned an internal server error (error code 500) accessing #{params[:url]}"
+      rescue URI::InvalidURIError => e
+        @error = "The url appears to be invalid #{params[:url]}"
       end
     else
       @feed = Feed.new
