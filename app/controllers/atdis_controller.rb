@@ -6,6 +6,8 @@ class AtdisController < ApplicationController
         @page = @feed.applications
       rescue RestClient::ResourceNotFound => e
         @error = "Could not load data - #{e}"
+      rescue RestClient::InternalServerError => e
+        @error = "Remote server returned an internal server error (error code 500) accessing #{params[:url]}"
       end
     else
       @feed = Feed.new
