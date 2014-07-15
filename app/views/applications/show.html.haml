@@ -70,6 +70,11 @@
             = f.input :address, :placeholder => "Address", :hint => hint
             %div#faq_commenting_address.inline-hints.hidden
               = render :partial => 'static/faq_commenting_address'
+            -# This is a spam bot honeytrap. A human being should not be filling this in
+            -# It's not awesome for screenreaders though
+            %li{style: "display: none;"}
+              = label_tag :little_sweety, 'Little Sweety'
+              = text_field_tag :little_sweety, "", placeholder: "Please leave this blank"
           = f.actions do
             = f.action :submit, button_html: {class: "button button-action"}
       - elsif !@application.comment_url.blank?
