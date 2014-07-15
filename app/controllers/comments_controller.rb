@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
     @comments = Comment.visible.order("updated_at DESC").paginate :page => params[:page]
     @rss = comments_url(params.merge(:format => "rss", :page => nil))
   end
-  
+
   def create
     @application = Application.find(params[:application_id])
 
@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
       end
     end
   end
-  
+
   def confirmed
     @comment = Comment.find_by_confirm_id(params[:id])
     if @comment
