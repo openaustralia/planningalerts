@@ -151,8 +151,6 @@ describe Application do
       Location.should_receive(:geocode).with("dfjshd").and_return(mock("Location", :success => false))
       logger = mock("Logger")
       logger.should_receive(:error).with("Couldn't geocode address: dfjshd")
-      # Ignore the warning message (from the tinyurl'ing)
-      logger.stub!(:warn)
 
       a = Factory.build(:application, :address => "dfjshd", :council_reference => "r1", :date_scraped => Time.now)
       a.stub!(:logger).and_return(logger)
