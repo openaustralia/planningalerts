@@ -14,29 +14,33 @@
 %h4 How can I help?
 %p
   If you have some computer programming experience, you should be able to work out how to prepare a scraper for
-  PlanningAlerts. By using our preferred scraping technology,
-  #{link_to "ScraperWiki", "https://scraperwiki.com/"}, you can write a scraper using nothing but your web browser.
+  PlanningAlerts. All PlanningAlerts scrapers are hosted on our #{link_to "morph.io", "https://morph.io/"}
+  scraping platform, which takes care of all the boring bits of scraping for you (well, most of the boring bits!).
 %p
   The next thing to do is to decide what council to scrape. Once you've picked one, look it up on
   our
   = link_to "crowd-sourced list of councils", "https://docs.google.com/spreadsheet/ccc?key=0AmvYMal8CGUsdG1tM0lEWUctR194eGN6bUh0VGFfc1E"
   and have a look at their published planning applications. Quickly double-check that the council isn't #{link_to "covered already", authorities_path}.
 
-%h4 An introduction to scraping with ScraperWiki
+%h4 An introduction to scraping with morph.io
 %p
-  Even if you've never done any scraping, you'll quickly get up and running with some straightforward tutorials available on the Scraperwiki site.
+  With morph.io, you can choose to write your scraper in Ruby, Python, PHP or Perl so there's a good chance
+  you're already familiar an available programming language. Since all of the code is hosted on GitHub you're
+  probably also already familiar with how to share and collaborate on your scraper code.
 %p
-  With ScraperWiki, you can choose to write your scraper in Ruby, Python or PHP so there's a good chance
-  you're already familiar an available programming language.
+  morph.io provides an easy migration path from our previous scraper host, ScraperWiki Classic, and provides
+  all the same great conveniences like taking care of saving your data, running your scraper regularly, and
+  emailing you when there's a problem.
 %p
-  Read tutorials on scraping with ScraperWiki for #{link_to "Ruby", "https://scraperwiki.com/docs/ruby/"},
-  #{link_to "Python", "https://scraperwiki.com/docs/python/"} or #{link_to "PHP", "https://scraperwiki.com/docs/php/"}.
+  You can find out more in the #{link_to "morph.io documentation", "https://morph.io/documentation"}. If you're a novice scraper writer the tutorials on scraping
+  with ScraperWiki Classic for #{link_to "Ruby", "https://scraperwiki.com/docs/ruby/"},
+  #{link_to "Python", "https://scraperwiki.com/docs/python/"} or #{link_to "PHP", "https://scraperwiki.com/docs/php/"}
+  are still helpful resources despite being out of date.
 
 %h4 Now it's time to scrape
 %p
-  = link_to "Create your own ScraperWiki account", "https://scraperwiki.com/login/#signup"
-  and
-  = link_to "create a new scraper", "https://scraperwiki.com"
+  Make sure you have a #{link_to "GitHub account", "https://github.com/join"}, then you can use it to sign in to morph.io and
+  = link_to "create a new scraper", "https://morph.io/scrapers/new"
   that downloads and saves the following information:
 
 %p The following fields are <span class="highlight">required</span>. All development applications should have these bits of information.
@@ -129,34 +133,36 @@
 
 %p
   To ensure the date_scraped field isn't overwritten on subsequent scrapes add code similar to this to
-  save your planning application to the ScraperWiki datastore:
+  save your planning application to the morph.io datastore:
 
 %code.long-lines
   %pre
     :preserve
-      if (ScraperWiki.select("* from swdata where `council_reference`='\#{record['council_reference']}'").empty? rescue true)
-        ScraperWiki.save_sqlite(['council_reference'], record)
+      if (ScraperWikiMorph.select("* from data where `council_reference`='\#{record['council_reference']}'").empty? rescue true)
+        ScraperWikiMorph.save_sqlite(['council_reference'], record)
       else
         puts "Skipping already saved record " + record['council_reference']
       end
 
 %p
   If you get stuck, have a look at
-  = link_to "the scrapers already written for PlanningAlerts", "https://scraperwiki.com/tags/planningalerts.org.au"
+  = link_to "the scrapers already written for PlanningAlerts", "https://morph.io/planningalerts-scrapers"
   and email
   = link_to "community mailing list", "http://groups.google.com/group/openaustralia-dev"
   if you have any questions.
 
 %h4 Scheduling the scraper
 %p
-  Set the scraper to run once per day. This can be done on ScraperWiki on the main page of the scraper.
+  Set the scraper to run once per day. This can be done on morph.io on the settings page of the scraper.
 
 %h4 Finishing up
 %p
   Once you've finished your scraper and it's successfully downloading planning applications, simply
   email the OpenAustralia Community mailing list or
   = mail_to "contact@planningalerts.org.au", "contact@planningalerts.org.au"
-  and we'll add it to the next run.
+  and we'll fork it into the
+  = link_to "planningalerts-scrapers organization", "https://morph.io/planningalerts-scrapers"
+  and import it into PlanningAlerts.
 %p
   The last thing to do is look up on Wikipedia how many people live within the council you've just covered so you can
   pat yourself on the back knowing that you've just helped tens of thousands of people get PlanningAlerts.
