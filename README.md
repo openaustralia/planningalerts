@@ -30,6 +30,7 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
  * If you are on OSX change the socket to /tmp/mysql.sock
  * Create the databases - `rake db:create`
  * Load the database schema - `rake db:schema:load`
+ * Generate Thinking Sphinx configuration - `bundle exec rake thinking_sphinx:configure`
 
 **Run The Tests**
  * Run the test suite - `rake`
