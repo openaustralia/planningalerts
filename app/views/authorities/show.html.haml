@@ -6,7 +6,7 @@
     Population #{number_with_delimiter @authority.population_2011} (2011 estimate)
 
 - if @authority.covered?
-  - if @authority && @authority.broken?
+  - if @authority && @authority.broken? && @authority.applications.count != 0
     %p
       %span.highlight It looks like something might be wrong. The latest application was received #{time_ago_in_words(@authority.latest_application_date)} ago.
       = link_to "Why?", faq_path(:anchor => "broken_scraper")
