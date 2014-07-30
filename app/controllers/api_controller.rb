@@ -3,9 +3,14 @@ class ApiController < ApplicationController
   before_filter :check_api_parameters, except: [:old_index, :howto]
 
   def authority
-    # TODO Handle the situation where the authority name isn't found
-    authority = Authority.find_by_short_name_encoded!(params[:authority_id])
-    api_render(authority.applications, "Recent applications from #{authority.full_name_and_state}")
+    # Temporarily block
+    if request.headers["User-Agent"] == "Ruby"
+      render text: "Not authorized", status: :unauthorized
+    else
+      # TODO Handle the situation where the authority name isn't found
+      authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+      api_render(authority.applications, "Recent applications from #{authority.full_name_and_state}")
+    end
   end
 
   def postcode
