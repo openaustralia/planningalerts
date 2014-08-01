@@ -98,6 +98,9 @@ module PlanningalertsApp
     config.planningalerts_api_example_bottom_left_lng = 140.833740
     config.planningalerts_api_example_top_right_lat = -29.113775
     config.planningalerts_api_example_top_right_lng = 153.325195
+
+    # This was causing exceptions to be thrown on some API calls. Disabling it as it seems not to be needed
+    config.action_dispatch.ip_spoofing_check = false
   end
 end
 
