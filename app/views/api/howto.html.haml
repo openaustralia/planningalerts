@@ -62,7 +62,7 @@
   %code= raw api_example_authority_url_html("js")
   .apiexamples
     = link_to "Example", api_example_authority_url("js"), :class => "button button-rounded"
-    = link_to "Map", mapify(api_example_authority_url("rss") + "&style=html", 11), :class => "button button-rounded"
+    = link_to "Map", mapify(api_example_authority_url("rss") + "?style=html", 11), :class => "button button-rounded"
 .apiitem
   %h5
     Postcode
