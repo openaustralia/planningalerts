@@ -4,7 +4,7 @@ If you are planning to submit your development application feed for ATDIS compli
 
 These are the same steps which the [OpenAustralia Foundation](http://www.openaustraliafoundation.org.au) (OAF) will carry out for the official compliance testing.
 
-Note that the definitive reference of what is compliant with the ATDIS specification is the [specification document](specification) itself. This page is intended as a short, simple to read summary of the process by which OAF will test compliance and you should test your compliance before submitting. Just because something isn’t included here (and is included in the specification) doesn’t mean that it isn’t important!
+Note that the definitive reference of what is compliant with the ATDIS specification is the [specification document](specification) itself. This page is intended as a short, simple to read summary of the process by which OAF will test compliance and you should test your compliance before submitting. Just because something isn’t included here (and is included in the specification) doesn’t mean that it isn’t important.
 
 ### What you should do to prepare before submitting for compliance testing
 
