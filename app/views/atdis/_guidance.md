@@ -46,7 +46,7 @@ With the [test harness](http://www.planningalerts.org.au/atdis/test) you can eas
 * Suburbs (one or more)
 * Postcodes (one or more)
 
-Make sure you also test combinations of the searches (for instance a search on suburb and street names at the same time)
+Make sure you also test combinations of the searches, for instance a search on suburb and street names at the same time.
 
 #### Step 5 - Test feed URLs for individual applications
 
