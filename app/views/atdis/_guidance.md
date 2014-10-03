@@ -1,3 +1,5 @@
+[Help improve this page](https://github.com/openaustralia/planningalerts-app/blob/master/app/views/atdis/_guidance.md)
+
 If you are planning to submit your development application feed for ATDIS compliance testing this is the page for you! Here we'll outline what you need to do to prepare yourself to ensure maximum chance of success. We will guide you through step-by-step the testing you should do yourself before submitting your feed for compliance testing.
 
 The testing steps are the same as those that will be carried out by the [OpenAustralia Foundation](http://www.openaustraliafoundation.org.au) (OAF) when we carry out the official compliance testing.
@@ -15,11 +17,11 @@ Before submitting your ATDIS feed for compliance testing you should thoroughly t
 [http://www.planningalerts.org.au/atdis/test](http://www.planningalerts.org.au/atdis/test)
 
 * If there are multiple pages of results, test each page.
-* Test that different ways of searching across applications validate and return the expected applications
+* Test that different ways of searching across applications all validate
 
 If you've passed, congratulations! You've passed the first step.
 
-It’s really important to understand that passing the automated test is just the first steps and does not guarantee that the feed is compliant. There are many aspects of the specification that can not be easily automatically tested and so are not included in the test harness. These will be covered in the following steps.
+It’s really important to understand that passing the automated test is the first step and does not guarantee that your feed is compliant. There are many aspects of the specification that can not be easily automatically tested and so are not included in the test harness. These will be covered in the following steps.
 
 #### Step 2 - Manual inspection of results
 
@@ -74,7 +76,7 @@ Follow any optional `comments_url` links in the same way.
 
 #### Step 8 - Submit your feed for compliance testing
 
-When you have completed steps 1-7 succesfully you should be ready to submit your feed for compliance testing.
+When you have completed steps 1-7 successfully you should be ready to submit your feed for compliance testing.
 
 When you are ready please contact xxxxx at NSW Planning & Environment and let them know.
 
