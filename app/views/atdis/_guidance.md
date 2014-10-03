@@ -52,7 +52,7 @@ Make sure you also test combinations of the searches, for instance a search on s
 
 Test that each individual application in the feed results can also be accessed individually at its own URL, returning results consistent with those in the main feed.
 
-See [section 4.2](/atdis/specification#section4.2) of the specification for more.
+See [section 4.2](/atdis/specification#section4.2) of the specification for more information about the required feed URL.
 
 ####<a name="step-6"></a> Step 6 - Visually inspect `more_info_url` and `comments_url` web addresses
 
