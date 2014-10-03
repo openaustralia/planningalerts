@@ -2,7 +2,7 @@ module ApplicationsHelper
   def static_google_map_url(options = {:size => "512x512"})
     "http://maps.google.com/maps/api/staticmap?center=#{CGI.escape(options[:address])}&zoom=14&size=#{options[:size]}&maptype=roadmap&markers=color:blue|label:#{CGI.escape(options[:address])}|#{CGI.escape(options[:address])}&sensor=false"
   end
-  
+
   def scraped_and_received_text(application)
     text = "We found this application for you on the planning authority's website #{time_ago_in_words(application.date_scraped)} ago. "
     if application.date_received
@@ -51,7 +51,7 @@ module ApplicationsHelper
     end
     text.html_safe
   end
-  
+
   def page_title(application)
     # Include the scraping date in the title so that multiple applications from the same address have different titles
     "#{@application.address} | #{@application.date_scraped.to_date.to_formatted_s(:rfc822)}"
