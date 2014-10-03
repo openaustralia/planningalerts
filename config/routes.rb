@@ -97,6 +97,7 @@ PlanningalertsApp::Application.routes.draw do
     post :test, :action => 'test_redirect'
     get 'feed/:number/atdis/1.0/applications.json', :action => 'feed', :as => :feed
     get :specification
+    get :guidance
   end
 
   match 'api/howto' => 'api#howto', :as => :api_howto
