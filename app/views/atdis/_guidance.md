@@ -36,7 +36,7 @@ Go back to the test harness results in step 1 and very carefully examine the dev
 
 If your feed returns multiple pages of results do the same manual inspection as you did in step 2 for each of the pages. Also, make sure that the pages are returning different results and check that they are ordered as expected.
 
-#### Step 4 - Manual inspection of result of different filtering
+#### Step 4 - Manual inspection of results of different filtering
 
 With the [test harness](http://www.planningalerts.org.au/atdis/test) you can easily test your feed's response to different kinds of searches (filtering).
 
