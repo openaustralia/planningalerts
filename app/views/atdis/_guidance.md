@@ -38,9 +38,7 @@ If your feed returns multiple pages of results do the same manual inspection as 
 
 #### Step 4 - Manual inspection of results of different filtering
 
-With the [test harness](http://www.planningalerts.org.au/atdis/test) you can easily test your feed's response to different kinds of searches (filtering).
-
-Now, test that the following searches work and return the expected results:
+With the [test harness](http://www.planningalerts.org.au/atdis/test) you can easily test your feed's response to different kinds of searches (filtering). Test that the following searches work and return the expected results:
 
 * Lodgement date (from and/or to)
 * Last modified date (from and/or to)
