@@ -12,7 +12,7 @@ Follow the steps below
 
 #### Step 1 - Test your feed against the automated test harness
 
-Before submitting your ATDIS feed for compliance testing you should thoroughly test your ATDIS feed using the automated test harness available at
+Before submitting your ATDIS feed for compliance testing you should thoroughly test your ATDIS feed using the automated test harness available at:
 
 [http://www.planningalerts.org.au/atdis/test](http://www.planningalerts.org.au/atdis/test)
 
