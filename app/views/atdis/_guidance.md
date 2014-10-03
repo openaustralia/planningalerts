@@ -25,7 +25,8 @@ It’s really important to understand that passing the automated test is the fir
 
 #### Step 2 - Manual inspection of results
 
-Go back to the test harness results in step 1. Very carefully examine the development application data that's returned.
+Go back to the test harness results in step 1 and very carefully examine the development application data that's returned:
+
 * Look for any inconsistencies.
 * Look for any text description information that looks garbled or malformed.
 * Look for any dummy data that is clearly wrong
