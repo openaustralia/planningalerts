@@ -64,7 +64,7 @@ Follow any optional `comments_url` links in the same way.
 
 ####<a name="step-7"></a> Step 7 - Test browser renderable feeds
 
-* Test that pages render valid HTML5 and CSS3
+* Test that pages render valid [HTML5](http://validator.w3.org/) and [CSS3](http://jigsaw.w3.org/css-validator/)
 * Test that pages are WCAG2.0 compatible (minimum level A) - Use automated checking tool available at [http://achecker.ca/checker/index.php](http://achecker.ca/checker/index.php)
 
 ####<a name="step-8"></a> Step 8 - Submit your feed for compliance testing
