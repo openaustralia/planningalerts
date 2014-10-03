@@ -21,7 +21,7 @@ Before submitting your ATDIS feed for compliance testing you should thoroughly t
 
 #####If you've passed, congratulations! You've passed the first step. ######
 
-It’s really important to understand that passing the automated test is the first step and does not guarantee that your feed is compliant. There are many aspects of the specification that can not be easily automatically tested and so are not included in the test harness. These will be covered in the following steps.
+It’s really important to understand that passing the automated test is the first step and does not guarantee that your feed is compliant. There are many aspects of the specification that can not be easily tested automatically and so are not included in the test harness. These will be covered in the following steps.
 
 #### Step 2 - Manual inspection of results
 
