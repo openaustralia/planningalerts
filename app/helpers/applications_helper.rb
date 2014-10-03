@@ -47,6 +47,7 @@ module ApplicationsHelper
     else
       text = "You're too late! The period for officially commenting on this application finished <strong>#{days_ago_in_words(application.on_notice_to)}</strong>."
       text << " It lasted for #{distance_of_time_in_words(application.on_notice_from, application.on_notice_to)}." if application.on_notice_from
+      text << " If you comment now it will not be officially considered."
     end
     text.html_safe
   end
