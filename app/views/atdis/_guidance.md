@@ -34,10 +34,7 @@ Go back to the test harness results in step 1 and very carefully examine the dev
 
 #### Step 3 - Manual inspection of paging
 
-If your feed returns multiple pages of results do the same manual inspection as you did in step 2 for each of the pages.
-
-* Also, make sure that the pages are returning different results
-* Check that they are ordered as expected
+If your feed returns multiple pages of results do the same manual inspection as you did in step 2 for each of the pages. Also, make sure that the pages are returning different results and check that they are ordered as expected.
 
 #### Step 4 - Manual inspection of result of different filtering
 
