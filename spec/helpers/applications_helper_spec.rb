@@ -99,13 +99,13 @@ describe ApplicationsHelper do
 
       it "should say when the application is on notice" do
         helper.on_notice_text(@application).should ==
-          "You're too late! The period for officially commenting on this application finished <strong>2 days ago</strong>. It lasted for 14 days. If you comment now it will not be officially considered."
+          "You're too late! The period for officially commenting on this application finished <strong>2 days ago</strong>. It lasted for 14 days. If you comment now your comment will not be officially considered."
       end
 
       it "should only say when on notice to if there is no on notice from information" do
         @application.stub!(:on_notice_from).and_return(nil)
         helper.on_notice_text(@application).should ==
-          "You're too late! The period for officially commenting on this application finished <strong>2 days ago</strong>. If you comment now it will not be officially considered."
+          "You're too late! The period for officially commenting on this application finished <strong>2 days ago</strong>. If you comment now your comment will not be officially considered."
       end
     end
 
