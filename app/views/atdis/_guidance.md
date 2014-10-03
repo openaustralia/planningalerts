@@ -6,11 +6,11 @@ These are the same steps which the [OpenAustralia Foundation](http://www.openaus
 
 Note that the definitive reference of what is compliant with the ATDIS specification is the [specification document](specification) itself. This page is intended as a short, simple to read summary of the process by which OAF will test compliance and you should test your compliance before submitting. Just because something isn’t included here (and is included in the specification) doesn’t mean that it isn’t important.
 
-### What you should do to prepare before submitting for compliance testing
+###<a name="before-submitting"></a> What you should do to prepare before submitting for compliance testing
 
 Follow the 8 steps below.
 
-#### Step 1 - Test your feed against the automated test harness
+####<a name="step-1"></a> Step 1 - Test your feed against the automated test harness
 
 Before submitting your ATDIS feed for compliance testing you should thoroughly test your ATDIS feed using the automated test harness available at:
 
@@ -23,7 +23,7 @@ Before submitting your ATDIS feed for compliance testing you should thoroughly t
 
 It’s really important to understand that passing the automated test is the first step and does not guarantee that your feed is compliant. There are many aspects of the specification that can not be easily tested automatically and so are not included in the test harness. These will be covered in the following steps.
 
-#### Step 2 - Manual inspection of results
+####<a name="step-2"></a> Step 2 - Manual inspection of results
 
 Go back to the test harness results in step 1 and very carefully examine the development application data that's returned, looking for any:
 
@@ -32,11 +32,11 @@ Go back to the test harness results in step 1 and very carefully examine the dev
 * Dummy data that is clearly wrong
 * Repeated information that shouldn't be repeated
 
-#### Step 3 - Manual inspection of paging
+####<a name="step-3"></a> Step 3 - Manual inspection of paging
 
 If your feed returns multiple pages of results do the same manual inspection as you did in step 2 for each of the pages. Also, make sure that the pages are returning different results and check that they are ordered as expected.
 
-#### Step 4 - Manual inspection of results of different filtering
+####<a name="step-4"></a> Step 4 - Manual inspection of results of different filtering
 
 With the [test harness](http://www.planningalerts.org.au/atdis/test) you can easily test your feed's response to different kinds of searches (filtering). Test that the following searches work and return the expected results:
 
@@ -48,13 +48,13 @@ With the [test harness](http://www.planningalerts.org.au/atdis/test) you can eas
 
 Make sure you also test combinations of the searches, for instance a search on suburb and street names at the same time.
 
-#### Step 5 - Test feed URLs for individual applications
+####<a name="step-5"></a> Step 5 - Test feed URLs for individual applications
 
 Test that each individual application in the feed results can also be accessed individually at its own URL, returning results consistent with those in the main feed.
 
 See [section 4.2](/atdis/specification#section4.2) of the specification for more.
 
-#### Step 6 - Visually inspect `more_info_url` and `comments_url` web addresses
+####<a name="step-6"></a> Step 6 - Visually inspect `more_info_url` and `comments_url` web addresses
 
 With your web browser follow links in the mandatory `more_info_url` fields and visually inspect them. They should be a normal human readable web page giving you more information about that particular application.
 
@@ -65,12 +65,12 @@ Note that
 
 Follow any optional `comments_url` links in the same way.
 
-#### Step 7 - test browser renderable feeds
+####<a name="step-7"></a> Step 7 - test browser renderable feeds
 
 * Test that pages render valid HTML5 and CSS3
 * Test that pages are WCAG2.0 compatible (minimum level A) - Use automated checking tool available at [http://achecker.ca/checker/index.php](http://achecker.ca/checker/index.php)
 
-#### Step 8 - Submit your feed for compliance testing
+####<a name="step-8"></a> Step 8 - Submit your feed for compliance testing
 
 When you have completed steps 1-7 successfully you should be ready to submit your feed for compliance testing.
 
