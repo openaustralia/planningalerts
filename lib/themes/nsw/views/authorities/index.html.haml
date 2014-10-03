@@ -1,11 +1,18 @@
 - content_for :page_title, "Planning authorities currently covered by the service"
 %h3= yield :page_title
 %p
-  This service doesn't yet cover all of NSW, but we are working on it. If you're looking for a service
-  with national Australian coverage go to #{link_to "PlanningAlerts", "http://www.planningalerts.org.au"}.
+  This service doesn't yet cover all of NSW so we’re working with planning authorities via the
+  = link_to "Application Tracking program", "http://www.planning.nsw.gov.au/en-au/buildinginnsw/e-planningfornsw/applicationtracking.aspx"
+  to improve coverage.
 %p
-  New authorities are being added all the time, so if your local authority isn't listed below
-  #{link_to "sign up anyway", new_alert_path} and you'll start receiving alerts once it has been included.
+  We are bringing in new councils to the Application Tracking program all the time. So if your local
+  NSW council is not listed below please
+  = link_to "sign up", new_alert_path
+  and encourage your council to become a part of the
+  #{link_to "Application Tracking program", "http://www.planning.nsw.gov.au/en-au/buildinginnsw/e-planningfornsw/applicationtracking.aspx"}.
+%p
+  If on the other hand you are looking for a service
+  with covers all of Australia, then head over to #{link_to "PlanningAlerts", "http://www.planningalerts.org.au"}.
 %p
   We currently cover #{Authority.nsw_percentage_population_covered_by_all_active_authorities.to_i}% of NSW's population within #{@authorities["NSW"].count} authorities.
 %p
