@@ -1,8 +1,8 @@
 [Help improve this page](https://github.com/openaustralia/planningalerts-app/blob/master/app/views/atdis/_guidance.md)
 
-If you are planning to submit your development application feed for ATDIS compliance testing this is the page for you! Here we'll outline what you need to do to prepare yourself to ensure maximum chance of success. We will guide you through step-by-step the testing you should do yourself before submitting your feed for compliance testing.
+If you are planning to submit your development application feed for ATDIS compliance testing this is the page for you! Here we'll outline what you need to do to prepare yourself to ensure maximum chance of success. We will guide you step-by-step through the testing you should do yourself before submitting your feed for compliance testing.
 
-The testing steps are the same as those that will be carried out by the [OpenAustralia Foundation](http://www.openaustraliafoundation.org.au) (OAF) when we carry out the official compliance testing.
+These are the same steps which the [OpenAustralia Foundation](http://www.openaustraliafoundation.org.au) (OAF) will carry out for the official compliance testing.
 
 Note that the definitive reference of what is compliant with the ATDIS specification is the [specification document](https://github.com/openaustralia/atdis/raw/master/docs/ATDIS-1.0.2%20Application%20Tracking%20Data%20Interchange%20Specification%20(v1.0.2\).pdf) itself. This page is intended as a short, simple to read summary of the process by which OAF will test compliance and you should test your compliance before submitting. Just because something isn’t included here (and is included in the specification) doesn’t mean that it isn’t important!
 
@@ -19,7 +19,7 @@ Before submitting your ATDIS feed for compliance testing you should thoroughly t
 * If there are multiple pages of results, test each page.
 * Test that different ways of searching across applications all validate
 
-If you've passed, congratulations! You've passed the first step.
+#####If you've passed, congratulations! You've passed the first step. ######
 
 It’s really important to understand that passing the automated test is the first step and does not guarantee that your feed is compliant. There are many aspects of the specification that can not be easily automatically tested and so are not included in the test harness. These will be covered in the following steps.
 
@@ -42,7 +42,7 @@ If your feed returns multiple pages of results do the same manual inspection as 
 
 With the [test harness](http://www.planningalerts.org.au/atdis/test) you can easily test your feed's response to different kinds of searches (filtering).
 
-You should test that the following searches work and return the expected results:
+Now, test that the following searches work and return the expected results:
 
 * Lodgement date (from and/or to)
 * Last modified date (from and/or to)
@@ -50,11 +50,11 @@ You should test that the following searches work and return the expected results
 * Suburbs (one or more)
 * Postcodes (one or more)
 
-You should also also test combinations of the searches (for instance a search on suburb and street names at the same time)
+Make sure you also test combinations of the searches (for instance a search on suburb and street names at the same time)
 
 #### Step 5 - Test feed URLs for individual applications
 
-Test that each individual application in the feed results can also be accessed individually at its own URL returning results consistent with those in the main feed.
+Test that each individual application in the feed results can also be accessed individually at its own URL, returning results consistent with those in the main feed.
 
 See [section 4.2](/atdis/specification#section4.2) of the specification for more.
 
