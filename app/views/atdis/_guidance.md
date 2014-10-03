@@ -8,7 +8,7 @@ Note that the definitive reference of what is compliant with the ATDIS specifica
 
 ### What you should do to prepare before submitting for compliance testing
 
-Follow the steps below
+Follow the 8 steps below.
 
 #### Step 1 - Test your feed against the automated test harness
 
