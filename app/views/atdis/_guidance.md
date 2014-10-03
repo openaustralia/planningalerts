@@ -16,7 +16,7 @@ Before submitting your ATDIS feed for compliance testing you should thoroughly t
 
 [http://www.planningalerts.org.au/atdis/test](http://www.planningalerts.org.au/atdis/test)
 
-* If there are multiple pages of results, test each page.
+* If there are multiple pages of results, test each page
 * Test that different ways of searching across applications all validate
 
 #####If you've passed, congratulations! You've passed the first step. ######
@@ -27,8 +27,8 @@ It’s really important to understand that passing the automated test is the fir
 
 Go back to the test harness results in step 1 and very carefully examine the development application data that's returned, looking for any:
 
-* Inconsistencies.
-* Text description information that looks garbled or malformed.
+* Inconsistencies
+* Text description information that looks garbled or malformed
 * Dummy data that is clearly wrong
 * Repeated information that shouldn't be repeated
 
