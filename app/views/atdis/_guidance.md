@@ -56,7 +56,7 @@ See [section 4.2](/atdis/specification#section4.2) of the specification for more
 
 ####<a name="step-6"></a> Step 6 - Visually inspect `more_info_url` and `comments_url` web addresses
 
-With your web browser follow links in the mandatory `more_info_url` fields and visually inspect them. They should be a normal human readable web page giving you more information about that particular application.
+With your web browser follow links in the mandatory `more_info_url` fields and visually inspect them. They should be a normal, human-readable web page giving you more information about that particular application.
 
 Note that
 > The underlying content must be directly accessible without
