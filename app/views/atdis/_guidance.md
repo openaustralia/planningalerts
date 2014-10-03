@@ -6,6 +6,8 @@ These are the same steps which the [OpenAustralia Foundation](http://www.openaus
 
 Note that the definitive reference of what is compliant with the ATDIS specification is the [specification document](specification) itself. This page is intended as a short, simple to read summary of the process by which OAF will test compliance and you should test your compliance before submitting. Just because something isn’t included here (and is included in the specification) doesn’t mean that it isn’t important.
 
+If at any stage you have any questions or run into any problems please get in touch by emailing us at [atdis-support@planningalerts.org.au](mailto:atdis-support@planningalerts.org.au)
+
 ###<a name="before-submitting"></a> What you should do to prepare before submitting for compliance testing
 
 Follow the 8 steps below.
@@ -21,7 +23,7 @@ Before submitting your ATDIS feed for compliance testing you should thoroughly t
 
 **If you've passed, congratulations! You've passed the first step.**
 
-It’s really important to understand that passing the automated test is the first step and does not guarantee that your feed is compliant. There are many aspects of the specification that can not be easily tested automatically and so are not included in the test harness. These will be covered in the following steps.
+It’s really important to understand that passing the automated test is the first step and does not guarantee that your feed is fully compliant. Please continue to step 2 for tests that involve manual inspection.
 
 ####<a name="step-2"></a> Step 2 - Manual inspection of results
 
@@ -71,10 +73,16 @@ Follow any optional `comments_url` links in the same way.
 
 When you have completed steps 1-7 successfully you should be ready to submit your feed for compliance testing.
 
-When you are ready please contact xxxxx at NSW Planning & Environment and let them know.
+When you are ready please contact NSW Planning & Environment and let them know.
 
 Please provide them with:
 
-* One or more Base URLs of ATDIS feeds (as they would be entered into the test harness)
+* One or more Base URLs of ATDIS feeds as they would be entered into the test harness (for example http://www.council.nsw.gov.au/atdis/1.0)
+* The name and version number of the software you are using to generate the ATDIS feed
+* A description of any known issues with the data quality available from the feeds (if any)
+* A technical contact (name, email & phone number)
+* A general contact (name, email & phone number if different than above) who should be contacted with the results of the testing
 
-(For example: http://www.council.nsw.gov.au/atdis/1.0)
+When we (OpenAustralia Foundation) have completed the compliance testing we will contact the general contact above via email to let them know the results.
+
+Good luck!
