@@ -58,10 +58,7 @@ See [section 4.2](/atdis/specification#section4.2) of the specification for more
 
 With your web browser follow links in the mandatory `more_info_url` fields and visually inspect them. They should be a normal, human-readable web page giving you more information about that particular application.
 
-Note that
-> The underlying content must be directly accessible without
-> authentication, cookies or other limiting requirements for the
-> consuming system
+Note that, “_[The underlying content must be directly accessible without authentication, cookies or other limiting requirements for the consuming system](http://localhost:3000/atdis/specification#section4.3.2)_”. A good way to test this is to open a “private browsing” or “incognito” window to ensure that you're not logged in or have any cookies from your system present.
 
 Follow any optional `comments_url` links in the same way.
 
