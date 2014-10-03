@@ -50,11 +50,19 @@
       - if @application.authority.contactable?
         - if @application.on_notice_to
           %p= on_notice_text(@application)
-        %p
-          All the information you provide in your comment below will be sent to
-          %strong= @application.authority.full_name
-          where it will be taken into account and may
-          influence whether the application is approved or not. The text of your comment and your name will be public.
+        - if @application.on_notice_to && Date.today > @application.on_notice_to
+          %p
+            All the information you provide in your comment below will be sent to
+            = succeed "." do
+              %strong= @application.authority.full_name
+            The text of your comment and your name will be public.
+        - else
+          %p
+            All the information you provide in your comment below will be sent to
+            %strong= @application.authority.full_name
+            where it will be taken into account and may
+            influence whether the application is approved or not.
+            The text of your comment and your name will be public.
         %p
           If you have made a donation to a Councillor and/or gift to a Councillor or Council employee you may
           #{link_to("need to disclose this", faq_path(:anchor => "disclosure"))}.
