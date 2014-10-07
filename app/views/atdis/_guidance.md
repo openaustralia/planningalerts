@@ -73,7 +73,7 @@ Follow any optional `comments_url` links in the same way.
 
 When you have completed steps 1-7 successfully you should be ready to submit your feed for compliance testing.
 
-When you are ready please contact NSW Planning & Environment and let them know.
+When you are ready please let NSW Planning & Environment know by emailing them at [eplanning@planning.nsw.gov.au](mailto:eplanning@planning.nsw.gov.au) with the subject "ATDIS".
 
 Please provide them with:
 
