@@ -44,7 +44,7 @@
 
 = semantic_form_for @feed, :url => atdis_test_path do |f|
   = f.inputs do
-    = f.input :base_url, :label => "ATDIS Base URL", :placeholder => "http://www.council.nsw.gov.au/atdis/1.0/applications.json"
+    = f.input :base_url, :label => "ATDIS Base URL", :placeholder => "http://www.council.nsw.gov.au/atdis/1.0"
   = f.inputs do
     = f.input :page, :label => "Page Number", :as => :number, :min => 1
   %h2= link_to "Filters", "#", id: "filter-heading"
