@@ -146,6 +146,13 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
   end
 
   def get_message_part (mail, content_type)
-    mail.body.parts.find { |p| p.content_type.match content_type }.body.raw_source
+    part = mail.body.parts.find { |p| p.content_type.match content_type }
+    result = part.body.raw_source
+    if part.content_type =~ /html/
+      # Use premailer gem to inline css for regression testing
+      Premailer.new(result, with_html_string: true).to_inline_css
+    else
+      result
+    end
   end
 end

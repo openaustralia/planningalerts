@@ -64,6 +64,8 @@ group :test do
   gem 'coveralls', :require => false
   gem 'vcr'
   gem 'webmock'
+  # Using this to test what cuttlefish.io would do with inlining css
+  gem 'premailer'
 end
 
 group :development do
