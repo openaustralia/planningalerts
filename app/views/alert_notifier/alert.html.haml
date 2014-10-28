@@ -1,12 +1,106 @@
 !!!
 %html
-  %body{:style => "font-family:sans-serif;"}
+  %head
+    :css
+      body {
+        font-family: sans-serif;
+      }
+      .header {
+        background: #878787;
+        padding: 5px 0 5px 10px;
+        margin-bottom: 5px;
+      }
+      .header a {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        text-decoration: none;
+      }
+      .advert {
+        margin: 6px 11px 25px;
+        padding: 15px;
+        background: #D0FFFF;
+        -moz-border-radius: 10px;
+        -khtml-border-radius: 10px;
+        -webkit-border-radius: 10px;
+      }
+      .advert a {
+        color: #A60201;
+      }
+      .comments-header {
+        margin: 6px 11px 25px;
+        padding: 15px;
+        background: #fcfbbd;
+        -moz-border-radius: 10px;
+        -khtml-border-radius: 10px;
+        -webkit-border-radius: 10px;
+      }
+      .comment {
+        margin-left: 15px;
+        margin-right: 15px;
+        background: #fafafa;
+      }
+      .comment span {
+        color: #989898;
+      }
+      .comment a {
+        color: #f2630c;
+        font-weight: bold;
+      }
+      .applications-header {
+        margin: 6px 11px 25px;
+        padding: 15px;
+        background: #fcfbbd;
+        -moz-border-radius: 10px;
+        -khtml-border-radius: 10px;
+        -webkit-border-radius: 10px;
+      }
+      .applications-more {
+        padding-left: 15px;
+      }
+      .application {
+        margin: 6px 11px 25px;
+        padding: 15px;
+        background: #eeeeee;
+      }
+      .application .address {
+        padding-bottom: 5px;
+      }
+      .application .address a {
+        font-size: 18px;
+        font-weight: bold;
+        color: #f2630c;
+      }
+      .application .map {
+        padding: 5px;
+        width: 155px;
+      }
+      .application .streetview {
+        padding: 5px;
+      }
+      .application .description {
+        vertical-align: top;
+      }
+      .application .add-comment a {
+        color: #f2630c;
+      }
+      .footer-outer {
+        border-top: solid 3px #F2630C;
+      }
+      .footer-outer .footer-inner {
+        padding-left: 15px; padding-top: 5px;
+      }
+      .footer-outer .footer-inner a {
+        color: #f2630c;
+      }
+
+  %body
     = render "header"
     - unless @comments.empty?
       = render "comments"
     - unless @applications.empty?
       = render "applications"
-    %div{:style => "border-top: solid 3px #F2630C;"}
-      %div{:style => "padding-left: 15px; padding-top: 5px;"}
+    .footer-outer
+      .footer-inner
         = render "footer_main"
         = render "footer_actions"

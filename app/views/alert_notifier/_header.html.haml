@@ -1,13 +1,14 @@
-%div{:style => "background: #878787; padding: 5px 0 5px 10px; margin-bottom:5px"}
-  = link_to "PlanningAlerts", root_url(host: @host), style: "color: white; font-weight:bold; font-size: 20px; text-decoration:none;"
-%div{:style => "margin: 6px 11px 25px; padding: 15px; background: #D0FFFF; -moz-border-radius: 10px; -khtml-border-radius: 10px; -webkit-border-radius: 10px;"}
+.header
+  = link_to "PlanningAlerts", root_url(host: @host)
+
+.advert
   Hi, did you know we make these
   %strong other wonderful projects
   too?
-  #{link_to "They Vote For You", "https://theyvoteforyou.org.au/?utm_source=pa&utm_medium=email&utm_campaign=alert", style: "color: #A60201;"}
+  #{link_to "They Vote For You", "https://theyvoteforyou.org.au/?utm_source=pa&utm_medium=email&utm_campaign=alert"}
   %sup
     %strong New!
   ,
-  #{link_to "Right To Know", "https://www.righttoknow.org.au/?utm_source=pa&utm_medium=email&utm_campaign=alert", style: "color: #A60201;"},
-  #{link_to "OpenAustralia.org", "http://www.openaustralia.org/?utm_source=pa&utm_medium=email&utm_campaign=alert", style: "color: #A60201;"}, and
-  #{link_to "Election Leaflets", "http://www.electionleaflets.org.au/?utm_source=pa&utm_medium=email&utm_campaign=alert", style: "color: #A60201;"}.
+  #{link_to "Right To Know", "https://www.righttoknow.org.au/?utm_source=pa&utm_medium=email&utm_campaign=alert"},
+  #{link_to "OpenAustralia.org", "http://www.openaustralia.org/?utm_source=pa&utm_medium=email&utm_campaign=alert"}, and
+  #{link_to "Election Leaflets", "http://www.electionleaflets.org.au/?utm_source=pa&utm_medium=email&utm_campaign=alert"}.
