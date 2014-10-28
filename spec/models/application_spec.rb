@@ -50,6 +50,7 @@ describe Application do
       it { Factory.build(:application, :comment_url => "http://blah.com?p=1").should be_valid }
       it { Factory.build(:application, :comment_url => "mailto:m@foo.com?subject=hello+sir").should be_valid }
       it { Factory.build(:application, :comment_url => "foo").should_not be_valid }
+      it { Factory.build(:application, :comment_url => "mailto:council@lakemac.nsw.gov.au?Subject=Redhead%20Beach%20&%20Surf%20Life%20Saving%20Club,%202A%20Beach%20Road,%20REDHEAD%20%20NSW%20%202290%20DA-1699/2014").should be_valid }
     end
 
     describe "date_received" do
