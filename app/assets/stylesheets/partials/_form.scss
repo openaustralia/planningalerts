@@ -89,7 +89,7 @@ a.btn:hover {
 
 // Special formatting for specific forms
 
-.formtastic#new_comment {
+.formtastic#new_comment, .formtastic#new_report {
   @include float-form(100%, 0%, 100%, 0, "buttons-left", "left", "select-auto");
   // Hide the labels
   li label.label {
@@ -104,13 +104,6 @@ a.btn:hover {
   textarea {
     padding: 0.5em;
   }
-}
-
-.formtastic#new_report {
-  @include float-form(950px, 190px, 754px, 0, "buttons-left", "left", "select-auto");
-}
-
-.formtastic#new_comment, .formtastic#new_report {
   textarea, input {
     font-family: $blueprint-font-family;
     font-size: 100%;
