@@ -1,3 +1,12 @@
+$cyan: #d0ffff;
+$dark_red: #a60201;
+$yellow: #fcfbbd;
+$orange: #f2630c;
+$dark_gray: #878787;
+$mid_gray: #989898;
+$light_gray: #eeeeee;
+$lightest_gray: #fafafa;
+
 .box {
   margin: 6px 11px 25px;
   padding: 15px;
@@ -8,7 +17,7 @@ body {
 }
 
 .header {
-  background: #878787;
+  background: $dark_gray;
   padding: 5px 0 5px 10px;
   margin-bottom: 5px;
   a {
@@ -20,31 +29,27 @@ body {
 }
 
 .advert {
-  background: #D0FFFF;
+  background: $cyan;
   a {
-    color: #A60201;
+    color: $dark_red;
   }
 }
 
-.comments-header {
-  background: #fcfbbd;
+.comments-header, .applications-header {
+  background: $yellow;
 }
 
 .comment {
   margin-left: 15px;
   margin-right: 15px;
-  background: #fafafa;
+  background: $lightest_gray;
   span {
-    color: #989898;
+    color: $mid_gray;
   }
   a {
-    color: #f2630c;
+    color: $orange;
     font-weight: bold;
   }
-}
-
-.applications-header {
-  background: #fcfbbd;
 }
 
 .applications-more {
@@ -52,13 +57,13 @@ body {
 }
 
 .application {
-  background: #eeeeee;
+  background: $light_gray;
   .address {
     padding-bottom: 5px;
     a {
       font-size: 18px;
       font-weight: bold;
-      color: #f2630c;
+      color: $orange;
     }
   }
   .map {
@@ -72,16 +77,16 @@ body {
     vertical-align: top;
   }
   .add-comment a {
-    color: #f2630c;
+    color: $orange;
   }
 }
 
 .footer-outer {
-  border-top: solid 3px #F2630C;
+  border-top: solid 3px $orange;
   .footer-inner {
     padding-left: 15px; padding-top: 5px;
     a {
-      color: #f2630c;
+      color: $orange;
     }
   }
 }
