@@ -15,6 +15,10 @@ body {
   font-family: sans-serif;
 }
 
+a {
+  color: $orange;
+}
+
 .header {
   background: $dark_gray;
   padding: 5px 0 5px 10px;
@@ -29,9 +33,6 @@ body {
 
 .advert {
   background: $cyan;
-  a {
-    color: $orange;
-  }
 }
 
 .comments-header, .applications-header {
@@ -46,7 +47,6 @@ body {
     color: $mid_gray;
   }
   a {
-    color: $orange;
     font-weight: bold;
   }
 }
@@ -62,7 +62,6 @@ body {
     a {
       font-size: 18px;
       font-weight: bold;
-      color: $orange;
     }
   }
   .map {
@@ -75,17 +74,11 @@ body {
   .description {
     vertical-align: top;
   }
-  .add-comment a {
-    color: $orange;
-  }
 }
 
 .footer-outer {
   border-top: solid 3px $orange;
   .footer-inner {
     padding-left: 15px; padding-top: 5px;
-    a {
-      color: $orange;
-    }
   }
 }
