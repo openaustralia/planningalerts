@@ -25,7 +25,7 @@ module EmailConfirmable
     end
 
     def send_confirmation_email
-      Notifier.confirm(self.theme, self).deliver
+      Notifier.delay.confirm(self.theme, self)
     end
 
     protected
