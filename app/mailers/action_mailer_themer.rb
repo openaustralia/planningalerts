@@ -35,4 +35,8 @@ module ActionMailerThemer
   def email_from(theme)
     ThemeChooser.create(theme).email_from
   end
+
+  def host(theme)
+    ThemeChooser.create(theme).host
+  end
 end

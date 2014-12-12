@@ -29,6 +29,10 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
     it "should use the singular in the comment line" do
       email.subject.should == "1 new comment on planning applications near #{@alert.address}"
     end
+
+    it "should have the unsubscribe header" do
+      email.header["List-Unsubscribe"].to_s.should == "<http://dev.planningalerts.org.au/alerts/abcdef/unsubscribe>"
+    end
   end
 
   describe "when sending a planning alert with two new comments" do
