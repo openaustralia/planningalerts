@@ -51,7 +51,7 @@ PlanningalertsApp::Application.configure do
   # Send mails to the locally running instance of Cuttlefish
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-     :address => "localhost",
+     :address => Configuration::CUTTLEFISH_SERVER,
      :port => 2525,
      :user_name => Configuration::CUTTLEFISH_USER_NAME,
      :password => Configuration::CUTTLEFISH_PASSWORD,

@@ -37,6 +37,7 @@ module Configuration
   TWITTER_OAUTH_TOKEN_SECRET = "xxxxxxxxxxx"
 
   # cuttlefish.io is used to send out emails in production
+  CUTTLEFISH_SERVER = "cuttlefish.io"
   CUTTLEFISH_USER_NAME = "xxxxxxxxxxxxxxxxx"
   CUTTLEFISH_PASSWORD = "xxxxxxxxxxxxxxxxxxxx"
 
