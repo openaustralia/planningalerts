@@ -55,8 +55,6 @@ PlanningalertsApp::Application.configure do
      :port => 2525,
      :user_name => Configuration::CUTTLEFISH_USER_NAME,
      :password => Configuration::CUTTLEFISH_PASSWORD,
-     # The cuttlefish smtp server is currently using a self-signed certificate
-     :openssl_verify_mode => "none",
      :authentication => :plain
   }
 
