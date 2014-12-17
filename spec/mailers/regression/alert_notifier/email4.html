@@ -1,94 +1,185 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>/* line 9, ../../app/assets/stylesheets/email.css.scss */
+.box {
+  margin: 6px 11px 25px;
+  padding: 15px;
+}
 
-</head>
-<body style="font-family: sans-serif">
-<style type="text/css">
+/* line 14, ../../app/assets/stylesheets/email.css.scss */
 body {
-font-family: sans-serif;
+  font-family: sans-serif;
+}
+
+/* line 18, ../../app/assets/stylesheets/email.css.scss */
+a {
+  color: #f2630c;
+}
+
+/* line 22, ../../app/assets/stylesheets/email.css.scss */
+.header {
+  background: #878787;
+  padding: 5px 0 5px 10px;
+  margin-bottom: 5px;
+}
+/* line 26, ../../app/assets/stylesheets/email.css.scss */
+.header a {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+/* line 34, ../../app/assets/stylesheets/email.css.scss */
+.advert {
+  background: #d0ffff;
+}
+
+/* line 38, ../../app/assets/stylesheets/email.css.scss */
+.comments-header, .applications-header {
+  background: #fcfbbd;
+}
+
+/* line 42, ../../app/assets/stylesheets/email.css.scss */
+.comment {
+  margin-left: 15px;
+  margin-right: 15px;
+  background: #fafafa;
+}
+/* line 46, ../../app/assets/stylesheets/email.css.scss */
+.comment span {
+  color: #989898;
+}
+/* line 49, ../../app/assets/stylesheets/email.css.scss */
+.comment a {
+  font-weight: bold;
+}
+
+/* line 54, ../../app/assets/stylesheets/email.css.scss */
+.applications-more {
+  padding-left: 15px;
+}
+
+/* line 58, ../../app/assets/stylesheets/email.css.scss */
+.application {
+  background: #eeeeee;
+}
+/* line 60, ../../app/assets/stylesheets/email.css.scss */
+.application .address {
+  padding-bottom: 5px;
+}
+/* line 62, ../../app/assets/stylesheets/email.css.scss */
+.application .address a {
+  font-size: 18px;
+  font-weight: bold;
+}
+/* line 67, ../../app/assets/stylesheets/email.css.scss */
+.application .map {
+  padding: 5px;
+  width: 155px;
+}
+/* line 71, ../../app/assets/stylesheets/email.css.scss */
+.application .streetview {
+  padding: 5px;
+}
+/* line 74, ../../app/assets/stylesheets/email.css.scss */
+.application .description {
+  vertical-align: top;
+}
+
+/* line 79, ../../app/assets/stylesheets/email.css.scss */
+.footer-outer {
+  border-top: solid 3px #f2630c;
+}
+/* line 81, ../../app/assets/stylesheets/email.css.scss */
+.footer-outer .footer-inner {
+  padding-left: 15px;
+  padding-top: 5px;
 }
 </style>
-<div style="background: #878787; margin-bottom: 5px; padding: 5px 0 5px 10px">
-<a href="http://nsw.127.0.0.1.xip.io:3000/" style="color: white; font-size: 20px; font-weight: bold; text-decoration: none">Application Tracking</a>
+</head>
+<body>
+<div class='header'>
+<a href="http://nsw.127.0.0.1.xip.io:3000/">Application Tracking</a>
 </div>
 
-<div style="background: #fcfbbd; margin: 6px 11px 25px; padding: 15px">
+<div class='box applications-header'>
 The following <strong>new planning applications</strong> have been found within 800 m of
 <strong>24 Bruce Rd, Glenbrook NSW 2773</strong>
 </div>
-<div style="background: #eeeeee; margin: 6px 11px 25px; padding: 15px">
+<div class='box application'>
 <table>
 <tr>
-<td colspan="2" style="padding-bottom: 5px">
-<a href="http://nsw.127.0.0.1.xip.io:3000/applications/1?utm_medium=email&amp;utm_source=alerts" style="color: #f2630c; font-size: 18px; font-weight: bold">Foo Street, Bar</a>
+<td class='address' colspan='2'>
+<a href="http://nsw.127.0.0.1.xip.io:3000/applications/1?utm_medium=email&amp;utm_source=alerts">Foo Street, Bar</a>
 </td>
 </tr>
 <tr>
-<td style="padding: 5px; width: 155px">
-<img alt="Map of Foo Street, Bar" height="150" src="http://maps.googleapis.com/maps/api/staticmap?zoom=16&amp;size=150x150&amp;maptype=roadmap&amp;markers=color:red%7C0.1,0.2&amp;sensor=false" width="150">
+<td class='map'>
+<img alt="Map of Foo Street, Bar" height="150" src="http://maps.googleapis.com/maps/api/staticmap?zoom=16&size=150x150&maptype=roadmap&markers=color:red%7C0.1,0.2&sensor=false" width="150" />
 </td>
-<td style="padding: 5px">
-<img alt="Streetview of Foo Street, Bar" height="150" src="http://maps.googleapis.com/maps/api/streetview?size=150x150&amp;location=0.1,0.2&amp;fov=90&amp;sensor=false" width="150">
+<td class='streetview'>
+<img alt="Streetview of Foo Street, Bar" height="150" src="http://maps.googleapis.com/maps/api/streetview?size=150x150&location=0.1,0.2&fov=90&sensor=false" width="150" />
 </td>
 </tr>
 <tr>
-<td colspan="2" style="vertical-align: top" valign="top">
+<td class='description' colspan='2'>
 Knock something down
 </td>
 </tr>
 <tr>
-<td colspan="2">
-<a href="http://nsw.127.0.0.1.xip.io:3000/applications/1?utm_campaign=add-comment&amp;utm_medium=email&amp;utm_source=alerts#add-comment" style="color: #f2630c">Add your own comment</a>
+<td colspan='2'>
+<a href="http://nsw.127.0.0.1.xip.io:3000/applications/1?utm_campaign=add-comment&amp;utm_medium=email&amp;utm_source=alerts#add-comment">Add your own comment</a>
 </td>
 </tr>
 </table>
 </div>
-<div style="background: #eeeeee; margin: 6px 11px 25px; padding: 15px">
+<div class='box application'>
 <table>
 <tr>
-<td colspan="2" style="padding-bottom: 5px">
-<a href="http://nsw.127.0.0.1.xip.io:3000/applications/2?utm_medium=email&amp;utm_source=alerts" style="color: #f2630c; font-size: 18px; font-weight: bold">Bar Street, Foo</a>
+<td class='address' colspan='2'>
+<a href="http://nsw.127.0.0.1.xip.io:3000/applications/2?utm_medium=email&amp;utm_source=alerts">Bar Street, Foo</a>
 </td>
 </tr>
 <tr>
-<td style="padding: 5px; width: 155px">
-<img alt="Map of Bar Street, Foo" height="150" src="http://maps.googleapis.com/maps/api/staticmap?zoom=16&amp;size=150x150&amp;maptype=roadmap&amp;markers=color:red%7C0.3,0.4&amp;sensor=false" width="150">
+<td class='map'>
+<img alt="Map of Bar Street, Foo" height="150" src="http://maps.googleapis.com/maps/api/staticmap?zoom=16&size=150x150&maptype=roadmap&markers=color:red%7C0.3,0.4&sensor=false" width="150" />
 </td>
-<td style="padding: 5px">
-<img alt="Streetview of Bar Street, Foo" height="150" src="http://maps.googleapis.com/maps/api/streetview?size=150x150&amp;location=0.3,0.4&amp;fov=90&amp;sensor=false" width="150">
+<td class='streetview'>
+<img alt="Streetview of Bar Street, Foo" height="150" src="http://maps.googleapis.com/maps/api/streetview?size=150x150&location=0.3,0.4&fov=90&sensor=false" width="150" />
 </td>
 </tr>
 <tr>
-<td colspan="2" style="vertical-align: top" valign="top">
+<td class='description' colspan='2'>
 Put something up
 </td>
 </tr>
 <tr>
-<td colspan="2">
-<a href="http://nsw.127.0.0.1.xip.io:3000/applications/2?utm_campaign=add-comment&amp;utm_medium=email&amp;utm_source=alerts#add-comment" style="color: #f2630c">Add your own comment</a>
+<td colspan='2'>
+<a href="http://nsw.127.0.0.1.xip.io:3000/applications/2?utm_campaign=add-comment&amp;utm_medium=email&amp;utm_source=alerts#add-comment">Add your own comment</a>
 </td>
 </tr>
 </table>
 </div>
 
 
-<div style="border-top-color: #f2630c; border-top-style: solid; border-top-width: 3px">
-<div style="padding-left: 15px; padding-top: 5px">
+<div class='footer-outer'>
+<div class='footer-inner'>
 <p>
 Application Tracking is brought to you by
-<a href="http://www.planning.nsw.gov.au/" style="color: #f2630c">Planning &amp; Environment, NSW</a>.
+<a href="http://www.planning.nsw.gov.au/">Planning &amp; Environment, NSW</a>.
 It is powered by
-<a href="http://www.planningalerts.org.au/" style="color: #f2630c">PlanningAlerts.org.au</a>
+<a href="http://www.planningalerts.org.au/">PlanningAlerts.org.au</a>
 from the
-<a href="http://www.openaustraliafoundation.org.au" style="color: #f2630c">OpenAustralia Foundation</a>.
+<a href="http://www.openaustraliafoundation.org.au">OpenAustralia Foundation</a>.
 </p>
 
 <p>
 You can
-<a href="http://nsw.127.0.0.1.xip.io:3000/alerts/abcdef/area" style="color: #f2630c">change the size</a>
+<a href="http://nsw.127.0.0.1.xip.io:3000/alerts/abcdef/area">change the size</a>
 of the area covered by this alert or
-<a href="http://nsw.127.0.0.1.xip.io:3000/alerts/abcdef/unsubscribe" style="color: #f2630c">unsubscribe</a>
+<a href="http://nsw.127.0.0.1.xip.io:3000/alerts/abcdef/unsubscribe">unsubscribe</a>
 and stop receiving these emails.
 </p>
 
