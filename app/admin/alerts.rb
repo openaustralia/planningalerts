@@ -12,4 +12,17 @@ ActiveAdmin.register Alert do
     column :updated_at
     default_actions
   end
+
+  # TODO: Don't export duplicates
+  collection_action :export_active_emails, method: :get do
+    emails = ''
+    Alert.active.find_each do |alert|
+      emails += alert.email + "\n"
+    end
+    send_data emails, filename: 'emails.txt'
+  end
+
+  action_item do
+    link_to "Export active email addresses", export_active_emails_admin_alerts_path
+  end
 end
