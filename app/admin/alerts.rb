@@ -13,13 +13,13 @@ ActiveAdmin.register Alert do
     default_actions
   end
 
-  # TODO: Don't export duplicates
   collection_action :export_active_emails, method: :get do
-    emails = ''
+    emails = []
     Alert.active.find_each do |alert|
-      emails += alert.email + "\n"
+      emails << alert.email
     end
-    send_data emails, filename: 'emails.txt'
+    emails.uniq! # TODO: Use ActiveRecord's `distinct` when we upgrade Rails
+    send_data emails.join("\n"), filename: 'emails.txt'
   end
 
   action_item do
