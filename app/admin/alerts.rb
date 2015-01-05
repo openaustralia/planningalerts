@@ -23,6 +23,8 @@ ActiveAdmin.register Alert do
   end
 
   action_item do
-    link_to "Export active email addresses", export_active_emails_admin_alerts_path
+    link_to "Export active email addresses",
+            export_active_emails_admin_alerts_path,
+            title: "Export a text file containing all email addresses with an active alert set up"
   end
 end
