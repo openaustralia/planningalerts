@@ -116,6 +116,46 @@ body {
   padding-bottom: 1em;
 }
 
+#donations-wrapper {
+  background-color: #2C9EB5;
+  color: white;
+  text-shadow: 1px 2px 0 #29757A;
+
+  h4 {
+    color: white;
+  }
+
+  p a {
+    color: #FFFFFF;
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  .button-action {
+    background: #EFAB01;
+    border-color: #FEB90B;
+    color: #FFFFFF;
+    font-size: 1.3em;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 0 #C87019;
+    transition: .5s all ease;
+    box-shadow: inset -2px -2px 0 0 darken(#EFAB01, 5%);
+
+    &:hover,
+    &:focus {
+      background: #FFF;
+      border-color: #FFF;
+      color: #29757A;
+      text-shadow: none;
+      box-shadow: 0 0 2em #FAE08B;
+    }
+  }
+}
+
 .donations-banner {
   padding-top: 1em;
   padding-bottom: 2em;
