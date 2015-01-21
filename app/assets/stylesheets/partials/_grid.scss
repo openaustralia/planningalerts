@@ -130,6 +130,29 @@
       text-align: center;
     }
   }
+
+  .donations-banner {
+    text-align: center;
+  }
+}
+
+@include at-breakpoint(45em) {
+  .donations-banner {
+    text-align: left;
+    @include clearfix;
+
+    .media-body {
+      float: left;
+      clear: left;
+      @include span-columns(8, 12);
+    }
+
+    .media-object {
+      margin-right: 3em;
+      float: right;
+      clear: right;
+    }
+  }
 }
 
 @include at-breakpoint(30em 12 60em) {
@@ -300,7 +323,7 @@
     padding-right: 0;
   }
 
-  #content, .tweets > div, .stats > div {
+  #content, .tweets > div, .stats > div, .donations-banner {
     padding-left: $grid-padding;
     padding-right: $grid-padding;
   }
