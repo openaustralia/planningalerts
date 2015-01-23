@@ -68,6 +68,9 @@ a {
       color: $dark;
       background-color: $content-background;
     }
+    li:last-child a {
+      color: $warm-highlight;
+    }
   }
   a {
     padding: .5em;
