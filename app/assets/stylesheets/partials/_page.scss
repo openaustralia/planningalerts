@@ -166,7 +166,7 @@ body {
 }
 
 #footer {
-  color: $lightest;
+  color: #ffffff;
 
   a {
     &:link, &:hover, &:visited {
@@ -176,9 +176,9 @@ body {
       color: $dark;
     }
   }
-  h4, h5, {
+  h4, h5 {
     &, a:link {
-      color: $lightest;
+      color: #ffffff;
     }
   }
   h4 {
@@ -201,9 +201,6 @@ body {
         display: block;
       }
     }
-  }
-  li {
-    color: $lightest;
   }
 }
 
