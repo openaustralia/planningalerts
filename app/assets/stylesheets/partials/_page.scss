@@ -356,6 +356,14 @@ div.comment {
   padding: 1em;
   background: #fafafa;
 
+  .comment-text {
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: $font-color;
+  }
+
   .report {
     opacity: 0;
   }
