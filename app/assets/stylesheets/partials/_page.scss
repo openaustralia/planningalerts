@@ -353,7 +353,6 @@ ol#comments {
 }
 
 figure.comment {
-  padding: 1em;
   background: #fafafa;
 
   .comment-text {
@@ -384,6 +383,11 @@ figure.comment {
       transition: opacity .1s linear;
     }
   }
+}
+
+.comment-text,
+.comment-meta {
+  padding: 1em;
 }
 
 .comment {
