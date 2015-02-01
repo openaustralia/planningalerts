@@ -39,7 +39,7 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 **Step 1 - Seed authorities table**
  * Start the rails server - `rails s`
- * Create an admin user - TODO: Explain how to do this
+ * Create an admin user - in the [Rails console](http://guides.rubyonrails.org/command_line.html#rails-console), run `User.create email: 'test@test.com', password: '123456'`
  * Go to the admin console - http://localhost:3000/admin
  * Create the authority Marrickville with the following data
    * FULL NAME	`Marrickville Council`
