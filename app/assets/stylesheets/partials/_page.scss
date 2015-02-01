@@ -358,7 +358,6 @@ figure.comment {
   .comment-text {
     font-style: normal;
     margin: 0;
-    padding: 0;
     border: 0;
     color: $font-color;
   }
@@ -385,9 +384,23 @@ figure.comment {
   }
 }
 
+.comment-address {
+  margin: 0;
+  font-size: 1em;
+}
+
+.comment-address,
 .comment-text,
 .comment-meta {
-  padding: 1em;
+  padding: .5em 1em;
+}
+
+.comment > *:first-child {
+  padding-top: 1em;
+}
+
+.comment > *:last-child {
+  padding-bottom: 1em;
 }
 
 .comment {
