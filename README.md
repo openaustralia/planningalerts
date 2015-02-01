@@ -21,7 +21,7 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
  * Checkout the project
 
 **Install Ruby Dependencies**
- * Install bundler - `gem install bundler`
+ * Install bundler and foreman - `gem install bundler foreman`
  * Install dependencies - `bundle install`
 
 **Setup The Database**
@@ -42,8 +42,7 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
  * Run - `rake planningalerts:applications:scrape['marrickville']`
 
 **Step 2 - Setup an Alert**
- * Start the rails server - `rails s`
- * Start MailCatcher - `mailcatcher`
+ * Start servers - `foreman start`
  * Hit the home page - http://localhost:3000
  * Enter an address e.g. 638 King St, Newtown NSW 2042
  * Click the "Email me" link and setup an alert
