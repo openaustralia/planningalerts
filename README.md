@@ -28,8 +28,7 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
  * Create your own database config file - `cp config/database.yml.example config/database.yml`
  * Update the config/database.yml with your root mysql credentials
  * If you are on OSX change the socket to /tmp/mysql.sock
- * Create the databases - `rake db:create`
- * Load the database schema - `rake db:schema:load`
+ * Set up the databases - `rake db:setup`
  * Generate Thinking Sphinx configuration - `bundle exec rake thinking_sphinx:configure`
 
 **Run The Tests**
@@ -39,8 +38,8 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 **Step 1 - Seed authorities table**
  * Start the rails server - `rails s`
- * Create an admin user - TODO: Explain how to do this
  * Go to the admin console - http://localhost:3000/admin
+ * Log in with the admin user `admin@example.com` and password `password`
  * Create the authority Marrickville with the following data
    * FULL NAME	`Marrickville Council`
    * SHORT NAME	`Marrickville`
