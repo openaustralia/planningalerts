@@ -36,25 +36,12 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 ### Scraping and sending emails in development
 
-**Step 1 - Seed authorities table**
- * Start the rails server - `rails s`
- * Go to the admin console - http://localhost:3000/admin
- * Log in with the admin user `admin@example.com` and password `password`
- * Create the authority Marrickville with the following data
-   * FULL NAME	`Marrickville Council`
-   * SHORT NAME	`Marrickville`
-   * STATE	`NSW`
-   * EMAIL	`council@marrickville.nsw.gov.au`
-   * POPULATION 2011	`81489`
-   * MORPH NAME	`planningalerts-scrapers/marrickville`
-   * DISABLED	`false`
-
-**Step 2 - Scrape DAs**
+**Step 1 - Scrape DAs**
  * Register on [morph.io](https://morph.io) and [get your api key](https://morph.io/documentation/api).
  * Update `MORPH_API_KEY` in app/models/configuration.rb
  * Run - `rake planningalerts:applications:scrape['marrickville']`
 
-**Step 3 - Setup an Alert**
+**Step 2 - Setup an Alert**
  * Start the rails server - `rails s`
  * Start MailCatcher - `mailcatcher`
  * Hit the home page - http://localhost:3000
@@ -62,7 +49,7 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
  * Click the "Email me" link and setup an alert
  * Open MailCatcher and click the confirm link: http://localhost:1080/
 
-**Step 4 - Send email alerts**
+**Step 3 - Send email alerts**
  * Run - `rake planningalerts:applications:email`
  * Check the email in your browser: http://localhost:1080/
  * To resend alerts during testing, just set the `last_sent` attribute of your alert to *nil*
