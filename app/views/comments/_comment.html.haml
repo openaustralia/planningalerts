@@ -2,7 +2,7 @@
   =link_to application_path(comment.application), class: "panel-link" do
     %figure.comment
       - if current_page?(comments_path)
-        %h2.comment-address
+        %h2.comment-address.panel-heading
           #{comment.application.suburb} #{comment.application.state}
           #{": On “" + truncate(comment.application.description) + "”"}
           at

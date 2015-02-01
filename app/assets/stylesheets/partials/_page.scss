@@ -358,6 +358,19 @@ ol#comments {
   &:hover,
   &:focus {
     text-decoration: none;
+
+    .panel-heading {
+      background-color: darken($lightest-cool-highlight, 10%);
+    }
+  }
+
+  .panel-heading {
+    background-color: $lightest-cool-highlight;
+    -webkit-transition: background .1s linear;
+    -moz-transition: background .1s linear;
+    -o-transition: background .1s linear;
+    -ms-transition: background .1s linear;
+    transition: background .1s linear;
   }
 }
 
@@ -396,7 +409,6 @@ figure.comment {
 .comment-address {
   margin: 0;
   font-size: 1em;
-  background-color: $lightest-cool-highlight;
 }
 
 .comment-address,
