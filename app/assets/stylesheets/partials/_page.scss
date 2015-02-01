@@ -352,6 +352,15 @@ ol#comments {
   margin-right: 0;
 }
 
+.panel-link {
+  color: $font-color;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
 figure.comment {
   background: #fafafa;
 
