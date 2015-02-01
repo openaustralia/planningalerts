@@ -3,7 +3,10 @@
     %figure.comment
       - if current_page?(comments_path)
         %h2.comment-address
-          On #{comment.application.address}: #{truncate(comment.application.description)}
+          #{comment.application.suburb} #{comment.application.state}
+          #{": On “" + truncate(comment.application.description) + "”"}
+          at
+          #{comment.application.address}
       %blockquote.comment-text= comment_as_html(comment.text)
       %figcaption.comment-meta
         %span.author
