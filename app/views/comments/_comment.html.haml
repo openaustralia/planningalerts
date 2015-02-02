@@ -3,8 +3,8 @@
     %figure.comment.panel
       - if current_page?(comments_path)
         %h2.comment-address.panel-heading
-          #{comment.application.suburb} #{comment.application.state}
-          #{": On “" + truncate(comment.application.description) + "”"}
+          %strong #{comment.application.suburb} #{comment.application.state}
+          #{"on “" + truncate(comment.application.description) + "”"}
           at
           #{comment.application.address}
       %blockquote.comment-text= comment_as_html(comment.text)
