@@ -436,6 +436,11 @@ ol#comments {
   padding-bottom: 1em;
 }
 
+.comment-time {
+  font-size: 0.9em;
+  display: inline-block;
+}
+
 body {
   h3, h4, h5 {
     color: $cool-highlight;
