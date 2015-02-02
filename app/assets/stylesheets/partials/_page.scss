@@ -431,6 +431,7 @@ ol#comments {
 }
 
 .comment-report {
+  @include quiet;
   margin-top: .15em;
   float: right;
   font-size: 0.9em;
