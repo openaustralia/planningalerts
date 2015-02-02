@@ -379,7 +379,7 @@ ol#comments {
 }
 
 .comment {
-  margin-bottom: 1em;
+  margin-bottom: 2.5em;
   background: #fafafa;
 
   &:hover {
@@ -430,10 +430,6 @@ ol#comments {
 .comment-text,
 .comment-meta {
   padding: .5em 1em;
-}
-
-.comment > *:last-child {
-  padding-bottom: 1em;
 }
 
 .comment-time {
