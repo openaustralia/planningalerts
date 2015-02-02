@@ -2,6 +2,7 @@
   = link_to application_path(comment.application), title: "View application at #{comment.application.address}", class: "panel-link" do
     %figure.comment.panel
       %h2.comment-address.panel-heading
+        In
         %strong #{comment.application.suburb} #{comment.application.state}
         #{"on “" + truncate(comment.application.description) + "”"}
         at
