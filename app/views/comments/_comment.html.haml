@@ -8,9 +8,8 @@
         #{comment.application.address}
       %blockquote.comment-text= comment_as_html(comment.text)
       %figcaption.comment-meta
-        %span.author
-          by #{comment.name}
-        =link_to "#{time_ago_in_words(comment.updated_at)} ago", application_path(comment.application), class: "comment-time"
+        %span.author by #{comment.name}
+        %time.comment-time{datetime: comment.updated_at.strftime("%F")} #{time_ago_in_words(comment.updated_at)} ago
         - if current_page?(application_path(comment.application))
           %span.report= link_to "report comment", new_comment_report_path(comment)
 - else
