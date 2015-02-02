@@ -381,13 +381,6 @@ ol#comments {
 figure.comment {
   background: #fafafa;
 
-  .comment-text {
-    font-style: normal;
-    margin: 0;
-    border: 0;
-    color: $font-color;
-  }
-
   .report {
     opacity: 0;
   }
@@ -408,6 +401,13 @@ figure.comment {
       transition: opacity .1s linear;
     }
   }
+}
+
+.comment-text {
+  font-style: normal;
+  margin: 0;
+  border: 0;
+  color: $font-color;
 }
 
 .comment-address {
