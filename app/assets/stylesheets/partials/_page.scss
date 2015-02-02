@@ -164,6 +164,10 @@ body {
 
 // Within content
 
+.page-title {
+  @extend h3;
+}
+
 p a, li a, span a, dd a, dt a, div a {
   @include hover-link;
 }
