@@ -379,12 +379,9 @@ ol#comments {
 }
 
 .comment {
+  margin-bottom: 1em;
   background: #fafafa;
 
-  .report {
-    opacity: 0;
-  }
-  
   &:hover {
     background: #f0f0f0;
     -webkit-transition: background .1s linear;
@@ -402,6 +399,15 @@ ol#comments {
       transition: opacity .1s linear;
     }
   }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  .report {
+    @include float-right;
+    opacity: 0;
+  }
 }
 
 .comment-text {
@@ -416,6 +422,10 @@ ol#comments {
   font-size: 1em;
 }
 
+.comment-meta {
+  @include quiet;
+}
+
 .comment-address,
 .comment-text,
 .comment-meta {
@@ -428,20 +438,6 @@ ol#comments {
 
 .comment > *:last-child {
   padding-bottom: 1em;
-}
-
-.comment {
-  margin-bottom: 1em;
-
-  p:last-child {
-    margin-bottom: 0;
-  }
-  .author {
-    @include quiet;
-  }
-  .report {
-    @include float-right;
-  }
 }
 
 body {
