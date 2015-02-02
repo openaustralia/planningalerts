@@ -1,5 +1,5 @@
 - if current_page?(comments_path)
-  =link_to application_path(comment.application), class: "panel-link" do
+  = link_to application_path(comment.application), class: "panel-link" do
     %figure.comment.panel
       - if current_page?(comments_path)
         %h2.comment-address.panel-heading
