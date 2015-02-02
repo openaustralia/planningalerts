@@ -352,6 +352,10 @@ ol#comments {
   margin-right: 0;
 }
 
+.panel {
+  border: 1px $lightest-cool-highlight solid;
+}
+
 .panel-link {
   color: $font-color;
 

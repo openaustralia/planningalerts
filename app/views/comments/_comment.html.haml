@@ -1,6 +1,6 @@
 - if current_page?(comments_path)
   =link_to application_path(comment.application), class: "panel-link" do
-    %figure.comment
+    %figure.comment.panel
       - if current_page?(comments_path)
         %h2.comment-address.panel-heading
           #{comment.application.suburb} #{comment.application.state}
@@ -15,7 +15,7 @@
         - if current_page?(application_path(comment.application))
           %span.report= link_to "report comment", new_comment_report_path(comment)
 - else
-  %figure.comment
+  %figure.comment.panel
     %blockquote.comment-text= comment_as_html(comment.text)
     %figcaption.comment-meta
       %span.author
