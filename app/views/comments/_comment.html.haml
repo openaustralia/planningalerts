@@ -19,4 +19,4 @@
       %time.comment-time{datetime: comment.updated_at.strftime("%F")}
         #{time_ago_in_words(comment.updated_at)} ago
       - if current_page?(application_path(comment.application))
-        %span.report= link_to "report comment", new_comment_report_path(comment)
+        = link_to "report comment", new_comment_report_path(comment), class: "comment-report"
