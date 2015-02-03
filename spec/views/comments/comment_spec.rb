@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe "comments/_comment" do
+  before do
+    Timecop.freeze(Time.parse('2015-01-26 08:32:34 +1100'))
+  end
+
+  after do
+    Timecop.return
+  end
+
   it "should remove links in the comment text" do
     application = mock_model(Application)
     comment = mock_model(Comment, :name => "Matthew", :updated_at => Time.now, :application => application,
@@ -11,7 +19,7 @@ describe "comments/_comment" do
 <blockquote class='comment-text'><p>This is a link to <a href="http://openaustralia.org" rel="nofollow">openaustralia.org</a></p></blockquote>
 <figcaption class='comment-meta'>
 <span class='comment-author'>by Matthew</span>
-<time class='comment-time' datetime='2015-02-03'>
+<time class='comment-time' datetime='2015-01-26'>
 less than a minute ago
 </time>
 </figcaption>
@@ -32,7 +40,7 @@ less than a minute ago
 <p>This is a new paragraph</p></blockquote>
 <figcaption class='comment-meta'>
 <span class='comment-author'>by Matthew</span>
-<time class='comment-time' datetime='2015-02-03'>
+<time class='comment-time' datetime='2015-01-26'>
 less than a minute ago
 </time>
 </figcaption>
@@ -50,7 +58,7 @@ less than a minute ago
 <blockquote class='comment-text'><p><a rel="nofollow">A nasty link</a></p></blockquote>
 <figcaption class='comment-meta'>
 <span class='comment-author'>by Matthew</span>
-<time class='comment-time' datetime='2015-02-03'>
+<time class='comment-time' datetime='2015-01-26'>
 less than a minute ago
 </time>
 </figcaption>
