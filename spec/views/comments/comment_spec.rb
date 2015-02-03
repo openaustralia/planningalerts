@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "comments/_comment" do
   before do
-    Timecop.freeze(Time.parse('2015-01-26 08:32:34 +1100'))
+    Timecop.freeze(Time.local(2015, 1, 26, 10, 5, 0))
   end
 
   after do
