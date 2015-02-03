@@ -338,6 +338,7 @@ GEM
       riddle (>= 1.5.3)
     thor (0.19.1)
     tilt (1.4.1)
+    timecop (0.7.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -417,6 +418,7 @@ DEPENDENCIES
   susy
   therubyracer
   thinking-sphinx (~> 2.0)
+  timecop
   twitter
   uglifier
   validate_url

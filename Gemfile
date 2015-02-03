@@ -64,6 +64,7 @@ group :test do
   gem 'coveralls', :require => false
   gem 'vcr'
   gem 'webmock'
+  gem 'timecop'
 end
 
 group :development do
