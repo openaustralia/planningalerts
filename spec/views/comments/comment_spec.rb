@@ -1,16 +1,29 @@
 require 'spec_helper'
 
 describe "comments/_comment" do
+  before do
+    Timecop.freeze(Time.local(2015, 1, 26, 10, 5, 0))
+  end
+
+  after do
+    Timecop.return
+  end
+
   it "should remove links in the comment text" do
     application = mock_model(Application)
     comment = mock_model(Comment, :name => "Matthew", :updated_at => Time.now, :application => application,
       :text => 'This is a link to <a href="http://openaustralia.org">openaustralia.org</a>')
     render :partial => "comment", :object => comment
     rendered.should == <<-EOF
-<div class='comment'>
-<div class='text'><p>This is a link to <a href="http://openaustralia.org" rel="nofollow">openaustralia.org</a></p></div>
-<span class='author'>by Matthew less than a minute ago</span>
-</div>
+<figure class='comment panel'>
+<blockquote class='comment-text'><p>This is a link to <a href="http://openaustralia.org" rel="nofollow">openaustralia.org</a></p></blockquote>
+<figcaption class='comment-meta'>
+<span class='comment-author'>by Matthew</span>
+<time class='comment-time' datetime='2015-01-26'>
+less than a minute ago
+</time>
+</figcaption>
+</figure>
     EOF
   end
 
@@ -20,13 +33,18 @@ describe "comments/_comment" do
       :text => "This is the first paragraph\nAnd the next line\n\nThis is a new paragraph")
     render :partial => "comment", :object => comment
     rendered.should == <<-EOF
-<div class='comment'>
-<div class='text'><p>This is the first paragraph
+<figure class='comment panel'>
+<blockquote class='comment-text'><p>This is the first paragraph
 <br>And the next line</p>
 
-<p>This is a new paragraph</p></div>
-<span class='author'>by Matthew less than a minute ago</span>
-</div>
+<p>This is a new paragraph</p></blockquote>
+<figcaption class='comment-meta'>
+<span class='comment-author'>by Matthew</span>
+<time class='comment-time' datetime='2015-01-26'>
+less than a minute ago
+</time>
+</figcaption>
+</figure>
     EOF
   end
 
@@ -36,11 +54,15 @@ describe "comments/_comment" do
       :text => "<a href=\"javascript:document.location='http://www.google.com/'\">A nasty link</a><img src=\"http://foo.co\">")
     render :partial => "comment", :object => comment
     rendered.should == <<-EOF
-<div class='comment'>
-<div class='text'><p><a rel="nofollow">A nasty link</a></p></div>
-<span class='author'>by Matthew less than a minute ago</span>
-</div>
+<figure class='comment panel'>
+<blockquote class='comment-text'><p><a rel="nofollow">A nasty link</a></p></blockquote>
+<figcaption class='comment-meta'>
+<span class='comment-author'>by Matthew</span>
+<time class='comment-time' datetime='2015-01-26'>
+less than a minute ago
+</time>
+</figcaption>
+</figure>
     EOF
   end
 end
-
