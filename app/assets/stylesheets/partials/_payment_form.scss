@@ -32,82 +32,22 @@
   }
 }
 
-.registration-form {
-  @include at-breakpoint(45em) {
-    @include span-columns(8, 12);
-    margin-right: auto;
-    margin-left: auto;
-    float: none;
+#button-pro-signup {
+  @include box-sizing(border-box);
+  margin: 0 auto 1em;
+  text-align: center;
+  font-size: 1.25em;
+  font-family: $blueprint-font-family;
+
+  strong {
+    display: block;
   }
 
-  @include at-breakpoint(70em) {
-    @include span-columns(7, 12);
-    margin-right: auto;
-    margin-left: auto;
-    float: none;
+  .registration-price {
+    font-size: 2em;
   }
 
-  * {
-    @include box-sizing(border-box);
-    font-family: $blueprint-font-family;
-  }
-
-  input,
-  button {
-    letter-spacing: 1px;
-  }
-
-  legend {
-    margin: 0 auto 1em;
-    text-align: center;
+  .registration-price-per {
     font-size: 1.25em;
-
-    strong {
-      display: block;
-    }
-
-    .registration-price {
-      font-size: 2em;
-    }
-
-    .registration-price-per {
-      font-size: 1.25em;
-    }
-  }
-
-  label {
-    margin-bottom: .25em;
-    display: block;
-    font-size: 1.1em;
-    font-weight: bold;
-  }
-
-  input {
-    margin-bottom: 1.25em;
-    width: 100%;
-    font-size: 1.2em;
-    padding: .5em;
-    display: block;
-    border: 2px #bbb solid;
-  }
-
-  .input-group-expiration {
-    @include at-breakpoint(45em) {
-      margin-right: 5%;
-    }
-  }
-
-  .input-group-expiration,
-  .input-group-cvv {
-    @include at-breakpoint(45em) {
-      width: 47%;
-      display: inline-block;
-    }
-  }
-
-  .button-action {
-    margin: 1em auto 0;
-    padding: .5em 1.75em;
-    display: block;
   }
 }
