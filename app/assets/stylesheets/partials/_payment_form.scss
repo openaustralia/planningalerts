@@ -34,15 +34,23 @@
   }
 
   label {
+    margin-bottom: .25em;
     display: block;
+    font-size: 1.1em;
     font-weight: bold;
   }
 
   input {
-    margin-bottom: 1em;
+    margin-bottom: 1.25em;
     width: 100%;
-    font-size: 1.1em;
+    font-size: 1.2em;
     padding: .5em;
+    display: block;
+  }
+
+  .button-action {
+    margin: 1em auto 0;
+    padding: .5em 1.75em;
     display: block;
   }
 }
