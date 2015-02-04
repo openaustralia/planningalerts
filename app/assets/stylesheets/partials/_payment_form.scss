@@ -51,6 +51,11 @@
     @include box-sizing(border-box);
   }
 
+  input,
+  button {
+    letter-spacing: 1px;
+  }
+
   legend {
     margin: 0 auto 1em;
     text-align: center;
