@@ -49,6 +49,7 @@
 
   * {
     @include box-sizing(border-box);
+    font-family: $blueprint-font-family;
   }
 
   input,
