@@ -1,0 +1,35 @@
+.registration-form {
+  * {
+    @include box-sizing(border-box);
+  }
+
+  legend {
+    margin-bottom: 1em;
+    font-size: 1.5em;
+
+    strong {
+      display: block;
+    }
+
+    .registration-price {
+      font-size: 2em;
+    }
+
+    .registration-price-per {
+      font-size: 1.25em;
+    }
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+  }
+
+  input {
+    margin-bottom: 1em;
+    width: 100%;
+    font-size: 1.1em;
+    padding: .5em;
+    display: block;
+  }
+}
