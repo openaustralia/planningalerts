@@ -24,10 +24,12 @@
       %label{for: 'card-number'} Credit Card Number
       %input{placeholder: '1234 5678 9012 3456', pattern: '[0-9]*', type: 'text', id: 'card-number', name: 'card_number', autocomplete: 'cc-number'}
 
-      %label{for: 'card-expiration'} Expiration (MM/YYYY)
-      %input{placeholder: 'MM/YYYY', type: 'text', id: 'card-expiration', name: 'card_exp_date'}
+      .input-group-expiration
+        %label{for: 'card-expiration'} Expiration
+        %input{placeholder: 'MM/YYYY', type: 'text', id: 'card-expiration', name: 'card_exp_date'}
 
-      %label{for: 'card-cvv'} CVV Number
-      %input{placeholder: 'CVV', pattern: '[0-9]*', type: 'text', id: 'card-cvv', name: 'card_cvv', autocomplete: 'cc-csc'}
+      .input-group-cvv
+        %label{for: 'card-cvv'} CVV Number
+        %input{placeholder: 'CVV', pattern: '[0-9]*', type: 'text', id: 'card-cvv', name: 'card_cvv', autocomplete: 'cc-csc'}
 
     %button.button.button-rounded.button-action.button-large Submit

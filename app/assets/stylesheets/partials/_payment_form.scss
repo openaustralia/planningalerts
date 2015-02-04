@@ -85,6 +85,20 @@
     border: 1px #ccc solid;
   }
 
+  .input-group-expiration {
+    @include at-breakpoint(45em) {
+      margin-right: 5%;
+    }
+  }
+
+  .input-group-expiration,
+  .input-group-cvv {
+    @include at-breakpoint(45em) {
+      width: 47%;
+      display: inline-block;
+    }
+  }
+
   .button-action {
     margin: 1em auto 0;
     padding: .5em 1.75em;
