@@ -11,6 +11,20 @@
 }
 
 .registration-form {
+  @include at-breakpoint(45em) {
+    @include span-columns(8, 12);
+    margin-right: auto;
+    margin-left: auto;
+    float: none;
+  }
+
+  @include at-breakpoint(70em) {
+    @include span-columns(7, 12);
+    margin-right: auto;
+    margin-left: auto;
+    float: none;
+  }
+
   * {
     @include box-sizing(border-box);
   }
