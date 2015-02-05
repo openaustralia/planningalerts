@@ -9,7 +9,7 @@
     -# TODO: Move to head to block page until it loads
     %script{src: "https://checkout.stripe.com/checkout.js"}
 
-    %button{id: "button-pro-signup"}
+    %button{type: 'submit', id: "button-pro-signup", data: {key: Rails.configuration.stripe[:publishable_key]}}
       %strong
         %span.registration-price $99
         %span.registration-price-per /month
