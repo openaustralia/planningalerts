@@ -7,7 +7,11 @@ class TwitterFeed
   end
 
   def feed
-    @feed ||= Twitter.user_timeline(username)[0...2] || []
+    if Twitter.credentials?
+      @feed ||= Twitter.user_timeline(username)[0...2] || []
+    else
+      []
+    end
   end
 
   def items
