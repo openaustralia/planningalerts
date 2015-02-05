@@ -1,5 +1,8 @@
 class SubscriptionsController < ApplicationController
   def new
+    if params[:email]
+      @email = params[:email]
+    end
   end
 
   def create

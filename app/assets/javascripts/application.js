@@ -11,6 +11,7 @@ $("#menu .toggle").click(function(){
 
 if ("#button-pro-signup".length) {
   public_key = $('#button-pro-signup').attr('data-key');
+  email = $('#button-pro-signup').attr("data-email");
 
   var handler = StripeCheckout.configure({
     key: public_key,
@@ -27,7 +28,8 @@ if ("#button-pro-signup".length) {
     handler.open({
       name: 'PlanningAlerts',
       amount: 9900,
-      currency: 'AUD'
+      currency: 'AUD',
+      email: email
     });
     e.preventDefault();
 
