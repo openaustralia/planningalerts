@@ -1,15 +1,16 @@
 require 'new_relic/recipes'
 require 'bundler/capistrano'
-require 'rvm/capistrano'
-require 'rvm/capistrano/alias_and_wrapp'
 require 'delayed/recipes'
+if stage != "development"
+  require 'rvm/capistrano'
+  require 'rvm/capistrano/alias_and_wrapp'
+  set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
+  before 'deploy', 'rvm:create_alias'
+  before 'deploy', 'rvm:create_wrappers'
+end
 
 # This adds a task that precompiles assets for the asset pipeline
 load 'deploy/assets'
-
-set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
-before 'deploy', 'rvm:create_alias'
-before 'deploy', 'rvm:create_wrappers'
 
 set :application, "planningalerts.org.au/app"
 set :repository,  "git://github.com/openaustralia/planningalerts-app.git"
