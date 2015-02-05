@@ -127,5 +127,5 @@ PlanningalertsApp::Application.routes.draw do
   match '/404', :to => 'static#error_404'
   match "/500", :to => 'static#error_500'
 
-  resources :subscriptions
+  resources :subscriptions, :only => [:new, :create]
 end
