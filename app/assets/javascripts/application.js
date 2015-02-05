@@ -20,6 +20,10 @@ if ("#button-pro-signup".length) {
       var tokenInput = $("<input type=hidden name=stripeToken />").val(response.id);
       var emailInput = $("<input type=hidden name=stripeEmail />").val(response.email);
       $("#subscription-payment-form").append(tokenInput).append(emailInput).submit();
+      $('#button-pro-signup').fadeOut('fast', function() {
+        var processingNotice = $("<p class='form-processing'>Processing ...</p>").fadeIn('slow');
+        $("#subscription-payment-form").append(processingNotice);
+      });
     }
   });
 
