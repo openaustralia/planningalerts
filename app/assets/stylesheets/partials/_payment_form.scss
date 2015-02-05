@@ -22,13 +22,19 @@
   }
 
   @include at-breakpoint(40em) {
-    @include span-columns(11, 12);
+    @include span-columns(10, 12);
     margin: 2em auto 0;
     float: none;
 
     p {
       font-size: 1.25em;
     }
+  }
+
+  @include at-breakpoint(60em) {
+    @include span-columns(8, 12);
+    margin: 2em auto 0;
+    float: none;
   }
 }
 
