@@ -1,17 +1,18 @@
 .registration-page {
   padding-bottom: 2em;
+  text-align: center;
 
   @include at-breakpoint(40em) {
     padding-bottom: 4em;
+
+    p {
+      font-size: 1.25em;
+    }
   }
 
   @include at-breakpoint(60em) {
     padding-bottom: 6em;
   }
-}
-
-.registration-intro {
-  text-align: center;
 
   h1 {
     font-size: 2.5em;
@@ -20,15 +21,12 @@
   p {
     font-size: 1.1em;
   }
+}
 
   @include at-breakpoint(40em) {
     @include span-columns(10, 12);
     margin: 2em auto 0;
     float: none;
-
-    p {
-      font-size: 1.25em;
-    }
   }
 
   @include at-breakpoint(60em) {
