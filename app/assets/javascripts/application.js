@@ -10,12 +10,15 @@ $("#menu .toggle").click(function(){
 });
 
 if ("#button-pro-signup".length) {
+  public_key = $('#button-pro-signup').attr('data-key');
+
   var handler = StripeCheckout.configure({
-    key: 'pk_test_7waRLEZaqjxyoxtZzlHtliMS',
+    key: public_key,
     image: '/square-image.png',
-    token: function(token) {
-      // Use the token to create the charge with a server-side script.
-      // You can access the token ID with `token.id`
+    token: function(response) {
+      var tokenInput = $("<input type=hidden name=stripeToken />").val(response.id);
+      var emailInput = $("<input type=hidden name=stripeEmail />").val(response.email);
+      $("#subscription-payment-form").append(tokenInput).append(emailInput).submit();
     }
   });
 
