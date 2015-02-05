@@ -14,8 +14,6 @@ before 'deploy', 'rvm:create_wrappers'
 set :application, "planningalerts.org.au/app"
 set :repository,  "git://github.com/openaustralia/planningalerts-app.git"
 
-server "kedumba.openaustraliafoundation.org.au", :app, :web, :db, :primary => true
-
 set :use_sudo, false
 set :user, "deploy"
 set :scm, :git
@@ -23,10 +21,14 @@ set :stage, "test" unless exists? :stage
 set :rails_env, "production" #added for delayed job
 
 if stage == "production"
+  server "kedumba.openaustraliafoundation.org.au", :app, :web, :db, :primary => true
   set :deploy_to, "/srv/www/www.#{application}"
 elsif stage == "test"
+  server "kedumba.openaustraliafoundation.org.au", :app, :web, :db, :primary => true
   set :deploy_to, "/srv/www/test.#{application}"
-  #set :branch, "test"
+elsif stage == "development"
+  server "planningalerts.org.au.dev", :app, :web, :db, :primary => true
+  set :deploy_to, "/srv/www"
 end
 
 # We need to run this after our collector mongrels are up and running
