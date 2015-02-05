@@ -41,9 +41,18 @@
 #button-pro-signup {
   @include box-sizing(border-box);
   margin: 0 auto 1em;
+  border: 0;
+  padding: 1em;
   text-align: center;
   font-size: 1.25em;
   font-family: $blueprint-font-family;
+  -webkit-appearance: none;
+  background: $light;
+  text-shadow: 0 1px 0 $lightest;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   strong {
     display: block;
