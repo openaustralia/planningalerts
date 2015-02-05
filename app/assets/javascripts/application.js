@@ -37,7 +37,8 @@ if ("#button-pro-signup".length) {
     });
     e.preventDefault();
 
-    // TODO: send GA event track
+    // send GA event track
+    ga('send', 'event', 'subscriptions', 'click subscribe button');
   });
 
   // Close Checkout on page navigation
