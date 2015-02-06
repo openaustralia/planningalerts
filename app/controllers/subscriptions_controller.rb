@@ -11,7 +11,7 @@ class SubscriptionsController < ApplicationController
     @email = params[:stripeEmail]
 
     if @email.blank?
-      redirect_to new_subscription_path, alert: 'Sorry, there’s an error in the form. <strong><a href="mailto:contact@planningalerts.org.au?subject=Unable to subscribe">Please contact us</a></strong>.'.html_safe
+      redirect_to new_subscription_path, alert: 'Sorry, there&rsquo;s an error in the form. <strong><a href="mailto:contact@planningalerts.org.au?subject=Unable to subscribe">Please contact us</a></strong>.'.html_safe
     else
       customer = Stripe::Customer.create(
         email: @email,
