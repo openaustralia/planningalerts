@@ -34,7 +34,8 @@ if ("#button-pro-signup".length) {
       name: 'PlanningAlerts',
       amount: 9900,
       currency: 'AUD',
-      email: email
+      email: email,
+      panelLabel: "Subscribe for {{amount}}/mo"
     });
     e.preventDefault();
 
