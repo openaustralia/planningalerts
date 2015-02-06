@@ -9,13 +9,17 @@ class SubscriptionsController < ApplicationController
     # Amount in cents
     @amount = 9900
 
-    customer = Stripe::Customer.create(
-      email: params[:stripeEmail],
-      card: params[:stripeToken],
-      description: '$99/month PlanningAlerts subscription'
-    )
+    if params[:stripeEmail].blank?
+      redirect_to new_subscription_path, alert: 'Sorry, there’s an error in the form. <strong><a href="mailto:contact@planningalerts.org.au?subject=Unable to subscribe">Please contact us</a></strong>.'.html_safe
+    else
+      customer = Stripe::Customer.create(
+        email: params[:stripeEmail],
+        card: params[:stripeToken],
+        description: '$99/month PlanningAlerts subscription'
+      )
 
-    @email = params[:stripeEmail];
+      @email = params[:stripeEmail]
+    end
 
   # TODO: rescue and redirect to new on attempt to reload the create page
   # which tries to reuse the token again and errors.
