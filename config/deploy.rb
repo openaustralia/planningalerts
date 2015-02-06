@@ -1,6 +1,7 @@
 require 'new_relic/recipes'
 require 'bundler/capistrano'
 require 'delayed/recipes'
+set :stage, "test" unless exists? :stage
 if stage != "development"
   require 'rvm/capistrano'
   require 'rvm/capistrano/alias_and_wrapp'
@@ -18,7 +19,6 @@ set :repository,  "git://github.com/openaustralia/planningalerts-app.git"
 set :use_sudo, false
 set :user, "deploy"
 set :scm, :git
-set :stage, "test" unless exists? :stage
 set :rails_env, "production" #added for delayed job
 
 if stage == "production"
