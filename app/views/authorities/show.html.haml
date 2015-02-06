@@ -25,7 +25,7 @@
 
     %h4 Number of applications scraped each week
     #chart
-    <script src="http://d3js.org/d3.v2.js"></script>
+    <script src="https://d3js.org/d3.v2.js"></script>
     = javascript_include_tag "bar_graph"
     :javascript
       barGraph("#chart", "#{per_week_authority_applications_url(@authority.short_name_encoded, :format => 'js')}");
