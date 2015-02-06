@@ -59,6 +59,29 @@ namespace :deploy do
   task :restart, :except => { :no_release => true } do
     run "touch #{File.join(current_path,'tmp','restart.txt')}"
   end
+
+  desc "Deploys and starts a `cold' application. Uses db:schema:load instead of Capistrano's default of db:migrate"
+  task :cold do
+    update
+    load_schema
+    start
+  end
+
+  desc "Identical to Capistrano's db:migrate task but does db:schema:load instead"
+  task :load_schema, roles: :app do
+    rake = fetch(:rake, "rake")
+    rails_env = fetch(:rails_env, "production")
+    migrate_env = fetch(:migrate_env, "")
+    migrate_target = fetch(:migrate_target, :latest)
+
+    directory = case migrate_target.to_sym
+      when :current then current_path
+      when :latest  then latest_release
+      else raise ArgumentError, "unknown migration target #{migrate_target.inspect}"
+      end
+
+    run "cd #{directory} && #{rake} RAILS_ENV=#{rails_env} #{migrate_env} db:schema:load"
+  end
 end
 
 namespace :foreman do
