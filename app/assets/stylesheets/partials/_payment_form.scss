@@ -1,4 +1,5 @@
-.registration-page {
+.registration-page,
+.registration-success-page {
   padding-bottom: 2em;
   text-align: center;
 
@@ -23,6 +24,7 @@
   }
 }
 
+.registration-page {
   @include at-breakpoint(40em) {
     @include span-columns(10, 12);
     margin: 2em auto 0;
@@ -31,6 +33,20 @@
 
   @include at-breakpoint(60em) {
     @include span-columns(8, 12);
+    margin: 2em auto 0;
+    float: none;
+  }
+}
+
+.registration-success-page {
+  @include at-breakpoint(40em) {
+    @include span-columns(11, 12);
+    margin: 2em auto 0;
+    float: none;
+  }
+
+  @include at-breakpoint(60em) {
+    @include span-columns(10, 12);
     margin: 2em auto 0;
     float: none;
   }
