@@ -61,7 +61,7 @@
   font-size: 1.25em;
   font-family: $blueprint-font-family;
   -webkit-appearance: none;
-  background: $light;
+  background: darken($light, 8%);
   text-shadow: 0 1px 0 $lightest;
 
   &:hover {
