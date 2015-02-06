@@ -47,4 +47,7 @@ if ("#button-pro-signup".length) {
   $(window).on('popstate', function() {
     handler.close();
   });
+
+  // enable the button
+  $('#button-pro-signup').attr('disabled', false);
 }

@@ -77,6 +77,10 @@
   strong {
     display: block;
   }
+
+  &[disabled] {
+    color: $font-color;
+  }
 }
 
 .registration-price-container {
