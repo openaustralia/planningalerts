@@ -63,6 +63,7 @@
   -webkit-appearance: none;
   background: darken($light, 8%);
   text-shadow: 0 1px 0 $lightest;
+  border-radius: .2em;
 
   &:hover,
   &:focus {
