@@ -8,7 +8,12 @@ class TwitterFeed
 
   def feed
     if Twitter.credentials?
-      @feed ||= Twitter.user_timeline(username)[0...2] || []
+      # If there's any kind of error just return an empty feed
+      begin
+        @feed ||= Twitter.user_timeline(username)[0...2] || []
+      rescue
+        []
+      end
     else
       []
     end
