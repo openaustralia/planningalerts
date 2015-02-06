@@ -74,7 +74,7 @@ module ApplicationsHelper
   def google_static_streetview_url(application, options)
     size = options[:size] || "350x200"
     fov = options[:fov] || 90
-    "http://maps.googleapis.com/maps/api/streetview?size=#{size}&location=#{application.lat},#{application.lng}&fov=#{fov}&sensor=false".html_safe
+    "https://maps.googleapis.com/maps/api/streetview?size=#{size}&location=#{application.lat},#{application.lng}&fov=#{fov}&sensor=false".html_safe
   end
 
   def google_static_streetview(application, options)

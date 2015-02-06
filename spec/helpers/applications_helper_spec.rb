@@ -129,9 +129,9 @@ describe ApplicationsHelper do
 
       it "should generate a static google streetview image" do
         helper.google_static_streetview(@application, :size => "350x200", :fov => 90).should ==
-          "<img alt=\"Streetview of Foo Road, NSW\" height=\"200\" src=\"http://maps.googleapis.com/maps/api/streetview?size=350x200&location=1.0,2.0&fov=90&sensor=false\" width=\"350\" />"
+          "<img alt=\"Streetview of Foo Road, NSW\" height=\"200\" src=\"https://maps.googleapis.com/maps/api/streetview?size=350x200&location=1.0,2.0&fov=90&sensor=false\" width=\"350\" />"
         helper.google_static_streetview(@application, :size => "100x100", :fov => 60).should ==
-          "<img alt=\"Streetview of Foo Road, NSW\" height=\"100\" src=\"http://maps.googleapis.com/maps/api/streetview?size=100x100&location=1.0,2.0&fov=60&sensor=false\" width=\"100\" />"
+          "<img alt=\"Streetview of Foo Road, NSW\" height=\"100\" src=\"https://maps.googleapis.com/maps/api/streetview?size=100x100&location=1.0,2.0&fov=60&sensor=false\" width=\"100\" />"
       end
     end
   end
