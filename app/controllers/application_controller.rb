@@ -31,6 +31,6 @@ class ApplicationController < ActionController::Base
 
   def ssl_required?
     # Don't force ssl on api requests
-    params[:controller] != "api" && params[:controller] != "layar"
+    params[:controller] != "api" && params[:controller] != "layar" && @theme != "nsw"
   end
 end
