@@ -17,6 +17,7 @@ module ActionMailerThemer
 
     @themer = ThemeChooser.create(theme)
     @host = @themer.host
+    @protocol = @themer.protocol
     # Only override mail delivery options in production
     if Rails.env.production? && theme == "nsw"
       delivery_options = {user_name: @themer.cuttlefish_user_name , password: @themer.cuttlefish_password }
@@ -38,5 +39,9 @@ module ActionMailerThemer
 
   def host(theme)
     ThemeChooser.create(theme).host
+  end
+
+  def protocol(theme)
+    ThemeChooser.create(theme).protocol
   end
 end

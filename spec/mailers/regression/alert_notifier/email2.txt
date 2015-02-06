@@ -3,7 +3,7 @@ The following new comment has been made on a planning application within 800 m o
 I think this is a great idea
 by Matthew Landauer on 2 Foo Parade, Glenbrook NSW 2773
 
-http://dev.planningalerts.org.au/applications/3?utm_medium=email&utm_source=alerts#comment1
+https://dev.planningalerts.org.au/applications/3?utm_medium=email&utm_source=alerts#comment1
 
 ============================================================
 
@@ -13,8 +13,8 @@ Foo Street, Bar
 
 Knock something down
 
-Read more: http://dev.planningalerts.org.au/applications/1?utm_medium=email&utm_source=alerts
-Add your own comment: http://dev.planningalerts.org.au/applications/1?utm_campaign=add-comment&utm_medium=email&utm_source=alerts#add-comment
+Read more: https://dev.planningalerts.org.au/applications/1?utm_medium=email&utm_source=alerts
+Add your own comment: https://dev.planningalerts.org.au/applications/1?utm_campaign=add-comment&utm_medium=email&utm_source=alerts#add-comment
 
 -----------------------------
 
@@ -22,18 +22,18 @@ Bar Street, Foo
 
 Put something up
 
-Read more: http://dev.planningalerts.org.au/applications/2?utm_medium=email&utm_source=alerts
-Add your own comment: http://dev.planningalerts.org.au/applications/2?utm_campaign=add-comment&utm_medium=email&utm_source=alerts#add-comment
+Read more: https://dev.planningalerts.org.au/applications/2?utm_medium=email&utm_source=alerts
+Add your own comment: https://dev.planningalerts.org.au/applications/2?utm_campaign=add-comment&utm_medium=email&utm_source=alerts#add-comment
 
 ============================================================
 
 Find PlanningAlerts useful? Support this charity-run project with a tax deductible donation:
 
-http://dev.planningalerts.org.au/donate?utm_medium=email&utm_source=alerts
+https://dev.planningalerts.org.au/donate?utm_medium=email&utm_source=alerts
 
 PlanningAlerts is a free service run by independent charity the OpenAustralia Foundation.
 Discover our other projects: https://www.openaustraliafoundation.org.au/projects/
 
-To change the size of the area covered by the alerts: http://dev.planningalerts.org.au/alerts/abcdef/area
+To change the size of the area covered by the alerts: https://dev.planningalerts.org.au/alerts/abcdef/area
 
-To stop receiving these emails: http://dev.planningalerts.org.au/alerts/abcdef/unsubscribe
+To stop receiving these emails: https://dev.planningalerts.org.au/alerts/abcdef/unsubscribe

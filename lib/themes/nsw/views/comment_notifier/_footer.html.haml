@@ -3,6 +3,6 @@
   you by
   = link_to "Planning & Environment, NSW", "http://www.planning.nsw.gov.au"
   and powered by
-  = link_to "PlanningAlerts.org.au", "http://www.planningalerts.org.au"
-  from #{link_to "the OpenAustralia Foundation", "http://www.openaustraliafoundation.org.au"}.
-  = link_to "View this application on #{@themer.app_name}", application_url(@comment.application, host: @host)
+  = link_to "PlanningAlerts.org.au", "https://www.planningalerts.org.au"
+  from #{link_to "the OpenAustralia Foundation", "https://www.openaustraliafoundation.org.au"}.
+  = link_to "View this application on #{@themer.app_name}", application_url(@comment.application, protocol: @protocol, host: @host)

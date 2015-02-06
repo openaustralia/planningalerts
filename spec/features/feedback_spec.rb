@@ -46,7 +46,7 @@ feature "Give feedback to Council" do
     current_email.should have_subject("Please confirm your comment")
     # And the email body should contain a link to the confirmation page
     comment = Comment.find_by_text("I think this is a really good ideas")
-    current_email.default_part_body.to_s.should include(confirmed_comment_url(:id => comment.confirm_id, :host => 'dev.planningalerts.org.au'))
+    current_email.default_part_body.to_s.should include(confirmed_comment_url(:id => comment.confirm_id, :protocol => "https", :host => 'dev.planningalerts.org.au'))
   end
 
   scenario "Unconfirmed comment should not be shown" do
