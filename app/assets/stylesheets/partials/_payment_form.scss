@@ -64,6 +64,11 @@
   background: darken($light, 8%);
   text-shadow: 0 1px 0 $lightest;
 
+  &:hover,
+  &:focus {
+    background: darken($light, 25%);
+  }
+
   &:hover {
     cursor: pointer;
   }
