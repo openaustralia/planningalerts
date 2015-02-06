@@ -30,6 +30,7 @@ if ("#button-pro-signup".length) {
   $('#button-pro-signup').on('click', function(e) {
     // Open Checkout with further options
     handler.open({
+      image: '/assets/street_map.png',
       name: 'PlanningAlerts',
       amount: 9900,
       currency: 'AUD',
