@@ -116,9 +116,9 @@ describe ApplicationsHelper do
 
       it "should generate a static google map api image" do
         helper.google_static_map(@application, :size => "350x200", :zoom => 16).should ==
-          "<img alt=\"Map of Foo Road, NSW\" height=\"200\" src=\"http://maps.googleapis.com/maps/api/staticmap?zoom=16&size=350x200&maptype=roadmap&markers=color:red%7C1.0,2.0&sensor=false\" width=\"350\" />"
+          "<img alt=\"Map of Foo Road, NSW\" height=\"200\" src=\"https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=350x200&maptype=roadmap&markers=color:red%7C1.0,2.0&sensor=false\" width=\"350\" />"
         helper.google_static_map(@application, :size => "100x100", :zoom => 14).should ==
-          "<img alt=\"Map of Foo Road, NSW\" height=\"100\" src=\"http://maps.googleapis.com/maps/api/staticmap?zoom=14&size=100x100&maptype=roadmap&markers=color:red%7C1.0,2.0&sensor=false\" width=\"100\" />"
+          "<img alt=\"Map of Foo Road, NSW\" height=\"100\" src=\"https://maps.googleapis.com/maps/api/staticmap?zoom=14&size=100x100&maptype=roadmap&markers=color:red%7C1.0,2.0&sensor=false\" width=\"100\" />"
       end
     end
 
