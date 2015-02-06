@@ -3,6 +3,7 @@
 
 class ApplicationController < ActionController::Base
   use_vanity
+  force_ssl if: :ssl_required?
 
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
@@ -28,4 +29,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def ssl_required?
+    # Don't force ssl on api requests
+    params[:controller] != "api" && params[:controller] != "layar"
+  end
 end

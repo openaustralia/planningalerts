@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe EmailConfirmable::ConfirmController do
+  before :each do
+    request.env['HTTPS'] = 'on'
+  end
+
   describe "confirming" do
     it "should set the alert to be confirmed" do
       alert = mock_model(Alert)

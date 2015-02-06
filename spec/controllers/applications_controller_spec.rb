@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe ApplicationsController do
+  before :each do
+    request.env['HTTPS'] = 'on'
+  end
+
   describe "#index" do
     describe "rss feed" do
       before :each do
