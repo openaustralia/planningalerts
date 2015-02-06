@@ -124,6 +124,8 @@ PlanningalertsApp::Application.routes.draw do
 
   resources :subscriptions, :only => [:new, :create]
 
+  match 'subscriptions' => redirect('/subscriptions/new')
+
   root :to => 'applications#address'
 
   match '/404', :to => 'static#error_404'
