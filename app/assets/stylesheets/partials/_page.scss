@@ -68,7 +68,7 @@ a {
       color: $dark;
       background-color: $content-background;
     }
-    li:last-child a {
+    a.donate-link-header {
       color: $warm-highlight;
     }
   }
