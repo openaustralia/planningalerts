@@ -32,5 +32,10 @@ describe "redirects" do
       get "http://www.planningalerts.org.au/applications"
       response.should redirect_to "https://www.planningalerts.org.au/applications"
     end
+
+    it "should redirect the api howto page" do
+      get "http://www.planningalerts.org.au/api/howto"
+      response.should redirect_to "https://www.planningalerts.org.au/api/howto"
+    end
   end
 end
