@@ -32,4 +32,11 @@ class LayarController < ApplicationController
     end
     render :json => result
   end
+
+  private
+
+  # Disable ssl redirects on this controller
+  def ssl_required?
+    false
+  end
 end

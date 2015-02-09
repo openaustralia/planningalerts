@@ -101,6 +101,11 @@ class ApiController < ApplicationController
 
   private
 
+  # Disable ssl redirects on this controller
+  def ssl_required?
+    false
+  end
+
   def check_api_parameters
     valid_parameter_keys = [
       "format", "action", "controller",

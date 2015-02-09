@@ -30,9 +30,8 @@ class ApplicationController < ActionController::Base
   end
 
   def ssl_required?
-    # Don't force ssl on api requests
     # This method is called before set_view_path so we need to calculate the theme from the
     # request rather than using @theme which isn't yet set
-    params[:controller] != "api" && params[:controller] != "layar" && ThemeChooser.themer_from_request(request).theme != "nsw"
+    ThemeChooser.themer_from_request(request).theme != "nsw"
   end
 end
