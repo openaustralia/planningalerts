@@ -82,6 +82,10 @@ namespace :deploy do
 
     run "cd #{directory} && #{rake} RAILS_ENV=#{rails_env} #{migrate_env} db:schema:load"
   end
+
+  after "deploy:setup" do
+    run "mkdir -p #{shared_path}/sitemaps"
+  end
 end
 
 namespace :foreman do
