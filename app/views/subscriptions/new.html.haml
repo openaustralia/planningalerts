@@ -14,5 +14,5 @@
         %span.registration-price $99
         %span.registration-price-per /month
 
-    %button{disabled: true, type: 'submit', id: "button-pro-signup", data: {key: Rails.configuration.stripe[:publishable_key], email: (@email if @email)}}
+    %button{disabled: true, type: 'submit', id: "button-pro-signup", data: {key: Configuration::STRIPE_PUBLISHABLE_KEY, email: (@email if @email)}}
       Subscribe for early access
