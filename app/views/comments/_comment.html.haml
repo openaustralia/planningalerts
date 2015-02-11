@@ -4,8 +4,8 @@
       %h2.comment-address.panel-heading
         In
         %strong #{comment.application.suburb} #{comment.application.state}
-        #{"on “" + truncate(comment.application.description) + "”"}
-        at
+        on
+        = comment.application.description ? "“" + truncate(comment.application.description) + "” at" : "application for"
         #{comment.application.address}
       %blockquote.comment-text= comment_as_html(comment.text)
       %figcaption.comment-meta
