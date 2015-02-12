@@ -5,10 +5,6 @@
 
   @include at-breakpoint(40em) {
     padding-bottom: 4em;
-
-    p {
-      font-size: 1.25em;
-    }
   }
 
   @include at-breakpoint(60em) {
@@ -18,10 +14,18 @@
   h1 {
     font-size: 2em;
     line-height: 1.2;
+
+    @include at-breakpoint(40em) {
+      font-size: 2.5em;
+    }
   }
 
   p {
     font-size: 1.1em;
+
+    @include at-breakpoint(40em) {
+      font-size: 1.3em;
+    }
   }
 }
 
