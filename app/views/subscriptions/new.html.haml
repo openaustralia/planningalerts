@@ -1,0 +1,13 @@
+.registration-page
+  = form_tag subscriptions_path, id: 'subscription-payment-form', class: 'registration-intro' do
+    %h1 Tailor your alerts to&nbsp;suit your business&nbsp;needs
+
+    %p
+      Access powerful new features from PlanningAlerts.
+      Discover new opportunities, track key investments and keep your important clients&nbsp;in&nbsp;the&nbsp;know.
+
+    -# TODO: Move to head to block page until it loads
+    %script{src: "https://checkout.stripe.com/checkout.js"}
+
+    %button{disabled: true, type: 'submit', id: "button-pro-signup", data: {key: Configuration::STRIPE_PUBLISHABLE_KEY, email: (@email if @email)}}
+      Subscribe now $99/month

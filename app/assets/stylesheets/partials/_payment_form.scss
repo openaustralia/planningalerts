@@ -1,0 +1,108 @@
+.registration-page,
+.registration-success-page {
+  padding-bottom: 2em;
+  text-align: center;
+
+  @include at-breakpoint(40em) {
+    padding-bottom: 4em;
+  }
+
+  @include at-breakpoint(60em) {
+    padding-bottom: 6em;
+  }
+
+  h1 {
+    font-size: 2em;
+    line-height: 1.2;
+
+    @include at-breakpoint(40em) {
+      font-size: 2.5em;
+    }
+  }
+
+  p {
+    font-size: 1.1em;
+
+    @include at-breakpoint(40em) {
+      font-size: 1.3em;
+    }
+  }
+}
+
+.registration-page {
+  @include at-breakpoint(40em) {
+    @include span-columns(10, 12);
+    margin: 2em auto 0;
+    float: none;
+  }
+
+  @include at-breakpoint(60em) {
+    @include span-columns(8, 12);
+    margin: 2em auto 0;
+    float: none;
+  }
+}
+
+.registration-success-page {
+  @include at-breakpoint(40em) {
+    @include span-columns(11, 12);
+    margin: 2em auto 0;
+    float: none;
+  }
+
+  @include at-breakpoint(60em) {
+    @include span-columns(10, 12);
+    margin: 2em auto 0;
+    float: none;
+  }
+}
+
+#button-pro-signup {
+  @include box-sizing(border-box);
+  margin: 0 auto 1em;
+  border: 0;
+  padding: 1em;
+  text-align: center;
+  font-size: 1.25em;
+  font-family: $blueprint-font-family;
+  -webkit-appearance: none;
+  background: darken($light, 8%);
+  text-shadow: 0 1px 0 $lightest;
+  border-radius: .2em;
+
+  &:hover,
+  &:focus {
+    background: darken($light, 25%);
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  strong {
+    display: block;
+  }
+
+  &[disabled] {
+    color: $font-color;
+  }
+}
+
+.registration-price-container {
+  margin-bottom: .5em;
+}
+
+.registration-price {
+  font-size: 2.5em;
+}
+
+.registration-price-per {
+  font-size: 1.25em;
+}
+
+p.form-processing {
+  margin: 0 auto 1em;
+  padding: 1em 0 .7em;
+  font-size: 1.25em;
+  font-weight: bold;
+}
