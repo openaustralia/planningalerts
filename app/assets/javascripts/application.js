@@ -35,7 +35,7 @@ if ("#button-pro-signup".length) {
       amount: 9900,
       currency: 'AUD',
       email: email,
-      panelLabel: "Subscribe for {{amount}}/mo"
+      panelLabel: "Subscribe now {{amount}}/mo"
     });
     e.preventDefault();
 
