@@ -9,10 +9,5 @@
     -# TODO: Move to head to block page until it loads
     %script{src: "https://checkout.stripe.com/checkout.js"}
 
-    %p.registration-price-container
-      %strong
-        %span.registration-price $99
-        %span.registration-price-per /month
-
     %button{disabled: true, type: 'submit', id: "button-pro-signup", data: {key: Configuration::STRIPE_PUBLISHABLE_KEY, email: (@email if @email)}}
-      Subscribe for early access
+      Subscribe now, $99/month
