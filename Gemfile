@@ -46,6 +46,7 @@ gem 'newrelic_rpm'
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem "validate_url"
+gem "twitter"
 gem "atdis"
 gem "oj"
 # Need to stick with 2.3.0 to support Ruby 1.8.7

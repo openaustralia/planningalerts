@@ -26,7 +26,7 @@ module ApplicationHelper
       "#{significant_figure_remove_trailing_zero(meters / 1000.0, 2)} km"
     end
   end
-
+  
   def significant_figure_remove_trailing_zero(a, s)
     text = significant_figure(a, s).to_s
     if text [-2..-1] == ".0"
@@ -47,15 +47,19 @@ module ApplicationHelper
       0
     end
   end
-
+  
   def km_in_words(km)
     meters_in_words(km * 1000)
   end
-
+  
   def render_rss_feed
     render :partial => 'shared/rss_item', :collection => PlanningAlertsRSS.recent, :as => :item
   end
   
+  def render_twitter_feed(username)
+    render :partial => 'shared/tweet', :collection => TwitterFeed.new(username).items, :as => :item
+  end
+
   def contributors
     [
       { :name => "Roger Barnes", :email_md5 => "dd6c985d22e3bf6ea849e8d2e6750d76" },
