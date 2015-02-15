@@ -147,6 +147,15 @@ body {
 
     &:hover,
     &:focus {
+      background: lighten(#EFAB01, 10%);
+      border-color: darken(#FEB90B, 5%);
+      color: #FFFFFF;
+      text-shadow: 2px 2px 0 darken(#C87019, 5%);
+      box-shadow: inset -2px -2px 0 0 darken(#EFAB01, 10%),  0 0 2em rgba( #FAE08B, .7 );
+      transition: .3s all ease;
+    }
+
+    &:active {
       background: #FFF;
       border-color: #FFF;
       color: #29757A;
