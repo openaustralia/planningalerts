@@ -568,6 +568,16 @@ form.address-search {
   }
 }
 
+.tweets {
+  li > a {
+    &:hover,
+    &:focus {
+      text-shadow: 0 1px 1px #fff;
+      background-color: $lightest-cool-highlight;
+    }
+  }
+}
+
 .notice a {
   color: $link_color !important;
 }
