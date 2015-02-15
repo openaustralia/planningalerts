@@ -553,12 +553,14 @@ form.address-search {
     }
   }
 }
+
+.tweets,
 .news {
   border-top: 1px solid $lightest-cool-highlight;
   padding-top: 1em;
 }
 
-.tweets, .stats {
+.stats {
   background-color: $lightest-cool-highlight;
 
   li {
