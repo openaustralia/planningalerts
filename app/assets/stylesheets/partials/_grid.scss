@@ -37,6 +37,10 @@
   @include span-columns(12 omega, 12);
 }
 
+.tweets {
+  margin-top: 3em;
+}
+
 // footer
 .keepintouch {
   @include span-columns(6, 12);
@@ -446,6 +450,8 @@
   }
 
   .tweets {
+    margin-top: 5em;
+
     li {
       width: 50%;
 
