@@ -9,7 +9,8 @@
     -# TODO: Move to head to block page until it loads
     %script{src: "https://checkout.stripe.com/checkout.js"}
 
-    %button{disabled: true, type: 'submit', id: "button-pro-signup", data: {key: Configuration::STRIPE_PUBLISHABLE_KEY, email: (@email if @email)}}
-      Subscribe now $99/month
+    %input{type: 'hidden', name: 'stripeAmount', value: @amount}
+    %button{disabled: true, type: 'submit', id: "button-pro-signup", data: {key: Configuration::STRIPE_PUBLISHABLE_KEY, amount: @amount, email: (@email if @email)}}
+      Subscribe now #{@display_amount}/month
 
     %p No lock-in. Cancel anytime

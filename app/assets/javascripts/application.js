@@ -12,6 +12,7 @@ $("#menu .toggle").click(function(){
 if ("#button-pro-signup".length) {
   public_key = $('#button-pro-signup').attr('data-key');
   email = $('#button-pro-signup').attr("data-email");
+  amount = $('#button-pro-signup').attr("data-amount");
 
   var handler = StripeCheckout.configure({
     key: public_key,
@@ -32,7 +33,7 @@ if ("#button-pro-signup".length) {
     handler.open({
       image: '/assets/street_map.png',
       name: 'PlanningAlerts',
-      amount: 9900,
+      amount: amount,
       currency: 'AUD',
       email: email,
       panelLabel: "Subscribe now {{amount}}/mo"

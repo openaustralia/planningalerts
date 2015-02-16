@@ -1,13 +1,15 @@
 class SubscriptionsController < ApplicationController
   def new
+    # Amount in cents
+    @amount = 9900
+    @display_amount = "$#{@amount.to_s[0...-2]}"
+
     if params[:email]
       @email = params[:email]
     end
   end
 
   def create
-    # Amount in cents
-    @amount = 9900
     @email = params[:stripeEmail]
 
     if @email.blank?
@@ -16,7 +18,7 @@ class SubscriptionsController < ApplicationController
       customer = Stripe::Customer.create(
         email: @email,
         card: params[:stripeToken],
-        description: '$99/month PlanningAlerts subscription'
+        description: "$#{params[:stripeAmount][0...-2]}/month PlanningAlerts subscription"
       )
     end
 
