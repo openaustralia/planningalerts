@@ -29,10 +29,10 @@ module Configuration
   GOOGLE_ANALYTICS_KEY = "UA-3107958-5"
 
   # OAuth details for Twitter application with read access only (for twitter feed on home page)
-  TWITTER_CONSUMER_KEY = "xxxxxxxxxxx"
-  TWITTER_CONSUMER_SECRET = "xxxxxxxxxxx"
-  TWITTER_OAUTH_TOKEN = "xxxxxxxxxxx"
-  TWITTER_OAUTH_TOKEN_SECRET = "xxxxxxxxxxx"
+  # TWITTER_CONSUMER_KEY = "xxxxxxxxxxx"
+  # TWITTER_CONSUMER_SECRET = "xxxxxxxxxxx"
+  # TWITTER_OAUTH_TOKEN = "xxxxxxxxxxx"
+  # TWITTER_OAUTH_TOKEN_SECRET = "xxxxxxxxxxx"
 
   # cuttlefish.io is used to send out emails in production
   CUTTLEFISH_SERVER = "cuttlefish.io"
@@ -50,4 +50,9 @@ module Configuration
   THEME_NSW_GOOGLE_ANALYTICS_KEY = "UA-3107958-12"
 
   HONEYBADGER_API_KEY = 'xxxxxxxx'
+
+  # Stripe is used to process cards and customers
+  # for subscriptions. See app/controllers/subscriptions_controller.rb
+  STRIPE_PUBLISHABLE_KEY = 'xxxxxxxxxxxxxxxxx'
+  STRIPE_SECRET_KEY = 'xxxxxxxxxxxxxxxxx'
 end

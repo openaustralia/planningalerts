@@ -4,7 +4,7 @@ describe "redirects" do
   describe "api redirects" do
     it "should not redirect the normal home page on the normal subdomain" do
       VCR.use_cassette('planningalerts') do
-        get "http://www.planningalerts.org.au"
+        get "https://www.planningalerts.org.au"
       end
       response.should_not be_redirect
     end
@@ -23,7 +23,19 @@ describe "redirects" do
       it "to the applications index page for js should not redirect" do
         get "http://api.planningalerts.org.au/applications.js"
         response.should_not be_redirect
-      end      
+      end
+    end
+  end
+
+  describe "ssl redirects" do
+    it "should redirect to ssl" do
+      get "http://www.planningalerts.org.au/applications"
+      response.should redirect_to "https://www.planningalerts.org.au/applications"
+    end
+
+    it "should redirect the api howto page" do
+      get "http://www.planningalerts.org.au/api/howto"
+      response.should redirect_to "https://www.planningalerts.org.au/api/howto"
     end
   end
 end

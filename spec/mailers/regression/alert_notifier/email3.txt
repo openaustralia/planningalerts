@@ -1,17 +1,9 @@
-Hi, did you know we make these other wonderful projects too?
-
-They Vote For You: https://theyvoteforyou.org.au
-Right To Know: https://www.righttoknow.org.au
-OpenAustralia.org.au: http://www.openaustralia.org.au
-Election Leaflets: http://www.electionleaflets.org.au
-
-============================================================
 The following new comments have been made on planning applications within 800 m of 24 Bruce Rd, Glenbrook NSW 2773:
 
 I think this is a great idea
 by Matthew Landauer on 2 Foo Parade, Glenbrook NSW 2773
 
-http://dev.planningalerts.org.au/applications/3?utm_medium=email&utm_source=alerts#comment1
+https://dev.planningalerts.org.au/applications/3?utm_medium=email&utm_source=alerts#comment1
 
 -----------------------------
 
@@ -20,14 +12,17 @@ Carles typewriter officia, cillum ethical elit swag. Consequat cillum yr wes and
 Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. Odd future aesthetic tempor, mustache bespoke gastropub dolore polaroid salvia helvetica. Kogi chambray cardigan sunt single-origi...
 by Jack Smith on 2 Foo Parade, Glenbrook NSW 2773
 
-http://dev.planningalerts.org.au/applications/3?utm_medium=email&utm_source=alerts#comment2
+https://dev.planningalerts.org.au/applications/3?utm_medium=email&utm_source=alerts#comment2
 
 ============================================================
 
-PlanningAlerts is a free service run by the charity OpenAustralia Foundation.
-This service depends on donations from people like you for its survival.
-If you use this service please consider donating: http://dev.planningalerts.org.au/donate?utm_medium=email&utm_source=alerts
+Find PlanningAlerts useful? Support this charity-run project with a tax deductible donation:
 
-To change the size of the area covered by the alerts: http://dev.planningalerts.org.au/alerts/abcdef/area
+https://dev.planningalerts.org.au/donate?utm_medium=email&utm_source=alerts
 
-To stop receiving these emails: http://dev.planningalerts.org.au/alerts/abcdef/unsubscribe
+PlanningAlerts is a free service run by independent charity the OpenAustralia Foundation.
+Discover our other projects: https://www.openaustraliafoundation.org.au/projects/
+
+To change the size of the area covered by the alerts: https://dev.planningalerts.org.au/alerts/abcdef/area
+
+To stop receiving these emails: https://dev.planningalerts.org.au/alerts/abcdef/unsubscribe

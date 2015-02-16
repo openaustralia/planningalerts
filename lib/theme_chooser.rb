@@ -21,6 +21,10 @@ class DefaultTheme < Theme
     ActionMailer::Base.default_url_options[:host]
   end
 
+  def protocol
+    "https"
+  end
+
   def app_name
     ::Configuration::EMAIL_FROM_NAME
   end
@@ -56,6 +60,10 @@ class NSWTheme < Theme
   # This might have a port number included
   def host
     ::Configuration::THEME_NSW_HOST
+  end
+
+  def protocol
+    "http"
   end
 
   def app_name

@@ -5,4 +5,4 @@
       by
       = comment.name
       on
-    = link_to comment.application.address, application_url(comment.application, host: @host, anchor: "comment#{comment.id}", utm_medium: "email", utm_source: "alerts")
+    = link_to comment.application.address, application_url(comment.application, protocol: @protocol, host: @host, anchor: "comment#{comment.id}", utm_medium: "email", utm_source: "alerts")

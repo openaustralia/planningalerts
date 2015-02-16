@@ -3,6 +3,7 @@
 
 class ApplicationController < ActionController::Base
   use_vanity
+  force_ssl if: :ssl_required?
 
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
@@ -28,4 +29,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def ssl_required?
+    # This method is called before set_view_path so we need to calculate the theme from the
+    # request rather than using @theme which isn't yet set
+    ThemeChooser.themer_from_request(request).theme != "nsw"
+  end
 end

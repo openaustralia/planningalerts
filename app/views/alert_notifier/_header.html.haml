@@ -1,14 +1,1 @@
-.header
-  = link_to "PlanningAlerts", root_url(host: @host)
-
-.box.advert
-  Hi, did you know we make these
-  %strong other wonderful projects
-  too?
-  #{link_to "They Vote For You", "https://theyvoteforyou.org.au/?utm_source=pa&utm_medium=email&utm_campaign=alert"}
-  %sup
-    %strong New!
-  ,
-  #{link_to "Right To Know", "https://www.righttoknow.org.au/?utm_source=pa&utm_medium=email&utm_campaign=alert"},
-  #{link_to "OpenAustralia.org", "http://www.openaustralia.org.au/?utm_source=pa&utm_medium=email&utm_campaign=alert"}, and
-  #{link_to "Election Leaflets", "http://www.electionleaflets.org.au/?utm_source=pa&utm_medium=email&utm_campaign=alert"}.
+.header= link_to "PlanningAlerts", root_url(protocol: @protocol, host: @host)

@@ -1,32 +1,35 @@
 require 'new_relic/recipes'
 require 'bundler/capistrano'
-require 'rvm/capistrano'
-require 'rvm/capistrano/alias_and_wrapp'
 require 'delayed/recipes'
+set :stage, "test" unless exists? :stage
+if stage != "development"
+  require 'rvm/capistrano'
+  require 'rvm/capistrano/alias_and_wrapp'
+  set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
+  before 'deploy', 'rvm:create_alias'
+  before 'deploy', 'rvm:create_wrappers'
+end
 
 # This adds a task that precompiles assets for the asset pipeline
 load 'deploy/assets'
 
-set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
-before 'deploy', 'rvm:create_alias'
-before 'deploy', 'rvm:create_wrappers'
-
 set :application, "planningalerts.org.au/app"
 set :repository,  "git://github.com/openaustralia/planningalerts-app.git"
-
-server "kedumba.openaustraliafoundation.org.au", :app, :web, :db, :primary => true
 
 set :use_sudo, false
 set :user, "deploy"
 set :scm, :git
-set :stage, "test" unless exists? :stage
 set :rails_env, "production" #added for delayed job
 
 if stage == "production"
+  server "kedumba.openaustraliafoundation.org.au", :app, :web, :db, :primary => true
   set :deploy_to, "/srv/www/www.#{application}"
 elsif stage == "test"
+  server "kedumba.openaustraliafoundation.org.au", :app, :web, :db, :primary => true
   set :deploy_to, "/srv/www/test.#{application}"
-  #set :branch, "test"
+elsif stage == "development"
+  server "planningalerts.org.au.dev", :app, :web, :db, :primary => true
+  set :deploy_to, "/srv/www"
 end
 
 # We need to run this after our collector mongrels are up and running
@@ -55,6 +58,33 @@ namespace :deploy do
 
   task :restart, :except => { :no_release => true } do
     run "touch #{File.join(current_path,'tmp','restart.txt')}"
+  end
+
+  desc "Deploys and starts a `cold' application. Uses db:schema:load instead of Capistrano's default of db:migrate"
+  task :cold do
+    update
+    load_schema
+    start
+  end
+
+  desc "Identical to Capistrano's db:migrate task but does db:schema:load instead"
+  task :load_schema, roles: :app do
+    rake = fetch(:rake, "rake")
+    rails_env = fetch(:rails_env, "production")
+    migrate_env = fetch(:migrate_env, "")
+    migrate_target = fetch(:migrate_target, :latest)
+
+    directory = case migrate_target.to_sym
+      when :current then current_path
+      when :latest  then latest_release
+      else raise ArgumentError, "unknown migration target #{migrate_target.inspect}"
+      end
+
+    run "cd #{directory} && #{rake} RAILS_ENV=#{rails_env} #{migrate_env} db:schema:load"
+  end
+
+  after "deploy:setup" do
+    run "mkdir -p #{shared_path}/sitemaps"
   end
 end
 

@@ -14,7 +14,7 @@ Oh yes it is.
 =============================================================================
 This comment was submitted via PlanningAlerts, a free service run by the
 OpenAustralia Foundation for the public good.
-See http://dev.planningalerts.org.au/applications/123 for more information
+See https://dev.planningalerts.org.au/applications/123 for more information
 
-http://www.openaustraliafoundation.org.au
+https://www.openaustraliafoundation.org.au
 =============================================================================

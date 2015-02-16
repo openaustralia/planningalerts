@@ -101,6 +101,11 @@ class ApiController < ApplicationController
 
   private
 
+  def ssl_required?
+    # Only redirect on howto page. Normal api requests on this controller should not redirect
+    params[:action] == "howto"
+  end
+
   def check_api_parameters
     valid_parameter_keys = [
       "format", "action", "controller",

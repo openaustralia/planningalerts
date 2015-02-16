@@ -122,6 +122,10 @@ PlanningalertsApp::Application.routes.draw do
 
   match '/vanity(/:action(/:id(.:format)))', :controller=>:vanity
 
+  resources :subscriptions, :only => [:new, :create]
+
+  match 'subscriptions' => redirect('/subscriptions/new')
+
   root :to => 'applications#address'
 
   match '/404', :to => 'static#error_404'

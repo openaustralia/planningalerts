@@ -31,7 +31,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
     end
 
     it "should have the unsubscribe header" do
-      email.header["List-Unsubscribe"].to_s.should == "<http://dev.planningalerts.org.au/alerts/abcdef/unsubscribe>"
+      email.header["List-Unsubscribe"].to_s.should == "<https://dev.planningalerts.org.au/alerts/abcdef/unsubscribe>"
     end
   end
 
@@ -134,8 +134,8 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
       end
 
       it 'should contain links to the applications' do
-        @html_body.should have_link("Foo Street, Bar", href: "http://dev.planningalerts.org.au/applications/1?utm_medium=email&utm_source=alerts")
-        @html_body.should have_link("Bar Street, Foo", href: "http://dev.planningalerts.org.au/applications/2?utm_medium=email&utm_source=alerts")
+        @html_body.should have_link("Foo Street, Bar", href: "https://dev.planningalerts.org.au/applications/1?utm_medium=email&utm_source=alerts")
+        @html_body.should have_link("Bar Street, Foo", href: "https://dev.planningalerts.org.au/applications/2?utm_medium=email&utm_source=alerts")
       end
 
       it 'should contain application descriptions' do

@@ -68,13 +68,13 @@ module ApplicationsHelper
     lat = options[:lat]
     lng = options[:lng]
     label = options[:label] || "Map"
-    image_tag("http://maps.googleapis.com/maps/api/staticmap?zoom=#{zoom}&size=#{size}&maptype=roadmap&markers=color:red%7C#{lat},#{lng}&sensor=false".html_safe, :size => size, :alt => label)
+    image_tag("https://maps.googleapis.com/maps/api/staticmap?zoom=#{zoom}&size=#{size}&maptype=roadmap&markers=color:red%7C#{lat},#{lng}&sensor=false".html_safe, :size => size, :alt => label)
   end
 
   def google_static_streetview_url(application, options)
     size = options[:size] || "350x200"
     fov = options[:fov] || 90
-    "http://maps.googleapis.com/maps/api/streetview?size=#{size}&location=#{application.lat},#{application.lng}&fov=#{fov}&sensor=false".html_safe
+    "https://maps.googleapis.com/maps/api/streetview?size=#{size}&location=#{application.lat},#{application.lng}&fov=#{fov}&sensor=false".html_safe
   end
 
   def google_static_streetview(application, options)

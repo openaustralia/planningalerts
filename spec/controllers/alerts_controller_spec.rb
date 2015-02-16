@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe AlertsController do
+  before :each do
+    request.env['HTTPS'] = 'on'
+  end
+
   describe "unsubscribing" do
     it "should delete the alert when unsubscribing" do
       alert = mock_model(Alert)

@@ -1,7 +1,7 @@
 class LayarController < ApplicationController
   # Ugly polluting namespace kind of nastiness
   include ActionView::Helpers::TextHelper
-  
+
   def getpoi
     @applications = Application.near([params[:lat].to_f, params[:lon].to_f], params[:radius].to_f / 1000, :units => :km).paginate(:page => params[:pageKey], :per_page => 10)
     layar_applications = @applications.map do |a|
@@ -31,5 +31,12 @@ class LayarController < ApplicationController
       result[:nextPageKey] = @applications.current_page + 1
     end
     render :json => result
+  end
+
+  private
+
+  # Disable ssl redirects on this controller
+  def ssl_required?
+    false
   end
 end

@@ -86,9 +86,7 @@ class Authority < ActiveRecord::Base
   end
 
   def scraper_data_morph_style(start_date, end_date, info_logger)
-    # The morph api requires a key
-    text = open_url_safe(morph_feed_url_for_date_range(start_date, end_date), info_logger,
-      "x-api-key" => ::Configuration::MORPH_API_KEY)
+    text = open_url_safe(morph_feed_url_for_date_range(start_date, end_date), info_logger)
     if text
       Application.translate_morph_feed_data(text)
     else
@@ -189,7 +187,7 @@ class Authority < ActiveRecord::Base
 
   def morph_feed_url_for_date_range(start_date, end_date)
     query = CGI.escape("select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
-    "https://api.morph.io/#{morph_name}/data.json?query=#{query}"
+    "https://api.morph.io/#{morph_name}/data.json?query=#{query}&key=#{::Configuration::MORPH_API_KEY}"
   end
 
   # So that the encoding function can be used elsewhere
