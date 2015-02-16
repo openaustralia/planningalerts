@@ -556,7 +556,7 @@ form.address-search {
   margin-bottom: 1em;
 }
 
-.news, .tweets, .stats {
+.tweets, .stats {
   a {
     &:link, &:visited {
         color: $darkest;
@@ -607,8 +607,7 @@ form.address-search {
   }
 }
 
-.tweets,
-.news {
+.tweets {
   border-top: 1px solid $lightest-cool-highlight;
   padding-top: 1em;
 }

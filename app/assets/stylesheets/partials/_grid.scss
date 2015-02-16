@@ -32,11 +32,6 @@
   @include span-columns(3 omega, 12);
 }
 
-// news
-.news {
-  @include span-columns(12 omega, 12);
-}
-
 .tweets {
   margin-top: 3em;
 }
@@ -56,7 +51,7 @@
   }
 
   #menu, #main, #sidebar,
-  .news, .keepintouch, .oaf {
+  .keepintouch, .oaf {
     @include span-columns(6 omega);
   }
 
