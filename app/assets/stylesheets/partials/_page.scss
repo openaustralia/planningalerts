@@ -119,12 +119,66 @@ body {
   padding-bottom: 1em;
 }
 
+#donations-wrapper {
+  background-color: #2C9EB5;
+  color: white;
+  text-shadow: 1px 2px 0 #29757A;
+
+  h4 {
+    color: white;
+  }
+
+  p a {
+    color: #FFFFFF;
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+
+  .button-action {
+    background: #EFAB01;
+    border-color: #FEB90B;
+    color: #FFFFFF;
+    font-size: 1.3em;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 0 #C87019;
+    transition: .5s all ease;
+    box-shadow: inset -2px -2px 0 0 darken(#EFAB01, 5%);
+
+    &:hover,
+    &:focus {
+      background: lighten(#EFAB01, 10%);
+      border-color: darken(#FEB90B, 5%);
+      color: #FFFFFF;
+      text-shadow: 2px 2px 0 darken(#C87019, 5%);
+      box-shadow: inset -2px -2px 0 0 darken(#EFAB01, 10%),  0 0 2em rgba( #FAE08B, .7 );
+      transition: .3s all ease;
+    }
+
+    &:active {
+      background: #FFF;
+      border-color: #FFF;
+      color: #29757A;
+      text-shadow: none;
+      box-shadow: 0 0 2em #FAE08B;
+    }
+  }
+}
+
+.donations-banner {
+  padding-top: 1em;
+  padding-bottom: 2em;
+}
+
 #footer-wrapper {
   background-color: $warm-highlight;
 }
 
 #footer {
-  color: $lightest;
+  color: #ffffff;
 
   a {
     &:link, &:hover, &:visited {
@@ -134,9 +188,9 @@ body {
       color: $dark;
     }
   }
-  h4, h5, {
+  h4, h5 {
     &, a:link {
-      color: $lightest;
+      color: #ffffff;
     }
   }
   h4 {
@@ -159,9 +213,6 @@ body {
         display: block;
       }
     }
-  }
-  li {
-    color: $lightest;
   }
 }
 
@@ -505,7 +556,7 @@ form.address-search {
   margin-bottom: 1em;
 }
 
-.news, .tweets, .stats {
+.tweets, .stats {
   a {
     &:link, &:visited {
         color: $darkest;
@@ -555,16 +606,27 @@ form.address-search {
     }
   }
 }
-.news {
+
+.tweets {
   border-top: 1px solid $lightest-cool-highlight;
   padding-top: 1em;
 }
 
-.tweets, .stats {
+.stats {
   background-color: $lightest-cool-highlight;
 
   li {
     border-color: #fff;
+  }
+}
+
+.tweets {
+  li > a {
+    &:hover,
+    &:focus {
+      text-shadow: 0 1px 1px #fff;
+      background-color: $lightest-cool-highlight;
+    }
   }
 }
 

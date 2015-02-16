@@ -3,7 +3,7 @@
     - cache 'tweets', :expires_in => 30.minutes do
       .tweets.container
         %div
-          %h4 Tweets
+          %h4 Tweets from PlanningAlerts
           %ul
             = render_twitter_feed("PlanningAlerts")
             -#:plain

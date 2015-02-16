@@ -32,9 +32,8 @@
   @include span-columns(3 omega, 12);
 }
 
-// news
-.news {
-  @include span-columns(12 omega, 12);
+.tweets {
+  margin-top: 3em;
 }
 
 // footer
@@ -52,7 +51,7 @@
   }
 
   #menu, #main, #sidebar,
-  .news, .keepintouch, .oaf {
+  .keepintouch, .oaf {
     @include span-columns(6 omega);
   }
 
@@ -128,6 +127,37 @@
     li {
       width: 100%;
       text-align: center;
+    }
+  }
+
+  .donations-banner {
+    text-align: center;
+  }
+}
+
+@include at-breakpoint(45em) {
+  .donations-banner {
+    text-align: left;
+    @include clearfix;
+
+    .media-body {
+      float: left;
+      clear: left;
+      @include span-columns(8, 12);
+    }
+
+    .media-object {
+      margin-right: 3em;
+      float: right;
+      clear: right;
+    }
+  }
+}
+
+@include at-breakpoint(60em) {
+  .donations-banner {
+    .media-object {
+      margin-right: 4em;
     }
   }
 }
@@ -291,7 +321,7 @@
     }
   }
 
-  .main, .tweets, .stats {
+  .main, .stats {
     width: 61.3em;
   }
   .main {
@@ -300,7 +330,7 @@
     padding-right: 0;
   }
 
-  #content, .tweets > div, .stats > div {
+  #content, .stats > div, .donations-banner {
     padding-left: $grid-padding;
     padding-right: $grid-padding;
   }
@@ -362,19 +392,12 @@
     width: 28%;
   }
 
-  #tweets-wrapper, #stats-wrapper {
+  #stats-wrapper {
     background-color: $lightest-cool-highlight;
   }
-  .tweets, .stats {
-    background: transparent;
-    border-top: none;
-    border-bottom: none;
-    padding: 0;
 
+  .tweets, .stats {
     > div {
-      border-top: 1px solid darken($lightest-cool-highlight, 5%);
-      //@include background(linear-gradient($light-cool-highlight 20%, $lightest-cool-highlight));
-      padding-top: 1em;
       padding-bottom: 1em;
     }
     li {
@@ -387,31 +410,54 @@
         border-right: 1px solid #fff;
         padding-right: .75em;
       }
+    }
+    .cta {
+      clear: both;
+    }
+  }
+
+  .stats {
+    background: transparent;
+    border-top: none;
+    border-bottom: none;
+    padding: 0;
+
+    > div {
+      border-top: 1px solid darken($lightest-cool-highlight, 5%);
+      padding-top: 1em;
+    }
+
+    ul {
+      @include clearfix;
+    }
+
+    li {
+      width: 25%;
+      text-align: center;
+
       &:last-child a {
         padding-left: .75em;
         padding-right: 0;
         border-right: none;
       }
     }
-    .cta {
-      clear: both;
-    }
+
   }
-  .stats {
-    ul {
-      @include clearfix;
-    }
-    li {
-      width: 25%;
-      text-align: center;
-    }
-  }
+
   .tweets {
+    margin-top: 5em;
+
     li {
       width: 50%;
 
       a {
         min-height: 72px;
+      }
+
+      &:nth-child(2n+2) a {
+        padding-left: .75em;
+        padding-right: 0;
+        border-right: none;
       }
     }
   }
