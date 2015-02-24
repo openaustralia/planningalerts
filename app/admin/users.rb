@@ -1,6 +1,7 @@
 ActiveAdmin.register User do
   index :download_links => false do
     column :email
+    column :admin
     default_actions
   end
 
