@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150224102727) do
+ActiveRecord::Schema.define(:version => 20150224175724) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -44,17 +44,6 @@ ActiveRecord::Schema.define(:version => 20150224102727) do
     t.datetime "last_processed"
     t.string   "theme",                         :default => "default", :null => false
   end
-
-  create_table "api_keys", :force => true do |t|
-    t.string   "key"
-    t.string   "contact_name"
-    t.string   "contact_email"
-    t.string   "organisation"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  add_index "api_keys", ["key"], :name => "index_api_keys_on_key", :unique => true
 
   create_table "api_statistics", :force => true do |t|
     t.string   "ip_address"
