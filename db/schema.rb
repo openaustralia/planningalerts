@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150224011720) do
+ActiveRecord::Schema.define(:version => 20150224031820) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -189,6 +189,10 @@ ActiveRecord::Schema.define(:version => 20150224011720) do
     t.datetime "updated_at"
     t.datetime "reset_password_sent_at"
     t.boolean  "admin",                                 :default => false, :null => false
+    t.string   "api_key"
+    t.string   "name"
+    t.string   "organisation"
+    t.boolean  "bulk_api",                              :default => false, :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
