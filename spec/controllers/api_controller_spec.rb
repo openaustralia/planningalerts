@@ -4,8 +4,8 @@ describe ApiController do
   describe "#all" do
     describe "rss" do
       it "should not support rss" do
-        user = User.create!(email: "foo@bar.com", password: "foofoo")
-        get :all, :format => "rss", :key => user.api_key
+        key = ApiKey.create
+        get :all, :format => "rss", :key => key.key
         response.status.should == 406
       end
     end
@@ -31,24 +31,13 @@ describe ApiController do
         response.body.should == '{"error":"not authorised"}'
       end
 
-      it "should error if valid api key is given but no bulk api access" do
-        user = User.create!(email: "foo@bar.com", password: "foofoo")
-        VCR.use_cassette('planningalerts') do
-          result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
-          Application.stub_chain(:where, :paginate).and_return([result])
-        end
-        get :all, :key => user.api_key, :format => "js"
-        response.status.should == 401
-        response.body.should == '{"error":"not authorised"}'
-      end
-
       it "should find recent applications if api key is given" do
-        user = User.create!(email: "foo@bar.com", password: "foofoo", bulk_api: true)
+        key = ApiKey.create
         VCR.use_cassette('planningalerts') do
           result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
           Application.stub_chain(:where, :paginate).and_return([result])
         end
-        get :all, :key => user.api_key, :format => "js"
+        get :all, :key => key.key, :format => "js"
         response.status.should == 200
         JSON.parse(response.body).should == {
           "application_count" => 1,
