@@ -1,5 +1,4 @@
 class ApiStatistic < ActiveRecord::Base
-  belongs_to :api_key
   belongs_to :user
 
   def self.log(request)
