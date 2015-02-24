@@ -3,6 +3,7 @@ ActiveAdmin.register User do
     column :email
     column :name
     column :organisation
+    column :api_key
     column :bulk_api
     column :admin
     default_actions
