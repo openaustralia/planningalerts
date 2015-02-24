@@ -13,6 +13,13 @@ class ApplicationController < ActionController::Base
 
   before_filter :load_configuration, :set_view_path
 
+  def authenticate_active_admin_user!
+    authenticate_user!
+    unless current_user.admin?
+      render text: "Not authorised", status: :forbidden
+    end
+  end
+
   private
 
   def load_configuration
