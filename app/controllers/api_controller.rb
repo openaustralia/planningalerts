@@ -48,7 +48,7 @@ class ApiController < ApplicationController
   # other API calls because the paging is done differently (via scrape time rather than page number)
   def all
     # TODO Check that params page and v aren't being used
-    if ApiKey.where(key: params[:key]).exists?
+    if User.where(api_key: params[:key], bulk_api: true).exists?
       ApiStatistic.log(request)
       apps = Application.reorder("id")
       apps = apps.where("id > ?", params["since_id"]) if params["since_id"]
