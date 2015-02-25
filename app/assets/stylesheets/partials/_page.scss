@@ -362,6 +362,7 @@ div.apiitem {
   code {
     @include boxed-content;
     word-wrap: break-word;
+    white-space: pre;
     margin-bottom: 1em;
 
     pre {
