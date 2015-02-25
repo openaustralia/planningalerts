@@ -4,7 +4,7 @@ describe ApiHowtoHelper do
   it "should return the url for mapping arbitrary georss feed on Google maps" do
     helper.mapify("http://foo.com", 4).should == "http://maps.google.com/maps?f=q&hl=en&layer=&ie=UTF8&z=4&om=1&q=http%3A%2F%2Ffoo.com"
   end
-  
+
   it "should provide urls of examples of use of the api" do
     helper.api_example_address_url("js", nil).should == "http://api.planningalerts.org.au/applications.js?address=24+Bruce+Road+Glenbrook%2C+NSW+2773&radius=4000"
     helper.api_example_latlong_url("js", nil).should == "http://api.planningalerts.org.au/applications.js?lat=-33.772609&lng=150.624263&radius=4000"
@@ -13,7 +13,7 @@ describe ApiHowtoHelper do
     helper.api_example_postcode_url("js", nil).should == "http://api.planningalerts.org.au/applications.js?postcode=2780"
     helper.api_example_suburb_and_state_url("js", nil).should == "http://api.planningalerts.org.au/applications.js?state=NSW&suburb=Katoomba"
   end
-  
+
   it "should display the example urls nicely" do
     helper.api_example_address_url_html("rss", nil).should == "http://api.planningalerts.org.au/applications.rss?<strong>address</strong>=[address]&amp;<strong>radius</strong>=[distance_in_metres]"
     helper.api_example_latlong_url_html("rss", nil).should == "http://api.planningalerts.org.au/applications.rss?<strong>lat</strong>=[latitude]&amp;<strong>lng</strong>=[longitude]&amp;<strong>radius</strong>=[distance_in_metres]"
