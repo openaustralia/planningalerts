@@ -79,6 +79,16 @@ a.btn:hover {
       padding: .5em;
     }
   }
+  li.boolean {
+    label {
+      // This is so nasty and wrong
+      margin-left: 25%;
+      width: 100%;
+    }
+    input {
+      width: 20px;
+    }
+  }
 }
 
 .formtastic.alert {
