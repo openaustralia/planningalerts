@@ -1,4 +1,4 @@
-%h3 Sign up
+%h3 Register for account
 
 = semantic_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
   = devise_error_messages!
@@ -9,6 +9,6 @@
     = f.input :organisation, label: "Organisation name", hint: "Your company name or leave blank if this is for personal, non-commercial use"
     = f.input :password, required: false
   = f.actions do
-    = f.action :submit, label: "Sign up", button_html: {class: "button button-rounded button-large button-action"}
+    = f.action :submit, label: "Register", button_html: {class: "button button-rounded button-large button-action"}
 
 = render "devise/shared/links"
