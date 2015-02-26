@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
     :trackable, :validatable, :confirmable
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :name, :organisation, :password, :password_confirmation,
-    :remember_me, :bulk_api, :admin
+    :remember_me
   before_create :set_api_key
 
   def set_api_key

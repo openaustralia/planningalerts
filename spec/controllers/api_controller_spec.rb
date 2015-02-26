@@ -43,7 +43,8 @@ describe ApiController do
       end
 
       it "should find recent applications if api key is given" do
-        user = User.create!(email: "foo@bar.com", password: "foofoo", bulk_api: true)
+        user = User.create!(email: "foo@bar.com", password: "foofoo")
+        user.update_attribute(:bulk_api, true)
         VCR.use_cassette('planningalerts') do
           result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
           Application.stub_chain(:where, :paginate).and_return([result])
