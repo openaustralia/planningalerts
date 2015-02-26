@@ -2,8 +2,8 @@
 
 = semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
   = f.inputs do
-    = f.input :email
-    = f.input :password
+    = f.input :email, required: false
+    = f.input :password, required: false
     = f.input :remember_me, as: :boolean
   = f.actions do
     = f.action :submit, label: "Sign in", button_html: {class: "button button-rounded button-large button-action"}
