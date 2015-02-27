@@ -21,6 +21,32 @@
   JSON. To get GeoRSS instead simply replace ".js" in the URL with ".rss". To get JSONP add the query parameter "callback".
 
 %hr
+.notice
+  %p
+    - if current_user
+      The API examples below contain your API key:
+      = current_user.api_key
+    - else
+      To use the API you will need an API key which you get automatically when you
+      = link_to "register for an account", new_user_registration_path
+      or
+      = link_to "sign in", new_user_session_path
+      to your existing account. (Note that this is different
+      than having signed up for an email alert). Once you've done that, return to this page
+      and the API examples below will contain your API key.
+
+  - if current_user
+    %p
+      = link_to "Logout", destroy_user_session_path, class: "button button-rounded"
+  - else
+    %p
+      = link_to "Register for an account", new_user_registration_path, class: "button button-rounded"
+
+  %p
+    Use of the API key will be <strong>required</strong> from <strong>1 June 2015</strong>.
+    If you're using the API now without a key you have until 1 June 2015 to make the
+    simple change. If you have any question don't hesitate to #{mail_to "contact@planningalerts.org.au", "contact us"}.
+
 %h4 API documentation
 .apiitem
   %h5
