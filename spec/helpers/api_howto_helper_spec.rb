@@ -15,11 +15,20 @@ describe ApiHowtoHelper do
   end
 
   it "should display the example urls nicely" do
-    helper.api_example_address_url_html("rss", nil).should == "http://api.planningalerts.org.au/applications.rss?<strong>address</strong>=[address]&amp;<strong>radius</strong>=[distance_in_metres]"
-    helper.api_example_latlong_url_html("rss", nil).should == "http://api.planningalerts.org.au/applications.rss?<strong>lat</strong>=[latitude]&amp;<strong>lng</strong>=[longitude]&amp;<strong>radius</strong>=[distance_in_metres]"
-    helper.api_example_area_url_html("rss", nil).should == "http://api.planningalerts.org.au/applications.rss?<strong>bottom_left_lat</strong>=[latitude]&amp;<strong>bottom_left_lng</strong>=[longitude]&amp;<strong>top_right_lat</strong>=[latitude]&amp;<strong>top_right_lng</strong>=[longitude]"
-    helper.api_example_authority_url_html("rss", nil).should == "http://api.planningalerts.org.au/authorities/[name]/applications.rss"
-    helper.api_example_postcode_url_html("rss", nil).should == "http://api.planningalerts.org.au/applications.rss?<strong>postcode</strong>=[postcode]"
-    helper.api_example_suburb_and_state_url_html("rss", nil).should == "http://api.planningalerts.org.au/applications.rss?<strong>state</strong>=[state]&amp;<strong>suburb</strong>=[suburb]"
+    helper.api_example_address_url_html("rss", nil).should == "http://api.planningalerts.org.au/applications.rss?<strong>address</strong>=[address]&amp;<strong>key</strong>=[key]&amp;<strong>radius</strong>=[distance_in_metres]"
+    helper.api_example_latlong_url_html("rss", nil).should == "http://api.planningalerts.org.au/applications.rss?<strong>key</strong>=[key]&amp;<strong>lat</strong>=[latitude]&amp;<strong>lng</strong>=[longitude]&amp;<strong>radius</strong>=[distance_in_metres]"
+    helper.api_example_area_url_html("rss", nil).should == "http://api.planningalerts.org.au/applications.rss?<strong>bottom_left_lat</strong>=[latitude]&amp;<strong>bottom_left_lng</strong>=[longitude]&amp;<strong>key</strong>=[key]&amp;<strong>top_right_lat</strong>=[latitude]&amp;<strong>top_right_lng</strong>=[longitude]"
+    helper.api_example_authority_url_html("rss", nil).should == "http://api.planningalerts.org.au/authorities/[name]/applications.rss?<strong>key</strong>=[key]"
+    helper.api_example_postcode_url_html("rss", nil).should == "http://api.planningalerts.org.au/applications.rss?<strong>key</strong>=[key]&amp;<strong>postcode</strong>=[postcode]"
+    helper.api_example_suburb_and_state_url_html("rss", nil).should == "http://api.planningalerts.org.au/applications.rss?<strong>key</strong>=[key]&amp;<strong>state</strong>=[state]&amp;<strong>suburb</strong>=[suburb]"
+  end
+
+  it "should display the example urls nicely" do
+    helper.api_example_address_url_html("rss", "123").should == "http://api.planningalerts.org.au/applications.rss?<strong>address</strong>=[address]&amp;<strong>key</strong>=123&amp;<strong>radius</strong>=[distance_in_metres]"
+    helper.api_example_latlong_url_html("rss", "123").should == "http://api.planningalerts.org.au/applications.rss?<strong>key</strong>=123&amp;<strong>lat</strong>=[latitude]&amp;<strong>lng</strong>=[longitude]&amp;<strong>radius</strong>=[distance_in_metres]"
+    helper.api_example_area_url_html("rss", "123").should == "http://api.planningalerts.org.au/applications.rss?<strong>bottom_left_lat</strong>=[latitude]&amp;<strong>bottom_left_lng</strong>=[longitude]&amp;<strong>key</strong>=123&amp;<strong>top_right_lat</strong>=[latitude]&amp;<strong>top_right_lng</strong>=[longitude]"
+    helper.api_example_authority_url_html("rss", "123").should == "http://api.planningalerts.org.au/authorities/[name]/applications.rss?<strong>key</strong>=123"
+    helper.api_example_postcode_url_html("rss", "123").should == "http://api.planningalerts.org.au/applications.rss?<strong>key</strong>=123&amp;<strong>postcode</strong>=[postcode]"
+    helper.api_example_suburb_and_state_url_html("rss", "123").should == "http://api.planningalerts.org.au/applications.rss?<strong>key</strong>=123&amp;<strong>state</strong>=[state]&amp;<strong>suburb</strong>=[suburb]"
   end
 end

@@ -52,26 +52,49 @@ module ApiHowtoHelper
 
   def api_example_address_url_html(format, key)
     # Doing this hackery with 11's and 22's so that we don't escape "[" and "]"
-    htmlify(api_example_address_url(format, key, "11", "22").sub("11", "[address]").sub("22", "[distance_in_metres]"))
+    t = api_example_address_url(format, key || "33", "11", "22")
+    t = t.sub("11", "[address]")
+    t = t.sub("22", "[distance_in_metres]")
+    t = t.sub("33", "[key]") if key.nil?
+    htmlify(t)
   end
 
   def api_example_latlong_url_html(format, key)
-    htmlify(api_example_latlong_url(format, key, "11", "22", "33").sub("11", "[latitude]").sub("22", "[longitude]").sub("33", "[distance_in_metres]"))
+    t = api_example_latlong_url(format, key || "44", "11", "22", "33")
+    t = t.sub("11", "[latitude]")
+    t = t.sub("22", "[longitude]")
+    t = t.sub("33", "[distance_in_metres]")
+    t = t.sub("44", "[key]") if key.nil?
+    htmlify(t)
   end
 
   def api_example_area_url_html(format, key)
-    htmlify(api_example_area_url(format, key, "11", "22", "11", "22").gsub("11", "[latitude]").gsub("22", "[longitude]"))
+    t = api_example_area_url(format, key || "33", "11", "22", "11", "22")
+    t = t.gsub("11", "[latitude]")
+    t = t.gsub("22", "[longitude]")
+    t = t.sub("33", "[key]") if key.nil?
+    htmlify(t)
   end
 
   def api_example_authority_url_html(format, key)
-    htmlify(api_example_authority_url(format, key, "11").sub("11", "[name]"))
+    t = api_example_authority_url(format, key || "22", "11")
+    t = t.sub("11", "[name]")
+    t = t.sub("22", "[key]") if key.nil?
+    htmlify(t)
   end
 
   def api_example_postcode_url_html(format, key)
-    htmlify(api_example_postcode_url(format, key, "11").sub("11", "[postcode]"))
+    t = api_example_postcode_url(format, key || "22", "11")
+    t = t.sub("11", "[postcode]")
+    t = t.sub("22", "[key]") if key.nil?
+    htmlify(t)
   end
 
   def api_example_suburb_and_state_url_html(format, key)
-    htmlify(api_example_suburb_and_state_url(format, key, "11", "22").sub("11", "[suburb]").sub("22", "[state]"))
+    t = api_example_suburb_and_state_url(format, key || "33", "11", "22")
+    t = t.sub("11", "[suburb]")
+    t = t.sub("22", "[state]")
+    t = t.sub("33", "[key]") if key.nil?
+    htmlify(t)
   end
 end
