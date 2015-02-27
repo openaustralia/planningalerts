@@ -13,6 +13,7 @@ if ("#button-pro-signup".length) {
   public_key = $('#button-pro-signup').attr('data-key');
   email = $('#button-pro-signup').attr("data-email");
   amount = $('#button-pro-signup').attr("data-amount");
+  submit_block = $('.payment-submit-block');
 
   var handler = StripeCheckout.configure({
     key: public_key,
@@ -21,7 +22,7 @@ if ("#button-pro-signup".length) {
       var tokenInput = $("<input type=hidden name=stripeToken />").val(response.id);
       var emailInput = $("<input type=hidden name=stripeEmail />").val(response.email);
       $("#subscription-payment-form").append(tokenInput).append(emailInput).submit();
-      $('#button-pro-signup').fadeOut('fast', function() {
+      submit_block.fadeOut('fast', function() {
         var processingNotice = $("<p class='form-processing'>Processing ...</p>").fadeIn('slow');
         $("#subscription-payment-form").append(processingNotice);
       });
