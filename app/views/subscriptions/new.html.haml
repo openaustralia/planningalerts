@@ -1,10 +1,12 @@
 .registration-page
   = form_tag subscriptions_path, id: 'subscription-payment-form', class: 'registration-intro' do
-    %h1 Tailor your alerts to&nbsp;suit your business&nbsp;needs
+    %h1 Sift through less email and get more useful alerts.
 
-    %p
-      Access powerful new features from PlanningAlerts.
-      Discover new opportunities, track key investments and keep your important clients&nbsp;in&nbsp;the&nbsp;know.
+    %p You’ll get all your alerts in one email so you never have to sift through your inbox again.
+
+    %p Discover new opportunities by watching as many locations as you need.
+
+    %p Make sure your coverage is complete. You can easily add and edit addresses from your full list of alerts in one place.
 
     -# TODO: Move to head to block page until it loads
     %script{src: "https://checkout.stripe.com/checkout.js"}
