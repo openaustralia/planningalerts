@@ -32,7 +32,7 @@ en:
       unlocked: 'Your account was successfully unlocked. You are now signed in.'
     mailer:
       confirmation_instructions:
-        subject: 'Confirmation instructions'
+        subject: 'Please confirm your account'
       reset_password_instructions:
         subject: 'Reset password instructions'
       unlock_instructions:
