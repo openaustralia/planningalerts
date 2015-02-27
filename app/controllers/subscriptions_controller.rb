@@ -1,12 +1,7 @@
 class SubscriptionsController < ApplicationController
   def new
     # Amount in cents
-    @amount = case params[:utm_campaign]
-              when "test_2_cohort_3"
-                4900
-              else
-                9900
-              end
+    @amount = 4900
     @display_amount = "$#{@amount.to_s[0...-2]}"
 
     if params[:email]
