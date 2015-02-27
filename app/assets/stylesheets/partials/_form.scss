@@ -99,6 +99,12 @@ a.btn:hover {
 
 // Special formatting for specific forms
 
+.formtastic.user {
+  input.button {
+    white-space: normal;
+  }
+}
+
 .formtastic#new_comment, .formtastic#new_report {
   @include float-form(100%, 0%, 100%, 0, "buttons-left", "left", "select-auto");
   // Hide the labels
