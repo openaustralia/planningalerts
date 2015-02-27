@@ -100,7 +100,7 @@
         font-size: 1.1em;
         margin-bottom: .5em;
       }
-      #{nest("li.stringish, li.string", "label, input")}, .inline-hints  {
+      #{nest("li.stringish, li.string", "label, input")}, .inline-hints, label[for="user_remember_me"]  {
         //li.stringish, li.string, .inline-hints {
         text-align: center;
         width: 100%;
@@ -108,7 +108,7 @@
       #geolocate {
         display: inline-block;
       }
-      .inline-hints {
+      .inline-hints, label[for="user_remember_me"] {
         margin-left: 0;
       }
       .actions {
