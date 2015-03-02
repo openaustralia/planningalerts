@@ -323,6 +323,10 @@ body .container .attention {
     &:last-child {
       border-bottom: none;
     }
+
+    a:visited {
+      color: #344355;
+    }
   }
   .description {
     color: $font-color;
