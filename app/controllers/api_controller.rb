@@ -1,5 +1,4 @@
 class ApiController < ApplicationController
-  caches_page :howto
   before_filter :check_api_parameters, except: [:old_index, :howto]
 
   def authority
