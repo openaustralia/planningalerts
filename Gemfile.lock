@@ -257,7 +257,7 @@ GEM
     rb-fsevent (0.9.4)
     rdoc (3.12.2)
       json (~> 1.4)
-    redcarpet (2.3.0)
+    redcarpet (3.2.3)
     redis (3.0.6)
     redis-namespace (1.4.1)
       redis (~> 3.0.4)
@@ -414,7 +414,7 @@ DEPENDENCIES
   rails (= 3.2.21)
   rake
   rb-fsevent
-  redcarpet (= 2.3.0)
+  redcarpet
   rspec-rails (~> 2.4)
   rvm-capistrano
   sanitize
