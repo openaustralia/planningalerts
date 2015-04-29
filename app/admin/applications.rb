@@ -1,5 +1,5 @@
 ActiveAdmin.register Application do
-  actions :index, :show
+  actions :index, :show, :destroy
 
   index do
     column :council_reference
