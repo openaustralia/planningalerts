@@ -1,4 +1,4 @@
-[Help improve this page](https://github.com/openaustralia/planningalerts-app/blob/master/app/views/atdis/_guidance.md)
+[Help improve this page](https://github.com/openaustralia/planningalerts/blob/master/app/views/atdis/_guidance.md)
 
 If you are planning to submit your development application feed for ATDIS compliance testing this is the page for you! Here we'll outline what you need to do to prepare yourself to ensure maximum chance of success. We will guide you step-by-step through the testing you should do yourself before submitting your feed for compliance testing.
 
