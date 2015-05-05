@@ -10,7 +10,7 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 ## Development
 
-[![Build Status](https://travis-ci.org/openaustralia/planningalerts-app.png?branch=master)](https://travis-ci.org/openaustralia/planningalerts-app) [![Dependency Status](https://gemnasium.com/openaustralia/planningalerts-app.png)](https://gemnasium.com/openaustralia/planningalerts-app) [![Coverage Status](https://coveralls.io/repos/openaustralia/planningalerts-app/badge.png?branch=master)](https://coveralls.io/r/openaustralia/planningalerts-app?branch=master) [![Code Climate](https://codeclimate.com/github/openaustralia/planningalerts-app.png)](https://codeclimate.com/github/openaustralia/planningalerts-app)
+[![Build Status](https://travis-ci.org/openaustralia/planningalerts.png?branch=master)](https://travis-ci.org/openaustralia/planningalerts) [![Dependency Status](https://gemnasium.com/openaustralia/planningalerts.png)](https://gemnasium.com/openaustralia/planningalerts) [![Coverage Status](https://coveralls.io/repos/openaustralia/planningalerts/badge.png?branch=master)](https://coveralls.io/r/openaustralia/planningalerts?branch=master) [![Code Climate](https://codeclimate.com/github/openaustralia/planningalerts.png)](https://codeclimate.com/github/openaustralia/planningalerts)
 
 **Install Dependencies**
  * Install MySql - On OSX download dmg from [http://dev.mysql.com/downloads/](http://dev.mysql.com/downloads/)
