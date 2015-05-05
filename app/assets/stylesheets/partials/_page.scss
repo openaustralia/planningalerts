@@ -493,9 +493,10 @@ ol#comments {
   font-size: 0.9em;
 }
 
-.comment-report {
+.comment-action {
   @include quiet;
   margin-top: .15em;
+  margin-left: .5em;
   float: right;
   font-size: 0.9em;
   text-decoration: underline;

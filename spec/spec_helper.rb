@@ -61,4 +61,6 @@ RSpec.configure do |config|
   config.before(:each) do
     ActionMailer::Base.deliveries = []
   end
+
+  config.include Devise::TestHelpers, type: :view
 end
