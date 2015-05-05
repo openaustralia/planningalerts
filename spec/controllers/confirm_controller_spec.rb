@@ -23,8 +23,7 @@ describe EmailConfirmable::ConfirmController do
     end
     
     it "should return a 404 when the wrong confirm_id is used" do
-      get :confirmed, :resource => 'alerts', :id => "1111"
-      response.code.should == "404"
+      expect { get :confirmed, :resource => 'alerts', :id => "1111" }.to raise_error ActiveRecord::RecordNotFound
     end
   end
 end

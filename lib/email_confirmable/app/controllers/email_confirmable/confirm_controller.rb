@@ -8,7 +8,7 @@ class EmailConfirmable::ConfirmController < ApplicationController
       instance_variable_set(("@" + singular).to_sym, object)
       render singular
     else
-      render :text => "", :status => 404
+      raise ActiveRecord::RecordNotFound
     end
   end
 end
