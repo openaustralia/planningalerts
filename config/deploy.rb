@@ -14,7 +14,7 @@ end
 load 'deploy/assets'
 
 set :application, "planningalerts.org.au/app"
-set :repository,  "git://github.com/openaustralia/planningalerts-app.git"
+set :repository,  "https://github.com/openaustralia/planningalerts.git"
 
 set :use_sudo, false
 set :user, "deploy"
