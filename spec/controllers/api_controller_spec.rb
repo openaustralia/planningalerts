@@ -283,8 +283,7 @@ describe ApiController do
       end
 
       it "should error if valid api key is given but no bulk api access" do
-        user = User.create!(email: "foo@bar.com", password: "foofoo")
-        get :date_scraped, :key => user.api_key, :format => "js", date_scraped: Date.today
+        get :date_scraped, :key => FactoryGirl.create(:user).api_key, :format => "js", date_scraped: Date.today
         response.status.should == 401
         response.body.should == '{"error":"not authorised"}'
       end
