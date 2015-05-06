@@ -255,6 +255,8 @@ GEM
       thor (>= 0.14.6, < 2.0)
     rake (10.3.2)
     rb-fsevent (0.9.4)
+    rb-inotify (0.9.5)
+      ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
     redcarpet (3.2.3)
@@ -414,6 +416,7 @@ DEPENDENCIES
   rails (= 3.2.21)
   rake
   rb-fsevent
+  rb-inotify
   redcarpet
   rspec-rails (~> 2.4)
   rvm-capistrano
