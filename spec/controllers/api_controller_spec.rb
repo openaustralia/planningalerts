@@ -294,9 +294,16 @@ describe ApiController do
 
     context "valid authentication" do
       let(:user) { FactoryGirl.create(:user, bulk_api: true) }
+      before(:each) do
+        VCR.use_cassette('planningalerts', allow_playback_repeats: true) do
+          FactoryGirl.create_list(:application, 5, date_scraped: DateTime.new(2015, 05, 05, 12, 0, 0))
+          FactoryGirl.create_list(:application, 5, date_scraped: DateTime.new(2015, 05, 06, 12, 0, 0))
+        end
+      end
       subject { get :date_scraped, :key => user.api_key, :format => "js", date_scraped: "2015-05-06" }
 
       it { expect(subject).to be_success }
+      it { expect(JSON.parse(subject.body).count).to eq 5 }
     end
   end
 end

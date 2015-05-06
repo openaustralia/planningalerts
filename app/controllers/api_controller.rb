@@ -45,7 +45,7 @@ class ApiController < ApplicationController
   end
 
   def date_scraped
-    date = Date.today # TODO: Parse date from param
+    date = Date.new(2015, 05, 06) # TODO: Parse date from param
     api_render(Application.where(date_scraped: date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
   end
 
