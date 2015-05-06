@@ -55,7 +55,7 @@ class ApiController < ApplicationController
       api_render(Application.where(date_scraped: date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
     else
       respond_to do |format|
-        format.js { render json: {error: "invalid date_scraped"}, status: 401 }
+        format.js { render json: {error: "invalid date_scraped"}, status: 400 }
       end
     end
   end
