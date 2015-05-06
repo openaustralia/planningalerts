@@ -63,6 +63,8 @@ PlanningalertsApp::Application.routes.draw do
     get 'applications' => 'api#area', as: nil,
       constraints: QueryParamsPresentConstraint.new(:bottom_left_lat, :bottom_left_lng,
         :top_right_lat, :top_right_lng)
+    get 'applications' => 'api#date_scraped', as: nil,
+      constraints: QueryParamsPresentConstraint.new(:date_scraped)
     get 'applications' => 'api#all', as: nil
   end
 

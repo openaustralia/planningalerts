@@ -43,6 +43,19 @@ class ApiController < ApplicationController
       "Recent applications in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})")
   end
 
+  def date_scraped
+    date = Date.today # TODO: Parse date from param
+    if User.where(api_key: params[:key], bulk_api: true).exists?
+      api_render(Application.where(date_scraped: date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
+    else
+      respond_to do |format|
+        format.js do
+          render json: {error: "not authorised"}, status: 401
+        end
+      end
+    end
+  end
+
   # Note that this returns results in a slightly different format than the
   # other API calls because the paging is done differently (via scrape time rather than page number)
   def all
