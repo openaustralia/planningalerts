@@ -1,5 +1,5 @@
 Factory.define :authority do |a|
-  a.full_name "Acme Local Planning Authority"
+  a.sequence(:full_name) { |n| "Acme Local Planning Authority - #{n}" }
   a.short_name {|b| b.full_name}
 end
 

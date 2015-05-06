@@ -46,7 +46,8 @@ describe ApiController do
         user = User.create!(email: "foo@bar.com", password: "foofoo")
         user.update_attribute(:bulk_api, true)
         VCR.use_cassette('planningalerts') do
-          result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+          authority = Factory(:authority, full_name: "Acme Local Planning Authority")
+          result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1), authority: authority)
           Application.stub_chain(:where, :paginate).and_return([result])
         end
         get :all, :key => user.api_key, :format => "js"
@@ -91,7 +92,8 @@ describe ApiController do
 
     it "should support jsonp" do
       VCR.use_cassette('planningalerts') do
-        result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+        authority = Factory(:authority, full_name: "Acme Local Planning Authority")
+        result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1), authority: authority)
         Application.stub_chain(:where, :paginate).and_return([result])
       end
       get :postcode, :format => "js", :postcode => "2780", :callback => "foobar"
@@ -121,7 +123,8 @@ describe ApiController do
 
     it "should support json api version 2" do
       VCR.use_cassette('planningalerts') do
-        application = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+        authority = Factory(:authority, full_name: "Acme Local Planning Authority")
+        application = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1), authority: authority)
         result = [application]
         result.stub!(:total_pages).and_return(5)
         Application.stub_chain(:where, :paginate).and_return(result)
