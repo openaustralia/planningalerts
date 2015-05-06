@@ -276,14 +276,14 @@ describe ApiController do
 
   describe "#date_scraped" do
     it "should error if invalid api key is given" do
-      get :date_scraped, :key => "jsdfhsd", :format => "js"
+      get :date_scraped, :key => "jsdfhsd", :format => "js", date_scraped: Date.today
       response.status.should == 401
       response.body.should == '{"error":"not authorised"}'
     end
 
     it "should error if valid api key is given but no bulk api access" do
       user = User.create!(email: "foo@bar.com", password: "foofoo")
-      get :date_scraped, :key => user.api_key, :format => "js"
+      get :date_scraped, :key => user.api_key, :format => "js", date_scraped: Date.today
       response.status.should == 401
       response.body.should == '{"error":"not authorised"}'
     end
@@ -291,7 +291,7 @@ describe ApiController do
     it "should be successful if valid api key is given with bulk api access" do
       user = User.create!(email: "foo@bar.com", password: "foofoo")
       user.update_attribute(:bulk_api, true)
-      get :date_scraped, :key => user.api_key, :format => "js"
+      get :date_scraped, :key => user.api_key, :format => "js", date_scraped: Date.today
       response.should be_success
     end
   end
