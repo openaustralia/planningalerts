@@ -19,3 +19,8 @@ Factory.define :comment do |c|
   c.address "12 Foo Street"
   c.association :application
 end
+
+Factory.define :user do |u|
+  u.email "foo@bar.com"
+  u.password "foofoo"
+end
