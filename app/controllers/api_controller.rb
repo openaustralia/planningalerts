@@ -47,9 +47,13 @@ class ApiController < ApplicationController
   def date_scraped
     begin
       date = Date.parse(params[:date_scraped])
-      api_render(Application.where(date_scraped: date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
     rescue ArgumentError => e
       raise e unless e.message == "invalid date"
+    end
+
+    if date
+      api_render(Application.where(date_scraped: date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
+    else
       respond_to do |format|
         format.js { render json: {error: "invalid date_scraped"}, status: 401 }
       end
