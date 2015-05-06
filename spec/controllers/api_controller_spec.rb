@@ -291,11 +291,7 @@ describe ApiController do
     end
 
     context "valid authentication" do
-      let(:user) do
-        user = User.create!(email: "foo@bar.com", password: "foofoo")
-        user.update_attribute(:bulk_api, true)
-        user
-      end
+      let(:user) { FactoryGirl.create(:user, bulk_api: true) }
 
       it "should be successful if valid api key is given with bulk api access" do
         get :date_scraped, :key => user.api_key, :format => "js", date_scraped: Date.today
