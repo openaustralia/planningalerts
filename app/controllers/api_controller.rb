@@ -1,5 +1,6 @@
 class ApiController < ApplicationController
   before_filter :check_api_parameters, except: [:old_index, :howto]
+  before_filter :authenticate_bulk_api, only: [:all, :date_scraped]
 
   def authority
     # TODO Handle the situation where the authority name isn't found
@@ -45,47 +46,31 @@ class ApiController < ApplicationController
 
   def date_scraped
     date = Date.today # TODO: Parse date from param
-    if User.where(api_key: params[:key], bulk_api: true).exists?
-      api_render(Application.where(date_scraped: date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
-    else
-      respond_to do |format|
-        format.js do
-          render json: {error: "not authorised"}, status: 401
-        end
-      end
-    end
+    api_render(Application.where(date_scraped: date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
   end
 
   # Note that this returns results in a slightly different format than the
   # other API calls because the paging is done differently (via scrape time rather than page number)
   def all
     # TODO Check that params page and v aren't being used
-    if User.where(api_key: params[:key], bulk_api: true).exists?
-      ApiStatistic.log(request)
-      apps = Application.reorder("id")
-      apps = apps.where("id > ?", params["since_id"]) if params["since_id"]
+    ApiStatistic.log(request)
+    apps = Application.reorder("id")
+    apps = apps.where("id > ?", params["since_id"]) if params["since_id"]
 
-      # Max number of records that we'll show
-      limit = 1000
+    # Max number of records that we'll show
+    limit = 1000
 
-      applications = apps.limit(limit).to_a
-      last = applications.last
-      last = Application.reorder("id").last if last.nil?
-      max_id = last.id if last
+    applications = apps.limit(limit).to_a
+    last = applications.last
+    last = Application.reorder("id").last if last.nil?
+    max_id = last.id if last
 
-      respond_to do |format|
-        format.js do
-          s = {:applications => applications, :application_count => apps.count, :max_id => max_id}
-          j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
-            :include => {:authority => {:only => [:full_name]}})
-          render :json => j, :callback => params[:callback]
-        end
-      end
-    else
-      respond_to do |format|
-        format.js do
-          render json: {error: "not authorised"}, status: 401
-        end
+    respond_to do |format|
+      format.js do
+        s = {:applications => applications, :application_count => apps.count, :max_id => max_id}
+        j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
+          :include => {:authority => {:only => [:full_name]}})
+        render :json => j, :callback => params[:callback]
       end
     end
   end
@@ -133,6 +118,16 @@ class ApiController < ApplicationController
     invalid_parameter_keys = params.keys - valid_parameter_keys
     unless invalid_parameter_keys.empty?
       render :text => "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.sort.join(', ')}", :status => 400
+    end
+  end
+
+  def authenticate_bulk_api
+    unless User.where(api_key: params[:key], bulk_api: true).exists?
+      respond_to do |format|
+        format.js do
+          render json: {error: "not authorised"}, status: 401
+        end
+      end
     end
   end
 
