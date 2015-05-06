@@ -275,27 +275,25 @@ describe ApiController do
   end
 
   describe "#date_scraped" do
-    context "invalid authentication" do
-      it "should error if invalid api key is given" do
-        get :date_scraped, :key => "jsdfhsd", :format => "js", date_scraped: "2015-05-06"
-        response.status.should == 401
-        response.body.should == '{"error":"not authorised"}'
-      end
+    context "invalid api key is given" do
+      subject { get :date_scraped, :key => "jsdfhsd", :format => "js", date_scraped: "2015-05-06" }
 
-      it "should error if valid api key is given but no bulk api access" do
-        get :date_scraped, :key => FactoryGirl.create(:user).api_key, :format => "js", date_scraped: "2015-05-06"
-        response.status.should == 401
-        response.body.should == '{"error":"not authorised"}'
-      end
+      it { expect(subject.status).to eq 401 }
+      it { expect(subject.body).to eq '{"error":"not authorised"}' }
+    end
+
+    context "valid api key is given but no bulk api access" do
+      subject { get :date_scraped, :key => FactoryGirl.create(:user).api_key, :format => "js", date_scraped: "2015-05-06" }
+
+      it { expect(subject.status).to eq 401 }
+      it { expect(subject.body).to eq '{"error":"not authorised"}' }
     end
 
     context "valid authentication" do
       let(:user) { FactoryGirl.create(:user, bulk_api: true) }
+      subject { get :date_scraped, :key => user.api_key, :format => "js", date_scraped: "2015-05-06" }
 
-      it "should be successful if valid api key is given with bulk api access" do
-        get :date_scraped, :key => user.api_key, :format => "js", date_scraped: "2015-05-06"
-        response.should be_success
-      end
+      it { expect(subject).to be_success }
     end
   end
 end
