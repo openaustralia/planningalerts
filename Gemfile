@@ -1,16 +1,13 @@
 source "https://rubygems.org"
 
-gem 'rails', '3.2.21'
+gem 'rails', '4.0.13'
 gem 'mysql2', '> 0.3'
 
-# Needed for the new asset pipeline
-group :assets do
-  gem 'coffee-rails'
-  gem "compass-rails"
-  gem 'sass-rails'
-  gem "susy"
-  gem 'uglifier'
-end
+gem 'coffee-rails'
+gem "compass-rails"
+gem 'sass-rails'
+gem "susy"
+gem 'uglifier'
 
 # jQuery is the default JavaScript library in Rails 3.1
 # Locking jquery-rails to 2.2.1 so that activeadmin can find jquery-ui when it's precompiling its assets
@@ -31,7 +28,8 @@ gem 'thinking-sphinx', "~> 3.0"
 gem "formtastic"
 gem 'validates_email_format_of'
 gem "geocoder", :require => "geocoder"
-gem 'activeadmin'
+# Temporarily disabling during Rails 4 upgrade
+#gem 'activeadmin'
 # Disabling metric_fu because it depends on rcov which doesn't work on Ruby 1.9
 #gem 'metric_fu'
 gem "rake"
@@ -45,7 +43,8 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem "validate_url"
 gem "twitter"
-gem "atdis"
+# Can revert to plain gem when this PR is merged https://github.com/openaustralia/atdis/pull/39
+gem "atdis", github: "openaustralia/atdis", branch: "activemodel4"
 gem "oj"
 gem "redcarpet"
 gem 'honeybadger'
