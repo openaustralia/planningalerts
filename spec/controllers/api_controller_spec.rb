@@ -46,7 +46,8 @@ describe ApiController do
         user = User.create!(email: "foo@bar.com", password: "foofoo")
         user.update_attribute(:bulk_api, true)
         VCR.use_cassette('planningalerts') do
-          result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+          authority = Factory(:authority, full_name: "Acme Local Planning Authority")
+          result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1), authority: authority)
           Application.stub_chain(:where, :paginate).and_return([result])
         end
         get :all, :key => user.api_key, :format => "js"
@@ -91,7 +92,8 @@ describe ApiController do
 
     it "should support jsonp" do
       VCR.use_cassette('planningalerts') do
-        result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+        authority = Factory(:authority, full_name: "Acme Local Planning Authority")
+        result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1), authority: authority)
         Application.stub_chain(:where, :paginate).and_return([result])
       end
       get :postcode, :format => "js", :postcode => "2780", :callback => "foobar"
@@ -121,7 +123,8 @@ describe ApiController do
 
     it "should support json api version 2" do
       VCR.use_cassette('planningalerts') do
-        application = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+        authority = Factory(:authority, full_name: "Acme Local Planning Authority")
+        application = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1), authority: authority)
         result = [application]
         result.stub!(:total_pages).and_return(5)
         Application.stub_chain(:where, :paginate).and_return(result)
@@ -270,6 +273,42 @@ describe ApiController do
         get :suburb, :format => "rss", :suburb => "Katoomba", :state => "NSW"
         assigns[:applications].should == result
         assigns[:description].should == "Recent applications in Katoomba, NSW"
+      end
+    end
+  end
+
+  describe "#date_scraped" do
+    context "invalid api key is given" do
+      subject { get :date_scraped, :key => "jsdfhsd", :format => "js", date_scraped: "2015-05-06" }
+
+      it { expect(subject.status).to eq 401 }
+      it { expect(subject.body).to eq '{"error":"not authorised"}' }
+    end
+
+    context "valid api key is given but no bulk api access" do
+      subject { get :date_scraped, :key => FactoryGirl.create(:user).api_key, :format => "js", date_scraped: "2015-05-06" }
+
+      it { expect(subject.status).to eq 401 }
+      it { expect(subject.body).to eq '{"error":"not authorised"}' }
+    end
+
+    context "valid authentication" do
+      let(:user) { FactoryGirl.create(:user, bulk_api: true) }
+      before(:each) do
+        VCR.use_cassette('planningalerts', allow_playback_repeats: true) do
+          FactoryGirl.create_list(:application, 5, date_scraped: DateTime.new(2015, 05, 05, 12, 0, 0))
+          FactoryGirl.create_list(:application, 5, date_scraped: DateTime.new(2015, 05, 06, 12, 0, 0))
+        end
+      end
+      subject { get :date_scraped, :key => user.api_key, :format => "js", date_scraped: "2015-05-06" }
+
+      it { expect(subject).to be_success }
+      it { expect(JSON.parse(subject.body).count).to eq 5 }
+
+      context "invalid date" do
+        subject { get :date_scraped, :key => user.api_key, :format => "js", date_scraped: "foobar" }
+        it { expect(subject).to_not be_success }
+        it { expect(subject.body).to eq '{"error":"invalid date_scraped"}' }
       end
     end
   end

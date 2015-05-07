@@ -1,5 +1,5 @@
 Factory.define :authority do |a|
-  a.full_name "Acme Local Planning Authority"
+  a.sequence(:full_name) { |n| "Acme Local Planning Authority - #{n}" }
   a.short_name {|b| b.full_name}
 end
 
@@ -18,4 +18,9 @@ Factory.define :comment do |c|
   c.text "a comment"
   c.address "12 Foo Street"
   c.association :application
+end
+
+Factory.define :user do |u|
+  u.email "foo@bar.com"
+  u.password "foofoo"
 end
