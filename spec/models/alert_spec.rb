@@ -217,14 +217,14 @@ describe Alert do
     it "should return the local government authority name" do
       Geo2gov.should_receive(:new).with(1.0, 2.0).and_return(mock(:lga_name => "Blue Mountains"))
 
-      a = Alert.new(:lat => 1.0, :lng => 2.0, :email => "foo@bar.com", :radius_meters => 200, :address => "")
+      a = Factory(:alert, :lat => 1.0, :lng => 2.0, :email => "foo@bar.com", :radius_meters => 200, :address => "")
       a.lga_name.should == "Blue Mountains"      
     end
     
     it "should cache the value in the database" do
       Geo2gov.should_receive(:new).once.with(1.0, 2.0).and_return(mock(:lga_name => "Blue Mountains"))
 
-      a = Alert.create!(:id => 1, :lat => 1.0, :lng => 2.0, :email => "foo@bar.com", :radius_meters => 200, :address => "")
+      a = Factory(:alert, :id => 1, :lat => 1.0, :lng => 2.0, :email => "foo@bar.com", :radius_meters => 200, :address => "")
       a.lga_name.should == "Blue Mountains"
       b = Alert.find(:first)
       b.lga_name.should == "Blue Mountains"
@@ -233,7 +233,7 @@ describe Alert do
 
   describe "comments" do
     it "should see a new comment when there is a new comments on an application" do
-      alert = Alert.create!(:email => "matthew@openaustralia.org", :address => @address, :radius_meters => 2000)
+      alert = Factory(:alert, :email => "matthew@openaustralia.org", :address => @address, :radius_meters => 2000)
       p1 = alert.location.endpoint(0, 501) # 501 m north of alert
       application = Factory.create(:application, :lat => p1.lat, :lng => p1.lng, :suburb => "", :state => "", :postcode => "")
       comment1 = application.comments.create!(:text => "This is a comment", :name => "Matthew", :email => "matthew@openaustralia.org", :address => "Foo street", :confirmed => true)
@@ -241,7 +241,7 @@ describe Alert do
     end
 
     it "should only see two new comments when there are two new comments on a single application" do
-      alert = Alert.create!(:email => "matthew@openaustralia.org", :address => @address, :radius_meters => 2000)
+      alert = Factory(:alert, :email => "matthew@openaustralia.org", :address => @address, :radius_meters => 2000)
       p1 = alert.location.endpoint(0, 501) # 501 m north of alert
       application = Factory.create(:application, :lat => p1.lat, :lng => p1.lng, :suburb => "", :state => "", :postcode => "")
       comment1 = application.comments.create!(:text => "This is a comment", :name => "Matthew", :email => "matthew@openaustralia.org", :address => "Foo street", :confirmed => true)
