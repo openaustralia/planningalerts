@@ -24,7 +24,7 @@ describe Alert do
     email = "foo@foo.org"
     u1 = Alert.create!(:email => email, :address => "A street address", :radius_meters => 200, :lat => 1.0, :lng => 2.0)
     u2 = Alert.create!(:email => email, :address => "A street address", :radius_meters => 800, :lat => 1.0, :lng => 2.0)
-    alerts = Alert.find_all_by_email(email) 
+    alerts = Alert.where(email: email)
     alerts.count.should == 1
     alerts.first.radius_meters.should == u2.radius_meters
   end
@@ -33,7 +33,7 @@ describe Alert do
     email = "foo@foo.org"
     Alert.create!(:email => email, :address => "A street address", :radius_meters => 200, :lat => 1.0, :lng => 2.0)
     Alert.create!(:email => email, :address => "Another street address", :radius_meters => 800, :lat => 1.0, :lng => 2.0)
-    Alert.find_all_by_email(email).count.should == 2
+    Alert.where(email: email).count.should == 2
   end
   
   it "should be able to accept location information if it is already known and so not use the geocoder" do

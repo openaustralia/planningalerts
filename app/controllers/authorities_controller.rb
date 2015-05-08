@@ -4,7 +4,7 @@ class AuthoritiesController < ApplicationController
     states = Authority.enabled.find(:all, :group => "state", :order => "state").map{|a| a.state}
     @authorities = {}
     states.each do |state|
-      @authorities[state] = Authority.enabled.find_all_by_state(state, :order => "full_name")
+      @authorities[state] = Authority.enabled.where(state: state).order(:full_name)
     end
   end
 

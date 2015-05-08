@@ -31,7 +31,7 @@ namespace :planningalerts do
       duplicates.each do |authority_id, council_reference|
         authority = Authority.find(authority_id)
         puts "Removing duplicates for #{authority.full_name_and_state} - #{council_reference} and redirecting..."
-        applications = authority.applications.find_all_by_council_reference(council_reference)
+        applications = authority.applications.where(council_reference: council_reference)
         # The first result is the most recently scraped. We want to keep the last result which was the first
         # one scraped
         application_to_keep = applications[-1]
