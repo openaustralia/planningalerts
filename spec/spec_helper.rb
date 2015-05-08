@@ -35,6 +35,17 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
 
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with :truncation
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
   # If true, the base class of anonymous controllers will be inferred
