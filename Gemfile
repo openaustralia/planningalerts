@@ -28,8 +28,8 @@ gem 'thinking-sphinx', "~> 3.0"
 gem "formtastic"
 gem 'validates_email_format_of'
 gem "geocoder", :require => "geocoder"
-# Temporarily disabling during Rails 4 upgrade
-#gem 'activeadmin'
+# Rails 4 support is a work in progress so requires tracking master
+gem 'activeadmin', github: 'activeadmin'
 # Disabling metric_fu because it depends on rcov which doesn't work on Ruby 1.9
 #gem 'metric_fu'
 gem "rake"

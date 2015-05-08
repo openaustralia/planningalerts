@@ -1,4 +1,22 @@
 GIT
+  remote: git://github.com/activeadmin/activeadmin.git
+  revision: 7e72b7881eb6f19ca58b7f4467c8874a43115426
+  specs:
+    activeadmin (1.0.0.pre1)
+      arbre (~> 1.0, >= 1.0.2)
+      bourbon
+      coffee-rails
+      formtastic (~> 3.1)
+      formtastic_i18n
+      inherited_resources (~> 1.6)
+      jquery-rails
+      jquery-ui-rails (~> 5.0)
+      kaminari (~> 0.15)
+      rails (>= 3.2, < 5.0)
+      ransack (~> 1.3)
+      sass-rails
+
+GIT
   remote: git://github.com/openaustralia/atdis.git
   revision: 54b80f8a07367dd3f035cc15a1a08800b6d4fd79
   branch: activemodel4
@@ -37,6 +55,8 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     addressable (2.3.3)
+    arbre (1.0.3)
+      activesupport (>= 3.0.0)
     arel (4.0.2)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -44,6 +64,9 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bourbon (4.2.2)
+      sass (~> 3.4)
+      thor
     builder (3.1.4)
     capistrano (2.15.5)
       highline
@@ -129,6 +152,7 @@ GEM
       thor (>= 0.13.6)
     formtastic (3.1.3)
       actionpack (>= 3.2.13)
+    formtastic_i18n (0.3.0)
     geocoder (1.1.6)
     geokit (1.6.7)
       multi_json (>= 1.3.2)
@@ -147,6 +171,9 @@ GEM
       rspec (~> 2.11)
     haml (4.0.6)
       tilt
+    has_scope (0.6.0)
+      actionpack (>= 3.2, < 5)
+      activesupport (>= 3.2, < 5)
     highline (1.6.20)
     honeybadger (1.15.3)
       json
@@ -157,15 +184,23 @@ GEM
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
+    inherited_resources (1.6.0)
+      actionpack (>= 3.2, < 5)
+      has_scope (~> 0.6.0.rc)
+      railties (>= 3.2, < 5)
+      responders
     innertube (1.1.0)
     joiner (0.2.0)
       activerecord (>= 3.1.0, < 4.1.0)
     jquery-rails (2.2.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (4.0.5)
-      railties (>= 3.1.0)
+    jquery-ui-rails (5.0.3)
+      railties (>= 3.2.16)
     json (1.8.2)
+    kaminari (0.16.3)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     launchy (2.2.0)
       addressable (~> 2.3)
     libv8 (3.11.8.13)
@@ -200,6 +235,8 @@ GEM
     newrelic_rpm (3.6.8.164)
     nokogiri (1.5.11)
     oj (2.1.4)
+    polyamorous (1.2.0)
+      activerecord (>= 3.0)
     pry (0.9.12)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -229,6 +266,12 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
+    ransack (1.6.6)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      i18n
+      polyamorous (~> 1.2)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
@@ -237,6 +280,8 @@ GEM
     redis-namespace (1.4.1)
       redis (~> 3.0.4)
     ref (1.0.2)
+    responders (1.1.2)
+      railties (>= 3.2, < 4.2)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -355,6 +400,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activeadmin!
   atdis!
   better_errors
   binding_of_caller
