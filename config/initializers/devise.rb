@@ -42,6 +42,8 @@ Devise.setup do |config|
   # Setup a pepper to generate the encrypted password.
   config.pepper = "efd2458ec24a6957dad5a2a769b9f6822fd96e483a10f622000d44ddf3f926eaadf9e804bdfc967e7c34d2f959d5fa84c1afeea9a97975d32f6e7125c831bb9d"
 
+  config.secret_key = Configuration::DEVISE_SECRET_KEY
+
   # ==> Configuration for :confirmable
   # The time you want to give your user to confirm his account. During this time
   # he will be able to access your application without confirming. Default is nil.

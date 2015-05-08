@@ -55,4 +55,6 @@ module Configuration
   # for subscriptions. See app/controllers/subscriptions_controller.rb
   STRIPE_PUBLISHABLE_KEY = 'xxxxxxxxxxxxxxxxx'
   STRIPE_SECRET_KEY = 'xxxxxxxxxxxxxxxxx'
+
+  DEVISE_SECRET_KEY = "9c92ee433b851b3db3952e81e0c9d678de778b194986e2ae8b160eca08bea4696152801e83d88b75a17375867b07e46d70d9bfb7ff5a352c2e1de8790448eaa5"
 end
