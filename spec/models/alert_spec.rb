@@ -40,7 +40,7 @@ describe Alert do
     Location.should_not_receive(:geocode)
     @attributes[:lat] = 1.0
     @attributes[:lng] = 2.0
-    u = Alert.create!(@attributes)
+    u = Factory(:alert, @attributes)
     u.lat.should == 1.0
     u.lng.should == 2.0
   end
@@ -171,7 +171,7 @@ describe Alert do
       p2 = @alert.location.endpoint(0, 499) # 499 m north of alert
       p3 = @alert.location.endpoint(45, 499 * Math.sqrt(2)) # Just inside the NE corner of a box centred on the alert (of size 2 * 499m)
       p4 = @alert.location.endpoint(90, 499) # 499 m east of alert
-      auth = Authority.create!(:full_name => "", :short_name => "")
+      auth = Factory(:authority)
       @app1 = Factory(:application, :lat => p1.lat, :lng => p1.lng, :date_scraped => 5.minutes.ago, :council_reference => "A1", :suburb => "", :state => "", :postcode => "", :authority => auth)
       @app2 = Factory(:application, :lat => p2.lat, :lng => p2.lng, :date_scraped => 12.hours.ago, :council_reference => "A2", :suburb => "", :state => "", :postcode => "", :authority => auth)
       @app3 = Factory(:application, :lat => p3.lat, :lng => p3.lng, :date_scraped => 2.days.ago, :council_reference => "A3", :suburb => "", :state => "", :postcode => "", :authority => auth)
