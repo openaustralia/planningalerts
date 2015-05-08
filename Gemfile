@@ -7,6 +7,8 @@ gem 'mysql2', '> 0.3'
 gem 'protected_attributes'
 # Allow us to use `caches_page`
 gem "actionpack-page_caching"
+# Need to support sweepers
+gem "rails-observers"
 
 gem 'coffee-rails'
 gem "compass-rails"

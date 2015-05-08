@@ -273,6 +273,8 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.0.13)
       sprockets-rails (~> 2.0)
+    rails-observers (0.1.2)
+      activemodel (~> 4.0)
     railties (4.0.13)
       actionpack (= 4.0.13)
       activesupport (= 4.0.13)
@@ -456,6 +458,7 @@ DEPENDENCIES
   rack-livereload
   rack-throttle
   rails (= 4.0.13)
+  rails-observers
   rake
   rb-fsevent
   rb-inotify
