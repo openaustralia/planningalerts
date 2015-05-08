@@ -35,7 +35,7 @@ PlanningalertsApp::Application.routes.draw do
   # Can't do the redirects in the routing as above because the redirect depends
   # on the passed parameters
   get 'api.php' => 'api#old_index'
-  get 'api' => 'api#old_index'
+  get 'api' => 'api#old_index', as: :api_old_index
 
   resources :alerts, :only => [:new, :create], :path_names => {:new => 'signup'} do
     collection do
