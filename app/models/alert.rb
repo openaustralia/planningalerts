@@ -6,8 +6,8 @@ class Alert < ActiveRecord::Base
   before_create :remove_other_alerts_for_this_address
   acts_as_email_confirmable
 
-  scope :active, :conditions => {:confirmed => true, :unsubscribed => false}
-  scope :in_past_week, where("created_at > ?", 7.days.ago)
+  scope :active, -> { where(confirmed: true, unsubscribed: false) }
+  scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
 
   def location=(l)
     if l
