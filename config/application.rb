@@ -19,10 +19,6 @@ module PlanningalertsApp
     config.autoload_paths << "#{config.root}/app/sweepers"
     config.autoload_paths << "#{config.root}/lib"
 
-    # Only load the plugins named here, in the order given (default is alphabetical).
-    # :all can be used as a placeholder for all plugins not explicitly named.
-    # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
-
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
     config.active_record.observers = :application_sweeper, :alert_sweeper, :authority_sweeper, :stat_sweeper
@@ -36,31 +32,11 @@ module PlanningalertsApp
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # JavaScript files you want as :defaults (application.js is always included).
-    # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
-
-    # Configure the default encoding used in templates for Ruby 1.9.
-    config.encoding = "utf-8"
-
-    # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
-
     # We are using some rack middleware to throttle people that make too many API requests
     config.middleware.use ApiThrottler,:cache => Dalli::Client.new,
         :strategies => YAML.load_file("#{config.root}/config/throttling.yml"),
         :key_prefix => :throttle,
         :message => "Rate Limit Exceeded. See http://www.planningalerts.org.au/api/howto#hLicenseInfo for more information"
-
-    config.assets.enabled = true
-    config.assets.version = '1.0'
-
-    # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-    # config.assets.precompile += %w( search.js )
-    config.assets.precompile += ['ie.css', 'screen.css', 'print.css',
-      'placeholder_polyfill.min.css',
-      'active_admin.js', 'applications.js', 'bar_graph.js', 'maps.js', 'mxn.core.js',
-      'mxn.googlev3.core.js', 'mxn.js', 'placeholder_polyfill.jquery.min.combo.js', 'preview.js',
-      'atdis.js']
 
     config.action_dispatch.tld_length = 2
 
