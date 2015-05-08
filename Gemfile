@@ -3,6 +3,9 @@ source "https://rubygems.org"
 gem 'rails', '4.0.13'
 gem 'mysql2', '> 0.3'
 
+# TODO: Swtich to Strong Parameters and remove this
+gem 'protected_attributes'
+
 gem 'coffee-rails'
 gem "compass-rails"
 gem 'sass-rails'
