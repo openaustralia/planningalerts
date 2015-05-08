@@ -44,7 +44,7 @@ ActiveAdmin.register Authority do
     f.buttons
   end
 
-  action_item :only => :show do
+  action_item :scrape, :only => :show do
     button_to('Scrape', scrape_admin_authority_path)
   end
 

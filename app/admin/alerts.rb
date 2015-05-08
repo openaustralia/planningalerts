@@ -22,7 +22,7 @@ ActiveAdmin.register Alert do
     send_data emails.join("\n"), filename: 'emails.txt'
   end
 
-  action_item do
+  action_item :export do
     link_to "Export active email addresses",
             export_active_emails_admin_alerts_path,
             title: "Export a text file containing all email addresses with an active alert set up"
