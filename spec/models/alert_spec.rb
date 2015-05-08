@@ -31,8 +31,8 @@ describe Alert do
   
   it "should allow multiple alerts for different street addresses but the same email address" do
     email = "foo@foo.org"
-    Alert.create!(:email => email, :address => "A street address", :radius_meters => 200, :lat => 1.0, :lng => 2.0)
-    Alert.create!(:email => email, :address => "Another street address", :radius_meters => 800, :lat => 1.0, :lng => 2.0)
+    Factory(:alert, :email => email, :address => "A street address", :radius_meters => 200, :lat => 1.0, :lng => 2.0)
+    Factory(:alert, :email => email, :address => "Another street address", :radius_meters => 800, :lat => 1.0, :lng => 2.0)
     Alert.where(email: email).count.should == 2
   end
   
