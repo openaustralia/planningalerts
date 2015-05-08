@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Authority do
   describe "detecting authorities with old applications" do
     before :each do
-      @a1 = Factory(:authority, :full_name => "Blue Mountains City Council")
-      @a2 = Factory(:authority, :full_name => "Marrickville City Council")
+      @a1 = Factory(:authority)
+      @a2 = Factory(:authority)
       VCR.use_cassette('planningalerts') do
         Factory(:application, :authority => @a1, :date_scraped => 3.weeks.ago)
         Factory(:application, :authority => @a2)
