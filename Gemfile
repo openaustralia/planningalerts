@@ -5,6 +5,8 @@ gem 'mysql2', '> 0.3'
 
 # TODO: Swtich to Strong Parameters and remove this
 gem 'protected_attributes'
+# Allow us to use `caches_page`
+gem "actionpack-page_caching"
 
 gem 'coffee-rails'
 gem "compass-rails"
