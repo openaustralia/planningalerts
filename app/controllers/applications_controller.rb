@@ -78,7 +78,7 @@ class ApplicationsController < ApplicationController
 
     @q = params[:q]
     if @q
-      @applications = Application.search @q, :order => :date_scraped, :sort_mode => :desc, :page => params[:page], :per_page => per_page
+      @applications = Application.search @q, :order => "date_scraped DESC", :page => params[:page], :per_page => per_page
       @applications.context[:panes] << ThinkingSphinx::Panes::ExcerptsPane
       @rss = search_applications_path(:format => "rss", :q => @q, :page => nil)
     end
