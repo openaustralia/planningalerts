@@ -1,7 +1,7 @@
 namespace :planningalerts do
   namespace :applications do
     desc "Scrape new applications, index them, send emails and generate XML sitemap"
-    task :scrape_and_email => [:scrape, 'ts:in', :email, :sitemap]
+    task :scrape_and_email => [:scrape, 'ts:index', :email, :sitemap]
 
     desc "Scrape all the applications for the last few days for all the loaded authorities"
     task :scrape, [:authority_short_name] => :environment do |t, args|
