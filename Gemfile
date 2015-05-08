@@ -75,6 +75,8 @@ group :development do
   gem 'rb-fsevent'
   gem 'rvm-capistrano'
   gem "capistrano"
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 group :test, :development do
