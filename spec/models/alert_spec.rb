@@ -226,7 +226,7 @@ describe Alert do
 
       a = Factory(:alert, :id => 1, :lat => 1.0, :lng => 2.0, :email => "foo@bar.com", :radius_meters => 200, :address => "")
       a.lga_name.should == "Blue Mountains"
-      b = Alert.find(:first)
+      b = Alert.first
       b.lga_name.should == "Blue Mountains"
     end
   end
