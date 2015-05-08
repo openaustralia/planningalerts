@@ -22,8 +22,8 @@ describe Authority do
 
   describe "short name encoded" do
     before :each do
-      @a1 = Authority.create!(:short_name => "Blue Mountains", :full_name => "Blue Mountains City Council")
-      @a2 = Authority.create!(:short_name => "Blue Mountains (new one)", :full_name => "Blue Mountains City Council (fictional new one)")
+      @a1 = Factory(:authority, short_name: "Blue Mountains", full_name: "Blue Mountains City Council")
+      @a2 = Factory(:authority, short_name: "Blue Mountains (new one)", full_name: "Blue Mountains City Council (fictional new one)")
     end
 
     it "should be constructed by replacing space by underscores and making it all lowercase" do
