@@ -44,11 +44,6 @@ class Application < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 100
 
-  define_index do
-    indexes description
-    has date_scraped
-  end
-
   # TODO: factor out common location accessor between Application and Alert
   def location
     Location.new(lat, lng) if lat && lng
