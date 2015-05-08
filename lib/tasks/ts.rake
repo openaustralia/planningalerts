@@ -1,8 +1,15 @@
 namespace :ts do
-  # Make Thinking Sphinx play nicely with Foreman
-  desc "Run searchd in the foreground"
-  task :run_in_foreground => :environment do
-    ts = ThinkingSphinx::Configuration.instance
-    exec "#{ts.bin_path}#{ts.searchd_binary_name} --pidfile --config #{ts.config_file} --nodetach"
+  desc "Run Thinking Sphinx in the foreground (for something like foreman)"
+  task :run_in_foreground => ['ts:stop', 'ts:index'] do
+    config = ThinkingSphinx::Configuration.instance
+    controller = config.controller
+
+    unless pid = fork
+      exec "#{controller.bin_path}#{controller.searchd_binary_name} --pidfile --config #{config.configuration_file} --nodetach"
+    end
+
+    Signal.trap('TERM') { Process.kill('TERM', pid) }
+    Signal.trap('INT')  { Process.kill('INT', pid) }
+    Process.wait(pid)
   end
 end
