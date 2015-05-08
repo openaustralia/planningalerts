@@ -58,6 +58,7 @@ GEM
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (4.0.2)
+    bcrypt (3.1.10)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -124,6 +125,13 @@ GEM
     delayed_job_active_record (4.0.3)
       activerecord (>= 3.0, < 5.0)
       delayed_job (>= 3.0, < 4.1)
+    devise (3.4.1)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      responders
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     diff-lcs (1.2.1)
     domain_name (0.5.24)
       unf (>= 0.0.5, < 1.0.0)
@@ -235,6 +243,7 @@ GEM
     newrelic_rpm (3.6.8.164)
     nokogiri (1.5.11)
     oj (2.1.4)
+    orm_adapter (0.5.0)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
     pry (0.9.12)
@@ -388,6 +397,8 @@ GEM
       redis (>= 2.1)
       redis-namespace (>= 1.1.0)
     vcr (2.5.0)
+    warden (1.2.3)
+      rack (>= 1.0)
     webmock (1.13.0)
       addressable (>= 2.2.7)
       crack (>= 0.3.2)
@@ -413,6 +424,7 @@ DEPENDENCIES
   dalli
   database_cleaner
   delayed_job_active_record
+  devise
   email_spec
   factory_girl (< 3.0)
   factory_girl_rails
