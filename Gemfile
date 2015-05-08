@@ -34,7 +34,7 @@ gem "will_paginate"
 gem 'thinking-sphinx', "~> 3.0"
 gem "formtastic"
 gem 'validates_email_format_of'
-gem "geocoder", :require => "geocoder"
+gem "geocoder"
 # Rails 4 support is a work in progress so requires tracking master
 gem 'activeadmin', github: 'activeadmin'
 gem "devise"
