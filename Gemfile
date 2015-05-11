@@ -18,9 +18,7 @@ gem "susy"
 gem 'uglifier'
 
 # jQuery is the default JavaScript library in Rails 3.1
-# Locking jquery-rails to 2.2.1 so that activeadmin can find jquery-ui when it's precompiling its assets
-# Probably can get rid of this by updating activeadmin
-gem 'jquery-rails', "2.2.1"
+gem 'jquery-rails'
 gem "jquery-ui-rails"
 
 gem "foreman"
