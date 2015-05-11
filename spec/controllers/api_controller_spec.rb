@@ -97,9 +97,9 @@ describe ApiController do
         Application.stub_chain(:where, :paginate).and_return([result])
       end
       get :postcode, :format => "js", :postcode => "2780", :callback => "foobar"
-      response.body[0..6].should == "foobar("
+      response.body[0..10].should == "/**/foobar("
       response.body[-1..-1].should == ")"
-      JSON.parse(response.body[7..-2]).should == [{
+      JSON.parse(response.body[11..-2]).should == [{
         "application" => {
           "id" => 10,
           "council_reference" => "001",
