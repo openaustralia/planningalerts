@@ -5,8 +5,7 @@ describe ApiController do
     describe "rss" do
       it "should not support rss" do
         user = Factory.create(:user, email: "foo@bar.com", password: "foofoo")
-        get :all, :format => "rss", :key => user.api_key
-        response.status.should == 406
+        expect{get :all, :format => "rss", :key => user.api_key}.to raise_error ActionController::UnknownFormat
       end
     end
 
