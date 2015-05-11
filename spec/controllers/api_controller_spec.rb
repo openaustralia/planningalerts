@@ -143,7 +143,7 @@ describe ApiController do
             "comment_url" => nil,
             "lat" => nil,
             "lng" => nil,
-            "date_scraped" => "2001-01-01T00:00:00Z",
+            "date_scraped" => "2001-01-01T00:00:00.000Z",
             "date_received" => nil,
             "on_notice_from" => nil,
             "on_notice_to" => nil,
