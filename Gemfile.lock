@@ -103,6 +103,8 @@ GEM
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
       sass (>= 3.3.13, < 3.5)
+    compass-blueprint (1.0.0)
+      compass
     compass-core (1.0.3)
       multi_json (~> 1.0)
       sass (>= 3.3.0, < 3.5)
@@ -431,6 +433,7 @@ DEPENDENCIES
   capistrano
   capybara (< 2.0)
   coffee-rails
+  compass-blueprint
   compass-rails
   coveralls
   daemons

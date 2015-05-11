@@ -12,6 +12,7 @@ gem "rails-observers"
 
 gem 'coffee-rails'
 gem "compass-rails"
+gem "compass-blueprint"
 gem 'sass-rails'
 gem "susy"
 gem 'uglifier'
