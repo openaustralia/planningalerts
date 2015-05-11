@@ -164,7 +164,7 @@ class ApiController < ApplicationController
       end
       format.js do
         if params[:v] == "2"
-          s = {:applications => @applications, :application_count => @applications.count, :page_count => @applications.total_pages}
+          s = {:application_count => @applications.count, :page_count => @applications.total_pages, :applications => @applications}
         else
           s = @applications
         end
