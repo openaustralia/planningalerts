@@ -4,7 +4,7 @@ describe ApiController do
   describe "#all" do
     describe "rss" do
       it "should not support rss" do
-        user = User.create!(email: "foo@bar.com", password: "foofoo")
+        user = Factory.create(:user, email: "foo@bar.com", password: "foofoo")
         get :all, :format => "rss", :key => user.api_key
         response.status.should == 406
       end
@@ -32,7 +32,7 @@ describe ApiController do
       end
 
       it "should error if valid api key is given but no bulk api access" do
-        user = User.create!(email: "foo@bar.com", password: "foofoo")
+        user = Factory.create(:user, email: "foo@bar.com", password: "foofoo")
         VCR.use_cassette('planningalerts') do
           result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
           Application.stub_chain(:where, :paginate).and_return([result])
@@ -43,7 +43,7 @@ describe ApiController do
       end
 
       it "should find recent applications if api key is given" do
-        user = User.create!(email: "foo@bar.com", password: "foofoo")
+        user = Factory.create(:user, email: "foo@bar.com", password: "foofoo")
         user.update_attribute(:bulk_api, true)
         VCR.use_cassette('planningalerts') do
           authority = Factory(:authority, full_name: "Acme Local Planning Authority")
