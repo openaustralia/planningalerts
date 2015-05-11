@@ -218,7 +218,7 @@ class Authority < ActiveRecord::Base
 
   def latest_application
     # The applications are sorted by default by the date_scraped because of the default scope on the model
-    applications.find(:first)
+    applications.first
   end
 
   def latest_application_date
