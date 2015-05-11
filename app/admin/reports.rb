@@ -12,6 +12,6 @@ ActiveAdmin.register Report do
       truncate(report.details)
     end
     column :comment
-    default_actions
+    actions
   end
 end

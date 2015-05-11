@@ -6,7 +6,7 @@ ActiveAdmin.register Application do
     column :address
     column :description
     column :authority
-    default_actions
+    actions
   end
 
   show :title => :address do

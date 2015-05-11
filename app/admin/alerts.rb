@@ -10,7 +10,7 @@ ActiveAdmin.register Alert do
     column :unsubscribed
     column :created_at
     column :updated_at
-    default_actions
+    actions
   end
 
   collection_action :export_active_emails, method: :get do

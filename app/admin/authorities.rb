@@ -7,7 +7,7 @@ ActiveAdmin.register Authority do
   index do
     column "Name", :full_name
     column :state
-    default_actions
+    actions
   end
 
   show :title => :full_name do |a|
