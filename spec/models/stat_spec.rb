@@ -19,6 +19,6 @@ describe Stat do
     Stat.delete_all
     #Stat.logger.should_receive(:error).with("Could not find key applications_sent for Stat lookup")
     Stat.applications_sent.should == 0
-    Stat.find_by_key("applications_sent").value.should == 0
+    Stat.find_by(key: "applications_sent").value.should == 0
   end
 end

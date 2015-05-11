@@ -30,6 +30,6 @@ class Stat < ActiveRecord::Base
   end
   
   def self.record_for_key(key)
-    Stat.find_or_create_by_key(:key => key, :value => 0)
+    Stat.find_or_create_by(key: key) { |s| s.value = 0 }
   end
 end
