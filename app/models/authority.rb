@@ -201,7 +201,7 @@ class Authority < ActiveRecord::Base
 
   def self.find_by_short_name_encoded(n)
     # TODO: Potentially not very efficient when number of authorities is high. Loads all authorities into memory
-    find(:all).find{|a| a.short_name_encoded == n}
+    all.find{|a| a.short_name_encoded == n}
   end
 
   def self.find_by_short_name_encoded!(n)
