@@ -28,7 +28,7 @@ feature "Manage alerts" do
 
   scenario "Unsubscribe from an email alert" do
     # Adding arbitrary coordinates so that geocoding is not carried out
-    alert = Alert.create!(:address => "24 Bruce Rd, Glenbrook", :email => "example@example.com",
+    alert = Factory.create(:alert, :address => "24 Bruce Rd, Glenbrook", :email => "example@example.com",
       :radius_meters => "2000", :lat => 1.0, :lng => 1.0, :confirmed => true)
     visit unsubscribe_alert_url(:id => alert.confirm_id, :host => 'dev.planningalerts.org.au')
 
@@ -39,7 +39,7 @@ feature "Manage alerts" do
   end
 
   scenario "Change size of email alert" do
-    alert = Alert.create!(:address => "24 Bruce Rd, Glenbrook", :email => "example@example.com",
+    alert = Factory.create(:alert, :address => "24 Bruce Rd, Glenbrook", :email => "example@example.com",
       :radius_meters => "2000", :lat => 1.0, :lng => 1.0, :confirmed => true)
     visit area_alert_url(:id => alert.confirm_id, :host => 'dev.planningalerts.org.au')
 
