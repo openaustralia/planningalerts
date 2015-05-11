@@ -1,4 +1,6 @@
 class Stat < ActiveRecord::Base
+  attr_accessible :key, :value
+
   def self.applications_sent
     get_value_for_key("applications_sent")
   end
