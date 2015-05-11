@@ -104,19 +104,19 @@ describe ApiController do
           "id" => 10,
           "council_reference" => "001",
           "address" => "A test address",
-          "on_notice_from" => nil,
-          "on_notice_to" => nil,
-          "authority" => {
-            "full_name" => "Acme Local Planning Authority"
-          },
-          "no_alerted" => nil,
           "description" => "Pretty",
-          "comment_url" => nil,
           "info_url" => "http://foo.com",
-          "date_received" => nil,
+          "comment_url" => nil,
           "lat" => nil,
           "lng" => nil,
-          "date_scraped" => "2001-01-01T00:00:00Z",
+          "date_scraped" => "2001-01-01T00:00:00.000Z",
+          "date_received" => nil,
+          "on_notice_from" => nil,
+          "on_notice_to" => nil,
+          "no_alerted" => nil,
+          "authority" => {
+            "full_name" => "Acme Local Planning Authority"
+          }
         }
       }]
     end
