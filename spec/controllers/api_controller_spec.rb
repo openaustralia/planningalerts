@@ -239,13 +239,20 @@ describe ApiController do
   end
 
   describe "#area" do
+    it "should not work if there isn't an api key" do
+      get :area, :format => "rss", :bottom_left_lat => 1.0, :bottom_left_lng => 2.0,
+        :top_right_lat => 3.0, :top_right_lng => 4.0
+      response.status.should == 401
+      response.body.should == 'not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes'
+    end
+
     it "should find recent applications in an area" do
       result, scope = mock, mock
       Application.should_receive(:where).with("lat > ? AND lng > ? AND lat < ? AND lng < ?", 1.0, 2.0, 3.0, 4.0).and_return(scope)
       scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
 
-      get :area, :format => "rss", :bottom_left_lat => 1.0, :bottom_left_lng => 2.0,
-        :top_right_lat => 3.0, :top_right_lng => 4.0
+      get :area, key: user.api_key, format: "rss", bottom_left_lat: 1.0, bottom_left_lng: 2.0,
+        top_right_lat: 3.0, top_right_lng: 4.0
       assigns[:applications].should == result
       assigns[:description].should == "Recent applications in the area (1.0,2.0) (3.0,4.0)"
     end

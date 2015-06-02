@@ -1,7 +1,7 @@
 class ApiController < ApplicationController
   before_filter :check_api_parameters, except: [:old_index, :howto]
   before_filter :authenticate_bulk_api, only: [:all, :date_scraped]
-  before_filter :require_api_key, only: [:postcode, :point]
+  before_filter :require_api_key, only: [:postcode, :point, :area]
 
   def authority
     # TODO Handle the situation where the authority name isn't found
@@ -135,9 +135,13 @@ class ApiController < ApplicationController
 
   def require_api_key
     unless User.where(api_key: params[:key]).exists?
+      error_text = "not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"
       respond_to do |format|
         format.js do
-          render json: {error: "not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"}, status: 401
+          render json: {error: error_text}, status: 401
+        end
+        format.rss do
+          render text: error_text, status: 401
         end
       end
     end
