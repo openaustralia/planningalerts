@@ -19,7 +19,7 @@ describe ApiController do
         end
         get :all, :format => "js"
         response.status.should == 401
-        response.body.should == '{"error":"not authorised"}'
+        response.body.should == '{"error":"not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"}'
       end
 
       it "should error if invalid api key is given" do
@@ -29,7 +29,7 @@ describe ApiController do
         end
         get :all, :key => "jsdfhsd", :format => "js"
         response.status.should == 401
-        response.body.should == '{"error":"not authorised"}'
+        response.body.should == '{"error":"not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"}'
       end
 
       it "should error if valid api key is given but no bulk api access" do
@@ -313,7 +313,7 @@ describe ApiController do
       subject { get :date_scraped, :key => "jsdfhsd", :format => "js", date_scraped: "2015-05-06" }
 
       it { expect(subject.status).to eq 401 }
-      it { expect(subject.body).to eq '{"error":"not authorised"}' }
+      it { expect(subject.body).to eq '{"error":"not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"}' }
     end
 
     context "valid api key is given but no bulk api access" do

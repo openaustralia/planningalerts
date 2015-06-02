@@ -1,7 +1,7 @@
 class ApiController < ApplicationController
   before_filter :check_api_parameters, except: [:old_index, :howto]
+  before_filter :require_api_key, only: [:authority, :postcode, :suburb, :point, :area, :all, :date_scraped]
   before_filter :authenticate_bulk_api, only: [:all, :date_scraped]
-  before_filter :require_api_key, only: [:authority, :postcode, :suburb, :point, :area]
 
   def authority
     # TODO Handle the situation where the authority name isn't found
