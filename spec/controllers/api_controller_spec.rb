@@ -280,11 +280,17 @@ describe ApiController do
   end
 
   describe "#suburb" do
+    it "should not work without an api key" do
+      get :suburb, :format => "rss", :suburb => "Katoomba"
+      response.status.should == 401
+      response.body.should == 'not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes'
+    end
+
     it "should find recent applications for a suburb" do
       result, scope = mock, mock
       Application.should_receive(:where).with(:suburb => "Katoomba").and_return(scope)
       scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
-      get :suburb, :format => "rss", :suburb => "Katoomba"
+      get :suburb, key: user.api_key, format: "rss", suburb: "Katoomba"
       assigns[:applications].should == result
       assigns[:description].should == "Recent applications in Katoomba"
     end
@@ -295,7 +301,7 @@ describe ApiController do
         Application.should_receive(:where).with(:suburb => "Katoomba").and_return(scope1)
         scope1.should_receive(:where).with(:state => "NSW").and_return(scope2)
         scope2.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
-        get :suburb, :format => "rss", :suburb => "Katoomba", :state => "NSW"
+        get :suburb, key: user.api_key, format: "rss", suburb: "Katoomba", state: "NSW"
         assigns[:applications].should == result
         assigns[:description].should == "Recent applications in Katoomba, NSW"
       end
