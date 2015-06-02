@@ -39,7 +39,7 @@ describe ApiController do
         end
         get :all, :key => user.api_key, :format => "js"
         response.status.should == 401
-        response.body.should == '{"error":"not authorised"}'
+        response.body.should == '{"error":"no bulk api access"}'
       end
 
       it "should find recent applications if api key is given" do
@@ -320,7 +320,7 @@ describe ApiController do
       subject { get :date_scraped, :key => FactoryGirl.create(:user).api_key, :format => "js", date_scraped: "2015-05-06" }
 
       it { expect(subject.status).to eq 401 }
-      it { expect(subject.body).to eq '{"error":"not authorised"}' }
+      it { expect(subject.body).to eq '{"error":"no bulk api access"}' }
     end
 
     context "valid authentication" do

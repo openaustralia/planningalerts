@@ -151,7 +151,7 @@ class ApiController < ApplicationController
     unless User.where(api_key: params[:key], bulk_api: true).exists?
       respond_to do |format|
         format.js do
-          render json: {error: "not authorised"}, status: 401
+          render json: {error: "no bulk api access"}, status: 401
         end
       end
     end
