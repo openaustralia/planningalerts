@@ -164,6 +164,12 @@ describe ApiController do
   end
 
   describe "#point" do
+    it "shouldn't work if there isn't a valid api key" do
+      get :point, key: "sdfk", format: "js", address: "24 Bruce Road Glenbrook", radius: 4000
+      response.status.should == 401
+      response.body.should == '{"error":"not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"}'
+    end
+
     describe "failed search by address" do
       it "should error if some unknown parameters are included" do
         get :point, :format => "rss", :address => "24 Bruce Road Glenbrook", :radius => 4000, :foo => 200, :bar => "fiddle"
@@ -182,30 +188,30 @@ describe ApiController do
       end
 
       it "should find recent applications near the address" do
-        get :point, :format => "rss", :address => "24 Bruce Road Glenbrook", :radius => 4000
+        get :point, key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000
         assigns[:applications].should == @result
         # Should use the normalised form of the address in the description
         assigns[:description].should == "Recent applications within 4 km of 24 Bruce Road, Glenbrook NSW 2773"
       end
 
       it "should find recent applications near the address using the old parameter name" do
-        get :point, :format => "rss", :address => "24 Bruce Road Glenbrook", :area_size => 4000
+        get :point, key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", area_size: 4000
         assigns[:applications].should == @result
         assigns[:description].should == "Recent applications within 4 km of 24 Bruce Road, Glenbrook NSW 2773"
       end
 
       it "should log the api call" do
-       get :point, :format => "rss", :address => "24 Bruce Road Glenbrook", :radius => 4000
+       get :point, key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000
        a = ApiStatistic.first
        a.ip_address.should == "0.0.0.0"
-       a.query.should == "/applications.rss?address=24+Bruce+Road+Glenbrook&radius=4000"
+       a.query.should == "/applications.rss?address=24+Bruce+Road+Glenbrook&key=#{CGI.escape(user.api_key)}&radius=4000"
       end
 
       it "should use a search radius of 2000 when none is specified" do
         result = mock
         Application.stub_chain(:near, :paginate).and_return(result)
 
-        get :point, :address => "24 Bruce Road Glenbrook", :format => "rss"
+        get :point, key: user.api_key, address: "24 Bruce Road Glenbrook", format: "rss"
         assigns[:applications].should == result
         assigns[:description].should == "Recent applications within 2 km of 24 Bruce Road, Glenbrook NSW 2773"
       end
@@ -219,13 +225,13 @@ describe ApiController do
       end
 
       it "should find recent applications near the point" do
-        get :point, :format => "rss", :lat => 1.0, :lng => 2.0, :radius => 4000
+        get :point, key: user.api_key, format: "rss", lat: 1.0, lng: 2.0, radius: 4000
         assigns[:applications].should == @result
         assigns[:description].should == "Recent applications within 4 km of 1.0,2.0"
       end
 
       it "should find recent applications near the point using the old parameter name" do
-        get :point, :format => "rss", :lat => 1.0, :lng => 2.0, :area_size => 4000
+        get :point, key: user.api_key, format: "rss", lat: 1.0, lng: 2.0, area_size: 4000
         assigns[:applications].should == @result
         assigns[:description].should == "Recent applications within 4 km of 1.0,2.0"
       end
