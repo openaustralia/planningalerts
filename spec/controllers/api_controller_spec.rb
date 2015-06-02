@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 describe ApiController do
+  let(:user) { User.create!(email: "foo@bar.com", password: "foofoo")}
+
   describe "#all" do
     describe "rss" do
       it "should not support rss" do
-        user = User.create!(email: "foo@bar.com", password: "foofoo")
         get :all, :format => "rss", :key => user.api_key
         response.status.should == 406
       end
@@ -32,7 +33,6 @@ describe ApiController do
       end
 
       it "should error if valid api key is given but no bulk api access" do
-        user = User.create!(email: "foo@bar.com", password: "foofoo")
         VCR.use_cassette('planningalerts') do
           result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
           Application.stub_chain(:where, :paginate).and_return([result])
@@ -43,7 +43,6 @@ describe ApiController do
       end
 
       it "should find recent applications if api key is given" do
-        user = User.create!(email: "foo@bar.com", password: "foofoo")
         user.update_attribute(:bulk_api, true)
         VCR.use_cassette('planningalerts') do
           authority = Factory(:authority, full_name: "Acme Local Planning Authority")
@@ -81,11 +80,18 @@ describe ApiController do
   end
 
   describe "#postcode" do
+    # TODO: Make errors work with rss format
+    it "should not work if you don't supply an api key" do
+      get :postcode, format: "js", postcode: "2780"
+      response.status.should == 401
+      response.body.should == '{"error":"not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"}'
+    end
+
     it "should find recent applications for a postcode" do
       result, scope = mock, mock
       Application.should_receive(:where).with(:postcode => "2780").and_return(scope)
       scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
-      get :postcode, :format => "rss", :postcode => "2780"
+      get :postcode, key: user.api_key, format: "rss", postcode: "2780"
       assigns[:applications].should == result
       assigns[:description].should == "Recent applications in postcode 2780"
     end
@@ -96,7 +102,7 @@ describe ApiController do
         result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1), authority: authority)
         Application.stub_chain(:where, :paginate).and_return([result])
       end
-      get :postcode, :format => "js", :postcode => "2780", :callback => "foobar"
+      get :postcode, key: user.api_key, format: "js", postcode: "2780", callback: "foobar"
       response.body[0..6].should == "foobar("
       response.body[-1..-1].should == ")"
       JSON.parse(response.body[7..-2]).should == [{
@@ -129,7 +135,7 @@ describe ApiController do
         result.stub!(:total_pages).and_return(5)
         Application.stub_chain(:where, :paginate).and_return(result)
       end
-      get :postcode, :format => "js", :v => "2", :postcode => "2780"
+      get :postcode, key: user.api_key, format: "js", v: "2", postcode: "2780"
       JSON.parse(response.body).should == {
         "application_count" => 1,
         "page_count" => 5,

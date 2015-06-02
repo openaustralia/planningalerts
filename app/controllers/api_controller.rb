@@ -1,6 +1,7 @@
 class ApiController < ApplicationController
   before_filter :check_api_parameters, except: [:old_index, :howto]
   before_filter :authenticate_bulk_api, only: [:all, :date_scraped]
+  before_filter :require_api_key, only: :postcode
 
   def authority
     # TODO Handle the situation where the authority name isn't found
@@ -129,6 +130,16 @@ class ApiController < ApplicationController
     invalid_parameter_keys = params.keys - valid_parameter_keys
     unless invalid_parameter_keys.empty?
       render :text => "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.sort.join(', ')}", :status => 400
+    end
+  end
+
+  def require_api_key
+    unless User.where(api_key: params[:key]).exists?
+      respond_to do |format|
+        format.js do
+          render json: {error: "not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"}, status: 401
+        end
+      end
     end
   end
 
