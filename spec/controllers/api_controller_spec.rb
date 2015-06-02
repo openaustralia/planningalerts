@@ -259,6 +259,12 @@ describe ApiController do
   end
 
   describe "#authority" do
+    it "should not work if there is no api key" do
+      get :authority, :format => "rss", :authority_id => "blue_mountains"
+      response.status.should == 401
+      response.body.should == 'not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes'
+    end
+
     it "should find recent applications for an authority" do
       authority, result, scope = mock, mock, mock
 
@@ -267,7 +273,7 @@ describe ApiController do
       scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
       authority.should_receive(:full_name_and_state).and_return("Blue Mountains City Council")
 
-      get :authority, :format => "rss", :authority_id => "blue_mountains"
+      get :authority, key: user.api_key, format: "rss", authority_id: "blue_mountains"
       assigns[:applications].should == result
       assigns[:description].should == "Recent applications from Blue Mountains City Council"
     end
