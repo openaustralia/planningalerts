@@ -258,15 +258,12 @@
 }
 
 @include at-breakpoint(60em 24) {
-
-  $container-style: static;
-
   .container {
     margin-left: auto;
     margin-right: auto;
     padding-left: 0;
     padding-right: 0;
-    @include set-container-width;
+    @include set-container-width($total-columns, static);
   }
 
   #menu {
