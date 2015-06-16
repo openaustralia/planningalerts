@@ -1,5 +1,6 @@
 class ApiController < ApplicationController
   before_filter :check_api_parameters, except: [:old_index, :howto]
+  before_filter :require_api_key, except: [:old_index, :howto]
   before_filter :authenticate_bulk_api, only: [:all, :date_scraped]
 
   def authority
@@ -132,11 +133,25 @@ class ApiController < ApplicationController
     end
   end
 
+  def require_api_key
+    unless User.where(api_key: params[:key]).exists?
+      error_text = "not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"
+      respond_to do |format|
+        format.js do
+          render json: {error: error_text}, status: 401
+        end
+        format.rss do
+          render text: error_text, status: 401
+        end
+      end
+    end
+  end
+
   def authenticate_bulk_api
     unless User.where(api_key: params[:key], bulk_api: true).exists?
       respond_to do |format|
         format.js do
-          render json: {error: "not authorised"}, status: 401
+          render json: {error: "no bulk api access"}, status: 401
         end
       end
     end

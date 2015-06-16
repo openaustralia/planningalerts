@@ -4,12 +4,12 @@ class AtdisController < ApplicationController
       @feed = Feed.create_from_url(params[:url])
       begin
         @page = @feed.applications
-      rescue RestClient::ResourceNotFound => e
-        @error = "Could not load data - #{e}"
       rescue RestClient::InternalServerError => e
         @error = "Remote server returned an internal server error (error code 500) accessing #{params[:url]}"
       rescue RestClient::RequestTimeout => e
         @error = "Timeout in request to #{params[:url]}. Remote server did not respond in a reasonable amount of time."
+      rescue RestClient::Exception => e
+        @error = "Could not load data - #{e}"
       rescue URI::InvalidURIError => e
         @error = "The url appears to be invalid #{params[:url]}"
       end
