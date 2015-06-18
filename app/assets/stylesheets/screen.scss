@@ -26,5 +26,6 @@ body {
 @import "partials/grid";
 
 @import "atdis";
-// Just include jquery.ui.datepicker doesn't seem to work properly
-@import "jquery-ui";
+@import "jquery-ui/core";
+@import "jquery-ui/datepicker";
+@import "jquery-ui/theme";
