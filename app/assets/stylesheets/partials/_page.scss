@@ -11,11 +11,6 @@ body {
   background: $content-background;
 }
 
-// Transition links by colour
-a {
-  @include single-transition(color, .3s);
-}
-
 #header-wrapper {
   background-color: $dark;
 }
@@ -76,7 +71,6 @@ a {
     padding: .5em;
     display: block;
     text-decoration: none;
-    @include single-transition(background-color, .5s);
 
     &:link, &:visited {
       color: #fff;
