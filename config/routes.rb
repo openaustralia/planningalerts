@@ -12,7 +12,7 @@ class QueryParamsPresentConstraint
   end
 
   def matches?(request)
-    @params.all?{|p| request.path_parameters[p.to_s].present?}
+    @params.all? { |p| request.params[p.to_s].present? }
   end
 end
 
