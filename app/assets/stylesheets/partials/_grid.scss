@@ -373,7 +373,7 @@
   }
 
   #map_div, .details {
-    @include span-columns(8, 24);
+    @include span-columns(8, 24, false, $from-direction, static);
   }
   #map_div {
     height: 330px;
