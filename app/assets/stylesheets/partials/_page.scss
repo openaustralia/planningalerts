@@ -239,6 +239,7 @@ hr {
   .button {
     @include button(simple, $lightest-cool-highlight);
     font-weight: normal;
+    font-size: 11px;
   }
   .button-action {
     @include button(simple, $warm-highlight);
