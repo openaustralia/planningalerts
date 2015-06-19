@@ -33,7 +33,7 @@ ActiveAdmin.register Comment, :as => "ApplicationComment" do
       f.input :confirmed
       f.input :hidden
     end
-    f.buttons
+    f.actions
   end
 
 end

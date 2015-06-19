@@ -41,7 +41,7 @@ ActiveAdmin.register Authority do
       f.input :morph_name, hint: "The name of the scraper at morph.io", placeholder: "planningalerts-scrapers/scraper-blue-mountains"
       f.input :disabled
     end
-    f.buttons
+    f.actions
   end
 
   action_item :scrape, :only => :show do
