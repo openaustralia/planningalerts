@@ -9,6 +9,8 @@ ActiveAdmin.register Application do
     actions
   end
 
+  remove_filter :comments
+
   show :title => :address do
     attributes_table do
       row :id
