@@ -28,20 +28,20 @@ ActiveAdmin.register Authority do
   end
 
   form do |f|
-    f.inputs "Name" do
-      f.input :full_name
-      f.input :short_name
+    inputs "Name" do
+      input :full_name
+      input :short_name
     end
-    f.inputs "Details" do
-      f.input :state
-      f.input :email
-      f.input :population_2011
+    inputs "Details" do
+      input :state
+      input :email
+      input :population_2011
     end
-    f.inputs "Scraping" do
-      f.input :morph_name, hint: "The name of the scraper at morph.io", placeholder: "planningalerts-scrapers/scraper-blue-mountains"
-      f.input :disabled
+    inputs "Scraping" do
+      input :morph_name, hint: "The name of the scraper at morph.io", placeholder: "planningalerts-scrapers/scraper-blue-mountains"
+      input :disabled
     end
-    f.actions
+    actions
   end
 
   action_item :scrape, :only => :show do
