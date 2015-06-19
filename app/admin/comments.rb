@@ -6,7 +6,7 @@ ActiveAdmin.register Comment, :as => "ApplicationComment" do
   scope :visible, :default => true
   scope :all
 
-  index :title => :comments do
+  index :title => "Comments" do
     column :text, :sortable => false do |comment|
       truncate(comment.text)
     end
