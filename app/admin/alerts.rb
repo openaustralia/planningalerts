@@ -15,12 +15,7 @@ ActiveAdmin.register Alert do
   end
 
   collection_action :export_active_emails, method: :get do
-    emails = []
-    Alert.active.find_each do |alert|
-      emails << alert.email
-    end
-    emails.uniq! # TODO: Use ActiveRecord's `distinct` when we upgrade Rails
-    send_data emails.join("\n"), filename: 'emails.txt'
+    send_data Alert.active.select(:email).distinct.pluck(:email).join("\n"), filename: 'emails.txt'
   end
 
   action_item :export do
