@@ -7,7 +7,7 @@ class CreateSuburbStatePostcodeColumns < ActiveRecord::Migration
     end
     Application.reset_column_information
     # Load all the applications and resave them to force the geocoder to save the address bits and pieces
-    Application.find(:all).each do |app|
+    Application.all.each do |app|
       app.save!
     end
   end

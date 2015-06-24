@@ -16,7 +16,7 @@ class PlanningAlertsSitemap
     s.add_url get_involved_path, :changefreq => :monthly
 
     # All the applications pages
-    Application.find(:all).each do |application|
+    Application.all.each do |application|
       s.add_url application_path(application), :changefreq => :monthly, :lastmod => application.date_scraped
     end
 
