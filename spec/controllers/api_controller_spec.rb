@@ -87,7 +87,7 @@ describe ApiController do
     end
 
     it "should find recent applications for a postcode" do
-      result, scope = mock, mock
+      result, scope = double, double
       Application.should_receive(:where).with(:postcode => "2780").and_return(scope)
       scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
       get :postcode, key: user.api_key, format: "rss", postcode: "2780"
@@ -179,8 +179,8 @@ describe ApiController do
 
     describe "search by address" do
       before :each do
-        location = mock(:lat => 1.0, :lng => 2.0, :full_address => "24 Bruce Road, Glenbrook NSW 2773")
-        @result = mock
+        location = double(:lat => 1.0, :lng => 2.0, :full_address => "24 Bruce Road, Glenbrook NSW 2773")
+        @result = double
 
         Location.should_receive(:geocode).with("24 Bruce Road Glenbrook").and_return(location)
         Application.stub_chain(:near, :paginate).and_return(@result)
@@ -207,7 +207,7 @@ describe ApiController do
       end
 
       it "should use a search radius of 2000 when none is specified" do
-        result = mock
+        result = double
         Application.stub_chain(:near, :paginate).and_return(result)
 
         get :point, key: user.api_key, address: "24 Bruce Road Glenbrook", format: "rss"
@@ -218,7 +218,7 @@ describe ApiController do
 
     describe "search by lat & lng" do
       before :each do
-        @result = mock
+        @result = double
 
         Application.stub_chain(:near, :paginate).and_return(@result)
       end
@@ -246,7 +246,7 @@ describe ApiController do
     end
 
     it "should find recent applications in an area" do
-      result, scope = mock, mock
+      result, scope = double, double
       Application.should_receive(:where).with("lat > ? AND lng > ? AND lat < ? AND lng < ?", 1.0, 2.0, 3.0, 4.0).and_return(scope)
       scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
 
@@ -265,7 +265,7 @@ describe ApiController do
     end
 
     it "should find recent applications for an authority" do
-      authority, result, scope = mock, mock, mock
+      authority, result, scope = double, double, double
 
       Authority.should_receive(:find_by_short_name_encoded).with("blue_mountains").and_return(authority)
       authority.should_receive(:applications).and_return(scope)
@@ -286,7 +286,7 @@ describe ApiController do
     end
 
     it "should find recent applications for a suburb" do
-      result, scope = mock, mock
+      result, scope = double, double
       Application.should_receive(:where).with(:suburb => "Katoomba").and_return(scope)
       scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
       get :suburb, key: user.api_key, format: "rss", suburb: "Katoomba"
@@ -296,7 +296,7 @@ describe ApiController do
 
     describe "search by suburb and state" do
       it "should find recent applications for a suburb and state" do
-        result, scope1, scope2 = mock, mock, mock
+        result, scope1, scope2 = double, double, double
         Application.should_receive(:where).with(:suburb => "Katoomba").and_return(scope1)
         scope1.should_receive(:where).with(:state => "NSW").and_return(scope2)
         scope2.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)

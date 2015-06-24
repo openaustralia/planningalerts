@@ -54,14 +54,14 @@ describe Alert do
     end
     
     it "should set an error on the address if there is an error on geocoding" do
-      Location.stub!(:geocode).and_return(mock(:error => "some error message", :lat => nil, :lng => nil, :full_address => nil))
+      Location.stub!(:geocode).and_return(double(:error => "some error message", :lat => nil, :lng => nil, :full_address => nil))
       u = Alert.new(:email => "matthew@openaustralia.org")
       u.should_not be_valid
       u.errors[:address].should == ["some error message"]
     end
     
     it "should error if there are multiple matches from the geocoder" do
-      Location.stub!(:geocode).and_return(mock(:lat => 1, :lng => 2, :full_address => "Bruce Rd, VIC 3885", :error => nil, :all => [nil, nil]))
+      Location.stub!(:geocode).and_return(double(:lat => 1, :lng => 2, :full_address => "Bruce Rd, VIC 3885", :error => nil, :all => [nil, nil]))
       u = Alert.new(:address => "Bruce Road", :email => "matthew@openaustralia.org")
       u.should_not be_valid
       u.errors[:address].should == ["isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"]
@@ -215,14 +215,14 @@ describe Alert do
   
   describe "lga_name" do
     it "should return the local government authority name" do
-      Geo2gov.should_receive(:new).with(1.0, 2.0).and_return(mock(:lga_name => "Blue Mountains"))
+      Geo2gov.should_receive(:new).with(1.0, 2.0).and_return(double(:lga_name => "Blue Mountains"))
 
       a = Factory(:alert, :lat => 1.0, :lng => 2.0, :email => "foo@bar.com", :radius_meters => 200, :address => "")
       a.lga_name.should == "Blue Mountains"      
     end
     
     it "should cache the value in the database" do
-      Geo2gov.should_receive(:new).once.with(1.0, 2.0).and_return(mock(:lga_name => "Blue Mountains"))
+      Geo2gov.should_receive(:new).once.with(1.0, 2.0).and_return(double(:lga_name => "Blue Mountains"))
 
       a = Factory(:alert, :id => 1, :lat => 1.0, :lng => 2.0, :email => "foo@bar.com", :radius_meters => 200, :address => "")
       a.lga_name.should == "Blue Mountains"

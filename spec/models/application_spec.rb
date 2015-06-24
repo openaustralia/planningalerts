@@ -5,7 +5,7 @@ describe Application do
     Authority.delete_all
     @auth = Factory.create(:authority, :full_name => "Fiddlesticks", :state => "NSW", :short_name => "Fiddle")
     # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
-    Location.stub!(:geocode).and_return(mock(:lat => 1.0, :lng => 2.0, :suburb => "Glenbrook", :state => "NSW",
+    Location.stub!(:geocode).and_return(double(:lat => 1.0, :lng => 2.0, :suburb => "Glenbrook", :state => "NSW",
       :postcode => "2773", :success => true))
   end
 
@@ -140,7 +140,7 @@ describe Application do
 
   describe "on saving" do
     it "should geocode the address" do
-      loc = mock("Location", :lat => -33.772609, :lng => 150.624263, :suburb => "Glenbrook", :state => "NSW",
+      loc = double("Location", :lat => -33.772609, :lng => 150.624263, :suburb => "Glenbrook", :state => "NSW",
         :postcode => "2773", :success => true)
       Location.should_receive(:geocode).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
       a = Factory(:application, :address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1", :date_scraped => Time.now)
@@ -149,8 +149,8 @@ describe Application do
     end
 
     it "should log an error if the geocoder can't make sense of the address" do
-      Location.should_receive(:geocode).with("dfjshd").and_return(mock("Location", :success => false))
-      logger = mock("Logger")
+      Location.should_receive(:geocode).with("dfjshd").and_return(double("Location", :success => false))
+      logger = double("Logger")
       logger.should_receive(:error).with("Couldn't geocode address: dfjshd")
 
       a = Factory.build(:application, :address => "dfjshd", :council_reference => "r1", :date_scraped => Time.now)
@@ -254,11 +254,11 @@ describe Application do
       @date = Date.new(2009, 1, 1)
       @feed_url = "http://example.org?year=#{@date.year}&month=#{@date.month}&day=#{@date.day}"
       Application.delete_all
-      @auth.stub!(:open).and_return(mock(:read => @feed_xml))
+      @auth.stub!(:open).and_return(double(:read => @feed_xml))
     end
 
     it "should collect the correct applications" do
-      logger = mock
+      logger = double
       @auth.stub!(:logger).and_return(logger)
       logger.should_receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
 
@@ -276,7 +276,7 @@ describe Application do
     end
 
     it "should not create new applications when they already exist" do
-      logger = mock
+      logger = double
       @auth.stub!(:logger).and_return(logger)
       logger.should_receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
       logger.should_receive(:info).with("0 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
@@ -292,7 +292,7 @@ describe Application do
       Date.stub!(:today).and_return(Date.new(2010, 1, 10))
       # Overwriting a constant here. Normally generates a warning. Silence it!
       Kernel::silence_warnings { ::Configuration::SCRAPE_DELAY = 1 }
-      logger = mock
+      logger = double
       logger.should_receive(:info).with("Scraping 2 authorities")
       #logger.should_receive(:add).with(1, nil, "Took 0 s to collect applications from Fiddlesticks, NSW")
       #logger.should_receive(:add).with(1, nil, "Took 0 s to collect applications from Wombat City Council, NSW")
