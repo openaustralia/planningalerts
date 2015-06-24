@@ -42,28 +42,28 @@ describe "Location" do
   end
   
   it "should error if the address is empty" do
-    Geokit::Geocoders::GoogleGeocoder3.stub!(:geocode).and_return(double(:all => []))
+    Geokit::Geocoders::GoogleGeocoder3.stub(:geocode).and_return(double(:all => []))
 
     l = Location.geocode("")
     l.error.should == "can't be empty"
   end
   
   it "should error if the address is not valid" do
-    Geokit::Geocoders::GoogleGeocoder3.stub!(:geocode).and_return(double(:lat => nil, :lng => nil, :all => []))
+    Geokit::Geocoders::GoogleGeocoder3.stub(:geocode).and_return(double(:lat => nil, :lng => nil, :all => []))
 
     l = Location.geocode("rxsd23dfj")
     l.error.should == "isn't valid"
   end
   
   it "should error if the street address is not in australia" do
-    Geokit::Geocoders::GoogleGeocoder3.stub!(:geocode).and_return(double(:lat => 1, :lng => 2, :country_code => "US", :all => [double(:lat => 1, :lng => 2, :country_code => "US")]))
+    Geokit::Geocoders::GoogleGeocoder3.stub(:geocode).and_return(double(:lat => 1, :lng => 2, :country_code => "US", :all => [double(:lat => 1, :lng => 2, :country_code => "US")]))
 
     l = Location.geocode("New York")
     l.error.should == "isn't in Australia"
   end
   
   it "should not error if there are multiple matches from the geocoder" do
-    Geokit::Geocoders::GoogleGeocoder3.stub!(:geocode).and_return(double(:all => 
+    Geokit::Geocoders::GoogleGeocoder3.stub(:geocode).and_return(double(:all => 
       [double(:country_code => "AU", :lat => 1, :lng => 2, :accuracy => 6), double(:country_code => "AU", :lat => 1.1, :lng => 2.1, :accuracy => 6)]))
 
     l = Location.geocode("Bruce Road")
@@ -71,7 +71,7 @@ describe "Location" do
   end
   
   it "should error if the address is not a full street address but rather a suburb name or similar" do
-    Geokit::Geocoders::GoogleGeocoder3.stub!(:geocode).and_return(double(:all => [double(:country_code => "AU", :lat => 1, :lng => 2, :accuracy => 4, :full_address => "Glenbrook NSW, Australia")]))
+    Geokit::Geocoders::GoogleGeocoder3.stub(:geocode).and_return(double(:all => [double(:country_code => "AU", :lat => 1, :lng => 2, :accuracy => 4, :full_address => "Glenbrook NSW, Australia")]))
 
     l = Location.geocode("Glenbrook, NSW")
     l.error.should == "isn't complete. We saw that address as \"Glenbrook NSW\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state"
@@ -91,8 +91,8 @@ describe "Location" do
       double(:full_address => "Bathurst Rd, Campbell River, BC V9W, Canada", :country_code => "CA"),
       double(:full_address => "Bathurst Rd, Riverside, CA, USA", :country_code => "US"),
     ]
-    m.stub!(:all => all)
-    Geokit::Geocoders::GoogleGeocoder3.stub!(:geocode).and_return(double(:all => all))
+    m.stub(:all => all)
+    Geokit::Geocoders::GoogleGeocoder3.stub(:geocode).and_return(double(:all => all))
     l = Location.geocode("Bathurst Rd")
     all = l.all
     all.count.should == 3
@@ -109,8 +109,8 @@ describe "Location" do
       double(:full_address => "Sowerby St, Sowerby, Halifax, Calderdale HX6 3, UK", :country_code => "UK"),
       double(:full_address => "Sowerby St, Burnley, Lancashire BB12 8, UK", :country_code => "UK")
     ]
-    m.stub!(:all => all)
-    Geokit::Geocoders::GoogleGeocoder3.stub!(:geocode).and_return(double(:full_address => "Sowerby St, Lawrence 9532, New Zealand", :all => all))
+    m.stub(:all => all)
+    Geokit::Geocoders::GoogleGeocoder3.stub(:geocode).and_return(double(:full_address => "Sowerby St, Lawrence 9532, New Zealand", :all => all))
     l = Location.geocode("Sowerby St")
     l.full_address.should == "Sowerby St, Garfield NSW 2580"
     all = l.all

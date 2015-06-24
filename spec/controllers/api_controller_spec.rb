@@ -131,7 +131,7 @@ describe ApiController do
         authority = Factory(:authority, full_name: "Acme Local Planning Authority")
         application = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1), authority: authority)
         result = [application]
-        result.stub!(:total_pages).and_return(5)
+        result.stub(:total_pages).and_return(5)
         Application.stub_chain(:where, :paginate).and_return(result)
       end
       get :postcode, key: user.api_key, format: "js", v: "2", postcode: "2780"

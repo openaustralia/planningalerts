@@ -7,11 +7,11 @@ describe Alert do
       :radius_meters => 200}
     # Unless we override this elsewhere just stub the geocoder to return coordinates of address above
     @loc = Location.new(-33.772609, 150.624263)
-    @loc.stub!(:country_code).and_return("AU")
-    @loc.stub!(:full_address).and_return("24 Bruce Rd, Glenbrook NSW 2773")
-    @loc.stub!(:accuracy).and_return(8)
-    @loc.stub!(:all).and_return([@loc])
-    Location.stub!(:geocode).and_return(@loc)
+    @loc.stub(:country_code).and_return("AU")
+    @loc.stub(:full_address).and_return("24 Bruce Rd, Glenbrook NSW 2773")
+    @loc.stub(:accuracy).and_return(8)
+    @loc.stub(:all).and_return([@loc])
+    Location.stub(:geocode).and_return(@loc)
     Alert.delete_all
   end
 
@@ -54,14 +54,14 @@ describe Alert do
     end
     
     it "should set an error on the address if there is an error on geocoding" do
-      Location.stub!(:geocode).and_return(double(:error => "some error message", :lat => nil, :lng => nil, :full_address => nil))
+      Location.stub(:geocode).and_return(double(:error => "some error message", :lat => nil, :lng => nil, :full_address => nil))
       u = Alert.new(:email => "matthew@openaustralia.org")
       u.should_not be_valid
       u.errors[:address].should == ["some error message"]
     end
     
     it "should error if there are multiple matches from the geocoder" do
-      Location.stub!(:geocode).and_return(double(:lat => 1, :lng => 2, :full_address => "Bruce Rd, VIC 3885", :error => nil, :all => [nil, nil]))
+      Location.stub(:geocode).and_return(double(:lat => 1, :lng => 2, :full_address => "Bruce Rd, VIC 3885", :error => nil, :all => [nil, nil]))
       u = Alert.new(:address => "Bruce Road", :email => "matthew@openaustralia.org")
       u.should_not be_valid
       u.errors[:address].should == ["isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"]
@@ -254,7 +254,7 @@ describe Alert do
     context "an alert with no new comments" do
       let(:alert) { Alert.create!(:email => "matthew@openaustralia.org", :address => @address, :radius_meters => 2000) }
       before :each do
-        alert.stub!(:recent_comments).and_return([])
+        alert.stub(:recent_comments).and_return([])
         # Don't know why this isn't cleared out automatically
         ActionMailer::Base.deliveries = []
       end
@@ -266,7 +266,7 @@ describe Alert do
         end
 
         before :each do
-          alert.stub!(:recent_applications).and_return([application])
+          alert.stub(:recent_applications).and_return([application])
         end
 
         it "should return the number of applications and comments sent" do
@@ -296,7 +296,7 @@ describe Alert do
 
       context "and no new applications nearby" do
         before :each do
-          alert.stub!(:recent_applications).and_return([])
+          alert.stub(:recent_applications).and_return([])
         end
 
         it "should not send an email" do

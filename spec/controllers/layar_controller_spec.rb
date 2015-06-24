@@ -5,8 +5,8 @@ describe LayarController do
     application = double(:distance => 2, :lat => 1.0, :lng => 2.0, :id => 101, :address => " 1 Foo St\n Fooville",
       :description => "1234 678901234 67890123 56789 12345 1234567 90123456789 123456 89\n1234567890 2345678 012345678 01234512345")
     result = [application]
-    result.stub!(:current_page).and_return(1)
-    result.stub!(:total_pages).and_return(2)
+    result.stub(:current_page).and_return(1)
+    result.stub(:total_pages).and_return(2)
     Application.stub_chain(:near, :paginate).and_return(result)
     get :getpoi, :lat => 1.0, :lon => 2.0, :radius => 3000, :pageKey => "2"
     assigns[:applications].should == result

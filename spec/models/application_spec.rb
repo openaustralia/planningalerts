@@ -5,7 +5,7 @@ describe Application do
     Authority.delete_all
     @auth = Factory.create(:authority, :full_name => "Fiddlesticks", :state => "NSW", :short_name => "Fiddle")
     # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
-    Location.stub!(:geocode).and_return(double(:lat => 1.0, :lng => 2.0, :suburb => "Glenbrook", :state => "NSW",
+    Location.stub(:geocode).and_return(double(:lat => 1.0, :lng => 2.0, :suburb => "Glenbrook", :state => "NSW",
       :postcode => "2773", :success => true))
   end
 
@@ -58,7 +58,7 @@ describe Application do
 
       context "the date today is 1 january 2001" do
         before :each do
-          Date.stub!(:today).and_return(Date.new(2001,1,1))
+          Date.stub(:today).and_return(Date.new(2001,1,1))
         end
         it { Factory.build(:application, :date_received => Date.new(2002,1,1)).should_not be_valid }
         it { Factory.build(:application, :date_received => Date.new(2000,1,1)).should be_valid }
@@ -154,7 +154,7 @@ describe Application do
       logger.should_receive(:error).with("Couldn't geocode address: dfjshd")
 
       a = Factory.build(:application, :address => "dfjshd", :council_reference => "r1", :date_scraped => Time.now)
-      a.stub!(:logger).and_return(logger)
+      a.stub(:logger).and_return(logger)
 
       a.save!
       a.lat.should be_nil
@@ -195,7 +195,7 @@ describe Application do
       EOF
       # Freeze time
       t = Time.now
-      Time.stub!(:now).and_return(t)
+      Time.stub(:now).and_return(t)
       Application.translate_morph_feed_data(feed_data).should ==
       [
         {
@@ -254,12 +254,12 @@ describe Application do
       @date = Date.new(2009, 1, 1)
       @feed_url = "http://example.org?year=#{@date.year}&month=#{@date.month}&day=#{@date.day}"
       Application.delete_all
-      @auth.stub!(:open).and_return(double(:read => @feed_xml))
+      @auth.stub(:open).and_return(double(:read => @feed_xml))
     end
 
     it "should collect the correct applications" do
       logger = double
-      @auth.stub!(:logger).and_return(logger)
+      @auth.stub(:logger).and_return(logger)
       logger.should_receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
 
       @auth.collect_applications_date_range(@date, @date)
@@ -277,7 +277,7 @@ describe Application do
 
     it "should not create new applications when they already exist" do
       logger = double
-      @auth.stub!(:logger).and_return(logger)
+      @auth.stub(:logger).and_return(logger)
       logger.should_receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
       logger.should_receive(:info).with("0 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
 
@@ -289,7 +289,7 @@ describe Application do
 
     it "should collect all the applications from all the authorities over the last n days" do
       auth2 = Factory.create(:authority, :full_name => "Wombat City Council", :short_name => "Wombat", :state => "NSW")
-      Date.stub!(:today).and_return(Date.new(2010, 1, 10))
+      Date.stub(:today).and_return(Date.new(2010, 1, 10))
       # Overwriting a constant here. Normally generates a warning. Silence it!
       Kernel::silence_warnings { ::Configuration::SCRAPE_DELAY = 1 }
       logger = double
