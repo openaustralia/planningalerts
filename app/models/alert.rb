@@ -9,7 +9,7 @@ class Alert < ActiveRecord::Base
   scope :active, -> { where(confirmed: true, unsubscribed: false) }
   scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
 
-  attr_accessible :email, :address, :radius_meters
+  attr_accessible :email, :address, :radius_meters, :theme
 
   def location=(l)
     if l
