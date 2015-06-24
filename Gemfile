@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem 'rails', '4.0.13'
+gem 'rails', '4.1.11'
 gem 'mysql2', '> 0.3'
 
 # TODO: Swtich to Strong Parameters and remove this
@@ -30,7 +30,7 @@ gem 'httparty'
 gem "will_paginate"
 # For minifying javascript and css
 #gem 'smurf'
-gem 'thinking-sphinx', "~> 3.0"
+gem 'thinking-sphinx'
 gem "formtastic"
 gem 'validates_email_format_of'
 gem "geocoder"
