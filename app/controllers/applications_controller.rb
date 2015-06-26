@@ -1,6 +1,8 @@
 require 'will_paginate/array'
 
 class ApplicationsController < ApplicationController
+  # TODO: Switch actions from JS to JSON format and remove this
+  skip_before_action :verify_authenticity_token, only: [:per_day, :per_week]
 
   def index
     @description = "Recent applications"
