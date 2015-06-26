@@ -50,8 +50,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem "validate_url"
 gem "twitter"
-# Can revert to plain gem when this PR is merged https://github.com/openaustralia/atdis/pull/39
-gem "atdis", github: "openaustralia/atdis", branch: "activemodel4"
+gem "atdis"
 gem "oj"
 gem "redcarpet"
 gem 'honeybadger'
