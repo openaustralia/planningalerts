@@ -4,8 +4,10 @@ class Comment < ActiveRecord::Base
   validates_presence_of :name, :text, :address
 
   acts_as_email_confirmable
-  scope :visible, :conditions => {:confirmed => true, :hidden => false}
-  scope :in_past_week, where("created_at > ?", 7.days.ago)
+  scope :visible, -> { where(confirmed: true, hidden: false) }
+  scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
+
+  attr_accessible :text, :name, :email, :address
 
   # Send the comment to the planning authority
   def after_confirm

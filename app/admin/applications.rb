@@ -6,8 +6,10 @@ ActiveAdmin.register Application do
     column :address
     column :description
     column :authority
-    default_actions
+    actions
   end
+
+  remove_filter :comments
 
   show :title => :address do
     attributes_table do

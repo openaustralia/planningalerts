@@ -3,9 +3,9 @@ require 'spec_helper'
 describe Application do
   before :each do
     Authority.delete_all
-    @auth = Authority.create!(:full_name => "Fiddlesticks", :state => "NSW", :short_name => "Fiddle")
+    @auth = Factory.create(:authority, :full_name => "Fiddlesticks", :state => "NSW", :short_name => "Fiddle")
     # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
-    Location.stub!(:geocode).and_return(mock(:lat => 1.0, :lng => 2.0, :suburb => "Glenbrook", :state => "NSW",
+    Location.stub(:geocode).and_return(double(:lat => 1.0, :lng => 2.0, :suburb => "Glenbrook", :state => "NSW",
       :postcode => "2773", :success => true))
   end
 
@@ -58,7 +58,7 @@ describe Application do
 
       context "the date today is 1 january 2001" do
         before :each do
-          Date.stub!(:today).and_return(Date.new(2001,1,1))
+          Date.stub(:today).and_return(Date.new(2001,1,1))
         end
         it { Factory.build(:application, :date_received => Date.new(2002,1,1)).should_not be_valid }
         it { Factory.build(:application, :date_received => Date.new(2000,1,1)).should be_valid }
@@ -76,71 +76,71 @@ describe Application do
 
   describe "getting DA descriptions" do
     it "should allow applications to be blank" do
-      Application.new(:description => "").description.should == ""
+      Factory.build(:application, :description => "").description.should == ""
     end
 
     it "should allow the application description to be nil" do
-      Application.new(:description => nil).description.should be_nil
+      Factory.build(:application, :description => nil).description.should be_nil
     end
 
     it "should start descriptions with a capital letter" do
-      Application.new(:description => "a description").description.should == "A description"
+      Factory.build(:application, :description => "a description").description.should == "A description"
     end
 
     it "should fix capitilisation of descriptions all in caps" do
-      Application.new(:description => "DWELLING").description.should == "Dwelling"
+      Factory.build(:application, :description => "DWELLING").description.should == "Dwelling"
     end
 
     it "should not capitalise descriptions that are partially in lowercase" do
-      Application.new(:description => "To merge Owners Corporation").description.should == "To merge Owners Corporation"
+      Factory.build(:application, :description => "To merge Owners Corporation").description.should == "To merge Owners Corporation"
     end
 
     it "should capitalise the first word of each sentence" do
-      Application.new(:description => "A SENTENCE. ANOTHER SENTENCE").description.should == "A sentence. Another sentence"
+      Factory.build(:application, :description => "A SENTENCE. ANOTHER SENTENCE").description.should == "A sentence. Another sentence"
     end
 
     it "should only capitalise the word if it's all lower case" do
-      Application.new(:description => 'ab sentence. AB SENTENCE. aB sentence. Ab sentence').description.should ==  'Ab sentence. AB SENTENCE. aB sentence. Ab sentence'
+      Factory.build(:application, :description => 'ab sentence. AB SENTENCE. aB sentence. Ab sentence').description.should ==  'Ab sentence. AB SENTENCE. aB sentence. Ab sentence'
     end
 
     it "should allow blank sentences" do
-      Application.new(:description => "A poorly.    . formed sentence . \n").description.should ==  "A poorly. . Formed sentence. "
+      Factory.build(:application, :description => "A poorly.    . formed sentence . \n").description.should ==  "A poorly. . Formed sentence. "
     end
   end
 
   describe "getting addresses" do
     it "should convert words to first letter capitalised form" do
-      Application.new(:address => "1 KINGSTON AVENUE, PAKENHAM").address.should == "1 Kingston Avenue, Pakenham"
+      Factory.build(:application, :address => "1 KINGSTON AVENUE, PAKENHAM").address.should == "1 Kingston Avenue, Pakenham"
     end
 
     it "should not convert words that are not already all in upper case" do
-      Application.new(:address => "In the paddock next to the radio telescope").address.should == "In the paddock next to the radio telescope"
+      Factory.build(:application, :address => "In the paddock next to the radio telescope").address.should == "In the paddock next to the radio telescope"
     end
 
     it "should handle a mixed bag of lower and upper case" do
-      Application.new(:address => "63 Kimberley drive, SHAILER PARK").address.should == "63 Kimberley drive, Shailer Park"
+      Factory.build(:application, :address => "63 Kimberley drive, SHAILER PARK").address.should == "63 Kimberley drive, Shailer Park"
     end
 
     it "should not affect dashes in the address" do
-      Application.new(:address => "63-81").address.should == "63-81"
+      Factory.build(:application, :address => "63-81").address.should == "63-81"
     end
 
     it "should not affect abbreviations like the state names" do
-      Application.new(:address => "1 KINGSTON AVENUE, PAKENHAM VIC 3810").address.should == "1 Kingston Avenue, Pakenham VIC 3810"
+      Factory.build(:application, :address => "1 KINGSTON AVENUE, PAKENHAM VIC 3810").address.should == "1 Kingston Avenue, Pakenham VIC 3810"
     end
 
     it "should not affect the state names" do
-      Application.new(:address => "QLD VIC NSW SA ACT TAS WA NT").address.should == "QLD VIC NSW SA ACT TAS WA NT"
+      Factory.build(:application, :address => "QLD VIC NSW SA ACT TAS WA NT").address.should == "QLD VIC NSW SA ACT TAS WA NT"
     end
 
     it "should not affect codes" do
-      Application.new(:address => "R79813 24X").address.should == "R79813 24X"
+      Factory.build(:application, :address => "R79813 24X").address.should == "R79813 24X"
     end
   end
 
   describe "on saving" do
     it "should geocode the address" do
-      loc = mock("Location", :lat => -33.772609, :lng => 150.624263, :suburb => "Glenbrook", :state => "NSW",
+      loc = double("Location", :lat => -33.772609, :lng => 150.624263, :suburb => "Glenbrook", :state => "NSW",
         :postcode => "2773", :success => true)
       Location.should_receive(:geocode).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
       a = Factory(:application, :address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1", :date_scraped => Time.now)
@@ -149,12 +149,12 @@ describe Application do
     end
 
     it "should log an error if the geocoder can't make sense of the address" do
-      Location.should_receive(:geocode).with("dfjshd").and_return(mock("Location", :success => false))
-      logger = mock("Logger")
+      Location.should_receive(:geocode).with("dfjshd").and_return(double("Location", :success => false))
+      logger = double("Logger")
       logger.should_receive(:error).with("Couldn't geocode address: dfjshd")
 
       a = Factory.build(:application, :address => "dfjshd", :council_reference => "r1", :date_scraped => Time.now)
-      a.stub!(:logger).and_return(logger)
+      a.stub(:logger).and_return(logger)
 
       a.save!
       a.lat.should be_nil
@@ -195,7 +195,7 @@ describe Application do
       EOF
       # Freeze time
       t = Time.now
-      Time.stub!(:now).and_return(t)
+      Time.stub(:now).and_return(t)
       Application.translate_morph_feed_data(feed_data).should ==
       [
         {
@@ -254,12 +254,12 @@ describe Application do
       @date = Date.new(2009, 1, 1)
       @feed_url = "http://example.org?year=#{@date.year}&month=#{@date.month}&day=#{@date.day}"
       Application.delete_all
-      @auth.stub!(:open).and_return(mock(:read => @feed_xml))
+      @auth.stub(:open).and_return(double(:read => @feed_xml))
     end
 
     it "should collect the correct applications" do
-      logger = mock
-      @auth.stub!(:logger).and_return(logger)
+      logger = double
+      @auth.stub(:logger).and_return(logger)
       logger.should_receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
 
       @auth.collect_applications_date_range(@date, @date)
@@ -276,8 +276,8 @@ describe Application do
     end
 
     it "should not create new applications when they already exist" do
-      logger = mock
-      @auth.stub!(:logger).and_return(logger)
+      logger = double
+      @auth.stub(:logger).and_return(logger)
       logger.should_receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
       logger.should_receive(:info).with("0 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
 
@@ -288,11 +288,11 @@ describe Application do
     end
 
     it "should collect all the applications from all the authorities over the last n days" do
-      auth2 = Authority.create!(:full_name => "Wombat City Council", :short_name => "Wombat", :state => "NSW")
-      Date.stub!(:today).and_return(Date.new(2010, 1, 10))
+      auth2 = Factory.create(:authority, :full_name => "Wombat City Council", :short_name => "Wombat", :state => "NSW")
+      Date.stub(:today).and_return(Date.new(2010, 1, 10))
       # Overwriting a constant here. Normally generates a warning. Silence it!
       Kernel::silence_warnings { ::Configuration::SCRAPE_DELAY = 1 }
-      logger = mock
+      logger = double
       logger.should_receive(:info).with("Scraping 2 authorities")
       #logger.should_receive(:add).with(1, nil, "Took 0 s to collect applications from Fiddlesticks, NSW")
       #logger.should_receive(:add).with(1, nil, "Took 0 s to collect applications from Wombat City Council, NSW")

@@ -14,7 +14,7 @@ describe EmailConfirmable::ConfirmController do
     end
 
     it "should set the alert to be confirmed when on an iPhone" do
-      request.stub!(:user_agent).and_return('iphone')
+      request.stub(:user_agent).and_return('iphone')
       alert = mock_model(Alert)
       Alert.should_receive(:find_by_confirm_id).with("1234").and_return(alert)
       alert.should_receive(:confirm!)

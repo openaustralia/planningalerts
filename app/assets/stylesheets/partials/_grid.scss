@@ -258,15 +258,12 @@
 }
 
 @include at-breakpoint(60em 24) {
-
-  $container-style: static;
-
   .container {
     margin-left: auto;
     margin-right: auto;
     padding-left: 0;
     padding-right: 0;
-    @include set-container-width;
+    @include set-container-width($total-columns, static);
   }
 
   #menu {
@@ -376,7 +373,7 @@
   }
 
   #map_div, .details {
-    @include span-columns(8, 24);
+    @include span-columns(8, 24, false, $from-direction, static);
   }
   #map_div {
     height: 330px;

@@ -29,7 +29,7 @@ a.btn:hover {
 
   // Make text field sit nicely at the expected full width
   input, textarea {
-    @include box-sizing(border-box);
+    box-sizing: border-box;
     color: $cool-highlight;
   }
 

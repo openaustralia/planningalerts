@@ -1,13 +1,12 @@
 require 'spec_helper'
 
 describe ApiController do
-  let(:user) { User.create!(email: "foo@bar.com", password: "foofoo")}
+  let(:user) { Factory.create(:user, email: "foo@bar.com", password: "foofoo")}
 
   describe "#all" do
     describe "rss" do
       it "should not support rss" do
-        get :all, :format => "rss", :key => user.api_key
-        response.status.should == 406
+        expect{get :all, :format => "rss", :key => user.api_key}.to raise_error ActionController::UnknownFormat
       end
     end
 
@@ -59,19 +58,19 @@ describe ApiController do
               "id" => 10,
               "council_reference" => "001",
               "address" => "A test address",
-              "on_notice_from" => nil,
-              "on_notice_to" => nil,
-              "authority" => {
-                "full_name" => "Acme Local Planning Authority"
-              },
-              "no_alerted" => nil,
               "description" => "Pretty",
-              "comment_url" => nil,
               "info_url" => "http://foo.com",
-              "date_received" => nil,
+              "comment_url" => nil,
               "lat" => nil,
               "lng" => nil,
-              "date_scraped" => "2001-01-01T00:00:00Z",
+              "date_scraped" => "2001-01-01T00:00:00.000Z",
+              "date_received" => nil,
+              "on_notice_from" => nil,
+              "on_notice_to" => nil,
+              "no_alerted" => nil,
+              "authority" => {
+                "full_name" => "Acme Local Planning Authority"
+              }
             }
           }]
         }
@@ -88,7 +87,7 @@ describe ApiController do
     end
 
     it "should find recent applications for a postcode" do
-      result, scope = mock, mock
+      result, scope = double, double
       Application.should_receive(:where).with(:postcode => "2780").and_return(scope)
       scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
       get :postcode, key: user.api_key, format: "rss", postcode: "2780"
@@ -103,26 +102,26 @@ describe ApiController do
         Application.stub_chain(:where, :paginate).and_return([result])
       end
       get :postcode, key: user.api_key, format: "js", postcode: "2780", callback: "foobar"
-      response.body[0..6].should == "foobar("
+      response.body[0..10].should == "/**/foobar("
       response.body[-1..-1].should == ")"
-      JSON.parse(response.body[7..-2]).should == [{
+      JSON.parse(response.body[11..-2]).should == [{
         "application" => {
           "id" => 10,
           "council_reference" => "001",
           "address" => "A test address",
-          "on_notice_from" => nil,
-          "on_notice_to" => nil,
-          "authority" => {
-            "full_name" => "Acme Local Planning Authority"
-          },
-          "no_alerted" => nil,
           "description" => "Pretty",
-          "comment_url" => nil,
           "info_url" => "http://foo.com",
-          "date_received" => nil,
+          "comment_url" => nil,
           "lat" => nil,
           "lng" => nil,
-          "date_scraped" => "2001-01-01T00:00:00Z",
+          "date_scraped" => "2001-01-01T00:00:00.000Z",
+          "date_received" => nil,
+          "on_notice_from" => nil,
+          "on_notice_to" => nil,
+          "no_alerted" => nil,
+          "authority" => {
+            "full_name" => "Acme Local Planning Authority"
+          }
         }
       }]
     end
@@ -132,7 +131,7 @@ describe ApiController do
         authority = Factory(:authority, full_name: "Acme Local Planning Authority")
         application = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1), authority: authority)
         result = [application]
-        result.stub!(:total_pages).and_return(5)
+        result.stub(:total_pages).and_return(5)
         Application.stub_chain(:where, :paginate).and_return(result)
       end
       get :postcode, key: user.api_key, format: "js", v: "2", postcode: "2780"
@@ -144,19 +143,19 @@ describe ApiController do
             "id" => 10,
             "council_reference" => "001",
             "address" => "A test address",
-            "on_notice_from" => nil,
-            "on_notice_to" => nil,
-            "authority" => {
-              "full_name" => "Acme Local Planning Authority"
-            },
-            "no_alerted" => nil,
             "description" => "Pretty",
-            "comment_url" => nil,
             "info_url" => "http://foo.com",
-            "date_received" => nil,
+            "comment_url" => nil,
             "lat" => nil,
             "lng" => nil,
-            "date_scraped" => "2001-01-01T00:00:00Z",
+            "date_scraped" => "2001-01-01T00:00:00.000Z",
+            "date_received" => nil,
+            "on_notice_from" => nil,
+            "on_notice_to" => nil,
+            "no_alerted" => nil,
+            "authority" => {
+              "full_name" => "Acme Local Planning Authority"
+            }
           }
         }]
       }
@@ -180,8 +179,8 @@ describe ApiController do
 
     describe "search by address" do
       before :each do
-        location = mock(:lat => 1.0, :lng => 2.0, :full_address => "24 Bruce Road, Glenbrook NSW 2773")
-        @result = mock
+        location = double(:lat => 1.0, :lng => 2.0, :full_address => "24 Bruce Road, Glenbrook NSW 2773")
+        @result = double
 
         Location.should_receive(:geocode).with("24 Bruce Road Glenbrook").and_return(location)
         Application.stub_chain(:near, :paginate).and_return(@result)
@@ -208,7 +207,7 @@ describe ApiController do
       end
 
       it "should use a search radius of 2000 when none is specified" do
-        result = mock
+        result = double
         Application.stub_chain(:near, :paginate).and_return(result)
 
         get :point, key: user.api_key, address: "24 Bruce Road Glenbrook", format: "rss"
@@ -219,7 +218,7 @@ describe ApiController do
 
     describe "search by lat & lng" do
       before :each do
-        @result = mock
+        @result = double
 
         Application.stub_chain(:near, :paginate).and_return(@result)
       end
@@ -247,7 +246,7 @@ describe ApiController do
     end
 
     it "should find recent applications in an area" do
-      result, scope = mock, mock
+      result, scope = double, double
       Application.should_receive(:where).with("lat > ? AND lng > ? AND lat < ? AND lng < ?", 1.0, 2.0, 3.0, 4.0).and_return(scope)
       scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
 
@@ -266,7 +265,7 @@ describe ApiController do
     end
 
     it "should find recent applications for an authority" do
-      authority, result, scope = mock, mock, mock
+      authority, result, scope = double, double, double
 
       Authority.should_receive(:find_by_short_name_encoded).with("blue_mountains").and_return(authority)
       authority.should_receive(:applications).and_return(scope)
@@ -287,7 +286,7 @@ describe ApiController do
     end
 
     it "should find recent applications for a suburb" do
-      result, scope = mock, mock
+      result, scope = double, double
       Application.should_receive(:where).with(:suburb => "Katoomba").and_return(scope)
       scope.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)
       get :suburb, key: user.api_key, format: "rss", suburb: "Katoomba"
@@ -297,7 +296,7 @@ describe ApiController do
 
     describe "search by suburb and state" do
       it "should find recent applications for a suburb and state" do
-        result, scope1, scope2 = mock, mock, mock
+        result, scope1, scope2 = double, double, double
         Application.should_receive(:where).with(:suburb => "Katoomba").and_return(scope1)
         scope1.should_receive(:where).with(:state => "NSW").and_return(scope2)
         scope2.should_receive(:paginate).with(:page => nil, :per_page => 100).and_return(result)

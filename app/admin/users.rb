@@ -14,6 +14,6 @@ ActiveAdmin.register User do
     end
     column :bulk_api
     column :admin
-    default_actions
+    actions
   end
 end

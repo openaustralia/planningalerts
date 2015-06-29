@@ -19,8 +19,10 @@ end
 
 class Authority < ActiveRecord::Base
   has_many :applications
-  scope :enabled, :conditions => 'disabled = 0 or disabled is null'
-  scope :active, :conditions => '(disabled = 0 or disabled is null) AND morph_name != "" AND morph_name IS NOT NULL'
+  scope :enabled, -> { where('disabled = 0 or disabled is null') }
+  scope :active, -> { where('(disabled = 0 or disabled is null) AND morph_name != "" AND morph_name IS NOT NULL') }
+
+  attr_accessible :full_name, :short_name, :state, :email, :population_2011, :morph_name
 
   def full_name_and_state
     full_name + ", " + state
@@ -201,7 +203,7 @@ class Authority < ActiveRecord::Base
 
   def self.find_by_short_name_encoded(n)
     # TODO: Potentially not very efficient when number of authorities is high. Loads all authorities into memory
-    find(:all).find{|a| a.short_name_encoded == n}
+    all.find{|a| a.short_name_encoded == n}
   end
 
   def self.find_by_short_name_encoded!(n)
@@ -218,7 +220,7 @@ class Authority < ActiveRecord::Base
 
   def latest_application
     # The applications are sorted by default by the date_scraped because of the default scope on the model
-    applications.find(:first)
+    applications.first
   end
 
   def latest_application_date

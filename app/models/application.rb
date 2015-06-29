@@ -12,10 +12,13 @@ class Application < ActiveRecord::Base
   validate :date_received_can_not_be_in_the_future, :validate_on_notice_period
   validates :council_reference, :uniqueness => { :scope => :authority_id }
 
-  default_scope :order => "date_scraped DESC"
+  default_scope { order "date_scraped DESC" }
 
-  scope :in_past_week, where("date_scraped > ?", 7.days.ago)
-  scope :recent, where("date_scraped >= ?", 14.days.ago)
+  scope :in_past_week, -> { where("date_scraped > ?", 7.days.ago) }
+  scope :recent, -> { where("date_scraped >= ?", 14.days.ago) }
+
+  attr_accessible :council_reference, :address, :description, :info_url, :comment_url,
+                  :date_received, :date_scraped, :on_notice_from, :on_notice_to
 
   def date_received_can_not_be_in_the_future
     if date_received && date_received > Date.today

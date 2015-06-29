@@ -2,15 +2,15 @@ require 'spec_helper'
 
 describe AlertNotifier do
   before :each do
-    @alert = Alert.create!(:email => "matthew@openaustralia.org", :address => "24 Bruce Rd, Glenbrook NSW 2773",
+    @alert = Factory.create(:alert, :email => "matthew@openaustralia.org", :address => "24 Bruce Rd, Glenbrook NSW 2773",
       :lat => 1.0, :lng => 2.0, :radius_meters => 800)
-    @alert.stub!(:confirm_id).and_return("abcdef")
+    @alert.stub(:confirm_id).and_return("abcdef")
     @original_emails_sent = Stat.emails_sent
     @original_applications_sent = Stat.applications_sent
-    location1 = mock("Location", :lat => 0.1, :lng => 0.2)
+    location1 = double("Location", :lat => 0.1, :lng => 0.2)
     @a1 = mock_model(Application, :address => "Foo Street, Bar", :council_reference => "a1", :description => "Knock something down", :id => 1,
         :lat => location1.lat, :lng => location1.lng, :location => location1)
-    location2 = mock("Location", :lat => 0.3, :lng => 0.4)
+    location2 = double("Location", :lat => 0.3, :lng => 0.4)
     @a2 = mock_model(Application, :address => "Bar Street, Foo", :council_reference => "a2", :description => "Put something up", :id => 2,
         :lat => location2.lat, :lng => location2.lng, :location => location2)
     @a3 = mock_model(Application, :address => "2 Foo Parade, Glenbrook NSW 2773", :id => 3)

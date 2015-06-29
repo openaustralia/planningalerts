@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Authority do
   describe "detecting authorities with old applications" do
     before :each do
-      @a1 = Factory(:authority, :full_name => "Blue Mountains City Council")
-      @a2 = Factory(:authority, :full_name => "Marrickville City Council")
+      @a1 = Factory(:authority)
+      @a2 = Factory(:authority)
       VCR.use_cassette('planningalerts') do
         Factory(:application, :authority => @a1, :date_scraped => 3.weeks.ago)
         Factory(:application, :authority => @a2)
@@ -22,8 +22,8 @@ describe Authority do
 
   describe "short name encoded" do
     before :each do
-      @a1 = Authority.create!(:short_name => "Blue Mountains", :full_name => "Blue Mountains City Council")
-      @a2 = Authority.create!(:short_name => "Blue Mountains (new one)", :full_name => "Blue Mountains City Council (fictional new one)")
+      @a1 = Factory(:authority, short_name: "Blue Mountains", full_name: "Blue Mountains City Council")
+      @a2 = Factory(:authority, short_name: "Blue Mountains (new one)", full_name: "Blue Mountains City Council (fictional new one)")
     end
 
     it "should be constructed by replacing space by underscores and making it all lowercase" do
@@ -45,7 +45,7 @@ describe Authority do
       let (:authority) { Factory.build(:authority) }
       it "should get the feed date only once" do
         authority.should_receive(:open_url_safe).once
-        authority.scraper_data_original_style("http://foo.com", Date.new(2001,1,1), Date.new(2001,1,3), mock)
+        authority.scraper_data_original_style("http://foo.com", Date.new(2001,1,1), Date.new(2001,1,3), double)
       end
     end
   end

@@ -1,6 +1,6 @@
 @import "compass/utilities/general/min";
-@import "compass/utilities/links/hover-link";
-@import "compass/utilities/lists/horizontal-list";
+@import "compass/typography/links/hover-link";
+@import "compass/typography/lists/horizontal-list";
 
 body {
   background-color: $content-background;
@@ -9,11 +9,6 @@ body {
 
 .main {
   background: $content-background;
-}
-
-// Transition links by colour
-a {
-  @include single-transition(color, .3s);
 }
 
 #header-wrapper {
@@ -76,7 +71,6 @@ a {
     padding: .5em;
     display: block;
     text-decoration: none;
-    @include single-transition(background-color, .5s);
 
     &:link, &:visited {
       color: #fff;
@@ -239,6 +233,7 @@ hr {
   .button {
     @include button(simple, $lightest-cool-highlight);
     font-weight: normal;
+    font-size: 11px;
   }
   .button-action {
     @include button(simple, $warm-highlight);

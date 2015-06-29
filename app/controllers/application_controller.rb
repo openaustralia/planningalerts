@@ -39,6 +39,6 @@ class ApplicationController < ActionController::Base
   def ssl_required?
     # This method is called before set_view_path so we need to calculate the theme from the
     # request rather than using @theme which isn't yet set
-    ThemeChooser.themer_from_request(request).theme != "nsw"
+    ::ThemeChooser.themer_from_request(request).theme != "nsw" && !Rails.env.development?
   end
 end

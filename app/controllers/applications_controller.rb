@@ -1,6 +1,8 @@
 require 'will_paginate/array'
 
 class ApplicationsController < ApplicationController
+  # TODO: Switch actions from JS to JSON format and remove this
+  skip_before_action :verify_authenticity_token, only: [:per_day, :per_week]
 
   def index
     @description = "Recent applications"
@@ -99,7 +101,7 @@ class ApplicationsController < ApplicationController
     end
 
     @application = Application.find(params[:id])
-    @nearby_count = @application.find_all_nearest_or_recent.count
+    @nearby_count = @application.find_all_nearest_or_recent.size
     @comment = Comment.new
     # Required for new email alert signup form
     @alert = Alert.new(:address => @application.address)

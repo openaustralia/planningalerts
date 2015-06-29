@@ -12,14 +12,14 @@ class QueryParamsPresentConstraint
   end
 
   def matches?(request)
-    @params.all?{|p| request.query_parameters[p.to_s].present?}
+    @params.all? { |p| request.params[p.to_s].present? }
   end
 end
 
 PlanningalertsApp::Application.routes.draw do
   constraints :subdomain => "api" do
     constraints FormatConstraint.new do
-      match "(*path)" => redirect{|p,r| "http://www.#{r.domain(2)}/#{p[:path]}"}
+      get "(*path)" => redirect{|p,r| "http://www.#{r.domain(2)}/#{p[:path]}"}
     end
   end
 
@@ -28,14 +28,14 @@ PlanningalertsApp::Application.routes.draw do
   devise_for :users
 
   # Redirect old urls
-  match 'apihowto.php' => redirect('/api/howto')
-  match 'about.php' => redirect('/about')
-  match 'faq.php' => redirect('/faq')
-  match 'getinvolved.php' => redirect('/getinvolved')
+  get 'apihowto.php' => redirect('/api/howto')
+  get 'about.php' => redirect('/about')
+  get 'faq.php' => redirect('/faq')
+  get 'getinvolved.php' => redirect('/getinvolved')
   # Can't do the redirects in the routing as above because the redirect depends
   # on the passed parameters
-  match 'api.php' => 'api#old_index'
-  match 'api' => 'api#old_index'
+  get 'api.php' => 'api#old_index'
+  get 'api' => 'api#old_index', as: :api_old_index
 
   resources :alerts, :only => [:new, :create], :path_names => {:new => 'signup'} do
     collection do
@@ -102,34 +102,34 @@ PlanningalertsApp::Application.routes.draw do
     get :guidance
   end
 
-  match 'api/howto' => 'api#howto', :as => :api_howto
-  match 'api' => 'api#index', :as => :api
+  get 'api/howto' => 'api#howto', :as => :api_howto
+  get 'api' => 'api#index', :as => :api
 
-  match 'about' => 'static#about', :as => :about
-  match 'faq' => 'static#faq', :as => :faq
-  match 'getinvolved' => 'static#get_involved', :as => :get_involved
-  match 'how_to_write_a_scraper' => 'static#how_to_write_a_scraper'
-  match 'how_to_lobby_your_local_council' => 'static#how_to_lobby_your_local_council'
+  get 'about' => 'static#about', :as => :about
+  get 'faq' => 'static#faq', :as => :faq
+  get 'getinvolved' => 'static#get_involved', :as => :get_involved
+  get 'how_to_write_a_scraper' => 'static#how_to_write_a_scraper'
+  get 'how_to_lobby_your_local_council' => 'static#how_to_lobby_your_local_council'
 
-  match 'donate' => 'static#donate'
-  match 'donate/thanks' => 'static#donate_thanks'
-  match 'donate/cancel' => 'static#donate_cancel'
+  get 'donate' => 'static#donate'
+  get 'donate/thanks' => 'static#donate_thanks'
+  get 'donate/cancel' => 'static#donate_cancel'
 
-  match '/' => 'applications#address', :as => :address_applications
+  get '/' => 'applications#address', :as => :address_applications
 
-  match 'layar/getpoi' => 'layar#getpoi'
+  get 'layar/getpoi' => 'layar#getpoi'
 
-  match 'comments/:id/confirmed' => 'comments#confirmed', :as => :confirmed_comment
-  match 'alerts/:id/confirmed' => 'email_confirmable/confirm#confirmed', :as => :confirmed_alert, :resource => 'alerts'
+  get 'comments/:id/confirmed' => 'comments#confirmed', :as => :confirmed_comment
+  get 'alerts/:id/confirmed' => 'email_confirmable/confirm#confirmed', :as => :confirmed_alert, :resource => 'alerts'
 
-  match '/vanity(/:action(/:id(.:format)))', :controller=>:vanity
+  get '/vanity(/:action(/:id(.:format)))', :controller=>:vanity
 
   resources :subscriptions, :only => [:new, :create]
 
-  match 'subscriptions' => redirect('/subscriptions/new')
+  get 'subscriptions' => redirect('/subscriptions/new')
 
   root :to => 'applications#address'
 
-  match '/404', :to => 'static#error_404'
-  match "/500", :to => 'static#error_500'
+  get '/404', :to => 'static#error_404'
+  get "/500", :to => 'static#error_500'
 end

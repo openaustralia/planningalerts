@@ -65,17 +65,17 @@ describe ThrottleConfigurable do
   end
 
   it "should not do any throttling with the unlimited strategy" do
-    request = mock(:request, :ip => "1.2.3.5")
+    request = double(:request, :ip => "1.2.3.5")
     t.allowed?(request).should be_true
   end
 
   it "should never allow the request when an ip is blocked" do
-    request = mock(:request, :ip => "1.2.3.6")
+    request = double(:request, :ip => "1.2.3.6")
     t.allowed?(request).should be_false
   end
 
   it "should limit request to the max count in the hourly strategy" do
-    request = mock(:request, :ip => "1.2.3.7")
+    request = double(:request, :ip => "1.2.3.7")
     t.allowed?(request).should be_true
     t.allowed?(request).should be_true
     t.allowed?(request).should be_true
@@ -83,7 +83,7 @@ describe ThrottleConfigurable do
   end
 
   it "should limit requests to the max count in the daily strategy too" do
-    request = mock(:request, :ip => "1.2.3.4")
+    request = double(:request, :ip => "1.2.3.4")
     t.allowed?(request).should be_true
     t.allowed?(request).should be_true
     t.allowed?(request).should be_false

@@ -4,8 +4,11 @@ log/*.log
 tmp/cache
 tmp/pids
 tmp/sass-cache
+tmp/binlog
+tmp/rspec_guard_result
 coverage
 log/searchd.development.pid
+log/development.sphinx.pid
 config/database.yml
 config/development.sphinx.conf
 db/sphinx/development/*

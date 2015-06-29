@@ -10,7 +10,7 @@ describe Sitemap do
   it "should output an xml sitemap" do
     public = Rails.root.join('public').to_s
     
-    file1 = mock("file1")
+    file1 = double("file1")
     File.should_receive(:open).with("#{public}/sitemap.xml", "w").and_return(file1)
     file1.should_receive(:<<).with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
     file1.should_receive(:<<).with("<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")
@@ -21,7 +21,7 @@ describe Sitemap do
     file1.should_receive(:<<).with("</sitemapindex>")
     file1.should_receive(:close)
 
-    file2 = mock("file2")
+    file2 = double("file2")
     Zlib::GzipWriter.should_receive(:open).with("#{public}/sitemaps/sitemap1.xml.gz").and_return(file2)
     file2.should_receive(:<<).with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
     file2.should_receive(:<<).with("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")

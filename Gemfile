@@ -1,21 +1,24 @@
 source "https://rubygems.org"
 
-gem 'rails', '3.2.21'
+gem 'rails', '4.1.11'
 gem 'mysql2', '> 0.3'
 
-# Needed for the new asset pipeline
-group :assets do
-  gem 'coffee-rails'
-  gem "compass-rails"
-  gem 'sass-rails'
-  gem "susy"
-  gem 'uglifier'
-end
+# TODO: Swtich to Strong Parameters and remove this
+gem 'protected_attributes'
+# Allow us to use `caches_page`
+gem "actionpack-page_caching"
+# Need to support sweepers
+gem "rails-observers"
+
+gem 'coffee-rails'
+gem "compass-rails"
+gem "compass-blueprint"
+gem 'sass-rails'
+gem "susy"
+gem 'uglifier'
 
 # jQuery is the default JavaScript library in Rails 3.1
-# Locking jquery-rails to 2.2.1 so that activeadmin can find jquery-ui when it's precompiling its assets
-# Probably can get rid of this by updating activeadmin
-gem 'jquery-rails', "2.2.1"
+gem 'jquery-rails'
 gem "jquery-ui-rails"
 
 gem "foreman"
@@ -27,11 +30,13 @@ gem 'httparty'
 gem "will_paginate"
 # For minifying javascript and css
 #gem 'smurf'
-gem 'thinking-sphinx', "~> 3.0"
+gem 'thinking-sphinx'
 gem "formtastic"
 gem 'validates_email_format_of'
-gem "geocoder", :require => "geocoder"
-gem 'activeadmin'
+gem "geocoder"
+# Rails 4 support is a work in progress so requires tracking master
+gem 'activeadmin', github: 'activeadmin'
+gem "devise"
 # Disabling metric_fu because it depends on rcov which doesn't work on Ruby 1.9
 #gem 'metric_fu'
 gem "rake"
@@ -80,7 +85,7 @@ group :development do
 end
 
 group :test, :development do
-  gem 'rspec-rails', '~> 2.4'
+  gem 'rspec-rails', '~> 2.14.2'
 end
 
 group :production do

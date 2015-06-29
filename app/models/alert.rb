@@ -6,8 +6,10 @@ class Alert < ActiveRecord::Base
   before_create :remove_other_alerts_for_this_address
   acts_as_email_confirmable
 
-  scope :active, :conditions => {:confirmed => true, :unsubscribed => false}
-  scope :in_past_week, where("created_at > ?", 7.days.ago)
+  scope :active, -> { where(confirmed: true, unsubscribed: false) }
+  scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
+
+  attr_accessible :email, :address, :radius_meters, :theme
 
   def location=(l)
     if l
@@ -98,7 +100,7 @@ class Alert < ActiveRecord::Base
 
   # Applications that have been scraped since the last time the user was sent an alert
   def recent_applications
-    Application.order("date_received DESC").near([location.lat, location.lng], radius_km, :units => :km).where('date_scraped > ?', cutoff_time).all
+    Application.order("date_received DESC").near([location.lat, location.lng], radius_km, :units => :km).where('date_scraped > ?', cutoff_time)
   end
 
   # Applications in the area of interest which have new comments made since we were last alerted

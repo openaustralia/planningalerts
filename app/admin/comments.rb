@@ -6,14 +6,14 @@ ActiveAdmin.register Comment, :as => "ApplicationComment" do
   scope :visible, :default => true
   scope :all
 
-  index :title => :comments do
+  index :title => "Comments" do
     column :text, :sortable => false do |comment|
       truncate(comment.text)
     end
     column :email
     column :name
     column :application
-    default_actions
+    actions
   end
 
   filter :text
@@ -21,19 +21,18 @@ ActiveAdmin.register Comment, :as => "ApplicationComment" do
   filter :name
 
   form do |f|
-    f.inputs "Text" do
-      f.input :text
+    inputs "Text" do
+      input :text
     end
-    f.inputs "Person details" do
-      f.input :email
-      f.input :name
-      f.input :address
+    inputs "Person details" do
+      input :email
+      input :name
+      input :address
     end
-    f.inputs "Comment Properties" do
-      f.input :confirmed
-      f.input :hidden
+    inputs "Comment Properties" do
+      input :confirmed
+      input :hidden
     end
-    f.buttons
+    actions
   end
-
 end

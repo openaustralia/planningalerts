@@ -4,12 +4,9 @@ require 'rails/all'
 require 'rack/throttle'
 require File.dirname(__FILE__) + "/../lib/api_throttler"
 
-if defined?(Bundler)
-# If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
-  # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
-end
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
 
 module PlanningalertsApp
   class Application < Rails::Application
@@ -21,10 +18,6 @@ module PlanningalertsApp
     # config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths << "#{config.root}/app/sweepers"
     config.autoload_paths << "#{config.root}/lib"
-
-    # Only load the plugins named here, in the order given (default is alphabetical).
-    # :all can be used as a placeholder for all plugins not explicitly named.
-    # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
@@ -39,31 +32,11 @@ module PlanningalertsApp
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # JavaScript files you want as :defaults (application.js is always included).
-    # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
-
-    # Configure the default encoding used in templates for Ruby 1.9.
-    config.encoding = "utf-8"
-
-    # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
-
     # We are using some rack middleware to throttle people that make too many API requests
     config.middleware.use ApiThrottler,:cache => Dalli::Client.new,
         :strategies => YAML.load_file("#{config.root}/config/throttling.yml"),
         :key_prefix => :throttle,
         :message => "Rate Limit Exceeded. See http://www.planningalerts.org.au/api/howto#hLicenseInfo for more information"
-
-    config.assets.enabled = true
-    config.assets.version = '1.0'
-
-    # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-    # config.assets.precompile += %w( search.js )
-    config.assets.precompile += ['ie.css', 'screen.css', 'print.css',
-      'placeholder_polyfill.min.css',
-      'active_admin.js', 'applications.js', 'bar_graph.js', 'maps.js', 'mxn.core.js',
-      'mxn.googlev3.core.js', 'mxn.js', 'placeholder_polyfill.jquery.min.combo.js', 'preview.js',
-      'atdis.js']
 
     config.action_dispatch.tld_length = 2
 

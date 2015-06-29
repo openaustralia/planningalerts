@@ -3,6 +3,8 @@ class ApiController < ApplicationController
   before_filter :require_api_key, except: [:old_index, :howto]
   before_filter :authenticate_bulk_api, only: [:all, :date_scraped]
 
+  skip_before_action :verify_authenticity_token, except: [:old_index, :howto]
+
   def authority
     # TODO Handle the situation where the authority name isn't found
     authority = Authority.find_by_short_name_encoded!(params[:authority_id])
@@ -112,7 +114,7 @@ class ApiController < ApplicationController
 
   def ssl_required?
     # Only redirect on howto page. Normal api requests on this controller should not redirect
-    params[:action] == "howto"
+    params[:action] == "howto" && super
   end
 
   def check_api_parameters
@@ -179,7 +181,7 @@ class ApiController < ApplicationController
       end
       format.js do
         if params[:v] == "2"
-          s = {:applications => @applications, :application_count => @applications.count, :page_count => @applications.total_pages}
+          s = {:application_count => @applications.count, :page_count => @applications.total_pages, :applications => @applications}
         else
           s = @applications
         end
