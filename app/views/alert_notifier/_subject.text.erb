@@ -1,7 +1,7 @@
 <% if !applications.empty? && comments.empty? %>
-<%= pluralize(applications.count, "new planning application") %> near <%= alert.address %>
+<%= pluralize(applications.size, "new planning application") %> near <%= alert.address %>
 <% elsif applications.empty? && !comments.empty? %>
-<%= pluralize(comments.count, "new comment") %> on planning applications near <%= alert.address %>
+<%= pluralize(comments.size, "new comment") %> on planning applications near <%= alert.address %>
 <% elsif !applications.empty? && !comments.empty? %>
-<%= pluralize(comments.count, "new comment") %> and <%= pluralize(applications.count, "new planning application") %> near <%= alert.address %>
+<%= pluralize(comments.size, "new comment") %> and <%= pluralize(applications.size, "new planning application") %> near <%= alert.address %>
 <% end %>
