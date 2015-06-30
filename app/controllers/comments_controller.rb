@@ -1,11 +1,13 @@
 class CommentsController < ApplicationController
-  # Allows access to /comments.js
-  # TODO: Switch to .json
-  skip_before_action :verify_authenticity_token, only: [:index]
-
   def index
     @comments = Comment.visible.order("updated_at DESC").paginate :page => params[:page]
     @rss = comments_url(params.merge(:format => "rss", :page => nil))
+
+    respond_to do |format|
+      format.html
+      format.rss
+      format.js { render content_type: "application/json" }
+    end
   end
 
   def create
