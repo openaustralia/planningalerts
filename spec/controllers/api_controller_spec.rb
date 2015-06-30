@@ -101,7 +101,7 @@ describe ApiController do
         result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1), authority: authority)
         Application.stub_chain(:where, :paginate).and_return([result])
       end
-      get :postcode, key: user.api_key, format: "js", postcode: "2780", callback: "foobar"
+      xhr :get, :postcode, key: user.api_key, format: "js", postcode: "2780", callback: "foobar"
       response.body[0..10].should == "/**/foobar("
       response.body[-1..-1].should == ")"
       JSON.parse(response.body[11..-2]).should == [{
