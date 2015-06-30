@@ -88,7 +88,7 @@ class ApplicationsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.rss { render "index", :format => :rss, :layout => false, :content_type => Mime::XML }
+      format.rss { render "api/index", :format => :rss, :layout => false, :content_type => Mime::XML }
     end
   end
 
