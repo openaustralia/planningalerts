@@ -56,7 +56,7 @@ class ApiController < ApplicationController
       api_render(Application.where(date_scraped: date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
     else
       respond_to do |format|
-        format.js { render json: {error: "invalid date_scraped"}, status: 400, content_type: "application/json" }
+        format.js { render json: {error: "invalid date_scraped"}, status: 400, content_type: Mime::JSON }
       end
     end
   end
@@ -82,7 +82,7 @@ class ApiController < ApplicationController
         s = {:applications => applications, :application_count => apps.count, :max_id => max_id}
         j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
           :include => {:authority => {:only => [:full_name]}})
-        render :json => j, :callback => params[:callback], content_type: "application/json"
+        render :json => j, :callback => params[:callback], content_type: Mime::JSON
       end
     end
   end
@@ -138,7 +138,7 @@ class ApiController < ApplicationController
       error_text = "not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"
       respond_to do |format|
         format.js do
-          render json: {error: error_text}, status: 401, content_type: "application/json"
+          render json: {error: error_text}, status: 401, content_type: Mime::JSON
         end
         format.rss do
           render text: error_text, status: 401
@@ -151,7 +151,7 @@ class ApiController < ApplicationController
     unless User.where(api_key: params[:key], bulk_api: true).exists?
       respond_to do |format|
         format.js do
-          render json: {error: "no bulk api access"}, status: 401, content_type: "application/json"
+          render json: {error: "no bulk api access"}, status: 401, content_type: Mime::JSON
         end
       end
     end
@@ -185,7 +185,7 @@ class ApiController < ApplicationController
         end
         j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
           :include => {:authority => {:only => [:full_name]}})
-        render :json => j, :callback => params[:callback], content_type: "application/json"
+        render :json => j, :callback => params[:callback], content_type: Mime::JSON
       end
     end
   end
