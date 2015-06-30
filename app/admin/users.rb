@@ -16,4 +16,6 @@ ActiveAdmin.register User do
     column :admin
     actions
   end
+
+  remove_filter :api_statistics
 end
