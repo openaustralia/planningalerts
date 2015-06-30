@@ -3,8 +3,6 @@ class ApiController < ApplicationController
   before_filter :require_api_key, except: [:old_index, :howto]
   before_filter :authenticate_bulk_api, only: [:all, :date_scraped]
 
-  skip_before_action :verify_authenticity_token, except: [:old_index, :howto]
-
   def authority
     # TODO Handle the situation where the authority name isn't found
     authority = Authority.find_by_short_name_encoded!(params[:authority_id])
@@ -58,7 +56,7 @@ class ApiController < ApplicationController
       api_render(Application.where(date_scraped: date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
     else
       respond_to do |format|
-        format.js { render json: {error: "invalid date_scraped"}, status: 400 }
+        format.js { render json: {error: "invalid date_scraped"}, status: 400, content_type: "application/json" }
       end
     end
   end
@@ -84,7 +82,7 @@ class ApiController < ApplicationController
         s = {:applications => applications, :application_count => apps.count, :max_id => max_id}
         j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
           :include => {:authority => {:only => [:full_name]}})
-        render :json => j, :callback => params[:callback]
+        render :json => j, :callback => params[:callback], content_type: "application/json"
       end
     end
   end
@@ -140,7 +138,7 @@ class ApiController < ApplicationController
       error_text = "not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"
       respond_to do |format|
         format.js do
-          render json: {error: error_text}, status: 401
+          render json: {error: error_text}, status: 401, content_type: "application/json"
         end
         format.rss do
           render text: error_text, status: 401
@@ -153,7 +151,7 @@ class ApiController < ApplicationController
     unless User.where(api_key: params[:key], bulk_api: true).exists?
       respond_to do |format|
         format.js do
-          render json: {error: "no bulk api access"}, status: 401
+          render json: {error: "no bulk api access"}, status: 401, content_type: "application/json"
         end
       end
     end
@@ -187,7 +185,7 @@ class ApiController < ApplicationController
         end
         j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
           :include => {:authority => {:only => [:full_name]}})
-        render :json => j, :callback => params[:callback]
+        render :json => j, :callback => params[:callback], content_type: "application/json"
       end
     end
   end
