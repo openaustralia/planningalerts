@@ -31,9 +31,9 @@ class AtdisController < ApplicationController
   def feed
     file = Feed.example_path(params[:number].to_i, (params[:page] || "1").to_i)
     if File.exists?(file)
-      render :file  => file, :content_type => "application/json", :layout => false
+      render file: file, content_type: "application/json", layout: false
     else
-      render :text => "not available", :status => 404
+      render text: "not available", status: 404
     end
   end
 
