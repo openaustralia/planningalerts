@@ -136,7 +136,7 @@ class ApiController < ApplicationController
   end
 
   def require_api_key
-    unless User.where(api_key: params[:key]).exists?
+    unless params[:key] && User.where(api_key: params[:key]).exists?
       error_text = "not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"
       respond_to do |format|
         format.js do
