@@ -3,6 +3,11 @@ class ApiController < ApplicationController
   before_filter :require_api_key, except: [:old_index, :howto]
   before_filter :authenticate_bulk_api, only: [:all, :date_scraped]
 
+  # This is disabled because at least one commercial user of the API is doing
+  # GET requests for JSONP instead of using XHR
+  # TODO: Remove this line to re-enable CSRF protection on API actions
+  skip_before_action :verify_authenticity_token, except: [:old_index, :howto]
+
   def authority
     # TODO Handle the situation where the authority name isn't found
     authority = Authority.find_by_short_name_encoded!(params[:authority_id])
