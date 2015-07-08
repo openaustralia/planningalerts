@@ -12,7 +12,7 @@ class AuthorityLogger < Logger
     # Put a maximum limit on how long the log can get
     e = @authority.last_scraper_run_log + progname + "\n"
     if e.size < 5000
-      @authority.update_attribute(:last_scraper_run_log, e)
+      @authority.update_column(:last_scraper_run_log, e)
     end
   end
 end
