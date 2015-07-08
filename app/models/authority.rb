@@ -22,7 +22,7 @@ class Authority < ActiveRecord::Base
   scope :enabled, -> { where('disabled = 0 or disabled is null') }
   scope :active, -> { where('(disabled = 0 or disabled is null) AND morph_name != "" AND morph_name IS NOT NULL') }
 
-  attr_accessible :full_name, :short_name, :state, :email, :population_2011, :morph_name
+  attr_accessible :full_name, :short_name, :state, :email, :population_2011, :morph_name, :disabled
 
   def full_name_and_state
     full_name + ", " + state
