@@ -51,7 +51,7 @@ GEM
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (5.0.1.20140414130214)
-    atdis (0.3.12)
+    atdis (0.3.13)
       activemodel
       multi_json (~> 1.7)
       rest-client
@@ -241,7 +241,7 @@ GEM
     middleware (0.1.0)
     mime-types (2.6.1)
     minitest (5.7.0)
-    multi_json (1.11.1)
+    multi_json (1.11.2)
     multi_xml (0.5.3)
     multipart-post (1.2.0)
     mysql2 (0.3.18)
