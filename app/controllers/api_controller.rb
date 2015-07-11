@@ -70,7 +70,7 @@ class ApiController < ApplicationController
   # other API calls because the paging is done differently (via scrape time rather than page number)
   def all
     # TODO Check that params page and v aren't being used
-    ApiStatistic.log(request)
+    ApiStatistic.log(request) unless ::Configuration::DISABLE_API_LOGGING
     apps = Application.reorder("id")
     apps = apps.where("id > ?", params["since_id"]) if params["since_id"]
 
@@ -175,7 +175,7 @@ class ApiController < ApplicationController
     @applications = apps.paginate(:page => params[:page], :per_page => per_page)
     @description = description
 
-    ApiStatistic.log(request)
+    ApiStatistic.log(request) unless ::Configuration::DISABLE_API_LOGGING
     respond_to do |format|
       # TODO: Move the template over to using an xml builder
       format.rss do
