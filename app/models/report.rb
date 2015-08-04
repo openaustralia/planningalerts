@@ -3,6 +3,4 @@ class Report < ActiveRecord::Base
   
   validates_presence_of :name, :email, :details
   validates_email_format_of :email, :on => :create
-
-  attr_accessible :name, :email, :details
 end

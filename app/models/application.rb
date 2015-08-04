@@ -17,9 +17,6 @@ class Application < ActiveRecord::Base
   scope :in_past_week, -> { where("date_scraped > ?", 7.days.ago) }
   scope :recent, -> { where("date_scraped >= ?", 14.days.ago) }
 
-  attr_accessible :council_reference, :address, :description, :info_url, :comment_url,
-                  :date_received, :date_scraped, :on_notice_from, :on_notice_to
-
   def date_received_can_not_be_in_the_future
     if date_received && date_received > Date.today
       errors.add(:date_received, 'can not be in the future')

@@ -3,8 +3,6 @@ source "https://rubygems.org"
 gem 'rails', '4.1.11'
 gem 'mysql2', '> 0.3'
 
-# TODO: Swtich to Strong Parameters and remove this
-gem 'protected_attributes'
 # Allow us to use `caches_page`
 gem "actionpack-page_caching"
 # Need to support sweepers

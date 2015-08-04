@@ -7,8 +7,6 @@ class Comment < ActiveRecord::Base
   scope :visible, -> { where(confirmed: true, hidden: false) }
   scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
 
-  attr_accessible :text, :name, :email, :address
-
   # Send the comment to the planning authority
   def after_confirm
     CommentNotifier.delay.notify("default", self)

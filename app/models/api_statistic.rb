@@ -1,8 +1,6 @@
 class ApiStatistic < ActiveRecord::Base
   belongs_to :user
 
-  attr_accessible :ip_address, :query, :user_agent, :query_time, :user
-
   def self.log(request)
     # Lookup the api key if there is one
     user = User.find_by_api_key(request.query_parameters["key"]) unless request.query_parameters["key"].blank?
