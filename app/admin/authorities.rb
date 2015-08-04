@@ -55,4 +55,6 @@ ActiveAdmin.register Authority do
     authority.delay.collect_applications
     redirect_to({:action => :show}, :notice => "Queued for scraping!")
   end
+
+  permit_params :full_name, :short_name, :state, :email, :population_2011, :morph_name, :disabled
 end
