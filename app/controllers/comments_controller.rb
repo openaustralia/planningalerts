@@ -16,8 +16,7 @@ class CommentsController < ApplicationController
     # First check if the honeypot field has been filled out by a spam bot
     # If so, make it look like things worked but don't actually do anything
     if params[:little_sweety].blank?
-      # TODO: Put controls on model so that hash assignment below can't be abused
-      @comment = Comment.new(params[:comment])
+      @comment = Comment.new(comment_params)
       @comment.application_id = @application.id
       if !@comment.save
         flash.now[:error] = "Some of the comment wasn't filled out completely. See below."
@@ -36,5 +35,11 @@ class CommentsController < ApplicationController
     else
       render :text => "", :status => 404
     end
+  end
+
+  private
+
+  def comment_params
+    params.require(:comment).permit(:text, :name, :email, :address)
   end
 end
