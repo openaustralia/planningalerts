@@ -1,6 +1,6 @@
 ActiveAdmin.register Alert do
   menu label: "Alerts"
-  actions :all, except: [:new, :create]
+  actions :index, :show
 
   index title: "Alerts" do
     column :email
