@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  actions :index, :show
+  actions :all
 
   index :download_links => false do
     column :email
@@ -18,4 +18,22 @@ ActiveAdmin.register User do
   end
 
   remove_filter :api_statistics
+
+  form do |f|
+    inputs "Details" do
+      input :email
+      input :name
+      input :organisation
+    end
+    inputs "API" do
+      input :api_key
+      input :bulk_api
+    end
+    inputs "Administration" do
+      input :admin
+    end
+    actions
+  end
+
+  permit_params :email, :name, :organisation, :api_key, :bulk_api, :admin
 end
