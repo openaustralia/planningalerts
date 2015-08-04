@@ -35,4 +35,6 @@ ActiveAdmin.register Comment, :as => "ApplicationComment" do
     end
     actions
   end
+
+  permit_params :text, :email, :name, :confirmed, :address, :hidden
 end
