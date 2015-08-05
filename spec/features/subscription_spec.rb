@@ -1,11 +1,13 @@
 require "spec_helper"
 
 feature "Subscribing for access to several alerts" do
-  scenario "Signing up for a 3rd alert" do
-    email = "mary@enterpriserealty.com"
+  given(:email) { "mary@enterpriserealty.com" }
+  background do
     create(:alert, email: email, confirmed: true, address: "123 King St, Newtown")
     create(:alert, email: email, confirmed: true, address: "456 Marrickville Rd, Marrickville")
+  end
 
+  scenario "Signing up for a 3rd alert" do
     VCR.use_cassette("planningalerts") do
       visit "/alerts/signup"
 
