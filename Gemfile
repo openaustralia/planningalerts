@@ -59,8 +59,7 @@ group :test do
   gem 'capybara', '< 2.0'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
-  # factory_girl 3.x requires Ruby 1.9
-  gem 'factory_girl', '< 3.0'
+  gem 'factory_girl'
   gem 'email_spec'
   gem 'coveralls', :require => false
   gem 'vcr'

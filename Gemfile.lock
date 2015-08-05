@@ -149,10 +149,10 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.7)
     execjs (2.5.2)
-    factory_girl (2.6.4)
-      activesupport (>= 2.3.9)
-    factory_girl_rails (1.7.0)
-      factory_girl (~> 2.6.0)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
     faraday (0.8.7)
       multipart-post (~> 1.1)
@@ -458,7 +458,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise
   email_spec
-  factory_girl (< 3.0)
+  factory_girl
   factory_girl_rails
   foreigner
   foreman
