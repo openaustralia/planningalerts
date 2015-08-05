@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ApiController do
-  let(:user) { Factory.create(:user, email: "foo@bar.com", password: "foofoo")}
+  let(:user) { create(:user, email: "foo@bar.com", password: "foofoo")}
 
   describe "#all" do
     describe "rss" do

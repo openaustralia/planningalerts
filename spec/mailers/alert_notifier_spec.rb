@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe AlertNotifier do
   before :each do
-    @alert = Factory.create(:alert, :email => "matthew@openaustralia.org", :address => "24 Bruce Rd, Glenbrook NSW 2773",
+    @alert = create(:alert, :email => "matthew@openaustralia.org", :address => "24 Bruce Rd, Glenbrook NSW 2773",
       :lat => 1.0, :lng => 2.0, :radius_meters => 800)
     @alert.stub(:confirm_id).and_return("abcdef")
     @original_emails_sent = Stat.emails_sent

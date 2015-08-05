@@ -235,7 +235,7 @@ describe Alert do
     it "should see a new comment when there is a new comments on an application" do
       alert = create(:alert, :email => "matthew@openaustralia.org", :address => @address, :radius_meters => 2000)
       p1 = alert.location.endpoint(0, 501) # 501 m north of alert
-      application = Factory.create(:application, :lat => p1.lat, :lng => p1.lng, :suburb => "", :state => "", :postcode => "")
+      application = create(:application, :lat => p1.lat, :lng => p1.lng, :suburb => "", :state => "", :postcode => "")
       comment1 = create(:comment, application: application, :text => "This is a comment", :name => "Matthew", :email => "matthew@openaustralia.org", :address => "Foo street", :confirmed => true)
       alert.new_comments.should == [comment1]
     end
@@ -243,7 +243,7 @@ describe Alert do
     it "should only see two new comments when there are two new comments on a single application" do
       alert = create(:alert, :email => "matthew@openaustralia.org", :address => @address, :radius_meters => 2000)
       p1 = alert.location.endpoint(0, 501) # 501 m north of alert
-      application = Factory.create(:application, :lat => p1.lat, :lng => p1.lng, :suburb => "", :state => "", :postcode => "")
+      application = create(:application, :lat => p1.lat, :lng => p1.lng, :suburb => "", :state => "", :postcode => "")
       comment1 = create(:comment, application: application, :text => "This is a comment", :name => "Matthew", :email => "matthew@openaustralia.org", :address => "Foo street", :confirmed => true)
       comment2 = create(:comment, application: application, :text => "This is a comment", :name => "Matthew", :email => "matthew@openaustralia.org", :address => "Foo street", :confirmed => true)
       alert.new_comments.should == [comment1, comment2]

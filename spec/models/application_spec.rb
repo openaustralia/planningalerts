@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Application do
   before :each do
     Authority.delete_all
-    @auth = Factory.create(:authority, :full_name => "Fiddlesticks", :state => "NSW", :short_name => "Fiddle")
+    @auth = create(:authority, :full_name => "Fiddlesticks", :state => "NSW", :short_name => "Fiddle")
     # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
     Location.stub(:geocode).and_return(double(:lat => 1.0, :lng => 2.0, :suburb => "Glenbrook", :state => "NSW",
       :postcode => "2773", :success => true))
@@ -11,130 +11,130 @@ describe Application do
 
   describe "validation" do
     describe "date_scraped" do
-      it { Factory.build(:application, :date_scraped => nil).should_not be_valid }
+      it { build(:application, :date_scraped => nil).should_not be_valid }
     end
 
     describe "council_reference" do
       let (:auth1) { create(:authority) }
 
-      it { Factory.build(:application, :council_reference => "").should_not be_valid }
+      it { build(:application, :council_reference => "").should_not be_valid }
 
       context "one application already exists" do
         before :each do
-          Factory.create(:application, :council_reference => "A01", :authority => auth1)
+          create(:application, :council_reference => "A01", :authority => auth1)
         end
         let(:auth2) { create(:authority, :full_name => "A second authority") }
 
-        it { Factory.build(:application, :council_reference => "A01", :authority => auth1).should_not be_valid }
-        it { Factory.build(:application, :council_reference => "A02", :authority => auth1).should be_valid }
-        it { Factory.build(:application, :council_reference => "A01", :authority => auth2).should be_valid }
+        it { build(:application, :council_reference => "A01", :authority => auth1).should_not be_valid }
+        it { build(:application, :council_reference => "A02", :authority => auth1).should be_valid }
+        it { build(:application, :council_reference => "A01", :authority => auth2).should be_valid }
       end
     end
 
     describe "address" do
-      it { Factory.build(:application, :address => "").should_not be_valid }
+      it { build(:application, :address => "").should_not be_valid }
     end
 
     describe "description" do
-      it { Factory.build(:application, :description => "").should_not be_valid }
+      it { build(:application, :description => "").should_not be_valid }
     end
 
     describe "info_url" do
-      it { Factory.build(:application, :info_url => "").should_not be_valid }
-      it { Factory.build(:application, :info_url => "http://blah.com?p=1").should be_valid }
-      it { Factory.build(:application, :info_url => "foo").should_not be_valid }
+      it { build(:application, :info_url => "").should_not be_valid }
+      it { build(:application, :info_url => "http://blah.com?p=1").should be_valid }
+      it { build(:application, :info_url => "foo").should_not be_valid }
     end
 
     describe "comment_url" do
-      it { Factory.build(:application, :comment_url => nil).should be_valid }
-      it { Factory.build(:application, :comment_url => "http://blah.com?p=1").should be_valid }
-      it { Factory.build(:application, :comment_url => "mailto:m@foo.com?subject=hello+sir").should be_valid }
-      it { Factory.build(:application, :comment_url => "foo").should_not be_valid }
-      it { Factory.build(:application, :comment_url => "mailto:council@lakemac.nsw.gov.au?Subject=Redhead%20Beach%20&%20Surf%20Life%20Saving%20Club,%202A%20Beach%20Road,%20REDHEAD%20%20NSW%20%202290%20DA-1699/2014").should be_valid }
+      it { build(:application, :comment_url => nil).should be_valid }
+      it { build(:application, :comment_url => "http://blah.com?p=1").should be_valid }
+      it { build(:application, :comment_url => "mailto:m@foo.com?subject=hello+sir").should be_valid }
+      it { build(:application, :comment_url => "foo").should_not be_valid }
+      it { build(:application, :comment_url => "mailto:council@lakemac.nsw.gov.au?Subject=Redhead%20Beach%20&%20Surf%20Life%20Saving%20Club,%202A%20Beach%20Road,%20REDHEAD%20%20NSW%20%202290%20DA-1699/2014").should be_valid }
     end
 
     describe "date_received" do
-      it { Factory.build(:application, :date_received => nil).should be_valid }
+      it { build(:application, :date_received => nil).should be_valid }
 
       context "the date today is 1 january 2001" do
         before :each do
           Date.stub(:today).and_return(Date.new(2001,1,1))
         end
-        it { Factory.build(:application, :date_received => Date.new(2002,1,1)).should_not be_valid }
-        it { Factory.build(:application, :date_received => Date.new(2000,1,1)).should be_valid }
+        it { build(:application, :date_received => Date.new(2002,1,1)).should_not be_valid }
+        it { build(:application, :date_received => Date.new(2000,1,1)).should be_valid }
       end
     end
 
     describe "on_notice" do
-      it { Factory.build(:application, :on_notice_from => nil, :on_notice_to => nil).should be_valid }
-      it { Factory.build(:application, :on_notice_from => Date.new(2001,1,1), :on_notice_to => Date.new(2001,2,1)).should be_valid }
-      it { Factory.build(:application, :on_notice_from => nil, :on_notice_to => Date.new(2001,2,1)).should be_valid }
-      it { Factory.build(:application, :on_notice_from => Date.new(2001,1,1), :on_notice_to => nil).should be_valid }
-      it { Factory.build(:application, :on_notice_from => Date.new(2001,2,1), :on_notice_to => Date.new(2001,1,1)).should_not be_valid }
+      it { build(:application, :on_notice_from => nil, :on_notice_to => nil).should be_valid }
+      it { build(:application, :on_notice_from => Date.new(2001,1,1), :on_notice_to => Date.new(2001,2,1)).should be_valid }
+      it { build(:application, :on_notice_from => nil, :on_notice_to => Date.new(2001,2,1)).should be_valid }
+      it { build(:application, :on_notice_from => Date.new(2001,1,1), :on_notice_to => nil).should be_valid }
+      it { build(:application, :on_notice_from => Date.new(2001,2,1), :on_notice_to => Date.new(2001,1,1)).should_not be_valid }
     end
   end
 
   describe "getting DA descriptions" do
     it "should allow applications to be blank" do
-      Factory.build(:application, :description => "").description.should == ""
+      build(:application, :description => "").description.should == ""
     end
 
     it "should allow the application description to be nil" do
-      Factory.build(:application, :description => nil).description.should be_nil
+      build(:application, :description => nil).description.should be_nil
     end
 
     it "should start descriptions with a capital letter" do
-      Factory.build(:application, :description => "a description").description.should == "A description"
+      build(:application, :description => "a description").description.should == "A description"
     end
 
     it "should fix capitilisation of descriptions all in caps" do
-      Factory.build(:application, :description => "DWELLING").description.should == "Dwelling"
+      build(:application, :description => "DWELLING").description.should == "Dwelling"
     end
 
     it "should not capitalise descriptions that are partially in lowercase" do
-      Factory.build(:application, :description => "To merge Owners Corporation").description.should == "To merge Owners Corporation"
+      build(:application, :description => "To merge Owners Corporation").description.should == "To merge Owners Corporation"
     end
 
     it "should capitalise the first word of each sentence" do
-      Factory.build(:application, :description => "A SENTENCE. ANOTHER SENTENCE").description.should == "A sentence. Another sentence"
+      build(:application, :description => "A SENTENCE. ANOTHER SENTENCE").description.should == "A sentence. Another sentence"
     end
 
     it "should only capitalise the word if it's all lower case" do
-      Factory.build(:application, :description => 'ab sentence. AB SENTENCE. aB sentence. Ab sentence').description.should ==  'Ab sentence. AB SENTENCE. aB sentence. Ab sentence'
+      build(:application, :description => 'ab sentence. AB SENTENCE. aB sentence. Ab sentence').description.should ==  'Ab sentence. AB SENTENCE. aB sentence. Ab sentence'
     end
 
     it "should allow blank sentences" do
-      Factory.build(:application, :description => "A poorly.    . formed sentence . \n").description.should ==  "A poorly. . Formed sentence. "
+      build(:application, :description => "A poorly.    . formed sentence . \n").description.should ==  "A poorly. . Formed sentence. "
     end
   end
 
   describe "getting addresses" do
     it "should convert words to first letter capitalised form" do
-      Factory.build(:application, :address => "1 KINGSTON AVENUE, PAKENHAM").address.should == "1 Kingston Avenue, Pakenham"
+      build(:application, :address => "1 KINGSTON AVENUE, PAKENHAM").address.should == "1 Kingston Avenue, Pakenham"
     end
 
     it "should not convert words that are not already all in upper case" do
-      Factory.build(:application, :address => "In the paddock next to the radio telescope").address.should == "In the paddock next to the radio telescope"
+      build(:application, :address => "In the paddock next to the radio telescope").address.should == "In the paddock next to the radio telescope"
     end
 
     it "should handle a mixed bag of lower and upper case" do
-      Factory.build(:application, :address => "63 Kimberley drive, SHAILER PARK").address.should == "63 Kimberley drive, Shailer Park"
+      build(:application, :address => "63 Kimberley drive, SHAILER PARK").address.should == "63 Kimberley drive, Shailer Park"
     end
 
     it "should not affect dashes in the address" do
-      Factory.build(:application, :address => "63-81").address.should == "63-81"
+      build(:application, :address => "63-81").address.should == "63-81"
     end
 
     it "should not affect abbreviations like the state names" do
-      Factory.build(:application, :address => "1 KINGSTON AVENUE, PAKENHAM VIC 3810").address.should == "1 Kingston Avenue, Pakenham VIC 3810"
+      build(:application, :address => "1 KINGSTON AVENUE, PAKENHAM VIC 3810").address.should == "1 Kingston Avenue, Pakenham VIC 3810"
     end
 
     it "should not affect the state names" do
-      Factory.build(:application, :address => "QLD VIC NSW SA ACT TAS WA NT").address.should == "QLD VIC NSW SA ACT TAS WA NT"
+      build(:application, :address => "QLD VIC NSW SA ACT TAS WA NT").address.should == "QLD VIC NSW SA ACT TAS WA NT"
     end
 
     it "should not affect codes" do
-      Factory.build(:application, :address => "R79813 24X").address.should == "R79813 24X"
+      build(:application, :address => "R79813 24X").address.should == "R79813 24X"
     end
   end
 
@@ -153,7 +153,7 @@ describe Application do
       logger = double("Logger")
       logger.should_receive(:error).with("Couldn't geocode address: dfjshd")
 
-      a = Factory.build(:application, :address => "dfjshd", :council_reference => "r1", :date_scraped => Time.now)
+      a = build(:application, :address => "dfjshd", :council_reference => "r1", :date_scraped => Time.now)
       a.stub(:logger).and_return(logger)
 
       a.save!
@@ -162,7 +162,7 @@ describe Application do
     end
 
     it "should set the url for showing the address on a google map" do
-      a = Factory.build(:application, :address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1", :date_scraped => Time.now)
+      a = build(:application, :address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1", :date_scraped => Time.now)
       a.map_url.should == "http://maps.google.com/maps?q=24+Bruce+Road%2C+Glenbrook%2C+NSW&z=15"
     end
   end
@@ -288,7 +288,7 @@ describe Application do
     end
 
     it "should collect all the applications from all the authorities over the last n days" do
-      auth2 = Factory.create(:authority, :full_name => "Wombat City Council", :short_name => "Wombat", :state => "NSW")
+      auth2 = create(:authority, :full_name => "Wombat City Council", :short_name => "Wombat", :state => "NSW")
       Date.stub(:today).and_return(Date.new(2010, 1, 10))
       # Overwriting a constant here. Normally generates a warning. Silence it!
       Kernel::silence_warnings { ::Configuration::SCRAPE_DELAY = 1 }
