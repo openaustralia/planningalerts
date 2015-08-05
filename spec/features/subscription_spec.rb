@@ -24,5 +24,9 @@ feature "Subscribing for access to several alerts" do
     click_first_link_in_email
 
     expect(page).to have_content("You now have several email alerts")
+    # We're assuming the user has completed the Stripe form here
+    click_button("Subscribe now $49/month")
+
+    expect(page).to have_content("Thank you for subscribing")
   end
 end

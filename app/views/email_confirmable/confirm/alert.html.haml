@@ -5,8 +5,17 @@
     You will now receive email alerts for any planning applications we find within <strong>#{meters_in_words(@alert.radius_meters)}</strong>
     of <strong>#{@alert.address}</strong>.
   - if @alert.email_has_several_other_alerts?
-    %p
-      You now have several email alerts. PlanningAlerts is free for low-volume, non-commercial use. After a free trial, you'll need to subscribe to keep getting alerts.
+    = form_tag subscriptions_path, id: 'subscription-payment-form', class: 'registration-intro' do
+      %p
+        You now have several email alerts. PlanningAlerts is free for low-volume, non-commercial use. After a free trial, you'll need to subscribe to keep getting alerts.
+      -# TODO: Move to head to block page until it loads
+      -# TODO: Deal with no JavaScript
+      %script{src: "https://checkout.stripe.com/checkout.js"}
+
+      %input{type: 'hidden', name: 'stripeAmount', value: 4900}
+      %button{type: 'submit', id: "button-pro-signup", data: {key: Configuration::STRIPE_PUBLISHABLE_KEY, amount: 4900, email: @alert.email}}
+        Subscribe now $49/month
+
 %p
   You can
   = link_to "change the size of the area covered by the alerts", area_alert_path(:id => @alert.confirm_id)
