@@ -4,8 +4,9 @@
   %p
     You will now receive email alerts for any planning applications we find within <strong>#{meters_in_words(@alert.radius_meters)}</strong>
     of <strong>#{@alert.address}</strong>.
-  %p
-    You now have several email alerts. PlanningAlerts is free for low-volume, non-commercial use. After a free trial, you'll need to subscribe to keep getting alerts.
+  - if Alert.active.where(email: @alert.email).count >= 3
+    %p
+      You now have several email alerts. PlanningAlerts is free for low-volume, non-commercial use. After a free trial, you'll need to subscribe to keep getting alerts.
 %p
   You can
   = link_to "change the size of the area covered by the alerts", area_alert_path(:id => @alert.confirm_id)

@@ -23,6 +23,7 @@ feature "Manage alerts" do
 
     page.should have_content("your alert has been activated")
     page.should have_content("24 Bruce Road, Glenbrook NSW 2773")
+    page.should_not have_content("You now have several email alerts")
     Alert.active.find_by(:address => "24 Bruce Road, Glenbrook NSW 2773", :radius_meters => "2000", :email => current_email_address).should_not be_nil
   end
 
