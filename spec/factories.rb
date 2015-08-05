@@ -27,5 +27,10 @@ FactoryGirl.define do
   end
 
   factory :alert do
+    email "mary@example.org"
+    address "252-254 Illawarra Road Marrickville 2204"
+    lat -33.911105
+    lng 151.155503
+    radius_meters 2000
   end
 end
