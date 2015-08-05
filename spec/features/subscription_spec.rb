@@ -21,6 +21,6 @@ feature "Subscribing for access to several alerts" do
     current_email.default_part_body.to_s.should include("24 Bruce Road, Glenbrook NSW 2773")
     click_first_link_in_email
 
-    page.should have_content("Subscribe for high-volume access")
+    page.should have_content("You now have several email alerts")
   end
 end
