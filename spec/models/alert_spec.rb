@@ -31,8 +31,8 @@ describe Alert do
   
   it "should allow multiple alerts for different street addresses but the same email address" do
     email = "foo@foo.org"
-    Factory(:alert, :email => email, :address => "A street address", :radius_meters => 200, :lat => 1.0, :lng => 2.0)
-    Factory(:alert, :email => email, :address => "Another street address", :radius_meters => 800, :lat => 1.0, :lng => 2.0)
+    create(:alert, :email => email, :address => "A street address", :radius_meters => 200, :lat => 1.0, :lng => 2.0)
+    create(:alert, :email => email, :address => "Another street address", :radius_meters => 800, :lat => 1.0, :lng => 2.0)
     Alert.where(email: email).count.should == 2
   end
   
@@ -40,7 +40,7 @@ describe Alert do
     Location.should_not_receive(:geocode)
     @attributes[:lat] = 1.0
     @attributes[:lng] = 2.0
-    u = Factory(:alert, @attributes)
+    u = create(:alert, @attributes)
     u.lat.should == 1.0
     u.lng.should == 2.0
   end
@@ -171,11 +171,11 @@ describe Alert do
       p2 = @alert.location.endpoint(0, 499) # 499 m north of alert
       p3 = @alert.location.endpoint(45, 499 * Math.sqrt(2)) # Just inside the NE corner of a box centred on the alert (of size 2 * 499m)
       p4 = @alert.location.endpoint(90, 499) # 499 m east of alert
-      auth = Factory(:authority)
-      @app1 = Factory(:application, :lat => p1.lat, :lng => p1.lng, :date_scraped => 5.minutes.ago, :council_reference => "A1", :suburb => "", :state => "", :postcode => "", :authority => auth)
-      @app2 = Factory(:application, :lat => p2.lat, :lng => p2.lng, :date_scraped => 12.hours.ago, :council_reference => "A2", :suburb => "", :state => "", :postcode => "", :authority => auth)
-      @app3 = Factory(:application, :lat => p3.lat, :lng => p3.lng, :date_scraped => 2.days.ago, :council_reference => "A3", :suburb => "", :state => "", :postcode => "", :authority => auth)
-      @app4 = Factory(:application, :lat => p4.lat, :lng => p4.lng, :date_scraped => 4.days.ago, :council_reference => "A4", :suburb => "", :state => "", :postcode => "", :authority => auth)
+      auth = create(:authority)
+      @app1 = create(:application, :lat => p1.lat, :lng => p1.lng, :date_scraped => 5.minutes.ago, :council_reference => "A1", :suburb => "", :state => "", :postcode => "", :authority => auth)
+      @app2 = create(:application, :lat => p2.lat, :lng => p2.lng, :date_scraped => 12.hours.ago, :council_reference => "A2", :suburb => "", :state => "", :postcode => "", :authority => auth)
+      @app3 = create(:application, :lat => p3.lat, :lng => p3.lng, :date_scraped => 2.days.ago, :council_reference => "A3", :suburb => "", :state => "", :postcode => "", :authority => auth)
+      @app4 = create(:application, :lat => p4.lat, :lng => p4.lng, :date_scraped => 4.days.ago, :council_reference => "A4", :suburb => "", :state => "", :postcode => "", :authority => auth)
     end
     
     it "should return applications that have been scraped since the last time the user was sent an alert" do
@@ -217,14 +217,14 @@ describe Alert do
     it "should return the local government authority name" do
       Geo2gov.should_receive(:new).with(1.0, 2.0).and_return(double(:lga_name => "Blue Mountains"))
 
-      a = Factory(:alert, :lat => 1.0, :lng => 2.0, :email => "foo@bar.com", :radius_meters => 200, :address => "")
+      a = create(:alert, :lat => 1.0, :lng => 2.0, :email => "foo@bar.com", :radius_meters => 200, :address => "")
       a.lga_name.should == "Blue Mountains"      
     end
     
     it "should cache the value in the database" do
       Geo2gov.should_receive(:new).once.with(1.0, 2.0).and_return(double(:lga_name => "Blue Mountains"))
 
-      a = Factory(:alert, :id => 1, :lat => 1.0, :lng => 2.0, :email => "foo@bar.com", :radius_meters => 200, :address => "")
+      a = create(:alert, :id => 1, :lat => 1.0, :lng => 2.0, :email => "foo@bar.com", :radius_meters => 200, :address => "")
       a.lga_name.should == "Blue Mountains"
       b = Alert.first
       b.lga_name.should == "Blue Mountains"
@@ -233,19 +233,19 @@ describe Alert do
 
   describe "comments" do
     it "should see a new comment when there is a new comments on an application" do
-      alert = Factory(:alert, :email => "matthew@openaustralia.org", :address => @address, :radius_meters => 2000)
+      alert = create(:alert, :email => "matthew@openaustralia.org", :address => @address, :radius_meters => 2000)
       p1 = alert.location.endpoint(0, 501) # 501 m north of alert
       application = Factory.create(:application, :lat => p1.lat, :lng => p1.lng, :suburb => "", :state => "", :postcode => "")
-      comment1 = Factory(:comment, application: application, :text => "This is a comment", :name => "Matthew", :email => "matthew@openaustralia.org", :address => "Foo street", :confirmed => true)
+      comment1 = create(:comment, application: application, :text => "This is a comment", :name => "Matthew", :email => "matthew@openaustralia.org", :address => "Foo street", :confirmed => true)
       alert.new_comments.should == [comment1]
     end
 
     it "should only see two new comments when there are two new comments on a single application" do
-      alert = Factory(:alert, :email => "matthew@openaustralia.org", :address => @address, :radius_meters => 2000)
+      alert = create(:alert, :email => "matthew@openaustralia.org", :address => @address, :radius_meters => 2000)
       p1 = alert.location.endpoint(0, 501) # 501 m north of alert
       application = Factory.create(:application, :lat => p1.lat, :lng => p1.lng, :suburb => "", :state => "", :postcode => "")
-      comment1 = Factory(:comment, application: application, :text => "This is a comment", :name => "Matthew", :email => "matthew@openaustralia.org", :address => "Foo street", :confirmed => true)
-      comment2 = Factory(:comment, application: application, :text => "This is a comment", :name => "Matthew", :email => "matthew@openaustralia.org", :address => "Foo street", :confirmed => true)
+      comment1 = create(:comment, application: application, :text => "This is a comment", :name => "Matthew", :email => "matthew@openaustralia.org", :address => "Foo street", :confirmed => true)
+      comment2 = create(:comment, application: application, :text => "This is a comment", :name => "Matthew", :email => "matthew@openaustralia.org", :address => "Foo street", :confirmed => true)
       alert.new_comments.should == [comment1, comment2]
     end
   end
@@ -261,7 +261,7 @@ describe Alert do
 
       context "and a new application nearby" do
         let(:application) do
-          Factory(:application, :lat => 1.0, :lng => 2.0, :address => "24 Bruce Road, Glenbrook, NSW",
+          create(:application, :lat => 1.0, :lng => 2.0, :address => "24 Bruce Road, Glenbrook, NSW",
             :suburb => "Glenbrook", :state => "NSW", :postcode => "2773", :no_alerted => 3)
         end
 

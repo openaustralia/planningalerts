@@ -15,7 +15,7 @@ describe Application do
     end
 
     describe "council_reference" do
-      let (:auth1) { Factory(:authority) }
+      let (:auth1) { create(:authority) }
 
       it { Factory.build(:application, :council_reference => "").should_not be_valid }
 
@@ -23,7 +23,7 @@ describe Application do
         before :each do
           Factory.create(:application, :council_reference => "A01", :authority => auth1)
         end
-        let(:auth2) { Factory(:authority, :full_name => "A second authority") }
+        let(:auth2) { create(:authority, :full_name => "A second authority") }
 
         it { Factory.build(:application, :council_reference => "A01", :authority => auth1).should_not be_valid }
         it { Factory.build(:application, :council_reference => "A02", :authority => auth1).should be_valid }
@@ -143,7 +143,7 @@ describe Application do
       loc = double("Location", :lat => -33.772609, :lng => 150.624263, :suburb => "Glenbrook", :state => "NSW",
         :postcode => "2773", :success => true)
       Location.should_receive(:geocode).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
-      a = Factory(:application, :address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1", :date_scraped => Time.now)
+      a = create(:application, :address => "24 Bruce Road, Glenbrook, NSW", :council_reference => "r1", :date_scraped => Time.now)
       a.lat.should == loc.lat
       a.lng.should == loc.lng
     end

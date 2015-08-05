@@ -3,11 +3,11 @@ require 'spec_helper'
 describe Authority do
   describe "detecting authorities with old applications" do
     before :each do
-      @a1 = Factory(:authority)
-      @a2 = Factory(:authority)
+      @a1 = create(:authority)
+      @a2 = create(:authority)
       VCR.use_cassette('planningalerts') do
-        Factory(:application, :authority => @a1, :date_scraped => 3.weeks.ago)
-        Factory(:application, :authority => @a2)
+        create(:application, :authority => @a1, :date_scraped => 3.weeks.ago)
+        create(:application, :authority => @a2)
       end
     end
 
@@ -22,8 +22,8 @@ describe Authority do
 
   describe "short name encoded" do
     before :each do
-      @a1 = Factory(:authority, short_name: "Blue Mountains", full_name: "Blue Mountains City Council")
-      @a2 = Factory(:authority, short_name: "Blue Mountains (new one)", full_name: "Blue Mountains City Council (fictional new one)")
+      @a1 = create(:authority, short_name: "Blue Mountains", full_name: "Blue Mountains City Council")
+      @a2 = create(:authority, short_name: "Blue Mountains (new one)", full_name: "Blue Mountains City Council (fictional new one)")
     end
 
     it "should be constructed by replacing space by underscores and making it all lowercase" do

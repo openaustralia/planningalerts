@@ -6,9 +6,9 @@ feature "Give feedback to Council" do
   # I want to send feedback on a development application directly to the planning authority
 
   scenario "Giving feedback for an authority without a feedback email" do
-    authority = Factory(:authority, :full_name => "Foo")
+    authority = create(:authority, :full_name => "Foo")
     VCR.use_cassette('planningalerts') do
-      application = Factory(:application, :id => "1", :authority_id => authority.id, :comment_url => 'mailto:foo@bar.com')
+      application = create(:application, :id => "1", :authority_id => authority.id, :comment_url => 'mailto:foo@bar.com')
       visit(application_path(application))
     end
 
@@ -16,9 +16,9 @@ feature "Give feedback to Council" do
   end
 
   scenario "Hide feedback form where there is no feedback email or comment_url" do
-    authority = Factory(:authority, :full_name => "Foo")
+    authority = create(:authority, :full_name => "Foo")
     VCR.use_cassette('planningalerts') do
-      application = Factory(:application, :id => "1", :authority_id => authority.id)
+      application = create(:application, :id => "1", :authority_id => authority.id)
       visit(application_path(application))
     end
 
@@ -26,9 +26,9 @@ feature "Give feedback to Council" do
   end
 
   scenario "Adding a comment" do
-    authority = Factory(:authority, :full_name => "Foo", :email => "feedback@foo.gov.au")
+    authority = create(:authority, :full_name => "Foo", :email => "feedback@foo.gov.au")
     VCR.use_cassette('planningalerts') do
-      application = Factory(:application, :id => "1", :authority_id => authority.id)
+      application = create(:application, :id => "1", :authority_id => authority.id)
       visit(application_path(application))
     end
 
@@ -50,10 +50,10 @@ feature "Give feedback to Council" do
   end
 
   scenario "Unconfirmed comment should not be shown" do
-    authority = Factory(:authority, :full_name => "Foo", :email => "feedback@foo.gov.au")
+    authority = create(:authority, :full_name => "Foo", :email => "feedback@foo.gov.au")
     VCR.use_cassette('planningalerts') do
-      application = Factory(:application, :id => "1", :authority_id => authority.id)
-      Factory(:comment, :confirmed => false, :text => "I think this is a really good ideas", :application => application)
+      application = create(:application, :id => "1", :authority_id => authority.id)
+      create(:comment, :confirmed => false, :text => "I think this is a really good ideas", :application => application)
       visit(application_path(application))
     end
 
@@ -61,10 +61,10 @@ feature "Give feedback to Council" do
   end
 
   scenario "Confirming the comment" do
-    authority = Factory(:authority, :full_name => "Foo", :email => "feedback@foo.gov.au")
+    authority = create(:authority, :full_name => "Foo", :email => "feedback@foo.gov.au")
     VCR.use_cassette('planningalerts') do
-      application = Factory(:application, :id => "1", :authority_id => authority.id)
-      comment = Factory(:comment, :confirmed => false, :text => "I think this is a really good ideas", :application => application)
+      application = create(:application, :id => "1", :authority_id => authority.id)
+      comment = create(:comment, :confirmed => false, :text => "I think this is a really good ideas", :application => application)
       visit(confirmed_comment_path(:id => comment.confirm_id))
     end
 
@@ -80,7 +80,7 @@ feature "Give feedback to Council" do
     email_moderator = ::Configuration::EMAIL_MODERATOR
     Kernel::silence_warnings { ::Configuration::EMAIL_MODERATOR = "moderator@planningalerts.org.au" }
     VCR.use_cassette('planningalerts') do
-      comment = Factory(:comment, :confirmed => true, :text => "I'm saying something abusive", :name => "Jack Rude", :email => "rude@foo.com", :id => "23")
+      comment = create(:comment, :confirmed => true, :text => "I'm saying something abusive", :name => "Jack Rude", :email => "rude@foo.com", :id => "23")
       visit(new_comment_report_path(comment))
     end
 

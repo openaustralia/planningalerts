@@ -13,7 +13,7 @@ describe ApiController do
     describe "json" do
       it "should not find recent applications if no api key is given" do
         VCR.use_cassette('planningalerts') do
-          result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+          result = create(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
           Application.stub_chain(:where, :paginate).and_return([result])
         end
         get :all, :format => "js"
@@ -23,7 +23,7 @@ describe ApiController do
 
       it "should error if invalid api key is given" do
         VCR.use_cassette('planningalerts') do
-          result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+          result = create(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
           Application.stub_chain(:where, :paginate).and_return([result])
         end
         get :all, :key => "jsdfhsd", :format => "js"
@@ -33,7 +33,7 @@ describe ApiController do
 
       it "should error if valid api key is given but no bulk api access" do
         VCR.use_cassette('planningalerts') do
-          result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
+          result = create(:application, :id => 10, :date_scraped => Time.utc(2001,1,1))
           Application.stub_chain(:where, :paginate).and_return([result])
         end
         get :all, :key => user.api_key, :format => "js"
@@ -44,8 +44,8 @@ describe ApiController do
       it "should find recent applications if api key is given" do
         user.update_attribute(:bulk_api, true)
         VCR.use_cassette('planningalerts') do
-          authority = Factory(:authority, full_name: "Acme Local Planning Authority")
-          result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1), authority: authority)
+          authority = create(:authority, full_name: "Acme Local Planning Authority")
+          result = create(:application, :id => 10, :date_scraped => Time.utc(2001,1,1), authority: authority)
           Application.stub_chain(:where, :paginate).and_return([result])
         end
         get :all, :key => user.api_key, :format => "js"
@@ -97,8 +97,8 @@ describe ApiController do
 
     it "should support jsonp" do
       VCR.use_cassette('planningalerts') do
-        authority = Factory(:authority, full_name: "Acme Local Planning Authority")
-        result = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1), authority: authority)
+        authority = create(:authority, full_name: "Acme Local Planning Authority")
+        result = create(:application, :id => 10, :date_scraped => Time.utc(2001,1,1), authority: authority)
         Application.stub_chain(:where, :paginate).and_return([result])
       end
       xhr :get, :postcode, key: user.api_key, format: "js", postcode: "2780", callback: "foobar"
@@ -128,8 +128,8 @@ describe ApiController do
 
     it "should support json api version 2" do
       VCR.use_cassette('planningalerts') do
-        authority = Factory(:authority, full_name: "Acme Local Planning Authority")
-        application = Factory(:application, :id => 10, :date_scraped => Time.utc(2001,1,1), authority: authority)
+        authority = create(:authority, full_name: "Acme Local Planning Authority")
+        application = create(:application, :id => 10, :date_scraped => Time.utc(2001,1,1), authority: authority)
         result = [application]
         result.stub(:total_pages).and_return(5)
         Application.stub_chain(:where, :paginate).and_return(result)
