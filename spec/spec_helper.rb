@@ -48,6 +48,8 @@ RSpec.configure do |config|
 
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
+  config.include FactoryGirl::Syntax::Methods
+
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
