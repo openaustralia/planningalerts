@@ -1,6 +1,10 @@
 require "spec_helper"
 
 feature "Subscribing for access to several alerts" do
+  let(:stripe_helper) { StripeMock.create_test_helper }
+  before { StripeMock.start }
+  after { StripeMock.stop }
+
   given(:email) { "mary@enterpriserealty.com" }
   background do
     create(:alert, email: email, confirmed: true, address: "123 King St, Newtown")
