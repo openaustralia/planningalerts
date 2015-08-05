@@ -316,4 +316,25 @@ describe Alert do
       end
     end
   end
+
+  describe "#email_has_several_other_alerts?" do
+    let(:email) { "luke@example.org" }
+    let(:alert) { Alert.find_by(email: email) }
+
+    before :each do
+      2.times { create(:alert, confirmed: true, email: email) }
+    end
+
+    context "2 alerts" do
+      it { expect(alert.email_has_several_other_alerts?).to be_false }
+    end
+
+    context "3 alerts or more" do
+      before :each do
+        create(:alert, confirmed: true, email: email)
+      end
+
+      it { expect(alert.email_has_several_other_alerts?).to be_true }
+    end
+  end
 end

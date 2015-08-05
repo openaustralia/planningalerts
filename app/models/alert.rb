@@ -187,6 +187,10 @@ class Alert < ActiveRecord::Base
     [total_no_emails, total_no_applications, total_no_comments]
   end
 
+  def email_has_several_other_alerts?
+    Alert.active.where(email: email).count >= 3
+  end
+
   private
 
   def remove_other_alerts_for_this_address
