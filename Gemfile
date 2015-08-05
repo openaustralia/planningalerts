@@ -55,8 +55,7 @@ gem 'honeybadger'
 gem 'stripe'
 
 group :test do
-  # Apparently capybara 2 only works with Ruby 1.9
-  gem 'capybara', '< 2.0'
+  gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'factory_girl'
