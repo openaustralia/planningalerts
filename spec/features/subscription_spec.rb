@@ -31,6 +31,6 @@ feature "Subscribing for access to several alerts" do
     # We're assuming the user has completed the Stripe form here
     click_button("Subscribe now $49/month")
 
-    expect(page).to have_content("Thank you for subscribing")
+    expect(page).to have_content("Your subscription for mary@enterpriserealty.com has been confirmed")
   end
 end
