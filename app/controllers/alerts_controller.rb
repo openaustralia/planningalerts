@@ -19,6 +19,11 @@ class AlertsController < ApplicationController
     end
   end
 
+  def confirmed
+    @alert = Alert.find_by!(confirm_id: params[:id])
+    @alert.confirm!
+  end
+
   def unsubscribe
     @alert = Alert.find_by_confirm_id(params[:id])
     @alert.update_attribute(:unsubscribed, true) if @alert

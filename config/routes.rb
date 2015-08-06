@@ -120,7 +120,7 @@ PlanningalertsApp::Application.routes.draw do
   get 'layar/getpoi' => 'layar#getpoi'
 
   get 'comments/:id/confirmed' => 'comments#confirmed', :as => :confirmed_comment
-  get 'alerts/:id/confirmed' => 'email_confirmable/confirm#confirmed', :as => :confirmed_alert, :resource => 'alerts'
+  get 'alerts/:id/confirmed' => 'alerts#confirmed', :as => :confirmed_alert
 
   get '/vanity(/:action(/:id(.:format)))', :controller=>:vanity
 
