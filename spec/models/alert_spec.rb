@@ -162,7 +162,25 @@ describe Alert do
       u.confirmed.should == true
     end
   end
-  
+
+  describe "#confirm!" do
+    let(:alert) { Alert.create!(@attributes) }
+    before do
+      alert.stub(:email_has_several_other_alerts?).and_return(true)
+    end
+
+    it "should create a new subscription if you have several other alerts" do
+      Subscription.should_receive(:create_trial_subscription_for).with(@attributes[:email])
+      alert.confirm!
+    end
+
+    it "should not create a subscription if you already have one" do
+      alert.stub(:subscription).and_return(mock_model(Subscription))
+      Subscription.should_not_receive(:create_trial_subscription_for)
+      alert.confirm!
+    end
+  end
+
   describe "recent applications for this user" do
     before :each do
       @alert = Alert.create!(:email => "matthew@openaustralia.org", :address => @address, :radius_meters => 2000)
