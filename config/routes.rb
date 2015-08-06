@@ -80,6 +80,9 @@ PlanningalertsApp::Application.routes.draw do
   end
 
   resources :comments, :only => [:index] do
+    member do
+      get :confirmed
+    end
     resources :reports, :only => [:new, :create]
   end
 
@@ -119,8 +122,6 @@ PlanningalertsApp::Application.routes.draw do
   get '/' => 'applications#address', :as => :address_applications
 
   get 'layar/getpoi' => 'layar#getpoi'
-
-  get 'comments/:id/confirmed' => 'comments#confirmed', :as => :confirmed_comment
 
   get '/vanity(/:action(/:id(.:format)))', :controller=>:vanity
 
