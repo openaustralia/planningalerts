@@ -1,4 +1,6 @@
 class Alert < ActiveRecord::Base
+  belongs_to :subscription, foreign_key: :email, primary_key: :email
+
   validates_numericality_of :radius_meters, :greater_than => 0, :message => "isn't selected"
   validate :validate_address
 

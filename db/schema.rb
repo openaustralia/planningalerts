@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710014603) do
+ActiveRecord::Schema.define(version: 20150806021808) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "resource_id",   null: false
@@ -160,6 +160,13 @@ ActiveRecord::Schema.define(version: 20150710014603) do
   create_table "stats", force: true do |t|
     t.string  "key",   limit: 25, null: false
     t.integer "value",            null: false
+  end
+
+  create_table "subscriptions", force: true do |t|
+    t.string  "email"
+    t.integer "trial_days_remaining"
+    t.string  "stripe_customer_id"
+    t.string  "stripe_subscription_id"
   end
 
   create_table "users", force: true do |t|
