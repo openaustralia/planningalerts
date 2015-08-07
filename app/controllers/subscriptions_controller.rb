@@ -32,7 +32,7 @@ class SubscriptionsController < ApplicationController
       )
       # TODO: Set the plan ID correctly
       stripe_subscription = customer.subscriptions.create(plan: "TODO")
-      subscription.update!(stripe_subscription_id: subscription.id,  stripe_customer_id: customer.id)
+      subscription.update!(stripe_subscription_id: stripe_subscription.id,  stripe_customer_id: customer.id)
     end
 
   # TODO: rescue and redirect to new on attempt to reload the create page
