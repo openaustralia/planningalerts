@@ -29,6 +29,7 @@ feature "Subscribing for access to several alerts" do
 
     expect(page).to have_content("You now have several email alerts")
     expect(Subscription.find_by!(email: email).trial_days_remaining).to eql 14
+    expect(Subscription.find_by!(email: email)).to be_trial
     # We're assuming the user has completed the Stripe form here
     click_button("Subscribe now $49/month")
 
