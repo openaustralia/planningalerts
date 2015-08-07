@@ -14,6 +14,7 @@
 
       %input{type: 'hidden', name: 'stripeAmount', value: 4900}
       %input{type: 'hidden', name: 'stripeEmail', value: @alert.email}
+      %input{type: 'hidden', name: 'stripeToken', value: ""}
       %button{type: 'submit', id: "button-pro-signup", data: {key: Configuration::STRIPE_PUBLISHABLE_KEY, amount: 4900, email: @alert.email}}
         Subscribe now $49/month
 

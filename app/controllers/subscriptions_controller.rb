@@ -20,8 +20,9 @@ class SubscriptionsController < ApplicationController
 
   def create
     @email = params[:stripeEmail]
+    subscription = Subscription.find_by(email: @email)
 
-    if @email.blank?
+    if @email.blank? || subscription.blank?
       redirect_to new_subscription_path, alert: 'Sorry, there&rsquo;s an error in the form. <strong><a href="mailto:contact@planningalerts.org.au?subject=Unable to subscribe">Please contact us</a></strong>.'.html_safe
     else
       customer = Stripe::Customer.create(
@@ -29,6 +30,9 @@ class SubscriptionsController < ApplicationController
         card: params[:stripeToken],
         description: "$#{params[:stripeAmount][0...-2]}/month PlanningAlerts subscription"
       )
+      # TODO: Set the plan ID correctly
+      stripe_subscription = customer.subscriptions.create(plan: "TODO")
+      subscription.update!(stripe_subscription_id: subscription.id,  stripe_customer_id: customer.id)
     end
 
   # TODO: rescue and redirect to new on attempt to reload the create page

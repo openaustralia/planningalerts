@@ -2,7 +2,13 @@ require "spec_helper"
 
 feature "Subscribing for access to several alerts" do
   let(:stripe_helper) { StripeMock.create_test_helper }
-  before { StripeMock.start }
+  before do
+    StripeMock.start
+    # TODO: Set the plan ID correctly
+    # When plan is set to 0 StripeMock doesn't check for the card number when creating the customer
+    # FIXME: StripeMock should create a customer when only a token is supplied
+    stripe_helper.create_plan(id: "TODO", amount: 0)
+  end
   after { StripeMock.stop }
 
   given(:email) { "mary@enterpriserealty.com" }
@@ -30,9 +36,12 @@ feature "Subscribing for access to several alerts" do
     expect(page).to have_content("You now have several email alerts")
     expect(Subscription.find_by!(email: email).trial_days_remaining).to eql 14
     expect(Subscription.find_by!(email: email)).to be_trial
-    # We're assuming the user has completed the Stripe form here
+    # Fake what the Stripe JS does (i.e. inject the token in the form if successful)
+    # FIXME: This isn't having an effect because we're just setting the plan amout to 0. See comment above.
+    first("input[name='stripeToken']", visible: false).set(stripe_helper.generate_card_token)
     click_button("Subscribe now $49/month")
 
     expect(page).to have_content("Your subscription for mary@enterpriserealty.com has been confirmed")
+    expect(Subscription.find_by!(email: email)).to be_paid
   end
 end
