@@ -28,6 +28,7 @@ class SubscriptionsController < ApplicationController
       customer = Stripe::Customer.create(
         email: @email,
         card: params[:stripeToken],
+        # TODO: Remove this amount thing because we'll just be using a plan
         description: "$#{params[:stripeAmount][0...-2]}/month PlanningAlerts subscription"
       )
       # TODO: Set the plan ID correctly
