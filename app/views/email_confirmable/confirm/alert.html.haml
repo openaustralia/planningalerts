@@ -4,8 +4,8 @@
   %p
     You will now receive email alerts for any planning applications we find within <strong>#{meters_in_words(@alert.radius_meters)}</strong>
     of <strong>#{@alert.address}</strong>.
-  - # TODO: Don't show this if they're already signed up
-  - if @alert.email_has_several_other_alerts?
+
+  - if @alert.reload.subscription.try(:trial?)
     = form_tag subscriptions_path, id: 'subscription-payment-form', class: 'registration-intro' do
       %p
         You now have several email alerts. PlanningAlerts is free for low-volume, non-commercial use. After a free trial, you'll need to subscribe to keep getting alerts.
