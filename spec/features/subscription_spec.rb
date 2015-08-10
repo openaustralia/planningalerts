@@ -43,4 +43,13 @@ feature "Subscribing for access to several alerts" do
     expect(page).to have_content("Your subscription for mary@enterpriserealty.com has been confirmed")
     expect(Subscription.find_by!(email: email)).to be_paid
   end
+
+  scenario "Clicking the link in trial period alert banner and then subscribing" do
+    # an email address with a subscription is in its trial period
+    # the email address receives a planning alert with a new application
+    # the person clicks a link in the trail banner
+    # they are taken to a page where they can subscribe
+    # they subscribe
+    # their subscription is confirmed
+  end
 end
