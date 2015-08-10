@@ -5,6 +5,7 @@ $dark_gray: #878787;
 $mid_gray: #989898;
 $light_gray: #eeeeee;
 $lightest_gray: #fafafa;
+$teal_blue: #2C9EB5;
 
 .box {
   margin: 6px 11px 25px;
@@ -28,6 +29,22 @@ a {
     font-weight: bold;
     font-size: 20px;
     text-decoration: none;
+  }
+}
+
+.trial-banner {
+  margin-top: 0;
+  background-color: $teal_blue;
+  color: #ffffff;
+  font-size: 14px;
+
+  a {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  p {
+    margin-top: 0;
   }
 }
 
