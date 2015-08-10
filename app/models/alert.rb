@@ -195,6 +195,7 @@ class Alert < ActiveRecord::Base
 
   def confirm!
     super
+    # TODO: Move this out of here. It's a hack because this isn't part of what "confirm!" should do
     Subscription.create_trial_subscription_for(email) if email_has_several_other_alerts? && subscription.nil?
   end
 
