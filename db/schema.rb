@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150810044024) do
+ActiveRecord::Schema.define(version: 20150810044318) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "resource_id",   null: false
@@ -163,10 +163,12 @@ ActiveRecord::Schema.define(version: 20150810044024) do
   end
 
   create_table "subscriptions", force: true do |t|
-    t.string  "email"
-    t.integer "trial_days_remaining"
-    t.string  "stripe_customer_id"
-    t.string  "stripe_subscription_id"
+    t.string   "email"
+    t.integer  "trial_days_remaining"
+    t.string   "stripe_customer_id"
+    t.string   "stripe_subscription_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "subscriptions", ["email"], name: "index_subscriptions_on_email", unique: true, using: :btree
