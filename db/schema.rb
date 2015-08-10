@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150810044318) do
+ActiveRecord::Schema.define(version: 20150810044659) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "resource_id",   null: false
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 20150810044318) do
     t.datetime "last_processed"
     t.string   "theme",                      default: "default", null: false
   end
+
+  add_index "alerts", ["email"], name: "index_alerts_on_email", using: :btree
 
   create_table "api_statistics", force: true do |t|
     t.string   "ip_address"
