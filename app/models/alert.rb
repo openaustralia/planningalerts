@@ -193,6 +193,12 @@ class Alert < ActiveRecord::Base
     Alert.active.where(email: email).count >= 3
   end
 
+  def create_subscription_if_required
+    if email_has_several_other_alerts? && subscription.nil?
+      Subscription.create_trial_subscription_for(email)
+    end
+  end
+
   private
 
   def remove_other_alerts_for_this_address
