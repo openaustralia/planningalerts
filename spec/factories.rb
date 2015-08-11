@@ -33,4 +33,8 @@ FactoryGirl.define do
     lng 151.155503
     radius_meters 2000
   end
+
+  factory :subscription do
+    sequence(:email) { |s| "mary#{s}@enterpriserealty.com.au" }
+  end
 end
