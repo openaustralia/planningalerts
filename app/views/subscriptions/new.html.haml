@@ -2,13 +2,12 @@
 
 .registration-page
   = form_tag subscriptions_path, id: 'subscription-payment-form', class: 'registration-intro' do
-    %h1 Sift through less email and get more useful&nbsp;alerts
+    %h1 Get planning alerts for all the locations you need
 
-    %p You’ll get all your alerts in one email so you never have to sift&nbsp;through your inbox&nbsp;again.
-
-    %p Discover new opportunities by watching as many locations as&nbsp;you&nbsp;need.
-
-    %p Make sure your coverage is complete. You can easily add and edit addresses from your full list of alerts in one&nbsp;place.
+    %p
+      While personal use of PlanningAlerts is free
+      tracking multiple locations, or using it for commercial purposes,
+      requires an active subscription.
 
     -# TODO: Move to head to block page until it loads
     %script{src: "https://checkout.stripe.com/checkout.js"}
