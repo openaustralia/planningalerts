@@ -9,14 +9,6 @@
   @include at-breakpoint(60em) {
     padding-bottom: 6em;
   }
-
-  p {
-    font-size: 1.1em;
-
-    @include at-breakpoint(40em) {
-      font-size: 1.3em;
-    }
-  }
 }
 
 .registration-success-page {
