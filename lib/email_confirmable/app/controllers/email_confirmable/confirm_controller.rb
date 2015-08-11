@@ -1,4 +1,5 @@
 class EmailConfirmable::ConfirmController < ApplicationController
+  # TODO: This is no longer used so maybe we should remove it
   def confirmed
     object = params[:resource].classify.constantize.find_by_confirm_id(params[:id])
     if object
