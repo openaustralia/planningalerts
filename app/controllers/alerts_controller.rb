@@ -22,6 +22,9 @@ class AlertsController < ApplicationController
   def confirmed
     @alert = Alert.find_by!(confirm_id: params[:id])
     @alert.confirm!
+    if @alert.email_has_several_other_alerts? && @alert.subscription.nil?
+      Subscription.create_trial_subscription_for(@alert.email)
+    end
   end
 
   def unsubscribe
