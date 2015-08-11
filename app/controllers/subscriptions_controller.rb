@@ -30,8 +30,7 @@ class SubscriptionsController < ApplicationController
         card: params[:stripeToken],
         description: "PlanningAlerts subscriber"
       )
-      # TODO: Set the plan ID correctly
-      stripe_subscription = customer.subscriptions.create(plan: "TODO")
+      stripe_subscription = customer.subscriptions.create(plan: "planningalerts")
       subscription.update!(stripe_subscription_id: stripe_subscription.id,  stripe_customer_id: customer.id)
     end
 
