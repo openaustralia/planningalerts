@@ -1,13 +1,13 @@
 .registration-page,
 .registration-success-page {
-  padding-bottom: 2em;
+  padding-bottom: 4em;
 
   @include at-breakpoint(40em) {
-    padding-bottom: 4em;
+    padding-bottom: 8em;
   }
 
   @include at-breakpoint(60em) {
-    padding-bottom: 6em;
+    padding-bottom: 9em;
   }
 }
 
