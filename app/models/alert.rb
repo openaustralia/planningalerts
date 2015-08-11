@@ -194,7 +194,7 @@ class Alert < ActiveRecord::Base
   end
 
   def create_subscription_if_required
-    if email_has_several_other_alerts? && subscription.nil?
+    if Subscription::FEATURE_ENABLED && email_has_several_other_alerts? && subscription.nil?
       Subscription.create!(email: email, trial_started_at: Date.today)
     end
   end

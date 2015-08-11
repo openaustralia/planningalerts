@@ -2,6 +2,8 @@ class Subscription < ActiveRecord::Base
   has_many :alerts, foreign_key: :email, primary_key: :email
   validates :email, uniqueness: true
 
+  FEATURE_ENABLED = !Rails.env.production?
+
   def trial_end_at
     trial_started_at + 14.days
   end
