@@ -7,7 +7,7 @@ describe AlertsController do
 
   describe "confirming" do
     it "should set the alert to be confirmed" do
-      alert = mock_model(Alert)
+      alert = create(:alert)
       Alert.should_receive(:find_by!).with(confirm_id: "1234").and_return(alert)
       alert.should_receive(:confirm!)
       get :confirmed, :resource => 'alerts', :id => "1234"
@@ -15,7 +15,7 @@ describe AlertsController do
 
     it "should set the alert to be confirmed when on an iPhone" do
       request.stub(:user_agent).and_return('iphone')
-      alert = mock_model(Alert)
+      alert = create(:alert)
       Alert.should_receive(:find_by!).with(confirm_id: "1234").and_return(alert)
       alert.should_receive(:confirm!)
       get :confirmed, :resource => 'alerts', :id => "1234"
