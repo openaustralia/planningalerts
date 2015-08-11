@@ -11,6 +11,18 @@
   }
 }
 
+.registration-intro {
+  @include at-breakpoint(53em) {
+    width: 60%;
+  }
+
+  p {
+    @include at-breakpoint(40em) {
+      font-size: 1.175em;
+    }
+  }
+}
+
 .registration-success-page {
   @include at-breakpoint(40em) {
     @include span-columns(11, 12);
