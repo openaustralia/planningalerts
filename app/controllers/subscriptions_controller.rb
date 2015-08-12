@@ -15,6 +15,7 @@ class SubscriptionsController < ApplicationController
 
     if params[:email]
       @email = params[:email]
+      @subscription = Subscription.find_by(email: @email)
     end
   end
 
