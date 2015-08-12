@@ -11,8 +11,7 @@
       and use PlanningAlerts in your work.
 
     - if Subscription.find_by(email: @email).try :trial?
-      - # TODO: make the day count dynamic
-      %p You’ve got three days left on your trial subscription.
+      %p You’ve got #{ pluralize(Subscription.find_by(email: @email).trial_days_remaining, 'day') } left on your trial subscription.
 
     -# TODO: Move to head to block page until it loads
     %script{src: "https://checkout.stripe.com/checkout.js"}
