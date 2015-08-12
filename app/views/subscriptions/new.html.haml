@@ -1,20 +1,17 @@
-- content_for :page_title, 'Get less email & more useful alerts'
+- content_for :page_title, 'Subscribe here'
 
 .registration-page
   = form_tag subscriptions_path, id: 'subscription-payment-form', class: 'registration-intro' do
-    %h1 Sift through less email and get more useful&nbsp;alerts
+    %h1.page-title Subscribe here
 
-    %p You’ll get all your alerts in one email so you never have to sift&nbsp;through your inbox&nbsp;again.
-
-    %p Discover new opportunities by watching as many locations as&nbsp;you&nbsp;need.
-
-    %p Make sure your coverage is complete. You can easily add and edit addresses from your full list of alerts in one&nbsp;place.
+    %p
+      Subscribe here to get alerts of planning applications near several addresses.
+      Once you’re subscribed you can sign up for alerts from as many locations as you need
+      and use PlanningAlerts in your work.
 
     -# TODO: Move to head to block page until it loads
     %script{src: "https://checkout.stripe.com/checkout.js"}
 
     %input{type: 'hidden', name: 'stripeAmount', value: @amount}
-    %button{disabled: true, type: 'submit', id: "button-pro-signup", data: {key: Configuration::STRIPE_PUBLISHABLE_KEY, amount: @amount, email: (@email if @email)}}
+    %button{disabled: true, type: 'submit', class: "button-action", id: "button-pro-signup", data: {key: Configuration::STRIPE_PUBLISHABLE_KEY, amount: @amount, email: (@email if @email)}}
       Subscribe now #{@display_amount}/month
-
-    %p No lock-in. Cancel anytime.
