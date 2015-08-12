@@ -47,12 +47,28 @@ feature "Subscribing for access to several alerts" do
     end
   end
 
-  scenario "Clicking the link in trial period alert banner and then subscribing" do
-    # an email address with a subscription is in its trial period
-    # the email address receives a planning alert with a new application
-    # the person clicks a link in the trail banner
-    # they are taken to a page where they can subscribe
-    # they subscribe
-    # their subscription is confirmed
+  context "Trial subscription" do
+    given(:alert) { create(:alert, email: email, confirmed: true, lat: -33.911105, lng: 151.155503, address: "123 Illawarra Road Marrickville 2204") }
+    background do
+      create(:subscription, email: email)
+      create(:application, address: "252 Illawarra Road Marrickville 2204",
+                           lat: -33.911105,
+                           lng: 151.155503,
+                           suburb: "Marrickville",
+                           state: "NSW",
+                           postcode: "2204")
+    end
+
+    scenario "Alerts contain a trial subscription banner that I can click to subscription" do
+      alert.process!
+      open_email(email)
+      expect(current_email).to have_subject("1 new planning application near 123 Illawarra Road Marrickville 2204")
+      # expect(current_email.default_part_body.to_s).to include("Trial subscription")
+
+      # the person clicks a link in the trail banner
+      # they are taken to a page where they can subscribe
+      # they subscribe
+      # their subscription is confirmed
+    end
   end
 end
