@@ -1,4 +1,6 @@
 class Alert < ActiveRecord::Base
+  belongs_to :subscription, foreign_key: :email, primary_key: :email
+
   validates_numericality_of :radius_meters, :greater_than => 0, :message => "isn't selected"
   validate :validate_address
 
@@ -185,6 +187,16 @@ class Alert < ActiveRecord::Base
     EmailBatch.create!(:no_emails => total_no_emails, :no_applications => total_no_applications,
       :no_comments => total_no_comments)
     [total_no_emails, total_no_applications, total_no_comments]
+  end
+
+  def email_has_several_other_alerts?
+    Alert.active.where(email: email).count >= 3
+  end
+
+  def create_subscription_if_required
+    if Subscription::FEATURE_ENABLED && email_has_several_other_alerts? && subscription.nil?
+      Subscription.create!(email: email, trial_started_at: Date.today)
+    end
   end
 
   private
