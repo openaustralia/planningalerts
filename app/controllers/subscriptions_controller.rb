@@ -5,7 +5,7 @@ class SubscriptionsController < ApplicationController
 
   def create
     @email = params[:stripeEmail]
-    subscription = Subscription.find_by(email: @email)
+    subscription = Subscription.find_or_create_by(email: @email)
 
     if @email.blank? || subscription.blank?
       redirect_to new_subscription_path, alert: 'Sorry, there&rsquo;s an error in the form. <strong><a href="mailto:contact@planningalerts.org.au?subject=Unable to subscribe">Please contact us</a></strong>.'.html_safe
