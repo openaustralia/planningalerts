@@ -12,9 +12,7 @@
 }
 
 .registration-intro {
-  @include at-breakpoint(53em) {
-    width: 60%;
-  }
+  max-width: 42em;
 
   p {
     @include at-breakpoint(40em) {
