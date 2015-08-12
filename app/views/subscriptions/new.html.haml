@@ -12,7 +12,7 @@
 
     - if @subscription && @subscription.trial?
       %p
-        You’ve got
+        You have
         = pluralize(@subscription.trial_days_remaining, 'day')
         left on your trial subscription.
 
