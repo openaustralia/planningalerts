@@ -12,5 +12,5 @@
     -# TODO: Move to head to block page until it loads
     %script{src: "https://checkout.stripe.com/checkout.js"}
 
-    %button{disabled: true, type: 'submit', class: "button-action", id: "button-pro-signup", data: {key: Configuration::STRIPE_PUBLISHABLE_KEY, amount: 4900, email: (@email if @email)}}
+    %button{disabled: true, type: 'submit', class: "button-action", id: "button-pro-signup", data: {key: Configuration::STRIPE_PUBLISHABLE_KEY, amount: 4900, email: @email}}
       Subscribe now $49/month
