@@ -10,6 +10,10 @@
       Once you’re subscribed you can sign up for alerts from as many locations as you need
       and use PlanningAlerts in your work.
 
+    - if Subscription.find_by(email: @email).try :trial?
+      - # TODO: make the day count dynamic
+      %p You’ve got three days left on your trial subscription.
+
     -# TODO: Move to head to block page until it loads
     %script{src: "https://checkout.stripe.com/checkout.js"}
 
