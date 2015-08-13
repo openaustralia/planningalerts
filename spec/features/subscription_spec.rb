@@ -31,7 +31,7 @@ feature "Subscribing for access to several alerts" do
 
       open_last_email_for(email)
       expect(current_email).to have_subject("Please confirm your planning alert")
-      expect(current_email.default_part_body.to_s).to include("24 Bruce Road, Glenbrook NSW 2773")
+      expect(current_email).to have_body_text("24 Bruce Road, Glenbrook NSW 2773")
       click_first_link_in_email
 
       expect(page).to have_content("You now have several email alerts")
