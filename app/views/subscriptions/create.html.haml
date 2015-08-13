@@ -6,7 +6,7 @@
   %p Your subscription for #{@email} has been confirmed.Thank&nbsp;you.
 
   %p
-    Go forth and #{link_to "add alerts to your heart's desire", new_alert_path}.
+    Go forth and #{link_to "add alerts to your heart's desire", new_alert_path(email: @email)}.
 
   %p
     If you would like to cancel your subscription or have any questions
