@@ -63,6 +63,11 @@ a {
       padding-top: 15px;
       padding-left: 0;
       display: block;
+
+      // This is to keep the par on one line on iPhones.
+      // If we remove the margin on the body then remove this,
+      // because there will be space for the full line at 14px.
+      font-size: 13px;
     }
   }
 }
