@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "alert_notifier/alert" do
   it "should not use html entities to encode the description" do
     assign(:alert, mock_model(Alert, :address => "Foo Parade",
-      :radius_meters => 2000, :confirm_id => "1234"))
+      :radius_meters => 2000, :confirm_id => "1234", :subscription => nil))
     application = mock_model(Application, :address => "Bar Street",
       :description => "Alterations & additions", :council_reference => "007",
       :location => double("Location", :lat => 1.0, :lng => 2.0))
