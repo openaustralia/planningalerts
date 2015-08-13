@@ -47,21 +47,13 @@ a {
 
   p {
     margin: 0;
-    padding-right: 16px;
+    padding-left: 16px;
     display: inline-block;
 
     @media only screen and (max-width: 480px) {
       padding-bottom: 14px;
       display: block;
     }
-  }
-}
-
-.trial-banner-button {
-  float: right;
-
-  @media only screen and (max-width: 480px) {
-    float: none;
   }
 }
 
