@@ -50,7 +50,7 @@ feature "Subscribing for access to several alerts" do
   context "Trial subscription" do
     given(:alert) { create(:alert, email: email, confirmed: true, lat: -33.911105, lng: 151.155503, address: "123 Illawarra Road Marrickville 2204") }
     background do
-      create(:subscription, email: email)
+      create(:subscription, email: email, trial_started_at: Date.today)
       create(:application, address: "252 Illawarra Road Marrickville 2204",
                            lat: -33.911105,
                            lng: 151.155503,
@@ -63,7 +63,7 @@ feature "Subscribing for access to several alerts" do
       alert.process!
       open_email(email)
       expect(current_email).to have_subject("1 new planning application near 123 Illawarra Road Marrickville 2204")
-      # expect(current_email.default_part_body.to_s).to include("Trial subscription")
+      expect(current_email.default_part_body.to_s).to include("Trial subscription")
 
       # the person clicks a link in the trail banner
       # they are taken to a page where they can subscribe

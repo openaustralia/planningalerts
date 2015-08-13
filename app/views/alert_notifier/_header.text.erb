@@ -1,0 +1,3 @@
+<% if @alert.subscription.try(:trial?) %>
+<%= render "trial_banner" %>
+<% end %>
