@@ -1,7 +1,7 @@
 -# TODO: Move to head to block page until it loads
 %script{src: "https://checkout.stripe.com/checkout.js"}
 
-%input{type: 'hidden', name: 'stripeEmail', value: @email}
+%input{type: 'hidden', name: 'stripeEmail', value: email}
 %input{type: 'hidden', name: 'stripeToken', value: ""}
-%button{type: 'submit', class: "button-action", id: "button-pro-signup", data: {key: Configuration::STRIPE_PUBLISHABLE_KEY, amount: 4900, email: @email}}
+%button{type: 'submit', class: "button-action", id: "button-pro-signup", data: {key: Configuration::STRIPE_PUBLISHABLE_KEY, amount: 4900, email: email}}
   Subscribe now $49/month
