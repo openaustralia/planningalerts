@@ -1,5 +1,6 @@
 .registration-page,
 .registration-success-page {
+  max-width: 42em;
   padding-bottom: 4em;
 
   @include at-breakpoint(40em) {
@@ -9,29 +10,11 @@
   @include at-breakpoint(60em) {
     padding-bottom: 9em;
   }
-}
-
-.registration-intro {
-  max-width: 42em;
 
   p {
     @include at-breakpoint(40em) {
       font-size: 1.175em;
     }
-  }
-}
-
-.registration-success-page {
-  @include at-breakpoint(40em) {
-    @include span-columns(11, 12);
-    margin: 2em auto 0;
-    float: none;
-  }
-
-  @include at-breakpoint(60em) {
-    @include span-columns(10, 12);
-    margin: 2em auto 0;
-    float: none;
   }
 }
 
