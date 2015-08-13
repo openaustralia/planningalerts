@@ -1,3 +1,3 @@
-Trial subscription <%= @alert.subscription.trial_days_remaining %> days left
+Trial subscription <%= pluralize(@alert.subscription.trial_days_remaining, "day") %> left
 Use this link to subscribe now:
 <%= new_subscription_url(email: @alert.email) %>

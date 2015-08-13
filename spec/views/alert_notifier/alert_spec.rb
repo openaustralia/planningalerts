@@ -39,4 +39,12 @@ describe "alert_notifier/alert" do
     render
     rendered.should have_content("10 days left")
   end
+
+  it "should not pluralise 'day' when there's only one left" do
+    subscription = create(:subscription, trial_started_at: 13.days.ago)
+    assign(:alert, mock_model(Alert, :address => "Foo Parade",
+      :radius_meters => 2000, :confirm_id => "1234", :subscription => subscription))
+    render
+    rendered.should have_content("1 day left")
+  end
 end
