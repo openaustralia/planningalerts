@@ -31,4 +31,12 @@ describe "alert_notifier/alert" do
     render
     rendered.should have_content("Trial subscription")
   end
+
+  it "should show the number of days remaining in the trial subscription" do
+    subscription = create(:subscription, trial_started_at: 4.days.ago)
+    assign(:alert, mock_model(Alert, :address => "Foo Parade",
+      :radius_meters => 2000, :confirm_id => "1234", :subscription => subscription))
+    render
+    rendered.should have_content("10 days left")
+  end
 end

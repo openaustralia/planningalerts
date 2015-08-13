@@ -1,4 +1,3 @@
-<% # TODO: make day count dynamic %>
-Trial subscription 13 days left
+Trial subscription <%= @alert.subscription.trial_days_remaining %> days left
 Use this link to subscribe now:
 <%= new_subscription_url(email: @alert.email) %>
