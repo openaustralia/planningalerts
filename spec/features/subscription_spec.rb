@@ -40,7 +40,7 @@ feature "Subscribing for access to several alerts" do
     first("input[name='stripeToken']", visible: false).set(stripe_helper.generate_card_token)
     click_button("Subscribe now $49/month")
 
-    expect(page).to have_content("Your subscription for mary@enterpriserealty.com has been confirmed")
+    expect(page).to have_content("Thanks for subscribing!")
     expect(Subscription.find_by!(email: email)).to be_paid
   end
 end
