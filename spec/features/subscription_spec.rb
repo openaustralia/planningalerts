@@ -61,12 +61,13 @@ feature "Subscribing for access to several alerts" do
 
     scenario "Alerts contain a trial subscription banner that I can click to subscription" do
       alert.process!
+
       open_email(email)
       expect(current_email).to have_subject("1 new planning application near 123 Illawarra Road Marrickville 2204")
-      expect(current_email.default_part_body.to_s).to include("Trial subscription")
+      expect(current_email).to have_body_text("Trial subscription")
+      visit_in_email("Subscribe now")
 
-      # the person clicks a link in the trail banner
-      # they are taken to a page where they can subscribe
+      expect(page).to have_content("Subscribe now")
       # they subscribe
       # their subscription is confirmed
     end
