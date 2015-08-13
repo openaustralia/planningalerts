@@ -5,7 +5,7 @@ class Subscription < ActiveRecord::Base
   FEATURE_ENABLED = !Rails.env.production?
 
   def trial_end_at
-    trial_started_at + 14.days
+    trial_started_at + 7.days
   end
 
   def trial_days_remaining
