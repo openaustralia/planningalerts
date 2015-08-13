@@ -41,8 +41,17 @@ a {
   font-size: 14px;
 
   a {
+    display: inline-block;
+    border-radius: 5px;
+    padding: 6px 10px;
+    background-color: $orange;
     color: #ffffff;
-    text-decoration: underline;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      background-color: lighten($orange, 20%);
+    }
   }
 
   p {
