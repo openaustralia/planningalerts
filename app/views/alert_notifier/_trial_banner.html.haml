@@ -1,6 +1,6 @@
 .trial-banner.box
   = link_to "Subscribe now", new_subscription_url(email: @alert.email), class: 'trial-banner-button'
   %p
-    Trial subscription
+    Your trial subscription has
     = pluralize(@alert.subscription.trial_days_remaining, "day")
-    left
+    remaining

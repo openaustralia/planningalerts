@@ -60,8 +60,9 @@ a {
     display: inline-block;
 
     @media only screen and (max-width: 480px) {
-      padding-left: 4px;
-      font-size: 12px;
+      padding-top: 15px;
+      padding-left: 0;
+      display: block;
     }
   }
 }

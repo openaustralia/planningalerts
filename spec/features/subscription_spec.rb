@@ -64,7 +64,7 @@ feature "Subscribing for access to several alerts" do
 
       open_email(email)
       expect(current_email).to have_subject("1 new planning application near 123 Illawarra Road Marrickville 2204")
-      expect(current_email).to have_body_text("Trial subscription")
+      expect(current_email).to have_body_text("trial subscription")
       visit_in_email("Subscribe now")
 
       expect(page).to have_content("Subscribe now")

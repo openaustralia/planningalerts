@@ -21,7 +21,7 @@ describe "alert_notifier/alert" do
     assign(:alert, mock_model(Alert, :address => "Foo Parade",
       :radius_meters => 2000, :confirm_id => "1234", :subscription => nil))
     render
-    rendered.should_not have_content("Trial subscription")
+    rendered.should_not have_content("trial subscription")
   end
 
   it "should show the trial banner to trial subscribers" do
@@ -29,7 +29,7 @@ describe "alert_notifier/alert" do
     assign(:alert, mock_model(Alert, :address => "Foo Parade",
       :radius_meters => 2000, :confirm_id => "1234", :subscription => subscription))
     render
-    rendered.should have_content("Trial subscription")
+    rendered.should have_content("trial subscription")
   end
 
   it "should show the number of days remaining in the trial subscription" do
@@ -37,7 +37,7 @@ describe "alert_notifier/alert" do
     assign(:alert, mock_model(Alert, :address => "Foo Parade",
       :radius_meters => 2000, :confirm_id => "1234", :subscription => subscription))
     render
-    rendered.should have_content("10 days left")
+    rendered.should have_content("10 days remaining")
   end
 
   it "should not pluralise 'day' when there's only one left" do
@@ -45,6 +45,6 @@ describe "alert_notifier/alert" do
     assign(:alert, mock_model(Alert, :address => "Foo Parade",
       :radius_meters => 2000, :confirm_id => "1234", :subscription => subscription))
     render
-    rendered.should have_content("1 day left")
+    rendered.should have_content("1 day remaining")
   end
 end
