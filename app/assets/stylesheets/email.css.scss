@@ -5,6 +5,7 @@ $dark_gray: #878787;
 $mid_gray: #989898;
 $light_gray: #eeeeee;
 $lightest_gray: #fafafa;
+$dark_blue: #1D3D61;
 
 .box {
   margin: 6px 11px 25px;
@@ -22,12 +23,52 @@ a {
 .header {
   background: $dark_gray;
   padding: 5px 0 5px 10px;
-  margin-bottom: 5px;
+
   a {
     color: white;
     font-weight: bold;
     font-size: 20px;
     text-decoration: none;
+  }
+}
+
+.trial-banner {
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  background-color: $dark_blue;
+  color: #ffffff;
+  font-size: 14px;
+
+  a {
+    display: inline-block;
+    border-radius: 5px;
+    padding: 6px 10px;
+    background-color: $orange;
+    color: #ffffff;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      background-color: lighten($orange, 20%);
+    }
+  }
+
+  p {
+    margin: 0;
+    padding-left: 16px;
+    display: inline-block;
+
+    @media only screen and (max-width: 480px) {
+      padding-top: 15px;
+      padding-left: 0;
+      display: block;
+
+      // This is to keep the par on one line on iPhones.
+      // If we remove the margin on the body then remove this,
+      // because there will be space for the full line at 14px.
+      font-size: 13px;
+    }
   }
 }
 
