@@ -9,10 +9,4 @@
       Once you’re subscribed you can sign up for alerts from as many locations as you need
       and use PlanningAlerts in your work.
 
-    -# TODO: Move to head to block page until it loads
-    %script{src: "https://checkout.stripe.com/checkout.js"}
-
-    %input{type: 'hidden', name: 'stripeEmail', value: @email}
-    %input{type: 'hidden', name: 'stripeToken', value: ""}
-    %button{type: 'submit', class: "button-action", id: "button-pro-signup", data: {key: Configuration::STRIPE_PUBLISHABLE_KEY, amount: 4900, email: @email}}
-      Subscribe now $49/month
+    = render "stripe_button"
