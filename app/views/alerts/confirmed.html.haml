@@ -34,8 +34,9 @@
       You can
       = link_to "subscribe here", new_subscription_url(email: @alert.email)
       as soon as you’re ready.
-%p
-  You can
-  = link_to "change the size of the area covered by the alerts", area_alert_path(:id => @alert.confirm_id)
-  now or at a later time. Every email alert will have this link. If you want alerts around another address as well
-  = link_to "you can sign up for multiple alerts", new_alert_path
+- if !@alert.reload.subscription.try(:trial?)
+  %p
+    You can
+    = link_to "change the size of the area covered by the alerts", area_alert_path(:id => @alert.confirm_id)
+    now or at a later time. Every email alert will have this link. If you want alerts around another address as well
+    = link_to "you can sign up for multiple alerts", new_alert_path
