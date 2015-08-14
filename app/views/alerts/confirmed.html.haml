@@ -6,8 +6,7 @@
       You will now receive email alerts for any planning applications we find within <strong>#{meters_in_words(@alert.radius_meters)}</strong>
       of <strong>#{@alert.address}</strong>.
   %p
-    You can
-    = link_to "change the size of the area covered by the alerts", area_alert_path(:id => @alert.confirm_id)
+    You can #{link_to "change the size of the area covered by the alerts", area_alert_path(:id => @alert.confirm_id)}
     now or at a later time. Every email alert will have this link.
     If you want alerts around another address as well
     #{link_to "you can sign up for multiple alerts", new_alert_path}.
@@ -16,8 +15,7 @@
   .attention
     %h3
       Great, you now have alerts set up for
-      = Alert.active.where(email: @alert.email).count.to_s
-      street addresses!
+      #{Alert.active.where(email: @alert.email).count.to_s} street addresses!
     %p
       %strong You need a paid subscription to get alerts for several addresses, or to use PlanningAlerts for your work.
       #{link_to "A subscription costs $49 per month", new_subscription_url(email: @alert.email)}.
@@ -30,8 +28,7 @@
         so you can start getting your new alerts straight away.
     - else
       %p
-        You still have
-        = pluralize(@alert.subscription.trial_days_remaining, "day")
+        You still have #{pluralize(@alert.subscription.trial_days_remaining, "day")}
         remaining on your free trial subscription,
         so you’ll start getting your new alerts straight away.
     %p
@@ -39,6 +36,5 @@
       If this sounds like you, please #{mail_to "contact@planningalerts.org.au", "email us"}—we’ll be happy
       to help with a free, non-commercial subscription.
     %p
-      You can
-      = link_to "subscribe here", new_subscription_url(email: @alert.email)
+      You can #{link_to "subscribe here", new_subscription_url(email: @alert.email)}
       as soon as you’re ready.
