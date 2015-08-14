@@ -337,40 +337,4 @@ describe Alert do
       it { expect(alert.email_has_several_other_alerts?).to be_true }
     end
   end
-
-  describe "#create_subscription_if_required" do
-    let(:email) { "luke@example.org" }
-    let(:alert) { Alert.find_by(email: email) }
-
-    before :each do
-      2.times { create(:alert, confirmed: true, email: email) }
-    end
-
-    context "2 alerts" do
-      it do
-        expect(Subscription).not_to receive(:create!).with(email: email, trial_started_at: Date.today)
-        alert.create_subscription_if_required
-      end
-    end
-
-    context "3 alerts or more" do
-      before :each do
-        create(:alert, confirmed: true, email: email)
-      end
-
-      it do
-        expect(Subscription).to receive(:create!).with(email: email, trial_started_at: Date.today)
-        alert.create_subscription_if_required
-      end
-
-      context "already has a subscription" do
-        before { create(:subscription, email: email) }
-
-        it do
-          expect(Subscription).to_not receive(:create!).with(email: email, trial_started_at: Date.today)
-          alert.create_subscription_if_required
-        end
-      end
-    end
-  end
 end
