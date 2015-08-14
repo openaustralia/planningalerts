@@ -3,7 +3,7 @@
   .attention
     %h3
       Great, you now have alerts set up for
-      #{Alert.active.where(email: @alert.email).count.to_s} street addresses!
+      #{@subscription.alerts.count} street addresses!
     %p
       %strong You need a paid subscription to get alerts for several addresses, or to use PlanningAlerts for your work.
       #{link_to "A subscription costs $49 per month", new_subscription_url(email: @alert.email)}.
