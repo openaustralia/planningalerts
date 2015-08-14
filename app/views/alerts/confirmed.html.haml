@@ -3,8 +3,10 @@
   .attention
     %h3 Thanks, your alert has been activated
     %p
-      You will now receive email alerts for any planning applications we find within <strong>#{meters_in_words(@alert.radius_meters)}</strong>
-      of <strong>#{@alert.address}</strong>.
+      You will now receive email alerts for any planning applications we find within
+      %strong #{meters_in_words(@alert.radius_meters)}
+      of
+      %strong #{@alert.address}.
   %p
     You can #{link_to "change the size of the area covered by the alerts", area_alert_path(id: @alert.confirm_id)}
     now or at a later time. Every email alert will have this link.
