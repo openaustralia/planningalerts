@@ -87,7 +87,8 @@ module ApplicationHelper
       { name: "Elena Kelareva", email_md5: "6045804523b1526ff32b4fa75e9a9e01" },
       { name: "Tim Ansell", email_md5: "ddc397c8b591167f0a26cd3320aa794f" },
       { name: "Christopher Lam", email_md5: "9daa06c4242ab7dcb9868a54d38a0a16" },
-      { name: "Haiming Lai", email_md5: "d91f47b3d22536bf6cc881eba6c33f60" }
+      { name: "Haiming Lai", email_md5: "d91f47b3d22536bf6cc881eba6c33f60" },
+      { name: "Kenneth Dinesen", email_md5: "2ec62f13a1b7bea1121acfb784233941" }
     ]
   end
 end
