@@ -1,11 +1,15 @@
 - content_for :page_title, "Confirmed"
 .attention
-  %h3 Thanks, your alert has been activated
-  %p
-    You will now receive email alerts for any planning applications we find within <strong>#{meters_in_words(@alert.radius_meters)}</strong>
-    of <strong>#{@alert.address}</strong>.
-
-  - if @alert.reload.subscription.try(:trial?)
+  - if !@alert.reload.subscription.try(:trial?)
+    %h3 Thanks, your alert has been activated
+    %p
+      You will now receive email alerts for any planning applications we find within <strong>#{meters_in_words(@alert.radius_meters)}</strong>
+      of <strong>#{@alert.address}</strong>.
+  - else
+    %h3 Thanks, your alert has been activated
+    %p
+      You will now receive email alerts for any planning applications we find within <strong>#{meters_in_words(@alert.radius_meters)}</strong>
+      of <strong>#{@alert.address}</strong>.
     = form_tag subscriptions_path, id: 'subscription-payment-form', class: 'registration-intro' do
       %p
         You now have several email alerts. PlanningAlerts is free for low-volume, non-commercial use. After a free trial, you'll need to subscribe to keep getting alerts.
