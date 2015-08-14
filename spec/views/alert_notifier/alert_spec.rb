@@ -47,4 +47,27 @@ describe "alert_notifier/alert" do
     render
     rendered.should have_content("1 day remaining")
   end
+
+  it "should not show a note to people without a subscription saying they are a ‘paid subscriber’" do
+    assign(:alert, mock_model(Alert, address: "Foo Parade",
+      radius_meters: 2000, confirm_id: "1234", subscription: nil))
+    render
+    rendered.should_not have_content("You’re a paid subscriber")
+  end
+
+  it "should not show a note to trial subscribers saying they are a ‘paid subscriber’" do
+    subscription = create(:subscription, trial_started_at: Date.today)
+    assign(:alert, mock_model(Alert, address: "Foo Parade",
+      radius_meters: 2000, confirm_id: "1234", subscription: subscription))
+    render
+    rendered.should_not have_content("You’re a paid subscriber")
+  end
+
+  it "should show a note to paid subscribers saying they are a ‘paid subscriber’" do
+    subscription = create(:subscription, stripe_subscription_id: "a_stripe_id")
+    assign(:alert, mock_model(Alert, address: "Foo Parade",
+      radius_meters: 2000, confirm_id: "1234", subscription: subscription))
+    render
+    rendered.should have_content("You’re a paid subscriber")
+  end
 end
