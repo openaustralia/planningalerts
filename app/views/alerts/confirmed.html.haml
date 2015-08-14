@@ -6,8 +6,10 @@
       You will now receive email alerts for any planning applications we find within <strong>#{meters_in_words(@alert.radius_meters)}</strong>
       of <strong>#{@alert.address}</strong>.
   - else
-    - # TODO: Make alert count dynamic
-    %h3 Great, you now have alerts set up for 3 street addresses!
+    %h3
+      Great, you now have alerts set up for
+      = Alert.active.where(email: @alert.email).count.to_s
+      street addresses!
     %p
       You need a paid subscription to get alerts for several addresses, or to use PlanningAlerts for your work.
       A subscription costs $49 per month.
