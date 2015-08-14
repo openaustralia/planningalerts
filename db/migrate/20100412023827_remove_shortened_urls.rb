@@ -5,7 +5,7 @@ class RemoveShortenedUrls < ActiveRecord::Migration
   end
 
   def self.down
-    add_column :applications, :info_tinyurl, :string, :limit => 50
-    add_column :applications, :comment_tinyurl, :string, :limit => 50
+    add_column :applications, :info_tinyurl, :string, limit: 50
+    add_column :applications, :comment_tinyurl, :string, limit: 50
   end
 end

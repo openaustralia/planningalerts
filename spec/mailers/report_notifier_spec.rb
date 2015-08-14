@@ -2,11 +2,11 @@ require "spec_helper"
 
 describe ReportNotifier do
   before :each do
-    @application = mock_model(Application, :id => "2")
-    @comment = mock_model(Comment, :application => @application, :text => "I'm saying something abusive",
-      :name => "Jack Rude", :email => "rude@foo.com", :id => "23")
-    @report = mock_model(Report, :name => "Joe Reporter", :email => "reporter@foo.com", :comment => @comment,
-      :details => "It's very rude!")
+    @application = mock_model(Application, id: "2")
+    @comment = mock_model(Comment, application: @application, text: "I'm saying something abusive",
+      name: "Jack Rude", email: "rude@foo.com", id: "23")
+    @report = mock_model(Report, name: "Joe Reporter", email: "reporter@foo.com", comment: @comment,
+      details: "It's very rude!")
     @notifier = ReportNotifier.notify(@report)
   end
   

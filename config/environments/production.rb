@@ -64,16 +64,16 @@ PlanningalertsApp::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { :host => Configuration::HOST }
+  config.action_mailer.default_url_options = { host: Configuration::HOST }
 
   # Send mails to the locally running instance of Cuttlefish
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-     :address => Configuration::CUTTLEFISH_SERVER,
-     :port => 2525,
-     :user_name => Configuration::CUTTLEFISH_USER_NAME,
-     :password => Configuration::CUTTLEFISH_PASSWORD,
-     :authentication => :plain
+     address: Configuration::CUTTLEFISH_SERVER,
+     port: 2525,
+     user_name: Configuration::CUTTLEFISH_USER_NAME,
+     password: Configuration::CUTTLEFISH_PASSWORD,
+     authentication: :plain
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

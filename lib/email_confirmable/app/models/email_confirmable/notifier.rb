@@ -6,8 +6,8 @@ class EmailConfirmable::Notifier < ActionMailer::Base
     # This seems a bit long-winded. Is there a better way?
     instance_variable_set(("@" + class_name).to_sym, object)
 
-    themed_mail(:theme => theme, :to => object.email,
-      :subject => "Please confirm your #{object.class.model_name.human.downcase}",
-      :from => email_from(theme), :template_name => class_name)
+    themed_mail(theme: theme, to: object.email,
+      subject: "Please confirm your #{object.class.model_name.human.downcase}",
+      from: email_from(theme), template_name: class_name)
   end
 end

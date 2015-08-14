@@ -17,7 +17,7 @@ class QueryParamsPresentConstraint
 end
 
 PlanningalertsApp::Application.routes.draw do
-  constraints :subdomain => "api" do
+  constraints subdomain: "api" do
     constraints FormatConstraint.new do
       get "(*path)" => redirect{|p,r| "http://www.#{r.domain(2)}/#{p[:path]}"}
     end
@@ -37,7 +37,7 @@ PlanningalertsApp::Application.routes.draw do
   get 'api.php' => 'api#old_index'
   get 'api' => 'api#old_index', as: :api_old_index
 
-  resources :alerts, :only => [:new, :create], :path_names => {:new => 'signup'} do
+  resources :alerts, only: [:new, :create], path_names: {new: 'signup'} do
     collection do
       get :statistics
       get :widget_prototype
@@ -51,7 +51,7 @@ PlanningalertsApp::Application.routes.draw do
   end
 
   # Route API separately
-  scope :format => true do
+  scope format: true do
     get 'authorities/:authority_id/applications' => 'api#authority', as: nil
     get 'applications' => 'api#postcode', as: nil,
       constraints: QueryParamsPresentConstraint.new(:postcode)
@@ -69,25 +69,25 @@ PlanningalertsApp::Application.routes.draw do
     get 'applications' => 'api#all', as: nil
   end
 
-  resources :applications, :only => [:index, :show] do
+  resources :applications, only: [:index, :show] do
     member do
       get :nearby
     end
     collection do
       get :search
     end
-    resources :comments, :only => [:create, :show]
+    resources :comments, only: [:create, :show]
   end
 
-  resources :comments, :only => [:index] do
+  resources :comments, only: [:index] do
     member do
       get :confirmed
     end
-    resources :reports, :only => [:new, :create]
+    resources :reports, only: [:new, :create]
   end
 
-  resources :authorities, :only => [:index, :show] do
-    resources :applications, :only => [:index] do
+  resources :authorities, only: [:index, :show] do
+    resources :applications, only: [:index] do
       collection do
         get :per_day
         get :per_week
@@ -100,18 +100,18 @@ PlanningalertsApp::Application.routes.draw do
 
   namespace :atdis do
     get :test
-    post :test, :action => 'test_redirect'
-    get 'feed/:number/atdis/1.0/applications.json', :action => 'feed', :as => :feed
+    post :test, action: 'test_redirect'
+    get 'feed/:number/atdis/1.0/applications.json', action: 'feed', as: :feed
     get :specification
     get :guidance
   end
 
-  get 'api/howto' => 'api#howto', :as => :api_howto
-  get 'api' => 'api#index', :as => :api
+  get 'api/howto' => 'api#howto', as: :api_howto
+  get 'api' => 'api#index', as: :api
 
-  get 'about' => 'static#about', :as => :about
-  get 'faq' => 'static#faq', :as => :faq
-  get 'getinvolved' => 'static#get_involved', :as => :get_involved
+  get 'about' => 'static#about', as: :about
+  get 'faq' => 'static#faq', as: :faq
+  get 'getinvolved' => 'static#get_involved', as: :get_involved
   get 'how_to_write_a_scraper' => 'static#how_to_write_a_scraper'
   get 'how_to_lobby_your_local_council' => 'static#how_to_lobby_your_local_council'
 
@@ -119,18 +119,18 @@ PlanningalertsApp::Application.routes.draw do
   get 'donate/thanks' => 'static#donate_thanks'
   get 'donate/cancel' => 'static#donate_cancel'
 
-  get '/' => 'applications#address', :as => :address_applications
+  get '/' => 'applications#address', as: :address_applications
 
   get 'layar/getpoi' => 'layar#getpoi'
 
-  get '/vanity(/:action(/:id(.:format)))', :controller=>:vanity
+  get '/vanity(/:action(/:id(.:format)))', controller: :vanity
 
-  resources :subscriptions, :only => [:new, :create]
+  resources :subscriptions, only: [:new, :create]
 
   get 'subscriptions' => redirect('/subscriptions/new')
 
-  root :to => 'applications#address'
+  root to: 'applications#address'
 
-  get '/404', :to => 'static#error_404'
-  get "/500", :to => 'static#error_500'
+  get '/404', to: 'static#error_404'
+  get "/500", to: 'static#error_500'
 end

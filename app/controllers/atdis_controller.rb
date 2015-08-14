@@ -22,7 +22,7 @@ class AtdisController < ApplicationController
   def test_redirect
     @feed = Feed.new(params[:feed])
     if @feed.valid?
-      redirect_to atdis_test_url(:url => @feed.url)
+      redirect_to atdis_test_url(url: @feed.url)
     else
       render "test"
     end

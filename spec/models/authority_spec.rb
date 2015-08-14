@@ -6,8 +6,8 @@ describe Authority do
       @a1 = create(:authority)
       @a2 = create(:authority)
       VCR.use_cassette('planningalerts') do
-        create(:application, :authority => @a1, :date_scraped => 3.weeks.ago)
-        create(:application, :authority => @a2)
+        create(:application, authority: @a1, date_scraped: 3.weeks.ago)
+        create(:application, authority: @a2)
       end
     end
 

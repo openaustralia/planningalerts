@@ -33,10 +33,10 @@ module PlanningalertsApp
     # config.i18n.default_locale = :de
 
     # We are using some rack middleware to throttle people that make too many API requests
-    config.middleware.use ApiThrottler,:cache => Dalli::Client.new,
-        :strategies => YAML.load_file("#{config.root}/config/throttling.yml"),
-        :key_prefix => :throttle,
-        :message => "Rate Limit Exceeded. See http://www.planningalerts.org.au/api/howto#hLicenseInfo for more information"
+    config.middleware.use ApiThrottler,cache: Dalli::Client.new,
+        strategies: YAML.load_file("#{config.root}/config/throttling.yml"),
+        key_prefix: :throttle,
+        message: "Rate Limit Exceeded. See http://www.planningalerts.org.au/api/howto#hLicenseInfo for more information"
 
     config.action_dispatch.tld_length = 2
 

@@ -8,7 +8,7 @@ describe ApplicationsController do
   describe "#index" do
     describe "rss feed" do
       before :each do
-        Location.stub(:geocode).and_return(double(:lat => 1.0, :lng => 2.0, :full_address => "24 Bruce Road, Glenbrook NSW 2773"))
+        Location.stub(:geocode).and_return(double(lat: 1.0, lng: 2.0, full_address: "24 Bruce Road, Glenbrook NSW 2773"))
       end
 
       it "should not provide a link for all applications" do
@@ -20,7 +20,7 @@ describe ApplicationsController do
     describe "error checking on parameters used" do
       it "should not do error checking on the normal html sites" do
         VCR.use_cassette('planningalerts') do
-          get :index, :address => "24 Bruce Road Glenbrook", :radius => 4000, :foo => 200, :bar => "fiddle"
+          get :index, address: "24 Bruce Road Glenbrook", radius: 4000, foo: 200, bar: "fiddle"
         end
         response.code.should == "200"
       end
@@ -29,17 +29,17 @@ describe ApplicationsController do
     describe "search by authority" do
       it "should give a 404 when an invalid authority_id is used" do
         Authority.should_receive(:find_by_short_name_encoded).with("this_authority_does_not_exist").and_return(nil)
-        lambda{get :index, :authority_id => "this_authority_does_not_exist"}.should raise_error ActiveRecord::RecordNotFound
+        lambda{get :index, authority_id: "this_authority_does_not_exist"}.should raise_error ActiveRecord::RecordNotFound
       end
     end
   end
 
   describe "#show" do
     it "should gracefully handle an application without any geocoded information" do
-      app = mock_model(Application, :address => "An address that can't be geocoded", :date_scraped => Date.new(2010,1,1),
-        :description => "foo", :location => nil, :find_all_nearest_or_recent => [])
+      app = mock_model(Application, address: "An address that can't be geocoded", date_scraped: Date.new(2010,1,1),
+        description: "foo", location: nil, find_all_nearest_or_recent: [])
       Application.should_receive(:find).with("1").and_return(app)
-      get :show, :id => 1
+      get :show, id: 1
 
       assigns[:application].should == app
     end

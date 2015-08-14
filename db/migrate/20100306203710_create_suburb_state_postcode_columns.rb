@@ -1,9 +1,9 @@
 class CreateSuburbStatePostcodeColumns < ActiveRecord::Migration
   def self.up
     change_table(:applications) do |t|
-      t.string :suburb, :limit => 50
-      t.string :state, :limit => 10
-      t.string :postcode, :limit => 4
+      t.string :suburb, limit: 50
+      t.string :state, limit: 10
+      t.string :postcode, limit: 4
     end
     Application.reset_column_information
     # Load all the applications and resave them to force the geocoder to save the address bits and pieces

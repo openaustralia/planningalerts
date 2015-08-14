@@ -15,7 +15,7 @@ end
 class ThrottleConfigurable < Rack::Throttle::Limiter
   attr_reader :strategies
 
-  #:strategies => {
+  #strategies: {
   #  "hourly" => {
   #    100 => "default",
   #    200 => ["1.2.3.7", "1.2.3.8"],
@@ -64,9 +64,9 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     when "blocked"
       Rack::Throttle::Blocked.new(nil)
     when "hourly"
-      Rack::Throttle::Hourly.new(nil, options.merge(:max => max))
+      Rack::Throttle::Hourly.new(nil, options.merge(max: max))
     when "daily"
-      Rack::Throttle::Daily.new(nil, options.merge(:max => max))
+      Rack::Throttle::Daily.new(nil, options.merge(max: max))
     when "unlimited"
       Rack::Throttle::Unlimited.new(nil)
     end

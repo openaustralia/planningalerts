@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe ApplicationsHelper do
   before :each do
-    authority = mock_model(Authority, :full_name => "An authority", :short_name => "Blue Mountains")
-    @application = mock_model(Application, :map_url => "http://a.map.url",
-      :description => "A planning application", :council_reference => "A1", :authority => authority, :info_url => "http://info.url", :comment_url => "http://comment.url",
-      :on_notice_from => nil, :on_notice_to => nil)
+    authority = mock_model(Authority, full_name: "An authority", short_name: "Blue Mountains")
+    @application = mock_model(Application, map_url: "http://a.map.url",
+      description: "A planning application", council_reference: "A1", authority: authority, info_url: "http://info.url", comment_url: "http://comment.url",
+      on_notice_from: nil, on_notice_to: nil)
   end
 
   describe "scraped_and_received_text" do
@@ -115,9 +115,9 @@ describe ApplicationsHelper do
       end
 
       it "should generate a static google map api image" do
-        helper.google_static_map(@application, :size => "350x200", :zoom => 16).should ==
+        helper.google_static_map(@application, size: "350x200", zoom: 16).should ==
           "<img alt=\"Map of Foo Road, NSW\" height=\"200\" src=\"https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=350x200&maptype=roadmap&markers=color:red%7C1.0,2.0&sensor=false\" width=\"350\" />"
-        helper.google_static_map(@application, :size => "100x100", :zoom => 14).should ==
+        helper.google_static_map(@application, size: "100x100", zoom: 14).should ==
           "<img alt=\"Map of Foo Road, NSW\" height=\"100\" src=\"https://maps.googleapis.com/maps/api/staticmap?zoom=14&size=100x100&maptype=roadmap&markers=color:red%7C1.0,2.0&sensor=false\" width=\"100\" />"
       end
     end
@@ -128,9 +128,9 @@ describe ApplicationsHelper do
       end
 
       it "should generate a static google streetview image" do
-        helper.google_static_streetview(@application, :size => "350x200", :fov => 90).should ==
+        helper.google_static_streetview(@application, size: "350x200", fov: 90).should ==
           "<img alt=\"Streetview of Foo Road, NSW\" height=\"200\" src=\"https://maps.googleapis.com/maps/api/streetview?size=350x200&location=1.0,2.0&fov=90&sensor=false\" width=\"350\" />"
-        helper.google_static_streetview(@application, :size => "100x100", :fov => 60).should ==
+        helper.google_static_streetview(@application, size: "100x100", fov: 60).should ==
           "<img alt=\"Streetview of Foo Road, NSW\" height=\"100\" src=\"https://maps.googleapis.com/maps/api/streetview?size=100x100&location=1.0,2.0&fov=60&sensor=false\" width=\"100\" />"
       end
     end

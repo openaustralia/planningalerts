@@ -9,7 +9,7 @@ module EmailConfirmable
       send :include, InstanceMethods
 
       validates_presence_of :email
-      validates_email_format_of :email, :on => :create
+      validates_email_format_of :email, on: :create
       before_create :set_confirm_info
       after_create :send_confirmation_email
 

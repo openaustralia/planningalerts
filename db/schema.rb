@@ -253,6 +253,6 @@ ActiveRecord::Schema.define(version: 20150810045125) do
   add_index "vanity_participants", ["experiment_id", "shown"], name: "by_experiment_id_and_shown", using: :btree
   add_index "vanity_participants", ["experiment_id"], name: "index_vanity_participants_on_experiment_id", using: :btree
 
-  add_foreign_key "applications", "authorities", :name => "applications_authority_id_fk"
+  add_foreign_key "applications", "authorities", name: "applications_authority_id_fk"
 
 end

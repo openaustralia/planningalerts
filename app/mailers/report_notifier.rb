@@ -3,9 +3,9 @@ class ReportNotifier < ActionMailer::Base
     @report = report
     @comment = report.comment
     mail(
-      :to => ::Configuration::EMAIL_MODERATOR,
-      :from => "#{report.name} <#{report.email}>",
-      :subject => "PlanningAlerts: Abuse report"
+      to: ::Configuration::EMAIL_MODERATOR,
+      from: "#{report.name} <#{report.email}>",
+      subject: "PlanningAlerts: Abuse report"
     )
   end
 end

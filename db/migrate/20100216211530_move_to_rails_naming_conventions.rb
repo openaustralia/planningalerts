@@ -6,15 +6,15 @@ class MoveToRailsNamingConventions < ActiveRecord::Migration
     rename_table :user, :users
     rename_column :users, :user_id, :id
     
-    remove_foreign_key "applications", :name => "applications_ibfk_1"
+    remove_foreign_key "applications", name: "applications_ibfk_1"
     rename_column :authorities, :authority_id, :id
-    add_foreign_key "applications", "authorities", :name => "applications_authority_id_fk"
+    add_foreign_key "applications", "authorities", name: "applications_authority_id_fk"
   end
 
   def self.down
-    remove_foreign_key "applications", :name => "applications_authority_id_fk"
+    remove_foreign_key "applications", name: "applications_authority_id_fk"
     rename_column :authorities, :id, :authority_id
-    add_foreign_key "applications", "authorities", :name => "applications_ibfk_1", :primary_key => "authority_id"
+    add_foreign_key "applications", "authorities", name: "applications_ibfk_1", primary_key: "authority_id"
     
     rename_column :users, :id, :user_id
     rename_table :users, :user

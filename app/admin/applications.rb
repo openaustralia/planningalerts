@@ -11,7 +11,7 @@ ActiveAdmin.register Application do
 
   remove_filter :comments
 
-  show :title => :address do
+  show title: :address do
     attributes_table do
       row :id
       row :council_reference
@@ -33,7 +33,7 @@ ActiveAdmin.register Application do
     end
   end
 
-  sidebar :comments, :only => :show do
+  sidebar :comments, only: :show do
     ul do
       resource.comments.each do |comment|
         li do

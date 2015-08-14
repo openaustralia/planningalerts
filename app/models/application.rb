@@ -4,13 +4,13 @@ class Application < ActiveRecord::Base
   belongs_to :authority
   has_many :comments
   before_save :geocode
-  geocoded_by :address, :latitude  => :lat, :longitude => :lng
+  geocoded_by :address, latitude: :lat, longitude: :lng
 
-  validates :date_scraped, :council_reference, :address, :description, :presence => true
-  validates :info_url, :url => true
-  validates :comment_url, :url => {:allow_blank => true, :schemes => ["http", "https", "mailto"]}
+  validates :date_scraped, :council_reference, :address, :description, presence: true
+  validates :info_url, url: true
+  validates :comment_url, url: {allow_blank: true, schemes: ["http", "https", "mailto"]}
   validate :date_received_can_not_be_in_the_future, :validate_on_notice_period
-  validates :council_reference, :uniqueness => { :scope => :authority_id }
+  validates :council_reference, uniqueness: { scope: :authority_id }
 
   default_scope { order "date_scraped DESC" }
 
@@ -59,16 +59,16 @@ class Application < ActiveRecord::Base
   def self.translate_feed_data(feed_data)
     Nokogiri::XML(feed_data).search('application').map do |a|
       {
-        :council_reference => a.at('council_reference').inner_text,
-        :address => a.at('address').inner_text,
-        :description => a.at('description').inner_text,
-        :info_url => a.at('info_url').inner_text,
-        :comment_url => a.at('comment_url').inner_text,
-        :date_received => a.at('date_received').inner_text,
-        :date_scraped => Time.now,
+        council_reference: a.at('council_reference').inner_text,
+        address: a.at('address').inner_text,
+        description: a.at('description').inner_text,
+        info_url: a.at('info_url').inner_text,
+        comment_url: a.at('comment_url').inner_text,
+        date_received: a.at('date_received').inner_text,
+        date_scraped: Time.now,
         # on_notice_from and on_notice_to tags are optional
-        :on_notice_from => (a.at('on_notice_from').inner_text if a.at('on_notice_from')),
-        :on_notice_to => (a.at('on_notice_to').inner_text if a.at('on_notice_to'))
+        on_notice_from: (a.at('on_notice_from').inner_text if a.at('on_notice_from')),
+        on_notice_to: (a.at('on_notice_to').inner_text if a.at('on_notice_to'))
       }
     end
   end
@@ -81,16 +81,16 @@ class Application < ActiveRecord::Base
     if j.kind_of?(Array) && j.all?{|a| a.kind_of?(Hash)}
       j.map do |a|
         {
-          :council_reference => a['council_reference'],
-          :address => a['address'],
-          :description => a['description'],
-          :info_url => a['info_url'],
-          :comment_url => a['comment_url'],
-          :date_received => a['date_received'],
-          :date_scraped => Time.now,
+          council_reference: a['council_reference'],
+          address: a['address'],
+          description: a['description'],
+          info_url: a['info_url'],
+          comment_url: a['comment_url'],
+          date_received: a['date_received'],
+          date_scraped: Time.now,
           # on_notice_from and on_notice_to tags are optional
-          :on_notice_from => a['on_notice_from'],
-          :on_notice_to => a['on_notice_to']
+          on_notice_from: a['on_notice_from'],
+          on_notice_to: a['on_notice_to']
         }
       end
     else
@@ -155,7 +155,7 @@ class Application < ActiveRecord::Base
   # Find applications that are near the current application location and/or recently scraped
   def find_all_nearest_or_recent
     if location
-      nearbys(nearby_and_recent_max_distance_km, :units => :km).where('date_scraped > ?', nearby_and_recent_max_age_months.months.ago)
+      nearbys(nearby_and_recent_max_distance_km, units: :km).where('date_scraped > ?', nearby_and_recent_max_age_months.months.ago)
     else
       []
     end

@@ -27,7 +27,7 @@ class VanityMigration < ActiveRecord::Migration
       t.integer :alternative
       t.integer :conversions
     end
-    add_index :vanity_conversions, [:vanity_experiment_id, :alternative], :name => "by_experiment_id_and_alternative"
+    add_index :vanity_conversions, [:vanity_experiment_id, :alternative], name: "by_experiment_id_and_alternative"
 
     create_table :vanity_participants do |t|
       t.string :experiment_id
@@ -37,10 +37,10 @@ class VanityMigration < ActiveRecord::Migration
       t.integer :converted
     end
     add_index :vanity_participants, [:experiment_id]
-    add_index :vanity_participants, [:experiment_id, :identity], :name => "by_experiment_id_and_identity"
-    add_index :vanity_participants, [:experiment_id, :shown], :name => "by_experiment_id_and_shown"
-    add_index :vanity_participants, [:experiment_id, :seen], :name => "by_experiment_id_and_seen"
-    add_index :vanity_participants, [:experiment_id, :converted], :name => "by_experiment_id_and_converted"
+    add_index :vanity_participants, [:experiment_id, :identity], name: "by_experiment_id_and_identity"
+    add_index :vanity_participants, [:experiment_id, :shown], name: "by_experiment_id_and_shown"
+    add_index :vanity_participants, [:experiment_id, :seen], name: "by_experiment_id_and_seen"
+    add_index :vanity_participants, [:experiment_id, :converted], name: "by_experiment_id_and_converted"
   end
 
   def self.down

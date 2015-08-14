@@ -20,9 +20,9 @@ class Feed
     :lodgement_date_start, :lodgement_date_end,
     :last_modified_date_start, :last_modified_date_end
 
-  validates :base_url, :url => true
+  validates :base_url, url: true
   validates :lodgement_date_start, :lodgement_date_end,
-    :last_modified_date_start, :last_modified_date_end, :date => true, :allow_blank => true
+    :last_modified_date_start, :last_modified_date_end, date: true, allow_blank: true
 
   def initialize(options = {})
     @base_url = options[:base_url]
@@ -45,7 +45,7 @@ class Feed
   def self.create_from_url(url)
     feed_options = ATDIS::Feed.options_from_url(url)
     base_url = ATDIS::Feed.base_url_from_url(url)
-    Feed.new(feed_options.merge(:base_url => base_url))
+    Feed.new(feed_options.merge(base_url: base_url))
   end
 
   def url

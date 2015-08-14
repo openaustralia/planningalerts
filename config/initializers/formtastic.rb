@@ -51,7 +51,7 @@
 
 # Specifies if labels/hints for input fields automatically be looked up using I18n.
 # Default value: true. Overridden for specific fields by setting value to true,
-# i.e. :label => true, or :hint => true (or opposite depending on initialized value)
+# i.e. label: true, or hint: true (or opposite depending on initialized value)
 # Formtastic::FormBuilder.i18n_lookups_by_default = false
 
 # Specifies if I18n lookups of the default I18n Localizer should be cached to improve performance.

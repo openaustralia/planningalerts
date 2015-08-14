@@ -1,7 +1,7 @@
 class CreateStateColumn < ActiveRecord::Migration
   def self.up
-    # Can't make it :null => false to start with
-    add_column :authorities, :state, :string, :limit => 20
+    # Can't make it null: false to start with
+    add_column :authorities, :state, :string, limit: 20
   end
 
   def self.down

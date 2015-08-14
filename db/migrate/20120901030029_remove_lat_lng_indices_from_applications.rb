@@ -6,7 +6,7 @@ class RemoveLatLngIndicesFromApplications < ActiveRecord::Migration
   end
 
   def self.down
-    add_index "applications", ["lat"], :name => "index_applications_on_lat"
-    add_index "applications", ["lng"], :name => "index_applications_on_lng"
+    add_index "applications", ["lat"], name: "index_applications_on_lat"
+    add_index "applications", ["lng"], name: "index_applications_on_lng"
   end
 end

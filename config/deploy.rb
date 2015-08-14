@@ -22,13 +22,13 @@ set :scm, :git
 set :rails_env, "production" #added for delayed job
 
 if stage == "production"
-  server "kedumba.openaustraliafoundation.org.au", :app, :web, :db, :primary => true
+  server "kedumba.openaustraliafoundation.org.au", :app, :web, :db, primary: true
   set :deploy_to, "/srv/www/www.#{application}"
 elsif stage == "test"
-  server "kedumba.openaustraliafoundation.org.au", :app, :web, :db, :primary => true
+  server "kedumba.openaustraliafoundation.org.au", :app, :web, :db, primary: true
   set :deploy_to, "/srv/www/test.#{application}"
 elsif stage == "development"
-  server "planningalerts.org.au.dev", :app, :web, :db, :primary => true
+  server "planningalerts.org.au.dev", :app, :web, :db, primary: true
   set :deploy_to, "/srv/www"
 end
 
@@ -56,7 +56,7 @@ namespace :deploy do
     run links.map {|a| "ln -sf #{a.last} #{a.first}"}.join(";")
   end
 
-  task :restart, :except => { :no_release => true } do
+  task :restart, except: { no_release: true } do
     run "touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 

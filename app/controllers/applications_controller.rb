@@ -17,7 +17,7 @@ class ApplicationsController < ApplicationController
       apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
     end
 
-    @applications = apps.paginate(:page => params[:page], :per_page => 30)
+    @applications = apps.paginate(page: params[:page], per_page: 30)
   end
 
   # JSON api for returning the number of scraped applications per day
@@ -25,7 +25,7 @@ class ApplicationsController < ApplicationController
     authority = Authority.find_by_short_name_encoded!(params[:authority_id])
     respond_to do |format|
       format.js do
-        render :json => authority.applications_per_day
+        render json: authority.applications_per_day
       end
     end
   end
@@ -34,7 +34,7 @@ class ApplicationsController < ApplicationController
     authority = Authority.find_by_short_name_encoded!(params[:authority_id])
     respond_to do |format|
       format.js do
-        render :json => authority.applications_per_week
+        render json: authority.applications_per_week
       end
     end
   end
@@ -52,15 +52,15 @@ class ApplicationsController < ApplicationController
         @error = "Address #{location.error}"
       else
         @q = location.full_address
-        @alert = Alert.new(:address => @q)
+        @alert = Alert.new(address: @q)
         @other_addresses = location.all[1..-1].map{|l| l.full_address}
         @applications = case @sort
                         when 'distance'
-                          Application.near([location.lat, location.lng], @radius.to_f / 1000, :units => :km).reorder('distance').paginate(:page => params[:page], :per_page => per_page)
+                          Application.near([location.lat, location.lng], @radius.to_f / 1000, units: :km).reorder('distance').paginate(page: params[:page], per_page: per_page)
                         else # date_scraped
-                          Application.near([location.lat, location.lng], @radius.to_f / 1000, :units => :km).paginate(:page => params[:page], :per_page => per_page)
+                          Application.near([location.lat, location.lng], @radius.to_f / 1000, units: :km).paginate(page: params[:page], per_page: per_page)
                         end
-        @rss = applications_path(:format => 'rss', :address => @q, :radius => @radius)
+        @rss = applications_path(format: 'rss', address: @q, radius: @radius)
       end
     end
     @set_focus_control = "q"
@@ -80,15 +80,15 @@ class ApplicationsController < ApplicationController
 
     @q = params[:q]
     if @q
-      @applications = Application.search @q, :order => "date_scraped DESC", :page => params[:page], :per_page => per_page
+      @applications = Application.search @q, order: "date_scraped DESC", page: params[:page], per_page: per_page
       @applications.context[:panes] << ThinkingSphinx::Panes::ExcerptsPane
-      @rss = search_applications_path(:format => "rss", :q => @q, :page => nil)
+      @rss = search_applications_path(format: "rss", q: @q, page: nil)
     end
     @description = @q ? "Search: #{@q}" : "Search"
 
     respond_to do |format|
       format.html
-      format.rss { render "api/index", :format => :rss, :layout => false, :content_type => Mime::XML }
+      format.rss { render "api/index", format: :rss, layout: false, content_type: Mime::XML }
     end
   end
 
@@ -96,7 +96,7 @@ class ApplicationsController < ApplicationController
     # First check if there is a redirect
     redirect = ApplicationRedirect.find_by_application_id(params[:id])
     if redirect
-      redirect_to :id => redirect.redirect_application_id
+      redirect_to id: redirect.redirect_application_id
       return
     end
 
@@ -104,7 +104,7 @@ class ApplicationsController < ApplicationController
     @nearby_count = @application.find_all_nearest_or_recent.size
     @comment = Comment.new
     # Required for new email alert signup form
-    @alert = Alert.new(:address => @application.address)
+    @alert = Alert.new(address: @application.address)
 
     respond_to do |format|
       format.html
@@ -115,12 +115,12 @@ class ApplicationsController < ApplicationController
     # First check if there is a redirect
     redirect = ApplicationRedirect.find_by_application_id(params[:id])
     if redirect
-      redirect_to :id => redirect.redirect_application_id
+      redirect_to id: redirect.redirect_application_id
       return
     end
 
     @sort = params[:sort]
-    @rss = nearby_application_url(params.merge(:format => "rss", :page => nil))
+    @rss = nearby_application_url(params.merge(format: "rss", page: nil))
 
     # TODO: Fix this hacky ugliness
     if request.format == Mime::HTML
@@ -132,19 +132,19 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     case(@sort)
     when "time"
-      @applications = @application.find_all_nearest_or_recent.paginate :page => params[:page], :per_page => per_page
+      @applications = @application.find_all_nearest_or_recent.paginate page: params[:page], per_page: per_page
     when "distance"
       @applications = Application.unscoped do
-        @application.find_all_nearest_or_recent.paginate :page => params[:page], :per_page => per_page
+        @application.find_all_nearest_or_recent.paginate page: params[:page], per_page: per_page
       end
     else
-      redirect_to :sort => "time"
+      redirect_to sort: "time"
       return
     end
 
     respond_to do |format|
       format.html { render "nearby" }
-      format.rss { render "api/index", :format => :rss, :layout => false, :content_type => Mime::XML }
+      format.rss { render "api/index", format: :rss, layout: false, content_type: Mime::XML }
     end
   end
 end

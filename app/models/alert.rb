@@ -1,7 +1,7 @@
 class Alert < ActiveRecord::Base
   belongs_to :subscription, foreign_key: :email, primary_key: :email
 
-  validates_numericality_of :radius_meters, :greater_than => 0, :message => "isn't selected"
+  validates_numericality_of :radius_meters, greater_than: 0, message: "isn't selected"
   validate :validate_address
 
   before_validation :geocode
@@ -61,7 +61,7 @@ class Alert < ActiveRecord::Base
     frequency_distribution(alerts.map {|alert| alert.lga_name}.compact)
   end
 
-  # Pass an array of objects. Count the distribution of objects and return as a hash of :object => :count
+  # Pass an array of objects. Count the distribution of objects and return as a hash of object: :count
   def self.frequency_distribution(a)
     freq = {}
     a.each do |a|
@@ -100,12 +100,12 @@ class Alert < ActiveRecord::Base
 
   # Applications that have been scraped since the last time the user was sent an alert
   def recent_applications
-    Application.order("date_received DESC").near([location.lat, location.lng], radius_km, :units => :km).where('date_scraped > ?', cutoff_time)
+    Application.order("date_received DESC").near([location.lat, location.lng], radius_km, units: :km).where('date_scraped > ?', cutoff_time)
   end
 
   # Applications in the area of interest which have new comments made since we were last alerted
   def applications_with_new_comments
-    Application.near([location.lat, location.lng], radius_km, :units => :km).joins(:comments).where('comments.updated_at > ?', cutoff_time).where('comments.confirmed' => true).where('comments.hidden' => false).uniq
+    Application.near([location.lat, location.lng], radius_km, units: :km).joins(:comments).where('comments.updated_at > ?', cutoff_time).where('comments.confirmed' => true).where('comments.hidden' => false).uniq
   end
 
   def new_comments
@@ -159,7 +159,7 @@ class Alert < ActiveRecord::Base
 
     time = Time.now
     alerts.map{|a| a.id}.shuffle.each_slice(batch_size) do |alert_ids|
-      Alert.delay(:run_at => time).process_alerts(alert_ids)
+      Alert.delay(run_at: time).process_alerts(alert_ids)
       time += time_between_batches
     end
     info_logger.info "Mailing jobs for the next 24 hours queued"
@@ -184,8 +184,8 @@ class Alert < ActiveRecord::Base
     # page caches during mail runs.
     Stat.emails_sent += total_no_emails
     Stat.applications_sent += total_no_applications
-    EmailBatch.create!(:no_emails => total_no_emails, :no_applications => total_no_applications,
-      :no_comments => total_no_comments)
+    EmailBatch.create!(no_emails: total_no_emails, no_applications: total_no_applications,
+      no_comments: total_no_comments)
     [total_no_emails, total_no_applications, total_no_comments]
   end
 
@@ -202,7 +202,7 @@ class Alert < ActiveRecord::Base
   private
 
   def remove_other_alerts_for_this_address
-    Alert.delete_all(:email => email, :address => address)
+    Alert.delete_all(email: email, address: address)
   end
 
   def geocode

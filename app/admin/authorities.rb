@@ -1,7 +1,7 @@
 ActiveAdmin.register Authority do
-  actions :all, :except => [:destroy]
+  actions :all, except: [:destroy]
 
-  scope :active, :default => true
+  scope :active, default: true
   scope :all
 
   index do
@@ -10,7 +10,7 @@ ActiveAdmin.register Authority do
     actions
   end
 
-  show :title => :full_name do |a|
+  show title: :full_name do |a|
     attributes_table do
       row :full_name
       row :short_name
@@ -46,14 +46,14 @@ ActiveAdmin.register Authority do
     actions
   end
 
-  action_item :scrape, :only => :show do
+  action_item :scrape, only: :show do
     button_to('Scrape', scrape_admin_authority_path)
   end
 
-  member_action :scrape, :method => :post do
+  member_action :scrape, method: :post do
     authority = Authority.find(params[:id])
     authority.delay.collect_applications
-    redirect_to({:action => :show}, :notice => "Queued for scraping!")
+    redirect_to({action: :show}, notice: "Queued for scraping!")
   end
 
   permit_params :full_name, :short_name, :state, :email, :population_2011, :morph_name, :disabled

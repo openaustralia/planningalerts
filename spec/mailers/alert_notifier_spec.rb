@@ -2,20 +2,20 @@ require 'spec_helper'
 
 describe AlertNotifier do
   before :each do
-    @alert = create(:alert, :email => "matthew@openaustralia.org", :address => "24 Bruce Rd, Glenbrook NSW 2773",
-      :lat => 1.0, :lng => 2.0, :radius_meters => 800)
+    @alert = create(:alert, email: "matthew@openaustralia.org", address: "24 Bruce Rd, Glenbrook NSW 2773",
+      lat: 1.0, lng: 2.0, radius_meters: 800)
     @alert.stub(:confirm_id).and_return("abcdef")
     @original_emails_sent = Stat.emails_sent
     @original_applications_sent = Stat.applications_sent
-    location1 = double("Location", :lat => 0.1, :lng => 0.2)
-    @a1 = mock_model(Application, :address => "Foo Street, Bar", :council_reference => "a1", :description => "Knock something down", :id => 1,
-        :lat => location1.lat, :lng => location1.lng, :location => location1)
-    location2 = double("Location", :lat => 0.3, :lng => 0.4)
-    @a2 = mock_model(Application, :address => "Bar Street, Foo", :council_reference => "a2", :description => "Put something up", :id => 2,
-        :lat => location2.lat, :lng => location2.lng, :location => location2)
-    @a3 = mock_model(Application, :address => "2 Foo Parade, Glenbrook NSW 2773", :id => 3)
-    @c1 = mock_model(Comment, :text => "I think this is a great idea", :name => "Matthew Landauer", :application => @a3, :id => 1)
-    @c2 = mock_model(Comment, :name => "Jack Smith", :application => @a3, :id => 2, :text => <<-EOF
+    location1 = double("Location", lat: 0.1, lng: 0.2)
+    @a1 = mock_model(Application, address: "Foo Street, Bar", council_reference: "a1", description: "Knock something down", id: 1,
+        lat: location1.lat, lng: location1.lng, location: location1)
+    location2 = double("Location", lat: 0.3, lng: 0.4)
+    @a2 = mock_model(Application, address: "Bar Street, Foo", council_reference: "a2", description: "Put something up", id: 2,
+        lat: location2.lat, lng: location2.lng, location: location2)
+    @a3 = mock_model(Application, address: "2 Foo Parade, Glenbrook NSW 2773", id: 3)
+    @c1 = mock_model(Comment, text: "I think this is a great idea", name: "Matthew Landauer", application: @a3, id: 1)
+    @c2 = mock_model(Comment, name: "Jack Smith", application: @a3, id: 2, text: <<-EOF
 Carles typewriter officia, cillum ethical elit swag. Consequat cillum yr wes anderson. 3 wolf moon blog iphone, pickled irure skateboard mcsweeney's seitan keffiyeh wayfarers. Jean shorts sriracha sed laborum. Next level forage flexitarian id. Mixtape sriracha sartorial beard ut, salvia adipisicing veniam wayfarers bushwick ullamco 8-bit incididunt. Scenester excepteur dreamcatcher, truffaut organic placeat esse post-ironic carles cupidatat nihil butcher sartorial fanny pack lo-fi.
 
 Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. Odd future aesthetic tempor, mustache bespoke gastropub dolore polaroid salvia helvetica. Kogi chambray cardigan sunt single-origin coffee. Cardigan echo park master cleanse craft beer. Carles sunt selvage, beard gastropub artisan chillwave odio VHS street art you probably haven't heard of them gentrify mixtape aesthetic. Salvia chambray anim occupy echo park est. Pork belly sint post-ironic ennui, PBR vero culpa readymade cardigan laboris.

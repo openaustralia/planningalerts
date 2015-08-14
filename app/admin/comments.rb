@@ -1,13 +1,13 @@
 # Workaround for annoying bug in active_admin. See https://github.com/gregbell/active_admin/issues/64
-ActiveAdmin.register Comment, :as => "ApplicationComment" do
-  menu :label => "Comments"
-  actions :all, :except => [:destroy, :new, :create]
+ActiveAdmin.register Comment, as: "ApplicationComment" do
+  menu label: "Comments"
+  actions :all, except: [:destroy, :new, :create]
 
-  scope :visible, :default => true
+  scope :visible, default: true
   scope :all
 
-  index :title => "Comments" do
-    column :text, :sortable => false do |comment|
+  index title: "Comments" do
+    column :text, sortable: false do |comment|
       truncate(comment.text)
     end
     column :email

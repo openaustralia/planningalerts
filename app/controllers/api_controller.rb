@@ -16,16 +16,16 @@ class ApiController < ApplicationController
 
   def postcode
     # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
-    api_render(Application.where(:postcode => params[:postcode]),
+    api_render(Application.where(postcode: params[:postcode]),
       "Recent applications in postcode #{params[:postcode]}")
   end
 
   def suburb
-    apps = Application.where(:suburb => params[:suburb])
+    apps = Application.where(suburb: params[:suburb])
     description = "Recent applications in #{params[:suburb]}"
     if params[:state]
       description += ", #{params[:state]}"
-      apps = apps.where(:state => params[:state])
+      apps = apps.where(state: params[:state])
     end
     api_render(apps, description)
   end
@@ -39,7 +39,7 @@ class ApiController < ApplicationController
       location = Location.new(params[:lat].to_f, params[:lng].to_f)
       location_text = location.to_s
     end
-    api_render(Application.near([location.lat, location.lng], radius.to_f / 1000, :units => :km),
+    api_render(Application.near([location.lat, location.lng], radius.to_f / 1000, units: :km),
       "Recent applications within #{help.meters_in_words(radius.to_i)} of #{location_text}")
   end
 
@@ -84,10 +84,10 @@ class ApiController < ApplicationController
 
     respond_to do |format|
       format.js do
-        s = {:applications => applications, :application_count => apps.count, :max_id => max_id}
-        j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
-          :include => {:authority => {:only => [:full_name]}})
-        render :json => j, :callback => params[:callback], content_type: Mime::JSON
+        s = {applications: applications, application_count: apps.count, max_id: max_id}
+        j = s.to_json(except: [:authority_id, :suburb, :state, :postcode, :distance],
+          include: {authority: {only: [:full_name]}})
+        render json: j, callback: params[:callback], content_type: Mime::JSON
       end
     end
   end
@@ -95,18 +95,18 @@ class ApiController < ApplicationController
   def old_index
     case params[:call]
     when "address"
-      redirect_to applications_url(:format => "rss", :address => params[:address], :radius => params[:area_size])
+      redirect_to applications_url(format: "rss", address: params[:address], radius: params[:area_size])
     when "point"
-      redirect_to applications_url(:format => "rss", :lat => params[:lat], :lng => params[:lng],
-        :radius => params[:area_size])
+      redirect_to applications_url(format: "rss", lat: params[:lat], lng: params[:lng],
+        radius: params[:area_size])
     when "area"
-      redirect_to applications_url(:format => "rss",
-        :bottom_left_lat => params[:bottom_left_lat], :bottom_left_lng => params[:bottom_left_lng],
-        :top_right_lat => params[:top_right_lat], :top_right_lng => params[:top_right_lng])
+      redirect_to applications_url(format: "rss",
+        bottom_left_lat: params[:bottom_left_lat], bottom_left_lng: params[:bottom_left_lng],
+        top_right_lat: params[:top_right_lat], top_right_lng: params[:top_right_lng])
     when "authority"
-      redirect_to authority_applications_url(:format => "rss", :authority_id => Authority.short_name_encoded(params[:authority]))
+      redirect_to authority_applications_url(format: "rss", authority_id: Authority.short_name_encoded(params[:authority]))
     else
-      render :text => "unexpected value for parameter call. Accepted values: address, point, area and authority"
+      render text: "unexpected value for parameter call. Accepted values: address, point, area and authority"
     end
   end
 
@@ -134,7 +134,7 @@ class ApiController < ApplicationController
     # Parameter error checking (only do it on the API calls)
     invalid_parameter_keys = params.keys - valid_parameter_keys
     unless invalid_parameter_keys.empty?
-      render :text => "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.sort.join(', ')}", :status => 400
+      render text: "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.sort.join(', ')}", status: 400
     end
   end
 
@@ -172,7 +172,7 @@ class ApiController < ApplicationController
   end
 
   def api_render(apps, description)
-    @applications = apps.paginate(:page => params[:page], :per_page => per_page)
+    @applications = apps.paginate(page: params[:page], per_page: per_page)
     @description = description
 
     ApiStatistic.log(request) unless ::Configuration::DISABLE_API_LOGGING
@@ -180,17 +180,17 @@ class ApiController < ApplicationController
       # TODO: Move the template over to using an xml builder
       format.rss do
         render params[:style] == "html" ? "index_html" : "index",
-          :format => :rss, :layout => false, :content_type => Mime::XML
+          format: :rss, layout: false, content_type: Mime::XML
       end
       format.js do
         if params[:v] == "2"
-          s = {:application_count => @applications.count, :page_count => @applications.total_pages, :applications => @applications}
+          s = {application_count: @applications.count, page_count: @applications.total_pages, applications: @applications}
         else
           s = @applications
         end
-        j = s.to_json(:except => [:authority_id, :suburb, :state, :postcode, :distance],
-          :include => {:authority => {:only => [:full_name]}})
-        render :json => j, :callback => params[:callback], content_type: Mime::JSON
+        j = s.to_json(except: [:authority_id, :suburb, :state, :postcode, :distance],
+          include: {authority: {only: [:full_name]}})
+        render json: j, callback: params[:callback], content_type: Mime::JSON
       end
     end
   end

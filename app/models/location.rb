@@ -15,7 +15,7 @@ class Location < SimpleDelegator
   end
 
   def self.geocode(address)
-    r = Geokit::Geocoders::GoogleGeocoder3.geocode(address, :bias => "au")
+    r = Geokit::Geocoders::GoogleGeocoder3.geocode(address, bias: "au")
     r = r.all.find{|l| Location.new(l).in_correct_country?} || r
     l = Location.new(r)
     l.original_address = address
@@ -51,12 +51,12 @@ class Location < SimpleDelegator
   
   # Distance given is in metres
   def endpoint(bearing, distance)
-    Location.new(__getobj__.endpoint(bearing, distance / 1000.0, :units => :kms))
+    Location.new(__getobj__.endpoint(bearing, distance / 1000.0, units: :kms))
   end
   
   # Distance (in metres) to other point
   def distance_to(l)
-    __getobj__.distance_to(l.__getobj__, :units => :kms) * 1000.0
+    __getobj__.distance_to(l.__getobj__, units: :kms) * 1000.0
   end
   
   def full_address

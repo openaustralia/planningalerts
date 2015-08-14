@@ -4,6 +4,6 @@ class RemoveMapUrlColumn < ActiveRecord::Migration
   end
 
   def self.down
-    add_column :applications, :map_url, :string, :limit => 150
+    add_column :applications, :map_url, :string, limit: 150
   end
 end

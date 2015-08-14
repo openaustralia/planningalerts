@@ -2,18 +2,18 @@ class AlertsController < ApplicationController
   caches_page :statistics
 
   def widget_prototype
-    @alert = Alert.new(:address => params[:address], :email => params[:email])
+    @alert = Alert.new(address: params[:address], email: params[:email])
     @set_focus_control = params[:address] ? "alert_email" : "alert_address"
   end
 
   def new
-    @alert = Alert.new(:address => params[:address], :email => params[:email])
+    @alert = Alert.new(address: params[:address], email: params[:email])
     @set_focus_control = params[:address] ? "alert_email" : "alert_address"
   end
 
   def create
     @address = params[:alert][:address]
-    @alert = Alert.new(:address => @address, :email => params[:alert][:email], :radius_meters => zone_sizes['l'], :theme => @theme)
+    @alert = Alert.new(address: @address, email: params[:alert][:email], radius_meters: zone_sizes['l'], theme: @theme)
     if !@alert.save
       render 'new'
     end
