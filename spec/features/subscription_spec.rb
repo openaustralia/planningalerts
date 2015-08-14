@@ -37,6 +37,8 @@ feature "Subscribing for access to several alerts" do
       expect(page).to have_content("you now have alerts set up for 3 street addresses")
       expect(Subscription.find_by!(email: email).trial_days_remaining).to eql 7
       expect(Subscription.find_by!(email: email)).to be_trial
+      click_link("subscribe here")
+
       # Fake what the Stripe JS does (i.e. inject the token in the form if successful)
       # FIXME: This isn't having an effect because we're just setting the plan amout to 0. See comment above.
       first("input[name='stripeToken']", visible: false).set(stripe_helper.generate_card_token)
