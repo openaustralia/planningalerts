@@ -1,11 +1,19 @@
 - content_for :page_title, "Confirmed"
-.attention
-  - if !@alert.reload.subscription.try(:trial?)
+- if !@alert.reload.subscription.try(:trial?)
+  .attention
     %h3 Thanks, your alert has been activated
     %p
       You will now receive email alerts for any planning applications we find within <strong>#{meters_in_words(@alert.radius_meters)}</strong>
       of <strong>#{@alert.address}</strong>.
-  - else
+  %p
+    You can
+    = link_to "change the size of the area covered by the alerts", area_alert_path(:id => @alert.confirm_id)
+    now or at a later time. Every email alert will have this link.
+    If you want alerts around another address as well
+    #{link_to "you can sign up for multiple alerts", new_alert_path}.
+
+- else
+  .attention
     %h3
       Great, you now have alerts set up for
       = Alert.active.where(email: @alert.email).count.to_s
@@ -34,10 +42,3 @@
       You can
       = link_to "subscribe here", new_subscription_url(email: @alert.email)
       as soon as you’re ready.
-- if !@alert.reload.subscription.try(:trial?)
-  %p
-    You can
-    = link_to "change the size of the area covered by the alerts", area_alert_path(:id => @alert.confirm_id)
-    now or at a later time. Every email alert will have this link.
-    If you want alerts around another address as well
-    #{link_to "you can sign up for multiple alerts", new_alert_path}.
