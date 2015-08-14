@@ -1,5 +1,5 @@
 - content_for :page_title, "Confirmed"
-- if @alert.reload.subscription.try(:trial?)
+- if @alert.has_trial_subscription?
   .attention
     %h3
       Great, you now have alerts set up for

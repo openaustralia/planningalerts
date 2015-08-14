@@ -200,6 +200,10 @@ class Alert < ActiveRecord::Base
     end
   end
 
+  def has_trial_subscription?
+    subscription.try(:trial?)
+  end
+
   private
 
   def remove_other_alerts_for_this_address
