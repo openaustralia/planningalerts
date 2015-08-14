@@ -6,13 +6,14 @@
       You will now receive email alerts for any planning applications we find within <strong>#{meters_in_words(@alert.radius_meters)}</strong>
       of <strong>#{@alert.address}</strong>.
   - else
-    %h3 Thanks, your alert has been activated
+    - # TODO: Make alert count dynamic
+    %h3 Great, you now have alerts set up for 3 street addresses!
     %p
       You will now receive email alerts for any planning applications we find within <strong>#{meters_in_words(@alert.radius_meters)}</strong>
       of <strong>#{@alert.address}</strong>.
     = form_tag subscriptions_path, id: 'subscription-payment-form', class: 'registration-intro' do
       %p
-        You now have several email alerts. PlanningAlerts is free for low-volume, non-commercial use. After a free trial, you'll need to subscribe to keep getting alerts.
+        PlanningAlerts is free for low-volume, non-commercial use. After a free trial, you'll need to subscribe to keep getting alerts.
       = render partial: "subscriptions/stripe_button", locals: {email: @alert.email}
 %p
   You can

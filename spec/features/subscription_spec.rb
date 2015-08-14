@@ -34,7 +34,7 @@ feature "Subscribing for access to several alerts" do
       expect(current_email).to have_body_text("24 Bruce Road, Glenbrook NSW 2773")
       click_first_link_in_email
 
-      expect(page).to have_content("You now have several email alerts")
+      expect(page).to have_content("you now have alerts set up for 3 street addresses")
       expect(Subscription.find_by!(email: email).trial_days_remaining).to eql 7
       expect(Subscription.find_by!(email: email)).to be_trial
       # Fake what the Stripe JS does (i.e. inject the token in the form if successful)
