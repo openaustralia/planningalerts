@@ -89,7 +89,8 @@ module ApplicationHelper
       { name: "Christopher Lam", email_md5: "9daa06c4242ab7dcb9868a54d38a0a16" },
       { name: "Haiming Lai", email_md5: "d91f47b3d22536bf6cc881eba6c33f60" },
       { name: "Kenneth Dinesen", email_md5: "2ec62f13a1b7bea1121acfb784233941" },
-      { name: "Brian Zhang", email_md5: "dfa3cec311a6ac281bdd0f05f7b2839f" }
+      { name: "Brian Zhang", email_md5: "dfa3cec311a6ac281bdd0f05f7b2839f" },
+      { name: "Daniel Schramm", email_md5: "5ad9c348e0627c705ea2395339eb0feb" }
     ]
   end
 end
