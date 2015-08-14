@@ -27,7 +27,6 @@ class AlertsController < ApplicationController
       if @alert.subscription.nil?
         @subscription = Subscription.create!(email: @alert.email, trial_started_at: Date.today)
         @new_subscription = true
-        @alert.reload
       else
         @subscription = @alert.subscription
         @new_subscription = false
