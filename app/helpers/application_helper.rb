@@ -80,7 +80,8 @@ module ApplicationHelper
       { name: "Katherine Szuminska", email_md5: "23d3fa4bbac53c44edef4ff672b9816a" },
       { name: "Justin Wells", email_md5: "3c1983a3371799ba1a78606dc62655db" },
       { name: "Dylan Fogarty-MacDonald", email_md5: "8bb01991a13de24d9620ad71d046301a" },
-      { name: "Luke Bacon", email_md5: "0a705a02c7de5b135d90f7c08a343fa9" }
+      { name: "Luke Bacon", email_md5: "0a705a02c7de5b135d90f7c08a343fa9" },
+      { name: "Peter Serwylo", email_md5: "c4b310e4388f2d02bc857d0815513f65" }
     ]
   end
 end
