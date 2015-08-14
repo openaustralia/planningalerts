@@ -20,7 +20,7 @@
       street addresses!
     %p
       %strong You need a paid subscription to get alerts for several addresses, or to use PlanningAlerts for your work.
-      A subscription costs $49 per month.
+      #{link_to "A subscription costs $49 per month", new_subscription_url(email: @alert.email)}.
       Once you’re subscribed you can get alerts from as many locations as you need.
     - # TODO: Make this a test for if the trial has just been created, rather than its length
     - # Because if you sign up for another alert on the same day you'll see this again.
