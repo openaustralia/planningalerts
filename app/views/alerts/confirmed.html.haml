@@ -1,5 +1,5 @@
 - content_for :page_title, "Confirmed"
-- if @alert.has_trial_subscription?
+- if @subscription.try(:trial?)
   .attention
     %h3
       Great, you now have alerts set up for
@@ -10,13 +10,13 @@
       Once you’re subscribed you can get alerts from as many locations as you need.
     - # TODO: Make this a test for if the trial has just been created, rather than its length
     - # Because if you sign up for another alert on the same day you'll see this again.
-    - if @alert.subscription.trial_days_remaining == 7
+    - if @subscription.trial_days_remaining == 7
       %p
         We’ve set you up a 7 day free trial subscription,
         so you can start getting your new alerts straight away.
     - else
       %p
-        You still have #{pluralize(@alert.subscription.trial_days_remaining, "day")}
+        You still have #{pluralize(@subscription.trial_days_remaining, "day")}
         remaining on your free trial subscription,
         so you’ll start getting your new alerts straight away.
     %p

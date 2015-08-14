@@ -22,7 +22,17 @@ class AlertsController < ApplicationController
   def confirmed
     @alert = Alert.find_by!(confirm_id: params[:id])
     @alert.confirm!
-    @alert.create_subscription_if_required
+
+    if Subscription::FEATURE_ENABLED && @alert.email_has_several_other_alerts?
+      if @alert.subscription.nil?
+        @subscription = Subscription.create!(email: @alert.email, trial_started_at: Date.today)
+        @new_subscription = true
+        @alert.reload
+      else
+        @subscription = @alert.subscription
+        @new_subscription = false
+      end
+    end
   end
 
   def unsubscribe
