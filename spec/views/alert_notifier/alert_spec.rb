@@ -14,7 +14,7 @@ describe "alert_notifier/alert" do
     assign(:alert, mock_model(Alert, address: "Foo Parade",
       radius_meters: 2000, confirm_id: "1234", subscription: nil))
     render
-    rendered.should have_content("Alterations & additions")
+    expect(rendered).to have_content("Alterations & additions")
   end
 
   context "when the recipient is not a subscriber" do
@@ -24,8 +24,8 @@ describe "alert_notifier/alert" do
       render
     end
 
-    it { rendered.should_not have_content("trial subscription") }
-    it { rendered.should_not have_content("You’re a paid subscriber") }
+    it { expect(rendered).to_not have_content("trial subscription") }
+    it { expect(rendered).to_not have_content("You’re a paid subscriber") }
   end
 
   context "when the recipient has a trial subscription" do
@@ -36,9 +36,9 @@ describe "alert_notifier/alert" do
       render
     end
 
-    it { rendered.should have_content("trial subscription") }
-    it { rendered.should have_content("7 days remaining") }
-    it { rendered.should_not have_content("You’re a paid subscriber") }
+    it { expect(rendered).to have_content("trial subscription") }
+    it { expect(rendered).to have_content("7 days remaining") }
+    it { expect(rendered).to_not have_content("You’re a paid subscriber") }
   end
 
   context "when the recipient has a trial subscription with only one day left" do
@@ -49,7 +49,7 @@ describe "alert_notifier/alert" do
       render
     end
 
-    it { rendered.should have_content("1 day remaining") }
+    it { expect(rendered).to have_content("1 day remaining") }
   end
 
   context "when the recipient is a paid subscriber" do
@@ -60,6 +60,6 @@ describe "alert_notifier/alert" do
       render
     end
 
-    it { rendered.should have_content("You’re a paid subscriber") }
+    it { expect(rendered).to have_content("You’re a paid subscriber") }
   end
 end
