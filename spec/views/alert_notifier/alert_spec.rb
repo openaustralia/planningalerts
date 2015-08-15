@@ -24,13 +24,8 @@ describe "alert_notifier/alert" do
       render
     end
 
-    it "should not show the trial banner" do
-      rendered.should_not have_content("trial subscription")
-    end
-
-    it "should not show a note saying they are a ‘paid subscriber’" do
-      rendered.should_not have_content("You’re a paid subscriber")
-    end
+    it { rendered.should_not have_content("trial subscription") }
+    it { rendered.should_not have_content("You’re a paid subscriber") }
   end
 
   context "when the recipient has a trial subscription" do
@@ -41,17 +36,9 @@ describe "alert_notifier/alert" do
       render
     end
 
-    it "should show the trial banner" do
-      rendered.should have_content("trial subscription")
-    end
-
-    it "should show the number of days remaining in the trial" do
-      rendered.should have_content("7 days remaining")
-    end
-
-    it "should not show a note saying they are a ‘paid subscriber’" do
-      rendered.should_not have_content("You’re a paid subscriber")
-    end
+    it { rendered.should have_content("trial subscription") }
+    it { rendered.should have_content("7 days remaining") }
+    it { rendered.should_not have_content("You’re a paid subscriber") }
   end
 
   context "when the recipient has a trial subscription with only one day left" do
@@ -62,9 +49,7 @@ describe "alert_notifier/alert" do
       render
     end
 
-    it "should not pluralise 'day'" do
-      rendered.should have_content("1 day remaining")
-    end
+    it { rendered.should have_content("1 day remaining") }
   end
 
   context "when the recipient is a paid subscriber" do
@@ -75,8 +60,6 @@ describe "alert_notifier/alert" do
       render
     end
 
-    it "should show a note saying they are a ‘paid subscriber’" do
-      rendered.should have_content("You’re a paid subscriber")
-    end
+    it { rendered.should have_content("You’re a paid subscriber") }
   end
 end
