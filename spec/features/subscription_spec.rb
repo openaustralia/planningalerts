@@ -81,7 +81,11 @@ feature "Subscribing for access to several alerts" do
     end
 
     context "expired" do
-      background { Subscription.find_by!(email: email).update(trial_started_at: 7.days.ago) }
+      background do
+        create(:alert, email: email, confirmed: true, address: "123 King St, Newtown")
+        create(:alert, email: email, confirmed: true, address: "456 Marrickville Rd, Marrickville")
+        Subscription.find_by!(email: email).update(trial_started_at: 7.days.ago)
+      end
 
       scenario "Alerts don't contain the application details any more" do
         alert.process!
