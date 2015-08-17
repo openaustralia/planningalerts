@@ -60,4 +60,15 @@ describe "alert_notifier/alert" do
     it { expect(rendered).to have_content("You’re a paid subscriber") }
     it { expect(rendered).to_not have_content("Support this charity-run project with a tax deductible donation") }
   end
+
+  context "when the recipient's trial subscription has expired" do
+    before :each do
+      subscription = create(:subscription, email: "foo@example.org", trial_started_at: 7.days.ago)
+      2.times { create(:alert, email: "foo@example.org", confirmed: true) }
+      assign(:alert, create(:alert, email: "foo@example.org", confirmed: true, subscription: subscription))
+      render
+    end
+
+    it { expect(rendered).to have_content("Your trial subscription has expired") }
+  end
 end
