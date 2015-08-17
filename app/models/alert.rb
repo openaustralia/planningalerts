@@ -197,6 +197,10 @@ class Alert < ActiveRecord::Base
     subscription.try(:trial?)
   end
 
+  def expired_subscription?
+    email_has_several_other_alerts? && subscription && !subscription.trial? && !subscription.paid?
+  end
+
   private
 
   def remove_other_alerts_for_this_address

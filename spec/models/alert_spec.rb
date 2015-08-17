@@ -337,4 +337,40 @@ describe Alert do
       it { expect(alert.email_has_several_other_alerts?).to be_true }
     end
   end
+
+  describe "#expired_subscription?" do
+    let(:email) { "luke@example.org" }
+    let(:alert) { Alert.find_by(email: email) }
+
+    before :each do
+      2.times { create(:alert, confirmed: true, email: email) }
+    end
+
+    context "2 alerts" do
+      it { expect(alert.expired_subscription?).to be_false }
+    end
+
+    context "3 alerts or more" do
+      before :each do
+        create(:alert, confirmed: true, email: email)
+      end
+
+      it { expect(alert.expired_subscription?).to be_false }
+
+      context "trial subscription" do
+        before { create(:subscription, email: email, trial_started_at: Date.today) }
+        it { expect(alert.expired_subscription?).to be_false }
+      end
+
+      context "paid subscription" do
+        before { create(:subscription, email: email, stripe_subscription_id: "a_stripe_id") }
+        it { expect(alert.expired_subscription?).to be_false }
+      end
+
+      context "expired trial" do
+        before { create(:subscription, email: email, trial_started_at: 7.days.ago) }
+        it { expect(alert.expired_subscription?).to be_true }
+      end
+    end
+  end
 end
