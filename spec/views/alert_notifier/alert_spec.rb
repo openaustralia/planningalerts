@@ -11,16 +11,14 @@ describe "alert_notifier/alert" do
   end
 
   it "should not use html entities to encode the description" do
-    assign(:alert, mock_model(Alert, address: "Foo Parade",
-      radius_meters: 2000, confirm_id: "1234", subscription: nil))
+    assign(:alert, create(:alert))
     render
     expect(rendered).to have_content("Alterations & additions")
   end
 
   context "when the recipient is not a subscriber" do
     before :each do
-      assign(:alert, mock_model(Alert, address: "Foo Parade",
-        radius_meters: 2000, confirm_id: "1234", subscription: nil))
+      assign(:alert, create(:alert))
       render
     end
 
@@ -32,8 +30,7 @@ describe "alert_notifier/alert" do
   context "when the recipient has a trial subscription" do
     before :each do
       subscription = create(:subscription, trial_started_at: Date.today)
-      assign(:alert, mock_model(Alert, address: "Foo Parade",
-        radius_meters: 2000, confirm_id: "1234", subscription: subscription))
+      assign(:alert, create(:alert, subscription: subscription))
       render
     end
 
@@ -46,8 +43,7 @@ describe "alert_notifier/alert" do
   context "when the recipient has a trial subscription with only one day left" do
     before :each do
       subscription = create(:subscription, trial_started_at: 6.days.ago)
-      assign(:alert, mock_model(Alert, address: "Foo Parade",
-        radius_meters: 2000, confirm_id: "1234", subscription: subscription))
+      assign(:alert, create(:alert, subscription: subscription))
       render
     end
 
@@ -57,8 +53,7 @@ describe "alert_notifier/alert" do
   context "when the recipient is a paid subscriber" do
     before :each do
       subscription = create(:subscription, stripe_subscription_id: "a_stripe_id")
-      assign(:alert, mock_model(Alert, address: "Foo Parade",
-        radius_meters: 2000, confirm_id: "1234", subscription: subscription))
+      assign(:alert, create(:alert, subscription: subscription))
       render
     end
 
