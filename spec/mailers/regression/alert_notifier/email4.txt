@@ -24,4 +24,4 @@ https://www.openaustraliafoundation.org.au
 
 To change the size of the area covered by the alerts: http://nsw.127.0.0.1.xip.io:3000/alerts/abcdef/area
 
-To stop receiving these emails: http://nsw.127.0.0.1.xip.io:3000/alerts/abcdef/unsubscribe
+To stop receiving alerts for this address: http://nsw.127.0.0.1.xip.io:3000/alerts/abcdef/unsubscribe

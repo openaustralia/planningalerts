@@ -25,4 +25,4 @@ Discover our other projects: https://www.openaustraliafoundation.org.au/projects
 
 To change the size of the area covered by the alerts: https://dev.planningalerts.org.au/alerts/abcdef/area
 
-To stop receiving these emails: https://dev.planningalerts.org.au/alerts/abcdef/unsubscribe
+To stop receiving alerts for this address: https://dev.planningalerts.org.au/alerts/abcdef/unsubscribe
