@@ -36,6 +36,8 @@ a {
   margin-top: 0;
   margin-left: 0;
   margin-right: 0;
+  margin-bottom: 25px;
+  padding: 0 15px 15px 15px;
   background-color: $dark_blue;
   color: #ffffff;
   font-size: 14px;
@@ -46,20 +48,22 @@ a {
 
   p {
     margin: 0;
-    padding-left: 16px;
-    display: inline-block;
+    padding-top: 21px;
+    float: left;
 
     @media only screen and (max-width: 480px) {
-      padding-top: 15px;
-      padding-left: 0;
-      display: block;
-
       // This is to keep the par on one line on iPhones.
       // If we remove the margin on the body then remove this,
       // because there will be space for the full line at 14px.
       font-size: 13px;
     }
   }
+}
+
+.trial-banner-button-container {
+  padding-top: 15px;
+  padding-right: 16px;
+  float: left;
 }
 
 .trial-banner-button {

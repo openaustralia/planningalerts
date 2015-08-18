@@ -1,5 +1,9 @@
 .trial-banner.box
-  = link_to "Subscribe", new_subscription_url(email: @alert.email), class: 'trial-banner-button'
-  %p
-    Your #{link_to "trial subscription", new_subscription_url(email: @alert.email)}
-    has #{pluralize(@alert.subscription.trial_days_remaining, "day")} remaining
+  %table
+    %tr
+      %td
+        .trial-banner-button-container
+          = link_to "Subscribe", new_subscription_url(email: @alert.email), class: 'trial-banner-button'
+        %p
+          Your #{link_to "trial subscription", new_subscription_url(email: @alert.email)}
+          has #{pluralize(@alert.subscription.trial_days_remaining, "day")} remaining
