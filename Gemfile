@@ -71,6 +71,7 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-livereload'
+  gem 'growl'
   gem 'rb-inotify', require: false
   gem 'rack-livereload'
   gem 'mailcatcher'
