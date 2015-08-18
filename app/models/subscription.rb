@@ -1,6 +1,6 @@
 class Subscription < ActiveRecord::Base
   has_many :alerts, foreign_key: :email, primary_key: :email
-  validates :email, uniqueness: true
+  validates :email, uniqueness: true, presence: true
 
   FEATURE_ENABLED = !Rails.env.production?
 
