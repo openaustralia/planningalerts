@@ -67,7 +67,7 @@ feature "Subscribing for access to several alerts" do
       open_email(email)
       expect(current_email).to have_subject("1 new planning application near 123 Illawarra Road Marrickville 2204")
       expect(current_email).to have_body_text("trial subscription")
-      visit_in_email("Subscribe now")
+      visit_in_email("Subscribe")
 
       expect(page).to have_content("Subscribe now")
       # Fake what the Stripe JS does (i.e. inject the token in the form if successful)
