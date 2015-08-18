@@ -11,6 +11,9 @@
     %p
       %strong Non-commercial use of PlanningAlerts is free for any number of addresses.
       If this sounds like you, please #{mail_to "contact@planningalerts.org.au", "email us"}—we’ll
-      be happy to help with a free, non-commercial subscription.
+      be happy to help with a free,
+      - # This prevents the term breaking over two lines, remove this hack if copy changes make it possible
+      %span{style: "white-space: nowrap;"}non-commercial
+      subscription.
 
     = render partial: "stripe_button", locals: {email: @email}
