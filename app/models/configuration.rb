@@ -1,8 +1,5 @@
 # Stores application configuration settings
 module Configuration
-  # URL Stuff
-  HOST = 'localhost:3000'
-
   # See https://morph.io/api
   MORPH_API_KEY = "xxxxxxxxxxxxxxxxxxxx"
 
