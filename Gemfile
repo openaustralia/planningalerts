@@ -53,6 +53,7 @@ gem "oj"
 gem "redcarpet"
 gem 'honeybadger'
 gem 'stripe'
+gem 'dotenv-rails'
 
 group :test do
   gem 'capybara'
