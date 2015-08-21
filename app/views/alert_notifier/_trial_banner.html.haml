@@ -3,7 +3,7 @@
     %tr
       %td
         .trial-banner-button-container
-          = link_to "Subscribe now", new_subscription_url(email: @alert.email, utm_source: "alert", utm_medium: "email", utm_campaign: "trial_subscriber"), class: 'trial-banner-button'
+          = link_to "Subscribe now", new_subscription_url(@analytics_params.merge(email: @alert.email)), class: 'trial-banner-button'
         %p
-          Your #{link_to "trial subscription", new_subscription_url(email: @alert.email, utm_source: "alert", utm_medium: "email", utm_campaign: "trial_subscriber")}
+          Your #{link_to "trial subscription", new_subscription_url(@analytics_params.merge(email: @alert.email))}
           has #{pluralize(@alert.subscription.trial_days_remaining, "day")} remaining

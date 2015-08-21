@@ -4,7 +4,7 @@ class AlertNotifier < ActionMailer::Base
 
   def alert(theme, alert, applications, comments = [])
     @alert, @applications, @comments = alert, applications, comments
-
+    @analytics_params = {utm_source: "alert", utm_medium: "email", utm_campaign: "trial_subscriber"}
 
     themed_mail(theme: theme, from: email_from(theme), to: alert.email,
       subject: render_to_string(partial: "subject",
