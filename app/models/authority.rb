@@ -100,7 +100,7 @@ class Authority < ActiveRecord::Base
     info_logger = AuthorityLogger.new(self, other_info_logger)
 
     time = Benchmark.ms do
-      collect_applications_date_range(Date.today - ::Configuration::SCRAPE_DELAY, Date.today, info_logger)
+      collect_applications_date_range(Date.today - ENV["SCRAPE_DELAY"].to_i, Date.today, info_logger)
     end
     info_logger.info "Took #{(time / 1000).to_i} s to collect applications from #{full_name_and_state}"
   end

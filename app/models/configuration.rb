@@ -1,8 +1,5 @@
 # Stores application configuration settings
 module Configuration
-  # Scraper params
-  SCRAPE_DELAY = 5
-
   # Google maps key
   # Use the following maps API key if you are running your development instance at http://planningalerts-app.dev
   # This will be the case if you are using pow (http://pow.cx/)
