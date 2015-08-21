@@ -48,6 +48,7 @@ a {
 
   a {
     color: #ffffff;
+    text-decoration: underline;
   }
 
   p {
@@ -70,7 +71,7 @@ a {
   padding: 6px 10px;
   background-color: $orange;
   color: #ffffff;
-  text-decoration: none;
+  text-decoration: none !important;
 
   @media only screen and (max-width: 480px) {
     font-size: 16px;
