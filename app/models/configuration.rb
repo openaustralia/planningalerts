@@ -1,10 +1,5 @@
 # Stores application configuration settings
 module Configuration
-  # Google maps key
-  # Use the following maps API key if you are running your development instance at http://planningalerts-app.dev
-  # This will be the case if you are using pow (http://pow.cx/)
-  GOOGLE_MAPS_KEY = 'ABQIAAAAo-lZBjwKTxZxJsD-PJnp8RTctXwaglzRZcFAUhNsPfHMAK74xRSSE3HhjcyVtlJHXKjyRyk_3L4CYA'
-
   # If you have Google Maps API for Business (OpenAustralia Foundation gets it through the Google Maps API
   # grants programme for charities) uncomment and fill out the two lines below
   #GOOGLE_MAPS_CLIENT_ID = "xxxxxxxxxxx"
