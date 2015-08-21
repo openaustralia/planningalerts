@@ -1,10 +1,5 @@
 # Stores application configuration settings
 module Configuration
-  # cuttlefish.io is used to send out emails in production
-  CUTTLEFISH_SERVER = "cuttlefish.io"
-  CUTTLEFISH_USER_NAME = "xxxxxxxxxxxxxxxxx"
-  CUTTLEFISH_PASSWORD = "xxxxxxxxxxxxxxxxxxxx"
-
   # Configuration for the theme
   THEME_NSW_HOST = "nsw.127.0.0.1.xip.io:3000"
   THEME_NSW_EMAIL_FROM_ADDRESS = "contact@nsw.127.0.0.1.xip.io"
