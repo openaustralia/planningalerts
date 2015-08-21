@@ -26,11 +26,11 @@ class DefaultTheme < Theme
   end
 
   def app_name
-    ::Configuration::EMAIL_FROM_NAME
+    ENV["EMAIL_FROM_NAME"]
   end
 
   def email_from_address
-    ::Configuration::EMAIL_FROM_ADDRESS
+    ENV["EMAIL_FROM_ADDRESS"]
   end
 
   def google_analytics_key

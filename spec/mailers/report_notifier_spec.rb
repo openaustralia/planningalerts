@@ -15,7 +15,7 @@ describe ReportNotifier do
   end
   
   it "should go to the moderator email address" do
-    @notifier.to.should == ["contact@planningalerts.org.au"]
+    @notifier.to.should == ["moderator@planningalerts.org.au"]
   end
   
   it "should tell the moderator what the email is about" do
