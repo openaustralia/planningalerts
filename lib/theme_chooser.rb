@@ -34,7 +34,7 @@ class DefaultTheme < Theme
   end
 
   def google_analytics_key
-    ::Configuration::GOOGLE_ANALYTICS_KEY
+    ENV["GOOGLE_ANALYTICS_KEY"]
   end
 
   def google_maps_client_id

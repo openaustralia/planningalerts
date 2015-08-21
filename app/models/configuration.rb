@@ -22,9 +22,6 @@ module Configuration
   #GOOGLE_MAPS_CLIENT_ID = "xxxxxxxxxxx"
   #GOOGLE_MAPS_CRYPTOGRAPHIC_KEY = "xxxxxxxxxxx"
 
-  # Google Analytics key
-  GOOGLE_ANALYTICS_KEY = "UA-3107958-5"
-
   # OAuth details for Twitter application with read access only (for twitter feed on home page)
   # TWITTER_CONSUMER_KEY = "xxxxxxxxxxx"
   # TWITTER_CONSUMER_SECRET = "xxxxxxxxxxx"
