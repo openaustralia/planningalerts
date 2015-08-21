@@ -37,7 +37,7 @@ describe "alert_notifier/alert" do
       render
     end
 
-    it { expect(rendered).to have_content("Support this charity-run project with a tax deductible donation") }
+    it { expect(rendered).to_not have_content("Support this charity-run project with a tax deductible donation") }
     it { expect(rendered).to have_content("trial subscription") }
     it { expect(rendered).to have_content("7 days remaining") }
     it { expect(rendered).to_not have_content("You’re a paid subscriber") }
