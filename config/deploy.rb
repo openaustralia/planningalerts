@@ -27,6 +27,7 @@ if stage == "production"
 elsif stage == "test"
   server "kedumba.openaustraliafoundation.org.au", :app, :web, :db, primary: true
   set :deploy_to, "/srv/www/test.#{application}"
+  set :honeybadger_env, "staging"
 elsif stage == "development"
   server "planningalerts.org.au.dev", :app, :web, :db, primary: true
   set :deploy_to, "/srv/www"
