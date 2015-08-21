@@ -40,8 +40,6 @@ module Configuration
 
   THEME_NSW_GOOGLE_ANALYTICS_KEY = "UA-3107958-12"
 
-  HONEYBADGER_API_KEY = 'xxxxxxxx'
-
   # Stripe is used to process cards and customers
   # for subscriptions. See app/controllers/subscriptions_controller.rb
   STRIPE_PUBLISHABLE_KEY = 'xxxxxxxxxxxxxxxxx'
