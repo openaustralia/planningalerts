@@ -38,7 +38,7 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 **Step 1 - Scrape DAs**
  * Register on [morph.io](https://morph.io) and [get your api key](https://morph.io/documentation/api).
- * Update `MORPH_API_KEY` in app/models/configuration.rb
+ * Create a `.env.local` file and set your `MORPH_API_KEY`
  * Run - `rake planningalerts:applications:scrape['marrickville']`
 
 **Step 2 - Setup an Alert**

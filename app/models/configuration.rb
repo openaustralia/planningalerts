@@ -1,8 +1,5 @@
 # Stores application configuration settings
 module Configuration
-  # See https://morph.io/api
-  MORPH_API_KEY = "xxxxxxxxxxxxxxxxxxxx"
-
   # Email setup
   EMAIL_FROM_ADDRESS = 'contact@planningalerts.org.au'
   EMAIL_FROM_NAME = 'PlanningAlerts'
