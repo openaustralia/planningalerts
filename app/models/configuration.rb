@@ -1,15 +1,5 @@
 # Stores application configuration settings
 module Configuration
-  # Configuration for the theme
-  THEME_NSW_HOST = "nsw.127.0.0.1.xip.io:3000"
-  THEME_NSW_EMAIL_FROM_ADDRESS = "contact@nsw.127.0.0.1.xip.io"
-  THEME_NSW_EMAIL_FROM_NAME = "Application Tracking"
-
-  THEME_NSW_CUTTLEFISH_USER_NAME = "xxxxxxxxxxxxxxxxx"
-  THEME_NSW_CUTTLEFISH_PASSWORD = "xxxxxxxxxxxxxxxxxxxx"
-
-  THEME_NSW_GOOGLE_ANALYTICS_KEY = "UA-3107958-12"
-
   # Stripe is used to process cards and customers
   # for subscriptions. See app/controllers/subscriptions_controller.rb
   STRIPE_PUBLISHABLE_KEY = 'xxxxxxxxxxxxxxxxx'
