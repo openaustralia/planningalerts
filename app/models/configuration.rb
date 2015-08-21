@@ -1,10 +1,5 @@
 # Stores application configuration settings
 module Configuration
-  # If you have Google Maps API for Business (OpenAustralia Foundation gets it through the Google Maps API
-  # grants programme for charities) uncomment and fill out the two lines below
-  #GOOGLE_MAPS_CLIENT_ID = "xxxxxxxxxxx"
-  #GOOGLE_MAPS_CRYPTOGRAPHIC_KEY = "xxxxxxxxxxx"
-
   # OAuth details for Twitter application with read access only (for twitter feed on home page)
   # TWITTER_CONSUMER_KEY = "xxxxxxxxxxx"
   # TWITTER_CONSUMER_SECRET = "xxxxxxxxxxx"

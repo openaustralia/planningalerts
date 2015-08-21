@@ -38,7 +38,7 @@ class DefaultTheme < Theme
   end
 
   def google_maps_client_id
-    ::Configuration::GOOGLE_MAPS_CLIENT_ID if defined?(::Configuration::GOOGLE_MAPS_CLIENT_ID)
+    ENV["GOOGLE_MAPS_CLIENT_ID"]
   end
 
 # TODO Put this in the config
