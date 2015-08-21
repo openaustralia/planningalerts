@@ -1,11 +1,5 @@
 # Stores application configuration settings
 module Configuration
-  # OAuth details for Twitter application with read access only (for twitter feed on home page)
-  # TWITTER_CONSUMER_KEY = "xxxxxxxxxxx"
-  # TWITTER_CONSUMER_SECRET = "xxxxxxxxxxx"
-  # TWITTER_OAUTH_TOKEN = "xxxxxxxxxxx"
-  # TWITTER_OAUTH_TOKEN_SECRET = "xxxxxxxxxxx"
-
   # cuttlefish.io is used to send out emails in production
   CUTTLEFISH_SERVER = "cuttlefish.io"
   CUTTLEFISH_USER_NAME = "xxxxxxxxxxxxxxxxx"
