@@ -42,6 +42,11 @@ class Alert < ActiveRecord::Base
     Alert.find_by_sql(command)
   end
 
+  # Only enable subscriptions on the default theme
+  def subscription
+    super if theme == "default"
+  end
+
   # Name of the local government authority
   def lga_name
     # Cache value
