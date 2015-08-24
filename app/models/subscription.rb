@@ -5,6 +5,18 @@ class Subscription < ActiveRecord::Base
 
   FEATURE_ENABLED = !Rails.env.production?
 
+  def self.default_price
+    34
+  end
+
+  def self.price_for_email(email)
+    if subscription = find_by(email: email)
+      subscription.price
+    else
+      default_price
+    end
+  end
+
   def trial_end_at
     trial_started_at + 7.days
   end
@@ -19,6 +31,10 @@ class Subscription < ActiveRecord::Base
 
   def paid?
     stripe_subscription_id.present?
+  end
+
+  def price
+    stripe_plan_id == "planningalerts-15" ? 15 : 34
   end
 end
 

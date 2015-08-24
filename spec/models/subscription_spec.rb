@@ -22,4 +22,22 @@ describe Subscription do
     it { expect(Subscription.new(stripe_subscription_id: "")).to_not be_paid }
     it { expect(Subscription.new(stripe_subscription_id: nil)).to_not be_paid }
   end
+
+  describe ".default_price" do
+    it { expect(Subscription.default_price).to eql 34 }
+  end
+
+  describe ".price_for_email" do
+    it { expect(Subscription.price_for_email(nil)).to eql 34 }
+
+    it do
+      create(:subscription, email: "john@example.com", stripe_plan_id: "planningalerts-15")
+      expect(Subscription.price_for_email("john@example.com")).to eql 15
+    end
+
+    it do
+      create(:subscription, email: "john@example.com", stripe_plan_id: "planningalerts-34")
+      expect(Subscription.price_for_email("john@example.com")).to eql 34
+    end
+  end
 end
