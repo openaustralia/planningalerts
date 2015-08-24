@@ -25,7 +25,7 @@ class AlertsController < ApplicationController
 
     if Subscription::FEATURE_ENABLED && @alert.email_has_several_other_alerts?
       if @alert.subscription.nil?
-        @subscription = Subscription.create!(email: @alert.email, trial_started_at: Date.today)
+        @subscription = Subscription.create!(email: @alert.email, trial_started_at: Date.today, stripe_plan_id: "planningalerts-34")
         @new_subscription = true
       else
         @subscription = @alert.subscription
