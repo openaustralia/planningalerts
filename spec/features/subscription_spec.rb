@@ -79,4 +79,11 @@ feature "Subscribing for access to several alerts" do
       expect(Subscription.find_by!(email: email)).to be_paid
     end
   end
+
+  scenario "Show a different price to people with a different plan" do
+    create(:subscription, email: email, stripe_plan_id: "planningalerts-15")
+
+    visit(new_subscription_path(email: email))
+    expect(page).to have_content("$15/month")
+  end
 end
