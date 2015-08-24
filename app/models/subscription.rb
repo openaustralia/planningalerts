@@ -5,15 +5,17 @@ class Subscription < ActiveRecord::Base
 
   FEATURE_ENABLED = !Rails.env.production?
 
-  def self.default_price
-    34
-  end
+  class << self
+    def default_price
+      34
+    end
 
-  def self.price_for_email(email)
-    if subscription = find_by(email: email)
-      subscription.price
-    else
-      default_price
+    def price_for_email(email)
+      if subscription = find_by(email: email)
+        subscription.price
+      else
+        default_price
+      end
     end
   end
 
