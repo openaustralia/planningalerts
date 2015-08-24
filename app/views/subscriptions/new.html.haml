@@ -16,4 +16,4 @@
       %span{style: "white-space: nowrap;"}non-commercial
       subscription.
 
-    = render partial: "stripe_button", locals: {email: @email}
+    = render partial: "stripe_button", locals: {email: @email, price: @price}

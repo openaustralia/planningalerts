@@ -6,7 +6,8 @@
       #{@subscription.alerts.count} street addresses!
     %p
       %strong You need a paid subscription to get alerts for several addresses, or to use PlanningAlerts for your work.
-      #{link_to "A subscription costs $49 per month", new_subscription_url(email: @alert.email)}.
+      = succeed "." do
+        = link_to "A subscription costs #{@subscription.price} per month", new_subscription_url(email: @alert.email)
       Once you’re subscribed you can get alerts from as many locations as you need.
     - if @new_subscription
       %p

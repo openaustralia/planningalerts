@@ -1,6 +1,7 @@
 class SubscriptionsController < ApplicationController
   def new
     @email = params[:email]
+    @price = Subscription.price_for_email(@email)
   end
 
   def create
