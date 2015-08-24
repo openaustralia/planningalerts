@@ -64,7 +64,7 @@ namespace :planningalerts do
         puts "Sorry, no subscription candidates were found."
       else
         puts emails.join("\n")
-        if confirm "Create subscriptions for the above addresses?"
+        if confirm_question "Create subscriptions for the above addresses?"
           emails.each do |email|
             puts "Creating trial subscription for #{email}..."
             Subscription.create!(email: email, stripe_plan_id: args[:stripe_plan_id], trial_started_at: Date.today)
@@ -77,7 +77,7 @@ namespace :planningalerts do
     end
   end
 
-  def confirm(message)
+  def confirm_question(message)
     STDOUT.puts "#{message} (y/n)"
     STDIN.gets.strip == 'y'
   end
