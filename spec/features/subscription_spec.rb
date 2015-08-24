@@ -6,7 +6,7 @@ feature "Subscribing for access to several alerts" do
     StripeMock.start
     # When plan is set to 0 StripeMock doesn't check for the card number when creating the customer
     # FIXME: StripeMock should create a customer when only a token is supplied
-    stripe_helper.create_plan(id: "planningalerts", amount: 0)
+    stripe_helper.create_plan(id: "planningalerts-34", amount: 0)
   end
   after { StripeMock.stop }
 
