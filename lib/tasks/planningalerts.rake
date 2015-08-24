@@ -47,12 +47,12 @@ namespace :planningalerts do
   end
 
   namespace :subscriptions do
-    desc "Creates trial subscriptions for 50 random people with 3 or more alerts"
-    task :rollout, [:stripe_plan_id] => :environment do |t, args|
+    desc "Creates trial subscriptions for the requested number of random people with 3 or more alerts"
+    task :rollout, [:stripe_plan_id, :count] => :environment do |t, args|
       raise "Unknown Stripe plan ID" unless Subscription::PLAN_IDS.include?(args[:stripe_plan_id])
 
-               # 50 random alerts...
-      emails = Alert.order("RAND()").limit(50).
+               # The requested number of random alerts...
+      emails = Alert.order("RAND()").limit(args[:count]).
                # ...where there's 3 or more other active alerts already signed up...
                active.group(:email).having("count(alerts.email) >= 3").
                # ...and they don't already have a subscription...
