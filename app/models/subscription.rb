@@ -5,8 +5,6 @@ class Subscription < ActiveRecord::Base
   validates :email, uniqueness: true, presence: true
   validates :stripe_plan_id, inclusion: PLAN_IDS
 
-  FEATURE_ENABLED = !Rails.env.production?
-
   class << self
     def default_price
       34
