@@ -24,7 +24,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def trial_days_remaining
-    (trial_end_at.to_date - Time.zone.now.to_date).to_i
+    (trial_end_at.to_date - Date.today).to_i
   end
 
   def trial?
