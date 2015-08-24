@@ -19,8 +19,7 @@ ActiveAdmin.register Subscription do
   form do |f|
     inputs "Details" do
       input :email
-      # TODO: Don't duplicate definition of plan IDs
-      input :stripe_plan_id, as: :select, collection: %w(planningalerts-15 planningalerts-34)
+      input :stripe_plan_id, as: :select, collection: Subscription::PLAN_IDS
       input :stripe_customer_id
       input :stripe_subscription_id
       input :trial_started_at

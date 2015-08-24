@@ -1,7 +1,9 @@
 class Subscription < ActiveRecord::Base
+  PLAN_IDS = %w(planningalerts-15 planningalerts-34)
+
   has_many :alerts, foreign_key: :email, primary_key: :email
   validates :email, uniqueness: true, presence: true
-  validates :stripe_plan_id, inclusion: %w(planningalerts-15 planningalerts-34)
+  validates :stripe_plan_id, inclusion: PLAN_IDS
 
   FEATURE_ENABLED = !Rails.env.production?
 
