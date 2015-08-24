@@ -5,5 +5,5 @@
 %input{type: 'hidden', name: 'stripeEmail', value: email}
 %input{type: 'hidden', name: 'stripeToken', value: ""}
 -# TODO: Set amount to what we want
-%button{type: 'submit', class: "button-action", id: "button-pro-signup", data: {key: ENV["STRIPE_PUBLISHABLE_KEY"], amount: 4900, email: email}}
-  Subscribe now $49/month
+%button{type: 'submit', class: "button-action", id: "button-pro-signup", data: {key: ENV["STRIPE_PUBLISHABLE_KEY"], amount: price_in_cents(price), email: email}}
+  Subscribe now $#{price}/month
