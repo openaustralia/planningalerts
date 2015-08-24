@@ -34,7 +34,7 @@ describe "alert_notifier/alert" do
       subscription = create(:subscription, trial_started_at: Date.today)
       assign(:alert, mock_model(Alert, address: "Foo Parade",
         radius_meters: 2000, confirm_id: "1234", subscription: subscription))
-      assign(:analytics_params, foo: :bar)
+      assign(:trial_subscriber_analytics_params, foo: :bar)
       render
     end
 
@@ -49,7 +49,7 @@ describe "alert_notifier/alert" do
       subscription = create(:subscription, trial_started_at: 6.days.ago)
       assign(:alert, mock_model(Alert, address: "Foo Parade",
         radius_meters: 2000, confirm_id: "1234", subscription: subscription))
-      assign(:analytics_params, foo: :bar)
+      assign(:trial_subscriber_analytics_params, foo: :bar)
       render
     end
 
