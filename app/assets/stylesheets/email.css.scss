@@ -8,8 +8,14 @@ $lightest_gray: #fafafa;
 $dark_blue: #1D3D61;
 
 .box {
-  margin: 6px 11px 25px;
-  padding: 15px;
+  margin-top: 6px;
+  margin-right: 11px;
+  margin-bottom: 25px;
+  margin-left: 11px;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
 }
 
 body {
@@ -22,7 +28,10 @@ a {
 
 .header {
   background: $dark_gray;
-  padding: 5px 0 5px 10px;
+  padding-top: 5px;
+  padding-right: 0;
+  padding-bottom: 5px;
+  padding-left: 10px;
 
   a {
     color: white;
@@ -37,7 +46,10 @@ a {
   margin-left: 0;
   margin-right: 0;
   margin-bottom: 25px;
-  padding: 0 15px 15px 15px;
+  padding-top: 0;
+  padding-right: 15px;
+  padding-bottom: 15px
+  padding-left: 15px;
   background-color: $dark_blue;
   color: #ffffff;
   font-size: 14px;
@@ -68,7 +80,10 @@ a {
 .trial-banner-button {
   display: inline-block;
   border-radius: 5px;
-  padding: 6px 10px;
+  padding-top: 6px;
+  padding-right: 10px;
+  padding-bottom: 6px;
+  padding-left: 10px;
   background-color: $orange;
   color: #ffffff;
   text-decoration: none !important;
@@ -117,11 +132,17 @@ a {
     }
   }
   .map {
-    padding: 5px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
     width: 155px;
   }
   .streetview {
-    padding: 5px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
   }
   .description {
     vertical-align: top;
