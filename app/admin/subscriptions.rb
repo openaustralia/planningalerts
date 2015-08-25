@@ -16,6 +16,10 @@ ActiveAdmin.register Subscription do
   filter :stripe_subscription_id
   filter :trial_started_at
 
+  sidebar :rollout_status, priority: 0, only: :index do
+    "#{Alert.potential_new_subscribers.count.size} potential subscribers remain."
+  end
+
   form do |f|
     inputs "Details" do
       input :email
