@@ -73,6 +73,7 @@ describe "alert_notifier/alert" do
       subscription = create(:subscription, email: "foo@example.org", trial_started_at: 7.days.ago)
       2.times { create(:alert, email: "foo@example.org", confirmed: true) }
       assign(:alert, create(:alert, email: "foo@example.org", confirmed: true, subscription: subscription))
+      assign(:trial_subscriber_analytics_params, foo: :bar)
       render
     end
 
