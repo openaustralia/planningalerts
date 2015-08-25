@@ -51,14 +51,11 @@ namespace :planningalerts do
     task :rollout, [:stripe_plan_id, :count] => :environment do |t, args|
       raise "Unknown Stripe plan ID" unless Subscription::PLAN_IDS.include?(args[:stripe_plan_id])
 
-               # The requested number of random alerts...
-      emails = Alert.order("RAND()").limit(args[:count]).
-               # ...where there's 3 or more other active alerts already signed up...
-               active.group(:email).having("count(alerts.email) >= 3").
-               # ...and they don't already have a subscription...
-               includes(:subscription).where(subscriptions: {email: nil}).
-               # ...pluck just the email addresses
-               pluck(:email)
+      # The requested number of random alerts...
+      # ...where there's 3 or more other active alerts already signed up...
+      # ...and they don't already have a subscription...
+      # ...pluck just the email addresses
+      emails = Alert.potential_new_subscribers.order("RAND()").limit(args[:count]).pluck(:email)
 
       if emails.empty?
         puts "Sorry, no subscription candidates were found."

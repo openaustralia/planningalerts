@@ -10,6 +10,8 @@ class Alert < ActiveRecord::Base
 
   scope :active, -> { where(confirmed: true, unsubscribed: false) }
   scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
+  # People with 3 or more alerts that don't yet have a subscription
+  scope :potential_new_subscribers, -> { active.group("alerts.email").having("count(alerts.email) >= 3").includes(:subscription).where(subscriptions: {email: nil}) }
 
   def location=(l)
     if l
