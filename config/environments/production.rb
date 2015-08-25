@@ -64,15 +64,15 @@ PlanningalertsApp::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { host: Configuration::HOST }
+  config.action_mailer.default_url_options = { host: ENV["HOST"] }
 
   # Send mails to the locally running instance of Cuttlefish
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-     address: Configuration::CUTTLEFISH_SERVER,
+     address: ENV["CUTTLEFISH_SERVER"],
      port: 2525,
-     user_name: Configuration::CUTTLEFISH_USER_NAME,
-     password: Configuration::CUTTLEFISH_PASSWORD,
+     user_name: ENV["CUTTLEFISH_USER_NAME"],
+     password: ENV["CUTTLEFISH_PASSWORD"],
      authentication: :plain
   }
 

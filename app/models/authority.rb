@@ -100,7 +100,7 @@ class Authority < ActiveRecord::Base
     info_logger = AuthorityLogger.new(self, other_info_logger)
 
     time = Benchmark.ms do
-      collect_applications_date_range(Date.today - ::Configuration::SCRAPE_DELAY, Date.today, info_logger)
+      collect_applications_date_range(Date.today - ENV["SCRAPE_DELAY"].to_i, Date.today, info_logger)
     end
     info_logger.info "Took #{(time / 1000).to_i} s to collect applications from #{full_name_and_state}"
   end
@@ -187,7 +187,7 @@ class Authority < ActiveRecord::Base
 
   def morph_feed_url_for_date_range(start_date, end_date)
     query = CGI.escape("select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
-    "https://api.morph.io/#{morph_name}/data.json?query=#{query}&key=#{::Configuration::MORPH_API_KEY}"
+    "https://api.morph.io/#{morph_name}/data.json?query=#{query}&key=#{ENV['MORPH_API_KEY']}"
   end
 
   # So that the encoding function can be used elsewhere

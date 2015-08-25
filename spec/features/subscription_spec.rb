@@ -6,7 +6,7 @@ feature "Subscribing for access to several alerts" do
     StripeMock.start
     # When plan is set to 0 StripeMock doesn't check for the card number when creating the customer
     # FIXME: StripeMock should create a customer when only a token is supplied
-    stripe_helper.create_plan(id: "planningalerts", amount: 0)
+    stripe_helper.create_plan(id: "planningalerts-34", amount: 0)
   end
   after { StripeMock.stop }
 
@@ -42,7 +42,7 @@ feature "Subscribing for access to several alerts" do
       # Fake what the Stripe JS does (i.e. inject the token in the form if successful)
       # FIXME: This isn't having an effect because we're just setting the plan amout to 0. See comment above.
       first("input[name='stripeToken']", visible: false).set(stripe_helper.generate_card_token)
-      click_button("Subscribe now $49/month")
+      click_button("Subscribe now $34/month")
 
       expect(page).to have_content("Thanks for subscribing!")
       expect(Subscription.find_by!(email: email)).to be_paid
@@ -68,13 +68,13 @@ feature "Subscribing for access to several alerts" do
       open_email(email)
       expect(current_email).to have_subject("1 new planning application near 123 Illawarra Road Marrickville 2204")
       expect(current_email).to have_body_text("trial subscription")
-      visit_in_email("Subscribe now")
+      visit_in_email("Subscribe")
 
       expect(page).to have_content("Subscribe now")
       # Fake what the Stripe JS does (i.e. inject the token in the form if successful)
       # FIXME: This isn't having an effect because we're just setting the plan amout to 0. See comment above.
       first("input[name='stripeToken']", visible: false).set(stripe_helper.generate_card_token)
-      click_button("Subscribe now $49/month")
+      click_button("Subscribe now $34/month")
 
       expect(page).to have_content("Thanks for subscribing!")
       expect(Subscription.find_by!(email: email)).to be_paid
@@ -96,5 +96,12 @@ feature "Subscribing for access to several alerts" do
         expect(current_email).to have_body_text("Your trial subscription has expired")
       end
     end
+  end
+
+  scenario "Show a different price to people with a different plan" do
+    create(:subscription, email: email, stripe_plan_id: "planningalerts-15")
+
+    visit(new_subscription_path(email: email))
+    expect(page).to have_content("$15/month")
   end
 end

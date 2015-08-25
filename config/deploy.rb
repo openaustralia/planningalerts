@@ -27,6 +27,7 @@ if stage == "production"
 elsif stage == "test"
   server "kedumba.openaustraliafoundation.org.au", :app, :web, :db, primary: true
   set :deploy_to, "/srv/www/test.#{application}"
+  set :honeybadger_env, "staging"
 elsif stage == "development"
   server "planningalerts.org.au.dev", :app, :web, :db, primary: true
   set :deploy_to, "/srv/www"
@@ -44,7 +45,7 @@ namespace :deploy do
     links = {
             "#{release_path}/config/database.yml"               => "#{shared_path}/database.yml",
             "#{release_path}/config/throttling.yml"             => "#{shared_path}/throttling.yml",
-            "#{release_path}/app/models/configuration.rb"       => "#{shared_path}/configuration.rb",
+            "#{release_path}/.env.production"                   => "#{shared_path}/.env.production",
             "#{release_path}/config/production.sphinx.conf"     => "#{shared_path}/production.sphinx.conf",
             "#{release_path}/config/sphinx.yml"                 => "#{shared_path}/sphinx.yml",
             "#{release_path}/public/sitemap.xml"                => "#{shared_path}/sitemap.xml",

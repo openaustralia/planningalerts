@@ -42,6 +42,11 @@ class Alert < ActiveRecord::Base
     Alert.find_by_sql(command)
   end
 
+  # Only enable subscriptions on the default theme
+  def subscription
+    super if theme == "default"
+  end
+
   # Name of the local government authority
   def lga_name
     # Cache value
@@ -190,7 +195,7 @@ class Alert < ActiveRecord::Base
   end
 
   def email_has_several_other_alerts?
-    Alert.active.where(email: email).count >= 3
+    Alert.active.where(email: email, theme: theme).count >= 3
   end
 
   def has_trial_subscription?

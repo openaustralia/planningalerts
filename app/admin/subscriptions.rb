@@ -1,6 +1,7 @@
 ActiveAdmin.register Subscription do
   index do
     column :email
+    column :stripe_plan_id
     column :stripe_customer_id
     column :stripe_subscription_id
     column :paid?
@@ -18,6 +19,7 @@ ActiveAdmin.register Subscription do
   form do |f|
     inputs "Details" do
       input :email
+      input :stripe_plan_id, as: :select, collection: Subscription::PLAN_IDS
       input :stripe_customer_id
       input :stripe_subscription_id
       input :trial_started_at
@@ -25,5 +27,5 @@ ActiveAdmin.register Subscription do
     actions
   end
 
-  permit_params :email, :stripe_customer_id, :stripe_subscription_id, :trial_started_at
+  permit_params :email, :stripe_plan_id, :stripe_customer_id, :stripe_subscription_id, :trial_started_at
 end

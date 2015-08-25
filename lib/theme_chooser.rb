@@ -26,19 +26,19 @@ class DefaultTheme < Theme
   end
 
   def app_name
-    ::Configuration::EMAIL_FROM_NAME
+    ENV["EMAIL_FROM_NAME"]
   end
 
   def email_from_address
-    ::Configuration::EMAIL_FROM_ADDRESS
+    ENV["EMAIL_FROM_ADDRESS"]
   end
 
   def google_analytics_key
-    ::Configuration::GOOGLE_ANALYTICS_KEY
+    ENV["GOOGLE_ANALYTICS_KEY"]
   end
 
   def google_maps_client_id
-    ::Configuration::GOOGLE_MAPS_CLIENT_ID if defined?(::Configuration::GOOGLE_MAPS_CLIENT_ID)
+    ENV["GOOGLE_MAPS_CLIENT_ID"]
   end
 
 # TODO Put this in the config
@@ -59,7 +59,7 @@ class NSWTheme < Theme
 
   # This might have a port number included
   def host
-    ::Configuration::THEME_NSW_HOST
+    ENV["THEME_NSW_HOST"]
   end
 
   def protocol
@@ -67,23 +67,23 @@ class NSWTheme < Theme
   end
 
   def app_name
-    ::Configuration::THEME_NSW_EMAIL_FROM_NAME
+    ENV["THEME_NSW_EMAIL_FROM_NAME"]
   end
 
   def email_from_address
-    ::Configuration::THEME_NSW_EMAIL_FROM_ADDRESS
+    ENV["THEME_NSW_EMAIL_FROM_ADDRESS"]
   end
 
   def cuttlefish_user_name
-    ::Configuration::THEME_NSW_CUTTLEFISH_USER_NAME
+    ENV["THEME_NSW_CUTTLEFISH_USER_NAME"]
   end
 
   def cuttlefish_password
-    ::Configuration::THEME_NSW_CUTTLEFISH_PASSWORD
+    ENV["THEME_NSW_CUTTLEFISH_PASSWORD"]
   end
 
   def google_analytics_key
-    ::Configuration::THEME_NSW_GOOGLE_ANALYTICS_KEY
+    ENV["THEME_NSW_GOOGLE_ANALYTICS_KEY"]
   end
 
   def google_maps_client_id

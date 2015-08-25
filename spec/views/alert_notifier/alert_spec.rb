@@ -31,19 +31,21 @@ describe "alert_notifier/alert" do
     before :each do
       subscription = create(:subscription, trial_started_at: Date.today)
       assign(:alert, create(:alert, subscription: subscription))
+      assign(:trial_subscriber_analytics_params, foo: :bar)
       render
     end
 
-    it { expect(rendered).to have_content("Support this charity-run project with a tax deductible donation") }
     it { expect(rendered).to have_content("trial subscription") }
     it { expect(rendered).to have_content("7 days remaining") }
+    it { expect(rendered).to_not have_content("Support this charity-run project with a tax deductible donation") }
     it { expect(rendered).to_not have_content("You’re a paid subscriber") }
   end
 
   context "when the recipient has a trial subscription with only one day left" do
     before :each do
-      subscription = create(:subscription, trial_started_at: 6.days.ago)
+      subscription = create(:subscription, trial_started_at: Date.today - 6.days)
       assign(:alert, create(:alert, subscription: subscription))
+      assign(:trial_subscriber_analytics_params, foo: :bar)
       render
     end
 
