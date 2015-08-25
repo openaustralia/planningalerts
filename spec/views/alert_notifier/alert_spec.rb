@@ -41,6 +41,11 @@ describe "alert_notifier/alert" do
     it { expect(rendered).to_not have_content("You’re a paid subscriber") }
   end
 
+  # TODO: Remove this test?
+  #       We probably don't need this test as it is testing that pluralize works
+  #       and that the trial days count down properly. #trial_days_remaining is
+  #       covered in spec/models/subscription_spec.rb . Feels like we're just
+  #       testing the framework here to me.
   context "when the recipient has a trial subscription with only one day left" do
     before :each do
       subscription = create(:subscription, trial_started_at: Date.today - 6.days)
