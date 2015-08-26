@@ -1,2 +1,14 @@
 .box
-  %p Your trial subscription has expired
+  %p
+    %strong
+      You need to subcribe to get alerts for several addresses
+      if you use PlanningAlerts in your work.
+    Once you’re subscribed you can sign up for alerts from as many locations as you need.
+  %p
+    %strong
+      Non-commerial use of PlanningAlerts is free for any number of addresses.
+    If this sounds like you, simply reply to this email and tell us
+    why you need alerts for several addresses.
+    We’ll be happy to help with a free, non-commercial subscription.
+  %p
+    = link_to "Subscribe now to continue getting alerts", new_subscription_url(@trial_subscriber_analytics_params.merge(utm_content: "body_text_link", email: @alert.email))
