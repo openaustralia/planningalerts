@@ -8,6 +8,6 @@
           Your #{link_to "trial subscription", new_subscription_url(@trial_subscriber_analytics_params.merge(utm_content: "text_link", email: @alert.email))}
           has
           - if @alert.expired_subscription?
-            has expired
+            expired
           - else
             #{pluralize(@alert.subscription.trial_days_remaining, "day")} remaining
