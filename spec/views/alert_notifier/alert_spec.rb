@@ -78,6 +78,7 @@ describe "alert_notifier/alert" do
     end
 
     it { expect(rendered).to have_content("Your trial subscription has expired") }
-    # TODO: Add expectations for the footer content as above
+    it { expect(rendered).to_not have_content("Support this charity-run project with a tax deductible donation") }
+    it { expect(rendered).to_not have_content("You’re a paid subscriber") }
   end
 end
