@@ -5,6 +5,8 @@ ActiveAdmin.register Subscription do
     column :stripe_customer_id
     column :stripe_subscription_id
     column :paid?
+    column :free?
+    column :free_reason
     column :trial?
     column :trial_started_at
     column(:active_alerts) { |s| s.alerts.active.count }
