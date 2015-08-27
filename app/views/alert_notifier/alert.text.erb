@@ -1,4 +1,7 @@
 <%= render "header" -%>
+<% if @alert.expired_subscription? %>
+<%= render "expired_subscription" %>
+<% else %>
 <% unless @comments.empty? %>
 <%= render "comments" -%>
 <% unless @applications.empty? -%>
@@ -9,6 +12,7 @@
 <% end %>
 <% unless @applications.empty? %>
 <%= render "applications" -%>
+<% end %>
 <% end %>
 
 ============================================================
