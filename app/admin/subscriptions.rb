@@ -21,13 +21,24 @@ ActiveAdmin.register Subscription do
   form do |f|
     inputs "Details" do
       input :email
+    end
+
+    inputs "Paid" do
       input :stripe_plan_id, as: :select, collection: Subscription::PLAN_IDS
       input :stripe_customer_id
       input :stripe_subscription_id
+    end
+
+    inputs "Freebie" do
+      input :free_reason
+    end
+
+    inputs "Trial" do
       input :trial_started_at
     end
+
     actions
   end
 
-  permit_params :email, :stripe_plan_id, :stripe_customer_id, :stripe_subscription_id, :trial_started_at
+  permit_params :email, :stripe_plan_id, :stripe_customer_id, :stripe_subscription_id, :trial_started_at, :free_reason
 end
