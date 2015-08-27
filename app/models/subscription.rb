@@ -35,6 +35,10 @@ class Subscription < ActiveRecord::Base
     stripe_subscription_id.present?
   end
 
+  def free?
+    free_reason.present?
+  end
+
   def price
     case stripe_plan_id
     when "planningalerts-15"
