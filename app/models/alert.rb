@@ -198,7 +198,7 @@ class Alert < ActiveRecord::Base
     Alert.active.where(email: email, theme: theme).count >= 3
   end
 
-  def has_trial_subscription?
+  def trial_subscription?
     subscription.try(:trial?)
   end
 
