@@ -1,3 +1,3 @@
 .header= link_to "PlanningAlerts", root_url(protocol: @protocol, host: @host)
-- if @alert.subscription.try(:trial?)
+- if @alert.trial_subscription? || @alert.expired_subscription?
   = render "trial_banner"

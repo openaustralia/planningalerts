@@ -54,6 +54,7 @@ feature "Subscribing for access to several alerts" do
     background do
       create(:subscription, email: email, trial_started_at: Date.today)
       create(:application, address: "252 Illawarra Road Marrickville 2204",
+                           description: "A wonderful new house",
                            lat: -33.911105,
                            lng: 151.155503,
                            suburb: "Marrickville",
@@ -77,6 +78,23 @@ feature "Subscribing for access to several alerts" do
 
       expect(page).to have_content("Thanks for subscribing!")
       expect(Subscription.find_by!(email: email)).to be_paid
+    end
+
+    context "expired" do
+      background do
+        create(:alert, email: email, confirmed: true, address: "123 King St, Newtown")
+        create(:alert, email: email, confirmed: true, address: "456 Marrickville Rd, Marrickville")
+        Subscription.find_by!(email: email).update(trial_started_at: 7.days.ago)
+      end
+
+      scenario "Alerts don't contain the application details any more" do
+        alert.process!
+
+        open_email(email)
+        expect(current_email).to have_subject("1 new planning application near 123 Illawarra Road Marrickville 2204")
+        expect(current_email).to_not have_body_text("A wonderful new house")
+        expect(current_email).to have_body_text("You need to subscribe to get alerts for several addresses")
+      end
     end
   end
 

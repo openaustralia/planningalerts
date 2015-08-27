@@ -157,6 +157,15 @@ a {
   }
 }
 
+.expired-subscription-message {
+  h1 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #303030;
+    font-weight: normal;
+  }
+}
+
 .footer-outer {
   border-top: solid 3px $orange;
 

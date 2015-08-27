@@ -5,11 +5,15 @@
 
   %body
     = render "header"
-    - unless @comments.empty?
-      = render "comments"
-    - unless @applications.empty?
-      = render "applications"
+    - if @alert.expired_subscription?
+      = render "expired_subscription"
+    - else
+      - unless @comments.empty?
+        = render "comments"
+      - unless @applications.empty?
+        = render "applications"
     .footer-outer
       .footer-inner
-        = render "footer_main" unless @alert.subscription.try(:trial?)
+        - unless @alert.trial_subscription? || @alert.expired_subscription?
+          = render "footer_main"
         = render "footer_actions"

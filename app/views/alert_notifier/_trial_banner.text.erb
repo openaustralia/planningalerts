@@ -1,3 +1,7 @@
-Your trial subscription has <%= pluralize(@alert.subscription.trial_days_remaining, "day") %> left
+<% if @alert.expired_subscription? %>
+Your trial subscription has expired
+<% else %>
+Your trial subscription has <%= pluralize(@alert.subscription.trial_days_remaining, "day") %> remaining
+<% end %>
 Use this link to subscribe now:
 <%= new_subscription_url(@trial_subscriber_analytics_params.merge(utm_content: "text_format_link", email: @alert.email)) %>
