@@ -1,6 +1,7 @@
 ActiveAdmin.register Subscription do
   index do
     column :email
+    column(:active_alerts) { |s| s.alerts.active.count }
     column(:trial?) do |s|
       s.trial? ? status_tag("yes", :ok) : status_tag("no")
     end
@@ -15,7 +16,6 @@ ActiveAdmin.register Subscription do
     column :stripe_subscription_id
     column :free_reason
     column :trial_started_at
-    column(:active_alerts) { |s| s.alerts.active.count }
     actions
   end
 
