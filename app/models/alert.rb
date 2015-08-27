@@ -204,7 +204,7 @@ class Alert < ActiveRecord::Base
 
   # TODO: Move this to the subscription model?
   def expired_subscription?
-    email_has_several_other_alerts? && subscription && !subscription.trial? && !subscription.paid?
+    email_has_several_other_alerts? && subscription && !subscription.trial? && !subscription.paid? && !subscription.free?
   end
 
   private
