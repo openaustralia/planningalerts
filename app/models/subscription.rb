@@ -28,7 +28,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def trial?
-    !paid? && trial_days_remaining > 0
+    !paid? && !free? && trial_days_remaining > 0
   end
 
   def paid?
