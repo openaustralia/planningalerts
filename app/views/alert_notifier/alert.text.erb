@@ -13,5 +13,7 @@
 
 ============================================================
 
+<% unless @alert.subscription.try(:trial?) || @alert.expired_subscription? %>
 <%= render "footer_main" %>
+<% end %>
 <%= render "footer_actions" %>
