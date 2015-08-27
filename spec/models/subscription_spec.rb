@@ -15,12 +15,19 @@ describe Subscription do
     it { expect(Subscription.new(trial_started_at: Date.today)).to be_trial }
     it { expect(Subscription.new(trial_started_at: Date.today - 14.days)).to_not be_trial }
     it { expect(Subscription.new(trial_started_at: Date.today, stripe_subscription_id: "a_stripe_id")).to_not be_trial }
+    it { expect(Subscription.new(trial_started_at: Date.today, free_reason: "They're lovely")).to_not be_trial }
   end
 
   describe "#paid?" do
     it { expect(Subscription.new(stripe_subscription_id: "a_stripe_id")).to be_paid }
     it { expect(Subscription.new(stripe_subscription_id: "")).to_not be_paid }
     it { expect(Subscription.new(stripe_subscription_id: nil)).to_not be_paid }
+  end
+
+  describe "#free?" do
+    it { expect(Subscription.new(free_reason: "She's a champion")).to be_free }
+    it { expect(Subscription.new(free_reason: "")).to_not be_free }
+    it { expect(Subscription.new(free_reason: nil)).to_not be_free }
   end
 
   describe ".default_price" do
