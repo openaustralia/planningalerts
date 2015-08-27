@@ -14,6 +14,6 @@
         = render "applications"
     .footer-outer
       .footer-inner
-        - unless @alert.subscription.try(:trial?) || @alert.expired_subscription?
+        - unless @alert.trial_subscription? || @alert.expired_subscription?
           = render "footer_main"
         = render "footer_actions"
