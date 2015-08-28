@@ -43,13 +43,9 @@ describe ApplicationHelper do
     helper.significant_figure(-2.34, 2).should == -2.3
   end
 
-  it "#trial_subscriber_analytics_params" do
-    campaign_params = {
-      utm_source: "alert",
-      utm_medium: "email",
-      utm_campaign: "trial_subscriber"
-    }
-
-    expect(helper.trial_subscriber_analytics_params).to eq(campaign_params)
+  describe "#analytics_params" do
+    it {expect(helper.analytics_params(utm_campaign: "foo")).to eq(utm_source: "alert", utm_medium: "email", utm_campaign: "foo")}
+    it {expect(helper.analytics_params(utm_campaign: "bar")).to eq(utm_source: "alert", utm_medium: "email", utm_campaign: "bar")}
+    it {expect(helper.analytics_params(utm_campaign: "baz")).to eq(utm_source: "alert", utm_medium: "email", utm_campaign: "baz")}
   end
 end

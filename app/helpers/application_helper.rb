@@ -61,11 +61,14 @@ module ApplicationHelper
   end
 
   # TODO: Differentiate people with expired subscriptions
-  def trial_subscriber_analytics_params
+  # TODO: In Ruby 2.1 required keyword arguments are added,
+  # so instread of using '' for utm_campaign, we can require
+  # an entry.
+  def analytics_params(utm_campaign: '')
     return {
       utm_source: "alert",
       utm_medium: "email",
-      utm_campaign: "trial_subscriber"
+      utm_campaign: utm_campaign
     }
   end
 
