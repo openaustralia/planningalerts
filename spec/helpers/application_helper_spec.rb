@@ -42,4 +42,14 @@ describe ApplicationHelper do
   it "should round negative numbers" do
     helper.significant_figure(-2.34, 2).should == -2.3
   end
+
+  it "#trial_subscriber_analytics_params" do
+    campaign_params = {
+      utm_source: "alert",
+      utm_medium: "email",
+      utm_campaign: "trial_subscriber"
+    }
+
+    expect(helper.trial_subscriber_analytics_params).to eq(campaign_params)
+  end
 end

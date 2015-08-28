@@ -60,6 +60,15 @@ module ApplicationHelper
     render partial: 'shared/tweet', collection: TwitterFeed.new(username).items, as: :item
   end
 
+  # TODO: Differentiate people with expired subscriptions
+  def trial_subscriber_analytics_params
+    return {
+      utm_source: "alert",
+      utm_medium: "email",
+      utm_campaign: "trial_subscriber"
+    }
+  end
+
   def contributors
     [
       { name: "Roger Barnes", email_md5: "dd6c985d22e3bf6ea849e8d2e6750d76" },
