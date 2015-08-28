@@ -60,7 +60,6 @@ module ApplicationHelper
     render partial: 'shared/tweet', collection: TwitterFeed.new(username).items, as: :item
   end
 
-  # TODO: Differentiate people with expired subscriptions
   # TODO: In Ruby 2.1 required keyword arguments are added,
   # so instread of using '' for utm_campaign, we can require
   # an entry.

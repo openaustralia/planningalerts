@@ -3,9 +3,16 @@
     %tr
       %td
         .trial-banner-button-container
-          = link_to "Subscribe now", new_subscription_url(analytics_params(utm_campaign: "trial_subscriber").merge(utm_content: "button_link", email: @alert.email)), class: 'trial-banner-button'
+          - if @alert.expired_subscription?
+            = link_to "Subscribe now", new_subscription_url(analytics_params(utm_campaign: "subscribe-from-expired").merge(utm_content: "button_link", email: @alert.email)), class: 'trial-banner-button'
+          - else
+            = link_to "Subscribe now", new_subscription_url(analytics_params(utm_campaign: "trial_subscriber").merge(utm_content: "button_link", email: @alert.email)), class: 'trial-banner-button'
         %p
-          Your #{link_to "trial subscription", new_subscription_url(analytics_params(utm_campaign: "trial_subscriber").merge(utm_content: "text_link", email: @alert.email))}
+          Your
+          - if @alert.expired_subscription?
+            = link_to "trial subscription", new_subscription_url(analytics_params(utm_campaign: "subscribe-from-expired").merge(utm_content: "text_link", email: @alert.email))
+          - else
+            = link_to "trial subscription", new_subscription_url(analytics_params(utm_campaign: "trial_subscriber").merge(utm_content: "text_link", email: @alert.email))
           has
           - if @alert.expired_subscription?
             expired
