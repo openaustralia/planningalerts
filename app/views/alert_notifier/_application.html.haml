@@ -2,7 +2,7 @@
   %table
     %tr
       %td.address{:colspan => "2"}
-        = link_to application.address, application_url(protocol: @protocol, host: @host, id: application.id, utm_source: 'alerts', utm_medium: 'email')
+        = link_to application.address, application_url(protocol: @protocol, host: @host, id: application.id, utm_source: 'alerts', utm_medium: 'email', utm_campaign: 'view-application')
     - if application.location
       %tr
         %td.map
