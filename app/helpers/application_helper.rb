@@ -63,7 +63,7 @@ module ApplicationHelper
   # TODO: In Ruby 2.1 required keyword arguments are added,
   # so instread of using '' for utm_campaign, we can require
   # an entry.
-  def analytics_params(alert: nil, utm_content: '')
+  def subscribe_from_email_tracking_params(alert: nil, utm_content: '')
     if alert.expired_subscription?
       utm_campaign = "subscribe-from-expired"
     elsif alert.trial_subscription?

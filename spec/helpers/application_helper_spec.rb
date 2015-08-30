@@ -43,7 +43,7 @@ describe ApplicationHelper do
     helper.significant_figure(-2.34, 2).should == -2.3
   end
 
-  describe "#analytics_params" do
+  describe "#subscribe_from_email_tracking_params" do
     before(:each) { @alert = create(:alert) }
     base_params = { utm_source: "alert", utm_medium: "email" }
 
@@ -57,14 +57,14 @@ describe ApplicationHelper do
 
       context "without utm_content" do
         it {
-          expect(helper.analytics_params(alert: @alert))
+          expect(helper.subscribe_from_email_tracking_params(alert: @alert))
             .to eq params_for_trial_subscribers
         }
       end
 
       context "with utm_content" do
         it {
-          expect(helper.analytics_params(alert: @alert, utm_content: "wiz"))
+          expect(helper.subscribe_from_email_tracking_params(alert: @alert, utm_content: "wiz"))
             .to eq params_for_trial_subscribers.merge(utm_content: "wiz")
         }
       end
@@ -79,14 +79,14 @@ describe ApplicationHelper do
 
       context "without utm_content" do
         it {
-          expect(helper.analytics_params(alert: @alert))
+          expect(helper.subscribe_from_email_tracking_params(alert: @alert))
             .to eq params_for_expired_subscriber
         }
       end
 
       context "with utm_content" do
         it {
-          expect(helper.analytics_params(alert: @alert, utm_content: "wiz"))
+          expect(helper.subscribe_from_email_tracking_params(alert: @alert, utm_content: "wiz"))
             .to eq params_for_expired_subscriber.merge(utm_content: "wiz")
         }
       end

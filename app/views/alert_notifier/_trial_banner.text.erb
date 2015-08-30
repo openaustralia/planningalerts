@@ -5,7 +5,7 @@ Your trial subscription has <%= pluralize(@alert.subscription.trial_days_remaini
 <% end %>
 Use this link to subscribe now:
 <%= new_subscription_url(
-                   analytics_params(
+                   subscribe_from_email_tracking_params(
                      alert: @alert,
                      utm_content: "text_format_link"
                    )

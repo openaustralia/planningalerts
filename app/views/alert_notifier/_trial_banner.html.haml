@@ -3,10 +3,10 @@
     %tr
       %td
         .trial-banner-button-container
-          = link_to "Subscribe now", new_subscription_url(analytics_params(alert: @alert, utm_content: "button_link").merge(email: @alert.email)), class: 'trial-banner-button'
+          = link_to "Subscribe now", new_subscription_url(subscribe_from_email_tracking_params(alert: @alert, utm_content: "button_link").merge(email: @alert.email)), class: 'trial-banner-button'
         %p
           Your
-          = link_to "trial subscription", new_subscription_url(analytics_params(alert: @alert, utm_content: "text_link").merge(email: @alert.email))
+          = link_to "trial subscription", new_subscription_url(subscribe_from_email_tracking_params(alert: @alert, utm_content: "text_link").merge(email: @alert.email))
           has
           - if @alert.expired_subscription?
             expired
