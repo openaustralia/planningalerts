@@ -60,10 +60,7 @@ module ApplicationHelper
     render partial: 'shared/tweet', collection: TwitterFeed.new(username).items, as: :item
   end
 
-  # TODO: In Ruby 2.1 required keyword arguments are added,
-  # so instread of using '' for utm_campaign, we can require
-  # an entry.
-  def subscribe_from_email_tracking_params(alert: nil, utm_content: '')
+  def new_subscription_url_with_tracking(alert: nil, utm_content: '')
     if alert.expired_subscription?
       utm_campaign = "subscribe-from-expired"
     elsif alert.trial_subscription?
@@ -73,12 +70,13 @@ module ApplicationHelper
     params = {
       utm_source: "alert",
       utm_medium: "email",
-      utm_campaign: utm_campaign
+      utm_campaign: utm_campaign,
+      email: @alert.email
     }
 
     params.merge!(utm_content: utm_content) unless utm_content.blank?
 
-    return params
+    return new_subscription_url(params)
   end
 
   def contributors

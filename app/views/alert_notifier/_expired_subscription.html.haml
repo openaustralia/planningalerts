@@ -12,4 +12,4 @@
     why you need alerts for several addresses.
     We’ll be happy to help with a free, non-commercial subscription.
   %p
-    = link_to "Subscribe now to continue getting alerts", new_subscription_url(subscribe_from_email_tracking_params(alert: @alert, utm_content: "body_text_link").merge(email: @alert.email))
+    = link_to "Subscribe now to continue getting alerts", new_subscription_url_with_tracking(alert: @alert, utm_content: "body_text_link")

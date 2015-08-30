@@ -43,9 +43,17 @@ describe ApplicationHelper do
     helper.significant_figure(-2.34, 2).should == -2.3
   end
 
-  describe "#subscribe_from_email_tracking_params" do
-    before(:each) { @alert = create(:alert) }
-    base_params = { utm_source: "alert", utm_medium: "email" }
+  describe "#new_subscripion_url_with_tracking" do
+    before :each do
+      @alert = create(:alert)
+      base_params = {
+        email: @alert.email,
+        utm_source: "alert",
+        utm_medium: "email"
+      }
+      @params_for_trial_subscriber = base_params.merge(utm_campaign: "subscribe-from-trial")
+      @params_for_expired_subscriber = base_params.merge(utm_campaign: "subscribe-from-expired")
+    end
 
     context "for a trial subscriber" do
       before :each do
@@ -53,19 +61,17 @@ describe ApplicationHelper do
         allow(@alert).to receive(:expired_subscription?).and_return false
       end
 
-      params_for_trial_subscribers = base_params.merge(utm_campaign: "subscribe-from-trial")
-
       context "without utm_content" do
         it {
-          expect(helper.subscribe_from_email_tracking_params(alert: @alert))
-            .to eq params_for_trial_subscribers
+          expect(helper.new_subscription_url_with_tracking(alert: @alert))
+            .to eq new_subscription_url(@params_for_trial_subscriber)
         }
       end
 
       context "with utm_content" do
         it {
-          expect(helper.subscribe_from_email_tracking_params(alert: @alert, utm_content: "wiz"))
-            .to eq params_for_trial_subscribers.merge(utm_content: "wiz")
+          expect(helper.new_subscription_url_with_tracking(alert: @alert, utm_content: "foo"))
+            .to eq new_subscription_url(@params_for_trial_subscriber.merge(utm_content: "foo"))
         }
       end
     end
@@ -75,19 +81,18 @@ describe ApplicationHelper do
         allow(@alert).to receive(:trial_subscription?).and_return false
         allow(@alert).to receive(:expired_subscription?).and_return true
       end
-      params_for_expired_subscriber = base_params.merge(utm_campaign: "subscribe-from-expired")
 
       context "without utm_content" do
         it {
-          expect(helper.subscribe_from_email_tracking_params(alert: @alert))
-            .to eq params_for_expired_subscriber
+          expect(helper.new_subscription_url_with_tracking(alert: @alert))
+            .to eq new_subscription_url(@params_for_expired_subscriber)
         }
       end
 
       context "with utm_content" do
         it {
-          expect(helper.subscribe_from_email_tracking_params(alert: @alert, utm_content: "wiz"))
-            .to eq params_for_expired_subscriber.merge(utm_content: "wiz")
+          expect(helper.new_subscription_url_with_tracking(alert: @alert, utm_content: "foo"))
+            .to eq new_subscription_url(@params_for_expired_subscriber.merge(utm_content: "foo"))
         }
       end
     end
