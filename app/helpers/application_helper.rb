@@ -60,25 +60,6 @@ module ApplicationHelper
     render partial: 'shared/tweet', collection: TwitterFeed.new(username).items, as: :item
   end
 
-  def new_subscription_url_with_tracking(alert: nil, utm_content: '')
-    if alert.expired_subscription?
-      utm_campaign = "subscribe-from-expired"
-    elsif alert.trial_subscription?
-      utm_campaign = "subscribe-from-trial"
-    end
-
-    params = {
-      utm_source: "alert",
-      utm_medium: "email",
-      utm_campaign: utm_campaign,
-      email: @alert.email
-    }
-
-    params.merge!(utm_content: utm_content) unless utm_content.blank?
-
-    return new_subscription_url(params)
-  end
-
   def contributors
     [
       { name: "Roger Barnes", email_md5: "dd6c985d22e3bf6ea849e8d2e6750d76" },
