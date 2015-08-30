@@ -53,7 +53,10 @@ describe ApplicationHelper do
     end
 
     context "with utm_content" do
-      it {expect(helper.analytics_params(utm_campaign: "foo", utm_content: "wiz")).to eq(base_params.merge(utm_campaign: "foo", utm_content: "wiz"))}
+      it {
+        expect(helper.analytics_params(utm_campaign: "foo", utm_content: "wiz"))
+          .to eq(base_params.merge(utm_campaign: "foo", utm_content: "wiz"))
+      }
     end
   end
 end
