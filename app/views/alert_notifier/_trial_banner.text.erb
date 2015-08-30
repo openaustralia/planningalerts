@@ -6,7 +6,7 @@ Your trial subscription has <%= pluralize(@alert.subscription.trial_days_remaini
 Use this link to subscribe now:
 <%= new_subscription_url(
                    analytics_params(
-                     utm_campaign: @alert.expired_subscription? ? "subscribe-from-expired" : "subscribe-from-trial",
+                     alert: @alert,
                      utm_content: "text_format_link"
                    )
                      .merge(email: @alert.email)

@@ -44,19 +44,52 @@ describe ApplicationHelper do
   end
 
   describe "#analytics_params" do
+    before(:each) { @alert = create(:alert) }
     base_params = { utm_source: "alert", utm_medium: "email" }
 
-    context "without utm_content" do
-      it {expect(helper.analytics_params(utm_campaign: "foo")).to eq(base_params.merge(utm_campaign: "foo"))}
-      it {expect(helper.analytics_params(utm_campaign: "bar")).to eq(base_params.merge(utm_campaign: "bar"))}
-      it {expect(helper.analytics_params(utm_campaign: "baz")).to eq(base_params.merge(utm_campaign: "baz"))}
+    context "for a trial subscriber" do
+      before :each do
+        allow(@alert).to receive(:trial_subscription?).and_return true
+        allow(@alert).to receive(:expired_subscription?).and_return false
+      end
+
+      params_for_trial_subscribers = base_params.merge(utm_campaign: "subscribe-from-trial")
+
+      context "without utm_content" do
+        it {
+          expect(helper.analytics_params(alert: @alert))
+            .to eq params_for_trial_subscribers
+        }
+      end
+
+      context "with utm_content" do
+        it {
+          expect(helper.analytics_params(alert: @alert, utm_content: "wiz"))
+            .to eq params_for_trial_subscribers.merge(utm_content: "wiz")
+        }
+      end
     end
 
-    context "with utm_content" do
-      it {
-        expect(helper.analytics_params(utm_campaign: "foo", utm_content: "wiz"))
-          .to eq(base_params.merge(utm_campaign: "foo", utm_content: "wiz"))
-      }
+    context "for someone with an expired subscription" do
+      before :each do
+        allow(@alert).to receive(:trial_subscription?).and_return false
+        allow(@alert).to receive(:expired_subscription?).and_return true
+      end
+      params_for_expired_subscriber = base_params.merge(utm_campaign: "subscribe-from-expired")
+
+      context "without utm_content" do
+        it {
+          expect(helper.analytics_params(alert: @alert))
+            .to eq params_for_expired_subscriber
+        }
+      end
+
+      context "with utm_content" do
+        it {
+          expect(helper.analytics_params(alert: @alert, utm_content: "wiz"))
+            .to eq params_for_expired_subscriber.merge(utm_content: "wiz")
+        }
+      end
     end
   end
 end
