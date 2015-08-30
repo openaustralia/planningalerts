@@ -63,12 +63,16 @@ module ApplicationHelper
   # TODO: In Ruby 2.1 required keyword arguments are added,
   # so instread of using '' for utm_campaign, we can require
   # an entry.
-  def analytics_params(utm_campaign: '')
-    return {
+  def analytics_params(utm_campaign: '', utm_content: '')
+    params = {
       utm_source: "alert",
       utm_medium: "email",
       utm_campaign: utm_campaign
     }
+
+    params.merge!(utm_content: utm_content) unless utm_content.blank?
+
+    return params
   end
 
   def contributors

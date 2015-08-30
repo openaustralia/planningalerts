@@ -44,8 +44,14 @@ describe ApplicationHelper do
   end
 
   describe "#analytics_params" do
-    it {expect(helper.analytics_params(utm_campaign: "foo")).to eq(utm_source: "alert", utm_medium: "email", utm_campaign: "foo")}
-    it {expect(helper.analytics_params(utm_campaign: "bar")).to eq(utm_source: "alert", utm_medium: "email", utm_campaign: "bar")}
-    it {expect(helper.analytics_params(utm_campaign: "baz")).to eq(utm_source: "alert", utm_medium: "email", utm_campaign: "baz")}
+    context "without utm_content" do
+      it {expect(helper.analytics_params(utm_campaign: "foo")).to eq(utm_source: "alert", utm_medium: "email", utm_campaign: "foo")}
+      it {expect(helper.analytics_params(utm_campaign: "bar")).to eq(utm_source: "alert", utm_medium: "email", utm_campaign: "bar")}
+      it {expect(helper.analytics_params(utm_campaign: "baz")).to eq(utm_source: "alert", utm_medium: "email", utm_campaign: "baz")}
+    end
+
+    context "with utm_content" do
+      it {expect(helper.analytics_params(utm_campaign: "foo", utm_content: "wiz")).to eq(utm_source: "alert", utm_medium: "email", utm_campaign: "foo", utm_content: "wiz")}
+    end
   end
 end
