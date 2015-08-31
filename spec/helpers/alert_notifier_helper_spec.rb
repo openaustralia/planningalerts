@@ -15,7 +15,6 @@ describe AlertNotifierHelper do
       @application_id = 1
     end
 
-
     it {
       expect(
         helper.application_url_with_tracking(
