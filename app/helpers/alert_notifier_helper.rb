@@ -1,6 +1,6 @@
 module AlertNotifierHelper
   def base_tracking_params
-    return { utm_source: "alert", utm_medium: "email" }
+    return { utm_source: "alerts", utm_medium: "email" }
   end
 
   def new_subscription_url_with_tracking(alert: nil, utm_content: '')

@@ -4,7 +4,7 @@ describe AlertNotifierHelper do
   describe "#base_tracking_params" do
     it {
       expect(helper.base_tracking_params)
-        .to eq(utm_source: "alert", utm_medium: "email")
+        .to eq(utm_source: "alerts", utm_medium: "email")
     }
   end
 
