@@ -3,6 +3,17 @@ module AlertNotifierHelper
     return { utm_source: "alerts", utm_medium: "email" }
   end
 
+  def application_url_with_tracking(protocol: nil, host: nil, id: nil)
+    return application_url(
+          base_tracking_params.merge(
+            protocol: protocol,
+            host: host,
+            id: id,
+            utm_campaign: 'view-application'
+          )
+        )
+  end
+
   def new_subscription_url_with_tracking(alert: nil, utm_content: '')
     if alert.expired_subscription?
       utm_campaign = "subscribe-from-expired"

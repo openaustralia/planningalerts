@@ -3,5 +3,5 @@
 
 <%= raw application.description %>
 
-Read more: <%= raw application_url(protocol: @protocol, host: @host, id: application.id, utm_source: 'alerts', utm_medium: 'email', utm_campaign: 'view-application') %>
+Read more: <%= raw application_url_with_tracking(protocol: @protocol, host: @host, id: application.id) %>
 Add your own comment: <%= raw application_url(protocol: @protocol, host: @host, id: application.id, anchor: 'add-comment', utm_source: 'alerts', utm_medium: 'email', utm_campaign: 'add-comment') %>
