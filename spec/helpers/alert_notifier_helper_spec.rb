@@ -8,85 +8,78 @@ describe AlertNotifierHelper do
     }
   end
 
-  describe "#application_url_with_tracking" do
-    before :each do
-      @protocol = "http"
-      @host = "foo.com"
-      @application_id = 1
-    end
-
-    it {
-      expect(
-        helper.application_url_with_tracking(
-          protocol: @protocol,
-          host: @host,
-          id: @application_id
-        )
-      )
-      .to eq application_url(
-        base_tracking_params.merge(
-          protocol: @protocol,
-          host: @host,
-          id: @application_id,
-          utm_campaign: 'view-application'
-        )
-      )
-    }
-  end
-
-  describe "#comment_url_with_tracking" do
+  context "when application, protocol and host are set" do
     before :each do
       @protocol = "http"
       @host = "foo.com"
       @application = mock_model(Application, id: 1)
-      @comment = create(:comment, application: @application)
     end
 
-    it {
-      expect(
-        helper.comment_url_with_tracking(
-          protocol: @protocol,
-          host: @host,
-          comment: @comment
+    describe "#application_url_with_tracking" do
+      it {
+        expect(
+          helper.application_url_with_tracking(
+            protocol: @protocol,
+            host: @host,
+            id: @application.id
+          )
         )
-      )
-      .to eq application_url(
-        base_tracking_params.merge(
-          protocol: @protocol,
-          host: @host,
-          id: @comment.application.id,
-          anchor: "comment#{@comment.id}",
-          utm_campaign: 'view-comment'
+        .to eq application_url(
+          base_tracking_params.merge(
+            protocol: @protocol,
+            host: @host,
+            id: @application.id,
+            utm_campaign: 'view-application'
+          )
         )
-      )
-    }
-  end
-
-  describe "#new_comment_url_with_tracking" do
-    before :each do
-      @protocol = "http"
-      @host = "foo.com"
-      @application_id = 1
+      }
     end
 
-    it {
-      expect(
-        helper.new_comment_url_with_tracking(
-          protocol: @protocol,
-          host: @host,
-          id: @application_id
+    describe "#comment_url_with_tracking" do
+      before :each do
+        @comment = create(:comment, application: @application)
+      end
+
+      it {
+        expect(
+          helper.comment_url_with_tracking(
+            protocol: @protocol,
+            host: @host,
+            comment: @comment
+          )
         )
-      )
-      .to eq application_url(
-        base_tracking_params.merge(
-          protocol: @protocol,
-          host: @host,
-          id: @application_id,
-          utm_campaign: 'add-comment',
-          anchor: 'add-comment'
+        .to eq application_url(
+          base_tracking_params.merge(
+            protocol: @protocol,
+            host: @host,
+            id: @comment.application.id,
+            anchor: "comment#{@comment.id}",
+            utm_campaign: 'view-comment'
+          )
         )
-      )
-    }
+      }
+    end
+
+    describe "#new_comment_url_with_tracking" do
+      it {
+        expect(
+          helper.new_comment_url_with_tracking(
+            protocol: @protocol,
+            host: @host,
+            id: @application.id
+          )
+        )
+        .to eq application_url(
+          base_tracking_params.merge(
+            protocol: @protocol,
+            host: @host,
+            id: @application.id,
+            utm_campaign: 'add-comment',
+            anchor: 'add-comment'
+          )
+        )
+      }
+    end
   end
 
   describe "#new_subscripion_url_with_tracking" do
