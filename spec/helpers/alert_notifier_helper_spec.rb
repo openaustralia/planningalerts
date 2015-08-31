@@ -21,7 +21,8 @@ describe AlertNotifierHelper do
         helper.application_url_with_tracking(
           protocol: @protocol,
           host: @host,
-          id: @application_id)
+          id: @application_id
+        )
       )
       .to eq application_url(
         base_tracking_params.merge(
@@ -46,7 +47,8 @@ describe AlertNotifierHelper do
         helper.new_comment_url_with_tracking(
           protocol: @protocol,
           host: @host,
-          id: @application_id)
+          id: @application_id
+        )
       )
       .to eq application_url(
         base_tracking_params.merge(
