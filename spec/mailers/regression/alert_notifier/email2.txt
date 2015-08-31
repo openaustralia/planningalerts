@@ -3,7 +3,7 @@ The following new comment has been made on a planning application within 800 m o
 I think this is a great idea
 by Matthew Landauer on 2 Foo Parade, Glenbrook NSW 2773
 
-https://dev.planningalerts.org.au/applications/3?utm_medium=email&utm_source=alerts#comment1
+https://dev.planningalerts.org.au/applications/3?utm_campaign=view-comment&utm_medium=email&utm_source=alerts#comment1
 
 ============================================================
 
