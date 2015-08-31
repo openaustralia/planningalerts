@@ -1,16 +1,19 @@
 require 'spec_helper'
 
 describe AlertNotifierHelper do
+  describe "#base_tracking_params" do
+    it {
+      expect(helper.base_tracking_params)
+        .to eq(utm_source: "alert", utm_medium: "email")
+    }
+  end
+
   describe "#new_subscripion_url_with_tracking" do
     before :each do
       @alert = create(:alert)
-      base_params = {
-        email: @alert.email,
-        utm_source: "alert",
-        utm_medium: "email"
-      }
-      @params_for_trial_subscriber = base_params.merge(utm_campaign: "subscribe-from-trial")
-      @params_for_expired_subscriber = base_params.merge(utm_campaign: "subscribe-from-expired")
+      base_params_plus_email = base_tracking_params.merge(email: @alert.email)
+      @params_for_trial_subscriber = base_params_plus_email.merge(utm_campaign: "subscribe-from-trial")
+      @params_for_expired_subscriber = base_params_plus_email.merge(utm_campaign: "subscribe-from-expired")
     end
 
     context "for a trial subscriber" do
