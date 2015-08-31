@@ -16,7 +16,7 @@ describe AlertNotifierHelper do
     end
 
     describe "#application_url_with_tracking" do
-      it {
+      it "returns the correct url" do
         expect(
           helper.application_url_with_tracking(
             protocol: @protocol,
@@ -32,32 +32,34 @@ describe AlertNotifierHelper do
             utm_campaign: 'view-application'
           )
         )
-      }
+      end
     end
 
-    describe "#comment_url_with_tracking" do
+    context "and there is a comment" do
       before :each do
         @comment = create(:comment, application: @application)
       end
 
-      it {
-        expect(
-          helper.comment_url_with_tracking(
-            protocol: @protocol,
-            host: @host,
-            comment: @comment
+      describe "#comment_url_with_tracking" do
+        it "returns the correct url" do
+          expect(
+            helper.comment_url_with_tracking(
+              protocol: @protocol,
+              host: @host,
+              comment: @comment
+            )
           )
-        )
-        .to eq application_url(
-          base_tracking_params.merge(
-            protocol: @protocol,
-            host: @host,
-            id: @comment.application.id,
-            anchor: "comment#{@comment.id}",
-            utm_campaign: 'view-comment'
+          .to eq application_url(
+            base_tracking_params.merge(
+              protocol: @protocol,
+              host: @host,
+              id: @comment.application.id,
+              anchor: "comment#{@comment.id}",
+              utm_campaign: 'view-comment'
+            )
           )
-        )
-      }
+        end
+      end
     end
 
     describe "#new_comment_url_with_tracking" do
