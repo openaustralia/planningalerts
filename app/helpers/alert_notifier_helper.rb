@@ -32,8 +32,8 @@ module AlertNotifierHelper
             protocol: protocol,
             host: host,
             id: id,
-            utm_campaign: 'add-comment',
-            anchor: 'add-comment'
+            anchor: 'add-comment',
+            utm_campaign: 'add-comment'
           )
         )
   end
