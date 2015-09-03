@@ -101,6 +101,7 @@ class ApplicationsController < ApplicationController
     end
 
     @application = Application.find(params[:id])
+    @comments = @application.comments.visible
     @nearby_count = @application.find_all_nearest_or_recent.size
     @comment = Comment.new
     # Required for new email alert signup form
