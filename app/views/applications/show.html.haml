@@ -37,11 +37,10 @@
     %hr
 
     #comments-area
-      - if @application.authority.contactable?
-        - unless @comments.empty?
-          %h4= pluralize(@comments.count, "Comment")
-          %p.small.quiet
-            Have your say by #{link_to "adding your own comment", "#add-comment"}.
+      - if @comments.present?
+        %h4= pluralize(@comments.count, "Comment")
+        %p.small.quiet
+          Have your say by #{link_to "adding your own comment", "#add-comment"}.
         %ol#comments
           - @comments.each do |comment|
             %li{:id => "comment#{comment.id}"}
