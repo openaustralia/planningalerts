@@ -17,7 +17,6 @@ if ("#button-pro-signup".length) {
 
   var handler = StripeCheckout.configure({
     key: public_key,
-    image: '/square-image.png',
     token: function(response) {
       var tokenInput = $("<input type=hidden name=stripeToken />").val(response.id);
       var emailInput = $("<input type=hidden name=stripeEmail />").val(response.email);
