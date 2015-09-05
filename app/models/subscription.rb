@@ -40,12 +40,7 @@ class Subscription < ActiveRecord::Base
   end
 
   def price
-    case stripe_plan_id
-    when "planningalerts-15"
-      15
-    when "planningalerts-34"
-      34
-    end
+    stripe_plan_id[/\d+/].to_i
   end
 end
 

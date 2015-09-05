@@ -47,4 +47,10 @@ describe Subscription do
       expect(Subscription.price_for_email("john@example.com")).to eql 34
     end
   end
+
+  describe "#price" do
+    it { expect(Subscription.new(stripe_plan_id: "planningalerts-15").price).to eql 15 }
+    it { expect(Subscription.new(stripe_plan_id: "planningalerts-34").price).to eql 34 }
+    it { expect(Subscription.new(stripe_plan_id: "planningalerts-99").price).to eql 99 }
+  end
 end
