@@ -6,11 +6,11 @@ module AlertNotifierHelper
   end
 
   def base_tracking_params
-    return { utm_source: "alerts", utm_medium: "email" }
+    { utm_source: "alerts", utm_medium: "email" }
   end
 
   def application_url_with_tracking(protocol: nil, host: nil, id: nil)
-    return application_url(
+    application_url(
           base_tracking_params.merge(
             protocol: protocol,
             host: host,
@@ -21,7 +21,7 @@ module AlertNotifierHelper
   end
 
   def comment_url_with_tracking(comment: nil, protocol: nil, host: nil)
-    return application_url(
+    application_url(
       base_tracking_params.merge(
         protocol: protocol,
         host: host,
@@ -33,7 +33,7 @@ module AlertNotifierHelper
   end
 
   def new_comment_url_with_tracking(protocol: nil, host: nil, id: nil)
-    return application_url(
+    application_url(
           base_tracking_params.merge(
             protocol: protocol,
             host: host,
@@ -58,6 +58,6 @@ module AlertNotifierHelper
 
     params.merge!(utm_content: utm_content) unless utm_content.blank?
 
-    return new_subscription_url(params)
+    new_subscription_url(params)
   end
 end
