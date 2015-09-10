@@ -11,13 +11,13 @@ module AlertNotifierHelper
 
   def application_url_with_tracking(protocol: nil, host: nil, id: nil)
     application_url(
-          base_tracking_params.merge(
-            protocol: protocol,
-            host: host,
-            id: id,
-            utm_campaign: 'view-application'
-          )
-        )
+      base_tracking_params.merge(
+        protocol: protocol,
+        host: host,
+        id: id,
+        utm_campaign: 'view-application'
+      )
+    )
   end
 
   def comment_url_with_tracking(comment: nil, protocol: nil, host: nil)
@@ -34,14 +34,14 @@ module AlertNotifierHelper
 
   def new_comment_url_with_tracking(protocol: nil, host: nil, id: nil)
     application_url(
-          base_tracking_params.merge(
-            protocol: protocol,
-            host: host,
-            id: id,
-            anchor: 'add-comment',
-            utm_campaign: 'add-comment'
-          )
-        )
+      base_tracking_params.merge(
+        protocol: protocol,
+        host: host,
+        id: id,
+        anchor: 'add-comment',
+        utm_campaign: 'add-comment'
+      )
+    )
   end
 
   def new_subscription_url_with_tracking(alert: nil, utm_content: '')
