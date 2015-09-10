@@ -105,6 +105,26 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
       end
     end
 
+    context "HTML emails" do
+      before :each do
+        @html_body = @email.html_part.body
+      end
+
+      it 'should contain links to the applications' do
+        @html_body.should have_link("Foo Street, Bar", href: "https://dev.planningalerts.org.au/applications/1?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
+        @html_body.should have_link("Bar Street, Foo", href: "https://dev.planningalerts.org.au/applications/2?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
+      end
+
+      it 'should contain application descriptions' do
+        @html_body.should have_content "Knock something down"
+        @html_body.should have_content "Put something up"
+      end
+
+      it "should have a specific body" do
+        @html_body.should == Rails.root.join("spec/mailers/regression/alert_notifier/email1.html").read
+      end
+    end
+
     describe "when sending a planning alert with two new planning applications in the nsw theme" do
       before :each do
         @email = AlertNotifier.alert("nsw", @alert, [@a1, @a2])
@@ -125,26 +145,6 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
         it "should have a specific body" do
           @email.html_part.body.should == Rails.root.join("spec/mailers/regression/alert_notifier/email4.html").read
         end
-      end
-    end
-
-    context "HTML emails" do
-      before :each do
-        @html_body = @email.html_part.body
-      end
-
-      it 'should contain links to the applications' do
-        @html_body.should have_link("Foo Street, Bar", href: "https://dev.planningalerts.org.au/applications/1?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
-        @html_body.should have_link("Bar Street, Foo", href: "https://dev.planningalerts.org.au/applications/2?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
-      end
-
-      it 'should contain application descriptions' do
-        @html_body.should have_content "Knock something down"
-        @html_body.should have_content "Put something up"
-      end
-
-      it "should have a specific body" do
-        @html_body.should == Rails.root.join("spec/mailers/regression/alert_notifier/email1.html").read
       end
     end
   end
