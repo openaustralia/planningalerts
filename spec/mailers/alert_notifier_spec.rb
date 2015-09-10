@@ -131,7 +131,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
       end
 
       # TODO This is just a temporary address
-      it "should be from the main themes website email address" do
+      it "should be from the nsw theme’s email address" do
         @email.from.should == ["contact@nsw.127.0.0.1.xip.io"]
       end
 
