@@ -144,6 +144,15 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
       end
 
       context "HTML email" do
+        before :each do
+          @html_body = @email.html_part.body
+        end
+
+        it 'should contain links to the applications' do
+          @html_body.should have_link("Foo Street, Bar", href: "http://nsw.127.0.0.1.xip.io:3000/applications/1?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
+          @html_body.should have_link("Bar Street, Foo", href: "http://nsw.127.0.0.1.xip.io:3000/applications/2?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
+        end
+
         it "should have a specific body" do
           @email.html_part.body.should == Rails.root.join("spec/mailers/regression/alert_notifier/email4.html").read
         end
