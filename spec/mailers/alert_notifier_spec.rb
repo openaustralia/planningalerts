@@ -125,7 +125,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
       end
     end
 
-    describe "when sending a planning alert with two new planning applications in the nsw theme" do
+    context "when the theme is NSW" do
       before :each do
         @email = AlertNotifier.alert("nsw", @alert, [@a1, @a2])
       end
