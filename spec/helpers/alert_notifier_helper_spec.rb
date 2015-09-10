@@ -1,6 +1,34 @@
 require 'spec_helper'
 
 describe AlertNotifierHelper do
+  describe "#host_and_protocol_for_theme" do
+    include ActionMailerThemer
+
+    context "when the theme is Default" do
+      theme = "default"
+
+      it {
+        expect(helper.host_and_protocol_for_theme(theme))
+          .to eq(
+            host: host(theme),
+            protocol: protocol(theme)
+        )
+      }
+    end
+
+    context "when the theme is NSW" do
+      theme = "nsw"
+
+      it {
+        expect(helper.host_and_protocol_for_theme(theme))
+          .to eq(
+            host: host(theme),
+            protocol: protocol(theme)
+        )
+      }
+    end
+  end
+
   describe "#base_tracking_params" do
     it {
       expect(helper.base_tracking_params)

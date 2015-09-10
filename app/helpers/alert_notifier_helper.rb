@@ -1,4 +1,10 @@
 module AlertNotifierHelper
+  include ActionMailerThemer
+
+  def host_and_protocol_for_theme(theme)
+    { host: host(theme), protocol: protocol(theme) }
+  end
+
   def base_tracking_params
     return { utm_source: "alerts", utm_medium: "email" }
   end
