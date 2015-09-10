@@ -127,7 +127,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
       end
     end
 
-    context "when the theme is NSW" do
+    context "and the theme is NSW" do
       before :each do
         @email = AlertNotifier.alert("nsw", @alert, [@a1, @a2])
       end
