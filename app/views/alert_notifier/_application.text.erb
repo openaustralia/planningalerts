@@ -4,4 +4,4 @@
 <%= raw application.description %>
 
 Read more: <%= raw application_url_with_tracking(theme: @theme, id: application.id) %>
-Add your own comment: <%= raw new_comment_url_with_tracking(protocol: @protocol, host: @host, id: application.id) %>
+Add your own comment: <%= raw new_comment_url_with_tracking(theme: @theme, id: application.id) %>

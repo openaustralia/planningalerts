@@ -84,28 +84,17 @@ describe AlertNotifierHelper do
         end
       end
     end
-  end
-
-  context "when application, protocol and host are set" do
-    before :each do
-      @protocol = "http"
-      @host = "foo.com"
-      @application = mock_model(Application, id: 1)
-    end
 
     describe "#new_comment_url_with_tracking" do
       it {
         expect(
           helper.new_comment_url_with_tracking(
-            protocol: @protocol,
-            host: @host,
+            theme: @theme,
             id: @application.id
           )
         )
         .to eq application_url(
-          base_tracking_params.merge(
-            protocol: @protocol,
-            host: @host,
+          @base_params.merge(
             id: @application.id,
             utm_campaign: 'add-comment',
             anchor: 'add-comment'

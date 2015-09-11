@@ -34,11 +34,12 @@ module AlertNotifierHelper
     )
   end
 
-  def new_comment_url_with_tracking(protocol: nil, host: nil, id: nil)
+  def new_comment_url_with_tracking(theme: nil, id: nil)
+    base_params = host_and_protocol_for_theme(theme)
+                       .merge base_tracking_params
+
     application_url(
-      base_tracking_params.merge(
-        protocol: protocol,
-        host: host,
+      base_params.merge(
         id: id,
         anchor: 'add-comment',
         utm_campaign: 'add-comment'
