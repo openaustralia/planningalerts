@@ -38,7 +38,7 @@ describe AlertNotifierHelper do
 
   context "when application and theme are set" do
     before :each do
-      @theme = "nsw"
+      @theme = "default"
       @application = mock_model(Application, id: 1)
       @base_params = host_and_protocol_for_theme(@theme)
                        .merge base_tracking_params
