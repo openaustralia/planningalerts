@@ -9,11 +9,12 @@ module AlertNotifierHelper
     { utm_source: "alerts", utm_medium: "email" }
   end
 
-  def application_url_with_tracking(protocol: nil, host: nil, id: nil)
+  def application_url_with_tracking(theme: nil, id: nil)
+    base_params = host_and_protocol_for_theme(theme)
+                       .merge base_tracking_params
+
     application_url(
-      base_tracking_params.merge(
-        protocol: protocol,
-        host: host,
+      base_params.merge(
         id: id,
         utm_campaign: 'view-application'
       )

@@ -9,6 +9,7 @@ describe "alert_notifier/alert.html.haml" do
     assign(:applications, [application])
     assign(:comments, [])
     assign(:host, "foo.com")
+    assign(:theme, "default")
   end
 
   it "should not use html entities to encode the description" do
@@ -90,6 +91,7 @@ describe "alert_notifier/alert.text.erb" do
     assign(:applications, [application])
     assign(:comments, [])
     assign(:host, "foo.com")
+    assign(:theme, "default")
   end
 
   context "when the recipient is not a subscriber" do

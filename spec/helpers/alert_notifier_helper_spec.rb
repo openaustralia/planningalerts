@@ -36,31 +36,37 @@ describe AlertNotifierHelper do
     }
   end
 
-  context "when application, protocol and host are set" do
+  context "when application and theme are set" do
     before :each do
-      @protocol = "http"
-      @host = "foo.com"
+      @theme = "nsw"
       @application = mock_model(Application, id: 1)
+      @base_params = host_and_protocol_for_theme(@theme)
+                       .merge base_tracking_params
     end
 
     describe "#application_url_with_tracking" do
       it "returns the correct url" do
         expect(
           helper.application_url_with_tracking(
-            protocol: @protocol,
-            host: @host,
+            theme: @theme,
             id: @application.id
           )
         )
         .to eq application_url(
-          base_tracking_params.merge(
-            protocol: @protocol,
-            host: @host,
+          @base_params.merge(
             id: @application.id,
             utm_campaign: 'view-application'
           )
         )
       end
+    end
+  end
+
+  context "when application, protocol and host are set" do
+    before :each do
+      @protocol = "http"
+      @host = "foo.com"
+      @application = mock_model(Application, id: 1)
     end
 
     context "and there is a comment" do

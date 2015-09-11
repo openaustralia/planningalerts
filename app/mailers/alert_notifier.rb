@@ -3,8 +3,7 @@ class AlertNotifier < ActionMailer::Base
   helper :application, :applications
 
   def alert(theme, alert, applications, comments = [])
-    @alert, @applications, @comments = alert, applications, comments
-
+    @alert, @applications, @comments, @theme = alert, applications, comments, theme
     themed_mail(theme: theme, from: email_from(theme), to: alert.email,
       subject: render_to_string(partial: "subject",
         locals: {applications: applications, comments: comments, alert: alert}).strip,
