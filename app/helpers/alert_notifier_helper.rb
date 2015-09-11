@@ -21,11 +21,12 @@ module AlertNotifierHelper
     )
   end
 
-  def comment_url_with_tracking(comment: nil, protocol: nil, host: nil)
+  def comment_url_with_tracking(theme: nil, comment: nil)
+    base_params = host_and_protocol_for_theme(theme)
+                       .merge base_tracking_params
+
     application_url(
-      base_tracking_params.merge(
-        protocol: protocol,
-        host: host,
+      base_params.merge(
         id: comment.application.id,
         anchor: "comment#{comment.id}",
         utm_campaign: "view-comment"

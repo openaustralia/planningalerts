@@ -4,6 +4,5 @@ by <%= comment.name %> on <%= comment.application.address %>
 
 <%= comment_url_with_tracking(
   comment: comment,
-  protocol: @protocol,
-  host: @host).html_safe
+  theme: @theme).html_safe
 %>

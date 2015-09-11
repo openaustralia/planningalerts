@@ -60,14 +60,6 @@ describe AlertNotifierHelper do
         )
       end
     end
-  end
-
-  context "when application, protocol and host are set" do
-    before :each do
-      @protocol = "http"
-      @host = "foo.com"
-      @application = mock_model(Application, id: 1)
-    end
 
     context "and there is a comment" do
       before :each do
@@ -78,15 +70,12 @@ describe AlertNotifierHelper do
         it "returns the correct url" do
           expect(
             helper.comment_url_with_tracking(
-              protocol: @protocol,
-              host: @host,
+              theme: @theme,
               comment: @comment
             )
           )
           .to eq application_url(
-            base_tracking_params.merge(
-              protocol: @protocol,
-              host: @host,
+            @base_params.merge(
               id: @comment.application.id,
               anchor: "comment#{@comment.id}",
               utm_campaign: 'view-comment'
@@ -94,6 +83,14 @@ describe AlertNotifierHelper do
           )
         end
       end
+    end
+  end
+
+  context "when application, protocol and host are set" do
+    before :each do
+      @protocol = "http"
+      @host = "foo.com"
+      @application = mock_model(Application, id: 1)
     end
 
     describe "#new_comment_url_with_tracking" do
