@@ -40,8 +40,7 @@ describe AlertNotifierHelper do
     before :each do
       @theme = "default"
       @application = mock_model(Application, id: 1)
-      @base_params = host_and_protocol_for_theme(@theme)
-                       .merge base_tracking_params
+      @base_params = host_and_protocol_for_theme(@theme).merge(base_tracking_params)
     end
 
     describe "#application_url_with_tracking" do
