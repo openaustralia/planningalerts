@@ -9,6 +9,7 @@ describe "alert_notifier/alert.html.haml" do
     assign(:applications, [application])
     assign(:comments, [])
     assign(:host, "foo.com")
+    assign(:theme, "default")
   end
 
   it "should not use html entities to encode the description" do
@@ -32,7 +33,6 @@ describe "alert_notifier/alert.html.haml" do
     before :each do
       subscription = create(:subscription, trial_started_at: Date.today)
       assign(:alert, create(:alert, subscription: subscription))
-      assign(:trial_subscriber_analytics_params, foo: :bar)
       render
     end
 
@@ -51,7 +51,6 @@ describe "alert_notifier/alert.html.haml" do
     before :each do
       subscription = create(:subscription, trial_started_at: Date.today - 6.days)
       assign(:alert, create(:alert, subscription: subscription))
-      assign(:trial_subscriber_analytics_params, foo: :bar)
       render
     end
 
@@ -74,7 +73,6 @@ describe "alert_notifier/alert.html.haml" do
       subscription = create(:subscription, email: "foo@example.org", trial_started_at: 7.days.ago)
       2.times { create(:alert, email: "foo@example.org", confirmed: true) }
       assign(:alert, create(:alert, email: "foo@example.org", confirmed: true, subscription: subscription))
-      assign(:trial_subscriber_analytics_params, foo: :bar)
       render
     end
 
@@ -93,6 +91,7 @@ describe "alert_notifier/alert.text.erb" do
     assign(:applications, [application])
     assign(:comments, [])
     assign(:host, "foo.com")
+    assign(:theme, "default")
   end
 
   context "when the recipient is not a subscriber" do
@@ -110,7 +109,6 @@ describe "alert_notifier/alert.text.erb" do
     before :each do
       subscription = create(:subscription, trial_started_at: Date.today)
       assign(:alert, create(:alert, subscription: subscription))
-      assign(:trial_subscriber_analytics_params, foo: :bar)
       render
     end
 
@@ -129,7 +127,6 @@ describe "alert_notifier/alert.text.erb" do
     before :each do
       subscription = create(:subscription, trial_started_at: Date.today - 6.days)
       assign(:alert, create(:alert, subscription: subscription))
-      assign(:trial_subscriber_analytics_params, foo: :bar)
       render
     end
 
@@ -152,7 +149,6 @@ describe "alert_notifier/alert.text.erb" do
       subscription = create(:subscription, email: "foo@example.org", trial_started_at: 7.days.ago)
       2.times { create(:alert, email: "foo@example.org", confirmed: true) }
       assign(:alert, create(:alert, email: "foo@example.org", confirmed: true, subscription: subscription))
-      assign(:trial_subscriber_analytics_params, foo: :bar)
       render
     end
 

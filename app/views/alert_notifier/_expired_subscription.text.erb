@@ -8,4 +8,4 @@ If this sounds like you, simply reply to this email and tell us why you need ale
 We’ll be happy to help with a free, non-commercial subscription.
 
 Subscribe here to continue getting alerts:
-<%= raw new_subscription_url(@trial_subscriber_analytics_params.merge(utm_content: "body_text_link", email: @alert.email)) %>
+<%= raw new_subscription_url_with_tracking(alert: @alert, utm_content: "text_format_link") %>

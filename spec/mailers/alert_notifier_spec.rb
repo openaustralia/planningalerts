@@ -78,40 +78,62 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
   end
 
   describe "when sending a planning alert with two new planning applications" do
-    before :each do
-      @email = AlertNotifier.alert("default", @alert, [@a1, @a2])
-    end
+    context "and the theme is Default" do
+      before :each do
+        @email = AlertNotifier.alert("default", @alert, [@a1, @a2])
+      end
 
-    it "should be sent to the user's email address" do
-      @email.to.should == [@alert.email]
-    end
+      it "should be sent to the user's email address" do
+        @email.to.should == [@alert.email]
+      end
 
-    it "should be from the main planningalerts email address" do
-      @email.from.should == ["contact@planningalerts.org.au"]
-      #@email.from_addrs.first.name.should == "PlanningAlerts.org.au"
-    end
+      it "should be from the main planningalerts email address" do
+        @email.from.should == ["contact@planningalerts.org.au"]
+        #@email.from_addrs.first.name.should == "PlanningAlerts.org.au"
+      end
 
-    it "should have a sensible subject line" do
-      @email.subject.should == "2 new planning applications near #{@alert.address}"
-    end
+      it "should have a sensible subject line" do
+        @email.subject.should == "2 new planning applications near #{@alert.address}"
+      end
 
-    it "should be a multipart email" do
-      @email.body.parts.length.should eq(2)
-    end
+      it "should be a multipart email" do
+        @email.body.parts.length.should eq(2)
+      end
 
-    context "Text email" do
-      it "should nicely format a list of multiple planning applications" do
-        @email.text_part.body.should include Rails.root.join("spec/mailers/regression/alert_notifier/email1.txt").read
+      context "Text email" do
+        it "should nicely format a list of multiple planning applications" do
+          @email.text_part.body.should include Rails.root.join("spec/mailers/regression/alert_notifier/email1.txt").read
+        end
+      end
+
+      context "HTML emails" do
+        before :each do
+          @html_body = @email.html_part.body
+        end
+
+        it 'should contain links to the applications' do
+          @html_body.should have_link("Foo Street, Bar", href: "https://dev.planningalerts.org.au/applications/1?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
+          @html_body.should have_link("Bar Street, Foo", href: "https://dev.planningalerts.org.au/applications/2?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
+        end
+
+        it 'should contain application descriptions' do
+          @html_body.should have_content "Knock something down"
+          @html_body.should have_content "Put something up"
+        end
+
+        it "should have a specific body" do
+          @html_body.should == Rails.root.join("spec/mailers/regression/alert_notifier/email1.html").read
+        end
       end
     end
 
-    describe "when sending a planning alert with two new planning applications in the nsw theme" do
+    context "and the theme is NSW" do
       before :each do
         @email = AlertNotifier.alert("nsw", @alert, [@a1, @a2])
       end
 
       # TODO This is just a temporary address
-      it "should be from the main themes website email address" do
+      it "should be from the nsw theme’s email address" do
         @email.from.should == ["contact@nsw.127.0.0.1.xip.io"]
       end
 
@@ -122,29 +144,18 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
       end
 
       context "HTML email" do
+        before :each do
+          @html_body = @email.html_part.body
+        end
+
+        it 'should contain links to the applications' do
+          @html_body.should have_link("Foo Street, Bar", href: "http://nsw.127.0.0.1.xip.io:3000/applications/1?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
+          @html_body.should have_link("Bar Street, Foo", href: "http://nsw.127.0.0.1.xip.io:3000/applications/2?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
+        end
+
         it "should have a specific body" do
           @email.html_part.body.should == Rails.root.join("spec/mailers/regression/alert_notifier/email4.html").read
         end
-      end
-    end
-
-    context "HTML emails" do
-      before :each do
-        @html_body = @email.html_part.body
-      end
-
-      it 'should contain links to the applications' do
-        @html_body.should have_link("Foo Street, Bar", href: "https://dev.planningalerts.org.au/applications/1?utm_medium=email&utm_source=alerts")
-        @html_body.should have_link("Bar Street, Foo", href: "https://dev.planningalerts.org.au/applications/2?utm_medium=email&utm_source=alerts")
-      end
-
-      it 'should contain application descriptions' do
-        @html_body.should have_content "Knock something down"
-        @html_body.should have_content "Put something up"
-      end
-
-      it "should have a specific body" do
-        @html_body.should == Rails.root.join("spec/mailers/regression/alert_notifier/email1.html").read
       end
     end
   end

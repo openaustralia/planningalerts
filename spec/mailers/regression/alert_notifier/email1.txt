@@ -4,7 +4,7 @@ Foo Street, Bar
 
 Knock something down
 
-Read more: https://dev.planningalerts.org.au/applications/1?utm_medium=email&utm_source=alerts
+Read more: https://dev.planningalerts.org.au/applications/1?utm_campaign=view-application&utm_medium=email&utm_source=alerts
 Add your own comment: https://dev.planningalerts.org.au/applications/1?utm_campaign=add-comment&utm_medium=email&utm_source=alerts#add-comment
 
 -----------------------------
@@ -13,7 +13,7 @@ Bar Street, Foo
 
 Put something up
 
-Read more: https://dev.planningalerts.org.au/applications/2?utm_medium=email&utm_source=alerts
+Read more: https://dev.planningalerts.org.au/applications/2?utm_campaign=view-application&utm_medium=email&utm_source=alerts
 Add your own comment: https://dev.planningalerts.org.au/applications/2?utm_campaign=add-comment&utm_medium=email&utm_source=alerts#add-comment
 
 ============================================================

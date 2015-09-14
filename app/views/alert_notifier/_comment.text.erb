@@ -2,4 +2,4 @@
 <%= Sanitize.clean(truncate(comment.text, :length => 700), Sanitize::Config::BASIC).html_safe %>
 by <%= comment.name %> on <%= comment.application.address %>
 
-<%= application_url(comment.application, protocol: @protocol, host: @host, anchor: "comment#{comment.id}", utm_medium: "email", utm_source: "alerts").html_safe %>
+<%= comment_url_with_tracking(comment: comment, theme: @theme).html_safe %>

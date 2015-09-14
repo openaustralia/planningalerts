@@ -3,9 +3,10 @@ class AlertNotifier < ActionMailer::Base
   helper :application, :applications
 
   def alert(theme, alert, applications, comments = [])
-    @alert, @applications, @comments = alert, applications, comments
-    # TODO: Differentiate people with expired subscriptions
-    @trial_subscriber_analytics_params = {utm_source: "alert", utm_medium: "email", utm_campaign: "trial_subscriber"}
+    @theme = theme
+    @alert = alert
+    @applications = applications
+    @comments = comments
 
     themed_mail(theme: theme, from: email_from(theme), to: alert.email,
       subject: render_to_string(partial: "subject",
