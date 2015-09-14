@@ -2,6 +2,9 @@ ActiveAdmin.register Alert do
   menu label: "Alerts"
   actions :index, :show
 
+  scope :all, default: true
+  scope :active
+
   index title: "Alerts" do
     column :email
     column :address
