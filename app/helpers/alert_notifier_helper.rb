@@ -44,7 +44,7 @@ module AlertNotifierHelper
     )
   end
 
-  def new_subscription_url_with_tracking(alert: nil, utm_content: '')
+  def new_subscription_url_with_tracking(alert: nil, utm_content: nil)
     if alert.expired_subscription?
       utm_campaign = "subscribe-from-expired"
     elsif alert.trial_subscription?
@@ -56,7 +56,7 @@ module AlertNotifierHelper
       email: @alert.email
     )
 
-    params.merge!(utm_content: utm_content) unless utm_content.blank?
+    params.merge!(utm_content: utm_content) unless utm_content.nil?
 
     new_subscription_url(params)
   end
