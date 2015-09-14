@@ -10,8 +10,7 @@ module AlertNotifierHelper
   end
 
   def application_url_with_tracking(theme: nil, id: nil)
-    base_params = host_and_protocol_for_theme(theme)
-                       .merge(base_tracking_params)
+    base_params = host_and_protocol_for_theme(theme).merge(base_tracking_params)
 
     application_url(
       base_params.merge(
@@ -22,8 +21,7 @@ module AlertNotifierHelper
   end
 
   def comment_url_with_tracking(theme: nil, comment: nil)
-    base_params = host_and_protocol_for_theme(theme)
-                       .merge(base_tracking_params)
+    base_params = host_and_protocol_for_theme(theme).merge(base_tracking_params)
 
     application_url(
       base_params.merge(
@@ -35,8 +33,7 @@ module AlertNotifierHelper
   end
 
   def new_comment_url_with_tracking(theme: nil, id: nil)
-    base_params = host_and_protocol_for_theme(theme)
-                       .merge(base_tracking_params)
+    base_params = host_and_protocol_for_theme(theme).merge(base_tracking_params)
 
     application_url(
       base_params.merge(
