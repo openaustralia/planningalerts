@@ -9,7 +9,7 @@ describe AlertNotifierHelper do
 
       it {
         expect(helper.host_and_protocol_for_theme(theme))
-          .to eq(host: host(theme), protocol: protocol(theme))
+        .to eq(host: host(theme), protocol: protocol(theme))
       }
     end
 
@@ -18,7 +18,7 @@ describe AlertNotifierHelper do
 
       it {
         expect(helper.host_and_protocol_for_theme(theme))
-          .to eq(host: host(theme), protocol: protocol(theme))
+        .to eq(host: host(theme), protocol: protocol(theme))
       }
     end
   end
@@ -26,7 +26,7 @@ describe AlertNotifierHelper do
   describe "#base_tracking_params" do
     it {
       expect(helper.base_tracking_params)
-        .to eq(utm_source: "alerts", utm_medium: "email")
+      .to eq(utm_source: "alerts", utm_medium: "email")
     }
   end
 
@@ -114,14 +114,14 @@ describe AlertNotifierHelper do
       context "without utm_content" do
         it {
           expect(helper.new_subscription_url_with_tracking(alert: @alert))
-            .to eq new_subscription_url(@params_for_trial_subscriber)
+          .to eq new_subscription_url(@params_for_trial_subscriber)
         }
       end
 
       context "with utm_content" do
         it {
           expect(helper.new_subscription_url_with_tracking(alert: @alert, utm_content: "foo"))
-            .to eq new_subscription_url(@params_for_trial_subscriber.merge(utm_content: "foo"))
+          .to eq new_subscription_url(@params_for_trial_subscriber.merge(utm_content: "foo"))
         }
       end
     end
@@ -135,14 +135,14 @@ describe AlertNotifierHelper do
       context "without utm_content" do
         it {
           expect(helper.new_subscription_url_with_tracking(alert: @alert))
-            .to eq new_subscription_url(@params_for_expired_subscriber)
+          .to eq new_subscription_url(@params_for_expired_subscriber)
         }
       end
 
       context "with utm_content" do
         it {
           expect(helper.new_subscription_url_with_tracking(alert: @alert, utm_content: "foo"))
-            .to eq new_subscription_url(@params_for_expired_subscriber.merge(utm_content: "foo"))
+          .to eq new_subscription_url(@params_for_expired_subscriber.merge(utm_content: "foo"))
         }
       end
     end
