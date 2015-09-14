@@ -2,7 +2,4 @@
 <%= Sanitize.clean(truncate(comment.text, :length => 700), Sanitize::Config::BASIC).html_safe %>
 by <%= comment.name %> on <%= comment.application.address %>
 
-<%= comment_url_with_tracking(
-  comment: comment,
-  theme: @theme).html_safe
-%>
+<%= comment_url_with_tracking(comment: comment, theme: @theme).html_safe %>
