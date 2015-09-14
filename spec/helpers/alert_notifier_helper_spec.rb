@@ -9,10 +9,7 @@ describe AlertNotifierHelper do
 
       it {
         expect(helper.host_and_protocol_for_theme(theme))
-          .to eq(
-            host: host(theme),
-            protocol: protocol(theme)
-        )
+          .to eq(host: host(theme), protocol: protocol(theme))
       }
     end
 
@@ -21,10 +18,7 @@ describe AlertNotifierHelper do
 
       it {
         expect(helper.host_and_protocol_for_theme(theme))
-          .to eq(
-            host: host(theme),
-            protocol: protocol(theme)
-        )
+          .to eq(host: host(theme), protocol: protocol(theme))
       }
     end
   end
