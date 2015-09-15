@@ -1,4 +1,6 @@
 // based on http://refills.bourbon.io/#accordion-tabs
+// TODO: add a no-js fallback to make sure all functionality
+//       is always available.
 .tabs-list {
   $base-border-color: $lightest-cool-highlight !default;
   $base-background-color: $content-background !default;
