@@ -10,7 +10,7 @@
   $tab-active-background: $base-background-color;
   $tab-inactive-color: $base-background-color;
   $tab-inactive-hover-color: silver;
-  $gutter: 1em;
+  $base-spacing: 1em;
 
   @include clearfix;
   padding: 0;
@@ -26,7 +26,7 @@
     color: $tab-link-color;
     display: block;
     font-weight: 400;
-    padding: ($base-spacing / 2) $gutter;
+    padding: ($base-spacing / 2) $base-spacing;
     text-decoration: none;
     @include inline-block;
     border-top: 0;
