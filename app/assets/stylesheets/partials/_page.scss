@@ -407,7 +407,13 @@ ul#subscribe {
 #comments-area {
   margin-top: 1em;
   border-top: 1px solid $light-cool-highlight;
+
+  .tabs-list & {
+    margin-top: 0;
+    border-top: 0;
+  }
 }
+
 
 ol#comments {
   @include no-bullets;
