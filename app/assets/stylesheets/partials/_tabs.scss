@@ -13,6 +13,7 @@
   $base-spacing: 1em;
 
   @include clearfix;
+  margin: 0;
   padding: 0;
 
   li.tab-header-and-content {
