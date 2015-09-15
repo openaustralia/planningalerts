@@ -1,0 +1,11 @@
+%ul.tabs-list
+  %li.tab-header-and-content
+    = link_to "Comments", "#", class: "tab-link is-active"
+    .tab-content
+      = render "comments_area"
+  %li.tab-header-and-content
+    = link_to "Messages to councilors", "#", class: "tab-link"
+    .tab-content
+      %p
+        Soon you’ll be able to message your elected councilors
+        and see where they stand on planning decisions that matter to you

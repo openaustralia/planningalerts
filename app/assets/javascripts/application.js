@@ -3,6 +3,7 @@
 //= require jquery.ui.autocomplete.html.js
 //= require address_autocomplete.js
 //= require geolocation
+//= require refills_tabs.js
 
 $("#menu .toggle").click(function(){
   $("#menu ul").slideToggle("fast", function(){
