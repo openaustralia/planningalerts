@@ -3,7 +3,7 @@
   - if @application.on_notice_to
     %p= on_notice_text(@application)
   %p
-    Your comment will be sent to
+    Your comment and details will be sent to
     %strong #{@application.authority.full_name}.
     - unless @application.on_notice_to && Date.today > @application.on_notice_to
       They’ll consider your submission when they decide whether to approve this application.
