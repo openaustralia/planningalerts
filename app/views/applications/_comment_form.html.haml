@@ -4,10 +4,9 @@
     %p= on_notice_text(@application)
   - if @application.on_notice_to && Date.today > @application.on_notice_to
     %p
-      All the information you provide in your comment below will be sent to
-      = succeed "." do
-        %strong= @application.authority.full_name
-      The text of your comment and your name will be public.
+      Your comment will be sent to
+      %strong #{@application.authority.full_name}.
+      Your name and comment will be posted publicaly here as well.
   - else
     %p
       Your comment will be sent to
