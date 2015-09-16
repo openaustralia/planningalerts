@@ -5,7 +5,7 @@
   %p
     Your comment and details will be sent to
     %strong #{@application.authority.full_name}.
-    - unless @application.on_notice_to && Date.today > @application.on_notice_to
+    - unless @application.official_submission_period_expired?
       They’ll consider your submission when they decide whether to approve this application.
     Your name and comment will be posted publicaly here as well.
   %p
