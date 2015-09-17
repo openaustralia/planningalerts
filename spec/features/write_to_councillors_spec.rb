@@ -51,6 +51,8 @@ feature "Send a message to a councilor" do
       fill_in "My name is", with: "Luke"
       fill_in "message_body", with: "Hi there, could you please tell me some more about this application?"
 
+      click_button "Post your public message to your councillor"
+
       # fill out your name
       # write your message
       # post your message
