@@ -11,7 +11,7 @@
                  { id: "11", name: "Cristiane Aguilar", party: "Australian Labor Party" }]
 
 %ul.councillor-select-list
-  - councillors.each do |councillor|
+  - councillors.shuffle.each do |councillor|
     %li
       %input.councillor-select-radio{id: "councillor-#{councillor[:id]}", name: "councillor_id", value: "#{councillor[:id]}", type: "radio"}
       %label.councillor-select-lable.h-card{for: "councillor-#{councillor[:id]}"}
