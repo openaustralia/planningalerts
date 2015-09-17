@@ -27,3 +27,13 @@
             %li
               %input.councillor-select-radio{id: "councillor-5", name: "councillor_id", value: "5", type: "radio"}
               %label.councillor-select-lable{for: "councillor-5"} Leon Oldfield
+
+        - # TODO: Don’t show this section until a councillor has been selected
+        %fieldset.councillor-message-inputgroup
+          %legend Write your message
+          .councillor-message-block
+            - # TODO: Change this to the councillors name once it is selected
+            %p Dear Councillor
+            %p
+              %label{for: "commentor_name"} My name is
+              %input#commentor_name

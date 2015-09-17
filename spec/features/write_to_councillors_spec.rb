@@ -47,6 +47,9 @@ feature "Send a message to a councilor" do
       within(".councillor-select-list") do
         choose "councillor-2"
       end
+
+      fill_in "My name is", with: "Luke"
+
       # fill out your name
       # write your message
       # post your message
