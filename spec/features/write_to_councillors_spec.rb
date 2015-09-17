@@ -49,6 +49,7 @@ feature "Send a message to a councilor" do
       end
 
       fill_in "My name is", with: "Luke"
+      fill_in "message_body", with: "Hi there, could you please tell me some more about this application?"
 
       # fill out your name
       # write your message
