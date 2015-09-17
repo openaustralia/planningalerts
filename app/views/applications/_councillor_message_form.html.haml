@@ -1,0 +1,38 @@
+%form#councillor-message-form
+  %legend Write to your elected councillors about this application.
+
+  %fieldset.councillor-select-list
+    %legend Who would you like to contact?
+    %ul
+      %li
+        %input.councillor-select-radio{id: "councillor-1", name: "councillor_id", value: "1", type: "radio"}
+        %label.councillor-select-lable{for: "councillor-1"} Irene Lam
+      %li
+        %input.councillor-select-radio{id: "councillor-2", name: "councillor_id", value: "2", type: "radio"}
+        %label.councillor-select-lable{for: "councillor-2"} Fatima Merriweather
+      %li
+        %input.councillor-select-radio{id: "councillor-3", name: "councillor_id", value: "3", type: "radio"}
+        %label.councillor-select-lable{for: "councillor-3"} George Tall
+      %li
+        %input.councillor-select-radio{id: "councillor-4", name: "councillor_id", value: "4", type: "radio"}
+        %label.councillor-select-lable{for: "councillor-4"} Paula Crisp
+      %li
+        %input.councillor-select-radio{id: "councillor-5", name: "councillor_id", value: "5", type: "radio"}
+        %label.councillor-select-lable{for: "councillor-5"} Leon Oldfield
+
+  - # TODO: Don’t show this section until a councillor has been selected
+  %fieldset.councillor-message-inputgroup
+    %legend Write your message
+    .councillor-message-block
+      - # TODO: Change this to the councillors name once it is selected
+      %p Dear Councillor
+      %p
+        %label{for: "commentor_name"} My name is
+        %input#commentor_name
+
+      - # TODO: Add some placeholder content like 'I'm writing to you about DA ..'
+      %textarea#message_body{aria: {label: "Your message"}}
+
+  - # TODO: Replace 'your councillor' with the selected councillor’s name
+  - #       to reenforce the personal connection
+  %input.button.button-action{type: 'submit', value: "Post your public message to your councillor"}
