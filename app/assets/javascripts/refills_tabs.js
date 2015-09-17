@@ -1,4 +1,6 @@
 // based on http://refills.bourbon.io/#accordion-tabs
+// TODO: Allow people to link to the page with a specific tab open
+// TODO: Keep the content of both tabs accessible without js
 $(document).ready(function () {
   $('.tabs-list').each(function(index) {
     $(this).children('li').first().children('a').addClass('is-active').next().addClass('is-open').show();
