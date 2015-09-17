@@ -102,3 +102,26 @@ ol#comments {
   text-decoration: underline;
 }
 
+#councillor-message-form {
+  legend,
+  fieldset,
+  textarea {
+    margin-bottom: 2em;
+  }
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  fieldset legend {
+    font-weight: bold;
+  }
+
+  input[type="text"] {
+    padding: .5em;
+  }
+
+  textarea {
+    width: 100%;
+  }
+}
