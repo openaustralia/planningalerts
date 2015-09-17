@@ -53,9 +53,6 @@ feature "Send a message to a councilor" do
 
       click_button "Post your public message to your councillor"
 
-      # fill out your name
-      # write your message
-      # post your message
       # the message appears on the page
       # the message is sent off to the councillor
     end
