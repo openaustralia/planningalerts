@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 feature "Send a message to a councilor" do
+  # As someone interested in a local development application,
+  # let me write to my local councillor about it,
+  # so that I can get their help or feedback
+  # and find out where they stand on this development I care about
+
   context "when not logged in" do
     scenario "can’t see councilor messages sections" do
       # visit an application page
