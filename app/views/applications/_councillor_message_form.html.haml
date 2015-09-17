@@ -37,10 +37,10 @@
       %p Dear Councillor
       %p
         %label{for: "commentor_name"} My name is
-        %input#commentor_name{type: "text"}
+        %input#commentor_name{type: "text", placeholder: "your name here"}
 
       - # TODO: Add some placeholder content like 'I'm writing to you about DA ..'
-      %textarea#message_body{aria: {label: "Your message"}, rows: "15"}
+      %textarea#message_body{aria: {label: "Your message"}, rows: "15", placeholder: "Write your message here"}
 
   - # TODO: Replace 'your councillor' with the selected councillor’s name
   - #       to reenforce the personal connection
