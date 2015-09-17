@@ -3,32 +3,7 @@
 
   %fieldset.councillor-select-inputgroup
     %legend Which councillor would you like to contact?
-    %ul.councillor-select-list
-      %li
-        %input.councillor-select-radio{id: "councillor-1", name: "councillor_id", value: "1", type: "radio"}
-        %label.councillor-select-lable.h-card{for: "councillor-1"}
-          %span.p-name Irene Lam
-          %span.p-org Independent
-      %li
-        %input.councillor-select-radio{id: "councillor-2", name: "councillor_id", value: "2", type: "radio"}
-        %label.councillor-select-lable.h-card{for: "councillor-2"}
-          %span.p-name Fatima Merriweather
-          %span.p-org Liberal Party of Australia
-      %li
-        %input.councillor-select-radio{id: "councillor-3", name: "councillor_id", value: "3", type: "radio"}
-        %label.councillor-select-lable.h-card{for: "councillor-3"}
-          %span.p-name George Tall
-          %span.p-org The Residents Action Group for Dream Area
-      %li
-        %input.councillor-select-radio{id: "councillor-4", name: "councillor_id", value: "4", type: "radio"}
-        %label.councillor-select-lable.h-card{for: "councillor-4"}
-          %span.p-name Paula Crisp
-          %span.p-org Greens
-      %li
-        %input.councillor-select-radio{id: "councillor-5", name: "councillor_id", value: "5", type: "radio"}
-        %label.councillor-select-lable.h-card{for: "councillor-5"}
-          %span.p-name Leon Oldfield
-          %span.p-org Australian Labor Party
+    = render 'councillor_select_list'
   - # TODO: Don’t show this section until a councillor has been selected
   %fieldset.councillor-message-inputgroup
     %legend Write your message
