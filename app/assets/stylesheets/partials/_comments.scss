@@ -125,3 +125,42 @@ ol#comments {
     width: 100%;
   }
 }
+
+.councillor-select-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.councillor-select-radio {
+  @include sr-only();
+}
+
+.councillor-select-lable {
+  margin-bottom: .5em;
+  width: 100%;
+  display: block;
+  cursor: pointer;
+
+  .p-name,
+  .p-org {
+    display: block;
+  }
+
+  .p-name {
+    font-weight: bold;
+  }
+
+  :hover + &,
+  :focus + &  {
+    border-left: .25em $lightest-cool-highlight solid;
+    padding-left: .75em;
+    color: $link-hover-color;
+  }
+
+  :checked + & {
+    border-left: .25em $light-cool-highlight solid;
+    padding-left: .75em;
+    color: $link-active-color;
+  }
+}
