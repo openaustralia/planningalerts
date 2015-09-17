@@ -103,6 +103,12 @@ ol#comments {
 }
 
 #councillor-message-form {
+  // set box-sizing for simplicity
+  &,
+  * {
+    box-sizing: border-box;
+  }
+
   legend,
   fieldset,
   textarea {
