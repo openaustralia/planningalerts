@@ -170,3 +170,10 @@ ol#comments {
     color: $link-active-color;
   }
 }
+
+.councillor-message-block {
+  input#commentor_name {
+    padding-left: 1em;
+    width: 25em;
+  }
+}
