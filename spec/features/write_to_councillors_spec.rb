@@ -16,7 +16,7 @@ feature "Send a message to a councilor" do
     end
 
     scenario "can’t see councilor messages sections" do
-      # there should not be an introduction to writing to your councillors
+      page.should_not have_content("Write to your elected councillors about this application")
       # and you should not be able to write and submit a message.
     end
   end
@@ -41,7 +41,7 @@ feature "Send a message to a councilor" do
     end
 
     scenario "sending a message" do
-      # there should be a short text introduction to writing to your councillors
+      page.should have_content("Write to your elected councillors about this application")
       # there should be an expanation that this wont necessarily impact the decision about this application,
       #   encourage people to use the official process for that.
       # there should be a list of councilors to select from
