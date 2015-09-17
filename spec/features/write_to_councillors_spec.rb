@@ -44,8 +44,9 @@ feature "Send a message to a councilor" do
       page.should have_content("Write to your elected councillors about this application")
       # there should be an expanation that this wont necessarily impact the decision about this application,
       #   encourage people to use the official process for that.
-      # there should be a list of councilors to select from
-      # select the councillor you would like to write to
+      within(".councillor-select-list") do
+        choose "councillor-2"
+      end
       # fill out your name
       # write your message
       # post your message

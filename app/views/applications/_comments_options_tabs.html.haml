@@ -8,3 +8,22 @@
     .tab-content
       %form#councillor-message-form
         %legend Write to your elected councillors about this application.
+
+        %fieldset.councillor-select-list
+          %legend Who would you like to contact?
+          %ul
+            %li
+              %input.councillor-select-radio{id: "councillor-1", name: "councillor_id", value: "1", type: "radio"}
+              %label.councillor-select-lable{for: "councillor-1"} Irene Lam
+            %li
+              %input.councillor-select-radio{id: "councillor-2", name: "councillor_id", value: "2", type: "radio"}
+              %label.councillor-select-lable{for: "councillor-2"} Fatima Fakecouncillor
+            %li
+              %input.councillor-select-radio{id: "councillor-3", name: "councillor_id", value: "3", type: "radio"}
+              %label.councillor-select-lable{for: "councillor-3"} George Tall
+            %li
+              %input.councillor-select-radio{id: "councillor-4", name: "councillor_id", value: "4", type: "radio"}
+              %label.councillor-select-lable{for: "councillor-4"} Paula Crisp
+            %li
+              %input.councillor-select-radio{id: "councillor-5", name: "councillor_id", value: "5", type: "radio"}
+              %label.councillor-select-lable{for: "councillor-5"} Leon Oldfield
