@@ -1,0 +1,54 @@
+// based on http://refills.bourbon.io/#accordion-tabs
+// TODO: add a no-js fallback to make sure all functionality
+//       is always available.
+.tabs-list {
+  $base-border-color: $lightest-cool-highlight !default;
+  $base-background-color: $content-background !default;
+
+  $tab-link-color: $font-color;
+  $tab-border: 1px solid $base-border-color;
+  $tab-active-background: $base-background-color;
+  $tab-inactive-color: $base-background-color;
+  $tab-inactive-hover-color: silver;
+  $base-spacing: 1em;
+
+  @include clearfix;
+  margin: 0;
+  padding: 0;
+
+  li.tab-header-and-content {
+    list-style: none;
+    display: inline;
+  }
+
+  a.tab-link {
+    background-color: $tab-inactive-color;
+    border-top: $tab-border;
+    color: $tab-link-color;
+    display: block;
+    font-weight: 400;
+    padding: ($base-spacing / 2) $base-spacing;
+    text-decoration: none;
+    @include inline-block;
+    border-top: 0;
+
+    &:hover {
+      color: $link-color;
+    }
+
+    &.is-active {
+      border-bottom: 0;
+      border: $tab-border;
+      border-bottom-color: $tab-active-background;
+      margin-bottom: -1px;
+    }
+  }
+
+  .tab-content {
+    display: none;
+    padding: $base-spacing 0;
+    width: 100%;
+    border-top: $tab-border;
+    float: left;
+  }
+}

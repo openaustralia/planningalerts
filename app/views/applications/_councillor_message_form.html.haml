@@ -1,0 +1,22 @@
+%form#councillor-message-form
+  %legend Write to your elected councillors about this application.
+
+  %fieldset.councillor-select-inputgroup
+    %legend Which councillor would you like to contact?
+    = render 'councillor_select_list'
+  - # TODO: Don’t show this section until a councillor has been selected
+  %fieldset.councillor-message-inputgroup
+    %legend Write your message
+    .councillor-message-block
+      - # TODO: Change this to the councillors name once it is selected
+      %p Dear Councillor
+      %p
+        %label{for: "commentor_name"} My name is
+        %input#commentor_name{type: "text", placeholder: "your name here"}
+
+      - # TODO: Add some placeholder content like 'I'm writing to you about DA ..'
+      %textarea#message_body{aria: {label: "Your message"}, rows: "15", placeholder: "Write your message here"}
+
+  - # TODO: Replace 'your councillor' with the selected councillor’s name
+  - #       to reinforce the personal connection
+  %input.button.button-action{type: 'submit', value: "Post your public message to your councillor"}

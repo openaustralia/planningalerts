@@ -14,6 +14,7 @@ gem "compass-blueprint"
 gem 'sass-rails'
 gem "susy"
 gem 'uglifier'
+gem 'refills'
 
 # jQuery is the default JavaScript library in Rails 3.1
 gem 'jquery-rails'

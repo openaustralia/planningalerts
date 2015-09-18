@@ -161,6 +161,10 @@ class Application < ActiveRecord::Base
     end
   end
 
+  def official_submission_period_expired?
+    on_notice_to && Date.today > on_notice_to
+  end
+
   private
 
   # TODO: Optimisation is to make sure that this doesn't get called again on save when the address hasn't changed
