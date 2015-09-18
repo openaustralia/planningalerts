@@ -14,6 +14,6 @@
   - councillors.shuffle.each do |councillor|
     %li
       %input.councillor-select-radio{id: "councillor-#{councillor[:id]}", name: "councillor_id", value: "#{councillor[:id]}", type: "radio"}
-      %label.councillor-select-lable.h-card{for: "councillor-#{councillor[:id]}"}
+      %label.councillor-select-label.h-card{for: "councillor-#{councillor[:id]}"}
         %span.p-name= councillor[:name]
         %span.p-org= councillor[:party]

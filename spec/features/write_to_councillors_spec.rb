@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "Send a message to a councilor" do
+feature "Send a message to a councillor" do
   # As someone interested in a local development application,
   # let me write to my local councillor about it,
   # so that I can get their help or feedback
@@ -15,7 +15,7 @@ feature "Send a message to a councilor" do
       end
     end
 
-    scenario "can’t see councilor messages sections" do
+    scenario "can’t see councillor messages sections" do
       page.should_not have_content("Write to your elected councillors about this application")
       # and you should not be able to write and submit a message.
     end
@@ -42,7 +42,7 @@ feature "Send a message to a councilor" do
 
     scenario "sending a message" do
       page.should have_content("Write to your elected councillors about this application")
-      # there should be an expanation that this wont necessarily impact the decision about this application,
+      # there should be an explanation that this wont necessarily impact the decision about this application,
       #   encourage people to use the official process for that.
       within(".councillor-select-list") do
         choose "councillor-2"
