@@ -17,7 +17,7 @@ feature "Send a message to a councillor" do
 
     scenario "can’t see councillor messages sections" do
       page.should_not have_content("Write to your elected councillors about this application")
-      # and you should not be able to write and submit a message.
+      # TODO: and you should not be able to write and submit a message.
     end
   end
 
@@ -39,7 +39,7 @@ feature "Send a message to a councillor" do
     scenario "sending a message" do
       visit application_path(application)
       page.should have_content("Write to your elected councillors about this application")
-      # there should be an explanation that this wont necessarily impact the decision about this application,
+      # TOOD: there should be an explanation that this wont necessarily impact the decision about this application,
       #   encourage people to use the official process for that.
       within(".councillor-select-list") do
         choose "councillor-2"
@@ -50,8 +50,8 @@ feature "Send a message to a councillor" do
 
       click_button "Post your public message to your councillor"
 
-      # the message appears on the page
-      # the message is sent off to the councillor
+      # TODO: the message appears on the page
+      # TODO: the message is sent off to the councillor
     end
   end
 end
