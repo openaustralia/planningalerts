@@ -309,19 +309,19 @@ describe Application do
     context "when the ‘on notice to’ date is not set" do
       before { @application.update(on_notice_to: nil) }
 
-      it { expect(@application.official_submission_period_expired?).to eq(false) }
+      it { expect(@application.official_submission_period_expired?).to be_false }
     end
 
     context "when the ‘on notice to’ date has passed" do
       before { @application.update(on_notice_to: 1.day.ago) }
 
-      it { expect(@application.official_submission_period_expired?).to eq(true) }
+      it { expect(@application.official_submission_period_expired?).to be_true }
     end
 
     context "when the ‘on notice to’ date is in the future" do
       before { @application.update(on_notice_to: 1.day.from_now) }
 
-      it { expect(@application.official_submission_period_expired?).to eq(false) }
+      it { expect(@application.official_submission_period_expired?).to be_false }
     end
   end
 end

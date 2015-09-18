@@ -162,7 +162,7 @@ class Application < ActiveRecord::Base
   end
 
   def official_submission_period_expired?
-    on_notice_to && Date.today > on_notice_to ? true : false
+    on_notice_to && Date.today > on_notice_to
   end
 
   private
