@@ -35,9 +35,9 @@
         %p.source (Source: #{link_to @application.authority.full_name, authority_path(@application.authority.short_name_encoded)}, reference #{@application.council_reference})
 
     - if current_user && current_user.admin?
-      = render "comments_options_tabs"
+      = render "applications/comments_options_tabs"
     - else
-      = render "comments_area"
+      = render "applications/comments_area"
 
 #sidebar
   #alert
