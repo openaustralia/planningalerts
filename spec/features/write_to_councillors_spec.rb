@@ -23,7 +23,6 @@ feature "Send a message to a councillor" do
 
   context "when logged in as admin" do
     background do
-      authority = create(:authority, full_name: "Foo")
       admin = create(:admin)
 
       visit new_user_session_path
@@ -33,14 +32,12 @@ feature "Send a message to a councillor" do
       end
       click_button "Sign in"
       expect(page).to have_content "Signed in successfully"
-
-      VCR.use_cassette('planningalerts') do
-        application = create(:application, id: "1", authority_id: authority.id, comment_url: 'mailto:foo@bar.com')
-        visit application_path(application)
-      end
     end
 
+    given(:application) { VCR.use_cassette('planningalerts') { create(:application, id: "1", comment_url: 'mailto:foo@bar.com') } }
+
     scenario "sending a message" do
+      visit application_path(application)
       page.should have_content("Write to your elected councillors about this application")
       # there should be an explanation that this wont necessarily impact the decision about this application,
       #   encourage people to use the official process for that.
