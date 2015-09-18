@@ -7,4 +7,4 @@
       - @comments.each do |comment|
         %li{:id => "comment#{comment.id}"}
           = render :partial => 'comments/comment', :locals => {:comment => comment}
-  = render "applications/comment_form"
+  = render "comments/comment_form"
