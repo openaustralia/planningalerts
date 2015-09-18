@@ -25,6 +25,23 @@ feature "Give feedback to Council" do
     page.should_not have_content("How to comment on this application")
   end
 
+  scenario "Getting an error message if the comment form isn’t completed correctly" do
+    authority = create(:authority, full_name: "Foo", email: "feedback@foo.gov.au")
+    VCR.use_cassette('planningalerts') do
+      application = create(:application, id: "1", authority_id: authority.id)
+      visit(application_path(application))
+    end
+
+    fill_in("Comment", with: "I think this is a really good idea")
+    fill_in("Name", with: "Matthew Landauer")
+    fill_in("Email", with: "example@example.com")
+    # Don't fill in the address
+    click_button("Create Comment")
+
+    page.should have_content("Some of the comment wasn't filled out completely. See below.")
+    page.should_not have_content("Now check your email")
+  end
+
   scenario "Adding a comment" do
     authority = create(:authority, full_name: "Foo", email: "feedback@foo.gov.au")
     VCR.use_cassette('planningalerts') do
