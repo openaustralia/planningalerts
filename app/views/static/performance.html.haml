@@ -12,10 +12,12 @@
       %tr
         %th Date
         %th Number of people who commented
+        %th First time commenters
     %tbody
       - (Comment.all.order(:created_at).first.created_at.to_date..Date.today).to_a.reverse.each do |day|
         %tr
           %th= day
           %td= Comment.select {|c| c.created_at.to_date == day}.uniq {|c| c.email}.count
+          %td= Comment.select {|c| c.created_at.to_date == day}.uniq {|c| c.email}.select {|c| Comment.where("email = ? AND created_at < ?", c.email, c.created_at.to_date).empty? }.count
 - else
   Nobody has commented on an application yet.

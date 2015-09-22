@@ -14,17 +14,21 @@ feature "Viewing the use of the comments function" do
       VCR.use_cassette('planningalerts', allow_playback_repeats: true) do
         create(:comment, id: 1, confirmed: true, created_at: "2015-09-22", email: "foo@example.com")
         create(:comment, id: 2, confirmed: true, created_at: "2015-09-22", email: "bar@example.com")
-        create(:comment, id: 3, confirmed: true, created_at: "2015-09-18", email: "foo@example.com")
-        create(:comment, id: 4, confirmed: true, created_at: "2015-09-18", email: "bar@example.com")
-        create(:comment, id: 5, confirmed: true, created_at: "2015-09-18", email: "zap@example.com")
+        create(:comment, id: 3, confirmed: true, created_at: "2015-09-19", email: "foo@example.com")
+        create(:comment, id: 4, confirmed: true, created_at: "2015-09-19", email: "bar@example.com")
+        create(:comment, id: 5, confirmed: true, created_at: "2015-09-19", email: "zap@example.com")
+        create(:comment, id: 6, confirmed: true, created_at: "2015-09-18", email: "foo@example.com")
+        create(:comment, id: 7, confirmed: true, created_at: "2015-09-18", email: "bar@example.com")
+        create(:comment, id: 8, confirmed: true, created_at: "2015-09-18", email: "wiz@example.com")
       end
     end
 
     scenario "Viewing the table showing commenters per day" do
       visit performance_path
       expect(page).to have_content "The number of people who have commented on development applications by date"
-      expect(page).to have_content "2015-09-22 2"
-      expect(page).to have_content "2015-09-18 3"
+      expect(page).to have_content "2015-09-22 2 0"
+      expect(page).to have_content "2015-09-19 3 1"
+      expect(page).to have_content "2015-09-18 3 3"
     end
   end
 end
