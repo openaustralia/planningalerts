@@ -26,9 +26,9 @@ feature "Viewing the use of the comments function" do
     scenario "Viewing the table showing commenters per day" do
       visit performance_path
       expect(page).to have_content "The number of people who have commented on development applications by date"
-      expect(page).to have_content "2015-09-22 2 0"
-      expect(page).to have_content "2015-09-19 3 1"
-      expect(page).to have_content "2015-09-18 3 3"
+      expect(page).to have_content "2015-09-22 2 0 2"
+      expect(page).to have_content "2015-09-19 3 1 2"
+      expect(page).to have_content "2015-09-18 3 3 0"
     end
   end
 end
