@@ -13,7 +13,7 @@ class Comment < ActiveRecord::Base
   end
 
   def self.comments_with_unique_emails_for_date(date)
-    visible.select {|c| c.created_at.to_date == date}
+    visible.where("date(created_at) = ?", date).to_a
     .uniq {|c| c.email}
   end
 
