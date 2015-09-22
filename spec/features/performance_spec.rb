@@ -27,6 +27,7 @@ feature "Viewing the use of the comments function" do
       visit performance_path
       expect(page).to have_content "The number of people who have commented on development applications by date"
       expect(page).to have_content "2015-09-22 0 2"
+      expect(page).to have_content "2015-09-20 0 0"
       expect(page).to have_content "2015-09-19 1 2"
       expect(page).to have_content "2015-09-18 3 0"
     end
