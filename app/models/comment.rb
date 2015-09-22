@@ -22,4 +22,8 @@ class Comment < ActiveRecord::Base
     .select {|c| where("email = ? AND created_at < ?", c.email, c.created_at.to_date).empty? }
     .count
   end
+
+  def self.count_of_returning_commenters_for_date(date)
+    comments_with_unique_emails_for_date(date).count - count_of_first_time_commenters_for_date(date)
+  end
 end
