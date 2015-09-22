@@ -9,7 +9,7 @@ describe Comment do
     context "when there are no confirmed comments" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          create(:comment, confirmed: false)
+          create(:unconfirmed_comment)
         end
       end
 
@@ -19,7 +19,7 @@ describe Comment do
     context "when there are no comments on this date" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          create(:comment, confirmed: true, created_at: Date.yesterday)
+          create(:confirmed_comment, created_at: Date.yesterday)
         end
       end
 
@@ -29,7 +29,7 @@ describe Comment do
     context "when there are no confirmed comments on this date" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          create(:comment, confirmed: false, created_at: Date.today)
+          create(:unconfirmed_comment, created_at: Date.today)
         end
       end
 
@@ -39,7 +39,7 @@ describe Comment do
     context "when there is a confirmed comments on this date" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          @comment = create(:comment, confirmed: true, created_at: Date.today)
+          @comment = create(:confirmed_comment, created_at: Date.today)
         end
       end
 
@@ -49,8 +49,8 @@ describe Comment do
     context "when there is a confirmed comments on this date and on another date" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          @todays_comment = create(:comment, confirmed: true, created_at: Date.today)
-          @yesterdays_comment = create(:comment, confirmed: true, created_at: Date.yesterday)
+          @todays_comment = create(:confirmed_comment, created_at: Date.today)
+          @yesterdays_comment = create(:confirmed_comment, created_at: Date.yesterday)
         end
       end
 
@@ -60,8 +60,8 @@ describe Comment do
     context "when there are two confirmed comments on this date with the same email" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          @comment1 = create(:comment, confirmed: true, created_at: Date.today, email: "foo@example.com")
-          @comment2 = create(:comment, confirmed: true, created_at: Date.today, email: "foo@example.com")
+          @comment1 = create(:confirmed_comment, created_at: Date.today, email: "foo@example.com")
+          @comment2 = create(:confirmed_comment, created_at: Date.today, email: "foo@example.com")
         end
       end
 
@@ -77,7 +77,7 @@ describe Comment do
     context "there is a first time commenter" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          @comment = create(:comment, confirmed: true, created_at: Date.today, email: "foo@example.com")
+          @comment = create(:confirmed_comment, created_at: Date.today, email: "foo@example.com")
         end
       end
 
@@ -87,8 +87,8 @@ describe Comment do
     context "when a person has commented on two dates" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          @yesterdays_comment = create(:comment, confirmed: true, created_at: Date.yesterday, email: "foo@example.com")
-          @todays_comment = create(:comment, confirmed: true, created_at: Date.today, email: "foo@example.com")
+          @yesterdays_comment = create(:confirmed_comment, created_at: Date.yesterday, email: "foo@example.com")
+          @todays_comment = create(:confirmed_comment, created_at: Date.today, email: "foo@example.com")
         end
       end
 
@@ -110,7 +110,7 @@ describe Comment do
     context "there is a first time commenter" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          create(:comment, confirmed: true, created_at: Date.today, email: "foo@example.com")
+          create(:confirmed_comment, created_at: Date.today, email: "foo@example.com")
         end
       end
 
@@ -120,8 +120,8 @@ describe Comment do
     context "when a person has commented on two dates" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          @yesterdays_comment = create(:comment, confirmed: true, created_at: Date.yesterday, email: "foo@example.com")
-          @todays_comment = create(:comment, confirmed: true, created_at: Date.today, email: "foo@example.com")
+          @yesterdays_comment = create(:confirmed_comment, created_at: Date.yesterday, email: "foo@example.com")
+          @todays_comment = create(:confirmed_comment, created_at: Date.today, email: "foo@example.com")
         end
       end
 
