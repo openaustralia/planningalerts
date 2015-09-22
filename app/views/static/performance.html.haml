@@ -2,15 +2,20 @@
 
 %h2 Comments on planning applications
 
-%table
-  %caption The total number of comments per day
-  %thead
-    %tr
-      %th Date
-      %th Total number of comments
-  %tbody
-    - # TODO: order by most recent first
-    - Comment.all.group("date(created_at)").count.map do |day,total_count|
+- if Comment.any?
+  %table
+    %caption
+      The number of people who have
+      commented on development applications
+      by date
+    %thead
       %tr
-        %th= day
-        %th= total_count
+        %th Date
+        %th Number of people who commented
+    %tbody
+      - (Comment.all.order(:created_at).first.created_at.to_date..Date.today).to_a.reverse.each do |day|
+        %tr
+          %th= day
+          %td= Comment.select {|c| c.created_at.to_date == day}.uniq {|c| c.email}.count
+- else
+  Nobody has commented on an application yet.
