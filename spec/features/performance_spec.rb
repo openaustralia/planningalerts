@@ -4,7 +4,7 @@ feature "Viewing the use of the comments function" do
   context "when there are no comments" do
     scenario "Viewing the table showing commenters per day" do
       visit performance_path
-      expect(page).to_not have_content "The number of people who have commented on development applications by date"
+      expect(page).to_not have_content "New and returning people commenting on applications over time"
       expect(page).to have_content "Nobody has commented on an application yet"
     end
   end
@@ -25,7 +25,7 @@ feature "Viewing the use of the comments function" do
 
     scenario "Viewing the table showing commenters per day" do
       visit performance_path
-      expect(page).to have_content "The number of people who have commented on development applications by date"
+      expect(page).to have_content "New and returning people commenting on applications over time"
       expect(page).to have_content "2015-09-22 0 2"
       expect(page).to have_content "2015-09-20 0 0"
       expect(page).to have_content "2015-09-19 1 2"
