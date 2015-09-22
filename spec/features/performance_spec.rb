@@ -30,6 +30,7 @@ feature "Viewing the use of the comments function" do
       expect(page).to have_content "2015-09-20 0 0"
       expect(page).to have_content "2015-09-19 1 2"
       expect(page).to have_content "2015-09-18 3 0"
+      expect(page).to have_content "#{3.months.ago.to_date} 0 0"
     end
   end
 end
