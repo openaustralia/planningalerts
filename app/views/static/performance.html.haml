@@ -16,6 +16,6 @@
         %tr
           %th= day
           %td= Comment.by_first_time_commenters_for_date(day).count
-          %td= Comment.count_of_returning_commenters_for_date(day)
+          %td= Comment.by_returning_commenters_for_date(day).count
 - else
   Nobody has commented on an application yet.
