@@ -1,0 +1,16 @@
+%h1 Performance
+
+%h2 Comments on planning applications
+
+%table
+  %caption The total number of comments per day
+  %thead
+    %tr
+      %th Date
+      %th Total number of comments
+  %tbody
+    - # TODO: order by most recent first
+    - Comment.all.group("date(created_at)").count.map do |day,total_count|
+      %tr
+        %th= day
+        %th= total_count

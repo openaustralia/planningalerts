@@ -114,6 +114,7 @@ PlanningalertsApp::Application.routes.draw do
   get 'getinvolved' => 'static#get_involved', as: :get_involved
   get 'how_to_write_a_scraper' => 'static#how_to_write_a_scraper'
   get 'how_to_lobby_your_local_council' => 'static#how_to_lobby_your_local_council'
+  get 'performance' => 'static#performance'
 
   get 'donate' => 'static#donate'
   get 'donate/thanks' => 'static#donate_thanks'
