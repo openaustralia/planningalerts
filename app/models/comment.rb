@@ -11,4 +11,15 @@ class Comment < ActiveRecord::Base
   def after_confirm
     CommentNotifier.delay.notify("default", self)
   end
+
+  def self.comments_with_unique_emails_for_date(date)
+    visible.select {|c| c.created_at.to_date == date}
+    .uniq {|c| c.email}
+  end
+
+  def self.count_of_first_time_commenters_for_date(date)
+    comments_with_unique_emails_for_date(date)
+    .select {|c| where("email = ? AND created_at < ?", c.email, c.created_at.to_date).empty? }
+    .count
+  end
 end

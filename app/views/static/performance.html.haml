@@ -15,7 +15,7 @@
       - (3.months.ago.to_date..Date.today).to_a.reverse.each do |day|
         %tr
           %th= day
-          %td= Comment.select {|c| c.created_at.to_date == day}.uniq {|c| c.email}.select {|c| Comment.where("email = ? AND created_at < ?", c.email, c.created_at.to_date).empty? }.count
+          %td= Comment.count_of_first_time_commenters_for_date(day)
           %td= Comment.select {|c| c.created_at.to_date == day}.uniq {|c| c.email}.select {|c| Comment.where("email = ? AND created_at < ?", c.email, c.created_at.to_date).any? }.count
 - else
   Nobody has commented on an application yet.
