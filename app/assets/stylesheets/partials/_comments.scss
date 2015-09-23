@@ -148,6 +148,32 @@ ol#comments {
   }
 }
 
+#comment-receiver-inputgroup {
+  margin-top: 1em !important;
+
+  legend {
+    display: block;
+    margin-bottom: 1em !important;
+    font-weight: bold;
+  }
+}
+
+.receiver-type-option {
+  + label {
+    padding: 0 0 .5em .5em !important;
+  }
+}
+
+#councillors-list-toggler {
+  ~ .councillor-select-list {
+    display: none;
+  }
+
+  &:checked ~ .councillor-select-list {
+    display: block;
+  }
+}
+
 .councillor-select-list {
   margin: 0;
   padding: 0;

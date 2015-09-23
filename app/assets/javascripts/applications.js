@@ -4,6 +4,38 @@ $('#comment_address_input a').click(function(e) {
   $('#faq_commenting_address').slideToggle('fast');
 });
 
+if ($('#comment-receiver-inputgroup').length) {
+  // TODO: Add aria attributes for accessibility
+  // TODO: Fix keyboard navigation
+  councillorTogglerRadio = document.createElement('input');
+  $(councillorTogglerRadio).attr('type','radio')
+                           .attr('id', 'councillors-list-toggler')
+                           .attr('class', 'receiver-select-radio receiver-type-option');
+
+  councillorTogglerLabel = document.createElement('label');
+  $(councillorTogglerLabel).text('One of your elected local councillors')
+                           .attr('for', 'councillors-list-toggler')
+                           .attr('class', 'receiver-select-label receiver-type-option');
+
+  $('.councillor-select-list').before(councillorTogglerRadio)
+                              .before(councillorTogglerLabel);
+
+  radioForAuthorityOption = $('#receiver-to-authority-option')
+  radioForCouncillorsList = $('#councillors-list-toggler')
+
+  $(radioForCouncillorsList).click(function(e) {
+    if ($(radioForAuthorityOption).prop('checked') === true) {
+      $(radioForAuthorityOption).prop('checked', false);
+    }
+  });
+
+  $(radioForAuthorityOption).click(function(e) {
+    if ($(radioForCouncillorsList).prop('checked') === true) {
+      $(radioForCouncillorsList).prop('checked', false);
+    }
+  });
+}
+
 // GA Tracking of comment process
 $( document ).ready(function() {
   // check if the Google Analytics function is available
