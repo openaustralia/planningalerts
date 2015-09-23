@@ -103,7 +103,14 @@ ol#comments {
 }
 
 #comment-receiver-inputgroup {
+  margin-top: 1em !important;
   margin-bottom: 1em;
+
+  legend {
+    display: block;
+    margin-bottom: 1em !important;
+    font-weight: bold;
+  }
 
   // Nasty formtastic overrides
   .receiver-select-radio {
@@ -114,16 +121,6 @@ ol#comments {
 
   label {
     width: auto !important;
-  }
-}
-
-#comment-receiver-inputgroup {
-  margin-top: 1em !important;
-
-  legend {
-    display: block;
-    margin-bottom: 1em !important;
-    font-weight: bold;
   }
 }
 
