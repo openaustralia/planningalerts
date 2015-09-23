@@ -102,6 +102,22 @@ ol#comments {
   text-decoration: underline;
 }
 
+#comment-receiver-inputgroup {
+  margin-bottom: 1em;
+
+  // Nasty formtastic overrides
+  .receiver-select-radio {
+    width: auto !important;
+    float: left !important;
+    clear: left !important;
+  }
+
+  label {
+    width: auto !important;
+  }
+}
+
+
 #councillor-message-form {
   // set box-sizing for simplicity
   &,
@@ -144,7 +160,10 @@ ol#comments {
 
 .councillor-select-label {
   margin-bottom: .5em;
-  width: 100%;
+  // !important and no float to override formtastic
+  width: 100% !important;
+  float: none !important;
+  clear: both !important;
   display: block;
   cursor: pointer;
 
@@ -160,13 +179,15 @@ ol#comments {
   :hover + &,
   :focus + &  {
     border-left: .25em $lightest-cool-highlight solid;
-    padding-left: .75em;
+    // !important and no float to override formtastic
+    padding-left: .75em !important;
     color: $link-hover-color;
   }
 
   :checked + & {
     border-left: .25em $light-cool-highlight solid;
-    padding-left: .75em;
+    // !important and no float to override formtastic
+    padding-left: .75em !important;
     color: $link-active-color;
   }
 }

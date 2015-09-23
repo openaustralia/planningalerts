@@ -1,0 +1,63 @@
+- application_authority_councillors = [{ id: "1", name: "Irene Lam", party: "Independent" },
+                                       { id: "2", name: "Fatima Merriweather", party: "Liberal Party of Australia" },
+                                       { id: "3", name: "George Tall", party: "The Residents Action Group for Dream Area" },
+                                       { id: "4", name: "Paula Crisp", party: "Greens" },
+                                       { id: "5", name: "Leon Oldfield", party: "Australian Labor Party" },
+                                       { id: "6", name: "Jenny Nguyen", party: "Australian Labor Party" },
+                                       { id: "7", name: "Khal James", party: "Liberal Party of Australia" },
+                                       { id: "8", name: "Reza Ghoochannejhad", party: "Independent" },
+                                       { id: "9", name: "Sunil Chhetri", party: "Woodschool Independents" },
+                                       { id: "10", name: "Branka Brnovic", party: "Unaligned" },
+                                       { id: "11", name: "Cristiane Aguilar", party: "Australian Labor Party" }]
+
+
+%h4#add-comment Add your own comment
+- if @application.authority.contactable? || application_authority_councillors.any?
+  - if @application.on_notice_to
+    %p= on_notice_text(@application)
+  %p
+    Your comment and details will be sent to
+    %strong #{@application.authority.full_name}.
+    - unless @application.official_submission_period_expired?
+      They’ll consider your submission when they decide whether to approve this application.
+    Your name and comment will be posted publicly here as well.
+  %p
+    If you have made a donation to a Councillor and/or gift to a Councillor or Council employee you may
+    #{link_to("need to disclose this", faq_path(:anchor => "disclosure"))}.
+  = semantic_form_for [@application, @comment] do |f|
+    = f.inputs id: "comment-base-inputgroup" do
+      = f.input :text, :label => 'Comment', :placeholder => "Comment",
+        :hint => "Explain why you think this application should be approved or not. Please be polite, concise and to the point."
+      = f.input :name, :placeholder => "Name", :hint => "Please use your real full name if possible."
+    %fieldset#comment-receiver-inputgroup
+      %legend Who should this go to?
+      %input.receiver-select-radio{type: "radio", name: "receiver"}
+      %label.receiver-select-label= @application.authority.full_name
+      %input.receiver-select-radio{type: "radio", name: "receiver"}
+      %label.receiver-select-label One of your elected local councillors
+      - application_authority_councillors.shuffle.each do |councillor|
+        %input.councillor-select-radio{id: "councillor-#{councillor[:id]}", name: "receiver", value: "#{councillor[:id]}", type: "radio"}
+        %label.councillor-select-label.h-card{for: "councillor-#{councillor[:id]}"}
+          %span.p-name= councillor[:name]
+          %span.p-org= councillor[:party]
+    = f.inputs id: "comment-detail-inputgroup" do
+      = f.input :email, :placeholder => "Email", :hint => "We never display your email address"
+      - hint = capture do
+        e.g. 1 Sowerby St, Goulburn (we never display this).
+        = link_to("Why do you need my address?", faq_path(:anchor => "address"))
+      = f.input :address, :placeholder => "Address", :hint => hint
+      %div#faq_commenting_address.inline-hints.hidden
+        = render :partial => 'static/faq_commenting_address'
+      -# This is a spam bot honeytrap. A human being should not be filling this in
+      -# It's not awesome for screenreaders though
+      %li{style: "display: none;"}
+        = label_tag :little_sweety, 'Little Sweety'
+        = text_field_tag :little_sweety, "", placeholder: "Please leave this blank"
+    = f.actions do
+      = f.action :submit, label: "Create Comment", button_html: {class: "button button-action"}
+- elsif !@application.comment_url.blank?
+  %p
+    = link_to "How to comment", @application.comment_url
+    on this application (from #{@application.authority.full_name}).
+    - if @application.on_notice_to
+      = on_notice_text(@application)
