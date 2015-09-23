@@ -117,37 +117,6 @@ ol#comments {
   }
 }
 
-
-#councillor-message-form {
-  // set box-sizing for simplicity
-  &,
-  * {
-    box-sizing: border-box;
-  }
-
-  legend,
-  fieldset,
-  textarea {
-    margin-bottom: 2em;
-  }
-
-  p {
-    margin-bottom: 1em;
-  }
-
-  fieldset legend {
-    font-weight: bold;
-  }
-
-  input[type="text"] {
-    padding: .5em;
-  }
-
-  textarea {
-    width: 100%;
-  }
-}
-
 #comment-receiver-inputgroup {
   margin-top: 1em !important;
 
