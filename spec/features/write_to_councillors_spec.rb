@@ -50,7 +50,7 @@ feature "Send a message to a councillor" do
       fill_in("Email", with: "example@example.com")
       fill_in("Address", with: "11 Foo Street")
 
-      click_button("Create Comment")
+      click_button("Post your comment")
 
       # TODO: the message appears on the page
       # TODO: the message is sent off to the councillor
