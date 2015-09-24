@@ -40,7 +40,7 @@ feature "Send a message to a councillor" do
     given(:application) { VCR.use_cassette('planningalerts') { create(:application, id: "1", comment_url: 'mailto:foo@bar.com') } }
 
     scenario "sending a message" do
-      visit application_path(application)
+      visit application_path(application, with_councillors: "true")
       page.should have_content("Who should this go to?")
       fill_in("Comment", with: "I think this is a really good idea")
       fill_in("Name", with: "Matthew Landauer")

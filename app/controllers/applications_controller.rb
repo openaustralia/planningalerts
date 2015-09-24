@@ -108,17 +108,19 @@ class ApplicationsController < ApplicationController
     @alert = Alert.new(address: @application.address)
 
     if current_user && current_user.admin?
-      @application_authority_councillors = [{ id: "1", name: "Irene Lam", party: "Independent" },
-                                            { id: "2", name: "Fatima Merriweather", party: "Liberal Party of Australia" },
-                                            { id: "3", name: "George Tall", party: "The Residents Action Group for Dream Area" },
-                                            { id: "4", name: "Paula Crisp", party: "Greens" },
-                                            { id: "5", name: "Leon Oldfield", party: "Australian Labor Party" },
-                                            { id: "6", name: "Jenny Nguyen", party: "Australian Labor Party" },
-                                            { id: "7", name: "Khal James", party: "Liberal Party of Australia" },
-                                            { id: "8", name: "Reza Ghoochannejhad", party: "Independent" },
-                                            { id: "9", name: "Sunil Chhetri", party: "Woodschool Independents" },
-                                            { id: "10", name: "Branka Brnovic", party: "Unaligned" },
-                                            { id: "11", name: "Cristiane Aguilar", party: "Australian Labor Party" }]
+      if params[:with_councillors] == "true"
+        @application_authority_councillors = [{ id: "1", name: "Irene Lam", party: "Independent" },
+                                              { id: "2", name: "Fatima Merriweather", party: "Liberal Party of Australia" },
+                                              { id: "3", name: "George Tall", party: "The Residents Action Group for Dream Area" },
+                                              { id: "4", name: "Paula Crisp", party: "Greens" },
+                                              { id: "5", name: "Leon Oldfield", party: "Australian Labor Party" },
+                                              { id: "6", name: "Jenny Nguyen", party: "Australian Labor Party" },
+                                              { id: "7", name: "Khal James", party: "Liberal Party of Australia" },
+                                              { id: "8", name: "Reza Ghoochannejhad", party: "Independent" },
+                                              { id: "9", name: "Sunil Chhetri", party: "Woodschool Independents" },
+                                              { id: "10", name: "Branka Brnovic", party: "Unaligned" },
+                                              { id: "11", name: "Cristiane Aguilar", party: "Australian Labor Party" }]
+      end
     end
 
     respond_to do |format|
