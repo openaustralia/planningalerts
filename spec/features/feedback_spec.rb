@@ -137,7 +137,7 @@ feature "Give feedback to Council" do
       fill_in("Name", with: "Matthew Landauer")
       fill_in("Email", with: "example@example.com")
       # Don't fill in the address
-      click_button("Post your comment")
+      click_button("Create Comment")
 
       page.should have_content("Some of the comment wasn't filled out completely. See below.")
       page.should_not have_content("Now check your email")

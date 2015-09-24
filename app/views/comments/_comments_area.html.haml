@@ -7,7 +7,7 @@
       - @comments.each do |comment|
         %li{:id => "comment#{comment.id}"}
           = render :partial => 'comments/comment', :locals => {:comment => comment}
-  - if current_user && current_user.admin?
+  - if @application_authority_councillors
     = render "comments/comment_form_with_councillors"
   - else
     = render "comments/comment_form"
