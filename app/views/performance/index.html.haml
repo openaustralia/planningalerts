@@ -4,20 +4,17 @@
 
 %h2 Comments on planning applications
 
-- if Comment.any?
-  %table
-    %caption
-      New and returning people commenting on applications over time
-    %thead
+%table
+  %caption
+    New and returning people commenting on applications over time
+  %thead
+    %tr
+      %th Date
+      %th First time commenters
+      %th Returning commenters
+  %tbody
+    - @daily_comment_metrics.each do |day|
       %tr
-        %th Date
-        %th First time commenters
-        %th Returning commenters
-    %tbody
-      - @daily_comment_metrics.each do |day|
-        %tr
-          %th= day[:date]
-          %td= day[:first_time_commenters]
-          %td= day[:returning_commenters]
-- else
-  Nobody has commented on an application yet.
+        %th= day[:date]
+        %td= day[:first_time_commenters]
+        %td= day[:returning_commenters]
