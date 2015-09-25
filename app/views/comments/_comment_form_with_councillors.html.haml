@@ -1,17 +1,6 @@
 %h4#add-comment Add your own comment
 - if @application.authority.contactable? || @application_authority_councillors
-  - if @application.on_notice_to
-    %p= on_notice_text(@application)
-  - unless @application_authority_councillors
-    %p
-      Your comment and details will be sent to
-      %strong #{@application.authority.full_name}.
-      - unless @application.official_submission_period_expired?
-        They’ll consider your submission when they decide whether to approve this application.
-      Your name and comment will be posted publicly here as well.
-  %p
-    If you have made a donation to a Councillor and/or gift to a Councillor or Council employee you may
-    #{link_to("need to disclose this", faq_path(:anchor => "disclosure"))}.
+  = render "comments/comment_form_introduction"
   = semantic_form_for [@application, @comment] do |f|
     = f.inputs id: "comment-base-inputgroup" do
       = f.input :text, :label => 'Comment', :placeholder => "Comment",
