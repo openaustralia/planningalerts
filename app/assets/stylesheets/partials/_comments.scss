@@ -104,6 +104,8 @@ ol#comments {
 #comment-receiver-inputgroup {
   margin-top: 1em !important;
   margin-bottom: 1em;
+  border-bottom: 1px solid $lightest-cool-highlight;
+  padding-bottom: .5em;
 
   legend {
     display: block;
