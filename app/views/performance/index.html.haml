@@ -4,7 +4,7 @@
 
 %h2 Comments on planning applications
 
-- if Comment.any?
+- if @comments
   %table
     %caption
       New and returning people commenting on applications over time
@@ -17,7 +17,7 @@
       - (3.months.ago.to_date..Date.today).to_a.reverse.each do |day|
         %tr
           %th= day
-          %td= Comment.by_first_time_commenters_for_date(day).count
-          %td= Comment.by_returning_commenters_for_date(day).count
+          %td= @comments.by_first_time_commenters_for_date(day).count
+          %td= @comments.by_returning_commenters_for_date(day).count
 - else
   Nobody has commented on an application yet.
