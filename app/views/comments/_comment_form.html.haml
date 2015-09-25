@@ -1,5 +1,5 @@
 %h4#add-comment Add your own comment
-- if @application.authority.contactable?
+- if @application.authority.contactable? || @application_authority_councillors
   = render "comments/comment_form_introduction"
   = render "comments/comment_form_inputs"
 - elsif !@application.comment_url.blank?
