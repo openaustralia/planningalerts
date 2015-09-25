@@ -1,0 +1,15 @@
+%fieldset#comment-receiver-inputgroup
+  %legend Who should this go to?
+  %input.receiver-select-radio.receiver-type-option{id: "receiver-to-authority-option", type: "radio", name: "receiver"}
+  %label.receiver-select-label{for: "receiver-to-authority-option"}
+    = @application.authority.full_name
+    - unless @application.official_submission_period_expired?
+      %p
+        Write to the council if you want your comment considered
+        when they decide whether to approve this application.
+  .councillor-select-list
+    - @application_authority_councillors.shuffle.each do |councillor|
+      %input.councillor-select-radio{id: "councillor-#{councillor[:id]}", name: "receiver", value: "#{councillor[:id]}", type: "radio"}
+      %label.councillor-select-label.h-card{for: "councillor-#{councillor[:id]}"}
+        %span.p-name= councillor[:name]
+        %span.p-org= councillor[:party]
