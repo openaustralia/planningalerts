@@ -167,6 +167,16 @@ ol#comments {
   margin: 0;
   padding: 0;
   list-style: none;
+  clear: both;
+
+  footer {
+    clear: both;
+  }
+}
+
+.councillor-select-list-intro {
+  margin: 0 0 .5em 1.9em !important;
+  width: 80%;
 }
 
 .councillor-select-radio {

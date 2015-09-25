@@ -8,6 +8,9 @@
         Write to the council if you want your comment considered
         when they decide whether to approve this application.
   .councillor-select-list
+    %p.councillor-select-list-intro
+      Your elected councillors can answer your questions
+      and represent you in council meetings.
     - @application_authority_councillors.shuffle.each do |councillor|
       %input.councillor-select-radio{id: "councillor-#{councillor[:id]}", name: "receiver", value: "#{councillor[:id]}", type: "radio"}
       %label.councillor-select-label.h-card{for: "councillor-#{councillor[:id]}"}

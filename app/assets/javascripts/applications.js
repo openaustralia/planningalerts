@@ -20,6 +20,10 @@ if ($('#comment-receiver-inputgroup').length) {
   $('.councillor-select-list').before(councillorTogglerRadio)
                               .before(councillorTogglerLabel);
 
+  $('label[for="councillors-list-toggler"').append('<p>' + $('.councillor-select-list-intro').text() + '</p>');
+
+  $('.councillor-select-list-intro').remove();
+
   radioForAuthorityOption = $('#receiver-to-authority-option')
   radioForCouncillorsList = $('#councillors-list-toggler')
 
