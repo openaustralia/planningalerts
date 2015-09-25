@@ -134,11 +134,11 @@ describe Comment do
       end
 
       it "the returning count should equal the total count minus new commenters count" do
-        returning_count = Comment.by_returning_commenters_for_date(Date.today).count
-        first_time_count = Comment.by_first_time_commenters_for_date(Date.today).count
-        total_count = Comment.visible_with_unique_emails_for_date(Date.today).count
+        returning_count = Comment.by_returning_commenters_for_date(Date.today).to_a.count
+        first_time_count = Comment.by_first_time_commenters_for_date(Date.today).to_a.count
+        total_count = Comment.visible_with_unique_emails_for_date(Date.today).to_a.count
 
-        expect(returning_count).to eq total_count - first_time_count
+        expect(returning_count).to eq(total_count - first_time_count)
       end
     end
   end

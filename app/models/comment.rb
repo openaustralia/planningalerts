@@ -8,8 +8,7 @@ class Comment < ActiveRecord::Base
   scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
 
   scope :visible_with_unique_emails_for_date, ->(date) {
-    visible.where("date(created_at) = ?", date).to_a
-    .uniq {|c| c.email}
+    visible.where("date(created_at) = ?", date).group(:email)
   }
 
   scope :by_first_time_commenters_for_date, ->(date) {
