@@ -1,0 +1,20 @@
+- content_for :page_title, "Performance"
+
+%h1= yield :page_title
+
+%h2 Comments on planning applications
+
+%table
+  %caption
+    New and returning people commenting on applications over time
+  %thead
+    %tr
+      %th Date
+      %th First time commenters
+      %th Returning commenters
+  %tbody
+    - @daily_comment_metrics.each do |day|
+      %tr
+        %th= day[:date]
+        %td= day[:first_time_commenters]
+        %td= day[:returning_commenters]
