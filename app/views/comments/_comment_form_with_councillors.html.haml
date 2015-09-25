@@ -1,29 +1,7 @@
 %h4#add-comment Add your own comment
 - if @application.authority.contactable? || @application_authority_councillors
   = render "comments/comment_form_introduction"
-  = semantic_form_for [@application, @comment] do |f|
-    = f.inputs id: "comment-base-inputgroup" do
-      = f.input :text, :label => 'Comment', :placeholder => "Comment",
-        :hint => "Explain why you think this application should be approved or not. Please be polite, concise and to the point."
-      = f.input :name, :placeholder => "Name", :hint => "Please use your real full name if possible."
-    - if @application_authority_councillors
-      = render "comments/comment_receiver_options"
-    = f.inputs id: "comment-detail-inputgroup" do
-      = f.input :email, :placeholder => "Email", :hint => "We never display your email address"
-      - hint = capture do
-        e.g. 1 Sowerby St, Goulburn (we never display this).
-        = link_to("Why do you need my address?", faq_path(:anchor => "address"))
-      = f.input :address, :placeholder => "Address", :hint => hint
-      %div#faq_commenting_address.inline-hints.hidden
-        = render :partial => 'static/faq_commenting_address'
-      -# This is a spam bot honeytrap. A human being should not be filling this in
-      -# It's not awesome for screenreaders though
-      %li{style: "display: none;"}
-        = label_tag :little_sweety, 'Little Sweety'
-        = text_field_tag :little_sweety, "", placeholder: "Please leave this blank"
-    = f.actions do
-      %p Your name and comment will be posted publicly here
-      = f.action :submit, label: "Post your comment", button_html: {class: "button button-action"}
+  = render "comments/comment_form_inputs"
 - elsif !@application.comment_url.blank?
   %p
     = link_to "How to comment", @application.comment_url
