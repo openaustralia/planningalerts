@@ -212,6 +212,8 @@ class Authority < ActiveRecord::Base
   end
 
   # Is this authority contactable through PlanningAlerts? i.e. do we have an email address on record?
+  # TODO: The authority should be contractable if there are councillors to contract
+  #       even if their is no official contact email
   def contactable?
     email && email != ""
   end
