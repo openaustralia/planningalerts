@@ -36,7 +36,7 @@ feature "Give feedback to Council" do
     fill_in("Name", with: "Matthew Landauer")
     fill_in("Email", with: "example@example.com")
     # Don't fill in the address
-    click_button("Create Comment")
+    click_button("Post your comment")
 
     page.should have_content("Some of the comment wasn't filled out completely. See below.")
     page.should_not have_content("Now check your email")
@@ -53,7 +53,7 @@ feature "Give feedback to Council" do
     fill_in("Name", with: "Matthew Landauer")
     fill_in("Email", with: "example@example.com")
     fill_in("Address", with: "11 Foo Street")
-    click_button("Create Comment")
+    click_button("Post your comment")
 
     page.should have_content("Now check your email")
     page.should have_content("Click on the link in the email to confirm your comment")
@@ -137,7 +137,7 @@ feature "Give feedback to Council" do
       fill_in("Name", with: "Matthew Landauer")
       fill_in("Email", with: "example@example.com")
       # Don't fill in the address
-      click_button("Create Comment")
+      click_button("Post your comment")
 
       page.should have_content("Some of the comment wasn't filled out completely. See below.")
       page.should_not have_content("Now check your email")
