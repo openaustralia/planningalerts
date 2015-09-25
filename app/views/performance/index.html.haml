@@ -14,7 +14,7 @@
         %th First time commenters
         %th Returning commenters
     %tbody
-      - (3.months.ago.to_date..Date.today).to_a.reverse.each do |day|
+      - @comments_metrics_timespan.each do |day|
         %tr
           %th= day
           %td= @comments.by_first_time_commenters_for_date(day).count
