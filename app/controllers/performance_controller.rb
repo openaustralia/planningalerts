@@ -1,6 +1,11 @@
 class PerformanceController < ApplicationController
   def index
-    @comments = Comment.all
-    @comments_metrics_timespan = (3.months.ago.to_date..Date.today).to_a.reverse
+    @daily_comment_metrics = (3.months.ago.to_date..Date.today).to_a.reverse.map do |day|
+      {
+        date: day,
+        first_time_commenters: Comment.by_first_time_commenters_for_date(day).count,
+        returning_commenters: Comment.by_returning_commenters_for_date(day).count
+      }
+    end
   end
 end
