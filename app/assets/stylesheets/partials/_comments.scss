@@ -131,31 +131,6 @@ ol#comments {
 #councillors-list-toggler {
   ~ .councillor-select-list {
     display: none;
-
-    .councillor-select-radio {
-      @include sr-only();
-
-      &:hover + .councillor-select-label,
-      &:focus + .councillor-select-label  {
-        border-left: .25em $lightest-cool-highlight solid;
-        // !important and no float to override formtastic
-        padding-left: .75em !important;
-      }
-
-      &:checked + .councillor-select-label {
-        border-left: .25em $light-cool-highlight solid;
-        // !important and no float to override formtastic
-        padding-left: .75em !important;
-      }
-    }
-
-    .councillor-select-label {
-      // !important and no float to override formtastic
-      width: 100% !important;
-      float: none !important;
-      clear: both !important;
-      display: block;
-    }
   }
 
   &:checked ~ .councillor-select-list {
@@ -188,7 +163,7 @@ ol#comments {
 .councillor-select-label {
   margin-bottom: .5em;
   padding: 0 0 .5em .5em !important;
-  width: auto !important;
+  width: 80% !important;
   cursor: pointer;
 
   .p-name,
