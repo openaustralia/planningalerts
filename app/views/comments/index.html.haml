@@ -2,4 +2,4 @@
 %h1.page-title Recent comments
 = paginated_section @comments, :previous_label => "« Newer", :next_label => "Older »" do
   %ol#comments
-    = render @comments, with_link: true
+    = render @comments, with_link_wrapper: true

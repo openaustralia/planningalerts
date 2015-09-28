@@ -1,5 +1,5 @@
 %figure.comment-item.panel{id: "comment#{comment.id}"}
-  - if current_page?(comments_path)
+  - if with_address
     %h2.comment-address.panel-heading
       In
       %strong #{comment.application.suburb} #{comment.application.state}
