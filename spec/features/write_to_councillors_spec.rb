@@ -23,9 +23,6 @@ feature "Send a message to a councillor" do
 
   context "when logged in as admin" do
     background do
-      @council_or_councillor_explanation = "Write to the council
-                                            if you want your comment considered
-                                            when they decide whether to approve this application."
       admin = create(:admin)
 
       visit new_user_session_path
@@ -45,7 +42,7 @@ feature "Send a message to a councillor" do
       fill_in("Comment", with: "I think this is a really good idea")
       fill_in("Name", with: "Matthew Landauer")
 
-      page.should have_content(@council_or_councillor_explanation)
+      page.should have_content("Write to the council if you want your comment considered when they decide whether to approve this application.")
       within("#comment-receiver-inputgroup") do
         choose "councillor-2"
       end
