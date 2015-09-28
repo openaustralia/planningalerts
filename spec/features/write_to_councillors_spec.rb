@@ -16,7 +16,7 @@ feature "Send a message to a councillor" do
     end
 
     scenario "can’t see councillor messages sections" do
-      page.should_not have_content("Who should this go to?")
+      expect(page).to_not have_content("Who should this go to?")
       # TODO: and you should not be able to write and submit a message.
     end
   end
@@ -38,11 +38,11 @@ feature "Send a message to a councillor" do
 
     scenario "sending a message" do
       visit application_path(application, with_councillors: "true")
-      page.should have_content("Who should this go to?")
+      expect(page).to have_content("Who should this go to?")
       fill_in("Comment", with: "I think this is a really good idea")
       fill_in("Name", with: "Matthew Landauer")
 
-      page.should have_content("Write to the council if you want your comment considered when they decide whether to approve this application.")
+      expect(page).to have_content("Write to the council if you want your comment considered when they decide whether to approve this application.")
       within("#comment-receiver-inputgroup") do
         choose "councillor-2"
       end
