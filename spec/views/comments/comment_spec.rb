@@ -9,7 +9,7 @@ describe "comments/_comment" do
     Timecop.return
   end
 
-  it "should remove links in the comment text" do
+  it "should add rel='no-follow' to links in the comment text" do
     application = mock_model(Application)
     comment = mock_model(Comment, name: "Matthew", updated_at: Time.now, application: application,
       text: 'This is a link to <a href="http://openaustralia.org">openaustralia.org</a>')
