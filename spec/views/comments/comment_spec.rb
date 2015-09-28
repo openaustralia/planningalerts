@@ -24,6 +24,7 @@ less than a minute ago
 </time>
 </figcaption>
 </figure>
+
     EOF
   end
 
@@ -45,6 +46,7 @@ less than a minute ago
 </time>
 </figcaption>
 </figure>
+
     EOF
   end
 
@@ -63,6 +65,7 @@ less than a minute ago
 </time>
 </figcaption>
 </figure>
+
     EOF
   end
 end
