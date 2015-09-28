@@ -72,10 +72,6 @@ ol#comments {
   font-size: 1em;
 }
 
-.comment-meta {
-  color: $font-color;
-}
-
 .comment-address,
 .comment-meta {
   padding: .75em 1em;
@@ -84,6 +80,11 @@ ol#comments {
 .comment-text,
 .comment-actions {
   padding: 0 1em .75em;
+}
+
+.comment-author,
+.comment-time {
+  color: $font-color;
 }
 
 .comment-author {
