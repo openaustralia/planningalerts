@@ -8,7 +8,7 @@
       #{comment.application.address}
   %figcaption.comment-meta
     %span.comment-author #{comment.name}
-    = link_to application_path(comment.application, anchor: "comment#{comment.id}") do
+    = link_to application_url(comment.application, anchor: "comment#{comment.id}") do
       %time.comment-time{datetime: comment.updated_at.strftime("%F")}
         #{time_ago_in_words(comment.updated_at)} ago
   %blockquote.comment-text= comment_as_html(comment.text)
