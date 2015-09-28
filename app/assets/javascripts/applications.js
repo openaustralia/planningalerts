@@ -13,14 +13,13 @@ if ($('#comment-receiver-inputgroup').length) {
                            .attr('class', 'receiver-select-radio receiver-type-option');
 
   councillorTogglerLabel = document.createElement('label');
-  $(councillorTogglerLabel).text('One of your elected local councillors')
-                           .attr('for', 'councillors-list-toggler')
+  $(councillorTogglerLabel).attr('for', 'councillors-list-toggler')
                            .attr('class', 'receiver-select-label receiver-type-option');
 
   $('.councillor-select-list').before(councillorTogglerRadio)
                               .before(councillorTogglerLabel);
 
-  $('label[for="councillors-list-toggler"').append('<p>' + $('.councillor-select-list-intro').text() + '</p>');
+  $('label[for="councillors-list-toggler"').append('<strong>' + $('.councillor-select-list-intro strong').text() + '</strong><p>' + $('.councillor-select-list-intro p').text() + '</p>');
 
   $('.councillor-select-list-intro').remove();
 
