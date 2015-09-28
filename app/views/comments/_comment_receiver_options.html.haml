@@ -2,7 +2,7 @@
   %legend Who should this go to?
   %input.receiver-select-radio.receiver-type-option{id: "receiver-to-authority-option", type: "radio", name: "receiver"}
   %label.receiver-select-label{for: "receiver-to-authority-option"}
-    = @application.authority.full_name
+    %strong= @application.authority.full_name
     - unless @application.official_submission_period_expired?
       %p
         Write to the council if you want your comment considered
