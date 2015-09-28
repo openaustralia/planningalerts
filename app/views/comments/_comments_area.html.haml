@@ -4,7 +4,5 @@
     %p.small.quiet
       Have your say by #{link_to "adding your own comment", "#add-comment", class: "link-to-comment-form"}.
     %ol#comments
-      - @comments.each do |comment|
-        %li
-          = render 'comments/comment', comment: comment
+      = render @comments
   = render "comments/comment_form"
