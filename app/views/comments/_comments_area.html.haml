@@ -5,6 +5,6 @@
       Have your say by #{link_to "adding your own comment", "#add-comment", class: "link-to-comment-form"}.
     %ol#comments
       - @comments.each do |comment|
-        %li{:id => "comment#{comment.id}"}
-          = render :partial => 'comments/comment', :locals => {:comment => comment}
+        %li
+          = render 'comments/comment', comment: comment
   = render "comments/comment_form"
