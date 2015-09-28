@@ -26,11 +26,14 @@ feature "Send a message to a councillor" do
       admin = create(:admin)
 
       visit new_user_session_path
+
       within("#new_user") do
         fill_in "Email", with: admin.email
         fill_in "Password", with: admin.password
       end
+
       click_button "Sign in"
+
       expect(page).to have_content "Signed in successfully"
     end
 
@@ -38,11 +41,14 @@ feature "Send a message to a councillor" do
 
     scenario "sending a message" do
       visit application_path(application, with_councillors: "true")
+
       expect(page).to have_content("Who should this go to?")
+
       fill_in("Comment", with: "I think this is a really good idea")
       fill_in("Name", with: "Matthew Landauer")
 
       expect(page).to have_content("Write to the council if you want your comment considered when they decide whether to approve this application.")
+
       within("#comment-receiver-inputgroup") do
         choose "councillor-2"
       end
