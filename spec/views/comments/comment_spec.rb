@@ -15,7 +15,7 @@ describe "comments/_comment" do
       text: 'This is a link to <a href="http://openaustralia.org">openaustralia.org</a>')
     render partial: "comment", object: comment
     rendered.should == <<-EOF
-<figure class='comment panel'>
+<figure class='comment-item panel'>
 <blockquote class='comment-text'><p>This is a link to <a href="http://openaustralia.org" rel="nofollow">openaustralia.org</a></p></blockquote>
 <figcaption class='comment-meta'>
 <span class='comment-author'>by Matthew</span>
@@ -33,7 +33,7 @@ less than a minute ago
       text: "This is the first paragraph\nAnd the next line\n\nThis is a new paragraph")
     render partial: "comment", object: comment
     rendered.should == <<-EOF
-<figure class='comment panel'>
+<figure class='comment-item panel'>
 <blockquote class='comment-text'><p>This is the first paragraph
 <br>And the next line</p>
 
@@ -54,7 +54,7 @@ less than a minute ago
       text: "<a href=\"javascript:document.location='http://www.google.com/'\">A nasty link</a><img src=\"http://foo.co\">")
     render partial: "comment", object: comment
     rendered.should == <<-EOF
-<figure class='comment panel'>
+<figure class='comment-item panel'>
 <blockquote class='comment-text'><p><a rel="nofollow">A nasty link</a></p></blockquote>
 <figcaption class='comment-meta'>
 <span class='comment-author'>by Matthew</span>
