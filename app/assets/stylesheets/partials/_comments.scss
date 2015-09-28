@@ -44,6 +44,7 @@ ol#comments {
 .comment-item {
   margin-bottom: 2.5em;
   background: #fafafa;
+  @include clearfix;
 
   a &:hover {
     background: #f0f0f0;
@@ -76,9 +77,14 @@ ol#comments {
 }
 
 .comment-address,
-.comment-text,
 .comment-meta {
   padding: .75em 1em;
+}
+
+
+.comment-text,
+.comment-actions {
+  padding: 0 1em .75em;
 }
 
 .comment-author {
@@ -93,12 +99,15 @@ ol#comments {
   font-size: 0.9em;
 }
 
+.comment-actions {
+  float: right;
+  clear: both;
+  font-size: 0.9em;
+}
+
 .comment-action {
   @include quiet;
-  margin-top: .15em;
   margin-left: .5em;
-  float: right;
-  font-size: 0.9em;
   text-decoration: underline;
 }
 

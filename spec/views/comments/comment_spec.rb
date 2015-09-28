@@ -16,13 +16,16 @@ describe "comments/_comment" do
     render partial: "comment", object: comment
     rendered.should == <<-EOF
 <figure class='comment-item panel'>
-<blockquote class='comment-text'><p>This is a link to <a href="http://openaustralia.org" rel="nofollow">openaustralia.org</a></p></blockquote>
 <figcaption class='comment-meta'>
-<span class='comment-author'>by Matthew</span>
+<span class='comment-author'>Matthew</span>
 <time class='comment-time' datetime='2015-01-26'>
 less than a minute ago
 </time>
 </figcaption>
+<blockquote class='comment-text'><p>This is a link to <a href="http://openaustralia.org" rel="nofollow">openaustralia.org</a></p></blockquote>
+<div class='comment-actions'>
+<a class="comment-action" href="/comments/#{comment.id}/reports/new" title="Report this comment by Matthew for removal">report comment</a>
+</div>
 </figure>
 
     EOF
@@ -35,16 +38,19 @@ less than a minute ago
     render partial: "comment", object: comment
     rendered.should == <<-EOF
 <figure class='comment-item panel'>
-<blockquote class='comment-text'><p>This is the first paragraph
-<br>And the next line</p>
-
-<p>This is a new paragraph</p></blockquote>
 <figcaption class='comment-meta'>
-<span class='comment-author'>by Matthew</span>
+<span class='comment-author'>Matthew</span>
 <time class='comment-time' datetime='2015-01-26'>
 less than a minute ago
 </time>
 </figcaption>
+<blockquote class='comment-text'><p>This is the first paragraph
+<br>And the next line</p>
+
+<p>This is a new paragraph</p></blockquote>
+<div class='comment-actions'>
+<a class="comment-action" href="/comments/#{comment.id}/reports/new" title="Report this comment by Matthew for removal">report comment</a>
+</div>
 </figure>
 
     EOF
@@ -57,13 +63,16 @@ less than a minute ago
     render partial: "comment", object: comment
     rendered.should == <<-EOF
 <figure class='comment-item panel'>
-<blockquote class='comment-text'><p><a rel="nofollow">A nasty link</a></p></blockquote>
 <figcaption class='comment-meta'>
-<span class='comment-author'>by Matthew</span>
+<span class='comment-author'>Matthew</span>
 <time class='comment-time' datetime='2015-01-26'>
 less than a minute ago
 </time>
 </figcaption>
+<blockquote class='comment-text'><p><a rel="nofollow">A nasty link</a></p></blockquote>
+<div class='comment-actions'>
+<a class="comment-action" href="/comments/#{comment.id}/reports/new" title="Report this comment by Matthew for removal">report comment</a>
+</div>
 </figure>
 
     EOF
