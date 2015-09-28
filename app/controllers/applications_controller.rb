@@ -109,18 +109,18 @@ class ApplicationsController < ApplicationController
 
     if current_user && current_user.admin?
       if params[:with_councillors] == "true"
-        @application_authority_councillors = [{ id: "1", name: "Mark Gardiner", party: "Independent" },
-                                              { id: "2", name: "Sylvie Ellsmore", party: "The Greens" },
-                                              { id: "3", name: "Jo Haylen", party: "Labor" },
-                                              { id: "4", name: "Sam Iskandar", party: "Labor" },
-                                              { id: "5", name: "Victor Macri", party: "Independent" },
-                                              { id: "6", name: "Max Phillips", party: "The Greens" },
-                                              { id: "7", name: "Morris Hanna", party: "Independent" },
-                                              { id: "8", name: "David Leary", party: "The Greens" },
-                                              { id: "9", name: "Chris Woods", party: "Labor" },
-                                              { id: "10", name: "Melissa Brooks", party: "The Greens" },
-                                              { id: "11", name: "Rosana Tyler", party: "Liberal" },
-                                              { id: "12", name: "Daniel Barbar", party: "Labor" }]
+        @application_authority_councillors = [{ name: "Mark Gardiner", party: "Independent" },
+                                              { name: "Sylvie Ellsmore", party: "The Greens" },
+                                              { name: "Jo Haylen", party: "Labor" },
+                                              { name: "Sam Iskandar", party: "Labor" },
+                                              { name: "Victor Macri", party: "Independent" },
+                                              { name: "Max Phillips", party: "The Greens" },
+                                              { name: "Morris Hanna", party: "Independent" },
+                                              { name: "David Leary", party: "The Greens" },
+                                              { name: "Chris Woods", party: "Labor" },
+                                              { name: "Melissa Brooks", party: "The Greens" },
+                                              { name: "Rosana Tyler", party: "Liberal" },
+                                              { name: "Daniel Barbar", party: "Labor" }]
       end
     end
 

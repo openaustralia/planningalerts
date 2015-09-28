@@ -13,9 +13,9 @@
       %p
         Your elected councillors can answer your questions
         and represent you in council meetings.
-    - @application_authority_councillors.shuffle.each do |councillor|
-      %input.councillor-select-radio{id: "councillor-#{councillor[:id]}", name: "receiver", value: "#{councillor[:id]}", type: "radio"}
-      %label.councillor-select-label.h-card{for: "councillor-#{councillor[:id]}"}
+    - @application_authority_councillors.shuffle.each_with_index do |councillor, index|
+      %input.councillor-select-radio{id: "councillor-#{index}", name: "receiver", value: "#{index}", type: "radio"}
+      %label.councillor-select-label.h-card{for: "councillor-#{index}"}
         %span.p-name= councillor[:name]
         %span.p-org= councillor[:party]
     %footer
