@@ -104,7 +104,6 @@ ol#comments {
 #comment-receiver-inputgroup {
   margin-top: 1em !important;
   margin-bottom: 1em;
-  border-bottom: 1px solid $lightest-cool-highlight;
   padding-bottom: .5em;
 
   legend {
@@ -139,7 +138,7 @@ ol#comments {
 }
 
 .councillor-select-list {
-  margin: 0 0 0 2em;
+  margin: 0 0 2em 2em;
   padding: 1em 0 0;
   list-style: none;
   clear: both;
