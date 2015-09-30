@@ -52,20 +52,25 @@ a.btn:hover {
       }
     }
   }
+
   .inline-hints {
     @include quiet;
     font-size: 0.8em;
+
     img {
       vertical-align: middle;
       margin-left: 5px;
     }
   }
+
   div.inline-hints p {
     padding-top: 0.5em;
   }
+
   .inline-errors {
     color: $error-color;
   }
+
   li.string, li.stringish, li.email {
     label {
       text-align: right;
@@ -74,17 +79,20 @@ a.btn:hover {
       width: 23%;
       padding: .5em 2% 0 0;
     }
+
     input, textarea {
       font-size: 1.1em;
       padding: .5em;
     }
   }
+
   li.boolean {
     label {
       // This is so nasty and wrong
       margin-left: 25%;
       width: 100%;
     }
+
     input {
       width: 20px;
     }
@@ -117,13 +125,16 @@ a.btn:hover {
     padding-top: 0.8em;
     //font-size: 1em;
   }
+
   textarea {
     padding: 0.5em;
   }
+
   textarea, input {
     font-family: $blueprint-font-family;
     font-size: 100%;
   }
+
   div.inline-hints p {
     padding-top: 0.5em;
   }
@@ -144,6 +155,7 @@ form.donate {
     font-weight: normal;
     margin-left: 1em;
   }
+
   input#amount_donate, label, span {
     font-size: 1.3em;
   }
@@ -164,24 +176,30 @@ form.donate {
       font-size: .8em;
     }
   }
+
   .inline-hints {
     margin-left: 0;
   }
+
   p, .stringish input {
     font-size: 0.9em;
   }
+
   p {
     margin-bottom: 1em;
   }
+
   input, textarea {
     width: 100%;
   }
+
   .actions {
     padding: 0;
 
     &, li {
       width: 100%;
     }
+
     li {
       display: block;
       float: none;
@@ -195,23 +213,29 @@ form.donate {
       width: 25%;
       float: left;
     }
+
     ol {
       display: inline-block;
     }
+
     input {
       width: 9em;
     }
+
     li {
       margin-right: 1em;
       display: inline-block;
       float: left;
     }
+
     label {
       display: none;
     }
+
     .inline-errors {
       margin-left: 0;
     }
+
     .error {
       padding-top: 0;
     }
