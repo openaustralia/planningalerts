@@ -71,6 +71,9 @@ a.btn:hover {
     color: $error-color;
   }
 
+  li.string,
+  li.stringish,
+  li.email,
   li.text {
     label {
       font-weight: 500;
@@ -81,8 +84,6 @@ a.btn:hover {
   li.string, li.stringish, li.email {
     label {
       text-align: right;
-      font-size: 1.1em;
-      font-weight: 500;
       width: 23%;
       padding: .5em 2% 0 0;
     }
