@@ -32,9 +32,9 @@ feature "Give feedback to Council" do
       visit(application_path(application))
     end
 
-    fill_in("Comment", with: "I think this is a really good idea")
-    fill_in("Name", with: "Matthew Landauer")
-    fill_in("Email", with: "example@example.com")
+    fill_in("Write your comment", with: "I think this is a really good idea")
+    fill_in("Your name", with: "Matthew Landauer")
+    fill_in("Your email", with: "example@example.com")
     # Don't fill in the address
     click_button("Post your comment")
 
@@ -49,10 +49,10 @@ feature "Give feedback to Council" do
       visit(application_path(application))
     end
 
-    fill_in("Comment", with: "I think this is a really good ideas")
-    fill_in("Name", with: "Matthew Landauer")
-    fill_in("Email", with: "example@example.com")
-    fill_in("Address", with: "11 Foo Street")
+    fill_in("Write your comment", with: "I think this is a really good ideas")
+    fill_in("Your name", with: "Matthew Landauer")
+    fill_in("Your email", with: "example@example.com")
+    fill_in("Your street address", with: "11 Foo Street")
     click_button("Post your comment")
 
     page.should have_content("Now check your email")
@@ -101,7 +101,7 @@ feature "Give feedback to Council" do
 
     fill_in("Your name", with: "Joe Reporter")
     fill_in("Your email", with: "reporter@foo.com")
-    fill_in("Details", with: "You can't be rude to people!")
+    fill_in("Why should this comment be removed?", with: "You can't be rude to people!")
     click_button("Send report")
 
     page.should have_content("The comment has been reported and a moderator will look into it as soon as possible.")
@@ -133,9 +133,9 @@ feature "Give feedback to Council" do
         visit(application_path(application))
       end
 
-      fill_in("Comment", with: "I think this is a really good idea")
-      fill_in("Name", with: "Matthew Landauer")
-      fill_in("Email", with: "example@example.com")
+      fill_in("Write your comment", with: "I think this is a really good idea")
+      fill_in("Your name", with: "Matthew Landauer")
+      fill_in("Your email", with: "example@example.com")
       # Don't fill in the address
       click_button("Post your comment")
 
