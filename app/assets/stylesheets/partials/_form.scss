@@ -143,6 +143,10 @@ a.btn:hover {
     margin: 0%;
   }
 
+  label abbr[title="required"] {
+    @include sr-only();
+  }
+
   div.inline-hints p {
     padding-top: 0.5em;
   }
