@@ -13,14 +13,14 @@
     #{link_to("need to disclose this", faq_path(:anchor => "disclosure"))}.
   = semantic_form_for [@application, @comment] do |f|
     = f.inputs do
-      = f.input :text, :label => "Write your comment", :placeholder => "Comment",
+      = f.input :text, :label => "Write your comment",
         :hint => "Explain why you think this application should be approved or not. Please be polite, concise and to the point."
-      = f.input :name, :label => "Your name", :placeholder => "Name", :hint => "Please use your real full name if possible."
-      = f.input :email, :label => "Your email", :placeholder => "Email", :hint => "We never display your email address"
+      = f.input :name, :label => "Your name", :hint => "Please use your real full name if possible."
+      = f.input :email, :label => "Your email", :hint => "We never display your email address"
       - hint = capture do
         e.g. 1 Sowerby St, Goulburn (we never display this).
         = link_to("Why do you need my address?", faq_path(:anchor => "address"))
-      = f.input :address, :label => "Your street address", :placeholder => "Address", :hint => hint
+      = f.input :address, :label => "Your street address", :hint => hint
       %div#faq_commenting_address.inline-hints.hidden
         = render :partial => 'static/faq_commenting_address'
       -# This is a spam bot honeytrap. A human being should not be filling this in
