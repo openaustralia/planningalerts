@@ -123,6 +123,7 @@ a.btn:hover {
 
 .formtastic#new_comment, .formtastic#new_report {
   @include float-form(100%, 100%, 100%, 0, "buttons-left", left, "select-auto");
+  margin-top: 0;
 
   label {
     margin: .75em 0 .25em;
