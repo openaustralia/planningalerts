@@ -125,6 +125,7 @@ a.btn:hover {
   @include float-form(100%, 100%, 100%, 0, "buttons-left", left, "select-auto");
 
   label {
+    margin-bottom: .25em;
     font-size: 1em;
   }
 
