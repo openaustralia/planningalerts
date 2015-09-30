@@ -8,7 +8,7 @@
   you think the comment should be removed.
 = semantic_form_for [@comment, @report] do |f|
   = f.inputs do
-    = f.input :name, label: "Your name"
+    = f.input :name, label: "Your name", :placeholder => "e.g. Jane Citizen"
     = f.input :email, label: "Your email", :placeholder => "e.g. your@email.com"
     = f.input :details, label: "Why should this comment be removed?", as: :text
     -# This is a spam bot honeytrap. A human being should not be filling this in
