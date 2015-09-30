@@ -114,12 +114,8 @@ a.btn:hover {
 }
 
 .formtastic#new_comment, .formtastic#new_report {
-  @include float-form(100%, 0%, 100%, 0, "buttons-left", left, "select-auto");
-  // Hide the labels
-  li label.label {
-    left: -999em;
-    position: absolute;
-  }
+  @include float-form(100%, 100%, 100%, 0, "buttons-left", left, "select-auto");
+
   /* This is only used when the placeholder polyfill is active */
   .label span.placeholder {
     padding-top: 0.8em;
@@ -135,8 +131,16 @@ a.btn:hover {
     font-size: 100%;
   }
 
+  .inline-hints {
+    margin: 0%;
+  }
+
   div.inline-hints p {
     padding-top: 0.5em;
+  }
+
+  .actions {
+    padding: 0;
   }
 }
 
