@@ -71,6 +71,13 @@ a.btn:hover {
     color: $error-color;
   }
 
+  li.text {
+    label {
+      font-weight: 500;
+      font-size: 1.1em;
+    }
+  }
+
   li.string, li.stringish, li.email {
     label {
       text-align: right;
