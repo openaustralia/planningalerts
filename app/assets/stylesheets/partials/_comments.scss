@@ -67,6 +67,16 @@ ol#comments {
   }
 }
 
+.comment-address,
+.comment-meta {
+  color: $font-color;
+}
+
+.comment-text,
+.comment-meta {
+  padding: 0 0 .75em;
+}
+
 .comment-text {
   font-style: normal;
   margin: 0;
@@ -81,16 +91,6 @@ ol#comments {
 
 .comment-meta {
   color: $font-color;
-}
-
-.comment-address,
-.comment-meta {
-  color: $font-color;
-}
-
-.comment-text,
-.comment-meta {
-  padding: 0 0 .75em;
 }
 
 .comment-author {
