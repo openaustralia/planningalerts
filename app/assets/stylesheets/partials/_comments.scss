@@ -68,8 +68,14 @@ ol#comments {
 }
 
 .comment-address,
-.comment-meta {
+.comment-meta,
+.comment-text {
   color: $font-color;
+}
+
+.comment-address,
+.comment-text {
+  margin: 0;
 }
 
 .comment-text,
@@ -79,13 +85,10 @@ ol#comments {
 
 .comment-text {
   font-style: normal;
-  margin: 0;
   border: 0;
-  color: $font-color;
 }
 
 .comment-address {
-  margin: 0;
   font-size: 1em;
 }
 
