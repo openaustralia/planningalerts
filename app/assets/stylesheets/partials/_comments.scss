@@ -95,7 +95,6 @@ ol#comments {
 .comment-author {
   margin-right: .5em;
   display: block;
-  font-weight: bold;
 
   @include at-breakpoint(40em) {
     display: inline-block;
