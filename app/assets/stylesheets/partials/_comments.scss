@@ -40,10 +40,18 @@ ol#comments {
   }
 }
 
+.panel-heading,
+.panel-body {
+  padding: .75em 1em;
+}
+
+.panel-body {
+  @include clearfix;
+}
+
 .comment-item {
   margin-bottom: 2.5em;
   background: #fafafa;
-  @include clearfix;
 
   a &:hover {
     background: #f0f0f0;
@@ -77,12 +85,12 @@ ol#comments {
 
 .comment-address,
 .comment-meta {
-  padding: .75em 1em;
+  color: $font-color;
 }
 
 .comment-text,
-.comment-actions {
-  padding: 0 1em .75em;
+.comment-meta {
+  padding: 0 0 .75em;
 }
 
 .comment-author {

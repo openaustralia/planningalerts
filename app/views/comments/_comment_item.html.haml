@@ -6,13 +6,14 @@
       on
       = comment.application.description ? "“" + truncate(comment.application.description) + "” at" : "application for"
       #{comment.application.address}
-  %figcaption.comment-meta
-    %span.comment-author #{comment.name}
-    %time.comment-time{datetime: comment.updated_at.strftime("%F")}
-      #{time_ago_in_words(comment.updated_at)} ago
-  %blockquote.comment-text= comment_as_html(comment.text)
-  - unless current_page?(comments_path)
-    .comment-actions
-      - if current_user && current_user.admin?
-        = link_to "admin", admin_application_comment_path(comment), class: 'comment-action'
-      = link_to "report comment", new_comment_report_path(comment), title: "Report this comment by #{comment.name} for removal", class: "comment-action"
+  .panel-body
+    %figcaption.comment-meta
+      %span.comment-author #{comment.name}
+      %time.comment-time{datetime: comment.updated_at.strftime("%F")}
+        #{time_ago_in_words(comment.updated_at)} ago
+    %blockquote.comment-text= comment_as_html(comment.text)
+    - unless current_page?(comments_path)
+      .comment-actions
+        - if current_user && current_user.admin?
+          = link_to "admin", admin_application_comment_path(comment), class: 'comment-action'
+        = link_to "report comment", new_comment_report_path(comment), title: "Report this comment by #{comment.name} for removal", class: "comment-action"
