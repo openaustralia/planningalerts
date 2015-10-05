@@ -78,7 +78,6 @@ ol#comments {
   margin: 0;
 }
 
-.comment-text,
 .comment-meta {
   padding: 0 0 .75em;
 }
@@ -86,6 +85,7 @@ ol#comments {
 .comment-text {
   font-style: normal;
   border: 0;
+  padding: 0;
 }
 
 .comment-address {
@@ -108,6 +108,11 @@ ol#comments {
   float: right;
   clear: both;
   font-size: 0.9em;
+  padding: .75em 0 0;
+
+  @include at-breakpoint(40em) {
+    padding: 0;
+  }
 }
 
 .comment-action {
