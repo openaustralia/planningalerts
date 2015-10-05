@@ -79,6 +79,7 @@ ol#comments {
 }
 
 .comment-meta {
+  @include quiet;
   padding: 0 0 .75em;
 }
 
