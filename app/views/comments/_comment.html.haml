@@ -1,25 +1,6 @@
-- if current_page?(comments_path)
-  = link_to application_path(comment.application), title: "View application at #{comment.application.address}", class: "panel-link" do
-    %figure.comment.panel
-      %h2.comment-address.panel-heading
-        In
-        %strong #{comment.application.suburb} #{comment.application.state}
-        on
-        = comment.application.description ? "“" + truncate(comment.application.description) + "” at" : "application for"
-        #{comment.application.address}
-      %blockquote.comment-text= comment_as_html(comment.text)
-      %figcaption.comment-meta
-        %span.comment-author by #{comment.name}
-        %time.comment-time{datetime: comment.updated_at.strftime("%F")}
-          #{time_ago_in_words(comment.updated_at)} ago
-- else
-  %figure.comment.panel
-    %blockquote.comment-text= comment_as_html(comment.text)
-    %figcaption.comment-meta
-      %span.comment-author by #{comment.name}
-      %time.comment-time{datetime: comment.updated_at.strftime("%F")}
-        #{time_ago_in_words(comment.updated_at)} ago
-      - if current_user && current_user.admin?
-        = link_to "admin", admin_application_comment_path(comment), class: "comment-action"
-      - if current_page?(application_path(comment.application))
-        = link_to "report comment", new_comment_report_path(comment), title: "Report this comment by #{comment.name} for removal", class: "comment-action"
+%li
+  - if with_link_wrapper
+    = link_to application_path(comment.application), title: "View application at #{comment.application.address}", class: "panel-link" do
+      = render 'comments/comment_item', comment: comment, with_address: true
+  - else
+    = render 'comments/comment_item', comment: comment, with_address: false

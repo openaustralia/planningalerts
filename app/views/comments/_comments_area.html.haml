@@ -4,7 +4,5 @@
     %p.small.quiet
       Have your say by #{link_to "adding your own comment", "#add-comment", class: "link-to-comment-form"}.
     %ol#comments
-      - @comments.each do |comment|
-        %li{:id => "comment#{comment.id}"}
-          = render :partial => 'comments/comment', :locals => {:comment => comment}
+      = render @comments, with_link_wrapper: false
   = render "comments/comment_form"
