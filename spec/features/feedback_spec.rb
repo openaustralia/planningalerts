@@ -32,7 +32,7 @@ feature "Give feedback to Council" do
       visit(application_path(application))
     end
 
-    fill_in("Explain why you think this application should be approved or not", with: "I think this is a really good idea")
+    fill_in("Have your say on this application", with: "I think this is a really good idea")
     fill_in("Your name", with: "Matthew Landauer")
     fill_in("Your email", with: "example@example.com")
     # Don't fill in the address
@@ -49,7 +49,7 @@ feature "Give feedback to Council" do
       visit(application_path(application))
     end
 
-    fill_in("Explain why you think this application should be approved or not", with: "I think this is a really good ideas")
+    fill_in("Have your say on this application", with: "I think this is a really good ideas")
     fill_in("Your name", with: "Matthew Landauer")
     fill_in("Your email", with: "example@example.com")
     fill_in("Your street address", with: "11 Foo Street")
@@ -133,7 +133,7 @@ feature "Give feedback to Council" do
         visit(application_path(application))
       end
 
-      fill_in("Explain why you think this application should be approved or not", with: "I think this is a really good idea")
+      fill_in("Have your say on this application", with: "I think this is a really good idea")
       fill_in("Your name", with: "Matthew Landauer")
       fill_in("Your email", with: "example@example.com")
       # Don't fill in the address
