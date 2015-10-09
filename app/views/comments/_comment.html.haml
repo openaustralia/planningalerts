@@ -1,6 +1,9 @@
-%li
-  - if with_link_wrapper
-    = link_to application_path(comment.application), title: "View application at #{comment.application.address}", class: "panel-link" do
-      = render 'comments/comment_item', comment: comment, with_address: true
-  - else
-    = render 'comments/comment_item', comment: comment, with_address: false
+- if in_list
+  %li
+    - if with_link_wrapper
+      = link_to application_path(comment.application), title: "View application at #{comment.application.address}", class: "panel-link" do
+        = render 'comments/comment_item', comment: comment, with_address: true
+    - else
+      = render 'comments/comment_item', comment: comment, with_address: false
+- else
+  = render 'comments/comment_item', comment: comment, with_address: false
