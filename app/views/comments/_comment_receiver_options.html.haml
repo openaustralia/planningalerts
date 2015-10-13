@@ -3,7 +3,9 @@
   %input.receiver-select-radio.receiver-type-option{id: "receiver-to-authority-option", type: "radio", name: "receiver"}
   %label.receiver-select-label{for: "receiver-to-authority-option"}
     %strong= @application.authority.full_name
-    - unless @application.official_submission_period_expired?
+    - if @application.official_submission_period_expired?
+      %p= on_notice_text(@application)
+    - else
       %p
         Write to the council if you want your comment considered
         when they decide whether to approve this application.

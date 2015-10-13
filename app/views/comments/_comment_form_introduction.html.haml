@@ -1,5 +1,6 @@
 - if @application.on_notice_to
-  %p= on_notice_text(@application)
+  - unless @application_authority_councillors && @application.official_submission_period_expired?
+    %p= on_notice_text(@application)
 - unless @application_authority_councillors
   %p
     Your comment and details will be sent to
