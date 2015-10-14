@@ -76,7 +76,11 @@ PlanningalertsApp::Application.routes.draw do
     collection do
       get :search
     end
-    resources :comments, only: [:create, :show]
+    resources :comments, only: [:create, :show] do
+      collection do
+        post :test_form
+      end
+    end
   end
 
   resources :comments, only: [:index] do

@@ -58,6 +58,11 @@ feature "Send a message to a councillor" do
 
       click_button("Post your comment")
 
+      # While this is still a prototype prevent a comment from being created
+      expect(page).to_not have_content("Now check your email")
+      expect(page).to have_content("Your comment has not been sent")
+      expect(page).to_not have_content("I think this is a really good idea")
+
       # TODO: the message appears on the page
       # TODO: the message is sent off to the councillor
     end
