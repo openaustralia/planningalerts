@@ -107,21 +107,19 @@ class ApplicationsController < ApplicationController
     # Required for new email alert signup form
     @alert = Alert.new(address: @application.address)
 
-    if current_user && current_user.admin?
-      if params[:with_councillors] == "true"
-        @application_authority_councillors = [{ name: "Mark Gardiner", party: "Independent" },
-                                              { name: "Sylvie Ellsmore", party: "The Greens" },
-                                              { name: "Jo Haylen", party: "Labor" },
-                                              { name: "Sam Iskandar", party: "Labor" },
-                                              { name: "Victor Macri", party: "Independent" },
-                                              { name: "Max Phillips", party: "The Greens" },
-                                              { name: "Morris Hanna", party: "Independent" },
-                                              { name: "David Leary", party: "The Greens" },
-                                              { name: "Chris Woods", party: "Labor" },
-                                              { name: "Melissa Brooks", party: "The Greens" },
-                                              { name: "Rosana Tyler", party: "Liberal" },
-                                              { name: "Daniel Barbar", party: "Labor" }]
-      end
+    if params[:with_councillors] == "true"
+      @application_authority_councillors = [{ name: "Mark Gardiner", party: "Independent" },
+                                            { name: "Sylvie Ellsmore", party: "The Greens" },
+                                            { name: "Jo Haylen", party: "Labor" },
+                                            { name: "Sam Iskandar", party: "Labor" },
+                                            { name: "Victor Macri", party: "Independent" },
+                                            { name: "Max Phillips", party: "The Greens" },
+                                            { name: "Morris Hanna", party: "Independent" },
+                                            { name: "David Leary", party: "The Greens" },
+                                            { name: "Chris Woods", party: "Labor" },
+                                            { name: "Melissa Brooks", party: "The Greens" },
+                                            { name: "Rosana Tyler", party: "Liberal" },
+                                            { name: "Daniel Barbar", party: "Labor" }]
     end
 
     respond_to do |format|

@@ -6,7 +6,7 @@ feature "Send a message to a councillor" do
   # so that I can get their help or feedback
   # and find out where they stand on this development I care about
 
-  context "when not logged in" do
+  context "when with_councillor param is not true" do
     background do
       authority = create(:authority, full_name: "Foo")
       VCR.use_cassette('planningalerts') do
@@ -21,22 +21,7 @@ feature "Send a message to a councillor" do
     end
   end
 
-  context "when logged in as admin" do
-    background do
-      admin = create(:admin)
-
-      visit new_user_session_path
-
-      within("#new_user") do
-        fill_in "Email", with: admin.email
-        fill_in "Password", with: admin.password
-      end
-
-      click_button "Sign in"
-
-      expect(page).to have_content "Signed in successfully"
-    end
-
+  context "when with_councillors param equals 'true'" do
     given(:application) { VCR.use_cassette('planningalerts') { create(:application, id: "1", comment_url: 'mailto:foo@bar.com') } }
 
     scenario "sending a message" do
