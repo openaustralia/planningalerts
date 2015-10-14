@@ -11,8 +11,9 @@
         %strong #{days_ago_in_words(@application.on_notice_to)}.
         - if @application.on_notice_from
           It lasted for #{distance_of_time_in_words(@application.on_notice_from, @application.on_notice_to)}.
-        If you chose to comment now,
-        your comment will still be displayed here and be sent to the planning authority.
+        If you choose to write to them now,
+        your comment will still be sent through
+        and displayed here.
     - else
       %p
         Write to the council if you want your comment considered
