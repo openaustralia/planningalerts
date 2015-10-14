@@ -8,7 +8,7 @@
         You’re too late to have your comment officially considered
         when they decide on this application.
         The period for officially commenting on this application finished
-        %strong #{days_ago_in_words(@application.on_notice_to)}.
+        #{days_ago_in_words(@application.on_notice_to)}.
         - if @application.on_notice_from
           It lasted for #{distance_of_time_in_words(@application.on_notice_from, @application.on_notice_to)}.
         If you choose to write to them now,
