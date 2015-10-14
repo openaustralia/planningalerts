@@ -4,7 +4,15 @@
   %label.receiver-select-label{for: "receiver-to-authority-option"}
     %strong= @application.authority.full_name
     - if @application.official_submission_period_expired?
-      %p= on_notice_text(@application)
+      %p
+        You’re too late to have your comment officially considered
+        when they decide on this application.
+        The period for officially commenting on this application finished
+        %strong #{days_ago_in_words(@application.on_notice_to)}.
+        - if @application.on_notice_from
+          It lasted for #{distance_of_time_in_words(@application.on_notice_from, @application.on_notice_to)}.
+        If you chose to comment now,
+        your comment will still be displayed here and be sent to the planning authority.
     - else
       %p
         Write to the council if you want your comment considered
