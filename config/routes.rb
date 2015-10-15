@@ -133,6 +133,8 @@ PlanningalertsApp::Application.routes.draw do
 
   get 'subscriptions' => redirect('/subscriptions/new')
 
+  get 'performance' => 'performance#index'
+
   root to: 'applications#address'
 
   get '/404', to: 'static#error_404'

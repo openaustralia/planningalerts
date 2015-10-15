@@ -35,7 +35,16 @@ ol#comments {
   }
 }
 
-.comment {
+.panel-heading,
+.panel-body {
+  padding: .75em 1em;
+}
+
+.panel-body {
+  @include clearfix;
+}
+
+.comment-item {
   margin-bottom: 2.5em;
   background: #fafafa;
 
@@ -53,26 +62,30 @@ ol#comments {
   }
 }
 
+.comment-address,
+.comment-meta,
 .comment-text {
-  font-style: normal;
-  margin: 0;
-  border: 0;
   color: $font-color;
 }
 
-.comment-address {
+.comment-address,
+.comment-text {
   margin: 0;
-  font-size: 1em;
 }
 
 .comment-meta {
   @include quiet;
+  padding: 0 0 .75em;
 }
 
-.comment-address,
-.comment-text,
-.comment-meta {
-  padding: .75em 1em;
+.comment-text {
+  font-style: normal;
+  border: 0;
+  padding: 0;
+}
+
+.comment-address {
+  font-size: 1em;
 }
 
 .comment-author {
@@ -83,16 +96,24 @@ ol#comments {
   }
 }
 
-.comment-time {
+.comment-time-block {
   font-size: 0.9em;
+}
+
+.comment-actions {
+  float: right;
+  clear: both;
+  font-size: 0.9em;
+  padding: .75em 0 0;
+
+  @include at-breakpoint(40em) {
+    padding: 0;
+  }
 }
 
 .comment-action {
   @include quiet;
-  margin-top: .15em;
   margin-left: .5em;
-  float: right;
-  font-size: 0.9em;
   text-decoration: underline;
 }
 

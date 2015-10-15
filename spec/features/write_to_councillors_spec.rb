@@ -29,8 +29,8 @@ feature "Send a message to a councillor" do
 
       expect(page).to have_content("Who should this go to?")
 
-      fill_in("Comment", with: "I think this is a really good idea")
-      fill_in("Name", with: "Matthew Landauer")
+      fill_in("Have your say on this application", with: "I think this is a really good idea")
+      fill_in("Your name", with: "Matthew Landauer")
 
       expect(page).to have_content("Write to the council if you want your comment considered when they decide whether to approve this application.")
 
@@ -38,8 +38,8 @@ feature "Send a message to a councillor" do
         choose "councillor-2"
       end
 
-      fill_in("Email", with: "example@example.com")
-      fill_in("Address", with: "11 Foo Street")
+      fill_in("Your email", with: "example@example.com")
+      fill_in("Your street address", with: "11 Foo Street")
 
       click_button("Post your comment")
 

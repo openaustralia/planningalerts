@@ -19,6 +19,14 @@ FactoryGirl.define do
     text "a comment"
     address "12 Foo Street"
     association :application
+
+    factory :unconfirmed_comment do
+      confirmed false
+    end
+
+    factory :confirmed_comment do
+      confirmed true
+    end
   end
 
   factory :user do
