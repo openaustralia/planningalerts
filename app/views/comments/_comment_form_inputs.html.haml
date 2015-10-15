@@ -8,6 +8,8 @@
     = f.input :text, label: "Have your say on this application",
       placeholder: "Be polite, clear, and to the point so your comment gets listened to.",
       hint: donation_declaration_notice
+    %div#disclosure_explanation.inline-hints.hidden
+      = render partial: 'static/disclosure_explanation'
     = f.input :name, label: "Your name", placeholder: "e.g. Jane Citizen", hint: "Please use your real full name if possible."
   - if @application_authority_councillors
     = render "comments/comment_receiver_options"

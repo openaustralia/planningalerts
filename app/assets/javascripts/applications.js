@@ -4,6 +4,11 @@ $('#comment_address_input a').click(function(e) {
   $('#faq_commenting_address').slideToggle('fast');
 });
 
+$('#comment_text_input a').click(function(e) {
+  e.preventDefault();
+  $('#disclosure_explanation').slideToggle('fast');
+});
+
 if ($('#comment-receiver-inputgroup').length) {
   // TODO: Add aria attributes for accessibility
   // TODO: Fix keyboard navigation
