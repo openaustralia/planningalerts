@@ -105,6 +105,39 @@ a.btn:hover {
       width: 20px;
     }
   }
+
+  fieldset.daterange {
+    legend {
+      width: 25%;
+      float: left;
+    }
+
+    ol {
+      display: inline-block;
+    }
+
+    input {
+      width: 9em;
+    }
+
+    li {
+      margin-right: 1em;
+      display: inline-block;
+      float: left;
+    }
+
+    label {
+      display: none;
+    }
+
+    .inline-errors {
+      margin-left: 0;
+    }
+
+    .error {
+      padding-top: 0;
+    }
+  }
 }
 
 .formtastic.alert {
@@ -143,41 +176,5 @@ form.donate {
 }
 
 @import "special_forms/alert_widget_form";
-
-.formtastic {
-  fieldset.daterange {
-    legend {
-      width: 25%;
-      float: left;
-    }
-
-    ol {
-      display: inline-block;
-    }
-
-    input {
-      width: 9em;
-    }
-
-    li {
-      margin-right: 1em;
-      display: inline-block;
-      float: left;
-    }
-
-    label {
-      display: none;
-    }
-
-    .inline-errors {
-      margin-left: 0;
-    }
-
-    .error {
-      padding-top: 0;
-    }
-  }
-}
-
 @import "special_forms/comment_form";
 @import "special_forms/payment_form";
