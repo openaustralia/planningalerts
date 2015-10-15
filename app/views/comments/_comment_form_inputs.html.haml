@@ -5,8 +5,12 @@
 
 = semantic_form_for form_target do |f|
   = f.inputs id: "comment-base-inputgroup" do
+    - donation_declaration_notice = capture do
+      If you have made a donation to a Councillor and/or gift to a Councillor or Council employee you may
+      #{link_to("need to disclose this", faq_path(:anchor => "disclosure"))}.
     = f.input :text, label: "Have your say on this application",
-      placeholder: "Be polite, clear, and to the point so your comment gets listened to."
+      placeholder: "Be polite, clear, and to the point so your comment gets listened to.",
+      hint: donation_declaration_notice
     = f.input :name, label: "Your name", placeholder: "e.g. Jane Citizen", hint: "Please use your real full name if possible."
   - if @application_authority_councillors
     = render "comments/comment_receiver_options"
