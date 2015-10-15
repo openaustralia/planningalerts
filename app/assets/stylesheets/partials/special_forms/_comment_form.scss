@@ -34,6 +34,12 @@
 
   .actions {
     padding: 0;
+    // Formtastic overrides
+    width: 100%;
+
+    li {
+      text-align: left !important;
+    }
   }
 }
 
