@@ -58,6 +58,7 @@
 
 .receiver-type-option {
   + label {
+    margin-top: 0 !important;
     padding: 0 0 .5em .5em !important;
     width: 80% !important;
   }
@@ -96,7 +97,7 @@
 }
 
 .councillor-select-label {
-  margin-bottom: .5em;
+  margin: 0 0 .5em !important;
   padding: 0 0 .5em .5em !important;
   width: 80% !important;
   cursor: pointer;
