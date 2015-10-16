@@ -41,7 +41,7 @@ feature "Send a message to a councillor" do
       fill_in("Your email", with: "example@example.com")
       fill_in("Your street address", with: "11 Foo Street")
 
-      click_button("Post your comment")
+      click_button("Post your public comment")
 
       # While this is still a prototype prevent a comment from being created
       expect(page).to_not have_content("Now check your email")
