@@ -7,7 +7,7 @@
   = f.inputs id: "comment-base-inputgroup" do
     = f.input :text, label: "Have your say on this application",
                      placeholder: "Be polite, clear, and to the point so your comment gets listened to.",
-                     hint: "Have you made a donation or gift to a Councillor or Council employee? #{link_to("You may need to disclose this", faq_path(:anchor => "disclosure"))}.".html_safe
+                     hint: "Have you made a donation or gift to a Councillor or Council employee? #{link_to("You may need to disclose this", faq_path(anchor: "disclosure"))}.".html_safe
     %div#disclosure_explanation.inline-hints.hidden
       = render partial: 'static/disclosure_explanation'
     = f.input :name, label: "Your name",
