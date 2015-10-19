@@ -105,129 +105,7 @@ a.btn:hover {
       width: 20px;
     }
   }
-}
 
-.formtastic.alert {
-  abbr {
-    display: none;
-  }
-}
-
-// Special formatting for specific forms
-
-.formtastic.user {
-  input.button {
-    white-space: normal;
-  }
-}
-
-.formtastic#new_comment, .formtastic#new_report {
-  @include float-form(100%, 100%, 100%, 0, "buttons-left", left, "select-auto");
-  margin-top: 0;
-
-  label {
-    margin: .75em 0 .25em;
-    padding: 0;
-    font-size: 1em;
-  }
-
-  /* This is only used when the placeholder polyfill is active */
-  .label span.placeholder {
-    padding-top: 0.8em;
-    //font-size: 1em;
-  }
-
-  textarea {
-    padding: 0.5em;
-  }
-
-  textarea, input {
-    font-family: $blueprint-font-family;
-    font-size: 100%;
-  }
-
-  .inline-hints,
-  .inline-errors {
-    margin: 0;
-  }
-
-  label abbr[title="required"] {
-    @include sr-only();
-  }
-
-  .actions {
-    padding: 0;
-  }
-}
-
-body form.alert {
-  background: inherit;
-  border-color: inherit;
-  border: inherit;
-
-  p {
-    margin-bottom: 1em;
-  }
-}
-
-form.donate {
-  input[type="submit"] {
-    font-weight: normal;
-    margin-left: 1em;
-  }
-
-  input#amount_donate, label, span {
-    font-size: 1.3em;
-  }
-}
-
-#sidebar .formtastic.alert {
-  @include boxed-content;
-  margin-top: 0;
-
-  .label {
-    /* Use seriously old-school way of hiding these labels so that placeholder polyfill can still work */
-    left: -999em;
-    position: absolute;
-
-    /* This is only used when the placeholder polyfill is active */
-    span.placeholder {
-      padding-top: .2em;
-      font-size: .8em;
-    }
-  }
-
-  .inline-hints {
-    margin-left: 0;
-  }
-
-  p, .stringish input {
-    font-size: 0.9em;
-  }
-
-  p {
-    margin-bottom: 1em;
-  }
-
-  input, textarea {
-    width: 100%;
-  }
-
-  .actions {
-    padding: 0;
-
-    &, li {
-      width: 100%;
-    }
-
-    li {
-      display: block;
-      float: none;
-    }
-  }
-}
-
-.formtastic {
   fieldset.daterange {
     legend {
       width: 25%;
@@ -262,4 +140,41 @@ form.donate {
   }
 }
 
-@import "payment_form";
+.formtastic.alert {
+  abbr {
+    display: none;
+  }
+}
+
+// Special formatting for specific forms
+
+.formtastic.user {
+  input.button {
+    white-space: normal;
+  }
+}
+
+body form.alert {
+  background: inherit;
+  border-color: inherit;
+  border: inherit;
+
+  p {
+    margin-bottom: 1em;
+  }
+}
+
+form.donate {
+  input[type="submit"] {
+    font-weight: normal;
+    margin-left: 1em;
+  }
+
+  input#amount_donate, label, span {
+    font-size: 1.3em;
+  }
+}
+
+@import "special_forms/alert_widget_form";
+@import "special_forms/comment_form";
+@import "special_forms/payment_form";

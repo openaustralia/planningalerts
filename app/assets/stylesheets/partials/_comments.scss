@@ -1,11 +1,6 @@
 #comments-area {
   margin-top: 1em;
   border-top: 1px solid $light-cool-highlight;
-
-  .tabs-list & {
-    margin-top: 0;
-    border-top: 0;
-  }
 }
 
 ol#comments {
@@ -120,80 +115,4 @@ ol#comments {
   @include quiet;
   margin-left: .5em;
   text-decoration: underline;
-}
-
-#councillor-message-form {
-  // set box-sizing for simplicity
-  &,
-  * {
-    box-sizing: border-box;
-  }
-
-  legend,
-  fieldset,
-  textarea {
-    margin-bottom: 2em;
-  }
-
-  p {
-    margin-bottom: 1em;
-  }
-
-  fieldset legend {
-    font-weight: bold;
-  }
-
-  input[type="text"] {
-    padding: .5em;
-  }
-
-  textarea {
-    width: 100%;
-  }
-}
-
-.councillor-select-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.councillor-select-radio {
-  @include sr-only();
-}
-
-.councillor-select-label {
-  margin-bottom: .5em;
-  width: 100%;
-  display: block;
-  cursor: pointer;
-
-  .p-name,
-  .p-org {
-    display: block;
-  }
-
-  .p-name {
-    font-weight: bold;
-  }
-
-  :hover + &,
-  :focus + &  {
-    border-left: .25em $lightest-cool-highlight solid;
-    padding-left: .75em;
-    color: $link-hover-color;
-  }
-
-  :checked + & {
-    border-left: .25em $light-cool-highlight solid;
-    padding-left: .75em;
-    color: $link-active-color;
-  }
-}
-
-.councillor-message-block {
-  input#commentor_name {
-    padding-left: 1em;
-    width: 25em;
-  }
 }

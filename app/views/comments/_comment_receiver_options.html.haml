@@ -1,0 +1,35 @@
+%fieldset#comment-receiver-inputgroup
+  %legend Who should this go to?
+  %input.receiver-select-radio.receiver-type-option{id: "receiver-to-authority-option", type: "radio", name: "receiver"}
+  %label.receiver-select-label{for: "receiver-to-authority-option"}
+    %strong= @application.authority.full_name
+    - if @application.official_submission_period_expired?
+      %p
+        You’re too late to have your comment officially considered
+        when they decide on this application.
+        The period for officially commenting on this application finished
+        #{days_ago_in_words(@application.on_notice_to)}.
+        - if @application.on_notice_from
+          It lasted for #{distance_of_time_in_words(@application.on_notice_from, @application.on_notice_to)}.
+        If you choose to write to them now,
+        your comment will still be sent through
+        and displayed here.
+    - else
+      %p
+        Write to the council if you want your comment considered
+        when they decide whether to approve this application.
+  .councillor-select-list
+    %header.councillor-select-list-intro
+      %strong One of your elected local councillors
+      %p
+        Your elected councillors can answer your questions
+        and represent you in council meetings.
+    - @application_authority_councillors.shuffle.each_with_index do |councillor, index|
+      %input.councillor-select-radio{id: "councillor-#{index}", name: "receiver", value: "#{index}", type: "radio"}
+      %label.councillor-select-label.h-card{for: "councillor-#{index}"}
+        %span.p-name= councillor[:name]
+        %span.p-org= councillor[:party]
+    %footer
+      %strong Don’t worry if you don’t know who to contact.
+      Every councillor is there to represent you
+      so just pick someone who seems nice.

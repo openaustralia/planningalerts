@@ -37,6 +37,12 @@ class CommentsController < ApplicationController
     end
   end
 
+  def test_form
+    @application = Application.find(params[:application_id])
+    redirect_to application_path(@application, with_councillors: true),
+                notice: render_to_string(partial: 'test_form_thanks').html_safe
+  end
+
   private
 
   def comment_params

@@ -6,7 +6,7 @@ feature "Send a message to a councillor" do
   # so that I can get their help or feedback
   # and find out where they stand on this development I care about
 
-  context "when not logged in" do
+  context "when with_councillor param is not true" do
     background do
       authority = create(:authority, full_name: "Foo")
       VCR.use_cassette('planningalerts') do
@@ -16,39 +16,37 @@ feature "Send a message to a councillor" do
     end
 
     scenario "can’t see councillor messages sections" do
-      page.should_not have_content("Write to your elected councillors about this application")
+      expect(page).to_not have_content("Who should this go to?")
       # TODO: and you should not be able to write and submit a message.
     end
   end
 
-  context "when logged in as admin" do
-    background do
-      admin = create(:admin)
-
-      visit new_user_session_path
-      within("#new_user") do
-        fill_in "Email", with: admin.email
-        fill_in "Password", with: admin.password
-      end
-      click_button "Sign in"
-      expect(page).to have_content "Signed in successfully"
-    end
-
+  context "when with_councillors param equals 'true'" do
     given(:application) { VCR.use_cassette('planningalerts') { create(:application, id: "1", comment_url: 'mailto:foo@bar.com') } }
 
     scenario "sending a message" do
-      visit application_path(application)
-      page.should have_content("Write to your elected councillors about this application")
-      # TOOD: there should be an explanation that this wont necessarily impact the decision about this application,
-      #   encourage people to use the official process for that.
-      within(".councillor-select-list") do
+      visit application_path(application, with_councillors: "true")
+
+      expect(page).to have_content("Who should this go to?")
+
+      fill_in("Have your say on this application", with: "I think this is a really good idea")
+      fill_in("Your name", with: "Matthew Landauer")
+
+      expect(page).to have_content("Write to the council if you want your comment considered when they decide whether to approve this application.")
+
+      within("#comment-receiver-inputgroup") do
         choose "councillor-2"
       end
 
-      fill_in "My name is", with: "Luke"
-      fill_in "message_body", with: "Hi there, could you please tell me some more about this application?"
+      fill_in("Your email", with: "example@example.com")
+      fill_in("Your street address", with: "11 Foo Street")
 
-      click_button "Post your public message to your councillor"
+      click_button("Post your public comment")
+
+      # While this is still a prototype prevent a comment from being created
+      expect(page).to_not have_content("Now check your email")
+      expect(page).to have_content("Your comment has not been sent")
+      expect(page).to_not have_content("I think this is a really good idea")
 
       # TODO: the message appears on the page
       # TODO: the message is sent off to the councillor

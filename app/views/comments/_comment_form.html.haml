@@ -1,35 +1,9 @@
 %h4#add-comment Add your own comment
-- if @application.authority.contactable?
-  - if @application.on_notice_to
-    %p= on_notice_text(@application)
-  %p
-    Your comment and details will be sent to
-    %strong #{@application.authority.full_name}.
-    - unless @application.official_submission_period_expired?
-      They’ll consider your submission when they decide whether to approve this application.
-    Your name and comment will be posted publicly here as well.
-  %p
-    If you have made a donation to a Councillor and/or gift to a Councillor or Council employee you may
-    #{link_to("need to disclose this", faq_path(anchor: "disclosure"))}.
-  = semantic_form_for [@application, @comment] do |f|
-    = f.inputs do
-      = f.input :text, label: "Have your say on this application",
-        placeholder: "Be polite, clear, and to the point so your comment gets listened to."
-      = f.input :name, label: "Your name", placeholder: "e.g. Jane Citizen", hint: "Please use your real full name if possible."
-      = f.input :email, label: "Your email", placeholder: "e.g. your@email.com", hint: "We never display your email address."
-      - hint = capture do
-        We never display your street address.
-        = link_to("Why do you need my address?", faq_path(anchor: "address"))
-      = f.input :address, label: "Your street address", placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", hint: hint
-      %div#faq_commenting_address.inline-hints.hidden
-        = render partial: 'static/faq_commenting_address'
-      -# This is a spam bot honeytrap. A human being should not be filling this in
-      -# It's not awesome for screenreaders though
-      %li{style: "display: none;"}
-        = label_tag :little_sweety, 'Little Sweety'
-        = text_field_tag :little_sweety, "", placeholder: "Please leave this blank"
-    = f.actions do
-      = f.action :submit, label: "Post your comment",  button_html: {class: "button button-action"}
+- # TODO: Handle situation where the council doesn't have an email
+- #       but there are councillors to contact
+- if @application.authority.contactable? || @application_authority_councillors
+  = render "comments/comment_form_introduction"
+  = render "comments/comment_form_inputs"
 - elsif !@application.comment_url.blank?
   %p
     = link_to "How to comment", @application.comment_url
