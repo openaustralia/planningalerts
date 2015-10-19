@@ -35,8 +35,6 @@ describe ApplicationsController do
   end
 
   describe "#show" do
-    before { allow(controller).to receive(:current_user).and_return nil }
-
     it "should gracefully handle an application without any geocoded information" do
       app = mock_model(Application, address: "An address that can't be geocoded", date_scraped: Date.new(2010,1,1),
         description: "foo", location: nil, find_all_nearest_or_recent: [], comments: Comment)
