@@ -46,7 +46,8 @@ ol#comments {
 
 .comment-item {
   margin-bottom: 2.5em;
-  background: #fafafa;
+  background: lighten(#5098B9, 46.5%);
+  border-color: lighten(#5098B9, 22%);
 
   a &:hover {
     background: #f0f0f0;
