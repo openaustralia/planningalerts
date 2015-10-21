@@ -25,7 +25,7 @@ ActiveAdmin.register Subscription do
   filter :trial_started_at
 
   sidebar :rollout_status, priority: 0, only: :index do
-    "#{Alert.potential_new_subscribers.count.size} potential subscribers remain."
+    "#{Alert.potential_subscribers.without_subscription.count.size} potential subscribers remain."
   end
 
   form do |f|
