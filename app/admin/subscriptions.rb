@@ -51,5 +51,18 @@ ActiveAdmin.register Subscription do
     actions
   end
 
+  csv do
+    column :id
+    column :email
+    column(:active_alerts) { |s| s.alerts.active.count }
+    column :stripe_plan_id
+    column :stripe_customer_id
+    column :stripe_subscription_id
+    column :free_reason
+    column :trial_started_at
+    column :created_at
+    column :updated_at
+  end
+
   permit_params :email, :stripe_plan_id, :stripe_customer_id, :stripe_subscription_id, :trial_started_at, :free_reason
 end
