@@ -1,7 +1,1 @@
-<% if !applications.empty? && comments.empty? %>
-<%= "You're missing out on: " if alert.expired_subscription? %><%= pluralize(applications.size, "new planning application") %> near <%= alert.address %>
-<% elsif applications.empty? && !comments.empty? %>
-<%= "You're missing out on: " if alert.expired_subscription? %><%= pluralize(comments.size, "new comment") %> on planning applications near <%= alert.address %>
-<% elsif !applications.empty? && !comments.empty? %>
-<%= "You're missing out on: " if alert.expired_subscription? %><%= pluralize(comments.size, "new comment") %> and <%= pluralize(applications.size, "new planning application") %> near <%= alert.address %>
-<% end %>
+<%= subject(alert, applications, comments) %>

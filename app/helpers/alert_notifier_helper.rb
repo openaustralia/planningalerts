@@ -60,4 +60,16 @@ module AlertNotifierHelper
 
     new_subscription_url(params)
   end
+
+  def subject(alert, applications, comments)
+    items = if !applications.empty? && comments.empty?
+      pluralize(applications.size, "new planning application")
+    elsif applications.empty? && !comments.empty?
+      pluralize(comments.size, "new comment") + " on planning applications"
+    elsif !applications.empty? && !comments.empty?
+      pluralize(comments.size, "new comment") + " and " + pluralize(applications.size, "new planning application")
+    end
+
+    "#{"You're missing out on: " if alert.expired_subscription?}#{items} near #{alert.address}"
+  end
 end
