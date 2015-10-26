@@ -62,6 +62,23 @@ ol#comments {
   p:last-child {
     margin-bottom: 0;
   }
+
+  footer {
+    @include clearfix;
+    padding: .75em 0 0;
+    font-size: 0.9em;
+  }
+
+  footer .comment-meta {
+    float: left;
+    clear: left;
+    margin: 0;
+    max-width: 35em;
+
+    span {
+      display: inline-block;
+    }
+  }
 }
 
 .comment-to-councillor,
@@ -136,9 +153,7 @@ ol#comments {
 
 .comment-actions {
   float: right;
-  clear: both;
-  font-size: 0.9em;
-  padding: .75em 0 0;
+  clear: right;
 
   @include at-breakpoint(40em) {
     padding: 0;
