@@ -18,4 +18,4 @@
     .panel-body.comment-to-councillor-status
       %p
         Sent to #{@message_to_councillor[:receiver]} #{time_ago_in_words(@message_to_councillor[:updated_at])} ago.
-        They are yet to respond.
+        %span They are yet to respond.

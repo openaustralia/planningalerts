@@ -79,6 +79,10 @@ ol#comments {
   border-top-width: 1px;
   border-top-style: solid;
   border-radius: 0 0 .5em .5em;
+
+  span {
+    display: inline-block;
+  }
 }
 
 .comment-address,
