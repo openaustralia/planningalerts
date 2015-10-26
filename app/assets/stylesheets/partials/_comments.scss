@@ -64,6 +64,11 @@ ol#comments {
   }
 }
 
+.comment-to-councillor {
+  background: lighten(#FFE8B3, 13.5%);
+  border-color: darken(#FFE8B3, 15%);
+}
+
 .comment-address,
 .comment-meta,
 .comment-text {
