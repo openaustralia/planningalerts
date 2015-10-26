@@ -1,0 +1,17 @@
+%li 
+  %figure.comment-to-councillor.comment-item.panel{id: @message_to_councillor[:id]}
+    .panel-body
+      %figcaption.comment-meta
+        %span.comment-author= @message_to_councillor[:name]
+        wrote to
+        %span.comment-recipient.h-card
+          local councillor
+          %span.p-name= @message_to_councillor[:receiver]
+        %span.comment-time-block
+          %time.comment-time{datetime: @message_to_councillor[:updated_at].strftime("%F")}
+            #{time_ago_in_words(@message_to_councillor[:updated_at])} ago
+      %blockquote.comment-text= @message_to_councillor[:text]
+      .comment-actions
+        - if current_user && current_user.admin?
+          = link_to "admin", "#", class: 'comment-action'
+        = link_to "report comment", "#", title: "Report this comment by Laurie Burdekin for removal", class: "comment-action"

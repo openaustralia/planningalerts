@@ -94,12 +94,20 @@ ol#comments {
   display: inline-block;
 }
 
+.comment-recipient {
+  display: inline-block;
+}
+
 .comment-time-block {
   font-size: 0.9em;
   display: block;
 
   @include at-breakpoint(40em) {
     display: inline-block;
+
+    .comment-to-councillor & {
+      display: block;
+    }
   }
 }
 
