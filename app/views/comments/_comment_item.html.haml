@@ -7,7 +7,7 @@
       = comment.application.description ? "“" + truncate(comment.application.description) + "” at" : "application for"
       #{comment.application.address}
   .panel-body
-    %figcaption.comment-meta
+    %figcaption.comment-meta.comment-heading
       %span.comment-author #{comment.name}
       %span.comment-time-block
         commented

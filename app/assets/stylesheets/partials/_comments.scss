@@ -90,6 +90,10 @@ ol#comments {
   color: $font-color;
 }
 
+.comment-heading {
+  padding: 0 0 .75em;
+}
+
 .comment-address,
 .comment-text {
   margin: 0;
@@ -97,7 +101,6 @@ ol#comments {
 
 .comment-meta {
   @include quiet;
-  padding: 0 0 .75em;
 }
 
 .comment-text {
