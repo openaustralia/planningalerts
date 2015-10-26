@@ -16,9 +16,9 @@
     %blockquote.comment-text= comment_as_html(comment.text)
     %footer
       %p.comment-meta
-        - # TODO: Change this to show datestamp in useful timezone to the user, not UTC.
-        - #       Maybe local time of application or local time of user?
-        Posted #{ comment.updated_at.strftime("%e %b %Y at %l:%m %p") } and
+        - # TODO: Change this to show the date in user local time.
+        - #       Could be nice and human to do 'today' and 'yesterday'
+        Posted #{ comment.updated_at.strftime("%e %b %Y") } and
         %span sent to #{comment.application.authority.full_name}
       .comment-actions
         - if current_user && current_user.admin?
