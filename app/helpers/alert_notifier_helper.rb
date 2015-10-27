@@ -71,7 +71,7 @@ module AlertNotifierHelper
             end
 
     if alert.expired_subscription?
-      "You're missing out on: #{items} near #{alert.address}"
+      "You’re missing out on #{items} near #{alert.address}"
     else
       "#{items} near #{alert.address}"
     end
