@@ -62,11 +62,11 @@ module AlertNotifierHelper
   end
 
   def subject(alert, applications, comments)
-    items = if !applications.empty? && comments.empty?
+    items = if applications.any? && comments.empty?
       pluralize(applications.size, "new planning application")
-    elsif applications.empty? && !comments.empty?
+    elsif applications.empty? && comments.any?
       pluralize(comments.size, "new comment") + " on planning applications"
-    elsif !applications.empty? && !comments.empty?
+    elsif applications.any? && comments.any?
       pluralize(comments.size, "new comment") + " and " + pluralize(applications.size, "new planning application")
     end
 
