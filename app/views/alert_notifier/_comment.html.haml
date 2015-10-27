@@ -1,8 +1,7 @@
 %div.comment
-  = Sanitize.clean(ApplicationController.helpers.simple_format(truncate(comment.text, :length => 700)), Sanitize::Config::BASIC).html_safe
   %p
     %span
-      by
       = comment.name
-      on
-    = link_to comment.application.address, comment_url_with_tracking(comment: comment, theme: @theme)
+      commented on
+    #{link_to comment.application.address, comment_url_with_tracking(comment: comment, theme: @theme)}:
+  = Sanitize.clean(ApplicationController.helpers.simple_format(truncate(comment.text, :length => 700)), Sanitize::Config::BASIC).html_safe

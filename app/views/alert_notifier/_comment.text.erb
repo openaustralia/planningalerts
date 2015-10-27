@@ -1,5 +1,7 @@
 
-<%= Sanitize.clean(truncate(comment.text, :length => 700), Sanitize::Config::BASIC).html_safe %>
-by <%= comment.name %> on <%= comment.application.address %>
+<%= comment.name %> commented on <%= comment.application.address %>:
 
+<%= Sanitize.clean(truncate(comment.text, :length => 700), Sanitize::Config::BASIC).html_safe %>
+
+View comment on PlanningAlerts:
 <%= comment_url_with_tracking(comment: comment, theme: @theme).html_safe %>
