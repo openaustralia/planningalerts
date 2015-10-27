@@ -3,5 +3,5 @@
     %span
       = comment.name
       commented on
-    #{link_to comment.application.address, comment_url_with_tracking(comment: comment, theme: @theme)}:
+    #{link_to comment.application.address, application_url_with_tracking(id: comment.application.id, theme: @theme)}:
   = Sanitize.clean(ApplicationController.helpers.simple_format(truncate(comment.text, :length => 700)), Sanitize::Config::BASIC).html_safe
