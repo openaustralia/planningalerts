@@ -70,6 +70,10 @@ module AlertNotifierHelper
               pluralize(comments.size, "new comment") + " and " + pluralize(applications.size, "new planning application")
             end
 
-    "#{"You're missing out on: " if alert.expired_subscription?}#{items} near #{alert.address}"
+    if alert.expired_subscription?
+      "You're missing out on: #{items} near #{alert.address}"
+    else
+      "#{items} near #{alert.address}"
+    end
   end
 end
