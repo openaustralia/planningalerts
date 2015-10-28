@@ -19,7 +19,8 @@ describe ApplicationsHelper do
       end
 
       it "should add generic ‘application for’ text" do
-        expect(helper.display_description_with_address(@application)).to eq "application for #{@application.address}"
+        expect(helper.display_description_with_address(@application))
+          .to eq "application for #{@application.address}"
       end
     end
 
