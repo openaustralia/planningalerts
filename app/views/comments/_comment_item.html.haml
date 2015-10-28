@@ -4,8 +4,7 @@
       In
       %strong #{comment.application.suburb} #{comment.application.state}
       on
-      = comment.application.description ? "“" + truncate(comment.application.description) + "” at" : "application for"
-      #{comment.application.address}
+      = display_description_with_address(comment.application)
   .panel-body
     %figcaption.comment-meta
       %span.comment-author #{comment.name}
