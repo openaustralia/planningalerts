@@ -24,7 +24,7 @@ if ($('#comment-receiver-inputgroup').length) {
   $('.councillor-select-list').before(councillorTogglerRadio)
                               .before(councillorTogglerLabel);
 
-  $('label[for="councillors-list-toggler"').append('<strong>' + $('.councillor-select-list-intro strong').text() + '</strong><p>' + $('.councillor-select-list-intro p').text() + '</p>');
+  $('label[for="councillors-list-toggler"]').append('<strong>' + $('.councillor-select-list-intro strong').text() + '</strong><p>' + $('.councillor-select-list-intro p').text() + '</p>');
 
   $('.councillor-select-list-intro').remove();
 
