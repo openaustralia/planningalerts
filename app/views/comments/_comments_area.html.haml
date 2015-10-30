@@ -4,6 +4,6 @@
     %p.small.quiet
       Have your say by #{link_to "adding your own comment", "#add-comment", class: "link-to-comment-form"}.
     %ol#comments
-      = render @comments, in_list: true, with_link_wrapper: false
+      = render @comments, in_list: true, with_address: false
       = render "comments/message_to_councillor" if @message_to_councillor
   = render "comments/comment_form"

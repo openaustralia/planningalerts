@@ -107,7 +107,9 @@ ol#comments {
   margin: 0;
 }
 
-.comment-meta {
+.comment-meta,
+.comment-meta a,
+.comment-meta a:visited {
   @include quiet;
 }
 
