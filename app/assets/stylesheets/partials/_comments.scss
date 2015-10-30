@@ -19,29 +19,19 @@ ol#comments {
   &:hover,
   &:focus {
     text-decoration: none;
-
-    .panel-heading {
-      background-color: darken($lightest-cool-highlight, 10%);
-    }
-  }
-
-  .panel-heading {
-    background-color: $lightest-cool-highlight;
-    -webkit-transition: background .1s linear;
-    -moz-transition: background .1s linear;
-    -o-transition: background .1s linear;
-    -ms-transition: background .1s linear;
-    transition: background .1s linear;
   }
 }
 
-.panel-heading,
 .panel-body {
   padding: .75em 1em 1em;
 }
 
 .panel-body {
   @include clearfix;
+}
+
+.comment-address {
+  @extend .panel-body;
 }
 
 .comment-item {

@@ -1,11 +1,11 @@
+- if with_address
+  %h2.comment-address
+    In
+    %strong #{comment.application.suburb} #{comment.application.state}
+    on
+    = comment.application.description ? "“" + truncate(comment.application.description) + "” at" : "application for"
+    #{comment.application.address}:
 %figure.comment-item.panel{id: "comment#{comment.id}"}
-  - if with_address
-    %h2.comment-address.panel-heading
-      In
-      %strong #{comment.application.suburb} #{comment.application.state}
-      on
-      = comment.application.description ? "“" + truncate(comment.application.description) + "” at" : "application for"
-      #{comment.application.address}
   .panel-body
     %figcaption.comment-meta.comment-heading
       %span.comment-author #{comment.name}
