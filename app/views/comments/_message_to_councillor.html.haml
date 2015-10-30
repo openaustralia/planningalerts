@@ -18,5 +18,5 @@
           = link_to "report comment", "#", title: "Report this comment by Laurie Burdekin for removal", class: "comment-action"
     .panel-body.comment-to-councillor-status
       %p
-        Sent to #{@message_to_councillor[:receiver]} #{time_ago_in_words(@message_to_councillor[:updated_at])} ago.
+        Sent to local councillor #{@message_to_councillor[:receiver]} #{time_ago_in_words(@message_to_councillor[:updated_at])} ago.
         %span They are yet to respond.
