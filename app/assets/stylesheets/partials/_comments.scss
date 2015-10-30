@@ -30,7 +30,7 @@ ol#comments {
   @include clearfix;
 }
 
-.comment-address {
+.comment-location {
   @extend .panel-body;
 }
 
@@ -92,7 +92,7 @@ ol#comments {
   }
 }
 
-.comment-address,
+.comment-location,
 .comment-text {
   color: $font-color;
 }
@@ -102,7 +102,7 @@ ol#comments {
   max-width: 95%;
 }
 
-.comment-address,
+.comment-location,
 .comment-text {
   margin: 0;
 }
@@ -117,7 +117,7 @@ ol#comments {
   padding: 0;
 }
 
-.comment-address {
+.comment-location {
   font-size: 1em;
 }
 
