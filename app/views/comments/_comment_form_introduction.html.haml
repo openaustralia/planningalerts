@@ -1,7 +1,11 @@
 - if @application.on_notice_to
   - unless @application_authority_councillors && @application.official_submission_period_expired?
     %p= on_notice_text(@application)
-- unless @application_authority_councillors
+- if @application_authority_councillors
+  %p
+    Write to the planning authority
+    or one of your elected local councillors.
+- else
   %p
     Your comment and details will be sent to
     %strong #{@application.authority.full_name}.
