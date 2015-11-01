@@ -43,6 +43,16 @@
   }
 }
 
+#comment-base-inputgroup {
+  h4 {
+    margin: 0;
+  }
+
+  label p {
+    margin: .5em 0 !important;
+  }
+}
+
 #comment-receiver-inputgroup {
   margin-top: 1em !important;
 
@@ -111,8 +121,8 @@
     display: block;
   }
 
-  .p-name {
-    font-weight: bold;
+  .p-org {
+    font-weight: normal;
   }
 
   :hover + &,

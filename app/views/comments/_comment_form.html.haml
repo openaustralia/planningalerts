@@ -1,10 +1,9 @@
-%h4#add-comment Add your own comment
 - # TODO: Handle situation where the council doesn't have an email
 - #       but there are councillors to contact
 - if @application.authority.contactable? || @application_authority_councillors
-  = render "comments/comment_form_introduction"
   = render "comments/comment_form_inputs"
 - elsif !@application.comment_url.blank?
+  %h4#add-comment Add your own comment
   %p
     = link_to "How to comment", @application.comment_url
     on this application (from #{@application.authority.full_name}).

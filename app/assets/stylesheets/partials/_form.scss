@@ -71,14 +71,13 @@ a.btn:hover {
     color: $error-color;
   }
 
-  li.string,
-  li.stringish,
-  li.email,
-  li.text {
-    label {
-      font-weight: 500;
-      font-size: 1.1em;
-    }
+  label {
+    font-weight: 500;
+    font-size: 1.1em;
+  }
+
+  label p {
+    font-weight: normal;
   }
 
   li.string, li.stringish, li.email {
