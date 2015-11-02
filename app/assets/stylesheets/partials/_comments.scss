@@ -9,6 +9,23 @@ ol#comments {
   margin-right: 0;
 }
 
+.comment-exchange {
+  position: relative;
+  z-index: 0;
+
+  &:before {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 6em;
+    width: 1px;
+    background-color: darken(#FFE8B3, 15%);
+    z-index: -1;
+  }
+}
+
 .panel {
   border: 1px $lightest-cool-highlight solid;
 }
