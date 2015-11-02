@@ -162,6 +162,10 @@ ol#comments {
 .reply-from-councillor {
   margin-left: 3em;
 
+  .comment-item + & {
+    margin-top: -1em;
+  }
+
   .comment-heading {
     display: table;
   }
