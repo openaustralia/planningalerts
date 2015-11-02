@@ -76,7 +76,8 @@ ol#comments {
   border-color: darken(#FFE8B3, 15%);
 }
 
-.comment-to-councillor {
+.comment-to-councillor,
+.reply-from-councillor {
   background: lighten(#FFE8B3, 13.5%);
   border-color: darken(#FFE8B3, 15%);
 }
@@ -136,7 +137,8 @@ ol#comments {
   @include at-breakpoint(40em) {
     display: inline-block;
 
-    .comment-to-councillor & {
+    .comment-to-councillor &,
+    .reply-from-councillor {
       display: block;
     }
   }
@@ -155,4 +157,42 @@ ol#comments {
   @include quiet;
   margin-left: .5em;
   text-decoration: underline;
+}
+
+.reply-from-councillor {
+  margin-left: 3em;
+
+  .comment-heading {
+    display: table;
+  }
+
+  .councillor-image-wrapper,
+  .comment-meta {
+    vertical-align: top;
+    display: table-cell;
+  }
+
+  .councillor-image-wrapper {
+    padding: 0 1em 0 0;
+  }
+
+  .councillor-image {
+    width: 4em;
+    height: 4.5em;
+    overflow: hidden;
+    border-radius: .25em;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.councillor .p-name {
+  display: block;
+}
+
+.councillor .p-role {
+  font-weight: normal;
 }

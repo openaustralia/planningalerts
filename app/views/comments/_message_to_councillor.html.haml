@@ -16,7 +16,31 @@
           - if current_user && current_user.admin?
             = link_to "admin", "#", class: 'comment-action'
           = link_to "report comment", "#", title: "Report this comment by Laurie Burdekin for removal", class: "comment-action"
-    .panel-body.comment-to-councillor-status
-      %p
-        Delivered to local councillor #{@message_to_councillor[:receiver]} #{time_ago_in_words(@message_to_councillor[:updated_at])} ago.
-        %span They are yet to respond.
+    - unless @reply_from_councillor
+      .panel-body.comment-to-councillor-status
+        %p
+          Delivered to local councillor #{@message_to_councillor[:receiver]} #{time_ago_in_words(@message_to_councillor[:updated_at])} ago.
+          %span They are yet to respond.
+  - if @reply_from_councillor
+    %figure.reply-from-councillor.comment-item.panel{id: @reply_from_councillor[:id]}
+      .panel-body
+        .comment-heading.h-card
+          .councillor-image-wrapper
+            .councillor-image
+              = image_tag "http://www.marrickville.nsw.gov.au/Global/marr/marrwr/_assets/main/lib65081/clr%20brooks%20web.jpg",
+                          alt: "Photo of #{@reply_from_councillor[:councillor][:name]}",
+                          class: "u-photo"
+          %figcaption.comment-meta
+            .comment-author.councillor
+              %span.p-name= @reply_from_councillor[:councillor][:name]
+              %span.p-role local councillor for #{Authority.find(@reply_from_councillor[:authority_id]).full_name}
+            %span.comment-time-block
+              replied to #{@message_to_councillor[:name]}
+              %time.comment-time{datetime: @reply_from_councillor[:updated_at].strftime("%F")}
+              #{time_ago_in_words(@reply_from_councillor[:updated_at])} ago
+        %blockquote.comment-text= @reply_from_councillor[:text]
+        %footer
+          .comment-actions
+            - if current_user && current_user.admin?
+              = link_to "admin", "#", class: 'comment-action'
+            = link_to "report comment", "#", title: "Report this comment by Laurie Burdekin for removal", class: "comment-action"
