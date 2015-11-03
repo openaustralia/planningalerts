@@ -4,8 +4,7 @@
     %strong #{comment.application.suburb} #{comment.application.state}
     on
     = link_to application_path(comment.application.id), title: "View application", class: "comment-application" do
-      = comment.application.description ? "“" + truncate(comment.application.description) + "” at" : "application for"
-      #{comment.application.address}:
+      = display_description_with_address(comment.application)
 %figure.comment-item.panel{id: "comment#{comment.id}"}
   .panel-body
     %figcaption.comment-meta.comment-heading
