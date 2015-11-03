@@ -1,8 +1,8 @@
-%div.comment
-  = Sanitize.clean(ApplicationController.helpers.simple_format(truncate(comment.text, :length => 700)), Sanitize::Config::BASIC).html_safe
-  %p
+%div.comment.box
+  %p.comment-meta
     %span
-      by
       = comment.name
-      on
-    = link_to comment.application.address, comment_url_with_tracking(comment: comment, theme: @theme)
+      commented on
+    #{link_to display_description_with_address(comment.application), application_url_with_tracking(id: comment.application.id, theme: @theme)}:
+  = Sanitize.clean(ApplicationController.helpers.simple_format(truncate(comment.text, :length => 700)), Sanitize::Config::BASIC).html_safe
+  = link_to "View comment on PlanningAlerts", comment_url_with_tracking(comment: comment, theme: @theme)
