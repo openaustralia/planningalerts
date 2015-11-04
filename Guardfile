@@ -1,6 +1,17 @@
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
 
+guard :livereload do
+  watch(%r{app/views/.+\.(erb|haml|slim)$})
+  watch(%r{app/helpers/.+\.rb$})
+  watch(%r{public/.+\.(css|js|html)$})
+  watch(%r{config/locales/.+\.yml$})
+  watch(%r{stylesheets/.+\.(scss|sass)$})
+  watch(%r{stylesheets/\w+/.+\.(scss|sass)$})
+  # Rails Assets Pipeline
+  watch(%r{(app|vendor)/assets/\w+/(.+\.(css|js|html)).*})  { |m| "/assets/#{m[2]}" }
+end
+
 guard :rspec, cmd: "bin/rspec" do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
@@ -22,16 +33,4 @@ guard :rspec, cmd: "bin/rspec" do
   # Turnip features and steps
   watch(%r{^spec/acceptance/(.+)\.feature$})
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$})   { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
-end
-
-
-guard :livereload do
-  watch(%r{app/views/.+\.(erb|haml|slim)$})
-  watch(%r{app/helpers/.+\.rb$})
-  watch(%r{public/.+\.(css|js|html)$})
-  watch(%r{config/locales/.+\.yml$})
-  watch(%r{stylesheets/.+\.(scss|sass)$})
-  watch(%r{stylesheets/\w+/.+\.(scss|sass)$})
-  # Rails Assets Pipeline
-  watch(%r{(app|vendor)/assets/\w+/(.+\.(css|js|html)).*})  { |m| "/assets/#{m[2]}" }
 end
