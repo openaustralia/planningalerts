@@ -40,11 +40,8 @@ ol#comments {
 }
 
 .panel-body {
-  padding: .75em 1em 1em;
-}
-
-.panel-body {
   @include clearfix;
+  padding: .75em 1em 1em;
 }
 
 .comment-location {
