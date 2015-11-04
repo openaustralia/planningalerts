@@ -2,12 +2,12 @@ module ApplicationsHelper
   def display_description_with_address(application)
     display_description =
       if application.description
-        "“" + truncate(application.description, escape: false, separator: " ") + "” at"
+        "“#{truncate(application.description, escape: false, separator: " ")}” at"
       else
         "application for"
       end
 
-    display_description + " " + application.address
+    "#{display_description} #{application.address}"
   end
 
   def static_google_map_url(options = {size: "512x512"})
