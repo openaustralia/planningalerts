@@ -16,12 +16,7 @@
             #{time_ago_in_words(comment.updated_at)} ago
     %blockquote.comment-text= comment_as_html(comment.text)
     %footer
-      %p.comment-meta
-        - # TODO: Change this to show the date in user local time.
-        - #       Could be nice and human to do 'today' and 'yesterday'
-        = link_to "Posted #{ comment.updated_at.strftime("%e %b %Y") }", comment_path(comment), title: "View comment"
-        and
-        %span delivered to #{comment.application.authority.full_name}
+      %p.comment-meta delivered to the planning authority
       .comment-actions
         - if current_user && current_user.admin?
           = link_to "admin", admin_application_comment_path(comment), class: 'comment-action'
