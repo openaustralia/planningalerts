@@ -33,6 +33,8 @@ describe ApplicationsHelper do
         expect(helper.display_description_with_address(@application))
           .to eq "“#{@application.description}” at #{@application.address}"
       }
+
+      it { expect(helper.display_description_with_address(@application)).to_not be html_safe? }
     end
 
     context "when the application has a description longer than 30 characters" do
