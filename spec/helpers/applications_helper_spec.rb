@@ -45,6 +45,17 @@ describe ApplicationsHelper do
           .to eq "“Build something really real...” at #{@application.address}"
       end
     end
+
+    context "when the application has a description with special characters" do
+      before :each do
+        @application.stub(:description).and_return("Alertations & additions")
+      end
+
+      it "should display them properly" do
+        expect(helper.display_description_with_address(@application))
+          .to eq "“Alertations & additions” at #{@application.address}"
+      end
+    end
   end
 
   describe "scraped_and_received_text" do
