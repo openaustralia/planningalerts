@@ -5,7 +5,10 @@
 
 = semantic_form_for form_target do |f|
   = f.inputs id: "comment-base-inputgroup" do
-    = f.input :text, label: "Have your say on this application",
+    - label_for_text = capture do
+      %h4#add-comment Have your say on this application
+      = render "comments/comment_form_introduction"
+    = f.input :text, label: label_for_text.html_safe,
                      placeholder: "Be polite, clear, and to the point so your comment gets listened to.",
                      hint: "Have you made a donation or gift to a Councillor or Council employee? #{link_to("You may need to disclose this", faq_path(anchor: "disclosure"))}.".html_safe,
                      input_html: { rows: "10" }
@@ -31,5 +34,5 @@
       = label_tag :little_sweety, 'Little Sweety'
       = text_field_tag :little_sweety, "", placeholder: "Please leave this blank"
   = f.actions do
-    = f.action :submit, label: "Post your #{ "public " if @application_authority_councillors }comment",
+    = f.action :submit, label: "Post your public comment",
                         button_html: {class: "button button-action"}
