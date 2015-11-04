@@ -66,6 +66,12 @@ ol#comments {
     transition: background .1s linear;
   }
 
+  .comment-location {
+    border-bottom: 1px solid lighten(#5098B9, 22%);
+    background-color: lighten(#5098B9, 42%);
+    border-radius: .5em .5em 0 0;
+  }
+
   p:last-child {
     margin-bottom: 0;
   }
