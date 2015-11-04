@@ -53,7 +53,7 @@ describe ApplicationsHelper do
         @application.stub(:description).and_return("Alertations & additions")
       end
 
-      it "should display them properly" do
+      it "should not escape them" do
         expect(helper.display_description_with_address(@application))
           .to eq "“Alertations & additions” at #{@application.address}"
       end
