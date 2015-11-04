@@ -45,7 +45,7 @@ describe ApplicationsHelper do
       @application.stub(:on_notice_from).and_return(Date.today + 2.days)
       @application.stub(:on_notice_to).and_return(Date.today + 16.days)
       helper.on_notice_text(@application).should ==
-        "The period for officially responding to this application starts <strong>in 2 days</strong> and finishes 14 days later."
+        "The period to have your comment officially considered by the planning authority starts <strong>in 2 days</strong> and finishes 14 days later."
     end
 
     describe "period has just started" do
@@ -53,14 +53,14 @@ describe ApplicationsHelper do
         @application.stub(:on_notice_from).and_return(Date.today)
         @application.stub(:on_notice_to).and_return(Date.today + 14.days)
         helper.on_notice_text(@application).should ==
-          "You have <strong>14 days</strong> left to officially respond to this application. The period for comment started today."
+          "You have <strong>14 days</strong> left to have your comment officially considered by the planning authority. The period for comment started today."
       end
 
       it "should say when the application is on notice" do
         @application.stub(:on_notice_from).and_return(Date.today - 1.day)
         @application.stub(:on_notice_to).and_return(Date.today + 13.days)
         helper.on_notice_text(@application).should ==
-          "You have <strong>13 days</strong> left to officially respond to this application. The period for comment started yesterday."
+          "You have <strong>13 days</strong> left to have your comment officially considered by the planning authority. The period for comment started yesterday."
       end
     end
 
@@ -72,13 +72,13 @@ describe ApplicationsHelper do
 
       it "should say when the application is on notice" do
         helper.on_notice_text(@application).should ==
-          "You have <strong>12 days</strong> left to officially respond to this application. The period for comment started 2 days ago."
+          "You have <strong>12 days</strong> left to have your comment officially considered by the planning authority. The period for comment started 2 days ago."
       end
 
       it "should only say when on notice to if there is no on notice from information" do
         @application.stub(:on_notice_from).and_return(nil)
         helper.on_notice_text(@application).should ==
-          "You have <strong>12 days</strong> left to officially respond to this application."
+          "You have <strong>12 days</strong> left to have your comment officially considered by the planning authority."
       end
     end
 
@@ -87,7 +87,7 @@ describe ApplicationsHelper do
         @application.stub(:on_notice_from).and_return(Date.today - 14.day)
         @application.stub(:on_notice_to).and_return(Date.today)
         helper.on_notice_text(@application).should ==
-          "<strong>Today</strong> is the last day to officially respond to this application. The period for comment started 14 days ago."
+          "<strong>Today</strong> is the last day to have your comment officially considered by the planning authority. The period for comment started 14 days ago."
       end
     end
 

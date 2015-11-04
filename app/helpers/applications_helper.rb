@@ -37,12 +37,12 @@ module ApplicationsHelper
 
   def on_notice_text(application)
     if application.on_notice_from && (Date.today < application.on_notice_from)
-      text = "The period for officially responding to this application starts <strong>#{days_in_future_in_words(application.on_notice_from)}</strong> and finishes #{distance_of_time_in_words(application.on_notice_from, application.on_notice_to)} later."
+      text = "The period to have your comment officially considered by the planning authority starts <strong>#{days_in_future_in_words(application.on_notice_from)}</strong> and finishes #{distance_of_time_in_words(application.on_notice_from, application.on_notice_to)} later."
     elsif Date.today == application.on_notice_to
-      text = "<strong>Today</strong> is the last day to officially respond to this application."
+      text = "<strong>Today</strong> is the last day to have your comment officially considered by the planning authority."
       text << " The period for comment started #{days_ago_in_words(application.on_notice_from)}." if application.on_notice_from
     elsif Date.today < application.on_notice_to
-      text = "You have <strong>#{distance_of_time_in_words(Date.today, application.on_notice_to)}</strong> left to officially respond to this application."
+      text = "You have <strong>#{distance_of_time_in_words(Date.today, application.on_notice_to)}</strong> left to have your comment officially considered by the planning authority."
       text << " The period for comment started #{days_ago_in_words(application.on_notice_from)}." if application.on_notice_from
     else
       text = "You're too late! The period for officially commenting on this application finished <strong>#{days_ago_in_words(application.on_notice_to)}</strong>."
