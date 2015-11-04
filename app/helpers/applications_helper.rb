@@ -2,7 +2,7 @@ module ApplicationsHelper
   def display_description_with_address(application)
     display_description =
       if application.description
-        "“" + truncate(application.description, escape: false) + "” at"
+        "“" + truncate(application.description, escape: false, separator: " ") + "” at"
       else
         "application for"
       end

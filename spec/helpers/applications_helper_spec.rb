@@ -42,7 +42,7 @@ describe ApplicationsHelper do
 
       it "should trucate the description" do
         expect(helper.display_description_with_address(@application))
-          .to eq "“Build something really real...” at #{@application.address}"
+          .to eq "“Build something really...” at #{@application.address}"
       end
     end
 
