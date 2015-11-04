@@ -124,7 +124,7 @@ class ApplicationsController < ApplicationController
 
     if params[:with_councillor_message] == "true" || params[:with_councillor_reply] == "true"
       @message_to_councillor = { name: "Laurie Burdekin",
-                                 receiver: "Melissa Brooks",
+                                 recipient: "Melissa Brooks",
                                  text: "Hi Melissa, this development needs to be rethought out to suit the area and the community. This land was purchased from the original home owners to be used for a bypass and should never have been rezoned to accommodate a development such as this. We need you to reject this application at the council meeting.",
                                  updated_at: 5.hours.ago,
                                  id: "99",
