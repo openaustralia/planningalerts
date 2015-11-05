@@ -93,14 +93,14 @@ ol#comments {
 }
 
 .comment-to-councillor,
-.comment-to-councillor-status {
+.comment-to-councillor-status,
+.reply-from-councillor {
   border-color: darken(#FFE8B3, 15%);
 }
 
 .comment-to-councillor,
 .reply-from-councillor {
   background: lighten(#FFE8B3, 13.5%);
-  border-color: darken(#FFE8B3, 15%);
 }
 
 .comment-to-councillor-status {
