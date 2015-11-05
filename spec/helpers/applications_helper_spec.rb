@@ -20,7 +20,7 @@ describe ApplicationsHelper do
 
       it "should add generic ‘application for’ text" do
         expect(helper.display_description_with_address(@application))
-          .to eq "application for #{@application.address}"
+          .to eq "application for Foo Road, NSW"
       end
     end
 
@@ -31,7 +31,7 @@ describe ApplicationsHelper do
 
       it {
         expect(helper.display_description_with_address(@application))
-          .to eq "“#{@application.description}” at #{@application.address}"
+          .to eq "“Build something” at Foo Road, NSW"
       }
 
       it { expect(helper.display_description_with_address(@application)).to_not be html_safe? }
@@ -44,7 +44,7 @@ describe ApplicationsHelper do
 
       it "should trucate the description" do
         expect(helper.display_description_with_address(@application))
-          .to eq "“Build something really...” at #{@application.address}"
+          .to eq "“Build something really...” at Foo Road, NSW"
       end
     end
 
@@ -55,7 +55,7 @@ describe ApplicationsHelper do
 
       it "should not escape them" do
         expect(helper.display_description_with_address(@application))
-          .to eq "“Alertations & additions” at #{@application.address}"
+          .to eq "“Alertations & additions” at Foo Road, NSW"
       end
     end
   end
