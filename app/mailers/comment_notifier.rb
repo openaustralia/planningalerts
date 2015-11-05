@@ -10,6 +10,6 @@ class CommentNotifier < ActionMailer::Base
       # Setting reply-to to ensure that we don't get the replies for email clients that are not
       # respecting the from, sender headers that we've set.
       reply_to: "#{comment.name} <#{comment.email}>",
-      to: comment.application.authority.email, subject: "Comment on application #{comment.application.council_reference}")
+      to: (comment.councillor ? comment.councillor.email : comment.application.authority.email), subject: "Comment on application #{comment.application.council_reference}")
   end
 end

@@ -62,6 +62,9 @@ feature "Send a message to a councillor" do
 
       expect(unread_emails_for(Comment.last.application.authority.email).size).to eq 0
       expect(unread_emails_for(Councillor.find_by_name("Louise Councillor").email).size).to eq 1
+
+      open_email(Councillor.find_by_name("Louise Councillor").email)
+      expect(current_email).to have_content("I think this is a really good idea")
     end
   end
 end
