@@ -112,16 +112,14 @@ class ApplicationsController < ApplicationController
     end
 
     if params[:with_councillor_message] == "true" || params[:with_councillor_reply] == "true"
-      @message_to_councillor = { name: "Laurie Burdekin",
-                                 recipient: "Melissa Brooks",
-                                 text: "Hi Melissa, this development needs to be rethought out to suit the area and the community. This land was purchased from the original home owners to be used for a bypass and should never have been rezoned to accommodate a development such as this. We need you to reject this application at the council meeting.",
-                                 updated_at: 5.hours.ago,
-                                 id: "99",
-                                 reply: "100" }
+      @message_to_councillor = Comment.new(name: "Laurie Burdekin",
+                                           text: "Hi Melissa, this development needs to be rethought out to suit the area and the community. This land was purchased from the original home owners to be used for a bypass and should never have been rezoned to accommodate a development such as this. We need you to reject this application at the council meeting.",
+                                           updated_at: 5.hours.ago,
+                                           id: "99")
 
       if params[:with_councillor_reply] == "true"
         @reply_from_councillor = { councillor: { name: "Melissa Brooks", party: "The Greens" },
-                                   parent_comment_id: "99",
+                                   parent_comment_id: @message_to_councillor.id,
                                    text: "Thanks for your message Laurie. I’ll be sure to let the council know about your views at the upcoming council meeting on 12th November. Best wishes, Melissa Brooks",
                                    updated_at: 1.hours.ago,
                                    id: "100",
