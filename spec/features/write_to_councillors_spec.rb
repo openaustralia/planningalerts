@@ -35,7 +35,7 @@ feature "Send a message to a councillor" do
       expect(page).to have_content("Write to the planning authority (#{application.authority.full_name}) if you want your comment considered when they decide whether to approve this application.")
 
       within("#comment-receiver-inputgroup") do
-        choose "councillor-2"
+        choose "Mark Gardiner"
       end
 
       fill_in("Your email", with: "example@example.com")
@@ -43,13 +43,16 @@ feature "Send a message to a councillor" do
 
       click_button("Post your public comment")
 
-      # While this is still a prototype prevent a comment from being created
-      expect(page).to_not have_content("Now check your email")
-      expect(page).to have_content("Your comment has not been sent")
-      expect(page).to_not have_content("I think this is a really good idea")
+      page.should have_content("Now check your email")
 
-      # TODO: the message appears on the page
-      # TODO: the message is sent off to the councillor
+      expect(unread_emails_for("example@example.com").size).to eq 1
+      open_email("example@example.com")
+      # TODO: Review this text, does it still make sense for these messages?
+      expect(current_email).to have_subject("Please confirm your comment")
+
+      click_first_link_in_email
+
+      expect(page).to have_content "Your comment has been sent to Mark Gardiner and is now visible on this page."
     end
   end
 end
