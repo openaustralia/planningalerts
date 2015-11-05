@@ -86,10 +86,11 @@ feature "Send a message to a councillor" do
   end
 
   context "when a message for a councillor is confirmed" do
+    given (:comment) { VCR.use_cassette('planningalerts') { create(:comment,
+                                                                   name: "Matthew Landauer",
+                                                                   councillor_id: create(:councillor, name: "Louise Councillor").id,
+                                                                   text: "I think this is a really good idea") } }
     background :each do
-      comment = VCR.use_cassette('planningalerts') { create(:comment,
-                                                            councillor_id: create(:councillor, name: "Louise Councillor").id,
-                                                            text: "I think this is a really good idea") }
       comment.confirm!
     end
 
@@ -99,6 +100,12 @@ feature "Send a message to a councillor" do
 
       open_email(Councillor.find_by_name("Louise Councillor").email)
       expect(current_email).to have_content("I think this is a really good idea")
+    end
+
+    scenario "viewing the comment on the application page" do
+      visit application_path(comment.application)
+
+      expect(page).to have_content "Matthew Landauer wrote to local councillor Louise Councillor"
     end
   end
 end
