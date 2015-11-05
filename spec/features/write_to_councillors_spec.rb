@@ -87,9 +87,8 @@ feature "Send a message to a councillor" do
 
   context "when a message for a councillor is confirmed" do
     background :each do
-      create(:councillor, name: "Louise Councillor")
       comment = VCR.use_cassette('planningalerts') { create(:comment,
-                                                            councillor_id: Councillor.find_by_name("Louise Councillor").id,
+                                                            councillor_id: create(:councillor, name: "Louise Councillor").id,
                                                             text: "I think this is a really good idea") }
       comment.confirm!
     end
