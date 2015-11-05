@@ -33,6 +33,16 @@ describe CommentNotifier do
       it "should format paragraphs correctly in the html version of the email" do
         notifier.html_part.body.to_s.should include Rails.root.join("spec/mailers/regression/comment_notifier/email1.html").read
       end
+
+      context "when the comment is for a councillor" do
+        before do
+          @comment.update councillor_id: create(:councillor).id
+        end
+
+        it "should be sent to the Councillor's email address" do
+          notifier.to.should == [@comment.councillor.email]
+        end
+      end
     end
 
     context "nsw theme" do
@@ -60,6 +70,16 @@ describe CommentNotifier do
 
       it "should format paragraphs correctly in the html version of the email" do
         notifier.html_part.body.to_s.should include Rails.root.join("spec/mailers/regression/comment_notifier/email2.html").read
+      end
+
+      context "when the comment is for a councillor" do
+        before do
+          @comment.update councillor_id: create(:councillor).id
+        end
+
+        it "should be sent to the Councillor's email address" do
+          notifier.to.should == [@comment.councillor.email]
+        end
       end
     end
   end
