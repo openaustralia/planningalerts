@@ -3,8 +3,7 @@ require 'spec_helper'
 describe CommentNotifier do
   describe "notify" do
     before :each do
-      authority = create(:contactable_authority)
-      application = mock_model(Application, authority: authority, address: "12 Foo Rd", council_reference: "X/001", description: "Building something", id: 123)
+      application = mock_model(Application, authority: create(:contactable_authority), address: "12 Foo Rd", council_reference: "X/001", description: "Building something", id: 123)
       @comment = create(:confirmed_comment, email: "foo@bar.com", name: "Matthew", application: application, text: "It's a good thing.\n\nOh yes it is.", address: "1 Bar Street")
     end
 
