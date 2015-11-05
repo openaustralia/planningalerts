@@ -93,6 +93,7 @@ ol#comments {
 }
 
 .comment-to-councillor,
+.comment-to-councillor .comment-location,
 .comment-to-councillor-status,
 .reply-from-councillor {
   border-color: darken(#FFE8B3, 15%);
@@ -101,6 +102,10 @@ ol#comments {
 .comment-to-councillor,
 .reply-from-councillor {
   background: lighten(#FFE8B3, 13.5%);
+}
+
+.comment-to-councillor .comment-location {
+  background-color: lighten(#FFE8B3, 11%);
 }
 
 .comment-to-councillor-status {
