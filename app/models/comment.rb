@@ -1,5 +1,6 @@
 class Comment < ActiveRecord::Base
   belongs_to :application
+  belongs_to :councillor
   has_many :reports
   validates_presence_of :name, :text, :address
 

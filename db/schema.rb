@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827032857) do
+ActiveRecord::Schema.define(version: 20151105030140) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "resource_id",   null: false
@@ -119,12 +119,21 @@ ActiveRecord::Schema.define(version: 20150827032857) do
     t.string   "address"
     t.boolean  "hidden",         default: false,     null: false
     t.string   "theme",          default: "default", null: false
+    t.integer  "councillor_id"
   end
 
   add_index "comments", ["application_id"], name: "index_comments_on_application_id", using: :btree
   add_index "comments", ["confirm_id"], name: "index_comments_on_confirm_id", using: :btree
   add_index "comments", ["confirmed"], name: "index_comments_on_confirmed", using: :btree
   add_index "comments", ["hidden"], name: "index_comments_on_hidden", using: :btree
+
+  create_table "councillors", force: true do |t|
+    t.string   "name"
+    t.string   "image_url"
+    t.string   "party"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0
