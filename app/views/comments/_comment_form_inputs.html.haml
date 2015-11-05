@@ -1,7 +1,4 @@
-- if @application_authority_councillors
-  - form_target = [:test_form, @application, @comment]
-- else
-  - form_target = [@application, @comment]
+- form_target = [@application, @comment]
 
 = semantic_form_for form_target do |f|
   = f.inputs id: "comment-base-inputgroup" do
@@ -18,7 +15,7 @@
                      placeholder: "e.g. Jane Citizen",
                      hint: "Please use your real full name if possible."
   - if @application_authority_councillors
-    = render "comments/comment_receiver_options"
+    = render "comments/comment_receiver_options", f: f
   = f.inputs id: "comment-detail-inputgroup" do
     = f.input :email, label: "Your email",
                       placeholder: "e.g. your@email.com",

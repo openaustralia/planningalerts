@@ -2,5 +2,5 @@
   Thanks.
   = link_to 'Your comment', comment_path(@comment)
   has been sent to
-  = @comment.application.authority.full_name
+  = @comment.councillor ? "local councillor #{@comment.councillor.name}" : @comment.application.authority.full_name
   and is now visible on this page.

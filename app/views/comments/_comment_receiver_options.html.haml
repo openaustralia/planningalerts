@@ -24,11 +24,11 @@
       %p
         Your elected councillors can answer your questions
         and represent you in council meetings.
-    - @application_authority_councillors.shuffle.each_with_index do |councillor, index|
-      %input.councillor-select-radio{id: "councillor-#{index}", name: "receiver", value: "#{index}", type: "radio"}
-      %label.councillor-select-label.h-card{for: "councillor-#{index}"}
-        %span.p-name= councillor[:name]
-        %span.p-org= councillor[:party]
+    = f.collection_radio_buttons(:councillor_id, Councillor.all.shuffle, :id, :name) do |b|
+      = b.radio_button(class: "councillor-select-radio")
+      = b.label(class: "councillor-select-label h-card") do
+        %span.p-name= b.object.name
+        %span.p-org= b.object.party
     %footer
       %strong Don’t worry if you don’t know who to contact.
       Every councillor is there to represent you

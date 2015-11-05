@@ -5,6 +5,10 @@ feature "Send a message to a councillor" do
   # let me write to my local councillor about it,
   # so that I can get their help or feedback
   # and find out where they stand on this development I care about
+  background :each do
+    create(:councillor, name: "Louise Councillor")
+  end
+
 
   context "when with_councillor param is not true" do
     background do
@@ -35,7 +39,7 @@ feature "Send a message to a councillor" do
       expect(page).to have_content("Write to the planning authority (#{application.authority.full_name}) if you want your comment considered when they decide whether to approve this application.")
 
       within("#comment-receiver-inputgroup") do
-        choose "Mark Gardiner"
+        choose "Louise Councillor"
       end
 
       fill_in("Your email", with: "example@example.com")
@@ -52,7 +56,8 @@ feature "Send a message to a councillor" do
 
       click_first_link_in_email
 
-      expect(page).to have_content "Your comment has been sent to Mark Gardiner and is now visible on this page."
+      expect(page).to have_content "Your comment has been sent to local councillor Louise Councillor and is now visible on this page."
+      expect(page).to have_content "I think this is a really good idea"
     end
   end
 end

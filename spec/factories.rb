@@ -29,6 +29,10 @@ FactoryGirl.define do
     end
   end
 
+  factory :councillor do
+    name "Louise Councillor"
+  end
+
   factory :user do
     email "foo@bar.com"
     password "foofoo"
