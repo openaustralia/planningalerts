@@ -1,6 +1,6 @@
 %span.notice-comment-confirmed
   Thanks.
-  = link_to 'Your comment', application_path(@comment.application, anchor: "comment#{@comment.id}")
+  = link_to 'Your comment', comment_path(@comment)
   has been sent to
   = @comment.application.authority.full_name
   and is now visible on this page.
