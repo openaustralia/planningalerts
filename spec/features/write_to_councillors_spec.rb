@@ -59,7 +59,18 @@ feature "Send a message to a councillor" do
 
       expect(page).to have_content "Your comment has been sent to local councillor Louise Councillor and is now visible on this page."
       expect(page).to have_content "I think this is a really good idea"
+    end
+  end
 
+  context "when a message for a councillor is confirmed" do
+    background :each do
+      comment = VCR.use_cassette('planningalerts') { create(:comment,
+                                                            councillor_id: Councillor.find_by_name("Louise Councillor").id,
+                                                            text: "I think this is a really good idea") }
+      comment.confirm!
+    end
+
+    scenario "coucillor receives the message" do
       expect(unread_emails_for(Comment.last.application.authority.email).size).to eq 0
       expect(unread_emails_for(Councillor.find_by_name("Louise Councillor").email).size).to eq 1
 
