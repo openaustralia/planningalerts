@@ -28,3 +28,8 @@
           = link_to "admin", admin_application_comment_path(comment), class: 'comment-action'
         - unless current_page?(new_comment_report_path(comment.id))
           = link_to "report comment", new_comment_report_path(comment), title: "Report this comment by #{comment.name} for removal", class: "comment-action"
+  - if comment.councillor
+    .panel-body.comment-to-councillor-status
+      %p
+        Delivered to local councillor #{comment.councillor.name} #{time_ago_in_words(comment.updated_at)} ago.
+        %span They are yet to respond.

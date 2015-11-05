@@ -106,6 +106,7 @@ feature "Send a message to a councillor" do
       visit application_path(comment.application)
 
       expect(page).to have_content "Matthew Landauer wrote to local councillor Louise Councillor"
+      expect(page).to have_content "Delivered to local councillor Louise Councillor"
     end
   end
 end
