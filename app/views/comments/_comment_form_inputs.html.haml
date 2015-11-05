@@ -12,7 +12,7 @@
     = f.input :name, label: "Your name",
                      placeholder: "e.g. Jane Citizen",
                      hint: "Please use your real full name if possible."
-  - if @application_authority_councillors
+  - if @councillors
     = render "comments/comment_receiver_options", f: f
   = f.inputs id: "comment-detail-inputgroup" do
     = f.input :email, label: "Your email",

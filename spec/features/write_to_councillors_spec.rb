@@ -5,10 +5,6 @@ feature "Send a message to a councillor" do
   # let me write to my local councillor about it,
   # so that I can get their help or feedback
   # and find out where they stand on this development I care about
-  background :each do
-    create(:councillor, name: "Louise Councillor")
-  end
-
 
   context "when with_councillor param is not true" do
     background do
@@ -19,9 +15,22 @@ feature "Send a message to a councillor" do
       end
     end
 
-    scenario "can’t see councillor messages sections" do
-      expect(page).to_not have_content("Who should this go to?")
-      # TODO: and you should not be able to write and submit a message.
+    context "and there are no councillors" do
+      scenario "can’t see councillor messages sections" do
+        expect(page).to_not have_content("Who should this go to?")
+        # TODO: and you should not be able to write and submit a message.
+      end
+    end
+
+    context "and there are councillors" do
+      background do
+        create(:councillor, name: "Louise Councillor")
+      end
+
+      scenario "can’t see councillor messages sections" do
+        expect(page).to_not have_content("Who should this go to?")
+        # TODO: and you should not be able to write and submit a message.
+      end
     end
   end
 
@@ -29,41 +38,56 @@ feature "Send a message to a councillor" do
     given(:authority) { create(:contactable_authority) }
     given(:application) { VCR.use_cassette('planningalerts') { create(:application, id: "1", authority: authority) } }
 
-    scenario "sending a message" do
-      visit application_path(application, with_councillors: "true")
+    context "and there are no councillors" do
+      scenario "can’t see councillor messages sections" do
+        visit application_path(application, with_councillors: "true")
 
-      expect(page).to have_content("Who should this go to?")
+        expect(page).to_not have_content("Who should this go to?")
+      end
+    end
 
-      fill_in("Have your say on this application", with: "I think this is a really good idea")
-      fill_in("Your name", with: "Matthew Landauer")
-
-      expect(page).to have_content("Write to the planning authority (#{application.authority.full_name}) if you want your comment considered when they decide whether to approve this application.")
-
-      within("#comment-receiver-inputgroup") do
-        choose "Louise Councillor"
+    context "and there are councillors" do
+      background do
+        create(:councillor, name: "Louise Councillor")
       end
 
-      fill_in("Your email", with: "example@example.com")
-      fill_in("Your street address", with: "11 Foo Street")
+      scenario "sending a message" do
+        visit application_path(application, with_councillors: "true")
 
-      click_button("Post your public comment")
+        expect(page).to have_content("Who should this go to?")
 
-      page.should have_content("Now check your email")
+        fill_in("Have your say on this application", with: "I think this is a really good idea")
+        fill_in("Your name", with: "Matthew Landauer")
 
-      expect(unread_emails_for("example@example.com").size).to eq 1
-      open_email("example@example.com")
-      # TODO: Review this text, does it still make sense for these messages?
-      expect(current_email).to have_subject("Please confirm your comment")
+        expect(page).to have_content("Write to the planning authority (#{application.authority.full_name}) if you want your comment considered when they decide whether to approve this application.")
 
-      click_first_link_in_email
+        within("#comment-receiver-inputgroup") do
+          choose "Louise Councillor"
+        end
 
-      expect(page).to have_content "Your comment has been sent to local councillor Louise Councillor and is now visible on this page."
-      expect(page).to have_content "I think this is a really good idea"
+        fill_in("Your email", with: "example@example.com")
+        fill_in("Your street address", with: "11 Foo Street")
+
+        click_button("Post your public comment")
+
+        page.should have_content("Now check your email")
+
+        expect(unread_emails_for("example@example.com").size).to eq 1
+        open_email("example@example.com")
+        # TODO: Review this text, does it still make sense for these messages?
+        expect(current_email).to have_subject("Please confirm your comment")
+
+        click_first_link_in_email
+
+        expect(page).to have_content "Your comment has been sent to local councillor Louise Councillor and is now visible on this page."
+        expect(page).to have_content "I think this is a really good idea"
+      end
     end
   end
 
   context "when a message for a councillor is confirmed" do
     background :each do
+      create(:councillor, name: "Louise Councillor")
       comment = VCR.use_cassette('planningalerts') { create(:comment,
                                                             councillor_id: Councillor.find_by_name("Louise Councillor").id,
                                                             text: "I think this is a really good idea") }
