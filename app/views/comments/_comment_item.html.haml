@@ -1,4 +1,4 @@
-%figure.comment-item.panel{id: "comment#{comment.id}"}
+%figure.comment-item.panel{class: ("comment-to-councillor" if comment.councillor ), id: "comment#{comment.id}"}
   - if with_address
     %h2.comment-location
       In
@@ -9,14 +9,20 @@
   .panel-body
     %figcaption.comment-meta.comment-heading
       %span.comment-author #{comment.name}
+      - if comment.councillor
+        wrote to
+        %span.comment-recipient.h-card
+          local councillor
+          %span.p-name= comment.councillor ? comment.councillor.name : "Melissa Brooks"
       %span.comment-time-block
-        commented
+        = "commented" unless comment.councillor
         = link_to comment_path(comment), title: "View comment" do
           %time.comment-time{datetime: comment.updated_at.strftime("%F")}
             #{time_ago_in_words(comment.updated_at)} ago
     %blockquote.comment-text= comment_as_html(comment.text)
     %footer
-      %p.comment-meta delivered to the planning authority
+      - unless comment.councillor
+        %p.comment-meta delivered to the planning authority
       .comment-actions
         - if current_user && current_user.admin?
           = link_to "admin", admin_application_comment_path(comment), class: 'comment-action'
