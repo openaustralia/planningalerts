@@ -86,9 +86,10 @@ feature "Send a message to a councillor" do
   end
 
   context "when a message for a councillor is confirmed" do
+    given (:councillor) { create(:councillor, name: "Louise Councillor", email: "louise@council.nsw.gov.au") }
     given (:comment) { VCR.use_cassette('planningalerts') { create(:comment,
                                                                    name: "Matthew Landauer",
-                                                                   councillor_id: create(:councillor, name: "Louise Councillor").id,
+                                                                   councillor: councillor,
                                                                    text: "I think this is a really good idea") } }
     background :each do
       comment.confirm!
@@ -96,9 +97,9 @@ feature "Send a message to a councillor" do
 
     scenario "coucillor receives the message" do
       expect(unread_emails_for(Comment.last.application.authority.email).size).to eq 0
-      expect(unread_emails_for(Councillor.find_by_name("Louise Councillor").email).size).to eq 1
+      expect(unread_emails_for("louise@council.nsw.gov.au").size).to eq 1
 
-      open_email(Councillor.find_by_name("Louise Councillor").email)
+      open_email("louise@council.nsw.gov.au")
       expect(current_email).to have_content("I think this is a really good idea")
     end
 
