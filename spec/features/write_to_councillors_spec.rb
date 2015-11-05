@@ -26,7 +26,8 @@ feature "Send a message to a councillor" do
   end
 
   context "when with_councillors param equals 'true'" do
-    given(:application) { VCR.use_cassette('planningalerts') { create(:application, id: "1", comment_url: 'mailto:foo@bar.com') } }
+    given(:authority) { create(:contactable_authority) }
+    given(:application) { VCR.use_cassette('planningalerts') { create(:application, id: "1", authority: authority) } }
 
     scenario "sending a message" do
       visit application_path(application, with_councillors: "true")
@@ -58,6 +59,8 @@ feature "Send a message to a councillor" do
 
       expect(page).to have_content "Your comment has been sent to local councillor Louise Councillor and is now visible on this page."
       expect(page).to have_content "I think this is a really good idea"
+
+      expect(unread_emails_for(Comment.last.application.authority.email).size).to eq 0
     end
   end
 end
