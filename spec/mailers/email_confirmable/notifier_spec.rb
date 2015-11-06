@@ -65,7 +65,7 @@ describe EmailConfirmable::Notifier do
     let(:application) { mock_model(Application, authority: authority, address: "10 Smith Street",
       description: "A building", council_reference: "27B/6") }
     let(:object) { mock_model(Comment, text: "This is a comment", confirm_id: "sdbfjsd3rs", email: "matthew@openaustralia.org",
-      application: application) }
+      application: application, recipient_name: nil) }
 
     context "default theme" do
       let(:notifier) { EmailConfirmable::Notifier.confirm("default", object) }

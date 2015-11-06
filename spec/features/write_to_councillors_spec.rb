@@ -92,6 +92,8 @@ feature "Send a message to a councillor" do
         open_email("example@example.com")
         # TODO: Review this text, does it still make sense for these messages?
         expect(current_email).to have_subject("Please confirm your comment")
+        expect(current_email).to have_content("Louise Councillor")
+        expect(current_email).to_not have_content("Marrickville Council")
 
         click_first_link_in_email
 
