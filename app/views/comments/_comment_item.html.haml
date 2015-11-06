@@ -31,5 +31,5 @@
   - if comment.councillor
     .panel-body.comment-to-councillor-status
       %p
-        Delivered to local councillor #{comment.councillor.name} #{time_ago_in_words(comment.updated_at)} ago.
+        Delivered to #{comment.councillor.display_name} #{time_ago_in_words(comment.updated_at)} ago.
         %span They are yet to respond.
