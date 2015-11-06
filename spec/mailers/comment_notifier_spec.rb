@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe CommentNotifier do
-  describe "notify" do
+  describe "#notify_authority" do
     before :each do
       application = mock_model(Application, authority: create(:contactable_authority), address: "12 Foo Rd", council_reference: "X/001", description: "Building something", id: 123)
       @comment = create(:confirmed_comment, email: "foo@bar.com", name: "Matthew", application: application, text: "It's a good thing.\n\nOh yes it is.", address: "1 Bar Street")
     end
 
     context "default theme" do
-      let(:notifier) { CommentNotifier.notify("default", @comment) }
+      let(:notifier) { CommentNotifier.notify_authority("default", @comment) }
 
       it "should be sent to the planning authority's feedback email address" do
         notifier.to.should == [@comment.application.authority.email]
@@ -46,7 +46,7 @@ describe CommentNotifier do
     end
 
     context "nsw theme" do
-      let(:notifier) { CommentNotifier.notify("nsw", @comment) }
+      let(:notifier) { CommentNotifier.notify_authority("nsw", @comment) }
 
       it "should be sent to the planning authority's feedback email address" do
         notifier.to.should == [@comment.application.authority.email]

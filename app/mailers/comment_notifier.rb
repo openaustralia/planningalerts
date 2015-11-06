@@ -2,7 +2,7 @@ class CommentNotifier < ActionMailer::Base
   include ActionMailerThemer
   helper :comments
 
-  def notify(theme, comment)
+  def notify_authority(theme, comment)
     @comment = comment
 
     themed_mail(theme: theme, from: "#{comment.name} <#{comment.email}>",
