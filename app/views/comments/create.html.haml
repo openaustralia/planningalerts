@@ -3,7 +3,8 @@
   %h3= yield :page_title
   %p
     Shortly you should receive an email from PlanningAlerts.org.au.
-    <span class="highlight">Click on the link in the email</span> to confirm your comment.
+    %span.highlight Click on the link in the email
+    to confirm your comment.
     Your comment will not be displayed or sent to
     = @comment.councillor ? @comment.councillor.name : @application.authority.full_name
     until you click on the link in the email.
