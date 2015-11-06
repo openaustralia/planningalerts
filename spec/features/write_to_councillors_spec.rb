@@ -36,7 +36,7 @@ feature "Send a message to a councillor" do
   end
 
   context "when with_councillors param equals 'true'" do
-    given(:authority) { create(:contactable_authority) }
+    given(:authority) { create(:contactable_authority, full_name: "Marrickville Council") }
     given(:application) { VCR.use_cassette('planningalerts') { create(:application, id: "1", authority: authority) } }
 
     context "and there are no councillors on this authority" do
@@ -85,6 +85,8 @@ feature "Send a message to a councillor" do
         click_button("Post your public comment")
 
         page.should have_content("Now check your email")
+        expect(page).to have_content("Louise Councillor")
+        expect(page).to_not have_content("Marrickville Council")
 
         expect(unread_emails_for("example@example.com").size).to eq 1
         open_email("example@example.com")
