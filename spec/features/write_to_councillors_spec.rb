@@ -72,6 +72,7 @@ feature "Send a message to a councillor" do
         fill_in("Have your say on this application", with: "I think this is a really good idea")
         fill_in("Your name", with: "Matthew Landauer")
 
+        expect(page).to have_content("Post a comment for the planning authority or one of your elected local councillors")
         expect(page).to have_content("Write to the planning authority (#{application.authority.full_name}) if you want your comment considered when they decide whether to approve this application.")
 
         within("#comment-receiver-inputgroup") do
