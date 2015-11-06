@@ -143,7 +143,7 @@ describe Comment do
     end
   end
 
-  describe "#recipient_name" do
+  describe "#recipient_display_name" do
     let(:comment) do
       VCR.use_cassette('planningalerts') do
         create(:comment)
@@ -153,19 +153,19 @@ describe Comment do
     context "when the comment application has an authority" do
       before { comment.application.authority.update_attribute(:full_name, "Marrickville Council") }
 
-      it { expect(comment.recipient_name).to eq "Marrickville Council" }
+      it { expect(comment.recipient_display_name).to eq "Marrickville Council" }
     end
 
     context "when the comment application is a different authority" do
       before { comment.application.authority.update_attribute(:full_name, "Other Council") }
 
-      it { expect(comment.recipient_name).to eq "Other Council" }
+      it { expect(comment.recipient_display_name).to eq "Other Council" }
     end
 
     context "when the comment is a message to a councillor" do
       before { comment.councillor = create(:councillor, name: "Louise Councillor")}
 
-      it { expect(comment.recipient_name).to eq "Louise Councillor" }
+      it { expect(comment.recipient_display_name).to eq "local councillor Louise Councillor" }
     end
   end
 end

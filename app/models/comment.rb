@@ -31,7 +31,7 @@ class Comment < ActiveRecord::Base
     end
   end
 
-  def recipient_name
-    councillor ? councillor.name : application.authority.full_name
+  def recipient_display_name
+    councillor ? councillor.display_name : application.authority.full_name
   end
 end

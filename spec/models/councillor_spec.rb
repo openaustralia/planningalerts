@@ -1,5 +1,7 @@
 require 'spec_helper'
 
 describe Councillor do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#display_name" do
+    it { expect(create(:councillor, name: "Steve").display_name).to eq "local councillor Steve" }
+  end
 end

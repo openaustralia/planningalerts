@@ -69,7 +69,7 @@ describe EmailConfirmable::Notifier do
                           confirm_id: "sdbfjsd3rs",
                           email: "matthew@openaustralia.org",
                           application: application,
-                          recipient_name: nil)
+                          recipient_display_name: nil)
     end
 
     context "default theme" do
