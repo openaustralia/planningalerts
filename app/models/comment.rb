@@ -30,4 +30,8 @@ class Comment < ActiveRecord::Base
       CommentNotifier.delay.notify_authority("default", self)
     end
   end
+
+  def recipient_name
+    councillor ? councillor.name : application.authority.full_name
+  end
 end
