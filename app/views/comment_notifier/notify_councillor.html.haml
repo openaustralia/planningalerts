@@ -3,7 +3,9 @@
 %p
   You’ve got a new message from
   = @comment.name
-  in relation to a local planning application for #{@comment.application.address}.
+  in relation to a
+  = succeed "." do
+    = link_to "local planning application for #{@comment.application.address}", application_url(@comment.application, protocol: "https")
   The application is for, “#{@comment.application.description}”.
 
 %p

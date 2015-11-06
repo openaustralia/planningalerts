@@ -89,7 +89,7 @@ feature "Send a message to a councillor" do
     given (:councillor) { create(:councillor, name: "Louise Councillor", email: "louise@council.nsw.gov.au") }
     given (:comment) do
       VCR.use_cassette('planningalerts') do
-        application = create(:application, address: "24 Bruce Road Glenbrook", description: "A lovely house")
+        application = create(:application, id: 8, address: "24 Bruce Road Glenbrook", description: "A lovely house")
         create(:comment, application: application,
                          name: "Matthew Landauer",
                          councillor: councillor,
@@ -110,7 +110,7 @@ feature "Send a message to a councillor" do
       expect(current_email).to_not have_content("For the attention of the General Manager / Planning Manager / Planning Department")
       expect(current_email).to have_content("Hi Louise Councillor")
       expect(current_email).to have_content("a new message from Matthew Landauer")
-      expect(current_email).to have_content("in relation to a local planning application for 24 Bruce Road Glenbrook.")
+      expect(current_email).to have_body_text('in relation to a <a href="https://dev.planningalerts.org.au/applications/8">local planning application for 24 Bruce Road Glenbrook</a>.')
       expect(current_email).to have_content("A lovely house")
       expect(current_email).to have_content("I think this is a really good idea")
     end
