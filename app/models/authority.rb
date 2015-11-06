@@ -19,6 +19,8 @@ end
 
 class Authority < ActiveRecord::Base
   has_many :applications
+  has_many :councillors
+
   scope :enabled, -> { where('disabled = 0 or disabled is null') }
   scope :active, -> { where('(disabled = 0 or disabled is null) AND morph_name != "" AND morph_name IS NOT NULL') }
 

@@ -7,24 +7,25 @@ feature "Send a message to a councillor" do
   # and find out where they stand on this development I care about
 
   context "when with_councillor param is not true" do
+    given(:authority) { create(:authority, full_name: "Foo") }
+
     background do
-      authority = create(:authority, full_name: "Foo")
       VCR.use_cassette('planningalerts') do
         application = create(:application, id: "1", authority_id: authority.id, comment_url: 'mailto:foo@bar.com')
         visit application_path(application)
       end
     end
 
-    context "and there are no councillors" do
+    context "and there are no councillors on this authority" do
       scenario "can’t see councillor messages sections" do
         expect(page).to_not have_content("Who should this go to?")
         # TODO: and you should not be able to write and submit a message.
       end
     end
 
-    context "and there are councillors" do
+    context "and there are councillors for this authority" do
       background do
-        create(:councillor, name: "Louise Councillor")
+        create(:councillor, name: "Louise Councillor", authority: authority)
       end
 
       scenario "can’t see councillor messages sections" do
@@ -38,7 +39,7 @@ feature "Send a message to a councillor" do
     given(:authority) { create(:contactable_authority) }
     given(:application) { VCR.use_cassette('planningalerts') { create(:application, id: "1", authority: authority) } }
 
-    context "and there are no councillors" do
+    context "and there are no councillors on this authority" do
       scenario "can’t see councillor messages sections" do
         visit application_path(application, with_councillors: "true")
 
@@ -46,9 +47,21 @@ feature "Send a message to a councillor" do
       end
     end
 
-    context "and there are councillors" do
+    context "and there are councillors but not on this authority" do
       background do
-        create(:councillor, name: "Louise Councillor")
+        create(:councillor, name: "Louise Councillor", authority: create(:authority))
+      end
+
+      scenario "can’t see councillor messages sections" do
+        visit application_path(application, with_councillors: "true")
+
+        expect(page).to_not have_content("Who should this go to?")
+      end
+    end
+
+    context "and there are councillors on this authority" do
+      background do
+        create(:councillor, name: "Louise Councillor", authority: authority)
       end
 
       scenario "sending a message" do

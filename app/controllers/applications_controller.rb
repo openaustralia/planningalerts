@@ -108,7 +108,7 @@ class ApplicationsController < ApplicationController
     @alert = Alert.new(address: @application.address)
 
     if params[:with_councillors] == "true"
-      @councillors = Councillor.all.shuffle if Councillor.any?
+      @councillors = @application.authority.councillors.shuffle if @application.authority.councillors.any?
     end
 
     if params[:with_councillor_message] == "true" || params[:with_councillor_reply] == "true"
