@@ -87,10 +87,16 @@ feature "Send a message to a councillor" do
 
   context "when a message for a councillor is confirmed" do
     given (:councillor) { create(:councillor, name: "Louise Councillor", email: "louise@council.nsw.gov.au") }
-    given (:comment) { VCR.use_cassette('planningalerts') { create(:comment,
-                                                                   name: "Matthew Landauer",
-                                                                   councillor: councillor,
-                                                                   text: "I think this is a really good idea") } }
+    given (:comment) do
+      VCR.use_cassette('planningalerts') do
+        application = create(:application, address: "24 Bruce Road Glenbrook", description: "A lovely house")
+        create(:comment, application: application,
+                         name: "Matthew Landauer",
+                         councillor: councillor,
+                         text: "I think this is a really good idea")
+      end
+    end
+
     background :each do
       comment.confirm!
     end
@@ -102,6 +108,10 @@ feature "Send a message to a councillor" do
       open_email("louise@council.nsw.gov.au")
 
       expect(current_email).to_not have_content("For the attention of the General Manager / Planning Manager / Planning Department")
+      expect(current_email).to have_content("Hi Louise Councillor")
+      expect(current_email).to have_content("a new message from Matthew Landauer")
+      expect(current_email).to have_content("in relation to a local planning application for 24 Bruce Road Glenbrook.")
+      expect(current_email).to have_content("A lovely house")
       expect(current_email).to have_content("I think this is a really good idea")
     end
 
