@@ -1,3 +1,20 @@
-TODO
+Hi <%= @comment.councillor.name %>,
 
-<%= @comment.text.html_safe %>
+You’ve got a new message from <%= @comment.name %> in relation to a local
+planning application for <%= @comment.application.address %>.
+The application is for:
+
+    <%= @comment.application.description %>
+
+<%= @comment.name %> writes:
+
+    <%= @comment.text.html_safe %>
+
+This message was posted publicly on PlanningAlerts.
+You can publicly respond to this message by simply replying to this email.
+
+If this comment is spam, abusive, unlawful or harassing you can report it for removal from PlanningAlerts.
+
+Best wishes,
+
+PlanningAlerts
