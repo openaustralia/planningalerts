@@ -31,6 +31,10 @@ FactoryGirl.define do
     factory :confirmed_comment do
       confirmed true
     end
+
+    factory :comment_to_councillor do
+      association :councillor
+    end
   end
 
   factory :councillor do

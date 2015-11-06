@@ -33,16 +33,6 @@ describe CommentNotifier do
       it "should format paragraphs correctly in the html version of the email" do
         notifier.html_part.body.to_s.should include Rails.root.join("spec/mailers/regression/comment_notifier/email1.html").read
       end
-
-      context "when the comment is for a councillor" do
-        before do
-          @comment.update councillor_id: create(:councillor).id
-        end
-
-        it "should be sent to the Councillor's email address" do
-          notifier.to.should == [@comment.councillor.email]
-        end
-      end
     end
 
     context "nsw theme" do
@@ -71,16 +61,36 @@ describe CommentNotifier do
       it "should format paragraphs correctly in the html version of the email" do
         notifier.html_part.body.to_s.should include Rails.root.join("spec/mailers/regression/comment_notifier/email2.html").read
       end
+    end
+  end
 
-      context "when the comment is for a councillor" do
-        before do
-          @comment.update councillor_id: create(:councillor).id
-        end
-
-        it "should be sent to the Councillor's email address" do
-          notifier.to.should == [@comment.councillor.email]
-        end
+  describe "#notify_councillor" do
+    let(:comment_text) { "It's a good thing.\n\nOh yes it is." }
+    let(:comment) do
+      VCR.use_cassette('planningalerts') do
+        application = create(:application, council_reference: "X/001", address: "24 Bruce Road Glenbrook")
+        create(:comment_to_councillor, email: "foo@bar.com", name: "Matthew", application: application, text: comment_text, address: "1 Bar Street")
       end
+    end
+
+    context "default theme" do
+      let(:notifier) { CommentNotifier.notify_councillor("default", comment) }
+
+      it { expect(notifier.to).to eql [comment.councillor.email] }
+      it { expect(notifier.sender).to eql "contact@planningalerts.org.au" }
+      it { expect(notifier.subject).to eql "Planning application at 24 Bruce Road Glenbrook" }
+      it { expect(notifier.text_part).to have_content comment_text }
+      it { expect(notifier.html_part).to have_content comment_text }
+
+      # TODO
+      it "should be from the special email address we set up to accept replies" do
+        # expect(notifier.from).to eql ["???"]
+        pending "We haven't worked out what this should be"
+      end
+    end
+
+    context "nsw theme" do
+      # It should not be enabled for the NSW theme
     end
   end
 end

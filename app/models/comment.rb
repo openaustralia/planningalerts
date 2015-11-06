@@ -24,6 +24,10 @@ class Comment < ActiveRecord::Base
 
   # Send the comment to the planning authority
   def after_confirm
-    CommentNotifier.delay.notify_authority("default", self)
+    if councillor
+      CommentNotifier.delay.notify_councillor("default", self)
+    else
+      CommentNotifier.delay.notify_authority("default", self)
+    end
   end
 end

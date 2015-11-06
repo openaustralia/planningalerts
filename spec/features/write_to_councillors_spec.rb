@@ -100,6 +100,8 @@ feature "Send a message to a councillor" do
       expect(unread_emails_for("louise@council.nsw.gov.au").size).to eq 1
 
       open_email("louise@council.nsw.gov.au")
+
+      expect(current_email).to_not have_content("For the attention of the General Manager / Planning Manager / Planning Department")
       expect(current_email).to have_content("I think this is a really good idea")
     end
 
