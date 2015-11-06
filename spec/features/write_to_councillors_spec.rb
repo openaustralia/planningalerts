@@ -84,7 +84,7 @@ feature "Send a message to a councillor" do
 
         click_button("Post your public comment")
 
-        page.should have_content("Now check your email")
+        expect(page).to have_content("Now check your email")
         expect(page).to have_content("Louise Councillor")
         expect(page).to_not have_content("Marrickville Council")
 
