@@ -144,35 +144,26 @@ describe Comment do
   end
 
   describe "#recipient_name" do
-    context "when the comment application has an authority" do
-      let(:comment) do
-        VCR.use_cassette('planningalerts') do
-          application = create(:application, authority: create(:authority, full_name: "Marrickville Council"))
-          create(:comment, application: application)
-        end
+    let(:comment) do
+      VCR.use_cassette('planningalerts') do
+        create(:comment)
       end
+    end
+
+    context "when the comment application has an authority" do
+      before { comment.application.authority.update_attribute(:full_name, "Marrickville Council") }
 
       it { expect(comment.recipient_name).to eq "Marrickville Council" }
     end
 
     context "when the comment application is a different authority" do
-      let(:comment) do
-        VCR.use_cassette('planningalerts') do
-          application = create(:application, authority: create(:authority, full_name: "Other Council"))
-          create(:comment, application: application)
-        end
-      end
+      before { comment.application.authority.update_attribute(:full_name, "Other Council") }
 
       it { expect(comment.recipient_name).to eq "Other Council" }
     end
 
     context "when the comment is a message to a councillor" do
-      let(:comment) do
-        VCR.use_cassette('planningalerts') do
-          application = create(:application, authority: create(:authority, full_name: "Other Council"))
-          create(:comment, application: application, councillor: create(:councillor, name: "Louise Councillor"))
-        end
-      end
+      before { comment.councillor = create(:councillor, name: "Louise Councillor")}
 
       it { expect(comment.recipient_name).to eq "Louise Councillor" }
     end
