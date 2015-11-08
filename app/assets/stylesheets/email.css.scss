@@ -108,41 +108,7 @@ a {
   background: $yellow;
 }
 
-.comment {
-  background: $lightest_gray;
-  border-width: 1px;
-  border-style: solid;
-  border-color: $light_gray;
-
-  a {
-    font-weight: bold;
-  }
-
-  p {
-    margin-top: 0;
-    margin-bottom: 15px;
-    margin-bottom: 1em;
-  }
-}
-
-.comment-location {
-  font-size: 1em;
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-weight: normal;
-}
-
-.comment-meta {
-  span {
-    color: $mid_gray;
-  }
-}
-
-.comment-author,
-.comment-recipient {
-  display: inline-block;
-  font-weight: bold;
-}
+@import "partials/email_comments";
 
 .applications-more {
   padding-left: 15px;
