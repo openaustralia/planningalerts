@@ -21,6 +21,28 @@ $base-email-layout-unit: 15px;
   padding-left: $base-email-layout-unit;
 }
 
+.module {
+  margin-top: 6px;
+  margin-right: 0;
+  margin-bottom: 25px;
+  margin-left: 0;
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+}
+
+.panel-body {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  padding-top: $base-email-layout-unit;
+  padding-right: $base-email-layout-unit;
+  padding-bottom: $base-email-layout-unit;
+  padding-left: $base-email-layout-unit;
+}
+
 body {
   font-family: sans-serif;
 }

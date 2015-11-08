@@ -17,9 +17,8 @@
 
 .comment-location {
   font-size: 1em;
-  margin-top: 0;
-  margin-bottom: $base-email-layout-unit;
   font-weight: normal;
+  border-bottom: 1px solid $light_gray;
 }
 
 .comment-meta {
