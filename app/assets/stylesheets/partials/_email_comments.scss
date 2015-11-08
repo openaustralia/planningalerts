@@ -19,6 +19,11 @@
   font-size: 1em;
   font-weight: normal;
   border-bottom: 1px solid $light_gray;
+  color: $mid_gray;
+
+  a {
+    font-weight: normal;
+  }
 }
 
 .comment-meta {
