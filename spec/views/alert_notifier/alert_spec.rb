@@ -21,6 +21,20 @@ describe "alert_notifier/alert.html.haml" do
     expect(rendered).to have_content("Alterations & additions")
   end
 
+  context "when there is a comment to an authority" do
+    before do
+      comment = VCR.use_cassette('planningalerts') do
+        create(:comment_to_authority, name: "Matthew Landauer")
+      end
+      assign(:comments, [comment])
+      assign(:alert, create(:alert))
+
+      render
+    end
+
+    it { expect(rendered).to have_content("Matthew Landauer commented") }
+  end
+
   context "when the recipient is not a subscriber" do
     before :each do
       assign(:alert, create(:alert))

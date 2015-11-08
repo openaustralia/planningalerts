@@ -36,6 +36,10 @@ FactoryGirl.define do
       confirmed true
     end
 
+    factory :comment_to_authority do
+      councillor_id nil
+    end
+
     factory :comment_to_councillor do
       association :councillor
     end
