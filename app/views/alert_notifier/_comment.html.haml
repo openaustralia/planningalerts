@@ -18,3 +18,8 @@
           commented
     = Sanitize.clean(ApplicationController.helpers.simple_format(truncate(comment.text, :length => 700)), Sanitize::Config::BASIC).html_safe
     = link_to "View comment on PlanningAlerts", comment_url_with_tracking(comment: comment, theme: @theme)
+  - if comment.councillor
+    .panel-body.comment-to-councillor-status
+      %p
+        Delivered to #{comment.councillor.display_name}.
+        %span They are yet to respond.

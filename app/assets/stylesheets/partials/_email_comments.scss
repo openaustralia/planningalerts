@@ -37,3 +37,15 @@
   display: inline-block;
   font-weight: bold;
 }
+
+.comment-to-councillor-status {
+  border-top: 1px solid $light_gray;
+
+  p {
+    margin-bottom: 0;
+  }
+
+  span {
+    display: inline-block;
+  }
+}

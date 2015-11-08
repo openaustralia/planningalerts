@@ -54,6 +54,7 @@ describe "alert_notifier/alert.html.haml" do
     end
 
     it { expect(rendered).to have_content("Matthew Landauer wrote to local councillor Louise Councillor") }
+    it { expect(rendered).to have_content("Delivered to local councillor Louise Councillor") }
   end
 
   context "when the recipient is not a subscriber" do
