@@ -8,15 +8,17 @@ $light_gray: $lightest-cool-highlight;
 $lightest_gray: #fafafa;
 $dark_blue: $dark;
 
+$base-email-layout-unit: 15px;
+
 .box {
   margin-top: 6px;
   margin-right: 0;
   margin-bottom: 25px;
   margin-left: 0;
-  padding-top: 15px;
-  padding-right: 15px;
-  padding-bottom: 15px;
-  padding-left: 15px;
+  padding-top: $base-email-layout-unit;
+  padding-right: $base-email-layout-unit;
+  padding-bottom: $base-email-layout-unit;
+  padding-left: $base-email-layout-unit;
 }
 
 body {
@@ -71,6 +73,6 @@ a {
 
   .footer-inner {
     padding-top: 5px;
-    padding-left: 15px;
+    padding-left: $base-email-layout-unit;
   }
 }

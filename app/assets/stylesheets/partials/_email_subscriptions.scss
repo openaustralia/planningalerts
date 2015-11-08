@@ -4,9 +4,9 @@
   margin-right: 0;
   margin-bottom: 25px;
   padding-top: 0;
-  padding-right: 15px;
-  padding-bottom: 15px;
-  padding-left: 15px;
+  padding-right: $base-email-layout-unit;
+  padding-bottom: $base-email-layout-unit;
+  padding-left: $base-email-layout-unit;
   background-color: $dark_blue !important;
   color: #ffffff;
   font-size: 14px;
@@ -29,7 +29,7 @@
 }
 
 .trial-banner-button-container {
-  padding-top: 15px;
+  padding-top: $base-email-layout-unit;
   padding-right: 16px;
   float: left;
 }

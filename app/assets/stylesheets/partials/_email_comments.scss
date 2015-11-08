@@ -10,7 +10,7 @@
 
   p {
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: $base-email-layout-unit;
     margin-bottom: 1em;
   }
 }
@@ -18,7 +18,7 @@
 .comment-location {
   font-size: 1em;
   margin-top: 0;
-  margin-bottom: 15px;
+  margin-bottom: $base-email-layout-unit;
   font-weight: normal;
 }
 
