@@ -24,6 +24,10 @@ FactoryGirl.define do
     address "12 Foo Street"
     association :application
 
+    trait :confirmed do
+      confirmed true
+    end
+
     factory :unconfirmed_comment do
       confirmed false
     end

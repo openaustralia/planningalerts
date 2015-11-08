@@ -19,4 +19,21 @@ feature "View a message sent to a councillor" do
       expect(page).to have_content("wrote to local councillor")
     end
   end
+
+  given(:comment) do
+    VCR.use_cassette('planningalerts') do
+      create(
+        :comment_to_councillor,
+        :confirmed,
+        name: "Richard Pope",
+        councillor: create(:councillor, name: "Louise Councillor")
+      )
+    end
+  end
+
+  scenario "on the application page" do
+    visit application_path(comment.application)
+
+    expect(page).to have_content("Richard Pope wrote to local councillor Louise Councillor")
+  end
 end
