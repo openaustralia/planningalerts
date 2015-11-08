@@ -2,10 +2,13 @@ require 'spec_helper'
 
 # HTML email
 describe "alert_notifier/alert.html.haml" do
+  let(:application) do
+    VCR.use_cassette('planningalerts') do
+      application = create(:application, description: "Alterations & additions")
+    end
+  end
+
   before(:each) do
-    application = mock_model(Application, address: "Bar Street",
-      description: "Alterations & additions", council_reference: "007",
-      location: double("Location", lat: 1.0, lng: 2.0))
     assign(:applications, [application])
     assign(:comments, [])
     assign(:host, "foo.com")
