@@ -4,7 +4,9 @@ require 'spec_helper'
 describe "alert_notifier/alert.html.haml" do
   let(:application) do
     VCR.use_cassette('planningalerts') do
-      application = create(:application, description: "Alterations & additions")
+      application = create(:application,
+                           description: "Alterations & additions",
+                           address: "24 Bruce Road Glenbrook")
     end
   end
 
@@ -24,7 +26,11 @@ describe "alert_notifier/alert.html.haml" do
   context "when there is a comment to an authority" do
     before do
       comment = VCR.use_cassette('planningalerts') do
-        create(:comment_to_authority, name: "Matthew Landauer")
+        create(
+          :comment_to_authority,
+          name: "Matthew Landauer",
+          application: application
+        )
       end
       assign(:comments, [comment])
       assign(:alert, create(:alert))
@@ -33,6 +39,7 @@ describe "alert_notifier/alert.html.haml" do
     end
 
     it { expect(rendered).to have_content("Matthew Landauer commented") }
+    it { expect(rendered).to have_content("On “Alterations & additions” at 24 Bruce Road Glenbrook") }
   end
 
   context "when the recipient is not a subscriber" do
