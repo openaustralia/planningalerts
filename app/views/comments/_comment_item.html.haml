@@ -13,7 +13,7 @@
         wrote to
         %span.comment-recipient.h-card
           local councillor
-          %span.p-name= comment.councillor ? comment.councillor.name : "Melissa Brooks"
+          %span.p-name= comment.councillor.name
       %span.comment-time-block
         = "commented" unless comment.councillor
         = link_to comment_path(comment), title: "View comment" do
