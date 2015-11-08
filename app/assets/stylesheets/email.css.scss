@@ -137,6 +137,12 @@ a {
   }
 }
 
+.comment-author,
+.comment-recipient {
+  display: inline-block;
+  font-weight: bold;
+}
+
 .applications-more {
   padding-left: 15px;
 }
