@@ -8,7 +8,7 @@
         #{display_description_with_address(comment.application)}:
   .panel-body
     %figcaption.comment-meta.comment-heading
-      %span.comment-author #{comment.name}
+      %span.comment-author= comment.name
       - if comment.councillor
         wrote to
         %span.comment-recipient.h-card
