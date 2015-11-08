@@ -8,6 +8,12 @@
   %p.comment-meta
     %span
       = comment.name
-      commented
+      - if comment.councillor
+        wrote to
+        %span.comment-recipient.h-card
+          local councillor
+          %span.p-name= comment.councillor.name
+      - else
+        commented
   = Sanitize.clean(ApplicationController.helpers.simple_format(truncate(comment.text, :length => 700)), Sanitize::Config::BASIC).html_safe
   = link_to "View comment on PlanningAlerts", comment_url_with_tracking(comment: comment, theme: @theme)

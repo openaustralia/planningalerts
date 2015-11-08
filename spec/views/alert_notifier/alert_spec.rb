@@ -42,6 +42,20 @@ describe "alert_notifier/alert.html.haml" do
     it { expect(rendered).to have_content("On “Alterations & additions” at 24 Bruce Road Glenbrook") }
   end
 
+  context "when there is a comment to a councillor" do
+    before do
+      comment = VCR.use_cassette('planningalerts') do
+        create(:comment_to_councillor, name: "Matthew Landauer")
+      end
+      assign(:comments, [comment])
+      assign(:alert, create(:alert))
+
+      render
+    end
+
+    it { expect(rendered).to have_content("Matthew Landauer wrote to local councillor Louise Councillor") }
+  end
+
   context "when the recipient is not a subscriber" do
     before :each do
       assign(:alert, create(:alert))
