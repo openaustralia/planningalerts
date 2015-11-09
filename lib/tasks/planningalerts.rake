@@ -13,6 +13,14 @@ namespace :planningalerts do
     task :email => :environment do
       Alert.process_all_active_alerts(Logger.new(STDOUT))
     end
+
+    desc "Reset `last_sent` on all alerts to nil and then send emails"
+    task :reset_last_sent_and_email => [:reset_last_sent, :email]
+
+    desc "Set last_sent to nil on all alerts"
+    task :reset_last_sent => :environment do
+      Alert.all.each { |alert| alert.update(last_sent: nil) }
+    end
   end
 
   desc "Generate XML sitemap"
