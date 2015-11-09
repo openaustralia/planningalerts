@@ -1,12 +1,8 @@
 .comment {
   border-width: 1px;
   border-style: solid;
-  border-color: $formal-comment-border-color;
-  background-color: $formal-comment-background-color;
-
-  .comment-location {
-    border-color: $formal-comment-border-color;
-  }
+  border-color: $light_gray;
+  background-color: $lightest_gray;
 
   a {
     font-weight: bold;
@@ -22,10 +18,9 @@
 .comment-location {
   font-size: 1em;
   font-weight: normal;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
+  border-bottom: 1px solid $light_gray;
   color: $mid_gray;
-  background-color: $formal-comment-header-color;
+  background-color: $light_gray;
 
   a {
     font-weight: normal;
@@ -44,24 +39,8 @@
   font-weight: bold;
 }
 
-.comment-to-councillor,
-.comment-to-councillor .comment-location,
 .comment-to-councillor-status {
-  border-color: $councillor-message-border-color;
-}
-
-.comment-to-councillor {
-  background: $councillor-message-background-color;
-}
-
-.comment-to-councillor .comment-location {
-  background-color: $councillor-message-header-color;
-}
-
-.comment-to-councillor-status {
-  border-top-width: 1px;
-  border-top-style: solid;
-  background-color: #fff;
+  border-top: 1px solid $light_gray;
 
   p {
     margin-bottom: 0;
