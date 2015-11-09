@@ -8,6 +8,14 @@ $warm-highlight: #e3821f;
 $cool-highlight: #505050;
 $light-cool-highlight: #aac7bc;
 $lightest-cool-highlight: #e7e7e7;
+$councillor-message-yellow: #FFE8B3;
+$councillor-message-border-color: darken($councillor-message-yellow, 15%);
+$councillor-message-header-color: lighten($councillor-message-yellow, 11%);
+$councillor-message-background-color: lighten($councillor-message-yellow, 13.5%);
+$formal-comment-blue: #5098B9;
+$formal-comment-border-color: lighten($formal-comment-blue, 22%);
+$formal-comment-header-color: lighten($formal-comment-blue, 42%);
+$formal-comment-background-color: lighten($formal-comment-blue, 46.5%);
 
 $content-background: #fcfdfc;
 $background-overlay: transparentize($darkest,0.8);
