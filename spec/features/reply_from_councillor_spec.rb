@@ -16,7 +16,7 @@ feature "Councillor replies to a message sent to them" do
 
   background { comment.confirm! }
 
-  scenario "reply to a message and it's displayed on the application page" do
+  scenario "it's entered by an admin and displayed on the application page" do
     open_email("louise@council.nsw.gov.au")
     expect(current_email).to have_reply_to "replies@planningalerts.org.au"
     # The councillor replies to the message
