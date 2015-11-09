@@ -1,2 +1,2 @@
 sphinx: rvm . do bundle exec rake ts:run_in_foreground RAILS_ENV=production
-worker: rvm . do bundle exec rake jobs:work RAILS_ENV=production
+worker: rvm . do bundle exec dotenv rake jobs:work RAILS_ENV=production
