@@ -26,11 +26,9 @@ describe "alert_notifier/alert.html.haml" do
   context "when there is a comment to an authority" do
     before do
       comment = VCR.use_cassette('planningalerts') do
-        create(
-          :comment_to_authority,
-          name: "Matthew Landauer",
-          application: application
-        )
+        create(:comment_to_authority,
+               name: "Matthew Landauer",
+               application: application)
       end
       assign(:comments, [comment])
       assign(:alert, create(:alert))
@@ -141,11 +139,9 @@ describe "alert_notifier/alert.text.erb" do
   context "when there is a comment to an authority" do
     before do
       comment = VCR.use_cassette('planningalerts') do
-        create(
-          :comment_to_authority,
-          name: "Matthew Landauer",
-          application: application
-        )
+        create(:comment_to_authority,
+               name: "Matthew Landauer",
+               application: application)
       end
       assign(:comments, [comment])
       assign(:alert, create(:alert))
