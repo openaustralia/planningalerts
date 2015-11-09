@@ -6,6 +6,11 @@ Local councillor <%= @comment.councillor.name %> replied:
 
 <%= @reply.text %>
 
+=========================================================================
+
+View and share this reply on PlanningAlerts:
+<%= application_url(@comment.application, protocol: "https", anchor: "reply#{@reply.id}") %>
+
 Best wishes,
 
 PlanningAlerts
