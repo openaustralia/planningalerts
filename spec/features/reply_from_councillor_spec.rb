@@ -50,7 +50,8 @@ end
 feature "Commenter is notified of the councillors reply" do
   given (:councillor) { create(:councillor, name: "Louise Councillor") }
   given (:application) { create(:application,
-                                address: "24 Bruce Road Glenbrook") }
+                                address: "24 Bruce Road Glenbrook",
+                                description: "A lovely house") }
   given (:comment) do
     VCR.use_cassette('planningalerts') do
       create(:comment,
@@ -60,13 +61,17 @@ feature "Commenter is notified of the councillors reply" do
              councillor: councillor)
     end
   end
+  given (:email_intro_text) { "Local councillor Louise Councillor replied to your message about the planning application “A lovely house” at 24 Bruce Road Glenbrook:" }
+  given (:reply_text) { "I'm glad you think it's a good idea. I do too." }
 
   background do
-    create(:reply, comment: comment, councillor: councillor)
+    create(:reply, comment: comment, councillor: councillor, text: reply_text)
   end
 
   scenario "commenter gets an email with the councillor’s reply" do
     open_last_email_for("matthew@openaustralia.org")
     expect(current_email).to have_subject "Local Councillor Louise Councillor replied to your message"
+    expect(current_email).to have_body_text email_intro_text
+    expect(current_email).to have_body_text reply_text
   end
 end
