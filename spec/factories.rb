@@ -45,6 +45,13 @@ FactoryGirl.define do
     end
   end
 
+  factory :reply do
+    text "Thanks for your comment, I agree"
+    received_at 1.day.ago
+    association :comment
+    association :councillor
+  end
+
   factory :councillor do
     name "Louise Councillor"
     email "louise@council.state.gov"

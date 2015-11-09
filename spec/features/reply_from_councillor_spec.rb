@@ -46,3 +46,26 @@ feature "Councillor replies to a message sent to them" do
     expect(page).to have_content "I'm glad you think it's a good idea. I do too."
   end
 end
+
+feature "Commenter is notified of the councillors reply" do
+  given (:councillor) { create(:councillor, name: "Louise Councillor") }
+  given (:application) { create(:application,
+                                address: "24 Bruce Road Glenbrook") }
+  given (:comment) do
+    VCR.use_cassette('planningalerts') do
+      create(:comment,
+             :confirmed,
+             email: "matthew@openaustralia.org",
+             application: application)
+    end
+  end
+
+  background do
+    create(:reply, comment: comment)
+  end
+
+  scenario "commenter gets an email with the councillor’s reply" do
+    open_last_email_for("matthew@openaustralia.org")
+    expect(current_email).to have_subject "Local councillor Louise Councillor replied to your message"
+  end
+end
