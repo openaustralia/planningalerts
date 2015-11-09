@@ -117,6 +117,32 @@
   width: 80% !important;
   cursor: pointer;
 
+  .councillor-option {
+    display: table;
+  }
+
+  .councillor-image-wrapper,
+  .councillor-details {
+    vertical-align: top;
+    display: table-cell;
+  }
+
+  .councillor-image-wrapper {
+    padding: 0 1em 0 .5em;
+  }
+
+  .councillor-image {
+    width: 4em;
+    height: 4.5em;
+    overflow: hidden;
+    border-radius: .25em;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
   .p-name,
   .p-org {
     display: block;

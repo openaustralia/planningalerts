@@ -27,8 +27,16 @@
     = f.collection_radio_buttons(:councillor_id, @councillors, :id, :name) do |b|
       = b.radio_button(class: "councillor-select-radio")
       = b.label(class: "councillor-select-label h-card") do
-        %span.p-name= b.object.name
-        %span.p-org= b.object.party
+        .councillor-option
+          - if b.object.image_url.present?
+            .councillor-image-wrapper
+              .councillor-image
+                = image_tag b.object.image_url,
+                            alt: "Photo of #{b.object.name}",
+                            class: "u-photo"
+          .councillor-details
+            %span.p-name= b.object.name
+            %span.p-org= b.object.party
     %footer
       %strong Don’t worry if you don’t know who to contact.
       Every councillor is there to represent you
