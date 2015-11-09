@@ -2,6 +2,7 @@ class Comment < ActiveRecord::Base
   belongs_to :application
   belongs_to :councillor
   has_many :reports
+  has_many :replies
   validates_presence_of :name, :text, :address
 
   acts_as_email_confirmable

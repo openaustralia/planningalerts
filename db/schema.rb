@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106041236) do
+ActiveRecord::Schema.define(version: 20151109025518) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "resource_id",   null: false
@@ -160,6 +160,16 @@ ActiveRecord::Schema.define(version: 20151106041236) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
+
+  create_table "replies", force: true do |t|
+    t.text     "text"
+    t.datetime "received_at"
+    t.integer  "comment_id"
+    t.integer  "councillor_id"
+  end
+
+  add_index "replies", ["comment_id"], name: "index_replies_on_comment_id", using: :btree
+  add_index "replies", ["councillor_id"], name: "index_replies_on_councillor_id", using: :btree
 
   create_table "reports", force: true do |t|
     t.string   "name"
