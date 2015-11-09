@@ -24,13 +24,17 @@ set :rails_env, "production" #added for delayed job
 if stage == "production"
   server "kedumba.openaustraliafoundation.org.au", :app, :web, :db, primary: true
   set :deploy_to, "/srv/www/www.#{application}"
+  set :app_name, "planningalerts"
 elsif stage == "test"
   server "kedumba.openaustraliafoundation.org.au", :app, :web, :db, primary: true
   set :deploy_to, "/srv/www/test.#{application}"
+  set :app_name, "planningalerts-test"
   set :honeybadger_env, "staging"
 elsif stage == "development"
   server "planningalerts.org.au.dev", :app, :web, :db, primary: true
   set :deploy_to, "/srv/www"
+else
+  raise "Unknown stage: #{stage}"
 end
 
 # We need to run this after our collector mongrels are up and running
@@ -92,21 +96,21 @@ end
 namespace :foreman do
   desc "Export the Procfile to Ubuntu's upstart scripts"
   task :export, roles: :app do
-    run "cd #{current_path} && sudo bundle exec foreman export upstart /etc/init -u deploy -a planningalerts -f Procfile.production -l /srv/www/www.planningalerts.org.au/log --root /srv/www/www.planningalerts.org.au/app/current"
+    run "cd #{current_path} && sudo /home/deploy/.rvm/wrappers/planningalerts.org.au/app/bundle exec foreman export upstart /etc/init -u deploy -a #{app_name} -f Procfile.production -l #{deploy_to}/current/log --root #{deploy_to}/current"
   end
 
   desc "Start the application services"
   task :start, roles: :app do
-    sudo "service planningalerts start"
+    sudo "service #{app_name} start"
   end
 
   desc "Stop the application services"
   task :stop, roles: :app do
-    sudo "service planningalerts stop"
+    sudo "service #{app_name} stop"
   end
 
   desc "Restart the application services"
   task :restart, roles: :app do
-    run "sudo service planningalerts restart"
+    run "sudo service #{app_name} restart"
   end
 end
