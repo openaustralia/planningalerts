@@ -123,10 +123,15 @@ end
 
 # Text only email
 describe "alert_notifier/alert.text.erb" do
+  let(:application) do
+    VCR.use_cassette('planningalerts') do
+      create(:application,
+             description: "Alterations & additions",
+             address: "24 Bruce Road Glenbrook")
+    end
+  end
+
   before(:each) do
-    application = mock_model(Application, address: "Bar Street",
-      description: "Alterations & additions", council_reference: "007",
-      location: double("Location", lat: 1.0, lng: 2.0))
     assign(:applications, [application])
     assign(:comments, [])
     assign(:host, "foo.com")
