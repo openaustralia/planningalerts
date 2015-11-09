@@ -1,5 +1,6 @@
 class ReplyNotifier < ActionMailer::Base
   include ActionMailerThemer
+  helper :comments
 
   def notify_comment_author(theme, reply)
     @reply = reply

@@ -10,7 +10,7 @@
 
 %p Local councillor #{@comment.councillor.name} replied:
 
-%blockquote= @reply.text
+%blockquote= comment_as_html(@reply.text)
 
 %p
   %strong
