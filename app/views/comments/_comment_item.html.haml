@@ -30,8 +30,33 @@
           = link_to "admin", admin_application_comment_path(comment), class: 'comment-action'
         - unless current_page?(new_comment_report_path(comment.id))
           = link_to "report comment", new_comment_report_path(comment), title: "Report this comment by #{comment.name} for removal", class: "comment-action"
-  - if comment.councillor
+  - if comment.councillor && comment.replies.empty?
     .panel-body.comment-to-councillor-status
       %p
         Delivered to #{comment.councillor.display_name} #{time_ago_in_words(comment.updated_at)} ago.
         %span They are yet to respond.
+- comment.replies.each do |reply|
+  %figure.reply-from-councillor.comment-item.panel{id: "reply#{reply.id}"}
+    .panel-body
+      .comment-heading.h-card
+        - if reply.councillor.image_url.present?
+          .councillor-image-wrapper
+            .councillor-image
+              = image_tag reply.councillor.image_url,
+                          alt: "Photo of #{reply.councillor.name}",
+                          class: "u-photo"
+        %figcaption.comment-meta
+          .comment-author.councillor
+            %span.p-name= reply.councillor.name
+            %span.p-role local councillor for #{reply.councillor.authority.full_name}
+          %span.comment-time-block
+            replied to
+            = link_to reply.comment.name, "#comment#{reply.comment.id}", title: "View comment"
+            = link_to "#comment#{reply.comment.id}", title: "View comment" do
+              %time.comment-time{datetime: reply.received_at.strftime("%F")}
+                #{time_ago_in_words(reply.received_at)} ago
+      %blockquote.comment-text= reply.text
+      - if current_user && current_user.admin?
+        %footer
+          .comment-actions
+            = link_to "admin", admin_reply_path(reply),class: 'comment-action'
