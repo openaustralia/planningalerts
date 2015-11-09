@@ -138,6 +138,25 @@ describe "alert_notifier/alert.text.erb" do
     assign(:theme, "default")
   end
 
+  context "when there is a comment to an authority" do
+    before do
+      comment = VCR.use_cassette('planningalerts') do
+        create(
+          :comment_to_authority,
+          name: "Matthew Landauer",
+          application: application
+        )
+      end
+      assign(:comments, [comment])
+      assign(:alert, create(:alert))
+
+      render
+    end
+
+    it { expect(rendered).to have_content("Matthew Landauer commented") }
+    it { expect(rendered).to have_content("on “Alterations & additions” at 24 Bruce Road Glenbrook") }
+  end
+
   context "when the recipient is not a subscriber" do
     before :each do
       assign(:alert, create(:alert))

@@ -1,5 +1,5 @@
 
-<%= comment.name %> commented on <%= comment.application.address %>:
+<%= comment.name %> commented on <%= display_description_with_address(comment.application) %>:
 
 <%= Sanitize.clean(truncate(comment.text, :length => 700), Sanitize::Config::BASIC).html_safe %>
 
