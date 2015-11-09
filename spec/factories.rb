@@ -48,6 +48,7 @@ FactoryGirl.define do
   factory :councillor do
     name "Louise Councillor"
     email "louise@council.state.gov"
+    association :authority
   end
 
   factory :user do
