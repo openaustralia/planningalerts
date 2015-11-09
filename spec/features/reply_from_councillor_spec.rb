@@ -67,6 +67,6 @@ feature "Commenter is notified of the councillors reply" do
 
   scenario "commenter gets an email with the councillor’s reply" do
     open_last_email_for("matthew@openaustralia.org")
-    expect(current_email).to have_subject "Local councillor Louise Councillor replied to your message"
+    expect(current_email).to have_subject "Local Councillor Louise Councillor replied to your message"
   end
 end
