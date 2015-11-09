@@ -48,20 +48,25 @@ feature "Councillor replies to a message sent to them" do
 end
 
 feature "Commenter is notified of the councillors reply" do
-  given (:councillor) { create(:councillor, name: "Louise Councillor") }
+  given (:authority)   { create(:authority, full_name: "Marrickville Council") }
+  given (:councillor)  { create(:councillor,
+                                name: "Louise Councillor",
+                                authority: authority) }
   given (:application) { create(:application,
+                                id: 8,
                                 address: "24 Bruce Road Glenbrook",
                                 description: "A lovely house") }
   given (:comment) do
     VCR.use_cassette('planningalerts') do
       create(:comment,
              :confirmed,
+             id: 5,
              email: "matthew@openaustralia.org",
              application: application,
              councillor: councillor)
     end
   end
-  given (:email_intro_text) { "Local councillor Louise Councillor replied to your message about the planning application “A lovely house” at 24 Bruce Road Glenbrook" }
+  given (:email_intro_text) { "Local councillor Louise Councillor replied to <a href=\"https://dev.planningalerts.org.au/applications/8#comment5\">your message</a> about the planning application “A lovely house” at 24 Bruce Road Glenbrook" }
   given (:reply_text) { "I'm glad you think it's a good idea. I do too." }
 
   background do
@@ -73,5 +78,8 @@ feature "Commenter is notified of the councillors reply" do
     expect(current_email).to have_subject "Local Councillor Louise Councillor replied to your message"
     expect(current_email).to have_body_text email_intro_text
     expect(current_email).to have_body_text reply_text
+
+    click_first_link_in_email
+    expect(page).to have_content "Louise Councillor local councillor for Marrickville Council replied to Matthew Landauer"
   end
 end

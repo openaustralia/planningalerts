@@ -1,11 +1,21 @@
 %p
-  Local councillor #{@comment.councillor.name} replied to your message
+  Local councillor #{@comment.councillor.name} replied to
+  = link_to "your message", application_url(@comment.application,
+                                            protocol: "https",
+                                            anchor: "comment#{@comment.id}")
   about the planning application “#{@comment.application.description}”
   at #{@comment.application.address}.
 
 %p Local councillor #{@comment.councillor.name} wrote:
 
 %blockquote= @reply.text
+
+%p
+  %strong
+    = link_to "View and share this reply on PlanningAlerts",
+              application_url(@comment.application,
+                              protocol: "https",
+                              anchor: "reply#{@reply.id}")
 
 %p Best wishes,
 
