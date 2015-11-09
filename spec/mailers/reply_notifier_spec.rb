@@ -17,7 +17,7 @@ describe ReplyNotifier do
     end
     let(:reply) { create(:reply, comment: comment, councillor: councillor)}
     let(:notifier) { ReplyNotifier.notify_comment_author("default", reply)}
-    let(:email_intro_text) { "Local councillor Louise Councillor replied to your message about the planning application “A lovely house” at 24 Bruce Road Glenbrook:" }
+    let(:email_intro_text) { "Local councillor Louise Councillor replied to your message about the planning application “A lovely house” at 24 Bruce Road Glenbrook" }
 
     it { expect(notifier.to).to eq ["matthew@openaustralia.org"] }
     it { expect(notifier.sender).to eq "contact@planningalerts.org.au" }

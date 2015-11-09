@@ -61,7 +61,7 @@ feature "Commenter is notified of the councillors reply" do
              councillor: councillor)
     end
   end
-  given (:email_intro_text) { "Local councillor Louise Councillor replied to your message about the planning application “A lovely house” at 24 Bruce Road Glenbrook:" }
+  given (:email_intro_text) { "Local councillor Louise Councillor replied to your message about the planning application “A lovely house” at 24 Bruce Road Glenbrook" }
   given (:reply_text) { "I'm glad you think it's a good idea. I do too." }
 
   background do
