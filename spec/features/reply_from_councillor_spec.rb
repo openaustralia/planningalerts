@@ -35,6 +35,11 @@ feature "Councillor replies to a message sent to them" do
     # Enter the reply
     select "Louise Councillor", from: "Councillor"
     fill_in "Text", with: "I'm glad you think it's a good idea. I do too."
+    select "2015", from: "Year"
+    select "November", from: "Month"
+    select "9", from: "Day"
+    select "15", from: "Hour"
+    select "01", from: "Minute"
     click_button "Create Reply"
 
     visit application_path application
