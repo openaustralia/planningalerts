@@ -56,12 +56,13 @@ feature "Commenter is notified of the councillors reply" do
       create(:comment,
              :confirmed,
              email: "matthew@openaustralia.org",
-             application: application)
+             application: application,
+             councillor: councillor)
     end
   end
 
   background do
-    create(:reply, comment: comment)
+    create(:reply, comment: comment, councillor: councillor)
   end
 
   scenario "commenter gets an email with the councillor’s reply" do
