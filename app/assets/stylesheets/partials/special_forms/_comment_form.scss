@@ -80,6 +80,7 @@
 
 #councillors-list-toggler {
   ~ .councillor-select-list {
+    margin: 0 0 2em 2em;
     display: none;
   }
 
@@ -89,7 +90,7 @@
 }
 
 .councillor-select-list {
-  margin: 0 0 2em 2em;
+  margin: 0 0 0 2em;
   padding: 1em 0 0;
   list-style: none;
   clear: both;
