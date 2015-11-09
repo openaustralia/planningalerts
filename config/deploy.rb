@@ -96,7 +96,7 @@ end
 namespace :foreman do
   desc "Export the Procfile to Ubuntu's upstart scripts"
   task :export, roles: :app do
-    run "cd #{current_path} && sudo /home/deploy/.rvm/wrappers/planningalerts.org.au/app/bundle exec foreman export upstart /etc/init -u deploy -a #{app_name} -f Procfile.production -l #{deploy_to}/current/log --root #{deploy_to}/current"
+    run "cd #{current_path} && sudo /home/deploy/.rvm/wrappers/planningalerts.org.au/app/bundle exec foreman export upstart /etc/init -u deploy -a #{app_name} -f Procfile.production -l #{deploy_to}/current/log --root #{deploy_to}/current --env /dev/null"
   end
 
   desc "Start the application services"
