@@ -156,6 +156,12 @@ ol#comments {
   font-weight: bold;
 }
 
+.reply-from-councillor {
+  .comment-author {
+    display: block;
+  }
+}
+
 .comment-time-block {
   font-size: 0.9em;
   display: block;
