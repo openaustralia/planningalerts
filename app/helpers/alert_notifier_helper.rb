@@ -36,6 +36,18 @@ module AlertNotifierHelper
     )
   end
 
+  def reply_url_with_tracking(theme: nil, reply: nil)
+    base_params = host_and_protocol_for_theme(theme).merge(base_tracking_params)
+
+    application_url(
+      base_params.merge(
+        id: reply.comment.application.id,
+        anchor: "reply#{reply.id}",
+        utm_campaign: "view-reply"
+      )
+    )
+  end
+
   def new_comment_url_with_tracking(theme: nil, id: nil)
     base_params = host_and_protocol_for_theme(theme).merge(base_tracking_params)
 

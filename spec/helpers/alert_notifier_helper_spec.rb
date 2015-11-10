@@ -83,6 +83,30 @@ describe AlertNotifierHelper do
       end
     end
 
+    describe "#reply_url_with_tracking" do
+      let(:reply) do
+        VCR.use_cassette('planningalerts') do
+          create(:reply, id: 5)
+        end
+      end
+
+      it "returns the correct url" do
+        expect(
+          helper.reply_url_with_tracking(
+            theme: @theme,
+            reply: reply
+          )
+        )
+        .to eq application_url(
+          @base_params.merge(
+            id: reply.comment.application.id,
+            anchor: "reply5",
+            utm_campaign: 'view-reply'
+          )
+        )
+      end
+    end
+
     describe "#new_comment_url_with_tracking" do
       it {
         expect(
