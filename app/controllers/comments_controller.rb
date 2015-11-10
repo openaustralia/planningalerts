@@ -1,6 +1,16 @@
 class CommentsController < ApplicationController
   def index
-    @comments = Comment.visible.order("updated_at DESC").paginate page: params[:page]
+    @description = "Recent comments"
+
+    if params[:authority_id]
+      authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+      comments_to_display = authority.comments
+      @description << " on applications from #{authority.full_name_and_state}"
+    else
+      comments_to_display = Comment.all
+    end
+
+    @comments = comments_to_display.visible.order("updated_at DESC").paginate page: params[:page]
     @rss = comments_url(params.merge(format: "rss", page: nil))
 
     respond_to do |format|
