@@ -7,6 +7,7 @@ ActiveAdmin.register Authority do
   index do
     column "Name", :full_name
     column :state
+    column :email
     actions
   end
 
