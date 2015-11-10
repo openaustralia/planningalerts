@@ -1,6 +1,16 @@
 ActiveAdmin.register Reply do
   actions :all
 
+  index do
+    column :text, sortable: false do |reply|
+      truncate(reply.text)
+    end
+    column :councillor
+    column :received_at
+    column :comment
+    actions
+  end
+
   remove_filter :comment
 
   form do |f|
