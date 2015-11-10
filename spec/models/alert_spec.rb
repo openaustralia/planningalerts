@@ -252,12 +252,11 @@ describe Alert do
 
   describe ".applications_with_new_replies" do
     let (:alert) do
-      Alert.create!(email: "matthew@openaustralia.org",
-                    address: @address,
-                    radius_meters: 2000,
-                    lat: 1.0,
-                    lng: 2.0,
-                    last_sent: nil)
+      create(:alert,
+             address: @address,
+             radius_meters: 2000,
+             lat: 1.0,
+             lng: 2.0)
     end
 
     context "when there are no new relies near by" do
