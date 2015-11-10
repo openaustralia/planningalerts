@@ -1,6 +1,10 @@
 module AlertNotifierHelper
   include ActionMailerThemer
 
+  def capitalise_initial_character(text)
+    text[0].upcase + text[1..-1]
+  end
+
   def host_and_protocol_for_theme(theme)
     { host: host(theme), protocol: protocol(theme) }
   end

@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe AlertNotifierHelper do
+  describe "#capitalise_initial_character(text)" do
+    it { expect(helper.capitalise_initial_character("foo bar")).to eq "Foo bar" }
+    it { expect(helper.capitalise_initial_character("foo Bar")).to eq "Foo Bar" }
+  end
+
   describe "#host_and_protocol_for_theme" do
     include ActionMailerThemer
 
