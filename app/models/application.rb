@@ -3,6 +3,7 @@ require 'open-uri'
 class Application < ActiveRecord::Base
   belongs_to :authority
   has_many :comments
+  has_many :replies, through: :comments
   before_save :geocode
   geocoded_by :address, latitude: :lat, longitude: :lng
 

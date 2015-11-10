@@ -116,6 +116,13 @@ class Alert < ActiveRecord::Base
     Application.near([location.lat, location.lng], radius_km, units: :km).joins(:comments).where('comments.updated_at > ?', cutoff_time).where('comments.confirmed' => true).where('comments.hidden' => false).uniq
   end
 
+  def applications_with_new_replies
+    Application.near([location.lat, location.lng], radius_km, units: :km)
+               .joins(:replies)
+               .where('replies.received_at > ?', cutoff_time)
+               .uniq
+  end
+
   def new_comments
     comments = []
     # Doing this in this roundabout way because I'm not sure how to use "near" together with joins

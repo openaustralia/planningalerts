@@ -250,6 +250,58 @@ describe Alert do
     end
   end
 
+  describe ".applications_with_new_replies" do
+    let (:alert) do
+      Alert.create!(email: "matthew@openaustralia.org",
+                    address: @address,
+                    radius_meters: 2000,
+                    lat: 1.0,
+                    lng: 2.0,
+                    last_sent: nil)
+    end
+
+    context "when there are no new relies near by" do
+      it { expect(alert.applications_with_new_replies).to eq [] }
+    end
+
+    context "when there is a new reply near by" do
+      it "should return the application it belongs to" do
+        application = create(:application,
+                             lat: 1.0,
+                             lng: 2.0,
+                             address: @address,
+                             suburb: "Glenbrook",
+                             state: "NSW",
+                             postcode: "2773",
+                             no_alerted: 3)
+        create(:reply,
+               comment: create(:comment, application: application),
+               received_at: 1.hours.ago)
+
+        expect(alert.applications_with_new_replies).to eq [application]
+      end
+    end
+
+    context "when there is a new reply far away" do
+      it "should not return the application it belongs to" do
+        far_away = alert.location.endpoint(0, 5001) # 5001 m north of alert
+        application = create(:application,
+                             lat: far_away.lat,
+                             lng: far_away.lng,
+                             address: @address,
+                             suburb: "Glenbrook",
+                             state: "NSW",
+                             postcode: "2773",
+                             no_alerted: 3)
+        create(:reply,
+               comment: create(:comment, application: application),
+               received_at: 1.hours.ago)
+
+        expect(alert.applications_with_new_replies).to eq []
+      end
+    end
+  end
+
   describe "#process!" do
     context "an alert with no new comments" do
       let(:alert) { Alert.create!(email: "matthew@openaustralia.org", address: @address, radius_meters: 2000) }
