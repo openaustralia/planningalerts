@@ -8,6 +8,8 @@ ActiveAdmin.register Authority do
     column "Name", :full_name
     column :state
     column :email
+    column(:number_of_applications) { |a| a.applications.count }
+    column(:number_of_comments) { |a| a.comments.count }
     actions
   end
 
