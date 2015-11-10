@@ -97,6 +97,7 @@ PlanningalertsApp::Application.routes.draw do
         get :per_week
       end
     end
+    resources :comments, only: [:index]
     collection do
       get :test_feed
     end
