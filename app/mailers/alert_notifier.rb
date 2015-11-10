@@ -2,11 +2,13 @@ class AlertNotifier < ActionMailer::Base
   include ActionMailerThemer
   helper :application, :applications
 
-  def alert(theme, alert, applications, comments = [])
+  def alert(theme, alert, applications, comments = [], replies = [])
     @theme = theme
     @alert = alert
     @applications = applications
     @comments = comments
+    @replies = replies
+    @comments_and_replies = @comments + @replies
 
     themed_mail(theme: theme, from: email_from(theme), to: alert.email,
       subject: render_to_string(partial: "subject",

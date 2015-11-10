@@ -250,6 +250,55 @@ describe Alert do
     end
   end
 
+  describe "#new_replies" do
+    let (:alert) do
+      create(:alert,
+             address: @address,
+             radius_meters: 2000,
+             lat: 1.0,
+             lng: 2.0)
+    end
+
+    context "when their are no new replies" do
+      it { expect(alert.new_replies).to eq [] }
+    end
+
+    it "when there is a new reply on a nearby application it finds a new reply" do
+      application = create(:application,
+                            lat: 1.0,
+                            lng: 2.0,
+                            address: @address,
+                            suburb: "Glenbrook",
+                            state: "NSW",
+                            postcode: "2773",
+                            no_alerted: 3)
+      reply = create(:reply,
+                      comment: create(:comment, application: application),
+                      received_at: 1.hours.ago)
+
+      expect(alert.new_replies).to eq [reply]
+    end
+
+    it "only finds two new reply when there are two new replies on a sinlge application" do
+      application = create(:application,
+                            lat: 1.0,
+                            lng: 2.0,
+                            address: @address,
+                            suburb: "Glenbrook",
+                            state: "NSW",
+                            postcode: "2773",
+                            no_alerted: 3)
+      reply1 = create(:reply,
+                      comment: create(:comment, application: application),
+                      received_at: 1.hours.ago)
+      reply2 = create(:reply,
+                      comment: create(:comment, application: application),
+                      received_at: 2.hours.ago)
+
+      expect(alert.new_replies).to eq [reply1, reply2]
+    end
+  end
+
   describe "#applications_with_new_replies" do
     let (:alert) do
       create(:alert,
@@ -320,8 +369,8 @@ describe Alert do
           alert.stub(:recent_applications).and_return([application])
         end
 
-        it "should return the number of applications and comments sent" do
-          alert.process!.should == [1, 0]
+        it "should return the number of applications, comments and replies sent" do
+          alert.process!.should == [1, 0, 0]
         end
 
         it "should send an email" do
@@ -363,6 +412,35 @@ describe Alert do
         it "should update the last_processed time" do
           alert.process!
           (alert.last_processed - Time.now).abs.should < 1
+        end
+      end
+
+      context "and one new reply nearby" do
+        let(:application) do
+          create(:application,
+                 lat: 1.0,
+                 lng: 2.0,
+                 address: "24 Bruce Road, Glenbrook, NSW",
+                 suburb: "Glenbrook",
+                 state: "NSW",
+                 postcode: "2773",
+                 no_alerted: 3)
+        end
+        let(:reply) { create(:reply,
+                             comment: create(:comment, application: application),
+                             received_at: 1.hours.ago) }
+
+        before :each do
+          alert.stub(:new_replies).and_return([reply])
+        end
+
+        it "should return the number of applications, comments and replies sent" do
+          alert.process!.should == [0, 0, 1]
+        end
+
+        it "should send an email" do
+          alert.process!
+          ActionMailer::Base.deliveries.size.should == 1
         end
       end
     end

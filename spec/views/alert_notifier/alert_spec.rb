@@ -13,6 +13,8 @@ describe "alert_notifier/alert.html.haml" do
   before(:each) do
     assign(:applications, [application])
     assign(:comments, [])
+    assign(:replies, [])
+    assign(:comments_and_replies, [])
     assign(:host, "foo.com")
     assign(:theme, "default")
   end
@@ -31,6 +33,7 @@ describe "alert_notifier/alert.html.haml" do
                application: application)
       end
       assign(:comments, [comment])
+      assign(:comments_and_replies, [comment])
       assign(:alert, create(:alert))
 
       render
@@ -46,6 +49,7 @@ describe "alert_notifier/alert.html.haml" do
         create(:comment_to_councillor, name: "Matthew Landauer")
       end
       assign(:comments, [comment])
+      assign(:comments_and_replies, [comment])
       assign(:alert, create(:alert))
 
       render
@@ -53,6 +57,22 @@ describe "alert_notifier/alert.html.haml" do
 
     it { expect(rendered).to have_content("Matthew Landauer wrote to local councillor Louise Councillor") }
     it { expect(rendered).to have_content("Delivered to local councillor Louise Councillor") }
+  end
+
+  context "when there is a reply from a councillor" do
+    before do
+      comment = VCR.use_cassette('planningalerts') do
+        create(:comment_to_councillor, name: "Matthew Landauer")
+      end
+      reply = create(:reply, comment: comment, councillor: comment.councillor)
+      assign(:replies, [reply])
+      assign(:comments_and_replies, [reply])
+      assign(:alert, create(:alert))
+
+      render
+    end
+
+    it { expect(rendered).to have_content "Local councillor Louise Councillor replied to Matthew Landauer"}
   end
 
   context "when the recipient is not a subscriber" do
@@ -132,6 +152,7 @@ describe "alert_notifier/alert.text.erb" do
   before(:each) do
     assign(:applications, [application])
     assign(:comments, [])
+    assign(:comments_and_replies, [])
     assign(:host, "foo.com")
     assign(:theme, "default")
   end
@@ -144,6 +165,7 @@ describe "alert_notifier/alert.text.erb" do
                application: application)
       end
       assign(:comments, [comment])
+      assign(:comments_and_replies, [comment])
       assign(:alert, create(:alert))
 
       render
@@ -159,6 +181,7 @@ describe "alert_notifier/alert.text.erb" do
         create(:comment_to_councillor, name: "Matthew Landauer")
       end
       assign(:comments, [comment])
+      assign(:comments_and_replies, [comment])
       assign(:alert, create(:alert))
 
       render
