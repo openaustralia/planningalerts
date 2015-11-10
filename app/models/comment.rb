@@ -33,6 +33,6 @@ class Comment < ActiveRecord::Base
   end
 
   def recipient_display_name
-    councillor ? councillor.display_name : application.authority.full_name
+    councillor ? councillor.prefixed_name : application.authority.full_name
   end
 end

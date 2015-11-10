@@ -5,7 +5,7 @@ class Councillor < ActiveRecord::Base
 
   validates :authority, presence: true
 
-  def display_name
+  def prefixed_name
     "local councillor #{name}"
   end
 end
