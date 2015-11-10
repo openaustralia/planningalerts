@@ -10,6 +10,7 @@ ActiveAdmin.register Councillor do
   end
 
   remove_filter :comments
+  remove_filter :replies
 
   permit_params :name, :image_url, :party, :email, :authority_id
 end
