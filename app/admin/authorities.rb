@@ -7,6 +7,9 @@ ActiveAdmin.register Authority do
   index do
     column "Name", :full_name
     column :state
+    column :email
+    column(:number_of_applications) { |a| a.applications.count }
+    column(:number_of_comments) { |a| a.comments.count }
     actions
   end
 
@@ -28,6 +31,7 @@ ActiveAdmin.register Authority do
   end
 
   remove_filter :applications
+  remove_filter :comments
 
   form do |f|
     inputs "Name" do
@@ -54,6 +58,18 @@ ActiveAdmin.register Authority do
     authority = Authority.find(params[:id])
     authority.delay.collect_applications
     redirect_to({action: :show}, notice: "Queued for scraping!")
+  end
+
+  csv do
+    column :full_name
+    column :short_name
+    column :disabled
+    column :state
+    column :email
+    column :population_2011
+    column :morph_name
+    column(:number_of_applications) { |a| a.applications.count }
+    column(:number_of_comments) { |a| a.comments.count }
   end
 
   permit_params :full_name, :short_name, :state, :email, :population_2011, :morph_name, :disabled
