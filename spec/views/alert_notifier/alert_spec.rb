@@ -44,19 +44,45 @@ describe "alert_notifier/alert.html.haml" do
   end
 
   context "when there is a comment to a councillor" do
-    before do
-      comment = VCR.use_cassette('planningalerts') do
+    let(:comment) do
+      VCR.use_cassette('planningalerts') do
         create(:comment_to_councillor, name: "Matthew Landauer")
       end
+    end
+
+    before :each do
       assign(:comments, [comment])
       assign(:comments_and_replies, [comment])
       assign(:alert, create(:alert))
-
-      render
     end
 
-    it { expect(rendered).to have_content("Matthew Landauer wrote to local councillor Louise Councillor") }
-    it { expect(rendered).to have_content("Delivered to local councillor Louise Councillor") }
+    it "includes the comment" do
+      render
+
+      expect(rendered).to have_content("Matthew Landauer wrote to local councillor Louise Councillor")
+    end
+
+    context "and it has not be replied to" do
+      before :each do
+        render
+      end
+
+      it { expect(rendered).to have_content("Delivered to local councillor Louise Councillor") }
+      it { expect(rendered).to have_content("They are yet to respond") }
+    end
+
+    context "and it has be replied to" do
+      let(:reply) { create(:reply, comment: comment, councillor: comment.councillor) }
+
+      before :each do
+        assign(:replies, [reply])
+        assign(:comments_and_replies, [comment, reply])
+
+        render
+      end
+
+      it { expect(rendered).to_not have_content("They are yet to respond") }
+    end
   end
 
   context "when there is a reply from a councillor" do
