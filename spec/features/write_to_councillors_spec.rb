@@ -100,6 +100,15 @@ feature "Send a message to a councillor" do
         expect(page).to have_content "Your comment has been sent to local councillor Louise Councillor and is now visible on this page."
         expect(page).to have_content "I think this is a really good idea"
       end
+
+      context "but we're on the NSW theme" do
+        scenario "we can't see councillor messages sections" do
+          visit application_url(application, with_councillors: "true", host: "nsw.127.0.0.1.xip.io")
+
+          expect(page).to have_content("Application Tracking")
+          expect(page).to_not have_content("Who should this go to?")
+        end
+      end
     end
   end
 
