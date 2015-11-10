@@ -250,7 +250,7 @@ describe Alert do
     end
   end
 
-  describe ".applications_with_new_replies" do
+  describe "#applications_with_new_replies" do
     let (:alert) do
       create(:alert,
              address: @address,
