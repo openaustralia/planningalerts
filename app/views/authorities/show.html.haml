@@ -21,7 +21,10 @@
       of #{@authority.median_applications_per_week} applications per week (ignoring weeks without any applications at all).
 
     %p
-      = link_to "Browse all recent applications", authority_applications_path(@authority.short_name_encoded)
+      Browse all
+      = link_to "recent applications", authority_applications_path(@authority.short_name_encoded)
+      or
+      = link_to "comments on applications", authority_comments_path(@authority.short_name_encoded)
 
     %h4 Number of applications scraped each week
     #chart
