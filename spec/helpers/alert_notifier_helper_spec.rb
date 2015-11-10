@@ -186,6 +186,8 @@ describe AlertNotifierHelper do
                               location: double("Location", lat: 1.0, lng: 2.0))
     end
     let(:comment) { create(:comment, application: application) }
+    let(:comment2) { create(:comment, application: application) }
+    let(:reply) { create(:reply, comment: comment) }
 
     context "with an application" do
       subject { helper.subject(alert, [application], []) }
@@ -197,9 +199,19 @@ describe AlertNotifierHelper do
       it { should eql "1 new comment on planning applications near 123 Sample St" }
     end
 
+    context "with a reply" do
+      subject { helper.subject(alert, [], [], [reply]) }
+      it { should eql "1 new comment on planning applications near 123 Sample St" }
+    end
+
     context "with an application and a comment" do
       subject { helper.subject(alert, [application], [comment]) }
       it { should eql "1 new comment and 1 new planning application near 123 Sample St" }
+    end
+
+    context "with an application, a comment, and a reply" do
+      subject { helper.subject(alert, [application], [comment], [reply]) }
+      it { should eql "2 new comments and 1 new planning application near 123 Sample St" }
     end
 
     context "with an expired subscription" do
