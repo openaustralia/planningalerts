@@ -94,7 +94,8 @@ module ApplicationHelper
       { name: "Renee Wright", email_md5: "11917617eb0fe763c52889906b2a5540" },
       { name: "Dave Slutzkin", email_md5: "b5491c409c2d00ff7590066599d264cb" },
       { name: "Hugh Stimson", email_md5: "5f970615ea543215fa783c89012a6287" },
-      { name: "Eric Tam", email_md5: "7eac54f31e5f205964f9a306838d8899" }
+      { name: "Eric Tam", email_md5: "7eac54f31e5f205964f9a306838d8899" },
+      { name: "Ben M", email_md5: "a99b7918f974feb902e89bb613b32991" }
     ]
   end
 end
