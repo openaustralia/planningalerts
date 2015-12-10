@@ -2,8 +2,16 @@
 <% if @alert.expired_subscription? %>
 <%= render "expired_subscription" %>
 <% else %>
-<% unless @comments_and_replies.empty? %>
+<% unless @comments.empty? %>
 <%= render "comments" -%>
+<% unless @replies.empty? && @applications.empty? -%>
+
+============================================================
+
+<% end %>
+<% end %>
+<% unless @replies.empty? %>
+<%= render "replies" -%>
 <% unless @applications.empty? -%>
 
 ============================================================

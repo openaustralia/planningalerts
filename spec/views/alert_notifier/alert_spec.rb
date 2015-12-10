@@ -178,6 +178,7 @@ describe "alert_notifier/alert.text.erb" do
   before(:each) do
     assign(:applications, [application])
     assign(:comments, [])
+    assign(:replies, [])
     assign(:comments_and_replies, [])
     assign(:host, "foo.com")
     assign(:theme, "default")
