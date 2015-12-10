@@ -1,0 +1,8 @@
+.box.comments-header
+  - if @replies.count == 1
+    The following <strong>new reply</strong> has been made on a planning application
+  - else
+    The following <strong>new replies</strong> have been made on planning applications
+  within #{meters_in_words(@alert.radius_meters)} of
+  %strong= @alert.address
+= render :partial => "reply", :collection => @replies
