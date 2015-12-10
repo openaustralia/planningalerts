@@ -14,7 +14,6 @@ describe "alert_notifier/alert.html.haml" do
     assign(:applications, [application])
     assign(:comments, [])
     assign(:replies, [])
-    assign(:comments_and_replies, [])
     assign(:host, "foo.com")
     assign(:theme, "default")
   end
@@ -33,7 +32,6 @@ describe "alert_notifier/alert.html.haml" do
                application: application)
       end
       assign(:comments, [comment])
-      assign(:comments_and_replies, [comment])
       assign(:alert, create(:alert))
 
       render
@@ -52,7 +50,6 @@ describe "alert_notifier/alert.html.haml" do
 
     before :each do
       assign(:comments, [comment])
-      assign(:comments_and_replies, [comment])
       assign(:alert, create(:alert))
     end
 
@@ -76,7 +73,6 @@ describe "alert_notifier/alert.html.haml" do
 
       before :each do
         assign(:replies, [reply])
-        assign(:comments_and_replies, [comment, reply])
 
         render
       end
@@ -92,7 +88,6 @@ describe "alert_notifier/alert.html.haml" do
       end
       reply = create(:reply, comment: comment, councillor: comment.councillor)
       assign(:replies, [reply])
-      assign(:comments_and_replies, [reply])
       assign(:alert, create(:alert))
 
       render
@@ -179,7 +174,6 @@ describe "alert_notifier/alert.text.erb" do
     assign(:applications, [application])
     assign(:comments, [])
     assign(:replies, [])
-    assign(:comments_and_replies, [])
     assign(:host, "foo.com")
     assign(:theme, "default")
   end
@@ -192,7 +186,6 @@ describe "alert_notifier/alert.text.erb" do
                application: application)
       end
       assign(:comments, [comment])
-      assign(:comments_and_replies, [comment])
       assign(:alert, create(:alert))
 
       render
@@ -208,7 +201,6 @@ describe "alert_notifier/alert.text.erb" do
         create(:comment_to_councillor, name: "Matthew Landauer")
       end
       assign(:comments, [comment])
-      assign(:comments_and_replies, [comment])
       assign(:alert, create(:alert))
 
       render
@@ -224,7 +216,6 @@ describe "alert_notifier/alert.text.erb" do
       end
       reply = create(:reply, comment: comment, councillor: comment.councillor)
       assign(:replies, [reply])
-      assign(:comments_and_replies, [reply])
       assign(:alert, create(:alert))
 
       render
