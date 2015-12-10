@@ -66,7 +66,7 @@ feature "Commenter is notified of the councillors reply" do
              councillor: councillor)
     end
   end
-  given (:email_intro_text) { "Local councillor Louise Councillor replied to <a href=\"https://dev.planningalerts.org.au/applications/8#comment5\">your message</a> about the planning application “A lovely house” at 24 Bruce Road Glenbrook" }
+  given (:email_intro_text) { "Local councillor Louise Councillor replied to <a href=\"https://dev.planningalerts.org.au/applications/8?utm_campaign=view-comment&amp;utm_medium=email&amp;utm_source=reply-notification#comment5\">your message</a> about the planning application “A lovely house” at 24 Bruce Road Glenbrook" }
   given (:reply_text) { "I'm glad you think it's a good idea. I do too." }
 
   background do

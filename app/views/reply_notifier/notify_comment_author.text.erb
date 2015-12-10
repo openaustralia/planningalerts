@@ -11,7 +11,12 @@ Local councillor <%= @comment.councillor.name %> replied:
 =========================================================================
 
 View and share this reply on PlanningAlerts:
-<%= application_url(@comment.application, protocol: "https", anchor: "reply#{@reply.id}") %>
+<%= application_url(@comment.application,
+                    protocol: "https",
+                    anchor: "reply#{@reply.id}",
+                    utm_campaign: "view-reply",
+                    utm_source: "reply-notification",
+                    utm_medium: "email") %>
 
 Best wishes,
 

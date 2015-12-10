@@ -4,7 +4,10 @@
   Local councillor #{@comment.councillor.name} replied to
   = link_to "your message", application_url(@comment.application,
                                             protocol: "https",
-                                            anchor: "comment#{@comment.id}")
+                                            anchor: "comment#{@comment.id}",
+                                            utm_campaign: "view-comment",
+                                            utm_source: "reply-notification",
+                                            utm_medium: "email")
   about the planning application “#{@comment.application.description}”
   at #{@comment.application.address}.
 
@@ -17,7 +20,10 @@
     = link_to "View and share this reply on PlanningAlerts",
               application_url(@comment.application,
                               protocol: "https",
-                              anchor: "reply#{@reply.id}")
+                              anchor: "reply#{@reply.id}",
+                              utm_campaign: "view-reply",
+                              utm_source: "reply-notification",
+                              utm_medium: "email")
 
 %p Best wishes,
 
