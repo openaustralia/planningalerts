@@ -201,7 +201,7 @@ describe AlertNotifierHelper do
 
     context "with a reply" do
       subject { helper.subject(alert, [], [], [reply]) }
-      it { should eql "1 new comment on planning applications near 123 Sample St" }
+      it { should eql "1 new reply on planning applications near 123 Sample St" }
     end
 
     context "with an application and a comment" do
@@ -209,9 +209,14 @@ describe AlertNotifierHelper do
       it { should eql "1 new comment and 1 new planning application near 123 Sample St" }
     end
 
+    context "with an application and a reply" do
+      subject { helper.subject(alert, [application], [], [reply]) }
+      it { should eql "1 new reply and 1 new planning application near 123 Sample St" }
+    end
+
     context "with an application, a comment, and a reply" do
       subject { helper.subject(alert, [application], [comment], [reply]) }
-      it { should eql "2 new comments and 1 new planning application near 123 Sample St" }
+      it { should eql "1 new comment, 1 new reply and 1 new planning application near 123 Sample St" }
     end
 
     context "with an expired subscription" do
