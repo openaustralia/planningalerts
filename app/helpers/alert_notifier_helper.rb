@@ -77,7 +77,7 @@ module AlertNotifierHelper
     new_subscription_url(params)
   end
 
-  def subject(alert, applications, comments, replies = [])
+  def subject(alert, applications, comments, replies)
     applications_text = pluralize(applications.size, "new planning application") if applications.any?
     comments_text = pluralize(comments.size, "new comment") if comments.any?
     replies_text = pluralize(replies.size, "new reply") if replies.any?

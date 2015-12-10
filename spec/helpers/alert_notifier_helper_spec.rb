@@ -190,12 +190,12 @@ describe AlertNotifierHelper do
     let(:reply) { create(:reply, comment: comment) }
 
     context "with an application" do
-      subject { helper.subject(alert, [application], []) }
+      subject { helper.subject(alert, [application], [], []) }
       it { should eql "1 new planning application near 123 Sample St" }
     end
 
     context "with a comment" do
-      subject { helper.subject(alert, [], [comment]) }
+      subject { helper.subject(alert, [], [comment], []) }
       it { should eql "1 new comment on planning applications near 123 Sample St" }
     end
 
@@ -205,7 +205,7 @@ describe AlertNotifierHelper do
     end
 
     context "with an application and a comment" do
-      subject { helper.subject(alert, [application], [comment]) }
+      subject { helper.subject(alert, [application], [comment], []) }
       it { should eql "1 new comment and 1 new planning application near 123 Sample St" }
     end
 
@@ -227,17 +227,17 @@ describe AlertNotifierHelper do
       end
 
       context "with an application" do
-        subject { helper.subject(alert, [application], []) }
+        subject { helper.subject(alert, [application], [], []) }
         it { should eql "You’re missing out on 1 new planning application near 123 Sample St" }
       end
 
       context "with a comment" do
-        subject { helper.subject(alert, [], [comment]) }
+        subject { helper.subject(alert, [], [comment], []) }
         it { should eql "You’re missing out on 1 new comment on planning applications near 123 Sample St" }
       end
 
       context "with an application and a comment" do
-        subject { helper.subject(alert, [application], [comment]) }
+        subject { helper.subject(alert, [application], [comment], []) }
         it { should eql "You’re missing out on 1 new comment and 1 new planning application near 123 Sample St" }
       end
     end
