@@ -1,7 +1,7 @@
 .box.comments-header
   - if @replies.count == 1
-    The following <strong>new reply</strong> by a local councillor has
+    The following <strong>new reply by a local councillor</strong> has
   - else
-    The following <strong>new replies</strong> by local councillors have
+    The following <strong>new replies by local councillors</strong> have
   been posted on comments near you
 = render :partial => "reply", :collection => @replies
