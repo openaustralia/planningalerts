@@ -80,16 +80,16 @@ module AlertNotifierHelper
   def subject(alert, applications, comments, replies = [])
     items = if applications.any? && comments.empty? && replies.empty?
               pluralize(applications.size, "new planning application")
-            elsif applications.empty? && comments.any? && replies.empty?
-              pluralize(comments.size, "new comment") + " on planning applications"
-            elsif applications.empty? && comments.empty? && replies.any?
-              pluralize(replies.size, "new reply") + " on planning applications"
             elsif applications.any? && comments.any? && replies.empty?
               pluralize(comments.size, "new comment") + " and " + pluralize(applications.size, "new planning application")
             elsif applications.any? && comments.empty? && replies.any?
               pluralize(replies.size, "new reply") + " and " + pluralize(applications.size, "new planning application")
             elsif applications.any? && comments.any? && replies.any?
               pluralize(comments.size, "new comment") +", " + pluralize(replies.size, "new reply") + " and " + pluralize(applications.size, "new planning application")
+            elsif applications.empty? && comments.any? && replies.empty?
+              pluralize(comments.size, "new comment") + " on planning applications"
+            elsif applications.empty? && comments.empty? && replies.any?
+              pluralize(replies.size, "new reply") + " on planning applications"
             end
 
     if alert.expired_subscription?
