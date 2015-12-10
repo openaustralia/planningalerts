@@ -1,8 +1,7 @@
 .box.comments-header
   - if @replies.count == 1
-    The following <strong>new reply</strong> has been made on a planning application
+    The following <strong>new reply</strong> by a local councillor has
   - else
-    The following <strong>new replies</strong> have been made on planning applications
-  within #{meters_in_words(@alert.radius_meters)} of
-  %strong= @alert.address
+    The following <strong>new replies</strong> by local councillors have
+  been posted on comments near you
 = render :partial => "reply", :collection => @replies
