@@ -5,7 +5,11 @@ planning application:
 
 Address: <%= @comment.application.address %>
 Description: <%= @comment.application.description %>
-Link: <%= application_url(@comment.application, protocol: "https", utm_source: "councillor-notifier", utm_medium: "email", utm_campaign: "view-application") %>
+Link: <%= application_url(@comment.application,
+                          protocol: "https",
+                          utm_source: "councillor-notifier",
+                          utm_medium: "email",
+                          utm_campaign: "view-application") %>
 
 <%= @comment.name %> writes:
 
