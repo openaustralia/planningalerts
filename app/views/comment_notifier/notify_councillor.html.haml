@@ -5,7 +5,7 @@
   = @comment.name
   in relation to a
   = succeed "." do
-    = link_to "local planning application for #{@comment.application.address}", application_url(@comment.application, protocol: "https")
+    = link_to "local planning application for #{@comment.application.address}", application_url(@comment.application, protocol: "https", utm_source: "councillor-notifier", utm_medium: "email", utm_campaign: "view-application")
   The application is for, “#{@comment.application.description}”.
 
 %p
