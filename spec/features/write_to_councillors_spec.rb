@@ -6,7 +6,7 @@ feature "Send a message to a councillor" do
   # so that I can get their help or feedback
   # and find out where they stand on this development I care about
 
-  context "when with_councillor param is not true" do
+  context "when writing to councillors is not globally enabled" do
     given(:authority) { create(:authority, full_name: "Foo") }
 
     background do
@@ -35,13 +35,19 @@ feature "Send a message to a councillor" do
     end
   end
 
-  context "when with_councillors param equals 'true'" do
+  context "when writing to councillors is globally enabled" do
     given(:authority) { create(:contactable_authority, full_name: "Marrickville Council") }
     given(:application) { VCR.use_cassette('planningalerts') { create(:application, id: "1", authority: authority) } }
 
+    around do |test|
+      with_modified_env COUNCILLORS_ENABLED: 'true' do
+        test.run
+      end
+    end
+
     context "and there are no councillors on this authority" do
       scenario "can’t see councillor messages sections" do
-        visit application_path(application, with_councillors: "true")
+        visit application_path(application)
 
         expect(page).to_not have_content("Who should this go to?")
       end
@@ -53,7 +59,7 @@ feature "Send a message to a councillor" do
       end
 
       scenario "can’t see councillor messages sections" do
-        visit application_path(application, with_councillors: "true")
+        visit application_path(application)
 
         expect(page).to_not have_content("Who should this go to?")
       end
@@ -65,7 +71,7 @@ feature "Send a message to a councillor" do
       end
 
       scenario "sending a message" do
-        visit application_path(application, with_councillors: "true")
+        visit application_path(application)
 
         expect(page).to have_content("Who should this go to?")
 
@@ -103,12 +109,16 @@ feature "Send a message to a councillor" do
 
       context "but we're on the NSW theme" do
         scenario "we can't see councillor messages sections" do
-          visit application_url(application, with_councillors: "true", host: "nsw.127.0.0.1.xip.io")
+          visit application_url(application, host: "nsw.127.0.0.1.xip.io")
 
           expect(page).to have_content("Application Tracking")
           expect(page).to_not have_content("Who should this go to?")
         end
       end
+    end
+
+    def with_modified_env(options, &block)
+      ClimateControl.modify(options, &block)
     end
   end
 

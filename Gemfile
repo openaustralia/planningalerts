@@ -55,6 +55,7 @@ gem "redcarpet"
 gem 'honeybadger'
 gem 'stripe'
 gem 'dotenv-rails'
+gem 'climate_control'
 
 group :test do
   gem 'capybara'

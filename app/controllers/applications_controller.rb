@@ -107,7 +107,7 @@ class ApplicationsController < ApplicationController
     # Required for new email alert signup form
     @alert = Alert.new(address: @application.address)
 
-    if params[:with_councillors] == "true" && @theme == "default"
+    if ENV["COUNCILLORS_ENABLED"] == "true" && @theme == "default"
       @councillors = @application.authority.councillors.shuffle if @application.authority.councillors.any?
     end
 
