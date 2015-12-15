@@ -143,6 +143,23 @@ describe Comment do
     end
   end
 
+  describe "#to_councillor?" do
+    let(:comment_to_authority) do
+      VCR.use_cassette('planningalerts') do
+        create(:comment_to_authority)
+      end
+    end
+
+    let(:comment_to_councillor) do
+      VCR.use_cassette('planningalerts') do
+        create(:comment_to_councillor)
+      end
+    end
+
+    it { expect(comment_to_councillor.to_councillor?).to eq true }
+    it { expect(comment_to_authority.to_councillor?).to eq false }
+  end
+
   describe "#recipient_display_name" do
     let(:comment) do
       VCR.use_cassette('planningalerts') do

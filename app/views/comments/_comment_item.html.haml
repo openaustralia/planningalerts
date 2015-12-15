@@ -1,14 +1,14 @@
-%figure.comment-item.panel{class: ("comment-to-councillor" if comment.councillor), id: "comment#{comment.id}"}
+%figure.comment-item.panel{class: ("comment-to-councillor" if comment.to_councillor?), id: "comment#{comment.id}"}
   = render 'comments/comment_location_heading', comment: comment if with_address
   .panel-body
     %figcaption.comment-meta.comment-heading
       = render 'comments/comment_meta_sentence', comment: comment
     %blockquote.comment-text= comment_as_html(comment.text)
     %footer
-      - unless comment.councillor
+      - unless comment.to_councillor?
         %p.comment-meta delivered to the planning authority
       .comment-actions= render 'comments/comment_actions', comment: comment
-  - if comment.councillor && comment.replies.empty?
+  - if comment.to_councillor? && comment.replies.empty?
     .panel-body.comment-to-councillor-status
       %p
         Delivered to #{comment.councillor.prefixed_name}.
