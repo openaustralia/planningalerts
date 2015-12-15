@@ -107,7 +107,7 @@ class ApplicationsController < ApplicationController
     # Required for new email alert signup form
     @alert = Alert.new(address: @application.address)
 
-    if ENV["COUNCILLORS_ENABLED"] == "true" && @theme == "default"
+    if writing_to_councillors_enabled?
       @councillors = @application.authority.councillors.shuffle if @application.authority.councillors.any?
     end
 
@@ -167,5 +167,11 @@ class ApplicationsController < ApplicationController
       format.html { render "nearby" }
       format.rss { render "api/index", format: :rss, layout: false, content_type: Mime::XML }
     end
+  end
+
+  private
+
+  def writing_to_councillors_enabled?
+    ENV["COUNCILLORS_ENABLED"] == "true" && @theme == "default"
   end
 end
