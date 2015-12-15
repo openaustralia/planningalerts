@@ -143,13 +143,18 @@ describe Comment do
     end
   end
 
-  describe "#to_councillor?" do
+  context "to a planning authority" do
     let(:comment_to_authority) do
       VCR.use_cassette('planningalerts') do
         create(:comment_to_authority)
       end
     end
 
+    it { expect(comment_to_authority.to_councillor?).to eq false }
+    it { expect(comment_to_authority.awaiting_councillor_reply?).to eq false }
+  end
+
+  context "to a councillor" do
     let(:comment_to_councillor) do
       VCR.use_cassette('planningalerts') do
         create(:comment_to_councillor)
@@ -157,30 +162,16 @@ describe Comment do
     end
 
     it { expect(comment_to_councillor.to_councillor?).to eq true }
-    it { expect(comment_to_authority.to_councillor?).to eq false }
+    it { expect(comment_to_councillor.awaiting_councillor_reply?).to eq true }
   end
 
-  describe "#awaiting_councillor_reply?" do
-    let(:comment_to_councillor) do
-      VCR.use_cassette('planningalerts') do
-        create(:comment_to_councillor)
-      end
-    end
-
-    let(:comment_to_authority) do
-      VCR.use_cassette('planningalerts') do
-        create(:comment_to_authority)
-      end
-    end
-
+  context "to a councillor and has no reply" do
     let(:comment_with_reply) do
       VCR.use_cassette('planningalerts') do
         create(:reply).comment
       end
     end
 
-    it { expect(comment_to_councillor.awaiting_councillor_reply?).to eq true }
-    it { expect(comment_to_authority.awaiting_councillor_reply?).to eq false }
     it { expect(comment_with_reply.awaiting_councillor_reply?).to eq false }
   end
 
