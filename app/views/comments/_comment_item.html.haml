@@ -23,13 +23,7 @@
     %footer
       - unless comment.councillor
         %p.comment-meta delivered to the planning authority
-      .comment-actions
-        - if current_user && current_user.admin?
-          - if comment.councillor
-            = link_to "add reply", new_admin_reply_path("reply[comment_id]" => comment), class: 'comment-action'
-          = link_to "admin", admin_application_comment_path(comment), class: 'comment-action'
-        - unless current_page?(new_comment_report_path(comment.id))
-          = link_to "report comment", new_comment_report_path(comment), title: "Report this comment by #{comment.name} for removal", class: "comment-action"
+      .comment-actions= render 'comments/comment_actions', comment: comment
   - if comment.councillor && comment.replies.empty?
     .panel-body.comment-to-councillor-status
       %p
