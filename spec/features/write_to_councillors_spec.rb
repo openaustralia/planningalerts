@@ -107,6 +107,27 @@ feature "Send a message to a councillor" do
         expect(page).to have_content "I think this is a really good idea"
       end
 
+      scenario "getting an error after not selecting who your comment goes to" do
+        visit application_path(application)
+
+        expect(page).to have_content("Who should this go to?")
+
+        fill_in("Have your say on this application", with: "I think this is a really good idea")
+        fill_in("Your name", with: "Matthew Landauer")
+
+        # TODO: Get javascript driving working so the actual page can be tested
+        #       with the councillor list toggler.
+        #       This is currently working with the non-js version which
+        #       hardly anyone will actually use, though the validation works the same.
+
+        fill_in("Your email", with: "example@example.com")
+        fill_in("Your street address", with: "11 Foo Street")
+
+        click_button("Post your public comment")
+
+        expect(page).to have_content("You need to select who your message should go to from the list below.")
+      end
+
       context "but we're on the NSW theme" do
         scenario "we can't see councillor messages sections" do
           visit application_url(application, host: "nsw.127.0.0.1.xip.io")
