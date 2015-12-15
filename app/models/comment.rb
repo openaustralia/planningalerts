@@ -36,6 +36,10 @@ class Comment < ActiveRecord::Base
     councillor ? true : false
   end
 
+  def awaiting_councillor_reply?
+    to_councillor? && replies.empty?
+  end
+
   def recipient_display_name
     to_councillor? ? councillor.prefixed_name : application.authority.full_name
   end

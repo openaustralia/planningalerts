@@ -160,6 +160,30 @@ describe Comment do
     it { expect(comment_to_authority.to_councillor?).to eq false }
   end
 
+  describe "#awaiting_councillor_reply?" do
+    let(:comment_to_councillor) do
+      VCR.use_cassette('planningalerts') do
+        create(:comment_to_councillor)
+      end
+    end
+
+    let(:comment_to_authority) do
+      VCR.use_cassette('planningalerts') do
+        create(:comment_to_authority)
+      end
+    end
+
+    let(:comment_with_reply) do
+      VCR.use_cassette('planningalerts') do
+        create(:reply).comment
+      end
+    end
+
+    it { expect(comment_to_councillor.awaiting_councillor_reply?).to eq true }
+    it { expect(comment_to_authority.awaiting_councillor_reply?).to eq false }
+    it { expect(comment_with_reply.awaiting_councillor_reply?).to eq false }
+  end
+
   describe "#recipient_display_name" do
     let(:comment) do
       VCR.use_cassette('planningalerts') do

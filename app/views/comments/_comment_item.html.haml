@@ -8,7 +8,7 @@
       - unless comment.to_councillor?
         %p.comment-meta delivered to the planning authority
       .comment-actions= render 'comments/comment_actions', comment: comment
-  - if comment.to_councillor? && comment.replies.empty?
+  - if comment.awaiting_councillor_reply?
     .panel-body.comment-to-councillor-status
       %p
         Delivered to #{comment.councillor.prefixed_name}.
