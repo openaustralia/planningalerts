@@ -1,11 +1,5 @@
 %figure.comment-item.panel{class: ("comment-to-councillor" if comment.councillor), id: "comment#{comment.id}"}
-  - if with_address
-    %h2.comment-location
-      In
-      %strong #{comment.application.suburb} #{comment.application.state}
-      on
-      = link_to application_path(comment.application.id), title: "View application", class: "comment-application" do
-        #{display_description_with_address(comment.application)}:
+  = render 'comments/comment_location_heading', comment: comment if with_address
   .panel-body
     %figcaption.comment-meta.comment-heading
       %span.comment-author= comment.name
