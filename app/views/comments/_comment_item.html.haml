@@ -35,28 +35,4 @@
       %p
         Delivered to #{comment.councillor.prefixed_name}.
         %span They are yet to respond.
-- comment.replies.each do |reply|
-  %figure.reply-from-councillor.comment-item.panel{id: "reply#{reply.id}"}
-    .panel-body
-      .comment-heading.h-card
-        - if reply.councillor.image_url.present?
-          .councillor-image-wrapper
-            .councillor-image
-              = image_tag reply.councillor.image_url,
-                          alt: "Photo of #{reply.councillor.name}",
-                          class: "u-photo"
-        %figcaption.comment-meta
-          .comment-author.councillor
-            %span.p-name= reply.councillor.name
-            %span.p-role local councillor for #{reply.councillor.authority.full_name}
-          %span.comment-time-block
-            replied to
-            = link_to reply.comment.name, "#comment#{reply.comment.id}", title: "View comment"
-            = link_to "#reply#{reply.id}", title: "View reply" do
-              %time.comment-time{datetime: reply.received_at.strftime("%F")}
-                #{time_ago_in_words(reply.received_at)} ago
-      %blockquote.comment-text= reply.text
-      - if current_user && current_user.admin?
-        %footer
-          .comment-actions
-            = link_to "admin", admin_reply_path(reply),class: 'comment-action'
+= render comment.replies
