@@ -166,6 +166,10 @@ class Application < ActiveRecord::Base
     on_notice_to && Date.today > on_notice_to
   end
 
+  def councillors_for_authority
+    authority.councillors.shuffle if authority.councillors.any?
+  end
+
   private
 
   # TODO: Optimisation is to make sure that this doesn't get called again on save when the address hasn't changed

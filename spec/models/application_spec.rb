@@ -324,4 +324,32 @@ describe Application do
       it { expect(@application.official_submission_period_expired?).to be_false }
     end
   end
+
+  describe "#councillors_for_authority" do
+    let(:authority) { create(:authority) }
+    let(:application) { create(:application, authority: authority) }
+
+    context "when there are no councillors" do
+      it { expect(application.councillors_for_authority).to eq nil }
+    end
+
+    context "when there are councillors" do
+      before do
+        @councillor1 = create(:councillor, authority: authority)
+        @councillor2 = create(:councillor, authority: authority)
+        @councillor3 = create(:councillor, authority: authority)
+      end
+
+      # TODO: Using 'include' because order is shuffled. Rspec 3's contain_exactly would be more accurate.
+      it { expect(application.councillors_for_authority).to include(@councillor1, @councillor2, @councillor3) }
+    end
+
+    context "when there are councillors but not for the application’s authority" do
+      before do
+        @councillor1 = create(:councillor, authority: create(:authority))
+      end
+
+      it { expect(application.councillors_for_authority).to eq nil }
+    end
+  end
 end

@@ -108,7 +108,7 @@ class ApplicationsController < ApplicationController
     @alert = Alert.new(address: @application.address)
 
     if writing_to_councillors_enabled?
-      @councillors = @application.authority.councillors.shuffle if @application.authority.councillors.any?
+      @councillors = @application.councillors_for_authority
     end
 
     if params[:with_councillor_message] == "true" || params[:with_councillor_reply] == "true"
