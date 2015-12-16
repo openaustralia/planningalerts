@@ -24,6 +24,11 @@ class CommentsController < ApplicationController
         flash.now[:error] = "Some of the comment wasn't filled out completely. See below."
         # HACK: Required for new email alert signup form
         @alert = Alert.new(address: @application.address)
+
+        if writing_to_councillors_enabled?
+          @councillors = @application.councillors_for_authority
+        end
+
         render 'applications/show'
       end
     end
@@ -50,5 +55,9 @@ class CommentsController < ApplicationController
       :councillor_id,
       :for_planning_authority
     )
+  end
+
+  def writing_to_councillors_enabled?
+    ENV["COUNCILLORS_ENABLED"] == "true" && @theme == "default"
   end
 end
