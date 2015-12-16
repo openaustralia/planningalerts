@@ -257,6 +257,40 @@ describe Comment do
     end
   end
 
+  describe "#for_planning_authority?" do
+    let(:comment) do
+      VCR.use_cassette('planningalerts') do
+        create(:comment)
+      end
+    end
+
+    context "when it can't be sent to councillors" do
+      before { allow(comment).to receive(:has_receiver_options?).and_return(false) }
+
+      it { expect(comment.for_planning_authority?).to eq true }
+    end
+
+    context "when it can be sent to councillors" do
+      before { allow(comment).to receive(:has_receiver_options?).and_return(true) }
+
+      it "defaults to false" do
+        expect(comment.for_planning_authority?).to eq false
+      end
+
+      context "and when for_planning_authority has been set true" do
+        before { comment.update(for_planning_authority: true) }
+
+        it { expect(comment.for_planning_authority?).to eq true }
+      end
+
+      context "and when for_planning_authority has set true false" do
+        before { comment.update(for_planning_authority: false) }
+
+        it { expect(comment.for_planning_authority?).to eq false }
+      end
+    end
+  end
+
   describe "#recipient_display_name" do
     let(:comment) do
       VCR.use_cassette('planningalerts') do

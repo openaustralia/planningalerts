@@ -5,6 +5,8 @@ class Comment < ActiveRecord::Base
   has_many :replies
   validates_presence_of :name, :text, :address
 
+  attr_accessor :for_planning_authority
+
   acts_as_email_confirmable
   scope :visible, -> { where(confirmed: true, hidden: false) }
   scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
@@ -37,6 +39,14 @@ class Comment < ActiveRecord::Base
       application.authority.councillors.any?
     else
       false
+    end
+  end
+
+  def for_planning_authority?
+    if for_planning_authority.present?
+      for_planning_authority
+    else
+      !has_receiver_options?
     end
   end
 
