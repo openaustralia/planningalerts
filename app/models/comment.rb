@@ -4,6 +4,7 @@ class Comment < ActiveRecord::Base
   has_many :reports
   has_many :replies
   validates_presence_of :name, :text, :address
+  validate :receiver_must_be_selected_if_options_available
 
   attr_accessor :for_planning_authority
 
@@ -60,5 +61,18 @@ class Comment < ActiveRecord::Base
 
   def recipient_display_name
     to_councillor? ? councillor.prefixed_name : application.authority.full_name
+  end
+
+  private
+
+  def receiver_must_be_selected_if_options_available
+    if has_receiver_options?
+     if for_planning_authority.blank? && councillor_id.nil?
+       errors.add(
+         :receiver_options,
+         "You need to select who your message should go to from the list below."
+       )
+     end
+    end
   end
 end

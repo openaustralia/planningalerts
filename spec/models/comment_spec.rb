@@ -143,6 +143,55 @@ describe Comment do
     end
   end
 
+  describe "#receiver_must_be_selected_if_options_available" do
+    let(:comment) { VCR.use_cassette('planningalerts') { build(:comment) } }
+
+    context "when there is no option to send it to a councillor" do
+      before { allow(comment).to receive(:has_receiver_options?).and_return(false) }
+
+      context "and no receiver option is set" do
+        before do
+          comment.update_attribute(:for_planning_authority, nil)
+          comment.update_attribute(:councillor_id, nil)
+        end
+
+        it { expect(comment).to be_valid }
+      end
+    end
+
+    context "when it could be sent to a councillor" do
+      before { allow(comment).to receive(:has_receiver_options?).and_return(true) }
+
+      context "and for_authority has been set true" do
+        before { comment.update_attribute(:for_planning_authority, true) }
+
+        context "and no councillor has been selected" do
+          before { comment.update_attribute(:councillor_id, nil) }
+
+          it { expect(comment).to be_valid }
+        end
+      end
+
+      context "and for_authority is not set" do
+        before { comment.update_attribute(:for_planning_authority, nil) }
+
+        context "and no councillor has been selected" do
+          it "is not valid" do
+            expect(comment).to_not be_valid
+            expect(comment.errors[:receiver_options])
+              .to eq ["You need to select who your message should go to from the list below."]
+          end
+        end
+
+        context "and a councillor has been selected" do
+          before { comment.update_attribute(:councillor_id, create(:councillor).id) }
+
+          it { expect(comment).to be_valid }
+        end
+      end
+    end
+  end
+
   context "to a planning authority" do
     let(:comment_to_authority) do
       VCR.use_cassette('planningalerts') do
