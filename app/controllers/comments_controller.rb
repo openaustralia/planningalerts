@@ -40,6 +40,12 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:text, :name, :email, :address, :councillor_id)
+    params.require(:comment).permit(
+      :text,
+      :name,
+      :email,
+      :address,
+      :councillor_id
+    )
   end
 end
