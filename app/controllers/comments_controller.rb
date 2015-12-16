@@ -18,6 +18,8 @@ class CommentsController < ApplicationController
     if params[:little_sweety].blank?
       @comment = Comment.new(comment_params)
       @comment.application_id = @application.id
+      @comment.theme = @theme if @theme != "default"
+
       if !@comment.save
         flash.now[:error] = "Some of the comment wasn't filled out completely. See below."
         # HACK: Required for new email alert signup form
