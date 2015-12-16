@@ -175,6 +175,88 @@ describe Comment do
     it { expect(comment_with_reply.awaiting_councillor_reply?).to eq false }
   end
 
+  describe "#has_receiver_options?" do
+    let(:comment) do
+      VCR.use_cassette('planningalerts') do
+        create(:comment)
+      end
+    end
+
+    context "when the writing to councillors feature is not enabled" do
+      context "and Default theme is active" do
+        before :each do
+          comment.update_attribute(:theme, "default")
+        end
+
+        context "and there are councillors" do
+          it { expect(comment.has_receiver_options?).to eq false }
+        end
+
+        context "and there are not councillors" do
+          it { expect(comment.has_receiver_options?).to eq false }
+        end
+      end
+
+      context "and the NSW theme is active" do
+        before :each do
+          comment.update_attribute(:theme, "nsw")
+        end
+
+        context "and there are councillors" do
+          before do
+            create(:councillor, authority: comment.application.authority)
+          end
+
+          it { expect(comment.has_receiver_options?).to eq false }
+        end
+
+        context "and there are not councillors" do
+          it { expect(comment.has_receiver_options?).to eq false }
+        end
+      end
+    end
+
+    context "when the writing to councillors feature is enabled" do
+      around do |test|
+        with_modified_env COUNCILLORS_ENABLED: 'true' do
+          test.run
+        end
+      end
+
+      context "and Default theme is active" do
+        before :each do
+          comment.update_attribute(:theme, "default")
+        end
+
+        context "and there are councillors" do
+          before do
+            create(:councillor, authority: comment.application.authority)
+          end
+
+          it { expect(comment.has_receiver_options?).to eq true }
+        end
+
+        context "and there are not councillors" do
+          it { expect(comment.has_receiver_options?).to eq false }
+        end
+      end
+
+      context "and the NSW theme is active" do
+        before :each do
+          comment.update_attribute(:theme, "nsw")
+        end
+
+        context "and there are councillors" do
+          it { expect(comment.has_receiver_options?).to eq false }
+        end
+
+        context "and there are not councillors" do
+          it { expect(comment.has_receiver_options?).to eq false }
+        end
+      end
+    end
+  end
+
   describe "#recipient_display_name" do
     let(:comment) do
       VCR.use_cassette('planningalerts') do
@@ -199,5 +281,9 @@ describe Comment do
 
       it { expect(comment.recipient_display_name).to eq "local councillor Louise Councillor" }
     end
+  end
+
+  def with_modified_env(options, &block)
+    ClimateControl.modify(options, &block)
   end
 end

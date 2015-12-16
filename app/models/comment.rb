@@ -32,6 +32,14 @@ class Comment < ActiveRecord::Base
     end
   end
 
+  def has_receiver_options?
+    if ENV["COUNCILLORS_ENABLED"] == "true" && theme == "default"
+      application.authority.councillors.any?
+    else
+      false
+    end
+  end
+
   def to_councillor?
     councillor ? true : false
   end
