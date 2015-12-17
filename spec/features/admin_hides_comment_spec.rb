@@ -17,7 +17,7 @@ feature "Admin hides comment" do
     expect(page).to have_content "Signed in successfully"
   end
 
-  scenario "hides existing comment" do
+  scenario "successfully" do
     visit admin_root_path
     click_link "Comments"
 
