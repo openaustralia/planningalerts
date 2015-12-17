@@ -57,7 +57,7 @@ class CommentsController < ApplicationController
       :email,
       :address,
       :councillor_id,
-      :for_planning_authority
+      :comment_for
     )
   end
 

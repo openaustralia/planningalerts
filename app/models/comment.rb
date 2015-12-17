@@ -4,9 +4,13 @@ class Comment < ActiveRecord::Base
   has_many :reports
   has_many :replies
   validates_presence_of :name, :text, :address
-  validate :receiver_must_be_selected_if_options_available
+  validates_presence_of :comment_for, on: :create,
+                                      if: :has_for_options?,
+                                      message: "You need to select who your message should go to from the list below."
 
-  attr_accessor :for_planning_authority
+  after_validation :process_comment_for, on: :create
+
+  attr_accessor :comment_for
 
   acts_as_email_confirmable
   scope :visible, -> { where(confirmed: true, hidden: false) }
@@ -43,14 +47,6 @@ class Comment < ActiveRecord::Base
     end
   end
 
-  def for_planning_authority?
-    if for_planning_authority.present?
-      for_planning_authority
-    else
-      !has_for_options?
-    end
-  end
-
   def to_councillor?
     councillor ? true : false
   end
@@ -65,14 +61,9 @@ class Comment < ActiveRecord::Base
 
   private
 
-  def receiver_must_be_selected_if_options_available
-    if has_for_options?
-     if for_planning_authority.blank? && councillor_id.nil?
-       errors.add(
-         :receiver_options,
-         "You need to select who your message should go to from the list below."
-       )
-     end
+  def process_comment_for
+    if comment_for.present? && comment_for != "planning authority"
+      self.councillor_id = Councillor.find(comment_for).id
     end
   end
 end

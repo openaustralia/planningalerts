@@ -143,51 +143,59 @@ describe Comment do
     end
   end
 
-  describe "#receiver_must_be_selected_if_options_available" do
-    let(:comment) { VCR.use_cassette('planningalerts') { build(:comment) } }
+  describe "new comment" do
+    let(:new_comment) do
+      VCR.use_cassette('planningalerts') { build(:comment, comment_for: nil) }
+    end
 
-    context "when there is no option to send it to a councillor" do
-      before { allow(comment).to receive(:has_for_options?).and_return(false) }
+    context "that can be sent to a councillor" do
+      before :each do
+        allow(new_comment).to receive(:has_for_options?).and_return(true)
+      end
 
-      context "and no receiver option is set" do
+      it "is invalid without specificfy who it is for" do
+        expect(new_comment).to_not be_valid
+      end
+
+      context "when it is for the planning authority" do
         before do
-          comment.update_attribute(:for_planning_authority, nil)
-          comment.update_attribute(:councillor_id, nil)
+          new_comment.update_attribute(:comment_for, "planning authority")
         end
 
-        it { expect(comment).to be_valid }
+        it { expect(new_comment).to be_valid }
+      end
+
+      context "when it is for a councillor" do
+        before do
+          VCR.use_cassette('planningalerts') { create(:councillor, id: 3) }
+          new_comment.update_attribute(:comment_for, 3)
+        end
+
+        it { expect(new_comment).to be_valid }
       end
     end
 
-    context "when it could be sent to a councillor" do
-      before { allow(comment).to receive(:has_for_options?).and_return(true) }
-
-      context "and for_authority has been set true" do
-        before { comment.update_attribute(:for_planning_authority, true) }
-
-        context "and no councillor has been selected" do
-          before { comment.update_attribute(:councillor_id, nil) }
-
-          it { expect(comment).to be_valid }
-        end
+    context "that can’t be sent to a councillor" do
+      before do
+         allow(new_comment).to receive(:has_for_options?).and_return(false)
       end
 
-      context "and for_authority is not set" do
-        before { comment.update_attribute(:for_planning_authority, nil) }
+      it "is valid without specificing who it is for" do
+        expect(new_comment).to be_valid
+      end
+    end
+  end
 
-        context "and no councillor has been selected" do
-          it "is not valid" do
-            expect(comment).to_not be_valid
-            expect(comment.errors[:receiver_options])
-              .to eq ["You need to select who your message should go to from the list below."]
-          end
-        end
+  describe "existing comment" do
+    let(:existing_comment) do
+      VCR.use_cassette('planningalerts') { create(:comment, comment_for: nil) }
+    end
 
-        context "and a councillor has been selected" do
-          before { comment.update_attribute(:councillor_id, create(:councillor).id) }
+    context "that can be sent to a councillor" do
+      before { allow(existing_comment).to receive(:has_for_options?).and_return(true) }
 
-          it { expect(comment).to be_valid }
-        end
+      it "can be updated without specificfy who it is for" do
+        expect(existing_comment).to be_valid
       end
     end
   end
@@ -306,40 +314,6 @@ describe Comment do
     end
   end
 
-  describe "#for_planning_authority?" do
-    let(:comment) do
-      VCR.use_cassette('planningalerts') do
-        create(:comment)
-      end
-    end
-
-    context "when it can't be sent to councillors" do
-      before { allow(comment).to receive(:has_for_options?).and_return(false) }
-
-      it { expect(comment.for_planning_authority?).to eq true }
-    end
-
-    context "when it can be sent to councillors" do
-      before { allow(comment).to receive(:has_for_options?).and_return(true) }
-
-      it "defaults to false" do
-        expect(comment.for_planning_authority?).to eq false
-      end
-
-      context "and when for_planning_authority has been set true" do
-        before { comment.update(for_planning_authority: true) }
-
-        it { expect(comment.for_planning_authority?).to eq true }
-      end
-
-      context "and when for_planning_authority has set true false" do
-        before { comment.update(for_planning_authority: false) }
-
-        it { expect(comment.for_planning_authority?).to eq false }
-      end
-    end
-  end
-
   describe "#recipient_display_name" do
     let(:comment) do
       VCR.use_cassette('planningalerts') do
@@ -363,6 +337,51 @@ describe Comment do
       before { comment.councillor = create(:councillor, name: "Louise Councillor")}
 
       it { expect(comment.recipient_display_name).to eq "local councillor Louise Councillor" }
+    end
+  end
+
+  describe "#processing_comment_for on create" do
+    context "when comment_for is nil" do
+      let(:comment) do
+        VCR.use_cassette('planningalerts') { create(:comment, comment_for: nil) }
+      end
+
+      it "does nothing" do
+        expect(comment.councillor_id).to be_nil
+      end
+    end
+
+    context "when comment_for is 'planning authority'" do
+      let(:comment) do
+        VCR.use_cassette('planningalerts') { create(:comment, comment_for: "planning authority") }
+      end
+
+      it "does nothing" do
+        expect(comment.councillor_id).to be_nil
+      end
+    end
+
+    context "when comment_for is a councillor id" do
+      before { create(:councillor, id: 3) }
+
+      let(:comment) do
+        VCR.use_cassette('planningalerts') { create(:comment, comment_for: 3) }
+      end
+
+      it "assigns the correct councillor" do
+        expect(comment.councillor_id).to eq 3
+      end
+    end
+
+    context "when comment_for is an unknown councillor id" do
+      before { create(:councillor, id: 3) }
+
+      it "raises an error" do
+        VCR.use_cassette('planningalerts') do
+          expect { create(:comment, comment_for: 5) }
+            .to raise_error(ActiveRecord::RecordNotFound)
+        end
+      end
     end
   end
 

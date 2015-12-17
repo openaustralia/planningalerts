@@ -1,10 +1,10 @@
 = f.inputs id: "comment-receiver-inputgroup" do
-  %li.input{class: ("error" if @comment.errors[:receiver_options]) }
-    - if @comment.errors[:receiver_options]
-      %p.inline-errors= @comment.errors[:receiver_options].first.to_s
+  %li.input{class: ("error" if @comment.errors[:comment_for])}
+    - if @comment.errors[:comment_for]
+      %p.inline-errors= @comment.errors[:comment_for].first.to_s
     %legend Who should this go to?
-    = radio_button_tag("comment[for_planning_authority]",
-                      true,
+    = radio_button_tag("comment[comment_for]",
+                      "planning authority",
                       false,
                       id: "receiver-to-authority-option",
                       class: "receiver-select-radio receiver-type-option")
@@ -31,7 +31,7 @@
         %p
           Your elected councillors can answer your questions
           and represent you in council meetings.
-      = f.collection_radio_buttons(:councillor_id, @councillors, :id, :name) do |b|
+      = f.collection_radio_buttons(:comment_for, @councillors, :id, :name) do |b|
         = b.radio_button(class: "councillor-select-radio")
         = b.label(class: "councillor-select-label h-card") do
           .councillor-option
