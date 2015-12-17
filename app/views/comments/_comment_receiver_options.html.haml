@@ -25,7 +25,7 @@
         %p
           Write to the planning authority (#{@application.authority.full_name}) if you want your comment considered
           when they decide whether to approve this application.
-    .councillor-select-list
+    .councillor-select-list{class: ("open" if @councillor_list_open)}
       %header.councillor-select-list-intro
         %strong One of your elected local councillors
         %p

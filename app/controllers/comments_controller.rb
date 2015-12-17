@@ -29,6 +29,10 @@ class CommentsController < ApplicationController
           @councillors = @application.councillors_for_authority
         end
 
+        if params[:councillors_list_toggler] == "open"
+          @councillor_list_open = true
+        end
+
         render 'applications/show'
       end
     end

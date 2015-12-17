@@ -14,6 +14,8 @@ if ($('#comment-receiver-inputgroup').length) {
   // TODO: Fix keyboard navigation
   councillorTogglerRadio = document.createElement('input');
   $(councillorTogglerRadio).attr('type','radio')
+                           .attr('name','councillors_list_toggler')
+                           .attr('value','open')
                            .attr('id', 'councillors-list-toggler')
                            .attr('class', 'receiver-select-radio receiver-type-option');
 
@@ -22,6 +24,10 @@ if ($('#comment-receiver-inputgroup').length) {
                            .attr('class', 'receiver-select-label receiver-type-option');
 
   councillorListWrapper = $('.councillor-select-list');
+
+   if ($(councillorListWrapper).is('.open')) {
+     $(councillorTogglerRadio).prop('checked', true);
+   }
 
   councillorListWrapper.before(councillorTogglerRadio)
                        .before(councillorTogglerLabel);
@@ -37,11 +43,17 @@ if ($('#comment-receiver-inputgroup').length) {
     if ($(radioForAuthorityOption).prop('checked') === true) {
       $(radioForAuthorityOption).prop('checked', false);
     }
+
+    $(councillorListWrapper).addClass('open');
   });
 
   $(radioForAuthorityOption).click(function(e) {
     if ($(radioForCouncillorsList).prop('checked') === true) {
       $(radioForCouncillorsList).prop('checked', false);
+    }
+
+    if ($(councillorListWrapper).hasClass('open')) {
+      $(councillorListWrapper).removeClass('open');
     }
   });
 }
