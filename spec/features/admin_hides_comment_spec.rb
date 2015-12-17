@@ -3,7 +3,7 @@ require 'spec_helper'
 feature "Admin hides comment" do
   background do
     VCR.use_cassette('planningalerts') do
-      create(:confirmed_comment)
+      create(:confirmed_comment, id: 1)
     end
 
     admin = create(:admin)
