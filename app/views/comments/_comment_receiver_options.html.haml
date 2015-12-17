@@ -1,47 +1,48 @@
 = f.inputs id: "comment-receiver-inputgroup" do
-  %legend Who should this go to?
-  = radio_button_tag("comment[for_planning_authority]",
-                    true,
-                    false,
-                    id: "receiver-to-authority-option",
-                    class: "receiver-select-radio receiver-type-option")
-  %label.receiver-select-label{for: "receiver-to-authority-option"}
-    %strong The planning authority
-    - if @application.official_submission_period_expired?
-      %p
-        You’re too late to have your comment officially considered
-        when the planning authority (#{@application.authority.full_name}) decide on this application.
-        The period for officially commenting on this application finished
-        #{days_ago_in_words(@application.on_notice_to)}.
-        - if @application.on_notice_from
-          It lasted for #{distance_of_time_in_words(@application.on_notice_from, @application.on_notice_to)}.
-        If you choose to write to them now,
-        your comment will still be sent through
-        and displayed here.
-    - else
-      %p
-        Write to the planning authority (#{@application.authority.full_name}) if you want your comment considered
-        when they decide whether to approve this application.
-  .councillor-select-list
-    %header.councillor-select-list-intro
-      %strong One of your elected local councillors
-      %p
-        Your elected councillors can answer your questions
-        and represent you in council meetings.
-    = f.collection_radio_buttons(:councillor_id, @councillors, :id, :name) do |b|
-      = b.radio_button(class: "councillor-select-radio")
-      = b.label(class: "councillor-select-label h-card") do
-        .councillor-option
-          - if b.object.image_url.present?
-            .councillor-image-wrapper
-              .councillor-image
-                = image_tag b.object.image_url,
-                            alt: "Photo of #{b.object.name}",
-                            class: "u-photo"
-          .councillor-details
-            %span.p-name= b.object.name
-            %span.p-org= b.object.party
-    %footer
-      %strong Don’t worry if you don’t know who to contact.
-      Every councillor is there to represent you
-      so just pick someone who seems nice.
+  %li.input{class: ("error" if @comment.errors[:receiver_options]) }
+    %legend Who should this go to?
+    = radio_button_tag("comment[for_planning_authority]",
+                      true,
+                      false,
+                      id: "receiver-to-authority-option",
+                      class: "receiver-select-radio receiver-type-option")
+    %label.receiver-select-label{for: "receiver-to-authority-option"}
+      %strong The planning authority
+      - if @application.official_submission_period_expired?
+        %p
+          You’re too late to have your comment officially considered
+          when the planning authority (#{@application.authority.full_name}) decide on this application.
+          The period for officially commenting on this application finished
+          #{days_ago_in_words(@application.on_notice_to)}.
+          - if @application.on_notice_from
+            It lasted for #{distance_of_time_in_words(@application.on_notice_from, @application.on_notice_to)}.
+          If you choose to write to them now,
+          your comment will still be sent through
+          and displayed here.
+      - else
+        %p
+          Write to the planning authority (#{@application.authority.full_name}) if you want your comment considered
+          when they decide whether to approve this application.
+    .councillor-select-list
+      %header.councillor-select-list-intro
+        %strong One of your elected local councillors
+        %p
+          Your elected councillors can answer your questions
+          and represent you in council meetings.
+      = f.collection_radio_buttons(:councillor_id, @councillors, :id, :name) do |b|
+        = b.radio_button(class: "councillor-select-radio")
+        = b.label(class: "councillor-select-label h-card") do
+          .councillor-option
+            - if b.object.image_url.present?
+              .councillor-image-wrapper
+                .councillor-image
+                  = image_tag b.object.image_url,
+                              alt: "Photo of #{b.object.name}",
+                              class: "u-photo"
+            .councillor-details
+              %span.p-name= b.object.name
+              %span.p-org= b.object.party
+      %footer
+        %strong Don’t worry if you don’t know who to contact.
+        Every councillor is there to represent you
+        so just pick someone who seems nice.
