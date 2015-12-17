@@ -147,7 +147,7 @@ describe Comment do
     let(:comment) { VCR.use_cassette('planningalerts') { build(:comment) } }
 
     context "when there is no option to send it to a councillor" do
-      before { allow(comment).to receive(:has_receiver_options?).and_return(false) }
+      before { allow(comment).to receive(:has_for_options?).and_return(false) }
 
       context "and no receiver option is set" do
         before do
@@ -160,7 +160,7 @@ describe Comment do
     end
 
     context "when it could be sent to a councillor" do
-      before { allow(comment).to receive(:has_receiver_options?).and_return(true) }
+      before { allow(comment).to receive(:has_for_options?).and_return(true) }
 
       context "and for_authority has been set true" do
         before { comment.update_attribute(:for_planning_authority, true) }
@@ -224,7 +224,7 @@ describe Comment do
     it { expect(comment_with_reply.awaiting_councillor_reply?).to eq false }
   end
 
-  describe "#has_receiver_options?" do
+  describe "#has_for_options?" do
     let(:comment) do
       VCR.use_cassette('planningalerts') do
         create(:comment)
@@ -238,11 +238,11 @@ describe Comment do
         end
 
         context "and there are councillors" do
-          it { expect(comment.has_receiver_options?).to eq false }
+          it { expect(comment.has_for_options?).to eq false }
         end
 
         context "and there are not councillors" do
-          it { expect(comment.has_receiver_options?).to eq false }
+          it { expect(comment.has_for_options?).to eq false }
         end
       end
 
@@ -256,11 +256,11 @@ describe Comment do
             create(:councillor, authority: comment.application.authority)
           end
 
-          it { expect(comment.has_receiver_options?).to eq false }
+          it { expect(comment.has_for_options?).to eq false }
         end
 
         context "and there are not councillors" do
-          it { expect(comment.has_receiver_options?).to eq false }
+          it { expect(comment.has_for_options?).to eq false }
         end
       end
     end
@@ -282,11 +282,11 @@ describe Comment do
             create(:councillor, authority: comment.application.authority)
           end
 
-          it { expect(comment.has_receiver_options?).to eq true }
+          it { expect(comment.has_for_options?).to eq true }
         end
 
         context "and there are not councillors" do
-          it { expect(comment.has_receiver_options?).to eq false }
+          it { expect(comment.has_for_options?).to eq false }
         end
       end
 
@@ -296,11 +296,11 @@ describe Comment do
         end
 
         context "and there are councillors" do
-          it { expect(comment.has_receiver_options?).to eq false }
+          it { expect(comment.has_for_options?).to eq false }
         end
 
         context "and there are not councillors" do
-          it { expect(comment.has_receiver_options?).to eq false }
+          it { expect(comment.has_for_options?).to eq false }
         end
       end
     end
@@ -314,13 +314,13 @@ describe Comment do
     end
 
     context "when it can't be sent to councillors" do
-      before { allow(comment).to receive(:has_receiver_options?).and_return(false) }
+      before { allow(comment).to receive(:has_for_options?).and_return(false) }
 
       it { expect(comment.for_planning_authority?).to eq true }
     end
 
     context "when it can be sent to councillors" do
-      before { allow(comment).to receive(:has_receiver_options?).and_return(true) }
+      before { allow(comment).to receive(:has_for_options?).and_return(true) }
 
       it "defaults to false" do
         expect(comment.for_planning_authority?).to eq false

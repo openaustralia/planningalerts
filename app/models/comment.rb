@@ -35,7 +35,7 @@ class Comment < ActiveRecord::Base
     end
   end
 
-  def has_receiver_options?
+  def has_for_options?
     if ENV["COUNCILLORS_ENABLED"] == "true" && theme == "default"
       application.authority.councillors.any?
     else
@@ -47,7 +47,7 @@ class Comment < ActiveRecord::Base
     if for_planning_authority.present?
       for_planning_authority
     else
-      !has_receiver_options?
+      !has_for_options?
     end
   end
 
@@ -66,7 +66,7 @@ class Comment < ActiveRecord::Base
   private
 
   def receiver_must_be_selected_if_options_available
-    if has_receiver_options?
+    if has_for_options?
      if for_planning_authority.blank? && councillor_id.nil?
        errors.add(
          :receiver_options,
