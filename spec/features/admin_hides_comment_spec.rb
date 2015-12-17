@@ -31,4 +31,25 @@ feature "Admin hides comment" do
     expect(page).to have_content("Comment was successfully updated")
     expect(page).to have_content("Hidden true")
   end
+
+  scenario "successfully when writing to councillor feature is enabled" do
+    with_modified_env COUNCILLORS_ENABLED: 'true' do
+      visit admin_root_path
+      click_link "Comments"
+
+      within("#comment_1") do
+        click_link "Edit"
+      end
+
+      check "Hidden"
+      click_button "Update Comment"
+
+      expect(page).to have_content("Comment was successfully updated")
+      expect(page).to have_content("Hidden true")
+    end
+  end
+
+  def with_modified_env(options, &block)
+    ClimateControl.modify(options, &block)
+  end
 end
