@@ -51,7 +51,7 @@ describe ApplicationsController do
 
       get :show, id: 1
 
-      assigns[:application].should == application
+      expect(assigns[:application]).to eq application
     end
   end
 end
