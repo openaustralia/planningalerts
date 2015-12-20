@@ -1,4 +1,4 @@
-= semantic_form_for [@application, @comment] do |f|
+= semantic_form_for [@application, @create_comment] do |f|
   = f.inputs id: "comment-base-inputgroup" do
     - label_for_text = capture do
       %h4#add-comment Have your say on this application
@@ -6,6 +6,7 @@
     = f.input :text, label: label_for_text.html_safe,
                      placeholder: "Be polite, clear, and to the point so your comment gets listened to.",
                      hint: "Have you made a donation or gift to a Councillor or Council employee? #{link_to("You may need to disclose this", faq_path(anchor: "disclosure"))}.".html_safe,
+                     as: :text,
                      input_html: { rows: "10" }
     %div#disclosure_explanation.inline-hints.hidden
       = render partial: 'static/disclosure_explanation'

@@ -1,7 +1,7 @@
 = f.inputs id: "comment-receiver-inputgroup" do
-  %li.input{class: ("error" if @comment.errors[:comment_for])}
-    - if @comment.errors[:comment_for]
-      %p.inline-errors= @comment.errors[:comment_for].first.to_s
+  %li.input{class: ("error" if @create_comment.errors[:comment_for])}
+    - if @create_comment.errors[:comment_for]
+      %p.inline-errors= @create_comment.errors[:comment_for].first.to_s
     %legend Who should this go to?
     = radio_button_tag("comment[comment_for]",
                       "planning authority",
