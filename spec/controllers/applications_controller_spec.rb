@@ -36,15 +36,16 @@ describe ApplicationsController do
 
   describe "#show" do
     it "should gracefully handle an application without any geocoded information" do
-      app = mock_model(
-        Application,
-        address: "An address that can't be geocoded",
-        date_scraped: Date.new(2010,1,1),
-        description: "foo",
-        location: nil,
-        find_all_nearest_or_recent: [],
-        comments: Comment
-      )
+      app = VCR.use_cassette('application_with_no_address') do
+        create(
+          :application,
+          address: "An address that can't be geocoded",
+          id: 1
+        )
+      end
+
+      allow(app).to receive(:location).and_return(nil)
+      allow(app).to receive(:find_all_nearest_or_recent).and_return([])
 
       Application.should_receive(:find).with("1").and_return(app)
 
