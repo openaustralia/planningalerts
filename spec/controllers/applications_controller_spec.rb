@@ -36,9 +36,18 @@ describe ApplicationsController do
 
   describe "#show" do
     it "should gracefully handle an application without any geocoded information" do
-      app = mock_model(Application, address: "An address that can't be geocoded", date_scraped: Date.new(2010,1,1),
-        description: "foo", location: nil, find_all_nearest_or_recent: [], comments: Comment)
+      app = mock_model(
+        Application,
+        address: "An address that can't be geocoded",
+        date_scraped: Date.new(2010,1,1),
+        description: "foo",
+        location: nil,
+        find_all_nearest_or_recent: [],
+        comments: Comment
+      )
+
       Application.should_receive(:find).with("1").and_return(app)
+
       get :show, id: 1
 
       assigns[:application].should == app
