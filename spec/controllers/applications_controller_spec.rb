@@ -36,7 +36,7 @@ describe ApplicationsController do
 
   describe "#show" do
     it "should gracefully handle an application without any geocoded information" do
-      app = VCR.use_cassette('application_with_no_address') do
+      application = VCR.use_cassette('application_with_no_address') do
         create(
           :application,
           address: "An address that can't be geocoded",
@@ -44,14 +44,14 @@ describe ApplicationsController do
         )
       end
 
-      allow(app).to receive(:location).and_return(nil)
-      allow(app).to receive(:find_all_nearest_or_recent).and_return([])
+      allow(application).to receive(:location).and_return(nil)
+      allow(application).to receive(:find_all_nearest_or_recent).and_return([])
 
-      Application.should_receive(:find).with("1").and_return(app)
+      Application.should_receive(:find).with("1").and_return(application)
 
       get :show, id: 1
 
-      assigns[:application].should == app
+      assigns[:application].should == application
     end
   end
 end
