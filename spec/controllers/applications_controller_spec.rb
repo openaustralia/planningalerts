@@ -47,6 +47,8 @@ describe ApplicationsController do
       allow(application).to receive(:location).and_return(nil)
       allow(application).to receive(:find_all_nearest_or_recent).and_return([])
 
+      # TODO: Can this line be removed? It seems to be a duplicate of
+      # expectation on final line.
       Application.should_receive(:find).with("1").and_return(application)
 
       get :show, id: 1
