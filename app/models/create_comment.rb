@@ -63,8 +63,6 @@ class CreateComment
   private
 
   def process_comment_for(comment)
-    if comment_for.present? && comment_for != "planning authority"
-      comment.councillor_id = Councillor.find(comment_for).id
-    end
+    comment.councillor_id = Councillor.find(comment_for).id if for_councillor?
   end
 end
