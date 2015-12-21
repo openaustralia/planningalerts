@@ -9,7 +9,7 @@ class CreateComment
     :email,
     :theme,
     :comment_for,
-    :application_id
+    :application
   )
 
   validates_presence_of :name, :text, :email
@@ -26,7 +26,7 @@ class CreateComment
       remove_address_if_for_councillor
 
       @comment = Comment.new(
-        application_id: application_id,
+        application_id: application.id,
         name: name,
         text: text,
         address: address,
@@ -42,7 +42,7 @@ class CreateComment
 
   def could_be_for_councillor?
     if ENV["COUNCILLORS_ENABLED"] == "true" && theme == "default"
-      Application.find(application_id).authority.councillors.any?
+      application.authority.councillors.any?
     else
       false
     end

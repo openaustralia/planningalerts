@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe CreateComment do
   describe "#save_comment" do
-    let(:application) { create(:application, id: 1) }
+    let(:application) { VCR.use_cassette('planningalerts') { create(:application) } }
     let(:create_comment_form) do
-      build(:create_comment, application_id: 1,
+      build(:create_comment, application: application,
                              comment_for: nil,
                              text: "Testing testing 1 2 3")
     end
@@ -126,12 +126,9 @@ describe CreateComment do
   end
 
   describe "#could_be_for_councillor?" do
+    let(:application) { VCR.use_cassette('planningalerts') { create(:application) } }
     let(:create_comment_form) do
-      build(:create_comment, application_id: 1)
-    end
-
-    before :each do
-      @application = VCR.use_cassette('planningalerts') { create(:application, id: 1) }
+      build(:create_comment, application: application)
     end
 
     context "when the writing to councillors feature is not enabled" do
@@ -156,7 +153,7 @@ describe CreateComment do
 
         context "and there are councillors" do
           before do
-            create(:councillor, authority: @application.authority)
+            create(:councillor, authority: application.authority)
           end
 
           it { expect(create_comment_form.could_be_for_councillor?).to eq false }
@@ -182,7 +179,7 @@ describe CreateComment do
 
         context "and there are councillors" do
           before do
-            create(:councillor, authority: @application.authority)
+            create(:councillor, authority: application.authority)
           end
 
           it { expect(create_comment_form.could_be_for_councillor?).to eq true }

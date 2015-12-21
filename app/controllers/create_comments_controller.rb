@@ -10,7 +10,7 @@ class CreateCommentsController < ApplicationController
 
       @create_comment = CreateComment.new(
         create_comment_params.merge(
-          application_id: params[:application_id],
+          application: @application,
           theme: @theme
         )
       )
