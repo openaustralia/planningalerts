@@ -55,6 +55,18 @@ if ($('#comment-receiver-inputgroup').length) {
     if ($(councillorListWrapper).hasClass('open')) {
       $(councillorListWrapper).removeClass('open');
     }
+
+    $('#create_comment_address_input').attr('aria-hidden', 'false');
+  });
+
+  $('.councillor-select-radio').each(function() {
+    if ( $(this).prop('checked') === true ) {
+      $('#create_comment_address_input').attr('aria-hidden', 'true');
+    }
+
+    $(this).click(function() {
+      $('#create_comment_address_input').attr('aria-hidden', 'true');
+    });
   });
 }
 
