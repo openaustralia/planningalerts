@@ -3,11 +3,10 @@
     - if @create_comment.errors[:comment_for]
       %p.inline-errors= @create_comment.errors[:comment_for].first.to_s
     %legend Who should this go to?
-    = radio_button_tag("comment[comment_for]",
-                      "planning authority",
-                      false,
-                      id: "receiver-to-authority-option",
-                      class: "receiver-select-radio receiver-type-option")
+    = f.radio_button(:comment_for,
+                     "planning authority",
+                     { id: "receiver-to-authority-option",
+                       class: "receiver-select-radio receiver-type-option" })
     %label.receiver-select-label{for: "receiver-to-authority-option"}
       %strong The planning authority
       - if @application.official_submission_period_expired?
