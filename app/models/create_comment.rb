@@ -17,7 +17,7 @@ class CreateComment
   validates_email_format_of :email
   validates_presence_of(
     :comment_for,
-    if: :has_for_options?,
+    if: :could_be_for_councillor?,
     message: "You need to select who your message should go to from the list below."
   )
 
@@ -40,7 +40,7 @@ class CreateComment
     end
   end
 
-  def has_for_options?
+  def could_be_for_councillor?
     if ENV["COUNCILLORS_ENABLED"] == "true" && theme == "default"
       Application.find(application_id).authority.councillors.any?
     else

@@ -11,7 +11,7 @@ describe CreateComment do
 
     context "that can be sent to a councillor" do
       before :each do
-        allow(create_comment_form).to receive(:has_for_options?).and_return(true)
+        allow(create_comment_form).to receive(:could_be_for_councillor?).and_return(true)
       end
 
       it "is invalid without specificfy who it is for" do
@@ -97,7 +97,7 @@ describe CreateComment do
 
     context "that can’t be sent to a councillor" do
       before do
-         allow(create_comment_form).to receive(:has_for_options?).and_return(false)
+         allow(create_comment_form).to receive(:could_be_for_councillor?).and_return(false)
       end
 
       it "is valid without specificing who it is for" do
@@ -125,7 +125,7 @@ describe CreateComment do
     end
   end
 
-  describe "#has_for_options?" do
+  describe "#could_be_for_councillor?" do
     let(:create_comment_form) do
       build(:create_comment, application_id: 1)
     end
@@ -141,11 +141,11 @@ describe CreateComment do
         end
 
         context "and there are councillors" do
-          it { expect(create_comment_form.has_for_options?).to eq false }
+          it { expect(create_comment_form.could_be_for_councillor?).to eq false }
         end
 
         context "and there are not councillors" do
-          it { expect(create_comment_form.has_for_options?).to eq false }
+          it { expect(create_comment_form.could_be_for_councillor?).to eq false }
         end
       end
 
@@ -159,11 +159,11 @@ describe CreateComment do
             create(:councillor, authority: @application.authority)
           end
 
-          it { expect(create_comment_form.has_for_options?).to eq false }
+          it { expect(create_comment_form.could_be_for_councillor?).to eq false }
         end
 
         context "and there are not councillors" do
-          it { expect(create_comment_form.has_for_options?).to eq false }
+          it { expect(create_comment_form.could_be_for_councillor?).to eq false }
         end
       end
     end
@@ -185,11 +185,11 @@ describe CreateComment do
             create(:councillor, authority: @application.authority)
           end
 
-          it { expect(create_comment_form.has_for_options?).to eq true }
+          it { expect(create_comment_form.could_be_for_councillor?).to eq true }
         end
 
         context "and there are not councillors" do
-          it { expect(create_comment_form.has_for_options?).to eq false }
+          it { expect(create_comment_form.could_be_for_councillor?).to eq false }
         end
       end
 
@@ -199,11 +199,11 @@ describe CreateComment do
         end
 
         context "and there are councillors" do
-          it { expect(create_comment_form.has_for_options?).to eq false }
+          it { expect(create_comment_form.could_be_for_councillor?).to eq false }
         end
 
         context "and there are not councillors" do
-          it { expect(create_comment_form.has_for_options?).to eq false }
+          it { expect(create_comment_form.could_be_for_councillor?).to eq false }
         end
       end
     end
