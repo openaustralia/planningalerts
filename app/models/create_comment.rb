@@ -12,7 +12,8 @@ class CreateComment
     :application_id
   )
 
-  validates_presence_of :name, :text, :address, :email
+  validates_presence_of :name, :text, :email
+  validates_presence_of :address, unless: :for_councillor?
   validates_email_format_of :email
   validates_presence_of(
     :comment_for,
@@ -22,6 +23,8 @@ class CreateComment
 
   def save_comment
     if valid?
+      remove_address_if_for_councillor
+
       @comment = Comment.new(
         application_id: application_id,
         name: name,
@@ -51,6 +54,10 @@ class CreateComment
 
   def for_councillor?
     !for_planning_authority?
+  end
+
+  def remove_address_if_for_councillor
+    self.address = nil if for_councillor?
   end
 
   private

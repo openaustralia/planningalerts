@@ -49,6 +49,7 @@ FactoryGirl.define do
     end
 
     factory :comment_to_councillor do
+      address nil
       association :councillor
     end
   end

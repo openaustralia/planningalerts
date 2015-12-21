@@ -32,6 +32,18 @@ describe CreateComment do
             expect(application.comments.first.text).to eq "Testing testing 1 2 3"
           end
         end
+
+        context "and there is no address" do
+          before { create_comment_form.address = nil }
+
+          it { expect(create_comment_form).to_not be_valid }
+        end
+
+        context "and an address is present" do
+          before { create_comment_form.address = "64 Fake st" }
+
+          it { expect(create_comment_form).to be_valid }
+        end
       end
 
       context "when it is for a councillor" do
@@ -46,6 +58,25 @@ describe CreateComment do
           VCR.use_cassette('planningalerts') do
             expect(create_comment_form.save_comment).to be_an_instance_of(Comment)
             expect(application.comments.first.text).to eq "Testing testing 1 2 3"
+          end
+        end
+
+        context "and there is no address" do
+          before { create_comment_form.address = nil }
+
+          it { expect(create_comment_form).to be_valid }
+        end
+
+        context "and an address is present" do
+          before { create_comment_form.address = "64 Fake st" }
+
+          it "removes it before saving the comment" do
+            expect(create_comment_form).to be_valid
+
+            VCR.use_cassette('planningalerts') do
+              expect(create_comment_form.save_comment).to be_an_instance_of(Comment)
+              expect(application.comments.first.address).to be_nil
+            end
           end
         end
       end
@@ -78,6 +109,18 @@ describe CreateComment do
           expect(create_comment_form.save_comment).to be_an_instance_of(Comment)
           expect(application.comments.first.text).to eq "Testing testing 1 2 3"
         end
+      end
+
+      context "and there is no address" do
+        before { create_comment_form.address = nil }
+
+        it { expect(create_comment_form).to_not be_valid }
+      end
+
+      context "and an address is present" do
+        before { create_comment_form.address = "64 Fake st" }
+
+        it { expect(create_comment_form).to be_valid }
       end
     end
   end
@@ -167,24 +210,48 @@ describe CreateComment do
   end
 
   context "when comment_for is nil" do
-    let(:create_comment_form) { build(:create_comment, comment_for: nil) }
+    let(:create_comment_form) do
+      build(:create_comment, comment_for: nil, address: "64 Fake st")
+    end
 
     it { expect(create_comment_form.for_planning_authority?).to eq true }
     it { expect(create_comment_form.for_councillor?).to eq false }
+
+    it "doesn't remove the address" do
+      create_comment_form.remove_address_if_for_councillor
+
+      expect(create_comment_form.address).to eq "64 Fake st"
+    end
   end
 
   context "when comment_for is 'planning authority'" do
-    let(:create_comment_form) { build(:create_comment, comment_for: "planning authority") }
+    let(:create_comment_form) do
+      build(:create_comment, comment_for: "planning authority", address: "64 Fake st" )
+    end
 
     it { expect(create_comment_form.for_planning_authority?).to eq true }
     it { expect(create_comment_form.for_councillor?).to eq false }
+
+    it "doesn't remove the address" do
+      create_comment_form.remove_address_if_for_councillor
+
+      expect(create_comment_form.address).to eq "64 Fake st"
+    end
   end
 
   context "when comment_for is an integer" do
-    let(:create_comment_form) { build(:create_comment, comment_for: 2) }
+    let(:create_comment_form) do
+      build(:create_comment, comment_for: 2, address: "64 Fake st" )
+    end
 
     it { expect(create_comment_form.for_planning_authority?).to eq false }
     it { expect(create_comment_form.for_councillor?).to eq true }
+
+    it "removes the address" do
+      create_comment_form.remove_address_if_for_councillor
+
+      expect(create_comment_form.address).to be_nil
+    end
   end
 
   def with_modified_env(options, &block)

@@ -143,6 +143,46 @@ describe Comment do
     end
   end
 
+  context "new comment for a planning authority" do
+    let(:comment_to_authority) do
+      VCR.use_cassette('planningalerts') do
+        create(:comment_to_authority)
+      end
+    end
+
+    it "is not valid without an address" do
+      comment_to_authority.address = nil
+
+      expect(comment_to_authority).to_not be_valid
+    end
+
+    it "is valid with an address" do
+      comment_to_authority.address = "64 Fake St"
+
+      expect(comment_to_authority).to be_valid
+    end
+  end
+
+  context "new comment for a councillor" do
+    let(:comment_to_councillor) do
+      VCR.use_cassette('planningalerts') do
+        create(:comment_to_councillor)
+      end
+    end
+
+    it "is valid without an address" do
+      comment_to_councillor.address = nil
+
+      expect(comment_to_councillor).to be_valid
+    end
+
+    it "is valid with an address" do
+      comment_to_councillor.address = "64 Fake St"
+
+      expect(comment_to_councillor).to be_valid
+    end
+  end
+
   context "to a planning authority" do
     let(:comment_to_authority) do
       VCR.use_cassette('planningalerts') do

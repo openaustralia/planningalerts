@@ -3,7 +3,8 @@ class Comment < ActiveRecord::Base
   belongs_to :councillor
   has_many :reports
   has_many :replies
-  validates_presence_of :name, :text, :address
+  validates_presence_of :name, :text
+  validates_presence_of :address, unless: :to_councillor?
 
   acts_as_email_confirmable
   scope :visible, -> { where(confirmed: true, hidden: false) }

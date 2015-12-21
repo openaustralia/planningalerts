@@ -86,7 +86,6 @@ feature "Send a message to a councillor" do
         end
 
         fill_in("Your email", with: "example@example.com")
-        fill_in("Your street address", with: "11 Foo Street")
 
         click_button("Post your public comment")
 
@@ -121,7 +120,6 @@ feature "Send a message to a councillor" do
         #       hardly anyone will actually use, though the validation works the same.
 
         fill_in("Your email", with: "example@example.com")
-        fill_in("Your street address", with: "11 Foo Street")
 
         click_button("Post your public comment")
 
