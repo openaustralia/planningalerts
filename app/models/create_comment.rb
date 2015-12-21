@@ -45,6 +45,14 @@ class CreateComment
     end
   end
 
+  def for_planning_authority?
+    comment_for.nil? || comment_for == "planning authority"
+  end
+
+  def for_councillor?
+    !for_planning_authority?
+  end
+
   private
 
   def process_comment_for(comment)

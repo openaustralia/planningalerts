@@ -166,6 +166,27 @@ describe CreateComment do
     end
   end
 
+  context "when comment_for is nil" do
+    let(:create_comment_form) { build(:create_comment, comment_for: nil) }
+
+    it { expect(create_comment_form.for_planning_authority?).to eq true }
+    it { expect(create_comment_form.for_councillor?).to eq false }
+  end
+
+  context "when comment_for is 'planning authority'" do
+    let(:create_comment_form) { build(:create_comment, comment_for: "planning authority") }
+
+    it { expect(create_comment_form.for_planning_authority?).to eq true }
+    it { expect(create_comment_form.for_councillor?).to eq false }
+  end
+
+  context "when comment_for is an integer" do
+    let(:create_comment_form) { build(:create_comment, comment_for: 2) }
+
+    it { expect(create_comment_form.for_planning_authority?).to eq false }
+    it { expect(create_comment_form.for_councillor?).to eq true }
+  end
+
   def with_modified_env(options, &block)
     ClimateControl.modify(options, &block)
   end
