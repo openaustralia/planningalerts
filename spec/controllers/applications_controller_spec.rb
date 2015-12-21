@@ -36,12 +36,24 @@ describe ApplicationsController do
 
   describe "#show" do
     it "should gracefully handle an application without any geocoded information" do
-      app = mock_model(Application, address: "An address that can't be geocoded", date_scraped: Date.new(2010,1,1),
-        description: "foo", location: nil, find_all_nearest_or_recent: [], comments: Comment)
-      Application.should_receive(:find).with("1").and_return(app)
+      application = VCR.use_cassette('application_with_no_address') do
+        create(
+          :application,
+          address: "An address that can't be geocoded",
+          id: 1
+        )
+      end
+
+      allow(application).to receive(:location).and_return(nil)
+      allow(application).to receive(:find_all_nearest_or_recent).and_return([])
+
+      # TODO: Can this line be removed? It seems to be a duplicate of
+      # expectation on final line.
+      Application.should_receive(:find).with("1").and_return(application)
+
       get :show, id: 1
 
-      assigns[:application].should == app
+      expect(assigns[:application]).to eq application
     end
   end
 end

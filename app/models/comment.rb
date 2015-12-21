@@ -1,7 +1,10 @@
 class Comment < ActiveRecord::Base
   belongs_to :application
+  belongs_to :councillor
   has_many :reports
-  validates_presence_of :name, :text, :address
+  has_many :replies
+  validates_presence_of :name, :text
+  validates_presence_of :address, unless: :to_councillor?
 
   acts_as_email_confirmable
   scope :visible, -> { where(confirmed: true, hidden: false) }
@@ -23,6 +26,22 @@ class Comment < ActiveRecord::Base
 
   # Send the comment to the planning authority
   def after_confirm
-    CommentNotifier.delay.notify("default", self)
+    if to_councillor?
+      CommentNotifier.delay.notify_councillor("default", self)
+    else
+      CommentNotifier.delay.notify_authority("default", self)
+    end
+  end
+
+  def to_councillor?
+    councillor ? true : false
+  end
+
+  def awaiting_councillor_reply?
+    to_councillor? && replies.empty?
+  end
+
+  def recipient_display_name
+    to_councillor? ? councillor.prefixed_name : application.authority.full_name
   end
 end

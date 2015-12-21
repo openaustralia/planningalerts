@@ -42,55 +42,95 @@ feature "Give feedback to Council" do
     page.should_not have_content("Now check your email")
   end
 
-  scenario "Adding a comment" do
-    authority = create(:authority, full_name: "Foo", email: "feedback@foo.gov.au")
-    VCR.use_cassette('planningalerts') do
-      application = create(:application, id: "1", authority_id: authority.id)
-      visit(application_path(application))
+  context "when the authority is contactable" do
+    given(:application) do
+      VCR.use_cassette('planningalerts') do
+        authority = create(:contactable_authority,
+                           full_name: "Foo",
+                           email: "feedback@foo.gov.au")
+        create(:application, id: "1", authority: authority)
+      end
     end
 
-    fill_in("Have your say on this application", with: "I think this is a really good ideas")
-    fill_in("Your name", with: "Matthew Landauer")
-    fill_in("Your email", with: "example@example.com")
-    fill_in("Your street address", with: "11 Foo Street")
-    click_button("Post your public comment")
+    scenario "Adding a comment" do
+      visit(application_path(application))
 
-    page.should have_content("Now check your email")
-    page.should have_content("Click on the link in the email to confirm your comment")
+      fill_in("Have your say on this application", with: "I think this is a really good ideas")
+      fill_in("Your name", with: "Matthew Landauer")
+      fill_in("Your email", with: "example@example.com")
+      fill_in("Your street address", with: "11 Foo Street")
+      click_button("Post your public comment")
 
-    unread_emails_for("example@example.com").size.should == 1
-    open_email("example@example.com")
-    current_email.should have_subject("Please confirm your comment")
-    # And the email body should contain a link to the confirmation page
-    comment = Comment.find_by_text("I think this is a really good ideas")
-    current_email.default_part_body.to_s.should include(confirmed_comment_url(id: comment.confirm_id, protocol: "https", host: 'dev.planningalerts.org.au'))
-  end
+      page.should have_content("Now check your email")
+      page.should have_content("Click on the link in the email to confirm your comment")
 
-  scenario "Unconfirmed comment should not be shown" do
-    authority = create(:authority, full_name: "Foo", email: "feedback@foo.gov.au")
-    VCR.use_cassette('planningalerts') do
-      application = create(:application, id: "1", authority_id: authority.id)
+      unread_emails_for("example@example.com").size.should == 1
+      open_email("example@example.com")
+      current_email.should have_subject("Please confirm your comment")
+      # And the email body should contain a link to the confirmation page
+      comment = Comment.find_by_text("I think this is a really good ideas")
+      current_email.default_part_body.to_s.should include(confirmed_comment_url(id: comment.confirm_id, protocol: "https", host: 'dev.planningalerts.org.au'))
+    end
+
+    context "when there is the option to write to a councillor" do
+      around do |test|
+        with_modified_env COUNCILLORS_ENABLED: 'true' do
+          test.run
+        end
+      end
+
+      background do
+        create(:councillor, authority: application.authority)
+      end
+
+      scenario "Adding a comment for the planning authority" do
+        visit(application_path(application))
+
+        expect(page).to have_content("Who should this go to?")
+
+        fill_in("Have your say on this application", with: "I think this is a really good ideas")
+        fill_in("Your name", with: "Matthew Landauer")
+        choose("The planning authority")
+        fill_in("Your email", with: "example@example.com")
+        fill_in("Your street address", with: "11 Foo Street")
+        click_button("Post your public comment")
+
+        expect(page).to have_content("Now check your email")
+        expect(page).to have_content("Click on the link in the email to confirm your comment")
+
+        expect(unread_emails_for("example@example.com").size).to eq 1
+        open_email("example@example.com")
+
+        expect(current_email).to have_subject("Please confirm your comment")
+
+        comment = Comment.find_by_text("I think this is a really good ideas")
+        expect(current_email.default_part_body.to_s)
+          .to include(confirmed_comment_url(id: comment.confirm_id,
+                                            protocol: "https",
+                                            host: 'dev.planningalerts.org.au'))
+      end
+    end
+
+    scenario "Unconfirmed comment should not be shown" do
       create(:comment, confirmed: false, text: "I think this is a really good ideas", application: application)
+
       visit(application_path(application))
+
+      page.should_not have_content("I think this is a really good ideas")
     end
 
-    page.should_not have_content("I think this is a really good ideas")
-  end
-
-  scenario "Confirming the comment" do
-    authority = create(:authority, full_name: "Foo", email: "feedback@foo.gov.au")
-    VCR.use_cassette('planningalerts') do
-      application = create(:application, id: "1", authority_id: authority.id)
+    scenario "Confirming the comment" do
       comment = create(:comment, confirmed: false, text: "I think this is a really good ideas", application: application)
+
       visit(confirmed_comment_path(id: comment.confirm_id))
+
+      page.should have_content("Thanks. Your comment has been sent to Foo and is now visible on this page.")
+      page.should have_content("I think this is a really good ideas")
+
+      unread_emails_for("feedback@foo.gov.au").size.should == 1
+      open_email("feedback@foo.gov.au")
+      current_email.default_part_body.to_s.should include("I think this is a really good ideas")
     end
-
-    page.should have_content("Thanks. Your comment has been sent to Foo and is now visible on this page.")
-    page.should have_content("I think this is a really good ideas")
-
-    unread_emails_for("feedback@foo.gov.au").size.should == 1
-    open_email("feedback@foo.gov.au")
-    current_email.default_part_body.to_s.should include("I think this is a really good ideas")
   end
 
   scenario "Reporting abuse on a confirmed comment" do
@@ -142,5 +182,9 @@ feature "Give feedback to Council" do
       page.should have_content("Some of the comment wasn't filled out completely. See below.")
       page.should_not have_content("Now check your email")
     end
+  end
+
+  def with_modified_env(options, &block)
+    ClimateControl.modify(options, &block)
   end
 end

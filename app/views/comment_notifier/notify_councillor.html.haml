@@ -1,0 +1,28 @@
+%p Hi #{@comment.councillor.name},
+
+%p
+  You’ve got a new message from
+  = @comment.name
+  in relation to a
+  = succeed "." do
+    = link_to "local planning application for #{@comment.application.address}",
+              application_url(@comment.application,
+                              protocol: "https",
+                              utm_source: "councillor-notifications",
+                              utm_medium: "email",
+                              utm_campaign: "view-application")
+  The application is for, “#{@comment.application.description}”.
+
+%p
+  = @comment.name
+  writes:
+
+%blockquote= comment_as_html(@comment.text)
+
+%p
+  This message was posted publicly on PlanningAlerts.
+  You can publicly respond to this message by simply replying to this email.
+
+%p Best wishes,
+
+%p PlanningAlerts

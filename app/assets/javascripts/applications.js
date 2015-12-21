@@ -14,6 +14,8 @@ if ($('#comment-receiver-inputgroup').length) {
   // TODO: Fix keyboard navigation
   councillorTogglerRadio = document.createElement('input');
   $(councillorTogglerRadio).attr('type','radio')
+                           .attr('name','councillors_list_toggler')
+                           .attr('value','open')
                            .attr('id', 'councillors-list-toggler')
                            .attr('class', 'receiver-select-radio receiver-type-option');
 
@@ -21,8 +23,14 @@ if ($('#comment-receiver-inputgroup').length) {
   $(councillorTogglerLabel).attr('for', 'councillors-list-toggler')
                            .attr('class', 'receiver-select-label receiver-type-option');
 
-  $('.councillor-select-list').before(councillorTogglerRadio)
-                              .before(councillorTogglerLabel);
+  councillorListWrapper = $('.councillor-select-list');
+
+   if ($(councillorListWrapper).is('.open')) {
+     $(councillorTogglerRadio).prop('checked', true);
+   }
+
+  councillorListWrapper.before(councillorTogglerRadio)
+                       .before(councillorTogglerLabel);
 
   $('label[for="councillors-list-toggler"]').append('<strong>' + $('.councillor-select-list-intro strong').text() + '</strong><p>' + $('.councillor-select-list-intro p').text() + '</p>');
 
@@ -35,12 +43,30 @@ if ($('#comment-receiver-inputgroup').length) {
     if ($(radioForAuthorityOption).prop('checked') === true) {
       $(radioForAuthorityOption).prop('checked', false);
     }
+
+    $(councillorListWrapper).addClass('open');
   });
 
   $(radioForAuthorityOption).click(function(e) {
     if ($(radioForCouncillorsList).prop('checked') === true) {
       $(radioForCouncillorsList).prop('checked', false);
     }
+
+    if ($(councillorListWrapper).hasClass('open')) {
+      $(councillorListWrapper).removeClass('open');
+    }
+
+    $('#create_comment_address_input').attr('aria-hidden', 'false');
+  });
+
+  $('.councillor-select-radio').each(function() {
+    if ( $(this).prop('checked') === true ) {
+      $('#create_comment_address_input').attr('aria-hidden', 'true');
+    }
+
+    $(this).click(function() {
+      $('#create_comment_address_input').attr('aria-hidden', 'true');
+    });
   });
 }
 

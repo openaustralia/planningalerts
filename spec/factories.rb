@@ -2,6 +2,10 @@ FactoryGirl.define do
   factory :authority do
     sequence(:full_name) { |n| "Acme Local Planning Authority - #{n}" }
     short_name {|b| b.full_name}
+
+    factory :contactable_authority do
+      email "example@authority.gov"
+    end
   end
 
   factory :application do
@@ -13,12 +17,24 @@ FactoryGirl.define do
     info_url "http://foo.com"
   end
 
+  factory :create_comment do
+    email "matthew@openaustralia.org"
+    name "Matthew Landauer"
+    text "a comment"
+    address "12 Foo Street"
+    theme "default"
+  end
+
   factory :comment do
     email "matthew@openaustralia.org"
     name "Matthew Landauer"
     text "a comment"
     address "12 Foo Street"
     association :application
+
+    trait :confirmed do
+      confirmed true
+    end
 
     factory :unconfirmed_comment do
       confirmed false
@@ -27,6 +43,28 @@ FactoryGirl.define do
     factory :confirmed_comment do
       confirmed true
     end
+
+    factory :comment_to_authority do
+      councillor_id nil
+    end
+
+    factory :comment_to_councillor do
+      address nil
+      association :councillor
+    end
+  end
+
+  factory :reply do
+    text "Thanks for your comment, I agree"
+    received_at 1.day.ago
+    association :comment
+    association :councillor
+  end
+
+  factory :councillor do
+    name "Louise Councillor"
+    email "louise@council.state.gov"
+    association :authority
   end
 
   factory :user do

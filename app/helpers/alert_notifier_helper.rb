@@ -1,6 +1,10 @@
 module AlertNotifierHelper
   include ActionMailerThemer
 
+  def capitalise_initial_character(text)
+    text[0].upcase + text[1..-1]
+  end
+
   def host_and_protocol_for_theme(theme)
     { host: host(theme), protocol: protocol(theme) }
   end
@@ -28,6 +32,18 @@ module AlertNotifierHelper
         id: comment.application.id,
         anchor: "comment#{comment.id}",
         utm_campaign: "view-comment"
+      )
+    )
+  end
+
+  def reply_url_with_tracking(theme: nil, reply: nil)
+    base_params = host_and_protocol_for_theme(theme).merge(base_tracking_params)
+
+    application_url(
+      base_params.merge(
+        id: reply.comment.application.id,
+        anchor: "reply#{reply.id}",
+        utm_campaign: "view-reply"
       )
     )
   end
@@ -61,14 +77,13 @@ module AlertNotifierHelper
     new_subscription_url(params)
   end
 
-  def subject(alert, applications, comments)
-    items = if applications.any? && comments.empty?
-              pluralize(applications.size, "new planning application")
-            elsif applications.empty? && comments.any?
-              pluralize(comments.size, "new comment") + " on planning applications"
-            elsif applications.any? && comments.any?
-              pluralize(comments.size, "new comment") + " and " + pluralize(applications.size, "new planning application")
-            end
+  def subject(alert, applications, comments, replies)
+    applications_text = pluralize(applications.size, "new planning application") if applications.any?
+    comments_text = pluralize(comments.size, "new comment") if comments.any?
+    replies_text = pluralize(replies.size, "new reply") if replies.any?
+
+    items = [comments_text, replies_text, applications_text].compact.to_sentence(last_word_connector: " and ")
+    items += " on planning applications" if applications.empty?
 
     if alert.expired_subscription?
       "You’re missing out on #{items} near #{alert.address}"

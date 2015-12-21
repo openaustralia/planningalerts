@@ -10,6 +10,8 @@
     - else
       - unless @comments.empty?
         = render "comments"
+      - unless @replies.empty?
+        = render "replies"
       - unless @applications.empty?
         = render "applications"
     .footer-outer

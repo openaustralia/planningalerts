@@ -24,28 +24,4 @@ $container-style: fluid;
 
 $show-grid-backgrounds: false;
 
-// Colours
-
-$lightest: #ebf1d6;
-$light: #fae08b;
-$dark: #1d3d61;
-$darkest: #303030;
-$warm-highlight: #e3821f;
-$cool-highlight: #505050;
-$light-cool-highlight: #aac7bc;
-$lightest-cool-highlight: #e7e7e7;
-
-$content-background: #fcfdfc;
-$background-overlay: transparentize($darkest,0.8);
-$dark-overlay: transparentize($darkest,0.2);
-
-$font-color: $darkest;
-$link-color: #144b8c;
-$link-active-color: $link-color;
-$link-hover-color: $link-color;
-$link-visited-color: $link-color;
-$link-focus-color: $link-color;
-$quiet-color: $cool-highlight;
-$error-bg-color: #fbb;
-$error-color: $font-color;
-$highlight-color: $light; // Background
+@import "colours";

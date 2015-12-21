@@ -1,21 +1,46 @@
+@import "partials/colours";
 $cyan: #d0ffff;
 $yellow: #fcfbbd;
 $orange: #f2630c;
 $dark_gray: #878787;
-$mid_gray: #505050;
-$light_gray: #e7e7e7;
+$mid_gray: $cool-highlight;
+$light_gray: $lightest-cool-highlight;
 $lightest_gray: #fafafa;
-$dark_blue: #1D3D61;
+$dark_blue: $dark;
+
+$base-email-layout-unit: 15px;
 
 .box {
   margin-top: 6px;
-  margin-right: 11px;
+  margin-right: 0;
   margin-bottom: 25px;
-  margin-left: 11px;
-  padding-top: 15px;
-  padding-right: 15px;
-  padding-bottom: 15px;
-  padding-left: 15px;
+  margin-left: 0;
+  padding-top: $base-email-layout-unit;
+  padding-right: $base-email-layout-unit;
+  padding-bottom: $base-email-layout-unit;
+  padding-left: $base-email-layout-unit;
+}
+
+.module {
+  margin-top: 6px;
+  margin-right: 0;
+  margin-bottom: 25px;
+  margin-left: 0;
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+}
+
+.panel-body {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  padding-top: $base-email-layout-unit;
+  padding-right: $base-email-layout-unit;
+  padding-bottom: $base-email-layout-unit;
+  padding-left: $base-email-layout-unit;
 }
 
 body {
@@ -41,62 +66,7 @@ a {
   }
 }
 
-.trial-banner {
-  margin-top: 0;
-  margin-left: 0;
-  margin-right: 0;
-  margin-bottom: 25px;
-  padding-top: 0;
-  padding-right: 15px;
-  padding-bottom: 15px;
-  padding-left: 15px;
-  background-color: $dark_blue !important;
-  color: #ffffff;
-  font-size: 14px;
-
-  @media only screen and (max-width: 480px) {
-    font-size: 15px;
-  }
-
-  a {
-    color: #ffffff !important;
-    text-decoration: underline;
-  }
-
-  p {
-    margin: 0;
-    padding-top: 21px;
-    float: left;
-    color: #ffffff;
-  }
-}
-
-.trial-banner-button-container {
-  padding-top: 15px;
-  padding-right: 16px;
-  float: left;
-}
-
-.trial-banner-button {
-  display: inline-block;
-  border-radius: 5px;
-  padding-top: 6px;
-  padding-right: 10px;
-  padding-bottom: 6px;
-  padding-left: 10px;
-  background-color: $orange;
-  color: #ffffff;
-  text-decoration: none !important;
-
-  @media only screen and (max-width: 480px) {
-    font-size: 16px;
-  }
-
-  &:hover,
-  &:focus {
-    background-color: lighten($orange, 20%);
-  }
-}
+@import "partials/email_subscriptions";
 
 .advert {
   background: $cyan;
@@ -107,64 +77,9 @@ a {
   background: $yellow;
 }
 
-.comment {
-  background: $lightest_gray;
-  border-width: 1px;
-  border-style: solid;
-  border-color: $light_gray;
+@import "partials/email_comments";
 
-  a {
-    font-weight: bold;
-  }
-
-  p {
-    margin-top: 0;
-    margin-bottom: 15px;
-    margin-bottom: 1em;
-  }
-}
-
-.comment-meta {
-  span {
-    color: $mid_gray;
-  }
-}
-
-.applications-more {
-  padding-left: 15px;
-}
-
-.application {
-  background: $light_gray;
-
-  .address {
-    padding-bottom: 5px;
-
-    a {
-      font-size: 18px;
-      font-weight: bold;
-    }
-  }
-
-  .map {
-    padding-top: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    width: 155px;
-  }
-
-  .streetview {
-    padding-top: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-  }
-
-  .description {
-    vertical-align: top;
-  }
-}
+@import "partials/email_applications";
 
 .expired-subscription-message {
   h1 {
@@ -180,6 +95,6 @@ a {
 
   .footer-inner {
     padding-top: 5px;
-    padding-left: 15px;
+    padding-left: $base-email-layout-unit;
   }
 }

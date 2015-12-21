@@ -34,7 +34,7 @@ gem "formtastic"
 gem 'validates_email_format_of'
 gem "geocoder"
 # Rails 4 support is a work in progress so requires tracking master
-gem 'activeadmin', github: 'activeadmin'
+gem 'activeadmin', '~> 1.0.0.pre2'
 gem "devise"
 # Disabling metric_fu because it depends on rcov which doesn't work on Ruby 1.9
 #gem 'metric_fu'
@@ -55,6 +55,7 @@ gem "redcarpet"
 gem 'honeybadger'
 gem 'stripe'
 gem 'dotenv-rails'
+gem 'climate_control'
 
 group :test do
   gem 'capybara'

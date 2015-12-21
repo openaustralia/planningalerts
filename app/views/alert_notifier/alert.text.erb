@@ -4,6 +4,14 @@
 <% else %>
 <% unless @comments.empty? %>
 <%= render "comments" -%>
+<% unless @replies.empty? && @applications.empty? -%>
+
+============================================================
+
+<% end %>
+<% end %>
+<% unless @replies.empty? %>
+<%= render "replies" -%>
 <% unless @applications.empty? -%>
 
 ============================================================

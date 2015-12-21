@@ -1,0 +1,25 @@
+Hi <%= @comment.councillor.name %>,
+
+You’ve got a new message from <%= @comment.name %> in relation to a local
+planning application:
+
+Address: <%= @comment.application.address %>
+Description: <%= @comment.application.description %>
+Link: <%= application_url(@comment.application,
+                          protocol: "https",
+                          utm_source: "councillor-notifications",
+                          utm_medium: "email",
+                          utm_campaign: "view-application") %>
+
+<%= @comment.name %> writes:
+
+<%= @comment.text.html_safe %>
+
+=========================================================================
+
+This message was posted publicly on PlanningAlerts. You can publicly
+respond to this message by simply replying to this email.
+
+Best wishes,
+
+PlanningAlerts

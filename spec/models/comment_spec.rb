@@ -142,4 +142,102 @@ describe Comment do
       end
     end
   end
+
+  context "new comment for a planning authority" do
+    let(:comment_to_authority) do
+      VCR.use_cassette('planningalerts') do
+        create(:comment_to_authority)
+      end
+    end
+
+    it "is not valid without an address" do
+      comment_to_authority.address = nil
+
+      expect(comment_to_authority).to_not be_valid
+    end
+
+    it "is valid with an address" do
+      comment_to_authority.address = "64 Fake St"
+
+      expect(comment_to_authority).to be_valid
+    end
+  end
+
+  context "new comment for a councillor" do
+    let(:comment_to_councillor) do
+      VCR.use_cassette('planningalerts') do
+        create(:comment_to_councillor)
+      end
+    end
+
+    it "is valid without an address" do
+      comment_to_councillor.address = nil
+
+      expect(comment_to_councillor).to be_valid
+    end
+
+    it "is valid with an address" do
+      comment_to_councillor.address = "64 Fake St"
+
+      expect(comment_to_councillor).to be_valid
+    end
+  end
+
+  context "to a planning authority" do
+    let(:comment_to_authority) do
+      VCR.use_cassette('planningalerts') do
+        create(:comment_to_authority)
+      end
+    end
+
+    it { expect(comment_to_authority.to_councillor?).to eq false }
+    it { expect(comment_to_authority.awaiting_councillor_reply?).to eq false }
+  end
+
+  context "to a councillor" do
+    let(:comment_to_councillor) do
+      VCR.use_cassette('planningalerts') do
+        create(:comment_to_councillor)
+      end
+    end
+
+    it { expect(comment_to_councillor.to_councillor?).to eq true }
+    it { expect(comment_to_councillor.awaiting_councillor_reply?).to eq true }
+  end
+
+  context "to a councillor and has no reply" do
+    let(:comment_with_reply) do
+      VCR.use_cassette('planningalerts') do
+        create(:reply).comment
+      end
+    end
+
+    it { expect(comment_with_reply.awaiting_councillor_reply?).to eq false }
+  end
+
+  describe "#recipient_display_name" do
+    let(:comment) do
+      VCR.use_cassette('planningalerts') do
+        create(:comment)
+      end
+    end
+
+    context "when the comment application has an authority" do
+      before { comment.application.authority.update_attribute(:full_name, "Marrickville Council") }
+
+      it { expect(comment.recipient_display_name).to eq "Marrickville Council" }
+    end
+
+    context "when the comment application is a different authority" do
+      before { comment.application.authority.update_attribute(:full_name, "Other Council") }
+
+      it { expect(comment.recipient_display_name).to eq "Other Council" }
+    end
+
+    context "when the comment is a message to a councillor" do
+      before { comment.councillor = create(:councillor, name: "Louise Councillor")}
+
+      it { expect(comment.recipient_display_name).to eq "local councillor Louise Councillor" }
+    end
+  end
 end

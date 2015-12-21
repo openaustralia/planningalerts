@@ -19,6 +19,7 @@ end
 
 class Authority < ActiveRecord::Base
   has_many :applications
+  has_many :councillors
   has_many :comments, through: :applications
 
   scope :enabled, -> { where('disabled = 0 or disabled is null') }

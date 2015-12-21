@@ -103,41 +103,15 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     @comments = @application.comments.visible.order(:updated_at)
     @nearby_count = @application.find_all_nearest_or_recent.size
-    @comment = Comment.new
+    @create_comment = CreateComment.new(
+      application: @application,
+      theme: @theme
+    )
     # Required for new email alert signup form
     @alert = Alert.new(address: @application.address)
 
-    if params[:with_councillors] == "true"
-      @application_authority_councillors = [{ name: "Mark Gardiner", party: "Independent" },
-                                            { name: "Sylvie Ellsmore", party: "The Greens" },
-                                            { name: "Jo Haylen", party: "Labor" },
-                                            { name: "Sam Iskandar", party: "Labor" },
-                                            { name: "Victor Macri", party: "Independent" },
-                                            { name: "Max Phillips", party: "The Greens" },
-                                            { name: "Morris Hanna", party: "Independent" },
-                                            { name: "David Leary", party: "The Greens" },
-                                            { name: "Chris Woods", party: "Labor" },
-                                            { name: "Melissa Brooks", party: "The Greens" },
-                                            { name: "Rosana Tyler", party: "Liberal" },
-                                            { name: "Daniel Barbar", party: "Labor" }]
-    end
-
-    if params[:with_councillor_message] == "true" || params[:with_councillor_reply] == "true"
-      @message_to_councillor = { name: "Laurie Burdekin",
-                                 recipient: "Melissa Brooks",
-                                 text: "Hi Melissa, this development needs to be rethought out to suit the area and the community. This land was purchased from the original home owners to be used for a bypass and should never have been rezoned to accommodate a development such as this. We need you to reject this application at the council meeting.",
-                                 updated_at: 5.hours.ago,
-                                 id: "99",
-                                 reply: "100" }
-
-      if params[:with_councillor_reply] == "true"
-        @reply_from_councillor = { councillor: { name: "Melissa Brooks", party: "The Greens" },
-                                   parent_comment_id: "99",
-                                   text: "Thanks for your message Laurie. I’ll be sure to let the council know about your views at the upcoming council meeting on 12th November. Best wishes, Melissa Brooks",
-                                   updated_at: 1.hours.ago,
-                                   id: "100",
-                                   authority_id: 1}
-      end
+    if writing_to_councillors_enabled?
+      @councillors = @application.councillors_for_authority
     end
 
     respond_to do |format|
@@ -180,5 +154,11 @@ class ApplicationsController < ApplicationController
       format.html { render "nearby" }
       format.rss { render "api/index", format: :rss, layout: false, content_type: Mime::XML }
     end
+  end
+
+  private
+
+  def writing_to_councillors_enabled?
+    ENV["COUNCILLORS_ENABLED"] == "true" && @theme == "default"
   end
 end

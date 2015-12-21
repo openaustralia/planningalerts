@@ -675,3 +675,7 @@ ul.authorities {
   list-style: none;
   padding-left: 0;
 }
+
+[aria-hidden="true"] {
+  display: none !important;
+}

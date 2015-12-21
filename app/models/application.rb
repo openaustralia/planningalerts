@@ -3,6 +3,7 @@ require 'open-uri'
 class Application < ActiveRecord::Base
   belongs_to :authority
   has_many :comments
+  has_many :replies, through: :comments
   before_save :geocode
   geocoded_by :address, latitude: :lat, longitude: :lng
 
@@ -163,6 +164,10 @@ class Application < ActiveRecord::Base
 
   def official_submission_period_expired?
     on_notice_to && Date.today > on_notice_to
+  end
+
+  def councillors_for_authority
+    authority.councillors.shuffle if authority.councillors.any?
   end
 
   private

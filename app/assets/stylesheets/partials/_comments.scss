@@ -21,7 +21,7 @@ ol#comments {
     bottom: 0;
     left: 6em;
     width: 1px;
-    background-color: darken(#FFE8B3, 15%);
+    background-color: $councillor-message-border-color;
     z-index: -1;
   }
 }
@@ -51,8 +51,8 @@ ol#comments {
 
 .comment-item {
   margin-bottom: 2.5em;
-  background: lighten(#5098B9, 46.5%);
-  border-color: lighten(#5098B9, 22%);
+  background: $formal-comment-background-color;
+  border-color: $formal-comment-border-color;
   border-radius: .5em;
 
   a &:hover {
@@ -65,8 +65,8 @@ ol#comments {
   }
 
   .comment-location {
-    border-bottom: 1px solid lighten(#5098B9, 22%);
-    background-color: lighten(#5098B9, 42%);
+    border-bottom: 1px solid $formal-comment-border-color;
+    background-color: $formal-comment-header-color;
     border-radius: .5em .5em 0 0;
   }
 
@@ -93,18 +93,23 @@ ol#comments {
 }
 
 .comment-to-councillor,
-.comment-to-councillor-status {
-  border-color: darken(#FFE8B3, 15%);
+.comment-to-councillor .comment-location,
+.comment-to-councillor-status,
+.reply-from-councillor {
+  border-color: $councillor-message-border-color;
 }
 
 .comment-to-councillor,
 .reply-from-councillor {
-  background: lighten(#FFE8B3, 13.5%);
-  border-color: darken(#FFE8B3, 15%);
+  background: $councillor-message-background-color;
+}
+
+.comment-to-councillor .comment-location {
+  background-color: $councillor-message-header-color;
 }
 
 .comment-to-councillor-status {
-  background: lighten(#5098B9, 46.5%);
+  background: #fff;
   border-top-width: 1px;
   border-top-style: solid;
   border-radius: 0 0 .5em .5em;
@@ -149,6 +154,12 @@ ol#comments {
 .comment-recipient {
   display: inline-block;
   font-weight: bold;
+}
+
+.reply-from-councillor {
+  .comment-author {
+    display: block;
+  }
 }
 
 .comment-time-block {

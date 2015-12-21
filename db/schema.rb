@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827032857) do
+ActiveRecord::Schema.define(version: 20151109025518) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "resource_id",   null: false
@@ -119,12 +119,23 @@ ActiveRecord::Schema.define(version: 20150827032857) do
     t.string   "address"
     t.boolean  "hidden",         default: false,     null: false
     t.string   "theme",          default: "default", null: false
+    t.integer  "councillor_id"
   end
 
   add_index "comments", ["application_id"], name: "index_comments_on_application_id", using: :btree
   add_index "comments", ["confirm_id"], name: "index_comments_on_confirm_id", using: :btree
   add_index "comments", ["confirmed"], name: "index_comments_on_confirmed", using: :btree
   add_index "comments", ["hidden"], name: "index_comments_on_hidden", using: :btree
+
+  create_table "councillors", force: true do |t|
+    t.string   "name"
+    t.string   "image_url"
+    t.string   "party"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "email"
+    t.integer  "authority_id"
+  end
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0
@@ -149,6 +160,16 @@ ActiveRecord::Schema.define(version: 20150827032857) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
+
+  create_table "replies", force: true do |t|
+    t.text     "text"
+    t.datetime "received_at"
+    t.integer  "comment_id"
+    t.integer  "councillor_id"
+  end
+
+  add_index "replies", ["comment_id"], name: "index_replies_on_comment_id", using: :btree
+  add_index "replies", ["councillor_id"], name: "index_replies_on_councillor_id", using: :btree
 
   create_table "reports", force: true do |t|
     t.string   "name"
@@ -255,6 +276,6 @@ ActiveRecord::Schema.define(version: 20150827032857) do
   add_index "vanity_participants", ["experiment_id", "shown"], name: "by_experiment_id_and_shown", using: :btree
   add_index "vanity_participants", ["experiment_id"], name: "index_vanity_participants_on_experiment_id", using: :btree
 
-  add_foreign_key "applications", "authorities", name: "applications_authority_id_fk"
+  add_foreign_key "applications", "authorities", :name => "applications_authority_id_fk"
 
 end

@@ -116,6 +116,13 @@ class Alert < ActiveRecord::Base
     Application.near([location.lat, location.lng], radius_km, units: :km).joins(:comments).where('comments.updated_at > ?', cutoff_time).where('comments.confirmed' => true).where('comments.hidden' => false).uniq
   end
 
+  def applications_with_new_replies
+    Application.near([location.lat, location.lng], radius_km, units: :km)
+               .joins(:replies)
+               .where('replies.received_at > ?', cutoff_time)
+               .uniq
+  end
+
   def new_comments
     comments = []
     # Doing this in this roundabout way because I'm not sure how to use "near" together with joins
@@ -123,6 +130,15 @@ class Alert < ActiveRecord::Base
       comments += application.comments.visible.where('comments.updated_at > ?', cutoff_time)
     end
     comments
+  end
+
+  def new_replies
+    replies = []
+    # Doing this in this roundabout way because I'm not sure how to use "near" together with joins
+    applications_with_new_replies.each do |application|
+      replies += application.replies.where('replies.received_at > ?', cutoff_time)
+    end
+    replies
   end
 
   def cutoff_time
@@ -137,10 +153,12 @@ class Alert < ActiveRecord::Base
   def process!
     applications = recent_applications
     comments = new_comments
-    if !applications.empty? || !comments.empty?
+    replies = new_replies
+
+    if !applications.empty? || !comments.empty? || !replies.empty?
       # Temporarily disable Application Tracking email alerts
       if theme != "nsw"
-        AlertNotifier.alert(theme, self, applications, comments).deliver
+        AlertNotifier.alert(theme, self, applications, comments, replies).deliver
         self.last_sent = Time.now
       end
     end
@@ -151,8 +169,9 @@ class Alert < ActiveRecord::Base
     applications.each do |application|
       application.update_attribute(:no_alerted, (application.no_alerted || 0) + 1)
     end
-    # Return number of applications and comments sent
-    [applications.size, comments.size]
+
+    # Return number of applications, comments and replies sent
+    [applications.size, comments.size, replies.size]
   end
 
   # This is a long-running method. Call with care

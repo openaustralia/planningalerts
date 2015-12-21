@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe AlertNotifierHelper do
+  describe "#capitalise_initial_character(text)" do
+    it { expect(helper.capitalise_initial_character("foo bar")).to eq "Foo bar" }
+    it { expect(helper.capitalise_initial_character("foo Bar")).to eq "Foo Bar" }
+  end
+
   describe "#host_and_protocol_for_theme" do
     include ActionMailerThemer
 
@@ -75,6 +80,30 @@ describe AlertNotifierHelper do
             )
           )
         end
+      end
+    end
+
+    describe "#reply_url_with_tracking" do
+      let(:reply) do
+        VCR.use_cassette('planningalerts') do
+          create(:reply, id: 5)
+        end
+      end
+
+      it "returns the correct url" do
+        expect(
+          helper.reply_url_with_tracking(
+            theme: @theme,
+            reply: reply
+          )
+        )
+        .to eq application_url(
+          @base_params.merge(
+            id: reply.comment.application.id,
+            anchor: "reply5",
+            utm_campaign: 'view-reply'
+          )
+        )
       end
     end
 
@@ -157,20 +186,37 @@ describe AlertNotifierHelper do
                               location: double("Location", lat: 1.0, lng: 2.0))
     end
     let(:comment) { create(:comment, application: application) }
+    let(:comment2) { create(:comment, application: application) }
+    let(:reply) { create(:reply, comment: comment) }
 
     context "with an application" do
-      subject { helper.subject(alert, [application], []) }
+      subject { helper.subject(alert, [application], [], []) }
       it { should eql "1 new planning application near 123 Sample St" }
     end
 
     context "with a comment" do
-      subject { helper.subject(alert, [], [comment]) }
+      subject { helper.subject(alert, [], [comment], []) }
       it { should eql "1 new comment on planning applications near 123 Sample St" }
     end
 
+    context "with a reply" do
+      subject { helper.subject(alert, [], [], [reply]) }
+      it { should eql "1 new reply on planning applications near 123 Sample St" }
+    end
+
     context "with an application and a comment" do
-      subject { helper.subject(alert, [application], [comment]) }
+      subject { helper.subject(alert, [application], [comment], []) }
       it { should eql "1 new comment and 1 new planning application near 123 Sample St" }
+    end
+
+    context "with an application and a reply" do
+      subject { helper.subject(alert, [application], [], [reply]) }
+      it { should eql "1 new reply and 1 new planning application near 123 Sample St" }
+    end
+
+    context "with an application, a comment, and a reply" do
+      subject { helper.subject(alert, [application], [comment], [reply]) }
+      it { should eql "1 new comment, 1 new reply and 1 new planning application near 123 Sample St" }
     end
 
     context "with an expired subscription" do
@@ -181,17 +227,17 @@ describe AlertNotifierHelper do
       end
 
       context "with an application" do
-        subject { helper.subject(alert, [application], []) }
+        subject { helper.subject(alert, [application], [], []) }
         it { should eql "You’re missing out on 1 new planning application near 123 Sample St" }
       end
 
       context "with a comment" do
-        subject { helper.subject(alert, [], [comment]) }
+        subject { helper.subject(alert, [], [comment], []) }
         it { should eql "You’re missing out on 1 new comment on planning applications near 123 Sample St" }
       end
 
       context "with an application and a comment" do
-        subject { helper.subject(alert, [application], [comment]) }
+        subject { helper.subject(alert, [application], [comment], []) }
         it { should eql "You’re missing out on 1 new comment and 1 new planning application near 123 Sample St" }
       end
     end

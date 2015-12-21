@@ -1,8 +1,25 @@
-%div.comment.box
-  %p.comment-meta
-    %span
-      = comment.name
-      commented on
-    #{link_to display_description_with_address(comment.application), application_url_with_tracking(id: comment.application.id, theme: @theme)}:
-  = Sanitize.clean(ApplicationController.helpers.simple_format(truncate(comment.text, :length => 700)), Sanitize::Config::BASIC).html_safe
-  = link_to "View comment on PlanningAlerts", comment_url_with_tracking(comment: comment, theme: @theme)
+%div.comment.module{class: ("comment-to-councillor" if comment.councillor)}
+  %h2.comment-location.panel-body
+    On
+    = link_to application_url_with_tracking(id: comment.application.id, theme: @theme),
+              title: "View application",
+              class: "comment-application" do
+      #{display_description_with_address(comment.application)}:
+  .panel-body
+    %p.comment-meta
+      %span
+        %span.comment-author= comment.name
+        - if comment.councillor
+          wrote to
+          %span.comment-recipient.h-card
+            local councillor
+            %span.p-name= comment.councillor.name
+        - else
+          commented
+    = Sanitize.clean(ApplicationController.helpers.simple_format(truncate(comment.text, :length => 700)), Sanitize::Config::BASIC).html_safe
+    = link_to "View comment on PlanningAlerts", comment_url_with_tracking(comment: comment, theme: @theme)
+  - if comment.councillor && comment.replies.empty?
+    .panel-body.comment-to-councillor-status
+      %p
+        Delivered to #{comment.councillor.prefixed_name}.
+        %span They are yet to respond.
