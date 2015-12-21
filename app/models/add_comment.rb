@@ -1,5 +1,5 @@
 # Comment form object
-class CreateComment
+class AddComment
   include ActiveModel::Model
 
   attr_accessor(

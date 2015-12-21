@@ -56,16 +56,16 @@ if ($('#comment-receiver-inputgroup').length) {
       $(councillorListWrapper).removeClass('open');
     }
 
-    $('#create_comment_address_input').attr('aria-hidden', 'false');
+    $('#add_comment_address_input').attr('aria-hidden', 'false');
   });
 
   $('.councillor-select-radio').each(function() {
     if ( $(this).prop('checked') === true ) {
-      $('#create_comment_address_input').attr('aria-hidden', 'true');
+      $('#add_comment_address_input').attr('aria-hidden', 'true');
     }
 
     $(this).click(function() {
-      $('#create_comment_address_input').attr('aria-hidden', 'true');
+      $('#add_comment_address_input').attr('aria-hidden', 'true');
     });
   });
 }

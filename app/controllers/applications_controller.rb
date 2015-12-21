@@ -103,7 +103,7 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     @comments = @application.comments.visible.order(:updated_at)
     @nearby_count = @application.find_all_nearest_or_recent.size
-    @create_comment = CreateComment.new(
+    @add_comment = AddComment.new(
       application: @application,
       theme: @theme
     )

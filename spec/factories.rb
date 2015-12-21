@@ -17,7 +17,7 @@ FactoryGirl.define do
     info_url "http://foo.com"
   end
 
-  factory :create_comment do
+  factory :add_comment do
     email "matthew@openaustralia.org"
     name "Matthew Landauer"
     text "a comment"

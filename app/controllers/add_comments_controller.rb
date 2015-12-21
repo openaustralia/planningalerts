@@ -1,4 +1,4 @@
-class CreateCommentsController < ApplicationController
+class AddCommentsController < ApplicationController
   respond_to :html
 
   def create
@@ -8,14 +8,14 @@ class CreateCommentsController < ApplicationController
     # If so, make it look like things worked but don't actually do anything
     if params[:little_sweety].blank?
 
-      @create_comment = CreateComment.new(
-        create_comment_params.merge(
+      @add_comment = AddComment.new(
+        add_comment_params.merge(
           application: @application,
           theme: @theme
         )
       )
 
-      @comment = @create_comment.save_comment
+      @comment = @add_comment.save_comment
 
       if @comment.nil?
         flash.now[:error] = "Some of the comment wasn't filled out completely. See below."
@@ -39,8 +39,8 @@ class CreateCommentsController < ApplicationController
 
   private
 
-  def create_comment_params
-    params.require(:create_comment).permit(
+  def add_comment_params
+    params.require(:add_comment).permit(
       :name,
       :text,
       :address,

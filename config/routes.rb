@@ -77,7 +77,7 @@ PlanningalertsApp::Application.routes.draw do
       get :search
     end
     resources :comments, only: [:show]
-    resources :create_comments, only: [:create]
+    resources :add_comments, only: [:create]
   end
 
   resources :comments, only: [:index] do
