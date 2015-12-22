@@ -28,6 +28,14 @@ $( document ).ready(function() {
     }
 
     // Searching for applications
+    $('.address-search input[type="submit"]').click(function(e) {
+      ga('send', 'event', 'comments', 'click submit address search');
+    });
+
+    $('.address-search #geolocate').click(function(e) {
+      ga('send', 'event', 'comments', 'click locate me option');
+    });
+
     if ($('.address-search .error').length) {
       ga('send', 'event', 'search', 'address search form error message displayed');
     }
