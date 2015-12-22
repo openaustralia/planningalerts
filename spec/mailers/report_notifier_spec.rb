@@ -27,7 +27,7 @@ describe ReportNotifier do
 The abuse report was completed by Joe Reporter (reporter@foo.com) who said:
 It's very rude!
 
-The original comment was written by Jack Rude (rude@foo.com) who said:
+The original comment was written by Jack Rude who said:
 I'm saying something abusive
 
 The original comment can be found at:
@@ -36,5 +36,9 @@ http://dev.planningalerts.org.au/applications/2#comment23
 To edit/hide/delete this comment:
 http://dev.planningalerts.org.au/admin/comments/23/edit
     EOF
+  end
+
+  it "doesn’t include the commenters email as this could lead to data leak" do
+    expect(@notifier.body.to_s).to_not have_content("rude@foo.com")
   end
 end
