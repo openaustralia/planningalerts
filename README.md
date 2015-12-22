@@ -53,6 +53,19 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
  * Check the email in your browser: http://localhost:1080/
  * To resend alerts during testing, just set the `last_sent` attribute of your alert to *nil*
 
+## Deployment
+
+The code is deployed using Capistrano. To deploy to production run:
+
+    bundle exec cap -S stage=production deploy
+
+This command is defined in `config/deploy.rb`.
+
+View more available Capistrano commands with:
+
+    bundle exec cap -T
+
+
 ## Contributing
 
 * Fork the project on GitHub.
