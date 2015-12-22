@@ -100,6 +100,7 @@ ActiveAdmin.setup do |config|
   # Admin comments are enabled by default.
   #
   config.comments = false
+  config.comments_registration_name = "AdminComment"
 
   # == Batch Actions
   #
