@@ -6,7 +6,7 @@ $( document ).ready(function() {
       ga('send', 'event', 'comments', 'click link to go to comment form');
     });
 
-    $('#comment_submit_action input[type="submit"]').click(function(e) {
+    $('#comment-action-inputgroup input[type="submit"]').click(function(e) {
       ga('send', 'event', 'comments', 'click submit new comment');
     });
 

@@ -29,6 +29,6 @@
     %li{style: "display: none;"}
       = label_tag :little_sweety, 'Little Sweety'
       = text_field_tag :little_sweety, "", placeholder: "Please leave this blank"
-  = f.actions do
+  = f.actions id: "comment-action-inputgroup" do
     = f.action :submit, label: "Post your public comment",
                         button_html: {class: "button button-action"}
