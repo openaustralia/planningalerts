@@ -17,5 +17,10 @@ $( document ).ready(function() {
     if ($('#comments-area .error').length) {
       ga('send', 'event', 'comments', 'comment form error message displayed');
     }
+
+    // Creating Alerts
+    if ($('#new_alert .error').length) {
+      ga('send', 'event', 'alerts', 'alert form error messages displayed');
+    }
   }
 });
