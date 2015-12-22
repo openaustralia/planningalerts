@@ -1,10 +1,10 @@
 // Javascript used on applications pages
-$('#comment_address_input a').click(function(e) {
+$('#add_comment_address_input a').click(function(e) {
   e.preventDefault();
   $('#faq_commenting_address').slideToggle('fast');
 });
 
-$('#comment_text_input a').click(function(e) {
+$('#add_comment_text_input a').click(function(e) {
   e.preventDefault();
   $('#disclosure_explanation').slideToggle('fast');
 });
