@@ -13,5 +13,9 @@ $( document ).ready(function() {
     if ($('.notice-comment-confirmed').length) {
       ga('send', 'event', 'comments', 'comment confirm message displayed');
     }
+
+    if ($('#comments-area .error').length) {
+      ga('send', 'event', 'comments', 'comment form error message displayed');
+    }
   }
 });
