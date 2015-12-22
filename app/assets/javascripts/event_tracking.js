@@ -22,5 +22,10 @@ $( document ).ready(function() {
     if ($('#new_alert .error').length) {
       ga('send', 'event', 'alerts', 'alert form error messages displayed');
     }
+
+    // Searching for applications
+    if ($('.address-search .error').length) {
+      ga('send', 'event', 'search', 'address search form error message displayed');
+    }
   }
 });
