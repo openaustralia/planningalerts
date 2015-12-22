@@ -6,6 +6,7 @@ ActiveAdmin.register Report do
   filter :details
 
   index do
+    column :created_at
     column :name
     column :email
     column :details do |report|
