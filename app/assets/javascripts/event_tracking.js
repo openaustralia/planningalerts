@@ -19,6 +19,10 @@ $( document ).ready(function() {
     }
 
     // Creating Alerts
+    $('#new_alert input[type="submit"]').click(function(e) {
+      ga('send', 'event', 'comments', 'click submit create alert');
+    });
+
     if ($('#new_alert .error').length) {
       ga('send', 'event', 'alerts', 'alert form error messages displayed');
     }
