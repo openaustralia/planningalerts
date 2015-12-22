@@ -13,4 +13,4 @@
       %p
         Delivered to #{comment.councillor.prefixed_name}.
         %span They are yet to respond.
-= render comment.replies
+= render comment.replies unless current_page? new_comment_report_path(comment.id)
