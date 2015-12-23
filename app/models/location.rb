@@ -21,7 +21,7 @@ class Location < SimpleDelegator
     l.original_address = address
     l
   end
-  
+
   def in_correct_country?
     country_code == "AU"
   end
@@ -29,7 +29,7 @@ class Location < SimpleDelegator
   def suburb
     city
   end
-  
+
   def postcode
     zip
   end
@@ -48,25 +48,25 @@ class Location < SimpleDelegator
       end
     end
   end
-  
+
   # Distance given is in metres
   def endpoint(bearing, distance)
     Location.new(__getobj__.endpoint(bearing, distance / 1000.0, units: :kms))
   end
-  
+
   # Distance (in metres) to other point
   def distance_to(l)
     __getobj__.distance_to(l.__getobj__, units: :kms) * 1000.0
   end
-  
+
   def full_address
     __getobj__.full_address.sub(", Australia", "")
   end
-  
+
   def all
     __getobj__.all.find_all{|l| Location.new(l).in_correct_country?}.map{|l| Location.new(l)}
   end
-  
+
   def ==(a)
     lat == a.lat && lng == a.lng
   end
