@@ -38,13 +38,13 @@ class Location < SimpleDelegator
     # Only checking for errors on geocoding
     if original_address
       if original_address == ""
-        "can't be empty"
+        "Please enter a street address"
       elsif lat.nil? || lng.nil?
-        "isn't valid"
+        "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
       elsif !in_correct_country?
-        "isn't in Australia"
+        "Unfortunately we only cover Australia. It looks like that address is in another country."
       elsif accuracy < 5
-        "isn't complete. We saw that address as \"#{full_address}\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state"
+        "Sorry we don’t recognise that as a full street address like ‘1 Sowerby St, Goulburn, NSW’"
       end
     end
   end

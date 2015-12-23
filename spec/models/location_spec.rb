@@ -45,21 +45,21 @@ describe "Location" do
     Geokit::Geocoders::GoogleGeocoder3.stub(:geocode).and_return(double(all: []))
 
     l = Location.geocode("")
-    l.error.should == "can't be empty"
+    l.error.should == "Please enter a street address"
   end
 
   it "should error if the address is not valid" do
     Geokit::Geocoders::GoogleGeocoder3.stub(:geocode).and_return(double(lat: nil, lng: nil, all: []))
 
     l = Location.geocode("rxsd23dfj")
-    l.error.should == "isn't valid"
+    l.error.should == "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
   end
 
   it "should error if the street address is not in australia" do
     Geokit::Geocoders::GoogleGeocoder3.stub(:geocode).and_return(double(lat: 1, lng: 2, country_code: "US", all: [double(lat: 1, lng: 2, country_code: "US")]))
 
     l = Location.geocode("New York")
-    l.error.should == "isn't in Australia"
+    l.error.should == "Unfortunately we only cover Australia. It looks like that address is in another country."
   end
 
   it "should not error if there are multiple matches from the geocoder" do
@@ -74,7 +74,7 @@ describe "Location" do
     Geokit::Geocoders::GoogleGeocoder3.stub(:geocode).and_return(double(all: [double(country_code: "AU", lat: 1, lng: 2, accuracy: 4, full_address: "Glenbrook NSW, Australia")]))
 
     l = Location.geocode("Glenbrook, NSW")
-    l.error.should == "isn't complete. We saw that address as \"Glenbrook NSW\" which we don't recognise as a full street address. Check your spelling and make sure to include suburb and state"
+    l.error.should == "Sorry we don’t recognise that as a full street address like ‘1 Sowerby St, Goulburn, NSW’"
   end
 
   it "should list potential matches and they should be in Australia" do
