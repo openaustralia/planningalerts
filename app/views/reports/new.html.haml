@@ -17,4 +17,4 @@
       = label_tag :little_sweety, 'Little Sweety'
       = text_field_tag :little_sweety, "", placeholder: "Please leave this blank"
   = f.actions do
-    = f.action :submit, label: "Send report"
+    = f.action :submit, label: "Send report", button_html: { class: "button button-action" }
