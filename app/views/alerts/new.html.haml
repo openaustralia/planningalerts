@@ -2,12 +2,12 @@
 
 - content_for :meta_description, @themer.default_meta_description
 
-= semantic_form_for @alert, :url => {:action => 'create'} do |f|
+= semantic_form_for @alert, url: {action: 'create'} do |f|
   = f.inputs do
-    = f.input :address, :label => "Enter a street address", :placeholder => "e.g. 1 Sowerby St, Goulburn, NSW 2580"
-    = f.input :email, :label => "Enter your email address", :placeholder => "your@email.com"
+    = f.input :address, label: "Enter a street address", placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580"
+    = f.input :email, label: "Enter your email address", placeholder: "your@email.com"
   = f.actions do
-    = f.action :submit, :label => "Create alert", :button_html => { :class => "button button-rounded button-large button-action" }
+    = f.action :submit, label: "Create alert", button_html: { class: "button button-rounded button-large button-action" }
 
 %p You will receive email only when there are new applications nearby and no more than once per day.
 
