@@ -20,7 +20,7 @@ $( document ).ready(function() {
 
     // Creating Alerts
     $('#new_alert input[type="submit"]').click(function(e) {
-      ga('send', 'event', 'comments', 'click submit create alert');
+      ga('send', 'event', 'alerts', 'click submit create alert');
     });
 
     if ($('#new_alert .error').length) {
@@ -29,11 +29,11 @@ $( document ).ready(function() {
 
     // Searching for applications
     $('.address-search input[type="submit"]').click(function(e) {
-      ga('send', 'event', 'comments', 'click submit address search');
+      ga('send', 'event', 'search', 'click submit address search');
     });
 
     $('.address-search #geolocate').click(function(e) {
-      ga('send', 'event', 'comments', 'click locate me option');
+      ga('send', 'event', 'search', 'click locate me link');
     });
 
     if ($('.address-search .error').length) {
