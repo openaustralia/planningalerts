@@ -27,6 +27,21 @@ textarea {
   border: 2px solid #bbb;
 }
 
+// TODO: Do this in a non-hacky/generic way.
+// This is like this to get around conflicts between formtastic and blueprint
+#new_alert,
+#new_add_comment,
+#new_report,
+.address-search,
+#new_feed {
+  .error {
+    input,
+    textarea {
+      border-color: $form-error-color;
+    }
+  }
+}
+
 textarea {
   line-height: 1.5;
 }

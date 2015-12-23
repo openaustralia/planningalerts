@@ -22,7 +22,14 @@ $link-visited-color: $link-color;
 $link-focus-color: $link-color;
 
 $error-bg-color: #fbb;
+
+// TODO: Remove this variable or use it for it's intended purpose
+// Blueprint does weird things with this so it's been set to do nothing.
+// This is to do with conflicts between blueprint classes like alert and error
+// and the classes applied by Formtastic.
 $error-color: $font-color;
+
+$form-error-color: #C7523D;
 
 $councillor-message-yellow: #FFE8B3;
 $councillor-message-border-color: darken($councillor-message-yellow, 15%);
