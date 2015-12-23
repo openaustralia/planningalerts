@@ -57,7 +57,12 @@ if ($('#comment-receiver-inputgroup').length) {
     }
 
     $('#add_comment_address_input').attr('aria-hidden', 'false');
+    $('#add_comment_address_input input').attr('required', 'required');
   });
+
+  if ( radioForAuthorityOption.prop('checked') === true  ) {
+    $('#add_comment_address_input input').attr('required', 'required');
+  }
 
   $('.councillor-select-radio').each(function() {
     if ( $(this).prop('checked') === true ) {
@@ -66,6 +71,7 @@ if ($('#comment-receiver-inputgroup').length) {
 
     $(this).click(function() {
       $('#add_comment_address_input').attr('aria-hidden', 'true');
+      $('#add_comment_address_input input').removeAttr('required');
     });
   });
 }

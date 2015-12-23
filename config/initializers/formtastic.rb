@@ -82,7 +82,7 @@
 
 # You can opt-in to Formtastic's use of the HTML5 `required` attribute on `<input>`, `<select>`
 # and `<textarea>` tags by setting this to true (defaults to false).
-# Formtastic::FormBuilder.use_required_attribute = false
+Formtastic::FormBuilder.use_required_attribute = true
 
 # You can opt-in to new HTML5 browser validations (for things like email and url inputs) by setting
 # this to true. Doing so will add a `novalidate` attribute to the `<form>` tag.

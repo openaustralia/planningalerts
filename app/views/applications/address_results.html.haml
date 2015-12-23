@@ -32,7 +32,7 @@
     = render "alerts/signup_introduction"
     = f.inputs do
       = f.input :address, as: :hidden
-      = f.input :email, label: "Enter your email address", placeholder: "your@email.com"
+      = f.input :email, label: "Enter your email address", placeholder: "your@email.com", input_html: { required: "required" }
     = f.actions do
       = f.action :submit, label: "Create alert", button_html: { class: "button button-rounded button-action button-large" }
 
