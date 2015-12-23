@@ -76,6 +76,11 @@ describe Alert do
   end
 
   describe "email address" do
+    it "is not blank" do
+      @attributes[:email] = "  "
+      expect(Alert.new(@attributes)).to_not be_valid
+    end
+
     it "should be valid" do
       @attributes[:email] = "diddle@"
       u = Alert.new(@attributes)
