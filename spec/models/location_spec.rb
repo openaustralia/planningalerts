@@ -74,7 +74,7 @@ describe "Location" do
     Geokit::Geocoders::GoogleGeocoder3.stub(:geocode).and_return(double(all: [double(country_code: "AU", lat: 1, lng: 2, accuracy: 4, full_address: "Glenbrook NSW, Australia")]))
 
     l = Location.geocode("Glenbrook, NSW")
-    l.error.should == "Sorry we don’t recognise that as a full street address like ‘1 Sowerby St, Goulburn, NSW’"
+    l.error.should == "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
   end
 
   it "should list potential matches and they should be in Australia" do
