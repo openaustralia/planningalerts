@@ -12,6 +12,16 @@ $fb-gradient-style: matte;
 $fb-font-size: 1.3em;
 $fb-line-height: 1em;
 
+// Override blueprint interaction style
+// Remove this hack if we remove blueprint
+body .error a {
+  color: $link-color;
+
+  &#geolocate {
+    color: $font-color;
+  }
+}
+
 input,
 textarea {
   border: 2px solid #bbb;
