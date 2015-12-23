@@ -8,6 +8,22 @@ $warm-highlight: #e3821f;
 $cool-highlight: #505050;
 $light-cool-highlight: #aac7bc;
 $lightest-cool-highlight: #e7e7e7;
+
+$content-background: #fcfdfc;
+$font-color: $darkest;
+
+$quiet-color: $cool-highlight;
+$highlight-color: $light; // Background
+
+$link-color: #144b8c;
+$link-active-color: $link-color;
+$link-hover-color: $link-color;
+$link-visited-color: $link-color;
+$link-focus-color: $link-color;
+
+$error-bg-color: #fbb;
+$error-color: $font-color;
+
 $councillor-message-yellow: #FFE8B3;
 $councillor-message-border-color: darken($councillor-message-yellow, 15%);
 $councillor-message-header-color: lighten($councillor-message-yellow, 11%);
@@ -17,17 +33,5 @@ $formal-comment-border-color: lighten($formal-comment-blue, 22%);
 $formal-comment-header-color: lighten($formal-comment-blue, 42%);
 $formal-comment-background-color: lighten($formal-comment-blue, 46.5%);
 
-$content-background: #fcfdfc;
 $background-overlay: transparentize($darkest,0.8);
 $dark-overlay: transparentize($darkest,0.2);
-
-$font-color: $darkest;
-$link-color: #144b8c;
-$link-active-color: $link-color;
-$link-hover-color: $link-color;
-$link-visited-color: $link-color;
-$link-focus-color: $link-color;
-$quiet-color: $cool-highlight;
-$error-bg-color: #fbb;
-$error-color: $font-color;
-$highlight-color: $light; // Background
