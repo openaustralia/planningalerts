@@ -18,7 +18,7 @@ describe Alert do
   it "should have no trouble creating a user with valid attributes" do
     Alert.create!(@attributes)
   end
-  
+
   # In order to stop frustrating multiple alerts
   it "should only have one alert active for a particular street address / email address combination at one time" do
     email = "foo@foo.org"
@@ -28,14 +28,14 @@ describe Alert do
     alerts.count.should == 1
     alerts.first.radius_meters.should == u2.radius_meters
   end
-  
+
   it "should allow multiple alerts for different street addresses but the same email address" do
     email = "foo@foo.org"
     create(:alert, email: email, address: "A street address", radius_meters: 200, lat: 1.0, lng: 2.0)
     create(:alert, email: email, address: "Another street address", radius_meters: 800, lat: 1.0, lng: 2.0)
     Alert.where(email: email).count.should == 2
   end
-  
+
   it "should be able to accept location information if it is already known and so not use the geocoder" do
     Location.should_not_receive(:geocode)
     @attributes[:lat] = 1.0
@@ -44,7 +44,7 @@ describe Alert do
     u.lat.should == 1.0
     u.lng.should == 2.0
   end
-  
+
   describe "geocoding" do
     it "should happen automatically on saving" do
       alert = Alert.create!(@attributes)
@@ -52,14 +52,14 @@ describe Alert do
       alert.lng.should == @loc.lng
       alert.should be_valid
     end
-    
+
     it "should set an error on the address if there is an error on geocoding" do
       Location.stub(:geocode).and_return(double(error: "some error message", lat: nil, lng: nil, full_address: nil))
       u = Alert.new(email: "matthew@openaustralia.org")
       u.should_not be_valid
       u.errors[:address].should == ["some error message"]
     end
-    
+
     it "should error if there are multiple matches from the geocoder" do
       Location.stub(:geocode).and_return(double(lat: 1, lng: 2, full_address: "Bruce Rd, VIC 3885", error: nil, all: [nil, nil]))
       u = Alert.new(address: "Bruce Road", email: "matthew@openaustralia.org")
@@ -90,7 +90,7 @@ describe Alert do
       u.errors[:email].should == ["does not appear to be a valid e-mail address"]
     end
   end
-  
+
   it "should be able to store the attribute location" do
     u = Alert.new
     u.location = Location.new(1.0, 2.0)
@@ -99,7 +99,7 @@ describe Alert do
     u.location.lat.should == 1.0
     u.location.lng.should == 2.0
   end
-  
+
   it "should handle location being nil" do
     u = Alert.new
     u.location = nil
@@ -107,7 +107,7 @@ describe Alert do
     u.lng.should be_nil
     u.location.should be_nil
   end
-  
+
   describe "radius_meters" do
     it "should have a number" do
       @attributes[:radius_meters] = "a"
@@ -115,12 +115,12 @@ describe Alert do
       u.should_not be_valid
       u.errors[:radius_meters].should == ["isn't selected"]
     end
-  
+
     it "should be greater than zero" do
       @attributes[:radius_meters] = "0"
       u = Alert.new(@attributes)
       u.should_not be_valid
-      u.errors[:radius_meters].should == ["isn't selected"]    
+      u.errors[:radius_meters].should == ["isn't selected"]
     end
   end
 
@@ -129,32 +129,32 @@ describe Alert do
       u = Alert.create!(@attributes)
       u.confirm_id.should be_instance_of(String)
     end
-  
+
     it "should not be the the same for two different users" do
       u1 = Alert.create!(@attributes)
       u2 = Alert.create!(@attributes)
       u1.confirm_id.should_not == u2.confirm_id
     end
-    
+
     it "should only have hex characters in it and be exactly twenty characters long" do
       u = Alert.create!(@attributes)
       u.confirm_id.should =~ /^[0-9a-f]{20}$/
     end
   end
-  
+
   describe "confirmed" do
     it "should be false when alert is created" do
       u = Alert.create!(@attributes)
       u.confirmed.should be_false
     end
-    
+
     it "should be able to be set to false" do
       u = Alert.new(@attributes)
       u.confirmed = false
       u.save!
       u.confirmed.should == false
     end
-    
+
     it "should be able to set to true" do
       u = Alert.new(@attributes)
       u.confirmed = true
@@ -177,7 +177,7 @@ describe Alert do
       @app3 = create(:application, lat: p3.lat, lng: p3.lng, date_scraped: 2.days.ago, council_reference: "A3", suburb: "", state: "", postcode: "", authority: auth)
       @app4 = create(:application, lat: p4.lat, lng: p4.lng, date_scraped: 4.days.ago, council_reference: "A4", suburb: "", state: "", postcode: "", authority: auth)
     end
-    
+
     it "should return applications that have been scraped since the last time the user was sent an alert" do
       @alert.last_sent = 3.days.ago
       @alert.radius_meters = 2000
@@ -187,7 +187,7 @@ describe Alert do
       @alert.recent_applications.should include(@app2)
       @alert.recent_applications.should include(@app3)
     end
-    
+
     it "should return applications within the user's search area" do
       @alert.last_sent = 5.days.ago
       @alert.radius_meters = 500
@@ -196,31 +196,31 @@ describe Alert do
       @alert.recent_applications.should include(@app2)
       @alert.recent_applications.should include(@app4)
     end
-    
+
     it "should return applications that have been scraped in the last twenty four hours if the user has never had an alert" do
       @alert.last_sent = nil
       @alert.radius_meters = 2000
       @alert.save!
       @alert.recent_applications.should have(2).items
       @alert.recent_applications.should include(@app1)
-      @alert.recent_applications.should include(@app2)      
+      @alert.recent_applications.should include(@app2)
     end
   end
-  
+
   describe "frequency_distribution" do
     it "should return a frequency distribution of objects as an array sorted by count" do
       Alert.frequency_distribution(["a", "b", "c", "a", "a", "c", "a"]).should == [["a", 4], ["c", 2], ["b", 1]]
     end
   end
-  
+
   describe "lga_name" do
     it "should return the local government authority name" do
       Geo2gov.should_receive(:new).with(1.0, 2.0).and_return(double(lga_name: "Blue Mountains"))
 
       a = create(:alert, lat: 1.0, lng: 2.0, email: "foo@bar.com", radius_meters: 200, address: "")
-      a.lga_name.should == "Blue Mountains"      
+      a.lga_name.should == "Blue Mountains"
     end
-    
+
     it "should cache the value in the database" do
       Geo2gov.should_receive(:new).once.with(1.0, 2.0).and_return(double(lga_name: "Blue Mountains"))
 
