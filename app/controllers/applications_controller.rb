@@ -49,7 +49,7 @@ class ApplicationsController < ApplicationController
       location = Location.geocode(@q)
       if location.error
         @other_addresses = []
-        @error = "Address #{location.error}"
+        @error = location.error
       else
         @q = location.full_address
         @alert = Alert.new(address: @q)
