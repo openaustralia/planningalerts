@@ -80,14 +80,14 @@ describe Alert do
       @attributes[:email] = "diddle@"
       u = Alert.new(@attributes)
       u.should_not be_valid
-      u.errors[:email].should == ["does not appear to be valid"]    
+      u.errors[:email].should == ["does not appear to be a valid e-mail address"]
     end
 
     it "should have an '@' in it" do
       @attributes[:email] = "diddle"
       u = Alert.new(@attributes)
       u.should_not be_valid
-      u.errors[:email].should == ["does not appear to be valid"]    
+      u.errors[:email].should == ["does not appear to be a valid e-mail address"]
     end
   end
   

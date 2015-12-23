@@ -31,7 +31,7 @@ gem "will_paginate"
 #gem 'smurf'
 gem 'thinking-sphinx'
 gem "formtastic"
-gem 'validates_email_format_of'
+gem 'validates_email_format_of', '~> 1.6', '>= 1.6.3'
 gem "geocoder"
 # Rails 4 support is a work in progress so requires tracking master
 gem 'activeadmin', '~> 1.0.0.pre2'

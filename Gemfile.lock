@@ -425,7 +425,8 @@ GEM
     validate_url (0.2.2)
       activemodel (>= 3.0.0)
       addressable
-    validates_email_format_of (1.5.3)
+    validates_email_format_of (1.6.3)
+      i18n
     vanity (1.8.3)
       redis (>= 2.1)
       redis-namespace (>= 1.1.0)
@@ -508,7 +509,7 @@ DEPENDENCIES
   twitter
   uglifier
   validate_url
-  validates_email_format_of
+  validates_email_format_of (~> 1.6, >= 1.6.3)
   vanity
   vcr
   webmock
