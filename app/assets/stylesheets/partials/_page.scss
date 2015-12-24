@@ -257,6 +257,16 @@ hr {
   }
 }
 
+.button-facebook {
+  @include button(simple, #4e69a2); // Facebook blue
+  color: #fff !important;
+
+  &:hover,
+  &:focus {
+    color: #fff !important;
+  }
+}
+
 .disclaimer {
   @include quiet;
   font-size: 0.8em;

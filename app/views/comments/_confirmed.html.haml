@@ -1,6 +1,11 @@
-%p.notice.notice-comment-confirmed
-  Thanks.
-  = link_to 'Your comment', comment_path(@comment)
-  has been sent to
-  = @comment.councillor ? "local councillor #{@comment.councillor.name}" : @comment.application.authority.full_name
-  and is now visible on this page.
+.notice.notice-comment-confirmed
+  %p
+    Thanks.
+    = link_to 'Your comment', comment_path(@comment)
+    has been sent to
+    = @comment.councillor ? "local councillor #{@comment.councillor.name}" : @comment.application.authority.full_name
+    and is now visible on this page.
+  = link_to "Share this application on Facebook",
+    "https://www.facebook.com/sharer/sharer.php?u=#{application_url(@comment.application)}&t=",
+    title: "Share this planning application on Facebook",
+    class: "button-facebook"
