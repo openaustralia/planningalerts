@@ -102,7 +102,7 @@ feature "Send a message to a councillor" do
 
         click_first_link_in_email
 
-        expect(page).to have_content "Your comment has been sent to local councillor Louise Councillor and is now visible on this page."
+        expect(page).to have_content "Your comment has been sent to local councillor Louise Councillor and posted below."
         expect(page).to have_content "I think this is a really good idea"
       end
 
