@@ -18,6 +18,10 @@ $( document ).ready(function() {
       ga('send', 'event', 'comments', 'comment form error message displayed');
     }
 
+    $('.notice-comment-confirmed .button-facebook').click(function(e) {
+      ga('send', 'event', 'comments', 'click Facebook share on comment confirmation');
+    }
+
     // Creating Alerts
     $('#new_alert input[type="submit"]').click(function(e) {
       ga('send', 'event', 'alerts', 'click submit create alert');
