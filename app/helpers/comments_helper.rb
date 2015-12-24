@@ -6,4 +6,8 @@ module CommentsHelper
   def comment_path(comment)
     application_path(comment.application, anchor: "comment#{comment.id}")
   end
+
+  def comment_url(comment)
+    application_url(comment.application, anchor: "comment#{comment.id}")
+  end
 end
