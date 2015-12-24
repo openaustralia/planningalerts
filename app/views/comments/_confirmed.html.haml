@@ -1,6 +1,6 @@
 .notice.notice-comment-confirmed
+  %h1.page-title Thanks, your comment has been sent!
   %p
-    Thanks.
     = link_to 'Your comment', comment_path(@comment)
     has been sent to
     = @comment.councillor ? "local councillor #{@comment.councillor.name}" : @comment.application.authority.full_name

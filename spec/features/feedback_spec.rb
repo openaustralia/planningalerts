@@ -124,7 +124,7 @@ feature "Give feedback to Council" do
 
       visit(confirmed_comment_path(id: comment.confirm_id))
 
-      page.should have_content("Thanks. Your comment has been sent to Foo and is now visible on this page.")
+      page.should have_content("Your comment has been sent to Foo and is now visible on this page.")
       page.should have_content("I think this is a really good ideas")
 
       unread_emails_for("feedback@foo.gov.au").size.should == 1
