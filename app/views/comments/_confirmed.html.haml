@@ -1,10 +1,9 @@
 .notice.notice-comment-confirmed
   %h1.page-title Thanks, your comment has been sent!
   %p
-    = link_to 'Your comment', comment_path(@comment)
-    has been sent to
+    Your comment has been sent to
     = @comment.councillor ? "local councillor #{@comment.councillor.name}" : @comment.application.authority.full_name
-    and is now visible on this page.
+    and #{link_to 'is now visible on this page', comment_path(@comment)}.
   = link_to "Share this application on Facebook",
     "https://www.facebook.com/sharer/sharer.php?u=#{application_url(@comment.application)}&t=",
     title: "Share this planning application on Facebook",
