@@ -87,7 +87,7 @@ Formtastic::FormBuilder.use_required_attribute = true
 # You can opt-in to new HTML5 browser validations (for things like email and url inputs) by setting
 # this to true. Doing so will add a `novalidate` attribute to the `<form>` tag.
 # See http://diveintohtml5.org/forms.html#validation for more info.
-# Formtastic::FormBuilder.perform_browser_validations = true
+Formtastic::FormBuilder.perform_browser_validations = true
 
 # By creating custom input class finder, you can change how input classes  are looked up.
 # For example you can make it to search for TextInputFilter instead of TextInput.
