@@ -20,7 +20,7 @@ $( document ).ready(function() {
 
     $('.notice-comment-confirmed .button-facebook').click(function(e) {
       ga('send', 'event', 'comments', 'click Facebook share', 'from comment confirmation');
-    }
+    });
 
     // Creating Alerts
     $('#new_alert input[type="submit"]').click(function(e) {
