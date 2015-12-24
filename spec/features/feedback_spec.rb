@@ -131,6 +131,14 @@ feature "Give feedback to Council" do
       open_email("feedback@foo.gov.au")
       current_email.default_part_body.to_s.should include("I think this is a really good ideas")
     end
+
+    scenario "Sharing new comment on facebook" do
+      comment = create(:unconfirmed_comment, application: application)
+
+      visit(confirmed_comment_path(id: comment.confirm_id))
+
+      expect(page).to have_content("Share your comment on Facebook")
+    end
   end
 
   scenario "Reporting abuse on a confirmed comment" do
