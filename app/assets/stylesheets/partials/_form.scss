@@ -22,6 +22,14 @@ body .error a {
   }
 }
 
+#error_explanation {
+  @extend .error;
+
+  h2 {
+    font-size: 1em;
+  }
+}
+
 input,
 textarea {
   border: 2px solid #bbb;
@@ -33,7 +41,8 @@ textarea {
 #new_add_comment,
 #new_report,
 .address-search,
-#new_feed {
+#new_feed,
+#new_user {
   .error {
     input,
     textarea {
