@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
 
   before_filter :load_configuration, :set_view_path
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def authenticate_active_admin_user!
     authenticate_user!
@@ -40,5 +41,9 @@ class ApplicationController < ActionController::Base
     # This method is called before set_view_path so we need to calculate the theme from the
     # request rather than using @theme which isn't yet set
     ::ThemeChooser.themer_from_request(request).theme != "nsw" && !Rails.env.development?
+  end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << [:name, :organisation]
   end
 end
