@@ -16,6 +16,14 @@ describe ApiController do
       subject { get method, params.merge(key: "jsdfhsd") }
       include_examples "not authorised"
     end
+
+    context "user has API access disabled" do
+      subject do
+        user = FactoryGirl.create(:user, api_disabled: true)
+        get method, params.merge(key: user.api_key)
+      end
+      include_examples "not authorised"
+    end
   end
 
   let(:user) { create(:user, email: "foo@bar.com", password: "foofoo")}
