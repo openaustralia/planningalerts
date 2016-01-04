@@ -1,6 +1,23 @@
 require 'spec_helper'
 
 describe ApiController do
+  shared_examples "an authenticated API" do
+    shared_examples "not authorised" do
+      it { expect(subject.status).to eq 401 }
+      it { expect(subject.body).to eq '{"error":"not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"}' }
+    end
+
+    context "no API key is given" do
+      subject { get method, params.merge(key: nil) }
+      include_examples "not authorised"
+    end
+
+    context "invalid API key is given" do
+      subject { get method, params.merge(key: "jsdfhsd") }
+      include_examples "not authorised"
+    end
+  end
+
   let(:user) { create(:user, email: "foo@bar.com", password: "foofoo")}
 
   describe "#all" do
@@ -11,24 +28,9 @@ describe ApiController do
     end
 
     describe "json" do
-      it "should not find recent applications if no api key is given" do
-        VCR.use_cassette('planningalerts') do
-          result = create(:application, id: 10, date_scraped: Time.utc(2001,1,1))
-          Application.stub_chain(:where, :paginate).and_return([result])
-        end
-        get :all, format: "js"
-        response.status.should == 401
-        response.body.should == '{"error":"not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"}'
-      end
-
-      it "should error if invalid api key is given" do
-        VCR.use_cassette('planningalerts') do
-          result = create(:application, id: 10, date_scraped: Time.utc(2001,1,1))
-          Application.stub_chain(:where, :paginate).and_return([result])
-        end
-        get :all, key: "jsdfhsd", format: "js"
-        response.status.should == 401
-        response.body.should == '{"error":"not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"}'
+      it_behaves_like "an authenticated API" do
+        let(:method) { :all }
+        let(:params) { { format: "js" } }
       end
 
       it "should error if valid api key is given but no bulk api access" do
@@ -80,10 +82,9 @@ describe ApiController do
 
   describe "#postcode" do
     # TODO: Make errors work with rss format
-    it "should not work if you don't supply an api key" do
-      get :postcode, format: "js", postcode: "2780"
-      response.status.should == 401
-      response.body.should == '{"error":"not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"}'
+    it_behaves_like "an authenticated API" do
+      let(:method) { :postcode }
+      let(:params) { { format: "js", postcode: "2780" } }
     end
 
     it "should find recent applications for a postcode" do
@@ -163,10 +164,9 @@ describe ApiController do
   end
 
   describe "#point" do
-    it "shouldn't work if there isn't a valid api key" do
-      get :point, key: "sdfk", format: "js", address: "24 Bruce Road Glenbrook", radius: 4000
-      response.status.should == 401
-      response.body.should == '{"error":"not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"}'
+    it_behaves_like "an authenticated API" do
+      let(:method) { :point }
+      let(:params) { { format: "js", address: "24 Bruce Road Glenbrook", radius: 4000 } }
     end
 
     describe "failed search by address" do
@@ -238,11 +238,12 @@ describe ApiController do
   end
 
   describe "#area" do
-    it "should not work if there isn't an api key" do
-      get :area, format: "rss", bottom_left_lat: 1.0, bottom_left_lng: 2.0,
-        top_right_lat: 3.0, top_right_lng: 4.0
-      response.status.should == 401
-      response.body.should == 'not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes'
+    it_behaves_like "an authenticated API" do
+      let(:method) { :area }
+      let(:params) do
+        { format: "js", bottom_left_lat: 1.0, bottom_left_lng: 2.0,
+          top_right_lat: 3.0, top_right_lng: 4.0 }
+      end
     end
 
     it "should find recent applications in an area" do
@@ -258,10 +259,9 @@ describe ApiController do
   end
 
   describe "#authority" do
-    it "should not work if there is no api key" do
-      get :authority, format: "rss", authority_id: "blue_mountains"
-      response.status.should == 401
-      response.body.should == 'not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes'
+    it_behaves_like "an authenticated API" do
+      let(:method) { :authority }
+      let(:params) { { format: "js", authority_id: "blue_mountains" } }
     end
 
     it "should find recent applications for an authority" do
@@ -279,10 +279,9 @@ describe ApiController do
   end
 
   describe "#suburb" do
-    it "should not work without an api key" do
-      get :suburb, format: "rss", suburb: "Katoomba"
-      response.status.should == 401
-      response.body.should == 'not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes'
+    it_behaves_like "an authenticated API" do
+      let(:method) { :suburb }
+      let(:params) { { format: "js", suburb: "Katoomba" } }
     end
 
     it "should find recent applications for a suburb" do
@@ -308,11 +307,9 @@ describe ApiController do
   end
 
   describe "#date_scraped" do
-    context "invalid api key is given" do
-      subject { get :date_scraped, key: "jsdfhsd", format: "js", date_scraped: "2015-05-06" }
-
-      it { expect(subject.status).to eq 401 }
-      it { expect(subject.body).to eq '{"error":"not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"}' }
+    it_behaves_like "an authenticated API" do
+      let(:method) { :date_scraped }
+      let(:params) { { format: "js", date_scraped: "2015-05-06" } }
     end
 
     context "valid api key is given but no bulk api access" do
