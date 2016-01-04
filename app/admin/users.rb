@@ -12,6 +12,7 @@ ActiveAdmin.register User do
     column "API calls in last month" do |u|
       u.api_statistics.where("query_time >= ?", 1.month.ago).count
     end
+    column :api_disabled
     column :bulk_api
     column :admin
     actions
@@ -26,6 +27,7 @@ ActiveAdmin.register User do
       input :organisation
     end
     inputs "API" do
+      input :api_disabled
       input :api_key
       input :bulk_api
     end
@@ -35,5 +37,5 @@ ActiveAdmin.register User do
     actions
   end
 
-  permit_params :email, :name, :organisation, :api_key, :bulk_api, :admin
+  permit_params :email, :name, :organisation, :api_key, :bulk_api, :admin, :api_disabled
 end
