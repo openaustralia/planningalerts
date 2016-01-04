@@ -27,7 +27,7 @@
       = link_to "comments on applications", authority_comments_path(@authority.short_name_encoded)
 
     %h4 Number of applications scraped each week
-    #chart
+    #chart.chart
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/2.10.0/d3.v2.min.js"></script>
     = javascript_include_tag "bar_graph"
     :javascript
