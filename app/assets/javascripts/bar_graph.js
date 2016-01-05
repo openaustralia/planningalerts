@@ -90,7 +90,7 @@ function barGraph(selector, url, title) {
       x(function(d) { return x(d.key); }).
       y0(height).
       y1(function(d) { return y(d.values); }).
-      interpolate("basis");
+      interpolate("step-before");
 
     axisGroup.
       append("svg:path").
