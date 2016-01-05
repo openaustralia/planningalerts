@@ -27,6 +27,7 @@
       = link_to "comments on applications", authority_comments_path(@authority.short_name_encoded)
 
     #applications-chart.chart
+    #comments-chart.chart
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/2.10.0/d3.v2.min.js"></script>
     = javascript_include_tag "bar_graph"
     :javascript
@@ -36,8 +37,6 @@
         "Number of applications scraped each week"
       );
 
-    #comments-chart.chart
-    :javascript
       barGraph(
         "#comments-chart",
         "#{per_week_authority_comments_url(@authority.short_name_encoded, format: :json)}",
