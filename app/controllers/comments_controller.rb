@@ -32,8 +32,10 @@ class CommentsController < ApplicationController
   end
 
   def per_week
+    authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+
     respond_to do |format|
-      format.json { render json: { "json" => "response" } }
+      format.json { render json: authority.comments_per_week }
     end
   end
 end
