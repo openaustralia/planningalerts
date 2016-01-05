@@ -45,16 +45,6 @@ function barGraph(selector, url, title) {
       .attr("y2", height + 5)
       .attr("stroke", "lightgray");
 
-    axisGroup.selectAll(".yTicks")
-      .data(y.ticks(10))
-      .enter().append("svg:line")
-      .attr("class", "yTicks")
-      .attr("x1", -5)
-      .attr("y1", y)
-      .attr("x2", 0)
-      .attr("y2", y)
-      .attr("stroke", "lightgray");
-
     axisGroup.selectAll("text.xAxisMonth")
       .data(x.ticks(d3.time.months.utc, 2))
       .enter().append("text")
@@ -96,6 +86,17 @@ function barGraph(selector, url, title) {
       append("svg:path").
       attr("d", l(data)).
       attr("fill", "steelblue");
+
+    axisGroup.selectAll(".yTicks")
+      .data(y.ticks(10))
+      .enter().append("svg:line")
+      .attr("class", "yTicks")
+      .attr("x1", 0)
+      .attr("y1", y)
+      .attr("x2", width)
+      .attr("y2", y)
+      .attr("stroke", "#fff")
+      .style("opacity", .4);
   });
 
 }
