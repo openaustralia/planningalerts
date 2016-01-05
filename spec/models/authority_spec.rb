@@ -40,6 +40,70 @@ describe Authority do
     end
   end
 
+  describe "#comments_per_week" do
+    let(:authority) { create(:authority) }
+
+    before :each do
+      Timecop.freeze(Time.local(2016, 1, 5))
+    end
+
+    after :each do
+      Timecop.return
+    end
+
+    context "when the authority has no applications" do
+      it { expect(authority.comments_per_week).to eq [] }
+    end
+
+    context "when the authority has applications" do
+      before :each do
+        VCR.use_cassette('planningalerts') do
+          create(
+            :application,
+            authority: authority,
+            date_scraped: Date.new(2015,12,24),
+            id: 1
+          )
+        end
+      end
+
+      context "but no comments" do
+        it { expect(authority.comments_per_week).to eq [
+          [ Date.new(2015,12,20), 0 ],
+          [ Date.new(2015,12,27), 0 ],
+          [ Date.new(2016,1,3), 0 ]
+        ]}
+      end
+
+      it "doesn't count hidden or unconfirmed comments" do
+        create(:unconfirmed_comment, application_id: 1, updated_at: Date.new(2015,12,26))
+        create(:unconfirmed_comment, application_id: 1, updated_at: Date.new(2015,12,26))
+        create(:unconfirmed_comment, application_id: 1, updated_at: Date.new(2015,12,26))
+        create(:unconfirmed_comment, application_id: 1, updated_at: Date.new(2016,1,4))
+        create(:confirmed_comment, hidden: true, application_id: 1, updated_at: Date.new(2016,1,4))
+
+        expect(authority.comments_per_week).to eq [
+          [ Date.new(2015,12,20), 0 ],
+          [ Date.new(2015,12,27), 0 ],
+          [ Date.new(2016,1,3), 0 ]
+        ]
+      end
+
+      it "returns count of visible comments for each week since the first application was scraped" do
+        create(:confirmed_comment, application_id: 1, updated_at: Date.new(2015,12,26))
+        create(:confirmed_comment, application_id: 1, updated_at: Date.new(2015,12,26))
+        create(:confirmed_comment, application_id: 1, updated_at: Date.new(2015,12,26))
+        create(:confirmed_comment, application_id: 1, updated_at: Date.new(2016,1,4))
+
+        expect(authority.comments_per_week).to eq [
+          [ Date.new(2015,12,20), 3 ],
+          [ Date.new(2015,12,27), 0 ],
+          [ Date.new(2016,1,3), 1 ]
+        ]
+      end
+    end
+  end
+
   describe "#scraper_data_original_style" do
     context "authority with an xml feed with no date in the url" do
       let (:authority) { build(:authority) }
