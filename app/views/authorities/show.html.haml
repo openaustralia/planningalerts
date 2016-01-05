@@ -26,17 +26,23 @@
       or
       = link_to "comments on applications", authority_comments_path(@authority.short_name_encoded)
 
-    %h4 Number of applications scraped each week
     #applications-chart.chart
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/2.10.0/d3.v2.min.js"></script>
     = javascript_include_tag "bar_graph"
     :javascript
-      barGraph("#applications-chart", "#{per_week_authority_applications_url(@authority.short_name_encoded, :format => 'js')}");
+      barGraph(
+        "#applications-chart",
+        "#{per_week_authority_applications_url(@authority.short_name_encoded, :format => 'js')}",
+        "Number of applications scraped each week"
+      );
 
-    %h4 Number of comments posted each week
     #comments-chart.chart
     :javascript
-      barGraph("#comments-chart", "#{per_week_authority_comments_url(@authority.short_name_encoded, format: :json)}");
+      barGraph(
+        "#comments-chart",
+        "#{per_week_authority_comments_url(@authority.short_name_encoded, format: :json)}",
+        "Number of comments posted each week"
+      );
 
   = render "under_the_hood"
 - else

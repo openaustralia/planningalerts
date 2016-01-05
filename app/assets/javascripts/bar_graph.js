@@ -1,4 +1,14 @@
-function barGraph(selector, url) {
+function barGraph(selector, url, title) {
+
+  // Add the title
+  var wrapper_element = document.querySelectorAll(selector)[0];
+
+  var title_element = document.createElement('h4');
+  title_element.textContent = title;
+
+  wrapper_element.insertBefore(title_element, wrapper_element.firstChild);
+
+  // Add the chart
   d3.json(url, function(data) {
 
     data = data.map(function(d, i) {
