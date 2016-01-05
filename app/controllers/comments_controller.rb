@@ -30,4 +30,10 @@ class CommentsController < ApplicationController
       render text: "", status: 404
     end
   end
+
+  def per_week
+    respond_to do |format|
+      format.json { render json: { "json" => "response" } }
+    end
+  end
 end
