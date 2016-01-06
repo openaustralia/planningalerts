@@ -47,7 +47,7 @@ function barGraph(selector, url, title) {
       .attr("stroke-width", "2px");
 
     axisGroup.selectAll("text.xAxisMonth")
-      .data(x.ticks(d3.time.months.utc, 2))
+      .data(x.ticks(d3.time.months.utc, 3))
       .enter().append("text")
       .attr("class", "xAxisMonth")
       .attr("x", x)
