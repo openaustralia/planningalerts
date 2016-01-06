@@ -95,8 +95,9 @@ function barGraph(selector, url, title) {
       .attr("y1", y)
       .attr("x2", width)
       .attr("y2", y)
-      .attr("stroke", "#fff")
-      .style("opacity", .4);
+      .attr("stroke", function(d, i) {
+        if ( i === 0 ) { return "#888"; } else { return "rgba(255,255,255,.4)"; }
+      });
   });
 
 }
