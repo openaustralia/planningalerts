@@ -135,7 +135,11 @@ PlanningalertsApp::Application.routes.draw do
 
   get 'subscriptions' => redirect('/subscriptions/new')
 
-  get 'performance' => 'performance#index'
+  resources :performance, only: [:index] do
+    collection do
+      get :comments
+    end
+  end
 
   root to: 'applications#address'
 

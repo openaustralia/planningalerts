@@ -3,6 +3,12 @@ class PerformanceController < ApplicationController
     @daily_comment_metrics = comment_performance_data
   end
 
+  def comments
+    respond_to do |format|
+      format.json { render json: comment_performance_data }
+    end
+  end
+
   private
 
   def comment_performance_data
