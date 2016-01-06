@@ -29,7 +29,7 @@ function barGraph(selector, url, title) {
     var chart = d3.select(selector)
       .append("svg:svg")
       .attr("width", width + 2 * margin)
-      .attr("height", height + 2 * margin);
+      .attr("height", height + 3 * margin);
 
     var axisGroup = chart
       .append("g")
@@ -51,7 +51,7 @@ function barGraph(selector, url, title) {
       .attr("class", "xAxisMonth")
       .attr("x", x)
       .attr("y", height)
-      .attr("dy", "15")
+      .attr("dy", "20")
       .attr("text-anchor", "middle")
       .text(d3.time.format("%b"));
 
@@ -61,7 +61,7 @@ function barGraph(selector, url, title) {
       .attr("class", "xAxisYear")
       .attr("x", x)
       .attr("y", height + 8)
-      .attr("dy", "20")
+      .attr("dy", "30")
       .attr("text-anchor", "middle")
       .text(d3.time.format("%Y"));
 
