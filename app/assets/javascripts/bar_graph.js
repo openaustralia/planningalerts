@@ -76,7 +76,7 @@ function barGraph(selector, url, title) {
       .attr("dx", "-8")
       .attr("dy", "3")
       .attr("text-anchor", "end")
-      .text(y.tickFormat(5));
+      .text(y.tickFormat(0));
 
     var l = d3.svg.area().
       x(function(d) { return x(d.key); }).
