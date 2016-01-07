@@ -20,9 +20,10 @@ function barGraph(selector, url, title) {
     var height = 200;
     var margin = 30;
 
+    var maxYValue = d3.max(data, function(datum) { return datum.values; });
     var x = d3.time.scale().domain(d3.extent(data, function(datum) { return datum.key})).range([0, width]);
     var y = d3.scale.linear()
-      .domain([0, d3.max(data, function(datum) { return datum.values; })])
+      .domain([0, maxYValue])
       .rangeRound([height, 0]);
 
     // add the canvas to the DOM
