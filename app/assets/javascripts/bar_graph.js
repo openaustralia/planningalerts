@@ -21,8 +21,15 @@ function barGraph(selector, url, title) {
     var margin = { top: 20, right: 50, bottom: 20, left: 50 };
 
     var maxYValue = d3.max(data, function(datum) { return datum.values; });
-    var x = d3.time.scale().domain(d3.extent(data, function(datum) { return datum.key})).range([0, width]);
-    var y = d3.scale.linear()
+
+    var x = d3.time.scale()
+      .domain(
+        d3.extent(data, function(datum) { return datum.key; })
+      )
+      .range([0, width]);
+
+    var y = d3.scale
+      .linear()
       .domain([0, maxYValue])
       .rangeRound([height, 0]);
 
