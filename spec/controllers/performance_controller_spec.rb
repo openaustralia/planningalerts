@@ -7,7 +7,7 @@ describe PerformanceController do
 
   describe "#comments" do
     before :each do
-      Timecop.freeze(Time.local(2016, 1, 5))
+      Timecop.freeze(Time.utc(2016, 1, 5, 10))
     end
 
     after :each do
@@ -31,10 +31,10 @@ describe PerformanceController do
         get(:comments, format: :json)
 
         expect(JSON.parse(response.body)).to include({
-          "date"=>"2016-01-02", "first_time_commenters"=>0, "returning_commenters"=>2
+          "date"=>"2016-01-03", "first_time_commenters"=>0, "returning_commenters"=>2
         })
         expect(JSON.parse(response.body)).to include({
-          "date"=>"2015-10-06", "first_time_commenters"=>3, "returning_commenters"=>0
+          "date"=>"2015-10-07", "first_time_commenters"=>3, "returning_commenters"=>0
         })
       end
     end
