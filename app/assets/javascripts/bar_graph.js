@@ -85,7 +85,7 @@ function barGraph(selector, url, title) {
       .attr("text-anchor", "end")
       .text(y.tickFormat(0));
 
-    var l = d3.svg.area().
+    var areaValues = d3.svg.area().
       x(function(d) { return x(d.key); }).
       y0(height).
       y1(function(d) { return y(d.values); }).
@@ -93,7 +93,7 @@ function barGraph(selector, url, title) {
 
     chart.
       append("svg:path").
-      attr("d", l(data)).
+      attr("d", areaValues(data)).
       attr("fill", "steelblue");
 
     var yGridTickCount;
