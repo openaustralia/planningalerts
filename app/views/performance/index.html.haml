@@ -9,7 +9,7 @@
 
 %table#comment-performance-table
   %caption
-    New and returning people commenting on applications over time
+    New and returning people commenting on applications each day
   %thead
     %tr
       %th Date
@@ -28,7 +28,7 @@
   stackedAreaTimeseries(
     "#comment-performance-chart",
     "#{comments_performance_index_url(format: :json)}",
-    "New and returning people commenting on applications over time"
+    "New and returning people commenting on applications each day"
   );
 
   // Make the table only visible to screen readers
