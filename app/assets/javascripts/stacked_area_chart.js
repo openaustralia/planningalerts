@@ -37,6 +37,18 @@ function stackedAreaTimeseries(selector, url, title) {
       .tickPadding([5])
       .orient("left");
 
+    var yMidAxis = d3.svg.axis()
+      .scale(y)
+      .ticks(5)
+      .tickPadding([5])
+      .orient("left");
+
+    var ySmallAxis = d3.svg.axis()
+      .scale(y)
+      .ticks(2)
+      .tickPadding([5])
+      .orient("left");
+
     var area = d3.svg.area()
       .x(function(d) { return x(d.date); })
       .y0(function(d) { return y(d.y0); })
@@ -133,9 +145,19 @@ function stackedAreaTimeseries(selector, url, title) {
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
 
+      var yAxisForData;
+
+      if (maxDateVal > 10) {
+        yAxisForData = yAxis;
+      } else if (maxDateVal > 5 ) {
+        yAxisForData = yMidAxis;
+      } else {
+        yAxisForData = ySmallAxis;
+      }
+
       svg.append("g")
         .attr("class", "axis y-axis")
-        .call(yAxis);
+        .call(yAxisForData);
     });
   }
 }
