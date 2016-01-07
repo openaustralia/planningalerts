@@ -39,13 +39,11 @@ function barGraph(selector, url, title) {
     var chart = d3.select(selector)
       .append("svg:svg")
       .attr("width", margin.left + width + margin.right)
-      .attr("height", margin.top + height + margin.bottom);
-
-    var axisGroup = chart
+      .attr("height", margin.top + height + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    axisGroup.selectAll(".xTicks")
+    chart.selectAll(".xTicks")
       .data(x.ticks(d3.time.months.utc, 1))
       .enter().append("svg:line")
       .attr("class", "xTicks")
@@ -56,7 +54,7 @@ function barGraph(selector, url, title) {
       .attr("stroke", "#888")
       .attr("stroke-width", "2px");
 
-    axisGroup.selectAll("text.xAxisMonth")
+    chart.selectAll("text.xAxisMonth")
       .data(x.ticks(d3.time.months.utc, 3))
       .enter().append("text")
       .attr("class", "xAxisMonth")
@@ -66,7 +64,7 @@ function barGraph(selector, url, title) {
       .attr("text-anchor", "middle")
       .text(d3.time.format("%b"));
 
-    axisGroup.selectAll("text.xAxisYear")
+    chart.selectAll("text.xAxisYear")
       .data(x.ticks(d3.time.years.utc, 1))
       .enter().append("text")
       .attr("class", "xAxisYear")
@@ -76,7 +74,7 @@ function barGraph(selector, url, title) {
       .attr("text-anchor", "middle")
       .text(d3.time.format("%Y"));
 
-    axisGroup.selectAll("text.yAxis")
+    chart.selectAll("text.yAxis")
       .data(y.ticks(yTickCount))
       .enter().append("text")
       .attr("class", "yAxis")
@@ -93,14 +91,14 @@ function barGraph(selector, url, title) {
       y1(function(d) { return y(d.values); }).
       interpolate("monotone");
 
-    axisGroup.
+    chart.
       append("svg:path").
       attr("d", l(data)).
       attr("fill", "steelblue");
 
     var yGridTickCount;
     if (yTickCount === 5) { yGridTickCount = 10 } else { yGridTickCount = yTickCount };
-    axisGroup.selectAll(".yTicks")
+    chart.selectAll(".yTicks")
       .data(y.ticks(yGridTickCount))
       .enter().append("svg:line")
       .attr("class", "yTicks")
