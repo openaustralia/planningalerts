@@ -12,7 +12,7 @@ class PerformanceController < ApplicationController
   private
 
   def comment_performance_data
-    (3.months.ago.to_date..Date.yesterday).to_a.reverse.map do |day|
+    (3.months.ago.to_date..1.day.ago.to_date).to_a.reverse.map do |day|
       {
         date: day,
         first_time_commenters: Comment.by_first_time_commenters_for_date(day).count,
