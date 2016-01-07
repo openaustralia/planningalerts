@@ -56,7 +56,8 @@ function stackedAreaTimeseries(selector, url, title) {
       .interpolate("step-after");
 
     var stack = d3.layout.stack()
-      .values(function(d) { return d.values; });
+      .values(function(d) { return d.values; })
+      .order("reverse");
 
     var svg = d3.select(selector).append("svg")
       .attr("width", margin + width + legend_offset)
