@@ -18,7 +18,7 @@ function barGraph(selector, url, title) {
     var width = 800;
     var barWidth = 5;
     var height = 200;
-    var margin = 30;
+    var margin = { top: 20, right: 50, bottom: 20, left: 50 };
 
     var maxYValue = d3.max(data, function(datum) { return datum.values; });
     var x = d3.time.scale().domain(d3.extent(data, function(datum) { return datum.key})).range([0, width]);
@@ -38,12 +38,12 @@ function barGraph(selector, url, title) {
     // add the canvas to the DOM
     var chart = d3.select(selector)
       .append("svg:svg")
-      .attr("width", width + 2 * margin)
-      .attr("height", height + 3 * margin);
+      .attr("width", margin.left + width + margin.right)
+      .attr("height", margin.top + height + margin.bottom);
 
     var axisGroup = chart
       .append("g")
-      .attr("transform", "translate(" + margin + "," + margin + ")");
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     axisGroup.selectAll(".xTicks")
       .data(x.ticks(d3.time.months.utc, 1))
