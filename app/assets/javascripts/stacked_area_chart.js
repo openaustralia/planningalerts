@@ -169,6 +169,8 @@ function stackedAreaTimeseries(selector, url, title) {
         yAxisForData = ySmallAxis;
       }
 
+      // TODO: Add tooltip to show specific dates and values
+
       svg.append("g")
         .attr("class", "axis y-axis")
         .call(yAxisForData);
