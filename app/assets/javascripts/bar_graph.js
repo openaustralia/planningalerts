@@ -31,10 +31,8 @@ function barGraph(selector, url, title) {
       yTickCount = 1;
     } else if (maxYValue < 5) {
       yTickCount = 2;
-    } else if (maxYValue < 10) {
+    } else  {
       yTickCount = 5;
-    } else {
-      yTickCount = 10;
     }
 
     // add the canvas to the DOM
@@ -100,8 +98,10 @@ function barGraph(selector, url, title) {
       attr("d", l(data)).
       attr("fill", "steelblue");
 
+    var yGridTickCount;
+    if (yTickCount === 5) { yGridTickCount = 10 } else { yGridTickCount = yTickCount };
     axisGroup.selectAll(".yTicks")
-      .data(y.ticks(yTickCount))
+      .data(y.ticks(yGridTickCount))
       .enter().append("svg:line")
       .attr("class", "yTicks")
       .attr("x1", 0)
