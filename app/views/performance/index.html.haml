@@ -4,6 +4,9 @@
 
 %h2 Comments on planning applications
 
+-# target for chart script
+#comment-performance-chart.chart
+
 %table
   %caption
     New and returning people commenting on applications over time
@@ -18,3 +21,12 @@
         %th= day[:date]
         %td= day[:first_time_commenters]
         %td= day[:returning_commenters]
+
+= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/d3/2.10.0/d3.v2.min.js"
+= javascript_include_tag "stacked_area_chart"
+:javascript
+  stackedAreaTimeseries(
+    "#comment-performance-chart",
+    "#{comments_performance_index_url(format: :json)}",
+    "New and returning people commenting on applications over time"
+  );
