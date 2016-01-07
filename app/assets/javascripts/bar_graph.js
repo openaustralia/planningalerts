@@ -91,7 +91,7 @@ function barGraph(selector, url, title) {
       x(function(d) { return x(d.key); }).
       y0(height).
       y1(function(d) { return y(d.values); }).
-      interpolate("step-before");
+      interpolate("monotone");
 
     axisGroup.
       append("svg:path").
