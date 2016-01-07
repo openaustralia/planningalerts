@@ -53,7 +53,7 @@ function stackedAreaTimeseries(selector, url, title) {
       .x(function(d) { return x(d.date); })
       .y0(function(d) { return y(d.y0); })
       .y1(function(d) { return y(d.y0 + d.y); })
-      .interpolate("step-after");
+      .interpolate("monotone");
 
     var stack = d3.layout.stack()
       .values(function(d) { return d.values; })
