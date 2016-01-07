@@ -26,6 +26,17 @@ function barGraph(selector, url, title) {
       .domain([0, maxYValue])
       .rangeRound([height, 0]);
 
+    var yTickCount;
+    if (maxYValue < 2) {
+      yTickCount = 1;
+    } else if (maxYValue < 5) {
+      yTickCount = 2;
+    } else if (maxYValue < 10) {
+      yTickCount = 5;
+    } else {
+      yTickCount = 10;
+    }
+
     // add the canvas to the DOM
     var chart = d3.select(selector)
       .append("svg:svg")
@@ -68,7 +79,7 @@ function barGraph(selector, url, title) {
       .text(d3.time.format("%Y"));
 
     axisGroup.selectAll("text.yAxis")
-      .data(y.ticks(5))
+      .data(y.ticks(yTickCount))
       .enter().append("text")
       .attr("class", "yAxis")
       .attr("x", 0)
@@ -90,7 +101,7 @@ function barGraph(selector, url, title) {
       attr("fill", "steelblue");
 
     axisGroup.selectAll(".yTicks")
-      .data(y.ticks(10))
+      .data(y.ticks(yTickCount))
       .enter().append("svg:line")
       .attr("class", "yTicks")
       .attr("x1", 0)
