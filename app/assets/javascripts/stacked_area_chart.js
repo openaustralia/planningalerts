@@ -95,7 +95,7 @@ function stackedAreaTimeseries(selector, url, title) {
       }));
 
       // Find the value of the day with highest total value
-      var maxDateVal = d3.max(data, function(d) {
+      maxDateVal = d3.max(data, function(d) {
         var vals = d3.keys(d).map(function(key) { return key !== "date" ? d[key] : 0 });
         return d3.sum(vals);
       });
@@ -118,8 +118,15 @@ function stackedAreaTimeseries(selector, url, title) {
         .datum(function(d) {
           return { color: d.color, value: d.values[d.values.length - 1] };
         })
-        .attr("transform", function(d) {
-          return "translate(" + x(d.value.date) + "," + y(d.value.y0 + d.value.y / 2) + ")";
+        .attr("transform", function(d, i) {
+          var y_position_or_fallback;
+          if (d.value.y0 + d.value.y > 1) {
+            y_position_or_fallback = y(d.value.y0 + d.value.y / 2);
+          } else {
+            y_position_or_fallback = y(maxDateVal / ( 2 - i ));
+          }
+
+          return "translate(" + x(d.value.date) + "," + y_position_or_fallback + ")";
         })
         .attr("x", width + 10)
         .attr("dy", ".35em")
@@ -131,9 +138,16 @@ function stackedAreaTimeseries(selector, url, title) {
         .datum(function(d) {
           return { name: d.name, value: d.values[d.values.length - 1] };
         })
-        .attr("transform", function(d) {
-            var x_position_plus_offset = x(d.value.date) + 30
-            var y_position_plus_offset = y(d.value.y0 + d.value.y / 2) + 8
+        .attr("transform", function(d, i) {
+            var y_position_or_fallback;
+            if (d.value.y0 + d.value.y > 1) {
+              y_position_or_fallback = y(d.value.y0 + d.value.y / 2);
+            } else {
+              y_position_or_fallback = y(maxDateVal / ( 2 - i ));
+            }
+
+            var x_position_plus_offset = x(d.value.date) + 30;
+            var y_position_plus_offset = y_position_or_fallback + 8;
           return "translate(" + x_position_plus_offset + "," + y_position_plus_offset + ")";
         })
         .attr("x", width)
