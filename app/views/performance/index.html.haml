@@ -7,7 +7,7 @@
 -# target for chart script
 #comment-performance-chart.chart
 
-%table
+%table#comment-performance-table
   %caption
     New and returning people commenting on applications over time
   %thead
@@ -30,3 +30,12 @@
     "#{comments_performance_index_url(format: :json)}",
     "New and returning people commenting on applications over time"
   );
+
+  // Make the table only visible to screen readers
+  var table = document.getElementById('comment-performance-table')
+
+  if (table.classList) {
+    table.classList.add('sr-only');
+  } else {
+    table.className += ' sr-only';
+  }
