@@ -92,16 +92,15 @@ function barGraph(selector, url, title) {
       .attr("text-anchor", "end")
       .text(y.tickFormat(0));
 
-    var areaValues = d3.svg.area().
-      x(function(d) { return x(d.key); }).
-      y0(height).
-      y1(function(d) { return y(d.values); }).
-      interpolate("monotone");
+    var areaValues = d3.svg.area()
+      .x(function(d) { return x(d.key); })
+      .y0(height)
+      .y1(function(d) { return y(d.values); })
+      .interpolate("monotone");
 
-    chart.
-      append("svg:path").
-      attr("d", areaValues(data)).
-      attr("fill", "steelblue");
+    chart.append("svg:path")
+      .attr("d", areaValues(data))
+      .attr("fill", "steelblue");
 
     var yGridTickCount;
     if (yTickCount === 5) { yGridTickCount = 10 } else { yGridTickCount = yTickCount };
