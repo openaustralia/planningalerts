@@ -563,31 +563,6 @@ form.address-search {
   }
 }
 
-// Style chart on authority detail page
-.chart {
-  text {
-    fill: $font-color;
-    font-size: .875em;
-  }
-}
-
-.chart-area-stacked {
-  .axis {
-    line,
-    path {
-      fill: none;
-      stroke: #888;
-      stroke-width: 2px;
-    }
-  }
-
-  .y-axis {
-    .domain {
-      display: none;
-    }
-  }
-}
-
 // Prototype of possible widget for signing up to email alerts
 .widget-prototype {
   width: 700px;

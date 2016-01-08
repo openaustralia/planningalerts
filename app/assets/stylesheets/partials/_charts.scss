@@ -1,0 +1,23 @@
+.chart {
+  text {
+    fill: $font-color;
+    font-size: .875em;
+  }
+}
+
+.chart-area-stacked {
+  .axis {
+    line,
+    path {
+      fill: none;
+      stroke: #888;
+      stroke-width: 2px;
+    }
+  }
+
+  .y-axis {
+    .domain {
+      display: none;
+    }
+  }
+}
