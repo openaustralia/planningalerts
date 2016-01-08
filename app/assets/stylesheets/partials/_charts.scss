@@ -5,8 +5,14 @@
   }
 
   .chart-area {
-    fill: steelblue;
+    fill: lighten($dark, 40%);
   }
+}
+
+.chart-line {
+  fill: none;
+  stroke: $dark;
+  stroke-width: 3px;
 }
 
 .chart-area-stacked {

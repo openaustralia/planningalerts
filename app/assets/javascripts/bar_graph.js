@@ -98,9 +98,19 @@ function barGraph(selector, url, title) {
       .y1(function(d) { return y(d.values); })
       .interpolate("monotone");
 
+    var lineValues = d3.svg.line()
+      .x(function(d) { return x(d.key); })
+      .y(function(d) { return y(d.values); })
+      .interpolate("monotone");
+
     chart.append("svg:path")
       .attr("d", areaValues(data))
       .attr("class", "chart-area");
+
+    chart.append("svg:path")
+      .datum(data)
+      .attr("d", lineValues)
+      .attr("class", "chart-line");
 
     var yGridTickCount;
     if (yTickCount === 5) { yGridTickCount = 10 } else { yGridTickCount = yTickCount };
