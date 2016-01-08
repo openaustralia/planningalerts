@@ -1,3 +1,5 @@
+$chart-fill-color: lighten($dark, 65%);
+$chart-line-color: lighten($dark, 20%);
 .chart {
   text {
     fill: $font-color;
@@ -5,13 +7,13 @@
   }
 
   .chart-area {
-    fill: lighten($dark, 40%);
+    fill: $chart-fill-color;
   }
 }
 
 .chart-line {
   fill: none;
-  stroke: $dark;
+  stroke: $chart-line-color;
   stroke-width: 2px;
 
   &.chart-clipping-below {
