@@ -100,7 +100,7 @@ function barGraph(selector, url, title) {
 
     chart.append("svg:path")
       .attr("d", areaValues(data))
-      .attr("fill", "steelblue");
+      .attr("class", "chart-area");
 
     var yGridTickCount;
     if (yTickCount === 5) { yGridTickCount = 10 } else { yGridTickCount = yTickCount };
