@@ -13,6 +13,10 @@
   fill: none;
   stroke: $dark;
   stroke-width: 3px;
+
+  &.chart-clipping-below {
+    display: none;
+  }
 }
 
 .chart-area-stacked {

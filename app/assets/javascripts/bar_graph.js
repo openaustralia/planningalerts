@@ -98,6 +98,20 @@ function barGraph(selector, url, title) {
       .y1(function(d) { return y(d.values); })
       .interpolate("monotone");
 
+    // Clip the line a y(0) so 0 values are more prominent
+    chart.append("clipPath")
+      .attr("id", "clip-above")
+      .append("rect")
+      .attr("width", width)
+      .attr("height", y(0) - 1);
+
+    chart.append("clipPath")
+      .attr("id", "clip-below")
+      .append("rect")
+      .attr("y", y(0))
+      .attr("width", width)
+      .attr("height", height);
+
     var lineValues = d3.svg.line()
       .x(function(d) { return x(d.key); })
       .y(function(d) { return y(d.values); })
@@ -107,10 +121,14 @@ function barGraph(selector, url, title) {
       .attr("d", areaValues(data))
       .attr("class", "chart-area");
 
-    chart.append("svg:path")
+    chart.selectAll(".chart-line")
+      .data(["above", "below"])
+      .enter()
+      .append("path")
+      .attr("class", function(d) { return "chart-line chart-clipping-" + d; })
+      .attr("clip-path", function(d) { return "url(#clip-" + d + ")"; })
       .datum(data)
-      .attr("d", lineValues)
-      .attr("class", "chart-line");
+      .attr("d", lineValues);
 
     var yGridTickCount;
     if (yTickCount === 5) { yGridTickCount = 10 } else { yGridTickCount = yTickCount };
