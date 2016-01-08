@@ -33,6 +33,8 @@ function barGraph(selector, url, title) {
       .domain([0, maxYValue])
       .rangeRound([height, 0]);
 
+    var bisectDate = d3.bisector(function(d) { return d.key; }).left
+
     var yTickCount;
     if (maxYValue < 2) {
       yTickCount = 1;
@@ -129,6 +131,47 @@ function barGraph(selector, url, title) {
       .attr("clip-path", function(d) { return "url(#clip-" + d + ")"; })
       .datum(data)
       .attr("d", lineValues);
+
+    var focus = chart.append("g")
+      .attr("class", "focus");
+
+    focus.append("circle")
+      .attr("r", 5);
+
+    focus.append("text")
+      .attr("x", 9)
+      .attr("dy", -10);
+
+    focusDefault();
+
+    chart.append("rect")
+      .attr("class", "chart-overlay")
+      .attr("width", width)
+      .attr("height", height)
+      .on("mouseout", focusDefault)
+      .on("mousemove", mousemove);
+
+    function focusDefault() {
+      var finalPoint = data[data.length - 1],
+          focusDefaultPosition = {
+            x: x(finalPoint.key),
+            y: y(finalPoint.values)
+          };
+
+      focus.attr("transform", "translate(" + focusDefaultPosition.x + "," + focusDefaultPosition.y + ")");
+      focus.select("text").text(finalPoint.values);
+    }
+
+    function mousemove() {
+      var x0 = x.invert(d3.mouse(this)[0]),
+      i = bisectDate(data, x0, 1),
+      d0 = data[i - 1],
+      d1 = data[i],
+      d = x0 - d0.date > d1.date - x0 ? d1 : d0,
+      yValue = height - y(d.values);
+      focus.attr("transform", "translate(" + x(d.key) + "," + y(d.values) + ")");
+      focus.select("text").text(d.values);
+    }
   });
 
 }

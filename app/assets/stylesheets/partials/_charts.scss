@@ -37,3 +37,16 @@ $chart-line-color: lighten($dark, 20%);
     }
   }
 }
+
+.chart-overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus {
+  circle {
+    stroke: $chart-line-color;
+    stroke-width: 2px;
+    fill: transparent;
+  }
+}
