@@ -129,23 +129,6 @@ function barGraph(selector, url, title) {
       .attr("clip-path", function(d) { return "url(#clip-" + d + ")"; })
       .datum(data)
       .attr("d", lineValues);
-
-    var yGridTickCount;
-    if (yTickCount === 5) { yGridTickCount = 10 } else { yGridTickCount = yTickCount };
-    chart.selectAll(".yTicks")
-      .data(y.ticks(yGridTickCount))
-      .enter().append("svg:line")
-      .attr("class", "yTicks")
-      .attr("x1", 0)
-      .attr("y1", y)
-      .attr("x2", width)
-      .attr("y2", y)
-      .attr("stroke", function(d, i) {
-        if ( i === 0 ) { return "#888"; } else { return "rgba(255,255,255,.4)"; }
-      })
-      .attr("stroke-width", function(d, i) {
-        if ( i === 0 ) { return "4px"; } else { return "2px"; }
-      });
   });
 
 }
