@@ -50,6 +50,17 @@ function barGraph(selector, url, title) {
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    var areaValues = d3.svg.area()
+      .x(function(d) { return x(d.key); })
+      .y0(height)
+      .y1(function(d) { return y(d.values); })
+      .interpolate("monotone");
+
+    var lineValues = d3.svg.line()
+      .x(function(d) { return x(d.key); })
+      .y(function(d) { return y(d.values); })
+      .interpolate("monotone");
+
     chart.selectAll(".xTicks")
       .data(x.ticks(d3.time.months.utc, 1))
       .enter().append("svg:line")
@@ -92,11 +103,9 @@ function barGraph(selector, url, title) {
       .attr("text-anchor", "end")
       .text(y.tickFormat(0));
 
-    var areaValues = d3.svg.area()
-      .x(function(d) { return x(d.key); })
-      .y0(height)
-      .y1(function(d) { return y(d.values); })
-      .interpolate("monotone");
+    chart.append("svg:path")
+      .attr("d", areaValues(data))
+      .attr("class", "chart-area");
 
     // Clip the line a y(0) so 0 values are more prominent
     chart.append("clipPath")
@@ -111,15 +120,6 @@ function barGraph(selector, url, title) {
       .attr("y", y(0))
       .attr("width", width)
       .attr("height", height);
-
-    var lineValues = d3.svg.line()
-      .x(function(d) { return x(d.key); })
-      .y(function(d) { return y(d.values); })
-      .interpolate("monotone");
-
-    chart.append("svg:path")
-      .attr("d", areaValues(data))
-      .attr("class", "chart-area");
 
     chart.selectAll(".chart-line")
       .data(["above", "below"])
