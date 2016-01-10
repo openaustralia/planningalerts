@@ -18,7 +18,7 @@ function barGraph(selector, url, metric) {
     var width = 600;
     var barWidth = 5;
     var height = 200;
-    var margin = { top: 20, right: 50, bottom: 100, left: 40 };
+    var margin = { top: 20, right: 50, bottom: 100, left: 60 };
     var calloutWidth = 200;
 
     var maxYValue = d3.max(data, function(datum) { return datum.values; });
@@ -49,6 +49,7 @@ function barGraph(selector, url, metric) {
       .scale(y)
       .ticks(yTickCount)
       .tickFormat(d3.format(0))
+      .tickPadding(8)
       .orient("left");
 
     var xTickCount,
@@ -68,7 +69,8 @@ function barGraph(selector, url, metric) {
     var xAxis = d3.svg.axis()
       .scale(x)
       .ticks(xTickCount)
-      .tickFormat(xAxisDateFormats);
+      .tickFormat(xAxisDateFormats)
+      .tickPadding(8);
 
     // add the canvas to the DOM
     var chart = d3.select(selector)
@@ -91,11 +93,12 @@ function barGraph(selector, url, metric) {
 
     chart.append("g")
       .attr("class", "x-axis")
-      .attr("transform", "translate(0, " + height + ")")
+      .attr("transform", "translate(0, " + (height + 8) + ")")
       .call(xAxis);
 
     chart.append("g")
       .attr("class", "y-axis")
+      .attr("transform", "translate(-8, 0)")
       .call(yAxis);
 
     chart.append("svg:path")
