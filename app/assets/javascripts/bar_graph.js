@@ -51,6 +51,25 @@ function barGraph(selector, url, metric) {
       .tickFormat(d3.format(0))
       .orient("left");
 
+    var xTickCount,
+        xDomainMonths = d3.time.months(x.domain()[0], x.domain()[1]).length;
+    if (xDomainMonths < 9) {
+      xTickCount = 2;
+    } else {
+      xTickCount = (d3.time.months, 10);
+    }
+
+    var xAxisDateFormats = d3.time.format.multi([
+        ["%_d %b", function(d) { return d.getDate() != 1; }],
+        ["%b", function(d) { return d.getMonth(); }],
+        ["%Y", function() { return true; }]
+    ]);
+
+    var xAxis = d3.svg.axis()
+      .scale(x)
+      .ticks(xTickCount)
+      .tickFormat(xAxisDateFormats);
+
     // add the canvas to the DOM
     var chart = d3.select(selector)
       .append("svg:svg")
@@ -70,36 +89,10 @@ function barGraph(selector, url, metric) {
       .y(function(d) { return y(d.values); })
       .interpolate("monotone");
 
-    chart.selectAll(".xTicks")
-      .data(x.ticks(d3.time.months.utc, 1))
-      .enter().append("svg:line")
-      .attr("class", "xTicks")
-      .attr("x1", x)
-      .attr("y1", height + 5)
-      .attr("x2", x)
-      .attr("y2", height + 10)
-      .attr("stroke", "#888")
-      .attr("stroke-width", "1px");
-
-    chart.selectAll("text.xAxisMonth")
-      .data(x.ticks(d3.time.months.utc, 3))
-      .enter().append("text")
-      .attr("class", "xAxisMonth")
-      .attr("x", x)
-      .attr("y", height)
-      .attr("dy", "25")
-      .attr("text-anchor", "middle")
-      .text(d3.time.format("%b"));
-
-    chart.selectAll("text.xAxisYear")
-      .data(x.ticks(d3.time.years.utc, 1))
-      .enter().append("text")
-      .attr("class", "xAxisYear")
-      .attr("x", x)
-      .attr("y", height + 8)
-      .attr("dy", "35")
-      .attr("text-anchor", "middle")
-      .text(d3.time.format("%Y"));
+    chart.append("g")
+      .attr("class", "x-axis")
+      .attr("transform", "translate(0, " + height + ")")
+      .call(xAxis);
 
     chart.append("g")
       .attr("class", "y-axis")
