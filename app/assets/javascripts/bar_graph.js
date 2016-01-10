@@ -18,7 +18,7 @@ function barGraph(selector, url, metric) {
     var width = 600;
     var barWidth = 5;
     var height = 200;
-    var margin = { top: 20, right: 50, bottom: 100, left: 50 };
+    var margin = { top: 20, right: 50, bottom: 100, left: 40 };
     var calloutWidth = 200;
 
     var maxYValue = d3.max(data, function(datum) { return datum.values; });
