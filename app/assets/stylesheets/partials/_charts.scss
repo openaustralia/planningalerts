@@ -9,6 +9,12 @@ $chart-line-color: lighten($dark, 20%);
   .chart-area {
     fill: $chart-fill-color;
   }
+
+  .y-axis {
+    .domain {
+      display: none;
+    }
+  }
 }
 
 .chart-line {
@@ -28,12 +34,6 @@ $chart-line-color: lighten($dark, 20%);
       fill: none;
       stroke: #888;
       stroke-width: 2px;
-    }
-  }
-
-  .y-axis {
-    .domain {
-      display: none;
     }
   }
 }

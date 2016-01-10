@@ -45,6 +45,12 @@ function barGraph(selector, url, metric) {
       yTickCount = 5;
     }
 
+    var yAxis = d3.svg.axis()
+      .scale(y)
+      .ticks(yTickCount)
+      .tickFormat(d3.format(0))
+      .orient("left");
+
     // add the canvas to the DOM
     var chart = d3.select(selector)
       .append("svg:svg")
@@ -95,16 +101,9 @@ function barGraph(selector, url, metric) {
       .attr("text-anchor", "middle")
       .text(d3.time.format("%Y"));
 
-    chart.selectAll("text.yAxis")
-      .data(y.ticks(yTickCount))
-      .enter().append("text")
-      .attr("class", "yAxis")
-      .attr("x", 0)
-      .attr("y", y)
-      .attr("dx", "-8")
-      .attr("dy", "3")
-      .attr("text-anchor", "end")
-      .text(y.tickFormat(0));
+    chart.append("g")
+      .attr("class", "y-axis")
+      .call(yAxis);
 
     chart.append("svg:path")
       .attr("d", areaValues(data))
