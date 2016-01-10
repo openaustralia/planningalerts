@@ -75,9 +75,9 @@ function barGraph(selector, url, metric) {
       .enter().append("svg:line")
       .attr("class", "xTicks")
       .attr("x1", x)
-      .attr("y1", height)
+      .attr("y1", height + 5)
       .attr("x2", x)
-      .attr("y2", height + 5)
+      .attr("y2", height + 10)
       .attr("stroke", "#888")
       .attr("stroke-width", "2px");
 
@@ -87,7 +87,7 @@ function barGraph(selector, url, metric) {
       .attr("class", "xAxisMonth")
       .attr("x", x)
       .attr("y", height)
-      .attr("dy", "20")
+      .attr("dy", "25")
       .attr("text-anchor", "middle")
       .text(d3.time.format("%b"));
 
@@ -97,7 +97,7 @@ function barGraph(selector, url, metric) {
       .attr("class", "xAxisYear")
       .attr("x", x)
       .attr("y", height + 8)
-      .attr("dy", "30")
+      .attr("dy", "35")
       .attr("text-anchor", "middle")
       .text(d3.time.format("%Y"));
 
