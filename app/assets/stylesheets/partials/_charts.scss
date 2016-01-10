@@ -17,15 +17,7 @@ $chart-line-color: lighten($dark, 20%);
       stroke-width: .125em;
       shape-rendering: crispEdges;
     }
-  }
 
-  .y-axis {
-    .domain {
-      display: none;
-    }
-  }
-
-  .x-axis {
     .domain {
       display: none;
     }
