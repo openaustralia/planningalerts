@@ -72,6 +72,16 @@ function barGraph(selector, url, metric) {
       .tickFormat(xAxisDateFormats)
       .tickPadding(8);
 
+    var focusCallout = d3.select(selector)
+          .append("div")
+          .style("width", calloutWidth + "px")
+          .attr("class", "chart-callout")
+          .append("h5"),
+        focusCalloutValue = focusCallout.append("span")
+          .attr("class", "chart-callout-heading"),
+        focusCalloutDate = focusCallout.append("span")
+          .attr("class", "chart-callout-subheading");
+
     // add the canvas to the DOM
     var chart = d3.select(selector)
       .append("svg:svg")
@@ -137,16 +147,6 @@ function barGraph(selector, url, metric) {
 
     var focus = chart.append("g")
       .attr("class", "focus");
-
-    var focusCallout = d3.select(selector)
-          .append("div")
-          .style("width", calloutWidth + "px")
-          .attr("class", "chart-callout")
-          .append("h5"),
-        focusCalloutValue = focusCallout.append("span")
-          .attr("class", "chart-callout-heading"),
-        focusCalloutDate = focusCallout.append("span")
-          .attr("class", "chart-callout-subheading");
 
     focus.append("circle")
       .attr("r", 5);

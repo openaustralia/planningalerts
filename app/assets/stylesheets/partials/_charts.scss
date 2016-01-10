@@ -1,6 +1,8 @@
 $chart-fill-color: lighten($dark, 65%);
 $chart-line-color: lighten($dark, 20%);
 .chart {
+  @include clearfix();
+
   text {
     fill: $font-color;
     font-size: .875em;
@@ -52,8 +54,9 @@ $chart-line-color: lighten($dark, 20%);
 }
 
 .chart-callout {
-  display: block;
-  float: right;
+  @include at-breakpoint(40em) {
+    float: right;
+  }
 }
 
 .chart-callout-heading {
