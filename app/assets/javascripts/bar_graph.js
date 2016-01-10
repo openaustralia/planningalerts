@@ -101,6 +101,13 @@ function barGraph(selector, url, metric) {
       .attr("transform", "translate(-8, 0)")
       .call(yAxis);
 
+    chart.append("line")
+      .attr("class", "x-axis-baseline")
+      .attr("x1", 0)
+      .attr("y1", height)
+      .attr("x2", width)
+      .attr("y2", height);
+
     chart.append("svg:path")
       .attr("d", areaValues(data))
       .attr("class", "chart-area");

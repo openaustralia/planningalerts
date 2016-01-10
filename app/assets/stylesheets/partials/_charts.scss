@@ -24,6 +24,12 @@ $chart-line-color: lighten($dark, 20%);
   }
 }
 
+.x-axis-baseline {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
+}
+
 .chart-line {
   fill: none;
   stroke: $chart-line-color;
