@@ -66,7 +66,7 @@ function stackedAreaTimeseries(selector, url, title) {
       .append("g")
       .attr("transform", "translate(" + margin + "," + margin + ")");
 
-    d3.json(url, function(data, error) {
+    d3.json(url, function(error, data) {
       if (error) return console.warn(error);
 
       data.forEach(function(d) {
