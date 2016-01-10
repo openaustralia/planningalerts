@@ -79,7 +79,7 @@ function barGraph(selector, url, metric) {
       .attr("x2", x)
       .attr("y2", height + 10)
       .attr("stroke", "#888")
-      .attr("stroke-width", "2px");
+      .attr("stroke-width", "1px");
 
     chart.selectAll("text.xAxisMonth")
       .data(x.ticks(d3.time.months.utc, 3))
