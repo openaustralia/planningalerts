@@ -38,6 +38,20 @@ $chart-line-color: lighten($dark, 20%);
   }
 }
 
+.chart-callout {
+  display: block;
+  float: right;
+}
+
+.chart-callout-heading {
+  display: block;
+}
+
+.chart-callout-subheading {
+  display: block;
+  font-weight: normal;
+}
+
 .chart-overlay {
   fill: none;
   pointer-events: all;

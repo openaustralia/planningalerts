@@ -15,10 +15,11 @@ function barGraph(selector, url, metric) {
       return {key: new Date(d[0]), values: d[1]};
     });
 
-    var width = 800;
+    var width = 600;
     var barWidth = 5;
     var height = 200;
     var margin = { top: 20, right: 50, bottom: 20, left: 50 };
+    var calloutWidth = 200;
 
     var maxYValue = d3.max(data, function(datum) { return datum.values; });
 
@@ -135,6 +136,16 @@ function barGraph(selector, url, metric) {
     var focus = chart.append("g")
       .attr("class", "focus");
 
+    var focusCallout = d3.select(selector)
+          .append("div")
+          .style("width", calloutWidth + "px")
+          .attr("class", "chart-callout")
+          .append("h5"),
+        focusCalloutValue = focusCallout.append("span")
+          .attr("class", "chart-callout-heading"),
+        focusCalloutDate = focusCallout.append("span")
+          .attr("class", "chart-callout-subheading");
+
     focus.append("circle")
       .attr("r", 5);
 
@@ -160,6 +171,18 @@ function barGraph(selector, url, metric) {
 
       focus.attr("transform", "translate(" + focusDefaultPosition.x + "," + focusDefaultPosition.y + ")");
       focus.select("text").text(finalPoint.values);
+
+      setCalloutText(finalPoint);
+    }
+
+    function setCalloutText(point) {
+      var weekEnd = d3.time.week.offset(point.key, 1),
+          weekStartFormat = d3.time.format("%d %b"),
+          weekEndFormat = d3.time.format("%d %b %Y"),
+          dateSpan = weekStartFormat(point.key) + " – " + weekEndFormat(weekEnd);
+
+      focusCalloutValue.text(point.values + " " + metric);
+      focusCalloutDate.text(dateSpan);
     }
 
     function mousemove() {
@@ -171,6 +194,8 @@ function barGraph(selector, url, metric) {
       yValue = height - y(d.values);
       focus.attr("transform", "translate(" + x(d.key) + "," + y(d.values) + ")");
       focus.select("text").text(d.values);
+
+      setCalloutText(d);
     }
   });
 
