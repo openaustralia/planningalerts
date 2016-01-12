@@ -20,8 +20,7 @@ $chart-line-color: lighten($dark, 20%);
   .x-axis {
     line {
       stroke: #888;
-      stroke-width: .125em;
-      shape-rendering: crispEdges;
+      stroke-width: 1px;
     }
 
     .domain {
