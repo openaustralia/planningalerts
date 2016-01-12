@@ -29,19 +29,19 @@
     #applications-chart.chart
     #comments-chart.chart
 
-    = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/d3/2.10.0/d3.v2.min.js"
+    = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.12/d3.min.js"
     = javascript_include_tag "bar_graph"
     :javascript
       barGraph(
         "#applications-chart",
         "#{per_week_authority_applications_url(@authority.short_name_encoded, :format => 'js')}",
-        "Number of applications scraped each week"
+        "applications scraped"
       );
 
       barGraph(
         "#comments-chart",
         "#{per_week_authority_comments_url(@authority.short_name_encoded, format: :json)}",
-        "Number of comments posted each week"
+        "comments posted"
       );
 
   = render "under_the_hood"
