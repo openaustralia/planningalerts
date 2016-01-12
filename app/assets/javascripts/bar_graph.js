@@ -41,10 +41,8 @@ function barGraph(selector, url, metric) {
     var yTickCount;
     if (maxYValue < 2) {
       yTickCount = 1;
-    } else if (maxYValue < 5) {
-      yTickCount = 2;
     } else  {
-      yTickCount = 5;
+      yTickCount = 3;
     }
 
     var yAxis = d3.svg.axis()
