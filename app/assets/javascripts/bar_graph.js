@@ -18,7 +18,7 @@ function barGraph(selector, url, metric) {
 
     var width = 600;
     var barWidth = 5;
-    var height = 200;
+    var height = 100;
     var margin = { top: 20, right: 50, bottom: 100, left: 60 };
     var viewPortWidth = margin.left + width + margin.right;
     var viewPortHeight = margin.top + height + margin.bottom;
