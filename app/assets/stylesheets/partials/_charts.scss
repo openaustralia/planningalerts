@@ -3,6 +3,10 @@ $chart-line-color: lighten($dark, 20%);
 .chart {
   @include clearfix();
 
+  svg {
+    overflow: visible;
+  }
+
   text {
     fill: $font-color;
     font-size: .875em;
@@ -24,6 +28,12 @@ $chart-line-color: lighten($dark, 20%);
       display: none;
     }
   }
+}
+
+.chart-title {
+  width: 100%;
+  float: none;
+  clear: both;
 }
 
 .x-axis-baseline {
@@ -53,9 +63,31 @@ $chart-line-color: lighten($dark, 20%);
   }
 }
 
-.chart-callout {
-  @include at-breakpoint(40em) {
-    float: right;
+.chart-with-callout {
+  svg {
+    width: 100%;
+    height: auto;
+
+    @include at-breakpoint(40em) {
+      float: left;
+      clear: left;
+      width: 80%;
+    }
+  }
+
+  .chart-callout {
+    @include at-breakpoint(40em) {
+      float: right;
+      width: 20%;
+    }
+  }
+
+  text {
+    font-size: 1em;
+
+    @include at-breakpoint(40em) {
+      font-size: .875em;
+    }
   }
 }
 

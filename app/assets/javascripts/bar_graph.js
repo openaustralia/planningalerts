@@ -4,6 +4,7 @@ function barGraph(selector, url, metric) {
   var wrapper_element = document.querySelectorAll(selector)[0];
 
   var title_element = document.createElement('h4');
+  title_element.classList.add("chart-title");
   title_element.textContent = "Number of " + metric + " over time";
 
   wrapper_element.insertBefore(title_element, wrapper_element.firstChild);
@@ -19,7 +20,8 @@ function barGraph(selector, url, metric) {
     var barWidth = 5;
     var height = 200;
     var margin = { top: 20, right: 50, bottom: 100, left: 60 };
-    var calloutWidth = 200;
+    var viewPortWidth = margin.left + width + margin.right;
+    var viewPortHeight = margin.top + height + margin.bottom;
 
     var maxYValue = d3.max(data, function(datum) { return datum.values; });
 
@@ -74,7 +76,6 @@ function barGraph(selector, url, metric) {
 
     var focusCallout = d3.select(selector)
           .append("div")
-          .style("width", calloutWidth + "px")
           .attr("class", "chart-callout")
           .append("h5"),
         focusCalloutValue = focusCallout.append("span")
@@ -84,9 +85,11 @@ function barGraph(selector, url, metric) {
 
     // add the canvas to the DOM
     var chart = d3.select(selector)
+      .attr("class", "chart chart-with-callout")
       .append("svg:svg")
-      .attr("width", margin.left + width + margin.right)
-      .attr("height", margin.top + height + margin.bottom)
+      .attr("width", "100%")
+      .attr("height", "100%")
+      .attr("viewBox", "0 0 " + viewPortWidth + " " + viewPortHeight )
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
