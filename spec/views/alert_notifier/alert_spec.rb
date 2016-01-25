@@ -86,7 +86,13 @@ describe "alert_notifier/alert.html.haml" do
       comment = VCR.use_cassette('planningalerts') do
         create(:comment_to_councillor, name: "Matthew Landauer")
       end
-      reply = create(:reply, comment: comment, councillor: comment.councillor)
+      multi_line_reply_text = "Thanks for your comment\n\nBest wishes,\nLouise"
+      reply = create(
+        :reply,
+        text: multi_line_reply_text,
+        comment: comment,
+        councillor: comment.councillor
+      )
       assign(:replies, [reply])
       assign(:alert, create(:alert))
 
@@ -94,6 +100,16 @@ describe "alert_notifier/alert.html.haml" do
     end
 
     it { expect(rendered).to have_content "Local councillor Louise Councillor replied to Matthew Landauer"}
+
+    it "formats paragraphs as expected" do
+
+      expect(rendered).to include(
+"<p>Thanks for your comment</p>
+
+<p>Best wishes,
+<br>Louise</p>"
+      )
+    end
   end
 
   context "when the recipient is not a subscriber" do
