@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "replies/_reply" do
-  it "formats line breaks into paragraphs" do
+  it "renders linebreak formatting into html" do
     reply = VCR.use_cassette('planningalerts') do
       create(
         :reply,

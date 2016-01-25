@@ -101,7 +101,7 @@ describe "alert_notifier/alert.html.haml" do
 
     it { expect(rendered).to have_content "Local councillor Louise Councillor replied to Matthew Landauer"}
 
-    it "formats paragraphs as expected" do
+    it "renders linebreak formatting into html" do
 
       expect(rendered).to include(
 "<p>Thanks for your comment</p>
