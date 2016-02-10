@@ -41,6 +41,10 @@
       text-align: left !important;
     }
   }
+
+  [aria-hidden="true"] {
+    display: none;
+  }
 }
 
 #comment-base-inputgroup {
