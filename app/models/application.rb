@@ -126,7 +126,7 @@ class Application < ActiveRecord::Base
 
     if address
       address.split(' ').map do |word|
-        if word != word.upcase || exceptions.include?(word) || word =~ /\d/
+        if word != word.upcase || exceptions.any? { |exception| word =~ /^\W*#{exception}\W*$/ } || word =~ /\d/
           word
         else
           word.capitalize
