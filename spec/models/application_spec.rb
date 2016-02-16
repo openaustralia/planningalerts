@@ -133,6 +133,10 @@ describe Application do
       build(:application, address: "QLD VIC NSW SA ACT TAS WA NT").address.should == "QLD VIC NSW SA ACT TAS WA NT"
     end
 
+    it "should not affect the state names with punctuation" do
+      build(:application, address: "QLD. ,VIC ,NSW, !SA /ACT/ TAS: WA, NT;").address.should == "QLD. ,VIC ,NSW, !SA /ACT/ TAS: WA, NT;"
+    end
+
     it "should not affect codes" do
       build(:application, address: "R79813 24X").address.should == "R79813 24X"
     end
