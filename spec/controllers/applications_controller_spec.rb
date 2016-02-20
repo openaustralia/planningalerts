@@ -56,4 +56,21 @@ describe ApplicationsController do
       expect(assigns[:application]).to eq application
     end
   end
+
+  describe "#address" do
+    it "should set the radius to the supplied parameter" do
+      VCR.use_cassette('planningalerts') do
+        get :address, address: "24 Bruce Road Glenbrook", radius: 500
+      end
+      expect(assigns[:radius]).to eq 500.0
+    end
+
+    it "should set the radius to the default when not supplied" do
+      VCR.use_cassette('planningalerts') do
+        get :address, address: "24 Bruce Road Glenbrook"
+      end
+      expect(assigns[:radius]).to eq 2000.0
+    end
+  end
+
 end
