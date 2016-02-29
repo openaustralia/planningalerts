@@ -12,7 +12,7 @@ describe "applications/show" do
     assigns[:comment] = mock_model(Comment, errors: errors, text: nil, name: nil, email: nil)
     Vanity.context = Struct.new(:vanity_identity).new('1')
   end
-  
+
   describe "show" do
     before :each do
       @application.stub(:address).and_return("foo")
@@ -20,15 +20,15 @@ describe "applications/show" do
       @application.stub(:lng).and_return(2.0)
       @application.stub(:location).and_return(Location.new(1.0, 2.0))
     end
-    
+
     it "should display the map" do
       @application.stub(:date_received).and_return(nil)
       @application.stub(:date_scraped).and_return(Time.now)
       assigns[:application] = @application
       render
-      rendered.should have_selector("div#map_div")      
+      rendered.should have_selector("div#map_div")
     end
-    
+
     it "should say nothing about notice period when there is no information" do
       @application.stub(:date_received).and_return(nil)
       @application.stub(:date_scraped).and_return(Time.now)
@@ -39,7 +39,7 @@ describe "applications/show" do
       rendered.should_not have_selector("p.on_notice")
     end
   end
-  
+
   describe "show with application with no location" do
     it "should not display the map" do
       @application.stub(:address).and_return("An address that can't be geocoded")
@@ -49,7 +49,7 @@ describe "applications/show" do
       @application.stub(:date_received).and_return(nil)
       @application.stub(:date_scraped).and_return(Time.now)
       assigns[:application] = @application
-        
+
       render
       rendered.should_not have_selector("div#map_div")
     end
