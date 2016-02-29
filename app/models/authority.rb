@@ -244,6 +244,10 @@ class Authority < ActiveRecord::Base
     email && email != ""
   end
 
+  def write_to_councillors_enabled?
+    ENV["COUNCILLORS_ENABLED"] == "true"
+  end
+
   def latest_application
     # The applications are sorted by default by the date_scraped because of the default scope on the model
     applications.first

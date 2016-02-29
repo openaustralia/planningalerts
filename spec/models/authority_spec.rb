@@ -40,6 +40,34 @@ describe Authority do
     end
   end
 
+  describe "#write_to_councillors_enabled?" do
+    let(:authority) { build_stubbed(:authority) }
+
+    context "when it is globally not enabled" do
+      around do |test|
+        with_modified_env COUNCILLORS_ENABLED: nil do
+          test.run
+        end
+      end
+
+      it { expect(authority.write_to_councillors_enabled?).to eq false }
+    end
+
+    context "when it is globally enabled" do
+      around do |test|
+        with_modified_env COUNCILLORS_ENABLED: "true" do
+          test.run
+        end
+      end
+
+      it { expect(authority.write_to_councillors_enabled?).to eq true }
+    end
+
+    def with_modified_env(options, &block)
+      ClimateControl.modify(options, &block)
+    end
+  end
+
   describe "#comments_per_week" do
     let(:authority) { create(:authority) }
 

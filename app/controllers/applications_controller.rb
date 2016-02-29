@@ -159,6 +159,6 @@ class ApplicationsController < ApplicationController
   private
 
   def writing_to_councillors_enabled?
-    ENV["COUNCILLORS_ENABLED"] == "true" && @theme == "default"
+    @application.authority.write_to_councillors_enabled? && @theme == "default"
   end
 end
