@@ -41,8 +41,6 @@ describe Authority do
   end
 
   describe "#write_to_councillors_enabled?" do
-    let(:authority) { build_stubbed(:authority) }
-
     context "when it is globally not enabled" do
       around do |test|
         with_modified_env COUNCILLORS_ENABLED: nil do
@@ -50,7 +48,17 @@ describe Authority do
         end
       end
 
-      it { expect(authority.write_to_councillors_enabled?).to eq false }
+      context "and it is disabled on the authority" do
+        let(:authority) { build_stubbed(:authority, write_to_councillors_enabled: false) }
+
+        it { expect(authority.write_to_councillors_enabled?).to eq false }
+      end
+
+      context "and it is enabled on the authority" do
+        let(:authority) { build_stubbed(:authority, write_to_councillors_enabled: true) }
+
+        it { expect(authority.write_to_councillors_enabled?).to eq false }
+      end
     end
 
     context "when it is globally enabled" do
@@ -60,7 +68,17 @@ describe Authority do
         end
       end
 
-      it { expect(authority.write_to_councillors_enabled?).to eq true }
+      context "and it is disabled on the authority" do
+        let(:authority) { build_stubbed(:authority, write_to_councillors_enabled: false) }
+
+        it { expect(authority.write_to_councillors_enabled?).to eq false }
+      end
+
+      context "and it is enabled on the authority" do
+        let(:authority) { build_stubbed(:authority, write_to_councillors_enabled: true) }
+
+        it { expect(authority.write_to_councillors_enabled?).to eq true }
+      end
     end
 
     def with_modified_env(options, &block)

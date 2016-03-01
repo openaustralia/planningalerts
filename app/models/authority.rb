@@ -245,7 +245,7 @@ class Authority < ActiveRecord::Base
   end
 
   def write_to_councillors_enabled?
-    ENV["COUNCILLORS_ENABLED"] == "true"
+    ENV["COUNCILLORS_ENABLED"] == "true" ? write_to_councillors_enabled : false
   end
 
   def latest_application

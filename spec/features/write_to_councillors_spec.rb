@@ -6,8 +6,8 @@ feature "Send a message to a councillor" do
   # so that I can get their help or feedback
   # and find out where they stand on this development I care about
 
-  context "when writing to councillors is not globally enabled" do
-    given(:authority) { create(:authority, full_name: "Foo") }
+  context "when writing to councillors is unavailable" do
+    given(:authority) { create(:authority, full_name: "Foo", write_to_councillors_enabled: false) }
 
     background do
       VCR.use_cassette('planningalerts') do
@@ -35,8 +35,8 @@ feature "Send a message to a councillor" do
     end
   end
 
-  context "when writing to councillors is globally enabled" do
-    given(:authority) { create(:contactable_authority, full_name: "Marrickville Council") }
+  context "when writing to councillors is available" do
+    given(:authority) { create(:contactable_authority, full_name: "Marrickville Council", write_to_councillors_enabled: true) }
     given(:application) { VCR.use_cassette('planningalerts') { create(:application, id: "1", authority: authority) } }
 
     around do |test|
