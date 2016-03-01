@@ -3,6 +3,7 @@ ActiveAdmin.register Comment do
   actions :all, except: [:destroy, :new, :create]
 
   scope :visible, default: true
+  scope(:hidden) { |s| s.where(hidden: true) }
   scope :all
 
   index title: "Comments" do
@@ -18,7 +19,6 @@ ActiveAdmin.register Comment do
   filter :text
   filter :email
   filter :name
-  filter :hidden
   filter :application_id
 
   form do |f|
