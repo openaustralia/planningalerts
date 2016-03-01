@@ -8,6 +8,7 @@ ActiveAdmin.register Authority do
     column "Name", :full_name
     column :state
     column :email
+    column :write_to_councillors_enabled
     column(:number_of_applications) { |a| a.applications.count }
     column(:number_of_comments) { |a| a.comments.count }
     actions
@@ -19,6 +20,7 @@ ActiveAdmin.register Authority do
       row :short_name
       row :state
       row :email
+      row :write_to_councillors_enabled
       row :population_2011
       row :morph_name
       row :disabled
@@ -42,6 +44,7 @@ ActiveAdmin.register Authority do
       input :state
       input :email
       input :population_2011
+      input :write_to_councillors_enabled
     end
     inputs "Scraping" do
       input :morph_name, hint: "The name of the scraper at morph.io", placeholder: "planningalerts-scrapers/scraper-blue-mountains"
@@ -64,6 +67,7 @@ ActiveAdmin.register Authority do
     column :full_name
     column :short_name
     column :disabled
+    column :write_to_councillors_enabled
     column :state
     column :email
     column :population_2011
@@ -72,5 +76,5 @@ ActiveAdmin.register Authority do
     column(:number_of_comments) { |a| a.comments.count }
   end
 
-  permit_params :full_name, :short_name, :state, :email, :population_2011, :morph_name, :disabled
+  permit_params :full_name, :short_name, :state, :email, :write_to_councillors_enabled, :population_2011, :morph_name, :disabled
 end
