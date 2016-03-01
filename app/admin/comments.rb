@@ -19,6 +19,7 @@ ActiveAdmin.register Comment do
   filter :email
   filter :name
   filter :hidden
+  filter :application_id
 
   form do |f|
     inputs "Text" do
