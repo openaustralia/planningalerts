@@ -16,10 +16,10 @@ ActiveAdmin.register Comment do
     actions
   end
 
-  filter :text
+  filter :application_id
   filter :email
   filter :name
-  filter :application_id
+  filter :text
 
   form do |f|
     inputs "Text" do
