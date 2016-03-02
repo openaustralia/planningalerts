@@ -80,7 +80,7 @@ feature "Give feedback to Council" do
       end
 
       background do
-        application.authority.update(write_to_councillors_enabled: true)
+        application.authority.update!(write_to_councillors_enabled: true)
 
         create(:councillor, authority: application.authority)
       end
