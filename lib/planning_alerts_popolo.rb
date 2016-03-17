@@ -11,7 +11,7 @@ end
 
 class PlanningAlertsPopolo < EveryPolitician::Popolo::JSON
   def persons_for_organization_name(name)
-    organization_id = organizations.find { |o| o.name == name }.id
+    organization_id = find_organization_by_name(name).id
     organization_memberships = memberships.find_all { |m| m.role == "councillor" && m.organization_id == organization_id }
 
     organization_memberships.collect do |m|
@@ -21,6 +21,10 @@ class PlanningAlertsPopolo < EveryPolitician::Popolo::JSON
 
       EveryPolitician::Popolo::Person.new(person.document.merge(party: party_name))
     end
+  end
+
+  def find_organization_by_name(name)
+    organizations.find { |o| o.name == name }
   end
 end
 

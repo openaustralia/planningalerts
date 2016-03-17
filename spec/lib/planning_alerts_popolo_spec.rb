@@ -25,4 +25,13 @@ describe PlanningAlertsPopolo do
       expect(popolo.persons_for_organization_name("Albury City Council")).to eql expected_persons_array
     end
   end
+
+  describe "#find_organization_by_name" do
+    it "finds an organization by name" do
+      expected_organization = EveryPolitician::Popolo::Organization.new(id: "foo_bar", name: "Foo Bar")
+      popolo = PlanningAlertsPopolo.new(organizations: [{id: "foo_bar", name: "Foo Bar"}])
+
+      expect(popolo.find_organization_by_name("Foo Bar")).to eql expected_organization
+    end
+  end
 end
