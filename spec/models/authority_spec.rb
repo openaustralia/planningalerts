@@ -87,20 +87,20 @@ describe Authority do
   end
 
   describe "#load_councillors" do
-    subject { create(:authority, full_name: "Albury City Council") }
+    subject(:authority) { create(:authority, full_name: "Albury City Council") }
     let(:popolo) do
       popolo_file = Rails.root.join("spec", "fixtures", "local_councillor_popolo.json")
       EveryPolitician::Popolo::read(popolo_file)
     end
 
     it "should load 2 councillors" do
-      subject.load_councillors(popolo)
+      authority.load_councillors(popolo)
 
-      expect(subject.councillors.count).to eql 2
+      expect(authority.councillors.count).to eql 2
     end
 
     context "loading a councillor and their attributes" do
-      before { subject.load_councillors(popolo) }
+      before { authority.load_councillors(popolo) }
 
       it { expect(Councillor.find_by(name: "Kevin Mack").present?).to be_true }
       it { expect(Councillor.find_by(name: "Kevin Mack").email).to eql "kevin@albury.nsw.gov.au" }
