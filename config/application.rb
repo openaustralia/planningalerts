@@ -8,6 +8,9 @@ require File.dirname(__FILE__) + "/../lib/api_throttler"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# TODO: Can we just autoload everything in lib after the Gems are loaded?
+require File.dirname(__FILE__) + "/../lib/planning_alerts_popolo"
+
 module PlanningalertsApp
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
