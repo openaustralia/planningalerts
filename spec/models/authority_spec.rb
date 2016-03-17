@@ -99,14 +99,15 @@ describe Authority do
       expect(authority.councillors.count).to eql 2
     end
 
-    context "loading a councillor and their attributes" do
-      before { authority.load_councillors(popolo) }
+    it "loads councillors and their attributes" do
+      authority.load_councillors(popolo)
 
-      it { expect(Councillor.find_by(name: "Kevin Mack").present?).to be_true }
-      it { expect(Councillor.find_by(name: "Kevin Mack").email).to eql "kevin@albury.nsw.gov.au" }
-      it { expect(Councillor.find_by(name: "Kevin Mack").party).to be_nil }
-      it { expect(Councillor.find_by(name: "Ross Jackson").party).to eql "Liberal" }
-      it { expect(Councillor.find_by(name: "Kevin Mack").image_url).to eql "https://example.com/kevin.jpg" }
+      kevin = Councillor.find_by(name: "Kevin Mack")
+      expect(kevin.present?).to be_true
+      expect(kevin.email).to eql "kevin@albury.nsw.gov.au"
+      expect(kevin.image_url).to eql "https://example.com/kevin.jpg"
+      expect(kevin.party).to be_nil
+      expect(Councillor.find_by(name: "Ross Jackson").party).to eql "Liberal"
     end
 
     it "updates an existing councillor" do
