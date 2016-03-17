@@ -253,6 +253,7 @@ class Authority < ActiveRecord::Base
 
     persons.each do |person|
       c = councillors.find_or_create_by(name: person.name)
+      # FIXME: Email is madatory, what if the Popolo person has no email?
       c.update!(email: person.email, image_url: person.image, party: person.party)
     end
   end
