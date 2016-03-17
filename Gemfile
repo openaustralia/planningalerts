@@ -56,6 +56,7 @@ gem 'honeybadger'
 gem 'stripe'
 gem 'dotenv-rails'
 gem 'climate_control'
+gem 'everypolitician-popolo'
 
 group :test do
   gem 'capybara'

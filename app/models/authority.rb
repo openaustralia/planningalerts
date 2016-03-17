@@ -248,6 +248,25 @@ class Authority < ActiveRecord::Base
     ENV["COUNCILLORS_ENABLED"] == "true" ? write_to_councillors_enabled : false
   end
 
+  def load_councillors(popolo)
+    organization_id = popolo.organizations.find { |o| o.name == full_name }.id
+    memberships = popolo.memberships.find_all { |m| m.role == "councillor" && m.organization_id == organization_id }
+    persons_and_parties = memberships.collect do |m|
+      party = popolo.organizations.find { |o| o.classification == "party" && o.id == m.on_behalf_of_id }
+      person = popolo.persons.find { |p| p.id == m.person_id }
+      {person: person, party: party}
+    end
+
+    persons_and_parties.each do |pp|
+      person = pp[:person]
+      party = pp[:party]
+      party_name = party.name unless party.name == "unknown"
+
+      c = councillors.find_or_create_by(name: person.name)
+      c.update!(email: person.email, image_url: person.image, party: party_name)
+    end
+  end
+
   def latest_application
     # The applications are sorted by default by the date_scraped because of the default scope on the model
     applications.first

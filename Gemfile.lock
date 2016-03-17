@@ -147,6 +147,7 @@ GEM
       mail (~> 2.2)
     erubis (2.7.0)
     eventmachine (1.0.7)
+    everypolitician-popolo (0.2.0)
     execjs (2.5.2)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -463,6 +464,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   email_spec
+  everypolitician-popolo
   factory_girl
   factory_girl_rails
   foreigner

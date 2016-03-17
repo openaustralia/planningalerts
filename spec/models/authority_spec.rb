@@ -86,6 +86,30 @@ describe Authority do
     end
   end
 
+  describe "#load_councillors" do
+    subject { create(:authority, full_name: "Albury City Council") }
+    let(:popolo) do
+      popolo_file = Rails.root.join("spec", "fixtures", "local_councillor_popolo.json")
+      EveryPolitician::Popolo::read(popolo_file)
+    end
+
+    it "should load 2 councillors" do
+      subject.load_councillors(popolo)
+
+      expect(subject.councillors.count).to eql 2
+    end
+
+    context "loading a councillor and their attributes" do
+      before { subject.load_councillors(popolo) }
+
+      it { expect(Councillor.find_by(name: "Kevin Mack").present?).to be_true }
+      it { expect(Councillor.find_by(name: "Kevin Mack").email).to eql "kevin@albury.nsw.gov.au" }
+      it { expect(Councillor.find_by(name: "Kevin Mack").party).to be_nil }
+      it { expect(Councillor.find_by(name: "Ross Jackson").party).to eql "Liberal" }
+      it { expect(Councillor.find_by(name: "Kevin Mack").image_url).to eql "https://example.com/kevin.jpg" }
+    end
+  end
+
   describe "#comments_per_week" do
     let(:authority) { create(:authority) }
 
