@@ -12,7 +12,7 @@ end
 class PlanningAlertsPopolo < EveryPolitician::Popolo::JSON
   def persons_for_organization_name(name)
     organization_id = find_organization_by_name(name).id
-    organization_memberships = memberships.find_all { |m| m.role == "councillor" && m.organization_id == organization_id }
+    organization_memberships = councillor_memberships_for_organization_id(organization_id)
 
     organization_memberships.collect do |m|
       person = persons.find { |p| p.id == m.person_id }
@@ -25,6 +25,12 @@ class PlanningAlertsPopolo < EveryPolitician::Popolo::JSON
 
   def find_organization_by_name(name)
     organizations.find { |o| o.name == name }
+  end
+
+  def councillor_memberships_for_organization_id(id)
+    memberships.find_all do |m|
+      m.role == "councillor" && m.organization_id == id
+    end
   end
 end
 

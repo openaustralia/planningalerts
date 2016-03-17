@@ -34,4 +34,37 @@ describe PlanningAlertsPopolo do
       expect(popolo.find_organization_by_name("Foo Bar")).to eql expected_organization
     end
   end
+
+  describe "#councillor_memberships_for_organization_id" do
+    it "returns all memberships with role “councillor” for an organisation" do
+      popolo = PlanningAlertsPopolo.new(
+        memberships: [
+          {
+            person_id: "kevin_mack",
+            organization_id: "foo_bar",
+            role: "councillor"
+          },
+          {
+            person_id: "ross_jackson",
+            organization_id: "foo_bar",
+            role: "councillor"
+          },
+          {
+            person_id: "ross_jackson",
+            organization_id: "foo_bar",
+            role: "mayor"
+          },
+          {
+            person_id: "ming_zhang",
+            organization_id: "other_council",
+            role: "councillor"
+          }
+        ]
+      )
+
+      expect(popolo.councillor_memberships_for_organization_id("foo_bar")
+        .map { |membership| membership.person_id }
+      ).to eq ["kevin_mack", "ross_jackson"]
+    end
+  end
 end
