@@ -108,6 +108,20 @@ describe Authority do
       it { expect(Councillor.find_by(name: "Ross Jackson").party).to eql "Liberal" }
       it { expect(Councillor.find_by(name: "Kevin Mack").image_url).to eql "https://example.com/kevin.jpg" }
     end
+
+    it "updates an existing councillor" do
+      councillor = create(:councillor, authority: authority,
+                          name: "Kevin Mack",
+                          email: "old_address@example.com",
+                          party: "The Old Parties")
+
+      authority.load_councillors(popolo)
+
+      councillor.reload
+      expect(councillor.email).to eql "kevin@albury.nsw.gov.au"
+      expect(councillor.image_url).to eql "https://example.com/kevin.jpg"
+      expect(councillor.party).to be_nil
+    end
   end
 
   describe "#comments_per_week" do
