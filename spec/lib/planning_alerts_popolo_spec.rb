@@ -68,4 +68,15 @@ describe PlanningAlertsPopolo do
       expect(memberships[1].person_id).to eq "ross_jackson"
     end
   end
+
+  describe "#find_person_by_id" do
+    it "finds a person by their id" do
+      popolo = PlanningAlertsPopolo.new(
+        persons: [{name: "Kevin Mack", id: "kevin_mack"},
+                  {name: "Steve Buscemi", id: "steve_buscemi"}]
+      )
+
+      expect(popolo.find_person_by_id("kevin_mack").name).to eq "Kevin Mack"
+    end
+  end
 end
