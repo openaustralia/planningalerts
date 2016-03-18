@@ -56,6 +56,8 @@ feature "Commenter is notified of the councillors reply" do
                                 id: 8,
                                 address: "24 Bruce Road Glenbrook",
                                 description: "A lovely house") }
+  # TODO: Extract this to a method where user actually leaves comment
+  #       and confirms it.
   given (:comment) do
     VCR.use_cassette('planningalerts') do
       create(:comment,
@@ -74,7 +76,7 @@ feature "Commenter is notified of the councillors reply" do
   end
 
   scenario "commenter gets an email with the councillor’s reply" do
-    open_last_email_for("matthew@openaustralia.org")
+    open_email_for("matthew@openaustralia.org", with_subject: "Local Councillor Louise Councillor replied to your message")
     expect(current_email).to have_subject "Local Councillor Louise Councillor replied to your message"
     expect(current_email).to have_body_text email_intro_text
     expect(current_email).to have_body_text reply_text
