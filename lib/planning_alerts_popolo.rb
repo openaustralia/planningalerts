@@ -11,9 +11,7 @@ end
 
 class PlanningAlertsPopolo < EveryPolitician::Popolo::JSON
   def councillors_for_authority(name)
-    organization_memberships = councillor_memberships_for_organization(name)
-
-    organization_memberships.map do |membership|
+    councillor_memberships_for_organization(name).map do |membership|
       person_with_party_for_membership(membership)
     end
   end
