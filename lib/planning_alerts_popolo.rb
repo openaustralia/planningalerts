@@ -29,10 +29,9 @@ class PlanningAlertsPopolo < EveryPolitician::Popolo::JSON
   end
 
   def councillor_memberships_for_organization(name)
-    id = find_organization_by_name(name).id
-
     memberships.find_all do |m|
-      m.role == "councillor" && m.organization_id == id
+      m.role == "councillor" &&
+      m.organization_id == find_organization_by_name(name).id
     end
   end
 
