@@ -62,9 +62,10 @@ describe PlanningAlertsPopolo do
         ]
       )
 
-      expect(popolo.councillor_memberships_for_organization_id("foo_bar")
-        .map { |membership| membership.person_id }
-      ).to eq ["kevin_mack", "ross_jackson"]
+      memberships = popolo.councillor_memberships_for_organization_id("foo_bar")
+
+      expect(memberships[0].person_id).to eq "kevin_mack"
+      expect(memberships[1].person_id).to eq "ross_jackson"
     end
   end
 end
