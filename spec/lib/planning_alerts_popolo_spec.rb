@@ -35,6 +35,30 @@ describe PlanningAlertsPopolo do
     end
   end
 
+  describe "#find_party_organization_by_id" do
+    it "successfully finds a party" do
+      popolo = PlanningAlertsPopolo.new(
+        organizations: [{id: "mcgillicuddy_party",
+                        name: "McGillicuddy Serious Party",
+                        classification: "party"}]
+      )
+
+      expect(popolo.find_party_organization_by_id("mcgillicuddy_party").name)
+        .to eq "McGillicuddy Serious Party"
+    end
+
+    it "doesn’t return non party organization" do
+      popolo = PlanningAlertsPopolo.new(
+        organizations: [{id: "mcgillicuddy_party",
+                        name: "McGillicuddy Serious Party",
+                        classification: "tomato"}]
+      )
+
+      expect(popolo.find_party_organization_by_id("mcgillicuddy_party"))
+        .to eq nil
+    end
+  end
+
   describe "#councillor_memberships_for_organization_id" do
     it "returns all memberships with role “councillor” for an organisation" do
       popolo = PlanningAlertsPopolo.new(
