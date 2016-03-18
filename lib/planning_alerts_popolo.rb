@@ -10,7 +10,7 @@ module Everypolitician
 end
 
 class PlanningAlertsPopolo < EveryPolitician::Popolo::JSON
-  def persons_for_organization_name(name)
+  def councillors_for_authority(name)
     organization_id = find_organization_by_name(name).id
     organization_memberships = councillor_memberships_for_organization_id(organization_id)
 

@@ -249,7 +249,7 @@ class Authority < ActiveRecord::Base
   end
 
   def load_councillors(popolo)
-    persons = popolo.persons_for_organization_name(full_name)
+    persons = popolo.councillors_for_authority(full_name)
 
     persons.each do |person|
       c = councillors.find_or_create_by(name: person.name)

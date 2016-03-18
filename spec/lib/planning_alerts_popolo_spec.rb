@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe PlanningAlertsPopolo do
-  describe "#persons_for_organization_name" do
+  describe "#councillors_for_authority" do
     it "finds councillors for a named authority" do
       # TODO: Refactor this so it doesn't use a fixture
       popolo_file = Rails.root.join("spec", "fixtures", "local_councillor_popolo.json")
@@ -22,7 +22,7 @@ describe PlanningAlertsPopolo do
           party: "Liberal"
         )
       ]
-      expect(popolo.persons_for_organization_name("Albury City Council")).to eql expected_persons_array
+      expect(popolo.councillors_for_authority("Albury City Council")).to eql expected_persons_array
     end
   end
 
