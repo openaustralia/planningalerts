@@ -14,12 +14,8 @@ class PlanningAlertsPopolo < EveryPolitician::Popolo::JSON
     organization_id = find_organization_by_name(name).id
     organization_memberships = councillor_memberships_for_organization_id(organization_id)
 
-    organization_memberships.collect do |m|
-      person = find_person_by_id(m.person_id)
-      party = find_party_organization_by_id(m.on_behalf_of_id)
-      party_name = party.name unless party.name == "unknown"
-
-      EveryPolitician::Popolo::Person.new(person.document.merge(party: party_name))
+    organization_memberships.map do |membership|
+      person_with_party_for_membership(membership)
     end
   end
 
@@ -41,6 +37,16 @@ class PlanningAlertsPopolo < EveryPolitician::Popolo::JSON
 
   def find_person_by_id(id)
     persons.find { |p| p.id == id }
+  end
+
+  def person_with_party_for_membership(membership)
+    person = find_person_by_id(membership.person_id)
+    party = find_party_organization_by_id(membership.on_behalf_of_id)
+    party_name = party.name unless party.name == "unknown"
+
+    EveryPolitician::Popolo::Person.new(
+      person.document.merge(party: party_name)
+    )
   end
 end
 
