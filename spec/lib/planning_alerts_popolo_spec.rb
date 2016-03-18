@@ -59,9 +59,10 @@ describe PlanningAlertsPopolo do
     end
   end
 
-  describe "#councillor_memberships_for_organization_id" do
+  describe "#councillor_memberships_for_organization" do
     it "returns all memberships with role “councillor” for an organisation" do
       popolo = PlanningAlertsPopolo.new(
+        organizations: [{ name: "Foo Bar Council", id: "foo_bar" }],
         memberships: [
           {
             person_id: "kevin_mack",
@@ -86,7 +87,7 @@ describe PlanningAlertsPopolo do
         ]
       )
 
-      memberships = popolo.councillor_memberships_for_organization_id("foo_bar")
+      memberships = popolo.councillor_memberships_for_organization("Foo Bar Council")
 
       expect(memberships[0].person_id).to eq "kevin_mack"
       expect(memberships[1].person_id).to eq "ross_jackson"
