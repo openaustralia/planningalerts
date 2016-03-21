@@ -17,24 +17,22 @@ class PlanningAlertsPopolo < EveryPolitician::Popolo::JSON
   end
 
   def find_organization_by_name(name)
-    organizations.find { |o| o.name == name }
+    organizations.find_by(name: name)
   end
 
   def find_party_organization_by_id(id)
-    organizations.find do |o|
-      o.classification == "party" && o.id == id
-    end
+    organizations.find_by(id: id, classification: "party")
   end
 
   def councillor_memberships_for_organization(name)
-    memberships.find_all do |m|
-      m.role == "councillor" &&
-      m.organization_id == find_organization_by_name(name).id
-    end
+    memberships.where(
+      organization_id: find_organization_by_name(name).id,
+      role: "councillor"
+    )
   end
 
   def find_person_by_id(id)
-    persons.find { |p| p.id == id }
+    persons.find_by(id: id)
   end
 
   def person_with_party_for_membership(membership)

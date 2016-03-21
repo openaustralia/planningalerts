@@ -56,7 +56,8 @@ gem 'honeybadger'
 gem 'stripe'
 gem 'dotenv-rails'
 gem 'climate_control'
-gem 'everypolitician-popolo'
+# Use our fork with finders until this is merged https://github.com/everypolitician/everypolitician-popolo/pull/21
+gem 'everypolitician-popolo', github: 'openaustralia/everypolitician-popolo', ref: '7ffa4fb'
 
 group :test do
   gem 'capybara'
