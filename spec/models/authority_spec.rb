@@ -207,5 +207,6 @@ describe Authority do
     it { expect(build_stubbed(:authority, state: "WA").popolo_url).to eq nil }
     it { expect(build_stubbed(:authority, state: "TAS").popolo_url).to eq nil }
     it { expect(build_stubbed(:authority, state: "NT").popolo_url).to eq nil }
+    it { expect(build_stubbed(:authority, state: "Foo").popolo_url).to eq nil }
   end
 end
