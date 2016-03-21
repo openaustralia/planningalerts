@@ -249,35 +249,14 @@ class Authority < ActiveRecord::Base
   end
 
   def load_councillors(popolo)
-    persons = popolo_councillors_for_authority(popolo, full_name)
+    popolo_councillors = PopoloCouncillors.new(popolo)
+    persons = popolo_councillors.for_authority(full_name)
 
     persons.each do |person|
       c = councillors.find_or_create_by(name: person.name)
       # FIXME: Email is madatory, what if the Popolo person has no email?
       c.update!(email: person.email, image_url: person.image, party: person.party)
     end
-  end
-
-  def popolo_councillors_for_authority(popolo, name)
-    authority = popolo.organizations.find_by(name: name)
-    councillor_memberships = popolo.memberships.where(
-      organization_id: authority.id,
-      role: "councillor"
-    )
-
-    councillor_memberships.map do |membership|
-      popolo_person_with_party_for_membership(popolo, membership)
-    end
-  end
-
-  def popolo_person_with_party_for_membership(popolo, membership)
-    person = popolo.persons.find_by(id: membership.person_id)
-    party = popolo.organizations.find_by(id: membership.on_behalf_of_id, classification: "party")
-    party_name = party.name unless party.name == "unknown"
-
-    EveryPolitician::Popolo::Person.new(
-      person.document.merge(party: party_name)
-    )
   end
 
   def latest_application
