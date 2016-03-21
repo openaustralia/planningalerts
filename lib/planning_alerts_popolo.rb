@@ -11,33 +11,20 @@ end
 
 class PlanningAlertsPopolo < EveryPolitician::Popolo::JSON
   def councillors_for_authority(name)
-    councillor_memberships_for_organization(name).map do |membership|
+    authority = organizations.find_by(name: name)
+    councillor_memberships = memberships.where(
+      organization_id: authority.id,
+      role: "councillor"
+    )
+
+    councillor_memberships.map do |membership|
       person_with_party_for_membership(membership)
     end
   end
 
-  def find_organization_by_name(name)
-    organizations.find_by(name: name)
-  end
-
-  def find_party_organization_by_id(id)
-    organizations.find_by(id: id, classification: "party")
-  end
-
-  def councillor_memberships_for_organization(name)
-    memberships.where(
-      organization_id: find_organization_by_name(name).id,
-      role: "councillor"
-    )
-  end
-
-  def find_person_by_id(id)
-    persons.find_by(id: id)
-  end
-
   def person_with_party_for_membership(membership)
-    person = find_person_by_id(membership.person_id)
-    party = find_party_organization_by_id(membership.on_behalf_of_id)
+    person = persons.find_by(id: membership.person_id)
+    party = organizations.find_by(id: membership.on_behalf_of_id, classification: "party")
     party_name = party.name unless party.name == "unknown"
 
     EveryPolitician::Popolo::Person.new(
