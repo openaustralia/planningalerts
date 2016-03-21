@@ -1,7 +1,9 @@
 require "spec_helper"
 
 feature "Admin loads councillors for an authority" do
-  given(:authority) { create(:authority, full_name: "Marrickville Council") }
+  given(:authority) { create(:authority,
+                             full_name: "Marrickville Council",
+                             state: "NSW") }
 
   scenario "successfully" do
     # TODO: This is basically copied from "Admin hides comment" - DRY me up

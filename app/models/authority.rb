@@ -261,7 +261,13 @@ class Authority < ActiveRecord::Base
 
   def popolo_url
     # TODO: Return correct URL for the Authority's state
-    "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/nsw_local_councillor_popolo.json"
+    case state
+    when "NSW" then "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/nsw_local_councillor_popolo.json"
+    when "VIC" then "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/vic_local_councillor_popolo.json"
+    when "SA" then "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/sa_local_councillor_popolo.json"
+    when "QLD" then "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/qld_local_councillor_popolo.json"
+    else nil
+    end
   end
 
   def latest_application
