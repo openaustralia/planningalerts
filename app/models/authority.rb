@@ -254,9 +254,14 @@ class Authority < ActiveRecord::Base
 
     persons.each do |person|
       c = councillors.find_or_create_by(name: person.name)
-      # FIXME: Email is madatory, what if the Popolo person has no email?
-      c.update!(email: person.email, image_url: person.image, party: person.party)
+      # TODO: Return a list of successful and failed creations instead of silently dropping those with errors
+      c.update(email: person.email, image_url: person.image, party: person.party)
     end
+  end
+
+  def popolo_url
+    # TODO: Return correct URL for the Authority's state
+    "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/nsw_local_councillor_popolo.json"
   end
 
   def latest_application

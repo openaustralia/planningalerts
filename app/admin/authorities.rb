@@ -1,3 +1,5 @@
+require "open-uri"
+
 ActiveAdmin.register Authority do
   actions :all, except: [:destroy]
 
@@ -24,6 +26,14 @@ ActiveAdmin.register Authority do
       row :population_2011
       row :morph_name
       row :disabled
+    end
+
+    table_for resource.councillors, class: "index_table" do
+      column :name
+      column :email
+      column :party
+      column :image_url
+      column { |c| link_to "View", admin_councillor_path(c) }
     end
 
     h3 "Last scraper run log"
@@ -61,6 +71,16 @@ ActiveAdmin.register Authority do
     authority = Authority.find(params[:id])
     authority.delay.collect_applications
     redirect_to({action: :show}, notice: "Queued for scraping!")
+  end
+
+  action_item :load_councillors, only: :show do
+    button_to('Load Councillors', load_councillors_admin_authority_path)
+  end
+
+  member_action :load_councillors, method: :post do
+    popolo = EveryPolitician::Popolo.parse(open(resource.popolo_url).read)
+    resource.load_councillors(popolo)
+    redirect_to({action: :show}, notice: "Successfully loaded councillors")
   end
 
   csv do
