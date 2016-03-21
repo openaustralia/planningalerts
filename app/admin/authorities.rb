@@ -33,7 +33,7 @@ ActiveAdmin.register Authority do
       column :email
       column :party
       column :image_url
-      column { |c| link_to "View", admin_councillor_path(c) }
+      column { |c| "#{link_to "View", admin_councillor_path(c)} #{link_to "Edit", edit_admin_councillor_path(c)}".html_safe }
     end
 
     h3 "Last scraper run log"
