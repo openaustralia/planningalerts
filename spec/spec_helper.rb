@@ -71,4 +71,5 @@ RSpec.configure do |config|
   config.include EmailSpec::Matchers
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :view
+  config.include SessionHelpers, type: :feature
 end
