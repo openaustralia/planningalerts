@@ -13,6 +13,7 @@ ActiveAdmin.register Authority do
     column :write_to_councillors_enabled
     column(:number_of_applications) { |a| a.applications.count }
     column(:number_of_comments) { |a| a.comments.count }
+    column(:number_of_councillors) { |a| a.councillors.count }
     actions
   end
 
