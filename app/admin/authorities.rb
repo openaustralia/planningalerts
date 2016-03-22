@@ -35,8 +35,7 @@ ActiveAdmin.register Authority do
         column :name
         column :email
         column :party
-        # TODO: Just show the image
-        column(:image_url) { |c| link_to c.image_url, c.image_url }
+        column(:image) { |c| link_to image_tag(c.image_url), c.image_url }
         column { |c| "#{link_to "View", admin_councillor_path(c)} #{link_to "Edit", edit_admin_councillor_path(c)}".html_safe }
       end
     else
