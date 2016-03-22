@@ -6,15 +6,9 @@ feature "Admin loads councillors for an authority" do
                              state: "NSW") }
 
   scenario "successfully" do
-    # TODO: This is basically copied from "Admin hides comment" - DRY me up
-    admin = create(:admin)
+    sign_in_as_admin
+
     visit admin_authority_path(authority)
-    within("#new_user") do
-      fill_in "Email", with: admin.email
-      fill_in "Password", with: admin.password
-    end
-    click_button "Sign in"
-    expect(page).to have_content "Signed in successfully"
 
     VCR.use_cassette("australian_local_councillors_popolo") do
       click_button "Load Councillors"
@@ -31,15 +25,9 @@ feature "Admin loads councillors for an authority" do
                                    state: "QLD") }
 
     scenario "successfully" do
-      # TODO: This is basically copied from "Admin hides comment" - DRY me up
-      admin = create(:admin)
+      sign_in_as_admin
+
       visit admin_authority_path(qld_authority)
-      within("#new_user") do
-        fill_in "Email", with: admin.email
-        fill_in "Password", with: admin.password
-      end
-      click_button "Sign in"
-      expect(page).to have_content "Signed in successfully"
 
       VCR.use_cassette("australian_local_councillors_popolo") do
         click_button "Load Councillors"
@@ -49,5 +37,17 @@ feature "Admin loads councillors for an authority" do
       expect(page).to have_content "Sue Englart"
       expect(page).to have_content "John Gouldson"
     end
+  end
+
+  def sign_in_as_admin
+    # TODO: This is basically copied from "Admin hides comment" - DRY me up
+    admin = create(:admin)
+    visit admin_root_path
+    within("#new_user") do
+      fill_in "Email", with: admin.email
+      fill_in "Password", with: admin.password
+    end
+    click_button "Sign in"
+    expect(page).to have_content "Signed in successfully"
   end
 end
