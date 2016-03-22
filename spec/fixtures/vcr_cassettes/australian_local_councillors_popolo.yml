@@ -29,19 +29,19 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000
       Etag:
-      - '"11559eeeaed6d01dfe60d738275698cb8b24b546"'
+      - '"5addcb34a7407a6bc990a0ad258793678ab08877"'
       Content-Type:
       - text/plain; charset=utf-8
       Cache-Control:
       - max-age=300
       X-Github-Request-Id:
-      - 17EB2919:5F98:6AF8541:56EF9548
+      - 17EB291A:3F8B:9D7FCFE:56F0D956
       Content-Length:
-      - '50989'
+      - '51023'
       Accept-Ranges:
       - bytes
       Date:
-      - Mon, 21 Mar 2016 06:35:49 GMT
+      - Tue, 22 Mar 2016 05:34:16 GMT
       Via:
       - 1.1 varnish
       Connection:
@@ -49,19 +49,19 @@ http_interactions:
       X-Served-By:
       - cache-syd1625-SYD
       X-Cache:
-      - HIT
+      - MISS
       X-Cache-Hits:
-      - '1'
+      - '0'
       Vary:
       - Authorization,Accept-Encoding
       Access-Control-Allow-Origin:
       - '*'
       X-Fastly-Request-Id:
-      - 6fde40beab66b622a69c9577b2decd53b64585e3
+      - 8027c6d0a10a8162a2691dd8eb72f3b31badbf14
       Expires:
-      - Mon, 21 Mar 2016 06:40:49 GMT
+      - Tue, 22 Mar 2016 05:39:16 GMT
       Source-Age:
-      - '252'
+      - '1'
     body:
       encoding: UTF-8
       string: |
@@ -1108,39 +1108,39 @@ http_interactions:
               "name": "Robert Thompson"
             },
             {
-              "id": "city_of_canada_bay_council/angelo_tsirekas",
+              "id": "city_of_canada_bay/angelo_tsirekas",
               "name": "Angelo Tsirekas"
             },
             {
-              "id": "city_of_canada_bay_council/pauline_tyrrell",
+              "id": "city_of_canada_bay/pauline_tyrrell",
               "name": "Pauline Tyrrell"
             },
             {
-              "id": "city_of_canada_bay_council/tanveer_ahmed",
+              "id": "city_of_canada_bay/tanveer_ahmed",
               "name": "Tanveer Ahmed"
             },
             {
-              "id": "city_of_canada_bay_council/mirjana_cestar",
+              "id": "city_of_canada_bay/mirjana_cestar",
               "name": "Mirjana Cestar"
             },
             {
-              "id": "city_of_canada_bay_council/tony_fasanella",
+              "id": "city_of_canada_bay/tony_fasanella",
               "name": "Tony Fasanella"
             },
             {
-              "id": "city_of_canada_bay_council/neil_kenzler",
+              "id": "city_of_canada_bay/neil_kenzler",
               "name": "Neil Kenzler"
             },
             {
-              "id": "city_of_canada_bay_council/helen_mccaffrey",
+              "id": "city_of_canada_bay/helen_mccaffrey",
               "name": "Helen McCaffrey"
             },
             {
-              "id": "city_of_canada_bay_council/michael_j_megna",
+              "id": "city_of_canada_bay/michael_j_megna",
               "name": "Michael J Megna"
             },
             {
-              "id": "city_of_canada_bay_council/marian_o'connell",
+              "id": "city_of_canada_bay/marian_o'connell",
               "name": "Marian O'Connell"
             },
             {
@@ -3340,39 +3340,39 @@ http_interactions:
               "name": "Isaac Smith"
             },
             {
-              "id": "city_of_lithgow_council/maree_statham",
+              "id": "lithgow_city_council/maree_statham",
               "name": "Maree Statham"
             },
             {
-              "id": "city_of_lithgow_council/ray_thompson",
+              "id": "lithgow_city_council/ray_thompson",
               "name": "Ray Thompson"
             },
             {
-              "id": "city_of_lithgow_council/ross_higlett",
+              "id": "lithgow_city_council/ross_higlett",
               "name": "Ross Higlett"
             },
             {
-              "id": "city_of_lithgow_council/col_hunter",
+              "id": "lithgow_city_council/col_hunter",
               "name": "Col Hunter"
             },
             {
-              "id": "city_of_lithgow_council/frank_inzitari",
+              "id": "lithgow_city_council/frank_inzitari",
               "name": "Frank Inzitari"
             },
             {
-              "id": "city_of_lithgow_council/wayne_mcandrew",
+              "id": "lithgow_city_council/wayne_mcandrew",
               "name": "Wayne McAndrew"
             },
             {
-              "id": "city_of_lithgow_council/joe_mcginnes",
+              "id": "lithgow_city_council/joe_mcginnes",
               "name": "Joe McGinnes"
             },
             {
-              "id": "city_of_lithgow_council/peter_pilbeam",
+              "id": "lithgow_city_council/peter_pilbeam",
               "name": "Peter Pilbeam"
             },
             {
-              "id": "city_of_lithgow_council/martin_ticehurst",
+              "id": "lithgow_city_council/martin_ticehurst",
               "name": "Martin Ticehurst"
             },
             {
@@ -3594,8 +3594,20 @@ http_interactions:
               ]
             },
             {
+              "email": "dbarbar@marrickville.nsw.gov.au",
               "id": "marrickville_council/daniel_barbar",
-              "name": "Daniel Barbar"
+              "image": "http://www.marrickville.nsw.gov.au/Global/Council/Elected%20Council/clrbarbar1.jpg",
+              "name": "Daniel Barbar",
+              "images": [
+                {
+                  "url": "http://www.marrickville.nsw.gov.au/Global/Council/Elected%20Council/clrbarbar1.jpg"
+                }
+              ],
+              "sources": [
+                {
+                  "url": "http://www.marrickville.nsw.gov.au/en/council/elected-council/councillors/clr-d-barbar/"
+                }
+              ]
             },
             {
               "email": "mbrooks@marrickville.nsw.gov.au",
@@ -4729,47 +4741,47 @@ http_interactions:
               "name": "Andrew Tsounis"
             },
             {
-              "id": "council_of_the_city_of__ryde/bill_pickering",
+              "id": "city_of_ryde/bill_pickering",
               "name": "Bill Pickering"
             },
             {
-              "id": "council_of_the_city_of__ryde/roy_maggio",
+              "id": "city_of_ryde/roy_maggio",
               "name": "Roy Maggio"
             },
             {
-              "id": "council_of_the_city_of__ryde/craig_chung",
+              "id": "city_of_ryde/craig_chung",
               "name": "Craig Chung"
             },
             {
-              "id": "council_of_the_city_of__ryde/artin_etmekdjian",
+              "id": "city_of_ryde/artin_etmekdjian",
               "name": "Artin Etmekdjian"
             },
             {
-              "id": "council_of_the_city_of__ryde/jerome_laxale",
+              "id": "city_of_ryde/jerome_laxale",
               "name": "Jerome Laxale"
             },
             {
-              "id": "council_of_the_city_of__ryde/justin_li",
+              "id": "city_of_ryde/justin_li",
               "name": "Justin Li"
             },
             {
-              "id": "council_of_the_city_of__ryde/denise_pendleton",
+              "id": "city_of_ryde/denise_pendleton",
               "name": "Denise Pendleton"
             },
             {
-              "id": "council_of_the_city_of__ryde/terry_perram",
+              "id": "city_of_ryde/terry_perram",
               "name": "Terry Perram"
             },
             {
-              "id": "council_of_the_city_of__ryde/jeff_salvestro-martin",
+              "id": "city_of_ryde/jeff_salvestro-martin",
               "name": "Jeff Salvestro-Martin"
             },
             {
-              "id": "council_of_the_city_of__ryde/george_simon",
+              "id": "city_of_ryde/george_simon",
               "name": "George Simon"
             },
             {
-              "id": "council_of_the_city_of__ryde/sarkis_yedelian",
+              "id": "city_of_ryde/sarkis_yedelian",
               "name": "Sarkis Yedelian"
             },
             {
@@ -5009,43 +5021,43 @@ http_interactions:
               "name": "Cl Scott A Williams"
             },
             {
-              "id": "council_of_the_city_of_sydney/clover_moore",
+              "id": "city_of_sydney/clover_moore",
               "name": "Clover Moore"
             },
             {
-              "id": "council_of_the_city_of_sydney/robyn_kemmis",
+              "id": "city_of_sydney/robyn_kemmis",
               "name": "Robyn Kemmis"
             },
             {
-              "id": "council_of_the_city_of_sydney/irene_doutney",
+              "id": "city_of_sydney/irene_doutney",
               "name": "Irene Doutney"
             },
             {
-              "id": "council_of_the_city_of_sydney/christine_forster",
+              "id": "city_of_sydney/christine_forster",
               "name": "Christine Forster"
             },
             {
-              "id": "council_of_the_city_of_sydney/jenny_green",
+              "id": "city_of_sydney/jenny_green",
               "name": "Jenny Green"
             },
             {
-              "id": "council_of_the_city_of_sydney/robert_kok",
+              "id": "city_of_sydney/robert_kok",
               "name": "Robert Kok"
             },
             {
-              "id": "council_of_the_city_of_sydney/edward_mandla",
+              "id": "city_of_sydney/edward_mandla",
               "name": "Edward Mandla"
             },
             {
-              "id": "council_of_the_city_of_sydney/john_mant",
+              "id": "city_of_sydney/john_mant",
               "name": "John Mant"
             },
             {
-              "id": "council_of_the_city_of_sydney/linda_scott",
+              "id": "city_of_sydney/linda_scott",
               "name": "Linda Scott"
             },
             {
-              "id": "council_of_the_city_of_sydney/angela_vithoulkas",
+              "id": "city_of_sydney/angela_vithoulkas",
               "name": "Angela Vithoulkas"
             },
             {
@@ -6249,8 +6261,8 @@ http_interactions:
               "classification": "legislature"
             },
             {
-              "id": "legislature/the_council_of_the_city_of_botany_bay",
-              "name": "The Council of the City of Botany Bay",
+              "id": "legislature/city_of_botany_bay",
+              "name": "City of Botany Bay",
               "classification": "legislature"
             },
             {
@@ -6294,8 +6306,8 @@ http_interactions:
               "classification": "legislature"
             },
             {
-              "id": "legislature/city_of_canada_bay_council",
-              "name": "City of Canada Bay Council",
+              "id": "legislature/city_of_canada_bay",
+              "name": "City of Canada Bay",
               "classification": "legislature"
             },
             {
@@ -6574,8 +6586,8 @@ http_interactions:
               "classification": "legislature"
             },
             {
-              "id": "legislature/city_of_lithgow_council",
-              "name": "City of Lithgow Council",
+              "id": "legislature/lithgow_city_council",
+              "name": "Lithgow City Council",
               "classification": "legislature"
             },
             {
@@ -6734,8 +6746,8 @@ http_interactions:
               "classification": "legislature"
             },
             {
-              "id": "legislature/council_of_the_city_of_ryde",
-              "name": "Council of the City of  Ryde",
+              "id": "legislature/city_of_ryde",
+              "name": "City of Ryde",
               "classification": "legislature"
             },
             {
@@ -6769,8 +6781,8 @@ http_interactions:
               "classification": "legislature"
             },
             {
-              "id": "legislature/council_of_the_city_of_sydney",
-              "name": "Council of the City of Sydney",
+              "id": "legislature/city_of_sydney",
+              "name": "City of Sydney",
               "classification": "legislature"
             },
             {
@@ -6954,13 +6966,13 @@ http_interactions:
               "classification": "party"
             },
             {
-              "id": "party/the_greens",
-              "name": "The Greens",
+              "id": "party/labor",
+              "name": "Labor",
               "classification": "party"
             },
             {
-              "id": "party/labor",
-              "name": "Labor",
+              "id": "party/the_greens",
+              "name": "The Greens",
               "classification": "party"
             }
           ],
@@ -7999,43 +8011,43 @@ http_interactions:
             },
             {
               "person_id": "the_council_of_the_city_of_botany_bay/ben_keneally",
-              "organization_id": "legislature/the_council_of_the_city_of_botany_bay",
+              "organization_id": "legislature/city_of_botany_bay",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
               "person_id": "the_council_of_the_city_of_botany_bay/george_glinatsis",
-              "organization_id": "legislature/the_council_of_the_city_of_botany_bay",
+              "organization_id": "legislature/city_of_botany_bay",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
               "person_id": "the_council_of_the_city_of_botany_bay/mark_castle",
-              "organization_id": "legislature/the_council_of_the_city_of_botany_bay",
+              "organization_id": "legislature/city_of_botany_bay",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
               "person_id": "the_council_of_the_city_of_botany_bay/christina_curry",
-              "organization_id": "legislature/the_council_of_the_city_of_botany_bay",
+              "organization_id": "legislature/city_of_botany_bay",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
               "person_id": "the_council_of_the_city_of_botany_bay/stan_kondilios",
-              "organization_id": "legislature/the_council_of_the_city_of_botany_bay",
+              "organization_id": "legislature/city_of_botany_bay",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
               "person_id": "the_council_of_the_city_of_botany_bay/greg_mitchell",
-              "organization_id": "legislature/the_council_of_the_city_of_botany_bay",
+              "organization_id": "legislature/city_of_botany_bay",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
               "person_id": "the_council_of_the_city_of_botany_bay/brian_troy",
-              "organization_id": "legislature/the_council_of_the_city_of_botany_bay",
+              "organization_id": "legislature/city_of_botany_bay",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
@@ -8526,56 +8538,56 @@ http_interactions:
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_canada_bay_council/angelo_tsirekas",
-              "organization_id": "legislature/city_of_canada_bay_council",
+              "person_id": "city_of_canada_bay/angelo_tsirekas",
+              "organization_id": "legislature/city_of_canada_bay",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_canada_bay_council/pauline_tyrrell",
-              "organization_id": "legislature/city_of_canada_bay_council",
+              "person_id": "city_of_canada_bay/pauline_tyrrell",
+              "organization_id": "legislature/city_of_canada_bay",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_canada_bay_council/tanveer_ahmed",
-              "organization_id": "legislature/city_of_canada_bay_council",
+              "person_id": "city_of_canada_bay/tanveer_ahmed",
+              "organization_id": "legislature/city_of_canada_bay",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_canada_bay_council/mirjana_cestar",
-              "organization_id": "legislature/city_of_canada_bay_council",
+              "person_id": "city_of_canada_bay/mirjana_cestar",
+              "organization_id": "legislature/city_of_canada_bay",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_canada_bay_council/tony_fasanella",
-              "organization_id": "legislature/city_of_canada_bay_council",
+              "person_id": "city_of_canada_bay/tony_fasanella",
+              "organization_id": "legislature/city_of_canada_bay",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_canada_bay_council/neil_kenzler",
-              "organization_id": "legislature/city_of_canada_bay_council",
+              "person_id": "city_of_canada_bay/neil_kenzler",
+              "organization_id": "legislature/city_of_canada_bay",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_canada_bay_council/helen_mccaffrey",
-              "organization_id": "legislature/city_of_canada_bay_council",
+              "person_id": "city_of_canada_bay/helen_mccaffrey",
+              "organization_id": "legislature/city_of_canada_bay",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_canada_bay_council/michael_j_megna",
-              "organization_id": "legislature/city_of_canada_bay_council",
+              "person_id": "city_of_canada_bay/michael_j_megna",
+              "organization_id": "legislature/city_of_canada_bay",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_canada_bay_council/marian_o'connell",
-              "organization_id": "legislature/city_of_canada_bay_council",
+              "person_id": "city_of_canada_bay/marian_o'connell",
+              "organization_id": "legislature/city_of_canada_bay",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
@@ -11676,56 +11688,56 @@ http_interactions:
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_lithgow_council/maree_statham",
-              "organization_id": "legislature/city_of_lithgow_council",
+              "person_id": "lithgow_city_council/maree_statham",
+              "organization_id": "legislature/lithgow_city_council",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_lithgow_council/ray_thompson",
-              "organization_id": "legislature/city_of_lithgow_council",
+              "person_id": "lithgow_city_council/ray_thompson",
+              "organization_id": "legislature/lithgow_city_council",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_lithgow_council/ross_higlett",
-              "organization_id": "legislature/city_of_lithgow_council",
+              "person_id": "lithgow_city_council/ross_higlett",
+              "organization_id": "legislature/lithgow_city_council",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_lithgow_council/col_hunter",
-              "organization_id": "legislature/city_of_lithgow_council",
+              "person_id": "lithgow_city_council/col_hunter",
+              "organization_id": "legislature/lithgow_city_council",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_lithgow_council/frank_inzitari",
-              "organization_id": "legislature/city_of_lithgow_council",
+              "person_id": "lithgow_city_council/frank_inzitari",
+              "organization_id": "legislature/lithgow_city_council",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_lithgow_council/wayne_mcandrew",
-              "organization_id": "legislature/city_of_lithgow_council",
+              "person_id": "lithgow_city_council/wayne_mcandrew",
+              "organization_id": "legislature/lithgow_city_council",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_lithgow_council/joe_mcginnes",
-              "organization_id": "legislature/city_of_lithgow_council",
+              "person_id": "lithgow_city_council/joe_mcginnes",
+              "organization_id": "legislature/lithgow_city_council",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_lithgow_council/peter_pilbeam",
-              "organization_id": "legislature/city_of_lithgow_council",
+              "person_id": "lithgow_city_council/peter_pilbeam",
+              "organization_id": "legislature/lithgow_city_council",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "city_of_lithgow_council/martin_ticehurst",
-              "organization_id": "legislature/city_of_lithgow_council",
+              "person_id": "lithgow_city_council/martin_ticehurst",
+              "organization_id": "legislature/lithgow_city_council",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
@@ -12039,7 +12051,8 @@ http_interactions:
               "person_id": "marrickville_council/daniel_barbar",
               "organization_id": "legislature/marrickville_council",
               "role": "councillor",
-              "on_behalf_of_id": "party/unknown"
+              "on_behalf_of_id": "party/labor",
+              "start_date": "2014-11-15"
             },
             {
               "person_id": "marrickville_council/melissa_brooks",
@@ -13644,68 +13657,68 @@ http_interactions:
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of__ryde/bill_pickering",
-              "organization_id": "legislature/council_of_the_city_of_ryde",
+              "person_id": "city_of_ryde/bill_pickering",
+              "organization_id": "legislature/city_of_ryde",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of__ryde/roy_maggio",
-              "organization_id": "legislature/council_of_the_city_of_ryde",
+              "person_id": "city_of_ryde/roy_maggio",
+              "organization_id": "legislature/city_of_ryde",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of__ryde/craig_chung",
-              "organization_id": "legislature/council_of_the_city_of_ryde",
+              "person_id": "city_of_ryde/craig_chung",
+              "organization_id": "legislature/city_of_ryde",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of__ryde/artin_etmekdjian",
-              "organization_id": "legislature/council_of_the_city_of_ryde",
+              "person_id": "city_of_ryde/artin_etmekdjian",
+              "organization_id": "legislature/city_of_ryde",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of__ryde/jerome_laxale",
-              "organization_id": "legislature/council_of_the_city_of_ryde",
+              "person_id": "city_of_ryde/jerome_laxale",
+              "organization_id": "legislature/city_of_ryde",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of__ryde/justin_li",
-              "organization_id": "legislature/council_of_the_city_of_ryde",
+              "person_id": "city_of_ryde/justin_li",
+              "organization_id": "legislature/city_of_ryde",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of__ryde/denise_pendleton",
-              "organization_id": "legislature/council_of_the_city_of_ryde",
+              "person_id": "city_of_ryde/denise_pendleton",
+              "organization_id": "legislature/city_of_ryde",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of__ryde/terry_perram",
-              "organization_id": "legislature/council_of_the_city_of_ryde",
+              "person_id": "city_of_ryde/terry_perram",
+              "organization_id": "legislature/city_of_ryde",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of__ryde/jeff_salvestro-martin",
-              "organization_id": "legislature/council_of_the_city_of_ryde",
+              "person_id": "city_of_ryde/jeff_salvestro-martin",
+              "organization_id": "legislature/city_of_ryde",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of__ryde/george_simon",
-              "organization_id": "legislature/council_of_the_city_of_ryde",
+              "person_id": "city_of_ryde/george_simon",
+              "organization_id": "legislature/city_of_ryde",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of__ryde/sarkis_yedelian",
-              "organization_id": "legislature/council_of_the_city_of_ryde",
+              "person_id": "city_of_ryde/sarkis_yedelian",
+              "organization_id": "legislature/city_of_ryde",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
@@ -14064,62 +14077,62 @@ http_interactions:
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of_sydney/clover_moore",
-              "organization_id": "legislature/council_of_the_city_of_sydney",
+              "person_id": "city_of_sydney/clover_moore",
+              "organization_id": "legislature/city_of_sydney",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of_sydney/robyn_kemmis",
-              "organization_id": "legislature/council_of_the_city_of_sydney",
+              "person_id": "city_of_sydney/robyn_kemmis",
+              "organization_id": "legislature/city_of_sydney",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of_sydney/irene_doutney",
-              "organization_id": "legislature/council_of_the_city_of_sydney",
+              "person_id": "city_of_sydney/irene_doutney",
+              "organization_id": "legislature/city_of_sydney",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of_sydney/christine_forster",
-              "organization_id": "legislature/council_of_the_city_of_sydney",
+              "person_id": "city_of_sydney/christine_forster",
+              "organization_id": "legislature/city_of_sydney",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of_sydney/jenny_green",
-              "organization_id": "legislature/council_of_the_city_of_sydney",
+              "person_id": "city_of_sydney/jenny_green",
+              "organization_id": "legislature/city_of_sydney",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of_sydney/robert_kok",
-              "organization_id": "legislature/council_of_the_city_of_sydney",
+              "person_id": "city_of_sydney/robert_kok",
+              "organization_id": "legislature/city_of_sydney",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of_sydney/edward_mandla",
-              "organization_id": "legislature/council_of_the_city_of_sydney",
+              "person_id": "city_of_sydney/edward_mandla",
+              "organization_id": "legislature/city_of_sydney",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of_sydney/john_mant",
-              "organization_id": "legislature/council_of_the_city_of_sydney",
+              "person_id": "city_of_sydney/john_mant",
+              "organization_id": "legislature/city_of_sydney",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of_sydney/linda_scott",
-              "organization_id": "legislature/council_of_the_city_of_sydney",
+              "person_id": "city_of_sydney/linda_scott",
+              "organization_id": "legislature/city_of_sydney",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
             {
-              "person_id": "council_of_the_city_of_sydney/angela_vithoulkas",
-              "organization_id": "legislature/council_of_the_city_of_sydney",
+              "person_id": "city_of_sydney/angela_vithoulkas",
+              "organization_id": "legislature/city_of_sydney",
               "role": "councillor",
               "on_behalf_of_id": "party/unknown"
             },
@@ -15962,12 +15975,12 @@ http_interactions:
             },
             {
               "person_id": "the_council_of_the_city_of_botany_bay/ben_keneally",
-              "organization_id": "legislature/the_council_of_the_city_of_botany_bay",
+              "organization_id": "legislature/city_of_botany_bay",
               "role": "Mayor"
             },
             {
               "person_id": "the_council_of_the_city_of_botany_bay/george_glinatsis",
-              "organization_id": "legislature/the_council_of_the_city_of_botany_bay",
+              "organization_id": "legislature/city_of_botany_bay",
               "role": "deputy mayor"
             },
             {
@@ -16051,13 +16064,13 @@ http_interactions:
               "role": "deputy mayor"
             },
             {
-              "person_id": "city_of_canada_bay_council/angelo_tsirekas",
-              "organization_id": "legislature/city_of_canada_bay_council",
+              "person_id": "city_of_canada_bay/angelo_tsirekas",
+              "organization_id": "legislature/city_of_canada_bay",
               "role": "Mayor"
             },
             {
-              "person_id": "city_of_canada_bay_council/pauline_tyrrell",
-              "organization_id": "legislature/city_of_canada_bay_council",
+              "person_id": "city_of_canada_bay/pauline_tyrrell",
+              "organization_id": "legislature/city_of_canada_bay",
               "role": "deputy mayor"
             },
             {
@@ -16606,13 +16619,13 @@ http_interactions:
               "role": "deputy mayor"
             },
             {
-              "person_id": "city_of_lithgow_council/maree_statham",
-              "organization_id": "legislature/city_of_lithgow_council",
+              "person_id": "lithgow_city_council/maree_statham",
+              "organization_id": "legislature/lithgow_city_council",
               "role": "Mayor"
             },
             {
-              "person_id": "city_of_lithgow_council/ray_thompson",
-              "organization_id": "legislature/city_of_lithgow_council",
+              "person_id": "lithgow_city_council/ray_thompson",
+              "organization_id": "legislature/lithgow_city_council",
               "role": "deputy mayor"
             },
             {
@@ -16926,13 +16939,13 @@ http_interactions:
               "role": "deputy mayor"
             },
             {
-              "person_id": "council_of_the_city_of__ryde/bill_pickering",
-              "organization_id": "legislature/council_of_the_city_of_ryde",
+              "person_id": "city_of_ryde/bill_pickering",
+              "organization_id": "legislature/city_of_ryde",
               "role": "Mayor"
             },
             {
-              "person_id": "council_of_the_city_of__ryde/roy_maggio",
-              "organization_id": "legislature/council_of_the_city_of_ryde",
+              "person_id": "city_of_ryde/roy_maggio",
+              "organization_id": "legislature/city_of_ryde",
               "role": "deputy mayor"
             },
             {
@@ -16996,13 +17009,13 @@ http_interactions:
               "role": "deputy mayor"
             },
             {
-              "person_id": "council_of_the_city_of_sydney/clover_moore",
-              "organization_id": "legislature/council_of_the_city_of_sydney",
+              "person_id": "city_of_sydney/clover_moore",
+              "organization_id": "legislature/city_of_sydney",
               "role": "Lord Mayor"
             },
             {
-              "person_id": "council_of_the_city_of_sydney/robyn_kemmis",
-              "organization_id": "legislature/council_of_the_city_of_sydney",
+              "person_id": "city_of_sydney/robyn_kemmis",
+              "organization_id": "legislature/city_of_sydney",
               "role": "deputy mayor"
             },
             {
@@ -17311,7 +17324,7 @@ http_interactions:
           }
         }
     http_version: 
-  recorded_at: Mon, 21 Mar 2016 06:35:47 GMT
+  recorded_at: Tue, 22 Mar 2016 05:34:16 GMT
 - request:
     method: get
     uri: https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/qld_local_councillor_popolo.json
@@ -17347,19 +17360,19 @@ http_interactions:
       Cache-Control:
       - max-age=300
       X-Github-Request-Id:
-      - 17EB2919:5F9B:CBFF374:56F08CF5
+      - 17EB291A:5F9E:B47ABE7:56F0D9E3
       Content-Length:
       - '20326'
       Accept-Ranges:
       - bytes
       Date:
-      - Tue, 22 Mar 2016 00:08:25 GMT
+      - Tue, 22 Mar 2016 05:36:36 GMT
       Via:
       - 1.1 varnish
       Connection:
       - keep-alive
       X-Served-By:
-      - cache-syd1626-SYD
+      - cache-syd1625-SYD
       X-Cache:
       - MISS
       X-Cache-Hits:
@@ -17369,11 +17382,11 @@ http_interactions:
       Access-Control-Allow-Origin:
       - '*'
       X-Fastly-Request-Id:
-      - dd0f7e20dcf97ed40bf8dd8fdea34f2a263f143c
+      - 527d1dbd026b94c6c0899b4aebe5fa07f06613f4
       Expires:
-      - Tue, 22 Mar 2016 00:13:25 GMT
+      - Tue, 22 Mar 2016 05:41:36 GMT
       Source-Age:
-      - '0'
+      - '1'
     body:
       encoding: UTF-8
       string: |
@@ -24015,5 +24028,5 @@ http_interactions:
           }
         }
     http_version: 
-  recorded_at: Tue, 22 Mar 2016 00:08:25 GMT
+  recorded_at: Tue, 22 Mar 2016 05:36:37 GMT
 recorded_with: VCR 2.5.0
