@@ -265,12 +265,7 @@ class Authority < ActiveRecord::Base
   end
 
   def popolo_url
-    if ["NSW", "VIC", "SA", "QLD"].any? { |s| s === state }
-      repo = "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/"
-      repo << "#{state.downcase}_local_councillor_popolo.json"
-    else
-      nil
-    end
+    "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/#{state.downcase}_local_councillor_popolo.json"
   end
 
   def latest_application

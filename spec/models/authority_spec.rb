@@ -200,13 +200,13 @@ describe Authority do
   end
 
   describe "#popolo_url" do
-    it { expect(build_stubbed(:authority, state: "NSW").popolo_url).to eq "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/nsw_local_councillor_popolo.json" }
-    it { expect(build_stubbed(:authority, state: "VIC").popolo_url).to eq "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/vic_local_councillor_popolo.json" }
-    it { expect(build_stubbed(:authority, state: "SA").popolo_url).to eq "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/sa_local_councillor_popolo.json" }
-    it { expect(build_stubbed(:authority, state: "QLD").popolo_url).to eq "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/qld_local_councillor_popolo.json" }
-    it { expect(build_stubbed(:authority, state: "WA").popolo_url).to eq nil }
-    it { expect(build_stubbed(:authority, state: "TAS").popolo_url).to eq nil }
-    it { expect(build_stubbed(:authority, state: "NT").popolo_url).to eq nil }
-    it { expect(build_stubbed(:authority, state: "Foo").popolo_url).to eq nil }
+    it { expect(build(:authority, state: "NSW").popolo_url).to eq "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/nsw_local_councillor_popolo.json" }
+    it { expect(build(:authority, state: "VIC").popolo_url).to eq "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/vic_local_councillor_popolo.json" }
+    it { expect(build(:authority, state: "SA").popolo_url).to eq "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/sa_local_councillor_popolo.json" }
+    it { expect(build(:authority, state: "QLD").popolo_url).to eq "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/qld_local_councillor_popolo.json" }
+    it { expect(build(:authority, state: "WA").popolo_url).to eq "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/wa_local_councillor_popolo.json" }
+    it { expect(build(:authority, state: "TAS").popolo_url).to eq "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/tas_local_councillor_popolo.json" }
+    it { expect(build(:authority, state: "NT").popolo_url).to eq "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/nt_local_councillor_popolo.json" }
+    it { expect(build(:authority, state: "ACT").popolo_url).to eq "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/act_local_councillor_popolo.json" }
   end
 end
