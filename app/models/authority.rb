@@ -22,6 +22,11 @@ class Authority < ActiveRecord::Base
   has_many :councillors
   has_many :comments, through: :applications
 
+  validates :state, inclusion: {
+    in: %w(NSW VIC QLD SA WA TAS NT ACT),
+    message: "%{value} is not a state in Australia"
+  }
+
   scope :enabled, -> { where('disabled = 0 or disabled is null') }
   scope :active, -> { where('(disabled = 0 or disabled is null) AND morph_name != "" AND morph_name IS NOT NULL') }
 
