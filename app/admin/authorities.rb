@@ -29,13 +29,17 @@ ActiveAdmin.register Authority do
     end
 
     h3 "Councillors"
-    table_for resource.councillors, class: "index_table" do
-      column :name
-      column :email
-      column :party
-      # TODO: Just show the image
-      column(:image_url) { |c| link_to c.image_url, c.image_url }
-      column { |c| "#{link_to "View", admin_councillor_path(c)} #{link_to "Edit", edit_admin_councillor_path(c)}".html_safe }
+    if a.councillors.present?
+      table_for resource.councillors, class: "index_table" do
+        column :name
+        column :email
+        column :party
+        # TODO: Just show the image
+        column(:image_url) { |c| link_to c.image_url, c.image_url }
+        column { |c| "#{link_to "View", admin_councillor_path(c)} #{link_to "Edit", edit_admin_councillor_path(c)}".html_safe }
+      end
+    else
+      para "None loaded for this authority."
     end
 
     h3 "Last scraper run log"
