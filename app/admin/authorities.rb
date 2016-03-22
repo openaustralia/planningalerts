@@ -28,6 +28,7 @@ ActiveAdmin.register Authority do
       row :disabled
     end
 
+    h3 "Councillors"
     table_for resource.councillors, class: "index_table" do
       column :name
       column :email
