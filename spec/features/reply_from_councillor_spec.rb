@@ -12,7 +12,6 @@ feature "Councillor replies to a message sent to them" do
                        text: "I think this is a really good idea")
     end
   end
-  given (:admin) { create(:admin) }
 
   background { comment.confirm! }
 
@@ -24,11 +23,7 @@ feature "Councillor replies to a message sent to them" do
     # An admin checks this mailbox
 
     ## The admin enters the reply into the admin backend
-    # Sign in as an admin
-    visit new_user_session_path
-    fill_in "Email", with: admin.email
-    fill_in "Password", with: admin.password
-    click_button "Sign in"
+    sign_in_as_admin
     # Find the original comment from the reply and visit it
     visit application_path application
     within("#comment5") { click_link "add reply" }
