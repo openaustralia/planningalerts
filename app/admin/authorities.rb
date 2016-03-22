@@ -36,6 +36,7 @@ ActiveAdmin.register Authority do
         column :email
         column :party
         column(:image) { |c| link_to image_tag(c.image_url), c.image_url }
+        # TODO: Add delete action
         column { |c| "#{link_to "View", admin_councillor_path(c)} #{link_to "Edit", edit_admin_councillor_path(c)}".html_safe }
       end
     else
