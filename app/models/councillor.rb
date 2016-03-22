@@ -1,6 +1,6 @@
 class Councillor < ActiveRecord::Base
-  has_many :comments
-  has_many :replies
+  has_many :comments, dependent: :restrict_with_error
+  has_many :replies, dependent: :restrict_with_error
   belongs_to :authority
 
   validates :authority, :email, presence: true
