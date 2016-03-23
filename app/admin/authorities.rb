@@ -86,8 +86,12 @@ ActiveAdmin.register Authority do
 
   member_action :load_councillors, method: :post do
     popolo = EveryPolitician::Popolo.parse(open(resource.popolo_url).read)
-    resource.load_councillors(popolo)
-    redirect_to({action: :show}, notice: "Successfully loaded councillors")
+    results = resource.load_councillors(popolo)
+    errors = results.select { |c| c.errors.any? }
+    message = "Successfully loaded councillors."
+    message += " Skipped loading #{errors.count} Councillors" if errors.any?
+
+    redirect_to({action: :show}, notice: message)
   end
 
   csv do

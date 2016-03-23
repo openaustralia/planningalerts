@@ -38,4 +38,22 @@ feature "Admin loads councillors for an authority" do
       expect(page).to have_content "John Gouldson"
     end
   end
+
+  context "when councillors don’t have emails" do
+    given(:city_of_sydney) do
+      create(:authority, full_name: "City of Sydney", state: "NSW")
+    end
+
+    scenario "the admin is informed they were not loaded" do
+      sign_in_as_admin
+
+      visit admin_authority_path(city_of_sydney)
+
+      VCR.use_cassette("australian_local_councillors_popolo") do
+        click_button "Load Councillors"
+      end
+
+      expect(page).to have_content "Skipped loading 10 Councillors"
+    end
+  end
 end
