@@ -4,6 +4,7 @@ module Admin
       valid_councillors = councillors.select { |c| c.valid? }
       invalid_councillors = councillors.select { |c| c.invalid? }
 
+      # TODO: DRY up duplication
       case
       when councillors.any? && valid_councillors.any? && invalid_councillors.any?
         "Successfully loaded #{pluralize valid_councillors.count, "councillor"}." + " " +
