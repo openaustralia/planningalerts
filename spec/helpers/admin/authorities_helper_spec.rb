@@ -16,22 +16,22 @@ describe Admin::AuthoritiesHelper do
 
     it "all councillors failed to load due to errors" do
       invalid_councillors = [
-        build(:councillor, email: nil),
-        build(:councillor, image_url: "http://example.com")
+        build(:councillor, name: "Fred Dagg", email: nil),
+        build(:councillor, name: "Luke Lucas", image_url: "http://example.com")
       ]
 
       expect(helper.load_councillors_response_text(invalid_councillors))
-        .to eql "Skipped loading 2 councillors."
+        .to eql "Skipped loading 2 councillors. Fred Dagg (Email can't be blank) and Luke Lucas (Image url must be HTTPS)."
     end
 
     it "some councillors load successfully and some fail" do
       councillors = [
         build(:councillor),
-        build(:councillor, image_url: "http://example.com")
+        build(:councillor, name: "James Jamison", image_url: "http://example.com")
       ]
 
       expect(helper.load_councillors_response_text(councillors))
-        .to eql "Successfully loaded 1 councillor. Skipped loading 1 councillor."
+        .to eql "Successfully loaded 1 councillor. Skipped loading 1 councillor. James Jamison (Image url must be HTTPS)."
     end
   end
 end
