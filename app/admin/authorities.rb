@@ -87,6 +87,7 @@ ActiveAdmin.register Authority do
   member_action :load_councillors, method: :post do
     popolo = EveryPolitician::Popolo.parse(open(resource.popolo_url).read)
     results = resource.load_councillors(popolo)
+    # TODO: If there are errors tell the admin what they are, e.g. email can't be blank
     notice = render_to_string(partial: "load_councillors_message", locals: {councillors: results})
 
     redirect_to({action: :show}, notice: notice)
