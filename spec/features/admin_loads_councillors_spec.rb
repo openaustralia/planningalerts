@@ -14,7 +14,7 @@ feature "Admin loads councillors for an authority" do
       click_button "Load Councillors"
     end
 
-    expect(page).to have_content "Successfully loaded councillors"
+    expect(page).to have_content "Successfully loaded 11 councillors"
     expect(page).to have_content "Max Phillips"
     expect(page).to have_content "Chris Woods"
   end
@@ -33,7 +33,7 @@ feature "Admin loads councillors for an authority" do
         click_button "Load Councillors"
       end
 
-      expect(page).to have_content "Successfully loaded councillors"
+      expect(page).to have_content "Successfully loaded 11 councillors"
       expect(page).to have_content "Sue Englart"
       expect(page).to have_content "John Gouldson"
     end
@@ -53,7 +53,7 @@ feature "Admin loads councillors for an authority" do
         click_button "Load Councillors"
       end
 
-      expect(page).to have_content "Skipped loading 10 Councillors"
+      expect(page).to have_content "Skipped loading 10 councillors"
     end
   end
 end
