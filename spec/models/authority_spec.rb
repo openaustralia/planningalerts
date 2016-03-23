@@ -161,41 +161,56 @@ describe Authority do
   end
 
   describe "#load_councillors" do
-    subject(:authority) { create(:authority, full_name: "Albury City Council") }
     let(:popolo) do
       popolo_file = Rails.root.join("spec", "fixtures", "local_councillor_popolo.json")
       EveryPolitician::Popolo::read(popolo_file)
     end
 
-    it "should load 2 councillors" do
-      authority.load_councillors(popolo)
+    context "when the authority has two valid councillors" do
+      subject(:authority) { create(:authority, full_name: "Albury City Council") }
 
-      expect(authority.councillors.count).to eql 2
+      it "should load 2 councillors" do
+        authority.load_councillors(popolo)
+
+        expect(authority.councillors.count).to eql 2
+      end
+
+      it "loads councillors and their attributes" do
+        authority.load_councillors(popolo)
+
+        kevin = Councillor.find_by(name: "Kevin Mack")
+        expect(kevin.present?).to be_true
+        expect(kevin.email).to eql "kevin@albury.nsw.gov.au"
+        expect(kevin.image_url).to eql "https://example.com/kevin.jpg"
+        expect(kevin.party).to be_nil
+        expect(Councillor.find_by(name: "Ross Jackson").party).to eql "Liberal"
+      end
+
+      it "updates an existing councillor" do
+        councillor = create(:councillor, authority: authority,
+                            name: "Kevin Mack",
+                            email: "old_address@example.com",
+                            party: "The Old Parties")
+
+        authority.load_councillors(popolo)
+
+        councillor.reload
+        expect(councillor.email).to eql "kevin@albury.nsw.gov.au"
+        expect(councillor.image_url).to eql "https://example.com/kevin.jpg"
+        expect(councillor.party).to be_nil
+      end
     end
 
-    it "loads councillors and their attributes" do
-      authority.load_councillors(popolo)
+    context "when the authority has an invalid councillor" do
+      it "returns a Councillor with errors" do
+        armidale = create(:authority, full_name: "Armidale Dumaresq Council")
 
-      kevin = Councillor.find_by(name: "Kevin Mack")
-      expect(kevin.present?).to be_true
-      expect(kevin.email).to eql "kevin@albury.nsw.gov.au"
-      expect(kevin.image_url).to eql "https://example.com/kevin.jpg"
-      expect(kevin.party).to be_nil
-      expect(Councillor.find_by(name: "Ross Jackson").party).to eql "Liberal"
-    end
+        invalid_councillor = armidale.load_councillors(popolo).last
 
-    it "updates an existing councillor" do
-      councillor = create(:councillor, authority: authority,
-                          name: "Kevin Mack",
-                          email: "old_address@example.com",
-                          party: "The Old Parties")
-
-      authority.load_councillors(popolo)
-
-      councillor.reload
-      expect(councillor.email).to eql "kevin@albury.nsw.gov.au"
-      expect(councillor.image_url).to eql "https://example.com/kevin.jpg"
-      expect(councillor.party).to be_nil
+        expect(invalid_councillor).to_not be_valid
+        expect(invalid_councillor.errors).to include :email
+        expect(invalid_councillor.errors.get(:email)).to eql ["can't be blank"]
+      end
     end
   end
 

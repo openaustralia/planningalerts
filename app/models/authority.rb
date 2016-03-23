@@ -257,10 +257,10 @@ class Authority < ActiveRecord::Base
     popolo_councillors = PopoloCouncillors.new(popolo)
     persons = popolo_councillors.for_authority(full_name)
 
-    persons.each do |person|
-      c = councillors.find_or_create_by(name: person.name)
-      # TODO: Return a list of successful and failed creations instead of silently dropping those with errors
-      c.update(email: person.email, image_url: person.image, party: person.party)
+    persons.map do |person|
+      councillor = councillors.find_or_create_by(name: person.name)
+      councillor.update(email: person.email, image_url: person.image, party: person.party)
+      councillor
     end
   end
 
