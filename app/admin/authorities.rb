@@ -4,6 +4,7 @@ ActiveAdmin.register Authority do
   actions :all, except: [:destroy]
 
   scope :active, default: true
+  scope(:disabled) { |a| a.where(disabled: true) }
   scope :all
 
   index do
