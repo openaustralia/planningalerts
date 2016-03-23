@@ -49,8 +49,7 @@ ActiveAdmin.register Authority do
     end
   end
 
-  remove_filter :applications
-  remove_filter :comments
+  filter :full_name
 
   form do |f|
     inputs "Name" do
