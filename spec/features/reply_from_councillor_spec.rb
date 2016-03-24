@@ -12,7 +12,6 @@ feature "Councillor replies to a message sent to them" do
                        text: "I think this is a really good idea")
     end
   end
-  given (:admin) { create(:admin) }
 
   background { comment.confirm! }
 
@@ -24,11 +23,7 @@ feature "Councillor replies to a message sent to them" do
     # An admin checks this mailbox
 
     ## The admin enters the reply into the admin backend
-    # Sign in as an admin
-    visit new_user_session_path
-    fill_in "Email", with: admin.email
-    fill_in "Password", with: admin.password
-    click_button "Sign in"
+    sign_in_as_admin
     # Find the original comment from the reply and visit it
     visit application_path application
     within("#comment5") { click_link "add reply" }
@@ -56,6 +51,8 @@ feature "Commenter is notified of the councillors reply" do
                                 id: 8,
                                 address: "24 Bruce Road Glenbrook",
                                 description: "A lovely house") }
+  # TODO: Extract this to a method where user actually leaves comment
+  #       and confirms it.
   given (:comment) do
     VCR.use_cassette('planningalerts') do
       create(:comment,
@@ -74,7 +71,7 @@ feature "Commenter is notified of the councillors reply" do
   end
 
   scenario "commenter gets an email with the councillor’s reply" do
-    open_last_email_for("matthew@openaustralia.org")
+    open_email_for("matthew@openaustralia.org", with_subject: "Local Councillor Louise Councillor replied to your message")
     expect(current_email).to have_subject "Local Councillor Louise Councillor replied to your message"
     expect(current_email).to have_body_text email_intro_text
     expect(current_email).to have_body_text reply_text

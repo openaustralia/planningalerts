@@ -22,6 +22,11 @@ class Authority < ActiveRecord::Base
   has_many :councillors
   has_many :comments, through: :applications
 
+  validates :state, inclusion: {
+    in: %w(NSW VIC QLD SA WA TAS NT ACT),
+    message: "%{value} is not a state in Australia"
+  }
+
   scope :enabled, -> { where('disabled = 0 or disabled is null') }
   scope :active, -> { where('(disabled = 0 or disabled is null) AND morph_name != "" AND morph_name IS NOT NULL') }
 
@@ -246,6 +251,21 @@ class Authority < ActiveRecord::Base
 
   def write_to_councillors_enabled?
     ENV["COUNCILLORS_ENABLED"] == "true" ? write_to_councillors_enabled : false
+  end
+
+  def load_councillors(popolo)
+    popolo_councillors = PopoloCouncillors.new(popolo)
+    persons = popolo_councillors.for_authority(full_name)
+
+    persons.map do |person|
+      councillor = councillors.find_or_create_by(name: person.name)
+      councillor.update(email: person.email, image_url: person.image, party: person.party)
+      councillor
+    end
+  end
+
+  def popolo_url
+    "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/#{state.downcase}_local_councillor_popolo.json"
   end
 
   def latest_application

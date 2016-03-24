@@ -165,15 +165,7 @@ feature "Give feedback to Council" do
 
   context "when signed in as admin" do
     background do
-      admin = create(:admin)
-
-      visit new_user_session_path
-      within("#new_user") do
-        fill_in "Email", with: admin.email
-        fill_in "Password", with: admin.password
-      end
-      click_button "Sign in"
-      expect(page).to have_content "Signed in successfully"
+      sign_in_as_admin
     end
 
     scenario "Getting an error message if the comment form isn’t completed correctly" do

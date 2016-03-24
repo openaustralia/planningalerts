@@ -5,20 +5,11 @@ feature "Admin hides comment" do
     VCR.use_cassette('planningalerts') do
       create(:confirmed_comment, id: 1)
     end
-
-    admin = create(:admin)
-
-    visit new_user_session_path
-    within("#new_user") do
-      fill_in "Email", with: admin.email
-      fill_in "Password", with: admin.password
-    end
-    click_button "Sign in"
-    expect(page).to have_content "Signed in successfully"
   end
 
   scenario "successfully" do
-    visit admin_root_path
+    sign_in_as_admin
+
     click_link "Comments"
 
     within("#comment_1") do
@@ -34,7 +25,8 @@ feature "Admin hides comment" do
 
   scenario "successfully when writing to councillor feature is enabled" do
     with_modified_env COUNCILLORS_ENABLED: 'true' do
-      visit admin_root_path
+      sign_in_as_admin
+
       click_link "Comments"
 
       within("#comment_1") do

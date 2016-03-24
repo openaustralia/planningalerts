@@ -6,6 +6,8 @@ ActiveAdmin.register Councillor do
     column :name
     column :email
     column :party
+    column(:number_of_comments) { |c| c.comments.count }
+    column(:number_of_replies) { |c| c.replies.count }
     actions
   end
 

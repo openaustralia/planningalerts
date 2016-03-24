@@ -1,16 +1,20 @@
+require "open-uri"
+
 ActiveAdmin.register Authority do
   actions :all, except: [:destroy]
 
   scope :active, default: true
+  scope(:disabled) { |a| a.where(disabled: true) }
   scope :all
 
   index do
     column "Name", :full_name
     column :state
     column :email
-    column :write_to_councillors_enabled
     column(:number_of_applications) { |a| a.applications.count }
     column(:number_of_comments) { |a| a.comments.count }
+    column :write_to_councillors_enabled
+    column(:number_of_councillors) { |a| a.councillors.count }
     actions
   end
 
@@ -26,14 +30,27 @@ ActiveAdmin.register Authority do
       row :disabled
     end
 
+    h3 "Councillors"
+    if a.councillors.present?
+      table_for resource.councillors, class: "index_table" do
+        column :name
+        column :email
+        column :party
+        column(:image) { |c| link_to image_tag(c.image_url), c.image_url }
+        # TODO: Add delete action
+        column { |c| "#{link_to "View", admin_councillor_path(c)} #{link_to "Edit", edit_admin_councillor_path(c)}".html_safe }
+      end
+    else
+      para "None loaded for this authority."
+    end
+
     h3 "Last scraper run log"
     div do
       simple_format a.last_scraper_run_log
     end
   end
 
-  remove_filter :applications
-  remove_filter :comments
+  filter :full_name
 
   form do |f|
     inputs "Name" do
@@ -61,6 +78,18 @@ ActiveAdmin.register Authority do
     authority = Authority.find(params[:id])
     authority.delay.collect_applications
     redirect_to({action: :show}, notice: "Queued for scraping!")
+  end
+
+  action_item :load_councillors, only: :show do
+    button_to('Load Councillors', load_councillors_admin_authority_path)
+  end
+
+  member_action :load_councillors, method: :post do
+    popolo = EveryPolitician::Popolo.parse(open(resource.popolo_url).read)
+    results = resource.load_councillors(popolo)
+    notice = render_to_string(partial: "load_councillors_message", locals: {councillors: results})
+
+    redirect_to({action: :show}, notice: notice)
   end
 
   csv do

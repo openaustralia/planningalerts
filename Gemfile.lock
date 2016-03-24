@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/everypolitician/everypolitician-popolo.git
+  revision: be22bd81c598ae0602c5ddf8e9fdb8a783745877
+  branch: master
+  specs:
+    everypolitician-popolo (0.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -463,6 +470,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   email_spec
+  everypolitician-popolo!
   factory_girl
   factory_girl_rails
   foreigner

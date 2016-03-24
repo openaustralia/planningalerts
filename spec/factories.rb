@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :authority do
     sequence(:full_name) { |n| "Acme Local Planning Authority - #{n}" }
     short_name {|b| b.full_name}
+    state "NSW"
 
     factory :contactable_authority do
       email "example@authority.gov"
