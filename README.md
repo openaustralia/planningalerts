@@ -57,7 +57,7 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 The code is deployed using Capistrano. To deploy to production run:
 
-    bundle exec cap -S stage=production deploy
+    bundle exec cap --set-before stage=production deploy
 
 This command is defined in `config/deploy.rb`.
 
@@ -68,8 +68,7 @@ In this case you'll need to set the `branch` variable after recipies are loaded 
 
 View more available Capistrano commands with:
 
-    bundle exec cap -T
-
+    bundle exec cap --tasks
 
 ## Contributing
 
