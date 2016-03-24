@@ -61,6 +61,11 @@ The code is deployed using Capistrano. To deploy to production run:
 
 This command is defined in `config/deploy.rb`.
 
+Sometimes you want to deploy an alternate branch, for instance when deploying to the `test` stage.
+In this case you'll need to set the `branch` variable after recipies are loaded by using the `--set` argument instead of `--set-before`, e.g.
+
+    bundle exec cap --set-before stage=test --set branch=a-branch-i-want-to-test deploy
+
 View more available Capistrano commands with:
 
     bundle exec cap -T
