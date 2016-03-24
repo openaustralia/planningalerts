@@ -10,10 +10,10 @@ module Admin
       # TODO: DRY up duplication
       case
       when councillors.any? && valid_councillors.any? && invalid_councillors.any?
-        "Successfully loaded #{pluralize valid_councillors.count, "councillor"}." + " " +
+        "Successfully loaded/updated #{pluralize valid_councillors.count, "councillor"}." + " " +
         "Skipped loading #{pluralize invalid_councillors.count, "councillor"}. #{error_messages}."
       when councillors.any? && valid_councillors.count == councillors.count
-        "Successfully loaded #{pluralize valid_councillors.count, "councillor"}."
+        "Successfully loaded/updated #{pluralize valid_councillors.count, "councillor"}."
       when councillors.any? && invalid_councillors.count == councillors.count
         "Skipped loading #{pluralize invalid_councillors.count, "councillor"}. #{error_messages}."
       when councillors.empty?

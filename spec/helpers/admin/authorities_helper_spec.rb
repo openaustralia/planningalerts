@@ -6,7 +6,7 @@ describe Admin::AuthoritiesHelper do
       valid_councillors = [create(:councillor), create(:councillor)]
 
       expect(helper.load_councillors_response_text(valid_councillors))
-        .to eql "Successfully loaded 2 councillors."
+        .to eql "Successfully loaded/updated 2 councillors."
     end
 
     it "there were no councillors to load" do
@@ -31,7 +31,7 @@ describe Admin::AuthoritiesHelper do
       ]
 
       expect(helper.load_councillors_response_text(councillors))
-        .to eql "Successfully loaded 1 councillor. Skipped loading 1 councillor. James Jamison (Image url must be HTTPS)."
+        .to eql "Successfully loaded/updated 1 councillor. Skipped loading 1 councillor. James Jamison (Image url must be HTTPS)."
     end
   end
 end
