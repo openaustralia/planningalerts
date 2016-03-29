@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160301033011) do
+ActiveRecord::Schema.define(version: 20160329044846) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "resource_id",   null: false
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 20160301033011) do
     t.boolean  "hidden",         default: false,     null: false
     t.string   "theme",          default: "default", null: false
     t.integer  "councillor_id"
+    t.datetime "confirmed_at"
   end
 
   add_index "comments", ["application_id"], name: "index_comments_on_application_id", using: :btree
