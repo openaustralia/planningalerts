@@ -154,7 +154,7 @@ feature "Give feedback to Council" do
 
   scenario "Reporting abuse on a confirmed comment" do
     VCR.use_cassette('planningalerts') do
-      comment = create(:comment, confirmed: true, text: "I'm saying something abusive", name: "Jack Rude", email: "rude@foo.com", id: "23")
+      comment = create(:confirmed_comment, text: "I'm saying something abusive", name: "Jack Rude", email: "rude@foo.com", id: "23")
       visit(new_comment_report_path(comment))
     end
 
