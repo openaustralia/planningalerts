@@ -122,11 +122,11 @@ describe Authority do
       end
 
       it "doesn't count hidden or unconfirmed comments" do
-        create(:unconfirmed_comment, application_id: 1, updated_at: Date.new(2015,12,26))
-        create(:unconfirmed_comment, application_id: 1, updated_at: Date.new(2015,12,26))
-        create(:unconfirmed_comment, application_id: 1, updated_at: Date.new(2015,12,26))
-        create(:unconfirmed_comment, application_id: 1, updated_at: Date.new(2016,1,4))
-        create(:confirmed_comment, hidden: true, application_id: 1, updated_at: Date.new(2016,1,4))
+        create(:unconfirmed_comment, application_id: 1, created_at: Date.new(2015,12,26))
+        create(:unconfirmed_comment, application_id: 1, created_at: Date.new(2015,12,26))
+        create(:unconfirmed_comment, application_id: 1, created_at: Date.new(2015,12,26))
+        create(:unconfirmed_comment, application_id: 1, created_at: Date.new(2016,1,4))
+        create(:confirmed_comment, hidden: true, application_id: 1, confirmed_at: Date.new(2016,1,4))
 
         expect(authority.comments_per_week).to eq [
           [ Date.new(2015,12,20), 0 ],
@@ -136,10 +136,10 @@ describe Authority do
       end
 
       it "returns count of visible comments for each week since the first application was scraped" do
-        create(:confirmed_comment, application_id: 1, updated_at: Date.new(2015,12,26))
-        create(:confirmed_comment, application_id: 1, updated_at: Date.new(2015,12,26))
-        create(:confirmed_comment, application_id: 1, updated_at: Date.new(2015,12,26))
-        create(:confirmed_comment, application_id: 1, updated_at: Date.new(2016,1,4))
+        create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015,12,26))
+        create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015,12,26))
+        create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015,12,26))
+        create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2016,1,4))
 
         expect(authority.comments_per_week).to eq [
           [ Date.new(2015,12,20), 3 ],
