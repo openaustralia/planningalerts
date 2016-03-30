@@ -27,6 +27,8 @@ describe PerformanceController do
           create(:confirmed_comment, confirmed_at: 90.days.ago.to_date, email: "wiz@example.com")
         end
       end
+
+      # FIXME: This example description seems wrong/is really confusing.
       it "returns an empty Array as json" do
         get(:comments, format: :json)
 
