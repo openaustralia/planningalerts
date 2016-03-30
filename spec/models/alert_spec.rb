@@ -316,6 +316,75 @@ describe Alert do
     end
   end
 
+  describe "#applications_with_new_comments" do
+    let (:alert) { create(:alert, address: @address, radius_meters: 2000, lat: 1.0, lng: 2.0) }
+    let (:near_application) do
+      create(:application,
+             lat: 1.0,
+             lng: 2.0,
+             address: @address,
+             suburb: "Glenbrook",
+             state: "NSW",
+             postcode: "2773")
+    end
+    let (:far_away_application) do
+      # 5001 m north of alert
+      create(:application,
+             lat: alert.location.endpoint(0, 5001).lat,
+             lng: alert.location.endpoint(0, 5001).lng,
+             address: @address,
+             suburb: "Glenbrook",
+             state: "NSW",
+             postcode: "2773")
+    end
+
+    context "when there are no new comments near by" do
+      it { expect(alert.applications_with_new_comments).to eq [] }
+    end
+
+    context "when there is a new comment near by" do
+      it "returns the application it belongs to" do
+        create(:confirmed_comment, application: near_application)
+
+        expect(alert.applications_with_new_comments).to eq [near_application]
+      end
+    end
+
+    context "when there is an old comment near by" do
+      it "does not return the application it belongs to" do
+        create(:confirmed_comment,
+               updated_at: alert.cutoff_time - 1,
+               application: near_application)
+
+        expect(alert.applications_with_new_comments).to eq []
+      end
+    end
+
+    context "when there is an unconfirmed comment near by" do
+      it "does not return the application it belongs to" do
+        create(:unconfirmed_comment, application: near_application)
+
+        expect(alert.applications_with_new_comments).to eq []
+      end
+    end
+
+    context "when there is a hidden comment near by" do
+      it "does not return the application it belongs to" do
+        create(:confirmed_comment, hidden: true, application: near_application)
+
+        expect(alert.applications_with_new_comments).to eq []
+      end
+    end
+
+    context "when there is a new comment far away" do
+      it "does not return the application it belongs to" do
+        create(:confirmed_comment, application: far_away_application)
+
+        expect(alert.applications_with_new_comments).to eq []
+      end
+    end
+  end
+
   describe "#applications_with_new_replies" do
     let (:alert) do
       create(:alert,
