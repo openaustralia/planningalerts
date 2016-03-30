@@ -255,6 +255,24 @@ describe Alert do
 
       expect(alert.new_comments).to eql [comment1, comment2]
     end
+
+    it "does not see unconfirmed comments" do
+      alert = create(:alert, address: @address, radius_meters: 2000)
+      p1 = alert.location.endpoint(0, 501) # 501 m north of alert
+      application = create(:application, lat: p1.lat, lng: p1.lng, suburb: "", state: "", postcode: "")
+      unconfirmed_comment = create(:unconfirmed_comment, application: application)
+
+      expect(alert.new_comments).to_not eql [unconfirmed_comment]
+    end
+
+    it "does not see hidden comments" do
+      alert = create(:alert, address: @address, radius_meters: 2000)
+      p1 = alert.location.endpoint(0, 501) # 501 m north of alert
+      application = create(:application, lat: p1.lat, lng: p1.lng, suburb: "", state: "", postcode: "")
+      hidden_comment = create(:confirmed_comment, hidden: true, application: application)
+
+      expect(alert.new_comments).to_not eql [hidden_comment]
+    end
   end
 
   describe "#new_replies" do
