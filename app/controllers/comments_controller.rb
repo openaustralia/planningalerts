@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
       comments_to_display = Comment.all
     end
 
-    @comments = comments_to_display.visible.order("updated_at DESC").paginate page: params[:page]
+    @comments = comments_to_display.visible.order("confirmed_at DESC").paginate page: params[:page]
     @rss = comments_url(params.merge(format: "rss", page: nil))
 
     respond_to do |format|
