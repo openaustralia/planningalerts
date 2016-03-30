@@ -19,12 +19,12 @@ describe PerformanceController do
     context "when there are comments" do
       before do
         VCR.use_cassette('planningalerts', allow_playback_repeats: true) do
-          create(:confirmed_comment, created_at: 2.days.ago.to_date, email: "foo@example.com")
-          create(:confirmed_comment, created_at: 2.days.ago.to_date, email: "foo@example.com")
-          create(:confirmed_comment, created_at: 2.days.ago.to_date, email: "bar@example.com")
-          create(:confirmed_comment, created_at: 90.days.ago.to_date, email: "foo@example.com")
-          create(:confirmed_comment, created_at: 90.days.ago.to_date, email: "bar@example.com")
-          create(:confirmed_comment, created_at: 90.days.ago.to_date, email: "wiz@example.com")
+          create(:confirmed_comment, confirmed_at: 2.days.ago.to_date, email: "foo@example.com")
+          create(:confirmed_comment, confirmed_at: 2.days.ago.to_date, email: "foo@example.com")
+          create(:confirmed_comment, confirmed_at: 2.days.ago.to_date, email: "bar@example.com")
+          create(:confirmed_comment, confirmed_at: 90.days.ago.to_date, email: "foo@example.com")
+          create(:confirmed_comment, confirmed_at: 90.days.ago.to_date, email: "bar@example.com")
+          create(:confirmed_comment, confirmed_at: 90.days.ago.to_date, email: "wiz@example.com")
         end
       end
       it "returns an empty Array as json" do
