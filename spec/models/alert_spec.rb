@@ -238,20 +238,20 @@ describe Alert do
 
   describe "#new_comments" do
     it "sees a new comment when there are new comments on an application" do
-      alert = create(:alert, email: "matthew@openaustralia.org", address: @address, radius_meters: 2000)
+      alert = create(:alert, address: @address, radius_meters: 2000)
       p1 = alert.location.endpoint(0, 501) # 501 m north of alert
       application = create(:application, lat: p1.lat, lng: p1.lng, suburb: "", state: "", postcode: "")
-      comment1 = create(:comment, application: application, text: "This is a comment", name: "Matthew", email: "matthew@openaustralia.org", address: "Foo street", confirmed: true)
+      comment1 = create(:confirmed_comment, application: application)
 
       expect(alert.new_comments).to eql [comment1]
     end
 
     it "only sees two new comments when there are two new comments on a single application" do
-      alert = create(:alert, email: "matthew@openaustralia.org", address: @address, radius_meters: 2000)
+      alert = create(:alert, address: @address, radius_meters: 2000)
       p1 = alert.location.endpoint(0, 501) # 501 m north of alert
       application = create(:application, lat: p1.lat, lng: p1.lng, suburb: "", state: "", postcode: "")
-      comment1 = create(:comment, application: application, text: "This is a comment", name: "Matthew", email: "matthew@openaustralia.org", address: "Foo street", confirmed: true)
-      comment2 = create(:comment, application: application, text: "This is a comment", name: "Matthew", email: "matthew@openaustralia.org", address: "Foo street", confirmed: true)
+      comment1 = create(:confirmed_comment, application: application)
+      comment2 = create(:confirmed_comment, application: application)
 
       expect(alert.new_comments).to eql [comment1, comment2]
     end
