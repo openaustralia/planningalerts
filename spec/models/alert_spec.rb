@@ -254,6 +254,14 @@ describe Alert do
       expect(alert.new_comments).to eql [comment1, comment2]
     end
 
+    it "does not see old confirmed comments" do
+      old_comment = create(:confirmed_comment,
+                           updated_at: alert.cutoff_time - 1,
+                           application: application)
+
+      expect(alert.new_comments).to_not eql [old_comment]
+    end
+
     it "does not see unconfirmed comments" do
       unconfirmed_comment = create(:unconfirmed_comment, application: application)
 
