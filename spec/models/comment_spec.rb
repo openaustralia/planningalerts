@@ -215,6 +215,41 @@ describe Comment do
     it { expect(comment_with_reply.awaiting_councillor_reply?).to eq false }
   end
 
+  describe ".fill_confirmed_at_for_existing_confirmed_comments" do
+    around do |example|
+      VCR.use_cassette('planningalerts') do
+        example.run
+      end
+    end
+
+    it "sets confirmed_at to updated_at for comments that have been confirmed" do
+      date = Time.utc(2016, 3, 30, 9, 53, 30).in_time_zone
+      create(:confirmed_comment, id: 1, confirmed_at: nil, updated_at: date)
+
+      Comment.fill_confirmed_at_for_existing_confirmed_comments
+
+      expect(Comment.find(1).confirmed_at).to eql date
+    end
+
+    it "does nothing to comments that already have a confirmed_at value" do
+      old_date = Time.utc(2015, 10, 15, 16, 5, 10).in_time_zone
+      new_date = Time.utc(2016, 3, 30, 9, 53, 30).in_time_zone
+      create(:confirmed_comment, id: 1, confirmed_at: old_date, updated_at: new_date)
+
+      Comment.fill_confirmed_at_for_existing_confirmed_comments
+
+      expect(Comment.find(1).confirmed_at).to eql old_date
+    end
+
+    it "does nothing to comments that have not been confirmed" do
+      create(:unconfirmed_comment, id: 1)
+
+      Comment.fill_confirmed_at_for_existing_confirmed_comments
+
+      expect(Comment.find(1).confirmed_at).to be_nil
+    end
+  end
+
   describe "#recipient_display_name" do
     let(:comment) do
       VCR.use_cassette('planningalerts') do
