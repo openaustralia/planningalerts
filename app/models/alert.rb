@@ -113,7 +113,11 @@ class Alert < ActiveRecord::Base
 
   # Applications in the area of interest which have new comments made since we were last alerted
   def applications_with_new_comments
-    Application.near([location.lat, location.lng], radius_km, units: :km).joins(:comments).where('comments.updated_at > ?', cutoff_time).where('comments.confirmed' => true).where('comments.hidden' => false).uniq
+    Application.near([location.lat, location.lng], radius_km, units: :km)
+               .joins(:comments)
+               .where('comments.updated_at > ?', cutoff_time)
+               .where('comments.confirmed' => true)
+               .where('comments.hidden' => false).uniq
   end
 
   def applications_with_new_replies
