@@ -56,7 +56,7 @@ gem 'honeybadger'
 gem 'stripe'
 gem 'dotenv-rails'
 gem 'climate_control'
-gem 'everypolitician-popolo', github: 'everypolitician/everypolitician-popolo', branch: 'master'
+gem 'everypolitician-popolo', git: 'https://github.com/everypolitician/everypolitician-popolo.git', branch: 'master'
 
 group :test do
   gem 'capybara'

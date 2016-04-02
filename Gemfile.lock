@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/everypolitician/everypolitician-popolo.git
+  remote: https://github.com/everypolitician/everypolitician-popolo.git
   revision: be22bd81c598ae0602c5ddf8e9fdb8a783745877
   branch: master
   specs:
