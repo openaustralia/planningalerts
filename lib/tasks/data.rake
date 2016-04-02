@@ -33,11 +33,13 @@ namespace :data do
     records.each do |lga|
       next if lga["lga_name15"].match /(No usual address|Unincorporated)/
 
-      # {"cartodb_id"=>352, "lga_name15"=>"Mount Remarkable (DC)", "ste_name11"=>"South Australia"}
+      short_name = lga["lga_name15"].split(" (").first.downcase.underscore
+
       authority = Authority.where(lga_name15: lga["lga_name15"]).first
+      authority ||= Authority.where(short_name: short_name, state: states[lga["ste_name11"]]).first
       authority ||= Authority.new
       authority.full_name ||= lga["lga_name15"]
-      authority.short_name ||= lga["lga_name15"]
+      authority.short_name ||= short_name
       authority.lga_name15 ||= lga["lga_name15"]
       authority.state ||= states[lga["ste_name11"]]
       authority.save
