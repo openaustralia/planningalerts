@@ -144,6 +144,9 @@ ol#comments {
   font-style: normal;
   border: 0;
   padding: 0;
+
+  max-height: 30em;
+  overflow-y: auto;
 }
 
 .comment-location {
