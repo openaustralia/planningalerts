@@ -3,3 +3,25 @@
 //Recommended Blueprint configuration with scoping and semantic layout:
 body {
   @include blueprint-print(true); }
+
+@media print {
+  
+  #menu, 
+  #comments-area, 
+  #sidebar #alert, 
+  #stats-wrapper, 
+  #donations-wrapper, 
+  #footer-wrapper, 
+  #application .button,
+  #social {
+    display: none;
+  }
+
+  .print-media-only { 
+    display: inline-block;
+    float: left;
+  }
+  .gmnoprint {
+    display: none;
+  }
+}
