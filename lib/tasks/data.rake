@@ -2,6 +2,18 @@ namespace :data do
   require 'open-uri'
   require 'json'
 
+  def generate_shortname(name)
+    known_exceptions = {
+      "Wellington (A)" => "wellington_nsw",
+      "Kingston (DC)" => "kingston_sa",
+      "Latrobe (M)" => "latrobe_tas",
+      "Murray (A)" => "murray_nsw",
+      "Flinders (S)" => "flinders_qld",
+      "Central Highlands (M)" => "central_highlands_tas"
+    }
+
+    known_exceptions[name] || name.split(" (").first.downcase.gsub(" ", "_")
+  end
 
   path = File.dirname(__FILE__) + "/../../tmp/lga_2015_aust.geojson"
 
@@ -33,7 +45,7 @@ namespace :data do
     records.each do |lga|
       next if lga["lga_name15"].match /(No usual address|Unincorporated)/
 
-      short_name = lga["lga_name15"].split(" (").first.downcase.underscore
+      short_name = generate_shortname(lga["lga_name15"])
 
       authority = Authority.where(lga_name15: lga["lga_name15"]).first
       authority ||= Authority.where(short_name: short_name, state: states[lga["ste_name11"]]).first
@@ -44,7 +56,7 @@ namespace :data do
       authority.state ||= states[lga["ste_name11"]]
       authority.save
 
-      puts "#{authority.short_name}, #{authority.state}"
+      puts "#{authority.short_name}: #{authority.full_name} #{authority.state}"
     end
   end
 
