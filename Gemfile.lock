@@ -58,7 +58,7 @@ GEM
       multi_json (~> 1.7)
       rest-client
       rgeo-geojson
-    bcrypt (3.1.10)
+    bcrypt (3.1.11)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -133,7 +133,7 @@ GEM
     delayed_job_active_record (4.0.3)
       activerecord (>= 3.0, < 5.0)
       delayed_job (>= 3.0, < 4.1)
-    devise (3.4.1)
+    devise (3.5.6)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -445,7 +445,7 @@ GEM
       redis (>= 2.1)
       redis-namespace (>= 1.1.0)
     vcr (2.5.0)
-    warden (1.2.3)
+    warden (1.2.6)
       rack (>= 1.0)
     webmock (1.13.0)
       addressable (>= 2.2.7)
