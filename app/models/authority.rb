@@ -279,6 +279,6 @@ class Authority < ActiveRecord::Base
 
   # If the latest application is over two weeks old, the scraper's probably broken
   def broken?
-    applications.recent.empty?
+    applications.recent.empty? && superceded_by.blank?
   end
 end
