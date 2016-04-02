@@ -37,6 +37,11 @@ describe Authority do
     it "should not report that a scraper is broken if it has received a DA in less than two weeks" do
       @a2.broken?.should == false
     end
+
+    it "should not report that a scraper is broken if it is superceded" do
+      @a1.superceded_by = @a2.short_name
+      @a1.broken?.should == false
+    end
   end
 
   describe "short name encoded" do
