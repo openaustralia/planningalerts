@@ -31,20 +31,19 @@ namespace :data do
 
     records = JSON.parse(File.read(path))["rows"]
     records.each do |lga|
+      next if lga["lga_name15"].match /(No usual address|Unincorporated)/
+
       # {"cartodb_id"=>352, "lga_name15"=>"Mount Remarkable (DC)", "ste_name11"=>"South Australia"}
       authority = Authority.where(lga_name15: lga["lga_name15"]).first
-      authority ||= Authority.create({
+      authority ||= Authority.new
+      authority.update_attributes({
         full_name: lga["lga_name15"],
         short_name: lga["lga_name15"],
         lga_name15: lga["lga_name15"],
-        morph_name: nil,
-        email: nil,
-        population_2011: nil,
-        disabled: true,
         state: states[lga["ste_name11"]]
       })
 
-      puts authority.lga_name15
+      puts "#{authority.short_name}, #{authority.state}"
     end
   end
 
