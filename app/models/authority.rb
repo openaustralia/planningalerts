@@ -35,7 +35,7 @@ class Authority < ActiveRecord::Base
   end
 
   def covered?
-    !morph_name.blank? && superceded_by.blank?
+    !morph_name.blank? || !superceded_by.blank?
   end
 
   # Hardcoded total population of Australia (2011 estimate)
