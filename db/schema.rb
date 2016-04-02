@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160301033011) do
+ActiveRecord::Schema.define(version: 20160402093711) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "resource_id",   null: false
@@ -95,17 +95,21 @@ ActiveRecord::Schema.define(version: 20160301033011) do
   add_index "applications", ["suburb"], name: "index_applications_on_suburb", using: :btree
 
   create_table "authorities", force: true do |t|
-    t.string  "full_name",            limit: 200, null: false
-    t.string  "short_name",           limit: 100, null: false
+    t.string  "full_name",                    limit: 200,                 null: false
+    t.string  "short_name",                   limit: 100,                 null: false
     t.boolean "disabled"
-    t.string  "state",                limit: 20
+    t.string  "state",                        limit: 20
     t.string  "email"
     t.integer "population_2011"
     t.text    "last_scraper_run_log"
     t.string  "morph_name"
     t.boolean "write_to_councillors_enabled",             default: false, null: false
+    t.string  "lga_name15"
+    t.string  "superceded_by"
+    t.string  "primary_url"
   end
 
+  add_index "authorities", ["lga_name15"], name: "index_authorities_on_lga_name15", using: :btree
   add_index "authorities", ["short_name"], name: "short_name_unique", unique: true, using: :btree
 
   create_table "comments", force: true do |t|
