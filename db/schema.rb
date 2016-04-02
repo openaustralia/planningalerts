@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160402051442) do
+ActiveRecord::Schema.define(version: 20160402054935) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "resource_id",   null: false
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20160402051442) do
     t.string  "morph_name"
     t.boolean "write_to_councillors_enabled",             default: false, null: false
     t.string  "lga_name15"
+    t.string  "superceded_by"
   end
 
   add_index "authorities", ["lga_name15"], name: "index_authorities_on_lga_name15", using: :btree
