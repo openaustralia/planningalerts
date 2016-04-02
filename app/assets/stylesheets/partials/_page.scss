@@ -669,7 +669,8 @@ ul.ui-autocomplete {
   margin-bottom: 2em;
 }
 
-ul.authorities {
-  list-style: none;
-  padding-left: 0;
+table.authorities {
+  tr:nth-child(even) {
+   background-color: #eee;
+  }
 }
