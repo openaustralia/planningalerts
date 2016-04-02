@@ -36,12 +36,11 @@ namespace :data do
       # {"cartodb_id"=>352, "lga_name15"=>"Mount Remarkable (DC)", "ste_name11"=>"South Australia"}
       authority = Authority.where(lga_name15: lga["lga_name15"]).first
       authority ||= Authority.new
-      authority.update_attributes({
-        full_name: lga["lga_name15"],
-        short_name: lga["lga_name15"],
-        lga_name15: lga["lga_name15"],
-        state: states[lga["ste_name11"]]
-      })
+      authority.full_name ||= lga["lga_name15"]
+      authority.short_name ||= lga["lga_name15"]
+      authority.lga_name15 ||= lga["lga_name15"]
+      authority.state ||= states[lga["ste_name11"]]
+      authority.save
 
       puts "#{authority.short_name}, #{authority.state}"
     end
