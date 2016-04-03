@@ -24,17 +24,6 @@ class Comment < ActiveRecord::Base
     .select {|c| where("email = ? AND confirmed_at < ?", c.email, c.confirmed_at.to_date).any? }
   }
 
-  # TODO: This was for use in a specific migration,
-  #       inline this code into the migration once it's run and remove
-  #       this method so it's not hanging around here and in the test suit.
-  def self.fill_confirmed_at_for_existing_confirmed_comments
-    Comment.confirmed.each do |comment|
-      if comment.confirmed_at.nil?
-        comment.update!(confirmed_at: comment.updated_at)
-      end
-    end
-  end
-
   # Send the comment to the planning authority
   def after_confirm
     if to_councillor?
