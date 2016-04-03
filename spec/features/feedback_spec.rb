@@ -134,6 +134,15 @@ feature "Give feedback to Council" do
       current_email.default_part_body.to_s.should include("I think this is a really good ideas")
     end
 
+    scenario "Viewing the comment on the application page" do
+      comment = create(:comment, confirmed: false, text: "I think this is a really good ideas", application: application)
+
+      visit(confirmed_comment_path(id: comment.confirm_id))
+
+      expect(page).to have_content("commented less than a minute ago")
+      expect(page).to have_content("I think this is a really good ideas")
+    end
+
     scenario "Sharing new comment on facebook" do
       comment = create(:unconfirmed_comment, application: application)
 
@@ -145,7 +154,7 @@ feature "Give feedback to Council" do
 
   scenario "Reporting abuse on a confirmed comment" do
     VCR.use_cassette('planningalerts') do
-      comment = create(:comment, confirmed: true, text: "I'm saying something abusive", name: "Jack Rude", email: "rude@foo.com", id: "23")
+      comment = create(:confirmed_comment, text: "I'm saying something abusive", name: "Jack Rude", email: "rude@foo.com", id: "23")
       visit(new_comment_report_path(comment))
     end
 

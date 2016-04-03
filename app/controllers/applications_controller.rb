@@ -101,7 +101,7 @@ class ApplicationsController < ApplicationController
     end
 
     @application = Application.find(params[:id])
-    @comments = @application.comments.visible.order(:updated_at)
+    @comments = @application.comments.visible.order(:confirmed_at)
     @nearby_count = @application.find_all_nearest_or_recent.size
     @add_comment = AddComment.new(
       application: @application,

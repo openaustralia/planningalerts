@@ -11,18 +11,29 @@ class Comment < ActiveRecord::Base
   scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
 
   scope :visible_with_unique_emails_for_date, ->(date) {
-    visible.where("date(created_at) = ?", date).group(:email)
+    visible.where("date(confirmed_at) = ?", date).group(:email)
   }
 
   scope :by_first_time_commenters_for_date, ->(date) {
     visible_with_unique_emails_for_date(date)
-    .select {|c| where("email = ? AND created_at < ?", c.email, c.created_at.to_date).empty? }
+    .select {|c| where("email = ? AND confirmed_at < ?", c.email, c.confirmed_at.to_date).empty? }
   }
 
   scope :by_returning_commenters_for_date, ->(date) {
     visible_with_unique_emails_for_date(date)
-    .select {|c| where("email = ? AND created_at < ?", c.email, c.created_at.to_date).any? }
+    .select {|c| where("email = ? AND confirmed_at < ?", c.email, c.confirmed_at.to_date).any? }
   }
+
+  # TODO: This was for use in a specific migration,
+  #       inline this code into the migration once it's run and remove
+  #       this method so it's not hanging around here and in the test suit.
+  def self.fill_confirmed_at_for_existing_confirmed_comments
+    Comment.confirmed.each do |comment|
+      if comment.confirmed_at.nil?
+        comment.update!(confirmed_at: comment.updated_at)
+      end
+    end
+  end
 
   # Send the comment to the planning authority
   def after_confirm

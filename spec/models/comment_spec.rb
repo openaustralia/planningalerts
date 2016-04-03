@@ -19,7 +19,7 @@ describe Comment do
     context "when there are no comments on this date" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          create(:confirmed_comment, created_at: Date.yesterday)
+          create(:confirmed_comment, confirmed_at: Date.yesterday)
         end
       end
 
@@ -39,7 +39,7 @@ describe Comment do
     context "when there is a confirmed comments on this date" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          @comment = create(:confirmed_comment, created_at: Date.today)
+          @comment = create(:confirmed_comment, confirmed_at: Date.today)
         end
       end
 
@@ -49,8 +49,8 @@ describe Comment do
     context "when there is a confirmed comments on this date and on another date" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          @todays_comment = create(:confirmed_comment, created_at: Date.today)
-          @yesterdays_comment = create(:confirmed_comment, created_at: Date.yesterday)
+          @todays_comment = create(:confirmed_comment, confirmed_at: Date.today)
+          @yesterdays_comment = create(:confirmed_comment, confirmed_at: Date.yesterday)
         end
       end
 
@@ -60,8 +60,8 @@ describe Comment do
     context "when there are two confirmed comments on this date with the same email" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          @comment1 = create(:confirmed_comment, created_at: Date.today, email: "foo@example.com")
-          @comment2 = create(:confirmed_comment, created_at: Date.today, email: "foo@example.com")
+          @comment1 = create(:confirmed_comment, confirmed_at: Date.today, email: "foo@example.com")
+          @comment2 = create(:confirmed_comment, confirmed_at: Date.today, email: "foo@example.com")
         end
       end
 
@@ -77,7 +77,7 @@ describe Comment do
     context "there is a first time commenter" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          @comment = create(:confirmed_comment, created_at: Date.today, email: "foo@example.com")
+          @comment = create(:confirmed_comment, confirmed_at: Date.today, email: "foo@example.com")
         end
       end
 
@@ -87,8 +87,8 @@ describe Comment do
     context "when a person has commented on two dates" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          @yesterdays_comment = create(:confirmed_comment, created_at: Date.yesterday, email: "foo@example.com")
-          @todays_comment = create(:confirmed_comment, created_at: Date.today, email: "foo@example.com")
+          @yesterdays_comment = create(:confirmed_comment, confirmed_at: Date.yesterday, email: "foo@example.com")
+          @todays_comment = create(:confirmed_comment, confirmed_at: Date.today, email: "foo@example.com")
         end
       end
 
@@ -107,10 +107,10 @@ describe Comment do
       it { expect(Comment.by_returning_commenters_for_date("2015-09-22")).to eq [] }
     end
 
-    context "there is a first time commenter" do
+    context "when there is a first time commenter" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          create(:confirmed_comment, created_at: Date.today, email: "foo@example.com")
+          create(:confirmed_comment, confirmed_at: Date.today, email: "foo@example.com")
         end
       end
 
@@ -120,8 +120,8 @@ describe Comment do
     context "when a person has commented on two dates" do
       before :each do
         VCR.use_cassette('planningalerts') do
-          @yesterdays_comment = create(:confirmed_comment, created_at: Date.yesterday, email: "foo@example.com")
-          @todays_comment = create(:confirmed_comment, created_at: Date.today, email: "foo@example.com")
+          @yesterdays_comment = create(:confirmed_comment, confirmed_at: Date.yesterday, email: "foo@example.com")
+          @todays_comment = create(:confirmed_comment, confirmed_at: Date.today, email: "foo@example.com")
         end
       end
 
@@ -213,6 +213,41 @@ describe Comment do
     end
 
     it { expect(comment_with_reply.awaiting_councillor_reply?).to eq false }
+  end
+
+  describe ".fill_confirmed_at_for_existing_confirmed_comments" do
+    around do |example|
+      VCR.use_cassette('planningalerts') do
+        example.run
+      end
+    end
+
+    it "sets confirmed_at to updated_at for comments that have been confirmed" do
+      date = Time.utc(2016, 3, 30, 9, 53, 30).in_time_zone
+      create(:confirmed_comment, id: 1, confirmed_at: nil, updated_at: date)
+
+      Comment.fill_confirmed_at_for_existing_confirmed_comments
+
+      expect(Comment.find(1).confirmed_at).to eql date
+    end
+
+    it "does nothing to comments that already have a confirmed_at value" do
+      old_date = Time.utc(2015, 10, 15, 16, 5, 10).in_time_zone
+      new_date = Time.utc(2016, 3, 30, 9, 53, 30).in_time_zone
+      create(:confirmed_comment, id: 1, confirmed_at: old_date, updated_at: new_date)
+
+      Comment.fill_confirmed_at_for_existing_confirmed_comments
+
+      expect(Comment.find(1).confirmed_at).to eql old_date
+    end
+
+    it "does nothing to comments that have not been confirmed" do
+      create(:unconfirmed_comment, id: 1)
+
+      Comment.fill_confirmed_at_for_existing_confirmed_comments
+
+      expect(Comment.find(1).confirmed_at).to be_nil
+    end
   end
 
   describe "#recipient_display_name" do

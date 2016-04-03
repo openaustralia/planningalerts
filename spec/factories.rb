@@ -35,6 +35,7 @@ FactoryGirl.define do
 
     trait :confirmed do
       confirmed true
+      confirmed_at 5.minutes.ago
     end
 
     factory :unconfirmed_comment do
@@ -43,6 +44,7 @@ FactoryGirl.define do
 
     factory :confirmed_comment do
       confirmed true
+      confirmed_at 5.minutes.ago
     end
 
     factory :comment_to_authority do
