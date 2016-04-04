@@ -1,6 +1,16 @@
 require 'spec_helper'
 
 describe Authority do
+  describe "validations" do
+    it 'should ensure a unique short_name' do
+      @a1 = create(:authority, short_name: "Existing")
+      @a2 = build(:authority, short_name: "Existing")
+
+      @a2.valid?.should == false
+      @a2.errors.messages[:short_name].should == ["has already been taken"]
+    end
+  end
+
   describe "detecting authorities with old applications" do
     before :each do
       @a1 = create(:authority)
