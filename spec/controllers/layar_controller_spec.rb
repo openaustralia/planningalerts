@@ -13,7 +13,7 @@ describe LayarController do
     expected_layar = {
       "id" => 101, "type" => 1,
       "lat" => 1000000, "lon" => 2000000, "distance" => 2000.0, 
-      "actions" => [], "imageURL" => "http://www.planningalerts.org.au/images/layar/icon_100x75.png", "attribution" => nil,
+      "imageURL" => "http://www.planningalerts.org.au/images/layar/icon_100x75.png", "attribution" => nil,
       "title" => "1 Foo St Fooville",
       "line2" => "1234 678901234 67890123 56789 12345",
       "line3" => "1234567 90123456789 123456 89",
