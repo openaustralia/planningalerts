@@ -1,3 +1,5 @@
+require "rest-client"
+
 class Comment < ActiveRecord::Base
   belongs_to :application
   belongs_to :councillor
@@ -69,5 +71,22 @@ class Comment < ActiveRecord::Base
     writeitinstance.api_key = ENV["WRITEIT_API_KEY"]
 
     writeitinstance
+  end
+
+  def create_reply_from_writeit!
+    if replies.present? || writeit_message_id.blank?
+      false
+    else
+      # TODO: This should be done in the writeit-rails gem
+      api_response = RestClient.get(ENV["WRITEIT_BASE_URL"] + "/api/v1/message/" + writeit_message_id.to_s,
+                                    {params: {format: "json",
+                                              username: writeitinstance.username,
+                                              api_key: writeitinstance.api_key}})
+      message = JSON.parse(api_response.body, symbolize_names: true)
+
+      if answer = message[:answers].first
+        replies.create!(councillor: councillor, text: answer[:content], received_at: answer[:created])
+      end
+    end
   end
 end
