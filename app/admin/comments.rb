@@ -37,5 +37,19 @@ ActiveAdmin.register Comment do
     actions
   end
 
+  action_item :load_reply, only: :show do
+    if resource.to_councillor? && resource.writeit_message_id
+      button_to("Check WriteIt for replies", load_reply_admin_comment_path)
+    end
+  end
+
+  member_action :load_reply, method: :post do
+    if resource.create_reply_from_writeit!
+      redirect_to({action: :show}, notice: "Reply loaded")
+    else
+      redirect_to({action: :show}, notice: "No reply loaded")
+    end
+  end
+
   permit_params :text, :email, :name, :confirmed, :address, :hidden
 end
