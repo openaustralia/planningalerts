@@ -1,6 +1,9 @@
 - content_for :meta_description, @themer.default_meta_description
 
 %h3 Applications within #{meters_in_words(@radius)} of #{@q}
+- if @location.less_than_street_level_accuracy?
+  %p.attention
+    We didn't fully recognize your exact address, so you may not see the most relevant applications. Search with a street level or exact address to get better results. #{link_to "Search again", root_path}.
 
 - unless @other_addresses.empty?
   %h4 Or did you want?

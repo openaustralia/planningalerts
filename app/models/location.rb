@@ -49,6 +49,10 @@ class Location < SimpleDelegator
     end
   end
 
+  def less_than_street_level_accuracy?
+    accuracy < 5
+  end
+
   # Distance given is in metres
   def endpoint(bearing, distance)
     Location.new(__getobj__.endpoint(bearing, distance / 1000.0, units: :kms))
