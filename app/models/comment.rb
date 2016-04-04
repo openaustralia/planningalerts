@@ -43,8 +43,8 @@ class Comment < ActiveRecord::Base
       message.author_email = ENV["EMAIL_COUNCILLOR_REPLIES_TO"]
       message.writeitinstance = writeitinstance
       message.recipients = [councillor.writeit_id]
-      # TODO: Store the result that contains the message ID. It looks like "/api/v1/message/5650/"
       message.push_to_api
+      update!(writeit_message_id: message.remote_id)
     elsif to_councillor?
       CommentNotifier.delay.notify_councillor("default", self)
     else
