@@ -26,7 +26,26 @@ class Comment < ActiveRecord::Base
 
   # Send the comment to the planning authority
   def after_confirm
-    if to_councillor?
+    if to_councillor? && ENV["WRITEIT_BASE_URL"]
+      # TODO: Extract this
+      # TODO: Put this on the background queue
+      writeitinstance = WriteItInstance.new
+      writeitinstance.base_url = ENV["WRITEIT_BASE_URL"]
+      writeitinstance.url = ENV["WRITEIT_URL"]
+      writeitinstance.username = ENV["WRITEIT_USERNAME"]
+      writeitinstance.api_key = ENV["WRITEIT_API_KEY"]
+
+      message = Message.new
+      message.subject = "Planning application at #{application.address}"
+      # TODO: Add boiler plate
+      message.content = text
+      message.author_name = name
+      message.author_email = ENV["EMAIL_COUNCILLOR_REPLIES_TO"]
+      message.writeitinstance = writeitinstance
+      message.recipients = [councillor.writeit_id]
+      # TODO: Store the result that contains the message ID. It looks like "/api/v1/message/5650/"
+      message.push_to_api
+    elsif to_councillor?
       CommentNotifier.delay.notify_councillor("default", self)
     else
       CommentNotifier.delay.notify_authority("default", self)
