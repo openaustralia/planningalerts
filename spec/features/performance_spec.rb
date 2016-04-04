@@ -24,14 +24,14 @@ feature "Viewing the use of the comments function" do
   context "when there are comments" do
     background do
       VCR.use_cassette('planningalerts', allow_playback_repeats: true) do
-        create(:confirmed_comment, created_at: Time.current.to_date, email: "foo@example.com")
-        create(:confirmed_comment, created_at: Time.current.to_date, email: "bar@example.com")
-        create(:confirmed_comment, created_at: 3.days.ago, email: "foo@example.com")
-        create(:confirmed_comment, created_at: 3.days.ago, email: "bar@example.com")
-        create(:confirmed_comment, created_at: 3.days.ago, email: "zap@example.com")
-        create(:confirmed_comment, created_at: 4.days.ago.to_date, email: "foo@example.com")
-        create(:confirmed_comment, created_at: 4.days.ago.to_date, email: "bar@example.com")
-        create(:confirmed_comment, created_at: 4.days.ago.to_date, email: "wiz@example.com")
+        create(:confirmed_comment, confirmed_at: Time.current.to_date, email: "foo@example.com")
+        create(:confirmed_comment, confirmed_at: Time.current.to_date, email: "bar@example.com")
+        create(:confirmed_comment, confirmed_at: 3.days.ago, email: "foo@example.com")
+        create(:confirmed_comment, confirmed_at: 3.days.ago, email: "bar@example.com")
+        create(:confirmed_comment, confirmed_at: 3.days.ago, email: "zap@example.com")
+        create(:confirmed_comment, confirmed_at: 4.days.ago.to_date, email: "foo@example.com")
+        create(:confirmed_comment, confirmed_at: 4.days.ago.to_date, email: "bar@example.com")
+        create(:confirmed_comment, confirmed_at: 4.days.ago.to_date, email: "wiz@example.com")
       end
     end
 

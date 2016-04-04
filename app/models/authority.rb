@@ -189,7 +189,7 @@ class Authority < ActiveRecord::Base
     if applications.any?
       # Have to compensate for MySQL which treats Monday as the beginning of the week
       results = comments.visible.group(
-        "CAST(SUBDATE(updated_at, WEEKDAY(updated_at) + 1) AS DATE)"
+        "CAST(SUBDATE(confirmed_at, WEEKDAY(confirmed_at) + 1) AS DATE)"
       ).count
 
       earliest_week_with_applications = earliest_date.at_beginning_of_week.to_date

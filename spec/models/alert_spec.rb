@@ -236,22 +236,42 @@ describe Alert do
     end
   end
 
-  describe "comments" do
-    it "should see a new comment when there is a new comments on an application" do
-      alert = create(:alert, email: "matthew@openaustralia.org", address: @address, radius_meters: 2000)
-      p1 = alert.location.endpoint(0, 501) # 501 m north of alert
-      application = create(:application, lat: p1.lat, lng: p1.lng, suburb: "", state: "", postcode: "")
-      comment1 = create(:comment, application: application, text: "This is a comment", name: "Matthew", email: "matthew@openaustralia.org", address: "Foo street", confirmed: true)
-      alert.new_comments.should == [comment1]
+  describe "#new_comments" do
+    let(:alert) { create(:alert, address: @address, radius_meters: 2000) }
+    let(:p1) { alert.location.endpoint(0, 501) } # 501 m north of alert
+    let(:application) { create(:application, lat: p1.lat, lng: p1.lng, suburb: "", state: "", postcode: "") }
+
+    it "sees a new comment when there are new comments on an application" do
+      comment1 = create(:confirmed_comment, application: application)
+
+      expect(alert.new_comments).to eql [comment1]
     end
 
-    it "should only see two new comments when there are two new comments on a single application" do
-      alert = create(:alert, email: "matthew@openaustralia.org", address: @address, radius_meters: 2000)
-      p1 = alert.location.endpoint(0, 501) # 501 m north of alert
-      application = create(:application, lat: p1.lat, lng: p1.lng, suburb: "", state: "", postcode: "")
-      comment1 = create(:comment, application: application, text: "This is a comment", name: "Matthew", email: "matthew@openaustralia.org", address: "Foo street", confirmed: true)
-      comment2 = create(:comment, application: application, text: "This is a comment", name: "Matthew", email: "matthew@openaustralia.org", address: "Foo street", confirmed: true)
-      alert.new_comments.should == [comment1, comment2]
+    it "only sees two new comments when there are two new comments on a single application" do
+      comment1 = create(:confirmed_comment, application: application)
+      comment2 = create(:confirmed_comment, application: application)
+
+      expect(alert.new_comments).to eql [comment1, comment2]
+    end
+
+    it "does not see old confirmed comments" do
+      old_comment = create(:confirmed_comment,
+                           confirmed_at: alert.cutoff_time - 1,
+                           application: application)
+
+      expect(alert.new_comments).to_not eql [old_comment]
+    end
+
+    it "does not see unconfirmed comments" do
+      unconfirmed_comment = create(:unconfirmed_comment, application: application)
+
+      expect(alert.new_comments).to_not eql [unconfirmed_comment]
+    end
+
+    it "does not see hidden comments" do
+      hidden_comment = create(:confirmed_comment, hidden: true, application: application)
+
+      expect(alert.new_comments).to_not eql [hidden_comment]
     end
   end
 
@@ -301,6 +321,75 @@ describe Alert do
                       received_at: 2.hours.ago)
 
       expect(alert.new_replies).to eq [reply1, reply2]
+    end
+  end
+
+  describe "#applications_with_new_comments" do
+    let (:alert) { create(:alert, address: @address, radius_meters: 2000, lat: 1.0, lng: 2.0) }
+    let (:near_application) do
+      create(:application,
+             lat: 1.0,
+             lng: 2.0,
+             address: @address,
+             suburb: "Glenbrook",
+             state: "NSW",
+             postcode: "2773")
+    end
+    let (:far_away_application) do
+      # 5001 m north of alert
+      create(:application,
+             lat: alert.location.endpoint(0, 5001).lat,
+             lng: alert.location.endpoint(0, 5001).lng,
+             address: @address,
+             suburb: "Glenbrook",
+             state: "NSW",
+             postcode: "2773")
+    end
+
+    context "when there are no new comments near by" do
+      it { expect(alert.applications_with_new_comments).to eq [] }
+    end
+
+    context "when there is a new comment near by" do
+      it "returns the application it belongs to" do
+        create(:confirmed_comment, application: near_application)
+
+        expect(alert.applications_with_new_comments).to eq [near_application]
+      end
+    end
+
+    context "when there is an old comment near by" do
+      it "does not return the application it belongs to" do
+        create(:confirmed_comment,
+               confirmed_at: alert.cutoff_time - 1,
+               application: near_application)
+
+        expect(alert.applications_with_new_comments).to eq []
+      end
+    end
+
+    context "when there is an unconfirmed comment near by" do
+      it "does not return the application it belongs to" do
+        create(:unconfirmed_comment, application: near_application)
+
+        expect(alert.applications_with_new_comments).to eq []
+      end
+    end
+
+    context "when there is a hidden comment near by" do
+      it "does not return the application it belongs to" do
+        create(:confirmed_comment, hidden: true, application: near_application)
+
+        expect(alert.applications_with_new_comments).to eq []
+      end
+    end
+
+    context "when there is a new comment far away" do
+      it "does not return the application it belongs to" do
+        create(:confirmed_comment, application: far_away_application)
+
+        expect(alert.applications_with_new_comments).to eq []
+      end
     end
   end
 

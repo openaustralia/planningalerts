@@ -20,6 +20,7 @@ module EmailConfirmable
   module InstanceMethods
     def confirm!
       self.confirmed = true
+      self.confirmed_at = Time.current if self.has_attribute? :confirmed_at
       save!
       after_confirm if self.respond_to?(:after_confirm)
     end
