@@ -48,14 +48,7 @@ class Comment < ActiveRecord::Base
   end
 
   def send_via_writeit!
-    # TODO: Extract this
     # TODO: Put this on the background queue
-    writeitinstance = WriteItInstance.new
-    writeitinstance.base_url = ENV["WRITEIT_BASE_URL"]
-    writeitinstance.url = ENV["WRITEIT_URL"]
-    writeitinstance.username = ENV["WRITEIT_USERNAME"]
-    writeitinstance.api_key = ENV["WRITEIT_API_KEY"]
-
     message = Message.new
     message.subject = "Planning application at #{application.address}"
     # TODO: Add boiler plate
@@ -66,5 +59,15 @@ class Comment < ActiveRecord::Base
     message.recipients = [councillor.writeit_id]
     message.push_to_api
     update!(writeit_message_id: message.remote_id)
+  end
+
+  def writeitinstance
+    writeitinstance = WriteItInstance.new
+    writeitinstance.base_url = ENV["WRITEIT_BASE_URL"]
+    writeitinstance.url = ENV["WRITEIT_URL"]
+    writeitinstance.username = ENV["WRITEIT_USERNAME"]
+    writeitinstance.api_key = ENV["WRITEIT_API_KEY"]
+
+    writeitinstance
   end
 end
