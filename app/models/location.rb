@@ -43,8 +43,8 @@ class Location < SimpleDelegator
         "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
       elsif !in_correct_country?
         "Unfortunately we only cover Australia. It looks like that address is in another country."
-      elsif accuracy < 5
-        "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
+      elsif accuracy < 4
+        "Please enter a more detailed address like ‘Sowerby St, Goulburn, NSW’"
       end
     end
   end
