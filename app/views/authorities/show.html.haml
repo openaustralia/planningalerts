@@ -1,5 +1,8 @@
 - content_for :page_title, @authority.full_name
 %h3= yield :page_title
+- if @authority.primary_url
+  %p
+    <a href="#{@authority.primary_url}" target="_blank">#{@authority.primary_url}</a>
 
 - if @authority.population_2011
   %p
