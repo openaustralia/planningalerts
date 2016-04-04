@@ -85,7 +85,10 @@ class Comment < ActiveRecord::Base
       message = JSON.parse(api_response.body, symbolize_names: true)
 
       if answer = message[:answers].first
-        replies.create!(councillor: councillor, text: answer[:content], received_at: answer[:created])
+        replies.create!(councillor: councillor,
+                        text: answer[:content],
+                        received_at: answer[:created],
+                        writeit_id: answer[:id])
       end
     end
   end
