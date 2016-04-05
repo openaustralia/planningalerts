@@ -89,4 +89,8 @@ describe CommentNotifier do
       # It should not be enabled for the NSW theme
     end
   end
+
+  describe "#send_comment_via_writeit!" do
+    pending
+  end
 end
