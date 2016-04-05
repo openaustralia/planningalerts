@@ -73,6 +73,7 @@ class Comment < ActiveRecord::Base
     writeitinstance
   end
 
+  # TODO: Change this to add multiple replies
   def create_reply_from_writeit!
     if replies.present? || writeit_message_id.blank?
       false
