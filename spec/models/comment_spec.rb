@@ -240,4 +240,35 @@ describe Comment do
       it { expect(comment.recipient_display_name).to eq "local councillor Louise Councillor" }
     end
   end
+
+  describe "#create_replies_from_writeit!" do
+    around do |test|
+      writeit_env_variables = {
+        WRITEIT_BASE_URL: "http://writeit.ciudadanointeligente.org",
+        WRITEIT_URL: "/api/v1/instance/1927/",
+        WRITEIT_USERNAME: "henare",
+        WRITEIT_API_KEY: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+
+      with_modified_env(writeit_env_variables) do
+        test.run
+      end
+    end
+
+    let(:comment) do
+      create(:comment_to_councillor, writeit_message_id: 5652)
+    end
+
+    it "fetches answers from WriteIt, creates replies and returns them" do
+      VCR.use_cassette('planningalerts') do
+        comment.create_replies_from_writeit!
+      end
+
+      expect(comment.replies.count).to eql 1
+      expect(comment.replies.first.text).to eql "Test to Henare from Chris."
+      expect(comment.replies.first.writeit_id).to eql 629
+      expect(comment.replies.first.councillor).to eql comment.councillor
+      expect(comment.replies.first.received_at).to eql Time.utc(2016, 4, 4, 6, 58, 38)
+    end
+  end
 end
