@@ -29,6 +29,7 @@ class Comment < ActiveRecord::Base
   # Send the comment to the planning authority
   def after_confirm
     if to_councillor? && ENV["WRITEIT_BASE_URL"]
+      # TODO: Put this on the background queue
       CommentNotifier.send_comment_via_writeit!(self)
     elsif to_councillor?
       CommentNotifier.delay.notify_councillor("default", self)

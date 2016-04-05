@@ -25,11 +25,11 @@ class CommentNotifier < ActionMailer::Base
 
   # FIXME: This probably shouldn't be in the mailer
   def send_comment_via_writeit!(comment)
-    # TODO: Put this on the background queue
+    @comment = comment
+
     message = Message.new
     message.subject = "Planning application at #{comment.application.address}"
-    # TODO: Add boiler plate
-    message.content = comment.text
+    message.content = render_to_string("notify_councillor.text.erb")
     message.author_name = comment.name
     message.author_email = ENV["EMAIL_COUNCILLOR_REPLIES_TO"]
     message.writeitinstance = comment.writeitinstance
