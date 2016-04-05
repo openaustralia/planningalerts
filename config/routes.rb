@@ -85,7 +85,7 @@ PlanningalertsApp::Application.routes.draw do
       get :confirmed
     end
     collection do
-      post :reply_webhook
+      post :writeit_reply_webhook
     end
     resources :reports, only: [:new, :create]
   end

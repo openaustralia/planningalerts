@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  def reply_webhook
+  def writeit_reply_webhook
     if params[:message_id] && comment = Comment.find_by(writeit_message_id: params[:message_id][/\/api\/v1\/message\/(\d*)\//, 1])
       comment.create_replies_from_writeit!
       render text: "Processing inbound message.", status: 200
