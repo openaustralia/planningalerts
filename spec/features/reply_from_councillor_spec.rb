@@ -40,6 +40,41 @@ feature "Councillor replies to a message sent to them" do
     visit application_path application
     expect(page).to have_content "I'm glad you think it's a good idea. I do too."
   end
+
+  context "WriteIt is configured" do
+    given(:writeit_comment) do
+      create(:confirmed_comment, writeit_message_id: 5652,
+                                 application: application,
+                                 councillor: councillor)
+    end
+
+    around do |test|
+      writeit_env_variables = {
+        WRITEIT_BASE_URL: "http://writeit.ciudadanointeligente.org",
+        WRITEIT_URL: "/api/v1/instance/1927/",
+        WRITEIT_USERNAME: "henare",
+        WRITEIT_API_KEY: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+
+      with_modified_env(writeit_env_variables) do
+        test.run
+      end
+    end
+
+    scenario "it’s loaded from WriteIt by an admin" do
+      sign_in_as_admin
+      visit admin_comment_path(writeit_comment)
+      VCR.use_cassette('planningalerts', record: :new_episodes) do
+        click_button "Load replies from WriteIt"
+      end
+
+      expect(page).to have_content "Loaded 1 replies"
+
+      visit application_path(writeit_comment.application)
+
+      expect(page).to have_content "Test to Henare from Chris."
+    end
+  end
 end
 
 feature "Commenter is notified of the councillors reply" do
