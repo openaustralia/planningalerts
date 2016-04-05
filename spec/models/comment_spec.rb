@@ -284,5 +284,9 @@ describe Comment do
         expect(create(:comment).create_replies_from_writeit!).to be_false
       end
     end
+
+    it "returns an empty Array if there are no replies on WriteIt" do
+      pending
+    end
   end
 end
