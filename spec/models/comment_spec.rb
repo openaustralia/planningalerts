@@ -270,5 +270,11 @@ describe Comment do
       expect(comment.replies.first.councillor).to eql comment.councillor
       expect(comment.replies.first.received_at).to eql Time.utc(2016, 4, 4, 6, 58, 38)
     end
+
+    it "does nothing if the comment has no writeit_message_id" do
+      VCR.use_cassette('planningalerts') do
+        expect(create(:comment).create_replies_from_writeit!).to be_false
+      end
+    end
   end
 end
