@@ -29,7 +29,7 @@ class Comment < ActiveRecord::Base
   # Send the comment to the planning authority
   def after_confirm
     if to_councillor? && ENV["WRITEIT_BASE_URL"]
-      send_via_writeit!
+      CommentNotifier.send_comment_via_writeit!(self)
     elsif to_councillor?
       CommentNotifier.delay.notify_councillor("default", self)
     else
@@ -47,20 +47,6 @@ class Comment < ActiveRecord::Base
 
   def recipient_display_name
     to_councillor? ? councillor.prefixed_name : application.authority.full_name
-  end
-
-  def send_via_writeit!
-    # TODO: Put this on the background queue
-    message = Message.new
-    message.subject = "Planning application at #{application.address}"
-    # TODO: Add boiler plate
-    message.content = text
-    message.author_name = name
-    message.author_email = ENV["EMAIL_COUNCILLOR_REPLIES_TO"]
-    message.writeitinstance = writeitinstance
-    message.recipients = [councillor.writeit_id]
-    message.push_to_api
-    update!(writeit_message_id: message.remote_id)
   end
 
   def writeitinstance
