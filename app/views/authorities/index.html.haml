@@ -30,7 +30,7 @@
   %table.authorities
     - authorities.each do |authority|
       %tr
-        %td
+        %td.authority-name
           = link_to authority.full_name, authority_url(authority.short_name_encoded)
           - unless authority.covered?
             %br

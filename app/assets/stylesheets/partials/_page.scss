@@ -673,4 +673,8 @@ table.authorities {
   tr:nth-child(even) {
    background-color: #eee;
   }
+
+  td.authority-name {
+    width: 80%;
+  }
 }
