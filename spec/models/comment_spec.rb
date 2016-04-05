@@ -256,7 +256,7 @@ describe Comment do
     end
 
     let(:comment) do
-      create(:comment_to_councillor, writeit_message_id: 5652)
+      create(:comment_to_councillor, writeit_message_id: 1234)
     end
 
     it "fetches answers from WriteIt, creates replies and returns them" do
@@ -265,8 +265,8 @@ describe Comment do
       end
 
       expect(comment.replies.count).to eql 1
-      expect(comment.replies.first.text).to eql "Test to Henare from Chris."
-      expect(comment.replies.first.writeit_id).to eql 629
+      expect(comment.replies.first.text).to eql "I agree, thanks for your comment"
+      expect(comment.replies.first.writeit_id).to eql 567
       expect(comment.replies.first.councillor).to eql comment.councillor
       expect(comment.replies.first.received_at).to eql Time.utc(2016, 4, 4, 6, 58, 38)
     end

@@ -43,7 +43,7 @@ feature "Councillor replies to a message sent to them" do
 
   context "WriteIt is configured" do
     given(:writeit_comment) do
-      create(:confirmed_comment, writeit_message_id: 5652,
+      create(:confirmed_comment, writeit_message_id: 1234,
                                  application: application,
                                  councillor: councillor)
     end
@@ -72,7 +72,7 @@ feature "Councillor replies to a message sent to them" do
 
       visit application_path(writeit_comment.application)
 
-      expect(page).to have_content "Test to Henare from Chris."
+      expect(page).to have_content "I agree, thanks for your comment"
     end
   end
 end

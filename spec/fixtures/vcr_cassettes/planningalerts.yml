@@ -825,7 +825,7 @@ http_interactions:
   recorded_at: Sun, 22 Sep 2013 19:43:33 GMT
 - request:
     method: get
-    uri: http://writeit.ciudadanointeligente.org/api/v1/message/5652?api_key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&format=json&username=henare
+    uri: http://writeit.ciudadanointeligente.org/api/v1/message/1234?api_key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&format=json&username=henare
     body:
       encoding: US-ASCII
       string: ''
@@ -854,7 +854,7 @@ http_interactions:
       Vary:
       - Accept-Language, Host, Cookie
       Location:
-      - http://writeit.ciudadanointeligente.org/api/v1/message/5652/?format=json&username=henare&api_key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      - http://writeit.ciudadanointeligente.org/api/v1/message/1234/?format=json&username=henare&api_key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       Content-Language:
       - en
     body:
@@ -864,7 +864,7 @@ http_interactions:
   recorded_at: Tue, 05 Apr 2016 05:15:33 GMT
 - request:
     method: get
-    uri: http://writeit.ciudadanointeligente.org/api/v1/message/5652/?api_key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&format=json&username=henare
+    uri: http://writeit.ciudadanointeligente.org/api/v1/message/1234/?api_key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&format=json&username=henare
     body:
       encoding: US-ASCII
       string: ''
@@ -898,21 +898,21 @@ http_interactions:
       - no-cache
     body:
       encoding: UTF-8
-      string: '{"answers": [{"content": "Test to Henare from Chris.", "content_html":
-        "", "created": "2016-04-04T06:58:38", "id": 629, "message_id": 5652, "person":
+      string: '{"answers": [{"content": "I agree, thanks for your comment", "content_html":
+        "", "created": "2016-04-04T06:58:38", "id": 567, "message_id": 1234, "person":
         {"id": 43405, "image": "https://www.marrickville.nsw.gov.au/Global/marr/marrwr/_assets/main/lib65081/clr%20woods%20web.jpg",
         "name": "Chris Woods", "popit_id": "person/marrickville_council/chris_woods",
         "popit_url": "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/nsw_local_councillor_popolo.json/person/marrickville_council/chris_woods",
         "resource_uri": "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/nsw_local_councillor_popolo.json/person/marrickville_council/chris_woods",
         "summary": ""}, "resource_uri": ""}], "author_email": "replies@planningalerts.org.au",
         "author_name": "Henare Degan", "confirmated": true, "content": "Hey, this
-        is just a test.", "created": "2016-04-04T06:53:28", "id": 5652, "moderated":
+        is just a test.", "created": "2016-04-04T06:53:28", "id": 1234, "moderated":
         null, "people": [{"id": 43405, "image": "https://www.marrickville.nsw.gov.au/Global/marr/marrwr/_assets/main/lib65081/clr%20woods%20web.jpg",
         "name": "Chris Woods", "popit_id": "person/marrickville_council/chris_woods",
         "popit_url": "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/nsw_local_councillor_popolo.json/person/marrickville_council/chris_woods",
         "resource_uri": "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/nsw_local_councillor_popolo.json/person/marrickville_council/chris_woods",
         "summary": ""}], "persons": ["https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/nsw_local_councillor_popolo.json/person/marrickville_council/chris_woods"],
-        "public": true, "resource_uri": "/api/v1/message/5652/", "slug": "planning-application-at-33-westbourne-street-stanmore-nsw-2048",
+        "public": true, "resource_uri": "/api/v1/message/1234/", "slug": "planning-application-at-33-westbourne-street-stanmore-nsw-2048",
         "subject": "Planning application at 33 Westbourne Street Stanmore NSW 2048",
         "updated": "2016-04-04T06:53:28", "writeitinstance": "/api/v1/instance/1927/"}'
     http_version: 
