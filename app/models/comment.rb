@@ -62,10 +62,12 @@ class Comment < ActiveRecord::Base
   def create_replies_from_writeit!
     if writeit_message_id.present?
       # TODO: This should be done in the writeit-rails gem
-      api_response = RestClient.get(ENV["WRITEIT_BASE_URL"] + "/api/v1/message/" + writeit_message_id.to_s,
-                                    {params: {format: "json",
-                                              username: writeitinstance.username,
-                                              api_key: writeitinstance.api_key}})
+      api_response = RestClient.get(
+        ENV["WRITEIT_BASE_URL"] + "/api/v1/message/" + writeit_message_id.to_s,
+        params: { format: "json",
+                  username: writeitinstance.username,
+                  api_key: writeitinstance.api_key }
+      )
       message = JSON.parse(api_response.body, symbolize_names: true)
       answers = message[:answers]
 
