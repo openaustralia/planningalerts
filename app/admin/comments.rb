@@ -37,17 +37,19 @@ ActiveAdmin.register Comment do
     actions
   end
 
-  action_item :load_reply, only: :show do
+  action_item :load_replies, only: :show do
     if resource.to_councillor? && resource.writeit_message_id
-      button_to("Check WriteIt for replies", load_reply_admin_comment_path)
+      button_to("Check WriteIt for replies", load_replies_admin_comment_path)
     end
   end
 
-  member_action :load_reply, method: :post do
-    if resource.create_reply_from_writeit!
-      redirect_to({action: :show}, notice: "Reply loaded")
+  member_action :load_replies, method: :post do
+    replies = resource.create_replies_from_writeit!
+    if replies.present?
+      # TODO: Fix pluralisation: "Loaded 1 replies"
+      redirect_to({action: :show}, notice: "Loaded #{replies.count} replies")
     else
-      redirect_to({action: :show}, notice: "No reply loaded")
+      redirect_to({action: :show}, notice: "No replies loaded")
     end
   end
 

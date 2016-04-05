@@ -73,9 +73,8 @@ class Comment < ActiveRecord::Base
     writeitinstance
   end
 
-  # TODO: Change this to add multiple replies
-  def create_reply_from_writeit!
-    if replies.present? || writeit_message_id.blank?
+  def create_replies_from_writeit!
+    if writeit_message_id.blank?
       false
     else
       # TODO: This should be done in the writeit-rails gem
@@ -84,13 +83,16 @@ class Comment < ActiveRecord::Base
                                               username: writeitinstance.username,
                                               api_key: writeitinstance.api_key}})
       message = JSON.parse(api_response.body, symbolize_names: true)
+      answers = message[:answers]
 
-      if answer = message[:answers].first
-        replies.create!(councillor: councillor,
-                        text: answer[:content],
-                        received_at: answer[:created],
-                        writeit_id: answer[:id])
-      end
+      answers.collect do |answer|
+        unless replies.find_by(writeit_id: answer[:id])
+          replies.create!(councillor: councillor,
+                          text: answer[:content],
+                          received_at: answer[:created],
+                          writeit_id: answer[:id])
+        end
+      end.compact
     end
   end
 end
