@@ -80,10 +80,6 @@ describe Authority do
         it { expect(authority.write_to_councillors_enabled?).to eq true }
       end
     end
-
-    def with_modified_env(options, &block)
-      ClimateControl.modify(options, &block)
-    end
   end
 
   describe "#comments_per_week" do

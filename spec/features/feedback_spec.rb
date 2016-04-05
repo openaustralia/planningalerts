@@ -194,8 +194,4 @@ feature "Give feedback to Council" do
       page.should_not have_content("Now check your email")
     end
   end
-
-  def with_modified_env(options, &block)
-    ClimateControl.modify(options, &block)
-  end
 end
