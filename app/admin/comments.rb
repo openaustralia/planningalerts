@@ -39,7 +39,7 @@ ActiveAdmin.register Comment do
 
   action_item :load_replies, only: :show do
     if resource.to_councillor? && resource.writeit_message_id
-      button_to("Check WriteIt for replies", load_replies_admin_comment_path)
+      button_to("Load replies from WriteIt", load_replies_admin_comment_path)
     end
   end
 
