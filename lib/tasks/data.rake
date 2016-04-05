@@ -16,7 +16,7 @@ namespace :data do
     known_exceptions[name] || name.split(" (").first.downcase.gsub(" ", "_")
   end
 
-  path = File.dirname(__FILE__) + "/../../tmp/lga_2015_aust.geojson"
+  path = Rails.root.join("tmp/lga_2015_aust.geojson")
 
   desc "Fetch ABS LGA data"
   task :fetch_lgas do
