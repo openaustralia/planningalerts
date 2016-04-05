@@ -1,6 +1,7 @@
+require 'open-uri'
+require 'json'
+
 namespace :data do
-  require 'open-uri'
-  require 'json'
 
   def generate_shortname(name)
     known_exceptions = {
