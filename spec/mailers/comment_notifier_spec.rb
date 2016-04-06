@@ -91,6 +91,30 @@ describe CommentNotifier do
   end
 
   describe "#send_comment_via_writeit!" do
-    pending
+    around do |test|
+      writeit_env_variables = {
+        WRITEIT_BASE_URL: "http://writeit.ciudadanointeligente.org",
+        WRITEIT_URL: "/api/v1/instance/1927/",
+        WRITEIT_USERNAME: "henare",
+        WRITEIT_API_KEY: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      }
+
+      with_modified_env(writeit_env_variables) do
+        test.run
+      end
+    end
+
+    let(:comment) do
+      councillor = create(:councillor, popolo_id: "marrickville_council/chris_woods")
+      create(:comment, councillor: councillor)
+    end
+
+    it "sends the comment to the WriteIt API, and stores the created WriteIt message’s id on the comment" do
+      VCR.use_cassette('planningalerts') do
+        CommentNotifier.send_comment_via_writeit!(comment)
+      end
+
+      expect(comment.writeit_message_id).to eq 5665
+    end
   end
 end
