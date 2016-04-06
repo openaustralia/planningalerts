@@ -22,4 +22,19 @@ class CommentNotifier < ActionMailer::Base
       reply_to: "#{comment.name} <#{from_address}>",
       to: comment.councillor.email, subject: "Planning application at #{comment.application.address}")
   end
+
+  # FIXME: This probably shouldn't be in the mailer
+  def send_comment_via_writeit!(comment)
+    @comment = comment
+
+    message = Message.new
+    message.subject = "Planning application at #{comment.application.address}"
+    message.content = render_to_string("notify_councillor.text.erb")
+    message.author_name = comment.name
+    message.author_email = ENV["EMAIL_COUNCILLOR_REPLIES_TO"]
+    message.writeitinstance = comment.writeitinstance
+    message.recipients = [comment.councillor.writeit_id]
+    message.push_to_api
+    comment.update!(writeit_message_id: message.remote_id)
+  end
 end

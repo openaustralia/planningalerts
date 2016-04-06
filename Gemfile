@@ -57,6 +57,8 @@ gem 'stripe'
 gem 'dotenv-rails'
 gem 'climate_control'
 gem 'everypolitician-popolo', git: 'https://github.com/everypolitician/everypolitician-popolo.git', branch: 'master'
+# Using master until an updated version of the Gem is released https://github.com/ciudadanointeligente/writeit-rails/issues/4
+gem 'writeit-rails', git: 'https://github.com/ciudadanointeligente/writeit-rails.git', branch: 'master'
 
 group :test do
   gem 'capybara'

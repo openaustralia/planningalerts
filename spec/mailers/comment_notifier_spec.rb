@@ -89,4 +89,25 @@ describe CommentNotifier do
       # It should not be enabled for the NSW theme
     end
   end
+
+  describe "#send_comment_via_writeit!" do
+    around do |test|
+      with_modified_env(writeit_config_variables) do
+        test.run
+      end
+    end
+
+    let(:comment) do
+      councillor = create(:councillor, popolo_id: "marrickville_council/chris_woods")
+      create(:comment, councillor: councillor)
+    end
+
+    it "sends the comment to the WriteIt API, and stores the created WriteIt message’s id on the comment" do
+      VCR.use_cassette('planningalerts') do
+        CommentNotifier.send_comment_via_writeit!(comment)
+      end
+
+      expect(comment.writeit_message_id).to eq 5665
+    end
+  end
 end

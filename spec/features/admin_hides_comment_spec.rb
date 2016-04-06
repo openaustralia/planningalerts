@@ -40,8 +40,4 @@ feature "Admin hides comment" do
       expect(page).to have_content("Hidden true")
     end
   end
-
-  def with_modified_env(options, &block)
-    ClimateControl.modify(options, &block)
-  end
 end
