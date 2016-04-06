@@ -243,14 +243,7 @@ describe Comment do
 
   describe "#create_replies_from_writeit!" do
     around do |test|
-      writeit_env_variables = {
-        WRITEIT_BASE_URL: "http://writeit.ciudadanointeligente.org",
-        WRITEIT_URL: "/api/v1/instance/1927/",
-        WRITEIT_USERNAME: "henare",
-        WRITEIT_API_KEY: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-      }
-
-      with_modified_env(writeit_env_variables) do
+      with_modified_env(writeit_config_variables) do
         test.run
       end
     end
