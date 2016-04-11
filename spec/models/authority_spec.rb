@@ -3,11 +3,14 @@ require 'spec_helper'
 describe Authority do
   describe "validations" do
     it 'should ensure a unique short_name' do
-      @a1 = create(:authority, short_name: "Existing")
-      @a2 = build(:authority, short_name: "Existing")
+      existing_authority = create(:authority, short_name: "Existing")
+      new_authority = build(:authority, short_name: "Existing")
 
-      expect(@a2.valid?).to eq false
-      expect(@a2.errors.messages[:short_name]).to eq(["has already been taken"])
+
+      expect(existing_authority.valid?).to eq true
+
+      expect(new_authority.valid?).to eq false
+      expect(new_authority.errors.messages[:short_name]).to eq(["has already been taken"])
     end
   end
 
