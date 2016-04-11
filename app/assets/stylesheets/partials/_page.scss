@@ -29,14 +29,19 @@ body {
       text-decoration: none;
       text-shadow: -1px -1px 2px $dark;
 
-      &:link, &:visited {
+      &:link,
+      &:visited {
         color: $warm-highlight;
       }
-      &:active, &:hover, &:focus {
+
+      &:active,
+      &:hover,
+      &:focus {
         color: $light;
       }
     }
   }
+
   h2 {
     color: $lightest;
     font-weight: 300;
@@ -44,6 +49,7 @@ body {
     text-shadow: -1px -1px 1px $dark;
   }
 }
+
 // Don't show stats by default
 #stats {
   display: none;
@@ -59,27 +65,35 @@ body {
       padding: 0;
       @include inline-block;
     }
+
     li.selected a {
       color: $dark;
       background-color: $content-background;
     }
+
     a.donate-link-header {
       color: $warm-highlight;
     }
   }
+
   a {
     padding: .5em;
     display: block;
     text-decoration: none;
 
-    &:link, &:visited {
+    &:link,
+    &:visited {
       color: #fff;
     }
-    &:active, &:hover, &:focus {
+
+    &:active,
+    &:hover,
+    &:focus {
       color: $dark;
       background-color: $content-background;
     }
   }
+
   abbr {
     border: none;
   }
@@ -108,7 +122,9 @@ body {
   padding: 2em 0 1.5em 0;
 }
 
-.stats, .tweets, #footer {
+.stats,
+.tweets,
+#footer {
   padding-top: 1em;
   padding-bottom: 1em;
 }
@@ -175,25 +191,35 @@ body {
   color: #ffffff;
 
   a {
-    &:link, &:hover, &:visited {
+    &:link,
+    &:hover,
+    &:visited {
       color: $light;
     }
-    &:active, &:focus {
+
+    &:active,
+    &:focus {
       color: $dark;
     }
   }
-  h4, h5 {
-    &, a:link {
+
+  h4,
+  h5 {
+    &,
+    a:link {
       color: #ffffff;
     }
   }
+
   h4 {
     margin-top: 0;
   }
+
   h5 {
     font-weight: normal;
     margin-bottom: 0;
   }
+
   ul {
     @include no-bullets;
     padding-left: 0;
@@ -203,6 +229,7 @@ body {
       li {
         margin-bottom: 1.5em;
       }
+
       a {
         display: block;
       }
@@ -220,7 +247,12 @@ body {
   @extend h3;
 }
 
-p a, li a, span a, dd a, dt a, div a {
+p a,
+li a,
+span a,
+dd a,
+dt a,
+div a {
   @include hover-link;
 }
 
@@ -239,10 +271,12 @@ hr {
     font-weight: normal;
     font-size: 11px;
   }
+
   .button-action {
     @include button(simple, $warm-highlight);
     font-weight: normal;
   }
+
   .button-active {
     $border-active:       adjust-color($lightest-cool-highlight, $saturation: 9%, $lightness: -14%);
     $inset-shadow-active: adjust-color($lightest-cool-highlight, $saturation: 7%, $lightness: -17%);
@@ -250,12 +284,16 @@ hr {
     border: 1px solid $border-active;
     box-shadow: inset 0 0 8px 4px $inset-shadow-active, inset 0 0 8px 4px $inset-shadow-active;
   }
+
   .button-large {
     font-size: 19px;
   }
-  a.button-action, input.button-action {
+
+  a.button-action,
+  input.button-action {
     color: #fff;
   }
+
   dd {
     margin-left: 0;
   }
@@ -276,7 +314,8 @@ hr {
   font-size: 0.8em;
 }
 
-#map_div, #pano {
+#map_div,
+#pano {
   margin-bottom: 1em;
 }
 
@@ -291,7 +330,9 @@ body .container .attention {
   }
 }
 
-#privacy, #spnBeta, .explanation {
+#privacy,
+#spnBeta,
+.explanation {
   @include quiet;
   font-size: 0.8em;
 
@@ -315,6 +356,7 @@ body .container .attention {
       margin-bottom: .75em;
     }
   }
+
   b {
     margin-right: .5em;
   }
@@ -337,11 +379,13 @@ body .container .attention {
       color: #344355;
     }
   }
+
   .description {
     color: $font-color;
     margin-bottom: 0;
   }
 }
+
 .appinfo {
   font-size: 0.8em;
   color: $cool-highlight;
@@ -353,7 +397,8 @@ body .container .attention {
 }
 
 .application {
-  a:hover, a:focus {
+  a:hover,
+  a:focus {
     text-decoration: none;
 
     .address {
@@ -369,9 +414,11 @@ div.apiitem {
   h5 {
     margin-bottom: 1em;
   }
+
   p {
     margin-bottom: 1em;
   }
+
   code {
     @include boxed-content;
     word-wrap: break-word;
@@ -382,6 +429,7 @@ div.apiitem {
       margin: 0;
     }
   }
+
   code.long-lines {
     font-size: .9em;
   }
@@ -413,22 +461,28 @@ ul#subscribe {
     vertical-align: middle;
     margin-right: 0.5em;
   }
+
   li {
     margin-bottom: 0.5em;
   }
 }
 
 body {
-  h3, h4, h5 {
+  h3,
+  h4,
+  h5 {
     color: $cool-highlight;
   }
+
   h4 {
     margin-top: 1em;
   }
 }
 
 #application {
-  p.dates, p.more, p.source {
+  p.dates,
+  p.more,
+  p.source {
     @include quiet;
     font-size: 0.8em;
   }
@@ -438,6 +492,7 @@ body {
   .no_alerted {
     text-align: center;
   }
+
   .button {
     display: block; // Fill the column
     text-align: center;
@@ -478,31 +533,40 @@ form.address-search {
   margin-bottom: 1em;
 }
 
-.tweets, .stats {
+.tweets,
+.stats {
   a {
-    &:link, &:visited {
+    &:link,
+    &:visited {
         color: $darkest;
     }
-    &:active, &:hover, &:focus {
+
+    &:active,
+    &:hover,
+    &:focus {
       text-decoration: none;
 
       .body {
         color: $darkest;
       }
     }
+
     .number {
       color: $warm-highlight;
     }
   }
+
   h4 {
     font-weight: 500;
     margin: 0;
   }
+
   ul {
     @include no-bullets;
     padding-left: 0;
     margin: 0;
   }
+
   li {
     border-bottom: 1px solid $lightest-cool-highlight;
 
@@ -510,14 +574,17 @@ form.address-search {
       display: block;
       padding: .75em 0;
     }
+
     &:last-child {
       border: none;
     }
   }
+
   .date {
     font-size: 0.8em;
     color: $cool-highlight;
   }
+
   .cta {
     display: block;
     text-align: right;
@@ -556,12 +623,15 @@ form.address-search {
 #social {
   text-align: center;
 
-  .fb-like, .twitter-share-button {
+  .fb-like,
+  .twitter-share-button {
     display: block;
   }
+
   .fb-like {
     margin-top: 1em;
   }
+
   .twitter-share-button {
     margin: 2em auto 0 auto;
   }
@@ -577,6 +647,7 @@ form.address-search {
   #privacy {
     padding-left: 0;
   }
+
   .formtastic {
     margin-top: 0;
     margin-bottom: 0;
@@ -586,19 +657,24 @@ form.address-search {
     .inline-hints {
       margin-left: 0;
     }
+
     .actions {
       padding-left: 0;
     }
+
     li label {
       display: none;
     }
+
     input {
       width: 100%;
     }
   }
+
   h3 {
     margin-bottom: 0.5em;
   }
+
   p {
     margin-bottom: 0;
   }
@@ -611,27 +687,34 @@ table.scraper_fields {
   th {
     background: #e8e8e8;
   }
-  td, th {
+
+  td,
+  th {
     border: 1px solid #ddd;
     padding: 0.5em;
   }
+
   td {
     background: #f8f8f8;
+    vertical-align: top;
 
     p:last-child {
       margin-bottom: 0;
     }
-    vertical-align: top;
   }
+
   td.field {
     color: $dark;
   }
+
   .field {
     width: 15%;
   }
+
   .error {
     width: 15%
   }
+
   .example {
     width: 30%;
   }
@@ -649,6 +732,7 @@ td pre {
   a {
     text-decoration: none;
   }
+
   .number {
     display: block;
     font-weight: bold;
