@@ -6,8 +6,8 @@ describe Authority do
       @a1 = create(:authority, short_name: "Existing")
       @a2 = build(:authority, short_name: "Existing")
 
-      @a2.valid?.should == false
-      @a2.errors.messages[:short_name].should == ["has already been taken"]
+      expect(@a2.valid?).to eq false
+      expect(@a2.errors.messages[:short_name]).to eq(["has already been taken"])
     end
   end
 
@@ -22,11 +22,11 @@ describe Authority do
     end
 
     it "should report that a scraper is broken if it hasn't received a DA in over two weeks" do
-      @a1.broken?.should == true
+      expect(@a1.broken?).to eq true
     end
 
     it "should not report that a scraper is broken if it has received a DA in less than two weeks" do
-      @a2.broken?.should == false
+      expect(@a2.broken?).to eq false
     end
   end
 
@@ -37,16 +37,16 @@ describe Authority do
     end
 
     it "should be constructed by replacing space by underscores and making it all lowercase" do
-      @a1.short_name_encoded.should == "blue_mountains"
+      expect(@a1.short_name_encoded).to eq "blue_mountains"
     end
 
     it "should remove any non-word characters (except for underscore)" do
-      @a2.short_name_encoded.should == "blue_mountains_new_one"
+      expect(@a2.short_name_encoded).to eq "blue_mountains_new_one"
     end
 
     it "should find a authority by the encoded name" do
-      Authority.find_by_short_name_encoded("blue_mountains").should == @a1
-      Authority.find_by_short_name_encoded("blue_mountains_new_one").should == @a2
+      expect(Authority.find_by_short_name_encoded("blue_mountains")).to eq @a1
+      expect(Authority.find_by_short_name_encoded("blue_mountains_new_one")).to eq @a2
     end
   end
 
