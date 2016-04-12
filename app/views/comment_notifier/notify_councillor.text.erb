@@ -11,11 +11,13 @@ They’re writing to you about a local planning application:
 
 Address: <%= @comment.application.address %>
 Description: <%= @comment.application.description %>
-Link: <%= application_url(@comment.application,
-                          protocol: "https",
-                          utm_source: "councillor-notifications",
-                          utm_medium: "email",
-                          utm_campaign: "view-application") %>
+
+View this application and see what other people have to say at:
+<%= application_url(@comment.application,
+                    protocol: "https",
+                    utm_source: "councillor-notifications",
+                    utm_medium: "email",
+                    utm_campaign: "view-application") %>
 
 This message was posted publicly on PlanningAlerts. You can publicly
 respond to this message by simply replying to this email.
