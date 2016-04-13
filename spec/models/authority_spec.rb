@@ -6,7 +6,6 @@ describe Authority do
       existing_authority = create(:authority, short_name: "Existing")
       new_authority = build(:authority, short_name: "Existing")
 
-
       expect(existing_authority.valid?).to eq true
 
       expect(new_authority.valid?).to eq false
