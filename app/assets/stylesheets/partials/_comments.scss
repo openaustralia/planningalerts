@@ -144,6 +144,10 @@ ol#comments {
   font-style: normal;
   border: 0;
   padding: 0;
+
+  a {
+    word-wrap: break-word;
+  }
 }
 
 .comment-location {
