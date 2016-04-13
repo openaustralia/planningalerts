@@ -4,15 +4,15 @@
   border-color: $light_gray;
   background-color: $lightest_gray;
 
-  a {
-    font-weight: bold;
-  }
-
   p {
     margin-top: 0;
     margin-bottom: $base-email-layout-unit;
     margin-bottom: 1em;
   }
+}
+
+.action-link {
+  font-weight: bold;
 }
 
 .comment-location {
