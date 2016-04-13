@@ -16,6 +16,8 @@ describe CommentsHelper do
       expect(helper.comment_as_html("watch out <script>alert('danger');</script>"))
       .to eql "<p>watch out </p>"
     end
+
+    it { expect(helper.comment_as_html("watch out <script>alert('danger');</script>")).to be_html_safe }
   end
 
   describe "#comment_path" do
