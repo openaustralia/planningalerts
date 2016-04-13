@@ -55,6 +55,12 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 ### Configuring PlanningAlerts so people can write to their local councillors
 
+Three conditions must be met for the option to write to councillors to be available for an application:
+
+1. the global feature flag must be toggled on;
+2. the feature must be enabled on the authority that the application belongs to; and,
+3. there must be councillors associated with the authority for people to write to.
+
 ## Deployment
 
 The code is deployed using Capistrano. To deploy to production run:
