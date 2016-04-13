@@ -61,6 +61,18 @@ Three conditions must be met for the option to write to councillors to be availa
 2. the feature must be enabled on the authority that the application belongs to; and,
 3. there must be councillors associated with the authority for people to write to.
 
+#### Global feature flag
+
+You can toggle the availability of the writing to councillors feature on or off for the entire site with the environment variable `COUNCILLORS_ENABLED`.
+The feature is globally enabled when the value of `ENV["COUNCILLORS_ENABLED"]` is `"true"`.
+This flag is useful if you need to turn the feature _off_ globally.
+
+We set this in the [`.env`](https://github.com/openaustralia/planningalerts/blob/master/.env) file in production.  You can control setting in development by creating your own `.env.local` file which includes:
+
+```
+COUNCILLORS_ENABLED=true
+```
+
 ## Deployment
 
 The code is deployed using Capistrano. To deploy to production run:
