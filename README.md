@@ -73,6 +73,16 @@ We set this in the [`.env`](https://github.com/openaustralia/planningalerts/blob
 COUNCILLORS_ENABLED=true
 ```
 
+#### Enable the feature for an authority
+
+You can toggle the ‘writing to councillors’ options on or off
+for all applications under an authority. By default it is off.
+
+Control this setting at the admin page for the authority (e.g. `/admin/authorities/1/edit`).
+Check or uncheck the "Write to councillors enabled" option.
+
+You can see which authorities have the feature enabled at the Authorities admin page (`/admin/authorities`).
+
 ## Deployment
 
 The code is deployed using Capistrano. To deploy to production run:
