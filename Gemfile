@@ -27,6 +27,7 @@ gem "nokogiri"
 gem "foreigner"
 gem 'httparty'
 gem "will_paginate"
+gem "rails_autolink"
 # For minifying javascript and css
 #gem 'smurf'
 gem 'thinking-sphinx'
