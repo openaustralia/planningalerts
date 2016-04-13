@@ -83,6 +83,15 @@ Check or uncheck the "Write to councillors enabled" option.
 
 You can see which authorities have the feature enabled at the Authorities admin page (`/admin/authorities`).
 
+#### Adding councillors for an authority
+
+You can load in councillors for an authority at its admin page by clicking the “Load Councillors” button.
+Councillors for the authority will be loaded in if there is open data for them at [github.com/openaustralia/australian_local_councillors_popolo](https://github.com/openaustralia/australian_local_councillors_popolo).
+If you already have them in your database you can update them this way.
+
+If there isn’t any data for councillors at this authority, or the data is incomplete,
+follow the [“Updates” instructions at github.com/openaustralia/australian_local_councillors_popolo](https://github.com/openaustralia/australian_local_councillors_popolo#updates).
+
 ## Deployment
 
 The code is deployed using Capistrano. To deploy to production run:
