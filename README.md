@@ -53,6 +53,8 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
  * Check the email in your browser: http://localhost:1080/
  * To resend alerts during testing, just set the `last_sent` attribute of your alert to *nil*
 
+### Configuring PlanningAlerts so people can write to their local councillors
+
 ## Deployment
 
 The code is deployed using Capistrano. To deploy to production run:
