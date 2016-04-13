@@ -7,6 +7,11 @@ describe CommentsHelper do
       .to eql "<p>This is a paragraph</p>\n\n<p>This is another paragraph</p>"
     end
 
+    it "adds links to urls in text" do
+      expect(helper.comment_as_html("I love http://planningalerts.org.au"))
+      .to eql %(<p>I love <a href="http://planningalerts.org.au" rel="nofollow">http://planningalerts.org.au</a></p>)
+    end
+
     it "removes scary scripts" do
       expect(helper.comment_as_html("watch out <script>alert('danger');</script>"))
       .to eql "<p>watch out </p>"
