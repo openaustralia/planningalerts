@@ -108,7 +108,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
 
       context "HTML emails" do
         before :each do
-          @html_body = @email.html_part.body
+          @html_body = @email.html_part.body.to_s
         end
 
         it 'should contain links to the applications' do
@@ -145,7 +145,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
 
       context "HTML email" do
         before :each do
-          @html_body = @email.html_part.body
+          @html_body = @email.html_part.body.to_s
         end
 
         it 'should contain links to the applications' do
@@ -154,7 +154,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
         end
 
         it "should have a specific body" do
-          @email.html_part.body.should == Rails.root.join("spec/mailers/regression/alert_notifier/email4.html").read
+          @email.html_part.body.to_s.should == Rails.root.join("spec/mailers/regression/alert_notifier/email4.html").read
         end
       end
     end
