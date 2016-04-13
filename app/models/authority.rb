@@ -22,7 +22,7 @@ class Authority < ActiveRecord::Base
   has_many :councillors
   has_many :comments, through: :applications
 
-  validates :short_name, uniqueness: true, presence: true
+  validates :short_name, presence: true, uniqueness: { case_sensitive: false }
 
   validates :state, inclusion: {
     in: %w(NSW VIC QLD SA WA TAS NT ACT),

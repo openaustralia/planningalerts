@@ -11,6 +11,14 @@ describe Authority do
       expect(new_authority.valid?).to eq false
       expect(new_authority.errors.messages[:short_name]).to eq(["has already been taken"])
     end
+
+    it "unique short name should be case insensitive" do
+      existing_authority = create(:authority, short_name: "Existing")
+      new_authority = build(:authority, short_name: "existing")
+
+      expect(new_authority.valid?).to eq false
+      expect(new_authority.errors.messages[:short_name]).to eq(["has already been taken"])
+    end
   end
 
   describe "detecting authorities with old applications" do
