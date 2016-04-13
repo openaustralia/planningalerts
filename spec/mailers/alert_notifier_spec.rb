@@ -154,7 +154,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
         end
 
         it "should have a specific body" do
-          @email.html_part.body.to_s.should == Rails.root.join("spec/mailers/regression/alert_notifier/email4.html").read
+          @html_body.should == Rails.root.join("spec/mailers/regression/alert_notifier/email4.html").read
         end
       end
     end
