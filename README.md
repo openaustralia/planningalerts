@@ -62,6 +62,9 @@ Four conditions must be met for the option to write to councillors to be availab
 2. the feature must be enabled on the authority that the application belongs to; and,
 3. there must be councillors associated with the authority for people to write to.
 
+You also need to configure the app to accept replies from councillors.
+[Find instructions below](#accepting-councillor-replies).
+
 #### Global feature flag
 
 You can toggle the availability of the writing to councillors feature on or off for the entire site with the environment variable `COUNCILLORS_ENABLED`.
@@ -104,6 +107,19 @@ If you already have them in your database you can update them this way.
 
 If there isn’t any data for councillors at this authority, or the data is incomplete,
 follow the [“Updates” instructions at github.com/openaustralia/australian_local_councillors_popolo](https://github.com/openaustralia/australian_local_councillors_popolo#updates).
+
+#### Accepting councillor replies
+
+Not only can people write to their councillors using PlanningAlerts, but councillors can also reply!
+
+When someone writes to their local councillor, the councillor receives an email with the message.
+To reply, they simply reply to the email.
+The reply is then posted below the original comment on PlanningAlerts, and the commenter is notified.
+Replies are featured in alert emails like normal comments.
+
+You can choose between two different methods for loading replies into PlanningAlerts:
+The _Wizard of Oz_ method, which requires administrators to watch an email inbox and manually enter replies;
+or, by integrating with _WriteIt_, which will accept replies and have them automatically posted on PlanningAlerts.
 
 ## Deployment
 
