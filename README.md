@@ -55,9 +55,10 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 ### Configuring PlanningAlerts so people can write to their local councillors
 
-Three conditions must be met for the option to write to councillors to be available for an application:
+Four conditions must be met for the option to write to councillors to be available for an application:
 
 1. the global feature flag must be toggled on;
+1. a reply address must be configured for councillors to email their responses to;
 2. the feature must be enabled on the authority that the application belongs to; and,
 3. there must be councillors associated with the authority for people to write to.
 
@@ -71,6 +72,18 @@ We set this in the [`.env`](https://github.com/openaustralia/planningalerts/blob
 
 ```
 COUNCILLORS_ENABLED=true
+```
+
+#### Set the reply address for accepting responses
+
+You need to specify an email address for councillors to send their replies to.
+If you’re using the [‘Wizard of Oz’ setup](#default-wizard-of-oz-method), the councillor replies will come in to this address.
+If you’re using the [WriteIt integration](#intergrating-with-writeit), then the WriteIt notification emails for the thread will be send to there.
+
+Set this address using the `EMAIL_COUNCILLOR_REPLIES_TO` environment variable in [`.env`](https://github.com/openaustralia/planningalerts/blob/master/.env) and `.env.local` in your local development:
+
+```
+EMAIL_COUNCILLOR_REPLIES_TO=lovely@email.org.au
 ```
 
 #### Enable the feature for an authority
