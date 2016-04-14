@@ -141,6 +141,18 @@ On the ‘Add reply’ page fill in the form with the details of the reply:
 the `comment_id` of the comment it is responding to, the name of the councillor, the full text of the email received, and the time it was received (in [UTC time](http://time.is/UTC)).
 Hit the “Create reply” button.  The original commenter will be notified of the reply via email and the reply will be posted with the comment on the application page.
 
+##### Integrating with WriteIt
+
+For automatic posting of councillor replies to PlanningAlerts,
+you configure PlanningAlerts to send and receive messages via [WriteIt](http://writeit.ciudadanointeligente.org/en/).
+
+<!-- TODO:
+* ENV VARS
+* WRITE IT INSTANCE
+* HOW DOES THE COUNCILLOR DATA WORK?
+* WHAT HAPPENS WHEN YOU GET REPLIES?
+-->
+
 ## Deployment
 
 The code is deployed using Capistrano. To deploy to production run:
