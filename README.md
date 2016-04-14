@@ -55,6 +55,8 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 ### Configuring PlanningAlerts so people can write to their local councillors
 
+<!-- TODO: EXPLAIN WHY AND WHAT HERE -->
+
 Four conditions must be met for the option to write to councillors to be available for an application:
 
 1. the global feature flag must be toggled on;
@@ -122,6 +124,8 @@ The _Wizard of Oz_ method, which requires administrators to watch an email inbox
 or, by integrating with _WriteIt_, which will accept replies and have them automatically posted on PlanningAlerts.
 
 ##### Default Wizard of Oz method
+
+<!-- TODO: Why is this called this, why would you use this setup? -->
 
 By default, the reply address on the email sent to councillors will be the address you set with `ENV["EMAIL_COUNCILLOR_REPLIES_TO"]`.
 You can follow the [instructions above for setting the reply address](#set-the-reply-address-for-accepting-responses) if you haven’t yet.
