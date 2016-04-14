@@ -150,6 +150,7 @@ you configure PlanningAlerts to send and receive messages via [WriteIt](http://w
 * ENV VARS
 * WRITE IT INSTANCE
 * HOW DOES THE COUNCILLOR DATA WORK?
+* SENDING MESSAGES VIA WRITEIT
 * THE WEBHOOK
 * WHAT HAPPENS WHEN YOU GET REPLIES?
 -->
