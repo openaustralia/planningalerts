@@ -121,6 +121,22 @@ You can choose between two different methods for loading replies into PlanningAl
 The _Wizard of Oz_ method, which requires administrators to watch an email inbox and manually enter replies;
 or, by integrating with _WriteIt_, which will accept replies and have them automatically posted on PlanningAlerts.
 
+##### Default Wizard of Oz method
+
+By default, the reply address on the email sent to councillors will be the address you set with `ENV["EMAIL_COUNCILLOR_REPLIES_TO"]`.
+You can follow the [instructions above for setting the reply address](#set-the-reply-address-for-accepting-responses) if you haven’t yet.
+
+When a councillor replies to an email with someone’s message, like normal email, the reply will go to the inbox of the reply address.
+You will need to keep an eye on this inbox.
+
+When a councillor reply email arrives you will need to manually add it to PlanningAlerts.
+Add a reply by first finding the comment it is responding to on the comments index page or page for the application it is associated with.
+If you are logged in as an Admin, there will be a link “Add reply” on the bottom of the comment.
+
+On the ‘Add reply’ page fill in the form with the details of the reply:
+the `comment_id` of the comment it is responding to, the name of the councillor, the full text of the email received, and the time it was received (in [UTC time](http://time.is/UTC)).
+Hit the “Create reply” button.  The original commenter will be notified of the reply via email and the reply will be posted with the comment on the application page.
+
 ## Deployment
 
 The code is deployed using Capistrano. To deploy to production run:
