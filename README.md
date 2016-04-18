@@ -221,11 +221,10 @@ and create a new reply.
 If for some reason the webhook isn’t configured,
 or something else goes wrong, you can manually load replies from your WriteIt site.
 
-Navigate to the admin page for the comment you think there is a new reply for,
-e.g. `/admin/comments/123`.
-Use the “Load replies from WriteIt” button to load in new replies.
+Navigate to the admin page for a comment, e.g. `/admin/comments/123`.
+Use the “Load replies from WriteIt” button to load in new replies to that comment.
 PlanningAlerts will fetch any answers from the API for your WriteIt site
-and create new replies to the comment.
+and create new replies and associate them with the comment.
 
 ## Deployment
 
