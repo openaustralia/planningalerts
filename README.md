@@ -148,18 +148,18 @@ by integrating with [WriteIt](http://writeit.ciudadanointeligente.org/en/) to se
 
 ###### Basic setup
 
-To post people’s comments to a WriteIt instance, PlanningAlerts needs to know about that instance.
-
-If you want to use the [version of WriteIt publicly hosted by Fundación Ciudadano Inteligente](http://writeit.ciudadanointeligente.org/)
-you need to sign up for an account and create your own “site” over there.
-On the API page for your WriteIt site (find via ‘Site manager’) you’ll find the information you need:
+To send people’s comments to councillors via a WriteIt instance, PlanningAlerts needs to know some things about that instance:
 
 * the URL of the WriteIt app you’re using;
 * the location of your ‘site’ within that app;
 * your username for the WriteIt app; and,
 * your API key.
 
-This information about the WriteIt instance you will be working with is stored as environment variables.
+If you want to use the [version of WriteIt publicly hosted by Fundación Ciudadano Inteligente](http://writeit.ciudadanointeligente.org/)
+then sign up for an account and create your own “site” over there.
+On the API page for your WriteIt site (find via ‘Site manager’) you’ll find the information you need.
+
+The information about the WriteIt instance you will be working with is stored as environment variables.
 In production these should be in a `.env` file.
 Use `.env.local` in your local development environment.
 
