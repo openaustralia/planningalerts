@@ -190,7 +190,7 @@ You will be able to send messages to the people that have an email address.
 ###### Sending messages via WriteIt
 
 PlanningAlerts decides how to send a comment after it is confirmed by the user.
-If you’ve configured the integration to a WriteIt site,
+If you’ve [configured the integration to a WriteIt site](#basic-setup),
 comments to councillors will automatically be sent via the WriteIt API.
 
 ###### Automatically fetching replies with the _Writeit reply webhook_
