@@ -146,14 +146,86 @@ Hit the “Create reply” button. The original commenter will be notified of th
 For automatic posting of councillor replies to PlanningAlerts,
 you configure PlanningAlerts to send and receive messages via [WriteIt](http://writeit.ciudadanointeligente.org/en/).
 
-<!-- TODO:
-* ENV VARS
-* WRITE IT INSTANCE
-* HOW DOES THE COUNCILLOR DATA WORK?
-* SENDING MESSAGES VIA WRITEIT
-* THE WEBHOOK
-* WHAT HAPPENS WHEN YOU GET REPLIES?
--->
+###### Basic setup
+
+To post people’s comments to a WriteIt instance, PlanningAlerts needs to know about that instance.
+
+If you want to use the [version of WriteIt publicly hosted by Fundación Ciudadano Inteligente](http://writeit.ciudadanointeligente.org/)
+you need to sign up for an account and create your own “site” over there.
+On the API page for your WriteIt site (find via ‘Site manager’) you’ll find the information you need:
+
+* the URL of the WriteIt app you’re using;
+* the location of your ‘site’ within that app;
+* your username for the WriteIt app; and,
+* your API key.
+
+This information about the WriteIt instance you will be working with is stored as environment variables.
+In production these should be in a `.env` file.
+Use `.env.local` in your local development environment.
+
+```
+# WriteIt configuration
+WRITEIT_BASE_URL=http://writeit.ciudadanointeligente.org
+WRITEIT_URL=/api/v1/instance/1234/
+WRITEIT_USERNAME=yourusername
+WRITEIT_API_KEY=xxxxxxxxxxxxyourapikeyxxxxxxxxxxxxxxxxxx
+```
+
+###### Adding your councillor data to WriteIt
+
+You’ve already [loaded your councillors into PlanningAlerts](#adding-councillors-for-an-authority),
+now you need to load them into WriteIt.
+
+You can add “recipients” to your WriteIt site by adding a new ‘data source’.
+On the ‘Data Sources’ page for your WriteIt site add a new “Popolo URL” for each of the councillor popolo files at [github.com/openaustralia/australian_local_councillors_popolo](https://github.com/openaustralia/australian_local_councillors_popolo/),
+e.g. :
+
+```
+https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/nsw_local_councillor_popolo.json
+```
+
+When you add the ‘data source’ WriteIt loads in all the people in data.
+You will be able to send messages to the people that have an email address.
+
+###### Sending messages via WriteIt
+
+PlanningAlerts decides how to send a comment after it is confirmed by the user.
+If you’ve configured the integration to a WriteIt site,
+comments to councillors will automatically be sent via the WriteIt API.
+
+###### Automatically fetching replies with the _Writeit reply webhook_
+
+You can use PlanningAlerts WriteIt reply webook to
+automatically load new counillor replies from a WriteIt site.
+
+When a councillor receives a message that has been sent via WriteIt,
+the reply email address is a special WriteIt email address, not [your configured reply address](#set-the-reply-address-for-accepting-responses).
+When they reply to the email, the content of their email is automatically added
+as an answer to the original message on WriteIt.
+
+On the Wehbooks settings page for your WriteIt site,
+add the webhook URL for your PlanningAlerts setup as a new webhook URL, e.g.:
+
+```
+http://planningalerts.com/comments/writeit_reply_webhook
+```
+
+Now, when a new reply is created on your WriteIt site,
+WriteIt will post data about it to the webhook URL you set.
+
+Your PlanningAlerts app will then fetch the full answer from WriteIt
+and create a new reply.
+
+###### Manually loading replies from Writeit
+
+If for some reason the webhook isn’t configured,
+or something else goes wrong, you can manually load replies from your WriteIt site.
+
+Navigate to the admin page for the comment you think there is a new reply for,
+e.g. `/admin/comments/123`.
+Use the “Load replies from WriteIt” button to load in new replies.
+PlanningAlerts will fetch any answers from the API for your WriteIt site
+and create new replies to the comment.
 
 ## Deployment
 
