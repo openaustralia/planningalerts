@@ -139,7 +139,7 @@ If you are logged in as an Admin, there will be a link “Add reply” on the bo
 
 On the ‘Add reply’ page fill in the form with the details of the reply:
 the `comment_id` of the comment it is responding to, the name of the councillor, the full text of the email received, and the time it was received (in [UTC time](http://time.is/UTC)).
-Hit the “Create reply” button.  The original commenter will be notified of the reply via email and the reply will be posted with the comment on the application page.
+Hit the “Create reply” button. The original commenter will be notified of the reply via email and the reply will be posted with the comment on the application page.
 
 ##### Integrating with WriteIt
 
