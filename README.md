@@ -195,8 +195,8 @@ comments to councillors will automatically be sent via the WriteIt API.
 
 ###### Automatically fetching replies with the _Writeit reply webhook_
 
-You can use PlanningAlerts WriteIt reply webook to
-automatically load new counillor replies from a WriteIt site.
+You can add the PlanningAlerts _WriteIt reply webook_ to your Writeit site
+to automatically load new counillor replies.
 
 When a councillor receives a message that has been sent via WriteIt,
 the reply email address is a special WriteIt email address, not [your configured reply address](#set-the-reply-address-for-accepting-responses).
