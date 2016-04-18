@@ -157,7 +157,7 @@ To send people’s comments to councillors via a WriteIt instance, PlanningAlert
 
 If you want to use the [version of WriteIt publicly hosted by Fundación Ciudadano Inteligente](http://writeit.ciudadanointeligente.org/)
 then sign up for an account and create your own “site” over there.
-On the API page for your WriteIt site (find via ‘Site manager’) you’ll find the information you need.
+On the API page for your WriteIt site you’ll find the information you need.
 
 The information about the WriteIt instance you will be working with is stored as environment variables.
 In production these should be in a `.env` file.
