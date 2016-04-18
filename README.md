@@ -156,7 +156,7 @@ To send people’s comments to councillors via a WriteIt instance, PlanningAlert
 * your API key.
 
 If you want to use the [version of WriteIt publicly hosted by Fundación Ciudadano Inteligente](http://writeit.ciudadanointeligente.org/)
-then sign up for an account and create your own “site” over there.
+then sign up for an account and create your own ‘site’ over there.
 On the API page for your WriteIt site you’ll find the information you need.
 
 The information about the WriteIt instance you will be working with is stored as environment variables.
@@ -176,8 +176,8 @@ WRITEIT_API_KEY=xxxxxxxxxxxxyourapikeyxxxxxxxxxxxxxxxxxx
 You’ve already [loaded your councillors into PlanningAlerts](#adding-councillors-for-an-authority),
 now you need to load them into WriteIt.
 
-You can add “recipients” to your WriteIt site by adding a new ‘data source’.
-On the ‘Data Sources’ page for your WriteIt site add a new “Popolo URL” for each of the councillor popolo files at [github.com/openaustralia/australian_local_councillors_popolo](https://github.com/openaustralia/australian_local_councillors_popolo/),
+You can add ‘recipients’ to your WriteIt site by adding a new ‘data source’.
+On the ‘Data Sources’ page for your WriteIt site add a new ‘Popolo URL’ for each of the councillor popolo files at [github.com/openaustralia/australian_local_councillors_popolo](https://github.com/openaustralia/australian_local_councillors_popolo/),
 e.g. :
 
 ```
