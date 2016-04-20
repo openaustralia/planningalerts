@@ -125,7 +125,8 @@ or, by integrating with _WriteIt_, which will accept replies and have them autom
 
 ##### Default Wizard of Oz method
 
-<!-- TODO: Why is this called this, why would you use this setup? -->
+While the back and forth of writing to councillors appears seamless to users, by [default there is no magic](https://en.wikipedia.org/wiki/Wizard_of_Oz_experiment).
+Behind the scenes administrators need to manually collect replies from an email inbox and add them to people’s comments.
 
 By default, the reply address on the email sent to councillors will be the address you set with `ENV["EMAIL_COUNCILLOR_REPLIES_TO"]`.
 You can follow the [instructions above for setting the reply address](#set-the-reply-address-for-accepting-responses) if you haven’t yet.
