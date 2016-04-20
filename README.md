@@ -187,6 +187,9 @@ https://raw.githubusercontent.com/openaustralia/australian_local_councillors_pop
 When you add the ‘data source’ WriteIt loads in all the people in data.
 You will be able to send messages to the people that have an email address.
 
+Every time you want to add new councillors or change their details, you need to load that data into WriteIt, in addition to [loading the changes into PlanningAlerts](#adding-councillors-for-an-authority).
+On the Writeit ‘data sources’ page you can “fetch new data” to update your available ‘recipients’.
+
 ###### Sending messages via WriteIt
 
 PlanningAlerts decides how to send a comment after it is confirmed by the user.
