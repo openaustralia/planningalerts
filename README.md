@@ -55,7 +55,10 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 ### Configuring PlanningAlerts so people can write to their local councillors
 
-<!-- TODO: EXPLAIN WHY AND WHAT HERE -->
+While people use PlanningAlerts to provide official submissions to planning applications,
+sometimes the official process doesn’t work well, or they have questions and need a response.
+In Australia we elect local councillors to represent us in local government decision making—these are good people to speak to in these cases and many others.
+Through PlanningAlerts people can send public messages to their councillors about planning applications *and* councillors can reply.
 
 Four conditions must be met for the option to write to councillors to be available for an application:
 
