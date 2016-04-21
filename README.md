@@ -197,13 +197,13 @@ On the Writeit ‘data sources’ page you can “fetch new data” to update yo
 
 ###### Sending messages via WriteIt
 
-PlanningAlerts decides how to send a comment after it is confirmed by the user.
+PlanningAlerts decides how to send a comment [after it is confirmed](https://github.com/openaustralia/planningalerts/blob/master/app/models/comment.rb#L30-L38) by the user.
 If you’ve [configured the integration to a WriteIt site](#basic-setup),
 comments to councillors will automatically be sent via the WriteIt API.
 
 ###### Automatically fetching replies with the _Writeit reply webhook_
 
-You can add the PlanningAlerts _WriteIt reply webook_ to your Writeit site
+You can add the PlanningAlerts [_WriteIt reply webook_](https://github.com/openaustralia/planningalerts/blob/master/app/controllers/comments_controller.rb#L42-L49) to your Writeit site
 to automatically load new councillor replies.
 
 When a councillor receives a message that has been sent via WriteIt,
