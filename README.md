@@ -149,6 +149,7 @@ Hit the “Create reply” button. The original commenter will be notified of th
 
 PlanningAlerts can automatically post replies from councillors
 by integrating with [WriteIt](http://writeit.ciudadanointeligente.org/en/) to send messages and receive answers.
+This means that no action is required by administrators for councillor replies to be loaded.
 
 ###### Basic setup
 
