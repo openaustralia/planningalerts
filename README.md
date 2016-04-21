@@ -135,7 +135,7 @@ By default, the reply address on the email sent to councillors will be the addre
 You can follow the [instructions above for setting the reply address](#set-the-reply-address-for-accepting-responses) if you haven’t yet.
 
 When a councillor replies to an email with someone’s message, like normal email, the reply will go to the inbox of the reply address.
-You will need to keep an eye on this inbox.
+You will need to keep an eye on this inbox for incoming replies.
 
 When a councillor reply email arrives you will need to manually add it to PlanningAlerts.
 Add a reply by first finding the comment it is responding to on the comments index page or page for the application it is associated with.
