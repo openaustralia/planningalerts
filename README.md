@@ -189,7 +189,7 @@ e.g. :
 https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/nsw_local_councillor_popolo.json
 ```
 
-When you add the ‘data source’ WriteIt loads in all the people in data.
+When you add the ‘data source’ WriteIt loads in all [Popolo People objects](http://www.popoloproject.com/specs/person.html) available.
 You will be able to send messages to the people that have an email address.
 
 Every time you want to add new councillors or change their details, you need to load that data into WriteIt in addition to [loading the changes into PlanningAlerts](#adding-councillors-for-an-authority).
