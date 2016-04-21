@@ -123,8 +123,8 @@ The reply is then posted below the original comment on PlanningAlerts, and the c
 Replies are featured in alert emails like normal comments.
 
 You can choose between two different methods for loading replies into PlanningAlerts:
-The _Wizard of Oz_ method, which requires administrators to watch an email inbox and manually enter replies;
-or, by integrating with _WriteIt_, which will accept replies and have them automatically posted on PlanningAlerts.
+The [‘Wizard of Oz’ setup](#default-wizard-of-oz-method), which requires administrators to watch an email inbox and manually enter replies;
+or, by [integrating with a WriteIt site](#intergrating-with-writeit), which will accept replies and have them automatically posted on PlanningAlerts.
 
 ##### Default Wizard of Oz method
 
