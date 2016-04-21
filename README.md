@@ -88,7 +88,7 @@ You need to specify an email address for councillors to send their replies to.
 If you’re using the [‘Wizard of Oz’ setup](#default-wizard-of-oz-method), the councillor replies will come in to this address.
 If you’re using the [WriteIt integration](#intergrating-with-writeit), then the WriteIt answer notification emails will be sent there.
 
-Set this address using the `EMAIL_COUNCILLOR_REPLIES_TO` environment variable in [`.env`](https://github.com/openaustralia/planningalerts/blob/master/.env) and `.env.local` in your local development:
+Set this address using the `EMAIL_COUNCILLOR_REPLIES_TO` environment variable in [`.env`](https://github.com/openaustralia/planningalerts/blob/master/.env) or `.env.local` in your local development setup:
 
 ```
 EMAIL_COUNCILLOR_REPLIES_TO=lovely@email.org.au
