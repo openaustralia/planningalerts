@@ -138,7 +138,7 @@ When a councillor replies to an email with someone’s message, like normal emai
 You will need to keep an eye on this inbox for incoming replies.
 
 When a councillor reply email arrives you will need to manually add it to PlanningAlerts.
-Add a reply by first finding the comment it is responding to on the comments index page or page for the application it is associated with.
+To add a reply, first find the comment it is responding to on the comments index page or page for the application it is associated with.
 If you are logged in as an Admin, there will be a link “Add reply” on the bottom of the comment.
 
 On the ‘Add reply’ page fill in the form with the details of the reply:
