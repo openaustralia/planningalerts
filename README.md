@@ -203,13 +203,13 @@ comments to councillors will automatically be sent via the WriteIt API.
 
 ###### Automatically fetching replies with the _Writeit reply webhook_
 
-You can add the PlanningAlerts [_WriteIt reply webook_](https://github.com/openaustralia/planningalerts/blob/master/app/controllers/comments_controller.rb#L42-L49) to your Writeit site
-to automatically load new councillor replies.
-
 When a councillor receives a message that has been sent via WriteIt,
 the reply email address is a special WriteIt email address, not [your configured reply address](#set-the-reply-address-for-accepting-responses).
 When they reply to the email, the content of their email is automatically added
 as an answer to the original message on WriteIt.
+
+You can add the PlanningAlerts [_WriteIt reply webook_](https://github.com/openaustralia/planningalerts/blob/master/app/controllers/comments_controller.rb#L42-L49) to your Writeit site
+to automatically load these replies into PlanningAlerts.
 
 On the Wehbooks settings page for your WriteIt site,
 add the webhook URL for your PlanningAlerts setup as a new webhook URL, e.g.:
