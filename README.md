@@ -108,7 +108,7 @@ You can see which authorities have the feature enabled at the Authorities admin 
 
 You can load in councillors for an authority at its admin page by clicking the “Load Councillors” button.
 Councillors for the authority will be loaded if there is open data for them at [github.com/openaustralia/australian_local_councillors_popolo](https://github.com/openaustralia/australian_local_councillors_popolo).
-If you already have them in your database you can update them this way.
+If you already have them in your database loading will update any changed attributes.
 
 If there isn’t any data for councillors at this authority, or the data is incomplete,
 follow the [“Updates” instructions at github.com/openaustralia/australian_local_councillors_popolo](https://github.com/openaustralia/australian_local_councillors_popolo#updates).
