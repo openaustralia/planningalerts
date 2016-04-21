@@ -128,7 +128,7 @@ or, by [integrating with a WriteIt site](#intergrating-with-writeit), which will
 
 ##### Default Wizard of Oz method
 
-While the back and forth of writing to councillors appears seamless to users, by [default there is no magic](https://en.wikipedia.org/wiki/Wizard_of_Oz_experiment).
+While the back and forth of writing to councillors appears to be automatic to users, by [default there is no magic](https://en.wikipedia.org/wiki/Wizard_of_Oz_experiment).
 Behind the scenes administrators need to manually collect replies from an email inbox and add them to people’s comments.
 
 By default, the reply address on the email sent to councillors will be the address you set with `ENV["EMAIL_COUNCILLOR_REPLIES_TO"]`.
