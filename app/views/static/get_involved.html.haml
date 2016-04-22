@@ -2,7 +2,9 @@
 %h3= yield :page_title
 %p
   PlanningAlerts is run by the charity <a href="http://www.openaustraliafoundation.org.au">OpenAustralia Foundation</a>,
-  and relies on the support of volunteers and
+  and relies on the support of
+  = link_to "volunteers", about_path(anchor: :contributors)
+  and
   = link_to "donations", donate_path
   from people like you. If you would like to get involved we'd love to hear from you:
 
