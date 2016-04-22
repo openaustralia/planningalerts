@@ -70,8 +70,7 @@ Four conditions must be met for the option to write to councillors to be availab
 2. the feature must be enabled on the authority that the application belongs to; and,
 3. there must be councillors associated with the authority for people to write to.
 
-You also need to configure the app to accept replies from councillors.
-[Find instructions below](#accepting-councillor-replies).
+You will also need to [configure the app to accept replies from councillors](#accepting-councillor-replies).
 
 #### Global feature flag
 
