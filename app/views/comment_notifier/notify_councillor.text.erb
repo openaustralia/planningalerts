@@ -4,10 +4,8 @@ From <%= @comment.name %>
 
 =========================================================================
 
-Hi <%= @comment.councillor.name %>,
-
-The message above is from <%= @comment.name %>.
-They’re writing to you about a local planning application:
+This message to you from <%= @comment.name %> was posted on PlanningAlerts in response to the planning application below.
+You can publicly respond by simply replying to this email.
 
 Address: <%= @comment.application.address %>
 
@@ -19,9 +17,6 @@ You can read more and see what others have to say here:
                     utm_source: "councillor-notifications",
                     utm_medium: "email",
                     utm_campaign: "view-application") %>
-
-This message was posted publicly on PlanningAlerts.
-You can publicly respond to this message by simply replying to this email.
 
 Best wishes,
 
