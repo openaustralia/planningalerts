@@ -60,6 +60,9 @@ but sometimes the official process doesn’t work well, or they have questions a
 In Australia we elect local councillors to represent us in local government decision making—these are good people to speak to in these cases and many others.
 Through PlanningAlerts people can send public messages to their councillors about planning applications *and* councillors can reply.
 
+Developers will find a detailed explanation of how the feature works in this section.
+Administrators will be most interested in [how to add councillors for an authority](#adding-councillors-for-an-authority).
+
 Four conditions must be met for the option to write to councillors to be available for an application:
 
 1. the global feature flag must be toggled on;
