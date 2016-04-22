@@ -53,6 +53,187 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
  * Check the email in your browser: http://localhost:1080/
  * To resend alerts during testing, just set the `last_sent` attribute of your alert to *nil*
 
+### Configuring PlanningAlerts so people can write to their local councillors
+
+People use PlanningAlerts to provide official submissions to planning applications,
+but sometimes the official process doesn’t work well, or they have questions and need a response.
+In Australia we elect local councillors to represent us in local government decision making—these are good people to speak to in these cases and many others.
+Through PlanningAlerts people can send public messages to their councillors about planning applications *and* councillors can reply.
+
+Four conditions must be met for the option to write to councillors to be available for an application:
+
+1. the global feature flag must be toggled on;
+1. a reply address must be configured for councillors to email their responses to;
+2. the feature must be enabled on the authority that the application belongs to; and,
+3. there must be councillors associated with the authority for people to write to.
+
+You also need to configure the app to accept replies from councillors.
+[Find instructions below](#accepting-councillor-replies).
+
+#### Global feature flag
+
+You can toggle the availability of the writing to councillors feature on or off for the entire site with the environment variable `COUNCILLORS_ENABLED`.
+The feature is globally enabled when the value of `ENV["COUNCILLORS_ENABLED"]` is `"true"`.
+This flag is useful if you need to turn the feature _off_ globally.
+
+We set this in the [`.env`](https://github.com/openaustralia/planningalerts/blob/master/.env) file in production.  You can control setting in development by creating your own `.env.local` file which includes:
+
+```
+COUNCILLORS_ENABLED=true
+```
+
+#### Set the reply address for accepting responses
+
+You need to specify an email address for councillors to send their replies to.
+If you’re using the [‘Wizard of Oz’ setup](#default-wizard-of-oz-method), the councillor replies will come in to this address.
+If you’re using the [WriteIt integration](#intergrating-with-writeit), then the WriteIt answer notification emails will be sent there.
+
+Set this address using the `EMAIL_COUNCILLOR_REPLIES_TO` environment variable in [`.env`](https://github.com/openaustralia/planningalerts/blob/master/.env) or `.env.local` in your local development setup:
+
+```
+EMAIL_COUNCILLOR_REPLIES_TO=lovely@email.org.au
+```
+
+#### Enable the feature for an authority
+
+You can toggle the ‘writing to councillors’ options on or off
+for all applications under an authority. By default it is off.
+
+Control this setting at the admin page for the authority (e.g. `/admin/authorities/1/edit`).
+Check or uncheck the "Write to councillors enabled" option.
+
+You can see which authorities have the feature enabled at the Authorities admin page (`/admin/authorities`).
+
+#### Adding councillors for an authority
+
+You can load in councillors for an authority at its admin page by clicking the “Load Councillors” button.
+Councillors for the authority will be loaded if there is open data for them at [github.com/openaustralia/australian_local_councillors_popolo](https://github.com/openaustralia/australian_local_councillors_popolo).
+If you already have them in your database loading will update any changed attributes.
+
+If there isn’t any data for councillors at this authority, or the data is incomplete,
+follow the [“Updates” instructions at github.com/openaustralia/australian_local_councillors_popolo](https://github.com/openaustralia/australian_local_councillors_popolo#updates).
+
+#### Accepting councillor replies
+
+Not only can people write to their councillors using PlanningAlerts, but councillors can also reply!
+
+When someone writes to their local councillor, the councillor receives an email with the message.
+To reply, they simply reply to the email.
+The reply is then posted below the original comment on PlanningAlerts, and the commenter is notified.
+Replies are featured in alert emails like normal comments.
+
+You can choose between two different methods for loading replies into PlanningAlerts:
+The [‘Wizard of Oz’ setup](#default-wizard-of-oz-method), which requires administrators to watch an email inbox and manually enter replies;
+or, by [integrating with a WriteIt site](#intergrating-with-writeit), which will accept replies and have them automatically posted on PlanningAlerts.
+
+##### Default Wizard of Oz method
+
+While the back and forth of writing to councillors appears to be automatic to users, by [default there is no magic](https://en.wikipedia.org/wiki/Wizard_of_Oz_experiment).
+Behind the scenes administrators need to manually collect replies from an email inbox and add them to people’s comments.
+
+By default, the reply address on the email sent to councillors will be the address you set with `ENV["EMAIL_COUNCILLOR_REPLIES_TO"]`.
+You can follow the [instructions above for setting the reply address](#set-the-reply-address-for-accepting-responses) if you haven’t yet.
+
+When a councillor replies to an email with someone’s message, like normal email, the reply will go to the inbox of the reply address.
+You will need to keep an eye on this inbox for incoming replies.
+
+When a councillor reply email arrives you will need to manually add it to PlanningAlerts.
+To add a reply, first find the comment it is responding to on the comments index page or page for the application it is associated with.
+If you are logged in as an Admin, there will be a link “Add reply” on the bottom of the comment.
+
+On the ‘Add reply’ page fill in the form with the details of the reply:
+the `comment_id` of the comment it is responding to, the name of the councillor, the full text of the email received, and the time it was received (in [UTC time](http://time.is/UTC)).
+Hit the “Create reply” button. The original commenter will be notified of the reply via email and the reply will be posted with the comment on the application page.
+
+##### Integrating with WriteIt
+
+PlanningAlerts can automatically post replies from councillors
+by integrating with [WriteIt](http://writeit.ciudadanointeligente.org/en/) to send messages and receive answers.
+This means that no action is required by administrators for councillor replies to be loaded.
+
+###### Basic setup
+
+To send people’s comments to councillors via a WriteIt instance, PlanningAlerts needs to know some things about that instance:
+
+* the URL of the WriteIt app you’re using;
+* the location of your ‘site’ within that app;
+* your username for the WriteIt app; and,
+* your API key.
+
+If you want to use the [version of WriteIt publicly hosted by Fundación Ciudadano Inteligente](http://writeit.ciudadanointeligente.org/)
+then sign up for an account and create your own ‘site’ over there.
+On the API page for your WriteIt site you’ll find the information you need.
+
+The information about the WriteIt instance you will be working with is stored as environment variables.
+In production these should be in a `.env` file.
+Use `.env.local` in your local development environment.
+
+```
+# WriteIt configuration
+WRITEIT_BASE_URL=http://writeit.ciudadanointeligente.org
+WRITEIT_URL=/api/v1/instance/1234/
+WRITEIT_USERNAME=yourusername
+WRITEIT_API_KEY=xxxxxxxxxxxxyourapikeyxxxxxxxxxxxxxxxxxx
+```
+
+###### Adding your councillor data to WriteIt
+
+You’ve already [loaded your councillors into PlanningAlerts](#adding-councillors-for-an-authority),
+now you need to load them into WriteIt.
+
+You can add ‘recipients’ to your WriteIt site by adding a new ‘data source’.
+On the ‘Data Sources’ page for your WriteIt site add a new ‘Popolo URL’ for each of the councillor popolo files at [github.com/openaustralia/australian_local_councillors_popolo](https://github.com/openaustralia/australian_local_councillors_popolo/),
+e.g. :
+
+```
+https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/nsw_local_councillor_popolo.json
+```
+
+When you add the ‘data source’ WriteIt loads in all [Popolo People objects](http://www.popoloproject.com/specs/person.html) available.
+You will be able to send messages to the people who have an email address.
+
+Every time you want to add new councillors or change their details, you need to load that data into WriteIt in addition to [loading the changes into PlanningAlerts](#adding-councillors-for-an-authority).
+On the Writeit ‘data sources’ page you can “fetch new data” to update your available ‘recipients’.
+
+###### Sending messages via WriteIt
+
+PlanningAlerts decides how to send a comment [after it is confirmed](https://github.com/openaustralia/planningalerts/blob/master/app/models/comment.rb#L30-L38) by the user.
+If you’ve [configured the integration to a WriteIt site](#basic-setup),
+comments to councillors will automatically be sent via the WriteIt API.
+
+###### Automatically fetching replies with the _Writeit reply webhook_
+
+When a councillor receives a message that has been sent via WriteIt,
+the reply email address is a special WriteIt email address, not [your configured reply address](#set-the-reply-address-for-accepting-responses).
+When they reply to the email, the content of their email is automatically added
+as an answer to the original message on WriteIt.
+
+You can add the PlanningAlerts [_WriteIt reply webook_](https://github.com/openaustralia/planningalerts/blob/master/app/controllers/comments_controller.rb#L42-L49) to your Writeit site
+to automatically load these replies into PlanningAlerts.
+
+On the Wehbooks settings page for your WriteIt site,
+add the webhook URL for your PlanningAlerts setup as a new webhook URL, e.g.:
+
+```
+http://planningalerts.com/comments/writeit_reply_webhook
+```
+
+Now, when a new reply is created on your WriteIt site,
+WriteIt will post data about it to the webhook URL you set.
+
+Your PlanningAlerts app will then fetch the full answer from WriteIt
+and create a new reply.
+
+###### Manually loading replies from Writeit
+
+If for some reason the webhook isn’t configured,
+or something else goes wrong, you can manually load replies from your WriteIt site.
+
+Navigate to the admin page for a comment, e.g. `/admin/comments/123`.
+Use the “Load replies from WriteIt” button to load in new replies to that comment.
+PlanningAlerts will fetch any answers from the API for your WriteIt site
+and create new replies and associate them with the comment.
+
 ## Deployment
 
 The code is deployed using Capistrano. To deploy to production run:
