@@ -21,11 +21,15 @@
   which is a good indication that something is wrong. These are marked as
   <span class="highlight">possibly broken</span>.
 
-%ul.authorities
+%table.authorities
   - @authorities["NSW"].each do |authority|
-    %li
-      = link_to authority.full_name, authority_url(authority.short_name_encoded)
-      - if authority.broken?
-        %span.highlight possibly broken
-      - elsif !authority.covered?
-        &mdash; not covered
+    %tr
+      %td
+        = link_to authority.full_name, authority_url(authority.short_name_encoded)
+        - unless authority.covered?
+          %br
+          %small This authority isn't covered yet. #{link_to "Help fix this", get_involved_path}.
+
+      %td
+        - if authority.broken?
+          %span.highlight possibly broken
