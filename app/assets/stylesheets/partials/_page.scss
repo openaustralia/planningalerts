@@ -757,20 +757,12 @@ ul.ui-autocomplete {
   margin-bottom: 2em;
 }
 
-ul.authorities {
-  list-style: none;
-  padding-left: 0;
-
-  li {
-    margin-bottom: 0.25em;
+table.authorities {
+  tr:nth-child(even) {
+   background-color: #eee;
   }
 
-  a {
-    font-size: 1.1em;
-  }
-
-  .highlight {
-    display: inline-block;
-    padding: 0 .25em;
+  td.authority-name {
+    width: 80%;
   }
 }
