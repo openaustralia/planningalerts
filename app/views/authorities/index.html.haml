@@ -27,15 +27,11 @@
 
 - @authorities.each do |state, authorities|
   %h4{:id => state.downcase}= state
-  %table.authorities
+  %ul.authorities
     - authorities.each do |authority|
-      %tr
-        %td.authority-name
-          = link_to authority.full_name, authority_url(authority.short_name_encoded)
-          - unless authority.covered?
-            %br
-            %small This authority isn't covered yet. #{link_to "Help fix this", get_involved_path}.
-
-        %td
-          - if authority.broken?
-            %span.highlight possibly broken
+      %li
+        = link_to authority.full_name, authority_url(authority.short_name_encoded)
+        - if authority.broken?
+          %span.highlight possibly broken
+        - elsif !authority.covered?
+          &mdash; not covered
