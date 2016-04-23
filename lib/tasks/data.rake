@@ -43,7 +43,7 @@ namespace :data do
     }
 
     inserts = []
-    updates = []
+    updates = {}
 
     records = JSON.parse(File.read(path))["rows"]
     records.each do |lga|
@@ -57,15 +57,20 @@ namespace :data do
       unless authority
         inserts << "INSERT INTO authorities(full_name, short_name, lga_name15, state) VALUES('#{human_name}', '#{short_name}', '#{lga["lga_name15"]}', '#{states[lga["ste_name11"]]}');"
       else
-        updates << "UPDATE authorities SET lga_name15 = '#{lga["lga_name15"]}') WHERE id = #{authority.id};"
+        updates[authority.state] ||= {}
+        updates[authority.state][authority.full_name] = "UPDATE authorities SET lga_name15 = '#{lga["lga_name15"]}') WHERE id = #{authority.id};"
       end
     end
 
     puts "# Inserts - These *most likely* aren't a match to any existing authority"
-    inserts.map{|sql| puts sql}
+    inserts.each{|sql| puts sql}
 
     puts "# Updates - These are probably the same as the described council"
-    updates.map{|sql| puts sql}
+    states.values.each do |state|
+      updates[state].keys.each do |council|
+        puts updates[state][council] + " # #{council}, #{state}"
+      end
+    end
   end
 
   desc "Bootstrap"
