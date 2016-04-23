@@ -50,14 +50,14 @@ namespace :data do
       next if lga["lga_name15"].match /(No usual address|Unincorporated)/
 
       short_name = generate_shortname(lga["lga_name15"])
-
+      human_name = lga["lga_name15"].split(" (").first
       authority = Authority.where(lga_name15: lga["lga_name15"]).first
       authority ||= Authority.where(short_name: short_name, state: states[lga["ste_name11"]]).first
 
       unless authority
-        inserts << "INSERT INTO authorities(full_name, short_name, lga_name15, state) VALUES('#{lga["lga_name15"]}', '#{short_name}', '#{lga["lga_name15"]}', '#{states[lga["ste_name11"]]}');"
+        inserts << "INSERT INTO authorities(full_name, short_name, lga_name15, state) VALUES('#{human_name}', '#{short_name}', '#{lga["lga_name15"]}', '#{states[lga["ste_name11"]]}');"
       else
-        updates << "UPDATE authorities SET full_name = '#{lga["lga_name15"]}', short_name = '#{short_name}', lga_name15 = '#{lga["lga_name15"]}', state = '#{states[lga["ste_name11"]]}') WHERE id = #{authority.id};"
+        updates << "UPDATE authorities SET lga_name15 = '#{lga["lga_name15"]}') WHERE id = #{authority.id};"
       end
     end
 
