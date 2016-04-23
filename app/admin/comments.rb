@@ -37,5 +37,21 @@ ActiveAdmin.register Comment do
     actions
   end
 
+  action_item :load_replies, only: :show do
+    if ENV["WRITEIT_BASE_URL"] && resource.to_councillor? && resource.writeit_message_id
+      button_to("Load replies from WriteIt", load_replies_admin_comment_path)
+    end
+  end
+
+  member_action :load_replies, method: :post do
+    replies = resource.create_replies_from_writeit!
+    if replies.present?
+      # TODO: Fix pluralisation: "Loaded 1 replies"
+      redirect_to({action: :show}, notice: "Loaded #{replies.count} replies")
+    else
+      redirect_to({action: :show}, notice: "No replies loaded")
+    end
+  end
+
   permit_params :text, :email, :name, :confirmed, :address, :hidden
 end

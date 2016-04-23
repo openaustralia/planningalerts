@@ -9,4 +9,8 @@ class Councillor < ActiveRecord::Base
   def prefixed_name
     "local councillor #{name}"
   end
+
+  def writeit_id
+    authority.popolo_url + "/person/" + popolo_id
+  end
 end

@@ -240,4 +240,46 @@ describe Comment do
       it { expect(comment.recipient_display_name).to eq "local councillor Louise Councillor" }
     end
   end
+
+  describe "#create_replies_from_writeit!" do
+    around do |test|
+      with_modified_env(writeit_config_variables) do
+        test.run
+      end
+    end
+
+    let(:comment) do
+      create(:comment_to_councillor, writeit_message_id: 1234)
+    end
+
+    it "fetches answers from WriteIt, creates replies and returns them" do
+      VCR.use_cassette('planningalerts') do
+        comment.create_replies_from_writeit!
+      end
+
+      expect(comment.replies.count).to eql 1
+      expect(comment.replies.first.text).to eql "I agree, thanks for your comment"
+      expect(comment.replies.first.writeit_id).to eql 567
+      expect(comment.replies.first.councillor).to eql comment.councillor
+      expect(comment.replies.first.received_at).to eql Time.utc(2016, 4, 4, 6, 58, 38)
+    end
+
+    it "returns an empty Array if all the replies on WriteIt have already been added" do
+      VCR.use_cassette('planningalerts') do
+        create(:reply, comment: comment, writeit_id: 567)
+
+        expect(comment.create_replies_from_writeit!).to be_empty
+      end
+    end
+
+    it "does nothing if the comment has no writeit_message_id" do
+      VCR.use_cassette('planningalerts') do
+        expect(create(:comment).create_replies_from_writeit!).to be_false
+      end
+    end
+
+    it "returns an empty Array if there are no replies on WriteIt" do
+      pending
+    end
+  end
 end

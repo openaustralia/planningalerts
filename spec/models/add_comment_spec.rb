@@ -250,8 +250,4 @@ describe AddComment do
       expect(add_comment_form.address).to be_nil
     end
   end
-
-  def with_modified_env(options, &block)
-    ClimateControl.modify(options, &block)
-  end
 end

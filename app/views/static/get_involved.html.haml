@@ -2,7 +2,9 @@
 %h3= yield :page_title
 %p
   PlanningAlerts is run by the charity <a href="http://www.openaustraliafoundation.org.au">OpenAustralia Foundation</a>,
-  and relies on the support of volunteers and
+  and relies on the support of
+  = link_to "volunteers", about_path(anchor: :contributors)
+  and
   = link_to "donations", donate_path
   from people like you. If you would like to get involved we'd love to hear from you:
 
@@ -10,8 +12,12 @@
 %h4#hacker
   I am a programmer and want to add my local planning authority
 %p
-  You can help by writing a <a href="http://en.wikipedia.org/wiki/Screen_scraping">screen scraper</a>
-  for your local planning authority, all without leaving your web browser, in any one of your favorite languages: Ruby, Python or PHP.
+  You can help by writing a
+  = link_to "screen scraper", "http://en.wikipedia.org/wiki/Screen_scraping"
+  for your local planning authority.
+  Using our
+  = link_to "morph.io", "https://morph.io/"
+  scraping platform you can write it in any one of your favorite languages: Ruby, Python, JavaScript, Perl or PHP.
 %p.cta= link_to "Read our step-by-step instructions", how_to_write_a_scraper_path
 
 %hr

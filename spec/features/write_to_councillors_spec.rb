@@ -135,10 +135,6 @@ feature "Send a message to a councillor" do
         end
       end
     end
-
-    def with_modified_env(options, &block)
-      ClimateControl.modify(options, &block)
-    end
   end
 
   context "when a message for a councillor is confirmed" do

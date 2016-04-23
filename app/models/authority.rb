@@ -22,6 +22,8 @@ class Authority < ActiveRecord::Base
   has_many :councillors
   has_many :comments, through: :applications
 
+  validates :short_name, presence: true, uniqueness: { case_sensitive: false }
+
   validates :state, inclusion: {
     in: %w(NSW VIC QLD SA WA TAS NT ACT),
     message: "%{value} is not a state in Australia"
@@ -259,7 +261,7 @@ class Authority < ActiveRecord::Base
 
     persons.map do |person|
       councillor = councillors.find_or_create_by(name: person.name)
-      councillor.update(email: person.email, image_url: person.image, party: person.party)
+      councillor.update(email: person.email, image_url: person.image, party: person.party, popolo_id: person.id)
       councillor
     end
   end

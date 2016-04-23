@@ -1,3 +1,5 @@
+require "rest-client"
+
 class Comment < ActiveRecord::Base
   belongs_to :application
   belongs_to :councillor
@@ -26,7 +28,9 @@ class Comment < ActiveRecord::Base
 
   # Send the comment to the planning authority
   def after_confirm
-    if to_councillor?
+    if to_councillor? && ENV["WRITEIT_BASE_URL"]
+      CommentNotifier.delay.send_comment_via_writeit!(self)
+    elsif to_councillor?
       CommentNotifier.delay.notify_councillor("default", self)
     else
       CommentNotifier.delay.notify_authority("default", self)
@@ -43,5 +47,38 @@ class Comment < ActiveRecord::Base
 
   def recipient_display_name
     to_councillor? ? councillor.prefixed_name : application.authority.full_name
+  end
+
+  def writeitinstance
+    writeitinstance = WriteItInstance.new
+    writeitinstance.base_url = ENV["WRITEIT_BASE_URL"]
+    writeitinstance.url = ENV["WRITEIT_URL"]
+    writeitinstance.username = ENV["WRITEIT_USERNAME"]
+    writeitinstance.api_key = ENV["WRITEIT_API_KEY"]
+
+    writeitinstance
+  end
+
+  def create_replies_from_writeit!
+    if writeit_message_id.present?
+      # TODO: This should be done in the writeit-rails gem
+      api_response = RestClient.get(
+        ENV["WRITEIT_BASE_URL"] + "/api/v1/message/" + writeit_message_id.to_s,
+        params: { format: "json",
+                  username: writeitinstance.username,
+                  api_key: writeitinstance.api_key }
+      )
+      message = JSON.parse(api_response.body, symbolize_names: true)
+      answers = message[:answers]
+
+      answers.collect do |answer|
+        unless replies.find_by(writeit_id: answer[:id])
+          replies.create!(councillor: councillor,
+                          text: answer[:content],
+                          received_at: answer[:created],
+                          writeit_id: answer[:id])
+        end
+      end.compact
+    end
   end
 end
