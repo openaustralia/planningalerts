@@ -213,6 +213,7 @@ describe Authority do
                             name: "Kevin Mack",
                             image_url: "https://old_image.jpg",
                             email: "old_address@example.com",
+                            popolo_id: "authority/old_id",
                             party: "The Old Parties")
 
         authority.load_councillors(popolo)
@@ -220,6 +221,7 @@ describe Authority do
         councillor.reload
         expect(councillor.email).to eql "kevin@albury.nsw.gov.au"
         expect(councillor.image_url).to eql "https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/kevin_mack.jpg"
+        expect(councillor.popolo_id).to eql "albury_city_council/kevin_mack"
         expect(councillor.party).to be_nil
       end
 
