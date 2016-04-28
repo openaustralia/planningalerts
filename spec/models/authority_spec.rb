@@ -182,6 +182,12 @@ describe Authority do
       EveryPolitician::Popolo::read(popolo_file)
     end
 
+    around do |example|
+      VCR.use_cassette('planningalerts') do
+        example.run
+      end
+    end
+
     context "when the authority has two valid councillors" do
       subject(:authority) { create(:authority, full_name: "Albury City Council") }
 
@@ -197,7 +203,7 @@ describe Authority do
         kevin = Councillor.find_by(name: "Kevin Mack")
         expect(kevin.present?).to be_true
         expect(kevin.email).to eql "kevin@albury.nsw.gov.au"
-        expect(kevin.image_url).to eql "https://example.com/kevin.jpg"
+        expect(kevin.image_url).to eql "https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/kevin_mack.jpg"
         expect(kevin.party).to be_nil
         expect(Councillor.find_by(name: "Ross Jackson").party).to eql "Liberal"
       end
@@ -212,7 +218,7 @@ describe Authority do
 
         councillor.reload
         expect(councillor.email).to eql "kevin@albury.nsw.gov.au"
-        expect(councillor.image_url).to eql "https://example.com/kevin.jpg"
+        expect(councillor.image_url).to eql "https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/kevin_mack.jpg"
         expect(councillor.party).to be_nil
       end
 
