@@ -211,6 +211,7 @@ describe Authority do
       it "updates an existing councillor" do
         councillor = create(:councillor, authority: authority,
                             name: "Kevin Mack",
+                            image_url: "https://old_image.jpg",
                             email: "old_address@example.com",
                             party: "The Old Parties")
 
