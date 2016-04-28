@@ -263,10 +263,9 @@ class Authority < ActiveRecord::Base
       councillor = councillors.find_or_create_by(name: person.name)
 
       councillor.popolo_id = person.id
-
       councillor.image_url = councillor.cached_image_url if councillor.cached_image_available?
-
       councillor.update(email: person.email, party: person.party)
+
       councillor
     end
   end
