@@ -112,7 +112,7 @@ If you'd like to add councillors to an authority, first make sure that you've co
 
 If you're using WriteIt then the next step is to refresh the data source so WriteIt knows about the new people you've just added. Once the refresh has happened it's a good idea to check it was successful by seeing if you can write to one of the newly added councillors in the frontend.
 
-TODO: Update image cache.
+To make sure the councillor images are cached where PlanningAlerts knows to look for them [run the morph.io scraper](https://morph.io/openaustralia/australian_local_councillors_images) and wait for it to finish.
 
 Now visit the authority admin page and click the “Load Councillors” button.
 If you already have councillors in your database for this authority then this will update any changed attributes and add any new councillors.
