@@ -215,6 +215,24 @@ describe Authority do
         expect(councillor.image_url).to eql "https://example.com/kevin.jpg"
         expect(councillor.party).to be_nil
       end
+
+      it "uses the cached image_url when it’s available" do
+        cached_image_url = "https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/kevin_mack.jpg"
+
+        authority.load_councillors(popolo)
+
+        councillor = Councillor.find_by(name: "Kevin Mack")
+        expect(councillor.image_url).to eql cached_image_url
+      end
+
+      it "uses the popolo source image_url if there is no cached version" do
+        armidale = create(:authority, full_name: "Armidale Dumaresq Council")
+
+        armidale.load_councillors(popolo)
+
+        councillor = Councillor.find_by(name: "Daryl Betteridge")
+        expect(councillor.image_url).to eql "https://example.com/daryl.jpg"
+      end
     end
 
     context "when the authority has an invalid councillor" do
