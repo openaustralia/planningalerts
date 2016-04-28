@@ -261,7 +261,10 @@ class Authority < ActiveRecord::Base
 
     persons.map do |person|
       councillor = councillors.find_or_create_by(name: person.name)
-      councillor.update(email: person.email, image_url: person.image, party: person.party, popolo_id: person.id)
+      councillor.update(email: person.email,
+                        image_url: person.image,
+                        party: person.party,
+                        popolo_id: person.id)
       councillor
     end
   end
