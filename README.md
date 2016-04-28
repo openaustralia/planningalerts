@@ -110,7 +110,8 @@ You can see which authorities have the feature enabled at the Authorities admin 
 
 If you'd like to add councillors to an authority, first make sure that you've collected all the data as per the [instructions on the `australian_local_councillors_popolo` repository](https://github.com/openaustralia/australian_local_councillors_popolo#updates).
 
-If you're using WriteIt then the next step is to refresh the data source so WriteIt knows about the new people you've just added.
+If you're using WriteIt then the next step is to refresh the data source so WriteIt knows about the new people you've just added. Once the refresh has happened it's a good idea to check it was successful by seeing if you can write to one of the newly added councillors in the frontend.
+
 TODO: Update image cache.
 
 Now visit the authority admin page and click the “Load Councillors” button.
