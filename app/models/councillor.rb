@@ -13,4 +13,8 @@ class Councillor < ActiveRecord::Base
   def writeit_id
     authority.popolo_url + "/person/" + popolo_id
   end
+
+  def cached_image_url
+    "https://australian-local-councillors-images.s3.amazonaws.com/#{popolo_id}.jpg"
+  end
 end

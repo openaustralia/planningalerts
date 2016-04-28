@@ -262,18 +262,17 @@ class Authority < ActiveRecord::Base
     persons.map do |person|
       councillor = councillors.find_or_create_by(name: person.name)
 
-      image_cache_url = "https://australian-local-councillors-images.s3.amazonaws.com/#{person.id}.jpg"
+      councillor.popolo_id = person.id
 
-      if Net::HTTP.get_response(URI(image_cache_url)).kind_of? Net::HTTPSuccess
-        image_url = image_cache_url
+      if Net::HTTP.get_response(URI(councillor.cached_image_url)).kind_of? Net::HTTPSuccess
+        image_url = councillor.cached_image_url
       else
         image_url = person.image
       end
 
       councillor.update(email: person.email,
                         image_url: image_url,
-                        party: person.party,
-                        popolo_id: person.id)
+                        party: person.party)
       councillor
     end
   end

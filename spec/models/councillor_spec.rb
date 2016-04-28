@@ -20,4 +20,11 @@ describe Councillor do
         .to eql "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/nsw_local_councillor_popolo.json/person/authority/foo_bar"
     end
   end
+
+  describe "#cached_image_url" do
+    it "adds the popolo_id to the cache storage url" do
+      expect(create(:councillor, popolo_id: "authority/foo_bar").cached_image_url)
+        .to eql "https://australian-local-councillors-images.s3.amazonaws.com/authority/foo_bar.jpg"
+    end
+  end
 end
