@@ -185,7 +185,7 @@ describe Authority do
     context "when the authority has two valid councillors" do
       subject(:authority) { create(:authority, full_name: "Albury City Council") }
 
-      it "should load 2 councillors" do
+      it "loads 2 councillors" do
         authority.load_councillors(popolo)
 
         expect(authority.councillors.count).to eql 2
