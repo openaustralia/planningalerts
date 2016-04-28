@@ -270,8 +270,7 @@ class Authority < ActiveRecord::Base
         person.image
       end
 
-      councillor.update(email: person.email,
-                        party: person.party)
+      councillor.update(email: person.email, party: person.party)
       councillor
     end
   end
