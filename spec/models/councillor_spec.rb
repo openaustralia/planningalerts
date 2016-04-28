@@ -27,4 +27,24 @@ describe Councillor do
         .to eql "https://australian-local-councillors-images.s3.amazonaws.com/authority/foo_bar.jpg"
     end
   end
+
+  describe "#cached_image_available?" do
+    around do |example|
+      VCR.use_cassette('planningalerts') do
+        example.run
+      end
+    end
+
+    it "is true if the image can be found" do
+      councillor = build(:councillor, popolo_id: "albury_city_council/kevin_mack")
+
+      expect(councillor.cached_image_available?).to be true
+    end
+
+    it "is false if the image can't be found" do
+      councillor = build(:councillor, popolo_id: "authority/foo_bar")
+
+      expect(councillor.cached_image_available?).to be false
+    end
+  end
 end

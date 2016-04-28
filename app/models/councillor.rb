@@ -17,4 +17,8 @@ class Councillor < ActiveRecord::Base
   def cached_image_url
     "https://australian-local-councillors-images.s3.amazonaws.com/#{popolo_id}.jpg"
   end
+
+  def cached_image_available?
+    Net::HTTP.get_response(URI(cached_image_url)).kind_of? Net::HTTPSuccess
+  end
 end

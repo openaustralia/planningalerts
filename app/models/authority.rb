@@ -264,14 +264,13 @@ class Authority < ActiveRecord::Base
 
       councillor.popolo_id = person.id
 
-      if Net::HTTP.get_response(URI(councillor.cached_image_url)).kind_of? Net::HTTPSuccess
-        image_url = councillor.cached_image_url
+      councillor.image_url = if councillor.cached_image_available?
+        councillor.cached_image_url
       else
-        image_url = person.image
+        person.image
       end
 
       councillor.update(email: person.email,
-                        image_url: image_url,
                         party: person.party)
       councillor
     end

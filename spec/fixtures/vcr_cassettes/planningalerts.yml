@@ -42755,4 +42755,43 @@ http_interactions:
         VX//2Q==
     http_version: 
   recorded_at: Thu, 28 Apr 2016 05:46:43 GMT
+- request:
+    method: get
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/authority/foo_bar.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+      Host:
+      - australian-local-councillors-images.s3.amazonaws.com
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      X-Amz-Request-Id:
+      - 7C2F171222B3D8E8
+      X-Amz-Id-2:
+      - bCVqO7nqdk8nqg6zmET6LaWjyQokgg/4GM92f7ECMmPU/qDSHrIrVr0E7iMLZ0R6z8Ri5j7qzVE=
+      Content-Type:
+      - application/xml
+      Transfer-Encoding:
+      - chunked
+      Date:
+      - Thu, 28 Apr 2016 06:41:25 GMT
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: |-
+        <?xml version="1.0" encoding="UTF-8"?>
+        <Error><Code>NoSuchKey</Code><Message>The specified key does not exist.</Message><Key>authority/foo_bar.jpg</Key><RequestId>7C2F171222B3D8E8</RequestId><HostId>bCVqO7nqdk8nqg6zmET6LaWjyQokgg/4GM92f7ECMmPU/qDSHrIrVr0E7iMLZ0R6z8Ri5j7qzVE=</HostId></Error>
+    http_version: 
+  recorded_at: Thu, 28 Apr 2016 06:41:26 GMT
 recorded_with: VCR 2.5.0
