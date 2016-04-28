@@ -66,9 +66,9 @@ Administrators will be most interested in [how to add councillors for an authori
 Four conditions must be met for the option to write to councillors to be available for an application:
 
 1. the global feature flag must be toggled on;
-1. a reply address must be configured for councillors to email their responses to;
-2. the feature must be enabled on the authority that the application belongs to; and,
-3. there must be councillors associated with the authority for people to write to.
+2. a reply address must be configured for councillors to email their responses to;
+3. the feature must be enabled on the authority that the application belongs to; and,
+4. there must be councillors associated with the authority for people to write to.
 
 You will also need to [configure the app to accept replies from councillors](#accepting-councillor-replies).
 
