@@ -10,11 +10,11 @@ feature "Admin loads councillors for an authority" do
 
     visit admin_authority_path(authority)
 
-    VCR.use_cassette("australian_local_councillors_popolo") do
+    VCR.use_cassette("planningalerts") do
       click_button "Load Councillors"
     end
 
-    expect(page).to have_content "Successfully loaded/updated 11 councillors"
+    expect(page).to have_content "Successfully loaded/updated 12 councillors"
     expect(page).to have_content "Max Phillips"
     expect(page).to have_content "Chris Woods"
   end
@@ -29,7 +29,7 @@ feature "Admin loads councillors for an authority" do
 
       visit admin_authority_path(qld_authority)
 
-      VCR.use_cassette("australian_local_councillors_popolo") do
+      VCR.use_cassette("planningalerts") do
         click_button "Load Councillors"
       end
 
@@ -49,7 +49,7 @@ feature "Admin loads councillors for an authority" do
 
       visit admin_authority_path(city_of_sydney)
 
-      VCR.use_cassette("australian_local_councillors_popolo") do
+      VCR.use_cassette("planningalerts") do
         click_button "Load Councillors"
       end
 

@@ -13,4 +13,18 @@ class Councillor < ActiveRecord::Base
   def writeit_id
     authority.popolo_url + "/person/" + popolo_id
   end
+
+  def cached_image_url
+    "https://australian-local-councillors-images.s3.amazonaws.com/#{popolo_id}.jpg"
+  end
+
+  def cached_image_available?
+    uri = URI(cached_image_url)
+
+    request = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |https|
+      https.request_head(uri.path)
+    end
+
+    request.kind_of? Net::HTTPSuccess
+  end
 end

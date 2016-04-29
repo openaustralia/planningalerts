@@ -182,10 +182,16 @@ describe Authority do
       EveryPolitician::Popolo::read(popolo_file)
     end
 
+    around do |example|
+      VCR.use_cassette('planningalerts') do
+        example.run
+      end
+    end
+
     context "when the authority has two valid councillors" do
       subject(:authority) { create(:authority, full_name: "Albury City Council") }
 
-      it "should load 2 councillors" do
+      it "loads 2 councillors" do
         authority.load_councillors(popolo)
 
         expect(authority.councillors.count).to eql 2
@@ -197,7 +203,7 @@ describe Authority do
         kevin = Councillor.find_by(name: "Kevin Mack")
         expect(kevin.present?).to be_true
         expect(kevin.email).to eql "kevin@albury.nsw.gov.au"
-        expect(kevin.image_url).to eql "https://example.com/kevin.jpg"
+        expect(kevin.image_url).to eql "https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/kevin_mack.jpg"
         expect(kevin.party).to be_nil
         expect(Councillor.find_by(name: "Ross Jackson").party).to eql "Liberal"
       end
@@ -205,15 +211,36 @@ describe Authority do
       it "updates an existing councillor" do
         councillor = create(:councillor, authority: authority,
                             name: "Kevin Mack",
+                            image_url: "https://old_image.jpg",
                             email: "old_address@example.com",
+                            popolo_id: "authority/old_id",
                             party: "The Old Parties")
 
         authority.load_councillors(popolo)
 
         councillor.reload
         expect(councillor.email).to eql "kevin@albury.nsw.gov.au"
-        expect(councillor.image_url).to eql "https://example.com/kevin.jpg"
+        expect(councillor.image_url).to eql "https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/kevin_mack.jpg"
+        expect(councillor.popolo_id).to eql "albury_city_council/kevin_mack"
         expect(councillor.party).to be_nil
+      end
+
+      it "uses the cached image url when it’s available" do
+        cached_image_url = "https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/kevin_mack.jpg"
+
+        authority.load_councillors(popolo)
+
+        councillor = Councillor.find_by(name: "Kevin Mack")
+        expect(councillor.image_url).to eql cached_image_url
+      end
+
+      it "does not use popolo source image url if there is no cached version" do
+        armidale = create(:authority, full_name: "Armidale Dumaresq Council")
+
+        armidale.load_councillors(popolo)
+
+        councillor = Councillor.find_by(name: "Daryl Betteridge")
+        expect(councillor.image_url).to be_nil
       end
     end
 
