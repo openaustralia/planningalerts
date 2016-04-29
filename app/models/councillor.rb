@@ -19,6 +19,12 @@ class Councillor < ActiveRecord::Base
   end
 
   def cached_image_available?
-    Net::HTTP.get_response(URI(cached_image_url)).kind_of? Net::HTTPSuccess
+    uri = URI(cached_image_url)
+
+    request = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |https|
+      https.request_head(uri.path)
+    end
+
+    request.kind_of? Net::HTTPSuccess
   end
 end
