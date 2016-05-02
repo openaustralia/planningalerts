@@ -60,15 +60,17 @@ but sometimes the official process doesn’t work well, or they have questions a
 In Australia we elect local councillors to represent us in local government decision making—these are good people to speak to in these cases and many others.
 Through PlanningAlerts people can send public messages to their councillors about planning applications *and* councillors can reply.
 
+Developers will find a detailed explanation of how the feature works in this section.
+Administrators will be most interested in [how to add councillors for an authority](#adding-councillors-for-an-authority).
+
 Four conditions must be met for the option to write to councillors to be available for an application:
 
 1. the global feature flag must be toggled on;
-1. a reply address must be configured for councillors to email their responses to;
-2. the feature must be enabled on the authority that the application belongs to; and,
-3. there must be councillors associated with the authority for people to write to.
+2. a reply address must be configured for councillors to email their responses to;
+3. the feature must be enabled on the authority that the application belongs to; and,
+4. there must be councillors associated with the authority for people to write to.
 
-You also need to configure the app to accept replies from councillors.
-[Find instructions below](#accepting-councillor-replies).
+You will also need to [configure the app to accept replies from councillors](#accepting-councillor-replies).
 
 #### Global feature flag
 
@@ -106,12 +108,19 @@ You can see which authorities have the feature enabled at the Authorities admin 
 
 #### Adding councillors for an authority
 
-You can load in councillors for an authority at its admin page by clicking the “Load Councillors” button.
-Councillors for the authority will be loaded if there is open data for them at [github.com/openaustralia/australian_local_councillors_popolo](https://github.com/openaustralia/australian_local_councillors_popolo).
-If you already have them in your database loading will update any changed attributes.
+If you'd like to add new councillors for a planning authority, there are a number of steps that you need to take across a few different online services.
 
-If there isn’t any data for councillors at this authority, or the data is incomplete,
-follow the [“Updates” instructions at github.com/openaustralia/australian_local_councillors_popolo](https://github.com/openaustralia/australian_local_councillors_popolo#updates).
+Firstly, **make sure the data for your councillors is available from the [`australian_local_councillors_popolo` repository](https://github.com/openaustralia/australian_local_councillors_popolo)**. Follow it’s [instructions for adding new councillor data there](https://github.com/openaustralia/australian_local_councillors_popolo#updates).
+
+If you're [using WriteIt](#integrating-with-writeit) then the next step is to **refresh the data source in WriteIt so it knows about the coucillors you've added to the popolo data**. Check that your refresh was successful by confirming that you now have the option to write to your newly added councillors in the [WriteIt frontend](http://planningalerts.writeit.ciudadanointeligente.org/en/write/who/).
+
+**Run [the morph.io scraper](https://morph.io/openaustralia/australian_local_councillors_images) that copies the councillor’s images for use in PlanningAlerts**. Wait for it to finish running before continuing so that the councillors images are available for PlanningAlerts.
+
+Now **visit the authority admin page and click the “Load Councillors” button**.
+Any new councillors for this authority will be added, and existing councillors will be updated.
+
+Finally, check the list of your new and/or updated councillors on the authority’s admin page.
+If you're happy with the result then **[enable writing to councillors for this authority](#enable-the-feature-for-an-authority)**.
 
 #### Accepting councillor replies
 
@@ -194,6 +203,8 @@ You will be able to send messages to the people who have an email address.
 
 Every time you want to add new councillors or change their details, you need to load that data into WriteIt in addition to [loading the changes into PlanningAlerts](#adding-councillors-for-an-authority).
 On the Writeit ‘data sources’ page you can “fetch new data” to update your available ‘recipients’.
+
+It’s always a good idea to check that your update worked as expected by [seeing if you have the option to write to one of the newly added councillors in WriteIt](http://planningalerts.writeit.ciudadanointeligente.org/en/write/who/).
 
 ###### Sending messages via WriteIt
 
