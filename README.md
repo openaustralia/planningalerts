@@ -203,6 +203,8 @@ You will be able to send messages to the people who have an email address.
 Every time you want to add new councillors or change their details, you need to load that data into WriteIt in addition to [loading the changes into PlanningAlerts](#adding-councillors-for-an-authority).
 On the Writeit ‘data sources’ page you can “fetch new data” to update your available ‘recipients’.
 
+It’s always a good idea to check that your update worked as expected by [seeing if you have the option to write to one of the newly added councillors in WriteIt](http://planningalerts.writeit.ciudadanointeligente.org/en/write/who/).
+
 ###### Sending messages via WriteIt
 
 PlanningAlerts decides how to send a comment [after it is confirmed](https://github.com/openaustralia/planningalerts/blob/master/app/models/comment.rb#L30-L38) by the user.
