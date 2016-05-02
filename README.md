@@ -119,7 +119,8 @@ If you're [using WriteIt](#integrating-with-writeit) then the next step is to **
 Now **visit the authority admin page and click the “Load Councillors” button**.
 Any new councillors for this authority will be added, and existing councillors will be updated.
 
-If you're happy with the result then **enable the feature for this authority** and you're good to go.
+Finally, check the list of your new and/or updated councillors on the authority’s admin page.
+If you're happy with the result then **[enable writing to councillors for this authority](#enable-the-feature-for-an-authority)**.
 
 #### Accepting councillor replies
 
