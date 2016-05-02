@@ -117,7 +117,7 @@ If you're [using WriteIt](#integrating-with-writeit) then the next step is to **
 **Run [the morph.io scraper](https://morph.io/openaustralia/australian_local_councillors_images) that copies the councillor’s images for use in PlanningAlerts**. Wait for it to finish running before continuing so that the councillors images are available for PlanningAlerts.
 
 Now **visit the authority admin page and click the “Load Councillors” button**.
-If you already have councillors in your database for this authority then this will update any changed attributes and add any new councillors.
+Any new councillors for this authority will be added, and existing councillors will be updated.
 
 If you're happy with the result then **enable the feature for this authority** and you're good to go.
 
