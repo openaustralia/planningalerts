@@ -11,7 +11,7 @@
 %p
   The planning application is for
   = succeed ":" do
-    = link_to "#{@comment.application.address}",
+    = link_to @comment.application.address,
               application_url(@comment.application,
                               protocol: "https",
                               utm_source: "councillor-notifications",
