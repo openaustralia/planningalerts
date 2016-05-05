@@ -160,11 +160,11 @@ feature "Send a message to a councillor" do
       open_email("louise@council.nsw.gov.au")
 
       expect(current_email).to_not have_content("For the attention of the General Manager / Planning Manager / Planning Department")
-      expect(current_email).to have_content("Hi Louise Councillor")
-      expect(current_email).to have_content("a new message from Matthew Landauer")
-      expect(current_email).to have_body_text('in relation to a <a href="https://dev.planningalerts.org.au/applications/8?utm_campaign=view-application&amp;utm_medium=email&amp;utm_source=councillor-notifications">local planning application for 24 Bruce Road Glenbrook</a>.')
-      expect(current_email).to have_content("A lovely house")
+      expect(current_email).to have_content("Louise Councillor")
       expect(current_email).to have_content("I think this is a really good idea")
+      expect(current_email).to have_content("From Matthew Landauer")
+      expect(current_email).to have_body_text('The planning application is for <a href="https://dev.planningalerts.org.au/applications/8?utm_campaign=view-application&amp;utm_medium=email&amp;utm_source=councillor-notifications">24 Bruce Road Glenbrook</a>')
+      expect(current_email).to have_content("A lovely house")
     end
 
     scenario "viewing the comment on the application page" do
