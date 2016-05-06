@@ -24,7 +24,7 @@ describe Councillor do
   describe "#cached_image_url" do
     it "adds the popolo_id to the cache storage url" do
       expect(create(:councillor, popolo_id: "authority/foo_bar").cached_image_url)
-        .to eql "https://australian-local-councillors-images.s3.amazonaws.com/authority/foo_bar.jpg"
+        .to eql "https://australian-local-councillors-images.s3.amazonaws.com/authority/foo_bar-80x88.jpg"
     end
   end
 

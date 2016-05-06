@@ -25040,7 +25040,7 @@ http_interactions:
   recorded_at: Tue, 22 Mar 2016 05:36:37 GMT
 - request:
     method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/kevin_mack.jpg
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/kevin_mack-80x88.jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -25055,31 +25055,70 @@ http_interactions:
       message: OK
     headers:
       X-Amz-Id-2:
-      - rg/D4wJi1jtNS6Vn+GN6Na6zQ4RxUKAc+RNnOR70VKKASHReIDoD3oricpeBbyTJxhhPfvEmWWM=
+      - em05rl0U2zDRLEfX/DRG4RC2VFvIEPJ+QOSHxRIG0us86sIITww4mSD4f1dIbbN2wqy+JGidPIo=
       X-Amz-Request-Id:
-      - 6765DFC99F489440
+      - 6107562C9D7925B3
       Date:
-      - Fri, 29 Apr 2016 00:14:20 GMT
+      - Fri, 06 May 2016 01:54:27 GMT
       Last-Modified:
-      - Wed, 27 Apr 2016 10:53:59 GMT
+      - Thu, 05 May 2016 23:24:30 GMT
       Etag:
-      - '"a918f358bd6ca21c00734e34aaf0ca5c"'
+      - '"d804197dbf8fa41fd27ead3df1c7ec93"'
       Accept-Ranges:
       - bytes
       Content-Type:
       - ''
       Content-Length:
-      - '24028'
+      - '16863'
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:14:20 GMT
+  recorded_at: Fri, 06 May 2016 01:54:26 GMT
 - request:
     method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/authority/foo_bar.jpg
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/ross_jackson-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - g6OBNmnOM2buprNkRqGnkIDqIQonT4W2ZutqSC4tsX4CkGi4Q8qsjB1+iteGCMA1hUu6QUst06Q=
+      X-Amz-Request-Id:
+      - 0C54A0244217AD86
+      Date:
+      - Fri, 06 May 2016 01:54:27 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 23:24:36 GMT
+      Etag:
+      - '"9d87921f7bd0d609ed5afdf14d473ab9"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '17874'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 01:54:26 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/armidale_dumaresq_council/daryl_betteridge-80x88.jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -25094,25 +25133,25 @@ http_interactions:
       message: Not Found
     headers:
       X-Amz-Request-Id:
-      - 8E692AF7D545AD97
+      - F650E893B462998F
       X-Amz-Id-2:
-      - LVl2Go7FYb3NQiuX4DgGP5bmgYcIIaSC6O+i7JS02TyAb/L04lL6FxP5/YHKI4yE1IQ4wcyGrEw=
+      - nWpOauV2snfMkkfjG3Wv2RgOl+hynNTpf+2AS6s4RfhSBp8I4xs5PqW+sPdnmOJPXDz4TIrvbu0=
       Content-Type:
       - application/xml
       Transfer-Encoding:
       - chunked
       Date:
-      - Fri, 29 Apr 2016 00:14:19 GMT
+      - Fri, 06 May 2016 01:54:26 GMT
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:14:21 GMT
+  recorded_at: Fri, 06 May 2016 01:54:26 GMT
 - request:
     method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/armidale_dumaresq_council/daryl_betteridge.jpg
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/armidale_dumaresq_council/darren_cameron-80x88.jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -25127,25 +25166,25 @@ http_interactions:
       message: Not Found
     headers:
       X-Amz-Request-Id:
-      - 1671537D6D65C0F8
+      - 5B569F13C2A7E302
       X-Amz-Id-2:
-      - kVXtevuXPhfgRJCVVpv9RvuZkuRRVm4jt6jTiKeiWHVHSWcVzZQCyEa1J8TFGqHI40OQABwXDC0=
+      - ceO2vv8b9GMHAeyKy1oepa+ZNUuhAX1V2aD5S2WszICkgS+DayJjivahx1LComjmm1/q3pEd1Ik=
       Content-Type:
       - application/xml
       Transfer-Encoding:
       - chunked
       Date:
-      - Fri, 29 Apr 2016 00:15:40 GMT
+      - Fri, 06 May 2016 01:54:26 GMT
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:15:42 GMT
+  recorded_at: Fri, 06 May 2016 01:54:26 GMT
 - request:
     method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/armidale_dumaresq_council/darren_cameron.jpg
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/authority/foo_bar-80x88.jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -25160,25 +25199,25 @@ http_interactions:
       message: Not Found
     headers:
       X-Amz-Request-Id:
-      - CCED969DC7A4E7B3
+      - D02D1E285F8FCCF2
       X-Amz-Id-2:
-      - OQVlGrXJ+4JgSuPE/It5z4jOBrYaERCOtoYuOb5tR51/ZyFj0w3LJ1rrrFMkNM502OkzVnCaZXc=
+      - uC0yJcqkzZ6kt1Je1PCkDZMon+omeOv+9HTnTUQQbQ6aDjZX5jROLYotCf8FiIoBfhKoCPkJmzE=
       Content-Type:
       - application/xml
       Transfer-Encoding:
       - chunked
       Date:
-      - Fri, 29 Apr 2016 00:15:41 GMT
+      - Fri, 06 May 2016 01:54:28 GMT
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:15:42 GMT
+  recorded_at: Fri, 06 May 2016 01:54:28 GMT
 - request:
     method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/ross_jackson.jpg
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/mark_gardiner-80x88.jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -25193,31 +25232,31 @@ http_interactions:
       message: OK
     headers:
       X-Amz-Id-2:
-      - /ai1QG/D9GBTRRT7zdazKG49PpVwtXX9vd4yJW+5yfYmKw3iU40YvQJrHORPnnTksDWzNuM+yVE=
+      - 6DvxdtnzzifpnBwdT+6OVFx+wQOcISrCpLZuzpgwZOM0l/omp2p2cRt5aM3jOVkgdYHofPXEKmc=
       X-Amz-Request-Id:
-      - CB9DC87632A1F306
+      - D54D529692B79883
       Date:
-      - Fri, 29 Apr 2016 00:15:43 GMT
+      - Fri, 06 May 2016 02:02:59 GMT
       Last-Modified:
-      - Wed, 27 Apr 2016 10:54:00 GMT
+      - Thu, 05 May 2016 23:36:21 GMT
       Etag:
-      - '"4eedea6674729dcb0a7cedf8443fc95d"'
+      - '"2d0a926c44f9588cacccbb8ed09e1f83"'
       Accept-Ranges:
       - bytes
       Content-Type:
       - ''
       Content-Length:
-      - '25519'
+      - '36018'
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:15:43 GMT
+  recorded_at: Fri, 06 May 2016 02:02:58 GMT
 - request:
     method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/clover_moore.jpg
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/morris_hanna-80x88.jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -25232,31 +25271,889 @@ http_interactions:
       message: OK
     headers:
       X-Amz-Id-2:
-      - uBdE3ak+wwTqjajcqLbjtl/Z64wHsByLibjkSHvs/+loyn3zmqlQzYykEwSlMVVY1TyWfmiXmYo=
+      - Vz7/BsSZaIJzKzRdkELHdxQgWhaNeKH5NpQ9oOOhO7e1MIsThb5Zwugj6VfqkORLhR0k+3T2t28=
       X-Amz-Request-Id:
-      - 1F1D8CA74776E9CD
+      - 379DF29717A84217
       Date:
-      - Fri, 29 Apr 2016 00:16:06 GMT
+      - Fri, 06 May 2016 02:02:59 GMT
       Last-Modified:
-      - Wed, 27 Apr 2016 11:01:43 GMT
+      - Thu, 05 May 2016 23:36:28 GMT
       Etag:
-      - '"779dca49b08df3471bde75c30446785d"'
+      - '"55efc20fcca49e062e4634082f0bb665"'
       Accept-Ranges:
       - bytes
       Content-Type:
       - ''
       Content-Length:
-      - '14998'
+      - '28928'
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:06 GMT
+  recorded_at: Fri, 06 May 2016 02:02:58 GMT
 - request:
     method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/robyn_kemmis.jpg
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/daniel_barbar-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - hQbxP4fyoZtkRbFTnzi94T6jcYcJR1cfTL76jw4Cnj+UWdDbc1Xmm36jUB4SE/dsAQqkwh54Yx0=
+      X-Amz-Request-Id:
+      - FE4F736274237E5D
+      Date:
+      - Fri, 06 May 2016 02:02:59 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 23:36:34 GMT
+      Etag:
+      - '"ec9dbcc197cbb02a6d71c3f3244935cd"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '4577'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:02:58 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/melissa_brooks-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - t/5o5gdmK0MNWIWwOz3epsDMkbA1bQemsO2EthL+TwZ7L8K8JNH7ySmW6e0DSrGel87G8cIXaW0=
+      X-Amz-Request-Id:
+      - 6B03B60A923D69CD
+      Date:
+      - Fri, 06 May 2016 02:03:00 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 23:36:40 GMT
+      Etag:
+      - '"57d8f948f6acb8e7ef2536e0d27e785e"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '30837'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:02:59 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/sylvie_ellsmore-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - 9no1ZZNC8MILIU3tG2XPZgYGXE99mZbzbO11A/DApirlYKUmQmiN39+nDjVLpOGj0TD4UlqejMA=
+      X-Amz-Request-Id:
+      - 99277E9C4F9D999E
+      Date:
+      - Fri, 06 May 2016 02:03:00 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 23:36:47 GMT
+      Etag:
+      - '"47871017a17a3ac9e52c2e74c15ba73c"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '30443'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:02:59 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/jo_haylen-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - pM8O16md/pa2LloOSADikgizHG/a8zGzpLRXeGpUyio7gjU8zgWSEK1PvN4bw232ImW+6cAdslY=
+      X-Amz-Request-Id:
+      - 62C09D9D26FBD075
+      Date:
+      - Fri, 06 May 2016 02:03:00 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 23:36:53 GMT
+      Etag:
+      - '"fd4304104374b038ce8c7b77a31c94a5"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '23246'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:02:59 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/sam_iskandar-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - IrPxoHx72RiO6GoGIxUG/r+HiVkZSKB05Ie7vRKhL+DIfGECUeVBq7iVh7wTLLXw5HpQ0Xtdsug=
+      X-Amz-Request-Id:
+      - 9AAEE3CE882816FE
+      Date:
+      - Fri, 06 May 2016 02:03:00 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 23:37:00 GMT
+      Etag:
+      - '"063c7a94014316777e8e5c828b65571e"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '27474'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:02:59 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/david_leary-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - LPuPKZlCi3sx2i3roYbZXsF5AstF+9vjJIXTCHWvslc3PzIMYtTe1Ch0MOYh/FM1zM6isXTccIY=
+      X-Amz-Request-Id:
+      - 0A7E2E1A38FCBBDE
+      Date:
+      - Fri, 06 May 2016 02:03:01 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 23:37:06 GMT
+      Etag:
+      - '"87fd4e33f317771616255e13cb204bf5"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '28995'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:03:00 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/victor_macri-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - O4T89AgzZGUqawBzQ9hop9BspaCAEA0svruY+KISqkn7RIywEFdsshmR0wJstDyyi6P8ZLfKkFU=
+      X-Amz-Request-Id:
+      - ED08B495742D369F
+      Date:
+      - Fri, 06 May 2016 02:03:01 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 23:37:13 GMT
+      Etag:
+      - '"001a43b5f241de2683f656a18291e166"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '28204'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:03:00 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/max_phillips-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - oZPThwFIQZhX4Gowhm3HF/gD/4Vgms3WBI4qVjDqpX0bJAe1s/g6PF0oKz/lYSQA0zg7N+9OlbE=
+      X-Amz-Request-Id:
+      - 44E8C8864C6625C3
+      Date:
+      - Fri, 06 May 2016 02:03:01 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 23:37:20 GMT
+      Etag:
+      - '"054ff12b1b2692d29e4c60e52c7918a2"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '28172'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:03:00 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/rosana_tyler-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - GDIhBfEC94E6Yhf262NkP5PzJjyAvefVc8qRVREaN+hDKGjndNMRIBTqLE3Ga055ha5Iqb9eLnA=
+      X-Amz-Request-Id:
+      - 83EFCC04FA6B9823
+      Date:
+      - Fri, 06 May 2016 02:03:01 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 23:37:27 GMT
+      Etag:
+      - '"14b67aad3f6e6da9bd764868622c6864"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '26911'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:03:00 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/chris_woods-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - reoVRPI4Oa4DBh7fEnhk2CThDGQZsNcwFXA0rXGZUcqz3ScF1xz0ivGLD0MSm79lzzl07WK1YkM=
+      X-Amz-Request-Id:
+      - 44CED47BE6915DD8
+      Date:
+      - Fri, 06 May 2016 02:03:01 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 23:37:34 GMT
+      Etag:
+      - '"5d7acd1eca2ec71dabba3891e5caa0ea"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '19940'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:03:00 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/paul_antonio-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - IGNm0Zl1z1QdhDe7F6iBA9spp44/eJfPUOt0VyxZJVJmhsS3BBqEPw76sX+0XS/kYyl4mnHfSys=
+      X-Amz-Request-Id:
+      - D8312176D50D4E3E
+      Date:
+      - Fri, 06 May 2016 02:03:02 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 06:33:21 GMT
+      Etag:
+      - '"5c24ff93e52a79da08c507d673112cd9"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '2489'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:03:01 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/anne_glasheen-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - lQ5Nm+CSuxiTfIJF3S25tyfix6knMyirJB2r+Zg4BtsfpUm4ZPtGfpWypPnfPmVdBDtc55NnKiM=
+      X-Amz-Request-Id:
+      - 6651E1036533D086
+      Date:
+      - Fri, 06 May 2016 02:03:03 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 06:33:24 GMT
+      Etag:
+      - '"1bccc8661df28da7f90e9576284d885a"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '2510'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:03:02 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/bill_cahill-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - viJ0xCHdOCZB0QibrQsE/SKhWkyqDXlmq34YDA3r6r8nNgC3h2ugOZyZw1xUDmsnmXDyYrp+wfk=
+      X-Amz-Request-Id:
+      - D67A527E67B15E73
+      Date:
+      - Fri, 06 May 2016 02:03:03 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 06:33:28 GMT
+      Etag:
+      - '"f18e223126f62bb7da27f52685ba4b84"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '2573'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:03:02 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/carol_taylor-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - M5ZQ+7n7flk6VklmjQanr/WfGqvcFc1eikoQ1Wm9Lq+XpdLZxzM8jenlZtsWPlQ5wfZJyo9bgsA=
+      X-Amz-Request-Id:
+      - 4627C7DC3382E3CF
+      Date:
+      - Fri, 06 May 2016 02:03:03 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 06:33:31 GMT
+      Etag:
+      - '"3fa2d8262df3556dce3c7a956a8f55e4"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '2954'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:03:02 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/chris_tait-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - oQCJIGWIJYXOYwLqu+IkJfH0Icgqc4zr2M+HOBOg8nGbxAadNBvKpEM9KIV6tMLxKcnQc/ThodQ=
+      X-Amz-Request-Id:
+      - B0FF1F188B96B797
+      Date:
+      - Fri, 06 May 2016 02:03:03 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 06:33:35 GMT
+      Etag:
+      - '"2c3d01b685d13282de3ba66286e94d7c"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '2496'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:03:02 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/geoff_mcdonald-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - MkZzJaLZ1OrySdVZhzDhpKsCLSzh9aG+Fq9N71uhHpZ+DNjHACxIaDlyyb05WiMOu+nABwQVzqU=
+      X-Amz-Request-Id:
+      - A36AF32509D0EDEF
+      Date:
+      - Fri, 06 May 2016 02:03:03 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 06:33:38 GMT
+      Etag:
+      - '"7541ec6c0cf66a9cfb06091d8023e46e"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '2666'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:03:02 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/john_gouldson-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - bGr4+/k9S8bfelqEeIWX/R0mGr+rShco1iz4gxOJy8QrGEyjp5enXkYNRnv7c05uWlsI45Cq1U0=
+      X-Amz-Request-Id:
+      - 1171570320B6069C
+      Date:
+      - Fri, 06 May 2016 02:03:04 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 06:33:41 GMT
+      Etag:
+      - '"be24e7e1cdf0289362f553749365a8cf"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '2594'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:03:03 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/mike_williams-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - Whl0i+BGx/ayBKKygfi6Uc9v9D1jEP5gZf9AwYCKmyCzV0tXPeZiZUw7/43xx8gKflB9/RtoKkc=
+      X-Amz-Request-Id:
+      - 4C830FE0CEF262DB
+      Date:
+      - Fri, 06 May 2016 02:03:04 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 06:33:44 GMT
+      Etag:
+      - '"0f21dd29b566720d2af581519be482dd"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '2481'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:03:03 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/nancy_sommerfield-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - NKJYf6ghfZKTZmY20BAXFl2N3uXLS2yIh5nX8ZwrUs7wvs35psQ7KDVxKGkIDxOT4QE6Sr+W56Y=
+      X-Amz-Request-Id:
+      - E36BDD87F1724D24
+      Date:
+      - Fri, 06 May 2016 02:03:04 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 06:33:47 GMT
+      Etag:
+      - '"e056795559ca4a592fc747705da0b976"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '2788'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:03:03 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/roslyn_scotney-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - /ZiWdJ6R7/ZUzP/cZorZwy4U9/O0tX/eVxalt0dghAqeBKrV2v+zn9BiK4HCS3Bz12Hcb1tHGsk=
+      X-Amz-Request-Id:
+      - 60133CBECF147C42
+      Date:
+      - Fri, 06 May 2016 02:03:04 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 06:33:51 GMT
+      Etag:
+      - '"b45127430336afb13e0a770c04cf60a5"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '2538'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:03:03 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/sue_englart-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - 62PZpEADnBIEI4rn4ekVu9GjW8KZsnxVB2NkrxyCG8+dL2CRBMupJcEKpsYzN0yf9uzJ1GHXdM4=
+      X-Amz-Request-Id:
+      - BA930DCBE5FB350E
+      Date:
+      - Fri, 06 May 2016 02:03:05 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 06:33:54 GMT
+      Etag:
+      - '"4140b1ea2d39a01fc540383f1b5069c4"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '2985'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:03:04 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/clover_moore-80x88.jpg
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Amz-Id-2:
+      - d2Os60PnmKgrs1LN8rBcMv4NM4qwMrKlFJ3ua8dUjU2TDXzp8Dxrdq0dJ8wfGOU5c3/3wUKS1FU=
+      X-Amz-Request-Id:
+      - B29BDA4539C718BE
+      Date:
+      - Fri, 06 May 2016 02:03:06 GMT
+      Last-Modified:
+      - Thu, 05 May 2016 23:37:40 GMT
+      Etag:
+      - '"dd303a1a1204fbf8e6ae002fdbca4126"'
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - ''
+      Content-Length:
+      - '8040'
+      Server:
+      - AmazonS3
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Fri, 06 May 2016 02:03:05 GMT
+- request:
+    method: head
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/robyn_kemmis-80x88.jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -25271,25 +26168,25 @@ http_interactions:
       message: Not Found
     headers:
       X-Amz-Request-Id:
-      - 851AD37D6C5C1821
+      - 0CEBFBF33A617511
       X-Amz-Id-2:
-      - yYJWxeFWJUVVAapcEjlenicEU56VNn+CSlPGkC5Yexo8fhixFtkQ5hfwef1Gyz4z4+rmM2MAiXY=
+      - Gkxgs0UFulXAlyUTdOw59i/en4aASsMD39Br1ZmzXkm/6e6YhdHxU3limhR0hwZe8t5639revcs=
       Content-Type:
       - application/xml
       Transfer-Encoding:
       - chunked
       Date:
-      - Fri, 29 Apr 2016 00:16:05 GMT
+      - Fri, 06 May 2016 02:03:05 GMT
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:06 GMT
+  recorded_at: Fri, 06 May 2016 02:03:05 GMT
 - request:
     method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/irene_doutney.jpg
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/irene_doutney-80x88.jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -25304,31 +26201,31 @@ http_interactions:
       message: OK
     headers:
       X-Amz-Id-2:
-      - bgD879vxTNCi/bQ7+f+LL68IHn4TS2eqLp/MsBZ3ffDjProcfw65/Pn48Ey4kBfC5lg6YKgKf8c=
+      - VoG0pZG0/SwTEADog+fF29HezAar5mAneOnGKRwpje8O6Hk7cl+xKcLoVTkRgthASjU1TTQhMGk=
       X-Amz-Request-Id:
-      - F365A5D30141F50A
+      - EE522B33F2575D53
       Date:
-      - Fri, 29 Apr 2016 00:16:07 GMT
+      - Fri, 06 May 2016 02:03:06 GMT
       Last-Modified:
-      - Wed, 27 Apr 2016 11:01:48 GMT
+      - Thu, 05 May 2016 23:37:46 GMT
       Etag:
-      - '"653f778cc6f67b7dea1623e27ddcaafb"'
+      - '"525a56e3923931b6d04d2a0c31e45200"'
       Accept-Ranges:
       - bytes
       Content-Type:
       - ''
       Content-Length:
-      - '9468'
+      - '5258'
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:07 GMT
+  recorded_at: Fri, 06 May 2016 02:03:05 GMT
 - request:
     method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/christine_forster.jpg
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/christine_forster-80x88.jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -25343,31 +26240,31 @@ http_interactions:
       message: OK
     headers:
       X-Amz-Id-2:
-      - AMGMe7UdCFc1u3aGqpKdjx01o7gdOZ7WLdls+ubnLoD1zkRC6By2FvQJJdoAVyO3AB5p3UIIfqk=
+      - BNx9OQWjx9OboDNk5jVUnNQU9tOHnYyg63FRngn1H1rE1TbGTV2ThMQUalJmDWYdBeJetxNZoY4=
       X-Amz-Request-Id:
-      - 65EBFEEFD0502626
+      - B02082E52936F427
       Date:
-      - Fri, 29 Apr 2016 00:16:07 GMT
+      - Fri, 06 May 2016 02:03:07 GMT
       Last-Modified:
-      - Wed, 27 Apr 2016 11:01:52 GMT
+      - Thu, 05 May 2016 23:37:52 GMT
       Etag:
-      - '"17a73353b4f030b30cf85102fe945e78"'
+      - '"1d8cd7fff35c15c33dc1065686785e5a"'
       Accept-Ranges:
       - bytes
       Content-Type:
       - ''
       Content-Length:
-      - '11080'
+      - '4343'
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:07 GMT
+  recorded_at: Fri, 06 May 2016 02:03:06 GMT
 - request:
     method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/jenny_green.jpg
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/jenny_green-80x88.jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -25382,31 +26279,31 @@ http_interactions:
       message: OK
     headers:
       X-Amz-Id-2:
-      - FAap1hsRKdKqhesC9VtTlBY241RuOFxBNWs5okj1P6lkS8GNVGvp8YC6YhOWWLzWB5B07NTnhwE=
+      - 88AjGJn9vA7uo9BAU5x+ied47gJX/+DQIsKiqX4Ha025FsNvrJy/V/0Oxi9ZCJpzPX0J4AR7x9w=
       X-Amz-Request-Id:
-      - C051D0C6F0DAB490
+      - 1F2B7D352D007184
       Date:
-      - Fri, 29 Apr 2016 00:16:07 GMT
+      - Fri, 06 May 2016 02:03:07 GMT
       Last-Modified:
-      - Wed, 27 Apr 2016 11:01:57 GMT
+      - Thu, 05 May 2016 23:37:58 GMT
       Etag:
-      - '"08d7a6693515492206a3e21db1b3f1aa"'
+      - '"eb20f8958872792a676eeff391a9d8c3"'
       Accept-Ranges:
       - bytes
       Content-Type:
       - ''
       Content-Length:
-      - '11478'
+      - '4818'
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:07 GMT
+  recorded_at: Fri, 06 May 2016 02:03:06 GMT
 - request:
     method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/robert_kok.jpg
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/robert_kok-80x88.jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -25421,31 +26318,31 @@ http_interactions:
       message: OK
     headers:
       X-Amz-Id-2:
-      - l/a+Xrf2F5yqFRLgOUWqRfDP2UYovt+OZTcbJl6p3HRolww9mxoaCzHrb0q3ciiTa9un1j/hH6w=
+      - NpGSU041I/nCZIbQoIq8OdR/qVrwmDbHJ3h0QBJQqoXbwdMIHFq4HsmEcDT8vVQUOoTj8jzEGZw=
       X-Amz-Request-Id:
-      - A2E82A45EB61AA09
+      - 27C2098BBB91CC0C
       Date:
-      - Fri, 29 Apr 2016 00:16:08 GMT
+      - Fri, 06 May 2016 02:03:07 GMT
       Last-Modified:
-      - Wed, 27 Apr 2016 11:02:02 GMT
+      - Thu, 05 May 2016 23:38:04 GMT
       Etag:
-      - '"0ffef9c11e0d85587d45c00d07e05cde"'
+      - '"b500e2ef1d7c945a226b51293977b0d3"'
       Accept-Ranges:
       - bytes
       Content-Type:
       - ''
       Content-Length:
-      - '8983'
+      - '3572'
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:07 GMT
+  recorded_at: Fri, 06 May 2016 02:03:06 GMT
 - request:
     method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/edward_mandla.jpg
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/edward_mandla-80x88.jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -25460,31 +26357,31 @@ http_interactions:
       message: OK
     headers:
       X-Amz-Id-2:
-      - cRplGVKF0mxOiFkwVv2Vx751/cvcbP0kisMtVIw8eOw3TeREqTBjn1XlmDJxuce+BXgwPP3LJFo=
+      - KjR3ylf7RTLueJlV4t8kTQ2iQ3mjxWTJtRQv9XiYMMMWcyoERKTtmpfXwAbVgHC+M18UQ87iBr4=
       X-Amz-Request-Id:
-      - 6D446351156DF0E8
+      - 26C74C5DAF37A613
       Date:
-      - Fri, 29 Apr 2016 00:16:08 GMT
+      - Fri, 06 May 2016 02:03:07 GMT
       Last-Modified:
-      - Wed, 27 Apr 2016 11:02:07 GMT
+      - Thu, 05 May 2016 23:38:10 GMT
       Etag:
-      - '"5d00af906cb27ab4ffd8678bec714dda"'
+      - '"4303f65bd90432be4e5bbb1fd3e656d8"'
       Accept-Ranges:
       - bytes
       Content-Type:
       - ''
       Content-Length:
-      - '9441'
+      - '3746'
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:08 GMT
+  recorded_at: Fri, 06 May 2016 02:03:06 GMT
 - request:
     method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/john_mant.jpg
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/john_mant-80x88.jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -25499,31 +26396,31 @@ http_interactions:
       message: OK
     headers:
       X-Amz-Id-2:
-      - 1cEBdBMHCeqE09JC+6DQf07jWQUj+o2WXlKuW0UbIdwt20Sz8VCbMbVvr+yKkO8YuEoiXWpmWpw=
+      - 3uEIuckKCBqRWQsjV//3LseVjxuQth33dxQokBr9A+AuraQi1VripKmuDT+RM9W1UTClBHzTeoY=
       X-Amz-Request-Id:
-      - ED3F6D81EFF18316
+      - F1D6A8347193E763
       Date:
-      - Fri, 29 Apr 2016 00:16:08 GMT
+      - Fri, 06 May 2016 02:03:07 GMT
       Last-Modified:
-      - Wed, 27 Apr 2016 11:02:12 GMT
+      - Thu, 05 May 2016 23:38:16 GMT
       Etag:
-      - '"05eb08dd16405fdec0e849e2c5d68f6a"'
+      - '"f4e6084ac49a6f2278791625824f7226"'
       Accept-Ranges:
       - bytes
       Content-Type:
       - ''
       Content-Length:
-      - '9569'
+      - '3713'
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:08 GMT
+  recorded_at: Fri, 06 May 2016 02:03:06 GMT
 - request:
     method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/linda_scott.jpg
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/linda_scott-80x88.jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -25538,31 +26435,31 @@ http_interactions:
       message: OK
     headers:
       X-Amz-Id-2:
-      - ru1eGHnV4mlc9NOFYOz2IMCcKs0hHlE+XRm7Ek1bXhEF4YGR0R/RHJ1FVHJSxZE9jB2XjiKoE6U=
+      - WU5yGDGZ0bu/B/6aEGU4t5XE7+TZBINs8LDht1Km8+WDv3cAl7jtjkFF3lAvq7ZvZIJjay6DqhA=
       X-Amz-Request-Id:
-      - DE1DE1588FB01FA0
+      - 7F98F0DC8580EF24
       Date:
-      - Fri, 29 Apr 2016 00:16:08 GMT
+      - Fri, 06 May 2016 02:03:08 GMT
       Last-Modified:
-      - Wed, 27 Apr 2016 11:02:18 GMT
+      - Thu, 05 May 2016 23:38:22 GMT
       Etag:
-      - '"b5660d408a5d4da2bb03fc0116e4ed17"'
+      - '"82262d1d6302b5afac42ab2bfe1cbb87"'
       Accept-Ranges:
       - bytes
       Content-Type:
       - ''
       Content-Length:
-      - '10709'
+      - '4276'
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:08 GMT
+  recorded_at: Fri, 06 May 2016 02:03:07 GMT
 - request:
     method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/angela_vithoulkas.jpg
+    uri: https://australian-local-councillors-images.s3.amazonaws.com/city_of_sydney/angela_vithoulkas-80x88.jpg
     body:
       encoding: US-ASCII
       string: ''
@@ -25577,923 +26474,26 @@ http_interactions:
       message: OK
     headers:
       X-Amz-Id-2:
-      - ISyS/v0mbdgyw9A9atq7Xdzqif1sU5/2MzLAyzFd5Tmp0KeQgE8yQweTpk7YPrOdyluWOsnZeUU=
+      - tZmsaY7qFUh3+D7J50HAGoQvFaNPgMzfCg+vyWKhpBeJpBcc0PQl7PrE+Zgew1nb3QUCa1WTodw=
       X-Amz-Request-Id:
-      - 4311D169581759D5
+      - 6ECC3F986CAD6B9F
       Date:
-      - Fri, 29 Apr 2016 00:16:08 GMT
+      - Fri, 06 May 2016 02:03:08 GMT
       Last-Modified:
-      - Wed, 27 Apr 2016 11:02:22 GMT
+      - Thu, 05 May 2016 23:38:29 GMT
       Etag:
-      - '"6cc71da7196d4bc1c6b25d8dfd07b8f7"'
+      - '"ee8f23cd6758146201d23632661953ac"'
       Accept-Ranges:
       - bytes
       Content-Type:
       - ''
       Content-Length:
-      - '13176'
+      - '6738'
       Server:
       - AmazonS3
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:08 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/mark_gardiner.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - 0YI4Kuflt0dmOWqAW96WweSqKE2RDJhYis71MLPMs6U4039HRNtdTpgrzYyPV+IV06rDthUQiUQ=
-      X-Amz-Request-Id:
-      - 215A35DB833EAAE5
-      Date:
-      - Fri, 29 Apr 2016 00:16:20 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:00:24 GMT
-      Etag:
-      - '"7742de77e0ba840348a5ce60643612ca"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '51054'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:20 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/morris_hanna.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - pqu68feeElSOX36mvddRuCp4cjh3LU0MVcHZ6fp+LqFGbBpXpxgk7SV1QmaHe3YZk00blb8nqa4=
-      X-Amz-Request-Id:
-      - 906F0F7BD02E650A
-      Date:
-      - Fri, 29 Apr 2016 00:16:20 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:00:29 GMT
-      Etag:
-      - '"2fb317b18dd306c6b7c396bfd1c20591"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '44696'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:20 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/daniel_barbar.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - yAjuGllX1TS9TIDRHRUSP8GlCqVSRIPzRJSgq7aMsrcDKNZR1jASN8kH2qCFmjvTdHKW3kQta/Y=
-      X-Amz-Request-Id:
-      - 5B4F2D21AD014397
-      Date:
-      - Fri, 29 Apr 2016 00:16:20 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:00:36 GMT
-      Etag:
-      - '"7a16b24f5bda9f58d50a58dfab83a951"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '10048'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:20 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/melissa_brooks.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - 9BxCNNI2P99aOhv/oa7QOU9SQXvUW11NJs0JZ+MkOR6d9Pgxnaui2jSXlI+ccLOJDX0t26bNQNY=
-      X-Amz-Request-Id:
-      - BAA423564D20E33D
-      Date:
-      - Fri, 29 Apr 2016 00:16:20 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:00:44 GMT
-      Etag:
-      - '"7d64e07b2f704d09b9e27cae601e33ba"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '49135'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:20 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/sylvie_ellsmore.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - mZh0HkdCjnS1bKEdUxwQlwidFHb5TfO15criE959aPGG33adqT3ZQGfI1sJWx9vmX9R2BNoi6aA=
-      X-Amz-Request-Id:
-      - 465C37A79E3BD3CF
-      Date:
-      - Fri, 29 Apr 2016 00:16:21 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:00:49 GMT
-      Etag:
-      - '"f88852cbe908ada1845b6399b2472d5b"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '48458'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:20 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/jo_haylen.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - HCPlX2hEeE/FAcaflaUFA6C+Th/H9OH4XaQH3iM21A6eaInF8pdITCO45WTOUgi+aXQ8z3sy/U8=
-      X-Amz-Request-Id:
-      - 49BCD1B5385B2933
-      Date:
-      - Fri, 29 Apr 2016 00:16:21 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:00:56 GMT
-      Etag:
-      - '"d5a85c54a6780ceca5bb29be07436223"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '37416'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:21 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/sam_iskandar.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - JCvs+/+eoL1oKD/0qPuB/62hPvlcLs60S4z1V2CuLTkWvSPXpu2A1nDo93J3xUPaQGjv2fhJJoU=
-      X-Amz-Request-Id:
-      - CCCEC1D5DA39E4E1
-      Date:
-      - Fri, 29 Apr 2016 00:16:21 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:01:02 GMT
-      Etag:
-      - '"f51c1e9926431ebb0a66304407b50226"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '42346'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:21 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/david_leary.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - fRYA/MQ6xnAYBZrKVkK8QEvvw4O+wZYQN/QVxnL+5tedZm76e1D7B+XB8Dxyzl8AWbFbitQZL/U=
-      X-Amz-Request-Id:
-      - 193AF945B981D00E
-      Date:
-      - Fri, 29 Apr 2016 00:16:21 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:01:09 GMT
-      Etag:
-      - '"c4d18869be54b3315d1b3548426ed52a"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '45672'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:21 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/victor_macri.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - aY7jCKgPUDDG6cZwZl+38wECgTBDUN4r+AbuYTlpiLBukztQdayNBXxjQJp2QnYa1hfRRcD3iIU=
-      X-Amz-Request-Id:
-      - 67534A6DE37567A2
-      Date:
-      - Fri, 29 Apr 2016 00:16:22 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:01:17 GMT
-      Etag:
-      - '"874a7756276523f8f2c555dc71969400"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '43903'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:22 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/max_phillips.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - z3Xa/I4vJcS7AfBKhL5X1EkrWS4iA/JLylB4HrocdYbIlrNgvCLIKqZKEBJgWHvRf9ex7NVdngc=
-      X-Amz-Request-Id:
-      - 192B1FE7C0752910
-      Date:
-      - Fri, 29 Apr 2016 00:16:22 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:01:25 GMT
-      Etag:
-      - '"3d9372f4ae4e1726f8aec831c3d3b9bd"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '42059'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:22 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/rosana_tyler.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - 2dNxXFvXIXJ/TP+UUkK+h4yBKFB696WX9yr4umYNLU17pJVNP8OtvcaLUzuhTVrxE5JqxYdWoIw=
-      X-Amz-Request-Id:
-      - E278FA6AD4619973
-      Date:
-      - Fri, 29 Apr 2016 00:16:22 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:01:32 GMT
-      Etag:
-      - '"d5c1fe6960e134453b92b989e20205be"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '41377'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:22 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/marrickville_council/chris_woods.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - 5LdH+dyV6UyUOdmOMAA4VzKZNye+v39ZfLrAtBzh5t7bBHOrOaeb7ZZFwE4FyTi/tJJ+gfG8ERI=
-      X-Amz-Request-Id:
-      - C70AE751914AA95F
-      Date:
-      - Fri, 29 Apr 2016 00:16:22 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:01:37 GMT
-      Etag:
-      - '"57e868a763cbccd82594af4239d1d506"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '33204'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:22 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/paul_antonio.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - XPnPV6YtC4X4u1UkKF2R/SseiKe0ZOMFC2ENrTNYK5FPdEtT9ipfQyWFRzHl0zzjex/5JVkNhlk=
-      X-Amz-Request-Id:
-      - 1B27E10228BFF1BC
-      Date:
-      - Fri, 29 Apr 2016 00:16:24 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:05:16 GMT
-      Etag:
-      - '"b92356cdad7f73e0cbbec74e16d0ce73"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '6975'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:23 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/anne_glasheen.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - J4JXtld1VmHwmepEx9RKMd+FEO63jWnoTSqL97NJAKEQBrv2GIEoG57LM6+4dgCXxsbF8fIyDRc=
-      X-Amz-Request-Id:
-      - BC84304AAC1D73E6
-      Date:
-      - Fri, 29 Apr 2016 00:16:24 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:05:22 GMT
-      Etag:
-      - '"fdeb99b6e1e65d376697e62fd826d4fb"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '8047'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:24 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/bill_cahill.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - 9ya9bOUZ/D2yz6zMWBXva9DSAdbZ3F6HSPYsz88SvZqnKDNwQFlaQgkU3PXHu9d2Mmww2GxMp/4=
-      X-Amz-Request-Id:
-      - ADDC1105767193AD
-      Date:
-      - Fri, 29 Apr 2016 00:16:24 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:05:27 GMT
-      Etag:
-      - '"36cb3f2aa6ad0baa0eedc3de575315e4"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '6491'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:24 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/carol_taylor.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - oQtibjXAriqIrPTOruk3c/gtG1VAOsnpI3kUXM6XjpXmn5XI1vKakxACpp9h/eBuh4+NXQ5W4xo=
-      X-Amz-Request-Id:
-      - 66175A96B67EE93A
-      Date:
-      - Fri, 29 Apr 2016 00:16:24 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:05:33 GMT
-      Etag:
-      - '"8054abf210fcdc332243d8f5e8480fba"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '9043'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:24 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/chris_tait.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - xV2AjiNsw0rqTFD34R4ciOfKtbKoUrDUQTl0QX2LFLR/U65kRU3O3EuTL+oJks+U9MCOoV6907o=
-      X-Amz-Request-Id:
-      - EA3F84A171837003
-      Date:
-      - Fri, 29 Apr 2016 00:16:24 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:05:37 GMT
-      Etag:
-      - '"b4b27ae58ff0be5072cb023b4d315090"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '7259'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:24 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/geoff_mcdonald.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - iyxxSyGoNWmgnCZNkDujM2BI8+kTgSZb6UomVHzkMff99KZoPe55EjiLl+fOGbLYCrQDTIrvFnA=
-      X-Amz-Request-Id:
-      - 4C3A960A3A9E7DE3
-      Date:
-      - Fri, 29 Apr 2016 00:16:25 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:05:42 GMT
-      Etag:
-      - '"96fe7647ed365e4948973ffffbc3948e"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '8106'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:25 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/john_gouldson.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - fziKtTKziJW/MKub5W76l6s1L4OV7tAgvc0FFlxJxZ++m5udkfMv3CyByGol+QaYu8O3hG5xT6g=
-      X-Amz-Request-Id:
-      - F801881F3712B054
-      Date:
-      - Fri, 29 Apr 2016 00:16:25 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:05:47 GMT
-      Etag:
-      - '"a2977e2893c968c78897d8af8afe2fc7"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '7468'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:25 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/mike_williams.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - 6vMVzduShgK07WTh8nHKzv0Xu6My5SmGa2ncetfcNPGIkMQ7A9We3TLXCmi8Bqds3St/BOPaHdE=
-      X-Amz-Request-Id:
-      - 68703B10A49DD350
-      Date:
-      - Fri, 29 Apr 2016 00:16:25 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:05:52 GMT
-      Etag:
-      - '"d7a97ae77dddc12fed5f3a7b4e4a3337"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '7055'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:25 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/nancy_sommerfield.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - T4XpKWWbYekmMO8zTIEZ9lg00/h6eOK9P2K3jIy+Decn54uFmrk2Q8Nq9OT/q7OFsl1xm03/7RM=
-      X-Amz-Request-Id:
-      - 96D9C5C6B7E6FC37
-      Date:
-      - Fri, 29 Apr 2016 00:16:25 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:05:58 GMT
-      Etag:
-      - '"05a8d45ef1d1e3c558c93c828c798733"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '8128'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:25 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/roslyn_scotney.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - XrKkpT4jOHz2Mm2vtvHbejMViqEf/Aojj4rHapFiK4lWPJcfoiSPanQA0TajTrhv2SeVUwcUcfA=
-      X-Amz-Request-Id:
-      - CE2F3AAAFB9EF633
-      Date:
-      - Fri, 29 Apr 2016 00:16:26 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:06:02 GMT
-      Etag:
-      - '"c0ae8b062723431549b7652269fa53f2"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '9240'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:26 GMT
-- request:
-    method: head
-    uri: https://australian-local-councillors-images.s3.amazonaws.com/toowoomba_regional_council/sue_englart.jpg
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept:
-      - '*/*'
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      X-Amz-Id-2:
-      - 1nT0o7Nn22is7uTbxzH5NaB1uTF5oP7Jc+gv89RDzj6XdpLGSh7UkLHAEvJse6l8esHaQ9GNA88=
-      X-Amz-Request-Id:
-      - 28D97288E99AEEAA
-      Date:
-      - Fri, 29 Apr 2016 00:16:26 GMT
-      Last-Modified:
-      - Wed, 27 Apr 2016 11:06:07 GMT
-      Etag:
-      - '"e4c8a17f16595dea465b527c863a8c4d"'
-      Accept-Ranges:
-      - bytes
-      Content-Type:
-      - ''
-      Content-Length:
-      - '9903'
-      Server:
-      - AmazonS3
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version: 
-  recorded_at: Fri, 29 Apr 2016 00:16:26 GMT
+  recorded_at: Fri, 06 May 2016 02:03:07 GMT
 recorded_with: VCR 2.5.0

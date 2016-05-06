@@ -15,7 +15,7 @@ class Councillor < ActiveRecord::Base
   end
 
   def cached_image_url
-    "https://australian-local-councillors-images.s3.amazonaws.com/#{popolo_id}.jpg"
+    "https://australian-local-councillors-images.s3.amazonaws.com/#{popolo_id}-80x88.jpg"
   end
 
   def cached_image_available?

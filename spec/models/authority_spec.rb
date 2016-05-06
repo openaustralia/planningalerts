@@ -203,7 +203,7 @@ describe Authority do
         kevin = Councillor.find_by(name: "Kevin Mack")
         expect(kevin.present?).to be_true
         expect(kevin.email).to eql "kevin@albury.nsw.gov.au"
-        expect(kevin.image_url).to eql "https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/kevin_mack.jpg"
+        expect(kevin.image_url).to eql "https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/kevin_mack-80x88.jpg"
         expect(kevin.party).to be_nil
         expect(Councillor.find_by(name: "Ross Jackson").party).to eql "Liberal"
       end
@@ -220,13 +220,13 @@ describe Authority do
 
         councillor.reload
         expect(councillor.email).to eql "kevin@albury.nsw.gov.au"
-        expect(councillor.image_url).to eql "https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/kevin_mack.jpg"
+        expect(councillor.image_url).to eql "https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/kevin_mack-80x88.jpg"
         expect(councillor.popolo_id).to eql "albury_city_council/kevin_mack"
         expect(councillor.party).to be_nil
       end
 
       it "uses the cached image url when it’s available" do
-        cached_image_url = "https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/kevin_mack.jpg"
+        cached_image_url = "https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/kevin_mack-80x88.jpg"
 
         authority.load_councillors(popolo)
 
