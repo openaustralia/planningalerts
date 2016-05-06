@@ -1,6 +1,12 @@
 require "spec_helper"
 
 feature "Admin loads councillors for an authority" do
+  around do |example|
+    VCR.use_cassette('planningalerts') do
+      example.run
+    end
+  end
+
   given(:authority) { create(:authority,
                              full_name: "Marrickville Council",
                              state: "NSW") }
@@ -10,9 +16,7 @@ feature "Admin loads councillors for an authority" do
 
     visit admin_authority_path(authority)
 
-    VCR.use_cassette("planningalerts") do
-      click_button "Load Councillors"
-    end
+    click_button "Load Councillors"
 
     expect(page).to have_content "Successfully loaded/updated 12 councillors"
     expect(page).to have_content "Max Phillips"
@@ -29,9 +33,7 @@ feature "Admin loads councillors for an authority" do
 
       visit admin_authority_path(qld_authority)
 
-      VCR.use_cassette("planningalerts") do
-        click_button "Load Councillors"
-      end
+      click_button "Load Councillors"
 
       expect(page).to have_content "Successfully loaded/updated 11 councillors"
       expect(page).to have_content "Sue Englart"
@@ -49,9 +51,7 @@ feature "Admin loads councillors for an authority" do
 
       visit admin_authority_path(city_of_sydney)
 
-      VCR.use_cassette("planningalerts") do
-        click_button "Load Councillors"
-      end
+      click_button "Load Councillors"
 
       expect(page).to have_content "Skipped loading 10 councillors"
     end
