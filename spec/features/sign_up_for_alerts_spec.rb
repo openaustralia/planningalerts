@@ -18,7 +18,6 @@ feature "Sign up for alerts" do
 
     page.should have_content("Now check your email")
 
-    unread_emails_for("example@example.com").size.should == 1
     open_email("example@example.com")
     current_email.should have_subject("Please confirm your planning alert")
     current_email.default_part_body.to_s.should include("24 Bruce Road, Glenbrook NSW 2773")
