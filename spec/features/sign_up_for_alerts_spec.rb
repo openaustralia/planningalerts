@@ -78,7 +78,6 @@ feature "Sign up for alerts" do
       create(:application, address: "26 Bruce Rd, Glenbrook NSW 2773", authority: authority)
     end
 
-
     scenario "successfully" do
       visit applications_path(authority_id: "glenbrook")
 
