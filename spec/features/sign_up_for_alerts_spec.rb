@@ -3,14 +3,18 @@ require 'spec_helper'
 feature "Sign up for alerts" do
   # In order to see new development applications in my suburb
   # I want to sign up for an email alert
-  scenario "successfully" do
+  around do |example|
     VCR.use_cassette('planningalerts') do
-      visit '/alerts/signup'
-
-      fill_in("alert_email", with: "example@example.com")
-      fill_in("alert_address", with: "24 Bruce Road, Glenbrook")
-      click_button("Create alert")
+      example.run
     end
+  end
+
+  scenario "successfully" do
+    visit '/alerts/signup'
+
+    fill_in("alert_email", with: "example@example.com")
+    fill_in("alert_address", with: "24 Bruce Road, Glenbrook")
+    click_button("Create alert")
 
     page.should have_content("Now check your email")
 
@@ -27,12 +31,6 @@ feature "Sign up for alerts" do
   end
 
   context "via an application page" do
-    around do |example|
-      VCR.use_cassette('planningalerts') do
-        example.run
-      end
-    end
-
     given(:application) do
       create(:application, address: "24 Bruce Rd, Glenbrook NSW 2773")
     end
@@ -56,12 +54,6 @@ feature "Sign up for alerts" do
   end
 
   context "via the homepage" do
-    around do |example|
-      VCR.use_cassette('planningalerts') do
-        example.run
-      end
-    end
-
     background do
       create(:application, address: "26 Bruce Rd, Glenbrook NSW 2773")
     end
