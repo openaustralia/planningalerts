@@ -2,6 +2,10 @@
 
 %h3= @description
 
+- if @authority
+  = render "alerts/signup_introduction"
+  = render "alerts/signup_form", alert: @alert
+
 - if @authority && @authority.broken?
   - if @authority.latest_application_date.nil?
     %span.highlight There are no applications yet for this authority

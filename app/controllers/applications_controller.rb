@@ -12,6 +12,7 @@ class ApplicationsController < ApplicationController
       @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
       apps = @authority.applications
       @description << " from #{@authority.full_name_and_state}"
+      @alert = Alert.new
     else
       @description << " within the last #{Application.nearby_and_recent_max_age_months} months"
       apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
