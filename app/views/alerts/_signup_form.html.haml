@@ -1,4 +1,5 @@
 = semantic_form_for alert, html: {class: form_classes} do |f|
+  = render "alerts/signup_introduction" if with_intro
   = f.inputs do
     = f.input :address,
               label: "Enter a street address",
