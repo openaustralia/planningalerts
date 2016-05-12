@@ -72,6 +72,30 @@ feature "Sign up for alerts" do
     end
   end
 
+  context "via an authority’s applications page" do
+    given(:authority) { create(:authority, full_name: "Glenbrook City Council") }
+
+    background do
+      create(:application, address: "26 Bruce Rd, Glenbrook NSW 2773",
+                           authority: authority)
+    end
+
+
+    scenario "successfully" do
+      visit applications_path(authority: authority)
+
+      fill_in("alert_email", with: "example@example.com")
+      fill_in("alert_address", with: "24 Bruce Rd, Glenbrook")
+      click_button("Create alert")
+
+      expect(page).to have_content("Now check your email")
+
+      confirm_alert_in_email
+
+      expect(page).to have_content("your alert has been activated")
+    end
+  end
+
   def confirm_alert_in_email
     open_email("example@example.com")
     expect(current_email).to have_subject("Please confirm your planning alert")
