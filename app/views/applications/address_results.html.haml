@@ -27,14 +27,10 @@
     The more people that sign up for your area, the sooner we'll add your area to PlanningAlerts. So, get your friends and neighbours to sign up too!
 
 - else
-
-  = semantic_form_for @alert, html: {class: "attention"} do |f|
-    = render "alerts/signup_introduction"
-    = f.inputs do
-      = f.input :address, as: :hidden
-      = f.input :email, label: "Enter your email address", placeholder: "your@email.com", input_html: { required: "required" }
-    = f.actions do
-      = f.action :submit, label: "Create alert", button_html: { class: "button button-rounded button-action button-large" }
+  = render "alerts/signup_form", alert: @alert,
+                                 with_intro: true,
+                                 address_hidden: true,
+                                 form_classes: "attention"
 
   %ul.list-options
     %li
