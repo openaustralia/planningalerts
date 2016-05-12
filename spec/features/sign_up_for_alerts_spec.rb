@@ -13,20 +13,17 @@ feature "Sign up for alerts" do
     visit '/alerts/signup'
 
     fill_in("alert_email", with: "example@example.com")
-    fill_in("alert_address", with: "24 Bruce Road, Glenbrook")
+    fill_in("alert_address", with: "24 Bruce Rd, Glenbrook")
     click_button("Create alert")
 
     page.should have_content("Now check your email")
 
-    open_email("example@example.com")
-    current_email.should have_subject("Please confirm your planning alert")
-    current_email.default_part_body.to_s.should include("24 Bruce Road, Glenbrook NSW 2773")
-    click_first_link_in_email
+    confirm_alert_in_email
 
     page.should have_content("your alert has been activated")
-    page.should have_content("24 Bruce Road, Glenbrook NSW 2773")
+    page.should have_content("24 Bruce Rd, Glenbrook NSW 2773")
     page.should_not have_content("You now have several email alerts")
-    Alert.active.find_by(address: "24 Bruce Road, Glenbrook NSW 2773", radius_meters: "2000", email: current_email_address).should_not be_nil
+    Alert.active.find_by(address: "24 Bruce Rd, Glenbrook NSW 2773", radius_meters: "2000", email: current_email_address).should_not be_nil
   end
 
   context "via an application page" do
@@ -44,9 +41,7 @@ feature "Sign up for alerts" do
 
       page.should have_content("Now check your email")
 
-      open_email("example@example.com")
-      current_email.should have_subject("Please confirm your planning alert")
-      click_first_link_in_email
+      confirm_alert_in_email
 
       page.should have_content("your alert has been activated")
     end
@@ -59,7 +54,7 @@ feature "Sign up for alerts" do
 
     scenario "successfully" do
       visit root_path
-      fill_in("Enter a street address", with: "24 Bruce Road, Glenbrook")
+      fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
       click_button("Search")
 
       fill_in("Enter your email address", with: "example@example.com")
@@ -67,11 +62,16 @@ feature "Sign up for alerts" do
 
       page.should have_content("Now check your email")
 
-      open_email("example@example.com")
-      current_email.should have_subject("Please confirm your planning alert")
-      click_first_link_in_email
+      confirm_alert_in_email
 
       page.should have_content("your alert has been activated")
     end
+  end
+
+  def confirm_alert_in_email
+    open_email("example@example.com")
+    current_email.should have_subject("Please confirm your planning alert")
+    current_email.default_part_body.to_s.should include("24 Bruce Rd, Glenbrook NSW 2773")
+    click_first_link_in_email
   end
 end
