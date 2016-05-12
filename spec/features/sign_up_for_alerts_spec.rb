@@ -16,14 +16,14 @@ feature "Sign up for alerts" do
     fill_in("alert_address", with: "24 Bruce Rd, Glenbrook")
     click_button("Create alert")
 
-    page.should have_content("Now check your email")
+    expect(page).to have_content("Now check your email")
 
     confirm_alert_in_email
 
-    page.should have_content("your alert has been activated")
-    page.should have_content("24 Bruce Rd, Glenbrook NSW 2773")
-    page.should_not have_content("You now have several email alerts")
-    Alert.active.find_by(address: "24 Bruce Rd, Glenbrook NSW 2773", radius_meters: "2000", email: current_email_address).should_not be_nil
+    expect(page).to have_content("your alert has been activated")
+    expect(page).to have_content("24 Bruce Rd, Glenbrook NSW 2773")
+    expect(page).to_not have_content("You now have several email alerts")
+    expect(Alert.active.find_by(address: "24 Bruce Rd, Glenbrook NSW 2773", radius_meters: "2000", email: current_email_address)).to_not be_nil
   end
 
   context "via an application page" do
@@ -39,11 +39,11 @@ feature "Sign up for alerts" do
         click_button("Create Alert")
       end
 
-      page.should have_content("Now check your email")
+      expect(page).to have_content("Now check your email")
 
       confirm_alert_in_email
 
-      page.should have_content("your alert has been activated")
+      expect(page).to have_content("your alert has been activated")
     end
   end
 
@@ -60,18 +60,18 @@ feature "Sign up for alerts" do
       fill_in("Enter your email address", with: "example@example.com")
       click_button("Create alert")
 
-      page.should have_content("Now check your email")
+      expect(page).to have_content("Now check your email")
 
       confirm_alert_in_email
 
-      page.should have_content("your alert has been activated")
+      expect(page).to have_content("your alert has been activated")
     end
   end
 
   def confirm_alert_in_email
     open_email("example@example.com")
-    current_email.should have_subject("Please confirm your planning alert")
-    current_email.default_part_body.to_s.should include("24 Bruce Rd, Glenbrook NSW 2773")
+    expect(current_email).to have_subject("Please confirm your planning alert")
+    expect(current_email.default_part_body.to_s).to include("24 Bruce Rd, Glenbrook NSW 2773")
     click_first_link_in_email
   end
 end
