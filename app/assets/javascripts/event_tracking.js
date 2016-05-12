@@ -31,6 +31,10 @@ $( document ).ready(function() {
       ga('send', 'event', 'alerts', 'alert form error messages displayed');
     }
 
+    if ($('#alert-email-confirm-prompt').length) {
+      ga('send', 'event', 'alerts', 'alert prompt to confirm in email displayed');
+    }
+
     // Searching for applications
     $('.address-search input[type="submit"]').click(function(e) {
       ga('send', 'event', 'search', 'click submit address search');
