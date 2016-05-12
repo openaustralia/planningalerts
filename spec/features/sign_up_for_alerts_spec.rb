@@ -12,8 +12,8 @@ feature "Sign up for alerts" do
   scenario "successfully" do
     visit '/alerts/signup'
 
-    fill_in("alert_email", with: "example@example.com")
-    fill_in("alert_address", with: "24 Bruce Rd, Glenbrook")
+    fill_in("Enter your email address", with: "example@example.com")
+    fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
     click_button("Create alert")
 
     expect(page).to have_content("Now check your email")
@@ -84,8 +84,8 @@ feature "Sign up for alerts" do
     scenario "successfully" do
       visit applications_path(authority: authority)
 
-      fill_in("alert_email", with: "example@example.com")
-      fill_in("alert_address", with: "24 Bruce Rd, Glenbrook")
+      fill_in("Enter your email address", with: "example@example.com")
+      fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
       click_button("Create alert")
 
       expect(page).to have_content("Now check your email")
