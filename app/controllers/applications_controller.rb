@@ -13,6 +13,7 @@ class ApplicationsController < ApplicationController
       apps = @authority.applications
       @description << " from #{@authority.full_name_and_state}"
       @alert = Alert.new
+      @alert.address_for_placeholder = apps.last.address if apps.any?
     else
       @description << " within the last #{Application.nearby_and_recent_max_age_months} months"
       apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
