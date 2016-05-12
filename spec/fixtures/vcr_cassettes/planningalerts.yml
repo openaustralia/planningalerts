@@ -26496,4 +26496,310 @@ http_interactions:
       string: ''
     http_version: 
   recorded_at: Fri, 06 May 2016 02:03:07 GMT
+- request:
+    method: get
+    uri: http://maps.google.com/maps/api/geocode/json?address=24%20Bruce%20Rd,%20Glenbrook%20NSW%202773&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 12 May 2016 04:41:36 GMT
+      Expires:
+      - Fri, 13 May 2016 04:41:36 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - '*'
+      Server:
+      - mafe
+      Content-Length:
+      - '497'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "24",
+                       "short_name" : "24",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Glenbrook",
+                       "short_name" : "Glenbrook",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2773",
+                       "short_name" : "2773",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "24 Bruce Rd, Glenbrook NSW 2773, Australia",
+                 "geometry" : {
+                    "location" : {
+                       "lat" : -33.772607,
+                       "lng" : 150.624245
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.7712580197085,
+                          "lng" : 150.6255939802915
+                       },
+                       "southwest" : {
+                          "lat" : -33.7739559802915,
+                          "lng" : 150.6228960197085
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJoSwL6FaIEmsRGfTm6gH-VJQ",
+                 "types" : [ "street_address" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Thu, 12 May 2016 04:41:36 GMT
+- request:
+    method: get
+    uri: http://maps.google.com/maps/api/geocode/json?address=24%20Bruce%20Road,%20Glenbrook%20NSW%202773&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 12 May 2016 04:41:37 GMT
+      Expires:
+      - Fri, 13 May 2016 04:41:37 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - '*'
+      Server:
+      - mafe
+      Content-Length:
+      - '497'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "24",
+                       "short_name" : "24",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Glenbrook",
+                       "short_name" : "Glenbrook",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2773",
+                       "short_name" : "2773",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "24 Bruce Rd, Glenbrook NSW 2773, Australia",
+                 "geometry" : {
+                    "location" : {
+                       "lat" : -33.772607,
+                       "lng" : 150.624245
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.7712580197085,
+                          "lng" : 150.6255939802915
+                       },
+                       "southwest" : {
+                          "lat" : -33.7739559802915,
+                          "lng" : 150.6228960197085
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJoSwL6FaIEmsRGfTm6gH-VJQ",
+                 "types" : [ "street_address" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Thu, 12 May 2016 04:41:37 GMT
+- request:
+    method: get
+    uri: http://maps.google.com/maps/api/geocode/json?address=26%20Bruce%20Rd,%20Glenbrook%20NSW%202773&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 12 May 2016 04:41:41 GMT
+      Expires:
+      - Fri, 13 May 2016 04:41:41 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - '*'
+      Server:
+      - mafe
+      Content-Length:
+      - '497'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "26",
+                       "short_name" : "26",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Glenbrook",
+                       "short_name" : "Glenbrook",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2773",
+                       "short_name" : "2773",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "26 Bruce Rd, Glenbrook NSW 2773, Australia",
+                 "geometry" : {
+                    "location" : {
+                       "lat" : -33.77262,
+                       "lng" : 150.624566
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.7712710197085,
+                          "lng" : 150.6259149802915
+                       },
+                       "southwest" : {
+                          "lat" : -33.77396898029149,
+                          "lng" : 150.6232170197085
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJc03v5VaIEmsRB_gEvj-6HXk",
+                 "types" : [ "street_address" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Thu, 12 May 2016 04:41:42 GMT
 recorded_with: VCR 2.5.0

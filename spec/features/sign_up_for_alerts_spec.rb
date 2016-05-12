@@ -25,4 +25,33 @@ feature "Sign up for alerts" do
     page.should_not have_content("You now have several email alerts")
     Alert.active.find_by(address: "24 Bruce Road, Glenbrook NSW 2773", radius_meters: "2000", email: current_email_address).should_not be_nil
   end
+
+  context "via the homepage" do
+    around do |example|
+      VCR.use_cassette('planningalerts') do
+        example.run
+      end
+    end
+
+    background do
+      create(:application, address: "26 Bruce Rd, Glenbrook NSW 2773")
+    end
+
+    scenario "successfully" do
+      visit root_path
+      fill_in("Enter a street address", with: "24 Bruce Road, Glenbrook")
+      click_button("Search")
+
+      fill_in("Enter your email address", with: "example@example.com")
+      click_button("Create alert")
+
+      page.should have_content("Now check your email")
+
+      open_email("example@example.com")
+      current_email.should have_subject("Please confirm your planning alert")
+      click_first_link_in_email
+
+      page.should have_content("your alert has been activated")
+    end
+  end
 end
