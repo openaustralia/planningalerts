@@ -4,7 +4,7 @@
 
 - if @authority
   = render "alerts/signup_introduction"
-  = render "alerts/signup_form", alert: @alert
+  = render "alerts/signup_form", alert: @alert, form_classes: "attention"
 
 - if @authority && @authority.broken?
   - if @authority.latest_application_date.nil?
