@@ -23,7 +23,11 @@ feature "Sign up for alerts" do
     expect(page).to have_content("your alert has been activated")
     expect(page).to have_content("24 Bruce Rd, Glenbrook NSW 2773")
     expect(page).to_not have_content("You now have several email alerts")
-    expect(Alert.active.find_by(address: "24 Bruce Rd, Glenbrook NSW 2773", radius_meters: "2000", email: current_email_address)).to_not be_nil
+    expect(
+      Alert.active.find_by(address: "24 Bruce Rd, Glenbrook NSW 2773",
+                           radius_meters: "2000",
+                           email: current_email_address)
+    ).to_not be_nil
   end
 
   context "via an application page" do
