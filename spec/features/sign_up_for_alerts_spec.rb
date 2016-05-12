@@ -73,16 +73,14 @@ feature "Sign up for alerts" do
   end
 
   context "via an authority’s applications page" do
-    given(:authority) { create(:authority, full_name: "Glenbrook City Council") }
-
     background do
-      create(:application, address: "26 Bruce Rd, Glenbrook NSW 2773",
-                           authority: authority)
+      authority = create(:authority, short_name: "Glenbrook")
+      create(:application, address: "26 Bruce Rd, Glenbrook NSW 2773", authority: authority)
     end
 
 
     scenario "successfully" do
-      visit applications_path(authority: authority)
+      visit applications_path(authority_id: "glenbrook")
 
       fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
       fill_in("Enter your email address", with: "example@example.com")
