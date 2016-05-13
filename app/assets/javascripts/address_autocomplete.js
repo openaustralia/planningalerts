@@ -6,7 +6,7 @@ $("#alert_address,#q").autocomplete({
         service.getPlacePredictions({
             input: request.term,
             componentRestrictions: {country: "au"},
-            types: ["geocode"]
+            types: ["address"]
         }, function(predictions, status){
             response($.map(predictions, function(prediction){
                 // Just highlight the first matched substring
