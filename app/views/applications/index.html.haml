@@ -3,9 +3,9 @@
 %h3= @description
 
 = render "alerts/signup_form", alert: @alert,
-                                with_intro: true,
-                                address_hidden: false,
-                                form_classes: "attention"
+                               with_intro: true,
+                               address_hidden: false,
+                               form_classes: "attention"
 
 - if @authority && @authority.broken?
   - if @authority.latest_application_date.nil?
