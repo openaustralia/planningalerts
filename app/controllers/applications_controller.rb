@@ -18,6 +18,8 @@ class ApplicationsController < ApplicationController
     end
 
     @applications = apps.paginate(page: params[:page], per_page: 30)
+    @alert = Alert.new
+    @alert.address_for_placeholder = @applications.last.address if @applications.any?
   end
 
   # JSON api for returning the number of scraped applications per day

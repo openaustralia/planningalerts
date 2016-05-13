@@ -8,6 +8,8 @@ class Alert < ActiveRecord::Base
   before_create :remove_other_alerts_for_this_address
   acts_as_email_confirmable
 
+  attr_writer :address_for_placeholder
+
   scope :active, -> { where(confirmed: true, unsubscribed: false) }
   scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
   # People with 3 or more alerts that don't yet have a subscription
@@ -48,6 +50,10 @@ class Alert < ActiveRecord::Base
   # Only enable subscriptions on the default theme
   def subscription
     super if theme == "default"
+  end
+
+  def address_for_placeholder
+    @address_for_placeholder || "1 Sowerby St, Goulburn, NSW 2580"
   end
 
   # Name of the local government authority
