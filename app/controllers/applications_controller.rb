@@ -12,14 +12,14 @@ class ApplicationsController < ApplicationController
       @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
       apps = @authority.applications
       @description << " from #{@authority.full_name_and_state}"
-      @alert = Alert.new
-      @alert.address_for_placeholder = apps.last.address if apps.any?
     else
       @description << " within the last #{Application.nearby_and_recent_max_age_months} months"
       apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
     end
 
     @applications = apps.paginate(page: params[:page], per_page: 30)
+    @alert = Alert.new
+    @alert.address_for_placeholder = @applications.last.address if @applications.any?
   end
 
   # JSON api for returning the number of scraped applications per day
