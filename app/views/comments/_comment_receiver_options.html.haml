@@ -34,9 +34,9 @@
         = b.radio_button(class: "councillor-select-radio")
         = b.label(class: "councillor-select-label h-card") do
           .councillor-option
-            - if b.object.image_url.present?
-              .councillor-image-wrapper
-                .councillor-image
+            .councillor-image-wrapper
+              .councillor-image
+                - if b.object.image_url.present?
                   = image_tag b.object.image_url,
                               alt: "Photo of #{b.object.name}",
                               class: "u-photo"
