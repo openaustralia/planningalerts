@@ -148,6 +148,20 @@
     }
   }
 
+  .councillor-initials {
+    font-size: 1.5em;
+    text-transform: uppercase;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .p-name,
   .p-org {
     display: block;

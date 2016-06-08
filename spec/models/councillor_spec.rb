@@ -5,6 +5,14 @@ describe Councillor do
     it { expect(create(:councillor, name: "Steve").prefixed_name).to eq "local councillor Steve" }
   end
 
+  describe "#initials" do
+    it { expect(create(:councillor, name: "Vandarna").initials).to eq "V" }
+    it { expect(create(:councillor, name: "Vandarna Adams").initials).to eq "V A" }
+    it { expect(create(:councillor, name: "vandarna adams").initials).to eq "V A" }
+    it { expect(create(:councillor, name: "Kate O'Neil").initials).to eq "K O" }
+    it { expect(create(:councillor, name: "Kate \"Smithy\" Smiles").initials).to eq "K S" }
+  end
+
   describe "validations" do
     it { expect(Councillor.new).to_not be_valid }
     it { expect(Councillor.new(authority: create(:authority))).to_not be_valid }
