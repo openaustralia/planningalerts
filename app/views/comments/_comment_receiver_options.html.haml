@@ -34,12 +34,7 @@
         = b.radio_button(class: "councillor-select-radio")
         = b.label(class: "councillor-select-label h-card") do
           .councillor-option
-            .councillor-image-wrapper
-              .councillor-image
-                - if b.object.image_url.present?
-                  = image_tag b.object.image_url,
-                              alt: "Photo of #{b.object.name}",
-                              class: "u-photo"
+            = render "councillors/councillor_image", councillor: b.object
             .councillor-details
               %span.p-name= b.object.name
               %span.p-org= b.object.party
