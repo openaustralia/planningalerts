@@ -110,14 +110,15 @@
 }
 
 .councillor-select-radio {
-  width: auto !important;
-  clear: both;
+  @include sr-only();
+  position: relative !important;
   float: left;
+  opacity: 0;
 }
 
 .councillor-select-label {
   margin: 0 0 .5em !important;
-  padding: 0 0 .5em .5em !important;
+  padding: 0 0 .5em 0 !important;
   width: 80% !important;
   cursor: pointer;
 
@@ -132,7 +133,7 @@
   }
 
   .councillor-image-wrapper {
-    padding: 0 1em 0 .5em;
+    padding: 0 1em 0 0;
   }
 
   .councillor-image {
