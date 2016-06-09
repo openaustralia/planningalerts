@@ -124,16 +124,23 @@
 
   .councillor-option {
     display: table;
+    display: flex;
+    justify-content: flex-start;
   }
 
   .councillor-image-wrapper,
   .councillor-details {
     vertical-align: top;
     display: table-cell;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
   }
 
   .councillor-image-wrapper {
     padding: 0 1em 0 0;
+    flex: 0 0 auto;
   }
 
   .councillor-image {
