@@ -15,6 +15,7 @@ gem 'sass-rails'
 gem "susy"
 gem 'uglifier'
 gem 'refills'
+gem "autoprefixer-rails"
 
 # jQuery is the default JavaScript library in Rails 3.1
 gem 'jquery-rails'
