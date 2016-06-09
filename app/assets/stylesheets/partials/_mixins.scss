@@ -25,7 +25,7 @@
   padding: 10px;
   background-color: $lightest-cool-highlight;
   color: $cool-highlight;
-  @include border-radius(.5em);
+  border-radius: .5em;
 }
 
 // Make content not visible but available to screen readers
