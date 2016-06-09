@@ -84,8 +84,12 @@
 
 #councillors-list-toggler {
   ~ .councillor-select-list {
-    margin: 0 0 2em 2em;
+    margin: 0 0 2em 1em;
     display: none;
+
+    @include at-breakpoint(30em) {
+      margin: 0 0 2em 2em;
+    }
   }
 
   &:checked ~ .councillor-select-list {
@@ -155,9 +159,14 @@
   }
 
   .councillor-image {
-    width: 5em;
-    height: 5em;
+    width: 4em;
+    height: 4em;
     border: .25em solid $content-background;
+
+    @include at-breakpoint(30em) {
+      width: 5em;
+      height: 5em;
+    }
   }
 
   .p-name,
