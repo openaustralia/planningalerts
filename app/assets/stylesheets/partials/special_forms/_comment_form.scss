@@ -138,6 +138,7 @@
   .councillor-image {
     width: 5em;
     height: 5em;
+    border: .25em solid $content-background;
   }
 
   .p-name,
@@ -156,9 +157,17 @@
   :hover + &,
   :focus + &  {
     color: $link-hover-color;
+
+    .councillor-image {
+      border-color: $formal-comment-border-color;
+    }
   }
 
   :checked + & {
     color: $link-active-color;
+
+    .councillor-image {
+      border-color: $link-active-color;
+    }
   }
 }
