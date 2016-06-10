@@ -6,6 +6,12 @@ class Councillor < ActiveRecord::Base
   validates :authority, :email, presence: true
   validates :image_url, format: { with: /\Ahttps/, message: "must be HTTPS" }, allow_blank: true
 
+  def initials
+    first_letters = name.split(/\s/).collect { |word| word.first.upcase }
+    first_letters = first_letters.values_at(0, -1) unless first_letters.one?
+    first_letters.join(" ")
+  end
+
   def prefixed_name
     "local councillor #{name}"
   end

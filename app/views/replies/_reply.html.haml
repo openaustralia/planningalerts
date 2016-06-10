@@ -1,12 +1,7 @@
 %figure.reply-from-councillor.comment-item.panel{id: "reply#{reply.id}"}
   .panel-body
     .comment-heading.h-card
-      - if reply.councillor.image_url.present?
-        .councillor-image-wrapper
-          .councillor-image
-            = image_tag reply.councillor.image_url,
-                        alt: "Photo of #{reply.councillor.name}",
-                        class: "u-photo"
+      = render "councillors/councillor_image", councillor: reply.councillor
       %figcaption.comment-meta
         .comment-author.councillor
           %span.p-name= reply.councillor.name
