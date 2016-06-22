@@ -295,4 +295,17 @@ describe Comment do
       pending
     end
   end
+
+  describe "#to_councillor?" do
+    let(:comment) { VCR.use_cassette('planningalerts') { build(:comment) } }
+
+    it "should be false when there's no associated councillor" do
+      expect(comment.to_councillor?).to be_false
+    end
+
+    it "should be true when there's an associated councillor" do
+      comment.councillor = build(:councillor)
+      expect(comment.to_councillor?).to be_true
+    end
+  end
 end

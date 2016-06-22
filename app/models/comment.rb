@@ -44,7 +44,7 @@ class Comment < ActiveRecord::Base
   end
 
   def to_councillor?
-    councillor ? true : false
+    councillor.present?
   end
 
   def awaiting_councillor_reply?
