@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "Give feedback to Council" do
+feature "Give feedback" do
   # In order to affect the outcome of a development application
   # As a citizen
   # I want to send feedback on a development application directly to the planning authority
