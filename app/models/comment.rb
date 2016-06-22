@@ -26,8 +26,14 @@ class Comment < ActiveRecord::Base
     .select {|c| where("email = ? AND confirmed_at < ?", c.email, c.confirmed_at.to_date).any? }
   }
 
-  # Send the comment to the planning authority
-  def after_confirm
+  def confirm!
+    unless confirmed
+      update!(confirmed: true, confirmed_at: Time.current)
+      send_comment!
+    end
+  end
+
+  def send_comment!
     if to_councillor? && ENV["WRITEIT_BASE_URL"]
       CommentNotifier.delay.send_comment_via_writeit!(self)
     elsif to_councillor?

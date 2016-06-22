@@ -11,15 +11,6 @@ module EmailConfirmable
     scope :confirmed, -> { where(confirmed: true) }
   end
 
-  def confirm!
-    if !confirmed
-      self.confirmed = true
-      self.confirmed_at = Time.current if self.has_attribute? :confirmed_at
-      save!
-      after_confirm if self.respond_to?(:after_confirm)
-    end
-  end
-
   def send_confirmation_email
     ConfirmationMailer.delay.confirm(self.theme, self)
   end

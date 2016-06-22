@@ -159,6 +159,10 @@ class Alert < ActiveRecord::Base
     radius_meters / 1000.0
   end
 
+  def confirm!
+    update!(confirmed: true)
+  end
+
   # Process this email alert and send out an email if necessary. Returns number of applications and comments sent.
   def process!
     applications = recent_applications
