@@ -8,7 +8,7 @@ class Comment < ActiveRecord::Base
   validates_presence_of :name, :text
   validates_presence_of :address, unless: :to_councillor?
 
-  acts_as_email_confirmable
+  include EmailConfirmable
   scope :visible, -> { where(confirmed: true, hidden: false) }
   scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
 

@@ -6,7 +6,7 @@ class Alert < ActiveRecord::Base
 
   before_validation :geocode
   before_create :remove_other_alerts_for_this_address
-  acts_as_email_confirmable
+  include EmailConfirmable
 
   attr_writer :address_for_placeholder
 

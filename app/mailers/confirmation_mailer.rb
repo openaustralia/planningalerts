@@ -1,4 +1,4 @@
-class EmailConfirmable::Notifier < ActionMailer::Base
+class ConfirmationMailer < ActionMailer::Base
   include ActionMailerThemer
 
   def confirm(theme, object)
