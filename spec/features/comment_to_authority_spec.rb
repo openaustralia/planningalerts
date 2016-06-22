@@ -121,17 +121,28 @@ feature "Give feedback" do
       page.should_not have_content("I think this is a really good ideas")
     end
 
-    scenario "Confirming the comment" do
-      comment = create(:comment, confirmed: false, text: "I think this is a really good ideas", application: application)
+    context "confirming the comment" do
+      given(:comment) do
+        create(:comment, confirmed: false, text: "I think this is a really good ideas", application: application)
+      end
 
-      visit(confirmed_comment_path(id: comment.confirm_id))
+      scenario "should publish the comment" do
+        visit(confirmed_comment_path(id: comment.confirm_id))
 
-      page.should have_content("Your comment has been sent to Foo and posted below.")
-      page.should have_content("I think this is a really good ideas")
+        page.should have_content("Your comment has been sent to Foo and posted below.")
+        page.should have_content("I think this is a really good ideas")
 
-      unread_emails_for("feedback@foo.gov.au").size.should == 1
-      open_email("feedback@foo.gov.au")
-      current_email.default_part_body.to_s.should include("I think this is a really good ideas")
+        unread_emails_for("feedback@foo.gov.au").size.should == 1
+        open_email("feedback@foo.gov.au")
+        current_email.default_part_body.to_s.should include("I think this is a really good ideas")
+      end
+
+      scenario "twice should not send the comment twice" do
+        visit(confirmed_comment_path(id: comment.confirm_id))
+        visit(confirmed_comment_path(id: comment.confirm_id))
+
+        unread_emails_for("feedback@foo.gov.au").size.should == 1
+      end
     end
 
     scenario "Viewing the comment on the application page" do
