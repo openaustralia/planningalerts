@@ -3,6 +3,17 @@ require 'spec_helper'
 describe Comment do
   it_behaves_like "email_confirmable"
 
+  describe "#confirm!" do
+    let(:comment) do
+      VCR.use_cassette('planningalerts') { build(:comment, confirmed: true) }
+    end
+
+    it "should run callback once already confirmed" do
+      expect(comment).to_not receive(:after_confirm)
+      comment.confirm!
+    end
+  end
+
   describe ".visible_with_unique_emails_for_date" do
     context "when there are no comments" do
       it { expect(Comment.visible_with_unique_emails_for_date("2015-09-22")).to eq [] }
