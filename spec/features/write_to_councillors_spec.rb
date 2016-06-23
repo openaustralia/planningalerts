@@ -175,8 +175,11 @@ feature "Send a message to a councillor" do
     end
 
     context "twice" do
-      scenario "councillor doesn't get two messages" do
+      background do
         comment.confirm!
+      end
+
+      scenario "councillor doesn't get two messages" do
         expect(unread_emails_for("louise@council.nsw.gov.au").size).to eq 1
       end
     end
