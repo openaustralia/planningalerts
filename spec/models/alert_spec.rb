@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Alert do
+  it_behaves_like "email_confirmable"
+
   before :each do
     @address = "24 Bruce Road, Glenbrook, NSW"
     @attributes = {email: "matthew@openaustralia.org", address: @address,

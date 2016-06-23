@@ -6,7 +6,7 @@ class Alert < ActiveRecord::Base
 
   before_validation :geocode
   before_create :remove_other_alerts_for_this_address
-  acts_as_email_confirmable
+  include EmailConfirmable
 
   attr_writer :address_for_placeholder
 
@@ -157,6 +157,10 @@ class Alert < ActiveRecord::Base
 
   def radius_km
     radius_meters / 1000.0
+  end
+
+  def confirm!
+    update!(confirmed: true)
   end
 
   # Process this email alert and send out an email if necessary. Returns number of applications and comments sent.

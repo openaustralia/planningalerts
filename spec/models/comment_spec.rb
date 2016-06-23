@@ -1,6 +1,29 @@
 require 'spec_helper'
 
 describe Comment do
+  it_behaves_like "email_confirmable"
+
+  describe "#confirm!" do
+    context "when already confirmed" do
+      let(:comment) do
+        VCR.use_cassette('planningalerts') { build(:confirmed_comment) }
+      end
+
+      it "should not run after_confirm callback" do
+        expect(comment).to_not receive(:after_confirm)
+        comment.confirm!
+      end
+
+      it "should not change the confirmed_at time" do
+        time_before_confirmed_again = comment.confirmed_at
+
+        comment.confirm!
+
+        expect(comment.confirmed_at).to eql time_before_confirmed_again
+      end
+    end
+  end
+
   describe ".visible_with_unique_emails_for_date" do
     context "when there are no comments" do
       it { expect(Comment.visible_with_unique_emails_for_date("2015-09-22")).to eq [] }
@@ -280,6 +303,19 @@ describe Comment do
 
     it "returns an empty Array if there are no replies on WriteIt" do
       pending
+    end
+  end
+
+  describe "#to_councillor?" do
+    let(:comment) { VCR.use_cassette('planningalerts') { build(:comment) } }
+
+    it "should be false when there's no associated councillor" do
+      expect(comment.to_councillor?).to be_false
+    end
+
+    it "should be true when there's an associated councillor" do
+      comment.councillor = build(:councillor)
+      expect(comment.to_councillor?).to be_true
     end
   end
 end

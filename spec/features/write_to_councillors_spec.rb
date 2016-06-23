@@ -173,5 +173,15 @@ feature "Send a message to a councillor" do
       expect(page).to have_content "Matthew Landauer wrote to local councillor Louise Councillor"
       expect(page).to have_content "Delivered to local councillor Louise Councillor"
     end
+
+    context "twice" do
+      background do
+        comment.confirm!
+      end
+
+      scenario "councillor doesn't get two messages" do
+        expect(unread_emails_for("louise@council.nsw.gov.au").size).to eq 1
+      end
+    end
   end
 end

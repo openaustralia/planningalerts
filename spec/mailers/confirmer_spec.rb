@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe EmailConfirmable::Notifier do
+describe ConfirmationMailer do
   context "alert" do
     let(:object) { mock_model(Alert, confirm_id: "a237bfc", email: "matthew@oaf.org.au") }
 
     context "default theme" do
-      let(:notifier) { EmailConfirmable::Notifier.confirm("default", object) }
+      let(:notifier) { ConfirmationMailer.confirm("default", object) }
 
       describe "confirm" do
 
@@ -32,7 +32,7 @@ describe EmailConfirmable::Notifier do
     end
 
     context "nsw theme" do
-      let(:notifier) { EmailConfirmable::Notifier.confirm("nsw", object) }
+      let(:notifier) { ConfirmationMailer.confirm("nsw", object) }
 
       describe "confirm" do
 
@@ -73,7 +73,7 @@ describe EmailConfirmable::Notifier do
     end
 
     context "default theme" do
-      let(:notifier) { EmailConfirmable::Notifier.confirm("default", object) }
+      let(:notifier) { ConfirmationMailer.confirm("default", object) }
 
       describe "confirm" do
         it "should come from the planningalerts' normal email" do
@@ -99,7 +99,7 @@ describe EmailConfirmable::Notifier do
     end
 
     context "nsw theme" do
-      let(:notifier) { EmailConfirmable::Notifier.confirm("nsw", object) }
+      let(:notifier) { ConfirmationMailer.confirm("nsw", object) }
 
       describe "confirm" do
         it "should come from the nsw planningalerts' normal email" do
