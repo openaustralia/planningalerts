@@ -70,11 +70,11 @@ describe "Location" do
     l.error.should be_nil
   end
 
-  it "should error if the address is not a full street address but rather a suburb name or similar" do
-    Geokit::Geocoders::GoogleGeocoder3.stub(:geocode).and_return(double(all: [double(country_code: "AU", lat: 1, lng: 2, accuracy: 4, full_address: "Glenbrook NSW, Australia")]))
+  it "should error if the address is not a full street address, street address or suburb but rather place vaguer than a suburb" do
+    Geokit::Geocoders::GoogleGeocoder3.stub(:geocode).and_return(double(all: [double(country_code: "AU", lat: 1, lng: 2, accuracy: 3, full_address: "Glenbrook NSW, Australia")]))
 
-    l = Location.geocode("Glenbrook, NSW")
-    l.error.should == "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
+    l = Location.geocode("New South Wales")
+    l.error.should == "Please enter a more detailed address like ‘Sowerby St, Goulburn, NSW’"
   end
 
   it "should list potential matches and they should be in Australia" do

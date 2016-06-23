@@ -48,19 +48,19 @@ class ApplicationsController < ApplicationController
     per_page = 30
     @page = params[:page]
     if @q
-      location = Location.geocode(@q)
-      if location.error
+      @location = Location.geocode(@q)
+      if @location.error
         @other_addresses = []
-        @error = location.error
+        @error = @location.error
       else
-        @q = location.full_address
+        @q = @location.full_address
         @alert = Alert.new(address: @q)
-        @other_addresses = location.all[1..-1].map{|l| l.full_address}
+        @other_addresses = @location.all[1..-1].map{|l| l.full_address}
         @applications = case @sort
                         when 'distance'
-                          Application.near([location.lat, location.lng], @radius / 1000, units: :km).reorder('distance').paginate(page: params[:page], per_page: per_page)
+                          Application.near([@location.lat, @location.lng], @radius / 1000, units: :km).reorder('distance').paginate(page: params[:page], per_page: per_page)
                         else # date_scraped
-                          Application.near([location.lat, location.lng], @radius / 1000, units: :km).paginate(page: params[:page], per_page: per_page)
+                          Application.near([@location.lat, @location.lng], @radius / 1000, units: :km).paginate(page: params[:page], per_page: per_page)
                         end
         @rss = applications_path(format: 'rss', address: @q, radius: @radius)
       end
