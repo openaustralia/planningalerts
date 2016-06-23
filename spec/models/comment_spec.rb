@@ -13,6 +13,14 @@ describe Comment do
         expect(comment).to_not receive(:after_confirm)
         comment.confirm!
       end
+
+      it "should not change the confirmed_at time" do
+        time_before_confirmed_again = comment.confirmed_at
+
+        comment.confirm!
+
+        expect(comment.confirmed_at).to eql time_before_confirmed_again
+      end
     end
   end
 
