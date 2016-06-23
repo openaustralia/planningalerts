@@ -6,7 +6,7 @@ describe Comment do
   describe "#confirm!" do
     context "when already confirmed" do
       let(:comment) do
-        VCR.use_cassette('planningalerts') { build(:comment, confirmed: true) }
+        VCR.use_cassette('planningalerts') { build(:confirmed_comment) }
       end
 
       it "should not run after_confirm callback" do
