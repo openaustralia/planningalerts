@@ -4,13 +4,15 @@ describe Comment do
   it_behaves_like "email_confirmable"
 
   describe "#confirm!" do
-    let(:comment) do
-      VCR.use_cassette('planningalerts') { build(:comment, confirmed: true) }
-    end
+    context "when already confirmed" do
+      let(:comment) do
+        VCR.use_cassette('planningalerts') { build(:comment, confirmed: true) }
+      end
 
-    it "should run callback once already confirmed" do
-      expect(comment).to_not receive(:after_confirm)
-      comment.confirm!
+      it "should not run after_confirm callback" do
+        expect(comment).to_not receive(:after_confirm)
+        comment.confirm!
+      end
     end
   end
 
