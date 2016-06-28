@@ -14,6 +14,7 @@ ActiveAdmin.register Comment do
     column :email
     column :name
     column :application
+    column :councillor
     actions
   end
 
