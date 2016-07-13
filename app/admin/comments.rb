@@ -3,7 +3,7 @@ ActiveAdmin.register Comment do
   actions :all, except: [:destroy, :new, :create]
 
   scope :visible, default: true
-  scope("Visible, sent to councillor") { |s| s.visible.joins(:councillor) }
+  scope("Visible, sent to councillor") { |s| s.visible.to_councillor }
   scope(:hidden) { |s| s.where(hidden: true) }
   scope :all
 

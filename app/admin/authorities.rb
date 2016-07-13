@@ -13,7 +13,7 @@ ActiveAdmin.register Authority do
     column :email
     column(:applications) { |a| a.applications.count }
     column(:total_comments) { |a| a.comments.count }
-    column(:comments_to_councillors) { |a| a.comments.joins(:councillor).count }
+    column(:comments_to_councillors) { |a| a.comments.to_councillor.count }
     column(:comments_with_replies) { |a| a.comments.joins(:replies).uniq.count }
     column :write_to_councillors_enabled
     column(:number_of_councillors) { |a| a.councillors.count }
