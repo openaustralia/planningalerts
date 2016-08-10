@@ -112,7 +112,9 @@ If you'd like to add new councillors for a planning authority, there are a numbe
 
 Firstly, **make sure the data for your councillors is available from the [`australian_local_councillors_popolo` repository](https://github.com/openaustralia/australian_local_councillors_popolo)**. Follow it’s [instructions for adding new councillor data there](https://github.com/openaustralia/australian_local_councillors_popolo#updates).
 
-If you're [using WriteIt](#integrating-with-writeit) then the next step is to **refresh the data source in WriteIt so it knows about the coucillors you've added to the popolo data**. Check that your refresh was successful by confirming that you now have the option to write to your newly added councillors in the [WriteIt frontend](http://planningalerts.writeit.ciudadanointeligente.org/en/write/who/).
+If you're [using WriteIt](#integrating-with-writeit) then the next step is to **refresh the data source in WriteIt so it knows about the coucillors you've added to the popolo data**.
+
+**Confirm that you can now find the new councillors by searching for their names in the [WriteIt _frontend_](http://planningalerts.writeit.ciudadanointeligente.org/en/write/who/)**. Just because they are present in the [Recipents Page](http://planningalerts.writeit.ciudadanointeligente.org/en/manage/recipients/) or [in the API](http://planningalerts.writeit.ciudadanointeligente.org/en/manage/settings/api/) does not mean their emails have been loaded and they are contactable.
 
 **Run [the morph.io scraper](https://morph.io/openaustralia/australian_local_councillors_images) that copies the councillor’s images for use in PlanningAlerts**. Wait for it to finish running before continuing so that the councillors images are available for PlanningAlerts.
 
