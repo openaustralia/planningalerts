@@ -90,6 +90,8 @@ group :development do
   gem "binding_of_caller"
   gem "spring"
   # gem "spring-commands-rspec"
+  # FIXME: stop using `mock_model` and remove this
+  gem "rspec-activemodel-mocks"
 end
 
 group :test, :development do
