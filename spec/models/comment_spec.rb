@@ -302,7 +302,7 @@ describe Comment do
     end
 
     it "returns an empty Array if there are no replies on WriteIt" do
-      pending
+      skip
     end
   end
 
