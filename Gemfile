@@ -77,7 +77,7 @@ end
 
 group :development do
   gem 'guard'
-  # gem 'guard-rspec'
+  gem 'guard-rspec'
   gem 'guard-livereload'
   gem 'growl'
   gem 'rb-inotify', require: false
@@ -89,7 +89,7 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
   gem "spring"
-  # gem "spring-commands-rspec"
+  gem "spring-commands-rspec"
   # FIXME: stop using `mock_model` and remove this
   gem "rspec-activemodel-mocks"
 end
