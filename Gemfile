@@ -95,7 +95,7 @@ group :development do
 end
 
 group :test, :development do
-  gem 'rspec-rails', '2.99'
+  gem 'rspec-rails', '~> 3'
 end
 
 group :production do
