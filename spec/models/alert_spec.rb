@@ -204,7 +204,7 @@ describe Alert do
       @alert.radius_meters = 2000
       @alert.save!
 
-      expect(@alert.recent_applications).to have(3).items
+      expect(@alert.recent_applications.size).to eq 3
       expect(@alert.recent_applications).to include(@app1)
       expect(@alert.recent_applications).to include(@app2)
       expect(@alert.recent_applications).to include(@app3)
@@ -215,7 +215,7 @@ describe Alert do
       @alert.radius_meters = 500
       @alert.save!
 
-      expect(@alert.recent_applications).to have(2).items
+      expect(@alert.recent_applications.size).to eq 2
       expect(@alert.recent_applications).to include(@app2)
       expect(@alert.recent_applications).to include(@app4)
     end
@@ -225,7 +225,7 @@ describe Alert do
       @alert.radius_meters = 2000
       @alert.save!
 
-      expect(@alert.recent_applications).to have(2).items
+      expect(@alert.recent_applications.size).to eq 2
       expect(@alert.recent_applications).to include(@app1)
       expect(@alert.recent_applications).to include(@app2)
     end
