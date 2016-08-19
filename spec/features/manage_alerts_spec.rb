@@ -19,7 +19,7 @@ feature "Manage alerts" do
     visit area_alert_url(id: alert.confirm_id, host: 'dev.planningalerts.org.au')
 
     page.should have_content("What size area near 24 Bruce Rd, Glenbrook would you like to receive alerts for?")
-    find_field("My suburb (within 2 km)")['checked'].should be_true
+    find_field("My suburb (within 2 km)")['checked'].should be_truthy
     choose("My neighbourhood (within 800 m)")
     click_button("Update size")
 
