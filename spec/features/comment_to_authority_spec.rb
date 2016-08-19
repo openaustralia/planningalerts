@@ -12,7 +12,7 @@ feature "Give feedback" do
       visit(application_path(application))
     end
 
-    page.should have_content("How to comment on this application")
+    expect(page).to have_content("How to comment on this application")
   end
 
   scenario "Hide feedback form where there is no feedback email or comment_url" do
@@ -22,7 +22,7 @@ feature "Give feedback" do
       visit(application_path(application))
     end
 
-    page.should_not have_content("How to comment on this application")
+    expect(page).not_to have_content("How to comment on this application")
   end
 
   scenario "Getting an error message if the comment form isn’t completed correctly" do
@@ -38,8 +38,8 @@ feature "Give feedback" do
     # Don't fill in the address
     click_button("Post your public comment")
 
-    page.should have_content("Some of the comment wasn't filled out completely. See below.")
-    page.should_not have_content("Now check your email")
+    expect(page).to have_content("Some of the comment wasn't filled out completely. See below.")
+    expect(page).not_to have_content("Now check your email")
   end
 
   context "when the authority is contactable" do
@@ -61,15 +61,15 @@ feature "Give feedback" do
       fill_in("Your street address", with: "11 Foo Street")
       click_button("Post your public comment")
 
-      page.should have_content("Now check your email")
-      page.should have_content("Click on the link in the email to confirm your comment")
+      expect(page).to have_content("Now check your email")
+      expect(page).to have_content("Click on the link in the email to confirm your comment")
 
-      unread_emails_for("example@example.com").size.should == 1
+      expect(unread_emails_for("example@example.com").size).to eq(1)
       open_email("example@example.com")
-      current_email.should have_subject("Please confirm your comment")
+      expect(current_email).to have_subject("Please confirm your comment")
       # And the email body should contain a link to the confirmation page
       comment = Comment.find_by_text("I think this is a really good ideas")
-      current_email.default_part_body.to_s.should include(confirmed_comment_url(id: comment.confirm_id, protocol: "https", host: 'dev.planningalerts.org.au'))
+      expect(current_email.default_part_body.to_s).to include(confirmed_comment_url(id: comment.confirm_id, protocol: "https", host: 'dev.planningalerts.org.au'))
     end
 
     context "when there is the option to write to a councillor" do
@@ -118,7 +118,7 @@ feature "Give feedback" do
 
       visit(application_path(application))
 
-      page.should_not have_content("I think this is a really good ideas")
+      expect(page).not_to have_content("I think this is a really good ideas")
     end
 
     context "confirming the comment" do
@@ -129,19 +129,19 @@ feature "Give feedback" do
       scenario "should publish the comment" do
         visit(confirmed_comment_path(id: comment.confirm_id))
 
-        page.should have_content("Your comment has been sent to Foo and posted below.")
-        page.should have_content("I think this is a really good ideas")
+        expect(page).to have_content("Your comment has been sent to Foo and posted below.")
+        expect(page).to have_content("I think this is a really good ideas")
 
-        unread_emails_for("feedback@foo.gov.au").size.should == 1
+        expect(unread_emails_for("feedback@foo.gov.au").size).to eq(1)
         open_email("feedback@foo.gov.au")
-        current_email.default_part_body.to_s.should include("I think this is a really good ideas")
+        expect(current_email.default_part_body.to_s).to include("I think this is a really good ideas")
       end
 
       scenario "twice should not send the comment twice" do
         visit(confirmed_comment_path(id: comment.confirm_id))
         visit(confirmed_comment_path(id: comment.confirm_id))
 
-        unread_emails_for("feedback@foo.gov.au").size.should == 1
+        expect(unread_emails_for("feedback@foo.gov.au").size).to eq(1)
       end
     end
 
@@ -174,13 +174,13 @@ feature "Give feedback" do
     fill_in("Why should this comment be removed?", with: "You can't be rude to people!")
     click_button("Send report")
 
-    page.should have_content("The comment has been reported and a moderator will look into it as soon as possible.")
-    page.should have_content("Thanks for taking the time let us know about this.")
+    expect(page).to have_content("The comment has been reported and a moderator will look into it as soon as possible.")
+    expect(page).to have_content("Thanks for taking the time let us know about this.")
 
-    unread_emails_for("moderator@planningalerts.org.au").size.should == 1
+    expect(unread_emails_for("moderator@planningalerts.org.au").size).to eq(1)
     open_email("moderator@planningalerts.org.au")
-    current_email.should be_delivered_from("Joe Reporter <reporter@foo.com>")
-    current_email.should have_subject("PlanningAlerts: Abuse report")
+    expect(current_email).to be_delivered_from("Joe Reporter <reporter@foo.com>")
+    expect(current_email).to have_subject("PlanningAlerts: Abuse report")
   end
 
   context "when signed in as admin" do
@@ -201,8 +201,8 @@ feature "Give feedback" do
       # Don't fill in the address
       click_button("Post your public comment")
 
-      page.should have_content("Some of the comment wasn't filled out completely. See below.")
-      page.should_not have_content("Now check your email")
+      expect(page).to have_content("Some of the comment wasn't filled out completely. See below.")
+      expect(page).not_to have_content("Now check your email")
     end
   end
 end

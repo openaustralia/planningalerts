@@ -15,43 +15,43 @@ describe "applications/show" do
 
   describe "show" do
     before :each do
-      @application.stub(:address).and_return("foo")
-      @application.stub(:lat).and_return(1.0)
-      @application.stub(:lng).and_return(2.0)
-      @application.stub(:location).and_return(Location.new(1.0, 2.0))
+      allow(@application).to receive(:address).and_return("foo")
+      allow(@application).to receive(:lat).and_return(1.0)
+      allow(@application).to receive(:lng).and_return(2.0)
+      allow(@application).to receive(:location).and_return(Location.new(1.0, 2.0))
     end
 
     it "should display the map" do
-      @application.stub(:date_received).and_return(nil)
-      @application.stub(:date_scraped).and_return(Time.now)
+      allow(@application).to receive(:date_received).and_return(nil)
+      allow(@application).to receive(:date_scraped).and_return(Time.now)
       assigns[:application] = @application
       render
-      rendered.should have_selector("div#map_div")
+      expect(rendered).to have_selector("div#map_div")
     end
 
     it "should say nothing about notice period when there is no information" do
-      @application.stub(:date_received).and_return(nil)
-      @application.stub(:date_scraped).and_return(Time.now)
-      @application.stub(:on_notice_from).and_return(nil)
-      @application.stub(:on_notice_to).and_return(nil)
+      allow(@application).to receive(:date_received).and_return(nil)
+      allow(@application).to receive(:date_scraped).and_return(Time.now)
+      allow(@application).to receive(:on_notice_from).and_return(nil)
+      allow(@application).to receive(:on_notice_to).and_return(nil)
       assigns[:application] = @application
       render
-      rendered.should_not have_selector("p.on_notice")
+      expect(rendered).not_to have_selector("p.on_notice")
     end
   end
 
   describe "show with application with no location" do
     it "should not display the map" do
-      @application.stub(:address).and_return("An address that can't be geocoded")
-      @application.stub(:lat).and_return(nil)
-      @application.stub(:lng).and_return(nil)
-      @application.stub(:location).and_return(nil)
-      @application.stub(:date_received).and_return(nil)
-      @application.stub(:date_scraped).and_return(Time.now)
+      allow(@application).to receive(:address).and_return("An address that can't be geocoded")
+      allow(@application).to receive(:lat).and_return(nil)
+      allow(@application).to receive(:lng).and_return(nil)
+      allow(@application).to receive(:location).and_return(nil)
+      allow(@application).to receive(:date_received).and_return(nil)
+      allow(@application).to receive(:date_scraped).and_return(Time.now)
       assigns[:application] = @application
 
       render
-      rendered.should_not have_selector("div#map_div")
+      expect(rendered).not_to have_selector("div#map_div")
     end
   end
 end

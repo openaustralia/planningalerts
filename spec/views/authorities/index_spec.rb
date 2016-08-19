@@ -6,7 +6,7 @@ describe "authorities/index.haml" do
     a2 = mock_model(Authority, full_name: "Kangaroo City Council", short_name_encoded: "kangaroo", morph_url:nil, :broken? => false, :covered? => false)
     assign(:authorities, [["NSW", [a1, a2]]])
     render
-    rendered.should have_content(a1.full_name)
-    rendered.should have_content(a2.full_name)
+    expect(rendered).to have_content(a1.full_name)
+    expect(rendered).to have_content(a2.full_name)
   end
 end

@@ -19,73 +19,73 @@ describe ThrottleConfigurable do
   end
 
   it "should be able to extract the strategy setting for a particular ip address" do
-    t.strategy("1.2.3.4").should be_kind_of Rack::Throttle::Daily
-    t.strategy("1.2.3.5").should be_kind_of Rack::Throttle::Unlimited
-    t.strategy("1.2.3.6").should be_kind_of Rack::Throttle::Blocked
-    t.strategy("1.2.3.7").should be_kind_of Rack::Throttle::Hourly
-    t.strategy("1.2.3.8").should be_kind_of Rack::Throttle::Hourly
-    t.strategy("1.2.3.9").should be_kind_of Rack::Throttle::Hourly
+    expect(t.strategy("1.2.3.4")).to be_kind_of Rack::Throttle::Daily
+    expect(t.strategy("1.2.3.5")).to be_kind_of Rack::Throttle::Unlimited
+    expect(t.strategy("1.2.3.6")).to be_kind_of Rack::Throttle::Blocked
+    expect(t.strategy("1.2.3.7")).to be_kind_of Rack::Throttle::Hourly
+    expect(t.strategy("1.2.3.8")).to be_kind_of Rack::Throttle::Hourly
+    expect(t.strategy("1.2.3.9")).to be_kind_of Rack::Throttle::Hourly
   end
 
   it "should be able to extract the maximum hits for a particular ip address" do
-    t.strategy("1.2.3.4").max_per_day.should == 2
-    t.strategy("1.2.3.7").max_per_hour.should == 3
-    t.strategy("1.2.3.8").max_per_hour.should == 3
-    t.strategy("1.2.3.9").max_per_hour.should == 100
+    expect(t.strategy("1.2.3.4").max_per_day).to eq(2)
+    expect(t.strategy("1.2.3.7").max_per_hour).to eq(3)
+    expect(t.strategy("1.2.3.8").max_per_hour).to eq(3)
+    expect(t.strategy("1.2.3.9").max_per_hour).to eq(100)
   end
 
   it "should check that the strategy names are valid" do
-    lambda {ThrottleConfigurable.new(nil,
+    expect {ThrottleConfigurable.new(nil,
       strategies: {"foo" => "1.2.3.4"}
-      )}.should raise_error "Invalid strategy name used: foo"
+      )}.to raise_error "Invalid strategy name used: foo"
   end
 
   it "should check that the max count is valid" do
-    lambda {ThrottleConfigurable.new(nil,
+    expect {ThrottleConfigurable.new(nil,
       strategies: {"hourly" => {"foo" => "1.2.3.4"}}
-      )}.should raise_error "Invalid max count used: foo"
+      )}.to raise_error "Invalid max count used: foo"
   end
 
   it "should check that the ip addresses are potentially sane" do
-    lambda {ThrottleConfigurable.new(nil,
+    expect {ThrottleConfigurable.new(nil,
       strategies: {"hourly" => {100 => "257.2.3.4"}}
-      )}.should raise_error "Invalid ip address used: 257.2.3.4"
+      )}.to raise_error "Invalid ip address used: 257.2.3.4"
   end
 
   it "should check that an ip address isn't under multiple strategies" do
-    lambda {ThrottleConfigurable.new(nil,
+    expect {ThrottleConfigurable.new(nil,
       strategies: {"hourly" => {100 => "1.2.3.4"}, "unlimited" => "1.2.3.4"}
-      )}.should raise_error "ip address can not be used multiple times: 1.2.3.4"
+      )}.to raise_error "ip address can not be used multiple times: 1.2.3.4"
   end
 
   it "should check that there is a default setting" do
-    lambda {ThrottleConfigurable.new(nil,
+    expect {ThrottleConfigurable.new(nil,
       strategies: {"hourly" => {100 => "1.2.3.4"}}
-      )}.should raise_error "No default setting"
+      )}.to raise_error "No default setting"
   end
 
   it "should not do any throttling with the unlimited strategy" do
     request = double(:request, ip: "1.2.3.5")
-    t.allowed?(request).should be true
+    expect(t.allowed?(request)).to be true
   end
 
   it "should never allow the request when an ip is blocked" do
     request = double(:request, ip: "1.2.3.6")
-    t.allowed?(request).should be false
+    expect(t.allowed?(request)).to be false
   end
 
   it "should limit request to the max count in the hourly strategy" do
     request = double(:request, ip: "1.2.3.7")
-    t.allowed?(request).should be true
-    t.allowed?(request).should be true
-    t.allowed?(request).should be true
-    t.allowed?(request).should be false
+    expect(t.allowed?(request)).to be true
+    expect(t.allowed?(request)).to be true
+    expect(t.allowed?(request)).to be true
+    expect(t.allowed?(request)).to be false
   end
 
   it "should limit requests to the max count in the daily strategy too" do
     request = double(:request, ip: "1.2.3.4")
-    t.allowed?(request).should be true
-    t.allowed?(request).should be true
-    t.allowed?(request).should be false
+    expect(t.allowed?(request)).to be true
+    expect(t.allowed?(request)).to be true
+    expect(t.allowed?(request)).to be false
   end
 end

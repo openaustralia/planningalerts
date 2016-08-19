@@ -9,11 +9,11 @@ describe Alert do
       radius_meters: 200}
     # Unless we override this elsewhere just stub the geocoder to return coordinates of address above
     @loc = Location.new(-33.772609, 150.624263)
-    @loc.stub(:country_code).and_return("AU")
-    @loc.stub(:full_address).and_return("24 Bruce Rd, Glenbrook NSW 2773")
-    @loc.stub(:accuracy).and_return(8)
-    @loc.stub(:all).and_return([@loc])
-    Location.stub(:geocode).and_return(@loc)
+    allow(@loc).to receive(:country_code).and_return("AU")
+    allow(@loc).to receive(:full_address).and_return("24 Bruce Rd, Glenbrook NSW 2773")
+    allow(@loc).to receive(:accuracy).and_return(8)
+    allow(@loc).to receive(:all).and_return([@loc])
+    allow(Location).to receive(:geocode).and_return(@loc)
     Alert.delete_all
   end
 
@@ -27,53 +27,53 @@ describe Alert do
     u1 = Alert.create!(email: email, address: "A street address", radius_meters: 200, lat: 1.0, lng: 2.0)
     u2 = Alert.create!(email: email, address: "A street address", radius_meters: 800, lat: 1.0, lng: 2.0)
     alerts = Alert.where(email: email)
-    alerts.count.should == 1
-    alerts.first.radius_meters.should == u2.radius_meters
+    expect(alerts.count).to eq(1)
+    expect(alerts.first.radius_meters).to eq(u2.radius_meters)
   end
 
   it "should allow multiple alerts for different street addresses but the same email address" do
     email = "foo@foo.org"
     create(:alert, email: email, address: "A street address", radius_meters: 200, lat: 1.0, lng: 2.0)
     create(:alert, email: email, address: "Another street address", radius_meters: 800, lat: 1.0, lng: 2.0)
-    Alert.where(email: email).count.should == 2
+    expect(Alert.where(email: email).count).to eq(2)
   end
 
   it "should be able to accept location information if it is already known and so not use the geocoder" do
-    Location.should_not_receive(:geocode)
+    expect(Location).not_to receive(:geocode)
     @attributes[:lat] = 1.0
     @attributes[:lng] = 2.0
     u = create(:alert, @attributes)
-    u.lat.should == 1.0
-    u.lng.should == 2.0
+    expect(u.lat).to eq(1.0)
+    expect(u.lng).to eq(2.0)
   end
 
   describe "geocoding" do
     it "should happen automatically on saving" do
       alert = Alert.create!(@attributes)
-      alert.lat.should == @loc.lat
-      alert.lng.should == @loc.lng
-      alert.should be_valid
+      expect(alert.lat).to eq(@loc.lat)
+      expect(alert.lng).to eq(@loc.lng)
+      expect(alert).to be_valid
     end
 
     it "should set an error on the address if there is an error on geocoding" do
-      Location.stub(:geocode).and_return(double(error: "some error message", lat: nil, lng: nil, full_address: nil))
+      allow(Location).to receive(:geocode).and_return(double(error: "some error message", lat: nil, lng: nil, full_address: nil))
       u = Alert.new(email: "matthew@openaustralia.org")
-      u.should_not be_valid
-      u.errors[:address].should == ["some error message"]
+      expect(u).not_to be_valid
+      expect(u.errors[:address]).to eq(["some error message"])
     end
 
     it "should error if there are multiple matches from the geocoder" do
-      Location.stub(:geocode).and_return(double(lat: 1, lng: 2, full_address: "Bruce Rd, VIC 3885", error: nil, all: [nil, nil]))
+      allow(Location).to receive(:geocode).and_return(double(lat: 1, lng: 2, full_address: "Bruce Rd, VIC 3885", error: nil, all: [nil, nil]))
       u = Alert.new(address: "Bruce Road", email: "matthew@openaustralia.org")
-      u.should_not be_valid
-      u.errors[:address].should == ["isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"]
+      expect(u).not_to be_valid
+      expect(u.errors[:address]).to eq(["isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"])
     end
 
     it "should replace the address with the full resolved address obtained by geocoding" do
       @attributes[:address] = "24 Bruce Road, Glenbrook"
       u = Alert.new(@attributes)
       u.save!
-      u.address.should == "24 Bruce Rd, Glenbrook NSW 2773"
+      expect(u.address).to eq("24 Bruce Rd, Glenbrook NSW 2773")
     end
   end
 
@@ -86,87 +86,87 @@ describe Alert do
     it "should be valid" do
       @attributes[:email] = "diddle@"
       u = Alert.new(@attributes)
-      u.should_not be_valid
-      u.errors[:email].should == ["does not appear to be a valid e-mail address"]
+      expect(u).not_to be_valid
+      expect(u.errors[:email]).to eq(["does not appear to be a valid e-mail address"])
     end
 
     it "should have an '@' in it" do
       @attributes[:email] = "diddle"
       u = Alert.new(@attributes)
-      u.should_not be_valid
-      u.errors[:email].should == ["does not appear to be a valid e-mail address"]
+      expect(u).not_to be_valid
+      expect(u.errors[:email]).to eq(["does not appear to be a valid e-mail address"])
     end
   end
 
   it "should be able to store the attribute location" do
     u = Alert.new
     u.location = Location.new(1.0, 2.0)
-    u.lat.should == 1.0
-    u.lng.should == 2.0
-    u.location.lat.should == 1.0
-    u.location.lng.should == 2.0
+    expect(u.lat).to eq(1.0)
+    expect(u.lng).to eq(2.0)
+    expect(u.location.lat).to eq(1.0)
+    expect(u.location.lng).to eq(2.0)
   end
 
   it "should handle location being nil" do
     u = Alert.new
     u.location = nil
-    u.lat.should be_nil
-    u.lng.should be_nil
-    u.location.should be_nil
+    expect(u.lat).to be_nil
+    expect(u.lng).to be_nil
+    expect(u.location).to be_nil
   end
 
   describe "radius_meters" do
     it "should have a number" do
       @attributes[:radius_meters] = "a"
       u = Alert.new(@attributes)
-      u.should_not be_valid
-      u.errors[:radius_meters].should == ["isn't selected"]
+      expect(u).not_to be_valid
+      expect(u.errors[:radius_meters]).to eq(["isn't selected"])
     end
 
     it "should be greater than zero" do
       @attributes[:radius_meters] = "0"
       u = Alert.new(@attributes)
-      u.should_not be_valid
-      u.errors[:radius_meters].should == ["isn't selected"]
+      expect(u).not_to be_valid
+      expect(u.errors[:radius_meters]).to eq(["isn't selected"])
     end
   end
 
   describe "confirm_id" do
     it "should be a string" do
       u = Alert.create!(@attributes)
-      u.confirm_id.should be_instance_of(String)
+      expect(u.confirm_id).to be_instance_of(String)
     end
 
     it "should not be the the same for two different users" do
       u1 = Alert.create!(@attributes)
       u2 = Alert.create!(@attributes)
-      u1.confirm_id.should_not == u2.confirm_id
+      expect(u1.confirm_id).not_to eq(u2.confirm_id)
     end
 
     it "should only have hex characters in it and be exactly twenty characters long" do
       u = Alert.create!(@attributes)
-      u.confirm_id.should =~ /^[0-9a-f]{20}$/
+      expect(u.confirm_id).to match(/^[0-9a-f]{20}$/)
     end
   end
 
   describe "confirmed" do
     it "should be false when alert is created" do
       u = Alert.create!(@attributes)
-      u.confirmed.should be_falsey
+      expect(u.confirmed).to be_falsey
     end
 
     it "should be able to be set to false" do
       u = Alert.new(@attributes)
       u.confirmed = false
       u.save!
-      u.confirmed.should == false
+      expect(u.confirmed).to eq(false)
     end
 
     it "should be able to set to true" do
       u = Alert.new(@attributes)
       u.confirmed = true
       u.save!
-      u.confirmed.should == true
+      expect(u.confirmed).to eq(true)
     end
   end
 
@@ -233,25 +233,25 @@ describe Alert do
 
   describe "frequency_distribution" do
     it "should return a frequency distribution of objects as an array sorted by count" do
-      Alert.frequency_distribution(["a", "b", "c", "a", "a", "c", "a"]).should == [["a", 4], ["c", 2], ["b", 1]]
+      expect(Alert.frequency_distribution(["a", "b", "c", "a", "a", "c", "a"])).to eq([["a", 4], ["c", 2], ["b", 1]])
     end
   end
 
   describe "lga_name" do
     it "should return the local government authority name" do
-      Geo2gov.should_receive(:new).with(1.0, 2.0).and_return(double(lga_name: "Blue Mountains"))
+      expect(Geo2gov).to receive(:new).with(1.0, 2.0).and_return(double(lga_name: "Blue Mountains"))
 
       a = create(:alert, lat: 1.0, lng: 2.0, email: "foo@bar.com", radius_meters: 200, address: "")
-      a.lga_name.should == "Blue Mountains"
+      expect(a.lga_name).to eq("Blue Mountains")
     end
 
     it "should cache the value in the database" do
-      Geo2gov.should_receive(:new).once.with(1.0, 2.0).and_return(double(lga_name: "Blue Mountains"))
+      expect(Geo2gov).to receive(:new).once.with(1.0, 2.0).and_return(double(lga_name: "Blue Mountains"))
 
       a = create(:alert, id: 1, lat: 1.0, lng: 2.0, email: "foo@bar.com", radius_meters: 200, address: "")
-      a.lga_name.should == "Blue Mountains"
+      expect(a.lga_name).to eq("Blue Mountains")
       b = Alert.first
-      b.lga_name.should == "Blue Mountains"
+      expect(b.lga_name).to eq("Blue Mountains")
     end
   end
 
@@ -467,7 +467,7 @@ describe Alert do
     context "an alert with no new comments" do
       let(:alert) { Alert.create!(email: "matthew@openaustralia.org", address: @address, radius_meters: 2000) }
       before :each do
-        alert.stub(:recent_comments).and_return([])
+        allow(alert).to receive(:recent_comments).and_return([])
         # Don't know why this isn't cleared out automatically
         ActionMailer::Base.deliveries = []
       end
@@ -479,52 +479,52 @@ describe Alert do
         end
 
         before :each do
-          alert.stub(:recent_applications).and_return([application])
+          allow(alert).to receive(:recent_applications).and_return([application])
         end
 
         it "should return the number of applications, comments and replies sent" do
-          alert.process!.should == [1, 0, 0]
+          expect(alert.process!).to eq([1, 0, 0])
         end
 
         it "should send an email" do
           alert.process!
-          ActionMailer::Base.deliveries.size.should == 1
+          expect(ActionMailer::Base.deliveries.size).to eq(1)
         end
 
         it "should update the tally" do
           alert.process!
-          application.no_alerted.should == 4
+          expect(application.no_alerted).to eq(4)
         end
 
         it "should update the last_sent time" do
           alert.process!
-          (alert.last_sent - Time.now).abs.should < 1
+          expect((alert.last_sent - Time.now).abs).to be < 1
         end
 
         it "should update the last_processed time" do
           alert.process!
-          (alert.last_processed - Time.now).abs.should < 1
+          expect((alert.last_processed - Time.now).abs).to be < 1
         end
       end
 
       context "and no new applications nearby" do
         before :each do
-          alert.stub(:recent_applications).and_return([])
+          allow(alert).to receive(:recent_applications).and_return([])
         end
 
         it "should not send an email" do
           alert.process!
-          ActionMailer::Base.deliveries.should be_empty
+          expect(ActionMailer::Base.deliveries).to be_empty
         end
 
         it "should not update the last_sent time" do
           alert.process!
-          alert.last_sent.should be_nil
+          expect(alert.last_sent).to be_nil
         end
 
         it "should update the last_processed time" do
           alert.process!
-          (alert.last_processed - Time.now).abs.should < 1
+          expect((alert.last_processed - Time.now).abs).to be < 1
         end
       end
 
@@ -544,16 +544,16 @@ describe Alert do
                              received_at: 1.hours.ago) }
 
         before :each do
-          alert.stub(:new_replies).and_return([reply])
+          allow(alert).to receive(:new_replies).and_return([reply])
         end
 
         it "should return the number of applications, comments and replies sent" do
-          alert.process!.should == [0, 0, 1]
+          expect(alert.process!).to eq([0, 0, 1])
         end
 
         it "should send an email" do
           alert.process!
-          ActionMailer::Base.deliveries.size.should == 1
+          expect(ActionMailer::Base.deliveries.size).to eq(1)
         end
       end
     end

@@ -11,24 +11,24 @@ describe Sitemap do
     public = Rails.root.join('public').to_s
     
     file1 = double("file1")
-    File.should_receive(:open).with("#{public}/sitemap.xml", "w").and_return(file1)
-    file1.should_receive(:<<).with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
-    file1.should_receive(:<<).with("<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")
-    file1.should_receive(:<<).with("<sitemap>")
-    file1.should_receive(:<<).with("<loc>http://domain.org/sitemaps/sitemap1.xml.gz</loc>")
-    file1.should_receive(:<<).with("<lastmod>2010-02-01T00:00:00+00:00</lastmod>")
-    file1.should_receive(:<<).with("</sitemap>")
-    file1.should_receive(:<<).with("</sitemapindex>")
-    file1.should_receive(:close)
+    expect(File).to receive(:open).with("#{public}/sitemap.xml", "w").and_return(file1)
+    expect(file1).to receive(:<<).with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
+    expect(file1).to receive(:<<).with("<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")
+    expect(file1).to receive(:<<).with("<sitemap>")
+    expect(file1).to receive(:<<).with("<loc>http://domain.org/sitemaps/sitemap1.xml.gz</loc>")
+    expect(file1).to receive(:<<).with("<lastmod>2010-02-01T00:00:00+00:00</lastmod>")
+    expect(file1).to receive(:<<).with("</sitemap>")
+    expect(file1).to receive(:<<).with("</sitemapindex>")
+    expect(file1).to receive(:close)
 
     file2 = double("file2")
-    Zlib::GzipWriter.should_receive(:open).with("#{public}/sitemaps/sitemap1.xml.gz").and_return(file2)
-    file2.should_receive(:<<).with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
-    file2.should_receive(:<<).with("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")
-    file2.should_receive(:<<).with("<url><loc>http://domain.org/</loc><changefreq>hourly</changefreq><lastmod>2010-02-01T00:00:00+00:00</lastmod></url>")
-    file2.should_receive(:<<).with("<url><loc>http://domain.org/foo</loc><changefreq>daily</changefreq><lastmod>2010-01-01T00:00:00+00:00</lastmod></url>")
-    file2.should_receive(:<<).with("</urlset>")
-    file2.should_receive(:close)
+    expect(Zlib::GzipWriter).to receive(:open).with("#{public}/sitemaps/sitemap1.xml.gz").and_return(file2)
+    expect(file2).to receive(:<<).with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
+    expect(file2).to receive(:<<).with("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")
+    expect(file2).to receive(:<<).with("<url><loc>http://domain.org/</loc><changefreq>hourly</changefreq><lastmod>2010-02-01T00:00:00+00:00</lastmod></url>")
+    expect(file2).to receive(:<<).with("<url><loc>http://domain.org/foo</loc><changefreq>daily</changefreq><lastmod>2010-01-01T00:00:00+00:00</lastmod></url>")
+    expect(file2).to receive(:<<).with("</urlset>")
+    expect(file2).to receive(:close)
 
     s = Sitemap.new("http://domain.org", public, @logger)
 
@@ -41,22 +41,22 @@ describe Sitemap do
   it "should know the web root and the file path root" do
     public = Rails.root.join('public').to_s
     s = Sitemap.new("http://domain.org", public, @logger)
-    s.root_url.should == "http://domain.org"
-    s.root_path.should == public
+    expect(s.root_url).to eq("http://domain.org")
+    expect(s.root_path).to eq(public)
     s.finish
   end
   
   it "should have the path to one of the sitemaps" do
     public = Rails.root.join('public').to_s
     s = Sitemap.new("http://domain.org", public, @logger)
-    s.sitemap_relative_path.should == "sitemaps/sitemap1.xml.gz"
+    expect(s.sitemap_relative_path).to eq("sitemaps/sitemap1.xml.gz")
     s.finish
   end
   
   it "should have the path to the sitemap index" do
     public = Rails.root.join('public').to_s
     s = Sitemap.new("http://domain.org", public, @logger)
-    s.sitemap_index_relative_path.should == "sitemap.xml"
+    expect(s.sitemap_index_relative_path).to eq("sitemap.xml")
     s.finish
   end
 end

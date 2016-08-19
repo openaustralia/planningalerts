@@ -10,23 +10,23 @@ describe ConfirmationMailer do
       describe "confirm" do
 
         it "should come from the planningalerts' normal email" do
-          notifier.from.should == ["contact@planningalerts.org.au"]
+          expect(notifier.from).to eq(["contact@planningalerts.org.au"])
         end
 
         it "should go to the alert's email address" do
-          notifier.to.should == ["matthew@oaf.org.au"]
+          expect(notifier.to).to eq(["matthew@oaf.org.au"])
         end
 
         it "should tell the person what the email is about" do
-          notifier.subject.should == "Please confirm your planning alert"
+          expect(notifier.subject).to eq("Please confirm your planning alert")
         end
 
         it do
-          notifier.body.parts.find { |p| p.content_type.match /plain/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/alert.txt").read
+          expect(notifier.body.parts.find { |p| p.content_type.match /plain/ }.body.raw_source).to eq(Rails.root.join("spec/mailers/regression/email_confirmable/alert.txt").read)
         end
 
         it do
-          notifier.body.parts.find { |p| p.content_type.match /html/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/alert.html").read
+          expect(notifier.body.parts.find { |p| p.content_type.match /html/ }.body.raw_source).to eq(Rails.root.join("spec/mailers/regression/email_confirmable/alert.html").read)
         end
       end
     end
@@ -37,23 +37,23 @@ describe ConfirmationMailer do
       describe "confirm" do
 
         it "should come from the nsw planningalerts' normal email" do
-          notifier.from.should == ["contact@nsw.127.0.0.1.xip.io"]
+          expect(notifier.from).to eq(["contact@nsw.127.0.0.1.xip.io"])
         end
 
         it "should go to the alert's email address" do
-          notifier.to.should == ["matthew@oaf.org.au"]
+          expect(notifier.to).to eq(["matthew@oaf.org.au"])
         end
 
         it "should tell the person what the email is about" do
-          notifier.subject.should == "Please confirm your planning alert"
+          expect(notifier.subject).to eq("Please confirm your planning alert")
         end
 
         it do
-          notifier.body.parts.find { |p| p.content_type.match /plain/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/alert_nsw.txt").read
+          expect(notifier.body.parts.find { |p| p.content_type.match /plain/ }.body.raw_source).to eq(Rails.root.join("spec/mailers/regression/email_confirmable/alert_nsw.txt").read)
         end
 
         it do
-          notifier.body.parts.find { |p| p.content_type.match /html/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/alert_nsw.html").read
+          expect(notifier.body.parts.find { |p| p.content_type.match /html/ }.body.raw_source).to eq(Rails.root.join("spec/mailers/regression/email_confirmable/alert_nsw.html").read)
         end
       end
     end
@@ -77,23 +77,23 @@ describe ConfirmationMailer do
 
       describe "confirm" do
         it "should come from the planningalerts' normal email" do
-          notifier.from.should == ["contact@planningalerts.org.au"]
+          expect(notifier.from).to eq(["contact@planningalerts.org.au"])
         end
 
         it "should go to the comment's email address" do
-          notifier.to.should == ["matthew@openaustralia.org"]
+          expect(notifier.to).to eq(["matthew@openaustralia.org"])
         end
 
         it "should tell the person what the email is about" do
-          notifier.subject.should == "Please confirm your comment"
+          expect(notifier.subject).to eq("Please confirm your comment")
         end
 
         it do
-          notifier.body.parts.find { |p| p.content_type.match /plain/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/comment.txt").read
+          expect(notifier.body.parts.find { |p| p.content_type.match /plain/ }.body.raw_source).to eq(Rails.root.join("spec/mailers/regression/email_confirmable/comment.txt").read)
         end
 
         it do
-          notifier.body.parts.find { |p| p.content_type.match /html/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/comment.html").read
+          expect(notifier.body.parts.find { |p| p.content_type.match /html/ }.body.raw_source).to eq(Rails.root.join("spec/mailers/regression/email_confirmable/comment.html").read)
         end
       end
     end
@@ -103,23 +103,23 @@ describe ConfirmationMailer do
 
       describe "confirm" do
         it "should come from the nsw planningalerts' normal email" do
-          notifier.from.should == ["contact@nsw.127.0.0.1.xip.io"]
+          expect(notifier.from).to eq(["contact@nsw.127.0.0.1.xip.io"])
         end
 
         it "should go to the comment's email address" do
-          notifier.to.should == ["matthew@openaustralia.org"]
+          expect(notifier.to).to eq(["matthew@openaustralia.org"])
         end
 
         it "should tell the person what the email is about" do
-          notifier.subject.should == "Please confirm your comment"
+          expect(notifier.subject).to eq("Please confirm your comment")
         end
 
         it do
-          notifier.body.parts.find { |p| p.content_type.match /plain/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/comment_nsw.txt").read
+          expect(notifier.body.parts.find { |p| p.content_type.match /plain/ }.body.raw_source).to eq(Rails.root.join("spec/mailers/regression/email_confirmable/comment_nsw.txt").read)
         end
 
         it do
-          notifier.body.parts.find { |p| p.content_type.match /html/ }.body.raw_source.should == Rails.root.join("spec/mailers/regression/email_confirmable/comment_nsw.html").read
+          expect(notifier.body.parts.find { |p| p.content_type.match /html/ }.body.raw_source).to eq(Rails.root.join("spec/mailers/regression/email_confirmable/comment_nsw.html").read)
         end
       end
     end

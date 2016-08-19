@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Geo2gov do
   describe "Blue Mountains" do
     before :each do
-      Geo2gov.should_receive(:get).with("http://geo2gov.com.au/json?location=150.624263+-33.772609").and_return(
+      expect(Geo2gov).to receive(:get).with("http://geo2gov.com.au/json?location=150.624263+-33.772609").and_return(
         "Census" => [{"MSR" => "11", "LGA" => "LGA10900"}],
         "Response" => [
           {"Jurisdiction" => "Federal"},
@@ -17,33 +17,33 @@ describe Geo2gov do
     end
   
     it "should return the LGA code for the BLue Mountains for a point in the Blue Mountains" do
-      @g.lga_code.should == "LGA10900"
+      expect(@g.lga_code).to eq("LGA10900")
     end
   
     it "should return a list of jurisdictions that this point is in" do
-      @g.jurisdictions.should == ["Federal", "NSW:Blue_Mountains", "NSW"]
+      expect(@g.jurisdictions).to eq(["Federal", "NSW:Blue_Mountains", "NSW"])
     end
   
     it "should return the LGA jurisdiction" do
-      @g.lga_jurisdiction.should == "NSW:Blue_Mountains"
+      expect(@g.lga_jurisdiction).to eq("NSW:Blue_Mountains")
     end
     
     it "should return the name of the LGA (with the state) in a human readable form" do
-      @g.lga_name.should == "Blue Mountains, NSW"
+      expect(@g.lga_name).to eq("Blue Mountains, NSW")
     end
   end
 
   describe "Invalid point" do
     before :each do
-      Geo2gov.should_receive(:get).with("http://geo2gov.com.au/json?location=0+0").and_return("Error" => "Failed to find any divisions")
+      expect(Geo2gov).to receive(:get).with("http://geo2gov.com.au/json?location=0+0").and_return("Error" => "Failed to find any divisions")
       @g = Geo2gov.new(0, 0)
     end
 
     it "should return sensible nil values" do
-      @g.lga_code.should be_nil
-      @g.jurisdictions.should == []
-      @g.lga_jurisdiction.should be_nil
-      @g.lga_name.should be_nil
+      expect(@g.lga_code).to be_nil
+      expect(@g.jurisdictions).to eq([])
+      expect(@g.lga_jurisdiction).to be_nil
+      expect(@g.lga_name).to be_nil
     end
   end
 end

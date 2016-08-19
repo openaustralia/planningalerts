@@ -47,8 +47,8 @@ describe ApiController do
           Application.stub_chain(:where, :paginate).and_return([result])
         end
         get :all, key: user.api_key, format: "js"
-        response.status.should == 401
-        response.body.should == '{"error":"no bulk api access"}'
+        expect(response.status).to eq(401)
+        expect(response.body).to eq('{"error":"no bulk api access"}')
       end
 
       it "should find recent applications if api key is given" do
@@ -59,8 +59,8 @@ describe ApiController do
           Application.stub_chain(:where, :paginate).and_return([result])
         end
         get :all, key: user.api_key, format: "js"
-        response.status.should == 200
-        JSON.parse(response.body).should == {
+        expect(response.status).to eq(200)
+        expect(JSON.parse(response.body)).to eq({
           "application_count" => 1,
           "max_id" => 10,
           "applications" => [{
@@ -83,7 +83,7 @@ describe ApiController do
               }
             }
           }]
-        }
+        })
       end
     end
   end
@@ -97,11 +97,11 @@ describe ApiController do
 
     it "should find recent applications for a postcode" do
       result, scope = double, double
-      Application.should_receive(:where).with(postcode: "2780").and_return(scope)
-      scope.should_receive(:paginate).with(page: nil, per_page: 100).and_return(result)
+      expect(Application).to receive(:where).with(postcode: "2780").and_return(scope)
+      expect(scope).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
       get :postcode, key: user.api_key, format: "rss", postcode: "2780"
-      assigns[:applications].should == result
-      assigns[:description].should == "Recent applications in postcode 2780"
+      expect(assigns[:applications]).to eq(result)
+      expect(assigns[:description]).to eq("Recent applications in postcode 2780")
     end
 
     it "should support jsonp" do
@@ -111,9 +111,9 @@ describe ApiController do
         Application.stub_chain(:where, :paginate).and_return([result])
       end
       xhr :get, :postcode, key: user.api_key, format: "js", postcode: "2780", callback: "foobar"
-      response.body[0..10].should == "/**/foobar("
-      response.body[-1..-1].should == ")"
-      JSON.parse(response.body[11..-2]).should == [{
+      expect(response.body[0..10]).to eq("/**/foobar(")
+      expect(response.body[-1..-1]).to eq(")")
+      expect(JSON.parse(response.body[11..-2])).to eq([{
         "application" => {
           "id" => 10,
           "council_reference" => "001",
@@ -132,7 +132,7 @@ describe ApiController do
             "full_name" => "Acme Local Planning Authority"
           }
         }
-      }]
+      }])
     end
 
     it "should support json api version 2" do
@@ -140,11 +140,11 @@ describe ApiController do
         authority = create(:authority, full_name: "Acme Local Planning Authority")
         application = create(:application, id: 10, date_scraped: Time.utc(2001,1,1), authority: authority)
         result = [application]
-        result.stub(:total_pages).and_return(5)
+        allow(result).to receive(:total_pages).and_return(5)
         Application.stub_chain(:where, :paginate).and_return(result)
       end
       get :postcode, key: user.api_key, format: "js", v: "2", postcode: "2780"
-      JSON.parse(response.body).should == {
+      expect(JSON.parse(response.body)).to eq({
         "application_count" => 1,
         "page_count" => 5,
         "applications" => [{
@@ -167,7 +167,7 @@ describe ApiController do
             }
           }
         }]
-      }
+      })
     end
   end
 
@@ -180,8 +180,8 @@ describe ApiController do
     describe "failed search by address" do
       it "should error if some unknown parameters are included" do
         get :point, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000, foo: 200, bar: "fiddle"
-        response.body.should == "Bad request: Invalid parameter(s) used: bar, foo"
-        response.code.should == "400"
+        expect(response.body).to eq("Bad request: Invalid parameter(s) used: bar, foo")
+        expect(response.code).to eq("400")
       end
     end
 
@@ -190,28 +190,28 @@ describe ApiController do
         location = double(lat: 1.0, lng: 2.0, full_address: "24 Bruce Road, Glenbrook NSW 2773")
         @result = double
 
-        Location.should_receive(:geocode).with("24 Bruce Road Glenbrook").and_return(location)
+        expect(Location).to receive(:geocode).with("24 Bruce Road Glenbrook").and_return(location)
         Application.stub_chain(:near, :paginate).and_return(@result)
       end
 
       it "should find recent applications near the address" do
         get :point, key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000
-        assigns[:applications].should == @result
+        expect(assigns[:applications]).to eq(@result)
         # Should use the normalised form of the address in the description
-        assigns[:description].should == "Recent applications within 4 km of 24 Bruce Road, Glenbrook NSW 2773"
+        expect(assigns[:description]).to eq("Recent applications within 4 km of 24 Bruce Road, Glenbrook NSW 2773")
       end
 
       it "should find recent applications near the address using the old parameter name" do
         get :point, key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", area_size: 4000
-        assigns[:applications].should == @result
-        assigns[:description].should == "Recent applications within 4 km of 24 Bruce Road, Glenbrook NSW 2773"
+        expect(assigns[:applications]).to eq(@result)
+        expect(assigns[:description]).to eq("Recent applications within 4 km of 24 Bruce Road, Glenbrook NSW 2773")
       end
 
       it "should log the api call" do
        get :point, key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000
        a = ApiStatistic.first
-       a.ip_address.should == "0.0.0.0"
-       a.query.should == "/applications.rss?address=24+Bruce+Road+Glenbrook&key=#{CGI.escape(user.api_key)}&radius=4000"
+       expect(a.ip_address).to eq("0.0.0.0")
+       expect(a.query).to eq("/applications.rss?address=24+Bruce+Road+Glenbrook&key=#{CGI.escape(user.api_key)}&radius=4000")
       end
 
       it "should use a search radius of 2000 when none is specified" do
@@ -219,8 +219,8 @@ describe ApiController do
         Application.stub_chain(:near, :paginate).and_return(result)
 
         get :point, key: user.api_key, address: "24 Bruce Road Glenbrook", format: "rss"
-        assigns[:applications].should == result
-        assigns[:description].should == "Recent applications within 2 km of 24 Bruce Road, Glenbrook NSW 2773"
+        expect(assigns[:applications]).to eq(result)
+        expect(assigns[:description]).to eq("Recent applications within 2 km of 24 Bruce Road, Glenbrook NSW 2773")
       end
     end
 
@@ -233,14 +233,14 @@ describe ApiController do
 
       it "should find recent applications near the point" do
         get :point, key: user.api_key, format: "rss", lat: 1.0, lng: 2.0, radius: 4000
-        assigns[:applications].should == @result
-        assigns[:description].should == "Recent applications within 4 km of 1.0,2.0"
+        expect(assigns[:applications]).to eq(@result)
+        expect(assigns[:description]).to eq("Recent applications within 4 km of 1.0,2.0")
       end
 
       it "should find recent applications near the point using the old parameter name" do
         get :point, key: user.api_key, format: "rss", lat: 1.0, lng: 2.0, area_size: 4000
-        assigns[:applications].should == @result
-        assigns[:description].should == "Recent applications within 4 km of 1.0,2.0"
+        expect(assigns[:applications]).to eq(@result)
+        expect(assigns[:description]).to eq("Recent applications within 4 km of 1.0,2.0")
       end
     end
   end
@@ -256,13 +256,13 @@ describe ApiController do
 
     it "should find recent applications in an area" do
       result, scope = double, double
-      Application.should_receive(:where).with("lat > ? AND lng > ? AND lat < ? AND lng < ?", 1.0, 2.0, 3.0, 4.0).and_return(scope)
-      scope.should_receive(:paginate).with(page: nil, per_page: 100).and_return(result)
+      expect(Application).to receive(:where).with("lat > ? AND lng > ? AND lat < ? AND lng < ?", 1.0, 2.0, 3.0, 4.0).and_return(scope)
+      expect(scope).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
 
       get :area, key: user.api_key, format: "rss", bottom_left_lat: 1.0, bottom_left_lng: 2.0,
         top_right_lat: 3.0, top_right_lng: 4.0
-      assigns[:applications].should == result
-      assigns[:description].should == "Recent applications in the area (1.0,2.0) (3.0,4.0)"
+      expect(assigns[:applications]).to eq(result)
+      expect(assigns[:description]).to eq("Recent applications in the area (1.0,2.0) (3.0,4.0)")
     end
   end
 
@@ -275,14 +275,14 @@ describe ApiController do
     it "should find recent applications for an authority" do
       authority, result, scope = double, double, double
 
-      Authority.should_receive(:find_by_short_name_encoded).with("blue_mountains").and_return(authority)
-      authority.should_receive(:applications).and_return(scope)
-      scope.should_receive(:paginate).with(page: nil, per_page: 100).and_return(result)
-      authority.should_receive(:full_name_and_state).and_return("Blue Mountains City Council")
+      expect(Authority).to receive(:find_by_short_name_encoded).with("blue_mountains").and_return(authority)
+      expect(authority).to receive(:applications).and_return(scope)
+      expect(scope).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
+      expect(authority).to receive(:full_name_and_state).and_return("Blue Mountains City Council")
 
       get :authority, key: user.api_key, format: "rss", authority_id: "blue_mountains"
-      assigns[:applications].should == result
-      assigns[:description].should == "Recent applications from Blue Mountains City Council"
+      expect(assigns[:applications]).to eq(result)
+      expect(assigns[:description]).to eq("Recent applications from Blue Mountains City Council")
     end
   end
 
@@ -294,22 +294,22 @@ describe ApiController do
 
     it "should find recent applications for a suburb" do
       result, scope = double, double
-      Application.should_receive(:where).with(suburb: "Katoomba").and_return(scope)
-      scope.should_receive(:paginate).with(page: nil, per_page: 100).and_return(result)
+      expect(Application).to receive(:where).with(suburb: "Katoomba").and_return(scope)
+      expect(scope).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
       get :suburb, key: user.api_key, format: "rss", suburb: "Katoomba"
-      assigns[:applications].should == result
-      assigns[:description].should == "Recent applications in Katoomba"
+      expect(assigns[:applications]).to eq(result)
+      expect(assigns[:description]).to eq("Recent applications in Katoomba")
     end
 
     describe "search by suburb and state" do
       it "should find recent applications for a suburb and state" do
         result, scope1, scope2 = double, double, double
-        Application.should_receive(:where).with(suburb: "Katoomba").and_return(scope1)
-        scope1.should_receive(:where).with(state: "NSW").and_return(scope2)
-        scope2.should_receive(:paginate).with(page: nil, per_page: 100).and_return(result)
+        expect(Application).to receive(:where).with(suburb: "Katoomba").and_return(scope1)
+        expect(scope1).to receive(:where).with(state: "NSW").and_return(scope2)
+        expect(scope2).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
         get :suburb, key: user.api_key, format: "rss", suburb: "Katoomba", state: "NSW"
-        assigns[:applications].should == result
-        assigns[:description].should == "Recent applications in Katoomba, NSW"
+        expect(assigns[:applications]).to eq(result)
+        expect(assigns[:description]).to eq("Recent applications in Katoomba, NSW")
       end
     end
   end

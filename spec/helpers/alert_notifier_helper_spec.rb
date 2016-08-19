@@ -191,32 +191,32 @@ describe AlertNotifierHelper do
 
     context "with an application" do
       subject { helper.subject(alert, [application], [], []) }
-      it { should eql "1 new planning application near 123 Sample St" }
+      it { is_expected.to eql "1 new planning application near 123 Sample St" }
     end
 
     context "with a comment" do
       subject { helper.subject(alert, [], [comment], []) }
-      it { should eql "1 new comment on planning applications near 123 Sample St" }
+      it { is_expected.to eql "1 new comment on planning applications near 123 Sample St" }
     end
 
     context "with a reply" do
       subject { helper.subject(alert, [], [], [reply]) }
-      it { should eql "1 new reply on planning applications near 123 Sample St" }
+      it { is_expected.to eql "1 new reply on planning applications near 123 Sample St" }
     end
 
     context "with an application and a comment" do
       subject { helper.subject(alert, [application], [comment], []) }
-      it { should eql "1 new comment and 1 new planning application near 123 Sample St" }
+      it { is_expected.to eql "1 new comment and 1 new planning application near 123 Sample St" }
     end
 
     context "with an application and a reply" do
       subject { helper.subject(alert, [application], [], [reply]) }
-      it { should eql "1 new reply and 1 new planning application near 123 Sample St" }
+      it { is_expected.to eql "1 new reply and 1 new planning application near 123 Sample St" }
     end
 
     context "with an application, a comment, and a reply" do
       subject { helper.subject(alert, [application], [comment], [reply]) }
-      it { should eql "1 new comment, 1 new reply and 1 new planning application near 123 Sample St" }
+      it { is_expected.to eql "1 new comment, 1 new reply and 1 new planning application near 123 Sample St" }
     end
 
     context "with an expired subscription" do
@@ -228,17 +228,17 @@ describe AlertNotifierHelper do
 
       context "with an application" do
         subject { helper.subject(alert, [application], [], []) }
-        it { should eql "You’re missing out on 1 new planning application near 123 Sample St" }
+        it { is_expected.to eql "You’re missing out on 1 new planning application near 123 Sample St" }
       end
 
       context "with a comment" do
         subject { helper.subject(alert, [], [comment], []) }
-        it { should eql "You’re missing out on 1 new comment on planning applications near 123 Sample St" }
+        it { is_expected.to eql "You’re missing out on 1 new comment on planning applications near 123 Sample St" }
       end
 
       context "with an application and a comment" do
         subject { helper.subject(alert, [application], [comment], []) }
-        it { should eql "You’re missing out on 1 new comment and 1 new planning application near 123 Sample St" }
+        it { is_expected.to eql "You’re missing out on 1 new comment and 1 new planning application near 123 Sample St" }
       end
     end
   end

@@ -170,7 +170,7 @@ describe Authority do
     context "authority with an xml feed with no date in the url" do
       let (:authority) { build(:authority) }
       it "should get the feed date only once" do
-        authority.should_receive(:open_url_safe).once
+        expect(authority).to receive(:open_url_safe).once
         authority.scraper_data_original_style("http://foo.com", Date.new(2001,1,1), Date.new(2001,1,3), double)
       end
     end

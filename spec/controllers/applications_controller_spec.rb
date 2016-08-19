@@ -8,12 +8,12 @@ describe ApplicationsController do
   describe "#index" do
     describe "rss feed" do
       before :each do
-        Location.stub(:geocode).and_return(double(lat: 1.0, lng: 2.0, full_address: "24 Bruce Road, Glenbrook NSW 2773"))
+        allow(Location).to receive(:geocode).and_return(double(lat: 1.0, lng: 2.0, full_address: "24 Bruce Road, Glenbrook NSW 2773"))
       end
 
       it "should not provide a link for all applications" do
         get :index
-        assigns[:rss].should be_nil
+        expect(assigns[:rss]).to be_nil
       end
     end
 
@@ -22,14 +22,14 @@ describe ApplicationsController do
         VCR.use_cassette('planningalerts') do
           get :index, address: "24 Bruce Road Glenbrook", radius: 4000, foo: 200, bar: "fiddle"
         end
-        response.code.should == "200"
+        expect(response.code).to eq("200")
       end
     end
 
     describe "search by authority" do
       it "should give a 404 when an invalid authority_id is used" do
-        Authority.should_receive(:find_by_short_name_encoded).with("this_authority_does_not_exist").and_return(nil)
-        lambda{get :index, authority_id: "this_authority_does_not_exist"}.should raise_error ActiveRecord::RecordNotFound
+        expect(Authority).to receive(:find_by_short_name_encoded).with("this_authority_does_not_exist").and_return(nil)
+        expect{get :index, authority_id: "this_authority_does_not_exist"}.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end
@@ -49,7 +49,7 @@ describe ApplicationsController do
 
       # TODO: Can this line be removed? It seems to be a duplicate of
       # expectation on final line.
-      Application.should_receive(:find).with("1").and_return(application)
+      expect(Application).to receive(:find).with("1").and_return(application)
 
       get :show, id: 1
 
