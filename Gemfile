@@ -92,6 +92,7 @@ group :development do
   # gem "spring-commands-rspec"
   # FIXME: stop using `mock_model` and remove this
   gem "rspec-activemodel-mocks"
+  gem "transpec"
 end
 
 group :test, :development do
