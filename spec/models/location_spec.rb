@@ -91,7 +91,7 @@ describe "Location" do
       double(full_address: "Bathurst Rd, Campbell River, BC V9W, Canada", country_code: "CA"),
       double(full_address: "Bathurst Rd, Riverside, CA, USA", country_code: "US"),
     ]
-    m.stub(all: all)
+    allow(m).to receive_messages(all: all)
     allow(Geokit::Geocoders::GoogleGeocoder3).to receive(:geocode).and_return(double(all: all))
     l = Location.geocode("Bathurst Rd")
     all = l.all
@@ -109,7 +109,7 @@ describe "Location" do
       double(full_address: "Sowerby St, Sowerby, Halifax, Calderdale HX6 3, UK", country_code: "UK"),
       double(full_address: "Sowerby St, Burnley, Lancashire BB12 8, UK", country_code: "UK")
     ]
-    m.stub(all: all)
+    allow(m).to receive_messages(all: all)
     allow(Geokit::Geocoders::GoogleGeocoder3).to receive(:geocode).and_return(double(full_address: "Sowerby St, Lawrence 9532, New Zealand", all: all))
     l = Location.geocode("Sowerby St")
     expect(l.full_address).to eq("Sowerby St, Garfield NSW 2580")

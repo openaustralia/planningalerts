@@ -44,7 +44,7 @@ describe ApiController do
       it "should error if valid api key is given but no bulk api access" do
         VCR.use_cassette('planningalerts') do
           result = create(:application, id: 10, date_scraped: Time.utc(2001,1,1))
-          Application.stub_chain(:where, :paginate).and_return([result])
+          allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
         end
         get :all, key: user.api_key, format: "js"
         expect(response.status).to eq(401)
@@ -56,7 +56,7 @@ describe ApiController do
         VCR.use_cassette('planningalerts') do
           authority = create(:authority, full_name: "Acme Local Planning Authority")
           result = create(:application, id: 10, date_scraped: Time.utc(2001,1,1), authority: authority)
-          Application.stub_chain(:where, :paginate).and_return([result])
+          allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
         end
         get :all, key: user.api_key, format: "js"
         expect(response.status).to eq(200)
@@ -108,7 +108,7 @@ describe ApiController do
       VCR.use_cassette('planningalerts') do
         authority = create(:authority, full_name: "Acme Local Planning Authority")
         result = create(:application, id: 10, date_scraped: Time.utc(2001,1,1), authority: authority)
-        Application.stub_chain(:where, :paginate).and_return([result])
+        allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
       end
       xhr :get, :postcode, key: user.api_key, format: "js", postcode: "2780", callback: "foobar"
       expect(response.body[0..10]).to eq("/**/foobar(")
@@ -141,7 +141,7 @@ describe ApiController do
         application = create(:application, id: 10, date_scraped: Time.utc(2001,1,1), authority: authority)
         result = [application]
         allow(result).to receive(:total_pages).and_return(5)
-        Application.stub_chain(:where, :paginate).and_return(result)
+        allow(Application).to receive_message_chain(:where, :paginate).and_return(result)
       end
       get :postcode, key: user.api_key, format: "js", v: "2", postcode: "2780"
       expect(JSON.parse(response.body)).to eq({
@@ -191,7 +191,7 @@ describe ApiController do
         @result = double
 
         expect(Location).to receive(:geocode).with("24 Bruce Road Glenbrook").and_return(location)
-        Application.stub_chain(:near, :paginate).and_return(@result)
+        allow(Application).to receive_message_chain(:near, :paginate).and_return(@result)
       end
 
       it "should find recent applications near the address" do
@@ -216,7 +216,7 @@ describe ApiController do
 
       it "should use a search radius of 2000 when none is specified" do
         result = double
-        Application.stub_chain(:near, :paginate).and_return(result)
+        allow(Application).to receive_message_chain(:near, :paginate).and_return(result)
 
         get :point, key: user.api_key, address: "24 Bruce Road Glenbrook", format: "rss"
         expect(assigns[:applications]).to eq(result)
@@ -228,7 +228,7 @@ describe ApiController do
       before :each do
         @result = double
 
-        Application.stub_chain(:near, :paginate).and_return(@result)
+        allow(Application).to receive_message_chain(:near, :paginate).and_return(@result)
       end
 
       it "should find recent applications near the point" do
