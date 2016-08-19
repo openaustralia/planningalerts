@@ -73,7 +73,6 @@ group :test do
   gem 'webmock'
   gem 'timecop'
   gem 'stripe-ruby-mock', '~> 2.1.1', require: 'stripe_mock'
-  gem "transpec"
 end
 
 group :development do
