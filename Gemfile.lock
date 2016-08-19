@@ -479,7 +479,7 @@ GEM
     vanity (1.8.3)
       redis (>= 2.1)
       redis-namespace (>= 1.1.0)
-    vcr (2.5.0)
+    vcr (2.9.3)
     warden (1.2.6)
       rack (>= 1.0)
     webmock (1.13.0)
@@ -565,7 +565,7 @@ DEPENDENCIES
   validate_url
   validates_email_format_of (~> 1.6, >= 1.6.3)
   vanity
-  vcr
+  vcr (~> 2.9)
   webmock
   will_paginate
   writeit-rails!
