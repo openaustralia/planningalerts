@@ -152,7 +152,7 @@ describe Alert do
   describe "confirmed" do
     it "should be false when alert is created" do
       u = Alert.create!(@attributes)
-      u.confirmed.should be_false
+      u.confirmed.should be_falsey
     end
 
     it "should be able to be set to false" do
@@ -565,7 +565,7 @@ describe Alert do
     end
 
     context "2 alerts" do
-      it { expect(alert.email_has_several_other_alerts?).to be_false }
+      it { expect(alert.email_has_several_other_alerts?).to be false }
     end
 
     context "3 alerts or more" do
@@ -573,7 +573,7 @@ describe Alert do
         create(:alert, confirmed: true, email: email)
       end
 
-      it { expect(alert.email_has_several_other_alerts?).to be_true }
+      it { expect(alert.email_has_several_other_alerts?).to be true }
     end
   end
 
@@ -586,7 +586,7 @@ describe Alert do
     end
 
     context "2 alerts" do
-      it { expect(alert.expired_subscription?).to be_false }
+      it { expect(alert.expired_subscription?).to be false }
     end
 
     context "3 alerts or more" do
@@ -594,21 +594,21 @@ describe Alert do
         create(:alert, confirmed: true, email: email)
       end
 
-      it { expect(alert.expired_subscription?).to be_false }
+      it { expect(alert.expired_subscription?).to be_falsey }
 
       context "trial subscription" do
         before { create(:subscription, email: email, trial_started_at: Date.today) }
-        it { expect(alert.expired_subscription?).to be_false }
+        it { expect(alert.expired_subscription?).to be false }
       end
 
       context "paid subscription" do
         before { create(:subscription, email: email, stripe_subscription_id: "a_stripe_id") }
-        it { expect(alert.expired_subscription?).to be_false }
+        it { expect(alert.expired_subscription?).to be false }
       end
 
       context "expired trial" do
         before { create(:subscription, email: email, trial_started_at: 7.days.ago) }
-        it { expect(alert.expired_subscription?).to be_true }
+        it { expect(alert.expired_subscription?).to be true }
       end
     end
   end
