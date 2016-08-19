@@ -66,26 +66,26 @@ describe ThrottleConfigurable do
 
   it "should not do any throttling with the unlimited strategy" do
     request = double(:request, ip: "1.2.3.5")
-    t.allowed?(request).should be_true
+    t.allowed?(request).should be true
   end
 
   it "should never allow the request when an ip is blocked" do
     request = double(:request, ip: "1.2.3.6")
-    t.allowed?(request).should be_false
+    t.allowed?(request).should be false
   end
 
   it "should limit request to the max count in the hourly strategy" do
     request = double(:request, ip: "1.2.3.7")
-    t.allowed?(request).should be_true
-    t.allowed?(request).should be_true
-    t.allowed?(request).should be_true
-    t.allowed?(request).should be_false
+    t.allowed?(request).should be true
+    t.allowed?(request).should be true
+    t.allowed?(request).should be true
+    t.allowed?(request).should be false
   end
 
   it "should limit requests to the max count in the daily strategy too" do
     request = double(:request, ip: "1.2.3.4")
-    t.allowed?(request).should be_true
-    t.allowed?(request).should be_true
-    t.allowed?(request).should be_false
+    t.allowed?(request).should be true
+    t.allowed?(request).should be true
+    t.allowed?(request).should be false
   end
 end

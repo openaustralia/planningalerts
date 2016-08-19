@@ -297,7 +297,7 @@ describe Comment do
 
     it "does nothing if the comment has no writeit_message_id" do
       VCR.use_cassette('planningalerts') do
-        expect(create(:comment).create_replies_from_writeit!).to be_false
+        expect(create(:comment).create_replies_from_writeit!).to be_falsey
       end
     end
 
@@ -310,12 +310,12 @@ describe Comment do
     let(:comment) { VCR.use_cassette('planningalerts') { build(:comment) } }
 
     it "should be false when there's no associated councillor" do
-      expect(comment.to_councillor?).to be_false
+      expect(comment.to_councillor?).to be false
     end
 
     it "should be true when there's an associated councillor" do
       comment.councillor = build(:councillor)
-      expect(comment.to_councillor?).to be_true
+      expect(comment.to_councillor?).to be true
     end
   end
 end

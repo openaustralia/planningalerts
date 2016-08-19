@@ -201,7 +201,7 @@ describe Authority do
         authority.load_councillors(popolo)
 
         kevin = Councillor.find_by(name: "Kevin Mack")
-        expect(kevin.present?).to be_true
+        expect(kevin.present?).to be true
         expect(kevin.email).to eql "kevin@albury.nsw.gov.au"
         expect(kevin.image_url).to eql "https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/kevin_mack-80x88.jpg"
         expect(kevin.party).to be_nil
