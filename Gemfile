@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.7'
 gem 'mysql2', '> 0.3'
 
 # Allow us to use `caches_page`
