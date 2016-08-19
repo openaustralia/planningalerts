@@ -57,7 +57,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    addressable (2.3.3)
+    addressable (2.4.0)
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (5.0.1.20140414130214)
@@ -162,7 +162,7 @@ GEM
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
-    email_spec (1.4.0)
+    email_spec (1.6.0)
       launchy (~> 2.1)
       mail (~> 2.2)
     erubis (2.7.0)
@@ -238,7 +238,7 @@ GEM
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    launchy (2.2.0)
+    launchy (2.4.3)
       addressable (~> 2.3)
     libv8 (3.16.14.11)
     listen (2.10.1)
@@ -492,7 +492,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise
   dotenv-rails
-  email_spec
+  email_spec (~> 1.6)
   everypolitician-popolo!
   factory_girl
   factory_girl_rails
