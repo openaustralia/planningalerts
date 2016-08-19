@@ -203,28 +203,31 @@ describe Alert do
       @alert.last_sent = 3.days.ago
       @alert.radius_meters = 2000
       @alert.save!
-      @alert.recent_applications.should have(3).items
-      @alert.recent_applications.should include(@app1)
-      @alert.recent_applications.should include(@app2)
-      @alert.recent_applications.should include(@app3)
+
+      expect(@alert.recent_applications).to have(3).items
+      expect(@alert.recent_applications).to include(@app1)
+      expect(@alert.recent_applications).to include(@app2)
+      expect(@alert.recent_applications).to include(@app3)
     end
 
     it "should return applications within the user's search area" do
       @alert.last_sent = 5.days.ago
       @alert.radius_meters = 500
       @alert.save!
-      @alert.recent_applications.should have(2).items
-      @alert.recent_applications.should include(@app2)
-      @alert.recent_applications.should include(@app4)
+
+      expect(@alert.recent_applications).to have(2).items
+      expect(@alert.recent_applications).to include(@app2)
+      expect(@alert.recent_applications).to include(@app4)
     end
 
     it "should return applications that have been scraped in the last twenty four hours if the user has never had an alert" do
       @alert.last_sent = nil
       @alert.radius_meters = 2000
       @alert.save!
-      @alert.recent_applications.should have(2).items
-      @alert.recent_applications.should include(@app1)
-      @alert.recent_applications.should include(@app2)
+
+      expect(@alert.recent_applications).to have(2).items
+      expect(@alert.recent_applications).to include(@app1)
+      expect(@alert.recent_applications).to include(@app2)
     end
   end
 
