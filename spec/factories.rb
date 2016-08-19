@@ -57,6 +57,13 @@ FactoryGirl.define do
     end
   end
 
+  factory :report do
+    name "Joe Reporter"
+    email "reporter@foo.com"
+    details "It's very rude!"
+    comment :comment
+  end
+
   factory :reply do
     text "Thanks for your comment, I agree"
     received_at 1.day.ago
