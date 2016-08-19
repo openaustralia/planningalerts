@@ -43,6 +43,9 @@ gem "devise"
 gem "rake"
 gem 'rack-throttle'
 gem 'dalli'
+# TODO: move to new Rails santizer, this will be depreciated in Rails 5
+#       see http://edgeguides.rubyonrails.org/4_2_release_notes.html#html-sanitizer
+gem 'rails-deprecated_sanitizer'
 gem 'sanitize'
 gem 'vanity'
 gem 'rabl'
