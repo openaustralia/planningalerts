@@ -25,7 +25,6 @@ gem "foreman"
 gem "haml"
 gem "geokit"
 gem "nokogiri"
-gem "foreigner"
 gem 'httparty'
 gem "will_paginate"
 gem "rails_autolink"
