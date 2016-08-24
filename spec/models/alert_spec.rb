@@ -170,6 +170,68 @@ describe Alert do
     end
   end
 
+  describe ".with_new_unique_email_created_on_date" do
+    it { expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq [] }
+
+    context "when there are no active alerts" do
+      before do
+        create(:unconfirmed_alert, created_at: "2016-08-24")
+        create(:confirmed_alert, unsubscribed: true)
+      end
+
+      it "it doesn't include them" do
+        expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq []
+      end
+    end
+
+    context "when there are active alerts not created on this day" do
+      before do
+        create(:confirmed_alert, created_at: "2016-08-22")
+      end
+
+      it "doesn't include them" do
+        expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq []
+      end
+    end
+
+    context "when there are active alerts created on this day with emails that have previously created alerts" do
+      before do
+        create(:confirmed_alert, email: "clare@jones.org", created_at: "2016-08-24")
+        create(:confirmed_alert, email: "clare@jones.org", created_at: "2016-06-16")
+      end
+
+      it "doesn't include them" do
+        expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq []
+      end
+    end
+
+    context "when there are active alerts create on this day" do
+      before do
+        @alert =  create(:confirmed_alert, email: "1@example.org", created_at: Time.new(2016, 8, 24, 7, 0, 0, 00))
+        @alert2 =  create(:confirmed_alert, email: "2@example.org", created_at: Time.new(2016, 8, 24, 12, 0, 0, 00))
+        @alert3 =  create(:confirmed_alert, email: "3@example.org", created_at: Time.new(2012, 4, 01, 9, 0, 0, 00))
+        @alert4 =  create(:confirmed_alert, email: "4@example.org" ,created_at: Time.new(1990, 5, 27, 21, 0, 0, 00))
+      end
+
+      it "includes them" do
+        expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq [@alert, @alert2]
+        expect(Alert.with_new_unique_email_created_on_date("2012-04-01")).to eq [@alert3]
+        expect(Alert.with_new_unique_email_created_on_date("1990-05-27")).to eq [@alert4]
+      end
+    end
+
+    context "when there are multiple active alerts created with the same email on this day" do
+      before do
+        @alert1 = create(:confirmed_alert, email: "clare@jones.org", created_at: "2016-08-24")
+        @alert2 = create(:confirmed_alert, email: "clare@jones.org", created_at: "2016-08-24")
+      end
+
+      it "includes the first alert they created" do
+        expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq [@alert1]
+      end
+    end
+  end
+
   describe "#address_for_placeholder" do
     it "has a default address" do
       expect(Alert.new.address_for_placeholder).to eql "1 Sowerby St, Goulburn, NSW 2580"

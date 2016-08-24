@@ -140,6 +140,7 @@ PlanningalertsApp::Application.routes.draw do
 
   resources :performance, only: [:index] do
     collection do
+      get :alerts
       get :comments
     end
   end
