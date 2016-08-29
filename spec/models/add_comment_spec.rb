@@ -192,11 +192,39 @@ describe AddComment do
             create(:councillor, authority: application.authority)
           end
 
-          it { expect(add_comment_form.could_be_for_councillor?).to eq true }
+          context "and the authority has write to councillors disabled" do
+            before do
+              application.authority.update!(write_to_councillors_enabled: false)
+            end
+
+            it { expect(add_comment_form.could_be_for_councillor?).to eq false }
+          end
+
+          context "and the authority has write to councillors enabled" do
+            before do
+              application.authority.update!(write_to_councillors_enabled: true)
+            end
+
+            it { expect(add_comment_form.could_be_for_councillor?).to eq true }
+          end
         end
 
         context "and there are not councillors" do
-          it { expect(add_comment_form.could_be_for_councillor?).to eq false }
+          context "and the authority has write to councillors disabled" do
+            before do
+              application.authority.update!(write_to_councillors_enabled: false)
+            end
+
+            it { expect(add_comment_form.could_be_for_councillor?).to eq false }
+          end
+
+          context "and the authority has write to councillors enabled" do
+            before do
+              application.authority.update!(write_to_councillors_enabled: true)
+            end
+
+            it { expect(add_comment_form.could_be_for_councillor?).to eq false }
+          end
         end
       end
 
@@ -206,11 +234,45 @@ describe AddComment do
         end
 
         context "and there are councillors" do
-          it { expect(add_comment_form.could_be_for_councillor?).to eq false }
+          before do
+            create(:councillor, authority: application.authority)
+          end
+
+          context "and the authority has write to councillors disabled" do
+            before do
+              application.authority.update!(write_to_councillors_enabled: false)
+            end
+
+            it { expect(add_comment_form.could_be_for_councillor?).to eq false }
+          end
+
+          context "and the authority has write to councillors enabled" do
+            before do
+              application.authority.update!(write_to_councillors_enabled: true)
+            end
+
+            it { expect(add_comment_form.could_be_for_councillor?).to eq false }
+          end
         end
 
         context "and there are not councillors" do
           it { expect(add_comment_form.could_be_for_councillor?).to eq false }
+
+          context "and the authority has write to councillors disabled" do
+            before do
+              application.authority.update!(write_to_councillors_enabled: false)
+            end
+
+            it { expect(add_comment_form.could_be_for_councillor?).to eq false }
+          end
+
+          context "and the authority has write to councillors enabled" do
+            before do
+              application.authority.update!(write_to_councillors_enabled: true)
+            end
+
+            it { expect(add_comment_form.could_be_for_councillor?).to eq false }
+          end
         end
       end
     end

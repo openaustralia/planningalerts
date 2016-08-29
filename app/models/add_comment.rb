@@ -41,7 +41,7 @@ class AddComment
   end
 
   def could_be_for_councillor?
-    if ENV["COUNCILLORS_ENABLED"] == "true" && theme == "default"
+    if application.authority.write_to_councillors_enabled? && theme == "default"
       application.authority.councillors.any?
     else
       false
