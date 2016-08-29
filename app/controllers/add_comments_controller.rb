@@ -17,6 +17,7 @@ class AddCommentsController < ApplicationController
 
       @comment = @add_comment.save_comment
 
+      # TODO: This seems to have a lot repeated from Application#show
       if @comment.nil?
         flash.now[:error] = "Some of the comment wasn't filled out completely. See below."
 
