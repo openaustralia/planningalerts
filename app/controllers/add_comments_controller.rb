@@ -24,9 +24,7 @@ class AddCommentsController < ApplicationController
           @councillor_list_open = true
         end
 
-        if @add_comment.could_be_for_councillor?
-          @councillors = @application.councillors_for_authority
-        end
+        @councillors = @application.councillors_available_for_contact if @theme.eql? "default"
 
         # HACK: Required for new email alert signup form
         @alert = Alert.new(address: @application.address)
