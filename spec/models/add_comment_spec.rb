@@ -132,6 +132,12 @@ describe AddComment do
     end
 
     context "when the writing to councillors feature is not enabled" do
+      around do |test|
+        with_modified_env COUNCILLORS_ENABLED: nil do
+          test.run
+        end
+      end
+
       context "and Default theme is active" do
         before :each do
           add_comment_form.theme = "default"
