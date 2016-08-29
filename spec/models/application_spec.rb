@@ -364,7 +364,7 @@ describe Application do
     context "when there are no councillors" do
       context "and the feature is disabled for the authority" do
         before do
-          authority.update!(write_to_councillors_enabled: false)
+          allow(authority).to receive(:write_to_councillors_enabled?).and_return false
         end
 
         it { expect(application.councillors_available_for_contact).to eq nil }
@@ -372,7 +372,7 @@ describe Application do
 
       context "and the feature is enabled for the authority" do
         before do
-          authority.update!(write_to_councillors_enabled: true)
+          allow(authority).to receive(:write_to_councillors_enabled?).and_return true
         end
 
         it { expect(application.councillors_available_for_contact).to eq nil }
@@ -388,7 +388,7 @@ describe Application do
 
       context "but the feature is disabled for the authority" do
         before do
-          authority.update!(write_to_councillors_enabled: false)
+          allow(authority).to receive(:write_to_councillors_enabled?).and_return false
         end
 
         it { expect(application.councillors_available_for_contact).to eq nil }
@@ -396,7 +396,7 @@ describe Application do
 
       context "and the feature is enabled for the authority" do
         before do
-          authority.update!(write_to_councillors_enabled: true)
+          allow(authority).to receive(:write_to_councillors_enabled?).and_return true
         end
 
         it { expect(application.councillors_available_for_contact).to match_array [@councillor1, @councillor2, @councillor3] }
