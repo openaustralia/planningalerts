@@ -138,6 +138,10 @@ describe AddComment do
         end
 
         context "and there are councillors" do
+          before do
+            create(:councillor, authority: application.authority)
+          end
+
           it { expect(add_comment_form.could_be_for_councillor?).to eq false }
         end
 
