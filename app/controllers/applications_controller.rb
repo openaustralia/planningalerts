@@ -112,9 +112,7 @@ class ApplicationsController < ApplicationController
     # Required for new email alert signup form
     @alert = Alert.new(address: @application.address)
 
-    if writing_to_councillors_enabled?
-      @councillors = @application.councillors_for_authority
-    end
+    @councillors = @application.councillors_available_for_contact if @theme.eql? "default"
 
     respond_to do |format|
       format.html
@@ -156,11 +154,5 @@ class ApplicationsController < ApplicationController
       format.html { render "nearby" }
       format.rss { render "api/index", format: :rss, layout: false, content_type: Mime::XML }
     end
-  end
-
-  private
-
-  def writing_to_councillors_enabled?
-    @application.authority.write_to_councillors_enabled? && @theme == "default"
   end
 end
