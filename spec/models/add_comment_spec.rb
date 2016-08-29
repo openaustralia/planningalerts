@@ -137,15 +137,15 @@ describe AddComment do
           add_comment_form.theme = "default"
         end
 
+        context "and there are not councillors" do
+          it { expect(add_comment_form.could_be_for_councillor?).to eq false }
+        end
+
         context "and there are councillors" do
           before do
             create(:councillor, authority: application.authority)
           end
 
-          it { expect(add_comment_form.could_be_for_councillor?).to eq false }
-        end
-
-        context "and there are not councillors" do
           it { expect(add_comment_form.could_be_for_councillor?).to eq false }
         end
       end
