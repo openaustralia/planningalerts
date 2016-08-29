@@ -345,8 +345,7 @@ describe Application do
         @councillor3 = create(:councillor, authority: authority)
       end
 
-      # TODO: Using 'include' because order is shuffled. Rspec 3's contain_exactly would be more accurate.
-      it { expect(application.councillors_for_authority).to include(@councillor1, @councillor2, @councillor3) }
+      it { expect(application.councillors_for_authority).to match_array [@councillor1, @councillor2, @councillor3] }
     end
 
     context "when there are councillors but not for the application’s authority" do
