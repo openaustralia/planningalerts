@@ -24,7 +24,7 @@ class AddCommentsController < ApplicationController
           @councillor_list_open = true
         end
 
-        if writing_to_councillors_enabled?
+        if @add_comment.could_be_for_councillor?
           @councillors = @application.councillors_for_authority
         end
 
@@ -48,9 +48,5 @@ class AddCommentsController < ApplicationController
       :theme,
       :comment_for
     )
-  end
-
-  def writing_to_councillors_enabled?
-    ENV["COUNCILLORS_ENABLED"] == "true" && @theme == "default"
   end
 end
