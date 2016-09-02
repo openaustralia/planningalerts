@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem 'rails', '4.1.16'
+gem 'rails', '4.2.7'
 gem 'mysql2', '> 0.3'
 
 # Allow us to use `caches_page`
@@ -25,7 +25,6 @@ gem "foreman"
 gem "haml"
 gem "geokit"
 gem "nokogiri"
-gem "foreigner"
 gem 'httparty'
 gem "will_paginate"
 gem "rails_autolink"
@@ -43,6 +42,9 @@ gem "devise"
 gem "rake"
 gem 'rack-throttle'
 gem 'dalli'
+# TODO: move to new Rails santizer, this will be depreciated in Rails 5
+#       see http://edgeguides.rubyonrails.org/4_2_release_notes.html#html-sanitizer
+gem 'rails-deprecated_sanitizer'
 gem 'sanitize'
 gem 'vanity'
 gem 'rabl'
@@ -69,7 +71,7 @@ group :test do
   gem 'factory_girl'
   gem 'email_spec', '~> 1.6'
   gem 'coveralls', :require => false
-  gem 'vcr'
+  gem 'vcr', '~> 2.9'
   gem 'webmock'
   gem 'timecop'
   gem 'stripe-ruby-mock', '~> 2.1.1', require: 'stripe_mock'
