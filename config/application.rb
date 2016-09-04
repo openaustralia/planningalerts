@@ -23,6 +23,9 @@ module PlanningalertsApp
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
     config.active_record.observers = :application_sweeper, :alert_sweeper, :authority_sweeper, :stat_sweeper
 
+    # active job queue adapter (available from rails 4.2)
+    config.active_job.queue_adapter = :delayed_job
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
