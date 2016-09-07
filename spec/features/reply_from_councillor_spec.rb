@@ -4,6 +4,7 @@ feature "Councillor replies to a message sent to them" do
   given (:councillor) { create(:councillor, name: "Louise Councillor", email: "louise@council.nsw.gov.au") }
   given (:application) { create(:application, id: 8, address: "24 Bruce Road Glenbrook", description: "A lovely house") }
   given (:comment) do
+  let(:councillor) { create(:councillor, name: "Louise Councillor", email: "louise@council.nsw.gov.au", popolo_id: "marrickville_council/chris_woods") }
     VCR.use_cassette('planningalerts') do
       create(:comment, id: 5,
                        application: application,
