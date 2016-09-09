@@ -170,6 +170,10 @@ class Application < ActiveRecord::Base
     authority.councillors.shuffle if authority.councillors.any?
   end
 
+  def councillors_available_for_contact
+    councillors_for_authority if authority.write_to_councillors_enabled?
+  end
+
   private
 
   # TODO: Optimisation is to make sure that this doesn't get called again on save when the address hasn't changed

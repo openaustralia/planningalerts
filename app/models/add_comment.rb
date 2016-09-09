@@ -41,11 +41,7 @@ class AddComment
   end
 
   def could_be_for_councillor?
-    if ENV["COUNCILLORS_ENABLED"] == "true" && theme == "default"
-      application.authority.councillors.any?
-    else
-      false
-    end
+    application.councillors_available_for_contact && theme.eql?("default") ?  true : false
   end
 
   def for_planning_authority?

@@ -17,6 +17,7 @@ class AddCommentsController < ApplicationController
 
       @comment = @add_comment.save_comment
 
+      # TODO: This seems to have a lot repeated from Application#show
       if @comment.nil?
         flash.now[:error] = "Some of the comment wasn't filled out completely. See below."
 
@@ -24,9 +25,7 @@ class AddCommentsController < ApplicationController
           @councillor_list_open = true
         end
 
-        if writing_to_councillors_enabled?
-          @councillors = @application.councillors_for_authority
-        end
+        @councillors = @application.councillors_available_for_contact if @theme.eql? "default"
 
         # HACK: Required for new email alert signup form
         @alert = Alert.new(address: @application.address)
@@ -48,9 +47,5 @@ class AddCommentsController < ApplicationController
       :theme,
       :comment_for
     )
-  end
-
-  def writing_to_councillors_enabled?
-    ENV["COUNCILLORS_ENABLED"] == "true" && @theme == "default"
   end
 end

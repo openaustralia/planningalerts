@@ -72,6 +72,40 @@ feature "Give feedback" do
       expect(current_email.default_part_body.to_s).to include(confirmed_comment_url(id: comment.confirm_id, protocol: "https", host: 'dev.planningalerts.org.au'))
     end
 
+    context "when the write to councillor feature is on but not for this authority" do
+      around do |test|
+        with_modified_env COUNCILLORS_ENABLED: 'true' do
+          test.run
+        end
+      end
+
+      background do
+        application.authority.update!(write_to_councillors_enabled: false)
+
+        create(:councillor, authority: application.authority)
+      end
+
+      scenario "Adding a comment for the planning authority" do
+        visit(application_path(application))
+
+        fill_in("Have your say on this application", with: "I think this is a really good ideas")
+        fill_in("Your name", with: "Matthew Landauer")
+        fill_in("Your email", with: "example@example.com")
+        fill_in("Your street address", with: "11 Foo Street")
+        click_button("Post your public comment")
+
+        expect(page).to have_content("Now check your email")
+        expect(page).to have_content("Click on the link in the email to confirm your comment")
+
+        expect(unread_emails_for("example@example.com").size).to eq(1)
+        open_email("example@example.com")
+        expect(current_email).to have_subject("Please confirm your comment")
+        # And the email body should contain a link to the confirmation page
+        comment = Comment.find_by_text("I think this is a really good ideas")
+        expect(current_email.default_part_body.to_s).to include(confirmed_comment_url(id: comment.confirm_id, protocol: "https", host: 'dev.planningalerts.org.au'))
+      end
+    end
+
     context "when there is the option to write to a councillor" do
       around do |test|
         with_modified_env COUNCILLORS_ENABLED: 'true' do

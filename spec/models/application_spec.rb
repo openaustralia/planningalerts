@@ -345,8 +345,7 @@ describe Application do
         @councillor3 = create(:councillor, authority: authority)
       end
 
-      # TODO: Using 'include' because order is shuffled. Rspec 3's contain_exactly would be more accurate.
-      it { expect(application.councillors_for_authority).to include(@councillor1, @councillor2, @councillor3) }
+      it { expect(application.councillors_for_authority).to match_array [@councillor1, @councillor2, @councillor3] }
     end
 
     context "when there are councillors but not for the application’s authority" do
@@ -355,6 +354,53 @@ describe Application do
       end
 
       it { expect(application.councillors_for_authority).to eq nil }
+    end
+  end
+
+  describe "#councillors_available_for_contact" do
+    let(:authority) { create(:authority) }
+    let(:application) { create(:application, authority: authority) }
+
+    context "when there are no councillors" do
+      context "and the feature is disabled for the authority" do
+        before do
+          allow(authority).to receive(:write_to_councillors_enabled?).and_return false
+        end
+
+        it { expect(application.councillors_available_for_contact).to eq nil }
+      end
+
+      context "and the feature is enabled for the authority" do
+        before do
+          allow(authority).to receive(:write_to_councillors_enabled?).and_return true
+        end
+
+        it { expect(application.councillors_available_for_contact).to eq nil }
+      end
+    end
+
+    context "when there are councillors" do
+      before do
+        @councillor1 = create(:councillor, authority: authority)
+        @councillor2 = create(:councillor, authority: authority)
+        @councillor3 = create(:councillor, authority: authority)
+      end
+
+      context "but the feature is disabled for the authority" do
+        before do
+          allow(authority).to receive(:write_to_councillors_enabled?).and_return false
+        end
+
+        it { expect(application.councillors_available_for_contact).to eq nil }
+      end
+
+      context "and the feature is enabled for the authority" do
+        before do
+          allow(authority).to receive(:write_to_councillors_enabled?).and_return true
+        end
+
+        it { expect(application.councillors_available_for_contact).to match_array [@councillor1, @councillor2, @councillor3] }
+      end
     end
   end
 end

@@ -93,6 +93,14 @@ FactoryGirl.define do
     lat -33.911105
     lng 151.155503
     radius_meters 2000
+
+    factory :unconfirmed_alert do
+      confirmed false
+    end
+
+    factory :confirmed_alert do
+      confirmed true
+    end
   end
 
   factory :subscription do

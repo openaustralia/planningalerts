@@ -131,77 +131,51 @@ describe AddComment do
       build(:add_comment, application: application)
     end
 
-    context "when the writing to councillors feature is not enabled" do
-      context "and Default theme is active" do
-        before :each do
-          add_comment_form.theme = "default"
-        end
-
-        context "and there are councillors" do
-          it { expect(add_comment_form.could_be_for_councillor?).to eq false }
-        end
-
-        context "and there are not councillors" do
-          it { expect(add_comment_form.could_be_for_councillor?).to eq false }
-        end
+    context "and Default theme is active" do
+      before :each do
+        add_comment_form.theme = "default"
       end
 
-      context "and the NSW theme is active" do
-        before :each do
-          add_comment_form.theme = "nsw"
+      context "and there are contactable councillors" do
+        before do
+          allow(application).to receive(:councillors_available_for_contact)
+            .and_return [create(:councillor, authority: application.authority)]
         end
 
-        context "and there are councillors" do
-          before do
-            create(:councillor, authority: application.authority)
-          end
+        it { expect(add_comment_form.could_be_for_councillor?).to eq true }
+      end
 
-          it { expect(add_comment_form.could_be_for_councillor?).to eq false }
+      context "and there are no contactable councillors" do
+        before do
+          allow(application).to receive(:councillors_available_for_contact)
+            .and_return nil
         end
 
-        context "and there are not councillors" do
-          it { expect(add_comment_form.could_be_for_councillor?).to eq false }
-        end
+        it { expect(add_comment_form.could_be_for_councillor?).to eq false }
       end
     end
 
-    context "when the writing to councillors feature is enabled" do
-      around do |test|
-        with_modified_env COUNCILLORS_ENABLED: 'true' do
-          test.run
-        end
+    context "and the NSW theme is active" do
+      before :each do
+        add_comment_form.theme = "nsw"
       end
 
-      context "and Default theme is active" do
-        before :each do
-          add_comment_form.theme = "default"
+      context "and there are contactable councillors" do
+        before do
+          allow(application).to receive(:councillors_available_for_contact)
+            .and_return [create(:councillor, authority: application.authority)]
         end
 
-        context "and there are councillors" do
-          before do
-            create(:councillor, authority: application.authority)
-          end
-
-          it { expect(add_comment_form.could_be_for_councillor?).to eq true }
-        end
-
-        context "and there are not councillors" do
-          it { expect(add_comment_form.could_be_for_councillor?).to eq false }
-        end
+        it { expect(add_comment_form.could_be_for_councillor?).to eq false }
       end
 
-      context "and the NSW theme is active" do
-        before :each do
-          add_comment_form.theme = "nsw"
+      context "and there are no contactable councillors" do
+        before do
+          allow(application).to receive(:councillors_available_for_contact)
+            .and_return nil
         end
 
-        context "and there are councillors" do
-          it { expect(add_comment_form.could_be_for_councillor?).to eq false }
-        end
-
-        context "and there are not councillors" do
-          it { expect(add_comment_form.could_be_for_councillor?).to eq false }
-        end
+        it { expect(add_comment_form.could_be_for_councillor?).to eq false }
       end
     end
   end
