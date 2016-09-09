@@ -1,9 +1,9 @@
 require "spec_helper"
 
 feature "Councillor replies to a message sent to them" do
-  let(:councillor) { create(:councillor, name: "Louise Councillor", email: "louise@council.nsw.gov.au", popolo_id: "marrickville_council/chris_woods") }
-  let(:application) { create(:application, id: 8, address: "24 Bruce Road Glenbrook", description: "A lovely house") }
-  let!(:comment) do
+  given (:councillor) { create(:councillor, name: "Louise Councillor", email: "louise@council.nsw.gov.au", popolo_id: "marrickville_council/chris_woods") }
+  given (:application) { create(:application, id: 8, address: "24 Bruce Road Glenbrook", description: "A lovely house") }
+  given!(:comment) do
     VCR.use_cassette('planningalerts') do
       create(:comment, id: 5,
                        application: application,
@@ -41,7 +41,7 @@ feature "Councillor replies to a message sent to them" do
   end
 
   context "WriteIt is configured" do
-    let(:writeit_comment) do
+    given(:writeit_comment) do
       create(:confirmed_comment, writeit_message_id: 1234,
                                  application: application,
                                  councillor: councillor)
@@ -60,7 +60,6 @@ feature "Councillor replies to a message sent to them" do
         click_button "Load replies from WriteIt"
       end
 
-
       expect(page).to have_content "Loaded 1 replies"
 
       visit application_path(writeit_comment.application)
@@ -71,17 +70,17 @@ feature "Councillor replies to a message sent to them" do
 end
 
 feature "Commenter is notified of the councillors reply" do
-  let(:authority)   { create(:authority, full_name: "Marrickville Council") }
-  let(:councillor)  { create(:councillor,
+  given (:authority)   { create(:authority, full_name: "Marrickville Council") }
+  given (:councillor)  { create(:councillor,
                                 name: "Louise Councillor",
                                 authority: authority) }
-  let(:application) { create(:application,
+  given (:application) { create(:application,
                                 id: 8,
                                 address: "24 Bruce Road Glenbrook",
                                 description: "A lovely house") }
   # TODO: Extract this to a method where user actually leaves comment
   #       and confirms it.
-  let(:comment) do
+  given (:comment) do
     VCR.use_cassette('planningalerts') do
       create(:comment,
              :confirmed,
@@ -91,10 +90,10 @@ feature "Commenter is notified of the councillors reply" do
              councillor: councillor)
     end
   end
-  let(:email_intro_text) { "Local councillor Louise Councillor replied to <a href=\"https://dev.planningalerts.org.au/applications/8?utm_campaign=view-comment&amp;utm_medium=email&amp;utm_source=reply-notifications#comment5\">your message</a> about the planning application “A lovely house” at 24 Bruce Road Glenbrook" }
-  let(:reply_text) { "I'm glad you think it's a good idea. I do too." }
+  given (:email_intro_text) { "Local councillor Louise Councillor replied to <a href=\"https://dev.planningalerts.org.au/applications/8?utm_campaign=view-comment&amp;utm_medium=email&amp;utm_source=reply-notifications#comment5\">your message</a> about the planning application “A lovely house” at 24 Bruce Road Glenbrook" }
+  given (:reply_text) { "I'm glad you think it's a good idea. I do too." }
 
-  before do
+  background do
     create(:reply, comment: comment, councillor: councillor, text: reply_text)
   end
 
