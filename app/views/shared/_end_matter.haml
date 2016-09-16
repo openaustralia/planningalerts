@@ -5,6 +5,6 @@
 - if @themer.google_maps_client_id
   %script(src="https://maps.googleapis.com/maps/api/js?client=#{@themer.google_maps_client_id}&sensor=false&v=3.13&libraries=places" type="text/javascript")
 - else
-  %script(src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places" type="text/javascript")
+  %script(src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&region=au" type="text/javascript")
 = javascript_include_tag "application"
 = vanity_js
