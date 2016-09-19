@@ -12,7 +12,7 @@ module EmailConfirmable
   end
 
   def send_confirmation_email
-    ConfirmationMailer.delay.confirm(self.theme, self)
+    ConfirmationMailer.confirm(self.theme, self).deliver_later
   end
 
   protected

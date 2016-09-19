@@ -12,7 +12,7 @@ class ReportsController < ApplicationController
     if params[:little_sweety].blank?
       @report = @comment.reports.build(name: params[:report][:name], email: params[:report][:email], details: params[:report][:details])
       if @report.save
-        ReportNotifier.delay.notify(@report)
+        ReportNotifier.notify(@report).deliver_later
       else
         render 'new'
       end
