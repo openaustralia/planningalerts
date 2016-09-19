@@ -14,7 +14,6 @@ end
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
 require "email_spec"
 require 'rspec/active_model/mocks'
 

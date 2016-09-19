@@ -1,9 +1,9 @@
 require "spec_helper"
 
 feature "Councillor replies to a message sent to them" do
-  given (:councillor) { create(:councillor, name: "Louise Councillor", email: "louise@council.nsw.gov.au") }
+  given (:councillor) { create(:councillor, name: "Louise Councillor", email: "louise@council.nsw.gov.au", popolo_id: "marrickville_council/chris_woods") }
   given (:application) { create(:application, id: 8, address: "24 Bruce Road Glenbrook", description: "A lovely house") }
-  given (:comment) do
+  given!(:comment) do
     VCR.use_cassette('planningalerts') do
       create(:comment, id: 5,
                        application: application,
@@ -13,9 +13,8 @@ feature "Councillor replies to a message sent to them" do
     end
   end
 
-  background { comment.confirm! }
-
   scenario "it's entered by an admin and displayed on the application page" do
+    comment.confirm!
     open_email("louise@council.nsw.gov.au")
     expect(current_email).to have_reply_to "replies@planningalerts.org.au"
     # The councillor replies to the message
