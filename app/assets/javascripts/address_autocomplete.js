@@ -9,7 +9,7 @@ function initAutoComplete() {
 
   autocomplete.addListener('place_changed', function() {
     $("form.one-field").submit();
-  })
+  });
 }
 
-initAutoComplete()
+initAutoComplete();
