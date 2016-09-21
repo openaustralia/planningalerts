@@ -98,7 +98,8 @@ module ApplicationHelper
       { name: "Ben M", email_md5: "a99b7918f974feb902e89bb613b32991", github: '' },
       { name: "Kelvin Nicholson", email_md5: "68993df636ccc98ae440563cf62badd5", github: 'kelvinn' },
       { name: "Jason Thomas", email_md5: "edf2f394e21a040eca21d3618a8d7032", github: 'JasonThomasData' },
-      { name: "Mark Nottingham", email_md5: "38f92fdb9ac1b5213d40c595b14ec620", github: 'mnot' }
+      { name: "Mark Nottingham", email_md5: "38f92fdb9ac1b5213d40c595b14ec620", github: 'mnot' },
+      { name: "Dave Wood", email_md5: "3c4bb2010989f6b6461cb7ffb646c486", github: 'davwood' }
     ]
   end
 
