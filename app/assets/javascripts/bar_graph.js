@@ -40,7 +40,7 @@ function barGraph(selector, url, metric) {
 
     var yTickCount;
     if (maxYValue < 3) {
-      yTickCount = Math.floor(maxYValue)
+      yTickCount = Math.floor(maxYValue);
     } else {
       yTickCount = 3;
     }
