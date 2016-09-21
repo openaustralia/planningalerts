@@ -39,9 +39,9 @@ function barGraph(selector, url, metric) {
     var bisectDate = d3.bisector(function(d) { return d.key; }).left
 
     var yTickCount;
-    if (maxYValue < 2) {
-      yTickCount = 1;
-    } else  {
+    if (maxYValue < 3) {
+      yTickCount = Math.floor(maxYValue);
+    } else {
       yTickCount = 3;
     }
 
