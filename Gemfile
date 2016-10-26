@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 gem 'rails', '4.2.7'
 gem 'mysql2', '> 0.3'
+gem 'pg'
 
 # Allow us to use `caches_page`
 gem "actionpack-page_caching"
