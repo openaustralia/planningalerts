@@ -29,8 +29,10 @@ class Authority < ActiveRecord::Base
     message: "%{value} is not a state in Australia"
   }
 
-  scope :enabled, -> { where('disabled = 0 or disabled is null') }
-  scope :active, -> { where('(disabled = 0 or disabled is null) AND morph_name != "" AND morph_name IS NOT NULL') }
+  scope :enabled, -> { where('disabled = ? or disabled is null', false) }
+  scope :active, -> { where("(disabled = ? or disabled is null)
+                             AND morph_name != ''
+                             AND morph_name IS NOT NULL", false) }
 
   def full_name_and_state
     full_name + ", " + state
