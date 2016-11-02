@@ -176,6 +176,7 @@ class Authority < ActiveRecord::Base
     # Sunday is the beginning of the week (and the date returned here)
     # Have to compensate for MySQL which treats Monday as the beginning of the week
     h = by_week_from_sunday(applications, 'date_scraped')
+    return [] if h.empty?
     min = h.keys.min
     max = Date.today - Date.today.wday
     (min..max).step(7) do |date|
