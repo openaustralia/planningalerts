@@ -51,7 +51,10 @@ class Alert < ActiveRecord::Base
     alerts = where(confirmed: true).where("date(created_at) = ?", date).group(:email)
 
     alerts.select do |alert|
-      where("id != ? and email = ? and created_at < ?", alert.id, alert.email, alert.created_at).empty?
+      where("id != ? and email = ? and created_at < ?",
+            alert.id,
+            alert.email,
+            alert.created_at).empty?
     end.count
   end
 
