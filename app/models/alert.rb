@@ -57,7 +57,6 @@ class Alert < ActiveRecord::Base
 
   def self.count_of_email_completely_unsubscribed_on_date(date)
     emails = where("date(updated_at) = ?", date).where(unsubscribed: true).
-                                                 select(:email).
                                                  distinct.
                                                  pluck(:email)
 
