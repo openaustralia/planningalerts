@@ -9,6 +9,11 @@ module Themes
         false
       end
 
+      def delivery_options
+        { user_name: cuttlefish_user_name,
+          password: cuttlefish_password }
+      end
+
       def view_path
         File.expand_path('../views', __FILE__)
       end

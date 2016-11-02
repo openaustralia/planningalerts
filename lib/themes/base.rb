@@ -12,6 +12,10 @@ module Themes
       true
     end
 
+    def delivery_options
+      {}
+    end
+
     def email_from
       "#{app_name} <#{email_from_address}>"
     end

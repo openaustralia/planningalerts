@@ -4,23 +4,20 @@ module ActionMailerThemer
 
   def themed_mail(params)
     theme = params.delete(:theme)
+    @themer = ThemeChooser.create(theme)
 
-    # TODO Extract this into the theme
-    if theme == "default"
-      template_path = mailer_name
-    elsif theme == "nsw"
-      template_path = ["../../lib/themes/#{theme}/views/#{mailer_name}", mailer_name]
-      self.prepend_view_path "lib/themes/#{theme}/views"
+    if @themer.view_path
+      self.prepend_view_path @themer.view_path
+      template_path = [File.join(@themer.view_path, mailer_name), mailer_name]
     else
-      raise "Unknown theme #{theme}"
+      template_path = mailer_name
     end
 
-    @themer = ThemeChooser.create(theme)
     @host = @themer.host
     @protocol = @themer.protocol
     # Only override mail delivery options in production
-    if Rails.env.production? && theme == "nsw"
-      delivery_options = {user_name: @themer.cuttlefish_user_name , password: @themer.cuttlefish_password }
+    if Rails.env.production? && @themer.delivery_options
+      delivery_options = @themer.delivery_options
     else
       delivery_options = {}
     end
