@@ -175,13 +175,25 @@ class Authority < ActiveRecord::Base
   def applications_per_week
     # Sunday is the beginning of the week (and the date returned here)
     # Have to compensate for MySQL which treats Monday as the beginning of the week
-    h = applications.group("CAST(SUBDATE(date_scraped, WEEKDAY(date_scraped) + 1) AS DATE)").count
+    h = by_week_from_sunday(applications, 'date_scraped')
     min = h.keys.min
     max = Date.today - Date.today.wday
     (min..max).step(7) do |date|
       h[date] = 0 unless h.has_key?(date)
     end
     h.sort
+  end
+
+  def by_week_from_sunday(query, field)
+    # Have to compensate for databases which treat Monday as the beginning of the week
+    if ActiveRecord::Base.connection.adapter_name == 'Mysql2'
+      query.group("CAST(SUBDATE(#{field}, WEEKDAY(#{field}) + 1) AS DATE)").count
+    elsif ActiveRecord::Base.connection.adapter_name == 'PostgreSQL'
+      sql = "(DATE_TRUNC('week', #{field} + '1 day'::interval)::date - '1 day'::interval)::date"
+      query.reorder(sql).group(sql).count
+    else
+      raise "Unsupported connection adapter: #{ActiveRecord::Base.connection.adapter_name}"
+    end
   end
 
   def comments_per_week
@@ -191,10 +203,7 @@ class Authority < ActiveRecord::Base
     results = []
 
     if applications.any?
-      # Have to compensate for MySQL which treats Monday as the beginning of the week
-      results = comments.visible.group(
-        "CAST(SUBDATE(confirmed_at, WEEKDAY(confirmed_at) + 1) AS DATE)"
-      ).count
+      results = by_week_from_sunday(comments.visible, 'confirmed_at')
 
       earliest_week_with_applications = earliest_date.at_beginning_of_week.to_date
       latest_week = Date.today.at_beginning_of_week
