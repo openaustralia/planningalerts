@@ -102,6 +102,48 @@ describe Authority do
     end
   end
 
+  describe '#applications_per_week' do
+    let(:authority) { create(:authority) }
+
+    before :each do
+      Timecop.freeze(Time.local(2016, 1, 5))
+    end
+
+    after :each do
+      Timecop.return
+    end
+
+    context "when the authority has no applications" do
+      it "returns an empty list" do
+        expect(authority.applications_per_week).to eq []
+      end
+    end
+
+    context "when the authority has applications" do
+
+      it "returns count of applications for each week since the first application was scraped" do
+
+       VCR.use_cassette('planningalerts', allow_playback_repeats: true) do
+          create(:application, date_scraped: Time.utc(2015,12,26),
+                               council_reference: 'a1',
+                               authority: authority)
+          create(:application, date_scraped: Time.utc(2015,12,26),
+                               council_reference: 'a2',
+                               authority: authority)
+          create(:application, date_scraped: Time.utc(2016,1,4),
+                               council_reference: 'a3',
+                               authority: authority)
+        end
+        expect(authority.applications_per_week).to eq [
+          [ Date.new(2015,12,20), 2 ],
+          [ Date.new(2015,12,27), 0 ],
+          [ Date.new(2016,1,3), 1 ]
+        ]
+      end
+    end
+
+  end
+
   describe "#comments_per_week" do
     let(:authority) { create(:authority) }
 
