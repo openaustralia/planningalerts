@@ -48,8 +48,10 @@ class Alert < ActiveRecord::Base
   end
 
   def self.count_of_new_unique_email_created_on_date(date)
-    alerts = where(confirmed: true).where("date(created_at) = ?", date).group(:email)
-
+    alerts = where(confirmed: true).where("date(created_at) = ? AND id =
+                                           (SELECT min(a.id) FROM alerts a
+                                            WHERE a.email = alerts.email
+                                            AND date(a.created_at) = ?)", date, date)
     alerts.reject do |alert|
       where(email: alert.email).where("created_at < ?", alert.created_at).any?
     end.count

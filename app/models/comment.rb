@@ -14,7 +14,10 @@ class Comment < ActiveRecord::Base
   scope :to_councillor, -> { joins(:councillor) }
 
   scope :visible_with_unique_emails_for_date, ->(date) {
-    visible.where("date(confirmed_at) = ?", date).group(:email)
+    visible.where("date(confirmed_at) = ? AND id =
+                    (SELECT min(c.id) FROM comments c
+                     WHERE c.email = comments.email
+                     AND date(c.confirmed_at) = ?)", date, date)
   }
 
   scope :by_first_time_commenters_for_date, ->(date) {
