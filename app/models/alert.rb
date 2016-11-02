@@ -47,10 +47,10 @@ class Alert < ActiveRecord::Base
     Alert.find_by_sql(command)
   end
 
-  def self.with_new_unique_email_created_on_date(date)
+  def self.count_of_new_unique_email_created_on_date(date)
     where(confirmed: true).where("date(created_at) = ?", date).group(:email).select do |alert|
       where("id != ? and email = ? and created_at < ?", alert.id, alert.email, alert.created_at).empty?
-    end
+    end.count
   end
 
   def self.count_of_email_completely_unsubscribed_on_date(date)

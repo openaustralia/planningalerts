@@ -170,8 +170,8 @@ describe Alert do
     end
   end
 
-  describe ".with_new_unique_email_created_on_date" do
-    it { expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq [] }
+  describe ".count_of_new_unique_email_created_on_date" do
+    it { expect(Alert.count_of_new_unique_email_created_on_date("2016-08-24")).to eq 0 }
 
     context "when there are unconfirmed alerts" do
       before do
@@ -179,7 +179,7 @@ describe Alert do
       end
 
       it "it doesn't include them" do
-        expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq []
+        expect(Alert.count_of_new_unique_email_created_on_date("2016-08-24")).to eq 0
       end
     end
 
@@ -189,7 +189,7 @@ describe Alert do
       end
 
       it "doesn't include them" do
-        expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq []
+        expect(Alert.count_of_new_unique_email_created_on_date("2016-08-24")).to eq 0
       end
     end
 
@@ -200,7 +200,7 @@ describe Alert do
       end
 
       it "doesn't include them" do
-        expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq []
+        expect(Alert.count_of_new_unique_email_created_on_date("2016-08-24")).to eq 0
       end
     end
 
@@ -213,9 +213,9 @@ describe Alert do
       end
 
       it "includes them" do
-        expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq [@alert, @alert2]
-        expect(Alert.with_new_unique_email_created_on_date("2012-04-01")).to eq [@alert3]
-        expect(Alert.with_new_unique_email_created_on_date("1990-05-27")).to eq [@alert4]
+        expect(Alert.count_of_new_unique_email_created_on_date("2016-08-24")).to eq 2
+        expect(Alert.count_of_new_unique_email_created_on_date("2012-04-01")).to eq 1
+        expect(Alert.count_of_new_unique_email_created_on_date("1990-05-27")).to eq 1
       end
     end
 
@@ -225,8 +225,8 @@ describe Alert do
         @alert2 = create(:confirmed_alert, email: "clare@jones.org", created_at: "2016-08-24")
       end
 
-      it "includes the first alert they created" do
-        expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq [@alert1]
+      it "only counts one" do
+        expect(Alert.count_of_new_unique_email_created_on_date("2016-08-24")).to eq 1
       end
     end
 
@@ -244,7 +244,7 @@ describe Alert do
       end
 
       it "still includes it for the day it was created" do
-        expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq [alert]
+        expect(Alert.count_of_new_unique_email_created_on_date("2016-08-24")).to eq 1
       end
     end
   end
