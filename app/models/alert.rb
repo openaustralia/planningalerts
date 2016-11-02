@@ -51,10 +51,9 @@ class Alert < ActiveRecord::Base
     alerts = where(confirmed: true).where("date(created_at) = ?", date).group(:email)
 
     alerts.reject do |alert|
-      where("id != ? and email = ? and created_at < ?",
-            alert.id,
-            alert.email,
-            alert.created_at).any?
+      where(email: alert.email).where("created_at < ?", alert.created_at).
+                                where.not(id: alert.id).
+                                any?
     end.count
   end
 
