@@ -32,12 +32,46 @@ describe PerformanceController do
         get(:alerts, format: :json)
 
         expect(JSON.parse(response.body)).to include({
-          "date"=>"2016-08-19", "new_alert_subscribers"=>1
+          "date"=>"2016-08-19",
+          "new_alert_subscribers"=>1,
+          "emails_completely_unsubscribed" => 0
         })
 
         expect(JSON.parse(response.body)).to include({
-          "date"=>"2016-07-06", "new_alert_subscribers"=>2
+          "date"=>"2016-07-06",
+          "new_alert_subscribers"=>2,
+          "emails_completely_unsubscribed" => 0
         })
+      end
+    end
+
+    context "when people have unsubscribed" do
+      before do
+        alert = create :confirmed_alert, email: "mary@example.org", created_at: DateTime.new(2016,6,19)
+
+        Timecop.freeze(Time.utc(2016, 8, 23)) { alert.update_attribute(:unsubscribed, true) }
+
+        get(:alerts, format: :json)
+      end
+
+      it "we see them subscribe in the data" do
+        expect(JSON.parse(response.body)).to include(
+          {
+            "date" => "2016-06-19",
+            "new_alert_subscribers" => 1,
+            "emails_completely_unsubscribed" => 0
+          }
+        )
+      end
+
+      it "we see them unsubscribe in the data" do
+        expect(JSON.parse(response.body)).to include(
+          {
+            "date" => "2016-08-23",
+            "new_alert_subscribers" => 0,
+            "emails_completely_unsubscribed" => 1
+          }
+        )
       end
     end
   end
