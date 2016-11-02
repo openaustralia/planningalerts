@@ -1,7 +1,7 @@
 class AuthoritiesController < ApplicationController
   def index
     # map from state name to authorities in that state
-    states = Authority.enabled.group(:state).order(:state).map{|a| a.state}
+    states = Authority.enabled.order('state').pluck('DISTINCT state')
     @authorities = {}
     states.each do |state|
       @authorities[state] = Authority.enabled.where(state: state).order(:full_name)
