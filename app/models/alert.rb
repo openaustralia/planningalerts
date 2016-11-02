@@ -15,11 +15,6 @@ class Alert < ActiveRecord::Base
   # People with 3 or more alerts that don't yet have a subscription
   scope :potential_subscribers, -> { active.group("alerts.email").having("count(alerts.email) >= 3") }
   scope :without_subscription, -> { includes(:subscription).where(subscriptions: {email: nil}) }
-  scope :with_new_unique_email_created_on_date, ->(date) {
-    active.where("date(created_at) = ?", date).group(:email).select do |alert|
-      where("email = ? and created_at < ?", alert.email, alert.created_at.to_date).empty?
-    end
-  }
 
   def location=(l)
     if l
@@ -50,6 +45,24 @@ class Alert < ActiveRecord::Base
         )
       |
     Alert.find_by_sql(command)
+  end
+
+  def self.count_of_new_unique_email_created_on_date(date)
+    alerts = where(confirmed: true).where("date(created_at) = ?", date).group(:email)
+
+    alerts.reject do |alert|
+      where(email: alert.email).where("created_at < ?", alert.created_at).any?
+    end.count
+  end
+
+  def self.count_of_email_completely_unsubscribed_on_date(date)
+    emails = where("date(updated_at) = ?", date).where(unsubscribed: true).
+                                                 distinct.
+                                                 pluck(:email)
+
+    emails.reject do |email|
+      active.where(email: email).where("date(created_at) <= ?", date).any?
+    end.count
   end
 
   # Only enable subscriptions on the default theme

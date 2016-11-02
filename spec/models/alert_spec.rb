@@ -170,17 +170,16 @@ describe Alert do
     end
   end
 
-  describe ".with_new_unique_email_created_on_date" do
-    it { expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq [] }
+  describe ".count_of_new_unique_email_created_on_date" do
+    it { expect(Alert.count_of_new_unique_email_created_on_date("2016-08-24")).to eq 0 }
 
-    context "when there are no active alerts" do
+    context "when there are unconfirmed alerts" do
       before do
         create(:unconfirmed_alert, created_at: "2016-08-24")
-        create(:confirmed_alert, unsubscribed: true)
       end
 
       it "it doesn't include them" do
-        expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq []
+        expect(Alert.count_of_new_unique_email_created_on_date("2016-08-24")).to eq 0
       end
     end
 
@@ -190,7 +189,7 @@ describe Alert do
       end
 
       it "doesn't include them" do
-        expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq []
+        expect(Alert.count_of_new_unique_email_created_on_date("2016-08-24")).to eq 0
       end
     end
 
@@ -201,7 +200,7 @@ describe Alert do
       end
 
       it "doesn't include them" do
-        expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq []
+        expect(Alert.count_of_new_unique_email_created_on_date("2016-08-24")).to eq 0
       end
     end
 
@@ -214,9 +213,9 @@ describe Alert do
       end
 
       it "includes them" do
-        expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq [@alert, @alert2]
-        expect(Alert.with_new_unique_email_created_on_date("2012-04-01")).to eq [@alert3]
-        expect(Alert.with_new_unique_email_created_on_date("1990-05-27")).to eq [@alert4]
+        expect(Alert.count_of_new_unique_email_created_on_date("2016-08-24")).to eq 2
+        expect(Alert.count_of_new_unique_email_created_on_date("2012-04-01")).to eq 1
+        expect(Alert.count_of_new_unique_email_created_on_date("1990-05-27")).to eq 1
       end
     end
 
@@ -226,8 +225,95 @@ describe Alert do
         @alert2 = create(:confirmed_alert, email: "clare@jones.org", created_at: "2016-08-24")
       end
 
-      it "includes the first alert they created" do
-        expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq [@alert1]
+      it "only counts one" do
+        expect(Alert.count_of_new_unique_email_created_on_date("2016-08-24")).to eq 1
+      end
+    end
+
+    context "when the alert has since been unsubscribed" do
+      let!(:alert) do
+        a = Timecop.freeze(Date.new(2016, 8, 24)) do
+          create :confirmed_alert
+        end
+
+        Timecop.freeze(Date.new(2016, 8, 24)) do
+          a.update_attribute(:unsubscribed, true)
+        end
+
+        a
+      end
+
+      it "still includes it for the day it was created" do
+        expect(Alert.count_of_new_unique_email_created_on_date("2016-08-24")).to eq 1
+      end
+    end
+  end
+
+  describe ".count_of_email_completely_unsubscribed_on_date" do
+    it "is 0 when there is no unsubscribes" do
+      expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.today)).to eql 0
+    end
+
+    it "is 0 when there is no complete unsubscribes" do
+      create(:confirmed_alert, email: "foo@email.com", unsubscribed: true)
+      create(:confirmed_alert, email: "foo@email.com", unsubscribed: true)
+      create(:confirmed_alert, email: "foo@email.com", unsubscribed: false)
+
+      expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.today)).to eql 0
+    end
+
+    it "returns number of emails completely unsubscribed on a date" do
+      create(:confirmed_alert, unsubscribed: true)
+
+      expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.today)).to eql 1
+    end
+
+    it "only counts unique emails" do
+      create(:confirmed_alert, email: "foo@email.com", unsubscribed: true)
+      create(:confirmed_alert, email: "foo@email.com", unsubscribed: true)
+
+      expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.today)).to eql 1
+    end
+
+    it "only counts unsubscribes on the specified date" do
+      alert1 = create(:confirmed_alert, email: "foo@email.com")
+      alert2 = create(:confirmed_alert, email: "bar@email.com")
+
+      Timecop.freeze(Time.utc(2016, 8, 23)) { alert1.update_attribute(:unsubscribed, true) }
+      Timecop.freeze(Time.utc(2016, 8, 24)) { alert2.update_attribute(:unsubscribed, true) }
+
+      expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.new(2016, 8, 23))).to eql 1
+    end
+
+    context "when someone completely unsubscribes and then resubscribes" do
+      before do
+        alert = Timecop.freeze(Time.utc(2016, 8, 20)) do
+          create(:confirmed_alert, email: "foo@email.com")
+        end
+
+        Timecop.freeze(Time.utc(2016, 8, 23)) { alert.update_attribute(:unsubscribed, true) }
+
+        Timecop.freeze(Time.utc(2016, 8, 28)) do
+          create(:confirmed_alert, email: "foo@email.com")
+        end
+      end
+
+      it "counts their complete unsubscribe" do
+        expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.new(2016, 8, 23))).to eql 1
+      end
+
+      context "and then unsubscribe but not completely" do
+        before do
+          alert = Timecop.freeze(Time.utc(2016, 8, 28)) do
+            create(:confirmed_alert, email: "foo@email.com")
+          end
+
+          Timecop.freeze(Time.utc(2016, 9, 1)) { alert.update_attribute(:unsubscribed, true) }
+        end
+
+        it "doesn't count their unsubscribe" do
+          expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.new(2016, 9, 1))).to eql 0
+        end
       end
     end
   end
