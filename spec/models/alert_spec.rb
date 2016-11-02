@@ -232,6 +232,75 @@ describe Alert do
     end
   end
 
+  describe ".count_of_email_completely_unsubscribed_on_date" do
+    it "is 0 when there is no unsubscribes" do
+      expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.today)).to eql 0
+    end
+
+    it "is 0 when there is no complete unsubscribes" do
+      create(:confirmed_alert, email: "foo@email.com", unsubscribed: true)
+      create(:confirmed_alert, email: "foo@email.com", unsubscribed: true)
+      create(:confirmed_alert, email: "foo@email.com", unsubscribed: false)
+
+      expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.today)).to eql 0
+    end
+
+    it "returns number of emails completely unsubscribed on a date" do
+      create(:confirmed_alert, unsubscribed: true)
+
+      expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.today)).to eql 1
+    end
+
+    it "only counts unique emails" do
+      create(:confirmed_alert, email: "foo@email.com", unsubscribed: true)
+      create(:confirmed_alert, email: "foo@email.com", unsubscribed: true)
+
+      expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.today)).to eql 1
+    end
+
+    it "only counts unsubscribes on the specified date" do
+      alert1 = create(:confirmed_alert, email: "foo@email.com")
+      alert2 = create(:confirmed_alert, email: "bar@email.com")
+
+      Timecop.freeze(Time.utc(2016, 8, 23)) { alert1.update_attribute(:unsubscribed, true) }
+      Timecop.freeze(Time.utc(2016, 8, 24)) { alert2.update_attribute(:unsubscribed, true) }
+
+      expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.new(2016, 8, 23))).to eql 1
+    end
+
+    context "when someone completely unsubscribes and then resubscribes" do
+      before do
+        alert = Timecop.freeze(Time.utc(2016, 8, 20)) do
+          create(:confirmed_alert, email: "foo@email.com")
+        end
+
+        Timecop.freeze(Time.utc(2016, 8, 23)) { alert.update_attribute(:unsubscribed, true) }
+
+        Timecop.freeze(Time.utc(2016, 8, 28)) do
+          create(:confirmed_alert, email: "foo@email.com")
+        end
+      end
+
+      it "counts their complete unsubscribe" do
+        expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.new(2016, 8, 23))).to eql 1
+      end
+
+      context "and then unsubscribe but not completely" do
+        before do
+          alert = Timecop.freeze(Time.utc(2016, 8, 28)) do
+            create(:confirmed_alert, email: "foo@email.com")
+          end
+
+          Timecop.freeze(Time.utc(2016, 9, 1)) { alert.update_attribute(:unsubscribed, true) }
+        end
+
+        it "doesn't count their unsubscribe" do
+          expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.new(2016, 9, 1))).to eql 0
+        end
+      end
+    end
+  end
+
   describe "#address_for_placeholder" do
     it "has a default address" do
       expect(Alert.new.address_for_placeholder).to eql "1 Sowerby St, Goulburn, NSW 2580"

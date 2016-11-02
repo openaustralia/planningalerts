@@ -52,6 +52,17 @@ class Alert < ActiveRecord::Base
     Alert.find_by_sql(command)
   end
 
+  def self.count_of_email_completely_unsubscribed_on_date(date)
+    emails = where("date(updated_at) = ?", date).where(unsubscribed: true).
+                                                 select(:email).
+                                                 distinct.
+                                                 pluck(:email)
+
+    emails.reject do |email|
+      active.where(email: email).where("date(created_at) <= ?", date).any?
+    end.count
+  end
+
   # Only enable subscriptions on the default theme
   def subscription
     super if theme == "default"
