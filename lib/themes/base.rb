@@ -8,6 +8,10 @@ module Themes
       nil
     end
 
+    def ssl_required?
+      true
+    end
+
     def email_from
       "#{app_name} <#{email_from_address}>"
     end

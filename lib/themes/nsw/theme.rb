@@ -5,6 +5,10 @@ module Themes
         "nsw"
       end
 
+      def ssl_required?
+        false
+      end
+
       def view_path
         File.expand_path('../views', __FILE__)
       end
