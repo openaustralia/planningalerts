@@ -15,11 +15,6 @@ class Alert < ActiveRecord::Base
   # People with 3 or more alerts that don't yet have a subscription
   scope :potential_subscribers, -> { active.group("alerts.email").having("count(alerts.email) >= 3") }
   scope :without_subscription, -> { includes(:subscription).where(subscriptions: {email: nil}) }
-  scope :with_new_unique_email_created_on_date, ->(date) {
-    where(confirmed: true).where("date(created_at) = ?", date).group(:email).select do |alert|
-      where("id != ? and email = ? and created_at < ?", alert.id, alert.email, alert.created_at).empty?
-    end
-  }
 
   def location=(l)
     if l
@@ -50,6 +45,12 @@ class Alert < ActiveRecord::Base
         )
       |
     Alert.find_by_sql(command)
+  end
+
+  def self.with_new_unique_email_created_on_date(date)
+    where(confirmed: true).where("date(created_at) = ?", date).group(:email).select do |alert|
+      where("id != ? and email = ? and created_at < ?", alert.id, alert.email, alert.created_at).empty?
+    end
   end
 
   def self.count_of_email_completely_unsubscribed_on_date(date)
