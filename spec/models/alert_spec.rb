@@ -173,10 +173,9 @@ describe Alert do
   describe ".with_new_unique_email_created_on_date" do
     it { expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq [] }
 
-    context "when there are no active alerts" do
+    context "when there are unconfirmed alerts" do
       before do
         create(:unconfirmed_alert, created_at: "2016-08-24")
-        create(:confirmed_alert, unsubscribed: true)
       end
 
       it "it doesn't include them" do
@@ -228,6 +227,24 @@ describe Alert do
 
       it "includes the first alert they created" do
         expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq [@alert1]
+      end
+    end
+
+    context "when the alert has since been unsubscribed" do
+      let!(:alert) do
+        a = Timecop.freeze(Date.new(2016, 8, 24)) do
+          create :confirmed_alert
+        end
+
+        Timecop.freeze(Date.new(2016, 8, 24)) do
+          a.update_attribute(:unsubscribed, true)
+        end
+
+        a
+      end
+
+      it "still includes it for the day it was created" do
+        expect(Alert.with_new_unique_email_created_on_date("2016-08-24")).to eq [alert]
       end
     end
   end
