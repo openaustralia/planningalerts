@@ -313,16 +313,15 @@ describe Alert do
   end
 
   describe "#unsubscribe!" do
-    it "unsubscribes the alert" do
-      alert = create :alert
+    let(:alert) { create :alert }
 
+    it "unsubscribes the alert" do
       alert.unsubscribe!
 
       expect(alert).to be_unsubscribed
     end
 
     it "sets the unsubscribed_at time" do
-      alert = create :alert
       action_time = Time.new(2016, 11, 3, 15, 29)
 
       Timecop.freeze(action_time) { alert.unsubscribe! }
