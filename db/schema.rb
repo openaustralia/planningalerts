@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160824034142) do
+ActiveRecord::Schema.define(version: 20161103015049) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   limit: 255,   null: false
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20160824034142) do
     t.boolean  "unsubscribed",               default: false,     null: false
     t.datetime "last_processed"
     t.string   "theme",          limit: 255, default: "default", null: false
+    t.datetime "unsubscribed_at"
   end
 
   add_index "alerts", ["email"], name: "index_alerts_on_email", using: :btree
