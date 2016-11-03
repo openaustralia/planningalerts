@@ -101,6 +101,11 @@ FactoryGirl.define do
     factory :confirmed_alert do
       confirmed true
       confirm_id "1234"
+
+      factory :unsubscribed_alert do
+        unsubscribed true
+        unsubscribed_at Time.now
+      end
     end
   end
 
