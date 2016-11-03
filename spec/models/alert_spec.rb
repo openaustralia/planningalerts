@@ -318,6 +318,16 @@ describe Alert do
     end
   end
 
+  describe "#unsubscribe!" do
+    it "unsubscribes the alert" do
+      alert = create :alert
+
+      alert.unsubscribe!
+
+      expect(alert.unsubscribed).to be true
+    end
+  end
+
   describe "#address_for_placeholder" do
     it "has a default address" do
       expect(Alert.new.address_for_placeholder).to eql "1 Sowerby St, Goulburn, NSW 2580"

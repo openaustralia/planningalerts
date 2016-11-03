@@ -28,11 +28,12 @@ describe AlertsController do
   end
 
   describe "unsubscribing" do
-    it "should delete the alert when unsubscribing" do
-      alert = mock_model(Alert)
-      expect(Alert).to receive(:find_by_confirm_id).with("1234").and_return(alert)
-      expect(alert).to receive(:update_attribute).with(:unsubscribed, true)
-      get :unsubscribe, id: "1234"
+    it "should mark the alert as unsubscribed" do
+      alert = create :confirmed_alert
+
+      get :unsubscribe, id: alert.confirm_id
+
+      expect(alert.reload).to be_unsubscribed
     end
     
     # In order to avoid confusion when clicking on unsubscribe link twice -

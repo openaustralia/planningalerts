@@ -65,6 +65,10 @@ class Alert < ActiveRecord::Base
     end.count
   end
 
+  def unsubscribe!
+    update_attribute(:unsubscribed, true)
+  end
+
   # Only enable subscriptions on the default theme
   def subscription
     super if theme == "default"

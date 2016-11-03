@@ -100,6 +100,7 @@ FactoryGirl.define do
 
     factory :confirmed_alert do
       confirmed true
+      confirm_id "1234"
     end
   end
 
