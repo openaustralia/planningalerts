@@ -36,7 +36,6 @@ describe AlertsController do
       expect(alert.reload).to be_unsubscribed
     end
 
-    # In order to avoid confusion when clicking on unsubscribe link twice -
     it "should allow unsubscribing for non-existent alerts" do
       get :unsubscribe, id: "1111"
       expect(response).to be_success
