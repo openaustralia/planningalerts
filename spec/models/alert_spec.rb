@@ -318,7 +318,7 @@ describe Alert do
 
       alert.unsubscribe!
 
-      expect(alert.unsubscribed).to be true
+      expect(alert).to be_unsubscribed
     end
 
     it "sets the unsubscribed_at time" do
