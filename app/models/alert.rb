@@ -66,7 +66,7 @@ class Alert < ActiveRecord::Base
   end
 
   def unsubscribe!
-    update!(unsubscribed: true)
+    update!(unsubscribed: true, unsubscribed_at: Time.now)
   end
 
   # Only enable subscriptions on the default theme

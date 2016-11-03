@@ -326,6 +326,15 @@ describe Alert do
 
       expect(alert.unsubscribed).to be true
     end
+
+    it "sets the unsubscribed_at time" do
+      alert = create :alert
+      action_time = Time.new(2016, 11, 3, 15, 29)
+
+      Timecop.freeze(action_time) { alert.unsubscribe! }
+
+      expect(alert.unsubscribed_at).to eql action_time
+    end
   end
 
   describe "#address_for_placeholder" do
