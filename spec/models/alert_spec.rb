@@ -262,12 +262,6 @@ describe Alert do
       expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.today)).to eql 0
     end
 
-    it "returns number of emails completely unsubscribed on a date" do
-      create(:confirmed_alert, unsubscribed: true)
-
-      expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.today)).to eql 1
-    end
-
     it "only counts unique emails" do
       create(:confirmed_alert, email: "foo@email.com", unsubscribed: true)
       create(:confirmed_alert, email: "foo@email.com", unsubscribed: true)
