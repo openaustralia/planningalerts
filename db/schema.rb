@@ -95,15 +95,16 @@ ActiveRecord::Schema.define(version: 20160824034142) do
   add_index "applications", ["suburb"], name: "index_applications_on_suburb", using: :btree
 
   create_table "authorities", force: true do |t|
-    t.string  "full_name",            limit: 200, null: false
-    t.string  "short_name",           limit: 100, null: false
+    t.string  "full_name",                    limit: 200,                 null: false
+    t.string  "short_name",                   limit: 100,                 null: false
     t.boolean "disabled"
-    t.string  "state",                limit: 20
+    t.string  "state",                        limit: 20
     t.string  "email"
     t.integer "population_2011"
     t.text    "last_scraper_run_log"
     t.string  "morph_name"
     t.boolean "write_to_councillors_enabled",             default: false, null: false
+    t.string  "home_page"
   end
 
   add_index "authorities", ["short_name"], name: "short_name_unique", unique: true, using: :btree
