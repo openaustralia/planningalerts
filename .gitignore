@@ -25,6 +25,7 @@ public/sitemaps/sitemap*.xml.gz
 webrat.log
 .DS_Store
 planningalerts-app.sublime-workspace
+planningalerts-app.sublime-project
 
 #IntelliJ
 *.iml
