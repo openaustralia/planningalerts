@@ -5,7 +5,7 @@ describe AlertsController do
     request.env['HTTPS'] = 'on'
   end
 
-  describe "confirming" do
+  describe "#confirmed" do
     it "should set the alert to be confirmed" do
       alert = create(:alert)
       expect(Alert).to receive(:find_by!).with(confirm_id: "1234").and_return(alert)
@@ -27,7 +27,7 @@ describe AlertsController do
     end
   end
 
-  describe "unsubscribing" do
+  describe "#unsubscribe" do
     it "should mark the alert as unsubscribed" do
       alert = create :confirmed_alert
 
@@ -43,7 +43,7 @@ describe AlertsController do
     end
   end
 
-  describe "area" do
+  describe "#area" do
     it "should 404 if the alert can't be found" do
       expect {
         get :area, id: 'non_existent_id'
