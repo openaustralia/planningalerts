@@ -24,10 +24,12 @@ ActiveAdmin.register Authority do
     attributes_table do
       row :full_name
       row :short_name
+      row :lga_name15
       row :state
       row :email
       row :write_to_councillors_enabled
       row :population_2011
+      row :superceded_by
       row :morph_name
       row :disabled
     end
@@ -62,10 +64,12 @@ ActiveAdmin.register Authority do
     inputs "Details" do
       input :state
       input :email
+      input :lga_name15, hint: "What is the ABS name for this authority?"
       input :population_2011
       input :write_to_councillors_enabled
     end
     inputs "Scraping" do
+      input :superceded_by, hint: 'The short name of another authority that replaces this one', placeholder: 'spear'
       input :morph_name, hint: "The name of the scraper at morph.io", placeholder: "planningalerts-scrapers/scraper-blue-mountains"
       input :disabled
     end
@@ -97,15 +101,17 @@ ActiveAdmin.register Authority do
   csv do
     column :full_name
     column :short_name
+    column :lga_name15
     column :disabled
     column :write_to_councillors_enabled
     column :state
     column :email
     column :population_2011
+    column :superceded_by
     column :morph_name
     column(:number_of_applications) { |a| a.applications.count }
     column(:number_of_comments) { |a| a.comments.count }
   end
 
-  permit_params :full_name, :short_name, :state, :email, :write_to_councillors_enabled, :population_2011, :morph_name, :disabled
+  permit_params :full_name, :short_name, :state, :email, :write_to_councillors_enabled, :population_2011, :morph_name, :disabled, :superceded_by, :lga_name15
 end

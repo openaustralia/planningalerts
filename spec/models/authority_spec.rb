@@ -1,6 +1,25 @@
 require 'spec_helper'
 
 describe Authority do
+
+  describe "#covered?" do
+    it "should not be covered by default" do
+      authority = Authority.new
+      authority.covered?.should == false
+    end
+
+    it "should be covered if a morph_name is present" do
+      authority = Authority.new(morph_name: "test")
+
+      authority.covered?.should == true
+    end
+    it "should be covered if the authority is superceded" do
+      authority = Authority.new(superceded_by: "another_scraper")
+
+      authority.covered?.should == true
+    end
+  end
+
   describe "validations" do
     it 'should ensure a unique short_name' do
       existing_authority = create(:authority, short_name: "Existing")
@@ -37,6 +56,11 @@ describe Authority do
 
     it "should not report that a scraper is broken if it has received a DA in less than two weeks" do
       expect(@a2.broken?).to eq false
+    end
+
+    it "should not report that a scraper is broken if it is superceded" do
+      @a1.superceded_by = @a2.short_name
+      @a1.broken?.should == false
     end
   end
 

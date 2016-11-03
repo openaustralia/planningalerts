@@ -1,6 +1,11 @@
 - content_for :page_title, @authority.full_name
 %h3= yield :page_title
 
+- if @authority.superceded_by
+  %p.attention
+    This authority is covered by 
+    = link_to "another data source", authority_url(Authority.short_name_encoded(@authority.superceded_by))
+
 - if @authority.population_2011
   %p
     Population #{number_with_delimiter @authority.population_2011} (2011 estimate)

@@ -26,12 +26,22 @@
       %a.button-small.button.button-pill{ :href => "##{a.first.downcase}" }= a.first
 
 - @authorities.each do |state, authorities|
+  - covered_authorities = authorities.select{|authority| authority.covered? }
+  - missing_authorities = authorities.select{|authority| !authority.covered? }
   %h4{:id => state.downcase}= state
   %ul.authorities
-    - authorities.each do |authority|
+    - covered_authorities.each do |authority|
       %li
         = link_to authority.full_name, authority_url(authority.short_name_encoded)
         - if authority.broken?
           %span.highlight possibly broken
-        - elsif !authority.covered?
-          &mdash; not covered
+
+  - if missing_authorities.any?
+    %h5 Missing for #{state}
+    %p These authorities aren't covered yet. #{link_to "Help fix this", get_involved_path}.
+
+    %ul.authorities
+      - missing_authorities.each do |authority|
+        %li
+          = link_to authority.full_name, authority_url(authority.short_name_encoded)
+
