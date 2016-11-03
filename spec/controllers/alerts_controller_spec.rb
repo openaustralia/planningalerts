@@ -5,7 +5,7 @@ describe AlertsController do
     request.env['HTTPS'] = 'on'
   end
 
-  describe "confirming" do
+  describe "#confirmed" do
     it "should set the alert to be confirmed" do
       alert = create(:alert)
       expect(Alert).to receive(:find_by!).with(confirm_id: "1234").and_return(alert)
@@ -27,22 +27,22 @@ describe AlertsController do
     end
   end
 
-  describe "unsubscribing" do
-    it "should delete the alert when unsubscribing" do
-      alert = mock_model(Alert)
-      expect(Alert).to receive(:find_by_confirm_id).with("1234").and_return(alert)
-      expect(alert).to receive(:update_attribute).with(:unsubscribed, true)
-      get :unsubscribe, id: "1234"
+  describe "#unsubscribe" do
+    it "should mark the alert as unsubscribed" do
+      alert = create :confirmed_alert
+
+      get :unsubscribe, id: alert.confirm_id
+
+      expect(alert.reload).to be_unsubscribed
     end
-    
-    # In order to avoid confusion when clicking on unsubscribe link twice -
+
     it "should allow unsubscribing for non-existent alerts" do
       get :unsubscribe, id: "1111"
       expect(response).to be_success
     end
   end
 
-  describe "area" do
+  describe "#area" do
     it "should 404 if the alert can't be found" do
       expect {
         get :area, id: 'non_existent_id'

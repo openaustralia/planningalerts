@@ -237,7 +237,7 @@ describe Alert do
         end
 
         Timecop.freeze(Date.new(2016, 8, 24)) do
-          a.update_attribute(:unsubscribed, true)
+          a.unsubscribe!
         end
 
         a
@@ -255,22 +255,16 @@ describe Alert do
     end
 
     it "is 0 when there is no complete unsubscribes" do
-      create(:confirmed_alert, email: "foo@email.com", unsubscribed: true)
-      create(:confirmed_alert, email: "foo@email.com", unsubscribed: true)
-      create(:confirmed_alert, email: "foo@email.com", unsubscribed: false)
+      create(:unsubscribed_alert, email: "foo@email.com")
+      create(:unsubscribed_alert, email: "foo@email.com")
+      create(:confirmed_alert, email: "foo@email.com")
 
       expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.today)).to eql 0
     end
 
-    it "returns number of emails completely unsubscribed on a date" do
-      create(:confirmed_alert, unsubscribed: true)
-
-      expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.today)).to eql 1
-    end
-
     it "only counts unique emails" do
-      create(:confirmed_alert, email: "foo@email.com", unsubscribed: true)
-      create(:confirmed_alert, email: "foo@email.com", unsubscribed: true)
+      create(:unsubscribed_alert, email: "foo@email.com")
+      create(:unsubscribed_alert, email: "foo@email.com")
 
       expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.today)).to eql 1
     end
@@ -279,8 +273,8 @@ describe Alert do
       alert1 = create(:confirmed_alert, email: "foo@email.com")
       alert2 = create(:confirmed_alert, email: "bar@email.com")
 
-      Timecop.freeze(Time.utc(2016, 8, 23)) { alert1.update_attribute(:unsubscribed, true) }
-      Timecop.freeze(Time.utc(2016, 8, 24)) { alert2.update_attribute(:unsubscribed, true) }
+      Timecop.freeze(Time.utc(2016, 8, 23)) { alert1.unsubscribe! }
+      Timecop.freeze(Time.utc(2016, 8, 24)) { alert2.unsubscribe! }
 
       expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.new(2016, 8, 23))).to eql 1
     end
@@ -291,7 +285,7 @@ describe Alert do
           create(:confirmed_alert, email: "foo@email.com")
         end
 
-        Timecop.freeze(Time.utc(2016, 8, 23)) { alert.update_attribute(:unsubscribed, true) }
+        Timecop.freeze(Time.utc(2016, 8, 23)) { alert.unsubscribe! }
 
         Timecop.freeze(Time.utc(2016, 8, 28)) do
           create(:confirmed_alert, email: "foo@email.com")
@@ -308,13 +302,31 @@ describe Alert do
             create(:confirmed_alert, email: "foo@email.com")
           end
 
-          Timecop.freeze(Time.utc(2016, 9, 1)) { alert.update_attribute(:unsubscribed, true) }
+          Timecop.freeze(Time.utc(2016, 9, 1)) { alert.unsubscribe! }
         end
 
         it "doesn't count their unsubscribe" do
           expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.new(2016, 9, 1))).to eql 0
         end
       end
+    end
+  end
+
+  describe "#unsubscribe!" do
+    let(:alert) { create :alert }
+
+    it "unsubscribes the alert" do
+      alert.unsubscribe!
+
+      expect(alert).to be_unsubscribed
+    end
+
+    it "sets the unsubscribed_at time" do
+      action_time = Time.new(2016, 11, 3, 15, 29)
+
+      Timecop.freeze(action_time) { alert.unsubscribe! }
+
+      expect(alert.unsubscribed_at).to eql action_time
     end
   end
 

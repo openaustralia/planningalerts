@@ -49,7 +49,7 @@ describe PerformanceController do
       before do
         alert = create :confirmed_alert, email: "mary@example.org", created_at: DateTime.new(2016,6,19)
 
-        Timecop.freeze(Time.utc(2016, 8, 23)) { alert.update_attribute(:unsubscribed, true) }
+        Timecop.freeze(Time.utc(2016, 8, 23)) { alert.unsubscribe! }
 
         get(:alerts, format: :json)
       end
