@@ -2,6 +2,9 @@ language: ruby
 rvm:
   - 2.0
   - 2.1
+env:
+  - DB=mysql
+  - DB=postgresql
 
 before_install:
   # Workaround an issue with bundler version on Ruby 2.1
