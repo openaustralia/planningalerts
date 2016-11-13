@@ -23,6 +23,18 @@ module Themes
         request.domain(tld) == domain
       end
 
+      def total_population_covered_by_all_active_authorities
+        sum = 0
+        Authority.where(state: "NSW").active.each do |a|
+          sum += a.population_2011 if a.population_2011
+        end
+        sum
+      end
+
+      def total_population_2011
+        7211468
+      end
+
       # This might have a port number included
       def host
         ENV["THEME_NSW_HOST"]

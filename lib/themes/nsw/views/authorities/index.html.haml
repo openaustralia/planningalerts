@@ -14,7 +14,7 @@
   If on the other hand you are looking for a service
   with covers all of Australia, then head over to #{link_to "PlanningAlerts", "http://www.planningalerts.org.au"}.
 %p
-  We currently cover #{Authority.nsw_percentage_population_covered_by_all_active_authorities.to_i}% of NSW's population within #{@authorities["NSW"].count} authorities.
+  We currently cover #{Authority.percentage_population_covered_by_all_active_authorities(@themer).to_i}% of NSW's population within #{@authorities["NSW"].count} authorities.
 %p
   From time to time planning authorities change their websites which breaks the scrapers that gather the planning
   data. In the list below you can also see the authorities that we haven't received planning data from for a while
