@@ -157,7 +157,11 @@ class Alert < ActiveRecord::Base
     comments = []
     # Doing this in this roundabout way because I'm not sure how to use "near" together with joins
     applications_with_new_comments.each do |application|
-      comments += application.comments.visible.where('comments.confirmed_at > ?', cutoff_time)
+      comments += application
+                    .comments
+                      .visible
+                        .where('comments.confirmed_at > ?', cutoff_time)
+                          .order('created_at')
     end
     comments
   end
@@ -166,7 +170,10 @@ class Alert < ActiveRecord::Base
     replies = []
     # Doing this in this roundabout way because I'm not sure how to use "near" together with joins
     applications_with_new_replies.each do |application|
-      replies += application.replies.where('replies.received_at > ?', cutoff_time)
+      replies += application
+                  .replies
+                    .where('replies.received_at > ?', cutoff_time)
+                      .order('created_at')
     end
     replies
   end
