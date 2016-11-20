@@ -71,7 +71,7 @@ class Alert < ActiveRecord::Base
   end
 
   def address_for_placeholder
-    @address_for_placeholder || "1 Sowerby St, Goulburn, NSW 2580"
+    @address_for_placeholder || ThemeChooser.theme.example_address
   end
 
   # Name of the local government authority

@@ -18,6 +18,10 @@ class Location < SimpleDelegator
     ThemeChooser.theme.country_code
   end
 
+  def self.example_address
+    ThemeChooser.theme.example_address
+  end
+
   def self.geocode(address)
     r = Geokit::Geocoders::GoogleGeocoder3.geocode(address, bias: preferred_country_code.downcase)
     r = r.all.find{|l| Location.new(l).in_correct_country?} || r
@@ -44,11 +48,11 @@ class Location < SimpleDelegator
       if original_address == ""
         "Please enter a street address"
       elsif lat.nil? || lng.nil?
-        "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
+        "Sorry we don’t understand that address. Try one like ‘#{self.class.example_address}’"
       elsif !in_correct_country?
         "Unfortunately we only cover Australia. It looks like that address is in another country."
       elsif accuracy < 5
-        "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
+        "Please enter a full street address like ‘#{self.class.example_address}’"
       end
     end
   end

@@ -23,7 +23,7 @@
                       as: :email,
                       input_html: { required: "required" }
     = f.input :address, label: "Your street address",
-                        placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
+                        placeholder: "e.g. #{@themer.example_address}",
                         hint: "We never display your street address. #{link_to("Why do you need my address?", faq_path(anchor: "address"))}".html_safe,
                         input_html: { required: ("required" unless @add_comment.could_be_for_councillor?) }
     %div#faq_commenting_address.inline-hints.hidden

@@ -30,6 +30,10 @@ module Themes
       end
     end
 
+    def example_address
+      ENV['EXAMPLE_ADDRESS']
+    end
+
     def country_code
       ENV['COUNTRY_CODE']
     end
