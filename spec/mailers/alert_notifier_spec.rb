@@ -132,6 +132,13 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
         @email = AlertNotifier.alert("nsw", @alert, [@a1, @a2])
       end
 
+      around do |test|
+        with_theme_env 'nsw' do
+          ThemeChooser.theme
+          test.run
+        end
+      end
+
       # TODO This is just a temporary address
       it "should be from the nsw theme’s email address" do
         expect(@email.from).to eq(["contact@nsw.127.0.0.1.xip.io"])

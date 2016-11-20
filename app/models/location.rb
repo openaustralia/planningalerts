@@ -14,8 +14,12 @@ class Location < SimpleDelegator
     end
   end
 
+  def self.preferred_country_code
+    ThemeChooser.theme.country_code
+  end
+
   def self.geocode(address)
-    r = Geokit::Geocoders::GoogleGeocoder3.geocode(address, bias: "au")
+    r = Geokit::Geocoders::GoogleGeocoder3.geocode(address, bias: preferred_country_code.downcase)
     r = r.all.find{|l| Location.new(l).in_correct_country?} || r
     l = Location.new(r)
     l.original_address = address
@@ -23,7 +27,7 @@ class Location < SimpleDelegator
   end
 
   def in_correct_country?
-    country_code == "AU"
+    country_code == self.class.preferred_country_code
   end
 
   def suburb

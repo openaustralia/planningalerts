@@ -9,4 +9,9 @@ module EnvHelpers
   def with_modified_env(options, &block)
     ClimateControl.modify(options, &block)
   end
+
+  def with_theme_env(theme, &block)
+    env = Dotenv::Environment.new(ThemeChooser.create(theme).env_file)
+    with_modified_env(env, &block)
+  end
 end

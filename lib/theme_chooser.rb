@@ -3,21 +3,18 @@ class ThemeChooser
   def self.themes
     theme_classes = Dir.glob(Rails.root.join("lib", "themes", "**", "theme.rb"))
     theme_classes.each{ |theme_class| require theme_class }
-    themes = [Themes::Default::Theme.new]
-    Themes::Base.subclasses.each do |theme|
-      themes.unshift theme.new unless theme == Themes::Default::Theme
-    end
-    themes
+    Themes::Base.subclasses.map{ |theme| theme.new }
   end
 
-  def self.create(theme)
-    r = themes.find{|t| t.theme == theme}
-    raise "Unknown theme #{theme}" if r.nil?
-    r
+  def self.create(name)
+    theme = themes.find{ |t| t.name == name }
+    raise "Unknown theme #{name}" unless theme
+    theme
   end
 
-  def self.themer_from_request(request)
-    themes.find{|t| t.recognise?(request)}
+  def self.theme()
+    name = ENV['THEME'] || 'default'
+    create(name)
   end
 
 end

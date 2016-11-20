@@ -3,6 +3,7 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 require 'rack/throttle'
 require File.dirname(__FILE__) + "/../lib/api_throttler"
+require File.dirname(__FILE__) + "/../lib/themes"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -45,11 +46,7 @@ module PlanningalertsApp
 
     config.exceptions_app = self.routes
 
-    # TODO Generalise this
-    config.assets.paths << "#{Rails.root}/lib/themes/nsw/assets/stylesheets"
-    # FIXME For some reason this isn't working so the assets are in the main assets folder for now
-    # config.assets.paths << "#{Rails.root}/lib/themes/nsw/assets/images"
-
+    ThemeChooser.theme.asset_paths.each{ |path| config.assets.paths << path }
     # Application configuration
     # These are things that are nice to have as configurations but unlikely really
     # in practise to change much
