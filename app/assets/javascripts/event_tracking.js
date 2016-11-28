@@ -47,5 +47,22 @@ $( document ).ready(function() {
     if ($('.address-search .error').length) {
       ga('send', 'event', 'search', 'address search form error message displayed');
     }
+
+    // Updating alert radius
+    $('.map-settings input#size_s').click(function(e) {
+      ga('send', 'event', 'update alert settings', 'click size option My street');
+    });
+
+    $('.map-settings input#size_m').click(function(e) {
+      ga('send', 'event', 'update alert settings', 'click size option My neighbourhood');
+    });
+
+    $('.map-settings input#size_l').click(function(e) {
+      ga('send', 'event', 'update alert settings', 'click size option My suburb');
+    });
+
+    $('.map-settings input[type="submit"]').click(function(e) {
+      ga('send', 'event', 'update alert settings', 'click submit Update size');
+    });
   }
 });
