@@ -64,5 +64,18 @@ $( document ).ready(function() {
     $('.map-settings input[type="submit"]').click(function(e) {
       ga('send', 'event', 'update alert settings', 'click submit Update size');
     });
+
+    // Donations
+    $('.donate-link-header').click(function(e) {
+      ga('send', 'event', 'donate', 'click donate', 'header menu donate item');
+    });
+
+    $('.a-donate #content .button').click(function(e) {
+      ga('send', 'event', 'donate', 'click donate', 'footer donate button');
+    });
+
+    $('.donations-banner .button').click(function(e) {
+      ga('send', 'event', 'donate', 'click donate', 'Donate page donate button');
+    });
   }
 });
