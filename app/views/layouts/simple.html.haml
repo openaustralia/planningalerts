@@ -35,6 +35,6 @@
 
   %body{ :class => body_classes(controller_name, action_name) }
     = render "application/header"
-    = render "application/main"
+    = yield
     = render "application/footer"
     = render "shared/end_matter"
