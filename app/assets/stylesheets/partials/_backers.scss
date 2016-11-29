@@ -10,9 +10,24 @@
   .page-title {
     margin-top: 3em;
     color: white;
-  }
+    line-height: 1.4;
 
-  .button-action {
-    font-size: 1.4em;
+    @include at-breakpoint(40em) {
+      margin-top: 2em;
+      font-size: 2.5em;
+    }
+  }
+}
+
+.backers-payment-form {
+  font-size: 1.4em;
+  padding: 1em;
+  max-width: 30em;
+  background: rgba(255,255,255,.15);
+  margin: 4em auto 8em;
+  border-radius: .5em;
+
+  p:last-child {
+    margin-bottom: 0;
   }
 }

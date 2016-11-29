@@ -3,10 +3,10 @@
 .backers-page
   .container.main
     #content
-      = form_tag backers_path, id: 'backers-payment-form' do
-        %h1.page-title
-          Because you should be informed and have your say on changes to your local area.
+      %h1.page-title
+        Because you should be informed and have your say on changes to your local area.
 
+      = form_tag backers_path, class: 'backers-payment-form' do
         %p
           PlanningAlerts exists as a free, independent project
           because people like you back it with a small monthly donation.
