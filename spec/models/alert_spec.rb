@@ -263,10 +263,12 @@ describe Alert do
     end
 
     it "only counts unique emails" do
-      create(:unsubscribed_alert, email: "foo@email.com")
-      create(:unsubscribed_alert, email: "foo@email.com")
+      Timecop.freeze(Time.utc(2016, 8, 23)) do
+        create(:unsubscribed_alert, email: "foo@email.com", unsubscribed_at: Time.now)
+        create(:unsubscribed_alert, email: "foo@email.com", unsubscribed_at: Time.now)
+      end
 
-      expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.today)).to eql 1
+      expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.new(2016, 8, 23))).to eql 1
     end
 
     it "only counts unsubscribes on the specified date" do
