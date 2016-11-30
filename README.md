@@ -13,7 +13,9 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 [![Build Status](https://travis-ci.org/openaustralia/planningalerts.png?branch=master)](https://travis-ci.org/openaustralia/planningalerts) [![Coverage Status](https://coveralls.io/repos/openaustralia/planningalerts/badge.png?branch=master)](https://coveralls.io/r/openaustralia/planningalerts?branch=master) [![Code Climate](https://codeclimate.com/github/openaustralia/planningalerts.png)](https://codeclimate.com/github/openaustralia/planningalerts)
 
 **Install Dependencies**
- * Install MySql - On OSX download dmg from [http://dev.mysql.com/downloads/](http://dev.mysql.com/downloads/)
+ * Install a database
+     * MySQL - On OSX download dmg from [http://dev.mysql.com/downloads/](http://dev.mysql.com/downloads/)
+     * PostgreSQL - Use instructions from [https://www.postgresql.org/download/macosx/](https://www.postgresql.org/download/macosx/)
  * Install Sphinx - `brew install sphinx`
 
 **Checkout The Project**
@@ -26,8 +28,10 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 **Setup The Database**
  * Create your own database config file - `cp config/database.yml.example config/database.yml`
- * Update the config/database.yml with your root mysql credentials
- * If you are on OSX change the socket to /tmp/mysql.sock
+ * If you're using PostgreSQL, uncomment the PostgreSQL development config stanza, and comment
+   out the MySQL one in `config/database.yml`
+ * Update the config/database.yml with your database credentials
+ * If you are using MySQL on OSX change the socket to /tmp/mysql.sock
  * Set up the databases - `rake db:setup`
  * Generate Thinking Sphinx configuration - `bundle exec rake thinking_sphinx:configure`
 
