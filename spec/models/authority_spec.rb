@@ -120,9 +120,7 @@ describe Authority do
     end
 
     context "when the authority has applications" do
-
       it "returns count of applications for each week since the first application was scraped" do
-
        VCR.use_cassette('planningalerts', allow_playback_repeats: true) do
           create(:application, date_scraped: Time.utc(2015,12,26),
                                council_reference: 'a1',
@@ -134,6 +132,7 @@ describe Authority do
                                council_reference: 'a3',
                                authority: authority)
         end
+
         expect(authority.applications_per_week).to eq [
           [ Date.new(2015,12,20), 2 ],
           [ Date.new(2015,12,27), 0 ],
@@ -141,7 +140,6 @@ describe Authority do
         ]
       end
     end
-
   end
 
   describe "#comments_per_week" do
