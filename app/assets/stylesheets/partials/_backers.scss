@@ -1,6 +1,4 @@
 .backers-page {
-  color: white;
-  background-color: #2C9EB5;
   text-align: center;
 
   .main {
@@ -9,7 +7,6 @@
 
   .page-title {
     margin-top: 3em;
-    color: white;
     line-height: 1.4;
 
     @include at-breakpoint(40em) {
@@ -23,11 +20,20 @@
   font-size: 1.4em;
   padding: 1em;
   max-width: 30em;
-  background: rgba(255,255,255,.15);
+  background: rgba(200,200,200,.15);
   margin: 4em auto 8em;
   border-radius: .5em;
 
   p:last-child {
     margin-bottom: 0;
+  }
+}
+
+.backers-page-contrast-theme {
+  color: white;
+  background-color: #2C9EB5;
+
+  .page-title {
+    color: white;
   }
 }
