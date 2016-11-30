@@ -173,8 +173,6 @@ class Authority < ActiveRecord::Base
   end
 
   def applications_per_week
-    # Sunday is the beginning of the week (and the date returned here)
-    # Have to compensate for MySQL which treats Monday as the beginning of the week
     h = by_week_from_sunday(applications, 'date_scraped')
     return [] if h.empty?
     min = h.keys.min
@@ -186,6 +184,7 @@ class Authority < ActiveRecord::Base
   end
 
   def by_week_from_sunday(query, field)
+    # Sunday is the beginning of the week (and the date returned here)
     # Have to compensate for databases which treat Monday as the beginning of the week
     if ActiveRecord::Base.connection.adapter_name == 'Mysql2'
       query.group("CAST(SUBDATE(#{field}, WEEKDAY(#{field}) + 1) AS DATE)").count
