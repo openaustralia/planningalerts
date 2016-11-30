@@ -173,7 +173,7 @@ class Authority < ActiveRecord::Base
   end
 
   def applications_per_week
-    h = by_week_from_sunday(applications, 'date_scraped')
+    h = count_by_week_from_sunday(applications, 'date_scraped')
     return [] if h.empty?
     min = h.keys.min
     max = Date.today - Date.today.wday
@@ -183,7 +183,7 @@ class Authority < ActiveRecord::Base
     h.sort
   end
 
-  def by_week_from_sunday(query, field)
+  def count_by_week_from_sunday(query, field)
     # Sunday is the beginning of the week (and the date returned here)
     # Have to compensate for databases which treat Monday as the beginning of the week
     if ActiveRecord::Base.connection.adapter_name == 'Mysql2'
@@ -203,7 +203,7 @@ class Authority < ActiveRecord::Base
     results = []
 
     if applications.any?
-      results = by_week_from_sunday(comments.visible, 'confirmed_at')
+      results = count_by_week_from_sunday(comments.visible, 'confirmed_at')
 
       earliest_week_with_applications = earliest_date.at_beginning_of_week.to_date
       latest_week = Date.today.at_beginning_of_week
