@@ -115,3 +115,41 @@ $backer_background: $backer_green;
     }
   }
 }
+
+.backers-this-week {
+  padding-top: 2em;
+  background: #ccc;
+  text-align: center;
+
+  @include at-breakpoint(50em) {
+    padding: 2em 0;
+    text-align: left;
+  }
+
+  h2 {
+    font-size: 1.4em;
+    margin: 0 0 2em;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    margin: 0 0 2em;
+  }
+
+  p {
+    font-size: 1.2em;
+    margin: 0;
+  }
+
+  .number {
+    font-size: 2.4em;
+    font-weight: bold;
+    display: block;
+    line-height: 1.2;
+  }
+}

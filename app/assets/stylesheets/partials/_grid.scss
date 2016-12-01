@@ -487,3 +487,18 @@
     @include span-columns(4 omega, 12);
   }
 }
+
+.backers-this-week {
+  ul {
+    @include at-breakpoint(50em) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  li {
+    @include at-breakpoint(50em) {
+      width: 30%;
+    }
+  }
+}
