@@ -91,9 +91,12 @@
   }
 }
 
+$backer_blue: #2C9EB5;
+$backer_background: $backer_blue;
 .backers-page-contrast-theme {
   color: white;
-  background-color: #2C9EB5;
+  background-color: $backer_background;
+  background: linear-gradient(-45deg, $backer_background, lighten($backer_background, 15%));
 
   .page-title {
     color: white;
