@@ -1,27 +1,36 @@
 .backers-page {
+  padding-top: 2em;
   text-align: center;
+
+  @include at-breakpoint(40em) {
+    text-align: left;
+  }
 
   .main {
     background: none;
   }
 
   .page-title {
-    margin-top: 3em;
-    line-height: 1.4;
+    margin: 0 0 .5em;
+    line-height: 1.2;
+    font-weight: bold;
 
     @include at-breakpoint(40em) {
-      margin-top: 2em;
       font-size: 2.5em;
     }
   }
 }
 
+.backers-intro {
+  p {
+    font-size: 1.4em;
+  }
+}
+
 .backers-payment-form {
-  font-size: 1.4em;
-  padding: 1em 1em 1.5em;
-  max-width: 30em;
+  text-align: center;
+  padding: 1em 1em 1em;
   background: rgba(200,200,200,.15);
-  margin: 4em auto 8em;
   border-radius: .5em;
 
   p:last-child {
@@ -30,8 +39,7 @@
 }
 
 .amount-setter {
-  margin: 1em auto;
-  max-width: 9em;
+  margin: 0 0 1em;
   line-height: 1.25;
 }
 
@@ -45,9 +53,9 @@
 .amount-setter-container {
   display: flex;
   align-items: center;
+  justify-content: center;
 
   span {
-    flex: 1;
     text-align: left;
     padding-left: .75em;
   }

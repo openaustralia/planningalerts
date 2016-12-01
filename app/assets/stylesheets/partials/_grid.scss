@@ -470,3 +470,14 @@
     }
   }
 }
+
+.backers-intro {
+  box-sizing: border-box;
+  @include span-columns(8, 12);
+  padding-right: 1em;
+}
+
+.backers-payment-form {
+  box-sizing: border-box;
+  @include span-columns(4 omega, 12);
+}
