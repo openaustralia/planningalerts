@@ -92,7 +92,8 @@
 }
 
 $backer_blue: #2C9EB5;
-$backer_background: $backer_blue;
+$backer_green: #618F41;
+$backer_background: $backer_green;
 .backers-page-contrast-theme {
   color: white;
   background-color: $backer_background;
@@ -105,5 +106,9 @@ $backer_background: $backer_blue;
   .backers-payment-form {
     background: rgba(255,255,255,.1);
     text-shadow: 1px 2px 0 rgba(0,0,0,.15);
+
+    .small {
+      text-shadow: none;
+    }
   }
 }
