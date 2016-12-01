@@ -11,6 +11,15 @@
           PlanningAlerts exists as a free, independent project
           because people like you back it with a small monthly donation.
 
+        %fieldset.amount-setter
+          %label
+            %span.amount-setter-label-text Set your amount
+            %div.amount-setter-container
+              %div.amount-setter-input
+                %i &#36;
+                %input{type: "text", value: "3.50", placeholder: "0.00", required: "required"}
+              %span Per month
+
         %p
           %button.button-action{type: 'submit'}
             Become a PlanningAlerts Backer

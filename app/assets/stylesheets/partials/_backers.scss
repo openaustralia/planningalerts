@@ -18,7 +18,7 @@
 
 .backers-payment-form {
   font-size: 1.4em;
-  padding: 1em;
+  padding: 1em 1em 1.5em;
   max-width: 30em;
   background: rgba(200,200,200,.15);
   margin: 4em auto 8em;
@@ -29,11 +29,69 @@
   }
 }
 
+.amount-setter {
+  margin: 1em auto;
+  max-width: 9em;
+  line-height: 1.25;
+}
+
+.amount-setter-label-text {
+  display: block;
+  margin-bottom: .75em;
+  font-size: .75em;
+  text-transform: uppercase;
+}
+
+.amount-setter-container {
+  display: flex;
+  align-items: center;
+
+  span {
+    flex: 1;
+    text-align: left;
+    padding-left: .75em;
+  }
+}
+
+.amount-setter-input {
+  border: 2px #aaa solid;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 .1em .1em rgba(0,0,0,0.1);
+  color: #333;
+  text-shadow: none;
+
+  input,
+  i {
+    font-size: 1.25em;
+  }
+
+  i {
+    padding: .5em .125em .5em .5em;
+    width: 1em;
+    font-style: normal;
+  }
+
+  input {
+    padding: .5em .5em .5em 0;
+    width: 2.75em;
+    text-align: right;
+    border: 0;
+    background: transparent;
+  }
+}
+
 .backers-page-contrast-theme {
   color: white;
   background-color: #2C9EB5;
 
   .page-title {
     color: white;
+  }
+
+  .backers-payment-form {
+    background: rgba(255,255,255,.1);
+    text-shadow: 1px 2px 0 rgba(0,0,0,.15);
   }
 }
