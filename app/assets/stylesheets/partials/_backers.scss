@@ -106,6 +106,7 @@ $backer_background: $backer_green;
   padding-top: 2em;
   text-align: center;
   background: $backer_green;
+  background: linear-gradient(-45deg, $backer_green, lighten($backer_background, 5%));
   color: #eee;
 
   @include at-breakpoint(50em) {
