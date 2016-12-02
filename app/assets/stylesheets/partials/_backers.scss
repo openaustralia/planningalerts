@@ -109,13 +109,13 @@ $backer_background: $backer_green;
   color: #eee;
 
   @include at-breakpoint(50em) {
-    padding: 2em 0;
+    padding: 2em 0 0;
     text-align: left;
   }
 
   h2 {
     font-size: 1.4em;
-    margin: 0 0 2em;
+    margin: 0 0 1.5em;
     color: #eee;
   }
 
@@ -140,24 +140,11 @@ $backer_background: $backer_green;
     display: block;
     line-height: 1.2;
   }
-}
 
-.backers-thankyou {
-  // background: #111;
-  // background: linear-gradient(-45deg, $backer_background, lighten($backer_background, 15%));
-  background: $backer_green;
-  color: #eee;
-
-  .title-container {
-    padding-top: 2em;
-    padding-bottom: 2em;
-    text-align: right;
-  }
-
-  h2 {
+  .quote {
     font-style: italic;
     font-size: 1.4em;
-    padding: .5em 0;
+    padding: .5em 0 3em;
     margin: 0;
     color: #eee;
 
@@ -188,7 +175,8 @@ $backer_background: $backer_green;
     p {
       margin: 0 auto;
       padding-right: 12em;
-      box-sizing: content-box;
+      box-sizing: border-box;
+      font-size: 1em;
     }
   }
 }
