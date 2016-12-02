@@ -105,7 +105,7 @@ $backer_background: $backer_green;
 .backers-this-week {
   padding-top: 2em;
   text-align: center;
-  background: #315D18;
+  background: $backer_green;
   color: #eee;
 
   @include at-breakpoint(50em) {
@@ -143,16 +143,29 @@ $backer_background: $backer_green;
 }
 
 .backers-thankyou {
-  background: #111;
-  background: linear-gradient(-45deg, $backer_background, lighten($backer_background, 15%));
-  background: darken($backer_green, 5%);
+  // background: #111;
+  // background: linear-gradient(-45deg, $backer_background, lighten($backer_background, 15%));
+  background: $backer_green;
   color: #eee;
 
+  .title-container {
+    padding-top: 2em;
+    padding-bottom: 2em;
+    text-align: right;
+  }
+
   h2 {
+    font-style: italic;
     font-size: 1.4em;
     padding: .5em 0;
     margin: 0;
     color: #eee;
+
+    span {
+      display: block;
+      font-size: .857em;
+      font-style: normal;
+    }
   }
 
   img {
