@@ -153,3 +153,26 @@ $backer_background: $backer_green;
     line-height: 1.2;
   }
 }
+
+.backers-thankyou {
+  background: #111;
+  background: linear-gradient(-45deg, $backer_background, lighten($backer_background, 15%));
+  background: darken($backer_green, 5%);
+  color: #eee;
+
+  h2 {
+    font-size: 1.4em;
+    padding: .5em 0;
+    margin: 0;
+    color: #eee;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  figcaption {
+    padding-top: .25em;
+    padding-bottom: .75em;
+  }
+}
