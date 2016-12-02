@@ -1,3 +1,7 @@
+$backer_blue: #2C9EB5;
+$backer_green: #315D18;
+$backer_background: $backer_green;
+
 .backer-hero-image {
   background-image: url('/assets/sceptical-climate-001-invert-crop.jpg');
 }
@@ -98,38 +102,6 @@
   }
 }
 
-$backer_blue: #2C9EB5;
-$backer_green: #315D18;
-$backer_background: $backer_green;
-
-.backers-page-light-theme {
-  background: rgba(255,255,255,.8);
-  color: #000;
-
-  .page-title {
-    color: #000;
-  }
-}
-
-.backers-page-contrast-theme {
-  color: white;
-  background-color: $backer_background;
-  background: linear-gradient(-45deg, $backer_background, lighten($backer_background, 15%));
-
-  .page-title {
-    color: white;
-  }
-
-  .backers-payment-form {
-    background: rgba(255,255,255,.1);
-    text-shadow: 1px 2px 0 rgba(0,0,0,.15);
-
-    .small {
-      text-shadow: none;
-    }
-  }
-}
-
 .backers-this-week {
   padding-top: 2em;
   text-align: center;
@@ -190,5 +162,33 @@ $backer_background: $backer_green;
   figcaption {
     padding-top: .25em;
     padding-bottom: .75em;
+  }
+}
+
+.backers-page-light-theme {
+  background: rgba(255,255,255,.8);
+  color: #000;
+
+  .page-title {
+    color: #000;
+  }
+}
+
+.backers-page-contrast-theme {
+  color: white;
+  background-color: $backer_background;
+  background: linear-gradient(-45deg, $backer_background, lighten($backer_background, 15%));
+
+  .page-title {
+    color: white;
+  }
+
+  .backers-payment-form {
+    background: rgba(255,255,255,.1);
+    text-shadow: 1px 2px 0 rgba(0,0,0,.15);
+
+    .small {
+      text-shadow: none;
+    }
   }
 }
