@@ -132,8 +132,9 @@ $backer_background: $backer_green;
 
 .backers-this-week {
   padding-top: 2em;
-  background: #ccc;
   text-align: center;
+  background: #315D18;
+  color: #eee;
 
   @include at-breakpoint(50em) {
     padding: 2em 0;
@@ -143,6 +144,7 @@ $backer_background: $backer_green;
   h2 {
     font-size: 1.4em;
     margin: 0 0 2em;
+    color: #eee;
   }
 
   ul {
