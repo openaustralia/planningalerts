@@ -1,28 +1,29 @@
 - content_for :page_title, 'Back PlanningAlerts'
 
-.backers-page
-  .container.main
-    #content
-      %div.backers-intro
-        %h1.page-title
-          Because you should be informed and have your say on changes to your local area.
-        %p
-          PlanningAlerts exists as a free, independent project
-          because people like you back it with a small monthly&nbsp;donation.
-      = form_tag backers_path, class: 'backers-payment-form' do
-        %fieldset.amount-setter
-          %label
-            %span.amount-setter-label-text Choose your contribution
-            %div.amount-setter-container
-              %div.amount-setter-input
-                %i &#36;
-                %input{type: "text", value: "3.50", placeholder: "0.00", required: "required"}
-              %span Per month
-        %p
-          %button.button-action{type: 'submit'}
-            Donate $3.50 each month
-        %p.quiet.small
-          Donations over $2 are tax deductible.
+.backer-hero-image
+  .backers-page.backers-page-light-theme
+    .container.main
+      #content
+        %div.backers-intro
+          %h1.page-title
+            Because you should be informed and have your say on changes to your local area.
+          %p
+            PlanningAlerts exists as a free, independent project
+            because people like you back it with a small monthly&nbsp;donation.
+        = form_tag backers_path, class: 'backers-payment-form' do
+          %fieldset.amount-setter
+            %label
+              %span.amount-setter-label-text Choose your contribution
+              %div.amount-setter-container
+                %div.amount-setter-input
+                  %i &#36;
+                  %input{type: "text", value: "3.50", placeholder: "0.00", required: "required"}
+                %span Per month
+          %p
+            %button.button-action{type: 'submit'}
+              Donate $3.50 each month
+          %p.quiet.small
+            Donations over $2 are tax deductible.
 .backers-this-week
   .container
     %h2 This week on PlanningAlerts

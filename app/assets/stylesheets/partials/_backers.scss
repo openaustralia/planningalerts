@@ -1,3 +1,7 @@
+.backer-hero-image {
+  background-image: url('/assets/sceptical-climate-001-invert-crop.jpg');
+}
+
 .backers-page {
   text-align: center;
 
@@ -34,7 +38,7 @@
 .backers-payment-form {
   margin-top: 1em;
   text-align: center;
-  background: rgba(200,200,200,.15);
+  background: rgba(255,255,255,.45);
   border-radius: .5em;
 
   > p {
@@ -97,6 +101,16 @@
 $backer_blue: #2C9EB5;
 $backer_green: #315D18;
 $backer_background: $backer_green;
+
+.backers-page-light-theme {
+  background: rgba(255,255,255,.8);
+  color: #000;
+
+  .page-title {
+    color: #000;
+  }
+}
+
 .backers-page-contrast-theme {
   color: white;
   background-color: $backer_background;
