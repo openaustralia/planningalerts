@@ -27,19 +27,24 @@
 .backers-this-week
   .container
     %h2 Because of backers like you, here’s our week on PlanningAlerts
-    %ul
-      %li
-        %p
-          %span.number 76,559
-          emails sent to subscribers
-      %li
-        %p
-          %span.number 499
-          new people signed up for alerts
-      %li
-        %p
-          %span.number 141
-          new comments on applications
+    - cache 'stats', :expires_in => 1.hour do
+      %ul
+        %li
+          %p
+            - #%span.number= number_with_delimiter(EmailBatch.total_sent_in_past_week)
+            %span.number 115,299
+            emails sent to subscribers
+        %li
+          %p
+            - # FIXME: This stat is actually alerts signed up, not unique people signed up
+            -# %span.number= number_with_delimiter(Alert.active.in_past_week.count)
+            %span.number 447
+            new people signed up for alerts
+        %li
+          %p
+            -# %span.number= number_with_delimiter(Comment.visible.in_past_week.count)
+            %span.number 76
+            new comments on applications
     %h2.quote
       Thank you to all our backers and amazing volunteer contributors who make this all possible
       %span— Henare, Kat and Luke from the OpenAustralia Foundation
