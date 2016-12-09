@@ -39,12 +39,16 @@ $backer_green: #315D18;
 
 .backers-payment-form {
   margin-top: 1em;
+  padding: 1.5em 1em 1em;
   text-align: center;
   background: rgba(255,255,255,.8);
   border-radius: .5em;
 
   > p {
-    padding: 0 1em 1em;
+    margin: 0 0 1em;
+  }
+
+  p:last-child {
     margin: 0;
   }
 }
@@ -56,12 +60,11 @@ $backer_green: #315D18;
 
 .amount-setter-label-text {
   display: block;
-  padding: 1.5em 1rem;
+  padding: 0 0 1.5em;
   font-weight: bold;
 }
 
 .amount-setter-container {
-  padding: 0 1em;
   display: flex;
   align-items: center;
   justify-content: center;
