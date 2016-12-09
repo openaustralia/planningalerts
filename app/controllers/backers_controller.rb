@@ -4,6 +4,6 @@ class BackersController < ApplicationController
   end
 
   def create
-
+    render layout: "simple"
   end
 end
