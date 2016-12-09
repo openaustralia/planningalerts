@@ -4,12 +4,18 @@ $backer_green: #315D18;
   background-image: url('/assets/sceptical-climate-001-invert-crop.jpg');
 }
 
-.backers-page {
+.backers-page,
+.backers-this-week {
   text-align: center;
 
   @include at-breakpoint(50em) {
     text-align: left;
   }
+}
+
+.backers-page {
+  background: rgba(255,255,255,.8);
+  color: #000;
 
   .main {
     background: none;
@@ -21,6 +27,7 @@ $backer_green: #315D18;
   }
 
   .page-title {
+    color: #000;
     margin: 0 0 .5em;
     line-height: 1.2;
     font-weight: bold;
@@ -105,14 +112,12 @@ $backer_green: #315D18;
 
 .backers-this-week {
   padding-top: 2em;
-  text-align: center;
   background: $backer_green;
   background: linear-gradient(-45deg, $backer_green, lighten($backer_green, 5%));
   color: #eee;
 
   @include at-breakpoint(50em) {
     padding: 2em 0 0;
-    text-align: left;
   }
 
   h2 {
