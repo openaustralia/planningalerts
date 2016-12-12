@@ -17,11 +17,13 @@
               %div.amount-setter-container
                 %div.amount-setter-input
                   %i &#36;
-                  %input{type: "text", value: "3.50", placeholder: "0.00", required: "required"}
+                  - # TODO: Add more helpful restrictions on input to make this as easy as possible
+                  %input{type: "number", value: 4, placeholder: 0, required: "required"}
                 %span Per month
           %p
             %button.button-action{type: 'submit'}
-              Donate $3.50 each month
+              - # Make this dynamic based on the selection
+              Donate $4 each month
           %p.quiet.small
             Donations over $2 are tax deductible.
 .backers-this-week
