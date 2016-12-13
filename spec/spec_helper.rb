@@ -22,6 +22,7 @@ Capybara.javascript_driver = :poltergeist
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
   c.hook_into :webmock
+  c.ignore_localhost = true
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
