@@ -66,6 +66,7 @@ gem 'writeit-rails', git: 'https://github.com/ciudadanointeligente/writeit-rails
 
 group :test do
   gem 'capybara'
+  gem 'poltergeist'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'factory_girl'

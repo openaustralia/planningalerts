@@ -16,6 +16,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require "email_spec"
 require 'rspec/active_model/mocks'
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
 
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
