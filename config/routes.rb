@@ -135,8 +135,6 @@ PlanningalertsApp::Application.routes.draw do
   get '/vanity(/:action(/:id(.:format)))', controller: :vanity
 
   resources :subscriptions, only: [:new, :create]
-  get  'subscriptions/backers_new' => 'subscriptions#backers_new', as: :backers_new
-  post  'subscriptions/backers_create' => 'subscriptions#backers_create', as: :backers_create
 
   get 'subscriptions' => redirect('/subscriptions/new')
 

@@ -14,7 +14,7 @@ feature "Subscribing to donate monthly" do
   given(:email) { "mary@local.org" }
 
   it "successfully" do
-    visit backers_new_path(email: email)
+    visit new_subscription_path(email: email)
 
     # Fake what the Stripe JS does (i.e. inject the token in the form if successful)
     # FIXME: This isn't having an effect because we're just setting the plan amout to 0. See comment above.
@@ -26,7 +26,7 @@ feature "Subscribing to donate monthly" do
   end
 
   it "successfully at a higher rate" do
-    visit backers_new_path(email: email)
+    visit new_subscription_path(email: email)
 
     fill_in "Choose your contribution", with: 10
 

@@ -1,11 +1,11 @@
 class SubscriptionsController < ApplicationController
-  def backers_new
+  def new
     @email = params[:email]
     @price = Subscription.default_price
     render layout: "simple"
   end
 
-  def backers_create
+  def create
     @email = params[:stripeEmail]
     subscription = if Subscription.find_by_email(@email)
       Subscription.find_or_create_by!(email: @email)

@@ -10,7 +10,7 @@
           %p
             PlanningAlerts exists as a free, independent project
             because people like you back it with a small monthly&nbsp;donation.
-        = form_tag backers_create_path, class: 'backers-payment-form', id: "subscription-payment-form" do
+        = form_tag subscriptions_path, class: 'backers-payment-form', id: "subscription-payment-form" do
           %fieldset.amount-setter
             %label
               %span.amount-setter-label-text Choose your contribution
@@ -24,7 +24,7 @@
             -# %button.button-action{type: 'submit'}
             -#   - # Make this dynamic based on the selection
             -#   Donate $4 each month
-            = render partial: "stripe_button_backers", locals: {email: @email, price: @price}
+            = render partial: "stripe_button", locals: {email: @email, price: @price}
           %p.quiet.small
             Donations over $2 are tax deductible.
 .backers-this-week
