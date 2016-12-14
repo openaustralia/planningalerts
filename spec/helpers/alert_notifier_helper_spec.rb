@@ -129,51 +129,24 @@ describe AlertNotifierHelper do
   describe "#new_subscripion_url_with_tracking" do
     before :each do
       @alert = create(:alert)
-      base_params_plus_email = base_tracking_params.merge(email: @alert.email)
-      @params_for_trial_subscriber = base_params_plus_email.merge(utm_campaign: "subscribe-from-trial")
-      @params_for_expired_subscriber = base_params_plus_email.merge(utm_campaign: "subscribe-from-expired")
+      @base_params_plus_email_and_campaign = base_tracking_params.merge(
+        email: @alert.email,
+        utm_campaign: "subscribe-from-alert"
+      )
     end
 
-    context "for a trial subscriber" do
-      before :each do
-        allow(@alert).to receive(:trial_subscription?).and_return true
-        allow(@alert).to receive(:expired_subscription?).and_return false
-      end
-
-      context "without utm_content" do
-        it {
-          expect(helper.new_subscription_url_with_tracking(alert: @alert))
-          .to eq new_subscription_url(@params_for_trial_subscriber)
-        }
-      end
-
-      context "with utm_content" do
-        it {
-          expect(helper.new_subscription_url_with_tracking(alert: @alert, utm_content: "foo"))
-          .to eq new_subscription_url(@params_for_trial_subscriber.merge(utm_content: "foo"))
-        }
-      end
+    context "without utm_content" do
+      it {
+        expect(helper.new_subscription_url_with_tracking(alert: @alert))
+          .to eq new_subscription_url(@base_params_plus_email_and_campaign)
+      }
     end
 
-    context "for someone with an expired subscription" do
-      before :each do
-        allow(@alert).to receive(:trial_subscription?).and_return false
-        allow(@alert).to receive(:expired_subscription?).and_return true
-      end
-
-      context "without utm_content" do
-        it {
-          expect(helper.new_subscription_url_with_tracking(alert: @alert))
-          .to eq new_subscription_url(@params_for_expired_subscriber)
-        }
-      end
-
-      context "with utm_content" do
-        it {
-          expect(helper.new_subscription_url_with_tracking(alert: @alert, utm_content: "foo"))
-          .to eq new_subscription_url(@params_for_expired_subscriber.merge(utm_content: "foo"))
-        }
-      end
+    context "with utm_content" do
+      it {
+        expect(helper.new_subscription_url_with_tracking(alert: @alert, utm_content: "foo"))
+          .to eq new_subscription_url(@base_params_plus_email_and_campaign.merge(utm_content: "foo"))
+      }
     end
   end
 
@@ -217,29 +190,6 @@ describe AlertNotifierHelper do
     context "with an application, a comment, and a reply" do
       subject { helper.subject(alert, [application], [comment], [reply]) }
       it { is_expected.to eql "1 new comment, 1 new reply and 1 new planning application near 123 Sample St" }
-    end
-
-    context "with an expired subscription" do
-      let(:alert) do
-        subscription = create(:subscription, email: "foo@example.org", trial_started_at: 7.days.ago)
-        2.times { create(:alert, email: "foo@example.org", confirmed: true) }
-        create(:alert, email: "foo@example.org", address: "123 Sample St", confirmed: true, subscription: subscription)
-      end
-
-      context "with an application" do
-        subject { helper.subject(alert, [application], [], []) }
-        it { is_expected.to eql "You’re missing out on 1 new planning application near 123 Sample St" }
-      end
-
-      context "with a comment" do
-        subject { helper.subject(alert, [], [comment], []) }
-        it { is_expected.to eql "You’re missing out on 1 new comment on planning applications near 123 Sample St" }
-      end
-
-      context "with an application and a comment" do
-        subject { helper.subject(alert, [application], [comment], []) }
-        it { is_expected.to eql "You’re missing out on 1 new comment and 1 new planning application near 123 Sample St" }
-      end
     end
   end
 end

@@ -61,14 +61,8 @@ module AlertNotifierHelper
   end
 
   def new_subscription_url_with_tracking(alert: nil, utm_content: nil)
-    if alert.expired_subscription?
-      utm_campaign = "subscribe-from-expired"
-    elsif alert.trial_subscription?
-      utm_campaign = "subscribe-from-trial"
-    end
-
     params = base_tracking_params.merge(
-      utm_campaign: utm_campaign,
+      utm_campaign:  "subscribe-from-alert",
       email: @alert.email
     )
 
@@ -85,10 +79,6 @@ module AlertNotifierHelper
     items = [comments_text, replies_text, applications_text].compact.to_sentence(last_word_connector: " and ")
     items += " on planning applications" if applications.empty?
 
-    if alert.expired_subscription?
-      "You’re missing out on #{items} near #{alert.address}"
-    else
-      "#{items} near #{alert.address}"
-    end
+    "#{items} near #{alert.address}"
   end
 end

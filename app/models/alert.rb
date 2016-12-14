@@ -12,9 +12,6 @@ class Alert < ActiveRecord::Base
 
   scope :active, -> { where(confirmed: true, unsubscribed: false) }
   scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
-  # People with 3 or more alerts that don't yet have a subscription
-  scope :potential_subscribers, -> { active.group("alerts.email").having("count(alerts.email) >= 3") }
-  scope :without_subscription, -> { includes(:subscription).where(subscriptions: {email: nil}) }
 
   def location=(l)
     if l
@@ -250,19 +247,6 @@ class Alert < ActiveRecord::Base
     EmailBatch.create!(no_emails: total_no_emails, no_applications: total_no_applications,
       no_comments: total_no_comments)
     [total_no_emails, total_no_applications, total_no_comments]
-  end
-
-  def email_has_several_other_alerts?
-    Alert.active.where(email: email, theme: theme).count >= 3
-  end
-
-  def trial_subscription?
-    subscription.try(:trial?)
-  end
-
-  # TODO: Move this to the subscription model?
-  def expired_subscription?
-    email_has_several_other_alerts? && subscription && !subscription.trial? && !subscription.paid? && !subscription.free?
   end
 
   private
