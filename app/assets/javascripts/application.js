@@ -12,10 +12,22 @@ $("#menu .toggle").click(function(){
   });
 });
 
+function updateFormAmount(new_amount) {
+  $('#button-pro-signup').text("Donate $" + new_amount + " each month");
+  $('#button-pro-signup').attr("data-amount", new_amount * 100);
+};
+
 if ("#button-pro-signup".length) {
+  if ('.amount-setter-input input'.length) {
+    updateFormAmount($('.amount-setter-input input').val());
+
+    $('.amount-setter-input input').bind('input', function() {
+      updateFormAmount($(this).val());
+    });
+  }
+
   public_key = $('#button-pro-signup').attr('data-key');
   email = $('#button-pro-signup').attr("data-email");
-  amount = $('#button-pro-signup').attr("data-amount");
 
   var handler = StripeCheckout.configure({
     key: public_key,
@@ -31,6 +43,8 @@ if ("#button-pro-signup".length) {
   });
 
   $('#button-pro-signup').on('click', function(e) {
+    amount = $('#button-pro-signup').attr("data-amount");
+
     // Open Checkout with further options
     handler.open({
       image: '/assets/street_map.png',

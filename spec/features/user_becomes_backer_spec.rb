@@ -6,9 +6,7 @@ feature "Subscribing to donate monthly" do
     StripeMock.start
     # When plan is set to 0 StripeMock doesn't check for the card number when creating the customer
     # FIXME: StripeMock should create a customer when only a token is supplied
-    Subscription::PLAN_IDS.each do |id|
-      stripe_helper.create_plan(id: id, amount: 0)
-    end
+    stripe_helper.create_plan(id: "planningalerts-backers-test-1", amount: 0)
   end
 
   after { StripeMock.stop }
@@ -21,9 +19,29 @@ feature "Subscribing to donate monthly" do
     # Fake what the Stripe JS does (i.e. inject the token in the form if successful)
     # FIXME: This isn't having an effect because we're just setting the plan amout to 0. See comment above.
     first("input[name='stripeToken']", visible: false).set(stripe_helper.generate_card_token)
-    click_button "Donate $4 each month"
+    click_button "Donate each month"
 
     expect(page).to have_content "Thank you for backing PlanningAlerts"
     expect(Subscription.find_by!(email: email)).to be_paid
+  end
+
+  it "successfully at a higher rate" do
+    visit backers_new_path(email: email)
+
+    fill_in "Choose your contribution", with: 10
+
+    # Fake what the Stripe JS does (i.e. inject the token in the form if successful)
+    # FIXME: This isn't having an effect because we're just setting the plan amout to 0. See comment above.
+    first("input[name='stripeToken']", visible: false).set(stripe_helper.generate_card_token)
+
+    click_button "Donate each month"
+
+    expect(page).to have_content "Thank you for backing PlanningAlerts"
+    expect(Subscription.find_by!(email: email)).to be_paid
+
+    stripe_customer = Stripe::Customer.retrieve(Subscription.find_by!(email: email).stripe_customer_id)
+    subscription_quantity_on_stripe = stripe_customer.subscriptions.data.first.quantity
+
+    expect(subscription_quantity_on_stripe).to eq "10"
   end
 end

@@ -1,5 +1,5 @@
 class Subscription < ActiveRecord::Base
-  PLAN_IDS = %w(planningalerts-backers-test-4 planningalerts-5 planningalerts-15 planningalerts-34)
+  PLAN_IDS = %w(planningalerts-backers-test-1 planningalerts-5 planningalerts-15 planningalerts-34)
 
   has_many :alerts, -> { where theme: "default" }, foreign_key: :email, primary_key: :email
   validates :email, uniqueness: true, presence: true

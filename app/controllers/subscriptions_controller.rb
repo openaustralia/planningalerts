@@ -35,17 +35,21 @@ class SubscriptionsController < ApplicationController
     subscription = if Subscription.find_by_email(@email)
       Subscription.find_or_create_by!(email: @email)
     else
-      Subscription.create!(email: @email, stripe_plan_id: "planningalerts-backers-test-4")
+      Subscription.create!(email: @email, stripe_plan_id: "planningalerts-backers-test-1")
     end
 
-    subscription.stripe_plan_id = "planningalerts-backers-test-4" if subscription.stripe_plan_id.nil?
+    subscription.stripe_plan_id = "planningalerts-backers-test-1" if subscription.stripe_plan_id.nil?
 
     customer = Stripe::Customer.create(
       email: @email,
       card: params[:stripeToken],
       description: "PlanningAlerts subscriber"
     )
-    stripe_subscription = customer.subscriptions.create(plan: subscription.stripe_plan_id)
+    stripe_subscription = customer.subscriptions.create(
+      plan: subscription.stripe_plan_id,
+      quantity: params[:amount]
+    )
+
     subscription.update!(stripe_subscription_id: stripe_subscription.id,  stripe_customer_id: customer.id)
 
     # TODO: rescue and redirect to new on attempt to reload the create page
