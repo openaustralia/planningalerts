@@ -25,6 +25,32 @@ feature "Subscribing to donate monthly" do
     expect(Subscription.find_by!(email: email)).to be_paid
   end
 
+  context "with javascript" do
+    before do
+      # This is a hack to get around the ssl_required? method in
+      # the application controller which redirects poltergeist to https.
+      allow(Rails.env).to receive(:development?).and_return true
+    end
+
+    it "successfully", js: true do
+      visit new_subscription_path
+
+      click_button "Donate $4 each month"
+
+      page.within_frame find("iframe.stripe_checkout_app") do
+        fill_in "Email", with: email
+        fill_in "Card number", with: "4242424242424242"
+        fill_in "MM / YY", with: "1222"
+        fill_in "CVC", with: "123"
+        click_button "Subscribe AUD $4.00/mo"
+      end
+      sleep(3) # let the form process
+
+      expect(page).to have_content "Thank you for backing PlanningAlerts"
+      expect(Subscription.find_by!(email: email)).to be_paid
+    end
+  end
+
   it "successfully at a higher rate" do
     visit new_subscription_path(email: email)
 
