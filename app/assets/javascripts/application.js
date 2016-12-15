@@ -45,15 +45,17 @@ if ("#button-pro-signup".length) {
   $('#button-pro-signup').on('click', function(e) {
     amount = $('#button-pro-signup').attr("data-amount");
 
-    // Open Checkout with further options
-    handler.open({
+    formOptions = {
       image: '/assets/street_map.png',
       name: 'PlanningAlerts',
-      amount: amount,
+      amount: parseInt(amount),
       currency: 'AUD',
-      email: email,
       panelLabel: "Subscribe {{amount}}/mo"
-    });
+    };
+    if (typeof email !== "undefined") { formOptions.email = email };
+
+    // Open Checkout with further options
+    handler.open(formOptions);
     e.preventDefault();
 
     // send GA event track
