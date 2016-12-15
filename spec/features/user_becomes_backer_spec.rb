@@ -11,16 +11,11 @@ feature "Subscribing to donate monthly" do
 
   given(:email) { "mary@local.org" }
 
-  it "successfully" do
+  it "isn't possible without javascript", pending: true do
     visit new_subscription_path(email: email)
 
-    # Fake what the Stripe JS does (i.e. inject the token in the form if successful)
-    # FIXME: This isn't having an effect because we're just setting the plan amout to 0. See comment above.
-    first("input[name='stripeToken']", visible: false).set(stripe_helper.generate_card_token)
-    click_button "Donate each month"
-
-    expect(page).to have_content "Thank you for backing PlanningAlerts"
-    expect(Subscription.find_by!(email: email)).to be_paid
+    expect(page).to have_button("Donate each month", disabled: true)
+    expect(page).to have_content "Our payment form requires javascript from stripe.com"
   end
 
   context "with javascript" do
