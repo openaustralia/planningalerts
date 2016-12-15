@@ -17,7 +17,7 @@ class SubscriptionsController < ApplicationController
 
     customer = Stripe::Customer.create(
       email: @email,
-      card: params[:stripeToken],
+      source: params[:stripeToken],
       description: "PlanningAlerts subscriber"
     )
     stripe_subscription = customer.subscriptions.create(
