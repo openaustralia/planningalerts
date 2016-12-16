@@ -13,8 +13,13 @@ $("#menu .toggle").click(function(){
 });
 
 function updateFormAmount(new_amount) {
-  $('#button-pro-signup').text("Donate $" + new_amount + " each month");
   $('#button-pro-signup').attr("data-amount", new_amount * 100);
+
+  if (parseInt(new_amount) < 1 || new_amount == "" ) {
+    $('#button-pro-signup').text("Donate each month");
+  } else {
+    $('#button-pro-signup').text("Donate $" + new_amount + " each month");
+  }
 };
 
 if ("#button-pro-signup".length) {
@@ -26,6 +31,12 @@ if ("#button-pro-signup".length) {
 
     $('.amount-setter-input input').bind('input', function() {
       updateFormAmount($(this).val());
+
+      if ($(this).val() < 1) {
+        $('#button-pro-signup').prop("disabled", true);
+      } else {
+        $('#button-pro-signup').prop("disabled", false);
+      };
     });
   }
 
