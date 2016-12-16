@@ -5,5 +5,10 @@
 %input{type: 'hidden', name: 'stripeEmail', value: email}
 %input{type: 'hidden', name: 'stripeToken', value: ""}
 -# TODO: Set amount to what we want
-%button{type: 'submit', class: "button-action", id: "button-pro-signup", data: {key: ENV["STRIPE_PUBLISHABLE_KEY"], amount: price_in_cents(price), email: email}}
+%button{type: 'submit', class: "button-action", disabled: true, id: "button-pro-signup", data: {key: ENV["STRIPE_PUBLISHABLE_KEY"], amount: price_in_cents(price), email: email}}
   Donate each month
+%p.no-js-message
+  Our donation form can’t run without Javascript active
+  and access from our secure payment processor stripe.com.
+  If you’re seeing this and can't activate those things,
+  please email us at #{ mail_to "contact@planningalerts.org.au" }, we’re keen to help.

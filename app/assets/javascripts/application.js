@@ -18,6 +18,9 @@ function updateFormAmount(new_amount) {
 };
 
 if ("#button-pro-signup".length) {
+  $('#button-pro-signup').prop("disabled", "false");
+  $('#button-pro-signup + .no-js-message').addClass("hide");
+
   if ('.amount-setter-input input'.length) {
     updateFormAmount($('.amount-setter-input input').val());
 

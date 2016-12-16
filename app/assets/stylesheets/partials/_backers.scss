@@ -56,7 +56,15 @@ $backer_green: #315D18;
   }
 
   p:last-child {
-    margin: 0;
+    margin: 1em 0 0;
+  }
+}
+
+.no-js-message {
+  display: none;
+
+  button[disabled] + &:not(.hide) {
+    display: block;
   }
 }
 
