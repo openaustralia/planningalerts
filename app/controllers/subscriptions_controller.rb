@@ -13,12 +13,8 @@ class SubscriptionsController < ApplicationController
       stripe_plan_id: "planningalerts-backers-test-1"
     )
 
-    stripe_customer = subscription.create_stripe_customer(params[:stripeToken])
-    stripe_subscription = subscription.create_stripe_subscription(stripe_customer, params[:amount])
-
-    subscription.update!(
-      stripe_subscription_id: stripe_subscription.id,
-      stripe_customer_id: stripe_customer.id
+    subscription.send_subscription_to_stripe_and_store_ids(
+      params[:stripeToken], params[:amount]
     )
 
     # TODO: rescue and redirect to new on attempt to reload the create page

@@ -26,6 +26,16 @@ class Subscription < ActiveRecord::Base
     )
   end
 
+  def send_subscription_to_stripe_and_store_ids(stripe_token, amount)
+    stripe_customer = create_stripe_customer(stripe_token)
+    stripe_subscription = create_stripe_subscription(stripe_customer, amount)
+
+    update!(
+      stripe_subscription_id: stripe_subscription.id,
+      stripe_customer_id: stripe_customer.id
+    )
+  end
+
   def paid?
     stripe_subscription_id.present?
   end

@@ -63,4 +63,23 @@ describe Subscription do
       expect(stripe_subscription.class).to eq Stripe::Subscription
     end
   end
+
+  describe "#send_subscription_to_stripe_and_store_ids" do
+    let(:stripe_helper) { StripeMock.create_test_helper }
+    before { StripeMock.start }
+    after { StripeMock.stop }
+
+    it "updates the subscription with the stripe ids" do
+      stripe_helper.create_plan(id: "planningalerts-backers-test-1", amount: 1)
+      subscription = create(:subscription, email: "jenny@local.org",
+                                           stripe_subscription_id: nil,
+                                           stripe_customer_id: nil)
+      valid_stripe_token = stripe_helper.generate_card_token
+
+      subscription.send_subscription_to_stripe_and_store_ids(valid_stripe_token, 4)
+
+      expect(subscription.stripe_subscription_id).to_not be nil
+      expect(subscription.stripe_customer_id).to_not be nil
+    end
+  end
 end
