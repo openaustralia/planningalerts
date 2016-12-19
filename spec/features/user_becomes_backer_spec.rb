@@ -4,53 +4,75 @@ feature "Subscribing to donate monthly" do
   let(:stripe_helper) { StripeMock.create_test_helper }
   before do
     StripeMock.start
-    stripe_helper.create_plan(id: "planningalerts-backers-test-1", amount: 1)
+    stripe_helper.create_plan(amount: 1, id: ENV["STRIPE_PLAN_ID_FOR_SUBSCRIBERS"])
   end
 
   after { StripeMock.stop }
 
   given(:email) { "mary@local.org" }
 
-  it "isn't possible without javascript" do
-    visit new_subscription_path(email: email)
+  context "when no stripe plan is configured" do
+    around do |test|
+      with_modified_env STRIPE_PLAN_ID_FOR_SUBSCRIBERS: nil do
+        test.run
+      end
+    end
 
-    expect(page).to have_button("Donate each month", disabled: true)
-    expect(page).to have_content "Our donation form requires javascript"
+    it "isn't possible without a stripe plan configured" do
+      visit new_subscription_path
+
+      expect(page).to have_content "The page you were looking for doesn't exist."
+    end
   end
 
-  context "with javascript" do
-    before do
-      # This is a hack to get around the ssl_required? method in
-      # the application controller which redirects poltergeist to https.
-      allow(Rails.env).to receive(:development?).and_return true
+  context "when a stripe plan is configured" do
+    around do |test|
+      with_modified_env STRIPE_PLAN_ID_FOR_SUBSCRIBERS: "foo-plan-1" do
+        test.run
+      end
     end
 
-    it "successfully", js: true do
+    it "isn't possible without javascript" do
       visit new_subscription_path
 
-      click_button "Donate $4 each month"
-
-      fill_out_and_submit_stripe_card_form_with_email(email)
-
-      expect(page).to have_content "Thank you for backing PlanningAlerts"
-      expect(Subscription.find_by!(email: email)).to be_paid
+      expect(page).to have_button("Donate each month", disabled: true)
+      expect(page).to have_content "Our donation form requires javascript"
     end
 
-    it "successfully at a higher rate", js: true do
-      visit new_subscription_path
+    context "with javascript" do
+      before do
+        # This is a hack to get around the ssl_required? method in
+        # the application controller which redirects poltergeist to https.
+        allow(Rails.env).to receive(:development?).and_return true
+      end
 
-      fill_in "Choose your contribution", with: 10
-      click_button "Donate $10 each month"
+      it "successfully", js: true do
+        visit new_subscription_path
 
-      fill_out_and_submit_stripe_card_form_with_email(email)
+        click_button "Donate $4 each month"
 
-      expect(page).to have_content "Thank you for backing PlanningAlerts"
-      expect(Subscription.find_by!(email: email)).to be_paid
+        fill_out_and_submit_stripe_card_form_with_email(email)
 
-      stripe_customer = Stripe::Customer.retrieve(Subscription.find_by!(email: email).stripe_customer_id)
-      subscription_quantity_on_stripe = stripe_customer.subscriptions.data.first.quantity
+        expect(page).to have_content "Thank you for backing PlanningAlerts"
+        expect(Subscription.find_by!(email: email)).to be_paid
+      end
 
-      expect(subscription_quantity_on_stripe).to eq "10"
+      it "successfully at a higher rate", js: true do
+        visit new_subscription_path
+
+        fill_in "Choose your contribution", with: 10
+        click_button "Donate $10 each month"
+
+        fill_out_and_submit_stripe_card_form_with_email(email)
+
+        expect(page).to have_content "Thank you for backing PlanningAlerts"
+        expect(Subscription.find_by!(email: email)).to be_paid
+
+        stripe_customer = Stripe::Customer.retrieve(Subscription.find_by!(email: email).stripe_customer_id)
+        subscription_quantity_on_stripe = stripe_customer.subscriptions.data.first.quantity
+
+        expect(subscription_quantity_on_stripe).to eq "10"
+      end
     end
   end
 end

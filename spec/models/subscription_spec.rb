@@ -13,13 +13,21 @@ describe Subscription do
   context do
     let(:stripe_helper) { StripeMock.create_test_helper }
     let(:valid_stripe_token) { stripe_helper.generate_card_token }
-    let(:subscription) { create(:subscription, email: "jenny@local.org",
-                                               stripe_subscription_id: nil,
-                                               stripe_customer_id: nil) }
+    let(:subscription) do
+      create(:subscription, email: "jenny@local.org",
+                            stripe_subscription_id: nil,
+                            stripe_customer_id: nil,
+                            stripe_plan_id: ENV["STRIPE_PLAN_ID_FOR_SUBSCRIBERS"])
+    end
+
     around :all do |test|
       StripeMock.start
-      stripe_helper.create_plan(id: "planningalerts-backers-test-1", amount: 1)
-      test.run
+
+      with_modified_env STRIPE_PLAN_ID_FOR_SUBSCRIBERS: "foo-plan-1" do
+        stripe_helper.create_plan(amount: 1, id: ENV["STRIPE_PLAN_ID_FOR_SUBSCRIBERS"])
+        test.run
+      end
+
       StripeMock.stop
     end
 

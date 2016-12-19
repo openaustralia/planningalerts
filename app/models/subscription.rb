@@ -1,13 +1,21 @@
 class Subscription < ActiveRecord::Base
-  PLAN_IDS = %w(planningalerts-backers-test-1)
-
   has_many :alerts, -> { where theme: "default" }, foreign_key: :email, primary_key: :email
   validates :email, uniqueness: true, presence: true
-  validates :stripe_plan_id, inclusion: PLAN_IDS
+  validate :has_correct_stripe_plan_id
 
   class << self
     def default_price
       4
+    end
+
+    def stripe_plan_available?
+      ENV["STRIPE_PLAN_ID_FOR_SUBSCRIBERS"].present?
+    end
+  end
+
+  def has_correct_stripe_plan_id
+    unless stripe_plan_id.eql? ENV["STRIPE_PLAN_ID_FOR_SUBSCRIBERS"]
+      errors.add(:stripe_plan_id, "does not match our know active stripe plan #{ENV["STRIPE_PLAN_ID_FOR_SUBSCRIBERS"]}")
     end
   end
 

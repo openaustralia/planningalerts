@@ -111,6 +111,5 @@ FactoryGirl.define do
 
   factory :subscription do
     sequence(:email) { |s| "mary#{s}@enterpriserealty.com.au" }
-    stripe_plan_id "planningalerts-backers-test-1"
   end
 end
