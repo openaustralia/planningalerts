@@ -14,11 +14,7 @@ class SubscriptionsController < ApplicationController
     )
 
     stripe_customer = subscription.create_stripe_customer(params[:stripeToken])
-
-    stripe_subscription = stripe_customer.subscriptions.create(
-      plan: subscription.stripe_plan_id,
-      quantity: params[:amount]
-    )
+    stripe_subscription = subscription.create_stripe_subscription(stripe_customer, params[:amount])
 
     subscription.update!(
       stripe_subscription_id: stripe_subscription.id,

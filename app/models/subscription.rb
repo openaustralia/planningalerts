@@ -19,6 +19,13 @@ class Subscription < ActiveRecord::Base
     )
   end
 
+  def create_stripe_subscription(stripe_customer, amount)
+    stripe_customer.subscriptions.create(
+      plan: stripe_plan_id,
+      quantity: amount
+    )
+  end
+
   def paid?
     stripe_subscription_id.present?
   end
