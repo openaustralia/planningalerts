@@ -11,6 +11,14 @@ class Subscription < ActiveRecord::Base
     end
   end
 
+  def create_stripe_customer(stripe_token)
+    Stripe::Customer.create(
+      email: email,
+      source: stripe_token,
+      description: "PlanningAlerts subscriber"
+    )
+  end
+
   def paid?
     stripe_subscription_id.present?
   end
