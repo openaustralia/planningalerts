@@ -11,11 +11,11 @@ feature "Subscribing to donate monthly" do
 
   given(:email) { "mary@local.org" }
 
-  it "isn't possible without javascript", pending: true do
+  it "isn't possible without javascript" do
     visit new_subscription_path(email: email)
 
     expect(page).to have_button("Donate each month", disabled: true)
-    expect(page).to have_content "Our payment form requires javascript from stripe.com"
+    expect(page).to have_content "Our donation form requires javascript"
   end
 
   context "with javascript" do
