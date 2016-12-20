@@ -471,7 +471,7 @@
   }
 }
 
-.backers-intro {
+.subscriptions-intro {
   box-sizing: border-box;
 
   @include at-breakpoint(50em) {
@@ -480,7 +480,7 @@
   }
 }
 
-.backers-payment-form {
+.subscriptions-payment-form {
   box-sizing: border-box;
 
   @include at-breakpoint(50em) {
@@ -488,7 +488,7 @@
   }
 }
 
-.backers-this-week {
+.subscriptions-this-week {
   ul {
     @include at-breakpoint(50em) {
       display: flex;

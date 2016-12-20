@@ -1,13 +1,13 @@
-$backer_green: #315D18;
+$subscriptions_color: #315D18;
 
-.backer-hero-image {
+.subscriptions-hero-image {
   // TODO: Add large background image to connect this page
   //       to the value people get from PlanningAlerts
   // background-image: url('/assets/person_holding_phone.jpg');
 }
 
-.backers-page,
-.backers-this-week {
+.subscriptions-page,
+.subscriptions-this-week {
   text-align: center;
 
   @include at-breakpoint(50em) {
@@ -15,7 +15,7 @@ $backer_green: #315D18;
   }
 }
 
-.backers-page {
+.subscriptions-page {
   background: rgba(255,255,255,.8);
   color: #000;
 
@@ -40,13 +40,13 @@ $backer_green: #315D18;
   }
 }
 
-.backers-intro {
+.subscriptions-intro {
   p {
     font-size: 1.4em;
   }
 }
 
-.backers-payment-form {
+.subscriptions-payment-form {
   margin-top: 1em;
   padding: 1.5em 1em 1em;
   text-align: center;
@@ -121,10 +121,10 @@ $backer_green: #315D18;
   }
 }
 
-.backers-this-week {
+.subscriptions-this-week {
   padding-top: 2em;
-  background: $backer_green;
-  background: linear-gradient(-45deg, $backer_green, lighten($backer_green, 5%));
+  background: $subscriptions_color;
+  background: linear-gradient(-45deg, $subscriptions_color, lighten($subscriptions_color, 5%));
   color: #eee;
 
   @include at-breakpoint(50em) {
@@ -210,7 +210,7 @@ $backer_green: #315D18;
   }
 }
 
-.backers-thankyou {
+.subscriptions-thankyou {
   p {
     font-size: 1.2em;
   }

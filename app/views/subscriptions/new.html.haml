@@ -1,17 +1,17 @@
 - content_for :page_title, 'Back PlanningAlerts'
 
-.backer-hero-image
-  .backers-page
+.subscriptions-hero-image
+  .subscriptions-page
     .container.main
       #content
-        %div.backers-intro
+        %div.subscriptions-intro
           %h1.page-title
             You should be informed and have your say on changes to&nbsp;your local area.
           %p
             PlanningAlerts exists as a free, independent project
             because people like you back it with a small monthly&nbsp;donation.
         = render 'form', email: @email, price: @price
-.backers-this-week
+.subscriptions-this-week
   .container
     %h2 Because of backers like you, here’s our week on PlanningAlerts
     - cache 'subscriptions_new_thisweek_stats', :expires_in => 1.hour do
