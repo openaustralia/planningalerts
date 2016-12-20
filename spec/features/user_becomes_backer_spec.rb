@@ -4,7 +4,7 @@ feature "Subscribing to donate monthly" do
   let(:stripe_helper) { StripeMock.create_test_helper }
   before do
     StripeMock.start
-    stripe_helper.create_plan(amount: 1, id: ENV["STRIPE_PLAN_ID_FOR_SUBSCRIBERS"])
+    stripe_helper.create_plan(amount: 1, id: Subscription.plan_id_on_stripe)
   end
 
   after { StripeMock.stop }

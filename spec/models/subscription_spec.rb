@@ -17,14 +17,14 @@ describe Subscription do
       create(:subscription, email: "jenny@local.org",
                             stripe_subscription_id: nil,
                             stripe_customer_id: nil,
-                            stripe_plan_id: ENV["STRIPE_PLAN_ID_FOR_SUBSCRIBERS"])
+                            stripe_plan_id: Subscription.plan_id_on_stripe)
     end
 
     around :all do |test|
       StripeMock.start
 
       with_modified_env STRIPE_PLAN_ID_FOR_SUBSCRIBERS: "foo-plan-1" do
-        stripe_helper.create_plan(amount: 1, id: ENV["STRIPE_PLAN_ID_FOR_SUBSCRIBERS"])
+        stripe_helper.create_plan(amount: 1, id: Subscription.plan_id_on_stripe)
         test.run
       end
 

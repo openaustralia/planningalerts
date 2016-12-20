@@ -9,13 +9,17 @@ class Subscription < ActiveRecord::Base
     end
 
     def stripe_plan_available?
-      ENV["STRIPE_PLAN_ID_FOR_SUBSCRIBERS"].present?
+      plan_id_on_stripe.present?
+    end
+
+    def plan_id_on_stripe
+      ENV["STRIPE_PLAN_ID_FOR_SUBSCRIBERS"]
     end
   end
 
   def has_correct_stripe_plan_id
-    unless stripe_plan_id.eql? ENV["STRIPE_PLAN_ID_FOR_SUBSCRIBERS"]
-      errors.add(:stripe_plan_id, "does not match our know active stripe plan #{ENV["STRIPE_PLAN_ID_FOR_SUBSCRIBERS"]}")
+    unless stripe_plan_id.eql? Subscription.plan_id_on_stripe
+      errors.add(:stripe_plan_id, "does not match our know active stripe plan #{Subscription.plan_id_on_stripe}")
     end
   end
 
