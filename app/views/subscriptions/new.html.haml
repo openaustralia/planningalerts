@@ -30,19 +30,16 @@
       %ul
         %li
           %p
-            - #%span.number= number_with_delimiter(EmailBatch.total_sent_in_past_week)
-            %span.number 115,299
+            %span.number= number_with_delimiter(EmailBatch.total_sent_in_past_week)
             emails sent to subscribers
         %li
           %p
-            - # FIXME: This stat is actually alerts signed up, not unique people signed up
-            -# %span.number= number_with_delimiter(Alert.active.in_past_week.count)
-            %span.number 447
-            new people signed up for alerts
+            - # FIXME: This stat would be better as the number of people
+            %span.number= number_with_delimiter(Alert.active.in_past_week.count)
+            new alerts registered
         %li
           %p
-            -# %span.number= number_with_delimiter(Comment.visible.in_past_week.count)
-            %span.number 76
+            %span.number= number_with_delimiter(Comment.visible.in_past_week.count)
             new comments on applications
     %h2.quote
       Thank you to all our backers and amazing volunteer contributors who make this all possible
