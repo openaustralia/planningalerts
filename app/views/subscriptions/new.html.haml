@@ -20,11 +20,7 @@
                   - # TODO: Add more helpful restrictions on input to make this as easy as possible
                   = number_field_tag :amount, 4, pattern: "[0-9]*", placeholder: 0, required: "required", min: 1
                 %span Per month
-          %div
-            -# %button.button-action{type: 'submit'}
-            -#   - # Make this dynamic based on the selection
-            -#   Donate $4 each month
-            = render partial: "stripe_button", locals: {email: @email, price: @price}
+          %div= render partial: "stripe_button", locals: {email: @email, price: @price}
           %p.quiet.small
             Donations over $2 are tax deductible.
 .backers-this-week
