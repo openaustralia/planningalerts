@@ -1,7 +1,9 @@
 $backer_green: #315D18;
 
 .backer-hero-image {
-  background-image: url('/assets/sceptical-climate-001-invert-crop.jpg');
+  // TODO: Add large background image to connect this page
+  //       to the value people get from PlanningAlerts
+  // background-image: url('/assets/person_holding_phone.jpg');
 }
 
 .backers-page,
@@ -48,7 +50,8 @@ $backer_green: #315D18;
   margin-top: 1em;
   padding: 1.5em 1em 1em;
   text-align: center;
-  background: rgba(255,255,255,.8);
+  // TODO: when background image is inserted, set this to background: rgba(255,255,255,.8);
+  background: rgba(230,230,230,.8);
   border-radius: .5em;
 
   > p {
