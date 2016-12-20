@@ -22,27 +22,70 @@ $subscriptions_color: #315D18;
   .main {
     background: none;
 
+    @include at-breakpoint(40em) {
+      padding-top: 4em;
+      height: 43em;
+    }
+
     @include at-breakpoint(50em) {
       padding-top: 4em;
       height: 43em;
+    }
+
+    #content {
+      @include at-breakpoint(40em) {
+        box-sizing: border-box;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      @include at-breakpoint(50em) {
+        box-sizing: initial;
+        height: auto;
+        display: block;
+      }
     }
   }
 
   .page-title {
     color: #000;
     margin: 0 0 .5em;
-    line-height: 1.2;
     font-weight: bold;
+    font-size: 1.25em;
+    line-height: 1.5;
+
+    @include at-breakpoint(23em) {
+      font-size: 1.5em;
+      line-height: 1.2;
+    }
+
+    @include at-breakpoint(40em) {
+      font-size: 2em;
+      line-height: 1.2;
+    }
 
     @include at-breakpoint(50em) {
       font-size: 2.5em;
+      line-height: 1.2;
     }
   }
 }
 
 .subscriptions-intro {
   p {
-    font-size: 1.4em;
+    font-size: 1.25em;
+
+    @include at-breakpoint(40em) {
+      margin-top: 4em;
+      font-size: 1.5em;
+    }
+
+    @include at-breakpoint(50em) {
+      margin-top: 0;
+      font-size: 1.4em;
+    }
   }
 }
 

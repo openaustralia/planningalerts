@@ -474,8 +474,14 @@
 .subscriptions-intro {
   box-sizing: border-box;
 
+  @include at-breakpoint(40em) {
+    margin: 0 auto;
+    width: 88%;
+  }
+
   @include at-breakpoint(50em) {
     @include span-columns(8, 12);
+    margin: 0;
     padding-right: 1em;
   }
 }
