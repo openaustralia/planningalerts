@@ -10,19 +10,7 @@
           %p
             PlanningAlerts exists as a free, independent project
             because people like you back it with a small monthly&nbsp;donation.
-        = form_tag subscriptions_path, class: 'backers-payment-form', id: "subscription-payment-form" do
-          %fieldset.amount-setter
-            %label
-              %span.amount-setter-label-text Choose your contribution
-              %div.amount-setter-container
-                %div.amount-setter-input
-                  %i &#36;
-                  - # TODO: Add more helpful restrictions on input to make this as easy as possible
-                  = number_field_tag :amount, 4, pattern: "[0-9]*", placeholder: 0, required: "required", min: 1
-                %span Per month
-          %div= render partial: "stripe_button", locals: {email: @email, price: @price}
-          %p.quiet.small
-            Donations over $2 are tax deductible.
+        = render 'form', email: @email, price: @price
 .backers-this-week
   .container
     %h2 Because of backers like you, here’s our week on PlanningAlerts
