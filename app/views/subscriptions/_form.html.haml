@@ -6,7 +6,7 @@
         %div.amount-setter-input
           %i &#36;
           - # TODO: Add more helpful restrictions on input to make this as easy as possible
-          = number_field_tag :amount, price, pattern: "[0-9]*", placeholder: 0, required: "required", min: 1
+          = number_field_tag :amount, price, pattern: "[0-9]*", required: "required", min: 1, title: "Enter the number of dollars you’d like to donate monthly"
         %span Per month
   %div= render partial: "stripe_button", locals: {email: email, price: price}
   %p.quiet.small
