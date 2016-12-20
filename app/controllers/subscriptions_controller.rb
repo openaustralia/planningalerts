@@ -31,7 +31,7 @@ class SubscriptionsController < ApplicationController
   private
 
   def check_if_stripe_is_configured
-    unless Subscription.stripe_plan_available?
+    unless Subscription.plan_id_on_stripe.present?
       render "static/error_404"
     end
   end

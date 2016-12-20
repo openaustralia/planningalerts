@@ -8,10 +8,6 @@ class Subscription < ActiveRecord::Base
       4
     end
 
-    def stripe_plan_available?
-      plan_id_on_stripe.present?
-    end
-
     def plan_id_on_stripe
       ENV["STRIPE_PLAN_ID_FOR_SUBSCRIBERS"]
     end
