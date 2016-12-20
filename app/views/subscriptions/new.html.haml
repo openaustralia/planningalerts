@@ -26,7 +26,7 @@
 .backers-this-week
   .container
     %h2 Because of backers like you, here’s our week on PlanningAlerts
-    - cache 'stats', :expires_in => 1.hour do
+    - cache 'subscriptions_new_thisweek_stats', :expires_in => 1.hour do
       %ul
         %li
           %p
