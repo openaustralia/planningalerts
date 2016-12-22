@@ -1,4 +1,5 @@
 require "spec_helper"
+
 describe Subscription do
   describe ".default_price" do
     it { expect(Subscription.default_price).to eql 4 }
