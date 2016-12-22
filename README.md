@@ -15,6 +15,8 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 **Install Dependencies**
  * Install MySql - On OSX download dmg from [http://dev.mysql.com/downloads/](http://dev.mysql.com/downloads/)
  * Install Sphinx - `brew install sphinx`
+ * Install PhantomJS for headless browser testing with Poltergeist - follow
+   [instructions in the Poltergeist Readme](https://github.com/teampoltergeist/poltergeist#installing-phantomjs).
 
 **Checkout The Project**
  * Fork the project on Github
