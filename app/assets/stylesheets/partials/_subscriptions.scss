@@ -27,11 +27,6 @@ $subscriptions_color: #315D18;
       height: 43em;
     }
 
-    @include at-breakpoint(50em) {
-      padding-top: 4em;
-      height: 43em;
-    }
-
     #content {
       @include at-breakpoint(40em) {
         box-sizing: border-box;
@@ -63,12 +58,10 @@ $subscriptions_color: #315D18;
 
     @include at-breakpoint(40em) {
       font-size: 2em;
-      line-height: 1.2;
     }
 
     @include at-breakpoint(50em) {
       font-size: 2.5em;
-      line-height: 1.2;
     }
   }
 }
