@@ -15,6 +15,8 @@ class SubscriptionsController < ApplicationController
       stripe_plan_id: ENV["STRIPE_PLAN_ID_FOR_SUBSCRIBERS"]
     )
 
+    # TODO: This step should probably be extracted into the creation of subscriptions.
+    #       Do we want to create a subscription that isn't synced with stripe?
     subscription.send_subscription_to_stripe_and_store_ids(
       params[:stripeToken], params[:amount]
     )
