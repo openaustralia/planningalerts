@@ -21,7 +21,7 @@ ActiveAdmin.register Donation do
     end
 
     inputs "Paid" do
-      input :stripe_plan_id, as: :select, collection: Donation::PLAN_IDS
+      input :stripe_plan_id
       input :stripe_customer_id
       input :stripe_subscription_id
     end
