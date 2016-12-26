@@ -1,6 +1,6 @@
 - content_for :page_title, 'Thank you for backing PlanningAlerts'
 
-.subscriptions-page.subscriptions-thankyou
+.donations-page.donations-thankyou
   .container.main
     #content
       %h1.page-title Thank you for backing PlanningAlerts!
@@ -10,7 +10,7 @@
         Your donations go to informing more people about local planning
         and giving them a chance to participate.
         With the backing of people like you we’ve sent out
-        - cache 'subscriptions_create_stats', :expires_in => 1.hour do
+        - cache 'donations_create_stats', :expires_in => 1.hour do
           = number_with_delimiter(EmailBatch.total_sent_in_past_week)
         PlanningAlerts emails to people in the last 7 days.
       %p

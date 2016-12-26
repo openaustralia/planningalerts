@@ -1,4 +1,4 @@
-ActiveAdmin.register Subscription do
+ActiveAdmin.register Donation do
   index do
     column :email
     column(:active_alerts) { |s| s.alerts.active.count }
@@ -21,7 +21,7 @@ ActiveAdmin.register Subscription do
     end
 
     inputs "Paid" do
-      input :stripe_plan_id, as: :select, collection: Subscription::PLAN_IDS
+      input :stripe_plan_id, as: :select, collection: Donation::PLAN_IDS
       input :stripe_customer_id
       input :stripe_subscription_id
     end

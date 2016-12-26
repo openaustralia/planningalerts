@@ -1,4 +1,4 @@
-module SubscriptionsHelper
+module DonationsHelper
   def price_in_cents(price)
     price * 100
   end

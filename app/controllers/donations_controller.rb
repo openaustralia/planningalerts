@@ -1,23 +1,23 @@
-class SubscriptionsController < ApplicationController
+class DonationsController < ApplicationController
   before_action :check_if_stripe_is_configured
 
   def new
     @email = params[:email]
-    @price = Subscription.default_price
+    @price = Donation.default_price
     render layout: "simple"
   end
 
   def create
     @email = params[:stripeEmail]
 
-    subscription = Subscription.create!(
+    donation = Donation.create!(
       email: @email,
-      stripe_plan_id: ENV["STRIPE_PLAN_ID_FOR_SUBSCRIBERS"]
+      stripe_plan_id: ENV["STRIPE_PLAN_ID_FOR_DONATIONS"]
     )
 
-    # TODO: This step should probably be extracted into the creation of subscriptions.
-    #       Do we want to create a subscription that isn't synced with stripe?
-    subscription.send_subscription_to_stripe_and_store_ids(
+    # TODO: This step should probably be extracted into the creation of donations.
+    #       Do we want to create a donation that isn't synced with stripe?
+    donation.send_donation_to_stripe_and_store_ids(
       params[:stripeToken], params[:amount]
     )
 
@@ -27,13 +27,13 @@ class SubscriptionsController < ApplicationController
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
-    redirect_to new_subscription_path
+    redirect_to new_donation_path
   end
 
   private
 
   def check_if_stripe_is_configured
-    unless Subscription.plan_id_on_stripe.present?
+    unless Donation.plan_id_on_stripe.present?
       render "static/error_404"
     end
   end

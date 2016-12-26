@@ -48,10 +48,10 @@ if ("#button-pro-signup".length) {
     token: function(response) {
       var tokenInput = $("<input type=hidden name=stripeToken />").val(response.id);
       var emailInput = $("<input type=hidden name=stripeEmail />").val(response.email);
-      $("#subscription-payment-form").append(tokenInput).append(emailInput).submit();
+      $("#donation-payment-form").append(tokenInput).append(emailInput).submit();
       $('#button-pro-signup').fadeOut('fast', function() {
         var processingNotice = $("<p class='form-processing'>Processing ...</p>").fadeIn('slow');
-        $("#subscription-payment-form").append(processingNotice);
+        $("#donation-payment-form").append(processingNotice);
       });
     }
   });
@@ -73,7 +73,7 @@ if ("#button-pro-signup".length) {
     e.preventDefault();
 
     // send GA event track
-    ga('send', 'event', 'subscriptions', 'click subscribe button');
+    ga('send', 'event', 'donate', 'click donate each month button');
   });
 
   // Close Checkout on page navigation

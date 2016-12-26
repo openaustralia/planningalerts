@@ -126,26 +126,26 @@ describe AlertNotifierHelper do
     end
   end
 
-  describe "#new_subscripion_url_with_tracking" do
+  describe "#new_donation_url_with_tracking" do
     before :each do
       @alert = create(:alert)
       @base_params_plus_email_and_campaign = base_tracking_params.merge(
         email: @alert.email,
-        utm_campaign: "subscribe-from-alert"
+        utm_campaign: "donate-from-alert"
       )
     end
 
     context "without utm_content" do
       it {
-        expect(helper.new_subscription_url_with_tracking(alert: @alert))
-          .to eq new_subscription_url(@base_params_plus_email_and_campaign)
+        expect(helper.new_donation_url_with_tracking(alert: @alert))
+          .to eq new_donation_url(@base_params_plus_email_and_campaign)
       }
     end
 
     context "with utm_content" do
       it {
-        expect(helper.new_subscription_url_with_tracking(alert: @alert, utm_content: "foo"))
-          .to eq new_subscription_url(@base_params_plus_email_and_campaign.merge(utm_content: "foo"))
+        expect(helper.new_donation_url_with_tracking(alert: @alert, utm_content: "foo"))
+          .to eq new_donation_url(@base_params_plus_email_and_campaign.merge(utm_content: "foo"))
       }
     end
   end

@@ -61,7 +61,7 @@ You can configure PlanningAlerts to allow people to donate to the project monthl
 [Stripe](https://stripe.com) is used to process the payment and manage billing.
 
 You need to configured three evironment variables in your .env.local file
-to allow users to visit the subscriptions page.
+to allow users to visit the donations page.
 
 1. The publishable API key from your stripe account.
 2. The secret API key from your stripe account.
@@ -70,13 +70,13 @@ to allow users to visit the subscriptions page.
 
 ```
 # Stripe is used to process cards and customers
-# for subscriptions. See app/controllers/subscriptions_controller.rb
+# for donations. See app/controllers/donations_controller.rb
 # STRIPE_PUBLISHABLE_KEY=pk_test_xxxxxxxxxxxxxxxxxxxxxxxx
 # STRIPE_SECRET_KEY=sk_test_xxxxxxxxxxxxxxxxxxxxxxxx
-# Stripe plan ID for subscription.
+# Stripe plan ID for donation.
 # You need to make a subscription plan on stripe with the value of $1.
 # Replace the example id for the plan here
-# STRIPE_PLAN_ID_FOR_SUBSCRIBERS=example-planningalerts-subscribers-1
+# STRIPE_PLAN_ID_FOR_DONATIONS=example-planningalerts-subscribers-1
 ```
 
 ### Configuring PlanningAlerts so people can write to their local councillors

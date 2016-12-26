@@ -471,7 +471,7 @@
   }
 }
 
-.subscriptions-intro {
+.donations-intro {
   box-sizing: border-box;
 
   @include at-breakpoint(40em) {
@@ -486,7 +486,7 @@
   }
 }
 
-.subscriptions-payment-form {
+.donations-payment-form {
   box-sizing: border-box;
 
   @include at-breakpoint(50em) {
@@ -494,7 +494,7 @@
   }
 }
 
-.subscriptions-this-week {
+.donations-this-week {
   ul {
     @include at-breakpoint(50em) {
       display: flex;

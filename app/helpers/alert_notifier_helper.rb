@@ -60,15 +60,15 @@ module AlertNotifierHelper
     )
   end
 
-  def new_subscription_url_with_tracking(alert: nil, utm_content: nil)
+  def new_donation_url_with_tracking(alert: nil, utm_content: nil)
     params = base_tracking_params.merge(
-      utm_campaign:  "subscribe-from-alert",
+      utm_campaign:  "donate-from-alert",
       email: @alert.email
     )
 
     params.merge!(utm_content: utm_content) unless utm_content.nil?
 
-    new_subscription_url(params)
+    new_donation_url(params)
   end
 
   def subject(alert, applications, comments, replies)

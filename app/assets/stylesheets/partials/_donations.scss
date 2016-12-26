@@ -1,13 +1,13 @@
-$subscriptions_color: #315D18;
+$donations_color: #315D18;
 
-.subscriptions-hero-image {
+.donations-hero-image {
   // TODO: Add large background image to connect this page
   //       to the value people get from PlanningAlerts
   // background-image: url('/assets/person_holding_phone.jpg');
 }
 
-.subscriptions-page,
-.subscriptions-this-week {
+.donations-page,
+.donations-this-week {
   text-align: center;
 
   @include at-breakpoint(50em) {
@@ -15,7 +15,7 @@ $subscriptions_color: #315D18;
   }
 }
 
-.subscriptions-page {
+.donations-page {
   background: rgba(255,255,255,.8);
   color: #000;
 
@@ -66,7 +66,7 @@ $subscriptions_color: #315D18;
   }
 }
 
-.subscriptions-intro {
+.donations-intro {
   p {
     font-size: 1.25em;
 
@@ -82,7 +82,7 @@ $subscriptions_color: #315D18;
   }
 }
 
-.subscriptions-payment-form {
+.donations-payment-form {
   margin-top: 1em;
   padding: 1.5em 1em 1em;
   text-align: center;
@@ -157,10 +157,10 @@ $subscriptions_color: #315D18;
   }
 }
 
-.subscriptions-this-week {
+.donations-this-week {
   padding-top: 2em;
-  background: $subscriptions_color;
-  background: linear-gradient(-45deg, $subscriptions_color, lighten($subscriptions_color, 5%));
+  background: $donations_color;
+  background: linear-gradient(-45deg, $donations_color, lighten($donations_color, 5%));
   color: #eee;
 
   @include at-breakpoint(50em) {
@@ -246,7 +246,7 @@ $subscriptions_color: #315D18;
   }
 }
 
-.subscriptions-thankyou {
+.donations-thankyou {
   p {
     font-size: 1.2em;
   }

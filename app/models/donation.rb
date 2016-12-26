@@ -1,4 +1,4 @@
-class Subscription < ActiveRecord::Base
+class Donation < ActiveRecord::Base
   has_many :alerts, -> { where theme: "default" }, foreign_key: :email, primary_key: :email
   validates :email, uniqueness: true, presence: true
   validate :has_correct_stripe_plan_id
@@ -9,13 +9,13 @@ class Subscription < ActiveRecord::Base
     end
 
     def plan_id_on_stripe
-      ENV["STRIPE_PLAN_ID_FOR_SUBSCRIBERS"]
+      ENV["STRIPE_PLAN_ID_FOR_DONATIONS"]
     end
   end
 
   def has_correct_stripe_plan_id
-    unless stripe_plan_id.eql? Subscription.plan_id_on_stripe
-      errors.add(:stripe_plan_id, "does not match our know active stripe plan #{Subscription.plan_id_on_stripe}")
+    unless stripe_plan_id.eql? Donation.plan_id_on_stripe
+      errors.add(:stripe_plan_id, "does not match our know active stripe plan #{Donation.plan_id_on_stripe}")
     end
   end
 
@@ -34,7 +34,7 @@ class Subscription < ActiveRecord::Base
     )
   end
 
-  def send_subscription_to_stripe_and_store_ids(stripe_token, amount)
+  def send_donation_to_stripe_and_store_ids(stripe_token, amount)
     stripe_customer = create_stripe_customer(stripe_token)
     stripe_subscription = create_stripe_subscription(stripe_customer, amount)
 
