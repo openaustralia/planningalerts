@@ -54,34 +54,6 @@ namespace :planningalerts do
     end
   end
 
-  namespace :subscriptions do
-    desc "Creates trial subscriptions for the requested number of random people with 3 or more alerts"
-    task :rollout, [:stripe_plan_id, :count] => :environment do |t, args|
-      raise "Unknown Stripe plan ID" unless Subscription::PLAN_IDS.include?(args[:stripe_plan_id])
-
-      # The requested number of random alerts...
-      # ...where there's 3 or more other active alerts already signed up...
-      # ...and they don't already have a subscription...
-      # ...pluck just the email addresses
-      emails = Alert.potential_new_subscribers.order("RAND()").limit(args[:count]).pluck(:email)
-
-      if emails.empty?
-        puts "Sorry, no subscription candidates were found."
-      else
-        puts emails.join("\n")
-        if confirm_question "Create subscriptions for the above addresses?"
-          emails.each do |email|
-            puts "Creating trial subscription for #{email}..."
-            Subscription.create!(email: email, stripe_plan_id: args[:stripe_plan_id], trial_started_at: Date.today)
-          end
-          puts "Done."
-        else
-          puts "Cancelled."
-        end
-      end
-    end
-  end
-
   def confirm_question(message)
     STDOUT.puts "#{message} (y/n)"
     STDIN.gets.strip == 'y'
