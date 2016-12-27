@@ -57,12 +57,13 @@ gem "atdis"
 gem "oj"
 gem "redcarpet"
 gem 'honeybadger'
-gem 'stripe'
+gem 'stripe', "~> 1.57"
 gem 'dotenv-rails'
 gem 'climate_control'
 gem 'everypolitician-popolo', git: 'https://github.com/everypolitician/everypolitician-popolo.git', branch: 'master'
 # Using master until an updated version of the Gem is released https://github.com/ciudadanointeligente/writeit-rails/issues/4
 gem 'writeit-rails', git: 'https://github.com/ciudadanointeligente/writeit-rails.git', branch: 'master'
+gem 'mime-types', '~> 2.99' # our writeit gem version is incompatible with newer versions
 
 group :test do
   gem 'capybara'
@@ -75,7 +76,7 @@ group :test do
   gem 'vcr', '~> 2.9'
   gem 'webmock'
   gem 'timecop'
-  gem 'stripe-ruby-mock', '~> 2.1.1', require: 'stripe_mock'
+  gem 'stripe-ruby-mock', '~> 2.3.1', :require => 'stripe_mock'
 end
 
 group :development do
