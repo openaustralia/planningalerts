@@ -69,11 +69,11 @@ to allow users to visit the donations page.
    **with the amount/price of $1** (the amount/price is really important, if it isn't $1 you'll over charge people).
 
 ```
-# Stripe is used to process cards and customers
-# for donations. See app/controllers/donations_controller.rb
+# Stripe is used to process cards and manage billing for donations.
+# See app/controllers/donations_controller.rb
 # STRIPE_PUBLISHABLE_KEY=pk_test_xxxxxxxxxxxxxxxxxxxxxxxx
 # STRIPE_SECRET_KEY=sk_test_xxxxxxxxxxxxxxxxxxxxxxxx
-# Stripe plan ID for donation.
+# Stripe plan ID for recurring donation subscription.
 # You need to make a subscription plan on stripe with the value of $1.
 # Replace the example id for the plan here
 # STRIPE_PLAN_ID_FOR_DONATIONS=example-planningalerts-subscribers-1
