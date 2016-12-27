@@ -1,14 +1,6 @@
-- if @alert.subscription.try(:paid?)
-  %p
-    You’re a paid subscriber so feel free to
-    #{link_to "sign up for alerts from as many locations as you need", new_alert_url(email: @alert.email)}.
-  %p
-    You can cancel your subscription at any time, just
-    #{mail_to "contact@planningalerts.org.au", "email us at contact@planningalerts.org.au"}.
-- else
-  %p
-    %strong Find PlanningAlerts useful?
-    Support this charity-run project with a #{link_to "tax deductible donation", donate_url(protocol: @protocol, host: @host, utm_medium: "email", utm_source: "alerts")}.
-  %p
-    PlanningAlerts is a free service run by the independent charity #{link_to 'OpenAustralia Foundation', 'https://www.openaustraliafoundation.org.au/'}.
-    Discover our #{link_to 'other projects', 'https://www.openaustraliafoundation.org.au/projects/'}.
+%p
+  %strong Find PlanningAlerts useful?
+  Support this charity-run project with a #{link_to "tax deductible donation", donate_url(protocol: @protocol, host: @host, utm_medium: "email", utm_source: "alerts")}.
+%p
+  PlanningAlerts is a free service run by the independent charity #{link_to 'OpenAustralia Foundation', 'https://www.openaustraliafoundation.org.au/'}.
+  Discover our #{link_to 'other projects', 'https://www.openaustraliafoundation.org.au/projects/'}.

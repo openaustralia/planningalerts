@@ -1,0 +1,253 @@
+$donations_color: #315D18;
+
+.donations-hero-image {
+  // TODO: Add large background image to connect this page
+  //       to the value people get from PlanningAlerts
+  // background-image: url('/assets/person_holding_phone.jpg');
+}
+
+.donations-page,
+.donations-this-week {
+  text-align: center;
+
+  @include at-breakpoint(50em) {
+    text-align: left;
+  }
+}
+
+.donations-page {
+  background: rgba(255,255,255,.8);
+  color: #000;
+
+  .main {
+    background: none;
+
+    @include at-breakpoint(40em) {
+      padding-top: 4em;
+      height: 43em;
+    }
+
+    #content {
+      @include at-breakpoint(40em) {
+        box-sizing: border-box;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      @include at-breakpoint(50em) {
+        box-sizing: initial;
+        height: auto;
+        display: block;
+      }
+    }
+  }
+
+  .page-title {
+    color: #000;
+    margin: 0 0 .5em;
+    font-weight: bold;
+    font-size: 1.25em;
+    line-height: 1.5;
+
+    @include at-breakpoint(23em) {
+      font-size: 1.5em;
+      line-height: 1.2;
+    }
+
+    @include at-breakpoint(40em) {
+      font-size: 2em;
+    }
+
+    @include at-breakpoint(50em) {
+      font-size: 2.5em;
+    }
+  }
+}
+
+.donations-intro {
+  p {
+    font-size: 1.25em;
+
+    @include at-breakpoint(40em) {
+      margin-top: 4em;
+      font-size: 1.5em;
+    }
+
+    @include at-breakpoint(50em) {
+      margin-top: 0;
+      font-size: 1.4em;
+    }
+  }
+}
+
+.donations-payment-form {
+  margin-top: 1em;
+  padding: 1.5em 1em 1em;
+  text-align: center;
+  // TODO: when background image is inserted, set this to background: rgba(255,255,255,.8);
+  background: rgba(230,230,230,.8);
+  border-radius: .5em;
+
+  > p {
+    margin: 0 0 1em;
+  }
+
+  p:last-child {
+    margin: 1em 0 0;
+  }
+}
+
+.no-js-message {
+  display: none;
+
+  button[disabled] + &:not(.hide) {
+    display: block;
+  }
+}
+
+.amount-setter {
+  margin: 0 0 1.5em;
+  line-height: 1.25;
+}
+
+.amount-setter-label-text {
+  display: block;
+  padding: 0 0 1.5em;
+  font-weight: bold;
+}
+
+.amount-setter-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    text-align: left;
+    padding-left: .75em;
+  }
+}
+
+.amount-setter-input {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 .1em .1em rgba(0,0,0,0.2);
+  color: #333;
+  text-shadow: none;
+
+  input,
+  i {
+    font-size: 1.25em;
+  }
+
+  i {
+    padding: .5em .125em .5em .5em;
+    width: 1em;
+    font-style: normal;
+  }
+
+  input {
+    padding: .5em .5em .5em 0;
+    width: 2.75em;
+    text-align: center;
+    border: 0;
+    background: transparent;
+  }
+}
+
+.donations-this-week {
+  padding-top: 2em;
+  background: $donations_color;
+  background: linear-gradient(-45deg, $donations_color, lighten($donations_color, 5%));
+  color: #eee;
+
+  @include at-breakpoint(50em) {
+    padding: 2em 0 0;
+  }
+
+  h2 {
+    font-size: 1.4em;
+    margin: 0 0 1.5em;
+    color: #eee;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    margin: 0 0 2em;
+  }
+
+  p {
+    font-size: 1.2em;
+    margin: 0;
+  }
+
+  .number {
+    font-size: 2.4em;
+    font-weight: bold;
+    display: block;
+    line-height: 1.2;
+  }
+
+  .quote {
+    font-style: italic;
+    font-size: 1.4em;
+    padding: .5em 0 3em;
+    margin: 0;
+    color: #eee;
+
+    span {
+      display: block;
+      font-size: .857em;
+      font-style: normal;
+    }
+  }
+
+  img {
+    width: 100%;
+  }
+
+  figure {
+    position: relative;
+    background: #000;
+  }
+
+  figcaption {
+    padding-top: 1em;
+    padding-bottom: 1.5em;
+    background: rgba(0,0,0,0.7);
+
+    @include at-breakpoint(50em) {
+      padding-bottom: 1em;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+
+    p {
+      font-size: 1em;
+
+      @include at-breakpoint(50em) {
+        margin: 0 auto;
+        padding-right: 12em;
+        box-sizing: border-box;
+      }
+    }
+
+    a {
+      color: #eee;
+    }
+  }
+}
+
+.donations-thankyou {
+  p {
+    font-size: 1.2em;
+  }
+}

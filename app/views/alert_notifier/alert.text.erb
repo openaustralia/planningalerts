@@ -1,7 +1,4 @@
 <%= render "header" -%>
-<% if @alert.expired_subscription? %>
-<%= render "expired_subscription" %>
-<% else %>
 <% unless @comments.empty? %>
 <%= render "comments" -%>
 <% unless @replies.empty? && @applications.empty? -%>
@@ -21,11 +18,8 @@
 <% unless @applications.empty? %>
 <%= render "applications" -%>
 <% end %>
-<% end %>
 
 ============================================================
 
-<% unless @alert.subscription.try(:trial?) || @alert.expired_subscription? %>
 <%= render "footer_main" %>
-<% end %>
 <%= render "footer_actions" %>

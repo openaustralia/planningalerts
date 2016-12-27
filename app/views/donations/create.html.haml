@@ -1,0 +1,18 @@
+- content_for :page_title, 'Thank you for backing PlanningAlerts'
+
+.donations-page.donations-thankyou
+  .container.main
+    #content
+      %h1.page-title Thank you for backing PlanningAlerts!
+      %p
+        %strong We’re processing your donation and will send through a receipt shortly.
+      %p
+        Your donations go to informing more people about local planning
+        and giving them a chance to participate.
+        With the backing of people like you we’ve sent out
+        - cache 'donations_create_stats', :expires_in => 1.hour do
+          = number_with_delimiter(EmailBatch.total_sent_in_past_week)
+        PlanningAlerts emails to people in the last 7 days.
+      %p
+        You can cancel your monthly donations at any time, just
+        #{ mail_to "contact@planningalerts.org.au", "email us at contact@planningalerts.org.au" }.

@@ -1,12 +1,6 @@
-<% if @alert.subscription.try(:paid?) %>
-You’re a paid subscriber so feel free to sign up for alerts from as many locations as you need.
-
-You can cancel your subscription at any time, just email us at contact@planningalerts.org.au
-<% else %>
 Find PlanningAlerts useful? Support this charity-run project with a tax deductible donation:
 
 <%= raw donate_url(protocol: @protocol, host: @host, utm_medium: "email", utm_source: "alerts") %>
 
 PlanningAlerts is a free service run by independent charity the OpenAustralia Foundation.
 Discover our other projects: https://www.openaustraliafoundation.org.au/projects/
-<% end %>

@@ -16,10 +16,16 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require "email_spec"
 require 'rspec/active_model/mocks'
+require 'capybara/poltergeist'
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, { js_errors: false })
+end
+Capybara.javascript_driver = :poltergeist
 
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
   c.hook_into :webmock
+  c.ignore_localhost = true
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -44,15 +50,36 @@ RSpec.configure do |config|
   # config.mock_with :flexmock
   # config.mock_with :rr
 
+  # This DatabaseCleaner setup is customised for our use of a javascript driver
+  # as part of our feature tests using Capybara
+  # https://github.com/DatabaseCleaner/database_cleaner#rspec-with-capybara-example
   config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with :truncation
   end
 
-  config.around(:each) do |example|
-    DatabaseCleaner.cleaning do
-      example.run
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, type: :feature) do
+    # :rack_test driver's Rack app under test shares database connection
+    # with the specs, so continue to use transaction strategy for speed.
+    driver_shares_db_connection_with_specs = Capybara.current_driver == :rack_test
+
+    unless driver_shares_db_connection_with_specs
+      # Driver is probably for an external browser with an app
+      # under test that does *not* share a database connection with the
+      # specs, so use truncation strategy.
+      DatabaseCleaner.strategy = :truncation
     end
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.append_after(:each) do
+    DatabaseCleaner.clean
   end
 
   # If true, the base class of anonymous controllers will be inferred

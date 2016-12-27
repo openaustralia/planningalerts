@@ -12,38 +12,68 @@ $("#menu .toggle").click(function(){
   });
 });
 
+function updateFormAmount(new_amount) {
+  $('#button-pro-signup').attr("data-amount", new_amount * 100);
+
+  if (parseInt(new_amount) < 1 || new_amount == "" ) {
+    $('#button-pro-signup').text("Donate each month");
+  } else {
+    $('#button-pro-signup').text("Donate $" + new_amount + " each month");
+  }
+};
+
 if ("#button-pro-signup".length) {
+  $('#button-pro-signup').prop("disabled", "false");
+  $('#button-pro-signup + .no-js-message').addClass("hide");
+
+  if ('.amount-setter-input input'.length) {
+    updateFormAmount($('.amount-setter-input input').val());
+
+    $('.amount-setter-input input').bind('input', function() {
+      updateFormAmount($(this).val());
+
+      if ($(this).val() < 1) {
+        $('#button-pro-signup').prop("disabled", true);
+      } else {
+        $('#button-pro-signup').prop("disabled", false);
+      };
+    });
+  }
+
   public_key = $('#button-pro-signup').attr('data-key');
   email = $('#button-pro-signup').attr("data-email");
-  amount = $('#button-pro-signup').attr("data-amount");
 
   var handler = StripeCheckout.configure({
     key: public_key,
     token: function(response) {
       var tokenInput = $("<input type=hidden name=stripeToken />").val(response.id);
       var emailInput = $("<input type=hidden name=stripeEmail />").val(response.email);
-      $("#subscription-payment-form").append(tokenInput).append(emailInput).submit();
+      $("#donation-payment-form").append(tokenInput).append(emailInput).submit();
       $('#button-pro-signup').fadeOut('fast', function() {
         var processingNotice = $("<p class='form-processing'>Processing ...</p>").fadeIn('slow');
-        $("#subscription-payment-form").append(processingNotice);
+        $("#donation-payment-form").append(processingNotice);
       });
     }
   });
 
   $('#button-pro-signup').on('click', function(e) {
-    // Open Checkout with further options
-    handler.open({
+    amount = $('#button-pro-signup').attr("data-amount");
+
+    formOptions = {
       image: '/assets/street_map.png',
       name: 'PlanningAlerts',
-      amount: amount,
+      amount: parseInt(amount),
       currency: 'AUD',
-      email: email,
       panelLabel: "Subscribe {{amount}}/mo"
-    });
+    };
+    if (typeof email !== "undefined") { formOptions.email = email };
+
+    // Open Checkout with further options
+    handler.open(formOptions);
     e.preventDefault();
 
     // send GA event track
-    ga('send', 'event', 'subscriptions', 'click subscribe button');
+    ga('send', 'event', 'donate', 'click donate each month button');
   });
 
   // Close Checkout on page navigation

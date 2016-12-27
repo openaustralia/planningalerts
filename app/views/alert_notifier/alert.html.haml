@@ -5,17 +5,13 @@
 
   %body
     = render "header"
-    - if @alert.expired_subscription?
-      = render "expired_subscription"
-    - else
-      - unless @comments.empty?
-        = render "comments"
-      - unless @replies.empty?
-        = render "replies"
-      - unless @applications.empty?
-        = render "applications"
+    - unless @comments.empty?
+      = render "comments"
+    - unless @replies.empty?
+      = render "replies"
+    - unless @applications.empty?
+      = render "applications"
     .footer-outer
       .footer-inner
-        - unless @alert.trial_subscription? || @alert.expired_subscription?
-          = render "footer_main"
+        = render "footer_main"
         = render "footer_actions"

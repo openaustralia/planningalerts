@@ -470,3 +470,41 @@
     }
   }
 }
+
+.donations-intro {
+  box-sizing: border-box;
+
+  @include at-breakpoint(40em) {
+    margin: 0 auto;
+    width: 88%;
+  }
+
+  @include at-breakpoint(50em) {
+    @include span-columns(8, 12);
+    margin: 0;
+    padding-right: 1em;
+  }
+}
+
+.donations-payment-form {
+  box-sizing: border-box;
+
+  @include at-breakpoint(50em) {
+    @include span-columns(4 omega, 12);
+  }
+}
+
+.donations-this-week {
+  ul {
+    @include at-breakpoint(50em) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  li {
+    @include at-breakpoint(50em) {
+      width: 30%;
+    }
+  }
+}

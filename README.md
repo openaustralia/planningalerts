@@ -15,6 +15,8 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 **Install Dependencies**
  * Install MySql - On OSX download dmg from [http://dev.mysql.com/downloads/](http://dev.mysql.com/downloads/)
  * Install Sphinx - `brew install sphinx`
+ * Install PhantomJS for headless browser testing with Poltergeist - follow
+   [instructions in the Poltergeist Readme](https://github.com/teampoltergeist/poltergeist#installing-phantomjs).
 
 **Checkout The Project**
  * Fork the project on Github
@@ -52,6 +54,30 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
  * Run - `rake planningalerts:applications:email`
  * Check the email in your browser: http://localhost:1080/
  * To resend alerts during testing, just set the `last_sent` attribute of your alert to *nil*
+
+### Take regular donations through PlanningAlerts with Stripe
+
+You can configure PlanningAlerts to allow people to donate to the project monthly.
+[Stripe](https://stripe.com) is used to process the payment and manage billing.
+
+You need to configured three evironment variables in your .env.local file
+to allow users to visit the donations page.
+
+1. The publishable API key from your stripe account.
+2. The secret API key from your stripe account.
+3. The ID for a [Stripe subscription plan](https://stripe.com/docs/subscriptions/quickstart)
+   **with the amount/price of $1** (the amount/price is really important, if it isn't $1 you'll over charge people).
+
+```
+# Stripe is used to process cards and manage billing for donations.
+# See app/controllers/donations_controller.rb
+# STRIPE_PUBLISHABLE_KEY=pk_test_xxxxxxxxxxxxxxxxxxxxxxxx
+# STRIPE_SECRET_KEY=sk_test_xxxxxxxxxxxxxxxxxxxxxxxx
+# Stripe plan ID for recurring donation subscription.
+# You need to make a subscription plan on stripe with the value of $1.
+# Replace the example id for the plan here
+# STRIPE_PLAN_ID_FOR_DONATIONS=example-planningalerts-subscribers-1
+```
 
 ### Configuring PlanningAlerts so people can write to their local councillors
 

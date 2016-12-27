@@ -1,40 +1,13 @@
 - content_for :page_title, "Confirmed"
-- if @subscription.try(:trial?)
-  .attention
-    %h3
-      Great, you now have alerts set up for
-      #{@subscription.alerts.count} street addresses!
-    %p
-      %strong You need a paid subscription to get alerts for several addresses, or to use PlanningAlerts for your work.
-      = succeed "." do
-        = link_to "A subscription costs #{@subscription.price} per month", new_subscription_url(email: @alert.email)
-      Once you’re subscribed you can get alerts from as many locations as you need.
-    - if @new_subscription
-      %p
-        We’ve set you up with a 7 day free trial subscription,
-        so you can start getting your new alerts straight away.
-    - else
-      %p
-        You still have #{pluralize(@subscription.trial_days_remaining, "day")}
-        remaining on your free trial subscription,
-        so you’ll start getting your new alerts straight away.
-    %p
-      %strong Non-commercial use of PlanningAlerts is free for any number of addresses.
-      If this sounds like you, please #{mail_to "contact@planningalerts.org.au", "email us"}—we’ll be happy
-      to help with a free, non-commercial subscription.
-    %p
-      You can #{link_to "subscribe here", new_subscription_url(email: @alert.email)}
-      as soon as you’re ready.
-- else
-  .attention
-    %h3 Thanks, your alert has been activated
-    %p
-      You will now receive email alerts for any planning applications we find within
-      %strong #{meters_in_words(@alert.radius_meters)}
-      of
-      %strong #{@alert.address}.
+.attention
+  %h3 Thanks, your alert has been activated
   %p
-    You can #{link_to "change the size of the area covered by the alerts", area_alert_path(id: @alert.confirm_id)}
-    now or at a later time. Every email alert will have this link.
-    If you want alerts around another address as well
-    #{link_to "you can sign up for multiple alerts", new_alert_path}.
+    You will now receive email alerts for any planning applications we find within
+    %strong #{meters_in_words(@alert.radius_meters)}
+    of
+    %strong #{@alert.address}.
+%p
+  You can #{link_to "change the size of the area covered by the alerts", area_alert_path(id: @alert.confirm_id)}
+  now or at a later time. Every email alert will have this link.
+  If you want alerts around another address as well
+  #{link_to "you can sign up for multiple alerts", new_alert_path}.
