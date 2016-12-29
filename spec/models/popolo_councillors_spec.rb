@@ -26,44 +26,10 @@ describe PopoloCouncillors do
   end
 
   describe "#person_with_party_and_end_date_for_membership" do
-    it "returns a person with their party" do
+    let(:popolo) do
       # TODO: Why is this the only test not using the fixture file?
       # We should choose one or the other for consistency
-      popolo = Everypolitician::Popolo::JSON.new(
-        persons: [{ name: "Kevin Mack", id: "kevin_mack" }],
-        organizations: [
-          {
-            name: "Sunripe Tomato Party",
-            id: "sunripe_tomato_party",
-            classification: "party"
-          },
-          {
-            name: "Marrickville Council",
-            id: "marrickville_council",
-            classification: "legislature"
-          }
-        ],
-        memberships: [
-          {
-            person_id: "kevin_mack",
-            organization_id: "marrickville_council",
-            on_behalf_of_id: "sunripe_tomato_party"
-          }
-        ]
-      )
-      popolo_councillors = PopoloCouncillors.new(popolo)
-      membership = popolo.memberships.first
-
-      expect(popolo_councillors.person_with_party_and_end_date_for_membership(membership).party)
-        .to eq "Sunripe Tomato Party"
-      expect(popolo_councillors.person_with_party_and_end_date_for_membership(membership).name)
-        .to eq "Kevin Mack"
-    end
-
-    it "returns a person with their membership end_date" do
-      # TODO: Why is this the only test not using the fixture file?
-      # We should choose one or the other for consistency
-      popolo = Everypolitician::Popolo::JSON.new(
+      Everypolitician::Popolo::JSON.new(
         persons: [{ name: "Kevin Mack", id: "kevin_mack" }],
         organizations: [
           {
@@ -86,6 +52,19 @@ describe PopoloCouncillors do
           }
         ]
       )
+    end
+
+    it "returns a person with their party" do
+      popolo_councillors = PopoloCouncillors.new(popolo)
+      membership = popolo.memberships.first
+
+      expect(popolo_councillors.person_with_party_and_end_date_for_membership(membership).party)
+        .to eq "Sunripe Tomato Party"
+      expect(popolo_councillors.person_with_party_and_end_date_for_membership(membership).name)
+        .to eq "Kevin Mack"
+    end
+
+    it "returns a person with their membership end_date" do
       popolo_councillors = PopoloCouncillors.new(popolo)
       membership = popolo.memberships.first
 
