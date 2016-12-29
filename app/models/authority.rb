@@ -262,6 +262,9 @@ class Authority < ActiveRecord::Base
     persons.map do |person|
       councillor = councillors.find_or_create_by(name: person.name)
 
+      no_longer_councillor = person.end_date.present? && Date.parse(person.end_date) <= Date.today
+
+      councillor.current = false if no_longer_councillor
       councillor.popolo_id = person.id
       councillor.image_url = councillor.cached_image_url if councillor.cached_image_available?
       councillor.update(email: person.email, party: person.party)

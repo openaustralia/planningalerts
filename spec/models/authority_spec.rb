@@ -205,6 +205,7 @@ describe Authority do
         expect(kevin.email).to eql "kevin@albury.nsw.gov.au"
         expect(kevin.image_url).to eql "https://australian-local-councillors-images.s3.amazonaws.com/albury_city_council/kevin_mack-80x88.jpg"
         expect(kevin.party).to be_nil
+        expect(kevin.current).to be true
         expect(Councillor.find_by(name: "Ross Jackson").party).to eql "Liberal"
       end
 
@@ -241,6 +242,36 @@ describe Authority do
 
         councillor = Councillor.find_by(name: "Daryl Betteridge")
         expect(councillor.image_url).to be_nil
+      end
+
+      context "when a person is still a councillor" do
+        around do |test|
+          Timecop.freeze(2016, 9, 2) { test.run }
+        end
+
+        it "sets them as current" do
+          armidale = create(:authority, full_name: "Armidale Dumaresq Council")
+
+          armidale.load_councillors(popolo)
+
+          councillor = Councillor.find_by(name: "Daryl Betteridge")
+          expect(councillor.current?).to be true
+        end
+      end
+
+      context "when a person is no longer a councillor" do
+        around do |test|
+          Timecop.freeze(2016, 12, 10) { test.run }
+        end
+
+        it "sets them as not current" do
+          armidale = create(:authority, full_name: "Armidale Dumaresq Council")
+
+          armidale.load_councillors(popolo)
+
+          councillor = Councillor.find_by(name: "Daryl Betteridge")
+          expect(councillor.current?).to be false
+        end
       end
     end
 

@@ -56,4 +56,25 @@ feature "Admin loads councillors for an authority" do
       expect(page).to have_content "Skipped loading 10 councillors"
     end
   end
+
+  context "when some councillors have been removed from office" do
+    around do |test|
+      Timecop.freeze(2016, 10, 11) { test.run }
+    end
+
+    given(:authority) { create(:authority,
+                              full_name: "Marrickville Council",
+                              state: "NSW") }
+
+    scenario "they loaded and marked as not current" do
+      sign_in_as_admin
+
+      visit admin_authority_path(authority)
+
+      click_button "Load Councillors"
+
+      expect(page).to have_content "Successfully loaded/updated 12 councillors"
+      expect(page).to have_content "Melissa Brooks No"
+    end
+  end
 end

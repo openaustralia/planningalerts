@@ -36,6 +36,7 @@ ActiveAdmin.register Authority do
     if a.councillors.present?
       table_for resource.councillors, class: "index_table" do
         column :name
+        column :current
         column :email
         column :party
         column(:image) { |c| link_to image_tag(c.image_url), c.image_url }
