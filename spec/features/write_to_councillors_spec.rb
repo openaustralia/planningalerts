@@ -68,6 +68,7 @@ feature "Send a message to a councillor" do
     context "and there are councillors on this authority" do
       background do
         create(:councillor, name: "Louise Councillor", authority: authority)
+        create(:councillor, name: "Fatima Councillor", current: false, authority: authority)
       end
 
       scenario "sending a message" do
@@ -104,6 +105,12 @@ feature "Send a message to a councillor" do
 
         expect(page).to have_content "Your comment has been sent to local councillor Louise Councillor and posted below."
         expect(page).to have_content "I think this is a really good idea"
+      end
+
+      scenario "only current councillors are available to write to" do
+        visit application_path(application)
+
+        expect(page).to_not have_content "Fatima Councillor"
       end
 
       scenario "getting an error after not selecting who your comment goes to" do

@@ -330,6 +330,44 @@ describe Application do
     end
   end
 
+  describe "#current_councillors_for_authority" do
+    let(:authority) { create(:authority) }
+    let(:application) { create(:application, authority: authority) }
+
+    context "when there are no councillors" do
+      it { expect(application.current_councillors_for_authority).to eq nil }
+    end
+
+    context "when there are councillors" do
+      before do
+        @councillor1 = create(:councillor, authority: authority)
+        @councillor2 = create(:councillor, authority: authority)
+        @councillor3 = create(:councillor, authority: authority)
+      end
+
+      it { expect(application.current_councillors_for_authority).to match_array [@councillor1, @councillor2, @councillor3] }
+    end
+
+    context "when there are councillors but not for the application’s authority" do
+      before do
+        @councillor1 = create(:councillor, authority: create(:authority))
+      end
+
+      it { expect(application.current_councillors_for_authority).to eq nil }
+    end
+
+    context "when there are councillors but not all are current" do
+      before do
+        @current_councillor = create(:councillor, current: true, authority: authority)
+        @former_councillor = create(:councillor, current: false, authority: authority)
+      end
+
+      it "only includes the current ones" do
+        expect(application.current_councillors_for_authority).to eq [@current_councillor]
+      end
+    end
+  end
+
   describe "#councillors_for_authority" do
     let(:authority) { create(:authority) }
     let(:application) { create(:application, authority: authority) }

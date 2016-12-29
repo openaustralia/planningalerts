@@ -166,12 +166,16 @@ class Application < ActiveRecord::Base
     on_notice_to && Date.today > on_notice_to
   end
 
+  def current_councillors_for_authority
+    authority.councillors.where(current: true).shuffle if authority.councillors.any?
+  end
+
   def councillors_for_authority
     authority.councillors.shuffle if authority.councillors.any?
   end
 
   def councillors_available_for_contact
-    councillors_for_authority if authority.write_to_councillors_enabled?
+    current_councillors_for_authority if authority.write_to_councillors_enabled?
   end
 
   private
