@@ -304,6 +304,23 @@ describe Comment do
     it "returns an empty Array if there are no replies on WriteIt" do
       skip
     end
+
+    context "when the councillor is not current" do
+      before do
+        VCR.use_cassette('planningalerts') do
+          comment.councillor.update(current: false)
+        end
+      end
+
+      it "still loads the reply" do
+        VCR.use_cassette('planningalerts') do
+          comment.create_replies_from_writeit!
+        end
+
+        expect(comment.replies.first.text).to eql "I agree, thanks for your comment"
+        expect(comment.replies.first.councillor).to eql comment.councillor
+      end
+    end
   end
 
   describe "#to_councillor?" do
