@@ -66,7 +66,7 @@ feature "Admin loads councillors for an authority" do
                               full_name: "Marrickville Council",
                               state: "NSW") }
 
-    scenario "they loaded and marked as not current" do
+    scenario "they are loaded and marked as not current" do
       sign_in_as_admin
 
       visit admin_authority_path(authority)
