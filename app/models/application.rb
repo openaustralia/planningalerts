@@ -170,10 +170,6 @@ class Application < ActiveRecord::Base
     authority.councillors.where(current: true).shuffle if authority.councillors.any?
   end
 
-  def councillors_for_authority
-    authority.councillors.shuffle if authority.councillors.any?
-  end
-
   def councillors_available_for_contact
     current_councillors_for_authority if authority.write_to_councillors_enabled?
   end
