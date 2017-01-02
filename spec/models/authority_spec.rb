@@ -264,13 +264,26 @@ describe Authority do
           Timecop.freeze(2016, 12, 10) { test.run }
         end
 
-        it "sets them as not current" do
+        it "loads them and sets them as not current" do
           armidale = create(:authority, full_name: "Armidale Dumaresq Council")
 
           armidale.load_councillors(popolo)
 
           councillor = Councillor.find_by(name: "Daryl Betteridge")
           expect(councillor.current?).to be false
+        end
+
+        it "updates them as not current" do
+          armidale = create(:authority, full_name: "Armidale Dumaresq Council")
+          existing_councillor = create(
+            :councillor, authority: armidale,
+            name: "Daryl Betteridge",
+            current: true
+          )
+
+          armidale.load_councillors(popolo)
+
+          expect(existing_councillor.reload.current?).to be false
         end
       end
     end
