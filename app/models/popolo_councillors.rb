@@ -14,17 +14,18 @@ class PopoloCouncillors
     )
 
     councillor_memberships.map do |membership|
-      person_with_party_for_membership(membership)
+      person_with_party_and_end_date_for_membership(membership)
     end
   end
 
-  def person_with_party_for_membership(membership)
+  def person_with_party_and_end_date_for_membership(membership)
     person = popolo.persons.find_by(id: membership.person_id)
+    end_date = membership.end_date
     party = popolo.organizations.find_by(id: membership.on_behalf_of_id, classification: "party")
     party_name = party.name unless party.name == "unknown"
 
     EveryPolitician::Popolo::Person.new(
-      person.document.merge(party: party_name)
+      person.document.merge(party: party_name, end_date: end_date)
     )
   end
 end

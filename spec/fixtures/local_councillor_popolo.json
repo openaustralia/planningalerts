@@ -81,7 +81,8 @@
       "person_id": "armidale_dumaresq_council/daryl_betteridge",
       "organization_id": "legislature/armidale_dumaresq_council",
       "role": "councillor",
-      "on_behalf_of_id": "party/labor"
+      "on_behalf_of_id": "party/labor",
+      "end_date": "2016-09-10"
     },
     {
       "person_id": "armidale_dumaresq_council/darren_cameron",

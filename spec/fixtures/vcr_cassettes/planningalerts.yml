@@ -13067,7 +13067,8 @@ http_interactions:
               "person_id": "marrickville_council/melissa_brooks",
               "organization_id": "legislature/marrickville_council",
               "role": "councillor",
-              "on_behalf_of_id": "party/the_greens"
+              "on_behalf_of_id": "party/the_greens",
+              "end_date": "2016-10-11"
             },
             {
               "person_id": "marrickville_council/sylvie_ellsmore",

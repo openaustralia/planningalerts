@@ -4,6 +4,7 @@ ActiveAdmin.register Councillor do
   index do
     column :authority
     column :name
+    column :current
     column :email
     column :party
     column(:number_of_comments) { |c| c.comments.count }

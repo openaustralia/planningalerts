@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161226071108) do
+ActiveRecord::Schema.define(version: 20161228065516) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   limit: 255,   null: false
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 20161226071108) do
     t.string   "email",        limit: 255
     t.integer  "authority_id", limit: 4
     t.string   "popolo_id",    limit: 255
+    t.boolean  "current",                  default: true, null: false
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
