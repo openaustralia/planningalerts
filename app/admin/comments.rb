@@ -23,6 +23,8 @@ ActiveAdmin.register Comment do
   filter :name
   filter :text
 
+  show title: proc{ |resource| "Comment by #{resource.name}#{" (unconfirmed)" unless resource.confirmed?}" }
+
   form do |f|
     inputs "Text" do
       input :text
@@ -33,7 +35,6 @@ ActiveAdmin.register Comment do
       input :address
     end
     inputs "Comment Properties" do
-      input :confirmed
       input :hidden
     end
     actions
@@ -55,5 +56,17 @@ ActiveAdmin.register Comment do
     end
   end
 
-  permit_params :text, :email, :name, :confirmed, :address, :hidden
+  action_item :confirm, only: :show do
+    if resource.confirmed?
+    else
+      button_to("Confirm", confirm_admin_comment_path)
+    end
+  end
+
+  member_action :confirm, method: :post do
+    resource.confirm!
+    redirect_to({action: :show}, notice: "Comment confirmed and sent")
+  end
+
+  permit_params :text, :email, :name, :address, :hidden
 end
