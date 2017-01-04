@@ -34,7 +34,7 @@ ActiveAdmin.register Comment do
       input :name
       input :address
     end
-    inputs "Comment Properties" do
+    inputs "Moderate comment" do
       input :hidden
     end
     actions
