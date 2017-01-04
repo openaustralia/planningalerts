@@ -36,7 +36,7 @@ class Comment < ActiveRecord::Base
 
   def send_comment!
     if to_councillor? && ENV["WRITEIT_BASE_URL"]
-      CommentNotifier.send_comment_via_writeit!(self).deliver_now
+      CommentNotifier.send_comment_via_writeit!(self).deliver_later
     elsif to_councillor?
       CommentNotifier.notify_councillor("default", self).deliver_later
     else
