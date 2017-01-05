@@ -617,7 +617,7 @@ describe Alert do
 
   describe "#process!" do
     context "an alert with no new comments" do
-      let(:alert) { Alert.create!(email: "matthew@openaustralia.org", address: address, radius_meters: 2000) }
+      let(:alert) { create(:alert, address: address) }
       before :each do
         allow(alert).to receive(:recent_comments).and_return([])
         # Don't know why this isn't cleared out automatically
