@@ -14,14 +14,6 @@ describe Alert do
     allow(Location).to receive(:geocode).and_return(@loc)
   end
 
-  it "should have no trouble creating a user with valid attributes" do
-    Alert.create!(
-      address: "24 Bruce Road, Glenbrook, NSW",
-      email: "matthew@openaustralia.org",
-      radius_meters: 200
-    )
-  end
-
   # In order to stop frustrating multiple alerts
   it "should only have one alert active for a particular street address / email address combination at one time" do
     email = "foo@foo.org"
