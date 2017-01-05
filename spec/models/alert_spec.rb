@@ -5,16 +5,6 @@ describe Alert do
 
   let(:address) { "24 Bruce Road, Glenbrook" }
 
-  before :each do
-    # Unless we override this elsewhere just stub the geocoder to return coordinates of address above
-    @loc = Location.new(-33.772609, 150.624263)
-    allow(@loc).to receive(:country_code).and_return("AU")
-    allow(@loc).to receive(:full_address).and_return("24 Bruce Rd, Glenbrook NSW 2773")
-    allow(@loc).to receive(:accuracy).and_return(8)
-    allow(@loc).to receive(:all).and_return([@loc])
-    allow(Location).to receive(:geocode).and_return(@loc)
-  end
-
   # In order to stop frustrating multiple alerts
   it "should only have one alert active for a particular street address / email address combination at one time" do
     email = "foo@foo.org"
@@ -45,11 +35,10 @@ describe Alert do
     it "should happen automatically on saving" do
       alert = build(:alert, address: address, lat: nil, lng: nil)
 
-      alert.save
+      VCR.use_cassette(:planningalerts) { alert.save! }
 
-      expect(alert.lat).to eq(@loc.lat)
-      expect(alert.lng).to eq(@loc.lng)
-      expect(alert).to be_valid
+      expect(alert.lat).to eq(-33.772607)
+      expect(alert.lng).to eq(150.624245)
     end
 
     it "should set an error on the address if there is an error on geocoding" do
@@ -68,8 +57,10 @@ describe Alert do
 
     it "should replace the address with the full resolved address obtained by geocoding" do
       u = build(:alert, address: "24 Bruce Road, Glenbrook", lat: nil, lng: nil)
-      u.save!
-      expect(u.address).to eq("24 Bruce Rd, Glenbrook NSW 2773")
+
+      VCR.use_cassette(:planningalerts) { u.save! }
+
+      expect(u.address).to eq("24 Bruce Road, Glenbrook NSW 2773")
     end
   end
 
