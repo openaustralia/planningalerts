@@ -5,8 +5,6 @@ describe Alert do
 
   before :each do
     @address = "24 Bruce Road, Glenbrook, NSW"
-    @attributes = {email: "matthew@openaustralia.org", address: @address,
-      radius_meters: 200}
     # Unless we override this elsewhere just stub the geocoder to return coordinates of address above
     @loc = Location.new(-33.772609, 150.624263)
     allow(@loc).to receive(:country_code).and_return("AU")
@@ -18,7 +16,11 @@ describe Alert do
   end
 
   it "should have no trouble creating a user with valid attributes" do
-    Alert.create!(@attributes)
+    Alert.create!(
+      address: "24 Bruce Road, Glenbrook, NSW",
+      email: "matthew@openaustralia.org",
+      radius_meters: 200
+    )
   end
 
   # In order to stop frustrating multiple alerts
@@ -40,16 +42,19 @@ describe Alert do
 
   it "should be able to accept location information if it is already known and so not use the geocoder" do
     expect(Location).not_to receive(:geocode)
-    @attributes[:lat] = 1.0
-    @attributes[:lng] = 2.0
-    u = create(:alert, @attributes)
+
+    u = create(:alert, lat: 1.0, lng: 2.0)
+
     expect(u.lat).to eq(1.0)
     expect(u.lng).to eq(2.0)
   end
 
   describe "geocoding" do
     it "should happen automatically on saving" do
-      alert = Alert.create!(@attributes)
+      alert = build(:alert, address: @address, lat: nil, lng: nil)
+
+      alert.save
+
       expect(alert.lat).to eq(@loc.lat)
       expect(alert.lng).to eq(@loc.lng)
       expect(alert).to be_valid
@@ -57,42 +62,39 @@ describe Alert do
 
     it "should set an error on the address if there is an error on geocoding" do
       allow(Location).to receive(:geocode).and_return(double(error: "some error message", lat: nil, lng: nil, full_address: nil))
-      u = Alert.new(email: "matthew@openaustralia.org")
+      u = build(:alert, lat: nil, lng: nil)
       expect(u).not_to be_valid
       expect(u.errors[:address]).to eq(["some error message"])
     end
 
     it "should error if there are multiple matches from the geocoder" do
       allow(Location).to receive(:geocode).and_return(double(lat: 1, lng: 2, full_address: "Bruce Rd, VIC 3885", error: nil, all: [nil, nil]))
-      u = Alert.new(address: "Bruce Road", email: "matthew@openaustralia.org")
+      u = build(:alert, address: "Bruce Road", lat: nil, lng: nil)
       expect(u).not_to be_valid
       expect(u.errors[:address]).to eq(["isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"])
     end
 
     it "should replace the address with the full resolved address obtained by geocoding" do
-      @attributes[:address] = "24 Bruce Road, Glenbrook"
-      u = Alert.new(@attributes)
+      u = build(:alert, address: "24 Bruce Road, Glenbrook", lat: nil, lng: nil)
       u.save!
       expect(u.address).to eq("24 Bruce Rd, Glenbrook NSW 2773")
     end
   end
 
+  # TODO: Is this actually testing EmailConfirmable?
   describe "email address" do
     it "is not blank" do
-      @attributes[:email] = "  "
-      expect(Alert.new(@attributes)).to_not be_valid
+      expect(build(:alert, email: nil)).to_not be_valid
     end
 
     it "should be valid" do
-      @attributes[:email] = "diddle@"
-      u = Alert.new(@attributes)
+      u = build(:alert, email: "diddle@")
       expect(u).not_to be_valid
       expect(u.errors[:email]).to eq(["does not appear to be a valid e-mail address"])
     end
 
     it "should have an '@' in it" do
-      @attributes[:email] = "diddle"
-      u = Alert.new(@attributes)
+      u = build(:alert, email: "diddle")
       expect(u).not_to be_valid
       expect(u.errors[:email]).to eq(["does not appear to be a valid e-mail address"])
     end
@@ -117,53 +119,49 @@ describe Alert do
 
   describe "radius_meters" do
     it "should have a number" do
-      @attributes[:radius_meters] = "a"
-      u = Alert.new(@attributes)
+      u = build(:alert, radius_meters: "a")
       expect(u).not_to be_valid
       expect(u.errors[:radius_meters]).to eq(["isn't selected"])
     end
 
     it "should be greater than zero" do
-      @attributes[:radius_meters] = "0"
-      u = Alert.new(@attributes)
+      u = build(:alert, radius_meters: "0")
       expect(u).not_to be_valid
       expect(u.errors[:radius_meters]).to eq(["isn't selected"])
     end
   end
 
+  # TODO: Is this actually testing EmailConfirmable?
   describe "confirm_id" do
     it "should be a string" do
-      u = Alert.create!(@attributes)
-      expect(u.confirm_id).to be_instance_of(String)
+      expect(create(:alert).confirm_id).to be_instance_of(String)
     end
 
     it "should not be the the same for two different users" do
-      u1 = Alert.create!(@attributes)
-      u2 = Alert.create!(@attributes)
+      u1 = create(:alert)
+      u2 = create(:alert)
       expect(u1.confirm_id).not_to eq(u2.confirm_id)
     end
 
     it "should only have hex characters in it and be exactly twenty characters long" do
-      u = Alert.create!(@attributes)
-      expect(u.confirm_id).to match(/^[0-9a-f]{20}$/)
+      expect(create(:alert).confirm_id).to match(/^[0-9a-f]{20}$/)
     end
   end
 
   describe "confirmed" do
     it "should be false when alert is created" do
-      u = Alert.create!(@attributes)
-      expect(u.confirmed).to be_falsey
+      expect(create(:alert).confirmed).to be_falsey
     end
 
     it "should be able to be set to false" do
-      u = Alert.new(@attributes)
+      u = build(:alert)
       u.confirmed = false
       u.save!
       expect(u.confirmed).to eq(false)
     end
 
     it "should be able to set to true" do
-      u = Alert.new(@attributes)
+      u = build(:alert)
       u.confirmed = true
       u.save!
       expect(u.confirmed).to eq(true)
@@ -348,7 +346,7 @@ describe Alert do
 
   describe "recent applications for this user" do
     before :each do
-      @alert = Alert.create!(email: "matthew@openaustralia.org", address: @address, radius_meters: 2000)
+      @alert = create(:alert, email: "matthew@openaustralia.org", address: @address, radius_meters: 2000)
       # Position test application around the point of the alert
       p1 = @alert.location.endpoint(0, 501) # 501 m north of alert
       p2 = @alert.location.endpoint(0, 499) # 499 m north of alert
