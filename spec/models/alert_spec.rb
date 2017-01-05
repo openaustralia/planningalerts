@@ -17,8 +17,8 @@ describe Alert do
   # In order to stop frustrating multiple alerts
   it "should only have one alert active for a particular street address / email address combination at one time" do
     email = "foo@foo.org"
-    u1 = Alert.create!(email: email, address: "A street address", radius_meters: 200, lat: 1.0, lng: 2.0)
-    u2 = Alert.create!(email: email, address: "A street address", radius_meters: 800, lat: 1.0, lng: 2.0)
+    u1 = create(:alert, email: email, address: "A street address", radius_meters: 200)
+    u2 = create(:alert, email: email, address: "A street address", radius_meters: 800)
     alerts = Alert.where(email: email)
     expect(alerts.count).to eq(1)
     expect(alerts.first.radius_meters).to eq(u2.radius_meters)
