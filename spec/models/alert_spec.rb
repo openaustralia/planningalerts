@@ -262,6 +262,63 @@ describe Alert do
     end
   end
 
+  describe "#geocode_from_address" do
+    let(:original_address) { "24 Bruce Road, Glenbrook" }
+
+    context "when the lat and lng are set" do
+      let(:alert) do
+        build(:alert, address: original_address, lat: 1, lng: 2)
+      end
+
+      it "does not update the address" do
+        alert.geocode_from_address
+
+        expect(alert.address).to eq original_address
+      end
+    end
+
+    context "when the lat and lng are nil" do
+      it "sets the address to the full address returned from the geocoder" do
+        alert = build(:alert, address: original_address, lat: nil, lng: nil)
+
+        VCR.use_cassette(:planningalerts) { alert.geocode_from_address }
+
+        expect(alert.address).to eq "24 Bruce Road, Glenbrook NSW 2773"
+      end
+
+      it "sets the lat and lng" do
+        alert = build(:alert, address: original_address, lat: nil, lng: nil)
+
+        VCR.use_cassette(:planningalerts) { alert.geocode_from_address }
+
+        expect(alert.lat).to eq(-33.772607)
+        expect(alert.lng).to eq(150.624245)
+      end
+
+      it "sets an error on the alert if there is an geocoding error" do
+        allow(Location).to receive(:geocode).and_return(double(error: "some error message", lat: nil, lng: nil, full_address: nil))
+
+        alert = build(:alert, address: original_address, lat: nil, lng: nil)
+
+        alert.geocode_from_address
+
+        expect(alert.errors).not_to be nil
+        expect(alert.errors[:address]).to eq(["some error message"])
+      end
+
+      it "should error if there are multiple matches from the geocoder" do
+        allow(Location).to receive(:geocode).and_return(double(lat: 1, lng: 2, full_address: "Bruce Rd, VIC 3885", error: nil, all: [nil, nil]))
+
+        alert = build(:alert, address: "Bruce Road", lat: nil, lng: nil)
+
+        alert.geocode_from_address
+
+        expect(alert.errors).not_to be nil
+        expect(alert.errors[:address]).to eq(["isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"])
+      end
+    end
+  end
+
   describe "#unsubscribe!" do
     let(:alert) { create :alert }
 

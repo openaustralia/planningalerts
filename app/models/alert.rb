@@ -249,6 +249,22 @@ class Alert < ActiveRecord::Base
     [total_no_emails, total_no_applications, total_no_comments]
   end
 
+  def geocode_from_address
+    # Only geocode if location hasn't been set
+    if lat.nil? && lng.nil?
+      geocode_result = Location.geocode(address)
+
+      if geocode_result.error
+        self.errors.add(:address, geocode_result.error)
+      elsif geocode_result.all.size > 1
+        self.errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{geocode_result.full_address}")
+      else
+        self.location = geocode_result
+        self.address = geocode_result.full_address
+      end
+    end
+  end
+
   private
 
   def remove_other_alerts_for_this_address
