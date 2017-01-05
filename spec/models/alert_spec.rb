@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Alert do
   it_behaves_like "email_confirmable"
 
-  let(:address) { "24 Bruce Road, Glenbrook, NSW" }
+  let(:address) { "24 Bruce Road, Glenbrook" }
 
   before :each do
     # Unless we override this elsewhere just stub the geocoder to return coordinates of address above
