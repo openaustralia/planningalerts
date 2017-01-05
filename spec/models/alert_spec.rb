@@ -3,8 +3,9 @@ require 'spec_helper'
 describe Alert do
   it_behaves_like "email_confirmable"
 
+  let(:address) { "24 Bruce Road, Glenbrook, NSW" }
+
   before :each do
-    @address = "24 Bruce Road, Glenbrook, NSW"
     # Unless we override this elsewhere just stub the geocoder to return coordinates of address above
     @loc = Location.new(-33.772609, 150.624263)
     allow(@loc).to receive(:country_code).and_return("AU")
@@ -42,7 +43,7 @@ describe Alert do
 
   describe "geocoding" do
     it "should happen automatically on saving" do
-      alert = build(:alert, address: @address, lat: nil, lng: nil)
+      alert = build(:alert, address: address, lat: nil, lng: nil)
 
       alert.save
 
@@ -337,7 +338,7 @@ describe Alert do
 
   describe "recent applications for this user" do
     before :each do
-      @alert = create(:alert, email: "matthew@openaustralia.org", address: @address, radius_meters: 2000)
+      @alert = create(:alert, email: "matthew@openaustralia.org", address: address, radius_meters: 2000)
       # Position test application around the point of the alert
       p1 = @alert.location.endpoint(0, 501) # 501 m north of alert
       p2 = @alert.location.endpoint(0, 499) # 499 m north of alert
@@ -407,7 +408,7 @@ describe Alert do
   end
 
   describe "#new_comments" do
-    let(:alert) { create(:alert, address: @address, radius_meters: 2000) }
+    let(:alert) { create(:alert, address: address, radius_meters: 2000) }
     let(:p1) { alert.location.endpoint(0, 501) } # 501 m north of alert
     let(:application) { create(:application, lat: p1.lat, lng: p1.lng, suburb: "", state: "", postcode: "") }
 
@@ -448,7 +449,7 @@ describe Alert do
   describe "#new_replies" do
     let (:alert) do
       create(:alert,
-             address: @address,
+             address: address,
              radius_meters: 2000,
              lat: 1.0,
              lng: 2.0)
@@ -462,7 +463,7 @@ describe Alert do
       application = create(:application,
                             lat: 1.0,
                             lng: 2.0,
-                            address: @address,
+                            address: address,
                             suburb: "Glenbrook",
                             state: "NSW",
                             postcode: "2773",
@@ -478,7 +479,7 @@ describe Alert do
       application = create(:application,
                             lat: 1.0,
                             lng: 2.0,
-                            address: @address,
+                            address: address,
                             suburb: "Glenbrook",
                             state: "NSW",
                             postcode: "2773",
@@ -495,12 +496,12 @@ describe Alert do
   end
 
   describe "#applications_with_new_comments" do
-    let (:alert) { create(:alert, address: @address, radius_meters: 2000, lat: 1.0, lng: 2.0) }
+    let (:alert) { create(:alert, address: address, radius_meters: 2000, lat: 1.0, lng: 2.0) }
     let (:near_application) do
       create(:application,
              lat: 1.0,
              lng: 2.0,
-             address: @address,
+             address: address,
              suburb: "Glenbrook",
              state: "NSW",
              postcode: "2773")
@@ -510,7 +511,7 @@ describe Alert do
       create(:application,
              lat: alert.location.endpoint(0, 5001).lat,
              lng: alert.location.endpoint(0, 5001).lng,
-             address: @address,
+             address: address,
              suburb: "Glenbrook",
              state: "NSW",
              postcode: "2773")
@@ -566,7 +567,7 @@ describe Alert do
   describe "#applications_with_new_replies" do
     let (:alert) do
       create(:alert,
-             address: @address,
+             address: address,
              radius_meters: 2000,
              lat: 1.0,
              lng: 2.0)
@@ -581,7 +582,7 @@ describe Alert do
         application = create(:application,
                              lat: 1.0,
                              lng: 2.0,
-                             address: @address,
+                             address: address,
                              suburb: "Glenbrook",
                              state: "NSW",
                              postcode: "2773",
@@ -600,7 +601,7 @@ describe Alert do
         application = create(:application,
                              lat: far_away.lat,
                              lng: far_away.lng,
-                             address: @address,
+                             address: address,
                              suburb: "Glenbrook",
                              state: "NSW",
                              postcode: "2773",
@@ -616,7 +617,7 @@ describe Alert do
 
   describe "#process!" do
     context "an alert with no new comments" do
-      let(:alert) { Alert.create!(email: "matthew@openaustralia.org", address: @address, radius_meters: 2000) }
+      let(:alert) { Alert.create!(email: "matthew@openaustralia.org", address: address, radius_meters: 2000) }
       before :each do
         allow(alert).to receive(:recent_comments).and_return([])
         # Don't know why this isn't cleared out automatically
