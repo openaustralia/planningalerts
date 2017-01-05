@@ -12,7 +12,6 @@ describe Alert do
     allow(@loc).to receive(:accuracy).and_return(8)
     allow(@loc).to receive(:all).and_return([@loc])
     allow(Location).to receive(:geocode).and_return(@loc)
-    Alert.delete_all
   end
 
   it "should have no trouble creating a user with valid attributes" do
