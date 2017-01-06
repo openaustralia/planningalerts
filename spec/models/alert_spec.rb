@@ -98,23 +98,6 @@ describe Alert do
     end
   end
 
-  # TODO: Is this actually testing EmailConfirmable?
-  describe "confirm_id" do
-    it "should be a string" do
-      expect(create(:alert).confirm_id).to be_instance_of(String)
-    end
-
-    it "should not be the the same for two different users" do
-      u1 = create(:alert)
-      u2 = create(:alert)
-      expect(u1.confirm_id).not_to eq(u2.confirm_id)
-    end
-
-    it "should only have hex characters in it and be exactly twenty characters long" do
-      expect(create(:alert).confirm_id).to match(/^[0-9a-f]{20}$/)
-    end
-  end
-
   describe "confirmed" do
     it "should be false when alert is created" do
       expect(create(:alert).confirmed).to be_falsey
