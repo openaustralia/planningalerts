@@ -3,32 +3,19 @@ require 'spec_helper'
 describe Alert do
   it_behaves_like "email_confirmable"
 
-  before :each do
-    @address = "24 Bruce Road, Glenbrook, NSW"
-    @attributes = {email: "matthew@openaustralia.org", address: @address,
-      radius_meters: 200}
-    # Unless we override this elsewhere just stub the geocoder to return coordinates of address above
-    @loc = Location.new(-33.772609, 150.624263)
-    allow(@loc).to receive(:country_code).and_return("AU")
-    allow(@loc).to receive(:full_address).and_return("24 Bruce Rd, Glenbrook NSW 2773")
-    allow(@loc).to receive(:accuracy).and_return(8)
-    allow(@loc).to receive(:all).and_return([@loc])
-    allow(Location).to receive(:geocode).and_return(@loc)
-    Alert.delete_all
-  end
-
-  it "should have no trouble creating a user with valid attributes" do
-    Alert.create!(@attributes)
-  end
+  let(:address) { "24 Bruce Road, Glenbrook" }
 
   # In order to stop frustrating multiple alerts
   it "should only have one alert active for a particular street address / email address combination at one time" do
     email = "foo@foo.org"
-    u1 = Alert.create!(email: email, address: "A street address", radius_meters: 200, lat: 1.0, lng: 2.0)
-    u2 = Alert.create!(email: email, address: "A street address", radius_meters: 800, lat: 1.0, lng: 2.0)
+    existing_alert = create(:alert, email: email, address: "A street address")
+    new_alert = create(:alert, email: email, address: "A street address")
+
     alerts = Alert.where(email: email)
+
     expect(alerts.count).to eq(1)
-    expect(alerts.first.radius_meters).to eq(u2.radius_meters)
+    expect(alerts.first).to_not eql existing_alert
+    expect(alerts.first).to eql new_alert
   end
 
   it "should allow multiple alerts for different street addresses but the same email address" do
@@ -40,133 +27,94 @@ describe Alert do
 
   it "should be able to accept location information if it is already known and so not use the geocoder" do
     expect(Location).not_to receive(:geocode)
-    @attributes[:lat] = 1.0
-    @attributes[:lng] = 2.0
-    u = create(:alert, @attributes)
-    expect(u.lat).to eq(1.0)
-    expect(u.lng).to eq(2.0)
+
+    alert = create(:alert, lat: 1.0, lng: 2.0)
+
+    expect(alert.lat).to eq(1.0)
+    expect(alert.lng).to eq(2.0)
   end
 
   describe "geocoding" do
     it "should happen automatically on saving" do
-      alert = Alert.create!(@attributes)
-      expect(alert.lat).to eq(@loc.lat)
-      expect(alert.lng).to eq(@loc.lng)
-      expect(alert).to be_valid
+      alert = build(:alert, address: address, lat: nil, lng: nil)
+
+      VCR.use_cassette(:planningalerts) { alert.save! }
+
+      expect(alert.lat).to eq(-33.772607)
+      expect(alert.lng).to eq(150.624245)
     end
 
     it "should set an error on the address if there is an error on geocoding" do
       allow(Location).to receive(:geocode).and_return(double(error: "some error message", lat: nil, lng: nil, full_address: nil))
-      u = Alert.new(email: "matthew@openaustralia.org")
-      expect(u).not_to be_valid
-      expect(u.errors[:address]).to eq(["some error message"])
+      alert = build(:alert, lat: nil, lng: nil)
+      expect(alert).not_to be_valid
+      expect(alert.errors[:address]).to eq(["some error message"])
     end
 
     it "should error if there are multiple matches from the geocoder" do
       allow(Location).to receive(:geocode).and_return(double(lat: 1, lng: 2, full_address: "Bruce Rd, VIC 3885", error: nil, all: [nil, nil]))
-      u = Alert.new(address: "Bruce Road", email: "matthew@openaustralia.org")
-      expect(u).not_to be_valid
-      expect(u.errors[:address]).to eq(["isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"])
+      alert = build(:alert, address: "Bruce Road", lat: nil, lng: nil)
+      expect(alert).not_to be_valid
+      expect(alert.errors[:address]).to eq(["isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"])
     end
 
     it "should replace the address with the full resolved address obtained by geocoding" do
-      @attributes[:address] = "24 Bruce Road, Glenbrook"
-      u = Alert.new(@attributes)
-      u.save!
-      expect(u.address).to eq("24 Bruce Rd, Glenbrook NSW 2773")
-    end
-  end
+      alert = build(:alert, address: "24 Bruce Road, Glenbrook", lat: nil, lng: nil)
 
-  describe "email address" do
-    it "is not blank" do
-      @attributes[:email] = "  "
-      expect(Alert.new(@attributes)).to_not be_valid
-    end
+      VCR.use_cassette(:planningalerts) { alert.save! }
 
-    it "should be valid" do
-      @attributes[:email] = "diddle@"
-      u = Alert.new(@attributes)
-      expect(u).not_to be_valid
-      expect(u.errors[:email]).to eq(["does not appear to be a valid e-mail address"])
-    end
-
-    it "should have an '@' in it" do
-      @attributes[:email] = "diddle"
-      u = Alert.new(@attributes)
-      expect(u).not_to be_valid
-      expect(u.errors[:email]).to eq(["does not appear to be a valid e-mail address"])
+      expect(alert.address).to eq("24 Bruce Road, Glenbrook NSW 2773")
     end
   end
 
   it "should be able to store the attribute location" do
-    u = Alert.new
-    u.location = Location.new(1.0, 2.0)
-    expect(u.lat).to eq(1.0)
-    expect(u.lng).to eq(2.0)
-    expect(u.location.lat).to eq(1.0)
-    expect(u.location.lng).to eq(2.0)
+    alert = Alert.new
+    alert.location = Location.new(1.0, 2.0)
+    expect(alert.lat).to eq(1.0)
+    expect(alert.lng).to eq(2.0)
+    expect(alert.location.lat).to eq(1.0)
+    expect(alert.location.lng).to eq(2.0)
   end
 
   it "should handle location being nil" do
-    u = Alert.new
-    u.location = nil
-    expect(u.lat).to be_nil
-    expect(u.lng).to be_nil
-    expect(u.location).to be_nil
+    alert = Alert.new
+    alert.location = nil
+    expect(alert.lat).to be_nil
+    expect(alert.lng).to be_nil
+    expect(alert.location).to be_nil
   end
 
   describe "radius_meters" do
     it "should have a number" do
-      @attributes[:radius_meters] = "a"
-      u = Alert.new(@attributes)
-      expect(u).not_to be_valid
-      expect(u.errors[:radius_meters]).to eq(["isn't selected"])
+      alert = build(:alert, radius_meters: "a")
+      expect(alert).not_to be_valid
+      expect(alert.errors[:radius_meters]).to eq(["isn't selected"])
     end
 
     it "should be greater than zero" do
-      @attributes[:radius_meters] = "0"
-      u = Alert.new(@attributes)
-      expect(u).not_to be_valid
-      expect(u.errors[:radius_meters]).to eq(["isn't selected"])
-    end
-  end
-
-  describe "confirm_id" do
-    it "should be a string" do
-      u = Alert.create!(@attributes)
-      expect(u.confirm_id).to be_instance_of(String)
-    end
-
-    it "should not be the the same for two different users" do
-      u1 = Alert.create!(@attributes)
-      u2 = Alert.create!(@attributes)
-      expect(u1.confirm_id).not_to eq(u2.confirm_id)
-    end
-
-    it "should only have hex characters in it and be exactly twenty characters long" do
-      u = Alert.create!(@attributes)
-      expect(u.confirm_id).to match(/^[0-9a-f]{20}$/)
+      alert = build(:alert, radius_meters: "0")
+      expect(alert).not_to be_valid
+      expect(alert.errors[:radius_meters]).to eq(["isn't selected"])
     end
   end
 
   describe "confirmed" do
     it "should be false when alert is created" do
-      u = Alert.create!(@attributes)
-      expect(u.confirmed).to be_falsey
+      expect(create(:alert).confirmed).to be_falsey
     end
 
     it "should be able to be set to false" do
-      u = Alert.new(@attributes)
-      u.confirmed = false
-      u.save!
-      expect(u.confirmed).to eq(false)
+      alert = build(:alert)
+      alert.confirmed = false
+      alert.save!
+      expect(alert.confirmed).to eq(false)
     end
 
     it "should be able to set to true" do
-      u = Alert.new(@attributes)
-      u.confirmed = true
-      u.save!
-      expect(u.confirmed).to eq(true)
+      alert = build(:alert)
+      alert.confirmed = true
+      alert.save!
+      expect(alert.confirmed).to eq(true)
     end
   end
 
@@ -232,15 +180,15 @@ describe Alert do
 
     context "when the alert has since been unsubscribed" do
       let!(:alert) do
-        a = Timecop.freeze(Date.new(2016, 8, 24)) do
+        alert = Timecop.freeze(Date.new(2016, 8, 24)) do
           create :confirmed_alert
         end
 
         Timecop.freeze(Date.new(2016, 8, 24)) do
-          a.unsubscribe!
+          alert.unsubscribe!
         end
 
-        a
+        alert
       end
 
       it "still includes it for the day it was created" do
@@ -348,7 +296,7 @@ describe Alert do
 
   describe "recent applications for this user" do
     before :each do
-      @alert = Alert.create!(email: "matthew@openaustralia.org", address: @address, radius_meters: 2000)
+      @alert = create(:alert, email: "matthew@openaustralia.org", address: address, radius_meters: 2000)
       # Position test application around the point of the alert
       p1 = @alert.location.endpoint(0, 501) # 501 m north of alert
       p2 = @alert.location.endpoint(0, 499) # 499 m north of alert
@@ -403,22 +351,22 @@ describe Alert do
     it "should return the local government authority name" do
       expect(Geo2gov).to receive(:new).with(1.0, 2.0).and_return(double(lga_name: "Blue Mountains"))
 
-      a = create(:alert, lat: 1.0, lng: 2.0, email: "foo@bar.com", radius_meters: 200, address: "")
-      expect(a.lga_name).to eq("Blue Mountains")
+      alert = create(:alert, lat: 1.0, lng: 2.0, email: "foo@bar.com", radius_meters: 200, address: "")
+      expect(alert.lga_name).to eq("Blue Mountains")
     end
 
     it "should cache the value in the database" do
       expect(Geo2gov).to receive(:new).once.with(1.0, 2.0).and_return(double(lga_name: "Blue Mountains"))
 
-      a = create(:alert, id: 1, lat: 1.0, lng: 2.0, email: "foo@bar.com", radius_meters: 200, address: "")
-      expect(a.lga_name).to eq("Blue Mountains")
-      b = Alert.first
-      expect(b.lga_name).to eq("Blue Mountains")
+      alert = create(:alert, id: 1, lat: 1.0, lng: 2.0, email: "foo@bar.com", radius_meters: 200, address: "")
+      expect(alert.lga_name).to eq("Blue Mountains")
+
+      expect(Alert.first.lga_name).to eq("Blue Mountains")
     end
   end
 
   describe "#new_comments" do
-    let(:alert) { create(:alert, address: @address, radius_meters: 2000) }
+    let(:alert) { create(:alert, address: address, radius_meters: 2000) }
     let(:p1) { alert.location.endpoint(0, 501) } # 501 m north of alert
     let(:application) { create(:application, lat: p1.lat, lng: p1.lng, suburb: "", state: "", postcode: "") }
 
@@ -459,7 +407,7 @@ describe Alert do
   describe "#new_replies" do
     let (:alert) do
       create(:alert,
-             address: @address,
+             address: address,
              radius_meters: 2000,
              lat: 1.0,
              lng: 2.0)
@@ -473,7 +421,7 @@ describe Alert do
       application = create(:application,
                             lat: 1.0,
                             lng: 2.0,
-                            address: @address,
+                            address: address,
                             suburb: "Glenbrook",
                             state: "NSW",
                             postcode: "2773",
@@ -489,7 +437,7 @@ describe Alert do
       application = create(:application,
                             lat: 1.0,
                             lng: 2.0,
-                            address: @address,
+                            address: address,
                             suburb: "Glenbrook",
                             state: "NSW",
                             postcode: "2773",
@@ -506,12 +454,12 @@ describe Alert do
   end
 
   describe "#applications_with_new_comments" do
-    let (:alert) { create(:alert, address: @address, radius_meters: 2000, lat: 1.0, lng: 2.0) }
+    let (:alert) { create(:alert, address: address, radius_meters: 2000, lat: 1.0, lng: 2.0) }
     let (:near_application) do
       create(:application,
              lat: 1.0,
              lng: 2.0,
-             address: @address,
+             address: address,
              suburb: "Glenbrook",
              state: "NSW",
              postcode: "2773")
@@ -521,7 +469,7 @@ describe Alert do
       create(:application,
              lat: alert.location.endpoint(0, 5001).lat,
              lng: alert.location.endpoint(0, 5001).lng,
-             address: @address,
+             address: address,
              suburb: "Glenbrook",
              state: "NSW",
              postcode: "2773")
@@ -577,7 +525,7 @@ describe Alert do
   describe "#applications_with_new_replies" do
     let (:alert) do
       create(:alert,
-             address: @address,
+             address: address,
              radius_meters: 2000,
              lat: 1.0,
              lng: 2.0)
@@ -592,7 +540,7 @@ describe Alert do
         application = create(:application,
                              lat: 1.0,
                              lng: 2.0,
-                             address: @address,
+                             address: address,
                              suburb: "Glenbrook",
                              state: "NSW",
                              postcode: "2773",
@@ -611,7 +559,7 @@ describe Alert do
         application = create(:application,
                              lat: far_away.lat,
                              lng: far_away.lng,
-                             address: @address,
+                             address: address,
                              suburb: "Glenbrook",
                              state: "NSW",
                              postcode: "2773",
@@ -627,7 +575,7 @@ describe Alert do
 
   describe "#process!" do
     context "an alert with no new comments" do
-      let(:alert) { Alert.create!(email: "matthew@openaustralia.org", address: @address, radius_meters: 2000) }
+      let(:alert) { create(:alert, address: address) }
       before :each do
         allow(alert).to receive(:recent_comments).and_return([])
         # Don't know why this isn't cleared out automatically
