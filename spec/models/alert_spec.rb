@@ -67,25 +67,6 @@ describe Alert do
     end
   end
 
-  # TODO: Is this actually testing EmailConfirmable?
-  describe "email address" do
-    it "is not blank" do
-      expect(build(:alert, email: nil)).to_not be_valid
-    end
-
-    it "should be valid" do
-      alert = build(:alert, email: "diddle@")
-      expect(alert).not_to be_valid
-      expect(alert.errors[:email]).to eq(["does not appear to be a valid e-mail address"])
-    end
-
-    it "should have an '@' in it" do
-      alert = build(:alert, email: "diddle")
-      expect(alert).not_to be_valid
-      expect(alert.errors[:email]).to eq(["does not appear to be a valid e-mail address"])
-    end
-  end
-
   it "should be able to store the attribute location" do
     alert = Alert.new
     alert.location = Location.new(1.0, 2.0)
