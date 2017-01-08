@@ -93,6 +93,37 @@ feature "Sign up for alerts" do
     end
   end
 
+  context "when there is already an unconfirmed alert for the address" do
+    around do |test|
+      Timecop.freeze(DateTime.new(2017, 1, 4, 14, 35)) { test.run }
+    end
+
+    given!(:preexisting_alert) do
+      create(:unconfirmed_alert, address: "24 Bruce Rd, Glenbrook NSW 2773",
+                                 email: "example@example.com",
+                                 created_at: 3.days.ago,
+                                 updated_at: 3.days.ago)
+    end
+
+    scenario "successfully" do
+      visit '/alerts/signup'
+
+      fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
+      fill_in("Enter your email address", with: "example@example.com")
+      click_button("Create alert")
+
+      expect(page).to have_content("Now check your email")
+
+      confirm_alert_in_email
+
+      expect(page).to have_content("your alert has been activated")
+      expect(page).to have_content("24 Bruce Rd, Glenbrook NSW 2773")
+
+      expect(preexisting_alert.reload.created_at).to eq 3.days.ago
+      expect(preexisting_alert.reload.updated_at).to eq Time.current
+    end
+  end
+
   def confirm_alert_in_email
     open_email("example@example.com")
     expect(current_email).to have_subject("Please confirm your planning alert")

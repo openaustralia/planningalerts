@@ -12,10 +12,21 @@ class AlertsController < ApplicationController
   end
 
   def create
-    @address = params[:alert][:address]
-    @alert = Alert.new(address: @address, email: params[:alert][:email], radius_meters: zone_sizes['l'], theme: @theme)
-    if !@alert.save
-      render 'new'
+    @alert = Alert.new(
+      email: params[:alert][:email],
+      address: params[:alert][:address],
+      radius_meters: zone_sizes['l'],
+      theme: @theme
+    )
+    @alert.geocode_from_address
+
+    if Alert.find_by(email: @alert.email, address: @alert.address, confirmed: false)
+      @alert = Alert.find_by(email: @alert.email, address: @alert.address)
+      @alert.send_confirmation_email
+    else
+      if !@alert.save
+        render 'new'
+      end
     end
   end
 
