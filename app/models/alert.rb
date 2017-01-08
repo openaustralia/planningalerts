@@ -252,15 +252,11 @@ class Alert < ActiveRecord::Base
   def geocode_from_address
     # Only geocode if location hasn't been set
     if lat.nil? && lng.nil?
-      geocode_result = Location.geocode(address)
+      @geocode_result = Location.geocode(address)
 
-      if geocode_result.error
-        self.errors.add(:address, geocode_result.error)
-      elsif geocode_result.all.size > 1
-        self.errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{geocode_result.full_address}")
-      else
-        self.location = geocode_result
-        self.address = geocode_result.full_address
+      unless @geocode_result.error || @geocode_result.all.many?
+        self.location = @geocode_result
+        self.address = @geocode_result.full_address
       end
     end
   end

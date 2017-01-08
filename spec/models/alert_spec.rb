@@ -5,6 +5,54 @@ describe Alert do
 
   let(:address) { "24 Bruce Road, Glenbrook" }
 
+  context "when the geocoder doesn't need to run" do
+    let(:alert) { build(:alert, address: "foo", lat: 1, lng: 2) }
+
+    it "doesn't validate the address" do
+      expect(alert).to be_valid
+    end
+  end
+
+  context "when the geocoder does need to run" do
+    let(:alert) do
+      build(:alert, address: "Bruce Rd", lat: nil, lng: nil)
+    end
+
+    it "is invalid if there was an error geocoding the address" do
+      allow(Location).to receive(:geocode).and_return(
+        double(
+          error: "some error message",
+          lat: nil,
+          lng: nil,
+          full_address: nil
+        )
+      )
+
+      alert.save
+
+      expect(alert).to be_invalid
+      expect(alert.errors[:address]).to eq(["some error message"])
+    end
+
+    it "is invalid if the geocoder found multiple locations for the address" do
+      allow(Location).to receive(:geocode).and_return(
+        double(
+          lat: 1,
+          lng: 2,
+          full_address: "Bruce Rd, VIC 3885",
+          error: nil,
+          all: [double(full_address: "Bruce Rd, VIC 3885"),
+                double(full_address: "Bruce Rd, NSW 2042")]
+        )
+      )
+
+      alert.save
+
+      expect(alert).not_to be_valid
+      expect(alert.errors[:address]).to eq(["isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"])
+    end
+  end
+
   # In order to stop frustrating multiple alerts
   it "should only have one alert active for a particular street address / email address combination at one time" do
     email = "foo@foo.org"
@@ -42,20 +90,6 @@ describe Alert do
 
       expect(alert.lat).to eq(-33.772607)
       expect(alert.lng).to eq(150.624245)
-    end
-
-    it "should set an error on the address if there is an error on geocoding" do
-      allow(Location).to receive(:geocode).and_return(double(error: "some error message", lat: nil, lng: nil, full_address: nil))
-      alert = build(:alert, lat: nil, lng: nil)
-      expect(alert).not_to be_valid
-      expect(alert.errors[:address]).to eq(["some error message"])
-    end
-
-    it "should error if there are multiple matches from the geocoder" do
-      allow(Location).to receive(:geocode).and_return(double(lat: 1, lng: 2, full_address: "Bruce Rd, VIC 3885", error: nil, all: [nil, nil]))
-      alert = build(:alert, address: "Bruce Road", lat: nil, lng: nil)
-      expect(alert).not_to be_valid
-      expect(alert.errors[:address]).to eq(["isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"])
     end
 
     it "should replace the address with the full resolved address obtained by geocoding" do
@@ -293,28 +327,6 @@ describe Alert do
 
         expect(alert.lat).to eq(-33.772607)
         expect(alert.lng).to eq(150.624245)
-      end
-
-      it "sets an error on the alert if there is an geocoding error" do
-        allow(Location).to receive(:geocode).and_return(double(error: "some error message", lat: nil, lng: nil, full_address: nil))
-
-        alert = build(:alert, address: original_address, lat: nil, lng: nil)
-
-        alert.geocode_from_address
-
-        expect(alert.errors).not_to be nil
-        expect(alert.errors[:address]).to eq(["some error message"])
-      end
-
-      it "should error if there are multiple matches from the geocoder" do
-        allow(Location).to receive(:geocode).and_return(double(lat: 1, lng: 2, full_address: "Bruce Rd, VIC 3885", error: nil, all: [nil, nil]))
-
-        alert = build(:alert, address: "Bruce Road", lat: nil, lng: nil)
-
-        alert.geocode_from_address
-
-        expect(alert.errors).not_to be nil
-        expect(alert.errors[:address]).to eq(["isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"])
       end
     end
   end
