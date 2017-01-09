@@ -53,26 +53,6 @@ describe Alert do
     end
   end
 
-  # In order to stop frustrating multiple alerts
-  it "should only have one alert active for a particular street address / email address combination at one time" do
-    email = "foo@foo.org"
-    existing_alert = create(:alert, email: email, address: "A street address")
-    new_alert = create(:alert, email: email, address: "A street address")
-
-    alerts = Alert.where(email: email)
-
-    expect(alerts.count).to eq(1)
-    expect(alerts.first).to_not eql existing_alert
-    expect(alerts.first).to eql new_alert
-  end
-
-  it "should allow multiple alerts for different street addresses but the same email address" do
-    email = "foo@foo.org"
-    create(:alert, email: email, address: "A street address", radius_meters: 200, lat: 1.0, lng: 2.0)
-    create(:alert, email: email, address: "Another street address", radius_meters: 800, lat: 1.0, lng: 2.0)
-    expect(Alert.where(email: email).count).to eq(2)
-  end
-
   it "should be able to accept location information if it is already known and so not use the geocoder" do
     expect(Location).not_to receive(:geocode)
 

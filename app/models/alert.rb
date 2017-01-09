@@ -5,7 +5,6 @@ class Alert < ActiveRecord::Base
   validate :validate_address
 
   before_validation :geocode
-  before_create :remove_other_alerts_for_this_address
   include EmailConfirmable
 
   attr_writer :address_for_placeholder
@@ -262,10 +261,6 @@ class Alert < ActiveRecord::Base
   end
 
   private
-
-  def remove_other_alerts_for_this_address
-    Alert.delete_all(email: email, address: address)
-  end
 
   def geocode
     # Only geocode if location hasn't been set
