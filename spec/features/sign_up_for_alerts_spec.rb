@@ -30,6 +30,17 @@ feature "Sign up for alerts" do
     ).to_not be_nil
   end
 
+  scenario "unsuccessfully with an invalid address" do
+    visit '/alerts/signup'
+
+    fill_in("Enter a street address", with: "Bruce Rd")
+    fill_in("Enter your email address", with: "example@example.com")
+
+    click_button("Create alert")
+
+    expect(page).to have_content("Please enter a full street address, including suburb and state, e.g. Bruce Rd, Millmerran QLD 4357")
+  end
+
   context "via an application page" do
     given(:application) do
       create(:application, address: "24 Bruce Rd, Glenbrook NSW 2773")
