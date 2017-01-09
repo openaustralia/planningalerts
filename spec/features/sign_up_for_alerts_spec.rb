@@ -143,7 +143,7 @@ feature "Sign up for alerts" do
                                updated_at: 3.days.ago)
     end
 
-    scenario "see the confirmation page, so we don't leak information, but send a notice about the signup attempt" do
+    scenario "see the confirmation page, so we don't leak information, but also get a notice about the signup attempt" do
       visit '/alerts/signup'
 
       fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
