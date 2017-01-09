@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170109002546) do
+ActiveRecord::Schema.define(version: 20170109005050) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   limit: 255,   null: false
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20170109002546) do
     t.float    "lat",             limit: 24,                      null: false
     t.float    "lng",             limit: 24,                      null: false
     t.string   "confirm_id",      limit: 20
-    t.boolean  "confirmed",                   default: false
+    t.boolean  "confirmed",                   default: false,     null: false
     t.integer  "radius_meters",   limit: 4,                       null: false
     t.string   "lga_name",        limit: 50
     t.datetime "created_at"
