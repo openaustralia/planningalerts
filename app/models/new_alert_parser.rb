@@ -12,9 +12,7 @@ class NewAlertParser
       if preexisting_matching_alert.confirmed?
         nil
       else
-        preexisting_alert = preexisting_matching_unconfirmed_alert
-
-        preexisting_alert.send_confirmation_email
+        preexisting_matching_alert.send_confirmation_email
 
         nil
       end
