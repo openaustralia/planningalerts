@@ -9,7 +9,7 @@ describe NewAlertParser do
     end
 
     context "when there is no matching pre-existing Alert" do
-      it "returns the original alert geocoded" do
+      it "returns the original alert" do
         alert = build(:alert, id: 7, address: "24 Bruce Rd, Glenbrook", lat: nil, lng: nil)
 
         parser_result = NewAlertParser.new(alert).parse
