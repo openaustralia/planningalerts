@@ -135,6 +135,27 @@ feature "Sign up for alerts" do
     end
   end
 
+  context "when there is already an confirmed alert for the address" do
+    given!(:preexisting_alert) do
+      create(:confirmed_alert, address: "24 Bruce Rd, Glenbrook NSW 2773",
+                               email: "jenny@email.org",
+                               created_at: 3.days.ago,
+                               updated_at: 3.days.ago)
+    end
+
+    scenario "see the confiration page, so we don't leak information, but nothing happens" do
+      visit '/alerts/signup'
+
+      fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
+      fill_in("Enter your email address", with: "jenny@email.org")
+      click_button("Create alert")
+
+      expect(page).to have_content("Now check your email")
+
+      mailbox_for("jenny@email.org").empty?
+    end
+  end
+
   def confirm_alert_in_email
     open_email("example@example.com")
     expect(current_email).to have_subject("Please confirm your planning alert")

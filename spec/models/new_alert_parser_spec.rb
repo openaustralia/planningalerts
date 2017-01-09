@@ -69,5 +69,36 @@ describe NewAlertParser do
         expect(parser_result).to be nil
       end
     end
+
+    context "when there is a matching confirmed alert" do
+      let!(:preexisting_alert) do
+        create(
+          :confirmed_alert,
+          address: "24 Bruce Rd, Glenbrook NSW 2773",
+          email: "jenny@example.com",
+          created_at: 3.days.ago,
+          updated_at: 3.days.ago
+        )
+      end
+
+      it "returns nil" do
+        new_alert = build(
+          :alert,
+          email: "jenny@example.com",
+          address: "24 Bruce Rd, Glenbrook",
+          lat: nil,
+          lng: nil
+        )
+
+        parser_result = NewAlertParser.new(new_alert).parse
+
+        expect(parser_result).to be nil
+      end
+
+      # it "sends a helpful email to the alert’s email address" do
+      #   pending "add this behaviour"
+      #   fail
+      # end
+    end
   end
 end
