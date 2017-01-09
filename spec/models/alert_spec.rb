@@ -100,7 +100,7 @@ describe Alert do
 
   describe "confirmed" do
     it "should be false when alert is created" do
-      expect(create(:alert).confirmed).to be_falsey
+      expect(create(:alert).confirmed).to be false
     end
 
     it "should be able to be set to false" do
