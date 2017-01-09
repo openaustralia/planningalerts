@@ -77,7 +77,8 @@ describe NewAlertParser do
           address: "24 Bruce Rd, Glenbrook NSW 2773",
           email: "jenny@example.com",
           created_at: 3.days.ago,
-          updated_at: 3.days.ago
+          updated_at: 3.days.ago,
+          theme: "default"
         )
       end
 
@@ -95,10 +96,19 @@ describe NewAlertParser do
         expect(parser_result).to be nil
       end
 
-      # it "sends a helpful email to the alert’s email address" do
-      #   pending "add this behaviour"
-      #   fail
-      # end
+      it "sends a helpful email to the alert’s email address" do
+        new_alert = build(
+          :alert,
+          email: "jenny@example.com",
+          address: "24 Bruce Rd, Glenbrook",
+          lat: nil,
+          lng: nil
+        )
+
+        expect(AlertNotifier).to receive(:new_signup_attempt_notice).with(preexisting_alert).and_call_original
+
+        NewAlertParser.new(new_alert).parse
+      end
 
       context "but it is unsubscribed" do
         before do

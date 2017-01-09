@@ -143,7 +143,7 @@ feature "Sign up for alerts" do
                                updated_at: 3.days.ago)
     end
 
-    scenario "see the confiration page, so we don't leak information, but nothing happens" do
+    scenario "see the confiration page, so we don't leak information, but send a notice about the signup attempt" do
       visit '/alerts/signup'
 
       fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
@@ -152,7 +152,11 @@ feature "Sign up for alerts" do
 
       expect(page).to have_content("Now check your email")
 
-      mailbox_for("jenny@email.org").empty?
+      open_last_email_for("jenny@email.org")
+
+      expect(current_email.default_part_body.to_s).to have_content(
+        "We just received a new request to send PlanningAlerts for 24 Bruce Rd, Glenbrook NSW 2773 to your email address."
+      )
     end
 
     context "but it is unsubscribed" do

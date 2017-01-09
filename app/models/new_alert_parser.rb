@@ -18,6 +18,10 @@ class NewAlertParser
       if preexisting_matching_alert.unsubscribed?
         alert
       else
+        AlertNotifier.new_signup_attempt_notice(
+          preexisting_matching_alert
+        ).deliver_later
+
         nil
       end
     else
