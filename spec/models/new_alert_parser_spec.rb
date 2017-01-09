@@ -99,6 +99,27 @@ describe NewAlertParser do
       #   pending "add this behaviour"
       #   fail
       # end
+
+      context "but it is unsubscribed" do
+        before do
+          preexisting_alert.unsubscribe!
+        end
+
+        it "returns the new alert" do
+          new_alert = build(
+            :alert,
+            id: 9,
+            email: "jenny@example.com",
+            address: "24 Bruce Rd, Glenbrook",
+            lat: nil,
+            lng: nil
+          )
+
+          parser_result = NewAlertParser.new(new_alert).parse
+
+          expect(parser_result.id).to eq 9
+        end
+      end
     end
   end
 end

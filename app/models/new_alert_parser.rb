@@ -10,7 +10,11 @@ class NewAlertParser
 
     if preexisting_matching_alert
       if preexisting_matching_alert.confirmed?
-        nil
+        if preexisting_matching_alert.unsubscribed?
+          alert
+        else
+          nil
+        end
       else
         preexisting_matching_alert.send_confirmation_email
 

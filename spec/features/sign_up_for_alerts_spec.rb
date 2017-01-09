@@ -154,6 +154,29 @@ feature "Sign up for alerts" do
 
       mailbox_for("jenny@email.org").empty?
     end
+
+    context "but it is unsubscribed" do
+      before do
+        preexisting_alert.unsubscribe!
+      end
+
+      scenario "successfully" do
+        visit '/alerts/signup'
+
+        fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
+        fill_in("Enter your email address", with: "jenny@email.org")
+        click_button("Create alert")
+
+        expect(page).to have_content("Now check your email")
+
+        open_email("jenny@email.org")
+
+        click_first_link_in_email
+
+        expect(page).to have_content("your alert has been activated")
+        expect(page).to have_content("24 Bruce Rd, Glenbrook NSW 2773")
+      end
+    end
   end
 
   def confirm_alert_in_email
