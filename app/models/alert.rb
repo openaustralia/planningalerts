@@ -61,6 +61,10 @@ class Alert < ActiveRecord::Base
     end.count
   end
 
+  def geocoded?
+    location.present?
+  end
+
   def unsubscribe!
     update!(unsubscribed: true, unsubscribed_at: Time.now)
   end
@@ -249,8 +253,7 @@ class Alert < ActiveRecord::Base
   end
 
   def geocode_from_address
-    # Only geocode if location hasn't been set
-    if lat.nil? && lng.nil?
+    unless geocoded?
       @geocode_result = Location.geocode(address)
 
       unless @geocode_result.error || @geocode_result.all.many?

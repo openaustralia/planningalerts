@@ -311,6 +311,11 @@ describe Alert do
     end
   end
 
+  describe "#geocoded?" do
+    it { expect(build(:alert, address: "foo", lat: nil, lng: nil).geocoded?).to be false }
+    it { expect(build(:alert, address: "foo", lat: 1, lng: 2).geocoded?).to be true }
+  end
+
   describe "#unsubscribe!" do
     let(:alert) { create :alert }
 
