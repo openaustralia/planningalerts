@@ -46,11 +46,11 @@ describe NewAlertParser do
           email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
           lat: nil,
-          lng: nil
+          lng: nil,
+          theme: "default"
         )
 
-        # FIXME: This isn't testing that the specific instance has received this message
-        expect_any_instance_of(Alert).to receive(:send_confirmation_email)
+        expect(ConfirmationMailer).to receive(:confirm).with("default", preexisting_alert).and_call_original
 
         NewAlertParser.new(new_alert).parse
       end
