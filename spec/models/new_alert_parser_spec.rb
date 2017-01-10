@@ -41,6 +41,7 @@ describe NewAlertParser do
       end
 
       it "resends the confirmation email for the pre-existing alert" do
+        allow(ConfirmationMailer).to receive(:confirm).with("default", preexisting_alert).and_call_original
         new_alert = build(
           :alert,
           email: "jenny@example.com",
@@ -50,9 +51,9 @@ describe NewAlertParser do
           theme: "default"
         )
 
-        expect(ConfirmationMailer).to receive(:confirm).with("default", preexisting_alert).and_call_original
-
         NewAlertParser.new(new_alert).parse
+
+        expect(ConfirmationMailer).to have_received(:confirm).with("default", preexisting_alert)
       end
 
       it "returns nil" do
@@ -97,6 +98,7 @@ describe NewAlertParser do
       end
 
       it "sends a helpful email to the alert’s email address" do
+        allow(AlertNotifier).to receive(:new_signup_attempt_notice).with(preexisting_alert).and_call_original
         new_alert = build(
           :alert,
           email: "jenny@example.com",
@@ -105,9 +107,9 @@ describe NewAlertParser do
           lng: nil
         )
 
-        expect(AlertNotifier).to receive(:new_signup_attempt_notice).with(preexisting_alert).and_call_original
-
         NewAlertParser.new(new_alert).parse
+
+        expect(AlertNotifier).to have_received(:new_signup_attempt_notice).with(preexisting_alert)
       end
 
       context "but it is unsubscribed" do
