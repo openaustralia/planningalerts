@@ -305,17 +305,37 @@ describe Alert do
 
     context "when the lat and lng are nil" do
       it "sets the address to the full address returned from the geocoder" do
+        allow(Location).to receive(:geocode).and_return(
+          double(
+            lat: 3,
+            lng: 4,
+            full_address: "24 Bruce Road, Glenbrook NSW 2773",
+            error: nil,
+            all: []
+          )
+        )
+
         alert = build(:alert, address: original_address, lat: nil, lng: nil)
 
-        VCR.use_cassette(:planningalerts) { alert.geocode_from_address }
+        alert.geocode_from_address
 
         expect(alert.address).to eq "24 Bruce Road, Glenbrook NSW 2773"
       end
 
       it "sets the lat and lng" do
+        allow(Location).to receive(:geocode).and_return(
+          double(
+            lat: -33.772607,
+            lng: 150.624245,
+            full_address: "24 Bruce Rd, Glenbrook, VIC 3885",
+            error: nil,
+            all: []
+          )
+        )
+
         alert = build(:alert, address: original_address, lat: nil, lng: nil)
 
-        VCR.use_cassette(:planningalerts) { alert.geocode_from_address }
+        alert.geocode_from_address
 
         expect(alert.lat).to eq(-33.772607)
         expect(alert.lng).to eq(150.624245)
