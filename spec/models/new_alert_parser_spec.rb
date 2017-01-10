@@ -26,6 +26,7 @@ describe NewAlertParser do
         parser_result = NewAlertParser.new(alert).parse
 
         expect(parser_result.address).to eq "24 Bruce Rd, Glenbrook NSW 2773"
+        expect(parser_result.geocoded?).to be true
       end
     end
 
