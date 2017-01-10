@@ -14,15 +14,26 @@ class NewAlertParser
   private
 
   def parse_for_preexisting_alert_states
-    if preexisting_matching_alert.confirmed?
-      if preexisting_matching_alert.unsubscribed?
-        alert
-      else
-        send_notice_to_existing_active_alert_owner_and_return
-      end
-    else
+    case
+    when preexisting_alert_is_confirmed_but_unsubscribed?
+      alert
+    when preexisting_alert_is_confirmed_and_subscribed?
+      send_notice_to_existing_active_alert_owner_and_return
+    when preexisting_alert_is_unconfirmed?
       resend_original_confirmation_email_and_return
     end
+  end
+
+  def preexisting_alert_is_confirmed_but_unsubscribed?
+    preexisting_matching_alert.confirmed? && preexisting_matching_alert.unsubscribed?
+  end
+
+  def preexisting_alert_is_confirmed_and_subscribed?
+    preexisting_matching_alert.confirmed? && !preexisting_matching_alert.unsubscribed?
+  end
+
+  def preexisting_alert_is_unconfirmed?
+    !preexisting_matching_alert.confirmed?
   end
 
   def preexisting_matching_alert
