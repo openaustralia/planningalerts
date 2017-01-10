@@ -284,10 +284,22 @@ describe Alert do
         build(:alert, address: original_address, lat: 1, lng: 2)
       end
 
-      it "does not update the address" do
+      it "it regeolocates the location" do
+        allow(Location).to receive(:geocode).and_return(
+          double(
+            lat: 3,
+            lng: 4,
+            full_address: "24 Bruce Rd, Glenbrook, VIC 3885",
+            error: nil,
+            all: []
+          )
+        )
+
         alert.geocode_from_address
 
-        expect(alert.address).to eq original_address
+        expect(alert.address).to eq "24 Bruce Rd, Glenbrook, VIC 3885"
+        expect(alert.lat).to eql 3.0
+        expect(alert.lng).to eql 4.0
       end
     end
 

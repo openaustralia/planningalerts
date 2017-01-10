@@ -10,7 +10,7 @@ describe NewAlertParser do
 
     context "when there is no matching pre-existing Alert" do
       it "returns the original alert" do
-        alert = build(:alert)
+        alert = build(:alert, address: "24 Bruce Rd, Glenbrook")
 
         parser_result = NewAlertParser.new(alert).parse
 
