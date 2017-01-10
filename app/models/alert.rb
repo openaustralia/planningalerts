@@ -4,7 +4,7 @@ class Alert < ActiveRecord::Base
   validates_numericality_of :radius_meters, greater_than: 0, message: "isn't selected"
   validate :validate_address
 
-  before_validation :geocode
+  before_validation :geocode_from_address
   include EmailConfirmable
 
   attr_writer :address_for_placeholder
@@ -261,15 +261,6 @@ class Alert < ActiveRecord::Base
   end
 
   private
-
-  def geocode
-    # Only geocode if location hasn't been set
-    if self.lat.nil? && self.lng.nil?
-      @geocode_result = Location.geocode(address)
-      self.location = @geocode_result
-      self.address = @geocode_result.full_address
-    end
-  end
 
   def validate_address
     # Only validate the street address if we used the geocoder
