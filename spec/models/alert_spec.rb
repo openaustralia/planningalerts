@@ -313,6 +313,47 @@ describe Alert do
       expect(alert.lat).to eq(-33.772607)
       expect(alert.lng).to eq(150.624245)
     end
+
+    context "when there is an error geocoding" do
+      it "doesn't update any values" do
+        allow(Location).to receive(:geocode).and_return(
+          double(
+            error: "some error message",
+            lat: nil,
+            lng: nil,
+            full_address: nil
+          )
+        )
+
+        alert = build(:alert, address: original_address, lat: nil, lng: nil)
+
+        alert.geocode_from_address
+
+        expect(alert.address).to eq original_address
+        expect(alert.location).to eq nil
+      end
+    end
+
+    context "when the geocoder finds multiple locations" do
+      it "doesn't update any values" do
+        allow(Location).to receive(:geocode).and_return(
+          double(
+            lat: 1,
+            lng: 2,
+            full_address: "Bruce Rd, VIC 3885",
+            error: nil,
+            all: [double(full_address: "Bruce Rd, VIC 3885"),
+                  double(full_address: "Bruce Rd, NSW 2042")]
+          )
+        )
+        alert = build(:alert, address: original_address, lat: nil, lng: nil)
+
+        alert.geocode_from_address
+
+        expect(alert.address).to eq original_address
+        expect(alert.location).to eq nil
+      end
+    end
   end
 
   describe "#geocoded?" do
