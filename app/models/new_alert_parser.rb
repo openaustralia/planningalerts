@@ -18,20 +18,28 @@ class NewAlertParser
       if preexisting_matching_alert.unsubscribed?
         alert
       else
-        AlertNotifier.new_signup_attempt_notice(
-          preexisting_matching_alert
-        ).deliver_later
-
-        nil
+        send_notice_to_existing_active_alert_owner_and_return
       end
     else
-      preexisting_matching_alert.send_confirmation_email
-
-      nil
+      resend_original_confirmation_email_and_return
     end
   end
 
   def preexisting_matching_alert
     Alert.find_by(email: alert.email, address: alert.address)
+  end
+
+  def send_notice_to_existing_active_alert_owner_and_return
+    AlertNotifier.new_signup_attempt_notice(
+      preexisting_matching_alert
+    ).deliver_later
+
+    return
+  end
+
+  def resend_original_confirmation_email_and_return
+    preexisting_matching_alert.send_confirmation_email
+
+    return
   end
 end
