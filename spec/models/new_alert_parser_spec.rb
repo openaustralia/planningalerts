@@ -14,7 +14,7 @@ describe NewAlertParser do
 
         parser_result = NewAlertParser.new(alert).parse
 
-        expect(parser_result.id).to eq 7
+        expect(parser_result).to eql alert
       end
 
       it "geocodes the alert" do
