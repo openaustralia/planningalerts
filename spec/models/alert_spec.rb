@@ -19,28 +19,13 @@ describe Alert do
     end
 
     it "is valid when the geocoder returns no errors" do
-      allow(Location).to receive(:geocode).and_return(
-        double(
-          lat: -33.772607,
-          lng: 150.624245,
-          full_address: "24 Bruce Rd, Glenbrook, VIC 3885",
-          error: nil,
-          all: []
-        )
-      )
+      mock_geocoder_valid_address_response
 
       expect(alert).to be_valid
     end
 
     it "is invalid if there was an error geocoding the address" do
-      allow(Location).to receive(:geocode).and_return(
-        double(
-          error: "some error message",
-          lat: nil,
-          lng: nil,
-          full_address: nil
-        )
-      )
+      mock_geocoder_error_response
 
       alert.save
 
@@ -49,16 +34,7 @@ describe Alert do
     end
 
     it "is invalid if the geocoder found multiple locations for the address" do
-      allow(Location).to receive(:geocode).and_return(
-        double(
-          lat: 1,
-          lng: 2,
-          full_address: "Bruce Rd, VIC 3885",
-          error: nil,
-          all: [double(full_address: "Bruce Rd, VIC 3885"),
-                double(full_address: "Bruce Rd, NSW 2042")]
-        )
-      )
+      mock_geocoder_multiple_locations_response
 
       alert.save
 
@@ -294,32 +270,16 @@ describe Alert do
     let(:original_address) { "24 Bruce Road, Glenbrook" }
 
     it "sets the address to the full address returned from the geocoder" do
-      allow(Location).to receive(:geocode).and_return(
-        double(
-          lat: 3,
-          lng: 4,
-          full_address: "24 Bruce Road, Glenbrook NSW 2773",
-          error: nil,
-          all: []
-        )
-      )
+      mock_geocoder_valid_address_response
       alert = build(:alert, address: original_address, lat: nil, lng: nil)
 
       alert.geocode_from_address
 
-      expect(alert.address).to eq "24 Bruce Road, Glenbrook NSW 2773"
+      expect(alert.address).to eq "24 Bruce Rd, Glenbrook, VIC 3885"
     end
 
     it "sets the lat and lng" do
-      allow(Location).to receive(:geocode).and_return(
-        double(
-          lat: -33.772607,
-          lng: 150.624245,
-          full_address: "24 Bruce Rd, Glenbrook, VIC 3885",
-          error: nil,
-          all: []
-        )
-      )
+      mock_geocoder_valid_address_response
       alert = build(:alert, address: original_address, lat: nil, lng: nil)
 
       alert.geocode_from_address
@@ -330,14 +290,7 @@ describe Alert do
 
     context "when there is an error geocoding" do
       it "doesn't update any values" do
-        allow(Location).to receive(:geocode).and_return(
-          double(
-            error: "some error message",
-            lat: nil,
-            lng: nil,
-            full_address: nil
-          )
-        )
+        mock_geocoder_error_response
 
         alert = build(:alert, address: original_address, lat: nil, lng: nil)
 
@@ -350,16 +303,7 @@ describe Alert do
 
     context "when the geocoder finds multiple locations" do
       it "doesn't update any values" do
-        allow(Location).to receive(:geocode).and_return(
-          double(
-            lat: 1,
-            lng: 2,
-            full_address: "Bruce Rd, VIC 3885",
-            error: nil,
-            all: [double(full_address: "Bruce Rd, VIC 3885"),
-                  double(full_address: "Bruce Rd, NSW 2042")]
-          )
-        )
+        mock_geocoder_multiple_locations_response
         alert = build(:alert, address: original_address, lat: nil, lng: nil)
 
         alert.geocode_from_address
