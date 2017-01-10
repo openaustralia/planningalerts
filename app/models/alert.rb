@@ -270,7 +270,7 @@ class Alert < ActiveRecord::Base
     if @geocode_result
       if @geocode_result.error
         errors.add(:address, @geocode_result.error)
-      elsif @geocode_result.all.size > 1
+      elsif @geocode_result.all.many?
         errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
       end
     end
