@@ -26905,4 +26905,1340 @@ http_interactions:
         }
     http_version: 
   recorded_at: Thu, 12 May 2016 05:09:36 GMT
-recorded_with: VCR 2.5.0
+- request:
+    method: get
+    uri: http://maps.google.com/maps/api/geocode/json?address=Bruce%20Rd&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 09 Jan 2017 03:36:53 GMT
+      Expires:
+      - Tue, 10 Jan 2017 03:36:53 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - '*'
+      Server:
+      - mafe
+      Content-Length:
+      - '1818'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Mount Martha",
+                       "short_name" : "Mount Martha",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Mornington Peninsula Shire",
+                       "short_name" : "Mornington Peninsula",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Victoria",
+                       "short_name" : "VIC",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "3934",
+                       "short_name" : "3934",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Mount Martha VIC 3934, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -38.296238,
+                          "lng" : 145.0312444
+                       },
+                       "southwest" : {
+                          "lat" : -38.304894,
+                          "lng" : 144.9940619
+                       }
+                    },
+                    "location" : {
+                       "lat" : -38.3025233,
+                       "lng" : 145.0123317
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -38.296238,
+                          "lng" : 145.0312444
+                       },
+                       "southwest" : {
+                          "lat" : -38.304894,
+                          "lng" : 144.9940619
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJ5cHH8SbF1WoRAx23sdZonhM",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Riverton",
+                       "short_name" : "Riverton",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Clare and Gilbert Valleys Council",
+                       "short_name" : "Clare and Gilbert Valleys",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "South Australia",
+                       "short_name" : "SA",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "5412",
+                       "short_name" : "5412",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Riverton SA 5412, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -34.1303714,
+                          "lng" : 138.8358855
+                       },
+                       "southwest" : {
+                          "lat" : -34.16475399999999,
+                          "lng" : 138.7509152
+                       }
+                    },
+                    "location" : {
+                       "lat" : -34.1547389,
+                       "lng" : 138.8118674
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -34.1303714,
+                          "lng" : 138.8358855
+                       },
+                       "southwest" : {
+                          "lat" : -34.16475399999999,
+                          "lng" : 138.7509152
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJhR1MB4eGuWoRn1XBfYMYFVs",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Taldra",
+                       "short_name" : "Taldra",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "District Council of Loxton Waikerie",
+                       "short_name" : "DC of Loxton Waikerie",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "South Australia",
+                       "short_name" : "SA",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "5311",
+                       "short_name" : "5311",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Taldra SA 5311, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -34.3232233,
+                          "lng" : 140.8630602
+                       },
+                       "southwest" : {
+                          "lat" : -34.4444632,
+                          "lng" : 140.8363832
+                       }
+                    },
+                    "location" : {
+                       "lat" : -34.3821106,
+                       "lng" : 140.8376694
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -34.3232233,
+                          "lng" : 140.8630602
+                       },
+                       "southwest" : {
+                          "lat" : -34.4444632,
+                          "lng" : 140.8363832
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJzwWx0TfFxmoR5EvcTF8SjDk",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "The Regional Council of Goyder",
+                       "short_name" : "Goyder",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "South Australia",
+                       "short_name" : "SA",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "5417",
+                       "short_name" : "5417",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, South Australia 5417, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -33.6827756,
+                          "lng" : 139.0941389
+                       },
+                       "southwest" : {
+                          "lat" : -33.6928132,
+                          "lng" : 138.9896481
+                       }
+                    },
+                    "location" : {
+                       "lat" : -33.690277,
+                       "lng" : 139.0441222
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.6827756,
+                          "lng" : 139.0941389
+                       },
+                       "southwest" : {
+                          "lat" : -33.6928132,
+                          "lng" : 138.9896481
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJg4Gy8v03uWoRq_FTivJB9ZE",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Mount Charles",
+                       "short_name" : "Mount Charles",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "District Council of Tatiara",
+                       "short_name" : "DC of Tatiara",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "South Australia",
+                       "short_name" : "SA",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "5267",
+                       "short_name" : "5267",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Mount Charles SA 5267, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -36.0505877,
+                          "lng" : 140.2531167
+                       },
+                       "southwest" : {
+                          "lat" : -36.1089447,
+                          "lng" : 140.2529291
+                       }
+                    },
+                    "location" : {
+                       "lat" : -36.0727219,
+                       "lng" : 140.2530571
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -36.0505877,
+                          "lng" : 140.2543718802915
+                       },
+                       "southwest" : {
+                          "lat" : -36.1089447,
+                          "lng" : 140.2516739197085
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJAeeMAT3CyWoR9jTA4om_4A4",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Bruce",
+                       "short_name" : "Bruce",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "South Australia",
+                       "short_name" : "SA",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "5433",
+                       "short_name" : "5433",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Bruce SA 5433, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -32.44738299999999,
+                          "lng" : 138.1886968
+                       },
+                       "southwest" : {
+                          "lat" : -32.4759258,
+                          "lng" : 138.13094
+                       }
+                    },
+                    "location" : {
+                       "lat" : -32.4640303,
+                       "lng" : 138.1578209
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -32.44738299999999,
+                          "lng" : 138.1886968
+                       },
+                       "southwest" : {
+                          "lat" : -32.4759258,
+                          "lng" : 138.13094
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJr3tJhUqvvWoRnZK7u8oZXy8",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Manmanning",
+                       "short_name" : "Manmanning",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Shire of Dowerin",
+                       "short_name" : "Dowerin",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Western Australia",
+                       "short_name" : "WA",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "6465",
+                       "short_name" : "6465",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Manmanning WA 6465, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -30.8645424,
+                          "lng" : 117.1714087
+                       },
+                       "southwest" : {
+                          "lat" : -30.9125385,
+                          "lng" : 117.1703647
+                       }
+                    },
+                    "location" : {
+                       "lat" : -30.89533669999999,
+                       "lng" : 117.1713687
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -30.8645424,
+                          "lng" : 117.1722356802915
+                       },
+                       "southwest" : {
+                          "lat" : -30.9125385,
+                          "lng" : 117.1695377197085
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJ-QVsoXeCzCsRz3FWmW85xVU",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Mudgee",
+                       "short_name" : "Mudgee",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Mid-Western Regional Council",
+                       "short_name" : "Mid-Western Regional",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2850",
+                       "short_name" : "2850",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Mudgee NSW 2850, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -32.6195019,
+                          "lng" : 149.6064302
+                       },
+                       "southwest" : {
+                          "lat" : -32.6249336,
+                          "lng" : 149.5794324
+                       }
+                    },
+                    "location" : {
+                       "lat" : -32.6212426,
+                       "lng" : 149.5931025
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -32.6195019,
+                          "lng" : 149.6064302
+                       },
+                       "southwest" : {
+                          "lat" : -32.6249336,
+                          "lng" : 149.5794324
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJ01rGd7yJDmsRvzLsvVaCk3s",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "East Gippsland Shire",
+                       "short_name" : "East Gippsland",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Victoria",
+                       "short_name" : "VIC",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Victoria, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -37.7301987,
+                          "lng" : 147.9191394
+                       },
+                       "southwest" : {
+                          "lat" : -37.8358437,
+                          "lng" : 147.8941966
+                       }
+                    },
+                    "location" : {
+                       "lat" : -37.7794129,
+                       "lng" : 147.8993326
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -37.7301987,
+                          "lng" : 147.9191394
+                       },
+                       "southwest" : {
+                          "lat" : -37.8358437,
+                          "lng" : 147.8941966
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJr7aEXBpkJWsRbCAjoDaQlAY",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Millmerran",
+                       "short_name" : "Millmerran",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Toowoomba Regional",
+                       "short_name" : "Toowoomba",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Queensland",
+                       "short_name" : "QLD",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "4357",
+                       "short_name" : "4357",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Millmerran QLD 4357, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -27.866874,
+                          "lng" : 151.2732381
+                       },
+                       "southwest" : {
+                          "lat" : -27.8747515,
+                          "lng" : 151.2612269
+                       }
+                    },
+                    "location" : {
+                       "lat" : -27.87081,
+                       "lng" : 151.267257
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -27.866874,
+                          "lng" : 151.2732381
+                       },
+                       "southwest" : {
+                          "lat" : -27.8747515,
+                          "lng" : 151.2612269
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJ2wdF3DpjvWsRH3r7vKsLTHs",
+                 "types" : [ "route" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Mon, 09 Jan 2017 03:36:53 GMT
+- request:
+    method: get
+    uri: http://maps.google.com/maps/api/geocode/json?address=Bruce%20Rd&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - '*/*'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 09 Jan 2017 03:36:53 GMT
+      Expires:
+      - Tue, 10 Jan 2017 03:36:53 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - '*'
+      Server:
+      - mafe
+      Content-Length:
+      - '1818'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+    body:
+      encoding: UTF-8
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Mount Martha",
+                       "short_name" : "Mount Martha",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Mornington Peninsula Shire",
+                       "short_name" : "Mornington Peninsula",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Victoria",
+                       "short_name" : "VIC",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "3934",
+                       "short_name" : "3934",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Mount Martha VIC 3934, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -38.296238,
+                          "lng" : 145.0312444
+                       },
+                       "southwest" : {
+                          "lat" : -38.304894,
+                          "lng" : 144.9940619
+                       }
+                    },
+                    "location" : {
+                       "lat" : -38.3025233,
+                       "lng" : 145.0123317
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -38.296238,
+                          "lng" : 145.0312444
+                       },
+                       "southwest" : {
+                          "lat" : -38.304894,
+                          "lng" : 144.9940619
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJ5cHH8SbF1WoRAx23sdZonhM",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Riverton",
+                       "short_name" : "Riverton",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Clare and Gilbert Valleys Council",
+                       "short_name" : "Clare and Gilbert Valleys",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "South Australia",
+                       "short_name" : "SA",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "5412",
+                       "short_name" : "5412",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Riverton SA 5412, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -34.1303714,
+                          "lng" : 138.8358855
+                       },
+                       "southwest" : {
+                          "lat" : -34.16475399999999,
+                          "lng" : 138.7509152
+                       }
+                    },
+                    "location" : {
+                       "lat" : -34.1547389,
+                       "lng" : 138.8118674
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -34.1303714,
+                          "lng" : 138.8358855
+                       },
+                       "southwest" : {
+                          "lat" : -34.16475399999999,
+                          "lng" : 138.7509152
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJhR1MB4eGuWoRn1XBfYMYFVs",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Taldra",
+                       "short_name" : "Taldra",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "District Council of Loxton Waikerie",
+                       "short_name" : "DC of Loxton Waikerie",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "South Australia",
+                       "short_name" : "SA",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "5311",
+                       "short_name" : "5311",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Taldra SA 5311, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -34.3232233,
+                          "lng" : 140.8630602
+                       },
+                       "southwest" : {
+                          "lat" : -34.4444632,
+                          "lng" : 140.8363832
+                       }
+                    },
+                    "location" : {
+                       "lat" : -34.3821106,
+                       "lng" : 140.8376694
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -34.3232233,
+                          "lng" : 140.8630602
+                       },
+                       "southwest" : {
+                          "lat" : -34.4444632,
+                          "lng" : 140.8363832
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJzwWx0TfFxmoR5EvcTF8SjDk",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "The Regional Council of Goyder",
+                       "short_name" : "Goyder",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "South Australia",
+                       "short_name" : "SA",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "5417",
+                       "short_name" : "5417",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, South Australia 5417, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -33.6827756,
+                          "lng" : 139.0941389
+                       },
+                       "southwest" : {
+                          "lat" : -33.6928132,
+                          "lng" : 138.9896481
+                       }
+                    },
+                    "location" : {
+                       "lat" : -33.690277,
+                       "lng" : 139.0441222
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.6827756,
+                          "lng" : 139.0941389
+                       },
+                       "southwest" : {
+                          "lat" : -33.6928132,
+                          "lng" : 138.9896481
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJg4Gy8v03uWoRq_FTivJB9ZE",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Mount Charles",
+                       "short_name" : "Mount Charles",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "District Council of Tatiara",
+                       "short_name" : "DC of Tatiara",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "South Australia",
+                       "short_name" : "SA",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "5267",
+                       "short_name" : "5267",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Mount Charles SA 5267, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -36.0505877,
+                          "lng" : 140.2531167
+                       },
+                       "southwest" : {
+                          "lat" : -36.1089447,
+                          "lng" : 140.2529291
+                       }
+                    },
+                    "location" : {
+                       "lat" : -36.0727219,
+                       "lng" : 140.2530571
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -36.0505877,
+                          "lng" : 140.2543718802915
+                       },
+                       "southwest" : {
+                          "lat" : -36.1089447,
+                          "lng" : 140.2516739197085
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJAeeMAT3CyWoR9jTA4om_4A4",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Bruce",
+                       "short_name" : "Bruce",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "South Australia",
+                       "short_name" : "SA",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "5433",
+                       "short_name" : "5433",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Bruce SA 5433, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -32.44738299999999,
+                          "lng" : 138.1886968
+                       },
+                       "southwest" : {
+                          "lat" : -32.4759258,
+                          "lng" : 138.13094
+                       }
+                    },
+                    "location" : {
+                       "lat" : -32.4640303,
+                       "lng" : 138.1578209
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -32.44738299999999,
+                          "lng" : 138.1886968
+                       },
+                       "southwest" : {
+                          "lat" : -32.4759258,
+                          "lng" : 138.13094
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJr3tJhUqvvWoRnZK7u8oZXy8",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Manmanning",
+                       "short_name" : "Manmanning",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Shire of Dowerin",
+                       "short_name" : "Dowerin",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Western Australia",
+                       "short_name" : "WA",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "6465",
+                       "short_name" : "6465",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Manmanning WA 6465, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -30.8645424,
+                          "lng" : 117.1714087
+                       },
+                       "southwest" : {
+                          "lat" : -30.9125385,
+                          "lng" : 117.1703647
+                       }
+                    },
+                    "location" : {
+                       "lat" : -30.89533669999999,
+                       "lng" : 117.1713687
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -30.8645424,
+                          "lng" : 117.1722356802915
+                       },
+                       "southwest" : {
+                          "lat" : -30.9125385,
+                          "lng" : 117.1695377197085
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJ-QVsoXeCzCsRz3FWmW85xVU",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Mudgee",
+                       "short_name" : "Mudgee",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Mid-Western Regional Council",
+                       "short_name" : "Mid-Western Regional",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2850",
+                       "short_name" : "2850",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Mudgee NSW 2850, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -32.6195019,
+                          "lng" : 149.6064302
+                       },
+                       "southwest" : {
+                          "lat" : -32.6249336,
+                          "lng" : 149.5794324
+                       }
+                    },
+                    "location" : {
+                       "lat" : -32.6212426,
+                       "lng" : 149.5931025
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -32.6195019,
+                          "lng" : 149.6064302
+                       },
+                       "southwest" : {
+                          "lat" : -32.6249336,
+                          "lng" : 149.5794324
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJ01rGd7yJDmsRvzLsvVaCk3s",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "East Gippsland Shire",
+                       "short_name" : "East Gippsland",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Victoria",
+                       "short_name" : "VIC",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Victoria, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -37.7301987,
+                          "lng" : 147.9191394
+                       },
+                       "southwest" : {
+                          "lat" : -37.8358437,
+                          "lng" : 147.8941966
+                       }
+                    },
+                    "location" : {
+                       "lat" : -37.7794129,
+                       "lng" : 147.8993326
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -37.7301987,
+                          "lng" : 147.9191394
+                       },
+                       "southwest" : {
+                          "lat" : -37.8358437,
+                          "lng" : 147.8941966
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJr7aEXBpkJWsRbCAjoDaQlAY",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Millmerran",
+                       "short_name" : "Millmerran",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Toowoomba Regional",
+                       "short_name" : "Toowoomba",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Queensland",
+                       "short_name" : "QLD",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "4357",
+                       "short_name" : "4357",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Millmerran QLD 4357, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -27.866874,
+                          "lng" : 151.2732381
+                       },
+                       "southwest" : {
+                          "lat" : -27.8747515,
+                          "lng" : 151.2612269
+                       }
+                    },
+                    "location" : {
+                       "lat" : -27.87081,
+                       "lng" : 151.267257
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -27.866874,
+                          "lng" : 151.2732381
+                       },
+                       "southwest" : {
+                          "lat" : -27.8747515,
+                          "lng" : 151.2612269
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJ2wdF3DpjvWsRH3r7vKsLTHs",
+                 "types" : [ "route" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Mon, 09 Jan 2017 03:36:54 GMT
+recorded_with: VCR 2.9.3

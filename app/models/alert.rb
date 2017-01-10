@@ -4,8 +4,7 @@ class Alert < ActiveRecord::Base
   validates_numericality_of :radius_meters, greater_than: 0, message: "isn't selected"
   validate :validate_address
 
-  before_validation :geocode
-  before_create :remove_other_alerts_for_this_address
+  before_validation :geocode_from_address, unless: :geocoded?
   include EmailConfirmable
 
   attr_writer :address_for_placeholder
@@ -60,6 +59,10 @@ class Alert < ActiveRecord::Base
     emails.reject do |email|
       active.where(email: email).where("date(created_at) <= ?", date).any?
     end.count
+  end
+
+  def geocoded?
+    location.present?
   end
 
   def unsubscribe!
@@ -249,27 +252,23 @@ class Alert < ActiveRecord::Base
     [total_no_emails, total_no_applications, total_no_comments]
   end
 
-  private
+  def geocode_from_address
+    @geocode_result = Location.geocode(address)
 
-  def remove_other_alerts_for_this_address
-    Alert.delete_all(email: email, address: address)
-  end
-
-  def geocode
-    # Only geocode if location hasn't been set
-    if self.lat.nil? && self.lng.nil?
-      @geocode_result = Location.geocode(address)
+    unless @geocode_result.error || @geocode_result.all.many?
       self.location = @geocode_result
       self.address = @geocode_result.full_address
     end
   end
+
+  private
 
   def validate_address
     # Only validate the street address if we used the geocoder
     if @geocode_result
       if @geocode_result.error
         errors.add(:address, @geocode_result.error)
-      elsif @geocode_result.all.size > 1
+      elsif @geocode_result.all.many?
         errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
       end
     end
