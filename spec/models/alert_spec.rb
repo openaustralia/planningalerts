@@ -18,6 +18,20 @@ describe Alert do
       build(:alert, address: "Bruce Rd", lat: nil, lng: nil)
     end
 
+    it "is valid when the geocoder returns no errors" do
+      allow(Location).to receive(:geocode).and_return(
+        double(
+          lat: -33.772607,
+          lng: 150.624245,
+          full_address: "24 Bruce Rd, Glenbrook, VIC 3885",
+          error: nil,
+          all: []
+        )
+      )
+
+      expect(alert).to be_valid
+    end
+
     it "is invalid if there was an error geocoding the address" do
       allow(Location).to receive(:geocode).and_return(
         double(
