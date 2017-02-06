@@ -24,7 +24,7 @@ gem "jquery-ui-rails"
 gem "foreman"
 gem "haml"
 gem "geokit"
-gem "nokogiri"
+gem "nokogiri", '~> 1.6.0' # 1.7.0 requires Ruby 2.1+
 gem 'httparty'
 gem "will_paginate"
 gem "rails_autolink"
