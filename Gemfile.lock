@@ -282,7 +282,7 @@ GEM
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
     newrelic_rpm (3.6.8.164)
-    nokogiri (1.7.0.1)
+    nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     nokogumbo (1.4.7)
       nokogiri
@@ -531,7 +531,7 @@ DEPENDENCIES
   mime-types (~> 2.99)
   mysql2 (> 0.3)
   newrelic_rpm
-  nokogiri
+  nokogiri (~> 1.6.0)
   oj
   poltergeist
   rabl
