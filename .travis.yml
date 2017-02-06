@@ -2,6 +2,8 @@ language: ruby
 rvm:
   - 2.0
   - 2.1
+  - 2.2
+  - 2.3
 
 before_install:
   # Workaround an issue with bundler version on Ruby 2.1
