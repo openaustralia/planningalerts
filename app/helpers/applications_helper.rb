@@ -11,7 +11,7 @@ module ApplicationsHelper
   end
 
   def static_google_map_url(options = {size: "512x512"})
-    "http://maps.google.com/maps/api/staticmap?center=#{CGI.escape(options[:address])}&zoom=14&size=#{options[:size]}&maptype=roadmap&markers=color:blue|label:#{CGI.escape(options[:address])}|#{CGI.escape(options[:address])}&sensor=false"
+    "http://maps.google.com/maps/api/staticmap?center=#{CGI.escape(options[:address])}&zoom=14&size=#{options[:size]}&maptype=roadmap&markers=color:blue|label:#{CGI.escape(options[:address])}|#{CGI.escape(options[:address])}"
   end
 
   def scraped_and_received_text(application)
@@ -79,13 +79,13 @@ module ApplicationsHelper
     lat = options[:lat]
     lng = options[:lng]
     label = options[:label] || "Map"
-    image_tag("https://maps.googleapis.com/maps/api/staticmap?zoom=#{zoom}&size=#{size}&maptype=roadmap&markers=color:red%7C#{lat},#{lng}&sensor=false".html_safe, size: size, alt: label)
+    image_tag("https://maps.googleapis.com/maps/api/staticmap?zoom=#{zoom}&size=#{size}&maptype=roadmap&markers=color:red%7C#{lat},#{lng}".html_safe, size: size, alt: label)
   end
 
   def google_static_streetview_url(application, options)
     size = options[:size] || "350x200"
     fov = options[:fov] || 90
-    "https://maps.googleapis.com/maps/api/streetview?size=#{size}&location=#{application.lat},#{application.lng}&fov=#{fov}&sensor=false".html_safe
+    "https://maps.googleapis.com/maps/api/streetview?size=#{size}&location=#{application.lat},#{application.lng}&fov=#{fov}".html_safe
   end
 
   def google_static_streetview(application, options)
