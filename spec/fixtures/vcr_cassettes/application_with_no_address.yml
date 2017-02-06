@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://maps.google.com/maps/api/geocode/json?address=An%20address%20that%20can't%20be%20geocoded&region=au&sensor=false
+    uri: http://maps.google.com/maps/api/geocode/json?address=An%20address%20that%20can't%20be%20geocoded&region=au
     body:
       encoding: US-ASCII
       string: ''
