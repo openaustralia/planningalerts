@@ -2,7 +2,7 @@
 http_interactions: 
 - request: 
     method: get
-    uri: http://maps.google.com/maps/api/geocode/json?address=A%20test%20address&region=au
+    uri: http://maps.google.com/maps/api/geocode/json?address=A%20test%20address&region=au&sensor=false
     body: 
       string: ""
     headers: 
@@ -46,7 +46,7 @@ http_interactions:
   recorded_at: Sun, 22 Sep 2013 19:09:07 GMT
 - request: 
     method: get
-    uri: http://maps.google.com/maps/api/geocode/json?address=24%20Bruce%20Road%20Glenbrook&region=au
+    uri: http://maps.google.com/maps/api/geocode/json?address=24%20Bruce%20Road%20Glenbrook&region=au&sensor=false
     body: 
       string: ""
     headers: 
@@ -144,7 +144,7 @@ http_interactions:
   recorded_at: Sun, 22 Sep 2013 19:29:53 GMT
 - request: 
     method: get
-    uri: http://maps.google.com/maps/api/geocode/json?address=24%20Bruce%20Road,%20Glenbrook&region=au
+    uri: http://maps.google.com/maps/api/geocode/json?address=24%20Bruce%20Road,%20Glenbrook&region=au&sensor=false
     body: 
       string: ""
     headers: 
@@ -242,7 +242,7 @@ http_interactions:
   recorded_at: Sun, 22 Sep 2013 19:39:36 GMT
 - request: 
     method: get
-    uri: http://maps.google.com/maps/api/geocode/json?address=A%20test%20address&region=au
+    uri: http://maps.google.com/maps/api/geocode/json?address=A%20test%20address&region=au&sensor=false
     body: 
       string: ""
     headers: 
@@ -26499,7 +26499,7 @@ http_interactions:
   recorded_at: Fri, 06 May 2016 02:03:07 GMT
 - request:
     method: get
-    uri: http://maps.google.com/maps/api/geocode/json?address=24%20Bruce%20Rd,%20Glenbrook%20NSW%202773&region=au
+    uri: http://maps.google.com/maps/api/geocode/json?address=24%20Bruce%20Rd,%20Glenbrook%20NSW%202773&region=au&sensor=false
     body:
       encoding: US-ASCII
       string: ''
@@ -26601,7 +26601,7 @@ http_interactions:
   recorded_at: Thu, 12 May 2016 04:41:36 GMT
 - request:
     method: get
-    uri: http://maps.google.com/maps/api/geocode/json?address=26%20Bruce%20Rd,%20Glenbrook%20NSW%202773&region=au
+    uri: http://maps.google.com/maps/api/geocode/json?address=26%20Bruce%20Rd,%20Glenbrook%20NSW%202773&region=au&sensor=false
     body:
       encoding: US-ASCII
       string: ''
@@ -26703,7 +26703,7 @@ http_interactions:
   recorded_at: Thu, 12 May 2016 04:41:42 GMT
 - request:
     method: get
-    uri: http://maps.google.com/maps/api/geocode/json?address=24%20Bruce%20Rd,%20Glenbrook%20NSW%202773&region=au
+    uri: http://maps.google.com/maps/api/geocode/json?address=24%20Bruce%20Rd,%20Glenbrook%20NSW%202773&region=au&sensor=false
     body:
       encoding: US-ASCII
       string: ''
@@ -26805,7 +26805,7 @@ http_interactions:
   recorded_at: Thu, 12 May 2016 04:57:25 GMT
 - request:
     method: get
-    uri: http://maps.google.com/maps/api/geocode/json?address=24%20Bruce%20Rd,%20Glenbrook&region=au
+    uri: http://maps.google.com/maps/api/geocode/json?address=24%20Bruce%20Rd,%20Glenbrook&region=au&sensor=false
     body:
       encoding: US-ASCII
       string: ''
@@ -26907,7 +26907,7 @@ http_interactions:
   recorded_at: Thu, 12 May 2016 05:09:36 GMT
 - request:
     method: get
-    uri: http://maps.google.com/maps/api/geocode/json?address=Bruce%20Rd&region=au
+    uri: http://maps.google.com/maps/api/geocode/json?address=Bruce%20Rd&region=au&sensor=false
     body:
       encoding: US-ASCII
       string: ''
@@ -27575,7 +27575,7 @@ http_interactions:
   recorded_at: Mon, 09 Jan 2017 03:36:53 GMT
 - request:
     method: get
-    uri: http://maps.google.com/maps/api/geocode/json?address=Bruce%20Rd&region=au
+    uri: http://maps.google.com/maps/api/geocode/json?address=Bruce%20Rd&region=au&sensor=false
     body:
       encoding: US-ASCII
       string: ''
