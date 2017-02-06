@@ -352,7 +352,7 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
-    redcarpet (3.3.2)
+    redcarpet (3.4.0)
     redis (3.0.6)
     redis-namespace (1.4.1)
       redis (~> 3.0.4)
