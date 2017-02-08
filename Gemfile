@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem 'rails', '4.2.7'
+gem 'rails', '4.2.7.1'
 gem 'mysql2', '> 0.3'
 
 # Allow us to use `caches_page`
@@ -24,7 +24,7 @@ gem "jquery-ui-rails"
 gem "foreman"
 gem "haml"
 gem "geokit"
-gem "nokogiri", '~> 1.6.0' # 1.7.0 requires Ruby 2.1+
+gem "nokogiri", '~> 1.6.0' # Nokogiri 1.7.0+ needs ruby 2.1
 gem 'httparty'
 gem "will_paginate"
 gem "rails_autolink"
