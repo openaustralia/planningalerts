@@ -1,5 +1,6 @@
 .bundle
 .env.local
+.env.development
 db/*.sqlite3
 log/*.log
 tmp/cache
