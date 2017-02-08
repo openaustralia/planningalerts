@@ -22,7 +22,7 @@ function updateFormAmount(new_amount) {
   }
 };
 
-if ("#button-pro-signup".length) {
+if ("#button-pro-signup".length && typeof(StripeCheckout) === "object") {
   $('#button-pro-signup').prop("disabled", "false");
   $('#button-pro-signup + .no-js-message').addClass("hide");
 
