@@ -36,7 +36,7 @@ gem 'validates_email_format_of', '~> 1.6', '>= 1.6.3'
 gem "geocoder"
 # Rails 4 support is a work in progress so requires tracking master
 gem 'activeadmin', '~> 1.0.0.pre2'
-gem "devise", '~> 3.5'
+gem "devise", '~> 3.5' # Newer Devise needs Ruby 2.1+
 # Disabling metric_fu because it depends on rcov which doesn't work on Ruby 1.9
 #gem 'metric_fu'
 gem "rake"
