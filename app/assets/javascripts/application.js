@@ -22,11 +22,11 @@ function updateFormAmount(new_amount) {
   }
 };
 
-if ("#button-pro-signup".length && typeof(StripeCheckout) === "object") {
+if ($("#button-pro-signup").length && typeof(StripeCheckout) === "object") {
   $('#button-pro-signup').prop("disabled", "false");
   $('#button-pro-signup + .no-js-message').addClass("hide");
 
-  if ('.amount-setter-input input'.length) {
+  if ($('.amount-setter-input input').length) {
     updateFormAmount($('.amount-setter-input input').val());
 
     $('.amount-setter-input input').bind('input', function() {
