@@ -49,7 +49,7 @@ gem 'rabl'
 gem 'newrelic_rpm'
 gem 'delayed_job_active_record'
 gem 'daemons'
-gem "validate_url"
+gem "validate_url", "~> 0.2.2" # 1.0.0 causes failures like "Validation failed: Comment url is not a valid URL" on mailto: links
 gem "twitter"
 gem "atdis"
 gem "oj"

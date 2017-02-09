@@ -493,7 +493,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
-    validate_url (1.0.2)
+    validate_url (0.2.2)
       activemodel (>= 3.0.0)
       addressable
     validates_email_format_of (1.6.3)
@@ -588,7 +588,7 @@ DEPENDENCIES
   timecop
   twitter
   uglifier
-  validate_url
+  validate_url (~> 0.2.2)
   validates_email_format_of (~> 1.6, >= 1.6.3)
   vanity
   vcr (~> 2.9)
