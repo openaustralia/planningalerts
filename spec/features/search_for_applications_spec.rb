@@ -39,19 +39,7 @@ feature "Searching for development application near an address" do
 
       fill_in "Enter a street address", with: "24 Bruce Road Glenb"
 
-      # this simulates focusing on the input field, which triggers the autocomplete search
-      page.execute_script("el = document.querySelector('.address-autocomplete-input');
-                           event = document.createEvent('HTMLEvents');
-                           event.initEvent('focus', false, true);
-                           el.dispatchEvent(event);")
-
-      # Confirm that the suggested addresses appear.
-      # Is this a too brittle? It'll fail if the address format changes.
-      within ".pac-container" do
-        expect(page).to have_content "Bruce Road, Glenbrook, New South Wales"
-      end
-
-      # TODO: Actually test clicking the suggestion and seeing results
+      expect_autocomplete_suggestions_to_include "Bruce Road, Glenbrook, New South Wales"
     end
   end
 end
