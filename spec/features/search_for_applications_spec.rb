@@ -26,4 +26,32 @@ feature "Searching for development application near an address" do
       expect(page).to have_content "A lovely house"
     end
   end
+
+  context "with javascript" do
+    before do
+      # This is a hack to get around the ssl_required? method in
+      # the application controller which redirects poltergeist to https.
+      allow(Rails.env).to receive(:development?).and_return true
+    end
+
+    scenario "autocomplete results are displayed", js: true do
+      visit root_path
+
+      fill_in "Enter a street address", with: "24 Bruce R"
+
+      # this simulates focusing on the input field, which triggers the autocomplete search
+      page.execute_script("el = document.querySelector('#q');
+                           event = document.createEvent('HTMLEvents');
+                           event.initEvent('focus', false, true);
+                           el.dispatchEvent(event);")
+
+      # Confirm that the suggested addresses appear.
+      # Is this a too brittle? It'll fail if the address format changes.
+      within ".pac-container" do
+        expect(page).to have_content "Bruce Road, Glenbrook, New South Wales"
+      end
+
+      # TODO: Actually test clicking the suggestion and seeing results
+    end
+  end
 end
