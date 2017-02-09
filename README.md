@@ -40,7 +40,7 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 **Step 1 - Scrape DAs**
  * Register on [morph.io](https://morph.io) and [get your api key](https://morph.io/documentation/api).
- * Create a `.env.local` file and set your `MORPH_API_KEY`
+ * Create a `.env.development` file and set your `MORPH_API_KEY`
  * Run - `rake planningalerts:applications:scrape['marrickville']`
 
 **Step 2 - Setup an Alert**
@@ -60,7 +60,7 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 You can configure PlanningAlerts to allow people to donate to the project monthly.
 [Stripe](https://stripe.com) is used to process the payment and manage billing.
 
-You need to configured three evironment variables in your .env.local file
+You need to configured three evironment variables in your .env.development file
 to allow users to visit the donations page.
 
 1. The publishable API key from your stripe account.
@@ -104,7 +104,7 @@ You can toggle the availability of the writing to councillors feature on or off 
 The feature is globally enabled when the value of `ENV["COUNCILLORS_ENABLED"]` is `"true"`.
 This flag is useful if you need to turn the feature _off_ globally.
 
-We set this in the [`.env`](https://github.com/openaustralia/planningalerts/blob/master/.env) file in production.  You can control setting in development by creating your own `.env.local` file which includes:
+We set this in the [`.env`](https://github.com/openaustralia/planningalerts/blob/master/.env) file in production.  You can control setting in development by creating your own `.env.development` file which includes:
 
 ```
 COUNCILLORS_ENABLED=true
@@ -116,7 +116,7 @@ You need to specify an email address for councillors to send their replies to.
 If you’re using the [‘Wizard of Oz’ setup](#default-wizard-of-oz-method), the councillor replies will come in to this address.
 If you’re using the [WriteIt integration](#intergrating-with-writeit), then the WriteIt answer notification emails will be sent there.
 
-Set this address using the `EMAIL_COUNCILLOR_REPLIES_TO` environment variable in [`.env`](https://github.com/openaustralia/planningalerts/blob/master/.env) or `.env.local` in your local development setup:
+Set this address using the `EMAIL_COUNCILLOR_REPLIES_TO` environment variable in [`.env`](https://github.com/openaustralia/planningalerts/blob/master/.env) or `.env.development` in your local development setup:
 
 ```
 EMAIL_COUNCILLOR_REPLIES_TO=lovely@email.org.au
@@ -199,7 +199,7 @@ On the API page for your WriteIt site you’ll find the information you need.
 
 The information about the WriteIt instance you will be working with is stored as environment variables.
 In production these should be in a `.env` file.
-Use `.env.local` in your local development environment.
+Use `.env.development` in your local development environment.
 
 ```
 # WriteIt configuration

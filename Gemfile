@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem 'rails', '4.2.7'
+gem 'rails', '4.2.7.1'
 gem 'mysql2', '> 0.3'
 
 # Allow us to use `caches_page`
@@ -24,7 +24,7 @@ gem "jquery-ui-rails"
 gem "foreman"
 gem "haml"
 gem "geokit"
-gem "nokogiri"
+gem "nokogiri", '~> 1.6.0' # Nokogiri 1.7.0+ needs ruby 2.1
 gem 'httparty'
 gem "will_paginate"
 gem "rails_autolink"
@@ -36,7 +36,7 @@ gem 'validates_email_format_of', '~> 1.6', '>= 1.6.3'
 gem "geocoder"
 # Rails 4 support is a work in progress so requires tracking master
 gem 'activeadmin', '~> 1.0.0.pre2'
-gem "devise"
+gem "devise", '~> 3.5' # Newer Devise needs Ruby 2.1+
 # Disabling metric_fu because it depends on rcov which doesn't work on Ruby 1.9
 #gem 'metric_fu'
 gem "rake"
@@ -81,6 +81,7 @@ end
 
 group :development do
   gem 'guard'
+  gem 'listen', '< 3' # Used by guard. 3.0.0+ includes ruby_dep 1.5.0 which needs Ruby 2.2+
   gem 'guard-rspec'
   gem 'guard-livereload'
   gem 'growl'
