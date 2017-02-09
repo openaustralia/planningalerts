@@ -40,7 +40,12 @@ if ($("#button-pro-signup").length && typeof(StripeCheckout) === "object") {
     });
   }
 
-  public_key = $('#button-pro-signup').attr('data-key');
+  if (typeof($('#button-pro-signup').attr('data-key')) !== "undefined") {
+    public_key = $('#button-pro-signup').attr('data-key');
+  } else {
+    public_key = "";
+  }
+
   email = $('#button-pro-signup').attr("data-email");
 
   var handler = StripeCheckout.configure({
