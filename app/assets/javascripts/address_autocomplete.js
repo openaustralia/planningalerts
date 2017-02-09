@@ -1,5 +1,5 @@
 function initAutoComplete() {
-  var input = document.getElementById('q');
+  var input = document.querySelector(".address-autocomplete-input");
   var options = {
     componentRestrictions: {country: "au"},
     types: ["address"]

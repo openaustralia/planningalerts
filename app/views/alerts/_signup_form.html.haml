@@ -6,7 +6,7 @@
     - else
       = f.input :address, label: "Enter a street address",
                           placeholder: "e.g. #{alert.address_for_placeholder}",
-                          input_html: { required: "required" }
+                          input_html: { required: "required", class: "address-autocomplete-input" }
     = f.input :email, label: "Enter your email address",
                       placeholder: "your@email.com",
                       input_html: { required: "required" }

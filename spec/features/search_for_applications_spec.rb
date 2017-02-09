@@ -40,7 +40,7 @@ feature "Searching for development application near an address" do
       fill_in "Enter a street address", with: "24 Bruce R"
 
       # this simulates focusing on the input field, which triggers the autocomplete search
-      page.execute_script("el = document.querySelector('#q');
+      page.execute_script("el = document.querySelector('.address-autocomplete-input');
                            event = document.createEvent('HTMLEvents');
                            event.initEvent('focus', false, true);
                            el.dispatchEvent(event);")
