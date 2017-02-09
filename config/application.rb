@@ -82,5 +82,7 @@ module PlanningalertsApp
 end
 
 # Use javascript to add participants to the A/B testing to avoid robots and spiders
-Vanity.playground.use_js!
-Vanity.playground.add_participant_path = "/vanity/add_participant"
+Vanity.configure do |config|
+  config.use_js = true
+  config.add_participant_route = "/vanity/add_participant"
+end

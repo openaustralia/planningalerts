@@ -351,9 +351,6 @@ GEM
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
     redcarpet (3.4.0)
-    redis (3.0.6)
-    redis-namespace (1.4.1)
-      redis (~> 3.0.4)
     ref (2.0.0)
     refills (0.1.0)
     responders (2.3.0)
@@ -471,9 +468,8 @@ GEM
       addressable
     validates_email_format_of (1.6.3)
       i18n
-    vanity (1.8.3)
-      redis (>= 2.1)
-      redis-namespace (>= 1.1.0)
+    vanity (2.2.7)
+      i18n
     vcr (2.9.3)
     warden (1.2.7)
       rack (>= 1.0)
@@ -571,4 +567,4 @@ DEPENDENCIES
   writeit-rails!
 
 BUNDLED WITH
-   1.13.7
+   1.14.3
