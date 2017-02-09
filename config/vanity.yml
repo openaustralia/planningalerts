@@ -1,4 +1,6 @@
 development:
   adapter: active_record
+test:
+  adapter: active_record
 production:
   adapter: active_record
