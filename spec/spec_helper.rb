@@ -99,6 +99,12 @@ RSpec.configure do |config|
     ActionMailer::Base.deliveries = []
   end
 
+  # This is a hack to get around the ssl_required? method in
+  # the application controller which redirects poltergeist to https.
+  config.before(:each, js: true) do
+    allow(Rails.env).to receive(:development?).and_return true
+  end
+
   config.include EmailSpec::Helpers
   config.include EmailSpec::Matchers
   config.include FactoryGirl::Syntax::Methods

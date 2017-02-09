@@ -40,12 +40,6 @@ feature "Subscribing to donate monthly" do
     end
 
     context "with javascript" do
-      before do
-        # This is a hack to get around the ssl_required? method in
-        # the application controller which redirects poltergeist to https.
-        allow(Rails.env).to receive(:development?).and_return true
-      end
-
       it "successfully", js: true do
         visit new_donation_path
 

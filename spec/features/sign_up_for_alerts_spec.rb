@@ -104,12 +104,6 @@ feature "Sign up for alerts" do
     end
 
     context "with javascript" do
-      before do
-        # This is a hack to get around the ssl_required? method in
-        # the application controller which redirects poltergeist to https.
-        allow(Rails.env).to receive(:development?).and_return true
-      end
-
       scenario "autocomplete results are displayed", js: true do
         visit applications_path(authority_id: "glenbrook")
 
@@ -200,12 +194,6 @@ feature "Sign up for alerts" do
   end
 
   context "with javascript" do
-    before do
-      # This is a hack to get around the ssl_required? method in
-      # the application controller which redirects poltergeist to https.
-      allow(Rails.env).to receive(:development?).and_return true
-    end
-
     scenario "autocomplete results are displayed", js: true do
       visit '/alerts/signup'
 
