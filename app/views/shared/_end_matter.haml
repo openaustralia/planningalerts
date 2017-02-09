@@ -2,9 +2,10 @@
 - if @set_focus_control
   :javascript
     document.getElementById('#{@set_focus_control}').focus();
-- if @themer.google_maps_client_id
-  %script(src="https://maps.googleapis.com/maps/api/js?client=#{@themer.google_maps_client_id}&v=3.13&libraries=places" type="text/javascript")
-- else
-  %script(src="https://maps.googleapis.com/maps/api/js?libraries=places&region=au" type="text/javascript")
+- if with_maps_scripts
+  - if @themer.google_maps_client_id
+    %script(src="https://maps.googleapis.com/maps/api/js?client=#{@themer.google_maps_client_id}&v=3.13&libraries=places" type="text/javascript")
+  - else
+    %script(src="https://maps.googleapis.com/maps/api/js?libraries=places&region=au" type="text/javascript")
 = javascript_include_tag "application"
 = vanity_js
