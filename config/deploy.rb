@@ -4,10 +4,7 @@ require 'delayed/recipes'
 set :stage, "test" unless exists? :stage
 if stage != "development"
   require 'rvm/capistrano'
-  require 'rvm/capistrano/alias_and_wrapp'
   set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
-  before 'deploy', 'rvm:create_alias'
-  before 'deploy', 'rvm:create_wrappers'
 end
 
 # This adds a task that precompiles assets for the asset pipeline
