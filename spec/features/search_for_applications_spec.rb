@@ -37,7 +37,7 @@ feature "Searching for development application near an address" do
     scenario "autocomplete results are displayed", js: true do
       visit root_path
 
-      fill_in "Enter a street address", with: "24 Bruce R"
+      fill_in "Enter a street address", with: "24 Bruce Road Glenb"
 
       # this simulates focusing on the input field, which triggers the autocomplete search
       page.execute_script("el = document.querySelector('.address-autocomplete-input');
