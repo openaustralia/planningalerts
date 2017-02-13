@@ -5,7 +5,7 @@
   New authorities are being added all the time, so if your local authority isn't listed below
   #{link_to "sign up anyway", new_alert_path} and you'll start receiving alerts once it has been included.
 %p
-  We currently cover #{Authority.percentage_population_covered_by_all_active_authorities.to_i}% of Australia's population within #{@authority_count} authorities. For this number we're only counting places where the main planning authority is covered. As an example, most of Victoria is covered by the SPEAR system but not all Victorian planning applications go through it. So, we don't include SPEAR in our population count.
+  We currently cover #{Authority.percentage_population_covered_by_all_active_authorities(@themer).to_i}% of Australia's population within #{@authority_count} authorities. For this number we're only counting places where the main planning authority is covered. As an example, most of Victoria is covered by the SPEAR system but not all Victorian planning applications go through it. So, we don't include SPEAR in our population count.
 %p
   If you are a programmer and would like to write a scraper for your local authority, or work for a local authority
   and would like to make your data available, #{link_to "find out how you can get involved", get_involved_path}.

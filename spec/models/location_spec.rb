@@ -52,7 +52,7 @@ describe "Location" do
     allow(Geokit::Geocoders::GoogleGeocoder3).to receive(:geocode).and_return(double(lat: nil, lng: nil, all: []))
 
     l = Location.geocode("rxsd23dfj")
-    expect(l.error).to eq("Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’")
+    expect(l.error).to eq("Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW 2580’")
   end
 
   it "should error if the street address is not in australia" do
@@ -74,7 +74,7 @@ describe "Location" do
     allow(Geokit::Geocoders::GoogleGeocoder3).to receive(:geocode).and_return(double(all: [double(country_code: "AU", lat: 1, lng: 2, accuracy: 4, full_address: "Glenbrook NSW, Australia")]))
 
     l = Location.geocode("Glenbrook, NSW")
-    expect(l.error).to eq("Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’")
+    expect(l.error).to eq("Please enter a full street address like ‘1 Sowerby St, Goulburn, NSW 2580’")
   end
 
   it "should list potential matches and they should be in Australia" do

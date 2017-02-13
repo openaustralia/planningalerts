@@ -29,18 +29,18 @@ class ApplicationController < ActionController::Base
   end
 
   def set_view_path
-    @themer = ThemeChooser.themer_from_request(request)
-    @theme = @themer.theme
+    @themer = ThemeChooser.theme
+    @theme = @themer.name
 
-    if @theme == "nsw"
-      self.prepend_view_path "lib/themes/nsw/views"
+    if @themer.view_path
+      self.prepend_view_path @themer.view_path
     end
   end
 
   def ssl_required?
     # This method is called before set_view_path so we need to calculate the theme from the
     # request rather than using @theme which isn't yet set
-    ::ThemeChooser.themer_from_request(request).theme != "nsw" && !Rails.env.development?
+    ::ThemeChooser.theme.ssl_required? && !Rails.env.development?
   end
 
   def configure_permitted_parameters

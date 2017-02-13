@@ -32,6 +32,14 @@ describe ConfirmationMailer do
     end
 
     context "nsw theme" do
+
+      around do |test|
+        with_theme_env 'nsw' do
+          ThemeChooser.theme
+          test.run
+        end
+      end
+
       let(:notifier) { ConfirmationMailer.confirm("nsw", object) }
 
       describe "confirm" do
@@ -99,6 +107,14 @@ describe ConfirmationMailer do
     end
 
     context "nsw theme" do
+
+      around do |test|
+        with_theme_env 'nsw' do
+          ThemeChooser.theme
+          test.run
+        end
+      end
+
       let(:notifier) { ConfirmationMailer.confirm("nsw", object) }
 
       describe "confirm" do

@@ -1,0 +1,114 @@
+# See https://morph.io/api
+MORPH_API_KEY: "ROgYhnHpyK6zJW4NNnzM"
+
+ALLOW_BATCH_REQUESTS: false
+
+PUBLISHMYDATA_USER: ""
+PUBLISHMYDATA_PASSWORD: ""
+PUBLISHMYDATA_BASE_URL: ""
+
+# Email setup
+EMAIL_FROM_ADDRESS: 'louise@localhost'
+EMAIL_FROM_NAME: 'PlanningAlerts'
+# Email that bounced emails go to (sets Return-Path header in outgoing email)
+BOUNCE_EMAIL_ADDRESS: EMAIL_FROM_ADDRESS
+# The email that abuse reports are sent to
+EMAIL_MODERATOR: EMAIL_FROM_ADDRESS
+
+# Scraper params
+SCRAPE_DELAY: 5
+
+# Google maps key
+# Use the following maps API key if you are running your development instance at http://planningalerts-app.dev
+# This will be the case if you are using pow (http://pow.cx/)
+GOOGLE_MAPS_KEY: ''
+
+# If you have Google Maps API for Business (OpenAustralia Foundation gets it through the Google Maps API
+# grants programme for charities) fill out the two lines below
+GOOGLE_MAPS_CLIENT_ID:
+GOOGLE_MAPS_CRYPTOGRAPHIC_KEY:
+
+# Google Analytics key
+GOOGLE_ANALYTICS_KEY: ""
+
+# OAuth details for Twitter application with read access only (for twitter feed on home page)
+TWITTER_CONSUMER_KEY: "xxxxxxxxxxx"
+TWITTER_CONSUMER_SECRET: "xxxxxxxxxxx"
+TWITTER_OAUTH_TOKEN: "xxxxxxxxxxx"
+TWITTER_OAUTH_TOKEN_SECRET: "xxxxxxxxxxx"
+
+# cuttlefish.io is used to send out emails in production
+CUTTLEFISH_USER_NAME: "xxxxxxxxxxxxxxxxx"
+CUTTLEFISH_PASSWORD: "xxxxxxxxxxxxxxxxxxxx"
+
+# Mapit instance to use
+MAPIT_URL: "http://mapit.mysociety.org"
+
+# Configuration for the theme
+THEME: 'southwark'
+CUSTOM_MODELS_PATH: "lib/themes/southwark"
+
+# THEME_NSW_HOST: "nsw.127.0.0.1.xip.io:3000"
+# THEME_NSW_EMAIL_FROM_ADDRESS: "contact@nsw.127.0.0.1.xip.io"
+# THEME_NSW_EMAIL_FROM_NAME: "Application Tracking"
+
+# THEME_NSW_CUTTLEFISH_USER_NAME: "xxxxxxxxxxxxxxxxx"
+# THEME_NSW_CUTTLEFISH_PASSWORD: "xxxxxxxxxxxxxxxxxxxx"
+
+# THEME_NSW_GOOGLE_ANALYTICS_KEY: "UA-3107958-12"
+
+THEME_SOUTHWARK_HOST: "southwark.10.11.12.13.xip.io:3000"
+THEME_SOUTHWARK_EMAIL_FROM_ADDRESS: "contact@southwark.10.11.12.13.xip.io"
+THEME_SOUTHWARK_EMAIL_FROM_NAME: "PlanningAlerts"
+
+THEME_SOUTHWARK_CUTTLEFISH_USER_NAME: "xxxxxxxxxxxxxxxxx"
+THEME_SOUTHWARK_CUTTLEFISH_PASSWORD: "xxxxxxxxxxxxxxxxxxxx"
+
+THEME_SOUTHWARK_GOOGLE_ANALYTICS_KEY: ""
+THEME_SOUTHWARK_DISABLE_ALERTS: true
+THEME_SOUTHWARK_DISABLE_COMMENTS: true
+THEME_SOUTHWARK_DISABLE_SOCIAL_SHARING: true
+
+THEME_SOUTHWARK_SEARCH_RADIUS: 0.5 # Miles
+
+# Categories for Applications
+THEME_SOUTHWARK_CATEGORIES:
+  - "Advertisement Consent"
+  - "Approval of Details - Article 30 DMPO"
+  - "Approval of Reserved Matters"
+  - "C. of Lawfulness Existing - Listed Bldg"
+  - "Certificate of Lawfulness - proposed"
+  - "Cert. of Lawfulness - existing"
+  - "Council's Own Development - Reg. 3"
+  - "Full Planning Permission"
+  - "Listed Building Consent"
+  - "Not Available"
+  - "Prior Approval"
+  - "S.73 Vary/remove conds/minor alterations"
+  - "Scoping Opinion (EIA)"
+  - "Tree Preservation Order - works related"
+  - "Tree works 5 day notification"
+  - "Tree Works in Conservation Area"
+  - "Variation / discharge of legal agreement"
+  - "Variation: non-material changes"
+
+# Status values for Applications
+THEME_SOUTHWARK_STATUSES:
+  appeal_decided: 'Appeal Decided'
+  appeal_received: 'Appeal Received'
+  application_decided: 'Application Decided'
+  application_withdrawn: 'Pending Committee Decision'
+  pending_decision: 'Pending Decision'
+  pending_delegated_decision: 'Pending Delegated Decision'
+  registered_as_valid: 'Registered as valid application'
+  application_invalid: 'App invalid or turned away not started'
+
+COUNTRY_NAME: 'the UK'
+COUNTRY_CODE: 'GB'
+THEME_SOUTHWARK_BOUNDING_BOX_SW:
+   - 51.4206
+   - -0.1115
+THEME_SOUTHWARK_BOUNDING_BOX_NE:
+   - 51.5098
+   - -0.0294
+MINIMUM_ACCURACY: 5

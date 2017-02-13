@@ -134,9 +134,15 @@ feature "Send a message to a councillor" do
       end
 
       context "but we're on the NSW theme" do
-        scenario "we can't see councillor messages sections" do
-          visit application_url(application, host: "nsw.127.0.0.1.xip.io")
+        around do |test|
+          with_theme_env 'nsw' do
+            ThemeChooser.theme
+            test.run
+          end
+        end
 
+        scenario "we can't see councillor messages sections" do
+          visit application_path(application)
           expect(page).to have_content("Application Tracking")
           expect(page).to_not have_content("Who should this go to?")
         end
