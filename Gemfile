@@ -24,7 +24,7 @@ gem "jquery-ui-rails"
 gem "foreman"
 gem "haml"
 gem "geokit"
-gem "nokogiri", '~> 1.6.0' # Nokogiri 1.7.0+ needs ruby 2.1
+gem "nokogiri"
 gem 'httparty'
 gem "will_paginate"
 gem "rails_autolink"
@@ -36,9 +36,7 @@ gem 'validates_email_format_of', '~> 1.6', '>= 1.6.3'
 gem "geocoder"
 # Rails 4 support is a work in progress so requires tracking master
 gem 'activeadmin', '~> 1.0.0.pre2'
-gem "devise", '~> 3.5' # Newer Devise needs Ruby 2.1+
-# Disabling metric_fu because it depends on rcov which doesn't work on Ruby 1.9
-#gem 'metric_fu'
+gem "devise", '~> 4.2.0' # Pin to a particular major version to get deprecation warnings
 gem "rake"
 gem 'rack-throttle'
 gem 'dalli'
@@ -51,7 +49,7 @@ gem 'rabl'
 gem 'newrelic_rpm'
 gem 'delayed_job_active_record'
 gem 'daemons'
-gem "validate_url"
+gem "validate_url", "~> 0.2.2" # 1.0.0 causes failures like "Validation failed: Comment url is not a valid URL" on mailto: links
 gem "twitter"
 gem "atdis"
 gem "oj"

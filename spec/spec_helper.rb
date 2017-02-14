@@ -2,10 +2,10 @@ require 'simplecov'
 require 'coveralls'
 
 # Generate coverage locally in html as well as in coveralls.io
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::HTMLFormatter,
   Coveralls::SimpleCov::Formatter
-]
+])
 SimpleCov.start('rails') do
   add_filter 'app/admin'
 end
@@ -102,7 +102,7 @@ RSpec.configure do |config|
   config.include EmailSpec::Helpers
   config.include EmailSpec::Matchers
   config.include FactoryGirl::Syntax::Methods
-  config.include Devise::TestHelpers, type: :view
+  config.include Devise::Test::ControllerHelpers, type: :view
   config.include SessionHelpers, type: :feature
   config.include EnvHelpers
   config.include MockLocationHelpers
