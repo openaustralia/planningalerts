@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
-  before_filter :load_configuration, :set_view_path
+  before_filter :set_header_variable, :set_view_path
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def authenticate_active_admin_user!
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def load_configuration
+  def set_header_variable
     @alert_count = Stat.applications_sent
   end
 
