@@ -28,14 +28,20 @@ describe "redirects" do
   end
 
   describe "ssl redirects" do
-    it "should redirect to ssl" do
-      get "http://www.planningalerts.org.au/applications"
-      expect(response).to redirect_to "https://www.planningalerts.org.au/applications"
-    end
+    context "in the production environment" do
+      before do
+        allow(Rails.env).to receive(:production?).and_return true
+      end
 
-    it "should redirect the api howto page" do
-      get "http://www.planningalerts.org.au/api/howto"
-      expect(response).to redirect_to "https://www.planningalerts.org.au/api/howto"
+      it "should redirect to ssl" do
+        get "http://www.planningalerts.org.au/applications"
+        expect(response).to redirect_to "https://www.planningalerts.org.au/applications"
+      end
+
+      it "should redirect the api howto page" do
+        get "http://www.planningalerts.org.au/api/howto"
+        expect(response).to redirect_to "https://www.planningalerts.org.au/api/howto"
+      end
     end
   end
 end

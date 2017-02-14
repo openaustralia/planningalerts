@@ -26,4 +26,14 @@ feature "Searching for development application near an address" do
       expect(page).to have_content "A lovely house"
     end
   end
+
+  context "with javascript" do
+    scenario "autocomplete results are displayed", js: true do
+      visit root_path
+
+      fill_in "Enter a street address", with: "24 Bruce Road Glenb"
+
+      expect_autocomplete_suggestions_to_include "Bruce Road, Glenbrook, New South Wales"
+    end
+  end
 end

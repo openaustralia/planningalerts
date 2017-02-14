@@ -102,6 +102,16 @@ feature "Sign up for alerts" do
 
       expect(page).to have_content("your alert has been activated")
     end
+
+    context "with javascript" do
+      scenario "autocomplete results are displayed", js: true do
+        visit applications_path(authority_id: "glenbrook")
+
+        fill_in "Enter a street address", with: "24 Bruce Road Glenb"
+
+        expect_autocomplete_suggestions_to_include "Bruce Road, Glenbrook, New South Wales"
+      end
+    end
   end
 
   context "when there is already an unconfirmed alert for the address" do
@@ -180,6 +190,16 @@ feature "Sign up for alerts" do
         expect(page).to have_content("your alert has been activated")
         expect(page).to have_content("24 Bruce Rd, Glenbrook NSW 2773")
       end
+    end
+  end
+
+  context "with javascript" do
+    scenario "autocomplete results are displayed", js: true do
+      visit '/alerts/signup'
+
+      fill_in "Enter a street address", with: "24 Bruce Road Glenb"
+
+      expect_autocomplete_suggestions_to_include "Bruce Road, Glenbrook, New South Wales"
     end
   end
 
