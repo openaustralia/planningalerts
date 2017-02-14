@@ -22,11 +22,11 @@ function updateFormAmount(new_amount) {
   }
 };
 
-if ("#button-pro-signup".length) {
+if ($("#button-pro-signup").length && typeof(StripeCheckout) === "object") {
   $('#button-pro-signup').prop("disabled", "false");
   $('#button-pro-signup + .no-js-message').addClass("hide");
 
-  if ('.amount-setter-input input'.length) {
+  if ($('.amount-setter-input input').length) {
     updateFormAmount($('.amount-setter-input input').val());
 
     $('.amount-setter-input input').bind('input', function() {
@@ -40,7 +40,12 @@ if ("#button-pro-signup".length) {
     });
   }
 
-  public_key = $('#button-pro-signup').attr('data-key');
+  if (typeof($('#button-pro-signup').attr('data-key')) !== "undefined") {
+    public_key = $('#button-pro-signup').attr('data-key');
+  } else {
+    public_key = "";
+  }
+
   email = $('#button-pro-signup').attr("data-email");
 
   var handler = StripeCheckout.configure({

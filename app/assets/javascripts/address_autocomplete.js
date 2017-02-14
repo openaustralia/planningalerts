@@ -12,4 +12,7 @@ function initAutoComplete() {
   });
 }
 
-initAutoComplete();
+// TODO: Once a409874 is merged, remove the test search for the "#q" selector
+if (document.querySelectorAll("#q").length || document.querySelectorAll('.address-autocomplete-input').length) {
+  initAutoComplete();
+}
