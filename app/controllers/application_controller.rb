@@ -25,7 +25,6 @@ class ApplicationController < ActionController::Base
 
   def load_configuration
     @alert_count = Stat.applications_sent
-    @authority_count = Authority.active.count
   end
 
   def set_view_path

@@ -1,5 +1,7 @@
 class AuthoritiesController < ApplicationController
   def index
+    @authority_count = Authority.active.count
+
     # map from state name to authorities in that state
     states = Authority.enabled.group(:state).order(:state).map{|a| a.state}
     @authorities = {}
