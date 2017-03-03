@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/openaustralia/planningalerts.png?label=ready&title=Ready)](https://waffle.io/openaustralia/planningalerts)
 # PlanningAlerts
 
 Find out and have your say about development applications in your area.
