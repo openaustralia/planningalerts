@@ -1,2 +1,3 @@
 sphinx: rvm . do bundle exec rake ts:run_in_foreground RAILS_ENV=production
 worker: rvm . do bundle exec rake jobs:work RAILS_ENV=production
+actionmailer-worker: rvm . do bundle exec rake jobs:work RAILS_ENV=production QUEUE=mailers
