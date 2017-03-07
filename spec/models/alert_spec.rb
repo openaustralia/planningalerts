@@ -672,6 +672,19 @@ describe Alert do
           alert.process!
           expect((alert.last_processed - Time.now).abs).to be < 1
         end
+
+        context "that was not properly geocoded" do
+          let(:application) do
+            VCR.use_cassette('application_with_no_address') do
+              create(:application, lat: 1.0, lng: 2.0, address: "An address that can't be geocoded")
+            end
+          end
+
+          it "should not cause the application to be re-geocoded" do
+            expect(Location).to_not receive(:geocode)
+            alert.process!
+          end
+        end
       end
 
       context "and no new applications nearby" do

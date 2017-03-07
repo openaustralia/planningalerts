@@ -200,7 +200,7 @@ class Alert < ActiveRecord::Base
 
     # Update the tallies on each application.
     applications.each do |application|
-      application.update_attribute(:no_alerted, (application.no_alerted || 0) + 1)
+      application.increment(:no_alerted)
     end
 
     # Return number of applications, comments and replies sent
