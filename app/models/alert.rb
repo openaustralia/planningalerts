@@ -192,11 +192,8 @@ class Alert < ActiveRecord::Base
     replies = new_replies
 
     if !applications.empty? || !comments.empty? || !replies.empty?
-      # Temporarily disable Application Tracking email alerts
-      if theme != "nsw"
-        AlertNotifier.alert(theme, self, applications, comments, replies).deliver_now
-        self.last_sent = Time.now
-      end
+      AlertNotifier.alert(theme, self, applications, comments, replies).deliver_now
+      self.last_sent = Time.now
     end
     self.last_processed = Time.now
     save!
