@@ -7,5 +7,3 @@
   %p
     = link_to "How to comment", @application.comment_url
     on this application (from #{@application.authority.full_name}).
-    - if @application.on_notice_to
-      = on_notice_text(@application)
