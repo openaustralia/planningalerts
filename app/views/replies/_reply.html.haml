@@ -9,7 +9,7 @@
         %span.comment-time-block
           replied to
           = link_to reply.comment.name, "#comment#{reply.comment.id}", title: "View comment"
-          = link_to "#reply#{reply.id}", title: "View reply" do
+          = link_to "#{application_path(reply.comment.application)}\#reply#{reply.id}", title: "View reply" do
             %time.comment-time{datetime: reply.received_at.strftime("%F")}
               #{time_ago_in_words(reply.received_at)} ago
     %blockquote.comment-text= simple_format(reply.text)
