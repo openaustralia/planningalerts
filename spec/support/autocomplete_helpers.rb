@@ -8,7 +8,9 @@ module AutocompleteHelpers
 
     # Confirm that the suggested addresses appear.
     within ".pac-container" do
-      expect(page).to have_content expected_address
+      # This regex is a hack because google seems to change how results are returned
+      # it would be better to find less brittle way of testing this.
+      expect(page).to have_content /#{expected_address.sub(", ","(, )?")}/
     end
   end
 end
