@@ -1,9 +1,9 @@
 #comments-area
   - if @comments.present?
     %h4= pluralize(@comments.count, "Comment")
-    %p
-      - if @application.on_notice_to
-        = on_notice_text(@application)
+    - if @application.on_notice_to
+      - unless @councillors && @application.official_submission_period_expired?
+        %p= on_notice_text(@application)
     %p.small.quiet
       Have your say by #{link_to "adding your own comment", "#add-comment", class: "link-to-comment-form"}.
     %ol#comments
