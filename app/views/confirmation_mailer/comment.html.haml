@@ -7,9 +7,9 @@
 
 %p If your email program does not let you click on this link, just copy and paste it into your web browser and hit return.
 
-%p
-  Your comment:
-  = comment_as_html(@comment.text)
+%p Your comment:
+
+%blockquote= comment_as_html(@comment.text)
 
 %p
   On the application:
