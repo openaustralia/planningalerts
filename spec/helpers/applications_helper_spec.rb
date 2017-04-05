@@ -171,6 +171,18 @@ describe ApplicationsHelper do
       end
     end
 
+    describe "applications_json_path" do
+      let(:authority) { create(:authority, short_name: "marrickville", ) }
+      let(:user) { create(:user)}
+      it "returns authority applications path as JSON" do
+        expect(helper).to receive(:current_user).and_return(user)
+        user.api_key ="ABCDE12345"
+        expect(helper.applications_json_path(authority)).to eq(
+        "/authorities/marrickville/applications.js?key=ABCDE12345"
+        )
+      end
+    end
+
     describe "static maps" do
       before :each do
         allow(@application).to receive(:address).and_return("Foo Road, NSW")
