@@ -1,6 +1,6 @@
 class AlertNotifier < ActionMailer::Base
   include ActionMailerThemer
-  helper :application, :applications
+  helper :application, :applications, :comments
 
   def alert(theme, alert, applications, comments = [], replies = [])
     @theme = theme
