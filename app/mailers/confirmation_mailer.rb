@@ -1,7 +1,6 @@
 class ConfirmationMailer < ActionMailer::Base
   include ActionMailerThemer
-
-  add_template_helper(CommentsHelper)
+  helper :comments
 
   def confirm(theme, object)
     class_name = object.class.name.underscore
