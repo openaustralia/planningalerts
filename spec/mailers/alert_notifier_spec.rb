@@ -21,6 +21,15 @@ Carles typewriter officia, cillum ethical elit swag. Consequat cillum yr wes and
 Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. Odd future aesthetic tempor, mustache bespoke gastropub dolore polaroid salvia helvetica. Kogi chambray cardigan sunt single-origin coffee. Cardigan echo park master cleanse craft beer. Carles sunt selvage, beard gastropub artisan chillwave odio VHS street art you probably haven't heard of them gentrify mixtape aesthetic. Salvia chambray anim occupy echo park est. Pork belly sint post-ironic ennui, PBR vero culpa readymade cardigan laboris.
     EOF
     )
+    @c3 = create(:comment, name: "Natalie Black", application: @a3, id: 3, text: "Is this actually a good idea?")
+    @c4 = create(:comment, name: "Natalie White", application: @a3, id: 4, text: "This is acutally a good idea.")
+    @c5 = create(:comment, name: "Natalie Brown", application: @a3, id: 5, text: "How does this affect our neigbourhood?")
+    @c6 = create(:comment, name: "Natalie Green", application: @a3, id: 6, text: "When is the townhall meeting?")
+    @c7 = create(:comment, name: "Natalie Grey", application: @a3, id: 7, text: "I'm not sure this is a good idea?")
+    @c8 = create(:comment, name: "Natalie Silver", application: @a3, id: 8, text: "I think it's an excellent idea.")
+    @c9 = create(:comment, name: "Natalie Gold", application: @a3, id: 9, text: "I can't wait for this to happen.")
+    @c10 = create(:comment, name: "Natalie Rose", application: @a3, id: 10, text: "I would like to have information session for the residents")
+    @c11 = create(:comment, name: "Natalie Scarlet", application: @a3, id: 11, text: "Is this actually a good idea?")
   end
 
   describe "when sending a planning alert with one new comment" do
@@ -49,6 +58,12 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
     it "should nicely format (in HTML) a list of multiple planning applications" do
       expect(email.html_part.body.to_s).to eq(Rails.root.join("spec/mailers/regression/alert_notifier/email3.html").read)
     end
+  end
+
+  describe "when sending an email alert with more than 10 comments in the application" do
+    let(:email) { AlertNotifier.alert("default", @alert, [], [@c1, @c2])}
+
+    expect()
   end
 
   describe "when send a planning alert with one new comment and two new planning applications" do
