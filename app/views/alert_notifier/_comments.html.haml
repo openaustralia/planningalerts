@@ -5,4 +5,8 @@
     The following <strong>new comments</strong> have been made on planning applications
   within #{meters_in_words(@alert.radius_meters)} of
   %strong= @alert.address
-= render :partial => "comment", :collection => @comments
+= render :partial => "comment", :collection => @comments.last(10)
+
+- if @comments.count > 10
+  =link_to comments_url do
+    see more comments
