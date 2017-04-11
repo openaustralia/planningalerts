@@ -1,6 +1,4 @@
 module ApplicationsHelper
-
-
   def display_description_with_address(application)
     display_description =
       if application.description
@@ -70,7 +68,7 @@ module ApplicationsHelper
     "#{@application.address} | #{@application.date_scraped.to_date.to_formatted_s(:rfc822)}"
   end
 
-  def applications_json_path(authority)
+  def authority_applications_json_path_for_current_user(authority)
     authority_applications_path(authority.short_name_encoded, format: :js, key: current_user.api_key)
   end
 
