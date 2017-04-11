@@ -29,7 +29,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
     @c8 = create(:comment, name: "Natalie Silver", application: @a3, id: 8, text: "I think it's an excellent idea.")
     @c9 = create(:comment, name: "Natalie Gold", application: @a3, id: 9, text: "I can't wait for this to happen.")
     @c10 = create(:comment, name: "Natalie Rose", application: @a3, id: 10, text: "I would like to have information session for the residents")
-    @c11 = create(:comment, name: "Natalie Scarlet", application: @a3, id: 11, text: "Is this actually a good idea?")
+    @c11 = create(:comment, name: "Natalie Scarlet", application: @a3, id: 11, text: "I'm moving out.")
   end
 
   describe "when sending a planning alert with one new comment" do
@@ -61,9 +61,13 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
   end
 
   describe "when sending an email alert with more than 10 comments in the application" do
-    let(:email) { AlertNotifier.alert("default", @alert, [], [@c1, @c2])}
-
-    expect()
+    let(:email) { AlertNotifier.alert("default", @alert, [], [@c1, @c2, @c3, @c4, @c5, @c6, @c7, @c8, @c9, @c10, @c11])}
+    it "should show the latest 10 comments in html" do
+      expect(email.html_part.body.to_s).to eq(Rails.root.join("spec/mailers/regression/alert_notifier/email5.html").read)
+    end
+    it "should show the latest 10 comments in text" do
+      expect(email.text_part.body.to_s).to include Rails.root.join("spec/mailers/regression/alert_notifier/email5.txt").read
+    end
   end
 
   describe "when send a planning alert with one new comment and two new planning applications" do
