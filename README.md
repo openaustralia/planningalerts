@@ -13,8 +13,8 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 [![Build Status](https://travis-ci.org/openaustralia/planningalerts.png?branch=master)](https://travis-ci.org/openaustralia/planningalerts) [![Coverage Status](https://coveralls.io/repos/openaustralia/planningalerts/badge.png?branch=master)](https://coveralls.io/r/openaustralia/planningalerts?branch=master) [![Code Climate](https://codeclimate.com/github/openaustralia/planningalerts.png)](https://codeclimate.com/github/openaustralia/planningalerts)
 
 **Install Dependencies**
- * Install MySql - On OSX download dmg from [http://dev.mysql.com/downloads/](http://dev.mysql.com/downloads/)
- * Install Sphinx - `brew install sphinx`
+ * Install MySql - On macOS download dmg from [http://dev.mysql.com/downloads/](http://dev.mysql.com/downloads/)
+ * Install Sphinx - On macOS `brew install sphinx`
  * Install PhantomJS for headless browser testing with Poltergeist - follow
    [instructions in the Poltergeist Readme](https://github.com/teampoltergeist/poltergeist#installing-phantomjs).
 
