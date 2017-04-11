@@ -30,11 +30,11 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
  * Create your own database config file - `cp config/database.yml.example config/database.yml`
  * Update the config/database.yml with your root mysql credentials
  * If you are on OSX change the socket to /tmp/mysql.sock
- * Set up the databases - `rake db:setup`
+ * Set up the databases - `bundle exec rake db:setup`
  * Generate Thinking Sphinx configuration - `bundle exec rake ts:configure`
 
 **Run The Tests**
- * Run the test suite - `rake`
+ * Run the test suite - `bundle exec rake`
 
 ### Scraping and sending emails in development
 
