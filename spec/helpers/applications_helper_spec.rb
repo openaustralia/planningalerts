@@ -171,15 +171,15 @@ describe ApplicationsHelper do
       end
     end
 
-    describe "authority_applications_json_path_for_current_user" do
+    describe "authority_applications_json_url_for_current_user" do
       let(:authority) { create(:authority, short_name: "marrickville", ) }
       let(:user) { build(:user, api_key: "ABCDE12345" )}
 
       before { expect(helper).to receive(:current_user).and_return(user) }
 
-      subject { helper.authority_applications_json_path_for_current_user(authority) }
+      subject { helper.authority_applications_json_url_for_current_user(authority) }
 
-      it { is_expected.to eq("/authorities/marrickville/applications.js?key=ABCDE12345") }
+      it { is_expected.to eq("http://api.planningalerts.org.au/authorities/marrickville/applications.js?key=ABCDE12345") }
     end
 
     describe "static maps" do
