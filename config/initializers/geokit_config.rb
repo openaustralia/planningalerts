@@ -13,15 +13,13 @@ if defined? Geokit
 	# These setting can be nil if not needed, otherwise, addr and port must be
 	# filled in at a minimum.  If the proxy requires authentication, the username
 	# and password can be provided as well.
-	Geokit::Geocoders::proxy_addr = nil
-	Geokit::Geocoders::proxy_port = nil
-	Geokit::Geocoders::proxy_user = nil
-	Geokit::Geocoders::proxy_pass = nil
+	Geokit::Geocoders::proxy = nil
 
 	# This is your yahoo application key for the Yahoo Geocoder.
 	# See http://developer.yahoo.com/faq/index.html#appid
 	# and http://developer.yahoo.com/maps/rest/V1/geocode.html
-	Geokit::Geocoders::yahoo = 'REPLACE_WITH_YOUR_YAHOO_KEY'
+	Geokit::Geocoders::YahooGeocoder.key = 'REPLACE_WITH_YOUR_YAHOO_KEY'
+        Geokit::Geocoders::YahooGeocoder.secret = 'REPLACE_WITH_YOUR_YAHOO_SECRET'
 
 	# This is your Google Maps geocoder key.
 	# See http://www.google.com/apis/maps/signup.html
@@ -37,7 +35,7 @@ if defined? Geokit
 	# usage tied to an account, the value should be set to username:password.
 	# See http://geocoder.us
 	# and http://geocoder.us/user/signup
-	Geokit::Geocoders::geocoder_us = false
+	Geokit::Geocoders::UsGeocoder.key = nil
 
 	# This is your authorization key for geocoder.ca.
 	# To use the free service, the value can be set to nil or false.  For
@@ -45,7 +43,7 @@ if defined? Geokit
 	# Geocoder.ca.
 	# See http://geocoder.ca
 	# and http://geocoder.ca/?register=1
-	Geokit::Geocoders::geocoder_ca = false
+	Geokit::Geocoders::CaGeocoder.key = nil
 
 	# Uncomment to use a username with the Geonames geocoder
 	#Geokit::Geocoders::geonames="REPLACE_WITH_YOUR_GEONAMES_USERNAME"
