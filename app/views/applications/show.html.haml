@@ -6,6 +6,11 @@
   %meta(name="twitter:title" content="#{@application.address}")
   %meta(name="twitter:description" content="#{@application.description[0..199] if @application.description}")
   %meta(name="twitter:image" content="#{google_static_streetview_url(@application, size: "120x120")}")
+  %meta(property="fb:app_id" content="335651659855671")
+  %meta(property="og:url" content="#{application_url(@application)}")
+  %meta(property="og:title" content="#{@application.address}")
+  %meta(property="og:description" content="#{@application.description[0..199] if @application.description}")
+  %meta(property="og:image" content="#{google_static_streetview_url(@application, size: "200x200")}")
 
 = render "applications/facebook"
 = render "applications/twitter"
