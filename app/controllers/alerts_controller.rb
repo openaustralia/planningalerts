@@ -11,6 +11,7 @@ class AlertsController < ApplicationController
     @set_focus_control = params[:address] ? "alert_email" : "alert_address"
   end
 
+
   def create
     @address = params[:alert][:address]
     @alert = NewAlertParser.new(
