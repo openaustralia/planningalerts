@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
-  before_filter :set_header_variable, :set_view_path
+  before_filter :set_header_variable, :set_view_path, :validate_page_param
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def authenticate_active_admin_user!
@@ -44,5 +44,13 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :organisation])
+  end
+
+  def validate_page_param
+    unless params[:page].present? && params[:page].to_i > 0
+     params[:page] = 1
+    else
+     params[:page] = params[:page].to_i
+   end
   end
 end
