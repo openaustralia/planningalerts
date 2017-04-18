@@ -13,7 +13,6 @@ class AlertsController < ApplicationController
 
 
   def create
-    @address = params[:alert][:address]
     @alert = NewAlertParser.new(
       Alert.new(
         email: params[:alert][:email],
@@ -22,6 +21,7 @@ class AlertsController < ApplicationController
         theme: @theme
       )
     ).parse
+
     if @alert.present? && !@alert.save
       render 'new'
     end

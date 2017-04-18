@@ -1,6 +1,5 @@
 PlanningalertsApp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.assets.precompile += %w( print.css ie.css placeholder_polyfill.min.css placeholder_polyfill.jquery.min.combo.js maps.js      		applications.js atdis.js bar_graph.js stacked_area_chart.js )
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
@@ -17,12 +16,7 @@ PlanningalertsApp::Application.configure do
   # Send mail via Mailcatcher and raise an error if there is a problem
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-      :address => 'localhost',
-      :port => 25,
-      :openssl_verify_mode => :none,
-      :enable_starttls_auto => false
-  }
+  config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
   
   # Print deprecation notices to the Rails logger

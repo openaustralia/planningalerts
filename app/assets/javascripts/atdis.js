@@ -1,5 +1,5 @@
-require jquery-ui/datepicker
-require jquery-ui/datepicker-en-AU.js
+//= require jquery-ui/datepicker
+//= require jquery-ui/datepicker-en-AU.js
 
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
