@@ -12,6 +12,7 @@ class AlertsController < ApplicationController
   end
 
   def create
+    @address = params[:alert][:address]
     @alert = NewAlertParser.new(
       Alert.new(
         email: params[:alert][:email],
