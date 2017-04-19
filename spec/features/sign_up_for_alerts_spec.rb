@@ -17,6 +17,7 @@ feature "Sign up for alerts" do
     click_button("Create alert")
 
     expect(page).to have_content("Now check your email")
+    expect(page).to have_content("Return to applications near 24 Bruce Rd, Glenbrook")
 
     confirm_alert_in_email
 
@@ -55,6 +56,7 @@ feature "Sign up for alerts" do
       end
 
       expect(page).to have_content("Now check your email")
+      expect(page).to have_content("Return to applications near 24 Bruce Rd, Glenbrook")
 
       confirm_alert_in_email
 
@@ -76,6 +78,7 @@ feature "Sign up for alerts" do
       click_button("Create alert")
 
       expect(page).to have_content("Now check your email")
+      expect(page).to have_content("Return to applications near 24 Bruce Rd, Glenbrook")
 
       confirm_alert_in_email
 
@@ -97,6 +100,7 @@ feature "Sign up for alerts" do
       click_button("Create alert")
 
       expect(page).to have_content("Now check your email")
+      expect(page).to have_content("Return to applications near 24 Bruce Rd, Glenbrook")
 
       confirm_alert_in_email
 
@@ -134,6 +138,7 @@ feature "Sign up for alerts" do
       click_button("Create alert")
 
       expect(page).to have_content("Now check your email")
+      expect(page).to have_content("Return to applications near 24 Bruce Rd, Glenbrook")
 
       confirm_alert_in_email
 
@@ -161,6 +166,7 @@ feature "Sign up for alerts" do
       click_button("Create alert")
 
       expect(page).to have_content("Now check your email")
+      expect(page).to have_content("Return to applications near 24 Bruce Rd, Glenbrook")
 
       open_last_email_for("jenny@email.org")
 
@@ -182,6 +188,7 @@ feature "Sign up for alerts" do
         click_button("Create alert")
 
         expect(page).to have_content("Now check your email")
+        expect(page).to have_content("Return to applications near 24 Bruce Rd, Glenbrook")
 
         open_email("jenny@email.org")
 
