@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
 
   def validate_page_param
     unless params[:page].present? && params[:page].to_i > 0
-     params[:page] = 1
+     params[:page] = nil
     else
      params[:page] = params[:page].to_i
    end
