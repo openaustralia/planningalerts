@@ -220,7 +220,7 @@ class Authority < ActiveRecord::Base
 
   def morph_feed_url_for_date_range(start_date, end_date)
     query = CGI.escape("select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
-    key = CGI.escape(ENV['MORPH_API_KEY']) || ""
+    key = CGI.escape(ENV['MORPH_API_KEY'] || "")
     "https://api.morph.io/#{morph_name}/data.json?query=#{query}&key=#{key}"
   end
 
