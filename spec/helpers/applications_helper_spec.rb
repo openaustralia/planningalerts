@@ -85,6 +85,12 @@ describe ApplicationsHelper do
     end
   end
 
+  describe "decode" do
+    it "should decode the html entities such as &amp; to &" do
+      expect(decode("&#8211; &amp; &amp;#8217;")).to eq("– & ’")
+    end
+  end
+
   describe "on_notice_text" do
     before :each do
       allow(@application).to receive(:address).and_return("foo")

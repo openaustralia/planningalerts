@@ -62,6 +62,7 @@ gem 'everypolitician-popolo', git: 'https://github.com/everypolitician/everypoli
 # Using master until an updated version of the Gem is released https://github.com/ciudadanointeligente/writeit-rails/issues/4
 gem 'writeit-rails', git: 'https://github.com/ciudadanointeligente/writeit-rails.git', branch: 'master'
 gem 'mime-types', '~> 2.99' # our writeit gem version is incompatible with newer versions
+gem 'htmlentities'
 
 group :test do
   gem 'capybara'
@@ -78,7 +79,6 @@ group :test do
 end
 
 group :development do
-  gem 'htmlentities'
   gem 'letter_opener'
   gem 'guard'
   gem 'listen', '< 3' # Used by guard. 3.0.0+ includes ruby_dep 1.5.0 which needs Ruby 2.2+
