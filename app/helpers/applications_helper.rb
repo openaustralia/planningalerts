@@ -70,7 +70,7 @@ module ApplicationsHelper
 
   # TODO: extract to theme
   def api_host
-   "api.planningalerts.org.au"
+    "api.planningalerts.org.au"
   end
 
   def authority_applications_json_url_for_current_user(authority)
