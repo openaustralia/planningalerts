@@ -18,4 +18,4 @@
   = render "applications", :applications => @applications
 
 - if current_user && @authority
-  = link_to "View as JSON", authority_applications_json_url_for_current_user(@authority)
+  = link_to "Get applications as JSON", authority_applications_json_url_for_current_user(@authority)
