@@ -16,3 +16,6 @@
 
 = paginated_section @applications, :previous_label => "« Newer", :next_label => "Older »" do
   = render "applications", :applications => @applications
+
+- if current_user && @authority
+  = link_to "View as JSON", authority_applications_json_url_for_current_user(@authority)

@@ -67,6 +67,15 @@ module ApplicationsHelper
     # Include the scraping date in the title so that multiple applications from the same address have different titles
     "#{@application.address} | #{@application.date_scraped.to_date.to_formatted_s(:rfc822)}"
   end
+  
+  # TODO: extract to theme
+  def api_host
+   "api.planningalerts.org.au"
+  end
+
+  def authority_applications_json_url_for_current_user(authority)
+    authority_applications_url(authority.short_name_encoded, host: api_host, format: :js, key: current_user.api_key)
+  end
 
   def google_static_map(application, options)
     google_static_map2(options.merge(lat: application.lat, lng: application.lng, label: "Map of #{application.address}"))
@@ -92,4 +101,5 @@ module ApplicationsHelper
     size = options[:size] || "350x200"
     image_tag(google_static_streetview_url(application, options), size: size, alt: "Streetview of #{application.address}")
   end
+
 end
