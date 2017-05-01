@@ -68,11 +68,6 @@ module ApplicationsHelper
     "#{@application.address} | #{@application.date_scraped.to_date.to_formatted_s(:rfc822)}"
   end
 
-  # TODO: extract to theme
-  def api_host
-    "api.planningalerts.org.au"
-  end
-
   def authority_applications_json_url_for_current_user(authority)
     link_params = {format: :js, key: current_user.api_key }
     link_params.merge!(host: api_host) if Rails.env.production?
@@ -105,4 +100,10 @@ module ApplicationsHelper
     image_tag(google_static_streetview_url(application, options), size: size, alt: "Streetview of #{application.address}")
   end
 
+  private
+
+  # TODO: extract to theme
+  def api_host
+    "api.planningalerts.org.au"
+  end
 end
