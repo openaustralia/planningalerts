@@ -74,7 +74,10 @@ module ApplicationsHelper
   end
 
   def authority_applications_json_url_for_current_user(authority)
-    authority_applications_url(authority.short_name_encoded, host: api_host, format: :js, key: current_user.api_key)
+    link_params = {format: :js, key: current_user.api_key }
+    link_params.merge!(host: api_host) if Rails.env.production?
+
+    authority_applications_url(authority.short_name_encoded, link_params)
   end
 
   def google_static_map(application, options)

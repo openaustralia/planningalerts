@@ -180,7 +180,13 @@ describe ApplicationsHelper do
         let(:user) { build(:user, api_key: "ABCDE12345" )}
         before { expect(helper).to receive(:current_user).and_return(user) }
 
-        it { is_expected.to eq("http://api.planningalerts.org.au/authorities/marrickville/applications.js?key=ABCDE12345") }
+        it { is_expected.to eq "http://test.host/authorities/marrickville/applications.js?key=ABCDE12345" }
+
+        context "and we're in production" do
+          before { allow(Rails.env).to receive(:production?).and_return true }
+
+          it { is_expected.to eq "http://api.planningalerts.org.au/authorities/marrickville/applications.js?key=ABCDE12345" }
+        end
       end
 
       context "when there is no current user" do
