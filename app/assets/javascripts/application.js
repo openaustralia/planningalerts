@@ -1,10 +1,11 @@
-//= require jquery-ui/autocomplete
-//= require jquery-ui/menu
-//= require jquery.ui.autocomplete.html.js
-//= require address_autocomplete.js
-//= require geolocation
-//= require applications
-//= require event_tracking
+require jquery-ui/autocomplete
+require jquery-ui/menu
+require jquery.ui.autocomplete.html.js
+require address_autocomplete.js
+require geolocation
+require applications
+require event_tracking
+require jquery-ui/datepicker
 
 $("#menu .toggle").click(function(){
   $("#menu ul").slideToggle("fast", function(){
