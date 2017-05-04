@@ -1,4 +1,4 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
 
 gem 'rails', '4.2.7.1'
 gem 'mysql2', '> 0.3'
@@ -79,7 +79,6 @@ group :test do
 end
 
 group :development do
-  gem 'letter_opener'
   gem 'guard'
   gem 'listen', '< 3' # Used by guard. 3.0.0+ includes ruby_dep 1.5.0 which needs Ruby 2.2+
   gem 'guard-rspec'
