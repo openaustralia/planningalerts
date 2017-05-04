@@ -108,6 +108,9 @@ class Application < ActiveRecord::Base
 
   def description
     description = read_attribute(:description)
+    coder = HTMLEntities.new
+    first_decoding = coder.decode(description)
+    description = coder.decode(first_decoding)
     if description
       # If whole description is in upper case switch the whole description to lower case
       description = description.downcase if description.upcase == description

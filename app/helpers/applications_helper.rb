@@ -24,11 +24,6 @@ module ApplicationsHelper
     text
   end
 
-  def decode(description)
-    coder = HTMLEntities.new
-    first_decoding = coder.decode(description)
-    coder.decode(first_decoding)
-  end
 
   def days_ago_in_words(date)
     case date

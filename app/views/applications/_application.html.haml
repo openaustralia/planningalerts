@@ -7,4 +7,4 @@
       - else
         #{time_ago_in_words(application.date_scraped)} ago
     %p.description
-      = application.respond_to?(:excerpts) && application.excerpts ? decode(application.excerpts.description.html_safe) : decode(application.description)
+      = application.respond_to?(:excerpts) && application.excerpts ? application.excerpts.description.html_safe : application.description
