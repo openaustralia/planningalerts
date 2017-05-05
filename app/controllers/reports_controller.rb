@@ -11,6 +11,7 @@ class ReportsController < ApplicationController
     if verify_recaptcha && @report.save
       ReportNotifier.notify(@report).deliver_later
     else
+      # TODO: Show an error message because the CAPTCHA probably wasn't verified
       render 'new'
     end
   end
