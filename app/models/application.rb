@@ -109,6 +109,8 @@ class Application < ActiveRecord::Base
   def description
     description = read_attribute(:description)
     coder = HTMLEntities.new
+    # first_decoding converts &amp; to &
+    # the secound call of decode converts &#<entity_number> into actual entity symbol.
     first_decoding = coder.decode(description)
     description = coder.decode(first_decoding)
     if description
