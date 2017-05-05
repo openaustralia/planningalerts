@@ -11,10 +11,6 @@
     = f.input :name, label: "Your name", placeholder: "e.g. Jane Citizen", input_html: { required: "required" }
     = f.input :email, label: "Your email", placeholder: "e.g. your@email.com", input_html: { required: "required" }
     = f.input :details, label: "Why should this comment be removed?", as: :text, input_html: { required: "required" }
-    -# This is a spam bot honeytrap. A human being should not be filling this in
-    -# It's not awesome for screenreaders though
-    %li{style: "display: none;"}
-      = label_tag :little_sweety, 'Little Sweety'
-      = text_field_tag :little_sweety, "", placeholder: "Please leave this blank"
+    = recaptcha_tags
   = f.actions do
     = f.action :submit, label: "Send report", button_html: { class: "button button-action" }
