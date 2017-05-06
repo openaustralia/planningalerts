@@ -12,7 +12,7 @@ class ReportsController < ApplicationController
       ReportNotifier.notify(@report).deliver_later
     else
       if flash[:recaptcha_error]
-        flash[:error] = "Sorry, we couldn't verify that you're not a robot. Make sure you click the <em>I'm not a robot</em> box below and try again.".html_safe
+        flash[:error] = "Sorry, we couldn’t verify that you’re not a robot. Make sure you click the <em>I’m not a robot</em> box below and try again.".html_safe
       end
 
       render 'new'
