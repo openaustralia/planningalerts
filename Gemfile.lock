@@ -366,6 +366,8 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
+    recaptcha (4.3.1)
+      json
     redcarpet (3.4.0)
     ref (2.0.0)
     refills (0.1.0)
@@ -571,6 +573,7 @@ DEPENDENCIES
   rake
   rb-fsevent
   rb-inotify
+  recaptcha
   redcarpet
   refills
   rspec-activemodel-mocks
@@ -597,4 +600,4 @@ DEPENDENCIES
   writeit-rails!
 
 BUNDLED WITH
-   1.14.3
+   1.14.6

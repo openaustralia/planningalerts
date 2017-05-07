@@ -18,8 +18,12 @@ describe ReportNotifier do
     @notifier = ReportNotifier.notify(@report)
   end
   
-  it "should come from the reporter's email address" do
-    expect(@notifier.from).to eq(["reporter@foo.com"])
+  it "should come from the moderator's email address" do
+    expect(@notifier.from).to eq(["moderator@planningalerts.org.au"])
+  end
+
+  it "should have a replyto of the reporter's email address" do
+    expect(@notifier.reply_to).to eq(["reporter@foo.com"])
   end
   
   it "should go to the moderator email address" do

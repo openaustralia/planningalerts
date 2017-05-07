@@ -62,6 +62,7 @@ gem 'everypolitician-popolo', git: 'https://github.com/everypolitician/everypoli
 # Using master until an updated version of the Gem is released https://github.com/ciudadanointeligente/writeit-rails/issues/4
 gem 'writeit-rails', git: 'https://github.com/ciudadanointeligente/writeit-rails.git', branch: 'master'
 gem 'mime-types', '~> 2.99' # our writeit gem version is incompatible with newer versions
+gem 'recaptcha', require: 'recaptcha/rails'
 
 group :test do
   gem 'capybara'

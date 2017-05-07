@@ -213,7 +213,8 @@ feature "Give feedback" do
 
     expect(unread_emails_for("moderator@planningalerts.org.au").size).to eq(1)
     open_email("moderator@planningalerts.org.au")
-    expect(current_email).to be_delivered_from("Joe Reporter <reporter@foo.com>")
+    expect(current_email).to be_delivered_from("Joe Reporter <moderator@planningalerts.org.au>")
+    expect(current_email).to have_reply_to("Joe Reporter <reporter@foo.com>")
     expect(current_email).to have_subject("PlanningAlerts: Abuse report")
   end
 
