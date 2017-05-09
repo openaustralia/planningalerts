@@ -1,5 +1,5 @@
 ActiveAdmin.register Report do
-  actions :index, :show
+  actions :index, :show, :destroy
 
   filter :name
   filter :email
