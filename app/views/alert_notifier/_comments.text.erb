@@ -3,4 +3,7 @@ The following new comment has been made on a planning application within <%= met
 <% else %>
 The following new comments have been made on planning applications within <%= meters_in_words(@alert.radius_meters) %> of <%= @alert.address %>:
 <% end %>
-<%= render :partial => "comment", :collection => @comments, :spacer_template => "spacer" -%>
+<%= render :partial => "comment", :collection => @comments.last(10), :spacer_template => "spacer" %>
+<% if @comments.count > 10 %>
+See more comments: <%= comments_url %>
+<% end %>
