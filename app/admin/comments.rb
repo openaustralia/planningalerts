@@ -22,6 +22,7 @@ ActiveAdmin.register Comment do
   filter :email
   filter :name
   filter :text
+  filter :councillor
 
   show title: proc{ |resource| "Comment by #{resource.name}#{" (unconfirmed)" unless resource.confirmed?}" }
 
