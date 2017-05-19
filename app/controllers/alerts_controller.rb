@@ -21,7 +21,6 @@ class AlertsController < ApplicationController
         theme: @theme
       )
     ).parse
-
     if @alert.present? && !@alert.save
       render 'new'
     end
