@@ -20,7 +20,7 @@ Add your own comment: https://dev.planningalerts.org.au/applications/2?utm_campa
 
 Find PlanningAlerts useful? Support this charity-run project with a tax deductible donation:
 
-https://dev.planningalerts.org.au/donate?utm_medium=email&utm_source=alerts
+https://dev.planningalerts.org.au/donations/new?utm_medium=email&utm_source=alerts
 
 PlanningAlerts is a free service run by independent charity the OpenAustralia Foundation.
 Discover our other projects: https://www.openaustraliafoundation.org.au/projects/
