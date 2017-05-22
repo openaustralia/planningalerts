@@ -1,5 +1,29 @@
 $donations_color: #315D18;
 
+.notice.donations-notice {
+  padding: 1em 0;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+
+  @include at-breakpoint(40em) {
+    padding: 1.5em 0;
+  }
+
+  p {
+    font-size: 1.25em;
+    margin: 0;
+
+    @include at-breakpoint(40em) {
+      font-size: 1.5em;
+    }
+
+    @include at-breakpoint(50em) {
+      font-size: 1.4em;
+    }
+  }
+}
+
 .donations-hero-image {
   // TODO: Add large background image to connect this page
   //       to the value people get from PlanningAlerts
