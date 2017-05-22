@@ -29,7 +29,7 @@ class DonationsController < ApplicationController
     flash[:error] = e.message
     redirect_to new_donation_path
   rescue ActiveRecord::RecordInvalid
-    flash[:error] = "Sorry, we weren't able to process your donation. Please email us at contact@planningalerts and we'll sort it out. Thanks for your support."
+    flash[:error] = "Sorry, we weren't able to process your donation. Please email us at contact@planningalerts and we'll sort it out. Thanks for your support and patience."
     redirect_to new_donation_path
   end
 

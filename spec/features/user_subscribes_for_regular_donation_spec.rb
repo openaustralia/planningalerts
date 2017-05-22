@@ -80,7 +80,7 @@ feature "Subscribing to donate monthly" do
 
           fill_out_and_submit_stripe_card_form_with_email(email)
 
-          expect(page).to have_content "Sorry, we weren't able to process your donation. Please email us at contact@planningalerts and we'll sort it out. Thanks for your support."
+          expect(page).to have_content "Sorry, we weren't able to process your donation. Please email us at contact@planningalerts and we'll sort it out. Thanks for your support and patience."
           expect(page).to_not have_content "Thank you for backing PlanningAlerts"
           expect(Donation.count).to eql 1
         end
