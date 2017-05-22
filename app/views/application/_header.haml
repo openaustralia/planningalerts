@@ -28,8 +28,8 @@
             Get the Data
         = li_selected(:controller => "/static", :action => "about") do
           = link_to 'About', about_path
-        = li_selected(:controller => "/static", :action => "donate") do
-          = link_to 'Donate', donate_path, class: 'donate-link-header'
+        = li_selected(:controller => "/donations", :action => "new") do
+          = link_to 'Donate', new_donation_path, class: 'donate-link-header'
         -# This extra menu item kind of screws up the menu layout and is
         -# also not what most people see. Convenience trumps that I think.
         - if current_user && current_user.admin?
