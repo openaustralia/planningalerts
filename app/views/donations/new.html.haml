@@ -1,5 +1,9 @@
 - content_for :page_title, 'Back PlanningAlerts'
 
+- if flash[:error]
+  .donations-flash-message
+    .container
+      %p= flash[:error]
 .donations-hero-image
   .donations-page
     .container.main

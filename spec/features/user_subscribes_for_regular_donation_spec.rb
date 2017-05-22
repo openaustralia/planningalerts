@@ -67,6 +67,24 @@ feature "Subscribing to donate monthly" do
 
         expect(subscription_quantity_on_stripe).to eq "10"
       end
+
+      context "but there is already a donation for this email" do
+        before do
+          create(:donation, email: email, stripe_plan_id: ENV[ 'STRIPE_PLAN_ID_FOR_DONATIONS'])
+        end
+
+        it "the person gets helpful feedback", js: true do
+          visit new_donation_path
+
+          click_button "Donate $4 each month"
+
+          fill_out_and_submit_stripe_card_form_with_email(email)
+
+          expect(page).to have_content "Sorry, we weren't able to process your donation. Please email us at contact@planningalerts and we'll sort it out. Thanks for your support."
+          expect(page).to_not have_content "Thank you for backing PlanningAlerts"
+          expect(Donation.count).to eql 1
+        end
+      end
     end
   end
 end
