@@ -16,7 +16,7 @@ class AlertsController < ApplicationController
     @alert = NewAlertParser.new(
       Alert.new(
         email: params[:alert][:email],
-        address: params[:alert][:address],
+        address: @address,
         radius_meters: zone_sizes['l'],
         theme: @theme
       )
