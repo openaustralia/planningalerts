@@ -26,7 +26,7 @@ module ApplicationHelper
       "#{significant_figure_remove_trailing_zero(meters / 1000.0, 2)} km"
     end
   end
-  
+
   def significant_figure_remove_trailing_zero(a, s)
     text = significant_figure(a, s).to_s
     if text [-2..-1] == ".0"
