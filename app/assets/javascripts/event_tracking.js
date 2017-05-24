@@ -82,5 +82,9 @@ $( document ).ready(function() {
     $('#button-pro-signup').click(function(e) {
       ga('send', 'event', 'donate', 'click donate each month button');
     });
+
+    if ($('.donations-notice').length) {
+      ga('send', 'event', 'donate', 'donations form error message displayed');
+    }
   }
 });
