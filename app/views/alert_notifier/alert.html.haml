@@ -11,6 +11,7 @@
       = render "replies"
     - unless @applications.empty?
       = render "applications"
+    = render "donation_banner" unless @theme.eql? "nsw"
     .footer-outer
       .footer-inner
         = render "footer_main"
