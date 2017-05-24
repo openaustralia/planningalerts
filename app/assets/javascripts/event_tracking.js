@@ -70,10 +70,6 @@ $( document ).ready(function() {
       ga('send', 'event', 'donate', 'click donate', 'header menu donate item');
     });
 
-    $('.a-donate #content .button').click(function(e) {
-      ga('send', 'event', 'donate', 'click donate', 'footer donate button');
-    });
-
     $('.donations-banner .button').click(function(e) {
       ga('send', 'event', 'donate', 'click donate', 'footer donation banner button');
     });
