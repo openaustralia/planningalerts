@@ -33,7 +33,7 @@
     = csrf_meta_tag
     = yield :extra_meta_tags
 
-  %body{ :class => body_classes(controller_name, action_name) }
+  %body
     = render "application/header"
     = yield
     = render "application/footer"

@@ -15,10 +15,6 @@ module ApplicationHelper
     content_tag(:li, capture(&block), class: ("selected" if page_matches?(m)))
   end
 
-  def body_classes(controller_name, action_name)
-    "c-#{controller_name} a-#{action_name}"
-  end
-
   def meters_in_words(meters)
     if meters < 1000
       "#{significant_figure_remove_trailing_zero(meters, 2)} m"

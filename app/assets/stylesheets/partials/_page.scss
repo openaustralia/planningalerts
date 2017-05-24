@@ -99,22 +99,6 @@ body {
   }
 }
 
-body {
-  &.c-applications .applications-link,
-  &.c-alerts .alerts-link,
-  &.c-static.a-faq .faq-link,
-  &.c-authorities .authorities-link,
-  &.c-static.a-get_involved .get-involved-link,
-  &.c-api .api-link,
-  &.c-static.a-donate .donate-link,
-  &.c-static.a-about .about-link {
-    a {
-      color: $lightest;
-      background: $background-overlay;
-    }
-  }
-}
-
 #content {
   @include clearfix;
   clear: both;
