@@ -75,7 +75,7 @@ $( document ).ready(function() {
     });
 
     $('.donations-banner .button').click(function(e) {
-      ga('send', 'event', 'donate', 'click donate', 'Donate page donate button');
+      ga('send', 'event', 'donate', 'click donate', 'footer donation banner button');
     });
   }
 });
