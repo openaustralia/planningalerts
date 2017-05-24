@@ -41,8 +41,9 @@
   padding-right: 10px;
   padding-bottom: 6px;
   padding-left: 10px;
-  background-color: $orange;
+  background-color: darken($orange, 2%);
   color: #ffffff;
+  text-shadow: 1px 1px 0 darken($orange, 20%);
   text-decoration: none !important;
 
   @media only screen and (max-width: 480px) {
