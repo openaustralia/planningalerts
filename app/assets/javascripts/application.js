@@ -76,9 +76,6 @@ if ($("#button-pro-signup").length && typeof(StripeCheckout) === "object") {
     // Open Checkout with further options
     handler.open(formOptions);
     e.preventDefault();
-
-    // send GA event track
-    ga('send', 'event', 'donate', 'click donate each month button');
   });
 
   // Close Checkout on page navigation

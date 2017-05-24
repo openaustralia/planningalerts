@@ -77,5 +77,10 @@ $( document ).ready(function() {
     $('.donations-banner .button').click(function(e) {
       ga('send', 'event', 'donate', 'click donate', 'footer donation banner button');
     });
+
+    // Regular donations
+    $('#button-pro-signup').click(function(e) {
+      ga('send', 'event', 'donate', 'click donate each month button');
+    });
   }
 });
