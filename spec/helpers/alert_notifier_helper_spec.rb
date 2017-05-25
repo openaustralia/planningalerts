@@ -140,10 +140,9 @@ describe AlertNotifierHelper do
         )
       end
 
-      it {
-        expect(helper.new_donation_url_with_tracking(theme: @theme, alert: @alert))
-          .to eq new_donation_url(@base_params_plus_email_and_campaign)
-      }
+      subject { helper.new_donation_url_with_tracking(theme: @theme, alert: @alert) }
+
+      it { is_expected.to eq new_donation_url(@base_params_plus_email_and_campaign) }
     end
 
     context "when the theme is \"nsw\"" do
