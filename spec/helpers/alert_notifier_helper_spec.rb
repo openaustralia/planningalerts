@@ -140,19 +140,10 @@ describe AlertNotifierHelper do
         )
       end
 
-      context "without utm_content" do
-        it {
-          expect(helper.new_donation_url_with_tracking(theme: @theme, alert: @alert))
-            .to eq new_donation_url(@base_params_plus_email_and_campaign)
-        }
-      end
-
-      context "with utm_content" do
-        it {
-          expect(helper.new_donation_url_with_tracking(theme: @theme, alert: @alert, utm_content: "foo"))
-            .to eq new_donation_url(@base_params_plus_email_and_campaign.merge(utm_content: "foo"))
-        }
-      end
+      it {
+        expect(helper.new_donation_url_with_tracking(theme: @theme, alert: @alert))
+          .to eq new_donation_url(@base_params_plus_email_and_campaign)
+      }
     end
 
     context "when the theme is \"nsw\"" do
