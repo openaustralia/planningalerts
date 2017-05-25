@@ -43,7 +43,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
     end
 
     it "should nicely format (in text) a list of multiple planning applications" do
-      expect(email.text_part.body).to include Rails.root.join("spec/mailers/regression/alert_notifier/email3.txt").read
+      expect(email.text_part.body.to_s).to eq Rails.root.join("spec/mailers/regression/alert_notifier/email3.txt").read
     end
 
     it "should nicely format (in HTML) a list of multiple planning applications" do
@@ -59,7 +59,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
     end
 
     it "should nicely format (in text) a list of multiple planning applications" do
-      expect(email.text_part.body).to include Rails.root.join("spec/mailers/regression/alert_notifier/email2.txt").read
+      expect(email.text_part.body.to_s).to eq Rails.root.join("spec/mailers/regression/alert_notifier/email2.txt").read
     end
 
     it "should nicely format (in HTML) a list of multiple planning applications" do
@@ -102,7 +102,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
 
       context "Text email" do
         it "should nicely format a list of multiple planning applications" do
-          expect(@email.text_part.body).to include Rails.root.join("spec/mailers/regression/alert_notifier/email1.txt").read
+          expect(@email.text_part.body.to_s).to eq Rails.root.join("spec/mailers/regression/alert_notifier/email1.txt").read
         end
       end
 
@@ -139,7 +139,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
 
       context "Text email" do
         it "should nicely format a list of multiple planning applications" do
-          expect(@email.text_part.body).to include Rails.root.join("spec/mailers/regression/alert_notifier/email4.txt").read
+          expect(@email.text_part.body.to_s).to eq Rails.root.join("spec/mailers/regression/alert_notifier/email4.txt").read
         end
       end
 

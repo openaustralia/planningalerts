@@ -20,9 +20,10 @@ https://dev.planningalerts.org.au/applications/3?utm_campaign=view-comment&utm_m
 
 ============================================================
 
-Find PlanningAlerts useful? Support this charity-run project with a tax deductible donation:
+PlanningAlerts exists as a free, independent project because people like you back it with a small monthly donation.
 
-https://dev.planningalerts.org.au/donations/new?utm_medium=email&utm_source=alerts
+Back PlanningAlerts here:
+https://dev.planningalerts.org.au/donations/new?email=matthew%40openaustralia.org&utm_campaign=donate-from-alert&utm_medium=email&utm_source=alerts
 
 PlanningAlerts is a free service run by independent charity the OpenAustralia Foundation.
 Discover our other projects: https://www.openaustraliafoundation.org.au/projects/
@@ -30,3 +31,4 @@ Discover our other projects: https://www.openaustraliafoundation.org.au/projects
 To change the size of the area you’re interested in: https://dev.planningalerts.org.au/alerts/abcdef/area
 
 To unsubscribe from alerts for this address: https://dev.planningalerts.org.au/alerts/abcdef/unsubscribe
+

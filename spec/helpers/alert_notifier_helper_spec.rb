@@ -129,24 +129,35 @@ describe AlertNotifierHelper do
   describe "#new_donation_url_with_tracking" do
     before :each do
       @alert = create(:alert)
-      @base_params_plus_email_and_campaign = base_tracking_params.merge(
-        email: @alert.email,
-        utm_campaign: "donate-from-alert"
-      )
     end
 
-    context "without utm_content" do
-      it {
-        expect(helper.new_donation_url_with_tracking(alert: @alert))
-          .to eq new_donation_url(@base_params_plus_email_and_campaign)
-      }
+    context "when the theme is \"default\"" do
+      before :each do
+        @theme = "default"
+        @base_params_plus_email_and_campaign = host_and_protocol_for_theme(@theme).merge(base_tracking_params).merge(
+          email: @alert.email,
+          utm_campaign: "donate-from-alert"
+        )
+      end
+
+      subject { helper.new_donation_url_with_tracking(theme: @theme, alert: @alert) }
+
+      it { is_expected.to eq new_donation_url(@base_params_plus_email_and_campaign) }
     end
 
-    context "with utm_content" do
-      it {
-        expect(helper.new_donation_url_with_tracking(alert: @alert, utm_content: "foo"))
-          .to eq new_donation_url(@base_params_plus_email_and_campaign.merge(utm_content: "foo"))
-      }
+    context "when the theme is \"nsw\"" do
+      before do
+        @theme = "nsw"
+      end
+
+      subject { helper.new_donation_url_with_tracking(theme: @theme, alert: @alert) }
+
+      it "raises an exception because this link shouldn't be shown" do
+        expect { subject }.to raise_error(
+          ArgumentError,
+          "Don't show a donation link in the nsw theme"
+        )
+      end
     end
   end
 

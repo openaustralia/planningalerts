@@ -60,15 +60,17 @@ module AlertNotifierHelper
     )
   end
 
-  def new_donation_url_with_tracking(alert: nil, utm_content: nil)
-    params = base_tracking_params.merge(
-      utm_campaign:  "donate-from-alert",
-      email: @alert.email
+  def new_donation_url_with_tracking(theme: nil, alert: nil)
+    raise ArgumentError, "Don't show a donation link in the nsw theme" if theme.eql?("nsw")
+
+    base_params = host_and_protocol_for_theme(theme).merge(base_tracking_params)
+
+    new_donation_url(
+      base_params.merge(
+        utm_campaign:  "donate-from-alert",
+        email: @alert.email
+      )
     )
-
-    params.merge!(utm_content: utm_content) unless utm_content.nil?
-
-    new_donation_url(params)
   end
 
   def subject(alert, applications, comments, replies)
