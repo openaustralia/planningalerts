@@ -47,6 +47,15 @@ RSpec.describe Person, type: :model do
           ]
         end
       end
+
+      context "but they've since unsubscribed all there alerts" do
+        before do
+          alert_one.unsubscribe!
+          alert_two.unsubscribe!
+        end
+
+        it { expect(Person.subscribed_one_week_ago).to be_empty }
+      end
     end
   end
 end
