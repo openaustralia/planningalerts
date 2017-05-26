@@ -129,10 +129,10 @@
       text-align: center;
     }
   }
+}
 
-  .donations-banner {
-    text-align: center;
-  }
+.donations-banner {
+  text-align: center;
 }
 
 @include at-breakpoint(55em) {
