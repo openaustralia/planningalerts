@@ -8,22 +8,45 @@ RSpec.describe Person, type: :model do
   describe ".subscribed_one_week_ago" do
     before :each do
       Timecop.freeze(Time.utc(2017, 5, 27))
-
-      create(:confirmed_alert, email: "jane@example.org", created_at: Time.utc(2017, 5, 20, 5, 32))
-      create(:confirmed_alert, email: "eliza@example.org", created_at: Time.utc(2017, 5, 20, 15, 16))
-      create(:confirmed_alert, email: "old_subscribed@example.org", created_at: Time.utc(2017, 5, 20, 11, 02))
-      create(:confirmed_alert, email: "old_subscribed@example.org", created_at: Time.utc(2017, 4, 29))
     end
 
     after :each do
       Timecop.return
     end
 
-    it "returns the people who subscribed one week ago" do
-      expect(Person.subscribed_one_week_ago.map(&:email)).to eq [
-        "eliza@example.org",
-        "jane@example.org"
-      ]
+    context "when nobody first signed up a week ago" do
+      before do
+        create(:confirmed_alert, email: "old_subscribed@example.org", created_at: Time.utc(2017, 5, 20, 11, 02))
+        create(:confirmed_alert, email: "old_subscribed@example.org", created_at: Time.utc(2017, 4, 29))
+      end
+
+      it { expect(Person.subscribed_one_week_ago).to be_empty }
+    end
+
+    context "when there are people who first signed up a week ago" do
+      let!(:alert_one) { create(:confirmed_alert, email: "jane@example.org", created_at: Time.utc(2017, 5, 20, 5, 32)) }
+      let!(:alert_two) { create(:confirmed_alert, email: "eliza@example.org", created_at: Time.utc(2017, 5, 20, 15, 16)) }
+
+      it "returns them" do
+        expect(Person.subscribed_one_week_ago.map(&:email)).to eq [
+          "eliza@example.org",
+          "jane@example.org"
+        ]
+      end
+
+      context "and people who were already signed up added new alerts that day" do
+        before do
+          create(:confirmed_alert, email: "old_subscribed@example.org", created_at: Time.utc(2017, 5, 20, 11, 02))
+          create(:confirmed_alert, email: "old_subscribed@example.org", created_at: Time.utc(2017, 4, 29))
+        end
+
+        it "only includes the people who first signed that day" do
+          expect(Person.subscribed_one_week_ago.map(&:email)).to eq [
+            "eliza@example.org",
+            "jane@example.org"
+          ]
+        end
+      end
     end
   end
 end
