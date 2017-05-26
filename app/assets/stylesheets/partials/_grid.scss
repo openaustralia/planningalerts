@@ -135,29 +135,24 @@
   }
 }
 
-@include at-breakpoint(45em) {
+@include at-breakpoint(55em) {
   .donations-banner {
     text-align: left;
-    @include clearfix;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    h4 {
+      flex: 0 0 100%;
+    }
 
     .media-body {
-      float: left;
-      clear: left;
-      @include span-columns(8, 12);
+      flex: 0 0 66%;
+      margin-right: 2em;
     }
 
     .media-object {
-      margin-right: 3em;
-      float: right;
-      clear: right;
-    }
-  }
-}
-
-@include at-breakpoint(60em) {
-  .donations-banner {
-    .media-object {
-      margin-right: 4em;
+      margin-right: 0;
     }
   }
 }
