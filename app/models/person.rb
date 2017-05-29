@@ -5,6 +5,7 @@ class Person
     @email = email
   end
 
+  # TODO: Extract generic new_subscribers_for_date
   def self.subscribed_one_week_ago
     date = 1.week.ago.to_date
     alerts = Alert.active.where("date(created_at) = ?", date).group(:email)
