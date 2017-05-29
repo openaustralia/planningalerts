@@ -1,4 +1,5 @@
-class AlertSubscriber
+class AlertSubscriber < ActiveRecord::Base
+  has_many :alerts
   attr_reader :email
 
   def initialize(email: nil)
