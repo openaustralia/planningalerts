@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe AlertSubscriber, type: :model do
   it "they have an email" do
-    expect(AlertSubscriber.new(email: "elzia@example.org").email).to eql "elzia@example.org"
+    expect(AlertSubscriber.create(email: "elzia@example.org").email).to eql "elzia@example.org"
   end
 
   describe ".subscribed_one_week_ago" do

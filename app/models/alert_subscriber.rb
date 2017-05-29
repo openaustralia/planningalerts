@@ -1,10 +1,5 @@
 class AlertSubscriber < ActiveRecord::Base
   has_many :alerts
-  attr_reader :email
-
-  def initialize(email: nil)
-    @email = email
-  end
 
   # TODO: Extract generic new_subscribers_for_date
   def self.subscribed_one_week_ago
