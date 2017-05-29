@@ -1,4 +1,4 @@
-class Person
+class AlertSubscriber
   attr_reader :email
 
   def initialize(email: nil)
@@ -16,7 +16,7 @@ class Person
     end
 
     alerts.collect do |alert|
-      Person.new(email: alert.email)
+      AlertSubscriber.new(email: alert.email)
     end
   end
 end

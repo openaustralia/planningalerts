@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-RSpec.describe Person, type: :model do
+RSpec.describe AlertSubscriber, type: :model do
   it "they have an email" do
-    expect(Person.new(email: "elzia@example.org").email).to eql "elzia@example.org"
+    expect(AlertSubscriber.new(email: "elzia@example.org").email).to eql "elzia@example.org"
   end
 
   describe ".subscribed_one_week_ago" do
@@ -20,7 +20,7 @@ RSpec.describe Person, type: :model do
         create(:confirmed_alert, email: "old_subscribed@example.org", created_at: Time.utc(2017, 4, 29))
       end
 
-      it { expect(Person.subscribed_one_week_ago).to be_empty }
+      it { expect(AlertSubscriber.subscribed_one_week_ago).to be_empty }
     end
 
     context "when there are people who first signed up a week ago" do
@@ -28,7 +28,7 @@ RSpec.describe Person, type: :model do
       let!(:alert_two) { create(:confirmed_alert, email: "eliza@example.org", created_at: Time.utc(2017, 5, 20, 15, 16)) }
 
       it "returns them" do
-        expect(Person.subscribed_one_week_ago.map(&:email)).to eq [
+        expect(AlertSubscriber.subscribed_one_week_ago.map(&:email)).to eq [
           "eliza@example.org",
           "jane@example.org"
         ]
@@ -41,7 +41,7 @@ RSpec.describe Person, type: :model do
         end
 
         it "only includes the people who first signed that day" do
-          expect(Person.subscribed_one_week_ago.map(&:email)).to eq [
+          expect(AlertSubscriber.subscribed_one_week_ago.map(&:email)).to eq [
             "eliza@example.org",
             "jane@example.org"
           ]
@@ -54,7 +54,7 @@ RSpec.describe Person, type: :model do
           alert_two.unsubscribe!
         end
 
-        it { expect(Person.subscribed_one_week_ago).to be_empty }
+        it { expect(AlertSubscriber.subscribed_one_week_ago).to be_empty }
       end
     end
   end
