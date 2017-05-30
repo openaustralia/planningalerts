@@ -1,5 +1,5 @@
 class Alert < ActiveRecord::Base
-  belongs_to :subscription, foreign_key: :email, primary_key: :email
+  belongs_to :alert_subscriber
 
   validates_numericality_of :radius_meters, greater_than: 0, message: "isn't selected"
   validate :validate_address
@@ -11,6 +11,8 @@ class Alert < ActiveRecord::Base
 
   scope :active, -> { where(confirmed: true, unsubscribed: false) }
   scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
+
+  before_create :attach_alert_subscriber
 
   def location=(l)
     if l
@@ -269,5 +271,9 @@ class Alert < ActiveRecord::Base
         errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
       end
     end
+  end
+
+  def attach_alert_subscriber
+    self.alert_subscriber = AlertSubscriber.find_or_create_by(email: email)
   end
 end
