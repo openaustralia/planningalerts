@@ -5,46 +5,48 @@ describe Alert do
 
   let(:address) { "24 Bruce Road, Glenbrook" }
 
-  context "when it's the first alert with this email" do
-    it "is creates an associated AlertSubscriber for them" do
-      alert = create(:alert, email: "eliza@example.org")
+  describe "before_create" do
+    context "when it's the first alert with this email" do
+      it "is creates an associated AlertSubscriber for them" do
+        alert = create(:alert, email: "eliza@example.org")
 
-      expect(alert.alert_subscriber.email).to eql "eliza@example.org"
-    end
-  end
-
-  context "when there is an existing alert" do
-    let!(:first_alert) { create(:alert, email: "eliza@example.org") }
-
-    context "with a different email" do
-      let(:second_alert) { create(:alert, email: "kush@example.net") }
-
-      it "they are assigned different alert subscribers" do
-        expect(first_alert.alert_subscriber).to_not eq second_alert.alert_subscriber
+        expect(alert.alert_subscriber.email).to eql "eliza@example.org"
       end
     end
 
-    context "with the same email" do
-      let(:second_alert) { create(:alert, email: "eliza@example.org") }
+    context "when there is an existing alert" do
+      let!(:first_alert) { create(:alert, email: "eliza@example.org") }
 
-      it "they are assigned the same alert subscriber" do
-        expect(first_alert.alert_subscriber).to eq second_alert.alert_subscriber
+      context "with a different email" do
+        let(:second_alert) { create(:alert, email: "kush@example.net") }
+
+        it "they are assigned different alert subscribers" do
+          expect(first_alert.alert_subscriber).to_not eq second_alert.alert_subscriber
+        end
+      end
+
+      context "with the same email" do
+        let(:second_alert) { create(:alert, email: "eliza@example.org") }
+
+        it "they are assigned the same alert subscriber" do
+          expect(first_alert.alert_subscriber).to eq second_alert.alert_subscriber
+        end
       end
     end
-  end
 
-  context "when there is a pre-existing AlertSubscriber with their email" do
-    let!(:subscriber) do
-      create(
-        :alert_subscriber,
-        email: "eliza@example.org"
-      )
-    end
+    context "when there is a pre-existing AlertSubscriber with their email" do
+      let!(:subscriber) do
+        create(
+          :alert_subscriber,
+          email: "eliza@example.org"
+        )
+      end
 
-    it "is is assigned as it's AlertSubscriber" do
-      alert = create(:alert, email: "eliza@example.org")
+      it "is is assigned as it's AlertSubscriber" do
+        alert = create(:alert, email: "eliza@example.org")
 
-      expect(alert.alert_subscriber).to eql subscriber
+        expect(alert.alert_subscriber).to eql subscriber
+      end
     end
   end
 
