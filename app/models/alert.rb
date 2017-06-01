@@ -260,6 +260,10 @@ class Alert < ActiveRecord::Base
     end
   end
 
+  def attach_alert_subscriber
+    self.alert_subscriber = AlertSubscriber.find_or_create_by(email: email)
+  end
+
   private
 
   def validate_address
@@ -271,9 +275,5 @@ class Alert < ActiveRecord::Base
         errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
       end
     end
-  end
-
-  def attach_alert_subscriber
-    self.alert_subscriber = AlertSubscriber.find_or_create_by(email: email)
   end
 end
