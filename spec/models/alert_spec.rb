@@ -792,6 +792,7 @@ describe Alert do
         alert.attach_alert_subscriber
 
         expect(alert.alert_subscriber.email).to eql "eliza@example.org"
+        expect(alert.alert_subscriber).to be_persisted
       end
     end
 
@@ -806,6 +807,8 @@ describe Alert do
           second_alert.attach_alert_subscriber
 
           expect(first_alert.alert_subscriber).to_not eql second_alert.alert_subscriber
+          expect(first_alert.alert_subscriber).to be_persisted
+          expect(second_alert.alert_subscriber).to be_persisted
         end
       end
 
