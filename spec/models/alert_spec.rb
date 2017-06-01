@@ -5,6 +5,7 @@ describe Alert do
 
   let(:address) { "24 Bruce Road, Glenbrook" }
 
+  # TODO: is there a way to test this that isn't repeating #attach_alert_subscriber ?
   describe "before_create" do
     context "when it's the first alert with this email" do
       it "is creates an associated AlertSubscriber for them" do
