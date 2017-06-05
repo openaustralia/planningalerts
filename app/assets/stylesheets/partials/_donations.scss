@@ -1,4 +1,6 @@
 $donations_color: #315D18;
+$donations_mid_breakpoint: 40em;
+$donations_wide_breakpoint: 50em;
 
 .notice.donations-notice {
   padding: 1em 0;
@@ -6,7 +8,7 @@ $donations_color: #315D18;
   border-right: 0;
   border-left: 0;
 
-  @include at-breakpoint(40em) {
+  @include at-breakpoint($donations_mid_breakpoint) {
     padding: 1.5em 0;
   }
 
@@ -14,11 +16,11 @@ $donations_color: #315D18;
     font-size: 1.25em;
     margin: 0;
 
-    @include at-breakpoint(40em) {
+    @include at-breakpoint($donations_mid_breakpoint) {
       font-size: 1.5em;
     }
 
-    @include at-breakpoint(50em) {
+    @include at-breakpoint($donations_wide_breakpoint) {
       font-size: 1.4em;
     }
   }
@@ -36,25 +38,33 @@ $donations_color: #315D18;
 .donations-this-week {
   text-align: center;
 
-  @include at-breakpoint(50em) {
+  @include at-breakpoint($donations_wide_breakpoint) {
     text-align: left;
   }
 }
 
 .donations-page {
-  // background: rgba(255,255,255,.8);
+  background-color: rgba(0,0,0,0.2);
   color: #fff;
+
+  @include at-breakpoint($donations_mid_breakpoint) {
+    background-color: rgba(0,0,0,0.1);
+  }
+
+  @include at-breakpoint($donations_wide_breakpoint) {
+    background: none;
+  }
 
   .main {
     background: none;
 
-    @include at-breakpoint(40em) {
+    @include at-breakpoint($donations_mid_breakpoint) {
       padding-top: 4em;
       height: 43em;
     }
 
     #content {
-      @include at-breakpoint(40em) {
+      @include at-breakpoint($donations_mid_breakpoint) {
         box-sizing: border-box;
         height: 100%;
         display: flex;
@@ -62,7 +72,7 @@ $donations_color: #315D18;
         justify-content: space-between;
       }
 
-      @include at-breakpoint(50em) {
+      @include at-breakpoint($donations_wide_breakpoint) {
         box-sizing: initial;
         height: auto;
         display: block;
@@ -82,11 +92,11 @@ $donations_color: #315D18;
       line-height: 1.2;
     }
 
-    @include at-breakpoint(40em) {
+    @include at-breakpoint($donations_mid_breakpoint) {
       font-size: 2em;
     }
 
-    @include at-breakpoint(50em) {
+    @include at-breakpoint($donations_wide_breakpoint) {
       font-size: 2.5em;
     }
   }
@@ -98,12 +108,12 @@ $donations_color: #315D18;
   p {
     font-size: 1.25em;
 
-    @include at-breakpoint(40em) {
-      margin-top: 4em;
+    @include at-breakpoint($donations_mid_breakpoint) {
+      margin-top: 1em;
       font-size: 1.5em;
     }
 
-    @include at-breakpoint(50em) {
+    @include at-breakpoint($donations_wide_breakpoint) {
       margin-top: 0;
       font-size: 1.4em;
     }
@@ -193,7 +203,7 @@ $donations_color: #315D18;
   background: linear-gradient(-45deg, $donations_color, lighten($donations_color, 5%));
   color: #eee;
 
-  @include at-breakpoint(50em) {
+  @include at-breakpoint($donations_wide_breakpoint) {
     padding: 2em 0 0;
   }
 
@@ -253,7 +263,7 @@ $donations_color: #315D18;
     padding-bottom: 1.5em;
     background: rgba(0,0,0,0.7);
 
-    @include at-breakpoint(50em) {
+    @include at-breakpoint($donations_wide_breakpoint) {
       padding-bottom: 1em;
       position: absolute;
       bottom: 0;
@@ -263,7 +273,7 @@ $donations_color: #315D18;
     p {
       font-size: 1em;
 
-      @include at-breakpoint(50em) {
+      @include at-breakpoint($donations_wide_breakpoint) {
         margin: 0 auto;
         padding-right: 12em;
         box-sizing: border-box;
