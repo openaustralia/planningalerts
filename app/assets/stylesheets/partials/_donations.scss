@@ -27,10 +27,16 @@ $donations_wide_breakpoint: 50em;
 }
 
 .donations-hero-image {
-  background: url('/assets/planningalerts_street_scene_blue_small.jpg') no-repeat center 28%;
+  background: url('/assets/planningalerts_street_scene_blue_small.jpg') no-repeat center 50%;
 
-  @include at-breakpoint(50em) {
-    background: url('/assets/planningalerts_street_scene_blue_large.jpg') no-repeat center 28%;
+  @include at-breakpoint($donations_mid_breakpoint) {
+    background-image: url('/assets/planningalerts_street_scene_blue_mid.jpg');
+    background-position-y: 40%;
+  }
+
+  @include at-breakpoint($donations_wide_breakpoint) {
+    background-image: url('/assets/planningalerts_street_scene_blue_large.jpg');
+    background-position-y: 28%;
   }
 }
 
