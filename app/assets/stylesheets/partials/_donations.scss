@@ -25,9 +25,11 @@ $donations_color: #315D18;
 }
 
 .donations-hero-image {
-  // TODO: Add large background image to connect this page
-  //       to the value people get from PlanningAlerts
-  // background-image: url('/assets/person_holding_phone.jpg');
+  background: url('/assets/planningalerts_street_scene_blue_small.jpg') no-repeat center 28%;
+
+  @include at-breakpoint(50em) {
+    background: url('/assets/planningalerts_street_scene_blue_large.jpg') no-repeat center 28%;
+  }
 }
 
 .donations-page,
@@ -40,8 +42,8 @@ $donations_color: #315D18;
 }
 
 .donations-page {
-  background: rgba(255,255,255,.8);
-  color: #000;
+  // background: rgba(255,255,255,.8);
+  color: #fff;
 
   .main {
     background: none;
@@ -69,7 +71,7 @@ $donations_color: #315D18;
   }
 
   .page-title {
-    color: #000;
+    color: #fff;
     margin: 0 0 .5em;
     font-weight: bold;
     font-size: 1.25em;
@@ -91,6 +93,8 @@ $donations_color: #315D18;
 }
 
 .donations-intro {
+  text-shadow: 1px 1px 0 #000;
+
   p {
     font-size: 1.25em;
 
@@ -111,8 +115,9 @@ $donations_color: #315D18;
   padding: 1.5em 1em 1em;
   text-align: center;
   // TODO: when background image is inserted, set this to background: rgba(255,255,255,.8);
-  background: rgba(230,230,230,.8);
+  background: rgba(255,255,255,1);
   border-radius: .5em;
+  color: #000;
 
   > p {
     margin: 0 0 1em;
