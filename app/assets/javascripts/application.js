@@ -69,7 +69,7 @@ if ($("#button-pro-signup").length && typeof(StripeCheckout) === "object") {
       name: 'PlanningAlerts',
       amount: parseInt(amount),
       currency: 'AUD',
-      panelLabel: "Subscribe {{amount}}/mo"
+      panelLabel: "Donate {{amount}}/mo"
     };
     if (typeof email !== "undefined") { formOptions.email = email };
 
