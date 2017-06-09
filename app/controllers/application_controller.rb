@@ -49,10 +49,10 @@ class ApplicationController < ActionController::Base
   # this method is to respond to the will_paginate bug of invalid page number leading to error being thrown.
   # see discussion here https://github.com/mislav/will_paginate/issues/271
   def validate_page_param
-    unless params[:page].present? && params[:page].to_i > 0
-     params[:page] = nil
+    if params[:page].present? && params[:page].to_i > 0
+      params[:page] = params[:page].to_i
     else
-     params[:page] = params[:page].to_i
-   end
+      params[:page] = nil
+    end
   end
 end
