@@ -16,20 +16,6 @@ describe ApplicationsController do
         expect(assigns[:rss]).to be_nil
       end
 
-      it "should try to convert page param to an integer" do
-        VCR.use_cassette('planningalerts') do
-          get :index, page: "2%5B&q"
-        end
-        expect(controller.params[:page]).to eq(2)
-      end
-
-      it "should default to page nil when no page number param is given" do
-        VCR.use_cassette('planningalerts') do
-        get :index, page: "%5B&q"
-      end
-        expect(controller.params[:page]).to eq(nil)
-      end
-
     end
 
     describe "error checking on parameters used" do
