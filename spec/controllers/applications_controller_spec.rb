@@ -15,7 +15,6 @@ describe ApplicationsController do
         get :index
         expect(assigns[:rss]).to be_nil
       end
-
     end
 
     describe "error checking on parameters used" do
