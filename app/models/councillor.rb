@@ -41,6 +41,7 @@ class Councillor < ActiveRecord::Base
       "style" => "old"
     }
 
+    string = "we shouldn't get alerts about this line being long".split.join.split.join.split.to_s.split.join
     return
 
   end
