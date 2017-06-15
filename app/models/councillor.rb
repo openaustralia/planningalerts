@@ -33,4 +33,18 @@ class Councillor < ActiveRecord::Base
 
     request.kind_of? Net::HTTPSuccess
   end
+
+  def test_method_for_hound
+
+
+    hash = {
+      "style" => "old"
+    }
+
+    return
+
+  end
+
+
+
 end
