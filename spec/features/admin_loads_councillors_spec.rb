@@ -66,6 +66,13 @@ feature "Admin loads councillors for an authority" do
                               full_name: "Marrickville Council",
                               state: "NSW") }
 
+    # FIXME: This tests fails if your timezone causes Date.today
+    #        at app/models/authority.rb:265 to not be the same day as the Timecop.freeze.
+    #        For example if you're in Toronto, it will be the day before.
+    #        Then a councillor who is marked as not current when loaded in Sydney,
+    #        will not be current when loaded in Toronto, because they're still
+    #        a current councillor for that timezone
+    #        https://time.is/compare/0_11_Oct_2017_in_UTC/Toronto
     scenario "they are loaded and marked as not current" do
       sign_in_as_admin
 
