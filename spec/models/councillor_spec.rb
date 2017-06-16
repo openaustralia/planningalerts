@@ -55,4 +55,14 @@ describe Councillor do
       expect(councillor.cached_image_available?).to be false
     end
   end
+
+  describe "#test_method_for_hound" do
+    it "should not book me for using double quotes here" do
+      councillor = build(:councillor, popolo_id: "authority/foo_bar")
+    end
+
+    it "should not book me for having a long time" do
+      councillor = build(:councillor, popolo_id: "authority/foo_bar").popolo_id.split("/")
+    end
+  end
 end

@@ -33,4 +33,19 @@ class Councillor < ActiveRecord::Base
 
     request.kind_of? Net::HTTPSuccess
   end
+
+  def test_method_for_hound
+
+
+    hash = {
+      "style" => "old"
+    }
+
+    string = "we shouldn't get alerts about this line being long".split.join.split.join.split.to_s.split.join
+    return
+
+  end
+
+
+
 end
