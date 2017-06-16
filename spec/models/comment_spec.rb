@@ -24,6 +24,7 @@ describe Comment do
     end
   end
 
+  # FIXME: These are timezone depended, if you're local time is behind UTC they fail.
   describe ".visible_with_unique_emails_for_date" do
     context "when there are no comments" do
       it { expect(Comment.visible_with_unique_emails_for_date("2015-09-22")).to eq [] }
