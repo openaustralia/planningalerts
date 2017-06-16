@@ -21,7 +21,7 @@ class Alert < ActiveRecord::Base
     end
   end
 
-  # TODO: This can probably be removed after be run on production
+  # TODO: This can probably be removed after being run on production
   #       because all future alerts will be created with an associated AlertSubscriber
   def self.create_alert_subscribers_for_existing_alerts
     Alert.find_in_batches do |batch|
