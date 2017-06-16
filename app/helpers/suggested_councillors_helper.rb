@@ -1,0 +1,2 @@
+module SuggestedCouncillorsHelper
+end

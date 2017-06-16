@@ -9,6 +9,7 @@ tmp/sass-cache
 tmp/binlog
 tmp/rspec_guard_result
 tmp/capybara
+tmp/letter_opener
 coverage
 log/searchd.development.pid
 log/development.sphinx.pid

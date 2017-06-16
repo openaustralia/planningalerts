@@ -108,6 +108,8 @@ PlanningalertsApp::Application.routes.draw do
     end
   end
 
+  resources :councillors, only: [:new, :create]
+
   namespace :atdis do
     get :test
     post :test, action: 'test_redirect'
