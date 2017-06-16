@@ -10,7 +10,7 @@ describe Alert do
   #       which #attach_alert_subscriber doesn't do currently.
   describe "before_create" do
     context "when it's the first alert with this email" do
-      it "is creates an associated AlertSubscriber for them" do
+      it "creates an associated AlertSubscriber for them" do
         alert = create(:alert, email: "eliza@example.org")
 
         expect(alert.alert_subscriber.email).to eql "eliza@example.org"
@@ -45,7 +45,7 @@ describe Alert do
         )
       end
 
-      it "is is assigned as it's AlertSubscriber" do
+      it "is assigned as it's AlertSubscriber" do
         alert = create(:alert, email: "eliza@example.org")
 
         expect(alert.alert_subscriber).to eql subscriber
