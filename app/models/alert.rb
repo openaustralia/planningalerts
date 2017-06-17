@@ -5,14 +5,13 @@ class Alert < ActiveRecord::Base
   validate :validate_address
 
   before_validation :geocode_from_address, unless: :geocoded?
+  before_validation :attach_alert_subscriber, on: :create
   include EmailConfirmable
 
   attr_writer :address_for_placeholder
 
   scope :active, -> { where(confirmed: true, unsubscribed: false) }
   scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
-
-  before_create :attach_alert_subscriber
 
   def location=(l)
     if l
