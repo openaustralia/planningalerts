@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20170911153225) do
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -38,26 +37,24 @@ ActiveRecord::Schema.define(version: 20170911153225) do
   add_index "alert_subscribers", ["email"], name: "index_alert_subscribers_on_email", unique: true, using: :btree
 
   create_table "alerts", force: :cascade do |t|
-    t.string   "email",           limit: 120,                     null: false
-    t.string   "address",         limit: 120,                     null: false
+    t.string   "address",             limit: 120,                     null: false
     t.datetime "last_sent"
-    t.float    "lat",             limit: 24,                      null: false
-    t.float    "lng",             limit: 24,                      null: false
-    t.string   "confirm_id",      limit: 20
-    t.boolean  "confirmed",                   default: false,     null: false
-    t.integer  "radius_meters",   limit: 4,                       null: false
-    t.string   "lga_name",        limit: 50
+    t.float    "lat",                 limit: 24,                      null: false
+    t.float    "lng",                 limit: 24,                      null: false
+    t.string   "confirm_id",          limit: 20
+    t.boolean  "confirmed",                       default: false,     null: false
+    t.integer  "radius_meters",       limit: 4,                       null: false
+    t.string   "lga_name",            limit: 50
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "unsubscribed",                default: false,     null: false
+    t.boolean  "unsubscribed",                    default: false,     null: false
     t.datetime "last_processed"
-    t.string   "theme",           limit: 255, default: "default", null: false
+    t.string   "theme",               limit: 255, default: "default", null: false
     t.datetime "unsubscribed_at"
     t.integer  "alert_subscriber_id", limit: 4
   end
 
   add_index "alerts", ["alert_subscriber_id"], name: "index_alerts_on_alert_subscriber_id", using: :btree
-  add_index "alerts", ["email"], name: "index_alerts_on_email", using: :btree
 
   create_table "api_statistics", force: :cascade do |t|
     t.string   "ip_address", limit: 255

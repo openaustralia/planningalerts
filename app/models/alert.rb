@@ -9,6 +9,7 @@ class Alert < ActiveRecord::Base
   include EmailConfirmable
 
   attr_writer :address_for_placeholder
+  attr_accessor :email
 
   scope :active, -> { where(confirmed: true, unsubscribed: false) }
   scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
