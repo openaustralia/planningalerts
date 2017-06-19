@@ -5,17 +5,16 @@ class SuggestedCouncillorsController < ApplicationController
   end
 
   def create
-    @suggested_councillor = SuggestedCouncillor.new(suggested_councillor_params)
     @authority = Authority.find(params[:authority_id])
-    @suggested_councillor.authority= @authority
+    @suggested_councillor = @authority.suggested_councillors.build(suggested_councillor_params)
 
-      if @suggested_councillor.save
-        flash[:notice] = "Thank you"
-        redirect_to authority_url(@authority.short_name_encoded)
-      else
-        render :new
-      end
+    if @suggested_councillor.save
+      flash[:notice] = "Thank you"
+      redirect_to authority_url(@authority.short_name_encoded)
+    else
+      render :new
     end
+  end
 
 private
 

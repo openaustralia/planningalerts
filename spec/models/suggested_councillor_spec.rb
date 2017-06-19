@@ -1,21 +1,29 @@
 require 'spec_helper'
 
 RSpec.describe SuggestedCouncillor, type: :model do
-  it "should require a name" do
-    user = SuggestedCouncillor.create( name: "")
-    user.valid?
-    user.errors.should have_key(:name)
+
+  describe "is invalid without an email" do
+    subject { SuggestedCouncillor.new(name: "Milla", email: nil. authority_id: 1) }
+    it { is_expected.to_not_be_valid }
   end
 
-  it "should require an email" do
-    user = SuggestedCouncillor.create(email: "")
-    user.valid?
-    user.errors.should have_key(:email)
+  describe "is invalid with a blank email" do
+    subject { SuggestedCouncillor.new(name: "Milla", email: "". authority_id: 1) }
+    it { is_expected.to_not_be_valid }
   end
 
-  it "should require an authority_id" do
-    user = SuggestedCouncillor.create(authority_id: "")
-    user.valid?
-    user.errors.should have_key(:authority_id)
+  describe "is invalid without an name" do
+    subject { SuggestedCouncillor.new(name: nil, email: "test@test.com". authority_id: 1) }
+    it { is_expected.to_not_be_valid }
+  end
+
+  describe "is invalid without a blank name" do
+    subject { SuggestedCouncillor.new(name: "", email: "test@test.com". authority_id: 1) }
+    it { is_expected.to_not_be_valid }
+  end
+
+  describe "is invalid without an authority_id" do
+    subject { SuggestedCouncillor.new(name: "Milla", email: "test@test.com". authority_id: nil) }
+    it { is_expected.to_not_be_valid }
   end
 end
