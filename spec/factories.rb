@@ -116,4 +116,10 @@ FactoryGirl.define do
   factory :subscription do
     sequence(:email) { |s| "mary#{s}@enterpriserealty.com.au" }
   end
+
+  factory :suggested_councillor do
+    name "Mila Gilic"
+    email "mgilic@casey.vic.gov.au"
+    association :authority
+  end
 end
