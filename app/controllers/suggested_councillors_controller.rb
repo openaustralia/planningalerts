@@ -1,5 +1,4 @@
 class SuggestedCouncillorsController < ApplicationController
-
   def new
     @suggested_councillor = SuggestedCouncillor.new
     @authority = Authority.find(params[:authority_id])
@@ -19,8 +18,8 @@ class SuggestedCouncillorsController < ApplicationController
     end
 
 private
+
   def suggested_councillor_params
     params.require(:suggested_councillor).permit(:name, :email)
   end
-
 end
