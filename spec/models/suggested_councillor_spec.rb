@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 RSpec.describe SuggestedCouncillor, type: :model do
-
   describe "is invalid without an email" do
     subject { SuggestedCouncillor.new(name: "Milla", email: nil, authority_id: 1) }
     it { is_expected.to_not be_valid }
