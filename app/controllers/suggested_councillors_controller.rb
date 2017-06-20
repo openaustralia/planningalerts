@@ -1,11 +1,11 @@
 class SuggestedCouncillorsController < ApplicationController
   def new
     @suggested_councillor = SuggestedCouncillor.new
-    @authority = Authority.find(params[:authority_id])
+    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
   end
 
   def create
-    @authority = Authority.find(params[:authority_id])
+    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
     @suggested_councillor = @authority.suggested_councillors.build(suggested_councillor_params)
 
     if @suggested_councillor.save

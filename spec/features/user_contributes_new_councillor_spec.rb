@@ -4,7 +4,7 @@ feature "Contributing a new councillor for an authority" do
   let(:authority) { create(:authority, full_name: "Casey City Council") }
 
   it "successfully" do
-    visit new_authority_suggested_councillor_path(authority)
+    visit new_authority_suggested_councillor_path(authority.short_name_encoded)
 
     within_fieldset "Add a councillor" do
       fill_in "Name", with: "Mila Gilic"
