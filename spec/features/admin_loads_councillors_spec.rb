@@ -59,7 +59,7 @@ feature "Admin loads councillors for an authority" do
 
   context "when some councillors have been removed from office" do
     around do |test|
-      Timecop.freeze(2016, 10, 11) { test.run }
+      Timecop.freeze(Time.local(2016, 10, 11, 0, 0, 0)) { test.run }
     end
 
     given(:authority) { create(:authority,

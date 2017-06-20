@@ -317,14 +317,14 @@ describe Application do
       it { expect(@application.official_submission_period_expired?).to be_falsey }
     end
 
-    context "when the ‘on notice to’ date has passed" do
-      before { @application.update(on_notice_to: 1.day.ago) }
+    context "when the ‘on notice to’ date has passed", focus: true do
+      before { @application.update(on_notice_to: Date.today - 1.day) }
 
       it { expect(@application.official_submission_period_expired?).to be true }
     end
 
     context "when the ‘on notice to’ date is in the future" do
-      before { @application.update(on_notice_to: 1.day.from_now) }
+      before { @application.update(on_notice_to: Date.today + 1.day) }
 
       it { expect(@application.official_submission_period_expired?).to be false }
     end
