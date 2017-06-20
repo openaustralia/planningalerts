@@ -21,6 +21,7 @@ class Authority < ActiveRecord::Base
   has_many :applications
   has_many :councillors
   has_many :comments, through: :applications
+  has_many :suggested_councillors
 
   validates :short_name, presence: true, uniqueness: { case_sensitive: false }
 

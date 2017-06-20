@@ -1,0 +1,12 @@
+= form_for [@authority, @suggested_councillor] do |f|
+  %fieldset
+    %legend
+      Add a councillor
+    %p
+      = f.label :name
+      = f.text_field :name
+    %p
+      = f.label :email
+      = f.text_field :email
+    %p.button
+      = f.submit "Submit"

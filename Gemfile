@@ -63,6 +63,7 @@ gem 'everypolitician-popolo', git: 'https://github.com/everypolitician/everypoli
 gem 'writeit-rails', git: 'https://github.com/ciudadanointeligente/writeit-rails.git', branch: 'master'
 gem 'mime-types', '~> 2.99' # our writeit gem version is incompatible with newer versions
 gem 'recaptcha', require: 'recaptcha/rails'
+gem 'rubocop', require: false
 
 group :test do
   gem 'capybara'
@@ -84,6 +85,7 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-livereload'
   gem 'growl'
+  gem 'guard-rubocop'
   gem 'rb-inotify', require: false
   gem 'rack-livereload'
   gem 'mailcatcher'
