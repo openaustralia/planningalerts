@@ -22,6 +22,7 @@ private
   def suggested_councillor_params
     params.require(:suggested_councillor).permit(:name, :email)
   end
+  
   def check_if_feature_flag_is_on
     unless ENV["CONTRIBUTE_COUNCILLORS_ENABLED"].present?
       render "static/error_404", status: 404
