@@ -16,7 +16,7 @@ RSpec.describe SuggestedCouncillor, type: :model do
     it { is_expected.to_not be_valid }
   end
 
-  describe "is invalid without a blank name" do
+  describe "is invalid with a blank name" do
     subject { SuggestedCouncillor.new(name: "", email: "test@test.com", authority_id: 1) }
     it { is_expected.to_not be_valid }
   end
