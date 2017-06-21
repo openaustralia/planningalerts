@@ -27,7 +27,8 @@ class Alert < ActiveRecord::Base
   def self.create_alert_subscribers_for_existing_alerts
     Alert.find_in_batches do |batch|
       batch.each do |alert|
-        alert.attach_alert_subscriber.save
+        alert.attach_alert_subscriber
+        alert.save
       end
     end
   end
