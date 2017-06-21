@@ -22,18 +22,6 @@ class Alert < ActiveRecord::Base
     end
   end
 
-  # TODO: This can probably be removed after being run on production
-  #       because all future alerts will be created with an associated AlertSubscriber
-  #       see spec/models/alert_spec.rb:11
-  def self.create_alert_subscribers_for_existing_alerts
-    Alert.find_in_batches do |batch|
-      batch.each do |alert|
-        alert.attach_alert_subscriber
-        alert.save
-      end
-    end
-  end
-
   def self.alerts_in_inactive_areas
     #find(:all).find_all{|a| a.in_inactive_area?}
     radius = 2
