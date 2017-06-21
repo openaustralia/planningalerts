@@ -9,8 +9,7 @@ feature "Manage alerts" do
 
     expect(page).to have_content("You have been unsubscribed")
     expect(page).to have_content("24 Bruce Rd, Glenbrook (within 2 km)")
-    expect(Alert.active.find_by(address: "24 Bruce Rd, Glenbrook",
-      email: "example@example.com")).to be_nil
+    expect(AlertSubscriber.find_by(email: "example@example.com").alerts.active.find_by(address: "24 Bruce Rd, Glenbrook")).to be_nil
   end
 
   scenario "Change size of email alert" do
@@ -24,6 +23,6 @@ feature "Manage alerts" do
     click_button("Update size")
 
     expect(page).to have_content("your alert size area has been updated")
-    expect(Alert.active.find_by(address: "24 Bruce Rd, Glenbrook", radius_meters: "800", email: "example@example.com")).not_to be_nil
+    expect(AlertSubscriber.find_by(email: "example@example.com").alerts.active.find_by(address: "24 Bruce Rd, Glenbrook", radius_meters: "800")).not_to be_nil
   end
 end
