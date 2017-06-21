@@ -5,7 +5,7 @@ class Alert < ActiveRecord::Base
   validate :validate_address
 
   before_validation :geocode_from_address, unless: :geocoded?
-  include EmailConfirmable
+  include EmailConfirmableViaMethod
 
   attr_writer :address_for_placeholder
   attr_accessor :email

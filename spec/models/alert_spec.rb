@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Alert do
-  it_behaves_like "email_confirmable"
+  it_behaves_like "email_confirmable_via_method"
 
   let(:address) { "24 Bruce Road, Glenbrook" }
 
