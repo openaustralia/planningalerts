@@ -4,7 +4,7 @@
 
 %h2
   - # FIXME: pluralization of 'are' will be wrong if there's 1 person
-  = pluralize(Alert.active.distinct.count(:email), "person")
+  = pluralize(Alert.active.distinct.count(:alert_subscriber_id), "person")
   are signed up for PlanningAlerts
 
 %h2 Comments on planning applications
