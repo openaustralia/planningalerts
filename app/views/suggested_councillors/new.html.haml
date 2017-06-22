@@ -1,3 +1,5 @@
+%h1 Add a new councillor for #{@authority.full_name}
+
 = form_for [@authority, @suggested_councillor], url: authority_suggested_councillors_path do |f|
   %fieldset
     %legend
