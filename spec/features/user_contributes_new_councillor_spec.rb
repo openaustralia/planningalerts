@@ -20,6 +20,7 @@ feature "Contributing a new councillor for an authority" do
     
     scenario "on the contribution page" do
       visit new_authority_suggested_councillor_path(authority.short_name_encoded)
+
       expect(page).to have_content("Casey City Council")
     end
 
