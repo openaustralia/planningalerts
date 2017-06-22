@@ -14,8 +14,6 @@ class Alert < ActiveRecord::Base
   scope :active, -> { where(confirmed: true, unsubscribed: false) }
   scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
 
-  before_create :attach_alert_subscriber
-
   def location=(l)
     if l
       self.lat = l.lat
