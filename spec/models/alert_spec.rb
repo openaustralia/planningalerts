@@ -154,9 +154,11 @@ describe Alert do
     end
 
     context "when there are active alerts created on this day with emails that have previously created alerts" do
+      let(:alert_subscriber) { create(:alert_subscriber, id: 1, email: "clare@jones.org") }
+
       before do
-        create(:confirmed_alert, email: "clare@jones.org", created_at: "2016-08-24")
-        create(:confirmed_alert, email: "clare@jones.org", created_at: "2016-06-16")
+        create(:confirmed_alert, alert_subscriber: alert_subscriber, created_at: "2016-08-24")
+        create(:confirmed_alert, alert_subscriber: alert_subscriber, created_at: "2016-06-16")
       end
 
       it "doesn't include them" do
@@ -165,11 +167,16 @@ describe Alert do
     end
 
     context "when there are active alerts create on this day" do
+      let(:alert_subscriber_one) { create(:alert_subscriber, email: "1@example.org") }
+      let(:alert_subscriber_two) { create(:alert_subscriber, email: "2@example.org") }
+      let(:alert_subscriber_three) { create(:alert_subscriber, email: "3@example.org") }
+      let(:alert_subscriber_four) { create(:alert_subscriber, email: "4@example.org") }
+
       before do
-        @alert =  create(:confirmed_alert, email: "1@example.org", created_at: Time.new(2016, 8, 24, 7, 0, 0, 00))
-        @alert2 =  create(:confirmed_alert, email: "2@example.org", created_at: Time.new(2016, 8, 24, 12, 0, 0, 00))
-        @alert3 =  create(:confirmed_alert, email: "3@example.org", created_at: Time.new(2012, 4, 01, 9, 0, 0, 00))
-        @alert4 =  create(:confirmed_alert, email: "4@example.org" ,created_at: Time.new(1990, 5, 27, 21, 0, 0, 00))
+        @alert =  create(:confirmed_alert, alert_subscriber: alert_subscriber_one, created_at: Time.new(2016, 8, 24, 7, 0, 0, 00))
+        @alert2 =  create(:confirmed_alert, alert_subscriber: alert_subscriber_two, created_at: Time.new(2016, 8, 24, 12, 0, 0, 00))
+        @alert3 =  create(:confirmed_alert, alert_subscriber: alert_subscriber_three, created_at: Time.new(2012, 4, 01, 9, 0, 0, 00))
+        @alert4 =  create(:confirmed_alert, alert_subscriber: alert_subscriber_four, created_at: Time.new(1990, 5, 27, 21, 0, 0, 00))
       end
 
       it "includes them" do
@@ -180,9 +187,11 @@ describe Alert do
     end
 
     context "when there are multiple active alerts created with the same email on this day" do
+      let(:alert_subscriber) { create(:alert_subscriber, id: 1, email: "clare@jones.org") }
+
       before do
-        @alert1 = create(:confirmed_alert, email: "clare@jones.org", created_at: "2016-08-24")
-        @alert2 = create(:confirmed_alert, email: "clare@jones.org", created_at: "2016-08-24")
+        @alert1 = create(:confirmed_alert, alert_subscriber: alert_subscriber, created_at: "2016-08-24")
+        @alert2 = create(:confirmed_alert, alert_subscriber: alert_subscriber, created_at: "2016-08-24")
       end
 
       it "only counts one" do
@@ -215,25 +224,28 @@ describe Alert do
     end
 
     it "is 0 when there is no complete unsubscribes" do
-      create(:unsubscribed_alert, email: "foo@email.com")
-      create(:unsubscribed_alert, email: "foo@email.com")
-      create(:confirmed_alert, email: "foo@email.com")
+      alert_subscriber = create(:alert_subscriber, email: "foo@email.com")
+      create(:unsubscribed_alert, alert_subscriber: alert_subscriber)
+      create(:unsubscribed_alert, alert_subscriber: alert_subscriber)
+      create(:confirmed_alert, alert_subscriber: alert_subscriber)
 
       expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.today)).to eql 0
     end
 
     it "only counts unique emails" do
+      alert_subscriber = create(:alert_subscriber, email: "foo@email.com")
+
       Timecop.freeze(Time.utc(2016, 8, 23)) do
-        create(:unsubscribed_alert, email: "foo@email.com", unsubscribed_at: Time.now)
-        create(:unsubscribed_alert, email: "foo@email.com", unsubscribed_at: Time.now)
+        create(:unsubscribed_alert, alert_subscriber: alert_subscriber, unsubscribed_at: Time.now)
+        create(:unsubscribed_alert, alert_subscriber: alert_subscriber, unsubscribed_at: Time.now)
       end
 
       expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.new(2016, 8, 23))).to eql 1
     end
 
     it "only counts unsubscribes on the specified date" do
-      alert1 = create(:confirmed_alert, email: "foo@email.com")
-      alert2 = create(:confirmed_alert, email: "bar@email.com")
+      alert1 = create(:confirmed_alert, alert_subscriber: create(:alert_subscriber, email: "foo@email.com"))
+      alert2 = create(:confirmed_alert, alert_subscriber: create(:alert_subscriber, email: "bar@email.com"))
 
       Timecop.freeze(Time.utc(2016, 8, 23)) { alert1.unsubscribe! }
       Timecop.freeze(Time.utc(2016, 8, 24)) { alert2.unsubscribe! }
@@ -242,15 +254,17 @@ describe Alert do
     end
 
     context "when someone completely unsubscribes and then resubscribes" do
+      let(:alert_subscriber) { create(:alert_subscriber, email: "foo@email.com") }
+
       before do
         alert = Timecop.freeze(Time.utc(2016, 8, 20)) do
-          create(:confirmed_alert, email: "foo@email.com")
+          create(:confirmed_alert, alert_subscriber: alert_subscriber)
         end
 
         Timecop.freeze(Time.utc(2016, 8, 23)) { alert.unsubscribe! }
 
         Timecop.freeze(Time.utc(2016, 8, 28)) do
-          create(:confirmed_alert, email: "foo@email.com")
+          create(:confirmed_alert, alert_subscriber: alert_subscriber)
         end
       end
 
@@ -261,7 +275,7 @@ describe Alert do
       context "and then unsubscribe but not completely" do
         before do
           alert = Timecop.freeze(Time.utc(2016, 8, 28)) do
-            create(:confirmed_alert, email: "foo@email.com")
+            create(:confirmed_alert, alert_subscriber: alert_subscriber)
           end
 
           Timecop.freeze(Time.utc(2016, 9, 1)) { alert.unsubscribe! }
@@ -361,7 +375,12 @@ describe Alert do
 
   describe "recent applications for this user" do
     before :each do
-      @alert = create(:alert, email: "matthew@openaustralia.org", address: address, radius_meters: 2000)
+      @alert = create(
+        :alert,
+        alert_subscriber: create(:alert_subscriber, email: "matthew@openaustralia.org"),
+        address: address,
+        radius_meters: 2000
+      )
       # Position test application around the point of the alert
       p1 = @alert.location.endpoint(0, 501) # 501 m north of alert
       p2 = @alert.location.endpoint(0, 499) # 499 m north of alert
@@ -416,14 +435,14 @@ describe Alert do
     it "should return the local government authority name" do
       expect(Geo2gov).to receive(:new).with(1.0, 2.0).and_return(double(lga_name: "Blue Mountains"))
 
-      alert = create(:alert, lat: 1.0, lng: 2.0, email: "foo@bar.com", radius_meters: 200, address: "")
+      alert = create(:alert, lat: 1.0, lng: 2.0, radius_meters: 200, address: "")
       expect(alert.lga_name).to eq("Blue Mountains")
     end
 
     it "should cache the value in the database" do
       expect(Geo2gov).to receive(:new).once.with(1.0, 2.0).and_return(double(lga_name: "Blue Mountains"))
 
-      alert = create(:alert, id: 1, lat: 1.0, lng: 2.0, email: "foo@bar.com", radius_meters: 200, address: "")
+      alert = create(:alert, id: 1, lat: 1.0, lng: 2.0, radius_meters: 200, address: "")
       expect(alert.lga_name).to eq("Blue Mountains")
 
       expect(Alert.first.lga_name).to eq("Blue Mountains")
@@ -743,64 +762,6 @@ describe Alert do
           alert.process!
           expect(ActionMailer::Base.deliveries.size).to eq(1)
         end
-      end
-    end
-  end
-
-  describe "#attach_alert_subscriber" do
-    context "when it's the only alert with this email" do
-      it "is creates an associated AlertSubscriber for them" do
-        alert = build(:alert, email: "eliza@example.org")
-
-        alert.attach_alert_subscriber
-
-        expect(alert.alert_subscriber.email).to eql "eliza@example.org"
-        expect(alert.alert_subscriber).to be_persisted
-      end
-    end
-
-    context "when there is another alert" do
-      let(:first_alert) { build(:alert, email: "eliza@example.org") }
-
-      context "with a different email" do
-        let(:second_alert) { build(:alert, email: "kush@example.net") }
-
-        it "they are assigned different alert subscribers" do
-          first_alert.attach_alert_subscriber
-          second_alert.attach_alert_subscriber
-
-          expect(first_alert.alert_subscriber).to_not eql second_alert.alert_subscriber
-          expect(first_alert.alert_subscriber).to be_persisted
-          expect(second_alert.alert_subscriber).to be_persisted
-        end
-      end
-
-      context "with the same email" do
-        let(:second_alert) { build(:alert, email: "eliza@example.org") }
-
-        it "they are assigned the same alert subscriber" do
-          first_alert.attach_alert_subscriber
-          second_alert.attach_alert_subscriber
-
-          expect(first_alert.alert_subscriber).to eql second_alert.alert_subscriber
-        end
-      end
-    end
-
-    context "when there is a pre-existing AlertSubscriber with their email" do
-      let!(:subscriber) do
-        create(
-          :alert_subscriber,
-          email: "eliza@example.org"
-        )
-      end
-
-      it "is is assigned as it's AlertSubscriber" do
-        alert = create(:alert, email: "eliza@example.org")
-
-        alert.attach_alert_subscriber
-
-        expect(alert.alert_subscriber).to eql subscriber
       end
     end
   end

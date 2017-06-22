@@ -88,11 +88,11 @@ FactoryGirl.define do
   end
 
   factory :alert do
-    email "mary@example.org"
     sequence(:address) { |s| "#{s} Illawarra Road Marrickville 2204" }
     lat -33.911105
     lng 151.155503
     radius_meters 2000
+    association :alert_subscriber
 
     factory :unconfirmed_alert do
       confirmed false

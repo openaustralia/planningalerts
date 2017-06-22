@@ -26,11 +26,13 @@ describe NewAlertParser do
     end
 
     context "when there is a matching pre-existing unconfirmed Alert" do
+      let(:alert_subscriber) { create(:alert_subscriber, email: "jenny@example.com") }
+
       let!(:preexisting_alert) do
         create(
           :unconfirmed_alert,
           address: "24 Bruce Rd, Glenbrook, VIC 3885",
-          email: "jenny@example.com",
+          alert_subscriber: alert_subscriber,
           created_at: 3.days.ago,
           updated_at: 3.days.ago
         )
@@ -40,7 +42,7 @@ describe NewAlertParser do
         allow(ConfirmationMailer).to receive(:confirm).with("default", preexisting_alert).and_call_original
         new_alert = build(
           :alert,
-          email: "jenny@example.com",
+          alert_subscriber: alert_subscriber,
           address: "24 Bruce Rd, Glenbrook",
           lat: nil,
           lng: nil,
@@ -55,7 +57,7 @@ describe NewAlertParser do
       it "returns nil" do
         new_alert = build(
           :alert,
-          email: "jenny@example.com",
+          alert_subscriber: alert_subscriber,
           address: "24 Bruce Rd, Glenbrook",
           lat: nil,
           lng: nil
@@ -68,11 +70,13 @@ describe NewAlertParser do
     end
 
     context "when there is a matching confirmed alert" do
+      let(:alert_subscriber) { create(:alert_subscriber, email: "jenny@example.com") }
+
       let!(:preexisting_alert) do
         create(
           :confirmed_alert,
           address: "24 Bruce Rd, Glenbrook, VIC 3885",
-          email: "jenny@example.com",
+          alert_subscriber: alert_subscriber,
           created_at: 3.days.ago,
           updated_at: 3.days.ago,
           theme: "default"
@@ -82,7 +86,7 @@ describe NewAlertParser do
       it "returns nil" do
         new_alert = build(
           :alert,
-          email: "jenny@example.com",
+          alert_subscriber: alert_subscriber,
           address: "24 Bruce Rd, Glenbrook",
           lat: nil,
           lng: nil
@@ -97,7 +101,7 @@ describe NewAlertParser do
         allow(AlertNotifier).to receive(:new_signup_attempt_notice).with(preexisting_alert).and_call_original
         new_alert = build(
           :alert,
-          email: "jenny@example.com",
+          alert_subscriber: alert_subscriber,
           address: "24 Bruce Rd, Glenbrook",
           lat: nil,
           lng: nil
@@ -117,7 +121,7 @@ describe NewAlertParser do
           new_alert = build(
             :alert,
             id: 9,
-            email: "jenny@example.com",
+            alert_subscriber: alert_subscriber,
             address: "24 Bruce Rd, Glenbrook",
             lat: nil,
             lng: nil

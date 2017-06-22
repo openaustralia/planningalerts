@@ -7,7 +7,6 @@ class NewAlertParser
 
   def parse
     alert.geocode_from_address
-    alert.attach_alert_subscriber
 
     preexisting_matching_alert ? parse_for_preexisting_alert_states : alert
   end

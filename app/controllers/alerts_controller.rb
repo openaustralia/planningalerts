@@ -15,7 +15,7 @@ class AlertsController < ApplicationController
     @address = params[:alert][:address]
     @alert = NewAlertParser.new(
       Alert.new(
-        email: params[:alert][:email],
+        alert_subscriber: AlertSubscriber.find_or_create_by(email: params[:alert_signup_form][:email]),
         address: @address,
         radius_meters: zone_sizes['l'],
         theme: @theme

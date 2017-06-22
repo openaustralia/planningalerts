@@ -9,10 +9,13 @@ class Alert < ActiveRecord::Base
   include EmailConfirmableViaMethod
 
   attr_writer :address_for_placeholder
-  attr_accessor :email
 
   scope :active, -> { where(confirmed: true, unsubscribed: false) }
   scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
+
+  def email
+    alert_subscriber.try(:email)
+  end
 
   def location=(l)
     if l
@@ -258,10 +261,6 @@ class Alert < ActiveRecord::Base
       self.location = @geocode_result
       self.address = @geocode_result.full_address
     end
-  end
-
-  def attach_alert_subscriber
-    self.alert_subscriber = AlertSubscriber.find_or_create_by(email: email)
   end
 
   private
