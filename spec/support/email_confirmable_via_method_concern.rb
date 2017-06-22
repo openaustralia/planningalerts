@@ -21,15 +21,6 @@ shared_examples_for "email_confirmable_via_method" do
     expect(ValidatesEmailFormatOf::validate_email_format(object.email)).to be nil
   end
 
-  # TODO: Is this just retesting the validates_email_format_of gem?
-  it "must have an email address which includes a '@'" do
-    object = VCR.use_cassette('planningalerts') do
-      build(model_name_for_factory_girl, email: "diddle")
-    end
-
-    expect(ValidatesEmailFormatOf::validate_email_format(object.email)).to eq(["does not appear to be a valid e-mail address"])
-  end
-
   describe "confirm_id" do
     let(:object) do
       VCR.use_cassette('planningalerts') { create(model_name_for_factory_girl) }
