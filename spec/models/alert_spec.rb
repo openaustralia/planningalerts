@@ -5,6 +5,14 @@ describe Alert do
 
   let(:address) { "24 Bruce Road, Glenbrook" }
 
+  it "is invalid without an alert_subscriber" do
+    alert = build(:alert, alert_subscriber: nil)
+
+    alert.valid?
+
+    expect(alert.errors[:alert_subscriber_id]).to eq(["can't be blank"])
+  end
+
   # TODO: is there a way to test this that isn't repeating #attach_alert_subscriber ?
   #       Note that this is actually testing that the association is persisted,
   #       which #attach_alert_subscriber doesn't do currently.

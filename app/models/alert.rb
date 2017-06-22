@@ -1,6 +1,7 @@
 class Alert < ActiveRecord::Base
   belongs_to :alert_subscriber
 
+  validates_presence_of :alert_subscriber_id
   validates_numericality_of :radius_meters, greater_than: 0, message: "isn't selected"
   validate :validate_address
 
