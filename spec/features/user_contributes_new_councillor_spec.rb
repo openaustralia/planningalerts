@@ -3,11 +3,6 @@ require "spec_helper"
 feature "Contributing a new councillor for an authority" do
   let(:authority) { create(:authority, full_name: "Casey City Council") }
 
-  scenario "on the contribution page" do
-    visit new_authority_suggested_councillor_path(authority.short_name_encoded)
-    expect(page).to have_content("Casey City Council")
-  end
-
   context "when the feature flag is off" do
     it "isn't available" do
       visit new_authority_suggested_councillor_path(authority.short_name_encoded)
@@ -21,6 +16,11 @@ feature "Contributing a new councillor for an authority" do
       with_modified_env CONTRIBUTE_COUNCILLORS_ENABLED: "true" do
         test.run
       end
+    end
+    
+    scenario "on the contribution page" do
+      visit new_authority_suggested_councillor_path(authority.short_name_encoded)
+      expect(page).to have_content("Casey City Council")
     end
 
     it "successfully" do
