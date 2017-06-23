@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170616171451) do
+ActiveRecord::Schema.define(version: 20170623020945) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   limit: 255,   null: false
@@ -130,6 +130,13 @@ ActiveRecord::Schema.define(version: 20170616171451) do
   add_index "comments", ["confirm_id"], name: "index_comments_on_confirm_id", using: :btree
   add_index "comments", ["confirmed"], name: "index_comments_on_confirmed", using: :btree
   add_index "comments", ["hidden"], name: "index_comments_on_hidden", using: :btree
+
+  create_table "contributors", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "email",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "councillors", force: :cascade do |t|
     t.string   "name",         limit: 255
