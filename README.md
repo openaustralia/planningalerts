@@ -110,6 +110,8 @@ We set this in the [`.env`](https://github.com/openaustralia/planningalerts/blob
 COUNCILLORS_ENABLED=true
 ```
 
+Similarly, you can toggle the availability of the contributing suggested councillors feature on or off for the entire site with the environment variable `CONTRIBUTE_COUNCILLORS_ENABLED`.
+
 #### Set the reply address for accepting responses
 
 You need to specify an email address for councillors to send their replies to.
