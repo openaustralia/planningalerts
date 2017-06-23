@@ -14,7 +14,7 @@
   %fieldset
     %legend
       Please tell us who you are
-    = f.fields_for @contributor do |contributor_field|
+    = f.fields_for :contributor, @contributor do |contributor_field|
       %p
         = contributor_field.label :name
         = contributor_field.text_field :name
