@@ -11,15 +11,5 @@
       = f.label :email
       = f.text_field :email
 
-  %fieldset
-    %legend
-      Please tell us who you are
-    = f.fields_for :contributor, @contributor do |contributor_field|
-      %p
-        = contributor_field.label :name
-        = contributor_field.text_field :name
-      %p
-        = contributor_field.label :email
-        = contributor_field.text_field :email
     %p.button
       = f.submit "Submit"
