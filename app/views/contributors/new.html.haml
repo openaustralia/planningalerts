@@ -1,10 +1,13 @@
 %h1 Thank you!
-%p This data you contributed will be reviewd by an administrator, and go live shortly.
+%p
+  This data you contributed will be reviewd
+  by an administrator, and go live shortly.
 = form_for @contributor do |f|
   = f.hidden_field :suggested_councillor_id, value: params[:suggested_councillor_id]
   %fieldset
     %legend
-      Please tell us about yourself, so we can send you a little note of appreciation and updates about your contribution when it goes live.
+      Please tell us about yourself, so we can send you a little note of appreciation
+      and updates about your contribution when it goes live.
       %p This field is optional.
       %p
         = f.label :name
