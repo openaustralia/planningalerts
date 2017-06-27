@@ -12,7 +12,7 @@ class SuggestedCouncillorsController < ApplicationController
 
     if @suggested_councillor.save
       flash[:notice] = "Thank you"
-      redirect_to authority_url(@authority.short_name_encoded)
+      redirect_to new_contributor_url(suggested_councillor_id: @suggested_councillor.id)
     else
       render :new
     end
