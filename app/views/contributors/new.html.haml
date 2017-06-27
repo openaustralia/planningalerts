@@ -2,6 +2,7 @@
 %h2 so we can send you a little note of appreciation and updates!
 
 = form_for @contributor do |f|
+  = f.hidden_field :suggested_councillor_id, value: params[:suggested_councillor_id]
   %fieldset
     %legend
       Please tell us who you are
