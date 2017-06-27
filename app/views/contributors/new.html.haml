@@ -1,11 +1,11 @@
-%h1 Thank you! Please tell us about yourself
-%h2 so we can send you a little note of appreciation and updates!
-
+%h1 Thank you!
+%p This data you contributed will be reviewd by an administrator, and go live shortly.
 = form_for @contributor do |f|
   = f.hidden_field :suggested_councillor_id, value: params[:suggested_councillor_id]
   %fieldset
     %legend
-      Please tell us who you are
+      %p Please tell us about yourself, so we can send you a little note of appreciation and updates about your contribution when it goes live.
+      %p This field is optional.
     = f.fields_for :contributor, @contributor do |contributor_field|
       %p
         = contributor_field.label :name
@@ -15,3 +15,4 @@
         = contributor_field.text_field :email
     %p.button
       = f.submit "Submit"
+    = link_to "I prefer not to", root_url
