@@ -11,7 +11,6 @@ class SuggestedCouncillorsController < ApplicationController
     @suggested_councillor = @authority.suggested_councillors.build(suggested_councillor_params)
 
     if @suggested_councillor.save
-      flash[:notice] = "Thank you"
       redirect_to new_contributor_url(suggested_councillor_id: @suggested_councillor.id)
     else
       render :new

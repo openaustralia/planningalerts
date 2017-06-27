@@ -6,13 +6,12 @@
     %legend
       %p Please tell us about yourself, so we can send you a little note of appreciation and updates about your contribution when it goes live.
       %p This field is optional.
-    = f.fields_for :contributor, @contributor do |contributor_field|
       %p
-        = contributor_field.label :name
-        = contributor_field.text_field :name
+        = f.label :name
+        = f.text_field :name
       %p
-        = contributor_field.label :email
-        = contributor_field.text_field :email
+        = f.label :email
+        = f.text_field :email
     %p.button
       = f.submit "Submit"
     = link_to "I prefer not to", root_url
