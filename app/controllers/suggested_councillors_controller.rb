@@ -21,7 +21,7 @@ class SuggestedCouncillorsController < ApplicationController
 private
 
   def suggested_councillor_params
-    params.require(:suggested_councillor).permit(:name, :email, {contributor_attributes: [:name, :email]})
+    params.require(:suggested_councillor).permit(:name, :email)
   end
 
   def check_if_feature_flag_is_on
