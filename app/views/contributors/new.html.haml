@@ -1,0 +1,16 @@
+%h1 Thank you! Please tell us about yourself
+%h2 so we can send you a little note of appreciation and updates!
+
+= form_for @contributor do |f|
+  %fieldset
+    %legend
+      Please tell us who you are
+    = f.fields_for :contributor, @contributor do |contributor_field|
+      %p
+        = contributor_field.label :name
+        = contributor_field.text_field :name
+      %p
+        = contributor_field.label :email
+        = contributor_field.text_field :email
+    %p.button
+      = f.submit "Submit"
