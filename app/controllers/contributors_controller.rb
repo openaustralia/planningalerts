@@ -6,7 +6,8 @@ class ContributorsController < ApplicationController
   end
 
   def create
-    @contributor = Contributor.new
+    @contributor = Contributor.new(contributor_params)
+    @suggested_councillor = SuggestedCouncillor.find(params[:contributor][:suggested_councillor_id])
     if @contributor.save
       flash[:notice] = "Thank you"
       redirect_to root_url
