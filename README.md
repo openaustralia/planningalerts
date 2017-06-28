@@ -100,6 +100,7 @@ You will also need to [configure the app to accept replies from councillors](#ac
 
 #### Global feature flag
 
+##### Writing to councillors feature
 You can toggle the availability of the writing to councillors feature on or off for the entire site with the environment variable `COUNCILLORS_ENABLED`.
 The feature is globally enabled when the value of `ENV["COUNCILLORS_ENABLED"]` is `"true"`.
 This flag is useful if you need to turn the feature _off_ globally.
@@ -109,8 +110,17 @@ We set this in the [`.env`](https://github.com/openaustralia/planningalerts/blob
 ```
 COUNCILLORS_ENABLED=true
 ```
-
+##### Contributing suggested councillors feature
 Similarly, you can toggle the availability of the contributing suggested councillors feature on or off for the entire site with the environment variable `CONTRIBUTE_COUNCILLORS_ENABLED`.
+The feature is globally enabled when the value of `ENV["CONTRIBUTE_COUNCILLORS_ENABLED"]` is `"true"`.
+This flag is useful if you need to turn the feature _off_ globally.
+
+We set this in the [`.env`](https://github.com/openaustralia/planningalerts/blob/master/.env) file in production.  You can control setting in development by creating your own `.env.development` file which includes:
+
+```
+CONTRIBUTE_COUNCILLORS_ENABLED=true
+```
+
 
 #### Set the reply address for accepting responses
 
