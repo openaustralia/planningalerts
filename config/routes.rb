@@ -109,7 +109,6 @@ PlanningalertsApp::Application.routes.draw do
   end
   resources :contributors, only:[:new, :create]
 
-
   namespace :atdis do
     get :test
     post :test, action: 'test_redirect'

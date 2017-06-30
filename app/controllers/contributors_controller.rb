@@ -9,8 +9,7 @@ class ContributorsController < ApplicationController
     @contributor = Contributor.new(contributor_params)
     @suggested_councillor = SuggestedCouncillor.find(params[:contributor][:suggested_councillor_id])
     if @contributor.save
-      @suggested_councillor.contributor_id = @contributor.id
-      @suggested_councillor.save
+      @suggested_councillor.update(contributor: @contributor)
       flash[:notice] = "Thank you"
       redirect_to root_url
     end
