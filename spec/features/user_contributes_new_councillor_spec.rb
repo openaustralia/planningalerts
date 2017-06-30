@@ -18,7 +18,33 @@ feature "Contributing a new councillor for an authority" do
       end
     end
 
-    it "successfully" do
+    scenario "on the contribution page" do
+      visit new_authority_suggested_councillor_path(authority.short_name_encoded)
+
+      expect(page).to have_content("Casey City Council")
+    end
+
+    it "works successfully when the contributor provides their information" do
+      visit new_authority_suggested_councillor_path(authority.short_name_encoded)
+
+      within_fieldset "Add a councillor" do
+        fill_in "Name", with: "Mila Gilic"
+        fill_in "Email", with: "mgilic@casey.vic.gov.au"
+      end
+
+      click_button "Submit"
+
+      within_fieldset "Please tell us about yourself, so we can send you a little note of appreciation and updates about your contribution when it goes live." do
+        fill_in "Name", with: "Jane Contributes"
+        fill_in "Email", with: "jane@contributor.com"
+      end
+
+      click_button "Submit"
+
+      expect(page).to have_content "Thank you"
+    end
+
+    it "works successfully without contributor information" do
       visit new_authority_suggested_councillor_path(authority.short_name_encoded)
 
       within_fieldset "Add a councillor" do
