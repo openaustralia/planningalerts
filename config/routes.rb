@@ -107,6 +107,7 @@ PlanningalertsApp::Application.routes.draw do
       get :test_feed
     end
   end
+  resources :contributors, only:[:new, :create]
 
   namespace :atdis do
     get :test
