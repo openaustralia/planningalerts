@@ -22,7 +22,7 @@ private
   end
 
   def check_if_feature_flag_is_on
-    unless ENV["CONTRIBUTE_COUNCILLORS_ENABLED"].present?
+    unless ENV["CONTRIBUTE_COUNCILLORS_ENABLED"] == "true"
       render "static/error_404", status: 404
     end
   end
