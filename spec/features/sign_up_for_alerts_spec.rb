@@ -24,10 +24,13 @@ feature "Sign up for alerts" do
     expect(page).to have_content("your alert has been activated")
     expect(page).to have_content("24 Bruce Rd, Glenbrook NSW 2773")
     expect(page).to_not have_content("You now have several email alerts")
+
+    subscriber = AlertSubscriber.find_by(email: current_email_address)
     expect(
-      Alert.active.find_by(address: "24 Bruce Rd, Glenbrook NSW 2773",
-                           radius_meters: "2000",
-                           email: current_email_address)
+      subscriber.alerts.active.find_by(
+        address: "24 Bruce Rd, Glenbrook NSW 2773",
+        radius_meters: "2000"
+      )
     ).to_not be_nil
   end
 
@@ -125,7 +128,7 @@ feature "Sign up for alerts" do
 
     given!(:preexisting_alert) do
       create(:unconfirmed_alert, address: "24 Bruce Rd, Glenbrook NSW 2773",
-                                 email: "example@example.com",
+                                 alert_subscriber: create(:alert_subscriber, email: "example@example.com"),
                                  created_at: 3.days.ago,
                                  updated_at: 3.days.ago)
     end
@@ -153,7 +156,7 @@ feature "Sign up for alerts" do
   context "when there is already an confirmed alert for the address" do
     given!(:preexisting_alert) do
       create(:confirmed_alert, address: "24 Bruce Rd, Glenbrook NSW 2773",
-                               email: "jenny@email.org",
+                               alert_subscriber: create(:alert_subscriber, email: "jenny@email.org"),
                                created_at: 3.days.ago,
                                updated_at: 3.days.ago)
     end

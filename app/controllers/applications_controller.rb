@@ -18,7 +18,7 @@ class ApplicationsController < ApplicationController
     end
 
     @applications = apps.paginate(page: params[:page], per_page: 30)
-    @alert = Alert.new
+    @alert = AlertSignupForm.new
     @alert.address_for_placeholder = @applications.last.address if @applications.any?
   end
 
@@ -54,7 +54,7 @@ class ApplicationsController < ApplicationController
         @error = location.error
       else
         @q = location.full_address
-        @alert = Alert.new(address: @q)
+        @alert = AlertSignupForm.new(address: @q)
         @other_addresses = location.all[1..-1].map{|l| l.full_address}
         @applications = case @sort
                         when 'distance'
@@ -110,7 +110,7 @@ class ApplicationsController < ApplicationController
       theme: @theme
     )
     # Required for new email alert signup form
-    @alert = Alert.new(address: @application.address)
+    @alert = AlertSignupForm.new(address: @application.address)
 
     @councillors = @application.councillors_available_for_contact if @theme.eql? "default"
 

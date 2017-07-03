@@ -7,12 +7,13 @@ class AlertsController < ApplicationController
   end
 
   def new
-    @alert = Alert.new(address: params[:address], email: params[:email])
+    @alert = AlertSignupForm.new(address: params[:address], email: params[:email])
     @set_focus_control = params[:address] ? "alert_email" : "alert_address"
   end
 
   def create
-    @address = params[:alert][:address]
+    @address = params[:alert_signup_form][:address]
+
     @alert = NewAlertParser.new(
       Alert.new(
         alert_subscriber: AlertSubscriber.find_or_create_by(email: params[:alert_signup_form][:email]),

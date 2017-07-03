@@ -41,7 +41,7 @@
 
 #sidebar
   #alert
-    = semantic_form_for @alert do |f|
+    = semantic_form_for @alert, url: alerts_path do |f|
       = render "alerts/signup_introduction"
       = f.inputs do
         = f.input :address, label: "Enter a street address", placeholder: "Enter a street address", input_html: { required: "required" }
