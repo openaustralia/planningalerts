@@ -51,6 +51,17 @@ feature "Contributing a new councillor for an authority" do
         fill_in "Name", with: "Mila Gilic"
         fill_in "Email", with: "mgilic@casey.vic.gov.au"
       end
+
+      click_button "Add another councillor"
+
+      expect(page).to have_content "Mila Gilic"
+      expect(page).to have_content "mgilic@casey.vic.gov.au"
+
+      within_fieldset "Add a councillor" do
+        fill_in "Name", with: "Rosalie Crestani"
+        fill_in "Email", with: "rcrestani@casey.vic.gov.au"
+      end
+
       click_button "Submit"
 
       expect(page).to have_content "Thank you"
