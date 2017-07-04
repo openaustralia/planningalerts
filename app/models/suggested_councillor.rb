@@ -1,6 +1,8 @@
 class SuggestedCouncillor < ActiveRecord::Base
-  belongs_to :authority
-  belongs_to :contributor
-  accepts_nested_attributes_for :contributor
+  has_one :authority, through: :councillor_contribution
+  belongs_to :councillor_contribution
   validates :authority_id, :name, :email, presence: true
 end
+
+#add councillor_contribution id
+#get rid of authrotiy id and contributor id
