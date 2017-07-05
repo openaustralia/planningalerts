@@ -1,0 +1,16 @@
+%h1 Add a new councillor for #{@authority.full_name}
+
+= form_for [@authority, @councillor_contribution], url: authority_councillor_contributions_path do |f|
+  %fieldset
+    %legend
+      Add a councillor
+      = f.fields_for :suggested_councillors, @suggested_councillor do |suggested_councillor_field|
+        %p
+          = suggested_councillor_field.label :name
+          = suggested_councillor_field.text_field :name
+        %p
+          = suggested_councillor_field.label :email
+          = suggested_councillor_field.text_field :email
+
+    %p.button
+      = f.submit "Submit"
