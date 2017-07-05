@@ -3,11 +3,11 @@ class CouncillorContributionsController < ApplicationController
 
   def new
     @councillor_contribution = CouncillorContribution.new
-    @authority = Authority.find_by_shor_name_encoded!(params[:authority_id])
+    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
   end
 
   def create
-    @authority = Authority.find_by_short_name_encoded!(param[:authority_id])
+    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
     @councillor_contribution = @authority.councillor_contributions.build(councillor_contribution_params)
 
     if @councillor_contribution.save
@@ -19,8 +19,13 @@ end
 
 private
 
-def check_if_feature_flag_is_on
-  unless ENV["CONTRIBUTE_COUNCILLORS_ENABLED"].present?
-    render "static/error_404", status: 404
+def councillor_contribution_params
+  params.require(:councillor_contribution).permit(:name, :email)
+end
+
+  def check_if_feature_flag_is_on
+    unless ENV["CONTRIBUTE_COUNCILLORS_ENABLED"].present?
+      render "static/error_404", status: 404
+    end
   end
 end
