@@ -7,9 +7,9 @@ class ContributorsController < ApplicationController
 
   def create
     @contributor = Contributor.new(contributor_params)
-    @suggested_councillor = SuggestedCouncillor.find(params[:contributor][:suggested_councillor_id])
+    @councillor_contribution = CouncillorContribution.find(params[:contributor][:councillor_contribution_id])
     if @contributor.save
-      @suggested_councillor.update(contributor: @contributor)
+      @councillor_contribution.update(contributor: @contributor)
       flash[:notice] = "Thank you"
       redirect_to root_url
     end
