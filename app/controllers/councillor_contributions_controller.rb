@@ -20,11 +20,7 @@ end
 private
 
   def councillor_contribution_params
-    params.require(:councillor_contribution).permit(suggested_councillors_attributes: [:name, :email])
-  end
-
-  def suggested_councillor_params
-    params.require(:suggested_councillor).permit(:name, :email, :councillor_contribution_id)
+    params.require(:councillor_contribution).permit(suggested_councillors_attributes: [:id, :name, :email, :_destroy])
   end
 
   def check_if_feature_flag_is_on
