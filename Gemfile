@@ -32,6 +32,7 @@ gem "rails_autolink"
 #gem 'smurf'
 gem 'thinking-sphinx'
 gem "formtastic"
+gem "cocoon"
 gem 'validates_email_format_of', '~> 1.6', '>= 1.6.3'
 gem "geocoder"
 # Rails 4 support is a work in progress so requires tracking master
