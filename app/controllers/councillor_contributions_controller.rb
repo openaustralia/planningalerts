@@ -4,7 +4,7 @@ class CouncillorContributionsController < ApplicationController
   def new
     @councillor_contribution = CouncillorContribution.new
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
-    @suggested_councillor = SuggestedCouncillor.new
+    @suggested_councillor = @councillor_contribution.suggested_councillors.build
   end
 
   def create
