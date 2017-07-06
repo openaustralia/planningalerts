@@ -5,6 +5,7 @@
 //= require geolocation
 //= require applications
 //= require event_tracking
+//= require cocoon
 
 $("#menu .toggle").click(function(){
   $("#menu ul").slideToggle("fast", function(){
