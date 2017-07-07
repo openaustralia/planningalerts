@@ -6,7 +6,7 @@
       Add a councillor
       = f.fields_for :suggested_councillors do |suggested_councillor_field|
         = render 'suggested_councillor_fields', f: suggested_councillor_field
-        %button.links{:id => "add_button"}
+        %button.links{:id => "add-button"}
           = link_to_add_association "Add another councillor", f, :suggested_councillors
-  %p.button{:id => "submit_button"}
+  %p.button{:id => "submit-button"}
     = f.submit "Submit 1 new councillor", id: "counts"
