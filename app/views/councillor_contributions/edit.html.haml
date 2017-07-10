@@ -1,0 +1,3 @@
+%h1 Add another councillor for #{@authority.full_name}
+= form_for [@authority, @councillor_contribution], url: authority_councillor_contribution_path do |f|
+  = render 'contribution_form_input', f: f
