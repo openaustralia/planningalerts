@@ -1,6 +1,6 @@
 %fieldset
   %legend
-    "Add a councillor"
+    Add a councillor
     = f.fields_for :suggested_councillors, @suggested_councillor do |suggested_councillor_field|
       %p{:class => "nameField"}
         = suggested_councillor_field.label :name
