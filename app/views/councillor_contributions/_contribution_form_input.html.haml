@@ -12,4 +12,4 @@
     = f.submit "Add another councillor"
 
   %p.button{:class => "contribute"}
-    = f.submit "Submit"
+    = f.submit "Submit #{@councillor_contribution.suggested_councillors.length + 1} new councillors"
