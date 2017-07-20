@@ -2,44 +2,26 @@ class CouncillorContributionsController < ApplicationController
   before_action :check_if_feature_flag_is_on
 
   def new
-    @councillor_contribution = CouncillorContribution.new
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
-    @suggested_councillor = SuggestedCouncillor.new
+
+    if params["councillor_contribution"]
+      @councillor_contribution = @authority.councillor_contributions.build(councillor_contribution_params)
+    else
+      @councillor_contribution = CouncillorContribution.new
+    end
+
+    @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
   end
 
   def create
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
     @councillor_contribution = @authority.councillor_contributions.build(councillor_contribution_params)
+
     if @councillor_contribution.save
-      if params[:commit] == "Add another councillor"
-        redirect_to edit_authority_councillor_contribution_url(authority_id: @authority.short_name_encoded, id: @councillor_contribution.id)
-      else
-        redirect_to new_contributor_url(councillor_contribution_id: @councillor_contribution.id)
-      end
+      redirect_to new_contributor_url(councillor_contribution_id: @councillor_contribution.id)
     else
       render :new
     end
-  end
-
-  def edit
-    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
-    @councillor_contribution = CouncillorContribution.find(params[:id])
-    @suggested_councillor = SuggestedCouncillor.new
-  end
-
-  def update
-    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
-    @councillor_contribution = CouncillorContribution.find(params[:id])
-    if @councillor_contribution.update(councillor_contribution_params)
-      if params[:commit] == "Add another councillor"
-        redirect_to edit_authority_councillor_contribution_url(authority_id: @authority.short_name_encoded, id: @councillor_contribution.id)
-      else
-        redirect_to new_contributor_url(councillor_contribution_id: @councillor_contribution.id)
-      end
-    else
-      render :edit
-    end
-
   end
 
 private
