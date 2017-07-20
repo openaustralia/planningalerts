@@ -21,6 +21,10 @@ class CouncillorContributionsController < ApplicationController
     end
   end
 
+  def tutorial
+    @authorities = Authority.all
+  end
+
   def edit
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
     @councillor_contribution = CouncillorContribution.find(params[:id])
