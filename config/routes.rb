@@ -109,6 +109,7 @@ PlanningalertsApp::Application.routes.draw do
   end
 
   get '/contribution_tutorial' => 'councillor_contributions#tutorial'
+  get '/contribution_tutorial/search/:council_name' => 'councillor_contributions#search'
 
   resources :contributors, only:[:new, :create]
 
