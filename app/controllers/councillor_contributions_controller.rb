@@ -23,7 +23,11 @@ class CouncillorContributionsController < ApplicationController
 
   def tutorial
     @authorities = Authority.all
+    if params[:council_name]
+         @authorities_search = Authority.where(short_name: params[:council_name].titlecase)
+      end
   end
+
 
   def edit
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
