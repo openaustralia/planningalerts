@@ -21,7 +21,7 @@ class CouncillorContributionsController < ApplicationController
     end
   end
 
-  def tutorial
+  def council_directory
     @authorities = Authority.all
     if params[:council_name]
          @authorities_search = Authority.where(short_name: params[:council_name].titlecase)
