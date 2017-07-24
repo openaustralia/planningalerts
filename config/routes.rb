@@ -110,7 +110,7 @@ PlanningalertsApp::Application.routes.draw do
 
   get '/council_directory' => 'councillor_contributions#council_directory'
   get '/council_directory/search/' => 'council_directory#search'
-  get '/contribution_tutorial' => 'coouncillor_contributions#tutorial'
+  get '/contribution_tutorial' => 'councillor_contributions#tutorial'
 
   resources :contributors, only:[:new, :create]
 
