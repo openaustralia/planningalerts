@@ -1,7 +1,8 @@
 %h1 Council Directory
 
 = form_tag contribution_tutorial_path, :method => :get do |f|
-  %label Search the council you want to contribute
+  %label
+    Search the council you want to contribute
   %p
     = label_tag :council_name
     = text_field_tag :council_name
