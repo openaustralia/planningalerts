@@ -1,5 +1,5 @@
 Authority.create! full_name: 'Marrickvelle Council',
-                  short_name: Marrickvelle',
+                  short_name: 'Marrickvelle',
                   state: 'NSW',
                   email: 'council@Marrickvelle.nsw.gov.au',
                   population_2011: '81489',
