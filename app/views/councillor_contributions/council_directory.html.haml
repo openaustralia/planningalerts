@@ -1,0 +1,25 @@
+%h1 Council Directory
+
+= form_tag council_directory_path, :method => :get do |f|
+  %label
+    Search the council you want to contribute
+  %p
+    = label_tag :council_name
+    = text_field_tag :council_name
+  %p.button
+    = submit_tag "Search", :action => :get
+  %ul
+    - if @authorities_search.nil?
+      - @authorities.each do |a|
+        %li
+        = link_to a.full_name, a.website_url
+
+    - elsif @authorities_search.empty?
+      %br
+      %p.attention Sorry, no results found!
+
+    - elsif @authorities_search
+      - @authorities_search.each do |a|
+        %li
+          %h2
+            = link_to a.full_name, a.website_url
