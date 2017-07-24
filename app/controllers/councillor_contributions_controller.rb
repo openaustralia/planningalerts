@@ -21,6 +21,10 @@ class CouncillorContributionsController < ApplicationController
     end
   end
 
+  def tutorial
+
+  end
+
   def council_directory
     @authorities = Authority.all
     if params[:council_name]
