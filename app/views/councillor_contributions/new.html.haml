@@ -1,3 +1,17 @@
 %h1 Add a new councillor for #{@authority.full_name}
+%h2 The councillor(s) you submitted:
 = form_for [@authority, @councillor_contribution], url: authority_councillor_contributions_path do |f|
+  %ul
+    - @councillor_contribution.suggested_councillors[0...-1].each do |s|
+      %li
+        %dt Name
+        %dd
+          = s.name
+        %dt Email
+        %dd
+          = s.email
+  - @councillor_contribution.suggested_councillors[0...-1].each do |s|
+    = f.fields_for :suggested_councillors, @councillor_contribution.suggested_councillors.last do |suggested_councillor_field|
+      = suggested_councillor_field.hidden_field :name, value: s.name
+      = suggested_councillor_field.hidden_field :email, value: s.email
   = render 'contribution_form_input', f: f

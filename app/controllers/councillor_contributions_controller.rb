@@ -2,24 +2,13 @@ class CouncillorContributionsController < ApplicationController
   before_action :check_if_feature_flag_is_on
 
   def new
-    @councillor_contribution = CouncillorContribution.new
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
-    @suggested_councillor = SuggestedCouncillor.new
-  end
 
-  def create
-    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
-    @councillor_contribution = @authority.councillor_contributions.build(councillor_contribution_params)
-    if @councillor_contribution.save
-      if params[:commit] == "Add another councillor"
-        redirect_to edit_authority_councillor_contribution_url(authority_id: @authority.short_name_encoded, id: @councillor_contribution.id)
-      else
-        redirect_to new_contributor_url(councillor_contribution_id: @councillor_contribution.id)
-      end
+    if params["councillor_contribution"]
+      @councillor_contribution = @authority.councillor_contributions.build(councillor_contribution_params)
     else
-      render :new
+      @councillor_contribution = CouncillorContribution.new
     end
-  end
 
   def tutorial
     @authorities = Authority.all
