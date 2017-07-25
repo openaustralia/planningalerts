@@ -10,11 +10,25 @@ class CouncillorContributionsController < ApplicationController
       @councillor_contribution = CouncillorContribution.new
     end
 
+    @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
+  end
+
+  def create
+    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    @councillor_contribution = @authority.councillor_contributions.build(councillor_contribution_params)
+
+    if @councillor_contribution.save
+      redirect_to new_contributor_url(councillor_contribution_id: @councillor_contribution.id)
+    else
+      render :new
+    end
+  end
+
   def tutorial
     @authorities = Authority.all
     if params[:council_name]
          @authorities_search = Authority.where(short_name: params[:council_name].titlecase)
-      end
+    end
   end
 
 private
