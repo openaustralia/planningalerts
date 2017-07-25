@@ -103,6 +103,7 @@ PlanningalertsApp::Application.routes.draw do
       end
     end
     resources :councillor_contributions, only:[:new, :create]
+
       collection do
         get :test_feed
       end
@@ -111,6 +112,8 @@ PlanningalertsApp::Application.routes.draw do
   get '/council_directory' => 'councillor_contributions#council_directory'
   get '/council_directory/search/' => 'council_directory#search'
   get '/contribution_tutorial' => 'councillor_contributions#tutorial'
+  post "/authorities/:authority_id/councillor_contributions/new", to: "councillor_contributions#new"
+
 
   resources :contributors, only:[:new, :create]
 
