@@ -28,28 +28,6 @@ class CouncillorContributionsController < ApplicationController
       end
   end
 
-
-  def edit
-    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
-    @councillor_contribution = CouncillorContribution.find(params[:id])
-    @suggested_councillor = SuggestedCouncillor.new
-  end
-
-  def update
-    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
-    @councillor_contribution = CouncillorContribution.find(params[:id])
-    if @councillor_contribution.update(councillor_contribution_params)
-      if params[:commit] == "Add another councillor"
-        redirect_to edit_authority_councillor_contribution_url(authority_id: @authority.short_name_encoded, id: @councillor_contribution.id)
-      else
-        redirect_to new_contributor_url(councillor_contribution_id: @councillor_contribution.id)
-      end
-    else
-      render :edit
-    end
-
-  end
-
 private
 
   def councillor_contribution_params
