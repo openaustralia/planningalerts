@@ -1,6 +1,6 @@
 require "spec_helper"
 
-feature "Contributing a new councillor for an authority" do
+feature "Contributing new councillors for an authority" do
   let(:authority) { create(:authority, full_name: "Casey City Council") }
 
   context "when the feature flag is off" do
