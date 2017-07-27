@@ -3,12 +3,11 @@
 %ul
   - @councillor_contribution.suggested_councillors[0...-1].each do |s|
     %li
-      %dt Name
-      %dd
-        = s.name
-      %dt Email
-      %dd
-        = s.email
+      %dl
+        %dt Name
+        %dd= s.name
+        %dt Email
+        %dd= s.email
 = form_for [@authority, @councillor_contribution], url: authority_councillor_contributions_path do |f|
   - @councillor_contribution.suggested_councillors[0...-1].each do |s|
     = f.fields_for :suggested_councillors, @councillor_contribution.suggested_councillors.last do |suggested_councillor_field|
