@@ -28,7 +28,7 @@ feature "Contributing new councillors for an authority" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
       within_fieldset "Add a councillor" do
-        fill_in "Name", with: "Mila Gilic"
+        fill_in "Full name", with: "Mila Gilic"
         fill_in "Email", with: "mgilic@casey.vic.gov.au"
       end
 
@@ -48,7 +48,7 @@ feature "Contributing new councillors for an authority" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
       within_fieldset "Add a councillor" do
-        fill_in "Name", with: "Mila Gilic"
+        fill_in "Full name", with: "Mila Gilic"
         fill_in "Email", with: "mgilic@casey.vic.gov.au"
       end
 
@@ -58,7 +58,7 @@ feature "Contributing new councillors for an authority" do
       expect(page).to have_content "mgilic@casey.vic.gov.au"
 
       within_fieldset "Add a councillor" do
-        fill_in "Name", with: "Rosalie Crestani"
+        fill_in "Full name", with: "Rosalie Crestani"
         fill_in "Email", with: "rcrestani@casey.vic.gov.au"
       end
 
@@ -71,21 +71,21 @@ feature "Contributing new councillors for an authority" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
       within_fieldset "Add a councillor" do
-        fill_in "Name", with: "Mila Gilic"
+        fill_in "Full name", with: "Mila Gilic"
         fill_in "Email", with: "mgilic@casey.vic.gov.au"
       end
 
       click_button "Add another councillor"
 
       within_fieldset "Add a councillor" do
-        fill_in "Name", with: "Rosalie Crestani"
+        fill_in "Full name", with: "Rosalie Crestani"
         fill_in "Email", with: "rcrestani@casey.vic.gov.au"
       end
 
       click_button "Add another councillor"
 
       within_fieldset "Add a councillor" do
-        fill_in "Name", with: "Rosalie Crestani"
+        fill_in "Full name", with: "Rosalie Crestani"
         fill_in "Email", with: "rcrestani@casey.vic.gov.au"
       end
 
@@ -101,21 +101,21 @@ feature "Contributing new councillors for an authority" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
       within_fieldset "Add a councillor" do
-        fill_in "Name", with: "Mila Gilic"
+        fill_in "Full name", with: "Mila Gilic"
         fill_in "Email", with: "mgilic@casey.vic.gov.au"
       end
 
       click_button "Add another councillor"
 
       within_fieldset "Add a councillor" do
-        fill_in "Name", with: "Rosalie Crestani"
+        fill_in "Full name", with: "Rosalie Crestani"
         fill_in "Email", with: "rcrestani@casey.vic.gov.au"
       end
 
       click_button "Add another councillor"
 
       within_fieldset "Add a councillor" do
-        fill_in "Name", with: "Rosalie Crestani"
+        fill_in "Full name", with: "Rosalie Crestani"
         fill_in "Email", with: "rcrestani@casey.vic.gov.au"
       end
 
