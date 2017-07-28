@@ -1,19 +1,21 @@
 %h1.page-title Add a new councillor for #{@authority.full_name}
-- if @councillor_contribution.suggested_councillors.many?
-  %h2 The councillor(s) you submitted:
-  %ul
-    - @councillor_contribution.suggested_councillors[0...-1].each do |s|
-      %li
-        %dl
-          %dt Name
-          %dd= s.name
-          %dt Email
-          %dd= s.email
 = form_for [@authority, @councillor_contribution], url: authority_councillor_contributions_path, html: { class: "councillor-contribution-form" } do |f|
   - @councillor_contribution.suggested_councillors[0...-1].each do |s|
     = f.fields_for :suggested_councillors, @councillor_contribution.suggested_councillors.last do |suggested_councillor_field|
       = suggested_councillor_field.hidden_field :name, value: s.name
       = suggested_councillor_field.hidden_field :email, value: s.email
-  = render 'contribution_form_input', f: f
-  %button{formaction: new_authority_councillor_contribution_path, class: "button"} Add another councillor
-  = f.submit "Submit #{@councillor_contribution.suggested_councillors.length} new councillors", class: "button-action"
+  .councillor-contribution-councillors
+    - if @councillor_contribution.suggested_councillors.many?
+      %h2 The councillor(s) you submitted:
+      %ul
+        - @councillor_contribution.suggested_councillors[0...-1].each do |s|
+          %li
+            %dl
+              %dt Name
+              %dd= s.name
+              %dt Email
+              %dd= s.email
+    = render 'contribution_form_input', f: f
+    %button{formaction: new_authority_councillor_contribution_path, class: "button"} Add another councillor
+  .councillor-contribution-actions
+    = f.submit "Submit #{@councillor_contribution.suggested_councillors.length} new councillors", class: "button-action"
