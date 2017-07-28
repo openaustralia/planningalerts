@@ -31,7 +31,7 @@ class CouncillorContributionsController < ApplicationController
     end
   end
 
-private
+  private
 
   def councillor_contribution_params
     params.require(:councillor_contribution).permit(suggested_councillors_attributes: [:name, :email])

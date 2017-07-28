@@ -1,6 +1,6 @@
 require "spec_helper"
 
-feature "Contributing a new councillor for an authority" do
+feature "Contributing new councillors for an authority" do
   let(:authority) { create(:authority, full_name: "Casey City Council") }
 
   context "when the feature flag is off" do
@@ -67,7 +67,7 @@ feature "Contributing a new councillor for an authority" do
       expect(page).to have_content "Thank you"
     end
 
-    it "successfully submit suggested councillor(s) information with a blank field of add another councillors" do
+    it "successfully with three councillors and one blank councillor" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
       within_fieldset "Add a councillor" do
@@ -97,7 +97,7 @@ feature "Contributing a new councillor for an authority" do
 
     end
 
-    it "successfully submit suggested councillor(s) information with all field filled in" do
+    it "successfully with three councillors" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
       within_fieldset "Add a councillor" do
