@@ -1,2 +1,2 @@
-%button{:formaction => new_authority_councillor_contribution_path} Add another councillor
+%button{formaction: new_authority_councillor_contribution_path, class: "button"} Add another councillor
 = f.submit "Submit #{@councillor_contribution.suggested_councillors.length} new councillors", class: "button-action"
