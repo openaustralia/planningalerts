@@ -1,0 +1,24 @@
+// TODO: These forms styles are very repetitive with #new_add_comment and .formtastic child styles
+//       They just don't have the .formatastic overrides.
+//       There is probably a refactor to make these the base/raw form styles
+//       and to move them into _form.scss
+.councillor-contribution-form {
+  label {
+    display: block;
+    margin: .75em 0 .25em;
+    padding: 0;
+    font-size: 1em;
+    font-weight: 500;
+  }
+
+  input {
+    display: block;
+    padding: .25em;
+    font-family: $blueprint-font-family;
+    font-size: 100%;
+  }
+
+  [aria-hidden="true"] {
+    display: none;
+  }
+}
