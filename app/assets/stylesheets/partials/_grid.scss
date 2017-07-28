@@ -506,12 +506,35 @@
 }
 
 .councillor-contributions {
-  box-sizing: border-box;
-
   @include at-breakpoint(60em) {
     @include span-columns(8, 12);
     float: none;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+
+.councillor-contribution-form {
+  fieldset {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .suggested-councillor-input-group {
+    flex: 1 0 auto;
+  }
+
+  input {
+    box-sizing: border-box;
+  }
+}
+
+.suggested-councillor-input-group {
+  input {
+    width: 100%;
+  }
+
+  & + & {
+    margin-left: 2em;
   }
 }
