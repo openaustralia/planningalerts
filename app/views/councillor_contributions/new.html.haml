@@ -15,4 +15,5 @@
       = suggested_councillor_field.hidden_field :name, value: s.name
       = suggested_councillor_field.hidden_field :email, value: s.email
   = render 'contribution_form_input', f: f
-  = render 'contribution_submit_buttons', f: f
+  %button{formaction: new_authority_councillor_contribution_path, class: "button"} Add another councillor
+  = f.submit "Submit #{@councillor_contribution.suggested_councillors.length} new councillors", class: "button-action"
