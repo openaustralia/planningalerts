@@ -504,3 +504,14 @@
     }
   }
 }
+
+.councillor-contributions {
+  box-sizing: border-box;
+
+  @include at-breakpoint(60em) {
+    @include span-columns(8, 12);
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
