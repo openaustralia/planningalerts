@@ -102,11 +102,14 @@ PlanningalertsApp::Application.routes.draw do
         get :per_week
       end
     end
-    resources :suggested_councillors, only:[:new, :create]
+    resources :councillor_contributions, only:[:new, :create]
     collection do
       get :test_feed
     end
   end
+
+  post "/authorities/:authority_id/councillor_contributions/new", to: "councillor_contributions#new"
+
   resources :contributors, only:[:new, :create]
 
   namespace :atdis do
