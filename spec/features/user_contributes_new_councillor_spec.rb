@@ -67,7 +67,7 @@ feature "Contributing new councillors for an authority" do
       expect(page).to have_content "Thank you"
     end
 
-    it "work successfully with a blank field of add another councillors" do
+    it "successfully with three councillors and one blank councillor" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
       within_fieldset "Add a councillor" do
@@ -97,7 +97,7 @@ feature "Contributing new councillors for an authority" do
 
     end
 
-    it "successfully submit 3 councillor information" do
+    it "successfully with three councillors" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
       within_fieldset "Add a councillor" do
