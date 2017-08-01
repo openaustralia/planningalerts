@@ -56,7 +56,7 @@ feature "Contributing new councillors for an authority" do
         fill_in "Email", with: "rcrestani@casey.vic.gov.au"
       end
 
-      click_button "Submit 2 new councillors"
+      click_button "Submit"
 
       expect(page).to have_content "Thank you"
     end
