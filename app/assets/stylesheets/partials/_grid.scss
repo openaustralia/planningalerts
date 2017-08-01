@@ -504,3 +504,48 @@
     }
   }
 }
+
+.councillor-contributions {
+  @include at-breakpoint(60em) {
+    @include span-columns(8, 12);
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.councillor-contribution-form {
+  .suggested-councillor-input-wrapper {
+    @include at-breakpoint(30em) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .suggested-councillor-input-group {
+    @include at-breakpoint(30em) {
+      width: 50%;
+      box-sizing: border-box;
+    }
+  }
+
+  input {
+    box-sizing: border-box;
+  }
+}
+
+.suggested-councillor-input-group {
+  @include at-breakpoint(30em) {
+    padding-right: 1em;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  & + & {
+    @include at-breakpoint(30em) {
+      padding-right: 0;
+    }
+  }
+}
