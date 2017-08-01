@@ -7,7 +7,6 @@
         = suggested_councillor_field.hidden_field :email, value: s.email
     .councillor-contribution-councillors
       - if @councillor_contribution.suggested_councillors.many?
-        %h2 The councillor(s) you submitted:
         %ul
           - @councillor_contribution.suggested_councillors[0...-1].each do |s|
             %li
