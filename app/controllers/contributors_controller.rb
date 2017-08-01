@@ -15,7 +15,7 @@ class ContributorsController < ApplicationController
     end
   end
 
-private
+  private
 
   def contributor_params
     params.require(:contributor).permit(:name, :email)
