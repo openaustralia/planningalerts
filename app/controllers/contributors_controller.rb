@@ -15,6 +15,11 @@ class ContributorsController < ApplicationController
     end
   end
 
+  def no_contributor_info
+    flash[:notice] = "Thank you"
+    redirect_to root_url
+  end
+
   private
 
   def contributor_params
