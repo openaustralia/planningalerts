@@ -18,13 +18,7 @@ feature "Contributing new councillors for an authority" do
       end
     end
 
-    it "lands on the contribution page of the chosen authority" do
-      visit new_authority_councillor_contribution_path(authority.short_name_encoded)
-
-      expect(page).to have_content("Casey City Council")
-    end
-
-    it "works successfully when the contributor provides their information" do
+    it "after landing on the contribution page, works successfully when the contributor provides their information" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
       within ".councillor-contribution-councillors fieldset" do
