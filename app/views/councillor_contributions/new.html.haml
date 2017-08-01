@@ -10,7 +10,7 @@
         %ul
           - @councillor_contribution.suggested_councillors[0...-1].each do |s|
             %li
-              %dl
+              %dl.suggested-councillor-input-wrapper
                 .suggested-councillor-input-group
                   %dt.councillor-contribution-label Full name
                   %dd= s.name
