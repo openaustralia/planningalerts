@@ -517,13 +517,17 @@
 .councillor-contribution-form {
   dl,
   fieldset {
-    display: flex;
-    justify-content: space-between;
+    @include at-breakpoint(30em) {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   .suggested-councillor-input-group {
-    width: 50%;
-    box-sizing: border-box;
+    @include at-breakpoint(30em) {
+      width: 50%;
+      box-sizing: border-box;
+    }
   }
 
   input {
@@ -532,13 +536,17 @@
 }
 
 .suggested-councillor-input-group {
-  padding-right: 1em;
+  @include at-breakpoint(30em) {
+    padding-right: 1em;
+  }
 
   input {
     width: 100%;
   }
 
   & + & {
-    padding-right: 0;
+    @include at-breakpoint(30em) {
+      padding-right: 0;
+    }
   }
 }
