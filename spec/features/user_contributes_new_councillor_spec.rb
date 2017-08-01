@@ -80,7 +80,6 @@ feature "Contributing new councillors for an authority" do
       click_button "Submit 4 new councillors"
 
       expect(page).to have_content "Thank you"
-
     end
 
     it "successfully with three councillors" do
