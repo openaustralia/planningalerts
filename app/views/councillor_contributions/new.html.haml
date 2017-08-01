@@ -12,10 +12,12 @@
           - @councillor_contribution.suggested_councillors[0...-1].each do |s|
             %li
               %dl
-                %dt Full name
-                %dd= s.name
-                %dt Email
-                %dd= s.email
+                .suggested-councillor-input-group
+                  %dt.councillor-contribution-label Full name
+                  %dd= s.name
+                .suggested-councillor-input-group
+                  %dt.councillor-contribution-label Email
+                  %dd= s.email
       = render 'contribution_form_input', f: f
       %button{formaction: new_authority_councillor_contribution_path, class: "button"} Add another councillor
     .councillor-contribution-actions

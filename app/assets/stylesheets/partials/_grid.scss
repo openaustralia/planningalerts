@@ -515,13 +515,15 @@
 }
 
 .councillor-contribution-form {
+  dl,
   fieldset {
     display: flex;
     justify-content: space-between;
   }
 
   .suggested-councillor-input-group {
-    flex: 1 0 auto;
+    width: 50%;
+    box-sizing: border-box;
   }
 
   input {
@@ -530,11 +532,13 @@
 }
 
 .suggested-councillor-input-group {
+  padding-right: 1em;
+
   input {
     width: 100%;
   }
 
   & + & {
-    margin-left: 2em;
+    padding-right: 0;
   }
 }

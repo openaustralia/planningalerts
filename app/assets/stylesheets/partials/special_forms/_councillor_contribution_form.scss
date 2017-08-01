@@ -3,7 +3,7 @@
 //       There is probably a refactor to make these the base/raw form styles
 //       and to move them into _form.scss
 .councillor-contribution-form {
-  label {
+  .councillor-contribution-label {
     display: block;
     margin: .75em 0 .25em;
     padding: 0;
@@ -24,6 +24,12 @@
 
   fieldset {
     margin-bottom: 1em;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 }
 
