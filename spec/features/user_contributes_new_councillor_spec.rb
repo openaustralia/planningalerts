@@ -38,7 +38,7 @@ feature "Contributing new councillors for an authority" do
       expect(page).to have_content "Thank you"
     end
 
-    it "works successfully without contributor information" do
+    it "works successfully when the contributor does not provide their information" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
       within ".councillor-contribution-councillors fieldset" do
