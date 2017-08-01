@@ -9,8 +9,9 @@ class CouncillorContributionsController < ApplicationController
     else
       @councillor_contribution = CouncillorContribution.new
     end
-
-    @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
+    if @councillor_contribution.suggested_councillors.empty? || @councillor_contribution.suggested_councillors.last.valid?
+      @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
+    end
   end
 
   def create
