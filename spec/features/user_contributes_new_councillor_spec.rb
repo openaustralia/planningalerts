@@ -107,7 +107,6 @@ feature "Contributing new councillors for an authority" do
       click_button "Submit 3 new councillors"
 
       expect(page).to have_content "Thank you"
-
     end
   end
 end
