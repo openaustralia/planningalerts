@@ -18,41 +18,6 @@ feature "Contributing new councillors for an authority" do
       end
     end
 
-    it "after landing on the contribution page, works successfully when the contributor provides their information" do
-      visit new_authority_councillor_contribution_path(authority.short_name_encoded)
-
-      within ".councillor-contribution-councillors fieldset" do
-        fill_in "Full name", with: "Mila Gilic"
-        fill_in "Email", with: "mgilic@casey.vic.gov.au"
-      end
-
-      click_button "Submit 1 new councillor"
-
-      within_fieldset "Please tell us about yourself, so we can send you a little note of appreciation and updates about your contribution when it goes live." do
-        fill_in "Name", with: "Jane Contributes"
-        fill_in "Email", with: "jane@contributor.com"
-      end
-
-      click_button "Submit"
-
-      expect(page).to have_content "Thank you"
-    end
-
-    it "works successfully when the contributor does not provide their information" do
-      visit new_authority_councillor_contribution_path(authority.short_name_encoded)
-
-      within ".councillor-contribution-councillors fieldset" do
-        fill_in "Full name", with: "Mila Gilic"
-        fill_in "Email", with: "mgilic@casey.vic.gov.au"
-      end
-
-      click_button "Submit 1 new councillor"
-
-      click_link "I prefer not to"
-
-      expect(page).to have_content "Thank you"
-    end
-
     it "successfully with three councillors and one blank councillor" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
