@@ -26,7 +26,7 @@ feature "Contributing new councillors for an authority" do
         fill_in "Email", with: "mgilic@casey.vic.gov.au"
       end
 
-      click_button "Submit 1 new councillors"
+      click_button "Submit 1 new councillor"
 
       within_fieldset "Please tell us about yourself, so we can send you a little note of appreciation and updates about your contribution when it goes live." do
         fill_in "Name", with: "Jane Contributes"
@@ -46,7 +46,7 @@ feature "Contributing new councillors for an authority" do
         fill_in "Email", with: "mgilic@casey.vic.gov.au"
       end
 
-      click_button "Submit 1 new councillors"
+      click_button "Submit 1 new councillor"
 
       click_link "I prefer not to"
 

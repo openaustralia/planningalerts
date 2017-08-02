@@ -20,4 +20,4 @@
       = render 'contribution_form_input', f: f
       %button{formaction: new_authority_councillor_contribution_path, class: "button"} Add another councillor
     .councillor-contribution-actions
-      = f.submit "Submit #{@councillor_contribution.suggested_councillors.length} new councillors", class: "button-action"
+      = f.submit "Submit #{pluralize(@councillor_contribution.suggested_councillors.length, "new councillor")}", class: "button-action"
