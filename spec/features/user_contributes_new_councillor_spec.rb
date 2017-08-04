@@ -22,8 +22,8 @@ feature "Contributing new councillors for an authority" do
       before :each do
         visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
-        within_fieldset "Add a councillor" do
-          fill_in "Name", with: "Mila Gilic"
+        within ".councillor-contribution-councillors fieldset" do
+          fill_in "Full name", with: "Mila Gilic"
           fill_in "Email", with: "mgilic.invalid"
         end
 
