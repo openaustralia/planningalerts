@@ -34,6 +34,7 @@ feature "Contributing new councillors for an authority" do
         expect(page).to have_content("does not appear to be a valid e-mail address")
       end
 
+      # FIXME: This test is passing but it's not testing what we want
       it "does not go into the list of the suggested councillors" do
         expect(page).to_not have_content("Name: Mila Gilic")
         expect(page).to_not have_content("Email: mglic.invalid")
