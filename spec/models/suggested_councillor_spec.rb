@@ -22,7 +22,7 @@ RSpec.describe SuggestedCouncillor, type: :model do
     it { is_expected.to_not be_valid }
   end
 
-  describe "is invalid without an authority_id" do
+  describe "is invalid without an councillor_contribution_id" do
     subject { SuggestedCouncillor.new(name: "Milla", email: "test@test.com", councillor_contribution_id: nil) }
     it { is_expected.to_not be_valid }
   end

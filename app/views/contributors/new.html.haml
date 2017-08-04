@@ -1,6 +1,6 @@
 %h1 Thank you!
 %p
-  This data you contributed will be reviewd
+  This data you contributed will be reviewed
   by an administrator, and go live shortly.
 = form_for @contributor do |f|
   = f.hidden_field :councillor_contribution_id, value: params[:councillor_contribution_id]
@@ -17,4 +17,4 @@
         = f.text_field :email
     %p.button
       = f.submit "Submit"
-    = link_to "I prefer not to", root_url
+    = link_to "I prefer not to", contributors_no_info_path
