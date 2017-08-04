@@ -35,8 +35,8 @@ feature "Contributing new councillors for an authority" do
       end
 
       it "does not go into the list of the suggested councillors" do
-        expect(page).to not_have_content("Name: Mila Gilic")
-        expect(page).to not_have_content("Email: mglic.invalid")
+        expect(page).to_not have_content("Name: Mila Gilic")
+        expect(page).to_not have_content("Email: mglic.invalid")
       end
 
     end
