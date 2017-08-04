@@ -24,6 +24,29 @@ feature "Contributing new councillors for an authority" do
       expect(page).to have_content("Casey City Council")
     end
 
+    context "when a person submit an invalid email" do
+      before :each do
+        visit new_authority_councillor_contribution_path(authority.short_name_encoded)
+
+        within_fieldset "Add a councillor" do
+          fill_in "Name", with: "Mila Gilic"
+          fill_in "Email", with: "mgilic.invalid"
+        end
+
+        click_button "Submit"
+      end
+
+      it "displays an error message" do
+        expect(page).to have_content("does not appear to be a valid e-mail address")
+      end
+
+      it "does not go into the list of the suggested councillors" do
+        expect(page).to not_have_content("Name: Mila Gilic")
+        expect(page).to not_have_content("Email: mglic.invalid")
+      end
+
+    end
+
     it "works successfully when the contributor provides their information" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
