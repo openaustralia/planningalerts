@@ -21,7 +21,7 @@ class CouncillorContributionsController < ApplicationController
     if @councillor_contribution.save
       redirect_to new_contributor_url(councillor_contribution_id: @councillor_contribution.id)
     else
-      flash[:notice] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
+      flash[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
       render :new
     end
   end
