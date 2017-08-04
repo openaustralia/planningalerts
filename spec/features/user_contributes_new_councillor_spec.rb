@@ -24,6 +24,28 @@ feature "Contributing new councillors for an authority" do
       expect(page).to have_content("Casey City Council")
     end
 
+    context "when a person submit blank email" do
+      before :each do
+        visit new_authority_councillor_contribution_path(authority.short_name_encoded)
+
+        within_fieldset "Add a councillor" do
+          fill_in "Name", with: "Mila Gilic"
+          fill_in "Email", with: ""
+        end
+
+        click_button "Submit"
+      end
+
+      it "displays an error message" do
+        expect(page).to have_content("Email can't be blank")
+      end
+
+      it "does not go into the list of the suggested councillors" do
+        expect(page).to have_no_content("Name: Mila Gilic")
+        expect(page).to have_no_content("Email:")
+      end
+    end
+
     context "when a person submit an invalid email" do
       before :each do
         visit new_authority_councillor_contribution_path(authority.short_name_encoded)
