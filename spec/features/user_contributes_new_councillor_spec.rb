@@ -53,7 +53,7 @@ feature "Contributing new councillors for an authority" do
       end
 
       it "displays an error message" do
-        expect(page).to have_content("Email format seems not right. Does it follow the format of example@email.com?")
+        expect(page).to have_content("Email must be a valid email address, e.g. jane@example.com")
       end
 
       it "does not go into the list of the suggested councillors" do
