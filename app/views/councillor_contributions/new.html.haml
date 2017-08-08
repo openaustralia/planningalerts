@@ -5,6 +5,7 @@
       = f.fields_for :suggested_councillors, @councillor_contribution.suggested_councillors.last do |suggested_councillor_field|
         = suggested_councillor_field.text_field :name, value: s.name
         = suggested_councillor_field.text_field :email, value: s.email
+    .councillor-contribution-councillors
       = render 'contribution_form_input', f: f
       %button{formaction: new_authority_councillor_contribution_path, class: "button"} Add another councillor
     .councillor-contribution-actions
