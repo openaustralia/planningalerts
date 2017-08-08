@@ -1,6 +1,6 @@
 .councillor-contributions
   %h1.page-title Add a new councillor for #{@authority.full_name}
-  = form_for [@authority, @councillor_contribution], url: authority_councillor_contributions_path, html: { class: "councillor-contribution-form" } do |f|
+  = form_for [@authority, @councillor_contribution], url: authority_councillor_contributions_path(@authority.short_name_encoded), html: { class: "councillor-contribution-form" } do |f|
     - @councillor_contribution.suggested_councillors[0...-1].each do |s|
       = f.fields_for :suggested_councillors, @councillor_contribution.suggested_councillors.last do |suggested_councillor_field|
         = suggested_councillor_field.hidden_field :name, value: s.name
@@ -18,6 +18,6 @@
                   %dt.councillor-contribution-label Email
                   %dd= s.email
       = render 'contribution_form_input', f: f
-      %button{formaction: new_authority_councillor_contribution_path, class: "button"} Add another councillor
+      %button{formaction: new_authority_councillor_contribution_path(@authority.short_name_encoded), class: "button"} Add another councillor
     .councillor-contribution-actions
       = f.submit "Submit #{pluralize(@councillor_contribution.suggested_councillors.length, "new councillor")}", class: "button-action"
