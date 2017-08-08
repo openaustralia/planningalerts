@@ -22,6 +22,9 @@ class CouncillorContributionsController < ApplicationController
       redirect_to new_contributor_url(councillor_contribution_id: @councillor_contribution.id)
     else
       flash[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
+      if @councillor_contribution.suggested_councillors.empty?
+        @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
+      end
       render :new
     end
   end
