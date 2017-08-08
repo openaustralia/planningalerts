@@ -1,27 +1,12 @@
 require 'spec_helper'
 
-feature "Contributing new councillors for an authority" do
-  let(:authority) { create(:authority, full_name: "Casey City Council") }
+describe "councillor_contributions/new" do
+  it "displays the full name of the assigned authority" do
+    assign(:authority, create(:authority, full_name: "Casey City Council"))
+    assign(:councillor_contribution, CouncillorContribution.new)
 
-  context "when the feature flag is off" do
-    it "isn't available" do
-      visit new_authority_councillor_contribution_path(authority.short_name_encoded)
+    render
 
-      expect(page.status_code).to eq 404
-    end
-  end
-
-  context "when the feature flag is on" do
-    around do |test|
-      with_modified_env CONTRIBUTE_COUNCILLORS_ENABLED: "true" do
-        test.run
-      end
-    end
-
-    scenario "on the contribution page, display the name of the authority" do
-      visit new_authority_councillor_contribution_path(authority.short_name_encoded)
-
-      expect(page).to have_content("Casey City Council")
-    end
+    expect(rendered).to have_content("Casey City Council")
   end
 end
