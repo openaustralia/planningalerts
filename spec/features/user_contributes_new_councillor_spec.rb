@@ -87,5 +87,26 @@ feature "Contributing new councillors for an authority" do
       find_field("Full name", with: "Mila Gilic")
       find_field("Email", with: "mgilic@casey.vic.gov.au")
     end
+
+    it "successfully with councillors being edited after they're first added" do
+      visit new_authority_councillor_contribution_path(authority.short_name_encoded)
+
+      within ".councillor-contribution-councillors fieldset" do
+        fill_in "Full name", with: "Nila Gelic"
+        fill_in "Email", with: "ngelic@casey.vic.gov.au"
+      end
+
+      click_button "Add another councillor"
+
+      find_field("Full name", with: "Nila Gelic")
+      find_field("Email", with: "ngelic@casey.vic.gov.au")
+
+      fill_in "councillor_contribution_suggested_councillors_attributes_0_name", with: "Mila Gilic"
+      fill_in "councillor_contribution_suggested_councillors_attributes_0_email", with:"mgilic@casey.vic.gov.au"
+
+      click_button "Submit 2 new councillors"
+
+      expect(page).to have_content "Thank you"
+    end
   end
 end
