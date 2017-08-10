@@ -28,6 +28,6 @@ RSpec.describe SuggestedCouncillor, type: :model do
   end
 
   describe "must have a valid email attribute" do
-    it { expect(SuggestedCouncillor.new).to validate_email_format_of(:email).with_message("Email must be a valid email address, e.g. jane@example.com") }
+    it { expect(SuggestedCouncillor.new).to validate_email_format_of(:email).with_message("must be a valid email address, e.g. jane@example.com") }
   end
 end
