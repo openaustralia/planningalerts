@@ -101,8 +101,10 @@ feature "Contributing new councillors for an authority" do
       find_field("Full name", with: "Nila Gelic")
       find_field("Email", with: "ngelic@casey.vic.gov.au")
 
-      fill_in "councillor_contribution_suggested_councillors_attributes_0_name", with: "Mila Gilic"
-      fill_in "councillor_contribution_suggested_councillors_attributes_0_email", with:"mgilic@casey.vic.gov.au"
+      within "fieldset:first-child" do
+        fill_in "Full name", with: "Mila Gilic"
+        fill_in "Email", with:"mgilic@casey.vic.gov.au"
+      end
 
       click_button "Submit 2 new councillors"
 
