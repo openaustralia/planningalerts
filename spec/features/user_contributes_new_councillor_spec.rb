@@ -109,6 +109,8 @@ feature "Contributing new councillors for an authority" do
       click_button "Submit 2 new councillors"
 
       expect(page).to have_content "Thank you"
+      expect(SuggestedCouncillor.find_by(name: "Original Councillor")).to be_nil
+      expect(SuggestedCouncillor.find_by(name: "Changed Councillor")).to be_present
     end
   end
 end
