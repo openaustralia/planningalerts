@@ -92,17 +92,17 @@ feature "Contributing new councillors for an authority" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
       within "fieldset" do
-        fill_in "Full name", with: "Nila Gelic"
+        fill_in "Full name", with: "Original Councillor"
         fill_in "Email", with: "ngelic@casey.vic.gov.au"
       end
 
       click_button "Add another councillor"
 
-      find_field("Full name", with: "Nila Gelic")
+      find_field("Full name", with: "Original Councillor")
       find_field("Email", with: "ngelic@casey.vic.gov.au")
 
       within "fieldset:first-child" do
-        fill_in "Full name", with: "Mila Gilic"
+        fill_in "Full name", with: "Changed Councillor"
         fill_in "Email", with:"mgilic@casey.vic.gov.au"
       end
 
