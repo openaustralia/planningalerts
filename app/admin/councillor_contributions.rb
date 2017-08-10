@@ -3,6 +3,7 @@ ActiveAdmin.register CouncillorContribution do
 
   index do
     column "Councillor Contribution id", :id
+    column :created_at
     column :authority
     actions
   end
