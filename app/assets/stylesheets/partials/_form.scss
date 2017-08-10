@@ -55,6 +55,19 @@ textarea {
   }
 }
 
+// TODO: Is this wrapping form class necessary?
+.councillor-contribution-form {
+  .field_with_errors {
+    input {
+      border-color: $form-error-color;
+    }
+
+    .councillor-contribution-error {
+      color: $form-error-color;
+    }
+  }
+}
+
 textarea {
   line-height: 1.5;
 }
