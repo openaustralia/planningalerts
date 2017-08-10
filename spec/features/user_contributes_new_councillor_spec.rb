@@ -74,20 +74,6 @@ feature "Contributing new councillors for an authority" do
       expect(page).to have_content "Thank you"
     end
 
-    it "successfully display the list of suggested councillor in fieldset" do
-      visit new_authority_councillor_contribution_path(authority.short_name_encoded)
-
-      within "fieldset" do
-        fill_in "Full name", with: "Mila Gilic"
-        fill_in "Email", with: "mgilic@casey.vic.gov.au"
-      end
-
-      click_button "Add another councillor"
-
-      find_field("Full name", with: "Mila Gilic")
-      find_field("Email", with: "mgilic@casey.vic.gov.au")
-    end
-
     it "successfully with councillors being edited after they're first added" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
