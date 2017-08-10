@@ -18,6 +18,28 @@ feature "Contributing new councillors for an authority" do
       end
     end
 
+  context "when a person submits a blank name and a blank email" do
+    before :each do
+      visit new_authority_councillor_contribution_path(authority.short_name_encoded)
+
+      within ".councillor-contribution-councillors fieldset" do
+        fill_in "Full name", with: ""
+        fill_in "Email", with: ""
+      end
+
+      click_button "Submit"
+    end
+
+    it "displays an error message" do
+      expect(page).to have_content("Name can't be blank")
+      expect(page).to have_content("Email can't be blank")
+    end
+
+    it "does not go to the contributor information page" do
+      expect(page).to have_current_path(new_authority_councillor_contribution_path(authority.short_name_encoded))
+    end
+  end
+
     context "when a person submits a blank email" do
       before :each do
         visit new_authority_councillor_contribution_path(authority.short_name_encoded)
