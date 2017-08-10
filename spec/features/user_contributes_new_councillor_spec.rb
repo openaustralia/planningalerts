@@ -91,7 +91,7 @@ feature "Contributing new councillors for an authority" do
     it "successfully with councillors being edited after they're first added" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
-      within "fieldset" do
+      within "fieldset:first-child" do
         fill_in "Full name", with: "Original Councillor"
         fill_in "Email", with: "ngelic@casey.vic.gov.au"
       end
