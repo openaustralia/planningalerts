@@ -21,21 +21,21 @@ feature "Contributing new councillors for an authority" do
     it "successfully with three councillors and one blank councillor" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
-      within ".councillor-contribution-councillors fieldset" do
+      within "fieldset" do
         fill_in "Full name", with: "Mila Gilic"
         fill_in "Email", with: "mgilic@casey.vic.gov.au"
       end
 
       click_button "Add another councillor"
 
-      within ".councillor-contribution-councillors fieldset" do
+      within "fieldset:nth-child(2)" do
         fill_in "Full name", with: "Rosalie Crestani"
         fill_in "Email", with: "rcrestani@casey.vic.gov.au"
       end
 
       click_button "Add another councillor"
 
-      within ".councillor-contribution-councillors fieldset" do
+      within "fieldset:nth-child(3)" do
         fill_in "Full name", with: "Rosalie Crestani"
         fill_in "Email", with: "rcrestani@casey.vic.gov.au"
       end
@@ -50,21 +50,21 @@ feature "Contributing new councillors for an authority" do
     it "successfully with three councillors" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
-      within ".councillor-contribution-councillors fieldset" do
+      within "fieldset" do
         fill_in "Full name", with: "Mila Gilic"
         fill_in "Email", with: "mgilic@casey.vic.gov.au"
       end
 
       click_button "Add another councillor"
 
-      within ".councillor-contribution-councillors fieldset" do
+      within "fieldset:nth-child(2)" do
         fill_in "Full name", with: "Rosalie Crestani"
         fill_in "Email", with: "rcrestani@casey.vic.gov.au"
       end
 
       click_button "Add another councillor"
 
-      within ".councillor-contribution-councillors fieldset" do
+      within "fieldset:nth-child(3)" do
         fill_in "Full name", with: "Rosalie Crestani"
         fill_in "Email", with: "rcrestani@casey.vic.gov.au"
       end
