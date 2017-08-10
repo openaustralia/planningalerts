@@ -7,4 +7,10 @@ ActiveAdmin.register CouncillorContribution do
     actions
   end
 
+  show title: :created_at do
+    attributes_table do
+      row :id
+      row :authority
+    end
+
 end
