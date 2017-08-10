@@ -4,5 +4,6 @@ ActiveAdmin.register SuggestedCouncillor do
     column :authority
     column :name
     column :email
+    column :councillor_contribution_id
   end
 end
