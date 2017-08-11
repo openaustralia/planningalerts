@@ -10,9 +10,7 @@ class CouncillorContributionsController < ApplicationController
       @councillor_contribution = CouncillorContribution.new
     end
 
-    if @councillor_contribution.suggested_councillors.empty? || @councillor_contribution.suggested_councillors.collect { |c| c.valid? }.exclude?(false)
-      @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
-    end
+    @councillor_contribution.suggested_councillors.build({email: nil, name: nil}) if new_suggested_councillor_required?
   end
 
   def create
@@ -40,5 +38,9 @@ class CouncillorContributionsController < ApplicationController
       unless ENV["CONTRIBUTE_COUNCILLORS_ENABLED"].present?
         render "static/error_404", status: 404
       end
+  end
+
+  def new_suggested_councillor_required?
+    @councillor_contribution.suggested_councillors.empty? || @councillor_contribution.suggested_councillors.collect { |c| c.valid? }.exclude?(false)
   end
 end
