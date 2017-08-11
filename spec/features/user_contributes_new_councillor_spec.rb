@@ -18,7 +18,7 @@ feature "Contributing new councillors for an authority" do
       end
     end
 
-  context "when a person submits a blank name and a blank email" do
+  context "when a person submits a councillor with all blank attributes" do
     before :each do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
