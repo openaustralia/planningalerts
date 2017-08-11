@@ -20,10 +20,8 @@ feature "Admin views a suggested councillor" do
 end
 
 feature "Admin views councillor contributions" do
-  before do
-    authority = create(:authority, full_name: "Casey City Council")
-    contributor = create(:contributor, name: "Felix Chaung", email: "example@gmail.com")
-    councillor_contribution = create(:councillor_contribution, contributor: contributor)
+  before :each do
+      Timecop.freeze(Time.local(2017, 8, 1))
 
     create(
       :suggested_councillor,
