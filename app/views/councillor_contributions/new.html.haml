@@ -1,9 +1,9 @@
 .councillor-contributions
   %h1.page-title Add a new councillor for #{@authority.full_name}
-  = form_for [@authority, @councillor_contribution], url: authority_councillor_contributions_path, html: { class: "councillor-contribution-form" } do |f|
+  = form_for [@authority, @councillor_contribution], url: authority_councillor_contributions_path(@authority.short_name_encoded), html: { class: "councillor-contribution-form" } do |f|
     .councillor-contribution-councillors
       - @councillor_contribution.suggested_councillors.each do |s|
         = render 'contribution_form_input', f: f, suggested_councillor: s
-      %button{formaction: new_authority_councillor_contribution_path, class: "button"} Add another councillor
+      %button{formaction: new_authority_councillor_contribution_path(@authority.short_name_encoded), class: "button"} Add another councillor
     .councillor-contribution-actions
       = f.submit "Submit #{pluralize(@councillor_contribution.suggested_councillors.length, "new councillor")}", class: "button-action"
