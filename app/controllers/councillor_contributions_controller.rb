@@ -9,8 +9,9 @@ class CouncillorContributionsController < ApplicationController
     else
       @councillor_contribution = CouncillorContribution.new
     end
-
-    @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
+    if @councillor_contribution.suggested_councillors.empty? || @councillor_contribution.suggested_councillors.collect { |c| c.valid? }.exclude?(false)
+      @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
+    end
   end
 
   def create
@@ -20,6 +21,10 @@ class CouncillorContributionsController < ApplicationController
     if @councillor_contribution.save
       redirect_to new_contributor_url(councillor_contribution_id: @councillor_contribution.id)
     else
+      flash[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
+      if @councillor_contribution.suggested_councillors.empty?
+        @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
+      end
       render :new
     end
   end
