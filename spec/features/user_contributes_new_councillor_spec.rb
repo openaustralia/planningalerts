@@ -84,33 +84,52 @@ feature "Contributing new councillors for an authority" do
       end
     end
 
-    it "successfully with three councillors and one blank councillor" do
-      visit new_authority_councillor_contribution_path(authority.short_name_encoded)
+    context "with three councillors and one blank councillor" do
+      before :each do
+        visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
-      within "fieldset" do
-        fill_in "Full name", with: "Mila Gilic"
-        fill_in "Email", with: "mgilic@casey.vic.gov.au"
+        within "fieldset" do
+          fill_in "Full name", with: "Mila Gilic"
+          fill_in "Email", with: "mgilic@casey.vic.gov.au"
+        end
+
+        click_button "Add another councillor"
+
+        within "fieldset:nth-child(2)" do
+          fill_in "Full name", with: "Rosalie Crestani"
+          fill_in "Email", with: "rcrestani@casey.vic.gov.au"
+        end
+
+        click_button "Add another councillor"
+
+        within "fieldset:nth-child(3)" do
+          fill_in "Full name", with: "Rosalie Crestani"
+          fill_in "Email", with: "rcrestani@casey.vic.gov.au"
+        end
+
+        click_button "Add another councillor"
+
+        click_button "Submit 4 new councillors"
       end
 
-      click_button "Add another councillor"
-
-      within "fieldset:nth-child(2)" do
-        fill_in "Full name", with: "Rosalie Crestani"
-        fill_in "Email", with: "rcrestani@casey.vic.gov.au"
+      # TODO: This really should return the blank councillor as invalid.
+      #       but the person then needs a way to remove it if they added the
+      #       extra councillor by accident and they don't want to submit it.
+      #       Remove this once the two in exchange for the two pending tests below.
+      it "successfully" do
+        expect(page).to have_content "Thank you"
       end
 
-      click_button "Add another councillor"
-
-      within "fieldset:nth-child(3)" do
-        fill_in "Full name", with: "Rosalie Crestani"
-        fill_in "Email", with: "rcrestani@casey.vic.gov.au"
+      it "displays an error message" do
+        pending("this is yet to be implemented, it needs to be clear to people what to do if they accidentally add an extra councillor fieldset before we prevent a blank one from being submitted")
+        expect(page).to have_content("Name can't be blank")
+        expect(page).to have_content("Email can't be blank")
       end
 
-      click_button "Add another councillor"
-
-      click_button "Submit 4 new councillors"
-
-      expect(page).to have_content "Thank you"
+      it "does not go to the contributor information page" do
+        pending("this is yet to be implemented, it needs to be clear to people what to do if they accidentally add an extra councillor fieldset before we prevent a blank one from being submitted")
+        expect(page).to have_content "Add a new councillor for Casey City Council"
+      end
     end
 
     it "successfully with three councillors" do
