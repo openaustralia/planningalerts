@@ -55,7 +55,11 @@ textarea {
   }
 }
 
-// TODO: Is this wrapping form class necessary?
+// TODO: This form doesn't use the Semantic Form library (from formtastic gem) that our other forms do.
+//       We're actually writing over a lot of the css we get from that library for those forms,
+//       so for this new form we decided it would be less complex to use the vanilla rails form helper.
+//       The CSS from Semantic Form is technical debt at this point, and should be gradually removed as we touch
+//       each of those forms. These new styles could be the base for those styles.
 .councillor-contribution-form {
   .field_with_errors {
     input {
