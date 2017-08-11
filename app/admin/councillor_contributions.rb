@@ -11,6 +11,7 @@ ActiveAdmin.register CouncillorContribution do
 
   show title: :created_at do
     attributes_table do
+      row :contributor
       row :id
       row :authority
     end
