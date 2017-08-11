@@ -1,23 +1,9 @@
 .councillor-contributions
   %h1.page-title Add a new councillor for #{@authority.full_name}
   = form_for [@authority, @councillor_contribution], url: authority_councillor_contributions_path, html: { class: "councillor-contribution-form" } do |f|
-    - @councillor_contribution.suggested_councillors[0...-1].each do |s|
-      = f.fields_for :suggested_councillors, @councillor_contribution.suggested_councillors.last do |suggested_councillor_field|
-        = suggested_councillor_field.hidden_field :name, value: s.name
-        = suggested_councillor_field.hidden_field :email, value: s.email
     .councillor-contribution-councillors
-      - if @councillor_contribution.suggested_councillors.many?
-        %ul
-          - @councillor_contribution.suggested_councillors[0...-1].each do |s|
-            %li
-              %dl.suggested-councillor-input-wrapper
-                .suggested-councillor-input-group
-                  %dt.councillor-contribution-label Full name
-                  %dd= s.name
-                .suggested-councillor-input-group
-                  %dt.councillor-contribution-label Email
-                  %dd= s.email
-      = render 'contribution_form_input', f: f
+      - @councillor_contribution.suggested_councillors.each do |s|
+        = render 'contribution_form_input', f: f, suggested_councillor: s
       %button{formaction: new_authority_councillor_contribution_path, class: "button"} Add another councillor
     .councillor-contribution-actions
       = f.submit "Submit #{pluralize(@councillor_contribution.suggested_councillors.length, "new councillor")}", class: "button-action"
