@@ -57,4 +57,12 @@ feature "Admin views councillor contributions" do
   after :each do
     Timecop.return
   end
+
+  it "successfully" do
+    sign_in_as_admin
+
+    click_link "Councillor Contributions"
+
+    expect(page).to have_content "Felix Chaung August 01, 2017 04:00"
+  end
 end
