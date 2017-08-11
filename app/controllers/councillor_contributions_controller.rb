@@ -9,6 +9,7 @@ class CouncillorContributionsController < ApplicationController
     else
       @councillor_contribution = CouncillorContribution.new
     end
+
     if @councillor_contribution.suggested_councillors.empty? || @councillor_contribution.suggested_councillors.collect { |c| c.valid? }.exclude?(false)
       @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
     end
