@@ -4,11 +4,12 @@ class CouncillorContributionsController < ApplicationController
   def new
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
 
-    if params["councillor_contribution"]
-      @councillor_contribution = @authority.councillor_contributions.build(councillor_contribution_params)
-    else
-      @councillor_contribution = CouncillorContribution.new
-    end
+    @councillor_contribution =
+      if params["councillor_contribution"]
+        @authority.councillor_contributions.build(councillor_contribution_params)
+      else
+        CouncillorContribution.new
+      end
 
     @councillor_contribution.suggested_councillors.build({email: nil, name: nil}) if new_suggested_councillor_required?
   end
