@@ -54,4 +54,7 @@ feature "Admin views councillor contributions" do
       )
   end
 
+  after :each do
+    Timecop.return
+  end
 end
