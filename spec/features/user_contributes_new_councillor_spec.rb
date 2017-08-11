@@ -38,7 +38,7 @@ feature "Contributing new councillors for an authority" do
 
     it "does not go to the contributor information page" do
       pending("this is yet to be implemented, it needs to be clear to people what to do if they accidentally add an extra councillor fieldset before we prevent a blank one from being submitted")
-      expect(page).to have_current_path(new_authority_councillor_contribution_path(authority.short_name_encoded))
+      expect(page).to have_content "Add a new councillor for Casey City Council"
     end
   end
 
