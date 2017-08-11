@@ -31,13 +31,11 @@ feature "Contributing new councillors for an authority" do
     end
 
     it "displays an error message" do
-      pending("this is yet to be implemented, it needs to be clear to people what to do if they accidentally add an extra councillor fieldset before we prevent a blank one from being submitted")
       expect(page).to have_content("Name can't be blank")
       expect(page).to have_content("Email can't be blank")
     end
 
     it "does not go to the contributor information page" do
-      pending("this is yet to be implemented, it needs to be clear to people what to do if they accidentally add an extra councillor fieldset before we prevent a blank one from being submitted")
       expect(page).to have_content "Add a new councillor for Casey City Council"
     end
   end
