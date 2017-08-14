@@ -70,7 +70,6 @@ group :test do
   gem 'poltergeist'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
-  gem 'factory_girl'
   gem 'email_spec', '~> 1.6'
   gem 'coveralls', :require => false
   gem 'vcr', '~> 2.9'
