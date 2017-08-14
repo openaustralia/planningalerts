@@ -62,11 +62,6 @@ FactoryGirl.define do
     email "felix@gmail.com"
   end
 
-  factory :councillor_contribution do
-    association :contributor
-    association :authority
-  end
-
   factory :report do
     name "Joe Reporter"
     email "reporter@foo.com"
