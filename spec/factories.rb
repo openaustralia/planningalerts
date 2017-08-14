@@ -57,6 +57,11 @@ FactoryGirl.define do
     end
   end
 
+  factory :councillor_contribution do
+    association :contributor
+    association :authority
+  end
+
   factory :report do
     name "Joe Reporter"
     email "reporter@foo.com"
@@ -120,11 +125,6 @@ FactoryGirl.define do
   factory :suggested_councillor do
     name "Mila Gilic"
     email "mgilic@casey.vic.gov.au"
-    association :authority
-  end
-
-  factory :councillor_contribution do
-    association :contributor
     association :authority
   end
 
