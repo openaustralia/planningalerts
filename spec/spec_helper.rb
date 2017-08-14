@@ -17,6 +17,7 @@ require 'rspec/rails'
 require "email_spec"
 require 'rspec/active_model/mocks'
 require 'capybara/poltergeist'
+require 'factory_girl_rails'
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, { js_errors: false })
 end
