@@ -38,14 +38,14 @@ feature "Admin views councillor contributions" do
       create(
         :suggested_councillor,
         name: "Susan Serey",
-        email: "sserey@.vic.gov.au",
+        email: "sserey@casey.vic.gov.au",
         councillor_contribution: councillor_contribution,
         created_at: creation_time
       )
       create(
         :suggested_councillor,
         name: "Rosalie Crestani",
-        email: "rcrestani@.vic.gov.au",
+        email: "rcrestani@casey.vic.gov.au",
         councillor_contribution: councillor_contribution,
         created_at: creation_time
       )
