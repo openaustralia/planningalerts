@@ -124,6 +124,12 @@ FactoryGirl.define do
   end
 
   factory :councillor_contribution do
+    association :contributor
     association :authority
+  end
+
+  factory :contributor do
+    name "Felix Chaung"
+    email "felix@gmail.com"
   end
 end
