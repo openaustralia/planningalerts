@@ -556,6 +556,7 @@ DEPENDENCIES
   dotenv-rails
   email_spec (~> 1.6)
   everypolitician-popolo!
+  factory_girl
   factory_girl_rails
   foreman
   formtastic
