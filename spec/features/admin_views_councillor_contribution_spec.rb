@@ -60,6 +60,6 @@ feature "Admin views councillor contributions" do
 
     click_link "Councillor Contributions"
 
-    expect(page).to have_content "Felix Chaung August 01, 2017 04:00 Casey City Council"
+    expect(page). to have_content "Felix Chaung #{Time.current.strftime('%B %d, %Y %H:%M')} Casey City Council"
   end
 end
