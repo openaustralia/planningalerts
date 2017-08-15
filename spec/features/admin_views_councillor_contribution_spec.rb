@@ -26,7 +26,7 @@ feature "Admin views councillor contributions" do
       authority = create(:authority, full_name: "Casey City Council")
       contributor = create(:contributor, name: "Felix Chaung", email: "example@gmail.com")
       councillor_contribution = create(:councillor_contribution, contributor: contributor, authority: authority)
-      creation_time = "2017-08-01 00:00:00 -0400"
+      creation_time = Time.current
 
       create(
         :suggested_councillor,
