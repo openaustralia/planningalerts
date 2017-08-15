@@ -10,12 +10,10 @@ feature "Admin views a suggested councillor" do
     )
   end
 
-  it "successfully" do
+  it "not on the Suggested Councillors page" do
     sign_in_as_admin
 
-    click_link "Suggested Councillors"
-
-    expect(page).to have_content "Casey City Council Mila Gilic mgilic@casey.vic.gov.au"
+    expect(page).to_not have_content "Suggested Councillors"
   end
 end
 
