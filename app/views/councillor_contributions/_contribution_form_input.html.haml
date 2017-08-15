@@ -1,9 +1,15 @@
 %fieldset
   .suggested-councillor-input-wrapper
-    = f.fields_for :suggested_councillors, @councillor_contribution.suggested_councillors.last do |suggested_councillor_field|
+    = f.fields_for :suggested_councillors, suggested_councillor do |suggested_councillor_field|
       .suggested-councillor-input-group
         = suggested_councillor_field.label :name, "Full name", class: "councillor-contribution-label"
         = suggested_councillor_field.text_field :name
+        - if suggested_councillor.errors[:name].any?
+          = suggested_councillor_field.label :name, class: "councillor-contribution-error" do
+            = suggested_councillor.errors.full_messages_for(:name).to_sentence
       .suggested-councillor-input-group
         = suggested_councillor_field.label :email, class: "councillor-contribution-label"
         = suggested_councillor_field.text_field :email
+        - if suggested_councillor.errors[:email].any?
+          = suggested_councillor_field.label :email, class: "councillor-contribution-error" do
+            = suggested_councillor.errors.full_messages_for(:email).to_sentence

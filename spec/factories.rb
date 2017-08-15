@@ -120,6 +120,10 @@ FactoryGirl.define do
   factory :suggested_councillor do
     name "Mila Gilic"
     email "mgilic@casey.vic.gov.au"
+    councillor_contribution
+  end
+
+  factory :councillor_contribution do
     association :authority
   end
 
