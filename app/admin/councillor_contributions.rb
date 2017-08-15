@@ -18,7 +18,6 @@ ActiveAdmin.register CouncillorContribution do
 
     h3 "Suggested Councillor"
       table_for resource.suggested_councillors, class: "index_table" do
-        column :created_at
         column :name
         column :email
     end
