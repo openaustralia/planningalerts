@@ -1,22 +1,5 @@
 require "spec_helper"
 
-feature "Admin views a suggested councillor" do
-  before do
-    create(
-      :suggested_councillor,
-      name: "Mila Gilic",
-      email: "mgilic@casey.vic.gov.au",
-      authority: create(:authority, full_name: "Casey City Council")
-    )
-  end
-
-  it "not on the Suggested Councillors page" do
-    sign_in_as_admin
-
-    expect(page).to_not have_content "Suggested Councillors"
-  end
-end
-
 feature "Admin views councillor contributions" do
   before :each do
       Timecop.freeze(Time.local(2017, 8, 1))
