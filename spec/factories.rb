@@ -124,10 +124,6 @@ FactoryGirl.define do
   end
 
   factory :councillor_contribution do
-    association :authority
-  end
-
-  factory :councillor_contribution do
     association :contributor
     association :authority
   end
