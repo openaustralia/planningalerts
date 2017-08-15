@@ -16,7 +16,7 @@ ActiveAdmin.register CouncillorContribution do
       row :authority
     end
 
-    h3 "Suggested Councillor"
+    h3 "Suggested Councillors"
       table_for resource.suggested_councillors, class: "index_table" do
         column :name
         column :email
