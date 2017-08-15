@@ -62,16 +62,4 @@ feature "Admin views councillor contributions" do
 
     expect(page).to have_content "Felix Chaung August 01, 2017 04:00 Casey City Council"
   end
-
-  it "#show page when the 'view' link is clicked" do
-    sign_in_as_admin
-
-    click_link "Councillor Contributions"
-
-    click_link "View"
-    expect(page).to have_content "2017-08-01 04:00:00 UTC Councillor Contribution Details Contributor Felix Chaung"
-    expect(page).to have_content "August 01, 2017 04:00 Casey City Council Mila Gilic mgilic@casey.vic.gov.au"
-    expect(page).to have_content "August 01, 2017 04:00 Casey City Council Susan Serey sserey@.vic.gov.au"
-    expect(page).to have_content "August 01, 2017 04:00 Casey City Council Rosalie Crestani rcrestani@.vic.gov.au"
-  end
 end
