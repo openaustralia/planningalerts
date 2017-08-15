@@ -13,12 +13,12 @@ ActiveAdmin.register CouncillorContribution do
     attributes_table do
       row :contributor
       row :id
+      row :authority
     end
 
     h3 "Suggested Councillor"
       table_for resource.suggested_councillors, class: "index_table" do
         column :created_at
-        column :authority
         column :name
         column :email
     end
