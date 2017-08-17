@@ -11,7 +11,9 @@ ActiveAdmin.register CouncillorContribution do
 
   show title: :created_at do
 
-
+    panel "Councillor Contribution Details" do
+      render partial: "details", locals: {contributor: resource.contributor, authority: resource.authority}
+    end
 
     h3 "Suggested Councillors"
     table_for resource.suggested_councillors, class: "index_table" do
