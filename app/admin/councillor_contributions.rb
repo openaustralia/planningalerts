@@ -10,11 +10,6 @@ ActiveAdmin.register CouncillorContribution do
   end
 
   show title: :created_at do
-    h3 "Contributor"
-    table_for resource.contributor, class: "index_table" do
-      column :name
-      column :email
-    end
 
     attributes_table do
       row :authority
