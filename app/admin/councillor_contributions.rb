@@ -15,6 +15,7 @@ ActiveAdmin.register CouncillorContribution do
       column :name
       column :email
     end
+
     attributes_table do
       row :authority
     end
