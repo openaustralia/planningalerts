@@ -11,9 +11,7 @@ ActiveAdmin.register CouncillorContribution do
 
   show title: :created_at do
 
-    attributes_table do
-      row :authority
-    end
+
 
     h3 "Suggested Councillors"
     table_for resource.suggested_councillors, class: "index_table" do
