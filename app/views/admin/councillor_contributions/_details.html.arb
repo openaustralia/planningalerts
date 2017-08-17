@@ -1,0 +1,13 @@
+table do
+  tr do
+    th "Contributor Name"
+    th "Contributor Email"
+    th "Authority"
+  end
+  tr do
+    td a contributor.name, href:admin_contributor_path
+    td a contributor.email
+    "#{contributor.email}"
+    td a authority.full_name
+  end
+end
