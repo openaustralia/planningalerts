@@ -58,4 +58,17 @@ feature "Admin views councillor contributions" do
     expect(page).to have_content "Susan Serey sserey@casey.vic.gov.au"
     expect(page).to have_content "Rosalie Crestani rcrestani@casey.vic.gov.au"
   end
+  it "successfully with the link for the contributor detail page" do
+    sign_in_as_admin
+
+    click_link "Councillor Contributions"
+
+    click_link "View"
+
+    click_link "Felix Chaung"
+
+    expect(page).to have_content "Felix Chaung"
+    expect(page).to have_content "example@gmail.com"
+    expect(page).to have_content "Created At August 01, 2017 04:00"
+  end
 end
