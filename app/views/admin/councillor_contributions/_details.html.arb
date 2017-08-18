@@ -5,7 +5,7 @@ table do
     th "Authority"
   end
   tr do
-    td a contributor.name, href:admin_contributor_path
+    td contributor.name
     td contributor.email
     "#{contributor.email}"
     td a authority.full_name
