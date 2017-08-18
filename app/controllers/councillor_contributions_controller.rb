@@ -33,7 +33,7 @@ class CouncillorContributionsController < ApplicationController
   private
 
   def councillor_contribution_params
-    params.require(:councillor_contribution).permit(suggested_councillors_attributes: [:name, :email])
+    params.require(:councillor_contribution).permit(suggested_councillors_attributes: [:name, :email], :source_url)
   end
 
   def check_if_feature_flag_is_on
