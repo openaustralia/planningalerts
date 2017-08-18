@@ -58,18 +58,40 @@ feature "Admin views councillor contributions" do
     expect(page).to have_content "Susan Serey sserey@casey.vic.gov.au"
     expect(page).to have_content "Rosalie Crestani rcrestani@casey.vic.gov.au"
   end
-
-  it "successfully with the link for the contributor detail page" do
-    sign_in_as_admin
-
-    click_link "Councillor Contributions"
-
-    click_link "View"
-
-    click_link "Felix Chaung"
-
-    expect(page).to have_content "Felix Chaung"
-    expect(page).to have_content "example@gmail.com"
-    expect(page).to have_content "Created At #{Time.current.strftime('%B %d, %Y %H:%M')}"
-  end
 end
+
+  feature "Admin views councillor contributions without contributor information" do
+    before :each do
+        Timecop.freeze(Time.local(2017, 8, 1))
+
+        authority = create(:authority, full_name: "Casey City Council")
+        councillor_contribution = create(:councillor_contribution, contributor: nil, authority: authority)
+        creation_time = Time.current
+
+        create(
+          :suggested_councillor,
+          name: "Mila Gilic",
+          email: "mgilic@casey.vic.gov.au",
+          councillor_contribution: councillor_contribution,
+          created_at: creation_time
+        )
+        create(
+          :suggested_councillor,
+          name: "Susan Serey",
+          email: "sserey@casey.vic.gov.au",
+          councillor_contribution: councillor_contribution,
+          created_at: creation_time
+        )
+        create(
+          :suggested_councillor,
+          name: "Rosalie Crestani",
+          email: "rcrestani@casey.vic.gov.au",
+          councillor_contribution: councillor_contribution,
+          created_at: creation_time
+        )
+    end
+
+    after :each do
+      Timecop.return
+    end
+  end
