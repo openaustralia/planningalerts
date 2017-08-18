@@ -60,7 +60,6 @@ feature "Admin views councillor contributions" do
   end
 
   it "successfully with the link for the contributor detail page" do
-    Timecop.freeze(Time.local(2017, 8, 1))
     sign_in_as_admin
 
     click_link "Councillor Contributions"
@@ -72,6 +71,5 @@ feature "Admin views councillor contributions" do
     expect(page).to have_content "Felix Chaung"
     expect(page).to have_content "example@gmail.com"
     expect(page).to have_content "Created At #{Time.current.strftime('%B %d, %Y %H:%M')}"
-    Timecop.return
   end
 end
