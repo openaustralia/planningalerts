@@ -69,6 +69,6 @@ feature "Admin views councillor contributions" do
 
     expect(page).to have_content "Felix Chaung"
     expect(page).to have_content "example@gmail.com"
-    expect(page).to have_content "Created At August 01, 2017 04:00"
+    expect(page).to have_content "Created At #{Time.current.strftime('%B %d, %Y %H:%M')}"
   end
 end
