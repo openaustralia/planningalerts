@@ -11,7 +11,8 @@ ActiveAdmin.register CouncillorContribution do
 
   show title: :created_at do
 
-    panel "Councillor Contribution Details" do
+    if resource.contributor.present?
+      panel "Councillor Contribution Details" do
       render partial: "details", locals: {contributor: resource.contributor, authority: resource.authority}
     end
 
