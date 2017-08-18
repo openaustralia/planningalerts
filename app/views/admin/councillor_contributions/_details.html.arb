@@ -7,7 +7,6 @@ table do
   tr do
     td contributor.name
     td contributor.email
-    "#{contributor.email}"
-    td a authority.full_name
+    td a authority.full_name, href: admin_authority_path(authority)
   end
 end
