@@ -94,4 +94,18 @@ end
     after :each do
       Timecop.return
     end
+
+    it "successfully" do
+      sign_in_as_admin
+
+      click_link "Councillor Contributions"
+
+      click_link "View"
+
+      expect(page).to have_content "Anonymous Contributor"
+      expect(page).to have_content "Casey City Council"
+      expect(page).to have_content "Mila Gilic mgilic@casey.vic.gov.au"
+      expect(page).to have_content "Susan Serey sserey@casey.vic.gov.au"
+      expect(page).to have_content "Rosalie Crestani rcrestani@casey.vic.gov.au"
+    end
   end
