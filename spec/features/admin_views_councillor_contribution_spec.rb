@@ -52,7 +52,7 @@ feature "Admin views councillor contributions" do
     click_link "View"
 
     expect(page).to have_content "Felix Chaung"
-    expect(page).to have_content "example@gmail"
+    expect(page).to have_content "example@gmail.com"
     expect(page).to have_content "Casey City Council"
     expect(page).to have_content "Mila Gilic mgilic@casey.vic.gov.au"
     expect(page).to have_content "Susan Serey sserey@casey.vic.gov.au"
