@@ -14,7 +14,17 @@ ActiveAdmin.register CouncillorContribution do
     if resource.contributor.present?
       panel "Councillor Contribution Details" do
       render partial: "details", locals: {contributor: resource.contributor, authority: resource.authority}
+      end
+    else
+      panel "Councillor Contribution Details" do
+        table_for resource do
+          column "Contributor" do
+            "Anonymous Contributor"
+          end
+        column :authority
+      end
     end
+  end
 
     h3 "Suggested Councillors"
     table_for resource.suggested_councillors, class: "index_table" do
