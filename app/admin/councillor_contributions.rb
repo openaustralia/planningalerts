@@ -15,7 +15,6 @@ ActiveAdmin.register CouncillorContribution do
       row :id
       row :authority
       row :source_url
-
     end
 
     h3 "Suggested Councillors"
