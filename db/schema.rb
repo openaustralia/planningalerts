@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170818220607) do
+ActiveRecord::Schema.define(version: 20170822154624) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   limit: 255,   null: false
@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 20170818220607) do
     t.integer  "authority_id",   limit: 4
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.string   "source_url",     limit: 255
+    t.string   "source",         limit: 255
   end
 
   create_table "councillors", force: :cascade do |t|
