@@ -1,23 +1,25 @@
 .councillor-contributions
   %h1.page-title Who are the elected councillors for #{@authority.full_name}?
   %p Once we know, people will be able to ask them about development applications in PlanningAlerts. Collecting this information is a great contribution and will only take you a few minutes.
-  %p
-    You should be able to find the information we need from the #{@authority.full_name} website.
-    Find their list of elected "councillors" or "aldermen" and for each one add their full name and email into the form below.
-  %ul
-    %li
-      %strong Full Name
-      should be just their full name without titles, e.g. for "Lord Mayor Alderman Dr Sue Hicks OAM" just enter "Sue Hicks".
-    %li
-      %strong Email
-      should be the email address for contacting that individual councillor.
-  %p
-    You can add multiple councillors by clicking the "Add another councillor" button.
-    Add all the councillors into the form below and then submit them.
-  %p
-    If you have any questions or can't find all the information you need,
-    please let us know, we're here to help. Contact us by email at
-    = mail_to "contact@planningalerts.org.au", "contact@planningalerts.org.au."
+  %details
+    %summary Instructions
+    %p
+      You should be able to find the information we need from the #{@authority.full_name} website.
+      Find their list of elected "councillors" or "aldermen" and for each one add their full name and email into the form below.
+    %ul
+      %li
+        %strong Full Name
+        should be just their full name without titles, e.g. for "Lord Mayor Alderman Dr Sue Hicks OAM" just enter "Sue Hicks".
+      %li
+        %strong Email
+        should be the email address for contacting that individual councillor.
+    %p
+      You can add multiple councillors by clicking the "Add another councillor" button.
+      Add all the councillors into the form below and then submit them.
+    %p
+      If you have any questions or can't find all the information you need,
+      please let us know, we're here to help. Contact us by email at
+      = mail_to "contact@planningalerts.org.au", "contact@planningalerts.org.au."
 
   = form_for [@authority, @councillor_contribution], url: authority_councillor_contributions_path(@authority.short_name_encoded), html: { class: "councillor-contribution-form" } do |f|
     .councillor-contribution-councillors
