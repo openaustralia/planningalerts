@@ -34,7 +34,7 @@
     = yield :extra_meta_tags
 
   %body
-    = render "application/header"
+    = render "application/header", with_navigation: true
     = yield
     = render "application/footer"
     = render "shared/end_matter", with_maps_scripts: false

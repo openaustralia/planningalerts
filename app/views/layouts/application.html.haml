@@ -44,7 +44,7 @@
     = yield :extra_meta_tags
 
   %body
-    = render "application/header"
+    = render "application/header", with_navigation: true
     = render "application/main"
     = render "shared/stats"
     = render "shared/donations"
