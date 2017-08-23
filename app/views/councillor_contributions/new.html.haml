@@ -5,5 +5,9 @@
       - @councillor_contribution.suggested_councillors.each do |s|
         = render 'contribution_form_input', f: f, suggested_councillor: s
       %button{formaction: new_authority_councillor_contribution_path(@authority.short_name_encoded), class: "button"} Add another councillor
+    .councillor-contribtution-source
+      %p If you found this information online, please provide the URL where we can check it.
+      = f.label :name, "Source"
+      = f.text_area :source
     .councillor-contribution-actions
       = f.submit "Submit #{pluralize(@councillor_contribution.suggested_councillors.length, "new councillor")}", class: "button-action"
