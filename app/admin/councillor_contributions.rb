@@ -9,7 +9,7 @@ ActiveAdmin.register CouncillorContribution do
     actions
   end
 
-  show title: :authority_name do
+  show title: proc {|resource| "Councillor Contribution for #{resource.authority_name}, #{resource.created_at.strftime('%B %d, %Y')}"} do
     if resource.contributor.present?
       panel "Councillor Contribution Details" do
       render partial: "details", locals: {contributor: resource.contributor, authority: resource.authority}
