@@ -2,11 +2,9 @@ table do
   tr do
     th "Contributor Name"
     th "Contributor Email"
-    th "Authority"
   end
   tr do
     td contributor.name
     td a contributor.email, href: "mailto:#{contributor.email}"
-    td a authority.full_name, href: admin_authority_path(authority)
   end
 end
