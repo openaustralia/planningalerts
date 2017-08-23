@@ -1,6 +1,6 @@
 !!! 5
 %html(lang="en")
-  = render "shared/html_head"
+  = render "shared/html_head", with_placeholder_polyfill: true
   %body
     = render "application/header", with_navigation: false
     = render "application/main"

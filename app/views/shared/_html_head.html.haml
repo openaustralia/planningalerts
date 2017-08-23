@@ -31,12 +31,12 @@
       document.write(unescape('%3Cscript type="text/javascript" src="/assets/jquery-1.8.0.min.js"%3E%3C/script%3E'));
     }
 
-  -#
-    The placeholder polyfill js needs to be in the header for it to work.
-    Would like to investigate more and understand this better
-
-  = stylesheet_link_tag "placeholder_polyfill.min.css"
-  = javascript_include_tag "placeholder_polyfill.jquery.min.combo.js"
+  - if with_placeholder_polyfill
+    -#
+      The placeholder polyfill js needs to be in the header for it to work.
+      Would like to investigate more and understand this better
+    = stylesheet_link_tag "placeholder_polyfill.min.css"
+    = javascript_include_tag "placeholder_polyfill.jquery.min.combo.js"
 
   = csrf_meta_tag
   = yield :extra_meta_tags
