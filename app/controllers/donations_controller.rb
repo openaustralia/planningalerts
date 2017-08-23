@@ -4,7 +4,7 @@ class DonationsController < ApplicationController
   def new
     @email = params[:email]
     @price = Donation.default_price
-    render layout: "simple"
+    render layout: "donations"
   end
 
   def create
@@ -23,7 +23,7 @@ class DonationsController < ApplicationController
 
     # TODO: rescue and redirect to new on attempt to reload the create page
     # which tries to reuse the token again and errors.
-    render layout: "simple"
+    render layout: "donations"
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
