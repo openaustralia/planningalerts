@@ -4,4 +4,16 @@ class CouncillorContribution < ActiveRecord::Base
   has_many :suggested_councillors, inverse_of: :councillor_contribution
   accepts_nested_attributes_for :suggested_councillors, reject_if: :all_blank
   validates_associated :suggested_councillors
+
+  def attribution(with_email: false)
+    if contributor
+      if with_email
+        "#{contributor.name} ( #{contributor.email} )"
+      else
+        contributor.name
+      end
+    else
+      "Anonymous"
+    end
+  end
 end

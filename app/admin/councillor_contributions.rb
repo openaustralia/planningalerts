@@ -2,18 +2,16 @@ ActiveAdmin.register CouncillorContribution do
   actions :index, :show
 
   index do
-    column :contributor
+    column(:contributor) { |contribution| contribution.attribution }
     column :created_at
     column :authority
 
     actions
   end
 
-  show title: :created_at do
+  show title: proc {|resource| "Councillor Contribution for #{resource.authority.full_name}, #{resource.created_at.strftime('%B %d, %Y')}"} do
     attributes_table do
-      row :contributor
-      row :id
-      row :authority
+      row(:contributor) { |contribution| contribution.attribution(with_email: true) }
     end
 
     h3 "Suggested Councillors"

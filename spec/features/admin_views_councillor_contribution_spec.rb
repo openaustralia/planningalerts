@@ -44,15 +44,16 @@ feature "Admin views councillor contributions" do
     expect(page).to have_content "Felix Chaung #{Time.current.strftime('%B %d, %Y %H:%M')} Casey City Council"
   end
 
-  it "successfully with suggested councillors on the show page" do
+  it "successfully with suggested councillors on the show page with contributor information" do
     sign_in_as_admin
 
     click_link "Councillor Contributions"
 
     click_link "View"
 
-    expect(page).to have_content "Contributor Felix Chaung"
-    expect(page).to have_content "Authority Casey City Council"
+    expect(page).to have_content "Felix Chaung"
+    expect(page).to have_content "example@gmail.com"
+    expect(page).to have_content "Casey City Council"
     expect(page).to have_content "Mila Gilic mgilic@casey.vic.gov.au"
     expect(page).to have_content "Susan Serey sserey@casey.vic.gov.au"
     expect(page).to have_content "Rosalie Crestani rcrestani@casey.vic.gov.au"
