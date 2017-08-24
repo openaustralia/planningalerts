@@ -13,7 +13,7 @@ If you have any questions or can't find all the information you need, please let
   link_to(
     "Improve these instructions.",
     "https://github.com/openaustralia/planningalerts/blob/master/app/views/councillor_contributions/_instructions_body.md",
-    title: "You submit changes to these instructions on GitHub with a free GitHub account.",
+    title: "You can submit changes to these instructions on GitHub with a free GitHub account.",
     target: "_blank"
   )
 %>
