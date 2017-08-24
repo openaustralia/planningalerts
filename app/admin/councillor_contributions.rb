@@ -12,7 +12,16 @@ ActiveAdmin.register CouncillorContribution do
   show title: proc {|resource| "Councillor Contribution for #{resource.authority_name}, #{resource.created_at.strftime('%B %d, %Y')}"} do
     if resource.contributor.present?
       panel "Councillor Contribution Details" do
-      render partial: "details", locals: {contributor: resource.contributor}
+        table do
+          tr do
+            th "Contributor Name"
+            th "Contributor Email"
+          end
+          tr do
+            td resource.contributor.name
+            td a resource.contributor.email, href: "mailto:#{resource.contributor.email}"
+          end
+        end
       end
     else
       panel "Councillor Contribution Details" do
