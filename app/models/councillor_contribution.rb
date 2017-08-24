@@ -9,7 +9,15 @@ class CouncillorContribution < ActiveRecord::Base
     authority.full_name
   end
 
-  def attribution
-    contributor ? contributor.name : "Anonymous"
+  def attribution(with_email: false)
+    if contributor
+      if with_email
+        "#{contributor.name} ( #{contributor.email} )"
+      else
+        contributor.name
+      end
+    else
+      "Anonymous"
+    end
   end
 end

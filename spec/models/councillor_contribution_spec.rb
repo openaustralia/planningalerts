@@ -19,17 +19,33 @@ describe CouncillorContribution do
       it do
         expect(contribution.attribution).to eq "Anonymous"
       end
+
+      context "with email: true option" do
+        subject { contribution.attribution(with_email: true) }
+
+        it { is_expected.to eq "Anonymous" }
+      end
     end
 
     context "when there is a contributor" do
       before do
         contribution.update(
-          contributor: create(:contributor, name: "Hisayo Horie")
+          contributor: create(
+            :contributor,
+            name: "Hisayo Horie",
+            email: "hisayo@example.com"
+          )
         )
       end
 
       it do
         expect(contribution.attribution).to eq "Hisayo Horie"
+      end
+
+      context "with email: true option" do
+        subject { contribution.attribution(with_email: true) }
+
+        it { is_expected.to eq "Hisayo Horie (hisayo@example.com)" }
       end
     end
   end

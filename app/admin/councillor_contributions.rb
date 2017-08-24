@@ -11,13 +11,7 @@ ActiveAdmin.register CouncillorContribution do
 
   show title: proc {|resource| "Councillor Contribution for #{resource.authority_name}, #{resource.created_at.strftime('%B %d, %Y')}"} do
     attributes_table do
-      row("Contributor") do |r|
-        if resource.contributor.present?
-          "#{r.contributor.name} ( #{ r.contributor.email } )"
-        else
-          "Anonymous"
-        end
-      end
+      row(:contributor) { |contribution| contribution.attribution(with_email: true) }
     end
 
     h3 "Suggested Councillors"
