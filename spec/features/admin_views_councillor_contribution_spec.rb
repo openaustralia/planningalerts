@@ -102,7 +102,7 @@ end
 
       click_link "View"
 
-      expect(page).to have_content "Anonymous Contributor"
+      expect(page).to have_content "Anonymous"
       expect(page).to have_content "Casey City Council"
       expect(page).to have_content "Mila Gilic mgilic@casey.vic.gov.au"
       expect(page).to have_content "Susan Serey sserey@casey.vic.gov.au"
