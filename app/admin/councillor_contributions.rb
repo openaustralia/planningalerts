@@ -20,4 +20,8 @@ ActiveAdmin.register CouncillorContribution do
       column :email
     end
   end
-end
+
+    action_item :download,:only => [:show] do
+      link_to "Download the suggested councillors CSV", admin_councillor_contribution_suggested_councillors_path(:councillor_contribution_id=>resource.id, :format => :csv )
+      end
+  end
