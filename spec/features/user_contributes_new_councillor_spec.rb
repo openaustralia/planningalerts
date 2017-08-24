@@ -36,7 +36,7 @@ feature "Contributing new councillors for an authority" do
     end
 
     it "does not go to the contributor information page" do
-      expect(page).to have_content "Add a new councillor for Casey City Council"
+      expect(page).to have_content "Who are the elected councillors for Casey City Council?"
     end
   end
 
