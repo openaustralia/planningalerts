@@ -15,7 +15,7 @@ ActiveAdmin.register CouncillorContribution do
         if resource.contributor.present?
           "#{r.contributor.name} ( #{ r.contributor.email } )"
         else
-          "Anonymous Contributor"
+          "Anonymous"
         end
       end
     end
