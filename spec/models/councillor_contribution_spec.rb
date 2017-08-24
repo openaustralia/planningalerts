@@ -11,14 +11,10 @@ describe CouncillorContribution do
   end
 
   describe "#attribution" do
-    let(:contribution) do
-      create(:councillor_contribution, contributor: nil)
-    end
+    let(:contribution) { create(:councillor_contribution, contributor: nil) }
 
     context "when there is no contributor" do
-      it do
-        expect(contribution.attribution).to eq "Anonymous"
-      end
+      it { expect(contribution.attribution).to eq "Anonymous" }
 
       context "with email: true option" do
         subject { contribution.attribution(with_email: true) }
@@ -28,17 +24,11 @@ describe CouncillorContribution do
     end
 
     context "when there is a contributor" do
-      let(:contributor) do
-        create(:contributor, email: nil, name: "Hisayo Horie")
-      end
+      let(:contributor) { create(:contributor, email: nil, name: "Hisayo Horie") }
 
-      before do
-        contribution.update(contributor: contributor)
-      end
+      before { contribution.update(contributor: contributor) }
 
-      it do
-        expect(contribution.attribution).to eq "Hisayo Horie"
-      end
+      it { expect(contribution.attribution).to eq "Hisayo Horie" }
 
       context "with email: true option" do
         subject { contribution.attribution(with_email: true) }
@@ -48,9 +38,7 @@ describe CouncillorContribution do
         end
 
         context "and the contributor has an email" do
-          before do
-            contributor.update(email: "hisayo@example.com")
-          end
+          before { contributor.update(email: "hisayo@example.com") }
 
           it { is_expected.to eq "Hisayo Horie ( hisayo@example.com )" }
         end
