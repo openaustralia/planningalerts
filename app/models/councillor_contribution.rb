@@ -11,7 +11,7 @@ class CouncillorContribution < ActiveRecord::Base
 
   def attribution(with_email: false)
     if contributor
-      if with_email
+      if with_email && contributor.email
         "#{contributor.name} ( #{contributor.email} )"
       else
         contributor.name

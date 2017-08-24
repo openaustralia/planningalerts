@@ -28,14 +28,12 @@ describe CouncillorContribution do
     end
 
     context "when there is a contributor" do
+      let(:contributor) do
+        create(:contributor, email: nil, name: "Hisayo Horie")
+      end
+
       before do
-        contribution.update(
-          contributor: create(
-            :contributor,
-            name: "Hisayo Horie",
-            email: "hisayo@example.com"
-          )
-        )
+        contribution.update(contributor: contributor)
       end
 
       it do
@@ -45,7 +43,17 @@ describe CouncillorContribution do
       context "with email: true option" do
         subject { contribution.attribution(with_email: true) }
 
-        it { is_expected.to eq "Hisayo Horie (hisayo@example.com)" }
+        context "and the contributor has no email" do
+          it { is_expected.to eq "Hisayo Horie" }
+        end
+
+        context "and the contributor has an email" do
+          before do
+            contributor.update(email: "hisayo@example.com")
+          end
+
+          it { is_expected.to eq "Hisayo Horie ( hisayo@example.com )" }
+        end
       end
     end
   end
