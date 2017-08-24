@@ -10,14 +10,11 @@ ActiveAdmin.register CouncillorContribution do
   end
 
   show title: proc {|resource| "Councillor Contribution for #{resource.authority_name}, #{resource.created_at.strftime('%B %d, %Y')}"} do
-    panel "Councillor Contribution Details" do
-      table_for resource do
-        if resource.contributor.present?
-          column("Contributor Name") { |r| r.contributor.name }
-          column("Contributor Email") { |r| link_to r.contributor.email, href: "mailto:#{resource.contributor.email}" }
-        else
-          column("Contributor") { "Anonymous Contributor" }
-        end
+    attributes_table do
+      if resource.contributor.present?
+        row("Contributor") { |r| "#{r.contributor.name} ( #{ r.contributor.email } )" }
+      else
+        row("Contributor") { "Anonymous Contributor" }
       end
     end
 
