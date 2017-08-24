@@ -1,5 +1,6 @@
 class CouncillorContributionsController < ApplicationController
   before_action :check_if_feature_flag_is_on
+  layout "minimal"
 
   def new
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
