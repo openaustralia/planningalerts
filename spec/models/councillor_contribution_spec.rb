@@ -34,7 +34,7 @@ describe CouncillorContribution do
         subject { contribution.attribution(with_email: true) }
 
         context "and the contributor has no email" do
-          it { is_expected.to eq "Hisayo Horie" }
+          it { is_expected.to eq "Hisayo Horie (  )" }
         end
 
         context "and the contributor has an email" do
