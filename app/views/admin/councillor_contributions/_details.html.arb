@@ -1,0 +1,10 @@
+table do
+  tr do
+    th "Contributor Name"
+    th "Contributor Email"
+  end
+  tr do
+    td contributor.name
+    td a contributor.email, href: "mailto:#{contributor.email}"
+  end
+end

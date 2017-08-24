@@ -9,11 +9,19 @@ ActiveAdmin.register CouncillorContribution do
     actions
   end
 
-  show title: :created_at do
-    attributes_table do
-      row :contributor
-      row :id
-      row :authority
+  show title: proc {|resource| "Councillor Contribution for #{resource.authority_name}, #{resource.created_at.strftime('%B %d, %Y')}"} do
+    if resource.contributor.present?
+      panel "Councillor Contribution Details" do
+      render partial: "details", locals: {contributor: resource.contributor}
+      end
+    else
+      panel "Councillor Contribution Details" do
+        table_for resource do
+          column "Contributor" do
+            "Anonymous Contributor"
+          end
+        end
+      end
     end
 
     h3 "Suggested Councillors"
