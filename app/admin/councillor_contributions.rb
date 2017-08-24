@@ -2,7 +2,13 @@ ActiveAdmin.register CouncillorContribution do
   actions :index, :show
 
   index do
-    column :contributor
+    column(:contributor) do |r|
+      if r.contributor.present?
+        "#{r.contributor.name}"
+      else
+        "Anonymous"
+      end
+    end
     column :created_at
     column :authority
 
