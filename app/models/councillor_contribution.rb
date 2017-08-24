@@ -8,4 +8,8 @@ class CouncillorContribution < ActiveRecord::Base
   def authority_name
     authority.full_name
   end
+
+  def attribution
+    contributor ? contributor.name : "Anonymous"
+  end
 end
