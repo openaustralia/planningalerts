@@ -16,9 +16,7 @@ ActiveAdmin.register CouncillorContribution do
           column("Contributor Name") { |r| r.contributor.name }
           column("Contributor Email") { |r| link_to r.contributor.email, href: "mailto:#{resource.contributor.email}" }
         else
-          column "Contributor" do
-            "Anonymous Contributor"
-          end
+          column("Contributor") { "Anonymous Contributor" }
         end
       end
     end
