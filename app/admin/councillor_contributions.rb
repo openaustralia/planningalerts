@@ -11,10 +11,12 @@ ActiveAdmin.register CouncillorContribution do
 
   show title: proc {|resource| "Councillor Contribution for #{resource.authority_name}, #{resource.created_at.strftime('%B %d, %Y')}"} do
     attributes_table do
-      if resource.contributor.present?
-        row("Contributor") { |r| "#{r.contributor.name} ( #{ r.contributor.email } )" }
-      else
-        row("Contributor") { "Anonymous Contributor" }
+      row("Contributor") do |r|
+        if resource.contributor.present?
+          "#{r.contributor.name} ( #{ r.contributor.email } )"
+        else
+          "Anonymous Contributor"
+        end
       end
     end
 
