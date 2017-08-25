@@ -9,7 +9,7 @@ ActiveAdmin.register SuggestedCouncillor do
     column (:exective){nil}
     column (:council){@councillor_contribution.authority.full_name}
     column (:council_website){nil}
-    column (:id){nil}
+    column ("id"){:csv_councillor_id}
     column :email
     column (:image){nil}
     column (:party){nil}
