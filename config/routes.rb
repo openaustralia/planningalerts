@@ -102,7 +102,7 @@ PlanningalertsApp::Application.routes.draw do
         get :per_week
       end
     end
-    resources :councillor_contributions, only:[:new, :create]
+    resources :councillor_contributions, only:[:new, :create, :show]
     collection do
       get :test_feed
     end
