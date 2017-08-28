@@ -20,6 +20,7 @@ class CouncillorContribution < ActiveRecord::Base
   def to_csv
     attributes = %w{name start_date end_date exective council council_website
       id email image party source ward phone_mobile}
+      
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
