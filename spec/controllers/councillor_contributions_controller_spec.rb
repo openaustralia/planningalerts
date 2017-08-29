@@ -10,6 +10,14 @@ describe CouncillorContributionsController do
         test.run
       end
     end
+  before :each do
+  create(
+   :suggested_councillor,
+   name: "Mila Gilic",
+   email: "mgilic@casey.vic.gov.au",
+   councillor_contribution: councillor_contribution
+   )
+  end
 
     describe "#show" do
       it "download csv file" do
