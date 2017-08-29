@@ -30,6 +30,13 @@ class CouncillorContributionsController < ApplicationController
     end
   end
 
+  def council_directory
+    @authorities = Authority.all
+    if params[:council_name]
+         @authorities_search = Authority.where(short_name: params[:council_name].titlecase)
+    end
+  end
+
   private
 
   def councillor_contribution_params
