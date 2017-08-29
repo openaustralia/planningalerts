@@ -109,6 +109,7 @@ PlanningalertsApp::Application.routes.draw do
   end
 
   post "/authorities/:authority_id/councillor_contributions/new", to: "councillor_contributions#new"
+  get '/council_directory' => 'councillor_contributions#council_directory'
 
   resources :contributors, only:[:new, :create]
     get "/contributors/no_info", to: "contributors#no_contributor_info"
