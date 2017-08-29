@@ -22,8 +22,17 @@ describe CouncillorContributionsController do
     describe "#show" do
       it "download csv file" do
         get :show, authority_id: authority.id, id: councillor_contribution.id, format: "csv"
-        expect(response.header['Content-Type']).to include'text/csv'
-        expect(response.body).to include "name,start_date,end_date,exective,council,council_website,id,email,image,party,source,ward,phone_mobile"
+        response_csv = CSV.parse(response.body)
+        expect((response_csv).first).to eql [
+          "name", "start_date", "end_date", "exective", "council",
+          "council_website","id","email", "image", "party", "source",
+          "ward", "phone_mobile"
+        ]
+        expect(response_csv.last).to eql [
+          "Mila Gilic", nil, nil,nil,"Casey City Council",nil,
+          "casey_city_council/mila_gilic", "mgilic@casey.vic.gov.au", nil,
+          nil, nil, nil, nil, nil
+          ]
       end
     end
   end
