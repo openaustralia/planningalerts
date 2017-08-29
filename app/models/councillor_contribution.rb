@@ -28,7 +28,7 @@ class CouncillorContribution < ActiveRecord::Base
 
       suggested_councillors.each do |s|
         csv << [
-          s.name, nil, nil, nil, authority.full_name, nil, s.csv_councillor_id,
+          s.name, nil, nil, nil, authority.full_name, nil, s.popolo_id,
           s.email, nil, nil, nil, nil, nil, nil
         ]
       end
