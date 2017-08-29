@@ -21,7 +21,7 @@ ActiveAdmin.register CouncillorContribution do
     end
   end
 
-    action_item :download,:only => [:show] do
-      link_to "Download the suggested councillors CSV", authority_councillor_contribution_path(resource.authority, resource.id, format: :csv)
-      end
+  action_item :download,:only => [:show] do
+    link_to "Download the suggested councillors CSV", authority_councillor_contribution_path(resource.authority, resource.id, format: :csv)
   end
+end
