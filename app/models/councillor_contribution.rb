@@ -1,3 +1,4 @@
+require 'csv'
 class CouncillorContribution < ActiveRecord::Base
   belongs_to :contributor
   belongs_to :authority
