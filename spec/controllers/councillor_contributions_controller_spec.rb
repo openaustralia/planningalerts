@@ -1,9 +1,8 @@
 require 'spec_helper'
 
 describe CouncillorContributionsController do
-    let(:authority) { create(:authority) }
+    let(:authority) { create(:authority, full_name: "Casey City Council") }
     let(:councillor_contribution) { create(:councillor_contribution, authority: authority) }
-    let(:suggested_councillors) { create(:suggested_councillor, name: "Mila Gelic", email: "mgilic@casey.vic.gov.au") }
 
   context "when the feature flag is on" do
     around do |test|
