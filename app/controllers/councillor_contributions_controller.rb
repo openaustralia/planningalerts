@@ -37,7 +37,7 @@ class CouncillorContributionsController < ApplicationController
       format.csv do
         send_data(
           @councillor_contribution.to_csv,
-          filename: "councillor_contribution for #{@councillor_contribution.authority.full_name},#{@councillor_contribution.created_at}.csv",
+          filename: "#{@councillor_contribution.created_at.to_date.to_s}_#{@councillor_contribution.authority.short_name.downcase}_councillor_contribution.csv",
           content_type: Mime[:csv]
         )
       end
