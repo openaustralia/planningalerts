@@ -31,6 +31,19 @@ class CouncillorContributionsController < ApplicationController
     end
   end
 
+  def show
+    @councillor_contribution = CouncillorContribution.find(params[:id])
+    respond_to do |format|
+      format.csv do
+        send_data(
+          @councillor_contribution.to_csv,
+          filename: "#{@councillor_contribution.created_at.to_date.to_s}_#{@councillor_contribution.authority.short_name.downcase}_councillor_contribution_#{@councillor_contribution.id}.csv",
+          content_type: Mime[:csv]
+        )
+      end
+    end
+  end
+
   private
 
   def councillor_contribution_params

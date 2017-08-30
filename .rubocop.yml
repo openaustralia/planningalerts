@@ -5,6 +5,28 @@ AllCops:
   Exclude:
     -  db/schema.rb
 
+Style/FirstParameterIndentation:
+  StyleGuide: https://rubocop.readthedocs.io/en/latest/cops_layout/#layoutfirstparameterindentation
+  Enabled: true
+
+Style/AlignParameters:
+  StyleGuide: https://rubocop.readthedocs.io/en/latest/cops_layout/#layoutalignparameters
+  Enabled: true
+  EnforcedStyle: with_first_parameter
+
+Style/IndentationWidth:
+  StyleGuide: https://rubocop.readthedocs.io/en/latest/cops_layout/#layoutindentationwidth
+  Enabled: true
+
+Style/IndentationConsistency:
+  StyleGuide: https://rubocop.readthedocs.io/en/latest/cops_layout/#layoutindentationconsistency
+  Enabled: true
+  EnforcedStyle: normal
+
+Style/ClosingParenthesisIndentation:
+  StyleGuide: https://rubocop.readthedocs.io/en/latest/cops_layout/#layoutclosingparenthesisindentation
+  Enabled: true
+
 Style/HashSyntax:
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#hash-literals
   EnforcedStyle: ruby19
