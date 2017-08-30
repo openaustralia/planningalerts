@@ -23,6 +23,7 @@ describe CouncillorContributionsController do
     describe "#show" do
       it "download csv file" do
         get :show, authority_id: authority.id, id: councillor_contribution.id, format: "csv"
+
         response_csv = CSV.parse(response.body)
         expect((response_csv).first).to eql [
           "name", "start_date", "end_date", "exective", "council", "council_website",
