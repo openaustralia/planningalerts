@@ -20,8 +20,8 @@ class CouncillorContribution < ActiveRecord::Base
 
   def to_csv
     attributes = %w{
-      name start_date end_date exective council council_website id email image
-      party source ward phone_mobile
+      name start_date end_date exective council council_website
+      id email image party source ward phone_mobile
     }
 
     CSV.generate(headers: true) do |csv|
@@ -29,8 +29,8 @@ class CouncillorContribution < ActiveRecord::Base
 
       suggested_councillors.each do |s|
         csv << [
-          s.name, nil, nil, nil, authority.full_name, nil, s.popolo_id,
-          s.email, nil, nil, nil, nil, nil, nil
+          s.name, nil, nil, nil, authority.full_name, nil,
+          s.popolo_id, s.email, nil, nil, nil, nil, nil, nil
         ]
       end
     end
