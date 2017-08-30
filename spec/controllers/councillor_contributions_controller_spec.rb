@@ -21,7 +21,7 @@ describe CouncillorContributionsController do
     end
 
     describe "#show" do
-      it "download csv file" do
+      it "returns a valid CSV file with the contribution" do
         get :show, authority_id: authority.id, id: councillor_contribution.id, format: "csv"
 
         response_csv = CSV.parse(response.body)
