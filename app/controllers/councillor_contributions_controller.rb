@@ -23,6 +23,7 @@ class CouncillorContributionsController < ApplicationController
     end
 
     if @councillor_contribution.save
+      AdminNoticeMailer.notice_for_councillor_contribution.deliver_later
       redirect_to new_contributor_url(councillor_contribution_id: @councillor_contribution.id)
     else
       flash[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
