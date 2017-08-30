@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe CouncillorContributionsController do
-    let(:authority) { create(:authority, full_name: "Casey City Council") }
-    let(:councillor_contribution) { create(:councillor_contribution, authority: authority) }
+  let(:authority) { create(:authority, full_name: "Casey City Council") }
+  let(:councillor_contribution) { create(:councillor_contribution, authority: authority) }
 
   context "when the feature flag is on" do
     around do |test|
@@ -10,14 +10,15 @@ describe CouncillorContributionsController do
         test.run
       end
     end
-  before :each do
-  create(
-   :suggested_councillor,
-   name: "Mila Gilic",
-   email: "mgilic@casey.vic.gov.au",
-   councillor_contribution: councillor_contribution
-   )
-  end
+
+    before :each do
+      create(
+        :suggested_councillor,
+        name: "Mila Gilic",
+        email: "mgilic@casey.vic.gov.au",
+        councillor_contribution: councillor_contribution
+      )
+    end
 
     describe "#show" do
       it "download csv file" do
