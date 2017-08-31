@@ -1,14 +1,14 @@
 .councillor-contributions
-  %h1.page-title Who are the elected councillors for #{@authority.full_name}?
-  %p
-    Once we know, people will be able to ask them about development applications in PlanningAlerts.
-    Collecting this information is a great contribution and will only take you a few minutes.
-
-  %details
-    %summary Instructions
-    = render "instructions_body"
-
   = form_for [@authority, @councillor_contribution], url: authority_councillor_contributions_path(@authority.short_name_encoded), html: { class: "councillor-contribution-form" } do |f|
+    %h1.page-title Who are the elected councillors for #{@authority.full_name}?
+    %p
+      Once we know, people will be able to ask them about development applications in PlanningAlerts.
+      Collecting this information is a great contribution and will only take you a few minutes.
+
+    %details
+      %summary Instructions
+      = render "instructions_body"
+
     %legend Add all the councillors details you can find:
     .councillor-contribution-councillors
       - @councillor_contribution.suggested_councillors.each do |s|
