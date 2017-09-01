@@ -12,7 +12,7 @@ describe "councillor_contributions/_instructions_body" do
     it "render a link to the website" do
       render "instructions_body"
 
-      expect(rendered).to include "<a href=\"https://example.nsw.gov.au\">Example Council</a>"
+      expect(rendered).to include "<a title=\"Go to the Example Council website.\" href=\"https://example.nsw.gov.au\">Example Council</a>"
     end
   end
 
@@ -27,7 +27,7 @@ describe "councillor_contributions/_instructions_body" do
     it "render it's name with no link" do
       render "instructions_body"
 
-      expect(rendered).to_not include "<a href='https://example.nsw.gov.au'>Example Council</a>"
+      expect(rendered).to_not include "<a href=\"https://example.nsw.gov.au\" title=\"Go to the Example Council website.\">Example Council</a>"
       expect(rendered).to include "Example Council"
     end
   end
