@@ -1,6 +1,15 @@
 %p
-  Hi Admin,
+  Hi There humans,
 
 %p
-  There is a new submission of councillor contribution. Please check the
-  = link_to 'Admin page.', admin_councillor_contributions_url
+  You've got a wonderful new councillor contribution in
+  = "#{@councillor_contribution.authority.full_name}."
+  Here is the
+  = link_to "link.", admin_councillor_contribution_url(@councillor_contribution.id)
+%p
+  Don't forget to thank the lovely human who made this contribution if you know who they are!
+%p
+  Have a great day,
+
+%p
+  PlanningAlerts
