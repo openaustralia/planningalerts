@@ -7,6 +7,7 @@ describe AdminNoticeMailer do
     @mailer = AdminNoticeMailer.notice_for_councillor_contribution(@councillor_contribution)
   end
   it "should come from the moderator's email address" do
+    expect(@mailer.from).to eq(["moderator@planningalerts.org.au"])
   end
 
   it "should go to the moderator email address" do
