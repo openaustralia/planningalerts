@@ -19,6 +19,7 @@ describe AdminNoticeMailer do
   end
 
   it "should contain the authority name of the councillor contribution" do
+    expect(@mailer.body.to_s).to include("Casey City Council")
   end
 
   it "should contain the link to the admin show page of the councillor contribition" do
