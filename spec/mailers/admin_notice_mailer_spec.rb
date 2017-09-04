@@ -3,7 +3,7 @@ require 'spec_helper'
 describe AdminNoticeMailer do
   before :each do
     @authority = build(:authority, full_name: "Casey City Council")
-    @councillor_contribution = create(:councillor_contribution, authority: @authority)
+    @councillor_contribution = create(:councillor_contribution, authority: @authority, id: 1)
     @mailer = AdminNoticeMailer.notice_for_councillor_contribution(@councillor_contribution)
   end
   it "should come from the moderator's email address" do
