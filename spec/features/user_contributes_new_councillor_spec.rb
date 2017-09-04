@@ -18,6 +18,37 @@ feature "Contributing new councillors for an authority" do
       end
     end
 
+    context "with three councillors" do
+      before do
+        visit new_authority_councillor_contribution_path(authority.short_name_encoded)
+
+        within "fieldset" do
+          fill_in "Full name", with: "Mila Gilic"
+          fill_in "Email", with: "mgilic@casey.vic.gov.au"
+        end
+
+        click_button "Add another councillor"
+
+        within "fieldset:nth-child(2)" do
+          fill_in "Full name", with: "Rosalie Crestani"
+          fill_in "Email", with: "rcrestani@casey.vic.gov.au"
+        end
+
+        click_button "Add another councillor"
+
+        within "fieldset:nth-child(3)" do
+          fill_in "Full name", with: "Rosalie Crestani"
+          fill_in "Email", with: "rcrestani@casey.vic.gov.au"
+        end
+
+        click_button "Submit 3 new councillors"
+      end
+
+      it "successfully" do
+        expect(page).to have_content "Thank you"
+      end
+    end
+
     context "when a person submits one councillor with all blank attributes" do
       before :each do
         visit new_authority_councillor_contribution_path(authority.short_name_encoded)
@@ -80,37 +111,6 @@ feature "Contributing new councillors for an authority" do
       it "does not go to the contributor information page" do
         pending("this is yet to be implemented, it needs to be clear to people what to do if they accidentally add an extra councillor fieldset before we prevent a blank one from being submitted")
         expect(page).to have_content "Add a new councillor for Casey City Council"
-      end
-    end
-
-    context "with three councillors" do
-      before do
-        visit new_authority_councillor_contribution_path(authority.short_name_encoded)
-
-        within "fieldset" do
-          fill_in "Full name", with: "Mila Gilic"
-          fill_in "Email", with: "mgilic@casey.vic.gov.au"
-        end
-
-        click_button "Add another councillor"
-
-        within "fieldset:nth-child(2)" do
-          fill_in "Full name", with: "Rosalie Crestani"
-          fill_in "Email", with: "rcrestani@casey.vic.gov.au"
-        end
-
-        click_button "Add another councillor"
-
-        within "fieldset:nth-child(3)" do
-          fill_in "Full name", with: "Rosalie Crestani"
-          fill_in "Email", with: "rcrestani@casey.vic.gov.au"
-        end
-
-        click_button "Submit 3 new councillors"
-      end
-
-      it "successfully" do
-        expect(page).to have_content "Thank you"
       end
     end
 
