@@ -18,22 +18,22 @@ feature "Contributing new councillors for an authority" do
       end
     end
 
-  context "when a person submits one councillor with all blank attributes" do
-    before :each do
-      visit new_authority_councillor_contribution_path(authority.short_name_encoded)
+    context "when a person submits one councillor with all blank attributes" do
+      before :each do
+        visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
-      within ".councillor-contribution-councillors fieldset" do
-        fill_in "Full name", with: ""
-        fill_in "Email", with: ""
+        within ".councillor-contribution-councillors fieldset" do
+          fill_in "Full name", with: ""
+          fill_in "Email", with: ""
+        end
+
+        click_button "Submit"
       end
 
-      click_button "Submit"
+      it "does not go to the contributor information page" do
+        expect(page).to have_content "Who are the elected councillors for Casey City Council?"
+      end
     end
-
-    it "does not go to the contributor information page" do
-      expect(page).to have_content "Who are the elected councillors for Casey City Council?"
-    end
-  end
 
     context "with three councillors and one blank councillor" do
       before :each do
