@@ -55,11 +55,6 @@ feature "Contributing new councillors for an authority" do
       it "displays an error message" do
         expect(page).to have_content("Email can't be blank")
       end
-
-      it "does not go into the list of the suggested councillors" do
-        expect(page).to have_no_content("Full name: Mila Gilic")
-        expect(page).to have_no_content("Email:")
-      end
     end
 
     context "when a person submit an invalid email" do
@@ -76,11 +71,6 @@ feature "Contributing new councillors for an authority" do
 
       it "displays an error message" do
         expect(page).to have_content("Email must be a valid email address, e.g. jane@example.com")
-      end
-
-      it "does not go into the list of the suggested councillors" do
-        expect(page).to have_no_content("Full name: Mila Gilic")
-        expect(page).to have_no_content("Email: mglic.invalid")
       end
     end
 
