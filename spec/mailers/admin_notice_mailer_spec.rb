@@ -14,6 +14,10 @@ describe AdminNoticeMailer do
     expect(@mailer.to).to eq(["moderator@planningalerts.org.au"])
   end
 
+  it "should tell the moderator what the email is about" do
+    expect(@mailer.subject).to eq("New councillor contribution")
+  end
+
   it "should contain the authority name of the councillor contribution" do
   end
 
