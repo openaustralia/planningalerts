@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170704165351) do
+ActiveRecord::Schema.define(version: 20170830203313) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   limit: 255,   null: false
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20170704165351) do
     t.text    "last_scraper_run_log",         limit: 65535
     t.string  "morph_name",                   limit: 255
     t.boolean "write_to_councillors_enabled",               default: false, null: false
+    t.string  "website_url",                  limit: 255
   end
 
   add_index "authorities", ["short_name"], name: "short_name_unique", unique: true, using: :btree
