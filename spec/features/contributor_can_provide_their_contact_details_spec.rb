@@ -21,6 +21,9 @@ feature "Contributor can contribute their contact information" do
     end
 
     it "successfully" do
+      # TODO: Remove this whole flow after implementing https://github.com/openaustralia/planningalerts/issues/1229#issuecomment-325914899
+      pending "this flow should be removed after the form is incorporated elsewhere"
+
       visit new_contributor_path(councillor_contribution_id: 1)
 
       within_fieldset "Please tell us about yourself, so we can send you a little note of appreciation and updates about your contribution when it goes live." do
@@ -34,6 +37,9 @@ feature "Contributor can contribute their contact information" do
     end
 
     it "or not if they choose" do
+      # TODO: Remove this whole flow after implementing https://github.com/openaustralia/planningalerts/issues/1229#issuecomment-325914899
+      pending "this flow should be removed after the form is incorporated elsewhere"
+
       visit new_contributor_path(councillor_contribution_id: 1)
 
       click_link "I prefer not to"
