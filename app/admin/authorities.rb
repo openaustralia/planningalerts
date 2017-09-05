@@ -26,6 +26,7 @@ ActiveAdmin.register Authority do
       row :short_name
       row :state
       row :email
+      row :website_url
       row :write_to_councillors_enabled
       row :population_2011
       row :morph_name
@@ -63,6 +64,7 @@ ActiveAdmin.register Authority do
     inputs "Details" do
       input :state
       input :email
+      input :website_url
       input :population_2011
       input :write_to_councillors_enabled
     end
@@ -108,5 +110,5 @@ ActiveAdmin.register Authority do
     column(:number_of_comments) { |a| a.comments.count }
   end
 
-  permit_params :full_name, :short_name, :state, :email, :write_to_councillors_enabled, :population_2011, :morph_name, :disabled
+  permit_params :full_name, :short_name, :state, :email, :website_url, :write_to_councillors_enabled, :population_2011, :morph_name, :disabled
 end
