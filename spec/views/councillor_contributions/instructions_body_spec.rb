@@ -24,7 +24,7 @@ describe "councillor_contributions/_instructions_body" do
       )
     end
 
-    it "render it's name with no link" do
+    it "render its name with no link" do
       render "instructions_body"
 
       expect(rendered).to_not include "<a title=\"Go to the Example Council website.\" target=\"_blank\" href=\"https://example.nsw.gov.au\">Example Council</a>"
