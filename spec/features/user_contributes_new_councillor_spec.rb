@@ -183,5 +183,23 @@ feature "Contributing new councillors for an authority" do
       expect(SuggestedCouncillor.find_by(name: "Original Councillor")).to be_nil
       expect(SuggestedCouncillor.find_by(name: "Changed Councillor")).to be_present
     end
+
+    it "admin receives notification email for councillor contribution" do
+      visit new_authority_councillor_contribution_path(authority.short_name_encoded)
+
+      within "fieldset" do
+        fill_in "Full name", with: "Mila Gilic"
+        fill_in "Email", with: "mgilic@casey.vic.gov.au"
+      end
+
+      click_button "Submit 1 new councillor"
+
+      expect(unread_emails_for("moderator@planningalerts.org.au").size).to eq 1
+
+      open_email("moderator@planningalerts.org.au")
+
+      expect(current_email).to have_content("Casey City Council")
+      expect(current_email).to have_link("review the contribution on its admin page", href: "http://dev.planningalerts.org.au/admin/councillor_contributions/1")
+    end
   end
 end
