@@ -5,10 +5,10 @@
       %p
         Once we know, people will be able to ask them about development applications in PlanningAlerts.
         Collecting this information is a great contribution and will only take you a few minutes.
-      %details
+    .councillor-contribution-councillors
+      %details.councillor-contribution-instructions
         %summary Instructions
         = render "instructions_body"
-    .councillor-contribution-councillors
       %legend Add all the councillors details you can find:
       - @councillor_contribution.suggested_councillors.each do |s|
         = render 'contribution_form_input', f: f, suggested_councillor: s

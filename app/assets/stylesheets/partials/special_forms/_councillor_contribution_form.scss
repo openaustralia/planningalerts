@@ -3,6 +3,10 @@
 //       There is probably a refactor to make these the base/raw form styles
 //       and to move them into _form.scss
 .councillor-contribution-form {
+  .councillor-contribution-instructions {
+    margin-bottom: 2em;
+  }
+
   .councillor-contribution-label {
     display: block;
     margin: .75em 0 .25em;
@@ -12,7 +16,7 @@
   }
 
   legend {
-    margin: 2em 0 1em;
+    margin: 0 0 1em;
     display: block;
     font-weight: 500;
   }
@@ -26,12 +30,6 @@
 
   fieldset {
     margin-bottom: 1em;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
   }
 }
 
@@ -55,4 +53,24 @@
 
 .councillor-contribution-actions {
   text-align: right;
+
+  @supports (display: grid) {
+    @include at-breakpoint(55em) {
+      padding: 1em;
+      background: $lightest-cool-highlight;
+      border-radius: 1em;
+      text-align: center;
+    }
+  }
+
+  p {
+    display: none;
+
+    @supports (display: grid) {
+      @include at-breakpoint(55em) {
+        display: block;
+        margin: 1em 0 0;
+      }
+    }
+  }
 }
