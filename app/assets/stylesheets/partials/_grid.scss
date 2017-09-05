@@ -509,6 +509,7 @@
   @include at-breakpoint(55em) {
     display: grid;
     grid-template-columns: 66% 30%;
+    grid-column-gap: 2em; // fallback for Safari, doesn't currently support % here.
     grid-column-gap: 4%;
     align-content: start;
     justify-content: start;
