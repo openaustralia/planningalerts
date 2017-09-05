@@ -29,14 +29,14 @@ feature "Contributing new councillors for an authority" do
 
         click_button "Add another councillor"
 
-        within "fieldset:nth-child(2)" do
+        within(page.all("fieldset")[1]) do
           fill_in "Full name", with: "Rosalie Crestani"
           fill_in "Email", with: "rcrestani@casey.vic.gov.au"
         end
 
         click_button "Add another councillor"
 
-        within "fieldset:nth-child(3)" do
+        within(page.all("fieldset")[2]) do
           fill_in "Full name", with: "Rosalie Crestani"
           fill_in "Email", with: "rcrestani@casey.vic.gov.au"
         end
@@ -77,14 +77,14 @@ feature "Contributing new councillors for an authority" do
 
         click_button "Add another councillor"
 
-        within "fieldset:nth-child(2)" do
+        within(page.all("fieldset")[1]) do
           fill_in "Full name", with: "Rosalie Crestani"
           fill_in "Email", with: "rcrestani@casey.vic.gov.au"
         end
 
         click_button "Add another councillor"
 
-        within "fieldset:nth-child(3)" do
+        within(page.all("fieldset")[2]) do
           fill_in "Full name", with: "Rosalie Crestani"
           fill_in "Email", with: "rcrestani@casey.vic.gov.au"
         end
@@ -117,7 +117,7 @@ feature "Contributing new councillors for an authority" do
     it "successfully with councillors being edited after they're first added" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
-      within "fieldset:first-child" do
+      within(page.all("fieldset").first) do
         fill_in "Full name", with: "Original Councillor"
         fill_in "Email", with: "ngelic@casey.vic.gov.au"
       end
@@ -127,7 +127,7 @@ feature "Contributing new councillors for an authority" do
       find_field("Full name", with: "Original Councillor")
       find_field("Email", with: "ngelic@casey.vic.gov.au")
 
-      within "fieldset:first-child" do
+      within(page.all("fieldset").first) do
         fill_in "Full name", with: "Changed Councillor"
         fill_in "Email", with:"mgilic@casey.vic.gov.au"
       end
