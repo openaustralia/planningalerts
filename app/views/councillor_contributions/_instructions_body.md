@@ -1,4 +1,4 @@
-You should be able to find the information we need from the <%= link_to_or_website_text_for(@authority) %>.
+You should be able to find the information we need from the **<%= link_to_or_website_text_for(@authority) %>**.
 Find their list of elected "councillors" or "aldermen" and for each one add their full name and email into the form below.
 
 * **Full Name** should be just their given names, first name first. Leave out titles and other information. For example, if you find "_Lord Mayor Alderman Dr Sue Robbins Chen OAM_" just enter "_Sue Robbins Chen_".
