@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe AdminNoticeMailer do
+describe CouncillorContributionNotifier do
     describe "notice of councillor contribution for admin" do
       let(:authority) { create(:authority, full_name: "Casey City Council") }
       let(:councillor_contribution) { create(:councillor_contribution, authority: authority, id: 1) }
-      let(:mailer) { AdminNoticeMailer.notice_for_councillor_contribution(councillor_contribution) }
+      let(:mailer) { CouncillorContributionNotifier.notify(councillor_contribution) }
 
     it "should come from the moderator's email address" do
       expect(mailer.from).to eq(["moderator@planningalerts.org.au"])
@@ -15,7 +15,7 @@ describe AdminNoticeMailer do
     end
 
     it "should tell the moderator what the email is about" do
-      expect(mailer.subject).to eq("New councillor contribution")
+      expect(mailer.subject).to eq("PlanningAlerts: New councillor contribution")
     end
 
     it "should contain the authority name of the councillor contribution" do
