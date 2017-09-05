@@ -12,7 +12,7 @@ describe "councillor_contributions/_instructions_body" do
     it "render a link to the website" do
       render "instructions_body"
 
-      expect(rendered).to include "<a title=\"Go to the Example Council website.\" target=\"_blank\" href=\"https://example.nsw.gov.au\">Example Council</a>"
+      expect(rendered).to include "<a title=\"Go to the Example Council website.\" target=\"_blank\" href=\"https://example.nsw.gov.au\">Example Council website</a>"
     end
   end
 
