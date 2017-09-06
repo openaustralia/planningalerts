@@ -29,14 +29,14 @@ feature "Contributing new councillors for an authority" do
 
         click_button "Add another councillor"
 
-        within "fieldset:nth-child(2)" do
+        within(page.all("fieldset")[1]) do
           fill_in "Full name", with: "Rosalie Crestani"
           fill_in "Email", with: "rcrestani@casey.vic.gov.au"
         end
 
         click_button "Add another councillor"
 
-        within "fieldset:nth-child(3)" do
+        within(page.all("fieldset")[2]) do
           fill_in "Full name", with: "Rosalie Crestani"
           fill_in "Email", with: "rcrestani@casey.vic.gov.au"
         end
@@ -98,14 +98,14 @@ feature "Contributing new councillors for an authority" do
 
         click_button "Add another councillor"
 
-        within "fieldset:nth-child(2)" do
+        within(page.all("fieldset")[1]) do
           fill_in "Full name", with: "Rosalie Crestani"
           fill_in "Email", with: "rcrestani@casey.vic.gov.au"
         end
 
         click_button "Add another councillor"
 
-        within "fieldset:nth-child(3)" do
+        within(page.all("fieldset")[2]) do
           fill_in "Full name", with: "Rosalie Crestani"
           fill_in "Email", with: "rcrestani@casey.vic.gov.au"
         end
@@ -138,7 +138,7 @@ feature "Contributing new councillors for an authority" do
     it "successfully with councillors being edited after they're first added" do
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
-      within "fieldset:first-child" do
+      within(page.all("fieldset").first) do
         fill_in "Full name", with: "Original Councillor"
         fill_in "Email", with: "ngelic@casey.vic.gov.au"
       end
@@ -148,7 +148,7 @@ feature "Contributing new councillors for an authority" do
       find_field("Full name", with: "Original Councillor")
       find_field("Email", with: "ngelic@casey.vic.gov.au")
 
-      within "fieldset:first-child" do
+      within(page.all("fieldset").first) do
         fill_in "Full name", with: "Changed Councillor"
         fill_in "Email", with:"mgilic@casey.vic.gov.au"
       end
@@ -158,6 +158,36 @@ feature "Contributing new councillors for an authority" do
       expect(page).to have_content "Thank you"
       expect(SuggestedCouncillor.find_by(name: "Original Councillor")).to be_nil
       expect(SuggestedCouncillor.find_by(name: "Changed Councillor")).to be_present
+    end
+
+    it "admin receives notification email for councillor contribution" do
+      admin = create(:admin)
+
+      visit new_authority_councillor_contribution_path(authority.short_name_encoded)
+
+      within "fieldset" do
+        fill_in "Full name", with: "Mila Gilic"
+        fill_in "Email", with: "mgilic@casey.vic.gov.au"
+      end
+
+      click_button "Submit 1 new councillor"
+
+      expect(unread_emails_for("moderator@planningalerts.org.au").size).to eq 1
+
+      open_email("moderator@planningalerts.org.au")
+
+      expect(current_email).to have_content("Casey City Council")
+
+      click_first_link_in_email
+
+      within("#new_user") do
+        fill_in "Email", with: admin.email
+        fill_in "Password", with: admin.password
+      end
+
+      click_button "Sign in"
+
+      expect(page).to have_content("Mila Gilic")
     end
   end
 end
