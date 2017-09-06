@@ -29,6 +29,10 @@ class CouncillorContributionsController < ApplicationController
     end
   end
 
+  def thank_you
+    @councillor_contribution = CouncillorContribution.find_by_id(params[:id])
+  end
+
   def create
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
     @councillor_contribution = @authority.councillor_contributions.build(councillor_contribution_params)
