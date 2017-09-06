@@ -110,7 +110,7 @@ PlanningalertsApp::Application.routes.draw do
 
   post "/authorities/:authority_id/councillor_contributions/new", to: "councillor_contributions#new"
   get "councillor_contributions/:id/contributor/new", to: "councillor_contributions#new_contributor", as: :new_contributor
-
+  post "councillor_contributions/:id/contributor/create", to: "councillor_contributions#create_contributor", as: :create_contributor
 
   namespace :atdis do
     get :test
