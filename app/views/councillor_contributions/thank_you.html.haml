@@ -1,0 +1,5 @@
+%h1
+  Thank you for this great contribution of #{@councillor_contribution.suggested_councillors.count}
+  new #{@councillor_contribution.authority.full_name} #{"Councillor".pluralize(@councillor_contribution.suggested_councillors.length)}
+
+= link_to "Go back to home page", root_url
