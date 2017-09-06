@@ -185,6 +185,8 @@ feature "Contributing new councillors for an authority" do
     end
 
     it "admin receives notification email for councillor contribution" do
+      admin = create(:admin)
+
       visit new_authority_councillor_contribution_path(authority.short_name_encoded)
 
       within "fieldset" do
@@ -199,7 +201,17 @@ feature "Contributing new councillors for an authority" do
       open_email("moderator@planningalerts.org.au")
 
       expect(current_email).to have_content("Casey City Council")
-      expect(current_email).to have_link("review the contribution on its admin page", href: "http://dev.planningalerts.org.au/admin/councillor_contributions/1")
+
+      click_first_link_in_email
+
+      within("#new_user") do
+        fill_in "Email", with: admin.email
+        fill_in "Password", with: admin.password
+      end
+
+      click_button "Sign in"
+
+      expect(page).to have_content("Mila Gilic")
     end
   end
 end
