@@ -109,9 +109,8 @@ PlanningalertsApp::Application.routes.draw do
   end
 
   post "/authorities/:authority_id/councillor_contributions/new", to: "councillor_contributions#new"
+  get "councillor_contributions/:id/contributor/new", to: "councillor_contributions#new_contributor", as: :new_contributor
 
-  resources :contributors, only:[:new, :create]
-    get "/contributors/no_info", to: "contributors#no_contributor_info"
 
   namespace :atdis do
     get :test
