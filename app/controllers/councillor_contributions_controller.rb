@@ -50,11 +50,6 @@ class CouncillorContributionsController < ApplicationController
   def create
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
     @councillor_contribution = @authority.councillor_contributions.build(councillor_contribution_params)
-
-    if @councillor_contribution.suggested_councillors.empty?
-      @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
-    end
-
     if @councillor_contribution.save
       CouncillorContributionNotifier.notify(@councillor_contribution).deliver_later
       redirect_to new_contributor_url(id: @councillor_contribution.id)
