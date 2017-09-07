@@ -30,8 +30,8 @@ feature "Contributing new councillors for an authority" do
         click_button "Add another councillor"
 
         within(page.all("fieldset")[1]) do
-          fill_in "Full name", with: "Rosalie Crestani"
-          fill_in "Email", with: "rcrestani@casey.vic.gov.au"
+          fill_in "Full name", with: "Susan Serey"
+          fill_in "Email", with: "ssurey@casey.vic.gov.au"
         end
 
         click_button "Add another councillor"
