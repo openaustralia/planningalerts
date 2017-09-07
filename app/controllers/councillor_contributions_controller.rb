@@ -29,6 +29,17 @@ class CouncillorContributionsController < ApplicationController
     end
   end
 
+  def add_contributor
+    #get the councillor_contribution params
+
+    #validate the councillor_contribution
+
+    #if not  validate redirect to the councillot_contributions#new
+
+    #if it validate, load up the page for contributor information
+
+  end
+
   def thank_you
     @councillor_contribution = CouncillorContribution.find_by_id(params[:id])
   end
