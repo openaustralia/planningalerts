@@ -42,7 +42,7 @@ class CouncillorContributionsController < ApplicationController
     @councillor_contribution = CouncillorContribution.find(councillor_contribution_with_contibutor_params[:id])
 
     unless @councillor_contribution.create_contributor(councillor_contribution_with_contibutor_params[:contributor])
-      flash[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
+      flash[:error] = "There's a problem with the information you entered."
       render :add_contributor
     end
   end
