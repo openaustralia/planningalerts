@@ -1,13 +1,9 @@
-%h1 Great work! Thank you!
-%p
-  This data you contributed will be reviewed
-  by an administrator, and go live shortly.
 = form_for @councillor_contribution, url: authority_councillor_contribution_thank_you_path(@authority.short_name_encoded) do |f|
   = f.hidden_field :id, value: @councillor_contribution.id
   = f.fields_for :contributor do |contributor_field|
     %fieldset
       %legend
-        Please tell us about yourself, so we can send you a little note of appreciation
+        Great! Please tell us about yourself, so we can send you a little note of appreciation
         and updates about your contribution when it goes live.
         %p This field is optional.
         %p
