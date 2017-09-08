@@ -7,7 +7,9 @@ class CouncillorContributionsController < ApplicationController
 
     @councillor_contribution =
       if params["councillor_contribution"]
-        @authority.councillor_contributions.build(councillor_contribution_params)
+        @authority.councillor_contributions.build(
+          councillor_contribution_with_suggested_councillors_params
+        )
       else
         CouncillorContribution.new
       end
@@ -18,7 +20,9 @@ class CouncillorContributionsController < ApplicationController
   def add_contributor
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
 
-    @councillor_contribution = @authority.councillor_contributions.build(councillor_contribution_params)
+    @councillor_contribution = @authority.councillor_contributions.build(
+      councillor_contribution_with_suggested_councillors_params
+    )
 
     if @councillor_contribution.suggested_councillors.empty?
       @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
@@ -36,7 +40,7 @@ class CouncillorContributionsController < ApplicationController
   def thank_you
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
     @councillor_contribution = CouncillorContribution.find(params[:id])
-    unless @councillor_contribution.update_attributes(councillor_contribution_params)
+    unless @councillor_contribution.update_attributes(councillor_contribution_with_contibutor_params)
       flash[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
       render :add_contributor
     end
@@ -57,10 +61,15 @@ class CouncillorContributionsController < ApplicationController
 
   private
 
-  def councillor_contribution_params
+  def councillor_contribution_with_suggested_councillors_params
     params.require(:councillor_contribution).permit(
-      {suggested_councillors_attributes: [:name, :email],
-      contributor_attributes: [:name, :email]}
+      suggested_councillors_attributes: [:name, :email]
+    )
+  end
+
+  def councillor_contribution_with_contibutor_params
+    params.require(:councillor_contribution).permit(
+      contributor_attributes: [:name, :email]
     )
   end
 
