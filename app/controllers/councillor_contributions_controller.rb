@@ -34,9 +34,7 @@ class CouncillorContributionsController < ApplicationController
   def update
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
     @councillor_contribution = @authority.councillor_contributions.build(councillor_contribution_params)
-    if @councillor_contribution.save
-      CouncillorContributionNotifier.notify(@councillor_contribution).deliver_later
-    else
+    unless @councillor_contribution.save
       flash[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
       render :add_contributor
     end
