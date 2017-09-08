@@ -32,7 +32,7 @@ class CouncillorContributionsController < ApplicationController
       CouncillorContributionNotifier.notify(@councillor_contribution).deliver_later
       @councillor_contribution.build_contributor({email: nil, name: nil})
     else
-      flash[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
+      flash.now[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
       render :new
     end
   end
@@ -42,7 +42,7 @@ class CouncillorContributionsController < ApplicationController
     @councillor_contribution = CouncillorContribution.find(councillor_contribution_with_contibutor_params[:id])
 
     unless @councillor_contribution.create_contributor(councillor_contribution_with_contibutor_params[:contributor])
-      flash[:error] = "There's a problem with the information you entered."
+      flash.now[:error] = "There's a problem with the information you entered."
       render :add_contributor
     end
   end
