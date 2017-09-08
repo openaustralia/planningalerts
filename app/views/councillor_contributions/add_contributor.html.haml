@@ -2,7 +2,7 @@
 %p
   This data you contributed will be reviewed
   by an administrator, and go live shortly.
-= form_for @councillor_contribution, url: authority_councillor_contributions_path(@authority.short_name_encoded) do |f|
+= form_for @councillor_contribution, url: authority_councillor_contribution_path(@authority.short_name_encoded, @councillor_contribution.id) do |f|
   = f.fields_for :suggested_councillors do |suggested_councillor_field|
     = suggested_councillor_field.hidden_field :name
     = suggested_councillor_field.hidden_field :email
