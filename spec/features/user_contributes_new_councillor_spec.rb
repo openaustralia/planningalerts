@@ -56,6 +56,7 @@ feature "Contributing new councillors for an authority" do
 
         it "successfully" do
           expect(page).to have_content "Thank you for this great contribution of 3 new Casey City Council Councillors"
+          expect(Contributor.last.name).to eq "Jane Contributes"
         end
       end
 
@@ -66,6 +67,7 @@ feature "Contributing new councillors for an authority" do
 
         it "successfully" do
           expect(page).to have_content "Thank you for this great contribution of 3 new Casey City Council Councillors"
+          expect(Contributor.count).to be_zero
         end
       end
     end

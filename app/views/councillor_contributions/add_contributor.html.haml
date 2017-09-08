@@ -11,6 +11,5 @@
         %p
           = contributor_field.label :email
           = contributor_field.text_field :email
-  -#TODO: don't submit the form data if the user clicks "No thanks"
-  = f.submit "No thanks", class: "button"
+  = f.button "No thanks", class: "button", value: "skip"
   = f.submit "Submit", class: "button-action"
