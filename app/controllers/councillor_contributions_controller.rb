@@ -21,7 +21,9 @@ class CouncillorContributionsController < ApplicationController
     if @councillor_contribution.suggested_councillors.empty?
       @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
     end
-    if @councillor_contribution.invalid?
+    if @councillor_contribution.save
+      @councillor_contribution.build_contributor({email: nil, name: nil})
+    else
       flash[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
       render :new
     else
