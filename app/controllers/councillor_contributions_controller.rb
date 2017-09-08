@@ -28,8 +28,7 @@ class CouncillorContributionsController < ApplicationController
       flash[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
       render :new
 
-  def thank_you
-    @councillor_contribution = CouncillorContribution.find_by_id(params[:id])
+    end
   end
 
   def create
