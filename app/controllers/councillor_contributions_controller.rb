@@ -84,8 +84,4 @@ class CouncillorContributionsController < ApplicationController
   def new_suggested_councillor_required?
     @councillor_contribution.suggested_councillors.empty? || @councillor_contribution.suggested_councillors.collect { |c| c.valid? }.exclude?(false)
   end
-
-  def contributor_params
-    params.require(:contributor).permit(:name, :email)
-  end
 end
