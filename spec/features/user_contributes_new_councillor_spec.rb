@@ -30,8 +30,8 @@ feature "Contributing new councillors for an authority" do
         click_button "Add another councillor"
 
         within(page.all("fieldset")[1]) do
-          fill_in "Full name", with: "Rosalie Crestani"
-          fill_in "Email", with: "rcrestani@casey.vic.gov.au"
+          fill_in "Full name", with: "Susan Serey"
+          fill_in "Email", with: "ssurey@casey.vic.gov.au"
         end
 
         click_button "Add another councillor"
@@ -44,8 +44,31 @@ feature "Contributing new councillors for an authority" do
         click_button "Submit 3 new councillors"
       end
 
-      it "successfully" do
-        expect(page).to have_content "Thank you"
+      context "and providing contributor details" do
+        before do
+          within_fieldset "Please tell us about yourself, so we can send you a little note of appreciation and updates about your contribution when it goes live." do
+            fill_in "Name", with: "Jane Contributes"
+            fill_in "Email", with: "jane@contributor.com"
+          end
+
+          click_button "Submit"
+        end
+
+        it "successfully" do
+          expect(page).to have_content "Thank you for this great contribution of 3 new Casey City Council Councillors"
+          expect(CouncillorContribution.first.contributor.name).to eq "Jane Contributes"
+        end
+      end
+
+      context "and skiping contributor details" do
+        before do
+          click_button "No thanks"
+        end
+
+        it "successfully" do
+          expect(page).to have_content "Thank you for this great contribution of 3 new Casey City Council Councillors"
+          expect(Contributor.count).to be_zero
+        end
       end
     end
 
@@ -99,7 +122,7 @@ feature "Contributing new councillors for an authority" do
       #       extra councillor by accident and they don't want to submit it.
       #       Remove this once the two in exchange for the two pending tests below.
       it "successfully" do
-        expect(page).to have_content "Thank you"
+        expect(page).to have_content "Great!"
       end
 
       it "displays an error message" do
@@ -134,7 +157,7 @@ feature "Contributing new councillors for an authority" do
 
       click_button "Submit 2 new councillors"
 
-      expect(page).to have_content "Thank you"
+      expect(page).to have_content "Great!"
       expect(SuggestedCouncillor.find_by(name: "Original Councillor")).to be_nil
       expect(SuggestedCouncillor.find_by(name: "Changed Councillor")).to be_present
     end

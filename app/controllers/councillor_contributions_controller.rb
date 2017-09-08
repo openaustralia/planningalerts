@@ -7,7 +7,9 @@ class CouncillorContributionsController < ApplicationController
 
     @councillor_contribution =
       if params["councillor_contribution"]
-        @authority.councillor_contributions.build(councillor_contribution_params)
+        @authority.councillor_contributions.build(
+          councillor_contribution_with_suggested_councillors_params
+        )
       else
         CouncillorContribution.new
       end
@@ -15,9 +17,12 @@ class CouncillorContributionsController < ApplicationController
     @councillor_contribution.suggested_councillors.build({email: nil, name: nil}) if new_suggested_councillor_required?
   end
 
-  def create
+  def add_contributor
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
-    @councillor_contribution = @authority.councillor_contributions.build(councillor_contribution_params)
+
+    @councillor_contribution = @authority.councillor_contributions.build(
+      councillor_contribution_with_suggested_councillors_params
+    )
 
     if @councillor_contribution.suggested_councillors.empty?
       @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
@@ -25,10 +30,24 @@ class CouncillorContributionsController < ApplicationController
 
     if @councillor_contribution.save
       CouncillorContributionNotifier.notify(@councillor_contribution).deliver_later
-      redirect_to new_contributor_url(councillor_contribution_id: @councillor_contribution.id)
+      @councillor_contribution.build_contributor({email: nil, name: nil})
     else
-      flash[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
+      flash.now[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
       render :new
+    end
+  end
+
+  def thank_you
+    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    @councillor_contribution = CouncillorContribution.find(councillor_contribution_with_contibutor_params[:id])
+
+    unless params[:button].eql? "skip"
+      unless @councillor_contribution.create_contributor!(councillor_contribution_with_contibutor_params[:contributor_attributes])
+        flash.now[:error] = "There's a problem with the information you entered."
+        render :add_contributor
+      end
+
+      @councillor_contribution.save!
     end
   end
 
@@ -47,8 +66,17 @@ class CouncillorContributionsController < ApplicationController
 
   private
 
-  def councillor_contribution_params
-    params.require(:councillor_contribution).permit(suggested_councillors_attributes: [:name, :email])
+  def councillor_contribution_with_suggested_councillors_params
+    params.require(:councillor_contribution).permit(
+      suggested_councillors_attributes: [:name, :email]
+    )
+  end
+
+  def councillor_contribution_with_contibutor_params
+    params.require(:councillor_contribution).permit(
+      :id,
+      contributor_attributes: [:name, :email]
+    )
   end
 
   def check_if_feature_flag_is_on
