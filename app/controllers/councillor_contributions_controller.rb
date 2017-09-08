@@ -31,7 +31,7 @@ class CouncillorContributionsController < ApplicationController
     end
   end
 
-  def create
+  def update
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
     @councillor_contribution = @authority.councillor_contributions.build(councillor_contribution_params)
     if @councillor_contribution.save
