@@ -120,7 +120,7 @@ feature "Contributing new councillors for an authority" do
       #       extra councillor by accident and they don't want to submit it.
       #       Remove this once the two in exchange for the two pending tests below.
       it "successfully" do
-        expect(page).to have_content "Thank you"
+        expect(page).to have_content "Great!"
       end
 
       it "displays an error message" do
@@ -155,7 +155,7 @@ feature "Contributing new councillors for an authority" do
 
       click_button "Submit 2 new councillors"
 
-      expect(page).to have_content "Thank you"
+      expect(page).to have_content "Great!"
       expect(SuggestedCouncillor.find_by(name: "Original Councillor")).to be_nil
       expect(SuggestedCouncillor.find_by(name: "Changed Councillor")).to be_present
     end
