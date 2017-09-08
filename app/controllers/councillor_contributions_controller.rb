@@ -41,7 +41,7 @@ class CouncillorContributionsController < ApplicationController
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
     @councillor_contribution = CouncillorContribution.find(councillor_contribution_with_contibutor_params[:id])
 
-    unless @councillor_contribution.create_contributor(councillor_contribution_with_contibutor_params[:contributor])
+    unless @councillor_contribution.create_contributor(councillor_contribution_with_contibutor_params[:contributor_attributes])
       flash.now[:error] = "There's a problem with the information you entered."
       render :add_contributor
     end
