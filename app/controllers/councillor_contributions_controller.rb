@@ -31,7 +31,7 @@ class CouncillorContributionsController < ApplicationController
     end
   end
 
-  def update
+  def thank_you
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
     @councillor_contribution = CouncillorContribution.find(params[:id])
     unless @councillor_contribution.update_attributes(councillor_contribution_params)
