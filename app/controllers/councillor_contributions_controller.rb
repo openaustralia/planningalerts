@@ -17,17 +17,19 @@ class CouncillorContributionsController < ApplicationController
 
   def add_contributor
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+
     @councillor_contribution = @authority.councillor_contributions.build(councillor_contribution_params)
+
     if @councillor_contribution.suggested_councillors.empty?
       @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
     end
+
     if @councillor_contribution.save
       CouncillorContributionNotifier.notify(@councillor_contribution).deliver_later
       @councillor_contribution.build_contributor({email: nil, name: nil})
     else
       flash[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
       render :new
-
     end
   end
 
