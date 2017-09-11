@@ -44,6 +44,15 @@ feature "Contributing new councillors for an authority" do
         click_button "Submit 3 new councillors"
       end
 
+      context "and skipping source information" do
+        before do
+          click_button "Submit"
+        end
+        it "successfully" do
+          expect(page).to have_content "Please tell us about yourself"
+        end
+      end
+
       context "and providing contributor details" do
         before do
           within_fieldset "Please tell us about yourself, so we can send you a little note of appreciation and updates about your contribution when it goes live." do
