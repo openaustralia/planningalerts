@@ -53,6 +53,13 @@ feature "Contributing new councillors for an authority" do
         end
       end
 
+      context ", providing source information" do
+        before do
+          fill_in "Source", with: "https//caseycitycouncil.nsw.gov.au"
+
+          click_button "Submit"
+        end
+
       context "and providing contributor details" do
         before do
           within_fieldset "Please tell us about yourself, so we can send you a little note of appreciation and updates about your contribution when it goes live." do
