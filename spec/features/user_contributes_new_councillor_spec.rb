@@ -75,15 +75,15 @@ feature "Contributing new councillors for an authority" do
           expect(CouncillorContribution.first.contributor.name).to eq "Jane Contributes"
         end
       end
+        context "and skiping contributor details" do
+          before do
+            click_button "No thanks"
+          end
 
-      context "and skiping contributor details" do
-        before do
-          click_button "No thanks"
-        end
-
-        it "successfully" do
-          expect(page).to have_content "Thank you for this great contribution of 3 new Casey City Council Councillors"
-          expect(Contributor.count).to be_zero
+          it "successfully" do
+            expect(page).to have_content "Thank you for this great contribution of 3 new Casey City Council Councillors"
+            expect(Contributor.count).to be_zero
+          end
         end
       end
     end
@@ -131,6 +131,10 @@ feature "Contributing new councillors for an authority" do
         click_button "Add another councillor"
 
         click_button "Submit 4 new councillors"
+
+        fill_in "Source", with: "https//caseycitycouncil.nsw.gov.au"
+
+        click_button "Submit"
       end
 
       # TODO: This really should return the blank councillor as invalid.
@@ -173,6 +177,10 @@ feature "Contributing new councillors for an authority" do
 
       click_button "Submit 2 new councillors"
 
+      fill_in "Source", with: "https//caseycitycouncil.nsw.gov.au"
+
+      click_button "Submit"
+
       expect(page).to have_content "Great!"
       expect(SuggestedCouncillor.find_by(name: "Original Councillor")).to be_nil
       expect(SuggestedCouncillor.find_by(name: "Changed Councillor")).to be_present
@@ -189,6 +197,10 @@ feature "Contributing new councillors for an authority" do
       end
 
       click_button "Submit 1 new councillor"
+
+      fill_in "Source", with: "https//caseycitycouncil.nsw.gov.au"
+
+      click_button "Submit"
 
       expect(unread_emails_for("moderator@planningalerts.org.au").size).to eq 1
 
