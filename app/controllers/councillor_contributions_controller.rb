@@ -17,6 +17,23 @@ class CouncillorContributionsController < ApplicationController
     @councillor_contribution.suggested_councillors.build({email: nil, name: nil}) if new_suggested_councillor_required?
   end
 
+  def source
+    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+
+    @councillor_contribution = @authority.councillor_contributions.build(
+      councillor_contribution_with_suggested_councillors_params
+    )
+
+    if @councillor_contribution.suggested_councillors.empty?
+      @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
+    end
+
+    unless @councillor_contribution.valid?
+      flash.now[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
+      render :new
+    end
+  end
+
   def add_contributor
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
 
