@@ -1,5 +1,5 @@
 .councillor-contributions
-  = form_for [@authority, @councillor_contribution], url: add_contributor_authority_councillor_contribution_path(@authority.short_name_encoded), html: { class: "councillor-contribution-form" } do |f|
+  = form_for [@authority, @councillor_contribution], url: add_source_authority_councillor_contribution_path(@authority.short_name_encoded), html: { class: "councillor-contribution-form" } do |f|
     .councillor-contribution-intro
       %h1.page-title Who are the elected councillors for #{@authority.full_name}?
       %p
