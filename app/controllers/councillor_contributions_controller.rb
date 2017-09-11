@@ -85,6 +85,7 @@ class CouncillorContributionsController < ApplicationController
 
   def councillor_contribution_with_suggested_councillors_params
     params.require(:councillor_contribution).permit(
+      :source,
       suggested_councillors_attributes: [:name, :email]
     )
   end
