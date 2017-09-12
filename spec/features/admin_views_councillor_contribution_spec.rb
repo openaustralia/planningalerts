@@ -83,4 +83,20 @@ feature "Admin views councillor contributions" do
 
     expect(page). to have_content("Councillor contribution was successfully updated.")
   end
+
+  it "shows the reviewed status on the index page" do
+    sign_in_as_admin
+
+    click_link "Councillor Contributions"
+
+    click_link "Edit"
+
+    check("Reviewed")
+
+    click_button("Update Councillor contribution")
+
+    first(:link, "Councillor Contributions").click
+
+    expect(page).to have_content "Felix Chaung #{Time.current.strftime('%B %d, %Y %H:%M')} Casey City Council Yes"
+  end
 end
