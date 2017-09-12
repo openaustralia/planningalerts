@@ -5,6 +5,7 @@ ActiveAdmin.register CouncillorContribution do
     column(:contributor) { |contribution| contribution.attribution }
     column :created_at
     column :authority
+    column :reviewed
 
     actions
   end
