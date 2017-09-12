@@ -69,4 +69,18 @@ feature "Admin views councillor contributions" do
     expect(page).to have_text "Reviewed"
     find(:css, "#councillor_contribution_reviewed[value='1']").set(false)
   end
+
+  it "can change the status of reviewed when admin click the checkbox in #edit page" do
+    sign_in_as_admin
+
+    click_link "Councillor Contributions"
+
+    click_link "Edit"
+
+    check("Reviewed")
+
+    click_button("Update Councillor contribution")
+
+    expect(page). to have_content("Councillor contribution was successfully updated.")
+  end
 end
