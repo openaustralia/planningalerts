@@ -22,6 +22,22 @@ ActiveAdmin.register CouncillorContribution do
     end
   end
 
+  form title: "edit" do |f|
+    inputs "Councillor contribution" do
+      input :contributor
+      input :source
+      input :reviewed
+    end
+
+    actions
+
+    h3 "Suggested Councillors"
+    table_for resource.suggested_councillors, class: "index_table" do
+      column :name
+      column :email
+    end
+  end
+
   action_item :download, only: [:show] do
     link_to "Download the suggested councillors CSV", authority_councillor_contribution_path(resource.authority, resource.id, format: :csv)
   end
