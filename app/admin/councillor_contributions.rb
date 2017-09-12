@@ -1,5 +1,5 @@
 ActiveAdmin.register CouncillorContribution do
-  actions :index, :show
+  actions :index, :show, :edit, :update
 
   index do
     column(:contributor) { |contribution| contribution.attribution }
