@@ -6,7 +6,7 @@ feature "Admin views councillor contributions" do
 
       authority = create(:authority, full_name: "Casey City Council")
       contributor = create(:contributor, name: "Felix Chaung", email: "example@gmail.com")
-      councillor_contribution = create(:councillor_contribution, contributor: contributor, authority: authority)
+      councillor_contribution = create(:councillor_contribution, contributor: contributor, authority: authority, id: 1)
       creation_time = Time.current
 
       create(
