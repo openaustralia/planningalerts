@@ -58,4 +58,15 @@ feature "Admin views councillor contributions" do
     expect(page).to have_content "Susan Serey sserey@casey.vic.gov.au"
     expect(page).to have_content "Rosalie Crestani rcrestani@casey.vic.gov.au"
   end
+
+  it "with reviewed column default false" do
+    sign_in_as_admin
+
+    click_link "Councillor Contributions"
+
+    click_link "Edit"
+
+    expect(page).to have_text "Reviewed"
+    find(:css, "#councillor_contribution_reviewed[value='1']").set(false)
+  end
 end
