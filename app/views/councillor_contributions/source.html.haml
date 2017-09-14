@@ -5,10 +5,9 @@
       = suggested_councillor_field.hidden_field :name, value: s.name
       = suggested_councillor_field.hidden_field :email, value: s.email
   %h1.page-title Thanks! Where did you get this information?
-  = f.label :source, "Let us know where you found this information so we can double check and save time when it needs to be updated. If the source was the council website, just enter the web address (URL) for main councillors page. This field is optional.", class: "councillor-contribution-label"
+  = f.label :source, "Let us know where you found this information so we can double check and save time when it needs to be updated. If the source was the council website, just enter the web address (URL) for main councillors page.", class: "councillor-contribution-label"
   = f.text_area :source, rows: "5"
 
 
   .councillor-contribution-actions
-    = f.button "Skip", class: "button"
     = f.submit "Submit", class: "button-action"
