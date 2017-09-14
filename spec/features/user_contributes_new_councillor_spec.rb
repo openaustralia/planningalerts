@@ -55,7 +55,7 @@ feature "Contributing new councillors for an authority" do
 
       context ", providing source information" do
         before do
-          fill_in "Source", with: "https//caseycitycouncil.nsw.gov.au"
+          fill_in "Let us know where you found this information", with: "https//caseycitycouncil.nsw.gov.au"
 
           click_button "Submit"
         end
@@ -132,7 +132,7 @@ feature "Contributing new councillors for an authority" do
 
         click_button "Submit 4 new councillors"
 
-        fill_in "Source", with: "https//caseycitycouncil.nsw.gov.au"
+        fill_in "Let us know where you found this information", with: "https//caseycitycouncil.nsw.gov.au"
 
         click_button "Submit"
       end
@@ -177,7 +177,7 @@ feature "Contributing new councillors for an authority" do
 
       click_button "Submit 2 new councillors"
 
-      fill_in "Source", with: "https//caseycitycouncil.nsw.gov.au"
+      fill_in "Let us know where you found this information", with: "https//caseycitycouncil.nsw.gov.au"
 
       click_button "Submit"
 
@@ -198,7 +198,7 @@ feature "Contributing new councillors for an authority" do
 
       click_button "Submit 1 new councillor"
 
-      fill_in "Source", with: "https//caseycitycouncil.nsw.gov.au"
+      fill_in "Let us know where you found this information", with: "https//caseycitycouncil.nsw.gov.au"
 
       click_button "Submit"
 
