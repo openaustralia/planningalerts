@@ -5,12 +5,12 @@
       %legend
         Great! Please tell us about yourself, so we can send you a little note of appreciation
         and updates about your contribution when it goes live.
-        %p
-          = contributor_field.label :name
-          = contributor_field.text_field :name
-        %p
-          = contributor_field.label :email
-          = contributor_field.text_field :email
+      %p
+        = contributor_field.label :name
+        = contributor_field.text_field :name
+      %p
+        = contributor_field.label :email
+        = contributor_field.text_field :email
   .councillor-contribution-actions
     = f.button "No thanks", class: "button", value: "skip"
     = f.submit "Submit", class: "button-action"
