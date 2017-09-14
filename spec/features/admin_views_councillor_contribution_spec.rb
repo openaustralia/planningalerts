@@ -30,6 +30,10 @@ feature "Admin views councillor contributions" do
         councillor_contribution: councillor_contribution,
         created_at: creation_time
       )
+
+      sign_in_as_admin
+
+      click_link "Councillor Contributions"
   end
 
   after :each do
