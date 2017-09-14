@@ -41,11 +41,7 @@ feature "Admin views councillor contributions" do
   end
 
   it "successfully on the index page" do
-    sign_in_as_admin
-
-    click_link "Councillor Contributions"
-
-    expect(page).to have_content "Felix Chaung #{Time.current.strftime('%B %d, %Y %H:%M')} Casey City Council"
+    expect(page).to have_content "Felix Chaung #{Time.current.strftime('%B %d, %Y %H:%M')} Casey City Council No"
   end
 
   it "successfully with suggested councillors on the show page with contributor information" do
