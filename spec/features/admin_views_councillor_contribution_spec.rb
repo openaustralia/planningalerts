@@ -57,12 +57,8 @@ feature "Admin views councillor contributions" do
     find(:css, "#councillor_contribution_reviewed[value='1']").set(false)
   end
 
-  it "can change the status of reviewed when admin click the checkbox in #edit page" do
-    sign_in_as_admin
-
-    click_link "Councillor Contributions"
-
-    click_link "Edit"
+  it "can change the status of reviewed when admin click the checkbox in #view page" do
+    click_link "View"
 
     check("Reviewed")
 
@@ -72,11 +68,7 @@ feature "Admin views councillor contributions" do
   end
 
   it "shows the reviewed status on the index page" do
-    sign_in_as_admin
-
-    click_link "Councillor Contributions"
-
-    click_link "Edit"
+    click_link "View"
 
     check("Reviewed")
 
