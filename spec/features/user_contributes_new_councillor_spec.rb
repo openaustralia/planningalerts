@@ -75,7 +75,7 @@ feature "Contributing new councillors for an authority" do
       end
         context "and skiping contributor details" do
           before do
-            click_button "No thanks"
+            click_button "I'd rather not say"
           end
 
           it "successfully" do
