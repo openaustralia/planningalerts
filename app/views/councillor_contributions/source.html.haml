@@ -1,4 +1,3 @@
-
 = form_for [@authority, @councillor_contribution], url: add_contributor_authority_councillor_contribution_path(@authority.short_name_encoded), html: { class: "councillor-contribution-form councillor-contribution-form-source" } do |f|
   = f.fields_for :suggested_councillors do |suggested_councillor_field|
     - @councillor_contribution.suggested_councillors.each do |s|
@@ -7,7 +6,5 @@
   %h1.page-title Thanks! Where did you get this information?
   = f.label :source, "Let us know where you found this information so we can double check and save time when it needs to be updated. If the source was the council website, enter the web address (URL) for main councillors page.", class: "councillor-contribution-label"
   = f.text_area :source, rows: "5"
-
-
   .councillor-contribution-actions
     = f.submit "Submit", class: "button-action"
