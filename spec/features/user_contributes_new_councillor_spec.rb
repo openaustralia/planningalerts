@@ -49,7 +49,7 @@ feature "Contributing new councillors for an authority" do
           click_button "Submit"
         end
         it "successfully" do
-          expect(page).to have_content "Please tell us about yourself"
+          expect(page).to have_content "Who do we thank?"
         end
       end
 
@@ -62,10 +62,8 @@ feature "Contributing new councillors for an authority" do
 
       context "and providing contributor details" do
         before do
-          within_fieldset "Please tell us about yourself, so we can send you a little note of appreciation and updates about your contribution when it goes live." do
-            fill_in "Name", with: "Jane Contributes"
-            fill_in "Email", with: "jane@contributor.com"
-          end
+          fill_in "Your name", with: "Jane Contributes"
+          fill_in "Your email", with: "jane@contributor.com"
 
           click_button "Submit"
         end
@@ -142,7 +140,7 @@ feature "Contributing new councillors for an authority" do
       #       extra councillor by accident and they don't want to submit it.
       #       Remove this once the two in exchange for the two pending tests below.
       it "successfully" do
-        expect(page).to have_content "Great!"
+        expect(page).to have_content "Who do we thank?"
       end
 
       it "displays an error message" do
@@ -181,7 +179,7 @@ feature "Contributing new councillors for an authority" do
 
       click_button "Submit"
 
-      expect(page).to have_content "Great!"
+      expect(page).to have_content "Who do we thank?"
       expect(SuggestedCouncillor.find_by(name: "Original Councillor")).to be_nil
       expect(SuggestedCouncillor.find_by(name: "Changed Councillor")).to be_present
     end
