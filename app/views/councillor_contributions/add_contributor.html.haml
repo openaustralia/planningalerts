@@ -1,4 +1,4 @@
-= form_for @councillor_contribution, url: authority_councillor_contribution_thank_you_path(@authority.short_name_encoded) do |f|
+= form_for @councillor_contribution, url: authority_councillor_contribution_thank_you_path(@authority.short_name_encoded), html: { class: "councillor-contribution-form councillor-contribution-form-contributor" } do |f|
   = f.hidden_field :id, value: @councillor_contribution.id
   = f.fields_for :contributor do |contributor_field|
     %fieldset
@@ -11,5 +11,6 @@
         %p
           = contributor_field.label :email
           = contributor_field.text_field :email
-  = f.button "No thanks", class: "button", value: "skip"
-  = f.submit "Submit", class: "button-action"
+  .councillor-contribution-actions
+    = f.button "No thanks", class: "button", value: "skip"
+    = f.submit "Submit", class: "button-action"
