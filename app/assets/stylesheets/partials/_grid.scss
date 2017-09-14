@@ -505,7 +505,7 @@
   }
 }
 
-.councillor-contribution-form {
+.councillor-contribution-form-councillor-input {
   @include at-breakpoint(55em) {
     display: grid;
     grid-template-columns: 66% 30%;
