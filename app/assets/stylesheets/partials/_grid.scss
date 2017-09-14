@@ -554,12 +554,6 @@
   @include at-breakpoint(30em) {
     width: 50%;
     box-sizing: border-box;
-  }
-}
-
-.contributor-input-group,
-.suggested-councillor-input-group {
-  @include at-breakpoint(30em) {
     padding-right: 1em;
   }
 
