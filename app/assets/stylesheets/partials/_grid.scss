@@ -535,19 +535,13 @@
     grid-row-start: 2;
     align-self: start;
   }
+}
 
-  .suggested-councillor-input-wrapper {
-    @include at-breakpoint(30em) {
-      display: flex;
-      justify-content: space-between;
-    }
-  }
-
-  .suggested-councillor-input-group {
-    @include at-breakpoint(30em) {
-      width: 50%;
-      box-sizing: border-box;
-    }
+.contributor-input-wrapper,
+.suggested-councillor-input-wrapper {
+  @include at-breakpoint(30em) {
+    display: flex;
+    justify-content: space-between;
   }
 
   input {
@@ -555,6 +549,15 @@
   }
 }
 
+.contributor-input-group,
+.suggested-councillor-input-group {
+  @include at-breakpoint(30em) {
+    width: 50%;
+    box-sizing: border-box;
+  }
+}
+
+.contributor-input-group,
 .suggested-councillor-input-group {
   @include at-breakpoint(30em) {
     padding-right: 1em;
