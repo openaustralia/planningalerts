@@ -11,32 +11,23 @@ ActiveAdmin.register CouncillorContribution do
   end
 
   show title: proc {|resource| "Councillor Contribution for #{resource.authority.full_name}, #{resource.created_at.strftime('%B %d, %Y')}"} do
-    attributes_table do
-      row(:contributor) { |contribution| contribution.attribution(with_email: true) }
-    end
-
-    h3 "Suggested Councillors"
-    table_for resource.suggested_councillors, class: "index_table" do
-      column :name
-      column :email
-    end
+  attributes_table do
+    row(:contributor) { |contribution| contribution.attribution(with_email: true) }
   end
 
-  form title: "edit" do |f|
-    inputs "Councillor contribution" do
-      input :contributor
-      input :source
-      input :reviewed
-    end
+  h3 "Suggested Councillors"
+  table_for resource.suggested_councillors, class: "index_table" do
+    column :name
+    column :email
+  end
 
-    actions
-
-    h3 "Suggested Councillors"
-    table_for resource.suggested_councillors, class: "index_table" do
-      column :name
-      column :email
+  div do
+    form_for [:admin, resource], builder: ActiveAdmin::FormBuilder do |f|
+      f.inputs :reviewed
+      f.submit
     end
   end
+end
 
   action_item :download, only: [:show] do
     link_to "Download the suggested councillors CSV", authority_councillor_contribution_path(resource.authority, resource.id, format: :csv)
