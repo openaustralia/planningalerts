@@ -6,10 +6,10 @@
       and updates about your contribution when it goes live.
     %fieldset.contributor-input-wrapper
       .contributor-input-group
-        = contributor_field.label :name, class: "councillor-contribution-label"
+        = contributor_field.label :name, "Your name", class: "councillor-contribution-label"
         = contributor_field.text_field :name
       .contributor-input-group
-        = contributor_field.label :email, class: "councillor-contribution-label"
+        = contributor_field.label :email, "Your email", class: "councillor-contribution-label"
         = contributor_field.text_field :email
   .councillor-contribution-actions
     = f.button "No thanks", class: "button", value: "skip"
