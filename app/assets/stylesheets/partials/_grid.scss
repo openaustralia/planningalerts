@@ -505,6 +505,13 @@
   }
 }
 
+.councillor-contribution-form-source {
+  @include at-breakpoint(55em) {
+    margin: 0 auto;
+    width: 66%;
+  }
+}
+
 .councillor-contribution-form-councillor-input {
   @include at-breakpoint(55em) {
     display: grid;
