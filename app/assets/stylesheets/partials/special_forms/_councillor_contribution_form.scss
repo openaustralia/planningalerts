@@ -2,7 +2,8 @@
 //       They just don't have the .formatastic overrides.
 //       There is probably a refactor to make these the base/raw form styles
 //       and to move them into _form.scss
-.councillor-contribution-form {
+.councillor-contribution-form,
+.councillor-contribution-source-form {
   .councillor-contribution-instructions {
     margin-bottom: 2em;
   }
@@ -21,11 +22,17 @@
     font-weight: 500;
   }
 
-  input {
+  input,
+  textarea {
     display: block;
     padding: .25em;
     font-family: $blueprint-font-family;
     font-size: 100%;
+  }
+
+  textarea {
+    width: 100%;
+    box-sizing: border-box;
   }
 
   fieldset {

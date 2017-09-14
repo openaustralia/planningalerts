@@ -1,12 +1,12 @@
 
-= form_for [@authority, @councillor_contribution], url: add_contributor_authority_councillor_contribution_path(@authority.short_name_encoded) do |f|
+= form_for [@authority, @councillor_contribution], url: add_contributor_authority_councillor_contribution_path(@authority.short_name_encoded), html: { class: "councillor-contribution-source-form" } do |f|
   = f.fields_for :suggested_councillors do |suggested_councillor_field|
     - @councillor_contribution.suggested_councillors.each do |s|
       = suggested_councillor_field.hidden_field :name, value: s.name
       = suggested_councillor_field.hidden_field :email, value: s.email
   %h1 Amazing work! Almost there
   %p We would like to know the information source of your contribution. This field is optional.
-  = f.label :source
+  = f.label :source, class: "councillor-contribution-label"
   = f.text_area :source
 
   = f.submit "Submit"
