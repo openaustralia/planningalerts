@@ -28,7 +28,9 @@ class CouncillorContributionsController < ApplicationController
       @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
     end
 
-    unless @councillor_contribution.valid?
+    if @councillor_contribution.save
+      CouncillorContributionNotifier.notify(@councillor_contribution).deliver_later
+    else
       flash.now[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
       render :new
     end
@@ -37,16 +39,11 @@ class CouncillorContributionsController < ApplicationController
   def add_contributor
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
 
-    @councillor_contribution = @authority.councillor_contributions.build(
-      councillor_contribution_with_suggested_councillors_params
+    @councillor_contribution = CouncillorContribution.find(
+      councillor_contribution_with_suggested_councillors_params[:id]
     )
 
-    if @councillor_contribution.suggested_councillors.empty?
-      @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
-    end
-
-    if @councillor_contribution.save
-      CouncillorContributionNotifier.notify(@councillor_contribution).deliver_later
+    if @councillor_contribution.update(source: councillor_contribution_with_suggested_councillors_params[:source])
       @councillor_contribution.build_contributor({email: nil, name: nil})
     else
       flash.now[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
@@ -85,6 +82,7 @@ class CouncillorContributionsController < ApplicationController
 
   def councillor_contribution_with_suggested_councillors_params
     params.require(:councillor_contribution).permit(
+      :id,
       :source,
       suggested_councillors_attributes: [:name, :email]
     )
