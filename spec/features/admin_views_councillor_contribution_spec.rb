@@ -2,38 +2,38 @@ require "spec_helper"
 
 feature "Admin views councillor contributions" do
   before :each do
-      Timecop.freeze(Time.local(2017, 8, 1))
+    Timecop.freeze(Time.local(2017, 8, 1))
 
-      authority = create(:authority, full_name: "Casey City Council")
-      contributor = create(:contributor, name: "Felix Chaung", email: "example@gmail.com")
-      councillor_contribution = create(:councillor_contribution, contributor: contributor, authority: authority, id: 1)
-      creation_time = Time.current
+    authority = create(:authority, full_name: "Casey City Council")
+    contributor = create(:contributor, name: "Felix Chaung", email: "example@gmail.com")
+    councillor_contribution = create(:councillor_contribution, contributor: contributor, authority: authority, id: 1)
+    creation_time = Time.current
 
-      create(
-        :suggested_councillor,
-        name: "Mila Gilic",
-        email: "mgilic@casey.vic.gov.au",
-        councillor_contribution: councillor_contribution,
-        created_at: creation_time
-      )
-      create(
-        :suggested_councillor,
-        name: "Susan Serey",
-        email: "sserey@casey.vic.gov.au",
-        councillor_contribution: councillor_contribution,
-        created_at: creation_time
-      )
-      create(
-        :suggested_councillor,
-        name: "Rosalie Crestani",
-        email: "rcrestani@casey.vic.gov.au",
-        councillor_contribution: councillor_contribution,
-        created_at: creation_time
-      )
+    create(
+      :suggested_councillor,
+      name: "Mila Gilic",
+      email: "mgilic@casey.vic.gov.au",
+      councillor_contribution: councillor_contribution,
+      created_at: creation_time
+    )
+    create(
+      :suggested_councillor,
+      name: "Susan Serey",
+      email: "sserey@casey.vic.gov.au",
+      councillor_contribution: councillor_contribution,
+      created_at: creation_time
+    )
+    create(
+      :suggested_councillor,
+      name: "Rosalie Crestani",
+      email: "rcrestani@casey.vic.gov.au",
+      councillor_contribution: councillor_contribution,
+      created_at: creation_time
+    )
 
-      sign_in_as_admin
+    sign_in_as_admin
 
-      click_link "Councillor Contributions"
+    click_link "Councillor Contributions"
   end
 
   after :each do
