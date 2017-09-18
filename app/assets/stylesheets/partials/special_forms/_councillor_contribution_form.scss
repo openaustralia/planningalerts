@@ -21,11 +21,20 @@
     font-weight: 500;
   }
 
-  input {
+  input,
+  textarea {
     display: block;
     padding: .25em;
     font-family: $blueprint-font-family;
     font-size: 100%;
+  }
+
+  textarea {
+    padding: .5em;
+    margin: 1em 0;
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
   }
 
   fieldset {
@@ -33,19 +42,18 @@
   }
 }
 
-.councillor-contribution-councillors {
-  padding-bottom: 2em;
-
-  input,
-  dd {
+.contributor-input-group,
+.suggested-councillor-input-group {
+  input {
     font-size: 1.2em;
-  }
-
-  dt {
-    color: $cool-highlight;
   }
 }
 
+.councillor-contribution-councillors {
+  padding-bottom: 2em;
+}
+
+.button-secondary-action,
 .button-add-input {
   margin-top: 1em;
   font-size: 1em !important;
@@ -54,22 +62,24 @@
 .councillor-contribution-actions {
   text-align: right;
 
-  @supports (display: grid) {
-    @include at-breakpoint(55em) {
-      padding: 1em;
-      background: $lightest-cool-highlight;
-      border-radius: 1em;
-      text-align: center;
-    }
-  }
-
-  p {
-    display: none;
-
+  .councillor-contribution-form-councillor-input & {
     @supports (display: grid) {
       @include at-breakpoint(55em) {
-        display: block;
-        margin: 1em 0 0;
+        padding: 1em;
+        background: $lightest-cool-highlight;
+        border-radius: 1em;
+        text-align: center;
+      }
+    }
+
+    p {
+      display: none;
+
+      @supports (display: grid) {
+        @include at-breakpoint(55em) {
+          display: block;
+          margin: 1em 0 0;
+        }
       }
     }
   }

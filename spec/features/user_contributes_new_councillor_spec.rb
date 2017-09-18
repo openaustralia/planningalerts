@@ -44,30 +44,46 @@ feature "Contributing new councillors for an authority" do
         click_button "Submit 3 new councillors"
       end
 
-      context "and providing contributor details" do
+      context "and skipping source information" do
         before do
-          within_fieldset "Please tell us about yourself, so we can send you a little note of appreciation and updates about your contribution when it goes live." do
-            fill_in "Name", with: "Jane Contributes"
-            fill_in "Email", with: "jane@contributor.com"
-          end
-
           click_button "Submit"
         end
 
         it "successfully" do
-          expect(page).to have_content "Thank you for this great contribution of 3 new Casey City Council Councillors"
-          expect(CouncillorContribution.first.contributor.name).to eq "Jane Contributes"
+          expect(page).to have_content "Who do we thank?"
         end
       end
 
-      context "and skiping contributor details" do
+      context ", providing source information" do
         before do
-          click_button "No thanks"
+          fill_in "Let us know where you found this information", with: "https//caseycitycouncil.nsw.gov.au"
+
+          click_button "Submit"
         end
 
-        it "successfully" do
-          expect(page).to have_content "Thank you for this great contribution of 3 new Casey City Council Councillors"
-          expect(Contributor.count).to be_zero
+        context "and providing contributor details" do
+          before do
+            fill_in "Your name", with: "Jane Contributes"
+            fill_in "Your email", with: "jane@contributor.com"
+
+            click_button "Submit"
+          end
+
+          it "successfully" do
+            expect(page).to have_content "Thank you for this great contribution of 3 new Casey City Council Councillors"
+            expect(CouncillorContribution.first.contributor.name).to eq "Jane Contributes"
+          end
+        end
+
+        context "and skiping contributor details" do
+          before do
+            click_button "I'd rather not say"
+          end
+
+          it "successfully" do
+            expect(page).to have_content "Thank you for this great contribution of 3 new Casey City Council Councillors"
+            expect(Contributor.count).to be_zero
+          end
         end
       end
     end
@@ -115,6 +131,10 @@ feature "Contributing new councillors for an authority" do
         click_button "Add another councillor"
 
         click_button "Submit 4 new councillors"
+
+        fill_in "Let us know where you found this information", with: "https//caseycitycouncil.nsw.gov.au"
+
+        click_button "Submit"
       end
 
       # TODO: This really should return the blank councillor as invalid.
@@ -122,7 +142,7 @@ feature "Contributing new councillors for an authority" do
       #       extra councillor by accident and they don't want to submit it.
       #       Remove this once the two in exchange for the two pending tests below.
       it "successfully" do
-        expect(page).to have_content "Great!"
+        expect(page).to have_content "Who do we thank?"
       end
 
       it "displays an error message" do
@@ -157,7 +177,11 @@ feature "Contributing new councillors for an authority" do
 
       click_button "Submit 2 new councillors"
 
-      expect(page).to have_content "Great!"
+      fill_in "Let us know where you found this information", with: "https//caseycitycouncil.nsw.gov.au"
+
+      click_button "Submit"
+
+      expect(page).to have_content "Who do we thank?"
       expect(SuggestedCouncillor.find_by(name: "Original Councillor")).to be_nil
       expect(SuggestedCouncillor.find_by(name: "Changed Councillor")).to be_present
     end
@@ -173,6 +197,10 @@ feature "Contributing new councillors for an authority" do
       end
 
       click_button "Submit 1 new councillor"
+
+      fill_in "Let us know where you found this information", with: "https//caseycitycouncil.nsw.gov.au"
+
+      click_button "Submit"
 
       expect(unread_emails_for("moderator@planningalerts.org.au").size).to eq 1
 
