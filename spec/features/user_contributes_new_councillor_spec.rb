@@ -61,19 +61,20 @@ feature "Contributing new councillors for an authority" do
           click_button "Submit"
         end
 
-      context "and providing contributor details" do
-        before do
-          fill_in "Your name", with: "Jane Contributes"
-          fill_in "Your email", with: "jane@contributor.com"
+        context "and providing contributor details" do
+          before do
+            fill_in "Your name", with: "Jane Contributes"
+            fill_in "Your email", with: "jane@contributor.com"
 
-          click_button "Submit"
+            click_button "Submit"
+          end
+
+          it "successfully" do
+            expect(page).to have_content "Thank you for this great contribution of 3 new Casey City Council Councillors"
+            expect(CouncillorContribution.first.contributor.name).to eq "Jane Contributes"
+          end
         end
 
-        it "successfully" do
-          expect(page).to have_content "Thank you for this great contribution of 3 new Casey City Council Councillors"
-          expect(CouncillorContribution.first.contributor.name).to eq "Jane Contributes"
-        end
-      end
         context "and skiping contributor details" do
           before do
             click_button "I'd rather not say"
