@@ -24,6 +24,8 @@ class CouncillorContributionsController < ApplicationController
       councillor_contribution_with_suggested_councillors_params
     )
 
+    # Hack to stop someone submitting a blank contribution
+    # Remove this once people can remove councillors from their contribution
     if @councillor_contribution.suggested_councillors.empty?
       @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
     end
