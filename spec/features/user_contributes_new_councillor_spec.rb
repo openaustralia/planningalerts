@@ -48,6 +48,7 @@ feature "Contributing new councillors for an authority" do
         before do
           click_button "Submit"
         end
+
         it "successfully" do
           expect(page).to have_content "Who do we thank?"
         end
