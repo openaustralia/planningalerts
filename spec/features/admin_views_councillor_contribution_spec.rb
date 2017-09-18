@@ -53,29 +53,32 @@ feature "Admin views councillor contributions" do
     expect(page).to have_content "Mila Gilic mgilic@casey.vic.gov.au"
     expect(page).to have_content "Susan Serey sserey@casey.vic.gov.au"
     expect(page).to have_content "Rosalie Crestani rcrestani@casey.vic.gov.au"
-    expect(page).to have_text "Reviewed"
-    find(:css, "#councillor_contribution_reviewed[value='1']").set(false)
+    expect(page).to have_content "Mark as reviewed"
   end
 
-  it "can change the status of reviewed when admin click the checkbox in #view page" do
-    click_link "View"
+  context "when the feature flag is on" do
+    around do |test|
+      with_modified_env CONTRIBUTE_COUNCILLORS_ENABLED: "true" do
+        test.run
+      end
+    end
 
-    check("Reviewed")
+    it "can toggle the status of mark as reviewed when admin click the button 'Mark as reviewed'" do
+      click_link "View"
 
-    click_button("Update Councillor contribution")
+      click_link("Mark as reviewed")
 
-    expect(page). to have_content("Councillor contribution was successfully updated.")
-  end
+      expect(page).to have_content "Mark as not reviewed"
+    end
 
-  it "shows the reviewed status on the index page" do
-    click_link "View"
+    it "shows the reviewed status on the index page" do
+      click_link "View"
 
-    check("Reviewed")
+      click_link("Mark as reviewed")
 
-    click_button("Update Councillor contribution")
+      first(:link, "Councillor Contributions").click
 
-    first(:link, "Councillor Contributions").click
-
-    expect(page).to have_content "Felix Chaung #{Time.current.strftime('%B %d, %Y %H:%M')} Casey City Council Yes"
+      expect(page).to have_content "Felix Chaung #{Time.current.strftime('%B %d, %Y %H:%M')} Casey City Council Yes"
+    end
   end
 end
