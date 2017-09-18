@@ -64,6 +64,16 @@ class CouncillorContributionsController < ApplicationController
     end
   end
 
+  def mark_as_reviewed
+    @councillor_contribution = CouncillorContribution.find(params[:id])
+    if @councillor_contribution.reviewed?
+      @councillor_contribution.update(reviewed: false)
+    else
+      @councillor_contribution.update(reviewed: true)
+    end
+    redirect_to admin_councillor_contribution_url(params[:id])
+  end
+
   private
 
   def councillor_contribution_with_suggested_councillors_params
