@@ -43,12 +43,8 @@ class CouncillorContributionsController < ApplicationController
       councillor_contribution_with_suggested_councillors_params[:id]
     )
 
-    if @councillor_contribution.update(source: councillor_contribution_with_suggested_councillors_params[:source])
-      @councillor_contribution.build_contributor({email: nil, name: nil})
-    else
-      flash.now[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
-      render :new
-    end
+    @councillor_contribution.update!(source: councillor_contribution_with_suggested_councillors_params[:source])
+    @councillor_contribution.build_contributor({email: nil, name: nil})
   end
 
   def thank_you
