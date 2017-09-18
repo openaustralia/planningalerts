@@ -17,24 +17,33 @@ class CouncillorContributionsController < ApplicationController
     @councillor_contribution.suggested_councillors.build({email: nil, name: nil}) if new_suggested_councillor_required?
   end
 
-  def add_contributor
+  def source
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
 
     @councillor_contribution = @authority.councillor_contributions.build(
       councillor_contribution_with_suggested_councillors_params
     )
 
+    # Hack to stop someone submitting a blank contribution
+    # Remove this once people can remove councillors from their contribution
     if @councillor_contribution.suggested_councillors.empty?
       @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
     end
 
     if @councillor_contribution.save
       CouncillorContributionNotifier.notify(@councillor_contribution).deliver_later
-      @councillor_contribution.build_contributor({email: nil, name: nil})
     else
       flash.now[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
       render :new
     end
+  end
+
+  def add_contributor
+    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    @councillor_contribution = CouncillorContribution.find(councillor_contribution_with_source_params[:id])
+
+    @councillor_contribution.update!(source: councillor_contribution_with_source_params[:source])
+    @councillor_contribution.build_contributor({email: nil, name: nil})
   end
 
   def thank_you
@@ -42,11 +51,7 @@ class CouncillorContributionsController < ApplicationController
     @councillor_contribution = CouncillorContribution.find(councillor_contribution_with_contibutor_params[:id])
 
     unless params[:button].eql? "skip"
-      unless @councillor_contribution.create_contributor!(councillor_contribution_with_contibutor_params[:contributor_attributes])
-        flash.now[:error] = "There's a problem with the information you entered."
-        render :add_contributor
-      end
-
+      @councillor_contribution.create_contributor!(councillor_contribution_with_contibutor_params[:contributor_attributes])
       @councillor_contribution.save!
     end
   end
@@ -70,6 +75,10 @@ class CouncillorContributionsController < ApplicationController
     params.require(:councillor_contribution).permit(
       suggested_councillors_attributes: [:name, :email]
     )
+  end
+
+  def councillor_contribution_with_source_params
+    params.require(:councillor_contribution).permit(:id, :source)
   end
 
   def councillor_contribution_with_contibutor_params
