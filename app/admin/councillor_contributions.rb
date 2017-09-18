@@ -20,13 +20,6 @@ ActiveAdmin.register CouncillorContribution do
     column :name
     column :email
   end
-
-  div do
-    form_for [:admin, resource], builder: ActiveAdmin::FormBuilder do |f|
-      f.inputs :reviewed
-      f.submit
-    end
-  end
 end
 
   action_item :download, only: [:show] do
