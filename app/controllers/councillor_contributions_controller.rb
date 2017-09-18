@@ -38,9 +38,9 @@ class CouncillorContributionsController < ApplicationController
 
   def add_contributor
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
-    @councillor_contribution = CouncillorContribution.find(councillor_contribution_with_contibutor_params[:id])
+    @councillor_contribution = CouncillorContribution.find(councillor_contribution_with_source_params[:id])
 
-    @councillor_contribution.update!(source: councillor_contribution_with_suggested_councillors_params[:source])
+    @councillor_contribution.update!(source: councillor_contribution_with_source_params[:source])
     @councillor_contribution.build_contributor({email: nil, name: nil})
   end
 
@@ -71,10 +71,12 @@ class CouncillorContributionsController < ApplicationController
 
   def councillor_contribution_with_suggested_councillors_params
     params.require(:councillor_contribution).permit(
-      :id,
-      :source,
       suggested_councillors_attributes: [:name, :email]
     )
+  end
+
+  def councillor_contribution_with_source_params
+    params.require(:councillor_contribution).permit(:id, :source)
   end
 
   def councillor_contribution_with_contibutor_params
