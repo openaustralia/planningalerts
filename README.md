@@ -8,6 +8,26 @@ If you're interested in contributing a scraper read our [step-by-step guide to w
 
 PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.openaustraliafoundation.org.au). It was adapted for Australia by Matthew Landauer and Katherine Szuminska, and is based on the UK site PlanningAlerts.com, built by Richard Pope, Mikel Maron, Sam Smith, Duncan Parkes, Tom Hughes and Andy Armstrong.
 
+## Table of Contents
+
+* [Development](#development)
+  * [Scraping and sending emails in development](#scraping-and-sending-emails-in-development)
+  * [Take regular donations through PlanningAlerts with Stripe](#take-regular-donations-through-planningalerts-with-stripe)
+  * [Configuring PlanningAlerts so people can write to their local councillors](##configuring-planningalerts-so-people-can-write-to-their-local-councillors)
+    * [Global feature flag](#global-feature-flag)
+      * [Writing to councillors feature](#writing-to-councillors-feature)
+      * [Contributing suggested councillors feature](#contributing-suggested-councillors-feature)
+    * [Set the reply address for accepting responses](#set-the-reply-address-for-accepting-responses)
+    * [Enable the feature for an authority](#enable-the-feature-for-an-authority)
+    * [Adding councillors for an authority](#adding-councillors-for-an-authority)
+    * [Accepting councillor replies](#accepting-councillor-replies)
+      * [Default Wizard of Oz method](#default-wizard-of-oz-method)
+      * [Integrating with WriteIt](#integrating-with-writeit)
+* [Deployment](#deployment)
+* [Contributing](#contributing)
+* [Credits](#credits)
+* [License](#license)
+
 ## Development
 
 [![Build Status](https://travis-ci.org/openaustralia/planningalerts.png?branch=master)](https://travis-ci.org/openaustralia/planningalerts) [![Coverage Status](https://coveralls.io/repos/openaustralia/planningalerts/badge.png?branch=master)](https://coveralls.io/r/openaustralia/planningalerts?branch=master) [![Code Climate](https://codeclimate.com/github/openaustralia/planningalerts.png)](https://codeclimate.com/github/openaustralia/planningalerts)
