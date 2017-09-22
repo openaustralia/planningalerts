@@ -102,10 +102,16 @@ PlanningalertsApp::Application.routes.draw do
         get :per_week
       end
     end
+    resources :councillor_contributions, only:[:new, :show]
     collection do
       get :test_feed
     end
   end
+
+  post "/authorities/:authority_id/councillor_contributions/new", to: "councillor_contributions#new"
+  patch "/auhtorities/:authority_id/councillor_contributions/add_contributor", to: "councillor_contributions#add_contributor", as: :add_contributor_authority_councillor_contribution
+  post "/authorities/:authority_id/councillor_contributions/source", to: "councillor_contributions#source", as: :add_source_authority_councillor_contribution
+  patch "/authorities/:authority_id/councillor_contributions/thank_you", to: "councillor_contributions#thank_you", as: :authority_councillor_contribution_thank_you
 
   namespace :atdis do
     get :test

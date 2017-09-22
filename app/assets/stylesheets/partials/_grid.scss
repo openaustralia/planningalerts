@@ -504,3 +504,66 @@
     }
   }
 }
+
+.councillor-contribution-form-contributor,
+.councillor-contribution-form-source {
+  @include at-breakpoint(55em) {
+    margin: 0 auto;
+    width: 66%;
+  }
+}
+
+.councillor-contribution-form-councillor-input {
+  @include at-breakpoint(55em) {
+    display: grid;
+    grid-template-columns: 66% 30%;
+    grid-column-gap: 2em; // fallback for Safari, doesn't currently support % here.
+    grid-column-gap: 4%;
+    align-content: start;
+    justify-content: start;
+  }
+
+  .councillor-contribution-intro,
+  .councillor-contribution-councillors {
+    grid-column-start: 1;
+  }
+  .councillor-contribution-councillors {
+    grid-row-start: 2;
+  }
+  .councillor-contribution-actions {
+    grid-column-start: 2;
+    grid-row-start: 2;
+    align-self: start;
+  }
+}
+
+.contributor-input-wrapper,
+.suggested-councillor-input-wrapper {
+  @include at-breakpoint(30em) {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  input {
+    box-sizing: border-box;
+  }
+}
+
+.contributor-input-group,
+.suggested-councillor-input-group {
+  @include at-breakpoint(30em) {
+    width: 50%;
+    box-sizing: border-box;
+    padding-right: 1em;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  & + & {
+    @include at-breakpoint(30em) {
+      padding-right: 0;
+    }
+  }
+}

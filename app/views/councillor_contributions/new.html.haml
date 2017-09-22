@@ -1,0 +1,18 @@
+.councillor-contributions
+  = form_for [@authority, @councillor_contribution], url: add_source_authority_councillor_contribution_path(@authority.short_name_encoded), html: { class: "councillor-contribution-form councillor-contribution-form-councillor-input" } do |f|
+    .councillor-contribution-intro
+      %h1.page-title Who are the elected councillors for #{@authority.full_name}?
+      %p
+        Once we know, people will be able to ask them about development applications in PlanningAlerts.
+        Collecting this information is a great contribution and will only take you a few minutes.
+    .councillor-contribution-councillors
+      %details.councillor-contribution-instructions
+        %summary Instructions
+        = render "instructions_body"
+      %legend Add all the councillors details you can find:
+      - @councillor_contribution.suggested_councillors.each do |s|
+        = render 'contribution_form_input', f: f, suggested_councillor: s
+      %button{formaction: new_authority_councillor_contribution_path(@authority.short_name_encoded), class: "button button-add-input"} Add another councillor
+    .councillor-contribution-actions
+      = f.submit "Submit #{pluralize(@councillor_contribution.suggested_councillors.length, "new councillor")}", class: "button-action"
+      %p Thanks!

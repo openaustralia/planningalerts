@@ -303,6 +303,49 @@ hr {
   margin-bottom: 1em;
 }
 
+details {
+  border-radius: 1em;
+  background: $lightest-cool-highlight;
+  padding: 0;
+  cursor: pointer;
+
+  &[open] {
+    cursor: default;
+    padding: 0 1em 1em;
+  }
+}
+
+summary {
+  padding: 1em;
+  display: block;
+  cursor: pointer;
+
+  details[open] > & {
+    padding: 1em 0;
+    font-weight: bold;
+  }
+
+  &::before {
+    content: 'Show';
+    padding-right: 0.5em;
+
+    details[open] > & {
+      content: none;
+    }
+  }
+
+  &::after {
+    details[open] > & {
+      content: 'Hide';
+      float: right;
+    }
+  }
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+}
+
 /* Attention grabbers */
 body .container .attention {
   @include boxed-content;
