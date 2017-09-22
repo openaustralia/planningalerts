@@ -109,6 +109,10 @@ FactoryGirl.define do
     end
   end
 
+  factory :alert_subscriber do
+    email "eliza@example.org"
+  end
+
   factory :donation do
     sequence(:email) { |s| "mary#{s}@enterpriserealty.com.au" }
   end
