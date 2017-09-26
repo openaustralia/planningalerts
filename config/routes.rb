@@ -25,8 +25,6 @@ PlanningalertsApp::Application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  patch "admin/councillor_contribution/:id/mark_as_reviewed", to: "councillor_contributions#mark_as_reviewed", as: :mark_as_reviewed
-
   devise_for :users
 
   # Redirect old urls
