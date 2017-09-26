@@ -36,24 +36,24 @@ feature "Admin loads councillors for an authority" do
       click_button "Load Councillors"
 
       expect(page).to have_content "Successfully loaded/updated 11 councillors"
-      expect(page).to have_content "Sue Englart"
-      expect(page).to have_content "John Gouldson"
+      expect(page).to have_content "Anne Glasheen"
+      expect(page).to have_content "Nancy Sommerfield"
     end
   end
 
   context "when councillors don’t have emails" do
-    given(:city_of_sydney) do
-      create(:authority, full_name: "City of Sydney", state: "NSW")
+    given(:gundagai) do
+      create(:authority, full_name: "Gundagai Shire Council", state: "NSW")
     end
 
     scenario "the admin is informed they were not loaded" do
       sign_in_as_admin
 
-      visit admin_authority_path(city_of_sydney)
+      visit admin_authority_path(gundagai)
 
       click_button "Load Councillors"
 
-      expect(page).to have_content "Skipped loading 10 councillors"
+      expect(page).to have_content "Skipped loading 8 councillors"
     end
   end
 

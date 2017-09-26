@@ -275,7 +275,7 @@ class Authority < ActiveRecord::Base
   end
 
   def popolo_url
-    "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/#{state.downcase}_local_councillor_popolo.json"
+    "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/data/#{state.upcase}/local_councillor_popolo.json"
   end
 
   def latest_application
