@@ -1,5 +1,5 @@
 class Alert < ActiveRecord::Base
-  belongs_to :subscription, foreign_key: :email, primary_key: :email
+  belongs_to :alert_subscriber
 
   validates_numericality_of :radius_meters, greater_than: 0, message: "isn't selected"
   validate :validate_address
@@ -12,10 +12,24 @@ class Alert < ActiveRecord::Base
   scope :active, -> { where(confirmed: true, unsubscribed: false) }
   scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
 
+  before_create :attach_alert_subscriber
+
   def location=(l)
     if l
       self.lat = l.lat
       self.lng = l.lng
+    end
+  end
+
+  # TODO: This can probably be removed after being run on production
+  #       because all future alerts will be created with an associated AlertSubscriber
+  #       see spec/models/alert_spec.rb:11
+  def self.create_alert_subscribers_for_existing_alerts
+    Alert.find_in_batches do |batch|
+      batch.each do |alert|
+        alert.attach_alert_subscriber
+        alert.save
+      end
     end
   end
 
@@ -256,6 +270,10 @@ class Alert < ActiveRecord::Base
       self.location = @geocode_result
       self.address = @geocode_result.full_address
     end
+  end
+
+  def attach_alert_subscriber
+    self.alert_subscriber = AlertSubscriber.find_or_create_by(email: email)
   end
 
   private

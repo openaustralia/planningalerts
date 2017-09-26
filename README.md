@@ -8,6 +8,27 @@ If you're interested in contributing a scraper read our [step-by-step guide to w
 
 PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.openaustraliafoundation.org.au). It was adapted for Australia by Matthew Landauer and Katherine Szuminska, and is based on the UK site PlanningAlerts.com, built by Richard Pope, Mikel Maron, Sam Smith, Duncan Parkes, Tom Hughes and Andy Armstrong.
 
+## Table of Contents
+
+* [Development](#development)
+  * [Scraping and sending emails in development](#scraping-and-sending-emails-in-development)
+  * [Take regular donations through PlanningAlerts with Stripe](#take-regular-donations-through-planningalerts-with-stripe)
+  * [Configuring PlanningAlerts so people can write to their local councillors](##configuring-planningalerts-so-people-can-write-to-their-local-councillors)
+    * [Global feature flag](#global-feature-flag)
+      * [Writing to councillors feature](#writing-to-councillors-feature)
+      * [Contributing suggested councillors feature](#contributing-suggested-councillors-feature)
+    * [Set the reply address for accepting responses](#set-the-reply-address-for-accepting-responses)
+    * [Enable the feature for an authority](#enable-the-feature-for-an-authority)
+    * [Adding councillors for an authority](#adding-councillors-for-an-authority)
+    * [Accepting councillor replies](#accepting-councillor-replies)
+      * [Default Wizard of Oz method](#default-wizard-of-oz-method)
+      * [Integrating with WriteIt](#integrating-with-writeit)
+    * [Processing councillor data contributions](#processing-councillor-data-contributions)
+* [Deployment](#deployment)
+* [Contributing](#contributing)
+* [Credits](#credits)
+* [License](#license)
+
 ## Development
 
 [![Build Status](https://travis-ci.org/openaustralia/planningalerts.png?branch=master)](https://travis-ci.org/openaustralia/planningalerts) [![Coverage Status](https://coveralls.io/repos/openaustralia/planningalerts/badge.png?branch=master)](https://coveralls.io/r/openaustralia/planningalerts?branch=master) [![Code Climate](https://codeclimate.com/github/openaustralia/planningalerts.png)](https://codeclimate.com/github/openaustralia/planningalerts)
@@ -280,6 +301,24 @@ Navigate to the admin page for a comment, e.g. `/admin/comments/123`.
 Use the “Load replies from WriteIt” button to load in new replies to that comment.
 PlanningAlerts will fetch any answers from the API for your WriteIt site
 and create new replies and associate them with the comment.
+
+#### Processing councillor data contributions
+
+It's important that the lists of councillors that people can write to stay up-to-date.
+To help you update the listings, PlanningAlerts invites people to contribute data to maintain the list of councillors for their local area.
+
+When contributions come in, they are listed on the admin page for Councillor Contributions.
+An email is also sent to the administrator email address to notify you—at the OpenAustralia Foundation we've configured these emails to be forwarded to our Slack channel for higher visibility.
+
+To review and ingest the contribution:
+
+1. Find the contribution on the Councillor Contributions admin page (`/admin/councillor_contributions`).
+2. Review the list of suggested councillors.
+   The person has been asked to provide information about the source of the data, and their contact information to assist you in reviewing their contribution.
+3. If the contribution is acceptable hit the 'Download the suggested councillors CSV' button.
+4. You can make changes to the data at this point if you want to adjust it or add more fields for the councillors.
+5. Take this CSV and contribute it to the [repository for structured data of Australian local councillors](https://github.com/openaustralia/australian_local_councillors_popolo)
+   following [its 'Updates' instructions](https://github.com/openaustralia/australian_local_councillors_popolo/#updates)
 
 ## Deployment
 

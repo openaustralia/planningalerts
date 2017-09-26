@@ -302,6 +302,6 @@ describe Authority do
   end
 
   describe "#popolo_url" do
-    it { expect(build(:authority, state: "NSW").popolo_url).to eq "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/nsw_local_councillor_popolo.json" }
+    it { expect(build(:authority, state: "NSW").popolo_url).to eq "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/data/NSW/local_councillor_popolo.json" }
   end
 end

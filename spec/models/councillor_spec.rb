@@ -25,7 +25,7 @@ describe Councillor do
   describe "#writeit_id" do
     it "combines the popolo_id with the authority popolo_url" do
       expect(create(:councillor, popolo_id: "authority/foo_bar").writeit_id)
-        .to eql "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/nsw_local_councillor_popolo.json/person/authority/foo_bar"
+        .to eql "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/data/NSW/local_councillor_popolo.json/person/authority/foo_bar"
     end
   end
 
