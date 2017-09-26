@@ -26,8 +26,15 @@ end
   action_item :download, only: [:show] do
     link_to "Download the suggested councillors CSV", authority_councillor_contribution_path(resource.authority, resource.id, format: :csv)
   end
-  action_item :mark_as_reviewed, only: [:show] do
-    link_to "Mark as #{resource.reviewed? ?  "not " : ""}reviewed", mark_as_reviewed_path(resource.id), method: :patch
+
+  member_action :toggle_reviewed, method: :patch do
+    resource.toggle("reviewed")
+    resource.save!
+
+    redirect_to({action: :show})
+  end
+  action_item :toggle_reviewed, only: [:show] do
+    button_to "Mark as #{resource.reviewed? ?  "not " : ""}reviewed", toggle_reviewed_admin_councillor_contribution_path, method: :patch
   end
   permit_params :contributor, :created_at, :authority, :suggested_councillors_id, :reviewed
 end
