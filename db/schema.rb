@@ -12,7 +12,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 
-ActiveRecord::Schema.define(version: 20170911153225) do
+ActiveRecord::Schema.define(version: 20170912165633) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "resource_id",   limit: 255,   null: false
@@ -156,6 +156,7 @@ ActiveRecord::Schema.define(version: 20170911153225) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.text     "source",         limit: 65535
+    t.boolean  "reviewed",                     default: false
   end
 
   create_table "councillors", force: :cascade do |t|

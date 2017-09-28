@@ -1,54 +1,47 @@
 require "spec_helper"
 
 feature "Admin views councillor contributions" do
-  before :each do
-      Timecop.freeze(Time.local(2017, 8, 1))
-
-      authority = create(:authority, full_name: "Casey City Council")
-      contributor = create(:contributor, name: "Felix Chaung", email: "example@gmail.com")
-      councillor_contribution = create(:councillor_contribution, contributor: contributor, authority: authority)
-      creation_time = Time.current
-
-      create(
-        :suggested_councillor,
-        name: "Mila Gilic",
-        email: "mgilic@casey.vic.gov.au",
-        councillor_contribution: councillor_contribution,
-        created_at: creation_time
-      )
-      create(
-        :suggested_councillor,
-        name: "Susan Serey",
-        email: "sserey@casey.vic.gov.au",
-        councillor_contribution: councillor_contribution,
-        created_at: creation_time
-      )
-      create(
-        :suggested_councillor,
-        name: "Rosalie Crestani",
-        email: "rcrestani@casey.vic.gov.au",
-        councillor_contribution: councillor_contribution,
-        created_at: creation_time
-      )
+  let(:authority) { create(:authority, full_name: "Casey City Council") }
+  let(:contributor) { create(:contributor, name: "Felix Chaung", email: "example@gmail.com") }
+  let(:councillor_contribution) do
+    create(
+      :councillor_contribution,
+      contributor: contributor,
+      authority: authority,
+      created_at: Time.utc(2017, 8, 1, 11, 34, 5)
+    )
   end
 
-  after :each do
-    Timecop.return
+  before :each do
+    create(
+      :suggested_councillor,
+      name: "Mila Gilic",
+      email: "mgilic@casey.vic.gov.au",
+      councillor_contribution: councillor_contribution
+    )
+    create(
+      :suggested_councillor,
+      name: "Susan Serey",
+      email: "sserey@casey.vic.gov.au",
+      councillor_contribution: councillor_contribution
+    )
+    create(
+      :suggested_councillor,
+      name: "Rosalie Crestani",
+      email: "rcrestani@casey.vic.gov.au",
+      councillor_contribution: councillor_contribution
+    )
+
+    sign_in_as_admin
+
+    click_link "Councillor Contributions"
   end
 
   it "successfully on the index page" do
-    sign_in_as_admin
-
-    click_link "Councillor Contributions"
-
-    expect(page).to have_content "Felix Chaung #{Time.current.strftime('%B %d, %Y %H:%M')} Casey City Council"
+    expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council No"
   end
 
   it "successfully with suggested councillors on the show page with contributor information" do
-    sign_in_as_admin
-
-    click_link "Councillor Contributions"
-
     click_link "View"
 
     expect(page).to have_content "Felix Chaung"
@@ -57,5 +50,29 @@ feature "Admin views councillor contributions" do
     expect(page).to have_content "Mila Gilic mgilic@casey.vic.gov.au"
     expect(page).to have_content "Susan Serey sserey@casey.vic.gov.au"
     expect(page).to have_content "Rosalie Crestani rcrestani@casey.vic.gov.au"
+  end
+
+  it "and marks one as reviewed" do
+    click_link "View"
+
+    click_button("Mark as reviewed")
+
+    first(:link, "Councillor Contributions").click
+
+    expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council Yes"
+  end
+
+  context "and one has been reviewed" do
+    before { councillor_contribution.update(reviewed: true) }
+
+    it "marks it as 'not reviewd'" do
+      click_link "View"
+
+      click_button("Mark as not reviewed")
+
+      first(:link, "Councillor Contributions").click
+
+      expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council No"
+    end
   end
 end
