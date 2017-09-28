@@ -3,15 +3,16 @@ require "spec_helper"
 feature "Admin views councillor contributions" do
   let(:authority) { create(:authority, full_name: "Casey City Council") }
   let(:contributor) { create(:contributor, name: "Felix Chaung", email: "example@gmail.com") }
-
-  before :each do
-    councillor_contribution = create(
+  let(:councillor_contribution) do
+    create(
       :councillor_contribution,
       contributor: contributor,
       authority: authority,
       created_at: Time.utc(2017, 8, 1, 11, 34, 5)
     )
+  end
 
+  before :each do
     create(
       :suggested_councillor,
       name: "Mila Gilic",
