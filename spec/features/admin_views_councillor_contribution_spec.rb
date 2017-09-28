@@ -55,29 +55,21 @@ feature "Admin views councillor contributions" do
     expect(page).to have_content "Rosalie Crestani rcrestani@casey.vic.gov.au"
   end
 
-  context "when the feature flag is on" do
-    around do |test|
-      with_modified_env CONTRIBUTE_COUNCILLORS_ENABLED: "true" do
-        test.run
-      end
-    end
+  it "can toggle the status of mark as reviewed when admin click the button 'Mark as reviewed'" do
+    click_link "View"
 
-    it "can toggle the status of mark as reviewed when admin click the button 'Mark as reviewed'" do
-      click_link "View"
+    click_button("Mark as reviewed")
 
-      click_button("Mark as reviewed")
+    expect(page).to have_xpath("//input[@value='Mark as not reviewed']")
+  end
 
-      expect(page).to have_xpath("//input[@value='Mark as not reviewed']")
-    end
+  it "shows the reviewed status on the index page" do
+    click_link "View"
 
-    it "shows the reviewed status on the index page" do
-      click_link "View"
+    click_button("Mark as reviewed")
 
-      click_button("Mark as reviewed")
+    first(:link, "Councillor Contributions").click
 
-      first(:link, "Councillor Contributions").click
-
-      expect(page).to have_content "Felix Chaung #{Time.current.strftime('%B %d, %Y %H:%M')} Casey City Council Yes"
-    end
+    expect(page).to have_content "Felix Chaung #{Time.current.strftime('%B %d, %Y %H:%M')} Casey City Council Yes"
   end
 end
