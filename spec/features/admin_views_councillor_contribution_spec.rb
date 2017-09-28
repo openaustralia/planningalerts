@@ -55,7 +55,7 @@ feature "Admin views councillor contributions" do
     expect(page).to have_content "Rosalie Crestani rcrestani@casey.vic.gov.au"
   end
 
-  it "can toggle the status of mark as reviewed when admin click the button 'Mark as reviewed'" do
+  it "and marks one as reviewed" do
     click_link "View"
 
     click_button("Mark as reviewed")
