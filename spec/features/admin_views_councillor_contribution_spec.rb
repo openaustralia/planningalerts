@@ -14,30 +14,27 @@ feature "Admin views councillor contributions" do
     councillor_contribution = create(
       :councillor_contribution,
       contributor: contributor,
-      authority: authority
+      authority: authority,
+      created_at: Time.current
     )
-    creation_time = Time.current
 
     create(
       :suggested_councillor,
       name: "Mila Gilic",
       email: "mgilic@casey.vic.gov.au",
-      councillor_contribution: councillor_contribution,
-      created_at: creation_time
+      councillor_contribution: councillor_contribution
     )
     create(
       :suggested_councillor,
       name: "Susan Serey",
       email: "sserey@casey.vic.gov.au",
-      councillor_contribution: councillor_contribution,
-      created_at: creation_time
+      councillor_contribution: councillor_contribution
     )
     create(
       :suggested_councillor,
       name: "Rosalie Crestani",
       email: "rcrestani@casey.vic.gov.au",
-      councillor_contribution: councillor_contribution,
-      created_at: creation_time
+      councillor_contribution: councillor_contribution
     )
 
     sign_in_as_admin
