@@ -57,16 +57,22 @@ feature "Admin views councillor contributions" do
 
     click_button("Mark as reviewed")
 
-    expect(page).to have_xpath("//input[@value='Mark as not reviewed']")
-  end
-
-  it "shows the reviewed status on the index page" do
-    click_link "View"
-
-    click_button("Mark as reviewed")
-
     first(:link, "Councillor Contributions").click
 
     expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council Yes"
+  end
+
+  context "and one has been reviewed" do
+    before { councillor_contribution.update(reviewed: true) }
+
+    it "marks it as 'not reviewd'" do
+      click_link "View"
+
+      click_button("Mark as not reviewed")
+
+      first(:link, "Councillor Contributions").click
+
+      expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council No"
+    end
   end
 end
