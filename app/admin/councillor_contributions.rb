@@ -35,7 +35,7 @@ ActiveAdmin.register CouncillorContribution do
   end
 
   action_item :toggle_reviewed, only: [:show] do
-    button_to "Mark as #{resource.reviewed? ?  "not " : ""}reviewed", toggle_reviewed_admin_councillor_contribution_path, method: :patch
+    button_to "Mark as #{"not " if resource.reviewed}reviewed", toggle_reviewed_admin_councillor_contribution_path, method: :patch
   end
 
   permit_params :contributor, :created_at, :authority, :suggested_councillors_id, :reviewed
