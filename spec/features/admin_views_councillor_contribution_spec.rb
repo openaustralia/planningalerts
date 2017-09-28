@@ -4,18 +4,12 @@ feature "Admin views councillor contributions" do
   let(:authority) { create(:authority, full_name: "Casey City Council") }
   let(:contributor) { create(:contributor, name: "Felix Chaung", email: "example@gmail.com") }
 
-  around :each do |example|
-    Timecop.freeze(Time.local(2017, 8, 1))
-    example.run
-    Timecop.return
-  end
-
   before :each do
     councillor_contribution = create(
       :councillor_contribution,
       contributor: contributor,
       authority: authority,
-      created_at: Time.current
+      created_at: Time.utc(2017, 8, 1, 11, 34, 5)
     )
 
     create(
@@ -43,7 +37,7 @@ feature "Admin views councillor contributions" do
   end
 
   it "successfully on the index page" do
-    expect(page).to have_content "Felix Chaung #{Time.current.strftime('%B %d, %Y %H:%M')} Casey City Council No"
+    expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council No"
   end
 
   it "successfully with suggested councillors on the show page with contributor information" do
@@ -72,6 +66,6 @@ feature "Admin views councillor contributions" do
 
     first(:link, "Councillor Contributions").click
 
-    expect(page).to have_content "Felix Chaung #{Time.current.strftime('%B %d, %Y %H:%M')} Casey City Council Yes"
+    expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council Yes"
   end
 end
