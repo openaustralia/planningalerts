@@ -11,7 +11,11 @@ feature "Admin views councillor contributions" do
   end
 
   before :each do
-    councillor_contribution = create(:councillor_contribution, contributor: contributor, authority: authority, id: 1)
+    councillor_contribution = create(
+      :councillor_contribution,
+      contributor: contributor,
+      authority: authority
+    )
     creation_time = Time.current
 
     create(
