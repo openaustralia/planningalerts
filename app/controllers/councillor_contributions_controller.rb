@@ -69,6 +69,16 @@ class CouncillorContributionsController < ApplicationController
     end
   end
 
+  def index
+    @councillor_contributions = CouncillorContribution.where(reviewed: true).order(created_at: :desc)
+    respond_to do |format|
+      format.json do
+        render json: @councillor_contributions.to_json(only: [:source, :id, :created_at],
+        include: {contributor: {only: [:name]}})
+      end
+    end
+  end
+
   private
 
   def councillor_contribution_with_suggested_councillors_params
