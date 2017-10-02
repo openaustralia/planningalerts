@@ -43,5 +43,22 @@ describe CouncillorContributionsController do
           ]
       end
     end
+
+    describe "#index" do
+      before :each do
+        Timecop.freeze(Time.utc(2017, 9, 30))
+        create(:councillor_contribution, authority: authority, source: "Foo bar source", reviewed: true)
+      end
+
+      after :each do
+        Timecop.return
+      end
+
+      it "renders reviewed councillor contributions in json format in reverse chronological order" do
+        get :index, format: "json"
+        response_json = JSON.parse(response.body)
+        expect(response_json).to eql [{"councillor_contribution"=>{"id"=>1, "created_at"=>"2017-09-30T00:00:00.000Z", "source"=>"Foo bar source", "contributor"=>{"name"=>"Felix Chaung"}}}]
+      end
+    end
   end
 end
