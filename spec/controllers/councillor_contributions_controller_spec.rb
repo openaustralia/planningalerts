@@ -5,8 +5,8 @@ describe CouncillorContributionsController do
     create(:authority, full_name: "Casey City Council", website_url: "http://www.casey.vic.gov.au")
   end
 
-  let(:councillor_contribution) do
-    create(:councillor_contribution, authority: authority, source: "Foo bar source")
+  let(:councillor_contribution_not_reviewed) do
+    create(:councillor_contribution, authority: authority, source: "not reviewed", reviewed: false)
   end
 
   context "when the feature flag is on" do
@@ -16,16 +16,19 @@ describe CouncillorContributionsController do
       end
     end
 
-    before :each do
-      create(
-        :suggested_councillor,
-        name: "Mila Gilic",
-        email: "mgilic@casey.vic.gov.au",
-        councillor_contribution: councillor_contribution
-      )
-    end
-
     describe "#show" do
+      let(:councillor_contribution) do
+        create(:councillor_contribution, authority: authority, source: "Foo bar source", reviewed: true)
+      end
+      before :each do
+        create(
+          :suggested_councillor,
+          name: "Mila Gilic",
+          email: "mgilic@casey.vic.gov.au",
+          councillor_contribution: councillor_contribution
+        )
+      end
+
       it "returns a valid CSV file with the contribution" do
         get :show, authority_id: authority.id, id: councillor_contribution.id, format: "csv"
 
