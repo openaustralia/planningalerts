@@ -108,6 +108,8 @@ PlanningalertsApp::Application.routes.draw do
     end
   end
 
+  resources :councillor_contributions, only:[:index]
+
   post "/authorities/:authority_id/councillor_contributions/new", to: "councillor_contributions#new"
   patch "/auhtorities/:authority_id/councillor_contributions/add_contributor", to: "councillor_contributions#add_contributor", as: :add_contributor_authority_councillor_contribution
   post "/authorities/:authority_id/councillor_contributions/source", to: "councillor_contributions#source", as: :add_source_authority_councillor_contribution
