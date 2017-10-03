@@ -5,10 +5,6 @@ describe CouncillorContributionsController do
     create(:authority, full_name: "Casey City Council", website_url: "http://www.casey.vic.gov.au")
   end
 
-  let(:councillor_contribution_not_reviewed) do
-    create(:councillor_contribution, authority: authority, source: "not reviewed", reviewed: false)
-  end
-
   context "when the feature flag is on" do
     around do |test|
       with_modified_env CONTRIBUTE_COUNCILLORS_ENABLED: "true" do
@@ -45,8 +41,13 @@ describe CouncillorContributionsController do
     end
 
     describe "#index" do
-      before :each do
+      around :each do |example|
         Timecop.freeze(Time.utc(2017, 9, 30))
+        example.run
+        Timecop.return
+      end
+
+      it "renders reviewed councillor contributions in json format in reverse chronological order" do
         create(
           :councillor_contribution,
           id: 3,
@@ -54,14 +55,9 @@ describe CouncillorContributionsController do
           source: "Foo bar source",
           reviewed: true
         )
-      end
 
-      after :each do
-        Timecop.return
-      end
-
-      it "renders reviewed councillor contributions in json format in reverse chronological order" do
         get :index, format: "json"
+
         response_json = JSON.parse(response.body)
 
         expected_json = [
@@ -77,6 +73,19 @@ describe CouncillorContributionsController do
           }
         ]
         expect(response_json).to eql expected_json
+      end
+
+      it "doesn't include unrevied contributions" do
+        create(
+          :councillor_contribution,
+          source: "not reviewed",
+          reviewed: false
+        )
+
+        get :index, format: "json"
+
+        expect(response.body).to_not include "not revieved"
+        expect(JSON.parse(response.body).count).to be_zero
       end
     end
   end
