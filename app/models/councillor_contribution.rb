@@ -32,8 +32,7 @@ class CouncillorContribution < ActiveRecord::Base
       "image",
       "party",
       "source",
-      "ward",
-      "phone_mobile"
+      "ward"
     ]
 
     CSV.generate(headers: true) do |csv|
@@ -53,7 +52,6 @@ class CouncillorContribution < ActiveRecord::Base
           nil,
           nil,
           source,
-          nil,
           nil
         ]
       end
