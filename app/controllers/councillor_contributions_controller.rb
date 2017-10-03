@@ -73,8 +73,9 @@ class CouncillorContributionsController < ApplicationController
     @councillor_contributions = CouncillorContribution.where(reviewed: true).order(created_at: :desc)
     respond_to do |format|
       format.json do
-        render json: @councillor_contributions.to_json(only: [:source, :id, :created_at],
+        contributions_json = @councillor_contributions.to_json(only: [:source, :id, :created_at],
         include: {contributor: {only: [:name]}})
+        render json: contributions_json
       end
     end
   end
