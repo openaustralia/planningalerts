@@ -57,7 +57,20 @@ describe CouncillorContributionsController do
       it "renders reviewed councillor contributions in json format in reverse chronological order" do
         get :index, format: "json"
         response_json = JSON.parse(response.body)
-        expect(response_json).to eql [{"councillor_contribution"=>{"id"=>1, "created_at"=>"2017-09-30T00:00:00.000Z", "source"=>"Foo bar source", "contributor"=>{"name"=>"Felix Chaung"}}}]
+
+        expected_json = [
+          {
+            "councillor_contribution" => {
+              "id" => 1,
+              "created_at" => "2017-09-30T00:00:00.000Z",
+              "source" => "Foo bar source",
+              "contributor" => {
+                "name" => "Felix Chaung"
+              }
+            }
+          }
+        ]
+        expect(response_json).to eql expected_json
       end
     end
   end
