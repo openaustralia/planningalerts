@@ -61,8 +61,6 @@ describe CouncillorContributionsController do
 
         get :index, format: "json"
 
-        response_json = JSON.parse(response.body)
-
         expected_json = [
           {
             "councillor_contribution" => {
@@ -75,7 +73,7 @@ describe CouncillorContributionsController do
             }
           }
         ]
-        expect(response_json).to eql expected_json
+        expect(JSON.parse(response.body)).to eql expected_json
       end
 
       it "doesn't include unrevied contributions" do
