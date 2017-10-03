@@ -47,7 +47,13 @@ describe CouncillorContributionsController do
     describe "#index" do
       before :each do
         Timecop.freeze(Time.utc(2017, 9, 30))
-        create(:councillor_contribution, authority: authority, source: "Foo bar source", reviewed: true)
+        create(
+          :councillor_contribution,
+          id: 3,
+          authority: authority,
+          source: "Foo bar source",
+          reviewed: true
+        )
       end
 
       after :each do
@@ -61,7 +67,7 @@ describe CouncillorContributionsController do
         expected_json = [
           {
             "councillor_contribution" => {
-              "id" => 1,
+              "id" => 3,
               "created_at" => "2017-09-30T00:00:00.000Z",
               "source" => "Foo bar source",
               "contributor" => {
