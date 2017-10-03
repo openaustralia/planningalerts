@@ -24,7 +24,7 @@ class CouncillorContribution < ActiveRecord::Base
       "name",
       "start_date",
       "end_date",
-      "exective",
+      "executive",
       "council",
       "council_website",
       "id",

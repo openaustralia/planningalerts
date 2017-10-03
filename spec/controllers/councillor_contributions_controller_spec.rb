@@ -31,7 +31,7 @@ describe CouncillorContributionsController do
 
         response_csv = CSV.parse(response.body)
         expect((response_csv).first).to eql [
-          "name", "start_date", "end_date", "exective", "council", "council_website",
+          "name", "start_date", "end_date", "executive", "council", "council_website",
           "id","email", "image", "party", "source", "ward", "phone_mobile"
         ]
         expect(response_csv.last).to eql [
