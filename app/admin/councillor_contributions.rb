@@ -20,6 +20,9 @@ ActiveAdmin.register CouncillorContribution do
     table_for resource.suggested_councillors, class: "index_table" do
       column :name
       column :email
+      column "Actions" do |suggested_councillor|
+        link_to "Edit", edit_admin_suggested_councillor_path(suggested_councillor)
+      end
     end
   end
 
