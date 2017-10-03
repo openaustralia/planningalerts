@@ -50,7 +50,6 @@ class CouncillorContribution < ActiveRecord::Base
           s.email,
           nil,
           nil,
-          nil,
           source,
           nil
         ]

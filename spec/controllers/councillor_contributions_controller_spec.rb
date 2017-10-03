@@ -36,7 +36,7 @@ describe CouncillorContributionsController do
         ]
         expect(response_csv.last).to eql [
           "Mila Gilic", nil, nil, nil, "Casey City Council", "http://www.casey.vic.gov.au",
-          "casey_city_council/mila_gilic", "mgilic@casey.vic.gov.au", nil, nil, nil, "Foo bar source", nil
+          "casey_city_council/mila_gilic", "mgilic@casey.vic.gov.au", nil, nil, "Foo bar source", nil
           ]
       end
     end
