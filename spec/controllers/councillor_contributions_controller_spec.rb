@@ -41,6 +41,9 @@ describe CouncillorContributionsController do
     end
 
     describe "#index" do
+      # FIXME: We should test the time by setting the created_at on the contributoin,
+      #        not by freezing time. This is indirect, and it would pass if the JSON
+      #        rendered the current time, not the created_at time.
       around :each do |example|
         Timecop.freeze(Time.utc(2017, 9, 30))
         example.run
