@@ -13,20 +13,21 @@ describe CouncillorContributionsController do
     end
 
     describe "#show" do
-      let(:councillor_contribution) do
-        create(:councillor_contribution, authority: authority, source: "Foo bar source", reviewed: true)
-      end
-      before :each do
+      it "returns a valid CSV file with the contribution" do
         create(
           :suggested_councillor,
           name: "Mila Gilic",
           email: "mgilic@casey.vic.gov.au",
-          councillor_contribution: councillor_contribution
+          councillor_contribution: create(
+            :councillor_contribution,
+            id: 5,
+            authority: authority,
+            source: "Foo bar source",
+            reviewed: true
+          )
         )
-      end
 
-      it "returns a valid CSV file with the contribution" do
-        get :show, authority_id: authority.id, id: councillor_contribution.id, format: "csv"
+        get :show, authority_id: authority.id, id: 5, format: "csv"
 
         response_csv = CSV.parse(response.body)
         expect((response_csv).first).to eql [
