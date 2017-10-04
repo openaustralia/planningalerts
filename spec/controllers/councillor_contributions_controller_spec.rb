@@ -23,7 +23,7 @@ describe CouncillorContributionsController do
             id: 5,
             authority: authority,
             source: "Foo bar source",
-            reviewed: true
+            accepted: true
           )
         )
 
@@ -42,13 +42,13 @@ describe CouncillorContributionsController do
     end
 
     describe "#index" do
-      it "renders reviewed councillor contributions in json format in reverse chronological order" do
+      it "renders accepted councillor contributions in json format in reverse chronological order" do
         create(
           :councillor_contribution,
           id: 3,
           authority: authority,
           source: "Foo bar source",
-          reviewed: true,
+          accepted: true,
           created_at: Time.utc(2017, 9, 30)
         )
 
@@ -69,16 +69,16 @@ describe CouncillorContributionsController do
         expect(JSON.parse(response.body)).to eql expected_json
       end
 
-      it "doesn't include unrevied contributions" do
+      it "doesn't include contributions that aren't marked accepted" do
         create(
           :councillor_contribution,
-          source: "not reviewed",
-          reviewed: false
+          source: "not accepted",
+          accepted: false
         )
 
         get :index, format: "json"
 
-        expect(response.body).to_not include "not revieved"
+        expect(response.body).to_not include "not accepted"
         expect(JSON.parse(response.body).count).to be_zero
       end
     end

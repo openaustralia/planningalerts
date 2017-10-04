@@ -70,7 +70,7 @@ class CouncillorContributionsController < ApplicationController
   end
 
   def index
-    @councillor_contributions = CouncillorContribution.where(reviewed: true).order(created_at: :desc)
+    @councillor_contributions = CouncillorContribution.where(accepted: true).order(created_at: :desc)
     respond_to do |format|
       format.json do
         contributions_json = @councillor_contributions.to_json(

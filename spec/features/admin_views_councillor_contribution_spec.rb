@@ -38,7 +38,7 @@ feature "Admin views councillor contributions" do
   end
 
   it "successfully on the index page" do
-    expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council No"
+    expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council No No"
   end
 
   it "successfully with suggested councillors on the show page with contributor information" do
@@ -59,10 +59,10 @@ feature "Admin views councillor contributions" do
 
     first(:link, "Councillor Contributions").click
 
-    expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council Yes"
+    expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council Yes No"
   end
 
-  context "and one has been reviewed" do
+  context "when one has been reviewed" do
     before { councillor_contribution.update(reviewed: true) }
 
     it "marks it as 'not reviewd'" do
@@ -72,7 +72,41 @@ feature "Admin views councillor contributions" do
 
       first(:link, "Councillor Contributions").click
 
-      expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council No"
+      expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council No No"
+    end
+
+    it "and marks it as accepted" do
+      click_link "View"
+
+      click_button("Mark as accepted")
+
+      first(:link, "Councillor Contributions").click
+
+      expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council Yes Yes"
+    end
+
+    context "and accepted" do
+      before { councillor_contribution.update(accepted: true) }
+
+      it "and marks one as not accepted" do
+        click_link "View"
+
+        click_button("Mark as not accepted")
+
+        first(:link, "Councillor Contributions").click
+
+        expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council Yes No"
+      end
+
+      it "marking it as not reviewed also marks it not accepted" do
+        click_link "View"
+
+        click_button("Mark as not reviewed")
+
+        first(:link, "Councillor Contributions").click
+
+        expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council No No"
+      end
     end
   end
 end

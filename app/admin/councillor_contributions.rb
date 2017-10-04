@@ -6,6 +6,7 @@ ActiveAdmin.register CouncillorContribution do
     column :created_at
     column :authority
     column :reviewed
+    column :accepted
 
     actions
   end
@@ -32,6 +33,14 @@ ActiveAdmin.register CouncillorContribution do
 
   member_action :toggle_reviewed, method: :patch do
     resource.toggle("reviewed")
+    resource.accepted = false unless resource.reviewed?
+    resource.save!
+
+    redirect_to({action: :show})
+  end
+
+  member_action :toggle_accepted, method: :patch do
+    resource.toggle("accepted")
     resource.save!
 
     redirect_to({action: :show})
@@ -39,6 +48,12 @@ ActiveAdmin.register CouncillorContribution do
 
   action_item :toggle_reviewed, only: [:show] do
     button_to "Mark as #{"not " if resource.reviewed}reviewed", toggle_reviewed_admin_councillor_contribution_path, method: :patch
+  end
+
+  action_item :toggle_reviewed, only: [:show] do
+    if resource.reviewed
+      button_to "Mark as #{"not " if resource.accepted}accepted", toggle_accepted_admin_councillor_contribution_path, method: :patch
+    end
   end
 
   permit_params :contributor, :created_at, :authority, :suggested_councillors_id, :reviewed
