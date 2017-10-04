@@ -33,6 +33,7 @@ ActiveAdmin.register CouncillorContribution do
 
   member_action :toggle_reviewed, method: :patch do
     resource.toggle("reviewed")
+    resource.accepted = false unless resource.reviewed?
     resource.save!
 
     redirect_to({action: :show})

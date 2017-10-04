@@ -97,6 +97,16 @@ feature "Admin views councillor contributions" do
 
         expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council Yes No"
       end
+
+      it "marking it as not reviewed also marks it not accepted" do
+        click_link "View"
+
+        click_button("Mark as not reviewed")
+
+        first(:link, "Councillor Contributions").click
+
+        expect(page).to have_content "Felix Chaung August 01, 2017 11:34 Casey City Council No No"
+      end
     end
   end
 end
