@@ -78,7 +78,7 @@ feature "Admin views councillor contributions" do
     it "and marks it as accepted" do
       click_link "View"
 
-      click_button("Mark as Accepted")
+      click_button("Mark as accepted")
 
       first(:link, "Councillor Contributions").click
 
