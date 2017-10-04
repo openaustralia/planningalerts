@@ -6,6 +6,7 @@ ActiveAdmin.register CouncillorContribution do
     column :created_at
     column :authority
     column :reviewed
+    column :accepted
 
     actions
   end
