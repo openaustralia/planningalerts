@@ -372,6 +372,8 @@ You should see that some applications have already been collected. If not wait a
 
 If all looks good then thank the contributor for helping tens of thousands of people get PlanningAlerts by tweeting about it from @PlanningAlerts. It's always fun to @mention the council too, sometimes we get a RT :grinning:
 
+>We've just added @BellingenShire thanks to @LoveMyData. Another 12,886 people can now get PlanningAlerts!
+
 ## Contributing
 
 * Fork the project on GitHub.
