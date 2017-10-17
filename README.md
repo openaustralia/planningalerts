@@ -346,7 +346,7 @@ The first step is to fork their repository into the @planningalerts-scrapers org
 
 Once you've done that add it to morph and do an initial scrape to get some data. It's always a good idea to check that the scraper is getting the data we expect. Just like you'd do if someone had fixed a scraper and opened a pull request.
 
-Speaking of pull requests, because we've forked the scraper GitHub turns off issues on forked repositories. It's a good idea to switch it back on for ours so that other people can open issues and pull requests against the `planningalerts-scrapers` repository.
+Speaking of pull requests, because we've forked the scraper GitHub turns off issues on forked repositories. It's a good idea to switch it back on for ours so that other people can open issues and pull requests against the @planningalerts-scrapers repository.
 
 Now that we have a working scraper and some data we can add the new authority to PlanningAlerts. First, log into the admin backend and browse to the authorities section:
 
