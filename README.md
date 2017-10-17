@@ -25,6 +25,7 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
       * [Integrating with WriteIt](#integrating-with-writeit)
     * [Processing councillor data contributions](#processing-councillor-data-contributions)
 * [Deployment](#deployment)
+  * [Adding a new authority](#adding-a-new-authority)
 * [Contributing](#contributing)
 * [Credits](#credits)
 * [License](#license)
@@ -336,6 +337,42 @@ In this case you'll need to set the `branch` variable after recipies are loaded 
 View more available Capistrano commands with:
 
     bundle exec cap --tasks
+
+### Adding a new authority
+
+Someone has just written a new scraper for PlanningAlerts, woohoo! :tada: Now we need to add it to the site.
+
+The first step is to fork their repository into the @planningalerts-scrapers organisation. This gives us control over the repository. If we didn't do that then the person could potentially inject bad data without us noticing. A more likely problem is that they go off and do something else and we have no control of the repository to fix things.
+
+Once you've done that add it to morph and do an initial scrape to get some data. It's always a good idea to check that the scraper is getting the data we expect. Just like you'd do if someone had fixed a scraper and opened a pull request.
+
+Speaking of pull requests, because we've forked the scraper GitHub turns off issues on forked repositories. It's a good idea to switch it back on for ours so that other people can open issues and pull requests against the @planningalerts-scrapers repository.
+
+Now that we have a working scraper and some data we can add the new authority to PlanningAlerts. First, log into the admin backend and browse to the authorities section:
+
+https://www.planningalerts.org.au/admin/authorities
+
+Click _New Authority_ in the top-right of the page. Now fill out all the details, here's what needs to go in each field:
+
+* Full name: The full name of the authority that's displayed throughout the site, e.g. Bellingen Shire Council
+* Short name: Used in the URL (must be unique), e.g. bellingen
+* State: Short version of the state the authority is in. Must be one of NSW, VIC, QLD, SA, WA, TAS, NT, ACT
+* Email: email address that comments get sent to. Try and find a specific DA comment address or failing that use the main contact email address for the council, e.g. da_comments@bellingen.nsw.gov.au
+* Website url: URL of the authority's website, e.g. http://www.bellingen.nsw.gov.au/
+* Population 2011: Look this up on Wikipedia. We use this on the about page to calculate how much of the population we cover.
+* Scraping, morph name: The morph name of the scraper you just forked, e.g. planningalerts-scrapers/bellingen
+
+Click _Create Authority_. Now scrape some applications so you can see them on the new authority page - click _Scrape_.
+
+(Unfortunately there's a bug that's making this take ages, FIXME: https://github.com/openaustralia/planningalerts/issues/1158)
+
+Visit the new authority page, e.g. https://www.planningalerts.org.au/authorities/bellingen/
+
+You should see that some applications have already been collected. If not wait a few seconds and refresh the page. Once you've got some do a quick check on a few by clicking _Brownse all recent applications_ and selecting a few. Make sure the comment form is visible (that means you set an email address).
+
+If all looks good then thank the contributor for helping tens of thousands of people get PlanningAlerts by tweeting about it from @PlanningAlerts. It's always fun to @mention the council too, sometimes we get a RT :grinning:
+
+>We've just added @BellingenShire thanks to @LoveMyData. Another 12,886 people can now get PlanningAlerts! e.g. https://www.planningalerts.org.au/applications/898071
 
 ## Contributing
 
