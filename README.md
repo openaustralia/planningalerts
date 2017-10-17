@@ -364,6 +364,8 @@ Click _New Authority_ in the top-right of the page. Now fill out all the details
 
 Click _Create Authority_. Now scrape some applications so you can see them on the new authority page - click _Scrape_.
 
+(Unfortunately there's a bug that's making this take ages, FIXME: https://github.com/openaustralia/planningalerts/issues/1158)
+
 Visit the new authority page, e.g. https://www.planningalerts.org.au/authorities/bellingen/
 
 You should see that some applications have already been collected. If not wait a few seconds and refresh the page. Once you've got some do a quick check on a few by clicking _Brownse all recent applications_ and selecting a few. Make sure the comment form is visible (that means you set an email address).
