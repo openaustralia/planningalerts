@@ -338,7 +338,7 @@ View more available Capistrano commands with:
 
     bundle exec cap --tasks
 
-### Adding a new authority to PlanningAlerts
+### Adding a new authority
 
 Someone has just written a new scraper for PlanningAlerts, woohoo! :tada: Now we need to add it to the site.
 
