@@ -30,6 +30,7 @@ elsif stage == "test"
 elsif stage == "development"
   server "planningalerts.org.au.dev", :app, :web, :db, primary: true
   set :deploy_to, "/srv/www/production"
+  set :app_name, "planningalerts"
 else
   raise "Unknown stage: #{stage}"
 end
