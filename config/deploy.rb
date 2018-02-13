@@ -29,7 +29,7 @@ elsif stage == "test"
   set :honeybadger_env, "staging"
 elsif stage == "development"
   server "planningalerts.org.au.dev", :app, :web, :db, primary: true
-  set :deploy_to, "/srv/www"
+  set :deploy_to, "/srv/www/production"
 else
   raise "Unknown stage: #{stage}"
 end
