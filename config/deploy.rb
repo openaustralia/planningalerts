@@ -40,6 +40,8 @@ end
 after "deploy:update", "newrelic:notice_deployment"
 
 before "deploy:restart", "foreman:restart"
+before "foreman:restart", "foreman:enable"
+before "foreman:enable", "foreman:export"
 
 namespace :deploy do
   desc "After a code update, we link additional config and the scrapers"
@@ -110,5 +112,11 @@ namespace :foreman do
   desc "Restart the application services"
   task :restart, roles: :app do
     sudo "systemctl restart #{app_name}.target"
+  end
+
+  # This only strictly needs to get run on the first deploy
+  desc "Enable the application services"
+  task :enable, roles: :app do
+    sudo "systemctl enable #{app_name}.target"
   end
 end
