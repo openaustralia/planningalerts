@@ -2,7 +2,7 @@ require 'new_relic/recipes'
 require 'bundler/capistrano'
 require 'delayed/recipes'
 set :stage, "test" unless exists? :stage
-if stage != "development"
+if stage != "development" && stage != "ec2"
   require 'rvm/capistrano'
   set :rvm_ruby_string, :local
 end
@@ -29,6 +29,10 @@ elsif stage == "test"
   set :honeybadger_env, "staging"
 elsif stage == "development"
   server "planningalerts.org.au.dev", :app, :web, :db, primary: true
+  set :deploy_to, "/srv/www/production"
+  set :app_name, "planningalerts"
+elsif stage == "ec2"
+  server "ec2.planningalerts.org.au", :app, :web, :db, primary: true
   set :deploy_to, "/srv/www/production"
   set :app_name, "planningalerts"
 else
