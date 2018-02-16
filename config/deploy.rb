@@ -2,10 +2,6 @@ require 'new_relic/recipes'
 require 'bundler/capistrano'
 require 'delayed/recipes'
 set :stage, "test" unless exists? :stage
-if stage != "development" && stage != "ec2"
-  require 'rvm/capistrano'
-  set :rvm_ruby_string, :local
-end
 
 # This adds a task that precompiles assets for the asset pipeline
 load 'deploy/assets'
@@ -19,20 +15,16 @@ set :scm, :git
 set :rails_env, "production" #added for delayed job
 
 if stage == "production"
-  server "kedumba.openaustraliafoundation.org.au", :app, :web, :db, primary: true
-  set :deploy_to, "/srv/www/www.#{application}"
+  server "planningalerts.org.au", :app, :web, :db, primary: true
+  set :deploy_to, "/srv/www/production"
   set :app_name, "planningalerts"
 elsif stage == "test"
-  server "kedumba.openaustraliafoundation.org.au", :app, :web, :db, primary: true
-  set :deploy_to, "/srv/www/test.#{application}"
+  server "planningalerts.org.au", :app, :web, :db, primary: true
+  set :deploy_to, "/srv/www/staging"
   set :app_name, "planningalerts-test"
   set :honeybadger_env, "staging"
 elsif stage == "development"
   server "planningalerts.org.au.dev", :app, :web, :db, primary: true
-  set :deploy_to, "/srv/www/production"
-  set :app_name, "planningalerts"
-elsif stage == "ec2"
-  server "ec2.planningalerts.org.au", :app, :web, :db, primary: true
   set :deploy_to, "/srv/www/production"
   set :app_name, "planningalerts"
 else
