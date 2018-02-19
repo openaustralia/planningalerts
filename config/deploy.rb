@@ -92,7 +92,7 @@ end
 namespace :foreman do
   desc "Export the Procfile to Ubuntu's upstart scripts"
   task :export, roles: :app do
-    run "cd #{current_path} && sudo bundle exec foreman export systemd /etc/systemd/system -u deploy -a #{app_name} -f Procfile.production -l #{shared_path}/log --root #{current_path}"
+    run "cd #{current_path} && sudo bundle exec foreman export systemd /etc/systemd/system -e .env.production -u deploy -a #{app_name} -f Procfile.production -l #{shared_path}/log --root #{current_path}"
   end
 
   desc "Start the application services"
