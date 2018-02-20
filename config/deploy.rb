@@ -48,6 +48,7 @@ namespace :deploy do
             "#{release_path}/.env.production"                   => "#{shared_path}/.env.production",
             "#{release_path}/config/production.sphinx.conf"     => "#{shared_path}/production.sphinx.conf",
             "#{release_path}/config/sphinx.yml"                 => "#{shared_path}/sphinx.yml",
+            "#{release_path}/config/newrelic.yml"               => "#{shared_path}/newrelic.yml",
             "#{release_path}/public/sitemap.xml"                => "#{shared_path}/sitemap.xml",
             "#{release_path}/public/sitemaps"                   => "#{shared_path}/sitemaps",
             "#{release_path}/public/assets"                     => "#{shared_path}/assets",
