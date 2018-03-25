@@ -54,7 +54,6 @@ gem "validate_url", "~> 0.2.2" # 1.0.0 causes failures like "Validation failed: 
 gem "twitter"
 gem "atdis"
 gem "oj"
-gem "redcarpet"
 gem 'honeybadger'
 gem 'stripe', "~> 1.57"
 gem 'dotenv-rails'
