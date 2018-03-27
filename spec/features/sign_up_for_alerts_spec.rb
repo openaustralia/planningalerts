@@ -39,7 +39,7 @@ feature "Sign up for alerts" do
 
     click_button("Create alert")
 
-    expect(page).to have_content("Please enter a full street address, including suburb and state, e.g. Bruce Rd, Millmerran QLD 4357")
+    expect(page).to have_content("Please enter a full street address, including suburb and state, e.g. Bruce Rd, Mount Martha VIC 3934")
   end
 
   context "via an application page" do
@@ -113,7 +113,7 @@ feature "Sign up for alerts" do
 
         fill_in "Enter a street address", with: "24 Bruce Road Glenb"
 
-        expect_autocomplete_suggestions_to_include "Bruce Road, Glenbrook, New South Wales"
+        expect_autocomplete_suggestions_to_include "24 Bruce Road, Glenbrook NSW"
       end
     end
   end
@@ -206,7 +206,7 @@ feature "Sign up for alerts" do
 
       fill_in "Enter a street address", with: "24 Bruce Road Glenb"
 
-      expect_autocomplete_suggestions_to_include "Bruce Road, Glenbrook, New South Wales"
+      expect_autocomplete_suggestions_to_include "Bruce Road, Glenbrook NSW"
     end
   end
 

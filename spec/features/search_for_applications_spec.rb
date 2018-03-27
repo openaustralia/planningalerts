@@ -33,7 +33,7 @@ feature "Searching for development application near an address" do
 
       fill_in "Enter a street address", with: "24 Bruce Road Glenb"
 
-      expect_autocomplete_suggestions_to_include "Bruce Road, Glenbrook, New South Wales"
+      expect_autocomplete_suggestions_to_include "Bruce Road, Glenbrook NSW"
     end
   end
 end
