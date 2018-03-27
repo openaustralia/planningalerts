@@ -39,7 +39,7 @@ feature "Sign up for alerts" do
 
     click_button("Create alert")
 
-    expect(page).to have_content("Please enter a full street address, including suburb and state, e.g. Bruce Rd, Mount Martha VIC 3934")
+    expect(page).to have_content("Please enter a full street address, including suburb and state, e.g. Bruce Rd, Millmerran QLD 4357")
   end
 
   context "via an application page" do
