@@ -1,11 +1,4 @@
 language: ruby
-rvm:
-  - 2.3
-
-before_install:
-  # Workaround an issue with bundler version on Ruby 2.1
-  # https://github.com/travis-ci/travis-ci/issues/3531
-  - gem install bundler
 
 before_script:
   - cp config/database.yml.example config/database.yml
