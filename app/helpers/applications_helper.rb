@@ -10,10 +10,6 @@ module ApplicationsHelper
     "#{display_description} #{application.address}"
   end
 
-  def static_google_map_url(options = {size: "512x512"})
-    "http://maps.google.com/maps/api/staticmap?center=#{CGI.escape(options[:address])}&zoom=14&size=#{options[:size]}&maptype=roadmap&markers=color:blue|label:#{CGI.escape(options[:address])}|#{CGI.escape(options[:address])}"
-  end
-
   def scraped_and_received_text(application)
     text = "We found this application for you on the planning authority's website #{time_ago_in_words(application.date_scraped)} ago. "
     if application.date_received
