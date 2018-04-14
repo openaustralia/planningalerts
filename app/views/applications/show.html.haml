@@ -18,20 +18,20 @@
 
       - if @application.location
         #map_div
-          %noscript= google_static_map(@application, size: "350x200")
-        %div.print-media-only= google_static_map(@application, size: "350x200")
+          %noscript= google_static_map(@application, size: "350x330")
+        %div.print-media-only= google_static_map(@application, size: "350x330")
 
       .details
         - if @application.location
           #pano
-            %noscript= google_static_streetview(@application, size: "350x200")
-            %div.print-media-oly= google_static_streetview(@application, size: "350x200")
+            %noscript= google_static_streetview(@application, size: "350x330")
+            %div.print-media-only= google_static_streetview(@application, size: "350x330")
 
 
-        %p.description= @application.description
-        = link_to @application.info_url, class: "button button-rounded", target: "_blank" do
-          = image_tag "external_link.png", size: "10x10"
-          Read more information
+      %p.description= @application.description
+      = link_to @application.info_url, class: "button button-rounded", target: "_blank" do
+        = image_tag "external_link.png", size: "10x10"
+        Read more information
 
       %footer
         %p.dates= scraped_and_received_text(@application)
