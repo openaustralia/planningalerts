@@ -69,7 +69,6 @@ group :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
   gem 'factory_girl'
   gem 'email_spec', '~> 1.6'
   gem 'coveralls', :require => false
@@ -102,6 +101,7 @@ end
 
 group :test, :development do
   gem 'rspec-rails', '~> 3'
+  gem 'factory_girl_rails'
 end
 
 group :production do
