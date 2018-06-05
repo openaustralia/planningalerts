@@ -77,18 +77,29 @@ module ApplicationsHelper
 
   # Version of google_static_map above that isn't tied into the implementation of Application
   def google_static_map2(options)
-    zoom = options[:zoom] || 16
     size = options[:size] || "350x200"
+    label = options[:label] || "Map"
+    image_tag(google_static_map_url(options), size: size, alt: label)
+  end
+
+  def google_static_map_url(options)
+    zoom = options[:zoom] || 16
     lat = options[:lat]
     lng = options[:lng]
-    label = options[:label] || "Map"
-    image_tag("https://maps.googleapis.com/maps/api/staticmap?zoom=#{zoom}&size=#{size}&maptype=roadmap&markers=color:red%7C#{lat},#{lng}".html_safe, size: size, alt: label)
+    size = options[:size] || "350x200"
+    google_signed_url(
+      "https://maps.googleapis.com",
+      "/maps/api/staticmap?zoom=#{zoom}&size=#{size}&maptype=roadmap&markers=color:red%7C#{lat},#{lng}"
+    )
   end
 
   def google_static_streetview_url(application, options)
     size = options[:size] || "350x200"
     fov = options[:fov] || 90
-    "https://maps.googleapis.com/maps/api/streetview?size=#{size}&location=#{application.lat},#{application.lng}&fov=#{fov}".html_safe
+    google_signed_url(
+      "https://maps.googleapis.com",
+      "/maps/api/streetview?size=#{size}&location=#{application.lat},#{application.lng}&fov=#{fov}"
+    )
   end
 
   def google_static_streetview(application, options)
@@ -97,6 +108,28 @@ module ApplicationsHelper
   end
 
   private
+
+  def google_signed_url(domain, path)
+    client_id = ENV['GOOGLE_MAPS_CLIENT_ID']
+    cryptographic_key = ENV['GOOGLE_MAPS_CRYPTOGRAPHIC_KEY']
+    if client_id.present?
+      signature = sign_gmap_bus_api_url(path + "&client=#{client_id}" , cryptographic_key)
+      (domain + path + "&client=#{client_id}&signature=#{signature}").html_safe
+    else
+      (domain + path).html_safe
+    end
+  end
+
+  # This code comes from Googles Examples
+  # http://gmaps-samples.googlecode.com/svn/trunk/urlsigning/urlsigner.rb
+  def sign_gmap_bus_api_url(urlToSign, google_cryptographic_key)
+    # Decode the private key
+    rawKey = Base64.decode64(google_cryptographic_key.tr('-_', '+/'))
+    # create a signature using the private key and the URL
+    rawSignature = OpenSSL::HMAC.digest('sha1', rawKey, urlToSign)
+    # encode the signature into base64 for url use form.
+    Base64.encode64(rawSignature).tr('+/', '-_').gsub(/\n/, '')
+  end
 
   # TODO: extract to theme
   def api_host
