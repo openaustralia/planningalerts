@@ -164,11 +164,6 @@ describe Application do
       expect(a.lat).to be_nil
       expect(a.lng).to be_nil
     end
-
-    it "should set the url for showing the address on a google map" do
-      a = build(:application, address: "24 Bruce Road, Glenbrook, NSW", council_reference: "r1", date_scraped: Time.now)
-      expect(a.map_url).to eq("http://maps.google.com/maps?q=24+Bruce+Road%2C+Glenbrook%2C+NSW&z=15")
-    end
   end
 
   describe "collecting applications from the scraperwiki web service url" do

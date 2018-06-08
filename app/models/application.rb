@@ -100,12 +100,6 @@ class Application < ActiveRecord::Base
     end
   end
 
-  # TODO: This is very similar to the method in the api_howto_helper. Maybe they should be together?
-  def map_url
-    zoom = 15
-    "http://maps.google.com/maps?q=#{CGI.escape(address)}&z=#{zoom}";
-  end
-
   def description
     description = read_attribute(:description)
     if description
