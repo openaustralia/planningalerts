@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe ApiHowtoHelper do
-  it "should return the url for mapping arbitrary georss feed on Google maps" do
-    expect(helper.mapify("http://foo.com", 4)).to eq("http://maps.google.com/maps?f=q&hl=en&layer=&ie=UTF8&z=4&om=1&q=http%3A%2F%2Ffoo.com")
-  end
-
   it "should provide urls of examples of use of the api" do
     expect(helper.api_example_address_url("js", nil)).to eq("http://api.planningalerts.org.au/applications.js?address=24+Bruce+Road+Glenbrook%2C+NSW+2773&radius=4000")
     expect(helper.api_example_latlong_url("js", nil)).to eq("http://api.planningalerts.org.au/applications.js?lat=-33.772609&lng=150.624263&radius=4000")
