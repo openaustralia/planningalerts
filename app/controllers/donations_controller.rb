@@ -30,7 +30,7 @@ class DonationsController < ApplicationController
     flash[:error] = e.message
     redirect_to new_donation_path
   rescue ActiveRecord::RecordInvalid
-    flash[:error] = "Sorry, we weren't able to process your donation. This may be because you already have a monthly subscription and we don't want to charge you twice! <a href='mailto:contact@planningalerts' title='Email the PlanningAlerts Team'>Please email us at contact@planningalerts</a> and we'll sort it out. Thanks for your support and patience.".html_safe
+    flash[:error] = "Sorry, we weren't able to process your donation. This may be because you already have a monthly donation set up and we don't want to charge you twice! <a href='mailto:contact@planningalerts' title='Email the PlanningAlerts Team'>Please email us at contact@planningalerts</a> and we'll sort it out. Thanks for your support and patience.".html_safe
     redirect_to new_donation_path
   end
 
