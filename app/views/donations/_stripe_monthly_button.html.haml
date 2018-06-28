@@ -4,8 +4,9 @@
 
 %input{type: 'hidden', name: 'stripeEmail', value: email}
 %input{type: 'hidden', name: 'stripeToken', value: ""}
+%input{type: 'hidden', name: 'stripeMonthly', value: "monthly"}
 -# TODO: Set amount to what we want
-%button{type: 'submit', class: "button-action", disabled: true, id: "button-pro-signup", data: {key: ENV["STRIPE_PUBLISHABLE_KEY"], amount: price_in_cents(price), email: email}}
+%button{type: 'submit', class: "button-action", disabled: true, id: "button-pro-signup", data: {key: ENV["STRIPE_PUBLISHABLE_KEY"], amount: price_in_cents(price), email: email, monthly: true}}
   Donate each month
 %p.no-js-message
   Our donation form requires javascript from our secure payment processor stripe.com.

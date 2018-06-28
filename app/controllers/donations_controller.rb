@@ -18,8 +18,9 @@ class DonationsController < ApplicationController
     # TODO: This step should probably be extracted into the creation of donations.
     #       Do we want to create a donation that isn't synced with stripe?
     donation.send_donation_to_stripe_and_store_ids(
-      params[:stripeToken], params[:amount]
+      params[:stripeToken], params[:amount], params[:stripeMonthly]
     )
+
 
     # TODO: rescue and redirect to new on attempt to reload the create page
     # which tries to reuse the token again and errors.
@@ -28,7 +29,7 @@ class DonationsController < ApplicationController
     flash[:error] = e.message
     redirect_to new_donation_path
   rescue ActiveRecord::RecordInvalid
-    flash[:error] = "Sorry, we weren't able to process your donation. <a href='mailto:contact@planningalerts' title='Email the PlanningAlerts Team'>Please email us at contact@planningalerts</a> and we'll sort it out. Thanks for your support and patience.".html_safe
+    flash[:error] = "Sorry, we weren't able to process your donation. This may be because you already have a monthly subscription and we don't want to charge you twice! <a href='mailto:contact@planningalerts' title='Email the PlanningAlerts Team'>Please email us at contact@planningalerts</a> and we'll sort it out. Thanks for your support and patience.".html_safe
     redirect_to new_donation_path
   end
 
