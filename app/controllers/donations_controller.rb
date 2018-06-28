@@ -17,6 +17,7 @@ class DonationsController < ApplicationController
 
     # TODO: This step should probably be extracted into the creation of donations.
     #       Do we want to create a donation that isn't synced with stripe?
+    puts params
     donation.send_donation_to_stripe_and_store_ids(
       params[:stripeToken], params[:amount], params[:stripeMonthly]
     )

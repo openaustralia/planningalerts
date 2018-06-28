@@ -17,10 +17,12 @@ class Donation < ActiveRecord::Base
       
     unless stripe_plan_id.eql? Donation.plan_id_on_stripe
       errors.add(:stripe_plan_id, "does not match our know active stripe plan #{Donation.plan_id_on_stripe}")
+      puts errors
     end
   end
 
   def create_stripe_customer(stripe_token)
+    puts "creating customer"
     Stripe::Customer.create(
       email: email,
       source: stripe_token,
@@ -29,6 +31,7 @@ class Donation < ActiveRecord::Base
   end
 
   def create_stripe_charge(stripe_customer, amount)
+    puts "creating charge for #{amount}"
     Stripe::Charge.create(
       :amount => amount.to_i * 100,
       :currency => 'AUD',
@@ -38,6 +41,7 @@ class Donation < ActiveRecord::Base
   end
   
   def create_stripe_subscription(stripe_customer, amount)
+    puts "creating subscription"
     stripe_customer.subscriptions.create(
       plan: stripe_plan_id,
       quantity: amount
