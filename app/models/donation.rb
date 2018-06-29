@@ -21,12 +21,18 @@ class Donation < ActiveRecord::Base
     end
   end
 
-  def create_stripe_customer(stripe_token)
-    puts "creating customer"
+  def create_stripe_customer(stripe_token, monthly)
+    if monthly
+      puts "Creating customer for regular donation"
+      customer_description = "PlanningAlerts subscriber"
+    else
+      puts "Creating customer for once-off donation"
+      customer_description = "PlanningAlerts donor"
+    end
     Stripe::Customer.create(
       email: email,
       source: stripe_token,
-      description: "PlanningAlerts subscriber"
+      description: customer_description
     )
   end
 
@@ -41,7 +47,7 @@ class Donation < ActiveRecord::Base
   end
   
   def create_stripe_subscription(stripe_customer, amount)
-    puts "creating subscription"
+    puts "creating subscription for #{amount}"
     stripe_customer.subscriptions.create(
       plan: stripe_plan_id,
       quantity: amount
@@ -49,14 +55,16 @@ class Donation < ActiveRecord::Base
   end
 
   def send_donation_to_stripe_and_store_ids(stripe_token, amount, monthly = true)
-    stripe_customer = create_stripe_customer(stripe_token)
+    stripe_customer = create_stripe_customer(stripe_token, monthly)
     if monthly
+      puts "Monthly #{monthly} => Subscription"
       stripe_subscription = create_stripe_subscription(stripe_customer, amount)
       update!(
         stripe_subscription_id: stripe_subscription.id,
         stripe_customer_id: stripe_customer.id
       )
     else
+      puts "Monthly #{monthly} => Charge"
       stripe_charge = create_stripe_charge(stripe_customer, amount)
       update!(
         stripe_subscription_id: stripe_charge.id,

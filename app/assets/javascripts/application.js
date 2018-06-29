@@ -14,21 +14,23 @@ $("#menu .toggle").click(function(){
 
 function updateFormAmount(new_amount) {
   $('#button-pro-signup').attr("data-amount", new_amount * 100);
-  $('#button-pro-donation').attr("data-amount", new_amount * 100);
 
   if (parseInt(new_amount) < 1 || new_amount == "" ) {
-    $('#button-pro-signup').text("Donate each month");
-    $('#button-pro-donation').text("Donate once");
+    amount_text = "Donate";
   } else {
-    $('#button-pro-signup').text("Donate $" + new_amount + " each month");
-    $('#button-pro-donation').text("Donate $" + new_amount + " once");
+   amount_text = "Donate $" + new_amount;
   };
+  if ($('#monthly').prop("checked")) {
+    amount_text = amount_text + " each month";
+  } else {
+    amount_text = amount_text + " once";
+  };
+  $('#button-pro-signup').text(amount_text);
 };
 
 if ($("#button-pro-signup").length && typeof(StripeCheckout) === "object") {
   $('#button-pro-signup').prop("disabled", "false");
   $('#button-pro-signup + .no-js-message').addClass("hide");
-  $('#button-pro-donation').prop("disabled", "false");
 
   if ($('.amount-setter-input input').length) {
     updateFormAmount($('.amount-setter-input input').val());
@@ -38,11 +40,12 @@ if ($("#button-pro-signup").length && typeof(StripeCheckout) === "object") {
 
       if ($(this).val() < 1) {
         $('#button-pro-signup').prop("disabled", true);
-        $('#button-pro-donation').prop("disabled", true);
       } else {
         $('#button-pro-signup').prop("disabled", false);
-        $('#button-pro-donation').prop("disabled", false);
       };
+    });
+    $('#monthly').bind('change', function() {
+      updateFormAmount($('.amount-setter-input input').val());
     });
   }
 
@@ -54,25 +57,13 @@ if ($("#button-pro-signup").length && typeof(StripeCheckout) === "object") {
 
   email = $('#button-pro-signup').attr("data-email");
 
-  var monthly_handler = StripeCheckout.configure({
+  var handler = StripeCheckout.configure({
     key: public_key,
     token: function(response) {
       var tokenInput = $("<input type=hidden name=stripeToken />").val(response.id);
       var emailInput = $("<input type=hidden name=stripeEmail />").val(response.email);
       $("#donation-payment-form").append(tokenInput).append(emailInput).submit();
       $('#button-pro-signup').fadeOut('fast', function() {
-        var processingNotice = $("<p class='form-processing'>Processing ...</p>").fadeIn('slow');
-        $("#donation-payment-form").append(processingNotice);
-      });
-    }
-  });
-  var once_handler = StripeCheckout.configure({
-    key: public_key,
-    token: function(response) {
-      var tokenInput = $("<input type=hidden name=stripeToken />").val(response.id);
-      var emailInput = $("<input type=hidden name=stripeEmail />").val(response.email);
-      $("#donation-payment-form").append(tokenInput).append(emailInput).submit();
-      $('#button-pro-donation').fadeOut('fast', function() {
         var processingNotice = $("<p class='form-processing'>Processing ...</p>").fadeIn('slow');
         $("#donation-payment-form").append(processingNotice);
       });
@@ -89,36 +80,15 @@ if ($("#button-pro-signup").length && typeof(StripeCheckout) === "object") {
       currency: 'AUD',
       panelLabel: "Donate {{amount}}/mo"
     };
+    if ($("#monthly")) {formOptions.panelLabel = "Donate {{amount}}"};
     if (typeof email !== "undefined") { formOptions.email = email };
 
     // Open Checkout with further options
-    monthly_handler.open(formOptions);
+    handler.open(formOptions);
     e.preventDefault();
-  });
-
-  $('#button-pro-donation').on('click', function(e) {
-    amount = $('#button-pro-donation').attr("data-amount");
-    
-    formOptions = {
-      image: '/assets/street_map.png',
-      name: 'PlanningAlerts',
-      amount: parseInt(amount),
-      currency: 'AUD',
-      panelLabel: "Donate {{amount}}"
-    };
-    if (typeof email !== "undefined") { formOptions.email = email };
-
-    // Open Checkout with further options
-    once_handler.open(formOptions);
-    e.preventDefault();
-  });
-  // Close Checkout on page navigation
-  $(window).on('popstate', function() {
-    once_handler.close();
-    monthly_handler.close();
   });
 
   // enable the button
   $('#button-pro-signup').attr('disabled', false);
-  $('#button-pro-donation').attr('disabled', false);
+
 }
