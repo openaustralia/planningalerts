@@ -93,27 +93,27 @@ end
 namespace :foreman do
   desc "Export the Procfile to Ubuntu's upstart scripts"
   task :export, roles: :app do
-    run "cd #{current_path} && sudo bundle exec foreman export systemd /etc/systemd/system -e .env.production -u deploy -a #{app_name} -f Procfile.production -l #{shared_path}/log --root #{current_path}"
+    run "cd #{current_path} && sudo bundle exec foreman export systemd /etc/systemd/system -e .env.production -u deploy -a #{app_name}-#{fetch(:stage)} -f Procfile.production -l #{shared_path}/log --root #{current_path}"
   end
 
   desc "Start the application services"
   task :start, roles: :app do
-    sudo "systemctl enable #{app_name}.target"
+    sudo "systemctl enable #{app_name}-#{fetch(:stage)}.target"
   end
 
   desc "Stop the application services"
   task :stop, roles: :app do
-    sudo "systemctl stop #{app_name}.target"
+    sudo "systemctl stop #{app_name}-#{fetch(:stage)}.target"
   end
 
   desc "Restart the application services"
   task :restart, roles: :app do
-    sudo "systemctl restart #{app_name}.target"
+    sudo "systemctl restart #{app_name}-#{fetch(:stage)}.target"
   end
 
   # This only strictly needs to get run on the first deploy
   desc "Enable the application services"
   task :enable, roles: :app do
-    sudo "systemctl enable #{app_name}.target"
+    sudo "systemctl enable #{app_name}-#{fetch(:stage)}.target"
   end
 end
