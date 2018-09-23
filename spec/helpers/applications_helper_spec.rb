@@ -200,6 +200,7 @@ describe ApplicationsHelper do
     describe "static maps" do
       before :each do
         allow(@application).to receive(:address).and_return("Foo Road, NSW")
+        allow(ENV).to receive(:[]).with("GOOGLE_MAPS_CLIENT_ID").and_return(Nil)
         allow(ENV).to receive(:[]).with("GOOGLE_MAPS_API_KEY").and_return("123456789012345678901234567=")
       end
 
@@ -209,7 +210,7 @@ describe ApplicationsHelper do
           "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=350x200&maptype=roadmap&markers=color:red%7C1.0,2.0&client=abc&signature=UT70D_1Q-u5dLxy5pENnThfA6cI=\" width=\"350\" height=\"200\" />"
         )
         expect(helper.google_static_map(@application, size: "100x100", zoom: 14)).to eq(
-          "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?zoom=14&size=100x100&maptype=roadmap&markers=color:red%7C1.0,2.0&key=123456789012345678901234567=" width=\"100\" height=\"100\" />"
+          "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?zoom=14&size=100x100&maptype=roadmap&markers=color:red%7C1.0,2.0&key=123456789012345678901234567=\" width=\"100\" height=\"100\" />"
         )
       end
     end
@@ -217,6 +218,7 @@ describe ApplicationsHelper do
     describe "static streetview" do
       before :each do
         allow(@application).to receive(:address).and_return("Foo Road, NSW")
+        allow(ENV).to receive(:[]).with("GOOGLE_MAPS_CLIENT_ID").and_return(Nil)
         allow(ENV).to receive(:[]).with("GOOGLE_MAPS_API_KEY").and_return("abc")
         allow(ENV).to receive(:[]).with("GOOGLE_MAPS_CRYPTOGRAPHIC_KEY").and_return("123456789012345678901234567=")
       end
