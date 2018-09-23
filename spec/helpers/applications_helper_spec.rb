@@ -209,7 +209,7 @@ describe ApplicationsHelper do
           "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=350x200&maptype=roadmap&markers=color:red%7C1.0,2.0&client=abc&signature=UT70D_1Q-u5dLxy5pENnThfA6cI=\" width=\"350\" height=\"200\" />"
         )
         expect(helper.google_static_map(@application, size: "100x100", zoom: 14)).to eq(
-          "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?zoom=14&size=100x100&maptype=roadmap&markers=color:red%7C1.0,2.0&key=123456789012345678901234567=" width=\"100\" height=\"100\" />"
+          "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?zoom=14&size=100x100&maptype=roadmap&markers=color:red%7C1.0,2.0&key=123456789012345678901234567=\" width=\"100\" height=\"100\" />"
         )
       end
     end
