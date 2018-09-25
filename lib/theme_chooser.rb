@@ -37,8 +37,8 @@ class DefaultTheme < Theme
     ENV["GOOGLE_ANALYTICS_KEY"]
   end
 
-  def google_maps_client_id
-    ENV["GOOGLE_MAPS_CLIENT_ID"]
+  def google_maps_api_key
+    ENV["GOOGLE_MAPS_API_KEY"]
   end
 
 # TODO Put this in the config

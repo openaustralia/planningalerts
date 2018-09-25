@@ -31,8 +31,8 @@ if defined? Geokit
 	if ENV["GOOGLE_MAPS_CLIENT_ID"]
 		Geokit::Geocoders::google_client_id = ENV["GOOGLE_MAPS_CLIENT_ID"]
 		Geokit::Geocoders::google_cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
-    elsif ENV["GOOGLE_MAPS_API_KEY"]
-      Geokit::Geocoders::google = ENV["GOOGLE_API_KEY"]
+    elsif ENV["GOOGLE_MAPS_SERVER_KEY"]
+      Geokit::Geocoders::google = ENV["GOOGLE_MAPS_SERVER_KEY"]
       Geokit::Geocoders::google_cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
     end
 	# This is your username and password for geocoder.us.
