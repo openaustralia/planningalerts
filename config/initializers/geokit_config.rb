@@ -33,6 +33,7 @@ if defined? Geokit
 		Geokit::Geocoders::google_cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
     elsif ENV["GOOGLE_MAPS_API_KEY"]
       Geokit::Geocoders::google = ENV["GOOGLE_API_KEY"]
+      Geokit::Geocoders::google_cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
     end
 	# This is your username and password for geocoder.us.
 	# To use the free service, the value can be set to nil or false.  For
