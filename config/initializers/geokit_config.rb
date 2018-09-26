@@ -35,6 +35,7 @@ if defined? Geokit
       Geokit::Geocoders::google = ENV["GOOGLE_MAPS_SERVER_KEY"]
       Geokit::Geocoders::google_cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
     end
+    Geokit::Geocoders::logger.level=Logger::DEBUG
 	# This is your username and password for geocoder.us.
 	# To use the free service, the value can be set to nil or false.  For
 	# usage tied to an account, the value should be set to username:password.
