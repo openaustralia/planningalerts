@@ -56,7 +56,7 @@ describe "alert_notifier/alert.html.haml" do
     it "includes the comment" do
       render
 
-      expect(rendered).to have_content("Matthew Landauer wrote to local councillor Louise Councillor")
+      expect(rendered).to have_content("Matthew Landauer\nwrote to\n\nlocal councillor\nLouise Councillor")
     end
 
     context "and it has not be replied to" do
@@ -99,7 +99,7 @@ describe "alert_notifier/alert.html.haml" do
       render
     end
 
-    it { expect(rendered).to have_content "Local councillor Louise Councillor replied to Matthew Landauer"}
+    it { expect(rendered).to have_content "Local councillor Louise Councillor\nreplied to\n\nMatthew Landauer"}
 
     it "renders linebreak formatting into html" do
       expect(rendered).to include(

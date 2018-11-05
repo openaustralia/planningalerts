@@ -65,7 +65,7 @@ describe CommentNotifier do
   end
 
   describe "#notify_councillor" do
-    let(:comment_text) { "It's a good thing.\n\nOh yes it is." }
+    let(:comment_text) { "It's a good thing.\r\n\r\nOh yes it is." }
     let(:comment) do
       VCR.use_cassette('planningalerts') do
         application = create(:application, council_reference: "X/001", address: "24 Bruce Road Glenbrook")

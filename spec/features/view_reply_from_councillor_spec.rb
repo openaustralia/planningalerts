@@ -21,7 +21,7 @@ feature "View a reply from a councillor" do
     visit application_path(comment.application)
 
     expect(page).to have_content("Richard Pope wrote to local councillor Louise Councillor")
-    expect(page).to have_content("Louise Councillor local councillor for City of Sydney replied to Richard Pope")
+    expect(page).to have_content("Louise Councillor local councillor for City of Sydney\nreplied to Richard Pope")
   end
 
   context "when they are not one of the authority's current councillors" do
@@ -33,7 +33,7 @@ feature "View a reply from a councillor" do
       visit application_path(comment.application)
 
       expect(page).to have_content("Richard Pope wrote to local councillor Louise Councillor")
-      expect(page).to have_content("Louise Councillor local councillor for City of Sydney replied to Richard Pope")
+      expect(page).to have_content("Louise Councillor local councillor for City of Sydney\nreplied to Richard Pope")
     end
   end
 end

@@ -172,7 +172,7 @@ Cillum ethnic single-origin coffee labore, sriracha fixie jean shorts freegan. O
       alert = build(:alert, address: "123 Lovely St, La La")
       email = AlertNotifier.new_signup_attempt_notice(alert)
 
-      expect(email.html_part.body.to_s).to have_content "We just received a new request to send PlanningAlerts for 123 Lovely St, La La to your email address."
+      expect(email.html_part.body.to_s).to have_content "We just received a new request to send PlanningAlerts for 123 Lovely St, La La\nto your email address."
       expect(email.text_part.body.to_s).to have_content "We just received a new request to send PlanningAlerts for 123 Lovely St, La La to your email address."
     end
   end

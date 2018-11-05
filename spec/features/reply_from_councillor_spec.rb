@@ -104,6 +104,6 @@ feature "Commenter is notified of the councillors reply" do
     expect(current_email).to have_body_text reply_text
 
     click_first_link_in_email
-    expect(page).to have_content "Louise Councillor local councillor for Marrickville Council replied to Matthew Landauer"
+    expect(page).to have_content "Louise Councillor local councillor for Marrickville Council\nreplied to Matthew Landauer"
   end
 end
