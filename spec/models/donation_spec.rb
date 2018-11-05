@@ -34,13 +34,13 @@ describe Donation do
 
     describe "#send_customer_to_stripe" do
       it "creates a stripe customer with the donation’s attributes" do
-        stripe_customer = donation.create_stripe_customer(valid_stripe_token, false)
+        stripe_customer = donation.create_stripe_customer(valid_stripe_token)
 
         expect(stripe_customer.email).to eql "jenny@local.org"
       end
 
       it "returns a stripe customer object" do
-        stripe_customer = donation.create_stripe_customer(valid_stripe_token, false)
+        stripe_customer = donation.create_stripe_customer(valid_stripe_token)
 
         expect(stripe_customer.class).to eql Stripe::Customer
       end
