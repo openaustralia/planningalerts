@@ -16,11 +16,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require "email_spec"
 require 'rspec/active_model/mocks'
-require 'capybara/poltergeist'
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, { js_errors: false })
-end
-Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :selenium_chrome_headless
+Capybara.server = :webrick
 
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/fixtures/vcr_cassettes'

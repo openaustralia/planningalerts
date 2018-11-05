@@ -98,18 +98,21 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    capybara (2.4.4)
-      mime-types (>= 1.16)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (~> 2.0)
+    capybara (3.10.1)
+      addressable
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (~> 1.2)
+      xpath (~> 3.2)
     celluloid (0.16.0)
       timers (~> 4.0.0)
+    childprocess (0.9.0)
+      ffi (~> 1.0, >= 1.0.11)
     chunky_png (1.3.8)
     climate_control (0.0.3)
       activesupport (>= 3.0)
-    cliver (0.3.2)
     coderay (1.1.1)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -284,6 +287,7 @@ GEM
     method_source (0.8.2)
     middleware (0.1.0)
     mime-types (2.99.3)
+    mini_mime (1.0.1)
     mini_portile2 (2.3.0)
     minitest (5.10.1)
     multi_json (1.13.1)
@@ -300,7 +304,7 @@ GEM
     net-ssh-gateway (2.0.0)
       net-ssh (>= 4.0.0)
     newrelic_rpm (4.8.0.341)
-    nokogiri (1.8.2)
+    nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     nokogumbo (1.5.0)
       nokogiri
@@ -311,10 +315,6 @@ GEM
     orm_adapter (0.5.0)
     parser (2.4.0.0)
       ast (~> 2.2)
-    poltergeist (1.12.0)
-      capybara (~> 2.1)
-      cliver (~> 0.3.1)
-      websocket-driver (>= 0.2.0)
     polyamorous (1.3.1)
       activerecord (>= 3.0)
     powerpack (0.1.1)
@@ -378,6 +378,7 @@ GEM
     redcarpet (3.4.0)
     ref (2.0.0)
     refills (0.1.0)
+    regexp_parser (1.2.0)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
     rest-client (1.6.7)
@@ -418,6 +419,7 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.8.1)
+    rubyzip (1.2.2)
     rvm-capistrano (1.5.6)
       capistrano (~> 2.15.4)
     safe_yaml (1.0.4)
@@ -432,6 +434,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+    selenium-webdriver (3.141.0)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.2, >= 1.2.2)
     shellany (0.0.1)
     simple_oauth (0.3.1)
     simplecov (0.12.0)
@@ -523,12 +528,9 @@ GEM
     webmock (1.13.0)
       addressable (>= 2.2.7)
       crack (>= 0.3.2)
-    websocket-driver (0.6.4)
-      websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.2)
     will_paginate (3.1.5)
-    xpath (2.0.0)
-      nokogiri (~> 1.3)
+    xpath (3.2.0)
+      nokogiri (~> 1.8)
 
 PLATFORMS
   ruby
@@ -578,7 +580,6 @@ DEPENDENCIES
   newrelic_rpm
   nokogiri
   oj
-  poltergeist
   rabl
   rack-livereload
   rack-throttle
@@ -598,6 +599,7 @@ DEPENDENCIES
   rvm-capistrano
   sanitize
   sass-rails
+  selenium-webdriver
   spring
   spring-commands-rspec
   stripe (~> 1.57)
@@ -617,4 +619,4 @@ DEPENDENCIES
   writeit-rails!
 
 BUNDLED WITH
-   1.16.2
+   1.17.1
