@@ -106,8 +106,8 @@ describe Alert do
 
       VCR.use_cassette(:planningalerts) { alert.save! }
 
-      expect(alert.lat).to eq(-33.772607)
-      expect(alert.lng).to eq(150.624245)
+      expect(alert.lat).to eq(-33.7726179)
+      expect(alert.lng).to eq(150.6242341)
     end
 
     it "should replace the address with the full resolved address obtained by geocoding" do
@@ -115,7 +115,7 @@ describe Alert do
 
       VCR.use_cassette(:planningalerts) { alert.save! }
 
-      expect(alert.address).to eq("24 Bruce Road, Glenbrook NSW 2773")
+      expect(alert.address).to eq("24 Bruce Rd, Glenbrook NSW 2773")
     end
   end
 

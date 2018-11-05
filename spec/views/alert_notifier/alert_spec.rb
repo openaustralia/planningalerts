@@ -37,8 +37,8 @@ describe "alert_notifier/alert.html.haml" do
       render
     end
 
-    it { expect(rendered).to have_content("Matthew Landauer commented") }
-    it { expect(rendered).to have_content("On “Alterations & additions” at 24 Bruce Road Glenbrook") }
+    it { expect(rendered).to have_content("Matthew Landauer\ncommented") }
+    it { expect(rendered).to have_content("On\n“Alterations & additions” at 24 Bruce Road Glenbrook") }
   end
 
   context "when there is a comment to a councillor" do

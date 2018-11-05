@@ -116,7 +116,7 @@ feature "Sign up for alerts" do
 
         fill_in "Enter a street address", with: "24 Bruce Road Glenb"
 
-        expect_autocomplete_suggestions_to_include "24 Bruce Road, Glenbrook NSW"
+        expect_autocomplete_suggestions_to_include "Bruce Road, Glenbrook NSW"
       end
     end
   end
@@ -174,7 +174,7 @@ feature "Sign up for alerts" do
       open_last_email_for("jenny@email.org")
 
       expect(current_email.default_part_body.to_s).to have_content(
-        "We just received a new request to send PlanningAlerts for 24 Bruce Rd, Glenbrook NSW 2773 to your email address."
+        "We just received a new request to send PlanningAlerts for 24 Bruce Rd, Glenbrook NSW 2773\nto your email address."
       )
     end
 
