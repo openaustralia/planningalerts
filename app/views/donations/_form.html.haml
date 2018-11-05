@@ -7,11 +7,7 @@
           %i &#36;
           - # TODO: Add more helpful restrictions on input to make this as easy as possible
           = number_field_tag :amount, price, pattern: "[0-9]*", required: "required", min: 1, title: "Enter the number of dollars you’d like to donate monthly"
-  %fieldset.monthly-chooser
-    %label
-      %span.monthly-choser-label-text Repeat every month:
-      %span.monthly-chooser-container
-        %i= check_box_tag 'monthly', true
+        %span Per month
   %div= render partial: "stripe_button", locals: {email: email, price: price}
   %p.quiet.small
     Donations over $2 are

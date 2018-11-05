@@ -16,16 +16,10 @@ function updateFormAmount(new_amount) {
   $('#button-pro-signup').attr("data-amount", new_amount * 100);
 
   if (parseInt(new_amount) < 1 || new_amount == "" ) {
-    amount_text = "Donate";
+    $('#button-pro-signup').text("Donate each month");
   } else {
-   amount_text = "Donate $" + new_amount;
-  };
-  if ($('#monthly').prop("checked")) {
-    amount_text = amount_text + " each month";
-  } else {
-    amount_text = amount_text + " once";
-  };
-  $('#button-pro-signup').text(amount_text);
+    $('#button-pro-signup').text("Donate $" + new_amount + " each month");
+  }
 };
 
 if ($("#button-pro-signup").length && typeof(StripeCheckout) === "object") {
@@ -43,9 +37,6 @@ if ($("#button-pro-signup").length && typeof(StripeCheckout) === "object") {
       } else {
         $('#button-pro-signup').prop("disabled", false);
       };
-    });
-    $('#monthly').bind('change', function() {
-      updateFormAmount($('.amount-setter-input input').val());
     });
   }
 
@@ -80,7 +71,6 @@ if ($("#button-pro-signup").length && typeof(StripeCheckout) === "object") {
       currency: 'AUD',
       panelLabel: "Donate {{amount}}/mo"
     };
-    if ($("#monthly")) {formOptions.panelLabel = "Donate {{amount}}"};
     if (typeof email !== "undefined") { formOptions.email = email };
 
     // Open Checkout with further options
@@ -88,7 +78,11 @@ if ($("#button-pro-signup").length && typeof(StripeCheckout) === "object") {
     e.preventDefault();
   });
 
+  // Close Checkout on page navigation
+  $(window).on('popstate', function() {
+    handler.close();
+  });
+
   // enable the button
   $('#button-pro-signup').attr('disabled', false);
-
 }
