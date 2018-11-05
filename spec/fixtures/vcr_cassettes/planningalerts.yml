@@ -29719,4 +29719,1228 @@ http_interactions:
       string: ''
     http_version: 
   recorded_at: Tue, 26 Sep 2017 01:35:19 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=A%20test%20address&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 05 Nov 2018 22:55:37 GMT
+      Expires:
+      - Tue, 06 Nov 2018 22:55:37 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '65'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [],
+           "status" : "ZERO_RESULTS"
+        }
+    http_version: 
+  recorded_at: Tue, 05 Jan 2016 10:00:00 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=A%20test%20address&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 05 Nov 2018 22:55:37 GMT
+      Expires:
+      - Tue, 06 Nov 2018 22:55:37 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '65'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [],
+           "status" : "ZERO_RESULTS"
+        }
+    http_version: 
+  recorded_at: Tue, 05 Jan 2016 10:00:00 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=A%20test%20address&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 05 Nov 2018 22:55:37 GMT
+      Expires:
+      - Tue, 06 Nov 2018 22:55:37 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '65'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [],
+           "status" : "ZERO_RESULTS"
+        }
+    http_version: 
+  recorded_at: Tue, 05 Jan 2016 10:00:00 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=A%20test%20address&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 05 Nov 2018 22:55:37 GMT
+      Expires:
+      - Tue, 06 Nov 2018 22:55:37 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '65'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [],
+           "status" : "ZERO_RESULTS"
+        }
+    http_version: 
+  recorded_at: Tue, 05 Jan 2016 10:00:00 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=A%20test%20address&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 05 Nov 2018 22:55:38 GMT
+      Expires:
+      - Tue, 06 Nov 2018 22:55:38 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '65'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [],
+           "status" : "ZERO_RESULTS"
+        }
+    http_version: 
+  recorded_at: Tue, 05 Jan 2016 10:00:00 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=A%20test%20address&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 05 Nov 2018 22:55:38 GMT
+      Expires:
+      - Tue, 06 Nov 2018 22:55:38 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '65'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [],
+           "status" : "ZERO_RESULTS"
+        }
+    http_version: 
+  recorded_at: Tue, 05 Jan 2016 10:00:00 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=A%20test%20address&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 05 Nov 2018 22:55:38 GMT
+      Expires:
+      - Tue, 06 Nov 2018 22:55:38 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '65'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [],
+           "status" : "ZERO_RESULTS"
+        }
+    http_version: 
+  recorded_at: Tue, 05 Jan 2016 10:00:00 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=A%20test%20address&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 05 Nov 2018 22:55:39 GMT
+      Expires:
+      - Tue, 06 Nov 2018 22:55:39 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '65'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [],
+           "status" : "ZERO_RESULTS"
+        }
+    http_version: 
+  recorded_at: Tue, 05 Jan 2016 10:00:00 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=24%20Bruce%20Road%20Glenbrook&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 05 Nov 2018 22:55:40 GMT
+      Expires:
+      - Tue, 06 Nov 2018 22:55:40 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '565'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "24",
+                       "short_name" : "24",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Glenbrook",
+                       "short_name" : "Glenbrook",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Blue Mountains City Council",
+                       "short_name" : "Blue Mountains",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2773",
+                       "short_name" : "2773",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "24 Bruce Rd, Glenbrook NSW 2773, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -33.77256910000001,
+                          "lng" : 150.6242931
+                       },
+                       "southwest" : {
+                          "lat" : -33.7726639,
+                          "lng" : 150.6241947
+                       }
+                    },
+                    "location" : {
+                       "lat" : -33.7726179,
+                       "lng" : 150.6242341
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.7712675197085,
+                          "lng" : 150.6255928802915
+                       },
+                       "southwest" : {
+                          "lat" : -33.7739654802915,
+                          "lng" : 150.6228949197085
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJz5V26FaIEmsRT6oPpmmOwAk",
+                 "types" : [ "premise" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Mon, 05 Nov 2018 22:55:28 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=24%20Bruce%20Road,%20Glenbrook&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 05 Nov 2018 22:55:46 GMT
+      Expires:
+      - Tue, 06 Nov 2018 22:55:46 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '565'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "24",
+                       "short_name" : "24",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Glenbrook",
+                       "short_name" : "Glenbrook",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Blue Mountains City Council",
+                       "short_name" : "Blue Mountains",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2773",
+                       "short_name" : "2773",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "24 Bruce Rd, Glenbrook NSW 2773, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -33.77256910000001,
+                          "lng" : 150.6242931
+                       },
+                       "southwest" : {
+                          "lat" : -33.7726639,
+                          "lng" : 150.6241947
+                       }
+                    },
+                    "location" : {
+                       "lat" : -33.7726179,
+                       "lng" : 150.6242341
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.7712675197085,
+                          "lng" : 150.6255928802915
+                       },
+                       "southwest" : {
+                          "lat" : -33.7739654802915,
+                          "lng" : 150.6228949197085
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJz5V26FaIEmsRT6oPpmmOwAk",
+                 "types" : [ "premise" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Mon, 05 Nov 2018 22:55:34 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=Bruce%20Rd&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 05 Nov 2018 22:55:48 GMT
+      Expires:
+      - Tue, 06 Nov 2018 22:55:48 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '605'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Rd",
+                       "short_name" : "Bruce Rd",
+                       "types" : [
+                          "bus_station",
+                          "establishment",
+                          "point_of_interest",
+                          "transit_station"
+                       ]
+                    },
+                    {
+                       "long_name" : "Safety Beach",
+                       "short_name" : "Safety Beach",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Mornington Peninsula Shire",
+                       "short_name" : "Mornington Peninsula",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Victoria",
+                       "short_name" : "VIC",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "3936",
+                       "short_name" : "3936",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Safety Beach VIC 3936, Australia",
+                 "geometry" : {
+                    "location" : {
+                       "lat" : -38.3039488,
+                       "lng" : 145.0047086
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -38.3025998197085,
+                          "lng" : 145.0060575802915
+                       },
+                       "southwest" : {
+                          "lat" : -38.3052977802915,
+                          "lng" : 145.0033596197085
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJSTePgifF1WoRj3qt8CeCH_M",
+                 "plus_code" : {
+                    "compound_code" : "M2W3+CV Safety Beach, Victoria, Australia",
+                    "global_code" : "4RH7M2W3+CV"
+                 },
+                 "types" : [
+                    "bus_station",
+                    "establishment",
+                    "point_of_interest",
+                    "transit_station"
+                 ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Mon, 05 Nov 2018 22:55:36 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=24%20Bruce%20Rd,%20Glenbrook&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 05 Nov 2018 22:55:49 GMT
+      Expires:
+      - Tue, 06 Nov 2018 22:55:49 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '565'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "24",
+                       "short_name" : "24",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Glenbrook",
+                       "short_name" : "Glenbrook",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Blue Mountains City Council",
+                       "short_name" : "Blue Mountains",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2773",
+                       "short_name" : "2773",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "24 Bruce Rd, Glenbrook NSW 2773, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -33.77256910000001,
+                          "lng" : 150.6242931
+                       },
+                       "southwest" : {
+                          "lat" : -33.7726639,
+                          "lng" : 150.6241947
+                       }
+                    },
+                    "location" : {
+                       "lat" : -33.7726179,
+                       "lng" : 150.6242341
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.7712675197085,
+                          "lng" : 150.6255928802915
+                       },
+                       "southwest" : {
+                          "lat" : -33.7739654802915,
+                          "lng" : 150.6228949197085
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJz5V26FaIEmsRT6oPpmmOwAk",
+                 "types" : [ "premise" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Mon, 05 Nov 2018 22:55:37 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=26%20Bruce%20Rd,%20Glenbrook%20NSW%202773&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 05 Nov 2018 22:55:50 GMT
+      Expires:
+      - Tue, 06 Nov 2018 22:55:50 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '565'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "26",
+                       "short_name" : "26",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Glenbrook",
+                       "short_name" : "Glenbrook",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Blue Mountains City Council",
+                       "short_name" : "Blue Mountains",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2773",
+                       "short_name" : "2773",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "26 Bruce Rd, Glenbrook NSW 2773, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -33.7727249,
+                          "lng" : 150.6243278
+                       },
+                       "southwest" : {
+                          "lat" : -33.772868,
+                          "lng" : 150.624171
+                       }
+                    },
+                    "location" : {
+                       "lat" : -33.7727854,
+                       "lng" : 150.6242409
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.77144746970851,
+                          "lng" : 150.6255983802915
+                       },
+                       "southwest" : {
+                          "lat" : -33.7741454302915,
+                          "lng" : 150.6229004197085
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJ5_8A6VaIEmsR1nOBIhQUhYA",
+                 "types" : [ "premise" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Mon, 05 Nov 2018 22:55:38 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=24%20Bruce%20Rd,%20Glenbrook%20NSW%202773&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 05 Nov 2018 22:55:51 GMT
+      Expires:
+      - Tue, 06 Nov 2018 22:55:51 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '565'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "24",
+                       "short_name" : "24",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Glenbrook",
+                       "short_name" : "Glenbrook",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Blue Mountains City Council",
+                       "short_name" : "Blue Mountains",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2773",
+                       "short_name" : "2773",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "24 Bruce Rd, Glenbrook NSW 2773, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -33.77256910000001,
+                          "lng" : 150.6242931
+                       },
+                       "southwest" : {
+                          "lat" : -33.7726639,
+                          "lng" : 150.6241947
+                       }
+                    },
+                    "location" : {
+                       "lat" : -33.7726179,
+                       "lng" : 150.6242341
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.7712675197085,
+                          "lng" : 150.6255928802915
+                       },
+                       "southwest" : {
+                          "lat" : -33.7739654802915,
+                          "lng" : 150.6228949197085
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJz5V26FaIEmsRT6oPpmmOwAk",
+                 "types" : [ "premise" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Mon, 05 Nov 2018 22:55:39 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=24%20Bruce%20Rd,%20Glenbrook%20NSW%202773&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Mon, 05 Nov 2018 22:55:51 GMT
+      Expires:
+      - Tue, 06 Nov 2018 22:55:51 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '565'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "24",
+                       "short_name" : "24",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Glenbrook",
+                       "short_name" : "Glenbrook",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Blue Mountains City Council",
+                       "short_name" : "Blue Mountains",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2773",
+                       "short_name" : "2773",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "24 Bruce Rd, Glenbrook NSW 2773, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -33.77256910000001,
+                          "lng" : 150.6242931
+                       },
+                       "southwest" : {
+                          "lat" : -33.7726639,
+                          "lng" : 150.6241947
+                       }
+                    },
+                    "location" : {
+                       "lat" : -33.7726179,
+                       "lng" : 150.6242341
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.7712675197085,
+                          "lng" : 150.6255928802915
+                       },
+                       "southwest" : {
+                          "lat" : -33.7739654802915,
+                          "lng" : 150.6228949197085
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJz5V26FaIEmsRT6oPpmmOwAk",
+                 "types" : [ "premise" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Mon, 05 Nov 2018 22:55:39 GMT
 recorded_with: VCR 2.9.3
