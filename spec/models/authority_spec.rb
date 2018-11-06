@@ -173,7 +173,7 @@ describe Authority do
       let(:authority) { build(:authority) }
       it "should get the feed date only once" do
         expect(authority).to receive(:open_url_safe).once
-        authority.scraper_data_original_style("http://foo.com", Date.new(2001, 1, 1), Date.new(2001, 1, 3), double)
+        authority.scraper_data_original_style("http://foo.com", double)
       end
     end
   end

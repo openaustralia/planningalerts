@@ -86,7 +86,7 @@ class Authority < ActiveRecord::Base
 
   # Get all the scraper data for this authority and date in an array of attributes that can be used
   # creating applications
-  def scraper_data_original_style(feed_url, start_date, end_date, info_logger)
+  def scraper_data_original_style(feed_url, info_logger)
     feed_data = []
     text = open_url_safe(feed_url, info_logger)
 
@@ -122,8 +122,8 @@ class Authority < ActiveRecord::Base
     end
   end
 
-  def collect_unsaved_applications_date_range_original_style(feed_url, start_date, end_date, info_logger = logger)
-    d = scraper_data_original_style(feed_url, start_date, end_date, info_logger)
+  def collect_unsaved_applications_date_range_original_style(feed_url, info_logger = logger)
+    d = scraper_data_original_style(feed_url, info_logger)
     d.map do |attributes|
       applications.build(attributes)
     end
