@@ -3,5 +3,7 @@ addons:
 language: ruby
 
 before_script:
+  - wget http://chromedriver.storage.googleapis.com/2.9/chromedriver_linux64.zip
+  - unzip chromedriver_linux64.zip -d $HOME/bin
   - cp config/database.yml.example config/database.yml
   - bundle exec rake db:setup
