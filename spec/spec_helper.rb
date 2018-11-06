@@ -17,14 +17,19 @@ require 'rspec/rails'
 require "email_spec"
 require 'rspec/active_model/mocks'
 
-require 'capybara'
+require "selenium/webdriver"
+
 Capybara.register_driver :chrome do |app|
-  options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox headless disable-gpu])
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+
+Capybara.register_driver :headless_chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox headless disable-gpu disable-dev-shm-usage])
 
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
 
-Capybara.javascript_driver = :chrome
+Capybara.javascript_driver = :headless_chrome # or optional :chrome for getting a browser locally
 Capybara.server = :webrick
 
 VCR.configure do |c|

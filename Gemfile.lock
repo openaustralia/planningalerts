@@ -106,6 +106,9 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.2)
       xpath (~> 3.2)
+    capybara-selenium (0.0.6)
+      capybara
+      selenium-webdriver
     celluloid (0.16.0)
       timers (~> 4.0.0)
     childprocess (0.9.0)
@@ -546,6 +549,7 @@ DEPENDENCIES
   binding_of_caller
   capistrano
   capybara
+  capybara-selenium
   climate_control
   coffee-rails
   compass-blueprint
@@ -602,7 +606,6 @@ DEPENDENCIES
   rvm-capistrano
   sanitize
   sass-rails
-  selenium-webdriver
   spring
   spring-commands-rspec
   stripe (~> 1.57)
