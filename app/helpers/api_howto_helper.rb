@@ -8,45 +8,57 @@ module ApiHowtoHelper
   end
 
   def api_key
-    current_user.api_key if current_user
+    current_user&.api_key
   end
 
-  def api_example_address_url(format, key, address = Rails.application.config.planningalerts_api_example_address,
-    radius = Rails.application.config.planningalerts_api_example_size)
+  def api_example_address_url(
+    format, key, address = Rails.application.config.planningalerts_api_example_address,
+    radius = Rails.application.config.planningalerts_api_example_size
+  )
     applications_url(host: api_host, format: format, address: address, radius: radius, key: key)
   end
 
-  def api_example_latlong_url(format, key, lat = Rails.application.config.planningalerts_api_example_lat, lng = Rails.application.config.planningalerts_api_example_lng,
-    radius = Rails.application.config.planningalerts_api_example_size)
+  def api_example_latlong_url(
+    format, key, lat = Rails.application.config.planningalerts_api_example_lat, lng = Rails.application.config.planningalerts_api_example_lng,
+    radius = Rails.application.config.planningalerts_api_example_size
+  )
     applications_url(host: api_host, format: format, lat: lat, lng: lng, radius: radius, key: key)
   end
 
-  def api_example_area_url(format, key, bottom_left_lat = Rails.application.config.planningalerts_api_example_bottom_left_lat,
+  def api_example_area_url(
+    format, key, bottom_left_lat = Rails.application.config.planningalerts_api_example_bottom_left_lat,
     bottom_left_lng = Rails.application.config.planningalerts_api_example_bottom_left_lng,
     top_right_lat = Rails.application.config.planningalerts_api_example_top_right_lat,
-    top_right_lng = Rails.application.config.planningalerts_api_example_top_right_lng)
-    applications_url(host: api_host, format: format,
+    top_right_lng = Rails.application.config.planningalerts_api_example_top_right_lng
+  )
+    applications_url(
+      host: api_host, format: format,
       bottom_left_lat: bottom_left_lat, bottom_left_lng: bottom_left_lng,
       top_right_lat: top_right_lat, top_right_lng: top_right_lng,
-      key: key)
+      key: key
+    )
   end
 
   def api_example_authority_url(format, key, authority = Rails.application.config.planningalerts_api_example_authority)
-    authority_applications_url(host: api_host, format: format, authority_id: authority,
-      key: key)
+    authority_applications_url(
+      host: api_host, format: format, authority_id: authority,
+      key: key
+    )
   end
 
   def api_example_postcode_url(format, key, postcode = Rails.application.config.planningalerts_api_example_postcode, extra_params = {})
-    applications_url({host: api_host, format: format, postcode: postcode, key: key}.merge(extra_params))
+    applications_url({ host: api_host, format: format, postcode: postcode, key: key }.merge(extra_params))
   end
 
   def api_example_suburb_and_state_url(format, key, suburb = Rails.application.config.planningalerts_api_example_suburb, state = Rails.application.config.planningalerts_api_example_state)
-    applications_url(host: api_host, format: format, suburb: suburb, state: state,
-      key: key)
+    applications_url(
+      host: api_host, format: format, suburb: suburb, state: state,
+      key: key
+    )
   end
 
   def api_example_address_url_html(format, key)
-    # Doing this hackery with 11's and 22's so that we don't escape "[" and "]"
+    # Doing this hackery with 11's and 22's so that we don't escape the square brackets
     t = api_example_address_url(format, key || "33", "11", "22")
     t = t.sub("11", "[address]")
     t = t.sub("22", "[distance_in_metres]")

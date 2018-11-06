@@ -12,7 +12,7 @@ set :repository,  "https://github.com/openaustralia/planningalerts.git"
 set :use_sudo, false
 set :user, "deploy"
 set :scm, :git
-set :rails_env, "production" #added for delayed job
+set :rails_env, "production" # added for delayed job
 
 if stage == "production"
   server "planningalerts.org.au", :app, :web, :db, primary: true

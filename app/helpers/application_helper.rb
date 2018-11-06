@@ -5,7 +5,7 @@ require 'rss/2.0'
 module ApplicationHelper
   def page_matches?(options)
     if options[:action].is_a?(Array)
-      options[:action].any?{|a| current_page?(controller: options[:controller], action: a) }
+      options[:action].any? { |a| current_page?(controller: options[:controller], action: a) }
     else
       current_page?(controller: options[:controller], action: options[:action])
     end
@@ -34,24 +34,24 @@ module ApplicationHelper
 
   # Round the number a to s significant figures
   def significant_figure(a, s)
-    if a > 0
-      m = 10 ** (Math.log10(a).ceil - s)
+    if a.positive?
+      m = 10**(Math.log10(a).ceil - s)
       ((a.to_f / m).round * m).to_f
-    elsif a < 0
+    elsif a.negative?
       -significant_figure(-a, s)
     else
       0
     end
   end
-  
+
   def km_in_words(km)
     meters_in_words(km * 1000)
   end
-  
+
   def render_rss_feed
     render partial: 'shared/rss_item', collection: PlanningAlertsRSS.recent, as: :item
   end
-  
+
   def render_twitter_feed(username)
     render partial: 'shared/tweet', collection: TwitterFeed.new(username).items, as: :item
   end
@@ -98,7 +98,7 @@ module ApplicationHelper
       { name: "Dave Wood", email_md5: "3c4bb2010989f6b6461cb7ffb646c486", github: 'davwood' },
       { name: "Hisayo Horie", email_md5: "4524061d35b17696f37c95c227525e58", github: 'hisayohorie' },
       { name: "Akriti Verma", email_md5: "d3c175a9561c30dfa6ea6b826d875687", github: 'akve17' },
-      { name: "Kris Gesling", email_md5: "a4ec899a9651f56a6aad76e2876b435e", github: 'krisgesling' },
+      { name: "Kris Gesling", email_md5: "a4ec899a9651f56a6aad76e2876b435e", github: 'krisgesling' }
     ]
   end
 

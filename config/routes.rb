@@ -19,7 +19,7 @@ end
 PlanningalertsApp::Application.routes.draw do
   constraints subdomain: "api" do
     constraints FormatConstraint.new do
-      get "(*path)" => redirect{|p,r| "http://www.#{r.domain(2)}/#{p[:path]}"}
+      get "(*path)" => redirect { |p, r| "http://www.#{r.domain(2)}/#{p[:path]}" }
     end
   end
 
@@ -37,7 +37,7 @@ PlanningalertsApp::Application.routes.draw do
   get 'api.php' => 'api#old_index'
   get 'api' => 'api#old_index', as: :api_old_index
 
-  resources :alerts, only: [:new, :create], path_names: {new: 'signup'} do
+  resources :alerts, only: %i[new create], path_names: { new: 'signup' } do
     collection do
       get :statistics
       get :widget_prototype
@@ -45,7 +45,7 @@ PlanningalertsApp::Application.routes.draw do
     member do
       get :confirmed
       get :area
-	    post :area
+      post :area
       get :unsubscribe
     end
   end
@@ -54,22 +54,24 @@ PlanningalertsApp::Application.routes.draw do
   scope format: true do
     get 'authorities/:authority_id/applications' => 'api#authority', as: nil
     get 'applications' => 'api#postcode', as: nil,
-      constraints: QueryParamsPresentConstraint.new(:postcode)
+        constraints: QueryParamsPresentConstraint.new(:postcode)
     get 'applications' => 'api#suburb', as: nil,
-      constraints: QueryParamsPresentConstraint.new(:suburb)
+        constraints: QueryParamsPresentConstraint.new(:suburb)
     get 'applications' => 'api#point', as: nil,
-      constraints: QueryParamsPresentConstraint.new(:address)
+        constraints: QueryParamsPresentConstraint.new(:address)
     get 'applications' => 'api#point', as: nil,
-      constraints: QueryParamsPresentConstraint.new(:lat, :lng)
+        constraints: QueryParamsPresentConstraint.new(:lat, :lng)
     get 'applications' => 'api#area', as: nil,
-      constraints: QueryParamsPresentConstraint.new(:bottom_left_lat, :bottom_left_lng,
-        :top_right_lat, :top_right_lng)
+        constraints: QueryParamsPresentConstraint.new(
+          :bottom_left_lat, :bottom_left_lng,
+          :top_right_lat, :top_right_lng
+        )
     get 'applications' => 'api#date_scraped', as: nil,
-      constraints: QueryParamsPresentConstraint.new(:date_scraped)
+        constraints: QueryParamsPresentConstraint.new(:date_scraped)
     get 'applications' => 'api#all', as: nil
   end
 
-  resources :applications, only: [:index, :show] do
+  resources :applications, only: %i[index show] do
     member do
       get :nearby
     end
@@ -87,10 +89,10 @@ PlanningalertsApp::Application.routes.draw do
     collection do
       post :writeit_reply_webhook
     end
-    resources :reports, only: [:new, :create]
+    resources :reports, only: %i[new create]
   end
 
-  resources :authorities, only: [:index, :show] do
+  resources :authorities, only: %i[index show] do
     resources :applications, only: [:index] do
       collection do
         get :per_day
@@ -102,13 +104,13 @@ PlanningalertsApp::Application.routes.draw do
         get :per_week
       end
     end
-    resources :councillor_contributions, only:[:new, :show]
+    resources :councillor_contributions, only: %i[new show]
     collection do
       get :test_feed
     end
   end
 
-  resources :councillor_contributions, only:[:index]
+  resources :councillor_contributions, only: [:index]
 
   post "/authorities/:authority_id/councillor_contributions/new", to: "councillor_contributions#new"
   patch "/auhtorities/:authority_id/councillor_contributions/add_contributor", to: "councillor_contributions#add_contributor", as: :add_contributor_authority_councillor_contribution
@@ -142,7 +144,7 @@ PlanningalertsApp::Application.routes.draw do
 
   get '/vanity(/:action(/:id(.:format)))', controller: :vanity
 
-  resources :donations, only: [:new, :create]
+  resources :donations, only: %i[new create]
 
   get 'donations' => redirect('/donations/new')
 

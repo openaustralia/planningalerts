@@ -2,6 +2,8 @@ AllCops:
   Exclude:
       - 'db/migrate/*'
       - 'db/schema.rb'
+      - config/compass.rb
+      - bin/*
 
 # Things we're disabling temporarily
 Style/StringLiterals:
