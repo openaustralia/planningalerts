@@ -136,15 +136,15 @@ class Authority < ActiveRecord::Base
     collect_unsaved_applications_date_range(start_date, end_date, info_logger).each do |application|
       # TODO: Consider if it would be better to overwrite applications with new data if they already exists
       # This would allow for the possibility that the application information was incorrectly entered at source
-      # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
-      unless applications.find_by_council_reference(application.council_reference)
-        begin
-          application.save!
-          count += 1
-        rescue Exception => e
-          error_count += 1
-          info_logger.error "Error #{e} while trying to save application #{application.council_reference} for #{full_name_and_state}. So, skipping"
-        end
+      # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
+      next if applications.find_by_council_reference(application.council_reference)
+
+      begin
+        application.save!
+        count += 1
+      rescue StandardError => e
+        error_count += 1
+        info_logger.error "Error #{e} while trying to save application #{application.council_reference} for #{full_name_and_state}. So, skipping"
       end
     end
 
