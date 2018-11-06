@@ -140,7 +140,7 @@ describe AlertNotifierHelper do
         )
       end
 
-      subject { helper.new_donation_url_with_tracking(theme: @theme, alert: @alert) }
+      subject { helper.new_donation_url_with_tracking(theme: @theme) }
 
       it { is_expected.to eq new_donation_url(@base_params_plus_email_and_campaign) }
     end
@@ -150,7 +150,7 @@ describe AlertNotifierHelper do
         @theme = "nsw"
       end
 
-      subject { helper.new_donation_url_with_tracking(theme: @theme, alert: @alert) }
+      subject { helper.new_donation_url_with_tracking(theme: @theme) }
 
       it "raises an exception because this link shouldn't be shown" do
         expect { subject }.to raise_error(
