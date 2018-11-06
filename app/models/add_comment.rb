@@ -22,26 +22,26 @@ class AddComment
   )
 
   def save_comment
-    if valid?
-      remove_address_if_for_councillor
+    return unless valid?
 
-      @comment = Comment.new(
-        application_id: application.id,
-        name: name,
-        text: text,
-        address: address,
-        email: email,
-        theme: theme
-      )
+    remove_address_if_for_councillor
 
-      process_comment_for(@comment)
+    @comment = Comment.new(
+      application_id: application.id,
+      name: name,
+      text: text,
+      address: address,
+      email: email,
+      theme: theme
+    )
 
-      @comment if @comment.save
-    end
+    process_comment_for(@comment)
+
+    @comment if @comment.save
   end
 
   def could_be_for_councillor?
-    application.councillors_available_for_contact && theme.eql?("default") ?  true : false
+    application.councillors_available_for_contact && theme.eql?("default") ? true : false
   end
 
   def for_planning_authority?

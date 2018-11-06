@@ -6,10 +6,10 @@ class ApiStatistic < ActiveRecord::Base
   LOGGING_ENABLED = true
 
   def self.log(request)
-    if LOGGING_ENABLED
-      # Lookup the api key if there is one
-      user = User.find_by_api_key(request.query_parameters["key"]) unless request.query_parameters["key"].blank?
-      create!(ip_address: request.remote_ip, query: request.fullpath, user_agent: request.headers["User-Agent"], query_time: Time.now, user: user)
-    end
+    return unless LOGGING_ENABLED
+
+    # Lookup the api key if there is one
+    user = User.find_by_api_key(request.query_parameters["key"]) unless request.query_parameters["key"].blank?
+    create!(ip_address: request.remote_ip, query: request.fullpath, user_agent: request.headers["User-Agent"], query_time: Time.now, user: user)
   end
 end

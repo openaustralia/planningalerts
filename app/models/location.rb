@@ -16,7 +16,7 @@ class Location < SimpleDelegator
 
   def self.geocode(address)
     r = Geokit::Geocoders::GoogleGeocoder.geocode(address, bias: "au")
-    r = r.all.find{|l| Location.new(l).in_correct_country?} || r
+    r = r.all.find { |l| Location.new(l).in_correct_country? } || r
     l = Location.new(r)
     l.original_address = address
     l
@@ -36,16 +36,16 @@ class Location < SimpleDelegator
 
   def error
     # Only checking for errors on geocoding
-    if original_address
-      if original_address == ""
-        "Please enter a street address"
-      elsif lat.nil? || lng.nil?
-        "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
-      elsif !in_correct_country?
-        "Unfortunately we only cover Australia. It looks like that address is in another country."
-      elsif accuracy < 5
-        "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
-      end
+    return if original_address.nil?
+
+    if original_address == ""
+      "Please enter a street address"
+    elsif lat.nil? || lng.nil?
+      "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
+    elsif !in_correct_country?
+      "Unfortunately we only cover Australia. It looks like that address is in another country."
+    elsif accuracy < 5
+      "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
     end
   end
 
@@ -64,10 +64,10 @@ class Location < SimpleDelegator
   end
 
   def all
-    __getobj__.all.find_all{|l| Location.new(l).in_correct_country?}.map{|l| Location.new(l)}
+    __getobj__.all.find_all { |l| Location.new(l).in_correct_country? }.map { |l| Location.new(l) }
   end
 
-  def ==(a)
-    lat == a.lat && lng == a.lng
+  def ==(other)
+    lat == other.lat && lng == other.lng
   end
 end

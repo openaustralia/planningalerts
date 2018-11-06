@@ -15,10 +15,10 @@ class Alert < ActiveRecord::Base
   before_create :attach_alert_subscriber
 
   def location=(l)
-    if l
-      self.lat = l.lat
-      self.lng = l.lng
-    end
+    return unless l
+
+    self.lat = l.lat
+    self.lng = l.lng
   end
 
   # TODO: This can probably be removed after being run on production
@@ -34,10 +34,10 @@ class Alert < ActiveRecord::Base
   end
 
   def self.alerts_in_inactive_areas
-    #find(:all).find_all{|a| a.in_inactive_area?}
+    # find(:all).find_all{|a| a.in_inactive_area?}
     radius = 2
-    c = Math.cos(radius/GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
-    s = Math.sin(radius/GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
+    c = Math.cos(radius / GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
+    s = Math.sin(radius / GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
     multiplier = GeoKit::Mappable::EARTH_RADIUS_IN_KMS
     command =
       %|
@@ -66,9 +66,9 @@ class Alert < ActiveRecord::Base
   end
 
   def self.count_of_email_completely_unsubscribed_on_date(date)
-    emails = where("date(unsubscribed_at) = ?", date).where(unsubscribed: true).
-                                                      distinct.
-                                                      pluck(:email)
+    emails = where("date(unsubscribed_at) = ?", date).where(unsubscribed: true)
+                                                     .distinct
+                                                     .pluck(:email)
 
     emails.reject do |email|
       active.where(email: email).where("date(created_at) <= ?", date).any?
@@ -108,24 +108,23 @@ class Alert < ActiveRecord::Base
   # Given a list of alerts (with locations), find which LGAs (Local Government Authorities) they are in and
   # return the distribution (i.e. count) of authorities.
   def self.distribution_of_lgas(alerts)
-    frequency_distribution(alerts.map {|alert| alert.lga_name}.compact)
+    frequency_distribution(alerts.map(&:lga_name).compact)
   end
 
   # Pass an array of objects. Count the distribution of objects and return as a hash of object: :count
   def self.frequency_distribution(a)
     freq = {}
-    a.each do |a|
-      freq[a] = (freq[a] || 0) + 1
+    a.each do |i|
+      freq[i] = (freq[i] || 0) + 1
     end
-    freq.to_a.sort {|a, b| -(a[1] <=> b[1])}
+    freq.to_a.sort { |i, j| -(i[1] <=> j[1]) }
   end
 
   def in_inactive_area?
     radius = 2
-    point = GeoKit::LatLng.new(lat, lng)
 
-    c = Math.cos(radius/GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
-    s = Math.sin(radius/GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
+    c = Math.cos(radius / GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
+    s = Math.sin(radius / GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
     multiplier = GeoKit::Mappable::EARTH_RADIUS_IN_KMS
     Application.find_by_sql(
       %|
@@ -141,7 +140,7 @@ class Alert < ActiveRecord::Base
             <= #{radius}
         ) LIMIT 1
       |
-      ).empty?
+    ).empty?
   end
 
   def location
@@ -232,7 +231,7 @@ class Alert < ActiveRecord::Base
     info_logger.info "Splitting mailing for the next 24 hours into batches of size #{batch_size} roughly every #{time_between_batches / 60} minutes"
 
     time = Time.now
-    alerts.map{|a| a.id}.shuffle.each_slice(batch_size) do |alert_ids|
+    alerts.map(&:id).shuffle.each_slice(batch_size) do |alert_ids|
       Alert.delay(run_at: time).process_alerts(alert_ids)
       time += time_between_batches
     end
@@ -247,11 +246,11 @@ class Alert < ActiveRecord::Base
     total_no_comments = 0
     Alert.find(alert_ids).each do |alert|
       no_applications, no_comments = alert.process!
-      if no_applications > 0 || no_comments > 0
-        total_no_applications += no_applications
-        total_no_comments += no_comments
-        total_no_emails += 1
-      end
+      skip if no_applications.zero? && no_comments.zero?
+
+      total_no_applications += no_applications
+      total_no_comments += no_comments
+      total_no_emails += 1
     end
 
     # Update statistics. Updating the Stat at the end of each mail run has the advantage of not continiously invalidating
@@ -259,17 +258,17 @@ class Alert < ActiveRecord::Base
     Stat.emails_sent += total_no_emails
     Stat.applications_sent += total_no_applications
     EmailBatch.create!(no_emails: total_no_emails, no_applications: total_no_applications,
-      no_comments: total_no_comments)
+                       no_comments: total_no_comments)
     [total_no_emails, total_no_applications, total_no_comments]
   end
 
   def geocode_from_address
     @geocode_result = Location.geocode(address)
 
-    unless @geocode_result.error || @geocode_result.all.many?
-      self.location = @geocode_result
-      self.address = @geocode_result.full_address
-    end
+    return if @geocode_result.error || @geocode_result.all.many?
+
+    self.location = @geocode_result
+    self.address = @geocode_result.full_address
   end
 
   def attach_alert_subscriber
@@ -280,12 +279,12 @@ class Alert < ActiveRecord::Base
 
   def validate_address
     # Only validate the street address if we used the geocoder
-    if @geocode_result
-      if @geocode_result.error
-        errors.add(:address, @geocode_result.error)
-      elsif address_ambiguous?
-        errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
-      end
+    return unless @geocode_result
+
+    if @geocode_result.error
+      errors.add(:address, @geocode_result.error)
+    elsif address_ambiguous?
+      errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
     end
   end
 

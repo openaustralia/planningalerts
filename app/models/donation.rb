@@ -1,7 +1,7 @@
 class Donation < ActiveRecord::Base
   has_many :alerts, -> { where theme: "default" }, foreign_key: :email, primary_key: :email
   validates :email, uniqueness: true, presence: true
-  validate :has_correct_stripe_plan_id
+  validate :correct_stripe_plan_id?
 
   class << self
     def default_price
@@ -13,10 +13,10 @@ class Donation < ActiveRecord::Base
     end
   end
 
-  def has_correct_stripe_plan_id
-    unless stripe_plan_id.eql? Donation.plan_id_on_stripe
-      errors.add(:stripe_plan_id, "does not match our know active stripe plan #{Donation.plan_id_on_stripe}")
-    end
+  def correct_stripe_plan_id?
+    return if stripe_plan_id.eql? Donation.plan_id_on_stripe
+
+    errors.add(:stripe_plan_id, "does not match our know active stripe plan #{Donation.plan_id_on_stripe}")
   end
 
   def create_stripe_customer(stripe_token)
@@ -48,4 +48,3 @@ class Donation < ActiveRecord::Base
     stripe_subscription_id.present?
   end
 end
-

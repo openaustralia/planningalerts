@@ -2,7 +2,8 @@ require 'open-uri'
 
 class AuthorityLogger < Logger
   def initialize(authority, other_logger)
-    @authority, @other_logger = authority, other_logger
+    @authority = authority
+    @other_logger = other_logger
     # We're starting a new run of the logger & scraper so clear out the old so we're ready for the new
     @authority.update_attribute(:last_scraper_run_log, "")
   end
@@ -11,9 +12,9 @@ class AuthorityLogger < Logger
     @other_logger.add(severity, message, progname)
     # Put a maximum limit on how long the log can get
     e = @authority.last_scraper_run_log + progname + "\n"
-    if e.size < 5000
-      @authority.update_column(:last_scraper_run_log, e)
-    end
+    return if e.size >= 5000
+
+    @authority.update_column(:last_scraper_run_log, e)
   end
 end
 
@@ -26,7 +27,7 @@ class Authority < ActiveRecord::Base
   validates :short_name, presence: true, uniqueness: { case_sensitive: false }
 
   validates :state, inclusion: {
-    in: %w(NSW VIC QLD SA WA TAS NT ACT),
+    in: %w[NSW VIC QLD SA WA TAS NT ACT],
     message: "%{value} is not a state in Australia"
   }
 
@@ -77,12 +78,10 @@ class Authority < ActiveRecord::Base
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
   def open_url_safe(url, info_logger, options = {})
-    begin
-      open(url, options).read
-    rescue Exception => e
-      info_logger.error "Error #{e} while getting data from url #{url}. So, skipping"
-      nil
-    end
+    open(url, options).read
+  rescue StandardError => e
+    info_logger.error "Error #{e} while getting data from url #{url}. So, skipping"
+    nil
   end
 
   # Get all the scraper data for this authority and date in an array of attributes that can be used
@@ -90,9 +89,8 @@ class Authority < ActiveRecord::Base
   def scraper_data_original_style(feed_url, start_date, end_date, info_logger)
     feed_data = []
     text = open_url_safe(feed_url, info_logger)
-    if text
-      feed_data += Application.translate_feed_data(text)
-    end
+
+    feed_data += Application.translate_feed_data(text) if text
     feed_data
   end
 
@@ -136,7 +134,7 @@ class Authority < ActiveRecord::Base
     count = 0
     error_count = 0
     collect_unsaved_applications_date_range(start_date, end_date, info_logger).each do |application|
-      # TODO Consider if it would be better to overwrite applications with new data if they already exists
+      # TODO: Consider if it would be better to overwrite applications with new data if they already exists
       # This would allow for the possibility that the application information was incorrectly entered at source
       # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
       unless applications.find_by_council_reference(application.council_reference)
@@ -151,9 +149,9 @@ class Authority < ActiveRecord::Base
     end
 
     info_logger.info "#{count} new applications found for #{full_name_and_state} with date from #{start_date} to #{end_date}"
-    if error_count > 0
-      info_logger.info "#{error_count} applications errored for #{full_name_and_state} with date from #{start_date} to #{end_date}"
-    end
+    return if error_count.zero?
+
+    info_logger.info "#{error_count} applications errored for #{full_name_and_state} with date from #{start_date} to #{end_date}"
   end
 
   # Returns an array of arrays [date, number_of_applications_that_date]
@@ -161,13 +159,13 @@ class Authority < ActiveRecord::Base
     h = applications.group("CAST(date_scraped AS DATE)").count
     # For any dates not in h fill them in with zeros
     (h.keys.min..Date.today).each do |date|
-      h[date] = 0 unless h.has_key?(date)
+      h[date] = 0 unless h.key?(date)
     end
     h.sort
   end
 
   def median_applications_per_week
-    v = applications_per_week.select{|a| a[1] > 0}.map{|a| a[1]}.sort
+    v = applications_per_week.select { |a| a[1].positive? }.map { |a| a[1] }.sort
     v[v.count / 2]
   end
 
@@ -178,14 +176,14 @@ class Authority < ActiveRecord::Base
     min = h.keys.min
     max = Date.today - Date.today.wday
     (min..max).step(7) do |date|
-      h[date] = 0 unless h.has_key?(date)
+      h[date] = 0 unless h.key?(date)
     end
     h.sort
   end
 
   def comments_per_week
     # Sunday is the beginning of the week to match applications_per_week
-    Date.beginning_of_week= :sunday
+    Date.beginning_of_week = :sunday
 
     results = []
 
@@ -199,7 +197,7 @@ class Authority < ActiveRecord::Base
       latest_week = Date.today.at_beginning_of_week
 
       (earliest_week_with_applications..latest_week).step(7) do |date|
-        results[date] = 0 unless results.has_key?(date)
+        results[date] = 0 unless results.key?(date)
       end
     end
 
@@ -212,7 +210,7 @@ class Authority < ActiveRecord::Base
     earliest_application = Application.unscoped do
       applications.order("date_scraped").first
     end
-    earliest_application.date_scraped if earliest_application
+    earliest_application&.date_scraped
   end
 
   def morph_url
@@ -226,7 +224,7 @@ class Authority < ActiveRecord::Base
 
   # So that the encoding function can be used elsewhere
   def self.short_name_encoded(short_name)
-    short_name.downcase.gsub(' ', '_').gsub(/\W/, '')
+    short_name.downcase.tr(' ', '_').gsub(/\W/, '')
   end
 
   def short_name_encoded
@@ -235,7 +233,7 @@ class Authority < ActiveRecord::Base
 
   def self.find_by_short_name_encoded(n)
     # TODO: Potentially not very efficient when number of authorities is high. Loads all authorities into memory
-    all.find{|a| a.short_name_encoded == n}
+    all.find { |a| a.short_name_encoded == n }
   end
 
   def self.find_by_short_name_encoded!(n)
@@ -284,7 +282,7 @@ class Authority < ActiveRecord::Base
   end
 
   def latest_application_date
-    latest_application.date_scraped if latest_application
+    latest_application&.date_scraped
   end
 
   # If the latest application is over two weeks old, the scraper's probably broken

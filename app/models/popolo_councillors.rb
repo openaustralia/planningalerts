@@ -6,7 +6,7 @@ class PopoloCouncillors
   end
 
   def for_authority(name)
-    # FIXME: We don’t handle not finding an organisation in the Popolo
+    # FIXME: We do not handle not finding an organisation in the Popolo
     authority = popolo.organizations.find_by(name: name)
     councillor_memberships = popolo.memberships.where(
       organization_id: authority.id,

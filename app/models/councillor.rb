@@ -31,6 +31,6 @@ class Councillor < ActiveRecord::Base
       https.request_head(uri.path)
     end
 
-    request.kind_of? Net::HTTPSuccess
+    request.is_a? Net::HTTPSuccess
   end
 end

@@ -20,19 +20,19 @@ class CouncillorContribution < ActiveRecord::Base
   end
 
   def to_csv
-    attributes = [
-      "name",
-      "start_date",
-      "end_date",
-      "executive",
-      "council",
-      "council_website",
-      "id",
-      "email",
-      "image",
-      "party",
-      "source",
-      "ward"
+    attributes = %w[
+      name
+      start_date
+      end_date
+      executive
+      council
+      council_website
+      id
+      email
+      image
+      party
+      source
+      ward
     ]
 
     CSV.generate(headers: true) do |csv|

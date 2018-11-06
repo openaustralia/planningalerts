@@ -1,10 +1,8 @@
 class DateValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-    begin
-      Date.parse(value)
-    rescue ArgumentError
-      record.errors.add(attribute, "is not a correctly formatted date")
-    end
+    Date.parse(value)
+  rescue ArgumentError
+    record.errors.add(attribute, "is not a correctly formatted date")
   end
 end
 
@@ -17,12 +15,12 @@ class Feed
   include ActiveModel::Validations
 
   attr_reader :base_url, :page, :street, :suburb, :postcode,
-    :lodgement_date_start, :lodgement_date_end,
-    :last_modified_date_start, :last_modified_date_end
+              :lodgement_date_start, :lodgement_date_end,
+              :last_modified_date_start, :last_modified_date_end
 
   validates :base_url, url: true
   validates :lodgement_date_start, :lodgement_date_end,
-    :last_modified_date_start, :last_modified_date_end, date: true, allow_blank: true
+            :last_modified_date_start, :last_modified_date_end, date: true, allow_blank: true
 
   def initialize(options = {})
     @base_url = options[:base_url]
@@ -59,13 +57,11 @@ class Feed
     # there is little point.
     if Rails.env.development? && u.host == "localhost"
       file = Feed.example_path(Rails.application.routes.recognize_path(u.path)[:number].to_i, page)
-      if File.exists?(file)
-        page = ATDIS::Models::Page.read_json(File.read(file))
-        page.url = url
-        page
-      else
-        raise RestClient::ResourceNotFound
-      end
+      raise RestClient::ResourceNotFound unless File.exist?(file)
+
+      page = ATDIS::Models::Page.read_json(File.read(file))
+      page.url = url
+      page
     else
       ATDIS::Feed.new(base_url).applications(feed_options)
     end
@@ -75,7 +71,7 @@ class Feed
     false
   end
 
-  def Feed.example_path(number, page)
+  def self.example_path(number, page)
     Rails.root.join("spec/atdis_json_examples/example#{number}_page#{page}.json")
   end
 

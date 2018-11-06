@@ -1,5 +1,4 @@
 class TwitterFeed
-
   attr_reader :username
 
   def initialize(username)
@@ -7,7 +6,8 @@ class TwitterFeed
   end
 
   def feed
-    if twitter = client
+    twitter = client
+    if twitter
       # If there's any kind of error just return an empty feed
       begin
         @feed ||= twitter.user_timeline(username)[0...2] || []
@@ -30,13 +30,13 @@ class TwitterFeed
   end
 
   def client
-    if ENV["TWITTER_CONSUMER_KEY"]
-      Twitter::REST::Client.new do |config|
-        config.consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
-        config.consumer_secret     = ENV["TWITTER_CONSUMER_SECRET"]
-        config.access_token        = ENV["TWITTER_OAUTH_TOKEN"]
-        config.access_token_secret = ENV["TWITTER_OAUTH_TOKEN_SECRET"]
-      end
+    return if ENV["TWITTER_CONSUMER_KEY"].empty?
+
+    Twitter::REST::Client.new do |config|
+      config.consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
+      config.consumer_secret     = ENV["TWITTER_CONSUMER_SECRET"]
+      config.access_token        = ENV["TWITTER_OAUTH_TOKEN"]
+      config.access_token_secret = ENV["TWITTER_OAUTH_TOKEN_SECRET"]
     end
   end
 end

@@ -4,5 +4,4 @@ class EmailBatch < ActiveRecord::Base
   def self.total_sent_in_past_week
     in_past_week.sum(:no_emails)
   end
-
 end

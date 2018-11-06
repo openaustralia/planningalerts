@@ -19,19 +19,19 @@ class Comment < ActiveRecord::Base
 
   scope :by_first_time_commenters_for_date, ->(date) {
     visible_with_unique_emails_for_date(date)
-    .select {|c| where("email = ? AND confirmed_at < ?", c.email, c.confirmed_at.to_date).empty? }
+      .select { |c| where("email = ? AND confirmed_at < ?", c.email, c.confirmed_at.to_date).empty? }
   }
 
   scope :by_returning_commenters_for_date, ->(date) {
     visible_with_unique_emails_for_date(date)
-    .select {|c| where("email = ? AND confirmed_at < ?", c.email, c.confirmed_at.to_date).any? }
+      .select { |c| where("email = ? AND confirmed_at < ?", c.email, c.confirmed_at.to_date).any? }
   }
 
   def confirm!
-    unless confirmed
-      update!(confirmed: true, confirmed_at: Time.current)
-      send_comment!
-    end
+    return if confirmed
+
+    update!(confirmed: true, confirmed_at: Time.current)
+    send_comment!
   end
 
   def send_comment!
