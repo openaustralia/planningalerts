@@ -13,7 +13,7 @@ class DefaultTheme < Theme
     "default"
   end
 
-  def recognise?(request)
+  def recognise?(_request)
     true
   end
 
@@ -41,7 +41,7 @@ class DefaultTheme < Theme
     ENV["GOOGLE_MAPS_API_KEY"]
   end
 
-# TODO Put this in the config
+  # TODO: Put this in the config
   def default_meta_description
     "A free service which searches Australian planning authority websites and emails you details of applications near you"
   end
@@ -90,22 +90,22 @@ class NSWTheme < Theme
     nil
   end
 
-  # TODO Put this in the config
+  # TODO: Put this in the config
   def default_meta_description
     "Discover what's happening in your local area in NSW. Find out about new building work. Get alerted by email."
   end
 end
 
 class ThemeChooser
-  THEMES = [NSWTheme.new, DefaultTheme.new]
+  THEMES = [NSWTheme.new, DefaultTheme.new].freeze
 
   def self.create(theme)
-    r = THEMES.find{|t| t.theme == theme}
+    r = THEMES.find { |t| t.theme == theme }
     raise "Unknown theme #{theme}" if r.nil?
     r
   end
 
   def self.themer_from_request(request)
-    THEMES.find{|t| t.recognise?(request)}
+    THEMES.find { |t| t.recognise?(request) }
   end
 end

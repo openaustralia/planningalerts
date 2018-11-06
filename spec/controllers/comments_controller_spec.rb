@@ -35,23 +35,25 @@ describe CommentsController do
         create(
           :application,
           authority_id: 1,
-          date_scraped: Date.new(2015,12,24),
+          date_scraped: Date.new(2015, 12, 24),
           id: 1
         )
 
-        create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015,12,26))
-        create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015,12,26))
-        create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015,12,26))
-        create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2016,1,4))
+        create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015, 12, 26))
+        create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015, 12, 26))
+        create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015, 12, 26))
+        create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2016, 1, 4))
       end
 
       get_authority_comments_per_week
 
-      expect(JSON.parse(response.body)).to eq([
-        [ "2015-12-20", 3 ],
-        [ "2015-12-27", 0 ],
-        [ "2016-01-03", 1 ]
-      ])
+      expect(JSON.parse(response.body)).to eq(
+        [
+          ["2015-12-20", 3],
+          ["2015-12-27", 0],
+          ["2016-01-03", 1]
+        ]
+      )
     end
   end
 end

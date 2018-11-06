@@ -18,36 +18,36 @@ describe PerformanceController do
 
     context "when there are active alerts" do
       before do
-        create :confirmed_alert, email: "mary@example.org", created_at: DateTime.new(2016,6,19)
-        create :confirmed_alert, email: "mary@example.org", created_at: DateTime.new(2016,7,19)
-        create :confirmed_alert, email: "mary@example.org", created_at: DateTime.new(2016,8,19)
-        create :confirmed_alert, email: "clare@example.org", created_at: DateTime.new(2016,8,19)
-        create :confirmed_alert, email: "clare@example.org", created_at: DateTime.new(2016,8,19)
-        create :confirmed_alert, email: "zou@example.org", created_at: DateTime.new(2016,7,6)
-        create :confirmed_alert, email: "henare@example.org", created_at: DateTime.new(2016,7,6)
-        create :confirmed_alert, email: "kat@example.org", created_at: DateTime.new(2016,8,5)
+        create :confirmed_alert, email: "mary@example.org", created_at: DateTime.new(2016, 6, 19)
+        create :confirmed_alert, email: "mary@example.org", created_at: DateTime.new(2016, 7, 19)
+        create :confirmed_alert, email: "mary@example.org", created_at: DateTime.new(2016, 8, 19)
+        create :confirmed_alert, email: "clare@example.org", created_at: DateTime.new(2016, 8, 19)
+        create :confirmed_alert, email: "clare@example.org", created_at: DateTime.new(2016, 8, 19)
+        create :confirmed_alert, email: "zou@example.org", created_at: DateTime.new(2016, 7, 6)
+        create :confirmed_alert, email: "henare@example.org", created_at: DateTime.new(2016, 7, 6)
+        create :confirmed_alert, email: "kat@example.org", created_at: DateTime.new(2016, 8, 5)
       end
 
       it "returns an json data" do
         get(:alerts, format: :json)
 
-        expect(JSON.parse(response.body)).to include({
-          "date"=>"2016-08-19",
-          "new_alert_subscribers"=>1,
+        expect(JSON.parse(response.body)).to include(
+          "date" => "2016-08-19",
+          "new_alert_subscribers" => 1,
           "emails_completely_unsubscribed" => 0
-        })
+        )
 
-        expect(JSON.parse(response.body)).to include({
-          "date"=>"2016-07-06",
-          "new_alert_subscribers"=>2,
+        expect(JSON.parse(response.body)).to include(
+          "date" => "2016-07-06",
+          "new_alert_subscribers" => 2,
           "emails_completely_unsubscribed" => 0
-        })
+        )
       end
     end
 
     context "when people have unsubscribed" do
       before do
-        alert = create :confirmed_alert, email: "mary@example.org", created_at: DateTime.new(2016,6,19)
+        alert = create :confirmed_alert, email: "mary@example.org", created_at: DateTime.new(2016, 6, 19)
 
         Timecop.freeze(Time.utc(2016, 8, 23)) { alert.unsubscribe! }
 
@@ -56,21 +56,17 @@ describe PerformanceController do
 
       it "we see them subscribe in the data" do
         expect(JSON.parse(response.body)).to include(
-          {
-            "date" => "2016-06-19",
-            "new_alert_subscribers" => 1,
-            "emails_completely_unsubscribed" => 0
-          }
+          "date" => "2016-06-19",
+          "new_alert_subscribers" => 1,
+          "emails_completely_unsubscribed" => 0
         )
       end
 
       it "we see them unsubscribe in the data" do
         expect(JSON.parse(response.body)).to include(
-          {
-            "date" => "2016-08-23",
-            "new_alert_subscribers" => 0,
-            "emails_completely_unsubscribed" => 1
-          }
+          "date" => "2016-08-23",
+          "new_alert_subscribers" => 0,
+          "emails_completely_unsubscribed" => 1
         )
       end
     end
@@ -103,12 +99,12 @@ describe PerformanceController do
       it "returns an empty Array as json" do
         get(:comments, format: :json)
 
-        expect(JSON.parse(response.body)).to include({
-          "date"=>"2016-01-03", "first_time_commenters"=>0, "returning_commenters"=>2
-        })
-        expect(JSON.parse(response.body)).to include({
-          "date"=>"2015-10-07", "first_time_commenters"=>3, "returning_commenters"=>0
-        })
+        expect(JSON.parse(response.body)).to include(
+          "date" => "2016-01-03", "first_time_commenters" => 0, "returning_commenters" => 2
+        )
+        expect(JSON.parse(response.body)).to include(
+          "date" => "2015-10-07", "first_time_commenters" => 3, "returning_commenters" => 0
+        )
       end
     end
   end

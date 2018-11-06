@@ -5,8 +5,8 @@ describe AddComment do
     let(:application) { VCR.use_cassette('planningalerts') { create(:application) } }
     let(:add_comment_form) do
       build(:add_comment, application: application,
-                             comment_for: nil,
-                             text: "Testing testing 1 2 3")
+                          comment_for: nil,
+                          text: "Testing testing 1 2 3")
     end
 
     context "that can be sent to a councillor" do
@@ -97,7 +97,7 @@ describe AddComment do
 
     context "that can’t be sent to a councillor" do
       before do
-         allow(add_comment_form).to receive(:could_be_for_councillor?).and_return(false)
+        allow(add_comment_form).to receive(:could_be_for_councillor?).and_return(false)
       end
 
       it "is valid without specificing who it is for" do
@@ -197,7 +197,7 @@ describe AddComment do
 
   context "when comment_for is 'planning authority'" do
     let(:add_comment_form) do
-      build(:add_comment, comment_for: "planning authority", address: "64 Fake st" )
+      build(:add_comment, comment_for: "planning authority", address: "64 Fake st")
     end
 
     it { expect(add_comment_form.for_planning_authority?).to eq true }
@@ -212,7 +212,7 @@ describe AddComment do
 
   context "when comment_for is an integer" do
     let(:add_comment_form) do
-      build(:add_comment, comment_for: 2, address: "64 Fake st" )
+      build(:add_comment, comment_for: 2, address: "64 Fake st")
     end
 
     it { expect(add_comment_form.for_planning_authority?).to eq false }

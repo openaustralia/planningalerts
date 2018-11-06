@@ -5,8 +5,10 @@ describe Application do
     Authority.delete_all
     @auth = create(:authority, full_name: "Fiddlesticks", state: "NSW", short_name: "Fiddle")
     # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
-    allow(Location).to receive(:geocode).and_return(double(lat: 1.0, lng: 2.0, suburb: "Glenbrook", state: "NSW",
-      postcode: "2773", success: true))
+    allow(Location).to receive(:geocode).and_return(
+      double(lat: 1.0, lng: 2.0, suburb: "Glenbrook", state: "NSW",
+             postcode: "2773", success: true)
+    )
   end
 
   describe "validation" do
@@ -15,7 +17,7 @@ describe Application do
     end
 
     describe "council_reference" do
-      let (:auth1) { create(:authority) }
+      let(:auth1) { create(:authority) }
 
       it { expect(build(:application, council_reference: "")).not_to be_valid }
 
@@ -58,19 +60,19 @@ describe Application do
 
       context "the date today is 1 january 2001" do
         before :each do
-          allow(Date).to receive(:today).and_return(Date.new(2001,1,1))
+          allow(Date).to receive(:today).and_return(Date.new(2001, 1, 1))
         end
-        it { expect(build(:application, date_received: Date.new(2002,1,1))).not_to be_valid }
-        it { expect(build(:application, date_received: Date.new(2000,1,1))).to be_valid }
+        it { expect(build(:application, date_received: Date.new(2002, 1, 1))).not_to be_valid }
+        it { expect(build(:application, date_received: Date.new(2000, 1, 1))).to be_valid }
       end
     end
 
     describe "on_notice" do
       it { expect(build(:application, on_notice_from: nil, on_notice_to: nil)).to be_valid }
-      it { expect(build(:application, on_notice_from: Date.new(2001,1,1), on_notice_to: Date.new(2001,2,1))).to be_valid }
-      it { expect(build(:application, on_notice_from: nil, on_notice_to: Date.new(2001,2,1))).to be_valid }
-      it { expect(build(:application, on_notice_from: Date.new(2001,1,1), on_notice_to: nil)).to be_valid }
-      it { expect(build(:application, on_notice_from: Date.new(2001,2,1), on_notice_to: Date.new(2001,1,1))).not_to be_valid }
+      it { expect(build(:application, on_notice_from: Date.new(2001, 1, 1), on_notice_to: Date.new(2001, 2, 1))).to be_valid }
+      it { expect(build(:application, on_notice_from: nil, on_notice_to: Date.new(2001, 2, 1))).to be_valid }
+      it { expect(build(:application, on_notice_from: Date.new(2001, 1, 1), on_notice_to: nil)).to be_valid }
+      it { expect(build(:application, on_notice_from: Date.new(2001, 2, 1), on_notice_to: Date.new(2001, 1, 1))).not_to be_valid }
     end
   end
 
@@ -144,8 +146,9 @@ describe Application do
 
   describe "on saving" do
     it "should geocode the address" do
-      loc = double("Location", lat: -33.772609, lng: 150.624263, suburb: "Glenbrook", state: "NSW",
-        postcode: "2773", success: true)
+      loc = double("Location",
+                   lat: -33.772609, lng: 150.624263, suburb: "Glenbrook", state: "NSW",
+                   postcode: "2773", success: true)
       expect(Location).to receive(:geocode).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
       a = create(:application, address: "24 Bruce Road, Glenbrook, NSW", council_reference: "r1", date_scraped: Time.now)
       expect(a.lat).to eq(loc.lat)
@@ -196,30 +199,30 @@ describe Application do
       t = Time.now
       allow(Time).to receive(:now).and_return(t)
       expect(Application.translate_morph_feed_data(feed_data)).to eq(
-      [
-        {
-          date_scraped: t,
-          description: "Construction of Dwelling",
-          info_url: "http://www.yarracity.vic.gov.au/Planning-Application-Search/Results.aspx?ApplicationNumber=PL01/0776.01&Suburb=(All)&Street=(All)&Status=(All)&Ward=(All)",
-          on_notice_from: "2012-05-01",
-          on_notice_to: "2012-06-01",
-          date_received: "2012-07-06",
-          council_reference: "PL01/0776.01",
-          address: "56 Murphy St Richmond VIC 3121",
-          comment_url: "http://www.yarracity.vic.gov.au/planning--building/Planning-applications/Objecting-to-a-planning-applicationVCAT/"
-        },
-        {
-          date_scraped: t,
-          description: "Liquor Licence for Existing Caf\u00e9",
-          info_url: "http://www.yarracity.vic.gov.au/Planning-Application-Search/Results.aspx?ApplicationNumber=PL02/0313.01&Suburb=(All)&Street=(All)&Status=(All)&Ward=(All)",
-          on_notice_from: nil,
-          on_notice_to: nil,
-          date_received: "2012-07-30",
-          council_reference: "PL02/0313.01",
-          address: "359-361 Napier St Fitzroy VIC 3065",
-          comment_url: "http://www.yarracity.vic.gov.au/planning--building/Planning-applications/Objecting-to-a-planning-applicationVCAT/"
-        }
-      ]
+        [
+          {
+            date_scraped: t,
+            description: "Construction of Dwelling",
+            info_url: "http://www.yarracity.vic.gov.au/Planning-Application-Search/Results.aspx?ApplicationNumber=PL01/0776.01&Suburb=(All)&Street=(All)&Status=(All)&Ward=(All)",
+            on_notice_from: "2012-05-01",
+            on_notice_to: "2012-06-01",
+            date_received: "2012-07-06",
+            council_reference: "PL01/0776.01",
+            address: "56 Murphy St Richmond VIC 3121",
+            comment_url: "http://www.yarracity.vic.gov.au/planning--building/Planning-applications/Objecting-to-a-planning-applicationVCAT/"
+          },
+          {
+            date_scraped: t,
+            description: "Liquor Licence for Existing Caf\u00e9",
+            info_url: "http://www.yarracity.vic.gov.au/Planning-Application-Search/Results.aspx?ApplicationNumber=PL02/0313.01&Suburb=(All)&Street=(All)&Status=(All)&Ward=(All)",
+            on_notice_from: nil,
+            on_notice_to: nil,
+            date_received: "2012-07-30",
+            council_reference: "PL02/0313.01",
+            address: "359-361 Napier St Fitzroy VIC 3065",
+            comment_url: "http://www.yarracity.vic.gov.au/planning--building/Planning-applications/Objecting-to-a-planning-applicationVCAT/"
+          }
+        ]
       )
     end
 
@@ -271,8 +274,8 @@ describe Application do
       expect(r1.info_url).to eq("http://fiddle.gov.au/info/R1")
       expect(r1.comment_url).to eq("http://fiddle.gov.au/comment/R1")
       expect(r1.date_received).to eq(@date)
-      expect(r1.on_notice_from).to eq(Date.new(2009,1,5))
-      expect(r1.on_notice_to).to eq(Date.new(2009,1,19))
+      expect(r1.on_notice_from).to eq(Date.new(2009, 1, 5))
+      expect(r1.on_notice_to).to eq(Date.new(2009, 1, 19))
     end
 
     it "should not create new applications when they already exist" do
@@ -292,8 +295,8 @@ describe Application do
       allow(Date).to receive(:today).and_return(Date.new(2010, 1, 10))
       logger = double
       expect(logger).to receive(:info).with("Scraping 2 authorities")
-      #logger.should_receive(:add).with(1, nil, "Took 0 s to collect applications from Fiddlesticks, NSW")
-      #logger.should_receive(:add).with(1, nil, "Took 0 s to collect applications from Wombat City Council, NSW")
+      # logger.should_receive(:add).with(1, nil, "Took 0 s to collect applications from Fiddlesticks, NSW")
+      # logger.should_receive(:add).with(1, nil, "Took 0 s to collect applications from Wombat City Council, NSW")
       expect(@auth).to receive(:collect_applications).with(logger)
       expect(auth2).to receive(:collect_applications).with(logger)
 

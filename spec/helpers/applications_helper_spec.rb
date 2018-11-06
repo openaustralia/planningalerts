@@ -3,9 +3,17 @@ require 'spec_helper'
 describe ApplicationsHelper do
   before :each do
     authority = mock_model(Authority, full_name: "An authority", short_name: "Blue Mountains")
-    @application = mock_model(Application, map_url: "http://a.map.url",
-      description: "A planning application", council_reference: "A1", authority: authority, info_url: "http://info.url", comment_url: "http://comment.url",
-      on_notice_from: nil, on_notice_to: nil)
+    @application = mock_model(
+      Application,
+      map_url: "http://a.map.url",
+      description: "A planning application",
+      council_reference: "A1",
+      authority: authority,
+      info_url: "http://info.url",
+      comment_url: "http://comment.url",
+      on_notice_from: nil,
+      on_notice_to: nil
+    )
   end
 
   describe "display_description_with_address" do
@@ -172,12 +180,12 @@ describe ApplicationsHelper do
     end
 
     describe "authority_applications_json_url_for_current_user" do
-      let(:authority) { create(:authority, short_name: "marrickville", ) }
+      let(:authority) { create(:authority, short_name: "marrickville") }
 
       subject { helper.authority_applications_json_url_for_current_user(authority) }
 
       context "when there is a current user" do
-        let(:user) { build(:user, api_key: "ABCDE12345" )}
+        let(:user) { build(:user, api_key: "ABCDE12345") }
         before { expect(helper).to receive(:current_user).and_return(user) }
 
         it { is_expected.to eq "http://test.host/authorities/marrickville/applications.js?key=ABCDE12345" }

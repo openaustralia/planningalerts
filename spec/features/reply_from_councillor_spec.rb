@@ -1,8 +1,8 @@
 require "spec_helper"
 
 feature "Councillor replies to a message sent to them" do
-  given (:councillor) { create(:councillor, name: "Louise Councillor", email: "louise@council.nsw.gov.au", popolo_id: "marrickville_council/chris_woods") }
-  given (:application) { create(:application, id: 8, address: "24 Bruce Road Glenbrook", description: "A lovely house") }
+  given(:councillor) { create(:councillor, name: "Louise Councillor", email: "louise@council.nsw.gov.au", popolo_id: "marrickville_council/chris_woods") }
+  given(:application) { create(:application, id: 8, address: "24 Bruce Road Glenbrook", description: "A lovely house") }
   given!(:comment) do
     VCR.use_cassette('planningalerts') do
       create(:comment, id: 5,
@@ -70,17 +70,15 @@ feature "Councillor replies to a message sent to them" do
 end
 
 feature "Commenter is notified of the councillors reply" do
-  given (:authority)   { create(:authority, full_name: "Marrickville Council") }
-  given (:councillor)  { create(:councillor,
-                                name: "Louise Councillor",
-                                authority: authority) }
-  given (:application) { create(:application,
-                                id: 8,
-                                address: "24 Bruce Road Glenbrook",
-                                description: "A lovely house") }
+  given(:authority)   { create(:authority, full_name: "Marrickville Council") }
+  given(:councillor)  { create(:councillor, name: "Louise Councillor", authority: authority) }
+  given(:application) do
+    create(:application, id: 8, address: "24 Bruce Road Glenbrook", description: "A lovely house")
+  end
+
   # TODO: Extract this to a method where user actually leaves comment
   #       and confirms it.
-  given (:comment) do
+  given(:comment) do
     VCR.use_cassette('planningalerts') do
       create(:comment,
              :confirmed,
@@ -90,8 +88,8 @@ feature "Commenter is notified of the councillors reply" do
              councillor: councillor)
     end
   end
-  given (:email_intro_text) { "Local councillor Louise Councillor replied to <a href=\"https://dev.planningalerts.org.au/applications/8?utm_campaign=view-comment&amp;utm_medium=email&amp;utm_source=reply-notifications#comment5\">your message</a> about the planning application “A lovely house” at 24 Bruce Road Glenbrook" }
-  given (:reply_text) { "I'm glad you think it's a good idea. I do too." }
+  given(:email_intro_text) { "Local councillor Louise Councillor replied to <a href=\"https://dev.planningalerts.org.au/applications/8?utm_campaign=view-comment&amp;utm_medium=email&amp;utm_source=reply-notifications#comment5\">your message</a> about the planning application “A lovely house” at 24 Bruce Road Glenbrook" }
+  given(:reply_text) { "I'm glad you think it's a good idea. I do too." }
 
   background do
     create(:reply, comment: comment, councillor: councillor, text: reply_text)

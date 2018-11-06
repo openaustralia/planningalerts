@@ -14,7 +14,7 @@ describe AlertNotifierHelper do
 
       it {
         expect(helper.host_and_protocol_for_theme(theme))
-        .to eq(host: host(theme), protocol: protocol(theme))
+          .to eq(host: host(theme), protocol: protocol(theme))
       }
     end
 
@@ -23,7 +23,7 @@ describe AlertNotifierHelper do
 
       it {
         expect(helper.host_and_protocol_for_theme(theme))
-        .to eq(host: host(theme), protocol: protocol(theme))
+          .to eq(host: host(theme), protocol: protocol(theme))
       }
     end
   end
@@ -31,7 +31,7 @@ describe AlertNotifierHelper do
   describe "#base_tracking_params" do
     it {
       expect(helper.base_tracking_params)
-      .to eq(utm_source: "alerts", utm_medium: "email")
+        .to eq(utm_source: "alerts", utm_medium: "email")
     }
   end
 
@@ -50,12 +50,12 @@ describe AlertNotifierHelper do
             id: @application.id
           )
         )
-        .to eq application_url(
-          @base_params.merge(
-            id: @application.id,
-            utm_campaign: 'view-application'
+          .to eq application_url(
+            @base_params.merge(
+              id: @application.id,
+              utm_campaign: 'view-application'
+            )
           )
-        )
       end
     end
 
@@ -72,13 +72,13 @@ describe AlertNotifierHelper do
               comment: @comment
             )
           )
-          .to eq application_url(
-            @base_params.merge(
-              id: @comment.application.id,
-              anchor: "comment#{@comment.id}",
-              utm_campaign: 'view-comment'
+            .to eq application_url(
+              @base_params.merge(
+                id: @comment.application.id,
+                anchor: "comment#{@comment.id}",
+                utm_campaign: 'view-comment'
+              )
             )
-          )
         end
       end
     end
@@ -97,13 +97,13 @@ describe AlertNotifierHelper do
             reply: reply
           )
         )
-        .to eq application_url(
-          @base_params.merge(
-            id: reply.comment.application.id,
-            anchor: "reply5",
-            utm_campaign: 'view-reply'
+          .to eq application_url(
+            @base_params.merge(
+              id: reply.comment.application.id,
+              anchor: "reply5",
+              utm_campaign: 'view-reply'
+            )
           )
-        )
       end
     end
 
@@ -115,13 +115,13 @@ describe AlertNotifierHelper do
             id: @application.id
           )
         )
-        .to eq application_url(
-          @base_params.merge(
-            id: @application.id,
-            utm_campaign: 'add-comment',
-            anchor: 'add-comment'
+          .to eq application_url(
+            @base_params.merge(
+              id: @application.id,
+              utm_campaign: 'add-comment',
+              anchor: 'add-comment'
+            )
           )
-        )
       }
     end
   end

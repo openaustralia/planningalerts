@@ -157,9 +157,9 @@ describe Comment do
       end
 
       it "the returning count should equal the total count minus new commenters count" do
-        returning_count = Comment.by_returning_commenters_for_date(Date.current).to_a.count
-        first_time_count = Comment.by_first_time_commenters_for_date(Date.current).to_a.count
-        total_count = Comment.visible_with_unique_emails_for_date(Date.current).to_a.count
+        returning_count = Comment.by_returning_commenters_for_date(Date.current).to_a.size
+        first_time_count = Comment.by_first_time_commenters_for_date(Date.current).to_a.size
+        total_count = Comment.visible_with_unique_emails_for_date(Date.current).to_a.size
 
         expect(returning_count).to eq(total_count - first_time_count)
       end
@@ -258,7 +258,7 @@ describe Comment do
     end
 
     context "when the comment is a message to a councillor" do
-      before { comment.councillor = create(:councillor, name: "Louise Councillor")}
+      before { comment.councillor = create(:councillor, name: "Louise Councillor") }
 
       it { expect(comment.recipient_display_name).to eq "local councillor Louise Councillor" }
     end

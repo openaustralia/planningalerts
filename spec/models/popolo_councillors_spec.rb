@@ -4,7 +4,7 @@ describe PopoloCouncillors do
   describe "#for_authority" do
     it "finds councillors for a named authority" do
       popolo_file = Rails.root.join("spec", "fixtures", "local_councillor_popolo.json")
-      popolo_councillors = PopoloCouncillors.new(EveryPolitician::Popolo::read(popolo_file))
+      popolo_councillors = PopoloCouncillors.new(EveryPolitician::Popolo.read(popolo_file))
 
       expected_persons_array = [
         EveryPolitician::Popolo::Person.new(

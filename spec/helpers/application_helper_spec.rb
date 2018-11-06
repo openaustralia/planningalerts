@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe ApplicationHelper do
-
   describe "#meters_in_words" do
     it "should convert a distance in metres to simple concise text" do
       expect(helper.meters_in_words(2000)).to eq("2 km")

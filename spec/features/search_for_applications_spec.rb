@@ -9,8 +9,8 @@ feature "Searching for development application near an address" do
 
   background do
     create(:application,
-            address: "24 Bruce Road Glenbrook",
-            description: "A lovely house")
+           address: "24 Bruce Road Glenbrook",
+           description: "A lovely house")
   end
 
   scenario "successfully" do

@@ -3,19 +3,21 @@ require 'spec_helper'
 feature "Manage alerts" do
   scenario "Unsubscribe from an email alert" do
     # Adding arbitrary coordinates so that geocoding is not carried out
-    alert = create(:alert, address: "24 Bruce Rd, Glenbrook", email: "example@example.com",
-      radius_meters: "2000", lat: 1.0, lng: 1.0, confirmed: true)
+    alert = create(:alert,
+                   address: "24 Bruce Rd, Glenbrook", email: "example@example.com",
+                   radius_meters: "2000", lat: 1.0, lng: 1.0, confirmed: true)
     visit unsubscribe_alert_url(id: alert.confirm_id, host: 'dev.planningalerts.org.au')
 
     expect(page).to have_content("You have been unsubscribed")
     expect(page).to have_content("24 Bruce Rd, Glenbrook (within 2 km)")
     expect(Alert.active.find_by(address: "24 Bruce Rd, Glenbrook",
-      email: "example@example.com")).to be_nil
+                                email: "example@example.com")).to be_nil
   end
 
   scenario "Change size of email alert" do
-    alert = create(:alert, address: "24 Bruce Rd, Glenbrook", email: "example@example.com",
-      radius_meters: "2000", lat: 1.0, lng: 1.0, confirmed: true)
+    alert = create(:alert,
+                   address: "24 Bruce Rd, Glenbrook", email: "example@example.com",
+                   radius_meters: "2000", lat: 1.0, lng: 1.0, confirmed: true)
     visit area_alert_url(id: alert.confirm_id, host: 'dev.planningalerts.org.au')
 
     expect(page).to have_content("What size area near 24 Bruce Rd, Glenbrook would you like to receive alerts for?")

@@ -44,9 +44,9 @@ describe AlertsController do
 
   describe "#area" do
     it "should 404 if the alert can't be found" do
-      expect {
+      expect do
         get :area, id: 'non_existent_id'
-      }.to raise_error(ActiveRecord::RecordNotFound)
+      end.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 end

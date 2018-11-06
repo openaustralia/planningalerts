@@ -27,14 +27,14 @@ describe "Location" do
 
   # Hmm... this test really needs a network connection to run and doesn't really make sense to test
   # through doubleing. So, commenting out
-  #it "should return the country code of the geocoded address" do
-  #  Location.geocode("24 Bruce Road, Glenbrook, NSW 2773").country_code.should == "AU"
-  #end
+  # it "should return the country code of the geocoded address" do
+  #   Location.geocode("24 Bruce Road, Glenbrook, NSW 2773").country_code.should == "AU"
+  # end
 
   # Same as the test above
-  #it "should bias the results of geocoding to australian addresses" do
-  #  Location.geocode("Bruce Road").country_code.should == "AU"
-  #end
+  # it "should bias the results of geocoding to australian addresses" do
+  #   Location.geocode("Bruce Road").country_code.should == "AU"
+  # end
 
   it "should normalise addresses without the country in them" do
     loc = Location.new(double(full_address: "24 Bruce Road, Glenbrook, NSW 2773, Australia"))
@@ -89,7 +89,7 @@ describe "Location" do
       double(full_address: "Bathurst Rd, Durban South 4004, South Africa", country_code: "ZA"),
       double(full_address: "Bathurst Rd, Port Kennedy WA 6172, Australia", country_code: "AU"),
       double(full_address: "Bathurst Rd, Campbell River, BC V9W, Canada", country_code: "CA"),
-      double(full_address: "Bathurst Rd, Riverside, CA, USA", country_code: "US"),
+      double(full_address: "Bathurst Rd, Riverside, CA, USA", country_code: "US")
     ]
     allow(m).to receive_messages(all: all)
     allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(all: all))

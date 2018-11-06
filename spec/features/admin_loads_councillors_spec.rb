@@ -7,9 +7,7 @@ feature "Admin loads councillors for an authority" do
     end
   end
 
-  given(:authority) { create(:authority,
-                             full_name: "Marrickville Council",
-                             state: "NSW") }
+  given(:authority) { create(:authority, full_name: "Marrickville Council", state: "NSW") }
 
   scenario "successfully" do
     sign_in_as_admin
@@ -24,9 +22,9 @@ feature "Admin loads councillors for an authority" do
   end
 
   context "when the authority is from another state" do
-    given(:qld_authority) { create(:authority,
-                                   full_name: "Toowoomba Regional Council",
-                                   state: "QLD") }
+    given(:qld_authority) do
+      create(:authority, full_name: "Toowoomba Regional Council", state: "QLD")
+    end
 
     scenario "successfully" do
       sign_in_as_admin
@@ -62,9 +60,9 @@ feature "Admin loads councillors for an authority" do
       Timecop.freeze(Time.local(2016, 10, 11, 0, 0, 0)) { test.run }
     end
 
-    given(:authority) { create(:authority,
-                              full_name: "Marrickville Council",
-                              state: "NSW") }
+    given(:authority) do
+      create(:authority, full_name: "Marrickville Council", state: "NSW")
+    end
 
     scenario "they are loaded and marked as not current" do
       sign_in_as_admin

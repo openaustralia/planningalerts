@@ -99,7 +99,7 @@ describe "alert_notifier/alert.html.haml" do
       render
     end
 
-    it { expect(rendered).to have_content "Local councillor Louise Councillor\nreplied to\n\nMatthew Landauer"}
+    it { expect(rendered).to have_content "Local councillor Louise Councillor\nreplied to\n\nMatthew Landauer" }
 
     it "renders linebreak formatting into html" do
       expect(rendered).to include(
@@ -173,6 +173,6 @@ describe "alert_notifier/alert.text.erb" do
       render
     end
 
-    it { expect(rendered).to have_content "Local councillor Louise Councillor replied to Matthew Landauer"}
+    it { expect(rendered).to have_content "Local councillor Louise Councillor replied to Matthew Landauer" }
   end
 end

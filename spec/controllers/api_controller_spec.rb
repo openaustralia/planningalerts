@@ -26,12 +26,12 @@ describe ApiController do
     end
   end
 
-  let(:user) { create(:user, email: "foo@bar.com", password: "foofoo")}
+  let(:user) { create(:user, email: "foo@bar.com", password: "foofoo") }
 
   describe "#all" do
     describe "rss" do
       it "should not support rss" do
-        expect{get :all, format: "rss", key: user.api_key}.to raise_error ActionController::UnknownFormat
+        expect { get :all, format: "rss", key: user.api_key }.to raise_error ActionController::UnknownFormat
       end
     end
 
@@ -43,7 +43,7 @@ describe ApiController do
 
       it "should error if valid api key is given but no bulk api access" do
         VCR.use_cassette('planningalerts') do
-          result = create(:application, id: 10, date_scraped: Time.utc(2001,1,1))
+          result = create(:application, id: 10, date_scraped: Time.utc(2001, 1, 1))
           allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
         end
         get :all, key: user.api_key, format: "js"
@@ -55,12 +55,12 @@ describe ApiController do
         user.update_attribute(:bulk_api, true)
         VCR.use_cassette('planningalerts') do
           authority = create(:authority, full_name: "Acme Local Planning Authority")
-          result = create(:application, id: 10, date_scraped: Time.utc(2001,1,1), authority: authority)
+          result = create(:application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
           allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
         end
         get :all, key: user.api_key, format: "js"
         expect(response.status).to eq(200)
-        expect(JSON.parse(response.body)).to eq({
+        expect(JSON.parse(response.body)).to eq(
           "application_count" => 1,
           "max_id" => 10,
           "applications" => [{
@@ -83,7 +83,7 @@ describe ApiController do
               }
             }
           }]
-        })
+        )
       end
     end
   end
@@ -96,7 +96,8 @@ describe ApiController do
     end
 
     it "should find recent applications for a postcode" do
-      result, scope = double, double
+      result = double
+      scope = double
       expect(Application).to receive(:where).with(postcode: "2780").and_return(scope)
       expect(scope).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
       get :postcode, key: user.api_key, format: "rss", postcode: "2780"
@@ -107,44 +108,46 @@ describe ApiController do
     it "should support jsonp" do
       VCR.use_cassette('planningalerts') do
         authority = create(:authority, full_name: "Acme Local Planning Authority")
-        result = create(:application, id: 10, date_scraped: Time.utc(2001,1,1), authority: authority)
+        result = create(:application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
         allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
       end
       xhr :get, :postcode, key: user.api_key, format: "js", postcode: "2780", callback: "foobar"
       expect(response.body[0..10]).to eq("/**/foobar(")
       expect(response.body[-1..-1]).to eq(")")
-      expect(JSON.parse(response.body[11..-2])).to eq([{
-        "application" => {
-          "id" => 10,
-          "council_reference" => "001",
-          "address" => "A test address",
-          "description" => "Pretty",
-          "info_url" => "http://foo.com",
-          "comment_url" => nil,
-          "lat" => nil,
-          "lng" => nil,
-          "date_scraped" => "2001-01-01T00:00:00.000Z",
-          "date_received" => nil,
-          "on_notice_from" => nil,
-          "on_notice_to" => nil,
-          "no_alerted" => nil,
-          "authority" => {
-            "full_name" => "Acme Local Planning Authority"
+      expect(JSON.parse(response.body[11..-2])).to eq(
+        [{
+          "application" => {
+            "id" => 10,
+            "council_reference" => "001",
+            "address" => "A test address",
+            "description" => "Pretty",
+            "info_url" => "http://foo.com",
+            "comment_url" => nil,
+            "lat" => nil,
+            "lng" => nil,
+            "date_scraped" => "2001-01-01T00:00:00.000Z",
+            "date_received" => nil,
+            "on_notice_from" => nil,
+            "on_notice_to" => nil,
+            "no_alerted" => nil,
+            "authority" => {
+              "full_name" => "Acme Local Planning Authority"
+            }
           }
-        }
-      }])
+        }]
+      )
     end
 
     it "should support json api version 2" do
       VCR.use_cassette('planningalerts') do
         authority = create(:authority, full_name: "Acme Local Planning Authority")
-        application = create(:application, id: 10, date_scraped: Time.utc(2001,1,1), authority: authority)
+        application = create(:application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
         result = [application]
         allow(result).to receive(:total_pages).and_return(5)
         allow(Application).to receive_message_chain(:where, :paginate).and_return(result)
       end
       get :postcode, key: user.api_key, format: "js", v: "2", postcode: "2780"
-      expect(JSON.parse(response.body)).to eq({
+      expect(JSON.parse(response.body)).to eq(
         "application_count" => 1,
         "page_count" => 5,
         "applications" => [{
@@ -167,7 +170,7 @@ describe ApiController do
             }
           }
         }]
-      })
+      )
     end
   end
 
@@ -208,10 +211,10 @@ describe ApiController do
       end
 
       it "should log the api call" do
-       get :point, key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000
-       a = ApiStatistic.first
-       expect(a.ip_address).to eq("0.0.0.0")
-       expect(a.query).to eq("/applications.rss?address=24+Bruce+Road+Glenbrook&key=#{CGI.escape(user.api_key)}&radius=4000")
+        get :point, key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000
+        a = ApiStatistic.first
+        expect(a.ip_address).to eq("0.0.0.0")
+        expect(a.query).to eq("/applications.rss?address=24+Bruce+Road+Glenbrook&key=#{CGI.escape(user.api_key)}&radius=4000")
       end
 
       it "should use a search radius of 2000 when none is specified" do
@@ -255,12 +258,18 @@ describe ApiController do
     end
 
     it "should find recent applications in an area" do
-      result, scope = double, double
+      result = double
+      scope = double
       expect(Application).to receive(:where).with("lat > ? AND lng > ? AND lat < ? AND lng < ?", 1.0, 2.0, 3.0, 4.0).and_return(scope)
       expect(scope).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
 
-      get :area, key: user.api_key, format: "rss", bottom_left_lat: 1.0, bottom_left_lng: 2.0,
-        top_right_lat: 3.0, top_right_lng: 4.0
+      get :area,
+          key: user.api_key,
+          format: "rss",
+          bottom_left_lat: 1.0,
+          bottom_left_lng: 2.0,
+          top_right_lat: 3.0,
+          top_right_lng: 4.0
       expect(assigns[:applications]).to eq(result)
       expect(assigns[:description]).to eq("Recent applications in the area (1.0,2.0) (3.0,4.0)")
     end
@@ -273,7 +282,9 @@ describe ApiController do
     end
 
     it "should find recent applications for an authority" do
-      authority, result, scope = double, double, double
+      authority = double
+      result = double
+      scope = double
 
       expect(Authority).to receive(:find_by_short_name_encoded).with("blue_mountains").and_return(authority)
       expect(authority).to receive(:applications).and_return(scope)
@@ -293,7 +304,8 @@ describe ApiController do
     end
 
     it "should find recent applications for a suburb" do
-      result, scope = double, double
+      result = double
+      scope = double
       expect(Application).to receive(:where).with(suburb: "Katoomba").and_return(scope)
       expect(scope).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
       get :suburb, key: user.api_key, format: "rss", suburb: "Katoomba"
@@ -303,7 +315,9 @@ describe ApiController do
 
     describe "search by suburb and state" do
       it "should find recent applications for a suburb and state" do
-        result, scope1, scope2 = double, double, double
+        result = double
+        scope1 = double
+        scope2 = double
         expect(Application).to receive(:where).with(suburb: "Katoomba").and_return(scope1)
         expect(scope1).to receive(:where).with(state: "NSW").and_return(scope2)
         expect(scope2).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
@@ -331,8 +345,8 @@ describe ApiController do
       let(:user) { FactoryGirl.create(:user, bulk_api: true) }
       before(:each) do
         VCR.use_cassette('planningalerts', allow_playback_repeats: true) do
-          FactoryGirl.create_list(:application, 5, date_scraped: DateTime.new(2015, 05, 05, 12, 0, 0))
-          FactoryGirl.create_list(:application, 5, date_scraped: DateTime.new(2015, 05, 06, 12, 0, 0))
+          FactoryGirl.create_list(:application, 5, date_scraped: DateTime.new(2015, 5, 5, 12, 0, 0))
+          FactoryGirl.create_list(:application, 5, date_scraped: DateTime.new(2015, 5, 6, 12, 0, 0))
         end
       end
       subject { get :date_scraped, key: user.api_key, format: "js", date_scraped: "2015-05-06" }

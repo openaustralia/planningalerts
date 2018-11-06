@@ -182,7 +182,7 @@ describe Alert do
 
       # This is to make the setup data match all the records that were created
       # before the callback to create associated AlertSubscribers was added.
-      Alert.all.each {|a| a.update(alert_subscriber_id: nil)}
+      Alert.all.each { |a| a.update(alert_subscriber_id: nil) }
       AlertSubscriber.delete_all
     end
 
@@ -235,10 +235,10 @@ describe Alert do
 
     context "when there are active alerts create on this day" do
       before do
-        @alert =  create(:confirmed_alert, email: "1@example.org", created_at: Time.new(2016, 8, 24, 7, 0, 0, 00))
-        @alert2 =  create(:confirmed_alert, email: "2@example.org", created_at: Time.new(2016, 8, 24, 12, 0, 0, 00))
-        @alert3 =  create(:confirmed_alert, email: "3@example.org", created_at: Time.new(2012, 4, 01, 9, 0, 0, 00))
-        @alert4 =  create(:confirmed_alert, email: "4@example.org" ,created_at: Time.new(1990, 5, 27, 21, 0, 0, 00))
+        @alert = create(:confirmed_alert, email: "1@example.org", created_at: Time.new(2016, 8, 24, 7, 0, 0, 0))
+        @alert2 = create(:confirmed_alert, email: "2@example.org", created_at: Time.new(2016, 8, 24, 12, 0, 0, 0))
+        @alert3 = create(:confirmed_alert, email: "3@example.org", created_at: Time.new(2012, 4, 1, 9, 0, 0, 0))
+        @alert4 = create(:confirmed_alert, email: "4@example.org", created_at: Time.new(1990, 5, 27, 21, 0, 0, 0))
       end
 
       it "includes them" do
@@ -424,7 +424,7 @@ describe Alert do
         Alert.new(
           address_for_placeholder: "5 Boaty St, Boat Face"
         ).address_for_placeholder
-     ).to eql "5 Boaty St, Boat Face"
+      ).to eql "5 Boaty St, Boat Face"
     end
   end
 
@@ -477,7 +477,7 @@ describe Alert do
 
   describe "frequency_distribution" do
     it "should return a frequency distribution of objects as an array sorted by count" do
-      expect(Alert.frequency_distribution(["a", "b", "c", "a", "a", "c", "a"])).to eq([["a", 4], ["c", 2], ["b", 1]])
+      expect(Alert.frequency_distribution(%w[a b c a a c a])).to eq([["a", 4], ["c", 2], ["b", 1]])
     end
   end
 
@@ -539,7 +539,7 @@ describe Alert do
   end
 
   describe "#new_replies" do
-    let (:alert) do
+    let(:alert) do
       create(:alert,
              address: address,
              radius_meters: 2000,
@@ -553,29 +553,29 @@ describe Alert do
 
     it "when there is a new reply on a nearby application it finds a new reply" do
       application = create(:application,
-                            lat: 1.0,
-                            lng: 2.0,
-                            address: address,
-                            suburb: "Glenbrook",
-                            state: "NSW",
-                            postcode: "2773",
-                            no_alerted: 3)
+                           lat: 1.0,
+                           lng: 2.0,
+                           address: address,
+                           suburb: "Glenbrook",
+                           state: "NSW",
+                           postcode: "2773",
+                           no_alerted: 3)
       reply = create(:reply,
-                      comment: create(:comment, application: application),
-                      received_at: 1.hours.ago)
+                     comment: create(:comment, application: application),
+                     received_at: 1.hours.ago)
 
       expect(alert.new_replies).to eq [reply]
     end
 
     it "only finds two new reply when there are two new replies on a sinlge application" do
       application = create(:application,
-                            lat: 1.0,
-                            lng: 2.0,
-                            address: address,
-                            suburb: "Glenbrook",
-                            state: "NSW",
-                            postcode: "2773",
-                            no_alerted: 3)
+                           lat: 1.0,
+                           lng: 2.0,
+                           address: address,
+                           suburb: "Glenbrook",
+                           state: "NSW",
+                           postcode: "2773",
+                           no_alerted: 3)
       reply1 = create(:reply,
                       comment: create(:comment, application: application),
                       received_at: 1.hours.ago)
@@ -588,8 +588,8 @@ describe Alert do
   end
 
   describe "#applications_with_new_comments" do
-    let (:alert) { create(:alert, address: address, radius_meters: 2000, lat: 1.0, lng: 2.0) }
-    let (:near_application) do
+    let(:alert) { create(:alert, address: address, radius_meters: 2000, lat: 1.0, lng: 2.0) }
+    let(:near_application) do
       create(:application,
              lat: 1.0,
              lng: 2.0,
@@ -598,7 +598,7 @@ describe Alert do
              state: "NSW",
              postcode: "2773")
     end
-    let (:far_away_application) do
+    let(:far_away_application) do
       # 5001 m north of alert
       create(:application,
              lat: alert.location.endpoint(0, 5001).lat,
@@ -657,7 +657,7 @@ describe Alert do
   end
 
   describe "#applications_with_new_replies" do
-    let (:alert) do
+    let(:alert) do
       create(:alert,
              address: address,
              radius_meters: 2000,
@@ -718,8 +718,9 @@ describe Alert do
 
       context "and a new application nearby" do
         let(:application) do
-          create(:application, lat: 1.0, lng: 2.0, address: "24 Bruce Road, Glenbrook, NSW",
-            suburb: "Glenbrook", state: "NSW", postcode: "2773", no_alerted: 3)
+          create(:application,
+                 lat: 1.0, lng: 2.0, address: "24 Bruce Road, Glenbrook, NSW",
+                 suburb: "Glenbrook", state: "NSW", postcode: "2773", no_alerted: 3)
         end
 
         before :each do
@@ -796,9 +797,10 @@ describe Alert do
                  postcode: "2773",
                  no_alerted: 3)
         end
-        let(:reply) { create(:reply,
-                             comment: create(:comment, application: application),
-                             received_at: 1.hours.ago) }
+        let(:reply) do
+          create(:reply, comment: create(:comment, application: application),
+                         received_at: 1.hours.ago)
+        end
 
         before :each do
           allow(alert).to receive(:new_replies).and_return([reply])

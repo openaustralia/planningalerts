@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-#feature "Show statistics on alerts" do
-  # In order to figure out which scrapers to write first
-  # As a scraper developer
-  # I want to see how many people have signed up for alerts in each area and whether that area has a scraper written for it already
-  
+# feature "Show statistics on alerts" do
+# In order to figure out which scrapers to write first
+# As a scraper developer
+# I want to see how many people have signed up for alerts in each area and whether that area has a scraper written for it already
+
 #  scenario "list all the email alerts by authority" do
 #    Alert.create!(email: "foo@openaustralia.org", address: "200 Darley Street, Newtown",
 #      radius_meters: "2000")
@@ -20,4 +20,4 @@ require 'spec_helper'
 #    page.should have_content("Marrickville, NSW 1")
 #    page.should_not have_content("Blue Mountains, NSW")
 #  end
-#end
+# end

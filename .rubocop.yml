@@ -1,72 +1,61 @@
-# To keep things simple, we're using a whitelist approach
-# Add Cops gradually as needed
 AllCops:
-  DisabledByDefault: true
   Exclude:
-    -  db/schema.rb
+      - 'db/migrate/*'
+      - 'db/schema.rb'
 
-Style/FirstParameterIndentation:
-  StyleGuide: https://rubocop.readthedocs.io/en/latest/cops_layout/#layoutfirstparameterindentation
-  Enabled: true
+# Things we're disabling temporarily
+Style/StringLiterals:
+  Enabled: false
 
-Style/AlignParameters:
-  StyleGuide: https://rubocop.readthedocs.io/en/latest/cops_layout/#layoutalignparameters
-  Enabled: true
-  EnforcedStyle: with_first_parameter
+Style/FrozenStringLiteralComment:
+  Enabled: false
 
-Style/IndentationWidth:
-  StyleGuide: https://rubocop.readthedocs.io/en/latest/cops_layout/#layoutindentationwidth
-  Enabled: true
+Metrics/LineLength:
+  Enabled: false
 
-Style/IndentationConsistency:
-  StyleGuide: https://rubocop.readthedocs.io/en/latest/cops_layout/#layoutindentationconsistency
-  Enabled: true
-  EnforcedStyle: normal
+Style/ClassAndModuleChildren:
+  Enabled: false
 
-Style/ClosingParenthesisIndentation:
-  StyleGuide: https://rubocop.readthedocs.io/en/latest/cops_layout/#layoutclosingparenthesisindentation
-  Enabled: true
+# We prefer double quotes here and it we're making liberal use of multi-line
+# strings so it makes sense to enforce those to be consistent oo
+# Style/StringLiterals:
+#   EnforcedStyle: double_quotes
+#   ConsistentQuotesInMultiline: true
 
-Style/HashSyntax:
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#hash-literals
-  EnforcedStyle: ruby19
+# This one I disagree with. Putting seperators in large numbers makes sense
+# in some circumstances but in others (an example id in a database table)
+# it's just nonsensical. Also, I think this one might also be a bit US centric.
+Style/NumericLiterals:
+  Enabled: false
 
-Style/EmptyLines:
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#two-or-more-empty-lines
-  Enabled: true
+# For Rails it feels a little overkill to have to write a description for
+# each class because so much is naming conventions. So, disabling this
+Style/Documentation:
+  Enabled: false
 
-Style/EmptyLineBetweenDefs:
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#empty-lines-between-methods
-  Enabled: true
+# Disable a bunch of metrics to do with code complexity. These as are all
+# a bit hard-nosed. Maybe after we've done a pass with Code Climate we
+# can revisit these
+Metrics/AbcSize:
+  Enabled: false
 
-Style/EmptyLinesAroundAccessModifier:
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#empty-lines-around-access-modifier
-  Enabled: true
+Metrics/BlockLength:
+  Enabled: false
 
-Style/EmptyLinesAroundBeginBody:
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#empty-lines-around-bodies
-  Enabled: true
+Metrics/ClassLength:
+  Enabled: false
 
-Style/EmptyLinesAroundBlockBody:
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#empty-lines-around-bodies
-  Enabled: true
+Metrics/CyclomaticComplexity:
+  Enabled: false
 
-Style/EmptyLinesAroundClassBody:
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#empty-lines-around-bodies
-  Enabled: true
+Metrics/MethodLength:
+  Enabled: false
 
-Style/EmptyLinesAroundExceptionHandlingKeywords:
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#empty-lines-around-bodies
-  Enabled: true
+Metrics/ModuleLength:
+  Enabled: false
 
-Style/EmptyLinesAroundMethodBody:
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#empty-lines-around-bodies
-  Enabled: true
+Metrics/ParameterLists:
+  Enabled: false
 
-Style/EmptyLinesAroundModuleBody:
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#empty-lines-around-bodies
-  Enabled: true
-
-Style/RedundantReturn:
-  StyleGuide: https://rubocop.readthedocs.io/en/latest/cops_style/#styleredundantreturn
-  Enabled: true
+Metrics/PerceivedComplexity:
+  Enabled: false

@@ -1,11 +1,11 @@
 class Rack::Throttle::Blocked < Rack::Throttle::Limiter
-  def allowed?(request)
+  def allowed?(_request)
     false
   end
 end
 
 class Rack::Throttle::Unlimited < Rack::Throttle::Limiter
-  def allowed?(request)
+  def allowed?(_request)
     true
   end
 end
@@ -15,17 +15,17 @@ end
 class ThrottleConfigurable < Rack::Throttle::Limiter
   attr_reader :strategies
 
-  #strategies: {
-  #  "hourly" => {
-  #    100 => "default",
-  #    200 => ["1.2.3.7", "1.2.3.8"],
-  #  },
-  #  "daily" => {
-  #    60000 => "1.2.3.4"
-  #  },
-  #  "unlimited" => "1.2.3.5",
-  #  "blocked" => "1.2.3.6",
-  #}
+  # strategies: {
+  #   "hourly" => {
+  #     100 => "default",
+  #     200 => ["1.2.3.7", "1.2.3.8"],
+  #   },
+  #   "daily" => {
+  #     60000 => "1.2.3.4"
+  #   },
+  #   "unlimited" => "1.2.3.5",
+  #   "blocked" => "1.2.3.6",
+  # }
   def initialize(app, options = {})
     super
 
@@ -37,7 +37,7 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
       case strategy
       when "hourly", "daily"
         value.each do |m, hosts|
-          raise "Invalid max count used: #{m}" unless m.kind_of?(Integer)
+          raise "Invalid max count used: #{m}" unless m.is_a?(Integer)
           add_hosts_to_strategies(hosts, strategy_factory(strategy, m))
         end
       when "unlimited", "blocked"
@@ -60,7 +60,7 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
   private
 
   def strategy_factory(name, max = nil)
-    case(name)
+    case name
     when "blocked"
       Rack::Throttle::Blocked.new(nil)
     when "hourly"
@@ -74,14 +74,14 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
 
   def valid_ip?(ip)
     n = ip.split(".")
-    (n.count == 4 && n.all? {|m| m.to_i >= 0 && m.to_i <= 255}) || (ip == "default")
+    (n.count == 4 && n.all? { |m| m.to_i >= 0 && m.to_i <= 255 }) || (ip == "default")
   end
 
   def add_hosts_to_strategies(hosts, strategy)
     hosts = [hosts] unless hosts.respond_to?(:each)
     hosts.each do |host|
       raise "Invalid ip address used: #{host}" unless valid_ip?(host)
-      raise "ip address can not be used multiple times: #{host}" if @strategies.has_key?(host)
+      raise "ip address can not be used multiple times: #{host}" if @strategies.key?(host)
       @strategies[host] = strategy
     end
   end

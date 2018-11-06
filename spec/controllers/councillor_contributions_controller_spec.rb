@@ -30,14 +30,16 @@ describe CouncillorContributionsController do
         get :show, authority_id: authority.id, id: 5, format: "csv"
 
         response_csv = CSV.parse(response.body)
-        expect((response_csv).first).to eql [
-          "name", "start_date", "end_date", "executive", "council", "council_website",
-          "id","email", "image", "party", "source", "ward"
+        expect(response_csv.first).to eql %w[
+          name start_date end_date executive council council_website
+          id email image party source ward
         ]
-        expect(response_csv.last).to eql [
-          "Mila Gilic", nil, nil, nil, "Casey City Council", "http://www.casey.vic.gov.au",
-          "casey_city_council/mila_gilic", "mgilic@casey.vic.gov.au", nil, nil, "Foo bar source", nil
+        expect(response_csv.last).to eql(
+          [
+            "Mila Gilic", nil, nil, nil, "Casey City Council", "http://www.casey.vic.gov.au",
+            "casey_city_council/mila_gilic", "mgilic@casey.vic.gov.au", nil, nil, "Foo bar source", nil
           ]
+        )
       end
     end
 

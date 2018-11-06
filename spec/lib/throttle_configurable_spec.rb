@@ -5,17 +5,21 @@ require 'spec_helper'
 
 describe ThrottleConfigurable do
   let(:t) do
-    ThrottleConfigurable.new(nil, strategies: {
-      "hourly" => {
-        100 => "default",
-        3 => ["1.2.3.7", "1.2.3.8"],
-      },
-      "daily" => {
-        2 => "1.2.3.4"
-      },
-      "unlimited" => "1.2.3.5",
-      "blocked" => "1.2.3.6",
-    })
+    ThrottleConfigurable.new(
+      nil,
+      strategies:
+        {
+          "hourly" => {
+            100 => "default",
+            3 => ["1.2.3.7", "1.2.3.8"]
+          },
+          "daily" => {
+            2 => "1.2.3.4"
+          },
+          "unlimited" => "1.2.3.5",
+          "blocked" => "1.2.3.6"
+        }
+    )
   end
 
   it "should be able to extract the strategy setting for a particular ip address" do
@@ -35,33 +39,33 @@ describe ThrottleConfigurable do
   end
 
   it "should check that the strategy names are valid" do
-    expect {ThrottleConfigurable.new(nil,
-      strategies: {"foo" => "1.2.3.4"}
-      )}.to raise_error "Invalid strategy name used: foo"
+    expect do
+      ThrottleConfigurable.new(nil, strategies: { "foo" => "1.2.3.4" })
+    end.to raise_error "Invalid strategy name used: foo"
   end
 
   it "should check that the max count is valid" do
-    expect {ThrottleConfigurable.new(nil,
-      strategies: {"hourly" => {"foo" => "1.2.3.4"}}
-      )}.to raise_error "Invalid max count used: foo"
+    expect do
+      ThrottleConfigurable.new(nil, strategies: { "hourly" => { "foo" => "1.2.3.4" } })
+    end.to raise_error "Invalid max count used: foo"
   end
 
   it "should check that the ip addresses are potentially sane" do
-    expect {ThrottleConfigurable.new(nil,
-      strategies: {"hourly" => {100 => "257.2.3.4"}}
-      )}.to raise_error "Invalid ip address used: 257.2.3.4"
+    expect do
+      ThrottleConfigurable.new(nil, strategies: { "hourly" => { 100 => "257.2.3.4" } })
+    end.to raise_error "Invalid ip address used: 257.2.3.4"
   end
 
   it "should check that an ip address isn't under multiple strategies" do
-    expect {ThrottleConfigurable.new(nil,
-      strategies: {"hourly" => {100 => "1.2.3.4"}, "unlimited" => "1.2.3.4"}
-      )}.to raise_error "ip address can not be used multiple times: 1.2.3.4"
+    expect do
+      ThrottleConfigurable.new(nil, strategies: { "hourly" => { 100 => "1.2.3.4" }, "unlimited" => "1.2.3.4" })
+    end.to raise_error "ip address can not be used multiple times: 1.2.3.4"
   end
 
   it "should check that there is a default setting" do
-    expect {ThrottleConfigurable.new(nil,
-      strategies: {"hourly" => {100 => "1.2.3.4"}}
-      )}.to raise_error "No default setting"
+    expect do
+      ThrottleConfigurable.new(nil, strategies: { "hourly" => { 100 => "1.2.3.4" } })
+    end.to raise_error "No default setting"
   end
 
   it "should not do any throttling with the unlimited strategy" do

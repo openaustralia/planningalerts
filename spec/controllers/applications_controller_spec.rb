@@ -29,7 +29,7 @@ describe ApplicationsController do
     describe "search by authority" do
       it "should give a 404 when an invalid authority_id is used" do
         expect(Authority).to receive(:find_by_short_name_encoded).with("this_authority_does_not_exist").and_return(nil)
-        expect{get :index, authority_id: "this_authority_does_not_exist"}.to raise_error ActiveRecord::RecordNotFound
+        expect { get :index, authority_id: "this_authority_does_not_exist" }.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end
@@ -72,5 +72,4 @@ describe ApplicationsController do
       expect(assigns[:radius]).to eq 2000.0
     end
   end
-
 end

@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) +'/throttle_configurable'
+require File.dirname(__FILE__) + '/throttle_configurable'
 
 # Same as configurable throttler except it only throttles API requests (based on the interpreted route)
 class ApiThrottler < ThrottleConfigurable
@@ -6,7 +6,7 @@ class ApiThrottler < ThrottleConfigurable
     path_info = Rails.application.routes.recognize_path request.url rescue {}
     # If this request is to the API
     if path_info && path_info[:controller] == "applications" && path_info[:action] == "index" &&
-      (path_info[:format] == "rss" || path_info[:format] == "js")
+       (path_info[:format] == "rss" || path_info[:format] == "js")
       # Rate limit this request
       super
     else

@@ -145,8 +145,8 @@ feature "Send a message to a councillor" do
   end
 
   context "when a message for a councillor is confirmed" do
-    given (:councillor) { create(:councillor, name: "Louise Councillor", email: "louise@council.nsw.gov.au") }
-    given (:comment) do
+    given(:councillor) { create(:councillor, name: "Louise Councillor", email: "louise@council.nsw.gov.au") }
+    given(:comment) do
       VCR.use_cassette('planningalerts') do
         application = create(:application, id: 8, address: "24 Bruce Road Glenbrook", description: "A lovely house")
         create(:comment, application: application,

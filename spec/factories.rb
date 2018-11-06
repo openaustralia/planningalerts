@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :authority do
     sequence(:full_name) { |n| "Acme Local Planning Authority - #{n}" }
-    short_name {|b| b.full_name}
+    short_name(&:full_name)
     state "NSW"
 
     factory :contactable_authority do
@@ -12,7 +12,7 @@ FactoryGirl.define do
   factory :application do
     association :authority
     council_reference "001"
-    date_scraped {|b| 10.minutes.ago}
+    date_scraped { |_b| 10.minutes.ago }
     address "A test address"
     description "pretty"
     info_url "http://foo.com"
@@ -90,8 +90,8 @@ FactoryGirl.define do
   factory :alert do
     email "mary@example.org"
     sequence(:address) { |s| "#{s} Illawarra Road Marrickville 2204" }
-    lat -33.911105
-    lng 151.155503
+    lat(-33.911105)
+    lng(151.155503)
     radius_meters 2000
 
     factory :unconfirmed_alert do

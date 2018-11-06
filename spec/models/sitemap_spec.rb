@@ -9,7 +9,7 @@ describe Sitemap do
 
   it "should output an xml sitemap" do
     public = Rails.root.join('public').to_s
-    
+
     file1 = double("file1")
     expect(File).to receive(:open).with("#{public}/sitemap.xml", "w").and_return(file1)
     expect(file1).to receive(:<<).with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
@@ -35,9 +35,9 @@ describe Sitemap do
     s.add_url "/", changefreq: :hourly, lastmod: DateTime.new(2010, 2, 1)
     s.add_url "/foo", changefreq: :daily, lastmod: DateTime.new(2010, 1, 1)
     s.finish
-    #s.notify_search_engines
+    # s.notify_search_engines
   end
-  
+
   it "should know the web root and the file path root" do
     public = Rails.root.join('public').to_s
     s = Sitemap.new("http://domain.org", public, @logger)
@@ -45,14 +45,14 @@ describe Sitemap do
     expect(s.root_path).to eq(public)
     s.finish
   end
-  
+
   it "should have the path to one of the sitemaps" do
     public = Rails.root.join('public').to_s
     s = Sitemap.new("http://domain.org", public, @logger)
     expect(s.sitemap_relative_path).to eq("sitemaps/sitemap1.xml.gz")
     s.finish
   end
-  
+
   it "should have the path to the sitemap index" do
     public = Rails.root.join('public').to_s
     s = Sitemap.new("http://domain.org", public, @logger)

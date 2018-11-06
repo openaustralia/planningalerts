@@ -172,7 +172,7 @@ feature "Contributing new councillors for an authority" do
 
       within(page.all("fieldset").first) do
         fill_in "Full name", with: "Changed Councillor"
-        fill_in "Email", with:"mgilic@casey.vic.gov.au"
+        fill_in "Email", with: "mgilic@casey.vic.gov.au"
       end
 
       click_button "Submit 2 new councillors"
