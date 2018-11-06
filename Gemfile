@@ -68,7 +68,8 @@ gem 'google_places'
 
 group :test do
   gem 'capybara'
-  gem 'capybara-selenium'
+  gem 'chromedriver-helper'
+  gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem 'factory_girl'
   gem 'email_spec', '~> 1.6'
