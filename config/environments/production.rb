@@ -60,7 +60,7 @@ PlanningalertsApp::Application.configure do
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   # TODO: Use one JS/CSS asset to reduce HTTP requests
-  config.assets.precompile += %w( print.css ie.css placeholder_polyfill.min.css placeholder_polyfill.jquery.min.combo.js maps.js applications.js atdis.js bar_graph.js stacked_area_chart.js )
+  config.assets.precompile += %w[print.css ie.css placeholder_polyfill.min.css placeholder_polyfill.jquery.min.combo.js maps.js applications.js atdis.js bar_graph.js stacked_area_chart.js]
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -69,11 +69,11 @@ PlanningalertsApp::Application.configure do
   # Send mails to the locally running instance of Cuttlefish
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-     address: ENV["CUTTLEFISH_SERVER"],
-     port: 2525,
-     user_name: ENV["CUTTLEFISH_USER_NAME"],
-     password: ENV["CUTTLEFISH_PASSWORD"],
-     authentication: :plain
+    address: ENV["CUTTLEFISH_SERVER"],
+    port: 2525,
+    user_name: ENV["CUTTLEFISH_USER_NAME"],
+    password: ENV["CUTTLEFISH_PASSWORD"],
+    authentication: :plain
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

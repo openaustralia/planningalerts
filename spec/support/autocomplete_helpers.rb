@@ -10,7 +10,7 @@ module AutocompleteHelpers
     within ".pac-container" do
       # This regex is a hack because google seems to change how results are returned
       # it would be better to find less brittle way of testing this.
-      expect(page).to have_content /#{expected_address.sub(", ","(, )?")}/
+      expect(page).to have_content(/#{expected_address.sub(", ", "(, )?")}/)
     end
   end
 end

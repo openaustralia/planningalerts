@@ -2,10 +2,10 @@ require 'simplecov'
 require 'coveralls'
 
 # Generate coverage locally in html as well as in coveralls.io
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
-])
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
+  [SimpleCov::Formatter::HTMLFormatter,
+   Coveralls::SimpleCov::Formatter]
+)
 SimpleCov.start('rails') do
   add_filter 'app/admin'
 end
@@ -35,12 +35,12 @@ VCR.configure do |c|
   c.hook_into :webmock
   c.ignore_localhost = true
   # Uncomment this below if you want to record new external http requests
-  #c.default_cassette_options = { record: :new_episodes }
+  # c.default_cassette_options = { record: :new_episodes }
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.

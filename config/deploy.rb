@@ -43,23 +43,23 @@ namespace :deploy do
   desc "After a code update, we link additional config and the scrapers"
   before "deploy:assets:precompile" do
     links = {
-            "#{release_path}/config/database.yml"               => "#{shared_path}/database.yml",
-            "#{release_path}/config/throttling.yml"             => "#{shared_path}/throttling.yml",
-            "#{release_path}/.env.production"                   => "#{shared_path}/.env.production",
-            "#{release_path}/config/production.sphinx.conf"     => "#{shared_path}/production.sphinx.conf",
-            "#{release_path}/config/sphinx.yml"                 => "#{shared_path}/sphinx.yml",
-            "#{release_path}/config/newrelic.yml"               => "#{shared_path}/newrelic.yml",
-            "#{release_path}/public/sitemap.xml"                => "#{shared_path}/sitemap.xml",
-            "#{release_path}/public/sitemaps"                   => "#{shared_path}/sitemaps",
-            "#{release_path}/public/assets"                     => "#{shared_path}/assets",
+      "#{release_path}/config/database.yml"               => "#{shared_path}/database.yml",
+      "#{release_path}/config/throttling.yml"             => "#{shared_path}/throttling.yml",
+      "#{release_path}/.env.production"                   => "#{shared_path}/.env.production",
+      "#{release_path}/config/production.sphinx.conf"     => "#{shared_path}/production.sphinx.conf",
+      "#{release_path}/config/sphinx.yml"                 => "#{shared_path}/sphinx.yml",
+      "#{release_path}/config/newrelic.yml"               => "#{shared_path}/newrelic.yml",
+      "#{release_path}/public/sitemap.xml"                => "#{shared_path}/sitemap.xml",
+      "#{release_path}/public/sitemaps"                   => "#{shared_path}/sitemaps",
+      "#{release_path}/public/assets"                     => "#{shared_path}/assets"
     }
 
     # "ln -sf <a> <b>" creates a symbolic link but deletes <b> if it already exists
-    run links.map {|a| "ln -sf #{a.last} #{a.first}"}.join(";")
+    run links.map { |a| "ln -sf #{a.last} #{a.first}" }.join(";")
   end
 
   task :restart, except: { no_release: true } do
-    run "touch #{File.join(current_path,'tmp','restart.txt')}"
+    run "touch #{File.join(current_path, 'tmp', 'restart.txt')}"
   end
 
   desc "Deploys and starts a `cold' application. Uses db:schema:load instead of Capistrano's default of db:migrate"
@@ -76,7 +76,8 @@ namespace :deploy do
     migrate_env = fetch(:migrate_env, "")
     migrate_target = fetch(:migrate_target, :latest)
 
-    directory = case migrate_target.to_sym
+    directory =
+      case migrate_target.to_sym
       when :current then current_path
       when :latest  then latest_release
       else raise ArgumentError, "unknown migration target #{migrate_target.inspect}"
