@@ -14,7 +14,7 @@ class CouncillorContributionsController < ApplicationController
         CouncillorContribution.new
       end
 
-    @councillor_contribution.suggested_councillors.build({email: nil, name: nil}) if new_suggested_councillor_required?
+    @councillor_contribution.suggested_councillors.build(email: nil, name: nil) if new_suggested_councillor_required?
   end
 
   def source
@@ -27,7 +27,7 @@ class CouncillorContributionsController < ApplicationController
     # Hack to stop someone submitting a blank contribution
     # Remove this once people can remove councillors from their contribution
     if @councillor_contribution.suggested_councillors.empty?
-      @councillor_contribution.suggested_councillors.build({email: nil, name: nil})
+      @councillor_contribution.suggested_councillors.build(email: nil, name: nil)
     end
 
     if @councillor_contribution.save
@@ -43,17 +43,16 @@ class CouncillorContributionsController < ApplicationController
     @councillor_contribution = CouncillorContribution.find(councillor_contribution_with_source_params[:id])
 
     @councillor_contribution.update!(source: councillor_contribution_with_source_params[:source])
-    @councillor_contribution.build_contributor({email: nil, name: nil})
+    @councillor_contribution.build_contributor(email: nil, name: nil)
   end
 
   def thank_you
     @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
     @councillor_contribution = CouncillorContribution.find(councillor_contribution_with_contibutor_params[:id])
+    return if params[:button].eql? "skip"
 
-    unless params[:button].eql? "skip"
-      @councillor_contribution.create_contributor!(councillor_contribution_with_contibutor_params[:contributor_attributes])
-      @councillor_contribution.save!
-    end
+    @councillor_contribution.create_contributor!(councillor_contribution_with_contibutor_params[:contributor_attributes])
+    @councillor_contribution.save!
   end
 
   def show
@@ -62,7 +61,7 @@ class CouncillorContributionsController < ApplicationController
       format.csv do
         send_data(
           @councillor_contribution.to_csv,
-          filename: "#{@councillor_contribution.created_at.to_date.to_s}_#{@councillor_contribution.authority.short_name.downcase}_councillor_contribution_#{@councillor_contribution.id}.csv",
+          filename: "#{@councillor_contribution.created_at.to_date}_#{@councillor_contribution.authority.short_name.downcase}_councillor_contribution_#{@councillor_contribution.id}.csv",
           content_type: Mime[:csv]
         )
       end
@@ -74,7 +73,7 @@ class CouncillorContributionsController < ApplicationController
     respond_to do |format|
       format.json do
         contributions_json = @councillor_contributions.to_json(
-          only: [:source, :id, :created_at],
+          only: %i[source id created_at],
           include: { contributor: { only: [:name] } }
         )
         render json: contributions_json
@@ -86,7 +85,7 @@ class CouncillorContributionsController < ApplicationController
 
   def councillor_contribution_with_suggested_councillors_params
     params.require(:councillor_contribution).permit(
-      suggested_councillors_attributes: [:name, :email]
+      suggested_councillors_attributes: %i[name email]
     )
   end
 
@@ -97,17 +96,17 @@ class CouncillorContributionsController < ApplicationController
   def councillor_contribution_with_contibutor_params
     params.require(:councillor_contribution).permit(
       :id,
-      contributor_attributes: [:name, :email]
+      contributor_attributes: %i[name email]
     )
   end
 
   def check_if_feature_flag_is_on
-    unless ENV["CONTRIBUTE_COUNCILLORS_ENABLED"].present?
-      render "static/error_404", status: 404
-    end
+    return if ENV["CONTRIBUTE_COUNCILLORS_ENABLED"].present?
+
+    render "static/error_404", status: 404
   end
 
   def new_suggested_councillor_required?
-    @councillor_contribution.suggested_councillors.empty? || @councillor_contribution.suggested_councillors.collect { |c| c.valid? }.exclude?(false)
+    @councillor_contribution.suggested_councillors.empty? || @councillor_contribution.suggested_councillors.collect(&:valid?).exclude?(false)
   end
 end

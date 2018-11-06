@@ -6,35 +6,31 @@ class AddCommentsController < ApplicationController
 
     # First check if the honeypot field has been filled out by a spam bot
     # If so, make it look like things worked but don't actually do anything
-    if params[:little_sweety].blank?
+    return if params[:little_sweety].present?
 
-      @add_comment = AddComment.new(
-        add_comment_params.merge(
-          application: @application,
-          theme: @theme
-        )
+    @add_comment = AddComment.new(
+      add_comment_params.merge(
+        application: @application,
+        theme: @theme
       )
+    )
 
-      @comment = @add_comment.save_comment
+    @comment = @add_comment.save_comment
 
-      # TODO: This seems to have a lot repeated from Application#show
-      if @comment.nil?
-        flash.now[:error] = "Some of the comment wasn't filled out completely. See below."
+    return if @comment
 
-        if params[:councillors_list_toggler] == "open"
-          @councillor_list_open = true
-        end
+    # TODO: This seems to have a lot repeated from Application#show
+    flash.now[:error] = "Some of the comment wasn't filled out completely. See below."
 
-        @councillors = @application.councillors_available_for_contact if @theme.eql? "default"
+    @councillor_list_open = true if params[:councillors_list_toggler] == "open"
 
-        # HACK: Required for new email alert signup form
-        @alert = Alert.new(address: @application.address)
+    @councillors = @application.councillors_available_for_contact if @theme.eql? "default"
 
-        render 'applications/show'
-      end
-    end
+    # HACK: Required for new email alert signup form
+    @alert = Alert.new(address: @application.address)
+
+    render 'applications/show'
   end
-
 
   private
 

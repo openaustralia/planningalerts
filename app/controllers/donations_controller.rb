@@ -23,7 +23,6 @@ class DonationsController < ApplicationController
 
     # TODO: rescue and redirect to new on attempt to reload the create page
     # which tries to reuse the token again and errors.
-
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to new_donation_path
@@ -35,8 +34,8 @@ class DonationsController < ApplicationController
   private
 
   def check_if_stripe_is_configured
-    unless Donation.plan_id_on_stripe.present?
-      render "static/error_404"
-    end
+    return if Donation.plan_id_on_stripe.present?
+
+    render "static/error_404"
   end
 end

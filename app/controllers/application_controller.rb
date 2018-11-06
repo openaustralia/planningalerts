@@ -16,9 +16,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_active_admin_user!
     authenticate_user!
-    unless current_user.admin?
-      render text: "Not authorised", status: :forbidden
-    end
+    render text: "Not authorised", status: :forbidden unless current_user.admin?
   end
 
   private
@@ -31,9 +29,7 @@ class ApplicationController < ActionController::Base
     @themer = ThemeChooser.themer_from_request(request)
     @theme = @themer.theme
 
-    if @theme == "nsw"
-      self.prepend_view_path "lib/themes/nsw/views"
-    end
+    prepend_view_path "lib/themes/nsw/views" if @theme == "nsw"
   end
 
   def ssl_required?
@@ -43,16 +39,14 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :organisation])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name organisation])
   end
 
   # this method is to respond to the will_paginate bug of invalid page number leading to error being thrown.
   # see discussion here https://github.com/mislav/will_paginate/issues/271
   def validate_page_param
-    if params[:page].present? && params[:page].to_i > 0
-      params[:page] = params[:page].to_i
-    else
-      params[:page] = nil
-    end
+    params[:page] = if params[:page].present? && params[:page].to_i.positive?
+                      params[:page].to_i
+                    end
   end
 end

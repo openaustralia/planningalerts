@@ -8,7 +8,7 @@ class LayarController < ApplicationController
       lines = word_wrap(a.description, line_width: 35).split("\n")
       line4 = truncate(lines[2..-1].join(" "), length: 35) if lines[2..-1]
       {
-        actions: [{label: "More info", uri: application_url(utm_medium: 'ar', utm_source: 'layar', id: a.id)}],
+        actions: [{ label: "More info", uri: application_url(utm_medium: 'ar', utm_source: 'layar', id: a.id) }],
         attribution: nil,
         distance: a.distance.to_f * 1000,
         id: a.id,
@@ -25,7 +25,7 @@ class LayarController < ApplicationController
       }
     end
     # TODO: Make layer name configurable
-    result = {hotspots: layar_applications, radius: params[:radius].to_i, errorCode: 0, errorString: nil, layer: "planningalertsaustralia"}
+    result = { hotspots: layar_applications, radius: params[:radius].to_i, errorCode: 0, errorString: nil, layer: "planningalertsaustralia" }
     if @applications.current_page < @applications.total_pages
       result[:morePages] = true
       result[:nextPageKey] = @applications.current_page + 1

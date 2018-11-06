@@ -2,13 +2,13 @@ require 'will_paginate/array'
 
 class ApplicationsController < ApplicationController
   # TODO: Switch actions from JS to JSON format and remove this
-  skip_before_action :verify_authenticity_token, only: [:per_day, :per_week]
+  skip_before_action :verify_authenticity_token, only: %i[per_day per_week]
 
   def index
     @description = "Recent applications"
 
     if params[:authority_id]
-      # TODO Handle the situation where the authority name isn't found
+      # TODO: Handle the situation where the authority name isn't found
       @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
       apps = @authority.applications
       @description << " from #{@authority.full_name_and_state}"
@@ -55,7 +55,7 @@ class ApplicationsController < ApplicationController
       else
         @q = location.full_address
         @alert = Alert.new(address: @q)
-        @other_addresses = location.all[1..-1].map{|l| l.full_address}
+        @other_addresses = location.all[1..-1].map(&:full_address)
         @applications = case @sort
                         when 'distance'
                           Application.near([location.lat, location.lng], @radius / 1000, units: :km).reorder('distance').paginate(page: params[:page], per_page: per_page)
@@ -67,18 +67,12 @@ class ApplicationsController < ApplicationController
     end
     @set_focus_control = "q"
     # Use a different template if there are results to display
-    if @q && @error.nil?
-      render "address_results"
-    end
+    render "address_results" if @q && @error.nil?
   end
 
   def search
     # TODO: Fix this hacky ugliness
-    if request.format == Mime::HTML
-      per_page = 30
-    else
-      per_page = Application.per_page
-    end
+    per_page = request.format == Mime::HTML ? 30 : Application.per_page
 
     @q = params[:q]
     if @q
@@ -131,14 +125,10 @@ class ApplicationsController < ApplicationController
     @rss = nearby_application_url(params.merge(format: "rss", page: nil))
 
     # TODO: Fix this hacky ugliness
-    if request.format == Mime::HTML
-      per_page = 30
-    else
-      per_page = Application.per_page
-    end
+    per_page = request.format == Mime::HTML ? 30 : Application.per_page
 
     @application = Application.find(params[:id])
-    case(@sort)
+    case @sort
     when "time"
       @applications = @application.find_all_nearest_or_recent.paginate page: params[:page], per_page: per_page
     when "distance"

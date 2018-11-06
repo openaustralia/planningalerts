@@ -4,13 +4,13 @@ class AtdisController < ApplicationController
       @feed = Feed.create_from_url(params[:url])
       begin
         @page = @feed.applications
-      rescue RestClient::InternalServerError => e
+      rescue RestClient::InternalServerError
         @error = "Remote server returned an internal server error (error code 500) accessing #{params[:url]}"
-      rescue RestClient::RequestTimeout => e
+      rescue RestClient::RequestTimeout
         @error = "Timeout in request to #{params[:url]}. Remote server did not respond in a reasonable amount of time."
       rescue RestClient::Exception => e
         @error = "Could not load data - #{e}"
-      rescue URI::InvalidURIError => e
+      rescue URI::InvalidURIError
         @error = "The url appears to be invalid #{params[:url]}"
       end
     else
@@ -30,16 +30,14 @@ class AtdisController < ApplicationController
 
   def feed
     file = Feed.example_path(params[:number].to_i, (params[:page] || "1").to_i)
-    if File.exists?(file)
+    if File.exist?(file)
       render file: file, content_type: Mime::JSON, layout: false
     else
       render text: "not available", status: 404
     end
   end
 
-  def specification
-  end
+  def specification; end
 
-  def guidance
-  end
+  def guidance; end
 end

@@ -22,9 +22,7 @@ class AlertsController < ApplicationController
       )
     ).parse
 
-    if @alert.present? && !@alert.save
-      render 'new'
-    end
+    render 'new' if @alert.present? && !@alert.save
   end
 
   def confirmed
@@ -34,7 +32,7 @@ class AlertsController < ApplicationController
 
   def unsubscribe
     @alert = Alert.find_by_confirm_id(params[:id])
-    @alert.unsubscribe! if @alert
+    @alert&.unsubscribe!
   end
 
   def area
@@ -51,19 +49,21 @@ class AlertsController < ApplicationController
 
   def statistics
     # Commented out because this page is killing mysql.
-    #@no_confirmed_alerts = Alert.confirmed.count
-    #@no_alerts = Alert.count
+    # @no_confirmed_alerts = Alert.confirmed.count
+    # @no_alerts = Alert.count
     # Hmmm... Temporary variable because we're calling a very slow method. Not good.
-    #@alerts_in_inactive_areas = Alert.alerts_in_inactive_areas
-    #@no_alerts_in_active_areas = @no_alerts - @alerts_in_inactive_areas.count
-    #@freq = Alert.distribution_of_lgas(@alerts_in_inactive_areas)
+    # @alerts_in_inactive_areas = Alert.alerts_in_inactive_areas
+    # @no_alerts_in_active_areas = @no_alerts - @alerts_in_inactive_areas.count
+    # @freq = Alert.distribution_of_lgas(@alerts_in_inactive_areas)
   end
 
   private
 
   def zone_sizes
-    {'s' => Rails.application.config.planningalerts_small_zone_size,
+    {
+      's' => Rails.application.config.planningalerts_small_zone_size,
       'm' => Rails.application.config.planningalerts_medium_zone_size,
-      'l' => Rails.application.config.planningalerts_large_zone_size}
+      'l' => Rails.application.config.planningalerts_large_zone_size
+    }
   end
 end

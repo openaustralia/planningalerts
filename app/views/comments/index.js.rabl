@@ -1,4 +1,4 @@
-collection  @comments
+collection @comments
 attributes :id, :text, :name, :updated_at
 
 child :application do
