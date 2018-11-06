@@ -16,7 +16,15 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require "email_spec"
 require 'rspec/active_model/mocks'
-Capybara.javascript_driver = :selenium_chrome_headless
+
+require 'capybara'
+Capybara.register_driver :chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox headless disable-gpu])
+
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
+Capybara.javascript_driver = :chrome
 Capybara.server = :webrick
 
 VCR.configure do |c|
