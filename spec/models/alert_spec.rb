@@ -69,7 +69,9 @@ describe Alert do
     it "is valid when the geocoder returns no errors" do
       mock_geocoder_valid_address_response
 
-      expect(alert).to be_valid
+      VCR.use_cassette('planningalerts') do
+        expect(alert).to be_valid
+      end
     end
 
     it "is invalid if there was an error geocoding the address" do
@@ -81,13 +83,13 @@ describe Alert do
       expect(alert.errors[:address]).to eq(["some error message"])
     end
 
-    it "is invalid if the geocoder found multiple locations for the address" do
-      mock_geocoder_multiple_locations_response
+    it "is invalid if the google places API returns multiple results" do
+      VCR.use_cassette('planningalerts') do
+        alert.save
+        expect(alert).not_to be_valid
+      end
 
-      alert.save
-
-      expect(alert).not_to be_valid
-      expect(alert.errors[:address]).to eq(["isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, VIC 3885"])
+      expect(alert.errors[:address]).to eq(["isn't complete. Please enter a full street address, including suburb and state, e.g. Bruce Rd, Victoria"])
     end
   end
 

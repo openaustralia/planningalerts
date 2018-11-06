@@ -283,8 +283,12 @@ class Alert < ActiveRecord::Base
     if @geocode_result
       if @geocode_result.error
         errors.add(:address, @geocode_result.error)
-      elsif @geocode_result.all.many?
-        errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
+      else
+        # Now check with the Google places API to see if it returns multiple results
+        client = GooglePlaces::Client.new(ENV["GOOGLE_MAPS_SERVER_KEY"])
+        if client.spots_by_query(address + " Australia").many?
+          errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
+        end
       end
     end
   end

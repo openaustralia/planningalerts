@@ -64,6 +64,7 @@ gem 'writeit-rails', git: 'https://github.com/ciudadanointeligente/writeit-rails
 gem 'mime-types', '~> 2.99' # our writeit gem version is incompatible with newer versions
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'rubocop', require: false
+gem 'google_places'
 
 group :test do
   gem 'capybara'

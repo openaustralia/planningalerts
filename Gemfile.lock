@@ -200,6 +200,8 @@ GEM
     geokit (1.13.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    google_places (0.21.0)
+      httparty
     growl (1.0.3)
     guard (2.14.1)
       formatador (>= 0.2.4)
@@ -563,6 +565,7 @@ DEPENDENCIES
   formtastic
   geocoder
   geokit
+  google_places
   growl
   guard
   guard-livereload
