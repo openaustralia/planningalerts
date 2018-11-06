@@ -40,11 +40,18 @@ class CommentsController < ApplicationController
   end
 
   def writeit_reply_webhook
-    if params[:message_id] && comment = Comment.find_by(writeit_message_id: params[:message_id][%r{/api/v1/message/(\d*)/}, 1])
-      comment.create_replies_from_writeit!
-      render text: "Processing inbound message.", status: 200
-    else
-      render text: "No message_id or comment not found.", status: 404
+    if params[:message_id].nil?
+      render text: "No message_id", status: 404
+      return
     end
+
+    comment = Comment.find_by(writeit_message_id: params[:message_id][%r{/api/v1/message/(\d*)/}, 1])
+    if comment.nil?
+      render text: "Comment not found.", status: 404
+      return
+    end
+
+    comment.create_replies_from_writeit!
+    render text: "Processing inbound message.", status: 200
   end
 end
