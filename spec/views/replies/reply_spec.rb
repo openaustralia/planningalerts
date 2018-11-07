@@ -12,12 +12,7 @@ describe "replies/_reply" do
     render reply
 
     expect(rendered).to include(
-"<p>Thanks for your comment.</p>
-
-<p>I agree.</p>
-
-<p>Best wishes,
-<br />Louise Councillor</p>"
+      "<p>Thanks for your comment.</p>\n\n<p>I agree.</p>\n\n<p>Best wishes,\n<br />Louise Councillor</p>"
     )
   end
 

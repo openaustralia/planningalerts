@@ -43,7 +43,9 @@ class Application < ActiveRecord::Base
 
   # For the benefit of will_paginate
   cattr_reader :per_page
+  # rubocop:disable Style/ClassVars
   @@per_page = 100
+  # rubocop:enable Style/ClassVars
 
   # TODO: factor out common location accessor between Application and Alert
   def location

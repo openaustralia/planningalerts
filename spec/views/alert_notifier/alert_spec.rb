@@ -103,10 +103,7 @@ describe "alert_notifier/alert.html.haml" do
 
     it "renders linebreak formatting into html" do
       expect(rendered).to include(
-"<p>Thanks for your comment</p>
-
-<p>Best wishes,
-<br>Louise</p>"
+        "<p>Thanks for your comment</p>\n\n<p>Best wishes,\n<br>Louise</p>"
       )
     end
   end
