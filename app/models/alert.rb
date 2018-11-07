@@ -85,9 +85,8 @@ class Alert < ActiveRecord::Base
     update!(unsubscribed: true, unsubscribed_at: Time.now)
   end
 
-  # Only enable subscriptions on the default theme
   def subscription
-    super if theme == "default"
+    super
   end
 
   def address_for_placeholder
@@ -207,7 +206,7 @@ class Alert < ActiveRecord::Base
     replies = new_replies
 
     if !applications.empty? || !comments.empty? || !replies.empty?
-      AlertNotifier.alert(theme, self, applications, comments, replies).deliver_now
+      AlertNotifier.alert("default", self, applications, comments, replies).deliver_now
       self.last_sent = Time.now
     end
     self.last_processed = Time.now

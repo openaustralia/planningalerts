@@ -45,8 +45,7 @@ describe NewAlertParser do
           email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
           lat: nil,
-          lng: nil,
-          theme: "default"
+          lng: nil
         )
 
         NewAlertParser.new(new_alert).parse
@@ -76,8 +75,7 @@ describe NewAlertParser do
           address: "24 Bruce Rd, Glenbrook, VIC 3885",
           email: "jenny@example.com",
           created_at: 3.days.ago,
-          updated_at: 3.days.ago,
-          theme: "default"
+          updated_at: 3.days.ago
         )
       end
 

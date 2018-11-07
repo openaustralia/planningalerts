@@ -14,7 +14,7 @@ module EmailConfirmable
   end
 
   def send_confirmation_email
-    ConfirmationMailer.confirm(theme, self).deliver_later
+    ConfirmationMailer.confirm("default", self).deliver_later
   end
 
   protected

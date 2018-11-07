@@ -25,8 +25,8 @@ class AlertNotifier < ActionMailer::Base
     @alert = alert
 
     themed_mail(
-      theme: alert.theme,
-      from: email_from(alert.theme),
+      theme: "default",
+      from: email_from("default"),
       to: alert.email,
       subject: "Your subscription for #{alert.address}"
     )
