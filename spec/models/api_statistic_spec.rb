@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe ApiStatistic do
   it "should log the api_key if it's valid" do

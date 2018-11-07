@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe AlertNotifierHelper do
   describe "#capitalise_initial_character(text)" do
@@ -53,7 +53,7 @@ describe AlertNotifierHelper do
           .to eq application_url(
             @base_params.merge(
               id: @application.id,
-              utm_campaign: 'view-application'
+              utm_campaign: "view-application"
             )
           )
       end
@@ -76,7 +76,7 @@ describe AlertNotifierHelper do
               @base_params.merge(
                 id: @comment.application.id,
                 anchor: "comment#{@comment.id}",
-                utm_campaign: 'view-comment'
+                utm_campaign: "view-comment"
               )
             )
         end
@@ -85,7 +85,7 @@ describe AlertNotifierHelper do
 
     describe "#reply_url_with_tracking" do
       let(:reply) do
-        VCR.use_cassette('planningalerts') do
+        VCR.use_cassette("planningalerts") do
           create(:reply, id: 5)
         end
       end
@@ -101,7 +101,7 @@ describe AlertNotifierHelper do
             @base_params.merge(
               id: reply.comment.application.id,
               anchor: "reply5",
-              utm_campaign: 'view-reply'
+              utm_campaign: "view-reply"
             )
           )
       end
@@ -118,8 +118,8 @@ describe AlertNotifierHelper do
           .to eq application_url(
             @base_params.merge(
               id: @application.id,
-              utm_campaign: 'add-comment',
-              anchor: 'add-comment'
+              utm_campaign: "add-comment",
+              anchor: "add-comment"
             )
           )
       }

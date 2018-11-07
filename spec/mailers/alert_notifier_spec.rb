@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe AlertNotifier do
   before :each do
@@ -114,12 +114,12 @@ describe AlertNotifier do
           @html_body = @email.html_part.body.to_s
         end
 
-        it 'should contain links to the applications' do
+        it "should contain links to the applications" do
           expect(@html_body).to have_link("Foo Street, Bar", href: "https://dev.planningalerts.org.au/applications/1?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
           expect(@html_body).to have_link("Bar Street, Foo", href: "https://dev.planningalerts.org.au/applications/2?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
         end
 
-        it 'should contain application descriptions' do
+        it "should contain application descriptions" do
           expect(@html_body).to have_content "Knock something down"
           expect(@html_body).to have_content "Put something up"
         end
@@ -151,7 +151,7 @@ describe AlertNotifier do
           @html_body = @email.html_part.body.to_s
         end
 
-        it 'should contain links to the applications' do
+        it "should contain links to the applications" do
           expect(@html_body).to have_link("Foo Street, Bar", href: "http://nsw.127.0.0.1.xip.io:3000/applications/1?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
           expect(@html_body).to have_link("Bar Street, Foo", href: "http://nsw.127.0.0.1.xip.io:3000/applications/2?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
         end

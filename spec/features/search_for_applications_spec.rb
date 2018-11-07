@@ -2,7 +2,7 @@ require "spec_helper"
 
 feature "Searching for development application near an address" do
   around do |scenario|
-    VCR.use_cassette('planningalerts') do
+    VCR.use_cassette("planningalerts") do
       scenario.run
     end
   end

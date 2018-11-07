@@ -6,10 +6,10 @@ class AlertNotifierPreview < ActionMailer::Preview
       lat: 0,
       lng: 0,
       radius_meters: 1000,
-      email: 'mary@example.com',
-      address: '1 Illawarra Road Marrickville 2204'
+      email: "mary@example.com",
+      address: "1 Illawarra Road Marrickville 2204"
     )
-    mail = AlertNotifier.alert('default', alert, [Application.first])
+    mail = AlertNotifier.alert("default", alert, [Application.first])
     alert.destroy
     mail
   end

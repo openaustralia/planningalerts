@@ -1,25 +1,25 @@
-require 'simplecov'
-require 'coveralls'
+require "simplecov"
+require "coveralls"
 
 # Generate coverage locally in html as well as in coveralls.io
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
   [SimpleCov::Formatter::HTMLFormatter,
    Coveralls::SimpleCov::Formatter]
 )
-SimpleCov.start('rails') do
-  add_filter 'app/admin'
+SimpleCov.start("rails") do
+  add_filter "app/admin"
 end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV["RAILS_ENV"] ||= 'test'
+ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../../config/environment", __FILE__)
-require 'rspec/rails'
+require "rspec/rails"
 require "email_spec"
-require 'rspec/active_model/mocks'
+require "rspec/active_model/mocks"
 
 capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-  'chromeOptions' => {
-    'args' => ['--headless', '--disable-gpu']
+  "chromeOptions" => {
+    "args" => ["--headless", "--disable-gpu"]
   }
 )
 
@@ -31,7 +31,7 @@ Capybara.javascript_driver = :chrome
 Capybara.server = :webrick
 
 VCR.configure do |c|
-  c.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
+  c.cassette_library_dir = "spec/fixtures/vcr_cassettes"
   c.hook_into :webmock
   c.ignore_localhost = true
   # Uncomment this below if you want to record new external http requests

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Geo2gov do
   describe "Blue Mountains" do

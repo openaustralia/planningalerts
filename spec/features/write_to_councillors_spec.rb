@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 feature "Send a message to a councillor" do
   # As someone interested in a local development application,
@@ -10,8 +10,8 @@ feature "Send a message to a councillor" do
     given(:authority) { create(:authority, full_name: "Foo", write_to_councillors_enabled: false) }
 
     background do
-      VCR.use_cassette('planningalerts') do
-        application = create(:application, id: "1", authority_id: authority.id, comment_url: 'mailto:foo@bar.com')
+      VCR.use_cassette("planningalerts") do
+        application = create(:application, id: "1", authority_id: authority.id, comment_url: "mailto:foo@bar.com")
         visit application_path(application)
       end
     end
@@ -37,10 +37,10 @@ feature "Send a message to a councillor" do
 
   context "when writing to councillors is available" do
     given(:authority) { create(:contactable_authority, full_name: "Marrickville Council", write_to_councillors_enabled: true) }
-    given(:application) { VCR.use_cassette('planningalerts') { create(:application, id: "1", authority: authority) } }
+    given(:application) { VCR.use_cassette("planningalerts") { create(:application, id: "1", authority: authority) } }
 
     around do |test|
-      with_modified_env COUNCILLORS_ENABLED: 'true' do
+      with_modified_env COUNCILLORS_ENABLED: "true" do
         test.run
       end
     end
@@ -147,7 +147,7 @@ feature "Send a message to a councillor" do
   context "when a message for a councillor is confirmed" do
     given(:councillor) { create(:councillor, name: "Louise Councillor", email: "louise@council.nsw.gov.au") }
     given(:comment) do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         application = create(:application, id: 8, address: "24 Bruce Road Glenbrook", description: "A lovely house")
         create(:comment, application: application,
                          name: "Matthew Landauer",

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe CouncillorContributionsController do
   let(:authority) do

@@ -1,7 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 feature "View a reply from a councillor" do
   given(:comment) do
-    VCR.use_cassette('planningalerts') do
+    VCR.use_cassette("planningalerts") do
       authority = create(:authority, full_name: "City of Sydney")
       create(
         :comment_to_councillor,

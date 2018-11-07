@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find_by_confirm_id(params[:id])
     if @comment
       @comment.confirm!
-      redirect_to @comment.application, notice: render_to_string(partial: 'confirmed').html_safe
+      redirect_to @comment.application, notice: render_to_string(partial: "confirmed").html_safe
     else
       render text: "", status: 404
     end

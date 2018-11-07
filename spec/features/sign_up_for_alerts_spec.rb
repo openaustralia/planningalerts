@@ -1,16 +1,16 @@
-require 'spec_helper'
+require "spec_helper"
 
 feature "Sign up for alerts" do
   # In order to see new development applications in my suburb
   # I want to sign up for an email alert
   around do |example|
-    VCR.use_cassette('planningalerts') do
+    VCR.use_cassette("planningalerts") do
       example.run
     end
   end
 
   scenario "successfully" do
-    visit '/alerts/signup'
+    visit "/alerts/signup"
 
     fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
     fill_in("Enter your email address", with: "example@example.com")
@@ -32,7 +32,7 @@ feature "Sign up for alerts" do
   end
 
   scenario "unsuccessfully with an invalid address" do
-    visit '/alerts/signup'
+    visit "/alerts/signup"
 
     fill_in("Enter a street address", with: "Bruce Rd")
     fill_in("Enter your email address", with: "example@example.com")
@@ -134,7 +134,7 @@ feature "Sign up for alerts" do
     end
 
     scenario "successfully" do
-      visit '/alerts/signup'
+      visit "/alerts/signup"
 
       fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
       fill_in("Enter your email address", with: "example@example.com")
@@ -162,7 +162,7 @@ feature "Sign up for alerts" do
     end
 
     scenario "see the confirmation page, so we don't leak information, but also get a notice about the signup attempt" do
-      visit '/alerts/signup'
+      visit "/alerts/signup"
 
       fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
       fill_in("Enter your email address", with: "jenny@email.org")
@@ -184,7 +184,7 @@ feature "Sign up for alerts" do
       end
 
       scenario "successfully" do
-        visit '/alerts/signup'
+        visit "/alerts/signup"
 
         fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
         fill_in("Enter your email address", with: "jenny@email.org")
@@ -205,7 +205,7 @@ feature "Sign up for alerts" do
 
   context "with javascript" do
     scenario "autocomplete results are displayed", js: true do
-      visit '/alerts/signup'
+      visit "/alerts/signup"
 
       fill_in "Enter a street address", with: "24 Bruce Road Glenb"
 

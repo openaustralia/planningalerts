@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe LayarHelper do
   # Delete this example and add some real ones or delete this file

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Comment do
   it_behaves_like "email_confirmable"
@@ -6,7 +6,7 @@ describe Comment do
   describe "#confirm!" do
     context "when already confirmed" do
       let(:comment) do
-        VCR.use_cassette('planningalerts') { build(:confirmed_comment) }
+        VCR.use_cassette("planningalerts") { build(:confirmed_comment) }
       end
 
       it "should not run after_confirm callback" do
@@ -31,7 +31,7 @@ describe Comment do
 
     context "when there are no confirmed comments" do
       before :each do
-        VCR.use_cassette('planningalerts') do
+        VCR.use_cassette("planningalerts") do
           create(:unconfirmed_comment)
         end
       end
@@ -41,7 +41,7 @@ describe Comment do
 
     context "when there are no comments on this date" do
       before :each do
-        VCR.use_cassette('planningalerts') do
+        VCR.use_cassette("planningalerts") do
           create(:confirmed_comment, confirmed_at: Date.yesterday)
         end
       end
@@ -51,7 +51,7 @@ describe Comment do
 
     context "when there are no confirmed comments on this date" do
       before :each do
-        VCR.use_cassette('planningalerts') do
+        VCR.use_cassette("planningalerts") do
           create(:unconfirmed_comment, created_at: Date.current)
         end
       end
@@ -61,7 +61,7 @@ describe Comment do
 
     context "when there is a confirmed comments on this date" do
       before :each do
-        VCR.use_cassette('planningalerts') do
+        VCR.use_cassette("planningalerts") do
           @comment = create(:confirmed_comment, confirmed_at: Date.current)
         end
       end
@@ -71,7 +71,7 @@ describe Comment do
 
     context "when there is a confirmed comments on this date and on another date" do
       before :each do
-        VCR.use_cassette('planningalerts') do
+        VCR.use_cassette("planningalerts") do
           @todays_comment = create(:confirmed_comment, confirmed_at: Date.current)
           @yesterdays_comment = create(:confirmed_comment, confirmed_at: Date.yesterday)
         end
@@ -82,7 +82,7 @@ describe Comment do
 
     context "when there are two confirmed comments on this date with the same email" do
       before :each do
-        VCR.use_cassette('planningalerts') do
+        VCR.use_cassette("planningalerts") do
           @comment1 = create(:confirmed_comment, confirmed_at: Date.current, email: "foo@example.com")
           @comment2 = create(:confirmed_comment, confirmed_at: Date.current, email: "foo@example.com")
         end
@@ -99,7 +99,7 @@ describe Comment do
 
     context "there is a first time commenter" do
       before :each do
-        VCR.use_cassette('planningalerts') do
+        VCR.use_cassette("planningalerts") do
           @comment = create(:confirmed_comment, confirmed_at: Date.current, email: "foo@example.com")
         end
       end
@@ -109,7 +109,7 @@ describe Comment do
 
     context "when a person has commented on two dates" do
       before :each do
-        VCR.use_cassette('planningalerts') do
+        VCR.use_cassette("planningalerts") do
           @yesterdays_comment = create(:confirmed_comment, confirmed_at: Date.yesterday, email: "foo@example.com")
           @todays_comment = create(:confirmed_comment, confirmed_at: Date.current, email: "foo@example.com")
         end
@@ -132,7 +132,7 @@ describe Comment do
 
     context "when there is a first time commenter" do
       before :each do
-        VCR.use_cassette('planningalerts') do
+        VCR.use_cassette("planningalerts") do
           create(:confirmed_comment, confirmed_at: Date.current, email: "foo@example.com")
         end
       end
@@ -142,7 +142,7 @@ describe Comment do
 
     context "when a person has commented on two dates" do
       before :each do
-        VCR.use_cassette('planningalerts') do
+        VCR.use_cassette("planningalerts") do
           @yesterdays_comment = create(:confirmed_comment, confirmed_at: Date.yesterday, email: "foo@example.com")
           @todays_comment = create(:confirmed_comment, confirmed_at: Date.current, email: "foo@example.com")
         end
@@ -168,7 +168,7 @@ describe Comment do
 
   context "new comment for a planning authority" do
     let(:comment_to_authority) do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         create(:comment_to_authority)
       end
     end
@@ -188,7 +188,7 @@ describe Comment do
 
   context "new comment for a councillor" do
     let(:comment_to_councillor) do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         create(:comment_to_councillor)
       end
     end
@@ -208,7 +208,7 @@ describe Comment do
 
   context "to a planning authority" do
     let(:comment_to_authority) do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         create(:comment_to_authority)
       end
     end
@@ -219,7 +219,7 @@ describe Comment do
 
   context "to a councillor" do
     let(:comment_to_councillor) do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         create(:comment_to_councillor)
       end
     end
@@ -230,7 +230,7 @@ describe Comment do
 
   context "to a councillor and has no reply" do
     let(:comment_with_reply) do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         create(:reply).comment
       end
     end
@@ -240,7 +240,7 @@ describe Comment do
 
   describe "#recipient_display_name" do
     let(:comment) do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         create(:comment)
       end
     end
@@ -276,7 +276,7 @@ describe Comment do
     end
 
     it "fetches answers from WriteIt, creates replies and returns them" do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         comment.create_replies_from_writeit!
       end
 
@@ -288,7 +288,7 @@ describe Comment do
     end
 
     it "returns an empty Array if all the replies on WriteIt have already been added" do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         create(:reply, comment: comment, writeit_id: 567)
 
         expect(comment.create_replies_from_writeit!).to be_empty
@@ -296,7 +296,7 @@ describe Comment do
     end
 
     it "does nothing if the comment has no writeit_message_id" do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         expect(create(:comment).create_replies_from_writeit!).to be_falsey
       end
     end
@@ -307,13 +307,13 @@ describe Comment do
 
     context "when the councillor is not current" do
       before do
-        VCR.use_cassette('planningalerts') do
+        VCR.use_cassette("planningalerts") do
           comment.councillor.update(current: false)
         end
       end
 
       it "still loads the reply" do
-        VCR.use_cassette('planningalerts') do
+        VCR.use_cassette("planningalerts") do
           comment.create_replies_from_writeit!
         end
 
@@ -324,7 +324,7 @@ describe Comment do
   end
 
   describe "#to_councillor?" do
-    let(:comment) { VCR.use_cassette('planningalerts') { build(:comment) } }
+    let(:comment) { VCR.use_cassette("planningalerts") { build(:comment) } }
 
     it "should be false when there's no associated councillor" do
       expect(comment.to_councillor?).to be false

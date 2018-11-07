@@ -111,9 +111,9 @@ module ApplicationsHelper
   private
 
   def google_signed_url(domain, path)
-    client_id = ENV['GOOGLE_MAPS_CLIENT_ID']
-    google_maps_key = ENV['GOOGLE_MAPS_API_KEY']
-    cryptographic_key = ENV['GOOGLE_MAPS_CRYPTOGRAPHIC_KEY']
+    client_id = ENV["GOOGLE_MAPS_CLIENT_ID"]
+    google_maps_key = ENV["GOOGLE_MAPS_API_KEY"]
+    cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
     if client_id.present?
       signature = sign_gmap_bus_api_url(path + "&client=#{client_id}", cryptographic_key)
       (domain + path + "&client=#{client_id}&signature=#{signature}").html_safe
@@ -129,11 +129,11 @@ module ApplicationsHelper
   # http://gmaps-samples.googlecode.com/svn/trunk/urlsigning/urlsigner.rb
   def sign_gmap_bus_api_url(url_to_sign, google_cryptographic_key)
     # Decode the private key
-    raw_key = Base64.decode64(google_cryptographic_key.tr('-_', '+/'))
+    raw_key = Base64.decode64(google_cryptographic_key.tr("-_", "+/"))
     # create a signature using the private key and the URL
-    raw_signature = OpenSSL::HMAC.digest('sha1', raw_key, url_to_sign)
+    raw_signature = OpenSSL::HMAC.digest("sha1", raw_key, url_to_sign)
     # encode the signature into base64 for url use form.
-    Base64.encode64(raw_signature).tr('+/', '-_').delete("\n")
+    Base64.encode64(raw_signature).tr("+/", "-_").delete("\n")
   end
 
   # TODO: extract to theme

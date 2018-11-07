@@ -1,8 +1,8 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Authority do
   describe "validations" do
-    it 'should ensure a unique short_name' do
+    it "should ensure a unique short_name" do
       existing_authority = create(:authority, short_name: "Existing")
       new_authority = build(:authority, short_name: "Existing")
 
@@ -25,7 +25,7 @@ describe Authority do
     before :each do
       @a1 = create(:authority)
       @a2 = create(:authority)
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         create(:application, authority: @a1, date_scraped: 3.weeks.ago)
         create(:application, authority: @a2)
       end
@@ -119,7 +119,7 @@ describe Authority do
 
     context "when the authority has applications" do
       before :each do
-        VCR.use_cassette('planningalerts') do
+        VCR.use_cassette("planningalerts") do
           create(
             :application,
             authority: authority,
@@ -185,7 +185,7 @@ describe Authority do
     end
 
     around do |example|
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         example.run
       end
     end

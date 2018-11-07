@@ -5,7 +5,7 @@ shared_examples_for "email_confirmable" do
   let(:model_name_for_factory_girl) { model.to_s.underscore.to_sym }
 
   it "must have an email" do
-    object = VCR.use_cassette('planningalerts') do
+    object = VCR.use_cassette("planningalerts") do
       build(model_name_for_factory_girl, email: nil)
     end
 
@@ -13,7 +13,7 @@ shared_examples_for "email_confirmable" do
   end
 
   it "must have a valid email address" do
-    object = VCR.use_cassette('planningalerts') do
+    object = VCR.use_cassette("planningalerts") do
       build(model_name_for_factory_girl, email: "diddle@")
     end
 
@@ -23,7 +23,7 @@ shared_examples_for "email_confirmable" do
 
   # TODO: Is this just retesting the validates_email_format_of gem?
   it "must have an email address which includes a '@'" do
-    object = VCR.use_cassette('planningalerts') do
+    object = VCR.use_cassette("planningalerts") do
       build(model_name_for_factory_girl, email: "diddle")
     end
 
@@ -33,7 +33,7 @@ shared_examples_for "email_confirmable" do
 
   describe "confirm_id" do
     let(:object) do
-      VCR.use_cassette('planningalerts') { create(model_name_for_factory_girl) }
+      VCR.use_cassette("planningalerts") { create(model_name_for_factory_girl) }
     end
 
     it "is a string" do
@@ -41,7 +41,7 @@ shared_examples_for "email_confirmable" do
     end
 
     it "is not the same for two different objects" do
-      another_object = VCR.use_cassette('planningalerts') do
+      another_object = VCR.use_cassette("planningalerts") do
         create(model_name_for_factory_girl)
       end
 
@@ -55,7 +55,7 @@ shared_examples_for "email_confirmable" do
 
   describe "#after_create" do
     let(:object) do
-      VCR.use_cassette('planningalerts') { build(model_name_for_factory_girl) }
+      VCR.use_cassette("planningalerts") { build(model_name_for_factory_girl) }
     end
 
     it "should call the method to send the confirmation email" do

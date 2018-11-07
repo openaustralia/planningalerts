@@ -51,7 +51,7 @@ class ApiController < ApplicationController
     lat1 = params[:top_right_lat].to_f
     lng1 = params[:top_right_lng].to_f
     api_render(
-      Application.where('lat > ? AND lng > ? AND lat < ? AND lng < ?', lat0, lng0, lat1, lng1),
+      Application.where("lat > ? AND lng > ? AND lat < ? AND lng < ?", lat0, lng0, lat1, lng1),
       "Recent applications in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
     )
   end

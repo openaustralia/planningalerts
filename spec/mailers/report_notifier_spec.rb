@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe ReportNotifier do
   before :each do
-    @comment = VCR.use_cassette('planningalerts') do
+    @comment = VCR.use_cassette("planningalerts") do
       build(:comment,
             application: build(:application, id: 2),
             text: "I'm saying something abusive",

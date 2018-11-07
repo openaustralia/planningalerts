@@ -1,4 +1,4 @@
-require 'open-uri'
+require "open-uri"
 
 class AuthorityLogger < Logger
   def initialize(authority, other_logger)
@@ -31,7 +31,7 @@ class Authority < ActiveRecord::Base
     message: "%{value} is not a state in Australia"
   }
 
-  scope :enabled, -> { where('disabled = 0 or disabled is null') }
+  scope :enabled, -> { where("disabled = 0 or disabled is null") }
   scope :active, -> { where('(disabled = 0 or disabled is null) AND morph_name != "" AND morph_name IS NOT NULL') }
 
   def full_name_and_state
@@ -224,7 +224,7 @@ class Authority < ActiveRecord::Base
 
   # So that the encoding function can be used elsewhere
   def self.short_name_encoded(short_name)
-    short_name.downcase.tr(' ', '_').gsub(/\W/, '')
+    short_name.downcase.tr(" ", "_").gsub(/\W/, "")
   end
 
   def short_name_encoded

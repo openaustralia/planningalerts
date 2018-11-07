@@ -1,9 +1,9 @@
-require 'spec_helper'
+require "spec_helper"
 
 # HTML email
 describe "alert_notifier/alert.html.haml" do
   let(:application) do
-    VCR.use_cassette('planningalerts') do
+    VCR.use_cassette("planningalerts") do
       create(:application,
              description: "Alterations & additions",
              address: "24 Bruce Road Glenbrook")
@@ -26,7 +26,7 @@ describe "alert_notifier/alert.html.haml" do
 
   context "when there is a comment to an authority" do
     before do
-      comment = VCR.use_cassette('planningalerts') do
+      comment = VCR.use_cassette("planningalerts") do
         create(:comment_to_authority,
                name: "Matthew Landauer",
                application: application)
@@ -43,7 +43,7 @@ describe "alert_notifier/alert.html.haml" do
 
   context "when there is a comment to a councillor" do
     let(:comment) do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         create(:comment_to_councillor, name: "Matthew Landauer")
       end
     end
@@ -83,7 +83,7 @@ describe "alert_notifier/alert.html.haml" do
 
   context "when there is a reply from a councillor" do
     before do
-      comment = VCR.use_cassette('planningalerts') do
+      comment = VCR.use_cassette("planningalerts") do
         create(:comment_to_councillor, name: "Matthew Landauer")
       end
       multi_line_reply_text = "Thanks for your comment\n\nBest wishes,\nLouise"
@@ -112,7 +112,7 @@ end
 # Text only email
 describe "alert_notifier/alert.text.erb" do
   let(:application) do
-    VCR.use_cassette('planningalerts') do
+    VCR.use_cassette("planningalerts") do
       create(:application,
              description: "Alterations & additions",
              address: "24 Bruce Road Glenbrook")
@@ -129,7 +129,7 @@ describe "alert_notifier/alert.text.erb" do
 
   context "when there is a comment to an authority" do
     before do
-      comment = VCR.use_cassette('planningalerts') do
+      comment = VCR.use_cassette("planningalerts") do
         create(:comment_to_authority,
                name: "Matthew Landauer",
                application: application)
@@ -146,7 +146,7 @@ describe "alert_notifier/alert.text.erb" do
 
   context "when there is a comment to a councillor" do
     before do
-      comment = VCR.use_cassette('planningalerts') do
+      comment = VCR.use_cassette("planningalerts") do
         create(:comment_to_councillor, name: "Matthew Landauer")
       end
       assign(:comments, [comment])
@@ -160,7 +160,7 @@ describe "alert_notifier/alert.text.erb" do
 
   context "when there is a reply from a councillor" do
     before do
-      comment = VCR.use_cassette('planningalerts') do
+      comment = VCR.use_cassette("planningalerts") do
         create(:comment_to_councillor, name: "Matthew Landauer")
       end
       reply = create(:reply, comment: comment, councillor: comment.councillor)

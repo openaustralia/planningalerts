@@ -28,16 +28,16 @@ PlanningalertsApp::Application.routes.draw do
   devise_for :users
 
   # Redirect old urls
-  get 'apihowto.php' => redirect('/api/howto')
-  get 'about.php' => redirect('/about')
-  get 'faq.php' => redirect('/faq')
-  get 'getinvolved.php' => redirect('/getinvolved')
+  get "apihowto.php" => redirect("/api/howto")
+  get "about.php" => redirect("/about")
+  get "faq.php" => redirect("/faq")
+  get "getinvolved.php" => redirect("/getinvolved")
   # Can't do the redirects in the routing as above because the redirect depends
   # on the passed parameters
-  get 'api.php' => 'api#old_index'
-  get 'api' => 'api#old_index', as: :api_old_index
+  get "api.php" => "api#old_index"
+  get "api" => "api#old_index", as: :api_old_index
 
-  resources :alerts, only: %i[new create], path_names: { new: 'signup' } do
+  resources :alerts, only: %i[new create], path_names: { new: "signup" } do
     collection do
       get :statistics
       get :widget_prototype
@@ -52,23 +52,23 @@ PlanningalertsApp::Application.routes.draw do
 
   # Route API separately
   scope format: true do
-    get 'authorities/:authority_id/applications' => 'api#authority', as: nil
-    get 'applications' => 'api#postcode', as: nil,
+    get "authorities/:authority_id/applications" => "api#authority", as: nil
+    get "applications" => "api#postcode", as: nil,
         constraints: QueryParamsPresentConstraint.new(:postcode)
-    get 'applications' => 'api#suburb', as: nil,
+    get "applications" => "api#suburb", as: nil,
         constraints: QueryParamsPresentConstraint.new(:suburb)
-    get 'applications' => 'api#point', as: nil,
+    get "applications" => "api#point", as: nil,
         constraints: QueryParamsPresentConstraint.new(:address)
-    get 'applications' => 'api#point', as: nil,
+    get "applications" => "api#point", as: nil,
         constraints: QueryParamsPresentConstraint.new(:lat, :lng)
-    get 'applications' => 'api#area', as: nil,
+    get "applications" => "api#area", as: nil,
         constraints: QueryParamsPresentConstraint.new(
           :bottom_left_lat, :bottom_left_lng,
           :top_right_lat, :top_right_lng
         )
-    get 'applications' => 'api#date_scraped', as: nil,
+    get "applications" => "api#date_scraped", as: nil,
         constraints: QueryParamsPresentConstraint.new(:date_scraped)
-    get 'applications' => 'api#all', as: nil
+    get "applications" => "api#all", as: nil
   end
 
   resources :applications, only: %i[index show] do
@@ -119,34 +119,34 @@ PlanningalertsApp::Application.routes.draw do
 
   namespace :atdis do
     get :test
-    post :test, action: 'test_redirect'
-    get 'feed/:number/atdis/1.0/applications.json', action: 'feed', as: :feed
+    post :test, action: "test_redirect"
+    get "feed/:number/atdis/1.0/applications.json", action: "feed", as: :feed
     get :specification
     get :guidance
   end
 
-  get 'api/howto' => 'api#howto', as: :api_howto
-  get 'api' => 'api#index', as: :api
+  get "api/howto" => "api#howto", as: :api_howto
+  get "api" => "api#index", as: :api
 
-  get 'about' => 'static#about', as: :about
-  get 'faq' => 'static#faq', as: :faq
-  get 'getinvolved' => 'static#get_involved', as: :get_involved
-  get 'how_to_write_a_scraper' => 'static#how_to_write_a_scraper'
-  get 'how_to_lobby_your_local_council' => 'static#how_to_lobby_your_local_council'
+  get "about" => "static#about", as: :about
+  get "faq" => "static#faq", as: :faq
+  get "getinvolved" => "static#get_involved", as: :get_involved
+  get "how_to_write_a_scraper" => "static#how_to_write_a_scraper"
+  get "how_to_lobby_your_local_council" => "static#how_to_lobby_your_local_council"
 
-  get 'donate' => 'static#donate'
-  get 'donate/thanks' => 'static#donate_thanks'
-  get 'donate/cancel' => 'static#donate_cancel'
+  get "donate" => "static#donate"
+  get "donate/thanks" => "static#donate_thanks"
+  get "donate/cancel" => "static#donate_cancel"
 
-  get '/' => 'applications#address', as: :address_applications
+  get "/" => "applications#address", as: :address_applications
 
-  get 'layar/getpoi' => 'layar#getpoi'
+  get "layar/getpoi" => "layar#getpoi"
 
-  get '/vanity(/:action(/:id(.:format)))', controller: :vanity
+  get "/vanity(/:action(/:id(.:format)))", controller: :vanity
 
   resources :donations, only: %i[new create]
 
-  get 'donations' => redirect('/donations/new')
+  get "donations" => redirect("/donations/new")
 
   resources :performance, only: [:index] do
     collection do
@@ -155,8 +155,8 @@ PlanningalertsApp::Application.routes.draw do
     end
   end
 
-  root to: 'applications#address'
+  root to: "applications#address"
 
-  get '/404', to: 'static#error_404'
-  get "/500", to: 'static#error_500'
+  get "/404", to: "static#error_404"
+  get "/500", to: "static#error_500"
 end

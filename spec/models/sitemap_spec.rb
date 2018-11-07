@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Sitemap do
   before :each do
@@ -8,7 +8,7 @@ describe Sitemap do
   end
 
   it "should output an xml sitemap" do
-    public = Rails.root.join('public').to_s
+    public = Rails.root.join("public").to_s
 
     file1 = double("file1")
     expect(File).to receive(:open).with("#{public}/sitemap.xml", "w").and_return(file1)
@@ -39,7 +39,7 @@ describe Sitemap do
   end
 
   it "should know the web root and the file path root" do
-    public = Rails.root.join('public').to_s
+    public = Rails.root.join("public").to_s
     s = Sitemap.new("http://domain.org", public, @logger)
     expect(s.root_url).to eq("http://domain.org")
     expect(s.root_path).to eq(public)
@@ -47,14 +47,14 @@ describe Sitemap do
   end
 
   it "should have the path to one of the sitemaps" do
-    public = Rails.root.join('public').to_s
+    public = Rails.root.join("public").to_s
     s = Sitemap.new("http://domain.org", public, @logger)
     expect(s.sitemap_relative_path).to eq("sitemaps/sitemap1.xml.gz")
     s.finish
   end
 
   it "should have the path to the sitemap index" do
-    public = Rails.root.join('public').to_s
+    public = Rails.root.join("public").to_s
     s = Sitemap.new("http://domain.org", public, @logger)
     expect(s.sitemap_index_relative_path).to eq("sitemap.xml")
     s.finish

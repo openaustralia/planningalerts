@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe ApiHowtoHelper do
   it "should provide urls of examples of use of the api" do

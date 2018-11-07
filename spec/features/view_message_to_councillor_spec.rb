@@ -1,7 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 feature "View a message sent to a councillor" do
   given(:comment) do
-    VCR.use_cassette('planningalerts') do
+    VCR.use_cassette("planningalerts") do
       create(
         :comment_to_councillor,
         :confirmed,

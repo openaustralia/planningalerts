@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe AlertSubscriber, type: :model do
   it "they have an email" do

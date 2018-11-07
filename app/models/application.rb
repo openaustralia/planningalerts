@@ -1,4 +1,4 @@
-require 'open-uri'
+require "open-uri"
 
 class Application < ActiveRecord::Base
   belongs_to :authority
@@ -21,7 +21,7 @@ class Application < ActiveRecord::Base
   def date_received_can_not_be_in_the_future
     return unless date_received && date_received > Date.today
 
-    errors.add(:date_received, 'can not be in the future')
+    errors.add(:date_received, "can not be in the future")
   end
 
   def validate_on_notice_period
@@ -60,18 +60,18 @@ class Application < ActiveRecord::Base
 
   # Translate xml data (as a string) into an array of attribute hashes that can used to create applications
   def self.translate_feed_data(feed_data)
-    Nokogiri::XML(feed_data).search('application').map do |a|
+    Nokogiri::XML(feed_data).search("application").map do |a|
       {
-        council_reference: a.at('council_reference').inner_text,
-        address: a.at('address').inner_text,
-        description: a.at('description').inner_text,
-        info_url: a.at('info_url').inner_text,
-        comment_url: a.at('comment_url').inner_text,
-        date_received: a.at('date_received').inner_text,
+        council_reference: a.at("council_reference").inner_text,
+        address: a.at("address").inner_text,
+        description: a.at("description").inner_text,
+        info_url: a.at("info_url").inner_text,
+        comment_url: a.at("comment_url").inner_text,
+        date_received: a.at("date_received").inner_text,
         date_scraped: Time.now,
         # on_notice_from and on_notice_to tags are optional
-        on_notice_from: (a.at('on_notice_from')&.inner_text),
-        on_notice_to: (a.at('on_notice_to')&.inner_text)
+        on_notice_from: (a.at("on_notice_from")&.inner_text),
+        on_notice_to: (a.at("on_notice_to")&.inner_text)
       }
     end
   end
@@ -84,16 +84,16 @@ class Application < ActiveRecord::Base
     if j.is_a?(Array) && j.all? { |a| a.is_a?(Hash) }
       j.map do |a|
         {
-          council_reference: a['council_reference'],
-          address: a['address'],
-          description: a['description'],
-          info_url: a['info_url'],
-          comment_url: a['comment_url'],
-          date_received: a['date_received'],
+          council_reference: a["council_reference"],
+          address: a["address"],
+          description: a["description"],
+          info_url: a["info_url"],
+          comment_url: a["comment_url"],
+          date_received: a["date_received"],
           date_scraped: Time.now,
           # on_notice_from and on_notice_to tags are optional
-          on_notice_from: a['on_notice_from'],
-          on_notice_to: a['on_notice_to']
+          on_notice_from: a["on_notice_from"],
+          on_notice_to: a["on_notice_to"]
         }
       end
     else
@@ -108,12 +108,12 @@ class Application < ActiveRecord::Base
 
     # If whole description is in upper case switch the whole description to lower case
     description = description.downcase if description.upcase == description
-    description.split('. ').map do |sentence|
-      words = sentence.split(' ')
+    description.split(". ").map do |sentence|
+      words = sentence.split(" ")
       # Capitalise the first word of the sentence if it's all lowercase
       words[0] = words[0].capitalize if !words[0].nil? && words[0].downcase == words[0]
-      words.join(' ')
-    end.join('. ')
+      words.join(" ")
+    end.join(". ")
   end
 
   def address
@@ -121,13 +121,13 @@ class Application < ActiveRecord::Base
     return unless address
     exceptions = %w[QLD VIC NSW SA ACT TAS WA NT]
 
-    address.split(' ').map do |word|
+    address.split(" ").map do |word|
       if word != word.upcase || exceptions.any? { |exception| word =~ /^\W*#{exception}\W*$/ } || word =~ /\d/
         word
       else
         word.capitalize
       end
-    end.join(' ')
+    end.join(" ")
   end
 
   # Default values for what we consider nearby and recent
@@ -151,7 +151,7 @@ class Application < ActiveRecord::Base
   # Find applications that are near the current application location and/or recently scraped
   def find_all_nearest_or_recent
     if location
-      nearbys(nearby_and_recent_max_distance_km, units: :km).where('date_scraped > ?', nearby_and_recent_max_age_months.months.ago)
+      nearbys(nearby_and_recent_max_distance_km, units: :km).where("date_scraped > ?", nearby_and_recent_max_age_months.months.ago)
     else
       []
     end

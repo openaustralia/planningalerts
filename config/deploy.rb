@@ -1,10 +1,10 @@
-require 'new_relic/recipes'
-require 'bundler/capistrano'
-require 'delayed/recipes'
+require "new_relic/recipes"
+require "bundler/capistrano"
+require "delayed/recipes"
 set :stage, "test" unless exists? :stage
 
 # This adds a task that precompiles assets for the asset pipeline
-load 'deploy/assets'
+load "deploy/assets"
 
 set :application, "planningalerts.org.au/app"
 set :repository,  "https://github.com/openaustralia/planningalerts.git"

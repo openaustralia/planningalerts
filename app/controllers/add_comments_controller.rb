@@ -29,7 +29,7 @@ class AddCommentsController < ApplicationController
     # HACK: Required for new email alert signup form
     @alert = Alert.new(address: @application.address)
 
-    render 'applications/show'
+    render "applications/show"
   end
 
   private

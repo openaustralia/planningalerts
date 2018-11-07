@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Application do
   before :each do
@@ -102,7 +102,7 @@ describe Application do
     end
 
     it "should only capitalise the word if it's all lower case" do
-      expect(build(:application, description: 'ab sentence. AB SENTENCE. aB sentence. Ab sentence').description).to eq('Ab sentence. AB SENTENCE. aB sentence. Ab sentence')
+      expect(build(:application, description: "ab sentence. AB SENTENCE. aB sentence. Ab sentence").description).to eq("Ab sentence. AB SENTENCE. aB sentence. Ab sentence")
     end
 
     it "should allow blank sentences" do

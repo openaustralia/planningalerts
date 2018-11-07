@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe NewAlertParser do
   describe "#parse" do

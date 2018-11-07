@@ -1,8 +1,8 @@
-require 'spec_helper'
+require "spec_helper"
 
 feature "Admin hides comment" do
   background do
-    VCR.use_cassette('planningalerts') do
+    VCR.use_cassette("planningalerts") do
       create(:confirmed_comment, id: 1)
     end
   end
@@ -24,7 +24,7 @@ feature "Admin hides comment" do
   end
 
   scenario "successfully when writing to councillor feature is enabled" do
-    with_modified_env COUNCILLORS_ENABLED: 'true' do
+    with_modified_env COUNCILLORS_ENABLED: "true" do
       sign_in_as_admin
 
       click_link "Comments"

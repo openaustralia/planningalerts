@@ -1,7 +1,7 @@
 # Simple wrapper around http://geo2gov.com.au/ web service
 class Geo2gov
   include HTTParty
-  base_uri 'geo2gov.com.au'
+  base_uri "geo2gov.com.au"
 
   def initialize(lat, lng)
     @lat = lat
@@ -37,6 +37,6 @@ class Geo2gov
 
   def lga_name
     j = lga_jurisdiction
-    j.split(":").last.tr('_', ' ') + ", " + j.split(":").first if j
+    j.split(":").last.tr("_", " ") + ", " + j.split(":").first if j
   end
 end

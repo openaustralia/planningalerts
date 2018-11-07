@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe CouncillorContributionNotifier do
   describe "notice of councillor contribution for admin" do

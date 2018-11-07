@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe "councillor_contributions/new" do
   it "displays the full name of the assigned authority" do

@@ -17,12 +17,12 @@ class AlertsController < ApplicationController
       Alert.new(
         email: params[:alert][:email],
         address: @address,
-        radius_meters: zone_sizes['l'],
+        radius_meters: zone_sizes["l"],
         theme: @theme
       )
     ).parse
 
-    render 'new' if @alert.present? && !@alert.save
+    render "new" if @alert.present? && !@alert.save
   end
 
   def confirmed
@@ -61,9 +61,9 @@ class AlertsController < ApplicationController
 
   def zone_sizes
     {
-      's' => Rails.application.config.planningalerts_small_zone_size,
-      'm' => Rails.application.config.planningalerts_medium_zone_size,
-      'l' => Rails.application.config.planningalerts_large_zone_size
+      "s" => Rails.application.config.planningalerts_small_zone_size,
+      "m" => Rails.application.config.planningalerts_medium_zone_size,
+      "l" => Rails.application.config.planningalerts_large_zone_size
     }
   end
 end

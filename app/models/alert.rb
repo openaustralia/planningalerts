@@ -149,22 +149,22 @@ class Alert < ActiveRecord::Base
 
   # Applications that have been scraped since the last time the user was sent an alert
   def recent_applications
-    Application.order("date_received DESC").near([location.lat, location.lng], radius_km, units: :km).where('date_scraped > ?', cutoff_time)
+    Application.order("date_received DESC").near([location.lat, location.lng], radius_km, units: :km).where("date_scraped > ?", cutoff_time)
   end
 
   # Applications in the area of interest which have new comments made since we were last alerted
   def applications_with_new_comments
     Application.near([location.lat, location.lng], radius_km, units: :km)
                .joins(:comments)
-               .where('comments.confirmed_at > ?', cutoff_time)
-               .where('comments.confirmed' => true)
-               .where('comments.hidden' => false).uniq
+               .where("comments.confirmed_at > ?", cutoff_time)
+               .where("comments.confirmed" => true)
+               .where("comments.hidden" => false).uniq
   end
 
   def applications_with_new_replies
     Application.near([location.lat, location.lng], radius_km, units: :km)
                .joins(:replies)
-               .where('replies.received_at > ?', cutoff_time)
+               .where("replies.received_at > ?", cutoff_time)
                .uniq
   end
 
@@ -172,7 +172,7 @@ class Alert < ActiveRecord::Base
     comments = []
     # Doing this in this roundabout way because I'm not sure how to use "near" together with joins
     applications_with_new_comments.each do |application|
-      comments += application.comments.visible.where('comments.confirmed_at > ?', cutoff_time)
+      comments += application.comments.visible.where("comments.confirmed_at > ?", cutoff_time)
     end
     comments
   end
@@ -181,7 +181,7 @@ class Alert < ActiveRecord::Base
     replies = []
     # Doing this in this roundabout way because I'm not sure how to use "near" together with joins
     applications_with_new_replies.each do |application|
-      replies += application.replies.where('replies.received_at > ?', cutoff_time)
+      replies += application.replies.where("replies.received_at > ?", cutoff_time)
     end
     replies
   end

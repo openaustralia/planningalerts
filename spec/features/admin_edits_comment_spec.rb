@@ -1,8 +1,8 @@
-require 'spec_helper'
+require "spec_helper"
 
 feature "Admin edits comment" do
   background do
-    VCR.use_cassette('planningalerts') do
+    VCR.use_cassette("planningalerts") do
       create(:confirmed_comment,
              name: "Alena",
              id: 1,

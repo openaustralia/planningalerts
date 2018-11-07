@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe CommentNotifier do
   describe "#notify_authority" do
@@ -67,7 +67,7 @@ describe CommentNotifier do
   describe "#notify_councillor" do
     let(:comment_text) { "It's a good thing.\r\n\r\nOh yes it is." }
     let(:comment) do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         application = create(:application, council_reference: "X/001", address: "24 Bruce Road Glenbrook")
         create(:comment_to_councillor, email: "foo@bar.com", name: "Matthew", application: application, text: comment_text, address: "1 Bar Street")
       end
@@ -103,7 +103,7 @@ describe CommentNotifier do
     end
 
     it "sends the comment to the WriteIt API, and stores the created WriteIt message’s id on the comment" do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         CommentNotifier.send_comment_via_writeit!(comment).deliver_now
       end
 

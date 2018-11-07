@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Councillor do
   describe "#prefixed_name" do
@@ -38,7 +38,7 @@ describe Councillor do
 
   describe "#cached_image_available?" do
     around do |example|
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         example.run
       end
     end

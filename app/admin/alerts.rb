@@ -20,7 +20,7 @@ ActiveAdmin.register Alert do
   remove_filter :subscription
 
   collection_action :export_active_emails, method: :get do
-    send_data Alert.active.select(:email).distinct.pluck(:email).join("\n"), filename: 'emails.txt'
+    send_data Alert.active.select(:email).distinct.pluck(:email).join("\n"), filename: "emails.txt"
   end
 
   action_item :export do

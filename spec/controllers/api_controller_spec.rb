@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe ApiController do
   shared_examples "an authenticated API" do
@@ -42,7 +42,7 @@ describe ApiController do
       end
 
       it "should error if valid api key is given but no bulk api access" do
-        VCR.use_cassette('planningalerts') do
+        VCR.use_cassette("planningalerts") do
           result = create(:application, id: 10, date_scraped: Time.utc(2001, 1, 1))
           allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
         end
@@ -53,7 +53,7 @@ describe ApiController do
 
       it "should find recent applications if api key is given" do
         user.update_attribute(:bulk_api, true)
-        VCR.use_cassette('planningalerts') do
+        VCR.use_cassette("planningalerts") do
           authority = create(:authority, full_name: "Acme Local Planning Authority")
           result = create(:application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
           allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
@@ -106,7 +106,7 @@ describe ApiController do
     end
 
     it "should support jsonp" do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         authority = create(:authority, full_name: "Acme Local Planning Authority")
         result = create(:application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
         allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
@@ -139,7 +139,7 @@ describe ApiController do
     end
 
     it "should support json api version 2" do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         authority = create(:authority, full_name: "Acme Local Planning Authority")
         application = create(:application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
         result = [application]
@@ -344,7 +344,7 @@ describe ApiController do
     context "valid authentication" do
       let(:user) { FactoryGirl.create(:user, bulk_api: true) }
       before(:each) do
-        VCR.use_cassette('planningalerts', allow_playback_repeats: true) do
+        VCR.use_cassette("planningalerts", allow_playback_repeats: true) do
           FactoryGirl.create_list(:application, 5, date_scraped: DateTime.new(2015, 5, 5, 12, 0, 0))
           FactoryGirl.create_list(:application, 5, date_scraped: DateTime.new(2015, 5, 6, 12, 0, 0))
         end

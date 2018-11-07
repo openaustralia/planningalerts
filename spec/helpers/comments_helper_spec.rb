@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe CommentsHelper do
   describe "#comment_as_html" do
@@ -21,7 +21,7 @@ describe CommentsHelper do
   end
 
   describe "#comment_path" do
-    let(:application) { VCR.use_cassette('planningalerts') { create(:application, id: 1) } }
+    let(:application) { VCR.use_cassette("planningalerts") { create(:application, id: 1) } }
     let(:comment) { create(:confirmed_comment, id: 1, application: application) }
 
     it "returns the path for the application with an anchor with the comment id" do
@@ -30,7 +30,7 @@ describe CommentsHelper do
   end
 
   describe "#comment_url" do
-    let(:application) { VCR.use_cassette('planningalerts') { create(:application, id: 1) } }
+    let(:application) { VCR.use_cassette("planningalerts") { create(:application, id: 1) } }
     let(:comment) { create(:confirmed_comment, id: 1, application: application) }
 
     it "returns the url for the application with an anchor with the comment id" do

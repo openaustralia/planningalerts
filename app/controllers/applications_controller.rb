@@ -1,4 +1,4 @@
-require 'will_paginate/array'
+require "will_paginate/array"
 
 class ApplicationsController < ApplicationController
   # TODO: Switch actions from JS to JSON format and remove this
@@ -44,7 +44,7 @@ class ApplicationsController < ApplicationController
   def address
     @q = params[:q]
     @radius = (params[:radius] || 2000).to_f
-    @sort = params[:sort] || 'time'
+    @sort = params[:sort] || "time"
     per_page = 30
     @page = params[:page]
     if @q
@@ -57,12 +57,12 @@ class ApplicationsController < ApplicationController
         @alert = Alert.new(address: @q)
         @other_addresses = location.all[1..-1].map(&:full_address)
         @applications = case @sort
-                        when 'distance'
-                          Application.near([location.lat, location.lng], @radius / 1000, units: :km).reorder('distance').paginate(page: params[:page], per_page: per_page)
+                        when "distance"
+                          Application.near([location.lat, location.lng], @radius / 1000, units: :km).reorder("distance").paginate(page: params[:page], per_page: per_page)
                         else # date_scraped
                           Application.near([location.lat, location.lng], @radius / 1000, units: :km).paginate(page: params[:page], per_page: per_page)
                         end
-        @rss = applications_path(format: 'rss', address: @q, radius: @radius)
+        @rss = applications_path(format: "rss", address: @q, radius: @radius)
       end
     end
     @set_focus_control = "q"

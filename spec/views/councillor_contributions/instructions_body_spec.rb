@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe "councillor_contributions/_instructions_body" do
   context "when the authority has a website url" do

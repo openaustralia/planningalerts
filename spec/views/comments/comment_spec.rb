@@ -1,11 +1,11 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe "comments/_comment" do
   before do
     Timecop.freeze(Time.local(2015, 1, 26, 10, 5, 0))
   end
 
-  let(:application) { VCR.use_cassette('planningalerts') { create(:application) } }
+  let(:application) { VCR.use_cassette("planningalerts") { create(:application) } }
 
   after do
     Timecop.return

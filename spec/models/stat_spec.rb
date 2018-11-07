@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Stat do
   it "should read in the number of applications that have gone out in emails" do

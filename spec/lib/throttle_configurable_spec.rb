@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 # There's not really much point in testing the whole throttling stack because that's tested in the gem
 # itself. Best just to concentrate on the bits that we're overriding

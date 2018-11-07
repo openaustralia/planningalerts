@@ -1,8 +1,8 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe AuthoritiesController do
   before :each do
-    request.env['HTTPS'] = 'on'
+    request.env["HTTPS"] = "on"
   end
 
   describe "#index" do

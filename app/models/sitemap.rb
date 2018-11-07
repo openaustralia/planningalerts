@@ -1,4 +1,4 @@
-require 'zlib'
+require "zlib"
 
 class SitemapUrl
   attr_reader :loc, :changefreq, :lastmod
@@ -72,7 +72,7 @@ class Sitemap
   end
 
   def start_index
-    @index_file = File.open("#{@root_path}/#{sitemap_index_relative_path}", 'w')
+    @index_file = File.open("#{@root_path}/#{sitemap_index_relative_path}", "w")
     @index_file << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
     @index_file << "<sitemapindex xmlns=\"#{SITEMAP_XMLNS}\">"
   end

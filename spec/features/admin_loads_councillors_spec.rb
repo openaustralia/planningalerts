@@ -2,7 +2,7 @@ require "spec_helper"
 
 feature "Admin loads councillors for an authority" do
   around do |example|
-    VCR.use_cassette('planningalerts') do
+    VCR.use_cassette("planningalerts") do
       example.run
     end
   end

@@ -1,8 +1,8 @@
-xml.instruct! :xml, version: '1.0'
-xml.rss :version => '2.0', 'xmlns:georss' => 'http://www.georss.org/georss' do
+xml.instruct! :xml, version: "1.0"
+xml.rss :version => "2.0", "xmlns:georss" => "http://www.georss.org/georss" do
   xml.channel do
-    xml.title 'Recent comments | PlanningAlerts'
-    xml.description 'Recent comments made on development applications via PlanningAlerts'
+    xml.title "Recent comments | PlanningAlerts"
+    xml.description "Recent comments made on development applications via PlanningAlerts"
     xml.link root_url
 
     @comments.each do |comment|

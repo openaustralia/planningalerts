@@ -1,8 +1,8 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe "replies/_reply" do
   it "renders linebreak formatting into html" do
-    reply = VCR.use_cassette('planningalerts') do
+    reply = VCR.use_cassette("planningalerts") do
       create(
         :reply,
         text: "Thanks for your comment.\n\nI agree.\n\nBest wishes,\nLouise Councillor"
@@ -17,7 +17,7 @@ describe "replies/_reply" do
   end
 
   it "doesn’t include any nasty javascript" do
-    reply = VCR.use_cassette('planningalerts') do
+    reply = VCR.use_cassette("planningalerts") do
       create(
         :reply,
         text: "

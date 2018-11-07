@@ -76,7 +76,7 @@ ActiveAdmin.register Authority do
   end
 
   action_item :scrape, only: :show do
-    button_to('Scrape', scrape_admin_authority_path)
+    button_to("Scrape", scrape_admin_authority_path)
   end
 
   member_action :scrape, method: :post do
@@ -86,7 +86,7 @@ ActiveAdmin.register Authority do
   end
 
   action_item :load_councillors, only: :show do
-    button_to('Load Councillors', load_councillors_admin_authority_path)
+    button_to("Load Councillors", load_councillors_admin_authority_path)
   end
 
   member_action :load_councillors, method: :post do

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 feature "Viewing total the number of individual subscribers" do
   background do
@@ -48,7 +48,7 @@ feature "Viewing the use of the comments function" do
 
   context "when there are comments" do
     background do
-      VCR.use_cassette('planningalerts', allow_playback_repeats: true) do
+      VCR.use_cassette("planningalerts", allow_playback_repeats: true) do
         create(:confirmed_comment, confirmed_at: Time.current.to_date, email: "foo@example.com")
         create(:confirmed_comment, confirmed_at: Time.current.to_date, email: "bar@example.com")
         create(:confirmed_comment, confirmed_at: 3.days.ago, email: "foo@example.com")

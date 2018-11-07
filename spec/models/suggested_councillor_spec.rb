@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 require "validates_email_format_of/rspec_matcher"
 
 RSpec.describe SuggestedCouncillor, type: :model do

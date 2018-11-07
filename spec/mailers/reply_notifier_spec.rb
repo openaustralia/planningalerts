@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe ReplyNotifier do
   describe "#notify_comment_author" do
@@ -9,7 +9,7 @@ describe ReplyNotifier do
     end
     let(:councillor) { create(:councillor, name: "Louise Councillor") }
     let(:comment) do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         create(:comment,
                :confirmed,
                councillor: councillor,

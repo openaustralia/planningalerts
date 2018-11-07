@@ -1,8 +1,8 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe CommentsController do
   before :each do
-    request.env['HTTPS'] = 'on'
+    request.env["HTTPS"] = "on"
   end
 
   describe "#per_week" do
@@ -31,7 +31,7 @@ describe CommentsController do
     end
 
     it "returns comments per week for an authority as json" do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         create(
           :application,
           authority_id: 1,

@@ -15,7 +15,7 @@ class ReportsController < ApplicationController
         flash[:error] = "Sorry, we couldn’t verify that you’re not a robot. Make sure you click the <em>I’m not a robot</em> box below and try again.".html_safe
       end
 
-      render 'new'
+      render "new"
     end
   end
 end

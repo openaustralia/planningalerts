@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 feature "Admin confirms comment for user" do
   around do |test|
@@ -6,7 +6,7 @@ feature "Admin confirms comment for user" do
   end
 
   background do
-    VCR.use_cassette('planningalerts') do
+    VCR.use_cassette("planningalerts") do
       create(:unconfirmed_comment,
              name: "Alena",
              id: 1,

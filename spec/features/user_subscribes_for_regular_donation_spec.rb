@@ -70,7 +70,7 @@ feature "Subscribing to donate monthly" do
 
       context "but there is already a donation for this email" do
         before do
-          create(:donation, email: email, stripe_plan_id: ENV['STRIPE_PLAN_ID_FOR_DONATIONS'])
+          create(:donation, email: email, stripe_plan_id: ENV["STRIPE_PLAN_ID_FOR_DONATIONS"])
         end
 
         it "the person gets helpful feedback", js: true do

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe "applications/show" do
   before :each do
@@ -18,9 +18,9 @@ describe "applications/show" do
     )
     # Don't know how to double this when using formtastic
     @alert = Alert.new
-    errors = double('Errors', :[] => nil)
+    errors = double("Errors", :[] => nil)
     assigns[:comment] = mock_model(Comment, errors: errors, text: nil, name: nil, email: nil)
-    Vanity.context = Struct.new(:vanity_identity).new('1')
+    Vanity.context = Struct.new(:vanity_identity).new("1")
   end
 
   describe "show" do

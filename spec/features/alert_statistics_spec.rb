@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 # feature "Show statistics on alerts" do
 # In order to figure out which scrapers to write first

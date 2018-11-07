@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe ApplicationHelper do
   describe "#meters_in_words" do

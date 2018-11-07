@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Alert do
   it_behaves_like "email_confirmable"
@@ -69,7 +69,7 @@ describe Alert do
     it "is valid when the geocoder returns no errors" do
       mock_geocoder_valid_address_response
 
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         expect(alert).to be_valid
       end
     end
@@ -84,7 +84,7 @@ describe Alert do
     end
 
     it "is invalid if the google places API returns multiple results" do
-      VCR.use_cassette('planningalerts') do
+      VCR.use_cassette("planningalerts") do
         alert.save
         expect(alert).not_to be_valid
       end
@@ -753,7 +753,7 @@ describe Alert do
 
         context "that was not properly geocoded" do
           let(:application) do
-            VCR.use_cassette('application_with_no_address') do
+            VCR.use_cassette("application_with_no_address") do
               create(:application, lat: 1.0, lng: 2.0, address: "An address that can't be geocoded")
             end
           end

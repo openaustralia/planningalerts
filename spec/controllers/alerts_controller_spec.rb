@@ -1,8 +1,8 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe AlertsController do
   before :each do
-    request.env['HTTPS'] = 'on'
+    request.env["HTTPS"] = "on"
   end
 
   describe "#confirmed" do
@@ -10,20 +10,20 @@ describe AlertsController do
       alert = create(:alert)
       expect(Alert).to receive(:find_by!).with(confirm_id: "1234").and_return(alert)
       expect(alert).to receive(:confirm!)
-      get :confirmed, resource: 'alerts', id: "1234"
+      get :confirmed, resource: "alerts", id: "1234"
     end
 
     it "should set the alert to be confirmed when on an iPhone" do
-      allow(request).to receive(:user_agent).and_return('iphone')
+      allow(request).to receive(:user_agent).and_return("iphone")
       alert = create(:alert)
       expect(Alert).to receive(:find_by!).with(confirm_id: "1234").and_return(alert)
       expect(alert).to receive(:confirm!)
-      get :confirmed, resource: 'alerts', id: "1234"
+      get :confirmed, resource: "alerts", id: "1234"
       expect(response).to be_success
     end
 
     it "should return a 404 when the wrong confirm_id is used" do
-      expect { get :confirmed, resource: 'alerts', id: "1111" }.to raise_error ActiveRecord::RecordNotFound
+      expect { get :confirmed, resource: "alerts", id: "1111" }.to raise_error ActiveRecord::RecordNotFound
     end
   end
 
@@ -45,7 +45,7 @@ describe AlertsController do
   describe "#area" do
     it "should 404 if the alert can't be found" do
       expect do
-        get :area, id: 'non_existent_id'
+        get :area, id: "non_existent_id"
       end.to raise_error(ActiveRecord::RecordNotFound)
     end
   end

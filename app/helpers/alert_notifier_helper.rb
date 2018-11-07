@@ -19,7 +19,7 @@ module AlertNotifierHelper
     application_url(
       base_params.merge(
         id: id,
-        utm_campaign: 'view-application'
+        utm_campaign: "view-application"
       )
     )
   end
@@ -54,8 +54,8 @@ module AlertNotifierHelper
     application_url(
       base_params.merge(
         id: id,
-        anchor: 'add-comment',
-        utm_campaign: 'add-comment'
+        anchor: "add-comment",
+        utm_campaign: "add-comment"
       )
     )
   end

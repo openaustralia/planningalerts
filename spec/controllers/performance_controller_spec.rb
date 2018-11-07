@@ -1,8 +1,8 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe PerformanceController do
   before :each do
-    request.env['HTTPS'] = 'on'
+    request.env["HTTPS"] = "on"
   end
 
   describe "#alerts" do
@@ -85,7 +85,7 @@ describe PerformanceController do
 
     context "when there are comments" do
       before do
-        VCR.use_cassette('planningalerts', allow_playback_repeats: true) do
+        VCR.use_cassette("planningalerts", allow_playback_repeats: true) do
           create(:confirmed_comment, confirmed_at: 2.days.ago.to_date, email: "foo@example.com")
           create(:confirmed_comment, confirmed_at: 2.days.ago.to_date, email: "foo@example.com")
           create(:confirmed_comment, confirmed_at: 2.days.ago.to_date, email: "bar@example.com")
