@@ -15,8 +15,8 @@ module AlertNotifierHelper
     { utm_source: "alerts", utm_medium: "email" }
   end
 
-  def application_url_with_tracking(theme: nil, id: nil)
-    base_params = host_and_protocol_for_theme(theme).merge(base_tracking_params)
+  def application_url_with_tracking(id: nil)
+    base_params = host_and_protocol_for_theme("default").merge(base_tracking_params)
 
     application_url(
       base_params.merge(
@@ -26,8 +26,8 @@ module AlertNotifierHelper
     )
   end
 
-  def comment_url_with_tracking(theme: nil, comment: nil)
-    base_params = host_and_protocol_for_theme(theme).merge(base_tracking_params)
+  def comment_url_with_tracking(comment: nil)
+    base_params = host_and_protocol_for_theme("default").merge(base_tracking_params)
 
     application_url(
       base_params.merge(
@@ -38,8 +38,8 @@ module AlertNotifierHelper
     )
   end
 
-  def reply_url_with_tracking(theme: nil, reply: nil)
-    base_params = host_and_protocol_for_theme(theme).merge(base_tracking_params)
+  def reply_url_with_tracking(reply: nil)
+    base_params = host_and_protocol_for_theme("default").merge(base_tracking_params)
 
     application_url(
       base_params.merge(
@@ -50,8 +50,8 @@ module AlertNotifierHelper
     )
   end
 
-  def new_comment_url_with_tracking(theme: nil, id: nil)
-    base_params = host_and_protocol_for_theme(theme).merge(base_tracking_params)
+  def new_comment_url_with_tracking(id: nil)
+    base_params = host_and_protocol_for_theme("default").merge(base_tracking_params)
 
     application_url(
       base_params.merge(
@@ -62,8 +62,8 @@ module AlertNotifierHelper
     )
   end
 
-  def new_donation_url_with_tracking(theme: nil)
-    base_params = host_and_protocol_for_theme(theme).merge(base_tracking_params)
+  def new_donation_url_with_tracking
+    base_params = host_and_protocol_for_theme("default").merge(base_tracking_params)
 
     new_donation_url(
       base_params.merge(

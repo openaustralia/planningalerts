@@ -1,7 +1,7 @@
 .reply-from-councillor.comment.module
   %h2.comment-location.panel-body
     On
-    = link_to application_url_with_tracking(id: reply.comment.application.id, theme: "default"),
+    = link_to application_url_with_tracking(id: reply.comment.application.id),
               title: "View application",
               class: "comment-application" do
       #{display_description_with_address(reply.comment.application)}:
@@ -13,4 +13,4 @@
         %span.comment-recipient
           %span.p-name= reply.comment.name
     = Sanitize.clean(ApplicationController.helpers.simple_format(truncate(reply.text, :length => 700)), Sanitize::Config::BASIC).html_safe
-    = link_to "View reply on PlanningAlerts", reply_url_with_tracking(reply: reply, theme: "default")
+    = link_to "View reply on PlanningAlerts", reply_url_with_tracking(reply: reply)

@@ -4,4 +4,4 @@
 <%= Sanitize.clean(truncate(reply.text, :length => 700), Sanitize::Config::BASIC).html_safe %>
 
 View reply on PlanningAlerts:
-<%= reply_url_with_tracking(reply: reply, theme: "default").html_safe %>
+<%= reply_url_with_tracking(reply: reply).html_safe %>

@@ -8,8 +8,8 @@ class CommentNotifier < ActionMailer::Base
     @comment = comment
 
     themed_mail(
-      theme: "default", from: "#{comment.name} <#{comment.email}>",
-      sender: email_from("default"),
+      from: "#{comment.name} <#{comment.email}>",
+      sender: email_from,
       # Setting reply-to to ensure that we don't get the replies for email clients that are not
       # respecting the from, sender headers that we've set.
       reply_to: "#{comment.name} <#{comment.email}>",
@@ -22,8 +22,8 @@ class CommentNotifier < ActionMailer::Base
     from_address = ENV["EMAIL_COUNCILLOR_REPLIES_TO"]
 
     themed_mail(
-      theme: "default", from: "#{comment.name} <#{from_address}>",
-      sender: email_from("default"),
+      from: "#{comment.name} <#{from_address}>",
+      sender: email_from,
       reply_to: "#{comment.name} <#{from_address}>",
       to: comment.councillor.email, subject: "Planning application at #{comment.application.address}"
     )

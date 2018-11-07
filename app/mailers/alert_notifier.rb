@@ -11,7 +11,7 @@ class AlertNotifier < ActionMailer::Base
     @replies = replies
 
     themed_mail(
-      theme: "default", from: email_from("default"), to: alert.email,
+      from: email_from, to: alert.email,
       subject: render_to_string(
         partial: "subject",
         locals: { applications: applications, comments: comments, alert: alert, replies: replies }
@@ -24,8 +24,7 @@ class AlertNotifier < ActionMailer::Base
     @alert = alert
 
     themed_mail(
-      theme: "default",
-      from: email_from("default"),
+      from: email_from,
       to: alert.email,
       subject: "Your subscription for #{alert.address}"
     )

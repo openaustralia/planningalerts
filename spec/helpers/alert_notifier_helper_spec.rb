@@ -38,7 +38,6 @@ describe AlertNotifierHelper do
       it "returns the correct url" do
         expect(
           helper.application_url_with_tracking(
-            theme: "default",
             id: @application.id
           )
         )
@@ -60,7 +59,6 @@ describe AlertNotifierHelper do
         it "returns the correct url" do
           expect(
             helper.comment_url_with_tracking(
-              theme: "default",
               comment: @comment
             )
           )
@@ -85,7 +83,6 @@ describe AlertNotifierHelper do
       it "returns the correct url" do
         expect(
           helper.reply_url_with_tracking(
-            theme: "default",
             reply: reply
           )
         )
@@ -103,7 +100,6 @@ describe AlertNotifierHelper do
       it {
         expect(
           helper.new_comment_url_with_tracking(
-            theme: "default",
             id: @application.id
           )
         )
@@ -131,7 +127,7 @@ describe AlertNotifierHelper do
         )
       end
 
-      subject { helper.new_donation_url_with_tracking(theme: "default") }
+      subject { helper.new_donation_url_with_tracking }
 
       it { is_expected.to eq new_donation_url(@base_params_plus_email_and_campaign) }
     end

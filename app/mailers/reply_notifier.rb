@@ -8,10 +8,9 @@ class ReplyNotifier < ActionMailer::Base
     @reply = reply
     @comment = @reply.comment
 
-    themed_mail(theme: "default",
-                to: reply.comment.email,
-                sender: email_from("default"),
-                from: email_from("default"),
+    themed_mail(to: reply.comment.email,
+                sender: email_from,
+                from: email_from,
                 subject: "#{reply.councillor.prefixed_name.titleize} replied to your message")
   end
 end

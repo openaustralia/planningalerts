@@ -4,4 +4,4 @@
 <%= Sanitize.clean(truncate(comment.text, :length => 700), Sanitize::Config::BASIC).html_safe %>
 
 View comment on PlanningAlerts:
-<%= comment_url_with_tracking(comment: comment, theme: "default").html_safe %>
+<%= comment_url_with_tracking(comment: comment).html_safe %>
