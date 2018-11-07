@@ -12,11 +12,9 @@ describe AlertNotifierHelper do
     include ActionMailerThemer
 
     context "when the theme is Default" do
-      theme = "default"
-
       it {
-        expect(helper.host_and_protocol_for_theme(theme))
-          .to eq(host: host(theme), protocol: protocol(theme))
+        expect(helper.host_and_protocol_for_theme)
+          .to eq(host: host, protocol: protocol)
       }
     end
   end
@@ -31,7 +29,7 @@ describe AlertNotifierHelper do
   context "when application and theme are set" do
     before :each do
       @application = mock_model(Application, id: 1)
-      @base_params = host_and_protocol_for_theme("default").merge(base_tracking_params)
+      @base_params = host_and_protocol_for_theme.merge(base_tracking_params)
     end
 
     describe "#application_url_with_tracking" do
@@ -121,7 +119,7 @@ describe AlertNotifierHelper do
 
     context "when the theme is \"default\"" do
       before :each do
-        @base_params_plus_email_and_campaign = host_and_protocol_for_theme("default").merge(base_tracking_params).merge(
+        @base_params_plus_email_and_campaign = host_and_protocol_for_theme.merge(base_tracking_params).merge(
           email: @alert.email,
           utm_campaign: "donate-from-alert"
         )

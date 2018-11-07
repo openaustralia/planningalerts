@@ -18,11 +18,11 @@ module ActionMailerThemer
     DefaultTheme.new.email_from
   end
 
-  def host(theme)
-    ThemeChooser.create(theme).host
+  def host
+    DefaultTheme.new.host
   end
 
-  def protocol(theme)
-    ThemeChooser.create(theme).protocol
+  def protocol
+    DefaultTheme.new.protocol
   end
 end

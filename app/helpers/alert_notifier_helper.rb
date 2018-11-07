@@ -7,8 +7,8 @@ module AlertNotifierHelper
     text[0].upcase + text[1..-1]
   end
 
-  def host_and_protocol_for_theme(theme)
-    { host: host(theme), protocol: protocol(theme) }
+  def host_and_protocol_for_theme
+    { host: host, protocol: protocol }
   end
 
   def base_tracking_params
@@ -16,7 +16,7 @@ module AlertNotifierHelper
   end
 
   def application_url_with_tracking(id: nil)
-    base_params = host_and_protocol_for_theme("default").merge(base_tracking_params)
+    base_params = host_and_protocol_for_theme.merge(base_tracking_params)
 
     application_url(
       base_params.merge(
@@ -27,7 +27,7 @@ module AlertNotifierHelper
   end
 
   def comment_url_with_tracking(comment: nil)
-    base_params = host_and_protocol_for_theme("default").merge(base_tracking_params)
+    base_params = host_and_protocol_for_theme.merge(base_tracking_params)
 
     application_url(
       base_params.merge(
@@ -39,7 +39,7 @@ module AlertNotifierHelper
   end
 
   def reply_url_with_tracking(reply: nil)
-    base_params = host_and_protocol_for_theme("default").merge(base_tracking_params)
+    base_params = host_and_protocol_for_theme.merge(base_tracking_params)
 
     application_url(
       base_params.merge(
@@ -51,7 +51,7 @@ module AlertNotifierHelper
   end
 
   def new_comment_url_with_tracking(id: nil)
-    base_params = host_and_protocol_for_theme("default").merge(base_tracking_params)
+    base_params = host_and_protocol_for_theme.merge(base_tracking_params)
 
     application_url(
       base_params.merge(
@@ -63,7 +63,7 @@ module AlertNotifierHelper
   end
 
   def new_donation_url_with_tracking
-    base_params = host_and_protocol_for_theme("default").merge(base_tracking_params)
+    base_params = host_and_protocol_for_theme.merge(base_tracking_params)
 
     new_donation_url(
       base_params.merge(

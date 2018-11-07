@@ -16,7 +16,7 @@ class AlertNotifier < ActionMailer::Base
         partial: "subject",
         locals: { applications: applications, comments: comments, alert: alert, replies: replies }
       ).strip,
-      "List-Unsubscribe" => "<" + unsubscribe_alert_url(protocol: protocol("default"), host: host("default"), id: alert.confirm_id) + ">"
+      "List-Unsubscribe" => "<" + unsubscribe_alert_url(protocol: protocol, host: host, id: alert.confirm_id) + ">"
     )
   end
 
