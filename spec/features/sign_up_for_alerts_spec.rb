@@ -44,7 +44,7 @@ feature "Sign up for alerts" do
     # I think because of the way geokit works we can return different alternative
     # addresses (each of which is equally sensible)
     # even though google is returning the same result (via vcr)
-    expect(page).to have_content("Please enter a full street address, including suburb and state, e.g. Bruce Rd, Victoria")
+    expect(page).to have_content(/Please enter a full street address, including suburb and state, e.g. Bruce Rd, Victoria/)
   end
 
   context "via an application page" do
