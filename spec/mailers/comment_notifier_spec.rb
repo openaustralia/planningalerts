@@ -10,7 +10,7 @@ describe CommentNotifier do
     end
 
     context "default theme" do
-      let(:notifier) { CommentNotifier.notify_authority("default", @comment) }
+      let(:notifier) { CommentNotifier.notify_authority(@comment) }
 
       it "should be sent to the planning authority's feedback email address" do
         expect(notifier.to).to eq([@comment.application.authority.email])
@@ -48,7 +48,7 @@ describe CommentNotifier do
     end
 
     context "default theme" do
-      let(:notifier) { CommentNotifier.notify_councillor("default", comment) }
+      let(:notifier) { CommentNotifier.notify_councillor(comment) }
 
       it { expect(notifier.to).to eql [comment.councillor.email] }
       it { expect(notifier.from).to eql ["replies@planningalerts.org.au"] }
