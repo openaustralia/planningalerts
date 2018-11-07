@@ -39,7 +39,7 @@ describe NewAlertParser do
       end
 
       it "resends the confirmation email for the pre-existing alert" do
-        allow(ConfirmationMailer).to receive(:confirm).with("default", preexisting_alert).and_call_original
+        allow(ConfirmationMailer).to receive(:confirm).with(preexisting_alert).and_call_original
         new_alert = build(
           :alert,
           email: "jenny@example.com",
@@ -50,7 +50,7 @@ describe NewAlertParser do
 
         NewAlertParser.new(new_alert).parse
 
-        expect(ConfirmationMailer).to have_received(:confirm).with("default", preexisting_alert)
+        expect(ConfirmationMailer).to have_received(:confirm).with(preexisting_alert)
       end
 
       it "returns nil" do

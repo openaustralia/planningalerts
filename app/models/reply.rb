@@ -7,6 +7,6 @@ class Reply < ActiveRecord::Base
   validates :received_at, presence: true
 
   after_create do
-    ReplyNotifier.notify_comment_author("default", self).deliver_later
+    ReplyNotifier.notify_comment_author(self).deliver_later
   end
 end

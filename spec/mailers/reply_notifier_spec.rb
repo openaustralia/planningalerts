@@ -20,7 +20,7 @@ describe ReplyNotifier do
       end
     end
     let(:reply) { create(:reply, comment: comment, councillor: councillor) }
-    let(:notifier) { ReplyNotifier.notify_comment_author("default", reply) }
+    let(:notifier) { ReplyNotifier.notify_comment_author(reply) }
     let(:email_intro_text) { "Local councillor Louise Councillor replied" }
 
     it { expect(notifier.to).to eq ["matthew@openaustralia.org"] }

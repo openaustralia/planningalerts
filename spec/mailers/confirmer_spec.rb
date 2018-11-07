@@ -7,7 +7,7 @@ describe ConfirmationMailer do
     let(:object) { mock_model(Alert, confirm_id: "a237bfc", email: "matthew@oaf.org.au") }
 
     context "default theme" do
-      let(:notifier) { ConfirmationMailer.confirm("default", object) }
+      let(:notifier) { ConfirmationMailer.confirm(object) }
 
       describe "confirm" do
         it "should come from the planningalerts' normal email" do
@@ -49,7 +49,7 @@ describe ConfirmationMailer do
     end
 
     context "default theme" do
-      let(:notifier) { ConfirmationMailer.confirm("default", object) }
+      let(:notifier) { ConfirmationMailer.confirm(object) }
 
       describe "confirm" do
         it "should come from the planningalerts' normal email" do
