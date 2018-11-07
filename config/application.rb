@@ -52,6 +52,10 @@ module PlanningalertsApp
     # These are things that are nice to have as configurations but unlikely really
     # in practise to change much
 
+    config.planningalerts_meta_description =
+      "A free service which searches Australian planning authority websites " \
+      "and emails you details of applications near you"
+
     config.planningalerts_small_zone_size = 200
     config.planningalerts_medium_zone_size = 800
     config.planningalerts_large_zone_size = 2000

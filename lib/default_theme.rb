@@ -43,8 +43,7 @@ class DefaultTheme < Theme
     ENV["GOOGLE_MAPS_API_KEY"]
   end
 
-  # TODO: Put this in the config
   def default_meta_description
-    "A free service which searches Australian planning authority websites and emails you details of applications near you"
+    Rails.application.config.planningalerts_meta_description
   end
 end
