@@ -1,14 +1,8 @@
 # frozen_string_literal: true
 
 module AlertNotifierHelper
-  include ActionMailerThemer
-
   def capitalise_initial_character(text)
     text[0].upcase + text[1..-1]
-  end
-
-  def host_and_protocol_for_theme
-    { host: host, protocol: protocol }
   end
 
   def base_tracking_params
@@ -16,10 +10,8 @@ module AlertNotifierHelper
   end
 
   def application_url_with_tracking(id: nil)
-    base_params = host_and_protocol_for_theme.merge(base_tracking_params)
-
     application_url(
-      base_params.merge(
+      base_tracking_params.merge(
         id: id,
         utm_campaign: "view-application"
       )
@@ -27,10 +19,8 @@ module AlertNotifierHelper
   end
 
   def comment_url_with_tracking(comment: nil)
-    base_params = host_and_protocol_for_theme.merge(base_tracking_params)
-
     application_url(
-      base_params.merge(
+      base_tracking_params.merge(
         id: comment.application.id,
         anchor: "comment#{comment.id}",
         utm_campaign: "view-comment"
@@ -39,10 +29,8 @@ module AlertNotifierHelper
   end
 
   def reply_url_with_tracking(reply: nil)
-    base_params = host_and_protocol_for_theme.merge(base_tracking_params)
-
     application_url(
-      base_params.merge(
+      base_tracking_params.merge(
         id: reply.comment.application.id,
         anchor: "reply#{reply.id}",
         utm_campaign: "view-reply"
@@ -51,10 +39,8 @@ module AlertNotifierHelper
   end
 
   def new_comment_url_with_tracking(id: nil)
-    base_params = host_and_protocol_for_theme.merge(base_tracking_params)
-
     application_url(
-      base_params.merge(
+      base_tracking_params.merge(
         id: id,
         anchor: "add-comment",
         utm_campaign: "add-comment"
@@ -63,10 +49,8 @@ module AlertNotifierHelper
   end
 
   def new_donation_url_with_tracking
-    base_params = host_and_protocol_for_theme.merge(base_tracking_params)
-
     new_donation_url(
-      base_params.merge(
+      base_tracking_params.merge(
         utm_campaign:  "donate-from-alert",
         email: @alert.email
       )

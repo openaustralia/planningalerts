@@ -9,7 +9,7 @@ class ConfirmationMailer < ActionMailer::Base
     # This seems a bit long-winded. Is there a better way?
     instance_variable_set(("@" + class_name).to_sym, object)
 
-    themed_mail(
+    mail(
       to: object.email,
       subject: "Please confirm your #{object.class.model_name.human.downcase}",
       from: email_from, template_name: class_name

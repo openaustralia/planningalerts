@@ -25,7 +25,7 @@ describe CouncillorContributionNotifier do
     end
 
     it "should contain the link to the admin show page of the councillor contribition" do
-      expect(mailer.body.to_s).to have_link("review the contribution on its admin page", href: "http://dev.planningalerts.org.au/admin/councillor_contributions/1")
+      expect(mailer.body.to_s).to have_link("review the contribution on its admin page", href: "https://dev.planningalerts.org.au/admin/councillor_contributions/1")
     end
   end
 end

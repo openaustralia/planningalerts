@@ -3,7 +3,7 @@
   Only then will your comment be visible to others and be sent off to #{@comment.recipient_display_name}.
   If you didn't make a comment, then simply ignore this email and nothing further will happen.
 
-= link_to "Confirm your comment", confirmed_comment_url(protocol: @protocol, host: @host, id: @comment.confirm_id)
+= link_to "Confirm your comment", confirmed_comment_url(id: @comment.confirm_id)
 
 %p If your email program does not let you click on this link, just copy and paste it into your web browser and hit return.
 

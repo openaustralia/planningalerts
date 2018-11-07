@@ -2,6 +2,6 @@ The following new planning applications have been found within <%= meters_in_wor
 <%= render :partial => "application", :collection => @applications[0..9], :spacer_template => "spacer" -%>
 <% if @applications.size > 10 %>
 But wait, there are more! Browse the full list of recent nearby applications:
-<%= address_applications_url(protocol: @protocol, host: @host, q: @alert.address) %>
+<%= address_applications_url(q: @alert.address) %>
 
 <% end %>

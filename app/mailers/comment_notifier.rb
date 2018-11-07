@@ -7,7 +7,7 @@ class CommentNotifier < ActionMailer::Base
   def notify_authority(comment)
     @comment = comment
 
-    themed_mail(
+    mail(
       from: "#{comment.name} <#{comment.email}>",
       sender: email_from,
       # Setting reply-to to ensure that we don't get the replies for email clients that are not
@@ -21,7 +21,7 @@ class CommentNotifier < ActionMailer::Base
     @comment = comment
     from_address = ENV["EMAIL_COUNCILLOR_REPLIES_TO"]
 
-    themed_mail(
+    mail(
       from: "#{comment.name} <#{from_address}>",
       sender: email_from,
       reply_to: "#{comment.name} <#{from_address}>",

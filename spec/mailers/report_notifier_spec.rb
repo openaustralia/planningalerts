@@ -45,10 +45,10 @@ describe ReportNotifier do
       I'm saying something abusive
 
       The original comment can be found at:
-      http://dev.planningalerts.org.au/applications/2#comment23
+      https://dev.planningalerts.org.au/applications/2#comment23
 
       To edit/hide/delete this comment:
-      http://dev.planningalerts.org.au/admin/comments/23/edit
+      https://dev.planningalerts.org.au/admin/comments/23/edit
     EOF
   end
 

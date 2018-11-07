@@ -66,7 +66,9 @@ PlanningalertsApp::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { host: ENV["HOST"] }
+  config.action_mailer.default_url_options = {
+    host: ENV["HOST"], protocol: "https"
+  }
 
   # Send mails to the locally running instance of Cuttlefish
   config.action_mailer.delivery_method = :smtp
