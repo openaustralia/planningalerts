@@ -134,15 +134,6 @@ feature "Send a message to a councillor" do
 
         expect(page).to have_content("You need to select who your message should go to from the list below.")
       end
-
-      context "but we're on the NSW theme" do
-        scenario "we can't see councillor messages sections" do
-          visit application_url(application, host: "nsw.127.0.0.1.xip.io")
-
-          expect(page).to have_content("Application Tracking")
-          expect(page).to_not have_content("Who should this go to?")
-        end
-      end
     end
   end
 

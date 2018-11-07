@@ -131,38 +131,6 @@ describe AlertNotifier do
         end
       end
     end
-
-    context "and the theme is NSW" do
-      before :each do
-        @email = AlertNotifier.alert("nsw", @alert, [@a1, @a2])
-      end
-
-      # TODO: This is just a temporary address
-      it "should be from the nsw theme’s email address" do
-        expect(@email.from).to eq(["contact@nsw.127.0.0.1.xip.io"])
-      end
-
-      context "Text email" do
-        it "should nicely format a list of multiple planning applications" do
-          expect(@email.text_part.body.to_s).to eq Rails.root.join("spec/mailers/regression/alert_notifier/email4.txt").read
-        end
-      end
-
-      context "HTML email" do
-        before :each do
-          @html_body = @email.html_part.body.to_s
-        end
-
-        it "should contain links to the applications" do
-          expect(@html_body).to have_link("Foo Street, Bar", href: "http://nsw.127.0.0.1.xip.io:3000/applications/1?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
-          expect(@html_body).to have_link("Bar Street, Foo", href: "http://nsw.127.0.0.1.xip.io:3000/applications/2?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
-        end
-
-        it "should have a specific body" do
-          expect(@html_body).to eq(Rails.root.join("spec/mailers/regression/alert_notifier/email4.html").read)
-        end
-      end
-    end
   end
 
   describe ".new_signup_attempt_notice" do

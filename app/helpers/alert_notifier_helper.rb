@@ -63,8 +63,6 @@ module AlertNotifierHelper
   end
 
   def new_donation_url_with_tracking(theme: nil)
-    raise ArgumentError, "Don't show a donation link in the nsw theme" if theme.eql?("nsw")
-
     base_params = host_and_protocol_for_theme(theme).merge(base_tracking_params)
 
     new_donation_url(

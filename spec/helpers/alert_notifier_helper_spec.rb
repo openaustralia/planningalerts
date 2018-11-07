@@ -19,15 +19,6 @@ describe AlertNotifierHelper do
           .to eq(host: host(theme), protocol: protocol(theme))
       }
     end
-
-    context "when the theme is NSW" do
-      theme = "nsw"
-
-      it {
-        expect(helper.host_and_protocol_for_theme(theme))
-          .to eq(host: host(theme), protocol: protocol(theme))
-      }
-    end
   end
 
   describe "#base_tracking_params" do
@@ -145,21 +136,6 @@ describe AlertNotifierHelper do
       subject { helper.new_donation_url_with_tracking(theme: @theme) }
 
       it { is_expected.to eq new_donation_url(@base_params_plus_email_and_campaign) }
-    end
-
-    context "when the theme is \"nsw\"" do
-      before do
-        @theme = "nsw"
-      end
-
-      subject { helper.new_donation_url_with_tracking(theme: @theme) }
-
-      it "raises an exception because this link shouldn't be shown" do
-        expect { subject }.to raise_error(
-          ArgumentError,
-          "Don't show a donation link in the nsw theme"
-        )
-      end
     end
   end
 

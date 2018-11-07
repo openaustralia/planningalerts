@@ -36,34 +36,6 @@ describe CommentNotifier do
         expect(notifier.html_part.body.to_s).to include Rails.root.join("spec/mailers/regression/comment_notifier/email1.html").read
       end
     end
-
-    context "nsw theme" do
-      let(:notifier) { CommentNotifier.notify_authority("nsw", @comment) }
-
-      it "should be sent to the planning authority's feedback email address" do
-        expect(notifier.to).to eq([@comment.application.authority.email])
-      end
-
-      it "should have the sender as the nsw planningalerts email address" do
-        expect(notifier.sender).to eq("contact@nsw.127.0.0.1.xip.io")
-      end
-
-      it "should be from the email address of the person who made the comment" do
-        expect(notifier.from).to eq([@comment.email])
-      end
-
-      it "should say in the subject line it is a comment on a development application" do
-        expect(notifier.subject).to eq("Comment on application X/001")
-      end
-
-      it "should have specific information in the body of the email" do
-        expect(notifier.text_part.body.to_s).to eq(Rails.root.join("spec/mailers/regression/comment_notifier/email2.txt").read)
-      end
-
-      it "should format paragraphs correctly in the html version of the email" do
-        expect(notifier.html_part.body.to_s).to include Rails.root.join("spec/mailers/regression/comment_notifier/email2.html").read
-      end
-    end
   end
 
   describe "#notify_councillor" do
