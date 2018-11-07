@@ -6,7 +6,8 @@
 source "https://rubygems.org"
 
 gem "rails", "4.2.7.1"
-gem "mysql2", "> 0.3"
+# TODO: Version 0.5.x of mysql2 gem doesn't appear to work with this version of rails
+gem "mysql2", "< 0.5"
 
 # Allow us to use `caches_page`
 gem "actionpack-page_caching"
