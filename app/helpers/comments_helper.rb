@@ -2,7 +2,8 @@
 
 module CommentsHelper
   def comment_as_html(text)
-    Sanitize.clean(simple_format(auto_link(text)), Sanitize::Config::BASIC).html_safe
+    # duplicate string to avoid "can't modify frozen String"
+    Sanitize.clean(simple_format(auto_link(text.dup)), Sanitize::Config::BASIC).html_safe
   end
 
   def comment_path(comment)

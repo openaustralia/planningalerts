@@ -13,7 +13,7 @@ module ApplicationsHelper
   end
 
   def scraped_and_received_text(application)
-    text = "We found this application for you on the planning authority's website #{time_ago_in_words(application.date_scraped)} ago. "
+    text = +"We found this application for you on the planning authority's website #{time_ago_in_words(application.date_scraped)} ago. "
     text << if application.date_received
               "It was received by them #{distance_of_time_in_words(application.date_received, application.date_scraped)} earlier."
             else
@@ -48,13 +48,13 @@ module ApplicationsHelper
     if application.on_notice_from && (Date.today < application.on_notice_from)
       text = "The period to have your comment officially considered by the planning authority <strong>starts #{days_in_future_in_words(application.on_notice_from)}</strong> and finishes #{distance_of_time_in_words(application.on_notice_from, application.on_notice_to)} later."
     elsif Date.today == application.on_notice_to
-      text = "<strong>Today is the last day</strong> to have your comment officially considered by the planning authority."
+      text = +"<strong>Today is the last day</strong> to have your comment officially considered by the planning authority."
       text << " The period for comment started #{days_ago_in_words(application.on_notice_from)}." if application.on_notice_from
     elsif Date.today < application.on_notice_to
-      text = "<strong>You have #{distance_of_time_in_words(Date.today, application.on_notice_to)} left</strong> to have your comment officially considered by the planning authority."
+      text = +"<strong>You have #{distance_of_time_in_words(Date.today, application.on_notice_to)} left</strong> to have your comment officially considered by the planning authority."
       text << " The period for comment started #{days_ago_in_words(application.on_notice_from)}." if application.on_notice_from
     else
-      text = "You're too late! The period for officially commenting on this application <strong>finished #{days_ago_in_words(application.on_notice_to)}</strong>."
+      text = +"You're too late! The period for officially commenting on this application <strong>finished #{days_ago_in_words(application.on_notice_to)}</strong>."
       text << " It lasted for #{distance_of_time_in_words(application.on_notice_from, application.on_notice_to)}." if application.on_notice_from
       text << " If you chose to comment now, your comment will still be displayed here and be sent to the planning authority but it will <strong>not be officially considered</strong> by the planning authority."
     end

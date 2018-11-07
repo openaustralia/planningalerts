@@ -7,7 +7,7 @@ class ApplicationsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[per_day per_week]
 
   def index
-    @description = "Recent applications"
+    @description = +"Recent applications"
 
     if params[:authority_id]
       # TODO: Handle the situation where the authority name isn't found

@@ -97,7 +97,7 @@ class Sitemap
   def add_url(loc, options = {})
     url = SitemapUrl.new(loc, options)
     # Now build up the bit of XML that we're going to add (as a string)
-    t = "<url>"
+    t = +"<url>"
     t << "<loc>#{root_url}#{url.loc}</loc>"
     t << "<changefreq>#{url.changefreq}</changefreq>" if url.changefreq
     t << "<lastmod>#{Sitemap.w3c_date(url.lastmod)}</lastmod>" if url.lastmod
