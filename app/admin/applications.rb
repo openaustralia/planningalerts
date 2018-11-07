@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Application do
   actions :index, :show, :destroy
 

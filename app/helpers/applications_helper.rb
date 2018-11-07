@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationsHelper
   def display_description_with_address(application)
     display_description =

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Controller for (mostly) static content
 class StaticController < ApplicationController
   # Reinstate caching of faq page when all authorities have commenting feature

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AutocompleteHelpers
   def expect_autocomplete_suggestions_to_include(expected_address)
     # this simulates focusing on the input field, which triggers the autocomplete search

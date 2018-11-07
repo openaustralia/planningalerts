@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Comment form object
 class AddComment
   include ActiveModel::Model

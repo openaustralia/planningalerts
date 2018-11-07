@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "zlib"
 
 class SitemapUrl
@@ -46,7 +48,7 @@ class Sitemap
   # This is the uncompressed size of a single sitemap file
   MAX_BYTES_PER_FILE = 10485760
 
-  SITEMAP_XMLNS = "http://www.sitemaps.org/schemas/sitemap/0.9".freeze
+  SITEMAP_XMLNS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
   def initialize(root_url, root_path, logger = Logger.new(STDOUT))
     @root_url = root_url

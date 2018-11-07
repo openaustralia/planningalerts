@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EnvHelpers
   def writeit_config_variables
     { WRITEIT_BASE_URL: "http://writeit.ciudadanointeligente.org",

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :ts do
   desc "Run Thinking Sphinx in the foreground (for something like foreman)"
   task run_in_foreground: ["ts:stop", "ts:index"] do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Report do
   actions :index, :show, :destroy
 

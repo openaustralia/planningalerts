@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PopoloCouncillors
   attr_accessor :popolo
 

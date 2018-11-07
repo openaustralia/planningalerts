@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CouncillorContributionsHelper
   def link_to_or_website_text_for(authority)
     link_to_if(

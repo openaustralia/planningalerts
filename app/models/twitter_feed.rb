@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TwitterFeed
   attr_reader :username
 

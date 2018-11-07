@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Comment do
   menu label: "Comments"
   actions :all, except: %i[destroy new create]

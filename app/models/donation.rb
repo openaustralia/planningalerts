@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Donation < ActiveRecord::Base
   has_many :alerts, -> { where theme: "default" }, foreign_key: :email, primary_key: :email
   validates :email, uniqueness: true, presence: true

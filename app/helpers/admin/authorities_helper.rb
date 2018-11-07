@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Admin
   module AuthoritiesHelper
     def load_councillors_response_text(councillors)

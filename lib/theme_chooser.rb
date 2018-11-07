@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Theme
   def domain
     host.split(":").first

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApiController < ApplicationController
   before_filter :check_api_parameters, except: %i[old_index howto]
   before_filter :require_api_key, except: %i[old_index howto]

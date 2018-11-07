@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AtdisHelper
   def yes_no(v)
     v ? "yes" : "no"

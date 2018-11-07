@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "standalone_sweeper"
 
 class AuthoritySweeper < StandaloneSweeper

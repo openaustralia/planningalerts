@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Alert do
   menu label: "Alerts"
   actions :index, :show

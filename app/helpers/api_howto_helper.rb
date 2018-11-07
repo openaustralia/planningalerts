@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApiHowtoHelper
   def htmlify(url)
     url.gsub(/(\?|&|&amp;)([a-z_]+)=/, '\1<strong>\2</strong>=').gsub("&", "&amp;")

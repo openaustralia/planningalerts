@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MockLocationHelpers
   def mock_geocoder_valid_address_response
     allow(Location).to receive(:geocode).and_return(

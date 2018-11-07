@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register SuggestedCouncillor do
   menu false
   actions :edit, :update

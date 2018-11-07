@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "new_relic/recipes"
 require "bundler/capistrano"
 require "delayed/recipes"

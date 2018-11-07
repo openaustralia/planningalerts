@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LayarController < ApplicationController
   # Ugly polluting namespace kind of nastiness
   include ActionView::Helpers::TextHelper

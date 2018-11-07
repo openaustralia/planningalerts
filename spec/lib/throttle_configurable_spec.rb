@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 # There's not really much point in testing the whole throttling stack because that's tested in the gem

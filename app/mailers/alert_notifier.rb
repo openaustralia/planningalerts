@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AlertNotifier < ActionMailer::Base
   include ActionMailerThemer
   helper :application, :applications, :comments

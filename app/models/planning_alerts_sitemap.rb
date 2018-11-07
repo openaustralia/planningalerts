@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlanningAlertsSitemap
   include Rails.application.routes.url_helpers
 

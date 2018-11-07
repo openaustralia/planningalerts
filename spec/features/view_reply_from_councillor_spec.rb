@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 feature "View a reply from a councillor" do
   given(:comment) do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 User.create! email: "admin@example.com", password: "password"
 Authority.create! full_name: "Marrickville Council",
                   short_name: "Marrickville",

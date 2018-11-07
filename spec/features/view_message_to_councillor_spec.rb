@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 feature "View a message sent to a councillor" do
   given(:comment) do

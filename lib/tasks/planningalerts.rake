@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :planningalerts do
   namespace :applications do
     desc "Scrape new applications, index them, send emails and generate XML sitemap"

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AtdisController < ApplicationController
   def test
     if !params[:url].blank?

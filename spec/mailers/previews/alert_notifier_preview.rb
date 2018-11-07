@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AlertNotifierPreview < ActionMailer::Preview
   def alert
     # Not using Factory here because it seems to be causing problems

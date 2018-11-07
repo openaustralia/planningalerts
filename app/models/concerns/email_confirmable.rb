@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Requires a field email, confirm_id and confirmed on model
 module EmailConfirmable
   extend ActiveSupport::Concern

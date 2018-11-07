@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 collection @comments
 attributes :id, :text, :name, :updated_at
 

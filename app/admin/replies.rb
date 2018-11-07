@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Reply do
   actions :all
 

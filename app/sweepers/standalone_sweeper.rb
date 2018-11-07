@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StandaloneSweeper < ActionController::Caching::Sweeper
   include Rails.application.routes.url_helpers
 

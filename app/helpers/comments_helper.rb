@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CommentsHelper
   def comment_as_html(text)
     Sanitize.clean(simple_format(auto_link(text)), Sanitize::Config::BASIC).html_safe

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   def index
     @description = "Recent comments"

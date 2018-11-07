@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReportNotifier < ActionMailer::Base
   def notify(report)
     @report = report

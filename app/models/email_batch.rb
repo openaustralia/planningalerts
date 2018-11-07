@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class EmailBatch < ActiveRecord::Base
   scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
 

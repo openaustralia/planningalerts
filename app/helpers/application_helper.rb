@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rss/1.0"
 require "rss/2.0"
 

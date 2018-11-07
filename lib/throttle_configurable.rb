@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Rack::Throttle::Blocked < Rack::Throttle::Limiter
   def allowed?(_request)
     false

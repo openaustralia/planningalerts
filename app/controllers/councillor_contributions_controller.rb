@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CouncillorContributionsController < ApplicationController
   before_action :check_if_feature_flag_is_on
   layout "minimal"

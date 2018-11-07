@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 feature "Viewing total the number of individual subscribers" do

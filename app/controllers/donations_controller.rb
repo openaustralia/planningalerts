@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DonationsController < ApplicationController
   before_action :check_if_stripe_is_configured
   layout "donations"

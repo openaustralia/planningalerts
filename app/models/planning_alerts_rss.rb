@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class PlanningAlertsRSS
-  URL = "https://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/feed/".freeze
+  URL = "https://www.openaustraliafoundation.org.au/category/projects/planningalerts-org-au/feed/"
 
   def self.recent
     content = HTTParty.get(URL).body

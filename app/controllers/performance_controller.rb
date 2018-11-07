@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PerformanceController < ApplicationController
   def index
     @daily_comment_metrics = comment_performance_data

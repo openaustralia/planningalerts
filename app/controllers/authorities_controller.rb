@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AuthoritiesController < ApplicationController
   def index
     @authority_count = Authority.active.count

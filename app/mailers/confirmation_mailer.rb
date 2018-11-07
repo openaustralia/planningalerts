@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ConfirmationMailer < ActionMailer::Base
   include ActionMailerThemer
   helper :comments

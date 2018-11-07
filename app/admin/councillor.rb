@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Councillor do
   actions :all
 

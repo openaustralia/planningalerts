@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Simple wrapper around http://geo2gov.com.au/ web service
 class Geo2gov
   include HTTParty

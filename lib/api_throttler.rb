@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.dirname(__FILE__) + "/throttle_configurable"
 
 # Same as configurable throttler except it only throttles API requests (based on the interpreted route)

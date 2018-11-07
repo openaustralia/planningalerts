@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Alert < ActiveRecord::Base
   belongs_to :alert_subscriber
 

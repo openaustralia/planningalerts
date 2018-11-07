@@ -6,9 +6,6 @@ AllCops:
       - bin/*
 
 # Things we're disabling temporarily
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
 Metrics/LineLength:
   Enabled: false
 

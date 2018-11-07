@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FormatConstraint
   def matches?(request)
     request.format.html?

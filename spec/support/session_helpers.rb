@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SessionHelpers
   def sign_in_as_admin
     admin = create(:admin)
