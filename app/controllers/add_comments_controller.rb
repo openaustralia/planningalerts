@@ -13,7 +13,7 @@ class AddCommentsController < ApplicationController
     @add_comment = AddComment.new(
       add_comment_params.merge(
         application: @application,
-        theme: @theme
+        theme: "default"
       )
     )
 
@@ -26,7 +26,7 @@ class AddCommentsController < ApplicationController
 
     @councillor_list_open = true if params[:councillors_list_toggler] == "open"
 
-    @councillors = @application.councillors_available_for_contact if @theme.eql? "default"
+    @councillors = @application.councillors_available_for_contact
 
     # HACK: Required for new email alert signup form
     @alert = Alert.new(address: @application.address)

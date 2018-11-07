@@ -103,12 +103,12 @@ class ApplicationsController < ApplicationController
     @nearby_count = @application.find_all_nearest_or_recent.size
     @add_comment = AddComment.new(
       application: @application,
-      theme: @theme
+      theme: "default"
     )
     # Required for new email alert signup form
     @alert = Alert.new(address: @application.address)
 
-    @councillors = @application.councillors_available_for_contact if @theme.eql? "default"
+    @councillors = @application.councillors_available_for_contact
 
     respond_to do |format|
       format.html

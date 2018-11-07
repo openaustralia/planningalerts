@@ -1,6 +1,6 @@
 - content_for :page_title, 'Sign Up'
 
-- content_for :meta_description, @themer.default_meta_description
+- content_for :meta_description, DefaultTheme.new.default_meta_description
 
 = render "signup_form", alert: @alert,
                         with_intro: false,

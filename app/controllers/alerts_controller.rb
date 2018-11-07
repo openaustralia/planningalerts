@@ -20,7 +20,7 @@ class AlertsController < ApplicationController
         email: params[:alert][:email],
         address: @address,
         radius_meters: zone_sizes["l"],
-        theme: @theme
+        theme: "default"
       )
     ).parse
 

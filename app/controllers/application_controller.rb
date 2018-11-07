@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
-  before_filter :set_header_variable, :set_view_path, :validate_page_param
+  before_filter :set_header_variable, :validate_page_param
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def authenticate_active_admin_user!
@@ -25,11 +25,6 @@ class ApplicationController < ActionController::Base
 
   def set_header_variable
     @alert_count = Stat.applications_sent
-  end
-
-  def set_view_path
-    @themer = ThemeChooser.themer_from_request(request)
-    @theme = @themer.theme
   end
 
   def ssl_required?
