@@ -134,10 +134,6 @@ describe AddComment do
     end
 
     context "and Default theme is active" do
-      before :each do
-        add_comment_form.theme = "default"
-      end
-
       context "and there are contactable councillors" do
         before do
           allow(application).to receive(:councillors_available_for_contact)
@@ -145,30 +141,6 @@ describe AddComment do
         end
 
         it { expect(add_comment_form.could_be_for_councillor?).to eq true }
-      end
-
-      context "and there are no contactable councillors" do
-        before do
-          allow(application).to receive(:councillors_available_for_contact)
-            .and_return nil
-        end
-
-        it { expect(add_comment_form.could_be_for_councillor?).to eq false }
-      end
-    end
-
-    context "and the NSW theme is active" do
-      before :each do
-        add_comment_form.theme = "nsw"
-      end
-
-      context "and there are contactable councillors" do
-        before do
-          allow(application).to receive(:councillors_available_for_contact)
-            .and_return [create(:councillor, authority: application.authority)]
-        end
-
-        it { expect(add_comment_form.could_be_for_councillor?).to eq false }
       end
 
       context "and there are no contactable councillors" do

@@ -3,7 +3,7 @@
     #statsbanner
       #stats
         #{number_to_human(@alert_count).downcase} applications sent across Australia
-    %h1= link_to DefaultTheme.new.app_name, root_path
+    %h1= link_to ENV["EMAIL_FROM_NAME"], root_path
     %h2
       Email alerts of planning applications
       %em near you
