@@ -1,7 +1,7 @@
 %div.comment.module{class: ("comment-to-councillor" if comment.councillor)}
   %h2.comment-location.panel-body
     On
-    = link_to application_url_with_tracking(id: comment.application.id, theme: @theme),
+    = link_to application_url_with_tracking(id: comment.application.id, theme: "default"),
               title: "View application",
               class: "comment-application" do
       #{display_description_with_address(comment.application)}:
@@ -17,7 +17,7 @@
         - else
           commented
     = comment_as_html(truncate(comment.text, :length => 700))
-    = link_to "View comment on PlanningAlerts", comment_url_with_tracking(comment: comment, theme: @theme), class: "action-link"
+    = link_to "View comment on PlanningAlerts", comment_url_with_tracking(comment: comment, theme: "default"), class: "action-link"
   - if comment.councillor && comment.replies.empty?
     .panel-body.comment-to-councillor-status
       %p

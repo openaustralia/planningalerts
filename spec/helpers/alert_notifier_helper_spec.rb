@@ -30,16 +30,15 @@ describe AlertNotifierHelper do
 
   context "when application and theme are set" do
     before :each do
-      @theme = "default"
       @application = mock_model(Application, id: 1)
-      @base_params = host_and_protocol_for_theme(@theme).merge(base_tracking_params)
+      @base_params = host_and_protocol_for_theme("default").merge(base_tracking_params)
     end
 
     describe "#application_url_with_tracking" do
       it "returns the correct url" do
         expect(
           helper.application_url_with_tracking(
-            theme: @theme,
+            theme: "default",
             id: @application.id
           )
         )
@@ -61,7 +60,7 @@ describe AlertNotifierHelper do
         it "returns the correct url" do
           expect(
             helper.comment_url_with_tracking(
-              theme: @theme,
+              theme: "default",
               comment: @comment
             )
           )
@@ -86,7 +85,7 @@ describe AlertNotifierHelper do
       it "returns the correct url" do
         expect(
           helper.reply_url_with_tracking(
-            theme: @theme,
+            theme: "default",
             reply: reply
           )
         )
@@ -104,7 +103,7 @@ describe AlertNotifierHelper do
       it {
         expect(
           helper.new_comment_url_with_tracking(
-            theme: @theme,
+            theme: "default",
             id: @application.id
           )
         )
@@ -126,14 +125,13 @@ describe AlertNotifierHelper do
 
     context "when the theme is \"default\"" do
       before :each do
-        @theme = "default"
-        @base_params_plus_email_and_campaign = host_and_protocol_for_theme(@theme).merge(base_tracking_params).merge(
+        @base_params_plus_email_and_campaign = host_and_protocol_for_theme("default").merge(base_tracking_params).merge(
           email: @alert.email,
           utm_campaign: "donate-from-alert"
         )
       end
 
-      subject { helper.new_donation_url_with_tracking(theme: @theme) }
+      subject { helper.new_donation_url_with_tracking(theme: "default") }
 
       it { is_expected.to eq new_donation_url(@base_params_plus_email_and_campaign) }
     end

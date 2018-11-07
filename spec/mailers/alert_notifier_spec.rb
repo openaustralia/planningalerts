@@ -29,7 +29,7 @@ describe AlertNotifier do
   end
 
   describe "when sending a planning alert with one new comment" do
-    let(:email) { AlertNotifier.alert("default", @alert, [], [@c1]) }
+    let(:email) { AlertNotifier.alert(@alert, [], [@c1]) }
 
     it "should use the singular in the comment line" do
       expect(email.subject).to eq("1 new comment on planning applications near #{@alert.address}")
@@ -41,7 +41,7 @@ describe AlertNotifier do
   end
 
   describe "when sending a planning alert with two new comments" do
-    let(:email) { AlertNotifier.alert("default", @alert, [], [@c1, @c2]) }
+    let(:email) { AlertNotifier.alert(@alert, [], [@c1, @c2]) }
 
     it "should use the plural in the comment line" do
       expect(email.subject).to eq("2 new comments on planning applications near #{@alert.address}")
@@ -57,7 +57,7 @@ describe AlertNotifier do
   end
 
   describe "when send a planning alert with one new comment and two new planning applications" do
-    let(:email) { AlertNotifier.alert("default", @alert, [@a1, @a2], [@c1]) }
+    let(:email) { AlertNotifier.alert(@alert, [@a1, @a2], [@c1]) }
 
     it "should tell you about both in the comment line" do
       expect(email.subject).to eq("1 new comment and 2 new planning applications near #{@alert.address}")
@@ -74,7 +74,7 @@ describe AlertNotifier do
 
   describe "when sending a planning alert with one new planning application" do
     before :each do
-      @email = AlertNotifier.alert("default", @alert, [@a1])
+      @email = AlertNotifier.alert(@alert, [@a1])
     end
 
     it "should use the singular (application) in the subject line" do
@@ -85,7 +85,7 @@ describe AlertNotifier do
   describe "when sending a planning alert with two new planning applications" do
     context "and the theme is Default" do
       before :each do
-        @email = AlertNotifier.alert("default", @alert, [@a1, @a2])
+        @email = AlertNotifier.alert(@alert, [@a1, @a2])
       end
 
       it "should be sent to the user's email address" do

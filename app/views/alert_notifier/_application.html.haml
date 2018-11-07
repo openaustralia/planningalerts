@@ -2,7 +2,7 @@
   %table
     %tr
       %td.address{:colspan => "2"}
-        = link_to application.address, application_url_with_tracking(theme: @theme, id: application.id)
+        = link_to application.address, application_url_with_tracking(theme: "default", id: application.id)
     - if application.location
       %tr
         %td.map
@@ -14,4 +14,4 @@
         = application.description
     %tr
       %td{:colspan => "2"}
-        = link_to 'Add your own comment', new_comment_url_with_tracking(theme: @theme, id: application.id)
+        = link_to 'Add your own comment', new_comment_url_with_tracking(theme: "default", id: application.id)

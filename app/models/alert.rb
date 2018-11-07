@@ -206,7 +206,7 @@ class Alert < ActiveRecord::Base
     replies = new_replies
 
     if !applications.empty? || !comments.empty? || !replies.empty?
-      AlertNotifier.alert("default", self, applications, comments, replies).deliver_now
+      AlertNotifier.alert(self, applications, comments, replies).deliver_now
       self.last_sent = Time.now
     end
     self.last_processed = Time.now
