@@ -2,7 +2,7 @@ ActiveAdmin.register CouncillorContribution do
   actions :index, :show
 
   index do
-    column(:contributor) { |contribution| contribution.attribution }
+    column(:contributor, &:attribution)
     column :created_at
     column :authority
     column :reviewed
@@ -11,7 +11,7 @@ ActiveAdmin.register CouncillorContribution do
     actions
   end
 
-  show title: proc {|resource| "Councillor Contribution for #{resource.authority.full_name}, #{resource.created_at.strftime('%B %d, %Y')}"} do
+  show title: proc { |resource| "Councillor Contribution for #{resource.authority.full_name}, #{resource.created_at.strftime('%B %d, %Y')}" } do
     attributes_table do
       row(:contributor) { |contribution| contribution.attribution(with_email: true) }
       row :source
@@ -36,23 +36,23 @@ ActiveAdmin.register CouncillorContribution do
     resource.accepted = false unless resource.reviewed?
     resource.save!
 
-    redirect_to({action: :show})
+    redirect_to(action: :show)
   end
 
   member_action :toggle_accepted, method: :patch do
     resource.toggle("accepted")
     resource.save!
 
-    redirect_to({action: :show})
+    redirect_to(action: :show)
   end
 
   action_item :toggle_reviewed, only: [:show] do
-    button_to "Mark as #{"not " if resource.reviewed}reviewed", toggle_reviewed_admin_councillor_contribution_path, method: :patch
+    button_to "Mark as #{'not ' if resource.reviewed}reviewed", toggle_reviewed_admin_councillor_contribution_path, method: :patch
   end
 
   action_item :toggle_reviewed, only: [:show] do
     if resource.reviewed
-      button_to "Mark as #{"not " if resource.accepted}accepted", toggle_accepted_admin_councillor_contribution_path, method: :patch
+      button_to "Mark as #{'not ' if resource.accepted}accepted", toggle_accepted_admin_councillor_contribution_path, method: :patch
     end
   end
 

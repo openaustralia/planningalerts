@@ -15,7 +15,7 @@ ActiveAdmin.register Donation do
   filter :stripe_customer_id
   filter :stripe_subscription_id
 
-  form do |f|
+  form do |_f|
     inputs "Details" do
       input :email
     end

@@ -13,7 +13,7 @@ ActiveAdmin.register Reply do
 
   remove_filter :comment
 
-  form do |f|
+  form do |_f|
     inputs do
       input :comment_id, as: :number, label: "Comment ID"
       input :councillor

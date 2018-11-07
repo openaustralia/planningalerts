@@ -9,7 +9,7 @@ guard :livereload do
   watch(%r{stylesheets/.+\.(scss|sass)$})
   watch(%r{stylesheets/\w+/.+\.(scss|sass)$})
   # Rails Assets Pipeline
-  watch(%r{(app|vendor)/assets/\w+/(.+\.(css|js|html)).*})  { |m| "/assets/#{m[2]}" }
+  watch(%r{(app|vendor)/assets/\w+/(.+\.(css|js|html)).*}) { |m| "/assets/#{m[2]}" }
 end
 
 guard :rspec, cmd: "bin/rspec" do
@@ -32,9 +32,9 @@ guard :rspec, cmd: "bin/rspec" do
 
   # Turnip features and steps
   watch(%r{^spec/acceptance/(.+)\.feature$})
-  watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$})   { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
+  watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
 end
 
 guard :rubocop, all_on_start: false do
-  watch(%r{.+\.rb$})
+  watch(/.+\.rb$/)
 end

@@ -1,7 +1,7 @@
 ActiveAdmin.register Report do
   actions :index, :show, :destroy
 
-  scope(:comment_not_hidden, default: true) { |r| r.joins(:comment).where(comments: {hidden: false}) }
+  scope(:comment_not_hidden, default: true) { |r| r.joins(:comment).where(comments: { hidden: false }) }
   scope :all
 
   filter :name

@@ -42,7 +42,7 @@ ActiveAdmin.register Authority do
         column :party
         column(:image) { |c| link_to image_tag(c.image_url), c.image_url }
         # TODO: Add delete action
-        column { |c| "#{link_to "View", admin_councillor_path(c)} #{link_to "Edit", edit_admin_councillor_path(c)}".html_safe }
+        column { |c| "#{link_to 'View', admin_councillor_path(c)} #{link_to 'Edit', edit_admin_councillor_path(c)}".html_safe }
       end
     else
       para "None loaded for this authority."
@@ -56,7 +56,7 @@ ActiveAdmin.register Authority do
 
   filter :full_name
 
-  form do |f|
+  form do |_f|
     inputs "Name" do
       input :full_name
       input :short_name
@@ -82,7 +82,7 @@ ActiveAdmin.register Authority do
   member_action :scrape, method: :post do
     authority = Authority.find(params[:id])
     authority.delay.collect_applications
-    redirect_to({action: :show}, notice: "Queued for scraping!")
+    redirect_to({ action: :show }, notice: "Queued for scraping!")
   end
 
   action_item :load_councillors, only: :show do
@@ -92,9 +92,9 @@ ActiveAdmin.register Authority do
   member_action :load_councillors, method: :post do
     popolo = EveryPolitician::Popolo.parse(open(resource.popolo_url).read)
     results = resource.load_councillors(popolo)
-    notice = render_to_string(partial: "load_councillors_message", locals: {councillors: results})
+    notice = render_to_string(partial: "load_councillors_message", locals: { councillors: results })
 
-    redirect_to({action: :show}, notice: notice)
+    redirect_to({ action: :show }, notice: notice)
   end
 
   csv do

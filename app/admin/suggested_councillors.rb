@@ -4,7 +4,7 @@ ActiveAdmin.register SuggestedCouncillor do
 
   controller do
     def update
-      super do |success, failure|
+      super do |success, _failure|
         success.html { redirect_to admin_councillor_contribution_path(resource.councillor_contribution) }
       end
     end

@@ -1,6 +1,6 @@
 ActiveAdmin.register Comment do
   menu label: "Comments"
-  actions :all, except: [:destroy, :new, :create]
+  actions :all, except: %i[destroy new create]
 
   scope :visible, default: true
   scope("Visible, sent to councillor") { |s| s.visible.to_councillor }
@@ -24,9 +24,9 @@ ActiveAdmin.register Comment do
   filter :text
   filter :councillor
 
-  show title: proc{ |resource| "Comment by #{resource.name}#{" (unconfirmed)" unless resource.confirmed?}" }
+  show title: proc { |resource| "Comment by #{resource.name}#{' (unconfirmed)' unless resource.confirmed?}" }
 
-  form do |f|
+  form do |_f|
     inputs "Text" do
       input :text
     end
@@ -51,9 +51,9 @@ ActiveAdmin.register Comment do
     replies = resource.create_replies_from_writeit!
     if replies.present?
       # TODO: Fix pluralisation: "Loaded 1 replies"
-      redirect_to({action: :show}, notice: "Loaded #{replies.count} replies")
+      redirect_to({ action: :show }, notice: "Loaded #{replies.count} replies")
     else
-      redirect_to({action: :show}, notice: "No replies loaded")
+      redirect_to({ action: :show }, notice: "No replies loaded")
     end
   end
 
@@ -66,7 +66,7 @@ ActiveAdmin.register Comment do
 
   member_action :confirm, method: :post do
     resource.confirm!
-    redirect_to({action: :show}, notice: "Comment confirmed and sent")
+    redirect_to({ action: :show }, notice: "Comment confirmed and sent")
   end
 
   permit_params :text, :email, :name, :address, :hidden

@@ -20,7 +20,7 @@ ActiveAdmin.register User do
 
   remove_filter :api_statistics
 
-  form do |f|
+  form do |_f|
     inputs "Details" do
       input :email
       input :name
