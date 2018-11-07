@@ -1,14 +1,18 @@
 # frozen_string_literal: true
 
-class Rack::Throttle::Blocked < Rack::Throttle::Limiter
-  def allowed?(_request)
-    false
-  end
-end
+module Rack
+  module Throttle
+    class Blocked < Rack::Throttle::Limiter
+      def allowed?(_request)
+        false
+      end
+    end
 
-class Rack::Throttle::Unlimited < Rack::Throttle::Limiter
-  def allowed?(_request)
-    true
+    class Unlimited < Rack::Throttle::Limiter
+      def allowed?(_request)
+        true
+      end
+    end
   end
 end
 
