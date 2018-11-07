@@ -9,9 +9,6 @@ AllCops:
 Metrics/LineLength:
   Enabled: false
 
-Lint/AmbiguousBlockAssociation:
-  Enabled: false
-
 # We prefer double quotes here and it we're making liberal use of multi-line
 # strings so it makes sense to enforce those to be consistent oo
 Style/StringLiterals:

@@ -10,7 +10,7 @@ module EmailConfirmable
     before_create :set_confirm_info
     after_create :send_confirmation_email
 
-    scope :confirmed, -> { where(confirmed: true) }
+    scope(:confirmed, -> { where(confirmed: true) })
   end
 
   def send_confirmation_email

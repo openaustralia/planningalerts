@@ -11,9 +11,9 @@ class Comment < ActiveRecord::Base
   validates_presence_of :address, unless: :to_councillor?
 
   include EmailConfirmable
-  scope :visible, -> { where(confirmed: true, hidden: false) }
-  scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
-  scope :to_councillor, -> { joins(:councillor) }
+  scope(:visible, -> { where(confirmed: true, hidden: false) })
+  scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
+  scope(:to_councillor, -> { joins(:councillor) })
 
   scope(:visible_with_unique_emails_for_date, lambda do |date|
     visible.where("date(confirmed_at) = ?", date).group(:email)

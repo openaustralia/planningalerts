@@ -11,8 +11,8 @@ class Alert < ActiveRecord::Base
 
   attr_writer :address_for_placeholder
 
-  scope :active, -> { where(confirmed: true, unsubscribed: false) }
-  scope :in_past_week, -> { where("created_at > ?", 7.days.ago) }
+  scope(:active, -> { where(confirmed: true, unsubscribed: false) })
+  scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
 
   before_create :attach_alert_subscriber
 
