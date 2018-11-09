@@ -92,7 +92,7 @@ module ApplicationHelper
       { name: "Renee Wright", email_md5: "11917617eb0fe763c52889906b2a5540", github: "rjwright" },
       { name: "Dave Slutzkin", email_md5: "b5491c409c2d00ff7590066599d264cb", github: "daveslutzkin" },
       { name: "Hugh Stimson", email_md5: "5f970615ea543215fa783c89012a6287", github: "hughstimson" },
-      { name: "Eric Tam", email_md5: "7eac54f31e5f205964f9a306838d8899", github: "" },
+      { name: "Eric Tam", email_md5: "7eac54f31e5f205964f9a306838d8899", github: "LoveMyData" },
       { name: "Ben M", email_md5: "a99b7918f974feb902e89bb613b32991", github: "" },
       { name: "Kelvin Nicholson", email_md5: "68993df636ccc98ae440563cf62badd5", github: "kelvinn" },
       { name: "Jason Thomas", email_md5: "edf2f394e21a040eca21d3618a8d7032", github: "JasonThomasData" },
