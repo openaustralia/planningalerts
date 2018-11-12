@@ -3,12 +3,12 @@
 
 .widget-prototype
   %h3 Receive email alerts of new development applications near you
-  = semantic_form_for @alert, :url => {:action => 'create'} do |f|
+  = semantic_form_for @alert, url: {action: 'create'} do |f|
     = f.inputs do
-      = f.input :address, :label => "Enter a street address", :hint => "e.g. 1 Sowerby St, Goulburn, NSW 2580", :placeholder => "Enter a street address"
-      = f.input :email, :label => "Enter your email address", :placeholder => "Enter your email address"
+      = f.input :address, label: "Enter a street address", hint: "e.g. 1 Sowerby St, Goulburn, NSW 2580", placeholder: "Enter a street address"
+      = f.input :email, label: "Enter your email address", placeholder: "Enter your email address"
     = f.actions do
-      = f.action :submit, :label => "Create alert"
+      = f.action :submit, label: "Create alert"
   %p
     This is a free service provided by <a href="http://www.planningalerts.org.au">Planning Alerts</a> and run by the charity <a href="http://www.openaustraliafoundation.org.au">the OpenAustralia Foundation</a>. Our
     %em Privacy Policy

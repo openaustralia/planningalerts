@@ -2,7 +2,7 @@
   %meta(content="text/html; charset=utf-8" http-equiv="Content-Type")
   %meta(name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1")
   - if yield(:meta_description)
-    %meta{:name => "Description", :content => yield(:meta_description)}
+    %meta{name: "Description", content: yield(:meta_description)}
 
   %title
     - if yield(:page_title) != ""
@@ -14,10 +14,10 @@
   - if @rss
     %link(rel="alternate" type="application/rss+xml" title="RSS" href=@rss)
 
-  = stylesheet_link_tag 'application.css', :media => 'screen, projection'
-  = stylesheet_link_tag 'print.css', :media => 'print'
+  = stylesheet_link_tag 'application.css', media: 'screen, projection'
+  = stylesheet_link_tag 'print.css', media: 'print'
   /[if IE]
-    = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'ie.css', media: 'screen, projection'
 
   %style(type="text/css")
     v:* { behavior:url(#default#VML);}

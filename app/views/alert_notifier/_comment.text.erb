@@ -1,7 +1,7 @@
 
 <%= comment.name %> <%= comment.councillor ? "wrote to #{comment.councillor.prefixed_name} about" : "commented on"  %> <%= display_description_with_address(comment.application) %>:
 
-<%= Sanitize.clean(truncate(comment.text, :length => 700), Sanitize::Config::BASIC).html_safe %>
+<%= Sanitize.clean(truncate(comment.text, length: 700), Sanitize::Config::BASIC).html_safe %>
 
 View comment on PlanningAlerts:
 <%= comment_url_with_tracking(comment: comment).html_safe %>

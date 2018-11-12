@@ -1,17 +1,17 @@
 .box.application
   %table
     %tr
-      %td.address{:colspan => "2"}
+      %td.address{colspan: "2"}
         = link_to application.address, application_url_with_tracking(id: application.id)
     - if application.location
       %tr
         %td.map
-          = google_static_map(application, :size => "150x150")
+          = google_static_map(application, size: "150x150")
         %td.streetview
-          = google_static_streetview(application, :size => "150x150")
+          = google_static_streetview(application, size: "150x150")
     %tr
-      %td.description{:colspan => "2"}
+      %td.description{colspan: "2"}
         = application.description
     %tr
-      %td{:colspan => "2"}
+      %td{colspan: "2"}
         = link_to 'Add your own comment', new_comment_url_with_tracking(id: application.id)

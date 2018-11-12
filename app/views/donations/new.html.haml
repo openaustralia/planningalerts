@@ -18,7 +18,7 @@
 .donations-this-week
   .container
     %h2 Because of backers like you, here’s our week on PlanningAlerts
-    - cache 'donations_new_thisweek_stats', :expires_in => 1.hour do
+    - cache 'donations_new_thisweek_stats', expires_in: 1.hour do
       %ul
         %li
           %p

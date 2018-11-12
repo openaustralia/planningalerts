@@ -2,7 +2,7 @@
 
 %h2= yield :page_title
 
-%form.formtastic{:action => url_for({}), :method => "get"}
+%form.formtastic{action: url_for({}), method: "get"}
   %fieldset.inputs
     %ol
       %li
@@ -11,7 +11,7 @@
   %fieldset.actions
     %ol
       %li
-        = submit_tag "Test feed", :name => nil
+        = submit_tag "Test feed", name: nil
 
 - if @errored_application
   %h3 Application which errored
@@ -35,4 +35,3 @@
         %tr
           %td.field= name
           %td= application.attributes[name]
-

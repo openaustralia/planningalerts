@@ -3,4 +3,4 @@ The following new reply by a local councillor has been posted on comments within
 <% else %>
 The following new replies by local councillors have been posted on comments within <%= meters_in_words(@alert.radius_meters) %> of <%= @alert.address %>:
 <% end %>
-<%= render :partial => "reply", :collection => @replies, :spacer_template => "spacer" -%>
+<%= render partial: "reply", collection: @replies, spacer_template: "spacer" -%>
