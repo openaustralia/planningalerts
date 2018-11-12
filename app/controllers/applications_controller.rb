@@ -24,6 +24,17 @@ class ApplicationsController < ApplicationController
     @alert.address_for_placeholder = @applications.last.address if @applications.any?
   end
 
+  # Most active applications in the last 4 weeks
+  def active
+    @applications = Application
+                    .where("date_scraped > ?", 4.weeks.ago)
+                    .joins(:comments)
+                    .group("applications.id")
+                    .merge(Comment.visible)
+                    .reorder("count(comments.id) DESC")
+                    .paginate(page: params[:page], per_page: 30)
+  end
+
   # JSON api for returning the number of scraped applications per day
   def per_day
     authority = Authority.find_by_short_name_encoded!(params[:authority_id])
