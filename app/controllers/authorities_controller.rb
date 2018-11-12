@@ -31,7 +31,7 @@ class AuthoritiesController < ApplicationController
     @applications = authority.collect_unsaved_applications_date_range_original_style(@url)
     # Try validating the applications and return all the errors for the first non-validating application
     @applications.each do |application|
-      skip if application.valid?
+      next if application.valid?
 
       @errored_application = application
       @applications = nil
