@@ -423,6 +423,13 @@ body .container .attention {
   color: $cool-highlight;
 }
 
+.box {
+  @include boxed-content;
+  h4 {
+    margin-top: 0;
+  }
+}
+
 .pagination {
   text-align: center;
   margin-bottom: 1em;
