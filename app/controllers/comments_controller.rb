@@ -2,7 +2,7 @@
 
 class CommentsController < ApplicationController
   def index
-    @description = "Recent comments"
+    @description = +"Recent comments"
 
     if params[:authority_id]
       authority = Authority.find_by_short_name_encoded!(params[:authority_id])
