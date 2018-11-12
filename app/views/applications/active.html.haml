@@ -4,13 +4,12 @@
 
 #main
   %p
-    This shows recent (in the last four weeks) applications that have had the
-    most comments made on them. This is a strong signal that an application
-    is contentious or has a large amount of community interest.
+    This shows the top 20 recent applications that have had the
+    most comments made on them. A high number of comments is a strong signal
+    that an application has a large amount of community interest.
 
 
-  = paginated_section @applications, :previous_label => "« Newer", :next_label => "Older »" do
-    = render "applications", :applications => @applications
+  = render "applications", :applications => @applications
 
 #sidebar
   .box

@@ -32,7 +32,7 @@ class ApplicationsController < ApplicationController
                     .group("applications.id")
                     .merge(Comment.visible)
                     .reorder("count(comments.id) DESC")
-                    .paginate(page: params[:page], per_page: 30)
+                    .limit(20)
   end
 
   # JSON api for returning the number of scraped applications per day
