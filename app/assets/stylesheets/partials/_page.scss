@@ -413,6 +413,11 @@ body .container .attention {
   }
 }
 
+.application .comments {
+  float: right;
+  color: $cool-highlight;
+}
+
 .appinfo {
   font-size: 0.8em;
   color: $cool-highlight;

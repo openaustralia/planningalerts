@@ -1,5 +1,7 @@
 %article.application
   = link_to application do
+    - if application.comments.visible.count > 0
+      .comments= pluralize(application.comments.visible.count, "comment")
     .address= application.address
     .appinfo
       - if application.respond_to? :distance
