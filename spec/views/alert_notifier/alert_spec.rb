@@ -17,7 +17,6 @@ describe "alert_notifier/alert.html.haml" do
     assign(:comments, [])
     assign(:replies, [])
     assign(:host, "foo.com")
-    assign(:theme, "default")
   end
 
   it "should not use html entities to encode the description" do
@@ -126,7 +125,6 @@ describe "alert_notifier/alert.text.erb" do
     assign(:comments, [])
     assign(:replies, [])
     assign(:host, "foo.com")
-    assign(:theme, "default")
   end
 
   context "when there is a comment to an authority" do

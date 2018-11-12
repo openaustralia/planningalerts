@@ -25,7 +25,6 @@ FactoryGirl.define do
     name "Matthew Landauer"
     text "a comment"
     address "12 Foo Street"
-    theme "default"
   end
 
   factory :comment do

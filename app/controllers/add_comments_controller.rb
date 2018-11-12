@@ -12,8 +12,7 @@ class AddCommentsController < ApplicationController
 
     @add_comment = AddComment.new(
       add_comment_params.merge(
-        application: @application,
-        theme: "default"
+        application: @application
       )
     )
 
@@ -42,7 +41,6 @@ class AddCommentsController < ApplicationController
       :text,
       :address,
       :email,
-      :theme,
       :comment_for
     )
   end

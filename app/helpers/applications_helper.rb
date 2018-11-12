@@ -138,7 +138,6 @@ module ApplicationsHelper
     Base64.encode64(raw_signature).tr("+/", "-_").delete("\n")
   end
 
-  # TODO: extract to theme
   def api_host
     "api.planningalerts.org.au"
   end

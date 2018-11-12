@@ -9,7 +9,6 @@ class AddComment
     :text,
     :address,
     :email,
-    :theme,
     :comment_for,
     :application
   )
@@ -33,8 +32,7 @@ class AddComment
       name: name,
       text: text,
       address: address,
-      email: email,
-      theme: theme
+      email: email
     )
 
     process_comment_for(@comment)
@@ -43,7 +41,7 @@ class AddComment
   end
 
   def could_be_for_councillor?
-    application.councillors_available_for_contact && theme.eql?("default") ? true : false
+    !application.councillors_available_for_contact.nil?
   end
 
   def for_planning_authority?

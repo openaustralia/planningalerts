@@ -102,8 +102,7 @@ class ApplicationsController < ApplicationController
     @comments = @application.comments.visible.order(:confirmed_at)
     @nearby_count = @application.find_all_nearest_or_recent.size
     @add_comment = AddComment.new(
-      application: @application,
-      theme: "default"
+      application: @application
     )
     # Required for new email alert signup form
     @alert = Alert.new(address: @application.address)

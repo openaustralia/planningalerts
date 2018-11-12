@@ -58,10 +58,6 @@ describe CommentNotifier do
       it { expect(notifier.text_part).to have_content comment_text }
       it { expect(notifier.html_part).to have_content comment_text }
     end
-
-    context "nsw theme" do
-      # It should not be enabled for the NSW theme
-    end
   end
 
   describe "#send_comment_via_writeit!" do
