@@ -2,16 +2,21 @@
 
 %h3 Most active applications in the last four weeks
 
-%p
-  This shows recent (in the last four weeks) applications that have had the
-  most comments made on them. This is a strong signal that an application
-  is contentious or has a large amount of community interest.
+#main
+  %p
+    This shows recent (in the last four weeks) applications that have had the
+    most comments made on them. This is a strong signal that an application
+    is contentious or has a large amount of community interest.
 
-%p
-  Are you a journalist? Then this page is for you! If you use information from
-  PlanningAlerts for a story please cite it in your story by including a full
-  link (e.g. https://...) to the application in question. This helps your readers
-  by being able to directly be involved in the community discussion.
 
-= paginated_section @applications, :previous_label => "« Newer", :next_label => "Older »" do
-  = render "applications", :applications => @applications
+  = paginated_section @applications, :previous_label => "« Newer", :next_label => "Older »" do
+    = render "applications", :applications => @applications
+
+#sidebar
+
+  %h4 Journalist?
+  %p
+    Then this page is for you! If you use information from
+    PlanningAlerts for a story please cite it in your story by including a full
+    link (e.g. https://...) to the application in question. This helps your readers
+    by being able to directly be involved in the community discussion.
