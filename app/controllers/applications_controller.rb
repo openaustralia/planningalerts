@@ -24,8 +24,7 @@ class ApplicationsController < ApplicationController
     @alert.address_for_placeholder = @applications.last.address if @applications.any?
   end
 
-  # Most active applications in the last 4 weeks
-  def active
+  def newsworthy
     @applications = Application
                     .where("date_scraped > ?", 4.weeks.ago)
                     .joins(:comments)
