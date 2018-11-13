@@ -1,0 +1,7 @@
+.trending.container
+  %div
+    %h4 Trending planning applications across Australia
+
+    = render "applications", applications: applications
+
+    = link_to "More&hellip;".html_safe, trending_applications_path, class: "cta"

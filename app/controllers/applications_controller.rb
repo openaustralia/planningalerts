@@ -79,6 +79,14 @@ class ApplicationsController < ApplicationController
         @rss = applications_path(format: "rss", address: @q, radius: @radius)
       end
     end
+    @trending = Application
+                .where("date_scraped > ?", 4.weeks.ago)
+                .joins(:comments)
+                .group("applications.id")
+                .merge(Comment.visible)
+                .reorder("count(comments.id) DESC")
+                .with_visible_comments_count
+                .limit(2)
     @set_focus_control = "q"
     # Use a different template if there are results to display
     render "address_results" if @q && @error.nil?

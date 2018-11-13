@@ -576,7 +576,8 @@ form.address-search {
 }
 
 .tweets,
-.stats {
+.stats,
+.trending {
   a {
     &:link,
     &:visited {
@@ -638,7 +639,7 @@ form.address-search {
   }
 }
 
-.tweets {
+.tweets, .trending {
   border-top: 1px solid $lightest-cool-highlight;
   padding-top: 1em;
 }
@@ -651,7 +652,7 @@ form.address-search {
   }
 }
 
-.tweets {
+.tweets, .trending {
   li > a {
     &:hover,
     &:focus {
