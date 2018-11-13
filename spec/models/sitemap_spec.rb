@@ -34,8 +34,8 @@ describe Sitemap do
 
     s = Sitemap.new("http://domain.org", public, @logger)
 
-    s.add_url "/", changefreq: :hourly, lastmod: DateTime.new(2010, 2, 1)
-    s.add_url "/foo", changefreq: :daily, lastmod: DateTime.new(2010, 1, 1)
+    s.add_url "/", changefreq: :hourly, lastmod: Time.utc(2010, 2, 1)
+    s.add_url "/foo", changefreq: :daily, lastmod: Time.utc(2010, 1, 1)
     s.finish
     # s.notify_search_engines
   end

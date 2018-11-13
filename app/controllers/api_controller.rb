@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class ApiController < ApplicationController
-  before_filter :check_api_parameters, except: %i[old_index howto]
-  before_filter :require_api_key, except: %i[old_index howto]
-  before_filter :authenticate_bulk_api, only: %i[all date_scraped]
+  before_action :check_api_parameters, except: %i[old_index howto]
+  before_action :require_api_key, except: %i[old_index howto]
+  before_action :authenticate_bulk_api, only: %i[all date_scraped]
 
   # This is disabled because at least one commercial user of the API is doing
   # GET requests for JSONP instead of using XHR
@@ -12,7 +12,7 @@ class ApiController < ApplicationController
 
   def authority
     # TODO: Handle the situation where the authority name isn't found
-    authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    authority = Authority.find_short_name_encoded!(params[:authority_id])
     api_render(authority.applications, "Recent applications from #{authority.full_name_and_state}")
   end
 

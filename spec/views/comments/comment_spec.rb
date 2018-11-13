@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe "comments/_comment" do
   before do
-    Timecop.freeze(Time.local(2015, 1, 26, 10, 5, 0))
+    Timecop.freeze(Time.zone.local(2015, 1, 26, 10, 5, 0))
   end
 
   let(:application) { VCR.use_cassette("planningalerts") { create(:application) } }

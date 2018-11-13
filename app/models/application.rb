@@ -21,7 +21,7 @@ class Application < ActiveRecord::Base
   scope(:recent, -> { where("date_scraped >= ?", 14.days.ago) })
 
   def date_received_can_not_be_in_the_future
-    return unless date_received && date_received > Date.today
+    return unless date_received && date_received > Time.zone.today
 
     errors.add(:date_received, "can not be in the future")
   end
@@ -70,7 +70,7 @@ class Application < ActiveRecord::Base
         info_url: a.at("info_url").inner_text,
         comment_url: a.at("comment_url").inner_text,
         date_received: a.at("date_received").inner_text,
-        date_scraped: Time.now,
+        date_scraped: Time.zone.now,
         # on_notice_from and on_notice_to tags are optional
         on_notice_from: (a.at("on_notice_from")&.inner_text),
         on_notice_to: (a.at("on_notice_to")&.inner_text)
@@ -92,7 +92,7 @@ class Application < ActiveRecord::Base
           info_url: a["info_url"],
           comment_url: a["comment_url"],
           date_received: a["date_received"],
-          date_scraped: Time.now,
+          date_scraped: Time.zone.now,
           # on_notice_from and on_notice_to tags are optional
           on_notice_from: a["on_notice_from"],
           on_notice_to: a["on_notice_to"]
@@ -105,7 +105,7 @@ class Application < ActiveRecord::Base
   end
 
   def description
-    description = read_attribute(:description)
+    description = self[:description]
     return unless description
 
     # If whole description is in upper case switch the whole description to lower case
@@ -119,7 +119,7 @@ class Application < ActiveRecord::Base
   end
 
   def address
-    address = read_attribute(:address)
+    address = self[:address]
     return unless address
     exceptions = %w[QLD VIC NSW SA ACT TAS WA NT]
 
@@ -160,7 +160,7 @@ class Application < ActiveRecord::Base
   end
 
   def official_submission_period_expired?
-    on_notice_to && Date.today > on_notice_to
+    on_notice_to && Time.zone.today > on_notice_to
   end
 
   def current_councillors_for_authority

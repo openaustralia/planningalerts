@@ -84,7 +84,7 @@ FactoryGirl.define do
 
     factory :admin do
       admin true
-      confirmed_at 1.days.ago
+      confirmed_at 1.day.ago
     end
   end
 
@@ -105,7 +105,7 @@ FactoryGirl.define do
 
       factory :unsubscribed_alert do
         unsubscribed true
-        unsubscribed_at Time.now
+        unsubscribed_at Time.zone.now
       end
     end
   end

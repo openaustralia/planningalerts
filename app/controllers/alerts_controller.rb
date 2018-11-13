@@ -32,13 +32,13 @@ class AlertsController < ApplicationController
   end
 
   def unsubscribe
-    @alert = Alert.find_by_confirm_id(params[:id])
+    @alert = Alert.find_by(confirm_id: params[:id])
     @alert&.unsubscribe!
   end
 
   def area
     @zone_sizes = zone_sizes
-    @alert = Alert.find_by_confirm_id!(params[:id])
+    @alert = Alert.find_by!(confirm_id: params[:id])
     if request.get?
       @size = @zone_sizes.invert[@alert.radius_meters]
     else

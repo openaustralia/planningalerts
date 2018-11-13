@@ -2,7 +2,7 @@
 
 class AtdisController < ApplicationController
   def test
-    if !params[:url].blank?
+    if params[:url].present?
       @feed = Feed.create_from_url(params[:url])
       begin
         @page = @feed.applications

@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :api_statistics
 
   def set_api_key
-    self.api_key = Digest::MD5.base64digest(id.to_s + rand.to_s + Time.now.to_s)[0...20]
+    self.api_key = Digest::MD5.base64digest(id.to_s + rand.to_s + Time.zone.now.to_s)[0...20]
   end
 
   def send_devise_notification(notification, *args)

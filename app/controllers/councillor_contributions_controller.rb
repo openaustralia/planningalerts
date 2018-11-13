@@ -5,7 +5,7 @@ class CouncillorContributionsController < ApplicationController
   layout "minimal"
 
   def new
-    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    @authority = Authority.find_short_name_encoded!(params[:authority_id])
 
     @councillor_contribution =
       if params["councillor_contribution"]
@@ -20,7 +20,7 @@ class CouncillorContributionsController < ApplicationController
   end
 
   def source
-    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    @authority = Authority.find_short_name_encoded!(params[:authority_id])
 
     @councillor_contribution = @authority.councillor_contributions.build(
       councillor_contribution_with_suggested_councillors_params
@@ -41,7 +41,7 @@ class CouncillorContributionsController < ApplicationController
   end
 
   def add_contributor
-    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    @authority = Authority.find_short_name_encoded!(params[:authority_id])
     @councillor_contribution = CouncillorContribution.find(councillor_contribution_with_source_params[:id])
 
     @councillor_contribution.update!(source: councillor_contribution_with_source_params[:source])
@@ -49,7 +49,7 @@ class CouncillorContributionsController < ApplicationController
   end
 
   def thank_you
-    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    @authority = Authority.find_short_name_encoded!(params[:authority_id])
     @councillor_contribution = CouncillorContribution.find(councillor_contribution_with_contibutor_params[:id])
     return if params[:button].eql? "skip"
 

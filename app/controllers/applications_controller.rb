@@ -11,7 +11,7 @@ class ApplicationsController < ApplicationController
 
     if params[:authority_id]
       # TODO: Handle the situation where the authority name isn't found
-      @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+      @authority = Authority.find_short_name_encoded!(params[:authority_id])
       apps = @authority.applications
       @description << " from #{@authority.full_name_and_state}"
     else
@@ -26,7 +26,7 @@ class ApplicationsController < ApplicationController
 
   # JSON api for returning the number of scraped applications per day
   def per_day
-    authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    authority = Authority.find_short_name_encoded!(params[:authority_id])
     respond_to do |format|
       format.js do
         render json: authority.applications_per_day
@@ -35,7 +35,7 @@ class ApplicationsController < ApplicationController
   end
 
   def per_week
-    authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    authority = Authority.find_short_name_encoded!(params[:authority_id])
     respond_to do |format|
       format.js do
         render json: authority.applications_per_week
@@ -92,7 +92,7 @@ class ApplicationsController < ApplicationController
 
   def show
     # First check if there is a redirect
-    redirect = ApplicationRedirect.find_by_application_id(params[:id])
+    redirect = ApplicationRedirect.find_by(application_id: params[:id])
     if redirect
       redirect_to id: redirect.redirect_application_id
       return
@@ -116,7 +116,7 @@ class ApplicationsController < ApplicationController
 
   def nearby
     # First check if there is a redirect
-    redirect = ApplicationRedirect.find_by_application_id(params[:id])
+    redirect = ApplicationRedirect.find_by(application_id: params[:id])
     if redirect
       redirect_to id: redirect.redirect_application_id
       return

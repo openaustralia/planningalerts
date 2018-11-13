@@ -35,7 +35,7 @@ describe "applications/show" do
 
     it "should display the map" do
       allow(@application).to receive(:date_received).and_return(nil)
-      allow(@application).to receive(:date_scraped).and_return(Time.now)
+      allow(@application).to receive(:date_scraped).and_return(Time.zone.now)
       assigns[:application] = @application
       render
       expect(rendered).to have_selector("div#map_div")
@@ -43,7 +43,7 @@ describe "applications/show" do
 
     it "should say nothing about notice period when there is no information" do
       allow(@application).to receive(:date_received).and_return(nil)
-      allow(@application).to receive(:date_scraped).and_return(Time.now)
+      allow(@application).to receive(:date_scraped).and_return(Time.zone.now)
       allow(@application).to receive(:on_notice_from).and_return(nil)
       allow(@application).to receive(:on_notice_to).and_return(nil)
       assigns[:application] = @application
@@ -59,7 +59,7 @@ describe "applications/show" do
       allow(@application).to receive(:lng).and_return(nil)
       allow(@application).to receive(:location).and_return(nil)
       allow(@application).to receive(:date_received).and_return(nil)
-      allow(@application).to receive(:date_scraped).and_return(Time.now)
+      allow(@application).to receive(:date_scraped).and_return(Time.zone.now)
       assigns[:application] = @application
 
       render

@@ -20,14 +20,14 @@ describe PerformanceController do
 
     context "when there are active alerts" do
       before do
-        create :confirmed_alert, email: "mary@example.org", created_at: DateTime.new(2016, 6, 19)
-        create :confirmed_alert, email: "mary@example.org", created_at: DateTime.new(2016, 7, 19)
-        create :confirmed_alert, email: "mary@example.org", created_at: DateTime.new(2016, 8, 19)
-        create :confirmed_alert, email: "clare@example.org", created_at: DateTime.new(2016, 8, 19)
-        create :confirmed_alert, email: "clare@example.org", created_at: DateTime.new(2016, 8, 19)
-        create :confirmed_alert, email: "zou@example.org", created_at: DateTime.new(2016, 7, 6)
-        create :confirmed_alert, email: "henare@example.org", created_at: DateTime.new(2016, 7, 6)
-        create :confirmed_alert, email: "kat@example.org", created_at: DateTime.new(2016, 8, 5)
+        create :confirmed_alert, email: "mary@example.org", created_at: Time.utc(2016, 6, 19)
+        create :confirmed_alert, email: "mary@example.org", created_at: Time.utc(2016, 7, 19)
+        create :confirmed_alert, email: "mary@example.org", created_at: Time.utc(2016, 8, 19)
+        create :confirmed_alert, email: "clare@example.org", created_at: Time.utc(2016, 8, 19)
+        create :confirmed_alert, email: "clare@example.org", created_at: Time.utc(2016, 8, 19)
+        create :confirmed_alert, email: "zou@example.org", created_at: Time.utc(2016, 7, 6)
+        create :confirmed_alert, email: "henare@example.org", created_at: Time.utc(2016, 7, 6)
+        create :confirmed_alert, email: "kat@example.org", created_at: Time.utc(2016, 8, 5)
       end
 
       it "returns an json data" do
@@ -49,7 +49,7 @@ describe PerformanceController do
 
     context "when people have unsubscribed" do
       before do
-        alert = create :confirmed_alert, email: "mary@example.org", created_at: DateTime.new(2016, 6, 19)
+        alert = create :confirmed_alert, email: "mary@example.org", created_at: Time.utc(2016, 6, 19)
 
         Timecop.freeze(Time.utc(2016, 8, 23)) { alert.unsubscribe! }
 

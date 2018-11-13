@@ -9,9 +9,7 @@ module ApiHowtoHelper
     "api.planningalerts.org.au"
   end
 
-  def api_key
-    current_user&.api_key
-  end
+  delegate :api_key, to: :current_user, allow_nil: true
 
   def api_example_address_url(
     format, key, address = Rails.application.config.planningalerts_api_example_address,

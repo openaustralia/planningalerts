@@ -125,7 +125,7 @@ feature "Sign up for alerts" do
 
   context "when there is already an unconfirmed alert for the address" do
     around do |test|
-      Timecop.freeze(DateTime.new(2017, 1, 4, 14, 35)) { test.run }
+      Timecop.freeze(Time.utc(2017, 1, 4, 14, 35)) { test.run }
     end
 
     given!(:preexisting_alert) do

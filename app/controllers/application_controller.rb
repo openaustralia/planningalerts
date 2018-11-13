@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
-  before_filter :set_header_variable, :validate_page_param
+  before_action :set_header_variable, :validate_page_param
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def authenticate_active_admin_user!

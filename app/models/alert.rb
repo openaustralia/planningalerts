@@ -3,7 +3,7 @@
 class Alert < ActiveRecord::Base
   belongs_to :alert_subscriber
 
-  validates_numericality_of :radius_meters, greater_than: 0, message: "isn't selected"
+  validates :radius_meters, numericality: { greater_than: 0, message: "isn't selected" }
   validate :validate_address
 
   before_validation :geocode_from_address, unless: :geocoded?
@@ -82,7 +82,7 @@ class Alert < ActiveRecord::Base
   end
 
   def unsubscribe!
-    update!(unsubscribed: true, unsubscribed_at: Time.now)
+    update!(unsubscribed: true, unsubscribed_at: Time.zone.now)
   end
 
   def subscription
@@ -96,10 +96,10 @@ class Alert < ActiveRecord::Base
   # Name of the local government authority
   def lga_name
     # Cache value
-    lga_name = read_attribute(:lga_name)
+    lga_name = self[:lga_name]
     unless lga_name
       lga_name = Geo2gov.new(lat, lng).lga_name
-      write_attribute(:lga_name, lga_name)
+      self[:lga_name] = lga_name
       # TODO: Kind of wrong to do a save! here in what appears to the outside world like a simple accessor method
       save!
     end
@@ -207,9 +207,9 @@ class Alert < ActiveRecord::Base
 
     if !applications.empty? || !comments.empty? || !replies.empty?
       AlertNotifier.alert(self, applications, comments, replies).deliver_now
-      self.last_sent = Time.now
+      self.last_sent = Time.zone.now
     end
-    self.last_processed = Time.now
+    self.last_processed = Time.zone.now
     save!
 
     # Update the tallies on each application.
@@ -231,7 +231,7 @@ class Alert < ActiveRecord::Base
     info_logger.info "Checking #{alerts.count} active alerts"
     info_logger.info "Splitting mailing for the next 24 hours into batches of size #{batch_size} roughly every #{time_between_batches / 60} minutes"
 
-    time = Time.now
+    time = Time.zone.now
     alerts.map(&:id).shuffle.each_slice(batch_size) do |alert_ids|
       Alert.delay(run_at: time).process_alerts(alert_ids)
       time += time_between_batches
