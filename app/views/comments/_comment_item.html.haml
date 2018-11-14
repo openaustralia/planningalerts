@@ -1,4 +1,4 @@
-%figure.comment-item.panel{class: ("comment-to-councillor" if comment.to_councillor?), id: "comment#{comment.id}"}
+%figure.comment-item.panel{ class: ("comment-to-councillor" if comment.to_councillor?), id: "comment#{comment.id}" }
   = render 'comments/comment_location_heading', comment: comment if with_address
   .panel-body
     %figcaption.comment-meta.comment-heading

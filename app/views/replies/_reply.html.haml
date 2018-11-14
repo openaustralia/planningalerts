@@ -1,4 +1,4 @@
-%figure.reply-from-councillor.comment-item.panel{id: "reply#{reply.id}"}
+%figure.reply-from-councillor.comment-item.panel{ id: "reply#{reply.id}" }
   .panel-body
     .comment-heading.h-card
       = render "councillors/councillor_image", councillor: reply.councillor
@@ -10,7 +10,7 @@
           replied to
           = link_to reply.comment.name, "#comment#{reply.comment.id}", title: "View comment"
           = link_to reply_path(reply), title: "View reply" do
-            %time.comment-time{datetime: reply.received_at.strftime("%F")}
+            %time.comment-time{ datetime: reply.received_at.strftime("%F") }
               #{time_ago_in_words(reply.received_at)} ago
     %blockquote.comment-text= simple_format(reply.text)
     - if current_user && current_user.admin?

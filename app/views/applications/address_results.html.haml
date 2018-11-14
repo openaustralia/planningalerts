@@ -38,10 +38,12 @@
     %li= link_to "Most recent first", { sort: "time", q: @q, page: nil }, class: "button button-pill button-small #{"button-active" if @sort == "time"}"
     %li= link_to "Closest first", { sort: "distance", q: @q, page: nil }, class: "button button-pill button-small #{"button-active" if @sort == "distance"}"
 
-  - if @sort == "distance"
-    - p, n = "Closer", "Further"
-  - else
-    - p, n = "Newer", "Older"
+  :ruby
+    if @sort == "distance"
+      p, n = "Closer", "Further"
+    else
+      p, n = "Newer", "Older"
+    end
 
   -# Only show the top pagination links beyond the first page
   - if @page.to_i > 1

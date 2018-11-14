@@ -1,11 +1,12 @@
--# TODO: Move to head to block page until it loads
--# TODO: Deal with no JavaScript
-%script{src: "https://checkout.stripe.com/checkout.js"}
+-#
+  TODO: Move to head to block page until it loads
+  TODO: Deal with no JavaScript
+%script{ src: "https://checkout.stripe.com/checkout.js" }
 
-%input{type: 'hidden', name: 'stripeEmail', value: email}
-%input{type: 'hidden', name: 'stripeToken', value: ""}
+%input{ type: 'hidden', name: 'stripeEmail', value: email }
+%input{ type: 'hidden', name: 'stripeToken', value: "" }
 -# TODO: Set amount to what we want
-%button{type: 'submit', class: "button-action", disabled: true, id: "button-pro-signup", data: {key: ENV["STRIPE_PUBLISHABLE_KEY"], amount: price_in_cents(price), email: email}}
+%button.button-action{ type: 'submit', disabled: true, id: "button-pro-signup", data: { key: ENV["STRIPE_PUBLISHABLE_KEY"], amount: price_in_cents(price), email: email } }
   Donate each month
 %p.no-js-message
   Our donation form requires javascript from our secure payment processor stripe.com.

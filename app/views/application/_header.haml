@@ -1,5 +1,5 @@
 #header-wrapper
-  #header.container
+  .container#header
     #statsbanner
       #stats
         #{number_to_human(@alert_count).downcase} applications sent across Australia
@@ -19,7 +19,7 @@
             = link_to 'Sign Up', new_alert_path
           = li_selected(:controller => "/static", :action => "faq") do
             = link_to faq_path do
-              %abbr(title="Frequently asked questions") FAQ
+              %abbr{ title: "Frequently asked questions" } FAQ
           = li_selected(:controller => "/authorities", :action => "index") do
             = link_to 'Coverage', authorities_path
           = li_selected(:controller => "/static", :action => "get_involved") do
@@ -31,8 +31,9 @@
             = link_to 'About', about_path
           = li_selected(:controller => "/donations", :action => "new") do
             = link_to 'Back PlanningAlerts', new_donation_path, class: 'donate-link-header'
-          -# This extra menu item kind of screws up the menu layout and is
-          -# also not what most people see. Convenience trumps that I think.
+          -#
+            This extra menu item kind of screws up the menu layout and is
+            also not what most people see. Convenience trumps that I think.
           - if current_user && current_user.admin?
             %li
               = link_to "Admin", admin_root_path

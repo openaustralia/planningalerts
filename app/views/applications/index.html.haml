@@ -18,5 +18,5 @@
   = render "applications", :applications => @applications
 
 - if current_user && @authority
-  - # TODO: If people are logged out, should we show them a link to get an API key?
+  -# TODO: If people are logged out, should we show them a link to get an API key?
   = link_to "Get applications as JSON", authority_applications_json_url_for_current_user(@authority)

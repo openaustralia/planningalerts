@@ -26,7 +26,7 @@
       %a.button-small.button.button-pill{ :href => "##{a.first.downcase}" }= a.first
 
 - @authorities.each do |state, authorities|
-  %h4{:id => state.downcase}= state
+  %h4{ id: state.downcase }= state
   %ul.authorities
     - authorities.each do |authority|
       %li

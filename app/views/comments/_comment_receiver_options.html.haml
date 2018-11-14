@@ -1,5 +1,5 @@
 = f.inputs id: "comment-receiver-inputgroup" do
-  %li.input{class: ("error" if @add_comment.errors[:comment_for].any?)}
+  %li.input{ class: ("error" if @add_comment.errors[:comment_for].any?) }
     - if @add_comment.errors[:comment_for].any?
       %p.inline-errors= @add_comment.errors[:comment_for].first.to_s
     %legend Who should this go to?
@@ -7,7 +7,7 @@
                      "planning authority",
                      { id: "receiver-to-authority-option",
                        class: "receiver-select-radio receiver-type-option" })
-    %label.receiver-select-label{for: "receiver-to-authority-option"}
+    %label.receiver-select-label{ for: "receiver-to-authority-option" }
       %strong The planning authority
       - if @application.official_submission_period_expired?
         %p
@@ -24,7 +24,7 @@
         %p
           Write to the planning authority (#{@application.authority.full_name}) if you want your comment considered
           when they decide whether to approve this application.
-    .councillor-select-list{class: ("open" if @councillor_list_open)}
+    .councillor-select-list{ class: ("open" if @councillor_list_open) }
       %header.councillor-select-list-intro
         %strong One of your elected local councillors
         %p

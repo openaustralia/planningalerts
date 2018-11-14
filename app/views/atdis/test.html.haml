@@ -48,7 +48,7 @@
   = f.inputs do
     = f.input :page, :label => "Page Number", :as => :number, :min => 1
   %h2= link_to "Filters", "#", id: "filter-heading"
-  #filters{class: ("hide" if !@feed.filters_set?)}
+  #filters{ class: ("hide" if !@feed.filters_set?) }
     = f.inputs "Lodgement Date", :class => "daterange" do
       = f.input :lodgement_date_start, :label => "Start", :required => false, :input_html => {:class => "date"}, :placeholder => "from"
       = f.input :lodgement_date_end, :label => "End", :required => false, :placeholder => "to"

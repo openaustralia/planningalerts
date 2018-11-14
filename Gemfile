@@ -93,6 +93,7 @@ group :development do
   gem "guard-livereload"
   gem "growl"
   gem "guard-rubocop"
+  gem "haml_lint", require: false
   gem "rb-inotify", require: false
   gem "rack-livereload"
   gem "mailcatcher"

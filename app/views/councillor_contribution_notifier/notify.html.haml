@@ -3,7 +3,7 @@
 
 %p
   You've got a wonderful new councillor contribution in for
-  = "#{@councillor_contribution.authority.full_name}."
+  #{@councillor_contribution.authority.full_name}.
   You can
   = "#{link_to 'review the contribution on its admin page', admin_councillor_contribution_url(@councillor_contribution.id)}.".html_safe
 %p

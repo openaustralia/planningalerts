@@ -2,7 +2,7 @@
 %h3= yield :page_title
 
 #map_div
-  
+
 .map-settings
   %p What size area near #{@alert.address} would you like to receive alerts for?
 
@@ -20,7 +20,7 @@
       %noscript
         %li
           Note: viewing the alert area on a map requires javascript
-      
+
     %p= submit_tag("Update size", :class => "button button-action button-rounded")
 
 = javascript_include_tag "maps"

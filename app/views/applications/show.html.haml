@@ -1,11 +1,11 @@
 - content_for :page_title, page_title(@application)
 - content_for :meta_description, @application.description
 - content_for :extra_meta_tags do
-  %meta(name="twitter:card" content="summary")
-  %meta(name="twitter:site" content="@PlanningAlerts")
-  %meta(name="twitter:title" content="#{@application.address}")
-  %meta(name="twitter:description" content="#{@application.description[0..199] if @application.description}")
-  %meta(name="twitter:image" content="#{google_static_streetview_url(@application, size: "120x120")}")
+  %meta{ name: "twitter:card", content: "summary" }
+  %meta{ name: "twitter:site", content: "@PlanningAlerts" }
+  %meta{ name: "twitter:title", content: "#{@application.address}" }
+  %meta{ name: "twitter:description", content: "#{@application.description[0..199] if @application.description}" }
+  %meta{ name: "twitter:image", content: "#{google_static_streetview_url(@application, size: "120x120")}" }
 
 = render "applications/facebook"
 = render "applications/twitter"
@@ -19,13 +19,13 @@
       - if @application.location
         #map_div
           %noscript= google_static_map(@application, size: "350x330")
-        %div.print-media-only= google_static_map(@application, size: "350x330")
+        .print-media-only= google_static_map(@application, size: "350x330")
 
       .details
         - if @application.location
           #pano
             %noscript= google_static_streetview(@application, size: "350x330")
-            %div.print-media-only= google_static_streetview(@application, size: "350x330")
+            .print-media-only= google_static_streetview(@application, size: "350x330")
 
 
       %p.description= @application.description

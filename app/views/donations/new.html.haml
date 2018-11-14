@@ -8,7 +8,7 @@
   .donations-page
     .container.main
       #content
-        %div.donations-intro
+        .donations-intro
           %h1.page-title
             You should be informed and have your say on changes to&nbsp;your local&nbsp;area.
           %p
@@ -26,7 +26,7 @@
             emails sent to subscribers
         %li
           %p
-            - # FIXME: This stat would be better as the number of people
+            -# FIXME: This stat would be better as the number of people
             %span.number= number_with_delimiter(Alert.active.in_past_week.count)
             new alerts registered
         %li
