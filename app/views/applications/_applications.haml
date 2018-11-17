@@ -1,3 +1,3 @@
 %ol.applications
-  - for application in applications
-    %li= render "application", :application => application
+  - applications.each do |application|
+    %li= render "application", application: application

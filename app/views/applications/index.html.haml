@@ -7,15 +7,15 @@
                                address_hidden: false,
                                form_classes: "attention"
 
-- if @authority && @authority.broken?
+- if @authority&.broken?
   - if @authority.latest_application_date.nil?
     %span.highlight There are no applications yet for this authority
   - else
     %span.highlight It looks like something might be wrong. The latest application was received #{time_ago_in_words(@authority.latest_application_date)} ago.
-    = link_to "Why?", faq_path(:anchor => "broken_scraper")
+    = link_to "Why?", faq_path(anchor: "broken_scraper")
 
-= paginated_section @applications, :previous_label => "« Newer", :next_label => "Older »" do
-  = render "applications", :applications => @applications
+= paginated_section @applications, previous_label: "« Newer", next_label: "Older »" do
+  = render "applications", applications: @applications
 
 - if current_user && @authority
   -# TODO: If people are logged out, should we show them a link to get an API key?

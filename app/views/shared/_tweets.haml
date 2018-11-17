@@ -1,9 +1,9 @@
 #tweets-wrapper
   - unless Rails.env.test?
-    - cache 'tweets', :expires_in => 30.minutes do
+    - cache "tweets", expires_in: 30.minutes do
       .tweets.container
         %div
           %h4 Tweets from PlanningAlerts
           %ul
             = render_twitter_feed("PlanningAlerts")
-          = link_to "Follow us on @PlanningAlerts", "http://www.twitter.com/PlanningAlerts", :class => "cta"
+          = link_to "Follow us on @PlanningAlerts", "http://www.twitter.com/PlanningAlerts", class: "cta"

@@ -21,9 +21,9 @@
 %ul.list-options
   %li
     %b Go to state
-  - @authorities.each_with_index do |a, i|
+  - @authorities.each do |a|
     %li
-      %a.button-small.button.button-pill{ :href => "##{a.first.downcase}" }= a.first
+      %a.button-small.button.button-pill{ href: "##{a.first.downcase}" }= a.first
 
 - @authorities.each do |state, authorities|
   %h4{ id: state.downcase }= state

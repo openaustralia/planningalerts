@@ -6,12 +6,12 @@
   %fieldset.inputs
     %ol
       %li
-        = label_tag 'url', 'Feed url'
-        = url_field_tag 'url', @url
+        = label_tag "url", "Feed url"
+        = url_field_tag "url", @url
   %fieldset.actions
     %ol
       %li
-        = submit_tag "Test feed", :name => nil
+        = submit_tag "Test feed", name: nil
 
 - if @errored_application
   %h3 Application which errored

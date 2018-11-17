@@ -14,10 +14,10 @@
   - if @rss
     %link{ rel: "alternate", type: "application/rss+xml", title: "RSS", href: @rss }
 
-  = stylesheet_link_tag 'application.css', :media => 'screen, projection'
-  = stylesheet_link_tag 'print.css', :media => 'print'
+  = stylesheet_link_tag "application.css", media: "screen, projection"
+  = stylesheet_link_tag "print.css", media: "print"
   /[if IE]
-    = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
+    = stylesheet_link_tag "ie.css", media: "screen, projection"
 
   %style{ type: "text/css" }
     v:* { behavior:url(#default#VML);}
@@ -32,10 +32,10 @@
       document.write(unescape('%3Cscript type="text/javascript" src="/assets/jquery-1.8.0.min.js"%3E%3C/script%3E'));
     }
 
+  -#
+    The placeholder polyfill js needs to be in the header for it to work.
+    Would like to investigate more and understand this better
   - if with_placeholder_polyfill
-    -#
-      The placeholder polyfill js needs to be in the header for it to work.
-      Would like to investigate more and understand this better
     = stylesheet_link_tag "placeholder_polyfill.min.css"
     = javascript_include_tag "placeholder_polyfill.jquery.min.combo.js"
 

@@ -1,13 +1,13 @@
 %figure.comment-item.panel{ class: ("comment-to-councillor" if comment.to_councillor?), id: "comment#{comment.id}" }
-  = render 'comments/comment_location_heading', comment: comment if with_address
+  = render "comments/comment_location_heading", comment: comment if with_address
   .panel-body
     %figcaption.comment-meta.comment-heading
-      = render 'comments/comment_meta_sentence', comment: comment
+      = render "comments/comment_meta_sentence", comment: comment
     %blockquote.comment-text= comment_as_html(comment.text)
     %footer
       - unless comment.to_councillor?
         %p.comment-meta delivered to the planning authority
-      .comment-actions= render 'comments/comment_actions', comment: comment
+      .comment-actions= render "comments/comment_actions", comment: comment
   - if comment.awaiting_councillor_reply?
     .panel-body.comment-to-councillor-status
       %p

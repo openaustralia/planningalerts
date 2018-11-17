@@ -3,7 +3,7 @@
         but there are councillors to contact
 - if @application.authority.contactable? || @councillors
   = render "comments/comment_form_inputs"
-- elsif !@application.comment_url.blank?
+- elsif @application.comment_url.present?
   %h4#add-comment Add your own comment
   %p
     = link_to "How to comment", @application.comment_url

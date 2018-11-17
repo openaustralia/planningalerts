@@ -1,5 +1,5 @@
 - content_for :page_title, @description
 %h1.page-title= @description
-= paginated_section @comments, :previous_label => "« Newer", :next_label => "Older »" do
+= paginated_section @comments, previous_label: "« Newer", next_label: "Older »" do
   %ol#comments
     = render @comments, in_list: true, with_address: true

@@ -12,5 +12,5 @@
         replied to
         %span.comment-recipient
           %span.p-name= reply.comment.name
-    = Sanitize.clean(ApplicationController.helpers.simple_format(truncate(reply.text, :length => 700)), Sanitize::Config::BASIC).html_safe
+    = Sanitize.clean(ApplicationController.helpers.simple_format(truncate(reply.text, length: 700)), Sanitize::Config::BASIC).html_safe
     = link_to "View reply on PlanningAlerts", reply_url_with_tracking(reply: reply)

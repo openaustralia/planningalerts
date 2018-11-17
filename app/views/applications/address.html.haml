@@ -2,7 +2,7 @@
 
 = render "address_search_preamble"
 
-%form.address-search.formtastic.one-field{ 'accept-charset' => "UTF-8", 'action' => "/", 'method' => "get" }
+%form.address-search.formtastic.one-field{ "accept-charset" => "UTF-8", "action" => "/", "method" => "get" }
   %fieldset.inputs
     %ol
       %li.string#q_input{ class: ("error" if @error) }

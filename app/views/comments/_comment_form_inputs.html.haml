@@ -9,7 +9,7 @@
                      as: :text,
                      input_html: { rows: "10", required: "required" }
     .inline-hints.hidden#disclosure_explanation
-      = render partial: 'static/disclosure_explanation'
+      = render partial: "static/disclosure_explanation"
     = f.input :name, label: "Your name",
                      placeholder: "e.g. Jane Citizen",
                      hint: "Please use your real full name if possible.",
@@ -27,15 +27,15 @@
                         hint: "We never display your street address. #{link_to("Why do you need my address?", faq_path(anchor: "address"))}".html_safe,
                         input_html: { required: ("required" unless @add_comment.could_be_for_councillor?) }
     .inline-hints.hidden#faq_commenting_address
-      = render partial: 'static/faq_commenting_address'
+      = render partial: "static/faq_commenting_address"
     -#
       This is a spam bot honeytrap. A human being should not be filling this in
       It's not awesome for screenreaders though
       haml-lint:disable InlineStyles
     %li{ style: "display: none;" }
-      = label_tag :little_sweety, 'Little Sweety'
+      = label_tag :little_sweety, "Little Sweety"
       = text_field_tag :little_sweety, "", placeholder: "Please leave this blank"
     -# haml-lint:enable InlineStyles
   = f.actions id: "comment-action-inputgroup" do
     = f.action :submit, label: "Post your public comment",
-                        button_html: {class: "button button-action"}
+                        button_html: { class: "button button-action" }

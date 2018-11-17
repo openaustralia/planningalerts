@@ -13,7 +13,7 @@
             %time.comment-time{ datetime: reply.received_at.strftime("%F") }
               #{time_ago_in_words(reply.received_at)} ago
     %blockquote.comment-text= simple_format(reply.text)
-    - if current_user && current_user.admin?
+    - if current_user&.admin?
       %footer
         .comment-actions
-          = link_to "admin", admin_reply_path(reply), class: 'comment-action'
+          = link_to "admin", admin_reply_path(reply), class: "comment-action"

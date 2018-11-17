@@ -1,4 +1,4 @@
-- content_for :page_title, 'Back PlanningAlerts'
+- content_for :page_title, "Back PlanningAlerts"
 
 - if flash[:error]
   .notice.donations-notice
@@ -14,11 +14,11 @@
           %p
             PlanningAlerts exists as a free, independent project
             because people like you back it with a small monthly&nbsp;donation.
-        = render 'form', email: @email, price: @price
+        = render "form", email: @email, price: @price
 .donations-this-week
   .container
     %h2 Because of backers like you, here’s our week on PlanningAlerts
-    - cache 'donations_new_thisweek_stats', :expires_in => 1.hour do
+    - cache "donations_new_thisweek_stats", expires_in: 1.hour do
       %ul
         %li
           %p

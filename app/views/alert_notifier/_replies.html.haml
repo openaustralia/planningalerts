@@ -6,4 +6,4 @@
   been posted on comments
   within #{meters_in_words(@alert.radius_meters)} of
   %strong= @alert.address
-= render :partial => "reply", :collection => @replies
+= render partial: "reply", collection: @replies

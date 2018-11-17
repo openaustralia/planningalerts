@@ -16,7 +16,7 @@
             %span.p-name= comment.councillor.name
         - else
           commented
-    = comment_as_html(truncate(comment.text, :length => 700))
+    = comment_as_html(truncate(comment.text, length: 700))
     = link_to "View comment on PlanningAlerts", comment_url_with_tracking(comment: comment), class: "action-link"
   - if comment.councillor && comment.replies.empty?
     .panel-body.comment-to-councillor-status

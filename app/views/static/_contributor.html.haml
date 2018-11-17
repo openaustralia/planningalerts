@@ -1,4 +1,4 @@
 %li
   = link_to contributor_profile_url(contributor) do
-    = image_tag("https://www.gravatar.com/avatar/#{contributor[:email_md5]}?s=32&d=identicon&r=g", :size => "32x32", :alt => "Avatar for #{contributor[:name]}")
+    = image_tag("https://www.gravatar.com/avatar/#{contributor[:email_md5]}?s=32&d=identicon&r=g", size: "32x32", alt: "Avatar for #{contributor[:name]}")
     = contributor[:name]

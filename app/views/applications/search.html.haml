@@ -1,13 +1,13 @@
 - content_for :page_title, @description
 
-= form_tag(search_applications_path, :method => :get) do |f|
-  = text_field_tag(:q, @q, :class => "textbox")
-  = submit_tag "Search >>", :class => "button", :name => nil
+= form_tag(search_applications_path, method: :get) do
+  = text_field_tag(:q, @q, class: "textbox")
+  = submit_tag "Search >>", class: "button", name: nil
 
 - if @applications
   - if @applications.any?
-    = paginated_section @applications, :previous_label => "« Newer", :next_label => "Older »" do
-      = render "applications", :applications => @applications
+    = paginated_section @applications, previous_label: "« Newer", next_label: "Older »" do
+      = render "applications", applications: @applications
   - else
     %br
     %p.attention Sorry, no results found!
