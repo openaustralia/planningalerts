@@ -54,7 +54,7 @@ describe ApiController do
       end
 
       it "should find recent applications if api key is given" do
-        user.update_attribute(:bulk_api, true)
+        user.update(bulk_api: true)
         VCR.use_cassette("planningalerts") do
           authority = create(:authority, full_name: "Acme Local Planning Authority")
           result = create(:application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
@@ -288,7 +288,7 @@ describe ApiController do
       result = double
       scope = double
 
-      expect(Authority).to receive(:find_by_short_name_encoded).with("blue_mountains").and_return(authority)
+      expect(Authority).to receive(:find_short_name_encoded).with("blue_mountains").and_return(authority)
       expect(authority).to receive(:applications).and_return(scope)
       expect(scope).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
       expect(authority).to receive(:full_name_and_state).and_return("Blue Mountains City Council")
@@ -347,8 +347,8 @@ describe ApiController do
       let(:user) { FactoryGirl.create(:user, bulk_api: true) }
       before(:each) do
         VCR.use_cassette("planningalerts", allow_playback_repeats: true) do
-          FactoryGirl.create_list(:application, 5, date_scraped: DateTime.new(2015, 5, 5, 12, 0, 0))
-          FactoryGirl.create_list(:application, 5, date_scraped: DateTime.new(2015, 5, 6, 12, 0, 0))
+          FactoryGirl.create_list(:application, 5, date_scraped: Time.utc(2015, 5, 5, 12, 0, 0))
+          FactoryGirl.create_list(:application, 5, date_scraped: Time.utc(2015, 5, 6, 12, 0, 0))
         end
       end
       subject { get :date_scraped, key: user.api_key, format: "js", date_scraped: "2015-05-06" }

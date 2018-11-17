@@ -2,10 +2,10 @@
 
 = render "address_search_preamble"
 
-%form.address-search.formtastic.one-field{'accept-charset' => "UTF-8", 'action' => "/", 'method' => "get"}
+%form.address-search.formtastic.one-field{ "accept-charset" => "UTF-8", "action" => "/", "method" => "get" }
   %fieldset.inputs
     %ol
-      %li#q_input.string{class: ("error" if @error)}
+      %li.string#q_input{ class: ("error" if @error) }
         = label_tag(:q, "Enter a street address")
         = text_field_tag(:q, @q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", required: "required", class: "address-autocomplete-input")
         - if @error

@@ -70,7 +70,6 @@ gem "everypolitician-popolo", git: "https://github.com/everypolitician/everypoli
 gem "writeit-rails", git: "https://github.com/openaustralia/writeit-rails.git", branch: "master"
 gem "mime-types", "~> 2.99" # our writeit gem version is incompatible with newer versions
 gem "recaptcha", require: "recaptcha/rails"
-gem "rubocop", require: false
 
 group :test do
   gem "capybara"
@@ -105,6 +104,9 @@ group :development do
   gem "spring-commands-rspec"
   # FIXME: stop using `mock_model` and remove this
   gem "rspec-activemodel-mocks"
+
+  gem "haml_lint", require: false
+  gem "rubocop", require: false
 end
 
 group :test, :development do

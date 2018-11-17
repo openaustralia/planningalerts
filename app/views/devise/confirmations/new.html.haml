@@ -4,9 +4,9 @@
   = devise_error_messages!
 
   = f.inputs do
-    = f.input :email, required: false, input_html: {autofocus: true}
+    = f.input :email, required: false, input_html: { autofocus: true }
 
   = f.actions do
-    = f.action :submit, label: "Resend confirmation instructions", button_html: {class: "button button-rounded button-large button-action"}
+    = f.action :submit, label: "Resend confirmation instructions", button_html: { class: "button button-rounded button-large button-action" }
 
 = render "devise/shared/links"

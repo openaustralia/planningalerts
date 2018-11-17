@@ -24,34 +24,34 @@ module ApplicationsHelper
 
   def days_ago_in_words(date)
     case date
-    when Date.today
+    when Time.zone.today
       "today"
-    when Date.today - 1.day
+    when Time.zone.today - 1.day
       "yesterday"
     else
-      "#{distance_of_time_in_words(date, Date.today)} ago"
+      "#{distance_of_time_in_words(date, Time.zone.today)} ago"
     end
   end
 
   def days_in_future_in_words(date)
     case date
-    when Date.today
+    when Time.zone.today
       "today"
-    when Date.today + 1.day
+    when Time.zone.today + 1.day
       "tomorrow"
     else
-      "in #{distance_of_time_in_words(Date.today, date)}"
+      "in #{distance_of_time_in_words(Time.zone.today, date)}"
     end
   end
 
   def on_notice_text(application)
-    if application.on_notice_from && (Date.today < application.on_notice_from)
+    if application.on_notice_from && (Time.zone.today < application.on_notice_from)
       text = "The period to have your comment officially considered by the planning authority <strong>starts #{days_in_future_in_words(application.on_notice_from)}</strong> and finishes #{distance_of_time_in_words(application.on_notice_from, application.on_notice_to)} later."
-    elsif Date.today == application.on_notice_to
+    elsif Time.zone.today == application.on_notice_to
       text = +"<strong>Today is the last day</strong> to have your comment officially considered by the planning authority."
       text << " The period for comment started #{days_ago_in_words(application.on_notice_from)}." if application.on_notice_from
-    elsif Date.today < application.on_notice_to
-      text = +"<strong>You have #{distance_of_time_in_words(Date.today, application.on_notice_to)} left</strong> to have your comment officially considered by the planning authority."
+    elsif Time.zone.today < application.on_notice_to
+      text = +"<strong>You have #{distance_of_time_in_words(Time.zone.today, application.on_notice_to)} left</strong> to have your comment officially considered by the planning authority."
       text << " The period for comment started #{days_ago_in_words(application.on_notice_from)}." if application.on_notice_from
     else
       text = +"You're too late! The period for officially commenting on this application <strong>finished #{days_ago_in_words(application.on_notice_to)}</strong>."

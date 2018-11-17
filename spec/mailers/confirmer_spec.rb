@@ -23,11 +23,11 @@ describe ConfirmationMailer do
         end
 
         it do
-          expect(notifier.body.parts.find { |p| p.content_type.match(/plain/) }.body.raw_source).to eq(Rails.root.join("spec/mailers/regression/email_confirmable/alert.txt").read)
+          expect(notifier.body.parts.find { |p| p.content_type.match(/plain/) }.body.raw_source).to eq(Rails.root.join("spec", "mailers", "regression", "email_confirmable", "alert.txt").read)
         end
 
         it do
-          expect(notifier.body.parts.find { |p| p.content_type.match(/html/) }.body.raw_source).to eq(Rails.root.join("spec/mailers/regression/email_confirmable/alert.html").read)
+          expect(notifier.body.parts.find { |p| p.content_type.match(/html/) }.body.raw_source).to eq(Rails.root.join("spec", "mailers", "regression", "email_confirmable", "alert.html").read)
         end
       end
     end
@@ -65,11 +65,11 @@ describe ConfirmationMailer do
         end
 
         it do
-          expect(notifier.body.parts.find { |p| p.content_type.match(/plain/) }.body.raw_source).to eq(Rails.root.join("spec/mailers/regression/email_confirmable/comment.txt").read)
+          expect(notifier.body.parts.find { |p| p.content_type.match(/plain/) }.body.raw_source).to eq(Rails.root.join("spec", "mailers", "regression", "email_confirmable", "comment.txt").read)
         end
 
         it do
-          expect(notifier.body.parts.find { |p| p.content_type.match(/html/) }.body.raw_source).to eq(Rails.root.join("spec/mailers/regression/email_confirmable/comment.html").read)
+          expect(notifier.body.parts.find { |p| p.content_type.match(/html/) }.body.raw_source).to eq(Rails.root.join("spec", "mailers", "regression", "email_confirmable", "comment.html").read)
         end
       end
     end

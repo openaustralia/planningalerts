@@ -92,7 +92,7 @@ ActiveAdmin.register Authority do
   end
 
   member_action :load_councillors, method: :post do
-    popolo = EveryPolitician::Popolo.parse(open(resource.popolo_url).read)
+    popolo = EveryPolitician::Popolo.parse(RestClient.get(resource.popolo_url).body)
     results = resource.load_councillors(popolo)
     notice = render_to_string(partial: "load_councillors_message", locals: { councillors: results })
 

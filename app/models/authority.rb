@@ -7,7 +7,7 @@ class AuthorityLogger < Logger
     @authority = authority
     @other_logger = other_logger
     # We're starting a new run of the logger & scraper so clear out the old so we're ready for the new
-    @authority.update_attribute(:last_scraper_run_log, "")
+    @authority.update(last_scraper_run_log: "")
   end
 
   def add(severity, message = nil, progname = nil)
@@ -16,15 +16,15 @@ class AuthorityLogger < Logger
     e = @authority.last_scraper_run_log + progname + "\n"
     return if e.size >= 5000
 
-    @authority.update_column(:last_scraper_run_log, e)
+    @authority.update(last_scraper_run_log: e)
   end
 end
 
 class Authority < ActiveRecord::Base
-  has_many :applications
-  has_many :councillors
+  has_many :applications, dependent: :destroy
+  has_many :councillors, dependent: :destroy
   has_many :comments, through: :applications
-  has_many :councillor_contributions
+  has_many :councillor_contributions, dependent: :destroy
 
   validates :short_name, presence: true, uniqueness: { case_sensitive: false }
 
@@ -41,7 +41,7 @@ class Authority < ActiveRecord::Base
   end
 
   def covered?
-    !morph_name.blank?
+    morph_name.present?
   end
 
   # Hardcoded total population of Australia (2011 estimate)
@@ -79,8 +79,8 @@ class Authority < ActiveRecord::Base
   end
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
-  def open_url_safe(url, info_logger, options = {})
-    open(url, options).read
+  def open_url_safe(url, info_logger)
+    RestClient.get(url).body
   rescue StandardError => e
     info_logger.error "Error #{e} while getting data from url #{url}. So, skipping"
     nil
@@ -111,7 +111,7 @@ class Authority < ActiveRecord::Base
     info_logger = AuthorityLogger.new(self, other_info_logger)
 
     time = Benchmark.ms do
-      collect_applications_date_range(Date.today - ENV["SCRAPE_DELAY"].to_i, Date.today, info_logger)
+      collect_applications_date_range(Time.zone.today - ENV["SCRAPE_DELAY"].to_i, Time.zone.today, info_logger)
     end
     info_logger.info "Took #{(time / 1000).to_i} s to collect applications from #{full_name_and_state}"
   end
@@ -139,7 +139,7 @@ class Authority < ActiveRecord::Base
       # TODO: Consider if it would be better to overwrite applications with new data if they already exists
       # This would allow for the possibility that the application information was incorrectly entered at source
       # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
-      next if applications.find_by_council_reference(application.council_reference)
+      next if applications.find_by(council_reference: application.council_reference)
 
       begin
         application.save!
@@ -160,7 +160,7 @@ class Authority < ActiveRecord::Base
   def applications_per_day
     h = applications.group("CAST(date_scraped AS DATE)").count
     # For any dates not in h fill them in with zeros
-    (h.keys.min..Date.today).each do |date|
+    (h.keys.min..Time.zone.today).each do |date|
       h[date] = 0 unless h.key?(date)
     end
     h.sort
@@ -176,7 +176,7 @@ class Authority < ActiveRecord::Base
     # Have to compensate for MySQL which treats Monday as the beginning of the week
     h = applications.group("CAST(SUBDATE(date_scraped, WEEKDAY(date_scraped) + 1) AS DATE)").count
     min = h.keys.min
-    max = Date.today - Date.today.wday
+    max = Time.zone.today - Time.zone.today.wday
     (min..max).step(7) do |date|
       h[date] = 0 unless h.key?(date)
     end
@@ -196,7 +196,7 @@ class Authority < ActiveRecord::Base
       ).count
 
       earliest_week_with_applications = earliest_date.at_beginning_of_week.to_date
-      latest_week = Date.today.at_beginning_of_week
+      latest_week = Time.zone.today.at_beginning_of_week
 
       (earliest_week_with_applications..latest_week).step(7) do |date|
         results[date] = 0 unless results.key?(date)
@@ -216,7 +216,7 @@ class Authority < ActiveRecord::Base
   end
 
   def morph_url
-    "https://morph.io/#{morph_name}" unless morph_name.blank?
+    "https://morph.io/#{morph_name}" if morph_name.present?
   end
 
   def morph_feed_url_for_date_range(start_date, end_date)
@@ -233,15 +233,16 @@ class Authority < ActiveRecord::Base
     Authority.short_name_encoded(short_name)
   end
 
-  def self.find_by_short_name_encoded(n)
+  def self.find_short_name_encoded(name)
     # TODO: Potentially not very efficient when number of authorities is high. Loads all authorities into memory
-    all.find { |a| a.short_name_encoded == n }
+    all.find { |a| a.short_name_encoded == name }
   end
 
-  def self.find_by_short_name_encoded!(n)
-    r = find_by_short_name_encoded(n)
+  def self.find_short_name_encoded!(name)
+    r = find_short_name_encoded(name)
     # In production environment raising RecordNotFound will produce an error code 404
     raise ActiveRecord::RecordNotFound if r.nil?
+
     r
   end
 
@@ -263,7 +264,7 @@ class Authority < ActiveRecord::Base
     persons.map do |person|
       councillor = councillors.find_or_create_by(name: person.name)
 
-      no_longer_councillor = person.end_date.present? && Date.parse(person.end_date) <= Date.today
+      no_longer_councillor = person.end_date.present? && Date.parse(person.end_date) <= Time.zone.today
 
       councillor.current = false if no_longer_councillor
       councillor.popolo_id = person.id

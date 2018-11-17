@@ -4,7 +4,7 @@ require "csv"
 class CouncillorContribution < ActiveRecord::Base
   belongs_to :contributor
   belongs_to :authority
-  has_many :suggested_councillors, inverse_of: :councillor_contribution
+  has_many :suggested_councillors, dependent: :destroy, inverse_of: :councillor_contribution
   accepts_nested_attributes_for :suggested_councillors, reject_if: :all_blank
   accepts_nested_attributes_for :contributor, reject_if: :all_blank
   validates_associated :suggested_councillors

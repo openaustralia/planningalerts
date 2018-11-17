@@ -57,8 +57,8 @@ describe Authority do
     end
 
     it "should find a authority by the encoded name" do
-      expect(Authority.find_by_short_name_encoded("blue_mountains")).to eq @a1
-      expect(Authority.find_by_short_name_encoded("blue_mountains_new_one")).to eq @a2
+      expect(Authority.find_short_name_encoded("blue_mountains")).to eq @a1
+      expect(Authority.find_short_name_encoded("blue_mountains_new_one")).to eq @a2
     end
   end
 
@@ -108,7 +108,7 @@ describe Authority do
     let(:authority) { create(:authority) }
 
     before :each do
-      Timecop.freeze(Time.local(2016, 1, 5))
+      Timecop.freeze(Time.zone.local(2016, 1, 5))
     end
 
     after :each do

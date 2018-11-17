@@ -12,7 +12,7 @@
 %table
   %tr
     %th M/O
-    %th(colspan=4) Field
+    %th{ colspan: 4 } Field
     %th Notes
   %tr
     %td M
@@ -21,7 +21,7 @@
     %td
     %td
     %td
-    %td Composite record containing list of locations related to this app 
+    %td Composite record containing list of locations related to this app
   %tr
     %td M
     %td
@@ -77,7 +77,7 @@
     %td
       %code torrens | other
     %td
-    %td Type of land title reference: torrens | other 
+    %td Type of land title reference: torrens | other
   %tr
     %td M
     %td
@@ -110,7 +110,7 @@
     %td
     %td
     %td Composite record containing geographic coordinates (GeoJSON format)
-  
+
 :markdown
   **Notes**
 
@@ -143,5 +143,3 @@
   * A title reference does not always include a section number. If the `section` value in `land_title_ref` is not available, then it should be populated with the value “`null`”.
 
   * When referencing a subdivision, Vendors and Councils should use the original parcel street numbers and/or lot references. In the case of a subdivision, then the pre- subdivision data should be used.
-
-

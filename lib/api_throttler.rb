@@ -8,7 +8,7 @@ class ApiThrottler < ThrottleConfigurable
     begin
       path_info = Rails.application.routes.recognize_path request.url
     # rubocop:disable Lint/HandleExceptions
-    rescue
+    rescue StandardError
     end
     # rubocop:enable Lint/HandleExceptions
 

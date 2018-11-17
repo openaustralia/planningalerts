@@ -1,6 +1,6 @@
 - content_for :page_title, @description
 
-= form_tag(search_applications_path, method: :get) do |f|
+= form_tag(search_applications_path, method: :get) do
   = text_field_tag(:q, @q, class: "textbox")
   = submit_tag "Search >>", class: "button", name: nil
 

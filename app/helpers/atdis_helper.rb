@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 module AtdisHelper
-  def yes_no(v)
-    v ? "yes" : "no"
+  def yes_no(value)
+    value ? "yes" : "no"
   end
 
   def attribute_value(value)
     if value.is_a?(Array)
-      value.map { |v| attribute_value(v) }.join.html_safe
+      value.map { |v| attribute_value(v) }.safe_join
     elsif value.class.respond_to?(:attribute_names)
       render partial: "attribute_table", locals: { model: value }
     elsif value.is_a?(DateTime)

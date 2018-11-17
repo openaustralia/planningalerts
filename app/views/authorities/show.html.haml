@@ -6,12 +6,12 @@
     Population #{number_with_delimiter @authority.population_2011} (2011 estimate)
 
 - if @authority.covered?
-  - if @authority && @authority.broken? && @authority.applications.count != 0
+  - if @authority.broken? && @authority.applications.count != 0
     %p
       %span.highlight It looks like something might be wrong. The latest application was received #{time_ago_in_words(@authority.latest_application_date)} ago.
       = link_to "Why?", faq_path(anchor: "broken_scraper")
 
-  - if @authority.applications.count == 0
+  - if @authority.applications.empty?
     %p
       No applications for #{@authority.full_name} have yet been collected.
   - else
@@ -26,15 +26,15 @@
       or
       = link_to "comments on applications", authority_comments_path(@authority.short_name_encoded)
 
-    #applications-chart.chart
-    #comments-chart.chart
+    .chart#applications-chart
+    .chart#comments-chart
 
     = javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.12/d3.min.js"
     = javascript_include_tag "bar_graph"
     :javascript
       barGraph(
         "#applications-chart",
-        "#{per_week_authority_applications_url(@authority.short_name_encoded, format: 'js')}",
+        "#{per_week_authority_applications_url(@authority.short_name_encoded, format: "js")}",
         "applications scraped"
       );
 

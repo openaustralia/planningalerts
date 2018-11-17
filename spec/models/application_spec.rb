@@ -61,9 +61,10 @@ describe Application do
       it { expect(build(:application, date_received: nil)).to be_valid }
 
       context "the date today is 1 january 2001" do
-        before :each do
-          allow(Date).to receive(:today).and_return(Date.new(2001, 1, 1))
+        around do |test|
+          Timecop.freeze(Date.new(2001, 1, 1)) { test.run }
         end
+
         it { expect(build(:application, date_received: Date.new(2002, 1, 1))).not_to be_valid }
         it { expect(build(:application, date_received: Date.new(2000, 1, 1))).to be_valid }
       end
@@ -152,7 +153,7 @@ describe Application do
                    lat: -33.772609, lng: 150.624263, suburb: "Glenbrook", state: "NSW",
                    postcode: "2773", success: true)
       expect(Location).to receive(:geocode).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
-      a = create(:application, address: "24 Bruce Road, Glenbrook, NSW", council_reference: "r1", date_scraped: Time.now)
+      a = create(:application, address: "24 Bruce Road, Glenbrook, NSW", council_reference: "r1", date_scraped: Time.zone.now)
       expect(a.lat).to eq(loc.lat)
       expect(a.lng).to eq(loc.lng)
     end
@@ -162,7 +163,7 @@ describe Application do
       logger = double("Logger")
       expect(logger).to receive(:error).with("Couldn't geocode address: dfjshd")
 
-      a = build(:application, address: "dfjshd", council_reference: "r1", date_scraped: Time.now)
+      a = build(:application, address: "dfjshd", council_reference: "r1", date_scraped: Time.zone.now)
       allow(a).to receive(:logger).and_return(logger)
 
       a.save!
@@ -173,7 +174,7 @@ describe Application do
 
   describe "collecting applications from the scraperwiki web service url" do
     it "should translate the data" do
-      feed_data = <<-EOF
+      feed_data = <<-JSON
         [
           {
             "date_scraped": "2012-08-24",
@@ -196,9 +197,9 @@ describe Application do
             "comment_url": "http://www.yarracity.vic.gov.au/planning--building/Planning-applications/Objecting-to-a-planning-applicationVCAT/"
           }
         ]
-      EOF
+      JSON
       # Freeze time
-      t = Time.now
+      t = Time.zone.now
       allow(Time).to receive(:now).and_return(t)
       expect(Application.translate_morph_feed_data(feed_data)).to eq(
         [
@@ -235,7 +236,7 @@ describe Application do
 
   describe "collecting applications from the scraper web service urls" do
     before :each do
-      @feed_xml = <<-EOF
+      @feed_xml = <<-JSON
       [
         {
           "council_reference": "R1",
@@ -255,11 +256,11 @@ describe Application do
           "comment_url": "http://fiddle.gov.au/comment/R2"
         }
       ]
-      EOF
+      JSON
       @date = Date.new(2009, 1, 1)
       @feed_url = "http://example.org?year=#{@date.year}&month=#{@date.month}&day=#{@date.day}"
       Application.delete_all
-      allow(@auth).to receive(:open).and_return(double(read: @feed_xml))
+      allow(@auth).to receive(:open_url_safe).and_return(@feed_xml)
     end
 
     it "should collect the correct applications" do
@@ -269,7 +270,7 @@ describe Application do
 
       @auth.collect_applications_date_range(@date, @date)
       expect(Application.count).to eq(2)
-      r1 = Application.find_by_council_reference("R1")
+      r1 = Application.find_by(council_reference: "R1")
       expect(r1.authority).to eq(@auth)
       expect(r1.address).to eq("1 Smith Street, Fiddleville")
       expect(r1.description).to eq("Knocking a house down")
@@ -318,13 +319,13 @@ describe Application do
     end
 
     context "when the ‘on notice to’ date has passed", focus: true do
-      before { @application.update(on_notice_to: Date.today - 1.day) }
+      before { @application.update(on_notice_to: Time.zone.today - 1.day) }
 
       it { expect(@application.official_submission_period_expired?).to be true }
     end
 
     context "when the ‘on notice to’ date is in the future" do
-      before { @application.update(on_notice_to: Date.today + 1.day) }
+      before { @application.update(on_notice_to: Time.zone.today + 1.day) }
 
       it { expect(@application.official_submission_period_expired?).to be false }
     end

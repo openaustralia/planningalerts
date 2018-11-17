@@ -9,7 +9,7 @@ describe CommentsController do
 
   describe "#per_week" do
     before :each do
-      Timecop.freeze(Time.local(2016, 1, 5))
+      Timecop.freeze(Time.zone.local(2016, 1, 5))
 
       create(:authority, short_name: "Blue Mountains", id: 1)
     end

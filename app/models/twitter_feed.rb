@@ -13,7 +13,7 @@ class TwitterFeed
       # If there's any kind of error just return an empty feed
       begin
         @feed ||= twitter.user_timeline(username)[0...2] || []
-      rescue
+      rescue StandardError
         []
       end
     else

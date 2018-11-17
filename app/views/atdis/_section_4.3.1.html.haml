@@ -6,7 +6,7 @@
 %table
   %tr
     %th M/O
-    %th(colspan=2) Fields
+    %th{ colspan: 2 } Fields
     %th Notes
   %tr
     %td M
@@ -19,7 +19,7 @@
     %td
       %code development_type
     %td
-    %td Relevant category requested by Planning and Infrastructure for the Local Development Performance Monitoring program 
+    %td Relevant category requested by Planning and Infrastructure for the Local Development Performance Monitoring program
   %tr
     %td M
     %td
@@ -129,11 +129,11 @@
     ```
     "determination_date": "2013-06-20"
     ```
-    
+
   * If the application does not have a determination date (yet, or at all), the value “`null`” should be specified for the `determination_date` field.
-  
+
   * The `notification_start_date` and `notification_end_date` are optional fields. Vendors are free to populate this value if it is available in the source system.
-  
+
   * The contents of `determination_type` and should be one of the values:
     * Pending
     * Refused by Council
@@ -142,13 +142,13 @@
     * Approved by Council
     * Approved under delegation
     * Rejected
-    
+
   * If the application does not have a notification period at all, the value “`null`” should be specified for the `notification_start_date` and `notification_end_date` fields.
-  
+
   * The contents of `estimated_cost` and should be a formatted currency string in Australian Dollars, of the form “$300,000”.
-  
+
   * If an application is related to other applications either within this LGA or in another LGA, then `related_apps` may contain a list of references to other applications. The reference should include the `authority/ref` value for that LGA as well as the `dat_id` in each case. The reference should be a URI that includes the protocol and the globally unique application id followed by the `dat_id` and `.json`. The specification does not prescribe the *type* of the relationship, other than to say that if this field is included, consuming systems should assume that the other applications are related to this one in some form. The intent of this field is to capture the relationship between applications with different application numbers.
-  
+
   * If a consuming system accesses a specific record using the globally unique identifier, the System should return data for just the single application record that was asked, and no others.
-  
+
   * Any globally unique id used in `related_apps` should also include the format (`.json`) in the URL.

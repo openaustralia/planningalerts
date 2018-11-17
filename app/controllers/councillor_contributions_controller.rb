@@ -5,7 +5,7 @@ class CouncillorContributionsController < ApplicationController
   layout "minimal"
 
   def new
-    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    @authority = Authority.find_short_name_encoded!(params[:authority_id])
 
     @councillor_contribution =
       if params["councillor_contribution"]
@@ -20,7 +20,7 @@ class CouncillorContributionsController < ApplicationController
   end
 
   def source
-    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    @authority = Authority.find_short_name_encoded!(params[:authority_id])
 
     @councillor_contribution = @authority.councillor_contributions.build(
       councillor_contribution_with_suggested_councillors_params
@@ -28,9 +28,7 @@ class CouncillorContributionsController < ApplicationController
 
     # Hack to stop someone submitting a blank contribution
     # Remove this once people can remove councillors from their contribution
-    if @councillor_contribution.suggested_councillors.empty?
-      @councillor_contribution.suggested_councillors.build(email: nil, name: nil)
-    end
+    @councillor_contribution.suggested_councillors.build(email: nil, name: nil) if @councillor_contribution.suggested_councillors.empty?
 
     if @councillor_contribution.save
       CouncillorContributionNotifier.notify(@councillor_contribution).deliver_later
@@ -41,7 +39,7 @@ class CouncillorContributionsController < ApplicationController
   end
 
   def add_contributor
-    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    @authority = Authority.find_short_name_encoded!(params[:authority_id])
     @councillor_contribution = CouncillorContribution.find(councillor_contribution_with_source_params[:id])
 
     @councillor_contribution.update!(source: councillor_contribution_with_source_params[:source])
@@ -49,7 +47,7 @@ class CouncillorContributionsController < ApplicationController
   end
 
   def thank_you
-    @authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    @authority = Authority.find_short_name_encoded!(params[:authority_id])
     @councillor_contribution = CouncillorContribution.find(councillor_contribution_with_contibutor_params[:id])
     return if params[:button].eql? "skip"
 
@@ -105,7 +103,7 @@ class CouncillorContributionsController < ApplicationController
   def check_if_feature_flag_is_on
     return if ENV["CONTRIBUTE_COUNCILLORS_ENABLED"].present?
 
-    render "static/error_404", status: 404
+    render "static/error_404", status: :not_found
   end
 
   def new_suggested_councillor_required?

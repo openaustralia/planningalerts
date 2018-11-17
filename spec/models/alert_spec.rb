@@ -280,7 +280,7 @@ describe Alert do
 
   describe ".count_of_email_completely_unsubscribed_on_date" do
     it "is 0 when there is no unsubscribes" do
-      expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.today)).to eql 0
+      expect(Alert.count_of_email_completely_unsubscribed_on_date(Time.zone.today)).to eql 0
     end
 
     it "is 0 when there is no complete unsubscribes" do
@@ -288,13 +288,13 @@ describe Alert do
       create(:unsubscribed_alert, email: "foo@email.com")
       create(:confirmed_alert, email: "foo@email.com")
 
-      expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.today)).to eql 0
+      expect(Alert.count_of_email_completely_unsubscribed_on_date(Time.zone.today)).to eql 0
     end
 
     it "only counts unique emails" do
       Timecop.freeze(Time.utc(2016, 8, 23)) do
-        create(:unsubscribed_alert, email: "foo@email.com", unsubscribed_at: Time.now)
-        create(:unsubscribed_alert, email: "foo@email.com", unsubscribed_at: Time.now)
+        create(:unsubscribed_alert, email: "foo@email.com", unsubscribed_at: Time.zone.now)
+        create(:unsubscribed_alert, email: "foo@email.com", unsubscribed_at: Time.zone.now)
       end
 
       expect(Alert.count_of_email_completely_unsubscribed_on_date(Date.new(2016, 8, 23))).to eql 1
@@ -406,7 +406,7 @@ describe Alert do
     end
 
     it "sets the unsubscribed_at time" do
-      action_time = Time.new(2016, 11, 3, 15, 29)
+      action_time = Time.utc(2016, 11, 3, 15, 29)
 
       Timecop.freeze(action_time) { alert.unsubscribe! }
 
@@ -562,7 +562,7 @@ describe Alert do
                            no_alerted: 3)
       reply = create(:reply,
                      comment: create(:comment, application: application),
-                     received_at: 1.hours.ago)
+                     received_at: 1.hour.ago)
 
       expect(alert.new_replies).to eq [reply]
     end
@@ -578,7 +578,7 @@ describe Alert do
                            no_alerted: 3)
       reply1 = create(:reply,
                       comment: create(:comment, application: application),
-                      received_at: 1.hours.ago)
+                      received_at: 1.hour.ago)
       reply2 = create(:reply,
                       comment: create(:comment, application: application),
                       received_at: 2.hours.ago)
@@ -681,7 +681,7 @@ describe Alert do
                              no_alerted: 3)
         create(:reply,
                comment: create(:comment, application: application),
-               received_at: 1.hours.ago)
+               received_at: 1.hour.ago)
 
         expect(alert.applications_with_new_replies).to eq [application]
       end
@@ -700,7 +700,7 @@ describe Alert do
                              no_alerted: 3)
         create(:reply,
                comment: create(:comment, application: application),
-               received_at: 1.hours.ago)
+               received_at: 1.hour.ago)
 
         expect(alert.applications_with_new_replies).to eq []
       end
@@ -743,12 +743,12 @@ describe Alert do
 
         it "should update the last_sent time" do
           alert.process!
-          expect((alert.last_sent - Time.now).abs).to be < 1
+          expect((alert.last_sent - Time.zone.now).abs).to be < 1
         end
 
         it "should update the last_processed time" do
           alert.process!
-          expect((alert.last_processed - Time.now).abs).to be < 1
+          expect((alert.last_processed - Time.zone.now).abs).to be < 1
         end
 
         context "that was not properly geocoded" do
@@ -782,7 +782,7 @@ describe Alert do
 
         it "should update the last_processed time" do
           alert.process!
-          expect((alert.last_processed - Time.now).abs).to be < 1
+          expect((alert.last_processed - Time.zone.now).abs).to be < 1
         end
       end
 
@@ -799,7 +799,7 @@ describe Alert do
         end
         let(:reply) do
           create(:reply, comment: create(:comment, application: application),
-                         received_at: 1.hours.ago)
+                         received_at: 1.hour.ago)
         end
 
         before :each do

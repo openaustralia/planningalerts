@@ -2,12 +2,12 @@
 
 %h2= yield :page_title
 
-%form.formtastic{action: url_for({}), method: "get"}
+%form.formtastic{ action: url_for({}), method: "get" }
   %fieldset.inputs
     %ol
       %li
-        = label_tag 'url', 'Feed url'
-        = url_field_tag 'url', @url
+        = label_tag "url", "Feed url"
+        = url_field_tag "url", @url
   %fieldset.actions
     %ol
       %li

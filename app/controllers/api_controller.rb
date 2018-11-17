@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class ApiController < ApplicationController
-  before_filter :check_api_parameters, except: %i[old_index howto]
-  before_filter :require_api_key, except: %i[old_index howto]
-  before_filter :authenticate_bulk_api, only: %i[all date_scraped]
+  before_action :check_api_parameters, except: %i[old_index howto]
+  before_action :require_api_key, except: %i[old_index howto]
+  before_action :authenticate_bulk_api, only: %i[all date_scraped]
 
   # This is disabled because at least one commercial user of the API is doing
   # GET requests for JSONP instead of using XHR
@@ -12,7 +12,7 @@ class ApiController < ApplicationController
 
   def authority
     # TODO: Handle the situation where the authority name isn't found
-    authority = Authority.find_by_short_name_encoded!(params[:authority_id])
+    authority = Authority.find_short_name_encoded!(params[:authority_id])
     api_render(authority.applications, "Recent applications from #{authority.full_name_and_state}")
   end
 
@@ -69,7 +69,7 @@ class ApiController < ApplicationController
       api_render(Application.where(date_scraped: date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
     else
       respond_to do |format|
-        format.js { render json: { error: "invalid date_scraped" }, status: 400, content_type: Mime::JSON }
+        format.js { render json: { error: "invalid date_scraped" }, status: :bad_request, content_type: Mime::JSON }
       end
     end
   end
@@ -147,7 +147,7 @@ class ApiController < ApplicationController
     invalid_parameter_keys = params.keys - valid_parameter_keys
     return if invalid_parameter_keys.empty?
 
-    render text: "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.sort.join(', ')}", status: 400
+    render text: "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.sort.join(', ')}", status: :bad_request
   end
 
   def require_api_key
@@ -159,10 +159,10 @@ class ApiController < ApplicationController
     error_text = "not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"
     respond_to do |format|
       format.js do
-        render json: { error: error_text }, status: 401, content_type: Mime::JSON
+        render json: { error: error_text }, status: :unauthorized, content_type: Mime::JSON
       end
       format.rss do
-        render text: error_text, status: 401
+        render text: error_text, status: :unauthorized
       end
     end
   end
@@ -172,7 +172,7 @@ class ApiController < ApplicationController
 
     respond_to do |format|
       format.js do
-        render json: { error: "no bulk api access" }, status: 401, content_type: Mime::JSON
+        render json: { error: "no bulk api access" }, status: :unauthorized, content_type: Mime::JSON
       end
     end
   end

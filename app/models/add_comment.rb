@@ -13,14 +13,14 @@ class AddComment
     :application
   )
 
-  validates_presence_of :name, :text, :email
-  validates_presence_of :address, unless: :for_councillor?
+  validates :name, presence: true
+  validates :text, presence: true
+  validates :email, presence: true
+  validates :address, presence: true, unless: :for_councillor?
   validates_email_format_of :email
-  validates_presence_of(
-    :comment_for,
-    if: :could_be_for_councillor?,
-    message: "You need to select who your message should go to from the list below."
-  )
+  validates :comment_for,
+            presence: { message: "You need to select who your message should go to from the list below." },
+            if: :could_be_for_councillor?
 
   def save_comment
     return unless valid?

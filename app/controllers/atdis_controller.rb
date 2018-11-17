@@ -2,7 +2,7 @@
 
 class AtdisController < ApplicationController
   def test
-    if !params[:url].blank?
+    if params[:url].present?
       @feed = Feed.create_from_url(params[:url])
       begin
         @page = @feed.applications
@@ -35,7 +35,7 @@ class AtdisController < ApplicationController
     if File.exist?(file)
       render file: file, content_type: Mime::JSON, layout: false
     else
-      render text: "not available", status: 404
+      render text: "not available", status: :not_found
     end
   end
 

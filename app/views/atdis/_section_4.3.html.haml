@@ -5,7 +5,7 @@
 
   To comply with the Specification, a feed must support the basic conceptual structure of a **list** of application records, within which the feed will provide blocks and fields for each application record.
 
-  Record types can be **mandatory** or **optional**. Within a record, fields can be **mandatory** or **optional**. 
+  Record types can be **mandatory** or **optional**. Within a record, fields can be **mandatory** or **optional**.
 
   A feed must include all **mandatory** record types. A feed *may* include any of the **optional** record types.
 
@@ -14,7 +14,7 @@
   If a feed chooses to include a record type then it must include all mandatory fields for that record type. A feed can chose whether or not to include any optional fields within a block.
 
   If a field is empty, then it should be populated with the appropriate JSON null value. For example:
-  
+
   ```
   {"field": null}
   ```
@@ -22,7 +22,7 @@
   Figure 4 describes the conceptual structure of a complying feed:
 
   ![feed structure](/assets/atdis/image_3.png)
-  
+
   <p align="center">
    Figure 4: Feed structure
   </p>
@@ -36,7 +36,7 @@
   5. Documents
   6. People
   7. Extended
-  
+
   The following sections describe the semantics of each of the seven record types that make up the Specification. For each record type, the Specification indicates whether the record type is mandatory or optional, and within each record type, which fields are mandatory or optional.
 
 

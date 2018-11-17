@@ -7,7 +7,7 @@
                                address_hidden: false,
                                form_classes: "attention"
 
-- if @authority && @authority.broken?
+- if @authority&.broken?
   - if @authority.latest_application_date.nil?
     %span.highlight There are no applications yet for this authority
   - else
@@ -18,5 +18,5 @@
   = render "applications", applications: @applications
 
 - if current_user && @authority
-  - # TODO: If people are logged out, should we show them a link to get an API key?
+  -# TODO: If people are logged out, should we show them a link to get an API key?
   = link_to "Get applications as JSON", authority_applications_json_url_for_current_user(@authority)

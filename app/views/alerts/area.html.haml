@@ -36,7 +36,7 @@
     marker.setLabel("#{escape_javascript(@alert.address)}");
     map.addMarker(marker);
     #{draw_box_javascript(@size)}
-    $('#size_s').click(function(){ #{draw_box_javascript('s')} });
-    $('#size_m').click(function(){ #{draw_box_javascript('m')} });
-    $('#size_l').click(function(){ #{draw_box_javascript('l')} });
+    $('#size_s').click(function(){ #{draw_box_javascript("s")} });
+    $('#size_m').click(function(){ #{draw_box_javascript("m")} });
+    $('#size_l').click(function(){ #{draw_box_javascript("l")} });
   });

@@ -48,18 +48,18 @@
   = f.inputs do
     = f.input :page, label: "Page Number", as: :number, min: 1
   %h2= link_to "Filters", "#", id: "filter-heading"
-  #filters{class: ("hide" if !@feed.filters_set?)}
+  #filters{ class: ("hide" unless @feed.filters_set?) }
     = f.inputs "Lodgement Date", class: "daterange" do
-      = f.input :lodgement_date_start, label: "Start", required: false, input_html: {class: "date"}, placeholder: "from"
+      = f.input :lodgement_date_start, label: "Start", required: false, input_html: { class: "date" }, placeholder: "from"
       = f.input :lodgement_date_end, label: "End", required: false, placeholder: "to"
     = f.inputs "Last Modified Date", class: "daterange" do
-      = f.input :last_modified_date_start, label: "Start", required: false, input_html: {class: "date"}, placeholder: "from"
+      = f.input :last_modified_date_start, label: "Start", required: false, input_html: { class: "date" }, placeholder: "from"
       = f.input :last_modified_date_end, label: "End", required: false, placeholder: "to"
     = f.input :street, placeholder: "Military,Cardinal", required: false, hint: "Restrict results to those applications in the given streets"
     = f.input :suburb, placeholder: "Mosman,Manly", required: false, hint: "Restrict results to those applications in the given suburbs"
     = f.input :postcode, placeholder: "2000,2780", required: false, hint: "Restrict results to those applications in the given postcodes"
   = f.actions do
-    = f.action :submit, label: "Test", button_html: {class: "button button-rounded"}
+    = f.action :submit, label: "Test", button_html: { class: "button button-rounded" }
 
 - if @page
   %h3 Test Results
@@ -75,11 +75,11 @@
       Also, to check that the whole feed is working you need to check that the other pages are working. Use the buttons below to test other pages.
     %p
       - if @page.previous_url
-        = link_to "Test previous page", {url: @page.previous_url}, class: "button button-rounded"
+        = link_to "Test previous page", { url: @page.previous_url }, class: "button button-rounded"
       - else
         %span.button.button-rounded.disabled Test previous page
       - if @page.next_url
-        = link_to "Test next page", {url: @page.next_url}, class: "button button-rounded"
+        = link_to "Test next page", { url: @page.next_url }, class: "button button-rounded"
       - else
         %span.button.button-rounded.disabled Test next page
 
@@ -93,13 +93,13 @@
       = link_to "This page", @page.url
       does not validate. See the errors below.
     %h3 Errors
-    = render partial: "attribute_error_table", locals: {model: @page}
+    = render partial: "attribute_error_table", locals: { model: @page }
 
 %h3 Vendor Technical Support
 %p
   For technical support questions on the ATDIS specification and this testing service please email
 %p
-  #{mail_to "atdis-support@planningalerts.org.au"}
+  = mail_to "atdis-support@planningalerts.org.au"
 %p
   Depending on the specific nature of the questions
   these enquiries will be handled either by

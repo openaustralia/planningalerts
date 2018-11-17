@@ -3,14 +3,14 @@
 %h1= yield :page_title
 
 %h2
-  - # FIXME: pluralization of 'are' will be wrong if there's 1 person
+  -# FIXME: pluralization of 'are' will be wrong if there's 1 person
   = pluralize(Alert.active.distinct.count(:email), "person")
   are signed up for PlanningAlerts
 
 %h2 Comments on planning applications
 
 -# target for chart script
-#comment-performance-chart.chart
+.chart#comment-performance-chart
 
 %table#comment-performance-table
   %caption

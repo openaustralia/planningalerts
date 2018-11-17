@@ -1,0 +1,38 @@
+linters:
+  LineLength:
+    enabled: false
+
+  # These require some more careful fixing. So leaving for later
+  InstanceVariables:
+    enabled: false
+
+  # Another one that we should fix but sometimes it's non-trivial. So,
+  # putting aside for the time being
+  IdNames:
+    enabled: false
+
+  RuboCop:
+      enabled: true
+      # These cops are incredibly noisy when it comes to HAML templates, so we
+      # ignore them.
+      ignored_cops:
+        - Lint/BlockAlignment
+        - Lint/EndAlignment
+        - Lint/Void
+        - Layout/AlignHash
+        - Layout/AlignParameters
+        - Layout/ElseAlignment
+        - Layout/EndOfLine
+        - Layout/IndentationWidth
+        - Layout/TrailingBlankLines
+        - Layout/TrailingWhitespace
+        - Metrics/BlockLength
+        - Metrics/BlockNesting
+        - Metrics/LineLength
+        - Naming/FileName
+        - Style/FrozenStringLiteralComment
+        - Style/IfUnlessModifier
+        - Style/Next
+        - Style/WhileUntilModifier
+        - Style/StringLiteralsInInterpolation
+        - Layout/CommentIndentation

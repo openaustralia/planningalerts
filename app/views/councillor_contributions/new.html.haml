@@ -11,8 +11,8 @@
         = render "instructions_body"
       %legend Add all the councillors details you can find:
       - @councillor_contribution.suggested_councillors.each do |s|
-        = render 'contribution_form_input', f: f, suggested_councillor: s
-      %button{formaction: new_authority_councillor_contribution_path(@authority.short_name_encoded), class: "button button-add-input"} Add another councillor
+        = render "contribution_form_input", f: f, suggested_councillor: s
+      %button{ formaction: new_authority_councillor_contribution_path(@authority.short_name_encoded), class: "button button-add-input" } Add another councillor
     .councillor-contribution-actions
       = f.submit "Submit #{pluralize(@councillor_contribution.suggested_councillors.length, "new councillor")}", class: "button-action"
       %p Thanks!

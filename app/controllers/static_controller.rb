@@ -30,6 +30,6 @@ class StaticController < ApplicationController
   end
 
   def error_500
-    render status: 500, formats: [:html]
+    render status: :internal_server_error, formats: [:html]
   end
 end

@@ -9,10 +9,9 @@
   %li= link_to "Most recent first", { sort: "time", page: nil }, class: "button button-pill button-small #{"button-active" if @sort == "time"}"
   %li= link_to "Closest first", { sort: "distance", page: nil }, class: "button button-pill button-small #{"button-active" if @sort == "distance"}"
 
-- if @sort == "time"
-  - p, n = "Newer", "Older"
-- else
-  - p, n = "Closer", "Further"
+:ruby
+  p = @sort == "time" ? "Newer" : "Closer"
+  n = @sort == "time" ? "Older" : "Further"
 
 = paginated_section @applications, previous_label: "« " + p, next_label: n + " »" do
   = render "applications", applications: @applications

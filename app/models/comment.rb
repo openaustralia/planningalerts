@@ -5,10 +5,11 @@ require "rest-client"
 class Comment < ActiveRecord::Base
   belongs_to :application
   belongs_to :councillor
-  has_many :reports
-  has_many :replies
-  validates_presence_of :name, :text
-  validates_presence_of :address, unless: :to_councillor?
+  has_many :reports, dependent: :destroy
+  has_many :replies, dependent: :destroy
+  validates :name, presence: true
+  validates :text, presence: true
+  validates :address, presence: true, unless: :to_councillor?
 
   include EmailConfirmable
   scope(:visible, -> { where(confirmed: true, hidden: false) })
@@ -69,7 +70,7 @@ class Comment < ActiveRecord::Base
   end
 
   def create_replies_from_writeit!
-    return unless writeit_message_id.present?
+    return if writeit_message_id.blank?
 
     # TODO: This should be done in the writeit-rails gem
     api_response = RestClient.get(

@@ -37,7 +37,7 @@ describe ReportNotifier do
   end
 
   it "should tell the moderator everything they need to know to decide on what to do with the report" do
-    expect(@notifier.body.to_s).to eq <<~EOF
+    expect(@notifier.body.to_s).to eq <<~REPORT
       The abuse report was completed by Joe Reporter (reporter@foo.com) who said:
       It's very rude!
 
@@ -49,7 +49,7 @@ describe ReportNotifier do
 
       To edit/hide/delete this comment:
       https://dev.planningalerts.org.au/admin/comments/23/edit
-    EOF
+    REPORT
   end
 
   it "doesn’t include the commenters email as this could lead to data leak" do

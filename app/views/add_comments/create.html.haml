@@ -6,7 +6,7 @@
     %span.highlight Click on the link in the email
     to confirm your comment.
     Your comment will not be displayed or sent to
-    = @comment.recipient_display_name if @comment
+    = @comment&.recipient_display_name
     until you click on the link in the email.
   %p
     If you don't get an email in the next few minutes, try checking your spam filter.
