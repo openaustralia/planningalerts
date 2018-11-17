@@ -5,8 +5,8 @@ require "rest-client"
 class Comment < ActiveRecord::Base
   belongs_to :application
   belongs_to :councillor
-  has_many :reports
-  has_many :replies
+  has_many :reports, dependent: :destroy
+  has_many :replies, dependent: :destroy
   validates :name, presence: true
   validates :text, presence: true
   validates :address, presence: true, unless: :to_councillor?

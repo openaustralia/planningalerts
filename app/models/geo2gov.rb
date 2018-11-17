@@ -34,6 +34,7 @@ class Geo2gov
       local.delete(a)
     end
     raise "Can't figure out the local government area for lat, lng: #{@lat}, #{@lng}" if local.count > 1
+
     local.first
   end
 

@@ -51,7 +51,7 @@ module AlertNotifierHelper
   def new_donation_url_with_tracking
     new_donation_url(
       base_tracking_params.merge(
-        utm_campaign:  "donate-from-alert",
+        utm_campaign: "donate-from-alert",
         email: @alert.email
       )
     )

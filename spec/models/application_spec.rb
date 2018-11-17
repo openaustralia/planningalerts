@@ -174,7 +174,7 @@ describe Application do
 
   describe "collecting applications from the scraperwiki web service url" do
     it "should translate the data" do
-      feed_data = <<-EOF
+      feed_data = <<-JSON
         [
           {
             "date_scraped": "2012-08-24",
@@ -197,7 +197,7 @@ describe Application do
             "comment_url": "http://www.yarracity.vic.gov.au/planning--building/Planning-applications/Objecting-to-a-planning-applicationVCAT/"
           }
         ]
-      EOF
+      JSON
       # Freeze time
       t = Time.zone.now
       allow(Time).to receive(:now).and_return(t)
@@ -236,7 +236,7 @@ describe Application do
 
   describe "collecting applications from the scraper web service urls" do
     before :each do
-      @feed_xml = <<-EOF
+      @feed_xml = <<-JSON
       [
         {
           "council_reference": "R1",
@@ -256,11 +256,11 @@ describe Application do
           "comment_url": "http://fiddle.gov.au/comment/R2"
         }
       ]
-      EOF
+      JSON
       @date = Date.new(2009, 1, 1)
       @feed_url = "http://example.org?year=#{@date.year}&month=#{@date.month}&day=#{@date.day}"
       Application.delete_all
-      allow(@auth).to receive(:open).and_return(double(read: @feed_xml))
+      allow(@auth).to receive(:open_url_safe).and_return(@feed_xml)
     end
 
     it "should collect the correct applications" do

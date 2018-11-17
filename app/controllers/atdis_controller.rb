@@ -35,7 +35,7 @@ class AtdisController < ApplicationController
     if File.exist?(file)
       render file: file, content_type: Mime::JSON, layout: false
     else
-      render text: "not available", status: 404
+      render text: "not available", status: :not_found
     end
   end
 

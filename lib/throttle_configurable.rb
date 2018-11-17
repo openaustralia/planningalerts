@@ -44,6 +44,7 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
       when "hourly", "daily"
         value.each do |m, hosts|
           raise "Invalid max count used: #{m}" unless m.is_a?(Integer)
+
           add_hosts_to_strategies(hosts, strategy_factory(strategy, m))
         end
       when "unlimited", "blocked"
@@ -88,6 +89,7 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     hosts.each do |host|
       raise "Invalid ip address used: #{host}" unless valid_ip?(host)
       raise "ip address can not be used multiple times: #{host}" if @strategies.key?(host)
+
       @strategies[host] = strategy
     end
   end

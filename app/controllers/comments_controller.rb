@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
       @comment.confirm!
       redirect_to @comment.application, notice: render_to_string(partial: "confirmed").html_safe
     else
-      render text: "", status: 404
+      render text: "", status: :not_found
     end
   end
 
@@ -43,17 +43,17 @@ class CommentsController < ApplicationController
 
   def writeit_reply_webhook
     if params[:message_id].nil?
-      render text: "No message_id", status: 404
+      render text: "No message_id", status: :not_found
       return
     end
 
     comment = Comment.find_by(writeit_message_id: params[:message_id][%r{/api/v1/message/(\d*)/}, 1])
     if comment.nil?
-      render text: "Comment not found.", status: 404
+      render text: "Comment not found.", status: :not_found
       return
     end
 
     comment.create_replies_from_writeit!
-    render text: "Processing inbound message.", status: 200
+    render text: "Processing inbound message.", status: :ok
   end
 end

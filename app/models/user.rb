@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
          :trackable, :validatable, :confirmable
   before_create :set_api_key
-  has_many :api_statistics
+  has_many :api_statistics, dependent: :destroy
 
   def set_api_key
     self.api_key = Digest::MD5.base64digest(id.to_s + rand.to_s + Time.zone.now.to_s)[0...20]

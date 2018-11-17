@@ -35,9 +35,8 @@ if defined? Geokit
     Geokit::Geocoders::GoogleGeocoder.client_id = ENV["GOOGLE_MAPS_CLIENT_ID"]
     Geokit::Geocoders::GoogleGeocoder.cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
   end
-  if ENV["GOOGLE_MAPS_SERVER_KEY"]
-    Geokit::Geocoders::GoogleGeocoder.api_key = ENV["GOOGLE_MAPS_SERVER_KEY"]
-  end
+
+  Geokit::Geocoders::GoogleGeocoder.api_key = ENV["GOOGLE_MAPS_SERVER_KEY"] if ENV["GOOGLE_MAPS_SERVER_KEY"]
 
   # You can also set multiple API KEYS for different domains that may be directed to this same application.
   # The domain from which the current user is being directed will automatically be updated for Geokit via

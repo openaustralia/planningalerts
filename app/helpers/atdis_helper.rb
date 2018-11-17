@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module AtdisHelper
-  def yes_no(v)
-    v ? "yes" : "no"
+  def yes_no(value)
+    value ? "yes" : "no"
   end
 
   def attribute_value(value)

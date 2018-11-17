@@ -4,7 +4,7 @@ require "spec_helper"
 
 feature "Admin confirms comment for user" do
   around do |test|
-    Timecop.freeze(DateTime.new(2016, 10, 10).utc) { test.run }
+    Timecop.freeze(Time.zone.local(2016, 10, 10)) { test.run }
   end
 
   background do

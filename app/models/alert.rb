@@ -16,11 +16,11 @@ class Alert < ActiveRecord::Base
 
   before_create :attach_alert_subscriber
 
-  def location=(l)
-    return unless l
+  def location=(loc)
+    return unless loc
 
-    self.lat = l.lat
-    self.lng = l.lng
+    self.lat = loc.lat
+    self.lng = loc.lng
   end
 
   # TODO: This can probably be removed after being run on production
@@ -113,9 +113,9 @@ class Alert < ActiveRecord::Base
   end
 
   # Pass an array of objects. Count the distribution of objects and return as a hash of object: :count
-  def self.frequency_distribution(a)
+  def self.frequency_distribution(array)
     freq = {}
-    a.each do |i|
+    array.each do |i|
       freq[i] = (freq[i] || 0) + 1
     end
     freq.to_a.sort { |i, j| -(i[1] <=> j[1]) }

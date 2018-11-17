@@ -57,8 +57,8 @@ class Location < SimpleDelegator
   end
 
   # Distance (in metres) to other point
-  def distance_to(l)
-    __getobj__.distance_to(l.__getobj__, units: :kms) * 1000.0
+  def distance_to(loc)
+    __getobj__.distance_to(loc.__getobj__, units: :kms) * 1000.0
   end
 
   def full_address

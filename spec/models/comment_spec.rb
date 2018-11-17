@@ -248,13 +248,13 @@ describe Comment do
     end
 
     context "when the comment application has an authority" do
-      before { comment.application.authority.update_attributes(full_name: "Marrickville Council") }
+      before { comment.application.authority.update(full_name: "Marrickville Council") }
 
       it { expect(comment.recipient_display_name).to eq "Marrickville Council" }
     end
 
     context "when the comment application is a different authority" do
-      before { comment.application.authority.update_attributes(full_name: "Other Council") }
+      before { comment.application.authority.update(full_name: "Other Council") }
 
       it { expect(comment.recipient_display_name).to eq "Other Council" }
     end

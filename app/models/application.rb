@@ -4,7 +4,7 @@ require "open-uri"
 
 class Application < ActiveRecord::Base
   belongs_to :authority
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_many :replies, through: :comments
   before_save :geocode
   geocoded_by :address, latitude: :lat, longitude: :lng
@@ -121,6 +121,7 @@ class Application < ActiveRecord::Base
   def address
     address = self[:address]
     return unless address
+
     exceptions = %w[QLD VIC NSW SA ACT TAS WA NT]
 
     address.split(" ").map do |word|

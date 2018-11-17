@@ -54,7 +54,7 @@ describe ApiController do
       end
 
       it "should find recent applications if api key is given" do
-        user.update_attributes(bulk_api: true)
+        user.update(bulk_api: true)
         VCR.use_cassette("planningalerts") do
           authority = create(:authority, full_name: "Acme Local Planning Authority")
           result = create(:application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)

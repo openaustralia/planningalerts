@@ -7,9 +7,7 @@ namespace :ts do
     controller = config.controller
     pid = fork
 
-    unless pid
-      exec "#{controller.bin_path}#{controller.searchd_binary_name} --pidfile --config #{config.configuration_file} --nodetach"
-    end
+    exec "#{controller.bin_path}#{controller.searchd_binary_name} --pidfile --config #{config.configuration_file} --nodetach" unless pid
 
     Signal.trap("TERM") { Process.kill("TERM", pid) }
     Signal.trap("INT")  { Process.kill("INT", pid) }

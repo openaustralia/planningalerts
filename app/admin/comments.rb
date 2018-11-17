@@ -44,9 +44,7 @@ ActiveAdmin.register Comment do
   end
 
   action_item :load_replies, only: :show do
-    if ENV["WRITEIT_BASE_URL"] && resource.to_councillor? && resource.writeit_message_id
-      button_to("Load replies from WriteIt", load_replies_admin_comment_path)
-    end
+    button_to("Load replies from WriteIt", load_replies_admin_comment_path) if ENV["WRITEIT_BASE_URL"] && resource.to_councillor? && resource.writeit_message_id
   end
 
   member_action :load_replies, method: :post do

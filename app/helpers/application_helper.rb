@@ -13,8 +13,8 @@ module ApplicationHelper
     end
   end
 
-  def li_selected(m, &block)
-    content_tag(:li, capture(&block), class: ("selected" if page_matches?(m)))
+  def li_selected(options, &block)
+    content_tag(:li, capture(&block), class: ("selected" if page_matches?(options)))
   end
 
   def meters_in_words(meters)
@@ -25,8 +25,8 @@ module ApplicationHelper
     end
   end
 
-  def significant_figure_remove_trailing_zero(a, s)
-    text = significant_figure(a, s).to_s
+  def significant_figure_remove_trailing_zero(value, sig_figs)
+    text = significant_figure(value, sig_figs).to_s
     if text [-2..-1] == ".0"
       text[0..-3]
     else
@@ -35,19 +35,19 @@ module ApplicationHelper
   end
 
   # Round the number a to s significant figures
-  def significant_figure(a, s)
-    if a.positive?
-      m = 10**(Math.log10(a).ceil - s)
-      ((a.to_f / m).round * m).to_f
-    elsif a.negative?
-      -significant_figure(-a, s)
+  def significant_figure(value, sig_figs)
+    if value.positive?
+      m = 10**(Math.log10(value).ceil - sig_figs)
+      ((value.to_f / m).round * m).to_f
+    elsif value.negative?
+      -significant_figure(-value, sig_figs)
     else
       0
     end
   end
 
-  def km_in_words(km)
-    meters_in_words(km * 1000)
+  def km_in_words(value_in_km)
+    meters_in_words(value_in_km * 1000)
   end
 
   def render_rss_feed
@@ -106,7 +106,7 @@ module ApplicationHelper
 
   def contributor_profile_url(contributor)
     if contributor[:github].blank?
-      "https://github.com/search?utf8=%E2%9C%93&q=fullname%3A%22#{URI.encode contributor[:name]}%22&type=Users&ref=searchresults"
+      "https://github.com/search?utf8=%E2%9C%93&q=fullname%3A%22#{CGI.escape contributor[:name]}%22&type=Users&ref=searchresults"
     else
       "https://github.com/#{contributor[:github]}"
     end

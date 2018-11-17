@@ -7,7 +7,7 @@ class AuthorityLogger < Logger
     @authority = authority
     @other_logger = other_logger
     # We're starting a new run of the logger & scraper so clear out the old so we're ready for the new
-    @authority.update_attributes(last_scraper_run_log: "")
+    @authority.update(last_scraper_run_log: "")
   end
 
   def add(severity, message = nil, progname = nil)
@@ -16,15 +16,15 @@ class AuthorityLogger < Logger
     e = @authority.last_scraper_run_log + progname + "\n"
     return if e.size >= 5000
 
-    @authority.update_attributes(last_scraper_run_log: e)
+    @authority.update(last_scraper_run_log: e)
   end
 end
 
 class Authority < ActiveRecord::Base
-  has_many :applications
-  has_many :councillors
+  has_many :applications, dependent: :destroy
+  has_many :councillors, dependent: :destroy
   has_many :comments, through: :applications
-  has_many :councillor_contributions
+  has_many :councillor_contributions, dependent: :destroy
 
   validates :short_name, presence: true, uniqueness: { case_sensitive: false }
 
@@ -79,8 +79,8 @@ class Authority < ActiveRecord::Base
   end
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
-  def open_url_safe(url, info_logger, options = {})
-    open(url, options).read
+  def open_url_safe(url, info_logger)
+    RestClient.get(url).body
   rescue StandardError => e
     info_logger.error "Error #{e} while getting data from url #{url}. So, skipping"
     nil
@@ -233,15 +233,16 @@ class Authority < ActiveRecord::Base
     Authority.short_name_encoded(short_name)
   end
 
-  def self.find_short_name_encoded(n)
+  def self.find_short_name_encoded(name)
     # TODO: Potentially not very efficient when number of authorities is high. Loads all authorities into memory
-    all.find { |a| a.short_name_encoded == n }
+    all.find { |a| a.short_name_encoded == name }
   end
 
-  def self.find_short_name_encoded!(n)
-    r = find_short_name_encoded(n)
+  def self.find_short_name_encoded!(name)
+    r = find_short_name_encoded(name)
     # In production environment raising RecordNotFound will produce an error code 404
     raise ActiveRecord::RecordNotFound if r.nil?
+
     r
   end
 
