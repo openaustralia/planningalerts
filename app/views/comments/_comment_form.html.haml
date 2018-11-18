@@ -1,12 +1,12 @@
 -#
   TODO: Handle situation where the council doesn't have an email
         but there are councillors to contact
-- if @application.authority.contactable? || @councillors
-  = render "comments/comment_form_inputs"
-- elsif @application.comment_url.present?
+- if application.authority.contactable? || councillors
+  = render "comments/comment_form_inputs", application: application, add_comment: add_comment, councillor_list_open: councillor_list_open
+- elsif application.comment_url.present?
   %h4#add-comment Add your own comment
   %p
-    = link_to "How to comment", @application.comment_url
-    on this application (from #{@application.authority.full_name}).
-    - if @application.on_notice_to
-      = on_notice_text(@application)
+    = link_to "How to comment", application.comment_url
+    on this application (from #{application.authority.full_name}).
+    - if application.on_notice_to
+      = on_notice_text(application)

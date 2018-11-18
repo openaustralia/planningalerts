@@ -1,7 +1,7 @@
 !!! 5
 %html{ lang: "en" }
-  = render "shared/html_head", with_placeholder_polyfill: true
+  = render "shared/html_head", with_placeholder_polyfill: true, rss: @rss
   %body
-    = render "application/header", with_navigation: false
+    = render "application/header", with_navigation: false, alert_count: @alert_count
     = render "application/main"
     = render "shared/end_matter", with_maps_scripts: false

@@ -11,8 +11,8 @@
       Email alerts of planning applications near you
     | PlanningAlerts
 
-  - if @rss
-    %link{ rel: "alternate", type: "application/rss+xml", title: "RSS", href: @rss }
+  - if rss
+    %link{ rel: "alternate", type: "application/rss+xml", title: "RSS", href: rss }
 
   = stylesheet_link_tag "application.css", media: "screen, projection"
   = stylesheet_link_tag "print.css", media: "print"

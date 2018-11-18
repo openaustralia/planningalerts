@@ -1,8 +1,8 @@
-= semantic_form_for [@application, @add_comment] do |f|
+= semantic_form_for [application, add_comment] do |f|
   = f.inputs id: "comment-base-inputgroup" do
     - label_for_text = capture do
       %h4#add-comment Have your say on this application
-      = render "comments/comment_form_introduction"
+      = render "comments/comment_form_introduction", application: application
     = f.input :text, label: label_for_text.html_safe,
                      placeholder: "Be polite, clear, and to the point so your comment gets listened to.",
                      hint: "Have you made a donation or gift to a Councillor or Council employee? #{link_to("You may need to disclose this", faq_path(anchor: "disclosure"))}.".html_safe,
@@ -15,7 +15,7 @@
                      hint: "Please use your real full name if possible.",
                      input_html: { required: "required" }
   - if @councillors
-    = render "comments/comment_receiver_options", f: f
+    = render "comments/comment_receiver_options", f: f, add_comment: add_comment, application: application, councillor_list_open: councillor_list_open
   = f.inputs id: "comment-detail-inputgroup" do
     = f.input :email, label: "Your email",
                       placeholder: "e.g. your@email.com",
@@ -25,7 +25,7 @@
     = f.input :address, label: "Your street address",
                         placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
                         hint: "We never display your street address. #{link_to("Why do you need my address?", faq_path(anchor: "address"))}".html_safe,
-                        input_html: { required: ("required" unless @add_comment.could_be_for_councillor?) }
+                        input_html: { required: ("required" unless add_comment.could_be_for_councillor?) }
     .inline-hints.hidden#faq_commenting_address
       = render partial: "static/faq_commenting_address"
     -#

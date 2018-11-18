@@ -1,6 +1,6 @@
 <%= render "header" -%>
 <% unless @comments.empty? %>
-<%= render "comments" -%>
+<%= render "comments", comments: @comments, alert: @alert -%>
 <% unless @replies.empty? && @applications.empty? -%>
 
 ============================================================
@@ -8,7 +8,7 @@
 <% end %>
 <% end %>
 <% unless @replies.empty? %>
-<%= render "replies" -%>
+<%= render "replies", replies: @replies, alert: @alert -%>
 <% unless @applications.empty? -%>
 
 ============================================================
@@ -16,11 +16,11 @@
 <% end %>
 <% end %>
 <% unless @applications.empty? %>
-<%= render "applications" -%>
+<%= render "applications", alert: @alert, applications: @applications -%>
 <% end %>
 
 ============================================================
 
 <%= render "donation_banner" %>
 <%= render "footer_main" %>
-<%= render "footer_actions" %>
+<%= render "footer_actions", alert: @alert %>
