@@ -2,7 +2,7 @@
   .container#header
     #statsbanner
       #stats
-        #{number_to_human(@alert_count).downcase} applications sent across Australia
+        #{number_to_human(alert_count).downcase} applications sent across Australia
     %h1= link_to ENV["EMAIL_FROM_NAME"], root_path
     %h2
       Email alerts of planning applications

@@ -6,13 +6,13 @@
   %body
     = render "header"
     - unless @comments.empty?
-      = render "comments"
+      = render "comments", comments: @comments, alert: @alert
     - unless @replies.empty?
-      = render "replies"
+      = render "replies", replies: @replies, alert: @alert
     - unless @applications.empty?
-      = render "applications"
+      = render "applications", alert: @alert, applications: @applications
     = render "donation_banner"
     .footer-outer
       .footer-inner
         = render "footer_main"
-        = render "footer_actions"
+        = render "footer_actions", alert: @alert

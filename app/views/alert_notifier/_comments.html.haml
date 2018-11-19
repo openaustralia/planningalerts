@@ -1,8 +1,8 @@
 .box.comments-header
-  - if @comments.count == 1
+  - if comments.count == 1
     The following <strong>new comment</strong> has been made on a planning application
   - else
     The following <strong>new comments</strong> have been made on planning applications
-  within #{meters_in_words(@alert.radius_meters)} of
-  %strong= @alert.address
-= render partial: "comment", collection: @comments
+  within #{meters_in_words(alert.radius_meters)} of
+  %strong= alert.address
+= render partial: "comment", collection: comments

@@ -1,7 +1,7 @@
 .box.applications-header
-  The following <strong>new planning applications</strong> have been found within #{meters_in_words(@alert.radius_meters)} of
-  %strong= @alert.address
-= render partial: "application", collection: @applications[0..9]
-- if @applications.size > 15
+  The following <strong>new planning applications</strong> have been found within #{meters_in_words(alert.radius_meters)} of
+  %strong= alert.address
+= render partial: "application", collection: applications[0..9]
+- if applications.size > 15
   %p.applications-more
-    But wait, there are more! Browse the full #{link_to "list of recent nearby applications", address_applications_url(q: @alert.address)}.
+    But wait, there are more! Browse the full #{link_to "list of recent nearby applications", address_applications_url(q: alert.address)}.

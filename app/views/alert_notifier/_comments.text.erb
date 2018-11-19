@@ -1,6 +1,6 @@
-<% if @comments.count == 1 %>
-The following new comment has been made on a planning application within <%= meters_in_words(@alert.radius_meters) %> of <%= @alert.address %>:
+<% if comments.count == 1 %>
+The following new comment has been made on a planning application within <%= meters_in_words(alert.radius_meters) %> of <%= alert.address %>:
 <% else %>
-The following new comments have been made on planning applications within <%= meters_in_words(@alert.radius_meters) %> of <%= @alert.address %>:
+The following new comments have been made on planning applications within <%= meters_in_words(alert.radius_meters) %> of <%= alert.address %>:
 <% end %>
-<%= render partial: "comment", collection: @comments, spacer_template: "spacer" -%>
+<%= render partial: "comment", collection: comments, spacer_template: "spacer" -%>

@@ -2,10 +2,6 @@ linters:
   LineLength:
     enabled: false
 
-  # These require some more careful fixing. So leaving for later
-  InstanceVariables:
-    enabled: false
-
   # Another one that we should fix but sometimes it's non-trivial. So,
   # putting aside for the time being
   IdNames:
