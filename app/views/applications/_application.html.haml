@@ -1,10 +1,13 @@
-%article.application
-  = link_to application do
-    .address= application.address
-    .appinfo
-      - if application.respond_to? :distance
-        #{time_ago_in_words(application.date_scraped)} ago, #{km_in_words(application.distance.to_f)} away
-      - else
-        #{time_ago_in_words(application.date_scraped)} ago
-    %p.description
-      = application.respond_to?(:excerpts) && application.excerpts ? application.excerpts.description.html_safe : application.description
+%li
+  %article.application
+    = link_to application do
+      - if application.visible_comments_count > 0
+        .comments= pluralize(application.visible_comments_count, "comment")
+      .address= application.address
+      .appinfo
+        - if application.respond_to? :distance
+          #{time_ago_in_words(application.date_scraped)} ago, #{km_in_words(application.distance.to_f)} away
+        - else
+          #{time_ago_in_words(application.date_scraped)} ago
+      %p.description
+        = application.respond_to?(:excerpts) && application.excerpts ? application.excerpts.description.html_safe : application.description

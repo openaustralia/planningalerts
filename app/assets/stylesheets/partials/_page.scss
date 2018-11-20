@@ -413,9 +413,24 @@ body .container .attention {
   }
 }
 
+.application .comments {
+  float: right;
+  color: $cool-highlight;
+}
+
 .appinfo {
   font-size: 0.8em;
   color: $cool-highlight;
+}
+
+.box {
+  @include boxed-content;
+  h4 {
+    margin-top: 0;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .pagination {
@@ -560,8 +575,20 @@ form.address-search {
   margin-bottom: 1em;
 }
 
+.tweets h4,
+.stats h4 {
+  font-weight: 500;
+  margin: 0;
+}
+
+.trending h4 {
+  font-weight: 500;
+  margin-top: 0;
+}
+
 .tweets,
-.stats {
+.stats,
+.trending {
   a {
     &:link,
     &:visited {
@@ -581,11 +608,6 @@ form.address-search {
     .number {
       color: $warm-highlight;
     }
-  }
-
-  h4 {
-    font-weight: 500;
-    margin: 0;
   }
 
   ul {
@@ -623,7 +645,7 @@ form.address-search {
   }
 }
 
-.tweets {
+.tweets, .trending {
   border-top: 1px solid $lightest-cool-highlight;
   padding-top: 1em;
 }
@@ -636,7 +658,7 @@ form.address-search {
   }
 }
 
-.tweets {
+.tweets, .trending {
   li > a {
     &:hover,
     &:focus {

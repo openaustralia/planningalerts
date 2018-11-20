@@ -20,6 +20,6 @@
 
   %p
     Unhappy?
-    = button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, class: "button button-rounded button-large button-action"
+    = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "button button-rounded button-large button-action"
 
   = link_to "Back", :back

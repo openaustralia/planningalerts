@@ -19,9 +19,22 @@ class ApplicationsController < ApplicationController
       apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
     end
 
-    @applications = apps.paginate(page: params[:page], per_page: 30)
+    @applications = apps
+                    .with_visible_comments_count
+                    .paginate(page: params[:page], per_page: 30)
     @alert = Alert.new
     @alert.address_for_placeholder = @applications.last.address if @applications.any?
+  end
+
+  def trending
+    @applications = Application
+                    .where("date_scraped > ?", 4.weeks.ago)
+                    .joins(:comments)
+                    .group("applications.id")
+                    .merge(Comment.visible)
+                    .reorder("count(comments.id) DESC")
+                    .with_visible_comments_count
+                    .limit(20)
   end
 
   # JSON api for returning the number of scraped applications per day
@@ -58,15 +71,22 @@ class ApplicationsController < ApplicationController
         @q = location.full_address
         @alert = Alert.new(address: @q)
         @other_addresses = location.all[1..-1].map(&:full_address)
-        @applications = case @sort
-                        when "distance"
-                          Application.near([location.lat, location.lng], @radius / 1000, units: :km).reorder("distance").paginate(page: params[:page], per_page: per_page)
-                        else # date_scraped
-                          Application.near([location.lat, location.lng], @radius / 1000, units: :km).paginate(page: params[:page], per_page: per_page)
-                        end
+        @applications = Application.near([location.lat, location.lng], @radius / 1000, units: :km)
+        @applications = @applications.reorder("distance") if @sort == "distance"
+        @applications = @applications
+                        .with_visible_comments_count
+                        .paginate(page: params[:page], per_page: per_page)
         @rss = applications_path(format: "rss", address: @q, radius: @radius)
       end
     end
+    @trending = Application
+                .where("date_scraped > ?", 4.weeks.ago)
+                .joins(:comments)
+                .group("applications.id")
+                .merge(Comment.visible)
+                .reorder("count(comments.id) DESC")
+                .with_visible_comments_count
+                .limit(4)
     @set_focus_control = "q"
     # Use a different template if there are results to display
     render "address_results" if @q && @error.nil?
@@ -131,15 +151,18 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     case @sort
     when "time"
-      @applications = @application.find_all_nearest_or_recent.paginate page: params[:page], per_page: per_page
+      @applications = @application.find_all_nearest_or_recent
     when "distance"
       @applications = Application.unscoped do
-        @application.find_all_nearest_or_recent.paginate page: params[:page], per_page: per_page
+        @application.find_all_nearest_or_recent
       end
     else
       redirect_to sort: "time"
       return
     end
+    @applications = @applications
+                    .with_visible_comments_count
+                    .paginate page: params[:page], per_page: per_page
 
     respond_to do |format|
       format.html { render "nearby" }

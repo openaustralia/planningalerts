@@ -389,7 +389,7 @@
     background-color: $lightest-cool-highlight;
   }
 
-  .tweets, .stats {
+  .tweets, .stats, .trending {
     > div {
       padding-bottom: 1em;
     }
@@ -437,7 +437,7 @@
 
   }
 
-  .tweets {
+  .tweets, .trending {
     margin-top: 5em;
 
     li {

@@ -1,5 +1,5 @@
 The following new planning applications have been found within <%= meters_in_words(alert.radius_meters) %> of <%= alert.address %>:
-<%= render :partial => "application", :collection => applications[0..9], :spacer_template => "spacer" -%>
+<%= render partial: "application", collection: applications[0..9], spacer_template: "spacer" -%>
 <% if applications.size > 10 %>
 But wait, there are more! Browse the full list of recent nearby applications:
 <%= address_applications_url(q: alert.address) %>

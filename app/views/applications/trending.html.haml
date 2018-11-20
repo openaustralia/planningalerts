@@ -1,0 +1,32 @@
+- content_for :page_title, "Trending planning applications"
+
+%h3 Trending planning applications
+
+#main
+  %p
+    Some planning applications attract considerably more community interest than others.
+    In 2016 hundreds of people in the local community opposed <a href="https://www.planningalerts.org.au/applications/534084">the loss of a historic Sydney building</a>.
+    Their efforts
+    <a href="https://www.oaf.org.au/2016/02/10/you-saved-the-historic-alexandria-hotel-go-you/">succeeded in saving this building</a>,
+    their much loved hotel, due in no small part to their comments on PlanningAlerts.
+  %p
+    However you probably would not have heard about this application unless you lived nearby.
+  %p
+    Now we are bringing the trending applications to the top so you can see what
+    people find most popular or contentious. This
+    page shows you the top 20 recent applications from across Australia that have
+    received the most comments.
+
+#main
+  %ol.applications= render @applications
+
+#sidebar
+  .box
+    %h4 Journalist?
+    %p
+      When you include information from PlanningAlerts in a story or post,
+      please cite it by including a link with a <strong>full URL</strong>.
+    %p
+      That way your
+      readers can see the facts for themselves, understand the broader context
+      and write their own comment.

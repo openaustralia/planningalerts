@@ -5,7 +5,7 @@ The original comment was written by <%= @comment.name%> who said:
 <%= @comment.text.html_safe %>
 
 The original comment can be found at:
-<%= application_url(@comment.application, :anchor => "comment#{@comment.id}") %>
+<%= application_url(@comment.application, anchor: "comment#{@comment.id}") %>
 
 To edit/hide/delete this comment:
 <%= edit_admin_comment_url(@comment) %>
