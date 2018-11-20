@@ -1,0 +1,8 @@
+%li
+  %article.application
+    = link_to application do
+      %p
+        In #{application.suburb}, #{application.state}
+        the planning application for "#{application.description}"
+        was commented on
+        = pluralize(application.visible_comments_count, "time")
