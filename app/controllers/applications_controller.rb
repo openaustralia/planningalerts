@@ -86,7 +86,7 @@ class ApplicationsController < ApplicationController
                 .merge(Comment.visible)
                 .reorder("count(comments.id) DESC")
                 .with_visible_comments_count
-                .limit(2)
+                .limit(4)
     @set_focus_control = "q"
     # Use a different template if there are results to display
     render "address_results" if @q && @error.nil?
