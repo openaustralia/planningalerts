@@ -66,8 +66,7 @@ gem "dotenv-rails"
 gem "climate_control"
 gem "everypolitician-popolo", git: "https://github.com/everypolitician/everypolitician-popolo.git", branch: "master"
 # Using master until an updated version of the Gem is released https://github.com/ciudadanointeligente/writeit-rails/issues/4
-# Also using openaustralia's fork to fix a security issue
-gem "writeit-rails", git: "https://github.com/openaustralia/writeit-rails.git", branch: "master"
+gem "writeit-rails", git: "https://github.com/ciudadanointeligente/writeit-rails.git", branch: "master"
 gem "mime-types", "~> 2.99" # our writeit gem version is incompatible with newer versions
 gem "recaptcha", require: "recaptcha/rails"
 
