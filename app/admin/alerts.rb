@@ -30,4 +30,14 @@ ActiveAdmin.register Alert do
             export_active_emails_admin_alerts_path,
             title: "Export a text file containing all email addresses with an active alert set up"
   end
+
+  action_item :unsubscribe, only: :show do
+    button_to "Unsubscribe", unsubscribe_admin_alert_path
+  end
+
+  member_action :unsubscribe, method: :post do
+    alert = Alert.find(params[:id])
+    alert.unsubscribe!
+    redirect_to(action: :show)
+  end
 end
