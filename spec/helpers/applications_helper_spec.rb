@@ -169,14 +169,14 @@ describe ApplicationsHelper do
 
       it "should say when the application is on notice" do
         expect(helper.on_notice_text(@application)).to eq(
-          "You're too late! The period for officially commenting on this application <strong>finished 2 days ago</strong>. It lasted for 14 days. If you chose to comment now, your comment will still be displayed here and be sent to the planning authority but it will <strong>not be officially considered</strong> by the planning authority."
+          "You&#39;re too late! The period for officially commenting on this application <strong>finished 2 days ago</strong>. It lasted for 14 days. If you chose to comment now, your comment will still be displayed here and be sent to the planning authority but it will <strong>not be officially considered</strong> by the planning authority."
         )
       end
 
       it "should only say when on notice to if there is no on notice from information" do
         allow(@application).to receive(:on_notice_from).and_return(nil)
         expect(helper.on_notice_text(@application)).to eq(
-          "You're too late! The period for officially commenting on this application <strong>finished 2 days ago</strong>. If you chose to comment now, your comment will still be displayed here and be sent to the planning authority but it will <strong>not be officially considered</strong> by the planning authority."
+          "You&#39;re too late! The period for officially commenting on this application <strong>finished 2 days ago</strong>. If you chose to comment now, your comment will still be displayed here and be sent to the planning authority but it will <strong>not be officially considered</strong> by the planning authority."
         )
       end
     end

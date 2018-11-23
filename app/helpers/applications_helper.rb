@@ -45,20 +45,28 @@ module ApplicationsHelper
   end
 
   def on_notice_text(application)
+    t = []
     if application.on_notice_from && (Time.zone.today < application.on_notice_from)
-      text = "The period to have your comment officially considered by the planning authority <strong>starts #{days_in_future_in_words(application.on_notice_from)}</strong> and finishes #{distance_of_time_in_words(application.on_notice_from, application.on_notice_to)} later."
+      t << "The period to have your comment officially considered by the planning authority"
+      t << content_tag(:strong, "starts #{days_in_future_in_words(application.on_notice_from)}")
+      t << "and finishes #{distance_of_time_in_words(application.on_notice_from, application.on_notice_to)} later."
     elsif Time.zone.today == application.on_notice_to
-      text = +"<strong>Today is the last day</strong> to have your comment officially considered by the planning authority."
-      text << " The period for comment started #{days_ago_in_words(application.on_notice_from)}." if application.on_notice_from
+      t << content_tag(:strong, "Today is the last day")
+      t << "to have your comment officially considered by the planning authority."
+      t << "The period for comment started #{days_ago_in_words(application.on_notice_from)}." if application.on_notice_from
     elsif Time.zone.today < application.on_notice_to
-      text = +"<strong>You have #{distance_of_time_in_words(Time.zone.today, application.on_notice_to)} left</strong> to have your comment officially considered by the planning authority."
-      text << " The period for comment started #{days_ago_in_words(application.on_notice_from)}." if application.on_notice_from
+      t << content_tag(:strong, "You have #{distance_of_time_in_words(Time.zone.today, application.on_notice_to)} left")
+      t << "to have your comment officially considered by the planning authority."
+      t << "The period for comment started #{days_ago_in_words(application.on_notice_from)}." if application.on_notice_from
     else
-      text = +"You're too late! The period for officially commenting on this application <strong>finished #{days_ago_in_words(application.on_notice_to)}</strong>."
-      text << " It lasted for #{distance_of_time_in_words(application.on_notice_from, application.on_notice_to)}." if application.on_notice_from
-      text << " If you chose to comment now, your comment will still be displayed here and be sent to the planning authority but it will <strong>not be officially considered</strong> by the planning authority."
+      t << "You're too late! The period for officially commenting on this application"
+      t << safe_join([content_tag(:strong, "finished #{days_ago_in_words(application.on_notice_to)}"), "."])
+      t << "It lasted for #{distance_of_time_in_words(application.on_notice_from, application.on_notice_to)}." if application.on_notice_from
+      t << "If you chose to comment now, your comment will still be displayed here and be sent to the planning authority but it will"
+      t << content_tag(:strong, "not be officially considered")
+      t << "by the planning authority."
     end
-    text.html_safe
+    safe_join(t, " ")
   end
 
   # TODO: Fix this (unused _application)
