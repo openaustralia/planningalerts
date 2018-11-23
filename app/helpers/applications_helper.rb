@@ -100,7 +100,11 @@ module ApplicationsHelper
     size = options[:size] || "350x200"
     google_signed_url(
       "https://maps.googleapis.com",
-      "/maps/api/staticmap?zoom=#{zoom}&size=#{size}&maptype=roadmap&markers=color:red%7C#{lat},#{lng}"
+      "/maps/api/staticmap",
+      maptype: "roadmap",
+      markers: "color:red|#{lat},#{lng}",
+      size: size,
+      zoom: zoom
     )
   end
 
@@ -109,7 +113,10 @@ module ApplicationsHelper
     fov = options[:fov] || 90
     google_signed_url(
       "https://maps.googleapis.com",
-      "/maps/api/streetview?size=#{size}&location=#{application.lat},#{application.lng}&fov=#{fov}"
+      "/maps/api/streetview",
+      fov: fov,
+      location: "#{application.lat},#{application.lng}",
+      size: size
     )
   end
 
@@ -120,7 +127,8 @@ module ApplicationsHelper
 
   private
 
-  def google_signed_url(domain, path)
+  def google_signed_url(domain, path, query)
+    path = path + "?" + query.to_query
     client_id = ENV["GOOGLE_MAPS_CLIENT_ID"]
     google_maps_key = ENV["GOOGLE_MAPS_API_KEY"]
     cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
