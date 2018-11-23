@@ -11,9 +11,9 @@ class StaticController < ApplicationController
 
   def faq; end
 
-  # rubocop:disable Style/AccessorMethodName
+  # rubocop:disable Naming/AccessorMethodName
   def get_involved; end
-  # rubocop:enable Style/AccessorMethodName
+  # rubocop:enable Naming/AccessorMethodName
 
   def how_to_write_a_scraper; end
 
