@@ -217,10 +217,10 @@ describe ApplicationsHelper do
 
       it "should generate a static google map api image" do
         expect(helper.google_static_map(@application, size: "350x200", zoom: 16)).to eq(
-          "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?maptype=roadmap&markers=color%3Ared%7C1.0%2C2.0&size=350x200&zoom=16&key=abc&signature=rjrxf9Al-r8DA3EB1eBjyLwv4rY=\" width=\"350\" height=\"200\" />"
+          "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=abc&maptype=roadmap&markers=color%3Ared%7C1.0%2C2.0&size=350x200&zoom=16&signature=BDMqLaSPiNHLtaxJtbj3n8YM0dg=\" width=\"350\" height=\"200\" />"
         )
         expect(helper.google_static_map(@application, size: "100x100", zoom: 14)).to eq(
-          "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?maptype=roadmap&markers=color%3Ared%7C1.0%2C2.0&size=100x100&zoom=14&key=abc&signature=rAVlH7dOV8LEZ9LGDsGU1xwDWPs=\" width=\"100\" height=\"100\" />"
+          "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=abc&maptype=roadmap&markers=color%3Ared%7C1.0%2C2.0&size=100x100&zoom=14&signature=jqBprFshZyAZ4i9m18WLpql2iss=\" width=\"100\" height=\"100\" />"
         )
       end
     end
@@ -235,10 +235,10 @@ describe ApplicationsHelper do
 
       it "should generate a static google streetview image" do
         expect(helper.google_static_streetview(@application, size: "350x200", fov: 90)).to eq(
-          "<img alt=\"Streetview of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/streetview?fov=90&location=1.0%2C2.0&size=350x200&key=abc&signature=robaZBVxVTdTnjGjW9FoAjx-1l8=\" width=\"350\" height=\"200\" />"
+          "<img alt=\"Streetview of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/streetview?fov=90&key=abc&location=1.0%2C2.0&size=350x200&signature=jVq9tBwGacE2vi01iJhpwi-VTls=\" width=\"350\" height=\"200\" />"
         )
         expect(helper.google_static_streetview(@application, size: "100x100", fov: 60)).to eq(
-          "<img alt=\"Streetview of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/streetview?fov=60&location=1.0%2C2.0&size=100x100&key=abc&signature=smjsYOswVDjipcemUlfFqHAGOZU=\" width=\"100\" height=\"100\" />"
+          "<img alt=\"Streetview of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/streetview?fov=60&key=abc&location=1.0%2C2.0&size=100x100&signature=8TW90O-QsH3B3ocZTTXi-fY2R1o=\" width=\"100\" height=\"100\" />"
         )
       end
     end

@@ -128,18 +128,22 @@ module ApplicationsHelper
   private
 
   def google_signed_url(domain, path, query)
-    path = path + "?" + query.to_query
     client_id = ENV["GOOGLE_MAPS_CLIENT_ID"]
     google_maps_key = ENV["GOOGLE_MAPS_API_KEY"]
     cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
     if client_id.present?
-      signature = sign_gmap_bus_api_url(path + "&client=#{client_id}", cryptographic_key)
-      (domain + path + "&client=#{client_id}&signature=#{signature}").html_safe
+      p = path + "?" + query.merge(client: client_id).to_query
+      signature = sign_gmap_bus_api_url(p, cryptographic_key)
+      (domain + p + "&signature=#{signature}").html_safe
     elsif google_maps_key.present?
-      signature = sign_gmap_bus_api_url(path + "&key=#{google_maps_key}", cryptographic_key)
-      (domain + path + "&key=#{google_maps_key}&signature=#{signature}").html_safe
+      p = path + "?" + query.merge(key: google_maps_key).to_query
+      signature = sign_gmap_bus_api_url(p, cryptographic_key)
+      # We want to make the signature that the signature appears on the
+      # end of path and query exactly in the form it was signed. That's why
+      # we're concatenating strings here
+      (domain + p + "&signature=#{signature}").html_safe
     else
-      (domain + path).html_safe
+      (domain + path + "?" + query.to_query).html_safe
     end
   end
 
