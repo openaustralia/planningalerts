@@ -13,8 +13,13 @@ class ReportsController < ApplicationController
     if verify_recaptcha && @report.save
       ReportNotifier.notify(@report).deliver_later
     else
-      flash[:error] = "Sorry, we couldn’t verify that you’re not a robot. Make sure you click the <em>I’m not a robot</em> box below and try again.".html_safe if flash[:recaptcha_error]
-
+      if flash[:recaptcha_error]
+        # Safe html i18n not working in controllers.
+        # See https://github.com/rails/rails/issues/27862
+        # rubocop:disable Rails/OutputSafety
+        flash[:error] = t(".you_are_a_robot_html").html_safe
+        # rubocop:enable Rails/OutputSafety
+      end
       render "new"
     end
   end

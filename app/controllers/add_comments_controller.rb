@@ -21,7 +21,7 @@ class AddCommentsController < ApplicationController
     return if @comment
 
     # TODO: This seems to have a lot repeated from Application#show
-    flash.now[:error] = "Some of the comment wasn't filled out completely. See below."
+    flash.now[:error] = t(".not_filled_out")
 
     @councillor_list_open = true if params[:councillors_list_toggler] == "open"
 

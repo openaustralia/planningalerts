@@ -29,7 +29,11 @@ class DonationsController < ApplicationController
     flash[:error] = e.message
     redirect_to new_donation_path
   rescue ActiveRecord::RecordInvalid
-    flash[:error] = "Sorry, we weren't able to process your donation. <a href='mailto:contact@planningalerts' title='Email the PlanningAlerts Team'>Please email us at contact@planningalerts</a> and we'll sort it out. Thanks for your support and patience.".html_safe
+    # Safe html i18n not working in controllers.
+    # See https://github.com/rails/rails/issues/27862
+    # rubocop:disable Rails/OutputSafety
+    flash[:error] = t(".not_able_to_process_donation_html").html_safe
+    # rubocop:enable Rails/OutputSafety
     redirect_to new_donation_path
   end
 

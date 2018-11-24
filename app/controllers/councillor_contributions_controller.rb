@@ -33,7 +33,7 @@ class CouncillorContributionsController < ApplicationController
     if @councillor_contribution.save
       CouncillorContributionNotifier.notify(@councillor_contribution).deliver_later
     else
-      flash.now[:error] = "There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors."
+      flash.now[:error] = t(".save_problem")
       render :new
     end
   end
