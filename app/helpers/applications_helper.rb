@@ -142,9 +142,13 @@ module ApplicationsHelper
       # We want to make the signature that the signature appears on the
       # end of path and query exactly in the form it was signed. That's why
       # we're concatenating strings here
+      # rubocop:disable Rails/OutputSafety
       (domain + p + "&signature=#{signature}").html_safe
+      # rubocop:enable Rails/OutputSafety
     else
+      # rubocop:disable Rails/OutputSafety
       (domain + path + "?" + query.to_query).html_safe
+      # rubocop:enable Rails/OutputSafety
     end
   end
 
