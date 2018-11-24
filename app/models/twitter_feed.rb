@@ -24,7 +24,7 @@ class TwitterFeed
   def items
     @items ||= feed.map do |tweet|
       item       = OpenStruct.new
-      item.title = tweet.text.html_safe
+      item.title = tweet.text
       item.date  = tweet.created_at
       item.link  = "https://twitter.com/#{username}/status/#{tweet.id}"
       item
