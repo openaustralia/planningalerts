@@ -49,11 +49,11 @@ describe AlertNotifier do
     end
 
     it "should nicely format (in text) a list of multiple planning applications" do
-      expect(email.text_part.body.to_s).to eq Rails.root.join("spec", "mailers", "regression", "alert_notifier", "email3.txt").read
+      expect(email.text_part.body.to_s).to eq Rails.root.join("spec", "mailers", "regression", "alert_notifier", "email3.txt").read.gsub("\n", "\r\n")
     end
 
     it "should nicely format (in HTML) a list of multiple planning applications" do
-      expect(email.html_part.body.to_s).to eq(Rails.root.join("spec", "mailers", "regression", "alert_notifier", "email3.html").read)
+      expect(email.html_part.body.to_s).to eq(Rails.root.join("spec", "mailers", "regression", "alert_notifier", "email3.html").read.gsub("\n", "\r\n"))
     end
   end
 
@@ -65,11 +65,11 @@ describe AlertNotifier do
     end
 
     it "should nicely format (in text) a list of multiple planning applications" do
-      expect(email.text_part.body.to_s).to eq Rails.root.join("spec", "mailers", "regression", "alert_notifier", "email2.txt").read
+      expect(email.text_part.body.to_s).to eq Rails.root.join("spec", "mailers", "regression", "alert_notifier", "email2.txt").read.gsub("\n", "\r\n")
     end
 
     it "should nicely format (in HTML) a list of multiple planning applications" do
-      expect(email.html_part.body.to_s).to eq(Rails.root.join("spec", "mailers", "regression", "alert_notifier", "email2.html").read)
+      expect(email.html_part.body.to_s).to eq(Rails.root.join("spec", "mailers", "regression", "alert_notifier", "email2.html").read.gsub("\n", "\r\n"))
     end
   end
 
@@ -108,7 +108,7 @@ describe AlertNotifier do
 
       context "Text email" do
         it "should nicely format a list of multiple planning applications" do
-          expect(@email.text_part.body.to_s).to eq Rails.root.join("spec", "mailers", "regression", "alert_notifier", "email1.txt").read
+          expect(@email.text_part.body.to_s).to eq Rails.root.join("spec", "mailers", "regression", "alert_notifier", "email1.txt").read.gsub("\n", "\r\n")
         end
       end
 
@@ -128,7 +128,7 @@ describe AlertNotifier do
         end
 
         it "should have a specific body" do
-          expect(@html_body).to eq(Rails.root.join("spec", "mailers", "regression", "alert_notifier", "email1.html").read)
+          expect(@html_body).to eq(Rails.root.join("spec", "mailers", "regression", "alert_notifier", "email1.html").read.gsub("\n", "\r\n"))
         end
       end
     end
