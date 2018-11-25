@@ -328,7 +328,7 @@ GEM
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    oj (2.1.4)
+    oj (3.7.1)
     orm_adapter (0.5.0)
     parallel (1.12.1)
     parser (2.5.3.0)
