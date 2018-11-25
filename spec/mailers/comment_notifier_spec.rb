@@ -55,8 +55,8 @@ describe CommentNotifier do
       it { expect(notifier.reply_to).to eql ["replies@planningalerts.org.au"] }
       it { expect(notifier.sender).to eql "contact@planningalerts.org.au" }
       it { expect(notifier.subject).to eql "Planning application at 24 Bruce Road Glenbrook" }
-      it { expect(notifier.text_part).to have_content comment_text }
-      it { expect(notifier.html_part).to have_content comment_text }
+      it { expect(notifier.text_part).to have_content "It's a good thing.\n\nOh yes it is." }
+      it { expect(notifier.html_part).to have_content "It's a good thing.\n\nOh yes it is." }
     end
   end
 
