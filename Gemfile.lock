@@ -340,7 +340,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     public_suffix (3.0.3)
-    rabl (0.8.0)
+    rabl (0.14.0)
       activesupport (>= 2.3.14)
     rack (1.6.11)
     rack-livereload (0.3.11)
