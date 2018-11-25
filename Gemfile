@@ -69,6 +69,9 @@ gem "everypolitician-popolo", git: "https://github.com/everypolitician/everypoli
 gem "writeit-rails", git: "https://github.com/ciudadanointeligente/writeit-rails.git", branch: "master"
 gem "mime-types", "~> 2.99" # our writeit gem version is incompatible with newer versions
 gem "recaptcha", require: "recaptcha/rails"
+# Upgrading to version 5.0 of bourbon looks like a fairly big change. So, delaying this
+# See https://www.bourbon.io/docs/migrating-from-v4-to-v5/
+gem "bourbon", "~> 4.0"
 
 group :test do
   gem "capybara"
