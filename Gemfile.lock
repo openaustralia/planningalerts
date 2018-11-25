@@ -79,9 +79,8 @@ GEM
       multi_json (~> 1.7)
       rest-client
       rgeo-geojson
-    autoprefixer-rails (5.1.8.1)
+    autoprefixer-rails (9.3.1)
       execjs
-      json
     bcrypt (3.1.11)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -187,7 +186,7 @@ GEM
     equalizer (0.0.10)
     erubis (2.7.0)
     eventmachine (1.0.9.1)
-    execjs (2.6.0)
+    execjs (2.7.0)
     factory_girl (4.8.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.8.0)
