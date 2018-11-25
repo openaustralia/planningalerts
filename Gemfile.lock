@@ -535,7 +535,7 @@ GEM
       addressable
     validates_email_format_of (1.6.3)
       i18n
-    vanity (2.2.7)
+    vanity (2.2.10)
       i18n
     vcr (2.9.3)
     warden (1.2.7)
