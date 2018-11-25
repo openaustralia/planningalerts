@@ -78,7 +78,7 @@ group :test do
   gem "factory_girl"
   gem "email_spec", "~> 1.6"
   gem "coveralls", require: false
-  gem "vcr", "~> 2.9"
+  gem "vcr"
   gem "webmock"
   gem "timecop"
   gem "stripe-ruby-mock", "~> 2.3.1", require: "stripe_mock"
