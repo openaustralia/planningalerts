@@ -115,6 +115,6 @@ end
 
 group :production do
   # Javascript runtime (required for precompiling assets in production)
-  gem "therubyracer"
+  gem "mini_racer"
 end
 # rubocop:enable Bundler/OrderedGems

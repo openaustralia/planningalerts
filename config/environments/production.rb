@@ -59,11 +59,6 @@ PlanningalertsApp::Application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.action_controller.asset_host = "http://assets.example.com"
 
-  # Precompile additional assets.
-  # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-  # TODO: Use one JS/CSS asset to reduce HTTP requests
-  config.assets.precompile += %w[print.css ie.css placeholder_polyfill.min.css placeholder_polyfill.jquery.min.combo.js maps.js applications.js atdis.js bar_graph.js stacked_area_chart.js]
-
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = {
