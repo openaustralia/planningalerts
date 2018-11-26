@@ -84,6 +84,7 @@ group :test do
   gem "webmock"
   gem "timecop"
   gem "stripe-ruby-mock", "~> 2.3.1", require: "stripe_mock"
+  gem "rails-controller-testing"
 end
 
 group :development do
