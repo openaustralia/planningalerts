@@ -22,7 +22,7 @@ feature "Admin hides comment" do
     click_button "Update Comment"
 
     expect(page).to have_content("Comment was successfully updated")
-    expect(page).to have_content("Hidden true")
+    expect(page).to have_content("Hidden Yes")
   end
 
   scenario "successfully when writing to councillor feature is enabled" do
@@ -39,7 +39,7 @@ feature "Admin hides comment" do
       click_button "Update Comment"
 
       expect(page).to have_content("Comment was successfully updated")
-      expect(page).to have_content("Hidden true")
+      expect(page).to have_content("Hidden Yes")
     end
   end
 end

@@ -31,7 +31,7 @@ feature "Admin confirms comment for user" do
     click_button "Confirm"
 
     expect(page).to have_content "Comment confirmed and sent"
-    expect(page).to have_content "Confirmed true"
+    expect(page).to have_content "Confirmed Yes"
     expect(page).to have_content "Confirmed At October 10, 2016"
     expect(page).to_not have_button "Confirm"
   end
