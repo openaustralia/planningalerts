@@ -117,7 +117,7 @@ RSpec.configure do |config|
 
   config.include EmailSpec::Helpers
   config.include EmailSpec::Matchers
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include SessionHelpers, type: :feature
   config.include EnvHelpers

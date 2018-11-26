@@ -21,7 +21,7 @@ describe ApiController do
 
     context "user has API access disabled" do
       subject do
-        user = FactoryGirl.create(:user, api_disabled: true)
+        user = FactoryBot.create(:user, api_disabled: true)
         get method, params.merge(key: user.api_key)
       end
       include_examples "not authorised"
@@ -337,18 +337,18 @@ describe ApiController do
     end
 
     context "valid api key is given but no bulk api access" do
-      subject { get :date_scraped, key: FactoryGirl.create(:user).api_key, format: "js", date_scraped: "2015-05-06" }
+      subject { get :date_scraped, key: FactoryBot.create(:user).api_key, format: "js", date_scraped: "2015-05-06" }
 
       it { expect(subject.status).to eq 401 }
       it { expect(subject.body).to eq '{"error":"no bulk api access"}' }
     end
 
     context "valid authentication" do
-      let(:user) { FactoryGirl.create(:user, bulk_api: true) }
+      let(:user) { FactoryBot.create(:user, bulk_api: true) }
       before(:each) do
         VCR.use_cassette("planningalerts", allow_playback_repeats: true) do
-          FactoryGirl.create_list(:application, 5, date_scraped: Time.utc(2015, 5, 5, 12, 0, 0))
-          FactoryGirl.create_list(:application, 5, date_scraped: Time.utc(2015, 5, 6, 12, 0, 0))
+          FactoryBot.create_list(:application, 5, date_scraped: Time.utc(2015, 5, 5, 12, 0, 0))
+          FactoryBot.create_list(:application, 5, date_scraped: Time.utc(2015, 5, 6, 12, 0, 0))
         end
       end
       subject { get :date_scraped, key: user.api_key, format: "js", date_scraped: "2015-05-06" }

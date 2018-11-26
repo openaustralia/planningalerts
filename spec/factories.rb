@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :authority do
     sequence(:full_name) { |n| "Acme Local Planning Authority - #{n}" }
     short_name(&:full_name)

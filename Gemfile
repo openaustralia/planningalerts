@@ -77,7 +77,7 @@ group :test do
   gem "chromedriver-helper"
   gem "selenium-webdriver"
   gem "database_cleaner"
-  gem "factory_girl"
+  gem "factory_bot"
   gem "email_spec", "~> 1.6"
   gem "coveralls", require: false
   gem "vcr"
@@ -112,7 +112,7 @@ end
 
 group :test, :development do
   gem "rspec-rails", "~> 3"
-  gem "factory_girl_rails"
+  gem "factory_bot_rails"
 end
 
 group :production do
