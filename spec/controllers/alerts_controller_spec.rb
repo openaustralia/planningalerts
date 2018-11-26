@@ -12,7 +12,7 @@ describe AlertsController do
       alert = create(:alert)
       expect(Alert).to receive(:find_by!).with(confirm_id: "1234").and_return(alert)
       expect(alert).to receive(:confirm!)
-      get :confirmed, resource: "alerts", id: "1234"
+      get :confirmed, params: { resource: "alerts", id: "1234" }
     end
 
     it "should set the alert to be confirmed when on an iPhone" do
@@ -20,12 +20,12 @@ describe AlertsController do
       alert = create(:alert)
       expect(Alert).to receive(:find_by!).with(confirm_id: "1234").and_return(alert)
       expect(alert).to receive(:confirm!)
-      get :confirmed, resource: "alerts", id: "1234"
+      get :confirmed, params: { resource: "alerts", id: "1234" }
       expect(response).to be_success
     end
 
     it "should return a 404 when the wrong confirm_id is used" do
-      expect { get :confirmed, resource: "alerts", id: "1111" }.to raise_error ActiveRecord::RecordNotFound
+      expect { get :confirmed, params: { resource: "alerts", id: "1111" } }.to raise_error ActiveRecord::RecordNotFound
     end
   end
 
@@ -33,13 +33,13 @@ describe AlertsController do
     it "should mark the alert as unsubscribed" do
       alert = create :confirmed_alert
 
-      get :unsubscribe, id: alert.confirm_id
+      get :unsubscribe, params: { id: alert.confirm_id }
 
       expect(alert.reload).to be_unsubscribed
     end
 
     it "should allow unsubscribing for non-existent alerts" do
-      get :unsubscribe, id: "1111"
+      get :unsubscribe, params: { id: "1111" }
       expect(response).to be_success
     end
   end
@@ -47,7 +47,7 @@ describe AlertsController do
   describe "#area" do
     it "should 404 if the alert can't be found" do
       expect do
-        get :area, id: "non_existent_id"
+        get :area, params: { id: "non_existent_id" }
       end.to raise_error(ActiveRecord::RecordNotFound)
     end
   end

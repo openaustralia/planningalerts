@@ -19,7 +19,7 @@ describe CommentsController do
     end
 
     subject(:get_authority_comments_per_week) do
-      get(:per_week, authority_id: "blue_mountains", format: :json)
+      get(:per_week, params: { authority_id: "blue_mountains", format: :json })
     end
 
     it { expect(get_authority_comments_per_week).to be_success }

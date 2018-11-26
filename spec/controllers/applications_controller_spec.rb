@@ -22,7 +22,7 @@ describe ApplicationsController do
     describe "error checking on parameters used" do
       it "should not do error checking on the normal html sites" do
         VCR.use_cassette("planningalerts") do
-          get :index, address: "24 Bruce Road Glenbrook", radius: 4000, foo: 200, bar: "fiddle"
+          get :index, params: { address: "24 Bruce Road Glenbrook", radius: 4000, foo: 200, bar: "fiddle" }
         end
         expect(response.code).to eq("200")
       end
@@ -31,7 +31,7 @@ describe ApplicationsController do
     describe "search by authority" do
       it "should give a 404 when an invalid authority_id is used" do
         expect(Authority).to receive(:find_short_name_encoded).with("this_authority_does_not_exist").and_return(nil)
-        expect { get :index, authority_id: "this_authority_does_not_exist" }.to raise_error ActiveRecord::RecordNotFound
+        expect { get :index, params: { authority_id: "this_authority_does_not_exist" } }.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end
@@ -53,7 +53,7 @@ describe ApplicationsController do
       # expectation on final line.
       expect(Application).to receive(:find).with("1").and_return(application)
 
-      get :show, id: 1
+      get :show, params: { id: 1 }
 
       expect(assigns[:application]).to eq application
     end
@@ -62,14 +62,14 @@ describe ApplicationsController do
   describe "#address" do
     it "should set the radius to the supplied parameter" do
       VCR.use_cassette("planningalerts") do
-        get :address, address: "24 Bruce Road Glenbrook", radius: 500
+        get :address, params: { address: "24 Bruce Road Glenbrook", radius: 500 }
       end
       expect(assigns[:radius]).to eq 500.0
     end
 
     it "should set the radius to the default when not supplied" do
       VCR.use_cassette("planningalerts") do
-        get :address, address: "24 Bruce Road Glenbrook"
+        get :address, params: { address: "24 Bruce Road Glenbrook" }
       end
       expect(assigns[:radius]).to eq 2000.0
     end

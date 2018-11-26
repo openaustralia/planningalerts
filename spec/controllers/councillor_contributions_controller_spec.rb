@@ -29,7 +29,7 @@ describe CouncillorContributionsController do
           )
         )
 
-        get :show, authority_id: authority.id, id: 5, format: "csv"
+        get :show, params: { authority_id: authority.id, id: 5, format: "csv" }
 
         response_csv = CSV.parse(response.body)
         expect(response_csv.first).to eql %w[

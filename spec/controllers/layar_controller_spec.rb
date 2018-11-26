@@ -10,7 +10,7 @@ describe LayarController do
     allow(result).to receive(:current_page).and_return(1)
     allow(result).to receive(:total_pages).and_return(2)
     allow(Application).to receive_message_chain(:near, :paginate).and_return(result)
-    get :getpoi, lat: 1.0, lon: 2.0, radius: 3000, pageKey: "2"
+    get :getpoi, params: { lat: 1.0, lon: 2.0, radius: 3000, pageKey: "2" }
     expect(assigns[:applications]).to eq(result)
     expected_layar = {
       "id" => 101, "type" => 1,
