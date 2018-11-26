@@ -5,7 +5,7 @@
 # starting. Investigate and FIX.
 source "https://rubygems.org"
 
-gem "rails", "4.2.7.1"
+gem "rails", "4.2.10"
 # TODO: Version 0.5.x of mysql2 gem doesn't appear to work with this version of rails
 gem "mysql2", "< 0.5"
 
