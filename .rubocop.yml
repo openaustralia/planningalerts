@@ -6,7 +6,9 @@ AllCops:
   Exclude:
       - 'db/migrate/*'
       - 'db/schema.rb'
-      - config/compass.rb
+      - config/*
+      - config/initializers/*
+      - config/environments/*
       - bin/*
 
 # Disabling warnings about line length because it's so common through
