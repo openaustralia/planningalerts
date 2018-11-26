@@ -88,7 +88,6 @@ end
 
 group :development do
   gem "guard"
-  gem "listen", "< 3" # Used by guard. 3.0.0+ includes ruby_dep 1.5.0 which needs Ruby 2.2+
   gem "guard-rspec"
   gem "guard-livereload"
   gem "growl"
