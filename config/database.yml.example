@@ -21,8 +21,11 @@ development:
   database: pa_development
   pool: 5
   username: planningalerts
-  password: 
+  password:
   socket: /var/run/mysqld/mysqld.sock
+  # This setting is only really necessary if using mysql 5.7.5 or later
+  variables:
+    sql_mode: TRADITIONAL
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -34,5 +37,7 @@ test: &TEST
   database: pa_test
   pool: 5
   username: root
-  password: 
+  password:
   socket: /var/run/mysqld/mysqld.sock
+  variables:
+    sql_mode: TRADITIONAL
