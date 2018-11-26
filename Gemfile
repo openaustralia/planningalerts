@@ -41,8 +41,7 @@ gem "thinking-sphinx"
 gem "formtastic"
 gem "validates_email_format_of", "~> 1.6", ">= 1.6.3"
 gem "geocoder"
-# Rails 4 support is a work in progress so requires tracking master
-gem "activeadmin", "~> 1.0.0.pre2"
+gem "activeadmin"
 gem "devise", "~> 4.2.0" # Pin to a particular major version to get deprecation warnings
 gem "rake"
 gem "rack-throttle"
