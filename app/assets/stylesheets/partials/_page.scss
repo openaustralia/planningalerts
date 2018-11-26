@@ -63,7 +63,7 @@ body {
 
     li {
       padding: 0;
-      @include inline-block;
+      display: inline-block;
     }
 
     li.selected a {

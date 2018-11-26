@@ -208,7 +208,7 @@
     li {
       width: 50%;
       text-align: center;
-      @include inline-block;
+      display: inline-block;
       float: left;
       &:last-child {
         border-bottom: 1px solid white;
@@ -236,7 +236,7 @@
     }
     a {
       padding: .5em;
-      @include inline-block;
+      display: inline-block;
     }
   }
   // Several state select buttons. They can fit on 1 line now
@@ -329,7 +329,7 @@
   }
 
   #main, #sidebar {
-    @include inline-block;
+    display: inline-block;
     float: left;
   }
   #main {
@@ -344,7 +344,7 @@
   .news {
     li {
       width: 50%;
-      @include inline-block;
+      display: inline-block;
       float: left;
 
       // Clear left introduces rows
@@ -396,7 +396,7 @@
     li {
       border-bottom: none;
       padding: 0;
-      @include inline-block;
+      display: inline-block;
       float: left;
 
       a {
