@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class Contributor < ActiveRecord::Base
+class Contributor < ApplicationRecord
   has_many :councillor_contributions, dependent: :destroy
 end

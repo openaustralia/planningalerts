@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Stat < ActiveRecord::Base
+class Stat < ApplicationRecord
   def self.applications_sent
     get_value_for_key("applications_sent")
   end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Councillor < ActiveRecord::Base
+class Councillor < ApplicationRecord
   has_many :comments, dependent: :restrict_with_error
   has_many :replies, dependent: :restrict_with_error
   belongs_to :authority

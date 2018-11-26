@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "csv"
-class CouncillorContribution < ActiveRecord::Base
+class CouncillorContribution < ApplicationRecord
   belongs_to :contributor
   belongs_to :authority
   has_many :suggested_councillors, dependent: :destroy, inverse_of: :councillor_contribution

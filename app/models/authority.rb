@@ -20,7 +20,7 @@ class AuthorityLogger < Logger
   end
 end
 
-class Authority < ActiveRecord::Base
+class Authority < ApplicationRecord
   has_many :applications, dependent: :destroy
   has_many :councillors, dependent: :destroy
   has_many :comments, through: :applications

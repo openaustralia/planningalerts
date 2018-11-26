@@ -2,7 +2,7 @@
 
 require "open-uri"
 
-class Application < ActiveRecord::Base
+class Application < ApplicationRecord
   belongs_to :authority
   has_many :comments, dependent: :destroy
   has_many :replies, through: :comments

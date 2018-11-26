@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ApiStatistic < ActiveRecord::Base
+class ApiStatistic < ApplicationRecord
   belongs_to :user
 
   # If you're deploying big database changes you can flip this and commit

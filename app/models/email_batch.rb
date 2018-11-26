@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EmailBatch < ActiveRecord::Base
+class EmailBatch < ApplicationRecord
   scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
 
   def self.total_sent_in_past_week

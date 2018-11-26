@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Donation < ActiveRecord::Base
+class Donation < ApplicationRecord
   # rubocop:disable Rails/HasManyOrHasOneDependent
   has_many :alerts, foreign_key: :email, primary_key: :email
   # rubocop:enable Rails/HasManyOrHasOneDependent

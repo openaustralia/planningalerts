@@ -2,7 +2,7 @@
 
 require "rest-client"
 
-class Comment < ActiveRecord::Base
+class Comment < ApplicationRecord
   belongs_to :application
   belongs_to :councillor
   has_many :reports, dependent: :destroy

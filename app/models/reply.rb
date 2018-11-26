@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Reply < ActiveRecord::Base
+class Reply < ApplicationRecord
   belongs_to :councillor
   belongs_to :comment
 

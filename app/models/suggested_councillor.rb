@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SuggestedCouncillor < ActiveRecord::Base
+class SuggestedCouncillor < ApplicationRecord
   has_one :authority, through: :councillor_contribution
   belongs_to :councillor_contribution
   validates :councillor_contribution, :name, :email, presence: true
