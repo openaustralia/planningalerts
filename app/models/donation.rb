@@ -2,7 +2,7 @@
 
 class Donation < ApplicationRecord
   # rubocop:disable Rails/HasManyOrHasOneDependent
-  has_many :alerts, foreign_key: :email, primary_key: :email
+  has_many :alerts, foreign_key: :email, primary_key: :email, inverse_of: false
   # rubocop:enable Rails/HasManyOrHasOneDependent
   validates :email, uniqueness: true, presence: true
   validate :correct_stripe_plan_id?

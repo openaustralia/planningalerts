@@ -2,7 +2,7 @@ Rails:
   Enabled: true
 
 AllCops:
-  TargetRailsVersion: 4.0
+  TargetRailsVersion: 5.0
   Exclude:
       - 'db/migrate/*'
       - 'db/schema.rb'
