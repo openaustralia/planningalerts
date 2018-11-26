@@ -42,7 +42,7 @@ gem "formtastic"
 gem "validates_email_format_of", "~> 1.6", ">= 1.6.3"
 gem "geocoder"
 gem "activeadmin"
-gem "devise", "~> 4.2.0" # Pin to a particular major version to get deprecation warnings
+gem "devise", "~> 4.2" # Pin to a particular major version to get deprecation warnings
 gem "rake"
 gem "rack-throttle"
 gem "dalli"
