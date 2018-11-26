@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Workaround for ActionController::Caching::Sweeper not getting defined early enough
+require "rails/observers/action_controller/caching/sweeper"
+
 class StandaloneSweeper < ActionController::Caching::Sweeper
   include Rails.application.routes.url_helpers
 
