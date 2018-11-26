@@ -18,7 +18,7 @@ class QueryParamsPresentConstraint
   end
 end
 
-PlanningalertsApp::Application.routes.draw do
+Rails.application.routes.draw do
   constraints subdomain: "api" do
     constraints FormatConstraint.new do
       get "(*path)" => redirect { |p, r| "http://www.#{r.domain(2)}/#{p[:path]}" }

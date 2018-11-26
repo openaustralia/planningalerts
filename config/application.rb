@@ -1,8 +1,6 @@
-# frozen_string_literal: true
+require_relative 'boot'
 
-require File.expand_path("boot", __dir__)
-
-require "rails/all"
+require 'rails/all'
 require "rack/throttle"
 require File.dirname(__FILE__) + "/../lib/api_throttler"
 
