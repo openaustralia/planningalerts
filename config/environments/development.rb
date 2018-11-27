@@ -36,7 +36,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   # Insert livereload js
-  config.middleware.insert_before(Rack::Lock, Rack::LiveReload)
+  config.middleware.insert_before(ActionDispatch::DebugExceptions, Rack::LiveReload)
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
