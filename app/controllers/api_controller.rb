@@ -69,7 +69,7 @@ class ApiController < ApplicationController
       api_render(Application.where(date_scraped: date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
     else
       respond_to do |format|
-        format.js { render json: { error: "invalid date_scraped" }, status: :bad_request, content_type: Mime::JSON }
+        format.js { render json: { error: "invalid date_scraped" }, status: :bad_request, content_type: Mime[:json] }
       end
     end
   end
@@ -95,7 +95,7 @@ class ApiController < ApplicationController
         s = { applications: applications, application_count: apps.count, max_id: max_id }
         j = s.to_json(except: %i[authority_id suburb state postcode distance],
                       include: { authority: { only: [:full_name] } })
-        render json: j, callback: params[:callback], content_type: Mime::JSON
+        render json: j, callback: params[:callback], content_type: Mime[:json]
       end
     end
   end
@@ -159,7 +159,7 @@ class ApiController < ApplicationController
     error_text = "not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"
     respond_to do |format|
       format.js do
-        render json: { error: error_text }, status: :unauthorized, content_type: Mime::JSON
+        render json: { error: error_text }, status: :unauthorized, content_type: Mime[:json]
       end
       format.rss do
         render text: error_text, status: :unauthorized
@@ -172,7 +172,7 @@ class ApiController < ApplicationController
 
     respond_to do |format|
       format.js do
-        render json: { error: "no bulk api access" }, status: :unauthorized, content_type: Mime::JSON
+        render json: { error: "no bulk api access" }, status: :unauthorized, content_type: Mime[:json]
       end
     end
   end
@@ -195,7 +195,7 @@ class ApiController < ApplicationController
       # TODO: Move the template over to using an xml builder
       format.rss do
         render params[:style] == "html" ? "index_html" : "index",
-               format: :rss, layout: false, content_type: Mime::XML
+               format: :rss, layout: false, content_type: Mime[:xml]
       end
       format.js do
         s = if params[:v] == "2"
@@ -205,7 +205,7 @@ class ApiController < ApplicationController
             end
         j = s.to_json(except: %i[authority_id suburb state postcode distance],
                       include: { authority: { only: [:full_name] } })
-        render json: j, callback: params[:callback], content_type: Mime::JSON
+        render json: j, callback: params[:callback], content_type: Mime[:json]
       end
     end
   end

@@ -94,7 +94,7 @@ class ApplicationsController < ApplicationController
 
   def search
     # TODO: Fix this hacky ugliness
-    per_page = request.format == Mime::HTML ? 30 : Application.per_page
+    per_page = request.format == Mime[:html] ? 30 : Application.per_page
 
     @q = params[:q]
     if @q
@@ -106,7 +106,7 @@ class ApplicationsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.rss { render "api/index", format: :rss, layout: false, content_type: Mime::XML }
+      format.rss { render "api/index", format: :rss, layout: false, content_type: Mime[:xml] }
     end
   end
 
@@ -146,7 +146,7 @@ class ApplicationsController < ApplicationController
     @rss = nearby_application_url(params.merge(format: "rss", page: nil))
 
     # TODO: Fix this hacky ugliness
-    per_page = request.format == Mime::HTML ? 30 : Application.per_page
+    per_page = request.format == Mime[:html] ? 30 : Application.per_page
 
     @application = Application.find(params[:id])
     case @sort
@@ -166,7 +166,7 @@ class ApplicationsController < ApplicationController
 
     respond_to do |format|
       format.html { render "nearby" }
-      format.rss { render "api/index", format: :rss, layout: false, content_type: Mime::XML }
+      format.rss { render "api/index", format: :rss, layout: false, content_type: Mime[:xml] }
     end
   end
 end

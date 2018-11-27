@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html
       format.rss
-      format.js { render content_type: Mime::JSON }
+      format.js { render content_type: Mime[:json] }
     end
   end
 
