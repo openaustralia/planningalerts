@@ -30,7 +30,7 @@
         %p
           Your elected councillors can answer your questions
           and represent you in council meetings.
-      = f.collection_radio_buttons(:comment_for, @councillors, :id, :name) do |b|
+      = f.collection_radio_buttons(:comment_for, @councillors, :id, :name, include_hidden: false) do |b|
         = b.radio_button(class: "councillor-select-radio")
         = b.label(class: "councillor-select-label h-card") do
           .councillor-option
