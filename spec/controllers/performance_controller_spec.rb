@@ -16,7 +16,7 @@ describe PerformanceController do
       Timecop.return
     end
 
-    it { expect(get(:alerts, format: :json)).to be_success }
+    it { expect(get(:alerts, format: :json)).to be_successful }
 
     context "when there are active alerts" do
       before do
@@ -83,7 +83,7 @@ describe PerformanceController do
       Timecop.return
     end
 
-    it { expect(get(:comments, format: :json)).to be_success }
+    it { expect(get(:comments, format: :json)).to be_successful }
 
     context "when there are comments" do
       before do

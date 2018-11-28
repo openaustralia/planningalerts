@@ -21,7 +21,7 @@ describe AlertsController do
       expect(Alert).to receive(:find_by!).with(confirm_id: "1234").and_return(alert)
       expect(alert).to receive(:confirm!)
       get :confirmed, params: { resource: "alerts", id: "1234" }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     it "should return a 404 when the wrong confirm_id is used" do
@@ -40,7 +40,7 @@ describe AlertsController do
 
     it "should allow unsubscribing for non-existent alerts" do
       get :unsubscribe, params: { id: "1111" }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

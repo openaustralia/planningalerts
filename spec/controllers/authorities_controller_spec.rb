@@ -8,6 +8,6 @@ describe AuthoritiesController do
   end
 
   describe "#index" do
-    it { expect(get(:index)).to be_success }
+    it { expect(get(:index)).to be_successful }
   end
 end

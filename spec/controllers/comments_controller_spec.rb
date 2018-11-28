@@ -22,7 +22,7 @@ describe CommentsController do
       get(:per_week, params: { authority_id: "blue_mountains", format: :json })
     end
 
-    it { expect(get_authority_comments_per_week).to be_success }
+    it { expect(get_authority_comments_per_week).to be_successful }
 
     context "when the authority has no applications" do
       it "returns an empty Array as json" do

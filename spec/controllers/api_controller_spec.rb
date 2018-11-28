@@ -354,12 +354,12 @@ describe ApiController do
       end
       subject { get :date_scraped, params: { key: user.api_key, format: "js", date_scraped: "2015-05-06" } }
 
-      it { expect(subject).to be_success }
+      it { expect(subject).to be_successful }
       it { expect(JSON.parse(subject.body).count).to eq 5 }
 
       context "invalid date" do
         subject { get :date_scraped, params: { key: user.api_key, format: "js", date_scraped: "foobar" } }
-        it { expect(subject).to_not be_success }
+        it { expect(subject).to_not be_successful }
         it { expect(subject.body).to eq '{"error":"invalid date_scraped"}' }
       end
     end
