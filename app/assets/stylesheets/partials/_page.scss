@@ -252,13 +252,13 @@ hr {
 
 .container {
   .button {
-    @include bourbon-button(simple, $lightest-cool-highlight);
+    @include bourbon-button($lightest-cool-highlight);
     font-weight: normal;
     font-size: 11px;
   }
 
   .button-action {
-    @include bourbon-button(simple, $warm-highlight);
+    @include bourbon-button($warm-highlight);
     font-weight: normal;
   }
 
@@ -285,7 +285,7 @@ hr {
 }
 
 .button-facebook {
-  @include bourbon-button(simple, #4e69a2); // Facebook blue
+  @include bourbon-button(#4e69a2); // Facebook blue
   color: #fff !important;
 
   &:hover,
