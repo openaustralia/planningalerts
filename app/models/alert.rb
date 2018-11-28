@@ -159,14 +159,14 @@ class Alert < ApplicationRecord
                .joins(:comments)
                .where("comments.confirmed_at > ?", cutoff_time)
                .where("comments.confirmed" => true)
-               .where("comments.hidden" => false).uniq
+               .where("comments.hidden" => false).distinct
   end
 
   def applications_with_new_replies
     Application.near([location.lat, location.lng], radius_km, units: :km)
                .joins(:replies)
                .where("replies.received_at > ?", cutoff_time)
-               .uniq
+               .distinct
   end
 
   def new_comments
