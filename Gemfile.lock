@@ -320,7 +320,7 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     mustermann (1.0.3)
-    mysql2 (0.4.10)
+    mysql2 (0.5.2)
     naught (1.1.0)
     nenv (0.3.0)
     net-scp (1.2.1)
@@ -616,7 +616,7 @@ DEPENDENCIES
   mailcatcher
   mime-types (~> 2.99)
   mini_racer
-  mysql2 (< 0.5)
+  mysql2
   newrelic_rpm
   nokogiri
   oj
