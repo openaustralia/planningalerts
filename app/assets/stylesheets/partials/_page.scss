@@ -1,6 +1,7 @@
 @import "compass/utilities/general/min";
 @import "compass/typography/links/hover-link";
 @import "compass/typography/lists/horizontal-list";
+@import "bourbon_deprecated";
 
 body {
   background-color: $content-background;
@@ -251,13 +252,13 @@ hr {
 
 .container {
   .button {
-    @include button(simple, $lightest-cool-highlight);
+    @include bourbon-button(simple, $lightest-cool-highlight);
     font-weight: normal;
     font-size: 11px;
   }
 
   .button-action {
-    @include button(simple, $warm-highlight);
+    @include bourbon-button(simple, $warm-highlight);
     font-weight: normal;
   }
 
@@ -284,7 +285,7 @@ hr {
 }
 
 .button-facebook {
-  @include button(simple, #4e69a2); // Facebook blue
+  @include bourbon-button(simple, #4e69a2); // Facebook blue
   color: #fff !important;
 
   &:hover,

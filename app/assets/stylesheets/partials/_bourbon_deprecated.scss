@@ -1,0 +1,217 @@
+// These are some mixins that have been deprecated in Bourbon 4 and
+// removed in Bourbon 5. This is purely about styling buttons
+// Note that we've changed the name of the mixins by prefixing with "bourbon-"
+
+@mixin bourbon-button ($style: simple, $base-color: #4294f0, $text-size: inherit, $padding: 7px 18px) {
+  // @include _bourbon-deprecate("button");
+
+  @if type-of($style) == string and type-of($base-color) == color {
+    @include bourbon-buttonstyle($style, $base-color, $text-size, $padding);
+  }
+
+  @if type-of($style) == string and type-of($base-color) == number {
+    $padding: $text-size;
+    $text-size: $base-color;
+    $base-color: #4294f0;
+
+    @if $padding == inherit {
+      $padding: 7px 18px;
+    }
+
+    @include bourbon-buttonstyle($style, $base-color, $text-size, $padding);
+  }
+
+  @if type-of($style) == color and type-of($base-color) == color {
+    $base-color: $style;
+    $style: simple;
+    @include bourbon-buttonstyle($style, $base-color, $text-size, $padding);
+  }
+
+  @if type-of($style) == color and type-of($base-color) == number {
+    $padding: $text-size;
+    $text-size: $base-color;
+    $base-color: $style;
+    $style: simple;
+
+    @if $padding == inherit {
+      $padding: 7px 18px;
+    }
+
+    @include bourbon-buttonstyle($style, $base-color, $text-size, $padding);
+  }
+
+  @if type-of($style) == number {
+    $padding: $base-color;
+    $text-size: $style;
+    $base-color: #4294f0;
+    $style: simple;
+
+    @if $padding == #4294f0 {
+      $padding: 7px 18px;
+    }
+
+    @include bourbon-buttonstyle($style, $base-color, $text-size, $padding);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+// Selector Style Button
+@mixin bourbon-buttonstyle($type, $b-color, $t-size, $pad) {
+  // Grayscale button
+  @if $type == simple and $b-color == grayscale($b-color) {
+    @include bourbon-simple($b-color, true, $t-size, $pad);
+  }
+
+  @if $type == shiny and $b-color == grayscale($b-color) {
+    @include shiny($b-color, true, $t-size, $pad);
+  }
+
+  @if $type == pill and $b-color == grayscale($b-color) {
+    @include pill($b-color, true, $t-size, $pad);
+  }
+
+  @if $type == flat and $b-color == grayscale($b-color) {
+    @include flat($b-color, true, $t-size, $pad);
+  }
+
+  // Colored button
+  @if $type == simple {
+    @include bourbon-simple($b-color, false, $t-size, $pad);
+  }
+
+  @else if $type == shiny {
+    @include shiny($b-color, false, $t-size, $pad);
+  }
+
+  @else if $type == pill {
+    @include pill($b-color, false, $t-size, $pad);
+  }
+
+  @else if $type == flat {
+    @include flat($b-color, false, $t-size, $pad);
+  }
+}
+
+// Simple Button
+@mixin bourbon-simple($base-color, $grayscale: false, $textsize: inherit, $padding: 7px 18px) {
+  $color:         hsl(0, 0, 100%);
+  $border:        adjust-color($base-color, $saturation:  9%,  $lightness: -14%);
+  $inset-shadow:  adjust-color($base-color, $saturation: -8%,  $lightness:  15%);
+  $stop-gradient: adjust-color($base-color, $saturation:  9%,  $lightness: -11%);
+  $text-shadow:   adjust-color($base-color, $saturation:  15%, $lightness: -18%);
+
+  @if bourbon-is-light($base-color) {
+    $color:       hsl(0, 0, 20%);
+    $text-shadow: adjust-color($base-color, $saturation: 10%, $lightness: 4%);
+  }
+
+  @if $grayscale == true {
+    $border:        grayscale($border);
+    $inset-shadow:  grayscale($inset-shadow);
+    $stop-gradient: grayscale($stop-gradient);
+    $text-shadow:   grayscale($text-shadow);
+  }
+
+  border: 1px solid $border;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 0 0 $inset-shadow;
+  color: $color;
+  display: inline-block;
+  font-size: $textsize;
+  font-weight: bold;
+  @include bourbon-linear-gradient ($base-color, $stop-gradient);
+  padding: $padding;
+  text-decoration: none;
+  text-shadow: 0 1px 0 $text-shadow;
+  background-clip: padding-box;
+
+  &:hover:not(:disabled) {
+    $base-color-hover:    adjust-color($base-color, $saturation: -4%, $lightness: -5%);
+    $inset-shadow-hover:  adjust-color($base-color, $saturation: -7%, $lightness:  5%);
+    $stop-gradient-hover: adjust-color($base-color, $saturation:  8%, $lightness: -14%);
+
+    @if $grayscale == true {
+      $base-color-hover:    grayscale($base-color-hover);
+      $inset-shadow-hover:  grayscale($inset-shadow-hover);
+      $stop-gradient-hover: grayscale($stop-gradient-hover);
+    }
+
+    @include bourbon-linear-gradient ($base-color-hover, $stop-gradient-hover);
+
+    box-shadow: inset 0 1px 0 0 $inset-shadow-hover;
+    cursor: pointer;
+  }
+
+  &:active:not(:disabled),
+  &:focus:not(:disabled) {
+    $border-active:       adjust-color($base-color, $saturation: 9%, $lightness: -14%);
+    $inset-shadow-active: adjust-color($base-color, $saturation: 7%, $lightness: -17%);
+
+    @if $grayscale == true {
+      $border-active:       grayscale($border-active);
+      $inset-shadow-active: grayscale($inset-shadow-active);
+    }
+
+    border: 1px solid $border-active;
+    box-shadow: inset 0 0 8px 4px $inset-shadow-active, inset 0 0 8px 4px $inset-shadow-active;
+  }
+}
+
+@function bourbon-is-light($hex-color) {
+  // @if $output-bourbon-deprecation-warnings == true {
+  //   @warn "[Bourbon] [Deprecation] `is-light` is deprecated and will be " +
+  //   "removed in 5.0.0.";
+  // }
+
+  $-local-red: red(rgba($hex-color, 1));
+  $-local-green: green(rgba($hex-color, 1));
+  $-local-blue: blue(rgba($hex-color, 1));
+  $-local-lightness: ($-local-red * 0.2126 + $-local-green * 0.7152 + $-local-blue * 0.0722) / 255;
+
+  @return $-local-lightness > 0.6;
+}
+
+@mixin bourbon-linear-gradient($pos, $g1, $g2: null,
+                       $g3: null, $g4: null,
+                       $g5: null, $g6: null,
+                       $g7: null, $g8: null,
+                       $g9: null, $g10: null,
+                       $fallback: null) {
+  //@include _bourbon-deprecate-for-prefixing("linear-gradient");
+
+  // Detect what type of value exists in $pos
+  $pos-type: type-of(nth($pos, 1));
+  $pos-spec: null;
+  $pos-degree: null;
+
+  // If $pos is missing from mixin, reassign vars and add default position
+  @if ($pos-type == color) or (nth($pos, 1) == "transparent")  {
+    $g10: $g9; $g9: $g8; $g8: $g7; $g7: $g6; $g6: $g5;
+    $g5: $g4; $g4: $g3; $g3: $g2; $g2: $g1; $g1: $pos;
+    $pos: null;
+  }
+
+  @if $pos {
+    $positions: _linear-positions-parser($pos);
+    $pos-degree: nth($positions, 1);
+    $pos-spec:   nth($positions, 2);
+  }
+
+  $full: $g1, $g2, $g3, $g4, $g5, $g6, $g7, $g8, $g9, $g10;
+
+  // Set $g1 as the default fallback color
+  $fallback-color: nth($g1, 1);
+
+  // If $fallback is a color use that color as the fallback color
+  @if (type-of($fallback) == color) or ($fallback == "transparent") {
+    $fallback-color: $fallback;
+  }
+
+  background-color: $fallback-color;
+  background-image: -webkit-linear-gradient($pos-degree $full); // Safari 5.1+, Chrome
+  background-image: unquote("linear-gradient(#{$pos-spec}#{$full})");
+}
