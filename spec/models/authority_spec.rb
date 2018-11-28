@@ -302,7 +302,7 @@ describe Authority do
 
         expect(invalid_councillor).to_not be_valid
         expect(invalid_councillor.errors).to include :email
-        expect(invalid_councillor.errors.get(:email)).to eql ["can't be blank"]
+        expect(invalid_councillor.errors[:email]).to eql ["can't be blank"]
       end
     end
   end
