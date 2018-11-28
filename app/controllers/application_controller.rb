@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_active_admin_user!
     authenticate_user!
-    render text: "Not authorised", status: :forbidden unless current_user.admin?
+    render plain: "Not authorised", status: :forbidden unless current_user.admin?
   end
 
   private

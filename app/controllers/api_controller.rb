@@ -118,7 +118,7 @@ class ApiController < ApplicationController
     when "authority"
       redirect_to authority_applications_url(format: "rss", authority_id: Authority.short_name_encoded(params[:authority]))
     else
-      render text: "unexpected value for parameter call. Accepted values: address, point, area and authority"
+      render plain: "unexpected value for parameter call. Accepted values: address, point, area and authority"
     end
   end
 
@@ -147,7 +147,7 @@ class ApiController < ApplicationController
     invalid_parameter_keys = params.keys - valid_parameter_keys
     return if invalid_parameter_keys.empty?
 
-    render text: "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.sort.join(', ')}", status: :bad_request
+    render plain: "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.sort.join(', ')}", status: :bad_request
   end
 
   def require_api_key
@@ -162,7 +162,7 @@ class ApiController < ApplicationController
         render json: { error: error_text }, status: :unauthorized, content_type: Mime[:json]
       end
       format.rss do
-        render text: error_text, status: :unauthorized
+        render plain: error_text, status: :unauthorized
       end
     end
   end

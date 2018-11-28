@@ -5,7 +5,7 @@ require "spec_helper"
 describe ApplicationController do
   controller do
     def index
-      render text: nil
+      render plain: nil
     end
   end
 
