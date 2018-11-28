@@ -277,13 +277,13 @@
 
   // Header's plane banner can be presented fancily
   // We're animating this... :)
-  @include keyframes(gettowed) {
+  @keyframes gettowed {
     from {
-      @include transform-origin(0%);
+      transform-origin: 0%;
       transform: rotate(-0.5deg);
     }
     to {
-      @include transform-origin(0%);
+      transform-origin: 0%;
       transform: rotate(0.5deg);
     }
   }
