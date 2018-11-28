@@ -2,8 +2,8 @@
 
 require "csv"
 class CouncillorContribution < ApplicationRecord
-  belongs_to :contributor
-  belongs_to :authority
+  belongs_to :contributor, optional: true
+  belongs_to :authority, optional: true
   has_many :suggested_councillors, dependent: :destroy, inverse_of: :councillor_contribution
   accepts_nested_attributes_for :suggested_councillors, reject_if: :all_blank
   accepts_nested_attributes_for :contributor, reject_if: :all_blank

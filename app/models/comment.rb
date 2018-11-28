@@ -3,8 +3,9 @@
 require "rest-client"
 
 class Comment < ApplicationRecord
+  # TODO: this doesn't appear to be null: false in the schema though
   belongs_to :application
-  belongs_to :councillor
+  belongs_to :councillor, optional: true
   has_many :reports, dependent: :destroy
   has_many :replies, dependent: :destroy
   validates :name, presence: true

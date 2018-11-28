@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApiStatistic < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
 
   # If you're deploying big database changes you can flip this and commit
   # so that API calls aren't blocked by your migration
