@@ -145,7 +145,15 @@ Rails.application.routes.draw do
 
   get "layar/getpoi" => "layar#getpoi"
 
-  get "/vanity(/:action(/:id(.:format)))", controller: :vanity
+  get '/vanity' =>'vanity#index'
+  get '/vanity/participant/:id' => 'vanity#participant'
+  post '/vanity/complete'
+  post '/vanity/chooses'
+  post '/vanity/reset'
+  post '/vanity/enable'
+  post '/vanity/disable'
+  post '/vanity/add_participant'
+  get '/vanity/image'
 
   resources :donations, only: %i[new create]
 
