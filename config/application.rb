@@ -86,6 +86,9 @@ module PlanningalertsApp
 
     # This was causing exceptions to be thrown on some API calls. Disabling it as it seems not to be needed
     config.action_dispatch.ip_spoofing_check = false
+    # Application configuration can go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded after loading
+    # the framework and any gems in your application.
   end
 end
 
