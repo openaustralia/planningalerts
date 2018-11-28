@@ -280,11 +280,11 @@
   @include keyframes(gettowed) {
     from {
       @include transform-origin(0%);
-      @include transform(rotate(-0.5deg));
+      transform: rotate(-0.5deg);
     }
     to {
       @include transform-origin(0%);
-      @include transform(rotate(0.5deg));
+      transform: rotate(0.5deg);
     }
   }
   #statsbanner {
@@ -293,7 +293,7 @@
     position: absolute;
     top: 2em;
     right: 1em;
-    @include transform(rotate(-1deg));
+    transform: rotate(-1deg);
   }
   #stats {
     background-color: #fff;
