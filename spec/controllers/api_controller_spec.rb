@@ -113,7 +113,7 @@ describe ApiController do
         result = create(:application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
         allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
       end
-      xhr :get, :postcode, key: user.api_key, format: "js", postcode: "2780", callback: "foobar"
+      get :postcode, params: { key: user.api_key, format: "js", postcode: "2780", callback: "foobar" }, xhr: true
       expect(response.body[0..10]).to eq("/**/foobar(")
       expect(response.body[-1..-1]).to eq(")")
       expect(JSON.parse(response.body[11..-2])).to eq(
