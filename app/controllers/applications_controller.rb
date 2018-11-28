@@ -84,7 +84,7 @@ class ApplicationsController < ApplicationController
                 .joins(:comments)
                 .group("applications.id")
                 .merge(Comment.visible)
-                .reorder("count(comments.id) DESC")
+                .reorder(Arel.sql("count(comments.id) DESC"))
                 .with_visible_comments_count
                 .limit(4)
     @set_focus_control = "q"
