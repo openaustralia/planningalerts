@@ -5,7 +5,7 @@
 # starting. Investigate and FIX.
 source "https://rubygems.org"
 
-gem "rails", "5.1.6.1"
+gem "rails", "5.2.1.1"
 gem "mysql2"
 
 # Allow us to use `caches_page`
