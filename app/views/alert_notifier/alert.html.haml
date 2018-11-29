@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %style= PlanningalertsApp::Application.assets["email.css"].to_s.html_safe
+    %style= Rails.application.assets_manifest.find_sources("email.css").first.to_s.html_safe
 
   %body
     = render "header"
