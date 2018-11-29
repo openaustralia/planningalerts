@@ -345,6 +345,7 @@ GEM
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    oj (3.7.4)
     orm_adapter (0.5.0)
     parallel (1.12.1)
     parser (2.5.3.0)
@@ -620,6 +621,7 @@ DEPENDENCIES
   mysql2
   newrelic_rpm
   nokogiri
+  oj
   rabl
   rack-livereload
   rack-throttle

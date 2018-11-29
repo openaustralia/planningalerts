@@ -104,6 +104,10 @@ gem "nokogiri"
 # For making forms a little easier
 gem "formtastic"
 
+# Speed up json parsing
+# TODO: Double check where this is being used
+gem "oj"
+
 group :test do
   gem "capybara"
   gem "chromedriver-helper"
