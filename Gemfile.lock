@@ -92,8 +92,6 @@ GEM
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
-    binding_of_caller (0.8.0)
-      debug_inspector (>= 0.0.1)
     bootsnap (1.3.2)
       msgpack (~> 1.0)
     bourbon (4.3.4)
@@ -162,7 +160,6 @@ GEM
     dalli (2.7.9)
     dante (0.2.0)
     database_cleaner (1.7.0)
-    debug_inspector (0.0.3)
     delayed_job (4.1.5)
       activesupport (>= 3.0, < 5.3)
     delayed_job_active_record (4.1.3)
@@ -348,7 +345,6 @@ GEM
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    oj (3.7.1)
     orm_adapter (0.5.0)
     parallel (1.12.1)
     parser (2.5.3.0)
@@ -417,7 +413,6 @@ GEM
     recaptcha (4.13.0)
       json
     redcarpet (3.4.0)
-    refills (0.2.0)
     regexp_parser (1.3.0)
     require_all (2.0.0)
     responders (2.4.0)
@@ -588,18 +583,15 @@ DEPENDENCIES
   atdis
   autoprefixer-rails
   better_errors
-  binding_of_caller
   bootsnap
   bourbon (~> 4.0)
   capistrano
   capybara
   chromedriver-helper
   climate_control
-  coffee-rails
   compass-blueprint
   compass-rails
   coveralls
-  daemons
   dalli
   database_cleaner
   delayed_job_active_record
@@ -630,7 +622,6 @@ DEPENDENCIES
   mysql2
   newrelic_rpm
   nokogiri
-  oj
   rabl
   rack-livereload
   rack-throttle
@@ -644,7 +635,7 @@ DEPENDENCIES
   rb-inotify
   recaptcha
   redcarpet
-  refills
+  rest-client
   rspec-activemodel-mocks
   rspec-rails (~> 3)
   rubocop
