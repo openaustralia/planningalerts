@@ -16,7 +16,9 @@ class AuthorityLogger < Logger
     e = @authority.last_scraper_run_log + progname + "\n"
     return if e.size >= 5000
 
-    @authority.update(last_scraper_run_log: e)
+    # We want this log to be written even if the rest of the authority
+    # object doesn't validate
+    Authority.update(@authority.id, last_scraper_run_log: e)
   end
 end
 
