@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
-# rubocop:disable Bundler/OrderedGems
-# Disabling because changing the order is stopping the server from
-# starting. Investigate and FIX.
 source "https://rubygems.org"
 
-gem "rails", "5.2.1.1"
-gem "mysql2"
 gem "bootsnap", require: false
+gem "mysql2"
+gem "rails", "5.2.1.1"
 gem "rake"
 
 # Caching
@@ -17,8 +14,8 @@ gem "actionpack-page_caching"
 gem "rails-observers"
 
 # API
-gem "rack-throttle"
 gem "dalli"
+gem "rack-throttle"
 
 # A/B testing
 gem "vanity"
@@ -30,9 +27,9 @@ gem "activeadmin"
 gem "devise", "~> 4.2" # Pin to a particular major version to get deprecation warnings
 
 # To handle different kinds of view templates
-gem "redcarpet"
 gem "haml"
 gem "rabl"
+gem "redcarpet"
 
 # Donations
 gem "stripe", "~> 1.57"
@@ -58,35 +55,35 @@ gem "geokit"
 gem "geocoder"
 
 # CSS related stuff
-gem "compass-rails"
-gem "compass-blueprint"
-gem "sass-rails"
-gem "susy"
+gem "autoprefixer-rails"
 # Upgrading to version 5.0 of bourbon looks like a fairly big change. So, delaying this
 # See https://www.bourbon.io/docs/migrating-from-v4-to-v5/
 gem "bourbon", "~> 4.0"
-gem "autoprefixer-rails"
+gem "compass-blueprint"
+gem "compass-rails"
+gem "sass-rails"
+gem "susy"
 
 # Javascript stuff
 gem "jquery-rails"
 gem "jquery-ui-rails"
 
 # Sanitizing and manipulating user input
-gem "sanitize"
 gem "rails_autolink"
 # TODO: move to new Rails santizer, this will be depreciated in Rails 5
 #       see http://edgeguides.rubyonrails.org/4_2_release_notes.html#html-sanitizer
 gem "rails-deprecated_sanitizer"
+gem "sanitize"
 
 # Startup setup and environment
-gem "foreman"
 gem "dotenv-rails"
+gem "foreman"
 
 # Councillors
 gem "everypolitician-popolo", git: "https://github.com/everypolitician/everypolitician-popolo.git", branch: "master"
+gem "mime-types", "~> 2.99" # our writeit gem version is incompatible with newer versions
 # Using master until an updated version of the Gem is released https://github.com/ciudadanointeligente/writeit-rails/issues/4
 gem "writeit-rails", git: "https://github.com/ciudadanointeligente/writeit-rails.git", branch: "master"
-gem "mime-types", "~> 2.99" # our writeit gem version is incompatible with newer versions
 
 # Figure out who is likely to be human
 gem "recaptcha", require: "recaptcha/rails"
@@ -110,35 +107,35 @@ gem "formtastic"
 group :test do
   gem "capybara"
   gem "chromedriver-helper"
-  gem "selenium-webdriver"
-  gem "database_cleaner"
-  gem "factory_bot"
-  gem "email_spec", "~> 1.6"
+  gem "climate_control"
   gem "coveralls", require: false
-  gem "vcr"
-  gem "webmock"
-  gem "timecop"
-  gem "stripe-ruby-mock", "~> 2.3.1", require: "stripe_mock"
+  gem "database_cleaner"
+  gem "email_spec", "~> 1.6"
+  gem "factory_bot"
+  gem "factory_bot_rails"
   gem "rails-controller-testing"
   gem "rspec-rails", "~> 3"
-  gem "factory_bot_rails"
+  gem "selenium-webdriver"
+  gem "stripe-ruby-mock", "~> 2.3.1", require: "stripe_mock"
+  gem "timecop"
+  gem "vcr"
+  gem "webmock"
   # FIXME: stop using `mock_model` and remove this
   gem "rspec-activemodel-mocks"
-  gem "climate_control"
 end
 
 group :development do
   # For guard and associated bits
+  gem "growl"
   gem "guard"
   gem "guard-livereload"
   gem "guard-rspec"
   gem "guard-rubocop"
-  gem "rb-inotify", require: false
-  gem "growl"
+  gem "rack-livereload"
   gem "rb-fsevent"
+  gem "rb-inotify", require: false
   gem "spring"
   gem "spring-commands-rspec"
-  gem "rack-livereload"
 
   # For seeing emails in development
   gem "mailcatcher"
@@ -160,4 +157,3 @@ group :production do
   gem "newrelic_rpm"
   gem "uglifier"
 end
-# # rubocop:enable Bundler/OrderedGems
