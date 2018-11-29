@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %style= Rails.application.assets_manifest.find_sources("email.css").first.to_s.html_safe
+    %style= Sprockets::Railtie.build_environment(Rails.application, true)["email.css"].to_s
 
   %body
     = render "header"
