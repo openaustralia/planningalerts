@@ -147,7 +147,6 @@ group :development do
   gem "better_errors"
 
   # For deployment
-  gem "rvm-capistrano"
   gem "capistrano"
 
   # Help with code quality
