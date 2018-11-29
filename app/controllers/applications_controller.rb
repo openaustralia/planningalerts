@@ -134,6 +134,7 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  # TODO: Remove pagination completely (because it's currently unused)
   def nearby
     # First check if there is a redirect
     redirect = ApplicationRedirect.find_by(application_id: params[:id])
@@ -143,7 +144,7 @@ class ApplicationsController < ApplicationController
     end
 
     @sort = params[:sort]
-    @rss = nearby_application_url(params.merge(format: "rss", page: nil))
+    @rss = nearby_application_url(params.permit(%i[id sort page]).merge(format: "rss", page: nil))
 
     # TODO: Fix this hacky ugliness
     per_page = request.format == Mime[:html] ? 30 : Application.per_page
