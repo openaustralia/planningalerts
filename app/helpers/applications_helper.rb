@@ -100,11 +100,7 @@ module ApplicationsHelper
     size = options[:size] || "350x200"
     google_signed_url(
       "https://maps.googleapis.com",
-      "/maps/api/staticmap",
-      maptype: "roadmap",
-      markers: "color:red|#{lat},#{lng}",
-      size: size,
-      zoom: zoom
+      "/maps/api/staticmap?zoom=#{zoom}&size=#{size}&maptype=roadmap&markers=color:red%7C#{lat},#{lng}"
     )
   end
 
@@ -113,10 +109,7 @@ module ApplicationsHelper
     fov = options[:fov] || 90
     google_signed_url(
       "https://maps.googleapis.com",
-      "/maps/api/streetview",
-      fov: fov,
-      location: "#{application.lat},#{application.lng}",
-      size: size
+      "/maps/api/streetview?size=#{size}&location=#{application.lat},#{application.lng}&fov=#{fov}"
     )
   end
 
@@ -127,40 +120,30 @@ module ApplicationsHelper
 
   private
 
-  def google_signed_url(domain, path, query)
+  def google_signed_url(domain, path)
     client_id = ENV["GOOGLE_MAPS_CLIENT_ID"]
     google_maps_key = ENV["GOOGLE_MAPS_API_KEY"]
     cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
-    if client_id.present? || google_maps_key.present?
-      query_with_key = if client_id.present?
-                         query.merge(client: client_id)
-                       else
-                         query.merge(key: google_maps_key)
-                       end
-      p = path + "?" + query_with_key.to_query
-      signature = sign_gmap_bus_api_url(p, cryptographic_key)
-      # We want to make the signature that the signature appears on the
-      # end of path and query exactly in the form it was signed. That's why
-      # we're concatenating strings here
-      # rubocop:disable Rails/OutputSafety
-      (domain + p + "&signature=#{signature}").html_safe
-      # rubocop:enable Rails/OutputSafety
+    if client_id.present?
+      signature = sign_gmap_bus_api_url(path + "&client=#{client_id}", cryptographic_key)
+      (domain + path + "&client=#{client_id}&signature=#{signature}").html_safe
+    elsif google_maps_key.present?
+      signature = sign_gmap_bus_api_url(path + "&key=#{google_maps_key}", cryptographic_key)
+      (domain + path + "&key=#{google_maps_key}&signature=#{signature}").html_safe
     else
-      # rubocop:disable Rails/OutputSafety
-      (domain + path + "?" + query.to_query).html_safe
-      # rubocop:enable Rails/OutputSafety
+      (domain + path).html_safe
     end
   end
 
   # This code comes from Googles Examples
   # http://gmaps-samples.googlecode.com/svn/trunk/urlsigning/urlsigner.rb
-  def sign_gmap_bus_api_url(url_to_sign, google_cryptographic_key)
+  def sign_gmap_bus_api_url(urlToSign, google_cryptographic_key)
     # Decode the private key
-    raw_key = Base64.decode64(google_cryptographic_key.tr("-_", "+/"))
+    rawKey = Base64.decode64(google_cryptographic_key.tr('-_', '+/'))
     # create a signature using the private key and the URL
-    raw_signature = OpenSSL::HMAC.digest("sha1", raw_key, url_to_sign)
+    rawSignature = OpenSSL::HMAC.digest('sha1', rawKey, urlToSign)
     # encode the signature into base64 for url use form.
-    Base64.encode64(raw_signature).tr("+/", "-_").delete("\n")
+    Base64.encode64(rawSignature).tr('+/', '-_').gsub(/\n/, '')
   end
 
   def api_host
