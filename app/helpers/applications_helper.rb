@@ -83,7 +83,7 @@ module ApplicationsHelper
   end
 
   def google_static_map(application, options)
-    google_static_map2(options.merge(lat: application.lat, lng: application.lng, label: "Map of #{application.address}"))
+    google_static_map2(options.merge(lat: application.lat, lng: application.lng, label: "Map of #{application.address}")).html_safe
   end
 
   # Version of google_static_map above that isn't tied into the implementation of Application
