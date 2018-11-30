@@ -100,7 +100,7 @@ module ApplicationsHelper
     size = options[:size] || "350x200"
     google_signed_url(
       "https://maps.googleapis.com",
-      "/maps/api/staticmap?zoom=#{zoom}&size=#{size}&maptype=roadmap&markers=color:red%7C#{lat},#{lng}"
+      "/maps/api/staticmap?zoom=#{zoom}&size=#{size}&maptype=roadmap&markers=color%3Ared%7C#{lat}%2C#{lng}"
     )
   end
 
@@ -109,7 +109,7 @@ module ApplicationsHelper
     fov = options[:fov] || 90
     google_signed_url(
       "https://maps.googleapis.com",
-      "/maps/api/streetview?size=#{size}&location=#{application.lat},#{application.lng}&fov=#{fov}"
+      "/maps/api/streetview?size=#{size}&location=#{application.lat}%2C#{application.lng}&fov=#{fov}"
     )
   end
 
