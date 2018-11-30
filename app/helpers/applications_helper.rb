@@ -100,7 +100,7 @@ module ApplicationsHelper
     size = options[:size] || "350x200"
     google_signed_url(
       "https://maps.googleapis.com",
-      "/maps/api/staticmap?zoom=#{zoom}&size=#{size}&maptype=roadmap&markers=color:red|#{lat},#{lng}"
+      "/maps/api/staticmap?zoom=#{zoom}&size=#{size}&maptype=roadmap&markers=color:red%7C#{lat},#{lng}"
     )
   end
 
