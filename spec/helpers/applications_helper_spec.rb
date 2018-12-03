@@ -219,9 +219,6 @@ describe ApplicationsHelper do
         expect(helper.google_static_map(@application, size: "350x200", zoom: 16)).to eq(
           "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?zoom=16&amp;size=350x200&amp;maptype=roadmap&amp;markers=color%3Ared%7C1.0%2C2.0&amp;key=abc&amp;signature=QNmyB4Gy0VfQFP5dLZrsYkodOYU=\" width=\"350\" height=\"200\" />"
         )
-        expect(helper.google_static_map(@application, size: "100x100", zoom: 14)).to eq(
-          "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?zoom=14&amp;size=100x100&amp;maptype=roadmap&amp;markers=color%3Ared%7C1.0%2C2.0&amp;key=abc&amp;signature=tGSgK7ppfCOmdWp66g9faZ5aEIo=\" width=\"100\" height=\"100\" />"
-        )
       end
     end
 
@@ -236,9 +233,6 @@ describe ApplicationsHelper do
       it "should generate a static google streetview image" do
         expect(helper.google_static_streetview(@application, size: "350x200", fov: 90)).to eq(
           "<img alt=\"Streetview of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/streetview?size=350x200&amp;location=1.0%2C2.0&amp;fov=90&amp;key=abc&amp;signature=wyw0bJD0PpG7ZWNRcgr7sfl7KQY=\" width=\"350\" height=\"200\" />"
-        )
-        expect(helper.google_static_streetview(@application, size: "100x100", fov: 60)).to eq(
-          "<img alt=\"Streetview of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/streetview?size=100x100&amp;location=1.0%2C2.0&amp;fov=60&amp;key=abc&amp;signature=gs_ftqMjwNFrdN07SkwmTBn2XvI=\" width=\"100\" height=\"100\" />"
         )
       end
     end
