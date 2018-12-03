@@ -41,6 +41,9 @@ before "deploy:restart", "foreman:restart"
 before "foreman:restart", "foreman:enable"
 before "foreman:enable", "foreman:export"
 
+# Clean up old releases so we don't fill up our disk
+after "deploy:restart", "deploy:cleanup"
+
 namespace :deploy do
   desc "After a code update, we link additional config and the scrapers"
   before "deploy:assets:precompile" do
