@@ -217,7 +217,7 @@ describe ApplicationsHelper do
 
       it "should generate a static google map api image" do
         expect(helper.google_static_map(@application, size: "350x200", zoom: 16)).to eq(
-          "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?zoom=16&amp;size=350x200&amp;maptype=roadmap&amp;markers=color%3Ared%7C1.0%2C2.0&amp;key=abc&amp;signature=QNmyB4Gy0VfQFP5dLZrsYkodOYU=\" width=\"350\" height=\"200\" />"
+          "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?maptype=roadmap&amp;markers=color%3Ared%7C1.0%2C2.0&amp;size=350x200&amp;zoom=16&amp;key=abc&amp;signature=rjrxf9Al-r8DA3EB1eBjyLwv4rY=\" width=\"350\" height=\"200\" />"
         )
       end
     end
@@ -232,7 +232,7 @@ describe ApplicationsHelper do
 
       it "should generate a static google streetview image" do
         expect(helper.google_static_streetview(@application, size: "350x200", fov: 90)).to eq(
-          "<img alt=\"Streetview of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/streetview?size=350x200&amp;location=1.0%2C2.0&amp;fov=90&amp;key=abc&amp;signature=wyw0bJD0PpG7ZWNRcgr7sfl7KQY=\" width=\"350\" height=\"200\" />"
+          "<img alt=\"Streetview of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/streetview?fov=90&amp;location=1.0%2C2.0&amp;size=350x200&amp;key=abc&amp;signature=robaZBVxVTdTnjGjW9FoAjx-1l8=\" width=\"350\" height=\"200\" />"
         )
       end
     end
