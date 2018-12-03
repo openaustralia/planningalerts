@@ -83,7 +83,7 @@ module ApplicationsHelper
   end
 
   def google_static_map(application, options)
-    google_static_map2(options.merge(lat: application.lat, lng: application.lng, label: "Map of #{application.address}")).html_safe
+    google_static_map2(options.merge(lat: application.lat, lng: application.lng, label: "Map of #{application.address}"))
   end
 
   # Version of google_static_map above that isn't tied into the implementation of Application
@@ -137,13 +137,13 @@ module ApplicationsHelper
 
   # This code comes from Googles Examples
   # http://gmaps-samples.googlecode.com/svn/trunk/urlsigning/urlsigner.rb
-  def sign_gmap_bus_api_url(urlToSign, google_cryptographic_key)
+  def sign_gmap_bus_api_url(url_to_sign, google_cryptographic_key)
     # Decode the private key
-    rawKey = Base64.decode64(google_cryptographic_key.tr('-_', '+/'))
+    raw_key = Base64.decode64(google_cryptographic_key.tr("-_", "+/"))
     # create a signature using the private key and the URL
-    rawSignature = OpenSSL::HMAC.digest('sha1', rawKey, urlToSign)
+    raw_signature = OpenSSL::HMAC.digest("sha1", raw_key, url_to_sign)
     # encode the signature into base64 for url use form.
-    Base64.encode64(rawSignature).tr('+/', '-_').gsub(/\n/, '')
+    Base64.encode64(raw_signature).tr("+/", "-_").delete("\n")
   end
 
   def api_host
