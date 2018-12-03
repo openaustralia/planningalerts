@@ -217,10 +217,10 @@ describe ApplicationsHelper do
 
       it "should generate a static google map api image" do
         expect(helper.google_static_map(@application, size: "350x200", zoom: 16)).to eq(
-          "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=350x200&maptype=roadmap&markers=color:red%7C1.0,2.0&key=abc&signature=Hp6oQM_F3SHj7xC349uBBd1y_rk=\" width=\"350\" height=\"200\" />"
+          "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?zoom=16&amp;size=350x200&amp;maptype=roadmap&amp;markers=color%3Ared%7C1.0%2C2.0&amp;key=abc&amp;signature=QNmyB4Gy0VfQFP5dLZrsYkodOYU=\" width=\"350\" height=\"200\" />"
         )
         expect(helper.google_static_map(@application, size: "100x100", zoom: 14)).to eq(
-          "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?zoom=14&size=100x100&maptype=roadmap&markers=color:red%7C1.0,2.0&key=abc&signature=2FFtM7Zw79Ojw6JlSuV01fJGeSU=\" width=\"100\" height=\"100\" />"
+          "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?zoom=14&amp;size=100x100&amp;maptype=roadmap&amp;markers=color%3Ared%7C1.0%2C2.0&amp;key=abc&amp;signature=tGSgK7ppfCOmdWp66g9faZ5aEIo=\" width=\"100\" height=\"100\" />"
         )
       end
     end
