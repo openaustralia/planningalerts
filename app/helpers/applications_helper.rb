@@ -131,12 +131,9 @@ module ApplicationsHelper
     client_id = ENV["GOOGLE_MAPS_CLIENT_ID"]
     google_maps_key = ENV["GOOGLE_MAPS_API_KEY"]
     cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
-    if client_id.present?
-      signed = path + "?" + query.merge(client: client_id).to_query
-      signature = sign_gmap_bus_api_url(signed, cryptographic_key)
-      domain + signed + "&signature=#{signature}"
-    elsif google_maps_key.present?
-      signed = path + "?" + query.merge(key: google_maps_key).to_query
+    if client_id.present? || google_maps_key.present?
+      q = client_id.present? ? { client: client_id } : { key: google_maps_key }
+      signed = path + "?" + query.merge(q).to_query
       signature = sign_gmap_bus_api_url(signed, cryptographic_key)
       domain + signed + "&signature=#{signature}"
     else
