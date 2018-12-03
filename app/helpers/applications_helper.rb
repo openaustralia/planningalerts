@@ -101,12 +101,10 @@ module ApplicationsHelper
     google_signed_url(
       "https://maps.googleapis.com",
       "/maps/api/staticmap",
-      {
-        maptype: "roadmap",
-        markers: "color:red|#{lat},#{lng}",
-        size: size,
-        zoom: zoom
-      }.to_query
+      maptype: "roadmap",
+      markers: "color:red|#{lat},#{lng}",
+      size: size,
+      zoom: zoom
     )
   end
 
@@ -116,11 +114,9 @@ module ApplicationsHelper
     google_signed_url(
       "https://maps.googleapis.com",
       "/maps/api/streetview",
-      {
-        fov: fov,
-        location: "#{application.lat},#{application.lng}",
-        size: size
-      }.to_query
+      fov: fov,
+      location: "#{application.lat},#{application.lng}",
+      size: size
     )
   end
 
@@ -136,15 +132,15 @@ module ApplicationsHelper
     google_maps_key = ENV["GOOGLE_MAPS_API_KEY"]
     cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
     if client_id.present?
-      signed = path + "?" + query + "&client=#{client_id}"
+      signed = path + "?" + query.to_query + "&client=#{client_id}"
       signature = sign_gmap_bus_api_url(signed, cryptographic_key)
       domain + signed + "&signature=#{signature}"
     elsif google_maps_key.present?
-      signed = path + "?" + query + "&key=#{google_maps_key}"
+      signed = path + "?" + query.to_query + "&key=#{google_maps_key}"
       signature = sign_gmap_bus_api_url(signed, cryptographic_key)
       domain + signed + "&signature=#{signature}"
     else
-      domain + path + "?" + query
+      domain + path + "?" + query.to_query
     end
   end
 
