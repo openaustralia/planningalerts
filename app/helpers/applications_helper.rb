@@ -126,12 +126,12 @@ module ApplicationsHelper
     cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
     if client_id.present?
       signature = sign_gmap_bus_api_url(path + "&client=#{client_id}", cryptographic_key)
-      (domain + path + "&client=#{client_id}&signature=#{signature}").html_safe
+      domain + path + "&client=#{client_id}&signature=#{signature}"
     elsif google_maps_key.present?
       signature = sign_gmap_bus_api_url(path + "&key=#{google_maps_key}", cryptographic_key)
-      (domain + path + "&key=#{google_maps_key}&signature=#{signature}").html_safe
+      domain + path + "&key=#{google_maps_key}&signature=#{signature}"
     else
-      (domain + path).html_safe
+      domain + path
     end
   end
 
