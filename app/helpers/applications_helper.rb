@@ -100,7 +100,8 @@ module ApplicationsHelper
     size = options[:size] || "350x200"
     google_signed_url(
       "https://maps.googleapis.com",
-      "/maps/api/staticmap?zoom=#{zoom}&size=#{size}&maptype=roadmap&markers=color%3Ared%7C#{lat}%2C#{lng}"
+      "/maps/api/staticmap",
+      "zoom=#{zoom}&size=#{size}&maptype=roadmap&markers=color%3Ared%7C#{lat}%2C#{lng}"
     )
   end
 
@@ -109,7 +110,8 @@ module ApplicationsHelper
     fov = options[:fov] || 90
     google_signed_url(
       "https://maps.googleapis.com",
-      "/maps/api/streetview?size=#{size}&location=#{application.lat}%2C#{application.lng}&fov=#{fov}"
+      "/maps/api/streetview",
+      "size=#{size}&location=#{application.lat}%2C#{application.lng}&fov=#{fov}"
     )
   end
 
@@ -120,18 +122,20 @@ module ApplicationsHelper
 
   private
 
-  def google_signed_url(domain, path)
+  def google_signed_url(domain, path, query)
     client_id = ENV["GOOGLE_MAPS_CLIENT_ID"]
     google_maps_key = ENV["GOOGLE_MAPS_API_KEY"]
     cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
     if client_id.present?
-      signature = sign_gmap_bus_api_url(path + "&client=#{client_id}", cryptographic_key)
-      domain + path + "&client=#{client_id}&signature=#{signature}"
+      signed = path + "?" + query + "&client=#{client_id}"
+      signature = sign_gmap_bus_api_url(signed, cryptographic_key)
+      domain + signed + "&signature=#{signature}"
     elsif google_maps_key.present?
-      signature = sign_gmap_bus_api_url(path + "&key=#{google_maps_key}", cryptographic_key)
-      domain + path + "&key=#{google_maps_key}&signature=#{signature}"
+      signed = path + "?" + query + "&key=#{google_maps_key}"
+      signature = sign_gmap_bus_api_url(signed, cryptographic_key)
+      domain + signed + "&signature=#{signature}"
     else
-      domain + path
+      domain + path + "?" + query
     end
   end
 
