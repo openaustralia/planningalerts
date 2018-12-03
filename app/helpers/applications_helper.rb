@@ -101,10 +101,12 @@ module ApplicationsHelper
     google_signed_url(
       "https://maps.googleapis.com",
       "/maps/api/staticmap",
-      "maptype=roadmap&" +
-      "markers=color%3Ared%7C#{lat}%2C#{lng}&" +
-      "size=#{size}&" +
-      "zoom=#{zoom}"
+      {
+        maptype: "roadmap",
+        markers: "color:red|#{lat},#{lng}",
+        size: size,
+        zoom: zoom
+      }.to_query
     )
   end
 
@@ -114,9 +116,11 @@ module ApplicationsHelper
     google_signed_url(
       "https://maps.googleapis.com",
       "/maps/api/streetview",
-      "fov=#{fov}&" +
-      "location=#{application.lat}%2C#{application.lng}&" +
-      "size=#{size}"
+      {
+        fov: fov,
+        location: "#{application.lat},#{application.lng}",
+        size: size
+      }.to_query
     )
   end
 
