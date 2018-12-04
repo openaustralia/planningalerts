@@ -40,9 +40,6 @@ Rails.application.routes.draw do
   get "api" => "api#old_index", as: :api_old_index
 
   resources :alerts, only: %i[new create], path_names: { new: "signup" } do
-    collection do
-      get :widget_prototype
-    end
     member do
       get :confirmed
       get :area

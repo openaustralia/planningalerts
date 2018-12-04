@@ -3,11 +3,6 @@
 class AlertsController < ApplicationController
   caches_page :statistics
 
-  def widget_prototype
-    @alert = Alert.new(address: params[:address], email: params[:email])
-    @set_focus_control = params[:address] ? "alert_email" : "alert_address"
-  end
-
   def new
     @alert = Alert.new(address: params[:address], email: params[:email])
     @set_focus_control = params[:address] ? "alert_email" : "alert_address"
