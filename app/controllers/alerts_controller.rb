@@ -55,7 +55,6 @@ class AlertsController < ApplicationController
     # Hmmm... Temporary variable because we're calling a very slow method. Not good.
     # @alerts_in_inactive_areas = Alert.alerts_in_inactive_areas
     # @no_alerts_in_active_areas = @no_alerts - @alerts_in_inactive_areas.count
-    # @freq = Alert.distribution_of_lgas(@alerts_in_inactive_areas)
   end
 
   private
