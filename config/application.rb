@@ -24,7 +24,7 @@ module PlanningalertsApp
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
-    config.active_record.observers = :application_sweeper, :alert_sweeper, :authority_sweeper, :stat_sweeper
+    config.active_record.observers = :application_sweeper, :authority_sweeper, :stat_sweeper
 
     # active job queue adapter (available from rails 4.2)
     config.active_job.queue_adapter = :delayed_job
