@@ -11,7 +11,7 @@
     - if with_navigation
       .hide= link_to "Skip navigation", "#content"
       #menu
-        = image_tag "menu.png", size: "30x30", class: "toggle"
+        = image_tag "menu.png", size: "50x50", class: "toggle", alt: "Toggle menu"
         %ul.collapse.hidden
           = li_selected(controller: "/applications", action: "address") do
             = link_to "Search", address_applications_path
