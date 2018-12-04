@@ -14,10 +14,10 @@
   - if rss
     %link{ rel: "alternate", type: "application/rss+xml", title: "RSS", href: rss }
 
-  = stylesheet_link_tag "application.css", media: "screen, projection"
+  = stylesheet_link_tag "application.css", media: "screen"
   = stylesheet_link_tag "print.css", media: "print"
   /[if IE]
-    = stylesheet_link_tag "ie.css", media: "screen, projection"
+    = stylesheet_link_tag "ie.css", media: "screen"
 
   -#
     Can't move jquery out of the header because we have inlined javascript in some of the pages
