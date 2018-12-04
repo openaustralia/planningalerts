@@ -2,12 +2,12 @@
   %fieldset.amount-setter
     %label
       %span.amount-setter-label-text Choose your contribution
-      .amount-setter-container
-        .amount-setter-input
-          %i &#36;
-          -# TODO: Add more helpful restrictions on input to make this as easy as possible
-          = number_field_tag :amount, price, required: "required", min: 1, title: "Enter the number of dollars you’d like to donate monthly"
-        %span Per month
+    .amount-setter-container
+      .amount-setter-input
+        %i &#36;
+        -# TODO: Add more helpful restrictions on input to make this as easy as possible
+        = number_field_tag :amount, price, required: "required", min: 1, title: "Enter the number of dollars you’d like to donate monthly"
+      %span Per month
   %div= render partial: "stripe_button", locals: { email: email, price: price }
   %p.quiet.small
     Donations over $2 are
