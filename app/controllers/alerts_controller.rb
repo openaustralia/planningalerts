@@ -53,8 +53,6 @@ class AlertsController < ApplicationController
     # @no_confirmed_alerts = Alert.confirmed.count
     # @no_alerts = Alert.count
     # Hmmm... Temporary variable because we're calling a very slow method. Not good.
-    # @alerts_in_inactive_areas = Alert.alerts_in_inactive_areas
-    # @no_alerts_in_active_areas = @no_alerts - @alerts_in_inactive_areas.count
   end
 
   private

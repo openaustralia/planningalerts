@@ -35,30 +35,6 @@ class Alert < ApplicationRecord
     end
   end
 
-  def self.alerts_in_inactive_areas
-    # find(:all).find_all{|a| a.in_inactive_area?}
-    radius = 2
-    c = Math.cos(radius / GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
-    s = Math.sin(radius / GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
-    multiplier = GeoKit::Mappable::EARTH_RADIUS_IN_KMS
-    command =
-      %|
-        SELECT * FROM `alerts` WHERE NOT EXISTS (
-          SELECT * FROM `applications` WHERE (
-            lat > DEGREES(ASIN(SIN(RADIANS(alerts.lat))*#{c} - COS(RADIANS(alerts.lat))*#{s}))
-            AND lat < DEGREES(ASIN(SIN(RADIANS(alerts.lat))*#{c} + COS(RADIANS(alerts.lat))*#{s}))
-            AND lng > alerts.lng - DEGREES(ATAN2(#{s}, #{c} * COS(RADIANS(alerts.lat))))
-            AND lng < alerts.lng + DEGREES(ATAN2(#{s}, #{c} * COS(RADIANS(alerts.lat))))
-            AND (ACOS(least(1,COS(RADIANS(alerts.lat))*COS(RADIANS(alerts.lng))*COS(RADIANS(lat))*COS(RADIANS(lng))+
-              COS(RADIANS(alerts.lat))*SIN(RADIANS(alerts.lng))*COS(RADIANS(lat))*SIN(RADIANS(lng))+
-              SIN(RADIANS(alerts.lat))*SIN(RADIANS(lat))))*#{multiplier})
-              <= #{radius}
-          ) LIMIT 1
-        )
-      |
-    Alert.find_by_sql(command)
-  end
-
   def self.count_of_new_unique_email_created_on_date(date)
     alerts = where(confirmed: true).where("date(created_at) = ?", date).group(:email)
 
