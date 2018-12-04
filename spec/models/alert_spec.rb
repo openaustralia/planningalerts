@@ -481,24 +481,6 @@ describe Alert do
     end
   end
 
-  describe "lga_name" do
-    it "should return the local government authority name" do
-      expect(Geo2gov).to receive(:new).with(1.0, 2.0).and_return(double(lga_name: "Blue Mountains"))
-
-      alert = create(:alert, lat: 1.0, lng: 2.0, email: "foo@bar.com", radius_meters: 200, address: "")
-      expect(alert.lga_name).to eq("Blue Mountains")
-    end
-
-    it "should cache the value in the database" do
-      expect(Geo2gov).to receive(:new).once.with(1.0, 2.0).and_return(double(lga_name: "Blue Mountains"))
-
-      alert = create(:alert, id: 1, lat: 1.0, lng: 2.0, email: "foo@bar.com", radius_meters: 200, address: "")
-      expect(alert.lga_name).to eq("Blue Mountains")
-
-      expect(Alert.first.lga_name).to eq("Blue Mountains")
-    end
-  end
-
   describe "#new_comments" do
     let(:alert) { create(:alert, address: address, radius_meters: 2000) }
     let(:p1) { alert.location.endpoint(0, 501) } # 501 m north of alert

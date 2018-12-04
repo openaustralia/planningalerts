@@ -93,19 +93,6 @@ class Alert < ApplicationRecord
     @address_for_placeholder || "1 Sowerby St, Goulburn, NSW 2580"
   end
 
-  # Name of the local government authority
-  def lga_name
-    # Cache value
-    lga_name = self[:lga_name]
-    unless lga_name
-      lga_name = Geo2gov.new(lat, lng).lga_name
-      self[:lga_name] = lga_name
-      # TODO: Kind of wrong to do a save! here in what appears to the outside world like a simple accessor method
-      save!
-    end
-    lga_name
-  end
-
   # Pass an array of objects. Count the distribution of objects and return as a hash of object: :count
   def self.frequency_distribution(array)
     freq = {}
