@@ -41,7 +41,6 @@ Rails.application.routes.draw do
 
   resources :alerts, only: %i[new create], path_names: { new: "signup" } do
     collection do
-      get :statistics
       get :widget_prototype
     end
     member do

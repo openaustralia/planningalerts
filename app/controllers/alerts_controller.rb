@@ -48,13 +48,6 @@ class AlertsController < ApplicationController
     end
   end
 
-  def statistics
-    # Commented out because this page is killing mysql.
-    # @no_confirmed_alerts = Alert.confirmed.count
-    # @no_alerts = Alert.count
-    # Hmmm... Temporary variable because we're calling a very slow method. Not good.
-  end
-
   private
 
   def zone_sizes
