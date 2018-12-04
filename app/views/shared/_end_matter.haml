@@ -4,8 +4,8 @@
     document.getElementById('#{@set_focus_control}').focus();
 - if with_maps_scripts
   - if ENV["GOOGLE_MAPS_CLIENT_ID"].present?
-    %script{ src: "https://maps.googleapis.com/maps/api/js?client=#{ENV['GOOGLE_MAPS_CLIENT_ID']}&v=3&libraries=places&region=au", type: "text/javascript" }
+    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?client=#{ENV['GOOGLE_MAPS_CLIENT_ID']}&v=3&libraries=places&region=au"
   - else
-    %script{ src: "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&v=3&libraries=places&region=au", type: "text/javascript" }
+    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&v=3&libraries=places&region=au"
 = javascript_include_tag "application"
 = vanity_js
