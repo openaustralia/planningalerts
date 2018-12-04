@@ -19,9 +19,6 @@
   /[if IE]
     = stylesheet_link_tag "ie.css", media: "screen, projection"
 
-  %style{ type: "text/css" }
-    v:* { behavior:url(#default#VML);}
-
   -#
     Can't move jquery out of the header because we have inlined javascript in some of the pages
     that use jquery. Ugh.
