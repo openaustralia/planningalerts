@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_04_183128) do
+ActiveRecord::Schema.define(version: 2018_12_05_224257) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 2018_12_04_183128) do
     t.string "morph_name"
     t.boolean "write_to_councillors_enabled", default: false, null: false
     t.string "website_url"
+    t.integer "population_2017"
     t.index ["short_name"], name: "short_name_unique", unique: true
   end
 
