@@ -69,7 +69,7 @@
 - if @application.location
   :javascript
     $(document).ready(function(){
-      initialiseMaps(#{@application.lat}, #{@application.lng}, "#{escape_javascript(@application.address)}");
+      initialiseMapAndPano(#{@application.lat}, #{@application.lng}, "#{escape_javascript(@application.address)}");
     })
 
 = javascript_include_tag "maps"

@@ -2,7 +2,12 @@
 //= require mxn.core.js
 //= require mxn.googlev3.core.js
 
-function initialiseMaps(latitude, longitude, address) {
+function initialiseMapAndPano(latitude, longitude, address) {
+  initialiseMap(latitude, longitude, address);
+  initialisePano(latitude, longitude);
+}
+
+function initialiseMap(latitude, longitude, address) {
   var map = new mxn.Mapstraction("map_div","googlev3");
   point = new mxn.LatLonPoint(latitude, longitude);
   map.setCenterAndZoom(point,16);
@@ -11,7 +16,9 @@ function initialiseMaps(latitude, longitude, address) {
   marker = new mxn.Marker(point)
   marker.setLabel(address);
   map.addMarker(marker);
+}
 
+function initialisePano(latitude, longitude) {
   // Can't yet figure out how to make the POV point at the marker
   var pointToLookAt = new google.maps.LatLng(latitude, longitude);
   var myPano = new  google.maps.StreetViewPanorama(document.getElementById("pano"),
