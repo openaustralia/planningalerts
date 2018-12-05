@@ -52,18 +52,6 @@ class Authority < ApplicationRecord
     22323933
   end
 
-  def self.nsw_total_population_2011
-    7211468
-  end
-
-  def self.nsw_total_population_covered_by_all_active_authorities
-    sum = 0
-    Authority.where(state: "NSW").active.each do |a|
-      sum += a.population_2011 if a.population_2011
-    end
-    sum
-  end
-
   def self.total_population_covered_by_all_active_authorities
     sum = 0
     Authority.active.each do |a|
@@ -74,10 +62,6 @@ class Authority < ApplicationRecord
 
   def self.percentage_population_covered_by_all_active_authorities
     (total_population_covered_by_all_active_authorities.to_f / total_population_2011) * 100
-  end
-
-  def self.nsw_percentage_population_covered_by_all_active_authorities
-    (nsw_total_population_covered_by_all_active_authorities.to_f / nsw_total_population_2011) * 100
   end
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
