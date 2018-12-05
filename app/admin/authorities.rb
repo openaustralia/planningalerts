@@ -31,6 +31,7 @@ ActiveAdmin.register Authority do
       row :website_url
       row :write_to_councillors_enabled
       row :population_2011
+      row :population_2017
       row :morph_name
       row :disabled
     end
@@ -76,6 +77,7 @@ ActiveAdmin.register Authority do
       input :email
       input :website_url
       input :population_2011
+      input :population_2017
       input :write_to_councillors_enabled
     end
     inputs "Scraping" do
@@ -115,10 +117,11 @@ ActiveAdmin.register Authority do
     column :state
     column :email
     column :population_2011
+    column :population_2017
     column :morph_name
     column(:number_of_applications) { |a| a.applications.count }
     column(:number_of_comments) { |a| a.comments.count }
   end
 
-  permit_params :full_name, :short_name, :state, :email, :website_url, :write_to_councillors_enabled, :population_2011, :morph_name, :disabled
+  permit_params :full_name, :short_name, :state, :email, :website_url, :write_to_councillors_enabled, :population_2011, :population_2017, :morph_name, :disabled
 end
