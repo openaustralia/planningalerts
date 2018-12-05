@@ -33,12 +33,12 @@ ActiveRecord::Schema.define(version: 2018_12_04_183128) do
     t.index ["email"], name: "index_alert_subscribers_on_email", unique: true
   end
 
-  create_table "alerts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "alerts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", limit: 120, null: false
     t.string "address", limit: 120, null: false
     t.datetime "last_sent"
-    t.float "lat", null: false
-    t.float "lng", null: false
+    t.float "lat", limit: 53, null: false
+    t.float "lng", limit: 53, null: false
     t.string "confirm_id", limit: 20
     t.boolean "confirmed", default: false, null: false
     t.integer "radius_meters", null: false
@@ -70,16 +70,16 @@ ActiveRecord::Schema.define(version: 2018_12_04_183128) do
     t.index ["application_id"], name: "index_application_redirects_on_application_id"
   end
 
-  create_table "applications", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "applications", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "council_reference", limit: 50, null: false
     t.text "address", null: false
     t.text "description"
     t.string "info_url", limit: 1024
     t.string "comment_url", limit: 1024
     t.integer "authority_id", null: false
-    t.float "lat"
-    t.float "lng"
-    t.datetime "date_scraped", null: false
+    t.float "lat", limit: 53
+    t.float "lng", limit: 53
+    t.timestamp "date_scraped", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.date "date_received"
     t.string "suburb", limit: 50
     t.string "state", limit: 10
@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 2018_12_04_183128) do
     t.index ["suburb"], name: "index_applications_on_suburb"
   end
 
-  create_table "authorities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "authorities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "full_name", limit: 200, null: false
     t.string "short_name", limit: 100, null: false
     t.boolean "disabled"
@@ -110,8 +110,8 @@ ActiveRecord::Schema.define(version: 2018_12_04_183128) do
     t.index ["short_name"], name: "short_name_unique", unique: true
   end
 
-  create_table "comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
-    t.text "text"
+  create_table "comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "text", limit: 16777215
     t.string "email"
     t.string "name"
     t.integer "application_id"
@@ -193,8 +193,8 @@ ActiveRecord::Schema.define(version: 2018_12_04_183128) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "replies", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
-    t.text "text"
+  create_table "replies", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "text", limit: 16777215
     t.datetime "received_at"
     t.integer "comment_id"
     t.integer "councillor_id"
@@ -225,7 +225,7 @@ ActiveRecord::Schema.define(version: 2018_12_04_183128) do
     t.integer "councillor_contribution_id"
   end
 
-  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", limit: 128, default: "", null: false
     t.string "password_salt", default: "", null: false
