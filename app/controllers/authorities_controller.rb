@@ -4,13 +4,9 @@ class AuthoritiesController < ApplicationController
   def index
     @authority_count = Authority.active.count
     @percentage_population_covered_by_all_active_authorities = Authority.percentage_population_covered_by_all_active_authorities.to_i
-
-    # map from state name to authorities in that state
-    states = Authority.enabled.group(:state).order(:state).map(&:state)
-    @authorities = {}
-    states.each do |state|
-      @authorities[state] = Authority.enabled.where(state: state).order(:full_name)
-    end
+    @authorities = Authority.enabled
+    @authorities = @authorities.order(population_2017: :desc) if params[:order] == "population"
+    @authorities = @authorities.order(:state, :full_name)
   end
 
   def show

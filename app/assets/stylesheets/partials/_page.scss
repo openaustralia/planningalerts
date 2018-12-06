@@ -730,6 +730,11 @@ form.address-search {
   }
 }
 
+// Override the blueprint default styling
+table thead th {
+  background-color: inherit;
+}
+
 table.scraper_fields {
   font-size: 0.9em;
   table-layout: fixed;

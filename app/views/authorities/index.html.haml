@@ -17,21 +17,26 @@
   = link_to "donation", donate_path
   or
   #{link_to "volunteering", get_involved_path} to help us fix it.
+%p
+  Note that you can also reorder the list by population if you're
+  interested in fixing the scrapers for the authorities with the largest population.
 
-%ul.list-options
-  %li
-    %b Go to state
-  - @authorities.each do |a|
-    %li
-      %a.button-small.button.button-pill{ href: "##{a.first.downcase}" }= a.first
-
-- @authorities.each do |state, authorities|
-  %h4{ id: state.downcase }= state
-  %ul.authorities
-    - authorities.each do |authority|
-      %li
-        = link_to authority.full_name, authority_url(authority.short_name_encoded)
-        - if authority.broken?
-          %span.highlight possibly broken
-        - elsif !authority.covered?
-          &mdash; not covered
+%table
+  %thead
+    %tr
+      %th= link_to "State", order: nil
+      %th= link_to "Authority", order: nil
+      %th
+        = link_to "Population", order: "population"
+        (2017 estimate)
+  %tbody
+    - @authorities.each do |authority|
+      %tr
+        %td= authority.state
+        %td
+          = link_to authority.full_name, authority_url(authority.short_name_encoded)
+          - if authority.broken?
+            %span.highlight possibly broken
+          - elsif !authority.covered?
+            &mdash; not covered
+        %td= authority.population_2017
