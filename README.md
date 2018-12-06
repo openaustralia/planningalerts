@@ -359,7 +359,7 @@ Click _New Authority_ in the top-right of the page. Now fill out all the details
 * State: Short version of the state the authority is in. Must be one of NSW, VIC, QLD, SA, WA, TAS, NT, ACT
 * Email: email address that comments get sent to. Try and find a specific DA comment address or failing that use the main contact email address for the council, e.g. da_comments@bellingen.nsw.gov.au
 * Website url: URL of the authority's website, e.g. http://www.bellingen.nsw.gov.au/
-* Population 2011: Look this up on Wikipedia. We use this on the about page to calculate how much of the population we cover.
+* Population 2017: Look this up at the Australian Bureau of Statistics (ABS). Look for Estimated Resident Population (ERP). Here's a direct link to the 2017 list http://stat.data.abs.gov.au/Index.aspx?DataSetCode=ABS_ERP_LGA2017. We use this on the about page to calculate how much of the population we cover.
 * Scraping, morph name: The morph name of the scraper you just forked, e.g. planningalerts-scrapers/bellingen
 
 Click _Create Authority_. Now scrape some applications so you can see them on the new authority page - click _Scrape_.

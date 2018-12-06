@@ -46,22 +46,22 @@ class Authority < ApplicationRecord
     morph_name.present?
   end
 
-  # Hardcoded total population of Australia (2011 estimate)
-  # From http://www.abs.gov.au/AUSSTATS/abs@.nsf/DetailsPage/3218.02011?OpenDocument#Data
-  def self.total_population_2011
-    22323933
+  # Hardcoded total population of Australia (2017 estimate)
+  # From http://stat.data.abs.gov.au/Index.aspx?DataSetCode=ABS_ERP_LGA2017
+  def self.total_population_2017
+    24597528
   end
 
-  def self.total_population_covered_by_all_active_authorities
+  def self.total_population_2017_covered_by_all_active_authorities
     sum = 0
     Authority.active.each do |a|
-      sum += a.population_2011 if a.population_2011
+      sum += a.population_2017 if a.population_2017
     end
     sum
   end
 
   def self.percentage_population_covered_by_all_active_authorities
-    (total_population_covered_by_all_active_authorities.to_f / total_population_2011) * 100
+    (total_population_2017_covered_by_all_active_authorities.to_f / total_population_2017) * 100
   end
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
