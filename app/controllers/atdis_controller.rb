@@ -40,6 +40,4 @@ class AtdisController < ApplicationController
   end
 
   def specification; end
-
-  def guidance; end
 end

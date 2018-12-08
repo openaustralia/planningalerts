@@ -121,7 +121,6 @@ Rails.application.routes.draw do
     post :test, action: "test_redirect"
     get "feed/:number/atdis/1.0/applications.json", action: "feed", as: :feed
     get :specification
-    get :guidance
   end
 
   get "api/howto" => "api#howto", as: :api_howto
