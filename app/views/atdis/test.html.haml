@@ -14,7 +14,7 @@
     in cooperation with a number of software vendors and
     #{link_to "the OpenAustralia Foundation", "https://www.openaustraliafoundation.org.au"}.
   %p
-    This page allows software vendors to automatically check that their ATDIS feed is compliant with the specification. It currently validates against version 1.0.2 of the specification.
+    This page allows software vendors and planning authorities to automatically check that their ATDIS feed is compliant with the specification. It currently validates against version 1.0.2 of the specification.
 %p
   = link_to "Read the ATDIS Specification", atdis_specification_path
 
@@ -94,26 +94,5 @@
       does not validate. See the errors below.
     %h3 Errors
     = render partial: "attribute_error_table", locals: { model: @page }
-
-%h3 Vendor Technical Support
-%p
-  For technical support questions on the ATDIS specification and this testing service please email
-%p
-  = mail_to "atdis-support@planningalerts.org.au"
-%p
-  Depending on the specific nature of the questions
-  these enquiries will be handled either by
-  = link_to "Carpadium", "http://www.carpadium.com/"
-  or
-  #{link_to "OpenAustralia Foundation", "https://www.openaustraliafoundation.org.au"}.
-  If you think you've found a bug in this testing service please explain how to reproduce the error step-by-step.
-
-%h3 About this service
-%p
-  This ATDIS test service has been developed by
-  = link_to "the OpenAustralia Foundation", "http://www.openaustraliafoundation.org.au"
-  for the #{link_to "NSW Department of Planning & Environment", "http://www.planning.nsw.gov.au/"}.
-  Most of the heavy validation and parsing lifting is done by a standalone
-  #{link_to "open-source (MIT) Ruby gem atdis", "https://github.com/openaustralia/atdis"}.
 
 = javascript_include_tag "atdis"
