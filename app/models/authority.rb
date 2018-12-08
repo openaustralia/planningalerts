@@ -3,22 +3,22 @@
 require "open-uri"
 
 class AuthorityLogger < Logger
-  def initialize(authority, other_logger)
-    @authority = authority
+  def initialize(authority_id, other_logger)
+    @authority_id = authority_id
     @other_logger = other_logger
     # We're starting a new run of the logger & scraper so clear out the old so we're ready for the new
-    @authority.update(last_scraper_run_log: "")
+    Authority.update(@authority_id, last_scraper_run_log: "")
   end
 
   def add(severity, message = nil, progname = nil)
     @other_logger.add(severity, message, progname)
     # Put a maximum limit on how long the log can get
-    e = @authority.last_scraper_run_log + progname + "\n"
+    e = Authority.find(@authority_id).last_scraper_run_log + progname + "\n"
     return if e.size >= 5000
 
     # We want this log to be written even if the rest of the authority
     # object doesn't validate
-    Authority.update(@authority.id, last_scraper_run_log: e)
+    Authority.update(@authority_id, last_scraper_run_log: e)
   end
 end
 
@@ -94,7 +94,7 @@ class Authority < ApplicationRecord
   # Collect applications over the default date range
   def collect_applications(other_info_logger = logger)
     # Also log to the authority database as well so we have easy access to this for the user
-    info_logger = AuthorityLogger.new(self, other_info_logger)
+    info_logger = AuthorityLogger.new(id, other_info_logger)
 
     time = Benchmark.ms do
       collect_applications_date_range(Time.zone.today - ENV["SCRAPE_DELAY"].to_i, Time.zone.today, info_logger)
