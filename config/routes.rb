@@ -104,9 +104,6 @@ Rails.application.routes.draw do
       end
     end
     resources :councillor_contributions, only: %i[new show]
-    collection do
-      get :test_feed
-    end
   end
 
   resources :councillor_contributions, only: [:index]

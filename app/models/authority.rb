@@ -72,16 +72,6 @@ class Authority < ApplicationRecord
     nil
   end
 
-  # Get all the scraper data for this authority and date in an array of attributes that can be used
-  # creating applications
-  def scraper_data_original_style(feed_url, info_logger)
-    feed_data = []
-    text = open_url_safe(feed_url, info_logger)
-
-    feed_data += Application.translate_feed_data(text) if text
-    feed_data
-  end
-
   def scraper_data_morph_style(start_date, end_date, info_logger)
     text = open_url_safe(morph_feed_url_for_date_range(start_date, end_date), info_logger)
     if text
@@ -105,13 +95,6 @@ class Authority < ApplicationRecord
   # Same as collection_applications_data_range except the applications are returned rather than saved
   def collect_unsaved_applications_date_range(start_date, end_date, info_logger = logger)
     d = scraper_data_morph_style(start_date, end_date, info_logger)
-    d.map do |attributes|
-      applications.build(attributes)
-    end
-  end
-
-  def collect_unsaved_applications_date_range_original_style(feed_url, info_logger = logger)
-    d = scraper_data_original_style(feed_url, info_logger)
     d.map do |attributes|
       applications.build(attributes)
     end

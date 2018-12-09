@@ -170,16 +170,6 @@ describe Authority do
     end
   end
 
-  describe "#scraper_data_original_style" do
-    context "authority with an xml feed with no date in the url" do
-      let(:authority) { build(:authority) }
-      it "should get the feed date only once" do
-        expect(authority).to receive(:open_url_safe).once
-        authority.scraper_data_original_style("http://foo.com", double)
-      end
-    end
-  end
-
   describe "#load_councillors" do
     let(:popolo) do
       popolo_file = Rails.root.join("spec", "fixtures", "local_councillor_popolo.json")

@@ -81,24 +81,6 @@ class Application < ApplicationRecord
     authorities.each { |auth| auth.collect_applications(info_logger) }
   end
 
-  # Translate xml data (as a string) into an array of attribute hashes that can used to create applications
-  def self.translate_feed_data(feed_data)
-    Nokogiri::XML(feed_data).search("application").map do |a|
-      {
-        council_reference: a.at("council_reference").inner_text,
-        address: a.at("address").inner_text,
-        description: a.at("description").inner_text,
-        info_url: a.at("info_url").inner_text,
-        comment_url: a.at("comment_url").inner_text,
-        date_received: a.at("date_received").inner_text,
-        date_scraped: Time.zone.now,
-        # on_notice_from and on_notice_to tags are optional
-        on_notice_from: (a.at("on_notice_from")&.inner_text),
-        on_notice_to: (a.at("on_notice_to")&.inner_text)
-      }
-    end
-  end
-
   def self.translate_morph_feed_data(feed_data)
     # Just use the same as ScraperWiki for the time being. Note that if something
     # goes wrong the error message will be wrong but let's ignore that for the time being
