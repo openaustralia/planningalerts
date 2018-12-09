@@ -43,9 +43,20 @@
 %h4#council
   I work for a local council or planning authority and would like to make our data available
 %p
-  The most important thing you can do is publish your data in a simple format that is freely available on the internet.
-  Something <a href="/brisbane.xml">like this XML</a> is good but we can work with most formats.
-  If you decide to use our XML format then we also have a simple free online tester available. Simply plug in the URL of your feed and check that it's all okay. The feed tester is available at #{link_to test_feed_authorities_url, test_feed_authorities_path}.
+  The most important thing you can do is publish your data in a simple machine-readable format that is freely available on the internet.
+%p
+  We highly recommend using the
+  #{link_to "Application Tracking Data Interchange Specification (ATDIS)", atdis_test_path}.
+  This modern, open format was developed by the NSW government, Carpadium Pty Ltd and
+  OpenAustralia Foundation in 2014. ATDIS is supported by many commercial software vendors
+  in their products for local councils in Australia. These include:
+  %ul
+    %li= link_to "Aten Systems", "http://www.atensystems.com/councillink"
+    %li= link_to "Civica", "https://www.civica.com/en-au/container---product-pages/authority-enterprise-suite/"
+    %li= link_to "Internetrix", "https://www.internetrix.com.au/"
+    %li= link_to "ITVision", "https://www.itvision.com.au/our-solutions/synergyonline-product-suite.aspx"
+    %li= link_to "SolOrient", "http://www.solorient.com.au/horizon-application-portal.html"
+    %li= link_to "Technology One", "https://www.technologyonecorp.com/products/planningxchange"
 
 %p.cta
   Please
