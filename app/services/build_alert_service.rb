@@ -17,21 +17,26 @@ class BuildAlertService
 
     if !preexisting_alert
       alert
-    elsif preexisting_alert.confirmed? && preexisting_alert.unsubscribed?
-      alert
-    elsif preexisting_alert.confirmed? && !preexisting_alert.unsubscribed?
-      send_notice_to_existing_active_alert_owner
-      nil
-    elsif !preexisting_alert.confirmed?
-      resend_original_confirmation_email
+    else
+      if preexisting_alert.confirmed?
+        send_notice_to_existing_active_alert_owner
+      else
+        resend_original_confirmation_email
+      end
       nil
     end
   end
 
   private
 
+  # Matching alerts that have been made before including those that haven't
+  # been confirmed yet
   def preexisting_alert
-    Alert.find_by(email: alert.email, address: alert.address)
+    Alert.find_by(
+      email: alert.email,
+      address: alert.address,
+      unsubscribed: false
+    )
   end
 
   def send_notice_to_existing_active_alert_owner
