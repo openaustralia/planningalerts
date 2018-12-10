@@ -11,7 +11,7 @@ namespace :planningalerts do
       info_logger = AuthorityLogger.new(authority.id, Logger.new(STDOUT))
       info_logger.info "Scraping #{authorities.count} authorities"
       authorities.each do |authority|
-        CollectApplicationsService.collect_applications(authority, info_logger)
+        CollectApplicationsService.collect_applications(authority, ENV["SCRAPE_DELAY"].to_i, info_logger)
       end
     end
 

@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class CollectApplicationsService
-  def self.collect_applications(authority, logger)
-    # TODO: Extract SCRAPE_DELAY as parameter
-    start_date = Time.zone.today - ENV["SCRAPE_DELAY"].to_i
+  def self.collect_applications(authority, scrape_delay, logger)
+    start_date = Time.zone.today - scrape_delay
     end_date = Time.zone.today
 
     time = Benchmark.ms do
