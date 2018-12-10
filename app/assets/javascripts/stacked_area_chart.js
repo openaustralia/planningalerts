@@ -48,7 +48,7 @@ function stackedAreaTimeseries(selector, url, title) {
       .append("g")
       .attr("transform", "translate(" + margin + "," + margin + ")");
 
-    d3.json(url, function(error, data) {
+    function onDataLoaded(error, data) {
       if (error) return console.warn(error);
 
       data.forEach(function(d) {
@@ -160,6 +160,7 @@ function stackedAreaTimeseries(selector, url, title) {
       svg.append("g")
         .attr("class", "axis y-axis")
         .call(yAxis);
-    });
+    }
+    d3.json(url, onDataLoaded);
   }
 }
