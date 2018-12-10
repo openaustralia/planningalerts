@@ -42,65 +42,24 @@ class Authority < ApplicationRecord
     (total_population_2017_covered_by_all_active_authorities.to_f / total_population_2017) * 100
   end
 
-  # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
   def open_url_safe(url, info_logger)
-    RestClient.get(url).body
-  rescue StandardError => e
-    info_logger.error "Error #{e} while getting data from url #{url}. So, skipping"
-    nil
+    CollectApplicationsService.open_url_safe(url, info_logger)
   end
 
   def scraper_data_morph_style(start_date, end_date, info_logger)
-    text = open_url_safe(morph_feed_url_for_date_range(start_date, end_date), info_logger)
-    if text
-      Application.translate_morph_feed_data(text)
-    else
-      []
-    end
+    CollectApplicationsService.scraper_data_morph_style(self, start_date, end_date, info_logger)
   end
 
-  # Collect applications over the default date range
   def collect_applications(other_info_logger = logger)
-    # Also log to the authority database as well so we have easy access to this for the user
-    info_logger = AuthorityLogger.new(id, other_info_logger)
-
-    time = Benchmark.ms do
-      collect_applications_date_range(Time.zone.today - ENV["SCRAPE_DELAY"].to_i, Time.zone.today, info_logger)
-    end
-    info_logger.info "Took #{(time / 1000).to_i} s to collect applications from #{full_name_and_state}"
+    CollectApplicationsService.collect_applications(self, other_info_logger)
   end
 
-  # Same as collection_applications_data_range except the applications are returned rather than saved
   def collect_unsaved_applications_date_range(start_date, end_date, info_logger = logger)
-    d = scraper_data_morph_style(start_date, end_date, info_logger)
-    d.map do |attributes|
-      applications.build(attributes)
-    end
+    CollectApplicationsService.collect_unsaved_applications_date_range(self, start_date, end_date, info_logger)
   end
 
-  # Collect all the applications for this authority by scraping
   def collect_applications_date_range(start_date, end_date, info_logger = logger)
-    count = 0
-    error_count = 0
-    collect_unsaved_applications_date_range(start_date, end_date, info_logger).each do |application|
-      # TODO: Consider if it would be better to overwrite applications with new data if they already exists
-      # This would allow for the possibility that the application information was incorrectly entered at source
-      # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
-      next if applications.find_by(council_reference: application.council_reference)
-
-      begin
-        application.save!
-        count += 1
-      rescue StandardError => e
-        error_count += 1
-        info_logger.error "Error #{e} while trying to save application #{application.council_reference} for #{full_name_and_state}. So, skipping"
-      end
-    end
-
-    info_logger.info "#{count} new applications found for #{full_name_and_state} with date from #{start_date} to #{end_date}"
-    return if error_count.zero?
-
-    info_logger.info "#{error_count} applications errored for #{full_name_and_state} with date from #{start_date} to #{end_date}"
+    CollectApplicationsService.collect_applications_date_range(self, start_date, end_date, info_logger)
   end
 
   # Returns an array of arrays [date, number_of_applications_that_date]
@@ -167,8 +126,7 @@ class Authority < ApplicationRecord
   end
 
   def morph_feed_url_for_date_range(start_date, end_date)
-    query = CGI.escape("select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
-    "https://api.morph.io/#{morph_name}/data.json?query=#{query}&key=#{ENV['MORPH_API_KEY']}"
+    CollectApplicationsService.morph_feed_url_for_date_range(self, start_date, end_date)
   end
 
   # So that the encoding function can be used elsewhere

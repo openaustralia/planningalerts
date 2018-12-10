@@ -82,29 +82,7 @@ class Application < ApplicationRecord
   end
 
   def self.translate_morph_feed_data(feed_data)
-    # Just use the same as ScraperWiki for the time being. Note that if something
-    # goes wrong the error message will be wrong but let's ignore that for the time being
-    j = JSON.parse(feed_data)
-    # Do a sanity check on the structure of the feed data
-    if j.is_a?(Array) && j.all? { |a| a.is_a?(Hash) }
-      j.map do |a|
-        {
-          council_reference: a["council_reference"],
-          address: a["address"],
-          description: a["description"],
-          info_url: a["info_url"],
-          comment_url: a["comment_url"],
-          date_received: a["date_received"],
-          date_scraped: Time.zone.now,
-          # on_notice_from and on_notice_to tags are optional
-          on_notice_from: a["on_notice_from"],
-          on_notice_to: a["on_notice_to"]
-        }
-      end
-    else
-      logger.error "Unexpected result from scraperwiki API: #{feed_data}"
-      []
-    end
+    CollectApplicationsService.translate_morph_feed_data(feed_data, logger)
   end
 
   def description
