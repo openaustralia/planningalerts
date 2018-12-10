@@ -6,7 +6,7 @@ class CollectApplicationsService
       # TODO: Extract SCRAPE_DELAY as parameter
       CollectApplicationsService.collect_applications_date_range(authority, Time.zone.today - ENV["SCRAPE_DELAY"].to_i, Time.zone.today, info_logger)
     end
-    info_logger.info "Took #{(time / 1000).to_i} s to collect applications from #{full_name_and_state}"
+    info_logger.info "Took #{(time / 1000).to_i} s to collect applications from #{authority.full_name_and_state}"
   end
 
   # Collect all the applications for this authority by scraping
