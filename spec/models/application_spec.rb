@@ -201,7 +201,7 @@ describe Application do
       # Freeze time
       t = Time.zone.now
       allow(Time).to receive(:now).and_return(t)
-      expect(Application.translate_morph_feed_data(feed_data)).to eq(
+      expect(CollectApplicationsService.translate_morph_feed_data(feed_data, Logger.new(STDOUT))).to eq(
         [
           {
             date_scraped: t,
@@ -230,7 +230,7 @@ describe Application do
     end
 
     it "should handle a malformed response" do
-      expect(Application.translate_morph_feed_data('[["An invalid scraperwiki API response"]]')).to eq([])
+      expect(CollectApplicationsService.translate_morph_feed_data('[["An invalid scraperwiki API response"]]', Logger.new(File::NULL))).to eq([])
     end
   end
 
@@ -260,15 +260,13 @@ describe Application do
       @date = Date.new(2009, 1, 1)
       @feed_url = "http://example.org?year=#{@date.year}&month=#{@date.month}&day=#{@date.day}"
       Application.delete_all
-      allow(@auth).to receive(:open_url_safe).and_return(@feed_xml)
+      allow(CollectApplicationsService).to receive(:open_url_safe).and_return(@feed_xml)
     end
 
     it "should collect the correct applications" do
       logger = double
-      allow(@auth).to receive(:logger).and_return(logger)
       expect(logger).to receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
-
-      @auth.collect_applications_date_range(@date, @date)
+      CollectApplicationsService.collect_applications_date_range(@auth, @date, @date, logger)
       expect(Application.count).to eq(2)
       r1 = Application.find_by(council_reference: "R1")
       expect(r1.authority).to eq(@auth)
@@ -283,13 +281,12 @@ describe Application do
 
     it "should not create new applications when they already exist" do
       logger = double
-      allow(@auth).to receive(:logger).and_return(logger)
       expect(logger).to receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
       expect(logger).to receive(:info).with("0 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
 
       # Getting the feed twice with the same content
-      @auth.collect_applications_date_range(@date, @date)
-      @auth.collect_applications_date_range(@date, @date)
+      CollectApplicationsService.collect_applications_date_range(@auth, @date, @date, logger)
+      CollectApplicationsService.collect_applications_date_range(@auth, @date, @date, logger)
       expect(Application.count).to eq(2)
     end
 
@@ -300,8 +297,8 @@ describe Application do
       expect(logger).to receive(:info).with("Scraping 2 authorities")
       # logger.should_receive(:add).with(1, nil, "Took 0 s to collect applications from Fiddlesticks, NSW")
       # logger.should_receive(:add).with(1, nil, "Took 0 s to collect applications from Wombat City Council, NSW")
-      expect(@auth).to receive(:collect_applications).with(logger)
-      expect(auth2).to receive(:collect_applications).with(logger)
+      expect(CollectApplicationsService).to receive(:collect_applications).with(@auth, logger)
+      expect(CollectApplicationsService).to receive(:collect_applications).with(auth2, logger)
 
       Application.collect_applications([@auth, auth2], logger)
     end

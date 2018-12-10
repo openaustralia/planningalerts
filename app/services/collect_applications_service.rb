@@ -8,7 +8,7 @@ class CollectApplicationsService
 
     time = Benchmark.ms do
       # TODO: Extract SCRAPE_DELAY as parameter
-      authority.collect_applications_date_range(Time.zone.today - ENV["SCRAPE_DELAY"].to_i, Time.zone.today, info_logger)
+      CollectApplicationsService.collect_applications_date_range(authority, Time.zone.today - ENV["SCRAPE_DELAY"].to_i, Time.zone.today, info_logger)
     end
     info_logger.info "Took #{(time / 1000).to_i} s to collect applications from #{full_name_and_state}"
   end
@@ -17,7 +17,7 @@ class CollectApplicationsService
   def self.collect_applications_date_range(authority, start_date, end_date, info_logger)
     count = 0
     error_count = 0
-    authority.collect_unsaved_applications_date_range(start_date, end_date, info_logger).each do |application|
+    CollectApplicationsService.collect_unsaved_applications_date_range(authority, start_date, end_date, info_logger).each do |application|
       # TODO: Consider if it would be better to overwrite applications with new data if they already exists
       # This would allow for the possibility that the application information was incorrectly entered at source
       # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
@@ -40,16 +40,16 @@ class CollectApplicationsService
 
   # Same as collection_applications_data_range except the applications are returned rather than saved
   def self.collect_unsaved_applications_date_range(authority, start_date, end_date, info_logger)
-    d = authority.scraper_data_morph_style(start_date, end_date, info_logger)
+    d = CollectApplicationsService.scraper_data_morph_style(authority, start_date, end_date, info_logger)
     d.map do |attributes|
       authority.applications.build(attributes)
     end
   end
 
   def self.scraper_data_morph_style(authority, start_date, end_date, info_logger)
-    text = authority.open_url_safe(authority.morph_feed_url_for_date_range(start_date, end_date), info_logger)
+    text = CollectApplicationsService.open_url_safe(CollectApplicationsService.morph_feed_url_for_date_range(authority, start_date, end_date), info_logger)
     if text
-      Application.translate_morph_feed_data(text)
+      CollectApplicationsService.translate_morph_feed_data(text, info_logger)
     else
       []
     end

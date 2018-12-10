@@ -78,11 +78,7 @@ class Application < ApplicationRecord
   # Optionally pass a logger which is just used for sending informational messages to do with this long-running job to
   def self.collect_applications(authorities, info_logger = logger)
     info_logger.info "Scraping #{authorities.count} authorities"
-    authorities.each { |auth| auth.collect_applications(info_logger) }
-  end
-
-  def self.translate_morph_feed_data(feed_data)
-    CollectApplicationsService.translate_morph_feed_data(feed_data, logger)
+    authorities.each { |auth| CollectApplicationsService.collect_applications(auth, info_logger) }
   end
 
   def description

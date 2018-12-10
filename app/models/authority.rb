@@ -42,26 +42,6 @@ class Authority < ApplicationRecord
     (total_population_2017_covered_by_all_active_authorities.to_f / total_population_2017) * 100
   end
 
-  def open_url_safe(url, info_logger)
-    CollectApplicationsService.open_url_safe(url, info_logger)
-  end
-
-  def scraper_data_morph_style(start_date, end_date, info_logger)
-    CollectApplicationsService.scraper_data_morph_style(self, start_date, end_date, info_logger)
-  end
-
-  def collect_applications(other_info_logger = logger)
-    CollectApplicationsService.collect_applications(self, other_info_logger)
-  end
-
-  def collect_unsaved_applications_date_range(start_date, end_date, info_logger = logger)
-    CollectApplicationsService.collect_unsaved_applications_date_range(self, start_date, end_date, info_logger)
-  end
-
-  def collect_applications_date_range(start_date, end_date, info_logger = logger)
-    CollectApplicationsService.collect_applications_date_range(self, start_date, end_date, info_logger)
-  end
-
   # Returns an array of arrays [date, number_of_applications_that_date]
   def applications_per_day
     h = applications.group("CAST(date_scraped AS DATE)").count
@@ -123,10 +103,6 @@ class Authority < ApplicationRecord
 
   def morph_url
     "https://morph.io/#{morph_name}" if morph_name.present?
-  end
-
-  def morph_feed_url_for_date_range(start_date, end_date)
-    CollectApplicationsService.morph_feed_url_for_date_range(self, start_date, end_date)
   end
 
   # So that the encoding function can be used elsewhere

@@ -91,7 +91,8 @@ ActiveAdmin.register Authority do
 
   member_action :scrape, method: :post do
     authority = Authority.find(params[:id])
-    authority.delay.collect_applications
+
+    CollectApplicationsService.delay.collect_applications(authority, logger)
     redirect_to({ action: :show }, notice: "Queued for scraping!")
   end
 
