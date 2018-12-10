@@ -11,7 +11,7 @@ class BuildAlertService
     )
   end
 
-  def parse
+  def call
     # Ensures the address is normalised into a consistent form
     alert.geocode_from_address
 

@@ -14,7 +14,7 @@ describe BuildAlertService do
           address: "24 Bruce Rd, Glenbrook",
           email: "foo@foo.com",
           radius_meters: 1000
-        ).parse
+        ).call
 
         expect(parser_result.email).to eql "foo@foo.com"
         expect(parser_result.radius_meters).to eql 1000
@@ -25,7 +25,7 @@ describe BuildAlertService do
           address: "24 Bruce Rd, Glenbrook",
           email: "foo@foo.com",
           radius_meters: 1000
-        ).parse
+        ).call
 
         expect(parser_result.address).to eq "24 Bruce Rd, Glenbrook, VIC 3885"
         expect(parser_result.geocoded?).to be true
@@ -50,7 +50,7 @@ describe BuildAlertService do
           email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
           radius_meters: 1000
-        ).parse
+        ).call
 
         expect(ConfirmationMailer).to have_received(:confirm).with(preexisting_alert)
       end
@@ -60,7 +60,7 @@ describe BuildAlertService do
           email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
           radius_meters: 1000
-        ).parse
+        ).call
 
         expect(parser_result).to be nil
       end
@@ -82,7 +82,7 @@ describe BuildAlertService do
           email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
           radius_meters: 1000
-        ).parse
+        ).call
 
         expect(parser_result).to be nil
       end
@@ -94,7 +94,7 @@ describe BuildAlertService do
           email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
           radius_meters: 1000
-        ).parse
+        ).call
 
         expect(AlertNotifier).to have_received(:new_signup_attempt_notice).with(preexisting_alert)
       end
@@ -109,7 +109,7 @@ describe BuildAlertService do
             email: "jenny@example.com",
             address: "24 Bruce Rd, Glenbrook",
             radius_meters: 1000
-          ).parse
+          ).call
 
           expect(parser_result.email).to eq "jenny@example.com"
         end
