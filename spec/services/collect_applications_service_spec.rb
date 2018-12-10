@@ -13,73 +13,12 @@ describe CollectApplicationsService do
     )
   end
 
-  describe "collecting applications from the scraperwiki web service url" do
-    it "should translate the data" do
-      feed_data = <<-JSON
-        [
-          {
-            "date_scraped": "2012-08-24",
-            "description": "Construction of Dwelling",
-            "info_url": "http://www.yarracity.vic.gov.au/Planning-Application-Search/Results.aspx?ApplicationNumber=PL01/0776.01&Suburb=(All)&Street=(All)&Status=(All)&Ward=(All)",
-            "on_notice_from": "2012-05-01",
-            "on_notice_to": "2012-06-01",
-            "date_received": "2012-07-06",
-            "council_reference": "PL01/0776.01",
-            "address": "56 Murphy St Richmond VIC 3121",
-            "comment_url": "http://www.yarracity.vic.gov.au/planning--building/Planning-applications/Objecting-to-a-planning-applicationVCAT/"
-          },
-          {
-            "date_scraped": "2012-08-24",
-            "description": "Liquor Licence for Existing Caf\u00e9",
-            "info_url": "http://www.yarracity.vic.gov.au/Planning-Application-Search/Results.aspx?ApplicationNumber=PL02/0313.01&Suburb=(All)&Street=(All)&Status=(All)&Ward=(All)",
-            "date_received": "2012-07-30",
-            "council_reference": "PL02/0313.01",
-            "address": "359-361 Napier St Fitzroy VIC 3065",
-            "comment_url": "http://www.yarracity.vic.gov.au/planning--building/Planning-applications/Objecting-to-a-planning-applicationVCAT/"
-          }
-        ]
-      JSON
-      # Freeze time
-      t = Time.zone.now
-      allow(Time).to receive(:now).and_return(t)
-      expect(CollectApplicationsService.translate_morph_feed_data(feed_data, Logger.new(STDOUT))).to eq(
-        [
-          {
-            date_scraped: t,
-            description: "Construction of Dwelling",
-            info_url: "http://www.yarracity.vic.gov.au/Planning-Application-Search/Results.aspx?ApplicationNumber=PL01/0776.01&Suburb=(All)&Street=(All)&Status=(All)&Ward=(All)",
-            on_notice_from: "2012-05-01",
-            on_notice_to: "2012-06-01",
-            date_received: "2012-07-06",
-            council_reference: "PL01/0776.01",
-            address: "56 Murphy St Richmond VIC 3121",
-            comment_url: "http://www.yarracity.vic.gov.au/planning--building/Planning-applications/Objecting-to-a-planning-applicationVCAT/"
-          },
-          {
-            date_scraped: t,
-            description: "Liquor Licence for Existing Caf\u00e9",
-            info_url: "http://www.yarracity.vic.gov.au/Planning-Application-Search/Results.aspx?ApplicationNumber=PL02/0313.01&Suburb=(All)&Street=(All)&Status=(All)&Ward=(All)",
-            on_notice_from: nil,
-            on_notice_to: nil,
-            date_received: "2012-07-30",
-            council_reference: "PL02/0313.01",
-            address: "359-361 Napier St Fitzroy VIC 3065",
-            comment_url: "http://www.yarracity.vic.gov.au/planning--building/Planning-applications/Objecting-to-a-planning-applicationVCAT/"
-          }
-        ]
-      )
-    end
-
-    it "should handle a malformed response" do
-      expect(CollectApplicationsService.translate_morph_feed_data('[["An invalid scraperwiki API response"]]', Logger.new(File::NULL))).to eq([])
-    end
-  end
-
   describe "collecting applications from the scraper web service urls" do
     before :each do
       feed = <<-JSON
       [
         {
+          "date_scraped": "2012-08-24",
           "council_reference": "R1",
           "address": "1 Smith Street, Fiddleville",
           "description": "Knocking a house down",
@@ -112,6 +51,7 @@ describe CollectApplicationsService do
       end
       expect(Application.count).to eq(2)
       r1 = Application.find_by(council_reference: "R1")
+      expect(r1.date_scraped).to eq(@date)
       expect(r1.authority).to eq(@auth)
       expect(r1.address).to eq("1 Smith Street, Fiddleville")
       expect(r1.description).to eq("Knocking a house down")
