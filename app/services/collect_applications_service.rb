@@ -2,9 +2,12 @@
 
 class CollectApplicationsService
   def self.collect_applications(authority, info_logger)
+    # TODO: Extract SCRAPE_DELAY as parameter
+    start_date = Time.zone.today - ENV["SCRAPE_DELAY"].to_i
+    end_date = Time.zone.today
+
     time = Benchmark.ms do
-      # TODO: Extract SCRAPE_DELAY as parameter
-      CollectApplicationsService.collect_applications_date_range(authority, Time.zone.today - ENV["SCRAPE_DELAY"].to_i, Time.zone.today, info_logger)
+      CollectApplicationsService.collect_applications_date_range(authority, start_date, end_date, info_logger)
     end
     info_logger.info "Took #{(time / 1000).to_i} s to collect applications from #{authority.full_name_and_state}"
   end
