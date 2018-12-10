@@ -6,6 +6,7 @@ class CollectApplicationsService
     @start_date = Time.zone.today - scrape_delay
     @end_date = Time.zone.today
     @logger = logger
+    @morph_api_key = ENV["MORPH_API_KEY"]
   end
 
   def call
@@ -15,7 +16,7 @@ class CollectApplicationsService
 
   private
 
-  attr_reader :authority, :start_date, :end_date, :logger
+  attr_reader :authority, :start_date, :end_date, :morph_api_key, :logger
 
   # Collect all the applications for this authority by scraping
   def collect_applications_date_range
@@ -60,8 +61,7 @@ class CollectApplicationsService
 
   def morph_feed_url_for_date_range
     query = CGI.escape("select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
-    # TODO: Extract API key as parameter
-    "https://api.morph.io/#{authority.morph_name}/data.json?query=#{query}&key=#{ENV['MORPH_API_KEY']}"
+    "https://api.morph.io/#{authority.morph_name}/data.json?query=#{query}&key=#{morph_api_key}"
   end
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
