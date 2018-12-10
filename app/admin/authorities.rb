@@ -92,7 +92,7 @@ ActiveAdmin.register Authority do
   member_action :scrape, method: :post do
     authority = Authority.find(params[:id])
     info_logger = AuthorityLogger.new(authority.id, logger)
-    CollectApplicationsService.delay.collect_applications(authority, ENV["SCRAPE_DELAY"].to_i, info_logger)
+    CollectApplicationsService.new(authority: authority, scrape_delay: ENV["SCRAPE_DELAY"].to_i, logger: info_logger).delay.call
     redirect_to({ action: :show }, notice: "Queued for scraping!")
   end
 

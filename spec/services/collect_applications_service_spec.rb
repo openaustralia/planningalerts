@@ -47,7 +47,7 @@ describe CollectApplicationsService do
       expect(logger).to receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
       expect(logger).to receive(:info).with("Took 0 s to collect applications from Fiddlesticks, NSW")
       Timecop.freeze(@date) do
-        CollectApplicationsService.collect_applications(@auth, 0, logger)
+        CollectApplicationsService.new(authority: @auth, scrape_delay: 0, logger: logger).call
       end
       expect(Application.count).to eq(2)
       r1 = Application.find_by(council_reference: "R1")
@@ -70,8 +70,8 @@ describe CollectApplicationsService do
 
       # Getting the feed twice with the same content
       Timecop.freeze(@date) do
-        CollectApplicationsService.collect_applications(@auth, 0, logger)
-        CollectApplicationsService.collect_applications(@auth, 0, logger)
+        CollectApplicationsService.new(authority: @auth, scrape_delay: 0, logger: logger).call
+        CollectApplicationsService.new(authority: @auth, scrape_delay: 0, logger: logger).call
       end
       expect(Application.count).to eq(2)
     end

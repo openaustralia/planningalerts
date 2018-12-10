@@ -1,21 +1,27 @@
 # frozen_string_literal: true
 
 class CollectApplicationsService
-  def self.collect_applications(authority, scrape_delay, logger)
-    start_date = Time.zone.today - scrape_delay
-    end_date = Time.zone.today
+  def initialize(authority:, scrape_delay:, logger:)
+    @authority = authority
+    @start_date = Time.zone.today - scrape_delay
+    @end_date = Time.zone.today
+    @logger = logger
+  end
 
-    time = Benchmark.ms do
-      CollectApplicationsService.collect_applications_date_range(authority, start_date, end_date, logger)
-    end
+  def call
+    time = Benchmark.ms { collect_applications_date_range }
     logger.info "Took #{(time / 1000).to_i} s to collect applications from #{authority.full_name_and_state}"
   end
 
+  private
+
+  attr_reader :authority, :start_date, :end_date, :logger
+
   # Collect all the applications for this authority by scraping
-  def self.collect_applications_date_range(authority, start_date, end_date, logger)
+  def collect_applications_date_range
     count = 0
     error_count = 0
-    CollectApplicationsService.collect_unsaved_applications_date_range(authority, start_date, end_date, logger).each do |application|
+    collect_unsaved_applications_date_range.each do |application|
       # TODO: Consider if it would be better to overwrite applications with new data if they already exists
       # This would allow for the possibility that the application information was incorrectly entered at source
       # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
@@ -37,37 +43,36 @@ class CollectApplicationsService
   end
 
   # Same as collection_applications_data_range except the applications are returned rather than saved
-  def self.collect_unsaved_applications_date_range(authority, start_date, end_date, logger)
-    d = CollectApplicationsService.scraper_data_morph_style(authority, start_date, end_date, logger)
-    d.map do |attributes|
+  def collect_unsaved_applications_date_range
+    scraper_data_morph_style.map do |attributes|
       authority.applications.build(attributes)
     end
   end
 
-  def self.scraper_data_morph_style(authority, start_date, end_date, logger)
-    text = CollectApplicationsService.open_url_safe(CollectApplicationsService.morph_feed_url_for_date_range(authority, start_date, end_date), logger)
+  def scraper_data_morph_style
+    text = CollectApplicationsService.open_url_safe(morph_feed_url_for_date_range)
     if text
-      CollectApplicationsService.translate_morph_feed_data(text, logger)
+      translate_morph_feed_data(text)
     else
       []
     end
   end
 
-  def self.morph_feed_url_for_date_range(authority, start_date, end_date)
+  def morph_feed_url_for_date_range
     query = CGI.escape("select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
     # TODO: Extract API key as parameter
     "https://api.morph.io/#{authority.morph_name}/data.json?query=#{query}&key=#{ENV['MORPH_API_KEY']}"
   end
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
-  def self.open_url_safe(url, logger)
+  def open_url_safe(url)
     RestClient.get(url).body
   rescue StandardError => e
     logger.error "Error #{e} while getting data from url #{url}. So, skipping"
     nil
   end
 
-  def self.translate_morph_feed_data(feed_data, logger)
+  def translate_morph_feed_data(feed_data)
     j = JSON.parse(feed_data)
     # Do a sanity check on the structure of the feed data
     if j.is_a?(Array) && j.all? { |a| a.is_a?(Hash) }
