@@ -289,19 +289,6 @@ describe Application do
       CollectApplicationsService.collect_applications_date_range(@auth, @date, @date, logger)
       expect(Application.count).to eq(2)
     end
-
-    it "should collect all the applications from all the authorities over the last n days" do
-      auth2 = create(:authority, full_name: "Wombat City Council", short_name: "Wombat", state: "NSW")
-      allow(Date).to receive(:today).and_return(Date.new(2010, 1, 10))
-      logger = double
-      expect(logger).to receive(:info).with("Scraping 2 authorities")
-      # logger.should_receive(:add).with(1, nil, "Took 0 s to collect applications from Fiddlesticks, NSW")
-      # logger.should_receive(:add).with(1, nil, "Took 0 s to collect applications from Wombat City Council, NSW")
-      expect(CollectApplicationsService).to receive(:collect_applications).with(@auth, logger)
-      expect(CollectApplicationsService).to receive(:collect_applications).with(auth2, logger)
-
-      Application.collect_applications([@auth, auth2], logger)
-    end
   end
 
   describe "#official_submission_period_expired?" do
