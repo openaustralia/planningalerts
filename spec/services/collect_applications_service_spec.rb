@@ -77,7 +77,7 @@ describe CollectApplicationsService do
 
   describe "collecting applications from the scraper web service urls" do
     before :each do
-      @feed_xml = <<-JSON
+      feed = <<-JSON
       [
         {
           "council_reference": "R1",
@@ -99,9 +99,8 @@ describe CollectApplicationsService do
       ]
       JSON
       @date = Date.new(2009, 1, 1)
-      @feed_url = "http://example.org?year=#{@date.year}&month=#{@date.month}&day=#{@date.day}"
       Application.delete_all
-      allow(CollectApplicationsService).to receive(:open_url_safe).and_return(@feed_xml)
+      allow(CollectApplicationsService).to receive(:open_url_safe).and_return(feed)
     end
 
     it "should collect the correct applications" do
