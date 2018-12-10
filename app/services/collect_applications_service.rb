@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 class CollectApplicationsService
-  # Collect applications over the default date range
-  def self.collect_applications(authority, other_info_logger = logger)
-    # Also log to the authority database as well so we have easy access to this for the user
-    info_logger = AuthorityLogger.new(authority.id, other_info_logger)
-
+  def self.collect_applications(authority, info_logger)
     time = Benchmark.ms do
       # TODO: Extract SCRAPE_DELAY as parameter
       CollectApplicationsService.collect_applications_date_range(authority, Time.zone.today - ENV["SCRAPE_DELAY"].to_i, Time.zone.today, info_logger)
