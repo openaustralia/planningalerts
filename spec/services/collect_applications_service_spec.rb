@@ -106,7 +106,10 @@ describe CollectApplicationsService do
     it "should collect the correct applications" do
       logger = double
       expect(logger).to receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
-      CollectApplicationsService.collect_applications_date_range(@auth, @date, @date, logger)
+      expect(logger).to receive(:info).with("Took 0 s to collect applications from Fiddlesticks, NSW")
+      Timecop.freeze(@date) do
+        CollectApplicationsService.collect_applications(@auth, 0, logger)
+      end
       expect(Application.count).to eq(2)
       r1 = Application.find_by(council_reference: "R1")
       expect(r1.authority).to eq(@auth)
@@ -123,10 +126,13 @@ describe CollectApplicationsService do
       logger = double
       expect(logger).to receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
       expect(logger).to receive(:info).with("0 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
+      expect(logger).to receive(:info).twice.with("Took 0 s to collect applications from Fiddlesticks, NSW")
 
       # Getting the feed twice with the same content
-      CollectApplicationsService.collect_applications_date_range(@auth, @date, @date, logger)
-      CollectApplicationsService.collect_applications_date_range(@auth, @date, @date, logger)
+      Timecop.freeze(@date) do
+        CollectApplicationsService.collect_applications(@auth, 0, logger)
+        CollectApplicationsService.collect_applications(@auth, 0, logger)
+      end
       expect(Application.count).to eq(2)
     end
   end
