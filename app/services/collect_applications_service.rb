@@ -69,8 +69,6 @@ class CollectApplicationsService
   end
 
   def self.translate_morph_feed_data(feed_data, logger)
-    # Just use the same as ScraperWiki for the time being. Note that if something
-    # goes wrong the error message will be wrong but let's ignore that for the time being
     j = JSON.parse(feed_data)
     # Do a sanity check on the structure of the feed data
     if j.is_a?(Array) && j.all? { |a| a.is_a?(Hash) }
@@ -89,7 +87,7 @@ class CollectApplicationsService
         }
       end
     else
-      logger.error "Unexpected result from scraperwiki API: #{feed_data}"
+      logger.error "Unexpected result from morph API: #{feed_data}"
       []
     end
   end
