@@ -35,24 +35,6 @@ class Alert < ApplicationRecord
     end
   end
 
-  def self.count_of_new_unique_email_created_on_date(date)
-    alerts = where(confirmed: true).where("date(created_at) = ?", date).group(:email)
-
-    alerts.reject do |alert|
-      where(email: alert.email).where("created_at < ?", alert.created_at).any?
-    end.count
-  end
-
-  def self.count_of_email_completely_unsubscribed_on_date(date)
-    emails = where("date(unsubscribed_at) = ?", date).where(unsubscribed: true)
-                                                     .distinct
-                                                     .pluck(:email)
-
-    emails.reject do |email|
-      active.where(email: email).where("date(created_at) <= ?", date).any?
-    end.count
-  end
-
   def geocoded?
     location.present?
   end
