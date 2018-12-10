@@ -8,6 +8,7 @@ class BuildAlertService
   end
 
   def parse
+    # Ensures the address is normalised into a consistent form
     alert.geocode_from_address
 
     preexisting_matching_alert ? parse_for_preexisting_alert_states : alert
