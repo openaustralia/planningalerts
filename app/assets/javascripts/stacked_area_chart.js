@@ -31,24 +31,6 @@ function stackedAreaTimeseries(selector, url, title) {
       .tickPadding([5])
       .orient("bottom");
 
-    var yAxis = d3.svg.axis()
-      .scale(y)
-      .ticks(10)
-      .tickPadding([5])
-      .orient("left");
-
-    var yMidAxis = d3.svg.axis()
-      .scale(y)
-      .ticks(5)
-      .tickPadding([5])
-      .orient("left");
-
-    var ySmallAxis = d3.svg.axis()
-      .scale(y)
-      .ticks(2)
-      .tickPadding([5])
-      .orient("left");
-
     var area = d3.svg.area()
       .x(function(d) { return x(d.date); })
       .y0(function(d) { return y(d.y0); })
@@ -160,22 +142,24 @@ function stackedAreaTimeseries(selector, url, title) {
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
 
-      var yAxisForData;
+      var yAxis = d3.svg.axis()
+        .scale(y)
+        .tickPadding([5])
+        .orient("left");
 
       if (maxDateVal > 10) {
-        yAxisForData = yAxis;
+        yAxis = yAxis.ticks(10);
       } else if (maxDateVal > 5 ) {
-        yAxisForData = yMidAxis;
+        yAxis = yAxis.ticks(5);
       } else {
-        yAxisForData = ySmallAxis;
+        yAxis = yAxis.ticks(2);
       }
 
       // TODO: Add tooltip to show specific dates and values
 
       svg.append("g")
         .attr("class", "axis y-axis")
-        .call(yAxisForData);
+        .call(yAxis);
     });
   }
 }
-
