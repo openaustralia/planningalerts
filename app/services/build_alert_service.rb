@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class NewAlertParser
+class BuildAlertService
   attr_reader :alert
 
   def initialize(alert)

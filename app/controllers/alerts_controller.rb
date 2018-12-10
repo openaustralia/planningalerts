@@ -10,7 +10,7 @@ class AlertsController < ApplicationController
 
   def create
     @address = params[:alert][:address]
-    @alert = NewAlertParser.new(
+    @alert = BuildAlertService.new(
       Alert.new(
         email: params[:alert][:email],
         address: @address,

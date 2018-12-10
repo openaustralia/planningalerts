@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe NewAlertParser do
+describe BuildAlertService do
   describe "#parse" do
     before :each do
       mock_geocoder_valid_address_response
@@ -12,7 +12,7 @@ describe NewAlertParser do
       it "returns the original alert" do
         alert = build(:alert, address: "24 Bruce Rd, Glenbrook")
 
-        parser_result = NewAlertParser.new(alert).parse
+        parser_result = BuildAlertService.new(alert).parse
 
         expect(parser_result).to eql alert
       end
@@ -20,7 +20,7 @@ describe NewAlertParser do
       it "geocodes the alert" do
         alert = build(:alert, id: 7, address: "24 Bruce Rd, Glenbrook", lat: nil, lng: nil)
 
-        parser_result = NewAlertParser.new(alert).parse
+        parser_result = BuildAlertService.new(alert).parse
 
         expect(parser_result.address).to eq "24 Bruce Rd, Glenbrook, VIC 3885"
         expect(parser_result.geocoded?).to be true
@@ -48,7 +48,7 @@ describe NewAlertParser do
           lng: nil
         )
 
-        NewAlertParser.new(new_alert).parse
+        BuildAlertService.new(new_alert).parse
 
         expect(ConfirmationMailer).to have_received(:confirm).with(preexisting_alert)
       end
@@ -62,7 +62,7 @@ describe NewAlertParser do
           lng: nil
         )
 
-        parser_result = NewAlertParser.new(new_alert).parse
+        parser_result = BuildAlertService.new(new_alert).parse
 
         expect(parser_result).to be nil
       end
@@ -88,7 +88,7 @@ describe NewAlertParser do
           lng: nil
         )
 
-        parser_result = NewAlertParser.new(new_alert).parse
+        parser_result = BuildAlertService.new(new_alert).parse
 
         expect(parser_result).to be nil
       end
@@ -103,7 +103,7 @@ describe NewAlertParser do
           lng: nil
         )
 
-        NewAlertParser.new(new_alert).parse
+        BuildAlertService.new(new_alert).parse
 
         expect(AlertNotifier).to have_received(:new_signup_attempt_notice).with(preexisting_alert)
       end
@@ -123,7 +123,7 @@ describe NewAlertParser do
             lng: nil
           )
 
-          parser_result = NewAlertParser.new(new_alert).parse
+          parser_result = BuildAlertService.new(new_alert).parse
 
           expect(parser_result.id).to eq 9
         end
