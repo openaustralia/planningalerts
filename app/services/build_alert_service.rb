@@ -3,8 +3,12 @@
 class BuildAlertService
   attr_reader :alert
 
-  def initialize(alert)
-    @alert = alert
+  def initialize(email:, address:, radius_meters:)
+    @alert = Alert.new(
+      email: email,
+      address: address,
+      radius_meters: radius_meters
+    )
   end
 
   def parse

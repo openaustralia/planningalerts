@@ -10,17 +10,22 @@ describe BuildAlertService do
 
     context "when there is no matching pre-existing Alert" do
       it "returns the original alert" do
-        alert = build(:alert, address: "24 Bruce Rd, Glenbrook")
+        parser_result = BuildAlertService.new(
+          address: "24 Bruce Rd, Glenbrook",
+          email: "foo@foo.com",
+          radius_meters: 1000
+        ).parse
 
-        parser_result = BuildAlertService.new(alert).parse
-
-        expect(parser_result).to eql alert
+        expect(parser_result.email).to eql "foo@foo.com"
+        expect(parser_result.radius_meters).to eql 1000
       end
 
       it "geocodes the alert" do
-        alert = build(:alert, id: 7, address: "24 Bruce Rd, Glenbrook", lat: nil, lng: nil)
-
-        parser_result = BuildAlertService.new(alert).parse
+        parser_result = BuildAlertService.new(
+          address: "24 Bruce Rd, Glenbrook",
+          email: "foo@foo.com",
+          radius_meters: 1000
+        ).parse
 
         expect(parser_result.address).to eq "24 Bruce Rd, Glenbrook, VIC 3885"
         expect(parser_result.geocoded?).to be true
@@ -40,29 +45,22 @@ describe BuildAlertService do
 
       it "resends the confirmation email for the pre-existing alert" do
         allow(ConfirmationMailer).to receive(:confirm).with(preexisting_alert).and_call_original
-        new_alert = build(
-          :alert,
+
+        BuildAlertService.new(
           email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
-          lat: nil,
-          lng: nil
-        )
-
-        BuildAlertService.new(new_alert).parse
+          radius_meters: 1000
+        ).parse
 
         expect(ConfirmationMailer).to have_received(:confirm).with(preexisting_alert)
       end
 
       it "returns nil" do
-        new_alert = build(
-          :alert,
+        parser_result = BuildAlertService.new(
           email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
-          lat: nil,
-          lng: nil
-        )
-
-        parser_result = BuildAlertService.new(new_alert).parse
+          radius_meters: 1000
+        ).parse
 
         expect(parser_result).to be nil
       end
@@ -80,30 +78,23 @@ describe BuildAlertService do
       end
 
       it "returns nil" do
-        new_alert = build(
-          :alert,
+        parser_result = BuildAlertService.new(
           email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
-          lat: nil,
-          lng: nil
-        )
-
-        parser_result = BuildAlertService.new(new_alert).parse
+          radius_meters: 1000
+        ).parse
 
         expect(parser_result).to be nil
       end
 
       it "sends a helpful email to the alert’s email address" do
         allow(AlertNotifier).to receive(:new_signup_attempt_notice).with(preexisting_alert).and_call_original
-        new_alert = build(
-          :alert,
+
+        BuildAlertService.new(
           email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
-          lat: nil,
-          lng: nil
-        )
-
-        BuildAlertService.new(new_alert).parse
+          radius_meters: 1000
+        ).parse
 
         expect(AlertNotifier).to have_received(:new_signup_attempt_notice).with(preexisting_alert)
       end
@@ -114,18 +105,13 @@ describe BuildAlertService do
         end
 
         it "returns the new alert" do
-          new_alert = build(
-            :alert,
-            id: 9,
+          parser_result = BuildAlertService.new(
             email: "jenny@example.com",
             address: "24 Bruce Rd, Glenbrook",
-            lat: nil,
-            lng: nil
-          )
+            radius_meters: 1000
+          ).parse
 
-          parser_result = BuildAlertService.new(new_alert).parse
-
-          expect(parser_result.id).to eq 9
+          expect(parser_result.email).to eq "jenny@example.com"
         end
       end
     end
