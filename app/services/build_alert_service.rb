@@ -20,9 +20,11 @@ class BuildAlertService
     elsif preexisting_alert.confirmed? && preexisting_alert.unsubscribed?
       alert
     elsif preexisting_alert.confirmed? && !preexisting_alert.unsubscribed?
-      send_notice_to_existing_active_alert_owner_and_return
+      send_notice_to_existing_active_alert_owner
+      nil
     elsif !preexisting_alert.confirmed?
-      resend_original_confirmation_email_and_return
+      resend_original_confirmation_email
+      nil
     end
   end
 
@@ -32,17 +34,13 @@ class BuildAlertService
     Alert.find_by(email: alert.email, address: alert.address)
   end
 
-  def send_notice_to_existing_active_alert_owner_and_return
+  def send_notice_to_existing_active_alert_owner
     AlertNotifier.new_signup_attempt_notice(
       preexisting_alert
     ).deliver_later
-
-    nil
   end
 
-  def resend_original_confirmation_email_and_return
+  def resend_original_confirmation_email
     preexisting_alert.send_confirmation_email
-
-    nil
   end
 end
