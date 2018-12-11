@@ -5,42 +5,49 @@
 // All this logic will automatically be available in application.js.
 
 $(function() {
+  function setMinDate(selector, date) {
+    $(selector).datepicker("option", "minDate", date);
+  }
+  function setMaxDate(selector, date) {
+    $(selector).datepicker("option", "maxDate", date);
+  }
+
   $("#feed_lodgement_date_start").datepicker({
     dateFormat: "yy-mm-dd",
     onClose: function(selectedDate) {
-      $("#feed_lodgement_date_end").datepicker("option", "minDate", selectedDate);
+      setMinDate("#feed_lodgement_date_end", selectedDate);
     }
   });
   $("#feed_lodgement_date_end").datepicker({
     dateFormat: "yy-mm-dd",
     onClose: function(selectedDate) {
-      $("#feed_lodgement_date_start").datepicker("option", "maxDate", selectedDate);
+      setMaxDate("#feed_lodgement_date_start", selectedDate);
     }
   });
   $("#feed_last_modified_date_start").datepicker({
     dateFormat: "yy-mm-dd",
     onClose: function(selectedDate) {
-      $("#feed_last_modified_date_end").datepicker("option", "minDate", selectedDate);
+      setMinDate("#feed_last_modified_date_end", selectedDate);
     }
   });
   $("#feed_last_modified_date_end").datepicker({
     dateFormat: "yy-mm-dd",
     onClose: function(selectedDate) {
-      $("#feed_last_modified_date_start").datepicker("option", "maxDate", selectedDate);
+      setMaxDate("#feed_last_modified_date_start", selectedDate);
     }
   });
 
   if ($("#feed_lodgement_date_start").datepicker("getDate") != null) {
-    $("#feed_lodgement_date_end").datepicker("option", "minDate", $("#feed_lodgement_date_start").datepicker("getDate"));
+    setMinDate("#feed_lodgement_date_end", $("#feed_lodgement_date_start").datepicker("getDate"));
   }
   if ($("#feed_lodgement_date_end").datepicker("getDate") != null) {
-    $("#feed_lodgement_date_start").datepicker("option", "maxDate", $("#feed_lodgement_date_end").datepicker("getDate"));
+    setMaxDate("#feed_lodgement_date_start", $("#feed_lodgement_date_end").datepicker("getDate"));
   }
   if ($("#feed_last_modified_date_start").datepicker("getDate") != null) {
-    $("#feed_last_modified_date_end").datepicker("option", "minDate", $("#feed_last_modified_date_start").datepicker("getDate"));
+    setMinDate("#feed_last_modified_date_end", $("#feed_last_modified_date_start").datepicker("getDate"));
   }
   if ($("#feed_last_modified_date_end").datepicker("getDate") != null) {
-    $("#feed_last_modified_date_start").datepicker("option", "maxDate", $("#feed_last_modified_date_end").datepicker("getDate"));
+    setMaxDate("#feed_last_modified_date_start", $("#feed_last_modified_date_end").datepicker("getDate"));
   }
 
   $("#filter-heading").click(function(){
