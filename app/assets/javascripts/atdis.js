@@ -8,47 +8,42 @@ $(function() {
   function setMinDate(selector, date) {
     $(selector).datepicker("option", "minDate", date);
   }
+
   function setMaxDate(selector, date) {
     $(selector).datepicker("option", "maxDate", date);
   }
 
-  $("#feed_lodgement_date_start").datepicker({
-    dateFormat: "yy-mm-dd",
-    onClose: function(selectedDate) {
-      setMinDate("#feed_lodgement_date_end", selectedDate);
+  function setupStartDate(start_selector, end_selector) {
+    $(start_selector).datepicker({
+      dateFormat: "yy-mm-dd",
+      onClose: function(selectedDate) {
+        setMinDate(end_selector, selectedDate);
+      }
+    });
+    if ($(start_selector).datepicker("getDate") != null) {
+      setMinDate(end_selector, $(start_selector).datepicker("getDate"));
     }
-  });
-  $("#feed_lodgement_date_end").datepicker({
-    dateFormat: "yy-mm-dd",
-    onClose: function(selectedDate) {
-      setMaxDate("#feed_lodgement_date_start", selectedDate);
-    }
-  });
-  $("#feed_last_modified_date_start").datepicker({
-    dateFormat: "yy-mm-dd",
-    onClose: function(selectedDate) {
-      setMinDate("#feed_last_modified_date_end", selectedDate);
-    }
-  });
-  $("#feed_last_modified_date_end").datepicker({
-    dateFormat: "yy-mm-dd",
-    onClose: function(selectedDate) {
-      setMaxDate("#feed_last_modified_date_start", selectedDate);
-    }
-  });
+  }
 
-  if ($("#feed_lodgement_date_start").datepicker("getDate") != null) {
-    setMinDate("#feed_lodgement_date_end", $("#feed_lodgement_date_start").datepicker("getDate"));
+  function setupEndDate(start_selector, end_selector) {
+    $(end_selector).datepicker({
+      dateFormat: "yy-mm-dd",
+      onClose: function(selectedDate) {
+        setMaxDate(start_selector, selectedDate);
+      }
+    });
+    if ($(end_selector).datepicker("getDate") != null) {
+      setMaxDate(start_selector, $(end_selector).datepicker("getDate"));
+    }
   }
-  if ($("#feed_lodgement_date_end").datepicker("getDate") != null) {
-    setMaxDate("#feed_lodgement_date_start", $("#feed_lodgement_date_end").datepicker("getDate"));
+
+  function setupDateRange(start_selector, end_selector) {
+    setupStartDate(start_selector, end_selector);
+    setupEndDate(start_selector, end_selector);
   }
-  if ($("#feed_last_modified_date_start").datepicker("getDate") != null) {
-    setMinDate("#feed_last_modified_date_end", $("#feed_last_modified_date_start").datepicker("getDate"));
-  }
-  if ($("#feed_last_modified_date_end").datepicker("getDate") != null) {
-    setMaxDate("#feed_last_modified_date_start", $("#feed_last_modified_date_end").datepicker("getDate"));
-  }
+
+  setupDateRange("#feed_lodgement_date_start", "#feed_lodgement_date_end");
+  setupDateRange("#feed_last_modified_date_start", "#feed_last_modified_date_end");
 
   $("#filter-heading").click(function(){
     $("#filters").toggle("fast");
