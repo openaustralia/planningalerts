@@ -1,3 +1,11 @@
+function y_position_or_fallback(d, i, y) {
+  if (d.value.y0 + d.value.y > 1) {
+    return y(d.value.y0 + d.value.y / 2);
+  } else {
+    return y(maxDateVal / ( 2 - i ));
+  }
+}
+
 function onStackedDataLoaded(selector, data) {
   // Add chart
   var parseDate = d3.time.format("%Y-%m-%d");
@@ -89,14 +97,7 @@ function onStackedDataLoaded(selector, data) {
       return { color: d.color, value: d.values[d.values.length - 1] };
     })
     .attr("transform", function(d, i) {
-      var y_position_or_fallback;
-      if (d.value.y0 + d.value.y > 1) {
-        y_position_or_fallback = y(d.value.y0 + d.value.y / 2);
-      } else {
-        y_position_or_fallback = y(maxDateVal / ( 2 - i ));
-      }
-
-      return "translate(" + x(d.value.date) + "," + y_position_or_fallback + ")";
+      return "translate(" + x(d.value.date) + "," + y_position_or_fallback(d, i, y) + ")";
     })
     .attr("x", width + 10)
     .attr("dy", ".35em")
@@ -109,15 +110,8 @@ function onStackedDataLoaded(selector, data) {
       return { name: d.name, value: d.values[d.values.length - 1] };
     })
     .attr("transform", function(d, i) {
-        var y_position_or_fallback;
-        if (d.value.y0 + d.value.y > 1) {
-          y_position_or_fallback = y(d.value.y0 + d.value.y / 2);
-        } else {
-          y_position_or_fallback = y(maxDateVal / ( 2 - i ));
-        }
-
         var x_position_plus_offset = x(d.value.date) + 30;
-        var y_position_plus_offset = y_position_or_fallback + 8;
+        var y_position_plus_offset = y_position_or_fallback(d, i, y) + 8;
       return "translate(" + x_position_plus_offset + "," + y_position_plus_offset + ")";
     })
     .attr("x", width)
