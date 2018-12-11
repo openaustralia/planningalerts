@@ -22,8 +22,7 @@ function stackedAreaTimeseries(selector, url, title) {
     var y = d3.scale.linear()
       .range([height, 0]);
 
-    var color = d3.scale.category20();
-    var colors = ["#1d3d61", "#e3821f"]
+    var colors = ["#1d3d61", "#e3821f"];
 
     var xAxis = d3.svg.axis()
       .scale(x)
