@@ -151,12 +151,6 @@ Rails.application.routes.draw do
 
   get "donations" => redirect("/donations/new")
 
-  resources :performance, only: [:index] do
-    collection do
-      get :comments
-    end
-  end
-
   root to: "applications#address"
 
   get "/404", to: "static#error_404"

@@ -17,20 +17,6 @@ class Comment < ApplicationRecord
   scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
   scope(:to_councillor, -> { joins(:councillor) })
 
-  scope(:visible_with_unique_emails_for_date, lambda do |date|
-    visible.where("date(confirmed_at) = ?", date).group(:email)
-  end)
-
-  scope(:by_first_time_commenters_for_date, lambda do |date|
-    visible_with_unique_emails_for_date(date)
-      .select { |c| where("email = ? AND confirmed_at < ?", c.email, c.confirmed_at.to_date).empty? }
-  end)
-
-  scope(:by_returning_commenters_for_date, lambda do |date|
-    visible_with_unique_emails_for_date(date)
-      .select { |c| where("email = ? AND confirmed_at < ?", c.email, c.confirmed_at.to_date).any? }
-  end)
-
   def confirm!
     return if confirmed
 
