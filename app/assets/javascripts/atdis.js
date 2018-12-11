@@ -13,12 +13,16 @@ $(function() {
     $(selector).datepicker("option", "maxDate", date);
   }
 
-  function setupStartDate(start_selector, end_selector) {
-    $(start_selector).datepicker({
+  function setupDatePicker(selector, onClose) {
+    $(selector).datepicker({
       dateFormat: "yy-mm-dd",
-      onClose: function(selectedDate) {
-        setMinDate(end_selector, selectedDate);
-      }
+      onClose: onClose
+    });
+  }
+
+  function setupStartDate(start_selector, end_selector) {
+    setupDatePicker(start_selector, function(selectedDate) {
+      setMinDate(end_selector, selectedDate);
     });
     if ($(start_selector).datepicker("getDate") != null) {
       setMinDate(end_selector, $(start_selector).datepicker("getDate"));
@@ -26,11 +30,8 @@ $(function() {
   }
 
   function setupEndDate(start_selector, end_selector) {
-    $(end_selector).datepicker({
-      dateFormat: "yy-mm-dd",
-      onClose: function(selectedDate) {
-        setMaxDate(start_selector, selectedDate);
-      }
+    setupDatePicker(end_selector, function(selectedDate) {
+      setMaxDate(start_selector, selectedDate);
     });
     if ($(end_selector).datepicker("getDate") != null) {
       setMaxDate(start_selector, $(end_selector).datepicker("getDate"));
