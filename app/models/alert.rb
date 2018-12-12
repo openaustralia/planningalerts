@@ -60,29 +60,6 @@ class Alert < ApplicationRecord
     freq.to_a.sort { |i, j| -(i[1] <=> j[1]) }
   end
 
-  def in_inactive_area?
-    radius = 2
-
-    c = Math.cos(radius / GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
-    s = Math.sin(radius / GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
-    multiplier = GeoKit::Mappable::EARTH_RADIUS_IN_KMS
-    Application.find_by_sql(
-      %|
-        SELECT * FROM `applications` WHERE (
-          lat IS NOT NULL AND lng IS NOT NULL
-          AND lat > DEGREES(ASIN(SIN(RADIANS(#{lat}))*#{c} - COS(RADIANS(#{lat}))*#{s}))
-          AND lat < DEGREES(ASIN(SIN(RADIANS(#{lat}))*#{c} + COS(RADIANS(#{lat}))*#{s}))
-          AND lng > #{lng} - DEGREES(ATAN2(#{s}, #{c} * COS(RADIANS(#{lat}))))
-          AND lng < #{lng} + DEGREES(ATAN2(#{s}, #{c} * COS(RADIANS(#{lat}))))
-          AND (ACOS(least(1,COS(RADIANS(#{lat}))*COS(RADIANS(#{lng}))*COS(RADIANS(lat))*COS(RADIANS(lng))+
-            COS(RADIANS(#{lat}))*SIN(RADIANS(#{lng}))*COS(RADIANS(lat))*SIN(RADIANS(lng))+
-            SIN(RADIANS(#{lat}))*SIN(RADIANS(lat))))*#{multiplier})
-            <= #{radius}
-        ) LIMIT 1
-      |
-    ).empty?
-  end
-
   def location
     Location.new(lat, lng) if lat && lng
   end
