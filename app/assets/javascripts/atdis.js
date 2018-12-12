@@ -5,42 +5,23 @@
 // All this logic will automatically be available in application.js.
 
 $(function() {
-  function setMinDate(selector, date) {
-    $(selector).datepicker("option", "minDate", date);
-  }
-
-  function setMaxDate(selector, date) {
-    $(selector).datepicker("option", "maxDate", date);
-  }
-
-  function setupDatePicker(selector, onClose) {
-    $(selector).datepicker({
+  // When this_selector is updated, update the option on the other_selector
+  function setupDatePicker(this_selector, other_selector, option) {
+    $(this_selector).datepicker({
       dateFormat: "yy-mm-dd",
-      onClose: onClose
+      onClose: function(date) {
+        $(other_selector).datepicker("option", option, date);
+      }
     });
-  }
-
-  function setupStartDate(start_selector, end_selector) {
-    setupDatePicker(start_selector, function(selectedDate) {
-      setMinDate(end_selector, selectedDate);
-    });
-    if ($(start_selector).datepicker("getDate") != null) {
-      setMinDate(end_selector, $(start_selector).datepicker("getDate"));
-    }
-  }
-
-  function setupEndDate(start_selector, end_selector) {
-    setupDatePicker(end_selector, function(selectedDate) {
-      setMaxDate(start_selector, selectedDate);
-    });
-    if ($(end_selector).datepicker("getDate") != null) {
-      setMaxDate(start_selector, $(end_selector).datepicker("getDate"));
+    if ($(this_selector).datepicker("getDate") != null) {
+      var date = $(this_selector).datepicker("getDate");
+      $(other_selector).datepicker("option", option, date);
     }
   }
 
   function setupDateRange(start_selector, end_selector) {
-    setupStartDate(start_selector, end_selector);
-    setupEndDate(start_selector, end_selector);
+    setupDatePicker(start_selector, end_selector, "minDate");
+    setupDatePicker(end_selector, start_selector, "maxDate");
   }
 
   setupDateRange("#feed_lodgement_date_start", "#feed_lodgement_date_end");
