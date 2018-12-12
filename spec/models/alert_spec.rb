@@ -243,20 +243,6 @@ describe Alert do
     end
   end
 
-  describe "#address_for_placeholder" do
-    it "has a default address" do
-      expect(Alert.new.address_for_placeholder).to eql "1 Sowerby St, Goulburn, NSW 2580"
-    end
-
-    it "can be set to something else" do
-      expect(
-        Alert.new(
-          address_for_placeholder: "5 Boaty St, Boat Face"
-        ).address_for_placeholder
-      ).to eql "5 Boaty St, Boat Face"
-    end
-  end
-
   describe "recent applications for this user" do
     before :each do
       @alert = create(:alert, email: "matthew@openaustralia.org", address: address, radius_meters: 2000)

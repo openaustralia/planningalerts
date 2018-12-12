@@ -9,8 +9,6 @@ class Alert < ApplicationRecord
   before_validation :geocode_from_address, unless: :geocoded?
   include EmailConfirmable
 
-  attr_writer :address_for_placeholder
-
   scope(:active, -> { where(confirmed: true, unsubscribed: false) })
   scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
 
@@ -33,10 +31,6 @@ class Alert < ApplicationRecord
 
   def subscription
     super
-  end
-
-  def address_for_placeholder
-    @address_for_placeholder || "1 Sowerby St, Goulburn, NSW 2580"
   end
 
   # Pass an array of objects. Count the distribution of objects and return as a hash of object: :count
