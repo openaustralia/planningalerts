@@ -1,5 +1,7 @@
 # PlanningAlerts
 
+[![Build Status](https://travis-ci.org/openaustralia/planningalerts.svg?branch=master)](https://travis-ci.org/openaustralia/planningalerts) [![Coverage Status](https://coveralls.io/repos/github/openaustralia/planningalerts/badge.svg?branch=master)](https://coveralls.io/github/openaustralia/planningalerts?branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/maintainability)](https://codeclimate.com/github/openaustralia/planningalerts/maintainability)
+
 Find out and have your say about development applications in your area.
 
 This is the code for the [web application](http://www.planningalerts.org.au/) side of things written using Ruby on Rails. The original code from [PlanningAlerts.com](http://www.planningalerts.com), which this app is based on, was written using PHP.
@@ -31,8 +33,6 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 * [License](#license)
 
 ## Development
-
-[![Build Status](https://travis-ci.org/openaustralia/planningalerts.svg?branch=master)](https://travis-ci.org/openaustralia/planningalerts) [![Coverage Status](https://coveralls.io/repos/github/openaustralia/planningalerts/badge.svg?branch=master)](https://coveralls.io/github/openaustralia/planningalerts?branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/maintainability)](https://codeclimate.com/github/openaustralia/planningalerts/maintainability)
 
 **Install Dependencies**
  * Install MySql - On macOS download dmg from [http://dev.mysql.com/downloads/](http://dev.mysql.com/downloads/)
