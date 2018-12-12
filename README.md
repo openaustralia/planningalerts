@@ -32,7 +32,7 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 ## Development
 
-[![Build Status](https://travis-ci.org/openaustralia/planningalerts.png?branch=master)](https://travis-ci.org/openaustralia/planningalerts) [![Coverage Status](https://coveralls.io/repos/openaustralia/planningalerts/badge.png?branch=master)](https://coveralls.io/r/openaustralia/planningalerts?branch=master) [![Code Climate](https://codeclimate.com/github/openaustralia/planningalerts.png)](https://codeclimate.com/github/openaustralia/planningalerts)
+[![Build Status](https://travis-ci.org/openaustralia/planningalerts.svg?branch=master)](https://travis-ci.org/openaustralia/planningalerts) [![Coverage Status](https://coveralls.io/repos/github/openaustralia/planningalerts/badge.svg?branch=master)](https://coveralls.io/github/openaustralia/planningalerts?branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/maintainability)](https://codeclimate.com/github/openaustralia/planningalerts/maintainability)
 
 **Install Dependencies**
  * Install MySql - On macOS download dmg from [http://dev.mysql.com/downloads/](http://dev.mysql.com/downloads/)
@@ -172,7 +172,7 @@ If you'd like to add new councillors for a planning authority, there are a numbe
 
 1. Firstly, **make sure the data for your councillors is available from the [`australian_local_councillors_popolo` repository](https://github.com/openaustralia/australian_local_councillors_popolo)**. Follow its [instructions for adding new councillor data there](https://github.com/openaustralia/australian_local_councillors_popolo#updates).
 2. If you're [using WriteIt](#integrating-with-writeit) then the next step is to **refresh the data source in WriteIt so it knows about the coucillors you've added to the popolo data**.
-   
+
    **Confirm that you can now find the new councillors by searching for their names in the [WriteIt _frontend_](http://planningalerts.writeit.ciudadanointeligente.org/en/write/who/)**. Just because they are present in the [Recipents Page](http://planningalerts.writeit.ciudadanointeligente.org/en/manage/recipients/) or [in the API](http://planningalerts.writeit.ciudadanointeligente.org/en/manage/settings/api/) does not mean their emails have been loaded and they are contactable.
 4. **Run [the morph.io scraper](https://morph.io/openaustralia/australian_local_councillors_images) that copies the councillor’s images for use in PlanningAlerts**. Wait for it to finish running before continuing so that the councillors images are available for PlanningAlerts.
 5. Now **visit the authority admin page and click the “Load Councillors” button**.
