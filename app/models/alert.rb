@@ -23,18 +23,6 @@ class Alert < ApplicationRecord
     self.lng = loc.lng
   end
 
-  # TODO: This can probably be removed after being run on production
-  #       because all future alerts will be created with an associated AlertSubscriber
-  #       see spec/models/alert_spec.rb:11
-  def self.create_alert_subscribers_for_existing_alerts
-    Alert.find_in_batches do |batch|
-      batch.each do |alert|
-        alert.attach_alert_subscriber
-        alert.save
-      end
-    end
-  end
-
   def geocoded?
     location.present?
   end
