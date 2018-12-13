@@ -10,7 +10,7 @@ class ImportApplicationsService
   end
 
   def call
-    time = Benchmark.ms { collect_applications_date_range }
+    time = Benchmark.ms { import_applications_date_range }
     logger.info "Took #{(time / 1000).to_i} s to import applications from #{authority.full_name_and_state}"
   end
 
@@ -18,11 +18,11 @@ class ImportApplicationsService
 
   attr_reader :authority, :start_date, :end_date, :morph_api_key, :logger
 
-  # Collect all the applications for this authority by scraping
-  def collect_applications_date_range
+  # Import all the applications for this authority from morph.io
+  def import_applications_date_range
     count = 0
     error_count = 0
-    collect_unsaved_applications_date_range.each do |application|
+    import_unsaved_applications_date_range.each do |application|
       # TODO: Consider if it would be better to overwrite applications with new data if they already exists
       # This would allow for the possibility that the application information was incorrectly entered at source
       # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
@@ -44,22 +44,22 @@ class ImportApplicationsService
   end
 
   # Same as collection_applications_data_range except the applications are returned rather than saved
-  def collect_unsaved_applications_date_range
-    scraper_data_morph_style.map do |attributes|
+  def import_unsaved_applications_date_range
+    import_data.map do |attributes|
       authority.applications.build(attributes)
     end
   end
 
-  def scraper_data_morph_style
-    text = ImportApplicationsService.open_url_safe(morph_feed_url_for_date_range)
+  def import_data
+    text = ImportApplicationsService.open_url_safe(morph_url_for_date_range)
     if text
-      translate_morph_feed_data(text)
+      translate_morph_data(text)
     else
       []
     end
   end
 
-  def morph_feed_url_for_date_range
+  def morph_url_for_date_range
     query = CGI.escape("select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
     "https://api.morph.io/#{authority.morph_name}/data.json?query=#{query}&key=#{morph_api_key}"
   end
@@ -72,7 +72,7 @@ class ImportApplicationsService
     nil
   end
 
-  def translate_morph_feed_data(feed_data)
+  def translate_morph_data(feed_data)
     j = JSON.parse(feed_data)
     # Do a sanity check on the structure of the feed data
     if j.is_a?(Array) && j.all? { |a| a.is_a?(Hash) }
