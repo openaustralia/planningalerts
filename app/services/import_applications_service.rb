@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-# TODO: Rename to ImportApplicationsService
-class CollectApplicationsService
+class ImportApplicationsService
   def initialize(authority:, scrape_delay:, logger:)
     @authority = authority
     @start_date = Time.zone.today - scrape_delay
@@ -52,7 +51,7 @@ class CollectApplicationsService
   end
 
   def scraper_data_morph_style
-    text = CollectApplicationsService.open_url_safe(morph_feed_url_for_date_range)
+    text = ImportApplicationsService.open_url_safe(morph_feed_url_for_date_range)
     if text
       translate_morph_feed_data(text)
     else

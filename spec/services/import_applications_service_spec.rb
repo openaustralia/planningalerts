@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe CollectApplicationsService do
+describe ImportApplicationsService do
   before :each do
     Authority.delete_all
     @auth = create(:authority, full_name: "Fiddlesticks", state: "NSW", short_name: "Fiddle")
@@ -13,7 +13,7 @@ describe CollectApplicationsService do
     )
   end
 
-  describe "collecting applications from the scraper web service urls" do
+  describe "importing applications from the scraper web service urls" do
     before :each do
       feed = <<-JSON
       [
@@ -39,15 +39,15 @@ describe CollectApplicationsService do
       JSON
       @date = Date.new(2009, 1, 1)
       Application.delete_all
-      allow(CollectApplicationsService).to receive(:open_url_safe).and_return(feed)
+      allow(ImportApplicationsService).to receive(:open_url_safe).and_return(feed)
     end
 
-    it "should collect the correct applications" do
+    it "should import the correct applications" do
       logger = double
       expect(logger).to receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
       expect(logger).to receive(:info).with("Took 0 s to import applications from Fiddlesticks, NSW")
       Timecop.freeze(@date) do
-        CollectApplicationsService.new(authority: @auth, scrape_delay: 0, logger: logger).call
+        ImportApplicationsService.new(authority: @auth, scrape_delay: 0, logger: logger).call
       end
       expect(Application.count).to eq(2)
       r1 = Application.find_by(council_reference: "R1")
@@ -70,8 +70,8 @@ describe CollectApplicationsService do
 
       # Getting the feed twice with the same content
       Timecop.freeze(@date) do
-        CollectApplicationsService.new(authority: @auth, scrape_delay: 0, logger: logger).call
-        CollectApplicationsService.new(authority: @auth, scrape_delay: 0, logger: logger).call
+        ImportApplicationsService.new(authority: @auth, scrape_delay: 0, logger: logger).call
+        ImportApplicationsService.new(authority: @auth, scrape_delay: 0, logger: logger).call
       end
       expect(Application.count).to eq(2)
     end
