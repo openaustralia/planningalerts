@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: Rename to ImportApplicationsService
 class CollectApplicationsService
   def initialize(authority:, scrape_delay:, logger:)
     @authority = authority
@@ -11,7 +12,7 @@ class CollectApplicationsService
 
   def call
     time = Benchmark.ms { collect_applications_date_range }
-    logger.info "Took #{(time / 1000).to_i} s to collect applications from #{authority.full_name_and_state}"
+    logger.info "Took #{(time / 1000).to_i} s to import applications from #{authority.full_name_and_state}"
   end
 
   private

@@ -45,7 +45,7 @@ describe CollectApplicationsService do
     it "should collect the correct applications" do
       logger = double
       expect(logger).to receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
-      expect(logger).to receive(:info).with("Took 0 s to collect applications from Fiddlesticks, NSW")
+      expect(logger).to receive(:info).with("Took 0 s to import applications from Fiddlesticks, NSW")
       Timecop.freeze(@date) do
         CollectApplicationsService.new(authority: @auth, scrape_delay: 0, logger: logger).call
       end
@@ -66,7 +66,7 @@ describe CollectApplicationsService do
       logger = double
       expect(logger).to receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
       expect(logger).to receive(:info).with("0 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
-      expect(logger).to receive(:info).twice.with("Took 0 s to collect applications from Fiddlesticks, NSW")
+      expect(logger).to receive(:info).twice.with("Took 0 s to import applications from Fiddlesticks, NSW")
 
       # Getting the feed twice with the same content
       Timecop.freeze(@date) do
