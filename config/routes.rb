@@ -104,6 +104,7 @@ Rails.application.routes.draw do
       end
     end
     resources :councillor_contributions, only: %i[new show]
+    get :under_the_hood
   end
 
   resources :councillor_contributions, only: [:index]

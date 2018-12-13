@@ -9,8 +9,6 @@ class Alert < ApplicationRecord
   before_validation :geocode_from_address, unless: :geocoded?
   include EmailConfirmable
 
-  attr_writer :address_for_placeholder
-
   scope(:active, -> { where(confirmed: true, unsubscribed: false) })
   scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
 
@@ -21,18 +19,6 @@ class Alert < ApplicationRecord
 
     self.lat = loc.lat
     self.lng = loc.lng
-  end
-
-  # TODO: This can probably be removed after being run on production
-  #       because all future alerts will be created with an associated AlertSubscriber
-  #       see spec/models/alert_spec.rb:11
-  def self.create_alert_subscribers_for_existing_alerts
-    Alert.find_in_batches do |batch|
-      batch.each do |alert|
-        alert.attach_alert_subscriber
-        alert.save
-      end
-    end
   end
 
   def geocoded?
@@ -47,10 +33,6 @@ class Alert < ApplicationRecord
     super
   end
 
-  def address_for_placeholder
-    @address_for_placeholder || "1 Sowerby St, Goulburn, NSW 2580"
-  end
-
   # Pass an array of objects. Count the distribution of objects and return as a hash of object: :count
   def self.frequency_distribution(array)
     freq = {}
@@ -58,29 +40,6 @@ class Alert < ApplicationRecord
       freq[i] = (freq[i] || 0) + 1
     end
     freq.to_a.sort { |i, j| -(i[1] <=> j[1]) }
-  end
-
-  def in_inactive_area?
-    radius = 2
-
-    c = Math.cos(radius / GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
-    s = Math.sin(radius / GeoKit::Mappable::EARTH_RADIUS_IN_KMS)
-    multiplier = GeoKit::Mappable::EARTH_RADIUS_IN_KMS
-    Application.find_by_sql(
-      %|
-        SELECT * FROM `applications` WHERE (
-          lat IS NOT NULL AND lng IS NOT NULL
-          AND lat > DEGREES(ASIN(SIN(RADIANS(#{lat}))*#{c} - COS(RADIANS(#{lat}))*#{s}))
-          AND lat < DEGREES(ASIN(SIN(RADIANS(#{lat}))*#{c} + COS(RADIANS(#{lat}))*#{s}))
-          AND lng > #{lng} - DEGREES(ATAN2(#{s}, #{c} * COS(RADIANS(#{lat}))))
-          AND lng < #{lng} + DEGREES(ATAN2(#{s}, #{c} * COS(RADIANS(#{lat}))))
-          AND (ACOS(least(1,COS(RADIANS(#{lat}))*COS(RADIANS(#{lng}))*COS(RADIANS(lat))*COS(RADIANS(lng))+
-            COS(RADIANS(#{lat}))*SIN(RADIANS(#{lng}))*COS(RADIANS(lat))*SIN(RADIANS(lng))+
-            SIN(RADIANS(#{lat}))*SIN(RADIANS(lat))))*#{multiplier})
-            <= #{radius}
-        ) LIMIT 1
-      |
-    ).empty?
   end
 
   def location

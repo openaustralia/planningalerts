@@ -44,7 +44,14 @@
         "comments posted"
       );
 
-  = render "under_the_hood", authority: @authority
+  %h4 Under the Hood
+  %p
+    Are you a developer or keen to learn some new things and help out in the process?
+    Then, #{link_to "look under the hood", authority_under_the_hood_path(@authority.short_name_encoded)},
+    see more about how the information gets into PlanningAlerts, what problems are
+    happening and what you might do to help fix them.
+  %p= link_to "Look under the hood", authority_under_the_hood_path(@authority.short_name_encoded)
+
 - else
   %p
     This authority is

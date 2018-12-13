@@ -101,10 +101,6 @@ class Authority < ApplicationRecord
     earliest_application&.date_scraped
   end
 
-  def morph_url
-    "https://morph.io/#{morph_name}" if morph_name.present?
-  end
-
   # So that the encoding function can be used elsewhere
   def self.short_name_encoded(short_name)
     short_name.downcase.tr(" ", "_").gsub(/\W/, "")

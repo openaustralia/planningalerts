@@ -172,33 +172,6 @@ describe Alert do
     end
   end
 
-  describe ".create_alert_subscribers_for_existing_alerts" do
-    before do
-      create(:alert, email: "email@one.org")
-      create(:alert, email: "email@one.org")
-      create(:alert, email: "email@two.org")
-      create(:alert, email: "email@three.org")
-      create(:alert, email: "email@three.org")
-
-      # This is to make the setup data match all the records that were created
-      # before the callback to create associated AlertSubscribers was added.
-      Alert.all.each { |a| a.update(alert_subscriber_id: nil) }
-      AlertSubscriber.delete_all
-    end
-
-    it "creates new alert subscribers for each unique email in Alerts" do
-      Alert.create_alert_subscribers_for_existing_alerts
-
-      expect(AlertSubscriber.count).to eq 3
-    end
-
-    it "saves the alert so the association is persisted" do
-      Alert.create_alert_subscribers_for_existing_alerts
-
-      expect(Alert.first.reload.alert_subscriber).to be_present
-    end
-  end
-
   describe "#geocode_from_address" do
     let(:original_address) { "24 Bruce Road, Glenbrook" }
 
@@ -267,20 +240,6 @@ describe Alert do
       Timecop.freeze(action_time) { alert.unsubscribe! }
 
       expect(alert.unsubscribed_at).to eql action_time
-    end
-  end
-
-  describe "#address_for_placeholder" do
-    it "has a default address" do
-      expect(Alert.new.address_for_placeholder).to eql "1 Sowerby St, Goulburn, NSW 2580"
-    end
-
-    it "can be set to something else" do
-      expect(
-        Alert.new(
-          address_for_placeholder: "5 Boaty St, Boat Face"
-        ).address_for_placeholder
-      ).to eql "5 Boaty St, Boat Face"
     end
   end
 

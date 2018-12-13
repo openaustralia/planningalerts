@@ -10,6 +10,11 @@ class AuthoritiesController < ApplicationController
   end
 
   def show
+    # TODO: Use something like the friendly_id gem instead
     @authority = Authority.find_short_name_encoded!(params[:id])
+  end
+
+  def under_the_hood
+    @authority = Authority.find_short_name_encoded!(params[:authority_id])
   end
 end

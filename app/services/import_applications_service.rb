@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CollectApplicationsService
+class ImportApplicationsService
   def initialize(authority:, scrape_delay:, logger:)
     @authority = authority
     @start_date = Time.zone.today - scrape_delay
@@ -11,7 +11,7 @@ class CollectApplicationsService
 
   def call
     time = Benchmark.ms { collect_applications_date_range }
-    logger.info "Took #{(time / 1000).to_i} s to collect applications from #{authority.full_name_and_state}"
+    logger.info "Took #{(time / 1000).to_i} s to import applications from #{authority.full_name_and_state}"
   end
 
   private
@@ -51,7 +51,7 @@ class CollectApplicationsService
   end
 
   def scraper_data_morph_style
-    text = CollectApplicationsService.open_url_safe(morph_feed_url_for_date_range)
+    text = ImportApplicationsService.open_url_safe(morph_feed_url_for_date_range)
     if text
       translate_morph_feed_data(text)
     else
