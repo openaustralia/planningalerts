@@ -52,10 +52,28 @@ class ImportApplicationsService
 
   def import_data
     text = ImportApplicationsService.open_url_safe(morph_url_for_date_range)
-    if text
-      translate_morph_data(text)
-    else
-      []
+    return [] if text.nil?
+
+    j = JSON.parse(text)
+    # Do a sanity check on the structure of the feed data
+    unless j.is_a?(Array) && j.all? { |a| a.is_a?(Hash) }
+      logger.error "Unexpected result from morph API: #{text}"
+      return []
+    end
+
+    j.map do |a|
+      {
+        council_reference: a["council_reference"],
+        address: a["address"],
+        description: a["description"],
+        info_url: a["info_url"],
+        comment_url: a["comment_url"],
+        date_received: a["date_received"],
+        date_scraped: Time.zone.now,
+        # on_notice_from and on_notice_to tags are optional
+        on_notice_from: a["on_notice_from"],
+        on_notice_to: a["on_notice_to"]
+      }
     end
   end
 
@@ -70,29 +88,5 @@ class ImportApplicationsService
   rescue StandardError => e
     logger.error "Error #{e} while getting data from url #{url}. So, skipping"
     nil
-  end
-
-  def translate_morph_data(feed_data)
-    j = JSON.parse(feed_data)
-    # Do a sanity check on the structure of the feed data
-    if j.is_a?(Array) && j.all? { |a| a.is_a?(Hash) }
-      j.map do |a|
-        {
-          council_reference: a["council_reference"],
-          address: a["address"],
-          description: a["description"],
-          info_url: a["info_url"],
-          comment_url: a["comment_url"],
-          date_received: a["date_received"],
-          date_scraped: Time.zone.now,
-          # on_notice_from and on_notice_to tags are optional
-          on_notice_from: a["on_notice_from"],
-          on_notice_to: a["on_notice_to"]
-        }
-      end
-    else
-      logger.error "Unexpected result from morph API: #{feed_data}"
-      []
-    end
   end
 end
