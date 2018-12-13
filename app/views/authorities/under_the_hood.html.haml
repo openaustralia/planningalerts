@@ -24,7 +24,7 @@
       format.
     %li
       If the scraper errors anyone who is
-      = link_to "watching the scraper", "#{@authority.morph_url}/watchers"
+      = link_to "watching the scraper", @authority.morph_watchers_url
       on morph.io gets informed via a daily email alert.
     %li
       The machine readable data is
@@ -46,9 +46,9 @@
 %p If something isn't right with the scraper or the data coming in then you could do one or several of the following
 %ul
   %li
-    = link_to "Report or view scraper issues", "https://github.com/#{@authority.morph_name}/issues"
+    = link_to "Report or view scraper issues", @authority.github_issues_url
   %li
-    = link_to "Fork the scraper on Github", "https://github.com/#{@authority.morph_name}"
+    = link_to "Fork the scraper on Github", @authority.github_url
     and try to fix it
   %li
     If it's an issue with the council website, then contact
@@ -62,5 +62,5 @@
     = link_to "Watch the scraper", @authority.morph_url
     on morph.io, so you will get an email if it errors. Press the "Watch" button in the top right.
   %li
-    #{link_to "View any scraper issues", "https://github.com/#{@authority.morph_name}/issues"}.
+    #{link_to "View any scraper issues", @authority.github_issues_url}.
     Help fix them or comment on them if they are out of date
