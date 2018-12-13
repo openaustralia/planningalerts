@@ -58,7 +58,7 @@ ActiveAdmin.register Authority do
       para "None loaded for this authority."
     end
 
-    h3 "Last scraper run log"
+    h3 "Last import run log"
     div do
       simple_format a.last_scraper_run_log
     end
@@ -86,14 +86,14 @@ ActiveAdmin.register Authority do
   end
 
   action_item :scrape, only: :show do
-    button_to("Scrape", scrape_admin_authority_path)
+    button_to("Import applications", import_admin_authority_path)
   end
 
-  member_action :scrape, method: :post do
+  member_action :import, method: :post do
     authority = Authority.find(params[:id])
     info_logger = AuthorityLogger.new(authority.id, logger)
     ImportApplicationsService.new(authority: authority, scrape_delay: ENV["SCRAPE_DELAY"].to_i, logger: info_logger).delay.call
-    redirect_to({ action: :show }, notice: "Queued for scraping!")
+    redirect_to({ action: :show }, notice: "Queued for importing!")
   end
 
   action_item :load_councillors, only: :show do
