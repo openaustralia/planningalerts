@@ -2,14 +2,16 @@
 
 namespace :planningalerts do
   namespace :applications do
-    desc "Scrape new applications, index them, send emails and generate XML sitemap"
+    desc "Import new applications, index them, send emails and generate XML sitemap"
+    # TODO: Rename the task to use "import"
+    # IMPORTANT: Also will need to update the cron job in production to match
     task scrape_and_email: [:scrape, "ts:index", :email, :sitemap]
 
-    desc "Scrape all the applications for the last few days for all the loaded authorities"
+    desc "Import all the applications for the last few days for all the loaded authorities"
     task :scrape, [:authority_short_name] => :environment do |_t, args|
       authorities = args[:authority_short_name] ? [Authority.find_short_name_encoded(args[:authority_short_name])] : Authority.active
       info_logger = AuthorityLogger.new(authority.id, Logger.new(STDOUT))
-      info_logger.info "Scraping #{authorities.count} authorities"
+      info_logger.info "Importing #{authorities.count} authorities"
       authorities.each do |authority|
         ImportApplicationsService.new(authority: authority, scrape_delay: ENV["SCRAPE_DELAY"].to_i, logger: info_logger).call
       end
