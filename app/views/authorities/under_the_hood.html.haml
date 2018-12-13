@@ -2,8 +2,65 @@
 %h3= yield :page_title
 
 %p
-  The information comes via our scraping platform #{link_to "morph.io", "https://morph.io"}. You are able to fork scrapers and collaborate
-  via Git.
+  More of the gory details of how information gets into PlanningAlerts. This is
+  here so you can see and learn how it's done but also so you are able to
+  fix things and see in detail what isn't working.
+%p
+  The steps
+  %ol
+    %li
+      Applications are published on the
+      = @authority.full_name
+      website in a human readable, non-structured form.
+    %li
+      The latest scraper code on Github is loaded by our scraping
+      platform #{link_to "morph.io", "https://morph.io"}.
+    %li
+      The
+      = link_to "scraper #{@authority.morph_name}", @authority.morph_url
+      on our scraping platform
+      = link_to "morph.io", "https://morph.io"
+      collects the information daily and converts it into a machine-readable
+      format.
+    %li
+      If the scraper errors anyone who is
+      = link_to "watching the scraper", "#{@authority.morph_url}/watchers"
+      on morph.io gets informed via a daily email alert.
+    %li
+      The machine readable data is
+      = link_to "validated and imported", anchor: "import"
+      into PlanningAlerts daily. If there are any validation errors on an
+      application, the application is skipped and the error is logged.
+      See below for the most recent logs.
+    %li
+      The information is published on PlanningAlerts, made available via the
+      #{link_to "API", api_howto_path}, and people are informed of new
+      applications via email alerts.
+
+%h4#import Most recent import logs
+
+.log_lines= simple_format @authority.last_scraper_run_log
+
+%h4 What you can do next
+
+%p If something isn't right with the scraper or the data coming in then you could do one or several of the following
 %ul
-  %li= link_to "View the scraper on morph.io", @authority.morph_url
-  %li= link_to "Report or view scraper issues", "https://github.com/#{@authority.morph_name}/issues"
+  %li
+    = link_to "Report or view scraper issues", "https://github.com/#{@authority.morph_name}/issues"
+  %li
+    = link_to "Fork the scraper on Github", "https://github.com/#{@authority.morph_name}"
+    and try to fix it
+  %li
+    If it's an issue with the council website, then contact
+    = @authority.full_name
+  %li
+    Contact us for help
+
+%p If everything is working fine right now but you want to help if something goes wrong
+%ul
+  %li
+    = link_to "Watch the scraper", @authority.morph_url
+    on morph.io, so you will get an email if it errors. Press the "Watch" button in the top right.
+  %li
+    #{link_to "View any scraper issues", "https://github.com/#{@authority.morph_name}/issues"}.
+    Help fix them or comment on them if they are out of date
