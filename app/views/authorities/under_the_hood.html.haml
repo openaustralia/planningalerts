@@ -17,14 +17,14 @@
       platform #{link_to "morph.io", "https://morph.io"}.
     %li
       The
-      = link_to "scraper #{@authority.morph_name}", @authority.morph_url
+      = link_to "scraper #{@authority.morph_name}", morph_url(@authority)
       on our scraping platform
       = link_to "morph.io", "https://morph.io"
       collects the information daily and converts it into a machine-readable
       format.
     %li
       If the scraper errors anyone who is
-      = link_to "watching the scraper", @authority.morph_watchers_url
+      = link_to "watching the scraper", morph_watchers_url(@authority)
       on morph.io gets informed via a daily email alert.
     %li
       The machine readable data is
@@ -46,9 +46,9 @@
 %p If something isn't right with the scraper or the data coming in then you could do one or several of the following
 %ul
   %li
-    = link_to "Report or view scraper issues", @authority.github_issues_url
+    = link_to "Report or view scraper issues", github_issues_url(@authority)
   %li
-    = link_to "Fork the scraper on Github", @authority.github_url
+    = link_to "Fork the scraper on Github", github_url(@authority)
     and try to fix it
   %li
     If it's an issue with the council website, then contact
@@ -59,8 +59,8 @@
 %p If everything is working fine right now but you want to help if something goes wrong
 %ul
   %li
-    = link_to "Watch the scraper", @authority.morph_url
+    = link_to "Watch the scraper", morph_url(@authority)
     on morph.io, so you will get an email if it errors. Press the "Watch" button in the top right.
   %li
-    #{link_to "View any scraper issues", @authority.github_issues_url}.
+    #{link_to "View any scraper issues", github_issues_url(@authority)}.
     Help fix them or comment on them if they are out of date
