@@ -8,7 +8,8 @@ class ApiController < ApplicationController
   # This is disabled because at least one commercial user of the API is doing
   # GET requests for JSONP instead of using XHR
   # TODO: Remove this line to re-enable CSRF protection on API actions
-  skip_before_action :verify_authenticity_token, except: %i[old_index howto]
+  skip_before_action :verify_authenticity_token,
+                     only: %i[authority postcode suburb point area date_scraped all]
 
   def authority
     # TODO: Handle the situation where the authority name isn't found
