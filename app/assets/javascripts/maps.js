@@ -4,7 +4,7 @@
 
 function initialiseMapAndPano(latitude, longitude, address) {
   initialiseMap("map_div", latitude, longitude, address);
-  initialisePano("pano", latitude, longitude);
+  initialisePano("pano", latitude, longitude, address);
 }
 
 function initialiseMap(id, latitude, longitude, address) {
@@ -18,7 +18,7 @@ function initialiseMap(id, latitude, longitude, address) {
   map.addMarker(marker);
 }
 
-function initialisePano(id, latitude, longitude) {
+function initialisePano(id, latitude, longitude, address) {
   // Can't yet figure out how to make the POV point at the marker
   var pointToLookAt = new google.maps.LatLng(latitude, longitude);
   var myPano = new  google.maps.StreetViewPanorama(document.getElementById(id),
