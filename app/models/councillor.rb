@@ -6,7 +6,7 @@ class Councillor < ApplicationRecord
   belongs_to :authority, optional: true
 
   validates :authority, :email, presence: true
-  validates :image_url, format: { with: /\Ahttps/, message: "must be HTTPS" }, allow_blank: true
+  validates :image_url, format: { with: /\Ahttps.*\z/, message: "must be HTTPS" }, allow_blank: true
 
   def initials
     first_letters = name.split(/\s/).collect { |word| word.first.upcase }
