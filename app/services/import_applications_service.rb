@@ -33,7 +33,7 @@ class ImportApplicationsService
         count += 1
       rescue StandardError => e
         error_count += 1
-        logger.error "Error #{e} while trying to save application #{application.council_reference} for #{full_name_and_state}. So, skipping"
+        logger.error "Error #{e} while trying to save application #{application.council_reference} for #{authority.full_name_and_state}. So, skipping"
       end
     end
 
