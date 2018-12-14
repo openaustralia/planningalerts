@@ -14,6 +14,14 @@ class ImportApplicationsService
     logger.info "Took #{(time / 1000).to_i} s to import applications from #{authority.full_name_and_state}"
   end
 
+  # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
+  def self.open_url_safe(url)
+    RestClient.get(url).body
+  rescue StandardError => e
+    logger.error "Error #{e} while getting data from url #{url}. So, skipping"
+    nil
+  end
+
   private
 
   attr_reader :authority, :start_date, :end_date, :morph_api_key, :logger
@@ -80,13 +88,5 @@ class ImportApplicationsService
   def morph_url_for_date_range
     query = CGI.escape("select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
     "https://api.morph.io/#{authority.morph_name}/data.json?query=#{query}&key=#{morph_api_key}"
-  end
-
-  # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
-  def self.open_url_safe(url)
-    RestClient.get(url).body
-  rescue StandardError => e
-    logger.error "Error #{e} while getting data from url #{url}. So, skipping"
-    nil
   end
 end
