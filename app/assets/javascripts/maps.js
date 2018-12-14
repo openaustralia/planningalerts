@@ -3,12 +3,12 @@
 //= require mxn.googlev3.core.js
 
 function initialiseMapAndPano(latitude, longitude, address) {
-  initialiseMap(latitude, longitude, address);
-  initialisePano(latitude, longitude);
+  initialiseMap("map_div", latitude, longitude, address);
+  initialisePano("pano", latitude, longitude);
 }
 
-function initialiseMap(latitude, longitude, address) {
-  var map = new mxn.Mapstraction("map_div","googlev3");
+function initialiseMap(id, latitude, longitude, address) {
+  var map = new mxn.Mapstraction(id, "googlev3");
   point = new mxn.LatLonPoint(latitude, longitude);
   map.setCenterAndZoom(point,16);
   map.addControls({ zoom: 'small', map_type: true });
@@ -18,10 +18,10 @@ function initialiseMap(latitude, longitude, address) {
   map.addMarker(marker);
 }
 
-function initialisePano(latitude, longitude) {
+function initialisePano(id, latitude, longitude) {
   // Can't yet figure out how to make the POV point at the marker
   var pointToLookAt = new google.maps.LatLng(latitude, longitude);
-  var myPano = new  google.maps.StreetViewPanorama(document.getElementById("pano"),
+  var myPano = new  google.maps.StreetViewPanorama(document.getElementById(id),
     {position: pointToLookAt, navigationControl: false, addressControl: false, zoom: 0});
   google.maps.event.addListener(myPano, 'position_changed', function() {
     // Orient the camera to face the position we're interested in
