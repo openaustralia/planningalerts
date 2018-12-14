@@ -151,6 +151,7 @@ group :development do
   gem "capistrano"
 
   # Help with code quality
+  gem "brakeman"
   gem "haml_lint", require: false
   gem "rubocop", "0.58.0", require: false # Using same version as defined in .codeclimate.yml
 end
