@@ -152,7 +152,7 @@ group :development do
 
   # Help with code quality
   gem "haml_lint", require: false
-  gem "rubocop", require: false
+  gem "rubocop", "0.58.0", require: false # Using same version as defined in .codeclimate.yml
 end
 
 group :production do

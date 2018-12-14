@@ -56,8 +56,8 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     raise "No default setting" if @strategies["default"].nil?
   end
 
-  def strategy(ip)
-    strategies[ip] || strategies["default"]
+  def strategy(ip_address)
+    strategies[ip_address] || strategies["default"]
   end
 
   def allowed?(request)
@@ -79,9 +79,9 @@ class ThrottleConfigurable < Rack::Throttle::Limiter
     end
   end
 
-  def valid_ip?(ip)
-    n = ip.split(".")
-    (n.count == 4 && n.all? { |m| m.to_i >= 0 && m.to_i <= 255 }) || (ip == "default")
+  def valid_ip?(ip_address)
+    n = ip_address.split(".")
+    (n.count == 4 && n.all? { |m| m.to_i >= 0 && m.to_i <= 255 }) || (ip_address == "default")
   end
 
   def add_hosts_to_strategies(hosts, strategy)
