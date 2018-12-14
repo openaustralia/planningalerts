@@ -1,6 +1,6 @@
 # PlanningAlerts
 
-[![Build Status](https://travis-ci.org/openaustralia/planningalerts.svg?branch=master)](https://travis-ci.org/openaustralia/planningalerts) [![Coverage Status](https://coveralls.io/repos/github/openaustralia/planningalerts/badge.svg?branch=master)](https://coveralls.io/github/openaustralia/planningalerts?branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/maintainability)](https://codeclimate.com/github/openaustralia/planningalerts/maintainability)
+[![Build Status](https://travis-ci.org/openaustralia/planningalerts.svg?branch=master)](https://travis-ci.org/openaustralia/planningalerts) [![Test Coverage](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/test_coverage)](https://codeclimate.com/github/openaustralia/planningalerts/test_coverage) [![Maintainability](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/maintainability)](https://codeclimate.com/github/openaustralia/planningalerts/maintainability)
 
 Find out and have your say about development applications in your area.
 
