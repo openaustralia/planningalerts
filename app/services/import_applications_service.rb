@@ -83,7 +83,7 @@ class ImportApplicationsService
   end
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
-  def open_url_safe(url)
+  def self.open_url_safe(url)
     RestClient.get(url).body
   rescue StandardError => e
     logger.error "Error #{e} while getting data from url #{url}. So, skipping"
