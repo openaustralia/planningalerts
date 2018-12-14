@@ -107,4 +107,14 @@ module ApplicationHelper
       "https://github.com/#{contributor[:github]}"
     end
   end
+
+  def our_sanitize(html)
+    cleaned = Sanitize.clean(html, Sanitize::Config::BASIC)
+    # We're trusting that the sanitize library does the right thing here. We
+    # kind of have to. It's returning some allowed html. So, we have to mark
+    # it as safe
+    # rubocop:disable Rails/OutputSafety
+    cleaned.html_safe
+    # rubocop:enable Rails/OutputSafety
+  end
 end
