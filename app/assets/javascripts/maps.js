@@ -2,11 +2,6 @@
 //= require mxn.core.js
 //= require mxn.googlev3.core.js
 
-function initialiseMapAndPano(latitude, longitude, address) {
-  initialiseMap("map_div", latitude, longitude, address);
-  initialisePano("pano", latitude, longitude, address);
-}
-
 function initialiseMap(id, latitude, longitude, address) {
   var map = new mxn.Mapstraction(id, "googlev3");
   point = new mxn.LatLonPoint(latitude, longitude);

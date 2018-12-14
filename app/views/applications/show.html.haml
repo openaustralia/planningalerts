@@ -17,13 +17,13 @@
         %h3.address= @application.address
 
       - if @application.location
-        #map_div
+        #map_div{data: {latitude: @application.lat, longitude: @application.lng, address: @application.address}}
           %noscript= google_static_map(@application, size: "350x330")
         .print-media-only= google_static_map(@application, size: "350x330")
 
       .details
         - if @application.location
-          #pano
+          #pano{data: {latitude: @application.lat, longitude: @application.lng, address: @application.address}}
             %noscript= google_static_streetview(@application, size: "350x330")
             .print-media-only= google_static_streetview(@application, size: "350x330")
 
@@ -66,10 +66,24 @@
     = render "applications/twitter_share_button", application: @application
     = render "applications/facebook_share_button", application: @application
 
-- if @application.location
-  :javascript
-    $(document).ready(function(){
-      initialiseMapAndPano(#{@application.lat}, #{@application.lng}, "#{escape_javascript(@application.address)}");
-    })
+:javascript
+  $(document).ready(function(){
+    if ($("#map_div").length) {
+      initialiseMap(
+        "map_div",
+        $("#map_div").data("latitude"),
+        $("#map_div").data("longitude"),
+        $("#map_div").data("address")
+      );
+    }
+    if ($("#pano").length) {
+      initialisePano(
+        "pano",
+        $("#pano").data("latitude"),
+        $("#pano").data("longitude"),
+        $("#pano").data("address")
+      );
+    }
+  })
 
 = javascript_include_tag "maps"
