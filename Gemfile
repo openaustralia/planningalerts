@@ -112,7 +112,6 @@ group :test do
   gem "capybara"
   gem "chromedriver-helper"
   gem "climate_control"
-  gem "coveralls", require: false
   gem "database_cleaner"
   gem "email_spec", "~> 1.6"
   gem "factory_bot"
@@ -120,6 +119,7 @@ group :test do
   gem "rails-controller-testing"
   gem "rspec-rails", "~> 3"
   gem "selenium-webdriver"
+  gem "simplecov", require: false
   gem "stripe-ruby-mock", "~> 2.3.1", require: "stripe_mock"
   gem "timecop"
   gem "vcr"
