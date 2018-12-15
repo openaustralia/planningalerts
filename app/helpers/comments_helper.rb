@@ -1,15 +1,12 @@
 # frozen_string_literal: true
 
 module CommentsHelper
+  # to access our_sanitize
+  include ApplicationHelper
+
   def comment_as_html(text)
     # duplicate string to avoid "can't modify frozen String"
-    cleaned = Sanitize.clean(simple_format(auto_link(text.dup)), Sanitize::Config::BASIC)
-    # We're trusting that the sanitize library does the right thing here. We
-    # kind of have to. It's returning some allowed html. So, we have to mark
-    # it as safe
-    # rubocop:disable Rails/OutputSafety
-    cleaned.html_safe
-    # rubocop:enable Rails/OutputSafety
+    our_sanitize(simple_format(auto_link(text.dup)))
   end
 
   def comment_path(comment)
