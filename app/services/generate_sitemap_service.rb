@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PlanningAlertsSitemap
+class GenerateSitemapService
   include Rails.application.routes.url_helpers
 
   def generate(logger = Logger.new(STDOUT))
