@@ -109,6 +109,8 @@ module ApplicationHelper
   end
 
   def our_sanitize(html)
+    # Using sanitize gem here because it also adds rel="nofollow" to links automatically
+    # which reduces "SEO" spam
     cleaned = Sanitize.clean(html, Sanitize::Config::BASIC)
     # We're trusting that the sanitize library does the right thing here. We
     # kind of have to. It's returning some allowed html. So, we have to mark
