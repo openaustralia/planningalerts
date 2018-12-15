@@ -3,8 +3,8 @@
 class PlanningAlertsSitemap
   include Rails.application.routes.url_helpers
 
-  def generate
-    s = Sitemap.new(root_url(host: ENV["HOST"])[0..-2], Rails.root.join("public"))
+  def generate(logger = Logger.new(STDOUT))
+    s = Sitemap.new(root_url(host: ENV["HOST"])[0..-2], Rails.root.join("public"), logger)
 
     # TODO: There is some redundancy between what is going on here and what is listed in the routes.rb
     # Figure out if there is a way to combine the configuration information entirely in the routing.

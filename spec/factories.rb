@@ -18,6 +18,14 @@ FactoryBot.define do
     address { "A test address" }
     description { "pretty" }
     info_url { "http://foo.com" }
+
+    factory :geocoded_application do
+      lat { 1.0 }
+      lng { 2.0 }
+      suburb { "Sydney" }
+      state { "NSW" }
+      postcode { "2000" }
+    end
   end
 
   factory :add_comment do
