@@ -16,7 +16,7 @@ describe CommentsHelper do
 
     it "removes scary scripts" do
       expect(helper.comment_as_html("watch out <script>alert('danger');</script>"))
-        .to eql "<p>watch out </p>"
+        .to eql "<p>watch out alert('danger');</p>"
     end
 
     it { expect(helper.comment_as_html("watch out <script>alert('danger');</script>")).to be_html_safe }

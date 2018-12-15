@@ -70,9 +70,6 @@ gem "jquery-ui-rails"
 
 # Sanitizing and manipulating user input
 gem "rails_autolink"
-# TODO: move to new Rails santizer, this will be depreciated in Rails 5
-#       see http://edgeguides.rubyonrails.org/4_2_release_notes.html#html-sanitizer
-gem "rails-deprecated_sanitizer"
 gem "sanitize"
 
 # Startup setup and environment
