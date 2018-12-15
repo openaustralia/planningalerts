@@ -2,4 +2,4 @@
 %h1.page-title= @description
 = paginated_section @comments, previous_label: "« Newer", next_label: "Older »" do
   %ol#comments
-    = render @comments, in_list: true, with_address: true
+    = render partial: "comment", collection: @comments, locals: { in_list: true, with_address: true }

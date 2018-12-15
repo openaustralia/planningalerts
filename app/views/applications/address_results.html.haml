@@ -45,5 +45,5 @@
   -# Only show the top pagination links beyond the first page
   - if @page.to_i > 1
     = will_paginate @applications, previous_label: "« #{p}", next_label: "#{n} »"
-  %ol.applications= render @applications
+  %ol.applications= render partial: "application", collection: @applications
   = will_paginate @applications, previous_label: "« #{p}", next_label: "#{n} »"
