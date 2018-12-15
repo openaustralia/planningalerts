@@ -33,8 +33,7 @@ namespace :planningalerts do
 
   desc "Generate XML sitemap"
   task sitemap: :environment do
-    s = GenerateSitemapService.new
-    s.generate
+    GenerateSitemapService.new.call
   end
 
   # A response to something bad

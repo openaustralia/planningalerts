@@ -16,7 +16,7 @@ describe "GenerateSitemapService" do
   after(:each) { FileUtils.rm_f("public/sitemaps/sitemap1.xml.gz") }
 
   it "should include the path of the application page" do
-    GenerateSitemapService.new.generate(logger)
+    GenerateSitemapService.new(logger).call
 
     Zlib::GzipReader.open("public/sitemaps/sitemap1.xml.gz") do |gz|
       expect(gz.read).to include "/applications/#{application.id}"

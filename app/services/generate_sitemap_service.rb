@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
 class GenerateSitemapService
+  attr_reader :logger
   include Rails.application.routes.url_helpers
 
-  def generate(logger = Logger.new(STDOUT))
+  def initialize(logger = Logger.new(STDOUT))
+    @logger = logger
+  end
+
+  def call
     s = Sitemap.new(root_url(host: ENV["HOST"])[0..-2], Rails.root.join("public"), logger)
 
     # TODO: There is some redundancy between what is going on here and what is listed in the routes.rb
