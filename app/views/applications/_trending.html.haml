@@ -1,9 +1,9 @@
-.trending.container
-  %div
-    %h4 Trending planning applications across Australia
-    %p
-      The most commented on recent applications
+.trending
+  %h4 Trending planning applications across Australia
+  %p
+    The most commented on recent applications
 
-    %ol.applications= render partial: "application_trending", collection: applications, as: :application
+  .container
+    %ol= render partial: "application_trending", collection: applications, as: :application
 
-    = link_to "More&hellip;".html_safe, trending_applications_path, class: "cta"
+  = link_to "More&hellip;".html_safe, trending_applications_path, class: "cta"

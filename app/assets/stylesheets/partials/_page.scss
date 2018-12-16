@@ -582,14 +582,54 @@ form.address-search {
   margin: 0;
 }
 
-.trending h4 {
-  font-weight: 500;
-  margin-top: 0;
+.trending {
+  h4 {
+    font-weight: 500;
+    margin-top: 0;
+  }
+
+  a {
+    &:link,
+    &:visited {
+        color: $darkest;
+    }
+
+    &:active,
+    &:hover,
+    &:focus {
+      text-decoration: none;
+
+      .body {
+        color: $darkest;
+      }
+    }
+  }
+
+  ol {
+    @include no-bullets;
+    padding-left: 0;
+  }
+
+  .cta {
+    display: block;
+    text-align: right;
+    margin-top: .25em;
+
+    &:link {
+      text-decoration: underline;
+    }
+  }
+
+  article {
+    &:hover,
+    &:focus {
+      text-shadow: 0 1px 1px #fff;
+      background-color: $lightest-cool-highlight;
+    }
+  }
 }
 
-.tweets,
-.stats,
-.trending {
+.tweets, .stats {
   a {
     &:link,
     &:visited {
@@ -659,7 +699,7 @@ form.address-search {
   }
 }
 
-.tweets, .trending {
+.tweets {
   li > a {
     &:hover,
     &:focus {

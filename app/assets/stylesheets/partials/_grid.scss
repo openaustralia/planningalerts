@@ -389,7 +389,15 @@
     background-color: $lightest-cool-highlight;
   }
 
-  .tweets, .stats, .trending {
+  .trending {
+    li {
+      padding: 0;
+      @include span-columns(12);
+      &:nth-child(2n) { @include omega; }
+    }
+  }
+
+  .tweets, .stats {
     > div {
       padding-bottom: 1em;
     }
@@ -437,7 +445,7 @@
 
   }
 
-  .tweets, .trending {
+  .tweets {
     margin-top: 5em;
 
     li {
