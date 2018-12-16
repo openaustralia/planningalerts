@@ -256,4 +256,73 @@ http_interactions:
         Dec 17 22:55:21 +0000 2009","favourites_count":10,"utc_offset":null,"time_zone":null,"geo_enabled":false,"verified":false,"statuses_count":803,"lang":"en","contributors_enabled":false,"is_translator":false,"is_translation_enabled":false,"profile_background_color":"2B2B2B","profile_background_image_url":"http:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_image_url_https":"https:\/\/abs.twimg.com\/images\/themes\/theme1\/bg.png","profile_background_tile":false,"profile_image_url":"http:\/\/pbs.twimg.com\/profile_images\/583720959\/Screen_shot_2009-12-21_at_00.32.02_normal.png","profile_image_url_https":"https:\/\/pbs.twimg.com\/profile_images\/583720959\/Screen_shot_2009-12-21_at_00.32.02_normal.png","profile_link_color":"1D3D61","profile_sidebar_border_color":"FFFFFF","profile_sidebar_fill_color":"DDEEF6","profile_text_color":"333333","profile_use_background_image":false,"has_extended_profile":false,"default_profile":false,"default_profile_image":false,"following":false,"follow_request_sent":false,"notifications":false,"translator_type":"none"},"geo":null,"coordinates":null,"place":null,"contributors":[12711062],"is_quote_status":false,"retweet_count":0,"favorite_count":2,"favorited":false,"retweeted":false,"lang":"en"}]'
     http_version:
   recorded_at: Sun, 16 Dec 2018 20:09:02 GMT
+- request:
+    method: get
+    uri: https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=abc768a
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      User-Agent:
+      - TwitterRubyGem/6.2.0
+      Connection:
+      - close
+      Host:
+      - api.twitter.com
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Cache-Control:
+      - no-cache, no-store, must-revalidate, pre-check=0, post-check=0
+      Connection:
+      - close
+      Content-Disposition:
+      - attachment; filename=json.json
+      Content-Length:
+      - '69'
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Sun, 16 Dec 2018 20:57:52 GMT
+      Expires:
+      - Tue, 31 Mar 1981 05:00:00 GMT
+      Last-Modified:
+      - Sun, 16 Dec 2018 20:57:52 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - tsa_l
+      Status:
+      - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=631138519
+      X-Access-Level:
+      - read
+      X-Connection-Hash:
+      - 68de9da35884c2d52cc526f8843a8816
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Rate-Limit-Limit:
+      - '900'
+      X-Rate-Limit-Remaining:
+      - '899'
+      X-Rate-Limit-Reset:
+      - '1544994772'
+      X-Response-Time:
+      - '176'
+      X-Transaction:
+      - 0093aad9005b2c71
+      X-Twitter-Response-Tags:
+      - BouncerCompliant
+      X-Xss-Protection:
+      - 1; mode=block; report=https://twitter.com/i/xss_report
+    body:
+      encoding: UTF-8
+      string: '{"errors":[{"code":34,"message":"Sorry, that page does not exist."}]}'
+    http_version:
+  recorded_at: Sun, 16 Dec 2018 20:56:44 GMT
 recorded_with: VCR 4.0.0

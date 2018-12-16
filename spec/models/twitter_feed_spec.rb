@@ -34,6 +34,13 @@ describe TwitterFeed do
         expect(items[1].date).to eq Time.zone.parse("2018-11-21 23:46:57 UTC")
         expect(items[1].link).to eq "https://twitter.com/planningalerts/status/1065391145876828160"
       end
+
+      it "should return nothing for an invalid user" do
+        items = VCR.use_cassette("twitter") do
+          TwitterFeed.new("abc768a").items
+        end
+        expect(items).to be_empty
+      end
     end
   end
 end
