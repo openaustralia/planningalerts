@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class TwitterFeed
-  attr_reader :username
+  attr_reader :username, :logger
 
-  def initialize(username)
+  def initialize(username, logger = Logger.new(STDOUT))
     @username = username
+    @logger = logger
   end
 
   def feed
@@ -13,7 +14,8 @@ class TwitterFeed
       # If there's any kind of error just return an empty feed
       begin
         @feed ||= twitter.user_timeline(username)[0...2] || []
-      rescue StandardError
+      rescue StandardError => e
+        logger.error "while accessing twitter API: #{e}"
         []
       end
     else
