@@ -3,7 +3,7 @@
 class TwitterFeed
   attr_reader :username, :logger
 
-  def initialize(username, logger = Logger.new(STDOUT))
+  def initialize(username, logger)
     @username = username
     @logger = logger
   end

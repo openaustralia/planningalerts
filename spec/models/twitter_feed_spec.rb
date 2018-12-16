@@ -40,7 +40,7 @@ describe TwitterFeed do
 
         it "should return the last 2 tweets" do
           items = VCR.use_cassette("twitter") do
-            TwitterFeed.new(twitter_user).items
+            TwitterFeed.new(twitter_user, Logger.new(STDOUT)).items
           end
           expect(items.count).to eq 2
           expect(items[0].title).to eq "@wheelyweb definitely agree that things would be improved by showing a selection of trending applications in differ… https://t.co/z8XDZOz7kK"

@@ -51,7 +51,7 @@ module ApplicationHelper
   end
 
   def render_twitter_feed(username)
-    render partial: "shared/tweet", collection: TwitterFeed.new(username).items, as: :item
+    render partial: "shared/tweet", collection: TwitterFeed.new(username, logger).items, as: :item
   end
 
   def contributors
