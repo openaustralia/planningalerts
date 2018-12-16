@@ -10,16 +10,16 @@ class TwitterFeed
 
   def feed
     twitter = client
-    if twitter
-      # If there's any kind of error just return an empty feed
-      begin
-        @feed ||= twitter.user_timeline(username)[0...2] || []
-      rescue StandardError => e
-        logger.error "while accessing twitter API: #{e}"
-        []
-      end
-    else
+    if twitter.nil?
       logger.warn "No twitter API credentials set"
+      return []
+    end
+
+    # If there's any kind of error just return an empty feed
+    begin
+      @feed ||= twitter.user_timeline(username)[0...2] || []
+    rescue StandardError => e
+      logger.error "while accessing twitter API: #{e}"
       []
     end
   end
