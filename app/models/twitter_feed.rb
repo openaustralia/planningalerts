@@ -19,6 +19,7 @@ class TwitterFeed
         []
       end
     else
+      logger.warn "No twitter API credentials set"
       []
     end
   end

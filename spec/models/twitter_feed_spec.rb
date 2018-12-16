@@ -6,13 +6,20 @@ describe TwitterFeed do
   describe "#items" do
     let(:silent_logger) do
       logger = double
+      allow(logger).to receive(:warn)
       allow(logger).to receive(:error)
       logger
     end
 
     context "with no twitter credentials" do
       it "should return nothing" do
-        expect(TwitterFeed.new("planningalerts").items).to be_empty
+        expect(TwitterFeed.new("planningalerts", silent_logger).items).to be_empty
+      end
+
+      it "should log a warning" do
+        logger = double
+        expect(logger).to receive(:warn).with("No twitter API credentials set")
+        TwitterFeed.new("planningalerts", logger).items
       end
     end
 
