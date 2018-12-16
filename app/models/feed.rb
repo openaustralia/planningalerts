@@ -53,17 +53,19 @@ class Feed
   end
 
   def applications
-    u = URI.parse(url)
     # In development we don't have a multithreaded web server so we have to fake the serving of the data
     # Assume if the url is local it's actually for one of the test data sets. We could be more careful but
     # there is little point.
-    if Rails.env.development? && u.host == "localhost"
-      file = Feed.example_path(Rails.application.routes.recognize_path(u.path)[:number].to_i, page)
-      raise RestClient::ResourceNotFound unless File.exist?(file)
+    if Rails.env.development?
+      u = URI.parse(url)
+      if u.host == "localhost"
+        file = Feed.example_path(Rails.application.routes.recognize_path(u.path)[:number].to_i, page)
+        raise RestClient::ResourceNotFound unless File.exist?(file)
 
-      page = ATDIS::Models::Page.read_json(File.read(file))
-      page.url = url
-      page
+        page = ATDIS::Models::Page.read_json(File.read(file))
+        page.url = url
+        page
+      end
     else
       ATDIS::Feed.new(base_url).applications(feed_options)
     end
