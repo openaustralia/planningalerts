@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 module AtdisHelper
-  def yes_no(value)
-    value ? "yes" : "no"
-  end
-
   def attribute_value(value)
     if value.is_a?(Array)
       safe_join(value.map { |v| attribute_value(v) })
