@@ -76,7 +76,7 @@ class Feed
   end
 
   def self.example_path(number, page)
-    Rails.root.join("spec/atdis_json_examples/example#{number}_page#{page}.json")
+    "spec/atdis_json_examples/example#{number}_page#{page}.json"
   end
 
   private
