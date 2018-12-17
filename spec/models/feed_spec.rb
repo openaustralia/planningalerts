@@ -46,4 +46,21 @@ describe Feed do
       expect(f.applications).to eq applications
     end
   end
+
+  describe "#persisted?" do
+    it "should always be false" do
+      f = Feed.new(base_url: "http://foo.com")
+      expect(f.persisted?).to eq false
+    end
+  end
+
+  describe ".example_path" do
+    it "should return the file path to where the examples are stored" do
+      expect(Feed.example_path(6, 1)).to eq "spec/atdis_json_examples/example6_page1.json"
+    end
+
+    it "should return a path to an existing file" do
+      expect(File.exist?(Feed.example_path(1, 1))).to be true
+    end
+  end
 end
