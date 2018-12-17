@@ -121,8 +121,10 @@ class Alert < ApplicationRecord
 
   # This generates a LOT of email. Call with care
   # TODO: Untested method
+  # TODO: Move this to its own service
   def self.queue_up_alerts_for_next_day(info_logger = logger, batch_size = 100)
     alerts = Alert.active.all
+    # TODO: batches should be calculated by rounding up
     no_batches = alerts.count / batch_size + 1
     time_between_batches = 24.hours / no_batches
     info_logger.info "Checking #{alerts.count} active alerts"
