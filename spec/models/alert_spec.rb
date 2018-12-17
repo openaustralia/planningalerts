@@ -695,8 +695,7 @@ describe Alert do
       it "should log some messages" do
         logger = double
         expect(logger).to receive(:info).with("Checking 2 active alerts")
-        # TODO: The batch period is not optimal right now
-        expect(logger).to receive(:info).with("Splitting mailing for the next 24 hours into batches of size 1 roughly every 480 minutes")
+        expect(logger).to receive(:info).with("Splitting mailing for the next 24 hours into batches of size 1 roughly every 720 minutes")
         expect(logger).to receive(:info).with("Mailing jobs for the next 24 hours queued")
         Alert.queue_up_alerts_for_next_day(logger, 1)
       end

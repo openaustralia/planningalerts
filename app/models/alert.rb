@@ -124,8 +124,8 @@ class Alert < ApplicationRecord
   # TODO: Move this to its own service
   def self.queue_up_alerts_for_next_day(info_logger = logger, batch_size = 100)
     alerts = Alert.active.all
-    # TODO: batches should be calculated by rounding up
-    no_batches = alerts.count / batch_size + 1
+    no_batches = (alerts.count.to_f / batch_size).ceil
+    no_batches = 1 if no_batches.zero?
     time_between_batches = 24.hours / no_batches
     info_logger.info "Checking #{alerts.count} active alerts"
     info_logger.info "Splitting mailing for the next 24 hours into batches of size #{batch_size} roughly every #{time_between_batches / 60} minutes"
