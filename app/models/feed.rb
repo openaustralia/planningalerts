@@ -76,7 +76,7 @@ class Feed
   end
 
   def self.example_path(number, page)
-    "spec/atdis_json_examples/example#{number}_page#{page}.json"
+    "app/views/atdis/examples/example#{number}_page#{page}.json"
   end
 
   private

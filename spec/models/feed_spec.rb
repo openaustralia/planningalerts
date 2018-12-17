@@ -56,7 +56,7 @@ describe Feed do
 
   describe ".example_path" do
     it "should return the file path to where the examples are stored" do
-      expect(Feed.example_path(6, 1)).to eq "spec/atdis_json_examples/example6_page1.json"
+      expect(Feed.example_path(6, 1)).to eq "app/views/atdis/examples/example6_page1.json"
     end
 
     it "should return a path to an existing file" do
