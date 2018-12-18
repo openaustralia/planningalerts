@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ImportApplicationsService
+class ImportApplicationsService < ApplicationService
   def initialize(authority:, scrape_delay:, logger:)
     @authority = authority
     @start_date = Time.zone.today - scrape_delay

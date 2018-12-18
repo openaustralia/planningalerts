@@ -10,11 +10,11 @@ class AlertsController < ApplicationController
 
   def create
     @address = params[:alert][:address]
-    @alert = BuildAlertService.new(
+    @alert = BuildAlertService.call(
       email: params[:alert][:email],
       address: @address,
       radius_meters: zone_sizes["l"]
-    ).call
+    )
 
     render "new" if @alert.present? && !@alert.save
   end

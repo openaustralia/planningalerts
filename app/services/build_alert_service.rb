@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class BuildAlertService
+class BuildAlertService < ApplicationService
   attr_reader :alert
 
   def initialize(email:, address:, radius_meters:)

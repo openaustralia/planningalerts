@@ -19,19 +19,19 @@ describe ProcessAlertsBatchService do
       expect(ProcessAlertService).to receive(:call).with(alert: alert2).and_return([3, 2, 0])
       expect(ProcessAlertService).to receive(:call).with(alert: alert3).and_return([0, 0, 0])
       allow(Alert).to receive(:find).with([alert1.id, alert2.id, alert3.id]).and_return([alert1, alert2, alert3])
-      ProcessAlertsBatchService.new(alert_ids: [alert1.id, alert2.id, alert3.id]).call
+      ProcessAlertsBatchService.call(alert_ids: [alert1.id, alert2.id, alert3.id])
     end
 
     it "should tally up the number of things sent and return that" do
       allow(Alert).to receive(:find).with([alert1.id, alert2.id, alert3.id]).and_return([alert1, alert2, alert3])
 
-      expect(ProcessAlertsBatchService.new(alert_ids: [alert1.id, alert2.id, alert3.id]).call).to eq [2, 8, 3]
+      expect(ProcessAlertsBatchService.call(alert_ids: [alert1.id, alert2.id, alert3.id])).to eq [2, 8, 3]
     end
 
     it "should create a record of the batch of sent email alerts" do
       allow(Alert).to receive(:find).with([alert1.id, alert2.id, alert3.id]).and_return([alert1, alert2, alert3])
 
-      ProcessAlertsBatchService.new(alert_ids: [alert1.id, alert2.id, alert3.id]).call
+      ProcessAlertsBatchService.call(alert_ids: [alert1.id, alert2.id, alert3.id])
       expect(EmailBatch.count).to eq 1
       batch = EmailBatch.first
       expect(batch.no_emails).to eq 2
@@ -46,7 +46,7 @@ describe ProcessAlertsBatchService do
 
       allow(Alert).to receive(:find).with([alert1.id, alert2.id, alert3.id]).and_return([alert1, alert2, alert3])
 
-      ProcessAlertsBatchService.new(alert_ids: [alert1.id, alert2.id, alert3.id]).call
+      ProcessAlertsBatchService.call(alert_ids: [alert1.id, alert2.id, alert3.id])
       expect(Stat.emails_sent).to eq 7
       expect(Stat.applications_sent).to eq 18
     end

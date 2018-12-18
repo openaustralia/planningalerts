@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Queues up all active alerts to be sent out in batches over the next 24 hours
-class QueueUpAlertsService
+class QueueUpAlertsService < ApplicationService
   def initialize(logger:, batch_size: 100)
     @logger = logger
     @batch_size = batch_size
@@ -13,7 +13,7 @@ class QueueUpAlertsService
 
     time = Time.zone.now
     alerts.map(&:id).shuffle.each_slice(batch_size) do |alert_ids|
-      ProcessAlertsBatchService.new(alert_ids: alert_ids).delay(run_at: time).call
+      ProcessAlertsBatchService.delay(run_at: time).call(alert_ids: alert_ids)
       time += time_between_batches
     end
 

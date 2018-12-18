@@ -13,13 +13,13 @@ namespace :planningalerts do
       puts "Importing #{authorities.count} authorities"
       authorities.each do |authority|
         info_logger = AuthorityLogger.new(authority.id, Logger.new(STDOUT))
-        ImportApplicationsService.new(authority: authority, scrape_delay: ENV["SCRAPE_DELAY"].to_i, logger: info_logger).call
+        ImportApplicationsService.call(authority: authority, scrape_delay: ENV["SCRAPE_DELAY"].to_i, logger: info_logger)
       end
     end
 
     desc "Send planning alerts"
     task email: :environment do
-      QueueUpAlertsService.new(logger: Logger.new(STDOUT)).call
+      QueueUpAlertsService.call(logger: Logger.new(STDOUT))
     end
 
     desc "Reset `last_sent` on all alerts to nil and then send emails"
@@ -33,7 +33,7 @@ namespace :planningalerts do
 
   desc "Generate XML sitemap"
   task sitemap: :environment do
-    GenerateSitemapService.new.call
+    GenerateSitemapService.call
   end
 
   # A response to something bad
