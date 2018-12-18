@@ -9,10 +9,6 @@ class QueueUpAlertsService
   end
 
   def call
-    alerts = Alert.active.all
-    no_batches = (alerts.count.to_f / batch_size).ceil
-    no_batches = 1 if no_batches.zero?
-    time_between_batches = 24.hours / no_batches
     info_logger.info "Checking #{alerts.count} active alerts"
     info_logger.info "Splitting mailing for the next 24 hours into batches of size #{batch_size} roughly every #{time_between_batches / 60} minutes"
 
@@ -21,10 +17,25 @@ class QueueUpAlertsService
       Alert.delay(run_at: time).process_alerts(alert_ids)
       time += time_between_batches
     end
+
     info_logger.info "Mailing jobs for the next 24 hours queued"
   end
 
   private
 
   attr_reader :info_logger, :batch_size
+
+  def alerts
+    Alert.active.all
+  end
+
+  def no_batches
+    no_batches = (alerts.count.to_f / batch_size).ceil
+    no_batches = 1 if no_batches.zero?
+    no_batches
+  end
+
+  def time_between_batches
+    24.hours / no_batches
+  end
 end
