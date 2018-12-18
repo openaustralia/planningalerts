@@ -94,7 +94,7 @@ class Alert < ApplicationRecord
   end
 
   def process!
-    ProcessAlertService.new(alert: self).call
+    ProcessAlertService.call(alert: self)
   end
 
   def geocode_from_address

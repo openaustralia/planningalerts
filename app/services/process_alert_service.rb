@@ -3,6 +3,10 @@
 # Process email alert and send out an email if necessary.
 # Returns number of applications and comments sent.
 class ProcessAlertService
+  def self.call(options)
+    new(options).call
+  end
+
   def initialize(alert:)
     @alert = alert
   end
