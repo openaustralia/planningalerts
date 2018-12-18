@@ -29,15 +29,6 @@ class Alert < ApplicationRecord
     update!(unsubscribed: true, unsubscribed_at: Time.zone.now)
   end
 
-  # Pass an array of objects. Count the distribution of objects and return as a hash of object: :count
-  def self.frequency_distribution(array)
-    freq = {}
-    array.each do |i|
-      freq[i] = (freq[i] || 0) + 1
-    end
-    freq.to_a.sort { |i, j| -(i[1] <=> j[1]) }
-  end
-
   def location
     Location.new(lat, lng) if lat && lng
   end

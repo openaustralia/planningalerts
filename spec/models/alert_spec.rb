@@ -290,12 +290,6 @@ describe Alert do
     end
   end
 
-  describe "frequency_distribution" do
-    it "should return a frequency distribution of objects as an array sorted by count" do
-      expect(Alert.frequency_distribution(%w[a b c a a c a])).to eq([["a", 4], ["c", 2], ["b", 1]])
-    end
-  end
-
   describe "#new_comments" do
     let(:alert) { create(:alert, address: address, radius_meters: 2000) }
     let(:p1) { alert.location.endpoint(0, 501) } # 501 m north of alert
