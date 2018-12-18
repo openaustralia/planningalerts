@@ -9,7 +9,7 @@ class QueueUpAlertsService
 
   def call
     logger.info "Checking #{alerts.count} active alerts"
-    logger.info "Splitting mailing for the next 24 hours into batches of size #{batch_size} roughly every #{time_between_batches / 60} minutes"
+    logger.info "Splitting mailing for the next 24 hours into batches of size #{batch_size} roughly every #{time_between_batches_in_words}"
 
     time = Time.zone.now
     alerts.map(&:id).shuffle.each_slice(batch_size) do |alert_ids|
@@ -23,6 +23,10 @@ class QueueUpAlertsService
   private
 
   attr_reader :logger, :batch_size
+
+  def time_between_batches_in_words
+    "#{time_between_batches / 60} minutes"
+  end
 
   def alerts
     Alert.active.all
