@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ProcessAlertsService
+class ProcessAlertsBatchService
   def initialize(alert_ids:)
     @alert_ids = alert_ids
   end

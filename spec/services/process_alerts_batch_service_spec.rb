@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe ProcessAlertsService do
+describe ProcessAlertsBatchService do
   context "with two confirmed alerts" do
     let(:alert1) { create(:confirmed_alert) }
     let(:alert2) { create(:confirmed_alert) }
@@ -19,19 +19,19 @@ describe ProcessAlertsService do
       expect(alert2).to receive(:process!).and_return([3, 2, 0])
       expect(alert3).to receive(:process!).and_return([0, 0, 0])
       allow(Alert).to receive(:find).with([alert1.id, alert2.id, alert3.id]).and_return([alert1, alert2, alert3])
-      ProcessAlertsService.new(alert_ids: [alert1.id, alert2.id, alert3.id]).call
+      ProcessAlertsBatchService.new(alert_ids: [alert1.id, alert2.id, alert3.id]).call
     end
 
     it "should tally up the number of things sent and return that" do
       allow(Alert).to receive(:find).with([alert1.id, alert2.id, alert3.id]).and_return([alert1, alert2, alert3])
 
-      expect(ProcessAlertsService.new(alert_ids: [alert1.id, alert2.id, alert3.id]).call).to eq [2, 8, 3]
+      expect(ProcessAlertsBatchService.new(alert_ids: [alert1.id, alert2.id, alert3.id]).call).to eq [2, 8, 3]
     end
 
     it "should create a record of the batch of sent email alerts" do
       allow(Alert).to receive(:find).with([alert1.id, alert2.id, alert3.id]).and_return([alert1, alert2, alert3])
 
-      ProcessAlertsService.new(alert_ids: [alert1.id, alert2.id, alert3.id]).call
+      ProcessAlertsBatchService.new(alert_ids: [alert1.id, alert2.id, alert3.id]).call
       expect(EmailBatch.count).to eq 1
       batch = EmailBatch.first
       expect(batch.no_emails).to eq 2
@@ -46,7 +46,7 @@ describe ProcessAlertsService do
 
       allow(Alert).to receive(:find).with([alert1.id, alert2.id, alert3.id]).and_return([alert1, alert2, alert3])
 
-      ProcessAlertsService.new(alert_ids: [alert1.id, alert2.id, alert3.id]).call
+      ProcessAlertsBatchService.new(alert_ids: [alert1.id, alert2.id, alert3.id]).call
       expect(Stat.emails_sent).to eq 7
       expect(Stat.applications_sent).to eq 18
     end

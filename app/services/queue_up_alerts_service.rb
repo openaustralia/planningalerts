@@ -13,7 +13,7 @@ class QueueUpAlertsService
 
     time = Time.zone.now
     alerts.map(&:id).shuffle.each_slice(batch_size) do |alert_ids|
-      ProcessAlertsService.new(alert_ids: alert_ids).delay(run_at: time).call
+      ProcessAlertsBatchService.new(alert_ids: alert_ids).delay(run_at: time).call
       time += time_between_batches
     end
 

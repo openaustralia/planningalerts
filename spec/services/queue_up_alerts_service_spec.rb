@@ -38,10 +38,10 @@ describe QueueUpAlertsService do
       delayed2 = double
       service1 = double
       service2 = double
-      expect(ProcessAlertsService).to receive(:new).with(alert_ids: [alert1.id]).and_return(service1)
+      expect(ProcessAlertsBatchService).to receive(:new).with(alert_ids: [alert1.id]).and_return(service1)
       expect(service1).to receive(:delay).and_return(delayed1)
       expect(delayed1).to receive(:call)
-      expect(ProcessAlertsService).to receive(:new).with(alert_ids: [alert2.id]).and_return(service2)
+      expect(ProcessAlertsBatchService).to receive(:new).with(alert_ids: [alert2.id]).and_return(service2)
       expect(service2).to receive(:delay).and_return(delayed2)
       expect(delayed2).to receive(:call)
       QueueUpAlertsService.new(logger: logger, batch_size: 1).call
