@@ -24,8 +24,8 @@ describe ProcessAlertService do
         allow(alert).to receive(:recent_applications).and_return([application])
       end
 
-      it "should return the number of applications, comments and replies sent" do
-        expect(ProcessAlertService.call(alert: alert)).to eq([1, 0, 0])
+      it "should return the number of emails, applications, comments and replies sent" do
+        expect(ProcessAlertService.call(alert: alert)).to eq([1, 1, 0, 0])
       end
 
       it "should send an email" do
@@ -81,6 +81,10 @@ describe ProcessAlertService do
         ProcessAlertService.call(alert: alert)
         expect((alert.last_processed - Time.zone.now).abs).to be < 1
       end
+
+      it "should return the number of applications, comments and replies sent" do
+        expect(ProcessAlertService.call(alert: alert)).to eq([0, 0, 0, 0])
+      end
     end
 
     context "and one new reply nearby" do
@@ -104,7 +108,7 @@ describe ProcessAlertService do
       end
 
       it "should return the number of applications, comments and replies sent" do
-        expect(ProcessAlertService.call(alert: alert)).to eq([0, 0, 1])
+        expect(ProcessAlertService.call(alert: alert)).to eq([1, 0, 0, 1])
       end
 
       it "should send an email" do

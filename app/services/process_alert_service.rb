@@ -15,6 +15,9 @@ class ProcessAlertService < ApplicationService
     if !applications.empty? || !comments.empty? || !replies.empty?
       AlertNotifier.alert(alert, applications, comments, replies).deliver_now
       alert.last_sent = Time.zone.now
+      no_emails = 1
+    else
+      no_emails = 0
     end
     alert.last_processed = Time.zone.now
     alert.save!
@@ -24,8 +27,8 @@ class ProcessAlertService < ApplicationService
       application.increment(:no_alerted)
     end
 
-    # Return number of applications, comments and replies sent
-    [applications.size, comments.size, replies.size]
+    # Return number of emails, applications, comments and replies sent
+    [no_emails, applications.size, comments.size, replies.size]
   end
 
   private
