@@ -138,6 +138,7 @@ class Alert < ApplicationRecord
   end
 
   # TODO: Untested method
+  # TODO: Also include no_replies in stats and return
   def self.process_alerts(alert_ids)
     # Only send alerts to confirmed users
     total_no_emails = 0
