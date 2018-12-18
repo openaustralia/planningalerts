@@ -115,10 +115,6 @@ class Alert < ApplicationRecord
     [applications.size, comments.size, replies.size]
   end
 
-  def self.process_alerts(alert_ids)
-    ProcessAlertsService.new(alert_ids: alert_ids).call
-  end
-
   def geocode_from_address
     @geocode_result = Location.geocode(address)
 

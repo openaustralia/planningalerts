@@ -34,10 +34,16 @@ describe QueueUpAlertsService do
       logger = double
       allow(logger).to receive(:info)
 
-      alert = double
-      expect(Alert).to receive(:delay).and_return(alert).twice
-      expect(alert).to receive(:process_alerts).with([alert1.id])
-      expect(alert).to receive(:process_alerts).with([alert2.id])
+      delayed1 = double
+      delayed2 = double
+      service1 = double
+      service2 = double
+      expect(ProcessAlertsService).to receive(:new).with(alert_ids: [alert1.id]).and_return(service1)
+      expect(service1).to receive(:delay).and_return(delayed1)
+      expect(delayed1).to receive(:call)
+      expect(ProcessAlertsService).to receive(:new).with(alert_ids: [alert2.id]).and_return(service2)
+      expect(service2).to receive(:delay).and_return(delayed2)
+      expect(delayed2).to receive(:call)
       QueueUpAlertsService.new(logger: logger, batch_size: 1).call
     end
   end
