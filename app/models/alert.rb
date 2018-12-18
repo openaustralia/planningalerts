@@ -137,8 +137,8 @@ class Alert < ApplicationRecord
     info_logger.info "Mailing jobs for the next 24 hours queued"
   end
 
-  # TODO: Untested method
   # TODO: Also include no_replies in stats and return
+  # TODO: Move to its own service class
   def self.process_alerts(alert_ids)
     # Only send alerts to confirmed users
     total_no_emails = 0
