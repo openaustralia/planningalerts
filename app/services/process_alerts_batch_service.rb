@@ -12,7 +12,7 @@ class ProcessAlertsBatchService
     total_no_applications = 0
     total_no_comments = 0
     Alert.find(alert_ids).each do |alert|
-      no_applications, no_comments = alert.process!
+      no_applications, no_comments = ProcessAlertService.call(alert: alert)
       next if no_applications.zero? && no_comments.zero?
 
       total_no_applications += no_applications

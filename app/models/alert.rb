@@ -93,10 +93,6 @@ class Alert < ApplicationRecord
     update!(confirmed: true)
   end
 
-  def process!
-    ProcessAlertService.call(alert: self)
-  end
-
   def geocode_from_address
     @geocode_result = Location.geocode(address)
 

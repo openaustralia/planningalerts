@@ -9,15 +9,15 @@ describe ProcessAlertsBatchService do
     let(:alert3) { create(:confirmed_alert) }
 
     before(:each) do
-      allow(alert1).to receive(:process!).and_return([5, 1, 0])
-      allow(alert2).to receive(:process!).and_return([3, 2, 0])
-      allow(alert3).to receive(:process!).and_return([0, 0, 0])
+      allow(ProcessAlertService).to receive(:call).with(alert: alert1).and_return([5, 1, 0])
+      allow(ProcessAlertService).to receive(:call).with(alert: alert2).and_return([3, 2, 0])
+      allow(ProcessAlertService).to receive(:call).with(alert: alert3).and_return([0, 0, 0])
     end
 
     it "should process each individual alert" do
-      expect(alert1).to receive(:process!).and_return([5, 1, 0])
-      expect(alert2).to receive(:process!).and_return([3, 2, 0])
-      expect(alert3).to receive(:process!).and_return([0, 0, 0])
+      expect(ProcessAlertService).to receive(:call).with(alert: alert1).and_return([5, 1, 0])
+      expect(ProcessAlertService).to receive(:call).with(alert: alert2).and_return([3, 2, 0])
+      expect(ProcessAlertService).to receive(:call).with(alert: alert3).and_return([0, 0, 0])
       allow(Alert).to receive(:find).with([alert1.id, alert2.id, alert3.id]).and_return([alert1, alert2, alert3])
       ProcessAlertsBatchService.new(alert_ids: [alert1.id, alert2.id, alert3.id]).call
     end
