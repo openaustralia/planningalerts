@@ -93,26 +93,8 @@ class Alert < ApplicationRecord
     update!(confirmed: true)
   end
 
-  # Process this email alert and send out an email if necessary. Returns number of applications and comments sent.
   def process!
-    applications = recent_applications
-    comments = new_comments
-    replies = new_replies
-
-    if !applications.empty? || !comments.empty? || !replies.empty?
-      AlertNotifier.alert(self, applications, comments, replies).deliver_now
-      self.last_sent = Time.zone.now
-    end
-    self.last_processed = Time.zone.now
-    save!
-
-    # Update the tallies on each application.
-    applications.each do |application|
-      application.increment(:no_alerted)
-    end
-
-    # Return number of applications, comments and replies sent
-    [applications.size, comments.size, replies.size]
+    ProcessAlertService.new(alert: self).call
   end
 
   def geocode_from_address
