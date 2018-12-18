@@ -22,12 +22,6 @@ describe ProcessAlertsBatchService do
       ProcessAlertsBatchService.call(alert_ids: [alert1.id, alert2.id, alert3.id])
     end
 
-    it "should tally up the number of things sent and return that" do
-      allow(Alert).to receive(:find).with([alert1.id, alert2.id, alert3.id]).and_return([alert1, alert2, alert3])
-
-      expect(ProcessAlertsBatchService.call(alert_ids: [alert1.id, alert2.id, alert3.id])).to eq [2, 8, 3]
-    end
-
     it "should create a record of the batch of sent email alerts" do
       allow(Alert).to receive(:find).with([alert1.id, alert2.id, alert3.id]).and_return([alert1, alert2, alert3])
 
