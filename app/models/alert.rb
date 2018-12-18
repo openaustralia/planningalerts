@@ -116,21 +116,8 @@ class Alert < ApplicationRecord
   end
 
   # This generates a LOT of email. Call with care
-  # TODO: Move this to its own service
   def self.queue_up_alerts_for_next_day(info_logger = logger, batch_size = 100)
-    alerts = Alert.active.all
-    no_batches = (alerts.count.to_f / batch_size).ceil
-    no_batches = 1 if no_batches.zero?
-    time_between_batches = 24.hours / no_batches
-    info_logger.info "Checking #{alerts.count} active alerts"
-    info_logger.info "Splitting mailing for the next 24 hours into batches of size #{batch_size} roughly every #{time_between_batches / 60} minutes"
-
-    time = Time.zone.now
-    alerts.map(&:id).shuffle.each_slice(batch_size) do |alert_ids|
-      Alert.delay(run_at: time).process_alerts(alert_ids)
-      time += time_between_batches
-    end
-    info_logger.info "Mailing jobs for the next 24 hours queued"
+    QueueUpAlertsService.new(info_logger: info_logger, batch_size: batch_size).call
   end
 
   # TODO: Also include no_replies in stats and return
