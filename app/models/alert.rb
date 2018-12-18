@@ -115,11 +115,6 @@ class Alert < ApplicationRecord
     [applications.size, comments.size, replies.size]
   end
 
-  # This generates a LOT of email. Call with care
-  def self.queue_up_alerts_for_next_day(info_logger = logger, batch_size = 100)
-    QueueUpAlertsService.new(info_logger: info_logger, batch_size: batch_size).call
-  end
-
   # TODO: Also include no_replies in stats and return
   # TODO: Move to its own service class
   def self.process_alerts(alert_ids)
