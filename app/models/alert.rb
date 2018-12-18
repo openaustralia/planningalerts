@@ -29,10 +29,6 @@ class Alert < ApplicationRecord
     update!(unsubscribed: true, unsubscribed_at: Time.zone.now)
   end
 
-  def subscription
-    super
-  end
-
   # Pass an array of objects. Count the distribution of objects and return as a hash of object: :count
   def self.frequency_distribution(array)
     freq = {}
