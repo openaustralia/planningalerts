@@ -121,7 +121,6 @@ ActiveRecord::Schema.define(version: 2018_12_06_032522) do
     t.datetime "updated_at"
     t.string "address"
     t.boolean "hidden", default: false, null: false
-    t.string "theme", default: "default", null: false
     t.integer "councillor_id"
     t.datetime "confirmed_at"
     t.integer "writeit_message_id"
