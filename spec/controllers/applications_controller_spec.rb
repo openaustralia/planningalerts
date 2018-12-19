@@ -99,5 +99,22 @@ describe ApplicationsController do
         expect(response).to redirect_to(id: redirect.redirect_application_id)
       end
     end
+
+    context "an application with nothing nearby" do
+      let(:application) { create(:geocoded_application) }
+      before(:each) do
+        application
+      end
+
+      it "should redirect if sort isn't set" do
+        get :nearby, params: { id: application.id }
+        expect(response).to redirect_to(sort: "time")
+      end
+
+      it "should render something" do
+        get :nearby, params: { id: application.id, sort: "time" }
+        expect(response).to be_successful
+      end
+    end
   end
 end
