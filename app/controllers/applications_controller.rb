@@ -5,6 +5,7 @@ require "will_paginate/array"
 class ApplicationsController < ApplicationController
   # TODO: Switch actions from JS to JSON format and remove this
   skip_before_action :verify_authenticity_token, only: %i[per_day per_week]
+  before_action :check_application_redirect, only: %i[show nearby]
 
   def index
     @description = +"Recent applications"
@@ -110,13 +111,6 @@ class ApplicationsController < ApplicationController
   end
 
   def show
-    # First check if there is a redirect
-    redirect = ApplicationRedirect.find_by(application_id: params[:id])
-    if redirect
-      redirect_to id: redirect.redirect_application_id
-      return
-    end
-
     @application = Application.find(params[:id])
     @comments = @application.comments.visible.order(:confirmed_at)
     @nearby_count = @application.find_all_nearest_or_recent.size
@@ -135,13 +129,6 @@ class ApplicationsController < ApplicationController
 
   # TODO: Remove pagination completely (because it's currently unused)
   def nearby
-    # First check if there is a redirect
-    redirect = ApplicationRedirect.find_by(application_id: params[:id])
-    if redirect
-      redirect_to id: redirect.redirect_application_id
-      return
-    end
-
     @sort = params[:sort]
     @rss = nearby_application_url(params.permit(%i[id sort page]).merge(format: "rss", page: nil))
 
@@ -168,5 +155,12 @@ class ApplicationsController < ApplicationController
       format.html { render "nearby" }
       format.rss { render "api/index", format: :rss, layout: false, content_type: Mime[:xml] }
     end
+  end
+
+  private
+
+  def check_application_redirect
+    redirect = ApplicationRedirect.find_by(application_id: params[:id])
+    redirect_to(id: redirect.redirect_application_id) if redirect
   end
 end
