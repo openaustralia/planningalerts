@@ -127,7 +127,6 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  # TODO: Remove pagination completely (because it's currently unused)
   def nearby
     @sort = params[:sort]
     @rss = nearby_application_url(params.permit(%i[id sort page]).merge(format: "rss", page: nil))
