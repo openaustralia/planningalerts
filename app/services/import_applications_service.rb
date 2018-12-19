@@ -15,7 +15,7 @@ class ImportApplicationsService < ApplicationService
   end
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
-  def self.open_url_safe(url)
+  def self.open_url_safe(url, logger)
     RestClient.get(url).body
   rescue StandardError => e
     logger.error "Error #{e} while getting data from url #{url}. So, skipping"
@@ -59,7 +59,7 @@ class ImportApplicationsService < ApplicationService
   end
 
   def import_data
-    text = ImportApplicationsService.open_url_safe(morph_url_for_date_range)
+    text = ImportApplicationsService.open_url_safe(morph_url_for_date_range, logger)
     return [] if text.nil?
 
     j = JSON.parse(text)
