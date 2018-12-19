@@ -28,6 +28,11 @@ FactoryBot.define do
     end
   end
 
+  factory :application_redirect do
+    application_id { 1 }
+    redirect_application_id { 2 }
+  end
+
   factory :add_comment do
     email { "matthew@openaustralia.org" }
     name { "Matthew Landauer" }

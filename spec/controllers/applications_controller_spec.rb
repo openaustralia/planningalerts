@@ -57,6 +57,18 @@ describe ApplicationsController do
 
       expect(assigns[:application]).to eq application
     end
+
+    context "a redirect is set up" do
+      let(:redirect) { create(:application_redirect) }
+      before(:each) do
+        redirect
+      end
+
+      it "should redirect to another application" do
+        get :show, params: { id: redirect.application_id }
+        expect(response).to redirect_to(id: redirect.redirect_application_id)
+      end
+    end
   end
 
   describe "#address" do
@@ -72,6 +84,20 @@ describe ApplicationsController do
         get :address, params: { address: "24 Bruce Road Glenbrook" }
       end
       expect(assigns[:radius]).to eq 2000.0
+    end
+  end
+
+  describe "#nearby" do
+    context "a redirect is set up" do
+      let(:redirect) { create(:application_redirect) }
+      before(:each) do
+        redirect
+      end
+
+      it "should redirect to another application" do
+        get :nearby, params: { id: redirect.application_id }
+        expect(response).to redirect_to(id: redirect.redirect_application_id)
+      end
     end
   end
 end
