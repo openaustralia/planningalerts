@@ -57,11 +57,6 @@ class Location
     Location.new(delegator.endpoint(bearing, distance / 1000.0, units: :kms))
   end
 
-  # Distance (in metres) to other point
-  def distance_to(loc)
-    delegator.distance_to(loc.delegator, units: :kms) * 1000.0
-  end
-
   def full_address
     delegator.full_address.sub(", Australia", "")
   end
