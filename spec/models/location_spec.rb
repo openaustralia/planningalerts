@@ -39,7 +39,7 @@ describe "Location" do
   # end
 
   it "should normalise addresses without the country in them" do
-    loc = Location.new(double(full_address: "24 Bruce Road, Glenbrook, NSW 2773, Australia"))
+    loc = Location.new(double(full_address: "24 Bruce Road, Glenbrook, NSW 2773, Australia", lat: 1.0, lng: 2.0, city: "Glenbrook", state: "NSW", zip: "2773", country_code: "AU", accuracy: nil))
     expect(loc.full_address).to eq("24 Bruce Road, Glenbrook, NSW 2773")
   end
 

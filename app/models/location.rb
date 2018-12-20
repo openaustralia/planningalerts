@@ -47,7 +47,7 @@ class Location
   attr_reader :delegator
 
   delegate :lat, :lng, :accuracy, :success, :to_s, :state, :country_code, to: :delegator
-  delegate :in_correct_country?, :suburb, :postcode, to: :geocoder_location
+  delegate :in_correct_country?, :suburb, :postcode, :full_address, to: :geocoder_location
 
   def initialize(delegator, original_address = nil)
     @delegator = delegator
@@ -84,10 +84,6 @@ class Location
     Location.new(delegator.endpoint(bearing, distance / 1000.0, units: :kms))
   end
 
-  def full_address
-    delegator.full_address.sub(", Australia", "")
-  end
-
   def all
     delegator.all.find_all { |l| Location.new(l).in_correct_country? }.map { |l| Location.new(l) }
   end
@@ -106,7 +102,7 @@ class Location
       state: state,
       postcode: delegator.zip,
       country_code: country_code,
-      full_address: full_address,
+      full_address: delegator.full_address.sub(", Australia", ""),
       accuracy: accuracy
     )
   end
