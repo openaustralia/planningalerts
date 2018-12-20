@@ -20,6 +20,10 @@ class GeocoderLocation
   def in_correct_country?
     country_code == "AU"
   end
+
+  def ==(other)
+    lat == other.lat && lng == other.lng
+  end
 end
 
 class GeocoderResults
@@ -89,10 +93,8 @@ class Location
   end
 
   def ==(other)
-    lat == other.lat && lng == other.lng
+    geocoder_location == other.geocoder_location
   end
-
-  private
 
   def geocoder_location
     GeocoderLocation.new(
