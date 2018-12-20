@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationService
-  def self.call(options)
-    new(options).call
+  def self.call(*params)
+    new(*params).call
   end
 end
