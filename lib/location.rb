@@ -6,14 +6,8 @@
 class Location < SimpleDelegator
   attr_accessor :original_address
 
-  def initialize(*params)
-    if params.count == 2
-      super(Geokit::LatLng.new(*params))
-    elsif params.count == 1
-      super(params.first)
-    else
-      raise "Unexpected number of parameters"
-    end
+  def self.from_lat_lng(lat, lng)
+    new(Geokit::LatLng.new(lat, lng))
   end
 
   def self.geocode(address)

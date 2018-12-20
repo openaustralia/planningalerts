@@ -30,7 +30,7 @@ describe "applications/show" do
       allow(@application).to receive(:address).and_return("foo")
       allow(@application).to receive(:lat).and_return(1.0)
       allow(@application).to receive(:lng).and_return(2.0)
-      allow(@application).to receive(:location).and_return(Location.new(1.0, 2.0))
+      allow(@application).to receive(:location).and_return(Location.from_lat_lng(1.0, 2.0))
     end
 
     it "should display the map" do

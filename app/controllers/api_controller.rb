@@ -39,7 +39,7 @@ class ApiController < ApplicationController
       location = Location.geocode(params[:address])
       location_text = location.full_address
     else
-      location = Location.new(params[:lat].to_f, params[:lng].to_f)
+      location = Location.from_lat_lng(params[:lat].to_f, params[:lng].to_f)
       location_text = location.to_s
     end
     api_render(

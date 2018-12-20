@@ -35,7 +35,7 @@ class Alert < ApplicationRecord
   end
 
   def location
-    Location.new(lat, lng) if lat && lng
+    Location.from_lat_lng(lat, lng) if lat && lng
   end
 
   # Applications that have been scraped since the last time the user was sent an alert
