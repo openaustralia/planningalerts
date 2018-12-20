@@ -16,6 +16,10 @@ class GeocoderLocation
     @full_address = full_address
     @accuracy = accuracy
   end
+
+  def in_correct_country?
+    country_code == "AU"
+  end
 end
 
 class GeocoderResults
@@ -60,7 +64,16 @@ class Location
   end
 
   def in_correct_country?
-    country_code == "AU"
+    GeocoderLocation.new(
+      lat: lat,
+      lng: lng,
+      suburb: suburb,
+      state: state,
+      postcode: postcode,
+      country_code: country_code,
+      full_address: full_address,
+      accuracy: accuracy
+    ).in_correct_country?
   end
 
   def suburb
