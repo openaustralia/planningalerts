@@ -90,7 +90,9 @@ class Location
 
   # Distance (in metres) to other point
   def distance_to(loc)
-    delegator.distance_to(loc.delegator, units: :kms) * 1000.0
+    loc1 = Geokit::LatLng.new(lat, lng)
+    loc2 = Geokit::LatLng.new(loc.lat, loc.lng)
+    loc1.distance_to(loc2, units: :kms) * 1000.0
   end
 
   def all
