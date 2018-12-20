@@ -59,11 +59,6 @@ class Application < ApplicationRecord
     end
   end
 
-  def self.public_attribute_names
-    %w[council_reference address description info_url comment_url
-       date_scraped date_received on_notice_from on_notice_to]
-  end
-
   # For the benefit of will_paginate
   cattr_reader :per_page
   # rubocop:disable Style/ClassVars
