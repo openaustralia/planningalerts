@@ -47,7 +47,7 @@ class Location
   attr_reader :delegator
 
   delegate :lat, :lng, :accuracy, :success, :to_s, :state, :country_code, to: :delegator
-  delegate :in_correct_country?, :suburb, to: :geocoder_location
+  delegate :in_correct_country?, :suburb, :postcode, to: :geocoder_location
 
   def initialize(delegator, original_address = nil)
     @delegator = delegator
@@ -62,10 +62,6 @@ class Location
     r = Geokit::Geocoders::GoogleGeocoder.geocode(address, bias: "au")
     r = r.all.find { |l| new(l).in_correct_country? } || r
     new(r, address)
-  end
-
-  def postcode
-    delegator.zip
   end
 
   def error
@@ -108,7 +104,7 @@ class Location
       lng: lng,
       suburb: delegator.city,
       state: state,
-      postcode: postcode,
+      postcode: delegator.zip,
       country_code: country_code,
       full_address: full_address,
       accuracy: accuracy
