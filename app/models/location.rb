@@ -97,7 +97,8 @@ class Location
 
   # Distance given is in metres
   def endpoint(bearing, distance)
-    p = delegator.endpoint(bearing, distance / 1000.0, units: :kms)
+    loc = Geokit::LatLng.new(lat, lng)
+    p = loc.endpoint(bearing, distance / 1000.0, units: :kms)
     Location.new(p)
   end
 
