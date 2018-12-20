@@ -88,6 +88,11 @@ class Location
     Location.new(delegator.endpoint(bearing, distance / 1000.0, units: :kms))
   end
 
+  # Distance (in metres) to other point
+  def distance_to(loc)
+    delegator.distance_to(loc.delegator, units: :kms) * 1000.0
+  end
+
   def all
     delegator.all.find_all { |l| Location.new(l).in_correct_country? }.map { |l| Location.new(l) }
   end
