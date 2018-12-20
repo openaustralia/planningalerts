@@ -55,8 +55,12 @@ class GeocoderLocation
 end
 
 class GeocoderResults
-  def initialize(all)
+  attr_reader :all, :success, :original_address
+
+  def initialize(all, success, original_address)
     @all = all
+    @success = success
+    @original_address = original_address
   end
 
   # Top location result
@@ -68,16 +72,13 @@ class GeocoderResults
   def rest
     all[1..-1]
   end
-
-  attr_reader :all
 end
 
 class Location
-  attr_accessor :original_address
-  attr_reader :delegator
+  attr_reader :delegator, :original_address
 
-  delegate :success, to: :delegator
   delegate :to_s, :lat, :lng, :state, :country_code, :accuracy, :in_correct_country?, :suburb, :postcode, :full_address, to: :geocoder_location
+  delegate :success, to: :geocoder_results
 
   def initialize(delegator, original_address = nil)
     @delegator = delegator
@@ -126,6 +127,10 @@ class Location
 
   def ==(other)
     geocoder_location == other.geocoder_location
+  end
+
+  def geocoder_results
+    GeocoderResults.new(all.map(&:geocoder_location), delegator.success, original_address)
   end
 
   def geocoder_location
