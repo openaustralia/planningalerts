@@ -55,23 +55,21 @@ class GeocoderLocation
 end
 
 class GeocoderResults
-  def initialize(locations)
-    @locations = locations
+  def initialize(all)
+    @all = all
   end
 
   # Top location result
   def top
-    locations.first
+    all.first
   end
 
   # The remaining location results
   def rest
-    locations[1..-1]
+    all[1..-1]
   end
 
-  private
-
-  attr_reader :locations
+  attr_reader :all
 end
 
 class Location
