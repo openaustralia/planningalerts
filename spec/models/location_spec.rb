@@ -95,7 +95,7 @@ describe "Location" do
   end
 
   it "should list potential matches and they should be in Australia" do
-    m = double(full_address: "Bathurst Rd, Orange NSW 2800, Australia", country_code: "AU", lat: nil, lng: nil, city: "Orange", state: "NSW", zip: "2800", accuracy: nil)
+    m = double(full_address: "Bathurst Rd, Orange NSW 2800, Australia", country_code: "AU", lat: nil, lng: nil, city: "Orange", state: "NSW", zip: "2800", accuracy: nil, success: true)
     all = [
       m,
       double(full_address: "Bathurst Rd, Katoomba NSW 2780, Australia", country_code: "AU", lat: nil, lng: nil, city: "Katoomba", state: "NSW", zip: "2780", accuracy: nil),
@@ -119,7 +119,7 @@ describe "Location" do
   end
 
   it "the first match should only return addresses in Australia" do
-    m = double(full_address: "Sowerby St, Garfield NSW 2580, Australia", country_code: "AU", lat: nil, lng: nil, city: "Garfield", state: "NSW", zip: "2580", accuracy: nil)
+    m = double(full_address: "Sowerby St, Garfield NSW 2580, Australia", country_code: "AU", lat: nil, lng: nil, city: "Garfield", state: "NSW", zip: "2580", accuracy: nil, success: true)
     all = [
       double(full_address: "Sowerby St, Lawrence 9532, New Zealand", country_code: "NZ", lat: nil, lng: nil, city: "Lawrence", state: nil, zip: "9532", accuracy: nil),
       m,

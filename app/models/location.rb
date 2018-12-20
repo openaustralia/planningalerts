@@ -51,7 +51,19 @@ class Location
   end
 
   def all
-    delegator.all.find_all { |l| Location.new(l).in_correct_country? }.map { |l| Location.new(l) }
+    geocoder_results.all.map do |r|
+      geo_loc = Geokit::GeoLoc.new(
+        lat: r.lat,
+        lng: r.lng,
+        city: r.suburb,
+        state: r.state,
+        zip: r.postcode,
+        country_code: r.country_code
+      )
+      geo_loc.full_address = r.full_address
+      geo_loc.accuracy = r.accuracy
+      Location.new(geo_loc)
+    end
   end
 
   def ==(other)
@@ -59,6 +71,7 @@ class Location
   end
 
   def geocoder_results
+    all = delegator.all.find_all { |l| Location.new(l).in_correct_country? }.map { |l| Location.new(l) }
     GeocoderResults.new(all.map(&:geocoder_location), delegator.success, original_address)
   end
 
