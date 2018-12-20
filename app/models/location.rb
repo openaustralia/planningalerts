@@ -56,8 +56,8 @@ class Location
   attr_accessor :original_address
   attr_reader :delegator
 
-  delegate :lat, :lng, :accuracy, :success, :to_s, :state, :country_code, to: :delegator
-  delegate :in_correct_country?, :suburb, :postcode, :full_address, to: :geocoder_location
+  delegate :success, :to_s, to: :delegator
+  delegate :lat, :lng, :state, :country_code, :accuracy, :in_correct_country?, :suburb, :postcode, :full_address, to: :geocoder_location
 
   def initialize(delegator, original_address = nil)
     @delegator = delegator
@@ -91,7 +91,8 @@ class Location
 
   # Distance given is in metres
   def endpoint(bearing, distance)
-    Location.new(delegator.endpoint(bearing, distance / 1000.0, units: :kms))
+    p = delegator.endpoint(bearing, distance / 1000.0, units: :kms)
+    Location.new(p)
   end
 
   # Distance (in metres) to other point
@@ -109,8 +110,8 @@ class Location
 
   def geocoder_location
     GeocoderLocation.new(
-      lat: lat,
-      lng: lng,
+      lat: delegator.lat,
+      lng: delegator.lng,
       suburb: (delegator.city if delegator.respond_to?(:city)),
       state: (delegator.state if delegator.respond_to?(:state)),
       postcode: (delegator.zip if delegator.respond_to?(:zip)),
