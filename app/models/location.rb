@@ -24,6 +24,12 @@ class GeocoderLocation
   def ==(other)
     lat == other.lat && lng == other.lng
   end
+
+  def distance_to(loc)
+    loc1 = Geokit::LatLng.new(lat, lng)
+    loc2 = Geokit::LatLng.new(loc.lat, loc.lng)
+    loc1.distance_to(loc2, units: :kms) * 1000.0
+  end
 end
 
 class GeocoderResults
@@ -90,9 +96,7 @@ class Location
 
   # Distance (in metres) to other point
   def distance_to(loc)
-    loc1 = Geokit::LatLng.new(lat, lng)
-    loc2 = Geokit::LatLng.new(loc.lat, loc.lng)
-    loc1.distance_to(loc2, units: :kms) * 1000.0
+    geocoder_location.distance_to(loc.geocoder_location)
   end
 
   def all
@@ -107,12 +111,12 @@ class Location
     GeocoderLocation.new(
       lat: lat,
       lng: lng,
-      suburb: delegator.city,
-      state: state,
-      postcode: delegator.zip,
-      country_code: country_code,
-      full_address: delegator.full_address.sub(", Australia", ""),
-      accuracy: accuracy
+      suburb: (delegator.city if delegator.respond_to?(:city)),
+      state: (delegator.state if delegator.respond_to?(:state)),
+      postcode: (delegator.zip if delegator.respond_to?(:zip)),
+      country_code: (delegator.country_code if delegator.respond_to?(:country_code)),
+      full_address: (delegator.full_address.sub(", Australia", "") if delegator.respond_to?(:full_address)),
+      accuracy: (delegator.accuracy if delegator.respond_to?(:accuracy))
     )
   end
 end
