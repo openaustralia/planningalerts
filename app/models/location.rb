@@ -3,8 +3,15 @@
 # Super thin veneer over Geokit geocoder and the results of the geocoding. The other main difference with
 # geokit vanilla is that the distances are all in meters and the geocoding is biased towards Australian addresses
 
-class Location < SimpleDelegator
+class Location
   attr_accessor :original_address
+  attr_reader :delegator
+
+  delegate :lat, :lng, :accuracy, :success, :to_s, :state, to: :delegator
+
+  def initialize(delegator)
+    @delegator = delegator
+  end
 
   def self.from_lat_lng(lat, lng)
     new(Geokit::LatLng.new(lat, lng))
@@ -19,15 +26,15 @@ class Location < SimpleDelegator
   end
 
   def in_correct_country?
-    country_code == "AU"
+    delegator.country_code == "AU"
   end
 
   def suburb
-    city
+    delegator.city
   end
 
   def postcode
-    zip
+    delegator.zip
   end
 
   def error
@@ -47,20 +54,20 @@ class Location < SimpleDelegator
 
   # Distance given is in metres
   def endpoint(bearing, distance)
-    Location.new(__getobj__.endpoint(bearing, distance / 1000.0, units: :kms))
+    Location.new(delegator.endpoint(bearing, distance / 1000.0, units: :kms))
   end
 
   # Distance (in metres) to other point
   def distance_to(loc)
-    __getobj__.distance_to(loc.__getobj__, units: :kms) * 1000.0
+    delegator.distance_to(loc.delegator, units: :kms) * 1000.0
   end
 
   def full_address
-    __getobj__.full_address.sub(", Australia", "")
+    delegator.full_address.sub(", Australia", "")
   end
 
   def all
-    __getobj__.all.find_all { |l| Location.new(l).in_correct_country? }.map { |l| Location.new(l) }
+    delegator.all.find_all { |l| Location.new(l).in_correct_country? }.map { |l| Location.new(l) }
   end
 
   def ==(other)
