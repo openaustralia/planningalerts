@@ -30,6 +30,12 @@ class GeocoderLocation
     loc2 = Geokit::LatLng.new(loc.lat, loc.lng)
     loc1.distance_to(loc2, units: :kms) * 1000.0
   end
+
+  # TODO: Probably want to show some of the geocoding information
+  # if it is present
+  def to_s
+    "#{lat},#{lng}"
+  end
 end
 
 class GeocoderResults
@@ -56,8 +62,8 @@ class Location
   attr_accessor :original_address
   attr_reader :delegator
 
-  delegate :success, :to_s, to: :delegator
-  delegate :lat, :lng, :state, :country_code, :accuracy, :in_correct_country?, :suburb, :postcode, :full_address, to: :geocoder_location
+  delegate :success, to: :delegator
+  delegate :to_s, :lat, :lng, :state, :country_code, :accuracy, :in_correct_country?, :suburb, :postcode, :full_address, to: :geocoder_location
 
   def initialize(delegator, original_address = nil)
     @delegator = delegator
