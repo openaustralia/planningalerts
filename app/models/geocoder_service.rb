@@ -56,8 +56,9 @@ class GeocoderService
   end
 
   def geocoder_results
-    all = delegator.all.find_all { |l| GeocoderService.new(l).in_correct_country? }.map { |l| GeocoderService.new(l) }
-    GeocoderResults.new(all.map(&:geocoder_location), delegator.success, original_address)
+    all = delegator.all.find_all { |l| GeocoderService.new(l).in_correct_country? }
+    all_converted = all.map { |l| GeocoderService.new(l).geocoder_location }
+    GeocoderResults.new(all_converted, delegator.success, original_address)
   end
 
   def geocoder_location
