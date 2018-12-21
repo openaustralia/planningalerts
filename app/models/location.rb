@@ -6,7 +6,7 @@
 class Location
   attr_reader :delegator, :original_address
 
-  delegate :to_s, :lat, :lng, :state, :country_code, :accuracy, :suburb, :postcode, :full_address, to: :geocoder_location
+  delegate :to_s, :lat, :lng, :state, :accuracy, :suburb, :postcode, :full_address, to: :geocoder_location
   delegate :success, to: :geocoder_results
 
   def initialize(delegator, original_address = nil)
@@ -25,7 +25,7 @@ class Location
   end
 
   def in_correct_country?
-    country_code == "AU"
+    geocoder_location.country_code == "AU"
   end
 
   def error
