@@ -6,16 +6,12 @@
 class Location
   attr_reader :delegator, :original_address
 
-  delegate :to_s, :lat, :lng, :state, :accuracy, :suburb, :postcode, :full_address, to: :geocoder_location
+  delegate :endpoint, :distance_to, :to_s, :lat, :lng, :state, :accuracy, :suburb, :postcode, :full_address, to: :geocoder_location
   delegate :success, to: :geocoder_results
 
   def initialize(delegator, original_address = nil)
     @delegator = delegator
     @original_address = original_address
-  end
-
-  def self.from_lat_lng(lat, lng)
-    new(Geokit::LatLng.new(lat, lng))
   end
 
   def self.geocode(address)
@@ -41,17 +37,6 @@ class Location
     elsif accuracy < 5
       "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
     end
-  end
-
-  # Distance given is in metres
-  def endpoint(bearing, distance)
-    p = geocoder_location.endpoint(bearing, distance)
-    Location.from_lat_lng(p.lat, p.lng)
-  end
-
-  # Distance (in metres) to other point
-  def distance_to(loc)
-    geocoder_location.distance_to(loc.geocoder_location)
   end
 
   def all

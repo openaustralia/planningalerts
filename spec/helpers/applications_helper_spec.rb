@@ -75,7 +75,7 @@ describe ApplicationsHelper do
       allow(@application).to receive(:address).and_return("foo")
       allow(@application).to receive(:lat).and_return(1.0)
       allow(@application).to receive(:lng).and_return(2.0)
-      allow(@application).to receive(:location).and_return(Location.from_lat_lng(1.0, 2.0))
+      allow(@application).to receive(:location).and_return(NewLocation.new(lat: 1.0, lng: 2.0))
     end
 
     it "should say when the application was received by the planning authority and when it appeared on PlanningAlerts" do
@@ -100,7 +100,7 @@ describe ApplicationsHelper do
       allow(@application).to receive(:address).and_return("foo")
       allow(@application).to receive(:lat).and_return(1.0)
       allow(@application).to receive(:lng).and_return(2.0)
-      allow(@application).to receive(:location).and_return(Location.from_lat_lng(1.0, 2.0))
+      allow(@application).to receive(:location).and_return(NewLocation.new(lat: 1.0, lng: 2.0))
       allow(@application).to receive(:date_received).and_return(nil)
       allow(@application).to receive(:date_scraped).and_return(Time.zone.now)
     end

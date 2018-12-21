@@ -123,7 +123,7 @@ describe Alert do
 
   it "should be able to store the attribute location" do
     alert = Alert.new
-    alert.location = Location.from_lat_lng(1.0, 2.0)
+    alert.location = NewLocation.new(lat: 1.0, lng: 2.0)
     expect(alert.lat).to eq(1.0)
     expect(alert.lng).to eq(2.0)
     expect(alert.location.lat).to eq(1.0)

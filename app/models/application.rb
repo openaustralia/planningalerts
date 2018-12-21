@@ -67,7 +67,7 @@ class Application < ApplicationRecord
 
   # TODO: factor out common location accessor between Application and Alert
   def location
-    Location.from_lat_lng(lat, lng) if lat && lng
+    NewLocation.new(lat: lat, lng: lng) if lat && lng
   end
 
   def description
