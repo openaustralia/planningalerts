@@ -55,10 +55,6 @@ class GeocoderService
     end
   end
 
-  def ==(other)
-    geocoder_location == other.geocoder_location
-  end
-
   def geocoder_results
     all = delegator.all.find_all { |l| GeocoderService.new(l).in_correct_country? }.map { |l| GeocoderService.new(l) }
     GeocoderResults.new(all.map(&:geocoder_location), delegator.success, original_address)

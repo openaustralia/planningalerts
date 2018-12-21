@@ -8,10 +8,6 @@ class Location
     @lng = lng
   end
 
-  def ==(other)
-    lat == other.lat && lng == other.lng
-  end
-
   # Value returned is in metres
   def distance_to(loc)
     loc1 = Geokit::LatLng.new(lat, lng)
