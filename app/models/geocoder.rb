@@ -65,7 +65,7 @@ class Geocoder
   end
 
   def geocoder_location
-    GeocoderLocation.new(
+    GeocodedLocation.new(
       lat: delegator.lat,
       lng: delegator.lng,
       suburb: (delegator.city if delegator.respond_to?(:city)),
