@@ -10,11 +10,11 @@ describe AlertNotifier do
     allow(@alert).to receive(:confirm_id).and_return("abcdef")
     @original_emails_sent = Stat.emails_sent
     @original_applications_sent = Stat.applications_sent
-    location1 = double("Geocoder", lat: 0.1, lng: 0.2)
+    location1 = double("GeocoderService", lat: 0.1, lng: 0.2)
     @a1 = mock_model(Application,
                      address: "Foo Street, Bar", council_reference: "a1", description: "Knock something down", id: 1,
                      lat: location1.lat, lng: location1.lng, location: location1)
-    location2 = double("Geocoder", lat: 0.3, lng: 0.4)
+    location2 = double("GeocoderService", lat: 0.3, lng: 0.4)
     @a2 = mock_model(Application,
                      address: "Bar Street, Foo", council_reference: "a2", description: "Put something up", id: 2,
                      lat: location2.lat, lng: location2.lng, location: location2)

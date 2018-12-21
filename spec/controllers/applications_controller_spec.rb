@@ -10,7 +10,7 @@ describe ApplicationsController do
   describe "#index" do
     describe "rss feed" do
       before :each do
-        allow(Geocoder).to receive(:geocode).and_return(double(lat: 1.0, lng: 2.0, full_address: "24 Bruce Road, Glenbrook NSW 2773"))
+        allow(GeocoderService).to receive(:geocode).and_return(double(lat: 1.0, lng: 2.0, full_address: "24 Bruce Road, Glenbrook NSW 2773"))
       end
 
       it "should not provide a link for all applications" do

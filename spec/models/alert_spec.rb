@@ -94,7 +94,7 @@ describe Alert do
   end
 
   it "should be able to accept location information if it is already known and so not use the geocoder" do
-    expect(Geocoder).not_to receive(:geocode)
+    expect(GeocoderService).not_to receive(:geocode)
 
     alert = create(:alert, lat: 1.0, lng: 2.0)
 

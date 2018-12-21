@@ -63,7 +63,7 @@ class ApplicationsController < ApplicationController
     per_page = 30
     @page = params[:page]
     if @q
-      location = Geocoder.geocode(@q)
+      location = GeocoderService.geocode(@q)
       if location.error
         @other_addresses = []
         @error = location.error
