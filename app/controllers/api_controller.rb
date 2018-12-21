@@ -36,7 +36,7 @@ class ApiController < ApplicationController
   def point
     radius = params[:radius] || params[:area_size] || 2000
     if params[:address]
-      location = Location.geocode(params[:address])
+      location = Geocoder.geocode(params[:address])
       location_text = location.full_address
     else
       location = NewLocation.new(lat: params[:lat].to_f, lng: params[:lng].to_f)

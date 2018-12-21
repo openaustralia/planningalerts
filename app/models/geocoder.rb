@@ -3,7 +3,7 @@
 # Super thin veneer over Geokit geocoder and the results of the geocoding. The other main difference with
 # geokit vanilla is that the distances are all in meters and the geocoding is biased towards Australian addresses
 
-class Location
+class Geocoder
   attr_reader :delegator, :original_address
 
   delegate :endpoint, :distance_to, :to_s, :lat, :lng, :state, :accuracy, :suburb, :postcode, :full_address, to: :geocoder_location
@@ -51,7 +51,7 @@ class Location
       )
       geo_loc.full_address = r.full_address
       geo_loc.accuracy = r.accuracy
-      Location.new(geo_loc)
+      Geocoder.new(geo_loc)
     end
   end
 
@@ -60,7 +60,7 @@ class Location
   end
 
   def geocoder_results
-    all = delegator.all.find_all { |l| Location.new(l).in_correct_country? }.map { |l| Location.new(l) }
+    all = delegator.all.find_all { |l| Geocoder.new(l).in_correct_country? }.map { |l| Geocoder.new(l) }
     GeocoderResults.new(all.map(&:geocoder_location), delegator.success, original_address)
   end
 

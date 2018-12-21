@@ -145,7 +145,7 @@ class Application < ApplicationRecord
     # Only geocode if location hasn't been set
     return if lat && lng && suburb && state && postcode
 
-    r = Location.geocode(address)
+    r = Geocoder.geocode(address)
     if r.success
       self.lat = r.lat
       self.lng = r.lng

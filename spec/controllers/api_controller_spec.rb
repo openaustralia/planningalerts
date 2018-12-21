@@ -195,7 +195,7 @@ describe ApiController do
         location = double(lat: 1.0, lng: 2.0, full_address: "24 Bruce Road, Glenbrook NSW 2773")
         @result = double
 
-        expect(Location).to receive(:geocode).with("24 Bruce Road Glenbrook").and_return(location)
+        expect(Geocoder).to receive(:geocode).with("24 Bruce Road Glenbrook").and_return(location)
         allow(Application).to receive_message_chain(:near, :paginate).and_return(@result)
       end
 

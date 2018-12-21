@@ -126,7 +126,7 @@ describe AlertNotifierHelper do
       mock_model(Application, address: "Bar Street",
                               description: "Alterations & additions",
                               council_reference: "007",
-                              location: double("Location", lat: 1.0, lng: 2.0))
+                              location: double("Geocoder", lat: 1.0, lng: 2.0))
     end
     let(:comment) { create(:comment, application: application) }
     let(:comment2) { create(:comment, application: application) }

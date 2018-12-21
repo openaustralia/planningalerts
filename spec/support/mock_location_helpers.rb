@@ -2,7 +2,7 @@
 
 module MockLocationHelpers
   def mock_geocoder_valid_address_response
-    allow(Location).to receive(:geocode).and_return(
+    allow(Geocoder).to receive(:geocode).and_return(
       double(
         lat: -33.772607,
         lng: 150.624245,
@@ -14,7 +14,7 @@ module MockLocationHelpers
   end
 
   def mock_geocoder_error_response
-    allow(Location).to receive(:geocode).and_return(
+    allow(Geocoder).to receive(:geocode).and_return(
       double(
         error: "some error message",
         lat: nil,
@@ -25,7 +25,7 @@ module MockLocationHelpers
   end
 
   def mock_geocoder_multiple_locations_response
-    allow(Location).to receive(:geocode).and_return(
+    allow(Geocoder).to receive(:geocode).and_return(
       double(
         lat: 1,
         lng: 2,
