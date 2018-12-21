@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class NewLocation
+class Location
   attr_reader :lat, :lng
 
   def initialize(lat:, lng:)
@@ -23,7 +23,7 @@ class NewLocation
   def endpoint(bearing, distance)
     loc = Geokit::LatLng.new(lat, lng)
     p = loc.endpoint(bearing, distance / 1000.0, units: :kms)
-    NewLocation.new(lat: p.lat, lng: p.lng)
+    Location.new(lat: p.lat, lng: p.lng)
   end
 
   def to_s
@@ -31,7 +31,7 @@ class NewLocation
   end
 end
 
-class GeocoderLocation < NewLocation
+class GeocoderLocation < Location
   attr_reader :suburb, :state, :postcode, :country_code, :full_address, :accuracy
 
   def initialize(lat:, lng:, suburb:, state:, postcode:, country_code:, full_address:, accuracy:)
