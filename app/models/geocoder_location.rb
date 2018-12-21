@@ -14,10 +14,6 @@ class GeocoderLocation
     @accuracy = accuracy
   end
 
-  def in_correct_country?
-    country_code == "AU"
-  end
-
   def ==(other)
     lat == other.lat && lng == other.lng
   end
