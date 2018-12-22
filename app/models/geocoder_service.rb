@@ -19,7 +19,16 @@ class GeocoderService
     geo_loc = Geokit::Geocoders::GoogleGeocoder.geocode(address, bias: "au")
 
     all = all_filtered(geo_loc)
-    all_converted = all.map { |g| GeocoderService.geocoder_location(g) }
+    all_converted = all.map do |g|
+      GeocodedLocation.new(
+        lat: g.lat,
+        lng: g.lng,
+        suburb: (g.city if g.respond_to?(:city)),
+        state: (g.state if g.respond_to?(:state)),
+        postcode: (g.zip if g.respond_to?(:zip)),
+        full_address: (g.full_address.sub(", Australia", "") if g.respond_to?(:full_address))
+      )
+    end
     geocoder_results = GeocoderResults.new(all_converted, geo_loc.success)
 
     geo_loc2 = all.first
@@ -43,17 +52,6 @@ class GeocoderService
 
   def self.all_filtered(geo_loc)
     geo_loc.all.find_all { |g| g.country_code == "AU" }
-  end
-
-  def self.geocoder_location(geo_loc)
-    GeocodedLocation.new(
-      lat: geo_loc.lat,
-      lng: geo_loc.lng,
-      suburb: (geo_loc.city if geo_loc.respond_to?(:city)),
-      state: (geo_loc.state if geo_loc.respond_to?(:state)),
-      postcode: (geo_loc.zip if geo_loc.respond_to?(:zip)),
-      full_address: (geo_loc.full_address.sub(", Australia", "") if geo_loc.respond_to?(:full_address))
-    )
   end
 
   def all
