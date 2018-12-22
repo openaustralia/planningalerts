@@ -15,9 +15,13 @@ class GeocoderService
   end
 
   def self.geocode(address)
-    r = Geokit::Geocoders::GoogleGeocoder.geocode(address, bias: "au")
-    r = r.all.find { |l| in_correct_country?(l) } || r
-    new(r, address)
+    geo_loc = Geokit::Geocoders::GoogleGeocoder.geocode(address, bias: "au")
+    geo_loc = all_filtered(geo_loc).first || geo_loc
+    new(geo_loc, address)
+  end
+
+  def self.all_filtered(geo_loc)
+    geo_loc.all.find_all { |g| GeocoderService.in_correct_country?(g) }
   end
 
   def in_correct_country?
@@ -60,7 +64,7 @@ class GeocoderService
   end
 
   def geocoder_results
-    all = delegator.all.find_all { |geo_loc| GeocoderService.in_correct_country?(geo_loc) }
+    all = GeocoderService.all_filtered(delegator)
     all_converted = all.map { |geo_loc| GeocoderService.geocoder_location(geo_loc) }
     GeocoderResults.new(all_converted, delegator.success, original_address)
   end
