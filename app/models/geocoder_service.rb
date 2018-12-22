@@ -60,8 +60,8 @@ class GeocoderService
   end
 
   def geocoder_results
-    all = delegator.all.find_all { |l| GeocoderService.in_correct_country?(l) }
-    all_converted = all.map { |l| GeocoderService.geocoder_location(l) }
+    all = delegator.all.find_all { |geo_loc| GeocoderService.in_correct_country?(geo_loc) }
+    all_converted = all.map { |geo_loc| GeocoderService.geocoder_location(geo_loc) }
     GeocoderResults.new(all_converted, delegator.success, original_address)
   end
 
@@ -69,16 +69,16 @@ class GeocoderService
     GeocoderService.geocoder_location(delegator)
   end
 
-  def self.geocoder_location(delegator)
+  def self.geocoder_location(geo_loc)
     GeocodedLocation.new(
-      lat: delegator.lat,
-      lng: delegator.lng,
-      suburb: (delegator.city if delegator.respond_to?(:city)),
-      state: (delegator.state if delegator.respond_to?(:state)),
-      postcode: (delegator.zip if delegator.respond_to?(:zip)),
-      country_code: (delegator.country_code if delegator.respond_to?(:country_code)),
-      full_address: (delegator.full_address.sub(", Australia", "") if delegator.respond_to?(:full_address)),
-      accuracy: (delegator.accuracy if delegator.respond_to?(:accuracy))
+      lat: geo_loc.lat,
+      lng: geo_loc.lng,
+      suburb: (geo_loc.city if geo_loc.respond_to?(:city)),
+      state: (geo_loc.state if geo_loc.respond_to?(:state)),
+      postcode: (geo_loc.zip if geo_loc.respond_to?(:zip)),
+      country_code: (geo_loc.country_code if geo_loc.respond_to?(:country_code)),
+      full_address: (geo_loc.full_address.sub(", Australia", "") if geo_loc.respond_to?(:full_address)),
+      accuracy: (geo_loc.accuracy if geo_loc.respond_to?(:accuracy))
     )
   end
 end
