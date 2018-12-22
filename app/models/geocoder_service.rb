@@ -37,11 +37,7 @@ class GeocoderService
   end
 
   def self.all_filtered(geo_loc)
-    geo_loc.all.find_all { |g| GeocoderService.in_correct_country?(g) }
-  end
-
-  def self.in_correct_country?(geo_loc)
-    GeocoderService.new(geo_loc).in_correct_country?
+    geo_loc.all.find_all { |g| g.country_code == "AU" }
   end
 
   def self.geocoder_location(geo_loc)
@@ -55,10 +51,6 @@ class GeocoderService
       full_address: (geo_loc.full_address.sub(", Australia", "") if geo_loc.respond_to?(:full_address)),
       accuracy: (geo_loc.accuracy if geo_loc.respond_to?(:accuracy))
     )
-  end
-
-  def in_correct_country?
-    geocoder_location.country_code == "AU"
   end
 
   def all
