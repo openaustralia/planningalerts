@@ -18,7 +18,7 @@ class GeocoderService
   def self.geocode(address)
     geo_loc = Geokit::Geocoders::GoogleGeocoder.geocode(address, bias: "au")
 
-    all = all_filtered(geo_loc)
+    all = geo_loc.all.find_all { |g| g.country_code == "AU" }
     all_converted = all.map do |g|
       GeocodedLocation.new(
         lat: g.lat,
@@ -50,15 +50,13 @@ class GeocoderService
     new(geocoder_results, error)
   end
 
-  def self.all_filtered(geo_loc)
-    geo_loc.all.find_all { |g| g.country_code == "AU" }
-  end
-
   def all
     geocoder_results.all.each_with_index.map do |_r, i|
       GeocoderService.new(geocoder_results, error, i)
     end
   end
+
+  private
 
   def geocoder_location
     geocoder_results.all[index]
