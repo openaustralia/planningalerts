@@ -36,7 +36,7 @@ describe "GeocoderService" do
   end
 
   it "should return nil if the address to geocode isn't valid" do
-    expect(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).with("", bias: "au").and_return(double(lat: nil, lng: nil, all: []))
+    expect(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).with("", bias: "au").and_return(double(lat: nil, lng: nil, country_code: nil, accuracy: nil, all: []))
     l = GeocoderService.geocode("")
     expect(l.lat).to be_nil
     expect(l.lng).to be_nil
@@ -59,14 +59,14 @@ describe "GeocoderService" do
   end
 
   it "should error if the address is empty" do
-    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(all: [], lat: nil, lng: nil))
+    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(all: [], lat: nil, lng: nil, country_code: nil, accuracy: nil))
 
     l = GeocoderService.geocode("")
     expect(l.error).to eq("Please enter a street address")
   end
 
   it "should error if the address is not valid" do
-    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(lat: nil, lng: nil, all: []))
+    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(lat: nil, lng: nil, country_code: nil, accuracy: nil, all: []))
 
     l = GeocoderService.geocode("rxsd23dfj")
     expect(l.error).to eq("Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’")

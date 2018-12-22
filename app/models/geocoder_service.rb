@@ -4,20 +4,24 @@
 # geokit vanilla is that the distances are all in meters and the geocoding is biased towards Australian addresses
 
 class GeocoderService
-  attr_reader :delegator, :original_address
+  attr_reader :delegator, :error, :original_address
 
   delegate :endpoint, :distance_to, :to_s, :lat, :lng, :state, :accuracy, :suburb, :postcode, :full_address, to: :geocoder_location
   delegate :success, to: :geocoder_results
 
-  def initialize(delegator, original_address = nil)
+  def initialize(delegator, error = nil, original_address = nil)
     @delegator = delegator
+    @error = error
     @original_address = original_address
   end
 
   def self.geocode(address)
     geo_loc = Geokit::Geocoders::GoogleGeocoder.geocode(address, bias: "au")
     geo_loc = all_filtered(geo_loc).first || geo_loc
-    new(geo_loc, address)
+    error = GeocoderService.error(
+      address, geo_loc.lat, geo_loc.lng, geo_loc.country_code == "AU", geo_loc.accuracy
+    )
+    new(geo_loc, error, address)
   end
 
   def self.all_filtered(geo_loc)
@@ -58,10 +62,6 @@ class GeocoderService
 
   def in_correct_country?
     geocoder_location.country_code == "AU"
-  end
-
-  def error
-    GeocoderService.error(original_address, lat, lng, in_correct_country?, accuracy)
   end
 
   def all
