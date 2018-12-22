@@ -17,11 +17,23 @@ class GeocoderService
 
   def self.geocode(address)
     geo_loc = Geokit::Geocoders::GoogleGeocoder.geocode(address, bias: "au")
-    geo_loc = all_filtered(geo_loc).first || geo_loc
-    error = GeocoderService.error(
-      address, geo_loc.lat, geo_loc.lng, geo_loc.country_code == "AU", geo_loc.accuracy
-    )
-    new(geo_loc, error, address)
+    geo_loc2 = all_filtered(geo_loc).first
+    if geo_loc2.nil?
+      geo_loc2 = geo_loc
+      in_correct_country = false
+    else
+      in_correct_country = true
+    end
+    if address == ""
+      error = "Please enter a street address"
+    elsif geo_loc2.lat.nil? || geo_loc2.lng.nil?
+      error = "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
+    elsif !in_correct_country
+      error = "Unfortunately we only cover Australia. It looks like that address is in another country."
+    elsif geo_loc2.accuracy < 5
+      error = "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
+    end
+    new(geo_loc2, error, address)
   end
 
   def self.all_filtered(geo_loc)
@@ -43,21 +55,6 @@ class GeocoderService
       full_address: (geo_loc.full_address.sub(", Australia", "") if geo_loc.respond_to?(:full_address)),
       accuracy: (geo_loc.accuracy if geo_loc.respond_to?(:accuracy))
     )
-  end
-
-  def self.error(original_address, lat, lng, in_correct_country, accuracy)
-    # Only checking for errors on geocoding
-    return if original_address.nil?
-
-    if original_address == ""
-      "Please enter a street address"
-    elsif lat.nil? || lng.nil?
-      "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
-    elsif !in_correct_country
-      "Unfortunately we only cover Australia. It looks like that address is in another country."
-    elsif accuracy < 5
-      "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
-    end
   end
 
   def in_correct_country?
