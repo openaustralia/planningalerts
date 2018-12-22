@@ -4,19 +4,25 @@
 # geokit vanilla is that the distances are all in meters and the geocoding is biased towards Australian addresses
 
 class GeocoderService
-  attr_reader :delegator, :error
+  attr_reader :delegator, :geocoder_results, :error
 
   delegate :endpoint, :distance_to, :to_s, :lat, :lng, :state, :accuracy, :suburb, :postcode, :full_address, to: :geocoder_location
   delegate :success, to: :geocoder_results
 
-  def initialize(delegator, error = nil)
+  def initialize(delegator, geocoder_results, error = nil)
     @delegator = delegator
+    @geocoder_results = geocoder_results
     @error = error
   end
 
   def self.geocode(address)
     geo_loc = Geokit::Geocoders::GoogleGeocoder.geocode(address, bias: "au")
-    geo_loc2 = all_filtered(geo_loc).first
+
+    all = all_filtered(geo_loc)
+    all_converted = all.map { |g| GeocoderService.geocoder_location(g) }
+    geocoder_results = GeocoderResults.new(all_converted, geo_loc.success)
+
+    geo_loc2 = all.first
     if geo_loc2.nil?
       geo_loc2 = geo_loc
       in_correct_country = false
@@ -32,7 +38,7 @@ class GeocoderService
     elsif geo_loc2.accuracy < 5
       error = "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
     end
-    new(geo_loc2, error)
+    new(geo_loc2, geocoder_results, error)
   end
 
   def self.all_filtered(geo_loc)
@@ -60,14 +66,8 @@ class GeocoderService
         zip: r.postcode
       )
       geo_loc.full_address = r.full_address
-      GeocoderService.new(geo_loc)
+      GeocoderService.new(geo_loc, geocoder_results)
     end
-  end
-
-  def geocoder_results
-    all = GeocoderService.all_filtered(delegator)
-    all_converted = all.map { |geo_loc| GeocoderService.geocoder_location(geo_loc) }
-    GeocoderResults.new(all_converted, delegator.success)
   end
 
   def geocoder_location

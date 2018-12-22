@@ -20,7 +20,7 @@ describe "GeocoderService" do
 
   describe "valid location" do
     before :each do
-      @result = double(all: [double(country_code: "AU", lat: -33.772609, lng: 150.624263, accuracy: 6, city: "Glenbrook", state: "NSW", zip: "2773", full_address: "24 Bruce Road, Glenbrook, NSW 2773, Australia")])
+      @result = double(success: true, all: [double(country_code: "AU", lat: -33.772609, lng: 150.624263, accuracy: 6, city: "Glenbrook", state: "NSW", zip: "2773", full_address: "24 Bruce Road, Glenbrook, NSW 2773, Australia")])
       expect(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).with("24 Bruce Road, Glenbrook, NSW 2773", bias: "au").and_return(@result)
       @loc = GeocoderService.geocode("24 Bruce Road, Glenbrook, NSW 2773")
     end
@@ -36,40 +36,40 @@ describe "GeocoderService" do
   end
 
   it "should return nil if the address to geocode isn't valid" do
-    expect(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).with("", bias: "au").and_return(double(lat: nil, lng: nil, country_code: nil, accuracy: nil, all: []))
+    expect(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).with("", bias: "au").and_return(double(success: false, lat: nil, lng: nil, country_code: nil, accuracy: nil, all: []))
     l = GeocoderService.geocode("")
     expect(l.lat).to be_nil
     expect(l.lng).to be_nil
   end
 
   it "should normalise addresses without the country in them" do
-    loc = GeocoderService.new(double(full_address: "24 Bruce Road, Glenbrook, NSW 2773, Australia", lat: 1.0, lng: 2.0, city: "Glenbrook", state: "NSW", zip: "2773", country_code: "AU", accuracy: nil))
+    loc = GeocoderService.new(double(full_address: "24 Bruce Road, Glenbrook, NSW 2773, Australia", lat: 1.0, lng: 2.0, city: "Glenbrook", state: "NSW", zip: "2773", country_code: "AU", accuracy: nil), nil)
     expect(loc.full_address).to eq("24 Bruce Road, Glenbrook, NSW 2773")
   end
 
   it "should error if the address is empty" do
-    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(all: [], lat: nil, lng: nil, country_code: nil, accuracy: nil))
+    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(success: false, all: [], lat: nil, lng: nil, country_code: nil, accuracy: nil))
 
     l = GeocoderService.geocode("")
     expect(l.error).to eq("Please enter a street address")
   end
 
   it "should error if the address is not valid" do
-    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(lat: nil, lng: nil, country_code: nil, accuracy: nil, all: []))
+    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(success: false, lat: nil, lng: nil, country_code: nil, accuracy: nil, all: []))
 
     l = GeocoderService.geocode("rxsd23dfj")
     expect(l.error).to eq("Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’")
   end
 
   it "should error if the street address is not in australia" do
-    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(lat: 1, lng: 2, country_code: "US", city: "New York", state: "NY", zip: nil, full_address: "New York, NY", accuracy: nil, all: [double(lat: 1, lng: 2, country_code: "US", city: "New York", state: "NY", zip: nil, full_address: "New York, NY", accuracy: nil)]))
+    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(success: true, lat: 1, lng: 2, country_code: "US", city: "New York", state: "NY", zip: nil, full_address: "New York, NY", accuracy: nil, all: [double(lat: 1, lng: 2, country_code: "US", city: "New York", state: "NY", zip: nil, full_address: "New York, NY", accuracy: nil)]))
 
     l = GeocoderService.geocode("New York")
     expect(l.error).to eq("Unfortunately we only cover Australia. It looks like that address is in another country.")
   end
 
   it "should not error if there are multiple matches from the geocoder" do
-    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(all:
+    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(success: true, all:
       [double(country_code: "AU", lat: 1, lng: 2, accuracy: 6, city: "Glenbrook", state: "NSW", zip: nil, full_address: "Bruce Road, Glenbrook, NSW, Australia"), double(country_code: "AU", lat: 1.1, lng: 2.1, accuracy: 6, city: "Somewhere else", state: "VIC", zip: nil, full_address: "Bruce Road, Somewhere else, VIC, Australia")]))
 
     l = GeocoderService.geocode("Bruce Road")
@@ -77,7 +77,7 @@ describe "GeocoderService" do
   end
 
   it "should error if the address is not a full street address but rather a suburb name or similar" do
-    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(all: [double(country_code: "AU", lat: 1, lng: 2, accuracy: 4, city: "Glenbrook", state: "NSW", zip: nil, full_address: "Glenbrook NSW, Australia")]))
+    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(success: true, all: [double(country_code: "AU", lat: 1, lng: 2, accuracy: 4, city: "Glenbrook", state: "NSW", zip: nil, full_address: "Glenbrook NSW, Australia")]))
 
     l = GeocoderService.geocode("Glenbrook, NSW")
     expect(l.error).to eq("Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’")
@@ -98,7 +98,7 @@ describe "GeocoderService" do
       double(full_address: "Bathurst Rd, Riverside, CA, USA", country_code: "US", lat: nil, lng: nil, city: "Riverside", state: "CA", zip: nil, accuracy: nil)
     ]
     allow(m).to receive_messages(all: all)
-    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(all: all))
+    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(success: true, all: all))
     l = GeocoderService.geocode("Bathurst Rd")
     all = l.all
     expect(all.count).to eq(3)
@@ -116,7 +116,7 @@ describe "GeocoderService" do
       double(full_address: "Sowerby St, Burnley, Lancashire BB12 8, UK", country_code: "UK", lat: nil, lng: nil, city: "Burnley", state: "Lancashire", zip: "BB12 8", accuracy: nil)
     ]
     allow(m).to receive_messages(all: all)
-    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(full_address: "Sowerby St, Lawrence 9532, New Zealand", all: all))
+    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(success: true, full_address: "Sowerby St, Lawrence 9532, New Zealand", all: all))
     l = GeocoderService.geocode("Sowerby St")
     expect(l.full_address).to eq("Sowerby St, Garfield NSW 2580")
     all = l.all
