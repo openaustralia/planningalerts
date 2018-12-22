@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-# Super thin veneer over Geokit geocoder and the results of the geocoding. The other main difference with
-# geokit vanilla is that the distances are all in meters and the geocoding is biased towards Australian addresses
-
 class GeocoderService
   attr_reader :geocoder_results, :error, :index
 
