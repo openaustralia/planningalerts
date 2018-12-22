@@ -41,11 +41,7 @@ class GeocoderService
     )
   end
 
-  def in_correct_country?
-    geocoder_location.country_code == "AU"
-  end
-
-  def error
+  def self.error(original_address, lat, lng, in_correct_country, accuracy)
     # Only checking for errors on geocoding
     return if original_address.nil?
 
@@ -53,11 +49,19 @@ class GeocoderService
       "Please enter a street address"
     elsif lat.nil? || lng.nil?
       "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
-    elsif !in_correct_country?
+    elsif !in_correct_country
       "Unfortunately we only cover Australia. It looks like that address is in another country."
     elsif accuracy < 5
       "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
     end
+  end
+
+  def in_correct_country?
+    geocoder_location.country_code == "AU"
+  end
+
+  def error
+    GeocoderService.error(original_address, lat, lng, in_correct_country?, accuracy)
   end
 
   def all

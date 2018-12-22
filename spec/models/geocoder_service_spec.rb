@@ -59,7 +59,7 @@ describe "GeocoderService" do
   end
 
   it "should error if the address is empty" do
-    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(all: []))
+    allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(all: [], lat: nil, lng: nil))
 
     l = GeocoderService.geocode("")
     expect(l.error).to eq("Please enter a street address")
