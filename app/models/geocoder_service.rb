@@ -47,7 +47,6 @@ class GeocoderService
       suburb: (geo_loc.city if geo_loc.respond_to?(:city)),
       state: (geo_loc.state if geo_loc.respond_to?(:state)),
       postcode: (geo_loc.zip if geo_loc.respond_to?(:zip)),
-      country_code: (geo_loc.country_code if geo_loc.respond_to?(:country_code)),
       full_address: (geo_loc.full_address.sub(", Australia", "") if geo_loc.respond_to?(:full_address)),
       accuracy: (geo_loc.accuracy if geo_loc.respond_to?(:accuracy))
     )
@@ -60,8 +59,7 @@ class GeocoderService
         lng: r.lng,
         city: r.suburb,
         state: r.state,
-        zip: r.postcode,
-        country_code: r.country_code
+        zip: r.postcode
       )
       geo_loc.full_address = r.full_address
       geo_loc.accuracy = r.accuracy
