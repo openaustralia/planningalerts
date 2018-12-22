@@ -57,11 +57,15 @@ class GeocoderService
 
   def geocoder_results
     all = delegator.all.find_all { |l| GeocoderService.new(l).in_correct_country? }
-    all_converted = all.map { |l| GeocoderService.new(l).geocoder_location }
+    all_converted = all.map { |l| GeocoderService.geocoder_location(l) }
     GeocoderResults.new(all_converted, delegator.success, original_address)
   end
 
   def geocoder_location
+    GeocoderService.geocoder_location(delegator)
+  end
+
+  def self.geocoder_location(delegator)
     GeocodedLocation.new(
       lat: delegator.lat,
       lng: delegator.lng,
