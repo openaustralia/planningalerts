@@ -42,11 +42,6 @@ describe "GeocoderService" do
     expect(l.lng).to be_nil
   end
 
-  it "should normalise addresses without the country in them" do
-    loc = GeocoderService.new(double(full_address: "24 Bruce Road, Glenbrook, NSW 2773, Australia", lat: 1.0, lng: 2.0, city: "Glenbrook", state: "NSW", zip: "2773", country_code: "AU", accuracy: nil), nil)
-    expect(loc.full_address).to eq("24 Bruce Road, Glenbrook, NSW 2773")
-  end
-
   it "should error if the address is empty" do
     allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(success: false, all: [], lat: nil, lng: nil, country_code: nil, accuracy: nil))
 

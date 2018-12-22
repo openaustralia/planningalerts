@@ -4,15 +4,16 @@
 # geokit vanilla is that the distances are all in meters and the geocoding is biased towards Australian addresses
 
 class GeocoderService
-  attr_reader :delegator, :geocoder_results, :error
+  attr_reader :delegator, :geocoder_results, :error, :index
 
-  delegate :endpoint, :distance_to, :to_s, :lat, :lng, :state, :accuracy, :suburb, :postcode, :full_address, to: :geocoder_location
+  delegate :endpoint, :distance_to, :to_s, :lat, :lng, :state, :accuracy, :suburb, :postcode, :full_address, to: :geocoder_location, allow_nil: true
   delegate :success, to: :geocoder_results
 
-  def initialize(delegator, geocoder_results, error = nil)
+  def initialize(delegator, geocoder_results, error = nil, index = 0)
     @delegator = delegator
     @geocoder_results = geocoder_results
     @error = error
+    @index = index
   end
 
   def self.geocode(address)
@@ -57,7 +58,7 @@ class GeocoderService
   end
 
   def all
-    geocoder_results.all.map do |r|
+    geocoder_results.all.each_with_index.map do |r, i|
       geo_loc = Geokit::GeoLoc.new(
         lat: r.lat,
         lng: r.lng,
@@ -66,11 +67,11 @@ class GeocoderService
         zip: r.postcode
       )
       geo_loc.full_address = r.full_address
-      GeocoderService.new(geo_loc, geocoder_results)
+      GeocoderService.new(geo_loc, geocoder_results, error, i)
     end
   end
 
   def geocoder_location
-    GeocoderService.geocoder_location(delegator)
+    geocoder_results.all[index]
   end
 end
