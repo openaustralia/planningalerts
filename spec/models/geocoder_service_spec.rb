@@ -42,17 +42,6 @@ describe "GeocoderService" do
     expect(l.lng).to be_nil
   end
 
-  # Hmm... this test really needs a network connection to run and doesn't really make sense to test
-  # through doubleing. So, commenting out
-  # it "should return the country code of the geocoded address" do
-  #   GeocoderService.geocode("24 Bruce Road, Glenbrook, NSW 2773").country_code.should == "AU"
-  # end
-
-  # Same as the test above
-  # it "should bias the results of geocoding to australian addresses" do
-  #   GeocoderService.geocode("Bruce Road").country_code.should == "AU"
-  # end
-
   it "should normalise addresses without the country in them" do
     loc = GeocoderService.new(double(full_address: "24 Bruce Road, Glenbrook, NSW 2773, Australia", lat: 1.0, lng: 2.0, city: "Glenbrook", state: "NSW", zip: "2773", country_code: "AU", accuracy: nil))
     expect(loc.full_address).to eq("24 Bruce Road, Glenbrook, NSW 2773")
