@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 class GeocoderService
-  attr_reader :geocoder_results, :error, :index
+  attr_reader :geocoder_results, :index
 
   delegate :endpoint, :distance_to, :to_s, :lat, :lng, :state, :accuracy, :suburb, :postcode, :full_address, to: :geocoder_location, allow_nil: true
-  delegate :success, to: :geocoder_results
+  delegate :success, :error, to: :geocoder_results
 
-  def initialize(geocoder_results, error = nil, index = 0)
+  def initialize(geocoder_results, index = 0)
     @geocoder_results = geocoder_results
-    @error = error
     @index = index
   end
 
@@ -26,7 +25,6 @@ class GeocoderService
         full_address: g.full_address.sub(", Australia", "")
       )
     end
-    geocoder_results = GeocoderResults.new(all_converted, geo_loc.success)
 
     geo_loc2 = all.first
     if geo_loc2.nil?
@@ -44,12 +42,12 @@ class GeocoderService
     elsif geo_loc2.accuracy < 5
       error = "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
     end
-    new(geocoder_results, error)
+    new(GeocoderResults.new(all_converted, geo_loc.success, error))
   end
 
   def all
     geocoder_results.all.each_with_index.map do |_r, i|
-      GeocoderService.new(geocoder_results, error, i)
+      GeocoderService.new(geocoder_results, i)
     end
   end
 
