@@ -20,7 +20,7 @@ class GeocodeService < ApplicationService
     end
     if address == ""
       error = "Please enter a street address"
-    elsif geo_loc2.lat.nil? || geo_loc2.lng.nil?
+    elsif !geo_loc.success
       error = "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
     elsif !in_correct_country
       error = "Unfortunately we only cover Australia. It looks like that address is in another country."

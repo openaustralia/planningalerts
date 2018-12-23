@@ -63,18 +63,18 @@ describe "GeocodeService" do
   end
 
   it "should list potential matches and they should be in Australia" do
-    m = double(full_address: "Bathurst Rd, Orange NSW 2800, Australia", country_code: "AU", lat: nil, lng: nil, city: "Orange", state: "NSW", zip: "2800", accuracy: nil, success: true)
+    m = double(full_address: "Bathurst Rd, Orange NSW 2800, Australia", country_code: "AU", lat: nil, lng: nil, city: "Orange", state: "NSW", zip: "2800", accuracy: 5, success: true)
     all = [
       m,
-      double(full_address: "Bathurst Rd, Katoomba NSW 2780, Australia", country_code: "AU", lat: nil, lng: nil, city: "Katoomba", state: "NSW", zip: "2780", accuracy: nil),
-      double(full_address: "Bathurst Rd, Staplehurst, Kent TN12 0, UK", country_code: "UK", lat: nil, lng: nil, city: "Staplehurst", state: "Kent", zip: "TN12 0", accuracy: nil),
-      double(full_address: "Bathurst Rd, Cape Town 7708, South Africa", country_code: "ZA", lat: nil, lng: nil, city: "Cape Town", state: nil, zip: "7708", accuracy: nil),
-      double(full_address: "Bathurst Rd, Winnersh, Wokingham RG41 5, UK", country_code: "UK", lat: nil, lng: nil, city: "Winnersh", state: "Wokingham", zip: "RG41 5", accuracy: nil),
-      double(full_address: "Bathurst Rd, Catonsville, MD 21228, USA", country_code: "US", lat: nil, lng: nil, city: "Catonsville", state: "MD", zip: "21228", accuracy: nil),
-      double(full_address: "Bathurst Rd, Durban South 4004, South Africa", country_code: "ZA", lat: nil, lng: nil, city: "Durban South", state: nil, zip: "4004", accuracy: nil),
-      double(full_address: "Bathurst Rd, Port Kennedy WA 6172, Australia", country_code: "AU", lat: nil, lng: nil, city: "Port Kennedy", state: "WA", zip: "6172", accuracy: nil),
-      double(full_address: "Bathurst Rd, Campbell River, BC V9W, Canada", country_code: "CA", lat: nil, lng: nil, city: "Campbell River", state: "BC", zip: "V9W", accuracy: nil),
-      double(full_address: "Bathurst Rd, Riverside, CA, USA", country_code: "US", lat: nil, lng: nil, city: "Riverside", state: "CA", zip: nil, accuracy: nil)
+      double(full_address: "Bathurst Rd, Katoomba NSW 2780, Australia", country_code: "AU", lat: nil, lng: nil, city: "Katoomba", state: "NSW", zip: "2780", accuracy: 5),
+      double(full_address: "Bathurst Rd, Staplehurst, Kent TN12 0, UK", country_code: "UK", lat: nil, lng: nil, city: "Staplehurst", state: "Kent", zip: "TN12 0", accuracy: 5),
+      double(full_address: "Bathurst Rd, Cape Town 7708, South Africa", country_code: "ZA", lat: nil, lng: nil, city: "Cape Town", state: nil, zip: "7708", accuracy: 5),
+      double(full_address: "Bathurst Rd, Winnersh, Wokingham RG41 5, UK", country_code: "UK", lat: nil, lng: nil, city: "Winnersh", state: "Wokingham", zip: "RG41 5", accuracy: 5),
+      double(full_address: "Bathurst Rd, Catonsville, MD 21228, USA", country_code: "US", lat: nil, lng: nil, city: "Catonsville", state: "MD", zip: "21228", accuracy: 5),
+      double(full_address: "Bathurst Rd, Durban South 4004, South Africa", country_code: "ZA", lat: nil, lng: nil, city: "Durban South", state: nil, zip: "4004", accuracy: 5),
+      double(full_address: "Bathurst Rd, Port Kennedy WA 6172, Australia", country_code: "AU", lat: nil, lng: nil, city: "Port Kennedy", state: "WA", zip: "6172", accuracy: 5),
+      double(full_address: "Bathurst Rd, Campbell River, BC V9W, Canada", country_code: "CA", lat: nil, lng: nil, city: "Campbell River", state: "BC", zip: "V9W", accuracy: 5),
+      double(full_address: "Bathurst Rd, Riverside, CA, USA", country_code: "US", lat: nil, lng: nil, city: "Riverside", state: "CA", zip: nil, accuracy: 5)
     ]
     allow(m).to receive_messages(all: all)
     allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(success: true, all: all))
@@ -87,12 +87,12 @@ describe "GeocodeService" do
   end
 
   it "the first match should only return addresses in Australia" do
-    m = double(full_address: "Sowerby St, Garfield NSW 2580, Australia", country_code: "AU", lat: nil, lng: nil, city: "Garfield", state: "NSW", zip: "2580", accuracy: nil, success: true)
+    m = double(full_address: "Sowerby St, Garfield NSW 2580, Australia", country_code: "AU", lat: nil, lng: nil, city: "Garfield", state: "NSW", zip: "2580", accuracy: 5, success: true)
     all = [
-      double(full_address: "Sowerby St, Lawrence 9532, New Zealand", country_code: "NZ", lat: nil, lng: nil, city: "Lawrence", state: nil, zip: "9532", accuracy: nil),
+      double(full_address: "Sowerby St, Lawrence 9532, New Zealand", country_code: "NZ", lat: nil, lng: nil, city: "Lawrence", state: nil, zip: "9532", accuracy: 5),
       m,
-      double(full_address: "Sowerby St, Sowerby, Halifax, Calderdale HX6 3, UK", country_code: "UK", lat: nil, lng: nil, city: "Sowerby", state: "Calderdale", zip: "HX6 3", accuracy: nil),
-      double(full_address: "Sowerby St, Burnley, Lancashire BB12 8, UK", country_code: "UK", lat: nil, lng: nil, city: "Burnley", state: "Lancashire", zip: "BB12 8", accuracy: nil)
+      double(full_address: "Sowerby St, Sowerby, Halifax, Calderdale HX6 3, UK", country_code: "UK", lat: nil, lng: nil, city: "Sowerby", state: "Calderdale", zip: "HX6 3", accuracy: 5),
+      double(full_address: "Sowerby St, Burnley, Lancashire BB12 8, UK", country_code: "UK", lat: nil, lng: nil, city: "Burnley", state: "Lancashire", zip: "BB12 8", accuracy: 5)
     ]
     allow(m).to receive_messages(all: all)
     allow(Geokit::Geocoders::GoogleGeocoder).to receive(:geocode).and_return(double(success: true, full_address: "Sowerby St, Lawrence 9532, New Zealand", all: all))
