@@ -9,16 +9,7 @@ class GeocodeService < ApplicationService
     geo_loc = Geokit::Geocoders::GoogleGeocoder.geocode(address, bias: "au")
 
     all = geo_loc.all.find_all { |g| g.country_code == "AU" }
-    all_converted = all.map do |g|
-      GeocodedLocation.new(
-        lat: g.lat,
-        lng: g.lng,
-        suburb: g.city,
-        state: g.state,
-        postcode: g.zip,
-        full_address: g.full_address.sub(", Australia", "")
-      )
-    end
+    all_converted = all.map { |g| convert_to_geocoded_location(g) }
 
     geo_loc2 = all.first
     if geo_loc2.nil?
@@ -42,4 +33,15 @@ class GeocodeService < ApplicationService
   private
 
   attr_reader :address
+
+  def convert_to_geocoded_location(geo_loc)
+    GeocodedLocation.new(
+      lat: geo_loc.lat,
+      lng: geo_loc.lng,
+      suburb: geo_loc.city,
+      state: geo_loc.state,
+      postcode: geo_loc.zip,
+      full_address: geo_loc.full_address.sub(", Australia", "")
+    )
+  end
 end
