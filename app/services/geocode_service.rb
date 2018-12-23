@@ -11,20 +11,15 @@ class GeocodeService < ApplicationService
     all = geo_loc.all.find_all { |g| g.country_code == "AU" }
     all_converted = all.map { |g| convert_to_geocoded_location(g) }
 
-    geo_loc2 = all.first
-    if geo_loc2.nil?
-      geo_loc2 = geo_loc
-      in_correct_country = false
-    else
-      in_correct_country = true
-    end
-    if address == ""
-      error = "Please enter a street address"
-    elsif !geo_loc.success
-      error = "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
-    elsif !in_correct_country
+    if !geo_loc.success
+      error = if address == ""
+                "Please enter a street address"
+              else
+                "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
+              end
+    elsif all.empty?
       error = "Unfortunately we only cover Australia. It looks like that address is in another country."
-    elsif geo_loc2.accuracy < 5
+    elsif all.first.accuracy < 5
       error = "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
     end
     GeocoderResults.new(all_converted, geo_loc.success, error)
