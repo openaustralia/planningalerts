@@ -90,12 +90,12 @@ class Alert < ApplicationRecord
   end
 
   def geocode_from_address
-    @geocode_result = GeocoderService.geocode(address)
+    @geocode_result = GeocoderService2.call(address)
 
     return if @geocode_result.error || @geocode_result.all.many?
 
-    self.location = @geocode_result
-    self.address = @geocode_result.full_address
+    self.location = @geocode_result.top
+    self.address = @geocode_result.top.full_address
   end
 
   def attach_alert_subscriber
@@ -111,7 +111,7 @@ class Alert < ApplicationRecord
     if @geocode_result.error
       errors.add(:address, @geocode_result.error)
     elsif @geocode_result.all.many?
-      errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.full_address}")
+      errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.top.full_address}")
     end
   end
 end

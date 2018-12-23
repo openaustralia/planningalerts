@@ -63,15 +63,15 @@ class ApplicationsController < ApplicationController
     per_page = 30
     @page = params[:page]
     if @q
-      location = GeocoderService.geocode(@q)
-      if location.error
+      result = GeocoderService2.call(@q)
+      if result.error
         @other_addresses = []
-        @error = location.error
+        @error = result.error
       else
-        @q = location.full_address
+        @q = result.top.full_address
         @alert = Alert.new(address: @q)
-        @other_addresses = location.all[1..-1].map(&:full_address)
-        @applications = Application.near([location.lat, location.lng], @radius / 1000, units: :km)
+        @other_addresses = result.rest.map(&:full_address)
+        @applications = Application.near([result.top.lat, result.top.lng], @radius / 1000, units: :km)
         @applications = @applications.reorder("distance") if @sort == "distance"
         @applications = @applications
                         .with_visible_comments_count

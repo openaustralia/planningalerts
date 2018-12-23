@@ -7,9 +7,21 @@ describe Application do
     Authority.delete_all
     @auth = create(:authority, full_name: "Fiddlesticks", state: "NSW", short_name: "Fiddle")
     # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
-    allow(GeocoderService).to receive(:geocode).and_return(
-      double(lat: 1.0, lng: 2.0, suburb: "Glenbrook", state: "NSW",
-             postcode: "2773", success: true)
+    allow(GeocoderService2).to receive(:call).and_return(
+      GeocoderResults.new(
+        [
+          GeocodedLocation.new(
+            lat: 1.0,
+            lng: 2.0,
+            suburb: "Glenbrook",
+            state: "NSW",
+            postcode: "2773",
+            full_address: "Glenbrook, NSW, 2773"
+          )
+        ],
+        true,
+        nil
+      )
     )
   end
 
@@ -149,17 +161,30 @@ describe Application do
 
   describe "on saving" do
     it "should geocode the address" do
-      loc = double("GeocoderService",
-                   lat: -33.772609, lng: 150.624263, suburb: "Glenbrook", state: "NSW",
-                   postcode: "2773", success: true)
-      expect(GeocoderService).to receive(:geocode).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
+      loc = GeocoderResults.new(
+        [
+          GeocodedLocation.new(
+            lat: -33.772609,
+            lng: 150.624263,
+            suburb: "Glenbrook",
+            state: "NSW",
+            postcode: "2773",
+            full_address: "Glenbrook, NSW 2773"
+          )
+        ],
+        true,
+        nil
+      )
+      expect(GeocoderService2).to receive(:call).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
       a = create(:application, address: "24 Bruce Road, Glenbrook, NSW", council_reference: "r1", date_scraped: Time.zone.now)
-      expect(a.lat).to eq(loc.lat)
-      expect(a.lng).to eq(loc.lng)
+      expect(a.lat).to eq(loc.top.lat)
+      expect(a.lng).to eq(loc.top.lng)
     end
 
     it "should log an error if the geocoder can't make sense of the address" do
-      expect(GeocoderService).to receive(:geocode).with("dfjshd").and_return(double("GeocoderService", success: false))
+      expect(GeocoderService2).to receive(:call).with("dfjshd").and_return(
+        GeocoderResults.new([], false, "something went wrong")
+      )
       logger = double("Logger")
       expect(logger).to receive(:error).with("Couldn't geocode address: dfjshd")
 
