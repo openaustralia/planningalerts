@@ -1,17 +1,11 @@
 # frozen_string_literal: true
 
-class GeocoderService
-  attr_reader :geocoder_results, :index
-
-  delegate :endpoint, :distance_to, :to_s, :lat, :lng, :state, :accuracy, :suburb, :postcode, :full_address, to: :geocoder_location, allow_nil: true
-  delegate :success, :error, to: :geocoder_results
-
-  def initialize(geocoder_results, index = 0)
-    @geocoder_results = geocoder_results
-    @index = index
+class GeocoderService2 < ApplicationService
+  def initialize(address)
+    @address = address
   end
 
-  def self.geocode(address)
+  def call
     geo_loc = Geokit::Geocoders::GoogleGeocoder.geocode(address, bias: "au")
 
     all = geo_loc.all.find_all { |g| g.country_code == "AU" }
@@ -42,7 +36,27 @@ class GeocoderService
     elsif geo_loc2.accuracy < 5
       error = "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
     end
-    new(GeocoderResults.new(all_converted, geo_loc.success, error))
+    GeocoderResults.new(all_converted, geo_loc.success, error)
+  end
+
+  private
+
+  attr_reader :address
+end
+
+class GeocoderService
+  attr_reader :geocoder_results, :index
+
+  delegate :endpoint, :distance_to, :to_s, :lat, :lng, :state, :accuracy, :suburb, :postcode, :full_address, to: :geocoder_location, allow_nil: true
+  delegate :success, :error, to: :geocoder_results
+
+  def initialize(geocoder_results, index = 0)
+    @geocoder_results = geocoder_results
+    @index = index
+  end
+
+  def self.geocode(address)
+    new(GeocoderService2.call(address))
   end
 
   def all
