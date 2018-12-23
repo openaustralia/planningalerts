@@ -20,10 +20,10 @@ class GeocoderService
       GeocodedLocation.new(
         lat: g.lat,
         lng: g.lng,
-        suburb: (g.city if g.respond_to?(:city)),
-        state: (g.state if g.respond_to?(:state)),
-        postcode: (g.zip if g.respond_to?(:zip)),
-        full_address: (g.full_address.sub(", Australia", "") if g.respond_to?(:full_address))
+        suburb: g.city,
+        state: g.state,
+        postcode: g.zip,
+        full_address: g.full_address.sub(", Australia", "")
       )
     end
     geocoder_results = GeocoderResults.new(all_converted, geo_loc.success)
