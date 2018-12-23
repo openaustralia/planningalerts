@@ -7,7 +7,7 @@ describe ImportApplicationsService do
     Authority.delete_all
     @auth = create(:authority, full_name: "Fiddlesticks", state: "NSW", short_name: "Fiddle")
     # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
-    allow(GeocoderService2).to receive(:call).and_return(
+    allow(GeocodeService).to receive(:call).and_return(
       GeocoderResults.new(
         [
           GeocodedLocation.new(

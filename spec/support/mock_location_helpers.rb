@@ -2,7 +2,7 @@
 
 module MockLocationHelpers
   def mock_geocoder_valid_address_response
-    allow(GeocoderService2).to receive(:call).and_return(
+    allow(GeocodeService).to receive(:call).and_return(
       GeocoderResults.new(
         [
           GeocodedLocation.new(
@@ -21,13 +21,13 @@ module MockLocationHelpers
   end
 
   def mock_geocoder_error_response
-    allow(GeocoderService2).to receive(:call).and_return(
+    allow(GeocodeService).to receive(:call).and_return(
       GeocoderResults.new([], false, "some error message")
     )
   end
 
   def mock_geocoder_multiple_locations_response
-    allow(GeocoderService2).to receive(:call).and_return(
+    allow(GeocodeService).to receive(:call).and_return(
       GeocoderResults.new(
         [
           GeocodedLocation.new(

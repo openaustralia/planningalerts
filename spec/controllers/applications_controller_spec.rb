@@ -10,7 +10,7 @@ describe ApplicationsController do
   describe "#index" do
     describe "rss feed" do
       before :each do
-        allow(GeocoderService2).to receive(:call).and_return(
+        allow(GeocodeService).to receive(:call).and_return(
           GeocoderResults.new(
             [
               GeocodedLocation.new(

@@ -56,7 +56,7 @@ describe ProcessAlertService do
         end
 
         it "should not cause the application to be re-geocoded" do
-          expect(GeocoderService2).to_not receive(:call)
+          expect(GeocodeService).to_not receive(:call)
           ProcessAlertService.call(alert: alert)
         end
       end

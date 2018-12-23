@@ -7,7 +7,7 @@ describe Application do
     Authority.delete_all
     @auth = create(:authority, full_name: "Fiddlesticks", state: "NSW", short_name: "Fiddle")
     # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
-    allow(GeocoderService2).to receive(:call).and_return(
+    allow(GeocodeService).to receive(:call).and_return(
       GeocoderResults.new(
         [
           GeocodedLocation.new(
@@ -175,14 +175,14 @@ describe Application do
         true,
         nil
       )
-      expect(GeocoderService2).to receive(:call).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
+      expect(GeocodeService).to receive(:call).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
       a = create(:application, address: "24 Bruce Road, Glenbrook, NSW", council_reference: "r1", date_scraped: Time.zone.now)
       expect(a.lat).to eq(loc.top.lat)
       expect(a.lng).to eq(loc.top.lng)
     end
 
     it "should log an error if the geocoder can't make sense of the address" do
-      expect(GeocoderService2).to receive(:call).with("dfjshd").and_return(
+      expect(GeocodeService).to receive(:call).with("dfjshd").and_return(
         GeocoderResults.new([], false, "something went wrong")
       )
       logger = double("Logger")

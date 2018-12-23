@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class GeocoderService2 < ApplicationService
+class GeocodeService < ApplicationService
   def initialize(address)
     @address = address
   end
