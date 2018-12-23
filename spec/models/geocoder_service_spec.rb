@@ -2,7 +2,7 @@
 
 require File.dirname(__FILE__) + "/../spec_helper"
 
-describe "GeocoderService" do
+describe "GeocoderService2" do
   describe "#distance_to" do
     it "should return results consistent with endpoint method" do
       loc1 = Location.new(lat: -33.772609, lng: 150.624263)
