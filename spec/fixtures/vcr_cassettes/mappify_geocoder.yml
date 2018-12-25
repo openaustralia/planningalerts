@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://mappify.io/api/rpc/address/autocomplete/
+    body:
+      encoding: UTF-8
+      string: '{"streetAddress":"24 Bruce Road, Glenbrook, NSW 2773","formatCase":true}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '72'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, X-Requested-With, Content-Type, Accept, authorization
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS,PATCH
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 24 Dec 2018 21:19:33 GMT
+      Etag:
+      - W/"1258-z6z7XyCQwYjDTB0iOoOHvUhSYKk"
+      Server:
+      - nginx/1.10.3 (Ubuntu)
+      X-Powered-By:
+      - Express
+      X-Ratelimit-Limit:
+      - '2500'
+      X-Ratelimit-Remaining:
+      - '2496'
+      Content-Length:
+      - '4696'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"type":"completeAddressRecordArray","result":[{"buildingName":null,"flatNumberPrefix":null,"flatNumber":null,"flatNumberSuffix":null,"levelNumber":null,"numberFirst":24,"numberFirstPrefix":null,"numberFirstSuffix":null,"numberLast":null,"numberLastPrefix":null,"numberLastSuffix":null,"streetName":"BRUCE","streetType":"ROAD","streetSuffixCode":null,"suburb":"GLENBROOK","state":"NSW","postCode":"2773","location":{"lat":-33.77260864,"lon":150.62426298},"streetAddress":"24
+        Bruce Road, Glenbrook NSW 2773"},{"buildingName":null,"flatNumberPrefix":null,"flatNumber":null,"flatNumberSuffix":null,"levelNumber":null,"numberFirst":26,"numberFirstPrefix":null,"numberFirstSuffix":null,"numberLast":null,"numberLastPrefix":null,"numberLastSuffix":null,"streetName":"BRUCE","streetType":"ROAD","streetSuffixCode":null,"suburb":"GLENBROOK","state":"NSW","postCode":"2773","location":{"lat":-33.77256919,"lon":150.62449466},"streetAddress":"26
+        Bruce Road, Glenbrook NSW 2773"},{"buildingName":null,"flatNumberPrefix":null,"flatNumber":null,"flatNumberSuffix":null,"levelNumber":null,"numberFirst":20,"numberFirstPrefix":null,"numberFirstSuffix":null,"numberLast":null,"numberLastPrefix":null,"numberLastSuffix":null,"streetName":"BRUCE","streetType":"ROAD","streetSuffixCode":null,"suburb":"GLENBROOK","state":"NSW","postCode":"2773","location":{"lat":-33.7722763,"lon":150.62424558},"streetAddress":"20
+        Bruce Road, Glenbrook NSW 2773"},{"buildingName":null,"flatNumberPrefix":null,"flatNumber":null,"flatNumberSuffix":null,"levelNumber":null,"numberFirst":22,"numberFirstPrefix":null,"numberFirstSuffix":null,"numberLast":null,"numberLastPrefix":null,"numberLastSuffix":null,"streetName":"BRUCE","streetType":"ROAD","streetSuffixCode":null,"suburb":"GLENBROOK","state":"NSW","postCode":"2773","location":{"lat":-33.77243869,"lon":150.62424869},"streetAddress":"22
+        Bruce Road, Glenbrook NSW 2773"},{"buildingName":null,"flatNumberPrefix":null,"flatNumber":null,"flatNumberSuffix":null,"levelNumber":null,"numberFirst":14,"numberFirstPrefix":null,"numberFirstSuffix":null,"numberLast":null,"numberLastPrefix":null,"numberLastSuffix":null,"streetName":"BRUCE","streetType":"ROAD","streetSuffixCode":null,"suburb":"GLENBROOK","state":"NSW","postCode":"2773","location":{"lat":-33.77134792,"lon":150.62412834},"streetAddress":"14
+        Bruce Road, Glenbrook NSW 2773"},{"buildingName":null,"flatNumberPrefix":null,"flatNumber":null,"flatNumberSuffix":null,"levelNumber":null,"numberFirst":2,"numberFirstPrefix":null,"numberFirstSuffix":null,"numberLast":8,"numberLastPrefix":null,"numberLastSuffix":null,"streetName":"BRUCE","streetType":"ROAD","streetSuffixCode":null,"suburb":"GLENBROOK","state":"NSW","postCode":"2773","location":{"lat":-33.77067221,"lon":150.62432347},"streetAddress":"2-8
+        Bruce Road, Glenbrook NSW 2773"},{"buildingName":null,"flatNumberPrefix":null,"flatNumber":null,"flatNumberSuffix":null,"levelNumber":null,"numberFirst":35,"numberFirstPrefix":null,"numberFirstSuffix":null,"numberLast":null,"numberLastPrefix":null,"numberLastSuffix":null,"streetName":"BRUCE","streetType":"ROAD","streetSuffixCode":null,"suburb":"GLENBROOK","state":"NSW","postCode":"2773","location":{"lat":-33.77239694,"lon":150.62376642},"streetAddress":"35
+        Bruce Road, Glenbrook NSW 2773"},{"buildingName":null,"flatNumberPrefix":null,"flatNumber":null,"flatNumberSuffix":null,"levelNumber":null,"numberFirst":16,"numberFirstPrefix":null,"numberFirstSuffix":"A","numberLast":null,"numberLastPrefix":null,"numberLastSuffix":null,"streetName":"BRUCE","streetType":"ROAD","streetSuffixCode":null,"suburb":"GLENBROOK","state":"NSW","postCode":"2773","location":{"lat":-33.77194548,"lon":150.62403067},"streetAddress":"16a
+        Bruce Road, Glenbrook NSW 2773"},{"buildingName":null,"flatNumberPrefix":null,"flatNumber":2,"flatNumberSuffix":null,"levelNumber":null,"numberFirst":14,"numberFirstPrefix":null,"numberFirstSuffix":null,"numberLast":null,"numberLastPrefix":null,"numberLastSuffix":null,"streetName":"BRUCE","streetType":"ROAD","streetSuffixCode":null,"suburb":"GLENBROOK","state":"NSW","postCode":"2773","location":{"lat":-33.77134792,"lon":150.62412834},"streetAddress":"Unit
+        2, 14 Bruce Road, Glenbrook NSW 2773"},{"buildingName":null,"flatNumberPrefix":null,"flatNumber":1,"flatNumberSuffix":null,"levelNumber":null,"numberFirst":14,"numberFirstPrefix":null,"numberFirstSuffix":null,"numberLast":null,"numberLastPrefix":null,"numberLastSuffix":null,"streetName":"BRUCE","streetType":"ROAD","streetSuffixCode":null,"suburb":"GLENBROOK","state":"NSW","postCode":"2773","location":{"lat":-33.77134792,"lon":150.62412834},"streetAddress":"Unit
+        1, 14 Bruce Road, Glenbrook NSW 2773"}],"confidence":0.9705882352941176}'
+    http_version: 
+  recorded_at: Mon, 24 Dec 2018 21:18:05 GMT
+recorded_with: VCR 4.0.0
