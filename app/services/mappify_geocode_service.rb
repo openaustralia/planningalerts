@@ -14,7 +14,7 @@ class MappifyGeocodeService < ApplicationService
     # Not a REST api. Ugh.
     request = RestClient.post(
       "https://mappify.io/api/rpc/address/autocomplete/",
-      { "streetAddress": address, "formatCase": true }.to_json,
+      { "streetAddress": address, "formatCase": true, boostPrefix: false }.to_json,
       content_type: :json,
       accept: :json
     )

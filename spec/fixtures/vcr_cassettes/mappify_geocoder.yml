@@ -5,7 +5,7 @@ http_interactions:
     uri: https://mappify.io/api/rpc/address/autocomplete/
     body:
       encoding: UTF-8
-      string: '{"streetAddress":"24 Bruce Road, Glenbrook, NSW 2773","formatCase":true}'
+      string: '{"streetAddress":"24 Bruce Road, Glenbrook, NSW 2773","formatCase":true,"boostPrefix":false}'
     headers:
       Accept:
       - application/json
@@ -14,7 +14,7 @@ http_interactions:
       Content-Type:
       - application/json
       Content-Length:
-      - '72'
+      - '92'
       User-Agent:
       - Ruby
   response:
@@ -31,7 +31,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 24 Dec 2018 21:19:33 GMT
+      - Wed, 26 Dec 2018 17:48:30 GMT
       Etag:
       - W/"1258-z6z7XyCQwYjDTB0iOoOHvUhSYKk"
       Server:
@@ -60,13 +60,13 @@ http_interactions:
         2, 14 Bruce Road, Glenbrook NSW 2773"},{"buildingName":null,"flatNumberPrefix":null,"flatNumber":1,"flatNumberSuffix":null,"levelNumber":null,"numberFirst":14,"numberFirstPrefix":null,"numberFirstSuffix":null,"numberLast":null,"numberLastPrefix":null,"numberLastSuffix":null,"streetName":"BRUCE","streetType":"ROAD","streetSuffixCode":null,"suburb":"GLENBROOK","state":"NSW","postCode":"2773","location":{"lat":-33.77134792,"lon":150.62412834},"streetAddress":"Unit
         1, 14 Bruce Road, Glenbrook NSW 2773"}],"confidence":0.9705882352941176}'
     http_version: 
-  recorded_at: Mon, 24 Dec 2018 21:18:05 GMT
+  recorded_at: Wed, 26 Dec 2018 17:46:56 GMT
 - request:
     method: post
     uri: https://mappify.io/api/rpc/address/autocomplete/
     body:
       encoding: UTF-8
-      string: '{"streetAddress":"rxsd23dfj","formatCase":true}'
+      string: '{"streetAddress":"rxsd23dfj","formatCase":true,"boostPrefix":false}'
     headers:
       Accept:
       - application/json
@@ -75,7 +75,7 @@ http_interactions:
       Content-Type:
       - application/json
       Content-Length:
-      - '47'
+      - '67'
       User-Agent:
       - Ruby
   response:
@@ -92,7 +92,7 @@ http_interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 26 Dec 2018 17:42:51 GMT
+      - Wed, 26 Dec 2018 17:48:32 GMT
       Etag:
       - W/"40-7wUNuv8O6rxI6yEtRvYW5xMr2o4"
       Server:
@@ -102,7 +102,7 @@ http_interactions:
       X-Ratelimit-Limit:
       - '2500'
       X-Ratelimit-Remaining:
-      - '2499'
+      - '2495'
       Content-Length:
       - '64'
       Connection:
@@ -111,5 +111,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"type":"completeAddressRecordArray","result":[],"confidence":0}'
     http_version: 
-  recorded_at: Wed, 26 Dec 2018 17:41:17 GMT
+  recorded_at: Wed, 26 Dec 2018 17:46:58 GMT
 recorded_with: VCR 4.0.0
