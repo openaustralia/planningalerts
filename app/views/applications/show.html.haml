@@ -5,7 +5,7 @@
   %meta{ name: "twitter:site", content: "@PlanningAlerts" }
   %meta{ name: "twitter:title", content: @application.address }
   %meta{ name: "twitter:description", content: (@application.description[0..199] if @application.description) }
-  %meta{ name: "twitter:image", content: google_static_streetview_url(@application, size: "120x120") }
+  %meta{ name: "twitter:image", content: google_static_map(@application, size: "120x120") }
 
 = render "applications/facebook"
 = render "applications/twitter"
