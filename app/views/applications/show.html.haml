@@ -19,13 +19,11 @@
       - if @application.location
         #map_div{data: {latitude: @application.lat, longitude: @application.lng, address: @application.address}}
           %noscript= google_static_map(@application, size: "350x330")
-        .print-media-only= google_static_map(@application, size: "350x330")
 
       .details
         - if @application.location
           #pano{data: {latitude: @application.lat, longitude: @application.lng, address: @application.address}}
             %noscript= google_static_streetview(@application, size: "350x330")
-            .print-media-only= google_static_streetview(@application, size: "350x330")
 
 
       %p.description= @application.description
