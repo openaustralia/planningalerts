@@ -90,7 +90,12 @@ module ApplicationsHelper
   def google_static_map2(options)
     size = options[:size] || "350x200"
     label = options[:label] || "Map"
-    image_tag(google_static_map_url(options), size: size, alt: label)
+    type = options[:type] || "img"
+    if type == "url"
+      google_static_map_url(options)
+    else
+      image_tag(google_static_map_url(options), size: size, alt: label)
+    end
   end
 
   def google_static_map_url(options)
