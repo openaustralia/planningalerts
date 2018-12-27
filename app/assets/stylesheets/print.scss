@@ -21,4 +21,17 @@ body {
   .gmnoprint {
     display: none;
   }
+
+  #map_div, #pano {
+    float: left;
+    width: 312px;
+    height: 330px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+  .description {
+    clear: both;
+  }
 }
