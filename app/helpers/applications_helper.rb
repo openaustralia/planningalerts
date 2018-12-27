@@ -82,27 +82,20 @@ module ApplicationsHelper
     authority_applications_url(authority.short_name_encoded, link_params)
   end
 
-  def google_static_map(application, options)
-    google_static_map2(options.merge(lat: application.lat, lng: application.lng, label: "Map of #{application.address}"))
+  def google_static_map(application, size: "350x200", type: "img", zoom: 16)
+    google_static_map2(application.lat, application.lng, label: "Map of #{application.address}", size: size, type: type, zoom: zoom)
   end
 
   # Version of google_static_map above that isn't tied into the implementation of Application
-  def google_static_map2(options)
-    size = options[:size] || "350x200"
-    label = options[:label] || "Map"
-    type = options[:type] || "img"
+  def google_static_map2(lat, lng, size: "350x200", label: "Map", type: "img", zoom: 16)
     if type == "url"
-      google_static_map_url(options)
+      google_static_map_url(lat, lng, zoom: zoom, size: size)
     else
-      image_tag(google_static_map_url(options), size: size, alt: label)
+      image_tag(google_static_map_url(lat, lng, zoom: zoom, size: size), size: size, alt: label)
     end
   end
 
-  def google_static_map_url(options)
-    zoom = options[:zoom] || 16
-    lat = options[:lat]
-    lng = options[:lng]
-    size = options[:size] || "350x200"
+  def google_static_map_url(lat, lng, zoom: 16, size: "350x200")
     google_signed_url(
       "https://maps.googleapis.com",
       "/maps/api/staticmap",
@@ -113,9 +106,7 @@ module ApplicationsHelper
     )
   end
 
-  def google_static_streetview_url(application, options)
-    size = options[:size] || "350x200"
-    fov = options[:fov] || 90
+  def google_static_streetview_url(application, size: "350x200", fov: 90)
     google_signed_url(
       "https://maps.googleapis.com",
       "/maps/api/streetview",
@@ -125,9 +116,8 @@ module ApplicationsHelper
     )
   end
 
-  def google_static_streetview(application, options)
-    size = options[:size] || "350x200"
-    image_tag(google_static_streetview_url(application, options), size: size, alt: "Streetview of #{application.address}")
+  def google_static_streetview(application, size: "350x200", fov: 90)
+    image_tag(google_static_streetview_url(application, size: size, fov: fov), size: size, alt: "Streetview of #{application.address}")
   end
 
   private
