@@ -82,17 +82,13 @@ module ApplicationsHelper
     authority_applications_url(authority.short_name_encoded, link_params)
   end
 
-  def google_static_map(application, size: "350x200", type: "img", zoom: 16)
-    google_static_map_lat_lng(application.lat, application.lng, label: "Map of #{application.address}", size: size, type: type, zoom: zoom)
+  def google_static_map(application, size: "350x200", zoom: 16)
+    google_static_map_lat_lng(application.lat, application.lng, label: "Map of #{application.address}", size: size, zoom: zoom)
   end
 
   # Version of google_static_map above that isn't tied into the implementation of Application
-  def google_static_map_lat_lng(lat, lng, size: "350x200", label: "Map", type: "img", zoom: 16)
-    if type == "url"
-      google_static_map_url_lat_lng(lat, lng, zoom: zoom, size: size)
-    else
-      image_tag(google_static_map_url_lat_lng(lat, lng, zoom: zoom, size: size), size: size, alt: label)
-    end
+  def google_static_map_lat_lng(lat, lng, size: "350x200", label: "Map", zoom: 16)
+    image_tag(google_static_map_url_lat_lng(lat, lng, zoom: zoom, size: size), size: size, alt: label)
   end
 
   def google_static_map_url(application, zoom: 16, size: "350x200")
