@@ -95,6 +95,10 @@ module ApplicationsHelper
     end
   end
 
+  def google_static_map_url(application, zoom: 16, size: "350x200")
+    google_static_map_url_lat_lng(application.lat, application.lng, zoom: zoom, size: size)
+  end
+
   def google_static_map_url_lat_lng(lat, lng, zoom: 16, size: "350x200")
     google_signed_url(
       "https://maps.googleapis.com",
