@@ -83,19 +83,19 @@ module ApplicationsHelper
   end
 
   def google_static_map(application, size: "350x200", type: "img", zoom: 16)
-    google_static_map2(application.lat, application.lng, label: "Map of #{application.address}", size: size, type: type, zoom: zoom)
+    google_static_map_lat_lng(application.lat, application.lng, label: "Map of #{application.address}", size: size, type: type, zoom: zoom)
   end
 
   # Version of google_static_map above that isn't tied into the implementation of Application
-  def google_static_map2(lat, lng, size: "350x200", label: "Map", type: "img", zoom: 16)
+  def google_static_map_lat_lng(lat, lng, size: "350x200", label: "Map", type: "img", zoom: 16)
     if type == "url"
-      google_static_map_url(lat, lng, zoom: zoom, size: size)
+      google_static_map_url_lat_lng(lat, lng, zoom: zoom, size: size)
     else
-      image_tag(google_static_map_url(lat, lng, zoom: zoom, size: size), size: size, alt: label)
+      image_tag(google_static_map_url_lat_lng(lat, lng, zoom: zoom, size: size), size: size, alt: label)
     end
   end
 
-  def google_static_map_url(lat, lng, zoom: 16, size: "350x200")
+  def google_static_map_url_lat_lng(lat, lng, zoom: 16, size: "350x200")
     google_signed_url(
       "https://maps.googleapis.com",
       "/maps/api/staticmap",
