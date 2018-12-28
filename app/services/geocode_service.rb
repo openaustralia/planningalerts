@@ -6,6 +6,7 @@ class GeocodeService < ApplicationService
   end
 
   def call
+    GeocodeQuery.create!(query: address)
     GoogleGeocodeService.call(address)
   end
 

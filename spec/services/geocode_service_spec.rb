@@ -10,4 +10,13 @@ describe GeocodeService do
     expect(GoogleGeocodeService).to receive(:call).with(address).and_return(result)
     expect(GeocodeService.call(address)).to eq result
   end
+
+  it "should write the query to the database" do
+    google_result = double
+    allow(GoogleGeocodeService).to receive(:call).with(address).and_return(google_result)
+
+    GeocodeService.call(address)
+    expect(GeocodeQuery.count).to eq 1
+    expect(GeocodeQuery.first.query).to eq address
+  end
 end
