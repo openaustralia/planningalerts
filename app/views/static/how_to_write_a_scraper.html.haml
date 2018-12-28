@@ -138,8 +138,8 @@
 %code.long-lines
   %pre
     :preserve
-      if (ScraperWikiMorph.select("* from data where `council_reference`='\#{record['council_reference']}'").empty? rescue true)
-        ScraperWikiMorph.save_sqlite(['council_reference'], record)
+      if (ScraperWiki.select("* from data where `council_reference`='\#{record['council_reference']}'").empty? rescue true)
+        ScraperWiki.save_sqlite(['council_reference'], record)
       else
         puts "Skipping already saved record " + record['council_reference']
       end
