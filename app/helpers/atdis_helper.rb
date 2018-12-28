@@ -11,7 +11,7 @@ module AtdisHelper
     elsif value.is_a?(URI)
       content_tag(:div, link_to(value.to_s, value.to_s), class: "value")
     elsif value.respond_to?(:x) && value.respond_to?(:y)
-      content_tag(:div, h(value) + content_tag(:p, google_static_map2(lat: value.y, lng: value.x, zoom: 12, size: "300x150")), class: "value")
+      content_tag(:div, h(value) + content_tag(:p, google_static_map_lat_lng(value.y, value.x, zoom: 12, size: "300x150")), class: "value")
     elsif value.is_a?(RGeo::Cartesian::PolygonImpl)
       content_tag(:div, h(value), class: "value")
     elsif value.is_a?(NilClass)
