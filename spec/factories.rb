@@ -45,7 +45,7 @@ FactoryBot.define do
     name { "Matthew Landauer" }
     text { "a comment" }
     address { "12 Foo Street" }
-    association :application
+    association :application, factory: :geocoded_application
 
     trait :confirmed do
       confirmed { true }

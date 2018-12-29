@@ -49,7 +49,7 @@ feature "Sign up for alerts" do
 
   context "via an application page" do
     given(:application) do
-      create(:application, address: "24 Bruce Rd, Glenbrook NSW 2773")
+      create(:geocoded_application, address: "24 Bruce Rd, Glenbrook NSW 2773")
     end
 
     scenario "successfully" do
@@ -71,7 +71,9 @@ feature "Sign up for alerts" do
 
   context "via the homepage" do
     background do
-      create(:application, address: "26 Bruce Rd, Glenbrook NSW 2773")
+      create(:geocoded_application,
+             address: "26 Bruce Rd, Glenbrook NSW 2773",
+             lat: -33.772812, lng: 150.624252)
     end
 
     scenario "successfully" do
@@ -94,7 +96,7 @@ feature "Sign up for alerts" do
   context "via an authority’s applications page" do
     background do
       authority = create(:authority, short_name: "Glenbrook")
-      create(:application, address: "26 Bruce Rd, Glenbrook NSW 2773", authority: authority)
+      create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", authority: authority)
     end
 
     scenario "successfully" do

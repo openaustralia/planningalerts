@@ -35,7 +35,7 @@ describe CommentsController do
     it "returns comments per week for an authority as json" do
       VCR.use_cassette("planningalerts") do
         create(
-          :application,
+          :geocoded_application,
           authority_id: 1,
           date_scraped: Date.new(2015, 12, 24),
           id: 1

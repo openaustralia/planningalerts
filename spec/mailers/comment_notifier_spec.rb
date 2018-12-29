@@ -42,7 +42,7 @@ describe CommentNotifier do
     let(:comment_text) { "It's a good thing.\r\n\r\nOh yes it is." }
     let(:comment) do
       VCR.use_cassette("planningalerts") do
-        application = create(:application, council_reference: "X/001", address: "24 Bruce Road Glenbrook")
+        application = create(:geocoded_application, council_reference: "X/001", address: "24 Bruce Road Glenbrook")
         create(:comment_to_councillor, email: "foo@bar.com", name: "Matthew", application: application, text: comment_text, address: "1 Bar Street")
       end
     end

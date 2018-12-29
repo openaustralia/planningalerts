@@ -51,7 +51,7 @@ describe ProcessAlertService do
       context "that was not properly geocoded" do
         let(:application) do
           VCR.use_cassette("application_with_no_address") do
-            create(:application, lat: 1.0, lng: 2.0, address: "An address that can't be geocoded")
+            create(:geocoded_application, lat: 1.0, lng: 2.0, address: "An address that can't be geocoded")
           end
         end
 

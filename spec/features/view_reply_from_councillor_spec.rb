@@ -10,7 +10,7 @@ feature "View a reply from a councillor" do
         :confirmed,
         name: "Richard Pope",
         councillor: create(:councillor, name: "Louise Councillor", authority: authority),
-        application: create(:application, authority: authority)
+        application: create(:geocoded_application, authority: authority)
       )
     end
   end

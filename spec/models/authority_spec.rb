@@ -28,8 +28,8 @@ describe Authority do
       @a1 = create(:authority)
       @a2 = create(:authority)
       VCR.use_cassette("planningalerts") do
-        create(:application, authority: @a1, date_scraped: 3.weeks.ago)
-        create(:application, authority: @a2)
+        create(:geocoded_application, authority: @a1, date_scraped: 3.weeks.ago)
+        create(:geocoded_application, authority: @a2)
       end
     end
 
@@ -123,7 +123,7 @@ describe Authority do
       before :each do
         VCR.use_cassette("planningalerts") do
           create(
-            :application,
+            :geocoded_application,
             authority: authority,
             date_scraped: Date.new(2015, 12, 24),
             id: 1

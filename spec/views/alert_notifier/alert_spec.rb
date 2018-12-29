@@ -6,7 +6,7 @@ require "spec_helper"
 describe "alert_notifier/alert.html.haml" do
   let(:application) do
     VCR.use_cassette("planningalerts") do
-      create(:application,
+      create(:geocoded_application,
              description: "Alterations & additions",
              address: "24 Bruce Road Glenbrook")
     end
@@ -114,7 +114,7 @@ end
 describe "alert_notifier/alert.text.erb" do
   let(:application) do
     VCR.use_cassette("planningalerts") do
-      create(:application,
+      create(:geocoded_application,
              description: "Alterations & additions",
              address: "24 Bruce Road Glenbrook")
     end

@@ -4,7 +4,7 @@ require "spec_helper"
 
 feature "Councillor replies to a message sent to them" do
   given(:councillor) { create(:councillor, name: "Louise Councillor", email: "louise@council.nsw.gov.au", popolo_id: "marrickville_council/chris_woods") }
-  given(:application) { create(:application, id: 8, address: "24 Bruce Road Glenbrook", description: "A lovely house") }
+  given(:application) { create(:geocoded_application, id: 8, address: "24 Bruce Road Glenbrook", description: "A lovely house") }
   given!(:comment) do
     VCR.use_cassette("planningalerts") do
       create(:comment, id: 5,
@@ -75,7 +75,7 @@ feature "Commenter is notified of the councillors reply" do
   given(:authority)   { create(:authority, full_name: "Marrickville Council") }
   given(:councillor)  { create(:councillor, name: "Louise Councillor", authority: authority) }
   given(:application) do
-    create(:application, id: 8, address: "24 Bruce Road Glenbrook", description: "A lovely house")
+    create(:geocoded_application, id: 8, address: "24 Bruce Road Glenbrook", description: "A lovely house")
   end
 
   # TODO: Extract this to a method where user actually leaves comment

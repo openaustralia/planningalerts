@@ -45,7 +45,7 @@ describe ApiController do
 
       it "should error if valid api key is given but no bulk api access" do
         VCR.use_cassette("planningalerts") do
-          result = create(:application, id: 10, date_scraped: Time.utc(2001, 1, 1))
+          result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1))
           allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
         end
         get :all, params: { key: user.api_key, format: "js" }
@@ -57,7 +57,7 @@ describe ApiController do
         user.update(bulk_api: true)
         VCR.use_cassette("planningalerts") do
           authority = create(:authority, full_name: "Acme Local Planning Authority")
-          result = create(:application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
+          result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
           allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
         end
         get :all, params: { key: user.api_key, format: "js" }
@@ -73,8 +73,8 @@ describe ApiController do
               "description" => "Pretty",
               "info_url" => "http://foo.com",
               "comment_url" => nil,
-              "lat" => nil,
-              "lng" => nil,
+              "lat" => 1.0,
+              "lng" => 2.0,
               "date_scraped" => "2001-01-01T00:00:00.000Z",
               "date_received" => nil,
               "on_notice_from" => nil,
@@ -110,7 +110,7 @@ describe ApiController do
     it "should support jsonp" do
       VCR.use_cassette("planningalerts") do
         authority = create(:authority, full_name: "Acme Local Planning Authority")
-        result = create(:application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
+        result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
         allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
       end
       get :postcode, params: { key: user.api_key, format: "js", postcode: "2780", callback: "foobar" }, xhr: true
@@ -125,8 +125,8 @@ describe ApiController do
             "description" => "Pretty",
             "info_url" => "http://foo.com",
             "comment_url" => nil,
-            "lat" => nil,
-            "lng" => nil,
+            "lat" => 1.0,
+            "lng" => 2.0,
             "date_scraped" => "2001-01-01T00:00:00.000Z",
             "date_received" => nil,
             "on_notice_from" => nil,
@@ -143,7 +143,7 @@ describe ApiController do
     it "should support json api version 2" do
       VCR.use_cassette("planningalerts") do
         authority = create(:authority, full_name: "Acme Local Planning Authority")
-        application = create(:application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
+        application = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
         result = [application]
         allow(result).to receive(:total_pages).and_return(5)
         allow(Application).to receive_message_chain(:where, :paginate).and_return(result)
@@ -160,8 +160,8 @@ describe ApiController do
             "description" => "Pretty",
             "info_url" => "http://foo.com",
             "comment_url" => nil,
-            "lat" => nil,
-            "lng" => nil,
+            "lat" => 1.0,
+            "lng" => 2.0,
             "date_scraped" => "2001-01-01T00:00:00.000Z",
             "date_received" => nil,
             "on_notice_from" => nil,
@@ -196,7 +196,7 @@ describe ApiController do
         location = double(lat: 1.0, lng: 2.0, full_address: "24 Bruce Road, Glenbrook NSW 2773")
         @result = double
 
-        expect(GeocodeService).to receive(:call).with("24 Bruce Road Glenbrook").and_return(location_result)
+        expect(GoogleGeocodeService).to receive(:call).with("24 Bruce Road Glenbrook").and_return(location_result)
         expect(location_result).to receive(:top).and_return(location)
         allow(Application).to receive_message_chain(:near, :paginate).and_return(@result)
       end
@@ -350,8 +350,8 @@ describe ApiController do
       let(:user) { FactoryBot.create(:user, bulk_api: true) }
       before(:each) do
         VCR.use_cassette("planningalerts", allow_playback_repeats: true) do
-          FactoryBot.create_list(:application, 5, date_scraped: Time.utc(2015, 5, 5, 12, 0, 0))
-          FactoryBot.create_list(:application, 5, date_scraped: Time.utc(2015, 5, 6, 12, 0, 0))
+          FactoryBot.create_list(:geocoded_application, 5, date_scraped: Time.utc(2015, 5, 5, 12, 0, 0))
+          FactoryBot.create_list(:geocoded_application, 5, date_scraped: Time.utc(2015, 5, 6, 12, 0, 0))
         end
       end
       subject { get :date_scraped, params: { key: user.api_key, format: "js", date_scraped: "2015-05-06" } }
