@@ -7,21 +7,11 @@ describe GeocodeService do
   let(:point0) { Location.new(lat: 1.5, lng: 2.5) }
   # This point is 500m away from point0
   let(:point500) { point0.endpoint(0, 500) }
+  let(:point50) { point0.endpoint(0, 50) }
 
-  let(:result0) do
-    GeocoderResults.new(
-      [point0],
-      true,
-      nil
-    )
-  end
-  let(:result500) do
-    GeocoderResults.new(
-      [point500],
-      true,
-      nil
-    )
-  end
+  let(:result0) { GeocoderResults.new([point0], true, nil) }
+  let(:result500) { GeocoderResults.new([point500], true, nil) }
+  let(:result50) { GeocoderResults.new([point50], true, nil) }
   let(:empty_result) { GeocoderResults.new([], true, nil) }
 
   context "valid google and mappify results" do
@@ -85,5 +75,16 @@ describe GeocodeService do
     end
   end
 
-  pending "should only record the results if the geocoders differ by some threshold"
+  context "valid results that are very close together" do
+    before(:each) do
+      allow(GoogleGeocodeService).to receive(:call).with(address).and_return(result0)
+      allow(MappifyGeocodeService).to receive(:call).with(address).and_return(result50)
+    end
+
+    it "should not write the query and result to the database" do
+      GeocodeService.call(address)
+      expect(GeocodeQuery.count).to be_zero
+      expect(GeocodeResult.count).to be_zero
+    end
+  end
 end
