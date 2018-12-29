@@ -1,0 +1,2 @@
+class GeocodeResult < ApplicationRecord
+end
