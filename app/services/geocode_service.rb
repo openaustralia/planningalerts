@@ -14,14 +14,14 @@ class GeocodeService < ApplicationService
       [
         {
           geocoder: "google",
-          lat: google_result.top.lat,
-          lng: google_result.top.lng,
+          lat: google_result.top&.lat,
+          lng: google_result.top&.lng,
           geocode_query_id: geocode_query.id
         },
         {
           geocoder: "mappify",
-          lat: mappify_result.top.lat,
-          lng: mappify_result.top.lng,
+          lat: mappify_result.top&.lat,
+          lng: mappify_result.top&.lng,
           geocode_query_id: geocode_query.id
         }
       ]
