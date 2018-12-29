@@ -90,7 +90,7 @@ class Alert < ApplicationRecord
   end
 
   def geocode_from_address
-    @geocode_result = GeocodeService.call(address)
+    @geocode_result = GoogleGeocodeService.call(address)
 
     return if @geocode_result.error || @geocode_result.all.many?
 
