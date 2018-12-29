@@ -9,6 +9,15 @@ class GeocodeService < ApplicationService
     google_result = GoogleGeocodeService.call(address)
     mappify_result = MappifyGeocodeService.call(address)
 
+    record_in_database(google_result, mappify_result)
+    google_result
+  end
+
+  private
+
+  attr_reader :address
+
+  def record_in_database(google_result, mappify_result)
     geocode_query = GeocodeQuery.create!(query: address)
     GeocodeResult.create!(
       [
@@ -26,10 +35,5 @@ class GeocodeService < ApplicationService
         }
       ]
     )
-    google_result
   end
-
-  private
-
-  attr_reader :address
 end
