@@ -23,6 +23,27 @@ describe MappifyGeocodeService do
       expect(result.success).to be true
       expect(result.error).to be_nil
     end
+
+    context "an API key is set in the environment variable" do
+      let(:api_key) { "12345678-1234-1234-1234-123456789abc" }
+      around do |test|
+        with_modified_env(MAPPIFY_API_KEY: api_key) { test.run }
+      end
+
+      it "should use the api key to do the api call" do
+        expect(RestClient).to receive(:post).with(
+          "https://mappify.io/api/rpc/address/autocomplete/",
+          {
+            streetAddress: address,
+            formatCase: true,
+            boostPrefix: false,
+            apiKey: api_key
+          }.to_json,
+          accept: :json, content_type: :json
+        ).and_return(double(body: { type: "completeAddressRecordArray", result: [] }.to_json))
+        result
+      end
+    end
   end
 
   context "an invalid address" do
@@ -32,4 +53,6 @@ describe MappifyGeocodeService do
       expect(result.all).to be_empty
     end
   end
+
+  pending "should support an api key if it is provided"
 end

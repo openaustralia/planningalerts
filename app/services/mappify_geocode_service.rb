@@ -12,12 +12,10 @@ class MappifyGeocodeService < ApplicationService
     # address to be split out into street, suburb, state and postcode fields.
 
     # Not a REST api. Ugh.
-    request = RestClient.post(
-      "https://mappify.io/api/rpc/address/autocomplete/",
-      { "streetAddress": address, "formatCase": true, boostPrefix: false }.to_json,
-      content_type: :json,
-      accept: :json
-    )
+    params = { "streetAddress": address, "formatCase": true, boostPrefix: false }
+    params["apiKey"] = ENV["MAPPIFY_API_KEY"] if ENV["MAPPIFY_API_KEY"].present?
+    request = RestClient.post("https://mappify.io/api/rpc/address/autocomplete/",
+                              params.to_json, content_type: :json, accept: :json)
     data = JSON.parse(request.body)
     raise "Unexpected type" unless data["type"] == "completeAddressRecordArray"
 
