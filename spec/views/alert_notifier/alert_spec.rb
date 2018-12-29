@@ -5,11 +5,9 @@ require "spec_helper"
 # HTML email
 describe "alert_notifier/alert.html.haml" do
   let(:application) do
-    VCR.use_cassette("planningalerts") do
-      create(:geocoded_application,
-             description: "Alterations & additions",
-             address: "24 Bruce Road Glenbrook")
-    end
+    create(:geocoded_application,
+           description: "Alterations & additions",
+           address: "24 Bruce Road Glenbrook")
   end
 
   before(:each) do
@@ -27,11 +25,10 @@ describe "alert_notifier/alert.html.haml" do
 
   context "when there is a comment to an authority" do
     before do
-      comment = VCR.use_cassette("planningalerts") do
-        create(:comment_to_authority,
-               name: "Matthew Landauer",
-               application: application)
-      end
+      comment = create(:comment_to_authority,
+                       name: "Matthew Landauer",
+                       application: application)
+
       assign(:comments, [comment])
       assign(:alert, create(:alert))
 
@@ -44,9 +41,7 @@ describe "alert_notifier/alert.html.haml" do
 
   context "when there is a comment to a councillor" do
     let(:comment) do
-      VCR.use_cassette("planningalerts") do
-        create(:comment_to_councillor, name: "Matthew Landauer")
-      end
+      create(:comment_to_councillor, name: "Matthew Landauer")
     end
 
     before :each do
@@ -113,11 +108,9 @@ end
 # Text only email
 describe "alert_notifier/alert.text.erb" do
   let(:application) do
-    VCR.use_cassette("planningalerts") do
-      create(:geocoded_application,
-             description: "Alterations & additions",
-             address: "24 Bruce Road Glenbrook")
-    end
+    create(:geocoded_application,
+           description: "Alterations & additions",
+           address: "24 Bruce Road Glenbrook")
   end
 
   before(:each) do
@@ -129,11 +122,10 @@ describe "alert_notifier/alert.text.erb" do
 
   context "when there is a comment to an authority" do
     before do
-      comment = VCR.use_cassette("planningalerts") do
-        create(:comment_to_authority,
-               name: "Matthew Landauer",
-               application: application)
-      end
+      comment = create(:comment_to_authority,
+                       name: "Matthew Landauer",
+                       application: application)
+
       assign(:comments, [comment])
       assign(:alert, create(:alert))
 

@@ -33,19 +33,17 @@ describe CommentsController do
     end
 
     it "returns comments per week for an authority as json" do
-      VCR.use_cassette("planningalerts") do
-        create(
-          :geocoded_application,
-          authority_id: 1,
-          date_scraped: Date.new(2015, 12, 24),
-          id: 1
-        )
+      create(
+        :geocoded_application,
+        authority_id: 1,
+        date_scraped: Date.new(2015, 12, 24),
+        id: 1
+      )
 
-        create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015, 12, 26))
-        create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015, 12, 26))
-        create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015, 12, 26))
-        create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2016, 1, 4))
-      end
+      create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015, 12, 26))
+      create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015, 12, 26))
+      create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2015, 12, 26))
+      create(:confirmed_comment, application_id: 1, confirmed_at: Date.new(2016, 1, 4))
 
       get_authority_comments_per_week
 

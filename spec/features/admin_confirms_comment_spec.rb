@@ -8,12 +8,10 @@ feature "Admin confirms comment for user" do
   end
 
   background do
-    VCR.use_cassette("planningalerts") do
-      create(:unconfirmed_comment,
-             name: "Alena",
-             id: 1,
-             created_at: 3.days.ago)
-    end
+    create(:unconfirmed_comment,
+           name: "Alena",
+           id: 1,
+           created_at: 3.days.ago)
   end
 
   scenario "successfully" do

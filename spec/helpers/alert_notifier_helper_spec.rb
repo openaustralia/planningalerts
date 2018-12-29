@@ -62,9 +62,7 @@ describe AlertNotifierHelper do
 
     describe "#reply_url_with_tracking" do
       let(:reply) do
-        VCR.use_cassette("planningalerts") do
-          create(:reply, id: 5)
-        end
+        create(:reply, id: 5)
       end
 
       it "returns the correct url" do

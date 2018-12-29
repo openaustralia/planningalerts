@@ -6,13 +6,11 @@ feature "Councillor replies to a message sent to them" do
   given(:councillor) { create(:councillor, name: "Louise Councillor", email: "louise@council.nsw.gov.au", popolo_id: "marrickville_council/chris_woods") }
   given(:application) { create(:geocoded_application, id: 8, address: "24 Bruce Road Glenbrook", description: "A lovely house") }
   given!(:comment) do
-    VCR.use_cassette("planningalerts") do
-      create(:comment, id: 5,
-                       application: application,
-                       name: "Matthew Landauer",
-                       councillor: councillor,
-                       text: "I think this is a really good idea")
-    end
+    create(:comment, id: 5,
+                     application: application,
+                     name: "Matthew Landauer",
+                     councillor: councillor,
+                     text: "I think this is a really good idea")
   end
 
   scenario "it's entered by an admin and displayed on the application page" do
@@ -81,14 +79,12 @@ feature "Commenter is notified of the councillors reply" do
   # TODO: Extract this to a method where user actually leaves comment
   #       and confirms it.
   given(:comment) do
-    VCR.use_cassette("planningalerts") do
-      create(:comment,
-             :confirmed,
-             id: 5,
-             email: "matthew@openaustralia.org",
-             application: application,
-             councillor: councillor)
-    end
+    create(:comment,
+           :confirmed,
+           id: 5,
+           email: "matthew@openaustralia.org",
+           application: application,
+           councillor: councillor)
   end
   given(:email_intro_text) { "Local councillor Louise Councillor replied to <a href=\"https://dev.planningalerts.org.au/applications/8?utm_campaign=view-comment&amp;utm_medium=email&amp;utm_source=reply-notifications#comment5\">your message</a> about the planning application “A lovely house” at 24 Bruce Road Glenbrook" }
   given(:reply_text) { "I'm glad you think it's a good idea. I do too." }

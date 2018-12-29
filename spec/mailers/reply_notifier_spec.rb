@@ -11,13 +11,11 @@ describe ReplyNotifier do
     end
     let(:councillor) { create(:councillor, name: "Louise Councillor") }
     let(:comment) do
-      VCR.use_cassette("planningalerts") do
-        create(:comment,
-               :confirmed,
-               councillor: councillor,
-               email: "matthew@openaustralia.org",
-               application: application)
-      end
+      create(:comment,
+             :confirmed,
+             councillor: councillor,
+             email: "matthew@openaustralia.org",
+             application: application)
     end
     let(:reply) { create(:reply, comment: comment, councillor: councillor) }
     let(:notifier) { ReplyNotifier.notify_comment_author(reply) }

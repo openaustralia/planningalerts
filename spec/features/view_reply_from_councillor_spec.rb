@@ -3,16 +3,14 @@
 require "spec_helper"
 feature "View a reply from a councillor" do
   given(:comment) do
-    VCR.use_cassette("planningalerts") do
-      authority = create(:authority, full_name: "City of Sydney")
-      create(
-        :comment_to_councillor,
-        :confirmed,
-        name: "Richard Pope",
-        councillor: create(:councillor, name: "Louise Councillor", authority: authority),
-        application: create(:geocoded_application, authority: authority)
-      )
-    end
+    authority = create(:authority, full_name: "City of Sydney")
+    create(
+      :comment_to_councillor,
+      :confirmed,
+      name: "Richard Pope",
+      councillor: create(:councillor, name: "Louise Councillor", authority: authority),
+      application: create(:geocoded_application, authority: authority)
+    )
   end
 
   before do

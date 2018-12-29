@@ -7,7 +7,7 @@ describe "comments/_comment" do
     Timecop.freeze(Time.zone.local(2015, 1, 26, 10, 5, 0))
   end
 
-  let(:application) { VCR.use_cassette("planningalerts") { create(:geocoded_application) } }
+  let(:application) { create(:geocoded_application) }
 
   after do
     Timecop.return

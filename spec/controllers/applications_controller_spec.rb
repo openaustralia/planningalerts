@@ -36,9 +36,7 @@ describe ApplicationsController do
 
     describe "error checking on parameters used" do
       it "should not do error checking on the normal html sites" do
-        VCR.use_cassette("planningalerts") do
-          get :index, params: { address: "24 Bruce Road Glenbrook", radius: 4000, foo: 200, bar: "fiddle" }
-        end
+        get :index, params: { address: "24 Bruce Road Glenbrook", radius: 4000, foo: 200, bar: "fiddle" }
         expect(response.code).to eq("200")
       end
     end
@@ -88,16 +86,12 @@ describe ApplicationsController do
 
   describe "#address" do
     it "should set the radius to the supplied parameter" do
-      VCR.use_cassette("planningalerts") do
-        get :address, params: { address: "24 Bruce Road Glenbrook", radius: 500 }
-      end
+      get :address, params: { address: "24 Bruce Road Glenbrook", radius: 500 }
       expect(assigns[:radius]).to eq 500.0
     end
 
     it "should set the radius to the default when not supplied" do
-      VCR.use_cassette("planningalerts") do
-        get :address, params: { address: "24 Bruce Road Glenbrook" }
-      end
+      get :address, params: { address: "24 Bruce Road Glenbrook" }
       expect(assigns[:radius]).to eq 2000.0
     end
   end

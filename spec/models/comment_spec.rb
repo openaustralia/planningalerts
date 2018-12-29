@@ -8,7 +8,7 @@ describe Comment do
   describe "#confirm!" do
     context "when already confirmed" do
       let(:comment) do
-        VCR.use_cassette("planningalerts") { build(:confirmed_comment) }
+        build(:confirmed_comment)
       end
 
       it "should not run after_confirm callback" do
@@ -28,9 +28,7 @@ describe Comment do
 
   context "new comment for a planning authority" do
     let(:comment_to_authority) do
-      VCR.use_cassette("planningalerts") do
-        create(:comment_to_authority)
-      end
+      create(:comment_to_authority)
     end
 
     it "is not valid without an address" do
@@ -48,9 +46,7 @@ describe Comment do
 
   context "new comment for a councillor" do
     let(:comment_to_councillor) do
-      VCR.use_cassette("planningalerts") do
-        create(:comment_to_councillor)
-      end
+      create(:comment_to_councillor)
     end
 
     it "is valid without an address" do
@@ -68,9 +64,7 @@ describe Comment do
 
   context "to a planning authority" do
     let(:comment_to_authority) do
-      VCR.use_cassette("planningalerts") do
-        create(:comment_to_authority)
-      end
+      create(:comment_to_authority)
     end
 
     it { expect(comment_to_authority.to_councillor?).to eq false }
@@ -79,9 +73,7 @@ describe Comment do
 
   context "to a councillor" do
     let(:comment_to_councillor) do
-      VCR.use_cassette("planningalerts") do
-        create(:comment_to_councillor)
-      end
+      create(:comment_to_councillor)
     end
 
     it { expect(comment_to_councillor.to_councillor?).to eq true }
@@ -90,9 +82,7 @@ describe Comment do
 
   context "to a councillor and has no reply" do
     let(:comment_with_reply) do
-      VCR.use_cassette("planningalerts") do
-        create(:reply).comment
-      end
+      create(:reply).comment
     end
 
     it { expect(comment_with_reply.awaiting_councillor_reply?).to eq false }
@@ -100,9 +90,7 @@ describe Comment do
 
   describe "#recipient_display_name" do
     let(:comment) do
-      VCR.use_cassette("planningalerts") do
-        create(:comment)
-      end
+      create(:comment)
     end
 
     context "when the comment application has an authority" do
@@ -167,9 +155,7 @@ describe Comment do
 
     context "when the councillor is not current" do
       before do
-        VCR.use_cassette("planningalerts") do
-          comment.councillor.update(current: false)
-        end
+        comment.councillor.update(current: false)
       end
 
       it "still loads the reply" do
@@ -184,7 +170,7 @@ describe Comment do
   end
 
   describe "#to_councillor?" do
-    let(:comment) { VCR.use_cassette("planningalerts") { build(:comment) } }
+    let(:comment) { build(:comment) }
 
     it "should be false when there's no associated councillor" do
       expect(comment.to_councillor?).to be false

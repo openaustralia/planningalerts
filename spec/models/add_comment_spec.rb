@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe AddComment do
   describe "#save_comment" do
-    let(:application) { VCR.use_cassette("planningalerts") { create(:geocoded_application) } }
+    let(:application) { create(:geocoded_application) }
     let(:add_comment_form) do
       build(:add_comment, application: application,
                           comment_for: nil,
@@ -29,10 +29,8 @@ describe AddComment do
         it { expect(add_comment_form).to be_valid }
 
         it "creates the comment with the correct attributes" do
-          VCR.use_cassette("planningalerts") do
-            expect(add_comment_form.save_comment).to be_an_instance_of(Comment)
-            expect(application.comments.first.text).to eq "Testing testing 1 2 3"
-          end
+          expect(add_comment_form.save_comment).to be_an_instance_of(Comment)
+          expect(application.comments.first.text).to eq "Testing testing 1 2 3"
         end
 
         context "and there is no address" do
@@ -50,17 +48,15 @@ describe AddComment do
 
       context "when it is for a councillor" do
         before do
-          VCR.use_cassette("planningalerts") { create(:councillor, id: 3) }
+          create(:councillor, id: 3)
           add_comment_form.comment_for = 3
         end
 
         it { expect(add_comment_form).to be_valid }
 
         it "creates the comment with the correct attributes" do
-          VCR.use_cassette("planningalerts") do
-            expect(add_comment_form.save_comment).to be_an_instance_of(Comment)
-            expect(application.comments.first.text).to eq "Testing testing 1 2 3"
-          end
+          expect(add_comment_form.save_comment).to be_an_instance_of(Comment)
+          expect(application.comments.first.text).to eq "Testing testing 1 2 3"
         end
 
         context "and there is no address" do
@@ -75,17 +71,15 @@ describe AddComment do
           it "removes it before saving the comment" do
             expect(add_comment_form).to be_valid
 
-            VCR.use_cassette("planningalerts") do
-              expect(add_comment_form.save_comment).to be_an_instance_of(Comment)
-              expect(application.comments.first.address).to be_nil
-            end
+            expect(add_comment_form.save_comment).to be_an_instance_of(Comment)
+            expect(application.comments.first.address).to be_nil
           end
         end
       end
 
       context "when it is for an unknown councillor" do
         before do
-          VCR.use_cassette("planningalerts") { create(:councillor, id: 3) }
+          create(:councillor, id: 3)
           add_comment_form.comment_for = 5
         end
 
@@ -107,10 +101,8 @@ describe AddComment do
       end
 
       it "creates the comment with the correct attributes" do
-        VCR.use_cassette("planningalerts") do
-          expect(add_comment_form.save_comment).to be_an_instance_of(Comment)
-          expect(application.comments.first.text).to eq "Testing testing 1 2 3"
-        end
+        expect(add_comment_form.save_comment).to be_an_instance_of(Comment)
+        expect(application.comments.first.text).to eq "Testing testing 1 2 3"
       end
 
       context "and there is no address" do
@@ -128,7 +120,7 @@ describe AddComment do
   end
 
   describe "#could_be_for_councillor?" do
-    let(:application) { VCR.use_cassette("planningalerts") { create(:geocoded_application) } }
+    let(:application) { create(:geocoded_application) }
     let(:add_comment_form) do
       build(:add_comment, application: application)
     end

@@ -4,12 +4,10 @@ require "spec_helper"
 
 feature "Admin edits comment" do
   background do
-    VCR.use_cassette("planningalerts") do
-      create(:confirmed_comment,
-             name: "Alena",
-             id: 1,
-             confirmed_at: 3.days.ago)
-    end
+    create(:confirmed_comment,
+           name: "Alena",
+           id: 1,
+           confirmed_at: 3.days.ago)
   end
 
   scenario "successfully" do

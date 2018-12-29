@@ -9,30 +9,24 @@ feature "Give feedback" do
 
   scenario "Giving feedback for an authority without a feedback email" do
     authority = create(:authority, full_name: "Foo")
-    VCR.use_cassette("planningalerts") do
-      application = create(:geocoded_application, id: "1", authority_id: authority.id, comment_url: "mailto:foo@bar.com")
-      visit(application_path(application))
-    end
+    application = create(:geocoded_application, id: "1", authority_id: authority.id, comment_url: "mailto:foo@bar.com")
+    visit(application_path(application))
 
     expect(page).to have_content("How to comment on this application")
   end
 
   scenario "Hide feedback form where there is no feedback email or comment_url" do
     authority = create(:authority, full_name: "Foo")
-    VCR.use_cassette("planningalerts") do
-      application = create(:geocoded_application, id: "1", authority_id: authority.id)
-      visit(application_path(application))
-    end
+    application = create(:geocoded_application, id: "1", authority_id: authority.id)
+    visit(application_path(application))
 
     expect(page).not_to have_content("How to comment on this application")
   end
 
   scenario "Getting an error message if the comment form isn’t completed correctly" do
     authority = create(:authority, full_name: "Foo", email: "feedback@foo.gov.au")
-    VCR.use_cassette("planningalerts") do
-      application = create(:geocoded_application, id: "1", authority_id: authority.id)
-      visit(application_path(application))
-    end
+    application = create(:geocoded_application, id: "1", authority_id: authority.id)
+    visit(application_path(application))
 
     fill_in("Have your say on this application", with: "I think this is a really good idea")
     fill_in("Your name", with: "Matthew Landauer")
@@ -46,12 +40,10 @@ feature "Give feedback" do
 
   context "when the authority is contactable" do
     given(:application) do
-      VCR.use_cassette("planningalerts") do
-        authority = create(:contactable_authority,
-                           full_name: "Foo",
-                           email: "feedback@foo.gov.au")
-        create(:geocoded_application, id: "1", authority: authority)
-      end
+      authority = create(:contactable_authority,
+                         full_name: "Foo",
+                         email: "feedback@foo.gov.au")
+      create(:geocoded_application, id: "1", authority: authority)
     end
 
     scenario "Adding a comment" do
@@ -200,10 +192,8 @@ feature "Give feedback" do
   end
 
   scenario "Reporting abuse on a confirmed comment" do
-    VCR.use_cassette("planningalerts") do
-      comment = create(:confirmed_comment, text: "I'm saying something abusive", name: "Jack Rude", email: "rude@foo.com", id: "23")
-      visit(new_comment_report_path(comment))
-    end
+    comment = create(:confirmed_comment, text: "I'm saying something abusive", name: "Jack Rude", email: "rude@foo.com", id: "23")
+    visit(new_comment_report_path(comment))
 
     fill_in("Your name", with: "Joe Reporter")
     fill_in("Your email", with: "reporter@foo.com")
@@ -227,10 +217,8 @@ feature "Give feedback" do
 
     scenario "Getting an error message if the comment form isn’t completed correctly" do
       authority = create(:authority, full_name: "Foo", email: "feedback@foo.gov.au")
-      VCR.use_cassette("planningalerts") do
-        application = create(:geocoded_application, id: "1", authority_id: authority.id)
-        visit(application_path(application))
-      end
+      application = create(:geocoded_application, id: "1", authority_id: authority.id)
+      visit(application_path(application))
 
       fill_in("Have your say on this application", with: "I think this is a really good idea")
       fill_in("Your name", with: "Matthew Landauer")

@@ -44,10 +44,8 @@ describe ApiController do
       end
 
       it "should error if valid api key is given but no bulk api access" do
-        VCR.use_cassette("planningalerts") do
-          result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1))
-          allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
-        end
+        result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1))
+        allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
         get :all, params: { key: user.api_key, format: "js" }
         expect(response.status).to eq(401)
         expect(response.body).to eq('{"error":"no bulk api access"}')
@@ -55,11 +53,9 @@ describe ApiController do
 
       it "should find recent applications if api key is given" do
         user.update(bulk_api: true)
-        VCR.use_cassette("planningalerts") do
-          authority = create(:authority, full_name: "Acme Local Planning Authority")
-          result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
-          allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
-        end
+        authority = create(:authority, full_name: "Acme Local Planning Authority")
+        result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
+        allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
         get :all, params: { key: user.api_key, format: "js" }
         expect(response.status).to eq(200)
         expect(JSON.parse(response.body)).to eq(
@@ -108,11 +104,9 @@ describe ApiController do
     end
 
     it "should support jsonp" do
-      VCR.use_cassette("planningalerts") do
-        authority = create(:authority, full_name: "Acme Local Planning Authority")
-        result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
-        allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
-      end
+      authority = create(:authority, full_name: "Acme Local Planning Authority")
+      result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
+      allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
       get :postcode, params: { key: user.api_key, format: "js", postcode: "2780", callback: "foobar" }, xhr: true
       expect(response.body[0..10]).to eq("/**/foobar(")
       expect(response.body[-1..-1]).to eq(")")
@@ -141,13 +135,11 @@ describe ApiController do
     end
 
     it "should support json api version 2" do
-      VCR.use_cassette("planningalerts") do
-        authority = create(:authority, full_name: "Acme Local Planning Authority")
-        application = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
-        result = [application]
-        allow(result).to receive(:total_pages).and_return(5)
-        allow(Application).to receive_message_chain(:where, :paginate).and_return(result)
-      end
+      authority = create(:authority, full_name: "Acme Local Planning Authority")
+      application = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
+      result = [application]
+      allow(result).to receive(:total_pages).and_return(5)
+      allow(Application).to receive_message_chain(:where, :paginate).and_return(result)
       get :postcode, params: { key: user.api_key, format: "js", v: "2", postcode: "2780" }
       expect(JSON.parse(response.body)).to eq(
         "application_count" => 1,
@@ -349,10 +341,8 @@ describe ApiController do
     context "valid authentication" do
       let(:user) { FactoryBot.create(:user, bulk_api: true) }
       before(:each) do
-        VCR.use_cassette("planningalerts", allow_playback_repeats: true) do
-          FactoryBot.create_list(:geocoded_application, 5, date_scraped: Time.utc(2015, 5, 5, 12, 0, 0))
-          FactoryBot.create_list(:geocoded_application, 5, date_scraped: Time.utc(2015, 5, 6, 12, 0, 0))
-        end
+        FactoryBot.create_list(:geocoded_application, 5, date_scraped: Time.utc(2015, 5, 5, 12, 0, 0))
+        FactoryBot.create_list(:geocoded_application, 5, date_scraped: Time.utc(2015, 5, 6, 12, 0, 0))
       end
       subject { get :date_scraped, params: { key: user.api_key, format: "js", date_scraped: "2015-05-06" } }
 
