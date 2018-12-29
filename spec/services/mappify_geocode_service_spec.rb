@@ -53,6 +53,4 @@ describe MappifyGeocodeService do
       expect(result.all).to be_empty
     end
   end
-
-  pending "should support an api key if it is provided"
 end
