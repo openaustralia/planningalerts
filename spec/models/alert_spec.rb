@@ -94,7 +94,7 @@ describe Alert do
   end
 
   it "should be able to accept location information if it is already known and so not use the geocoder" do
-    expect(GeocodeService).not_to receive(:call)
+    expect(GoogleGeocodeService).not_to receive(:call)
 
     alert = create(:alert, lat: 1.0, lng: 2.0)
 
@@ -103,19 +103,34 @@ describe Alert do
   end
 
   describe "geocoding" do
-    it "should happen automatically on saving" do
-      alert = build(:alert, address: address, lat: nil, lng: nil)
+    before :each do
+      expect(GoogleGeocodeService).to receive(:call).with(address).and_return(
+        GeocoderResults.new(
+          [
+            GeocodedLocation.new(
+              lat: -33.7726179,
+              lng: 150.6242341,
+              suburb: "Glenbrook",
+              state: "NSW",
+              postcode: "2773",
+              full_address: "24 Bruce Rd, Glenbrook NSW 2773"
+            )
+          ],
+          true,
+          nil
+        )
+      )
+    end
 
-      VCR.use_cassette(:planningalerts) { alert.save! }
+    it "should happen automatically on saving" do
+      alert = create(:alert, address: address, lat: nil, lng: nil)
 
       expect(alert.lat).to eq(-33.7726179)
       expect(alert.lng).to eq(150.6242341)
     end
 
     it "should replace the address with the full resolved address obtained by geocoding" do
-      alert = build(:alert, address: "24 Bruce Road, Glenbrook", lat: nil, lng: nil)
-
-      VCR.use_cassette(:planningalerts) { alert.save! }
+      alert = create(:alert, address: "24 Bruce Road, Glenbrook", lat: nil, lng: nil)
 
       expect(alert.address).to eq("24 Bruce Rd, Glenbrook NSW 2773")
     end
