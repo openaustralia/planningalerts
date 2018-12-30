@@ -37,6 +37,18 @@ class ApiController < ApplicationController
     radius = params[:radius] || params[:area_size] || 2000
     if params[:address]
       location = GoogleGeocodeService.call(params[:address]).top
+      if location.nil?
+        error_text = "could not geocode address"
+        respond_to do |format|
+          format.js do
+            render json: { error: error_text }, status: :bad_request, content_type: Mime[:json]
+          end
+          format.rss do
+            render plain: error_text, status: :bad_request
+          end
+        end
+        return
+      end
       location_text = location.full_address
     else
       location = Location.new(lat: params[:lat].to_f, lng: params[:lng].to_f)

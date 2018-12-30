@@ -183,43 +183,60 @@ describe ApiController do
     end
 
     describe "search by address" do
-      before :each do
-        location_result = double
-        location = double(lat: 1.0, lng: 2.0, full_address: "24 Bruce Road, Glenbrook NSW 2773")
-        @result = double
+      context "able to geocode address" do
+        before :each do
+          location_result = double
+          location = double(lat: 1.0, lng: 2.0, full_address: "24 Bruce Road, Glenbrook NSW 2773")
+          @result = double
 
-        expect(GoogleGeocodeService).to receive(:call).with("24 Bruce Road Glenbrook").and_return(location_result)
-        expect(location_result).to receive(:top).and_return(location)
-        allow(Application).to receive_message_chain(:near, :paginate).and_return(@result)
+          expect(GoogleGeocodeService).to receive(:call).with("24 Bruce Road Glenbrook").and_return(location_result)
+          expect(location_result).to receive(:top).and_return(location)
+          allow(Application).to receive_message_chain(:near, :paginate).and_return(@result)
+        end
+
+        it "should find recent applications near the address" do
+          get :point, params: { key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000 }
+          expect(assigns[:applications]).to eq(@result)
+          # Should use the normalised form of the address in the description
+          expect(assigns[:description]).to eq("Recent applications within 4 km of 24 Bruce Road, Glenbrook NSW 2773")
+        end
+
+        it "should find recent applications near the address using the old parameter name" do
+          get :point, params: { key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", area_size: 4000 }
+          expect(assigns[:applications]).to eq(@result)
+          expect(assigns[:description]).to eq("Recent applications within 4 km of 24 Bruce Road, Glenbrook NSW 2773")
+        end
+
+        it "should log the api call" do
+          get :point, params: { key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000 }
+          a = ApiStatistic.first
+          expect(a.ip_address).to eq("0.0.0.0")
+          expect(a.query).to eq("/applications.rss?address=24+Bruce+Road+Glenbrook&key=#{CGI.escape(user.api_key)}&radius=4000")
+        end
+
+        it "should use a search radius of 2000 when none is specified" do
+          result = double
+          allow(Application).to receive_message_chain(:near, :paginate).and_return(result)
+
+          get :point, params: { key: user.api_key, address: "24 Bruce Road Glenbrook", format: "rss" }
+          expect(assigns[:applications]).to eq(result)
+          expect(assigns[:description]).to eq("Recent applications within 2 km of 24 Bruce Road, Glenbrook NSW 2773")
+        end
       end
 
-      it "should find recent applications near the address" do
-        get :point, params: { key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000 }
-        expect(assigns[:applications]).to eq(@result)
-        # Should use the normalised form of the address in the description
-        expect(assigns[:description]).to eq("Recent applications within 4 km of 24 Bruce Road, Glenbrook NSW 2773")
-      end
+      context "geocoding error on address" do
+        before :each do
+          location_result = double
+          @result = double
 
-      it "should find recent applications near the address using the old parameter name" do
-        get :point, params: { key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", area_size: 4000 }
-        expect(assigns[:applications]).to eq(@result)
-        expect(assigns[:description]).to eq("Recent applications within 4 km of 24 Bruce Road, Glenbrook NSW 2773")
-      end
+          expect(GoogleGeocodeService).to receive(:call).with("24 Bruce Road Glenbrook").and_return(location_result)
+          expect(location_result).to receive(:top).and_return(nil)
+          allow(Application).to receive_message_chain(:near, :paginate).and_return(@result)
+        end
 
-      it "should log the api call" do
-        get :point, params: { key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000 }
-        a = ApiStatistic.first
-        expect(a.ip_address).to eq("0.0.0.0")
-        expect(a.query).to eq("/applications.rss?address=24+Bruce+Road+Glenbrook&key=#{CGI.escape(user.api_key)}&radius=4000")
-      end
-
-      it "should use a search radius of 2000 when none is specified" do
-        result = double
-        allow(Application).to receive_message_chain(:near, :paginate).and_return(result)
-
-        get :point, params: { key: user.api_key, address: "24 Bruce Road Glenbrook", format: "rss" }
-        expect(assigns[:applications]).to eq(result)
-        expect(assigns[:description]).to eq("Recent applications within 2 km of 24 Bruce Road, Glenbrook NSW 2773")
+        subject { get :point, params: { key: user.api_key, address: "24 Bruce Road Glenbrook", format: "rss" } }
+        it { expect(subject).to_not be_successful }
+        it { expect(subject.body).to eq "could not geocode address" }
       end
     end
 
