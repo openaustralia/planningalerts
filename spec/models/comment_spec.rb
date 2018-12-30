@@ -124,7 +124,7 @@ describe Comment do
     end
 
     it "fetches answers from WriteIt, creates replies and returns them" do
-      VCR.use_cassette("planningalerts") do
+      VCR.use_cassette("writeit") do
         comment.create_replies_from_writeit!
       end
 
@@ -136,7 +136,7 @@ describe Comment do
     end
 
     it "returns an empty Array if all the replies on WriteIt have already been added" do
-      VCR.use_cassette("planningalerts") do
+      VCR.use_cassette("writeit") do
         create(:reply, comment: comment, writeit_id: 567)
 
         expect(comment.create_replies_from_writeit!).to be_empty
@@ -144,7 +144,7 @@ describe Comment do
     end
 
     it "does nothing if the comment has no writeit_message_id" do
-      VCR.use_cassette("planningalerts") do
+      VCR.use_cassette("writeit") do
         expect(create(:comment).create_replies_from_writeit!).to be_falsey
       end
     end
@@ -159,7 +159,7 @@ describe Comment do
       end
 
       it "still loads the reply" do
-        VCR.use_cassette("planningalerts") do
+        VCR.use_cassette("writeit") do
           comment.create_replies_from_writeit!
         end
 

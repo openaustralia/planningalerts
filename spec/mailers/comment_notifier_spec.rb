@@ -71,7 +71,7 @@ describe CommentNotifier do
     end
 
     it "sends the comment to the WriteIt API, and stores the created WriteIt message’s id on the comment" do
-      VCR.use_cassette("planningalerts") do
+      VCR.use_cassette("writeit") do
         CommentNotifier.send_comment_via_writeit!(comment).deliver_now
       end
 

@@ -56,7 +56,7 @@ feature "Councillor replies to a message sent to them" do
     scenario "it’s loaded from WriteIt by an admin" do
       sign_in_as_admin
       visit admin_comment_path(writeit_comment)
-      VCR.use_cassette("planningalerts") do
+      VCR.use_cassette("writeit") do
         click_button "Load replies from WriteIt"
       end
 
