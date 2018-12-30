@@ -38,15 +38,7 @@ class ApiController < ApplicationController
     if params[:address]
       location = GoogleGeocodeService.call(params[:address]).top
       if location.nil?
-        error_text = "could not geocode address"
-        respond_to do |format|
-          format.js do
-            render json: { error: error_text }, status: :bad_request, content_type: Mime[:json]
-          end
-          format.rss do
-            render plain: error_text, status: :bad_request
-          end
-        end
+        render_error("could not geocode address", :bad_request)
         return
       end
       location_text = location.full_address
@@ -81,9 +73,7 @@ class ApiController < ApplicationController
     if date
       api_render(Application.where(date_scraped: date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
     else
-      respond_to do |format|
-        format.js { render json: { error: "invalid date_scraped" }, status: :bad_request, content_type: Mime[:json] }
-      end
+      render_error("invalid date_scraped", :bad_request)
     end
   end
 
@@ -160,7 +150,10 @@ class ApiController < ApplicationController
     invalid_parameter_keys = params.keys - valid_parameter_keys
     return if invalid_parameter_keys.empty?
 
-    render plain: "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.sort.join(', ')}", status: :bad_request
+    render_error(
+      "Bad request: Invalid parameter(s) used: #{invalid_parameter_keys.sort.join(', ')}",
+      :bad_request
+    )
   end
 
   def require_api_key
@@ -169,13 +162,19 @@ class ApiController < ApplicationController
       return
     end
 
-    error_text = "not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"
+    render_error(
+      "not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes",
+      :unauthorized
+    )
+  end
+
+  def render_error(error_text, status)
     respond_to do |format|
       format.js do
-        render json: { error: error_text }, status: :unauthorized, content_type: Mime[:json]
+        render json: { error: error_text }, status: status, content_type: Mime[:json]
       end
       format.rss do
-        render plain: error_text, status: :unauthorized
+        render plain: error_text, status: status
       end
     end
   end
@@ -183,11 +182,7 @@ class ApiController < ApplicationController
   def authenticate_bulk_api
     return if User.where(api_key: params[:key], bulk_api: true).exists?
 
-    respond_to do |format|
-      format.js do
-        render json: { error: "no bulk api access" }, status: :unauthorized, content_type: Mime[:json]
-      end
-    end
+    render_error("no bulk api access", :unauthorized)
   end
 
   def per_page

@@ -33,6 +33,7 @@ describe ApiController do
   describe "#all" do
     describe "rss" do
       it "should not support rss" do
+        user.update(bulk_api: true)
         expect { get :all, params: { format: "rss", key: user.api_key } }.to raise_error ActionController::UnknownFormat
       end
     end
