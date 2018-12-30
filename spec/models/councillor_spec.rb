@@ -40,7 +40,7 @@ describe Councillor do
 
   describe "#cached_image_available?" do
     around do |example|
-      VCR.use_cassette("planningalerts") do
+      VCR.use_cassette("councillors") do
         example.run
       end
     end

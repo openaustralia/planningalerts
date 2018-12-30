@@ -173,7 +173,7 @@ describe Authority do
     end
 
     around do |example|
-      VCR.use_cassette("planningalerts") do
+      VCR.use_cassette("councillors") do
         example.run
       end
     end
