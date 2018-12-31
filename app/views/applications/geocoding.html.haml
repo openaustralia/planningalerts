@@ -18,10 +18,10 @@
     - @queries.each do |query|
       %tr
         %td= query.query
-        %td= query.geocode_results.find_by(geocoder: "google").lat
-        %td= query.geocode_results.find_by(geocoder: "google").lng
-        %td= query.geocode_results.find_by(geocoder: "mappify").lat
-        %td= query.geocode_results.find_by(geocoder: "mappify").lng
+        %td= query.result("google").lat
+        %td= query.result("google").lng
+        %td= query.result("mappify").lat
+        %td= query.result("mappify").lng
         %td
           = time_ago_in_words(query.created_at)
           ago

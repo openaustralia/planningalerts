@@ -158,7 +158,7 @@ class ApplicationsController < ApplicationController
 
   def geocoding
     # TODO: Probably want to loop through in batches when generating CSVs
-    @queries = GeocodeQuery.all.order(created_at: :desc)
+    @queries = GeocodeQuery.all.order(created_at: :desc).includes(:geocode_results)
   end
 
   private
