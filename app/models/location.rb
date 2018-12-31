@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Location
-  attr_reader :lat, :lng
+  attr_accessor :lat, :lng
 
   def initialize(lat:, lng:)
     @lat = lat

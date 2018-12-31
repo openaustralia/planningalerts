@@ -9,6 +9,7 @@
       %th
     %tr
       %th Address
+      %th Average distance to average result (in metres)
       %th Lat
       %th Lng
       %th Lat
@@ -18,6 +19,7 @@
     - @queries.each do |query|
       %tr
         %td= query.query
+        %td= query.average_distance_to_average_result&.round
         %td= query.result("google").lat
         %td= query.result("google").lng
         %td= query.result("mappify").lat
