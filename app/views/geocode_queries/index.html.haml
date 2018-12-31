@@ -7,10 +7,10 @@
       %th Average distance to average result (to nearest metre)
       %th Created
   %tbody
-    - @queries.each do |query|
+    - @geocode_queries.each do |geocode_query|
       %tr
-        %td= link_to query.query, query
-        %td= query.average_distance_to_average_result&.round
+        %td= link_to geocode_query.query, geocode_query
+        %td= geocode_query.average_distance_to_average_result&.round
         %td
-          = time_ago_in_words(query.created_at)
+          = time_ago_in_words(geocode_query.created_at)
           ago
