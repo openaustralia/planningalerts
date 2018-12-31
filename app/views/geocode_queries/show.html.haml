@@ -40,8 +40,8 @@
 
     // TODO: Generalise to any number of geocoder results
 
-    var googleContentString = '<h3>Google</h3>';
-    var mappifyContentString = '<h3>Mappify</h3>';
+    var googleContentString = '#{escape_javascript(render "geocode_results/result", result: @geocode_query.result("google"))}';
+    var mappifyContentString = '#{escape_javascript(render "geocode_results/result", result: @geocode_query.result("mappify"))}';
 
     var googleInfowindow = new google.maps.InfoWindow({
       content: googleContentString
