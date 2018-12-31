@@ -18,7 +18,7 @@
   %tbody
     - @queries.each do |query|
       %tr
-        %td= query.query
+        %td= link_to query.query, query
         %td= query.average_distance_to_average_result&.round
         %td= query.result("google").lat
         %td= query.result("google").lng

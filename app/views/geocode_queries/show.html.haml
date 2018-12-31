@@ -1,0 +1,22 @@
+%h3= @geocode_query.query
+
+%table
+  %tbody
+    %tr
+      %th Address
+      %td= @geocode_query.query
+    %tr
+      %th Average distance to average result (to nearest metre)
+      %td= @geocode_query.average_distance_to_average_result&.round
+    %tr
+      %th Google Lat
+      %td= @geocode_query.result("google").lat
+    %tr
+      %th Google Lng
+      %td= @geocode_query.result("google").lng
+    %tr
+      %th Mappify Lat
+      %td= @geocode_query.result("mappify").lat
+    %tr
+      %th Mappify Lng
+      %td= @geocode_query.result("mappify").lng

@@ -110,7 +110,7 @@ Rails.application.routes.draw do
 
   resources :councillor_contributions, only: [:index]
 
-  resources :geocode_queries, only: [:index]
+  resources :geocode_queries, only: [:index, :show]
 
   post "/authorities/:authority_id/councillor_contributions/new", to: "councillor_contributions#new"
   patch "/auhtorities/:authority_id/councillor_contributions/add_contributor", to: "councillor_contributions#add_contributor", as: :add_contributor_authority_councillor_contribution
