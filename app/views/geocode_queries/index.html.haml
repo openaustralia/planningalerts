@@ -1,16 +1,17 @@
 %h3 Addresses with significant differences in geocoded results
 
-%table
-  %thead
-    %tr
-      %th Address
-      %th Average distance to average result (to nearest metre)
-      %th Created
-  %tbody
-    - @geocode_queries.each do |geocode_query|
+= paginated_section @geocode_queries do
+  %table
+    %thead
       %tr
-        %td= link_to geocode_query.query, geocode_query
-        %td= geocode_query.average_distance_to_average_result&.round
-        %td
-          = time_ago_in_words(geocode_query.created_at)
-          ago
+        %th Address
+        %th Average distance to average result (to nearest metre)
+        %th Created
+    %tbody
+      - @geocode_queries.each do |geocode_query|
+        %tr
+          %td= link_to geocode_query.query, geocode_query
+          %td= geocode_query.average_distance_to_average_result&.round
+          %td
+            = time_ago_in_words(geocode_query.created_at)
+            ago
