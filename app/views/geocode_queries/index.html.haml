@@ -3,27 +3,14 @@
 %table
   %thead
     %tr
-      %th
-      %th{colspan: 2} Google
-      %th{colspan: 2} Mappify
-      %th
-    %tr
       %th Address
       %th Average distance to average result (to nearest metre)
-      %th Lat
-      %th Lng
-      %th Lat
-      %th Lng
       %th Created
   %tbody
     - @queries.each do |query|
       %tr
         %td= link_to query.query, query
         %td= query.average_distance_to_average_result&.round
-        %td= query.result("google").lat
-        %td= query.result("google").lng
-        %td= query.result("mappify").lat
-        %td= query.result("mappify").lng
         %td
           = time_ago_in_words(query.created_at)
           ago
