@@ -1,0 +1,27 @@
+%h3 Addresses with significant differences in geocoded results
+
+%table
+  %thead
+    %tr
+      %th
+      %th{colspan: 2} Google
+      %th{colspan: 2} Mappify
+      %th
+    %tr
+      %th Address
+      %th Lat
+      %th Lng
+      %th Lat
+      %th Lng
+      %th Created
+  %tbody
+    - @queries.each do |query|
+      %tr
+        %td= query.query
+        %td= query.geocode_results.find_by(geocoder: "google").lat
+        %td= query.geocode_results.find_by(geocoder: "google").lng
+        %td= query.geocode_results.find_by(geocoder: "mappify").lat
+        %td= query.geocode_results.find_by(geocoder: "mappify").lng
+        %td
+          = time_ago_in_words(query.created_at)
+          ago

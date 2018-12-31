@@ -76,6 +76,7 @@ Rails.application.routes.draw do
     collection do
       get :search
       get :trending
+      get :geocoding
     end
     resources :comments, only: [:show]
     resources :add_comments, only: [:create]
