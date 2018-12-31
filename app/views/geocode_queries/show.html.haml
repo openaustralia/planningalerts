@@ -33,13 +33,15 @@
     var googleMarker = new google.maps.Marker({
       position: googleLatLng,
       map: map,
-      title: 'Google'
+      title: 'Google',
+      label: "G"
     });
 
     var mappifyMarker = new google.maps.Marker({
       position: mappifyLatLng,
       map: map,
-      title: 'Mappify'
+      title: 'Mappify',
+      label: "M"
     });
 
     googleMarker.addListener('click', function() {
