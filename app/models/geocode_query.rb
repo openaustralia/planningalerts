@@ -3,6 +3,21 @@
 class GeocodeQuery < ApplicationRecord
   has_many :geocode_results, dependent: :destroy
 
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << ["Id", "Address", "Average distance to average result",
+              "Google Lat", "Google Lng",
+              "Mappify Lat", "Mappify Lng",
+              "Created"]
+      all.find_each do |q|
+        csv << [q.id, q.query, q.average_distance_to_average_result,
+                q.result("google").lat, q.result("google").lng,
+                q.result("mappify").lat, q.result("mappify").lng,
+                q.created_at]
+      end
+    end
+  end
+
   def result(geocoder)
     geocode_results.find { |r| r.geocoder == geocoder }
   end

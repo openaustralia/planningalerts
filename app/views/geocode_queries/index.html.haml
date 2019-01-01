@@ -1,5 +1,7 @@
 %h3 Addresses with significant differences in geocoded results
 
+%p= link_to "Download as CSV", geocode_queries_path(format: :csv)
+
 = paginated_section @geocode_queries do
   %table
     %thead
