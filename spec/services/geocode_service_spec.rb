@@ -53,7 +53,6 @@ describe GeocodeService do
       expect(GeocodeResult.where(geocoder: "google").count).to eq 1
       geocode_result = GeocodeResult.where(geocoder: "google").first
       expect(geocode_result.geocoder).to eq "google"
-      # TODO: Should be able to return the result as a GeocodedLocation object
       expect(geocode_result.lat).to eq result0.top.lat
       expect(geocode_result.lng).to eq result0.top.lng
       expect(geocode_result.suburb).to eq result0.top.suburb
@@ -71,6 +70,11 @@ describe GeocodeService do
       expect(geocode_result.geocoder).to eq "mappify"
       expect(geocode_result.lat).to be_within(0.0001).of result500.top.lat
       expect(geocode_result.lng).to be_within(0.0001).of result500.top.lng
+      expect(geocode_result.suburb).to eq result500.top.suburb
+      expect(geocode_result.state).to eq result500.top.state
+      expect(geocode_result.postcode).to eq result500.top.postcode
+      expect(geocode_result.full_address).to eq result500.top.full_address
+
       expect(geocode_result.geocode_query.query).to eq address
     end
   end
@@ -86,6 +90,10 @@ describe GeocodeService do
       geocode_result = GeocodeResult.where(geocoder: "google").first
       expect(geocode_result.lat).to eq result0.top.lat
       expect(geocode_result.lng).to eq result0.top.lng
+      expect(geocode_result.suburb).to eq result0.top.suburb
+      expect(geocode_result.state).to eq result0.top.state
+      expect(geocode_result.postcode).to eq result0.top.postcode
+      expect(geocode_result.full_address).to eq result0.top.full_address
       expect(geocode_result.geocode_query.query).to eq address
     end
 
@@ -94,6 +102,10 @@ describe GeocodeService do
       geocode_result = GeocodeResult.where(geocoder: "mappify").first
       expect(geocode_result.lat).to be_nil
       expect(geocode_result.lng).to be_nil
+      expect(geocode_result.suburb).to be_nil
+      expect(geocode_result.state).to be_nil
+      expect(geocode_result.postcode).to be_nil
+      expect(geocode_result.full_address).to be_nil
       expect(geocode_result.geocode_query.query).to eq address
     end
   end
