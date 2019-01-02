@@ -10,4 +10,15 @@ class GeocodedLocation < Location
     @full_address = full_address
     super(lat: lat, lng: lng)
   end
+
+  def attributes
+    {
+      lat: lat,
+      lng: lng,
+      suburb: suburb,
+      state: state,
+      postcode: postcode,
+      full_address: full_address
+    }
+  end
 end

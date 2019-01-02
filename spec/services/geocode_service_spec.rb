@@ -4,10 +4,27 @@ require "spec_helper"
 
 describe GeocodeService do
   let(:address) { "24 Bruce Road, Glenbrook, NSW 2773" }
-  let(:point0) { Location.new(lat: 1.5, lng: 2.5) }
-  # This point is 500m away from point0
-  let(:point500) { point0.endpoint(0, 500) }
-  let(:point50) { point0.endpoint(0, 50) }
+  let(:point0) do
+    GeocodedLocation.new(
+      lat: 1.5, lng: 2.5, suburb: "Glenbrook", state: "NSW",
+      postcode: "2773", full_address: "24 Bruce Road, Glenbrook, NSW 2773"
+    )
+  end
+  # This point is 500m away from point0 with the same found address
+  let(:point500) do
+    p = point0.endpoint(0, 500)
+    GeocodedLocation.new(
+      lat: p.lat, lng: p.lng, suburb: point0.suburb, state: point0.state,
+      postcode: point0.postcode, full_address: point0.full_address
+    )
+  end
+  let(:point50) do
+    p = point0.endpoint(0, 50)
+    GeocodedLocation.new(
+      lat: p.lat, lng: p.lng, suburb: point0.suburb, state: point0.state,
+      postcode: point0.postcode, full_address: point0.full_address
+    )
+  end
 
   let(:result0) { GeocoderResults.new([point0], true, nil) }
   let(:result500) { GeocoderResults.new([point500], true, nil) }
@@ -36,8 +53,14 @@ describe GeocodeService do
       expect(GeocodeResult.where(geocoder: "google").count).to eq 1
       geocode_result = GeocodeResult.where(geocoder: "google").first
       expect(geocode_result.geocoder).to eq "google"
+      # TODO: Should be able to return the result as a GeocodedLocation object
       expect(geocode_result.lat).to eq result0.top.lat
       expect(geocode_result.lng).to eq result0.top.lng
+      expect(geocode_result.suburb).to eq result0.top.suburb
+      expect(geocode_result.state).to eq result0.top.state
+      expect(geocode_result.postcode).to eq result0.top.postcode
+      expect(geocode_result.full_address).to eq result0.top.full_address
+
       expect(geocode_result.geocode_query.query).to eq address
     end
 
