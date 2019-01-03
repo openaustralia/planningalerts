@@ -5,6 +5,12 @@
     height: 500px;
   }
 
+%dl
+  %dt Google address
+  %dd= @geocode_query.result("google").full_address
+  %dt Mappify address
+  %dd= @geocode_query.result("mappify").full_address
+
 #geocoding-map
 
 :javascript
