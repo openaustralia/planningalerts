@@ -186,7 +186,7 @@ describe Application do
         GeocoderResults.new([], false, "something went wrong")
       )
       logger = double("Logger")
-      expect(logger).to receive(:error).with("Couldn't geocode address: dfjshd")
+      expect(logger).to receive(:error).with("Couldn't geocode address: dfjshd (something went wrong)")
 
       a = build(:application, address: "dfjshd", council_reference: "r1", date_scraped: Time.zone.now)
       allow(a).to receive(:logger).and_return(logger)

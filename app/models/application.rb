@@ -146,7 +146,7 @@ class Application < ApplicationRecord
     return if lat && lng && suburb && state && postcode
 
     r = GeocodeService.call(address)
-    if r.success
+    if r.error.nil?
       self.lat = r.top.lat
       self.lng = r.top.lng
       self.suburb = r.top.suburb
@@ -156,7 +156,7 @@ class Application < ApplicationRecord
       self.state = "NSW" if state == "New South Wales"
       self.postcode = r.top.postcode
     else
-      logger.error "Couldn't geocode address: #{address}"
+      logger.error "Couldn't geocode address: #{address} (#{r.error})"
     end
   end
 end
