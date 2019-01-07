@@ -20,7 +20,6 @@ describe MappifyGeocodeService do
     end
 
     it "should not error" do
-      expect(result.success).to be true
       expect(result.error).to be_nil
     end
 

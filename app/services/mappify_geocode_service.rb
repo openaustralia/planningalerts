@@ -30,7 +30,7 @@ class MappifyGeocodeService < ApplicationService
         full_address: a["streetAddress"]
       )
     end
-    GeocoderResults.new(all, true, nil)
+    GeocoderResults.new(all, nil)
   end
 
   private

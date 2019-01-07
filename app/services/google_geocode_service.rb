@@ -22,7 +22,7 @@ class GoogleGeocodeService < ApplicationService
     elsif all.first.accuracy < 5
       error = "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
     end
-    GeocoderResults.new(all_converted, geo_loc.success, error)
+    GeocoderResults.new(all_converted, error)
   end
 
   private

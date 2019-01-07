@@ -26,10 +26,10 @@ describe GeocodeService do
     )
   end
 
-  let(:result0) { GeocoderResults.new([point0], true, nil) }
-  let(:result500) { GeocoderResults.new([point500], true, nil) }
-  let(:result50) { GeocoderResults.new([point50], true, nil) }
-  let(:empty_result) { GeocoderResults.new([], true, nil) }
+  let(:result0) { GeocoderResults.new([point0], nil) }
+  let(:result500) { GeocoderResults.new([point500], nil) }
+  let(:result50) { GeocoderResults.new([point50], nil) }
+  let(:empty_result) { GeocoderResults.new([], nil) }
 
   context "valid google and mappify results" do
     before(:each) do

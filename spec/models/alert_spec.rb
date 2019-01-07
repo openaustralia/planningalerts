@@ -116,7 +116,6 @@ describe Alert do
               full_address: "24 Bruce Rd, Glenbrook NSW 2773"
             )
           ],
-          true,
           nil
         )
       )

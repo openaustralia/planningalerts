@@ -19,7 +19,6 @@ describe Application do
             full_address: "Glenbrook, NSW, 2773"
           )
         ],
-        true,
         nil
       )
     )
@@ -172,7 +171,6 @@ describe Application do
             full_address: "Glenbrook, NSW 2773"
           )
         ],
-        true,
         nil
       )
       expect(GeocodeService).to receive(:call).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
@@ -183,7 +181,7 @@ describe Application do
 
     it "should log an error if the geocoder can't make sense of the address" do
       expect(GeocodeService).to receive(:call).with("dfjshd").and_return(
-        GeocoderResults.new([], false, "something went wrong")
+        GeocoderResults.new([], "something went wrong")
       )
       logger = double("Logger")
       expect(logger).to receive(:error).with("Couldn't geocode address: dfjshd (something went wrong)")

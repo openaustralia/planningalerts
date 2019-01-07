@@ -14,7 +14,6 @@ module MockLocationHelpers
             full_address: "24 Bruce Rd, Glenbrook, VIC 3885"
           )
         ],
-        true,
         nil
       )
     )
@@ -22,7 +21,7 @@ module MockLocationHelpers
 
   def mock_geocoder_error_response
     allow(GoogleGeocodeService).to receive(:call).and_return(
-      GeocoderResults.new([], false, "some error message")
+      GeocoderResults.new([], "some error message")
     )
   end
 
@@ -47,7 +46,6 @@ module MockLocationHelpers
             full_address: "Bruce Rd, NSW 2042"
           )
         ],
-        true,
         nil
       )
     )

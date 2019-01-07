@@ -19,7 +19,6 @@ describe ImportApplicationsService do
             full_address: "Glenbrook, NSW 2773"
           )
         ],
-        true,
         nil
       )
     )

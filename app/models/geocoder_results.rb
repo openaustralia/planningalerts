@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class GeocoderResults
-  attr_reader :all, :success, :error
+  attr_reader :all, :error
 
-  def initialize(all, success, error)
+  def initialize(all, error)
     @all = all
-    @success = success
     @error = error
   end
 
