@@ -11,7 +11,7 @@ class GeocodeService < ApplicationService
     google_result = GoogleGeocodeService.call(address)
     mappify_result = MappifyGeocodeService.call(address)
 
-    record_in_database(google_result, mappify_result) if results_are_different(google_result.top, mappify_result.top)
+    record_in_database(google_result, mappify_result) if results_are_different(google_result, mappify_result)
     google_result
   end
 
@@ -19,7 +19,10 @@ class GeocodeService < ApplicationService
 
   attr_reader :address, :threshold
 
-  def results_are_different(loc1, loc2)
+  def results_are_different(result1, result2)
+    # If the geocoder returns an error just treat it like a nil result
+    loc1 = result1.error ? nil : result1.top
+    loc2 = result2.error ? nil : result2.top
     return true if (loc1 && loc2.nil?) || (loc2 && loc1.nil?)
 
     loc1.distance_to(loc2) > threshold
