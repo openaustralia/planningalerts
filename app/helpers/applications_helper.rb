@@ -1,3 +1,4 @@
+# coding: utf-8
 # frozen_string_literal: true
 
 module ApplicationsHelper
@@ -82,49 +83,52 @@ module ApplicationsHelper
     authority_applications_url(authority.short_name_encoded, link_params)
   end
 
-  def google_static_map(application, size: "350x200", zoom: 16)
-    google_static_map_lat_lng(application.lat, application.lng, label: "Map of #{application.address}", size: size, zoom: zoom)
+  def google_static_map(application, size: "350x200", zoom: 16, key: "GOOGLE_MAPS_API_KEY")
+    google_static_map_lat_lng(application.lat, application.lng, label: "Map of #{application.address}", size: size, zoom: zoom, key: key)
   end
 
   # Version of google_static_map above that isn't tied into the implementation of Application
-  def google_static_map_lat_lng(lat, lng, size: "350x200", label: "Map", zoom: 16)
-    image_tag(google_static_map_url_lat_lng(lat, lng, zoom: zoom, size: size), size: size, alt: label)
+  def google_static_map_lat_lng(lat, lng, size: "350x200", label: "Map", zoom: 16, key: "GOOGLE_MAPS_API_KEY")
+    image_tag(google_static_map_url_lat_lng(lat, lng, zoom: zoom, size: size, key: key), size: size, alt: label)
   end
 
-  def google_static_map_url(application, zoom: 16, size: "350x200")
-    google_static_map_url_lat_lng(application.lat, application.lng, zoom: zoom, size: size)
+  def google_static_map_url(application, zoom: 16, size: "350x200", key: "GOOGLE_MAPS_API_KEY")
+    google_static_map_url_lat_lng(application.lat, application.lng, zoom: zoom, size: size, key: key)
   end
 
-  def google_static_map_url_lat_lng(lat, lng, zoom: 16, size: "350x200")
+  def google_static_map_url_lat_lng(lat, lng, zoom: 16, size: "350x200", key: "GOOGLE_MAPS_API_KEY")
     google_signed_url(
       "https://maps.googleapis.com",
       "/maps/api/staticmap",
       maptype: "roadmap",
       markers: "color:red|#{lat},#{lng}",
       size: size,
-      zoom: zoom
+      zoom: zoom,
+      key: key
     )
   end
 
-  def google_static_streetview_url(application, size: "350x200", fov: 90)
+  def google_static_streetview_url(application, size: "350x200", fov: 90, key: "GOOGLE_MAPS_API_KEY")
     google_signed_url(
       "https://maps.googleapis.com",
       "/maps/api/streetview",
       fov: fov,
       location: "#{application.lat},#{application.lng}",
-      size: size
+      size: size,
+      key: key
     )
   end
 
-  def google_static_streetview(application, size: "350x200", fov: 90)
-    image_tag(google_static_streetview_url(application, size: size, fov: fov), size: size, alt: "Streetview of #{application.address}")
+  def google_static_streetview(application, size: "350x200", fov: 90, key: "GOOGLE_MAPS_API_KEY")
+    image_tag(google_static_streetview_url(application, size: size, fov: fov, key: key), size: size, alt: "Streetview of #{application.address}")
   end
 
   private
 
   def google_signed_url(domain, path, query)
+    key = query.delete(:key) { "GOOGLE_MAPS_API_KEY" }
     client_id = ENV["GOOGLE_MAPS_CLIENT_ID"]
-    google_maps_key = ENV["GOOGLE_MAPS_API_KEY"]
+    google_maps_key = ENV[key]
     cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
     if client_id.present? || google_maps_key.present?
       q = client_id.present? ? { client: client_id } : { key: google_maps_key }

@@ -6,9 +6,9 @@
     - if application.location
       %tr
         %td.map
-          = google_static_map(application, size: "150x150")
+          = google_static_map(application, size: "150x150", key: "GOOGLE_MAPS_EMAIL_KEY")
         %td.streetview
-          = google_static_streetview(application, size: "150x150")
+          = google_static_streetview(application, size: "150x150", key: "GOOGLE_MAPS_EMAIL_KEY")
     %tr
       %td.description{ colspan: "2" }
         = application.description
