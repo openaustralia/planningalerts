@@ -59,17 +59,10 @@ class GoogleGeocodeService < ApplicationService
           r[:city] = comp["long_name"]
         elsif types.include?("administrative_area_level_1") # state
           r[:state] = comp["short_name"]
-        elsif types.include?("postal_town")
-          r[:city] = comp["long_name"]
         elsif types.include?("postal_code")
           r[:zip] = comp["long_name"]
         elsif types.include?("country")
           r[:country_code] = comp["short_name"]
-        # Use either sublocality or admin area level 3 if google does not return a city
-        elsif types.include?("sublocality")
-          r[:city] = comp["long_name"] if r[:city].nil?
-        elsif types.include?("administrative_area_level_3")
-          r[:city] = comp["long_name"] if r[:city].nil?
         end
       end
 
