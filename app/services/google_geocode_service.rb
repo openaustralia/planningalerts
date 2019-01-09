@@ -6,23 +6,47 @@ class GoogleGeocodeService < ApplicationService
   end
 
   def call
-    geo_loc = Geokit::Geocoders::GoogleGeocoder.geocode(address, bias: "au")
+    # geo_loc = Geokit::Geocoders::GoogleGeocoder.geocode(address, bias: "au")
+    #
+    # all = geo_loc.all.find_all { |g| g.country_code == "AU" }
+    # all_converted = all.map { |g| convert_to_geocoded_location(g) }
+    #
+    # if !geo_loc.success
+    #   error = if address == ""
+    #             "Please enter a street address"
+    #           else
+    #             "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
+    #           end
+    # elsif all.empty?
+    #   error = "Unfortunately we only cover Australia. It looks like that address is in another country."
+    # elsif all.first.accuracy < 5
+    #   error = "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
+    # end
 
-    all = geo_loc.all.find_all { |g| g.country_code == "AU" }
-    all_converted = all.map { |g| convert_to_geocoded_location(g) }
+    params = {
+      address: address,
+      key: ENV["GOOGLE_MAPS_SERVER_KEY"],
+      region: "au",
+      sensor: false
+    }
+    response = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?" + params.to_query)
+    # p response.parsed_response
 
-    if !geo_loc.success
-      error = if address == ""
-                "Please enter a street address"
-              else
-                "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
-              end
-    elsif all.empty?
-      error = "Unfortunately we only cover Australia. It looks like that address is in another country."
-    elsif all.first.accuracy < 5
-      error = "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
+    # TODO: Handle errors
+    results = response.parsed_response["results"]
+    all = results.map do |result|
+      # pp result
+      GeocodedLocation.new(
+        lat: result["geometry"]["location"]["lat"],
+        lng: result["geometry"]["location"]["lng"],
+        # TODO: Include actual suburb, state, postcode
+        suburb: "Foo",
+        state: "Bar",
+        postcode: "1234",
+        full_address: result["formatted_address"]
+      )
     end
-    GeocoderResults.new(all_converted, error)
+    GeocoderResults.new(all, nil)
   end
 
   private
