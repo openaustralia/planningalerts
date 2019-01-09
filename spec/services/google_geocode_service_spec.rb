@@ -15,6 +15,10 @@ describe "GoogleGeocodeService" do
     it "should geocode an address into a latitude and longitude by using the Google service" do
       expect(result.top.lat).to eq(-33.7726179)
       expect(result.top.lng).to eq(150.6242341)
+      expect(result.top.suburb).to eq "Glenbrook"
+      expect(result.top.state).to eq "NSW"
+      expect(result.top.postcode).to eq "2773"
+      expect(result.top.full_address).to eq "24 Bruce Rd, Glenbrook NSW 2773"
     end
 
     it "should not error" do
