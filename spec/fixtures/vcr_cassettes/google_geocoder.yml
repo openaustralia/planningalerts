@@ -1,0 +1,1097 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=Bathurst%20Rd&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Wed, 09 Jan 2019 01:31:51 GMT
+      Expires:
+      - Thu, 10 Jan 2019 01:31:51 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '645'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server-Timing:
+      - gfet4t7; dur=411
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bathurst Road",
+                       "short_name" : "Bathurst Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Orange",
+                       "short_name" : "Orange",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Orange City Council",
+                       "short_name" : "Orange",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2800",
+                       "short_name" : "2800",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bathurst Rd, Orange NSW 2800, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -33.2845982,
+                          "lng" : 149.1199622
+                       },
+                       "southwest" : {
+                          "lat" : -33.29868810000001,
+                          "lng" : 149.1052521
+                       }
+                    },
+                    "location" : {
+                       "lat" : -33.2922564,
+                       "lng" : 149.1117986
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.2845982,
+                          "lng" : 149.1199622
+                       },
+                       "southwest" : {
+                          "lat" : -33.29868810000001,
+                          "lng" : 149.1052521
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJH0G9qSnTEWsRqlyxiB7h3Fg",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bathurst Road",
+                       "short_name" : "Bathurst Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Katoomba",
+                       "short_name" : "Katoomba",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Blue Mountains City Council",
+                       "short_name" : "Blue Mountains",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2780",
+                       "short_name" : "2780",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bathurst Rd, Katoomba NSW 2780, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -33.7054189,
+                          "lng" : 150.312422
+                       },
+                       "southwest" : {
+                          "lat" : -33.7133084,
+                          "lng" : 150.2986635
+                       }
+                    },
+                    "location" : {
+                       "lat" : -33.7080521,
+                       "lng" : 150.3052462
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.7054189,
+                          "lng" : 150.312422
+                       },
+                       "southwest" : {
+                          "lat" : -33.7133084,
+                          "lng" : 150.2986635
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJ8cgviJ1uEmsRZVfB2xTYl_w",
+                 "types" : [ "route" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Wed, 09 Jan 2019 01:31:20 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=Sowerby%20St&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Wed, 09 Jan 2019 01:33:07 GMT
+      Expires:
+      - Thu, 10 Jan 2019 01:33:07 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '841'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server-Timing:
+      - gfet4t7; dur=444
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Sowerby Street",
+                       "short_name" : "Sowerby St",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Muswellbrook",
+                       "short_name" : "Muswellbrook",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Muswellbrook Shire Council",
+                       "short_name" : "Muswellbrook",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2333",
+                       "short_name" : "2333",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Sowerby St, Muswellbrook NSW 2333, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -32.254349,
+                          "lng" : 150.8936497
+                       },
+                       "southwest" : {
+                          "lat" : -32.2658816,
+                          "lng" : 150.8900145
+                       }
+                    },
+                    "location" : {
+                       "lat" : -32.2597588,
+                       "lng" : 150.8919811
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -32.254349,
+                          "lng" : 150.8936497
+                       },
+                       "southwest" : {
+                          "lat" : -32.2658816,
+                          "lng" : 150.8900145
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJKTiAODxhC2sR1WR4dPkv9yI",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Sowerby Street",
+                       "short_name" : "Sowerby St",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Oran Park",
+                       "short_name" : "Oran Park",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Camden Council",
+                       "short_name" : "Camden",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2570",
+                       "short_name" : "2570",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Sowerby St, Oran Park NSW 2570, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -33.9968457,
+                          "lng" : 150.7319668
+                       },
+                       "southwest" : {
+                          "lat" : -33.9981414,
+                          "lng" : 150.7301511
+                       }
+                    },
+                    "location" : {
+                       "lat" : -33.997865,
+                       "lng" : 150.7308767
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.99614456970851,
+                          "lng" : 150.7324079302915
+                       },
+                       "southwest" : {
+                          "lat" : -33.9988425302915,
+                          "lng" : 150.7297099697085
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJUbJx3zDyEmsRmW4q6bxod78",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Sowerby Street",
+                       "short_name" : "Sowerby St",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Goulburn",
+                       "short_name" : "Goulburn",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Goulburn Mulwaree Council",
+                       "short_name" : "Goulburn Mulwaree",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2580",
+                       "short_name" : "2580",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Sowerby St, Goulburn NSW 2580, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -34.772713,
+                          "lng" : 149.6917668
+                       },
+                       "southwest" : {
+                          "lat" : -34.7740777,
+                          "lng" : 149.6905053
+                       }
+                    },
+                    "location" : {
+                       "lat" : -34.7737266,
+                       "lng" : 149.6913939
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -34.7720463697085,
+                          "lng" : 149.6924850302915
+                       },
+                       "southwest" : {
+                          "lat" : -34.77474433029149,
+                          "lng" : 149.6897870697085
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJF33LnZqvFmsRz77ZFoS7rj4",
+                 "types" : [ "route" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Wed, 09 Jan 2019 01:32:35 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=Bruce%20Road&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Wed, 09 Jan 2019 01:33:08 GMT
+      Expires:
+      - Thu, 10 Jan 2019 01:33:08 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '791'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server-Timing:
+      - gfet4t7; dur=508
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Mornington Peninsula Shire",
+                       "short_name" : "Mornington Peninsula",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Victoria",
+                       "short_name" : "VIC",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Victoria, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -38.2952084,
+                          "lng" : 145.0328017
+                       },
+                       "southwest" : {
+                          "lat" : -38.306939,
+                          "lng" : 144.9940584
+                       }
+                    },
+                    "location" : {
+                       "lat" : -38.3025233,
+                       "lng" : 145.0123317
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -38.2952084,
+                          "lng" : 145.0328017
+                       },
+                       "southwest" : {
+                          "lat" : -38.306939,
+                          "lng" : 144.9940584
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJ5cHH8SbF1WoRAx23sdZonhM",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Maida Vale",
+                       "short_name" : "Maida Vale",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Shire of Kalamunda",
+                       "short_name" : "Kalamunda",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Western Australia",
+                       "short_name" : "WA",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "6057",
+                       "short_name" : "6057",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Maida Vale WA 6057, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -31.9666751,
+                          "lng" : 116.016267
+                       },
+                       "southwest" : {
+                          "lat" : -31.96798489999999,
+                          "lng" : 116.0088778
+                       }
+                    },
+                    "location" : {
+                       "lat" : -31.9672749,
+                       "lng" : 116.0113223
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -31.9659810197085,
+                          "lng" : 116.016267
+                       },
+                       "southwest" : {
+                          "lat" : -31.9686789802915,
+                          "lng" : 116.0088778
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJxcgCYzS_MioR2SD_tuLbSJc",
+                 "types" : [ "route" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Wattle Grove",
+                       "short_name" : "Wattle Grove",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Shire of Kalamunda",
+                       "short_name" : "Kalamunda",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "Western Australia",
+                       "short_name" : "WA",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "6107",
+                       "short_name" : "6107",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Bruce Rd, Wattle Grove WA 6107, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -32.0028654,
+                          "lng" : 115.9961308
+                       },
+                       "southwest" : {
+                          "lat" : -32.0075465,
+                          "lng" : 115.9932673
+                       }
+                    },
+                    "location" : {
+                       "lat" : -32.005221,
+                       "lng" : 115.993992
+                    },
+                    "location_type" : "GEOMETRIC_CENTER",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -32.0028654,
+                          "lng" : 115.9961308
+                       },
+                       "southwest" : {
+                          "lat" : -32.0075465,
+                          "lng" : 115.9932673
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJEfF7AwK_MioR_Y0G6othcC8",
+                 "types" : [ "route" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Wed, 09 Jan 2019 01:32:37 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Wed, 09 Jan 2019 01:33:08 GMT
+      Pragma:
+      - no-cache
+      Expires:
+      - Fri, 01 Jan 1990 00:00:00 GMT
+      Cache-Control:
+      - no-cache, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server-Timing:
+      - gfet4t7; dur=20
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "error_message" : "Invalid request. Missing the 'address', 'components', 'latlng' or 'place_id' parameter.",
+           "results" : [],
+           "status" : "INVALID_REQUEST"
+        }
+    http_version: 
+  recorded_at: Wed, 09 Jan 2019 01:32:37 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=rxsd23dfj&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Wed, 09 Jan 2019 01:33:09 GMT
+      Expires:
+      - Thu, 10 Jan 2019 01:33:09 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '65'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server-Timing:
+      - gfet4t7; dur=181
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [],
+           "status" : "ZERO_RESULTS"
+        }
+    http_version: 
+  recorded_at: Wed, 09 Jan 2019 01:32:38 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=New%20York&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Wed, 09 Jan 2019 01:33:10 GMT
+      Expires:
+      - Thu, 10 Jan 2019 01:33:10 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '430'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server-Timing:
+      - gfet4t7; dur=465
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "New York",
+                       "short_name" : "New York",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "New York",
+                       "short_name" : "NY",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "United States",
+                       "short_name" : "US",
+                       "types" : [ "country", "political" ]
+                    }
+                 ],
+                 "formatted_address" : "New York, NY, USA",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : 40.9175771,
+                          "lng" : -73.70027209999999
+                       },
+                       "southwest" : {
+                          "lat" : 40.4773991,
+                          "lng" : -74.25908989999999
+                       }
+                    },
+                    "location" : {
+                       "lat" : 40.7127753,
+                       "lng" : -74.0059728
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : 40.9175771,
+                          "lng" : -73.70027209999999
+                       },
+                       "southwest" : {
+                          "lat" : 40.4773991,
+                          "lng" : -74.25908989999999
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJOwg_06VPwokRYv534QaPC8g",
+                 "types" : [ "locality", "political" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Wed, 09 Jan 2019 01:32:39 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=24%20Bruce%20Road,%20Glenbrook,%20NSW%202773&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Wed, 09 Jan 2019 01:33:11 GMT
+      Expires:
+      - Thu, 10 Jan 2019 01:33:11 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '565'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server-Timing:
+      - gfet4t7; dur=431
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "24",
+                       "short_name" : "24",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "Bruce Road",
+                       "short_name" : "Bruce Rd",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Glenbrook",
+                       "short_name" : "Glenbrook",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Blue Mountains City Council",
+                       "short_name" : "Blue Mountains",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2773",
+                       "short_name" : "2773",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "24 Bruce Rd, Glenbrook NSW 2773, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -33.77256910000001,
+                          "lng" : 150.6242931
+                       },
+                       "southwest" : {
+                          "lat" : -33.7726639,
+                          "lng" : 150.6241947
+                       }
+                    },
+                    "location" : {
+                       "lat" : -33.7726179,
+                       "lng" : 150.6242341
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.7712675197085,
+                          "lng" : 150.6255928802915
+                       },
+                       "southwest" : {
+                          "lat" : -33.7739654802915,
+                          "lng" : 150.6228949197085
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJz5V26FaIEmsRT6oPpmmOwAk",
+                 "types" : [ "premise" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Wed, 09 Jan 2019 01:32:40 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=Glenbrook,%20NSW&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Wed, 09 Jan 2019 01:33:12 GMT
+      Expires:
+      - Thu, 10 Jan 2019 01:33:12 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '479'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server-Timing:
+      - gfet4t7; dur=444
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Glenbrook",
+                       "short_name" : "Glenbrook",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Blue Mountains City Council",
+                       "short_name" : "Blue Mountains",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2773",
+                       "short_name" : "2773",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Glenbrook NSW 2773, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -33.7492132,
+                          "lng" : 150.644918
+                       },
+                       "southwest" : {
+                          "lat" : -33.7826274,
+                          "lng" : 150.6065363
+                       }
+                    },
+                    "location" : {
+                       "lat" : -33.766667,
+                       "lng" : 150.619444
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.7492132,
+                          "lng" : 150.644918
+                       },
+                       "southwest" : {
+                          "lat" : -33.7826274,
+                          "lng" : 150.6065363
+                       }
+                    }
+                 },
+                 "place_id" : "ChIJVXe9J2R5EmsRsNQyFmh9AQU",
+                 "types" : [ "locality", "political" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Wed, 09 Jan 2019 01:32:41 GMT
+recorded_with: VCR 4.0.0
