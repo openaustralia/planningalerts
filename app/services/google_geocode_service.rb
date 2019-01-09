@@ -60,12 +60,16 @@ class GoogleGeocodeService < ApplicationService
               else
                 "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
               end
+      GeocoderResults.new([], error)
     elsif all.empty?
       error = "Unfortunately we only cover Australia. It looks like that address is in another country."
+      GeocoderResults.new([], error)
     elsif all.first[:accuracy] < 5
       error = "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
+      GeocoderResults.new([], error)
+    else
+      GeocoderResults.new(all_converted, error)
     end
-    GeocoderResults.new(all_converted, error)
   end
 
   private
