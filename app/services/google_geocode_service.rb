@@ -52,28 +52,19 @@ class GoogleGeocodeService < ApplicationService
     success = (status == "OK")
     results = response.parsed_response["results"]
     all = results.map do |result|
-      r = {}
-      result["address_components"].each do |comp|
-        types = comp["types"]
-        if types.include?("locality")
-          r[:city] = comp["long_name"]
-        elsif types.include?("administrative_area_level_1") # state
-          r[:state] = comp["short_name"]
-        elsif types.include?("postal_code")
-          r[:zip] = comp["long_name"]
-        elsif types.include?("country")
-          r[:country_code] = comp["short_name"]
-        end
-      end
-
+      components = result["address_components"]
+      city = components.find { |c| c["types"].include?("locality") }
+      state = components.find { |c| c["types"].include?("administrative_area_level_1") }
+      zip = components.find { |c| c["types"].include?("postal_code") }
+      country = components.find { |c| c["types"].include?("country") }
       {
         lat: result["geometry"]["location"]["lat"],
         lng: result["geometry"]["location"]["lng"],
-        city: r[:city],
-        state: r[:state],
-        zip: r[:zip],
+        city: (city["long_name"] if city),
+        state: (state["short_name"] if state),
+        zip: (zip["long_name"] if zip),
         full_address: result["formatted_address"],
-        country_code: r[:country_code],
+        country_code: (country["short_name"] if country),
         accuracy: ACCURACY[result["geometry"]["location_type"]]
       }
     end
