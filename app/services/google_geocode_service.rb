@@ -28,19 +28,20 @@ class GoogleGeocodeService < ApplicationService
     end
 
     results = response.parsed_response["results"]
-    all = []
-    results.each do |result|
-      components = result["address_components"]
-      city = components.find { |c| c["types"].include?("locality") }
-      state = components.find { |c| c["types"].include?("administrative_area_level_1") }
-      zip = components.find { |c| c["types"].include?("postal_code") }
-      country = components.find { |c| c["types"].include?("country") }
+    results = results.select do |result|
+      country = component(result, "country")
       # Even though we've biased the results towards au by using region: "au",
       # Google can still return results outside our country of interest. So,
       # test for this and ignore those
-      next if country.nil? || country["short_name"] != "AU"
+      country && country["short_name"] == "AU"
+    end
 
-      all << {
+    all = results.map do |result|
+      city = component(result, "locality")
+      state = component(result, "administrative_area_level_1")
+      zip = component(result, "postal_code")
+
+      {
         lat: result["geometry"]["location"]["lat"],
         lng: result["geometry"]["location"]["lng"],
         city: (city["long_name"] if city),
@@ -77,6 +78,11 @@ class GoogleGeocodeService < ApplicationService
   private
 
   attr_reader :address
+
+  # Extract component by type for a particular result
+  def component(result, type)
+    result["address_components"].find { |c| c["types"].include?(type) }
+  end
 
   ACCURACY = {
     "ROOFTOP" => 9,
