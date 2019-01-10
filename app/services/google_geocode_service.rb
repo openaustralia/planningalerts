@@ -41,6 +41,12 @@ class GoogleGeocodeService < ApplicationService
       )
     end
 
+    if results.first["partial_match"]
+      return error(
+        "Sorry we only got a partial match on that address"
+      )
+    end
+
     if results.first["geometry"]["location_type"] == "APPROXIMATE"
       return error(
         "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"

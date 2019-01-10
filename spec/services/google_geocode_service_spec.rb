@@ -91,4 +91,12 @@ describe "GoogleGeocodeService" do
       expect(result.all[2].full_address).to eq("Sowerby St, Goulburn NSW 2580")
     end
   end
+
+  context "valid address that google only gets partial match on" do
+    let(:address) { "11 Explorers Way Westdale NSW 2340" }
+
+    it "should error" do
+      expect(result.error).to eq "Sorry we only got a partial match on that address"
+    end
+  end
 end

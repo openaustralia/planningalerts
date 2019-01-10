@@ -1094,4 +1094,186 @@ http_interactions:
         }
     http_version: 
   recorded_at: Wed, 09 Jan 2019 01:32:41 GMT
+- request:
+    method: get
+    uri: https://maps.googleapis.com/maps/api/geocode/json?address=11%20Explorers%20Way%20Westdale%20NSW%202340&key=AIzaSyCmIXlJq_d6R-9vaPDr1Fx5eUr1Jl1Oc6Q&region=au&sensor=false
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 10 Jan 2019 17:56:45 GMT
+      Expires:
+      - Fri, 11 Jan 2019 17:56:45 GMT
+      Cache-Control:
+      - public, max-age=86400
+      Vary:
+      - Accept-Language
+      Access-Control-Allow-Origin:
+      - "*"
+      Server:
+      - mafe
+      Content-Length:
+      - '741'
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      Server-Timing:
+      - gfet4t7; dur=16
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+           "results" : [
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "11",
+                       "short_name" : "11",
+                       "types" : [ "street_number" ]
+                    },
+                    {
+                       "long_name" : "Explorers Way",
+                       "short_name" : "Explorers Way",
+                       "types" : [ "route" ]
+                    },
+                    {
+                       "long_name" : "Saint Clair",
+                       "short_name" : "St Clair",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Penrith City Council",
+                       "short_name" : "Penrith",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2759",
+                       "short_name" : "2759",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "11 Explorers Way, St Clair NSW 2759, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -33.7933528,
+                          "lng" : 150.792728
+                       },
+                       "southwest" : {
+                          "lat" : -33.7935039,
+                          "lng" : 150.7925509
+                       }
+                    },
+                    "location" : {
+                       "lat" : -33.7934124,
+                       "lng" : 150.7926683
+                    },
+                    "location_type" : "ROOFTOP",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -33.7920793697085,
+                          "lng" : 150.7939884302915
+                       },
+                       "southwest" : {
+                          "lat" : -33.7947773302915,
+                          "lng" : 150.7912904697085
+                       }
+                    }
+                 },
+                 "partial_match" : true,
+                 "place_id" : "ChIJPSgtaG2QEmsRbyUyFnnwxKA",
+                 "types" : [ "premise" ]
+              },
+              {
+                 "address_components" : [
+                    {
+                       "long_name" : "Westdale",
+                       "short_name" : "Westdale",
+                       "types" : [ "locality", "political" ]
+                    },
+                    {
+                       "long_name" : "Tamworth Regional Council",
+                       "short_name" : "Tamworth Regional",
+                       "types" : [ "administrative_area_level_2", "political" ]
+                    },
+                    {
+                       "long_name" : "New South Wales",
+                       "short_name" : "NSW",
+                       "types" : [ "administrative_area_level_1", "political" ]
+                    },
+                    {
+                       "long_name" : "Australia",
+                       "short_name" : "AU",
+                       "types" : [ "country", "political" ]
+                    },
+                    {
+                       "long_name" : "2340",
+                       "short_name" : "2340",
+                       "types" : [ "postal_code" ]
+                    }
+                 ],
+                 "formatted_address" : "Westdale NSW 2340, Australia",
+                 "geometry" : {
+                    "bounds" : {
+                       "northeast" : {
+                          "lat" : -31.0433423,
+                          "lng" : 150.8936182
+                       },
+                       "southwest" : {
+                          "lat" : -31.1347626,
+                          "lng" : 150.8143721
+                       }
+                    },
+                    "location" : {
+                       "lat" : -31.09673029999999,
+                       "lng" : 150.8493059
+                    },
+                    "location_type" : "APPROXIMATE",
+                    "viewport" : {
+                       "northeast" : {
+                          "lat" : -31.0433423,
+                          "lng" : 150.8936182
+                       },
+                       "southwest" : {
+                          "lat" : -31.1347626,
+                          "lng" : 150.8143721
+                       }
+                    }
+                 },
+                 "partial_match" : true,
+                 "place_id" : "ChIJnRIQ1-abCmsRkClEkLQJBgU",
+                 "types" : [ "locality", "political" ]
+              }
+           ],
+           "status" : "OK"
+        }
+    http_version: 
+  recorded_at: Thu, 10 Jan 2019 17:56:10 GMT
 recorded_with: VCR 4.0.0
