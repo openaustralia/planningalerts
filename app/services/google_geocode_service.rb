@@ -18,7 +18,15 @@ class GoogleGeocodeService < ApplicationService
     # TODO: Raise a proper error class here
     raise "An error #{status}" unless %w[OK ZERO_RESULTS INVALID_REQUEST].include?(status)
 
-    success = (status == "OK")
+    if status != "OK"
+      error = if address == ""
+                "Please enter a street address"
+              else
+                "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
+              end
+      return GeocoderResults.new([], error)
+    end
+
     results = response.parsed_response["results"]
     all = []
     results.each do |result|
@@ -54,22 +62,16 @@ class GoogleGeocodeService < ApplicationService
       )
     end
 
-    if !success
-      error = if address == ""
-                "Please enter a street address"
-              else
-                "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
-              end
-      GeocoderResults.new([], error)
-    elsif all.empty?
+    if all.empty?
       error = "Unfortunately we only cover Australia. It looks like that address is in another country."
-      GeocoderResults.new([], error)
-    elsif all.first[:accuracy] < 5
-      error = "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
-      GeocoderResults.new([], error)
-    else
-      GeocoderResults.new(all_converted, error)
+      return GeocoderResults.new([], error)
     end
+    if all.first[:accuracy] < 5
+      error = "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
+      return GeocoderResults.new([], error)
+    end
+
+    GeocoderResults.new(all_converted, error)
   end
 
   private
