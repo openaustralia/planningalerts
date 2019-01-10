@@ -5,8 +5,7 @@ require "spec_helper"
 describe MappifyGeocodeService do
   let(:result) do
     VCR.use_cassette(:mappify_geocoder,
-                     match_requests_on: %i[method uri headers],
-                     record: :new_episodes) do
+                     match_requests_on: %i[method uri headers]) do
       MappifyGeocodeService.call(address)
     end
   end

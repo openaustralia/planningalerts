@@ -30,8 +30,10 @@ VCR.configure do |c|
   c.cassette_library_dir = "spec/fixtures/vcr_cassettes"
   c.hook_into :webmock
   c.ignore_localhost = true
-  # Uncomment this below if you want to record new external http requests
-  # c.default_cassette_options = { record: :new_episodes }
+  # This will by default record new web requests in VCR. We can see
+  # that this is happened because the files in spec/fixtures/vcr_cassettes
+  # get appended to
+  c.default_cassette_options = { record: :new_episodes }
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
