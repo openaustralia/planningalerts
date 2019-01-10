@@ -31,11 +31,6 @@ if defined? Geokit
   # This is your Google Maps geocoder key.
   # See http://www.google.com/apis/maps/signup.html
   # and http://www.google.com/apis/maps/documentation/#Geocoding_Examples
-  if ENV["GOOGLE_MAPS_CLIENT_ID"]
-    Geokit::Geocoders::GoogleGeocoder.client_id = ENV["GOOGLE_MAPS_CLIENT_ID"]
-    Geokit::Geocoders::GoogleGeocoder.cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
-  end
-
   Geokit::Geocoders::GoogleGeocoder.api_key = ENV["GOOGLE_MAPS_SERVER_KEY"] if ENV["GOOGLE_MAPS_SERVER_KEY"]
 
   # You can also set multiple API KEYS for different domains that may be directed to this same application.

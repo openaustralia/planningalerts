@@ -210,7 +210,6 @@ describe ApplicationsHelper do
     describe "static maps" do
       before :each do
         allow(@application).to receive(:address).and_return("Foo Road, NSW")
-        allow(ENV).to receive(:[]).with("GOOGLE_MAPS_CLIENT_ID").and_return(nil)
         allow(ENV).to receive(:[]).with("GOOGLE_MAPS_API_KEY").and_return("abc")
         allow(ENV).to receive(:[]).with("GOOGLE_MAPS_CRYPTOGRAPHIC_KEY").and_return("123456789012345678901234567=")
       end
@@ -225,7 +224,6 @@ describe ApplicationsHelper do
     describe "static streetview" do
       before :each do
         allow(@application).to receive(:address).and_return("Foo Road, NSW")
-        allow(ENV).to receive(:[]).with("GOOGLE_MAPS_CLIENT_ID").and_return(nil)
         allow(ENV).to receive(:[]).with("GOOGLE_MAPS_API_KEY").and_return("abc")
         allow(ENV).to receive(:[]).with("GOOGLE_MAPS_CRYPTOGRAPHIC_KEY").and_return("123456789012345678901234567=")
       end
