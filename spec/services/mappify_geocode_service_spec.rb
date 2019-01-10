@@ -16,6 +16,10 @@ describe MappifyGeocodeService do
     it "should geocode the address into a specific latitude and longitude" do
       expect(result.top.lat).to eq(-33.77260864)
       expect(result.top.lng).to eq(150.62426298)
+      expect(result.top.suburb).to eq "Glenbrook"
+      expect(result.top.state).to eq "NSW"
+      expect(result.top.postcode).to eq "2773"
+      expect(result.top.full_address).to eq "24 Bruce Road, Glenbrook NSW 2773"
     end
 
     it "should not error" do
