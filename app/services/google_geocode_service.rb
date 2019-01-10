@@ -41,40 +41,28 @@ class GoogleGeocodeService < ApplicationService
       )
     end
 
-    all = results.map do |result|
-      city = component(result, "locality")
-      state = component(result, "administrative_area_level_1")
-      zip = component(result, "postal_code")
-
-      {
-        lat: result["geometry"]["location"]["lat"],
-        lng: result["geometry"]["location"]["lng"],
-        city: (city["long_name"] if city),
-        state: (state["short_name"] if state),
-        zip: (zip["long_name"] if zip),
-        full_address: result["formatted_address"],
-        accuracy: ACCURACY[result["geometry"]["location_type"]]
-      }
-    end
-
-    if all.first[:accuracy] < 5
+    if results.first["geometry"]["location_type"] == "APPROXIMATE"
       return error(
         "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
       )
     end
 
-    all_converted = all.map do |g|
+    all = results.map do |result|
+      suburb = component(result, "locality")
+      state = component(result, "administrative_area_level_1")
+      postcode = component(result, "postal_code")
+
       GeocodedLocation.new(
-        lat: g[:lat],
-        lng: g[:lng],
-        suburb: g[:city],
-        state: g[:state],
-        postcode: g[:zip],
-        full_address: g[:full_address].sub(", Australia", "")
+        lat: result["geometry"]["location"]["lat"],
+        lng: result["geometry"]["location"]["lng"],
+        suburb: (suburb["long_name"] if suburb),
+        state: (state["short_name"] if state),
+        postcode: (postcode["long_name"] if postcode),
+        full_address: result["formatted_address"].sub(", Australia", "")
       )
     end
 
-    GeocoderResults.new(all_converted, nil)
+    GeocoderResults.new(all, nil)
   end
 
   private
@@ -89,11 +77,4 @@ class GoogleGeocodeService < ApplicationService
   def component(result, type)
     result["address_components"].find { |c| c["types"].include?(type) }
   end
-
-  ACCURACY = {
-    "ROOFTOP" => 9,
-    "RANGE_INTERPOLATED" => 8,
-    "GEOMETRIC_CENTER" => 5,
-    "APPROXIMATE" => 4
-  }.freeze
 end
