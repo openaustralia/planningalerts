@@ -6,6 +6,8 @@ class GoogleGeocodeService < ApplicationService
   end
 
   def call
+    return error("Please enter a street address") if address == ""
+
     params = {
       address: address,
       key: ENV["GOOGLE_MAPS_SERVER_KEY"],
@@ -19,12 +21,9 @@ class GoogleGeocodeService < ApplicationService
     raise "An error #{status}" unless %w[OK ZERO_RESULTS INVALID_REQUEST].include?(status)
 
     if status != "OK"
-      error = if address == ""
-                "Please enter a street address"
-              else
-                "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
-              end
-      return GeocoderResults.new([], error)
+      return error(
+        "Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’"
+      )
     end
 
     results = response.parsed_response["results"]
@@ -34,6 +33,12 @@ class GoogleGeocodeService < ApplicationService
       # Google can still return results outside our country of interest. So,
       # test for this and ignore those
       country && country["short_name"] == "AU"
+    end
+
+    if results.empty?
+      return error(
+        "Unfortunately we only cover Australia. It looks like that address is in another country."
+      )
     end
 
     all = results.map do |result|
@@ -52,6 +57,12 @@ class GoogleGeocodeService < ApplicationService
       }
     end
 
+    if all.first[:accuracy] < 5
+      return error(
+        "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
+      )
+    end
+
     all_converted = all.map do |g|
       GeocodedLocation.new(
         lat: g[:lat],
@@ -63,21 +74,16 @@ class GoogleGeocodeService < ApplicationService
       )
     end
 
-    if all.empty?
-      error = "Unfortunately we only cover Australia. It looks like that address is in another country."
-      return GeocoderResults.new([], error)
-    end
-    if all.first[:accuracy] < 5
-      error = "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"
-      return GeocoderResults.new([], error)
-    end
-
-    GeocoderResults.new(all_converted, error)
+    GeocoderResults.new(all_converted, nil)
   end
 
   private
 
   attr_reader :address
+
+  def error(text)
+    GeocoderResults.new([], text)
+  end
 
   # Extract component by type for a particular result
   def component(result, type)
