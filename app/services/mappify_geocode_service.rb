@@ -23,8 +23,7 @@ class MappifyGeocodeService < ApplicationService
       GeocodedLocation.new(
         lat: a["location"]["lat"],
         lng: a["location"]["lon"],
-        # TODO: Make the suburb not all capitals
-        suburb: a["suburb"],
+        suburb: a["suburb"].titleize,
         state: a["state"],
         postcode: a["postCode"],
         full_address: a["streetAddress"]
