@@ -7,18 +7,22 @@ class SiteSetting < ApplicationRecord
   serialize :settings
 
   def self.streetview_in_emails_enabled
-    if settings.key?(:streetview_in_emails_enabled)
-      settings[:streetview_in_emails_enabled]
-    else
-      true
-    end
+    get(:streetview_in_emails_enabled, true)
   end
 
   def self.streetview_in_emails_enabled=(value)
-    SiteSetting.create!(settings: settings.merge(streetview_in_emails_enabled: value))
+    set(:streetview_in_emails_enabled, value)
   end
 
   def self.settings
     SiteSetting.order(id: :desc).first&.settings || {}
+  end
+
+  def self.set(param, value)
+    SiteSetting.create!(settings: settings.merge(param => value))
+  end
+
+  def self.get(param, default)
+    settings.key?(param) ? settings[param] : default
   end
 end
