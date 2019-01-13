@@ -20,8 +20,8 @@ class SiteSetting < ApplicationRecord
     DEFAULTS.merge(settings)
   end
 
-  def self.set(param, value)
-    SiteSetting.create!(settings: settings.merge(param => value))
+  def self.set(params)
+    SiteSetting.create!(settings: settings.merge(params))
   end
 
   def self.get(param)
