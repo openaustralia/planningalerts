@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# You can preview the mails by browsing to http://localhost:3000/rails/mailers
+
 class AlertNotifierPreview < ActionMailer::Preview
   def alert
     # Not using Factory here because it seems to be causing problems
