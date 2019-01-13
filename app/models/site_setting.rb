@@ -6,6 +6,12 @@
 class SiteSetting < ApplicationRecord
   serialize :settings
 
+  DEFAULTS = {
+    streetview_in_emails_enabled: true,
+    streetview_in_app_enabled: true
+  }.freeze
+
+  # Note that this doesn't include the default values
   def self.settings
     SiteSetting.order(id: :desc).first&.settings || {}
   end
@@ -14,7 +20,9 @@ class SiteSetting < ApplicationRecord
     SiteSetting.create!(settings: settings.merge(param => value))
   end
 
-  def self.get(param, default)
-    settings.key?(param) ? settings[param] : default
+  def self.get(param)
+    raise "Add default value for parameter :#{param} to SiteSetting.DEFAULTS" unless DEFAULTS.key?(param)
+
+    settings.key?(param) ? settings[param] : DEFAULTS[param]
   end
 end

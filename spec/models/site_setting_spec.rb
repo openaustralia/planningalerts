@@ -4,9 +4,12 @@ require "spec_helper"
 
 describe SiteSetting do
   describe ".get" do
-    it "should return the default value if nothing else is set" do
-      expect(SiteSetting.get(:streetview_in_emails_enabled, false)).to be false
-      expect(SiteSetting.get(:streetview_in_emails_enabled, true)).to be true
+    it "should be enabled by default" do
+      expect(SiteSetting.get(:streetview_in_emails_enabled)).to be true
+    end
+
+    it "should raise an error if using an unknown param" do
+      expect { SiteSetting.get(:this_does_not_exist) }.to raise_error(RuntimeError)
     end
   end
 
@@ -21,7 +24,7 @@ describe SiteSetting do
 
     it "can be read back out" do
       SiteSetting.set(:streetview_in_emails_enabled, false)
-      expect(SiteSetting.get(:streetview_in_emails_enabled, true)).to be false
+      expect(SiteSetting.get(:streetview_in_emails_enabled)).to be false
     end
 
     it "should created multiple records if updated multiple times" do
@@ -33,13 +36,13 @@ describe SiteSetting do
     it "should read back out if updated multiple times" do
       SiteSetting.set(:streetview_in_emails_enabled, false)
       SiteSetting.set(:streetview_in_emails_enabled, true)
-      expect(SiteSetting.get(:streetview_in_emails_enabled, true)).to be true
+      expect(SiteSetting.get(:streetview_in_emails_enabled)).to be true
     end
 
     it "should not overwrite other values" do
-      SiteSetting.set(:other_value, "foo")
+      SiteSetting.set(:streetview_in_app_enabled, "foo")
       SiteSetting.set(:streetview_in_emails_enabled, false)
-      expect(SiteSetting.get(:other_value, nil)).to eq "foo"
+      expect(SiteSetting.get(:streetview_in_app_enabled)).to eq "foo"
     end
   end
 end
