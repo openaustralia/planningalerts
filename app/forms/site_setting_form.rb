@@ -2,8 +2,10 @@
 
 class SiteSettingForm
   include ActiveModel::Model
+  include Virtus.model
 
-  attr_accessor :streetview_in_emails_enabled, :streetview_in_app_enabled
+  attribute :streetview_in_emails_enabled, Boolean
+  attribute :streetview_in_app_enabled, Boolean
 
   def persisted?
     true

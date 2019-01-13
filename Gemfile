@@ -105,6 +105,9 @@ gem "formtastic"
 # TODO: Double check where this is being used
 gem "oj"
 
+# Helps with defining attributes and type casting in form objects
+gem "virtus"
+
 group :test do
   gem "capybara"
   gem "chromedriver-helper"
