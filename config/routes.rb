@@ -26,6 +26,10 @@ Rails.application.routes.draw do
   end
 
   ActiveAdmin.routes(self)
+  namespace "admin" do
+    resource :site_settings, only: :update
+  end
+
 
   devise_for :users
 

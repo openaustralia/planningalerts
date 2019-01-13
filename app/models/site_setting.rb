@@ -16,6 +16,10 @@ class SiteSetting < ApplicationRecord
     SiteSetting.order(id: :desc).first&.settings || {}
   end
 
+  def self.settings_with_defaults
+    DEFAULTS.merge(settings)
+  end
+
   def self.set(param, value)
     SiteSetting.create!(settings: settings.merge(param => value))
   end
