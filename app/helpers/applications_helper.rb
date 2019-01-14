@@ -98,24 +98,28 @@ module ApplicationsHelper
 
   def google_static_map_url_lat_lng(lat, lng, zoom: 16, size: "350x200", key: "GOOGLE_MAPS_API_KEY")
     google_signed_url(
-      "https://maps.googleapis.com",
-      "/maps/api/staticmap",
-      maptype: "roadmap",
-      markers: "color:red|#{lat},#{lng}",
-      size: size,
-      zoom: zoom,
-      key: key
+      domain: "https://maps.googleapis.com",
+      path: "/maps/api/staticmap",
+      query: {
+        maptype: "roadmap",
+        markers: "color:red|#{lat},#{lng}",
+        size: size,
+        zoom: zoom,
+        key: key
+      }
     )
   end
 
   def google_static_streetview_url(application, size: "350x200", fov: 90, key: "GOOGLE_MAPS_API_KEY")
     google_signed_url(
-      "https://maps.googleapis.com",
-      "/maps/api/streetview",
-      fov: fov,
-      location: "#{application.lat},#{application.lng}",
-      size: size,
-      key: key
+      domain: "https://maps.googleapis.com",
+      path: "/maps/api/streetview",
+      query: {
+        fov: fov,
+        location: "#{application.lat},#{application.lng}",
+        size: size,
+        key: key
+      }
     )
   end
 
@@ -125,7 +129,7 @@ module ApplicationsHelper
 
   private
 
-  def google_signed_url(domain, path, query)
+  def google_signed_url(domain:, path:, query:)
     key = query.delete(:key) { "GOOGLE_MAPS_API_KEY" }
     google_maps_key = ENV[key]
     cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
