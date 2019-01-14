@@ -3,7 +3,8 @@
 module Admin
   class SiteSettingsController < ApplicationController
     def update
-      SiteSetting.set(SiteSettingForm.new(site_setting).attributes)
+      s = SiteSettingForm.new(site_setting)
+      s.persist
       redirect_to admin_dashboard_url, notice: "Site settings updated"
     end
 
