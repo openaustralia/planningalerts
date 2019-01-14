@@ -148,7 +148,8 @@ group :development do
   gem "better_errors"
 
   # For deployment
-  gem "capistrano"
+  # TODO: Upgrade to capistrano 3
+  gem "capistrano", "~> 2"
 
   # Help with code quality
   gem "brakeman"
