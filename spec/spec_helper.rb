@@ -111,6 +111,15 @@ RSpec.configure do |config|
     ActionMailer::Base.deliveries = []
   end
 
+  # Disable background jobs for feature specs so that emails get
+  # processed immediately
+  config.around(:each, type: :feature) do |example|
+    restore = Delayed::Worker.delay_jobs
+    Delayed::Worker.delay_jobs = false
+    example.run
+    Delayed::Worker.delay_jobs = restore
+  end
+
   config.include EmailSpec::Helpers
   config.include EmailSpec::Matchers
   config.include FactoryBot::Syntax::Methods

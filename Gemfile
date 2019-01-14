@@ -113,7 +113,7 @@ group :test do
   gem "chromedriver-helper"
   gem "climate_control"
   gem "database_cleaner"
-  gem "email_spec", "~> 1.6"
+  gem "email_spec"
   gem "factory_bot"
   gem "factory_bot_rails"
   gem "rails-controller-testing"

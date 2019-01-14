@@ -159,7 +159,7 @@ feature "Send a message to a councillor" do
       expect(current_email).to have_content("Louise Councillor")
       expect(current_email).to have_content("I think this is a really good idea")
       expect(current_email).to have_content("From Matthew Landauer")
-      expect(current_email).to have_body_text('The planning application is for <a href="https://dev.planningalerts.org.au/applications/8?utm_campaign=view-application&amp;utm_medium=email&amp;utm_source=councillor-notifications">24 Bruce Road Glenbrook</a>')
+      expect(current_email).to have_body_text('The planning application is for <a href="https://dev.planningalerts.org.au/applications/8?utm_campaign=view-application&utm_medium=email&utm_source=councillor-notifications">24 Bruce Road Glenbrook</a>')
       expect(current_email).to have_content("A lovely house")
     end
 

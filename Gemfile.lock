@@ -185,9 +185,10 @@ GEM
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
-    email_spec (1.6.0)
+    email_spec (2.2.0)
+      htmlentities (~> 4.3.3)
       launchy (~> 2.1)
-      mail (~> 2.2)
+      mail (~> 2.7)
     equalizer (0.0.11)
     erubi (1.8.0)
     eventmachine (1.2.7)
@@ -246,6 +247,7 @@ GEM
     hashdiff (0.3.8)
     highline (2.0.0)
     honeybadger (4.1.0)
+    htmlentities (4.3.4)
     http (3.3.0)
       addressable (~> 2.3)
       http-cookie (~> 1.0)
@@ -600,7 +602,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise (~> 4.2)
   dotenv-rails
-  email_spec (~> 1.6)
+  email_spec
   everypolitician-popolo!
   factory_bot
   factory_bot_rails
