@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_02_204300) do
+ActiveRecord::Schema.define(version: 2019_01_12_195109) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -230,6 +230,11 @@ ActiveRecord::Schema.define(version: 2019_01_02_204300) do
     t.integer "comment_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "site_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.string "settings"
+    t.datetime "created_at"
   end
 
   create_table "stats", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|

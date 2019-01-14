@@ -16,14 +16,20 @@
       %header
         %h3.address= @application.address
 
-      - if @application.location
-        #map_div{data: {latitude: @application.lat, longitude: @application.lng, address: @application.address}}
-          %noscript= google_static_map(@application, size: "350x330")
-
-      .details
+      - if SiteSetting.get(:streetview_in_app_enabled)
         - if @application.location
-          #pano{data: {latitude: @application.lat, longitude: @application.lng, address: @application.address}}
-            %noscript= google_static_streetview(@application, size: "350x330")
+          #map_div{data: {latitude: @application.lat, longitude: @application.lng, address: @application.address}}
+            %noscript= google_static_map(@application, size: "350x330")
+
+        .details
+          - if @application.location
+            #pano{data: {latitude: @application.lat, longitude: @application.lng, address: @application.address}}
+              %noscript= google_static_streetview(@application, size: "350x330")
+      - else
+        -# If just showing the map make it twice as wide
+        - if @application.location
+          #map_div.double{data: {latitude: @application.lat, longitude: @application.lng, address: @application.address}}
+            %noscript= google_static_map(@application, size: "700x330")
 
 
       %p.description= @application.description
