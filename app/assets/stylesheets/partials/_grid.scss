@@ -20,7 +20,7 @@
   @include span-columns(6 omega, 12);
 }
 
-#map_div {
+#map_div.double {
   @include span-columns(12 omega, 12);
 }
 
