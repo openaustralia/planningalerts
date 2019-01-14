@@ -141,8 +141,8 @@ group :development do
   gem "spring"
   gem "spring-commands-rspec"
 
-  # For seeing emails in development
-  gem "mailcatcher"
+  # Using this webserver for development
+  gem "thin"
 
   # For a better error page in development
   gem "better_errors"
