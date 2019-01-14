@@ -8,6 +8,7 @@ describe "GoogleGeocodeService" do
       GoogleGeocodeService.call(address)
     end
   end
+  let(:error) { result.error }
 
   context "valid full address" do
     let(:address) { "24 Bruce Road, Glenbrook, NSW 2773" }
@@ -97,6 +98,51 @@ describe "GoogleGeocodeService" do
 
     it "should error" do
       expect(result.error).to eq "Sorry we only got a partial match on that address"
+    end
+  end
+
+  # See https://github.com/openaustralia/planningalerts/issues/1281
+  # for a list of addresses that were causing problems that should do something more
+  # sensible now which is error so that a wrong geocoding result is not recorded
+  describe "addresses that were causing problems with the google geocoder before" do
+    context do
+      let(:address) { "1 Wickham Street Marsden Park NSW 2765" }
+      it { expect(error).to_not be_nil }
+    end
+
+    context do
+      let(:address) { "7 Bradfield Street Flagstone QLD 4280" }
+      it { expect(error).to_not be_nil }
+    end
+
+    context do
+      let(:address) { "21 Beck Street Park Ridge QLD 4125" }
+      it { expect(error).to_not be_nil }
+    end
+
+    context do
+      let(:address) { "8 Bennelong Cres Lloyd NSW 2650" }
+      it { expect(error).to_not be_nil }
+    end
+
+    context do
+      let(:address) { "16 Hilltop Gr, Cliftleigh 2321 NSW" }
+      it { expect(error).to_not be_nil }
+    end
+
+    context do
+      let(:address) { "17 Isabella Close, Narara NSW 2250" }
+      it { expect(error).to_not be_nil }
+    end
+
+    context do
+      let(:address) { "41 Foxall Street Riverstone NSW 2765" }
+      it { expect(error).to_not be_nil }
+    end
+
+    context do
+      let(:address) { "29 Larkin Street Marsden Park NSW 2765" }
+      it { expect(error).to_not be_nil }
     end
   end
 end

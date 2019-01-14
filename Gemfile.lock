@@ -87,6 +87,10 @@ GEM
       rgeo-geojson
     autoprefixer-rails (9.3.1)
       execjs
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.12)
     better_errors (2.5.0)
       coderay (>= 1.0.0)
@@ -122,6 +126,8 @@ GEM
     chunky_png (1.3.11)
     climate_control (0.2.0)
     coderay (1.1.2)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -160,6 +166,8 @@ GEM
     delayed_job_active_record (4.1.3)
       activerecord (>= 3.0, < 5.3)
       delayed_job (>= 3.0, < 5)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     devise (4.5.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -251,6 +259,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.1.1)
       concurrent-ruby (~> 1.0)
+    ice_nine (0.11.2)
     inherited_resources (1.9.0)
       actionpack (>= 4.2, < 5.3)
       has_scope (~> 0.6)
@@ -550,6 +559,11 @@ GEM
     vanity (2.2.10)
       i18n
     vcr (4.0.0)
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.8)
       rack (>= 2.0.6)
     webmock (3.4.2)
@@ -645,6 +659,7 @@ DEPENDENCIES
   validates_email_format_of (~> 1.6, >= 1.6.3)
   vanity
   vcr
+  virtus
   webmock
   will_paginate
   writeit-rails!

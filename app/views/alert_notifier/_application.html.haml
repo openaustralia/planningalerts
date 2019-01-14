@@ -5,10 +5,14 @@
         = link_to application.address, application_url_with_tracking(id: application.id)
     - if application.location
       %tr
-        %td.map
-          = google_static_map(application, size: "150x150", key: "GOOGLE_MAPS_EMAIL_KEY")
-        %td.streetview
-          = google_static_streetview(application, size: "150x150", key: "GOOGLE_MAPS_EMAIL_KEY")
+        - if SiteSetting.get(:streetview_in_emails_enabled)
+          %td.map
+            = google_static_map(application, size: "150x150", key: "GOOGLE_MAPS_EMAIL_KEY")
+          %td.streetview
+            = google_static_streetview(application, size: "150x150", key: "GOOGLE_MAPS_EMAIL_KEY")
+        - else
+          %td.map
+            = google_static_map(application, size: "300x150", key: "GOOGLE_MAPS_EMAIL_KEY")
     %tr
       %td.description{ colspan: "2" }
         = application.description
