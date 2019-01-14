@@ -104,9 +104,9 @@ module ApplicationsHelper
         maptype: "roadmap",
         markers: "color:red|#{lat},#{lng}",
         size: size,
-        zoom: zoom,
-        key: key
-      }
+        zoom: zoom
+      },
+      key: key
     )
   end
 
@@ -117,9 +117,9 @@ module ApplicationsHelper
       query: {
         fov: fov,
         location: "#{application.lat},#{application.lng}",
-        size: size,
-        key: key
-      }
+        size: size
+      },
+      key: key
     )
   end
 
@@ -129,8 +129,7 @@ module ApplicationsHelper
 
   private
 
-  def google_signed_url(domain:, path:, query:)
-    key = query.delete(:key) { "GOOGLE_MAPS_API_KEY" }
+  def google_signed_url(domain:, path:, query:, key: "GOOGLE_MAPS_API_KEY")
     google_maps_key = ENV[key]
     cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
     if google_maps_key.present?
