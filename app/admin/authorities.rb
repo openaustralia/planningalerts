@@ -91,8 +91,7 @@ ActiveAdmin.register Authority do
 
   member_action :import, method: :post do
     authority = Authority.find(params[:id])
-    info_logger = AuthorityLogger.new(authority.id, logger)
-    ImportApplicationsService.delay.call(authority: authority, scrape_delay: ENV["SCRAPE_DELAY"].to_i, logger: info_logger)
+    ImportApplicationsJob.perform_later(authority: authority, scrape_delay: ENV["SCRAPE_DELAY"].to_i)
     redirect_to({ action: :show }, notice: "Queued for importing!")
   end
 
