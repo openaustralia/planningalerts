@@ -18,7 +18,7 @@ class GoogleGeocodeService < ApplicationService
 
     status = response.parsed_response["status"]
     # TODO: Raise a proper error class here
-    raise "An error #{status}" unless %w[OK ZERO_RESULTS].include?(status)
+    raise "Google geocoding error #{status}" unless %w[OK ZERO_RESULTS].include?(status)
 
     if status != "OK"
       return error(
