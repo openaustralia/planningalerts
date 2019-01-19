@@ -30,6 +30,11 @@ Rails.application.routes.draw do
     resource :site_settings, only: :update
   end
 
+  require 'sidekiq/web'
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/admin/jobs'
+  end
+
 
   devise_for :users
 
