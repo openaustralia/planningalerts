@@ -11,3 +11,6 @@ before_script:
   - ./cc-test-reporter -d before-build
 after_script:
   - ./cc-test-reporter -d after-build -t simplecov --exit-code $TRAVIS_TEST_RESULT
+
+services:
+  - redis
