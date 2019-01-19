@@ -111,13 +111,13 @@ RSpec.configure do |config|
     ActionMailer::Base.deliveries = []
   end
 
+  require "sidekiq/testing"
   # Disable background jobs for feature specs so that emails get
   # processed immediately
   config.around(:each, type: :feature) do |example|
-    restore = Delayed::Worker.delay_jobs
-    Delayed::Worker.delay_jobs = false
-    example.run
-    Delayed::Worker.delay_jobs = restore
+    Sidekiq::Testing.inline! do
+      example.run
+    end
   end
 
   config.include EmailSpec::Helpers
