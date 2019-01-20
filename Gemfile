@@ -42,6 +42,7 @@ gem "validates_email_format_of", "~> 1.6", ">= 1.6.3"
 # TODO: Remove delayed job when sidekiq is properly up and running and all the
 # jobs in the delayed job in production have been exhausted
 gem "delayed_job_active_record"
+gem "redis-namespace"
 # We're migrating to sidekiq - for the time we have both the old and the new
 # installed side-by-side.
 gem "sidekiq"
