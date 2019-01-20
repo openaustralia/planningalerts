@@ -27,7 +27,7 @@ class QueueUpAlertsService < ApplicationService
   attr_reader :logger
 
   def time_between_alerts_in_words
-    "#{(time_between_alerts / 60).round} minutes"
+    "#{time_between_alerts.round} seconds"
   end
 
   def alerts
