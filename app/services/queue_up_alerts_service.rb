@@ -8,7 +8,7 @@ class QueueUpAlertsService < ApplicationService
 
   def call
     logger.info "Checking #{alerts.count} active alerts"
-    logger.info "Splitting mailing for the next 24 hours into batches of size 1 roughly every #{time_between_batches_in_words}"
+    logger.info "Splitting mailing for the next 24 hours - checks an alert roughly every #{time_between_batches_in_words}"
 
     start_time = Time.zone.now
     count = 0

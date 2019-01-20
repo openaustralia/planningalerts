@@ -7,7 +7,7 @@ describe QueueUpAlertsService do
     it "should log some useful messages" do
       logger = double
       expect(logger).to receive(:info).with("Checking 0 active alerts")
-      expect(logger).to receive(:info).with("Splitting mailing for the next 24 hours into batches of size 1 roughly every 1440 minutes")
+      expect(logger).to receive(:info).with("Splitting mailing for the next 24 hours - checks an alert roughly every 1440 minutes")
       expect(logger).to receive(:info).with("Mailing jobs for the next 24 hours queued")
       QueueUpAlertsService.call(logger: logger)
     end
@@ -24,7 +24,7 @@ describe QueueUpAlertsService do
     it "should log some messages" do
       logger = double
       expect(logger).to receive(:info).with("Checking 2 active alerts")
-      expect(logger).to receive(:info).with("Splitting mailing for the next 24 hours into batches of size 1 roughly every 720 minutes")
+      expect(logger).to receive(:info).with("Splitting mailing for the next 24 hours - checks an alert roughly every 720 minutes")
       expect(logger).to receive(:info).with("Mailing jobs for the next 24 hours queued")
       QueueUpAlertsService.call(logger: logger)
     end
