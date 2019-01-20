@@ -8,14 +8,14 @@ class QueueUpAlertsService < ApplicationService
 
   def call
     logger.info "Checking #{alerts.count} active alerts"
-    logger.info "Splitting mailing for the next 24 hours - checks an alert roughly every #{time_between_batches_in_words}"
+    logger.info "Splitting mailing for the next 24 hours - checks an alert roughly every #{time_between_alerts_in_words}"
 
     start_time = Time.zone.now
     count = 0
-    delay = time_between_batches
-    alerts.map(&:id).shuffle.each_slice(1) do |alert_ids|
+    delay = time_between_alerts
+    alerts.map(&:id).shuffle.each do |alert_id|
       time = start_time + count * delay
-      ProcessAlertsBatchJob.set(wait_until: time).perform_later(alert_ids)
+      ProcessAlertsBatchJob.set(wait_until: time).perform_later([alert_id])
       count += 1
     end
 
@@ -26,21 +26,21 @@ class QueueUpAlertsService < ApplicationService
 
   attr_reader :logger
 
-  def time_between_batches_in_words
-    "#{(time_between_batches / 60).round} minutes"
+  def time_between_alerts_in_words
+    "#{(time_between_alerts / 60).round} minutes"
   end
 
   def alerts
     Alert.active.all
   end
 
-  def no_batches
-    no_batches = alerts.count
-    no_batches = 1 if no_batches.zero?
-    no_batches
+  def no_alerts
+    no_alerts = alerts.count
+    no_alerts = 1 if no_alerts.zero?
+    no_alerts
   end
 
-  def time_between_batches
-    24.hours.to_f / no_batches
+  def time_between_alerts
+    24.hours.to_f / no_alerts
   end
 end
