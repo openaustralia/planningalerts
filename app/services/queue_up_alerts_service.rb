@@ -25,7 +25,7 @@ class QueueUpAlertsService < ApplicationService
   attr_reader :logger, :batch_size
 
   def time_between_batches_in_words
-    "#{time_between_batches / 60} minutes"
+    "#{(time_between_batches / 60).round} minutes"
   end
 
   def alerts
