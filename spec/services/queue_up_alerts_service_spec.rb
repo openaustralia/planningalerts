@@ -35,9 +35,9 @@ describe QueueUpAlertsService do
       allow(logger).to receive(:info)
 
       job = double
-      expect(ProcessAlertsBatchJob).to receive(:set).and_return(job).twice
-      expect(job).to receive(:perform_later).with([alert1.id])
-      expect(job).to receive(:perform_later).with([alert2.id])
+      expect(ProcessAlertJob).to receive(:set).and_return(job).twice
+      expect(job).to receive(:perform_later).with(alert1.id)
+      expect(job).to receive(:perform_later).with(alert2.id)
 
       QueueUpAlertsService.call(logger: logger)
     end
