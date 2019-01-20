@@ -11,10 +11,13 @@ class QueueUpAlertsService < ApplicationService
     logger.info "Checking #{alerts.count} active alerts"
     logger.info "Splitting mailing for the next 24 hours into batches of size #{batch_size} roughly every #{time_between_batches_in_words}"
 
-    time = Time.zone.now
+    start_time = Time.zone.now
+    count = 0
+    delay = time_between_batches
     alerts.map(&:id).shuffle.each_slice(batch_size) do |alert_ids|
+      time = start_time + count * delay
       ProcessAlertsBatchJob.set(wait_until: time).perform_later(alert_ids)
-      time += time_between_batches
+      count += 1
     end
 
     logger.info "Mailing jobs for the next 24 hours queued"
