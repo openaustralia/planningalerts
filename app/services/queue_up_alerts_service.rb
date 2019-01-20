@@ -39,6 +39,6 @@ class QueueUpAlertsService < ApplicationService
   end
 
   def time_between_batches
-    24.hours / no_batches
+    24.hours.to_f / no_batches
   end
 end
