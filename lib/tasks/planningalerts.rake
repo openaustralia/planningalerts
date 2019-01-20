@@ -19,7 +19,7 @@ namespace :planningalerts do
 
     desc "Send planning alerts"
     task email: :environment do
-      QueueUpAlertsService.call(logger: Logger.new(STDOUT), batch_size: 1)
+      QueueUpAlertsService.call(logger: Logger.new(STDOUT))
     end
 
     desc "Reset `last_sent` on all alerts to nil and then send emails"
