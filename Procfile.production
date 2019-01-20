@@ -2,4 +2,4 @@ sphinx: rvm . do bundle exec rake ts:run_in_foreground RAILS_ENV=production
 # TODO: Remove two delayed job workers when migration to sidekiq is complete
 worker: rvm . do bundle exec rake jobs:work RAILS_ENV=production
 actionmailer-worker: rvm . do bundle exec rake jobs:work RAILS_ENV=production QUEUE=mailers
-worker-sidekiq: rvm . do bundle exec sidekiq -q default -q mailers RAILS_ENV=production
+worker-sidekiq: rvm . do bundle exec sidekiq -q default -q mailers -e production
