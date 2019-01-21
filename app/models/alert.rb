@@ -14,11 +14,6 @@ class Alert < ApplicationRecord
 
   before_create :attach_alert_subscriber
 
-  # TODO: Remove this once all the background jobs that need it have finished
-  def self.process_alerts(alert_ids)
-    ProcessAlertAndRecordStatsService.call(alert_ids: alert_ids)
-  end
-
   def location=(loc)
     return unless loc
 
