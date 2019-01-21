@@ -12,6 +12,9 @@ class ProcessAlertAndRecordStatsService < ApplicationService
     alert = Alert.find(alert_id)
     no_emails, no_applications, no_comments, no_replies = ProcessAlertService.call(alert: alert)
 
+    # Don't need to do anything further if no email was sent
+    return if no_emails.zero?
+
     # Update statistics
     # TODO: Deal with concurrency issues with the way the stats are beign updated
     # TODO: Figure out the impact on caching updating this so regularly now
