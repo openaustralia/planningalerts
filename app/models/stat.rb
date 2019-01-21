@@ -5,10 +5,6 @@ class Stat < ApplicationRecord
     get_value_for_key("applications_sent")
   end
 
-  def self.applications_sent=(value)
-    set_value_for_key("applications_sent", value)
-  end
-
   def self.increment_applications_sent(value)
     increment_value_for_key("applications_sent", value)
   end
@@ -17,18 +13,8 @@ class Stat < ApplicationRecord
     get_value_for_key("emails_sent")
   end
 
-  def self.emails_sent=(value)
-    set_value_for_key("emails_sent", value)
-  end
-
   def self.increment_emails_sent(value)
     increment_value_for_key("emails_sent", value)
-  end
-
-  def self.set_value_for_key(key, value)
-    r = record_for_key(key)
-    r.value = value
-    r.save!
   end
 
   def self.get_value_for_key(key)

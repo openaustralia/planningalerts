@@ -30,8 +30,8 @@ describe ProcessAlertAndRecordStatsService do
 
     it "should increment the global stats" do
       # Starting point
-      Stat.emails_sent = 5
-      Stat.applications_sent = 10
+      Stat.increment_emails_sent(5)
+      Stat.increment_applications_sent(10)
 
       allow(Alert).to receive(:find).with(alert.id).and_return(alert)
 

@@ -16,10 +16,9 @@ class ProcessAlertAndRecordStatsService < ApplicationService
     return if no_emails.zero?
 
     # Update statistics
-    # TODO: Deal with concurrency issues with the way the stats are beign updated
     # TODO: Figure out the impact on caching updating this so regularly now
-    Stat.emails_sent += no_emails
-    Stat.applications_sent += no_applications
+    Stat.increment_emails_sent(no_emails)
+    Stat.increment_applications_sent(no_applications)
     # TODO: Rename EmailBatch as we're not using batches anymore
     EmailBatch.create!(
       no_emails: no_emails,
