@@ -2,7 +2,6 @@
 
 require "new_relic/recipes"
 require "bundler/capistrano"
-require "delayed/recipes"
 set :stage, "test" unless exists? :stage
 
 # This adds a task that precompiles assets for the asset pipeline
