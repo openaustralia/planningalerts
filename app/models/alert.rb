@@ -16,7 +16,7 @@ class Alert < ApplicationRecord
 
   # TODO: Remove this once all the background jobs that need it have finished
   def self.process_alerts(alert_ids)
-    ProcessAlertsBatchService.call(alert_ids: alert_ids)
+    ProcessAlertAndRecordStatsService.call(alert_ids: alert_ids)
   end
 
   def location=(loc)

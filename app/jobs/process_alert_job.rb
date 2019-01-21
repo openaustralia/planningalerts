@@ -4,6 +4,6 @@ class ProcessAlertJob < ApplicationJob
   queue_as :default
 
   def perform(id)
-    ProcessAlertsBatchService.call(alert_ids: [id])
+    ProcessAlertAndRecordStatsService.call(alert_ids: [id])
   end
 end

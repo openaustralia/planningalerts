@@ -2,7 +2,7 @@
 
 # Sends out a bunch of email alerts and
 # records the batch being sent out and updates the global statistics
-class ProcessAlertsBatchService < ApplicationService
+class ProcessAlertAndRecordStatsService < ApplicationService
   def initialize(alert_ids:)
     @alert_ids = alert_ids
   end
