@@ -3,8 +3,8 @@
 # Sends out a bunch of email alerts and
 # records the batch being sent out and updates the global statistics
 class ProcessAlertAndRecordStatsService < ApplicationService
-  def initialize(alert_ids:)
-    @alert_ids = alert_ids
+  def initialize(alert_id:)
+    @alert_ids = [alert_id]
   end
 
   # TODO: Also include no_replies in stats
