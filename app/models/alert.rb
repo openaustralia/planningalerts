@@ -12,8 +12,6 @@ class Alert < ApplicationRecord
   scope(:active, -> { where(confirmed: true, unsubscribed: false) })
   scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
 
-  before_create :attach_alert_subscriber
-
   def location=(loc)
     return unless loc
 
@@ -91,10 +89,6 @@ class Alert < ApplicationRecord
 
     self.location = @geocode_result.top
     self.address = @geocode_result.top.full_address
-  end
-
-  def attach_alert_subscriber
-    self.alert_subscriber = AlertSubscriber.find_or_create_by(email: email)
   end
 
   private

@@ -7,54 +7,6 @@ describe Alert do
 
   let(:address) { "24 Bruce Road, Glenbrook" }
 
-  # TODO: is there a way to test this that isn't repeating #attach_alert_subscriber ?
-  #       Note that this is actually testing that the association is persisted,
-  #       which #attach_alert_subscriber doesn't do currently.
-  describe "before_create" do
-    context "when it's the first alert with this email" do
-      it "creates an associated AlertSubscriber for them" do
-        alert = create(:alert, email: "eliza@example.org")
-
-        expect(alert.alert_subscriber.email).to eql "eliza@example.org"
-      end
-    end
-
-    context "when there is an existing alert" do
-      let!(:first_alert) { create(:alert, email: "eliza@example.org") }
-
-      context "with a different email" do
-        let(:second_alert) { create(:alert, email: "kush@example.net") }
-
-        it "they are assigned different alert subscribers" do
-          expect(first_alert.alert_subscriber).to_not eq second_alert.alert_subscriber
-        end
-      end
-
-      context "with the same email" do
-        let(:second_alert) { create(:alert, email: "eliza@example.org") }
-
-        it "they are assigned the same alert subscriber" do
-          expect(first_alert.alert_subscriber).to eq second_alert.alert_subscriber
-        end
-      end
-    end
-
-    context "when there is a pre-existing AlertSubscriber with their email" do
-      let!(:subscriber) do
-        create(
-          :alert_subscriber,
-          email: "eliza@example.org"
-        )
-      end
-
-      it "is assigned as it's AlertSubscriber" do
-        alert = create(:alert, email: "eliza@example.org")
-
-        expect(alert.alert_subscriber).to eql subscriber
-      end
-    end
-  end
-
   context "when the geocoder doesn't need to run" do
     let(:alert) { build(:alert, address: "foo", lat: 1, lng: 2) }
 
@@ -508,64 +460,6 @@ describe Alert do
                received_at: 1.hour.ago)
 
         expect(alert.applications_with_new_replies).to eq []
-      end
-    end
-  end
-
-  describe "#attach_alert_subscriber" do
-    context "when it's the only alert with this email" do
-      it "is creates an associated AlertSubscriber for them" do
-        alert = build(:alert, email: "eliza@example.org")
-
-        alert.attach_alert_subscriber
-
-        expect(alert.alert_subscriber.email).to eql "eliza@example.org"
-        expect(alert.alert_subscriber).to be_persisted
-      end
-    end
-
-    context "when there is another alert" do
-      let(:first_alert) { build(:alert, email: "eliza@example.org") }
-
-      context "with a different email" do
-        let(:second_alert) { build(:alert, email: "kush@example.net") }
-
-        it "they are assigned different alert subscribers" do
-          first_alert.attach_alert_subscriber
-          second_alert.attach_alert_subscriber
-
-          expect(first_alert.alert_subscriber).to_not eql second_alert.alert_subscriber
-          expect(first_alert.alert_subscriber).to be_persisted
-          expect(second_alert.alert_subscriber).to be_persisted
-        end
-      end
-
-      context "with the same email" do
-        let(:second_alert) { build(:alert, email: "eliza@example.org") }
-
-        it "they are assigned the same alert subscriber" do
-          first_alert.attach_alert_subscriber
-          second_alert.attach_alert_subscriber
-
-          expect(first_alert.alert_subscriber).to eql second_alert.alert_subscriber
-        end
-      end
-    end
-
-    context "when there is a pre-existing AlertSubscriber with their email" do
-      let!(:subscriber) do
-        create(
-          :alert_subscriber,
-          email: "eliza@example.org"
-        )
-      end
-
-      it "is is assigned as it's AlertSubscriber" do
-        alert = create(:alert, email: "eliza@example.org")
-
-        alert.attach_alert_subscriber
-
-        expect(alert.alert_subscriber).to eql subscriber
       end
     end
   end
