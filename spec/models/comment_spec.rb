@@ -42,6 +42,11 @@ describe Comment do
 
       expect(comment_to_authority).to be_valid
     end
+
+    it "should handle emojis in the comment text" do
+      comment_to_authority.text = "🙏🏼"
+      expect { comment_to_authority.save! }.to_not raise_error
+    end
   end
 
   context "new comment for a councillor" do

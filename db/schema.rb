@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2019_01_22_225629) do
 
-  create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
     t.string "resource_type", null: false
     t.integer "author_id"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.index ["resource_type", "resource_id"], name: "index_admin_notes_on_resource_type_and_resource_id"
   end
 
-  create_table "alerts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "alerts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "email", limit: 120, null: false
     t.string "address", limit: 120, null: false
     t.datetime "last_sent"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.index ["email"], name: "index_alerts_on_email"
   end
 
-  create_table "api_statistics", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "api_statistics", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "ip_address"
     t.datetime "query_time"
     t.text "query"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.index ["user_id"], name: "index_api_statistics_on_user_id"
   end
 
-  create_table "application_redirects", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "application_redirects", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "application_id"
     t.integer "redirect_application_id"
     t.datetime "created_at", null: false
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.index ["application_id"], name: "index_application_redirects_on_application_id"
   end
 
-  create_table "applications", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "applications", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "council_reference", limit: 50, null: false
     t.text "address", null: false
     t.text "description"
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.index ["suburb"], name: "index_applications_on_suburb"
   end
 
-  create_table "authorities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "authorities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "full_name", limit: 200, null: false
     t.string "short_name", limit: 100, null: false
     t.boolean "disabled"
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.index ["short_name"], name: "short_name_unique", unique: true
   end
 
-  create_table "comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.text "text", limit: 16777215
     t.string "email"
     t.string "name"
@@ -123,14 +123,14 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.index ["hidden"], name: "index_comments_on_hidden"
   end
 
-  create_table "contributors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "contributors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "councillor_contributions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "councillor_contributions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "contributor_id"
     t.integer "authority_id"
     t.datetime "created_at", null: false
@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.boolean "accepted", default: false
   end
 
-  create_table "councillors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "councillors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
     t.string "image_url"
     t.string "party"
@@ -152,7 +152,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.boolean "current", default: true, null: false
   end
 
-  create_table "donations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "donations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "stripe_plan_id"
     t.string "stripe_customer_id"
@@ -162,7 +162,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.index ["email"], name: "index_donations_on_email", unique: true
   end
 
-  create_table "email_batches", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "email_batches", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "no_emails", null: false
     t.integer "no_applications", null: false
     t.integer "no_comments", null: false
@@ -171,13 +171,13 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.integer "no_replies", null: false
   end
 
-  create_table "geocode_queries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "geocode_queries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "query", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "geocode_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "geocode_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "geocoder", null: false
     t.float "lat"
     t.float "lng"
@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.index ["geocode_query_id"], name: "index_geocode_results_on_geocode_query_id"
   end
 
-  create_table "replies", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "replies", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.text "text", limit: 16777215
     t.datetime "received_at"
     t.integer "comment_id"
@@ -201,7 +201,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.index ["councillor_id"], name: "index_replies_on_councillor_id"
   end
 
-  create_table "reports", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "reports", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.text "details"
@@ -210,17 +210,17 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.datetime "updated_at"
   end
 
-  create_table "site_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "site_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "settings"
     t.datetime "created_at"
   end
 
-  create_table "stats", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "stats", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "key", limit: 25, null: false
     t.integer "value", null: false
   end
 
-  create_table "suggested_councillors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "suggested_councillors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.datetime "created_at", null: false
@@ -228,7 +228,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.integer "councillor_contribution_id"
   end
 
-  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", limit: 128, default: "", null: false
     t.string "password_salt", default: "", null: false
@@ -259,14 +259,14 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "vanity_conversions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "vanity_conversions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "vanity_experiment_id"
     t.integer "alternative"
     t.integer "conversions"
     t.index ["vanity_experiment_id", "alternative"], name: "by_experiment_id_and_alternative"
   end
 
-  create_table "vanity_experiments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "vanity_experiments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "experiment_id"
     t.integer "outcome"
     t.datetime "created_at"
@@ -274,7 +274,7 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.index ["experiment_id"], name: "index_vanity_experiments_on_experiment_id"
   end
 
-  create_table "vanity_metric_values", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "vanity_metric_values", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "vanity_metric_id"
     t.integer "index"
     t.integer "value"
@@ -282,13 +282,13 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.index ["vanity_metric_id"], name: "index_vanity_metric_values_on_vanity_metric_id"
   end
 
-  create_table "vanity_metrics", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "vanity_metrics", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "metric_id"
     t.datetime "updated_at"
     t.index ["metric_id"], name: "index_vanity_metrics_on_metric_id"
   end
 
-  create_table "vanity_participants", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "vanity_participants", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "experiment_id"
     t.string "identity"
     t.integer "shown"
