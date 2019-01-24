@@ -5,7 +5,7 @@ class ApiStatistic < ApplicationRecord
 
   # If you're deploying big database changes you can flip this and commit
   # so that API calls aren't blocked by your migration
-  LOGGING_ENABLED = true
+  LOGGING_ENABLED = false
 
   def self.log(request)
     return unless LOGGING_ENABLED
