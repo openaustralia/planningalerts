@@ -13,7 +13,7 @@ class QueueUpAlertsService < ApplicationService
     start_time = Time.zone.now
     count = 0
     delay = time_between_alerts
-    alerts.map(&:id).shuffle.each do |alert_id|
+    alerts.pluck(:id).shuffle.each do |alert_id|
       time = start_time + count * delay
       ProcessAlertJob.set(wait_until: time).perform_later(alert_id)
       count += 1
