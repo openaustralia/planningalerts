@@ -1,5 +1,12 @@
 addons:
   chrome: stable
+  # Using mysql 5.7 to avoid key length problems due to ut8mb4 changes
+  apt:
+    sources:
+      - mysql-5.7-trusty
+    packages:
+      - mysql-server
+      - mysql-client
 language: ruby
 
 before_script:
