@@ -143,8 +143,6 @@ Rails.application.routes.draw do
   get "how_to_lobby_your_local_council" => "static#how_to_lobby_your_local_council"
 
   get "donate" => "static#donate"
-  get "donate/thanks" => "static#donate_thanks"
-  get "donate/cancel" => "static#donate_cancel"
 
   get "/" => "applications#address", as: :address_applications
 
