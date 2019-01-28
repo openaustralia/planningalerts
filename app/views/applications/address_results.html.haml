@@ -18,7 +18,7 @@
   .attention
     %h4 You can help!
     %p Donations allow us to add more local authorities, including yours! Or, if you're a programmer you can help directly by #{link_to "writing a screen scraper", get_involved_path}.
-    = link_to "Donate", donate_path, class: "button button-rounded button-action"
+    = link_to "Donate", new_donation_path, class: "button button-rounded button-action"
 
   %p
     To see an example of what the results would look like once your area is included see #{link_to "Bourke Street in Melbourne", address_applications_path(q: "Bourke St, Melbourne 3000")}.
