@@ -142,8 +142,6 @@ Rails.application.routes.draw do
   get "how_to_write_a_scraper" => "static#how_to_write_a_scraper"
   get "how_to_lobby_your_local_council" => "static#how_to_lobby_your_local_council"
 
-  get "donate" => "static#donate"
-
   get "/" => "applications#address", as: :address_applications
 
   get "layar/getpoi" => "layar#getpoi"
@@ -161,6 +159,7 @@ Rails.application.routes.draw do
   resources :donations, only: %i[new create]
 
   get "donations" => redirect("/donations/new")
+  get "donate" => redirect("/donations/new")
 
   root to: "applications#address"
 
