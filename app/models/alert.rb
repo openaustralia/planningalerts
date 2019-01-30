@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Alert < ApplicationRecord
-  belongs_to :alert_subscriber, optional: true
-
   validates :radius_meters, numericality: { greater_than: 0, message: "isn't selected" }
   validate :validate_address
 
