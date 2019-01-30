@@ -18,9 +18,6 @@
     %meta{ property: "place:location:latitude", content: @application.lat }
     %meta{ property: "place:location:longitude", content: @application.lng }
 
-= render "applications/facebook"
-= render "applications/twitter"
-
 #main
   #application
     %article#application-info
@@ -77,9 +74,7 @@
       - if @nearby_count != 0
         = link_to "Recent nearby applications", nearby_application_url(@application, sort: "time"), class: "button button-rounded"
 
-  #social
-    = render "applications/twitter_share_button", application: @application
-    = render "applications/facebook_share_button", application: @application
+  = render "applications/social_share"
 
 :javascript
   $(document).ready(function(){
