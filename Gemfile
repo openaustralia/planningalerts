@@ -66,6 +66,9 @@ gem "compass-rails"
 gem "sass-rails"
 gem "susy"
 
+# Icons
+gem "foundation-icons-sass-rails"
+
 # Javascript stuff
 gem "jquery-rails"
 gem "jquery-ui-rails"
