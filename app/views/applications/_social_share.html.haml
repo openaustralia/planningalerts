@@ -1,3 +1,23 @@
-#social
-  = render "applications/twitter_share_button", application: @application
-  = render "applications/facebook_share_button", application: @application
+-# #social
+-#   = render "applications/twitter_share_button", application: @application
+-#   = render "applications/facebook_share_button", application: @application
+
+%aside.social-share
+  %h2.social-share-heading.small
+    Share
+
+  %ul.list-inline.small
+    %li
+      = link_to "https://www.facebook.com/sharer/sharer.php?u=#{request.original_url}&t=", title: "Share on Facebook", class: 'share-link share-link-facebook' do
+        %i.fi-social-facebook
+        Facebook
+
+    %li
+      = link_to "https://twitter.com/intent/tweet?url=#{request.original_url}&text=&via=PlanningAlerts", title: "Share on Twitter", class: 'share-link share-link-twitter'  do
+        %i.fi-social-twitter
+        Twitter
+
+= link_to "Facebook",
+  "https://www.facebook.com/sharer/sharer.php?u=#{request.original_url}&t=",
+  title: "Share this planning application on Facebook",
+  class: "button-facebook"
