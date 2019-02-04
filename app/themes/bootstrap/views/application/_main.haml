@@ -1,6 +1,3 @@
-#main-wrapper
-  .container.main
-    #content
-      = render "shared/flashes"
-
-      = yield
+%main{role: "main"}
+  -# = render "shared/flashes"
+  = yield

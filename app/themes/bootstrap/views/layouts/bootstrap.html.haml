@@ -4,22 +4,7 @@
   %body
     .container
       = render "application/header", with_navigation: true, alert_count: @alert_count
-      -# = render "application/main"
-      %main{role: "main"}
-        .jumbotron
-          .col-sm-8.mx-auto
-            %h1 Navbar examples
-            %p
-              This example is a quick exercise to illustrate how the navbar and its contents work. Some navbars extend the width of the viewport, others are confined within a
-              = succeed "." do
-                %code .container
-              %a{href: "/docs/4.2/examples/navbar-static/"} top
-              and
-              %a{href: "/docs/4.2/examples/navbar-fixed/"} fixed top
-              examples.
-            %p At the smallest breakpoint, the collapse plugin is used to hide the links and show a menu button to toggle the collapsed content.
-            %p
-              %a.btn.btn-primary{href: "/docs/4.2/components/navbar/", role: "button"} View navbar docs »
+      = render "application/main"
       -# = render "shared/stats"
       -# = render "shared/donations"
       -# = render "application/footer"
