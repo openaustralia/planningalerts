@@ -1,0 +1,10 @@
+!!! 5
+%html{ lang: "en" }
+  = render "shared/html_head", with_placeholder_polyfill: true, rss: @rss
+  %body
+    = render "application/header", with_navigation: true, alert_count: @alert_count
+    = render "application/main"
+    = render "shared/stats"
+    = render "shared/donations"
+    = render "application/footer"
+    = render "shared/end_matter", with_maps_scripts: true

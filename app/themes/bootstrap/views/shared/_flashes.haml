@@ -1,0 +1,7 @@
+.flash-message
+  - if notice
+    .notice= notice
+  - if alert
+    %p.alert= alert
+  - if flash[:error]
+    %p.error= flash[:error]

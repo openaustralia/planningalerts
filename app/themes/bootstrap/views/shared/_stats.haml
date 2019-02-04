@@ -1,0 +1,26 @@
+#stats-wrapper
+  - cache "stats", expires_in: 1.hour do
+    .stats.container
+      %div
+        %h4 This week
+        %ul
+          %li
+            = link_to applications_path do
+              we collected
+              %span.number= number_with_delimiter(Application.in_past_week.count)
+              new applications
+          %li
+            = link_to new_alert_path do
+              you received
+              %span.number= number_with_delimiter(EmailBatch.total_sent_in_past_week)
+              email alerts
+          %li
+            = link_to new_alert_path do
+              you signed up for
+              %span.number= number_with_delimiter(Alert.active.in_past_week.count)
+              new email alerts
+          %li
+            = link_to comments_path do
+              you made
+              %span.number= number_with_delimiter(Comment.visible.in_past_week.count)
+              new comments
