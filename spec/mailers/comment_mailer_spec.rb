@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe CommentNotifier do
+describe CommentMailer do
   describe "#notify_authority" do
     before :each do
       application = mock_model(Application, authority: create(:contactable_authority), address: "12 Foo Rd", council_reference: "X/001", description: "Building something", id: 123)
@@ -10,7 +10,7 @@ describe CommentNotifier do
     end
 
     context "default theme" do
-      let(:notifier) { CommentNotifier.notify_authority(@comment) }
+      let(:notifier) { CommentMailer.notify_authority(@comment) }
 
       it "should be sent to the planning authority's feedback email address" do
         expect(notifier.to).to eq([@comment.application.authority.email])
@@ -29,11 +29,11 @@ describe CommentNotifier do
       end
 
       it "should have specific information in the body of the email" do
-        expect(notifier.text_part.body.to_s).to eq(Rails.root.join("spec", "mailers", "regression", "comment_notifier", "email1.txt").read)
+        expect(notifier.text_part.body.to_s).to eq(Rails.root.join("spec", "mailers", "regression", "comment_mailer", "email1.txt").read)
       end
 
       it "should format paragraphs correctly in the html version of the email" do
-        expect(notifier.html_part.body.to_s).to include Rails.root.join("spec", "mailers", "regression", "comment_notifier", "email1.html").read
+        expect(notifier.html_part.body.to_s).to include Rails.root.join("spec", "mailers", "regression", "comment_mailer", "email1.html").read
       end
     end
   end
@@ -46,7 +46,7 @@ describe CommentNotifier do
     end
 
     context "default theme" do
-      let(:notifier) { CommentNotifier.notify_councillor(comment) }
+      let(:notifier) { CommentMailer.notify_councillor(comment) }
 
       it { expect(notifier.to).to eql [comment.councillor.email] }
       it { expect(notifier.from).to eql ["replies@planningalerts.org.au"] }
@@ -72,7 +72,7 @@ describe CommentNotifier do
 
     it "sends the comment to the WriteIt API, and stores the created WriteIt message’s id on the comment" do
       VCR.use_cassette("writeit") do
-        CommentNotifier.send_comment_via_writeit!(comment).deliver_now
+        CommentMailer.send_comment_via_writeit!(comment).deliver_now
       end
 
       expect(comment.writeit_message_id).to eq 5665
