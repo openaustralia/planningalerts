@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe ReplyNotifier do
+describe ReplyMailer do
   describe "#notify_comment_author" do
     let(:application) do
       create(:geocoded_application,
@@ -18,7 +18,7 @@ describe ReplyNotifier do
              application: application)
     end
     let(:reply) { create(:reply, comment: comment, councillor: councillor) }
-    let(:notifier) { ReplyNotifier.notify_comment_author(reply) }
+    let(:notifier) { ReplyMailer.notify_comment_author(reply) }
     let(:email_intro_text) { "Local councillor Louise Councillor replied" }
 
     it { expect(notifier.to).to eq ["matthew@openaustralia.org"] }

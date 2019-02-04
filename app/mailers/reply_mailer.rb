@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ReplyNotifier < ActionMailer::Base
+class ReplyMailer < ActionMailer::Base
   include ActionMailerThemer
   helper :comments
 
