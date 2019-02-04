@@ -1,0 +1,73 @@
+!!!
+%html{lang: "en"}
+  -# = render "shared/html_head", with_placeholder_polyfill: true, rss: @rss
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{charset: "utf-8"}/
+    %meta{content: "width=device-width, initial-scale=1, shrink-to-fit=no", name: "viewport"}/
+    %meta{content: "", name: "description"}/
+    %meta{content: "Mark Otto, Jacob Thornton, and Bootstrap contributors", name: "author"}/
+    %meta{content: "Jekyll v3.8.5", name: "generator"}/
+    %title Navbar Template · Bootstrap
+    / Bootstrap core CSS
+    %link{crossorigin: "anonymous", href: "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css", integrity: "sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS", rel: "stylesheet"}/
+    :css
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+  %body
+    -# = render "application/header", with_navigation: true, alert_count: @alert_count
+    -# = render "application/main"
+    -# = render "shared/stats"
+    -# = render "shared/donations"
+    -# = render "application/footer"
+    -# = render "shared/end_matter", with_maps_scripts: true
+    .container
+      %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        %a.navbar-brand{href: "#"} Navbar
+        %button.navbar-toggler{"aria-controls" => "navbarsExample09", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarsExample09", "data-toggle" => "collapse", type: "button"}
+          %span.navbar-toggler-icon
+        #navbarsExample09.collapse.navbar-collapse
+          %ul.navbar-nav.mr-auto
+            %li.nav-item.active
+              %a.nav-link{href: "#"}
+                Home
+                %span.sr-only (current)
+            %li.nav-item
+              %a.nav-link{href: "#"} Link
+            %li.nav-item
+              %a.nav-link.disabled{href: "#"} Disabled
+            %li.nav-item.dropdown
+              %a#dropdown09.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"} Dropdown
+              .dropdown-menu{"aria-labelledby" => "dropdown09"}
+                %a.dropdown-item{href: "#"} Action
+                %a.dropdown-item{href: "#"} Another action
+                %a.dropdown-item{href: "#"} Something else here
+          %form.form-inline.my-2.my-md-0
+            %input.form-control{"aria-label" => "Search", placeholder: "Search", type: "text"}/
+      %main{role: "main"}
+        .jumbotron
+          .col-sm-8.mx-auto
+            %h1 Navbar examples
+            %p
+              This example is a quick exercise to illustrate how the navbar and its contents work. Some navbars extend the width of the viewport, others are confined within a
+              = succeed "." do
+                %code .container
+              %a{href: "/docs/4.2/examples/navbar-static/"} top
+              and
+              %a{href: "/docs/4.2/examples/navbar-fixed/"} fixed top
+              examples.
+            %p At the smallest breakpoint, the collapse plugin is used to hide the links and show a menu button to toggle the collapsed content.
+            %p
+              %a.btn.btn-primary{href: "/docs/4.2/components/navbar/", role: "button"} View navbar docs »
+    %script{crossorigin: "anonymous", integrity: "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo", src: "https://code.jquery.com/jquery-3.3.1.slim.min.js"}
+    :javascript
+      window.jQuery || document.write('<script src="/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')
+    %script{crossorigin: "anonymous", integrity: "sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP", src: "/docs/4.2/dist/js/bootstrap.bundle.min.js"}
