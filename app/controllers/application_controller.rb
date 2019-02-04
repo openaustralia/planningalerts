@@ -4,6 +4,9 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  # TODO: Allow the user to switch themes
+  theme "standard"
+
   use_vanity
   force_ssl if: :ssl_required?
 
