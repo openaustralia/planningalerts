@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CouncillorContributionNotifier < ActionMailer::Base
+class CouncillorContributionMailer < ActionMailer::Base
   def notify(councillor_contribution)
     @councillor_contribution = councillor_contribution
     mail(
