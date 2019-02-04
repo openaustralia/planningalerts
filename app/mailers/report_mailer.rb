@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ReportNotifier < ActionMailer::Base
+class ReportMailer < ActionMailer::Base
   def notify(report)
     @report = report
     @comment = report.comment

@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe ReportNotifier do
+describe ReportMailer do
   before :each do
     @comment = build(:comment,
                      application: build(:application, id: 2),
@@ -16,7 +16,7 @@ describe ReportNotifier do
                     email: "reporter@foo.com",
                     comment: @comment,
                     details: "It's very rude!")
-    @notifier = ReportNotifier.notify(@report)
+    @notifier = ReportMailer.notify(@report)
   end
 
   it "should come from the moderator's email address" do
