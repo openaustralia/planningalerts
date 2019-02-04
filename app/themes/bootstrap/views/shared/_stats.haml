@@ -1,26 +1,37 @@
-#stats-wrapper
-  - cache "stats", expires_in: 1.hour do
-    .stats.container
-      %div
-        %h4 This week
-        %ul
-          %li
+- cache "stats", expires_in: 1.hour do
+  %h4 This week
+
+  .row
+    .col-sm
+      .card
+        .card-header we collected
+        .card-body
+          %p.card-text
             = link_to applications_path do
-              we collected
-              %span.number= number_with_delimiter(Application.in_past_week.count)
+              = number_with_delimiter(Application.in_past_week.count)
               new applications
-          %li
+    .col-sm
+      .card
+        .card-header you received
+        .card-body
+          %p.card-text
             = link_to new_alert_path do
-              you received
-              %span.number= number_with_delimiter(EmailBatch.total_sent_in_past_week)
+              = number_with_delimiter(EmailBatch.total_sent_in_past_week)
               email alerts
-          %li
+    .w-100.d-lg-none
+    .col-sm
+      .card
+        .card-header you signed up for
+        .card-body
+          %p.card-text
             = link_to new_alert_path do
-              you signed up for
-              %span.number= number_with_delimiter(Alert.active.in_past_week.count)
+              = number_with_delimiter(Alert.active.in_past_week.count)
               new email alerts
-          %li
+    .col-sm
+      .card
+        .card-header you made
+        .card-body
+          %p.card-text
             = link_to comments_path do
-              you made
-              %span.number= number_with_delimiter(Comment.visible.in_past_week.count)
+              = number_with_delimiter(Comment.visible.in_past_week.count)
               new comments
