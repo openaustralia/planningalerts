@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class CommentNotifier < ActionMailer::Base
-  include ActionMailerThemer
+class CommentMailer < ActionMailer::Base
+  include EmailFrom
   helper :comments
 
   def notify_authority(comment)

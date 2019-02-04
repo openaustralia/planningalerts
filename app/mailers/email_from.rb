@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ActionMailerThemer
+module EmailFrom
   private
 
   def email_from

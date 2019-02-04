@@ -31,7 +31,7 @@ class CouncillorContributionsController < ApplicationController
     @councillor_contribution.suggested_councillors.build(email: nil, name: nil) if @councillor_contribution.suggested_councillors.empty?
 
     if @councillor_contribution.save
-      CouncillorContributionNotifier.notify(@councillor_contribution).deliver_later
+      CouncillorContributionMailer.notify(@councillor_contribution).deliver_later
     else
       flash.now[:error] = t(".save_problem")
       render :new

@@ -88,7 +88,7 @@ describe BuildAlertService do
       end
 
       it "sends a helpful email to the alert’s email address" do
-        allow(AlertNotifier).to receive(:new_signup_attempt_notice).with(preexisting_alert).and_call_original
+        allow(AlertMailer).to receive(:new_signup_attempt_notice).with(preexisting_alert).and_call_original
 
         BuildAlertService.call(
           email: "jenny@example.com",
@@ -96,7 +96,7 @@ describe BuildAlertService do
           radius_meters: 1000
         )
 
-        expect(AlertNotifier).to have_received(:new_signup_attempt_notice).with(preexisting_alert)
+        expect(AlertMailer).to have_received(:new_signup_attempt_notice).with(preexisting_alert)
       end
 
       context "but it is unsubscribed" do

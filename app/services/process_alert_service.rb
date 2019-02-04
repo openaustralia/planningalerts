@@ -13,7 +13,7 @@ class ProcessAlertService < ApplicationService
     replies = alert.new_replies
 
     if !applications.empty? || !comments.empty? || !replies.empty?
-      AlertNotifier.alert(alert, applications, comments, replies).deliver_now
+      AlertMailer.alert(alert, applications, comments, replies).deliver_now
       alert.last_sent = Time.zone.now
       no_emails = 1
     else

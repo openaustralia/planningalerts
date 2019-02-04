@@ -3,7 +3,7 @@
 require "spec_helper"
 
 # HTML email
-describe "alert_notifier/alert.html.haml" do
+describe "alert_mailer/alert.html.haml" do
   let(:application) do
     create(:geocoded_application,
            description: "Alterations & additions",
@@ -106,7 +106,7 @@ describe "alert_notifier/alert.html.haml" do
 end
 
 # Text only email
-describe "alert_notifier/alert.text.erb" do
+describe "alert_mailer/alert.text.erb" do
   let(:application) do
     create(:geocoded_application,
            description: "Alterations & additions",

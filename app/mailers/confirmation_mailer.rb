@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ConfirmationMailer < ActionMailer::Base
-  include ActionMailerThemer
+  include EmailFrom
   helper :comments
 
   def confirm(object)

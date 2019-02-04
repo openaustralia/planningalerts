@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class ReplyNotifier < ActionMailer::Base
-  include ActionMailerThemer
+class ReplyMailer < ActionMailer::Base
+  include EmailFrom
   helper :comments
 
   def notify_comment_author(reply)
