@@ -2,7 +2,7 @@
 
 # You can preview the mails by browsing to http://localhost:3000/rails/mailers
 
-class AlertNotifierPreview < ActionMailer::Preview
+class AlertMailerPreview < ActionMailer::Preview
   def alert
     # Not using Factory here because it seems to be causing problems
     # with the module reloading
@@ -13,7 +13,7 @@ class AlertNotifierPreview < ActionMailer::Preview
       email: "mary@example.com",
       address: "1 Illawarra Road Marrickville 2204"
     )
-    mail = AlertNotifier.alert(alert, [Application.first])
+    mail = AlertMailer.alert(alert, [Application.first])
     alert.destroy
     mail
   end
