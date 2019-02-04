@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AlertMailer < ActionMailer::Base
-  include ActionMailerThemer
+  include EmailFrom
   helper :application, :applications, :comments
 
   def alert(alert, applications, comments = [], replies = [])
