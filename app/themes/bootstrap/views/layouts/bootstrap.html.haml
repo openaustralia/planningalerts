@@ -11,17 +11,6 @@
     %title Navbar Template · Bootstrap
     / Bootstrap core CSS
     %link{crossorigin: "anonymous", href: "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css", integrity: "sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS", rel: "stylesheet"}/
-    :css
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
   %body
     -# = render "application/header", with_navigation: true, alert_count: @alert_count
     -# = render "application/main"
