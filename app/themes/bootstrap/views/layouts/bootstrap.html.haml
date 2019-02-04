@@ -2,35 +2,9 @@
 %html{lang: "en"}
   = render "shared/html_head", rss: @rss
   %body
-    -# = render "application/header", with_navigation: true, alert_count: @alert_count
-    -# = render "application/main"
-    -# = render "shared/stats"
-    -# = render "shared/donations"
-    -# = render "application/footer"
-    -# = render "shared/end_matter", with_maps_scripts: true
     .container
-      %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-        %a.navbar-brand{href: "#"} Navbar
-        %button.navbar-toggler{"aria-controls" => "navbarsExample09", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarsExample09", "data-toggle" => "collapse", type: "button"}
-          %span.navbar-toggler-icon
-        #navbarsExample09.collapse.navbar-collapse
-          %ul.navbar-nav.mr-auto
-            %li.nav-item.active
-              %a.nav-link{href: "#"}
-                Home
-                %span.sr-only (current)
-            %li.nav-item
-              %a.nav-link{href: "#"} Link
-            %li.nav-item
-              %a.nav-link.disabled{href: "#"} Disabled
-            %li.nav-item.dropdown
-              %a#dropdown09.nav-link.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#"} Dropdown
-              .dropdown-menu{"aria-labelledby" => "dropdown09"}
-                %a.dropdown-item{href: "#"} Action
-                %a.dropdown-item{href: "#"} Another action
-                %a.dropdown-item{href: "#"} Something else here
-          %form.form-inline.my-2.my-md-0
-            %input.form-control{"aria-label" => "Search", placeholder: "Search", type: "text"}/
+      = render "application/header", with_navigation: true, alert_count: @alert_count
+      -# = render "application/main"
       %main{role: "main"}
         .jumbotron
           .col-sm-8.mx-auto
@@ -46,4 +20,8 @@
             %p At the smallest breakpoint, the collapse plugin is used to hide the links and show a menu button to toggle the collapsed content.
             %p
               %a.btn.btn-primary{href: "/docs/4.2/components/navbar/", role: "button"} View navbar docs »
+      -# = render "shared/stats"
+      -# = render "shared/donations"
+      -# = render "application/footer"
+    -# = render "shared/end_matter", with_maps_scripts: true
     %script{crossorigin: "anonymous", integrity: "sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP", src: "/docs/4.2/dist/js/bootstrap.bundle.min.js"}

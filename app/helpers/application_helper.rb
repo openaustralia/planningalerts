@@ -17,6 +17,14 @@ module ApplicationHelper
     content_tag(:li, capture(&block), class: ("selected" if page_matches?(options)))
   end
 
+  def nav_item(url, &block)
+    active = current_page?(url)
+    body = capture(&block)
+    body += content_tag(:span, "(current)", class: "sr-only") if active
+    content_tag(:li, link_to(body, url, class: "nav-link"),
+                class: ["nav-item", ("active" if active)])
+  end
+
   def meters_in_words(meters)
     if meters < 1000
       "#{significant_figure_remove_trailing_zero(meters, 2)} m"
