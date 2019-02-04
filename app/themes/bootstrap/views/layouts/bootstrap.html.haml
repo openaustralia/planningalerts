@@ -1,16 +1,6 @@
 !!!
 %html{lang: "en"}
-  -# = render "shared/html_head", with_placeholder_polyfill: true, rss: @rss
-  %head
-    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{charset: "utf-8"}/
-    %meta{content: "width=device-width, initial-scale=1, shrink-to-fit=no", name: "viewport"}/
-    %meta{content: "", name: "description"}/
-    %meta{content: "Mark Otto, Jacob Thornton, and Bootstrap contributors", name: "author"}/
-    %meta{content: "Jekyll v3.8.5", name: "generator"}/
-    %title Navbar Template · Bootstrap
-    / Bootstrap core CSS
-    %link{crossorigin: "anonymous", href: "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css", integrity: "sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS", rel: "stylesheet"}/
+  = render "shared/html_head", rss: @rss
   %body
     -# = render "application/header", with_navigation: true, alert_count: @alert_count
     -# = render "application/main"
@@ -56,7 +46,4 @@
             %p At the smallest breakpoint, the collapse plugin is used to hide the links and show a menu button to toggle the collapsed content.
             %p
               %a.btn.btn-primary{href: "/docs/4.2/components/navbar/", role: "button"} View navbar docs »
-    %script{crossorigin: "anonymous", integrity: "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo", src: "https://code.jquery.com/jquery-3.3.1.slim.min.js"}
-    :javascript
-      window.jQuery || document.write('<script src="/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')
     %script{crossorigin: "anonymous", integrity: "sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP", src: "/docs/4.2/dist/js/bootstrap.bundle.min.js"}

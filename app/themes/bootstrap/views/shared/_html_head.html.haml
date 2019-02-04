@@ -1,6 +1,8 @@
 %head
-  %meta{ content: "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
-  %meta{ name: "viewport", content: "width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1" }
+  %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %meta{charset: "utf-8"}/
+  %meta{content: "width=device-width, initial-scale=1, shrink-to-fit=no", name: "viewport"}/
+
   - if yield(:meta_description)
     %meta{ name: "Description", content: yield(:meta_description) }
 
@@ -14,27 +16,17 @@
   - if rss
     %link{ rel: "alternate", type: "application/rss+xml", title: "RSS", href: rss }
 
-  = stylesheet_link_tag "application.css", media: "screen"
-  = stylesheet_link_tag "print.css", media: "print"
-  /[if IE]
-    = stylesheet_link_tag "ie.css", media: "screen"
+  -# = stylesheet_link_tag "application.css", media: "screen"
+  -# = stylesheet_link_tag "print.css", media: "print"
 
   -#
     Can't move jquery out of the header because we have inlined javascript in some of the pages
     that use jquery. Ugh.
-  = javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"
-  -# Fallback if CDN fails
-  :javascript
-    if (typeof jQuery == 'undefined') {
-      document.write(unescape('%3Cscript type="text/javascript" src="/assets/jquery-1.8.0.min.js"%3E%3C/script%3E'));
-    }
-
-  -#
-    The placeholder polyfill js needs to be in the header for it to work.
-    Would like to investigate more and understand this better
-  - if with_placeholder_polyfill
-    = stylesheet_link_tag "placeholder_polyfill.min.css"
-    = javascript_include_tag "placeholder_polyfill.jquery.min.combo.js"
+  %script{crossorigin: "anonymous", integrity: "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo", src: "https://code.jquery.com/jquery-3.3.1.slim.min.js"}
+  -# TODO: Add fallback in case of CDN failure
 
   = csrf_meta_tag
   = yield :extra_meta_tags
+
+  -# Bootstrap core CSS
+  %link{crossorigin: "anonymous", href: "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css", integrity: "sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS", rel: "stylesheet"}/
