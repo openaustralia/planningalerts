@@ -26,3 +26,6 @@
       %ul
         %li
           = link_to "openaustraliafoundation.org.au/blog", "https://www.openaustraliafoundation.org.au/blog/"
+
+    - if current_user&.admin?
+      = button_to "Toggle theme (visible only admins)", toggle_theme_path, class: "btn btn-outline-primary"
