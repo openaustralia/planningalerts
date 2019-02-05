@@ -2,28 +2,14 @@
 
 = render "address_search_preamble"
 
--# %form.address-search.formtastic.one-field{ "accept-charset" => "UTF-8", "action" => "/", "method" => "get" }
--#   %fieldset.inputs
--#     %ol
--#       %li.string#q_input{ class: ("error" if @error) }
--#         = label_tag(:q, "Enter a street address")
--#         = text_field_tag(:q, @q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", required: "required", class: "address-autocomplete-input")
--#         - if @error
--#           %p.inline-errors= @error
--#         = link_to "#", class: "inline-hints", id: "geolocate" do
--#           &hellip; or locate me automatically
--#   %fieldset.actions
--#     %ol
--#       %li.submit= submit_tag "Search", name: nil, class: "button button-rounded button-large button-action"
-
 = form_tag root_path, method: :get, enforce_utf8: false do
   .form-group
-    -# TODO: Show errors
     = label_tag(:q, "Enter a street address")
-    -# TODO: Make address autocomplete work
     = text_field_tag(:q, @q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", required: "required", class: "form-control address-autocomplete-input")
-    -# TODO: Make the geolocation work
-    = link_to "#", class: "form-text text-muted" do
+    -# TODO: Show errors
+    -# - if @error
+    -#   %p.inline-errors= @error
+    = link_to "#", class: "form-text text-muted", id: "geolocate" do
       &hellip; or locate me automatically
   %button{type: "submit", class: "btn btn-primary"} Search
 
