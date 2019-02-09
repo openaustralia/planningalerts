@@ -1,3 +1,6 @@
+// This depends on there being a link with the id #geolocate with a
+// .spinner inside of it that is hidden by default in the css
+
 $(function() {
   if (navigator.geolocation) {
     $("#geolocate").css('visibility', 'visible');
@@ -6,7 +9,7 @@ $(function() {
   $("#geolocate").click(function(e){
     var link = $(this);
     e.preventDefault();
-    link.append('<%= image_tag("spinner.gif", size: "16x16") %>');
+    link.find(".spinner").css('visibility', 'visible');
     navigator.geolocation.getCurrentPosition(function(pos) {
       var latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
       geocoder = new google.maps.Geocoder();
@@ -15,12 +18,12 @@ $(function() {
           console.log(results[0].formatted_address);
           location.href = '/?q=' + results[0].formatted_address;
         } else {
-          link.find('img').remove();
+          link.find(".spinner").css('visibility', 'hidden');
           link.html("Address lookup failed: " + status);
         }
       });
     }, function(err) {
-      link.find('img').remove();
+      link.find(".spinner").css('visibility', 'hidden');
       if (err.code == 1) { // User said no
           link.html("You declined; please fill in the box above");
       } else if (err.code == 2) { // No position

@@ -846,6 +846,9 @@ ul.ui-autocomplete {
   font-size: 1em;
   margin-top: 0.5em;
   display: inline-block;
+  .spinner {
+    visibility: hidden;
+  }
 }
 
 #application-info .button {
