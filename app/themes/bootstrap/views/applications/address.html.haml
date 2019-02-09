@@ -11,7 +11,8 @@
     -#   %p.inline-errors= @error
     = link_to "#", class: "form-text text-muted", id: "geolocate" do
       &hellip; or locate me automatically
-      = image_tag("spinner.gif", size: "16x16", class: "spinner")
+      .spinner-border.spinner-border-sm.spinner{ role: "status" }
+        %span.sr-only Locating...
 
   %button{type: "submit", class: "btn btn-primary"} Search
 
