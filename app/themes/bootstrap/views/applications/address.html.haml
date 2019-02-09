@@ -11,6 +11,8 @@
     -#   %p.inline-errors= @error
     = link_to "#", class: "form-text text-muted", id: "geolocate" do
       &hellip; or locate me automatically
+      = image_tag("spinner.gif", size: "16x16", class: "spinner")
+
   %button{type: "submit", class: "btn btn-primary"} Search
 
 -# = render "trending", applications: @trending
