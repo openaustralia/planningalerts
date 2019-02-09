@@ -16,7 +16,7 @@ $(function() {
       geocoder.geocode({'latLng': latlng}, function(results, status){
         if (status == google.maps.GeocoderStatus.OK) {
           console.log(results[0].formatted_address);
-          location.href = '/?q=' + results[0].formatted_address;
+          location.href = '/?q=' + encodeURIComponent(results[0].formatted_address);
         } else {
           link.find(".spinner").css('visibility', 'hidden');
           link.html("Address lookup failed: " + status);
