@@ -58,10 +58,6 @@ module ApplicationHelper
     meters_in_words(value_in_km * 1000)
   end
 
-  def render_twitter_feed(username)
-    render partial: "shared/tweet", collection: TwitterFeed.new(username, logger).items, as: :item
-  end
-
   def contributors
     [
       { name: "Roger Barnes", email_md5: "dd6c985d22e3bf6ea849e8d2e6750d76", github: "mindsocket" },
