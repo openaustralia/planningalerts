@@ -1,37 +1,24 @@
 - cache "stats", expires_in: 1.hour do
-  %h4 This week
+  %section.stats
+    %h4 This week
 
-  .row
-    .col-sm
-      .card
-        .card-header we collected
-        .card-body
-          %p.card-text
-            = link_to applications_path do
-              = number_with_delimiter(Application.in_past_week.count)
-              new applications
-    .col-sm
-      .card
-        .card-header you received
-        .card-body
-          %p.card-text
-            = link_to new_alert_path do
-              = number_with_delimiter(EmailBatch.total_sent_in_past_week)
-              email alerts
-    .w-100.d-lg-none
-    .col-sm
-      .card
-        .card-header you signed up for
-        .card-body
-          %p.card-text
-            = link_to new_alert_path do
-              = number_with_delimiter(Alert.active.in_past_week.count)
-              new email alerts
-    .col-sm
-      .card
-        .card-header you made
-        .card-body
-          %p.card-text
-            = link_to comments_path do
-              = number_with_delimiter(Comment.visible.in_past_week.count)
-              new comments
+    = link_to applications_path do
+      %p
+        we collected
+        = number_with_delimiter(Application.in_past_week.count)
+        new applications
+    = link_to new_alert_path do
+      %p
+        you received
+        = number_with_delimiter(EmailBatch.total_sent_in_past_week)
+        email alerts
+    = link_to new_alert_path do
+      %p
+        you signed up for
+        = number_with_delimiter(Alert.active.in_past_week.count)
+        new email alerts
+    = link_to comments_path do
+      %p
+        you made
+        = number_with_delimiter(Comment.visible.in_past_week.count)
+        new comments
