@@ -2,7 +2,7 @@
 @import "blueprint/reset";
 
 // To configure blueprint, edit the partials/base.sass file.
-@import "partials/base";
+@import "standard/partials/base";
 
 // Import all the default blueprint modules so that we can access their mixins.
 @import "blueprint/typography";
@@ -21,16 +21,16 @@ body {
 @import "bourbon";
 
 // Combine the partials into a single screen stylesheet.
-@import "partials/page";
-@import "partials/form";
-@import "partials/grid";
-@import "partials/comments";
-@import "partials/councillors";
-@import "partials/flash_messages";
-@import "partials/charts";
-@import "partials/donations";
+@import "standard/partials/page";
+@import "standard/partials/form";
+@import "standard/partials/grid";
+@import "standard/partials/comments";
+@import "standard/partials/councillors";
+@import "standard/partials/flash_messages";
+@import "standard/partials/charts";
+@import "standard/partials/donations";
 
-@import "atdis";
+@import "standard/atdis";
 @import "jquery-ui/core";
 @import "jquery-ui/datepicker";
 @import "jquery-ui/theme";
