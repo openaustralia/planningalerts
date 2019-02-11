@@ -123,4 +123,12 @@ module ApplicationHelper
     cleaned.html_safe
     # rubocop:enable Rails/OutputSafety
   end
+
+  def facebook_share_url(params)
+    "https://www.facebook.com/sharer/sharer.php?#{params.to_query}"
+  end
+
+  def twitter_share_url(params)
+    "https://twitter.com/intent/tweet?#{params.to_query}"
+  end
 end

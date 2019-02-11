@@ -8,11 +8,11 @@
 
   %ul
     %li
-      = link_to "https://www.facebook.com/sharer/sharer.php?u=#{request.original_url}&t=", title: "Share on Facebook", class: 'button-action' do
+      = link_to facebook_share_url(u: request.original_url, t: ""), title: "Share on Facebook", class: 'button-action' do
         %i.fi-social-facebook
         Facebook
 
     %li
-      = link_to "https://twitter.com/intent/tweet?url=#{request.original_url}&text=&via=PlanningAlerts", title: "Share on Twitter", class: 'button-action'  do
+      = link_to twitter_share_url(url: request.original_url, text: "", via: "PlanningAlerts"), title: "Share on Twitter", class: 'button-action'  do
         %i.fi-social-twitter
         Twitter
