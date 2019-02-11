@@ -7,3 +7,7 @@
  *= require_self
  *= require_tree .
 */
+
+section, footer {
+  margin-top: 2em;
+}
