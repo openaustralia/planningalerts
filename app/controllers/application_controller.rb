@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
 
   def theme_resolver
     # Only show a different theme if the user is an admin
-    if current_user&.admin? && session[:theme]
+    if session[:theme] && current_user&.admin?
       session[:theme]
     else
       "standard"
