@@ -155,6 +155,7 @@ group :development do
 
   # For a better error page in development
   gem "better_errors"
+  gem "binding_of_caller"
 
   # For deployment
   # TODO: Upgrade to capistrano 3
