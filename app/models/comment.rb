@@ -26,11 +26,11 @@ class Comment < ApplicationRecord
 
   def send_comment!
     if to_councillor? && ENV["WRITEIT_BASE_URL"]
-      CommentNotifier.send_comment_via_writeit!(self).deliver_later
+      CommentMailer.send_comment_via_writeit!(self).deliver_later
     elsif to_councillor?
-      CommentNotifier.notify_councillor(self).deliver_later
+      CommentMailer.notify_councillor(self).deliver_later
     else
-      CommentNotifier.notify_authority(self).deliver_later
+      CommentMailer.notify_authority(self).deliver_later
     end
   end
 

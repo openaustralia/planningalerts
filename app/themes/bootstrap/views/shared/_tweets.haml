@@ -1,0 +1,5 @@
+- cache "tweets", expires_in: 30.minutes do
+  %section.tweets
+    %h4 Tweets from PlanningAlerts
+    = render partial: "shared/tweet", collection: TwitterFeed.new("PlanningAlerts", logger).items, as: :item
+    = link_to "Follow us on @PlanningAlerts", "http://www.twitter.com/PlanningAlerts"

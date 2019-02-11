@@ -124,8 +124,14 @@ RSpec.configure do |config|
   config.include EmailSpec::Matchers
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::ControllerHelpers, type: :view
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.include SessionHelpers, type: :feature
   config.include EnvHelpers
   config.include MockLocationHelpers
   config.include AutocompleteHelpers
+
+  # For view tests point them at the standard theme
+  config.before(:each, type: :view) do
+    controller.prepend_view_path "app/themes/standard/views"
+  end
 end

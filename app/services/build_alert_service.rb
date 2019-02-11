@@ -40,7 +40,7 @@ class BuildAlertService < ApplicationService
   end
 
   def send_notice_to_existing_active_alert_owner
-    AlertNotifier.new_signup_attempt_notice(
+    AlertMailer.new_signup_attempt_notice(
       preexisting_alert
     ).deliver_later
   end

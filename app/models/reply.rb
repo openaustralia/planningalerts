@@ -8,6 +8,6 @@ class Reply < ApplicationRecord
   validates :received_at, presence: true
 
   after_create do
-    ReplyNotifier.notify_comment_author(self).deliver_later
+    ReplyMailer.notify_comment_author(self).deliver_later
   end
 end
