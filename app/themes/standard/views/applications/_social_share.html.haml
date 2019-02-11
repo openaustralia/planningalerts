@@ -1,7 +1,3 @@
--# #social
--#   = render "applications/twitter_share_button", application: @application
--#   = render "applications/facebook_share_button", application: @application
-
 %aside.social-share
   %h4.social-share-heading
     Share
@@ -13,6 +9,6 @@
         Facebook
 
     %li
-      = link_to twitter_share_url(url: request.original_url, text: "", via: "PlanningAlerts"), title: "Share on Twitter", class: 'button-action'  do
+      = link_to twitter_share_url(url: request.original_url, text: "Look at what's planned for #{@application.address}", via: "PlanningAlerts", related: "PlanningAlerts,OpenAustralia"), title: "Share on Twitter", class: 'button-action'  do
         %i.fi-social-twitter
         Twitter
