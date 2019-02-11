@@ -1,0 +1,99 @@
+- content_for :page_title, page_title(@application)
+- content_for :meta_description, @application.description
+- content_for :extra_meta_tags do
+  %meta{ name: "twitter:card", content: "summary" }
+  %meta{ name: "twitter:site", content: "@PlanningAlerts" }
+  %meta{ name: "twitter:title", content: @application.address }
+  %meta{ name: "twitter:description", content: (@application.description[0..199] if @application.description) }
+  %meta{ name: "twitter:image", content: google_static_map_url(@application, size: "512x512") }
+  %meta{ property: "fb:app_id", content: ENV["FACEBOOK_APP_ID"] }
+  %meta{ property: "og:url", content: application_url(@application) }
+  %meta{ property: "og:type", content: "place"}
+  %meta{ property: "og:title", content: @application.address }
+  %meta{ property: "og:description", content: (@application.description[0..199] if @application.description) }
+  %meta{ property: "og:image", content: google_static_map_url(@application, size: "512x512") }
+  %meta{ property: "og:image:width", content: 512 }
+  %meta{ property: "og:image:height", content: 512 }
+  - if @application.location
+    %meta{ property: "place:location:latitude", content: @application.lat }
+    %meta{ property: "place:location:longitude", content: @application.lng }
+
+#main
+  #application
+    %article#application-info
+      %header
+        %h3.address= @application.address
+
+      - if SiteSetting.get(:streetview_in_app_enabled)
+        - if @application.location
+          #map_div{data: {latitude: @application.lat, longitude: @application.lng, address: @application.address}}
+            %noscript= google_static_map(@application, size: "350x330")
+
+        .details
+          - if @application.location
+            #pano{data: {latitude: @application.lat, longitude: @application.lng, address: @application.address}}
+              %noscript= google_static_streetview(@application, size: "350x330")
+      - else
+        -# If just showing the map make it twice as wide
+        - if @application.location
+          #map_div.double{data: {latitude: @application.lat, longitude: @application.lng, address: @application.address}}
+            %noscript= google_static_map(@application, size: "700x330")
+
+
+      %p.description= @application.description
+      = link_to @application.info_url, class: "button button-rounded", target: "_blank" do
+        = image_tag "standard/external_link.png", size: "10x10", alt: "External link"
+        Read more information
+
+      %footer
+        %p.dates= scraped_and_received_text(@application)
+        %p.source (Source: #{link_to @application.authority.full_name, authority_path(@application.authority.short_name_encoded)}, reference #{@application.council_reference})
+
+      = render "comments/comments_area", comments: @comments, application: @application, councillors: @councillors, add_comment: @add_comment, councillor_list_open: @councillor_list_open
+
+#sidebar
+  #alert
+    = semantic_form_for @alert do |f|
+      = render "alerts/signup_introduction"
+      = f.inputs do
+        = f.input :address, label: "Enter a street address", placeholder: "Enter a street address", input_html: { required: "required" }
+        = f.input :email, label: "Enter your email address", placeholder: "Enter your email address", input_html: { required: "required" }
+      = f.actions do
+        = f.action :submit, label: "Create Alert", button_html: { class: "button button-rounded button-action button-large" }
+
+  - if @application.no_alerted || @nearby_count != 0
+    #application-stats
+      - if @application.no_alerted
+        %p.no_alerted
+          - if @application.no_alerted == 1
+            1 person was
+          - else
+            #{@application.no_alerted} people were
+          notified of this application via
+          = link_to "email alerts", new_alert_path
+      - if @nearby_count != 0
+        = link_to "Recent nearby applications", nearby_application_url(@application, sort: "time"), class: "button button-rounded"
+
+  = render "applications/social_share"
+
+:javascript
+  $(document).ready(function(){
+    if ($("#map_div").length) {
+      initialiseMap(
+        "map_div",
+        $("#map_div").data("latitude"),
+        $("#map_div").data("longitude"),
+        $("#map_div").data("address")
+      );
+    }
+    if ($("#pano").length) {
+      initialisePano(
+        "pano",
+        $("#pano").data("latitude"),
+        $("#pano").data("longitude"),
+        $("#pano").data("address")
+      );
+    }
+  })
+
+= javascript_include_tag "maps"

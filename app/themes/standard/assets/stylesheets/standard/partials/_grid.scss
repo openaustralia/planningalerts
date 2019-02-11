@@ -1,0 +1,577 @@
+.container {
+  @include container;
+}
+
+// The things here that are not wrapped in media queries are to make the IE8
+// look almost acceptable
+.container {
+  @include set-container-width;
+}
+
+#menu {
+  @include span-columns(12 omega, 12);
+}
+
+#map_div {
+  @include span-columns(6, 12);
+  height: 330px;
+}
+.map-settings {
+  @include span-columns(6 omega, 12);
+}
+
+#map_div.double {
+  @include span-columns(12 omega, 12);
+}
+
+#main {
+  @include span-columns(9, 12);
+}
+
+#sidebar {
+  @include span-columns(3 omega, 12);
+}
+
+.tweets {
+  margin-top: 3em;
+}
+
+// footer
+.keepintouch {
+  @include span-columns(6, 12);
+}
+.oaf {
+  @include span-columns(6 omega, 12);
+}
+
+@include at-breakpoint(6 30em) {
+
+  .container {
+    @include set-container-width;
+  }
+
+  #menu, #main, #sidebar,
+  .keepintouch, .oaf {
+    @include span-columns(6 omega);
+  }
+
+  #map_div {
+    height: 330px;
+  }
+  #map_div, .map-settings {
+    @include span-columns(6 omega);
+  }
+
+
+  // Hmm mobile-1st-wise, this should work in page.scss
+  // But I was having trouble overriding it, and didn't have patience
+  #menu li {
+    width: 49%;
+    text-align: center;
+  }
+
+}
+
+// Until we get to our largest size
+@include at-breakpoint(1em 60em) {
+
+  ul.ui-autocomplete {
+    text-align: center;
+  }
+  .container {
+    .formtastic#new_comment .actions li {
+      width: 100%;
+      text-align: center;
+    }
+    // Home page search form should be tweaked
+    // Also alert sign up form
+    form.alert, .address-search, form.user {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0;
+      margin-top: 0;
+
+      &.attention {
+        padding: 1em;
+      }
+      label {
+        float: none;
+        font-size: 1.1em;
+        margin-bottom: .5em;
+      }
+      #{nest("li.stringish, li.string", "label, input")}, .inline-hints, label[for="user_remember_me"]  {
+        //li.stringish, li.string, .inline-hints {
+        text-align: center;
+        width: 100%;
+      }
+      #geolocate {
+        display: inline-block;
+      }
+      .inline-hints, label[for="user_remember_me"] {
+        margin-left: 0;
+      }
+      .actions {
+        width: 100%;
+        padding-left: 0;
+
+        .action, .submit {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .stats {
+    li {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+.donations-banner {
+  text-align: center;
+}
+
+@include at-breakpoint(55em) {
+  .donations-banner {
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    h4 {
+      flex: 0 0 100%;
+    }
+
+    .media-body {
+      flex: 0 0 55%;
+      margin-right: 7em;
+    }
+
+    .media-object {
+      margin-top: .75em;
+      margin-right: 0;
+    }
+  }
+}
+
+@include at-breakpoint(30em 12 60em) {
+
+  .container {
+    @include set-container-width;
+  }
+
+  #menu {
+    @include span-columns(12 omega, 12);
+  }
+
+  #map_div {
+    @include span-columns(6, 12);
+    height: 330px;
+  }
+  .map-settings {
+    @include span-columns(6 omega, 12);
+  }
+
+  #application-info #map_div {
+    @include span-columns(12 omega, 12);
+  }
+
+  #main {
+    @include span-columns(9, 12);
+  }
+
+  #sidebar {
+    @include span-columns(3 omega, 12);
+  }
+
+  // news
+  .news {
+    @include span-columns(12 omega, 12);
+  }
+
+  // footer
+  .keepintouch {
+    @include span-columns(6, 12);
+  }
+  .oaf {
+    @include span-columns(6 omega, 12);
+  }
+
+  .oaf {
+    text-align: right;
+  }
+  .stats {
+    li {
+      width: 50%;
+      text-align: center;
+      display: inline-block;
+      float: left;
+      &:last-child {
+        border-bottom: 1px solid white;
+      }
+    }
+  }
+}
+
+#menu ul.hidden {
+  display: none;
+}
+
+// From tablet (mid) upwards
+@include at-breakpoint(30em) {
+  // Move from having a mobile-focused global nav
+  #menu {
+    .toggle {
+      display: none;
+    }
+    ul {
+      display: block !important;
+    }
+    li {
+      margin-right: .2em;
+    }
+    a {
+      padding: .5em;
+      display: inline-block;
+    }
+  }
+  // Several state select buttons. They can fit on 1 line now
+  .list-options li:first-child {
+    display: inline;
+    margin-bottom: 0;
+  }
+  // Blockquotes (only on how to lobby) can be different
+  body blockquote {
+    border: none;
+    border-left: 3px solid lighten($warm-highlight, 40%);
+    padding-left: 2em;
+    font-size: 1.1em;
+  }
+}
+
+@include at-breakpoint(60em 24) {
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+    @include set-container-width($total-columns, static);
+  }
+
+  #menu {
+    @include span-columns(24 omega, 24);
+  }
+
+  #header {
+    h1 {
+      font-size: 2.5em;
+    }
+    h2 {
+      font-size: 1em;
+    }
+  }
+
+  // Header's plane banner can be presented fancily
+  // We're animating this... :)
+  @keyframes gettowed {
+    from {
+      transform-origin: 0%;
+      transform: rotate(-0.5deg);
+    }
+    to {
+      transform-origin: 0%;
+      transform: rotate(0.5deg);
+    }
+  }
+  #statsbanner {
+    padding-left: 73px;
+    background: image_url("standard/plane.png") no-repeat 0 8px;
+    position: absolute;
+    top: 2em;
+    right: 1em;
+    transform: rotate(-1deg);
+  }
+  #stats {
+    background-color: #fff;
+    background-color: rgba(255,255,255,0.9);
+    animation: gettowed 3s ease-in-out infinite alternate;
+    @include border-radius(2px);
+    display: block;
+    padding: .35em .5em;
+    font-size: 0.9em;
+  }
+
+  // Navigation can be a bit larger
+  #menu {
+    font-size: 1em;
+
+    a {
+      padding: .5em .75em;
+    }
+  }
+
+  .main, .stats {
+    width: 61.3em;
+  }
+  .main {
+    border-bottom: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  #content, .stats > div, .donations-banner {
+    padding-left: $grid-padding;
+    padding-right: $grid-padding;
+  }
+
+  #main, #sidebar {
+    display: inline-block;
+    float: left;
+  }
+  #main {
+    width: 70%;
+    margin-right: 2%;
+  }
+
+  #content {
+    @include clearfix;
+  }
+
+  .news {
+    li {
+      width: 50%;
+      display: inline-block;
+      float: left;
+
+      // Clear left introduces rows
+      // Border stuff makes lines between the rows, but no line on the top or bottom of the grid
+      &:nth-child(odd) {
+        clear: left;
+        border-top: 1px solid $lightest-cool-highlight;
+        border-bottom: none;
+
+        a {
+          padding-right: .75em;
+        }
+      }
+      &:first-child {
+        border-top: none;
+      }
+    }
+  }
+
+  #pano {
+    height: 330px;
+  }
+
+  #map_div, .details {
+    @include span-columns(8, 24, false, $from-direction, static);
+  }
+  #map_div {
+    height: 330px;
+  }
+  .map-settings {
+    @include span-columns(15 omega, 24);
+  }
+  #application-info footer {
+    clear: left;
+  }
+
+  #sidebar {
+    width: 28%;
+  }
+
+  #stats-wrapper {
+    background-color: $lightest-cool-highlight;
+  }
+
+  .trending {
+    li {
+      padding: 0;
+      @include span-columns(12);
+      &:nth-child(2n) { @include omega; }
+    }
+  }
+
+  .tweets, .stats {
+    > div {
+      padding-bottom: 1em;
+    }
+    li {
+      border-bottom: none;
+      padding: 0;
+      display: inline-block;
+      float: left;
+
+      a {
+        border-right: 1px solid #fff;
+        padding-right: .75em;
+      }
+    }
+    .cta {
+      clear: both;
+    }
+  }
+
+  .stats {
+    background: transparent;
+    border-top: none;
+    border-bottom: none;
+    padding: 0;
+
+    > div {
+      border-top: 1px solid darken($lightest-cool-highlight, 5%);
+      padding-top: 1em;
+    }
+
+    ul {
+      @include clearfix;
+    }
+
+    li {
+      width: 25%;
+      text-align: center;
+
+      &:last-child a {
+        padding-left: .75em;
+        padding-right: 0;
+        border-right: none;
+      }
+    }
+
+  }
+
+  .tweets {
+    margin-top: 5em;
+
+    li {
+      width: 50%;
+
+      a {
+        min-height: 72px;
+      }
+
+      &:nth-child(2n+2) a {
+        padding-left: .75em;
+        padding-right: 0;
+        border-right: none;
+      }
+    }
+  }
+
+  #footer {
+    padding: 1.5em .7em 1.5em .7em;
+    .keepintouch {
+      @include span-columns(12,24);
+    }
+    .oaf {
+      @include span-columns(12 omega, 24);
+      text-align: right;
+    }
+  }
+}
+
+.donations-intro {
+  box-sizing: border-box;
+
+  @include at-breakpoint(40em) {
+    margin: 0 auto;
+    width: 88%;
+  }
+
+  @include at-breakpoint(50em) {
+    @include span-columns(8, 12);
+    margin: 0;
+    padding-right: 1em;
+  }
+}
+
+.donations-payment-form {
+  box-sizing: border-box;
+
+  @include at-breakpoint(50em) {
+    @include span-columns(4 omega, 12);
+  }
+}
+
+.donations-this-week {
+  ul {
+    @include at-breakpoint(50em) {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  li {
+    @include at-breakpoint(50em) {
+      width: 30%;
+    }
+  }
+}
+
+.councillor-contribution-form-contributor,
+.councillor-contribution-form-source {
+  @include at-breakpoint(55em) {
+    margin: 0 auto;
+    width: 66%;
+  }
+}
+
+.councillor-contribution-form-councillor-input {
+  @include at-breakpoint(55em) {
+    display: grid;
+    grid-template-columns: 66% 30%;
+    grid-column-gap: 2em; // fallback for Safari, doesn't currently support % here.
+    grid-column-gap: 4%;
+    align-content: start;
+    justify-content: start;
+  }
+
+  .councillor-contribution-intro,
+  .councillor-contribution-councillors {
+    grid-column-start: 1;
+  }
+  .councillor-contribution-councillors {
+    grid-row-start: 2;
+  }
+  .councillor-contribution-actions {
+    grid-column-start: 2;
+    grid-row-start: 2;
+    align-self: start;
+  }
+}
+
+.contributor-input-wrapper,
+.suggested-councillor-input-wrapper {
+  @include at-breakpoint(30em) {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  input {
+    box-sizing: border-box;
+  }
+}
+
+.contributor-input-group,
+.suggested-councillor-input-group {
+  @include at-breakpoint(30em) {
+    width: 50%;
+    box-sizing: border-box;
+    padding-right: 1em;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  & + & {
+    @include at-breakpoint(30em) {
+      padding-right: 0;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+- content_for :meta_description, Rails.application.config.planningalerts_meta_description
+
+= render "address_search_preamble"
+
+%form.address-search.formtastic.one-field{ "accept-charset" => "UTF-8", "action" => "/", "method" => "get" }
+  %fieldset.inputs
+    %ol
+      %li.string#q_input{ class: ("error" if @error) }
+        = label_tag(:q, "Enter a street address")
+        = text_field_tag(:q, @q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", required: "required", class: "address-autocomplete-input")
+        - if @error
+          %p.inline-errors= @error
+        = link_to "#", class: "inline-hints", id: "geolocate" do
+          &hellip; or locate me automatically
+          = image_tag("standard/spinner.gif", size: "16x16", class: "spinner")
+
+  %fieldset.actions
+    %ol
+      %li.submit= submit_tag "Search", name: nil, class: "button button-rounded button-large button-action"
+
+= render "trending", applications: @trending
+= render "shared/tweets"

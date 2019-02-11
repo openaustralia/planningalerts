@@ -110,6 +110,10 @@ gem "oj"
 # Helps with defining attributes and type casting in form objects
 gem "virtus"
 
+# For theming (so we can run our proper theme at the same time as an
+# experimental bootstrap based theme)
+gem "themes_on_rails"
+
 group :test do
   gem "capybara"
   gem "chromedriver-helper"

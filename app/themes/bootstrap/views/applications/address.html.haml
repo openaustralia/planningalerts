@@ -1,0 +1,20 @@
+- content_for :meta_description, Rails.application.config.planningalerts_meta_description
+
+= render "address_search_preamble"
+
+= form_tag root_path, method: :get, enforce_utf8: false do
+  .form-group
+    = label_tag(:q, "Enter a street address")
+    .input-group
+      = text_field_tag(:q, @q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", required: "required", class: ["form-control", "address-autocomplete-input", ("is-invalid" if @error)])
+      - if @error
+        .invalid-feedback= @error
+    = link_to "#", class: "form-text text-muted", id: "geolocate" do
+      &hellip; or locate me automatically
+      .spinner-border.spinner-border-sm.spinner{ role: "status" }
+        %span.sr-only Locating...
+
+  %button{type: "submit", class: "btn btn-primary"} Search
+
+= render "trending", applications: @trending
+= render "shared/tweets"

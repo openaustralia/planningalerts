@@ -4,6 +4,8 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  theme :theme_resolver
+
   use_vanity
   force_ssl if: :ssl_required?
 
@@ -22,6 +24,15 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def theme_resolver
+    # Only show a different theme if the user is an admin
+    if current_user&.admin? && session[:theme]
+      session[:theme]
+    else
+      "standard"
+    end
+  end
 
   def set_header_variable
     @alert_count = Stat.applications_sent

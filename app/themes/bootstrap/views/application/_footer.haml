@@ -1,0 +1,30 @@
+%footer
+  .row
+    .col
+      %h5 Email us at
+      %ul.list-unstyled
+        %li= mail_to "contact@planningalerts.org.au"
+      %h5 Chat with us on Twitter
+      %ul.list-unstyled
+        %li= link_to "@PlanningAlerts", "http://twitter.com/planningalerts"
+        %li= link_to "@OpenAustralia", "http://twitter.com/openaustralia"
+      %h5 Source code
+      %ul.list-unstyled
+        %li= link_to "github.com/openaustralia/planningalerts", "https://github.com/openaustralia/planningalerts"
+    .col
+      %h4
+        An
+        %a{ href: "http://openaustraliafoundation.org.au", title: "The OpenAustralia Foundation" } OpenAustralia Foundation
+        Project
+      %h5 Other wonderful projects from us
+      %ul.list-unstyled
+        %li= link_to "They Vote For You", "https://theyvoteforyou.org.au/"
+        %li= link_to "Right To Know", "https://www.righttoknow.org.au/"
+        %li= link_to "OpenAustralia.org", "https://www.openaustralia.org.au/"
+        %li= link_to "Election Leaflets", "http://www.electionleaflets.org.au/"
+      %h5 Read our blog
+      %ul.list-unstyled
+        %li
+          = link_to "openaustraliafoundation.org.au/blog", "https://www.openaustraliafoundation.org.au/blog/"
+  - if current_user&.admin?
+    = button_to "Toggle theme (visible only admins)", toggle_theme_path, class: "btn btn-outline-primary"

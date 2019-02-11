@@ -1,0 +1,39 @@
+// This import applies a global reset to any page that imports this stylesheet.
+@import "blueprint/reset";
+
+// To configure blueprint, edit the partials/base.sass file.
+@import "standard/partials/base";
+
+// Import all the default blueprint modules so that we can access their mixins.
+@import "blueprint/typography";
+@import "blueprint/utilities";
+@import "blueprint/interaction";
+
+// If you are doing a lot of stylesheet concatenation, it is suggested
+// that you scope your blueprint styles, so that you can better control
+// what pages use blueprint when stylesheets are concatenated together.
+body {
+  @include blueprint-typography(true);
+  @include blueprint-utilities;
+  @include blueprint-interaction;
+}
+
+@import "bourbon";
+
+// Combine the partials into a single screen stylesheet.
+@import "standard/partials/page";
+@import "standard/partials/form";
+@import "standard/partials/grid";
+@import "standard/partials/comments";
+@import "standard/partials/councillors";
+@import "standard/partials/flash_messages";
+@import "standard/partials/charts";
+@import "standard/partials/donations";
+
+@import "standard/atdis";
+@import "jquery-ui/core";
+@import "jquery-ui/datepicker";
+@import "jquery-ui/theme";
+
+@import "jquery-ui/autocomplete";
+@import "jquery-ui/menu";

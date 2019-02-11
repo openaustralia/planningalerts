@@ -1,0 +1,33 @@
+%head
+  %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %meta{charset: "utf-8"}/
+  %meta{content: "width=device-width, initial-scale=1, shrink-to-fit=no", name: "viewport"}/
+
+  - if yield(:meta_description)
+    %meta{ name: "Description", content: yield(:meta_description) }
+
+  %title
+    - if yield(:page_title) != ""
+      = yield(:page_title)
+    - else
+      Email alerts of planning applications near you
+    | PlanningAlerts
+
+  - if rss
+    %link{ rel: "alternate", type: "application/rss+xml", title: "RSS", href: rss }
+
+  -# = stylesheet_link_tag "application.css", media: "screen"
+  -# = stylesheet_link_tag "print.css", media: "print"
+  = stylesheet_link_tag "bootstrap/all"
+
+  -#
+    Can't move jquery out of the header because we have inlined javascript in some of the pages
+    that use jquery. Ugh.
+  %script{crossorigin: "anonymous", integrity: "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo", src: "https://code.jquery.com/jquery-3.3.1.slim.min.js"}
+  -# TODO: Add fallback in case of CDN failure
+
+  = csrf_meta_tag
+  = yield :extra_meta_tags
+
+  -# Bootstrap core CSS
+  %link{crossorigin: "anonymous", href: "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css", integrity: "sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS", rel: "stylesheet"}/

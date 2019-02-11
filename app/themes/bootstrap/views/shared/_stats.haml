@@ -1,0 +1,24 @@
+- cache "stats", expires_in: 1.hour do
+  %section.stats
+    %h4 This week
+
+    = link_to applications_path do
+      %p
+        we collected
+        = number_with_delimiter(Application.in_past_week.count)
+        new applications
+    = link_to new_alert_path do
+      %p
+        you received
+        = number_with_delimiter(EmailBatch.total_sent_in_past_week)
+        email alerts
+    = link_to new_alert_path do
+      %p
+        you signed up for
+        = number_with_delimiter(Alert.active.in_past_week.count)
+        new email alerts
+    = link_to comments_path do
+      %p
+        you made
+        = number_with_delimiter(Comment.visible.in_past_week.count)
+        new comments

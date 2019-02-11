@@ -1,0 +1,34 @@
+%header
+  %h1
+    = link_to ENV["EMAIL_FROM_NAME"], root_path
+    %small.text-muted Email alerts of planning applications near you
+  %p
+    = number_to_human(alert_count).downcase
+    applications sent across Australia
+  - if with_navigation
+    = link_to "Skip navigation", "#content", class: "sr-only sr-only-focusable"
+    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      -# %a.navbar-brand{href: "#"} Navbar
+      %button.navbar-toggler{"aria-controls" => "navbarsExample09", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarsExample09", "data-toggle" => "collapse", type: "button"}
+        %span.navbar-toggler-icon
+      #navbarsExample09.collapse.navbar-collapse
+        %ul.navbar-nav.mr-auto
+          = nav_item address_applications_path do
+            Search
+          = nav_item new_alert_path do
+            Sign Up
+          = nav_item faq_path do
+            %abbr{ title: "Frequently asked questions" } FAQ
+          = nav_item authorities_path do
+            Coverage
+          = nav_item get_involved_path do
+            Get Involved
+          = nav_item api_howto_path do
+            Get the Data
+          = nav_item about_path do
+            About
+          = nav_item new_donation_path do
+            Back PlanningAlerts
+          - if current_user&.admin?
+            = nav_item admin_root_path do
+              Admin
