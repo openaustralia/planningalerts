@@ -1,0 +1,28 @@
+- content_for :page_title, @description
+
+%h3= @description
+
+.jumbotron
+  = render "alerts/signup_form", alert: @alert,
+                                 with_intro: true,
+                                 address_hidden: false
+
+%section.applications
+  - if @authority&.broken?
+    - if @authority.latest_application_date.nil?
+      %p
+        %mark There are no applications yet for this authority
+    - else
+      %p
+        %mark
+          It looks like something might be wrong. The latest application was received
+          = time_ago_in_words(@authority.latest_application_date)
+          ago.
+      = link_to "Why?", faq_path(anchor: "broken_scraper")
+
+  = paginated_section @applications, previous_label: "« Newer", next_label: "Older »" do
+    = render partial: "application", collection: @applications
+
+- if current_user && @authority
+  -# TODO: If people are logged out, should we show them a link to get an API key?
+  = link_to "Get applications as JSON", authority_applications_json_url_for_current_user(@authority)
