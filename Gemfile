@@ -104,6 +104,7 @@ gem "atdis"
 gem "nokogiri"
 
 # For making forms a little easier
+gem "bootstrap_form", ">= 4.1.0"
 gem "formtastic"
 
 # Speed up json parsing
