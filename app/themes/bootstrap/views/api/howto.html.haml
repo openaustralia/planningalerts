@@ -1,0 +1,165 @@
+- content_for :page_title, "Get the Data — API"
+
+%h3= yield :page_title
+
+%p
+  Planning application data is available programmatically as feeds which can
+  be used in most web mapping APIs and desktop GIS software like #{link_to "Yahoo Pipes", "http://pipes.yahoo.com/"}. Details of the API are listed below.
+
+%p
+  Non&ndash;commercial, low&ndash;volume use of this service is free.
+  = link_to "Read more.", anchor: "hLicenseInfo"
+%p
+  All the API calls listed below return planning application sorted by the date they were scraped from the planning authority website with the most
+  recent listed first.
+%p
+  The API can return different formats including <a href="http://www.georss.org/">GeoRSS</a>, <a href="http://www.json.org/">JSON</a> and <a href="http://en.wikipedia.org/wiki/JSONP">JSONP</a>. The examples below return
+  JSON. To get GeoRSS instead simply replace ".js" in the URL with ".rss". To get JSONP add the query parameter "callback".
+
+.alert.alert-info{role: "alert"}
+  %p
+    - if current_user
+      The API examples below contain your API key:
+      = current_user.api_key
+    - else
+      To use the API you will need an API key which you get automatically when you
+      = link_to "register for an account", new_user_registration_path
+      or
+      = link_to "sign in", new_user_session_path
+      to your existing account. (Note that this is different
+      than having signed up for an email alert). Once you've done that, return to this page
+      and the API examples below will contain your API key.
+
+  - if current_user
+    %p
+      = link_to "Logout", destroy_user_session_path, class: "button button-rounded"
+  - else
+    %p
+      = link_to "Register for an account", new_user_registration_path, class: "button button-rounded"
+      or
+      = link_to "Sign in", new_user_session_path, class: "button button-rounded"
+
+%h4 API documentation
+%article
+  %h5
+    Single Location by address
+  %p
+    Return applications near a given street address. The area included is a circle with a radius of the given size (in metres)
+    with the address at its center. Suggested sizes are 400, 800 or 4000 metres.
+  %pre
+    %code= raw api_example_address_url_html("js", api_key)
+  - if current_user
+    = link_to "Example", api_example_address_url("js", api_key), class: "btn btn-outline-primary"
+
+%article
+  %h5
+    Single Location by longitude/latitude
+  %p
+    Return applications near a given longitude/latitude. The area included is a circle with a radius of the given size (in metres)
+    with the longitude/latitude at its center. Suggested sizes are 400, 800 or 4000 metres.
+  %pre
+    %code= raw api_example_latlong_url_html("js", api_key)
+  - if current_user
+    = link_to "Example", api_example_latlong_url("js", api_key), class: "btn btn-outline-primary"
+
+%article
+  %h5
+    Area by longitude/latitude
+  %p
+    Return applications within a rectangle defined by longitude/latitude.
+  %pre
+    %code= raw api_example_area_url_html("js", api_key)
+  - if current_user
+    = link_to "Example", api_example_area_url("js", api_key), class: "btn btn-outline-primary"
+
+%article
+  %h5
+    Planning authority
+  %p
+    Return applications for a specific planning authority (e.g. a local council) by authority short name. To discover the authority short name
+    to use here, find the planning authority on the
+    = link_to "list of authorities", authorities_path
+    and follow the link. The url has the authority short name in it.
+  %pre
+    %code= raw api_example_authority_url_html("js", api_key)
+  - if current_user
+    = link_to "Example", api_example_authority_url("js", api_key), class: "btn btn-outline-primary"
+
+%article
+  %h5
+    Postcode
+  %p
+    Return applications for a specific postcode area
+  %pre
+    %code= raw api_example_postcode_url_html("js", api_key)
+  - if current_user
+    = link_to "Example", api_example_postcode_url("js", api_key), class: "btn btn-outline-primary"
+
+%article
+  %h5
+    Suburb
+  %p
+    Return applications in a suburb. Including &ldquo;state&rdquo; in the search is optional.
+  %pre
+    %code= raw api_example_suburb_and_state_url_html("js", api_key)
+  - if current_user
+    = link_to "Example", api_example_suburb_and_state_url("js", api_key), class: "btn btn-outline-primary"
+
+%hr
+%h4 Extra query parameters
+%p
+  There are several parameters that can be applied to each of the above queries for extra usefulness.
+
+%article
+  %h5 page
+  %p
+    API calls return a maximum of #{Application.per_page} results. To retrieve more results simply do another request with page
+    set to 2, 3, etc&hellip; Not setting the page parameter is the same as requesting page 1.
+  %pre
+    %code= raw api_example_postcode_url("js", api_key, 2780, page: 2)
+
+%article
+  %h5 count
+  %p
+    API calls by default return a maximum of #{Application.per_page} results. To return less than that per page simply set the count parameter to the maximum number you want to return.
+  %pre
+    %code= raw api_example_postcode_url("js", api_key, 2780, count: 10)
+
+%article
+  %h5 style
+  %p
+    For georss, by setting &ldquo;style&rdquo; to &ldquo;html&rdquo; it will return an html formatted description in the georss feed rather than the default plain text. This is especially useful when a georss feed is embedded in a map as in some of the examples above.
+  %pre
+    %code= raw api_example_postcode_url("rss", api_key, 2780, style: "html")
+
+%article
+  %h5 callback
+  %p
+    To return JSONP, set &ldquo;callback&rdquo; to the name of your javascript callback function.
+  %pre
+    %code= raw api_example_postcode_url("js", api_key, 2780, callback: "my_callback")
+
+%hr
+%h4#hLicenseInfo
+  Usage &amp; License
+%p
+  Data is licensed under the&nbsp;
+  %a{ href: "http://creativecommons.org/licenses/by-sa/3.0/" }> Creative Commons Attribution&ndash;Share Alike 3.0 license
+  \.
+%p
+  Low volume,
+  %strong non&ndash;commercial
+  use of the API service is free. We ask that personal and non&ndash;profit use of this service attribute the OpenAustralia Foundation on your website or application.
+
+%p
+  Please
+  = mail_to "contact@planningalerts.org.au", "contact us"
+  for
+  %strong commercial
+  use. Commercial users may include Real Estate Agencies, Architects, Planners or Builders.
+
+%p
+  Also, please #{mail_to "contact@planningalerts.org.au", "get in touch"} if you intend to use the service on a large scale. In order to maintain quality of service for our API users, this service is rate limited by default to approximately 1000 requests per day.
+
+%p
+  We offer a range of paid options, from rate&ndash;limited to unlimited use of this service.
