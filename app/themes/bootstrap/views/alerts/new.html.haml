@@ -1,0 +1,12 @@
+- content_for :page_title, "Sign Up"
+
+- content_for :meta_description, Rails.application.config.planningalerts_meta_description
+
+= render "signup_form", alert: @alert,
+                        with_intro: false,
+                        address_hidden: false
+
+%p You will receive email only when there are new applications nearby and no more than once per day.
+
+= render "privacy_policy"
+= render "coverage_explanation"
