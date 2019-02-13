@@ -235,4 +235,18 @@ describe ApplicationsHelper do
       end
     end
   end
+
+  describe "#distance_in_words" do
+    it "should show a distance in metres" do
+      expect(helper.distance_in_words(50)).to eq "50m"
+    end
+
+    it "should round small distances to the nearest metre" do
+      expect(helper.distance_in_words(53.632)).to eq "54m"
+    end
+
+    it "should round distances in km to the nearest 100m" do
+      expect(helper.distance_in_words(1432.2)).to eq "1.4km"
+    end
+  end
 end

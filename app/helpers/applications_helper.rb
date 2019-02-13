@@ -126,6 +126,14 @@ module ApplicationsHelper
     image_tag(google_static_streetview_url(application, size: size, fov: fov, key: key), size: size, alt: "Streetview of #{application.address}")
   end
 
+  def distance_in_words(distance)
+    if distance >= 1000
+      "#{(distance / 1000).round(1)}km"
+    else
+      "#{distance.round}m"
+    end
+  end
+
   private
 
   def google_signed_url(domain:, path:, query:, key: "GOOGLE_MAPS_API_KEY")
