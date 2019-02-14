@@ -29,4 +29,3 @@ Discover our other projects: https://www.openaustraliafoundation.org.au/projects
 To change the size of the area you’re interested in: https://dev.planningalerts.org.au/alerts/abcdef/area
 
 To unsubscribe from alerts for this address: https://dev.planningalerts.org.au/alerts/abcdef/unsubscribe
-
