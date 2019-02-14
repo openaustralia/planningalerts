@@ -147,6 +147,12 @@ module ApplicationsHelper
     (value + 0.5).floor
   end
 
+  def distance_and_heading_in_words(from, to)
+    meters_in_words(from.distance_to(to)) +
+      " " +
+      heading_in_words(from.heading_to(to))
+  end
+
   private
 
   def google_signed_url(domain:, path:, query:, key: "GOOGLE_MAPS_API_KEY")
