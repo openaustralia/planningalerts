@@ -126,16 +126,6 @@ module ApplicationsHelper
     image_tag(google_static_streetview_url(application, size: size, fov: fov, key: key), size: size, alt: "Streetview of #{application.address}")
   end
 
-  # Given a distance in metres returns some words describing the distance
-  # in human terms
-  def distance_in_words(distance)
-    if distance >= 1000
-      "#{(distance / 1000).round(1)}km"
-    else
-      "#{distance.round}m"
-    end
-  end
-
   HEADING_SECTOR_NAMES = %w[N NE E SE S SW W NW].freeze
 
   def heading_in_words(degrees)
