@@ -3,6 +3,9 @@
     %tr
       %td.address{ colspan: "2" }
         = link_to application.address, application_url_with_tracking(id: application.id)
+    %tr
+      %td{ colspan: "2" }
+        = distance_and_heading_in_words(alert.location, application.location)
     - if application.location
       %tr
         - if SiteSetting.get(:streetview_in_emails_enabled)

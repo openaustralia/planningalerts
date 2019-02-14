@@ -126,6 +126,33 @@ module ApplicationsHelper
     image_tag(google_static_streetview_url(application, size: size, fov: fov, key: key), size: size, alt: "Streetview of #{application.address}")
   end
 
+  HEADING_SECTOR_NAMES = %w[N NE E SE S SW W NW].freeze
+
+  def heading_in_words(degrees)
+    # Dividing the compass into 8 sectors that are centred on north
+    sector = non_symmetric_round(degrees * 8 / 360.0).modulo(8)
+    HEADING_SECTOR_NAMES[sector]
+  end
+
+  # This rounds up for both and positive and negative numbers
+  # You can do this natively in ruby 2.4 or 2.5 I think but
+  # we don't have they yet on PlanningAlerts
+  # -1.5 => -1
+  # -1.0 => -1
+  # -0.5 => 0
+  #  0   => 0
+  #  0.5 => 1
+  #  1.0 => 1
+  def non_symmetric_round(value)
+    (value + 0.5).floor
+  end
+
+  def distance_and_heading_in_words(from, to)
+    meters_in_words(from.distance_to(to)) +
+      " " +
+      heading_in_words(from.heading_to(to))
+  end
+
   private
 
   def google_signed_url(domain:, path:, query:, key: "GOOGLE_MAPS_API_KEY")

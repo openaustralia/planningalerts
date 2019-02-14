@@ -15,6 +15,12 @@ class Location
     loc1.distance_to(loc2, units: :kms) * 1000.0
   end
 
+  def heading_to(loc)
+    loc1 = Geokit::LatLng.new(lat, lng)
+    loc2 = Geokit::LatLng.new(loc.lat, loc.lng)
+    loc1.heading_to(loc2)
+  end
+
   # Distance given is in metres
   def endpoint(bearing, distance)
     loc = Geokit::LatLng.new(lat, lng)

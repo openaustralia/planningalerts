@@ -49,7 +49,7 @@ describe AlertMailer do
     end
 
     it "should nicely format (in text) a list of multiple planning applications" do
-      expect(email.text_part.body.to_s).to eq Rails.root.join("spec", "mailers", "regression", "alert_mailer", "email3.txt").read.gsub("\n", "\r\n")
+      expect(email.text_part.body.to_s.strip).to eq Rails.root.join("spec", "mailers", "regression", "alert_mailer", "email3.txt").read.gsub("\n", "\r\n").strip
     end
 
     it "should nicely format (in HTML) a list of multiple planning applications" do
@@ -65,7 +65,7 @@ describe AlertMailer do
     end
 
     it "should nicely format (in text) a list of multiple planning applications" do
-      expect(email.text_part.body.to_s).to eq Rails.root.join("spec", "mailers", "regression", "alert_mailer", "email2.txt").read.gsub("\n", "\r\n")
+      expect(email.text_part.body.to_s.strip).to eq Rails.root.join("spec", "mailers", "regression", "alert_mailer", "email2.txt").read.gsub("\n", "\r\n").strip
     end
 
     it "should nicely format (in HTML) a list of multiple planning applications" do
@@ -108,7 +108,7 @@ describe AlertMailer do
 
       context "Text email" do
         it "should nicely format a list of multiple planning applications" do
-          expect(@email.text_part.body.to_s).to eq Rails.root.join("spec", "mailers", "regression", "alert_mailer", "email1.txt").read.gsub("\n", "\r\n")
+          expect(@email.text_part.body.to_s.strip).to eq Rails.root.join("spec", "mailers", "regression", "alert_mailer", "email1.txt").read.gsub("\n", "\r\n").strip
         end
       end
 
