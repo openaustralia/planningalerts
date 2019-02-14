@@ -13,7 +13,11 @@ class AlertMailerPreview < ActionMailer::Preview
       email: "mary@example.com",
       address: "1 Illawarra Road Marrickville 2204"
     )
-    mail = AlertMailer.alert(alert, [Application.first])
+    # This needs to have an application and a comment loaded for this to work
+    applications = [Application.first]
+    comments = [Comment.first]
+    replies = []
+    mail = AlertMailer.alert(alert, applications, comments, replies)
     alert.destroy
     mail
   end
