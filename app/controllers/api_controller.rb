@@ -81,7 +81,12 @@ class ApiController < ApplicationController
   # other API calls because the paging is done differently (via scrape time rather than page number)
   def all
     # TODO: Check that params page and v aren't being used
-    LogApiCallService.call(request: request)
+    LogApiCallService.call(
+      api_key: request.query_parameters["key"],
+      ip_address: request.remote_ip,
+      query: request.fullpath,
+      user_agent: request.headers["User-Agent"]
+    )
     apps = Application.reorder("id")
     apps = apps.where("id > ?", params["since_id"]) if params["since_id"]
 
@@ -198,7 +203,12 @@ class ApiController < ApplicationController
     @applications = apps.paginate(page: params[:page], per_page: per_page)
     @description = description
 
-    LogApiCallService.call(request: request)
+    LogApiCallService.call(
+      api_key: request.query_parameters["key"],
+      ip_address: request.remote_ip,
+      query: request.fullpath,
+      user_agent: request.headers["User-Agent"]
+    )
     respond_to do |format|
       # TODO: Move the template over to using an xml builder
       format.rss do

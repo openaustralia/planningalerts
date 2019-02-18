@@ -5,11 +5,11 @@ class LogApiCallService < ApplicationService
   # so that API calls aren't blocked by your migration
   LOGGING_ENABLED = true
 
-  def initialize(request:)
-    @api_key = request.query_parameters["key"]
-    @ip_address = request.remote_ip
-    @query = request.fullpath
-    @user_agent = request.headers["User-Agent"]
+  def initialize(api_key:, ip_address:, query:, user_agent:)
+    @api_key = api_key
+    @ip_address = ip_address
+    @query = query
+    @user_agent = user_agent
   end
 
   def call
