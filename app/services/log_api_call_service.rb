@@ -6,18 +6,21 @@ class LogApiCallService < ApplicationService
   LOGGING_ENABLED = true
 
   def initialize(request:)
-    @request = request
+    @api_key = request.query_parameters["key"]
+    @ip_address = request.remote_ip
+    @query = request.fullpath
+    @user_agent = request.headers["User-Agent"]
   end
 
   def call
     return unless LOGGING_ENABLED
 
     # Lookup the api key if there is one
-    user = User.find_by(api_key: request.query_parameters["key"]) if request.query_parameters["key"].present?
-    ApiStatistic.create!(ip_address: request.remote_ip, query: request.fullpath, user_agent: request.headers["User-Agent"], query_time: Time.zone.now, user: user)
+    user = User.find_by(api_key: api_key) if api_key.present?
+    ApiStatistic.create!(ip_address: ip_address, query: query, user_agent: user_agent, query_time: Time.zone.now, user: user)
   end
 
   private
 
-  attr_reader :request
+  attr_reader :api_key, :ip_address, :query, :user_agent
 end
