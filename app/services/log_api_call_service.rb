@@ -17,6 +17,10 @@ class LogApiCallService < ApplicationService
 
     # Lookup the api key if there is one
     user = User.find_by(api_key: api_key) if api_key.present?
+    # TODO: This is not idempotent in its current form. So, if either of the
+    # below fails we could end up with multiple records
+    # TODO: Also log whether this user is a commercial user
+    log_to_elasticsearch(user)
     log_to_mysql(user)
   end
 
@@ -26,5 +30,26 @@ class LogApiCallService < ApplicationService
 
   def log_to_mysql(user)
     ApiStatistic.create!(ip_address: ip_address, query: query, user_agent: user_agent, query_time: Time.zone.now, user: user)
+  end
+
+  def log_to_elasticsearch(user)
+    ElasticSearchClient&.index(
+      index: "pa-api-#{Rails.env}",
+      type: "api",
+      body: {
+        ip_address: ip_address,
+        query: query,
+        user_agent: user_agent,
+        query_time: Time.zone.now,
+        user: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          organisation: user.organisation,
+          bulk_api: user.bulk_api,
+          api_disabled: user.api_disabled
+        }
+      }
+    )
   end
 end

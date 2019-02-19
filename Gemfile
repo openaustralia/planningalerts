@@ -118,6 +118,10 @@ gem "virtus"
 # experimental bootstrap based theme)
 gem "themes_on_rails"
 
+# For logging API calls to elasticsearch
+gem "elasticsearch"
+gem "typhoeus"
+
 group :test do
   gem "capybara"
   gem "chromedriver-helper"
