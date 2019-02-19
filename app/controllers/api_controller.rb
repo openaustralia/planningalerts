@@ -81,7 +81,7 @@ class ApiController < ApplicationController
   # other API calls because the paging is done differently (via scrape time rather than page number)
   def all
     # TODO: Check that params page and v aren't being used
-    LogApiCallService.call(
+    LogApiCallJob.perform_later(
       api_key: request.query_parameters["key"],
       ip_address: request.remote_ip,
       query: request.fullpath,
@@ -203,7 +203,7 @@ class ApiController < ApplicationController
     @applications = apps.paginate(page: params[:page], per_page: per_page)
     @description = description
 
-    LogApiCallService.call(
+    LogApiCallJob.perform_later(
       api_key: request.query_parameters["key"],
       ip_address: request.remote_ip,
       query: request.fullpath,

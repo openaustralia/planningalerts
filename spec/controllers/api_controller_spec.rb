@@ -209,7 +209,9 @@ describe ApiController do
         end
 
         it "should log the api call" do
-          get :point, params: { key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000 }
+          Sidekiq::Testing.inline! do
+            get :point, params: { key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000 }
+          end
           a = ApiStatistic.first
           expect(a.ip_address).to eq("0.0.0.0")
           expect(a.query).to eq("/applications.rss?address=24+Bruce+Road+Glenbrook&key=#{CGI.escape(user.api_key)}&radius=4000")
