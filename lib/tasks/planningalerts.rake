@@ -60,9 +60,4 @@ namespace :planningalerts do
       end
     end
   end
-
-  def confirm_question(message)
-    STDOUT.puts "#{message} (y/n)"
-    STDIN.gets.strip == "y"
-  end
 end
