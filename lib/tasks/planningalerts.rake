@@ -31,6 +31,54 @@ namespace :planningalerts do
     end
   end
 
+  desc "Migrate api_statistics table from mysql to elasticsearch"
+  task migrate_api_statistics: :environment do
+    # This is the id of the first record that was also captured live
+    # in elasticsearch. So, we only need to go up to that id
+    CUTOFF_ID = 95554272
+    result = ElasticSearchClient&.search(
+      size: 0,
+      index: "pa-api-#{ENV['STAGE']}",
+      body: {
+        aggregations: { max_id: { max: { field: "id" } } }
+      }
+    )
+    max_id = result["aggregations"]["max_id"]["value"].to_i
+    api_statistics = ApiStatistic.where("id > ?", max_id).where("id < ?", CUTOFF_ID)
+    puts "#{api_statistics.count} records in mysql still to migrate"
+    # TODO: Change batch size to something sensible
+    api_statistics.find_in_batches(batch_size: 3) do |batch|
+      updates = batch.map do |a|
+        {
+          index: {
+            _index: "pa-api-#{ENV['STAGE']}",
+            _type: "api",
+            _id: a.id,
+            data: {
+              id: a.id,
+              ip_address: a.ip_address,
+              query: a.query,
+              user_agent: a.user_agent,
+              query_time: a.query_time,
+              user: {
+                id: a.user.id,
+                email: a.user.email,
+                name: a.user.name,
+                organisation: a.user.organisation,
+                bulk_api: a.user.bulk_api,
+                api_disabled: a.user.api_disabled
+              }
+            }
+          }
+        }
+      end
+      ElasticSearchClient&.bulk body: updates
+      # Only do a single batch for the time being
+      # TODO: Do all batches
+      exit
+    end
+  end
+
   desc "Generate XML sitemap"
   task sitemap: :environment do
     GenerateSitemapService.call
