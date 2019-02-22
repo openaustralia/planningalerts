@@ -216,6 +216,7 @@ class ApiController < ApplicationController
                format: :rss, layout: false, content_type: Mime[:xml]
       end
       format.js do
+        # TODO: Document use of v parameter
         s = if params[:v] == "2"
               { application_count: @applications.count, page_count: @applications.total_pages, applications: @applications }
             else
