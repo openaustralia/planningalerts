@@ -61,12 +61,12 @@ namespace :planningalerts do
               user_agent: a.user_agent,
               query_time: a.query_time,
               user: {
-                id: a.user.id,
-                email: a.user.email,
-                name: a.user.name,
-                organisation: a.user.organisation,
-                bulk_api: a.user.bulk_api,
-                api_disabled: a.user.api_disabled
+                id: a.user&.id,
+                email: a.user&.email,
+                name: a.user&.name,
+                organisation: a.user&.organisation,
+                bulk_api: a.user&.bulk_api,
+                api_disabled: a.user&.api_disabled
               }
             }
           }
