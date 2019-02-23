@@ -653,6 +653,7 @@ DEPENDENCIES
   rspec-activemodel-mocks
   rspec-rails (~> 3)
   rubocop (= 0.58.0)
+  ruby-progressbar
   sanitize
   sass-rails
   selenium-webdriver

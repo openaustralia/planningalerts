@@ -120,6 +120,7 @@ gem "themes_on_rails"
 
 # For logging API calls to elasticsearch
 gem "elasticsearch"
+gem "ruby-progressbar"
 gem "typhoeus"
 
 group :test do

@@ -46,6 +46,7 @@ namespace :planningalerts do
     max_id = result["aggregations"]["max_id"]["value"].to_i
     api_statistics = ApiStatistic.where("id > ?", max_id).where("id < ?", CUTOFF_ID)
     puts "#{api_statistics.count} records in mysql still to migrate"
+    progressbar = ProgressBar.create(total: api_statistics.count, format: "%b %c/%C %E")
     # TODO: Change batch size to something sensible
     api_statistics.find_in_batches(batch_size: 3) do |batch|
       updates = batch.map do |a|
@@ -73,9 +74,7 @@ namespace :planningalerts do
         }
       end
       ElasticSearchClient&.bulk body: updates
-      # Only do a single batch for the time being
-      # TODO: Do all batches
-      exit
+      progressbar.progress += batch.size
     end
   end
 
