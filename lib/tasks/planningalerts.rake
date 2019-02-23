@@ -45,7 +45,6 @@ namespace :planningalerts do
     )
     max_id = result["aggregations"]["max_id"]["value"].to_i
     api_statistics = ApiStatistic.where("id > ?", max_id).where("id < ?", CUTOFF_ID)
-    puts "#{api_statistics.count} records in mysql still to migrate"
     progressbar = ProgressBar.create(total: api_statistics.count, format: "%b %c/%C %E")
     # TODO: Change batch size to something sensible
     api_statistics.find_in_batches(batch_size: 1000) do |batch|
