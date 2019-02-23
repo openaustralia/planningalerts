@@ -48,7 +48,7 @@ namespace :planningalerts do
     puts "#{api_statistics.count} records in mysql still to migrate"
     progressbar = ProgressBar.create(total: api_statistics.count, format: "%b %c/%C %E")
     # TODO: Change batch size to something sensible
-    api_statistics.find_in_batches(batch_size: 3) do |batch|
+    api_statistics.find_in_batches(batch_size: 1000) do |batch|
       updates = batch.map do |a|
         {
           index: {
