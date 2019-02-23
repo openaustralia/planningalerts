@@ -53,7 +53,6 @@ namespace :planningalerts do
           index: {
             _index: "pa-api-#{ENV['STAGE']}",
             _type: "api",
-            _id: a.id,
             data: {
               mysql_id: a.id,
               ip_address: a.ip_address,
