@@ -40,7 +40,7 @@ namespace :planningalerts do
       size: 0,
       index: "pa-api-#{ENV['STAGE']}",
       body: {
-        aggregations: { max_id: { max: { field: "id" } } }
+        aggregations: { max_id: { max: { field: "mysql_id" } } }
       }
     )
     max_id = result["aggregations"]["max_id"]["value"].to_i
@@ -55,7 +55,7 @@ namespace :planningalerts do
             _type: "api",
             _id: a.id,
             data: {
-              id: a.id,
+              mysql_id: a.id,
               ip_address: a.ip_address,
               query: a.query,
               user_agent: a.user_agent,
