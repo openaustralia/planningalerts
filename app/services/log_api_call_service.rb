@@ -33,14 +33,15 @@ class LogApiCallService < ApplicationService
   end
 
   def log_to_elasticsearch(user)
+    time = Time.zone.now
     ElasticSearchClient&.index(
-      index: elasticsearch_index,
+      index: elasticsearch_index(time),
       type: "api",
       body: {
         ip_address: ip_address,
         query: query,
         user_agent: user_agent,
-        query_time: Time.zone.now,
+        query_time: time,
         user: {
           id: user.id,
           email: user.email,
@@ -53,7 +54,9 @@ class LogApiCallService < ApplicationService
     )
   end
 
-  def elasticsearch_index
-    "pa-api-#{ENV['STAGE']}"
+  def elasticsearch_index(time)
+    # Put all data for a particular month (in UTC) in its own index
+    time_as_text = time.utc.strftime("%Y.%m")
+    "pa-api-#{ENV['STAGE']}-#{time_as_text}"
   end
 end
