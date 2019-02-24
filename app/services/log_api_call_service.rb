@@ -33,6 +33,7 @@ class LogApiCallService < ApplicationService
   end
 
   def log_to_elasticsearch(user)
+    # Note that the time will be stored in the local timezone
     time = Time.zone.now
     ElasticSearchClient&.index(
       index: elasticsearch_index(time),
@@ -55,8 +56,9 @@ class LogApiCallService < ApplicationService
   end
 
   def elasticsearch_index(time)
-    # Put all data for a particular month (in UTC) in its own index
-    time_as_text = time.utc.strftime("%Y.%m")
+    # Note that we're keeping the time in the local time zone so it
+    # matches up with the value in query_time
+    time_as_text = time.strftime("%Y.%m")
     "pa-api-#{ENV['STAGE']}-#{time_as_text}"
   end
 end
