@@ -34,7 +34,7 @@ class LogApiCallService < ApplicationService
 
   def log_to_elasticsearch(user)
     ElasticSearchClient&.index(
-      index: "pa-api-#{ENV['STAGE']}",
+      index: elasticsearch_index,
       type: "api",
       body: {
         ip_address: ip_address,
@@ -51,5 +51,9 @@ class LogApiCallService < ApplicationService
         }
       }
     )
+  end
+
+  def elasticsearch_index
+    "pa-api-#{ENV['STAGE']}"
   end
 end
