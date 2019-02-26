@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_22_225629) do
+ActiveRecord::Schema.define(version: 2019_02_26_222520) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -43,16 +43,6 @@ ActiveRecord::Schema.define(version: 2019_01_22_225629) do
     t.integer "alert_subscriber_id"
     t.index ["alert_subscriber_id"], name: "index_alerts_on_alert_subscriber_id"
     t.index ["email"], name: "index_alerts_on_email"
-  end
-
-  create_table "api_statistics", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.string "ip_address"
-    t.datetime "query_time"
-    t.text "query"
-    t.text "user_agent"
-    t.integer "user_id"
-    t.index ["query_time"], name: "index_api_statistics_on_query_time"
-    t.index ["user_id"], name: "index_api_statistics_on_user_id"
   end
 
   create_table "application_redirects", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
