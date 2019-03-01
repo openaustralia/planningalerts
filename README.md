@@ -38,6 +38,7 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
  * Install MySql - On macOS download dmg from [http://dev.mysql.com/downloads/](http://dev.mysql.com/downloads/)
  * Install PhantomJS for headless browser testing with Poltergeist - follow
    [instructions in the Poltergeist Readme](https://github.com/teampoltergeist/poltergeist#installing-phantomjs).
+ * [Install Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup.html) - On macOS `brew install elasticsearch; brew services start elasticsearch`
 
 **Checkout The Project**
  * Fork the project on Github
