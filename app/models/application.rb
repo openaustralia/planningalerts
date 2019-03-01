@@ -3,8 +3,9 @@
 require "open-uri"
 
 class Application < ApplicationRecord
-  # TODO: Make indexing happen in the background
-  searchkick highlight: [:description], index_name: "pa_applications_#{ENV['STAGE']}"
+  searchkick highlight: [:description],
+             index_name: "pa_applications_#{ENV['STAGE']}",
+             callbacks: :async
 
   belongs_to :authority
   has_many :comments, dependent: :destroy
