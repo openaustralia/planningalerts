@@ -261,6 +261,7 @@ GEM
       actionpack (>= 4.1)
       activesupport (>= 4.1)
     hashdiff (0.3.8)
+    hashie (3.6.0)
     highline (2.0.0)
     honeybadger (4.1.0)
     htmlentities (4.3.4)
@@ -275,7 +276,7 @@ GEM
     http_parser.rb (0.6.0)
     httparty (0.16.2)
       multi_xml (>= 0.5.2)
-    i18n (1.5.2)
+    i18n (1.5.3)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     inherited_resources (1.9.0)
@@ -485,6 +486,10 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    searchkick (3.1.2)
+      activemodel (>= 4.2)
+      elasticsearch (>= 5)
+      hashie
     selenium-webdriver (3.141.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2, >= 1.2.2)
@@ -656,6 +661,7 @@ DEPENDENCIES
   ruby-progressbar
   sanitize
   sass-rails
+  searchkick
   selenium-webdriver
   sidekiq
   simplecov
