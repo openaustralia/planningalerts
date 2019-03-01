@@ -92,7 +92,6 @@ gem "recaptcha", require: "recaptcha/rails"
 
 # Site search
 gem "searchkick"
-gem "thinking-sphinx"
 
 # Reporting exceptions
 gem "honeybadger"
