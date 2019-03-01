@@ -5,11 +5,12 @@ class LogApiCallService < ApplicationService
   # so that API calls aren't blocked by your migration
   LOGGING_ENABLED = true
 
-  def initialize(api_key:, ip_address:, query:, user_agent:)
+  def initialize(api_key:, ip_address:, query:, user_agent:, time:)
     @api_key = api_key
     @ip_address = ip_address
     @query = query
     @user_agent = user_agent
+    @time = time
   end
 
   def call
@@ -23,10 +24,9 @@ class LogApiCallService < ApplicationService
 
   private
 
-  attr_reader :api_key, :ip_address, :query, :user_agent
+  attr_reader :api_key, :ip_address, :query, :user_agent, :time
 
   def log_to_elasticsearch(user)
-    time = Time.zone.now
     ElasticSearchClient&.index(
       index: elasticsearch_index(time),
       type: "api",

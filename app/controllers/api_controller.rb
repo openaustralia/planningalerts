@@ -85,7 +85,8 @@ class ApiController < ApplicationController
       api_key: request.query_parameters["key"],
       ip_address: request.remote_ip,
       query: request.fullpath,
-      user_agent: request.headers["User-Agent"]
+      user_agent: request.headers["User-Agent"],
+      time_as_float: Time.zone.now.to_f
     )
     apps = Application.reorder("id")
     apps = apps.where("id > ?", params["since_id"]) if params["since_id"]
@@ -207,7 +208,8 @@ class ApiController < ApplicationController
       api_key: request.query_parameters["key"],
       ip_address: request.remote_ip,
       query: request.fullpath,
-      user_agent: request.headers["User-Agent"]
+      user_agent: request.headers["User-Agent"],
+      time_as_float: Time.zone.now.to_f
     )
     respond_to do |format|
       # TODO: Move the template over to using an xml builder
