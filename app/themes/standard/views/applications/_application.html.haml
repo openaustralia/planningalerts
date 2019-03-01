@@ -10,4 +10,8 @@
         - else
           #{time_ago_in_words(application.date_scraped)} ago
       %p.description
-        = application.respond_to?(:excerpts) && application.excerpts ? application.excerpts.description.html_safe : application.description
+        -# Local variable highlights is optional. Only use it if it is there
+        - if local_assigns.has_key? :highlights
+          = local_assigns[:highlights][:description].html_safe
+        - else
+          = application.description

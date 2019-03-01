@@ -3,6 +3,11 @@
 require "open-uri"
 
 class Application < ApplicationRecord
+  searchkick highlight: [:description],
+             index_name: "pa_applications_#{ENV['STAGE']}",
+             locations: [:location],
+             callbacks: :async
+
   belongs_to :authority
   has_many :comments, dependent: :destroy
   has_many :replies, through: :comments
@@ -31,6 +36,10 @@ class Application < ApplicationRecord
       ) AS visible_comments_count_actual
     SQL
   end)
+
+  def search_data
+    attributes.merge(location: { lat: lat, lon: lng })
+  end
 
   # Includes fallback to slow version
   def visible_comments_count

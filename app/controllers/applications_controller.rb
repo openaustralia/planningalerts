@@ -98,8 +98,7 @@ class ApplicationsController < ApplicationController
 
     @q = params[:q]
     if @q
-      @applications = Application.search @q, order: "date_scraped DESC", page: params[:page], per_page: per_page
-      @applications.context[:panes] << ThinkingSphinx::Panes::ExcerptsPane
+      @applications = Application.search(@q, fields: [:description], order: { date_scraped: :desc }, highlight: { tag: "<span class=\"highlight\">" }, page: params[:page], per_page: per_page)
       @rss = search_applications_path(format: "rss", q: @q, page: nil)
     end
     @description = @q ? "Search: #{@q}" : "Search"

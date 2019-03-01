@@ -91,7 +91,7 @@ gem "writeit-rails", git: "https://github.com/ciudadanointeligente/writeit-rails
 gem "recaptcha", require: "recaptcha/rails"
 
 # Site search
-gem "thinking-sphinx"
+gem "searchkick"
 
 # Reporting exceptions
 gem "honeybadger"

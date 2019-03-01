@@ -36,9 +36,9 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 **Install Dependencies**
  * Install MySql - On macOS download dmg from [http://dev.mysql.com/downloads/](http://dev.mysql.com/downloads/)
- * Install Sphinx - On macOS `brew install sphinx`
  * Install PhantomJS for headless browser testing with Poltergeist - follow
    [instructions in the Poltergeist Readme](https://github.com/teampoltergeist/poltergeist#installing-phantomjs).
+ * [Install Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup.html) - On macOS `brew install elasticsearch; brew services start elasticsearch`
 
 **Checkout The Project**
  * Fork the project on Github
@@ -53,7 +53,6 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
  * Update the config/database.yml with your root mysql credentials
  * If you are on OSX change the socket to /tmp/mysql.sock
  * Set up the databases - `bundle exec rake db:setup`
- * Generate Thinking Sphinx configuration - `bundle exec rake ts:configure`
 
 **Run The Tests**
  * Run the test suite - `bundle exec rake`

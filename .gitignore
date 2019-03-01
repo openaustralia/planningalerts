@@ -10,11 +10,7 @@ tmp/binlog
 tmp/rspec_guard_result
 tmp/capybara
 coverage
-log/searchd.development.pid
-log/development.sphinx.pid
 config/database.yml
-config/development.sphinx.conf
-db/sphinx/development/*
 rerun.txt
 public/about.html
 public/api/*.html
