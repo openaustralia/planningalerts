@@ -7,7 +7,9 @@
 - if @applications
   - if @applications.any?
     = paginated_section @applications, previous_label: "« Newer", next_label: "Older »" do
-      %ol.applications= render @applications
+      %ol.applications
+        - @applications.with_highlights.each do |application, highlights|
+          = render application, highlights: highlights
   - else
     %br
     %p.attention Sorry, no results found!

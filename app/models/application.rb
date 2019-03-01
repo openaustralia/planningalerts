@@ -3,6 +3,11 @@
 require "open-uri"
 
 class Application < ApplicationRecord
+  # TODO: Make indexing happen in the background
+  # TODO: Add "pa-" prefix to elasticsearch indexes
+  # TODO: Use "stage" in index name rather than "environment"
+  searchkick highlight: [:description]
+
   belongs_to :authority
   has_many :comments, dependent: :destroy
   has_many :replies, through: :comments
