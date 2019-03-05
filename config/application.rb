@@ -2,7 +2,7 @@ require_relative 'boot'
 
 require 'rails/all'
 require "rack/throttle"
-require File.dirname(__FILE__) + "/../lib/api_throttler"
+require File.dirname(__FILE__) + "/../lib/throttle_daily_by_api_user"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -37,10 +37,9 @@ module PlanningalertsApp
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # We are using some rack middleware to throttle people that make too many API requests
-    config.middleware.use ApiThrottler,
+    config.middleware.use ThrottleDailyByApiUser,
+                          max: 1000,
                           cache: Dalli::Client.new,
-                          strategies: YAML.load_file("#{config.root}/config/throttling.yml"),
                           key_prefix: :throttle,
                           message: "Rate Limit Exceeded. See http://www.planningalerts.org.au/api/howto#hLicenseInfo for more information"
 
