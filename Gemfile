@@ -163,6 +163,9 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
 
+  # To profile code in development
+  gem "rack-mini-profiler"
+
   # For deployment
   # TODO: Upgrade to capistrano 3
   gem "capistrano", "~> 2"

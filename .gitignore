@@ -9,6 +9,7 @@ tmp/sass-cache
 tmp/binlog
 tmp/rspec_guard_result
 tmp/capybara
+tmp/miniprofiler
 coverage
 config/database.yml
 rerun.txt

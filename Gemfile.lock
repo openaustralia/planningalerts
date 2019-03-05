@@ -368,6 +368,8 @@ GEM
     rack (2.0.6)
     rack-livereload (0.3.17)
       rack
+    rack-mini-profiler (1.0.2)
+      rack (>= 1.2.0)
     rack-protection (2.0.5)
       rack
     rack-test (1.1.0)
@@ -631,6 +633,7 @@ DEPENDENCIES
   oj
   rabl
   rack-livereload
+  rack-mini-profiler
   rack-throttle
   rails (= 5.2.2)
   rails-controller-testing
