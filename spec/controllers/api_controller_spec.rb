@@ -96,9 +96,11 @@ describe ApiController do
 
     it "should find recent applications for a postcode" do
       result = double
-      scope = double
-      expect(Application).to receive(:where).with(postcode: "2780").and_return(scope)
-      expect(scope).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
+      scope1 = double
+      scope2 = double
+      expect(Application).to receive(:where).with(postcode: "2780").and_return(scope1)
+      expect(scope1).to receive(:includes).and_return(scope2)
+      expect(scope2).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
       get :postcode, params: { key: user.api_key, format: "rss", postcode: "2780" }
       expect(assigns[:applications]).to eq(result)
       expect(assigns[:description]).to eq("Recent applications in postcode 2780")
@@ -107,7 +109,7 @@ describe ApiController do
     it "should support jsonp" do
       authority = create(:authority, full_name: "Acme Local Planning Authority")
       result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
-      allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
+      allow(Application).to receive_message_chain(:where, :includes, :paginate).and_return([result])
       get :postcode, params: { key: user.api_key, format: "js", postcode: "2780", callback: "foobar" }, xhr: true
       expect(response.body[0..10]).to eq("/**/foobar(")
       expect(response.body[-1..-1]).to eq(")")
@@ -140,7 +142,7 @@ describe ApiController do
       application = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
       result = [application]
       allow(result).to receive(:total_pages).and_return(5)
-      allow(Application).to receive_message_chain(:where, :paginate).and_return(result)
+      allow(Application).to receive_message_chain(:where, :includes, :paginate).and_return(result)
       get :postcode, params: { key: user.api_key, format: "js", v: "2", postcode: "2780" }
       expect(JSON.parse(response.body)).to eq(
         "application_count" => 1,
@@ -192,7 +194,7 @@ describe ApiController do
 
           expect(GoogleGeocodeService).to receive(:call).with("24 Bruce Road Glenbrook").and_return(location_result)
           expect(location_result).to receive(:top).and_return(location)
-          allow(Application).to receive_message_chain(:near, :paginate).and_return(@result)
+          allow(Application).to receive_message_chain(:near, :includes, :paginate).and_return(@result)
         end
 
         it "should find recent applications near the address" do
@@ -221,7 +223,7 @@ describe ApiController do
 
         it "should use a search radius of 2000 when none is specified" do
           result = double
-          allow(Application).to receive_message_chain(:near, :paginate).and_return(result)
+          allow(Application).to receive_message_chain(:near, :includes, :paginate).and_return(result)
 
           get :point, params: { key: user.api_key, address: "24 Bruce Road Glenbrook", format: "rss" }
           expect(assigns[:applications]).to eq(result)
@@ -249,7 +251,7 @@ describe ApiController do
       before :each do
         @result = double
 
-        allow(Application).to receive_message_chain(:near, :paginate).and_return(@result)
+        allow(Application).to receive_message_chain(:near, :includes, :paginate).and_return(@result)
       end
 
       it "should find recent applications near the point" do
@@ -277,9 +279,11 @@ describe ApiController do
 
     it "should find recent applications in an area" do
       result = double
-      scope = double
-      expect(Application).to receive(:where).with("lat > ? AND lng > ? AND lat < ? AND lng < ?", 1.0, 2.0, 3.0, 4.0).and_return(scope)
-      expect(scope).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
+      scope1 = double
+      scope2 = double
+      expect(Application).to receive(:where).with("lat > ? AND lng > ? AND lat < ? AND lng < ?", 1.0, 2.0, 3.0, 4.0).and_return(scope1)
+      expect(scope1).to receive(:includes).and_return(scope2)
+      expect(scope2).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
 
       get :area, params: {
         key: user.api_key,
@@ -303,11 +307,13 @@ describe ApiController do
     it "should find recent applications for an authority" do
       authority = double
       result = double
-      scope = double
+      scope1 = double
+      scope2 = double
 
       expect(Authority).to receive(:find_short_name_encoded).with("blue_mountains").and_return(authority)
-      expect(authority).to receive(:applications).and_return(scope)
-      expect(scope).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
+      expect(authority).to receive(:applications).and_return(scope1)
+      expect(scope1).to receive(:includes).and_return(scope2)
+      expect(scope2).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
       expect(authority).to receive(:full_name_and_state).and_return("Blue Mountains City Council")
 
       get :authority, params: { key: user.api_key, format: "rss", authority_id: "blue_mountains" }
@@ -324,9 +330,11 @@ describe ApiController do
 
     it "should find recent applications for a suburb" do
       result = double
-      scope = double
-      expect(Application).to receive(:where).with(suburb: "Katoomba").and_return(scope)
-      expect(scope).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
+      scope1 = double
+      scope2 = double
+      expect(Application).to receive(:where).with(suburb: "Katoomba").and_return(scope1)
+      expect(scope1).to receive(:includes).and_return(scope2)
+      expect(scope2).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
       get :suburb, params: { key: user.api_key, format: "rss", suburb: "Katoomba" }
       expect(assigns[:applications]).to eq(result)
       expect(assigns[:description]).to eq("Recent applications in Katoomba")
@@ -337,9 +345,11 @@ describe ApiController do
         result = double
         scope1 = double
         scope2 = double
+        scope3 = double
         expect(Application).to receive(:where).with(suburb: "Katoomba").and_return(scope1)
         expect(scope1).to receive(:where).with(state: "NSW").and_return(scope2)
-        expect(scope2).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
+        expect(scope2).to receive(:includes).and_return(scope3)
+        expect(scope3).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
         get :suburb, params: { key: user.api_key, format: "rss", suburb: "Katoomba", state: "NSW" }
         expect(assigns[:applications]).to eq(result)
         expect(assigns[:description]).to eq("Recent applications in Katoomba, NSW")

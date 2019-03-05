@@ -201,7 +201,7 @@ class ApiController < ApplicationController
   end
 
   def api_render(apps, description)
-    @applications = apps.paginate(page: params[:page], per_page: per_page)
+    @applications = apps.includes(:authority).paginate(page: params[:page], per_page: per_page)
     @description = description
 
     LogApiCallJob.perform_later(
