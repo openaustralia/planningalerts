@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_26_222520) do
+ActiveRecord::Schema.define(version: 2019_03_05_022132) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -243,6 +243,7 @@ ActiveRecord::Schema.define(version: 2019_02_26_222520) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.boolean "api_disabled", default: false
+    t.boolean "unlimited_api_usage", default: false, null: false
     t.index ["api_key"], name: "index_users_on_api_key"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
