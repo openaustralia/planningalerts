@@ -3,14 +3,27 @@
 require "spec_helper"
 
 describe ThrottleDailyByApiUser do
+  let(:request) { double(url: url, params: params) }
+
+  describe "client_identifier" do
+    let(:url) { "/applications.js?lng=146&lat=-38&key=myapikey" }
+    let(:params) { { "lng" => "146", "lat" => "-38", "key" => "myapikey" } }
+    let(:result) { ThrottleDailyByApiUser.new(nil).client_identifier(request) }
+
+    it "should throttle based on the api key" do
+      expect(result).to eq "myapikey"
+    end
+  end
+
   describe "#whitelisted?" do
-    let(:request) { double(url: url, params: params) }
+    let(:result) { ThrottleDailyByApiUser.new(nil).whitelisted?(request) }
+
     describe "Request to the home page" do
       let(:url) { "/" }
       let(:params) { {} }
 
       it "should be whitelisted as it's not an api request" do
-        expect(ThrottleDailyByApiUser.new(nil).whitelisted?(request)).to eq true
+        expect(result).to eq true
       end
     end
 
@@ -22,7 +35,7 @@ describe ThrottleDailyByApiUser do
         let(:user) { create(:user) }
 
         it "should not be whitelisted" do
-          expect(ThrottleDailyByApiUser.new(nil).whitelisted?(request)).to eq false
+          expect(result).to eq false
         end
       end
 
@@ -30,7 +43,7 @@ describe ThrottleDailyByApiUser do
         let(:user) { create(:user, unlimited_api_usage: true) }
 
         it "should be whitelisted" do
-          expect(ThrottleDailyByApiUser.new(nil).whitelisted?(request)).to eq true
+          expect(result).to eq true
         end
       end
 
@@ -39,7 +52,7 @@ describe ThrottleDailyByApiUser do
         let(:params) { { "lng" => "146", "lat" => "-38", "key" => "foo" } }
 
         it "should not be whitelisted" do
-          expect(ThrottleDailyByApiUser.new(nil).whitelisted?(request)).to be_falsey
+          expect(result).to be_falsey
         end
       end
     end
