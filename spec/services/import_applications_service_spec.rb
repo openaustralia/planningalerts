@@ -58,7 +58,7 @@ describe ImportApplicationsService do
       expect(logger).to receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
       expect(logger).to receive(:info).with("Took 0 s to import applications from Fiddlesticks, NSW")
       Timecop.freeze(@date) do
-        ImportApplicationsService.call(authority: @auth, scrape_delay: 0, logger: logger)
+        ImportApplicationsService.call(authority: @auth, scrape_delay: 0, logger: logger, morph_api_key: "123")
       end
       expect(Application.count).to eq(2)
       r1 = Application.find_by(council_reference: "R1")
@@ -81,8 +81,8 @@ describe ImportApplicationsService do
 
       # Getting the feed twice with the same content
       Timecop.freeze(@date) do
-        ImportApplicationsService.call(authority: @auth, scrape_delay: 0, logger: logger)
-        ImportApplicationsService.call(authority: @auth, scrape_delay: 0, logger: logger)
+        ImportApplicationsService.call(authority: @auth, scrape_delay: 0, logger: logger, morph_api_key: "123")
+        ImportApplicationsService.call(authority: @auth, scrape_delay: 0, logger: logger, morph_api_key: "123")
       end
       expect(Application.count).to eq(2)
     end

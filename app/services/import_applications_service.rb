@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 class ImportApplicationsService < ApplicationService
-  def initialize(authority:, scrape_delay:, logger:)
+  def initialize(authority:, scrape_delay:, logger:, morph_api_key:)
     @authority = authority
     @start_date = Time.zone.today - scrape_delay
     @end_date = Time.zone.today
     @logger = logger
-    @morph_api_key = ENV["MORPH_API_KEY"]
+    @morph_api_key = morph_api_key
   end
 
   def call

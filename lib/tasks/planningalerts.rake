@@ -13,7 +13,7 @@ namespace :planningalerts do
       puts "Importing #{authorities.count} authorities"
       authorities.each do |authority|
         info_logger = AuthorityLogger.new(authority.id, Logger.new(STDOUT))
-        ImportApplicationsService.call(authority: authority, scrape_delay: ENV["SCRAPE_DELAY"].to_i, logger: info_logger)
+        ImportApplicationsService.call(authority: authority, scrape_delay: ENV["SCRAPE_DELAY"].to_i, logger: info_logger, morph_api_key: ENV["MORPH_API_KEY"])
       end
     end
 
