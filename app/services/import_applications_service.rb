@@ -86,7 +86,10 @@ class ImportApplicationsService < ApplicationService
   end
 
   def morph_url_for_date_range
-    query = CGI.escape("select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'")
-    "https://api.morph.io/#{authority.morph_name}/data.json?query=#{query}&key=#{morph_api_key}"
+    params = {
+      query: "select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'",
+      key: morph_api_key
+    }
+    "https://api.morph.io/#{authority.morph_name}/data.json?#{params.to_query}"
   end
 end

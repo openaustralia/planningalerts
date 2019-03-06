@@ -86,5 +86,17 @@ describe ImportApplicationsService do
       end
       expect(Application.count).to eq(2)
     end
+
+    it "should escape the morph api key and the sql query" do
+      logger = double
+      allow(logger).to receive(:info)
+      expect(ImportApplicationsService).to receive(:open_url_safe).with(
+        "https://api.morph.io//data.json?key=12%2F&query=select+%2A+from+%60data%60+where+%60date_scraped%60+%3E%3D+%272009-01-01%27+and+%60date_scraped%60+%3C%3D+%272009-01-01%27",
+        logger
+      )
+      Timecop.freeze(@date) do
+        ImportApplicationsService.call(authority: @auth, scrape_delay: 0, logger: logger, morph_api_key: "12/")
+      end
+    end
   end
 end
