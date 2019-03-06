@@ -108,8 +108,7 @@ module ApplicationHelper
     if contributor[:github].blank?
       params = {
         q: "fullname:\"#{contributor[:name]}\"",
-        type: "User",
-        ref: "searchresults"
+        type: "Users"
       }
       "https://github.com/search?#{params.to_query}"
     else
