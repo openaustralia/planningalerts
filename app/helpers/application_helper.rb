@@ -106,7 +106,12 @@ module ApplicationHelper
 
   def contributor_profile_url(contributor)
     if contributor[:github].blank?
-      "https://github.com/search?q=fullname%3A%22#{CGI.escape contributor[:name]}%22&type=Users&ref=searchresults"
+      params = {
+        q: "fullname:\"#{contributor[:name]}\"",
+        type: "User",
+        ref: "searchresults"
+      }
+      "https://github.com/search?#{params.to_query}"
     else
       "https://github.com/#{contributor[:github]}"
     end
