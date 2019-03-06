@@ -15,8 +15,8 @@
 
 :javascript
   $(document).ready(function(){
-    var googleLatLng = {lat: #{@geocode_query.result("google").lat}, lng: #{@geocode_query.result("google").lng}};
-    var mappifyLatLng = {lat: #{@geocode_query.result("mappify").lat}, lng: #{@geocode_query.result("mappify").lng}};
+    var googleLatLng = {lat: #{h @geocode_query.result("google").lat}, lng: #{h @geocode_query.result("google").lng}};
+    var mappifyLatLng = {lat: #{h @geocode_query.result("mappify").lat}, lng: #{h @geocode_query.result("mappify").lng}};
 
     var map = new google.maps.Map(document.getElementById('geocoding-map'), {
       zoom: 13,
