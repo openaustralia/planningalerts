@@ -5,7 +5,14 @@ require "spec_helper"
 describe CommentMailer do
   describe "#notify_authority" do
     before :each do
-      application = mock_model(Application, authority: create(:contactable_authority), address: "12 Foo Rd", council_reference: "X/001", description: "Building something", id: 123)
+      application = create(
+        :geocoded_application,
+        authority: create(:contactable_authority),
+        address: "12 Foo Rd",
+        council_reference: "X/001",
+        description: "Building something",
+        id: 123
+      )
       @comment = create(:confirmed_comment, email: "foo@bar.com", name: "Matthew", application: application, text: "It's a good thing.\n\nOh yes it is.", address: "1 Bar Street")
     end
 

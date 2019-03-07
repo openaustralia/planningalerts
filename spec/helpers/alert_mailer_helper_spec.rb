@@ -39,7 +39,7 @@ describe AlertMailerHelper do
 
     context "and there is a comment" do
       before :each do
-        @comment = create(:comment, application: @application)
+        @comment = create(:comment)
       end
 
       describe "#comment_url_with_tracking" do
@@ -121,10 +121,9 @@ describe AlertMailerHelper do
   describe "#subject" do
     let(:alert) { create(:alert, address: "123 Sample St") }
     let(:application) do
-      mock_model(Application, address: "Bar Street",
-                              description: "Alterations & additions",
-                              council_reference: "007",
-                              location: double(lat: 1.0, lng: 2.0))
+      create(:geocoded_application, address: "Bar Street",
+                                    description: "Alterations & additions",
+                                    council_reference: "007")
     end
     let(:comment) { create(:comment, application: application) }
     let(:comment2) { create(:comment, application: application) }

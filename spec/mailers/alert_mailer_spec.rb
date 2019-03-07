@@ -18,7 +18,7 @@ describe AlertMailer do
     @a2 = mock_model(Application,
                      address: "Bar Street, Foo", council_reference: "a2", description: "Put something up", id: 2,
                      lat: location2.lat, lng: location2.lng, location: location2)
-    @a3 = mock_model(Application, address: "2 Foo Parade, Glenbrook NSW 2773", id: 3)
+    @a3 = create(:geocoded_application, address: "2 Foo Parade, Glenbrook NSW 2773", id: 3)
     @c1 = create(:comment, text: "I think this is a great idea", name: "Matthew Landauer", application: @a3, id: 1)
     @c2 = create(
       :comment, name: "Jack Smith", application: @a3, id: 2, text: <<~COMMENT

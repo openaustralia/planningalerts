@@ -30,7 +30,7 @@ FactoryBot.define do
 
   factory :application_redirect do
     application_id { 1 }
-    redirect_application_id { 2 }
+    association :redirect_application, factory: :geocoded_application
   end
 
   factory :add_comment do
