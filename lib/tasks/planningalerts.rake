@@ -60,11 +60,11 @@ namespace :planningalerts do
 
   # A response to something bad
   namespace :emergency do
-    # TODO: Move comments of destroyed applications to the redirected application
     desc "Applications for an authority shouldn't have duplicate values of council_reference and so this removes duplicates."
     task fix_duplicate_council_references: :environment do
       # First find all duplicates
       duplicates = Application.group(:authority_id).group(:council_reference).count.select { |_k, v| v > 1 }.map { |k, _v| k }
+      puts "#{duplicates.count} council references with multiple records"
       duplicates.each do |authority_id, council_reference|
         authority = Authority.find(authority_id)
         puts "Removing duplicates for #{authority.full_name_and_state} - #{council_reference} and redirecting..."
@@ -76,6 +76,11 @@ namespace :planningalerts do
           ActiveRecord::Base.transaction do
             # Set up a redirect from the wrong to the right
             ApplicationRedirect.create!(application_id: a.id, redirect_application_id: application_to_keep.id)
+            # Move each comment to the application_to_keep
+            a.comments.each do |comment|
+              comment.update(application: application_to_keep)
+            end
+            a.reload
             a.destroy
           end
         end
