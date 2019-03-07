@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_07_050451) do
+ActiveRecord::Schema.define(version: 2019_03_07_071045) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -128,6 +128,8 @@ ActiveRecord::Schema.define(version: 2019_03_07_050451) do
     t.text "source"
     t.boolean "reviewed", default: false
     t.boolean "accepted", default: false
+    t.index ["authority_id"], name: "fk_rails_b23f89eb2a"
+    t.index ["contributor_id"], name: "fk_rails_7fd8de62d1"
   end
 
   create_table "councillors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
@@ -296,6 +298,8 @@ ActiveRecord::Schema.define(version: 2019_03_07_050451) do
   add_foreign_key "applications", "authorities", name: "applications_authority_id_fk"
   add_foreign_key "comments", "applications"
   add_foreign_key "comments", "councillors"
+  add_foreign_key "councillor_contributions", "authorities"
+  add_foreign_key "councillor_contributions", "contributors"
   add_foreign_key "geocode_results", "geocode_queries"
   add_foreign_key "replies", "comments"
   add_foreign_key "replies", "councillors"
