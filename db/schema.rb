@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_07_045810) do
+ActiveRecord::Schema.define(version: 2019_03_07_050451) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -44,11 +44,12 @@ ActiveRecord::Schema.define(version: 2019_03_07_045810) do
   end
 
   create_table "application_redirects", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "application_id"
-    t.integer "redirect_application_id"
+    t.integer "application_id", null: false
+    t.integer "redirect_application_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["application_id"], name: "index_application_redirects_on_application_id"
+    t.index ["redirect_application_id"], name: "fk_rails_24f1a5992a"
   end
 
   create_table "applications", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
@@ -291,6 +292,7 @@ ActiveRecord::Schema.define(version: 2019_03_07_045810) do
     t.index ["experiment_id"], name: "index_vanity_participants_on_experiment_id"
   end
 
+  add_foreign_key "application_redirects", "applications", column: "redirect_application_id"
   add_foreign_key "applications", "authorities", name: "applications_authority_id_fk"
   add_foreign_key "comments", "applications"
   add_foreign_key "comments", "councillors"
