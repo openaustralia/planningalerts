@@ -3,7 +3,7 @@
 class Councillor < ApplicationRecord
   has_many :comments, dependent: :restrict_with_error
   has_many :replies, dependent: :restrict_with_error
-  belongs_to :authority, optional: true
+  belongs_to :authority
 
   validates :authority, :email, presence: true
   validates :image_url, format: { with: /\Ahttps.*\z/, message: "must be HTTPS" }, allow_blank: true
