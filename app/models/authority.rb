@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class Authority < ApplicationRecord
-  has_many :applications, dependent: :destroy
-  has_many :councillors, dependent: :destroy
+  has_many :applications, dependent: :restrict_with_exception
+  has_many :councillors, dependent: :restrict_with_exception
   has_many :comments, through: :applications
-  has_many :councillor_contributions, dependent: :destroy
+  has_many :councillor_contributions, dependent: :restrict_with_exception
 
   validates :short_name, presence: true, uniqueness: { case_sensitive: false }
 

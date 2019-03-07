@@ -5,8 +5,8 @@ require "rest-client"
 class Comment < ApplicationRecord
   belongs_to :application
   belongs_to :councillor, optional: true
-  has_many :reports, dependent: :destroy
-  has_many :replies, dependent: :destroy
+  has_many :reports, dependent: :restrict_with_exception
+  has_many :replies, dependent: :restrict_with_exception
   validates :name, presence: true
   validates :text, presence: true
   validates :address, presence: true, unless: :to_councillor?

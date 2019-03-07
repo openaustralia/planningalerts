@@ -9,7 +9,7 @@ class Application < ApplicationRecord
              callbacks: :async
 
   belongs_to :authority
-  has_many :comments, dependent: :destroy
+  has_many :comments, dependent: :restrict_with_exception
   has_many :replies, through: :comments
   before_save :geocode
   geocoded_by :address, latitude: :lat, longitude: :lng
