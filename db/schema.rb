@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_022132) do
+ActiveRecord::Schema.define(version: 2019_03_07_043444) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_022132) do
     t.text "text", limit: 16777215
     t.string "email"
     t.string "name"
-    t.integer "application_id"
+    t.integer "application_id", null: false
     t.string "confirm_id"
     t.boolean "confirmed"
     t.datetime "created_at"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_022132) do
     t.index ["application_id"], name: "index_comments_on_application_id"
     t.index ["confirm_id"], name: "index_comments_on_confirm_id"
     t.index ["confirmed"], name: "index_comments_on_confirmed"
+    t.index ["councillor_id"], name: "fk_rails_f9fd210b40"
     t.index ["hidden"], name: "index_comments_on_hidden"
   end
 
@@ -293,5 +294,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_022132) do
   end
 
   add_foreign_key "applications", "authorities", name: "applications_authority_id_fk"
+  add_foreign_key "comments", "applications"
+  add_foreign_key "comments", "councillors"
   add_foreign_key "geocode_results", "geocode_queries"
 end
