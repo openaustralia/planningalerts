@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_07_140206) do
+ActiveRecord::Schema.define(version: 2019_03_07_140908) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -219,7 +219,8 @@ ActiveRecord::Schema.define(version: 2019_03_07_140206) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "councillor_contribution_id"
+    t.integer "councillor_contribution_id", null: false
+    t.index ["councillor_contribution_id"], name: "fk_rails_34c0974132"
   end
 
   create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
@@ -307,4 +308,5 @@ ActiveRecord::Schema.define(version: 2019_03_07_140206) do
   add_foreign_key "replies", "comments"
   add_foreign_key "replies", "councillors"
   add_foreign_key "reports", "comments"
+  add_foreign_key "suggested_councillors", "councillor_contributions"
 end
