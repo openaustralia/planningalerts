@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_07_043444) do
+ActiveRecord::Schema.define(version: 2019_03_07_044748) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -185,8 +185,8 @@ ActiveRecord::Schema.define(version: 2019_03_07_043444) do
   create_table "replies", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.text "text", limit: 16777215
     t.datetime "received_at"
-    t.integer "comment_id"
-    t.integer "councillor_id"
+    t.integer "comment_id", null: false
+    t.integer "councillor_id", null: false
     t.integer "writeit_id"
     t.index ["comment_id"], name: "index_replies_on_comment_id"
     t.index ["councillor_id"], name: "index_replies_on_councillor_id"
@@ -297,4 +297,6 @@ ActiveRecord::Schema.define(version: 2019_03_07_043444) do
   add_foreign_key "comments", "applications"
   add_foreign_key "comments", "councillors"
   add_foreign_key "geocode_results", "geocode_queries"
+  add_foreign_key "replies", "comments"
+  add_foreign_key "replies", "councillors"
 end
