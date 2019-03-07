@@ -23,18 +23,7 @@ describe ApplicationsHelper do
       allow(@application).to receive(:address).and_return("Foo Road, NSW")
     end
 
-    context "when the application has no description" do
-      before :each do
-        allow(@application).to receive(:description).and_return(nil)
-      end
-
-      it "should add generic ‘application for’ text" do
-        expect(helper.display_description_with_address(@application))
-          .to eq "application for Foo Road, NSW"
-      end
-    end
-
-    context "when the application has a description" do
+    context "when the application has a short description" do
       before :each do
         allow(@application).to receive(:description).and_return("Build something")
       end

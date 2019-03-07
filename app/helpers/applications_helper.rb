@@ -2,14 +2,7 @@
 
 module ApplicationsHelper
   def display_description_with_address(application)
-    display_description =
-      if application.description
-        "“#{truncate(application.description, escape: false, separator: ' ')}” at"
-      else
-        "application for"
-      end
-
-    "#{display_description} #{application.address}"
+    "“#{truncate(application.description, escape: false, separator: ' ')}” at #{application.address}"
   end
 
   def scraped_and_received_text(application)
