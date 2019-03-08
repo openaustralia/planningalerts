@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_08_004630) do
+ActiveRecord::Schema.define(version: 2019_03_08_010816) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2019_03_08_004630) do
     t.string "council_reference", limit: 50, null: false
     t.text "address", null: false
     t.text "description", null: false
-    t.string "info_url", limit: 1024
+    t.string "info_url", limit: 1024, null: false
     t.string "comment_url", limit: 1024
     t.integer "authority_id", null: false
     t.float "lat", limit: 53
