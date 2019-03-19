@@ -123,6 +123,9 @@ gem "elasticsearch"
 gem "ruby-progressbar"
 gem "typhoeus"
 
+# For conditional counter caches (used to count visible comments)
+gem "counter_culture"
+
 group :test do
   gem "capybara"
   gem "chromedriver-helper"

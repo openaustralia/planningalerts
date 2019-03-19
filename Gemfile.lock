@@ -74,6 +74,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    after_commit_action (1.1.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
     arbre (1.1.1)
       activesupport (>= 3.0.0)
     archive-zip (0.11.0)
@@ -159,6 +162,10 @@ GEM
       sprockets (< 4.0)
     concurrent-ruby (1.1.4)
     connection_pool (2.2.2)
+    counter_culture (2.1.4)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      after_commit_action (~> 1.0)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
@@ -600,6 +607,7 @@ DEPENDENCIES
   climate_control
   compass-blueprint
   compass-rails
+  counter_culture
   dalli
   database_cleaner
   devise (~> 4.2)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_08_010816) do
+ActiveRecord::Schema.define(version: 2019_03_19_233210) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2019_03_08_010816) do
     t.date "on_notice_from"
     t.date "on_notice_to"
     t.integer "no_alerted"
+    t.integer "visible_comments_count", default: 0, null: false
     t.index ["authority_id", "council_reference"], name: "index_applications_on_authority_id_and_council_reference", unique: true
     t.index ["authority_id", "date_scraped"], name: "index_applications_on_authority_id_and_date_scraped"
     t.index ["authority_id"], name: "authority_id"
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(version: 2019_03_08_010816) do
     t.index ["postcode"], name: "index_applications_on_postcode"
     t.index ["state"], name: "index_applications_on_state"
     t.index ["suburb"], name: "index_applications_on_suburb"
+    t.index ["visible_comments_count"], name: "index_applications_on_visible_comments_count"
   end
 
   create_table "authorities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|

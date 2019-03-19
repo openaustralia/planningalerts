@@ -16,6 +16,16 @@ class Comment < ApplicationRecord
   scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
   scope(:to_councillor, -> { joins(:councillor) })
 
+  counter_culture :application,
+                  column_name: proc { |comment| comment.visible? ? "visible_comments_count" : nil },
+                  column_names: {
+                    "comments.confirmed = true and comments.hidden = false" => "visible_comments_count"
+                  }
+
+  def visible?
+    confirmed && !hidden
+  end
+
   def confirm!
     return if confirmed
 

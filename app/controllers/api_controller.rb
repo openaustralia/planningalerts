@@ -102,7 +102,7 @@ class ApiController < ApplicationController
     respond_to do |format|
       format.js do
         s = { applications: applications, application_count: apps.count, max_id: max_id }
-        j = s.to_json(except: %i[authority_id suburb state postcode distance],
+        j = s.to_json(except: %i[authority_id suburb state postcode distance visible_comments_count],
                       include: { authority: { only: [:full_name] } })
         render json: j, callback: params[:callback], content_type: Mime[:json]
       end
@@ -224,7 +224,7 @@ class ApiController < ApplicationController
             else
               @applications
             end
-        j = s.to_json(except: %i[authority_id suburb state postcode distance],
+        j = s.to_json(except: %i[authority_id suburb state postcode distance visible_comments_count],
                       include: { authority: { only: [:full_name] } })
         render json: j, callback: params[:callback], content_type: Mime[:json]
       end
