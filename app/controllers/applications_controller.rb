@@ -21,7 +21,6 @@ class ApplicationsController < ApplicationController
     end
 
     @applications = apps
-                    .with_visible_comments_count
                     .paginate(page: params[:page], per_page: 30)
     @alert = Alert.new
   end
@@ -29,11 +28,7 @@ class ApplicationsController < ApplicationController
   def trending
     @applications = Application
                     .where("date_scraped > ?", 4.weeks.ago)
-                    .joins(:comments)
-                    .group("applications.id")
-                    .merge(Comment.visible)
-                    .reorder("count(comments.id) DESC")
-                    .with_visible_comments_count
+                    .reorder(visible_comments_count: :desc)
                     .limit(20)
   end
 
@@ -74,18 +69,13 @@ class ApplicationsController < ApplicationController
         @applications = Application.near([result.top.lat, result.top.lng], @radius / 1000, units: :km)
         @applications = @applications.reorder("distance") if @sort == "distance"
         @applications = @applications
-                        .with_visible_comments_count
                         .paginate(page: params[:page], per_page: per_page)
         @rss = applications_path(format: "rss", address: @q, radius: @radius)
       end
     end
     @trending = Application
                 .where("date_scraped > ?", 4.weeks.ago)
-                .joins(:comments)
-                .group("applications.id")
-                .merge(Comment.visible)
-                .reorder(Arel.sql("count(comments.id) DESC"))
-                .with_visible_comments_count
+                .reorder(visible_comments_count: :desc)
                 .limit(4)
     @set_focus_control = "q"
     # Use a different template if there are results to display
@@ -146,7 +136,6 @@ class ApplicationsController < ApplicationController
       return
     end
     @applications = @applications
-                    .with_visible_comments_count
                     .paginate page: params[:page], per_page: per_page
 
     respond_to do |format|

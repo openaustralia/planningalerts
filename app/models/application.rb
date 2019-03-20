@@ -24,30 +24,9 @@ class Application < ApplicationRecord
 
   scope(:in_past_week, -> { where("date_scraped > ?", 7.days.ago) })
   scope(:recent, -> { where("date_scraped >= ?", 14.days.ago) })
-  # Doing this as an alternative to counter caches
-  scope(:with_visible_comments_count, lambda do
-    select <<~SQL
-      applications.*,
-      (
-        SELECT COUNT(comments.id) FROM comments
-        WHERE application_id = applications.id
-        AND confirmed = true
-        AND hidden = false
-      ) AS visible_comments_count_actual
-    SQL
-  end)
 
   def search_data
     attributes.merge(location: { lat: lat, lon: lng })
-  end
-
-  # Includes fallback to slow version
-  def visible_comments_count
-    if respond_to? :visible_comments_count_actual
-      visible_comments_count_actual
-    else
-      comments.visible.count
-    end
   end
 
   def date_received_can_not_be_in_the_future
