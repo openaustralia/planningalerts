@@ -3,6 +3,22 @@
 require "open-uri"
 
 class Application < ApplicationRecord
+  ATTRIBUTE_KEYS_FOR_VERSIONS = %w[
+    date_scraped
+    address
+    description
+    info_url
+    comment_url
+    date_received
+    on_notice_from
+    on_notice_to
+    lat
+    lng
+    suburb
+    state
+    postcode
+  ].freeze
+
   searchkick highlight: [:description],
              index_name: "pa_applications_#{ENV['STAGE']}",
              locations: [:location],
@@ -11,7 +27,11 @@ class Application < ApplicationRecord
   belongs_to :authority
   has_many :comments, dependent: :restrict_with_exception
   has_many :replies, through: :comments
+  has_many :versions, -> { order(id: :desc) }, class_name: "ApplicationVersion", dependent: :restrict_with_exception, inverse_of: :application
+  has_one :current_version, -> { where(current: true) }, class_name: "ApplicationVersion", inverse_of: :application
+
   before_save :geocode
+  after_save :create_version
   geocoded_by :address, latitude: :lat, longitude: :lng
 
   validates :date_scraped, :council_reference, :address, :description, presence: true
@@ -146,5 +166,22 @@ class Application < ApplicationRecord
     else
       logger.error "Couldn't geocode address: #{address} (#{r.error})"
     end
+  end
+
+  def attributes_for_version_data
+    r = {}
+    ATTRIBUTE_KEYS_FOR_VERSIONS.each do |attribute_key|
+      r[attribute_key] = send(attribute_key)
+    end
+    r
+  end
+
+  def create_version
+    # If none of the data has changed don't save a new version
+    return if current_version && attributes_for_version_data == current_version.attributes.slice(*ATTRIBUTE_KEYS_FOR_VERSIONS)
+
+    current_version&.update(current: false)
+    versions.create!(attributes_for_version_data.merge(previous_version: current_version, current: true))
+    reload_current_version
   end
 end

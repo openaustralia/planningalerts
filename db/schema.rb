@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_19_233210) do
+ActiveRecord::Schema.define(version: 2019_03_20_024550) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -50,6 +50,34 @@ ActiveRecord::Schema.define(version: 2019_03_19_233210) do
     t.datetime "updated_at", null: false
     t.index ["application_id"], name: "index_application_redirects_on_application_id"
     t.index ["redirect_application_id"], name: "fk_rails_24f1a5992a"
+  end
+
+  create_table "application_versions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "application_id", null: false
+    t.bigint "previous_version_id"
+    t.boolean "current", null: false
+    t.text "address", null: false
+    t.text "description", null: false
+    t.string "info_url", limit: 1024, null: false
+    t.string "comment_url", limit: 1024
+    t.date "date_received"
+    t.date "on_notice_from"
+    t.date "on_notice_to"
+    t.timestamp "date_scraped", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.float "lat"
+    t.float "lng"
+    t.string "suburb", limit: 50
+    t.string "state", limit: 10
+    t.string "postcode", limit: 4
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["application_id"], name: "index_application_versions_on_application_id"
+    t.index ["date_scraped"], name: "index_application_versions_on_date_scraped"
+    t.index ["lat", "lng", "date_scraped"], name: "index_application_versions_on_lat_and_lng_and_date_scraped"
+    t.index ["postcode"], name: "index_application_versions_on_postcode"
+    t.index ["previous_version_id"], name: "index_application_versions_on_previous_version_id"
+    t.index ["state"], name: "index_application_versions_on_state"
+    t.index ["suburb"], name: "index_application_versions_on_suburb"
   end
 
   create_table "applications", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
@@ -301,6 +329,8 @@ ActiveRecord::Schema.define(version: 2019_03_19_233210) do
   end
 
   add_foreign_key "application_redirects", "applications", column: "redirect_application_id"
+  add_foreign_key "application_versions", "application_versions", column: "previous_version_id"
+  add_foreign_key "application_versions", "applications"
   add_foreign_key "applications", "authorities", name: "applications_authority_id_fk"
   add_foreign_key "comments", "applications"
   add_foreign_key "comments", "councillors"
