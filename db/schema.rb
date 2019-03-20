@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_20_024550) do
+ActiveRecord::Schema.define(version: 2019_03_20_231538) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 2019_03_20_024550) do
     t.date "on_notice_from"
     t.date "on_notice_to"
     t.timestamp "date_scraped", default: -> { "CURRENT_TIMESTAMP" }, null: false
-    t.float "lat"
-    t.float "lng"
+    t.float "lat", limit: 53
+    t.float "lng", limit: 53
     t.string "suburb", limit: 50
     t.string "state", limit: 10
     t.string "postcode", limit: 4
