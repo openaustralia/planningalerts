@@ -3,26 +3,7 @@
 require "spec_helper"
 
 describe Application do
-  before :each do
-    Authority.delete_all
-    @auth = create(:authority, full_name: "Fiddlesticks", state: "NSW", short_name: "Fiddle")
-    # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
-    allow(GeocodeService).to receive(:call).and_return(
-      GeocoderResults.new(
-        [
-          GeocodedLocation.new(
-            lat: 1.0,
-            lng: 2.0,
-            suburb: "Glenbrook",
-            state: "NSW",
-            postcode: "2773",
-            full_address: "Glenbrook, NSW, 2773"
-          )
-        ],
-        nil
-      )
-    )
-  end
+  let(:authority) { create(:authority) }
 
   describe "validation" do
     describe "date_scraped" do
@@ -30,19 +11,17 @@ describe Application do
     end
 
     describe "council_reference" do
-      let(:auth1) { create(:authority) }
-
       it { expect(build(:application, council_reference: "")).not_to be_valid }
 
       context "one application already exists" do
         before :each do
-          create(:application, council_reference: "A01", authority: auth1)
+          create(:geocoded_application, council_reference: "A01", authority: authority)
         end
-        let(:auth2) { create(:authority, full_name: "A second authority") }
+        let(:authority2) { create(:authority, full_name: "A second authority") }
 
-        it { expect(build(:application, council_reference: "A01", authority: auth1)).not_to be_valid }
-        it { expect(build(:application, council_reference: "A02", authority: auth1)).to be_valid }
-        it { expect(build(:application, council_reference: "A01", authority: auth2)).to be_valid }
+        it { expect(build(:geocoded_application, council_reference: "A01", authority: authority)).not_to be_valid }
+        it { expect(build(:geocoded_application, council_reference: "A02", authority: authority)).to be_valid }
+        it { expect(build(:geocoded_application, council_reference: "A01", authority: authority2)).to be_valid }
       end
     end
 
@@ -196,70 +175,73 @@ describe Application do
   end
 
   describe "#official_submission_period_expired?" do
-    before :each do
-      @application = create(:application)
-    end
+    let(:application) { create(:geocoded_application) }
 
     context "when the ‘on notice to’ date is not set" do
-      before { @application.update(on_notice_to: nil) }
+      before { application.update(on_notice_to: nil) }
 
-      it { expect(@application.official_submission_period_expired?).to be_falsey }
+      it { expect(application.official_submission_period_expired?).to be_falsey }
     end
 
     context "when the ‘on notice to’ date has passed", focus: true do
-      before { @application.update(on_notice_to: Time.zone.today - 1.day) }
+      before { application.update(on_notice_to: Time.zone.today - 1.day) }
 
-      it { expect(@application.official_submission_period_expired?).to be true }
+      it { expect(application.official_submission_period_expired?).to be true }
     end
 
     context "when the ‘on notice to’ date is in the future" do
-      before { @application.update(on_notice_to: Time.zone.today + 1.day) }
+      before { application.update(on_notice_to: Time.zone.today + 1.day) }
 
-      it { expect(@application.official_submission_period_expired?).to be false }
+      it { expect(application.official_submission_period_expired?).to be false }
     end
   end
 
   describe "#current_councillors_for_authority" do
-    let(:authority) { create(:authority) }
-    let(:application) { create(:application, authority: authority) }
+    let(:application) { create(:geocoded_application, authority: authority) }
 
     context "when there are no councillors" do
       it { expect(application.current_councillors_for_authority).to eq nil }
     end
 
     context "when there are councillors" do
+      let(:councillor1) { create(:councillor, authority: authority) }
+      let(:councillor2) { create(:councillor, authority: authority) }
+      let(:councillor3) { create(:councillor, authority: authority) }
+
       before do
-        @councillor1 = create(:councillor, authority: authority)
-        @councillor2 = create(:councillor, authority: authority)
-        @councillor3 = create(:councillor, authority: authority)
+        councillor1
+        councillor2
+        councillor3
       end
 
-      it { expect(application.current_councillors_for_authority).to match_array [@councillor1, @councillor2, @councillor3] }
+      it { expect(application.current_councillors_for_authority).to match_array [councillor1, councillor2, councillor3] }
     end
 
     context "when there are councillors but not for the application’s authority" do
       before do
-        @councillor1 = create(:councillor, authority: create(:authority))
+        create(:councillor, authority: create(:authority))
       end
 
       it { expect(application.current_councillors_for_authority).to eq nil }
     end
 
     context "when there are councillors but not all are current" do
+      let(:current_councillor) { create(:councillor, current: true, authority: authority) }
+      let(:former_councillor) { create(:councillor, current: false, authority: authority) }
+
       before do
-        @current_councillor = create(:councillor, current: true, authority: authority)
-        @former_councillor = create(:councillor, current: false, authority: authority)
+        current_councillor
+        former_councillor
       end
 
       it "only includes the current ones" do
-        expect(application.current_councillors_for_authority).to eq [@current_councillor]
+        expect(application.current_councillors_for_authority).to eq [current_councillor]
       end
     end
   end
 
   describe "#councillors_available_for_contact" do
-    let(:authority) { create(:authority) }
-    let(:application) { create(:application, authority: authority) }
+    let(:application) { create(:geocoded_application, authority: authority) }
 
     context "when there are no councillors" do
       context "and the feature is disabled for the authority" do
@@ -280,10 +262,14 @@ describe Application do
     end
 
     context "when there are councillors" do
+      let(:councillor1) { create(:councillor, authority: authority) }
+      let(:councillor2) { create(:councillor, authority: authority) }
+      let(:councillor3) { create(:councillor, authority: authority) }
+
       before do
-        @councillor1 = create(:councillor, authority: authority)
-        @councillor2 = create(:councillor, authority: authority)
-        @councillor3 = create(:councillor, authority: authority)
+        councillor1
+        councillor2
+        councillor3
       end
 
       context "but the feature is disabled for the authority" do
@@ -299,7 +285,7 @@ describe Application do
           allow(authority).to receive(:write_to_councillors_enabled?).and_return true
         end
 
-        it { expect(application.councillors_available_for_contact).to match_array [@councillor1, @councillor2, @councillor3] }
+        it { expect(application.councillors_available_for_contact).to match_array [councillor1, councillor2, councillor3] }
       end
     end
   end
