@@ -28,6 +28,14 @@ FactoryBot.define do
     end
   end
 
+  factory :application_version do
+    association :application, factory: :geocoded_application
+    address { "A test address" }
+    description { "pretty" }
+    info_url { "http://foo.com" }
+    current { false }
+  end
+
   factory :application_redirect do
     application_id { 1 }
     association :redirect_application, factory: :geocoded_application
