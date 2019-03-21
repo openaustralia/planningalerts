@@ -17,7 +17,7 @@ class ApplicationsController < ApplicationController
       @description << " from #{@authority.full_name_and_state}"
     else
       @description << " within the last #{Application.nearby_and_recent_max_age_months} months"
-      apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
+      apps = Application.joins(:current_version).where("application_versions.date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
     end
 
     @applications = apps
@@ -27,7 +27,8 @@ class ApplicationsController < ApplicationController
 
   def trending
     @applications = Application
-                    .where("date_scraped > ?", 4.weeks.ago)
+                    .joins(:current_version)
+                    .where("application_versions.date_scraped > ?", 4.weeks.ago)
                     .reorder(visible_comments_count: :desc)
                     .limit(20)
   end
@@ -66,7 +67,12 @@ class ApplicationsController < ApplicationController
         @q = result.top.full_address
         @alert = Alert.new(address: @q)
         @other_addresses = result.rest.map(&:full_address)
-        @applications = Application.near([result.top.lat, result.top.lng], @radius / 1000, units: :km)
+        @applications = Application.joins(:current_version).near(
+          [result.top.lat, result.top.lng], @radius / 1000,
+          units: :km,
+          latitude: "application_versions.lat",
+          longitude: "application_versions.lng"
+        )
         @applications = @applications.reorder("distance") if @sort == "distance"
         @applications = @applications
                         .paginate(page: params[:page], per_page: per_page)
@@ -74,7 +80,8 @@ class ApplicationsController < ApplicationController
       end
     end
     @trending = Application
-                .where("date_scraped > ?", 4.weeks.ago)
+                .joins(:current_version)
+                .where("application_versions.date_scraped > ?", 4.weeks.ago)
                 .reorder(visible_comments_count: :desc)
                 .limit(4)
     @set_focus_control = "q"
