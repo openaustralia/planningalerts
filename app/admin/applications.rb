@@ -12,6 +12,8 @@ ActiveAdmin.register Application do
   end
 
   remove_filter :comments
+  remove_filter :versions
+  remove_filter :current_version
 
   show title: :address do
     attributes_table do
