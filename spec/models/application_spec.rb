@@ -388,5 +388,13 @@ describe Application do
         expect(application2.info_url).to eq "http://foo.com"
       end
     end
+
+    describe "N+1 queries" do
+      it "should not do too many sql queries" do
+        5.times { create(:geocoded_application) }
+        expect(ActiveRecord::Base.connection).to receive(:exec_query).at_most(2).times.and_call_original
+        Application.all.map(&:description)
+      end
+    end
   end
 end

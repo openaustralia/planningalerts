@@ -31,18 +31,17 @@ class Alert < ApplicationRecord
 
   # Applications that have been scraped since the last time the user was sent an alert
   def recent_applications
-    Application.joins(:current_version).order("date_received DESC").near([location.lat, location.lng], radius_km, units: :km, latitude: "application_versions.lat", longitude: "application_versions.lng").where("application_versions.date_scraped > ?", cutoff_time)
+    Application.order("date_received DESC").near([location.lat, location.lng], radius_km, units: :km, latitude: "application_versions.lat", longitude: "application_versions.lng").where("application_versions.date_scraped > ?", cutoff_time)
   end
 
   # Applications in the area of interest which have new comments made since we were last alerted
   def applications_with_new_comments
-    Application.joins(:current_version)
-               .near(
-                 [location.lat, location.lng], radius_km,
-                 units: :km,
-                 latitude: "application_versions.lat",
-                 longitude: "application_versions.lng"
-               )
+    Application.near(
+      [location.lat, location.lng], radius_km,
+      units: :km,
+      latitude: "application_versions.lat",
+      longitude: "application_versions.lng"
+    )
                .joins(:comments)
                .where("comments.confirmed_at > ?", cutoff_time)
                .where("comments.confirmed" => true)
@@ -50,13 +49,12 @@ class Alert < ApplicationRecord
   end
 
   def applications_with_new_replies
-    Application.joins(:current_version)
-               .near(
-                 [location.lat, location.lng], radius_km,
-                 units: :km,
-                 latitude: "application_versions.lat",
-                 longitude: "application_versions.lng"
-               )
+    Application.near(
+      [location.lat, location.lng], radius_km,
+      units: :km,
+      latitude: "application_versions.lat",
+      longitude: "application_versions.lng"
+    )
                .joins(:replies)
                .where("replies.received_at > ?", cutoff_time)
                .distinct

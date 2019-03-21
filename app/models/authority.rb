@@ -60,7 +60,7 @@ class Authority < ApplicationRecord
   def applications_per_week
     # Sunday is the beginning of the week (and the date returned here)
     # Have to compensate for MySQL which treats Monday as the beginning of the week
-    h = applications.joins(:current_version).group("CAST(SUBDATE(application_versions.date_scraped, WEEKDAY(application_versions.date_scraped) + 1) AS DATE)").count
+    h = applications.group("CAST(SUBDATE(application_versions.date_scraped, WEEKDAY(application_versions.date_scraped) + 1) AS DATE)").count
     min = h.keys.min
     max = Time.zone.today - Time.zone.today.wday
     (min..max).step(7) do |date|
@@ -96,7 +96,7 @@ class Authority < ApplicationRecord
   def earliest_date
     # Removing default scoping by using "unscoped". Hmmm. Maybe get rid of default scoping entirely?
     earliest_application = Application.unscoped do
-      applications.joins(:current_version).order("date_scraped").first
+      applications.order("date_scraped").first
     end
     earliest_application&.date_scraped
   end
