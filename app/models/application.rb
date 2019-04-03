@@ -54,10 +54,9 @@ class Application < ApplicationRecord
   validate :date_received_can_not_be_in_the_future, :validate_on_notice_period
   validates :council_reference, uniqueness: { scope: :authority_id }
 
-  default_scope { includes(:current_version).joins(:current_version).order("application_versions.date_scraped DESC") }
-
-  scope(:in_past_week, -> { where("application_versions.date_scraped > ?", 7.days.ago) })
-  scope(:recent, -> { where("application_versions.date_scraped >= ?", 14.days.ago) })
+  scope(:with_current_version, -> { includes(:current_version).joins(:current_version) })
+  scope(:in_past_week, -> { joins(:current_version).where("application_versions.date_scraped > ?", 7.days.ago) })
+  scope(:recent, -> { joins(:current_version).where("application_versions.date_scraped >= ?", 14.days.ago) })
 
   def search_data
     attributes.merge(location: { lat: lat, lon: lng })
@@ -196,13 +195,12 @@ class Application < ApplicationRecord
   # Find applications that are near the current application location and/or recently scraped
   def find_all_nearest_or_recent
     if location
-      Application.near(
-        self, nearby_and_recent_max_distance_km,
+      nearbys(
+        nearby_and_recent_max_distance_km,
         units: :km,
         latitude: "application_versions.lat",
-        longitude: "application_versions.lng",
-        exclude: self
-      ).where("application_versions.date_scraped > ?", nearby_and_recent_max_age_months.months.ago)
+        longitude: "application_versions.lng"
+      ).with_current_version.where("application_versions.date_scraped > ?", nearby_and_recent_max_age_months.months.ago)
     else
       []
     end

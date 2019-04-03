@@ -44,7 +44,7 @@ class Authority < ApplicationRecord
 
   # Returns an array of arrays [date, number_of_applications_that_date]
   def applications_per_day
-    h = applications.group("CAST(date_scraped AS DATE)").count
+    h = applications.with_current_version.order("application_versions.date_scraped DESC").group("CAST(date_scraped AS DATE)").count
     # For any dates not in h fill them in with zeros
     (h.keys.min..Time.zone.today).each do |date|
       h[date] = 0 unless h.key?(date)
@@ -60,7 +60,7 @@ class Authority < ApplicationRecord
   def applications_per_week
     # Sunday is the beginning of the week (and the date returned here)
     # Have to compensate for MySQL which treats Monday as the beginning of the week
-    h = applications.group("CAST(SUBDATE(application_versions.date_scraped, WEEKDAY(application_versions.date_scraped) + 1) AS DATE)").count
+    h = applications.with_current_version.order("application_versions.date_scraped DESC").group("CAST(SUBDATE(application_versions.date_scraped, WEEKDAY(application_versions.date_scraped) + 1) AS DATE)").count
     min = h.keys.min
     max = Time.zone.today - Time.zone.today.wday
     (min..max).step(7) do |date|
@@ -79,7 +79,7 @@ class Authority < ApplicationRecord
       # Have to compensate for MySQL which treats Monday as the beginning of the week
       results = comments.visible.group(
         "CAST(SUBDATE(confirmed_at, WEEKDAY(confirmed_at) + 1) AS DATE)"
-      ).reorder(nil).count
+      ).count
 
       earliest_week_with_applications = earliest_date.at_beginning_of_week.to_date
       latest_week = Time.zone.today.at_beginning_of_week
@@ -94,10 +94,7 @@ class Authority < ApplicationRecord
 
   # When this authority started on PlanningAlerts. Just the date of the earliest scraped application
   def earliest_date
-    # Removing default scoping by using "unscoped". Hmmm. Maybe get rid of default scoping entirely?
-    earliest_application = Application.unscoped do
-      applications.order("date_scraped").first
-    end
+    earliest_application = applications.with_current_version.order("application_versions.date_scraped").first
     earliest_application&.date_scraped
   end
 
@@ -157,8 +154,7 @@ class Authority < ApplicationRecord
   end
 
   def latest_application
-    # The applications are sorted by default by the date_scraped because of the default scope on the model
-    applications.first
+    applications.with_current_version.order("application_versions.date_scraped DESC").first
   end
 
   def latest_application_date
