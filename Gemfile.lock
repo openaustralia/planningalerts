@@ -410,6 +410,8 @@ GEM
       activemodel (>= 4.0)
     rails_autolink (1.1.6)
       rails (> 3.1)
+    rails_select_on_includes (5.2.1)
+      activerecord (>= 5.2.1)
     railties (5.2.2.1)
       actionpack (= 5.2.2.1)
       activesupport (= 5.2.2.1)
@@ -647,6 +649,7 @@ DEPENDENCIES
   rails-controller-testing
   rails-observers
   rails_autolink
+  rails_select_on_includes (~> 5.2.1)
   rake
   rb-fsevent
   rb-inotify
