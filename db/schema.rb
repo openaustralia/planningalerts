@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_21_002428) do
+ActiveRecord::Schema.define(version: 2019_04_05_163147) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(version: 2019_03_21_002428) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "no_replies", null: false
+    t.index ["created_at"], name: "index_email_batches_on_created_at"
   end
 
   create_table "geocode_queries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
