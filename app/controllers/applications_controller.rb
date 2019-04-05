@@ -13,11 +13,11 @@ class ApplicationsController < ApplicationController
     if params[:authority_id]
       # TODO: Handle the situation where the authority name isn't found
       @authority = Authority.find_short_name_encoded!(params[:authority_id])
-      apps = @authority.applications
+      apps = @authority.applications.with_current_version.order("application_versions.date_scraped DESC")
       @description << " from #{@authority.full_name_and_state}"
     else
       @description << " within the last #{Application.nearby_and_recent_max_age_months} months"
-      apps = Application.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
+      apps = Application.with_current_version.order("application_versions.date_scraped DESC").where("application_versions.date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
     end
 
     @applications = apps
@@ -27,8 +27,9 @@ class ApplicationsController < ApplicationController
 
   def trending
     @applications = Application
-                    .where("date_scraped > ?", 4.weeks.ago)
-                    .reorder(visible_comments_count: :desc)
+                    .with_current_version
+                    .where("application_versions.date_scraped > ?", 4.weeks.ago)
+                    .order(visible_comments_count: :desc)
                     .limit(20)
   end
 
@@ -66,16 +67,25 @@ class ApplicationsController < ApplicationController
         @q = result.top.full_address
         @alert = Alert.new(address: @q)
         @other_addresses = result.rest.map(&:full_address)
-        @applications = Application.near([result.top.lat, result.top.lng], @radius / 1000, units: :km)
-        @applications = @applications.reorder("distance") if @sort == "distance"
+        @applications = Application.with_current_version.near(
+          [result.top.lat, result.top.lng], @radius / 1000,
+          units: :km,
+          latitude: "application_versions.lat",
+          longitude: "application_versions.lng"
+        )
+        if @sort == "time"
+          @applications = @applications
+                          .reorder("application_versions.date_scraped DESC")
+        end
         @applications = @applications
                         .paginate(page: params[:page], per_page: per_page)
         @rss = applications_path(format: "rss", address: @q, radius: @radius)
       end
     end
     @trending = Application
-                .where("date_scraped > ?", 4.weeks.ago)
-                .reorder(visible_comments_count: :desc)
+                .with_current_version
+                .where("application_versions.date_scraped > ?", 4.weeks.ago)
+                .order(visible_comments_count: :desc)
                 .limit(4)
     @set_focus_control = "q"
     # Use a different template if there are results to display
@@ -101,7 +111,7 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
-    @comments = @application.comments.visible.order(:confirmed_at)
+    @comments = @application.comments.visible.order(:confirmed_at).includes(:replies)
     @nearby_count = @application.find_all_nearest_or_recent.size
     @add_comment = AddComment.new(
       application: @application
@@ -126,11 +136,9 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     case @sort
     when "time"
-      @applications = @application.find_all_nearest_or_recent
+      @applications = @application.find_all_nearest_or_recent.reorder("application_versions.date_scraped DESC")
     when "distance"
-      @applications = Application.unscoped do
-        @application.find_all_nearest_or_recent
-      end
+      @applications = @application.find_all_nearest_or_recent
     else
       redirect_to sort: "time"
       return

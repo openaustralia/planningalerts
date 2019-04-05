@@ -376,5 +376,25 @@ describe Application do
         expect(application.versions.count).to eq 1
       end
     end
+
+    describe "reloading" do
+      it "should reload versioned data" do
+        application = create(:geocoded_application, date_scraped: Date.new(2001, 1, 1))
+        application2 = Application.find(application.id)
+        # Not testing all the version attributes - just a selection
+        expect(application2.date_scraped).to eq Date.new(2001, 1, 1)
+        expect(application2.address).to eq "A test address"
+        expect(application2.description).to eq "Pretty"
+        expect(application2.info_url).to eq "http://foo.com"
+      end
+    end
+
+    describe "N+1 queries" do
+      it "should not do too many sql queries" do
+        5.times { create(:geocoded_application) }
+        expect(ActiveRecord::Base.connection).to receive(:exec_query).at_most(2).times.and_call_original
+        Application.with_current_version.order("application_versions.date_scraped DESC").all.map(&:description)
+      end
+    end
   end
 end

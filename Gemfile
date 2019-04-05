@@ -7,6 +7,11 @@ gem "mysql2"
 gem "rails", "5.2.2.1"
 gem "rake"
 
+# Monkey-patch for bug where distance isn't loaded into model
+# This is the version of the gem required for rails 5.2
+# So, will need to upgrade this if we are upgrading rails.
+gem "rails_select_on_includes", "~> 5.2.1"
+
 # Caching
 # Allow us to use `caches_page`
 gem "actionpack-page_caching"

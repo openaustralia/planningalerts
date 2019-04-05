@@ -19,6 +19,20 @@ class Application < ApplicationRecord
     postcode
   ].freeze
 
+  attr_writer :date_scraped,
+              :info_url,
+              :comment_url,
+              :date_received,
+              :on_notice_from,
+              :on_notice_to,
+              :lat,
+              :lng,
+              :suburb,
+              :state,
+              :postcode,
+              :description,
+              :address
+
   searchkick highlight: [:description],
              index_name: "pa_applications_#{ENV['STAGE']}",
              locations: [:location],
@@ -40,10 +54,9 @@ class Application < ApplicationRecord
   validate :date_received_can_not_be_in_the_future, :validate_on_notice_period
   validates :council_reference, uniqueness: { scope: :authority_id }
 
-  default_scope { order "date_scraped DESC" }
-
-  scope(:in_past_week, -> { where("date_scraped > ?", 7.days.ago) })
-  scope(:recent, -> { where("date_scraped >= ?", 14.days.ago) })
+  scope(:with_current_version, -> { includes(:current_version).joins(:current_version) })
+  scope(:in_past_week, -> { joins(:current_version).where("application_versions.date_scraped > ?", 7.days.ago) })
+  scope(:recent, -> { joins(:current_version).where("application_versions.date_scraped >= ?", 14.days.ago) })
 
   def search_data
     attributes.merge(location: { lat: lat, lon: lng })
@@ -73,13 +86,66 @@ class Application < ApplicationRecord
   @@per_page = 100
   # rubocop:enable Style/ClassVars
 
-  # TODO: factor out common location accessor between Application and Alert
-  def location
-    Location.new(lat: lat, lng: lng) if lat && lng
+  delegate :location, to: :current_version
+
+  def date_scraped
+    load_version_data
+    @date_scraped
+  end
+
+  def info_url
+    load_version_data
+    @info_url
+  end
+
+  def comment_url
+    load_version_data
+    @comment_url
+  end
+
+  def date_received
+    load_version_data
+    @date_received
+  end
+
+  def on_notice_from
+    load_version_data
+    @on_notice_from
+  end
+
+  def on_notice_to
+    load_version_data
+    @on_notice_to
+  end
+
+  def lat
+    load_version_data
+    @lat
+  end
+
+  def lng
+    load_version_data
+    @lng
+  end
+
+  def suburb
+    load_version_data
+    @suburb
+  end
+
+  def state
+    load_version_data
+    @state
+  end
+
+  def postcode
+    load_version_data
+    @postcode
   end
 
   def description
-    description = self[:description]
+    load_version_data
+    description = @description
     return unless description
 
     # If whole description is in upper case switch the whole description to lower case
@@ -93,7 +159,8 @@ class Application < ApplicationRecord
   end
 
   def address
-    address = self[:address]
+    load_version_data
+    address = @address
     return unless address
 
     exceptions = %w[QLD VIC NSW SA ACT TAS WA NT]
@@ -128,7 +195,12 @@ class Application < ApplicationRecord
   # Find applications that are near the current application location and/or recently scraped
   def find_all_nearest_or_recent
     if location
-      nearbys(nearby_and_recent_max_distance_km, units: :km).where("date_scraped > ?", nearby_and_recent_max_age_months.months.ago)
+      nearbys(
+        nearby_and_recent_max_distance_km,
+        units: :km,
+        latitude: "application_versions.lat",
+        longitude: "application_versions.lng"
+      ).with_current_version.where("application_versions.date_scraped > ?", nearby_and_recent_max_age_months.months.ago)
     else
       []
     end
@@ -177,11 +249,21 @@ class Application < ApplicationRecord
   end
 
   def create_version
+    @version_data_loaded = true
     # If none of the data has changed don't save a new version
     return if current_version && attributes_for_version_data == current_version.attributes.slice(*ATTRIBUTE_KEYS_FOR_VERSIONS)
 
     current_version&.update(current: false)
     versions.create!(attributes_for_version_data.merge(previous_version: current_version, current: true))
     reload_current_version
+  end
+
+  def load_version_data
+    return if @version_data_loaded || !persisted?
+
+    ATTRIBUTE_KEYS_FOR_VERSIONS.each do |attribute_key|
+      send("#{attribute_key}=", current_version.send(attribute_key))
+    end
+    @version_data_loaded = true
   end
 end

@@ -172,6 +172,6 @@ module ApplicationsHelper
   end
 
   def api_host
-    "api.planningalerts.org.au"
+    Rails.env.development? ? "localhost" : "api.planningalerts.org.au"
   end
 end

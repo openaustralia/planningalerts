@@ -6,8 +6,7 @@ class CommentsController < ApplicationController
 
     if params[:authority_id]
       authority = Authority.find_short_name_encoded!(params[:authority_id])
-      # Unscope application order default scope so it's not by application.date_scraped
-      comments_to_display = authority.comments.unscope(:order)
+      comments_to_display = authority.comments
       @description << " on applications from #{authority.full_name_and_state}"
     else
       comments_to_display = Comment.all

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_20_231538) do
+ActiveRecord::Schema.define(version: 2019_03_21_002428) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -82,14 +82,14 @@ ActiveRecord::Schema.define(version: 2019_03_20_231538) do
 
   create_table "applications", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "council_reference", limit: 50, null: false
-    t.text "address", null: false
-    t.text "description", null: false
-    t.string "info_url", limit: 1024, null: false
+    t.text "address"
+    t.text "description"
+    t.string "info_url", limit: 1024
     t.string "comment_url", limit: 1024
     t.integer "authority_id", null: false
     t.float "lat", limit: 53
     t.float "lng", limit: 53
-    t.timestamp "date_scraped", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.timestamp "date_scraped"
     t.date "date_received"
     t.string "suburb", limit: 50
     t.string "state", limit: 10

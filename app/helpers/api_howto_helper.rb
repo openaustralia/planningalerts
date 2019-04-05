@@ -5,10 +5,6 @@ module ApiHowtoHelper
     url.gsub(/(\?|&|&amp;)([a-z_]+)=/, '\1<strong>\2</strong>=').gsub("&", "&amp;")
   end
 
-  def api_host
-    "api.planningalerts.org.au"
-  end
-
   delegate :api_key, to: :current_user, allow_nil: true
 
   def api_example_address_url(
