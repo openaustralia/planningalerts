@@ -107,8 +107,7 @@ class ApiController < ApplicationController
     respond_to do |format|
       format.js do
         s = { applications: applications, application_count: apps.count, max_id: max_id }
-        # TODO: Change the line below to %i[authority_id distance visible_comments_count] once columns have been deleted from applications
-        j = s.to_json(except: %i[authority_id suburb state postcode distance visible_comments_count],
+        j = s.to_json(only: %i[id council_reference applications application_count max_id],
                       methods: %i[date_scraped address description info_url
                                   comment_url date_received on_notice_from
                                   on_notice_to lat lng],
@@ -233,8 +232,7 @@ class ApiController < ApplicationController
             else
               @applications
             end
-        # TODO: Change the line below to %i[authority_id distance visible_comments_count] once columns have been deleted from applications
-        j = s.to_json(except: %i[authority_id suburb state postcode distance visible_comments_count],
+        j = s.to_json(only: %i[id council_reference applications application_count page_count],
                       methods: %i[date_scraped address description info_url
                                   comment_url date_received on_notice_from
                                   on_notice_to lat lng],

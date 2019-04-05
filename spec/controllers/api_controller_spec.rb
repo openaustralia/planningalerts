@@ -76,7 +76,6 @@ describe ApiController do
               "date_received" => nil,
               "on_notice_from" => nil,
               "on_notice_to" => nil,
-              "no_alerted" => nil,
               "authority" => {
                 "full_name" => "Acme Local Planning Authority"
               }
@@ -132,7 +131,6 @@ describe ApiController do
             "date_received" => nil,
             "on_notice_from" => nil,
             "on_notice_to" => nil,
-            "no_alerted" => nil,
             "authority" => {
               "full_name" => "Acme Local Planning Authority"
             }
@@ -165,7 +163,6 @@ describe ApiController do
             "date_received" => nil,
             "on_notice_from" => nil,
             "on_notice_to" => nil,
-            "no_alerted" => nil,
             "authority" => {
               "full_name" => "Acme Local Planning Authority"
             }
