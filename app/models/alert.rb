@@ -31,30 +31,43 @@ class Alert < ApplicationRecord
 
   # Applications that have been scraped since the last time the user was sent an alert
   def recent_applications
-    Application.with_current_version.order("application_versions.date_scraped DESC").near([location.lat, location.lng], radius_km, units: :km, latitude: "application_versions.lat", longitude: "application_versions.lng").where("application_versions.date_scraped > ?", cutoff_time)
+    Application.with_current_version
+               .order("application_versions.date_scraped DESC")
+               .near(
+                 [location.lat, location.lng], radius_km,
+                 units: :km,
+                 latitude: "application_versions.lat",
+                 longitude: "application_versions.lng"
+               )
+               .where("application_versions.date_scraped > ?", cutoff_time)
   end
 
   # Applications in the area of interest which have new comments made since we were last alerted
   def applications_with_new_comments
-    Application.with_current_version.order("application_versions.date_scraped DESC").near(
-      [location.lat, location.lng], radius_km,
-      units: :km,
-      latitude: "application_versions.lat",
-      longitude: "application_versions.lng"
-    )
+    Application.with_current_version
+               .order("application_versions.date_scraped DESC")
+               .near(
+                 [location.lat, location.lng], radius_km,
+                 units: :km,
+                 latitude: "application_versions.lat",
+                 longitude: "application_versions.lng"
+               )
                .joins(:comments)
                .where("comments.confirmed_at > ?", cutoff_time)
                .where("comments.confirmed" => true)
-               .where("comments.hidden" => false).distinct
+               .where("comments.hidden" => false)
+               .distinct
   end
 
   def applications_with_new_replies
-    Application.with_current_version.order("application_versions.date_scraped DESC").near(
-      [location.lat, location.lng], radius_km,
-      units: :km,
-      latitude: "application_versions.lat",
-      longitude: "application_versions.lng"
-    )
+    Application.with_current_version
+               .order("application_versions.date_scraped DESC")
+               .near(
+                 [location.lat, location.lng], radius_km,
+                 units: :km,
+                 latitude: "application_versions.lat",
+                 longitude: "application_versions.lng"
+               )
                .joins(:replies)
                .where("replies.received_at > ?", cutoff_time)
                .distinct
