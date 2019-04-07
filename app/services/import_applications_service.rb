@@ -30,18 +30,18 @@ class ImportApplicationsService < ApplicationService
   def import_applications_date_range
     count = 0
     error_count = 0
-    import_unsaved_applications_date_range.each do |application|
+    import_data.each do |attributes|
       # TODO: Consider if it would be better to overwrite applications with new data if they already exists
       # This would allow for the possibility that the application information was incorrectly entered at source
       # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
-      next if authority.applications.find_by(council_reference: application.council_reference)
+      next if authority.applications.find_by(council_reference: attributes[:council_reference])
 
       begin
-        application.save!
+        authority.applications.create!(attributes)
         count += 1
       rescue StandardError => e
         error_count += 1
-        logger.error "Error #{e} while trying to save application #{application.council_reference} for #{authority.full_name_and_state}. So, skipping"
+        logger.error "Error #{e} while trying to save application #{attributes[:council_reference]} for #{authority.full_name_and_state}. So, skipping"
       end
     end
 
@@ -49,13 +49,6 @@ class ImportApplicationsService < ApplicationService
     return if error_count.zero?
 
     logger.info "#{error_count} applications errored for #{authority.full_name_and_state} with date from #{start_date} to #{end_date}"
-  end
-
-  # Same as collection_applications_data_range except the applications are returned rather than saved
-  def import_unsaved_applications_date_range
-    import_data.map do |attributes|
-      authority.applications.build(attributes)
-    end
   end
 
   def import_data
