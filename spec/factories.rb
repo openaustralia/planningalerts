@@ -19,6 +19,10 @@ FactoryBot.define do
     description { "pretty" }
     info_url { "http://foo.com" }
 
+    after(:create) do |application, _evaluator|
+      application.create_version
+    end
+
     factory :geocoded_application do
       lat { 1.0 }
       lng { 2.0 }

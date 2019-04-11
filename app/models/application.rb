@@ -31,7 +31,6 @@ class Application < ApplicationRecord
   has_one :current_version, -> { where(current: true) }, class_name: "ApplicationVersion", inverse_of: :application
 
   before_save :geocode
-  after_save :create_version
   geocoded_by :address, latitude: :lat, longitude: :lng
 
   validates :date_scraped, :council_reference, :address, :description, presence: true
@@ -44,9 +43,12 @@ class Application < ApplicationRecord
   scope(:in_past_week, -> { joins(:current_version).where("application_versions.date_scraped > ?", 7.days.ago) })
   scope(:recent, -> { joins(:current_version).where("application_versions.date_scraped >= ?", 14.days.ago) })
 
-  def search_data
-    attributes.merge(location: { lat: lat, lon: lng })
-  end
+  # TODO: Temporarily commenting out to get test to run
+  # Note that search isn't working currently with the versioning
+  # TODO: Make it work again :-)
+  # def search_data
+  #   attributes.merge(location: { lat: lat, lon: lng })
+  # end
 
   def date_received_can_not_be_in_the_future
     return unless date_received && date_received > Time.zone.today
@@ -269,6 +271,16 @@ class Application < ApplicationRecord
     current_councillors_for_authority if authority.write_to_councillors_enabled?
   end
 
+  def create_version
+    @version_data_loaded = true
+    # If none of the data has changed don't save a new version
+    return if current_version && attributes_for_version_data == current_version.attributes.slice(*ATTRIBUTE_KEYS_FOR_VERSIONS)
+
+    current_version&.update(current: false)
+    versions.create!(attributes_for_version_data.merge(previous_version: current_version, current: true))
+    reload_current_version
+  end
+
   private
 
   # TODO: Optimisation is to make sure that this doesn't get called again on save when the address hasn't changed
@@ -297,16 +309,6 @@ class Application < ApplicationRecord
       r[attribute_key] = send(attribute_key)
     end
     r
-  end
-
-  def create_version
-    @version_data_loaded = true
-    # If none of the data has changed don't save a new version
-    return if current_version && attributes_for_version_data == current_version.attributes.slice(*ATTRIBUTE_KEYS_FOR_VERSIONS)
-
-    current_version&.update(current: false)
-    versions.create!(attributes_for_version_data.merge(previous_version: current_version, current: true))
-    reload_current_version
   end
 
   def load_version_data

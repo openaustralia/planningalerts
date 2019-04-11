@@ -21,10 +21,11 @@ class CreateOrUpdateApplicationService < ApplicationService
     application = Application.find_by(key_attributes)
     if application
       application.update!(attributes)
-      application
     else
-      Application.create!(attributes.merge(key_attributes))
+      application = Application.create!(attributes.merge(key_attributes))
     end
+    application.create_version
+    application
   end
 
   private
