@@ -19,20 +19,6 @@ class Application < ApplicationRecord
     postcode
   ].freeze
 
-  attr_writer :date_scraped,
-              :info_url,
-              :comment_url,
-              :date_received,
-              :on_notice_from,
-              :on_notice_to,
-              :lat,
-              :lng,
-              :suburb,
-              :state,
-              :postcode,
-              :description,
-              :address
-
   searchkick highlight: [:description],
              index_name: "pa_applications_#{ENV['STAGE']}",
              locations: [:location],
@@ -174,6 +160,71 @@ class Application < ApplicationRecord
     end.join(" ")
   end
 
+  def date_scraped=(value)
+    load_version_data
+    @date_scraped = value
+  end
+
+  def info_url=(value)
+    load_version_data
+    @info_url = value
+  end
+
+  def comment_url=(value)
+    load_version_data
+    @comment_url = value
+  end
+
+  def date_received=(value)
+    load_version_data
+    @date_received = value
+  end
+
+  def on_notice_from=(value)
+    load_version_data
+    @on_notice_from = value
+  end
+
+  def on_notice_to=(value)
+    load_version_data
+    @on_notice_to = value
+  end
+
+  def lat=(value)
+    load_version_data
+    @lat = value
+  end
+
+  def lng=(value)
+    load_version_data
+    @lng = value
+  end
+
+  def suburb=(value)
+    load_version_data
+    @suburb = value
+  end
+
+  def state=(value)
+    load_version_data
+    @state = value
+  end
+
+  def postcode=(value)
+    load_version_data
+    @postcode = value
+  end
+
+  def description=(value)
+    load_version_data
+    @description = value
+  end
+
+  def address=(value)
+    load_version_data
+    @address = value
+  end
+
   # Default values for what we consider nearby and recent
   def nearby_and_recent_max_distance_km
     Application.nearby_and_recent_max_distance_km
@@ -262,7 +313,7 @@ class Application < ApplicationRecord
     return if @version_data_loaded || !persisted?
 
     ATTRIBUTE_KEYS_FOR_VERSIONS.each do |attribute_key|
-      send("#{attribute_key}=", current_version.send(attribute_key))
+      instance_variable_set("@#{attribute_key}", current_version.send(attribute_key))
     end
     @version_data_loaded = true
   end

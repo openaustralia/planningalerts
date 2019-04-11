@@ -338,34 +338,38 @@ describe Application do
     end
 
     context "updated application with new data" do
-      before(:each) { application.update(address: "A better kind of address") }
+      let(:updated_application) do
+        a = Application.find(application.id)
+        a.update!(address: "A better kind of address")
+        a
+      end
 
       it "should create a new version when updating" do
-        expect(application.versions.count).to eq 2
+        expect(updated_application.versions.count).to eq 2
       end
 
       it "should have the new value" do
-        expect(application.address).to eq "A better kind of address"
+        expect(updated_application.address).to eq "A better kind of address"
       end
 
       it "should have the new value in the latest version" do
-        expect(application.versions[0].address).to eq "A better kind of address"
+        expect(updated_application.versions[0].address).to eq "A better kind of address"
       end
 
       it "should point to the previous version in the latest version" do
-        expect(application.versions[0].previous_version).to eq application.versions[1]
+        expect(updated_application.versions[0].previous_version).to eq application.versions[1]
       end
 
       it "should have the old value in the previous version" do
-        expect(application.versions[1].address).to eq "Some kind of address"
+        expect(updated_application.versions[1].address).to eq "Some kind of address"
       end
 
       it "the latest version should now be current" do
-        expect(application.versions[0].current).to eq true
+        expect(updated_application.versions[0].current).to eq true
       end
 
       it "the previous version should now be not current" do
-        expect(application.versions[1].current).to eq false
+        expect(updated_application.versions[1].current).to eq false
       end
     end
 
