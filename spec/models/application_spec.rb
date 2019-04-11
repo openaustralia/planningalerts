@@ -292,22 +292,24 @@ describe Application do
 
   describe "versioning" do
     let(:application) do
-      Application.create!(
-        authority: authority,
-        date_scraped: Date.new(2001, 1, 10),
+      CreateOrUpdateApplicationService.call(
+        authority_id: authority.id,
         council_reference: "123/45",
-        address: "Some kind of address",
-        description: "A really nice change",
-        info_url: "http://foo.com",
-        comment_url: "http://foo.com/comment",
-        date_received: Date.new(2001, 1, 1),
-        on_notice_from: Date.new(2002, 1, 1),
-        on_notice_to: Date.new(2002, 2, 1),
-        lat: 1.0,
-        lng: 2.0,
-        suburb: "Sydney",
-        state: "NSW",
-        postcode: "2000"
+        attributes: {
+          date_scraped: Date.new(2001, 1, 10),
+          address: "Some kind of address",
+          description: "A really nice change",
+          info_url: "http://foo.com",
+          comment_url: "http://foo.com/comment",
+          date_received: Date.new(2001, 1, 1),
+          on_notice_from: Date.new(2002, 1, 1),
+          on_notice_to: Date.new(2002, 2, 1),
+          lat: 1.0,
+          lng: 2.0,
+          suburb: "Sydney",
+          state: "NSW",
+          postcode: "2000"
+        }
       )
     end
 
@@ -339,9 +341,11 @@ describe Application do
 
     context "updated application with new data" do
       let(:updated_application) do
-        a = Application.find(application.id)
-        a.update!(address: "A better kind of address")
-        a
+        CreateOrUpdateApplicationService.call(
+          authority_id: application.authority_id,
+          council_reference: application.council_reference,
+          attributes: { address: "A better kind of address" }
+        )
       end
 
       it "should create a new version when updating" do
@@ -374,10 +378,16 @@ describe Application do
     end
 
     context "updated application with unchanged data" do
-      before(:each) { application.update(address: "Some kind of address") }
+      let(:updated_application) do
+        CreateOrUpdateApplicationService.call(
+          authority_id: application.authority_id,
+          council_reference: application.council_reference,
+          attributes: { address: "Some kind of address" }
+        )
+      end
 
       it "should not create a new version when the data hasn't changed" do
-        expect(application.versions.count).to eq 1
+        expect(updated_application.versions.count).to eq 1
       end
     end
 
