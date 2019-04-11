@@ -33,10 +33,7 @@ class Application < ApplicationRecord
   before_save :geocode
   geocoded_by :address, latitude: :lat, longitude: :lng
 
-  validates :date_scraped, :council_reference, :address, :description, presence: true
-  validates :info_url, url: true
-  validates :comment_url, url: { allow_blank: true, schemes: %w[http https mailto] }
-  validate :date_received_can_not_be_in_the_future, :validate_on_notice_period
+  validates :council_reference, presence: true
   validates :council_reference, uniqueness: { scope: :authority_id }
 
   scope(:with_current_version, -> { includes(:current_version).joins(:current_version) })
@@ -49,24 +46,6 @@ class Application < ApplicationRecord
   # def search_data
   #   attributes.merge(location: { lat: lat, lon: lng })
   # end
-
-  def date_received_can_not_be_in_the_future
-    return unless date_received && date_received > Time.zone.today
-
-    errors.add(:date_received, "can not be in the future")
-  end
-
-  def validate_on_notice_period
-    return unless on_notice_from || on_notice_to
-
-    if on_notice_from.nil?
-      # errors.add(:on_notice_from, "can not be empty if end of on notice period is set")
-    elsif on_notice_to.nil?
-      # errors.add(:on_notice_to, "can not be empty if start of on notice period is set")
-    elsif on_notice_from > on_notice_to
-      errors.add(:on_notice_to, "can not be earlier than the start of the on notice period")
-    end
-  end
 
   # For the benefit of will_paginate
   cattr_reader :per_page

@@ -6,10 +6,6 @@ describe Application do
   let(:authority) { create(:authority) }
 
   describe "validation" do
-    describe "date_scraped" do
-      it { expect(build(:application, date_scraped: nil)).not_to be_valid }
-    end
-
     describe "council_reference" do
       it { expect(build(:application, council_reference: "")).not_to be_valid }
 
@@ -23,49 +19,6 @@ describe Application do
         it { expect(build(:geocoded_application, council_reference: "A02", authority: authority)).to be_valid }
         it { expect(build(:geocoded_application, council_reference: "A01", authority: authority2)).to be_valid }
       end
-    end
-
-    describe "address" do
-      it { expect(build(:application, address: "")).not_to be_valid }
-    end
-
-    describe "description" do
-      it { expect(build(:application, description: "")).not_to be_valid }
-    end
-
-    describe "info_url" do
-      it { expect(build(:application, info_url: "")).not_to be_valid }
-      it { expect(build(:application, info_url: "http://blah.com?p=1")).to be_valid }
-      it { expect(build(:application, info_url: "foo")).not_to be_valid }
-    end
-
-    describe "comment_url" do
-      it { expect(build(:application, comment_url: nil)).to be_valid }
-      it { expect(build(:application, comment_url: "http://blah.com?p=1")).to be_valid }
-      it { expect(build(:application, comment_url: "mailto:m@foo.com?subject=hello+sir")).to be_valid }
-      it { expect(build(:application, comment_url: "foo")).not_to be_valid }
-      it { expect(build(:application, comment_url: "mailto:council@lakemac.nsw.gov.au?Subject=Redhead%20Beach%20&%20Surf%20Life%20Saving%20Club,%202A%20Beach%20Road,%20REDHEAD%20%20NSW%20%202290%20DA-1699/2014")).to be_valid }
-    end
-
-    describe "date_received" do
-      it { expect(build(:application, date_received: nil)).to be_valid }
-
-      context "the date today is 1 january 2001" do
-        around do |test|
-          Timecop.freeze(Date.new(2001, 1, 1)) { test.run }
-        end
-
-        it { expect(build(:application, date_received: Date.new(2002, 1, 1))).not_to be_valid }
-        it { expect(build(:application, date_received: Date.new(2000, 1, 1))).to be_valid }
-      end
-    end
-
-    describe "on_notice" do
-      it { expect(build(:application, on_notice_from: nil, on_notice_to: nil)).to be_valid }
-      it { expect(build(:application, on_notice_from: Date.new(2001, 1, 1), on_notice_to: Date.new(2001, 2, 1))).to be_valid }
-      it { expect(build(:application, on_notice_from: nil, on_notice_to: Date.new(2001, 2, 1))).to be_valid }
-      it { expect(build(:application, on_notice_from: Date.new(2001, 1, 1), on_notice_to: nil)).to be_valid }
-      it { expect(build(:application, on_notice_from: Date.new(2001, 2, 1), on_notice_to: Date.new(2001, 1, 1))).not_to be_valid }
     end
   end
 

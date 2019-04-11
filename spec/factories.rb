@@ -34,6 +34,7 @@ FactoryBot.define do
 
   factory :application_version do
     association :application, factory: :geocoded_application
+    date_scraped { |_b| 10.minutes.ago }
     address { "A test address" }
     description { "pretty" }
     info_url { "http://foo.com" }
