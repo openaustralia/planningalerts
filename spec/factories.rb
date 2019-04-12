@@ -1,24 +1,33 @@
 # frozen_string_literal: true
 
 def create_application(params)
-  authority_id = params[:authority_id] ||
-                 (params[:authority] || create(:authority)).id
-  attributes = params.reject do |k, _v|
-    %i[authority_id authority council_reference].include?(k)
-  end
-  CreateOrUpdateApplicationService.call(
-    authority_id: authority_id,
-    council_reference: params[:council_reference] || "001",
-    attributes: {
-      date_scraped: 10.minutes.ago,
-      address: "A test address",
-      description: "pretty",
-      info_url: "http://foo.com"
-    }.merge(attributes)
+  create_application_with_defaults(
+    params,
+    council_reference: "001",
+    date_scraped: 10.minutes.ago,
+    address: "A test address",
+    description: "pretty",
+    info_url: "http://foo.com"
   )
 end
 
 def create_geocoded_application(params)
+  create_application_with_defaults(
+    params,
+    council_reference: "001",
+    date_scraped: 10.minutes.ago,
+    address: "A test address",
+    description: "pretty",
+    info_url: "http://foo.com",
+    lat: 1.0,
+    lng: 2.0,
+    suburb: "Sydney",
+    state: "NSW",
+    postcode: "2000"
+  )
+end
+
+def create_application_with_defaults(params, attributes_default)
   authority_id = params[:authority_id] ||
                  (params[:authority] || create(:authority)).id
   attributes = params.reject do |k, _v|
@@ -26,18 +35,8 @@ def create_geocoded_application(params)
   end
   CreateOrUpdateApplicationService.call(
     authority_id: authority_id,
-    council_reference: params[:council_reference] || "001",
-    attributes: {
-      date_scraped: 10.minutes.ago,
-      address: "A test address",
-      description: "pretty",
-      info_url: "http://foo.com",
-      lat: 1.0,
-      lng: 2.0,
-      suburb: "Sydney",
-      state: "NSW",
-      postcode: "2000"
-    }.merge(attributes)
+    council_reference: params[:council_reference] || attributes_default[:council_reference],
+    attributes: attributes_default.merge(attributes)
   )
 end
 
