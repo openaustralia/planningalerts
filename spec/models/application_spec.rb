@@ -233,7 +233,7 @@ describe Application do
 
       context "and the feature is enabled for the authority" do
         before do
-          allow(authority).to receive(:write_to_councillors_enabled?).and_return true
+          allow_any_instance_of(Authority).to receive(:write_to_councillors_enabled?).and_return true
         end
 
         it { expect(application.councillors_available_for_contact).to match_array [councillor1, councillor2, councillor3] }

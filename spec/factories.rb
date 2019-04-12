@@ -1,11 +1,44 @@
 # frozen_string_literal: true
 
 def create_application(params)
-  create(:application, params)
+  authority_id = params[:authority_id] ||
+                 (params[:authority] || create(:authority)).id
+  attributes = params.reject do |k, _v|
+    %i[authority_id authority council_reference].include?(k)
+  end
+  CreateOrUpdateApplicationService.call(
+    authority_id: authority_id,
+    council_reference: params[:council_reference] || "001",
+    attributes: {
+      date_scraped: 10.minutes.ago,
+      address: "A test address",
+      description: "pretty",
+      info_url: "http://foo.com"
+    }.merge(attributes)
+  )
 end
 
 def create_geocoded_application(params)
-  create(:geocoded_application, params)
+  authority_id = params[:authority_id] ||
+                 (params[:authority] || create(:authority)).id
+  attributes = params.reject do |k, _v|
+    %i[authority_id authority council_reference].include?(k)
+  end
+  CreateOrUpdateApplicationService.call(
+    authority_id: authority_id,
+    council_reference: params[:council_reference] || "001",
+    attributes: {
+      date_scraped: 10.minutes.ago,
+      address: "A test address",
+      description: "pretty",
+      info_url: "http://foo.com",
+      lat: 1.0,
+      lng: 2.0,
+      suburb: "Sydney",
+      state: "NSW",
+      postcode: "2000"
+    }.merge(attributes)
+  )
 end
 
 FactoryBot.define do
