@@ -12,7 +12,7 @@ feature "Send a message to a councillor" do
     given(:authority) { create(:authority, full_name: "Foo", write_to_councillors_enabled: false) }
 
     background do
-      application = create(:geocoded_application, id: "1", authority_id: authority.id, comment_url: "mailto:foo@bar.com")
+      application = create_geocoded_application(id: "1", authority_id: authority.id, comment_url: "mailto:foo@bar.com")
       visit application_path(application)
     end
 
@@ -37,7 +37,7 @@ feature "Send a message to a councillor" do
 
   context "when writing to councillors is available" do
     given(:authority) { create(:contactable_authority, full_name: "Marrickville Council", write_to_councillors_enabled: true) }
-    given(:application) { create(:geocoded_application, id: "1", authority: authority) }
+    given(:application) { create_geocoded_application(id: "1", authority: authority) }
 
     around do |test|
       with_modified_env COUNCILLORS_ENABLED: "true" do
@@ -138,7 +138,7 @@ feature "Send a message to a councillor" do
   context "when a message for a councillor is confirmed" do
     given(:councillor) { create(:councillor, name: "Louise Councillor", email: "louise@council.nsw.gov.au") }
     given(:comment) do
-      application = create(:geocoded_application, id: 8, address: "24 Bruce Road Glenbrook", description: "A lovely house")
+      application = create_geocoded_application(id: 8, address: "24 Bruce Road Glenbrook", description: "A lovely house")
       create(:comment, application: application,
                        name: "Matthew Landauer",
                        councillor: councillor,

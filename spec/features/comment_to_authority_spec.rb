@@ -9,7 +9,7 @@ feature "Give feedback" do
 
   scenario "Giving feedback for an authority without a feedback email" do
     authority = create(:authority, full_name: "Foo")
-    application = create(:geocoded_application, id: "1", authority_id: authority.id, comment_url: "mailto:foo@bar.com")
+    application = create_geocoded_application(id: "1", authority_id: authority.id, comment_url: "mailto:foo@bar.com")
     visit(application_path(application))
 
     expect(page).to have_content("How to comment on this application")
@@ -17,7 +17,7 @@ feature "Give feedback" do
 
   scenario "Hide feedback form where there is no feedback email or comment_url" do
     authority = create(:authority, full_name: "Foo")
-    application = create(:geocoded_application, id: "1", authority_id: authority.id)
+    application = create_geocoded_application(id: "1", authority_id: authority.id)
     visit(application_path(application))
 
     expect(page).not_to have_content("How to comment on this application")
@@ -25,7 +25,7 @@ feature "Give feedback" do
 
   scenario "Getting an error message if the comment form isn’t completed correctly" do
     authority = create(:authority, full_name: "Foo", email: "feedback@foo.gov.au")
-    application = create(:geocoded_application, id: "1", authority_id: authority.id)
+    application = create_geocoded_application(id: "1", authority_id: authority.id)
     visit(application_path(application))
 
     fill_in("Have your say on this application", with: "I think this is a really good idea")
@@ -43,7 +43,7 @@ feature "Give feedback" do
       authority = create(:contactable_authority,
                          full_name: "Foo",
                          email: "feedback@foo.gov.au")
-      create(:geocoded_application, id: "1", authority: authority)
+      create_geocoded_application(id: "1", authority: authority)
     end
 
     scenario "Adding a comment" do
@@ -217,7 +217,7 @@ feature "Give feedback" do
 
     scenario "Getting an error message if the comment form isn’t completed correctly" do
       authority = create(:authority, full_name: "Foo", email: "feedback@foo.gov.au")
-      application = create(:geocoded_application, id: "1", authority_id: authority.id)
+      application = create_geocoded_application(id: "1", authority_id: authority.id)
       visit(application_path(application))
 
       fill_in("Have your say on this application", with: "I think this is a really good idea")

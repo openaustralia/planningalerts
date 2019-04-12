@@ -1,5 +1,13 @@
 # frozen_string_literal: true
 
+def create_application(params)
+  create(:application, params)
+end
+
+def create_geocoded_application(params)
+  create(:geocoded_application, params)
+end
+
 FactoryBot.define do
   factory :authority do
     sequence(:full_name) { |n| "Acme Local Planning Authority - #{n}" }

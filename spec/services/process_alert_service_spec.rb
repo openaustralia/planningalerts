@@ -50,7 +50,7 @@ describe ProcessAlertService do
 
       context "that was not properly geocoded" do
         let(:application) do
-          create(:geocoded_application, lat: 1.0, lng: 2.0, address: "An address that can't be geocoded")
+          create_geocoded_application(lat: 1.0, lng: 2.0, address: "An address that can't be geocoded")
         end
 
         it "should not cause the application to be re-geocoded" do
