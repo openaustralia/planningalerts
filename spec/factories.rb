@@ -73,6 +73,14 @@ FactoryBot.define do
     end
   end
 
+  # Note that this doesn't have an associated version record with it
+  # If you need that you should use create_application or
+  # create_geocoded_application above
+  factory :application2, class: "Application" do
+    association :authority
+    council_reference { "001" }
+  end
+
   factory :application_version do
     association :application, factory: :geocoded_application
     date_scraped { |_b| 10.minutes.ago }

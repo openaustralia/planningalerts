@@ -5,7 +5,7 @@ require "spec_helper"
 describe ReportMailer do
   before :each do
     @comment = build(:comment,
-                     application: build(:application, id: 2),
+                     application: create_geocoded_application(id: 2),
                      text: "I'm saying something abusive",
                      name: "Jack Rude",
                      email: "rude@foo.com",

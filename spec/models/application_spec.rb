@@ -7,7 +7,7 @@ describe Application do
 
   describe "validation" do
     describe "council_reference" do
-      it { expect(build(:application, council_reference: "")).not_to be_valid }
+      it { expect(build(:application2, council_reference: "")).not_to be_valid }
 
       context "one application already exists" do
         before :each do
