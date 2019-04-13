@@ -120,33 +120,6 @@ class Application < ApplicationRecord
     Application.normalise_address(@address)
   end
 
-  def self.normalise_description(description)
-    return unless description
-
-    # If whole description is in upper case switch the whole description to lower case
-    description = description.downcase if description.upcase == description
-    description.split(". ").map do |sentence|
-      words = sentence.split(" ")
-      # Capitalise the first word of the sentence if it's all lowercase
-      words[0] = words[0].capitalize if !words[0].nil? && words[0].downcase == words[0]
-      words.join(" ")
-    end.join(". ")
-  end
-
-  def self.normalise_address(address)
-    return unless address
-
-    exceptions = %w[QLD VIC NSW SA ACT TAS WA NT]
-
-    address.split(" ").map do |word|
-      if word != word.upcase || exceptions.any? { |exception| word =~ /^\W*#{exception}\W*$/ } || word =~ /\d/
-        word
-      else
-        word.capitalize
-      end
-    end.join(" ")
-  end
-
   def date_scraped=(value)
     load_version_data
     @date_scraped = value
@@ -228,6 +201,33 @@ class Application < ApplicationRecord
 
   def self.nearby_and_recent_max_age_months
     2
+  end
+
+  def self.normalise_description(description)
+    return unless description
+
+    # If whole description is in upper case switch the whole description to lower case
+    description = description.downcase if description.upcase == description
+    description.split(". ").map do |sentence|
+      words = sentence.split(" ")
+      # Capitalise the first word of the sentence if it's all lowercase
+      words[0] = words[0].capitalize if !words[0].nil? && words[0].downcase == words[0]
+      words.join(" ")
+    end.join(". ")
+  end
+
+  def self.normalise_address(address)
+    return unless address
+
+    exceptions = %w[QLD VIC NSW SA ACT TAS WA NT]
+
+    address.split(" ").map do |word|
+      if word != word.upcase || exceptions.any? { |exception| word =~ /^\W*#{exception}\W*$/ } || word =~ /\d/
+        word
+      else
+        word.capitalize
+      end
+    end.join(" ")
   end
 
   # Find applications that are near the current application location and/or recently scraped
