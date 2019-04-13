@@ -15,9 +15,9 @@ describe Application do
         end
         let(:authority2) { create(:authority, full_name: "A second authority") }
 
-        it { expect(build(:geocoded_application, council_reference: "A01", authority: authority)).not_to be_valid }
-        it { expect(build(:geocoded_application, council_reference: "A02", authority: authority)).to be_valid }
-        it { expect(build(:geocoded_application, council_reference: "A01", authority: authority2)).to be_valid }
+        it { expect(build(:application2, council_reference: "A01", authority: authority)).not_to be_valid }
+        it { expect(build(:application2, council_reference: "A02", authority: authority)).to be_valid }
+        it { expect(build(:application2, council_reference: "A01", authority: authority2)).to be_valid }
       end
     end
   end
