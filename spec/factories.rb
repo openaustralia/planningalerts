@@ -31,12 +31,11 @@ def create_application_with_defaults(params, attributes_default)
   # For simplicity only allow authority to be set by passing authority in params
   raise if params[:authority_id]
 
-  authority = params[:authority] || create(:authority)
   attributes = params.reject do |k, _v|
     %i[authority_id authority council_reference].include?(k)
   end
   CreateOrUpdateApplicationService.call(
-    authority_id: authority.id,
+    authority: params[:authority] || create(:authority),
     council_reference: params[:council_reference] || attributes_default[:council_reference],
     attributes: attributes_default.merge(attributes)
   )

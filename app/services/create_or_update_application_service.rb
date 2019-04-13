@@ -2,9 +2,9 @@
 
 class CreateOrUpdateApplicationService < ApplicationService
   def initialize(
-    authority_id:, council_reference:, attributes:
+    authority:, council_reference:, attributes:
   )
-    @authority_id = authority_id
+    @authority = authority
     @council_reference = council_reference
     @attributes = attributes
     # TODO: Do some sanity checking on the keys in attributes
@@ -15,7 +15,7 @@ class CreateOrUpdateApplicationService < ApplicationService
   # Returns created or updated application
   def call
     key_attributes = {
-      authority_id: authority_id, council_reference: council_reference
+      authority: authority, council_reference: council_reference
     }
     # First check if record already exists
     application = Application.find_by(key_attributes)
@@ -30,5 +30,5 @@ class CreateOrUpdateApplicationService < ApplicationService
 
   private
 
-  attr_reader :authority_id, :council_reference, :attributes
+  attr_reader :authority, :council_reference, :attributes
 end

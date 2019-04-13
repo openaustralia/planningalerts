@@ -233,7 +233,7 @@ describe Application do
 
       context "and the feature is enabled for the authority" do
         before do
-          allow_any_instance_of(Authority).to receive(:write_to_councillors_enabled?).and_return true
+          allow(authority).to receive(:write_to_councillors_enabled?).and_return true
         end
 
         it { expect(application.councillors_available_for_contact).to match_array [councillor1, councillor2, councillor3] }
@@ -244,7 +244,7 @@ describe Application do
   describe "versioning" do
     let(:application) do
       CreateOrUpdateApplicationService.call(
-        authority_id: authority.id,
+        authority: authority,
         council_reference: "123/45",
         attributes: {
           date_scraped: Date.new(2001, 1, 10),
@@ -293,7 +293,7 @@ describe Application do
     context "updated application with new data" do
       let(:updated_application) do
         CreateOrUpdateApplicationService.call(
-          authority_id: application.authority_id,
+          authority: application.authority,
           council_reference: application.council_reference,
           attributes: { address: "A better kind of address" }
         )
@@ -331,7 +331,7 @@ describe Application do
     context "updated application with unchanged data" do
       let(:updated_application) do
         CreateOrUpdateApplicationService.call(
-          authority_id: application.authority_id,
+          authority: application.authority,
           council_reference: application.council_reference,
           attributes: { address: "Some kind of address" }
         )

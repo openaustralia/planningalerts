@@ -38,7 +38,7 @@ class ImportApplicationsService < ApplicationService
 
       begin
         CreateOrUpdateApplicationService.call(
-          authority_id: authority.id,
+          authority: authority,
           council_reference: attributes[:council_reference],
           attributes: attributes.reject { |k, _v| k == :council_reference }
         )
