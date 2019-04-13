@@ -112,7 +112,15 @@ class Application < ApplicationRecord
 
   def description
     load_version_data
-    description = @description
+    Application.normalise_description(@description)
+  end
+
+  def address
+    load_version_data
+    Application.normalise_address(@address)
+  end
+
+  def self.normalise_description(description)
     return unless description
 
     # If whole description is in upper case switch the whole description to lower case
@@ -125,9 +133,7 @@ class Application < ApplicationRecord
     end.join(". ")
   end
 
-  def address
-    load_version_data
-    address = @address
+  def self.normalise_address(address)
     return unless address
 
     exceptions = %w[QLD VIC NSW SA ACT TAS WA NT]

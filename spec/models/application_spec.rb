@@ -22,71 +22,71 @@ describe Application do
     end
   end
 
-  describe "getting DA descriptions" do
+  describe ".normalise_description" do
     it "should allow applications to be blank" do
-      expect(build(:application, description: "").description).to eq("")
+      expect(Application.normalise_description("")).to eq("")
     end
 
     it "should allow the application description to be nil" do
-      expect(build(:application, description: nil).description).to be_nil
+      expect(Application.normalise_description(nil)).to be_nil
     end
 
     it "should start descriptions with a capital letter" do
-      expect(build(:application, description: "a description").description).to eq("A description")
+      expect(Application.normalise_description("a description")).to eq("A description")
     end
 
     it "should fix capitilisation of descriptions all in caps" do
-      expect(build(:application, description: "DWELLING").description).to eq("Dwelling")
+      expect(Application.normalise_description("DWELLING")).to eq("Dwelling")
     end
 
     it "should not capitalise descriptions that are partially in lowercase" do
-      expect(build(:application, description: "To merge Owners Corporation").description).to eq("To merge Owners Corporation")
+      expect(Application.normalise_description("To merge Owners Corporation")).to eq("To merge Owners Corporation")
     end
 
     it "should capitalise the first word of each sentence" do
-      expect(build(:application, description: "A SENTENCE. ANOTHER SENTENCE").description).to eq("A sentence. Another sentence")
+      expect(Application.normalise_description("A SENTENCE. ANOTHER SENTENCE")).to eq("A sentence. Another sentence")
     end
 
     it "should only capitalise the word if it's all lower case" do
-      expect(build(:application, description: "ab sentence. AB SENTENCE. aB sentence. Ab sentence").description).to eq("Ab sentence. AB SENTENCE. aB sentence. Ab sentence")
+      expect(Application.normalise_description("ab sentence. AB SENTENCE. aB sentence. Ab sentence")).to eq("Ab sentence. AB SENTENCE. aB sentence. Ab sentence")
     end
 
     it "should allow blank sentences" do
-      expect(build(:application, description: "A poorly.    . formed sentence . \n").description).to eq("A poorly. . Formed sentence. ")
+      expect(Application.normalise_description("A poorly.    . formed sentence . \n")).to eq("A poorly. . Formed sentence. ")
     end
   end
 
-  describe "getting addresses" do
+  describe ".normalise_address" do
     it "should convert words to first letter capitalised form" do
-      expect(build(:application, address: "1 KINGSTON AVENUE, PAKENHAM").address).to eq("1 Kingston Avenue, Pakenham")
+      expect(Application.normalise_address("1 KINGSTON AVENUE, PAKENHAM")).to eq("1 Kingston Avenue, Pakenham")
     end
 
     it "should not convert words that are not already all in upper case" do
-      expect(build(:application, address: "In the paddock next to the radio telescope").address).to eq("In the paddock next to the radio telescope")
+      expect(Application.normalise_address("In the paddock next to the radio telescope")).to eq("In the paddock next to the radio telescope")
     end
 
     it "should handle a mixed bag of lower and upper case" do
-      expect(build(:application, address: "63 Kimberley drive, SHAILER PARK").address).to eq("63 Kimberley drive, Shailer Park")
+      expect(Application.normalise_address("63 Kimberley drive, SHAILER PARK")).to eq("63 Kimberley drive, Shailer Park")
     end
 
     it "should not affect dashes in the address" do
-      expect(build(:application, address: "63-81").address).to eq("63-81")
+      expect(Application.normalise_address("63-81")).to eq("63-81")
     end
 
     it "should not affect abbreviations like the state names" do
-      expect(build(:application, address: "1 KINGSTON AVENUE, PAKENHAM VIC 3810").address).to eq("1 Kingston Avenue, Pakenham VIC 3810")
+      expect(Application.normalise_address("1 KINGSTON AVENUE, PAKENHAM VIC 3810")).to eq("1 Kingston Avenue, Pakenham VIC 3810")
     end
 
     it "should not affect the state names" do
-      expect(build(:application, address: "QLD VIC NSW SA ACT TAS WA NT").address).to eq("QLD VIC NSW SA ACT TAS WA NT")
+      expect(Application.normalise_address("QLD VIC NSW SA ACT TAS WA NT")).to eq("QLD VIC NSW SA ACT TAS WA NT")
     end
 
     it "should not affect the state names with punctuation" do
-      expect(build(:application, address: "QLD. ,VIC ,NSW, !SA /ACT/ TAS: WA, NT;").address).to eq("QLD. ,VIC ,NSW, !SA /ACT/ TAS: WA, NT;")
+      expect(Application.normalise_address("QLD. ,VIC ,NSW, !SA /ACT/ TAS: WA, NT;")).to eq("QLD. ,VIC ,NSW, !SA /ACT/ TAS: WA, NT;")
     end
 
     it "should not affect codes" do
-      expect(build(:application, address: "R79813 24X").address).to eq("R79813 24X")
+      expect(Application.normalise_address("R79813 24X")).to eq("R79813 24X")
     end
   end
 
