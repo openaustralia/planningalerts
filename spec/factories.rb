@@ -88,6 +88,14 @@ FactoryBot.define do
     description { "pretty" }
     info_url { "http://foo.com" }
     current { false }
+
+    factory :geocoded_application_version do
+      lat { 1.0 }
+      lng { 2.0 }
+      suburb { "Sydney" }
+      state { "NSW" }
+      postcode { "2000" }
+    end
   end
 
   factory :application_redirect do

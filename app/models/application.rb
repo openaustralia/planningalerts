@@ -30,7 +30,6 @@ class Application < ApplicationRecord
   has_many :versions, -> { order(id: :desc) }, class_name: "ApplicationVersion", dependent: :restrict_with_exception, inverse_of: :application
   has_one :current_version, -> { where(current: true) }, class_name: "ApplicationVersion", inverse_of: :application
 
-  before_save :geocode
   geocoded_by :address, latitude: :lat, longitude: :lng
 
   validates :council_reference, presence: true
@@ -266,27 +265,11 @@ class Application < ApplicationRecord
     reload_current_version
   end
 
-  private
-
-  # TODO: Optimisation is to make sure that this doesn't get called again on save when the address hasn't changed
-  def geocode
-    # Only geocode if location hasn't been set
-    return if lat && lng && suburb && state && postcode
-
-    r = GeocodeService.call(address)
-    if r.error.nil?
-      self.lat = r.top.lat
-      self.lng = r.top.lng
-      self.suburb = r.top.suburb
-      self.state = r.top.state
-      # Hack - workaround for inconsistent returned state name (as of 21 Jan 2011)
-      # from Google Geocoder
-      self.state = "NSW" if state == "New South Wales"
-      self.postcode = r.top.postcode
-    else
-      logger.error "Couldn't geocode address: #{address} (#{r.error})"
-    end
+  def make_dirty!
+    @version_data_loaded = false
   end
+
+  private
 
   def attributes_for_version_data
     r = {}

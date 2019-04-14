@@ -11,6 +11,8 @@ class ApplicationVersion < ApplicationRecord
 
   validates :current, uniqueness: { scope: :application_id }, if: :current
 
+  before_save :geocode
+
   delegate :authority, :council_reference, to: :application
 
   # TODO: factor out common location accessor between Application and Alert
@@ -36,5 +38,26 @@ class ApplicationVersion < ApplicationRecord
     elsif on_notice_from > on_notice_to
       errors.add(:on_notice_to, "can not be earlier than the start of the on notice period")
     end
+  end
+
+  # TODO: Optimisation is to make sure that this doesn't get called again on save when the address hasn't changed
+  def geocode
+    # Only geocode if location hasn't been set
+    return if lat && lng && suburb && state && postcode
+
+    r = GeocodeService.call(address)
+    if r.error.nil?
+      self.lat = r.top.lat
+      self.lng = r.top.lng
+      self.suburb = r.top.suburb
+      self.state = r.top.state
+      # Hack - workaround for inconsistent returned state name (as of 21 Jan 2011)
+      # from Google Geocoder
+      self.state = "NSW" if state == "New South Wales"
+      self.postcode = r.top.postcode
+    else
+      logger.error "Couldn't geocode address: #{address} (#{r.error})"
+    end
+    application.make_dirty!
   end
 end

@@ -118,7 +118,7 @@ describe Application do
       logger = double("Logger")
       expect(logger).to receive(:error).with("Couldn't geocode address: dfjshd (something went wrong)")
 
-      allow_any_instance_of(Application).to receive(:logger).and_return(logger)
+      allow_any_instance_of(ApplicationVersion).to receive(:logger).and_return(logger)
       a = create_application(address: "dfjshd", council_reference: "r1", date_scraped: Time.zone.now)
       expect(a.lat).to be_nil
       expect(a.lng).to be_nil

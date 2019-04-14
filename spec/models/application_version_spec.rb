@@ -66,31 +66,31 @@ describe ApplicationVersion do
       end
 
       it "should allow multiple versions for the same application that are not current" do
-        create(:application_version, application: application1, current: false)
+        create(:geocoded_application_version, application: application1, current: false)
         version2 = build(:application_version, application: application1, current: false)
         expect(version2).to be_valid
       end
 
       it "should allow one version for the same application to be current" do
-        create(:application_version, application: application1, current: false)
+        create(:geocoded_application_version, application: application1, current: false)
         version2 = build(:application_version, application: application1, current: true)
         expect(version2).to be_valid
       end
 
       it "should allow one version for the same application to be current" do
-        create(:application_version, application: application1, current: true)
+        create(:geocoded_application_version, application: application1, current: true)
         version2 = build(:application_version, application: application1, current: false)
         expect(version2).to be_valid
       end
 
       it "should not allow more than one version to be current" do
-        create(:application_version, application: application1, current: true)
+        create(:geocoded_application_version, application: application1, current: true)
         version2 = build(:application_version, application: application1, current: true)
         expect(version2).to_not be_valid
       end
 
       it "should allow more than one version to be current for different applications" do
-        create(:application_version, application: application1, current: true)
+        create(:geocoded_application_version, application: application1, current: true)
         version2 = build(:application_version, application: application2, current: true)
         expect(version2).to be_valid
       end
