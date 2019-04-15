@@ -79,10 +79,20 @@ FactoryBot.define do
   factory :application2, class: "Application" do
     association :authority
     council_reference { "001" }
+
+    factory :application2_with_version do
+      after(:create) do |application, _evaluator|
+        create(
+          :geocoded_application_version,
+          current: true,
+          application: application
+        )
+      end
+    end
   end
 
   factory :application_version do
-    association :application, factory: :geocoded_application
+    association :application, factory: :application2
     date_scraped { |_b| 10.minutes.ago }
     address { "A test address" }
     description { "pretty" }
@@ -100,7 +110,7 @@ FactoryBot.define do
 
   factory :application_redirect do
     application_id { 1 }
-    association :redirect_application, factory: :geocoded_application
+    association :redirect_application, factory: :application2
   end
 
   factory :add_comment do
@@ -115,7 +125,7 @@ FactoryBot.define do
     name { "Matthew Landauer" }
     text { "a comment" }
     address { "12 Foo Street" }
-    association :application, factory: :geocoded_application
+    association :application, factory: :application2_with_version
 
     trait :confirmed do
       confirmed { true }
