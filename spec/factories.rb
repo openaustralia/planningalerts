@@ -52,35 +52,14 @@ FactoryBot.define do
     end
   end
 
-  factory :application do
-    association :authority
-    council_reference { "001" }
-    date_scraped { |_b| 10.minutes.ago }
-    address { "A test address" }
-    description { "pretty" }
-    info_url { "http://foo.com" }
-
-    after(:create) do |application, _evaluator|
-      application.create_version
-    end
-
-    factory :geocoded_application do
-      lat { 1.0 }
-      lng { 2.0 }
-      suburb { "Sydney" }
-      state { "NSW" }
-      postcode { "2000" }
-    end
-  end
-
   # Note that this doesn't have an associated version record with it
   # If you need that you should use create_application or
   # create_geocoded_application above
-  factory :application2, class: "Application" do
+  factory :application do
     association :authority
     council_reference { "001" }
 
-    factory :application2_with_version do
+    factory :application_with_version do
       after(:create) do |application, _evaluator|
         create(
           :geocoded_application_version,
@@ -92,7 +71,7 @@ FactoryBot.define do
   end
 
   factory :application_version do
-    association :application, factory: :application2
+    association :application, factory: :application
     date_scraped { |_b| 10.minutes.ago }
     address { "A test address" }
     description { "pretty" }
@@ -110,7 +89,7 @@ FactoryBot.define do
 
   factory :application_redirect do
     application_id { 1 }
-    association :redirect_application, factory: :application2
+    association :redirect_application, factory: :application
   end
 
   factory :add_comment do
@@ -125,7 +104,7 @@ FactoryBot.define do
     name { "Matthew Landauer" }
     text { "a comment" }
     address { "12 Foo Street" }
-    association :application, factory: :application2_with_version
+    association :application, factory: :application_with_version
 
     trait :confirmed do
       confirmed { true }
