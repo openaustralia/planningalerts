@@ -119,8 +119,7 @@ describe Authority do
 
     context "when the authority has applications" do
       before :each do
-        create(
-          :geocoded_application,
+        create_geocoded_application(
           authority: authority,
           date_scraped: Date.new(2015, 12, 24),
           id: 1

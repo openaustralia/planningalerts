@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe "GenerateSitemapService" do
-  let(:application) { create(:geocoded_application) }
+  let(:application) { create_geocoded_application }
   # A logger that only displays errrors
   let(:logger) do
     logger = Logger.new(STDOUT)

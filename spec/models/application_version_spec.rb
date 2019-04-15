@@ -54,13 +54,13 @@ describe ApplicationVersion do
     describe "current" do
       # Creates a bare application with no application versions
       let(:application1) do
-        application = create(:geocoded_application)
+        application = create_geocoded_application
         application.versions.destroy_all
         application
       end
 
       let(:application2) do
-        application = create(:geocoded_application)
+        application = create_geocoded_application
         application.versions.destroy_all
         application
       end

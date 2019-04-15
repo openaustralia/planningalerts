@@ -8,10 +8,9 @@ describe CommentsController do
   end
 
   describe "#per_week" do
+    let!(:authority) { create(:authority, short_name: "Blue Mountains", id: 1) }
     before :each do
       Timecop.freeze(Time.zone.local(2016, 1, 5))
-
-      create(:authority, short_name: "Blue Mountains", id: 1)
     end
 
     after :each do
@@ -33,9 +32,8 @@ describe CommentsController do
     end
 
     it "returns comments per week for an authority as json" do
-      create(
-        :geocoded_application,
-        authority_id: 1,
+      create_geocoded_application(
+        authority: authority,
         date_scraped: Date.new(2015, 12, 24),
         id: 1
       )

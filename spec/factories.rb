@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-def create_application(params)
+def create_application(params = {})
   create_application_with_defaults(
     params,
     council_reference: "001",
@@ -11,7 +11,7 @@ def create_application(params)
   )
 end
 
-def create_geocoded_application(params)
+def create_geocoded_application(params = {})
   create_application_with_defaults(
     params,
     council_reference: "001",
