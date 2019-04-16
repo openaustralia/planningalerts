@@ -28,6 +28,14 @@ def create_geocoded_application(params = {})
 end
 
 def create_application_with_defaults(params, attributes_default)
+  valid_keys = %i[
+    council_reference lat lng address suburb state postcode date_scraped
+    no_alerted authority id description comment_url
+  ]
+  params.each do |k, _v|
+    raise "Invalid key: #{k}" unless valid_keys.include?(k)
+  end
+
   # For simplicity only allow authority to be set by passing authority in params
   raise if params[:authority_id]
 
