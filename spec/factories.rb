@@ -12,32 +12,18 @@ def create_application(params = {})
 end
 
 def create_geocoded_application(params = {})
-  create_application_with_defaults(
-    params,
-    council_reference: "001",
-    date_scraped: 10.minutes.ago,
-    address: "A test address",
-    description: "pretty",
-    info_url: "http://foo.com",
-    lat: 1.0,
-    lng: 2.0,
-    suburb: "Sydney",
-    state: "NSW",
-    postcode: "2000"
-  )
+  create(:application_with_version, params)
 end
 
 def create_application_with_defaults(params, attributes_default)
   valid_keys = %i[
-    council_reference lat lng address suburb state postcode date_scraped
-    no_alerted authority id description comment_url
+    id authority council_reference no_alerted
+    address description info_url comment_url date_received
+    on_notice_from on_notice_to date_scraped lat lng suburb state postcode
   ]
   params.each do |k, _v|
     raise "Invalid key: #{k}" unless valid_keys.include?(k)
   end
-
-  # For simplicity only allow authority to be set by passing authority in params
-  raise if params[:authority_id]
 
   attributes = params.reject do |k, _v|
     %i[authority_id authority council_reference].include?(k)
@@ -68,12 +54,42 @@ FactoryBot.define do
     council_reference { "001" }
 
     factory :application_with_version do
-      after(:create) do |application, _evaluator|
+      transient do
+        address { "A test address" }
+        description { "pretty" }
+        info_url { "http://foo.com" }
+        comment_url { nil }
+        date_received { nil }
+        on_notice_from { nil }
+        on_notice_to { nil }
+        date_scraped { 10.minutes.ago }
+        lat { 1.0 }
+        lng { 2.0 }
+        suburb { "Sydney" }
+        state { "NSW" }
+        postcode { "2000" }
+      end
+
+      after(:create) do |application, evaluator|
         create(
           :geocoded_application_version,
           current: true,
+          address: evaluator.address,
+          description: evaluator.description,
+          info_url: evaluator.info_url,
+          comment_url: evaluator.comment_url,
+          date_received: evaluator.date_received,
+          on_notice_from: evaluator.on_notice_from,
+          on_notice_to: evaluator.on_notice_to,
+          date_scraped: evaluator.date_scraped,
+          lat: evaluator.lat,
+          lng: evaluator.lng,
+          suburb: evaluator.suburb,
+          state: evaluator.state,
+          postcode: evaluator.postcode,
           application: application
         )
+        application.make_dirty!
       end
     end
   end
