@@ -121,7 +121,7 @@ describe AlertMailerHelper do
   describe "#subject" do
     let(:alert) { create(:alert, address: "123 Sample St") }
     let(:application) do
-      create_geocoded_application(address: "Bar Street",
+      create(:geocoded_application, address: "Bar Street",
                                     description: "Alterations & additions",
                                     council_reference: "007")
     end

@@ -1,13 +1,5 @@
 # frozen_string_literal: true
 
-def create_application(params = {})
-  create(:application, params)
-end
-
-def create_geocoded_application(params = {})
-  create(:geocoded_application, params)
-end
-
 FactoryBot.define do
   factory :authority do
     sequence(:full_name) { |n| "Acme Local Planning Authority - #{n}" }
@@ -19,9 +11,6 @@ FactoryBot.define do
     end
   end
 
-  # Note that this doesn't have an associated version record with it
-  # If you need that you should use create_application or
-  # create_geocoded_application above
   factory :application_with_no_version, class: "Application" do
     association :authority
     council_reference { "001" }

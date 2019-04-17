@@ -11,7 +11,7 @@ describe Application do
 
       context "one application already exists" do
         before :each do
-          create_geocoded_application(council_reference: "A01", authority: authority)
+          create(:geocoded_application, council_reference: "A01", authority: authority)
         end
         let(:authority2) { create(:authority, full_name: "A second authority") }
 
@@ -106,7 +106,7 @@ describe Application do
         nil
       )
       expect(GeocodeService).to receive(:call).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
-      a = create_application(address: "24 Bruce Road, Glenbrook, NSW", council_reference: "r1", date_scraped: Time.zone.now)
+      a = create(:application, address: "24 Bruce Road, Glenbrook, NSW", council_reference: "r1", date_scraped: Time.zone.now)
       expect(a.lat).to eq(loc.top.lat)
       expect(a.lng).to eq(loc.top.lng)
     end
@@ -119,14 +119,14 @@ describe Application do
       expect(logger).to receive(:error).with("Couldn't geocode address: dfjshd (something went wrong)")
 
       allow_any_instance_of(ApplicationVersion).to receive(:logger).and_return(logger)
-      a = create_application(address: "dfjshd", council_reference: "r1", date_scraped: Time.zone.now)
+      a = create(:application, address: "dfjshd", council_reference: "r1", date_scraped: Time.zone.now)
       expect(a.lat).to be_nil
       expect(a.lng).to be_nil
     end
   end
 
   describe "#official_submission_period_expired?" do
-    let(:application) { create_geocoded_application }
+    let(:application) { create(:geocoded_application) }
 
     context "when the ‘on notice to’ date is not set" do
       before { application.update(on_notice_to: nil) }
@@ -148,7 +148,7 @@ describe Application do
   end
 
   describe "#current_councillors_for_authority" do
-    let(:application) { create_geocoded_application(authority: authority) }
+    let(:application) { create(:geocoded_application, authority: authority) }
 
     context "when there are no councillors" do
       it { expect(application.current_councillors_for_authority).to eq nil }
@@ -192,7 +192,7 @@ describe Application do
   end
 
   describe "#councillors_available_for_contact" do
-    let(:application) { create_geocoded_application(authority: authority) }
+    let(:application) { create(:geocoded_application, authority: authority) }
 
     context "when there are no councillors" do
       context "and the feature is disabled for the authority" do
@@ -344,7 +344,7 @@ describe Application do
 
     describe "reloading" do
       it "should reload versioned data" do
-        application = create_geocoded_application(date_scraped: Date.new(2001, 1, 1))
+        application = create(:geocoded_application, date_scraped: Date.new(2001, 1, 1))
         application2 = Application.find(application.id)
         # Not testing all the version attributes - just a selection
         expect(application2.date_scraped).to eq Date.new(2001, 1, 1)
@@ -356,7 +356,7 @@ describe Application do
 
     describe "N+1 queries" do
       it "should not do too many sql queries" do
-        5.times { create_geocoded_application }
+        5.times { create(:geocoded_application) }
         expect(ActiveRecord::Base.connection).to receive(:exec_query).at_most(2).times.and_call_original
         Application.with_current_version.order("application_versions.date_scraped DESC").all.map(&:description)
       end

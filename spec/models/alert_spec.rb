@@ -218,10 +218,10 @@ describe Alert do
       p3 = @alert.location.endpoint(45, 499 * Math.sqrt(2)) # Just inside the NE corner of a box centred on the alert (of size 2 * 499m)
       p4 = @alert.location.endpoint(90, 499) # 499 m east of alert
       auth = create(:authority)
-      @app1 = create_application(lat: p1.lat, lng: p1.lng, date_scraped: 5.minutes.ago, council_reference: "A1", suburb: "", state: "", postcode: "", authority: auth)
-      @app2 = create_application(lat: p2.lat, lng: p2.lng, date_scraped: 12.hours.ago, council_reference: "A2", suburb: "", state: "", postcode: "", authority: auth)
-      @app3 = create_application(lat: p3.lat, lng: p3.lng, date_scraped: 2.days.ago, council_reference: "A3", suburb: "", state: "", postcode: "", authority: auth)
-      @app4 = create_application(lat: p4.lat, lng: p4.lng, date_scraped: 4.days.ago, council_reference: "A4", suburb: "", state: "", postcode: "", authority: auth)
+      @app1 = create(:application, lat: p1.lat, lng: p1.lng, date_scraped: 5.minutes.ago, council_reference: "A1", suburb: "", state: "", postcode: "", authority: auth)
+      @app2 = create(:application, lat: p2.lat, lng: p2.lng, date_scraped: 12.hours.ago, council_reference: "A2", suburb: "", state: "", postcode: "", authority: auth)
+      @app3 = create(:application, lat: p3.lat, lng: p3.lng, date_scraped: 2.days.ago, council_reference: "A3", suburb: "", state: "", postcode: "", authority: auth)
+      @app4 = create(:application, lat: p4.lat, lng: p4.lng, date_scraped: 4.days.ago, council_reference: "A4", suburb: "", state: "", postcode: "", authority: auth)
     end
 
     it "should return applications that have been scraped since the last time the user was sent an alert" do
@@ -259,7 +259,7 @@ describe Alert do
   describe "#new_comments" do
     let(:alert) { create(:alert, address: address, radius_meters: 2000) }
     let(:p1) { alert.location.endpoint(0, 501) } # 501 m north of alert
-    let(:application) { create_application(lat: p1.lat, lng: p1.lng, suburb: "", state: "", postcode: "") }
+    let(:application) { create(:application, lat: p1.lat, lng: p1.lng, suburb: "", state: "", postcode: "") }
 
     it "sees a new comment when there are new comments on an application" do
       comment1 = create(:confirmed_comment, application: application)
@@ -309,7 +309,7 @@ describe Alert do
     end
 
     it "when there is a new reply on a nearby application it finds a new reply" do
-      application = create_application(
+      application = create(:application, 
                            lat: 1.0,
                            lng: 2.0,
                            address: address,
@@ -325,7 +325,7 @@ describe Alert do
     end
 
     it "only finds two new reply when there are two new replies on a sinlge application" do
-      application = create_application(
+      application = create(:application, 
                            lat: 1.0,
                            lng: 2.0,
                            address: address,
@@ -347,7 +347,7 @@ describe Alert do
   describe "#applications_with_new_comments" do
     let(:alert) { create(:alert, address: address, radius_meters: 2000, lat: 1.0, lng: 2.0) }
     let(:near_application) do
-      create_application(
+      create(:application, 
              lat: 1.0,
              lng: 2.0,
              address: address,
@@ -357,7 +357,7 @@ describe Alert do
     end
     let(:far_away_application) do
       # 5001 m north of alert
-      create_application(
+      create(:application, 
              lat: alert.location.endpoint(0, 5001).lat,
              lng: alert.location.endpoint(0, 5001).lng,
              address: address,
@@ -428,7 +428,7 @@ describe Alert do
 
     context "when there is a new reply near by" do
       it "should return the application it belongs to" do
-        application = create_application(
+        application = create(:application, 
                              lat: 1.0,
                              lng: 2.0,
                              address: address,
@@ -447,7 +447,7 @@ describe Alert do
     context "when there is a new reply far away" do
       it "should not return the application it belongs to" do
         far_away = alert.location.endpoint(0, 5001) # 5001 m north of alert
-        application = create_application(
+        application = create(:application, 
                              lat: far_away.lat,
                              lng: far_away.lng,
                              address: address,

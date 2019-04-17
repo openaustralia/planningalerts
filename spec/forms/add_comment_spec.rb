@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe AddComment do
   describe "#save_comment" do
-    let(:application) { create_geocoded_application }
+    let(:application) { create(:geocoded_application) }
     let(:add_comment_form) do
       build(:add_comment, application: application,
                           comment_for: nil,
@@ -120,7 +120,7 @@ describe AddComment do
   end
 
   describe "#could_be_for_councillor?" do
-    let(:application) { create_geocoded_application }
+    let(:application) { create(:geocoded_application) }
     let(:add_comment_form) do
       build(:add_comment, application: application)
     end

@@ -27,8 +27,8 @@ describe Authority do
     before :each do
       @a1 = create(:authority)
       @a2 = create(:authority)
-      create_geocoded_application(authority: @a1, date_scraped: 3.weeks.ago)
-      create_geocoded_application(authority: @a2)
+      create(:geocoded_application, authority: @a1, date_scraped: 3.weeks.ago)
+      create(:geocoded_application, authority: @a2)
     end
 
     it "should report that a scraper is broken if it hasn't received a DA in over two weeks" do
@@ -119,7 +119,7 @@ describe Authority do
 
     context "when the authority has applications" do
       before :each do
-        create_geocoded_application(
+        create(:geocoded_application, 
           authority: authority,
           date_scraped: Date.new(2015, 12, 24),
           id: 1

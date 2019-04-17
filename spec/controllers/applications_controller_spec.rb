@@ -52,7 +52,7 @@ describe ApplicationsController do
     it "should gracefully handle an application without any geocoded information" do
       address = "An address that can't be geocoded"
       allow(GeocodeService).to receive(:call).with(address).and_return(GeocoderResults.new([], "Couldn't understand address"))
-      application = create_application(
+      application = create(:application, 
         address: address,
         id: 1
       )
@@ -108,7 +108,7 @@ describe ApplicationsController do
     end
 
     context "an application with nothing nearby" do
-      let(:application) { create_geocoded_application }
+      let(:application) { create(:geocoded_application) }
       before(:each) do
         application
       end
