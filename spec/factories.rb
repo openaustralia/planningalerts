@@ -53,45 +53,15 @@ FactoryBot.define do
         )
         application.make_dirty!
       end
-    end
 
-    factory :geocoded_application do
-      transient do
-        address { "A test address" }
-        description { "pretty" }
-        info_url { "http://foo.com" }
-        comment_url { nil }
-        date_received { nil }
-        on_notice_from { nil }
-        on_notice_to { nil }
-        date_scraped { 10.minutes.ago }
-        lat { 1.0 }
-        lng { 2.0 }
-        suburb { "Sydney" }
-        state { "NSW" }
-        postcode { "2000" }
-      end
-
-      after(:create) do |application, evaluator|
-        create(
-          :geocoded_application_version,
-          current: true,
-          address: evaluator.address,
-          description: evaluator.description,
-          info_url: evaluator.info_url,
-          comment_url: evaluator.comment_url,
-          date_received: evaluator.date_received,
-          on_notice_from: evaluator.on_notice_from,
-          on_notice_to: evaluator.on_notice_to,
-          date_scraped: evaluator.date_scraped,
-          lat: evaluator.lat,
-          lng: evaluator.lng,
-          suburb: evaluator.suburb,
-          state: evaluator.state,
-          postcode: evaluator.postcode,
-          application: application
-        )
-        application.make_dirty!
+      factory :geocoded_application do
+        transient do
+          lat { 1.0 }
+          lng { 2.0 }
+          suburb { "Sydney" }
+          state { "NSW" }
+          postcode { "2000" }
+        end
       end
     end
   end
