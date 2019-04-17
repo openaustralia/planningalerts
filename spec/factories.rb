@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 def create_application(params = {})
-  create(:application_with_version, params)
+  create(:application, params)
 end
 
 def create_geocoded_application(params = {})
-  create(:application_with_geocoded_version, params)
+  create(:geocoded_application, params)
 end
 
 FactoryBot.define do
@@ -22,11 +22,11 @@ FactoryBot.define do
   # Note that this doesn't have an associated version record with it
   # If you need that you should use create_application or
   # create_geocoded_application above
-  factory :application do
+  factory :application_with_no_version, class: "Application" do
     association :authority
     council_reference { "001" }
 
-    factory :application_with_version do
+    factory :application do
       transient do
         address { "A test address" }
         description { "pretty" }
@@ -66,7 +66,7 @@ FactoryBot.define do
       end
     end
 
-    factory :application_with_geocoded_version do
+    factory :geocoded_application do
       transient do
         address { "A test address" }
         description { "pretty" }
@@ -108,7 +108,7 @@ FactoryBot.define do
   end
 
   factory :application_version do
-    association :application, factory: :application
+    association :application, factory: :application_with_no_version
     date_scraped { |_b| 10.minutes.ago }
     address { "A test address" }
     description { "pretty" }
@@ -126,7 +126,7 @@ FactoryBot.define do
 
   factory :application_redirect do
     application_id { 1 }
-    association :redirect_application, factory: :application
+    association :redirect_application, factory: :application_with_no_version
   end
 
   factory :add_comment do
@@ -141,7 +141,7 @@ FactoryBot.define do
     name { "Matthew Landauer" }
     text { "a comment" }
     address { "12 Foo Street" }
-    association :application, factory: :application_with_geocoded_version
+    association :application, factory: :geocoded_application
 
     trait :confirmed do
       confirmed { true }
