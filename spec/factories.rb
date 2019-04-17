@@ -1,38 +1,11 @@
 # frozen_string_literal: true
 
 def create_application(params = {})
-  create_application_with_defaults(
-    params,
-    council_reference: "001",
-    date_scraped: 10.minutes.ago,
-    address: "A test address",
-    description: "pretty",
-    info_url: "http://foo.com"
-  )
-end
-
-def create_geocoded_application(params = {})
   create(:application_with_version, params)
 end
 
-def create_application_with_defaults(params, attributes_default)
-  valid_keys = %i[
-    id authority council_reference no_alerted
-    address description info_url comment_url date_received
-    on_notice_from on_notice_to date_scraped lat lng suburb state postcode
-  ]
-  params.each do |k, _v|
-    raise "Invalid key: #{k}" unless valid_keys.include?(k)
-  end
-
-  attributes = params.reject do |k, _v|
-    %i[authority_id authority council_reference].include?(k)
-  end
-  CreateOrUpdateApplicationService.call(
-    authority: params[:authority] || create(:authority),
-    council_reference: params[:council_reference] || attributes_default[:council_reference],
-    attributes: attributes_default.merge(attributes)
-  )
+def create_geocoded_application(params = {})
+  create(:application_with_geocoded_version, params)
 end
 
 FactoryBot.define do
@@ -54,6 +27,46 @@ FactoryBot.define do
     council_reference { "001" }
 
     factory :application_with_version do
+      transient do
+        address { "A test address" }
+        description { "pretty" }
+        info_url { "http://foo.com" }
+        comment_url { nil }
+        date_received { nil }
+        on_notice_from { nil }
+        on_notice_to { nil }
+        date_scraped { 10.minutes.ago }
+        lat { nil }
+        lng { nil }
+        suburb { nil }
+        state { nil }
+        postcode { nil }
+      end
+
+      after(:create) do |application, evaluator|
+        create(
+          :application_version,
+          current: true,
+          address: evaluator.address,
+          description: evaluator.description,
+          info_url: evaluator.info_url,
+          comment_url: evaluator.comment_url,
+          date_received: evaluator.date_received,
+          on_notice_from: evaluator.on_notice_from,
+          on_notice_to: evaluator.on_notice_to,
+          date_scraped: evaluator.date_scraped,
+          lat: evaluator.lat,
+          lng: evaluator.lng,
+          suburb: evaluator.suburb,
+          state: evaluator.state,
+          postcode: evaluator.postcode,
+          application: application
+        )
+        application.make_dirty!
+      end
+    end
+
+    factory :application_with_geocoded_version do
       transient do
         address { "A test address" }
         description { "pretty" }
@@ -128,7 +141,7 @@ FactoryBot.define do
     name { "Matthew Landauer" }
     text { "a comment" }
     address { "12 Foo Street" }
-    association :application, factory: :application_with_version
+    association :application, factory: :application_with_geocoded_version
 
     trait :confirmed do
       confirmed { true }
