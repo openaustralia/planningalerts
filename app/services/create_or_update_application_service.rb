@@ -31,12 +31,20 @@ class CreateOrUpdateApplicationService < ApplicationService
     return if application.current_version && attributes == application.current_version.attributes.symbolize_keys.slice(*attributes.keys)
 
     application.current_version&.update(current: false)
-    current_attributes = application.current_version&.attributes || {}
+    application.versions.create!(current_attributes(application).merge(attributes).merge(previous_version: application.current_version, current: true))
+    application.reload_current_version
+  end
+
+  def current_attributes(application)
+    current_attributes = if application.current_version
+                           application.current_version.attributes
+                         else
+                           {}
+                         end
     current_attributes = current_attributes.symbolize_keys
     current_attributes.delete(:id)
     current_attributes.delete(:created_at)
     current_attributes.delete(:updated_at)
-    application.versions.create!(current_attributes.merge(attributes).merge(previous_version: application.current_version, current: true))
-    application.reload_current_version
+    current_attributes
   end
 end
