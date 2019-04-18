@@ -36,11 +36,9 @@ class Application < ApplicationRecord
   @@per_page = 100
   # rubocop:enable Style/ClassVars
 
-  delegate :location, to: :current_version
-
   delegate :date_scraped, :info_url, :comment_url, :date_received,
            :on_notice_from, :on_notice_to, :lat, :lng, :suburb, :state,
-           :postcode, :description, :address,
+           :postcode, :description, :address, :location,
            to: :current_version
 
   # Default values for what we consider nearby and recent
