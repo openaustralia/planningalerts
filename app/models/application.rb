@@ -84,18 +84,4 @@ class Application < ApplicationRecord
   def councillors_available_for_contact
     current_councillors_for_authority if authority.write_to_councillors_enabled?
   end
-
-  def create_version(attributes)
-    # If none of the data has changed don't save a new version
-    return if current_version && attributes == current_version.attributes.symbolize_keys.slice(*attributes.keys)
-
-    current_version&.update(current: false)
-    current_attributes = current_version&.attributes || {}
-    current_attributes = current_attributes.symbolize_keys
-    current_attributes.delete(:id)
-    current_attributes.delete(:created_at)
-    current_attributes.delete(:updated_at)
-    versions.create!(current_attributes.merge(attributes).merge(previous_version: current_version, current: true))
-    reload_current_version
-  end
 end
