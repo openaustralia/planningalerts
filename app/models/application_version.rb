@@ -58,6 +58,5 @@ class ApplicationVersion < ApplicationRecord
     else
       logger.error "Couldn't geocode address: #{address} (#{r.error})"
     end
-    application.make_dirty!
   end
 end

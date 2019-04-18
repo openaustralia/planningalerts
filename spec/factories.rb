@@ -51,7 +51,6 @@ FactoryBot.define do
           postcode: evaluator.postcode,
           application: application
         )
-        application.make_dirty!
       end
 
       factory :geocoded_application do

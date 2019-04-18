@@ -3,22 +3,6 @@
 require "open-uri"
 
 class Application < ApplicationRecord
-  ATTRIBUTE_KEYS_FOR_VERSIONS = %w[
-    date_scraped
-    address
-    description
-    info_url
-    comment_url
-    date_received
-    on_notice_from
-    on_notice_to
-    lat
-    lng
-    suburb
-    state
-    postcode
-  ].freeze
-
   searchkick highlight: [:description],
              index_name: "pa_applications_#{ENV['STAGE']}",
              locations: [:location],
@@ -54,134 +38,16 @@ class Application < ApplicationRecord
 
   delegate :location, to: :current_version
 
-  def date_scraped
-    load_version_data
-    @date_scraped
-  end
-
-  def info_url
-    load_version_data
-    @info_url
-  end
-
-  def comment_url
-    load_version_data
-    @comment_url
-  end
-
-  def date_received
-    load_version_data
-    @date_received
-  end
-
-  def on_notice_from
-    load_version_data
-    @on_notice_from
-  end
-
-  def on_notice_to
-    load_version_data
-    @on_notice_to
-  end
-
-  def lat
-    load_version_data
-    @lat
-  end
-
-  def lng
-    load_version_data
-    @lng
-  end
-
-  def suburb
-    load_version_data
-    @suburb
-  end
-
-  def state
-    load_version_data
-    @state
-  end
-
-  def postcode
-    load_version_data
-    @postcode
-  end
+  delegate :date_scraped, :info_url, :comment_url, :date_received,
+           :on_notice_from, :on_notice_to, :lat, :lng, :suburb, :state, :postcode,
+           to: :current_version
 
   def description
-    load_version_data
-    Application.normalise_description(@description)
+    Application.normalise_description(current_version.description)
   end
 
   def address
-    load_version_data
-    Application.normalise_address(@address)
-  end
-
-  def date_scraped=(value)
-    load_version_data
-    @date_scraped = value
-  end
-
-  def info_url=(value)
-    load_version_data
-    @info_url = value
-  end
-
-  def comment_url=(value)
-    load_version_data
-    @comment_url = value
-  end
-
-  def date_received=(value)
-    load_version_data
-    @date_received = value
-  end
-
-  def on_notice_from=(value)
-    load_version_data
-    @on_notice_from = value
-  end
-
-  def on_notice_to=(value)
-    load_version_data
-    @on_notice_to = value
-  end
-
-  def lat=(value)
-    load_version_data
-    @lat = value
-  end
-
-  def lng=(value)
-    load_version_data
-    @lng = value
-  end
-
-  def suburb=(value)
-    load_version_data
-    @suburb = value
-  end
-
-  def state=(value)
-    load_version_data
-    @state = value
-  end
-
-  def postcode=(value)
-    load_version_data
-    @postcode = value
-  end
-
-  def description=(value)
-    load_version_data
-    @description = value
-  end
-
-  def address=(value)
-    load_version_data
-    @address = value
+    Application.normalise_address(current_version.address)
   end
 
   # Default values for what we consider nearby and recent
@@ -256,7 +122,6 @@ class Application < ApplicationRecord
   end
 
   def create_version(attributes_for_version_data)
-    @version_data_loaded = true
     # If none of the data has changed don't save a new version
     return if current_version && attributes_for_version_data == current_version.attributes.symbolize_keys.slice(*attributes_for_version_data.keys)
 
@@ -268,21 +133,5 @@ class Application < ApplicationRecord
     current_attributes.delete(:updated_at)
     versions.create!(current_attributes.merge(attributes_for_version_data).merge(previous_version: current_version, current: true))
     reload_current_version
-    @version_data_loaded = false
-  end
-
-  def make_dirty!
-    @version_data_loaded = false
-  end
-
-  private
-
-  def load_version_data
-    return if @version_data_loaded || !persisted?
-
-    ATTRIBUTE_KEYS_FOR_VERSIONS.each do |attribute_key|
-      instance_variable_set("@#{attribute_key}", current_version.send(attribute_key))
-    end
-    @version_data_loaded = true
   end
 end

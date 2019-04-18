@@ -126,22 +126,26 @@ describe Application do
   end
 
   describe "#official_submission_period_expired?" do
-    let(:application) { create(:geocoded_application) }
-
     context "when the ‘on notice to’ date is not set" do
-      before { application.update(on_notice_to: nil) }
+      let(:application) do
+        create(:geocoded_application, on_notice_to: nil)
+      end
 
       it { expect(application.official_submission_period_expired?).to be_falsey }
     end
 
     context "when the ‘on notice to’ date has passed", focus: true do
-      before { application.update(on_notice_to: Time.zone.today - 1.day) }
+      let(:application) do
+        create(:geocoded_application, on_notice_to: Time.zone.today - 1.day)
+      end
 
       it { expect(application.official_submission_period_expired?).to be true }
     end
 
     context "when the ‘on notice to’ date is in the future" do
-      before { application.update(on_notice_to: Time.zone.today + 1.day) }
+      let(:application) do
+        create(:geocoded_application, on_notice_to: Time.zone.today + 1.day)
+      end
 
       it { expect(application.official_submission_period_expired?).to be false }
     end
