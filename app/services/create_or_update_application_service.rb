@@ -18,13 +18,9 @@ class CreateOrUpdateApplicationService < ApplicationService
       authority: authority, council_reference: council_reference
     }
     # First check if record already exists
-    application = Application.find_by(key_attributes)
-    if application
-      application.update!(attributes)
-    else
-      application = Application.create!(attributes.merge(key_attributes))
-    end
-    application.create_version
+    application = Application.find_by(key_attributes) ||
+                  Application.create!(key_attributes)
+    application.create_version(attributes)
     application
   end
 

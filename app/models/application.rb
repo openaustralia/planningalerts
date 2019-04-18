@@ -255,14 +255,20 @@ class Application < ApplicationRecord
     current_councillors_for_authority if authority.write_to_councillors_enabled?
   end
 
-  def create_version
+  def create_version(attributes_for_version_data)
     @version_data_loaded = true
     # If none of the data has changed don't save a new version
-    return if current_version && attributes_for_version_data == current_version.attributes.slice(*ATTRIBUTE_KEYS_FOR_VERSIONS)
+    return if current_version && attributes_for_version_data == current_version.attributes.symbolize_keys.slice(*attributes_for_version_data.keys)
 
     current_version&.update(current: false)
-    versions.create!(attributes_for_version_data.merge(previous_version: current_version, current: true))
+    current_attributes = current_version&.attributes || {}
+    current_attributes = current_attributes.symbolize_keys
+    current_attributes.delete(:id)
+    current_attributes.delete(:created_at)
+    current_attributes.delete(:updated_at)
+    versions.create!(current_attributes.merge(attributes_for_version_data).merge(previous_version: current_version, current: true))
     reload_current_version
+    @version_data_loaded = false
   end
 
   def make_dirty!
@@ -270,14 +276,6 @@ class Application < ApplicationRecord
   end
 
   private
-
-  def attributes_for_version_data
-    r = {}
-    ATTRIBUTE_KEYS_FOR_VERSIONS.each do |attribute_key|
-      r[attribute_key] = send(attribute_key)
-    end
-    r
-  end
 
   def load_version_data
     return if @version_data_loaded || !persisted?
