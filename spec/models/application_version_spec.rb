@@ -51,74 +51,6 @@ describe ApplicationVersion do
       it { expect(build(:application_version, on_notice_from: Date.new(2001, 2, 1), on_notice_to: Date.new(2001, 1, 1))).not_to be_valid }
     end
 
-    describe ".normalise_description" do
-      it "should allow applications to be blank" do
-        expect(ApplicationVersion.normalise_description("")).to eq("")
-      end
-
-      it "should allow the application description to be nil" do
-        expect(ApplicationVersion.normalise_description(nil)).to be_nil
-      end
-
-      it "should start descriptions with a capital letter" do
-        expect(ApplicationVersion.normalise_description("a description")).to eq("A description")
-      end
-
-      it "should fix capitilisation of descriptions all in caps" do
-        expect(ApplicationVersion.normalise_description("DWELLING")).to eq("Dwelling")
-      end
-
-      it "should not capitalise descriptions that are partially in lowercase" do
-        expect(ApplicationVersion.normalise_description("To merge Owners Corporation")).to eq("To merge Owners Corporation")
-      end
-
-      it "should capitalise the first word of each sentence" do
-        expect(ApplicationVersion.normalise_description("A SENTENCE. ANOTHER SENTENCE")).to eq("A sentence. Another sentence")
-      end
-
-      it "should only capitalise the word if it's all lower case" do
-        expect(ApplicationVersion.normalise_description("ab sentence. AB SENTENCE. aB sentence. Ab sentence")).to eq("Ab sentence. AB SENTENCE. aB sentence. Ab sentence")
-      end
-
-      it "should allow blank sentences" do
-        expect(ApplicationVersion.normalise_description("A poorly.    . formed sentence . \n")).to eq("A poorly. . Formed sentence. ")
-      end
-    end
-
-    describe ".normalise_address" do
-      it "should convert words to first letter capitalised form" do
-        expect(ApplicationVersion.normalise_address("1 KINGSTON AVENUE, PAKENHAM")).to eq("1 Kingston Avenue, Pakenham")
-      end
-
-      it "should not convert words that are not already all in upper case" do
-        expect(ApplicationVersion.normalise_address("In the paddock next to the radio telescope")).to eq("In the paddock next to the radio telescope")
-      end
-
-      it "should handle a mixed bag of lower and upper case" do
-        expect(ApplicationVersion.normalise_address("63 Kimberley drive, SHAILER PARK")).to eq("63 Kimberley drive, Shailer Park")
-      end
-
-      it "should not affect dashes in the address" do
-        expect(ApplicationVersion.normalise_address("63-81")).to eq("63-81")
-      end
-
-      it "should not affect abbreviations like the state names" do
-        expect(ApplicationVersion.normalise_address("1 KINGSTON AVENUE, PAKENHAM VIC 3810")).to eq("1 Kingston Avenue, Pakenham VIC 3810")
-      end
-
-      it "should not affect the state names" do
-        expect(ApplicationVersion.normalise_address("QLD VIC NSW SA ACT TAS WA NT")).to eq("QLD VIC NSW SA ACT TAS WA NT")
-      end
-
-      it "should not affect the state names with punctuation" do
-        expect(ApplicationVersion.normalise_address("QLD. ,VIC ,NSW, !SA /ACT/ TAS: WA, NT;")).to eq("QLD. ,VIC ,NSW, !SA /ACT/ TAS: WA, NT;")
-      end
-
-      it "should not affect codes" do
-        expect(ApplicationVersion.normalise_address("R79813 24X")).to eq("R79813 24X")
-      end
-    end
-
     describe "current" do
       # Creates a bare application with no application versions
       let(:application1) do
@@ -164,4 +96,73 @@ describe ApplicationVersion do
       end
     end
   end
+
+  describe ".normalise_description" do
+    it "should allow applications to be blank" do
+      expect(ApplicationVersion.normalise_description("")).to eq("")
+    end
+
+    it "should allow the application description to be nil" do
+      expect(ApplicationVersion.normalise_description(nil)).to be_nil
+    end
+
+    it "should start descriptions with a capital letter" do
+      expect(ApplicationVersion.normalise_description("a description")).to eq("A description")
+    end
+
+    it "should fix capitilisation of descriptions all in caps" do
+      expect(ApplicationVersion.normalise_description("DWELLING")).to eq("Dwelling")
+    end
+
+    it "should not capitalise descriptions that are partially in lowercase" do
+      expect(ApplicationVersion.normalise_description("To merge Owners Corporation")).to eq("To merge Owners Corporation")
+    end
+
+    it "should capitalise the first word of each sentence" do
+      expect(ApplicationVersion.normalise_description("A SENTENCE. ANOTHER SENTENCE")).to eq("A sentence. Another sentence")
+    end
+
+    it "should only capitalise the word if it's all lower case" do
+      expect(ApplicationVersion.normalise_description("ab sentence. AB SENTENCE. aB sentence. Ab sentence")).to eq("Ab sentence. AB SENTENCE. aB sentence. Ab sentence")
+    end
+
+    it "should allow blank sentences" do
+      expect(ApplicationVersion.normalise_description("A poorly.    . formed sentence . \n")).to eq("A poorly. . Formed sentence. ")
+    end
+  end
+
+  describe ".normalise_address" do
+    it "should convert words to first letter capitalised form" do
+      expect(ApplicationVersion.normalise_address("1 KINGSTON AVENUE, PAKENHAM")).to eq("1 Kingston Avenue, Pakenham")
+    end
+
+    it "should not convert words that are not already all in upper case" do
+      expect(ApplicationVersion.normalise_address("In the paddock next to the radio telescope")).to eq("In the paddock next to the radio telescope")
+    end
+
+    it "should handle a mixed bag of lower and upper case" do
+      expect(ApplicationVersion.normalise_address("63 Kimberley drive, SHAILER PARK")).to eq("63 Kimberley drive, Shailer Park")
+    end
+
+    it "should not affect dashes in the address" do
+      expect(ApplicationVersion.normalise_address("63-81")).to eq("63-81")
+    end
+
+    it "should not affect abbreviations like the state names" do
+      expect(ApplicationVersion.normalise_address("1 KINGSTON AVENUE, PAKENHAM VIC 3810")).to eq("1 Kingston Avenue, Pakenham VIC 3810")
+    end
+
+    it "should not affect the state names" do
+      expect(ApplicationVersion.normalise_address("QLD VIC NSW SA ACT TAS WA NT")).to eq("QLD VIC NSW SA ACT TAS WA NT")
+    end
+
+    it "should not affect the state names with punctuation" do
+      expect(ApplicationVersion.normalise_address("QLD. ,VIC ,NSW, !SA /ACT/ TAS: WA, NT;")).to eq("QLD. ,VIC ,NSW, !SA /ACT/ TAS: WA, NT;")
+    end
+
+    it "should not affect codes" do
+      expect(ApplicationVersion.normalise_address("R79813 24X")).to eq("R79813 24X")
+    end
+  end
+
 end
