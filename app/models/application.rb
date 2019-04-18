@@ -40,6 +40,71 @@ class Application < ApplicationRecord
            :official_submission_period_expired?,
            to: :current_version
 
+  def date_scraped=(value)
+    load_version_data
+    @date_scraped = value
+  end
+
+  def info_url=(value)
+    load_version_data
+    @info_url = value
+  end
+
+  def comment_url=(value)
+    load_version_data
+    @comment_url = value
+  end
+
+  def date_received=(value)
+    load_version_data
+    @date_received = value
+  end
+
+  def on_notice_from=(value)
+    load_version_data
+    @on_notice_from = value
+  end
+
+  def on_notice_to=(value)
+    load_version_data
+    @on_notice_to = value
+  end
+
+  def lat=(value)
+    load_version_data
+    @lat = value
+  end
+
+  def lng=(value)
+    load_version_data
+    @lng = value
+  end
+
+  def suburb=(value)
+    load_version_data
+    @suburb = value
+  end
+
+  def state=(value)
+    load_version_data
+    @state = value
+  end
+
+  def postcode=(value)
+    load_version_data
+    @postcode = value
+  end
+
+  def description=(value)
+    load_version_data
+    @description = value
+  end
+
+  def address=(value)
+    load_version_data
+    @address = value
+  end
+
   # Default values for what we consider nearby and recent
   def nearby_and_recent_max_distance_km
     Application.nearby_and_recent_max_distance_km
