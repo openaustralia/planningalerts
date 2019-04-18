@@ -6,7 +6,7 @@ class CreateOrUpdateApplicationService < ApplicationService
   )
     @authority = authority
     @council_reference = council_reference
-    @attributes = attributes
+    @attributes = attributes.stringify_keys
     # TODO: Do some sanity checking on the keys in attributes
     # TODO: Make sure that authority_id and council_reference are not
     # keys in attributes
@@ -28,10 +28,10 @@ class CreateOrUpdateApplicationService < ApplicationService
 
   def create_version(application)
     # If none of the data has changed don't save a new version
-    return if application.current_version && attributes == application.current_version.attributes.symbolize_keys.slice(*attributes.keys)
+    return if application.current_version && attributes == application.current_version.attributes.slice(*attributes.keys)
 
     application.current_version&.update(current: false)
-    application.versions.create!(current_attributes(application).merge(attributes).merge(previous_version: application.current_version, current: true))
+    application.versions.create!(current_attributes(application).merge(attributes).merge("previous_version" => application.current_version, "current" => true))
     application.reload_current_version
   end
 
@@ -41,10 +41,9 @@ class CreateOrUpdateApplicationService < ApplicationService
                          else
                            {}
                          end
-    current_attributes = current_attributes.symbolize_keys
-    current_attributes.delete(:id)
-    current_attributes.delete(:created_at)
-    current_attributes.delete(:updated_at)
+    current_attributes.delete("id")
+    current_attributes.delete("created_at")
+    current_attributes.delete("updated_at")
     current_attributes
   end
 end
