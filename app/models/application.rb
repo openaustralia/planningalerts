@@ -39,6 +39,7 @@ class Application < ApplicationRecord
   delegate :date_scraped, :info_url, :comment_url, :date_received,
            :on_notice_from, :on_notice_to, :lat, :lng, :suburb, :state,
            :postcode, :description, :address, :location,
+           :official_submission_period_expired?,
            to: :current_version
 
   # Default values for what we consider nearby and recent
@@ -71,10 +72,6 @@ class Application < ApplicationRecord
     else
       []
     end
-  end
-
-  def official_submission_period_expired?
-    on_notice_to && Time.zone.today > on_notice_to
   end
 
   def current_councillors_for_authority

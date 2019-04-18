@@ -55,6 +55,10 @@ class ApplicationVersion < ApplicationRecord
     end.join(" ")
   end
 
+  def official_submission_period_expired?
+    on_notice_to && Time.zone.today > on_notice_to
+  end
+
   private
 
   def date_received_can_not_be_in_the_future

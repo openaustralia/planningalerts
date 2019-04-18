@@ -165,4 +165,29 @@ describe ApplicationVersion do
     end
   end
 
+  describe "#official_submission_period_expired?" do
+    context "when the ‘on notice to’ date is not set" do
+      let(:version) do
+        create(:geocoded_application_version, on_notice_to: nil)
+      end
+
+      it { expect(version.official_submission_period_expired?).to be_falsey }
+    end
+
+    context "when the ‘on notice to’ date has passed", focus: true do
+      let(:version) do
+        create(:geocoded_application_version, on_notice_to: Time.zone.today - 1.day)
+      end
+
+      it { expect(version.official_submission_period_expired?).to be true }
+    end
+
+    context "when the ‘on notice to’ date is in the future" do
+      let(:version) do
+        create(:geocoded_application_version, on_notice_to: Time.zone.today + 1.day)
+      end
+
+      it { expect(version.official_submission_period_expired?).to be false }
+    end
+  end
 end
