@@ -15,9 +15,44 @@ class ApplicationVersion < ApplicationRecord
 
   delegate :authority, :council_reference, to: :application
 
+  def description
+    ApplicationVersion.normalise_description(self[:description])
+  end
+
+  def address
+    ApplicationVersion.normalise_address(self[:address])
+  end
+
   # TODO: factor out common location accessor between Application and Alert
   def location
     Location.new(lat: lat, lng: lng) if lat && lng
+  end
+
+  def self.normalise_description(description)
+    return unless description
+
+    # If whole description is in upper case switch the whole description to lower case
+    description = description.downcase if description.upcase == description
+    description.split(". ").map do |sentence|
+      words = sentence.split(" ")
+      # Capitalise the first word of the sentence if it's all lowercase
+      words[0] = words[0].capitalize if !words[0].nil? && words[0].downcase == words[0]
+      words.join(" ")
+    end.join(". ")
+  end
+
+  def self.normalise_address(address)
+    return unless address
+
+    exceptions = %w[QLD VIC NSW SA ACT TAS WA NT]
+
+    address.split(" ").map do |word|
+      if word != word.upcase || exceptions.any? { |exception| word =~ /^\W*#{exception}\W*$/ } || word =~ /\d/
+        word
+      else
+        word.capitalize
+      end
+    end.join(" ")
   end
 
   private

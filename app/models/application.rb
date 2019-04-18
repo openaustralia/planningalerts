@@ -39,16 +39,9 @@ class Application < ApplicationRecord
   delegate :location, to: :current_version
 
   delegate :date_scraped, :info_url, :comment_url, :date_received,
-           :on_notice_from, :on_notice_to, :lat, :lng, :suburb, :state, :postcode,
+           :on_notice_from, :on_notice_to, :lat, :lng, :suburb, :state,
+           :postcode, :description, :address,
            to: :current_version
-
-  def description
-    Application.normalise_description(current_version.description)
-  end
-
-  def address
-    Application.normalise_address(current_version.address)
-  end
 
   # Default values for what we consider nearby and recent
   def nearby_and_recent_max_distance_km
@@ -66,33 +59,6 @@ class Application < ApplicationRecord
 
   def self.nearby_and_recent_max_age_months
     2
-  end
-
-  def self.normalise_description(description)
-    return unless description
-
-    # If whole description is in upper case switch the whole description to lower case
-    description = description.downcase if description.upcase == description
-    description.split(". ").map do |sentence|
-      words = sentence.split(" ")
-      # Capitalise the first word of the sentence if it's all lowercase
-      words[0] = words[0].capitalize if !words[0].nil? && words[0].downcase == words[0]
-      words.join(" ")
-    end.join(". ")
-  end
-
-  def self.normalise_address(address)
-    return unless address
-
-    exceptions = %w[QLD VIC NSW SA ACT TAS WA NT]
-
-    address.split(" ").map do |word|
-      if word != word.upcase || exceptions.any? { |exception| word =~ /^\W*#{exception}\W*$/ } || word =~ /\d/
-        word
-      else
-        word.capitalize
-      end
-    end.join(" ")
   end
 
   # Find applications that are near the current application location and/or recently scraped
