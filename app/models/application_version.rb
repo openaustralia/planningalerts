@@ -15,6 +15,10 @@ class ApplicationVersion < ApplicationRecord
 
   delegate :authority, :council_reference, to: :application
 
+  def search_data
+    attributes.merge(location: { lat: lat, lon: lng })
+  end
+
   def description
     ApplicationVersion.normalise_description(self[:description])
   end

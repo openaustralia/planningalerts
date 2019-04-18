@@ -23,12 +23,10 @@ class Application < ApplicationRecord
   scope(:in_past_week, -> { joins(:current_version).where("application_versions.date_scraped > ?", 7.days.ago) })
   scope(:recent, -> { joins(:current_version).where("application_versions.date_scraped >= ?", 14.days.ago) })
 
-  # TODO: Temporarily commenting out to get test to run
-  # Note that search isn't working currently with the versioning
-  # TODO: Make it work again :-)
-  # def search_data
-  #   attributes.merge(location: { lat: lat, lon: lng })
-  # end
+  def search_data
+    # Include version data in what's indexed by searchkick
+    attributes.merge(current_version&.search_data || {})
+  end
 
   # For the benefit of will_paginate
   cattr_reader :per_page
