@@ -71,7 +71,7 @@ feature "Sign up for alerts" do
 
   context "via the homepage" do
     background do
-      create(:geocoded_application,
+      create(:geocoded_application, 
              address: "26 Bruce Rd, Glenbrook NSW 2773",
              lat: -33.772812, lng: 150.624252)
     end

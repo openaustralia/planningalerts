@@ -11,15 +11,69 @@ FactoryBot.define do
     end
   end
 
-  factory :application do
+  factory :application_with_no_version, class: "Application" do
     association :authority
     council_reference { "001" }
+
+    factory :application do
+      transient do
+        address { "A test address" }
+        description { "pretty" }
+        info_url { "http://foo.com" }
+        comment_url { nil }
+        date_received { nil }
+        on_notice_from { nil }
+        on_notice_to { nil }
+        date_scraped { 10.minutes.ago }
+        lat { nil }
+        lng { nil }
+        suburb { nil }
+        state { nil }
+        postcode { nil }
+      end
+
+      after(:create) do |application, evaluator|
+        create(
+          :application_version,
+          current: true,
+          address: evaluator.address,
+          description: evaluator.description,
+          info_url: evaluator.info_url,
+          comment_url: evaluator.comment_url,
+          date_received: evaluator.date_received,
+          on_notice_from: evaluator.on_notice_from,
+          on_notice_to: evaluator.on_notice_to,
+          date_scraped: evaluator.date_scraped,
+          lat: evaluator.lat,
+          lng: evaluator.lng,
+          suburb: evaluator.suburb,
+          state: evaluator.state,
+          postcode: evaluator.postcode,
+          application: application
+        )
+      end
+
+      factory :geocoded_application do
+        transient do
+          lat { 1.0 }
+          lng { 2.0 }
+          suburb { "Sydney" }
+          state { "NSW" }
+          postcode { "2000" }
+        end
+      end
+    end
+  end
+
+  factory :application_version do
+    association :application, factory: :application_with_no_version
     date_scraped { |_b| 10.minutes.ago }
     address { "A test address" }
     description { "pretty" }
     info_url { "http://foo.com" }
+    current { false }
 
-    factory :geocoded_application do
+    factory :geocoded_application_version do
       lat { 1.0 }
       lng { 2.0 }
       suburb { "Sydney" }
@@ -28,17 +82,9 @@ FactoryBot.define do
     end
   end
 
-  factory :application_version do
-    association :application, factory: :geocoded_application
-    address { "A test address" }
-    description { "pretty" }
-    info_url { "http://foo.com" }
-    current { false }
-  end
-
   factory :application_redirect do
     application_id { 1 }
-    association :redirect_application, factory: :geocoded_application
+    association :redirect_application, factory: :application_with_no_version
   end
 
   factory :add_comment do

@@ -5,7 +5,7 @@ require "spec_helper"
 # HTML email
 describe "alert_mailer/alert.html.haml" do
   let(:application) do
-    create(:geocoded_application,
+    create(:geocoded_application, 
            description: "Alterations & additions",
            address: "24 Bruce Road Glenbrook")
   end
@@ -108,7 +108,7 @@ end
 # Text only email
 describe "alert_mailer/alert.text.erb" do
   let(:application) do
-    create(:geocoded_application,
+    create(:geocoded_application, 
            description: "Alterations & additions",
            address: "24 Bruce Road Glenbrook")
   end

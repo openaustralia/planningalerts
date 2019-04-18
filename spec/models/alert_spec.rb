@@ -309,7 +309,7 @@ describe Alert do
     end
 
     it "when there is a new reply on a nearby application it finds a new reply" do
-      application = create(:application,
+      application = create(:application, 
                            lat: 1.0,
                            lng: 2.0,
                            address: address,
@@ -325,7 +325,7 @@ describe Alert do
     end
 
     it "only finds two new reply when there are two new replies on a sinlge application" do
-      application = create(:application,
+      application = create(:application, 
                            lat: 1.0,
                            lng: 2.0,
                            address: address,
@@ -347,7 +347,7 @@ describe Alert do
   describe "#applications_with_new_comments" do
     let(:alert) { create(:alert, address: address, radius_meters: 2000, lat: 1.0, lng: 2.0) }
     let(:near_application) do
-      create(:application,
+      create(:application, 
              lat: 1.0,
              lng: 2.0,
              address: address,
@@ -357,7 +357,7 @@ describe Alert do
     end
     let(:far_away_application) do
       # 5001 m north of alert
-      create(:application,
+      create(:application, 
              lat: alert.location.endpoint(0, 5001).lat,
              lng: alert.location.endpoint(0, 5001).lng,
              address: address,
@@ -428,7 +428,7 @@ describe Alert do
 
     context "when there is a new reply near by" do
       it "should return the application it belongs to" do
-        application = create(:application,
+        application = create(:application, 
                              lat: 1.0,
                              lng: 2.0,
                              address: address,
@@ -447,7 +447,7 @@ describe Alert do
     context "when there is a new reply far away" do
       it "should not return the application it belongs to" do
         far_away = alert.location.endpoint(0, 5001) # 5001 m north of alert
-        application = create(:application,
+        application = create(:application, 
                              lat: far_away.lat,
                              lng: far_away.lng,
                              address: address,

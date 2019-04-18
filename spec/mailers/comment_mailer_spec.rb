@@ -5,8 +5,7 @@ require "spec_helper"
 describe CommentMailer do
   describe "#notify_authority" do
     before :each do
-      application = create(
-        :geocoded_application,
+      application = create(:geocoded_application, 
         authority: create(:contactable_authority),
         address: "12 Foo Rd",
         council_reference: "X/001",

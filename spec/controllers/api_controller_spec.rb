@@ -386,8 +386,10 @@ describe ApiController do
     context "valid authentication" do
       let(:user) { FactoryBot.create(:user, bulk_api: true) }
       before(:each) do
-        FactoryBot.create_list(:geocoded_application, 5, date_scraped: Time.utc(2015, 5, 5, 12, 0, 0))
-        FactoryBot.create_list(:geocoded_application, 5, date_scraped: Time.utc(2015, 5, 6, 12, 0, 0))
+        5.times do
+          create(:geocoded_application, date_scraped: Time.utc(2015, 5, 5, 12, 0, 0))
+          create(:geocoded_application, date_scraped: Time.utc(2015, 5, 6, 12, 0, 0))
+        end
       end
       subject { get :date_scraped, params: { key: user.api_key, format: "js", date_scraped: "2015-05-06" } }
 

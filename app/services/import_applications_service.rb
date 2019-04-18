@@ -37,7 +37,11 @@ class ImportApplicationsService < ApplicationService
       next if authority.applications.find_by(council_reference: attributes[:council_reference])
 
       begin
-        authority.applications.create!(attributes)
+        CreateOrUpdateApplicationService.call(
+          authority: authority,
+          council_reference: attributes[:council_reference],
+          attributes: attributes.reject { |k, _v| k == :council_reference }
+        )
         count += 1
       rescue StandardError => e
         error_count += 1

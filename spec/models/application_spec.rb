@@ -6,12 +6,8 @@ describe Application do
   let(:authority) { create(:authority) }
 
   describe "validation" do
-    describe "date_scraped" do
-      it { expect(build(:application, date_scraped: nil)).not_to be_valid }
-    end
-
     describe "council_reference" do
-      it { expect(build(:application, council_reference: "")).not_to be_valid }
+      it { expect(build(:application_with_no_version, council_reference: "")).not_to be_valid }
 
       context "one application already exists" do
         before :each do
@@ -19,121 +15,10 @@ describe Application do
         end
         let(:authority2) { create(:authority, full_name: "A second authority") }
 
-        it { expect(build(:geocoded_application, council_reference: "A01", authority: authority)).not_to be_valid }
-        it { expect(build(:geocoded_application, council_reference: "A02", authority: authority)).to be_valid }
-        it { expect(build(:geocoded_application, council_reference: "A01", authority: authority2)).to be_valid }
+        it { expect(build(:application_with_no_version, council_reference: "A01", authority: authority)).not_to be_valid }
+        it { expect(build(:application_with_no_version, council_reference: "A02", authority: authority)).to be_valid }
+        it { expect(build(:application_with_no_version, council_reference: "A01", authority: authority2)).to be_valid }
       end
-    end
-
-    describe "address" do
-      it { expect(build(:application, address: "")).not_to be_valid }
-    end
-
-    describe "description" do
-      it { expect(build(:application, description: "")).not_to be_valid }
-    end
-
-    describe "info_url" do
-      it { expect(build(:application, info_url: "")).not_to be_valid }
-      it { expect(build(:application, info_url: "http://blah.com?p=1")).to be_valid }
-      it { expect(build(:application, info_url: "foo")).not_to be_valid }
-    end
-
-    describe "comment_url" do
-      it { expect(build(:application, comment_url: nil)).to be_valid }
-      it { expect(build(:application, comment_url: "http://blah.com?p=1")).to be_valid }
-      it { expect(build(:application, comment_url: "mailto:m@foo.com?subject=hello+sir")).to be_valid }
-      it { expect(build(:application, comment_url: "foo")).not_to be_valid }
-      it { expect(build(:application, comment_url: "mailto:council@lakemac.nsw.gov.au?Subject=Redhead%20Beach%20&%20Surf%20Life%20Saving%20Club,%202A%20Beach%20Road,%20REDHEAD%20%20NSW%20%202290%20DA-1699/2014")).to be_valid }
-    end
-
-    describe "date_received" do
-      it { expect(build(:application, date_received: nil)).to be_valid }
-
-      context "the date today is 1 january 2001" do
-        around do |test|
-          Timecop.freeze(Date.new(2001, 1, 1)) { test.run }
-        end
-
-        it { expect(build(:application, date_received: Date.new(2002, 1, 1))).not_to be_valid }
-        it { expect(build(:application, date_received: Date.new(2000, 1, 1))).to be_valid }
-      end
-    end
-
-    describe "on_notice" do
-      it { expect(build(:application, on_notice_from: nil, on_notice_to: nil)).to be_valid }
-      it { expect(build(:application, on_notice_from: Date.new(2001, 1, 1), on_notice_to: Date.new(2001, 2, 1))).to be_valid }
-      it { expect(build(:application, on_notice_from: nil, on_notice_to: Date.new(2001, 2, 1))).to be_valid }
-      it { expect(build(:application, on_notice_from: Date.new(2001, 1, 1), on_notice_to: nil)).to be_valid }
-      it { expect(build(:application, on_notice_from: Date.new(2001, 2, 1), on_notice_to: Date.new(2001, 1, 1))).not_to be_valid }
-    end
-  end
-
-  describe "getting DA descriptions" do
-    it "should allow applications to be blank" do
-      expect(build(:application, description: "").description).to eq("")
-    end
-
-    it "should allow the application description to be nil" do
-      expect(build(:application, description: nil).description).to be_nil
-    end
-
-    it "should start descriptions with a capital letter" do
-      expect(build(:application, description: "a description").description).to eq("A description")
-    end
-
-    it "should fix capitilisation of descriptions all in caps" do
-      expect(build(:application, description: "DWELLING").description).to eq("Dwelling")
-    end
-
-    it "should not capitalise descriptions that are partially in lowercase" do
-      expect(build(:application, description: "To merge Owners Corporation").description).to eq("To merge Owners Corporation")
-    end
-
-    it "should capitalise the first word of each sentence" do
-      expect(build(:application, description: "A SENTENCE. ANOTHER SENTENCE").description).to eq("A sentence. Another sentence")
-    end
-
-    it "should only capitalise the word if it's all lower case" do
-      expect(build(:application, description: "ab sentence. AB SENTENCE. aB sentence. Ab sentence").description).to eq("Ab sentence. AB SENTENCE. aB sentence. Ab sentence")
-    end
-
-    it "should allow blank sentences" do
-      expect(build(:application, description: "A poorly.    . formed sentence . \n").description).to eq("A poorly. . Formed sentence. ")
-    end
-  end
-
-  describe "getting addresses" do
-    it "should convert words to first letter capitalised form" do
-      expect(build(:application, address: "1 KINGSTON AVENUE, PAKENHAM").address).to eq("1 Kingston Avenue, Pakenham")
-    end
-
-    it "should not convert words that are not already all in upper case" do
-      expect(build(:application, address: "In the paddock next to the radio telescope").address).to eq("In the paddock next to the radio telescope")
-    end
-
-    it "should handle a mixed bag of lower and upper case" do
-      expect(build(:application, address: "63 Kimberley drive, SHAILER PARK").address).to eq("63 Kimberley drive, Shailer Park")
-    end
-
-    it "should not affect dashes in the address" do
-      expect(build(:application, address: "63-81").address).to eq("63-81")
-    end
-
-    it "should not affect abbreviations like the state names" do
-      expect(build(:application, address: "1 KINGSTON AVENUE, PAKENHAM VIC 3810").address).to eq("1 Kingston Avenue, Pakenham VIC 3810")
-    end
-
-    it "should not affect the state names" do
-      expect(build(:application, address: "QLD VIC NSW SA ACT TAS WA NT").address).to eq("QLD VIC NSW SA ACT TAS WA NT")
-    end
-
-    it "should not affect the state names with punctuation" do
-      expect(build(:application, address: "QLD. ,VIC ,NSW, !SA /ACT/ TAS: WA, NT;").address).to eq("QLD. ,VIC ,NSW, !SA /ACT/ TAS: WA, NT;")
-    end
-
-    it "should not affect codes" do
-      expect(build(:application, address: "R79813 24X").address).to eq("R79813 24X")
     end
   end
 
@@ -165,34 +50,10 @@ describe Application do
       logger = double("Logger")
       expect(logger).to receive(:error).with("Couldn't geocode address: dfjshd (something went wrong)")
 
-      a = build(:application, address: "dfjshd", council_reference: "r1", date_scraped: Time.zone.now)
-      allow(a).to receive(:logger).and_return(logger)
-
-      a.save!
+      allow_any_instance_of(ApplicationVersion).to receive(:logger).and_return(logger)
+      a = create(:application, address: "dfjshd", council_reference: "r1", date_scraped: Time.zone.now)
       expect(a.lat).to be_nil
       expect(a.lng).to be_nil
-    end
-  end
-
-  describe "#official_submission_period_expired?" do
-    let(:application) { create(:geocoded_application) }
-
-    context "when the ‘on notice to’ date is not set" do
-      before { application.update(on_notice_to: nil) }
-
-      it { expect(application.official_submission_period_expired?).to be_falsey }
-    end
-
-    context "when the ‘on notice to’ date has passed", focus: true do
-      before { application.update(on_notice_to: Time.zone.today - 1.day) }
-
-      it { expect(application.official_submission_period_expired?).to be true }
-    end
-
-    context "when the ‘on notice to’ date is in the future" do
-      before { application.update(on_notice_to: Time.zone.today + 1.day) }
-
-      it { expect(application.official_submission_period_expired?).to be false }
     end
   end
 
@@ -292,22 +153,24 @@ describe Application do
 
   describe "versioning" do
     let(:application) do
-      Application.create!(
+      CreateOrUpdateApplicationService.call(
         authority: authority,
-        date_scraped: Date.new(2001, 1, 10),
         council_reference: "123/45",
-        address: "Some kind of address",
-        description: "A really nice change",
-        info_url: "http://foo.com",
-        comment_url: "http://foo.com/comment",
-        date_received: Date.new(2001, 1, 1),
-        on_notice_from: Date.new(2002, 1, 1),
-        on_notice_to: Date.new(2002, 2, 1),
-        lat: 1.0,
-        lng: 2.0,
-        suburb: "Sydney",
-        state: "NSW",
-        postcode: "2000"
+        attributes: {
+          date_scraped: Date.new(2001, 1, 10),
+          address: "Some kind of address",
+          description: "A really nice change",
+          info_url: "http://foo.com",
+          comment_url: "http://foo.com/comment",
+          date_received: Date.new(2001, 1, 1),
+          on_notice_from: Date.new(2002, 1, 1),
+          on_notice_to: Date.new(2002, 2, 1),
+          lat: 1.0,
+          lng: 2.0,
+          suburb: "Sydney",
+          state: "NSW",
+          postcode: "2000"
+        }
       )
     end
 
@@ -339,9 +202,11 @@ describe Application do
 
     context "updated application with new data" do
       let(:updated_application) do
-        a = Application.find(application.id)
-        a.update!(address: "A better kind of address")
-        a
+        CreateOrUpdateApplicationService.call(
+          authority: application.authority,
+          council_reference: application.council_reference,
+          attributes: { address: "A better kind of address" }
+        )
       end
 
       it "should create a new version when updating" do
@@ -374,10 +239,16 @@ describe Application do
     end
 
     context "updated application with unchanged data" do
-      before(:each) { application.update(address: "Some kind of address") }
+      let(:updated_application) do
+        CreateOrUpdateApplicationService.call(
+          authority: application.authority,
+          council_reference: application.council_reference,
+          attributes: { address: "Some kind of address" }
+        )
+      end
 
       it "should not create a new version when the data hasn't changed" do
-        expect(application.versions.count).to eq 1
+        expect(updated_application.versions.count).to eq 1
       end
     end
 

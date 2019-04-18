@@ -5,7 +5,7 @@ require "spec_helper"
 describe ReplyMailer do
   describe "#notify_comment_author" do
     let(:application) do
-      create(:geocoded_application,
+      create(:geocoded_application, 
              address: "24 Bruce Road Glenbrook",
              description: "A lovely house")
     end

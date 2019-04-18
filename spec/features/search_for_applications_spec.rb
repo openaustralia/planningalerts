@@ -10,7 +10,7 @@ feature "Searching for development application near an address" do
   end
 
   background do
-    create(:geocoded_application,
+    create(:geocoded_application, 
            address: "24 Bruce Road Glenbrook",
            description: "A lovely house",
            lat: -33.772609,
