@@ -14,12 +14,10 @@ class CreateOrUpdateApplicationService < ApplicationService
 
   # Returns created or updated application
   def call
-    key_attributes = {
+    # First check if record already exists or create a new one if it doesn't
+    application = Application.find_or_create_by!(
       authority: authority, council_reference: council_reference
-    }
-    # First check if record already exists
-    application = Application.find_by(key_attributes) ||
-                  Application.create!(key_attributes)
+    )
     application.create_version(attributes)
     application
   end
