@@ -15,7 +15,7 @@ describe ProcessAlertService do
 
     context "and a new application nearby" do
       let(:application) do
-        create(:application, 
+        create(:application,
                lat: 1.0, lng: 2.0, address: "24 Bruce Road, Glenbrook, NSW",
                suburb: "Glenbrook", state: "NSW", postcode: "2773", no_alerted: 3)
       end
@@ -87,7 +87,7 @@ describe ProcessAlertService do
 
     context "and one new reply nearby" do
       let(:application) do
-        create(:application, 
+        create(:application,
                lat: 1.0,
                lng: 2.0,
                address: "24 Bruce Road, Glenbrook, NSW",

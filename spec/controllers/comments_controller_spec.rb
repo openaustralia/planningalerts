@@ -32,7 +32,8 @@ describe CommentsController do
     end
 
     it "returns comments per week for an authority as json" do
-      create(:geocoded_application, 
+      create(
+        :geocoded_application,
         authority: authority,
         date_scraped: Date.new(2015, 12, 24),
         id: 1

@@ -8,7 +8,7 @@ feature "Admin confirms comment for user" do
   end
 
   background do
-    application = create(:geocoded_application, 
+    application = create(:geocoded_application,
                          authority: create(:contactable_authority))
     create(:unconfirmed_comment,
            name: "Alena",
