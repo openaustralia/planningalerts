@@ -18,8 +18,8 @@ class Application < ApplicationRecord
   validates :council_reference, uniqueness: { scope: :authority_id }
 
   scope(:with_current_version, -> { includes(:current_version).joins(:current_version) })
-  scope(:in_past_week, -> { joins(:current_version).where("application_versions.date_scraped > ?", 7.days.ago) })
-  scope(:recent, -> { joins(:current_version).where("application_versions.date_scraped >= ?", 14.days.ago) })
+  scope(:in_past_week, -> { joins(:current_version).where("date_scraped > ?", 7.days.ago) })
+  scope(:recent, -> { joins(:current_version).where("date_scraped >= ?", 14.days.ago) })
 
   def search_data
     # Include version data in what's indexed by searchkick
@@ -64,7 +64,7 @@ class Application < ApplicationRecord
         units: :km,
         latitude: "application_versions.lat",
         longitude: "application_versions.lng"
-      ).with_current_version.where("application_versions.date_scraped > ?", nearby_and_recent_max_age_months.months.ago)
+      ).with_current_version.where("date_scraped > ?", nearby_and_recent_max_age_months.months.ago)
     else
       []
     end

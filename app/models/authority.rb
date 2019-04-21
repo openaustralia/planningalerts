@@ -44,7 +44,7 @@ class Authority < ApplicationRecord
 
   # Returns an array of arrays [date, number_of_applications_that_date]
   def applications_per_day
-    h = applications.with_current_version.order("application_versions.date_scraped DESC").group("CAST(date_scraped AS DATE)").count
+    h = applications.with_current_version.order("date_scraped DESC").group("CAST(date_scraped AS DATE)").count
     # For any dates not in h fill them in with zeros
     (h.keys.min..Time.zone.today).each do |date|
       h[date] = 0 unless h.key?(date)
@@ -60,7 +60,7 @@ class Authority < ApplicationRecord
   def applications_per_week
     # Sunday is the beginning of the week (and the date returned here)
     # Have to compensate for MySQL which treats Monday as the beginning of the week
-    h = applications.with_current_version.order("application_versions.date_scraped DESC").group("CAST(SUBDATE(application_versions.date_scraped, WEEKDAY(application_versions.date_scraped) + 1) AS DATE)").count
+    h = applications.with_current_version.order("date_scraped DESC").group("CAST(SUBDATE(date_scraped, WEEKDAY(date_scraped) + 1) AS DATE)").count
     min = h.keys.min
     max = Time.zone.today - Time.zone.today.wday
     (min..max).step(7) do |date|
@@ -94,7 +94,7 @@ class Authority < ApplicationRecord
 
   # When this authority started on PlanningAlerts. Just the date of the earliest scraped application
   def earliest_date
-    earliest_application = applications.with_current_version.order("application_versions.date_scraped").first
+    earliest_application = applications.with_current_version.order("date_scraped").first
     earliest_application&.date_scraped
   end
 
@@ -154,7 +154,7 @@ class Authority < ApplicationRecord
   end
 
   def latest_application
-    applications.with_current_version.order("application_versions.date_scraped DESC").first
+    applications.with_current_version.order("date_scraped DESC").first
   end
 
   def latest_application_date

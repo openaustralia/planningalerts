@@ -19,16 +19,16 @@ class ApiController < ApplicationController
 
   def postcode
     # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
-    api_render(Application.with_current_version.order("application_versions.date_scraped DESC").where("application_versions.postcode" => params[:postcode]),
+    api_render(Application.with_current_version.order("date_scraped DESC").where("postcode" => params[:postcode]),
                "Recent applications in postcode #{params[:postcode]}")
   end
 
   def suburb
-    apps = Application.with_current_version.order("application_versions.date_scraped DESC").where("application_versions.suburb" => params[:suburb])
+    apps = Application.with_current_version.order("date_scraped DESC").where("suburb" => params[:suburb])
     description = "Recent applications in #{params[:suburb]}"
     if params[:state]
       description += ", #{params[:state]}"
-      apps = apps.where("application_versions.state" => params[:state])
+      apps = apps.where("state" => params[:state])
     end
     api_render(apps, description)
   end
@@ -47,7 +47,7 @@ class ApiController < ApplicationController
       location_text = location.to_s
     end
     api_render(
-      Application.with_current_version.order("application_versions.date_scraped DESC").near(
+      Application.with_current_version.order("date_scraped DESC").near(
         [location.lat, location.lng], radius.to_f / 1000,
         units: :km,
         latitude: "application_versions.lat",
@@ -63,7 +63,7 @@ class ApiController < ApplicationController
     lat1 = params[:top_right_lat].to_f
     lng1 = params[:top_right_lng].to_f
     api_render(
-      Application.with_current_version.order("application_versions.date_scraped DESC").where("application_versions.lat > ? AND application_versions.lng > ? AND application_versions.lat < ? AND application_versions.lng < ?", lat0, lng0, lat1, lng1),
+      Application.with_current_version.order("date_scraped DESC").where("lat > ? AND lng > ? AND lat < ? AND lng < ?", lat0, lng0, lat1, lng1),
       "Recent applications in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
     )
   end
@@ -76,7 +76,7 @@ class ApiController < ApplicationController
     end
 
     if date
-      api_render(Application.with_current_version.order("application_versions.date_scraped DESC").where("application_versions.date_scraped" => date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
+      api_render(Application.with_current_version.order("date_scraped DESC").where("application_versions.date_scraped" => date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
     else
       render_error("invalid date_scraped", :bad_request)
     end

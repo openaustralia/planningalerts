@@ -268,7 +268,7 @@ describe Application do
       it "should not do too many sql queries" do
         5.times { create(:geocoded_application) }
         expect(ActiveRecord::Base.connection).to receive(:exec_query).at_most(2).times.and_call_original
-        Application.with_current_version.order("application_versions.date_scraped DESC").all.map(&:description)
+        Application.with_current_version.order("date_scraped DESC").all.map(&:description)
       end
     end
   end

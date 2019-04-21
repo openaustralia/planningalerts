@@ -13,11 +13,11 @@ class ApplicationsController < ApplicationController
     if params[:authority_id]
       # TODO: Handle the situation where the authority name isn't found
       @authority = Authority.find_short_name_encoded!(params[:authority_id])
-      apps = @authority.applications.with_current_version.order("application_versions.date_scraped DESC")
+      apps = @authority.applications.with_current_version.order("date_scraped DESC")
       @description << " from #{@authority.full_name_and_state}"
     else
       @description << " within the last #{Application.nearby_and_recent_max_age_months} months"
-      apps = Application.with_current_version.order("application_versions.date_scraped DESC").where("application_versions.date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
+      apps = Application.with_current_version.order("date_scraped DESC").where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
     end
 
     @applications = apps
@@ -28,7 +28,7 @@ class ApplicationsController < ApplicationController
   def trending
     @applications = Application
                     .with_current_version
-                    .where("application_versions.date_scraped > ?", 4.weeks.ago)
+                    .where("date_scraped > ?", 4.weeks.ago)
                     .order(visible_comments_count: :desc)
                     .limit(20)
   end
@@ -75,7 +75,7 @@ class ApplicationsController < ApplicationController
         )
         if @sort == "time"
           @applications = @applications
-                          .reorder("application_versions.date_scraped DESC")
+                          .reorder("date_scraped DESC")
         end
         @applications = @applications
                         .paginate(page: params[:page], per_page: per_page)
@@ -84,7 +84,7 @@ class ApplicationsController < ApplicationController
     end
     @trending = Application
                 .with_current_version
-                .where("application_versions.date_scraped > ?", 4.weeks.ago)
+                .where("date_scraped > ?", 4.weeks.ago)
                 .order(visible_comments_count: :desc)
                 .limit(4)
     @set_focus_control = "q"
@@ -136,7 +136,7 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     case @sort
     when "time"
-      @applications = @application.find_all_nearest_or_recent.reorder("application_versions.date_scraped DESC")
+      @applications = @application.find_all_nearest_or_recent.reorder("date_scraped DESC")
     when "distance"
       @applications = @application.find_all_nearest_or_recent
     else

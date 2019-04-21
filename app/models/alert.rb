@@ -32,20 +32,20 @@ class Alert < ApplicationRecord
   # Applications that have been scraped since the last time the user was sent an alert
   def recent_applications
     Application.with_current_version
-               .order("application_versions.date_scraped DESC")
+               .order("date_scraped DESC")
                .near(
                  [location.lat, location.lng], radius_km,
                  units: :km,
                  latitude: "application_versions.lat",
                  longitude: "application_versions.lng"
                )
-               .where("application_versions.date_scraped > ?", cutoff_time)
+               .where("date_scraped > ?", cutoff_time)
   end
 
   # Applications in the area of interest which have new comments made since we were last alerted
   def applications_with_new_comments
     Application.with_current_version
-               .order("application_versions.date_scraped DESC")
+               .order("date_scraped DESC")
                .near(
                  [location.lat, location.lng], radius_km,
                  units: :km,
@@ -61,7 +61,7 @@ class Alert < ApplicationRecord
 
   def applications_with_new_replies
     Application.with_current_version
-               .order("application_versions.date_scraped DESC")
+               .order("date_scraped DESC")
                .near(
                  [location.lat, location.lng], radius_km,
                  units: :km,
