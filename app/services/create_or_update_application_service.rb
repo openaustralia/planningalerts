@@ -14,12 +14,14 @@ class CreateOrUpdateApplicationService < ApplicationService
 
   # Returns created or updated application
   def call
-    # First check if record already exists or create a new one if it doesn't
-    application = Application.find_or_create_by!(
-      authority: authority, council_reference: council_reference
-    )
-    create_version(application)
-    application
+    Application.transaction do
+      # First check if record already exists or create a new one if it doesn't
+      application = Application.find_or_create_by!(
+        authority: authority, council_reference: council_reference
+      )
+      create_version(application)
+      application
+    end
   end
 
   private
