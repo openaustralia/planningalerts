@@ -57,11 +57,11 @@ describe Application do
     end
   end
 
-  describe "#current_councillors_for_authority2" do
+  describe "#current_councillors_for_authority" do
     let(:application) { create(:geocoded_application, authority: authority) }
 
     context "when there are no councillors" do
-      it { expect(application.current_councillors_for_authority2).to be_empty }
+      it { expect(application.current_councillors_for_authority).to be_empty }
     end
 
     context "when there are councillors" do
@@ -75,7 +75,7 @@ describe Application do
         councillor3
       end
 
-      it { expect(application.current_councillors_for_authority2).to match_array [councillor1, councillor2, councillor3] }
+      it { expect(application.current_councillors_for_authority).to match_array [councillor1, councillor2, councillor3] }
     end
 
     context "when there are councillors but not for the application’s authority" do
@@ -83,7 +83,7 @@ describe Application do
         create(:councillor, authority: create(:authority))
       end
 
-      it { expect(application.current_councillors_for_authority2).to be_empty }
+      it { expect(application.current_councillors_for_authority).to be_empty }
     end
 
     context "when there are councillors but not all are current" do
@@ -96,7 +96,7 @@ describe Application do
       end
 
       it "only includes the current ones" do
-        expect(application.current_councillors_for_authority2).to eq [current_councillor]
+        expect(application.current_councillors_for_authority).to eq [current_councillor]
       end
     end
   end
