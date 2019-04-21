@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: Remove Layar support
 class LayarController < ApplicationController
   # Ugly polluting namespace kind of nastiness
   include ActionView::Helpers::TextHelper
