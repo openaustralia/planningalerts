@@ -76,10 +76,14 @@ class Application < ApplicationRecord
     authority.councillors.where(current: true).shuffle if authority.councillors.any?
   end
 
+  def current_councillors_for_authority2
+    current_councillors_for_authority || []
+  end
+
   # TODO: Move this method to Authority model
   def councillors_available_for_contact
     if authority.write_to_councillors_enabled?
-      current_councillors_for_authority || []
+      current_councillors_for_authority2
     else
       []
     end
