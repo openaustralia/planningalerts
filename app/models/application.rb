@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require "open-uri"
-
 class Application < ApplicationRecord
   searchkick highlight: [:description],
              index_name: "pa_applications_#{ENV['STAGE']}",
