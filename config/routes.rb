@@ -144,8 +144,6 @@ Rails.application.routes.draw do
 
   get "/" => "applications#address", as: :address_applications
 
-  get "layar/getpoi" => "layar#getpoi"
-
   get '/vanity' =>'vanity#index'
   get '/vanity/participant/:id' => 'vanity#participant'
   post '/vanity/complete'
