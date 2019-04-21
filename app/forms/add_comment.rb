@@ -41,7 +41,7 @@ class AddComment
   end
 
   def could_be_for_councillor?
-    !application.councillors_available_for_contact.nil?
+    !application.councillors_available_for_contact2.empty?
   end
 
   def for_planning_authority?

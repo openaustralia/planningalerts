@@ -81,4 +81,8 @@ class Application < ApplicationRecord
   def councillors_available_for_contact
     current_councillors_for_authority if authority.write_to_councillors_enabled?
   end
+
+  def councillors_available_for_contact2
+    councillors_available_for_contact || []
+  end
 end

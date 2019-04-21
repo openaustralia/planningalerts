@@ -38,6 +38,7 @@ describe "applications/show" do
       allow(@application).to receive(:date_received).and_return(nil)
       allow(@application).to receive(:date_scraped).and_return(Time.zone.now)
       assign(:application, @application)
+      assign(:councillors, [])
       render
       expect(rendered).to have_selector("div#map_div")
     end
@@ -48,6 +49,7 @@ describe "applications/show" do
       allow(@application).to receive(:on_notice_from).and_return(nil)
       allow(@application).to receive(:on_notice_to).and_return(nil)
       assign(:application, @application)
+      assign(:councillors, [])
       render
       expect(rendered).not_to have_selector("p.on_notice")
     end
@@ -62,6 +64,7 @@ describe "applications/show" do
       allow(@application).to receive(:date_received).and_return(nil)
       allow(@application).to receive(:date_scraped).and_return(Time.zone.now)
       assign(:application, @application)
+      assign(:councillors, [])
 
       render
       expect(rendered).not_to have_selector("div#map_div")

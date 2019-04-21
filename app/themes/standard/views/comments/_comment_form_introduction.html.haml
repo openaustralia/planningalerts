@@ -1,8 +1,8 @@
 - if application.on_notice_to
-  - unless @councillors && application.official_submission_period_expired?
+  - unless !@councillors.empty? && application.official_submission_period_expired?
     %p= on_notice_text(application)
 %p
-  - if @councillors
+  - unless @councillors.empty?
     Post a comment for the planning authority
     or one of your elected local councillors.
   - else

@@ -101,7 +101,7 @@ describe Application do
     end
   end
 
-  describe "#councillors_available_for_contact" do
+  describe "#councillors_available_for_contact2" do
     let(:application) { create(:geocoded_application, authority: authority) }
 
     context "when there are no councillors" do
@@ -110,7 +110,7 @@ describe Application do
           allow(authority).to receive(:write_to_councillors_enabled?).and_return false
         end
 
-        it { expect(application.councillors_available_for_contact).to eq nil }
+        it { expect(application.councillors_available_for_contact2).to be_empty }
       end
 
       context "and the feature is enabled for the authority" do
@@ -118,7 +118,7 @@ describe Application do
           allow(authority).to receive(:write_to_councillors_enabled?).and_return true
         end
 
-        it { expect(application.councillors_available_for_contact).to eq nil }
+        it { expect(application.councillors_available_for_contact2).to be_empty }
       end
     end
 
@@ -138,7 +138,7 @@ describe Application do
           allow(authority).to receive(:write_to_councillors_enabled?).and_return false
         end
 
-        it { expect(application.councillors_available_for_contact).to eq nil }
+        it { expect(application.councillors_available_for_contact2).to be_empty }
       end
 
       context "and the feature is enabled for the authority" do
@@ -146,7 +146,7 @@ describe Application do
           allow(authority).to receive(:write_to_councillors_enabled?).and_return true
         end
 
-        it { expect(application.councillors_available_for_contact).to match_array [councillor1, councillor2, councillor3] }
+        it { expect(application.councillors_available_for_contact2).to match_array [councillor1, councillor2, councillor3] }
       end
     end
   end

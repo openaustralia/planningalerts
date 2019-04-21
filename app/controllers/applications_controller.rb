@@ -119,7 +119,7 @@ class ApplicationsController < ApplicationController
     # Required for new email alert signup form
     @alert = Alert.new(address: @application.address)
 
-    @councillors = @application.councillors_available_for_contact
+    @councillors = @application.councillors_available_for_contact2
 
     respond_to do |format|
       format.html

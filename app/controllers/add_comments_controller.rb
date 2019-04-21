@@ -25,7 +25,7 @@ class AddCommentsController < ApplicationController
 
     @councillor_list_open = true if params[:councillors_list_toggler] == "open"
 
-    @councillors = @application.councillors_available_for_contact
+    @councillors = @application.councillors_available_for_contact2
 
     # HACK: Required for new email alert signup form
     @alert = Alert.new(address: @application.address)

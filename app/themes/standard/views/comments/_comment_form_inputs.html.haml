@@ -14,7 +14,7 @@
                      placeholder: "e.g. Jane Citizen",
                      hint: "Please use your real full name if possible.",
                      input_html: { required: "required" }
-  - if @councillors
+  - unless @councillors.empty?
     = render "comments/comment_receiver_options", f: f, add_comment: add_comment, application: application, councillor_list_open: councillor_list_open
   = f.inputs id: "comment-detail-inputgroup" do
     = f.input :email, label: "Your email",
