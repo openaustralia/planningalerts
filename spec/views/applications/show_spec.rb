@@ -21,7 +21,8 @@ describe "applications/show" do
     # Don't know how to double this when using formtastic
     @alert = Alert.new
     errors = double("Errors", :[] => nil)
-    assigns[:comment] = mock_model(Comment, errors: errors, text: nil, name: nil, email: nil)
+    assign(:comment,
+           mock_model(Comment, errors: errors, text: nil, name: nil, email: nil))
     Vanity.context = Struct.new(:vanity_identity).new("1")
   end
 
@@ -36,7 +37,7 @@ describe "applications/show" do
     it "should display the map" do
       allow(@application).to receive(:date_received).and_return(nil)
       allow(@application).to receive(:date_scraped).and_return(Time.zone.now)
-      assigns[:application] = @application
+      assign(:application, @application)
       render
       expect(rendered).to have_selector("div#map_div")
     end
@@ -46,7 +47,7 @@ describe "applications/show" do
       allow(@application).to receive(:date_scraped).and_return(Time.zone.now)
       allow(@application).to receive(:on_notice_from).and_return(nil)
       allow(@application).to receive(:on_notice_to).and_return(nil)
-      assigns[:application] = @application
+      assign(:application, @application)
       render
       expect(rendered).not_to have_selector("p.on_notice")
     end
@@ -60,7 +61,7 @@ describe "applications/show" do
       allow(@application).to receive(:location).and_return(nil)
       allow(@application).to receive(:date_received).and_return(nil)
       allow(@application).to receive(:date_scraped).and_return(Time.zone.now)
-      assigns[:application] = @application
+      assign(:application, @application)
 
       render
       expect(rendered).not_to have_selector("div#map_div")
