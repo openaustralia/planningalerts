@@ -72,7 +72,7 @@ class Application < ApplicationRecord
 
   # TODO: Move this method to Authority model
   def current_councillors_for_authority
-    (authority.councillors.where(current: true).shuffle if authority.councillors.any?) || []
+    authority.councillors.where(current: true).shuffle
   end
 
   # TODO: Move this method to Authority model
