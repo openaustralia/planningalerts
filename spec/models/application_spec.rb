@@ -57,50 +57,6 @@ describe Application do
     end
   end
 
-  describe "#current_councillors_for_authority" do
-    let(:application) { create(:geocoded_application, authority: authority) }
-
-    context "when there are no councillors" do
-      it { expect(application.current_councillors_for_authority).to be_empty }
-    end
-
-    context "when there are councillors" do
-      let(:councillor1) { create(:councillor, authority: authority) }
-      let(:councillor2) { create(:councillor, authority: authority) }
-      let(:councillor3) { create(:councillor, authority: authority) }
-
-      before do
-        councillor1
-        councillor2
-        councillor3
-      end
-
-      it { expect(application.current_councillors_for_authority).to match_array [councillor1, councillor2, councillor3] }
-    end
-
-    context "when there are councillors but not for the application’s authority" do
-      before do
-        create(:councillor, authority: create(:authority))
-      end
-
-      it { expect(application.current_councillors_for_authority).to be_empty }
-    end
-
-    context "when there are councillors but not all are current" do
-      let(:current_councillor) { create(:councillor, current: true, authority: authority) }
-      let(:former_councillor) { create(:councillor, current: false, authority: authority) }
-
-      before do
-        current_councillor
-        former_councillor
-      end
-
-      it "only includes the current ones" do
-        expect(application.current_councillors_for_authority).to eq [current_councillor]
-      end
-    end
-  end
-
   describe "#councillors_available_for_contact" do
     let(:application) { create(:geocoded_application, authority: authority) }
 

@@ -71,14 +71,9 @@ class Application < ApplicationRecord
   end
 
   # TODO: Move this method to Authority model
-  def current_councillors_for_authority
-    authority.councillors.where(current: true).shuffle
-  end
-
-  # TODO: Move this method to Authority model
   def councillors_available_for_contact
     if authority.write_to_councillors_enabled?
-      current_councillors_for_authority
+      authority.councillors.where(current: true).shuffle
     else
       []
     end
