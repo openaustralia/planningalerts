@@ -38,6 +38,8 @@ class Application < ApplicationRecord
            :official_submission_period_expired?,
            to: :current_version
 
+  delegate :councillors_available_for_contact, to: :authority
+
   # Default values for what we consider nearby and recent
   def nearby_and_recent_max_distance_km
     Application.nearby_and_recent_max_distance_km
@@ -65,15 +67,6 @@ class Application < ApplicationRecord
         latitude: "application_versions.lat",
         longitude: "application_versions.lng"
       ).with_current_version.where("date_scraped > ?", nearby_and_recent_max_age_months.months.ago)
-    else
-      []
-    end
-  end
-
-  # TODO: Move this method to Authority model
-  def councillors_available_for_contact
-    if authority.write_to_councillors_enabled?
-      authority.councillors.where(current: true).shuffle
     else
       []
     end

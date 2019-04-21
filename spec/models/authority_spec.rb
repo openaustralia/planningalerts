@@ -102,6 +102,56 @@ describe Authority do
     end
   end
 
+  describe "#councillors_available_for_contact" do
+    let(:authority) { create(:authority) }
+
+    context "when there are no councillors" do
+      context "and the feature is disabled for the authority" do
+        before do
+          allow(authority).to receive(:write_to_councillors_enabled?).and_return false
+        end
+
+        it { expect(authority.councillors_available_for_contact).to be_empty }
+      end
+
+      context "and the feature is enabled for the authority" do
+        before do
+          allow(authority).to receive(:write_to_councillors_enabled?).and_return true
+        end
+
+        it { expect(authority.councillors_available_for_contact).to be_empty }
+      end
+    end
+
+    context "when there are councillors" do
+      let(:councillor1) { create(:councillor, authority: authority) }
+      let(:councillor2) { create(:councillor, authority: authority) }
+      let(:councillor3) { create(:councillor, authority: authority) }
+
+      before do
+        councillor1
+        councillor2
+        councillor3
+      end
+
+      context "but the feature is disabled for the authority" do
+        before do
+          allow(authority).to receive(:write_to_councillors_enabled?).and_return false
+        end
+
+        it { expect(authority.councillors_available_for_contact).to be_empty }
+      end
+
+      context "and the feature is enabled for the authority" do
+        before do
+          allow(authority).to receive(:write_to_councillors_enabled?).and_return true
+        end
+
+        it { expect(authority.councillors_available_for_contact).to match_array [councillor1, councillor2, councillor3] }
+      end
+    end
+  end
+
   describe "#comments_per_week" do
     let(:authority) { create(:authority) }
 

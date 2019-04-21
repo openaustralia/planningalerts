@@ -16,6 +16,14 @@ class Authority < ApplicationRecord
   scope(:enabled, -> { where("disabled = 0 or disabled is null") })
   scope(:active, -> { where('(disabled = 0 or disabled is null) AND morph_name != "" AND morph_name IS NOT NULL') })
 
+  def councillors_available_for_contact
+    if write_to_councillors_enabled?
+      councillors.where(current: true).shuffle
+    else
+      []
+    end
+  end
+
   def full_name_and_state
     full_name + ", " + state
   end
