@@ -78,6 +78,10 @@ class Application < ApplicationRecord
 
   # TODO: Move this method to Authority model
   def councillors_available_for_contact
-    (current_councillors_for_authority if authority.write_to_councillors_enabled?) || []
+    if authority.write_to_councillors_enabled?
+      current_councillors_for_authority || []
+    else
+      []
+    end
   end
 end
