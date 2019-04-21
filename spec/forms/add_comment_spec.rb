@@ -128,7 +128,7 @@ describe AddComment do
     context "and Default theme is active" do
       context "and there are contactable councillors" do
         before do
-          allow(application).to receive(:councillors_available_for_contact2)
+          allow(application).to receive(:councillors_available_for_contact)
             .and_return [create(:councillor, authority: application.authority)]
         end
 
@@ -137,7 +137,7 @@ describe AddComment do
 
       context "and there are no contactable councillors" do
         before do
-          allow(application).to receive(:councillors_available_for_contact2)
+          allow(application).to receive(:councillors_available_for_contact)
             .and_return []
         end
 

@@ -76,13 +76,8 @@ class Application < ApplicationRecord
     authority.councillors.where(current: true).shuffle if authority.councillors.any?
   end
 
-  # TODO: When no councillors make it return [] rather than nil
   # TODO: Move this method to Authority model
   def councillors_available_for_contact
-    current_councillors_for_authority if authority.write_to_councillors_enabled?
-  end
-
-  def councillors_available_for_contact2
-    councillors_available_for_contact || []
+    (current_councillors_for_authority if authority.write_to_councillors_enabled?) || []
   end
 end
