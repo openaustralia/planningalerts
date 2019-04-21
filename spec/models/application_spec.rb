@@ -222,7 +222,7 @@ describe Application do
       end
 
       it "should point to the previous version in the latest version" do
-        expect(updated_application.versions[0].previous_version).to eq application.versions[1]
+        expect(updated_application.versions[0].previous_version).to eq updated_application.versions[1]
       end
 
       it "should have the old value in the previous version" do

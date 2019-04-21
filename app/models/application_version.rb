@@ -32,6 +32,22 @@ class ApplicationVersion < ApplicationRecord
     Location.new(lat: lat, lng: lng) if lat && lng
   end
 
+  def data_attributes
+    attributes.except("id", "created_at", "updated_at")
+  end
+
+  def self.create_version!(application_id:, previous_version:, attributes:)
+    create!(
+      (previous_version&.data_attributes || {})
+        .merge(attributes)
+        .merge(
+          "application_id" => application_id,
+          "previous_version" => previous_version,
+          "current" => true
+        )
+    )
+  end
+
   def self.normalise_description(description)
     return unless description
 

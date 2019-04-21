@@ -27,19 +27,18 @@ class CreateOrUpdateApplicationService < ApplicationService
   attr_reader :authority, :council_reference, :attributes
 
   def create_version(application)
-    # If none of the data has changed don't save a new version
-    return if application.current_version && attributes == application.current_version.attributes.slice(*attributes.keys)
+    previous_version = application.current_version
 
-    application.current_version&.update(current: false)
-    application.versions.create!(
-      (application.current_version&.attributes || {})
-        .except("id", "created_at", "updated_at")
-        .merge(attributes)
-        .merge(
-          "previous_version" => application.current_version,
-          "current" => true
-        )
+    # If none of the data has changed don't save a new version
+    return if previous_version && attributes == previous_version.attributes.slice(*attributes.keys)
+
+    previous_version&.update(current: false)
+    ApplicationVersion.create_version!(
+      application_id: application.id,
+      previous_version: previous_version,
+      attributes: attributes
     )
+    application.versions.reload
     application.reload_current_version
   end
 end
