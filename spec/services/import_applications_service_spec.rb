@@ -55,7 +55,7 @@ describe ImportApplicationsService do
 
   it "should import the correct applications" do
     logger = double
-    expect(logger).to receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
+    expect(logger).to receive(:info).with("2 new or updated applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
     expect(logger).to receive(:info).with("Took 0 s to import applications from Fiddlesticks, NSW")
     Timecop.freeze(date) do
       ImportApplicationsService.call(authority: auth, scrape_delay: 0, logger: logger, morph_api_key: "123")
@@ -73,10 +73,10 @@ describe ImportApplicationsService do
     expect(r1.on_notice_to).to eq(Date.new(2009, 1, 19))
   end
 
-  it "should not create new applications when they already exist" do
+  it "should update an application when it already exist" do
     logger = double
-    expect(logger).to receive(:info).with("2 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
-    expect(logger).to receive(:info).with("0 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
+    expect(logger).to receive(:info).with("2 new or updated applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
+    expect(logger).to receive(:info).with("1 new or updated application found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
     expect(logger).to receive(:info).twice.with("Took 0 s to import applications from Fiddlesticks, NSW")
 
     Timecop.freeze(date) do
@@ -89,8 +89,9 @@ describe ImportApplicationsService do
     end
     expect(Application.count).to eq(2)
     r2 = Application.find_by(council_reference: "R2")
-    expect(r2.versions.count).to eq 1
-    expect(r2.description).to eq "Putting a house up"
+    expect(r2.versions.count).to eq 2
+    expect(r2.description).to eq "Knocking a house down"
+    expect(r2.first_version.description).to eq "Putting a house up"
   end
 
   it "should escape the morph api key and the sql query" do

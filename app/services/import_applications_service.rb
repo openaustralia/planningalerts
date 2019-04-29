@@ -31,11 +31,6 @@ class ImportApplicationsService < ApplicationService
     count = 0
     error_count = 0
     import_data.each do |attributes|
-      # TODO: Consider if it would be better to overwrite applications with new data if they already exists
-      # This would allow for the possibility that the application information was incorrectly entered at source
-      # and was updated. But we would have to think whether those updated applications should get mailed out, etc...
-      next if authority.applications.find_by(council_reference: attributes[:council_reference])
-
       begin
         CreateOrUpdateApplicationService.call(
           authority: authority,
@@ -49,10 +44,10 @@ class ImportApplicationsService < ApplicationService
       end
     end
 
-    logger.info "#{count} new applications found for #{authority.full_name_and_state} with date from #{start_date} to #{end_date}"
+    logger.info "#{count} new or updated #{'application'.pluralize(count)} found for #{authority.full_name_and_state} with date from #{start_date} to #{end_date}"
     return if error_count.zero?
 
-    logger.info "#{error_count} applications errored for #{authority.full_name_and_state} with date from #{start_date} to #{end_date}"
+    logger.info "#{error_count} #{'application'.pluralize(error_count)} errored for #{authority.full_name_and_state} with date from #{start_date} to #{end_date}"
   end
 
   def import_data
