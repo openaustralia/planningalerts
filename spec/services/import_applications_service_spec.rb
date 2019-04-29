@@ -88,7 +88,9 @@ describe ImportApplicationsService do
       ImportApplicationsService.call(authority: auth, scrape_delay: 0, logger: logger, morph_api_key: "123")
     end
     expect(Application.count).to eq(2)
-    expect(Application.find_by(council_reference: "R2").description).to eq "Putting a house up"
+    r2 = Application.find_by(council_reference: "R2")
+    expect(r2.versions.count).to eq 1
+    expect(r2.description).to eq "Putting a house up"
   end
 
   it "should escape the morph api key and the sql query" do
