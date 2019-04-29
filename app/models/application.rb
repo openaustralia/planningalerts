@@ -11,6 +11,7 @@ class Application < ApplicationRecord
   has_many :replies, through: :comments
   has_many :versions, -> { order(id: :desc) }, class_name: "ApplicationVersion", dependent: :restrict_with_exception, inverse_of: :application
   has_one :current_version, -> { where(current: true) }, class_name: "ApplicationVersion", inverse_of: :application
+  has_one :first_version, -> { where(previous_version: nil) }, class_name: "ApplicationVersion", inverse_of: :application
 
   geocoded_by :address, latitude: :lat, longitude: :lng
 
@@ -18,6 +19,7 @@ class Application < ApplicationRecord
   validates :council_reference, uniqueness: { scope: :authority_id }
 
   scope(:with_current_version, -> { includes(:current_version).joins(:current_version) })
+  scope(:with_first_version, -> { includes(:first_version).joins(:first_version) })
   scope(:in_past_week, -> { joins(:current_version).where("date_scraped > ?", 7.days.ago) })
   scope(:recent, -> { joins(:current_version).where("date_scraped >= ?", 14.days.ago) })
 

@@ -8,7 +8,7 @@ class ProcessAlertService < ApplicationService
   end
 
   def call
-    applications = alert.recent_applications
+    applications = alert.recent_new_applications
     comments = alert.new_comments
     replies = alert.new_replies
 

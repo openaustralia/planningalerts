@@ -29,9 +29,11 @@ class Alert < ApplicationRecord
     Location.new(lat: lat, lng: lng) if lat && lng
   end
 
-  # Applications that have been scraped since the last time the user was sent an alert
-  def recent_applications
-    Application.with_current_version
+  # Applications that have been initially scraped since the last time the user was sent an alert
+  # If the application is updated (with a more recent date_scraped) it will not
+  # be included with the results.
+  def recent_new_applications
+    Application.with_first_version
                .order("date_scraped DESC")
                .near(
                  [location.lat, location.lng], radius_km,

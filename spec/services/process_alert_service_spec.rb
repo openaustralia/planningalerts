@@ -21,7 +21,7 @@ describe ProcessAlertService do
       end
 
       before :each do
-        allow(alert).to receive(:recent_applications).and_return([application])
+        allow(alert).to receive(:recent_new_applications).and_return([application])
       end
 
       it "should return the number of emails, applications, comments and replies sent" do
@@ -62,7 +62,7 @@ describe ProcessAlertService do
 
     context "and no new applications nearby" do
       before :each do
-        allow(alert).to receive(:recent_applications).and_return([])
+        allow(alert).to receive(:recent_new_applications).and_return([])
       end
 
       it "should not send an email" do

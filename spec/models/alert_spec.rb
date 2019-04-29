@@ -209,7 +209,7 @@ describe Alert do
     end
   end
 
-  describe "#recent_applications" do
+  describe "#recent_new_applications" do
     let(:alert) { create(:alert, last_sent: last_sent, radius_meters: radius_meters) }
 
     # Position test application around the point of the alert
@@ -230,7 +230,7 @@ describe Alert do
         let(:last_sent) { nil }
 
         it "should return applications that have been scraped in the last twenty four hours if the user has never had an alert" do
-          expect(alert.recent_applications).to contain_exactly(app1, app2)
+          expect(alert.recent_new_applications).to contain_exactly(app1, app2)
         end
       end
 
@@ -238,7 +238,7 @@ describe Alert do
         let(:last_sent) { 3.days.ago }
 
         it "should return applications that have been scraped since the last time the user was sent an alert" do
-          expect(alert.recent_applications).to contain_exactly(app1, app2, app3)
+          expect(alert.recent_new_applications).to contain_exactly(app1, app2, app3)
         end
 
         context "A couple of applications are updated one day ago" do
@@ -261,8 +261,8 @@ describe Alert do
             )
           end
 
-          pending "should only include applications initially scraped within the last 3 days" do
-            expect(alert.recent_applications).to contain_exactly(app1, app2, app3)
+          it "should only include applications initially scraped within the last 3 days" do
+            expect(alert.recent_new_applications).to contain_exactly(app1, app2, app3)
           end
         end
       end
@@ -271,7 +271,7 @@ describe Alert do
         let(:last_sent) { 5.days.ago }
 
         it "should return applications that have been scraped since the last time the user was sent an alert" do
-          expect(alert.recent_applications).to contain_exactly(app1, app2, app3, app4)
+          expect(alert.recent_new_applications).to contain_exactly(app1, app2, app3, app4)
         end
       end
     end
@@ -285,7 +285,7 @@ describe Alert do
         let(:last_sent) { 5.days.ago }
 
         it "should return applications within the user's search area" do
-          expect(alert.recent_applications).to contain_exactly(app2, app4)
+          expect(alert.recent_new_applications).to contain_exactly(app2, app4)
         end
       end
     end
