@@ -154,10 +154,6 @@ describe Comment do
       end
     end
 
-    it "returns an empty Array if there are no replies on WriteIt" do
-      skip
-    end
-
     context "when the councillor is not current" do
       before do
         comment.councillor.update(current: false)
