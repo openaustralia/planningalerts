@@ -5,29 +5,27 @@ require "spec_helper"
 describe ImportApplicationsService do
   let(:auth) { create(:authority, full_name: "Fiddlesticks", state: "NSW", short_name: "Fiddle") }
   let(:date) { Date.new(2009, 1, 1) }
-  let(:feed) do
-    <<-JSON
-    [
-      {
-        "date_scraped": "2012-08-24",
-        "council_reference": "R1",
-        "address": "1 Smith Street, Fiddleville",
-        "description": "Knocking a house down",
-        "info_url": "http://fiddle.gov.au/info/R1",
-        "comment_url": "http://fiddle.gov.au/comment/R1",
-        "date_received": "2009-01-01",
-        "on_notice_from": "2009-01-05",
-        "on_notice_to": "2009-01-19"
-      },
-      {
-        "council_reference": "R2",
-        "address": "2 Smith Street, Fiddleville",
-        "description": "Putting a house up",
-        "info_url": "http://fiddle.gov.au/info/R2",
-        "comment_url": "http://fiddle.gov.au/comment/R2"
-      }
-    ]
-    JSON
+  let(:app_data1) do
+    {
+      date_scraped: "2012-08-24",
+      council_reference: "R1",
+      address: "1 Smith Street, Fiddleville",
+      description: "Knocking a house down",
+      info_url: "http://fiddle.gov.au/info/R1",
+      comment_url: "http://fiddle.gov.au/comment/R1",
+      date_received: "2009-01-01",
+      on_notice_from: "2009-01-05",
+      on_notice_to: "2009-01-19"
+    }
+  end
+  let(:app_data2) do
+    {
+      council_reference: "R2",
+      address: "2 Smith Street, Fiddleville",
+      description: "Putting a house up",
+      info_url: "http://fiddle.gov.au/info/R2",
+      comment_url: "http://fiddle.gov.au/comment/R2"
+    }
   end
 
   before :each do
@@ -47,7 +45,9 @@ describe ImportApplicationsService do
         nil
       )
     )
-    allow(ImportApplicationsService).to receive(:open_url_safe).and_return(feed)
+    allow(ImportApplicationsService).to receive(:open_url_safe).and_return(
+      [app_data1, app_data2].to_json
+    )
   end
 
   it "should import the correct applications" do
