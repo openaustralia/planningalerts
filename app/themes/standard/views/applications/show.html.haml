@@ -74,7 +74,7 @@
       - if @nearby_count != 0
         = link_to "Recent nearby applications", nearby_application_url(@application, sort: "time"), class: "button button-rounded"
 
-  = render "applications/social_share"
+  = render "applications/social_share", application: @application
 
 :javascript
   $(document).ready(function(){

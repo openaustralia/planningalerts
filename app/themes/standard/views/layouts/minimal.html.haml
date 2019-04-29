@@ -4,4 +4,4 @@
   %body
     = render "application/header", with_navigation: false, alert_count: @alert_count
     = render "application/main"
-    = render "shared/end_matter", with_maps_scripts: false
+    = render "shared/end_matter", with_maps_scripts: false, set_focus_control: @set_focus_control

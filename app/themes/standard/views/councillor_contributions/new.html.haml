@@ -8,7 +8,7 @@
     .councillor-contribution-councillors
       %details.councillor-contribution-instructions
         %summary Instructions
-        = render "instructions_body"
+        = render "instructions_body", authority: @authority
       %legend Add all the councillors details you can find:
       - @councillor_contribution.suggested_councillors.each do |s|
         = render "contribution_form_input", f: f, suggested_councillor: s

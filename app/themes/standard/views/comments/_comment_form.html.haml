@@ -2,7 +2,7 @@
   TODO: Handle situation where the council doesn't have an email
         but there are councillors to contact
 - if application.authority.email.present? || !councillors.empty?
-  = render "comments/comment_form_inputs", application: application, add_comment: add_comment, councillor_list_open: councillor_list_open
+  = render "comments/comment_form_inputs", application: application, add_comment: add_comment, councillor_list_open: councillor_list_open, councillors: councillors
 - elsif application.comment_url.present?
   %h4#add-comment Add your own comment
   %p
