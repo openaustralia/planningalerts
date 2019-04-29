@@ -240,6 +240,31 @@ describe Alert do
         it "should return applications that have been scraped since the last time the user was sent an alert" do
           expect(alert.recent_applications).to contain_exactly(app1, app2, app3)
         end
+
+        context "A couple of applications are updated one day ago" do
+          before(:each) do
+            CreateOrUpdateApplicationService.call(
+              authority: app4.authority,
+              council_reference: app4.council_reference,
+              attributes: {
+                date_scraped: 1.day.ago,
+                description: "A new description"
+              }
+            )
+            CreateOrUpdateApplicationService.call(
+              authority: app2.authority,
+              council_reference: app2.council_reference,
+              attributes: {
+                date_scraped: 1.day.ago,
+                description: "A new description"
+              }
+            )
+          end
+
+          pending "should only include applications initially scraped within the last 3 days" do
+            expect(alert.recent_applications).to contain_exactly(app1, app2, app3)
+          end
+        end
       end
 
       context "last sent an alert 5 days ago" do
