@@ -209,50 +209,37 @@ describe Alert do
     end
   end
 
-  describe "recent applications for this user" do
-    before :each do
-      @alert = create(:alert, email: "matthew@openaustralia.org", address: address, radius_meters: 2000)
-      # Position test application around the point of the alert
-      p1 = @alert.location.endpoint(0, 501) # 501 m north of alert
-      p2 = @alert.location.endpoint(0, 499) # 499 m north of alert
-      p3 = @alert.location.endpoint(45, 499 * Math.sqrt(2)) # Just inside the NE corner of a box centred on the alert (of size 2 * 499m)
-      p4 = @alert.location.endpoint(90, 499) # 499 m east of alert
-      auth = create(:authority)
-      @app1 = create(:application, lat: p1.lat, lng: p1.lng, date_scraped: 5.minutes.ago, council_reference: "A1", suburb: "", state: "", postcode: "", authority: auth)
-      @app2 = create(:application, lat: p2.lat, lng: p2.lng, date_scraped: 12.hours.ago, council_reference: "A2", suburb: "", state: "", postcode: "", authority: auth)
-      @app3 = create(:application, lat: p3.lat, lng: p3.lng, date_scraped: 2.days.ago, council_reference: "A3", suburb: "", state: "", postcode: "", authority: auth)
-      @app4 = create(:application, lat: p4.lat, lng: p4.lng, date_scraped: 4.days.ago, council_reference: "A4", suburb: "", state: "", postcode: "", authority: auth)
-    end
+  describe "#recent_applications" do
+    let(:alert) { create(:alert, email: "matthew@openaustralia.org", address: address, radius_meters: 2000) }
+    let(:auth) { create(:authority) }
+
+    # Position test application around the point of the alert
+    let(:p1) { alert.location.endpoint(0, 501) } # 501 m north of alert
+    let(:p2) { alert.location.endpoint(0, 499) } # 499 m north of alert
+    let(:p3) { alert.location.endpoint(45, 499 * Math.sqrt(2)) } # Just inside the NE corner of a box centred on the alert (of size 2 * 499m)
+    let(:p4) { alert.location.endpoint(90, 499) } # 499 m east of alert
+
+    let!(:app1) { create(:application, lat: p1.lat, lng: p1.lng, date_scraped: 5.minutes.ago, council_reference: "A1", suburb: "", state: "", postcode: "", authority: auth) }
+    let!(:app2) { create(:application, lat: p2.lat, lng: p2.lng, date_scraped: 12.hours.ago, council_reference: "A2", suburb: "", state: "", postcode: "", authority: auth) }
+    let!(:app3) { create(:application, lat: p3.lat, lng: p3.lng, date_scraped: 2.days.ago, council_reference: "A3", suburb: "", state: "", postcode: "", authority: auth) }
+    let!(:app4) { create(:application, lat: p4.lat, lng: p4.lng, date_scraped: 4.days.ago, council_reference: "A4", suburb: "", state: "", postcode: "", authority: auth) }
 
     it "should return applications that have been scraped since the last time the user was sent an alert" do
-      @alert.last_sent = 3.days.ago
-      @alert.radius_meters = 2000
-      @alert.save!
+      alert.update!(last_sent: 3.days.ago, radius_meters: 2000)
 
-      expect(@alert.recent_applications.size).to eq 3
-      expect(@alert.recent_applications).to include(@app1)
-      expect(@alert.recent_applications).to include(@app2)
-      expect(@alert.recent_applications).to include(@app3)
+      expect(alert.recent_applications).to contain_exactly(app1, app2, app3)
     end
 
     it "should return applications within the user's search area" do
-      @alert.last_sent = 5.days.ago
-      @alert.radius_meters = 500
-      @alert.save!
+      alert.update!(last_sent: 5.days.ago, radius_meters: 500)
 
-      expect(@alert.recent_applications.size).to eq 2
-      expect(@alert.recent_applications).to include(@app2)
-      expect(@alert.recent_applications).to include(@app4)
+      expect(alert.recent_applications).to contain_exactly(app2, app4)
     end
 
     it "should return applications that have been scraped in the last twenty four hours if the user has never had an alert" do
-      @alert.last_sent = nil
-      @alert.radius_meters = 2000
-      @alert.save!
+      alert.update!(last_sent: nil, radius_meters: 2000)
 
-      expect(@alert.recent_applications.size).to eq 2
-      expect(@alert.recent_applications).to include(@app1)
-      expect(@alert.recent_applications).to include(@app2)
+      expect(alert.recent_applications).to contain_exactly(app1, app2)
     end
   end
 
