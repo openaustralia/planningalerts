@@ -211,7 +211,6 @@ describe Alert do
 
   describe "#recent_applications" do
     let(:alert) { create(:alert, email: "matthew@openaustralia.org", address: address, radius_meters: 2000) }
-    let(:auth) { create(:authority) }
 
     # Position test application around the point of the alert
     let(:p1) { alert.location.endpoint(0, 501) } # 501 m north of alert
@@ -219,10 +218,10 @@ describe Alert do
     let(:p3) { alert.location.endpoint(45, 499 * Math.sqrt(2)) } # Just inside the NE corner of a box centred on the alert (of size 2 * 499m)
     let(:p4) { alert.location.endpoint(90, 499) } # 499 m east of alert
 
-    let!(:app1) { create(:application, lat: p1.lat, lng: p1.lng, date_scraped: 5.minutes.ago, council_reference: "A1", suburb: "", state: "", postcode: "", authority: auth) }
-    let!(:app2) { create(:application, lat: p2.lat, lng: p2.lng, date_scraped: 12.hours.ago, council_reference: "A2", suburb: "", state: "", postcode: "", authority: auth) }
-    let!(:app3) { create(:application, lat: p3.lat, lng: p3.lng, date_scraped: 2.days.ago, council_reference: "A3", suburb: "", state: "", postcode: "", authority: auth) }
-    let!(:app4) { create(:application, lat: p4.lat, lng: p4.lng, date_scraped: 4.days.ago, council_reference: "A4", suburb: "", state: "", postcode: "", authority: auth) }
+    let!(:app1) { create(:application, lat: p1.lat, lng: p1.lng, date_scraped: 5.minutes.ago, council_reference: "A1", suburb: "", state: "", postcode: "") }
+    let!(:app2) { create(:application, lat: p2.lat, lng: p2.lng, date_scraped: 12.hours.ago, council_reference: "A2", suburb: "", state: "", postcode: "") }
+    let!(:app3) { create(:application, lat: p3.lat, lng: p3.lng, date_scraped: 2.days.ago, council_reference: "A3", suburb: "", state: "", postcode: "") }
+    let!(:app4) { create(:application, lat: p4.lat, lng: p4.lng, date_scraped: 4.days.ago, council_reference: "A4", suburb: "", state: "", postcode: "") }
 
     it "should return applications that have been scraped since the last time the user was sent an alert" do
       alert.update!(last_sent: 3.days.ago, radius_meters: 2000)
