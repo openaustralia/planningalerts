@@ -218,10 +218,10 @@ describe Alert do
     let(:p3) { alert.location.endpoint(45, 499 * Math.sqrt(2)) } # Just inside the NE corner of a box centred on the alert (of size 2 * 499m)
     let(:p4) { alert.location.endpoint(90, 499) } # 499 m east of alert
 
-    let!(:app1) { create(:application, lat: p1.lat, lng: p1.lng, date_scraped: 5.minutes.ago, suburb: "", state: "", postcode: "") }
-    let!(:app2) { create(:application, lat: p2.lat, lng: p2.lng, date_scraped: 12.hours.ago, suburb: "", state: "", postcode: "") }
-    let!(:app3) { create(:application, lat: p3.lat, lng: p3.lng, date_scraped: 2.days.ago, suburb: "", state: "", postcode: "") }
-    let!(:app4) { create(:application, lat: p4.lat, lng: p4.lng, date_scraped: 4.days.ago, suburb: "", state: "", postcode: "") }
+    let!(:app1) { create(:geocoded_application, lat: p1.lat, lng: p1.lng, date_scraped: 5.minutes.ago) }
+    let!(:app2) { create(:geocoded_application, lat: p2.lat, lng: p2.lng, date_scraped: 12.hours.ago) }
+    let!(:app3) { create(:geocoded_application, lat: p3.lat, lng: p3.lng, date_scraped: 2.days.ago) }
+    let!(:app4) { create(:geocoded_application, lat: p4.lat, lng: p4.lng, date_scraped: 4.days.ago) }
 
     context "with a search radius which includes all applications" do
       let(:radius_meters) { 2000 }
