@@ -1,7 +1,7 @@
 - content_for :page_title, "Applications nearby #{@application.address}"
 
 %h3 Applications nearby
-%p Other applications in the last #{@application.nearby_and_recent_max_age_months} months within #{@application.nearby_and_recent_max_distance_km} km of #{@application.address}
+%p Other applications in the last #{Application.nearby_and_recent_max_age_months} months within #{Application.nearby_and_recent_max_distance_km} km of #{@application.address}
 
 %ul.list-options
   %li

@@ -41,19 +41,11 @@ class Application < ApplicationRecord
   delegate :councillors_available_for_contact, to: :authority
 
   # Default values for what we consider nearby and recent
-  def nearby_and_recent_max_distance_km
-    Application.nearby_and_recent_max_distance_km
-  end
-
-  # Default values for what we consider nearby and recent
-  def nearby_and_recent_max_age_months
-    Application.nearby_and_recent_max_age_months
-  end
-
   def self.nearby_and_recent_max_distance_km
     2
   end
 
+  # Default values for what we consider nearby and recent
   def self.nearby_and_recent_max_age_months
     2
   end
@@ -62,11 +54,11 @@ class Application < ApplicationRecord
   def find_all_nearest_or_recent
     if location
       nearbys(
-        nearby_and_recent_max_distance_km,
+        Application.nearby_and_recent_max_distance_km,
         units: :km,
         latitude: "application_versions.lat",
         longitude: "application_versions.lng"
-      ).with_current_version.where("date_scraped > ?", nearby_and_recent_max_age_months.months.ago)
+      ).with_current_version.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
     else
       []
     end
