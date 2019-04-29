@@ -27,6 +27,9 @@ describe ImportApplicationsService do
       comment_url: "http://fiddle.gov.au/comment/R2"
     }
   end
+  let(:app_data2_updated) do
+    app_data2.merge(description: "Knocking a house down")
+  end
 
   before :each do
     # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
@@ -76,12 +79,16 @@ describe ImportApplicationsService do
     expect(logger).to receive(:info).with("0 new applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
     expect(logger).to receive(:info).twice.with("Took 0 s to import applications from Fiddlesticks, NSW")
 
-    # Getting the feed twice with the same content
     Timecop.freeze(date) do
       ImportApplicationsService.call(authority: auth, scrape_delay: 0, logger: logger, morph_api_key: "123")
+      # Getting the feed again with updated content for one of the applicartions
+      allow(ImportApplicationsService).to receive(:open_url_safe).and_return(
+        [app_data2_updated].to_json
+      )
       ImportApplicationsService.call(authority: auth, scrape_delay: 0, logger: logger, morph_api_key: "123")
     end
     expect(Application.count).to eq(2)
+    expect(Application.find_by(council_reference: "R2").description).to eq "Putting a house up"
   end
 
   it "should escape the morph api key and the sql query" do
