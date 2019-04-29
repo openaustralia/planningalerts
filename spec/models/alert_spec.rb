@@ -210,7 +210,7 @@ describe Alert do
   end
 
   describe "#recent_applications" do
-    let(:alert) { create(:alert, email: "matthew@openaustralia.org", address: address, radius_meters: 2000) }
+    let(:alert) { create(:alert) }
 
     # Position test application around the point of the alert
     let(:p1) { alert.location.endpoint(0, 501) } # 501 m north of alert
@@ -223,22 +223,30 @@ describe Alert do
     let!(:app3) { create(:application, lat: p3.lat, lng: p3.lng, date_scraped: 2.days.ago, council_reference: "A3", suburb: "", state: "", postcode: "") }
     let!(:app4) { create(:application, lat: p4.lat, lng: p4.lng, date_scraped: 4.days.ago, council_reference: "A4", suburb: "", state: "", postcode: "") }
 
-    it "should return applications that have been scraped since the last time the user was sent an alert" do
-      alert.update!(last_sent: 3.days.ago, radius_meters: 2000)
+    context "last sent an alert 3 days ago" do
+      let(:alert) { create(:alert, last_sent: 3.days.ago, radius_meters: 2000) }
 
-      expect(alert.recent_applications).to contain_exactly(app1, app2, app3)
+      it "should return applications that have been scraped since the last time the user was sent an alert" do
+        expect(alert.recent_applications).to contain_exactly(app1, app2, app3)
+      end
     end
 
-    it "should return applications within the user's search area" do
-      alert.update!(last_sent: 5.days.ago, radius_meters: 500)
+    context "with a reduced search radius of 500 metres" do
+      # Using last_sent of 5 days ago to ensure that otherwise all applications
+      # would be included if it wasn't for the search radius
+      let(:alert) { create(:alert, last_sent: 5.days.ago, radius_meters: 500) }
 
-      expect(alert.recent_applications).to contain_exactly(app2, app4)
+      it "should return applications within the user's search area" do
+        expect(alert.recent_applications).to contain_exactly(app2, app4)
+      end
     end
 
-    it "should return applications that have been scraped in the last twenty four hours if the user has never had an alert" do
-      alert.update!(last_sent: nil, radius_meters: 2000)
+    context "never before sent an alert" do
+      let(:alert) { create(:alert, last_sent: nil, radius_meters: 2000) }
 
-      expect(alert.recent_applications).to contain_exactly(app1, app2)
+      it "should return applications that have been scraped in the last twenty four hours if the user has never had an alert" do
+        expect(alert.recent_applications).to contain_exactly(app1, app2)
+      end
     end
   end
 
