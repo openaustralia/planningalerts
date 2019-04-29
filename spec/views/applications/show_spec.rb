@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe "applications/show" do
   before :each do
-    authority = mock_model(Authority, full_name: "An authority", short_name: "Blue Mountains", short_name_encoded: "blue_mountains", contactable?: false)
+    authority = mock_model(Authority, full_name: "An authority", short_name: "Blue Mountains", short_name_encoded: "blue_mountains")
     @application = mock_model(
       Application,
       map_url: "http://a.map.url",

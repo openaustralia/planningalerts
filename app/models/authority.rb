@@ -128,13 +128,6 @@ class Authority < ApplicationRecord
     r
   end
 
-  # Is this authority contactable through PlanningAlerts? i.e. do we have an email address on record?
-  # TODO: The authority should be contactable if there are councillors to contact
-  #       even if there is no official contact email
-  def contactable?
-    email && email != ""
-  end
-
   def write_to_councillors_enabled?
     ENV["COUNCILLORS_ENABLED"] == "true" ? write_to_councillors_enabled : false
   end
