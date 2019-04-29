@@ -1,7 +1,7 @@
 %h3 Forgot your password?
 
 = semantic_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-  = devise_error_messages!
+  = render "devise/shared/error_messages", resource: resource
 
   = f.inputs do
     = f.input :email, required: false, input_html: { autofocus: true }
