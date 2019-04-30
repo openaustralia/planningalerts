@@ -22,14 +22,6 @@ describe ApplicationVersion do
       it { expect(build(:application_version, info_url: "foo")).not_to be_valid }
     end
 
-    describe "comment_url" do
-      it { expect(build(:application_version, comment_url: nil)).to be_valid }
-      it { expect(build(:application_version, comment_url: "http://blah.com?p=1")).to be_valid }
-      it { expect(build(:application_version, comment_url: "mailto:m@foo.com?subject=hello+sir")).to be_valid }
-      it { expect(build(:application_version, comment_url: "foo")).not_to be_valid }
-      it { expect(build(:application_version, comment_url: "mailto:council@lakemac.nsw.gov.au?Subject=Redhead%20Beach%20&%20Surf%20Life%20Saving%20Club,%202A%20Beach%20Road,%20REDHEAD%20%20NSW%20%202290%20DA-1699/2014")).to be_valid }
-    end
-
     describe "date_received" do
       it { expect(build(:application_version, date_received: nil)).to be_valid }
 
