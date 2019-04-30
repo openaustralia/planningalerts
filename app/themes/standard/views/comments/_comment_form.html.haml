@@ -1,7 +1,7 @@
--#
-  TODO: Handle situation where the council doesn't have an email
-        but there are councillors to contact
-- if application.authority.email.present? || !application.councillors_available_for_contact.empty?
+-# Note that for simplicity here we've made it so that if the authority
+-# has no email for sending official comments then you can't write
+-# to councillors either even if some are set
+- if application.authority.email.present?
   = render "comments/comment_form_inputs", application: application, add_comment: add_comment, councillor_list_open: councillor_list_open
 - elsif application.comment_url.present?
   %h4#add-comment Add your own comment
