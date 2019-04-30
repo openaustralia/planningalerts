@@ -13,7 +13,6 @@ describe CreateOrUpdateApplicationService do
         address: "Some kind of address",
         description: "A really nice change",
         info_url: "http://foo.com",
-        comment_url: "http://foo.com/comment",
         date_received: Date.new(2001, 1, 1),
         on_notice_from: Date.new(2002, 1, 1),
         on_notice_to: Date.new(2002, 2, 1),
@@ -40,7 +39,6 @@ describe CreateOrUpdateApplicationService do
     expect(version.address).to eq "Some kind of address"
     expect(version.description).to eq "A really nice change"
     expect(version.info_url).to eq "http://foo.com"
-    expect(version.comment_url).to eq "http://foo.com/comment"
     expect(version.date_received).to eq Date.new(2001, 1, 1)
     expect(version.on_notice_from).to eq Date.new(2002, 1, 1)
     expect(version.on_notice_to).to eq Date.new(2002, 2, 1)
