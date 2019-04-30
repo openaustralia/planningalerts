@@ -22,7 +22,6 @@ ActiveAdmin.register Application do
       row :address
       row :description
       row :info_url
-      row :comment_url
       row :authority
       row :lat
       row :lng
