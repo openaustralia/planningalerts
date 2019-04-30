@@ -67,7 +67,6 @@ class ImportApplicationsService < ApplicationService
         address: a["address"],
         description: a["description"],
         info_url: a["info_url"],
-        comment_url: a["comment_url"],
         date_received: (Date.parse(a["date_received"]) if a["date_received"]),
         date_scraped: Time.zone.now,
         # on_notice_from and on_notice_to tags are optional

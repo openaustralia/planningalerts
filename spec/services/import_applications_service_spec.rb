@@ -12,7 +12,6 @@ describe ImportApplicationsService do
       address: "1 Smith Street, Fiddleville",
       description: "Knocking a house down",
       info_url: "http://fiddle.gov.au/info/R1",
-      comment_url: "http://fiddle.gov.au/comment/R1",
       date_received: "2009-01-01",
       on_notice_from: "2009-01-05",
       on_notice_to: "2009-01-19"
@@ -23,8 +22,7 @@ describe ImportApplicationsService do
       council_reference: "R2",
       address: "2 Smith Street, Fiddleville",
       description: "Putting a house up",
-      info_url: "http://fiddle.gov.au/info/R2",
-      comment_url: "http://fiddle.gov.au/comment/R2"
+      info_url: "http://fiddle.gov.au/info/R2"
     }
   end
   let(:app_data2_updated) do
@@ -67,7 +65,6 @@ describe ImportApplicationsService do
     expect(r1.address).to eq("1 Smith Street, Fiddleville")
     expect(r1.description).to eq("Knocking a house down")
     expect(r1.info_url).to eq("http://fiddle.gov.au/info/R1")
-    expect(r1.comment_url).to eq("http://fiddle.gov.au/comment/R1")
     expect(r1.date_received).to eq(date)
     expect(r1.on_notice_from).to eq(Date.new(2009, 1, 5))
     expect(r1.on_notice_to).to eq(Date.new(2009, 1, 19))
