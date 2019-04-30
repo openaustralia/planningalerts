@@ -34,13 +34,18 @@ class Application < ApplicationRecord
   @@per_page = 100
   # rubocop:enable Style/ClassVars
 
-  delegate :date_scraped, :info_url, :comment_url, :date_received,
+  delegate :date_scraped, :info_url, :date_received,
            :on_notice_from, :on_notice_to, :lat, :lng, :suburb, :state,
            :postcode, :description, :address, :location,
            :official_submission_period_expired?,
            to: :current_version
 
   delegate :councillors_available_for_contact, to: :authority
+
+  # Providing this for back compatibility in the API
+  def comment_url
+    nil
+  end
 
   # Default values for what we consider nearby and recent
   def self.nearby_and_recent_max_distance_km
