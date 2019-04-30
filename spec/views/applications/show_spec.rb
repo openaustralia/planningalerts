@@ -16,7 +16,8 @@ describe "applications/show" do
       on_notice_from: nil,
       on_notice_to: nil,
       find_all_nearest_or_recent: [],
-      comments: []
+      comments: [],
+      councillors_available_for_contact: []
     )
     # Don't know how to double this when using formtastic
     @alert = Alert.new
@@ -38,7 +39,6 @@ describe "applications/show" do
       allow(@application).to receive(:date_received).and_return(nil)
       allow(@application).to receive(:date_scraped).and_return(Time.zone.now)
       assign(:application, @application)
-      assign(:councillors, [])
       render
       expect(rendered).to have_selector("div#map_div")
     end
@@ -49,7 +49,6 @@ describe "applications/show" do
       allow(@application).to receive(:on_notice_from).and_return(nil)
       allow(@application).to receive(:on_notice_to).and_return(nil)
       assign(:application, @application)
-      assign(:councillors, [])
       render
       expect(rendered).not_to have_selector("p.on_notice")
     end
@@ -64,7 +63,6 @@ describe "applications/show" do
       allow(@application).to receive(:date_received).and_return(nil)
       allow(@application).to receive(:date_scraped).and_return(Time.zone.now)
       assign(:application, @application)
-      assign(:councillors, [])
 
       render
       expect(rendered).not_to have_selector("div#map_div")

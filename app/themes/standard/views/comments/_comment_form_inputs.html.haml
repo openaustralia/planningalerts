@@ -2,7 +2,7 @@
   = f.inputs id: "comment-base-inputgroup" do
     - label_for_text = capture do
       %h4#add-comment Have your say on this application
-      = render "comments/comment_form_introduction", application: application, councillors: councillors
+      = render "comments/comment_form_introduction", application: application
     = f.input :text, label: label_for_text.html_safe,
                      placeholder: "Be polite, clear, and to the point so your comment gets listened to.",
                      hint: "Have you made a donation or gift to a Councillor or Council employee? #{link_to("You may need to disclose this", faq_path(anchor: "disclosure"))}.".html_safe,
@@ -14,8 +14,8 @@
                      placeholder: "e.g. Jane Citizen",
                      hint: "Please use your real full name if possible.",
                      input_html: { required: "required" }
-  - unless councillors.empty?
-    = render "comments/comment_receiver_options", f: f, add_comment: add_comment, application: application, councillor_list_open: councillor_list_open, councillors: councillors
+  - unless application.councillors_available_for_contact.empty?
+    = render "comments/comment_receiver_options", f: f, add_comment: add_comment, application: application, councillor_list_open: councillor_list_open
   = f.inputs id: "comment-detail-inputgroup" do
     = f.input :email, label: "Your email",
                       placeholder: "e.g. your@email.com",
