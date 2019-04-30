@@ -3,10 +3,15 @@
 -# to councillors either even if some are set
 - if application.authority.email.present?
   = render "comments/comment_form_inputs", application: application, add_comment: add_comment, councillor_list_open: councillor_list_open
-- elsif application.comment_url.present?
+- else
   %h4#add-comment Add your own comment
   %p
-    = link_to "How to comment", application.comment_url
-    on this application (from #{application.authority.full_name}).
-    - if application.on_notice_to
-      = on_notice_text(application)
+    To comment on this application you will need to go to the
+    original source on #{link_to application.authority.full_name, application.info_url}
+    and find any instructions from there.
+  %p
+    This is because unfortunately we don't know an email address for this authority
+    to send official comments to. If you can find one please #{mail_to "contact@planningalerts.org.au", "let us know"}.
+
+  - if application.on_notice_to
+    %p= on_notice_text(application)
