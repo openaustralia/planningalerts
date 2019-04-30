@@ -12,7 +12,6 @@ describe ApplicationsHelper do
       council_reference: "A1",
       authority: authority,
       info_url: "http://info.url",
-      comment_url: "http://comment.url",
       on_notice_from: nil,
       on_notice_to: nil
     )
