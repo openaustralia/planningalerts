@@ -12,7 +12,7 @@ feature "Send a message to a councillor" do
     given(:authority) { create(:authority, full_name: "Foo", write_to_councillors_enabled: false) }
 
     background do
-      application = create(:geocoded_application, id: "1", authority: authority, comment_url: "mailto:foo@bar.com")
+      application = create(:geocoded_application, id: "1", authority: authority)
       visit application_path(application)
     end
 

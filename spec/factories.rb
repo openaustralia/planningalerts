@@ -20,7 +20,6 @@ FactoryBot.define do
         address { "A test address" }
         description { "pretty" }
         info_url { "http://foo.com" }
-        comment_url { nil }
         date_received { nil }
         on_notice_from { nil }
         on_notice_to { nil }
@@ -39,7 +38,6 @@ FactoryBot.define do
           address: evaluator.address,
           description: evaluator.description,
           info_url: evaluator.info_url,
-          comment_url: evaluator.comment_url,
           date_received: evaluator.date_received,
           on_notice_from: evaluator.on_notice_from,
           on_notice_to: evaluator.on_notice_to,
