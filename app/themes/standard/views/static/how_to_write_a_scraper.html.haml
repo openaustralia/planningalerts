@@ -79,15 +79,6 @@
           This should be a persistent URL that preferably is specific to this particular application. In many cases councils force
           users to click through a license to access planning application. In this case be careful about what URL you provide. Test clicking the link in a browser that hasn't established a session with the council's site to ensure users of PlanningAlerts will be able to click the link and not be presented with an error.
     %tr
-      %td.field comment_url
-      %td.example http://foo.gov.au/comment?key=527230
-      %td
-        %p
-          A URL where users can provide a response to council about this particular application.
-        %p
-          As in info_url this needs to be a persistent URL and should be specific to this particular application if possible.
-          Email mailto links are also valid in this field.
-    %tr
       %td.field date_scraped
       %td.example 2012-08-01
       %td
@@ -98,6 +89,10 @@
         %p
           Use the following Ruby code:
           %code Date.today.to_s
+%p
+  Note that there used to be a field "comment_url"
+  above that was required. This is no longer used though you might
+  still see it referenced in older scrapers.
 %p The following fields are optional because not every planning authority provides them. Please do include them if data is available.
 
 %table.scraper_fields
