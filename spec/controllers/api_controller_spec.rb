@@ -101,7 +101,7 @@ describe ApiController do
       scope4 = double("scope4")
       expect(Application).to receive(:with_current_version).and_return(scope1)
       expect(scope1).to receive(:order).and_return(scope2)
-      expect(scope2).to receive(:where).with("postcode" => "2780").and_return(scope3)
+      expect(scope2).to receive(:where).with(application_versions: { postcode: "2780" }).and_return(scope3)
       expect(scope3).to receive(:includes).and_return(scope4)
       expect(scope4).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
       get :postcode, params: { key: user.api_key, format: "rss", postcode: "2780" }
@@ -341,7 +341,7 @@ describe ApiController do
       scope4 = double
       expect(Application).to receive(:with_current_version).and_return(scope1)
       expect(scope1).to receive(:order).and_return(scope2)
-      expect(scope2).to receive(:where).with("suburb" => "Katoomba").and_return(scope3)
+      expect(scope2).to receive(:where).with(application_versions: { suburb: "Katoomba" }).and_return(scope3)
       expect(scope3).to receive(:includes).and_return(scope4)
       expect(scope4).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
       get :suburb, params: { key: user.api_key, format: "rss", suburb: "Katoomba" }
@@ -359,8 +359,8 @@ describe ApiController do
         scope5 = double
         expect(Application).to receive(:with_current_version).and_return(scope1)
         expect(scope1).to receive(:order).and_return(scope2)
-        expect(scope2).to receive(:where).with("suburb" => "Katoomba").and_return(scope3)
-        expect(scope3).to receive(:where).with("state" => "NSW").and_return(scope4)
+        expect(scope2).to receive(:where).with(application_versions: { suburb: "Katoomba" }).and_return(scope3)
+        expect(scope3).to receive(:where).with(application_versions: { state: "NSW" }).and_return(scope4)
         expect(scope4).to receive(:includes).and_return(scope5)
         expect(scope5).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
         get :suburb, params: { key: user.api_key, format: "rss", suburb: "Katoomba", state: "NSW" }
