@@ -50,6 +50,21 @@ describe CreateOrUpdateApplicationService do
     expect(version.current).to eq true
   end
 
+  it "should not leave an application record around if the version doesn't validate" do
+    expect do
+      CreateOrUpdateApplicationService.call(
+        authority: authority,
+        council_reference: "123/45",
+        # This will not be valid
+        attributes: {
+          description: "A really nice change"
+        }
+      )
+    end.to raise_error ActiveRecord::RecordInvalid
+    expect(ApplicationVersion.count).to eq 0
+    expect(Application.count).to eq 0
+  end
+
   context "updated application with new data" do
     let(:updated_application) do
       CreateOrUpdateApplicationService.call(
