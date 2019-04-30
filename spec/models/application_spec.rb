@@ -64,4 +64,25 @@ describe Application do
       Application.with_current_version.order("date_scraped DESC").all.map(&:description)
     end
   end
+
+  describe "#date_scraped" do
+    let(:application) { create(:geocoded_application) }
+
+    let(:updated_application) do
+      CreateOrUpdateApplicationService.call(
+        authority: application.authority,
+        council_reference: application.council_reference,
+        attributes: {
+          description: "An updated description",
+          date_scraped: 1.minute.ago
+        }
+      )
+    end
+
+    it "should be the initial date scraped" do
+      date_scraped = application.date_scraped
+      expect(updated_application.date_scraped).to eq date_scraped
+      expect(updated_application.current_version.date_scraped).to_not eq date_scraped
+    end
+  end
 end

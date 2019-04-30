@@ -34,11 +34,14 @@ class Application < ApplicationRecord
   @@per_page = 100
   # rubocop:enable Style/ClassVars
 
-  delegate :date_scraped, :info_url, :date_received,
+  delegate :info_url, :date_received,
            :on_notice_from, :on_notice_to, :lat, :lng, :suburb, :state,
            :postcode, :description, :address, :location,
            :official_submission_period_expired?,
            to: :current_version
+
+  # TODO: Give this (date_scraped) a more sensible name
+  delegate :date_scraped, to: :first_version
 
   delegate :councillors_available_for_contact, to: :authority
 
