@@ -53,7 +53,7 @@ describe ImportApplicationsService do
 
   it "should import the correct applications" do
     logger = double
-    expect(logger).to receive(:info).with("2 new or updated applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
+    expect(logger).to receive(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
     expect(logger).to receive(:info).with("Took 0 s to import applications from Fiddlesticks, NSW")
     Timecop.freeze(date) do
       ImportApplicationsService.call(authority: auth, scrape_delay: 0, logger: logger, morph_api_key: "123")
@@ -72,8 +72,8 @@ describe ImportApplicationsService do
 
   it "should update an application when it already exist" do
     logger = double
-    expect(logger).to receive(:info).with("2 new or updated applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
-    expect(logger).to receive(:info).with("1 new or updated application found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
+    expect(logger).to receive(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
+    expect(logger).to receive(:info).with("1 application found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
     expect(logger).to receive(:info).twice.with("Took 0 s to import applications from Fiddlesticks, NSW")
 
     Timecop.freeze(date) do

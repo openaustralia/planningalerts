@@ -44,7 +44,7 @@ class ImportApplicationsService < ApplicationService
       end
     end
 
-    logger.info "#{count} new or updated #{'application'.pluralize(count)} found for #{authority.full_name_and_state} with date from #{start_date} to #{end_date}"
+    logger.info "#{count} #{'application'.pluralize(count)} found for #{authority.full_name_and_state} with date from #{start_date} to #{end_date}"
     return if error_count.zero?
 
     logger.info "#{error_count} #{'application'.pluralize(error_count)} errored for #{authority.full_name_and_state} with date from #{start_date} to #{end_date}"
