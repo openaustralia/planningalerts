@@ -24,7 +24,9 @@ class ProcessAlertService < ApplicationService
 
     # Update the tallies on each application.
     applications.each do |application|
-      application.increment(:no_alerted)
+      # rubocop:disable Rails/SkipsModelValidations
+      Application.increment_counter(:no_alerted, application.id)
+      # rubocop:enable Rails/SkipsModelValidations
     end
 
     # Return number of emails, applications, comments and replies sent

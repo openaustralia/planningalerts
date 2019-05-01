@@ -35,6 +35,8 @@ describe ProcessAlertService do
 
       it "should update the tally" do
         ProcessAlertService.call(alert: alert)
+        # Just reload from the database to make sure
+        application.reload
         expect(application.no_alerted).to eq(4)
       end
 
