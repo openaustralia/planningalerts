@@ -84,11 +84,14 @@ namespace :planningalerts do
           # Doing this to ensure that current gets reloaded
           version.reload
           ApplicationVersion.transaction do
+            # rubocop:disable Rails/SkipsModelValidations
+            # We're using update_columns to avoid further attempts at geocoding
             ApplicationVersion.where(previous_version: version).each do |v|
-              v.update(previous_version: version.previous_version)
+              v.update_columns(previous_version_id: version.previous_version.id)
             end
             version.destroy!
-            version.previous_version.update!(current: true) if version.current
+            version.previous_version.update_columns(current: true) if version.current
+            # rubocop:enable Rails/SkipsModelValidations
           end
         end
       end
