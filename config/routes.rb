@@ -88,6 +88,7 @@ Rails.application.routes.draw do
       get :geocoding
     end
     resources :comments, only: [:show]
+    # TODO: Why is add_comments a separate controller?
     resources :add_comments, only: [:create]
   end
 
