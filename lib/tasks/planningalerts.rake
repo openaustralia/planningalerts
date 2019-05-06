@@ -21,14 +21,6 @@ namespace :planningalerts do
     task email: :environment do
       QueueUpAlertsService.call(logger: Logger.new(STDOUT))
     end
-
-    desc "Reset `last_sent` on all alerts to nil and then send emails"
-    task reset_last_sent_and_email: %i[reset_last_sent email]
-
-    desc "Set last_sent to nil on all alerts"
-    task reset_last_sent: :environment do
-      Alert.all.each { |alert| alert.update(last_sent: nil) }
-    end
   end
 
   desc "Take a snapshot of planningalerts indexes on elasticsearch and store on S3"
