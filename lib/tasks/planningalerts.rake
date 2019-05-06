@@ -55,46 +55,5 @@ namespace :planningalerts do
     task fixup_counter_caches: :environment do
       Comment.counter_culture_fix_counts
     end
-
-    desc "Remove versions of applications where only the date_scraped has changed"
-    task remove_duplicate_application_versions: :environment do
-      # First find applications with more than one version
-      ids = ApplicationVersion.group(:application_id).count.select { |_k, v| v > 1 }.keys
-      ids.each do |id|
-        application = Application.find(id)
-        puts "Checking application #{id} and fixing if necessary..."
-        # Go through each version and check if anything has changed
-        application.versions.each do |version|
-          current_attributes = version.attributes
-          previous_attributes = if version.previous_version
-                                  version.previous_version.attributes
-                                else
-                                  {}
-                                end
-          changed_attributes = []
-          current_attributes.each do |k, v|
-            changed_attributes << k if v != previous_attributes[k]
-          end
-          changed_attributes = changed_attributes.without(
-            "id", "previous_version_id", "current", "date_scraped", "created_at", "updated_at"
-          )
-
-          next unless changed_attributes.empty?
-
-          # Doing this to ensure that current gets reloaded
-          version.reload
-          ApplicationVersion.transaction do
-            # rubocop:disable Rails/SkipsModelValidations
-            # We're using update_columns to avoid further attempts at geocoding
-            ApplicationVersion.where(previous_version: version).each do |v|
-              v.update_columns(previous_version_id: version.previous_version.id)
-            end
-            version.destroy!
-            version.previous_version.update_columns(current: true) if version.current
-            # rubocop:enable Rails/SkipsModelValidations
-          end
-        end
-      end
-    end
   end
 end
