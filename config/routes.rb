@@ -90,6 +90,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:show]
     # TODO: Why is add_comments a separate controller?
     resources :add_comments, only: [:create]
+    resources :versions, only: [:index], controller: "application_versions"
   end
 
   resources :comments, only: [:index] do
