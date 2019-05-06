@@ -50,8 +50,10 @@ namespace :planningalerts do
     GenerateSitemapService.call
   end
 
-  desc "Regenerates all the counter caches in case they got out of synch"
-  task fixup_counter_caches: :environment do
-    Comment.counter_culture_fix_counts
+  namespace :emergency do
+    desc "Regenerates all the counter caches in case they got out of synch"
+    task fixup_counter_caches: :environment do
+      Comment.counter_culture_fix_counts
+    end
   end
 end
