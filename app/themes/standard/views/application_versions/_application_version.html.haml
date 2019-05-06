@@ -1,7 +1,7 @@
 %li
   %table
     %tbody
-      - application_version.data_attributes.each do |key, value|
+      - application_version.changed_data_attributes.each do |key, value|
         %tr
           %th= key.humanize
           %td= value
