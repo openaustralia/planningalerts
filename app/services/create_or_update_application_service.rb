@@ -28,11 +28,15 @@ class CreateOrUpdateApplicationService < ApplicationService
 
   attr_reader :authority, :council_reference, :attributes
 
+  def data_attributes
+    attributes.except("date_scraped")
+  end
+
   def create_version(application)
     previous_version = application.current_version
 
     # If none of the data has changed don't save a new version
-    return if previous_version && attributes == previous_version.attributes.slice(*attributes.keys)
+    return if previous_version && data_attributes == previous_version.attributes.slice(*data_attributes.keys)
 
     previous_version&.update(current: false)
     ApplicationVersion.create_version!(

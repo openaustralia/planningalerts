@@ -108,7 +108,11 @@ describe CreateOrUpdateApplicationService do
       CreateOrUpdateApplicationService.call(
         authority: application.authority,
         council_reference: application.council_reference,
-        attributes: { address: "Some kind of address" }
+        attributes: {
+          address: "Some kind of address",
+          # Note that date_scraped is more recent than the original
+          date_scraped: Date.new(2010, 1, 10)
+        }
       )
     end
 
