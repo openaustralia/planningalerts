@@ -157,6 +157,28 @@ describe ApplicationVersion do
     end
   end
 
+  describe "#changed_data_attributes" do
+    let(:version) { create(:geocoded_application_version) }
+
+    it "should return all data_attributes if only version" do
+      expect(version.changed_data_attributes).to eq version.data_attributes
+    end
+
+    it "should return just what's changed" do
+      date_scraped = 1.minute.ago
+      new_version = create(
+        :geocoded_application_version,
+        previous_version: version,
+        description: "A new description",
+        date_scraped: date_scraped
+      )
+      expect(new_version.changed_data_attributes).to eq(
+        "description" => "A new description",
+        "date_scraped" => new_version.date_scraped
+      )
+    end
+  end
+
   describe "#official_submission_period_expired?" do
     context "when the ‘on notice to’ date is not set" do
       let(:version) do

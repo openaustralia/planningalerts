@@ -38,6 +38,19 @@ class ApplicationVersion < ApplicationRecord
     )
   end
 
+  def changed_data_attributes
+    if previous_version
+      changed = {}
+      data_attributes.keys.each do |a|
+        changed[a] = data_attributes[a] unless data_attributes[a] == previous_version.data_attributes[a]
+      end
+      changed
+    else
+      # If this is the first version it's all changed!
+      data_attributes
+    end
+  end
+
   def self.create_version!(application_id:, previous_version:, attributes:)
     create!(
       (previous_version&.data_attributes || {})
