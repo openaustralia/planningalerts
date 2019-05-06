@@ -32,7 +32,10 @@ class ApplicationVersion < ApplicationRecord
   end
 
   def data_attributes
-    attributes.except("id", "created_at", "updated_at")
+    attributes.except(
+      "id", "created_at", "updated_at", "application_id",
+      "previous_version_id", "current"
+    )
   end
 
   def self.create_version!(application_id:, previous_version:, attributes:)
@@ -41,7 +44,7 @@ class ApplicationVersion < ApplicationRecord
         .merge(attributes)
         .merge(
           "application_id" => application_id,
-          "previous_version" => previous_version,
+          "previous_version_id" => previous_version&.id,
           "current" => true
         )
     )
