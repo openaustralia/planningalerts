@@ -84,6 +84,9 @@ namespace :planningalerts do
           # Doing this to ensure that current gets reloaded
           version.reload
           ApplicationVersion.transaction do
+            ApplicationVersion.where(previous_version: version).each do |v|
+              v.update(previous_version: version.previous_version)
+            end
             version.destroy!
             version.previous_version.update!(current: true) if version.current
           end
