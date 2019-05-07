@@ -32,6 +32,44 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 * [Credits](#credits)
 * [License](#license)
 
+## Meta
+
+### About PlanningAlerts
+You'd probably know if your next door neighbour was going to knock
+their house down (you'd get a letter through the door telling you they
+had applied for planning permission and asking you what you thought
+about it). But you'd probably never find out if the old cinema or pub
+5 streets away is going to be converted into luxury flats until the
+bulldozers turned up.
+
+PlanningAlerts is a free service which searches as many planning
+authority websites as it can find and emails you details of
+applications near you. The aim of this to enable shared scrutiny of
+what is being built (and knocked down) in peoples' communities.
+
+### Goals
+
+    “But the plans were on display…”
+    “On display? I eventually had to go down to the cellar to find them.”
+    “That’s the display department.”
+    “With a flashlight.”
+    “Ah, well, the lights had probably gone.”
+    “So had the stairs.”
+    “But look, you found the notice, didn’t you?”
+    “Yes,” said Arthur, “yes I did. It was on display in the bottom of a locked filing cabinet stuck in a disused lavatory with a sign on the door saying ‘Beware of the Leopard.”
+
+-- _Douglas Adams, The Hitchhiker's Guide to the Galaxy_
+
+* We aim to make it easy and simple for every Australian resident to
+  be aware of development plans affecting ther neighborhood
+* We aim to change the way people think of the conversation around
+  development applications. Responses to a DA should be part of a
+  broader, ongoing, civil discussion about the future of a shared
+  lived experience rather than an adversarial process.
+* We aim to make every resident know that they have the tools, the
+  knowledge, and the ability to be involved in the discussions shaping
+  the area they live in.
+
 ## Development
 
 **Install Dependencies**
