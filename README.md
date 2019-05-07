@@ -1,6 +1,6 @@
----
-title: PlanningAlerts README
----
+PlanningAlerts
+==============
+
 
 [![Build Status](https://travis-ci.org/openaustralia/planningalerts.svg?branch=master)](https://travis-ci.org/openaustralia/planningalerts) [![Test Coverage](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/test_coverage)](https://codeclimate.com/github/openaustralia/planningalerts/test_coverage) [![Maintainability](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/maintainability)](https://codeclimate.com/github/openaustralia/planningalerts/maintainability)
 
@@ -17,11 +17,14 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
-- [-](#-)
+- [PlanningAlerts](#planningalerts)
 - [Table of Contents](#table-of-contents)
 - [Meta](#meta)
     - [About PlanningAlerts](#about-planningalerts)
     - [Goals](#goals)
+        - [Easy and simple](#easy-and-simple)
+        - [Civil discussion](#civil-discussion)
+        - [Be involved](#be-involved)
 - [Development](#development)
     - [Scraping and sending emails in development](#scraping-and-sending-emails-in-development)
     - [Take regular donations through PlanningAlerts with Stripe](#take-regular-donations-through-planningalerts-with-stripe)
@@ -85,9 +88,36 @@ what is being built (and knocked down) in peoples' communities.
   development applications. Responses to a DA should be part of a
   broader, ongoing, **civil discussion** about the future of a shared
   lived experience rather than an adversarial process.
-* We aim to make every resident know that they have the tools, the
-  knowledge, and the ability to **be involved** in the discussions shaping
-  the area they live in.
+* We aim to make aware that they have the tools, the knowledge, and
+  the ability to **be involved** in the discussions shaping the area
+  they live in.
+
+### Easy and simple
+
+Planning processes are often built around the needs of the developers
+and the planning authority. PlanningAlerts instead focuses on the
+community.
+
+- PlanningAlerts makes it easy for residents to find all the DAs in
+  their neighborhood
+- PlanningAlerts offers proactive alerts when new DAs are found, so
+  residents don't even have to search
+- PlanningAlerts makes it simple for residents to be part of the
+  discussion around a DA
+
+While we will make reasonable efforts to ensure that comments provided
+via PlanningAlerts have sufficient information for planning
+authorities to be able to verify the source of comments on a DA, our
+priority is on ease and simplicity for the resident rather than ease
+and simplicity for the Authority. 
+
+_If Authorities choose to disregard comments from their own residents,
+they should be willing to explain that decision to their residents._
+
+### Civil discussion
+
+### Be involved
+
 
 # Development
 
