@@ -1,4 +1,6 @@
-# PlanningAlerts
+---
+title: PlanningAlerts README
+---
 
 [![Build Status](https://travis-ci.org/openaustralia/planningalerts.svg?branch=master)](https://travis-ci.org/openaustralia/planningalerts) [![Test Coverage](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/test_coverage)](https://codeclimate.com/github/openaustralia/planningalerts/test_coverage) [![Maintainability](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/maintainability)](https://codeclimate.com/github/openaustralia/planningalerts/maintainability)
 
@@ -10,60 +12,47 @@ If you're interested in contributing a scraper read our [step-by-step guide to w
 
 PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.openaustraliafoundation.org.au). It was adapted for Australia by Matthew Landauer and Katherine Szuminska, and is based on the UK site PlanningAlerts.com, built by Richard Pope, Mikel Maron, Sam Smith, Duncan Parkes, Tom Hughes and Andy Armstrong.
 
-## Table of Contents
+# Table of Contents
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
 **Table of Contents**
 
-- [PlanningAlerts](#planningalerts)
-    - [Table of Contents](#table-of-contents)
-    - [Meta](#meta)
-        - [About PlanningAlerts](#about-planningalerts)
-        - [Goals](#goals)
-    - [Development](#development)
-        - [Scraping and sending emails in development](#scraping-and-sending-emails-in-development)
-        - [Take regular donations through PlanningAlerts with Stripe](#take-regular-donations-through-planningalerts-with-stripe)
-        - [Configuring PlanningAlerts so people can write to their local councillors](#configuring-planningalerts-so-people-can-write-to-their-local-councillors)
-            - [Global feature flag](#global-feature-flag)
-                - [Writing to councillors feature](#writing-to-councillors-feature)
-                - [Contributing suggested councillors feature](#contributing-suggested-councillors-feature)
-            - [Set the reply address for accepting responses](#set-the-reply-address-for-accepting-responses)
-            - [Enable the feature for an authority](#enable-the-feature-for-an-authority)
-            - [Adding councillors for an authority](#adding-councillors-for-an-authority)
-            - [Accepting councillor replies](#accepting-councillor-replies)
-                - [Default Wizard of Oz method](#default-wizard-of-oz-method)
-                - [Integrating with WriteIt](#integrating-with-writeit)
-                    - [Basic setup](#basic-setup)
-                    - [Adding your councillor data to WriteIt](#adding-your-councillor-data-to-writeit)
-                    - [Sending messages via WriteIt](#sending-messages-via-writeit)
-                    - [Automatically fetching replies with the _Writeit reply webhook_](#automatically-fetching-replies-with-the-writeit-reply-webhook)
-                    - [Manually loading replies from Writeit](#manually-loading-replies-from-writeit)
-            - [Processing councillor data contributions](#processing-councillor-data-contributions)
-    - [Deployment](#deployment)
-        - [Adding a new authority](#adding-a-new-authority)
-    - [Contributing](#contributing)
-    - [Credits](#credits)
-    - [License](#license)
+- [-](#-)
+- [Table of Contents](#table-of-contents)
+- [Meta](#meta)
+    - [About PlanningAlerts](#about-planningalerts)
+    - [Goals](#goals)
+- [Development](#development)
+    - [Scraping and sending emails in development](#scraping-and-sending-emails-in-development)
+    - [Take regular donations through PlanningAlerts with Stripe](#take-regular-donations-through-planningalerts-with-stripe)
+    - [Configuring PlanningAlerts so people can write to their local councillors](#configuring-planningalerts-so-people-can-write-to-their-local-councillors)
+        - [Global feature flag](#global-feature-flag)
+            - [Writing to councillors feature](#writing-to-councillors-feature)
+            - [Contributing suggested councillors feature](#contributing-suggested-councillors-feature)
+        - [Set the reply address for accepting responses](#set-the-reply-address-for-accepting-responses)
+        - [Enable the feature for an authority](#enable-the-feature-for-an-authority)
+        - [Adding councillors for an authority](#adding-councillors-for-an-authority)
+        - [Accepting councillor replies](#accepting-councillor-replies)
+            - [Default Wizard of Oz method](#default-wizard-of-oz-method)
+            - [Integrating with WriteIt](#integrating-with-writeit)
+                - [Basic setup](#basic-setup)
+                - [Adding your councillor data to WriteIt](#adding-your-councillor-data-to-writeit)
+                - [Sending messages via WriteIt](#sending-messages-via-writeit)
+                - [Automatically fetching replies with the _Writeit reply webhook_](#automatically-fetching-replies-with-the-writeit-reply-webhook)
+                - [Manually loading replies from Writeit](#manually-loading-replies-from-writeit)
+        - [Processing councillor data contributions](#processing-councillor-data-contributions)
+- [Deployment](#deployment)
+    - [Adding a new authority](#adding-a-new-authority)
+- [Contributing](#contributing)
+- [Credits](#credits)
+- [License](#license)
 
 <!-- markdown-toc end -->
 
 
-## Meta
+# Meta
 
-### About PlanningAlerts
-You'd probably know if your next door neighbour was going to knock
-their house down (you'd get a letter through the door telling you they
-had applied for planning permission and asking you what you thought
-about it). But you'd probably never find out if the old cinema or pub
-5 streets away is going to be converted into luxury flats until the
-bulldozers turned up.
-
-PlanningAlerts is a free service which searches as many planning
-authority websites as it can find and emails you details of
-applications near you. The aim of this to enable shared scrutiny of
-what is being built (and knocked down) in peoples' communities.
-
-### Goals
+## About PlanningAlerts
 
     “But the plans were on display…”
     “On display? I eventually had to go down to the cellar to find them.”
@@ -76,17 +65,31 @@ what is being built (and knocked down) in peoples' communities.
 
 -- _Douglas Adams, The Hitchhiker's Guide to the Galaxy_
 
-* We aim to make it easy and simple for every Australian resident to
+You'd probably know if your next door neighbour was going to knock
+their house down (you'd get a letter through the door telling you they
+had applied for planning permission and asking you what you thought
+about it). But you'd probably never find out if the old cinema or pub
+5 streets away is going to be converted into luxury flats until the
+bulldozers turned up.
+
+PlanningAlerts is a free service which searches as many planning
+authority websites as it can find and emails you details of
+applications near you. The aim of this to enable shared scrutiny of
+what is being built (and knocked down) in peoples' communities.
+
+## Goals
+
+* We aim to make it **easy and simple** for every Australian resident to
   be aware of development plans affecting ther neighborhood
 * We aim to change the way people think of the conversation around
   development applications. Responses to a DA should be part of a
-  broader, ongoing, civil discussion about the future of a shared
+  broader, ongoing, **civil discussion** about the future of a shared
   lived experience rather than an adversarial process.
 * We aim to make every resident know that they have the tools, the
-  knowledge, and the ability to be involved in the discussions shaping
+  knowledge, and the ability to **be involved** in the discussions shaping
   the area they live in.
 
-## Development
+# Development
 
 **Install Dependencies**
  * Install MySql - On macOS download dmg from [http://dev.mysql.com/downloads/](http://dev.mysql.com/downloads/)
@@ -111,7 +114,7 @@ what is being built (and knocked down) in peoples' communities.
 **Run The Tests**
  * Run the test suite - `bundle exec rake`
 
-### Scraping and sending emails in development
+## Scraping and sending emails in development
 
 **Step 1 - Scrape DAs**
  * Register on [morph.io](https://morph.io) and [get your api key](https://morph.io/documentation/api).
@@ -130,7 +133,7 @@ what is being built (and knocked down) in peoples' communities.
  * Check the email in your browser: http://localhost:1080/
  * To resend alerts during testing, just set the `last_sent` attribute of your alert to *nil*
 
-### Take regular donations through PlanningAlerts with Stripe
+## Take regular donations through PlanningAlerts with Stripe
 
 You can configure PlanningAlerts to allow people to donate to the project monthly.
 [Stripe](https://stripe.com) is used to process the payment and manage billing.
@@ -154,7 +157,7 @@ to allow users to visit the donations page.
 # STRIPE_PLAN_ID_FOR_DONATIONS=example-planningalerts-subscribers-1
 ```
 
-### Configuring PlanningAlerts so people can write to their local councillors
+## Configuring PlanningAlerts so people can write to their local councillors
 
 People use PlanningAlerts to provide official submissions to planning applications,
 but sometimes the official process doesn’t work well, or they have questions and need a response.
@@ -173,9 +176,9 @@ Four conditions must be met for the option to write to councillors to be availab
 
 You will also need to [configure the app to accept replies from councillors](#accepting-councillor-replies).
 
-#### Global feature flag
+### Global feature flag
 
-##### Writing to councillors feature
+#### Writing to councillors feature
 You can toggle the availability of the writing to councillors feature on or off for the entire site with the environment variable `COUNCILLORS_ENABLED`.
 The feature is globally enabled when the value of `ENV["COUNCILLORS_ENABLED"]` is `"true"`.
 This flag is useful if you need to turn the feature _off_ globally.
@@ -185,7 +188,7 @@ We set this in the [`.env`](https://github.com/openaustralia/planningalerts/blob
 ```
 COUNCILLORS_ENABLED=true
 ```
-##### Contributing suggested councillors feature
+#### Contributing suggested councillors feature
 Similarly, you can toggle the availability of the contributing suggested councillors feature on or off for the entire site with the environment variable `CONTRIBUTE_COUNCILLORS_ENABLED`.
 The feature is globally enabled when the value of `ENV["CONTRIBUTE_COUNCILLORS_ENABLED"]` is `"true"`.
 This flag is useful if you need to turn the feature _off_ globally.
@@ -197,7 +200,7 @@ CONTRIBUTE_COUNCILLORS_ENABLED=true
 ```
 
 
-#### Set the reply address for accepting responses
+### Set the reply address for accepting responses
 
 You need to specify an email address for councillors to send their replies to.
 If you’re using the [‘Wizard of Oz’ setup](#default-wizard-of-oz-method), the councillor replies will come in to this address.
@@ -209,7 +212,7 @@ Set this address using the `EMAIL_COUNCILLOR_REPLIES_TO` environment variable in
 EMAIL_COUNCILLOR_REPLIES_TO=lovely@email.org.au
 ```
 
-#### Enable the feature for an authority
+### Enable the feature for an authority
 
 You can toggle the ‘writing to councillors’ options on or off
 for all applications under an authority. By default it is off.
@@ -219,7 +222,7 @@ Check or uncheck the "Write to councillors enabled" option.
 
 You can see which authorities have the feature enabled at the Authorities admin page (`/admin/authorities`).
 
-#### Adding councillors for an authority
+### Adding councillors for an authority
 
 If you'd like to add new councillors for a planning authority, there are a number of steps that you need to take across a few different online services:
 
@@ -233,7 +236,7 @@ Any new councillors for this authority will be added, and existing councillors w
 6. Finally, check the list of your new and/or updated councillors on the authority’s admin page.
 7. If you're happy with the result then **[enable writing to councillors for this authority](#enable-the-feature-for-an-authority)**.
 
-#### Accepting councillor replies
+### Accepting councillor replies
 
 Not only can people write to their councillors using PlanningAlerts, but councillors can also reply!
 
@@ -246,7 +249,7 @@ You can choose between two different methods for loading replies into PlanningAl
 The [‘Wizard of Oz’ setup](#default-wizard-of-oz-method), which requires administrators to watch an email inbox and manually enter replies;
 or, by [integrating with a WriteIt site](#intergrating-with-writeit), which will accept replies and have them automatically posted on PlanningAlerts.
 
-##### Default Wizard of Oz method
+#### Default Wizard of Oz method
 
 While the back and forth of writing to councillors appears to be automatic to users, by [default there is no magic](https://en.wikipedia.org/wiki/Wizard_of_Oz_experiment).
 Behind the scenes administrators need to manually collect replies from an email inbox and add them to people’s comments.
@@ -265,13 +268,13 @@ On the ‘Add reply’ page fill in the form with the details of the reply:
 the `comment_id` of the comment it is responding to, the name of the councillor, the full text of the email received, and the time it was received (in [UTC time](http://time.is/UTC)).
 Hit the “Create reply” button. The original commenter will be notified of the reply via email and the reply will be posted with the comment on the application page.
 
-##### Integrating with WriteIt
+#### Integrating with WriteIt
 
 PlanningAlerts can automatically post replies from councillors
 by integrating with [WriteIt](http://writeit.ciudadanointeligente.org/en/) to send messages and receive answers.
 This means that no action is required by administrators for councillor replies to be loaded.
 
-###### Basic setup
+##### Basic setup
 
 To send people’s comments to councillors via a WriteIt instance, PlanningAlerts needs to know some things about that instance:
 
@@ -296,7 +299,7 @@ WRITEIT_USERNAME=yourusername
 WRITEIT_API_KEY=xxxxxxxxxxxxyourapikeyxxxxxxxxxxxxxxxxxx
 ```
 
-###### Adding your councillor data to WriteIt
+##### Adding your councillor data to WriteIt
 
 You’ve already [loaded your councillors into PlanningAlerts](#adding-councillors-for-an-authority),
 now you need to load them into WriteIt.
@@ -317,13 +320,13 @@ On the Writeit ‘data sources’ page you can “fetch new data” to update yo
 
 It’s always a good idea to check that your update worked as expected by [seeing if you have the option to write to one of the newly added councillors in WriteIt](http://planningalerts.writeit.ciudadanointeligente.org/en/write/who/).
 
-###### Sending messages via WriteIt
+##### Sending messages via WriteIt
 
 PlanningAlerts decides how to send a comment [after it is confirmed](https://github.com/openaustralia/planningalerts/blob/master/app/models/comment.rb#L30-L38) by the user.
 If you’ve [configured the integration to a WriteIt site](#basic-setup),
 comments to councillors will automatically be sent via the WriteIt API.
 
-###### Automatically fetching replies with the _Writeit reply webhook_
+##### Automatically fetching replies with the _Writeit reply webhook_
 
 When a councillor receives a message that has been sent via WriteIt,
 the reply email address is a special WriteIt email address, not [your configured reply address](#set-the-reply-address-for-accepting-responses).
@@ -346,7 +349,7 @@ WriteIt will post data about it to the webhook URL you set.
 Your PlanningAlerts app will then fetch the full answer from WriteIt
 and create a new reply.
 
-###### Manually loading replies from Writeit
+##### Manually loading replies from Writeit
 
 If for some reason the webhook isn’t configured,
 or something else goes wrong, you can manually load replies from your WriteIt site.
@@ -356,7 +359,7 @@ Use the “Load replies from WriteIt” button to load in new replies to that co
 PlanningAlerts will fetch any answers from the API for your WriteIt site
 and create new replies and associate them with the comment.
 
-#### Processing councillor data contributions
+### Processing councillor data contributions
 
 It's important that the lists of councillors that people can write to stay up-to-date.
 To help you update the listings, PlanningAlerts invites people to contribute data to maintain the list of councillors for their local area.
@@ -374,7 +377,7 @@ To review and ingest the contribution:
 5. Take this CSV and contribute it to the [repository for structured data of Australian local councillors](https://github.com/openaustralia/australian_local_councillors_popolo)
    following [its 'Updates' instructions](https://github.com/openaustralia/australian_local_councillors_popolo/#updates)
 
-## Deployment
+# Deployment
 
 The code is deployed using Capistrano. To deploy to production run:
 
@@ -391,7 +394,7 @@ View more available Capistrano commands with:
 
     bundle exec cap --tasks
 
-### Adding a new authority
+## Adding a new authority
 
 Someone has just written a new scraper for PlanningAlerts, woohoo! :tada: Now we need to add it to the site.
 
@@ -425,7 +428,7 @@ If all looks good then thank the contributor for helping tens of thousands of pe
 
 >We've just added @BellingenShire thanks to @LoveMyData. Another 12,886 people can now get PlanningAlerts! e.g. https://www.planningalerts.org.au/applications/898071
 
-## Contributing
+# Contributing
 
 * Fork the project on GitHub.
 * Make a topic branch from the master branch.
@@ -433,10 +436,10 @@ If all looks good then thank the contributor for helping tens of thousands of pe
 * Commit the changes without making changes to any files that aren't related to your enhancement or fix.
 * Send a pull request against the master branch.
 
-## Credits
+# Credits
 
 Our awesome contributors can be found on the [PlanningAlerts site](http://www.planningalerts.org.au/about).
 
-## License
+# License
 
 GPLv2, see the LICENSE file for full details.
