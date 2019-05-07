@@ -12,25 +12,41 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 ## Table of Contents
 
-* [Development](#development)
-  * [Scraping and sending emails in development](#scraping-and-sending-emails-in-development)
-  * [Take regular donations through PlanningAlerts with Stripe](#take-regular-donations-through-planningalerts-with-stripe)
-  * [Configuring PlanningAlerts so people can write to their local councillors](##configuring-planningalerts-so-people-can-write-to-their-local-councillors)
-    * [Global feature flag](#global-feature-flag)
-      * [Writing to councillors feature](#writing-to-councillors-feature)
-      * [Contributing suggested councillors feature](#contributing-suggested-councillors-feature)
-    * [Set the reply address for accepting responses](#set-the-reply-address-for-accepting-responses)
-    * [Enable the feature for an authority](#enable-the-feature-for-an-authority)
-    * [Adding councillors for an authority](#adding-councillors-for-an-authority)
-    * [Accepting councillor replies](#accepting-councillor-replies)
-      * [Default Wizard of Oz method](#default-wizard-of-oz-method)
-      * [Integrating with WriteIt](#integrating-with-writeit)
-    * [Processing councillor data contributions](#processing-councillor-data-contributions)
-* [Deployment](#deployment)
-  * [Adding a new authority](#adding-a-new-authority)
-* [Contributing](#contributing)
-* [Credits](#credits)
-* [License](#license)
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [PlanningAlerts](#planningalerts)
+    - [Table of Contents](#table-of-contents)
+    - [Meta](#meta)
+        - [About PlanningAlerts](#about-planningalerts)
+        - [Goals](#goals)
+    - [Development](#development)
+        - [Scraping and sending emails in development](#scraping-and-sending-emails-in-development)
+        - [Take regular donations through PlanningAlerts with Stripe](#take-regular-donations-through-planningalerts-with-stripe)
+        - [Configuring PlanningAlerts so people can write to their local councillors](#configuring-planningalerts-so-people-can-write-to-their-local-councillors)
+            - [Global feature flag](#global-feature-flag)
+                - [Writing to councillors feature](#writing-to-councillors-feature)
+                - [Contributing suggested councillors feature](#contributing-suggested-councillors-feature)
+            - [Set the reply address for accepting responses](#set-the-reply-address-for-accepting-responses)
+            - [Enable the feature for an authority](#enable-the-feature-for-an-authority)
+            - [Adding councillors for an authority](#adding-councillors-for-an-authority)
+            - [Accepting councillor replies](#accepting-councillor-replies)
+                - [Default Wizard of Oz method](#default-wizard-of-oz-method)
+                - [Integrating with WriteIt](#integrating-with-writeit)
+                    - [Basic setup](#basic-setup)
+                    - [Adding your councillor data to WriteIt](#adding-your-councillor-data-to-writeit)
+                    - [Sending messages via WriteIt](#sending-messages-via-writeit)
+                    - [Automatically fetching replies with the _Writeit reply webhook_](#automatically-fetching-replies-with-the-writeit-reply-webhook)
+                    - [Manually loading replies from Writeit](#manually-loading-replies-from-writeit)
+            - [Processing councillor data contributions](#processing-councillor-data-contributions)
+    - [Deployment](#deployment)
+        - [Adding a new authority](#adding-a-new-authority)
+    - [Contributing](#contributing)
+    - [Credits](#credits)
+    - [License](#license)
+
+<!-- markdown-toc end -->
+
 
 ## Meta
 
