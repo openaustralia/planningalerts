@@ -42,7 +42,7 @@ ActiveAdmin.register Authority do
         column :current
         column :email
         column :party
-        column(:image) { |c| link_to image_tag(c.image_url), c.image_url }
+        column(:image) { |c| link_to(image_tag(c.image_url), c.image_url) if c.image_url.present? }
         # TODO: Add delete action
         column do |c|
           safe_join(
