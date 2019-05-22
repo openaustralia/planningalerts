@@ -51,8 +51,8 @@ class ApplicationVersion < ApplicationRecord
     end
   end
 
-  def self.create_version!(application_id:, previous_version:, attributes:)
-    create!(
+  def self.build_version(application_id:, previous_version:, attributes:)
+    new(
       (previous_version&.data_attributes || {})
         .merge(attributes)
         .merge(

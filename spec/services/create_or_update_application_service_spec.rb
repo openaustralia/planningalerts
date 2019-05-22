@@ -103,7 +103,7 @@ describe CreateOrUpdateApplicationService do
     end
   end
 
-  context "updated application with unchanged data" do
+  context "updated application where only date_scraped has changed" do
     let(:updated_application) do
       CreateOrUpdateApplicationService.call(
         authority: application.authority,
@@ -116,7 +116,24 @@ describe CreateOrUpdateApplicationService do
       )
     end
 
-    it "should not create a new version when the data hasn't changed" do
+    it "should not create a new version" do
+      expect(updated_application.versions.count).to eq 1
+    end
+  end
+
+  context "updated application with unchanged data once typecast" do
+    let(:updated_application) do
+      CreateOrUpdateApplicationService.call(
+        authority: application.authority,
+        council_reference: application.council_reference,
+        attributes: {
+          # Once typecast to a date this is the same as before
+          date_received: "2001-01-01"
+        }
+      )
+    end
+
+    it "should not create a new version" do
       expect(updated_application.versions.count).to eq 1
     end
   end
