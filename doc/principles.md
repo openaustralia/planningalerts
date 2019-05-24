@@ -4,17 +4,16 @@ into these principles.
 
 We hope they can guide you as you design and develop PlanningAlerts.
 
-
 * Do less
-* Starting with a vision for a societt and community where people are empowered
-  and involed in decision making at all levels. They feel connected to and able
+* Starting with a vision for a society and community where people are empowered
+  and involved in decision making at all levels. They feel connected to and able
   to influence the direction that everyone is taking.
 * Do small things quickly. Test. Experiment. Iterate.
 * Talk to people. Answer your own support email.
 * Implement features only that will broadly work everywhere. However, make
-  almost everything optiona, to deal with real-world differences.
+  almost everything optional, to deal with real-world differences.
 * Design for the process as it should be, not as it is.
-* Woirk hard to simplify the underlying beuracratic complexity but don't bury it.
+* Work hard to simplify the underlying bureaucratic complexity but don't bury it.
 * Give people actionable information and don't restrict their actions.
 * Design for everyone.
 * Assume people are smart (intelligent) and busy. Respect them. Don't talk down
