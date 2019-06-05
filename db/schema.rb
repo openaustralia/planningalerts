@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_05_195352) do
+ActiveRecord::Schema.define(version: 2019_06_05_060050) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 2019_04_05_195352) do
     t.boolean "write_to_councillors_enabled", default: false, null: false
     t.string "website_url"
     t.integer "population_2017"
+    t.string "scraper_authority_label", comment: "For scrapers for multiple authorities filter by this label"
     t.index ["short_name"], name: "short_name_unique", unique: true
   end
 

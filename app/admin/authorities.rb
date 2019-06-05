@@ -32,6 +32,7 @@ ActiveAdmin.register Authority do
       row :write_to_councillors_enabled
       row :population_2017
       row :morph_name
+      row :scraper_authority_label
       row :disabled
     end
 
@@ -80,6 +81,7 @@ ActiveAdmin.register Authority do
     end
     inputs "Scraping" do
       input :morph_name, hint: "The name of the scraper at morph.io", placeholder: "planningalerts-scrapers/scraper-blue-mountains"
+      input :scraper_authority_label, hint: "If the scraper above supports multiple authorities enter the authority_label used"
       input :disabled
     end
     actions
@@ -120,5 +122,5 @@ ActiveAdmin.register Authority do
     column(:number_of_comments) { |a| a.comments.count }
   end
 
-  permit_params :full_name, :short_name, :state, :email, :website_url, :write_to_councillors_enabled, :population_2017, :morph_name, :disabled
+  permit_params :full_name, :short_name, :state, :email, :website_url, :write_to_councillors_enabled, :population_2017, :morph_name, :scraper_authority_label, :disabled
 end
