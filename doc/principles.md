@@ -36,3 +36,4 @@ Everything starts with a vision for a society and community where people are emp
 * Use consistent and simple language.
 * Do things to reduce government as an information gatekeeper. Reduce
   government's 'bad' power so they user more 'good' power.
+* Maintainability is crucial. This project should last and evolve long into the future.
