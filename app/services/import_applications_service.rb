@@ -22,6 +22,10 @@ class ImportApplicationsService < ApplicationService
     nil
   end
 
+  def morph_query
+    "select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'"
+  end
+
   private
 
   attr_reader :authority, :start_date, :end_date, :morph_api_key, :logger
@@ -77,10 +81,7 @@ class ImportApplicationsService < ApplicationService
   end
 
   def morph_url_for_date_range
-    params = {
-      query: "select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'",
-      key: morph_api_key
-    }
+    params = { query: morph_query, key: morph_api_key }
     "https://api.morph.io/#{authority.morph_name}/data.json?#{params.to_query}"
   end
 end
