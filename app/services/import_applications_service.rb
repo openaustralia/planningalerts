@@ -23,7 +23,11 @@ class ImportApplicationsService < ApplicationService
   end
 
   def morph_query
-    "select * from `data` where `date_scraped` >= '#{start_date}' and `date_scraped` <= '#{end_date}'"
+    filters = []
+    filters << "`authority_label` = '#{authority.scraper_authority_label}'" if authority.scraper_authority_label.present?
+    filters << "`date_scraped` >= '#{start_date}'"
+    filters << "`date_scraped` <= '#{end_date}'"
+    "select * from `data` where " + filters.join(" and ")
   end
 
   private
