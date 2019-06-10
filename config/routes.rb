@@ -156,10 +156,12 @@ Rails.application.routes.draw do
   post '/vanity/add_participant'
   get '/vanity/image'
 
-  resources :donations, only: %i[new create]
-
-  get "donations" => redirect("/donations/new")
-  get "donate" => redirect("/donations/new")
+  ## Use the donations form on OAF for now.
+  # resources :donations, only: %i[new create]
+  get "donations/new" => redirect("https://www.oaf.org.au/donate/planningalerts/")
+  get "donations/create" => redirect("https://www.oaf.org.au/donate/planningalerts/")
+  get "donations" => redirect("https://www.oaf.org.au/donate/planningalerts/")
+  get "donate" => redirect("https://www.oaf.org.au/donate/planningalerts/")
 
   root to: "applications#address"
 
