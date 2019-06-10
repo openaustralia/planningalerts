@@ -1,0 +1,11 @@
+-#
+%script{ src: "https://donorbox.org/widget.js", paypalExpress: "false" }
+
+%iframe{ src: "https://donorbox.org/embed/planningalerts", height: "685px", width: "100%", 
+    style: "max-width:500px; min-width:310px; max-height:none!important", seamless: "seamless",
+    name: "donorbox", frameborder: "0", scrolling: "no", allowpaymentrequest: "" }
+
+%p.no-js-message
+  Our donation form requires javascript from our secure payment processor donorbox.org
+  If you’re seeing this and can't adjust any settings that might be blocking that,
+  please email us at #{mail_to "contact@planningalerts.org.au"}, we’re keen to help.
