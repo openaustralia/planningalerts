@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "new_relic/recipes"
 require "bundler/capistrano"
 set :stage, "test" unless exists? :stage
 
@@ -33,8 +32,6 @@ else
 end
 
 # We need to run this after our collector mongrels are up and running
-# This goes out even if the deploy fails, sadly
-after "deploy:update", "newrelic:notice_deployment"
 
 before "deploy:restart", "foreman:restart"
 before "foreman:restart", "foreman:enable"
@@ -50,7 +47,6 @@ namespace :deploy do
       "#{release_path}/config/database.yml" => "#{shared_path}/database.yml",
       "#{release_path}/config/throttling.yml" => "#{shared_path}/throttling.yml",
       "#{release_path}/.env.production" => "#{shared_path}/.env.production",
-      "#{release_path}/config/newrelic.yml" => "#{shared_path}/newrelic.yml",
       "#{release_path}/public/sitemap.xml" => "#{shared_path}/sitemap.xml",
       "#{release_path}/public/sitemaps" => "#{shared_path}/sitemaps",
       "#{release_path}/public/assets" => "#{shared_path}/assets"

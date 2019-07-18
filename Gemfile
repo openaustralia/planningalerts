@@ -187,6 +187,5 @@ end
 group :production do
   # Javascript runtime (required for precompiling assets in production)
   gem "mini_racer"
-  gem "newrelic_rpm"
   gem "uglifier"
 end
