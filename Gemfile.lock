@@ -351,7 +351,6 @@ GEM
     net-ssh (5.1.0)
     net-ssh-gateway (2.0.0)
       net-ssh (>= 4.0.0)
-    newrelic_rpm (5.6.0.349)
     nio4r (2.3.1)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
@@ -638,7 +637,6 @@ DEPENDENCIES
   mime-types (~> 2.99)
   mini_racer
   mysql2
-  newrelic_rpm
   nokogiri
   oj
   rabl
