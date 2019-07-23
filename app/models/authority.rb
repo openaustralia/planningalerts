@@ -6,7 +6,7 @@ class Authority < ApplicationRecord
   has_many :comments, through: :applications
   has_many :councillor_contributions, dependent: :restrict_with_exception
 
-  validates :short_name, presence: true, uniqueness: { case_sensitive: false }
+  validate :short_name_encoded_is_unique
 
   validates :state, inclusion: {
     in: %w[NSW VIC QLD SA WA TAS NT ACT],
@@ -15,6 +15,13 @@ class Authority < ApplicationRecord
 
   scope(:enabled, -> { where("disabled = 0 or disabled is null") })
   scope(:active, -> { where('(disabled = 0 or disabled is null) AND morph_name != "" AND morph_name IS NOT NULL') })
+
+  def short_name_encoded_is_unique
+    other = Authority.find_short_name_encoded(short_name_encoded)
+    return if other.nil? || other.id == id
+
+    errors.add(:short_name, "is not unique when encoded")
+  end
 
   def councillors_available_for_contact
     if write_to_councillors_enabled?

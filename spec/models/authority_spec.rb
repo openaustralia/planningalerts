@@ -4,22 +4,33 @@ require "spec_helper"
 
 describe Authority do
   describe "validations" do
-    let!(:existing_authority) { create(:authority, short_name: "Existing") }
+    let!(:existing_authority) { create(:authority, short_name: "Existing Council") }
 
     it "should ensure a unique short_name" do
-      new_authority = build(:authority, short_name: "Existing")
+      new_authority = build(:authority, short_name: "Existing Council")
 
-      expect(existing_authority.valid?).to eq true
+      expect(existing_authority).to be_valid
 
-      expect(new_authority.valid?).to eq false
-      expect(new_authority.errors.messages[:short_name]).to eq(["has already been taken"])
+      expect(new_authority).to_not be_valid
+      expect(new_authority.errors.messages[:short_name]).to eq(["is not unique when encoded"])
     end
 
     it "unique short name should be case insensitive" do
-      new_authority = build(:authority, short_name: "existing")
+      new_authority = build(:authority, short_name: "existing council")
 
-      expect(new_authority.valid?).to eq false
-      expect(new_authority.errors.messages[:short_name]).to eq(["has already been taken"])
+      expect(new_authority).to_not be_valid
+      expect(new_authority.errors.messages[:short_name]).to eq(["is not unique when encoded"])
+    end
+
+    it "should allow a different short_name" do
+      new_authority = build(:authority, short_name: "Different Council")
+      expect(new_authority).to be_valid
+    end
+
+    it "should not allow a name that encodes to the same string" do
+      new_authority = build(:authority, short_name: "existing_council")
+      expect(new_authority).to_not be_valid
+      expect(new_authority.errors.messages[:short_name]).to eq(["is not unique when encoded"])
     end
   end
 
