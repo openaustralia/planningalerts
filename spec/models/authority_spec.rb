@@ -4,8 +4,9 @@ require "spec_helper"
 
 describe Authority do
   describe "validations" do
+    let!(:existing_authority) { create(:authority, short_name: "Existing") }
+
     it "should ensure a unique short_name" do
-      existing_authority = create(:authority, short_name: "Existing")
       new_authority = build(:authority, short_name: "Existing")
 
       expect(existing_authority.valid?).to eq true
@@ -15,7 +16,6 @@ describe Authority do
     end
 
     it "unique short name should be case insensitive" do
-      create(:authority, short_name: "Existing")
       new_authority = build(:authority, short_name: "existing")
 
       expect(new_authority.valid?).to eq false
