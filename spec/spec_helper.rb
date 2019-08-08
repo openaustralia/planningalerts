@@ -13,17 +13,7 @@ require "rspec/rails"
 require "email_spec"
 require "rspec/active_model/mocks"
 
-capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-  "chromeOptions" => {
-    "args" => ["--headless", "--disable-gpu"]
-  }
-)
-
-Capybara.register_driver :chrome do |app|
-  Capybara::Selenium::Driver.new(app, browser: :chrome, desired_capabilities: capabilities)
-end
-
-Capybara.javascript_driver = :chrome
+Capybara.javascript_driver = :selenium_headless
 Capybara.server = :webrick
 
 VCR.configure do |c|

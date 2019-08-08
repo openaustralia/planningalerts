@@ -133,7 +133,6 @@ gem "counter_culture"
 
 group :test do
   gem "capybara"
-  gem "chromedriver-helper"
   gem "climate_control"
   gem "database_cleaner"
   gem "email_spec"
