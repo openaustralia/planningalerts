@@ -7,15 +7,7 @@
     or one of your elected local councillors.
   - else
     Your comment and details will be sent to
-<<<<<<< HEAD
-    %strong #{application.authority.full_name}, 
-    - if application.official_submission_period_expired?
-      but cannot be formally considered by them as the notification period for this application has expired.
-    - else
-      and may be considered by them as part of the decision making process for this application.
-=======
     %strong #{application.authority.full_name}.
     - unless application.official_submission_period_expired?
       They may consider your submission when they decide whether to approve this application.
->>>>>>> 40b68ee6... Simply change wording from "They\'ll" to "They may"
   Your&nbsp;name and comment will be posted publicly above.
