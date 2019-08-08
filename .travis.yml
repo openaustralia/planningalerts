@@ -1,12 +1,5 @@
 addons:
   chrome: stable
-  # Using mysql 5.7 to avoid key length problems due to ut8mb4 changes
-  apt:
-    sources:
-      - mysql-5.7-trusty
-    packages:
-      - mysql-server
-      - mysql-client
 language: ruby
 
 before_script:
@@ -19,5 +12,8 @@ after_script:
   - ./cc-test-reporter -d after-build -t simplecov --exit-code $TRAVIS_TEST_RESULT
 
 services:
+  - mysql
   - redis
   - elasticsearch
+
+dist: xenial
