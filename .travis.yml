@@ -1,5 +1,5 @@
 addons:
-  chrome: stable
+  firefox: latest
 language: ruby
 
 before_script:
