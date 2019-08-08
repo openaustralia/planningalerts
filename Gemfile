@@ -145,6 +145,7 @@ group :test do
   gem "stripe-ruby-mock", "~> 2.3.1", require: "stripe_mock"
   gem "timecop"
   gem "vcr"
+  gem "webdrivers", "~> 4.0"
   gem "webmock"
   # FIXME: stop using `mock_model` and remove this
   gem "rspec-activemodel-mocks"

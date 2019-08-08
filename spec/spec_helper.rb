@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "simplecov"
+require "webdrivers/geckodriver"
 
 SimpleCov.start("rails") do
   add_filter "app/admin"
@@ -19,6 +20,14 @@ Capybara.server = :webrick
 VCR.configure do |c|
   c.cassette_library_dir = "spec/fixtures/vcr_cassettes"
   c.hook_into :webmock
+  # Ignore requests to github and s3 for the benefit of the webdrivers gem
+  # which automatically downloads the webdriver for headless testing
+  c.ignore_hosts "github.com"
+  c.ignore_request do |request|
+    URI(request.uri).host =~ /s3.amazonaws.com/
+    # false
+    # URI(request.uri).port == 7777
+  end
   c.ignore_localhost = true
   # This will by default record new web requests in VCR. We can see
   # that this is happened because the files in spec/fixtures/vcr_cassettes
