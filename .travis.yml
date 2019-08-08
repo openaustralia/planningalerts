@@ -10,7 +10,6 @@ addons:
 language: ruby
 
 before_script:
-  - export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3
   - cp config/database.yml.example config/database.yml
   - bundle exec rake db:setup
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
