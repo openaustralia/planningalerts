@@ -67,10 +67,11 @@ ActiveAdmin.register Authority do
 
   filter :full_name
 
-  form do |_f|
+  form do |f|
     inputs "Name" do
       input :full_name
-      input :short_name
+      input :short_name, input_html: { disabled: !f.object.new_record? },
+                         hint: "Used to generate the authority URL and so shouldn't change once created"
     end
     inputs "Details" do
       input :state

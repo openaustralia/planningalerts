@@ -1,16 +1,8 @@
 addons:
-  chrome: stable
-  # Using mysql 5.7 to avoid key length problems due to ut8mb4 changes
-  apt:
-    sources:
-      - mysql-5.7-trusty
-    packages:
-      - mysql-server
-      - mysql-client
+  firefox: latest
 language: ruby
 
 before_script:
-  - export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3
   - cp config/database.yml.example config/database.yml
   - bundle exec rake db:setup
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -20,5 +12,8 @@ after_script:
   - ./cc-test-reporter -d after-build -t simplecov --exit-code $TRAVIS_TEST_RESULT
 
 services:
+  - mysql
   - redis
   - elasticsearch
+
+dist: xenial

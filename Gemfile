@@ -133,7 +133,6 @@ gem "counter_culture"
 
 group :test do
   gem "capybara"
-  gem "chromedriver-helper"
   gem "climate_control"
   gem "database_cleaner"
   gem "email_spec"
@@ -146,6 +145,7 @@ group :test do
   gem "stripe-ruby-mock", "~> 2.3.1", require: "stripe_mock"
   gem "timecop"
   gem "vcr"
+  gem "webdrivers", "~> 4.0"
   gem "webmock"
   # FIXME: stop using `mock_model` and remove this
   gem "rspec-activemodel-mocks"
@@ -187,6 +187,5 @@ end
 group :production do
   # Javascript runtime (required for precompiling assets in production)
   gem "mini_racer"
-  gem "newrelic_rpm"
   gem "uglifier"
 end
