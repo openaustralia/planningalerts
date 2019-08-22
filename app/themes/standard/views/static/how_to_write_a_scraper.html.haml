@@ -21,6 +21,19 @@
   our
   = link_to "crowd-sourced list of councils", "https://docs.google.com/spreadsheet/ccc?key=0AmvYMal8CGUsdG1tM0lEWUctR194eGN6bUh0VGFfc1E"
   and have a look at their published planning applications. Quickly double-check that the council isn't #{link_to "covered already", authorities_path}.
+%p
+  Some systems for displaying development applications on council websites are widely used. For most of those
+  we have already developed scrapers that are capable of scraping many authorities using the same system.
+  Check whether the council you want to scrape is using one of the systems
+  #{link_to "Masterview", "https://github.com/planningalerts-scrapers/masterview_scraper"},
+  #{link_to "Civica", "https://github.com/planningalerts-scrapers/civica_scraper"},
+  #{link_to "Icon", "https://github.com/planningalerts-scrapers/icon_scraper"},
+  #{link_to "ATDIS", "https://github.com/planningalerts-scrapers/multiple_atdis"},
+  #{link_to "Horizon", "https://github.com/planningalerts-scrapers/horizon_xml"},
+  #{link_to "Technology One", "https://github.com/planningalerts-scrapers/technology_one_scraper"} or
+  #{link_to "Epathway", "https://github.com/planningalerts-scrapers/epathway_scraper"}.
+  We don't yet have good documentation on how to recognise these different systems but that's
+  something we want to create. Or maybe you can help?
 
 %h4 An introduction to scraping with morph.io
 %p
