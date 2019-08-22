@@ -126,18 +126,37 @@
           = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
           format.
 
+%h4 Versioning application data
 %p
-  To ensure the date_scraped field isn't overwritten on subsequent scrapes add code similar to this to
-  save your planning application to the morph.io datastore:
+  It's important that scrapers collect the latest, most up-to-date, information. In fact,
+  if the information about an application changes (because, for instance, a council updates the
+  wording or corrects a mistake) your scraper should get the most up to date information.
+
+%p
+  For that reason, it's good practise for your scraper to look back a reasonable amount of
+  time (one month is good) in which you scrape all applications that might have changed in that
+  time. That way you're most likely to catch any changes. Often it's not possible to simply
+  get a list of applications that recently changed. Instead you have to scrape say a list
+  of applications that were recently received and applications that have recently been determined
+  (whether they're approved or not).
+
+%p
+  When you save an updated version of an application make sure you use the council_reference
+  field as the unique id. That way you don't end up with multiple versions of the same record.
+  If you're writing your scraper in Ruby that will look something like:
 
 %code.long-lines
   %pre
     :preserve
-      if (ScraperWiki.select("* from data where `council_reference`='\#{record['council_reference']}'").empty? rescue true)
-        ScraperWiki.save_sqlite(['council_reference'], record)
-      else
-        puts "Skipping already saved record " + record['council_reference']
-      end
+      ScraperWiki.save_sqlite(['council_reference'], record)
+
+%p
+  When the main PlanningAlerts system reads the latest application data from your
+  scraper on morph.io it automatically keeps track of the changes that occur
+  on indidivual applications. That way you can make sure that nothing truly gets
+  overwritten. There is always a history of what fields changed when. At the moment
+  this information is recorded in the database but isn't yet exposed to users in
+  the main application or through the data published through the API.
 
 %p
   If you get stuck, have a look at
