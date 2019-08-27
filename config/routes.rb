@@ -159,10 +159,10 @@ Rails.application.routes.draw do
   resources :donations, only: %i[new create]
   
   ## Use the donations form on OAF for now.
-  get "donations/new" => redirect("https://www.oaf.org.au/donate/planningalerts/")
-  get "donations/create" => redirect("https://www.oaf.org.au/donate/planningalerts/")
-  get "donations" => redirect("https://www.oaf.org.au/donate/planningalerts/")
-  get "donate" => redirect("https://www.oaf.org.au/donate/planningalerts/")
+  get "donations/new", to: redirect("https://www.oaf.org.au/donate/planningalerts/")
+  get "donations/create", to: redirect("https://www.oaf.org.au/donate/planningalerts/")
+  get "donations", to: redirect("https://www.oaf.org.au/donate/planningalerts/")
+  get "donate", to: redirect("https://www.oaf.org.au/donate/planningalerts/")
 
   root to: "applications#address"
 
