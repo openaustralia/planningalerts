@@ -46,9 +46,15 @@ module ApiHowtoHelper
     applications_url({ host: api_host, format: format, postcode: postcode, key: key }.merge(extra_params))
   end
 
-  def api_example_suburb_and_state_url(format, key, suburb = Rails.application.config.planningalerts_api_example_suburb, state = Rails.application.config.planningalerts_api_example_state)
+  def api_example_suburb_state_and_postcode_url(
+    format,
+    key,
+    suburb = Rails.application.config.planningalerts_api_example_suburb,
+    state = Rails.application.config.planningalerts_api_example_state,
+    postcode = Rails.application.config.planningalerts_api_example_postcode
+  )
     applications_url(
-      host: api_host, format: format, suburb: suburb, state: state,
+      host: api_host, format: format, suburb: suburb, state: state, postcode: postcode,
       key: key
     )
   end
@@ -93,11 +99,12 @@ module ApiHowtoHelper
     htmlify(t)
   end
 
-  def api_example_suburb_and_state_url_html(format, key)
-    t = api_example_suburb_and_state_url(format, key || "33", "11", "22")
+  def api_example_suburb_state_and_postcode_url_html(format, key)
+    t = api_example_suburb_state_and_postcode_url(format, key || "44", "11", "22", "33")
     t = t.sub("11", "[suburb]")
     t = t.sub("22", "[state]")
-    t = t.sub("33", "[key]") if key.nil?
+    t = t.sub("33", "[postcode]")
+    t = t.sub("44", "[key]") if key.nil?
     htmlify(t)
   end
 end

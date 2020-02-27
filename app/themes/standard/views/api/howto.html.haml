@@ -94,11 +94,11 @@
   %h5
     Suburb
   %p.apidefinition
-    Return applications in a suburb. Including &ldquo;state&rdquo; in the search is optional.
-  %code= raw api_example_suburb_and_state_url_html("js", api_key)
+    Return applications in a suburb. Including &ldquo;state&rdquo; and &ldquo;postcode&rdquo; in the search is optional.
+  %code= raw api_example_suburb_state_and_postcode_url_html("js", api_key)
   - if current_user
     .apiexamples
-      = link_to "Example", api_example_suburb_and_state_url("js", api_key), class: "button button-rounded"
+      = link_to "Example", api_example_suburb_state_and_postcode_url("js", api_key), class: "button button-rounded"
 
 %hr
 %h4 Extra query parameters

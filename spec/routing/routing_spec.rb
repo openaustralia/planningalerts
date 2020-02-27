@@ -10,12 +10,12 @@ describe "api routing" do
 
   it do
     expect(get: "applications.js?postcode=2780")
-      .to route_to(controller: "api", action: "postcode", format: "js", postcode: "2780")
+      .to route_to(controller: "api", action: "suburb_postcode", format: "js", postcode: "2780")
   end
 
   it do
     expect(get: "applications.js?suburb=Katoomba")
-      .to route_to(controller: "api", action: "suburb", format: "js", suburb: "Katoomba")
+      .to route_to(controller: "api", action: "suburb_postcode", format: "js", suburb: "Katoomba")
   end
 
   it do

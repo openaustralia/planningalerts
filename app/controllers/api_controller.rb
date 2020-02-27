@@ -9,7 +9,7 @@ class ApiController < ApplicationController
   # GET requests for JSONP instead of using XHR
   # TODO: Remove this line to re-enable CSRF protection on API actions
   skip_before_action :verify_authenticity_token,
-                     only: %i[authority postcode suburb point area date_scraped all]
+                     only: %i[authority suburb_postcode point area date_scraped all]
 
   def authority
     # TODO: Handle the situation where the authority name isn't found
@@ -17,20 +17,23 @@ class ApiController < ApplicationController
     api_render(authority.applications, "Recent applications from #{authority.full_name_and_state}")
   end
 
-  def postcode
-    # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
-    api_render(Application.with_current_version.order("date_scraped DESC").where(application_versions: { postcode: params[:postcode] }),
-               "Recent applications in postcode #{params[:postcode]}")
-  end
-
-  def suburb
-    apps = Application.with_current_version.order("date_scraped DESC").where(application_versions: { suburb: params[:suburb] })
-    description = "Recent applications in #{params[:suburb]}"
+  def suburb_postcode
+    apps = Application.with_current_version.order("date_scraped DESC")
+    descriptions = []
+    if params[:suburb]
+      descriptions << params[:suburb]
+      apps = apps.where(application_versions: { suburb: params[:suburb] })
+    end
     if params[:state]
-      description += ", #{params[:state]}"
+      descriptions << params[:state]
       apps = apps.where(application_versions: { state: params[:state] })
     end
-    api_render(apps, description)
+    # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
+    if params[:postcode]
+      descriptions << params[:postcode]
+      apps = apps.where(application_versions: { postcode: params[:postcode] })
+    end
+    api_render(apps, "Recent applications in #{descriptions.join(', ')}")
   end
 
   def point

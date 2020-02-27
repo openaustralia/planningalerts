@@ -86,10 +86,10 @@ describe ApiController do
     end
   end
 
-  describe "#postcode" do
+  describe "#suburb_postcode" do
     # TODO: Make errors work with rss format
     it_behaves_like "an authenticated API" do
-      let(:method) { :postcode }
+      let(:method) { :suburb_postcode }
       let(:params) { { format: "js", postcode: "2780" } }
     end
 
@@ -104,16 +104,16 @@ describe ApiController do
       expect(scope2).to receive(:where).with(application_versions: { postcode: "2780" }).and_return(scope3)
       expect(scope3).to receive(:includes).and_return(scope4)
       expect(scope4).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
-      get :postcode, params: { key: user.api_key, format: "rss", postcode: "2780" }
+      get :suburb_postcode, params: { key: user.api_key, format: "rss", postcode: "2780" }
       expect(assigns[:applications]).to eq(result)
-      expect(assigns[:description]).to eq("Recent applications in postcode 2780")
+      expect(assigns[:description]).to eq("Recent applications in 2780")
     end
 
     it "should support jsonp" do
       authority = create(:authority, full_name: "Acme Local Planning Authority")
       result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
       allow(Application).to receive_message_chain(:with_current_version, :order, :where, :includes, :paginate).and_return([result])
-      get :postcode, params: { key: user.api_key, format: "js", postcode: "2780", callback: "foobar" }, xhr: true
+      get :suburb_postcode, params: { key: user.api_key, format: "js", postcode: "2780", callback: "foobar" }, xhr: true
       expect(response.body[0..10]).to eq("/**/foobar(")
       expect(response.body[-1..-1]).to eq(")")
       expect(JSON.parse(response.body[11..-2])).to eq(
@@ -145,7 +145,7 @@ describe ApiController do
       result = [application]
       allow(result).to receive(:total_pages).and_return(5)
       allow(Application).to receive_message_chain(:with_current_version, :order, :where, :includes, :paginate).and_return(result)
-      get :postcode, params: { key: user.api_key, format: "js", v: "2", postcode: "2780" }
+      get :suburb_postcode, params: { key: user.api_key, format: "js", v: "2", postcode: "2780" }
       expect(JSON.parse(response.body)).to eq(
         "application_count" => 1,
         "page_count" => 5,
@@ -327,9 +327,9 @@ describe ApiController do
     end
   end
 
-  describe "#suburb" do
+  describe "#suburb_postcode" do
     it_behaves_like "an authenticated API" do
-      let(:method) { :suburb }
+      let(:method) { :suburb_postcode }
       let(:params) { { format: "js", suburb: "Katoomba" } }
     end
 
@@ -344,7 +344,7 @@ describe ApiController do
       expect(scope2).to receive(:where).with(application_versions: { suburb: "Katoomba" }).and_return(scope3)
       expect(scope3).to receive(:includes).and_return(scope4)
       expect(scope4).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
-      get :suburb, params: { key: user.api_key, format: "rss", suburb: "Katoomba" }
+      get :suburb_postcode, params: { key: user.api_key, format: "rss", suburb: "Katoomba" }
       expect(assigns[:applications]).to eq(result)
       expect(assigns[:description]).to eq("Recent applications in Katoomba")
     end
@@ -363,9 +363,31 @@ describe ApiController do
         expect(scope3).to receive(:where).with(application_versions: { state: "NSW" }).and_return(scope4)
         expect(scope4).to receive(:includes).and_return(scope5)
         expect(scope5).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
-        get :suburb, params: { key: user.api_key, format: "rss", suburb: "Katoomba", state: "NSW" }
+        get :suburb_postcode, params: { key: user.api_key, format: "rss", suburb: "Katoomba", state: "NSW" }
         expect(assigns[:applications]).to eq(result)
         expect(assigns[:description]).to eq("Recent applications in Katoomba, NSW")
+      end
+    end
+
+    describe "search by suburb, state and postcode" do
+      it "should find recent applications for a suburb, state and postcode" do
+        result = double
+        scope1 = double
+        scope2 = double
+        scope3 = double
+        scope4 = double
+        scope5 = double
+        scope6 = double
+        expect(Application).to receive(:with_current_version).and_return(scope1)
+        expect(scope1).to receive(:order).and_return(scope2)
+        expect(scope2).to receive(:where).with(application_versions: { suburb: "Katoomba" }).and_return(scope3)
+        expect(scope3).to receive(:where).with(application_versions: { state: "NSW" }).and_return(scope4)
+        expect(scope4).to receive(:where).with(application_versions: { postcode: "2780" }).and_return(scope5)
+        expect(scope5).to receive(:includes).and_return(scope6)
+        expect(scope6).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
+        get :suburb_postcode, params: { key: user.api_key, format: "rss", suburb: "Katoomba", state: "NSW", postcode: "2780" }
+        expect(assigns[:applications]).to eq(result)
+        expect(assigns[:description]).to eq("Recent applications in Katoomba, NSW, 2780")
       end
     end
   end

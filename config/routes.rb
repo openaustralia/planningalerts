@@ -60,9 +60,9 @@ Rails.application.routes.draw do
   # Route API separately
   scope format: true do
     get "authorities/:authority_id/applications" => "api#authority", as: nil
-    get "applications" => "api#postcode", as: nil,
+    get "applications" => "api#suburb_postcode", as: nil,
         constraints: QueryParamsPresentConstraint.new(:postcode)
-    get "applications" => "api#suburb", as: nil,
+    get "applications" => "api#suburb_postcode", as: nil,
         constraints: QueryParamsPresentConstraint.new(:suburb)
     get "applications" => "api#point", as: nil,
         constraints: QueryParamsPresentConstraint.new(:address)
