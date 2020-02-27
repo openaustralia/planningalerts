@@ -36,16 +36,16 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 **Install Dependencies**
  * Install MySql - On macOS download dmg from [http://dev.mysql.com/downloads/](http://dev.mysql.com/downloads/)
- * Install PhantomJS for headless browser testing with Poltergeist - follow
-   [instructions in the Poltergeist Readme](https://github.com/teampoltergeist/poltergeist#installing-phantomjs).
  * [Install Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup.html) - On macOS `brew install elasticsearch; brew services start elasticsearch`
+ * [Install Redis](https://redis.io/) - On macOS `brew install redis; brew services start redis`
 
 **Checkout The Project**
  * Fork the project on Github
  * Checkout the project
 
 **Install Ruby Dependencies**
- * Install bundler and foreman - `gem install bundler foreman`
+ * Install bundler - `gem install bundler -v '~>1'`
+ * Install foreman - `gem install foreman`
  * Install dependencies - `bundle install`
 
 **Setup The Database**
