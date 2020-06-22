@@ -29,7 +29,7 @@ gem "vanity"
 gem "activeadmin"
 
 # Logging in and such things
-gem "devise", "~> 4.2" # Pin to a particular major version to get deprecation warnings
+gem "devise", "~> 4.7" # Pin to a particular major version to get deprecation warnings
 
 # To handle different kinds of view templates
 gem "haml"
