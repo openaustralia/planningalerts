@@ -23,7 +23,7 @@ describe Donation do
                         stripe_plan_id: Donation.plan_id_on_stripe)
     end
 
-    around :all do |test|
+    around :each do |test|
       StripeMock.start
 
       with_modified_env STRIPE_PLAN_ID_FOR_DONATIONS: "foo-plan-1" do
