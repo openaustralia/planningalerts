@@ -39,17 +39,15 @@ class ImportApplicationsService < ApplicationService
     count = 0
     error_count = 0
     import_data.each do |attributes|
-      begin
-        CreateOrUpdateApplicationService.call(
-          authority: authority,
-          council_reference: attributes[:council_reference],
-          attributes: attributes.reject { |k, _v| k == :council_reference }
-        )
-        count += 1
-      rescue StandardError => e
-        error_count += 1
-        logger.error "Error #{e} while trying to save application #{attributes[:council_reference]} for #{authority.full_name_and_state}. So, skipping"
-      end
+      CreateOrUpdateApplicationService.call(
+        authority: authority,
+        council_reference: attributes[:council_reference],
+        attributes: attributes.reject { |k, _v| k == :council_reference }
+      )
+      count += 1
+    rescue StandardError => e
+      error_count += 1
+      logger.error "Error #{e} while trying to save application #{attributes[:council_reference]} for #{authority.full_name_and_state}. So, skipping"
     end
 
     logger.info "#{count} #{'application'.pluralize(count)} found for #{authority.full_name_and_state} with date from #{start_date} to #{end_date}"
