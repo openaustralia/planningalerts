@@ -62,10 +62,9 @@ module ApplicationsHelper
     safe_join(t, " ")
   end
 
-  # TODO: Fix this (unused _application)
-  def page_title(_application)
+  def page_title(application)
     # Include the scraping date in the title so that multiple applications from the same address have different titles
-    "#{@application.address} | #{@application.date_scraped.to_date.to_formatted_s(:rfc822)}"
+    "#{application.address} | #{application.date_scraped.to_date.to_formatted_s(:rfc822)}"
   end
 
   def authority_applications_json_url_for_current_user(authority)

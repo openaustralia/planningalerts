@@ -48,11 +48,11 @@ module AlertMailerHelper
     )
   end
 
-  def new_donation_url_with_tracking
+  def new_donation_url_with_tracking(alert)
     new_donation_url(
       base_tracking_params.merge(
         utm_campaign: "donate-from-alert",
-        email: @alert.email
+        email: alert.email
       )
     )
   end
