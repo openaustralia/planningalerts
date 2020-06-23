@@ -33,7 +33,9 @@ gem "devise", "~> 4.2" # Pin to a particular major version to get deprecation wa
 
 # To handle different kinds of view templates
 gem "haml"
-gem "rabl"
+# Temporarily locking version of rabl because upgrading causes
+# "Gem::Package::PathError: installing into parent path"
+gem "rabl", "0.14.0"
 gem "redcarpet"
 
 # Donations
@@ -67,7 +69,8 @@ gem "autoprefixer-rails"
 # See https://www.bourbon.io/docs/migrating-from-v4-to-v5/
 gem "bourbon", "~> 4.0"
 gem "compass-blueprint"
-gem "compass-rails"
+# compass is no longer maintained. TODO: Move away from compass
+gem "compass-rails", "3.1.0"
 gem "sass-rails"
 gem "susy"
 
