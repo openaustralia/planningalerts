@@ -49,11 +49,11 @@ describe AlertMailer do
     end
 
     it "should nicely format (in text) a list of multiple planning applications" do
-      expect(email.text_part.body.to_s.strip).to eq Rails.root.join("spec", "mailers", "regression", "alert_mailer", "email3.txt").read.gsub("\n", "\r\n").strip
+      expect(email.text_part.body.to_s.strip).to eq Rails.root.join("spec/mailers/regression/alert_mailer/email3.txt").read.gsub("\n", "\r\n").strip
     end
 
     it "should nicely format (in HTML) a list of multiple planning applications" do
-      expect(email.html_part.body.to_s).to eq(Rails.root.join("spec", "mailers", "regression", "alert_mailer", "email3.html").read.gsub("\n", "\r\n"))
+      expect(email.html_part.body.to_s).to eq(Rails.root.join("spec/mailers/regression/alert_mailer/email3.html").read.gsub("\n", "\r\n"))
     end
   end
 
@@ -65,11 +65,11 @@ describe AlertMailer do
     end
 
     it "should nicely format (in text) a list of multiple planning applications" do
-      expect(email.text_part.body.to_s.strip).to eq Rails.root.join("spec", "mailers", "regression", "alert_mailer", "email2.txt").read.gsub("\n", "\r\n").strip
+      expect(email.text_part.body.to_s.strip).to eq Rails.root.join("spec/mailers/regression/alert_mailer/email2.txt").read.gsub("\n", "\r\n").strip
     end
 
     it "should nicely format (in HTML) a list of multiple planning applications" do
-      expect(email.html_part.body.to_s).to eq(Rails.root.join("spec", "mailers", "regression", "alert_mailer", "email2.html").read.gsub("\n", "\r\n"))
+      expect(email.html_part.body.to_s).to eq(Rails.root.join("spec/mailers/regression/alert_mailer/email2.html").read.gsub("\n", "\r\n"))
     end
   end
 
@@ -108,7 +108,7 @@ describe AlertMailer do
 
       context "Text email" do
         it "should nicely format a list of multiple planning applications" do
-          expect(@email.text_part.body.to_s.strip).to eq Rails.root.join("spec", "mailers", "regression", "alert_mailer", "email1.txt").read.gsub("\n", "\r\n").strip
+          expect(@email.text_part.body.to_s.strip).to eq Rails.root.join("spec/mailers/regression/alert_mailer/email1.txt").read.gsub("\n", "\r\n").strip
         end
       end
 
@@ -128,7 +128,7 @@ describe AlertMailer do
         end
 
         it "should have a specific body" do
-          expect(@html_body).to eq(Rails.root.join("spec", "mailers", "regression", "alert_mailer", "email1.html").read.gsub("\n", "\r\n"))
+          expect(@html_body).to eq(Rails.root.join("spec/mailers/regression/alert_mailer/email1.html").read.gsub("\n", "\r\n"))
         end
       end
     end

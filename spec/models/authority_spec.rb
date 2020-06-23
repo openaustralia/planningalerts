@@ -229,7 +229,7 @@ describe Authority do
 
   describe "#load_councillors" do
     let(:popolo) do
-      popolo_file = Rails.root.join("spec", "fixtures", "local_councillor_popolo.json")
+      popolo_file = Rails.root.join("spec/fixtures/local_councillor_popolo.json")
       EveryPolitician::Popolo.read(popolo_file)
     end
 

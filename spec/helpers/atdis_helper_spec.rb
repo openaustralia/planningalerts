@@ -5,12 +5,8 @@ require "spec_helper"
 describe AtdisHelper do
   describe "#attribute_value" do
     it "should custom display a time" do
-      # rubocop:disable Rails/TimeZone
-      # rubocop:disable Style/DateTime
       # TODO: Update atdis gem to not return datetime but use time instead
       value = DateTime.new(2001, 1, 1)
-      # rubocop:enable Style/DateTime
-      # rubocop:enable Rails/TimeZone
       Timecop.freeze(Time.utc(2002, 1, 1)) do
         expect(helper.attribute_value(value)).to eq(
           '<div class="value">' \

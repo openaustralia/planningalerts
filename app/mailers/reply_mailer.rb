@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ReplyMailer < ActionMailer::Base
+class ReplyMailer < ApplicationMailer
   include EmailFrom
   helper :comments
 

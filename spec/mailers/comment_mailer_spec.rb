@@ -36,11 +36,11 @@ describe CommentMailer do
       end
 
       it "should have specific information in the body of the email" do
-        expect(notifier.text_part.body.to_s).to eq(Rails.root.join("spec", "mailers", "regression", "comment_mailer", "email1.txt").read)
+        expect(notifier.text_part.body.to_s).to eq(Rails.root.join("spec/mailers/regression/comment_mailer/email1.txt").read)
       end
 
       it "should format paragraphs correctly in the html version of the email" do
-        expect(notifier.html_part.body.to_s).to include Rails.root.join("spec", "mailers", "regression", "comment_mailer", "email1.html").read
+        expect(notifier.html_part.body.to_s).to include Rails.root.join("spec/mailers/regression/comment_mailer/email1.html").read
       end
     end
   end

@@ -104,13 +104,11 @@ class Sitemap
     t << "</url>"
 
     # First check if we need to start a new sitemap file
-    # rubocop:disable Performance/FixedSize
     if (@no_urls == MAX_URLS_PER_FILE) || (@sitemap_file.size + t.size + "</urlset>".size > MAX_BYTES_PER_FILE)
       finish_sitemap
       @index += 1
       start_sitemap
     end
-    # rubocop:enable Performance/FixedSize
 
     @sitemap_file << t
     @no_urls += 1

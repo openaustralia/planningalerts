@@ -1,5 +1,4 @@
-Rails:
-  Enabled: true
+require: rubocop-rails
 
 AllCops:
   TargetRailsVersion: 5.0
@@ -15,7 +14,7 @@ AllCops:
 # the codebase currently. It would be good to fix as it would make things
 # easier to read but it would take a bit of time to do.
 # TODO: Enable this again
-Metrics/LineLength:
+Layout/LineLength:
   Enabled: false
 
 # We prefer double quotes here and it we're making liberal use of multi-line
@@ -60,4 +59,32 @@ Metrics/ParameterLists:
   Enabled: false
 
 Metrics/PerceivedComplexity:
+  Enabled: false
+
+# TODO: Enable the following when we can
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: false
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: false
+
+Lint/RaiseException:
+  Enabled: false
+
+Lint/StructNewOverride:
+  Enabled: false
+
+Style/ExponentialNotation:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: false
+
+Style/HashTransformKeys:
+  Enabled: false
+
+Style/HashTransformValues:
+  Enabled: false
+
+Style/SlicingWithRange:
   Enabled: false

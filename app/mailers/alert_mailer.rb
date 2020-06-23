@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AlertMailer < ActionMailer::Base
+class AlertMailer < ApplicationMailer
   include EmailFrom
   helper :application, :applications, :comments
 

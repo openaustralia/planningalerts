@@ -4,10 +4,10 @@ class ThrottleDailyByApiUser < Rack::Throttle::Daily
   def whitelisted?(request)
     begin
       path_info = Rails.application.routes.recognize_path request.url
-    # rubocop:disable Lint/HandleExceptions
+    # rubocop:disable Lint/SuppressedException
     rescue StandardError
     end
-    # rubocop:enable Lint/HandleExceptions
+    # rubocop:enable Lint/SuppressedException
 
     if path_info.nil? || path_info[:controller] != "api"
       true

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ConfirmationMailer < ActionMailer::Base
+class ConfirmationMailer < ApplicationMailer
   include EmailFrom
   helper :comments
 
