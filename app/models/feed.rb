@@ -49,7 +49,8 @@ class Feed
   end
 
   def url
-    ATDIS::Feed.new(base_url).applications_url(feed_options)
+    # TODO: Make timezone (currently hardcoded to "Sydney") configurable
+    ATDIS::Feed.new(base_url, "Sydney").applications_url(feed_options)
   end
 
   def applications
