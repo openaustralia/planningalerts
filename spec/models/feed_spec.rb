@@ -41,7 +41,7 @@ describe Feed do
       f = Feed.new(base_url: "http://foo.com", lodgement_date_start: "2012")
       atdis = double
       applications = double
-      expect(ATDIS::Feed).to receive(:new).with("http://foo.com").and_return(atdis)
+      expect(ATDIS::Feed).to receive(:new).with("http://foo.com", "Sydney").and_return(atdis)
       expect(atdis).to receive(:applications).with(lodgement_date_start: "2012").and_return(applications)
       expect(f.applications).to eq applications
     end
