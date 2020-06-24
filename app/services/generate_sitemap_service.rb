@@ -2,6 +2,7 @@
 
 class GenerateSitemapService < ApplicationService
   attr_reader :logger
+
   include Rails.application.routes.url_helpers
 
   def initialize(logger: Logger.new(STDOUT))

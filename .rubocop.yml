@@ -63,28 +63,28 @@ Metrics/PerceivedComplexity:
 
 # TODO: Enable the following when we can
 Layout/EmptyLinesAroundAttributeAccessor:
-  Enabled: false
+  Enabled: true
 
 Layout/SpaceAroundMethodCallOperator:
-  Enabled: false
+  Enabled: true
 
 Lint/RaiseException:
-  Enabled: false
+  Enabled: true
 
 Lint/StructNewOverride:
-  Enabled: false
+  Enabled: true
 
 Style/ExponentialNotation:
-  Enabled: false
+  Enabled: true
 
 Style/HashEachMethods:
-  Enabled: false
+  Enabled: true
 
 Style/HashTransformKeys:
-  Enabled: false
+  Enabled: true
 
 Style/HashTransformValues:
-  Enabled: false
+  Enabled: true
 
 Style/SlicingWithRange:
-  Enabled: false
+  Enabled: true

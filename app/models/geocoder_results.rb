@@ -15,6 +15,6 @@ class GeocoderResults
 
   # The remaining location results
   def rest
-    all[1..-1]
+    all[1..]
   end
 end

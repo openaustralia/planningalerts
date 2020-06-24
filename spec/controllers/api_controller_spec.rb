@@ -115,7 +115,7 @@ describe ApiController do
       allow(Application).to receive_message_chain(:with_current_version, :order, :where, :includes, :paginate).and_return([result])
       get :suburb_postcode, params: { key: user.api_key, format: "js", postcode: "2780", callback: "foobar" }, xhr: true
       expect(response.body[0..10]).to eq("/**/foobar(")
-      expect(response.body[-1..-1]).to eq(")")
+      expect(response.body[-1..]).to eq(")")
       expect(JSON.parse(response.body[11..-2])).to eq(
         [{
           "application" => {

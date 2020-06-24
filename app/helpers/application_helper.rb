@@ -35,7 +35,7 @@ module ApplicationHelper
 
   def significant_figure_remove_trailing_zero(value, sig_figs)
     text = significant_figure(value, sig_figs).to_s
-    if text [-2..-1] == ".0"
+    if text [-2..] == ".0"
       text[0..-3]
     else
       text

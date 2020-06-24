@@ -2,7 +2,7 @@
 
 module AlertMailerHelper
   def capitalise_initial_character(text)
-    text[0].upcase + text[1..-1]
+    text[0].upcase + text[1..]
   end
 
   def base_tracking_params

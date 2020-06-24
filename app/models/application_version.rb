@@ -41,7 +41,7 @@ class ApplicationVersion < ApplicationRecord
   def changed_data_attributes
     if previous_version
       changed = {}
-      data_attributes.keys.each do |a|
+      data_attributes.each_key do |a|
         changed[a] = data_attributes[a] unless data_attributes[a] == previous_version.data_attributes[a]
       end
       changed
