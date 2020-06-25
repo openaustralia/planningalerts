@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %style= CompassRails.sprockets.find_asset("email.css").to_s
+    %style= Sprockets::Railtie.build_environment(Rails.application, true)["email.css"].to_s
 
   %body
     = render "header"
