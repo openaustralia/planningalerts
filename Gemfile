@@ -134,9 +134,6 @@ gem "typhoeus"
 # For conditional counter caches (used to count visible comments)
 gem "counter_culture"
 
-# Try not using more recent version so that css in alerts emails works
-gem "sprockets-rails", "2.3.3"
-
 group :test do
   gem "capybara"
   gem "climate_control"
