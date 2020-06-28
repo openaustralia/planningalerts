@@ -83,7 +83,7 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 You can configure PlanningAlerts to allow people to donate to the project monthly.
 [Stripe](https://stripe.com) is used to process the payment and manage billing.
 
-You need to configured three evironment variables in your .env.development file
+You need to configured three environment variables in your .env.development file
 to allow users to visit the donations page.
 
 1. The publishable API key from your stripe account.
