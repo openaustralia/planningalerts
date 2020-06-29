@@ -1,3 +1,4 @@
+# typed: false
 # frozen_string_literal: true
 
 # Filters added to this controller apply to all controllers in the application.

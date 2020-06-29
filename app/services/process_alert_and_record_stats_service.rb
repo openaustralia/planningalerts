@@ -1,3 +1,4 @@
+# typed: true
 # frozen_string_literal: true
 
 # Sends out a bunch of email alerts and

@@ -1,3 +1,4 @@
+# typed: true
 # frozen_string_literal: true
 
 # Experiment using the mappify.io geocoder (which uses GNAF)
