@@ -361,6 +361,8 @@ GEM
     rabl (0.14.0)
       activesupport (>= 2.3.14)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-livereload (0.3.17)
       rack
     rack-mini-profiler (2.0.2)
@@ -641,6 +643,7 @@ DEPENDENCIES
   nokogiri
   oj
   rabl (= 0.14.0)
+  rack-cors
   rack-livereload
   rack-mini-profiler
   rack-throttle

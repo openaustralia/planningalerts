@@ -135,6 +135,9 @@ gem "typhoeus"
 # For conditional counter caches (used to count visible comments)
 gem "counter_culture"
 
+# Make it easier for people using the API by setting CORS headers
+gem "rack-cors"
+
 group :test do
   gem "capybara"
   gem "climate_control"
