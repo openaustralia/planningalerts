@@ -1,7 +1,9 @@
-# typed: false
+# typed: true
 # frozen_string_literal: true
 
 module ApiHowtoHelper
+  include ApplicationsHelper
+
   def htmlify(url)
     url.gsub(/(\?|&|&amp;)([a-z_]+)=/, '\1<strong>\2</strong>=').gsub("&", "&amp;")
   end
@@ -44,7 +46,7 @@ module ApiHowtoHelper
   end
 
   def api_example_postcode_url(format, key, postcode = Rails.application.config.planningalerts_api_example_postcode, extra_params = {})
-    applications_url({ host: api_host, format: format, postcode: postcode, key: key }.merge(extra_params))
+    T.unsafe(self).applications_url({ host: api_host, format: format, postcode: postcode, key: key }.merge(extra_params))
   end
 
   def api_example_suburb_state_and_postcode_url(
