@@ -1,9 +1,12 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 module AtdisHelper
+  extend T::Sig
+
   include ApplicationsHelper
 
+  sig { params(value: T.untyped).returns(String) }
   def attribute_value(value)
     if value.is_a?(Array)
       safe_join(value.map { |v| attribute_value(v) })
