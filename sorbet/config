@@ -1,2 +1,6 @@
 --dir
 .
+--ignore
+spec/
+--ignore
+db/
