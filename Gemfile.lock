@@ -419,7 +419,7 @@ GEM
     recaptcha (5.5.0)
       json
     redcarpet (3.5.0)
-    redis (4.2.1)
+    redis (4.1.4)
     redis-namespace (1.7.0)
       redis (>= 3.0.4)
     regexp_parser (1.7.1)
@@ -499,11 +499,11 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     shellany (0.0.1)
-    sidekiq (6.0.7)
-      connection_pool (>= 2.2.2)
+    sidekiq (5.2.9)
+      connection_pool (~> 2.2, >= 2.2.2)
       rack (~> 2.0)
-      rack-protection (>= 2.0.0)
-      redis (>= 4.1.0)
+      rack-protection (>= 1.5.0)
+      redis (>= 3.3.5, < 4.2)
     simple_oauth (0.3.1)
     simplecov (0.18.5)
       docile (~> 1.1)
@@ -665,7 +665,7 @@ DEPENDENCIES
   sass-rails
   searchkick
   selenium-webdriver
-  sidekiq
+  sidekiq (< 6)
   simplecov
   spring
   spring-commands-rspec

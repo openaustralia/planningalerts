@@ -48,7 +48,8 @@ gem "validates_email_format_of", "~> 1.6", ">= 1.6.3"
 # Background queue uses sidekiq with redis
 # We need redis namespaces to seperate the production and staging environments
 gem "redis-namespace"
-gem "sidekiq"
+# TODO: We're currently using redis 3 in production so we can't upgrade to the latests sidekiq
+gem "sidekiq", "< 6"
 
 # For accessing external urls
 # TODO: Just pick one and use it for everything
