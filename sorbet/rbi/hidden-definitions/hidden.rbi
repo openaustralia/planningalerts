@@ -329,15 +329,6 @@ class ActionController::SessionOverflowError
   DEFAULT_MESSAGE = ::T.let(nil, ::T.untyped)
 end
 
-class ActionController::TestRequest
-  DEFAULT_ENV = ::T.let(nil, ::T.untyped)
-  ENCODER = ::T.let(nil, ::T.untyped)
-end
-
-class ActionController::TestSession
-  DEFAULT_OPTIONS = ::T.let(nil, ::T.untyped)
-end
-
 class ActionDispatch::AssertionResponse
   def code(); end
 
@@ -589,6 +580,12 @@ class ActionDispatch::Request
   RFC5789 = ::T.let(nil, ::T.untyped)
 end
 
+class ActionDispatch::Request::Session
+  ENV_SESSION_KEY = ::T.let(nil, ::T.untyped)
+  ENV_SESSION_OPTIONS_KEY = ::T.let(nil, ::T.untyped)
+  Unspecified = ::T.let(nil, ::T.untyped)
+end
+
 class ActionDispatch::RequestId
   X_REQUEST_ID = ::T.let(nil, ::T.untyped)
 end
@@ -727,9 +724,6 @@ end
 class ActionDispatch::Session::CacheStore
 end
 
-class ActionDispatch::Session::CookieStore::SessionId
-end
-
 class ActionDispatch::Session::MemCacheStore
   include ::ActionDispatch::Session::Compatibility
   include ::ActionDispatch::Session::StaleSessionCheck
@@ -745,7 +739,6 @@ end
 
 class ActionDispatch::SystemTestCase
   include ::Capybara::DSL
-  include ::Capybara::DSLRSpecProxyInstaller
   include ::Capybara::Minitest::Assertions
   include ::ActionDispatch::SystemTesting::TestHelpers::SetupAndTeardown
   include ::ActionDispatch::SystemTesting::TestHelpers::ScreenshotHelper
@@ -2449,7 +2442,11 @@ end
 class ActiveRecord::Base
   extend ::Geocoder::Model::ActiveRecord
   extend ::Geocoder::Model::Base
+  extend ::SorbetRails::CustomFinderMethods
   extend ::ActiveStorage::Attached::Macros
+  def self.inherited(child); end
+
+  def self.sbr_old_inherited(subclass); end
 end
 
 module ActiveRecord::Batches
@@ -2502,9 +2499,6 @@ module ActiveRecord::ConnectionAdapters::MySQL::SchemaStatements
   CHARSETS_OF_4BYTES_MAXLEN = ::T.let(nil, ::T.untyped)
 end
 
-class ActiveRecord::ConnectionAdapters::MySQL::TypeMetadata
-end
-
 class ActiveRecord::ConnectionAdapters::Mysql2Adapter
   ADAPTER_NAME = ::T.let(nil, ::T.untyped)
 end
@@ -2525,7 +2519,38 @@ module ActiveRecord::ConnectionHandling
 end
 
 module ActiveRecord::Enum
+  include ::Kernel
+  def _define_enum(*args, &blk); end
+
+  def _define_typed_enum(*args, &blk); end
+
+  def extract_enum_values(*args, &blk); end
+
+  def gen_typed_enum_values(*args, &blk); end
+
+  def old_enum(definitions); end
+
+  def typed_enum_reflections(*args, &blk); end
   ENUM_CONFLICT_MESSAGE = ::T.let(nil, ::T.untyped)
+  SR_ENUM_KEYWORDS = ::T.let(nil, ::T.untyped)
+end
+
+class ActiveRecord::Enum::ConflictTypedEnumNameError
+end
+
+class ActiveRecord::Enum::ConflictTypedEnumNameError
+end
+
+class ActiveRecord::Enum::MultipleEnumsDefinedError
+end
+
+class ActiveRecord::Enum::MultipleEnumsDefinedError
+end
+
+module ActiveRecord::Enum
+  extend ::T::Sig
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
 end
 
 class ActiveRecord::ExplainSubscriber
@@ -2537,20 +2562,37 @@ module ActiveRecord::FinderMethods
   ONE_AS_ONE = ::T.let(nil, ::T.untyped)
 end
 
-class ActiveRecord::FixtureSet
-  MAX_ID = ::T.let(nil, ::T.untyped)
-end
-
 class ActiveRecord::InternalMetadata
   include ::ActiveRecord::InternalMetadata::GeneratedAssociationMethods
   include ::Kaminari::ActiveRecordModelExtension
   include ::Kaminari::ConfigurationMethods
 end
 
+class ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ActiveRecord::InternalMetadata::GeneratedRelationMethods
+end
+
+class ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ActiveRecord::InternalMetadata::GeneratedRelationMethods
+end
+
+class ActiveRecord::InternalMetadata::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ActiveRecord::InternalMetadata::GeneratedRelationMethods
+end
+
 module ActiveRecord::InternalMetadata::GeneratedAssociationMethods
 end
 
 module ActiveRecord::InternalMetadata::GeneratedAssociationMethods
+end
+
+module ActiveRecord::InternalMetadata::GeneratedRelationMethods
+end
+
+module ActiveRecord::InternalMetadata::GeneratedRelationMethods
 end
 
 class ActiveRecord::InternalMetadata
@@ -2583,9 +2625,6 @@ end
 
 module ActiveRecord::LegacyYamlAdapter
   def self.convert(klass, coder); end
-end
-
-class ActiveRecord::Locking::LockingType
 end
 
 class ActiveRecord::LogSubscriber
@@ -2777,19 +2816,12 @@ class ActiveRecord::Relation
   include ::ActiveModel::ForbiddenAttributesProtection
   include ::ActiveRecord::SpawnMethods
   include ::ActiveRecord::Calculations
+  include ::SorbetRails::CustomFinderMethods
   CLAUSE_METHODS = ::T.let(nil, ::T.untyped)
   INVALID_METHODS_FOR_DELETE_ALL = ::T.let(nil, ::T.untyped)
   MULTI_VALUE_METHODS = ::T.let(nil, ::T.untyped)
   SINGLE_VALUE_METHODS = ::T.let(nil, ::T.untyped)
   VALUE_METHODS = ::T.let(nil, ::T.untyped)
-end
-
-class ActiveRecord::Relation::Merger
-  NORMAL_VALUES = ::T.let(nil, ::T.untyped)
-end
-
-class ActiveRecord::Relation::WhereClause
-  ARRAY_WITH_EMPTY_STRING = ::T.let(nil, ::T.untyped)
 end
 
 class ActiveRecord::SchemaMigration
@@ -2799,10 +2831,31 @@ class ActiveRecord::SchemaMigration
   def version(); end
 end
 
+class ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ActiveRecord::SchemaMigration::GeneratedRelationMethods
+end
+
+class ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ActiveRecord::SchemaMigration::GeneratedRelationMethods
+end
+
+class ActiveRecord::SchemaMigration::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ActiveRecord::SchemaMigration::GeneratedRelationMethods
+end
+
 module ActiveRecord::SchemaMigration::GeneratedAssociationMethods
 end
 
 module ActiveRecord::SchemaMigration::GeneratedAssociationMethods
+end
+
+module ActiveRecord::SchemaMigration::GeneratedRelationMethods
+end
+
+module ActiveRecord::SchemaMigration::GeneratedRelationMethods
 end
 
 class ActiveRecord::SchemaMigration
@@ -3072,18 +3125,26 @@ ActiveRecord::Type::Helpers = ActiveModel::Type::Helpers
 
 ActiveRecord::Type::Integer = ActiveModel::Type::Integer
 
-class ActiveRecord::Type::Serialized
-end
-
-class ActiveRecord::Type::Time::Value
-end
-
 module ActiveRecord::VERSION
   MAJOR = ::T.let(nil, ::T.untyped)
   MINOR = ::T.let(nil, ::T.untyped)
   PRE = ::T.let(nil, ::T.untyped)
   STRING = ::T.let(nil, ::T.untyped)
   TINY = ::T.let(nil, ::T.untyped)
+end
+
+class ActiveRecordOverrides
+  include ::Singleton
+  def enum_calls(); end
+
+  def get_enum_call(klass, enum_sym); end
+
+  def store_enum_call(klass, kwargs); end
+end
+
+class ActiveRecordOverrides
+  extend ::Singleton::SingletonClassMethods
+  def self.instance(); end
 end
 
 class ActiveStorage::Service
@@ -3931,20 +3992,11 @@ end
 module Alert::GeneratedAssociationMethods
 end
 
-class Alert
-  def self.active(*args); end
-
-  def self.confirmed(*args); end
-
-  def self.in_past_week(*args); end
-end
-
 class ApiController::Helper
   def self.instance(); end
 end
 
 class Application
-  include ::Application::GeneratedAssociationMethods
   include ::Geocoder::Store::ActiveRecord
   include ::Geocoder::Store::Base
   def _notify_application_sweeper_for_after_create(&block); end
@@ -4054,24 +4106,29 @@ class Application
   def validate_associated_records_for_versions(*args); end
 end
 
+class Application::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Application::GeneratedRelationMethods
+end
+
+class Application::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Application::GeneratedRelationMethods
+end
+
+class Application::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Application::GeneratedRelationMethods
+end
+
 module Application::GeneratedAssociationMethods
-  def authority(); end
-
-  def authority=(value); end
-
   def build_authority(*args, &block); end
 
   def build_current_version(*args, &block); end
 
   def build_first_version(*args, &block); end
 
-  def comment_ids(); end
-
   def comment_ids=(ids); end
-
-  def comments(); end
-
-  def comments=(value); end
 
   def create_authority(*args, &block); end
 
@@ -4085,38 +4142,38 @@ module Application::GeneratedAssociationMethods
 
   def create_first_version!(*args, &block); end
 
-  def current_version(); end
-
-  def current_version=(value); end
-
-  def first_version(); end
-
-  def first_version=(value); end
-
   def reload_authority(); end
 
   def reload_current_version(); end
 
   def reload_first_version(); end
 
-  def replies(); end
-
-  def replies=(value); end
-
-  def reply_ids(); end
-
   def reply_ids=(ids); end
 
-  def version_ids(); end
-
   def version_ids=(ids); end
-
-  def versions(); end
-
-  def versions=(value); end
 end
 
-module Application::GeneratedAssociationMethods
+module Application::GeneratedRelationMethods
+  def geocoded(*args, &block); end
+
+  def in_past_week(*args, &block); end
+
+  def near(*args, &block); end
+
+  def not_geocoded(*args, &block); end
+
+  def not_reverse_geocoded(*args, &block); end
+
+  def recent(*args, &block); end
+
+  def with_current_version(*args, &block); end
+
+  def with_first_version(*args, &block); end
+
+  def within_bounding_box(*args, &block); end
+end
+
+module Application::GeneratedRelationMethods
 end
 
 class Application
@@ -4192,18 +4249,6 @@ class Application
 
   def self.before_remove_for_versions?(); end
 
-  def self.geocoded(*args); end
-
-  def self.in_past_week(*args); end
-
-  def self.near(*args); end
-
-  def self.not_geocoded(*args); end
-
-  def self.not_reverse_geocoded(*args); end
-
-  def self.recent(*args); end
-
   def self.reindex(method_name=T.unsafe(nil), **options); end
 
   def self.search(term=T.unsafe(nil), **options, &block); end
@@ -4221,12 +4266,6 @@ class Application
   def self.searchkick_reindex(method_name=T.unsafe(nil), **options); end
 
   def self.searchkick_search(term=T.unsafe(nil), **options, &block); end
-
-  def self.with_current_version(*args); end
-
-  def self.with_first_version(*args); end
-
-  def self.within_bounding_box(*args); end
 end
 
 class ApplicationRecord
@@ -4247,10 +4286,24 @@ class ApplicationRecord
 end
 
 class ApplicationRedirect
-  include ::ApplicationRedirect::GeneratedAssociationMethods
   def autosave_associated_records_for_redirect_application(*args); end
 
   def belongs_to_counter_cache_after_update(reflection); end
+end
+
+class ApplicationRedirect::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ApplicationRedirect::GeneratedRelationMethods
+end
+
+class ApplicationRedirect::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ApplicationRedirect::GeneratedRelationMethods
+end
+
+class ApplicationRedirect::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ApplicationRedirect::GeneratedRelationMethods
 end
 
 module ApplicationRedirect::GeneratedAssociationMethods
@@ -4260,18 +4313,19 @@ module ApplicationRedirect::GeneratedAssociationMethods
 
   def create_redirect_application!(*args, &block); end
 
-  def redirect_application(); end
-
-  def redirect_application=(value); end
-
   def reload_redirect_application(); end
 end
 
-module ApplicationRedirect::GeneratedAssociationMethods
+module ApplicationRedirect::GeneratedRelationMethods
+end
+
+module ApplicationRedirect::GeneratedRelationMethods
+end
+
+class ApplicationSweeper
 end
 
 class ApplicationVersion
-  include ::ApplicationVersion::GeneratedAssociationMethods
   def autosave_associated_records_for_application(*args); end
 
   def autosave_associated_records_for_previous_version(*args); end
@@ -4279,11 +4333,22 @@ class ApplicationVersion
   def belongs_to_counter_cache_after_update(reflection); end
 end
 
+class ApplicationVersion::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ApplicationVersion::GeneratedRelationMethods
+end
+
+class ApplicationVersion::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ApplicationVersion::GeneratedRelationMethods
+end
+
+class ApplicationVersion::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ApplicationVersion::GeneratedRelationMethods
+end
+
 module ApplicationVersion::GeneratedAssociationMethods
-  def application(); end
-
-  def application=(value); end
-
   def build_application(*args, &block); end
 
   def build_previous_version(*args, &block); end
@@ -4296,16 +4361,15 @@ module ApplicationVersion::GeneratedAssociationMethods
 
   def create_previous_version!(*args, &block); end
 
-  def previous_version(); end
-
-  def previous_version=(value); end
-
   def reload_application(); end
 
   def reload_previous_version(); end
 end
 
-module ApplicationVersion::GeneratedAssociationMethods
+module ApplicationVersion::GeneratedRelationMethods
+end
+
+module ApplicationVersion::GeneratedRelationMethods
 end
 
 module Arbre::HTML
@@ -4372,7 +4436,6 @@ module Atdis
 end
 
 class Authority
-  include ::Authority::GeneratedAssociationMethods
   def _notify_authority_sweeper_for_after_create(&block); end
 
   def _notify_authority_sweeper_for_after_destroy(&block); end
@@ -4492,46 +4555,41 @@ class Authority
   def validate_associated_records_for_councillors(*args); end
 end
 
+class Authority::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Authority::GeneratedRelationMethods
+end
+
+class Authority::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Authority::GeneratedRelationMethods
+end
+
+class Authority::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Authority::GeneratedRelationMethods
+end
+
 module Authority::GeneratedAssociationMethods
-  def application_ids(); end
-
   def application_ids=(ids); end
-
-  def applications(); end
-
-  def applications=(value); end
-
-  def comment_ids(); end
 
   def comment_ids=(ids); end
 
-  def comments(); end
-
-  def comments=(value); end
-
-  def councillor_contribution_ids(); end
-
   def councillor_contribution_ids=(ids); end
 
-  def councillor_contributions(); end
-
-  def councillor_contributions=(value); end
-
-  def councillor_ids(); end
-
   def councillor_ids=(ids); end
-
-  def councillors(); end
-
-  def councillors=(value); end
 end
 
-module Authority::GeneratedAssociationMethods
+module Authority::GeneratedRelationMethods
+  def active(*args, &block); end
+
+  def enabled(*args, &block); end
+end
+
+module Authority::GeneratedRelationMethods
 end
 
 class Authority
-  def self.active(*args); end
-
   def self.after_add_for_applications(); end
 
   def self.after_add_for_applications=(val); end
@@ -4627,8 +4685,9 @@ class Authority
   def self.before_remove_for_councillors=(val); end
 
   def self.before_remove_for_councillors?(); end
+end
 
-  def self.enabled(*args); end
+class AuthoritySweeper
 end
 
 module AutoprefixerRails
@@ -6379,10 +6438,6 @@ class Capybara::Config
   OPTIONS = ::T.let(nil, ::T.untyped)
 end
 
-module Capybara::DSL
-  include ::Capybara::DSLRSpecProxyInstaller
-end
-
 module Capybara::Minitest
 end
 
@@ -6607,10 +6662,6 @@ end
 
 class Capybara::SessionConfig
   OPTIONS = ::T.let(nil, ::T.untyped)
-end
-
-module Capybara
-  extend ::Capybara::DSLRSpecProxyInstaller
 end
 
 module ChildProcess
@@ -6856,7 +6907,6 @@ module Coercible::TypeLookup
 end
 
 class Comment
-  include ::Comment::GeneratedAssociationMethods
   include ::AfterCommitAction
   def after_add_for_replies(); end
 
@@ -6921,18 +6971,25 @@ class Comment
   def validate_associated_records_for_reports(*args); end
 end
 
+class Comment::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Comment::GeneratedRelationMethods
+end
+
+class Comment::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Comment::GeneratedRelationMethods
+end
+
+class Comment::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Comment::GeneratedRelationMethods
+end
+
 module Comment::GeneratedAssociationMethods
-  def application(); end
-
-  def application=(value); end
-
   def build_application(*args, &block); end
 
   def build_councillor(*args, &block); end
-
-  def councillor(); end
-
-  def councillor=(value); end
 
   def create_application(*args, &block); end
 
@@ -6946,24 +7003,22 @@ module Comment::GeneratedAssociationMethods
 
   def reload_councillor(); end
 
-  def replies(); end
-
-  def replies=(value); end
-
-  def reply_ids(); end
-
   def reply_ids=(ids); end
 
-  def report_ids(); end
-
   def report_ids=(ids); end
-
-  def reports(); end
-
-  def reports=(value); end
 end
 
-module Comment::GeneratedAssociationMethods
+module Comment::GeneratedRelationMethods
+  def confirmed(*args, &block); end
+
+  def in_past_week(*args, &block); end
+
+  def to_councillor(*args, &block); end
+
+  def visible(*args, &block); end
+end
+
+module Comment::GeneratedRelationMethods
 end
 
 class Comment
@@ -7014,14 +7069,6 @@ class Comment
   def self.before_remove_for_reports=(val); end
 
   def self.before_remove_for_reports?(); end
-
-  def self.confirmed(*args); end
-
-  def self.in_past_week(*args); end
-
-  def self.to_councillor(*args); end
-
-  def self.visible(*args); end
 end
 
 module Compass
@@ -7336,7 +7383,6 @@ class ConnectionPool::Wrapper
 end
 
 class Contributor
-  include ::Contributor::GeneratedAssociationMethods
   def after_add_for_councillor_contributions(); end
 
   def after_add_for_councillor_contributions=(val); end
@@ -7366,17 +7412,29 @@ class Contributor
   def validate_associated_records_for_councillor_contributions(*args); end
 end
 
-module Contributor::GeneratedAssociationMethods
-  def councillor_contribution_ids(); end
+class Contributor::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Contributor::GeneratedRelationMethods
+end
 
-  def councillor_contribution_ids=(ids); end
+class Contributor::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Contributor::GeneratedRelationMethods
+end
 
-  def councillor_contributions(); end
-
-  def councillor_contributions=(value); end
+class Contributor::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Contributor::GeneratedRelationMethods
 end
 
 module Contributor::GeneratedAssociationMethods
+  def councillor_contribution_ids=(ids); end
+end
+
+module Contributor::GeneratedRelationMethods
+end
+
+module Contributor::GeneratedRelationMethods
 end
 
 class Contributor
@@ -7406,7 +7464,6 @@ class Contributor
 end
 
 class Councillor
-  include ::Councillor::GeneratedAssociationMethods
   def after_add_for_comments(); end
 
   def after_add_for_comments=(val); end
@@ -7468,20 +7525,25 @@ class Councillor
   def validate_associated_records_for_replies(*args); end
 end
 
+class Councillor::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Councillor::GeneratedRelationMethods
+end
+
+class Councillor::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Councillor::GeneratedRelationMethods
+end
+
+class Councillor::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Councillor::GeneratedRelationMethods
+end
+
 module Councillor::GeneratedAssociationMethods
-  def authority(); end
-
-  def authority=(value); end
-
   def build_authority(*args, &block); end
 
-  def comment_ids(); end
-
   def comment_ids=(ids); end
-
-  def comments(); end
-
-  def comments=(value); end
 
   def create_authority(*args, &block); end
 
@@ -7489,16 +7551,13 @@ module Councillor::GeneratedAssociationMethods
 
   def reload_authority(); end
 
-  def replies(); end
-
-  def replies=(value); end
-
-  def reply_ids(); end
-
   def reply_ids=(ids); end
 end
 
-module Councillor::GeneratedAssociationMethods
+module Councillor::GeneratedRelationMethods
+end
+
+module Councillor::GeneratedRelationMethods
 end
 
 class Councillor
@@ -7552,7 +7611,6 @@ class Councillor
 end
 
 class CouncillorContribution
-  include ::CouncillorContribution::GeneratedAssociationMethods
   def after_add_for_suggested_councillors(); end
 
   def after_add_for_suggested_councillors=(val); end
@@ -7590,18 +7648,25 @@ class CouncillorContribution
   def validate_associated_records_for_suggested_councillors(*args); end
 end
 
+class CouncillorContribution::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::CouncillorContribution::GeneratedRelationMethods
+end
+
+class CouncillorContribution::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::CouncillorContribution::GeneratedRelationMethods
+end
+
+class CouncillorContribution::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::CouncillorContribution::GeneratedRelationMethods
+end
+
 module CouncillorContribution::GeneratedAssociationMethods
-  def authority(); end
-
-  def authority=(value); end
-
   def build_authority(*args, &block); end
 
   def build_contributor(*args, &block); end
-
-  def contributor(); end
-
-  def contributor=(value); end
 
   def contributor_attributes=(attributes); end
 
@@ -7617,18 +7682,15 @@ module CouncillorContribution::GeneratedAssociationMethods
 
   def reload_contributor(); end
 
-  def suggested_councillor_ids(); end
-
   def suggested_councillor_ids=(ids); end
-
-  def suggested_councillors(); end
-
-  def suggested_councillors=(value); end
 
   def suggested_councillors_attributes=(attributes); end
 end
 
-module CouncillorContribution::GeneratedAssociationMethods
+module CouncillorContribution::GeneratedRelationMethods
+end
+
+module CouncillorContribution::GeneratedRelationMethods
 end
 
 class CouncillorContribution
@@ -8564,7 +8626,6 @@ module DomainName::Punycode
 end
 
 class Donation
-  include ::Donation::GeneratedAssociationMethods
   def after_add_for_alerts(); end
 
   def after_add_for_alerts=(val); end
@@ -8594,17 +8655,29 @@ class Donation
   def validate_associated_records_for_alerts(*args); end
 end
 
-module Donation::GeneratedAssociationMethods
-  def alert_ids(); end
+class Donation::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Donation::GeneratedRelationMethods
+end
 
-  def alert_ids=(ids); end
+class Donation::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Donation::GeneratedRelationMethods
+end
 
-  def alerts(); end
-
-  def alerts=(value); end
+class Donation::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Donation::GeneratedRelationMethods
 end
 
 module Donation::GeneratedAssociationMethods
+  def alert_ids=(ids); end
+end
+
+module Donation::GeneratedRelationMethods
+end
+
+module Donation::GeneratedRelationMethods
 end
 
 class Donation
@@ -8815,14 +8888,32 @@ class EmailBatch
   include ::EmailBatch::GeneratedAssociationMethods
 end
 
-module EmailBatch::GeneratedAssociationMethods
+class EmailBatch::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::EmailBatch::GeneratedRelationMethods
+end
+
+class EmailBatch::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::EmailBatch::GeneratedRelationMethods
+end
+
+class EmailBatch::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::EmailBatch::GeneratedRelationMethods
 end
 
 module EmailBatch::GeneratedAssociationMethods
 end
 
-class EmailBatch
-  def self.in_past_week(*args); end
+module EmailBatch::GeneratedAssociationMethods
+end
+
+module EmailBatch::GeneratedRelationMethods
+  def in_past_week(*args, &block); end
+end
+
+module EmailBatch::GeneratedRelationMethods
 end
 
 module EmailSpec::Helpers
@@ -9980,6 +10071,7 @@ end
 
 class FalseClass
   include ::JSON::Ext::Generator::GeneratorMethods::FalseClass
+  include ::SafeType::BooleanMixin
 end
 
 module Faraday
@@ -12000,11 +12092,17 @@ end
 class GenerateSitemapService
   include ::ActionDispatch::Routing::UrlFor
   include ::ActionDispatch::Routing::PolymorphicRoutes
+  def call(); end
+
   def default_url_options(); end
 
   def default_url_options=(val); end
 
   def default_url_options?(); end
+
+  def initialize(logger: T.unsafe(nil)); end
+
+  def logger(); end
 end
 
 class GenerateSitemapService
@@ -12017,8 +12115,46 @@ class GenerateSitemapService
   def self.default_url_options?(); end
 end
 
+module GeneratedUrlHelpers
+  def _routes(); end
+
+  def rails_info_path(*args); end
+
+  def rails_info_properties_path(*args); end
+
+  def rails_info_properties_url(*args); end
+
+  def rails_info_routes_path(*args); end
+
+  def rails_info_routes_url(*args); end
+
+  def rails_info_url(*args); end
+
+  def rails_mailers_path(*args); end
+
+  def rails_mailers_url(*args); end
+end
+
+module GeneratedUrlHelpers
+  extend ::ActiveSupport::Concern
+  def self._routes(); end
+
+  def self.full_url_for(options); end
+
+  def self.optimize_routes_generation?(); end
+
+  def self.polymorphic_path(record_or_hash_or_array, options=T.unsafe(nil)); end
+
+  def self.polymorphic_url(record_or_hash_or_array, options=T.unsafe(nil)); end
+
+  def self.route_for(name, *args); end
+
+  def self.url_for(options); end
+
+  def self.url_options(); end
+end
+
 class GeocodeQuery
-  include ::GeocodeQuery::GeneratedAssociationMethods
   def after_add_for_geocode_results(); end
 
   def after_add_for_geocode_results=(val); end
@@ -12048,17 +12184,29 @@ class GeocodeQuery
   def validate_associated_records_for_geocode_results(*args); end
 end
 
-module GeocodeQuery::GeneratedAssociationMethods
-  def geocode_result_ids(); end
+class GeocodeQuery::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::GeocodeQuery::GeneratedRelationMethods
+end
 
-  def geocode_result_ids=(ids); end
+class GeocodeQuery::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::GeocodeQuery::GeneratedRelationMethods
+end
 
-  def geocode_results(); end
-
-  def geocode_results=(value); end
+class GeocodeQuery::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::GeocodeQuery::GeneratedRelationMethods
 end
 
 module GeocodeQuery::GeneratedAssociationMethods
+  def geocode_result_ids=(ids); end
+end
+
+module GeocodeQuery::GeneratedRelationMethods
+end
+
+module GeocodeQuery::GeneratedRelationMethods
 end
 
 class GeocodeQuery
@@ -12088,10 +12236,24 @@ class GeocodeQuery
 end
 
 class GeocodeResult
-  include ::GeocodeResult::GeneratedAssociationMethods
   def autosave_associated_records_for_geocode_query(*args); end
 
   def belongs_to_counter_cache_after_update(reflection); end
+end
+
+class GeocodeResult::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::GeocodeResult::GeneratedRelationMethods
+end
+
+class GeocodeResult::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::GeocodeResult::GeneratedRelationMethods
+end
+
+class GeocodeResult::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::GeocodeResult::GeneratedRelationMethods
 end
 
 module GeocodeResult::GeneratedAssociationMethods
@@ -12101,14 +12263,13 @@ module GeocodeResult::GeneratedAssociationMethods
 
   def create_geocode_query!(*args, &block); end
 
-  def geocode_query(); end
-
-  def geocode_query=(value); end
-
   def reload_geocode_query(); end
 end
 
-module GeocodeResult::GeneratedAssociationMethods
+module GeocodeResult::GeneratedRelationMethods
+end
+
+module GeocodeResult::GeneratedRelationMethods
 end
 
 module Geocoder::Calculations
@@ -13760,6 +13921,17 @@ class IPAddr
   def initialize(addr=T.unsafe(nil), family=T.unsafe(nil)); end
 end
 
+module ITypeAssert
+  def get_type(); end
+end
+
+module ITypeAssert
+  extend ::T::Private::Abstract::Hooks
+  extend ::T::InterfaceWrapper::Helpers
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
 module IceNine
   VERSION = ::T.let(nil, ::T.untyped)
 end
@@ -14081,9 +14253,6 @@ module Lumberjack::Severity
   SEVERITY_LABELS = ::T.let(nil, ::T.untyped)
   UNKNOWN = ::T.let(nil, ::T.untyped)
   WARN = ::T.let(nil, ::T.untyped)
-end
-
-class Lumberjack::TaggedLoggerSupport::Formatter
 end
 
 class Lumberjack::Template
@@ -14464,9 +14633,6 @@ class Mail::POP3
 end
 
 class Mail::POP3
-end
-
-class Mail::PartsList
 end
 
 class Mail::PhraseList
@@ -14960,20 +15126,9 @@ module MiniRacer
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
-MiniTest = Minitest
-
-module Minitest
-  ENCS = ::T.let(nil, ::T.untyped)
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
 module Minitest::Assertions
   E = ::T.let(nil, ::T.untyped)
   UNDEFINED = ::T.let(nil, ::T.untyped)
-end
-
-class Minitest::BacktraceFilter
-  MT_RE = ::T.let(nil, ::T.untyped)
 end
 
 class Minitest::Runnable
@@ -14983,10 +15138,6 @@ end
 class Minitest::Test
   PASSTHROUGH_EXCEPTIONS = ::T.let(nil, ::T.untyped)
   TEARDOWN_METHODS = ::T.let(nil, ::T.untyped)
-end
-
-class Minitest::Unit
-  VERSION = ::T.let(nil, ::T.untyped)
 end
 
 class Module
@@ -16165,6 +16316,452 @@ class Parallel::UserInterruptHandler
   INTERRUPT_SIGNAL = ::T.let(nil, ::T.untyped)
 end
 
+module Parlour
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+class Parlour::ConflictResolver
+  def resolve_conflicts(*args, &blk); end
+end
+
+class Parlour::ConflictResolver
+  extend ::T::Sig
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
+module Parlour::Debugging
+end
+
+module Parlour::Debugging::Tree
+  INDENT_SPACES = ::T.let(nil, ::T.untyped)
+end
+
+module Parlour::Debugging::Tree
+  extend ::T::Sig
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+  def self.begin(*args, &blk); end
+
+  def self.end(*args, &blk); end
+
+  def self.here(*args, &blk); end
+
+  def self.line_prefix(); end
+
+  def self.text_prefix(); end
+end
+
+module Parlour::Debugging
+  extend ::T::Sig
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+  def self.debug_mode=(*args, &blk); end
+
+  def self.debug_mode?(*args, &blk); end
+
+  def self.debug_puts(*args, &blk); end
+
+  def self.name_for_debug_caller(*args, &blk); end
+end
+
+class Parlour::DetachedRbiGenerator
+  def detached!(*args, &blk); end
+end
+
+class Parlour::DetachedRbiGenerator
+end
+
+class Parlour::ParseError
+  def buffer(*args, &blk); end
+
+  def initialize(buffer, range); end
+
+  def range(*args, &blk); end
+end
+
+class Parlour::ParseError
+  extend ::T::Sig
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
+class Parlour::Plugin
+  def generate(*args, &blk); end
+
+  def initialize(*args, &blk); end
+
+  def strictness(*args, &blk); end
+
+  def strictness=(strictness); end
+end
+
+class Parlour::Plugin
+  extend ::T::Sig
+  extend ::T::Helpers
+  extend ::T::Private::Abstract::Hooks
+  extend ::T::InterfaceWrapper::Helpers
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+  def self.inherited(*args, &blk); end
+
+  def self.registered_plugins(*args, &blk); end
+
+  def self.run_plugins(*args, &blk); end
+end
+
+class Parlour::RbiGenerator
+  def current_plugin(*args, &blk); end
+
+  def current_plugin=(current_plugin); end
+
+  def initialize(*args, &blk); end
+
+  def options(*args, &blk); end
+
+  def rbi(*args, &blk); end
+
+  def root(*args, &blk); end
+end
+
+class Parlour::RbiGenerator::Arbitrary
+  def ==(*args, &blk); end
+
+  def code(*args, &blk); end
+
+  def code=(code); end
+end
+
+class Parlour::RbiGenerator::Arbitrary
+end
+
+class Parlour::RbiGenerator::Attribute
+  def class_attribute(*args, &blk); end
+
+  def kind(*args, &blk); end
+end
+
+class Parlour::RbiGenerator::Attribute
+end
+
+class Parlour::RbiGenerator::ClassNamespace
+  def abstract(*args, &blk); end
+
+  def superclass(*args, &blk); end
+end
+
+class Parlour::RbiGenerator::ClassNamespace
+end
+
+class Parlour::RbiGenerator::Constant
+  def ==(*args, &blk); end
+
+  def value(*args, &blk); end
+end
+
+class Parlour::RbiGenerator::Constant
+end
+
+class Parlour::RbiGenerator::EnumClassNamespace
+  def enums(*args, &blk); end
+end
+
+class Parlour::RbiGenerator::EnumClassNamespace
+end
+
+class Parlour::RbiGenerator::Extend
+  def ==(*args, &blk); end
+end
+
+class Parlour::RbiGenerator::Extend
+end
+
+class Parlour::RbiGenerator::Include
+  def ==(*args, &blk); end
+end
+
+class Parlour::RbiGenerator::Include
+end
+
+class Parlour::RbiGenerator::Method
+  def ==(*args, &blk); end
+
+  def abstract(*args, &blk); end
+
+  def class_method(*args, &blk); end
+
+  def final(*args, &blk); end
+
+  def implementation(*args, &blk); end
+
+  def overridable(*args, &blk); end
+
+  def override(*args, &blk); end
+
+  def parameters(*args, &blk); end
+
+  def return_type(*args, &blk); end
+
+  def type_parameters(*args, &blk); end
+end
+
+class Parlour::RbiGenerator::Method
+end
+
+class Parlour::RbiGenerator::ModuleNamespace
+  def interface(*args, &blk); end
+end
+
+class Parlour::RbiGenerator::ModuleNamespace
+end
+
+class Parlour::RbiGenerator::Namespace
+  def add_comment_to_next_child(*args, &blk); end
+
+  def children(*args, &blk); end
+
+  def constants(*args, &blk); end
+
+  def create_arbitrary(code:, &block); end
+
+  def create_attr(*args, &blk); end
+
+  def create_attr_accessor(*args, &blk); end
+
+  def create_attr_reader(*args, &blk); end
+
+  def create_attr_writer(*args, &blk); end
+
+  def create_attribute(*args, &blk); end
+
+  def create_class(*args, &blk); end
+
+  def create_constant(*args, &blk); end
+
+  def create_enum_class(*args, &blk); end
+
+  def create_extend(*args, &blk); end
+
+  def create_extends(*args, &blk); end
+
+  def create_include(*args, &blk); end
+
+  def create_includes(*args, &blk); end
+
+  def create_method(*args, &blk); end
+
+  def create_module(*args, &blk); end
+
+  def create_type_alias(*args, &blk); end
+
+  def extends(*args, &blk); end
+
+  def final(*args, &blk); end
+
+  def includes(*args, &blk); end
+
+  def path(*args, &blk); end
+end
+
+class Parlour::RbiGenerator::Namespace
+end
+
+class Parlour::RbiGenerator::Options
+  def break_params(*args, &blk); end
+
+  def indented(*args, &blk); end
+
+  def initialize(*args, &blk); end
+
+  def sort_namespaces(*args, &blk); end
+
+  def tab_size(*args, &blk); end
+end
+
+class Parlour::RbiGenerator::Options
+  extend ::T::Sig
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
+class Parlour::RbiGenerator::Parameter
+  def ==(*args, &blk); end
+
+  def default(*args, &blk); end
+
+  def initialize(*args, &blk); end
+
+  def kind(*args, &blk); end
+
+  def name(*args, &blk); end
+
+  def name_without_kind(*args, &blk); end
+
+  def to_def_param(*args, &blk); end
+
+  def to_sig_param(*args, &blk); end
+
+  def type(*args, &blk); end
+  PREFIXES = ::T.let(nil, ::T.untyped)
+end
+
+class Parlour::RbiGenerator::Parameter
+  extend ::T::Sig
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
+class Parlour::RbiGenerator::RbiObject
+  def add_comment(*args, &blk); end
+
+  def add_comments(*args, &blk); end
+
+  def comments(*args, &blk); end
+
+  def describe(*args, &blk); end
+
+  def generate_rbi(*args, &blk); end
+
+  def generated_by(*args, &blk); end
+
+  def generator(*args, &blk); end
+
+  def initialize(*args, &blk); end
+
+  def merge_into_self(*args, &blk); end
+
+  def mergeable?(*args, &blk); end
+
+  def name(*args, &blk); end
+end
+
+class Parlour::RbiGenerator::RbiObject
+  extend ::T::Helpers
+  extend ::T::Sig
+  extend ::T::Private::Abstract::Hooks
+  extend ::T::InterfaceWrapper::Helpers
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
+class Parlour::RbiGenerator
+  extend ::T::Sig
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
+module Parlour::TypeLoader
+end
+
+module Parlour::TypeLoader
+  extend ::T::Sig
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+  def self.load_file(*args, &blk); end
+
+  def self.load_project(*args, &blk); end
+
+  def self.load_source(*args, &blk); end
+end
+
+class Parlour::TypeParser
+  def ast(*args, &blk); end
+
+  def ast=(ast); end
+
+  def body_has_modifier?(*args, &blk); end
+
+  def body_includes_and_extends(*args, &blk); end
+
+  def constant_names(*args, &blk); end
+
+  def initialize(*args, &blk); end
+
+  def node_to_s(*args, &blk); end
+
+  def parse_all(*args, &blk); end
+
+  def parse_err(*args, &blk); end
+
+  def parse_path_to_object(*args, &blk); end
+
+  def parse_sig_into_methods(*args, &blk); end
+
+  def parse_sig_into_sig(*args, &blk); end
+
+  def sig_node?(*args, &blk); end
+
+  def unknown_node_errors(*args, &blk); end
+
+  def zip_by(*args, &blk); end
+end
+
+class Parlour::TypeParser::IntermediateSig
+  def abstract(); end
+
+  def abstract=(val); end
+
+  def final(); end
+
+  def final=(val); end
+
+  def initialize(*args, &blk); end
+
+  def overridable(); end
+
+  def overridable=(val); end
+
+  def override(); end
+
+  def override=(val); end
+
+  def params(); end
+
+  def params=(val); end
+
+  def return_type(); end
+
+  def return_type=(val); end
+
+  def type_parameters(); end
+
+  def type_parameters=(val); end
+end
+
+class Parlour::TypeParser::IntermediateSig
+  def self.inherited(s); end
+end
+
+class Parlour::TypeParser::NodePath
+  def child(*args, &blk); end
+
+  def indices(*args, &blk); end
+
+  def initialize(*args, &blk); end
+
+  def parent(*args, &blk); end
+
+  def sibling(*args, &blk); end
+
+  def traverse(*args, &blk); end
+end
+
+class Parlour::TypeParser::NodePath
+  extend ::T::Sig
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
+class Parlour::TypeParser
+  extend ::T::Sig
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+  def self.from_source(*args, &blk); end
+end
+
+module Parlour
+end
+
 ParseError = Racc::ParseError
 
 module Parser
@@ -16365,6 +16962,729 @@ class Polyamorous::JoinDependency
 end
 
 Polyamorous::OuterJoin = Arel::Nodes::OuterJoin
+
+module Polyfill
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+module Polyfill::InternalUtils
+end
+
+module Polyfill::InternalUtils
+  def self.create_module(); end
+
+  def self.current_ruby_version(); end
+
+  def self.ignore_warnings(); end
+
+  def self.keep_only_these_methods!(mod, whitelist); end
+
+  def self.methods_to_keep(modules, methods, lead_symbol, module_name); end
+
+  def self.modules_to_use(module_name, versions); end
+
+  def self.polyfill_versions_to_use(desired_version=T.unsafe(nil)); end
+
+  def self.to_f(obj); end
+
+  def self.to_hash(obj); end
+
+  def self.to_int(obj); end
+
+  def self.to_str(obj); end
+end
+
+module Polyfill::Module
+end
+
+module Polyfill::Module::M70136696979660
+end
+
+module Polyfill::Module::M70136696979660
+end
+
+module Polyfill::Module::M70136703403980
+end
+
+module Polyfill::Module::M70136703403980
+end
+
+module Polyfill::Module::M70136724983500
+end
+
+module Polyfill::Module::M70136724983500
+end
+
+module Polyfill::Module::M70136725950600
+end
+
+module Polyfill::Module::M70136725950600
+end
+
+module Polyfill::Module::M70136726326500
+end
+
+module Polyfill::Module::M70136726326500
+end
+
+module Polyfill::Module::M70136726993620
+end
+
+module Polyfill::Module::M70136726993620
+end
+
+module Polyfill::Module
+end
+
+module Polyfill::V2_2
+end
+
+module Polyfill::V2_2::Enumerable
+  def max(n=T.unsafe(nil)); end
+
+  def max_by(n=T.unsafe(nil)); end
+
+  def min(n=T.unsafe(nil)); end
+
+  def min_by(n=T.unsafe(nil)); end
+
+  def slice_after(pattern=T.unsafe(nil)); end
+
+  def slice_when(); end
+end
+
+module Polyfill::V2_2::Enumerable
+end
+
+module Polyfill::V2_2::Kernel
+  def itself(); end
+end
+
+module Polyfill::V2_2::Kernel
+end
+
+module Polyfill::V2_2::Math
+end
+
+module Polyfill::V2_2::Math::ClassMethods
+  def log(*args); end
+end
+
+module Polyfill::V2_2::Math::ClassMethods
+end
+
+module Polyfill::V2_2::Math
+end
+
+module Polyfill::V2_2::Prime
+end
+
+module Polyfill::V2_2::Prime::ClassMethods
+  def prime?(*args); end
+end
+
+module Polyfill::V2_2::Prime::ClassMethods
+end
+
+module Polyfill::V2_2::Prime
+end
+
+module Polyfill::V2_2::Vector
+  def +@(); end
+end
+
+module Polyfill::V2_2::Vector
+end
+
+module Polyfill::V2_2
+end
+
+module Polyfill::V2_3
+end
+
+module Polyfill::V2_3::Array
+  def bsearch_index(); end
+
+  def dig(head, *rest); end
+end
+
+module Polyfill::V2_3::Array
+end
+
+module Polyfill::V2_3::Enumerable
+  def chunk_while(); end
+
+  def grep_v(pattern); end
+
+  def slice_before(*args); end
+end
+
+module Polyfill::V2_3::Enumerable
+end
+
+module Polyfill::V2_3::Enumerator
+end
+
+module Polyfill::V2_3::Enumerator::Lazy
+  def grep_v(pattern); end
+end
+
+module Polyfill::V2_3::Enumerator::Lazy
+end
+
+module Polyfill::V2_3::Enumerator
+end
+
+module Polyfill::V2_3::Hash
+  def <(other); end
+
+  def <=(other); end
+
+  def >(other); end
+
+  def >=(other); end
+
+  def dig(head, *rest); end
+
+  def fetch_values(*keys); end
+
+  def to_proc(); end
+end
+
+module Polyfill::V2_3::Hash
+end
+
+module Polyfill::V2_3::Kernel
+  def loop(); end
+end
+
+module Polyfill::V2_3::Kernel
+end
+
+module Polyfill::V2_3::Numeric
+  def negative?(); end
+
+  def positive?(); end
+end
+
+module Polyfill::V2_3::Numeric
+end
+
+module Polyfill::V2_3::Prime
+end
+
+module Polyfill::V2_3::Prime::ClassMethods
+  def prime?(*args); end
+end
+
+module Polyfill::V2_3::Prime::ClassMethods
+end
+
+module Polyfill::V2_3::Prime
+end
+
+module Polyfill::V2_3::String
+  def +@(); end
+
+  def -@(); end
+end
+
+module Polyfill::V2_3::String::ClassMethods
+  def new(*args); end
+end
+
+module Polyfill::V2_3::String::ClassMethods
+end
+
+module Polyfill::V2_3::String
+end
+
+module Polyfill::V2_3::Struct
+  def dig(head, *rest); end
+end
+
+module Polyfill::V2_3::Struct
+end
+
+module Polyfill::V2_3
+end
+
+module Polyfill::V2_4
+end
+
+module Polyfill::V2_4::Array
+  def concat(*others); end
+
+  def sum(init=T.unsafe(nil)); end
+end
+
+module Polyfill::V2_4::Array
+end
+
+module Polyfill::V2_4::Comparable
+  def clamp(min, max); end
+end
+
+module Polyfill::V2_4::Comparable
+end
+
+module Polyfill::V2_4::Dir
+end
+
+module Polyfill::V2_4::Dir::ClassMethods
+  def empty?(path_name); end
+end
+
+module Polyfill::V2_4::Dir::ClassMethods
+end
+
+module Polyfill::V2_4::Dir
+end
+
+module Polyfill::V2_4::Enumerable
+  def chunk(*_); end
+
+  def sum(init=T.unsafe(nil)); end
+
+  def uniq(); end
+end
+
+module Polyfill::V2_4::Enumerable
+end
+
+module Polyfill::V2_4::Enumerator
+end
+
+module Polyfill::V2_4::Enumerator::Lazy
+  def chunk_while(); end
+
+  def uniq(); end
+end
+
+module Polyfill::V2_4::Enumerator::Lazy
+end
+
+module Polyfill::V2_4::Enumerator
+end
+
+module Polyfill::V2_4::File
+end
+
+module Polyfill::V2_4::File::ClassMethods
+  def empty?(file_name); end
+end
+
+module Polyfill::V2_4::File::ClassMethods
+end
+
+module Polyfill::V2_4::File
+end
+
+module Polyfill::V2_4::Float
+  def ceil(ndigits=T.unsafe(nil)); end
+
+  def floor(ndigits=T.unsafe(nil)); end
+
+  def truncate(ndigits=T.unsafe(nil)); end
+end
+
+module Polyfill::V2_4::Float
+end
+
+module Polyfill::V2_4::Hash
+  def compact(); end
+
+  def compact!(); end
+
+  def transform_values(); end
+
+  def transform_values!(); end
+end
+
+module Polyfill::V2_4::Hash
+end
+
+module Polyfill::V2_4::IO
+  def each_line(*args); end
+
+  def gets(*args); end
+
+  def lines(*args); end
+
+  def readline(*args); end
+
+  def readlines(*args); end
+end
+
+module Polyfill::V2_4::IO::ClassMethods
+  def foreach(name, *args); end
+
+  def readlines(file_name, *args); end
+end
+
+module Polyfill::V2_4::IO::ClassMethods
+end
+
+module Polyfill::V2_4::IO
+end
+
+module Polyfill::V2_4::IPAddr
+  def ==(*_); end
+end
+
+module Polyfill::V2_4::IPAddr
+end
+
+module Polyfill::V2_4::Integer
+  def ceil(ndigits=T.unsafe(nil)); end
+
+  def digits(base=T.unsafe(nil)); end
+
+  def floor(ndigits=T.unsafe(nil)); end
+
+  def round(ndigits=T.unsafe(nil), half: T.unsafe(nil)); end
+
+  def truncate(ndigits=T.unsafe(nil)); end
+end
+
+module Polyfill::V2_4::Integer
+end
+
+module Polyfill::V2_4::MatchData
+  def named_captures(); end
+
+  def values_at(*indexes); end
+end
+
+module Polyfill::V2_4::MatchData
+end
+
+module Polyfill::V2_4::Numeric
+  def clone(freeze: T.unsafe(nil)); end
+
+  def dup(); end
+
+  def finite?(); end
+
+  def infinite?(); end
+end
+
+module Polyfill::V2_4::Numeric
+end
+
+module Polyfill::V2_4::Object
+  def clone(freeze: T.unsafe(nil)); end
+end
+
+module Polyfill::V2_4::Object
+end
+
+module Polyfill::V2_4::Pathname
+  def empty?(); end
+end
+
+module Polyfill::V2_4::Pathname
+end
+
+module Polyfill::V2_4::Regexp
+  def match?(string, position=T.unsafe(nil)); end
+end
+
+module Polyfill::V2_4::Regexp
+end
+
+module Polyfill::V2_4::String
+  def casecmp?(other); end
+
+  def concat(*others); end
+
+  def each_line(*args); end
+
+  def lines(*args); end
+
+  def match?(pattern, position=T.unsafe(nil)); end
+
+  def prepend(*others); end
+
+  def unpack1(*args); end
+end
+
+module Polyfill::V2_4::String::ClassMethods
+  def new(*args); end
+end
+
+module Polyfill::V2_4::String::ClassMethods
+end
+
+module Polyfill::V2_4::String
+end
+
+module Polyfill::V2_4::StringIO
+  def each_line(*args); end
+
+  def gets(*args); end
+
+  def lines(*args); end
+
+  def readline(*args); end
+
+  def readlines(*args); end
+end
+
+module Polyfill::V2_4::StringIO::ClassMethods
+  def foreach(name, *args); end
+
+  def readlines(file_name, *args); end
+end
+
+module Polyfill::V2_4::StringIO::ClassMethods
+end
+
+module Polyfill::V2_4::StringIO
+end
+
+module Polyfill::V2_4::Symbol
+  def casecmp?(other); end
+
+  def match(*args); end
+
+  def match?(pattern, position=T.unsafe(nil)); end
+end
+
+module Polyfill::V2_4::Symbol
+end
+
+module Polyfill::V2_4
+end
+
+module Polyfill::V2_5
+end
+
+module Polyfill::V2_5::Array
+  def append(*args); end
+
+  def prepend(*args); end
+end
+
+module Polyfill::V2_5::Array
+end
+
+module Polyfill::V2_5::BigDecimal
+  def clone(); end
+
+  def dup(); end
+end
+
+module Polyfill::V2_5::BigDecimal
+end
+
+module Polyfill::V2_5::Dir
+end
+
+module Polyfill::V2_5::Dir::ClassMethods
+  def children(dirname, encoding: T.unsafe(nil)); end
+
+  def each_child(dirname, encoding: T.unsafe(nil)); end
+end
+
+module Polyfill::V2_5::Dir::ClassMethods
+end
+
+module Polyfill::V2_5::Dir
+end
+
+module Polyfill::V2_5::Enumerable
+  def all?(*pattern); end
+
+  def any?(*pattern); end
+
+  def none?(*pattern); end
+
+  def one?(*pattern); end
+end
+
+module Polyfill::V2_5::Enumerable
+end
+
+module Polyfill::V2_5::Hash
+  def slice(*keys); end
+
+  def transform_keys(); end
+end
+
+module Polyfill::V2_5::Hash
+end
+
+module Polyfill::V2_5::Integer
+  def allbits?(mask); end
+
+  def anybits?(mask); end
+
+  def ceil(*_); end
+
+  def floor(*_); end
+
+  def nobits?(mask); end
+
+  def round(*_); end
+
+  def truncate(*_); end
+end
+
+module Polyfill::V2_5::Integer::ClassMethods
+  def sqrt(n); end
+end
+
+module Polyfill::V2_5::Integer::ClassMethods
+end
+
+module Polyfill::V2_5::Integer
+end
+
+module Polyfill::V2_5::Kernel
+  def yield_self(); end
+end
+
+module Polyfill::V2_5::Kernel
+end
+
+module Polyfill::V2_5::Set
+  def ===(other); end
+
+  def to_s(); end
+end
+
+module Polyfill::V2_5::Set
+end
+
+module Polyfill::V2_5::String
+  def casecmp(other_str); end
+
+  def casecmp?(other_str); end
+
+  def delete_prefix(prefix); end
+
+  def delete_prefix!(prefix); end
+
+  def delete_suffix(suffix); end
+
+  def delete_suffix!(suffix); end
+
+  def each_grapheme_cluster(); end
+
+  def grapheme_clusters(); end
+
+  def start_with?(*prefixes); end
+end
+
+module Polyfill::V2_5::String
+end
+
+module Polyfill::V2_5::Struct
+end
+
+module Polyfill::V2_5::Struct::ClassMethods
+  def new(*args, keyword_init: T.unsafe(nil)); end
+end
+
+module Polyfill::V2_5::Struct::ClassMethods
+end
+
+module Polyfill::V2_5::Struct
+end
+
+module Polyfill::V2_5::Time
+end
+
+module Polyfill::V2_5::Time::ClassMethods
+  def at(*args); end
+end
+
+module Polyfill::V2_5::Time::ClassMethods
+end
+
+module Polyfill::V2_5::Time
+end
+
+module Polyfill::V2_5
+end
+
+module Polyfill::V2_6
+end
+
+module Polyfill::V2_6::Array
+  def difference(*arrays); end
+
+  def to_h(); end
+
+  def union(*arrays); end
+end
+
+module Polyfill::V2_6::Array
+end
+
+module Polyfill::V2_6::Enumerable
+  def to_h(); end
+end
+
+module Polyfill::V2_6::Enumerable
+end
+
+module Polyfill::V2_6::Hash
+  def merge(*args); end
+
+  def merge!(*args); end
+
+  def to_h(); end
+
+  def update(*args); end
+end
+
+module Polyfill::V2_6::Hash
+end
+
+module Polyfill::V2_6::Kernel
+  def Complex(*args, exception: T.unsafe(nil)); end
+
+  def Float(arg, exception: T.unsafe(nil)); end
+
+  def Integer(arg, exception: T.unsafe(nil)); end
+
+  def Rational(*args, exception: T.unsafe(nil)); end
+
+  def then(); end
+end
+
+module Polyfill::V2_6::Kernel
+end
+
+module Polyfill::V2_6::OpenStruct
+  def to_h(); end
+end
+
+module Polyfill::V2_6::OpenStruct
+end
+
+module Polyfill::V2_6::String
+  def split(*_); end
+end
+
+module Polyfill::V2_6::String
+end
+
+module Polyfill::V2_6::Struct
+  def to_h(); end
+end
+
+module Polyfill::V2_6::Struct
+end
+
+module Polyfill::V2_6
+end
+
+module Polyfill
+  def self.get(module_name, methods, options=T.unsafe(nil)); end
+end
 
 class Proc
   def <<(_); end
@@ -18305,7 +19625,6 @@ module RSpec::Expectations::Version
 end
 
 module RSpec::Matchers
-  include ::Capybara::RSpecMatcherProxyInstaller
   BE_PREDICATE_REGEX = ::T.let(nil, ::T.untyped)
   DYNAMIC_MATCHER_REGEX = ::T.let(nil, ::T.untyped)
   HAS_REGEX = ::T.let(nil, ::T.untyped)
@@ -18329,17 +19648,9 @@ module RSpec::Matchers::DSL::Macros
   RAISE_NOTIFIER = ::T.let(nil, ::T.untyped)
 end
 
-class RSpec::Matchers::DSL::Matcher
-  include ::Capybara::RSpecMatcherProxyInstaller
-end
-
 class RSpec::Matchers::ExpectedsForMultipleDiffs
   DEFAULT_DIFF_LABEL = ::T.let(nil, ::T.untyped)
   DESCRIPTION_MAX_LENGTH = ::T.let(nil, ::T.untyped)
-end
-
-module RSpec::Matchers
-  extend ::Capybara::RSpecMatcherProxyInstaller::ClassMethods
 end
 
 module RSpec::Mocks
@@ -18392,38 +19703,6 @@ end
 
 module RSpec::Mocks::Version
   STRING = ::T.let(nil, ::T.untyped)
-end
-
-module RSpec::Rails
-  DIRECTORY_MAPPINGS = ::T.let(nil, ::T.untyped)
-end
-
-RSpec::Rails::Assertions = Minitest::Assertions
-
-module RSpec::Rails::FeatureExampleGroup
-  DEFAULT_HOST = ::T.let(nil, ::T.untyped)
-end
-
-class RSpec::Rails::Matchers::BaseMatcher
-  UNDEFINED = ::T.let(nil, ::T.untyped)
-end
-
-class RSpec::Rails::Matchers::HaveEnqueuedMail
-  MAILER_JOB_METHOD = ::T.let(nil, ::T.untyped)
-end
-
-class RSpec::Rails::Matchers::HaveHttpStatus::GenericStatus
-  RESPONSE_METHODS = ::T.let(nil, ::T.untyped)
-end
-
-module RSpec::Rails::SystemExampleGroup
-  CHARS_TO_TRANSLATE = ::T.let(nil, ::T.untyped)
-end
-
-RSpec::Rails::TestUnitAssertionAdapter = RSpec::Rails::MinitestAssertionAdapter
-
-module RSpec::Rails::ViewRendering
-  RESOLVER_CACHE = ::T.let(nil, ::T.untyped)
 end
 
 RSpec::SharedContext = RSpec::Core::SharedContext
@@ -19031,9 +20310,6 @@ end
 
 class Rack::Session::Abstract::SessionHash
   Unspecified = ::T.let(nil, ::T.untyped)
-end
-
-class Rack::Session::Cookie::SessionId
 end
 
 class Rack::Session::Dalli
@@ -20444,7 +21720,6 @@ module Regexp::Syntax::Token::UnicodeProperty::Category
 end
 
 class Reply
-  include ::Reply::GeneratedAssociationMethods
   def autosave_associated_records_for_comment(*args); end
 
   def autosave_associated_records_for_councillor(*args); end
@@ -20452,18 +21727,25 @@ class Reply
   def belongs_to_counter_cache_after_update(reflection); end
 end
 
+class Reply::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Reply::GeneratedRelationMethods
+end
+
+class Reply::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Reply::GeneratedRelationMethods
+end
+
+class Reply::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Reply::GeneratedRelationMethods
+end
+
 module Reply::GeneratedAssociationMethods
   def build_comment(*args, &block); end
 
   def build_councillor(*args, &block); end
-
-  def comment(); end
-
-  def comment=(value); end
-
-  def councillor(); end
-
-  def councillor=(value); end
 
   def create_comment(*args, &block); end
 
@@ -20478,22 +21760,35 @@ module Reply::GeneratedAssociationMethods
   def reload_councillor(); end
 end
 
-module Reply::GeneratedAssociationMethods
+module Reply::GeneratedRelationMethods
+end
+
+module Reply::GeneratedRelationMethods
 end
 
 class Report
-  include ::Report::GeneratedAssociationMethods
   def autosave_associated_records_for_comment(*args); end
 
   def belongs_to_counter_cache_after_update(reflection); end
 end
 
+class Report::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Report::GeneratedRelationMethods
+end
+
+class Report::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Report::GeneratedRelationMethods
+end
+
+class Report::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Report::GeneratedRelationMethods
+end
+
 module Report::GeneratedAssociationMethods
   def build_comment(*args, &block); end
-
-  def comment(); end
-
-  def comment=(value); end
 
   def create_comment(*args, &block); end
 
@@ -20502,7 +21797,10 @@ module Report::GeneratedAssociationMethods
   def reload_comment(); end
 end
 
-module Report::GeneratedAssociationMethods
+module Report::GeneratedRelationMethods
+end
+
+module Report::GeneratedRelationMethods
 end
 
 class Resolv::DNS
@@ -23314,6 +24612,186 @@ class RubyVM
   def self.resolve_feature_path(_); end
 end
 
+module SafeType
+end
+
+class SafeType::Boolean
+  def initialize(type: T.unsafe(nil), **args); end
+end
+
+class SafeType::Boolean
+  def self.default(value=T.unsafe(nil)); end
+end
+
+module SafeType::BooleanMixin
+end
+
+module SafeType::BooleanMixin
+end
+
+class SafeType::CoercionError
+  def desired_type(); end
+
+  def initialize(value, desired_type, key=T.unsafe(nil)); end
+
+  def key(); end
+
+  def value(); end
+end
+
+class SafeType::CoercionError
+end
+
+class SafeType::Converter
+end
+
+class SafeType::Converter
+  def self.to_bool(input); end
+
+  def self.to_date(input); end
+
+  def self.to_date_time(input); end
+
+  def self.to_false(input); end
+
+  def self.to_float(input); end
+
+  def self.to_int(input); end
+
+  def self.to_time(input); end
+
+  def self.to_true(input); end
+
+  def self.to_type(input, type); end
+end
+
+class SafeType::Date
+  def initialize(type: T.unsafe(nil), from: T.unsafe(nil), to: T.unsafe(nil), **args); end
+end
+
+class SafeType::Date
+  def self.default(value=T.unsafe(nil), from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+  def self.strict(from: T.unsafe(nil), to: T.unsafe(nil)); end
+end
+
+class SafeType::DateTime
+  def initialize(type: T.unsafe(nil), from: T.unsafe(nil), to: T.unsafe(nil), **args); end
+end
+
+class SafeType::DateTime
+  def self.default(value=T.unsafe(nil), from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+  def self.strict(from: T.unsafe(nil), to: T.unsafe(nil)); end
+end
+
+class SafeType::EmptyValueError
+  def desired_type(); end
+
+  def initialize(desired_type, key=T.unsafe(nil)); end
+
+  def key(); end
+end
+
+class SafeType::EmptyValueError
+end
+
+class SafeType::Float
+  def initialize(type: T.unsafe(nil), min: T.unsafe(nil), max: T.unsafe(nil), **args); end
+end
+
+class SafeType::Float
+  def self.default(value=T.unsafe(nil), min: T.unsafe(nil), max: T.unsafe(nil)); end
+
+  def self.strict(min: T.unsafe(nil), max: T.unsafe(nil)); end
+end
+
+class SafeType::Integer
+  def initialize(type: T.unsafe(nil), min: T.unsafe(nil), max: T.unsafe(nil), **args); end
+end
+
+class SafeType::Integer
+  def self.default(value=T.unsafe(nil), min: T.unsafe(nil), max: T.unsafe(nil)); end
+
+  def self.strict(min: T.unsafe(nil), max: T.unsafe(nil)); end
+end
+
+class SafeType::InvalidRuleError
+  def initialize(); end
+end
+
+class SafeType::InvalidRuleError
+end
+
+class SafeType::Rule
+  def after(input); end
+
+  def before(input); end
+
+  def coerce(input, key=T.unsafe(nil)); end
+
+  def initialize(type:, default: T.unsafe(nil), required: T.unsafe(nil), **args); end
+
+  def is_valid?(input); end
+end
+
+class SafeType::Rule
+  def self.coerce(input); end
+
+  def self.default(); end
+
+  def self.strict(); end
+end
+
+class SafeType::String
+  def initialize(type: T.unsafe(nil), min_length: T.unsafe(nil), max_length: T.unsafe(nil), **args); end
+end
+
+class SafeType::String
+  def self.default(value=T.unsafe(nil), min_length: T.unsafe(nil), max_length: T.unsafe(nil)); end
+
+  def self.strict(min_length: T.unsafe(nil), max_length: T.unsafe(nil)); end
+end
+
+class SafeType::Symbol
+  def initialize(type: T.unsafe(nil), min_length: T.unsafe(nil), max_length: T.unsafe(nil), **args); end
+end
+
+class SafeType::Symbol
+  def self.default(value=T.unsafe(nil), min_length: T.unsafe(nil), max_length: T.unsafe(nil)); end
+
+  def self.strict(min_length: T.unsafe(nil), max_length: T.unsafe(nil)); end
+end
+
+class SafeType::Time
+  def initialize(type: T.unsafe(nil), from: T.unsafe(nil), to: T.unsafe(nil), **args); end
+end
+
+class SafeType::Time
+  def self.default(value=T.unsafe(nil), from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+  def self.strict(from: T.unsafe(nil), to: T.unsafe(nil)); end
+end
+
+class SafeType::ValidationError
+  def desired_type(); end
+
+  def initialize(value, desired_type, key=T.unsafe(nil)); end
+
+  def key(); end
+
+  def value(); end
+end
+
+class SafeType::ValidationError
+end
+
+module SafeType
+  def self.coerce(input, rule, coerce_key=T.unsafe(nil)); end
+
+  def self.coerce!(input, rule); end
+end
+
 module SafeYAML
   DEFAULT_OPTIONS = ::T.let(nil, ::T.untyped)
   MULTI_ARGUMENT_YAML_LOAD = ::T.let(nil, ::T.untyped)
@@ -24108,15 +25586,41 @@ class SiteSetting
   include ::SiteSetting::GeneratedAssociationMethods
 end
 
+class SiteSetting::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::SiteSetting::GeneratedRelationMethods
+end
+
+class SiteSetting::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::SiteSetting::GeneratedRelationMethods
+end
+
+class SiteSetting::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::SiteSetting::GeneratedRelationMethods
+end
+
 module SiteSetting::GeneratedAssociationMethods
 end
 
 module SiteSetting::GeneratedAssociationMethods
+end
+
+module SiteSetting::GeneratedRelationMethods
+end
+
+module SiteSetting::GeneratedRelationMethods
 end
 
 class SiteSettingForm
+  include ::ActiveModel::Validations
   include ::ActiveSupport::Callbacks
   include ::ActiveModel::Validations::HelperMethods
+  include ::ActiveModel::Conversion
+  include ::ActiveModel::Model
+  include ::ActiveModel::AttributeAssignment
+  include ::ActiveModel::ForbiddenAttributesProtection
   include ::Virtus::Model::Core
   include ::Virtus::ClassInclusions::Methods
   include ::Virtus::InstanceMethods
@@ -24136,7 +25640,11 @@ class SiteSettingForm
 
   def _validators?(); end
 
+  def initialize(params=T.unsafe(nil)); end
+
   def model_name(*args, &block); end
+
+  def persist(); end
 
   def validation_context(); end
 end
@@ -24349,6 +25857,281 @@ module Socket::Constants
   SO_WANTOOBFLAG = ::T.let(nil, ::T.untyped)
   TCP_NOOPT = ::T.let(nil, ::T.untyped)
   TCP_NOPUSH = ::T.let(nil, ::T.untyped)
+end
+
+class SorbetRails::Config
+  def enabled_gem_plugins(*args, &blk); end
+
+  def enabled_gem_plugins=(enabled_gem_plugins); end
+
+  def enabled_model_plugins(*args, &blk); end
+
+  def enabled_model_plugins=(enabled_model_plugins); end
+
+  def enabled_plugins(*args, &blk); end
+
+  def extra_helper_includes(*args, &blk); end
+
+  def extra_helper_includes=(extra_helper_includes); end
+
+  def initialize(&blk); end
+end
+
+class SorbetRails::Config
+  extend ::T::Sig
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
+module SorbetRails::CustomFinderMethods
+  def find_by_id(id); end
+
+  def find_by_id!(id); end
+
+  def find_n(*ids); end
+
+  def first_n(n); end
+
+  def last_n(n); end
+end
+
+module SorbetRails::CustomFinderMethods
+end
+
+module SorbetRails::ModelPlugins
+  include ::Kernel
+  def get_plugin_by_name(*args, &blk); end
+
+  def get_plugins(*args, &blk); end
+
+  def register_plugin(*args, &blk); end
+
+  def register_plugin_by_name(arg0, &blk); end
+
+  def set_plugins(*args, &blk); end
+end
+
+class SorbetRails::ModelPlugins::ActiveRecordAssoc
+  def assoc_should_be_untyped?(*args, &blk); end
+
+  def polymorphic_assoc?(*args, &blk); end
+
+  def populate_collection_assoc_getter_setter(*args, &blk); end
+
+  def populate_single_assoc_getter_setter(*args, &blk); end
+
+  def relation_should_be_untyped?(*args, &blk); end
+end
+
+class SorbetRails::ModelPlugins::ActiveRecordAssoc
+end
+
+class SorbetRails::ModelPlugins::ActiveRecordAttribute
+  def active_record_type_to_sorbet_type(*args, &blk); end
+
+  def generate_enum_methods(*args, &blk); end
+
+  def nilable_column?(*args, &blk); end
+
+  def time_zone_aware_column?(*args, &blk); end
+
+  def type_for_column_def(*args, &blk); end
+
+  def value_type_for_attr_writer(*args, &blk); end
+end
+
+class SorbetRails::ModelPlugins::ActiveRecordAttribute::ColumnType
+  def array_type(); end
+
+  def base_type(); end
+
+  def initialize(*args, &blk); end
+
+  def nilable(); end
+
+  def to_s(*args, &blk); end
+end
+
+class SorbetRails::ModelPlugins::ActiveRecordAttribute::ColumnType
+  extend ::T::Sig
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+  def self.inherited(s); end
+end
+
+class SorbetRails::ModelPlugins::ActiveRecordAttribute
+end
+
+class SorbetRails::ModelPlugins::ActiveRecordEnum
+end
+
+class SorbetRails::ModelPlugins::ActiveRecordEnum
+end
+
+class SorbetRails::ModelPlugins::ActiveRecordNamedScope
+end
+
+class SorbetRails::ModelPlugins::ActiveRecordNamedScope
+end
+
+class SorbetRails::ModelPlugins::ActiveRecordQuerying
+end
+
+class SorbetRails::ModelPlugins::ActiveRecordQuerying
+end
+
+class SorbetRails::ModelPlugins::ActiveRelationWhereNot
+end
+
+class SorbetRails::ModelPlugins::ActiveRelationWhereNot
+end
+
+class SorbetRails::ModelPlugins::ActiveStorageMethods
+  def create_has_many_methods(*args, &blk); end
+
+  def create_has_one_methods(*args, &blk); end
+end
+
+class SorbetRails::ModelPlugins::ActiveStorageMethods
+end
+
+class SorbetRails::ModelPlugins::Base
+  include ::SorbetRails::ModelUtils
+  def attribute_has_unconditional_presence_validation?(*args, &blk); end
+
+  def available_classes(*args, &blk); end
+end
+
+SorbetRails::ModelPlugins::Base::Parameter = Parlour::RbiGenerator::Parameter
+
+class SorbetRails::ModelPlugins::Base
+end
+
+class SorbetRails::ModelPlugins::CustomFinderMethods
+end
+
+class SorbetRails::ModelPlugins::CustomFinderMethods
+end
+
+class SorbetRails::ModelPlugins::EnumerableCollections
+end
+
+class SorbetRails::ModelPlugins::EnumerableCollections
+end
+
+class SorbetRails::ModelPlugins::UnrecognizedPluginName
+end
+
+class SorbetRails::ModelPlugins::UnrecognizedPluginName
+end
+
+module SorbetRails::ModelPlugins
+  extend ::T::Sig
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
+class SorbetRails::ModelRbiFormatter
+  include ::SorbetRails::ModelUtils
+  def available_classes(*args, &blk); end
+
+  def generate_base_rbi(*args, &blk); end
+
+  def generate_rbi(*args, &blk); end
+
+  def initialize(*args, &blk); end
+
+  def run_plugins(*args, &blk); end
+end
+
+class SorbetRails::ModelRbiFormatter
+  extend ::T::Sig
+  extend ::SorbetRails::ModelPlugins
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
+module SorbetRails::ModelUtils
+  def add_relation_query_method(*args, &blk); end
+
+  def exists_class_method?(*args, &blk); end
+
+  def exists_instance_method?(*args, &blk); end
+
+  def habtm_class?(*args, &blk); end
+
+  def model_assoc_proxy_class_name(*args, &blk); end
+
+  def model_assoc_relation_class_name(*args, &blk); end
+
+  def model_class(*args, &blk); end
+
+  def model_class_name(*args, &blk); end
+
+  def model_module_name(*args, &blk); end
+
+  def model_query_methods_returning_assoc_relation_module_name(*args, &blk); end
+
+  def model_query_methods_returning_relation_module_name(*args, &blk); end
+
+  def model_relation_class_name(*args, &blk); end
+
+  def model_relation_type_alias(*args, &blk); end
+
+  def model_relation_type_class_name(*args, &blk); end
+end
+
+module SorbetRails::ModelUtils
+  extend ::T::Sig
+  extend ::T::Helpers
+  extend ::T::Private::Abstract::Hooks
+  extend ::T::InterfaceWrapper::Helpers
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
+module SorbetRails::PluckToTStruct
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
+class SorbetRails::Railtie
+end
+
+class SorbetRails::Railtie
+end
+
+class SorbetRails::TypedEnumConfig
+  def class_name(); end
+
+  def initialize(*args, &blk); end
+
+  def strict_mode(); end
+end
+
+class SorbetRails::TypedEnumConfig
+  def self.inherited(s); end
+end
+
+module SorbetRails::Utils
+end
+
+module SorbetRails::Utils
+  extend ::T::Sig
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+  def self.rails_eager_load_all!(*args, &blk); end
+
+  def self.valid_method_name?(*args, &blk); end
+end
+
+module SorbetRails
+  extend ::T::Private::Methods::SingletonMethodHooks
+  def self.config(&blk); end
+
+  def self.configure(*args, &blk); end
+
+  def self.register_configured_plugins(&blk); end
 end
 
 class SortedSet
@@ -24629,6 +26412,8 @@ class StandaloneSweeper
   def default_url_options=(val); end
 
   def default_url_options?(); end
+
+  def expire_page(options); end
 end
 
 class StandaloneSweeper
@@ -24646,10 +26431,34 @@ class Stat
   def _notify_stat_sweeper_for_after_save(&block); end
 end
 
+class Stat::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Stat::GeneratedRelationMethods
+end
+
+class Stat::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Stat::GeneratedRelationMethods
+end
+
+class Stat::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Stat::GeneratedRelationMethods
+end
+
 module Stat::GeneratedAssociationMethods
 end
 
 module Stat::GeneratedAssociationMethods
+end
+
+module Stat::GeneratedRelationMethods
+end
+
+module Stat::GeneratedRelationMethods
+end
+
+class StatSweeper
 end
 
 class String
@@ -24696,7 +26505,6 @@ Struct::Passwd = Etc::Passwd
 Struct::Tms = Process::Tms
 
 class SuggestedCouncillor
-  include ::SuggestedCouncillor::GeneratedAssociationMethods
   def autosave_associated_records_for_authority(); end
 
   def autosave_associated_records_for_councillor_contribution(*args); end
@@ -24704,16 +26512,23 @@ class SuggestedCouncillor
   def belongs_to_counter_cache_after_update(reflection); end
 end
 
+class SuggestedCouncillor::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::SuggestedCouncillor::GeneratedRelationMethods
+end
+
+class SuggestedCouncillor::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::SuggestedCouncillor::GeneratedRelationMethods
+end
+
+class SuggestedCouncillor::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::SuggestedCouncillor::GeneratedRelationMethods
+end
+
 module SuggestedCouncillor::GeneratedAssociationMethods
-  def authority(); end
-
-  def authority=(value); end
-
   def build_councillor_contribution(*args, &block); end
-
-  def councillor_contribution(); end
-
-  def councillor_contribution=(value); end
 
   def create_councillor_contribution(*args, &block); end
 
@@ -24724,7 +26539,10 @@ module SuggestedCouncillor::GeneratedAssociationMethods
   def reload_councillor_contribution(); end
 end
 
-module SuggestedCouncillor::GeneratedAssociationMethods
+module SuggestedCouncillor::GeneratedRelationMethods
+end
+
+module SuggestedCouncillor::GeneratedRelationMethods
 end
 
 class Symbol
@@ -24753,6 +26571,11 @@ module Sysexits
   REVISION = ::T.let(nil, ::T.untyped)
   STATUS_CODES = ::T.let(nil, ::T.untyped)
   VERSION = ::T.let(nil, ::T.untyped)
+end
+
+class TA
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
 end
 
 module TZInfo::RubyCoreSupport
@@ -26343,6 +28166,7 @@ end
 
 class TrueClass
   include ::JSON::Ext::Generator::GeneratorMethods::TrueClass
+  include ::SafeType::BooleanMixin
 end
 
 module Twitter::Enumerable
@@ -26431,6 +28255,47 @@ class Twitter::Streaming::Event
   TWEET_EVENTS = ::T.let(nil, ::T.untyped)
 end
 
+module TypeCoerce
+end
+
+class TypeCoerce::CoercionError
+end
+
+class TypeCoerce::CoercionError
+end
+
+module TypeCoerce::Configuration
+end
+
+module TypeCoerce::Configuration
+  extend ::T::Private::Methods::SingletonMethodHooks
+  def self.raise_coercion_error(*args, &blk); end
+
+  def self.raise_coercion_error=(raise_coercion_error); end
+end
+
+class TypeCoerce::Converter
+  def from(args, raise_coercion_error: T.unsafe(nil)); end
+
+  def initialize(type); end
+
+  def new(); end
+  PRIMITIVE_TYPES = ::T.let(nil, ::T.untyped)
+end
+
+class TypeCoerce::Converter
+end
+
+class TypeCoerce::ShapeError
+end
+
+class TypeCoerce::ShapeError
+end
+
+module TypeCoerce
+  def self.[](type); end
+end
+
 module Typhoeus
   USER_AGENT = ::T.let(nil, ::T.untyped)
   VERSION = ::T.let(nil, ::T.untyped)
@@ -26442,9 +28307,6 @@ class Typhoeus::EasyFactory
   RENAMED_OPTIONS = ::T.let(nil, ::T.untyped)
   SANITIZE_IGNORE = ::T.let(nil, ::T.untyped)
   SANITIZE_TIMEOUT = ::T.let(nil, ::T.untyped)
-end
-
-class Typhoeus::Response::Header
 end
 
 module UNF
@@ -26620,10 +28482,31 @@ class User
   def password_confirmation=(password_confirmation); end
 end
 
+class User::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::User::GeneratedRelationMethods
+end
+
+class User::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::User::GeneratedRelationMethods
+end
+
+class User::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::User::GeneratedRelationMethods
+end
+
 module User::GeneratedAssociationMethods
 end
 
 module User::GeneratedAssociationMethods
+end
+
+module User::GeneratedRelationMethods
+end
+
+module User::GeneratedRelationMethods
 end
 
 class User
@@ -26755,9 +28638,6 @@ class VCR::Errors::UnhandledHTTPRequestError
   ALL_SUGGESTIONS = ::T.let(nil, ::T.untyped)
 end
 
-class VCR::HTTPInteraction::HookAware
-end
-
 module VCR::InternetConnection
   def available?(); end
   EXAMPLE_HOST = ::T.let(nil, ::T.untyped)
@@ -26806,12 +28686,6 @@ end
 
 module VCR::RSpec::Metadata
   extend ::VCR::RSpec::Metadata
-end
-
-class VCR::Request::FiberAware
-end
-
-class VCR::Request::Typed
 end
 
 class VCR::RequestIgnorer
@@ -27485,9 +29359,6 @@ end
 
 module Zip::NullInputStream
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
-end
-
-class Zip::StreamableStream
 end
 
 Zip::ZipCompressionMethodError = Zip::CompressionMethodError
