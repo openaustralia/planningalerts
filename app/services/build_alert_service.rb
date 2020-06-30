@@ -19,7 +19,7 @@ class BuildAlertService < ApplicationService
     )
   end
 
-  sig { void }
+  sig { returns(T.nilable(Alert)) }
   def call
     # Ensures the address is normalised into a consistent form
     alert.geocode_from_address
