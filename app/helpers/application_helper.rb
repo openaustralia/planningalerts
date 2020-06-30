@@ -31,7 +31,7 @@ module ApplicationHelper
                 class: ["nav-item", ("active" if active)])
   end
 
-  sig { params(meters: T.any(Float, Integer)).returns(String) }
+  sig { params(meters: Float).returns(String) }
   def meters_in_words(meters)
     if meters < 1000
       "#{significant_figure_remove_trailing_zero(meters, 2)} m"
@@ -40,7 +40,7 @@ module ApplicationHelper
     end
   end
 
-  sig { params(value: T.any(Float, Integer), sig_figs: Integer).returns(T.untyped) }
+  sig { params(value: Float, sig_figs: Integer).returns(T.untyped) }
   def significant_figure_remove_trailing_zero(value, sig_figs)
     text = significant_figure(value, sig_figs).to_s
     if text [-2..] == ".0"
@@ -51,7 +51,7 @@ module ApplicationHelper
   end
 
   # Round the number a to s significant figures
-  sig { params(value: T.any(Float, Integer), sig_figs: Integer).returns(Float) }
+  sig { params(value: Float, sig_figs: Integer).returns(Float) }
   def significant_figure(value, sig_figs)
     if value.positive?
       a = Math.log10(value).ceil - sig_figs

@@ -10,13 +10,13 @@
     %ul.sizes
       %li
         = radio_button_tag(:size, "s", @size == "s")
-        = label_tag(:size_s, "My street (within #{meters_in_words(@zone_sizes['s'])})")
+        = label_tag(:size_s, "My street (within #{meters_in_words(@zone_sizes['s'].to_f)})")
       %li
         = radio_button_tag(:size, "m", @size == "m")
-        = label_tag(:size_m, "My neighbourhood (within #{meters_in_words(@zone_sizes['m'])})")
+        = label_tag(:size_m, "My neighbourhood (within #{meters_in_words(@zone_sizes['m'].to_f)})")
       %li
         = radio_button_tag(:size, "l", @size == "l")
-        = label_tag(:size_l, "My suburb (within #{meters_in_words(@zone_sizes['l'])})")
+        = label_tag(:size_l, "My suburb (within #{meters_in_words(@zone_sizes['l'].to_f)})")
       %noscript
         %li
           Note: viewing the alert area on a map requires javascript

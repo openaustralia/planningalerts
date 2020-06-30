@@ -1,5 +1,5 @@
 .box.applications-header
-  The following <strong>new planning applications</strong> have been found within #{meters_in_words(alert.radius_meters)} of
+  The following <strong>new planning applications</strong> have been found within #{meters_in_words(alert.radius_meters.to_f)} of
   %strong= alert.address
 = render partial: "application", collection: applications[0..9], locals: { alert: alert }
 - if applications.size > 15

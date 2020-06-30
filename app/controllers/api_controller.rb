@@ -57,7 +57,7 @@ class ApiController < ApplicationController
         latitude: "application_versions.lat",
         longitude: "application_versions.lng"
       ),
-      "Recent applications within #{help.meters_in_words(radius.to_i)} of #{location_text}"
+      "Recent applications within #{help.meters_in_words(radius.to_f)} of #{location_text}"
     )
   end
 

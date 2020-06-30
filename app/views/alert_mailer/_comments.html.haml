@@ -3,6 +3,6 @@
     The following <strong>new comment</strong> has been made on a planning application
   - else
     The following <strong>new comments</strong> have been made on planning applications
-  within #{meters_in_words(alert.radius_meters)} of
+  within #{meters_in_words(alert.radius_meters.to_f)} of
   %strong= alert.address
 = render partial: "comment", collection: comments
