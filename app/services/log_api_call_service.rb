@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 # frozen_string_literal: true
 
 class LogApiCallService < ApplicationService
@@ -15,7 +15,8 @@ class LogApiCallService < ApplicationService
   end
 
   def call
-    return unless LOGGING_ENABLED
+    # Marking as T.unsafe to avoid complaining about unreachable code
+    return unless T.unsafe(LOGGING_ENABLED)
 
     # Lookup the api key if there is one
     user = User.find_by(api_key: api_key) if api_key.present?
