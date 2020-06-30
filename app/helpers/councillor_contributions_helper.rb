@@ -1,7 +1,10 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 module CouncillorContributionsHelper
+  extend T::Sig
+
+  sig { params(authority: Authority).returns(String) }
   def link_to_or_website_text_for(authority)
     link_to_if(
       authority.website_url.present?,
