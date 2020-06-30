@@ -81,7 +81,7 @@ module ApiHowtoHelper
       format: String,
       key: T.nilable(String),
       postcode: String,
-      extra_params: T::Hash[Symbol, String]
+      extra_params: T::Hash[Symbol, T.any(String, Integer)]
     ).returns(String)
   end
   def api_example_postcode_url(format, key, postcode = Rails.application.config.planningalerts_api_example_postcode, extra_params = {})

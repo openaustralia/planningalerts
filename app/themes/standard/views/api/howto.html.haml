@@ -109,22 +109,22 @@
   %p.apidefinition
     API calls return a maximum of #{Application.per_page} results. To retrieve more results simply do another request with page
     set to 2, 3, etc&hellip; Not setting the page parameter is the same as requesting page 1.
-  %code= raw api_example_postcode_url("js", api_key, 2780, page: 2)
+  %code= raw api_example_postcode_url("js", api_key, "2780", page: 2)
 .apiitem
   %h5 count
   %p.apidefinition
     API calls by default return a maximum of #{Application.per_page} results. To return less than that per page simply set the count parameter to the maximum number you want to return.
-  %code= raw api_example_postcode_url("js", api_key, 2780, count: 10)
+  %code= raw api_example_postcode_url("js", api_key, "2780", count: 10)
 .apiitem
   %h5 style
   %p.apidefinition
     For georss, by setting &ldquo;style&rdquo; to &ldquo;html&rdquo; it will return an html formatted description in the georss feed rather than the default plain text. This is especially useful when a georss feed is embedded in a map as in some of the examples above.
-  %code= raw api_example_postcode_url("rss", api_key, 2780, style: "html")
+  %code= raw api_example_postcode_url("rss", api_key, "2780", style: "html")
 .apiitem
   %h5 callback
   %p.apidefinition
     To return JSONP, set &ldquo;callback&rdquo; to the name of your javascript callback function.
-  %code= raw api_example_postcode_url("js", api_key, 2780, callback: "my_callback")
+  %code= raw api_example_postcode_url("js", api_key, "2780", callback: "my_callback")
 
 %hr
 %h4#hLicenseInfo
@@ -156,8 +156,8 @@
 %h4#hBeNice
   Be Nice
 %p
-The PlanningAlerts service is intended to help people be aware of what's happening in their local neighborhood, and to enable a civil discussion about those changes. 
+The PlanningAlerts service is intended to help people be aware of what's happening in their local neighborhood, and to enable a civil discussion about those changes.
 %p
-Don't use the service (or information obtained from the service) to market goods or services to individuals. 
+Don't use the service (or information obtained from the service) to market goods or services to individuals.
 %p
 Don't use the service (or information obtained from the service) to harass or intimidate a person.

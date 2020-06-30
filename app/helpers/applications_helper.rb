@@ -95,8 +95,10 @@ module ApplicationsHelper
     image_tag(google_static_map_url_lat_lng(lat, lng, zoom: zoom, size: size, key: key), size: size, alt: label)
   end
 
-  sig { params(application: Application, zoom: Integer, size: String, key: String).returns(String) }
+  sig { params(application: Application, zoom: Integer, size: String, key: String).returns(T.nilable(String)) }
   def google_static_map_url(application, zoom: 16, size: "350x200", key: "GOOGLE_MAPS_API_KEY")
+    return if application.lat.nil? || application.lng.nil?
+
     google_static_map_url_lat_lng(application.lat, application.lng, zoom: zoom, size: size, key: key)
   end
 
