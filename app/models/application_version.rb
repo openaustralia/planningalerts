@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 # frozen_string_literal: true
 
 class ApplicationVersion < ApplicationRecord
@@ -40,10 +40,11 @@ class ApplicationVersion < ApplicationRecord
   end
 
   def changed_data_attributes
-    if previous_version
+    v = previous_version
+    if v
       changed = {}
       data_attributes.each_key do |a|
-        changed[a] = data_attributes[a] unless data_attributes[a] == previous_version.data_attributes[a]
+        changed[a] = data_attributes[a] unless data_attributes[a] == v.data_attributes[a]
       end
       changed
     else
@@ -98,19 +99,22 @@ class ApplicationVersion < ApplicationRecord
   private
 
   def date_received_can_not_be_in_the_future
-    return unless date_received && date_received > Time.zone.today
+    d = date_received
+    return unless d && d > Time.zone.today
 
     errors.add(:date_received, "can not be in the future")
   end
 
   def validate_on_notice_period
-    return unless on_notice_from || on_notice_to
+    from = on_notice_from
+    to = on_notice_to
+    return unless from || to
 
-    if on_notice_from.nil?
+    if from.nil?
       # errors.add(:on_notice_from, "can not be empty if end of on notice period is set")
-    elsif on_notice_to.nil?
+    elsif to.nil?
       # errors.add(:on_notice_to, "can not be empty if start of on notice period is set")
-    elsif on_notice_from > on_notice_to
+    elsif from > to
       errors.add(:on_notice_to, "can not be earlier than the start of the on notice period")
     end
   end

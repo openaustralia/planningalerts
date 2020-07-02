@@ -1,7 +1,9 @@
-# typed: false
+# typed: true
 # frozen_string_literal: true
 
 class Alert < ApplicationRecord
+  extend T::Sig
+
   validates :radius_meters, numericality: { greater_than: 0, message: "isn't selected" }
   validate :validate_address
 
@@ -10,6 +12,18 @@ class Alert < ApplicationRecord
 
   scope(:active, -> { where(confirmed: true, unsubscribed: false) })
   scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
+
+  # lat and lng are only populated on save (where they are stored as not null).
+  # so they start off being nil. We're just overriding the type signature here.
+  sig { returns(T.nilable(Float)) }
+  def lat
+    self[:lat]
+  end
+
+  sig { returns(T.nilable(Float)) }
+  def lng
+    self [:lng]
+  end
 
   def location=(loc)
     return unless loc
