@@ -6,6 +6,6 @@ module SignupHelper
 
   sig { params(size: String, alert: Alert, zone_sizes: T::Hash[String, Integer]).returns(String) }
   def draw_box_javascript(size, alert, zone_sizes)
-    "preview(#{alert.location.lat}, #{alert.location.lng}, #{zone_sizes[size]});"
+    "preview(#{T.must(alert.location).lat}, #{T.must(alert.location).lng}, #{zone_sizes[size]});"
   end
 end
