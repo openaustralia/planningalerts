@@ -8,10 +8,10 @@ module Authority::ActiveRelation_WhereNot
 end
 
 module Authority::GeneratedAttributeMethods
-  sig { returns(T.nilable(T::Boolean)) }
+  sig { returns(T::Boolean) }
   def disabled; end
 
-  sig { params(value: T.nilable(T::Boolean)).void }
+  sig { params(value: T::Boolean).void }
   def disabled=(value); end
 
   sig { returns(T::Boolean) }
@@ -89,10 +89,10 @@ module Authority::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def short_name?; end
 
-  sig { returns(T.nilable(String)) }
+  sig { returns(String) }
   def state; end
 
-  sig { params(value: T.nilable(T.any(String, Symbol))).void }
+  sig { params(value: T.any(String, Symbol)).void }
   def state=(value); end
 
   sig { returns(T::Boolean) }

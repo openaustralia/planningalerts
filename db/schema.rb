@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_05_060050) do
+ActiveRecord::Schema.define(version: 2020_07_02_035247) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(version: 2019_06_05_060050) do
   create_table "authorities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "full_name", limit: 200, null: false
     t.string "short_name", limit: 100, null: false
-    t.boolean "disabled"
-    t.string "state", limit: 20
+    t.boolean "disabled", null: false
+    t.string "state", limit: 20, null: false
     t.string "email"
     t.text "last_scraper_run_log"
     t.string "morph_name"
