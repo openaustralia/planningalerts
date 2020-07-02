@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_02_050343) do
+ActiveRecord::Schema.define(version: 2020_07_02_052930) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -135,12 +135,12 @@ ActiveRecord::Schema.define(version: 2020_07_02_050343) do
 
   create_table "councillor_contributions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "contributor_id"
-    t.integer "authority_id"
+    t.integer "authority_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "source"
-    t.boolean "reviewed", default: false
-    t.boolean "accepted", default: false
+    t.boolean "reviewed", default: false, null: false
+    t.boolean "accepted", default: false, null: false
     t.index ["authority_id"], name: "fk_rails_b23f89eb2a"
     t.index ["contributor_id"], name: "fk_rails_7fd8de62d1"
   end

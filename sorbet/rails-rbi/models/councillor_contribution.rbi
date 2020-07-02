@@ -8,19 +8,19 @@ module CouncillorContribution::ActiveRelation_WhereNot
 end
 
 module CouncillorContribution::GeneratedAttributeMethods
-  sig { returns(T.nilable(T::Boolean)) }
+  sig { returns(T::Boolean) }
   def accepted; end
 
-  sig { params(value: T.nilable(T::Boolean)).void }
+  sig { params(value: T::Boolean).void }
   def accepted=(value); end
 
   sig { returns(T::Boolean) }
   def accepted?; end
 
-  sig { returns(T.nilable(Integer)) }
+  sig { returns(Integer) }
   def authority_id; end
 
-  sig { params(value: T.nilable(T.any(Numeric, ActiveSupport::Duration))).void }
+  sig { params(value: T.any(Numeric, ActiveSupport::Duration)).void }
   def authority_id=(value); end
 
   sig { returns(T::Boolean) }
@@ -53,10 +53,10 @@ module CouncillorContribution::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def id?; end
 
-  sig { returns(T.nilable(T::Boolean)) }
+  sig { returns(T::Boolean) }
   def reviewed; end
 
-  sig { params(value: T.nilable(T::Boolean)).void }
+  sig { params(value: T::Boolean).void }
   def reviewed=(value); end
 
   sig { returns(T::Boolean) }
@@ -82,10 +82,10 @@ module CouncillorContribution::GeneratedAttributeMethods
 end
 
 module CouncillorContribution::GeneratedAssociationMethods
-  sig { returns(T.nilable(::Authority)) }
+  sig { returns(::Authority) }
   def authority; end
 
-  sig { params(value: T.nilable(::Authority)).void }
+  sig { params(value: ::Authority).void }
   def authority=(value); end
 
   sig { returns(T.nilable(::Contributor)) }
