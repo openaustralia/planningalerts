@@ -17,10 +17,10 @@ module Councillor::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def authority_id?; end
 
-  sig { returns(T.nilable(ActiveSupport::TimeWithZone)) }
+  sig { returns(ActiveSupport::TimeWithZone) }
   def created_at; end
 
-  sig { params(value: T.nilable(T.any(Date, Time, ActiveSupport::TimeWithZone))).void }
+  sig { params(value: T.any(Date, Time, ActiveSupport::TimeWithZone)).void }
   def created_at=(value); end
 
   sig { returns(T::Boolean) }
@@ -62,10 +62,10 @@ module Councillor::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def image_url?; end
 
-  sig { returns(T.nilable(String)) }
+  sig { returns(String) }
   def name; end
 
-  sig { params(value: T.nilable(T.any(String, Symbol))).void }
+  sig { params(value: T.any(String, Symbol)).void }
   def name=(value); end
 
   sig { returns(T::Boolean) }
@@ -89,10 +89,10 @@ module Councillor::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def popolo_id?; end
 
-  sig { returns(T.nilable(ActiveSupport::TimeWithZone)) }
+  sig { returns(ActiveSupport::TimeWithZone) }
   def updated_at; end
 
-  sig { params(value: T.nilable(T.any(Date, Time, ActiveSupport::TimeWithZone))).void }
+  sig { params(value: T.any(Date, Time, ActiveSupport::TimeWithZone)).void }
   def updated_at=(value); end
 
   sig { returns(T::Boolean) }
