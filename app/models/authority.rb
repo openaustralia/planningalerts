@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 # frozen_string_literal: true
 
 class Authority < ApplicationRecord
@@ -49,7 +49,8 @@ class Authority < ApplicationRecord
   def self.total_population_2017_covered_by_all_active_authorities
     sum = 0
     Authority.active.each do |a|
-      sum += a.population_2017 if a.population_2017
+      population = a.population_2017
+      sum += population if population
     end
     sum
   end
