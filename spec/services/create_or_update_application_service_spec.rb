@@ -57,7 +57,8 @@ describe CreateOrUpdateApplicationService do
         council_reference: "123/45",
         # This will not be valid
         attributes: {
-          description: "A really nice change"
+          description: "A really nice change",
+          address: ""
         }
       )
     end.to raise_error ActiveRecord::RecordInvalid

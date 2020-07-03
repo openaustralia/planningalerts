@@ -94,10 +94,6 @@ describe ApplicationVersion do
       expect(ApplicationVersion.normalise_description("")).to eq("")
     end
 
-    it "should allow the application description to be nil" do
-      expect(ApplicationVersion.normalise_description(nil)).to be_nil
-    end
-
     it "should start descriptions with a capital letter" do
       expect(ApplicationVersion.normalise_description("a description")).to eq("A description")
     end
