@@ -7,4 +7,5 @@ Authority.create! full_name: "Marrickville Council",
                   email: "council@marrickville.nsw.gov.au",
                   population_2017: "81489",
                   morph_name: "planningalerts-scrapers/marrickville",
-                  website_url: "http://www.marrickville.nsw.gov.au"
+                  website_url: "http://www.marrickville.nsw.gov.au",
+                  disabled: false
