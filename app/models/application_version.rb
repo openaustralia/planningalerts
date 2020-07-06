@@ -35,7 +35,9 @@ class ApplicationVersion < ApplicationRecord
   # TODO: factor out common location accessor between Application and Alert
   sig { returns(T.nilable(Location)) }
   def location
-    Location.new(lat: lat, lng: lng) if lat && lng
+    lat_temp = lat
+    lng_temp = lng
+    Location.new(lat: lat_temp, lng: lng_temp) if lat_temp && lng_temp
   end
 
   sig { returns(T::Hash[String, T.untyped]) }

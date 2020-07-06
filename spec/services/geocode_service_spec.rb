@@ -12,14 +12,14 @@ describe GeocodeService do
   end
   # This point is 500m away from point0 with the same found address
   let(:point500) do
-    p = point0.endpoint(0, 500)
+    p = point0.endpoint(0.0, 500.0)
     GeocodedLocation.new(
       lat: p.lat, lng: p.lng, suburb: point0.suburb, state: point0.state,
       postcode: point0.postcode, full_address: point0.full_address
     )
   end
   let(:point50) do
-    p = point0.endpoint(0, 50)
+    p = point0.endpoint(0.0, 50.0)
     GeocodedLocation.new(
       lat: p.lat, lng: p.lng, suburb: point0.suburb, state: point0.state,
       postcode: point0.postcode, full_address: point0.full_address

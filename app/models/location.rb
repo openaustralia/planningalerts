@@ -1,21 +1,30 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class Location
-  attr_accessor :lat, :lng
+  extend T::Sig
 
+  sig { returns(Float) }
+  attr_accessor :lat
+
+  sig { returns(Float) }
+  attr_accessor :lng
+
+  sig { params(lat: Float, lng: Float).void }
   def initialize(lat:, lng:)
     @lat = lat
     @lng = lng
   end
 
   # Value returned is in metres
+  sig { params(loc: Location).returns(Float) }
   def distance_to(loc)
     loc1 = Geokit::LatLng.new(lat, lng)
     loc2 = Geokit::LatLng.new(loc.lat, loc.lng)
     loc1.distance_to(loc2, units: :kms) * 1000.0
   end
 
+  sig { params(loc: Location).returns(Float) }
   def heading_to(loc)
     loc1 = Geokit::LatLng.new(lat, lng)
     loc2 = Geokit::LatLng.new(loc.lat, loc.lng)
@@ -23,12 +32,14 @@ class Location
   end
 
   # Distance given is in metres
+  sig { params(bearing: Float, distance: Float).returns(Location) }
   def endpoint(bearing, distance)
     loc = Geokit::LatLng.new(lat, lng)
     p = loc.endpoint(bearing, distance / 1000.0, units: :kms)
     Location.new(lat: p.lat, lng: p.lng)
   end
 
+  sig { returns(String) }
   def to_s
     "#{lat},#{lng}"
   end

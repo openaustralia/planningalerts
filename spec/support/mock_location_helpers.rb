@@ -30,9 +30,9 @@ module MockLocationHelpers
       GeocoderResults.new(
         [
           GeocodedLocation.new(
-            lat: 1,
-            lng: 2,
-            suburb: nil,
+            lat: 1.0,
+            lng: 2.0,
+            suburb: "Foo",
             state: "VIC",
             postcode: "3885",
             full_address: "Bruce Rd, VIC 3885"
@@ -40,7 +40,7 @@ module MockLocationHelpers
           GeocodedLocation.new(
             lat: 1.1,
             lng: 2.1,
-            suburb: nil,
+            suburb: "Foo",
             state: "NSW",
             postcode: "2042",
             full_address: "Bruce Rd, NSW 2042"

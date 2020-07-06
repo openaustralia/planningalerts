@@ -7,7 +7,7 @@ describe "Location" do
     it "should return results consistent with endpoint method" do
       loc1 = Location.new(lat: -33.772609, lng: 150.624263)
       # 500 metres NE
-      loc2 = loc1.endpoint(45, 500)
+      loc2 = loc1.endpoint(45.0, 500.0)
       expect(loc1.distance_to(loc2)).to be_within(0.1).of(500)
     end
 
@@ -22,7 +22,7 @@ describe "Location" do
     it "should return results consistent with endpoint method" do
       loc1 = Location.new(lat: -33.772609, lng: 150.624263)
       # 500 metres NE
-      loc2 = loc1.endpoint(45, 500)
+      loc2 = loc1.endpoint(45.0, 500.0)
       expect(loc1.heading_to(loc2)).to be_within(0.1).of(45)
     end
   end

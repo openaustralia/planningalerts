@@ -310,7 +310,7 @@ describe ApiController do
     end
 
     it "should find recent applications for an authority" do
-      authority = double
+      authority = build(:authority, full_name: "Blue Mountains City Council", state: "NSW")
       result = double
       scope1 = double
       scope2 = double
@@ -319,11 +319,10 @@ describe ApiController do
       expect(authority).to receive(:applications).and_return(scope1)
       expect(scope1).to receive(:includes).and_return(scope2)
       expect(scope2).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
-      expect(authority).to receive(:full_name_and_state).and_return("Blue Mountains City Council")
 
       get :authority, params: { key: user.api_key, format: "rss", authority_id: "blue_mountains" }
       expect(assigns[:applications]).to eq(result)
-      expect(assigns[:description]).to eq("Recent applications from Blue Mountains City Council")
+      expect(assigns[:description]).to eq("Recent applications from Blue Mountains City Council, NSW")
     end
   end
 
