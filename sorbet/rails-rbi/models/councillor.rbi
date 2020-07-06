@@ -80,10 +80,10 @@ module Councillor::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def party?; end
 
-  sig { returns(T.nilable(String)) }
+  sig { returns(String) }
   def popolo_id; end
 
-  sig { params(value: T.nilable(T.any(String, Symbol))).void }
+  sig { params(value: T.any(String, Symbol)).void }
   def popolo_id=(value); end
 
   sig { returns(T::Boolean) }

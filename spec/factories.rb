@@ -141,6 +141,7 @@ FactoryBot.define do
   factory :councillor do
     name { "Louise Councillor" }
     email { "louise@council.state.gov" }
+    popolo_id { "louise_councillor" }
     association :authority
   end
 

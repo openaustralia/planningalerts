@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_02_052930) do
+ActiveRecord::Schema.define(version: 2020_07_06_113243) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -153,7 +153,7 @@ ActiveRecord::Schema.define(version: 2020_07_02_052930) do
     t.datetime "updated_at", null: false
     t.string "email", null: false
     t.integer "authority_id", null: false
-    t.string "popolo_id"
+    t.string "popolo_id", null: false
     t.boolean "current", default: true, null: false
     t.index ["authority_id"], name: "fk_rails_d8c8595037"
   end
