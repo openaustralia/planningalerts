@@ -46,9 +46,7 @@ class Alert < ApplicationRecord
 
   sig { returns(T.nilable(Location)) }
   def location
-    lat_temp = lat
-    lng_temp = lng
-    Location.new(lat: lat_temp, lng: lng_temp) if lat_temp && lng_temp
+    Location.build(lat: lat, lng: lng)
   end
 
   # Applications that have been initially scraped since the last time the user was sent an alert
