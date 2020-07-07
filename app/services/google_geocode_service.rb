@@ -1,11 +1,15 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class GoogleGeocodeService < ApplicationService
+  extend T::Sig
+
+  sig { params(address: String).void }
   def initialize(address)
     @address = address
   end
 
+  sig { returns(GeocoderResults) }
   def call
     return error("Please enter a street address") if address == ""
 
@@ -74,13 +78,16 @@ class GoogleGeocodeService < ApplicationService
 
   private
 
+  sig { returns(String) }
   attr_reader :address
 
+  sig { params(text: String).returns(GeocoderResults) }
   def error(text)
     GeocoderResults.new([], text)
   end
 
   # Extract component by type for a particular result
+  sig { params(result: T::Hash[String, T.untyped], type: String).returns(T.untyped) }
   def component(result, type)
     result["address_components"].find { |c| c["types"].include?(type) }
   end

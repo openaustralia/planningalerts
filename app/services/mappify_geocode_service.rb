@@ -1,12 +1,16 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 # Experiment using the mappify.io geocoder (which uses GNAF)
 class MappifyGeocodeService < ApplicationService
+  extend T::Sig
+
+  sig { params(address: String).void }
   def initialize(address)
     @address = address
   end
 
+  sig { returns(GeocoderResults) }
   def call
     # Using the mappify autocomplete API because that supports using a single
     # unformatted text field as input while the geocoding api requires the
@@ -35,5 +39,6 @@ class MappifyGeocodeService < ApplicationService
 
   private
 
+  sig { returns(String) }
   attr_reader :address
 end

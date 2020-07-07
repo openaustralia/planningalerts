@@ -1,11 +1,22 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class LogApiCallService < ApplicationService
+  extend T::Sig
+
   # If you're deploying big database changes you can flip this and commit
   # so that API calls aren't blocked by your migration
   LOGGING_ENABLED = true
 
+  sig do
+    params(
+      api_key: String,
+      ip_address: String,
+      query: String,
+      user_agent: String,
+      time: Time
+    ).void
+  end
   def initialize(api_key:, ip_address:, query:, user_agent:, time:)
     @api_key = api_key
     @ip_address = ip_address
@@ -14,6 +25,7 @@ class LogApiCallService < ApplicationService
     @time = time
   end
 
+  sig { void }
   def call
     # Marking as T.unsafe to avoid complaining about unreachable code
     return unless T.unsafe(LOGGING_ENABLED)
@@ -21,13 +33,27 @@ class LogApiCallService < ApplicationService
     # Lookup the api key if there is one
     user = User.find_by(api_key: api_key) if api_key.present?
     # TODO: Also log whether this user is a commercial user
-    log_to_elasticsearch(user)
+    log_to_elasticsearch(T.must(user))
   end
 
   private
 
-  attr_reader :api_key, :ip_address, :query, :user_agent, :time
+  sig { returns(String) }
+  attr_reader :api_key
 
+  sig { returns(String) }
+  attr_reader :ip_address
+
+  sig { returns(String) }
+  attr_reader :query
+
+  sig { returns(String) }
+  attr_reader :user_agent
+
+  sig { returns(Time) }
+  attr_reader :time
+
+  sig { params(user: User).void }
   def log_to_elasticsearch(user)
     ElasticSearchClient&.index(
       index: elasticsearch_index(time),
@@ -50,6 +76,7 @@ class LogApiCallService < ApplicationService
     )
   end
 
+  sig { params(time: Time).returns(String) }
   def elasticsearch_index(time)
     # Put all data for a particular month (in UTC) in its own index
     time_as_text = time.utc.strftime("%Y.%m")

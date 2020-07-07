@@ -1,14 +1,18 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 # Sends out a bunch of email alerts and
 # records the batch being sent out and updates the global statistics
 class ProcessAlertAndRecordStatsService < ApplicationService
+  extend T::Sig
+
+  sig { params(alert_id: Integer).void }
   def initialize(alert_id:)
     @alert_id = alert_id
   end
 
   # TODO: Also include no_replies in stats
+  sig { void }
   def call
     alert = Alert.find(alert_id)
     no_emails, no_applications, no_comments, no_replies = ProcessAlertService.call(alert: alert)
@@ -31,5 +35,6 @@ class ProcessAlertAndRecordStatsService < ApplicationService
 
   private
 
+  sig { returns(Integer) }
   attr_reader :alert_id
 end
