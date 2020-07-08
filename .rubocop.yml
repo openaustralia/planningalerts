@@ -63,7 +63,6 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Enabled: false
 
-# TODO: Enable the following when we can
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
 
