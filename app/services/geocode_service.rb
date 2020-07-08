@@ -16,9 +16,7 @@ class GeocodeService < ApplicationService
     google_result = GoogleGeocodeService.call(address)
     mappify_result = MappifyGeocodeService.call(address)
 
-    if results_are_different(google_result, mappify_result)
-      record_in_database(google_result, mappify_result)
-    end
+    record_in_database(google_result, mappify_result) if results_are_different(google_result, mappify_result)
     google_result
   end
 
