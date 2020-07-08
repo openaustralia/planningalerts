@@ -268,7 +268,7 @@ describe Alert do
 
         context "One application has an updated location (way off in the distance)" do
           before(:each) do
-            p = alert.location.endpoint(0, 10000)
+            p = alert.location.endpoint(0.0, 10000.0)
             CreateOrUpdateApplicationService.call(
               authority: app2.authority,
               council_reference: app2.council_reference,
