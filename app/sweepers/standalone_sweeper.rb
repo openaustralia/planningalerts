@@ -1,12 +1,13 @@
-# typed: ignore
+# typed: true
 # frozen_string_literal: true
 
 # Workaround for ActionController::Caching::Sweeper not getting defined early enough
 require "rails/observers/action_controller/caching/sweeper"
 
 class StandaloneSweeper < ActionController::Caching::Sweeper
-  StandaloneSweeperInclude = Rails.application.routes.url_helpers
-  include StandaloneSweeperInclude
+  # GeneratedUrlHelpers is provided by sorbet-rails as a drop-in replacement for
+  # Rails.application.routes.url_helpers
+  include GeneratedUrlHelpers
 
   protected
 

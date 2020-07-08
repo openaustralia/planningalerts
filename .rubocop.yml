@@ -98,7 +98,3 @@ Sorbet/FalseSigil:
     - db/seeds.rb
     - lib/tasks/*.rake
     - config.ru
-    # TODO: Remove the exclusions below as soon as we can
-    - app/sweepers/standalone_sweeper.rb
-    - app/forms/site_setting_form.rb
-    - app/services/generate_sitemap_service.rb

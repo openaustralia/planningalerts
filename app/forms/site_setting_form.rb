@@ -1,13 +1,13 @@
-# typed: ignore
+# typed: true
 # frozen_string_literal: true
 
 class SiteSettingForm
   include ActiveModel::Model
-  SiteSettingFormInclude = Virtus.model
-  include SiteSettingFormInclude
+  # See https://sorbet.org/docs/error-reference#4002
+  T.unsafe(self).include Virtus.model
 
-  attribute :streetview_in_emails_enabled, Boolean
-  attribute :streetview_in_app_enabled, Boolean
+  attribute :streetview_in_emails_enabled, Virtus::Attribute::Boolean
+  attribute :streetview_in_app_enabled, Virtus::Attribute::Boolean
 
   # If called without parameters will initialise with the current site settings
   def initialize(params = nil)
