@@ -265,6 +265,24 @@ describe Alert do
             expect(alert.recent_new_applications).to contain_exactly(app1, app2, app3)
           end
         end
+
+        context "One application has an updated location (way off in the distance)" do
+          before(:each) do
+            p = alert.location.endpoint(0, 10000)
+            CreateOrUpdateApplicationService.call(
+              authority: app2.authority,
+              council_reference: app2.council_reference,
+              attributes: {
+                lat: p.lat,
+                lng: p.lng
+              }
+            )
+          end
+
+          it "should not include the application with the updated address" do
+            expect(alert.recent_new_applications).to contain_exactly(app1, app3)
+          end
+        end
       end
 
       context "last sent an alert 5 days ago" do
