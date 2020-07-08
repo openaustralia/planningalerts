@@ -4,3 +4,5 @@
 spec/
 --ignore
 db/
+--ignore
+vendor/
