@@ -55,14 +55,15 @@ class Alert < ApplicationRecord
   sig { returns(Application::ActiveRecord_Relation) }
   def recent_new_applications
     Application.with_first_version
-               .order("date_scraped DESC")
+               .with_current_version
+               .order("application_versions.date_scraped DESC")
                .near(
                  [lat, lng], radius_km,
                  units: :km,
-                 latitude: "application_versions.lat",
-                 longitude: "application_versions.lng"
+                 latitude: "current_versions_applications.lat",
+                 longitude: "current_versions_applications.lng"
                )
-               .where("date_scraped > ?", cutoff_time)
+               .where("application_versions.date_scraped > ?", cutoff_time)
   end
 
   # Applications in the area of interest which have new comments made since we were last alerted
