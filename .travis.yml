@@ -14,6 +14,11 @@ before_script:
 after_script:
   - ./cc-test-reporter -d after-build -t simplecov --exit-code $TRAVIS_TEST_RESULT
 
+script:
+  - rake
+  # Also fail if any static type checking fails
+  - srb
+
 services:
   - mysql
   - redis
