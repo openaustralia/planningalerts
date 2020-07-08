@@ -1,4 +1,5 @@
 # typed: true
+# frozen_string_literal: true
 
 # This is a horrible hack
 module EmailConfirmable
