@@ -118,4 +118,3 @@ Sorbet/TrueSigil:
     - app/admin/*.rb
     - app/controllers/*.rb
     - app/controllers/admin/site_settings_controller.rb
-    - app/forms/add_comment.rb
