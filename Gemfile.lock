@@ -482,6 +482,8 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 0.82.0)
+    rubocop-sorbet (0.4.0)
+      rubocop
     ruby-progressbar (1.10.1)
     rubyzip (2.3.0)
     safe_type (1.1.1)
@@ -692,6 +694,7 @@ DEPENDENCIES
   rspec-rails (~> 3)
   rubocop (= 0.83.0)
   rubocop-rails
+  rubocop-sorbet
   ruby-progressbar
   sanitize
   sass-rails

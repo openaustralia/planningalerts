@@ -3,7 +3,8 @@
 
 class SiteSettingForm
   include ActiveModel::Model
-  include Virtus.model
+  SiteSettingFormInclude = Virtus.model
+  include SiteSettingFormInclude
 
   attribute :streetview_in_emails_enabled, Boolean
   attribute :streetview_in_app_enabled, Boolean

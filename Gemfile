@@ -202,6 +202,7 @@ group :development do
   gem "haml_lint", require: false
   gem "rubocop", "0.83.0", require: false # Using same version as defined in .codeclimate.yml
   gem "rubocop-rails", require: false
+  gem "rubocop-sorbet", require: false
 end
 
 group :production do

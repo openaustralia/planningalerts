@@ -5,7 +5,8 @@
 require "rails/observers/action_controller/caching/sweeper"
 
 class StandaloneSweeper < ActionController::Caching::Sweeper
-  include Rails.application.routes.url_helpers
+  StandaloneSweeperInclude = Rails.application.routes.url_helpers
+  include StandaloneSweeperInclude
 
   protected
 
