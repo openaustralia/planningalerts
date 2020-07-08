@@ -15,9 +15,9 @@ after_script:
   - ./cc-test-reporter -d after-build -t simplecov --exit-code $TRAVIS_TEST_RESULT
 
 script:
-  - rake
+  - bundle exec rake
   # Also fail if any static type checking fails
-  - srb
+  - bundle exec srb
 
 services:
   - mysql
