@@ -98,3 +98,28 @@ Sorbet/FalseSigil:
     - db/seeds.rb
     - lib/tasks/*.rake
     - config.ru
+
+Sorbet/TrueSigil:
+  Enabled: true
+  Exclude:
+    - spec/**/*.rb
+    - db/seeds.rb
+    - lib/tasks/*.rake
+    - config.ru
+    - Capfile
+    - Gemfile
+    - Guardfile
+    - Rakefile
+    # TODO: Remove these exclusions as soon as we can
+    - app/admin/*.rb
+    - app/controllers/*.rb
+    - app/controllers/admin/site_settings_controller.rb
+    - app/forms/add_comment.rb
+    - app/models/concerns/email_confirmable.rb
+    - app/services/application_service.rb
+    - app/sweepers/application_sweeper.rb
+    - app/sweepers/authority_sweeper.rb
+    - app/sweepers/stat_sweeper.rb
+    - app/themes/standard/views/comments/index.js.rabl
+    - app/themes/standard/views/comments/index.rss.builder
+    - experiments/metrics/alert_signup.rb
