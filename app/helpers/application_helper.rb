@@ -69,6 +69,7 @@ module ApplicationHelper
       { name: "Andrew Harvey", email_md5: "7284ad488e18a2b052a9c7b8fe1e3922", github: "andrewharvey" },
       { name: "Andrew Perry", email_md5: "7d329af0dcfe18c8797f542938286e46", github: "andrewperry" },
       { name: "Ben M", email_md5: "a99b7918f974feb902e89bb613b32991", github: "" },
+      { name: "Billy Kwong", email_md5: "a99b7918f974feb902e89bb613b32991", github: "tuppa" },
       { name: "Brian Zhang", email_md5: "dfa3cec311a6ac281bdd0f05f7b2839f", github: "" },
       { name: "Chris Nilsson", email_md5: "61aad7aa6e8cff40e22f420015d5aee9", github: "otherchirps" },
       { name: "Christopher Lam", email_md5: "9daa06c4242ab7dcb9868a54d38a0a16", github: "" },
