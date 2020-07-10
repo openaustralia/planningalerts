@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_05_060050) do
+ActiveRecord::Schema.define(version: 2020_07_06_113243) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(version: 2019_06_05_060050) do
   create_table "authorities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "full_name", limit: 200, null: false
     t.string "short_name", limit: 100, null: false
-    t.boolean "disabled"
-    t.string "state", limit: 20
+    t.boolean "disabled", null: false
+    t.string "state", limit: 20, null: false
     t.string "email"
     t.text "last_scraper_run_log"
     t.string "morph_name"
@@ -135,25 +135,25 @@ ActiveRecord::Schema.define(version: 2019_06_05_060050) do
 
   create_table "councillor_contributions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "contributor_id"
-    t.integer "authority_id"
+    t.integer "authority_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "source"
-    t.boolean "reviewed", default: false
-    t.boolean "accepted", default: false
+    t.boolean "reviewed", default: false, null: false
+    t.boolean "accepted", default: false, null: false
     t.index ["authority_id"], name: "fk_rails_b23f89eb2a"
     t.index ["contributor_id"], name: "fk_rails_7fd8de62d1"
   end
 
   create_table "councillors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "image_url"
     t.string "party"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "email", null: false
     t.integer "authority_id", null: false
-    t.string "popolo_id"
+    t.string "popolo_id", null: false
     t.boolean "current", default: true, null: false
     t.index ["authority_id"], name: "fk_rails_d8c8595037"
   end

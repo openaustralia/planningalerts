@@ -1,18 +1,23 @@
+# typed: strict
 # frozen_string_literal: true
 
 class CreateOrUpdateApplicationService < ApplicationService
+  extend T::Sig
+
+  sig { params(authority: Authority, council_reference: String, attributes: T::Hash[Symbol, T.untyped]).void }
   def initialize(
     authority:, council_reference:, attributes:
   )
     @authority = authority
     @council_reference = council_reference
-    @attributes = attributes.stringify_keys
+    @attributes = T.let(attributes.stringify_keys, T::Hash[String, T.untyped])
     # TODO: Do some sanity checking on the keys in attributes
     # TODO: Make sure that authority_id and council_reference are not
     # keys in attributes
   end
 
   # Returns created or updated application
+  sig { returns(Application) }
   def call
     Application.transaction do
       # First check if record already exists or create a new one if it doesn't
@@ -26,8 +31,16 @@ class CreateOrUpdateApplicationService < ApplicationService
 
   private
 
-  attr_reader :authority, :council_reference, :attributes
+  sig { returns(Authority) }
+  attr_reader :authority
 
+  sig { returns(String) }
+  attr_reader :council_reference
+
+  sig { returns(T::Hash[String, T.untyped]) }
+  attr_reader :attributes
+
+  sig { params(application: Application).void }
   def create_version(application)
     previous_version = application.current_version
     new_version = ApplicationVersion.build_version(

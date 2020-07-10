@@ -1,4 +1,6 @@
-require: rubocop-rails
+require:
+  - rubocop-rails
+  - rubocop-sorbet
 
 AllCops:
   TargetRailsVersion: 5.0
@@ -9,6 +11,7 @@ AllCops:
       - config/initializers/*
       - config/environments/*
       - bin/*
+      - vendor/**/*
 
 # Disabling warnings about line length because it's so common through
 # the codebase currently. It would be good to fix as it would make things
@@ -61,7 +64,6 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Enabled: false
 
-# TODO: Enable the following when we can
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
 
@@ -88,3 +90,30 @@ Style/HashTransformValues:
 
 Style/SlicingWithRange:
   Enabled: true
+
+# Sorbet
+
+Sorbet/FalseSigil:
+  Exclude:
+    - spec/**/*.rb
+    - db/seeds.rb
+    - lib/tasks/*.rake
+    - config.ru
+
+Sorbet/TrueSigil:
+  Enabled: true
+  Exclude:
+    - spec/**/*.rb
+    - db/seeds.rb
+    - lib/tasks/*.rake
+    - config.ru
+    - Capfile
+    - Gemfile
+    - Guardfile
+    - Rakefile
+    - app/themes/standard/views/comments/index.js.rabl
+    - app/themes/standard/views/comments/index.rss.builder
+    - experiments/metrics/alert_signup.rb
+    # TODO: Remove these exclusions as soon as we can
+    - app/admin/*.rb
+    - app/controllers/**/*.rb

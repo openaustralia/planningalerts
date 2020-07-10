@@ -1,3 +1,4 @@
+# typed: strict
 # frozen_string_literal: true
 
 require "rss/1.0"
@@ -5,6 +6,9 @@ require "rss/2.0"
 
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  extend T::Sig
+
+  sig { params(options: T::Hash[Symbol, T.untyped]).returns(T::Boolean) }
   def page_matches?(options)
     if options[:action].is_a?(Array)
       options[:action].any? { |a| current_page?(controller: options[:controller], action: a) }
@@ -13,10 +17,12 @@ module ApplicationHelper
     end
   end
 
+  sig { params(options: T::Hash[Symbol, T.untyped], block: T.untyped).returns(T.untyped) }
   def li_selected(options, &block)
     content_tag(:li, capture(&block), class: ("selected" if page_matches?(options)))
   end
 
+  sig { params(url: String, block: T.untyped).returns(T.untyped) }
   def nav_item(url, &block)
     active = current_page?(url)
     body = capture(&block)
@@ -25,6 +31,7 @@ module ApplicationHelper
                 class: ["nav-item", ("active" if active)])
   end
 
+  sig { params(meters: Float).returns(String) }
   def meters_in_words(meters)
     if meters < 1000
       "#{significant_figure_remove_trailing_zero(meters, 2)} m"
@@ -33,6 +40,7 @@ module ApplicationHelper
     end
   end
 
+  sig { params(value: Float, sig_figs: Integer).returns(T.untyped) }
   def significant_figure_remove_trailing_zero(value, sig_figs)
     text = significant_figure(value, sig_figs).to_s
     if text [-2..] == ".0"
@@ -43,21 +51,30 @@ module ApplicationHelper
   end
 
   # Round the number a to s significant figures
+  sig { params(value: Float, sig_figs: Integer).returns(Float) }
   def significant_figure(value, sig_figs)
     if value.positive?
-      m = 10**(Math.log10(value).ceil - sig_figs)
-      ((value.to_f / m).round * m).to_f
+      a = Math.log10(value).ceil - sig_figs
+      if a.negative?
+        m = T.cast(10**-a, Integer)
+        (value.to_f * m).round.to_f / m
+      else
+        m = T.cast(10**a, Integer)
+        (value.to_f / m).round.to_f * m
+      end
     elsif value.negative?
       -significant_figure(-value, sig_figs)
     else
-      0
+      0.0
     end
   end
 
+  sig { params(value_in_km: Float).returns(String) }
   def km_in_words(value_in_km)
     meters_in_words(value_in_km * 1000)
   end
 
+  sig { returns(T::Array[T::Hash[Symbol, String]]) }
   def contributors
     # Keeping all the names in alphabetical order by first name just so it's easier
     # to find people and it's less likely that we'll have accidental duplicates
@@ -107,6 +124,7 @@ module ApplicationHelper
     ]
   end
 
+  sig { params(contributor: T::Hash[Symbol, String]).returns(String) }
   def contributor_profile_url(contributor)
     if contributor[:github].blank?
       params = {
@@ -119,6 +137,7 @@ module ApplicationHelper
     end
   end
 
+  sig { params(html: String).returns(String) }
   def our_sanitize(html)
     # Using sanitize gem here because it also adds rel="nofollow" to links automatically
     # which reduces "SEO" spam
@@ -131,10 +150,12 @@ module ApplicationHelper
     # rubocop:enable Rails/OutputSafety
   end
 
+  sig { params(params: T::Hash[Symbol, String]).returns(String) }
   def facebook_share_url(params)
     "https://www.facebook.com/sharer/sharer.php?#{params.to_query}"
   end
 
+  sig { params(params: T::Hash[Symbol, String]).returns(String) }
   def twitter_share_url(params)
     "https://twitter.com/intent/tweet?#{params.to_query}"
   end

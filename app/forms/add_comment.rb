@@ -1,8 +1,10 @@
+# typed: true
 # frozen_string_literal: true
 
 # Comment form object
 class AddComment
   include ActiveModel::Model
+  extend ActiveModel::Validations::ClassMethods
 
   attr_accessor(
     :name,

@@ -1,14 +1,19 @@
+# typed: strict
 # frozen_string_literal: true
 
 # Process email alert and send out an email if necessary.
 # Returns number of applications and comments sent.
 class ProcessAlertService < ApplicationService
+  extend T::Sig
+
+  sig { params(alert: Alert).void }
   def initialize(alert:)
     @alert = alert
   end
 
+  sig { returns([Integer, Integer, Integer, Integer]) }
   def call
-    applications = alert.recent_new_applications
+    applications = alert.recent_new_applications.to_a
     comments = alert.new_comments
     replies = alert.new_replies
 
@@ -35,5 +40,6 @@ class ProcessAlertService < ApplicationService
 
   private
 
+  sig { returns(Alert) }
   attr_reader :alert
 end

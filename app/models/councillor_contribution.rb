@@ -1,20 +1,22 @@
+# typed: true
 # frozen_string_literal: true
 
 require "csv"
 class CouncillorContribution < ApplicationRecord
   belongs_to :contributor, optional: true
-  belongs_to :authority, optional: true
+  belongs_to :authority
   has_many :suggested_councillors, dependent: :restrict_with_exception, inverse_of: :councillor_contribution
   accepts_nested_attributes_for :suggested_councillors, reject_if: :all_blank
   accepts_nested_attributes_for :contributor, reject_if: :all_blank
   validates_associated :suggested_councillors
 
   def attribution(with_email: false)
-    if contributor
+    c = contributor
+    if c
       if with_email
-        "#{contributor.name} ( #{contributor.email} )"
+        "#{c.name} ( #{c.email} )"
       else
-        contributor.name
+        c.name
       end
     else
       "Anonymous"

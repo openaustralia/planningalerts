@@ -1,6 +1,12 @@
+# typed: strict
 # frozen_string_literal: true
 
 module AtdisHelper
+  extend T::Sig
+
+  include ApplicationsHelper
+
+  sig { params(value: T.untyped).returns(String) }
   def attribute_value(value)
     if value.is_a?(Array)
       safe_join(value.map { |v| attribute_value(v) })
@@ -8,7 +14,7 @@ module AtdisHelper
       render partial: "attribute_table", locals: { model: value }
     elsif value.is_a?(DateTime)
       content_tag(:div, time_tag(value) + " (" + time_ago_in_words(value) + " ago)", class: "value")
-    elsif value.is_a?(URI)
+    elsif value.is_a?(URI::HTTP)
       content_tag(:div, link_to(value.to_s, value.to_s), class: "value")
     elsif value.respond_to?(:x) && value.respond_to?(:y)
       content_tag(:div, h(value) + content_tag(:p, google_static_map_lat_lng(value.y, value.x, zoom: 12, size: "300x150")), class: "value")

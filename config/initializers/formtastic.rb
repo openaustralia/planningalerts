@@ -1,3 +1,4 @@
+# typed: strict
 # frozen_string_literal: true
 
 # Set the default text field size when input is a string. Default is nil.

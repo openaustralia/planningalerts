@@ -213,10 +213,10 @@ describe Alert do
     let(:alert) { create(:alert, last_sent: last_sent, radius_meters: radius_meters) }
 
     # Position test application around the point of the alert
-    let(:p1) { alert.location.endpoint(0, 501) } # 501 m north of alert
-    let(:p2) { alert.location.endpoint(0, 499) } # 499 m north of alert
-    let(:p3) { alert.location.endpoint(45, 499 * Math.sqrt(2)) } # Just inside the NE corner of a box centred on the alert (of size 2 * 499m)
-    let(:p4) { alert.location.endpoint(90, 499) } # 499 m east of alert
+    let(:p1) { alert.location.endpoint(0.0, 501.0) } # 501 m north of alert
+    let(:p2) { alert.location.endpoint(0.0, 499.0) } # 499 m north of alert
+    let(:p3) { alert.location.endpoint(45.0, 499 * Math.sqrt(2)) } # Just inside the NE corner of a box centred on the alert (of size 2 * 499m)
+    let(:p4) { alert.location.endpoint(90.0, 499.0) } # 499 m east of alert
 
     let!(:app1) { create(:geocoded_application, lat: p1.lat, lng: p1.lng, date_scraped: 5.minutes.ago) }
     let!(:app2) { create(:geocoded_application, lat: p2.lat, lng: p2.lng, date_scraped: 12.hours.ago) }
@@ -268,7 +268,7 @@ describe Alert do
 
         context "One application has an updated location (way off in the distance)" do
           before(:each) do
-            p = alert.location.endpoint(0, 10000)
+            p = alert.location.endpoint(0.0, 10000.0)
             CreateOrUpdateApplicationService.call(
               authority: app2.authority,
               council_reference: app2.council_reference,
@@ -311,7 +311,7 @@ describe Alert do
 
   describe "#new_comments" do
     let(:alert) { create(:alert, address: address, radius_meters: 2000) }
-    let(:p1) { alert.location.endpoint(0, 501) } # 501 m north of alert
+    let(:p1) { alert.location.endpoint(0.0, 501.0) } # 501 m north of alert
     let(:application) { create(:application, lat: p1.lat, lng: p1.lng, suburb: "", state: "", postcode: "") }
 
     it "sees a new comment when there are new comments on an application" do
@@ -411,8 +411,8 @@ describe Alert do
     let(:far_away_application) do
       # 5001 m north of alert
       create(:application,
-             lat: alert.location.endpoint(0, 5001).lat,
-             lng: alert.location.endpoint(0, 5001).lng,
+             lat: alert.location.endpoint(0.0, 5001.0).lat,
+             lng: alert.location.endpoint(0.0, 5001.0).lng,
              address: address,
              suburb: "Glenbrook",
              state: "NSW",
@@ -499,7 +499,7 @@ describe Alert do
 
     context "when there is a new reply far away" do
       it "should not return the application it belongs to" do
-        far_away = alert.location.endpoint(0, 5001) # 5001 m north of alert
+        far_away = alert.location.endpoint(0.0, 5001.0) # 5001 m north of alert
         application = create(:application,
                              lat: far_away.lat,
                              lng: far_away.lng,

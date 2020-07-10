@@ -5,7 +5,7 @@ require "spec_helper"
 describe QueueUpAlertsService do
   context "with no active alerts" do
     it "should log some useful messages" do
-      logger = double
+      logger = Logger.new(STDOUT)
       expect(logger).to receive(:info).with("Checking 0 active alerts")
       expect(logger).to receive(:info).with("Splitting mailing for the next 24 hours - checks an alert roughly every 86400 seconds")
       expect(logger).to receive(:info).with("Mailing jobs for the next 24 hours queued")
@@ -22,7 +22,7 @@ describe QueueUpAlertsService do
     end
 
     it "should log some messages" do
-      logger = double
+      logger = Logger.new(STDOUT)
       expect(logger).to receive(:info).with("Checking 2 active alerts")
       expect(logger).to receive(:info).with("Splitting mailing for the next 24 hours - checks an alert roughly every 43200 seconds")
       expect(logger).to receive(:info).with("Mailing jobs for the next 24 hours queued")
@@ -31,7 +31,7 @@ describe QueueUpAlertsService do
 
     it "should queue up batches" do
       # Silent logger
-      logger = double
+      logger = Logger.new(STDOUT)
       allow(logger).to receive(:info)
 
       job = double

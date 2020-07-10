@@ -1,9 +1,10 @@
+# typed: true
 # frozen_string_literal: true
 
 class GenerateSitemapService < ApplicationService
   attr_reader :logger
 
-  include Rails.application.routes.url_helpers
+  include GeneratedUrlHelpers
 
   def initialize(logger: Logger.new(STDOUT))
     @logger = logger

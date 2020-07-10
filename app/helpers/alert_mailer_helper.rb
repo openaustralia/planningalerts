@@ -1,16 +1,27 @@
+# typed: strict
 # frozen_string_literal: true
 
 module AlertMailerHelper
+  extend T::Sig
+
+  sig { params(text: String).returns(String) }
   def capitalise_initial_character(text)
-    text[0].upcase + text[1..]
+    first = text[0]
+    if first
+      first.upcase + T.must(text[1..])
+    else
+      ""
+    end
   end
 
+  sig { returns(T::Hash[Symbol, String]) }
   def base_tracking_params
     { utm_source: "alerts", utm_medium: "email" }
   end
 
+  sig { params(id: T.nilable(Integer)).returns(String) }
   def application_url_with_tracking(id: nil)
-    application_url(
+    T.unsafe(self).application_url(
       base_tracking_params.merge(
         id: id,
         utm_campaign: "view-application"
@@ -18,8 +29,9 @@ module AlertMailerHelper
     )
   end
 
-  def comment_url_with_tracking(comment: nil)
-    application_url(
+  sig { params(comment: Comment).returns(String) }
+  def comment_url_with_tracking(comment:)
+    T.unsafe(self).application_url(
       base_tracking_params.merge(
         id: comment.application.id,
         anchor: "comment#{comment.id}",
@@ -28,8 +40,9 @@ module AlertMailerHelper
     )
   end
 
-  def reply_url_with_tracking(reply: nil)
-    application_url(
+  sig { params(reply: Reply).returns(String) }
+  def reply_url_with_tracking(reply:)
+    T.unsafe(self).application_url(
       base_tracking_params.merge(
         id: reply.comment.application.id,
         anchor: "reply#{reply.id}",
@@ -38,8 +51,9 @@ module AlertMailerHelper
     )
   end
 
+  sig { params(id: T.nilable(Integer)).returns(String) }
   def new_comment_url_with_tracking(id: nil)
-    application_url(
+    T.unsafe(self).application_url(
       base_tracking_params.merge(
         id: id,
         anchor: "add-comment",
@@ -48,8 +62,9 @@ module AlertMailerHelper
     )
   end
 
+  sig { params(alert: Alert).returns(String) }
   def new_donation_url_with_tracking(alert)
-    new_donation_url(
+    T.unsafe(self).new_donation_url(
       base_tracking_params.merge(
         utm_campaign: "donate-from-alert",
         email: alert.email
@@ -57,6 +72,14 @@ module AlertMailerHelper
     )
   end
 
+  sig do
+    params(
+      alert: Alert,
+      applications: T::Array[Application],
+      comments: T::Array[Comment],
+      replies: T::Array[Reply]
+    ).returns(String)
+  end
   def subject(alert, applications, comments, replies)
     applications_text = pluralize(applications.size, "new planning application") if applications.any?
     comments_text = pluralize(comments.size, "new comment") if comments.any?

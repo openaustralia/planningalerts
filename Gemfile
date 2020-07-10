@@ -138,6 +138,15 @@ gem "counter_culture"
 # Make it easier for people using the API by setting CORS headers
 gem "rack-cors"
 
+# For type checking
+gem "sorbet-rails"
+gem "sorbet-runtime"
+
+# Only including these to keep sorbet happy
+# TODO: Figure out how to remove them
+gem "cancan"
+gem "pundit"
+
 group :test do
   gem "capybara"
   gem "climate_control"
@@ -159,6 +168,9 @@ group :test do
 end
 
 group :development do
+  # For static type checking
+  gem "sorbet"
+
   # For guard and associated bits
   gem "growl"
   gem "guard"
@@ -190,6 +202,7 @@ group :development do
   gem "haml_lint", require: false
   gem "rubocop", "0.83.0", require: false # Using same version as defined in .codeclimate.yml
   gem "rubocop-rails", require: false
+  gem "rubocop-sorbet", require: false
 end
 
 group :production do

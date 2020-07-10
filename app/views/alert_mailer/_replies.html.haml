@@ -4,6 +4,6 @@
   - else
     The following <strong>new replies by local councillors</strong> have
   been posted on comments
-  within #{meters_in_words(alert.radius_meters)} of
+  within #{meters_in_words(alert.radius_meters.to_f)} of
   %strong= alert.address
 = render partial: "reply", collection: replies

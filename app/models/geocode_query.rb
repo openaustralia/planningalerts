@@ -1,3 +1,4 @@
+# typed: true
 # frozen_string_literal: true
 
 class GeocodeQuery < ApplicationRecord
@@ -23,13 +24,15 @@ class GeocodeQuery < ApplicationRecord
   end
 
   def average_result
-    average = Location.new(lat: 0, lng: 0)
+    average = Location.new(lat: 0.0, lng: 0.0)
     count = 0
     geocode_results.each do |result|
-      return nil if result.lat.nil? || result.lng.nil?
+      lat = result.lat
+      lng = result.lng
+      return nil if lat.nil? || lng.nil?
 
-      average.lat += result.lat
-      average.lng += result.lng
+      average.lat += lat
+      average.lng += lng
       count += 1
     end
     average.lat /= count

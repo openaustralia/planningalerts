@@ -1,3 +1,4 @@
+# typed: true
 # frozen_string_literal: true
 
 require "rest-client"
@@ -52,7 +53,8 @@ class Comment < ApplicationRecord
   end
 
   def recipient_display_name
-    to_councillor? ? councillor.prefixed_name : application.authority.full_name
+    c = councillor
+    c ? c.prefixed_name : application.authority.full_name
   end
 
   def writeitinstance
@@ -70,7 +72,7 @@ class Comment < ApplicationRecord
 
     # TODO: This should be done in the writeit-rails gem
     api_response = RestClient.get(
-      ENV["WRITEIT_BASE_URL"] + "/api/v1/message/" + writeit_message_id.to_s,
+      T.must(ENV["WRITEIT_BASE_URL"]) + "/api/v1/message/" + writeit_message_id.to_s,
       params: { format: "json",
                 username: writeitinstance.username,
                 api_key: writeitinstance.api_key }

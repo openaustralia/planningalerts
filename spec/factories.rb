@@ -5,6 +5,7 @@ FactoryBot.define do
     sequence(:full_name) { |n| "Acme Local Planning Authority - #{n}" }
     short_name(&:full_name)
     state { "NSW" }
+    disabled { false }
 
     factory :contactable_authority do
       email { "example@authority.gov" }
@@ -140,6 +141,7 @@ FactoryBot.define do
   factory :councillor do
     name { "Louise Councillor" }
     email { "louise@council.state.gov" }
+    popolo_id { "louise_councillor" }
     association :authority
   end
 

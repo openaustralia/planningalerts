@@ -1,12 +1,17 @@
+# typed: strict
 # frozen_string_literal: true
 
 class GeocodeService < ApplicationService
+  extend T::Sig
+
   # Default threshold of 100m
+  sig { params(address: String, threshold: Integer).void }
   def initialize(address, threshold = 100)
     @address = address
     @threshold = threshold
   end
 
+  sig { returns(GeocoderResults) }
   def call
     google_result = GoogleGeocodeService.call(address)
     mappify_result = MappifyGeocodeService.call(address)
@@ -17,8 +22,13 @@ class GeocodeService < ApplicationService
 
   private
 
-  attr_reader :address, :threshold
+  sig { returns(String) }
+  attr_reader :address
 
+  sig { returns(Integer) }
+  attr_reader :threshold
+
+  sig { params(result1: GeocoderResults, result2: GeocoderResults).returns(T::Boolean) }
   def results_are_different(result1, result2)
     # If the geocoder returns an error just treat it like a nil result
     loc1 = result1.error ? nil : result1.top
@@ -28,6 +38,7 @@ class GeocodeService < ApplicationService
     loc1.distance_to(loc2) > threshold
   end
 
+  sig { params(google_result: GeocoderResults, mappify_result: GeocoderResults).void }
   def record_in_database(google_result, mappify_result)
     geocode_query = GeocodeQuery.create!(query: address)
     GeocodeResult.create!(
@@ -38,6 +49,8 @@ class GeocodeService < ApplicationService
     )
   end
 
+  # TODO: Type of attributes?
+  sig { params(result: GeocoderResults).returns(T.untyped) }
   def params_for_result(result)
     result.top&.attributes || {}
   end

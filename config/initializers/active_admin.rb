@@ -1,3 +1,4 @@
+# typed: strict
 # frozen_string_literal: true
 
 ActiveAdmin.setup do |config|

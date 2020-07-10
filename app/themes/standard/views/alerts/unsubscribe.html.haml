@@ -5,7 +5,7 @@
     %p
       You will no longer receive email alerts for any planning applications we find near
       %strong= @alert.address
-      (within #{meters_in_words(@alert.radius_meters)}).
+      (within #{meters_in_words(@alert.radius_meters.to_f)}).
   %p
     If you have unsubscribed because you would like to receive alerts at a different email address, or were getting too many emails,
     = link_to "you could always create a new alert with a new email address, or for a smaller area?",

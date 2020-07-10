@@ -1,20 +1,26 @@
+# typed: strict
 # frozen_string_literal: true
 
 class ImportApplicationsService < ApplicationService
+  extend T::Sig
+
+  sig { params(authority: Authority, scrape_delay: Integer, logger: Logger, morph_api_key: String).void }
   def initialize(authority:, scrape_delay:, logger:, morph_api_key:)
     @authority = authority
-    @start_date = Time.zone.today - scrape_delay
-    @end_date = Time.zone.today
+    @start_date = T.let(Time.zone.today - scrape_delay, Date)
+    @end_date = T.let(Time.zone.today, Date)
     @logger = logger
     @morph_api_key = morph_api_key
   end
 
+  sig { void }
   def call
     time = Benchmark.ms { import_applications_date_range }
     logger.info "Took #{(time / 1000).to_i} s to import applications from #{authority.full_name_and_state}"
   end
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
+  sig { params(url: String, logger: Logger).returns(String) }
   def self.open_url_safe(url, logger)
     RestClient.get(url).body
   rescue StandardError => e
@@ -22,6 +28,7 @@ class ImportApplicationsService < ApplicationService
     nil
   end
 
+  sig { returns(String) }
   def morph_query
     filters = []
     filters << "`authority_label` = '#{authority.scraper_authority_label}'" if authority.scraper_authority_label.present?
@@ -32,9 +39,23 @@ class ImportApplicationsService < ApplicationService
 
   private
 
-  attr_reader :authority, :start_date, :end_date, :morph_api_key, :logger
+  sig { returns(Authority) }
+  attr_reader :authority
+
+  sig { returns(Date) }
+  attr_reader :start_date
+
+  sig { returns(Date) }
+  attr_reader :end_date
+
+  sig { returns(String) }
+  attr_reader :morph_api_key
+
+  sig { returns(Logger) }
+  attr_reader :logger
 
   # Import all the applications for this authority from morph.io
+  sig { void }
   def import_applications_date_range
     count = 0
     error_count = 0
@@ -56,6 +77,7 @@ class ImportApplicationsService < ApplicationService
     logger.info "#{error_count} #{'application'.pluralize(error_count)} errored for #{authority.full_name_and_state} with date from #{start_date} to #{end_date}"
   end
 
+  sig { returns(T::Array[T::Hash[Symbol, T.nilable(T.any(String, Time))]]) }
   def import_data
     text = ImportApplicationsService.open_url_safe(morph_url_for_date_range, logger)
     return [] if text.nil?
@@ -82,6 +104,7 @@ class ImportApplicationsService < ApplicationService
     end
   end
 
+  sig { returns(String) }
   def morph_url_for_date_range
     params = { query: morph_query, key: morph_api_key }
     "https://api.morph.io/#{authority.morph_name}/data.json?#{params.to_query}"

@@ -1,3 +1,4 @@
+# typed: true
 # frozen_string_literal: true
 
 class FormatConstraint
@@ -124,7 +125,7 @@ Rails.application.routes.draw do
   resources :geocode_queries, only: [:index, :show]
 
   post "/authorities/:authority_id/councillor_contributions/new", to: "councillor_contributions#new"
-  patch "/auhtorities/:authority_id/councillor_contributions/add_contributor", to: "councillor_contributions#add_contributor", as: :add_contributor_authority_councillor_contribution
+  patch "/authorities/:authority_id/councillor_contributions/add_contributor", to: "councillor_contributions#add_contributor", as: :add_contributor_authority_councillor_contribution
   post "/authorities/:authority_id/councillor_contributions/source", to: "councillor_contributions#source", as: :add_source_authority_councillor_contribution
   patch "/authorities/:authority_id/councillor_contributions/thank_you", to: "councillor_contributions#thank_you", as: :authority_councillor_contribution_thank_you
 

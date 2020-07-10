@@ -1,6 +1,9 @@
+# typed: strict
 # frozen_string_literal: true
 
 class Application < ApplicationRecord
+  extend T::Sig
+
   searchkick highlight: [:description],
              index_name: "pa_applications_#{ENV['STAGE']}",
              locations: [:location],
@@ -23,6 +26,7 @@ class Application < ApplicationRecord
   scope(:in_past_week, -> { joins(:current_version).where("date_scraped > ?", 7.days.ago) })
   scope(:recent, -> { joins(:current_version).where("date_scraped >= ?", 14.days.ago) })
 
+  sig { returns(T::Hash[String, T.untyped]) }
   def search_data
     # Include version data in what's indexed by searchkick
     attributes.merge(current_version&.search_data || {})
@@ -31,7 +35,7 @@ class Application < ApplicationRecord
   # For the benefit of will_paginate
   cattr_reader :per_page
   # rubocop:disable Style/ClassVars
-  @@per_page = 100
+  @@per_page = T.let(100, Integer)
   # rubocop:enable Style/ClassVars
 
   delegate :info_url, :date_received,
@@ -46,21 +50,25 @@ class Application < ApplicationRecord
   delegate :councillors_available_for_contact, to: :authority
 
   # Providing this for back compatibility in the API
+  sig { returns(NilClass) }
   def comment_url
     nil
   end
 
   # Default values for what we consider nearby and recent
+  sig { returns(Integer) }
   def self.nearby_and_recent_max_distance_km
     2
   end
 
   # Default values for what we consider nearby and recent
+  sig { returns(Integer) }
   def self.nearby_and_recent_max_age_months
     2
   end
 
   # Find applications that are near the current application location and/or recently scraped
+  sig { returns(Application::ActiveRecord_Relation) }
   def find_all_nearest_or_recent
     if location
       nearbys(
