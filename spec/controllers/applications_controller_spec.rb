@@ -63,7 +63,7 @@ describe ApplicationsController do
 
       # TODO: Can this line be removed? It seems to be a duplicate of
       # expectation on final line.
-      expect(Application).to receive(:find).with("1").and_return(application)
+      expect(Application).to receive(:find).with(1).and_return(application)
 
       get :show, params: { id: 1 }
 
