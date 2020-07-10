@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 # frozen_string_literal: true
 
 class ApiController < ApplicationController
@@ -12,69 +12,103 @@ class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token,
                      only: %i[authority suburb_postcode point area date_scraped all]
 
+  class AuthorityParams < T::Struct
+    const :authority_id, String
+  end
+
   def authority
+    typed_params = TypedParams[AuthorityParams].new.extract!(params)
     # TODO: Handle the situation where the authority name isn't found
-    authority = Authority.find_short_name_encoded!(params[:authority_id])
+    authority = Authority.find_short_name_encoded!(typed_params.authority_id)
     api_render(authority.applications, "Recent applications from #{authority.full_name_and_state}")
   end
 
+  class SuburbPostcodeParams < T::Struct
+    const :suburb, T.nilable(String)
+    const :state, T.nilable(String)
+    const :postcode, T.nilable(String)
+  end
+
   def suburb_postcode
+    typed_params = TypedParams[SuburbPostcodeParams].new.extract!(params)
     apps = Application.with_current_version.order("date_scraped DESC")
     descriptions = []
-    if params[:suburb]
-      descriptions << params[:suburb]
-      apps = apps.where(application_versions: { suburb: params[:suburb] })
+    if typed_params.suburb
+      descriptions << typed_params.suburb
+      apps = apps.where(application_versions: { suburb: typed_params.suburb })
     end
-    if params[:state]
-      descriptions << params[:state]
-      apps = apps.where(application_versions: { state: params[:state] })
+    if typed_params.state
+      descriptions << typed_params.state
+      apps = apps.where(application_versions: { state: typed_params.state })
     end
     # TODO: Check that it's a valid postcode (i.e. numerical and four digits)
-    if params[:postcode]
-      descriptions << params[:postcode]
-      apps = apps.where(application_versions: { postcode: params[:postcode] })
+    if typed_params.postcode
+      descriptions << typed_params.postcode
+      apps = apps.where(application_versions: { postcode: typed_params.postcode })
     end
     api_render(apps, "Recent applications in #{descriptions.join(', ')}")
   end
 
+  class PointParams < T::Struct
+    const :radius, T.nilable(Float)
+    const :area_size, T.nilable(Float)
+    const :address, T.nilable(String)
+    const :lat, T.nilable(Float)
+    const :lng, T.nilable(Float)
+  end
+
   def point
-    radius = params[:radius] || params[:area_size] || 2000
-    if params[:address]
-      location = GoogleGeocodeService.call(params[:address]).top
+    typed_params = TypedParams[PointParams].new.extract!(params)
+    radius = typed_params.radius || typed_params.area_size || 2000.0
+    if typed_params.address
+      location = GoogleGeocodeService.call(typed_params.address).top
       if location.nil?
         render_error("could not geocode address", :bad_request)
         return
       end
       location_text = location.full_address
     else
-      location = Location.new(lat: params[:lat].to_f, lng: params[:lng].to_f)
+      location = Location.new(lat: typed_params.lat.to_f, lng: typed_params.lng.to_f)
       location_text = location.to_s
     end
     api_render(
       Application.with_current_version.order("date_scraped DESC").near(
-        [location.lat, location.lng], radius.to_f / 1000,
+        [location.lat, location.lng], radius / 1000,
         units: :km,
         latitude: "application_versions.lat",
         longitude: "application_versions.lng"
       ),
-      "Recent applications within #{help.meters_in_words(radius.to_f)} of #{location_text}"
+      "Recent applications within #{help.meters_in_words(radius)} of #{location_text}"
     )
   end
 
+  class AreaParams < T::Struct
+    const :bottom_left_lat, Float
+    const :bottom_left_lng, Float
+    const :top_right_lat, Float
+    const :top_right_lng, Float
+  end
+
   def area
-    lat0 = params[:bottom_left_lat].to_f
-    lng0 = params[:bottom_left_lng].to_f
-    lat1 = params[:top_right_lat].to_f
-    lng1 = params[:top_right_lng].to_f
+    typed_params = TypedParams[AreaParams].new.extract!(params)
+    lat0 = typed_params.bottom_left_lat
+    lng0 = typed_params.bottom_left_lng
+    lat1 = typed_params.top_right_lat
+    lng1 = typed_params.top_right_lng
     api_render(
       Application.with_current_version.order("date_scraped DESC").where("lat > ? AND lng > ? AND lat < ? AND lng < ?", lat0, lng0, lat1, lng1),
       "Recent applications in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
     )
   end
 
+  class DateScrapedParams < T::Struct
+    const :date_scraped, String
+  end
+
   def date_scraped
+    typed_params = TypedParams[DateScrapedParams].new.extract!(params)
     begin
-      date = Date.parse(params[:date_scraped])
+      date = Date.parse(typed_params.date_scraped)
     rescue ArgumentError => e
       raise e unless e.message == "invalid date"
     end
@@ -86,9 +120,15 @@ class ApiController < ApplicationController
     end
   end
 
+  class AllParams < T::Struct
+    const :since_id, T.nilable(Integer)
+    const :callback, T.nilable(String)
+  end
+
   # Note that this returns results in a slightly different format than the
   # other API calls because the paging is done differently (via scrape time rather than page number)
   def all
+    typed_params = TypedParams[AllParams].new.extract!(params)
     # TODO: Check that params page and v aren't being used
     LogApiCallJob.perform_later(
       api_key: request.query_parameters["key"],
@@ -98,7 +138,7 @@ class ApiController < ApplicationController
       time_as_float: Time.zone.now.to_f
     )
     apps = Application.with_current_version.order("applications.id")
-    apps = apps.where("applications.id > ?", params["since_id"]) if params["since_id"]
+    apps = apps.where("applications.id > ?", typed_params.since_id) if typed_params.since_id
 
     # Max number of records that we'll show
     limit = 1000
@@ -116,7 +156,7 @@ class ApiController < ApplicationController
                                   comment_url date_received on_notice_from
                                   on_notice_to lat lng],
                       include: { authority: { only: [:full_name] } })
-        render json: j, callback: params[:callback], content_type: Mime[:json]
+        render json: j, callback: typed_params.callback, content_type: Mime[:json]
       end
     end
   end
@@ -152,8 +192,13 @@ class ApiController < ApplicationController
     )
   end
 
+  class RequireApiKeyParams < T::Struct
+    const :key, T.nilable(String)
+  end
+
   def require_api_key
-    if params[:key] && User.where(api_key: params[:key], api_disabled: false).exists?
+    typed_params = TypedParams[RequireApiKeyParams].new.extract!(params)
+    if typed_params.key && User.where(api_key: typed_params.key, api_disabled: false).exists?
       # Everything is fine
       return
     end
@@ -175,23 +220,42 @@ class ApiController < ApplicationController
     end
   end
 
+  class AuthenticateBulkApiParams < T::Struct
+    const :key, String
+  end
+
   def authenticate_bulk_api
-    return if User.where(api_key: params[:key], bulk_api: true).exists?
+    typed_params = TypedParams[AuthenticateBulkApiParams].new.extract!(params)
+    return if User.where(api_key: typed_params.key, bulk_api: true).exists?
 
     render_error("no bulk api access", :unauthorized)
   end
 
+  class PerPageParams < T::Struct
+    const :count, T.nilable(Integer)
+  end
+
   def per_page
+    typed_params = TypedParams[PerPageParams].new.extract!(params)
     # Allow to set number of returned applications up to a maximum
-    if params[:count] && params[:count].to_i <= Application.per_page
-      params[:count].to_i
+    count = typed_params.count
+    if count && count <= Application.per_page
+      count
     else
       Application.per_page
     end
   end
 
+  class ApiRenderParams < T::Struct
+    const :page, T.nilable(Integer)
+    const :style, T.nilable(String)
+    const :v, T.nilable(String)
+    const :callback, T.nilable(String)
+  end
+
   def api_render(apps, description)
-    @applications = apps.includes(:authority).paginate(page: params[:page], per_page: per_page)
+    typed_params = TypedParams[ApiRenderParams].new.extract!(params)
+    @applications = apps.includes(:authority).paginate(page: typed_params.page, per_page: per_page)
     @description = description
 
     LogApiCallJob.perform_later(
@@ -204,12 +268,12 @@ class ApiController < ApplicationController
     respond_to do |format|
       # TODO: Move the template over to using an xml builder
       format.rss do
-        render params[:style] == "html" ? "index_html" : "index",
+        render typed_params.style == "html" ? "index_html" : "index",
                format: :rss, layout: false, content_type: Mime[:xml]
       end
       format.js do
         # TODO: Document use of v parameter
-        s = if params[:v] == "2"
+        s = if typed_params.v == "2"
               { application_count: @applications.count, page_count: @applications.total_pages, applications: @applications }
             else
               @applications
@@ -219,7 +283,7 @@ class ApiController < ApplicationController
                                   comment_url date_received on_notice_from
                                   on_notice_to lat lng],
                       include: { authority: { only: [:full_name] } })
-        render json: j, callback: params[:callback], content_type: Mime[:json]
+        render json: j, callback: typed_params.callback, content_type: Mime[:json]
       end
     end
   end
