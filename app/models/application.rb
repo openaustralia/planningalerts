@@ -68,7 +68,7 @@ class Application < ApplicationRecord
   end
 
   # Find applications that are near the current application location and/or recently scraped
-  sig { returns(Application::ActiveRecord_Relation) }
+  sig { returns(T.any(Application::ActiveRecord_Relation, T::Array[Application])) }
   def find_all_nearest_or_recent
     if location
       nearbys(
