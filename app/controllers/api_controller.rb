@@ -2,8 +2,8 @@
 # frozen_string_literal: true
 
 class ApiController < ApplicationController
-  before_action :check_api_parameters, except: %i[old_index howto]
-  before_action :require_api_key, except: %i[old_index howto]
+  before_action :check_api_parameters, except: %i[howto]
+  before_action :require_api_key, except: %i[howto]
   before_action :authenticate_bulk_api, only: %i[all date_scraped]
 
   # This is disabled because at least one commercial user of the API is doing
@@ -118,28 +118,6 @@ class ApiController < ApplicationController
                       include: { authority: { only: [:full_name] } })
         render json: j, callback: params[:callback], content_type: Mime[:json]
       end
-    end
-  end
-
-  def old_index
-    case params[:call]
-    when "address"
-      redirect_to applications_url(format: "rss", address: params[:address], radius: params[:area_size])
-    when "point"
-      redirect_to applications_url(
-        format: "rss", lat: params[:lat], lng: params[:lng],
-        radius: params[:area_size]
-      )
-    when "area"
-      redirect_to applications_url(
-        format: "rss",
-        bottom_left_lat: params[:bottom_left_lat], bottom_left_lng: params[:bottom_left_lng],
-        top_right_lat: params[:top_right_lat], top_right_lng: params[:top_right_lng]
-      )
-    when "authority"
-      redirect_to authority_applications_url(format: "rss", authority_id: Authority.short_name_encoded(params[:authority]))
-    else
-      render plain: "unexpected value for parameter call. Accepted values: address, point, area and authority"
     end
   end
 

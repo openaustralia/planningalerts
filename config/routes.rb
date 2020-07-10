@@ -39,16 +39,6 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  # Redirect old urls
-  get "apihowto.php" => redirect("/api/howto")
-  get "about.php" => redirect("/about")
-  get "faq.php" => redirect("/faq")
-  get "getinvolved.php" => redirect("/getinvolved")
-  # Can't do the redirects in the routing as above because the redirect depends
-  # on the passed parameters
-  get "api.php" => "api#old_index"
-  get "api" => "api#old_index", as: :api_old_index
-
   resources :alerts, only: %i[new create], path_names: { new: "signup" } do
     member do
       get :confirmed
@@ -158,7 +148,7 @@ Rails.application.routes.draw do
   get '/vanity/image'
 
   resources :donations, only: %i[new create]
-  
+
   ## Use the donations form on OAF for now.
   get "donations/new", to: redirect("https://www.oaf.org.au/donate/planningalerts/")
   get "donations/create", to: redirect("https://www.oaf.org.au/donate/planningalerts/")
