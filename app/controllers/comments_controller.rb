@@ -1,20 +1,26 @@
-# typed: false
+# typed: true
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  def index
-    @description = +"Recent comments"
+  class IndexParams < T::Struct
+    const :authority_id, T.nilable(String)
+    const :page, T.nilable(Integer)
+  end
 
-    if params[:authority_id]
-      authority = Authority.find_short_name_encoded!(params[:authority_id])
+  def index
+    typed_params = TypedParams[IndexParams].new.extract!(params)
+    @description = +"Recent comments"
+    authority_id = typed_params.authority_id
+    if authority_id
+      authority = Authority.find_short_name_encoded!(authority_id)
       comments_to_display = authority.comments
       @description << " on applications from #{authority.full_name_and_state}"
     else
       comments_to_display = Comment.all
     end
 
-    @comments = comments_to_display.visible.order("confirmed_at DESC").paginate page: params[:page]
-    @rss = comments_url(params.permit(%i[authority_id page]).merge(format: "rss", page: nil))
+    @comments = comments_to_display.visible.order("confirmed_at DESC").paginate page: typed_params.page
+    @rss = comments_url(typed_params.serialize.merge(format: "rss", page: nil))
 
     respond_to do |format|
       format.html
@@ -23,8 +29,13 @@ class CommentsController < ApplicationController
     end
   end
 
+  class ConfirmedParams < T::Struct
+    const :id, String
+  end
+
   def confirmed
-    @comment = Comment.find_by(confirm_id: params[:id])
+    typed_params = TypedParams[ConfirmedParams].new.extract!(params)
+    @comment = Comment.find_by(confirm_id: typed_params.id)
     if @comment
       @comment.confirm!
       # rubocop:disable Rails/OutputSafety
@@ -35,21 +46,32 @@ class CommentsController < ApplicationController
     end
   end
 
+  class PerWeekParams < T::Struct
+    const :authority_id, String
+  end
+
   def per_week
-    authority = Authority.find_short_name_encoded!(params[:authority_id])
+    typed_params = TypedParams[PerWeekParams].new.extract!(params)
+    authority = Authority.find_short_name_encoded!(typed_params.authority_id)
 
     respond_to do |format|
       format.json { render json: authority.comments_per_week }
     end
   end
 
+  class WriteitReplyHookParams < T::Struct
+    const :message_id, T.nilable(String)
+  end
+
   def writeit_reply_webhook
-    if params[:message_id].nil?
+    typed_params = TypedParams[WriteitReplyHookParams].new.extract!(params)
+    message_id = typed_params.message_id
+    if message_id.nil?
       render plain: "No message_id", status: :not_found
       return
     end
 
-    comment = Comment.find_by(writeit_message_id: params[:message_id][%r{/api/v1/message/(\d*)/}, 1])
+    comment = Comment.find_by(writeit_message_id: message_id[%r{/api/v1/message/(\d*)/}, 1])
     if comment.nil?
       render plain: "Comment not found.", status: :not_found
       return
