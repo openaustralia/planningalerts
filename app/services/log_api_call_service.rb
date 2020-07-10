@@ -13,7 +13,7 @@ class LogApiCallService < ApplicationService
       api_key: String,
       ip_address: String,
       query: String,
-      user_agent: String,
+      user_agent: T.nilable(String),
       time: Time
     ).void
   end
@@ -47,7 +47,7 @@ class LogApiCallService < ApplicationService
   sig { returns(String) }
   attr_reader :query
 
-  sig { returns(String) }
+  sig { returns(T.nilable(String)) }
   attr_reader :user_agent
 
   sig { returns(Time) }
