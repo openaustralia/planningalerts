@@ -1,10 +1,12 @@
-# typed: false
+# typed: true
 # frozen_string_literal: true
 
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  extend ThemesOnRails::ControllerAdditions::ClassMethods
+
   theme :theme_resolver
 
   use_vanity
