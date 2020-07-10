@@ -1,29 +1,39 @@
-# typed: false
+# typed: true
 # frozen_string_literal: true
 
 class AtdisController < ApplicationController
+  class TestParams < T::Struct
+    const :url, T.nilable(String)
+  end
+
   def test
-    if params[:url].present?
-      @feed = Feed.create_from_url(params[:url])
+    typed_params = TypedParams[TestParams].new.extract!(params)
+    if typed_params.url.present?
+      @feed = Feed.create_from_url(typed_params.url)
       begin
         @page = @feed.applications
       rescue RestClient::InternalServerError
-        @error = "Remote server returned an internal server error (error code 500) accessing #{params[:url]}"
+        @error = "Remote server returned an internal server error (error code 500) accessing #{typed_params.url}"
       rescue RestClient::RequestTimeout
-        @error = "Timeout in request to #{params[:url]}. Remote server did not respond in a reasonable amount of time."
+        @error = "Timeout in request to #{typed_params.url}. Remote server did not respond in a reasonable amount of time."
       rescue RestClient::Exception => e
         @error = "Could not load data - #{e}"
       rescue URI::InvalidURIError
-        @error = "The url appears to be invalid #{params[:url]}"
+        @error = "The url appears to be invalid #{typed_params.url}"
       end
     else
       @feed = Feed.new
     end
   end
 
+  class TestRedirectParams < T::Struct
+    const :feed, String
+  end
+
   # The job here is to take ugly posted parameters and redirect to a much simpler url
   def test_redirect
-    @feed = Feed.new(params[:feed])
+    typed_params = TypedParams[TestRedirectParams].new.extract!(params)
+    @feed = Feed.new(typed_params.feed)
     if @feed.valid?
       redirect_to atdis_test_url(url: @feed.url)
     else
@@ -31,8 +41,14 @@ class AtdisController < ApplicationController
     end
   end
 
+  class FeedParams < T::Struct
+    const :number, Integer
+    const :page, T.nilable(Integer)
+  end
+
   def feed
-    file = Feed.example_path(params[:number].to_i, (params[:page] || "1").to_i)
+    typed_params = TypedParams[FeedParams].new.extract!(params)
+    file = Feed.example_path(typed_params.number, typed_params.page || 1)
     if File.exist?(file)
       render file: file, content_type: Mime[:json], layout: false
     else
