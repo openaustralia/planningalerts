@@ -191,7 +191,7 @@ class Authority < ApplicationRecord
     applications.with_current_version.order("date_scraped DESC").first
   end
 
-  sig { returns(T.nilable(Date)) }
+  sig { returns(T.nilable(Time)) }
   def latest_application_date
     latest_application&.date_scraped
   end
