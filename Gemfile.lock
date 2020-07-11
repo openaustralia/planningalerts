@@ -162,7 +162,6 @@ GEM
     crass (1.0.6)
     daemons (1.3.1)
     dalli (2.7.10)
-    dante (0.2.0)
     database_cleaner (1.8.5)
     debug_inspector (0.0.3)
     descendants_tracker (0.0.4)
@@ -550,12 +549,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    stripe (1.58.0)
-      rest-client (>= 1.4, < 4.0)
-    stripe-ruby-mock (2.3.1)
-      dante (>= 0.2.0)
-      multi_json (~> 1.0)
-      stripe (~> 1.31)
     susy (2.2.14)
       sass (>= 3.3.0, < 3.5)
     sysexits (1.2.0)
@@ -707,8 +700,6 @@ DEPENDENCIES
   sorbet-runtime
   spring
   spring-commands-rspec
-  stripe (~> 1.57)
-  stripe-ruby-mock (~> 2.3.1)
   susy
   themes_on_rails
   thin

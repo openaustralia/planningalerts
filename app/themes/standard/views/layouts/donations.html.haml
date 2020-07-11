@@ -1,8 +1,0 @@
-!!! 5
-%html{ lang: "en" }
-  = render "shared/html_head", with_placeholder_polyfill: false, rss: @rss
-  %body
-    = render "application/header", with_navigation: true, alert_count: @alert_count
-    = yield
-    = render "application/footer"
-    = render "shared/end_matter", with_maps_scripts: false, set_focus_control: @set_focus_control

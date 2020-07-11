@@ -38,9 +38,6 @@ gem "haml"
 gem "rabl", "0.14.0"
 gem "redcarpet"
 
-# Donations
-gem "stripe", "~> 1.57"
-
 # Extra validation
 gem "validate_url", "~> 0.2.2" # 1.0.0 causes failures like "Validation failed: Comment url is not a valid URL" on mailto: links
 gem "validates_email_format_of", "~> 1.6", ">= 1.6.3"
@@ -158,7 +155,6 @@ group :test do
   gem "rspec-rails", "~> 3"
   gem "selenium-webdriver"
   gem "simplecov", require: false
-  gem "stripe-ruby-mock", "~> 2.3.1", require: "stripe_mock"
   gem "timecop"
   gem "vcr"
   gem "webdrivers", "~> 4.0"
