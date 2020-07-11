@@ -20,7 +20,7 @@ class ImportApplicationsService < ApplicationService
   end
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
-  sig { params(url: String, logger: Logger).returns(String) }
+  sig { params(url: String, logger: Logger).returns(T.nilable(String)) }
   def self.open_url_safe(url, logger)
     RestClient.get(url).body
   rescue StandardError => e
