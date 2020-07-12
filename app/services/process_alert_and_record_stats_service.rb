@@ -7,6 +7,11 @@ class ProcessAlertAndRecordStatsService < ApplicationService
   extend T::Sig
 
   sig { params(alert_id: Integer).void }
+  def self.call(alert_id:)
+    new(alert_id: alert_id).call
+  end
+
+  sig { params(alert_id: Integer).void }
   def initialize(alert_id:)
     @alert_id = alert_id
   end

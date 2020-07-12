@@ -17,6 +17,25 @@ class LogApiCallService < ApplicationService
       time: Time
     ).void
   end
+  def self.call(api_key:, ip_address:, query:, user_agent:, time:)
+    new(
+      api_key: api_key,
+      ip_address: ip_address,
+      query: query,
+      user_agent: user_agent,
+      time: time
+    ).call
+  end
+
+  sig do
+    params(
+      api_key: String,
+      ip_address: String,
+      query: String,
+      user_agent: T.nilable(String),
+      time: Time
+    ).void
+  end
   def initialize(api_key:, ip_address:, query:, user_agent:, time:)
     @api_key = api_key
     @ip_address = ip_address

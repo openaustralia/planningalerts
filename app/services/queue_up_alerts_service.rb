@@ -6,6 +6,11 @@ class QueueUpAlertsService < ApplicationService
   extend T::Sig
 
   sig { params(logger: Logger).void }
+  def self.call(logger:)
+    new(logger: logger).call
+  end
+
+  sig { params(logger: Logger).void }
   def initialize(logger:)
     @logger = logger
   end

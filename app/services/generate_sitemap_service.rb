@@ -6,7 +6,11 @@ class GenerateSitemapService < ApplicationService
 
   include GeneratedUrlHelpers
 
-  def initialize(logger: Logger.new(STDOUT))
+  def self.call(logger: Logger.new(STDOUT))
+    new(logger: logger).call
+  end
+
+  def initialize(logger:)
     @logger = logger
   end
 

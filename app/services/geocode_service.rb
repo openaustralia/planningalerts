@@ -5,8 +5,13 @@ class GeocodeService < ApplicationService
   extend T::Sig
 
   # Default threshold of 100m
+  sig { params(address: String, threshold: Integer).returns(GeocoderResults) }
+  def self.call(address, threshold = 100)
+    new(address, threshold).call
+  end
+
   sig { params(address: String, threshold: Integer).void }
-  def initialize(address, threshold = 100)
+  def initialize(address, threshold)
     @address = address
     @threshold = threshold
   end

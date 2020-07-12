@@ -6,6 +6,6 @@ class ImportApplicationsJob < ApplicationJob
 
   def perform(authority:, scrape_delay:)
     info_logger = AuthorityLogger.new(authority.id, logger)
-    ImportApplicationsService.call(authority: authority, scrape_delay: scrape_delay, logger: info_logger, morph_api_key: ENV["MORPH_API_KEY"])
+    ImportApplicationsService.call(authority: authority, scrape_delay: scrape_delay, logger: info_logger, morph_api_key: T.must(ENV["MORPH_API_KEY"]))
   end
 end
