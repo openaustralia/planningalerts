@@ -59,6 +59,29 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 **Run The Tests**
  * Run the test suite - `bundle exec rake`
 
+### Type checking
+
+Ruby is a dynamic language with very fluid types. This makes it great
+for quick development and a fun developer experience. However I (Matthew Landauer) have come to realise over the last few years as I've been
+using modern strongly typed languages like Go, Typescript and Elm that
+many of the painful aspects of typed languages that I'd grown up with (Mostly C/C++) were not there anymore and they were replaced with a
+greater sense of security when refactoring and working on larger
+code-bases.
+
+So, with the release of [Sorbet](https://sorbet.org/) from [Stripe](https://stripe.com/) it is time to apply some of that static
+typing to PlanningAlerts.
+
+To run the type checker:
+```
+bundle exec srb
+```
+
+This is still a work in progress. We're gradually trying to move the
+codebase over to `typed: strict` which enforces typed signatures
+for all methods.
+
+Also as Sorbet is relatively new things are bound to change quite quickly.
+
 ### Scraping and sending emails in development
 
 **Step 1 - Scrape DAs**
