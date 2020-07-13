@@ -4,6 +4,11 @@
 class GoogleGeocodeService < ApplicationService
   extend T::Sig
 
+  sig { params(address: String).returns(GeocoderResults) }
+  def self.call(address)
+    new(address).call
+  end
+
   sig { params(address: String).void }
   def initialize(address)
     @address = address

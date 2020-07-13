@@ -345,7 +345,7 @@ class VCR::RequestMatcherRegistry
   def uri_without_param_matchers; end
   def uri_without_params(*ignores); end
 end
-class Anonymous_Struct_91 < Struct
+class Anonymous_Struct_89 < Struct
   def callable; end
   def callable=(_); end
   def self.[](*arg0); end
@@ -353,10 +353,10 @@ class Anonymous_Struct_91 < Struct
   def self.members; end
   def self.new(*arg0); end
 end
-class VCR::RequestMatcherRegistry::Matcher < Anonymous_Struct_91
+class VCR::RequestMatcherRegistry::Matcher < Anonymous_Struct_89
   def matches?(request_1, request_2); end
 end
-class Anonymous_Struct_92 < Struct
+class Anonymous_Struct_90 < Struct
   def params_to_ignore; end
   def params_to_ignore=(_); end
   def self.[](*arg0); end
@@ -364,7 +364,7 @@ class Anonymous_Struct_92 < Struct
   def self.members; end
   def self.new(*arg0); end
 end
-class VCR::RequestMatcherRegistry::URIWithoutParamsMatcher < Anonymous_Struct_92
+class VCR::RequestMatcherRegistry::URIWithoutParamsMatcher < Anonymous_Struct_90
   def call(request_1, request_2); end
   def partial_uri_from(request); end
   def to_proc; end
@@ -391,7 +391,7 @@ module VCR::Normalizers::Header
   def initialize(*args); end
   def normalize_headers; end
 end
-class Anonymous_Struct_93 < Struct
+class Anonymous_Struct_91 < Struct
   def body; end
   def body=(_); end
   def headers; end
@@ -405,7 +405,7 @@ class Anonymous_Struct_93 < Struct
   def uri; end
   def uri=(_); end
 end
-class VCR::Request < Anonymous_Struct_93
+class VCR::Request < Anonymous_Struct_91
   def initialize(*args); end
   def method(*args); end
   def parsed_uri; end
@@ -416,7 +416,7 @@ class VCR::Request < Anonymous_Struct_93
   include VCR::Normalizers::Body
   include VCR::Normalizers::Header
 end
-class VCR::Request::Typed < Anonymous_Delegator_94
+class VCR::Request::Typed < Anonymous_Delegator_92
   def externally_stubbed?; end
   def ignored?; end
   def initialize(request, type); end
@@ -427,11 +427,11 @@ class VCR::Request::Typed < Anonymous_Delegator_94
   def type; end
   def unhandled?; end
 end
-class VCR::Request::FiberAware < Anonymous_Delegator_95
+class VCR::Request::FiberAware < Anonymous_Delegator_93
   def proceed; end
   def to_proc; end
 end
-class Anonymous_Struct_96 < Struct
+class Anonymous_Struct_94 < Struct
   def adapter_metadata; end
   def adapter_metadata=(_); end
   def body; end
@@ -447,7 +447,7 @@ class Anonymous_Struct_96 < Struct
   def status; end
   def status=(_); end
 end
-class VCR::Response < Anonymous_Struct_96
+class VCR::Response < Anonymous_Struct_94
   def compressed?; end
   def content_encoding; end
   def decompress; end
@@ -462,7 +462,7 @@ class VCR::Response < Anonymous_Struct_96
   include VCR::Normalizers::Body
   include VCR::Normalizers::Header
 end
-class Anonymous_Struct_97 < Struct
+class Anonymous_Struct_95 < Struct
   def code; end
   def code=(_); end
   def message; end
@@ -472,11 +472,11 @@ class Anonymous_Struct_97 < Struct
   def self.members; end
   def self.new(*arg0); end
 end
-class VCR::ResponseStatus < Anonymous_Struct_97
+class VCR::ResponseStatus < Anonymous_Struct_95
   def self.from_hash(hash); end
   def to_hash; end
 end
-class Anonymous_Struct_98 < Struct
+class Anonymous_Struct_96 < Struct
   def recorded_at; end
   def recorded_at=(_); end
   def request; end
@@ -488,13 +488,13 @@ class Anonymous_Struct_98 < Struct
   def self.members; end
   def self.new(*arg0); end
 end
-class VCR::HTTPInteraction < Anonymous_Struct_98
+class VCR::HTTPInteraction < Anonymous_Struct_96
   def hook_aware; end
   def initialize(*args); end
   def self.from_hash(hash); end
   def to_hash; end
 end
-class VCR::HTTPInteraction::HookAware < Anonymous_Delegator_99
+class VCR::HTTPInteraction::HookAware < Anonymous_Delegator_97
   def filter!(text, replacement_text); end
   def filter_hash!(hash, text, replacement_text); end
   def filter_object!(object, text, replacement_text); end
@@ -505,73 +505,4 @@ end
 module VCR::RSpec
 end
 module VCR::Middleware
-end
-module VCR::Cassette::Persisters::FileSystem
-  def [](file_name); end
-  def []=(file_name, content); end
-  def absolute_path_for(path); end
-  def absolute_path_to_file(file_name); end
-  def downcase_cassette_names?; end
-  def sanitized_file_name_from(file_name); end
-  def storage_location; end
-  def storage_location=(dir); end
-  extend VCR::Cassette::Persisters::FileSystem
-end
-class VCR::VersionChecker
-  def check_version!; end
-  def compare_version; end
-  def initialize(library_name, library_version, min_version); end
-  def parse_version(version); end
-  def raise_too_low_error; end
-  def too_low?; end
-  def version_requirement; end
-end
-class VCR::RequestHandler
-  def disabled?; end
-  def externally_stubbed?; end
-  def handle; end
-  def has_response_stub?(consume_stub); end
-  def invoke_after_request_hook(vcr_response); end
-  def invoke_before_request_hook; end
-  def library_name; end
-  def log_prefix; end
-  def on_externally_stubbed_request; end
-  def on_ignored_request; end
-  def on_recordable_request; end
-  def on_stubbed_by_vcr_request; end
-  def on_unhandled_request; end
-  def request_summary; end
-  def request_type(consume_stub = nil); end
-  def set_typed_request_for_after_hook(request_type); end
-  def should_ignore?; end
-  def stubbed_response; end
-  include VCR::Logger::Mixin
-end
-module VCR::LibraryHooks::WebMock
-  def global_hook_disabled?(request); end
-  def global_hook_disabled_requests; end
-  def with_global_hook_disabled(request); end
-  extend VCR::LibraryHooks::WebMock
-  extend VCR::LibraryHooks::WebMock::Helpers
-end
-module VCR::LibraryHooks::WebMock::Helpers
-  def request_headers_for(webmock_request); end
-  def typed_request_for(webmock_request, remove = nil); end
-  def vcr_request_for(webmock_request); end
-  def vcr_response_for(webmock_response); end
-end
-class VCR::LibraryHooks::WebMock::RequestHandler < VCR::RequestHandler
-  def externally_stubbed?; end
-  def initialize(request); end
-  def on_externally_stubbed_request; end
-  def on_stubbed_by_vcr_request; end
-  def on_unhandled_request; end
-  def request; end
-  def set_typed_request_for_after_hook(*args); end
-  def vcr_request; end
-  include VCR::LibraryHooks::WebMock::Helpers
-end
-module WebMock
-  def self.net_connect_allowed_with_vcr?(*args); end
-  def self.net_connect_allowed_without_vcr?(uri = nil); end
 end

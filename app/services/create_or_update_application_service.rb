@@ -4,6 +4,21 @@
 class CreateOrUpdateApplicationService < ApplicationService
   extend T::Sig
 
+  sig do
+    params(
+      authority: Authority,
+      council_reference: String,
+      attributes: T::Hash[Symbol, T.untyped]
+    ).returns(Application)
+  end
+  def self.call(authority:, council_reference:, attributes:)
+    new(
+      authority: authority,
+      council_reference: council_reference,
+      attributes: attributes
+    ).call
+  end
+
   sig { params(authority: Authority, council_reference: String, attributes: T::Hash[Symbol, T.untyped]).void }
   def initialize(
     authority:, council_reference:, attributes:

@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 
 # This is a horrible hack
 module EmailConfirmable

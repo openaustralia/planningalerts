@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 # frozen_string_literal: true
 
 module Admin
@@ -11,11 +11,18 @@ module Admin
 
     private
 
+    class SiteSettingParams < T::Struct
+      const :streetview_in_emails_enabled, T::Boolean
+      const :streetview_in_app_enabled, T::Boolean
+    end
+
+    class WrappedSiteSettingParams < T::Struct
+      const :site_setting, SiteSettingParams
+    end
+
     def site_setting
-      params[:site_setting].permit(
-        :streetview_in_emails_enabled,
-        :streetview_in_app_enabled
-      ).to_h.symbolize_keys
+      typed_params = TypedParams[WrappedSiteSettingParams].new.extract!(params)
+      typed_params.site_setting.serialize.symbolize_keys
     end
   end
 end

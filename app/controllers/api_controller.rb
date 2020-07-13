@@ -60,8 +60,9 @@ class ApiController < ApplicationController
   def point
     typed_params = TypedParams[PointParams].new.extract!(params)
     radius = typed_params.radius || typed_params.area_size || 2000.0
-    if typed_params.address
-      location = GoogleGeocodeService.call(typed_params.address).top
+    address = typed_params.address
+    if address
+      location = GoogleGeocodeService.call(address).top
       if location.nil?
         render_error("could not geocode address", :bad_request)
         return

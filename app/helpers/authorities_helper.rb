@@ -19,8 +19,8 @@ module AuthoritiesHelper
     "https://github.com/#{authority.morph_name}" if authority.morph_name.present?
   end
 
-  sig { params(authority: Authority).returns(T.nilable(String)) }
-  def github_issues_url(authority)
-    "#{github_url(authority)}/issues" if github_url(authority)
+  sig { returns(String) }
+  def github_issues_url
+    "https://github.com/planningalerts-scrapers/issues/issues/"
   end
 end

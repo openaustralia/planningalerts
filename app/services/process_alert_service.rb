@@ -6,6 +6,11 @@
 class ProcessAlertService < ApplicationService
   extend T::Sig
 
+  sig { params(alert: Alert).returns([Integer, Integer, Integer, Integer]) }
+  def self.call(alert:)
+    new(alert: alert).call
+  end
+
   sig { params(alert: Alert).void }
   def initialize(alert:)
     @alert = alert

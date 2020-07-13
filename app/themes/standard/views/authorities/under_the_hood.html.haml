@@ -46,7 +46,7 @@
 %p If something isn't right with the scraper or the data coming in then you could do one or several of the following
 %ul
   %li
-    = link_to "Report or view scraper issues", github_issues_url(@authority)
+    = link_to "Report or view scraper issues", github_issues_url
   %li
     = link_to "Fork the scraper on Github", github_url(@authority)
     and try to fix it
@@ -62,5 +62,5 @@
     = link_to "Watch the scraper", morph_url(@authority)
     on morph.io, so you will get an email if it errors. Press the "Watch" button in the top right while you're logged in to morph.io.
   %li
-    #{link_to "View any scraper issues", github_issues_url(@authority)}.
+    #{link_to "View any scraper issues", github_issues_url}.
     Help fix them or comment on them if they are out of date

@@ -28,7 +28,7 @@ module WebMock
   def self.hide_body_diff!; end
   def self.hide_stubbing_instructions!; end
   def self.included(clazz); end
-  def self.net_connect_allowed?(*args); end
+  def self.net_connect_allowed?(uri = nil); end
   def self.net_connect_explicit_allowed?(allowed, uri = nil); end
   def self.print_executed_requests; end
   def self.registered_request?(request_signature); end

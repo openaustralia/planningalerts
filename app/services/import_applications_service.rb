@@ -5,6 +5,16 @@ class ImportApplicationsService < ApplicationService
   extend T::Sig
 
   sig { params(authority: Authority, scrape_delay: Integer, logger: Logger, morph_api_key: String).void }
+  def self.call(authority:, scrape_delay:, logger:, morph_api_key:)
+    new(
+      authority: authority,
+      scrape_delay: scrape_delay,
+      logger: logger,
+      morph_api_key: morph_api_key
+    ).call
+  end
+
+  sig { params(authority: Authority, scrape_delay: Integer, logger: Logger, morph_api_key: String).void }
   def initialize(authority:, scrape_delay:, logger:, morph_api_key:)
     @authority = authority
     @start_date = T.let(Time.zone.today - scrape_delay, Date)
@@ -20,7 +30,7 @@ class ImportApplicationsService < ApplicationService
   end
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
-  sig { params(url: String, logger: Logger).returns(String) }
+  sig { params(url: String, logger: Logger).returns(T.nilable(String)) }
   def self.open_url_safe(url, logger)
     RestClient.get(url).body
   rescue StandardError => e
@@ -59,16 +69,24 @@ class ImportApplicationsService < ApplicationService
   def import_applications_date_range
     count = 0
     error_count = 0
-    import_data.each do |attributes|
+    import_data.each do |r|
       CreateOrUpdateApplicationService.call(
         authority: authority,
-        council_reference: attributes[:council_reference],
-        attributes: attributes.reject { |k, _v| k == :council_reference }
+        council_reference: r.council_reference,
+        attributes: {
+          address: r.address,
+          description: r.description,
+          info_url: r.info_url,
+          date_received: r.date_received,
+          date_scraped: r.date_scraped,
+          on_notice_from: r.on_notice_from,
+          on_notice_to: r.on_notice_to
+        }
       )
       count += 1
     rescue StandardError => e
       error_count += 1
-      logger.error "Error #{e} while trying to save application #{attributes[:council_reference]} for #{authority.full_name_and_state}. So, skipping"
+      logger.error "Error #{e} while trying to save application #{r.council_reference} for #{authority.full_name_and_state}. So, skipping"
     end
 
     logger.info "#{count} #{'application'.pluralize(count)} found for #{authority.full_name_and_state} with date from #{start_date} to #{end_date}"
@@ -77,7 +95,19 @@ class ImportApplicationsService < ApplicationService
     logger.info "#{error_count} #{'application'.pluralize(error_count)} errored for #{authority.full_name_and_state} with date from #{start_date} to #{end_date}"
   end
 
-  sig { returns(T::Array[T::Hash[Symbol, T.nilable(T.any(String, Time))]]) }
+  class ImportRecord < T::Struct
+    const :council_reference, String
+    const :address, String
+    const :description, String
+    const :info_url, String
+    const :date_received, T.nilable(String)
+    const :date_scraped, ActiveSupport::TimeWithZone
+    # on_notice_from and on_notice_to are optional
+    const :on_notice_from, T.nilable(String)
+    const :on_notice_to, T.nilable(String)
+  end
+
+  sig { returns(T::Array[ImportRecord]) }
   def import_data
     text = ImportApplicationsService.open_url_safe(morph_url_for_date_range, logger)
     return [] if text.nil?
@@ -90,7 +120,7 @@ class ImportApplicationsService < ApplicationService
     end
 
     j.map do |a|
-      {
+      ImportRecord.new(
         council_reference: a["council_reference"],
         address: a["address"],
         description: a["description"],
@@ -100,7 +130,7 @@ class ImportApplicationsService < ApplicationService
         # on_notice_from and on_notice_to tags are optional
         on_notice_from: a["on_notice_from"],
         on_notice_to: a["on_notice_to"]
-      }
+      )
     end
   end
 
