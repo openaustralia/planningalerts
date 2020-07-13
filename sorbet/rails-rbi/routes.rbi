@@ -518,13 +518,6 @@ module GeneratedUrlHelpers
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def user_confirmation_url(*args, **kwargs); end
 
-  # Sigs for route /api(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def api_old_index_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def api_old_index_url(*args, **kwargs); end
-
   # Sigs for route /alerts/:id/confirmed(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def confirmed_alert_path(*args, **kwargs); end
@@ -749,7 +742,7 @@ module GeneratedUrlHelpers
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def geocode_query_url(*args, **kwargs); end
 
-  # Sigs for route /auhtorities/:authority_id/councillor_contributions/add_contributor(.:format)
+  # Sigs for route /authorities/:authority_id/councillor_contributions/add_contributor(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def add_contributor_authority_councillor_contribution_path(*args, **kwargs); end
 
