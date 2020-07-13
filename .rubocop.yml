@@ -117,3 +117,29 @@ Sorbet/TrueSigil:
     # TODO: Remove these exclusions as soon as we can
     - app/admin/*.rb
     - app/controllers/councillor_contributions_controller.rb
+
+Sorbet/StrictSigil:
+  Enabled: true
+  Exclude:
+    - spec/**/*.rb
+    - db/seeds.rb
+    - lib/tasks/*.rake
+    - config.ru
+    - Capfile
+    - Gemfile
+    - Guardfile
+    - Rakefile
+    - app/themes/standard/views/comments/index.js.rabl
+    - app/themes/standard/views/comments/index.rss.builder
+    - experiments/metrics/alert_signup.rb
+    # TODO: Remove these exclusions as soon as we can
+    - app/admin/*.rb
+    - app/controllers/**/*.rb
+    - app/forms/*.rb
+    - app/helpers/**/*.rb
+    - app/jobs/*.rb
+    - app/mailers/*.rb
+    - app/models/**/*.rb
+    - app/services/*.rb
+    - app/sweepers/*.rb
+    - lib/*.rb
