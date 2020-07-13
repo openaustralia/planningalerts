@@ -728,10 +728,10 @@ class Devise::FailureApp < ActionController::Metal
   include ActionDispatch::Routing::UrlFor
   include ActionDispatch::Routing::UrlFor
   include ActiveSupport::Benchmarkable
-  include Anonymous_Module_43
+  include Anonymous_Module_41
   include Devise::Controllers::StoreLocation
 end
-module Anonymous_Module_43
+module Anonymous_Module_41
   def _generate_paths_by_default; end
   def _routes; end
   def self._routes; end
@@ -743,17 +743,13 @@ module Anonymous_Module_43
   def self.url_for(options); end
   def self.url_options; end
   extend ActiveSupport::Concern
-  extend Anonymous_Module_23
-  extend Anonymous_Module_24
+  extend Anonymous_Module_33
+  extend Anonymous_Module_34
   include ActionDispatch::Routing::UrlFor
-  include Anonymous_Module_23
-  include Anonymous_Module_24
+  include Anonymous_Module_33
+  include Anonymous_Module_34
 end
 class Devise::Delegator
   def call(env); end
   def failure_app(env); end
-end
-module Devise::Encryptor
-  def self.compare(klass, hashed_password, password); end
-  def self.digest(klass, password); end
 end

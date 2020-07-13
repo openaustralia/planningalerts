@@ -485,7 +485,7 @@ class Vanity::Adapters::ActiveRecordAdapter < Vanity::Adapters::AbstractAdapter
   def set_experiment_enabled(experiment, enabled); end
   def to_s; end
 end
-module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_30
+module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_26
 end
 class Vanity::Adapters::ActiveRecordAdapter::VanityRecord < ActiveRecord::Base
   def self._validators; end
@@ -495,7 +495,7 @@ class Vanity::Adapters::ActiveRecordAdapter::VanityRecord < ActiveRecord::Base
   def self.page(num = nil); end
   def self.rails_agnostic_find_or_create_by(method, value); end
   extend Kaminari::ConfigurationMethods::ClassMethods
-  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_30
+  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_26
   include Kaminari::ActiveRecordModelExtension
   include Kaminari::ConfigurationMethods
   include Vanity::Adapters::ActiveRecordAdapter::VanityRecord::GeneratedAssociationMethods
@@ -519,7 +519,7 @@ class Vanity::Adapters::ActiveRecordAdapter::VanityRecord::ActiveRecord_Associat
   include ActiveRecord::Delegation::ClassSpecificRelation
   include Vanity::Adapters::ActiveRecordAdapter::VanityRecord::GeneratedRelationMethods
 end
-module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_31
+module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_27
 end
 class Vanity::Adapters::ActiveRecordAdapter::VanityMetric < Vanity::Adapters::ActiveRecordAdapter::VanityRecord
   def after_add_for_vanity_metric_values; end
@@ -556,7 +556,7 @@ class Vanity::Adapters::ActiveRecordAdapter::VanityMetric < Vanity::Adapters::Ac
   def touch_with_grace_period; end
   def updated_before_grace_period?(now); end
   def validate_associated_records_for_vanity_metric_values(*args); end
-  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_31
+  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_27
   include Vanity::Adapters::ActiveRecordAdapter::VanityMetric::GeneratedAssociationMethods
 end
 module Vanity::Adapters::ActiveRecordAdapter::VanityMetric::GeneratedAssociationMethods
@@ -582,7 +582,7 @@ class Vanity::Adapters::ActiveRecordAdapter::VanityMetric::ActiveRecord_Associat
   include ActiveRecord::Delegation::ClassSpecificRelation
   include Vanity::Adapters::ActiveRecordAdapter::VanityMetric::GeneratedRelationMethods
 end
-module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_32
+module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_28
 end
 class Vanity::Adapters::ActiveRecordAdapter::VanityMetricValue < Vanity::Adapters::ActiveRecordAdapter::VanityRecord
   def autosave_associated_records_for_vanity_metric(*args); end
@@ -593,7 +593,7 @@ class Vanity::Adapters::ActiveRecordAdapter::VanityMetricValue < Vanity::Adapter
   def self._validators; end
   def self.attribute_type_decorations; end
   def self.defined_enums; end
-  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_32
+  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_28
   include Vanity::Adapters::ActiveRecordAdapter::VanityMetricValue::GeneratedAssociationMethods
 end
 module Vanity::Adapters::ActiveRecordAdapter::VanityMetricValue::GeneratedAssociationMethods
@@ -621,7 +621,7 @@ class Vanity::Adapters::ActiveRecordAdapter::VanityMetricValue::ActiveRecord_Ass
   include ActiveRecord::Delegation::ClassSpecificRelation
   include Vanity::Adapters::ActiveRecordAdapter::VanityMetricValue::GeneratedRelationMethods
 end
-module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_33
+module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_29
 end
 class Vanity::Adapters::ActiveRecordAdapter::VanityExperiment < Vanity::Adapters::ActiveRecordAdapter::VanityRecord
   def after_add_for_vanity_conversions; end
@@ -657,7 +657,7 @@ class Vanity::Adapters::ActiveRecordAdapter::VanityExperiment < Vanity::Adapters
   def self.defined_enums; end
   def self.retrieve(experiment); end
   def validate_associated_records_for_vanity_conversions(*args); end
-  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_33
+  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_29
   include Vanity::Adapters::ActiveRecordAdapter::VanityExperiment::GeneratedAssociationMethods
 end
 module Vanity::Adapters::ActiveRecordAdapter::VanityExperiment::GeneratedAssociationMethods
@@ -683,7 +683,7 @@ class Vanity::Adapters::ActiveRecordAdapter::VanityExperiment::ActiveRecord_Asso
   include ActiveRecord::Delegation::ClassSpecificRelation
   include Vanity::Adapters::ActiveRecordAdapter::VanityExperiment::GeneratedRelationMethods
 end
-module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_34
+module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_30
 end
 class Vanity::Adapters::ActiveRecordAdapter::VanityConversion < Vanity::Adapters::ActiveRecordAdapter::VanityRecord
   def autosave_associated_records_for_vanity_experiment(*args); end
@@ -694,7 +694,7 @@ class Vanity::Adapters::ActiveRecordAdapter::VanityConversion < Vanity::Adapters
   def self._validators; end
   def self.attribute_type_decorations; end
   def self.defined_enums; end
-  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_34
+  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_30
   include Vanity::Adapters::ActiveRecordAdapter::VanityConversion::GeneratedAssociationMethods
 end
 module Vanity::Adapters::ActiveRecordAdapter::VanityConversion::GeneratedAssociationMethods
@@ -722,14 +722,14 @@ class Vanity::Adapters::ActiveRecordAdapter::VanityConversion::ActiveRecord_Asso
   include ActiveRecord::Delegation::ClassSpecificRelation
   include Vanity::Adapters::ActiveRecordAdapter::VanityConversion::GeneratedRelationMethods
 end
-module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_35
+module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_31
 end
 class Vanity::Adapters::ActiveRecordAdapter::VanityParticipant < Vanity::Adapters::ActiveRecordAdapter::VanityRecord
   def self._validators; end
   def self.attribute_type_decorations; end
   def self.defined_enums; end
   def self.retrieve(experiment, identity, create = nil, update_with = nil); end
-  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_35
+  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_31
   include Vanity::Adapters::ActiveRecordAdapter::VanityParticipant::GeneratedAssociationMethods
 end
 module Vanity::Adapters::ActiveRecordAdapter::VanityParticipant::GeneratedAssociationMethods
