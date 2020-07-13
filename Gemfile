@@ -22,9 +22,6 @@ gem "rails-observers"
 gem "dalli"
 gem "rack-throttle"
 
-# A/B testing
-gem "vanity"
-
 # Admin interface
 gem "activeadmin"
 

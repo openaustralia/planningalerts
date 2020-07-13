@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
 
   theme :theme_resolver
 
-  use_vanity
   force_ssl if: :ssl_required?
 
   helper :all # include all helpers, all the time

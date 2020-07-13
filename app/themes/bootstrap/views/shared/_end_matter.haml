@@ -5,7 +5,6 @@
 - if with_maps_scripts
   = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAPS_API_KEY']}&v=3&libraries=places&region=au"
 = javascript_include_tag "application"
-= vanity_js
 
 %script{src: "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js", integrity: "sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut", crossorigin:"anonymous"}
 -# TODO: Replace with local bootstrap

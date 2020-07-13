@@ -137,16 +137,6 @@ Rails.application.routes.draw do
 
   get "/" => "applications#address", as: :address_applications
 
-  get '/vanity' =>'vanity#index'
-  get '/vanity/participant/:id' => 'vanity#participant'
-  post '/vanity/complete'
-  post '/vanity/chooses'
-  post '/vanity/reset'
-  post '/vanity/enable'
-  post '/vanity/disable'
-  post '/vanity/add_participant'
-  get '/vanity/image'
-
   ## Use the donations form on OAF for now.
   get "donations/new", to: redirect("https://www.oaf.org.au/donate/planningalerts/")
   get "donations/create", to: redirect("https://www.oaf.org.au/donate/planningalerts/")

@@ -68,6 +68,3 @@ Rails.application.configure do
   # TODO: For some reason this path isn't being set by rspec anymore?
   config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
 end
-
-# Uncomment the line below to turn on A/B data collection in development mode
-Vanity.playground.collecting = true

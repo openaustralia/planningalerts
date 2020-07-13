@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_10_203701) do
+ActiveRecord::Schema.define(version: 2020_07_13_075320) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -257,48 +257,6 @@ ActiveRecord::Schema.define(version: 2020_07_10_203701) do
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
-  create_table "vanity_conversions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "vanity_experiment_id"
-    t.integer "alternative"
-    t.integer "conversions"
-    t.index ["vanity_experiment_id", "alternative"], name: "by_experiment_id_and_alternative"
-  end
-
-  create_table "vanity_experiments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.string "experiment_id"
-    t.integer "outcome"
-    t.datetime "created_at"
-    t.datetime "completed_at"
-    t.index ["experiment_id"], name: "index_vanity_experiments_on_experiment_id"
-  end
-
-  create_table "vanity_metric_values", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "vanity_metric_id"
-    t.integer "index"
-    t.integer "value"
-    t.string "date"
-    t.index ["vanity_metric_id"], name: "index_vanity_metric_values_on_vanity_metric_id"
-  end
-
-  create_table "vanity_metrics", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.string "metric_id"
-    t.datetime "updated_at"
-    t.index ["metric_id"], name: "index_vanity_metrics_on_metric_id"
-  end
-
-  create_table "vanity_participants", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.string "experiment_id"
-    t.string "identity"
-    t.integer "shown"
-    t.integer "seen"
-    t.integer "converted"
-    t.index ["experiment_id", "converted"], name: "by_experiment_id_and_converted"
-    t.index ["experiment_id", "identity"], name: "by_experiment_id_and_identity"
-    t.index ["experiment_id", "seen"], name: "by_experiment_id_and_seen"
-    t.index ["experiment_id", "shown"], name: "by_experiment_id_and_shown"
-    t.index ["experiment_id"], name: "index_vanity_participants_on_experiment_id"
   end
 
   add_foreign_key "application_redirects", "applications", column: "redirect_application_id"

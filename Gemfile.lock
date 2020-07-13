@@ -589,8 +589,6 @@ GEM
       addressable
     validates_email_format_of (1.6.3)
       i18n
-    vanity (3.0.0)
-      i18n
     vcr (6.0.0)
     virtus (1.0.5)
       axiom-types (~> 0.1)
@@ -709,7 +707,6 @@ DEPENDENCIES
   uglifier
   validate_url (~> 0.2.2)
   validates_email_format_of (~> 1.6, >= 1.6.3)
-  vanity
   vcr
   virtus
   webdrivers (~> 4.0)

@@ -23,7 +23,6 @@ describe "applications/show" do
     errors = double("Errors", :[] => nil)
     assign(:comment,
            mock_model(Comment, errors: errors, text: nil, name: nil, email: nil))
-    Vanity.context = Struct.new(:vanity_identity).new("1")
   end
 
   describe "show" do
