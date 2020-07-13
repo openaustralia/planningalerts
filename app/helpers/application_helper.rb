@@ -159,4 +159,9 @@ module ApplicationHelper
   def twitter_share_url(params)
     "https://twitter.com/intent/tweet?#{params.to_query}"
   end
+
+  sig { returns(String) }
+  def donate_url
+    "https://www.oaf.org.au/donate/planningalerts/"
+  end
 end

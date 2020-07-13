@@ -62,16 +62,6 @@ module AlertMailerHelper
     )
   end
 
-  sig { params(alert: Alert).returns(String) }
-  def new_donation_url_with_tracking(alert)
-    T.unsafe(self).new_donation_url(
-      base_tracking_params.merge(
-        utm_campaign: "donate-from-alert",
-        email: alert.email
-      )
-    )
-  end
-
   sig do
     params(
       alert: Alert,

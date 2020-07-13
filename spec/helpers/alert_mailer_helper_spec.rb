@@ -99,25 +99,6 @@ describe AlertMailerHelper do
     end
   end
 
-  describe "#new_donation_url_with_tracking" do
-    before :each do
-      @alert = create(:alert)
-    end
-
-    context "when the theme is \"default\"" do
-      before :each do
-        @base_params_plus_email_and_campaign = base_tracking_params.merge(
-          email: @alert.email,
-          utm_campaign: "donate-from-alert"
-        )
-      end
-
-      subject { helper.new_donation_url_with_tracking(@alert) }
-
-      it { is_expected.to eq new_donation_url(@base_params_plus_email_and_campaign) }
-    end
-  end
-
   describe "#subject" do
     let(:alert) { create(:alert, address: "123 Sample St") }
     let(:application) do
