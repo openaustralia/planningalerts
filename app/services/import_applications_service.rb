@@ -98,7 +98,7 @@ class ImportApplicationsService < ApplicationService
   class ImportRecord < T::Struct
     const :council_reference, String
     const :address, String
-    const :description, String
+    const :description, T.nilable(String)
     const :info_url, String
     const :date_received, T.nilable(String)
     const :date_scraped, ActiveSupport::TimeWithZone
