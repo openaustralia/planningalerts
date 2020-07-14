@@ -91,6 +91,32 @@ Style/HashTransformValues:
 Style/SlicingWithRange:
   Enabled: true
 
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+
+# To use method signature in sorbet with accessors we need to separate them
+# So, disabling this
+Style/AccessorGrouping:
+  Enabled: false
+
+Style/BisectedAttrAccessor:
+  Enabled: true
+
+Style/RedundantAssignment:
+  Enabled: true
+
+Style/RedundantFetchBlock:
+  Enabled: true
+
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+
+Style/RedundantRegexpEscape:
+  Enabled: true
+
 # Sorbet
 
 Sorbet/FalseSigil:

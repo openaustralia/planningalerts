@@ -36,8 +36,8 @@ gem "rabl", "0.14.0"
 gem "redcarpet"
 
 # Extra validation
-gem "validate_url", "~> 0.2.2" # 1.0.0 causes failures like "Validation failed: Comment url is not a valid URL" on mailto: links
 gem "validates_email_format_of", "~> 1.6", ">= 1.6.3"
+gem "validate_url", "~> 0.2.2" # 1.0.0 causes failures like "Validation failed: Comment url is not a valid URL" on mailto: links
 
 # Background queue uses sidekiq with redis
 # We need redis namespaces to seperate the production and staging environments
@@ -193,7 +193,7 @@ group :development do
   # Help with code quality
   gem "brakeman"
   gem "haml_lint", require: false
-  gem "rubocop", "0.83.0", require: false # Using same version as defined in .codeclimate.yml
+  gem "rubocop", "0.87.0", require: false # Using same version as defined in .codeclimate.yml
   gem "rubocop-rails", require: false
   gem "rubocop-sorbet", require: false
 end
