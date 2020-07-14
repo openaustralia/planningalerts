@@ -1,7 +1,10 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class AuthorityLogger < Logger
+  extend T::Sig
+
+  sig { params(authority_id: Integer, other_logger: Logger).void }
   def initialize(authority_id, other_logger)
     @authority_id = authority_id
     @other_logger = other_logger
@@ -9,10 +12,12 @@ class AuthorityLogger < Logger
     Authority.update(@authority_id, last_scraper_run_log: "")
   end
 
+  sig { params(severity: Integer, message: T.nilable(String), progname: T.nilable(String)).void }
   def add(severity, message = nil, progname = nil)
-    @other_logger.add(severity, message, progname)
+    # Using block form of Logger#add because sorbet thinks the block is required (which it isn't)
+    @other_logger.add(severity, nil, progname) { message }
     # Put a maximum limit on how long the log can get
-    e = (Authority.find(@authority_id).last_scraper_run_log || "") + progname + "\n"
+    e = (Authority.find(@authority_id).last_scraper_run_log || "") + (progname || "") + "\n"
     return if e.size >= 5000
 
     # We want this log to be written even if the rest of the authority
