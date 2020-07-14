@@ -53,7 +53,10 @@ class GeocodeQuery < ApplicationRecord
     average = 0.0
     count = 0
     geocode_results.each do |result|
-      average += result.location.distance_to(point)
+      location = result.location
+      return nil if location.nil?
+
+      average += location.distance_to(point)
       count += 1
     end
     average /= count
