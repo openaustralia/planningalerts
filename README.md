@@ -6,11 +6,11 @@ gem install mysql2 -v '0.5.3' --source 'https://rubygems.org/' -- --with-ldflags
 
 Find out and have your say about development applications in your area.
 
-This is the code for the [web application](http://www.planningalerts.org.au/) side of things written using Ruby on Rails. The original code from [PlanningAlerts.com](http://www.planningalerts.com), which this app is based on, was written using PHP.
+This is the code for the [web application](http://www.planningalerts.org.au/) side of things written using Ruby on Rails.
 
 If you're interested in contributing a scraper read our [step-by-step guide to writing scrapers](http://www.planningalerts.org.au/how_to_write_a_scraper) on our scraping platform, [morph.io](https://morph.io/).
 
-PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.openaustraliafoundation.org.au). It was adapted for Australia by Matthew Landauer and Katherine Szuminska, and is based on the UK site PlanningAlerts.com, built by Richard Pope, Mikel Maron, Sam Smith, Duncan Parkes, Tom Hughes and Andy Armstrong.
+PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.openaustraliafoundation.org.au). It was created by Matthew Landauer and Katherine Szuminska.
 
 ## Table of Contents
 
