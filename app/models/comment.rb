@@ -1,9 +1,11 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 require "rest-client"
 
 class Comment < ApplicationRecord
+  extend T::Sig
+
   belongs_to :application
   belongs_to :councillor, optional: true
   has_many :reports, dependent: :restrict_with_exception
@@ -23,10 +25,14 @@ class Comment < ApplicationRecord
                     "comments.confirmed = true and comments.hidden = false" => "visible_comments_count"
                   }
 
+  # TODO: Change confirmed in schema to be null: false
+
+  sig { returns(T::Boolean) }
   def visible?
-    confirmed && !hidden
+    !!confirmed && !hidden
   end
 
+  sig { void }
   def confirm!
     return if confirmed
 
@@ -34,6 +40,7 @@ class Comment < ApplicationRecord
     send_comment!
   end
 
+  sig { void }
   def send_comment!
     if to_councillor? && ENV["WRITEIT_BASE_URL"]
       CommentMailer.send_comment_via_writeit!(self).deliver_later
@@ -44,19 +51,23 @@ class Comment < ApplicationRecord
     end
   end
 
+  sig { returns(T::Boolean) }
   def to_councillor?
     councillor.present?
   end
 
+  sig { returns(T::Boolean) }
   def awaiting_councillor_reply?
     to_councillor? && replies.empty?
   end
 
+  sig { returns(String) }
   def recipient_display_name
     c = councillor
     c ? c.prefixed_name : application.authority.full_name
   end
 
+  sig { returns(WriteItInstance) }
   def writeitinstance
     writeitinstance = WriteItInstance.new
     writeitinstance.base_url = ENV["WRITEIT_BASE_URL"]
@@ -67,6 +78,7 @@ class Comment < ApplicationRecord
     writeitinstance
   end
 
+  sig { returns(T.nilable(T::Array[Reply])) }
   def create_replies_from_writeit!
     return if writeit_message_id.blank?
 
