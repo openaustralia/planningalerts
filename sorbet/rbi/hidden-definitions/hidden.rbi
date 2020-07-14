@@ -2116,14 +2116,6 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
 
   def admin_dashboard_url(*args); end
 
-  def admin_donation_path(*args); end
-
-  def admin_donation_url(*args); end
-
-  def admin_donations_path(*args); end
-
-  def admin_donations_url(*args); end
-
   def admin_replies_path(*args); end
 
   def admin_replies_url(*args); end
@@ -2260,10 +2252,6 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
 
   def batch_action_admin_councillors_url(*args); end
 
-  def batch_action_admin_donations_path(*args); end
-
-  def batch_action_admin_donations_url(*args); end
-
   def batch_action_admin_replies_path(*args); end
 
   def batch_action_admin_replies_url(*args); end
@@ -2339,10 +2327,6 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
   def edit_admin_councillor_path(*args); end
 
   def edit_admin_councillor_url(*args); end
-
-  def edit_admin_donation_path(*args); end
-
-  def edit_admin_donation_url(*args); end
 
   def edit_admin_reply_path(*args); end
 
@@ -2420,10 +2404,6 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
 
   def new_admin_councillor_url(*args); end
 
-  def new_admin_donation_path(*args); end
-
-  def new_admin_donation_url(*args); end
-
   def new_admin_reply_path(*args); end
 
   def new_admin_reply_url(*args); end
@@ -2443,10 +2423,6 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
   def new_comment_report_path(*args); end
 
   def new_comment_report_url(*args); end
-
-  def new_donation_path(*args); end
-
-  def new_donation_url(*args); end
 
   def new_user_confirmation_path(*args); end
 
@@ -2543,38 +2519,6 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
   def user_session_path(*args); end
 
   def user_session_url(*args); end
-
-  def vanity_add_participant_path(*args); end
-
-  def vanity_add_participant_url(*args); end
-
-  def vanity_chooses_path(*args); end
-
-  def vanity_chooses_url(*args); end
-
-  def vanity_complete_path(*args); end
-
-  def vanity_complete_url(*args); end
-
-  def vanity_disable_path(*args); end
-
-  def vanity_disable_url(*args); end
-
-  def vanity_enable_path(*args); end
-
-  def vanity_enable_url(*args); end
-
-  def vanity_image_path(*args); end
-
-  def vanity_image_url(*args); end
-
-  def vanity_path(*args); end
-
-  def vanity_reset_path(*args); end
-
-  def vanity_reset_url(*args); end
-
-  def vanity_url(*args); end
 
   def writeit_reply_webhook_comments_path(*args); end
 
@@ -3318,11 +3262,6 @@ end
 module ActiveRecord::Enum
   ENUM_CONFLICT_MESSAGE = ::T.let(nil, ::T.untyped)
   SR_ENUM_KEYWORDS = ::T.let(nil, ::T.untyped)
-end
-
-module ActiveRecord::Enum
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
 end
 
 class ActiveRecord::ExplainRegistry
@@ -5214,13 +5153,6 @@ end
 class Admin::DashboardController
 end
 
-class Admin::DonationsController
-end
-
-class Admin::DonationsController
-  def self.resource_class=(klass); end
-end
-
 class Admin::RepliesController
 end
 
@@ -5233,6 +5165,14 @@ end
 
 class Admin::ReportsController
   def self.resource_class=(klass); end
+end
+
+class Admin::SiteSettingsController::SiteSettingParams
+  def self.inherited(s); end
+end
+
+class Admin::SiteSettingsController::WrappedSiteSettingParams
+  def self.inherited(s); end
 end
 
 class Admin::SuggestedCouncillorsController
@@ -5254,18 +5194,39 @@ class Alert
   include ::Alert::GeneratedAssociationMethods
 end
 
+class Alert::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Alert::GeneratedRelationMethods
+end
+
+class Alert::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Alert::GeneratedRelationMethods
+end
+
+class Alert::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::Alert::GeneratedRelationMethods
+end
+
 module Alert::GeneratedAssociationMethods
 end
 
 module Alert::GeneratedAssociationMethods
+end
+
+module Alert::GeneratedRelationMethods
+  def active(*args, &block); end
+
+  def confirmed(*args, &block); end
+
+  def in_past_week(*args, &block); end
+end
+
+module Alert::GeneratedRelationMethods
 end
 
 class Alert
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-module AlertMailerHelper
   extend ::T::Private::Methods::MethodHooks
   extend ::T::Private::Methods::SingletonMethodHooks
 end
@@ -5336,11 +5297,6 @@ end
 
 class ApiController::SuburbPostcodeParams
   def self.inherited(s); end
-end
-
-module ApiHowtoHelper
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
 end
 
 class Application
@@ -5617,21 +5573,47 @@ class Application
   def self.searchkick_search(term=T.unsafe(nil), **options, &block); end
 end
 
-module ApplicationHelper
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
 class ApplicationRecord
   include ::ApplicationRecord::GeneratedAssociationMethods
   include ::Kaminari::ActiveRecordModelExtension
   include ::Kaminari::ConfigurationMethods
+  RelationType = ::T.let(nil, ::T.untyped)
+end
+
+class ApplicationRecord::ActiveRecord_AssociationRelation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ApplicationRecord::GeneratedRelationMethods
+end
+
+class ApplicationRecord::ActiveRecord_AssociationRelation
+end
+
+class ApplicationRecord::ActiveRecord_Associations_CollectionProxy
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ApplicationRecord::GeneratedRelationMethods
+end
+
+class ApplicationRecord::ActiveRecord_Associations_CollectionProxy
+end
+
+class ApplicationRecord::ActiveRecord_Relation
+  include ::ActiveRecord::Delegation::ClassSpecificRelation
+  include ::ApplicationRecord::GeneratedRelationMethods
+end
+
+class ApplicationRecord::ActiveRecord_Relation
 end
 
 module ApplicationRecord::GeneratedAssociationMethods
 end
 
 module ApplicationRecord::GeneratedAssociationMethods
+end
+
+module ApplicationRecord::GeneratedRelationMethods
+end
+
+module ApplicationRecord::GeneratedRelationMethods
 end
 
 class ApplicationRecord
@@ -5760,11 +5742,6 @@ class ApplicationsController::ShowParams
   def self.inherited(s); end
 end
 
-module ApplicationsHelper
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
 module Arbre::HTML
   AUTO_BUILD_ELEMENTS = ::T.let(nil, ::T.untyped)
   HTML5_ELEMENTS = ::T.let(nil, ::T.untyped)
@@ -5840,11 +5817,6 @@ class AtdisController::TestRedirectParams
   def self.inherited(s); end
 end
 
-module AtdisHelper
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
 class AuthoritiesController::IndexParams
   def self.inherited(s); end
 end
@@ -5855,11 +5827,6 @@ end
 
 class AuthoritiesController::UnderTheHoodParams
   def self.inherited(s); end
-end
-
-module AuthoritiesHelper
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
 end
 
 class Authority
@@ -8738,11 +8705,6 @@ class CommentsController::WriteitReplyHookParams
   def self.inherited(s); end
 end
 
-module CommentsHelper
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
 module Compass
   VERSION = ::T.let(nil, ::T.untyped)
   VERSION_DETAILS = ::T.let(nil, ::T.untyped)
@@ -9391,11 +9353,6 @@ class CouncillorContribution
   def self.before_remove_for_suggested_councillors?(); end
 end
 
-module CouncillorContributionsHelper
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
 module CounterCulture
   VERSION = ::T.let(nil, ::T.untyped)
 end
@@ -9667,14 +9624,6 @@ class Dalli::Server
   REQUEST = ::T.let(nil, ::T.untyped)
   RESPONSE = ::T.let(nil, ::T.untyped)
   RESPONSE_CODES = ::T.let(nil, ::T.untyped)
-end
-
-module Dante
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-class Dante::Runner
-  MAX_START_TRIES = ::T.let(nil, ::T.untyped)
 end
 
 module DatabaseCleaner
@@ -10314,92 +10263,6 @@ module DomainName::Punycode
   SKEW = ::T.let(nil, ::T.untyped)
   TMAX = ::T.let(nil, ::T.untyped)
   TMIN = ::T.let(nil, ::T.untyped)
-end
-
-class Donation
-  def after_add_for_alerts(); end
-
-  def after_add_for_alerts=(val); end
-
-  def after_add_for_alerts?(); end
-
-  def after_remove_for_alerts(); end
-
-  def after_remove_for_alerts=(val); end
-
-  def after_remove_for_alerts?(); end
-
-  def autosave_associated_records_for_alerts(*args); end
-
-  def before_add_for_alerts(); end
-
-  def before_add_for_alerts=(val); end
-
-  def before_add_for_alerts?(); end
-
-  def before_remove_for_alerts(); end
-
-  def before_remove_for_alerts=(val); end
-
-  def before_remove_for_alerts?(); end
-
-  def validate_associated_records_for_alerts(*args); end
-end
-
-class Donation::ActiveRecord_AssociationRelation
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::Donation::GeneratedRelationMethods
-end
-
-class Donation::ActiveRecord_Associations_CollectionProxy
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::Donation::GeneratedRelationMethods
-end
-
-class Donation::ActiveRecord_Relation
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::Donation::GeneratedRelationMethods
-end
-
-module Donation::GeneratedAssociationMethods
-  def alert_ids=(ids); end
-end
-
-module Donation::GeneratedRelationMethods
-end
-
-module Donation::GeneratedRelationMethods
-end
-
-class Donation
-  def self.after_add_for_alerts(); end
-
-  def self.after_add_for_alerts=(val); end
-
-  def self.after_add_for_alerts?(); end
-
-  def self.after_remove_for_alerts(); end
-
-  def self.after_remove_for_alerts=(val); end
-
-  def self.after_remove_for_alerts?(); end
-
-  def self.before_add_for_alerts(); end
-
-  def self.before_add_for_alerts=(val); end
-
-  def self.before_add_for_alerts?(); end
-
-  def self.before_remove_for_alerts(); end
-
-  def self.before_remove_for_alerts=(val); end
-
-  def self.before_remove_for_alerts?(); end
-end
-
-module DonationsHelper
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
 end
 
 class Dotenv::Parser
@@ -12178,8 +12041,6 @@ end
 
 class File
   def self.exists?(_); end
-
-  def self.probe_stat_in(dir); end
 end
 
 FileList = Rake::FileList
@@ -15597,13 +15458,6 @@ class IPAddr
   def initialize(addr=T.unsafe(nil), family=T.unsafe(nil)); end
 end
 
-module ITypeAssert
-  extend ::T::Private::Abstract::Hooks
-  extend ::T::InterfaceWrapper::Helpers
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
 module IceNine
   VERSION = ::T.let(nil, ::T.untyped)
 end
@@ -15944,6 +15798,9 @@ module Lumberjack::Severity
   SEVERITY_LABELS = ::T.let(nil, ::T.untyped)
   UNKNOWN = ::T.let(nil, ::T.untyped)
   WARN = ::T.let(nil, ::T.untyped)
+end
+
+class Lumberjack::TaggedLoggerSupport::Formatter
 end
 
 class Lumberjack::Template
@@ -17327,13 +17184,9 @@ Net::HTTPServerErrorCode = Net::HTTPServerError
 
 Net::HTTPSession = Net::HTTP
 
-class Net::HTTPSuccess
-end
+Net::HTTPSuccess::EXCEPTION_TYPE = Net::HTTPError
 
-Net::HTTPSuccessCode::EXCEPTION_TYPE = Net::HTTPError
-
-class Net::HTTPSuccess
-end
+Net::HTTPSuccessCode = Net::HTTPSuccess
 
 class Net::HTTPURITooLong
   HAS_BODY = ::T.let(nil, ::T.untyped)
@@ -18227,76 +18080,12 @@ module Parlour
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
-class Parlour::ConflictResolver
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
 module Parlour::Debugging::Tree
   INDENT_SPACES = ::T.let(nil, ::T.untyped)
 end
 
-module Parlour::Debugging::Tree
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-module Parlour::Debugging
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-class Parlour::ParseError
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-class Parlour::Plugin
-  extend ::T::Private::Abstract::Hooks
-  extend ::T::InterfaceWrapper::Helpers
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-class Parlour::RbiGenerator::Options
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
 class Parlour::RbiGenerator::Parameter
   PREFIXES = ::T.let(nil, ::T.untyped)
-end
-
-class Parlour::RbiGenerator::Parameter
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-class Parlour::RbiGenerator::RbiObject
-  extend ::T::Private::Abstract::Hooks
-  extend ::T::InterfaceWrapper::Helpers
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-class Parlour::RbiGenerator
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-module Parlour::TypeLoader
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-class Parlour::TypeParser::NodePath
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-class Parlour::TypeParser
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
 end
 
 ParseError = Racc::ParseError
@@ -22552,11 +22341,6 @@ module Regexp::Syntax::Token::UnicodeProperty::Category
   Symbol = ::T.let(nil, ::T.untyped)
 end
 
-module RepliesHelper
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
 class Reply
   def autosave_associated_records_for_comment(*args); end
 
@@ -22639,6 +22423,18 @@ module Report::GeneratedRelationMethods
 end
 
 module Report::GeneratedRelationMethods
+end
+
+class ReportsController::CreateParams
+  def self.inherited(s); end
+end
+
+class ReportsController::NewParams
+  def self.inherited(s); end
+end
+
+class ReportsController::ReportParams
+  def self.inherited(s); end
 end
 
 class Resolv::DNS
@@ -26214,11 +26010,6 @@ module Sidekiq::WebRouter
   ROUTE_PARAMS = ::T.let(nil, ::T.untyped)
 end
 
-module SignupHelper
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
 module SimpleCov
   VERSION = ::T.let(nil, ::T.untyped)
 end
@@ -26547,44 +26338,7 @@ module Socket::Constants
   TCP_NOPUSH = ::T.let(nil, ::T.untyped)
 end
 
-class SorbetRails::Config
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-class SorbetRails::ModelPlugins::ActiveRecordAttribute::ColumnType
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
 SorbetRails::ModelPlugins::Base::Parameter = Parlour::RbiGenerator::Parameter
-
-module SorbetRails::ModelPlugins
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-class SorbetRails::ModelRbiFormatter
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-module SorbetRails::ModelUtils
-  extend ::T::Private::Abstract::Hooks
-  extend ::T::InterfaceWrapper::Helpers
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-module SorbetRails::PluckToTStruct
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-module SorbetRails::Utils
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
 
 module SorbetRails
   extend ::T::Private::Methods::SingletonMethodHooks
@@ -26934,20 +26688,6 @@ class StringScanner
   Version = ::T.let(nil, ::T.untyped)
 end
 
-module Stripe
-  DEFAULT_CA_BUNDLE_PATH = ::T.let(nil, ::T.untyped)
-  RETRY_EXCEPTIONS = ::T.let(nil, ::T.untyped)
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-module Stripe::APIOperations::Request::ClassMethods
-  OPTS_KEYS_TO_PERSIST = ::T.let(nil, ::T.untyped)
-end
-
-class Stripe::Account
-  ARGUMENT_NOT_PROVIDED = ::T.let(nil, ::T.untyped)
-end
-
 class Struct
   def filter(*_); end
 end
@@ -27025,11 +26765,6 @@ module Sysexits
   REVISION = ::T.let(nil, ::T.untyped)
   STATUS_CODES = ::T.let(nil, ::T.untyped)
   VERSION = ::T.let(nil, ::T.untyped)
-end
-
-class TA
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
 end
 
 module TZInfo::RubyCoreSupport
@@ -29165,49 +28900,6 @@ module ValidatesEmailFormatOf
   ERROR_MX_MESSAGE_I18N_KEY = ::T.let(nil, ::T.untyped)
   LocalPartSpecialChars = ::T.let(nil, ::T.untyped)
   VERSION = ::T.let(nil, ::T.untyped)
-end
-
-module Vanity
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-class Vanity::Adapters::ActiveRecordAdapter::VanityMetric
-  UPDATED_AT_GRACE_PERIOD = ::T.let(nil, ::T.untyped)
-end
-
-module Vanity::Autoconnect
-  BLACKLISTED_RAILS_RAKE_TASKS = ::T.let(nil, ::T.untyped)
-  ENVIRONMENT_VANITY_DISABLED_FLAG = ::T.let(nil, ::T.untyped)
-end
-
-class Vanity::Configuration
-  DEFAULTS = ::T.let(nil, ::T.untyped)
-  LEGACY_CONNECTION_KEY = ::T.let(nil, ::T.untyped)
-  LEGACY_REDIS_CONFIG_FILE = ::T.let(nil, ::T.untyped)
-end
-
-class Vanity::Connection
-  DEFAULT_SPECIFICATION = ::T.let(nil, ::T.untyped)
-end
-
-class Vanity::Experiment::AbTest
-  DEFAULT_SCORE_METHOD = ::T.let(nil, ::T.untyped)
-  Z_TO_PROBABILITY = ::T.let(nil, ::T.untyped)
-end
-
-class Vanity::Experiment::BayesianBanditScore
-  DEFAULT_PROBABILITY = ::T.let(nil, ::T.untyped)
-end
-
-class Vanity::Metric
-  AGGREGATES = ::T.let(nil, ::T.untyped)
-end
-
-module Vanity::Version
-  MAJOR = ::T.let(nil, ::T.untyped)
-  MINOR = ::T.let(nil, ::T.untyped)
-  PATCH = ::T.let(nil, ::T.untyped)
-  STRING = ::T.let(nil, ::T.untyped)
 end
 
 class Vector

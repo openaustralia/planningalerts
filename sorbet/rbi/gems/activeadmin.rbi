@@ -1604,9 +1604,9 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
   def self._routes; end
   def self.default_url_options=(obj); end
   include ActionDispatch::Routing::UrlFor
-  include Anonymous_Module_32
+  include Anonymous_Module_26
 end
-module Anonymous_Module_32
+module Anonymous_Module_26
   def _generate_paths_by_default; end
   def _routes; end
   def self._routes; end
@@ -1618,11 +1618,11 @@ module Anonymous_Module_32
   def self.url_for(options); end
   def self.url_options; end
   extend ActiveSupport::Concern
-  extend Anonymous_Module_33
-  extend Anonymous_Module_34
+  extend Anonymous_Module_27
+  extend Anonymous_Module_28
   include ActionDispatch::Routing::UrlFor
-  include Anonymous_Module_33
-  include Anonymous_Module_34
+  include Anonymous_Module_27
+  include Anonymous_Module_28
 end
 module ActiveAdmin::BatchActions
 end
@@ -1676,15 +1676,14 @@ class ApplicationController < ActionController::Base
   def theme_instance; end
   def theme_resolver; end
   def validate_page_param; end
-  def vanity_identity_block; end
-  def vanity_identity_method; end
   extend ThemesOnRails::ControllerAdditions::ClassMethods
   include ActionDispatch::Routing::UrlFor
-  include Anonymous_Module_35
+  include Anonymous_Module_29
 end
 module ApplicationHelper
   def contributor_profile_url(*args, &blk); end
   def contributors(*args, &blk); end
+  def donate_url(*args, &blk); end
   def facebook_share_url(*args, &blk); end
   def km_in_words(*args, &blk); end
   def li_selected(*args, &blk); end
@@ -1699,7 +1698,7 @@ module ApplicationHelper
   extend T::Private::Methods::SingletonMethodHooks
   extend T::Sig
 end
-module Anonymous_Module_35
+module Anonymous_Module_29
   def _generate_paths_by_default; end
   def _routes; end
   def self._routes; end
@@ -1711,11 +1710,11 @@ module Anonymous_Module_35
   def self.url_for(options); end
   def self.url_options; end
   extend ActiveSupport::Concern
-  extend Anonymous_Module_33
-  extend Anonymous_Module_34
+  extend Anonymous_Module_27
+  extend Anonymous_Module_28
   include ActionDispatch::Routing::UrlFor
-  include Anonymous_Module_33
-  include Anonymous_Module_34
+  include Anonymous_Module_27
+  include Anonymous_Module_28
 end
 module Admin
 end
@@ -1728,7 +1727,6 @@ module AlertMailerHelper
   def capitalise_initial_character(*args, &blk); end
   def comment_url_with_tracking(*args, &blk); end
   def new_comment_url_with_tracking(*args, &blk); end
-  def new_donation_url_with_tracking(*args, &blk); end
   def reply_url_with_tracking(*args, &blk); end
   def subject(*args, &blk); end
   extend T::Private::Methods::MethodHooks
@@ -1810,12 +1808,6 @@ module CouncillorContributionsHelper
   extend T::Private::Methods::SingletonMethodHooks
   extend T::Sig
 end
-module DonationsHelper
-  def price_in_cents(*args, &blk); end
-  extend T::Private::Methods::MethodHooks
-  extend T::Private::Methods::SingletonMethodHooks
-  extend T::Sig
-end
 module RepliesHelper
   def reply_path(*args, &blk); end
   extend T::Private::Methods::MethodHooks
@@ -1862,11 +1854,11 @@ class InheritedResources::Base < ApplicationController
   extend InheritedResources::ClassMethods
   extend InheritedResources::UrlHelpers
   include ActionDispatch::Routing::UrlFor
-  include Anonymous_Module_36
+  include Anonymous_Module_30
   include InheritedResources::Actions
   include InheritedResources::BaseHelpers
 end
-module Anonymous_Module_36
+module Anonymous_Module_30
   def _generate_paths_by_default; end
   def _routes; end
   def self._routes; end
@@ -1878,11 +1870,11 @@ module Anonymous_Module_36
   def self.url_for(options); end
   def self.url_options; end
   extend ActiveSupport::Concern
-  extend Anonymous_Module_33
-  extend Anonymous_Module_34
+  extend Anonymous_Module_27
+  extend Anonymous_Module_28
   include ActionDispatch::Routing::UrlFor
-  include Anonymous_Module_33
-  include Anonymous_Module_34
+  include Anonymous_Module_27
+  include Anonymous_Module_28
 end
 class ActiveAdmin::BaseController < InheritedResources::Base
   def _collection_params(*given_args); end
@@ -1925,9 +1917,9 @@ class ActiveAdmin::BaseController < InheritedResources::Base
   include ActionDispatch::Routing::UrlFor
   include ActiveAdmin::BaseController::Authorization
   include ActiveAdmin::BaseController::Menu
-  include Anonymous_Module_37
+  include Anonymous_Module_31
 end
-module Anonymous_Module_37
+module Anonymous_Module_31
   def _generate_paths_by_default; end
   def _routes; end
   def self._routes; end
@@ -1939,11 +1931,11 @@ module Anonymous_Module_37
   def self.url_for(options); end
   def self.url_options; end
   extend ActiveSupport::Concern
-  extend Anonymous_Module_33
-  extend Anonymous_Module_34
+  extend Anonymous_Module_27
+  extend Anonymous_Module_28
   include ActionDispatch::Routing::UrlFor
-  include Anonymous_Module_33
-  include Anonymous_Module_34
+  include Anonymous_Module_27
+  include Anonymous_Module_28
 end
 module ActiveAdmin::BaseController::Authorization
   def action_to_permission(action); end
@@ -2033,9 +2025,9 @@ class ActiveAdmin::ResourceController < ActiveAdmin::BaseController
   include ActiveAdmin::ResourceController::Streaming
   include ActiveAdmin::ScopeChain
   include ActiveAdmin::ViewHelpers::DownloadFormatLinksHelper
-  include Anonymous_Module_38
+  include Anonymous_Module_32
 end
-module Anonymous_Module_38
+module Anonymous_Module_32
   def _generate_paths_by_default; end
   def _routes; end
   def self._routes; end
@@ -2047,11 +2039,11 @@ module Anonymous_Module_38
   def self.url_for(options); end
   def self.url_options; end
   extend ActiveSupport::Concern
-  extend Anonymous_Module_33
-  extend Anonymous_Module_34
+  extend Anonymous_Module_27
+  extend Anonymous_Module_28
   include ActionDispatch::Routing::UrlFor
-  include Anonymous_Module_33
-  include Anonymous_Module_34
+  include Anonymous_Module_27
+  include Anonymous_Module_28
 end
 module ActiveAdmin::ResourceController::ActionBuilder
   extend ActiveSupport::Concern
@@ -2269,9 +2261,9 @@ class ActiveAdmin::PageController < ActiveAdmin::BaseController
   def self.resource_class; end
   def self.resources_configuration; end
   include ActionDispatch::Routing::UrlFor
-  include Anonymous_Module_39
+  include Anonymous_Module_33
 end
-module Anonymous_Module_39
+module Anonymous_Module_33
   def _generate_paths_by_default; end
   def _routes; end
   def self._routes; end
@@ -2283,11 +2275,11 @@ module Anonymous_Module_39
   def self.url_for(options); end
   def self.url_options; end
   extend ActiveSupport::Concern
-  extend Anonymous_Module_33
-  extend Anonymous_Module_34
+  extend Anonymous_Module_27
+  extend Anonymous_Module_28
   include ActionDispatch::Routing::UrlFor
-  include Anonymous_Module_33
-  include Anonymous_Module_34
+  include Anonymous_Module_27
+  include Anonymous_Module_28
 end
 class ActiveAdmin::PageDSL < ActiveAdmin::DSL
   def belongs_to(target, options = nil); end
@@ -2317,7 +2309,7 @@ class ActiveAdmin::CSVBuilder::Column
   def name; end
   def options; end
 end
-module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_40
+module Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_34
 end
 class ActiveAdmin::Comment < ActiveRecord::Base
   def autosave_associated_records_for_author(*args); end
@@ -2335,7 +2327,7 @@ class ActiveAdmin::Comment < ActiveRecord::Base
   def set_resource_type; end
   extend Kaminari::ConfigurationMethods::ClassMethods
   include ActiveAdmin::Comment::GeneratedAssociationMethods
-  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_40
+  include Anonymous_ActiveRecord_AttributeMethods_GeneratedAttributeMethods_34
   include Kaminari::ActiveRecordModelExtension
   include Kaminari::ConfigurationMethods
 end

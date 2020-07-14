@@ -2613,7 +2613,6 @@ class ActionController::Base < ActionController::Metal
   extend Responders::ControllerMethod
   extend Responders::ControllerMethod
   extend Searchkick::ControllerRuntime::ClassMethods
-  extend Vanity::Rails::UseVanity
   include AbstractController::AssetPaths
   include AbstractController::Caching
   include AbstractController::Caching::Fragments
@@ -2673,8 +2672,6 @@ class ActionController::Base < ActionController::Metal
   include ActiveSupport::Rescuable
   include Recaptcha::Adapters::ControllerMethods
   include Searchkick::ControllerRuntime
-  include Vanity::Rails::Filters
-  include Vanity::Rails::Identity
 end
 class ActionDispatch::ExceptionWrapper
   def application_trace; end

@@ -27,7 +27,7 @@ end
 class MultiXml::DisallowedTypeError < StandardError
   def initialize(type); end
 end
-module InvalidName___Class_0x00___FileLike_42
+module InvalidName___Class_0x00___FileLike_36
   def content_type; end
   def content_type=(arg0); end
   def original_filename; end

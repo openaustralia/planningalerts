@@ -25,11 +25,11 @@ module Guard
   def self.state; end
   extend Guard::Deprecated::Guard::ClassMethods
 end
-class Anonymous_Nenv_Environment_74 < Nenv::Environment
+class Anonymous_Nenv_Environment_68 < Nenv::Environment
   def gem_silence_deprecations?; end
   def strict?; end
 end
-class Guard::Config < Anonymous_Nenv_Environment_74
+class Guard::Config < Anonymous_Nenv_Environment_68
   def initialize; end
   def silence_deprecations?; end
 end

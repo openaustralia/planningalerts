@@ -255,7 +255,7 @@ class Virtus::Attribute
   def type; end
   def value_coerced?(value); end
   extend DescendantsTracker
-  include Anonymous_Equalizer_72
+  include Anonymous_Equalizer_66
   include Equalizer::Methods
 end
 class Virtus::Attribute::DefaultValue
@@ -277,7 +277,7 @@ class Virtus::Attribute::DefaultValue::FromSymbol < Virtus::Attribute::DefaultVa
   def call(instance, _); end
   def self.handle?(value); end
 end
-module Anonymous_Equalizer_72
+module Anonymous_Equalizer_66
   def cmp?(comparator, other); end
   def hash; end
   def inspect; end

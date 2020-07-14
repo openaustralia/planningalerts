@@ -375,8 +375,6 @@ class ActionMailer::Base < AbstractController::Base
   include ActiveSupport::Benchmarkable
   include ActiveSupport::Callbacks
   include ActiveSupport::Rescuable
-  include Vanity::Rails::Filters
-  include Vanity::Rails::UseVanityMailer
 end
 class ActionMailer::Base::NullMail
   def body; end
