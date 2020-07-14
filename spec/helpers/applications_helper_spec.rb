@@ -226,23 +226,23 @@ describe ApplicationsHelper do
 
   describe "#heading_in_words" do
     describe "north" do
-      it { expect(helper.heading_in_words(0.0)).to eq "N" }
-      it { expect(helper.heading_in_words(-22.5)).to eq "N" }
-      it { expect(helper.heading_in_words(22.4)).to eq "N" }
+      it { expect(helper.heading_in_words(0.0)).to eq "north" }
+      it { expect(helper.heading_in_words(-22.5)).to eq "north" }
+      it { expect(helper.heading_in_words(22.4)).to eq "north" }
     end
 
-    describe "north east" do
-      it { expect(helper.heading_in_words(22.5)).to eq "NE" }
-      it { expect(helper.heading_in_words(45.0)).to eq "NE" }
-      it { expect(helper.heading_in_words(67.4)).to eq "NE" }
+    describe "northeast" do
+      it { expect(helper.heading_in_words(22.5)).to eq "northeast" }
+      it { expect(helper.heading_in_words(45.0)).to eq "northeast" }
+      it { expect(helper.heading_in_words(67.4)).to eq "northeast" }
     end
 
     describe "east" do
-      it { expect(helper.heading_in_words(67.5)).to eq "E" }
+      it { expect(helper.heading_in_words(67.5)).to eq "east" }
     end
 
-    describe "north west" do
-      it { expect(helper.heading_in_words(-22.6)).to eq "NW" }
+    describe "northwest" do
+      it { expect(helper.heading_in_words(-22.6)).to eq "northwest" }
     end
   end
 end

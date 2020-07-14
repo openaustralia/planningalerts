@@ -1,4 +1,4 @@
-The following new comment has been made on a planning application within 800 m of 24 Bruce Rd, Glenbrook NSW 2773:
+The following new comment has been made on a planning application within 800 metres of 24 Bruce Rd, Glenbrook NSW 2773:
 
 Matthew Landauer commented on “Pretty” at 2 Foo Parade, Glenbrook NSW 2773:
 
@@ -9,10 +9,10 @@ https://dev.planningalerts.org.au/applications/3?utm_campaign=view-comment&utm_m
 
 ============================================================
 
-The following new planning applications have been found within 800 m of 24 Bruce Rd, Glenbrook NSW 2773:
+The following new planning applications have been found within 800 metres of 24 Bruce Rd, Glenbrook NSW 2773:
 
 Foo Street, Bar
-220 km SW
+220 kilometres southwest
 
 Knock something down
 
@@ -22,7 +22,7 @@ Add your own comment: https://dev.planningalerts.org.au/applications/1?utm_campa
 -----------------------------
 
 Bar Street, Foo
-190 km SW
+190 kilometres southwest
 
 Put something up
 

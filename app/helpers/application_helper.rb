@@ -34,9 +34,9 @@ module ApplicationHelper
   sig { params(meters: Float).returns(String) }
   def meters_in_words(meters)
     if meters < 1000
-      "#{significant_figure_remove_trailing_zero(meters, 2)} m"
+      pluralize(significant_figure_remove_trailing_zero(meters, 2), "metre")
     else
-      "#{significant_figure_remove_trailing_zero(meters / 1000.0, 2)} km"
+      pluralize(significant_figure_remove_trailing_zero(meters / 1000.0, 2), "kilometre")
     end
   end
 

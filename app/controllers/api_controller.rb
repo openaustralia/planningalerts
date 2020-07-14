@@ -296,5 +296,6 @@ class ApiController < ApplicationController
   class Helper
     include Singleton
     include ApplicationHelper
+    include ActionView::Helpers::TextHelper
   end
 end

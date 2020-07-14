@@ -23,7 +23,7 @@ feature "Searching for development application near an address" do
     fill_in "Enter a street address", with: "24 Bruce Road, Glenbrook"
     click_button "Search"
 
-    expect(page).to have_content "Applications within 2 km of 24 Bruce Rd, Glenbrook NSW 2773"
+    expect(page).to have_content "Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773"
 
     within "ol.applications" do
       expect(page).to have_content "24 Bruce Road"

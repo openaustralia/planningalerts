@@ -5,20 +5,25 @@ require "spec_helper"
 describe ApplicationHelper do
   describe "#meters_in_words" do
     it "should convert a distance in metres to simple concise text" do
-      expect(helper.meters_in_words(2000.0)).to eq("2 km")
-      expect(helper.meters_in_words(500.0)).to eq("500 m")
+      expect(helper.meters_in_words(2000.0)).to eq("2 kilometres")
+      expect(helper.meters_in_words(500.0)).to eq("500 metres")
     end
 
     it "should round distances in km to the nearest 100m" do
-      expect(helper.meters_in_words(2345.0)).to eq("2.3 km")
+      expect(helper.meters_in_words(2345.0)).to eq("2.3 kilometres")
     end
 
     it "should round distances in metres to nearest 10m" do
-      expect(helper.meters_in_words(923.45)).to eq("920 m")
+      expect(helper.meters_in_words(923.45)).to eq("920 metres")
     end
 
     it "should round distances less than 100 metres to nearest metre" do
-      expect(helper.meters_in_words(84.23)).to eq("84 m")
+      expect(helper.meters_in_words(84.23)).to eq("84 metres")
+    end
+
+    it "should use the singular when appropriate" do
+      expect(helper.meters_in_words(1000.0)).to eq("1 kilometre")
+      expect(helper.meters_in_words(1.0)).to eq("1 metre")
     end
   end
 

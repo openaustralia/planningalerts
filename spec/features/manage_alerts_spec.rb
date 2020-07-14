@@ -11,7 +11,7 @@ feature "Manage alerts" do
     visit unsubscribe_alert_url(id: alert.confirm_id, host: "dev.planningalerts.org.au")
 
     expect(page).to have_content("You have been unsubscribed")
-    expect(page).to have_content("24 Bruce Rd, Glenbrook (within 2 km)")
+    expect(page).to have_content("24 Bruce Rd, Glenbrook (within 2 kilometres)")
     expect(Alert.active.find_by(address: "24 Bruce Rd, Glenbrook",
                                 email: "example@example.com")).to be_nil
   end
@@ -23,8 +23,8 @@ feature "Manage alerts" do
     visit area_alert_url(id: alert.confirm_id, host: "dev.planningalerts.org.au")
 
     expect(page).to have_content("What size area near 24 Bruce Rd, Glenbrook would you like to receive alerts for?")
-    expect(find_field("My suburb (within 2 km)")["checked"]).to be_truthy
-    choose("My neighbourhood (within 800 m)")
+    expect(find_field("My suburb (within 2 kilometres)")["checked"]).to be_truthy
+    choose("My neighbourhood (within 800 metres)")
     click_button("Update size")
 
     expect(page).to have_content("your alert size area has been updated")

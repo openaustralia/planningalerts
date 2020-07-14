@@ -136,7 +136,7 @@ module ApplicationsHelper
     image_tag(google_static_streetview_url(application, size: size, fov: fov, key: key), size: size, alt: "Streetview of #{application.address}")
   end
 
-  HEADING_SECTOR_NAMES = T.let(%w[N NE E SE S SW W NW].freeze, T::Array[String])
+  HEADING_SECTOR_NAMES = T.let(%w[north northeast east southeast south southwest west northwest].freeze, T::Array[String])
 
   sig { params(degrees: Float).returns(String) }
   def heading_in_words(degrees)

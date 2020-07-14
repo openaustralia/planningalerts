@@ -202,13 +202,13 @@ describe ApiController do
           get :point, params: { key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000 }
           expect(assigns[:applications]).to eq(@result)
           # Should use the normalised form of the address in the description
-          expect(assigns[:description]).to eq("Recent applications within 4 km of 24 Bruce Road, Glenbrook NSW 2773")
+          expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 24 Bruce Road, Glenbrook NSW 2773")
         end
 
         it "should find recent applications near the address using the old parameter name" do
           get :point, params: { key: user.api_key, format: "rss", address: "24 Bruce Road Glenbrook", area_size: 4000 }
           expect(assigns[:applications]).to eq(@result)
-          expect(assigns[:description]).to eq("Recent applications within 4 km of 24 Bruce Road, Glenbrook NSW 2773")
+          expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 24 Bruce Road, Glenbrook NSW 2773")
         end
 
         it "should log the api call" do
@@ -228,7 +228,7 @@ describe ApiController do
 
           get :point, params: { key: user.api_key, address: "24 Bruce Road Glenbrook", format: "rss" }
           expect(assigns[:applications]).to eq(result)
-          expect(assigns[:description]).to eq("Recent applications within 2 km of 24 Bruce Road, Glenbrook NSW 2773")
+          expect(assigns[:description]).to eq("Recent applications within 2 kilometres of 24 Bruce Road, Glenbrook NSW 2773")
         end
       end
 
@@ -258,13 +258,13 @@ describe ApiController do
       it "should find recent applications near the point" do
         get :point, params: { key: user.api_key, format: "rss", lat: 1.0, lng: 2.0, radius: 4000 }
         expect(assigns[:applications]).to eq(@result)
-        expect(assigns[:description]).to eq("Recent applications within 4 km of 1.0,2.0")
+        expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 1.0,2.0")
       end
 
       it "should find recent applications near the point using the old parameter name" do
         get :point, params: { key: user.api_key, format: "rss", lat: 1.0, lng: 2.0, area_size: 4000 }
         expect(assigns[:applications]).to eq(@result)
-        expect(assigns[:description]).to eq("Recent applications within 4 km of 1.0,2.0")
+        expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 1.0,2.0")
       end
     end
   end
