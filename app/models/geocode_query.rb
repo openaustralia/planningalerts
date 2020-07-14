@@ -1,9 +1,11 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class GeocodeQuery < ApplicationRecord
+  extend T::Sig
   has_many :geocode_results, dependent: :destroy
 
+  sig { params(options: T.untyped).returns(String) }
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
       csv << ["Id", "Address", "Average distance to average result",
@@ -19,10 +21,12 @@ class GeocodeQuery < ApplicationRecord
     end
   end
 
+  sig { params(geocoder: String).returns(GeocodeResult) }
   def result(geocoder)
     geocode_results.find { |r| r.geocoder == geocoder }
   end
 
+  sig { returns(T.nilable(Location)) }
   def average_result
     average = Location.new(lat: 0.0, lng: 0.0)
     count = 0
@@ -41,11 +45,12 @@ class GeocodeQuery < ApplicationRecord
   end
 
   # Returns value in metres
+  sig { returns(T.nilable(Float)) }
   def average_distance_to_average_result
     point = average_result
     return nil if point.nil?
 
-    average = 0
+    average = 0.0
     count = 0
     geocode_results.each do |result|
       average += result.location.distance_to(point)
