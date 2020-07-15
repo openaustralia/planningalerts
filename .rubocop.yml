@@ -168,5 +168,4 @@ Sorbet/StrictSigil:
     - app/helpers/**/*.rb
     - app/jobs/*.rb
     - app/mailers/*.rb
-    - app/sweepers/*.rb
     - lib/*.rb
