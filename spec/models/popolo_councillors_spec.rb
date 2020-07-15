@@ -14,7 +14,7 @@ describe PopoloCouncillors do
             id: "albury_city_council/kevin_mack",
             name: "Kevin Mack",
             email: "kevin@albury.nsw.gov.au",
-            image: "https://example.com/kevin.jpg",
+            image: "https://example.com/kevin.jpg"
           ),
           nil,
           nil
@@ -23,7 +23,7 @@ describe PopoloCouncillors do
           EveryPolitician::Popolo::Person.new(
             id: "albury_city_council/ross_jackson",
             name: "Ross Jackson",
-            email: "ross@albury.nsw.gov.au",
+            email: "ross@albury.nsw.gov.au"
           ),
           "Liberal",
           nil
