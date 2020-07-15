@@ -9,18 +9,24 @@ describe PopoloCouncillors do
       popolo_councillors = PopoloCouncillors.new(EveryPolitician::Popolo.read(popolo_file))
 
       expected_persons_array = [
-        EveryPolitician::Popolo::Person.new(
-          id: "albury_city_council/kevin_mack",
-          name: "Kevin Mack",
-          email: "kevin@albury.nsw.gov.au",
-          image: "https://example.com/kevin.jpg",
-          party: nil
+        PersonWithExtraFields.new(
+          EveryPolitician::Popolo::Person.new(
+            id: "albury_city_council/kevin_mack",
+            name: "Kevin Mack",
+            email: "kevin@albury.nsw.gov.au",
+            image: "https://example.com/kevin.jpg",
+          ),
+          nil,
+          nil
         ),
-        EveryPolitician::Popolo::Person.new(
-          id: "albury_city_council/ross_jackson",
-          name: "Ross Jackson",
-          email: "ross@albury.nsw.gov.au",
-          party: "Liberal"
+        PersonWithExtraFields.new(
+          EveryPolitician::Popolo::Person.new(
+            id: "albury_city_council/ross_jackson",
+            name: "Ross Jackson",
+            email: "ross@albury.nsw.gov.au",
+          ),
+          "Liberal",
+          nil
         )
       ]
       expect(popolo_councillors.for_authority("Albury City Council")).to eql expected_persons_array
