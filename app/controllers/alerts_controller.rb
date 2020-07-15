@@ -62,11 +62,12 @@ class AlertsController < ApplicationController
     @alert&.unsubscribe!
   end
 
+  # TODO: Split this into two actions
   def area
     typed_params = TypedParams[AreaParams].new.extract!(params)
     @zone_sizes = zone_sizes
     @alert = Alert.find_by!(confirm_id: typed_params.id)
-    if request.get?
+    if request.get? || request.head?
       @size = @zone_sizes.invert[@alert.radius_meters]
     else
       @alert.radius_meters = @zone_sizes[typed_params.size]

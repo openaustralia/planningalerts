@@ -50,5 +50,11 @@ describe AlertsController do
         get :area, params: { id: "38457982345874" }
       end.to raise_error(ActiveRecord::RecordNotFound)
     end
+
+    it "should support head requests" do
+      alert = create :confirmed_alert
+      head :area, params: { id: alert.confirm_id }
+      expect(response).to be_successful
+    end
   end
 end
