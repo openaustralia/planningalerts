@@ -10,17 +10,14 @@ module Admin
         "#{c.name} (#{c.errors.full_messages.to_sentence})"
       end.to_sentence
 
-      # TODO: DRY up duplication
-      if councillors.any? && valid_councillors.any? && invalid_councillors.any?
-        "Successfully loaded/updated #{pluralize valid_councillors.count, 'councillor'}." + " " \
-          "Skipped loading #{pluralize invalid_councillors.count, 'councillor'}. #{error_messages}."
-      elsif councillors.any? && valid_councillors.count == councillors.count
-        "Successfully loaded/updated #{pluralize valid_councillors.count, 'councillor'}."
-      elsif councillors.any? && invalid_councillors.count == councillors.count
-        "Skipped loading #{pluralize invalid_councillors.count, 'councillor'}. #{error_messages}."
-      elsif councillors.empty?
-        "Could not find any councillors in the data to load."
-      end
+      return "Could not find any councillors in the data to load." if councillors.empty?
+
+      valid_message = "Successfully loaded/updated #{pluralize valid_councillors.count, 'councillor'}. "
+      invalid_message = "Skipped loading #{pluralize invalid_councillors.count, 'councillor'}. #{error_messages}."
+      text = ""
+      text += valid_message if valid_councillors.any?
+      text += invalid_message if invalid_councillors.any?
+      text.strip
     end
   end
 end
