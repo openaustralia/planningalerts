@@ -1,8 +1,11 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 module Admin
   module AuthoritiesHelper
+    extend T::Sig
+
+    sig { params(councillors: T::Array[Councillor]).returns(String) }
     def load_councillors_response_text(councillors)
       valid_councillors = councillors.select(&:valid?)
       invalid_councillors = councillors.select(&:invalid?)
