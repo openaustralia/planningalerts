@@ -1,19 +1,25 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class GenerateSitemapService < ApplicationService
+  extend T::Sig
+
+  sig { returns(Logger) }
   attr_reader :logger
 
   include GeneratedUrlHelpers
 
+  sig { params(logger: Logger).void }
   def self.call(logger: Logger.new(STDOUT))
     new(logger: logger).call
   end
 
+  sig { params(logger: Logger).void }
   def initialize(logger:)
     @logger = logger
   end
 
+  sig { void }
   def call
     s = Sitemap.new(T.must(root_url(host: ENV["HOST"])[0..-2]), Rails.root.join("public").to_s, logger)
 
