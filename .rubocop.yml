@@ -159,13 +159,15 @@ Sorbet/StrictSigil:
     - app/themes/standard/views/comments/index.rss.builder
     - experiments/metrics/alert_signup.rb
     # TODO: Remove these exclusions as soon as we can
+    - app/models/concerns/email_confirmable.rb
+    - app/models/councillor_contribution.rb
+    - app/models/feed.rb
     - app/admin/*.rb
     - app/controllers/**/*.rb
     - app/forms/*.rb
     - app/helpers/**/*.rb
     - app/jobs/*.rb
     - app/mailers/*.rb
-    - app/models/**/*.rb
     - app/services/*.rb
     - app/sweepers/*.rb
     - lib/*.rb
