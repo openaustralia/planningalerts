@@ -5,7 +5,7 @@ require "spec_helper"
 describe TwitterFeed do
   describe "#items" do
     let(:silent_logger) do
-      logger = double
+      logger = Logger.new(STDOUT)
       allow(logger).to receive(:warn)
       allow(logger).to receive(:error)
       logger
@@ -17,7 +17,7 @@ describe TwitterFeed do
       end
 
       it "should log a warning" do
-        logger = double
+        logger = Logger.new(STDOUT)
         expect(logger).to receive(:warn).with("No twitter API credentials set")
         TwitterFeed.new("planningalerts", logger).items
       end
@@ -63,7 +63,7 @@ describe TwitterFeed do
         end
 
         it "should log an error" do
-          logger = double
+          logger = Logger.new(STDOUT)
           expect(logger).to receive(:error).with("while accessing twitter API: Sorry, that page does not exist.")
           VCR.use_cassette("twitter") do
             TwitterFeed.new(twitter_user, logger).items
