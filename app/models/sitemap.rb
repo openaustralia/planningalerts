@@ -1,18 +1,27 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 require "zlib"
 
 class SitemapUrl
-  attr_reader :loc, :changefreq, :lastmod
+  extend T::Sig
 
-  CHANGEFREQ_VALUES = %w[always hourly daily weekly monthly yearly never"].freeze
+  sig { returns(String) }
+  attr_reader :loc
 
+  sig { returns(T.nilable(String)) }
+  attr_reader :changefreq
+
+  sig { returns(T.nilable(Time)) }
+  attr_reader :lastmod
+
+  CHANGEFREQ_VALUES = T.let(%w[always hourly daily weekly monthly yearly never"].freeze, T::Array[String])
+
+  sig { params(loc: String, options: T::Hash[Symbol, T.untyped]).void }
   def initialize(loc, options)
     @loc = loc
-    @changefreq = options.delete(:changefreq)
-    @changefreq = @changefreq.to_s if @changefreq
-    @lastmod = options.delete(:lastmod)
+    @changefreq = T.let(options.delete(:changefreq)&.to_s, T.nilable(String))
+    @lastmod = T.let(options.delete(:lastmod), T.nilable(Time))
     throw "Invalid value #{@changefreq} for changefreq" unless @changefreq.nil? || CHANGEFREQ_VALUES.include?(@changefreq)
     throw "Invalid options in add_url" unless options.empty?
   end
@@ -20,29 +29,42 @@ end
 
 # Like a Zlib::GzipWriter class but also counts the number of bytes (uncompressed) written out
 class CountedFile
+  extend T::Sig
+
+  sig { returns(Integer) }
   attr_reader :size
 
+  sig { params(filename: String).void }
   def initialize(filename)
-    @writer = Zlib::GzipWriter.open(filename)
-    @size = 0
+    @writer = T.let(Zlib::GzipWriter.open(filename), Zlib::GzipWriter)
+    @size = T.let(0, Integer)
   end
 
+  sig { params(text: String).void }
   def <<(text)
     @writer << text
     @size += text.size
   end
 
+  sig { params(filename: String).returns(CountedFile) }
   def self.open(filename)
     new(filename)
   end
 
+  sig { void }
   def close
     @writer.close
   end
 end
 
 class Sitemap
-  attr_reader :root_url, :root_path
+  extend T::Sig
+
+  sig { returns(String) }
+  attr_reader :root_url
+
+  sig { returns(String) }
+  attr_reader :root_path
 
   # These are limits that are imposed on a single sitemap file by the specification
   MAX_URLS_PER_FILE = 50000
@@ -51,6 +73,7 @@ class Sitemap
 
   SITEMAP_XMLNS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
+  sig { params(root_url: String, root_path: String, logger: Logger).void }
   def initialize(root_url, root_path, logger = Logger.new(STDOUT))
     @root_url = root_url
     @root_path = root_path
@@ -59,32 +82,40 @@ class Sitemap
     FileUtils.mkdir_p "#{@root_path}/sitemaps"
 
     # Index of current sitemap file
-    @index = 0
+    @index = T.let(0, Integer)
+    @index_file = T.let(File.open("#{root_path}/#{sitemap_index_relative_path}", "w"), File)
     start_index
+    @sitemap_file = T.let(CountedFile.open(sitemap_path), CountedFile)
+    @no_urls = T.let(0, Integer)
+    @lastmod = T.let(nil, T.nilable(Time))
     start_sitemap
   end
 
-  def start_sitemap
-    sitemap_path = "#{root_path}/#{sitemap_relative_path}"
-    @logger.info "Writing sitemap file (#{sitemap_path})..."
-    @sitemap_file = CountedFile.open(sitemap_path)
-    @sitemap_file << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-    @sitemap_file << "<urlset xmlns=\"#{SITEMAP_XMLNS}\">"
-    @no_urls = 0
-    @lastmod = nil
+  sig { returns(String) }
+  def sitemap_path
+    "#{root_path}/#{sitemap_relative_path}"
   end
 
+  sig { void }
+  def start_sitemap
+    @logger.info "Writing sitemap file (#{sitemap_path})..."
+    @sitemap_file << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+    @sitemap_file << "<urlset xmlns=\"#{SITEMAP_XMLNS}\">"
+  end
+
+  sig { void }
   def start_index
-    @index_file = File.open("#{@root_path}/#{sitemap_index_relative_path}", "w")
     @index_file << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
     @index_file << "<sitemapindex xmlns=\"#{SITEMAP_XMLNS}\">"
   end
 
+  sig { void }
   def finish_index
     @index_file << "</sitemapindex>"
     @index_file.close
   end
 
+  sig { void }
   def finish_sitemap
     @sitemap_file << "</urlset>"
     @sitemap_file.close
@@ -95,6 +126,7 @@ class Sitemap
     @index_file << "</sitemap>"
   end
 
+  sig { params(loc: String, options: T::Hash[Symbol, T.untyped]).void }
   def add_url(loc, options = {})
     url = SitemapUrl.new(loc, options)
     # Now build up the bit of XML that we're going to add (as a string)
@@ -115,25 +147,30 @@ class Sitemap
     @no_urls += 1
     # For the last modification time of the whole sitemap file use the most recent
     # modification time of all the urls in the file
-    @lastmod = url.lastmod if url.lastmod && (@lastmod.nil? || url.lastmod > @lastmod)
+    l = url.lastmod
+    @lastmod = l if l && (@lastmod.nil? || l > @lastmod)
   end
 
   # Write any remaining bits of XML and close all the files
+  sig { void }
   def finish
     finish_sitemap
     finish_index
   end
 
+  sig { params(date: T.nilable(Time)).returns(T.nilable(String)) }
   def self.w3c_date(date)
     date&.utc&.strftime("%Y-%m-%dT%H:%M:%S+00:00")
   end
 
   # Path on the filesystem (relative to root_path) to the sitemap index file
   # This needs to be at the root of the web path to include all the urls below it
+  sig { returns(String) }
   def sitemap_index_relative_path
     "sitemap.xml"
   end
 
+  sig { returns(String) }
   def sitemap_relative_path
     "sitemaps/sitemap#{@index + 1}.xml.gz"
   end
