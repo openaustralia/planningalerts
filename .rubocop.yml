@@ -165,7 +165,6 @@ Sorbet/StrictSigil:
     - app/admin/*.rb
     - app/controllers/**/*.rb
     - app/forms/*.rb
-    - app/helpers/**/*.rb
     - app/jobs/*.rb
     - app/mailers/*.rb
     - lib/*.rb
