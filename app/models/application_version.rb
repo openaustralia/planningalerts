@@ -143,15 +143,16 @@ class ApplicationVersion < ApplicationRecord
     return if lat && lng && suburb && state && postcode
 
     r = GeocodeService.call(address)
-    if r.error.nil?
-      self.lat = r.top.lat
-      self.lng = r.top.lng
-      self.suburb = r.top.suburb
-      self.state = r.top.state
+    top = r.top
+    if top
+      self.lat = top.lat
+      self.lng = top.lng
+      self.suburb = top.suburb
+      self.state = top.state
       # Hack - workaround for inconsistent returned state name (as of 21 Jan 2011)
       # from Google Geocoder
       self.state = "NSW" if state == "New South Wales"
-      self.postcode = r.top.postcode
+      self.postcode = top.postcode
     else
       logger.error "Couldn't geocode address: #{address} (#{r.error})"
     end

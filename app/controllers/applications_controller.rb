@@ -86,15 +86,16 @@ class ApplicationsController < ApplicationController
     @page = typed_params.page
     if @q
       result = GoogleGeocodeService.call(@q)
-      if result.error
+      top = result.top
+      if top.nil?
         @other_addresses = []
         @error = result.error
       else
-        @q = result.top.full_address
+        @q = top.full_address
         @alert = Alert.new(address: @q)
-        @other_addresses = result.rest.map(&:full_address)
+        @other_addresses = T.must(result.rest).map(&:full_address)
         @applications = Application.with_current_version.near(
-          [result.top.lat, result.top.lng], @radius / 1000,
+          [top.lat, top.lng], @radius / 1000,
           units: :km,
           latitude: "application_versions.lat",
           longitude: "application_versions.lng"

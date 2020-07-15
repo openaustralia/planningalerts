@@ -38,7 +38,8 @@ class GeocodeService < ApplicationService
     # If the geocoder returns an error just treat it like a nil result
     loc1 = result1.error ? nil : result1.top
     loc2 = result2.error ? nil : result2.top
-    return true if (loc1 && loc2.nil?) || (loc2 && loc1.nil?)
+    # Two nil locations are also different
+    return true if loc1.nil? || loc2.nil?
 
     loc1.distance_to(loc2) > threshold
   end

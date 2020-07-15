@@ -139,10 +139,11 @@ class Alert < ApplicationRecord
     @geocode_result = T.let(GoogleGeocodeService.call(address), T.nilable(GeocoderResults))
 
     r = T.must(@geocode_result)
-    return if r.error || r.all.many?
+    top = r.top
+    return if top.nil? || r.all.many?
 
-    self.location = r.top
-    self.address = r.top.full_address
+    self.location = top
+    self.address = top.full_address
   end
 
   private
@@ -152,10 +153,12 @@ class Alert < ApplicationRecord
     # Only validate the street address if we used the geocoder
     return unless @geocode_result
 
-    if @geocode_result.error
-      errors.add(:address, @geocode_result.error)
+    top = @geocode_result.top
+    error = @geocode_result.error
+    if top.nil?
+      errors.add(:address, error) if error
     elsif @geocode_result.all.many?
-      errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{@geocode_result.top.full_address}")
+      errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{top.full_address}")
     end
   end
 end
