@@ -1,10 +1,13 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class ReportMailer < ApplicationMailer
+  extend T::Sig
+
+  sig { params(report: Report).returns(Mail::Message) }
   def notify(report)
-    @report = report
-    @comment = report.comment
+    @report = T.let(report, T.nilable(Report))
+    @comment = T.let(report.comment, T.nilable(Comment))
     mail(
       to: ENV["EMAIL_MODERATOR"],
       from: "#{report.name} <#{ENV['EMAIL_MODERATOR']}>",
