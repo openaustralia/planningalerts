@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   sig { void }
   def set_api_key
-    self.api_key = Digest::MD5.base64digest(id.to_s + rand.to_s + Time.zone.now.to_s)[0...20]
+    self.api_key = SecureRandom.base58(20)
   end
 
   sig { params(notification: T.untyped, args: T.untyped).void }
