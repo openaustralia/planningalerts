@@ -1,10 +1,13 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class CommentMailer < ApplicationMailer
+  extend T::Sig
+
   include EmailFrom
   helper :comments
 
+  sig { params(comment: Comment).returns(Mail::Message) }
   def notify_authority(comment)
     @comment = comment
 
@@ -18,19 +21,23 @@ class CommentMailer < ApplicationMailer
     )
   end
 
+  sig { params(comment: Comment).returns(Mail::Message) }
+  # Note that this will fail if the comment doesn't have an attached councillor
   def notify_councillor(comment)
-    @comment = comment
+    @comment = T.let(comment, T.nilable(Comment))
     from_address = ENV["EMAIL_COUNCILLOR_REPLIES_TO"]
 
     mail(
       from: "#{comment.name} <#{from_address}>",
       sender: email_from,
       reply_to: "#{comment.name} <#{from_address}>",
-      to: comment.councillor.email, subject: "Planning application at #{comment.application.address}"
+      to: T.must(comment.councillor).email, subject: "Planning application at #{comment.application.address}"
     )
   end
 
   # FIXME: This probably shouldn't be in the mailer
+  # Note that this will fail if the comment doesn't have an attached councillor
+  sig { params(comment: Comment).void }
   def send_comment_via_writeit!(comment)
     @comment = comment
 
@@ -40,7 +47,7 @@ class CommentMailer < ApplicationMailer
     message.author_name = comment.name
     message.author_email = ENV["EMAIL_COUNCILLOR_REPLIES_TO"]
     message.writeitinstance = comment.writeitinstance
-    message.recipients = [comment.councillor.writeit_id]
+    message.recipients = [T.must(comment.councillor).writeit_id]
     message.push_to_api
     comment.update!(writeit_message_id: message.remote_id)
   end
