@@ -94,11 +94,11 @@ describe ApiController do
     end
 
     it "should find recent applications for a postcode" do
-      result = double
-      scope1 = double("scope1")
-      scope2 = double("scope2")
-      scope3 = double("scope3")
-      scope4 = double("scope4")
+      result = Application.none
+      scope1 = Application.none
+      scope2 = Application.none
+      scope3 = Application.none
+      scope4 = Application.none
       expect(Application).to receive(:with_current_version).and_return(scope1)
       expect(scope1).to receive(:order).and_return(scope2)
       expect(scope2).to receive(:where).with(application_versions: { postcode: "2780" }).and_return(scope3)
@@ -112,7 +112,15 @@ describe ApiController do
     it "should support jsonp" do
       authority = create(:authority, full_name: "Acme Local Planning Authority")
       result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
-      allow(Application).to receive_message_chain(:with_current_version, :order, :where, :includes, :paginate).and_return([result])
+      scope1 = Application.none
+      scope2 = Application.none
+      scope3 = Application.none
+      scope4 = Application.none
+      allow(Application).to receive(:with_current_version).and_return(scope1)
+      allow(scope1).to receive(:order).and_return(scope2)
+      allow(scope2).to receive(:where).and_return(scope3)
+      allow(scope3).to receive(:includes).and_return(scope4)
+      allow(scope4).to receive(:paginate).and_return(Application.where(id: result.id))
       get :suburb_postcode, params: { key: user.api_key, format: "js", postcode: "2780", callback: "foobar" }, xhr: true
       expect(response.body[0..10]).to eq("/**/foobar(")
       expect(response.body[-1..]).to eq(")")
@@ -142,9 +150,17 @@ describe ApiController do
     it "should support json api version 2" do
       authority = create(:authority, full_name: "Acme Local Planning Authority")
       application = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
-      result = [application]
+      result = Application.where(id: application.id)
+      scope1 = Application.none
+      scope2 = Application.none
+      scope3 = Application.none
+      scope4 = Application.none
       allow(result).to receive(:total_pages).and_return(5)
-      allow(Application).to receive_message_chain(:with_current_version, :order, :where, :includes, :paginate).and_return(result)
+      allow(Application).to receive(:with_current_version).and_return(scope1)
+      allow(scope1).to receive(:order).and_return(scope2)
+      allow(scope2).to receive(:where).and_return(scope3)
+      allow(scope3).to receive(:includes).and_return(scope4)
+      allow(scope4).to receive(:paginate).and_return(result)
       get :suburb_postcode, params: { key: user.api_key, format: "js", v: "2", postcode: "2780" }
       expect(JSON.parse(response.body)).to eq(
         "application_count" => 1,
@@ -191,11 +207,15 @@ describe ApiController do
         before :each do
           location_result = double
           location = double(lat: 1.0, lng: 2.0, full_address: "24 Bruce Road, Glenbrook NSW 2773")
-          @result = double
+          @result = Application.none
+          scope1 = Application.none
+          scope2 = Application.none
 
           expect(GoogleGeocodeService).to receive(:call).with("24 Bruce Road Glenbrook").and_return(location_result)
           expect(location_result).to receive(:top).and_return(location)
-          allow(Application).to receive_message_chain(:near, :includes, :paginate).and_return(@result)
+          allow(Application).to receive(:near).and_return(scope1)
+          allow(scope1).to receive(:includes).and_return(scope2)
+          allow(scope2).to receive(:paginate).and_return(@result)
         end
 
         it "should find recent applications near the address" do
@@ -223,8 +243,12 @@ describe ApiController do
         end
 
         it "should use a search radius of 2000 when none is specified" do
-          result = double
-          allow(Application).to receive_message_chain(:near, :includes, :paginate).and_return(result)
+          result = Application.none
+          scope1 = Application.none
+          scope2 = Application.none
+          allow(Application).to receive(:near).and_return(scope1)
+          allow(scope1).to receive(:includes).and_return(scope2)
+          allow(scope2).to receive(:paginate).and_return(result)
 
           get :point, params: { key: user.api_key, address: "24 Bruce Road Glenbrook", format: "rss" }
           expect(assigns[:applications]).to eq(result)
@@ -250,9 +274,13 @@ describe ApiController do
 
     describe "search by lat & lng" do
       before :each do
-        @result = double
+        @result = Application.none
+        scope1 = Application.none
+        scope2 = Application.none
 
-        allow(Application).to receive_message_chain(:near, :includes, :paginate).and_return(@result)
+        allow(Application).to receive(:near).and_return(scope1)
+        allow(scope1).to receive(:includes).and_return(scope2)
+        allow(scope2).to receive(:paginate).and_return(@result)
       end
 
       it "should find recent applications near the point" do
@@ -279,11 +307,11 @@ describe ApiController do
     end
 
     it "should find recent applications in an area" do
-      result = double
-      scope1 = double
-      scope2 = double
-      scope3 = double
-      scope4 = double
+      result = Application.none
+      scope1 = Application.none
+      scope2 = Application.none
+      scope3 = Application.none
+      scope4 = Application.none
       expect(Application).to receive(:with_current_version).and_return(scope1)
       expect(scope1).to receive(:order).and_return(scope2)
       expect(scope2).to receive(:where).with("lat > ? AND lng > ? AND lat < ? AND lng < ?", 1.0, 2.0, 3.0, 4.0).and_return(scope3)
@@ -311,9 +339,9 @@ describe ApiController do
 
     it "should find recent applications for an authority" do
       authority = build(:authority, full_name: "Blue Mountains City Council", state: "NSW")
-      result = double
-      scope1 = double
-      scope2 = double
+      result = Application.none
+      scope1 = Application.none
+      scope2 = Application.none
 
       expect(Authority).to receive(:find_short_name_encoded).with("blue_mountains").and_return(authority)
       expect(authority).to receive(:applications).and_return(scope1)
@@ -333,11 +361,11 @@ describe ApiController do
     end
 
     it "should find recent applications for a suburb" do
-      result = double
-      scope1 = double
-      scope2 = double
-      scope3 = double
-      scope4 = double
+      result = Application.none
+      scope1 = Application.none
+      scope2 = Application.none
+      scope3 = Application.none
+      scope4 = Application.none
       expect(Application).to receive(:with_current_version).and_return(scope1)
       expect(scope1).to receive(:order).and_return(scope2)
       expect(scope2).to receive(:where).with(application_versions: { suburb: "Katoomba" }).and_return(scope3)
@@ -350,12 +378,12 @@ describe ApiController do
 
     describe "search by suburb and state" do
       it "should find recent applications for a suburb and state" do
-        result = double
-        scope1 = double
-        scope2 = double
-        scope3 = double
-        scope4 = double
-        scope5 = double
+        result = Application.none
+        scope1 = Application.none
+        scope2 = Application.none
+        scope3 = Application.none
+        scope4 = Application.none
+        scope5 = Application.none
         expect(Application).to receive(:with_current_version).and_return(scope1)
         expect(scope1).to receive(:order).and_return(scope2)
         expect(scope2).to receive(:where).with(application_versions: { suburb: "Katoomba" }).and_return(scope3)
@@ -370,13 +398,13 @@ describe ApiController do
 
     describe "search by suburb, state and postcode" do
       it "should find recent applications for a suburb, state and postcode" do
-        result = double
-        scope1 = double
-        scope2 = double
-        scope3 = double
-        scope4 = double
-        scope5 = double
-        scope6 = double
+        result = Application.none
+        scope1 = Application.none
+        scope2 = Application.none
+        scope3 = Application.none
+        scope4 = Application.none
+        scope5 = Application.none
+        scope6 = Application.none
         expect(Application).to receive(:with_current_version).and_return(scope1)
         expect(scope1).to receive(:order).and_return(scope2)
         expect(scope2).to receive(:where).with(application_versions: { suburb: "Katoomba" }).and_return(scope3)

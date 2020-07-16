@@ -1,7 +1,9 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class ApiController < ApplicationController
+  extend T::Sig
+
   before_action :check_api_parameters, except: %i[howto]
   before_action :require_api_key, except: %i[howto]
   before_action :authenticate_bulk_api, only: %i[all date_scraped]
@@ -16,6 +18,7 @@ class ApiController < ApplicationController
     const :authority_id, String
   end
 
+  sig { void }
   def authority
     typed_params = TypedParams[AuthorityParams].new.extract!(params)
     # TODO: Handle the situation where the authority name isn't found
@@ -29,6 +32,7 @@ class ApiController < ApplicationController
     const :postcode, T.nilable(String)
   end
 
+  sig { void }
   def suburb_postcode
     typed_params = TypedParams[SuburbPostcodeParams].new.extract!(params)
     apps = Application.with_current_version.order("date_scraped DESC")
@@ -57,6 +61,7 @@ class ApiController < ApplicationController
     const :lng, T.nilable(Float)
   end
 
+  sig { void }
   def point
     typed_params = TypedParams[PointParams].new.extract!(params)
     radius = typed_params.radius || typed_params.area_size || 2000.0
@@ -90,6 +95,7 @@ class ApiController < ApplicationController
     const :top_right_lng, Float
   end
 
+  sig { void }
   def area
     typed_params = TypedParams[AreaParams].new.extract!(params)
     lat0 = typed_params.bottom_left_lat
@@ -106,6 +112,7 @@ class ApiController < ApplicationController
     const :date_scraped, String
   end
 
+  sig { void }
   def date_scraped
     typed_params = TypedParams[DateScrapedParams].new.extract!(params)
     begin
@@ -128,6 +135,7 @@ class ApiController < ApplicationController
 
   # Note that this returns results in a slightly different format than the
   # other API calls because the paging is done differently (via scrape time rather than page number)
+  sig { void }
   def all
     typed_params = TypedParams[AllParams].new.extract!(params)
     # TODO: Check that params page and v aren't being used
@@ -162,15 +170,18 @@ class ApiController < ApplicationController
     end
   end
 
+  sig { void }
   def howto; end
 
   private
 
+  sig { returns(T::Boolean) }
   def ssl_required?
     # Only redirect on howto page. Normal api requests on this controller should not redirect
     params[:action] == "howto" && super
   end
 
+  sig { void }
   def check_api_parameters
     valid_parameter_keys = %w[
       format action controller
@@ -197,6 +208,7 @@ class ApiController < ApplicationController
     const :key, T.nilable(String)
   end
 
+  sig { void }
   def require_api_key
     typed_params = TypedParams[RequireApiKeyParams].new.extract!(params)
     if typed_params.key && User.where(api_key: typed_params.key, api_disabled: false).exists?
@@ -210,6 +222,7 @@ class ApiController < ApplicationController
     )
   end
 
+  sig { params(error_text: String, status: Symbol).void }
   def render_error(error_text, status)
     respond_to do |format|
       format.js do
@@ -225,6 +238,7 @@ class ApiController < ApplicationController
     const :key, String
   end
 
+  sig { void }
   def authenticate_bulk_api
     typed_params = TypedParams[AuthenticateBulkApiParams].new.extract!(params)
     return if User.where(api_key: typed_params.key, bulk_api: true).exists?
@@ -236,6 +250,7 @@ class ApiController < ApplicationController
     const :count, T.nilable(Integer)
   end
 
+  sig { returns(Integer) }
   def per_page
     typed_params = TypedParams[PerPageParams].new.extract!(params)
     # Allow to set number of returned applications up to a maximum
@@ -254,10 +269,12 @@ class ApiController < ApplicationController
     const :callback, T.nilable(String)
   end
 
+  sig { params(apps: Application::RelationType, description: String).void }
   def api_render(apps, description)
     typed_params = TypedParams[ApiRenderParams].new.extract!(params)
-    @applications = apps.includes(:authority).paginate(page: typed_params.page, per_page: per_page)
-    @description = description
+    applications = apps.includes(:authority).paginate(page: typed_params.page, per_page: per_page)
+    @applications = T.let(applications, T.nilable(Application::RelationType))
+    @description = T.let(description, T.nilable(String))
 
     LogApiCallJob.perform_later(
       api_key: request.query_parameters["key"],
@@ -275,9 +292,9 @@ class ApiController < ApplicationController
       format.js do
         # TODO: Document use of v parameter
         s = if typed_params.v == "2"
-              { application_count: @applications.count, page_count: @applications.total_pages, applications: @applications }
+              { application_count: applications.count, page_count: applications.total_pages, applications: applications }
             else
-              @applications
+              applications
             end
         j = s.to_json(only: %i[id council_reference applications application_count page_count],
                       methods: %i[date_scraped address description info_url
@@ -289,6 +306,7 @@ class ApiController < ApplicationController
     end
   end
 
+  sig { returns(ApiController::Helper) }
   def help
     Helper.instance
   end
