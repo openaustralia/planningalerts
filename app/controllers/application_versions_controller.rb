@@ -1,8 +1,11 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class ApplicationVersionsController < ApplicationController
+  extend T::Sig
+
+  sig { void }
   def index
-    @application = Application.find(params[:application_id])
+    @application = T.let(Application.find(params[:application_id]), T.nilable(Application))
   end
 end
