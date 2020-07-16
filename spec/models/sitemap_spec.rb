@@ -12,7 +12,7 @@ describe Sitemap do
   it "should output an xml sitemap" do
     public = Rails.root.join("public").to_s
 
-    file1 = File.new("file1", "w")
+    file1 = double("file1")
     expect(File).to receive(:open).with("#{public}/sitemap.xml", "w").and_return(file1)
     expect(file1).to receive(:<<).with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
     expect(file1).to receive(:<<).with("<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")
@@ -23,23 +23,20 @@ describe Sitemap do
     expect(file1).to receive(:<<).with("</sitemapindex>")
     expect(file1).to receive(:close)
 
-    io = StringIO.new
-    file2 = Zlib::GzipWriter.new(io)
+    file2 = double("file2")
     expect(Zlib::GzipWriter).to receive(:open).with("#{public}/sitemaps/sitemap1.xml.gz").and_return(file2)
     expect(file2).to receive(:<<).with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
     expect(file2).to receive(:<<).with("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")
     expect(file2).to receive(:<<).with("<url><loc>http://domain.org/</loc><changefreq>hourly</changefreq><lastmod>2010-02-01T00:00:00+00:00</lastmod></url>")
     expect(file2).to receive(:<<).with("<url><loc>http://domain.org/foo</loc><changefreq>daily</changefreq><lastmod>2010-01-01T00:00:00+00:00</lastmod></url>")
     expect(file2).to receive(:<<).with("</urlset>")
-    expect(file2).to receive(:close).and_call_original
+    expect(file2).to receive(:close)
 
     s = Sitemap.new("http://domain.org", public, @logger)
 
     s.add_url "/", changefreq: :hourly, lastmod: Time.utc(2010, 2, 1)
     s.add_url "/foo", changefreq: :daily, lastmod: Time.utc(2010, 1, 1)
     s.finish
-
-    File.delete(file1)
     # s.notify_search_engines
   end
 
