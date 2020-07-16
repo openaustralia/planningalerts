@@ -3,11 +3,10 @@
 require "spec_helper"
 
 describe ThrottleDailyByApiUser do
-  let(:request) { double(url: url, params: params) }
+  let(:request) { Rack::Request.new(Rack::MockRequest.env_for(url)) }
 
   describe "client_identifier" do
     let(:url) { "/applications.js?lng=146&lat=-38&key=myapikey" }
-    let(:params) { { "lng" => "146", "lat" => "-38", "key" => "myapikey" } }
     let(:result) { ThrottleDailyByApiUser.new(nil).client_identifier(request) }
 
     it "should throttle based on the api key" do
@@ -20,7 +19,6 @@ describe ThrottleDailyByApiUser do
 
     describe "Request to the home page" do
       let(:url) { "/" }
-      let(:params) { {} }
 
       it "should be whitelisted as it's not an api request" do
         expect(result).to eq true
@@ -29,7 +27,6 @@ describe ThrottleDailyByApiUser do
 
     describe "Request to the API" do
       let(:url) { "/applications.js?lng=146&lat=-38&key=#{user.api_key}" }
-      let(:params) { { "lng" => "146", "lat" => "-38", "key" => user.api_key } }
 
       describe "A normal user" do
         let(:user) { create(:user) }
@@ -49,7 +46,6 @@ describe ThrottleDailyByApiUser do
 
       describe "with a non existent api key" do
         let(:url) { "/applications.js?lng=146&lat=-38&key=foo" }
-        let(:params) { { "lng" => "146", "lat" => "-38", "key" => "foo" } }
 
         it "should not be whitelisted" do
           expect(result).to be_falsey
