@@ -165,4 +165,3 @@ Sorbet/StrictSigil:
     - app/admin/*.rb
     - app/controllers/**/*.rb
     - app/forms/*.rb
-    - lib/*.rb
