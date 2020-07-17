@@ -29,22 +29,29 @@ end
 
 # Like a Zlib::GzipWriter class but also counts the number of bytes (uncompressed) written out
 class CountedFile
+  extend T::Sig
+
+  sig { returns(Integer) }
   attr_reader :size
 
+  sig { params(filename: String).void }
   def initialize(filename)
-    @writer = Zlib::GzipWriter.open(filename)
-    @size = 0
+    @writer = T.let(Zlib::GzipWriter.open(filename), Zlib::GzipWriter)
+    @size = T.let(0, Integer)
   end
 
+  sig { params(text: String).void }
   def <<(text)
     @writer << text
     @size += text.size
   end
 
+  sig { params(filename: String).returns(CountedFile) }
   def self.open(filename)
     new(filename)
   end
 
+  sig { void }
   def close
     @writer.close
   end

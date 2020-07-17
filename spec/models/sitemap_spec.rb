@@ -23,14 +23,14 @@ describe Sitemap do
     expect(file1).to receive(:<<).with("</sitemapindex>")
     expect(file1).to receive(:close)
 
-    file2 = double("file2")
+    file2 = Zlib::GzipWriter.new(StringIO.new)
     expect(Zlib::GzipWriter).to receive(:open).with("#{public}/sitemaps/sitemap1.xml.gz").and_return(file2)
     expect(file2).to receive(:<<).with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
     expect(file2).to receive(:<<).with("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")
     expect(file2).to receive(:<<).with("<url><loc>http://domain.org/</loc><changefreq>hourly</changefreq><lastmod>2010-02-01T00:00:00+00:00</lastmod></url>")
     expect(file2).to receive(:<<).with("<url><loc>http://domain.org/foo</loc><changefreq>daily</changefreq><lastmod>2010-01-01T00:00:00+00:00</lastmod></url>")
     expect(file2).to receive(:<<).with("</urlset>")
-    expect(file2).to receive(:close)
+    expect(file2).to receive(:close).and_call_original
 
     s = Sitemap.new("http://domain.org", public, @logger)
 
