@@ -58,6 +58,8 @@ class CountedFile
 end
 
 class Sitemap
+  extend T::Sig
+
   attr_reader :root_url, :root_path
 
   # These are limits that are imposed on a single sitemap file by the specification
@@ -67,6 +69,7 @@ class Sitemap
 
   SITEMAP_XMLNS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
+  sig { params(root_url: String, root_path: String, logger: Logger).void }
   def initialize(root_url, root_path, logger = Logger.new(STDOUT))
     @root_url = root_url
     @root_path = root_path
@@ -75,11 +78,14 @@ class Sitemap
     FileUtils.mkdir_p "#{@root_path}/sitemaps"
 
     # Index of current sitemap file
-    @index = 0
+    @index = T.let(0, Integer)
+    @no_urls = T.let(0, Integer)
+    @lastmod = T.let(nil, T.nilable(Time))
     start_index
     start_sitemap
   end
 
+  sig { void }
   def start_sitemap
     sitemap_path = "#{root_path}/#{sitemap_relative_path}"
     @logger.info "Writing sitemap file (#{sitemap_path})..."
@@ -90,17 +96,20 @@ class Sitemap
     @lastmod = nil
   end
 
+  sig { void }
   def start_index
     @index_file = File.open("#{@root_path}/#{sitemap_index_relative_path}", "w")
     @index_file << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
     @index_file << "<sitemapindex xmlns=\"#{SITEMAP_XMLNS}\">"
   end
 
+  sig { void }
   def finish_index
     @index_file << "</sitemapindex>"
     @index_file.close
   end
 
+  sig { void }
   def finish_sitemap
     @sitemap_file << "</urlset>"
     @sitemap_file.close
@@ -136,21 +145,25 @@ class Sitemap
   end
 
   # Write any remaining bits of XML and close all the files
+  sig { void }
   def finish
     finish_sitemap
     finish_index
   end
 
+  sig { params(date: T.nilable(Time)).returns(T.nilable(String)) }
   def self.w3c_date(date)
     date&.utc&.strftime("%Y-%m-%dT%H:%M:%S+00:00")
   end
 
   # Path on the filesystem (relative to root_path) to the sitemap index file
   # This needs to be at the root of the web path to include all the urls below it
+  sig { returns(String) }
   def sitemap_index_relative_path
     "sitemap.xml"
   end
 
+  sig { returns(String) }
   def sitemap_relative_path
     "sitemaps/sitemap#{@index + 1}.xml.gz"
   end
