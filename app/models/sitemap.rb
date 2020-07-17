@@ -4,13 +4,24 @@
 require "zlib"
 
 class SitemapUrl
-  attr_reader :loc, :changefreq, :lastmod
+  extend T::Sig
 
-  CHANGEFREQ_VALUES = %w[always hourly daily weekly monthly yearly never"].freeze
+  sig { returns(String) }
+  attr_reader :loc
 
+  # TODO: Make this return symbol for consistency
+  sig { returns(T.nilable(String)) }
+  attr_reader :changefreq
+
+  sig { returns(T.nilable(Time)) }
+  attr_reader :lastmod
+
+  CHANGEFREQ_VALUES = T.let(%w[always hourly daily weekly monthly yearly never"].freeze, T::Array[String])
+
+  sig { params(loc: String, changefreq: T.nilable(Symbol), lastmod: T.nilable(Time)).void }
   def initialize(loc, changefreq: nil, lastmod: nil)
     @loc = loc
-    @changefreq = changefreq&.to_s
+    @changefreq = T.let(changefreq&.to_s, T.nilable(String))
     @lastmod = lastmod
     throw "Invalid value #{@changefreq} for changefreq" unless @changefreq.nil? || CHANGEFREQ_VALUES.include?(@changefreq)
   end
@@ -113,7 +124,8 @@ class Sitemap
     @no_urls += 1
     # For the last modification time of the whole sitemap file use the most recent
     # modification time of all the urls in the file
-    @lastmod = url.lastmod if url.lastmod && (@lastmod.nil? || url.lastmod > @lastmod)
+    lastmod = url.lastmod
+    @lastmod = lastmod if lastmod && (@lastmod.nil? || lastmod > @lastmod)
   end
 
   # Write any remaining bits of XML and close all the files
