@@ -120,8 +120,15 @@ class Sitemap
     @index_file << "</sitemap>"
   end
 
-  def add_url(loc, options = {})
-    url = SitemapUrl.new(loc, options)
+  sig do
+    params(
+      loc: String,
+      changefreq: T.nilable(Symbol),
+      lastmod: T.nilable(Time)
+    ).void
+  end
+  def add_url(loc, changefreq: nil, lastmod: nil)
+    url = SitemapUrl.new(loc, changefreq: changefreq, lastmod: lastmod)
     # Now build up the bit of XML that we're going to add (as a string)
     t = +"<url>"
     t << "<loc>#{root_url}#{url.loc}</loc>"
