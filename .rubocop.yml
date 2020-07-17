@@ -162,7 +162,6 @@ Sorbet/StrictSigil:
     - app/models/concerns/email_confirmable.rb
     - app/models/councillor_contribution.rb
     - app/models/feed.rb
-    - app/models/sitemap.rb
     - app/admin/*.rb
     - app/controllers/**/*.rb
     - app/forms/*.rb

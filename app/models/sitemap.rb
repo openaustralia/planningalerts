@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 require "zlib"
@@ -60,7 +60,11 @@ end
 class Sitemap
   extend T::Sig
 
-  attr_reader :root_url, :root_path
+  sig { returns(String) }
+  attr_reader :root_url
+
+  sig { returns(String) }
+  attr_reader :root_path
 
   # These are limits that are imposed on a single sitemap file by the specification
   MAX_URLS_PER_FILE = 50000
@@ -79,28 +83,28 @@ class Sitemap
 
     # Index of current sitemap file
     @index = T.let(0, Integer)
+    @index_file = T.let(start_index, File)
+    @sitemap_file = T.let(start_sitemap, CountedFile)
     @no_urls = T.let(0, Integer)
     @lastmod = T.let(nil, T.nilable(Time))
-    start_index
-    start_sitemap
   end
 
-  sig { void }
+  sig { returns(CountedFile) }
   def start_sitemap
     sitemap_path = "#{root_path}/#{sitemap_relative_path}"
     @logger.info "Writing sitemap file (#{sitemap_path})..."
-    @sitemap_file = CountedFile.open(sitemap_path)
-    @sitemap_file << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-    @sitemap_file << "<urlset xmlns=\"#{SITEMAP_XMLNS}\">"
-    @no_urls = 0
-    @lastmod = nil
+    sitemap_file = CountedFile.open(sitemap_path)
+    sitemap_file << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+    sitemap_file << "<urlset xmlns=\"#{SITEMAP_XMLNS}\">"
+    sitemap_file
   end
 
-  sig { void }
+  sig { returns(File) }
   def start_index
-    @index_file = File.open("#{@root_path}/#{sitemap_index_relative_path}", "w")
-    @index_file << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-    @index_file << "<sitemapindex xmlns=\"#{SITEMAP_XMLNS}\">"
+    index_file = File.open("#{@root_path}/#{sitemap_index_relative_path}", "w")
+    index_file << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+    index_file << "<sitemapindex xmlns=\"#{SITEMAP_XMLNS}\">"
+    index_file
   end
 
   sig { void }
@@ -140,7 +144,9 @@ class Sitemap
     if (@no_urls == MAX_URLS_PER_FILE) || (@sitemap_file.size + t.size + "</urlset>".size > MAX_BYTES_PER_FILE)
       finish_sitemap
       @index += 1
-      start_sitemap
+      @sitemap_file = start_sitemap
+      @no_urls = 0
+      @lastmod = nil
     end
 
     @sitemap_file << t

@@ -12,7 +12,7 @@ describe Sitemap do
   it "should output an xml sitemap" do
     public = Rails.root.join("public").to_s
 
-    file1 = double("file1")
+    file1 = File.new("foo", "w")
     expect(File).to receive(:open).with("#{public}/sitemap.xml", "w").and_return(file1)
     expect(file1).to receive(:<<).with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
     expect(file1).to receive(:<<).with("<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")
@@ -21,7 +21,7 @@ describe Sitemap do
     expect(file1).to receive(:<<).with("<lastmod>2010-02-01T00:00:00+00:00</lastmod>")
     expect(file1).to receive(:<<).with("</sitemap>")
     expect(file1).to receive(:<<).with("</sitemapindex>")
-    expect(file1).to receive(:close)
+    expect(file1).to receive(:close).and_call_original
 
     file2 = Zlib::GzipWriter.new(StringIO.new)
     expect(Zlib::GzipWriter).to receive(:open).with("#{public}/sitemaps/sitemap1.xml.gz").and_return(file2)
@@ -38,6 +38,7 @@ describe Sitemap do
     s.add_url "/foo", changefreq: :daily, lastmod: Time.utc(2010, 1, 1)
     s.finish
     # s.notify_search_engines
+    File.delete("foo")
   end
 
   it "should know the web root and the file path root" do
