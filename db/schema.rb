@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_13_075320) do
+ActiveRecord::Schema.define(version: 2020_07_23_022439) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -188,7 +188,16 @@ ActiveRecord::Schema.define(version: 2020_07_13_075320) do
     t.index ["geocode_query_id"], name: "index_geocode_results_on_geocode_query_id"
   end
 
-  create_table "replies", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "github_issues", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "authority_id", null: false
+    t.string "github_repo", null: false
+    t.integer "github_number", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["authority_id"], name: "index_github_issues_on_authority_id"
+  end
+
+  create_table "replies", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.text "text", limit: 16777215
     t.datetime "received_at"
     t.integer "comment_id", null: false
@@ -269,6 +278,7 @@ ActiveRecord::Schema.define(version: 2020_07_13_075320) do
   add_foreign_key "councillor_contributions", "contributors"
   add_foreign_key "councillors", "authorities"
   add_foreign_key "geocode_results", "geocode_queries"
+  add_foreign_key "github_issues", "authorities"
   add_foreign_key "replies", "comments"
   add_foreign_key "replies", "councillors"
   add_foreign_key "reports", "comments"

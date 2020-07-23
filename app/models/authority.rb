@@ -8,6 +8,7 @@ class Authority < ApplicationRecord
   has_many :councillors, dependent: :restrict_with_exception
   has_many :comments, through: :applications
   has_many :councillor_contributions, dependent: :restrict_with_exception
+  has_one :github_issue, dependent: :destroy
 
   validate :short_name_encoded_is_unique
 
