@@ -16,7 +16,7 @@ module TypeCoerce::Configuration
   def self.raise_coercion_error(*args, &blk); end
   def self.raise_coercion_error=(arg0); end
 end
-module Polyfill::Module::M70275810304700
+module Polyfill::Module::M70173477033560
 end
 class TypeCoerce::CoercionError < SafeType::CoercionError
 end

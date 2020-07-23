@@ -1658,8 +1658,8 @@ module InheritedResources
 end
 class ApplicationController < ActionController::Base
   def _layout(formats); end
-  def authenticate_active_admin_user!; end
-  def configure_permitted_parameters; end
+  def authenticate_active_admin_user!(*args, &blk); end
+  def configure_permitted_parameters(*args, &blk); end
   def current_theme; end
   def layout_from_theme; end
   def self.__callbacks; end
@@ -1671,11 +1671,14 @@ class ApplicationController < ActionController::Base
   def self._wrapper_options; end
   def self.helpers_path; end
   def self.middleware_stack; end
-  def set_header_variable; end
-  def ssl_required?; end
+  def set_header_variable(*args, &blk); end
+  def ssl_required?(*args, &blk); end
   def theme_instance; end
-  def theme_resolver; end
-  def validate_page_param; end
+  def theme_resolver(*args, &blk); end
+  def validate_page_param(*args, &blk); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
+  extend T::Sig
   extend ThemesOnRails::ControllerAdditions::ClassMethods
   include ActionDispatch::Routing::UrlFor
   include Anonymous_Module_29
@@ -1719,7 +1722,10 @@ end
 module Admin
 end
 module Admin::AuthoritiesHelper
-  def load_councillors_response_text(councillors); end
+  def load_councillors_response_text(*args, &blk); end
+  extend T::Private::Methods::MethodHooks
+  extend T::Private::Methods::SingletonMethodHooks
+  extend T::Sig
 end
 module AlertMailerHelper
   def application_url_with_tracking(*args, &blk); end

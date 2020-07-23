@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 
 class SiteSetting < ApplicationRecord
   # Because it's serialized

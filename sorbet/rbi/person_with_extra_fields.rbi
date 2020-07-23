@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 
 class PersonWithExtraFields < Everypolitician::Popolo::Person
   sig { returns(T.nilable(String)) }
