@@ -50,6 +50,11 @@ namespace :planningalerts do
     GenerateSitemapService.call
   end
 
+  desc "Create GitHub issues for broken authorities"
+  task create_github_issues: :environment do
+    CreateGithubIssuesForBrokenAuthoritiesService.call(logger: Logger.new(STDOUT))
+  end
+
   namespace :emergency do
     desc "Regenerates all the counter caches in case they got out of synch"
     task fixup_counter_caches: :environment do
