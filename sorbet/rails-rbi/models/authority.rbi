@@ -153,6 +153,12 @@ module Authority::GeneratedAssociationMethods
 
   sig { params(value: T::Enumerable[::Councillor]).void }
   def councillors=(value); end
+
+  sig { returns(T.nilable(::GithubIssue)) }
+  def github_issue; end
+
+  sig { params(value: T.nilable(::GithubIssue)).void }
+  def github_issue=(value); end
 end
 
 module Authority::CustomFinderMethods
