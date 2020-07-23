@@ -197,7 +197,7 @@ ActiveRecord::Schema.define(version: 2020_07_23_022439) do
     t.index ["authority_id"], name: "index_github_issues_on_authority_id"
   end
 
-  create_table "replies", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "replies", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.text "text", limit: 16777215
     t.datetime "received_at"
     t.integer "comment_id", null: false
