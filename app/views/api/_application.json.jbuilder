@@ -1,3 +1,6 @@
+# typed: false
+# frozen_string_literal: true
+
 json.application do
   json.id application.id
   json.council_reference application.council_reference
