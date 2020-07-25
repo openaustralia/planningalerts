@@ -193,7 +193,7 @@ class Authority < ApplicationRecord
   end
 
   sig { returns(T.nilable(Time)) }
-  def latest_application_date
+  def latest_date_scraped
     latest_application&.date_scraped
   end
 
