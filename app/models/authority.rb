@@ -187,13 +187,9 @@ class Authority < ApplicationRecord
     "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/data/#{state.upcase}/local_councillor_popolo.json"
   end
 
-  sig { returns(T.nilable(Application)) }
-  def latest_application
-    applications.with_current_version.order("date_scraped DESC").first
-  end
-
   sig { returns(T.nilable(Time)) }
   def latest_date_scraped
+    latest_application = applications.with_current_version.order("date_scraped DESC").first
     latest_application&.date_scraped
   end
 
