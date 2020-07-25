@@ -4,7 +4,7 @@
 json.application do
   json.id application.id
   json.council_reference application.council_reference
-  json.date_scraped application.date_scraped
+  json.date_scraped application.first_date_scraped
   json.address application.address
   json.description application.description
   json.info_url application.info_url

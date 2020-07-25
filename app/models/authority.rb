@@ -129,7 +129,7 @@ class Authority < ApplicationRecord
   sig { returns(T.nilable(Time)) }
   def earliest_date
     earliest_application = applications.with_current_version.order("date_scraped").first
-    earliest_application&.date_scraped
+    earliest_application&.first_date_scraped
   end
 
   # So that the encoding function can be used elsewhere
@@ -194,7 +194,7 @@ class Authority < ApplicationRecord
 
   sig { returns(T.nilable(Time)) }
   def latest_application_date
-    latest_application&.date_scraped
+    latest_application&.first_date_scraped
   end
 
   # If the latest application is over two weeks old, the scraper's probably broken

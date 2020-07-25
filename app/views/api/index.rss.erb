@@ -7,7 +7,7 @@
         <% @applications.each do |application| -%>
             <item>
                 <title><![CDATA[<%= application.address %>]]></title>
-                <pubDate><%= application.date_scraped.to_date.to_formatted_s(:rfc822) %></pubDate>
+                <pubDate><%= application.first_date_scraped.to_date.to_formatted_s(:rfc822) %></pubDate>
                 <guid isPermaLink="false"><%= application.council_reference %></guid>
                 <georss:featurename><![CDATA[<%= application.address %>]]></georss:featurename>
                 <georss:point><%= application.lat %> <%= application.lng %></georss:point>

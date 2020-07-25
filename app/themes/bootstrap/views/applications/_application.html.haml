@@ -5,8 +5,8 @@
     .address= application.address
     .appinfo
       - if application.respond_to? :distance
-        #{time_ago_in_words(application.date_scraped)} ago, #{km_in_words(application.distance.to_f)} away
+        #{time_ago_in_words(application.first_date_scraped)} ago, #{km_in_words(application.distance.to_f)} away
       - else
-        #{time_ago_in_words(application.date_scraped)} ago
+        #{time_ago_in_words(application.first_date_scraped)} ago
     .description
       = application.respond_to?(:excerpts) && application.excerpts ? application.excerpts.description.html_safe : application.description

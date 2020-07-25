@@ -68,7 +68,7 @@ describe ApplicationsHelper do
 
     it "should say when the application was received by the planning authority and when it appeared on PlanningAlerts" do
       allow(@application).to receive(:date_received).and_return(20.days.ago)
-      allow(@application).to receive(:date_scraped).and_return(18.days.ago)
+      allow(@application).to receive(:first_date_scraped).and_return(18.days.ago)
       expect(helper.scraped_and_received_text(@application)).to eq(
         "We found this application for you on the planning authority's website 18 days ago. It was received by them 2 days earlier."
       )
@@ -76,7 +76,7 @@ describe ApplicationsHelper do
 
     it "should say something appropriate when the received date is not known" do
       allow(@application).to receive(:date_received).and_return(nil)
-      allow(@application).to receive(:date_scraped).and_return(18.days.ago)
+      allow(@application).to receive(:first_date_scraped).and_return(18.days.ago)
       expect(helper.scraped_and_received_text(@application)).to eq(
         "We found this application for you on the planning authority's website 18 days ago. The date it was received by them was not recorded."
       )
