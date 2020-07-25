@@ -128,7 +128,7 @@ class Authority < ApplicationRecord
   # When this authority started on PlanningAlerts. Just the date of the earliest scraped application
   sig { returns(T.nilable(Time)) }
   def earliest_date
-    earliest_application = applications.with_current_version.order("date_scraped").first
+    earliest_application = applications.with_first_version.order("date_scraped").first
     earliest_application&.first_date_scraped
   end
 
