@@ -1,0 +1,24 @@
+# typed: false
+# frozen_string_literal: true
+
+json.application_count @applications.count
+json.page_count @applications.total_pages
+json.applications @applications do |a|
+  json.application do
+    json.id a.id
+    json.council_reference a.council_reference
+    json.date_scraped a.date_scraped
+    json.address a.address
+    json.description a.description
+    json.info_url a.info_url
+    json.comment_url a.comment_url
+    json.date_received a.date_received
+    json.on_notice_from a.on_notice_from
+    json.on_notice_to a.on_notice_to
+    json.lat a.lat
+    json.lng a.lng
+    json.authority do
+      json.full_name a.authority.full_name
+    end
+  end
+end
