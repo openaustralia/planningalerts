@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe ApiController do
   render_views
-  
+
   shared_examples "an authenticated API" do
     shared_examples "not authorised" do
       it { expect(subject.status).to eq 401 }
