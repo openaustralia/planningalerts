@@ -3,6 +3,8 @@
 require "spec_helper"
 
 describe ApiController do
+  render_views
+  
   shared_examples "an authenticated API" do
     shared_examples "not authorised" do
       it { expect(subject.status).to eq 401 }
@@ -123,8 +125,8 @@ describe ApiController do
       allow(scope4).to receive(:paginate).and_return(Application.where(id: result.id))
       get :suburb_postcode, params: { key: user.api_key, format: "js", postcode: "2780", callback: "foobar" }, xhr: true
       expect(response.body[0..10]).to eq("/**/foobar(")
-      expect(response.body[-1..]).to eq(")")
-      expect(JSON.parse(response.body[11..-2])).to eq(
+      expect(response.body[-2..]).to eq(");")
+      expect(JSON.parse(response.body[11..-3])).to eq(
         [{
           "application" => {
             "id" => 10,

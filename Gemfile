@@ -144,6 +144,9 @@ gem "pundit"
 # For automatic creation of github issues when scrapers are broken
 gem "octokit", "~> 4.0"
 
+# For rendering json output
+gem "jpbuilder"
+
 group :test do
   gem "capybara"
   gem "climate_control"

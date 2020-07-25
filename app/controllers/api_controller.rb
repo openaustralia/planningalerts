@@ -291,17 +291,18 @@ class ApiController < ApplicationController
       end
       format.js do
         # TODO: Document use of v parameter
-        s = if typed_params.v == "2"
-              { application_count: applications.count, page_count: applications.total_pages, applications: applications }
-            else
-              applications
-            end
-        j = s.to_json(only: %i[id council_reference applications application_count page_count],
-                      methods: %i[date_scraped address description info_url
-                                  comment_url date_received on_notice_from
-                                  on_notice_to lat lng],
-                      include: { authority: { only: [:full_name] } })
-        render json: j, callback: typed_params.callback, content_type: Mime[:json]
+        if typed_params.v == "2"
+          s = { application_count: applications.count, page_count: applications.total_pages, applications: applications }
+          j = s.to_json(only: %i[id council_reference applications application_count page_count],
+                        methods: %i[date_scraped address description info_url
+                                    comment_url date_received on_notice_from
+                                    on_notice_to lat lng],
+                        include: { authority: { only: [:full_name] } })
+          render json: j, callback: typed_params.callback, content_type: Mime[:json]
+        else
+          @applications = applications
+          render "index", formats: :json, content_type: Mime[:json]
+        end
       end
     end
   end
