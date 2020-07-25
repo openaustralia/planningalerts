@@ -27,19 +27,13 @@ class CreateGithubIssuesForBrokenAuthoritiesService < ApplicationService
       latest_date = authority.latest_date_scraped
       # We don't want to create issues on newly created authorities that have
       # not yet scraped anything
-      if authority.broken? && latest_date
-        if issue.nil? || issue.closed?(client)
-          logger.info "Creating GitHub issue for broken authority #{authority.full_name}"
-          issue = client.create_issue(REPO, title(authority, latest_date), body(authority))
-          authority.create_github_issue!(
-            github_repo: REPO,
-            github_number: issue.number
-          )
-        else
-          # Update the title just this one time (because the latest_date was
-          # calculated incorrectly)
-          client.update_issue(REPO, issue.github_number, title(authority, latest_date), body(authority))
-        end
+      if authority.broken? && latest_date && (issue.nil? || issue.closed?(client))
+        logger.info "Creating GitHub issue for broken authority #{authority.full_name}"
+        issue = client.create_issue(REPO, title(authority, latest_date), body(authority))
+        authority.create_github_issue!(
+          github_repo: REPO,
+          github_number: issue.number
+        )
       end
     end
   end
