@@ -194,7 +194,7 @@ class Authority < ApplicationRecord
 
   sig { returns(T.nilable(Time)) }
   def latest_application_date
-    latest_application&.first_date_scraped
+    latest_application&.date_scraped
   end
 
   # If the latest application is over two weeks old, the scraper's probably broken
