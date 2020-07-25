@@ -60,7 +60,7 @@ describe ImportApplicationsService do
     end
     expect(Application.count).to eq(2)
     r1 = Application.find_by(council_reference: "R1")
-    expect(r1.date_scraped).to eq(date)
+    expect(r1.first_date_scraped).to eq(date)
     expect(r1.authority).to eq(auth)
     expect(r1.address).to eq("1 Smith Street, Fiddleville")
     expect(r1.description).to eq("Knocking a house down")

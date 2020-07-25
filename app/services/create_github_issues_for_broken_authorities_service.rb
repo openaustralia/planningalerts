@@ -24,7 +24,7 @@ class CreateGithubIssuesForBrokenAuthoritiesService < ApplicationService
 
     Authority.active.find_each do |authority|
       issue = authority.github_issue
-      latest_date = authority.latest_application_date
+      latest_date = authority.latest_date_scraped
       # We don't want to create issues on newly created authorities that have
       # not yet scraped anything
       if authority.broken? && latest_date && (issue.nil? || issue.closed?(client))

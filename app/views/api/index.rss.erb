@@ -7,14 +7,11 @@
         <% @applications.each do |application| -%>
             <item>
                 <title><![CDATA[<%= application.address %>]]></title>
-                <pubDate><%= application.date_scraped.to_date.to_formatted_s(:rfc822) %></pubDate>
+                <pubDate><%= application.first_date_scraped.to_date.to_formatted_s(:rfc822) %></pubDate>
                 <guid isPermaLink="false"><%= application.council_reference %></guid>
                 <georss:featurename><![CDATA[<%= application.address %>]]></georss:featurename>
                 <georss:point><%= application.lat %> <%= application.lng %></georss:point>
-                <description><![CDATA[
-                  <p><%= application.description %></p>
-                  <p><%= link_to "More information", application_url(application, utm_source: 'feed', utm_medium: 'rss') %></p>
-                ]]></description>
+                <description><![CDATA[<%= application.description %>]]></description>
                 <link><![CDATA[<%= application_url(application, utm_source: 'feed', utm_medium: 'rss') %>]]></link>
             </item>
         <% end -%>

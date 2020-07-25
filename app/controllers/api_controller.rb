@@ -159,13 +159,9 @@ class ApiController < ApplicationController
 
     respond_to do |format|
       format.js do
-        s = { applications: applications, application_count: apps.count, max_id: max_id }
-        j = s.to_json(only: %i[id council_reference applications application_count max_id],
-                      methods: %i[date_scraped address description info_url
-                                  comment_url date_received on_notice_from
-                                  on_notice_to lat lng],
-                      include: { authority: { only: [:full_name] } })
-        render json: j, callback: typed_params.callback, content_type: Mime[:json]
+        @applications = applications
+        @max_id = T.let(max_id, T.nilable(Integer))
+        render "all", formats: :json, content_type: Mime[:json]
       end
     end
   end
@@ -273,7 +269,7 @@ class ApiController < ApplicationController
   def api_render(apps, description)
     typed_params = TypedParams[ApiRenderParams].new.extract!(params)
     applications = apps.includes(:authority).paginate(page: typed_params.page, per_page: per_page)
-    @applications = T.let(applications, T.nilable(Application::RelationType))
+    @applications = T.let(applications, T.nilable(T.any(Application::RelationType, T::Array[Application])))
     @description = T.let(description, T.nilable(String))
 
     LogApiCallJob.perform_later(
@@ -286,22 +282,16 @@ class ApiController < ApplicationController
     respond_to do |format|
       # TODO: Move the template over to using an xml builder
       format.rss do
-        render typed_params.style == "html" ? "index_html" : "index",
-               format: :rss, layout: false, content_type: Mime[:xml]
+        render "index", format: :rss,
+                        layout: false,
+                        content_type: Mime[:xml],
+                        variants: typed_params.style
       end
       format.js do
         # TODO: Document use of v parameter
-        s = if typed_params.v == "2"
-              { application_count: applications.count, page_count: applications.total_pages, applications: applications }
-            else
-              applications
-            end
-        j = s.to_json(only: %i[id council_reference applications application_count page_count],
-                      methods: %i[date_scraped address description info_url
-                                  comment_url date_received on_notice_from
-                                  on_notice_to lat lng],
-                      include: { authority: { only: [:full_name] } })
-        render json: j, callback: typed_params.callback, content_type: Mime[:json]
+        render "index", formats: :json,
+                        content_type: Mime[:json],
+                        variants: typed_params.v
       end
     end
   end

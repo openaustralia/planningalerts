@@ -128,8 +128,8 @@ class Authority < ApplicationRecord
   # When this authority started on PlanningAlerts. Just the date of the earliest scraped application
   sig { returns(T.nilable(Time)) }
   def earliest_date
-    earliest_application = applications.with_current_version.order("date_scraped").first
-    earliest_application&.date_scraped
+    earliest_application = applications.with_first_version.order("date_scraped").first
+    earliest_application&.first_date_scraped
   end
 
   # So that the encoding function can be used elsewhere
@@ -187,13 +187,9 @@ class Authority < ApplicationRecord
     "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/data/#{state.upcase}/local_councillor_popolo.json"
   end
 
-  sig { returns(T.nilable(Application)) }
-  def latest_application
-    applications.with_current_version.order("date_scraped DESC").first
-  end
-
   sig { returns(T.nilable(Time)) }
-  def latest_application_date
+  def latest_date_scraped
+    latest_application = applications.with_current_version.order("date_scraped DESC").first
     latest_application&.date_scraped
   end
 

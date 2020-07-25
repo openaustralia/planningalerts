@@ -139,7 +139,7 @@ Sorbet/TrueSigil:
     - Rakefile
     - app/themes/standard/views/comments/index.js.rabl
     - app/themes/standard/views/comments/index.rss.builder
-    - experiments/metrics/alert_signup.rb
+    - app/views/api/_application.json.jbuilder
     # TODO: Remove these exclusions as soon as we can
     - app/admin/*.rb
     - app/controllers/councillor_contributions_controller.rb
@@ -157,6 +157,7 @@ Sorbet/StrictSigil:
     - Rakefile
     - app/themes/standard/views/comments/index.js.rabl
     - app/themes/standard/views/comments/index.rss.builder
+    - app/views/api/_application.json.jbuilder
     - experiments/metrics/alert_signup.rb
     # TODO: Remove these exclusions as soon as we can
     - app/models/concerns/email_confirmable.rb

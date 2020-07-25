@@ -41,11 +41,13 @@ class Application < ApplicationRecord
   delegate :info_url, :date_received,
            :on_notice_from, :on_notice_to, :lat, :lng, :suburb, :state,
            :postcode, :description, :address, :location,
-           :official_submission_period_expired?,
+           :official_submission_period_expired?, :date_scraped,
            to: :current_version
 
-  # TODO: Give this (date_scraped) a more sensible name
-  delegate :date_scraped, to: :first_version
+  sig { returns(Time) }
+  def first_date_scraped
+    T.must(first_version).date_scraped.time
+  end
 
   delegate :councillors_available_for_contact, to: :authority
 

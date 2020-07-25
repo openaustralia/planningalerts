@@ -80,8 +80,8 @@ describe Application do
     end
 
     it "should be the initial date scraped" do
-      date_scraped = application.date_scraped
-      expect(updated_application.date_scraped).to eq date_scraped
+      date_scraped = application.first_date_scraped
+      expect(updated_application.first_date_scraped).to eq date_scraped
       expect(updated_application.current_version.date_scraped).to_not eq date_scraped
     end
   end
