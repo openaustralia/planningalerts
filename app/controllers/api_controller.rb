@@ -286,12 +286,15 @@ class ApiController < ApplicationController
     respond_to do |format|
       # TODO: Move the template over to using an xml builder
       format.rss do
-        render "index", format: :rss, layout: false, content_type: Mime[:xml],
+        render "index", format: :rss,
+                        layout: false,
+                        content_type: Mime[:xml],
                         variants: typed_params.style
       end
       format.js do
         # TODO: Document use of v parameter
-        render "index", formats: :json, content_type: Mime[:json],
+        render "index", formats: :json,
+                        content_type: Mime[:json],
                         variants: typed_params.v
       end
     end
