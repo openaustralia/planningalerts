@@ -53,7 +53,7 @@ describe ImportApplicationsService do
 
   it "should import the correct applications" do
     logger = Logger.new(STDOUT)
-    expect(logger).to receive(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
+    expect(logger).to receive(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01")
     expect(logger).to receive(:info).with("Took 0 s to import applications from Fiddlesticks, NSW")
     Timecop.freeze(date) do
       ImportApplicationsService.call(authority: auth, scrape_delay: 0, logger: logger, morph_api_key: "123")
@@ -72,8 +72,8 @@ describe ImportApplicationsService do
 
   it "should update an application when it already exist" do
     logger = Logger.new(STDOUT)
-    expect(logger).to receive(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
-    expect(logger).to receive(:info).with("1 application found for Fiddlesticks, NSW with date from 2009-01-01 to 2009-01-01")
+    expect(logger).to receive(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01")
+    expect(logger).to receive(:info).with("1 application found for Fiddlesticks, NSW with date from 2009-01-01")
     expect(logger).to receive(:info).twice.with("Took 0 s to import applications from Fiddlesticks, NSW")
 
     Timecop.freeze(date) do
@@ -95,7 +95,7 @@ describe ImportApplicationsService do
     logger = Logger.new(STDOUT)
     allow(logger).to receive(:info)
     expect(ImportApplicationsService).to receive(:open_url_safe).with(
-      "https://api.morph.io//data.json?key=12%2F&query=select+%2A+from+%60data%60+where+%60date_scraped%60+%3E%3D+%272009-01-01%27+and+%60date_scraped%60+%3C%3D+%272009-01-01%27",
+      "https://api.morph.io//data.json?key=12%2F&query=select+%2A+from+%60data%60+where+%60date_scraped%60+%3E%3D+%272009-01-01%27",
       logger
     )
     Timecop.freeze(date) do
@@ -107,7 +107,7 @@ describe ImportApplicationsService do
     it "should filter by the date range" do
       Timecop.freeze(date) do
         s = ImportApplicationsService.new(authority: auth, scrape_delay: 7, logger: Logger.new(STDOUT), morph_api_key: "")
-        expect(s.morph_query).to eq "select * from `data` where `date_scraped` >= '2008-12-25' and `date_scraped` <= '2009-01-01'"
+        expect(s.morph_query).to eq "select * from `data` where `date_scraped` >= '2008-12-25'"
       end
     end
 
@@ -117,7 +117,7 @@ describe ImportApplicationsService do
       it "should filter by the authority_label" do
         Timecop.freeze(date) do
           s = ImportApplicationsService.new(authority: auth, scrape_delay: 7, logger: Logger.new(STDOUT), morph_api_key: "")
-          expect(s.morph_query).to eq "select * from `data` where `authority_label` = 'foo' and `date_scraped` >= '2008-12-25' and `date_scraped` <= '2009-01-01'"
+          expect(s.morph_query).to eq "select * from `data` where `authority_label` = 'foo' and `date_scraped` >= '2008-12-25'"
         end
       end
     end

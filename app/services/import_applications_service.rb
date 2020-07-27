@@ -18,7 +18,6 @@ class ImportApplicationsService < ApplicationService
   def initialize(authority:, scrape_delay:, logger:, morph_api_key:)
     @authority = authority
     @start_date = T.let(Time.zone.today - scrape_delay, Date)
-    @end_date = T.let(Time.zone.today, Date)
     @logger = logger
     @morph_api_key = morph_api_key
   end
@@ -43,7 +42,6 @@ class ImportApplicationsService < ApplicationService
     filters = []
     filters << "`authority_label` = '#{authority.scraper_authority_label}'" if authority.scraper_authority_label.present?
     filters << "`date_scraped` >= '#{start_date}'"
-    filters << "`date_scraped` <= '#{end_date}'"
     "select * from `data` where " + filters.join(" and ")
   end
 
@@ -54,9 +52,6 @@ class ImportApplicationsService < ApplicationService
 
   sig { returns(Date) }
   attr_reader :start_date
-
-  sig { returns(Date) }
-  attr_reader :end_date
 
   sig { returns(String) }
   attr_reader :morph_api_key
@@ -89,10 +84,10 @@ class ImportApplicationsService < ApplicationService
       logger.error "Error #{e} while trying to save application #{r.council_reference} for #{authority.full_name_and_state}. So, skipping"
     end
 
-    logger.info "#{count} #{'application'.pluralize(count)} found for #{authority.full_name_and_state} with date from #{start_date} to #{end_date}"
+    logger.info "#{count} #{'application'.pluralize(count)} found for #{authority.full_name_and_state} with date from #{start_date}"
     return if error_count.zero?
 
-    logger.info "#{error_count} #{'application'.pluralize(error_count)} errored for #{authority.full_name_and_state} with date from #{start_date} to #{end_date}"
+    logger.info "#{error_count} #{'application'.pluralize(error_count)} errored for #{authority.full_name_and_state} with date from #{start_date}"
   end
 
   class ImportRecord < T::Struct
