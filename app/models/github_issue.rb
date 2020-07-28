@@ -20,6 +20,7 @@ class GithubIssue < ApplicationRecord
 
   sig { params(client: Octokit::Client).returns(T.untyped) }
   def github_issue(client)
-    client.issue(github_repo, github_number)
+    @github_issue = T.let(@github_issue, T.nilable(Sawyer::Resource))
+    @github_issue ||= client.issue(github_repo, github_number)
   end
 end
