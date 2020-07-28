@@ -13,6 +13,8 @@ class CreateGithubIssuesForBrokenAuthoritiesService < ApplicationService
     String
   )
 
+  PROBABLY_FIXED_LABEL_NAME = "probably fixed"
+
   sig { params(logger: Logger).void }
   def self.call(logger:)
     new.call(logger: logger)
@@ -34,6 +36,9 @@ class CreateGithubIssuesForBrokenAuthoritiesService < ApplicationService
           github_repo: REPO,
           github_number: issue.number
         )
+      elsif !authority.broken? && issue && !issue.closed?(client)
+        logger.info "Authority #{authority.full_name} is fixed but github issue is still open. So labelling."
+        issue.add_label!(client, PROBABLY_FIXED_LABEL_NAME)
       end
     end
   end

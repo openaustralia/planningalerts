@@ -16,6 +16,12 @@ class GithubIssue < ApplicationRecord
     state(client) == "closed"
   end
 
+  # Add label to issue on github. If the label already is there it does nothing
+  sig { params(client: Octokit::Client, name: String).void }
+  def add_label!(client, name)
+    client.add_labels_to_an_issue(github_repo, github_number, [name])
+  end
+
   private
 
   sig { params(client: Octokit::Client).returns(T.untyped) }
