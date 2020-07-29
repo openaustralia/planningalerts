@@ -6,7 +6,7 @@ class ImportApplicationsService < ApplicationService
 
   sig { params(authority: Authority, logger: Logger).void }
   def self.call(authority:, logger:)
-    scrape_delay = ENV["SCRAPE_DELAY"].to_i
+    scrape_delay = T.must(ENV["SCRAPE_DELAY"]).to_i
     morph_api_key = T.must(ENV["MORPH_API_KEY"])
     new(
       authority: authority,
