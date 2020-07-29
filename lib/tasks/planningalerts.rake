@@ -52,7 +52,10 @@ namespace :planningalerts do
 
   desc "Create GitHub issues for broken authorities"
   task create_github_issues: :environment do
-    CreateGithubIssuesForBrokenAuthoritiesService.call(logger: Logger.new(STDOUT))
+    logger = Logger.new(STDOUT)
+    Authority.active.find_each do |authority|
+      SyncGithubIssueForAuthorityService.call(logger: logger, authority: authority)
+    end
   end
 
   namespace :emergency do
