@@ -22,6 +22,8 @@ class ImportApplicationsService < ApplicationService
   def call
     time = Benchmark.ms { import_applications_date_range }
     logger.info "Took #{(time / 1000).to_i} s to import applications from #{authority.full_name_and_state}"
+
+    SyncGithubIssueForAuthorityService.call(logger: logger, authority: authority)
   end
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception

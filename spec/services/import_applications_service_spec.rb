@@ -57,6 +57,8 @@ describe ImportApplicationsService do
     expect(logger).to receive(:info).with("Took 0 s to import applications from Fiddlesticks, NSW")
     allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(0)
     allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("123")
+    expect(SyncGithubIssueForAuthorityService).to receive(:call).with(logger: logger, authority: auth)
+
     Timecop.freeze(date) do
       ImportApplicationsService.call(authority: auth, logger: logger)
     end
@@ -79,6 +81,7 @@ describe ImportApplicationsService do
     expect(logger).to receive(:info).twice.with("Took 0 s to import applications from Fiddlesticks, NSW")
     allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(0)
     allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("123")
+    allow(SyncGithubIssueForAuthorityService).to receive(:call).with(logger: logger, authority: auth)
 
     Timecop.freeze(date) do
       ImportApplicationsService.call(authority: auth, logger: logger)
@@ -104,6 +107,7 @@ describe ImportApplicationsService do
     )
     allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(0)
     allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("12/")
+    expect(SyncGithubIssueForAuthorityService).to receive(:call).with(logger: logger, authority: auth)
 
     Timecop.freeze(date) do
       ImportApplicationsService.call(authority: auth, logger: logger)

@@ -5,7 +5,7 @@ namespace :planningalerts do
     desc "Import new applications, index them, send emails and generate XML sitemap"
     # TODO: Rename the task to use "import"
     # IMPORTANT: Also will need to update the cron job in production to match
-    task scrape_and_email: %i[scrape email sitemap elasticsearch_snapshot create_github_issues]
+    task scrape_and_email: %i[scrape email sitemap elasticsearch_snapshot]
 
     desc "Import all the applications for the last few days for all the loaded authorities"
     task :scrape, [:authority_short_name] => :environment do |_t, args|
@@ -48,14 +48,6 @@ namespace :planningalerts do
   desc "Generate XML sitemap"
   task sitemap: :environment do
     GenerateSitemapService.call
-  end
-
-  desc "Create GitHub issues for broken authorities"
-  task create_github_issues: :environment do
-    logger = Logger.new(STDOUT)
-    Authority.active.find_each do |authority|
-      SyncGithubIssueForAuthorityService.call(logger: logger, authority: authority)
-    end
   end
 
   namespace :emergency do
