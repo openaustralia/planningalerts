@@ -55,8 +55,10 @@ describe ImportApplicationsService do
     logger = Logger.new(STDOUT)
     expect(logger).to receive(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01")
     expect(logger).to receive(:info).with("Took 0 s to import applications from Fiddlesticks, NSW")
+    allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(0)
+    allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("123")
     Timecop.freeze(date) do
-      ImportApplicationsService.call(authority: auth, scrape_delay: 0, logger: logger, morph_api_key: "123")
+      ImportApplicationsService.call(authority: auth, logger: logger)
     end
     expect(Application.count).to eq(2)
     r1 = Application.find_by(council_reference: "R1")
@@ -75,14 +77,16 @@ describe ImportApplicationsService do
     expect(logger).to receive(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01")
     expect(logger).to receive(:info).with("1 application found for Fiddlesticks, NSW with date from 2009-01-01")
     expect(logger).to receive(:info).twice.with("Took 0 s to import applications from Fiddlesticks, NSW")
+    allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(0)
+    allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("123")
 
     Timecop.freeze(date) do
-      ImportApplicationsService.call(authority: auth, scrape_delay: 0, logger: logger, morph_api_key: "123")
+      ImportApplicationsService.call(authority: auth, logger: logger)
       # Getting the feed again with updated content for one of the applicartions
       allow(ImportApplicationsService).to receive(:open_url_safe).and_return(
         [app_data2_updated].to_json
       )
-      ImportApplicationsService.call(authority: auth, scrape_delay: 0, logger: logger, morph_api_key: "123")
+      ImportApplicationsService.call(authority: auth, logger: logger)
     end
     expect(Application.count).to eq(2)
     r2 = Application.find_by(council_reference: "R2")
@@ -98,8 +102,11 @@ describe ImportApplicationsService do
       "https://api.morph.io//data.json?key=12%2F&query=select+%2A+from+%60data%60+where+%60date_scraped%60+%3E%3D+%272009-01-01%27",
       logger
     )
+    allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(0)
+    allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("12/")
+
     Timecop.freeze(date) do
-      ImportApplicationsService.call(authority: auth, scrape_delay: 0, logger: logger, morph_api_key: "12/")
+      ImportApplicationsService.call(authority: auth, logger: logger)
     end
   end
 

@@ -4,8 +4,10 @@
 class ImportApplicationsService < ApplicationService
   extend T::Sig
 
-  sig { params(authority: Authority, scrape_delay: Integer, logger: Logger, morph_api_key: String).void }
-  def self.call(authority:, scrape_delay:, logger:, morph_api_key:)
+  sig { params(authority: Authority, logger: Logger).void }
+  def self.call(authority:, logger:)
+    scrape_delay = ENV["SCRAPE_DELAY"].to_i
+    morph_api_key = T.must(ENV["MORPH_API_KEY"])
     new(
       authority: authority,
       scrape_delay: scrape_delay,
