@@ -112,8 +112,10 @@ describe ImportApplicationsService do
 
   describe "#morph_query" do
     it "should filter by the date range" do
+      allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(7)
+      allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("")
       Timecop.freeze(date) do
-        s = ImportApplicationsService.new(authority: auth, scrape_delay: 7, logger: Logger.new(STDOUT), morph_api_key: "")
+        s = ImportApplicationsService.new(authority: auth, logger: Logger.new(STDOUT))
         expect(s.morph_query).to eq "select * from `data` where `date_scraped` >= '2008-12-25'"
       end
     end
@@ -122,8 +124,10 @@ describe ImportApplicationsService do
       let(:auth) { create(:authority, scraper_authority_label: "foo") }
 
       it "should filter by the authority_label" do
+        allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(7)
+        allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("")
         Timecop.freeze(date) do
-          s = ImportApplicationsService.new(authority: auth, scrape_delay: 7, logger: Logger.new(STDOUT), morph_api_key: "")
+          s = ImportApplicationsService.new(authority: auth, logger: Logger.new(STDOUT))
           expect(s.morph_query).to eq "select * from `data` where `authority_label` = 'foo' and `date_scraped` >= '2008-12-25'"
         end
       end
