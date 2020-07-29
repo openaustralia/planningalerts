@@ -95,7 +95,7 @@ ActiveAdmin.register Authority do
 
   member_action :import, method: :post do
     authority = Authority.find(params[:id])
-    ImportApplicationsJob.perform_later(authority: authority, scrape_delay: ENV["SCRAPE_DELAY"].to_i)
+    ImportApplicationsJob.perform_later(authority: authority)
     redirect_to({ action: :show }, notice: "Queued for importing!")
   end
 
