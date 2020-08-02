@@ -1,8 +1,9 @@
-%article
+.col.mb-4
   = link_to application do
-    %p
-      In #{application.suburb}, #{application.state}
-      the planning application for
-      "#{truncate(application.description, length: 100, separator: ' ')}"
-      was commented on
-      = pluralize(application.visible_comments_count, "time")
+    .card.h-100
+      .card-body
+        In #{application.suburb}, #{application.state}
+        the planning application for
+        = truncate(application.description, length: 100, separator: ' ')
+        was commented on
+        = pluralize(application.visible_comments_count, "time")
