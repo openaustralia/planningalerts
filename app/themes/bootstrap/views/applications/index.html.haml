@@ -15,7 +15,7 @@
     - else
       %p
         %mark
-          It looks like something might be wrong. The latest application was received
+          It looks like something might be wrong. The latest new application was received
           = time_ago_in_words(@authority.date_last_new_application_scraped)
           ago.
       = link_to "Why?", faq_path(anchor: "broken_scraper")
