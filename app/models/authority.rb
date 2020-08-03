@@ -71,8 +71,8 @@ class Authority < ApplicationRecord
 
   # Returns an array of arrays [date, number_of_applications_that_date]
   sig { returns(T::Array[T::Array[[Date, Integer]]]) }
-  def applications_per_day
-    h = applications.with_current_version.order("date_scraped DESC").group("CAST(date_scraped AS DATE)").count
+  def new_applications_per_day
+    h = applications.with_first_version.order("date_scraped DESC").group("CAST(date_scraped AS DATE)").count
     # For any dates not in h fill them in with zeros
     (h.keys.min..Time.zone.today).each do |date|
       h[date] = 0 unless h.key?(date)
@@ -81,16 +81,16 @@ class Authority < ApplicationRecord
   end
 
   sig { returns(T.nilable(Integer)) }
-  def median_applications_per_week
-    v = applications_per_week.select { |a| a[1].positive? }.map { |a| a[1] }.sort
+  def median_new_applications_per_week
+    v = new_applications_per_week.select { |a| a[1].positive? }.map { |a| a[1] }.sort
     v[v.count / 2]
   end
 
   sig { returns(T::Array[[Date, Integer]]) }
-  def applications_per_week
+  def new_applications_per_week
     # Sunday is the beginning of the week (and the date returned here)
     # Have to compensate for MySQL which treats Monday as the beginning of the week
-    h = applications.with_current_version.order("date_scraped DESC").group("CAST(SUBDATE(date_scraped, WEEKDAY(date_scraped) + 1) AS DATE)").count
+    h = applications.with_first_version.order("date_scraped DESC").group("CAST(SUBDATE(date_scraped, WEEKDAY(date_scraped) + 1) AS DATE)").count
     min = h.keys.min
     max = Time.zone.today - Time.zone.today.wday
     (min..max).step(7) do |date|
@@ -102,7 +102,7 @@ class Authority < ApplicationRecord
   # TODO: More strict type checking on contents of array
   sig { returns(T::Array[[Date, Integer]]) }
   def comments_per_week
-    # Sunday is the beginning of the week to match applications_per_week
+    # Sunday is the beginning of the week to match new_applications_per_week
     Date.beginning_of_week = :sunday
 
     results = []

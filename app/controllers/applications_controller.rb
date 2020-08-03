@@ -45,13 +45,13 @@ class ApplicationsController < ApplicationController
     const :authority_id, String
   end
 
-  # JSON api for returning the number of scraped applications per day
+  # JSON api for returning the number of new scraped applications per day
   def per_day
     typed_params = TypedParams[PerDayParams].new.extract!(params)
     authority = Authority.find_short_name_encoded!(typed_params.authority_id)
     respond_to do |format|
       format.js do
-        render json: authority.applications_per_day
+        render json: authority.new_applications_per_day
       end
     end
   end
@@ -65,7 +65,7 @@ class ApplicationsController < ApplicationController
     authority = Authority.find_short_name_encoded!(typed_params.authority_id)
     respond_to do |format|
       format.js do
-        render json: authority.applications_per_week
+        render json: authority.new_applications_per_week
       end
     end
   end
