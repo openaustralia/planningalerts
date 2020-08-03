@@ -36,7 +36,7 @@ class GenerateSitemapService < ApplicationService
 
     # All the applications pages
     Application.with_current_version.order("date_scraped DESC").all.find_each do |application|
-      s.add_url application_path(application), changefreq: :monthly, lastmod: application.first_date_scraped
+      s.add_url application_path(application), changefreq: :monthly, lastmod: application.date_scraped
     end
 
     s.finish
