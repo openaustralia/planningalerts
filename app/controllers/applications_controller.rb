@@ -21,11 +21,11 @@ class ApplicationsController < ApplicationController
     if authority_id
       # TODO: Handle the situation where the authority name isn't found
       @authority = Authority.find_short_name_encoded!(authority_id)
-      apps = @authority.applications.with_current_version.order("date_scraped DESC")
+      apps = @authority.applications.with_first_version.order("date_scraped DESC")
       @description << " from #{@authority.full_name_and_state}"
     else
       @description << " within the last #{Application.nearby_and_recent_max_age_months} months"
-      apps = Application.with_current_version.order("date_scraped DESC").where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
+      apps = Application.with_first_version.order("date_scraped DESC").where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
     end
 
     @applications = apps
