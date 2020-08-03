@@ -27,7 +27,7 @@ class SyncGithubIssueForAuthorityService < ApplicationService
     client = Octokit::Client.new(access_token: ENV["GITHUB_PERSONAL_ACCESS_TOKEN"])
 
     issue = authority.github_issue
-    latest_date = authority.latest_date_scraped
+    latest_date = authority.date_last_new_application_scraped
     # We don't want to create issues on newly created authorities that have
     # not yet scraped anything
     if authority.broken? && latest_date && (issue.nil? || issue.closed?(client))

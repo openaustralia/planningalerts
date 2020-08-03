@@ -9,14 +9,14 @@
 
 %section.applications
   - if @authority&.broken?
-    - if @authority.latest_date_scraped.nil?
+    - if @authority.date_last_new_application_scraped.nil?
       %p
         %mark There are no applications yet for this authority
     - else
       %p
         %mark
           It looks like something might be wrong. The latest application was received
-          = time_ago_in_words(@authority.latest_date_scraped)
+          = time_ago_in_words(@authority.date_last_new_application_scraped)
           ago.
       = link_to "Why?", faq_path(anchor: "broken_scraper")
 

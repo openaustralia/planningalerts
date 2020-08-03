@@ -8,10 +8,10 @@
                                form_classes: "attention"
 
 - if @authority&.broken?
-  - if @authority.latest_date_scraped.nil?
+  - if @authority.date_last_new_application_scraped.nil?
     %span.highlight There are no applications yet for this authority
   - else
-    %span.highlight It looks like something might be wrong. The latest application was received #{time_ago_in_words(@authority.latest_date_scraped)} ago.
+    %span.highlight It looks like something might be wrong. The latest application was received #{time_ago_in_words(@authority.date_last_new_application_scraped)} ago.
     = link_to "Why?", faq_path(anchor: "broken_scraper")
 
 = paginated_section @applications, previous_label: "« Newer", next_label: "Older »" do

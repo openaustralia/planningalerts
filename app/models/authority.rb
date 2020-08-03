@@ -187,10 +187,11 @@ class Authority < ApplicationRecord
     "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/data/#{state.upcase}/local_councillor_popolo.json"
   end
 
+  # When the last entirely new application was scraped. Applications being updated is ignored.
   sig { returns(T.nilable(Time)) }
-  def latest_date_scraped
-    latest_application = applications.with_current_version.order("date_scraped DESC").first
-    latest_application&.date_scraped
+  def date_last_new_application_scraped
+    latest_application = applications.with_first_version.order("date_scraped DESC").first
+    latest_application&.first_date_scraped
   end
 
   # If the latest application is over two weeks old, the scraper's probably broken
