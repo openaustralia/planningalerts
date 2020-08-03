@@ -77,9 +77,9 @@ class Application < ApplicationRecord
       nearbys(
         Application.nearby_and_recent_max_distance_km,
         units: :km,
-        latitude: "application_versions.lat",
-        longitude: "application_versions.lng"
-      ).with_current_version.where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
+        latitude: "current_versions_applications.lat",
+        longitude: "current_versions_applications.lng"
+      ).with_first_version.with_current_version.where("application_versions.date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
     else
       Application.none
     end
