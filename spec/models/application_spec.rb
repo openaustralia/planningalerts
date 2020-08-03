@@ -57,11 +57,12 @@ describe Application do
     end
   end
 
-  describe ".with_current_version" do
+  # TODO: The main code in the application does not yet reflect this way of doing a query
+  describe ".with_first_version" do
     it "should not do too many sql queries" do
       5.times { create(:geocoded_application) }
       expect(ActiveRecord::Base.connection).to receive(:exec_query).at_most(2).times.and_call_original
-      Application.with_current_version.order("date_scraped DESC").all.map(&:description)
+      Application.with_first_version.order("application_versions.date_scraped DESC").includes(:current_version).all.map(&:description)
     end
   end
 
