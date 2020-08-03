@@ -23,8 +23,8 @@ class Application < ApplicationRecord
 
   scope(:with_current_version, -> { includes(:current_version).joins(:current_version) })
   scope(:with_first_version, -> { includes(:first_version).joins(:first_version) })
-  scope(:in_past_week, -> { joins(:current_version).where("date_scraped > ?", 7.days.ago) })
-  scope(:recent, -> { joins(:current_version).where("date_scraped >= ?", 14.days.ago) })
+  scope(:in_past_week, -> { joins(:first_version).where("date_scraped > ?", 7.days.ago) })
+  scope(:recent, -> { joins(:first_version).where("date_scraped >= ?", 14.days.ago) })
 
   sig { returns(T::Hash[String, T.untyped]) }
   def search_data
