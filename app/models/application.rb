@@ -14,6 +14,7 @@ class Application < ApplicationRecord
   has_many :replies, through: :comments
   has_many :versions, -> { order(id: :desc) }, class_name: "ApplicationVersion", dependent: :restrict_with_exception, inverse_of: :application
   has_one :current_version, -> { where(current: true) }, class_name: "ApplicationVersion", inverse_of: :application
+  # TODO: Move first_date_scraped into applications table so that we don't need this association
   has_one :first_version, -> { where(previous_version: nil) }, class_name: "ApplicationVersion", inverse_of: :application
 
   geocoded_by :address, latitude: :lat, longitude: :lng
