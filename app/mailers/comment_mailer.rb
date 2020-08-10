@@ -12,10 +12,12 @@ class CommentMailer < ApplicationMailer
     @comment = comment
 
     mail(
-      from: "#{comment.name} <#{comment.email}>",
-      sender: email_from,
-      # Setting reply-to to ensure that we don't get the replies for email clients that are not
-      # respecting the from, sender headers that we've set.
+      # DMARC Domain alignment forces us to use our domain in the from header
+      # even though it goes against RFC 5322
+      # (see https://en.wikipedia.org/wiki/DMARC#Sender_field). We were using
+      # the "sender" header before to signify who was sending the email before
+      # but DMARC now effectively makes this way of doing things unworkable.
+      from: email_from,
       reply_to: "#{comment.name} <#{comment.email}>",
       to: comment.application.authority.email,
       subject: "Comment on application #{comment.application.council_reference}"
@@ -29,8 +31,8 @@ class CommentMailer < ApplicationMailer
     from_address = ENV["EMAIL_COUNCILLOR_REPLIES_TO"]
 
     mail(
-      from: "#{comment.name} <#{from_address}>",
-      sender: email_from,
+      # See comments above about DMARC domain alignment
+      from: email_from,
       reply_to: "#{comment.name} <#{from_address}>",
       to: T.must(comment.councillor).email,
       subject: "Planning application at #{comment.application.address}"

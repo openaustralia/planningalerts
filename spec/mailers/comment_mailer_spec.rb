@@ -23,12 +23,12 @@ describe CommentMailer do
         expect(notifier.to).to eq([@comment.application.authority.email])
       end
 
-      it "should have the sender as the main planningalerts email address" do
-        expect(notifier.sender).to eq("contact@planningalerts.org.au")
+      it "should have the from as the main planningalerts email address" do
+        expect(notifier.from).to eq(["contact@planningalerts.org.au"])
       end
 
-      it "should be from the email address of the person who made the comment" do
-        expect(notifier.from).to eq([@comment.email])
+      it "should be reply-to be the email address of the person who made the comment" do
+        expect(notifier.reply_to).to eq([@comment.email])
       end
 
       it "should say in the subject line it is a comment on a development application" do
@@ -56,9 +56,8 @@ describe CommentMailer do
       let(:notifier) { CommentMailer.notify_councillor(comment) }
 
       it { expect(notifier.to).to eql [comment.councillor.email] }
-      it { expect(notifier.from).to eql ["replies@planningalerts.org.au"] }
+      it { expect(notifier.from).to eql ["contact@planningalerts.org.au"] }
       it { expect(notifier.reply_to).to eql ["replies@planningalerts.org.au"] }
-      it { expect(notifier.sender).to eql "contact@planningalerts.org.au" }
       it { expect(notifier.subject).to eql "Planning application at 24 Bruce Road Glenbrook" }
       it { expect(notifier.text_part).to have_content "It's a good thing." }
       it { expect(notifier.html_part).to have_content "It's a good thing." }
