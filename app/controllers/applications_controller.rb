@@ -179,7 +179,7 @@ class ApplicationsController < ApplicationController
     @application = Application.find(typed_params.id)
     case @sort
     when "time"
-      @applications = @application.find_all_nearest_or_recent.reorder("date_scraped DESC")
+      @applications = @application.find_all_nearest_or_recent.reorder("application_versions.date_scraped DESC")
     when "distance"
       @applications = @application.find_all_nearest_or_recent
     else
