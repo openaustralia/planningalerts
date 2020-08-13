@@ -11,6 +11,10 @@ class CommentMailer < ApplicationMailer
   def notify_authority(comment)
     @comment = comment
 
+    # Tell Cuttlefish to always try to send this email irrespective
+    # of what's in the deny list
+    headers("X-Cuttlefish-Ignore-Deny-List" => "true")
+
     mail(
       # DMARC Domain alignment forces us to use our domain in the from header
       # even though it goes against RFC 5322
@@ -29,6 +33,10 @@ class CommentMailer < ApplicationMailer
   def notify_councillor(comment)
     @comment = T.let(comment, T.nilable(Comment))
     from_address = ENV["EMAIL_COUNCILLOR_REPLIES_TO"]
+
+    # Tell Cuttlefish to always try to send this email irrespective
+    # of what's in the deny list
+    headers("X-Cuttlefish-Ignore-Deny-List" => "true")
 
     mail(
       # See comments above about DMARC domain alignment
