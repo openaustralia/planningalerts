@@ -13,7 +13,11 @@ class CommentMailer < ApplicationMailer
 
     # Tell Cuttlefish to always try to send this email irrespective
     # of what's in the deny list
-    headers("X-Cuttlefish-Ignore-Deny-List" => "true")
+    headers(
+      "X-Cuttlefish-Ignore-Deny-List" => "true",
+      "X-Cuttlefish-Metadata-comment_id" => comment.id.to_s,
+      "X-Cuttlefish-Metadata-type" => "comment_to_authority"
+    )
 
     mail(
       # DMARC Domain alignment forces us to use our domain in the from header
@@ -36,7 +40,11 @@ class CommentMailer < ApplicationMailer
 
     # Tell Cuttlefish to always try to send this email irrespective
     # of what's in the deny list
-    headers("X-Cuttlefish-Ignore-Deny-List" => "true")
+    headers(
+      "X-Cuttlefish-Ignore-Deny-List" => "true",
+      "X-Cuttlefish-Metadata-comment_id" => comment.id.to_s,
+      "X-Cuttlefish-Metadata-type" => "comment_to_councillor"
+    )
 
     mail(
       # See comments above about DMARC domain alignment
