@@ -25,8 +25,7 @@ class AlertMailer < ApplicationMailer
       "List-Unsubscribe" => "<" + unsubscribe_alert_url(id: alert.confirm_id) + ">",
       # This special header sets arbitrary metadata on the email in Cuttlefish
       # It's not sent on in the outgoing email
-      "X-Cuttlefish-Metadata-alert_id" => alert.id.to_s,
-      "X-Cuttlefish-Metadata-type" => "alert"
+      "X-Cuttlefish-Metadata-alert_id" => alert.id.to_s
     )
 
     mail(

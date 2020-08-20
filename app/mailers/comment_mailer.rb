@@ -15,8 +15,7 @@ class CommentMailer < ApplicationMailer
     # of what's in the deny list
     headers(
       "X-Cuttlefish-Ignore-Deny-List" => "true",
-      "X-Cuttlefish-Metadata-comment_id" => comment.id.to_s,
-      "X-Cuttlefish-Metadata-type" => "comment_to_authority"
+      "X-Cuttlefish-Metadata-comment_id" => comment.id.to_s
     )
 
     mail(
@@ -42,8 +41,7 @@ class CommentMailer < ApplicationMailer
     # of what's in the deny list
     headers(
       "X-Cuttlefish-Ignore-Deny-List" => "true",
-      "X-Cuttlefish-Metadata-comment_id" => comment.id.to_s,
-      "X-Cuttlefish-Metadata-type" => "comment_to_councillor"
+      "X-Cuttlefish-Metadata-comment_id" => comment.id.to_s
     )
 
     mail(
