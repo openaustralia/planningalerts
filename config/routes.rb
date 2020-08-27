@@ -148,6 +148,8 @@ Rails.application.routes.draw do
   get "/404", to: "static#error_404"
   get "/500", to: "static#error_500"
 
+  post "/cuttlefish/event", to: "cuttlefish#event"
+
   # TODO: Only needed while we're testing the bootstrap theme
   resource :theme, only: [] do
     post 'toggle'
