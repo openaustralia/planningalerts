@@ -147,6 +147,9 @@ gem "octokit", "~> 4.0"
 # For rendering json output
 gem "jpbuilder"
 
+# For sending notifications to Slack about bounced emails to authorities
+gem "slack-notifier"
+
 group :test do
   gem "capybara"
   gem "climate_control"
