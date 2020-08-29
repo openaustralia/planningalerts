@@ -44,11 +44,11 @@ class NotifySlackCommentDeliveryService < ApplicationService
   def call
     notifier = Slack::Notifier.new ENV["SLACK_WEBHOOK_URL"]
     if status == "delivered"
-      notifier.ping "A comment was succesfully delivered to #{comment.application.authority.full_name} with email #{to}"
+      notifier.ping "A comment was succesfully delivered to #{comment.application.authority.full_name} #{to}"
     elsif status == "soft_bounce"
-      notifier.ping "A comment soft bounced when delivered to #{comment.application.authority.full_name} with email #{to}. Their email server said \"#{extended_status}\""
+      notifier.ping "A comment soft bounced when delivered to #{comment.application.authority.full_name} #{to}. Their email server said \"#{extended_status}\""
     elsif status == "hard_bounce"
-      notifier.ping "A comment hard bounced when delivered to #{comment.application.authority.full_name} with email #{to}. Their email server said \"#{extended_status}\""
+      notifier.ping "A comment hard bounced when delivered to #{comment.application.authority.full_name} #{to}. Their email server said \"#{extended_status}\""
     else
       raise "Unexpected status"
     end
