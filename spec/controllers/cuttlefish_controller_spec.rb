@@ -38,6 +38,8 @@ describe CuttlefishController do
           status: "delivered",
           extended_status: "sent (250 Message accepted)",
           email: {
+            id: 123,
+            message_id: "ABC@DEF.foo.com",
             from: "matthew@oaf.org.au",
             to: "joy@smart-unlimited.com",
             subject: "This is a test email from Cuttlefish",
@@ -63,6 +65,8 @@ describe CuttlefishController do
           status: "delivered",
           extended_status: "sent (250 Message accepted)",
           email: {
+            id: 123,
+            message_id: "ABC@DEF.foo.com",
             from: "matthew@oaf.org.au",
             to: "joy@smart-unlimited.com",
             subject: "This is a test email from Cuttlefish",
@@ -94,6 +98,8 @@ describe CuttlefishController do
           status: "hard_bounce",
           extended_status: "hard bounce",
           email: {
+            id: 123,
+            message_id: "ABC@DEF.foo.com",
             from: "matthew@oaf.org.au",
             to: "joy@smart-unlimited.com",
             subject: "This is a test email from Cuttlefish",

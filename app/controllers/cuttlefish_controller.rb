@@ -6,6 +6,8 @@ class CuttlefishController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   class EmailParams < T::Struct
+    const :id, Integer
+    const :message_id, String
     const :from, String
     const :to, String
     const :subject, String
