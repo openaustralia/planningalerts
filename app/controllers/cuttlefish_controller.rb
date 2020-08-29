@@ -16,6 +16,8 @@ class CuttlefishController < ApplicationController
   class DeliveryEventParams < T::Struct
     const :time, Time
     const :dsn, String
+    # It looks like the sorbet-coerce gem https://github.com/chanzuckerberg/sorbet-coerce
+    # doesn't yet support enums so we have to use a string for status
     const :status, String
     const :extended_status, String
     const :email, EmailParams
