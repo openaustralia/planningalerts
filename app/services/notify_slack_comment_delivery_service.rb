@@ -44,14 +44,24 @@ class NotifySlackCommentDeliveryService < ApplicationService
   def call
     notifier = Slack::Notifier.new ENV["SLACK_WEBHOOK_URL"]
     if status == "delivered"
-      notifier.ping "A comment was succesfully delivered to #{comment.application.authority.full_name} #{to}"
+      notifier.ping "A [comment](#{comment_url}) was succesfully [delivered](#{email_url}) to #{comment.application.authority.full_name} #{to}"
     elsif status == "soft_bounce"
-      notifier.ping "A comment soft bounced when delivered to #{comment.application.authority.full_name} #{to}. Their email server said \"#{extended_status}\""
+      notifier.ping "A [comment](#{comment_url}) soft bounced when [delivered](#{email_url}) to #{comment.application.authority.full_name} #{to}. Their email server said \"#{extended_status}\""
     elsif status == "hard_bounce"
-      notifier.ping "A comment hard bounced when delivered to #{comment.application.authority.full_name} #{to}. Their email server said \"#{extended_status}\""
+      notifier.ping "A [comment](#{comment_url}) hard bounced when [delivered](#{email_url}) to #{comment.application.authority.full_name} #{to}. Their email server said \"#{extended_status}\""
     else
       raise "Unexpected status"
     end
+  end
+
+  sig { returns(String) }
+  def email_url
+    "https://cuttlefish.oaf.org.au/emails/#{email_id}"
+  end
+
+  sig { returns(String) }
+  def comment_url
+    Rails.application.routes.url_helpers.admin_comment_url(comment, host: ENV["HOST"])
   end
 
   private
@@ -67,4 +77,7 @@ class NotifySlackCommentDeliveryService < ApplicationService
 
   sig { returns(String) }
   attr_reader :extended_status
+
+  sig { returns(Integer) }
+  attr_reader :email_id
 end
