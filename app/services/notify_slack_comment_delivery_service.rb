@@ -4,17 +4,40 @@
 class NotifySlackCommentDeliveryService < ApplicationService
   extend T::Sig
 
-  sig { params(comment: Comment, to: String, status: String, extended_status: String).void }
-  def self.call(comment:, to:, status:, extended_status:)
-    new(comment: comment, to: to, status: status, extended_status: extended_status).call
+  sig do
+    params(
+      comment: Comment,
+      to: String,
+      status: String,
+      extended_status: String,
+      email_id: Integer
+    ).void
+  end
+  def self.call(comment:, to:, status:, extended_status:, email_id:)
+    new(
+      comment: comment,
+      to: to,
+      status: status,
+      extended_status: extended_status,
+      email_id: email_id
+    ).call
   end
 
-  sig { params(comment: Comment, to: String, status: String, extended_status: String).void }
-  def initialize(comment:, to:, status:, extended_status:)
+  sig do
+    params(
+      comment: Comment,
+      to: String,
+      status: String,
+      extended_status: String,
+      email_id: Integer
+    ).void
+  end
+  def initialize(comment:, to:, status:, extended_status:, email_id:)
     @comment = comment
     @to = to
     @status = status
     @extended_status = extended_status
+    @email_id = email_id
   end
 
   sig { void }

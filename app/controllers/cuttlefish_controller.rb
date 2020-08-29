@@ -53,7 +53,8 @@ class CuttlefishController < ApplicationController
           comment: Comment.find(comment_id),
           to: delivery_event.email.to,
           status: status,
-          extended_status: delivery_event.extended_status
+          extended_status: delivery_event.extended_status,
+          email_id: delivery_event.email.id
         )
       end
     end

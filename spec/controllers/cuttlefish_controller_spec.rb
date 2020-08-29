@@ -87,7 +87,8 @@ describe CuttlefishController do
         comment: comment,
         to: "joy@smart-unlimited.com",
         status: "hard_bounce",
-        extended_status: "hard bounce"
+        extended_status: "hard bounce",
+        email_id: 123
       )
 
       params = {
