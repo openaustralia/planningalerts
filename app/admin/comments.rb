@@ -59,7 +59,7 @@ ActiveAdmin.register Comment do
   end
 
   action_item :resend, only: :show do
-    button_to("Resend email", resend_admin_comment_path)
+    button_to("Resend email", resend_admin_comment_path, disabled: resource.last_delivered_successfully)
   end
 
   member_action :resend, method: :post do
