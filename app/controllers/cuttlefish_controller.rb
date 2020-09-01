@@ -46,12 +46,22 @@ class CuttlefishController < ApplicationController
     delivery_event = typed_params.delivery_event
     if delivery_event
       status = delivery_event.status
+      # We're not interested in soft bounces. So, just accept them and move on...
+      if status == "soft_bounce"
+        head :ok
+        return
+      end
+      success = status == "delivered"
 
       # Check if this is from a comment
       comment_id = delivery_event.email.meta_values["comment-id"]
       if comment_id
         comment = Comment.find(comment_id)
-        if status == "hard_bounce"
+        comment.update!(
+          last_delivered_at: delivery_event.time,
+          last_delivered_succesfully: success
+        )
+        unless success
           NotifySlackCommentDeliveryService.call(
             comment: comment,
             to: delivery_event.email.to,
@@ -60,25 +70,15 @@ class CuttlefishController < ApplicationController
             email_id: delivery_event.email.id
           )
         end
-        if %w[delivered hard_bounce].include?(status)
-          comment.update!(
-            last_delivered_at: delivery_event.time,
-            last_delivered_succesfully: (status == "delivered")
-          )
-        end
       end
 
       # Check if this is from an alert
       alert_id = delivery_event.email.meta_values["alert-id"]
-      # Ignore soft bounces here
-      if alert_id && %w[delivered hard_bounce].include?(status)
+      if alert_id
         alert = Alert.find(alert_id)
-        # This will show a soft bounce as a failed delivery. Do we want this?
-        # Or do we want to wait until a soft bounce turns to a hard bounce to
-        # consider it a failed delivery?
         alert.update!(
           last_delivered_at: delivery_event.time,
-          last_delivered_succesfully: (status == "delivered")
+          last_delivered_succesfully: success
         )
       end
     end
