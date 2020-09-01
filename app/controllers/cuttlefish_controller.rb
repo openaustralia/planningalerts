@@ -49,14 +49,23 @@ class CuttlefishController < ApplicationController
 
       # Check if this is from a comment
       comment_id = delivery_event.email.meta_values["comment-id"]
-      if comment_id && %w[hard_bounce soft_bounce].include?(status)
-        NotifySlackCommentDeliveryService.call(
-          comment: Comment.find(comment_id),
-          to: delivery_event.email.to,
-          status: status,
-          extended_status: delivery_event.extended_status,
-          email_id: delivery_event.email.id
-        )
+      if comment_id
+        comment = Comment.find(comment_id)
+        if %w[hard_bounce soft_bounce].include?(status)
+          NotifySlackCommentDeliveryService.call(
+            comment: comment,
+            to: delivery_event.email.to,
+            status: status,
+            extended_status: delivery_event.extended_status,
+            email_id: delivery_event.email.id
+          )
+        end
+        if %w[delivered hard_bounce].include?(status)
+          comment.update!(
+            last_delivered_at: delivery_event.time,
+            last_delivered_succesfully: (status == "delivered")
+          )
+        end
       end
 
       # Check if this is from an alert

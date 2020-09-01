@@ -120,9 +120,9 @@ describe CuttlefishController do
       expect(alert.last_delivered_succesfully).to eq false
     end
 
-    it "should accept a succesful delivery event for a comment email and do nothing" do
+    it "should accept a succesful delivery event for a comment email" do
       expect(NotifySlackCommentDeliveryService).to_not receive(:call)
-
+      comment = create(:comment, id: 12)
       params = {
         key: "abc123",
         delivery_event: {
@@ -145,9 +145,12 @@ describe CuttlefishController do
       }
       post :event, params: params, format: :json
       expect(response.status).to eq(200)
+      comment.reload
+      expect(comment.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
+      expect(comment.last_delivered_succesfully).to eq true
     end
 
-    it "should accept a bounce delivery event for a comment email and do something" do
+    it "should accept a hard bounce delivery event for a comment email and do something" do
       comment = create(:comment, id: 12)
       expect(NotifySlackCommentDeliveryService).to receive(:call).with(
         comment: comment,
@@ -179,6 +182,46 @@ describe CuttlefishController do
       }
       post :event, params: params, format: :json
       expect(response.status).to eq(200)
+      comment.reload
+      expect(comment.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
+      expect(comment.last_delivered_succesfully).to eq false
+    end
+
+    it "should accept a soft bounce delivery event for a comment email and do something" do
+      comment = create(:comment, id: 12)
+      expect(NotifySlackCommentDeliveryService).to receive(:call).with(
+        comment: comment,
+        to: "joy@smart-unlimited.com",
+        status: "soft_bounce",
+        extended_status: "soft bounce",
+        email_id: 123
+      )
+
+      params = {
+        key: "abc123",
+        delivery_event: {
+          time: "2020-08-27T02:10:17.000Z",
+          dsn: "2.0.0",
+          status: "soft_bounce",
+          extended_status: "soft bounce",
+          email: {
+            id: 123,
+            message_id: "ABC@DEF.foo.com",
+            from: "matthew@oaf.org.au",
+            to: "joy@smart-unlimited.com",
+            subject: "This is a test email from Cuttlefish",
+            created_at: "2020-08-27T02:10:17.579Z",
+            meta_values: {
+              "comment-id": "12"
+            }
+          }
+        }
+      }
+      post :event, params: params, format: :json
+      expect(response.status).to eq(200)
+      comment.reload
+      expect(comment.last_delivered_at).to be_nil
+      expect(comment.last_delivered_succesfully).to be_nil
     end
   end
 end
