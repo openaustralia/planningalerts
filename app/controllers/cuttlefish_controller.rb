@@ -51,7 +51,7 @@ class CuttlefishController < ApplicationController
       comment_id = delivery_event.email.meta_values["comment-id"]
       if comment_id
         comment = Comment.find(comment_id)
-        if %w[hard_bounce soft_bounce].include?(status)
+        if status == "hard_bounce"
           NotifySlackCommentDeliveryService.call(
             comment: comment,
             to: delivery_event.email.to,

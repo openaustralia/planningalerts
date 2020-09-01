@@ -189,13 +189,7 @@ describe CuttlefishController do
 
     it "should accept a soft bounce delivery event for a comment email and do something" do
       comment = create(:comment, id: 12)
-      expect(NotifySlackCommentDeliveryService).to receive(:call).with(
-        comment: comment,
-        to: "joy@smart-unlimited.com",
-        status: "soft_bounce",
-        extended_status: "soft bounce",
-        email_id: 123
-      )
+      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
 
       params = {
         key: "abc123",
