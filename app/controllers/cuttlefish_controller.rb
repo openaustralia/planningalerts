@@ -59,7 +59,7 @@ class CuttlefishController < ApplicationController
         comment = Comment.find(comment_id)
         comment.update!(
           last_delivered_at: delivery_event.time,
-          last_delivered_succesfully: success
+          last_delivered_successfully: success
         )
         unless success
           NotifySlackCommentDeliveryService.call(
@@ -78,7 +78,7 @@ class CuttlefishController < ApplicationController
         alert = Alert.find(alert_id)
         alert.update!(
           last_delivered_at: delivery_event.time,
-          last_delivered_succesfully: success
+          last_delivered_successfully: success
         )
       end
     end

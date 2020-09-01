@@ -55,7 +55,7 @@ describe CuttlefishController do
       expect(response.status).to eq(200)
       alert.reload
       expect(alert.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
-      expect(alert.last_delivered_succesfully).to eq true
+      expect(alert.last_delivered_successfully).to eq true
     end
 
     it "should accept a delivery event for an alert email and do nothing" do
@@ -86,7 +86,7 @@ describe CuttlefishController do
       expect(response.status).to eq(200)
       alert.reload
       expect(alert.last_delivered_at).to be_nil
-      expect(alert.last_delivered_succesfully).to be_nil
+      expect(alert.last_delivered_successfully).to be_nil
     end
 
     it "should accept a delivery event for an alert email and record a failed delivery" do
@@ -117,7 +117,7 @@ describe CuttlefishController do
       expect(response.status).to eq(200)
       alert.reload
       expect(alert.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
-      expect(alert.last_delivered_succesfully).to eq false
+      expect(alert.last_delivered_successfully).to eq false
     end
 
     it "should accept a succesful delivery event for a comment email" do
@@ -147,7 +147,7 @@ describe CuttlefishController do
       expect(response.status).to eq(200)
       comment.reload
       expect(comment.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
-      expect(comment.last_delivered_succesfully).to eq true
+      expect(comment.last_delivered_successfully).to eq true
     end
 
     it "should accept a hard bounce delivery event for a comment email and do something" do
@@ -184,7 +184,7 @@ describe CuttlefishController do
       expect(response.status).to eq(200)
       comment.reload
       expect(comment.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
-      expect(comment.last_delivered_succesfully).to eq false
+      expect(comment.last_delivered_successfully).to eq false
     end
 
     it "should accept a soft bounce delivery event for a comment email and do something" do
@@ -215,7 +215,7 @@ describe CuttlefishController do
       expect(response.status).to eq(200)
       comment.reload
       expect(comment.last_delivered_at).to be_nil
-      expect(comment.last_delivered_succesfully).to be_nil
+      expect(comment.last_delivered_successfully).to be_nil
     end
   end
 end
