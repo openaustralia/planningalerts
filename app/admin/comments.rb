@@ -58,6 +58,15 @@ ActiveAdmin.register Comment do
     end
   end
 
+  action_item :resend, only: :show do
+    button_to("Resend email", resend_admin_comment_path)
+  end
+
+  member_action :resend, method: :post do
+    resource.send_comment!
+    redirect_to({ action: :show }, notice: "Resent comment")
+  end
+
   action_item :confirm, only: :show do
     if resource.confirmed?
     else
