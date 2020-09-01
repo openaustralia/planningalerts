@@ -27,9 +27,9 @@ describe CuttlefishController do
       expect(response.status).to eq(200)
     end
 
-    it "should accept a delivery event for an alert email but do nothing" do
+    it "should accept a delivery event for an alert email and record a succesful delivery" do
       expect(NotifySlackCommentDeliveryService).to_not receive(:call)
-
+      alert = create(:alert, id: 123)
       params = {
         key: "abc123",
         delivery_event: {
@@ -50,8 +50,74 @@ describe CuttlefishController do
           }
         }
       }
+
       post :event, params: params, format: :json
       expect(response.status).to eq(200)
+      alert.reload
+      expect(alert.last_delivered_at).to_not be_nil
+      expect(alert.last_delivered_succesfully).to eq true
+    end
+
+    it "should accept a delivery event for an alert email and do nothing" do
+      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
+      alert = create(:alert, id: 123)
+      params = {
+        key: "abc123",
+        delivery_event: {
+          time: "2020-08-27T02:10:17.000Z",
+          dsn: "2.0.0",
+          status: "soft_bounce",
+          extended_status: "soft bounce message",
+          email: {
+            id: 123,
+            message_id: "ABC@DEF.foo.com",
+            from: "matthew@oaf.org.au",
+            to: "joy@smart-unlimited.com",
+            subject: "This is a test email from Cuttlefish",
+            created_at: "2020-08-27T02:10:17.579Z",
+            meta_values: {
+              "alert-id": "123"
+            }
+          }
+        }
+      }
+
+      post :event, params: params, format: :json
+      expect(response.status).to eq(200)
+      alert.reload
+      expect(alert.last_delivered_at).to be_nil
+      expect(alert.last_delivered_succesfully).to be_nil
+    end
+
+    it "should accept a delivery event for an alert email and record a failed delivery" do
+      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
+      alert = create(:alert, id: 123)
+      params = {
+        key: "abc123",
+        delivery_event: {
+          time: "2020-08-27T02:10:17.000Z",
+          dsn: "2.0.0",
+          status: "hard_bounce",
+          extended_status: "hard bounce message",
+          email: {
+            id: 123,
+            message_id: "ABC@DEF.foo.com",
+            from: "matthew@oaf.org.au",
+            to: "joy@smart-unlimited.com",
+            subject: "This is a test email from Cuttlefish",
+            created_at: "2020-08-27T02:10:17.579Z",
+            meta_values: {
+              "alert-id": "123"
+            }
+          }
+        }
+      }
+
+      post :event, params: params, format: :json
+      expect(response.status).to eq(200)
+      alert.reload
+      expect(alert.last_delivered_at).to_not be_nil
+      expect(alert.last_delivered_succesfully).to eq false
     end
 
     it "should accept a succesful delivery event for a comment email and do nothing" do
