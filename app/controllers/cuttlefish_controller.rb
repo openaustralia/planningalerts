@@ -68,7 +68,7 @@ class CuttlefishController < ApplicationController
         # Or do we want to wait until a soft bounce turns to a hard bounce to
         # consider it a failed delivery?
         alert.update!(
-          last_delivered_at: Time.current,
+          last_delivered_at: delivery_event.time,
           last_delivered_succesfully: (status == "delivered")
         )
       end

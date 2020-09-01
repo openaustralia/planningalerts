@@ -54,7 +54,7 @@ describe CuttlefishController do
       post :event, params: params, format: :json
       expect(response.status).to eq(200)
       alert.reload
-      expect(alert.last_delivered_at).to_not be_nil
+      expect(alert.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
       expect(alert.last_delivered_succesfully).to eq true
     end
 
@@ -116,7 +116,7 @@ describe CuttlefishController do
       post :event, params: params, format: :json
       expect(response.status).to eq(200)
       alert.reload
-      expect(alert.last_delivered_at).to_not be_nil
+      expect(alert.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
       expect(alert.last_delivered_succesfully).to eq false
     end
 
