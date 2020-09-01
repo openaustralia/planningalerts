@@ -26,14 +26,26 @@ class AtdisController < ApplicationController
     end
   end
 
+  class FeedParams < T::Struct
+    const :base_url, String
+    const :page, Integer
+    const :lodgement_date_start, T.nilable(Date)
+    const :lodgement_date_end, T.nilable(Date)
+    const :last_modified_date_start, T.nilable(Date)
+    const :last_modified_date_end, T.nilable(Date)
+    const :street, T.nilable(String)
+    const :suburb, T.nilable(String)
+    const :postcode, T.nilable(String)
+  end
+
   class TestRedirectParams < T::Struct
-    const :feed, String
+    const :feed, FeedParams
   end
 
   # The job here is to take ugly posted parameters and redirect to a much simpler url
   def test_redirect
     typed_params = TypedParams[TestRedirectParams].new.extract!(params)
-    @feed = Feed.new(typed_params.feed)
+    @feed = Feed.new(typed_params.feed.serialize.symbolize_keys)
     if @feed.valid?
       redirect_to atdis_test_url(url: @feed.url)
     else
@@ -41,13 +53,13 @@ class AtdisController < ApplicationController
     end
   end
 
-  class FeedParams < T::Struct
+  class ExampleFeedParams < T::Struct
     const :number, Integer
     const :page, T.nilable(Integer)
   end
 
   def feed
-    typed_params = TypedParams[FeedParams].new.extract!(params)
+    typed_params = TypedParams[ExampleFeedParams].new.extract!(params)
     file = Feed.example_path(typed_params.number, typed_params.page || 1)
     if File.exist?(file)
       render file: file, content_type: Mime[:json], layout: false
