@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_23_022439) do
+ActiveRecord::Schema.define(version: 2020_09_01_000704) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 2020_07_23_022439) do
     t.boolean "unsubscribed", default: false, null: false
     t.datetime "last_processed"
     t.datetime "unsubscribed_at"
+    t.datetime "last_delivered_at"
+    t.boolean "last_delivered_succesfully"
     t.index ["email"], name: "index_alerts_on_email"
   end
 
