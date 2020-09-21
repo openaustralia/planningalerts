@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_01_051334) do
+ActiveRecord::Schema.define(version: 2020_09_21_005822) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2020_09_01_051334) do
     t.datetime "unsubscribed_at"
     t.datetime "last_delivered_at"
     t.boolean "last_delivered_successfully"
+    t.string "unsubscribed_by"
     t.index ["email"], name: "index_alerts_on_email"
   end
 
@@ -211,27 +212,27 @@ ActiveRecord::Schema.define(version: 2020_09_01_051334) do
     t.index ["councillor_id"], name: "index_replies_on_councillor_id"
   end
 
-  create_table "reports", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "reports", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.text "details"
+    t.text "details", limit: 16777215
     t.integer "comment_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["comment_id"], name: "fk_rails_bc3addd41c"
   end
 
-  create_table "site_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "site_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "settings"
     t.datetime "created_at"
   end
 
-  create_table "stats", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.string "key", limit: 25, null: false
+  create_table "stats", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+    t.string "key", limit: 25, default: "", null: false
     t.integer "value", null: false
   end
 
-  create_table "suggested_councillors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "suggested_councillors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.datetime "created_at", null: false
