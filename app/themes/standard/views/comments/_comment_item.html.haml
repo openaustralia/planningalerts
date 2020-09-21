@@ -6,14 +6,33 @@
     %blockquote.comment-text= comment_as_html(comment.text)
     %footer
       - unless comment.to_councillor?
+
         %p.comment-meta
           - if comment.last_delivered_successfully.nil?
-            sent
+            sent to the planning authority
           - elsif comment.last_delivered_successfully
-            delivered
+            = link_to "delivered to the planning authority", {anchor: "delivery-info-#{comment.id}"}, class: "hideable", data: {target: "#delivery-info-#{comment.id}"}
           - else
-            there was a problem delivering this
-          to the planning authority
+            = link_to "there was a problem delivering this to the planning authority", {anchor: "delivery-info-#{comment.id}"}, class: "hideable", data: {target: "#delivery-info-#{comment.id}"}
+
+        %p.comment-meta.hidden{id: "delivery-info-#{comment.id}"}
+          - if comment.last_delivered_successfully.nil?
+            -# Don't display any extra message if the comment has been sent but not yet delivered
+            -# Do we want to stick with this?
+          - elsif comment.last_delivered_successfully
+            This comment was successfully delivered to the
+            email server of
+            = comment.application.authority.full_name
+            at
+            = comment.last_delivered_at
+          - else
+            The comment was hard bounced by the email server of
+            = comment.application.authority.full_name
+            at
+            = comment.last_delivered_at
+            Please follow up by emailing us at contact@planningalerts.org.au so
+            that we can try to help resolve this issue
+
       .comment-actions= render "comments/comment_actions", comment: comment
   - if comment.awaiting_councillor_reply?
     .panel-body.comment-to-councillor-status

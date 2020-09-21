@@ -9,6 +9,12 @@ $('#add_comment_text_input a').click(function(e) {
   $('#disclosure_explanation').slideToggle('fast');
 });
 
+$('a.hideable').click(function(e) {
+  e.preventDefault();
+  target = $(e.target).attr("data-target");
+  $(target).slideToggle('fast');
+});
+
 if ($('#comment-receiver-inputgroup').length) {
   // TODO: Add aria attributes for accessibility
   // TODO: Fix keyboard navigation
