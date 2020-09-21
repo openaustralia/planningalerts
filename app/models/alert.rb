@@ -41,7 +41,17 @@ class Alert < ApplicationRecord
 
   sig { void }
   def unsubscribe!
-    update!(unsubscribed: true, unsubscribed_at: Time.zone.now)
+    unsubscribe_with_reason!(nil)
+  end
+
+  sig { void }
+  def unsubscribe_by_bounce!
+    unsubscribe_with_reason!("bounce")
+  end
+
+  sig { params(reason: T.nilable(String)).void }
+  def unsubscribe_with_reason!(reason)
+    update!(unsubscribed: true, unsubscribed_at: Time.zone.now, unsubscribed_by: reason)
   end
 
   sig { returns(T.nilable(Location)) }
