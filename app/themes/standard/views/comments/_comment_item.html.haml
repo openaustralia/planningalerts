@@ -6,7 +6,14 @@
     %blockquote.comment-text= comment_as_html(comment.text)
     %footer
       - unless comment.to_councillor?
-        %p.comment-meta delivered to the planning authority
+        %p.comment-meta
+          - if comment.last_delivered_successfully.nil?
+            sent
+          - elsif comment.last_delivered_successfully
+            delivered
+          - else
+            there was a problem delivering this
+          to the planning authority
       .comment-actions= render "comments/comment_actions", comment: comment
   - if comment.awaiting_councillor_reply?
     .panel-body.comment-to-councillor-status
