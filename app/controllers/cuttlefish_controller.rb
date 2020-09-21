@@ -80,6 +80,9 @@ class CuttlefishController < ApplicationController
           last_delivered_at: delivery_event.time,
           last_delivered_successfully: success
         )
+        # Check if there was a hard bounce because of a bad email address
+        # If that is the case we will automatically unsubscribe them here
+        alert.unsubscribe_by_bounce! if ["5.1.1", "5.1.10", "5.4.1", "5.4.4"].include?(delivery_event.status)
       end
     end
 
