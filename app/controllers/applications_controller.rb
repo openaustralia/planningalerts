@@ -149,7 +149,7 @@ class ApplicationsController < ApplicationController
   def show
     typed_params = TypedParams[ShowParams].new.extract!(params)
     @application = Application.find(typed_params.id)
-    @comments = @application.comments.visible.order(:confirmed_at).includes(:replies)
+    @comments = @application.comments.confirmed.order(:confirmed_at).includes(:replies)
     @nearby_count = @application.find_all_nearest_or_recent.size
     @add_comment = AddComment.new(
       application: @application

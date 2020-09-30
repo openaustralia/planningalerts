@@ -16,6 +16,7 @@ class Comment < ApplicationRecord
 
   include EmailConfirmable
   scope(:visible, -> { where(confirmed: true, hidden: false) })
+  scope(:confirmed, -> { where(confirmed: true) })
   scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
   scope(:to_councillor, -> { joins(:councillor) })
 
