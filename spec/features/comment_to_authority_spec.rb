@@ -52,7 +52,7 @@ feature "Give feedback" do
 
       expect(unread_emails_for("example@example.com").size).to eq(1)
       open_email("example@example.com")
-      expect(current_email).to have_subject("Please confirm your comment")
+      expect(current_email).to have_subject("PlanningAlerts: Please confirm your comment")
       # And the email body should contain a link to the confirmation page
       comment = Comment.find_by(text: "I think this is a really good ideas")
       expect(current_email.default_part_body.to_s).to include(confirmed_comment_url(id: comment.confirm_id, protocol: "https", host: "dev.planningalerts.org.au"))
@@ -85,7 +85,7 @@ feature "Give feedback" do
 
         expect(unread_emails_for("example@example.com").size).to eq(1)
         open_email("example@example.com")
-        expect(current_email).to have_subject("Please confirm your comment")
+        expect(current_email).to have_subject("PlanningAlerts: Please confirm your comment")
         # And the email body should contain a link to the confirmation page
         comment = Comment.find_by(text: "I think this is a really good ideas")
         expect(current_email.default_part_body.to_s).to include(confirmed_comment_url(id: comment.confirm_id, protocol: "https", host: "dev.planningalerts.org.au"))
@@ -123,7 +123,7 @@ feature "Give feedback" do
         expect(unread_emails_for("example@example.com").size).to eq 1
         open_email("example@example.com")
 
-        expect(current_email).to have_subject("Please confirm your comment")
+        expect(current_email).to have_subject("PlanningAlerts: Please confirm your comment")
 
         comment = Comment.find_by(text: "I think this is a really good ideas")
         expect(current_email.default_part_body.to_s)

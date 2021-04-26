@@ -19,7 +19,7 @@ describe ConfirmationMailer do
         end
 
         it "should tell the person what the email is about" do
-          expect(notifier.subject).to eq("Please confirm your planning alert")
+          expect(notifier.subject).to eq("PlanningAlerts: Please confirm your alert")
         end
 
         it do
@@ -61,7 +61,7 @@ describe ConfirmationMailer do
         end
 
         it "should tell the person what the email is about" do
-          expect(notifier.subject).to eq("Please confirm your comment")
+          expect(notifier.subject).to eq("PlanningAlerts: Please confirm your comment")
         end
 
         it do

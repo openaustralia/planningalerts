@@ -30,9 +30,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  activerecord:
-    models:
-      alert: "Planning Alert"
   errors:
     messages:
       not_a_date: "is not a date"

@@ -222,7 +222,7 @@ feature "Sign up for alerts" do
 
   def confirm_alert_in_email
     open_email("example@example.com")
-    expect(current_email).to have_subject("Please confirm your planning alert")
+    expect(current_email).to have_subject("PlanningAlerts: Please confirm your alert")
     expect(current_email.default_part_body.to_s).to include("24 Bruce Rd, Glenbrook NSW 2773")
     click_first_link_in_email
   end

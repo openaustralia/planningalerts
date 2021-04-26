@@ -16,7 +16,7 @@ class ConfirmationMailer < ApplicationMailer
 
     mail(
       to: object.email,
-      subject: "Please confirm your #{object.class.model_name.human.downcase}",
+      subject: "PlanningAlerts: Please confirm your #{object.class.model_name.human.downcase}",
       from: email_from, template_name: class_name
     )
   end
