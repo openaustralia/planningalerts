@@ -5,6 +5,7 @@
 User-agent: *
 Disallow: /?*q=
 Disallow: /authorities/*/applications
+Disallow: /authorities/*/comments
 Allow: /applications/
 Disallow: /applications
 Disallow: /applications/*/nearby
