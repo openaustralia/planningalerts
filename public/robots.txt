@@ -4,7 +4,9 @@
 
 User-agent: *
 Disallow: /?*q=
-Disallow: /authorities/*/applications
+# Leaving this commented out because it does appear to get significant
+# search traffic
+# Disallow: /authorities/*/applications
 Disallow: /authorities/*/comments
 Allow: /applications/
 Disallow: /applications
