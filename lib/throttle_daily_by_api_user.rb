@@ -15,7 +15,7 @@ class ThrottleDailyByApiUser < Rack::Throttle::Daily
     end
     # rubocop:enable Lint/SuppressedException
 
-    if path_info.nil? || path_info[:controller] != "api"
+    if path_info.nil? || path_info[:controller] != "api" || path_info[:action] == "howto"
       true
     else
       # Doing a database lookup in rack middleware - not ideal but

@@ -51,6 +51,15 @@ describe ThrottleDailyByApiUser do
           expect(result).to be_falsey
         end
       end
+
+      # Make sure that requests to the api docs aren't getting blocked
+      describe "request to api docs" do
+        let(:url) { "/api/howto" }
+
+        it "should be whitelisted" do
+          expect(result).to eq true
+        end
+      end
     end
   end
 end
