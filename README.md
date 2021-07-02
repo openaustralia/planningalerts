@@ -12,27 +12,6 @@ If you're interested in contributing a scraper read our [step-by-step guide to w
 
 PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.openaustraliafoundation.org.au). It was created by Matthew Landauer and Katherine Szuminska.
 
-## Table of Contents
-
-* [Development](#development)
-  * [Scraping and sending emails in development](#scraping-and-sending-emails-in-development)
-  * [Configuring PlanningAlerts so people can write to their local councillors](##configuring-planningalerts-so-people-can-write-to-their-local-councillors)
-    * [Global feature flag](#global-feature-flag)
-      * [Writing to councillors feature](#writing-to-councillors-feature)
-      * [Contributing suggested councillors feature](#contributing-suggested-councillors-feature)
-    * [Set the reply address for accepting responses](#set-the-reply-address-for-accepting-responses)
-    * [Enable the feature for an authority](#enable-the-feature-for-an-authority)
-    * [Adding councillors for an authority](#adding-councillors-for-an-authority)
-    * [Accepting councillor replies](#accepting-councillor-replies)
-      * [Default Wizard of Oz method](#default-wizard-of-oz-method)
-      * [Integrating with WriteIt](#integrating-with-writeit)
-    * [Processing councillor data contributions](#processing-councillor-data-contributions)
-* [Deployment](#deployment)
-  * [Adding a new authority](#adding-a-new-authority)
-* [Contributing](#contributing)
-* [Credits](#credits)
-* [License](#license)
-
 ## Development
 
 **Install Dependencies**
