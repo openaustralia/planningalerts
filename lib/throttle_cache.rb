@@ -15,7 +15,7 @@ class ThrottleCache
     @redis = Redis::Namespace.new(redis_config[:namespace], redis: @redis)
   end
 
-  sig { params(key: String, value: Integer).void }
+  sig { params(key: String, value: String).void }
   def set(key, value)
     redis.set(key, value)
     # Keep keys around for a year so we could potentially use the redis cache
@@ -27,7 +27,7 @@ class ThrottleCache
     redis.expire(key, 1.year)
   end
 
-  sig { params(key: String).returns(Integer) }
+  sig { params(key: String).returns(String) }
   # rubocop:disable Rails/Delegate
   def get(key)
     redis.get(key)
