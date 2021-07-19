@@ -441,7 +441,7 @@ GEM
       json
     redcarpet (3.5.1)
     redis (4.3.1)
-    redis-namespace (1.7.0)
+    redis-namespace (1.8.1)
       redis (>= 3.0.4)
     regexp_parser (1.7.1)
     require_all (3.0.0)
