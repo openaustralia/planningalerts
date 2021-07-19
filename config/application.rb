@@ -4,6 +4,7 @@ require_relative 'boot'
 require 'rails/all'
 require "rack/throttle"
 require File.dirname(__FILE__) + "/../lib/throttle_daily_by_api_user"
+require File.dirname(__FILE__) + "/../lib/throttle_cache"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -38,6 +39,7 @@ module PlanningalertsApp
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    # This redis configuration is used by the api rate limiter and sidekiq
     config.redis = {
       url: ENV["REDIS_URL"].present? ? ENV["REDIS_URL"] : "redis://localhost:6379/0",
       namespace: "pa_#{ENV['STAGE']}"
@@ -45,7 +47,7 @@ module PlanningalertsApp
 
     config.middleware.use ThrottleDailyByApiUser,
                           max: 1000,
-                          cache: Dalli::Client.new,
+                          cache: ThrottleCache.new(config.redis),
                           key_prefix: :throttle,
                           message: "Rate Limit Exceeded. See http://www.planningalerts.org.au/api/howto#hLicenseInfo for more information"
 
