@@ -15,7 +15,9 @@ class ThrottleCache
     @redis = Redis::Namespace.new(redis_config[:namespace], redis: @redis)
   end
 
-  sig { params(key: String, value: String).void }
+  # It's a bit strange that we set with an integer type but when we do a
+  # get it returns a string but that's what rack throttle expects
+  sig { params(key: String, value: Integer).void }
   def set(key, value)
     redis.set(key, value)
     # Keep keys around for a year so we could potentially use the redis cache
