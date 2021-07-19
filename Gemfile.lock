@@ -152,7 +152,7 @@ GEM
       sass-rails (< 5.1)
       sprockets (< 4.0)
     concurrent-ruby (1.1.6)
-    connection_pool (2.2.3)
+    connection_pool (2.2.5)
     counter_culture (2.5.1)
       activerecord (>= 4.2)
       activesupport (>= 4.2)
@@ -388,8 +388,6 @@ GEM
       rack
     rack-mini-profiler (2.0.2)
       rack (>= 1.2.0)
-    rack-protection (2.0.8.1)
-      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rack-throttle (0.7.0)
@@ -442,7 +440,7 @@ GEM
     recaptcha (5.5.0)
       json
     redcarpet (3.5.1)
-    redis (4.1.4)
+    redis (4.3.1)
     redis-namespace (1.7.0)
       redis (>= 3.0.4)
     regexp_parser (1.7.1)
@@ -532,11 +530,10 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     shellany (0.0.1)
-    sidekiq (5.2.9)
-      connection_pool (~> 2.2, >= 2.2.2)
+    sidekiq (6.2.1)
+      connection_pool (>= 2.2.2)
       rack (~> 2.0)
-      rack-protection (>= 1.5.0)
-      redis (>= 3.3.5, < 4.2)
+      redis (>= 4.2.0)
     simple_oauth (0.3.1)
     simplecov (0.18.5)
       docile (~> 1.1)
@@ -712,7 +709,7 @@ DEPENDENCIES
   sass-rails
   searchkick
   selenium-webdriver
-  sidekiq (< 6)
+  sidekiq
   simplecov
   slack-notifier
   sorbet

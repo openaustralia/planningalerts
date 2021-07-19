@@ -42,8 +42,7 @@ gem "validate_url", "~> 0.2.2" # 1.0.0 causes failures like "Validation failed: 
 # Background queue uses sidekiq with redis
 # We need redis namespaces to seperate the production and staging environments
 gem "redis-namespace"
-# TODO: We're currently using redis 3 in production so we can't upgrade to the latests sidekiq
-gem "sidekiq", "< 6"
+gem "sidekiq"
 
 # For accessing external urls
 # TODO: Just pick one and use it for everything
