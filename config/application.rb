@@ -38,6 +38,11 @@ module PlanningalertsApp
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    config.redis = {
+      url: ENV["REDIS_URL"].present? ? ENV["REDIS_URL"] : "redis://localhost:6379/0",
+      namespace: "pa_#{ENV['STAGE']}"
+    }
+
     config.middleware.use ThrottleDailyByApiUser,
                           max: 1000,
                           cache: Dalli::Client.new,
