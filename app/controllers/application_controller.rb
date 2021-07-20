@@ -46,7 +46,12 @@ class ApplicationController < ActionController::Base
 
   sig { returns(T::Boolean) }
   def ssl_required?
-    Rails.env.production?
+    # We want to serve unencrypted http to the load balancer and we're depending
+    # on nginx currently to do the ssl redirection.
+    # TODO: Check that cookies are secure with new setup. See link below
+    # https://blog.jverkamp.com/2019/04/30/forcing-secure-cookies-behind-an-elb-in-ruby/rails/
+    false
+    # Rails.env.production?
   end
 
   sig { void }
