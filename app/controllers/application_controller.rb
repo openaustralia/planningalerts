@@ -50,8 +50,7 @@ class ApplicationController < ActionController::Base
     # on nginx currently to do the ssl redirection.
     # TODO: Check that cookies are secure with new setup. See link below
     # https://blog.jverkamp.com/2019/04/30/forcing-secure-cookies-behind-an-elb-in-ruby/rails/
-    false
-    # Rails.env.production?
+    Rails.env.production? && !request.headers.key?("HTTP_X_FORWARDED_FOR")
   end
 
   sig { void }
