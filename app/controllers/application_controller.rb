@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
 
   theme :theme_resolver
 
+  force_ssl if: :ssl_required?
+
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
@@ -40,6 +42,15 @@ class ApplicationController < ActionController::Base
   sig { void }
   def set_header_variable
     @alert_count = T.let(Stat.applications_sent, T.nilable(Integer))
+  end
+
+  sig { returns(T::Boolean) }
+  def ssl_required?
+    # We want to serve unencrypted http to the load balancer and we're depending
+    # on nginx currently to do the ssl redirection.
+    # TODO: Check that cookies are secure with new setup. See link below
+    # https://blog.jverkamp.com/2019/04/30/forcing-secure-cookies-behind-an-elb-in-ruby/rails/
+    Rails.env.production?
   end
 
   sig { void }
