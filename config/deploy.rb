@@ -16,11 +16,11 @@ set :scm, :git
 set :rails_env, "production" # added for delayed job
 
 if stage == "production"
-  server "planningalerts.org.au", :app, :web, :db, primary: true
+  server "web1.planningalerts.org.au", :app, :web, :db, primary: true
   set :deploy_to, "/srv/www/production"
   set :app_name, "planningalerts"
 elsif stage == "test"
-  server "planningalerts.org.au", :app, :web, :db, primary: true
+  server "web1.planningalerts.org.au", :app, :web, :db, primary: true
   set :deploy_to, "/srv/www/staging"
   set :app_name, "planningalerts-test"
   set :honeybadger_env, "staging"
