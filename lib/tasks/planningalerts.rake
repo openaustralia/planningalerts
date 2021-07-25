@@ -3,12 +3,10 @@
 namespace :planningalerts do
   namespace :applications do
     desc "Import new applications, index them and send emails"
-    # TODO: Rename the task to use "import"
-    # IMPORTANT: Also will need to update the cron job in production to match
-    task scrape_and_email: %i[scrape email]
+    task import_and_email: %i[import email]
 
     desc "Import all the applications for the last few days for all the loaded authorities"
-    task :scrape, [:authority_short_name] => :environment do |_t, args|
+    task :import, [:authority_short_name] => :environment do |_t, args|
       authorities = args[:authority_short_name] ? [Authority.find_short_name_encoded(args[:authority_short_name])] : Authority.active
       puts "Importing #{authorities.count} authorities"
       authorities.each do |authority|
