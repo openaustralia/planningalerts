@@ -1,4 +1,4 @@
-class RemoveUnusedColumns < ActiveRecord::Migration
+class RemoveUnusedColumns < ActiveRecord::Migration[4.2]
   def self.up
     remove_column :applications, :postcode
     remove_column :authorities, :planning_email

@@ -1,4 +1,4 @@
-class CreateAdminUsers < ActiveRecord::Migration
+class CreateAdminUsers < ActiveRecord::Migration[4.2]
 
   def self.up
     create_table :admin_users do |t|

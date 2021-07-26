@@ -13,7 +13,7 @@ ActiveRecord::Migration::Compatibility::V5_2 = ActiveRecord::Migration::Current
 
 # Method definitions are documented here:
 # https://api.rubyonrails.org/v5.2/classes/ActiveRecord/ConnectionAdapters/SchemaStatements.html
-class ActiveRecord::Migration::Current < ActiveRecord::Migration
+class ActiveRecord::Migration::Current < ActiveRecord::Migration[4.2]
   # Tables
 
   # https://github.com/rails/rails/blob/v5.2.3/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L151-L290

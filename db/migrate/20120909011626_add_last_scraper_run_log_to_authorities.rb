@@ -1,4 +1,4 @@
-class AddLastScraperRunLogToAuthorities < ActiveRecord::Migration
+class AddLastScraperRunLogToAuthorities < ActiveRecord::Migration[4.2]
   def self.up
     add_column :authorities, :last_scraper_run_log, :text
   end

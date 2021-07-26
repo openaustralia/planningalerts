@@ -564,7 +564,7 @@ class ActiveRecord::Migration
   def version=(arg0); end
   def write(text = nil); end
 end
-class ActiveRecord::Migration::Current < ActiveRecord::Migration
+class ActiveRecord::Migration::Current < ActiveRecord::Migration[4.2]
 end
 class ActiveRecord::Migration::CheckPending
   def call(env); end

@@ -1,4 +1,4 @@
-class FixAutoincrement < ActiveRecord::Migration
+class FixAutoincrement < ActiveRecord::Migration[4.2]
   def self.up
     remove_foreign_key "applications", name: "applications_authority_id_fk"
     [:alerts, :applications, :authorities, :stats].each do |table|

@@ -1,4 +1,4 @@
-class AddAddressToComment < ActiveRecord::Migration
+class AddAddressToComment < ActiveRecord::Migration[4.2]
   def self.up
     add_column :comments, :address, :string
   end

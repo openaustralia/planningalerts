@@ -1,4 +1,4 @@
-class CreateEmailBatches < ActiveRecord::Migration
+class CreateEmailBatches < ActiveRecord::Migration[4.2]
   def change
     create_table :email_batches do |t|
       t.integer :no_emails

@@ -1,4 +1,4 @@
-class RemoveLatLngIndicesFromApplications < ActiveRecord::Migration
+class RemoveLatLngIndicesFromApplications < ActiveRecord::Migration[4.2]
   def self.up
     # Removing the individual lat, lng indices because the combined one should be sufficient
     remove_index :applications, :lat

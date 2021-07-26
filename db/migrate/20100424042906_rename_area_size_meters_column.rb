@@ -1,4 +1,4 @@
-class RenameAreaSizeMetersColumn < ActiveRecord::Migration
+class RenameAreaSizeMetersColumn < ActiveRecord::Migration[4.2]
   def self.up
     rename_column :alerts, :area_size_meters, :radius_meters
   end

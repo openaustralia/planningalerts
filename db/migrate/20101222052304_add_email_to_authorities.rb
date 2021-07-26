@@ -1,4 +1,4 @@
-class AddEmailToAuthorities < ActiveRecord::Migration
+class AddEmailToAuthorities < ActiveRecord::Migration[4.2]
   def self.up
     add_column :authorities, :email, :string
   end

@@ -1,4 +1,4 @@
-class CreateReports < ActiveRecord::Migration
+class CreateReports < ActiveRecord::Migration[4.2]
   def self.up
     create_table :reports do |t|
       t.string :name

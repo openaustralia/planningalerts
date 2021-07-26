@@ -1,4 +1,4 @@
-class CreateAlertSubscribersForExistingAlerts < ActiveRecord::Migration
+class CreateAlertSubscribersForExistingAlerts < ActiveRecord::Migration[4.2]
   def change
     Alert.find_in_batches do |batch|
       batch.each do |alert|

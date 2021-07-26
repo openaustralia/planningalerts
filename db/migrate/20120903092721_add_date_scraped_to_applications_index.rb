@@ -1,4 +1,4 @@
-class AddDateScrapedToApplicationsIndex < ActiveRecord::Migration
+class AddDateScrapedToApplicationsIndex < ActiveRecord::Migration[4.2]
   def self.up
     add_index :applications, [:lat, :lng, :date_scraped]
     remove_index :applications, [:lat, :lng]

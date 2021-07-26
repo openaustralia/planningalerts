@@ -1,4 +1,4 @@
-class AddScraperwikiNameToAuthorities < ActiveRecord::Migration
+class AddScraperwikiNameToAuthorities < ActiveRecord::Migration[4.2]
   def self.up
     add_column :authorities, :scraperwiki_name, :string
   end

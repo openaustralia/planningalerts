@@ -1,4 +1,4 @@
-class AddIndexApplicationIdToComments < ActiveRecord::Migration
+class AddIndexApplicationIdToComments < ActiveRecord::Migration[4.2]
   def self.up
     add_index :comments, :application_id
   end

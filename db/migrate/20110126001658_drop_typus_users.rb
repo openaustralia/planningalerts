@@ -1,4 +1,4 @@
-class DropTypusUsers < ActiveRecord::Migration
+class DropTypusUsers < ActiveRecord::Migration[4.2]
   def self.up
     drop_table :typus_users
   end

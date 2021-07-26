@@ -1,4 +1,4 @@
-class RemoveRailsAdminTables < ActiveRecord::Migration
+class RemoveRailsAdminTables < ActiveRecord::Migration[4.2]
   def self.up
     drop_table :rails_admin_histories
   end

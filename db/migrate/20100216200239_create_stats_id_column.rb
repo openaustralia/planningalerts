@@ -1,4 +1,4 @@
-class CreateStatsIdColumn < ActiveRecord::Migration
+class CreateStatsIdColumn < ActiveRecord::Migration[4.2]
   def self.up
     execute "ALTER TABLE `stats` ADD `id` INT(11) NOT NULL"
     execute "UPDATE `stats` SET `id` = '1' WHERE `key` = 'applications_sent'"

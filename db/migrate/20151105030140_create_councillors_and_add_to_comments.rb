@@ -1,4 +1,4 @@
-class CreateCouncillorsAndAddToComments < ActiveRecord::Migration
+class CreateCouncillorsAndAddToComments < ActiveRecord::Migration[4.2]
   def change
     create_table :councillors do |t|
       t.string :name

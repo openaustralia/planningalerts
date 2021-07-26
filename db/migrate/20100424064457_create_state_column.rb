@@ -1,4 +1,4 @@
-class CreateStateColumn < ActiveRecord::Migration
+class CreateStateColumn < ActiveRecord::Migration[4.2]
   def self.up
     # Can't make it null: false to start with
     add_column :authorities, :state, :string, limit: 20

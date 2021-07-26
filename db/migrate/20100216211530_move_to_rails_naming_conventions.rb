@@ -1,4 +1,4 @@
-class MoveToRailsNamingConventions < ActiveRecord::Migration
+class MoveToRailsNamingConventions < ActiveRecord::Migration[4.2]
   def self.up
     rename_table :application, :applications
     rename_column :applications, :application_id, :id

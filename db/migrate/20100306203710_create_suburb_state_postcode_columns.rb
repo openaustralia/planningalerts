@@ -1,4 +1,4 @@
-class CreateSuburbStatePostcodeColumns < ActiveRecord::Migration
+class CreateSuburbStatePostcodeColumns < ActiveRecord::Migration[4.2]
   def self.up
     change_table(:applications) do |t|
       t.string :suburb, limit: 50

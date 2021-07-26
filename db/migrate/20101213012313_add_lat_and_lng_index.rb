@@ -1,4 +1,4 @@
-class AddLatAndLngIndex < ActiveRecord::Migration
+class AddLatAndLngIndex < ActiveRecord::Migration[4.2]
   def self.up
     add_index :applications, [:lat, :lng]
   end

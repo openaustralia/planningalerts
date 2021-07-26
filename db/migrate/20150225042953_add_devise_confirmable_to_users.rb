@@ -1,4 +1,4 @@
-class AddDeviseConfirmableToUsers < ActiveRecord::Migration
+class AddDeviseConfirmableToUsers < ActiveRecord::Migration[4.2]
   def change
     # New columns required for device confirmable
     add_column :users, :confirmation_token, :string

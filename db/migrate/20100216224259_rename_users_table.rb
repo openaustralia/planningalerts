@@ -1,4 +1,4 @@
-class RenameUsersTable < ActiveRecord::Migration
+class RenameUsersTable < ActiveRecord::Migration[4.2]
   def self.up
     rename_table :users, :alerts
   end

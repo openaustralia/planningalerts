@@ -1,4 +1,4 @@
-class AddIndicesToCommentsTable < ActiveRecord::Migration
+class AddIndicesToCommentsTable < ActiveRecord::Migration[4.2]
   def self.up
     add_index :comments, :confirm_id
     add_index :comments, :confirmed

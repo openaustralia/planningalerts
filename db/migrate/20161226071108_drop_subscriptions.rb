@@ -1,4 +1,4 @@
-class DropSubscriptions < ActiveRecord::Migration
+class DropSubscriptions < ActiveRecord::Migration[4.2]
   def up
     drop_table :subscriptions
   end

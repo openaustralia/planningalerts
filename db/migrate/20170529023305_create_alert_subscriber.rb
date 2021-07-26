@@ -1,4 +1,4 @@
-class CreateAlertSubscriber < ActiveRecord::Migration
+class CreateAlertSubscriber < ActiveRecord::Migration[4.2]
   def change
     create_table :alert_subscribers do |t|
       t.string :email, null: false

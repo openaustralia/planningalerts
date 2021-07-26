@@ -1,4 +1,4 @@
-class CreateApiStatistics < ActiveRecord::Migration
+class CreateApiStatistics < ActiveRecord::Migration[4.2]
   def self.up
     create_table :api_statistics do |t|
       t.string :ip_address

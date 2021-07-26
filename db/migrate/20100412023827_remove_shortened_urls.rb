@@ -1,4 +1,4 @@
-class RemoveShortenedUrls < ActiveRecord::Migration
+class RemoveShortenedUrls < ActiveRecord::Migration[4.2]
   def self.up
     remove_column :applications, :info_tinyurl
     remove_column :applications, :comment_tinyurl

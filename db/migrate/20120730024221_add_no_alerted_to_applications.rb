@@ -1,4 +1,4 @@
-class AddNoAlertedToApplications < ActiveRecord::Migration
+class AddNoAlertedToApplications < ActiveRecord::Migration[4.2]
   def self.up
     add_column :applications, :no_alerted, :integer
   end

@@ -1,4 +1,4 @@
-class RenameMisspelledColumn < ActiveRecord::Migration
+class RenameMisspelledColumn < ActiveRecord::Migration[4.2]
   def self.up
     rename_column :applications, :date_recieved, :date_received
   end

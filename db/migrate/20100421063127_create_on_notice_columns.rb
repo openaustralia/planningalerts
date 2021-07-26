@@ -1,4 +1,4 @@
-class CreateOnNoticeColumns < ActiveRecord::Migration
+class CreateOnNoticeColumns < ActiveRecord::Migration[4.2]
   def self.up
     change_table(:applications) do |t|
       t.date :on_notice_from

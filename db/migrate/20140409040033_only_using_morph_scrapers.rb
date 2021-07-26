@@ -1,4 +1,4 @@
-class OnlyUsingMorphScrapers < ActiveRecord::Migration
+class OnlyUsingMorphScrapers < ActiveRecord::Migration[4.2]
   def up
     remove_column :authorities, :feed_url
     remove_column :authorities, :scraperwiki_name

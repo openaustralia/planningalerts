@@ -1,4 +1,4 @@
-class RemoveMapUrlColumn < ActiveRecord::Migration
+class RemoveMapUrlColumn < ActiveRecord::Migration[4.2]
   def self.up
     remove_column :applications, :map_url
   end

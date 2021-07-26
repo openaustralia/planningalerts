@@ -1,4 +1,4 @@
-class CreateCouncillorContributions < ActiveRecord::Migration
+class CreateCouncillorContributions < ActiveRecord::Migration[4.2]
   def change
     create_table :councillor_contributions do |t|
       t.integer :contributor_id
