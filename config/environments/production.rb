@@ -48,8 +48,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # TODO: Only OFF temporarily. SWITCH BACK ON
-  config.force_ssl = false
+  config.force_ssl = true
 
   # We're depending on the load balancer to do the redirection. Disabling the redirect
   # in rails itself makes it easier to test in development and when contacting the
