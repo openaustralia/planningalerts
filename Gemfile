@@ -149,6 +149,10 @@ gem "jpbuilder"
 # For sending notifications to Slack about bounced emails to authorities
 gem "slack-notifier"
 
+# Provide a url endpoint that checks the health of the app
+# (used by load balancer)
+gem "health_check"
+
 group :test do
   gem "capybara"
   gem "climate_control"

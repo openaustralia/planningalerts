@@ -260,6 +260,8 @@ GEM
       activesupport (>= 4.1)
     hashdiff (1.0.1)
     hashie (4.1.0)
+    health_check (3.1.0)
+      railties (>= 5.0)
     highline (2.0.3)
     honeybadger (4.7.0)
     htmlentities (4.3.4)
@@ -670,6 +672,7 @@ DEPENDENCIES
   guard-rubocop
   haml
   haml_lint
+  health_check
   honeybadger
   httparty
   jpbuilder
