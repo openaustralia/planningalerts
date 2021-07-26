@@ -50,6 +50,11 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
+  # We're depending on the load balancer to do the redirection. Disabling the redirect
+  # in rails itself makes it easier to test in development and when contacting the
+  # server directly (not going through the load balancer)
+  config.ssl_options = { redirect: false }
+
   # Set to :debug to see everything in the log.
   config.log_level = :warn
 
