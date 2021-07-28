@@ -153,6 +153,9 @@ gem "slack-notifier"
 # (used by load balancer)
 gem "health_check"
 
+# Using New Relic temporarily to debug some performance issues
+gem "newrelic_rpm"
+
 group :test do
   gem "capybara"
   gem "climate_control"
