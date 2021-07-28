@@ -50,6 +50,7 @@ namespace :deploy do
     links = {
       "#{release_path}/config/database.yml" => "#{shared_path}/database.yml",
       "#{release_path}/config/throttling.yml" => "#{shared_path}/throttling.yml",
+      "#{release_path}/config/newrelic.yml" => "#{shared_path}/newrelic.yml",
       "#{release_path}/.env.production" => "#{shared_path}/.env.production",
       "#{release_path}/public/sitemap.xml" => "#{shared_path}/sitemap.xml",
       "#{release_path}/public/sitemaps" => "#{shared_path}/sitemaps",
