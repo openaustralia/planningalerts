@@ -40,6 +40,7 @@ class CreateOrUpdateApplicationService < ApplicationService
         authority: authority, council_reference: council_reference
       )
       create_version(application)
+      application.reindex
       application
     end
   end
