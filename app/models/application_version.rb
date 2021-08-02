@@ -17,9 +17,11 @@ class ApplicationVersion < ApplicationRecord
 
   delegate :authority, :council_reference, to: :application
 
-  sig { returns(T::Hash[String, T.untyped]) }
+  sig { returns(T::Hash[Symbol, T.untyped]) }
   def search_data
-    attributes.merge("location" => { "lat" => lat, "lon" => lng })
+    # lat and lon need to be symbols (rather than strings) in search_data
+    # to get valid data come through searchkick for some reason
+    attributes.symbolize_keys.merge(location: { lat: lat, lon: lng })
   end
 
   sig { returns(String) }

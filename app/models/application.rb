@@ -27,10 +27,10 @@ class Application < ApplicationRecord
   scope(:in_past_week, -> { joins(:first_version).where("date_scraped > ?", 7.days.ago) })
   scope(:recent, -> { joins(:first_version).where("date_scraped >= ?", 14.days.ago) })
 
-  sig { returns(T::Hash[String, T.untyped]) }
+  sig { returns(T::Hash[Symbol, T.untyped]) }
   def search_data
     # Include version data in what's indexed by searchkick
-    attributes.merge(current_version&.search_data || {})
+    attributes.symbolize_keys.merge(current_version&.search_data || {})
   end
 
   # For the benefit of will_paginate
