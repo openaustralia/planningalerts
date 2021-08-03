@@ -27,6 +27,7 @@ ActiveAdmin.register User do
       input :api_key
       input :unlimited_api_usage
       input :bulk_api
+      input :api_commercial, hint: "Are they a paying commercial customer?"
     end
     inputs "Administration" do
       input :admin
@@ -34,5 +35,5 @@ ActiveAdmin.register User do
     actions
   end
 
-  permit_params :email, :name, :organisation, :api_key, :unlimited_api_usage, :bulk_api, :admin, :api_disabled
+  permit_params :email, :name, :organisation, :api_key, :unlimited_api_usage, :bulk_api, :api_commercial, :admin, :api_disabled
 end
