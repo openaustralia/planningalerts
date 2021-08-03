@@ -12,6 +12,7 @@ ActiveAdmin.register User do
     column :api_disabled
     column :unlimited_api_usage
     column :bulk_api
+    column :api_commercial
     column :admin
     actions
   end
