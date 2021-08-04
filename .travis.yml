@@ -23,6 +23,5 @@ script:
 services:
   - mysql
   - redis
-  - elasticsearch
 
 dist: xenial

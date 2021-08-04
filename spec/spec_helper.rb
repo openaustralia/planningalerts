@@ -133,4 +133,10 @@ RSpec.configure do |config|
   config.before(:each, type: :view) do
     controller.prepend_view_path "app/themes/standard/views"
   end
+
+  # Disable searchkick during testing so that we don't need to run
+  # elasticsearch locally which is a pain
+  config.before(:suite) do
+    Searchkick.disable_callbacks
+  end
 end
