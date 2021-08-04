@@ -20,8 +20,11 @@ describe TopUsageAPIKeysService do
     redis.set("throttle:#{user3.api_key}:2021-07-01", 2)
 
     redis.set("throttle:#{user1.api_key}:2021-07-02", 34)
-    redis.set("throttle:#{user2.api_key}:2021-07-02", 84)
     redis.set("throttle:#{user3.api_key}:2021-07-02", 212)
+
+    redis.set("throttle:#{user1.api_key}:2021-07-03", 12)
+    redis.set("throttle:#{user2.api_key}:2021-07-03", 5)
+    redis.set("throttle:#{user3.api_key}:2021-07-03", 42)
   end
 
   it "should return all users corresponding sorted by usage (number of API requests) on a particular day" do
