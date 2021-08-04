@@ -5,10 +5,14 @@ class TopUsageAPIKeysService < ApplicationService
   extend T::Sig
 
   def self.call(redis:, date:)
+    new.call(redis: redis, date: date)
+  end
+
+  def call(redis:, date:)
     all_usage_on_date(redis: redis, date: date).sort { |a, b| b[:requests] <=> a[:requests] }
   end
 
-  def self.all_usage_on_date(redis:, date:)
+  def all_usage_on_date(redis:, date:)
     # Definitely not the most efficient way to do things. It would be more
     # efficient in redis land to be using a hash but we're depending currently
     # on the way rack-throttle stores stuff
@@ -19,7 +23,7 @@ class TopUsageAPIKeysService < ApplicationService
     values.zip(users).map { |a| { requests: a[0], user: a[1] } }
   end
 
-  def self.all_keys_for_date(redis:, date:)
+  def all_keys_for_date(redis:, date:)
     redis.scan_each(match: "throttle:*:#{date}").to_a.uniq
   end
 end
