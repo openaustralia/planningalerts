@@ -146,7 +146,9 @@ FactoryBot.define do
   end
 
   factory :user do
-    email { "foo@bar.com" }
+    sequence :email do |n|
+      "user#{n}@bar.com"
+    end
     password { "foofoo" }
 
     factory :admin do
