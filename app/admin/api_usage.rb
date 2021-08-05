@@ -21,6 +21,8 @@ ActiveAdmin.register_page "API usage" do
     h2 "Top users of the API (by number of requests) over the last 30 days"
 
     table_for result do
+      column(:name) { |usage| link_to usage.user.name, admin_user_path(usage.user) }
+      column(:organisation) { |usage| link_to usage.user.organisation, admin_user_path(usage.user) }
       column(:email) { |usage| link_to usage.user.email, admin_user_path(usage.user) }
       column :requests
     end
