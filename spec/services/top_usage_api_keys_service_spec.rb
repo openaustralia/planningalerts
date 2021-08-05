@@ -40,9 +40,9 @@ describe TopUsageAPIKeysService do
       s = TopUsageAPIKeysService.new(redis)
       date = Date.new(2021, 7, 1)
       expect(s.all_usage_by_api_key_on_date(date)).to contain_exactly(
-        { api_key: user1.api_key, requests: 123, date: date },
-        { api_key: user2.api_key, requests: 54, date: date },
-        { api_key: user3.api_key, requests: 2, date: date }
+        { api_key: user1.api_key, requests: 123 },
+        { api_key: user2.api_key, requests: 54 },
+        { api_key: user3.api_key, requests: 2 }
       )
     end
   end
@@ -53,11 +53,11 @@ describe TopUsageAPIKeysService do
       date_from = Date.new(2021, 7, 1)
       date_to = date_from + 1
       expect(s.all_usage_by_api_key_in_date_range(date_from, date_to)).to contain_exactly(
-        { api_key: user1.api_key, requests: 123, date: date_from },
-        { api_key: user2.api_key, requests: 54, date: date_from },
-        { api_key: user3.api_key, requests: 2, date: date_from },
-        { api_key: user1.api_key, requests: 34, date: date_to },
-        { api_key: user3.api_key, requests: 212, date: date_to }
+        { api_key: user1.api_key, requests: 123 },
+        { api_key: user2.api_key, requests: 54 },
+        { api_key: user3.api_key, requests: 2 },
+        { api_key: user1.api_key, requests: 34 },
+        { api_key: user3.api_key, requests: 212 }
       )
     end
   end
