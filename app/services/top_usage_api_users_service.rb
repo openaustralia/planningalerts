@@ -49,7 +49,7 @@ class TopUsageAPIUsersService < ApplicationService
       keys += all_keys_for_date(date)
     end
     api_keys = keys.map { |k| k.split(":")[1] }
-    values = redis.mget(keys).map(&:to_i)
+    values = keys.empty? ? [] : redis.mget(keys).map(&:to_i)
     values.zip(api_keys).map { |a| ApiKeyRequests.new(requests: a[0], api_key: a[1]) }
   end
 
