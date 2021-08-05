@@ -14,15 +14,15 @@ class TopUsageAPIUsersService < ApplicationService
     const :requests, Integer
   end
 
-  sig { returns(Redis) }
+  sig { returns(T.any(Redis, Redis::Namespace)) }
   attr_reader :redis
 
-  sig { params(redis: Redis, date_from: Date, date_to: Date, number: Integer).returns(T::Array[ApiUserRequests]) }
+  sig { params(redis: T.any(Redis, Redis::Namespace), date_from: Date, date_to: Date, number: Integer).returns(T::Array[ApiUserRequests]) }
   def self.call(redis:, date_from:, date_to:, number:)
     new(redis).call(date_from: date_from, date_to: date_to, number: number)
   end
 
-  sig { params(redis: Redis).void }
+  sig { params(redis: T.any(Redis, Redis::Namespace)).void }
   def initialize(redis)
     @redis = redis
   end
