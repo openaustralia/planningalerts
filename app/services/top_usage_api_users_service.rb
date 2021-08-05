@@ -21,13 +21,6 @@ class TopUsageAPIUsersService < ApplicationService
     end
   end
 
-  def all_usage_by_user_on_date(date)
-    all_usage_by_api_key_on_date(date).map do |a|
-      user = User.find_by(api_key: a[:api_key])
-      { requests: a[:requests], user: user }
-    end
-  end
-
   def all_keys_for_date(date)
     redis.scan_each(match: "throttle:*:#{date}").to_a.uniq
   end
