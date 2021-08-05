@@ -6,16 +6,19 @@ class TopUsageAPIKeysService < ApplicationService
 
   attr_reader :redis
 
-  def self.call(redis:, date:)
-    new(redis).call(date: date)
+  def self.call(redis:, date_from:, date_to:, number:)
+    new(redis).call(date_from: date_from, date_to: date_to, number: number)
   end
 
   def initialize(redis)
     @redis = redis
   end
 
-  def call(date:)
-    all_usage_by_user_on_date(date).sort { |a, b| b[:requests] <=> a[:requests] }
+  def call(date_from:, date_to:, number:)
+    top_total_usage_by_api_key_in_date_range(date_from, date_to, number).map do |h|
+      user = User.find_by(api_key: h[:api_key])
+      { requests: h[:requests], user: user }
+    end
   end
 
   def all_usage_by_user_on_date(date)
@@ -68,12 +71,5 @@ class TopUsageAPIKeysService < ApplicationService
     array = total_usage_by_api_key_in_date_range(date_from, date_to)
     array = array.sort { |a, b| b[:requests] <=> a[:requests] }
     array[0..(number - 1)]
-  end
-
-  def top_total_usage_by_user_in_date_range(date_from, date_to, number)
-    top_total_usage_by_api_key_in_date_range(date_from, date_to, number).map do |h|
-      user = User.find_by(api_key: h[:api_key])
-      { requests: h[:requests], user: user }
-    end
   end
 end

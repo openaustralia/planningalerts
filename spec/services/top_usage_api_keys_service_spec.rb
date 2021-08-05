@@ -27,12 +27,13 @@ describe TopUsageAPIKeysService do
     redis.set("throttle:#{user3.api_key}:2021-07-03", 42)
   end
 
-  it "should return all users corresponding sorted by usage (number of API requests) on a particular day" do
-    expect(TopUsageAPIKeysService.call(redis: redis, date: Date.new(2021, 7, 1))).to eq [
-      { user: user1, requests: 123 },
-      { user: user2, requests: 54 },
-      { user: user3, requests: 2 }
-    ]
+  describe ".call" do
+    it "should return the top 2 total number of requests in descending sort order" do
+      expect(TopUsageAPIKeysService.call(redis: redis, date_from: Date.new(2021, 7, 1), date_to: Date.new(2021, 7, 2), number: 2)).to eq [
+        { user: user3, requests: 214 },
+        { user: user1, requests: 157 }
+      ]
+    end
   end
 
   describe ".all_usage_by_api_key_on_date" do
@@ -83,18 +84,6 @@ describe TopUsageAPIKeysService do
       expect(s.top_total_usage_by_api_key_in_date_range(date_from, date_to, 2)).to eq [
         { api_key: user3.api_key, requests: 214 },
         { api_key: user1.api_key, requests: 157 }
-      ]
-    end
-  end
-
-  describe ".top_total_usage_by_user_in_date_range" do
-    it "should return the top 2 total number of requests in descending sort order" do
-      s = TopUsageAPIKeysService.new(redis)
-      date_from = Date.new(2021, 7, 1)
-      date_to = date_from + 1
-      expect(s.top_total_usage_by_user_in_date_range(date_from, date_to, 2)).to eq [
-        { user: user3, requests: 214 },
-        { user: user1, requests: 157 }
       ]
     end
   end
