@@ -32,7 +32,7 @@ class TopUsageAPIKeysService < ApplicationService
     keys = all_keys_for_date(date)
     api_keys = keys.map { |k| k.split(":")[1] }
     values = redis.mget(keys).map(&:to_i)
-    values.zip(api_keys).map { |a| { requests: a[0], api_key: a[1] } }
+    values.zip(api_keys).map { |a| { requests: a[0], api_key: a[1], date: date } }
   end
 
   def all_keys_for_date(date)

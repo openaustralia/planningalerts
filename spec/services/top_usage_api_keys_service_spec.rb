@@ -34,4 +34,16 @@ describe TopUsageAPIKeysService do
       { user: user3, requests: 2 }
     ]
   end
+
+  describe ".all_usage_by_api_key_on_date" do
+    it "should return data directly from redis in a more usable format" do
+      s = TopUsageAPIKeysService.new(redis)
+      date = Date.new(2021, 7, 1)
+      expect(s.all_usage_by_api_key_on_date(date)).to contain_exactly(
+        { api_key: user1.api_key, requests: 123, date: date },
+        { api_key: user2.api_key, requests: 54, date: date },
+        { api_key: user3.api_key, requests: 2, date: date }
+      )
+    end
+  end
 end
