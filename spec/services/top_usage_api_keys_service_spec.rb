@@ -74,4 +74,16 @@ describe TopUsageAPIKeysService do
       )
     end
   end
+
+  describe ".top_total_usage_by_api_key_in_date_range" do
+    it "should return the top 2 total number of requests in descending sort order" do
+      s = TopUsageAPIKeysService.new(redis)
+      date_from = Date.new(2021, 7, 1)
+      date_to = date_from + 1
+      expect(s.top_total_usage_by_api_key_in_date_range(date_from, date_to, 2)).to eq [
+        { api_key: user3.api_key, requests: 214 },
+        { api_key: user1.api_key, requests: 157 }
+      ]
+    end
+  end
 end
