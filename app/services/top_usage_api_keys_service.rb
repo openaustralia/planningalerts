@@ -38,4 +38,14 @@ class TopUsageAPIKeysService < ApplicationService
   def all_keys_for_date(date)
     redis.scan_each(match: "throttle:*:#{date}").to_a.uniq
   end
+
+  def all_usage_by_api_key_in_date_range(date_from, date_to)
+    # TODO: Improve this implementation so that it doesn't make so many
+    # separate calls to redis
+    r = []
+    (date_from..date_to).each do |date|
+      r += all_usage_by_api_key_on_date(date)
+    end
+    r
+  end
 end
