@@ -98,6 +98,24 @@ module Comment::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def id?; end
 
+  sig { returns(T.nilable(ActiveSupport::TimeWithZone)) }
+  def last_delivered_at; end
+
+  sig { params(value: T.nilable(T.any(Date, Time, ActiveSupport::TimeWithZone))).void }
+  def last_delivered_at=(value); end
+
+  sig { returns(T::Boolean) }
+  def last_delivered_at?; end
+
+  sig { returns(T.nilable(T::Boolean)) }
+  def last_delivered_successfully; end
+
+  sig { params(value: T.nilable(T::Boolean)).void }
+  def last_delivered_successfully=(value); end
+
+  sig { returns(T::Boolean) }
+  def last_delivered_successfully?; end
+
   sig { returns(String) }
   def name; end
 

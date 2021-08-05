@@ -17,6 +17,15 @@ module User::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def admin?; end
 
+  sig { returns(T::Boolean) }
+  def api_commercial; end
+
+  sig { params(value: T::Boolean).void }
+  def api_commercial=(value); end
+
+  sig { returns(T::Boolean) }
+  def api_commercial?; end
+
   sig { returns(T.nilable(T::Boolean)) }
   def api_disabled; end
 
