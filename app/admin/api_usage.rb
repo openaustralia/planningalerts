@@ -25,6 +25,7 @@ ActiveAdmin.register_page "API usage" do
       column(:organisation) { |usage| link_to usage.user.organisation, admin_user_path(usage.user) }
       column(:email) { |usage| link_to usage.user.email, admin_user_path(usage.user) }
       column :requests
+      column(:api_disabled) { |usage| usage.user.api_disabled }
     end
   end
 end
