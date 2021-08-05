@@ -1108,6 +1108,16 @@ class ActionView::Helpers::Tags::TextArea < ActionView::Helpers::Tags::Base
   def render; end
   include ActionView::Helpers::Tags::Placeholderable
 end
+class ActionView::Renderer
+  def cache_hits; end
+  def initialize(lookup_context); end
+  def lookup_context; end
+  def lookup_context=(arg0); end
+  def render(context, options); end
+  def render_body(context, options); end
+  def render_partial(context, options, &block); end
+  def render_template(context, options); end
+end
 module ActionView::RoutingUrlFor
   def _generate_paths_by_default; end
   def _routes_context; end

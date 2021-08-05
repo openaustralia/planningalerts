@@ -24,23 +24,23 @@ class Dalli::GzipCompressor
   def self.decompress(data); end
 end
 class Dalli::Client
-  def add(key, value, ttl = nil, options = nil); end
+  def add(*args, &block); end
   def alive!; end
-  def append(key, value); end
+  def append(*args, &block); end
   def cas!(key, ttl = nil, options = nil, &block); end
-  def cas(key, ttl = nil, options = nil, &block); end
+  def cas(*args, &block); end
   def cas_core(key, always_set, ttl = nil, options = nil); end
   def close; end
-  def decr(key, amt = nil, ttl = nil, default = nil); end
-  def delete(key); end
+  def decr(*args, &block); end
+  def delete(*args, &block); end
   def fetch(key, ttl = nil, options = nil); end
   def flush(delay = nil); end
   def flush_all(delay = nil); end
-  def get(key, options = nil); end
-  def get_multi(*keys); end
+  def get(*args, &block); end
+  def get_multi(*args, &block); end
   def get_multi_yielder(keys); end
   def groups_for_keys(*keys); end
-  def incr(key, amt = nil, ttl = nil, default = nil); end
+  def incr(*args, &block); end
   def initialize(servers = nil, options = nil); end
   def key_with_namespace(key); end
   def key_without_namespace(key); end
@@ -52,12 +52,12 @@ class Dalli::Client
   def normalize_servers(servers); end
   def perform(*all_args); end
   def perform_multi_response_start(servers); end
-  def prepend(key, value); end
-  def replace(key, value, ttl = nil, options = nil); end
+  def prepend(*args, &block); end
+  def replace(*args, &block); end
   def reset; end
   def reset_stats; end
   def ring; end
-  def set(key, value, ttl = nil, options = nil); end
+  def set(*args, &block); end
   def stats(type = nil); end
   def touch(key, ttl = nil); end
   def ttl_or_default(ttl); end

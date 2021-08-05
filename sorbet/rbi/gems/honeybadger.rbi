@@ -616,21 +616,10 @@ module Honeybadger::Config::Env
   def self.cast_value(value, type = nil); end
   def self.new(env = nil); end
 end
-module Honeybadger::Breadcrumbs::LogWrapper
-  def add(severity, message = nil, progname = nil); end
-  def should_ignore_log?(message, progname); end
+module Honeybadger::Plugins::Sidekiq
 end
-module Honeybadger::Breadcrumbs::LogSubscriberInjector
-  def debug(*args, &block); end
-  def error(*args, &block); end
-  def fatal(*args, &block); end
-  def info(*args, &block); end
-  def unknown(*args, &block); end
-  def warn(*args, &block); end
-end
-class Honeybadger::Plugins::RailsBreadcrumbs
-  def self.send_breadcrumb_notification(name, duration, notification_config, data = nil); end
-  def self.subscribe_to_notification(name, notification_config); end
+class Honeybadger::Plugins::Sidekiq::Middleware
+  def call(worker, msg, queue); end
 end
 module Honeybadger::Plugins::Passenger
 end
@@ -638,35 +627,6 @@ module Honeybadger::Plugins::Rails
 end
 module Honeybadger::Plugins::Rails::ExceptionsCatcher
   def render_exception(arg, exception); end
-end
-module Honeybadger::Plugins::LocalVariables
-end
-module Honeybadger::Plugins::LocalVariables::ExceptionExtension
-  def __honeybadger_bindings_stack; end
-  def self.included(base); end
-  def set_backtrace_with_honeybadger(*args, &block); end
-end
-module Honeybadger::Plugins::Sidekiq
-end
-class Honeybadger::Plugins::Sidekiq::Middleware
-  def call(worker, msg, queue); end
-end
-module Honeybadger::Plugins::Shoryuken
-end
-class Honeybadger::Plugins::Shoryuken::Middleware
-  def attempt_threshold; end
-  def call(_worker, _queue, sqs_msg, body); end
-  def notification_params(body); end
-  def receive_count(sqs_msg); end
-end
-class Honeybadger::Util::Lambda
-  def self.lambda_execution?; end
-  def self.normalized_data; end
-  def self.trace_id; end
-end
-module Honeybadger::Plugins::Thor
-  def invoke_command_with_honeybadger(*args); end
-  def self.included(base); end
 end
 module Honeybadger::Plugins::Resque
 end
@@ -684,4 +644,44 @@ module Honeybadger::Plugins::Faktory
 end
 class Honeybadger::Plugins::Faktory::Middleware
   def call(worker, job); end
+end
+module Honeybadger::Plugins::LocalVariables
+end
+module Honeybadger::Plugins::LocalVariables::ExceptionExtension
+  def __honeybadger_bindings_stack; end
+  def self.included(base); end
+  def set_backtrace_with_honeybadger(*args, &block); end
+end
+class Honeybadger::Util::Lambda
+  def self.lambda_execution?; end
+  def self.normalized_data; end
+  def self.trace_id; end
+end
+module Honeybadger::Plugins::Shoryuken
+end
+class Honeybadger::Plugins::Shoryuken::Middleware
+  def attempt_threshold; end
+  def call(_worker, _queue, sqs_msg, body); end
+  def notification_params(body); end
+  def receive_count(sqs_msg); end
+end
+module Honeybadger::Plugins::Thor
+  def invoke_command_with_honeybadger(*args); end
+  def self.included(base); end
+end
+module Honeybadger::Breadcrumbs::LogWrapper
+  def add(severity, message = nil, progname = nil); end
+  def should_ignore_log?(message, progname); end
+end
+module Honeybadger::Breadcrumbs::LogSubscriberInjector
+  def debug(*args, &block); end
+  def error(*args, &block); end
+  def fatal(*args, &block); end
+  def info(*args, &block); end
+  def unknown(*args, &block); end
+  def warn(*args, &block); end
+end
+class Honeybadger::Plugins::RailsBreadcrumbs
+  def self.send_breadcrumb_notification(name, duration, notification_config, data = nil); end
+  def self.subscribe_to_notification(name, notification_config); end
 end

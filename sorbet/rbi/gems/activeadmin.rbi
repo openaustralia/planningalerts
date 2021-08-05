@@ -296,13 +296,20 @@ module ActiveAdmin::ViewHelpers
   include ActiveAdmin::ViewHelpers::ViewFactoryHelper
   include MethodOrProcHelper
 end
-module ActiveAdmin::ViewHelpers::BreadcrumbHelper
-  def breadcrumb_links(path = nil); end
+module ActiveAdmin::ViewHelpers::FlashHelper
+  def flash_messages; end
 end
-module ActiveAdmin::ViewHelpers::FormHelper
-  def active_admin_form_for(resource, options = nil, &block); end
-  def fields_for_params(params, options = nil); end
-  def hidden_field_tags_for(params, options = nil); end
+module ActiveAdmin::ViewHelpers::SidebarHelper
+  def skip_sidebar!; end
+  def skip_sidebar?; end
+end
+module ActiveAdmin::ViewHelpers::ActiveAdminApplicationHelper
+  def active_admin_application; end
+end
+module ActiveAdmin::ViewHelpers::AutoLinkHelper
+  def active_admin_resource_for(klass); end
+  def auto_link(resource, content = nil); end
+  def auto_url_for(resource); end
 end
 module ActiveAdmin::ViewHelpers::DisplayHelper
   def association_methods_for(resource); end
@@ -314,26 +321,13 @@ module ActiveAdmin::ViewHelpers::DisplayHelper
   def format_collection(collection); end
   def pretty_format(object); end
 end
-module ActiveAdmin::ViewHelpers::AutoLinkHelper
-  def active_admin_resource_for(klass); end
-  def auto_link(resource, content = nil); end
-  def auto_url_for(resource); end
-end
-module ActiveAdmin::ViewHelpers::ViewFactoryHelper
-  def view_factory; end
-end
-module ActiveAdmin::ViewHelpers::ActiveAdminApplicationHelper
-  def active_admin_application; end
+module ActiveAdmin::ViewHelpers::FormHelper
+  def active_admin_form_for(resource, options = nil, &block); end
+  def fields_for_params(params, options = nil); end
+  def hidden_field_tags_for(params, options = nil); end
 end
 module ActiveAdmin::ViewHelpers::TitleHelper
   def title(_title); end
-end
-module ActiveAdmin::ViewHelpers::FlashHelper
-  def flash_messages; end
-end
-module ActiveAdmin::ViewHelpers::SidebarHelper
-  def skip_sidebar!; end
-  def skip_sidebar?; end
 end
 module ActiveAdmin::ViewHelpers::ScopeNameHelper
   def scope_name(scope); end
@@ -344,6 +338,12 @@ module MethodOrProcHelper
   def render_in_context(context, obj, *args); end
   def render_or_call_method_or_proc_on(obj, string_symbol_or_proc, options = nil); end
   extend MethodOrProcHelper
+end
+module ActiveAdmin::ViewHelpers::ViewFactoryHelper
+  def view_factory; end
+end
+module ActiveAdmin::ViewHelpers::BreadcrumbHelper
+  def breadcrumb_links(path = nil); end
 end
 module ActiveAdmin::ViewHelpers::DownloadFormatLinksHelper
   def build_download_format_links(formats = nil); end
@@ -1672,7 +1672,6 @@ class ApplicationController < ActionController::Base
   def self.helpers_path; end
   def self.middleware_stack; end
   def set_header_variable(*args, &blk); end
-  def ssl_required?(*args, &blk); end
   def theme_instance; end
   def theme_resolver(*args, &blk); end
   def validate_page_param(*args, &blk); end
@@ -2171,42 +2170,6 @@ class ActiveAdmin::MenuCollection
   def on_build(&block); end
   def run_on_build_callbacks; end
 end
-module ActiveAdmin::Localizers
-  def self.resource(active_admin_config); end
-end
-class ActiveAdmin::Localizers::ResourceLocalizer
-  def array_to_key(*arr); end
-  def initialize(model_name, model = nil); end
-  def self.from_resource(resource_config); end
-  def self.t(key, options); end
-  def self.translate(key, options); end
-  def t(key, options = nil); end
-  def translate(key, options = nil); end
-end
-class ActiveAdmin::Scope
-  def default_block; end
-  def display_if_block; end
-  def group; end
-  def id; end
-  def initialize(name, method = nil, options = nil, &block); end
-  def name; end
-  def scope_block; end
-  def scope_method; end
-  def show_count; end
-end
-class ActiveAdmin::PagePresenter
-  def [](key); end
-  def block; end
-  def fetch(*args, &block); end
-  def has_key?(*args, &block); end
-  def initialize(options = nil, &block); end
-  def options; end
-end
-class ActiveAdmin::ControllerAction
-  def http_verb; end
-  def initialize(name, options = nil); end
-  def name; end
-end
 class ActiveAdmin::Page
   def add_default_action_items; end
   def add_default_sidebar_sections; end
@@ -2291,6 +2254,42 @@ class ActiveAdmin::PageDSL < ActiveAdmin::DSL
   def belongs_to(target, options = nil); end
   def content(options = nil, &block); end
   def page_action(name, options = nil, &block); end
+end
+class ActiveAdmin::PagePresenter
+  def [](key); end
+  def block; end
+  def fetch(*args, &block); end
+  def has_key?(*args, &block); end
+  def initialize(options = nil, &block); end
+  def options; end
+end
+class ActiveAdmin::ControllerAction
+  def http_verb; end
+  def initialize(name, options = nil); end
+  def name; end
+end
+module ActiveAdmin::Localizers
+  def self.resource(active_admin_config); end
+end
+class ActiveAdmin::Localizers::ResourceLocalizer
+  def array_to_key(*arr); end
+  def initialize(model_name, model = nil); end
+  def self.from_resource(resource_config); end
+  def self.t(key, options); end
+  def self.translate(key, options); end
+  def t(key, options = nil); end
+  def translate(key, options = nil); end
+end
+class ActiveAdmin::Scope
+  def default_block; end
+  def display_if_block; end
+  def group; end
+  def id; end
+  def initialize(name, method = nil, options = nil, &block); end
+  def name; end
+  def scope_block; end
+  def scope_method; end
+  def show_count; end
 end
 class ActiveAdmin::CSVBuilder
   def batch_size; end

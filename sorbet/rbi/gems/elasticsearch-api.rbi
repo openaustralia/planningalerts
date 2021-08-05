@@ -91,95 +91,6 @@ module Elasticsearch::API::Actions::ParamsRegistry
   def register(action, valid_params); end
   extend Elasticsearch::API::Actions::ParamsRegistry
 end
-module Elasticsearch::API::Cat
-  def cat; end
-end
-module Elasticsearch::API::Cat::Actions
-  def aliases(arguments = nil); end
-  def allocation(arguments = nil); end
-  def count(arguments = nil); end
-  def fielddata(arguments = nil); end
-  def health(arguments = nil); end
-  def help(arguments = nil); end
-  def indices(arguments = nil); end
-  def master(arguments = nil); end
-  def nodeattrs(arguments = nil); end
-  def nodes(arguments = nil); end
-  def pending_tasks(arguments = nil); end
-  def plugins(arguments = nil); end
-  def recovery(arguments = nil); end
-  def repositories(arguments = nil); end
-  def segments(arguments = nil); end
-  def shards(arguments = nil); end
-  def snapshots(arguments = nil); end
-  def tasks(arguments = nil); end
-  def templates(arguments = nil); end
-  def thread_pool(arguments = nil); end
-end
-module Elasticsearch::API::Cat::Actions::ParamsRegistry
-  def get(action); end
-  def register(action, valid_params); end
-  extend Elasticsearch::API::Cat::Actions::ParamsRegistry
-end
-module Elasticsearch::API::Snapshot
-  def snapshot; end
-end
-module Elasticsearch::API::Snapshot::Actions
-  def cleanup_repository(arguments = nil); end
-  def create(arguments = nil); end
-  def create_repository(arguments = nil); end
-  def delete(arguments = nil); end
-  def delete_repository(arguments = nil); end
-  def get(arguments = nil); end
-  def get_repository(arguments = nil); end
-  def restore(arguments = nil); end
-  def status(arguments = nil); end
-  def verify_repository(arguments = nil); end
-end
-module Elasticsearch::API::Snapshot::Actions::ParamsRegistry
-  def get(action); end
-  def register(action, valid_params); end
-  extend Elasticsearch::API::Snapshot::Actions::ParamsRegistry
-end
-module Elasticsearch::API::Cluster
-  def cluster; end
-end
-module Elasticsearch::API::Cluster::Actions
-  def allocation_explain(arguments = nil); end
-  def delete_component_template(arguments = nil); end
-  def delete_voting_config_exclusions(arguments = nil); end
-  def exists_component_template(arguments = nil); end
-  def exists_component_template?(arguments = nil); end
-  def get_component_template(arguments = nil); end
-  def get_settings(arguments = nil); end
-  def health(arguments = nil); end
-  def pending_tasks(arguments = nil); end
-  def post_voting_config_exclusions(arguments = nil); end
-  def put_component_template(arguments = nil); end
-  def put_settings(arguments = nil); end
-  def remote_info(arguments = nil); end
-  def reroute(arguments = nil); end
-  def state(arguments = nil); end
-  def stats(arguments = nil); end
-end
-module Elasticsearch::API::Cluster::Actions::ParamsRegistry
-  def get(action); end
-  def register(action, valid_params); end
-  extend Elasticsearch::API::Cluster::Actions::ParamsRegistry
-end
-module Elasticsearch::API::Tasks
-  def tasks; end
-end
-module Elasticsearch::API::Tasks::Actions
-  def cancel(arguments = nil); end
-  def get(arguments = nil); end
-  def list(arguments = nil); end
-end
-module Elasticsearch::API::Tasks::Actions::ParamsRegistry
-  def get(action); end
-  def register(action, valid_params); end
-  extend Elasticsearch::API::Tasks::Actions::ParamsRegistry
-end
 module Elasticsearch::API::Indices
   def indices; end
 end
@@ -259,6 +170,32 @@ module Elasticsearch::API::Nodes::Actions::ParamsRegistry
   def register(action, valid_params); end
   extend Elasticsearch::API::Nodes::Actions::ParamsRegistry
 end
+module Elasticsearch::API::Cluster
+  def cluster; end
+end
+module Elasticsearch::API::Cluster::Actions
+  def allocation_explain(arguments = nil); end
+  def delete_component_template(arguments = nil); end
+  def delete_voting_config_exclusions(arguments = nil); end
+  def exists_component_template(arguments = nil); end
+  def exists_component_template?(arguments = nil); end
+  def get_component_template(arguments = nil); end
+  def get_settings(arguments = nil); end
+  def health(arguments = nil); end
+  def pending_tasks(arguments = nil); end
+  def post_voting_config_exclusions(arguments = nil); end
+  def put_component_template(arguments = nil); end
+  def put_settings(arguments = nil); end
+  def remote_info(arguments = nil); end
+  def reroute(arguments = nil); end
+  def state(arguments = nil); end
+  def stats(arguments = nil); end
+end
+module Elasticsearch::API::Cluster::Actions::ParamsRegistry
+  def get(action); end
+  def register(action, valid_params); end
+  extend Elasticsearch::API::Cluster::Actions::ParamsRegistry
+end
 module Elasticsearch::API::Ingest
   def ingest; end
 end
@@ -274,19 +211,76 @@ module Elasticsearch::API::Ingest::Actions::ParamsRegistry
   def register(action, valid_params); end
   extend Elasticsearch::API::Ingest::Actions::ParamsRegistry
 end
+module Elasticsearch::API::Snapshot
+  def snapshot; end
+end
+module Elasticsearch::API::Snapshot::Actions
+  def cleanup_repository(arguments = nil); end
+  def create(arguments = nil); end
+  def create_repository(arguments = nil); end
+  def delete(arguments = nil); end
+  def delete_repository(arguments = nil); end
+  def get(arguments = nil); end
+  def get_repository(arguments = nil); end
+  def restore(arguments = nil); end
+  def status(arguments = nil); end
+  def verify_repository(arguments = nil); end
+end
+module Elasticsearch::API::Snapshot::Actions::ParamsRegistry
+  def get(action); end
+  def register(action, valid_params); end
+  extend Elasticsearch::API::Snapshot::Actions::ParamsRegistry
+end
+module Elasticsearch::API::Tasks
+  def tasks; end
+end
+module Elasticsearch::API::Tasks::Actions
+  def cancel(arguments = nil); end
+  def get(arguments = nil); end
+  def list(arguments = nil); end
+end
+module Elasticsearch::API::Tasks::Actions::ParamsRegistry
+  def get(action); end
+  def register(action, valid_params); end
+  extend Elasticsearch::API::Tasks::Actions::ParamsRegistry
+end
+module Elasticsearch::API::Cat
+  def cat; end
+end
+module Elasticsearch::API::Cat::Actions
+  def aliases(arguments = nil); end
+  def allocation(arguments = nil); end
+  def count(arguments = nil); end
+  def fielddata(arguments = nil); end
+  def health(arguments = nil); end
+  def help(arguments = nil); end
+  def indices(arguments = nil); end
+  def master(arguments = nil); end
+  def nodeattrs(arguments = nil); end
+  def nodes(arguments = nil); end
+  def pending_tasks(arguments = nil); end
+  def plugins(arguments = nil); end
+  def recovery(arguments = nil); end
+  def repositories(arguments = nil); end
+  def segments(arguments = nil); end
+  def shards(arguments = nil); end
+  def snapshots(arguments = nil); end
+  def tasks(arguments = nil); end
+  def templates(arguments = nil); end
+  def thread_pool(arguments = nil); end
+end
+module Elasticsearch::API::Cat::Actions::ParamsRegistry
+  def get(action); end
+  def register(action, valid_params); end
+  extend Elasticsearch::API::Cat::Actions::ParamsRegistry
+end
 module Elasticsearch::API::Remote
   def remote; end
 end
 module Elasticsearch::API::Remote::Actions
   def info(arguments = nil); end
 end
-class Elasticsearch::API::Snapshot::SnapshotClient
-  include Elasticsearch::API::Common::Client
-end
-class Elasticsearch::API::Nodes::NodesClient
-  include Elasticsearch::API::Common::Client
-end
-class Elasticsearch::API::Indices::IndicesClient
+class Elasticsearch::API::Remote::RemoteClient
   include Elasticsearch::API::Common::Client
 end
 class Elasticsearch::API::Cluster::ClusterClient
@@ -295,12 +289,18 @@ end
 class Elasticsearch::API::Cat::CatClient
   include Elasticsearch::API::Common::Client
 end
-class Elasticsearch::API::Remote::RemoteClient
+class Elasticsearch::API::Snapshot::SnapshotClient
   include Elasticsearch::API::Common::Client
 end
-class Elasticsearch::API::Tasks::TasksClient
+class Elasticsearch::API::Indices::IndicesClient
+  include Elasticsearch::API::Common::Client
+end
+class Elasticsearch::API::Nodes::NodesClient
   include Elasticsearch::API::Common::Client
 end
 class Elasticsearch::API::Ingest::IngestClient
+  include Elasticsearch::API::Common::Client
+end
+class Elasticsearch::API::Tasks::TasksClient
   include Elasticsearch::API::Common::Client
 end

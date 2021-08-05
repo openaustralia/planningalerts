@@ -70,6 +70,46 @@ class ActionCable::Server::Configuration
   def worker_pool_size; end
   def worker_pool_size=(arg0); end
 end
+module ActionCable::Connection
+  extend ActiveSupport::Autoload
+end
+module ActionCable::Connection::Identification
+  def connection_gid(ids); end
+  def connection_identifier; end
+  extend ActiveSupport::Concern
+end
+module ActionCable::Connection::Identification::ClassMethods
+  def identified_by(*identifiers); end
+end
+module ActionCable::Connection::InternalChannel
+  def internal_channel; end
+  def process_internal_message(message); end
+  def subscribe_to_internal_channel; end
+  def unsubscribe_from_internal_channel; end
+  extend ActiveSupport::Concern
+end
+class ActionCable::RemoteConnections
+  def initialize(server); end
+  def server; end
+  def where(identifier); end
+end
+class ActionCable::RemoteConnections::RemoteConnection
+  def disconnect; end
+  def identifiers; end
+  def identifiers=(val); end
+  def identifiers?; end
+  def initialize(server, ids); end
+  def self.identifiers; end
+  def self.identifiers=(val); end
+  def self.identifiers?; end
+  def server; end
+  def set_identifier_instance_vars(ids); end
+  def valid_identifiers?(ids); end
+  extend ActionCable::Connection::Identification::ClassMethods
+  include ActionCable::Connection::Identification
+end
+class ActionCable::RemoteConnections::RemoteConnection::InvalidIdentifiersError < StandardError
+end
 class ActionCable::Server::Worker
   def __callbacks; end
   def __callbacks?; end
@@ -235,28 +275,10 @@ class ActionCable::Server::Base
   include ActionCable::Server::Broadcasting
   include ActionCable::Server::Connections
 end
-module ActionCable::Connection
-  extend ActiveSupport::Autoload
-end
 module ActionCable::Connection::Authorization
   def reject_unauthorized_connection; end
 end
 class ActionCable::Connection::Authorization::UnauthorizedError < StandardError
-end
-module ActionCable::Connection::Identification
-  def connection_gid(ids); end
-  def connection_identifier; end
-  extend ActiveSupport::Concern
-end
-module ActionCable::Connection::Identification::ClassMethods
-  def identified_by(*identifiers); end
-end
-module ActionCable::Connection::InternalChannel
-  def internal_channel; end
-  def process_internal_message(message); end
-  def subscribe_to_internal_channel; end
-  def unsubscribe_from_internal_channel; end
-  extend ActiveSupport::Concern
 end
 class ActionCable::Connection::Base
   def allow_request_origin?; end

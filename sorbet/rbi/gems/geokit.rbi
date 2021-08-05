@@ -70,14 +70,6 @@ class Geokit::Geocoders::BaseIpGeocoder < Geokit::Geocoders::Geocoder
   def self.secure=(value); end
   def self.valid_ip?(ip); end
 end
-class Geokit::Geocoders::RipeGeocoder < Geokit::Geocoders::BaseIpGeocoder
-  def self.do_geocode(ip, _ = nil); end
-  def self.parse_json(json); end
-  def self.secure; end
-  def self.secure=(value); end
-  def self.set_address_components(data, loc); end
-  def self.submit_url(ip); end
-end
 class Geokit::Geocoders::CaGeocoder < Geokit::Geocoders::Geocoder
   def self.do_geocode(loc, _ = nil); end
   def self.key; end
@@ -86,38 +78,6 @@ class Geokit::Geocoders::CaGeocoder < Geokit::Geocoders::Geocoder
   def self.secure; end
   def self.secure=(value); end
   def self.submit_url(loc); end
-end
-class Geokit::Geocoders::UsGeocoder < Geokit::Geocoders::Geocoder
-  def self.do_geocode(address, _ = nil); end
-  def self.key; end
-  def self.key=(value); end
-  def self.parse_csv(array); end
-  def self.secure; end
-  def self.secure=(value); end
-  def self.submit_url(address); end
-end
-class Geokit::Geocoders::OSMGeocoder < Geokit::Geocoders::Geocoder
-  def self.do_geocode(address, options = nil); end
-  def self.do_reverse_geocode(latlng, options = nil); end
-  def self.extract_geoloc(result_json); end
-  def self.generate_bool_param_for_option(param, options); end
-  def self.generate_param_for(param, value); end
-  def self.generate_param_for_option(param, options); end
-  def self.parse_json(results); end
-  def self.secure; end
-  def self.secure=(value); end
-  def self.set_address_components(address_data, loc); end
-  def self.set_bounds(result_json, loc); end
-  def self.set_precision(result_json, loc); end
-end
-class Geokit::Geocoders::IpstackGeocoder < Geokit::Geocoders::BaseIpGeocoder
-  def self.api_key; end
-  def self.api_key=(value); end
-  def self.do_geocode(ip, _options = nil); end
-  def self.parse_json(result); end
-  def self.secure; end
-  def self.secure=(value); end
-  def self.submit_url(ip); end
 end
 class Geokit::Geocoders::IpGeocoder < Geokit::Geocoders::BaseIpGeocoder
   def self.do_geocode(ip, _ = nil); end
@@ -128,25 +88,31 @@ class Geokit::Geocoders::IpGeocoder < Geokit::Geocoders::BaseIpGeocoder
   def self.secure=(value); end
   def self.submit_url(ip); end
 end
-class Geokit::Geocoders::FreeGeoIpGeocoder < Geokit::Geocoders::BaseIpGeocoder
+class Geokit::Geocoders::IpApiGeocoder < Geokit::Geocoders::BaseIpGeocoder
+  def self.do_geocode(ip, _ = nil); end
+  def self.parse_json(result); end
+  def self.secure; end
+  def self.secure=(value); end
+  def self.submit_url(ip); end
+end
+class Geokit::Geocoders::GeoPluginGeocoder < Geokit::Geocoders::BaseIpGeocoder
   def self.do_geocode(ip, _ = nil); end
   def self.parse_xml(xml); end
   def self.secure; end
   def self.secure=(value); end
   def self.submit_url(ip); end
 end
-class Geokit::Geocoders::MapboxGeocoder < Geokit::Geocoders::Geocoder
-  def self.do_geocode(address, _options = nil); end
-  def self.do_reverse_geocode(latlng, _options = nil); end
-  def self.extract_geoloc(result_json); end
+class Geokit::Geocoders::GeocodioGeocoder < Geokit::Geocoders::Geocoder
+  def self.create_new_loc(json); end
+  def self.do_geocode(address, _ = nil); end
   def self.key; end
   def self.key=(value); end
-  def self.parse_json(results); end
+  def self.parse_json(json); end
   def self.secure; end
   def self.secure=(value); end
-  def self.set_address_components(result_json, loc); end
-  def self.set_bounds(bounds, loc); end
-  def self.set_precision(loc); end
+  def self.set_address_components(json, loc); end
+  def self.set_coordinates(json, loc); end
+  def self.submit_url(address); end
 end
 class Geokit::Geocoders::OpencageGeocoder < Geokit::Geocoders::Geocoder
   def self.do_geocode(address, options = nil); end
@@ -163,66 +129,12 @@ class Geokit::Geocoders::OpencageGeocoder < Geokit::Geocoders::Geocoder
   def self.set_address_components(address_data, loc); end
   def self.set_precision(result_json, loc); end
 end
-class Geokit::Geocoders::MapQuestGeocoder < Geokit::Geocoders::Geocoder
-  def self.do_geocode(address, _ = nil); end
-  def self.do_reverse_geocode(latlng); end
-  def self.extract_geoloc(result_json); end
-  def self.key; end
-  def self.key=(value); end
-  def self.parse_json(results); end
-  def self.secure; end
-  def self.secure=(value); end
-  def self.set_address_components(result_json, loc); end
-  def self.set_precision(result_json, loc); end
-end
-class Geokit::Geocoders::GeoPluginGeocoder < Geokit::Geocoders::BaseIpGeocoder
+class Geokit::Geocoders::MaxmindGeocoder < Geokit::Geocoders::Geocoder
   def self.do_geocode(ip, _ = nil); end
-  def self.parse_xml(xml); end
+  def self.geoip_data_path; end
+  def self.geoip_data_path=(value); end
   def self.secure; end
   def self.secure=(value); end
-  def self.submit_url(ip); end
-end
-class Geokit::Geocoders::FCCGeocoder < Geokit::Geocoders::Geocoder
-  def self.do_reverse_geocode(latlng); end
-  def self.parse_json(results); end
-  def self.secure; end
-  def self.secure=(value); end
-end
-class Geokit::Geocoders::GoogleGeocoder < Geokit::Geocoders::Geocoder
-  def self.api_key; end
-  def self.api_key=(value); end
-  def self.channel; end
-  def self.channel=(value); end
-  def self.client_id; end
-  def self.client_id=(value); end
-  def self.construct_bias_string_from_options(bias); end
-  def self.construct_components_string_from_options(components = nil); end
-  def self.cryptographic_key; end
-  def self.cryptographic_key=(value); end
-  def self.do_geocode(address, options = nil); end
-  def self.do_reverse_geocode(latlng, options = nil); end
-  def self.host; end
-  def self.host=(value); end
-  def self.parse_json(results); end
-  def self.secure; end
-  def self.secure=(value); end
-  def self.set_address_components(loc, addr); end
-  def self.set_bounds(loc, addr); end
-  def self.set_precision(loc, addr); end
-  def self.sign_gmap_bus_api_url(urlToSign, google_cryptographic_key); end
-  def self.single_json_to_geoloc(addr); end
-  def self.submit_url(query_string, options = nil); end
-end
-class Geokit::Geocoders::YandexGeocoder < Geokit::Geocoders::Geocoder
-  def self.do_geocode(address, _ = nil); end
-  def self.key; end
-  def self.key=(value); end
-  def self.parse_json(result); end
-  def self.secure; end
-  def self.secure=(value); end
-  def self.set_address_components(loc, l, country, locality); end
-  def self.set_precision(loc, l, locality); end
-  def self.submit_url(address); end
 end
 class Geokit::Geocoders::BingGeocoder < Geokit::Geocoders::Geocoder
   def self.do_geocode(address, _ = nil); end
@@ -238,24 +150,6 @@ class Geokit::Geocoders::BingGeocoder < Geokit::Geocoders::Geocoder
   def self.set_bounds(loc, xml); end
   def self.set_precision(loc, xml); end
   def self.submit_url(address); end
-end
-class Geokit::Geocoders::GeonamesGeocoder < Geokit::Geocoders::Geocoder
-  def self.do_geocode(address, _ = nil); end
-  def self.key; end
-  def self.key=(value); end
-  def self.parse_xml(xml); end
-  def self.premium; end
-  def self.premium=(value); end
-  def self.secure; end
-  def self.secure=(value); end
-  def self.submit_url(address); end
-end
-class Geokit::Geocoders::MaxmindGeocoder < Geokit::Geocoders::Geocoder
-  def self.do_geocode(ip, _ = nil); end
-  def self.geoip_data_path; end
-  def self.geoip_data_path=(value); end
-  def self.secure; end
-  def self.secure=(value); end
 end
 class Geokit::Geocoders::YahooGeocoder < Geokit::Geocoders::Geocoder
   def self.do_geocode(address, _ = nil); end
@@ -302,24 +196,42 @@ class OauthUtil
   def token_secret; end
   def token_secret=(arg0); end
 end
-class Geokit::Geocoders::GeocodioGeocoder < Geokit::Geocoders::Geocoder
-  def self.create_new_loc(json); end
-  def self.do_geocode(address, _ = nil); end
-  def self.key; end
-  def self.key=(value); end
+class Geokit::Geocoders::RipeGeocoder < Geokit::Geocoders::BaseIpGeocoder
+  def self.do_geocode(ip, _ = nil); end
   def self.parse_json(json); end
   def self.secure; end
   def self.secure=(value); end
-  def self.set_address_components(json, loc); end
-  def self.set_coordinates(json, loc); end
+  def self.set_address_components(data, loc); end
+  def self.submit_url(ip); end
+end
+class Geokit::Geocoders::GeonamesGeocoder < Geokit::Geocoders::Geocoder
+  def self.do_geocode(address, _ = nil); end
+  def self.key; end
+  def self.key=(value); end
+  def self.parse_xml(xml); end
+  def self.premium; end
+  def self.premium=(value); end
+  def self.secure; end
+  def self.secure=(value); end
   def self.submit_url(address); end
 end
-class Geokit::Geocoders::IpApiGeocoder < Geokit::Geocoders::BaseIpGeocoder
+class Geokit::Geocoders::FreeGeoIpGeocoder < Geokit::Geocoders::BaseIpGeocoder
   def self.do_geocode(ip, _ = nil); end
-  def self.parse_json(result); end
+  def self.parse_xml(xml); end
   def self.secure; end
   def self.secure=(value); end
   def self.submit_url(ip); end
+end
+class Geokit::Geocoders::YandexGeocoder < Geokit::Geocoders::Geocoder
+  def self.do_geocode(address, _ = nil); end
+  def self.key; end
+  def self.key=(value); end
+  def self.parse_json(result); end
+  def self.secure; end
+  def self.secure=(value); end
+  def self.set_address_components(loc, l, country, locality); end
+  def self.set_precision(loc, l, locality); end
+  def self.submit_url(address); end
 end
 class Geokit::Geocoders::GeobytesGeocoder < Geokit::Geocoders::BaseIpGeocoder
   def self.do_geocode(ip, _ = nil); end
@@ -327,6 +239,94 @@ class Geokit::Geocoders::GeobytesGeocoder < Geokit::Geocoders::BaseIpGeocoder
   def self.secure; end
   def self.secure=(value); end
   def self.submit_url(ip); end
+end
+class Geokit::Geocoders::GoogleGeocoder < Geokit::Geocoders::Geocoder
+  def self.api_key; end
+  def self.api_key=(value); end
+  def self.channel; end
+  def self.channel=(value); end
+  def self.client_id; end
+  def self.client_id=(value); end
+  def self.construct_bias_string_from_options(bias); end
+  def self.construct_components_string_from_options(components = nil); end
+  def self.cryptographic_key; end
+  def self.cryptographic_key=(value); end
+  def self.do_geocode(address, options = nil); end
+  def self.do_reverse_geocode(latlng, options = nil); end
+  def self.host; end
+  def self.host=(value); end
+  def self.parse_json(results); end
+  def self.secure; end
+  def self.secure=(value); end
+  def self.set_address_components(loc, addr); end
+  def self.set_bounds(loc, addr); end
+  def self.set_precision(loc, addr); end
+  def self.sign_gmap_bus_api_url(urlToSign, google_cryptographic_key); end
+  def self.single_json_to_geoloc(addr); end
+  def self.submit_url(query_string, options = nil); end
+end
+class Geokit::Geocoders::UsGeocoder < Geokit::Geocoders::Geocoder
+  def self.do_geocode(address, _ = nil); end
+  def self.key; end
+  def self.key=(value); end
+  def self.parse_csv(array); end
+  def self.secure; end
+  def self.secure=(value); end
+  def self.submit_url(address); end
+end
+class Geokit::Geocoders::MapboxGeocoder < Geokit::Geocoders::Geocoder
+  def self.do_geocode(address, _options = nil); end
+  def self.do_reverse_geocode(latlng, _options = nil); end
+  def self.extract_geoloc(result_json); end
+  def self.key; end
+  def self.key=(value); end
+  def self.parse_json(results); end
+  def self.secure; end
+  def self.secure=(value); end
+  def self.set_address_components(result_json, loc); end
+  def self.set_bounds(bounds, loc); end
+  def self.set_precision(loc); end
+end
+class Geokit::Geocoders::FCCGeocoder < Geokit::Geocoders::Geocoder
+  def self.do_reverse_geocode(latlng); end
+  def self.parse_json(results); end
+  def self.secure; end
+  def self.secure=(value); end
+end
+class Geokit::Geocoders::IpstackGeocoder < Geokit::Geocoders::BaseIpGeocoder
+  def self.api_key; end
+  def self.api_key=(value); end
+  def self.do_geocode(ip, _options = nil); end
+  def self.parse_json(result); end
+  def self.secure; end
+  def self.secure=(value); end
+  def self.submit_url(ip); end
+end
+class Geokit::Geocoders::MapQuestGeocoder < Geokit::Geocoders::Geocoder
+  def self.do_geocode(address, _ = nil); end
+  def self.do_reverse_geocode(latlng); end
+  def self.extract_geoloc(result_json); end
+  def self.key; end
+  def self.key=(value); end
+  def self.parse_json(results); end
+  def self.secure; end
+  def self.secure=(value); end
+  def self.set_address_components(result_json, loc); end
+  def self.set_precision(result_json, loc); end
+end
+class Geokit::Geocoders::OSMGeocoder < Geokit::Geocoders::Geocoder
+  def self.do_geocode(address, options = nil); end
+  def self.do_reverse_geocode(latlng, options = nil); end
+  def self.extract_geoloc(result_json); end
+  def self.generate_bool_param_for_option(param, options); end
+  def self.generate_param_for(param, value); end
+  def self.generate_param_for_option(param, options); end
+  def self.parse_json(results); end
+  def self.secure; end
+  def self.secure=(value); end
+  def self.set_address_components(address_data, loc); end
+  def self.set_bounds(result_json, loc); end
+  def self.set_precision(result_json, loc); end
 end
 class Geokit::Geocoders::MultiGeocoder < Geokit::Geocoders::Geocoder
   def self.do_geocode(address, *args); end

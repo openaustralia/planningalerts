@@ -486,7 +486,7 @@ end
 module HTTP
 end
 class HTTP::Client
-  def __perform__(req, options); end
+  def __perform__(request, options); end
   def webmock_enabled?; end
 end
 class HTTP::Request

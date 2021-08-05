@@ -658,15 +658,6 @@ class Faraday::Adapter::NetHttp < Faraday::Adapter
   def ssl_cert_store(ssl); end
   def ssl_verify_mode(ssl); end
 end
-class Faraday::Request::Authorization < Faraday::Middleware
-  def call(env); end
-  def initialize(app, type, token); end
-  def self.build_hash(type, hash); end
-  def self.header(type, token); end
-end
-class Faraday::Request::BasicAuthentication < Faraday::Request::Authorization
-  def self.header(login, pass); end
-end
 class Faraday::Adapter::Typhoeus < Faraday::Adapter
   def call(env); end
 end

@@ -7,16 +7,18 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/connection_pool/all/connection_pool.rbi
 #
-# connection_pool-2.2.3
+# connection_pool-2.2.5
 
 class ConnectionPool
   def available; end
   def checkin; end
   def checkout(options = nil); end
   def initialize(options = nil, &block); end
+  def reload(&block); end
   def self.wrap(options, &block); end
   def shutdown(&block); end
   def size; end
+  def then(options = nil); end
   def with(options = nil); end
 end
 class ConnectionPool::TimedStack
@@ -30,7 +32,7 @@ class ConnectionPool::TimedStack
   def max; end
   def pop(timeout = nil, options = nil); end
   def push(obj, options = nil); end
-  def shutdown(&block); end
+  def shutdown(reload: nil, &block); end
   def shutdown_connections(options = nil); end
   def store_connection(obj, options = nil); end
   def try_create(options = nil); end

@@ -1849,12 +1849,20 @@ class ActiveSupport::ArrayInquirer < Array
   def method_missing(name, *args); end
   def respond_to_missing?(name, include_private = nil); end
 end
+class File < IO
+  def self.atomic_write(file_name, temp_dir = nil); end
+  def self.empty?(arg0); end
+end
 module ActiveSupport::NumericWithFormat
   def to_s(format = nil, options = nil); end
 end
-class File < IO
-  def self.atomic_write(file_name, temp_dir = nil); end
-  def self.probe_stat_in(dir); end
+module Digest
+end
+module Digest::UUID
+  def self.uuid_from_hash(hash_class, uuid_namespace, name); end
+  def self.uuid_v3(uuid_namespace, name); end
+  def self.uuid_v4; end
+  def self.uuid_v5(uuid_namespace, name); end
 end
 module ActiveSupport::RangeWithFormat
   def to_default_s(format = nil); end
@@ -1874,19 +1882,11 @@ module ActiveSupport::EachTimeWithZone
   def ensure_iteration_allowed; end
   def step(n = nil, &block); end
 end
-module Digest
-end
-module Digest::UUID
-  def self.uuid_from_hash(hash_class, uuid_namespace, name); end
-  def self.uuid_v3(uuid_namespace, name); end
-  def self.uuid_v4; end
-  def self.uuid_v5(uuid_namespace, name); end
+module SecureRandom
+  def self.base58(n = nil); end
 end
 module ActiveSupport::MarshalWithAutoloading
   def load(source, proc = nil); end
-end
-module SecureRandom
-  def self.base58(n = nil); end
 end
 class ActiveSupport::Subscriber
   def self.add_event_subscriber(event); end

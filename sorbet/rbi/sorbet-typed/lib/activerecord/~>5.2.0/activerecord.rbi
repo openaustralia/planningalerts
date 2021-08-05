@@ -5,7 +5,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/edit/master/lib/activerecord/~>5.2.0/activerecord.rbi
 #
-# typed: strong
+# typed: ignore
 
 class ActiveRecord::Migration::Compatibility::V5_1 < ActiveRecord::Migration::Current; end
 

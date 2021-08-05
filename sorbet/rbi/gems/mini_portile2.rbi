@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/mini_portile2/all/mini_portile2.rbi
 #
-# mini_portile2-2.4.0
+# mini_portile2-2.5.0
 
 class MiniPortile
   def activate; end

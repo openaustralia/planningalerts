@@ -5,9 +5,9 @@
 #
 # If you would like to make changes to this file, great! Please create the gem's shim here:
 #
-#   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/libv8-7.3.492.27.1-x86_64-darwin/all/libv8-7.3.492.27.1-x86_64-darwin.rbi
+#   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/libv8-7.3.492.27.1-x86_64/all/libv8-7.3.492.27.1-x86_64.rbi
 #
-# libv8-7.3.492.27.1-x86_64-darwin-19
+# libv8-7.3.492.27.1-x86_64-linux
 
 module Libv8
   def self.configure_makefile; end

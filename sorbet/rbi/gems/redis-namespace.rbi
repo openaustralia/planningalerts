@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/redis-namespace/all/redis-namespace.rbi
 #
-# redis-namespace-1.7.0
+# redis-namespace-1.8.1
 
 class Redis
 end
@@ -47,6 +47,7 @@ class Redis::Namespace
   def evalsha(*args, &block); end
   def exec; end
   def exists(*args, &block); end
+  def exists?(*args, &block); end
   def expire(*args, &block); end
   def expireat(*args, &block); end
   def flushall(*args, &block); end
@@ -131,6 +132,7 @@ class Redis::Namespace
   def rpoplpush(*args, &block); end
   def rpush(*args, &block); end
   def rpushx(*args, &block); end
+  def ruby2_keywords_hash(kwargs); end
   def sadd(*args, &block); end
   def save(*args, &block); end
   def scan(*args, &block); end

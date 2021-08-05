@@ -7,19 +7,20 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/redis/all/redis.rbi
 #
-# redis-4.1.4
+# redis-4.3.1
 
 class Redis
   def _bpop(cmd, args, &blk); end
   def _client; end
   def _eval(cmd, args); end
+  def _exists(*keys); end
   def _geoarguments(*args, options: nil, sort: nil, count: nil); end
-  def _scan(command, cursor, args, options = nil, &block); end
+  def _scan(command, cursor, args, match: nil, count: nil, type: nil, &block); end
   def _subscription(method, timeout, channels, block); end
   def _xread(args, keys, ids, blocking_timeout_msec); end
   def append(key, value); end
   def asking; end
-  def auth(password); end
+  def auth(*args); end
   def bgrewriteaof; end
   def bgsave; end
   def bitcount(key, start = nil, stop = nil); end
@@ -27,7 +28,7 @@ class Redis
   def bitpos(key, bit, start = nil, stop = nil); end
   def blpop(*args); end
   def brpop(*args); end
-  def brpoplpush(source, destination, options = nil); end
+  def brpoplpush(source, destination, deprecated_timeout = nil, timeout: nil); end
   def bzpopmax(*args); end
   def bzpopmin(*args); end
   def call(*command); end
@@ -51,7 +52,8 @@ class Redis
   def eval(*args); end
   def evalsha(*args); end
   def exec; end
-  def exists(key); end
+  def exists(*keys); end
+  def exists?(*keys); end
   def expire(key, seconds); end
   def expireat(key, unix_time); end
   def flushall(options = nil); end
@@ -76,9 +78,9 @@ class Redis
   def hlen(key); end
   def hmget(key, *fields, &blk); end
   def hmset(key, *attrs); end
-  def hscan(key, cursor, options = nil); end
-  def hscan_each(key, options = nil, &block); end
-  def hset(key, field, value); end
+  def hscan(key, cursor, **options); end
+  def hscan_each(key, **options, &block); end
+  def hset(key, *attrs); end
   def hsetnx(key, field, value); end
   def hvals(key); end
   def id; end
@@ -93,7 +95,7 @@ class Redis
   def lindex(key, index); end
   def linsert(key, where, pivot, value); end
   def llen(key); end
-  def lpop(key); end
+  def lpop(key, count = nil); end
   def lpush(key, value); end
   def lpushx(key, value); end
   def lrange(key, start, stop); end
@@ -134,24 +136,26 @@ class Redis
   def randomkey; end
   def rename(old_name, new_name); end
   def renamenx(old_name, new_name); end
-  def restore(key, ttl, serialized_value, options = nil); end
-  def rpop(key); end
+  def restore(key, ttl, serialized_value, replace: nil); end
+  def rpop(key, count = nil); end
   def rpoplpush(source, destination); end
   def rpush(key, value); end
   def rpushx(key, value); end
   def sadd(key, member); end
   def save; end
-  def scan(cursor, options = nil); end
-  def scan_each(options = nil, &block); end
+  def scan(cursor, **options); end
+  def scan_each(**options, &block); end
   def scard(key); end
   def script(subcommand, *args); end
   def sdiff(*keys); end
   def sdiffstore(destination, *keys); end
   def select(db); end
   def self.current; end
-  def self.current=(redis); end
+  def self.current=(arg0); end
+  def self.exists_returns_integer; end
+  def self.exists_returns_integer=(value); end
   def sentinel(subcommand, *args); end
-  def set(key, value, options = nil); end
+  def set(key, value, ex: nil, px: nil, nx: nil, xx: nil, keepttl: nil); end
   def setbit(key, offset, value); end
   def setex(key, ttl, value); end
   def setnx(key, value); end
@@ -164,12 +168,12 @@ class Redis
   def slowlog(subcommand, length = nil); end
   def smembers(key); end
   def smove(source, destination, member); end
-  def sort(key, options = nil); end
+  def sort(key, by: nil, limit: nil, get: nil, order: nil, store: nil); end
   def spop(key, count = nil); end
   def srandmember(key, count = nil); end
   def srem(key, member); end
-  def sscan(key, cursor, options = nil); end
-  def sscan_each(key, options = nil, &block); end
+  def sscan(key, cursor, **options); end
+  def sscan_each(key, **options, &block); end
   def strlen(key); end
   def subscribe(*channels, &block); end
   def subscribe_with_timeout(timeout, *channels, &block); end
@@ -188,41 +192,41 @@ class Redis
   def with_reconnect(val = nil, &blk); end
   def without_reconnect(&blk); end
   def xack(key, group, *ids); end
-  def xadd(key, entry, opts = nil); end
+  def xadd(key, entry, approximate: nil, maxlen: nil, id: nil); end
   def xclaim(key, group, consumer, min_idle_time, *ids, **opts); end
   def xdel(key, *ids); end
   def xgroup(subcommand, key, group, id_or_consumer = nil, mkstream: nil); end
   def xinfo(subcommand, key, group = nil); end
   def xlen(key); end
   def xpending(key, group, *args); end
-  def xrange(key, start = nil, _end = nil, count: nil); end
+  def xrange(key, start = nil, range_end = nil, count: nil); end
   def xread(keys, ids, count: nil, block: nil); end
-  def xreadgroup(group, consumer, keys, ids, opts = nil); end
-  def xrevrange(key, _end = nil, start = nil, count: nil); end
+  def xreadgroup(group, consumer, keys, ids, count: nil, block: nil, noack: nil); end
+  def xrevrange(key, range_end = nil, start = nil, count: nil); end
   def xtrim(key, maxlen, approximate: nil); end
-  def zadd(key, *args); end
+  def zadd(key, *args, nx: nil, xx: nil, ch: nil, incr: nil); end
   def zcard(key); end
   def zcount(key, min, max); end
   def zincrby(key, increment, member); end
-  def zinterstore(destination, keys, options = nil); end
+  def zinterstore(destination, keys, weights: nil, aggregate: nil); end
   def zlexcount(key, min, max); end
   def zpopmax(key, count = nil); end
   def zpopmin(key, count = nil); end
-  def zrange(key, start, stop, options = nil); end
-  def zrangebylex(key, min, max, options = nil); end
-  def zrangebyscore(key, min, max, options = nil); end
+  def zrange(key, start, stop, withscores: nil, with_scores: nil); end
+  def zrangebylex(key, min, max, limit: nil); end
+  def zrangebyscore(key, min, max, withscores: nil, with_scores: nil, limit: nil); end
   def zrank(key, member); end
   def zrem(key, member); end
   def zremrangebyrank(key, start, stop); end
   def zremrangebyscore(key, min, max); end
-  def zrevrange(key, start, stop, options = nil); end
-  def zrevrangebylex(key, max, min, options = nil); end
-  def zrevrangebyscore(key, max, min, options = nil); end
+  def zrevrange(key, start, stop, withscores: nil, with_scores: nil); end
+  def zrevrangebylex(key, max, min, limit: nil); end
+  def zrevrangebyscore(key, max, min, withscores: nil, with_scores: nil, limit: nil); end
   def zrevrank(key, member); end
-  def zscan(key, cursor, options = nil); end
-  def zscan_each(key, options = nil, &block); end
+  def zscan(key, cursor, **options); end
+  def zscan_each(key, **options, &block); end
   def zscore(key, member); end
-  def zunionstore(destination, keys, options = nil); end
+  def zunionstore(destination, keys, weights: nil, aggregate: nil); end
   include MonitorMixin
 end
 class Redis::BaseError < RuntimeError
@@ -300,17 +304,16 @@ module Redis::Connection::CommandHelper
 end
 module Redis::Connection::SocketMixin
   def _read_from_socket(nbytes); end
-  def _write_to_socket(data); end
   def gets; end
   def initialize(*args); end
   def read(nbytes); end
   def timeout=(timeout); end
-  def write(data); end
+  def write(buffer); end
   def write_timeout=(timeout); end
 end
 class Redis::Connection::TCPSocket < Socket
   def self.connect(host, port, timeout); end
-  def self.connect_addrinfo(ai, port, timeout); end
+  def self.connect_addrinfo(addrinfo, port, timeout); end
   include Redis::Connection::SocketMixin
 end
 class Redis::Connection::UNIXSocket < Socket
@@ -319,6 +322,8 @@ class Redis::Connection::UNIXSocket < Socket
 end
 class Redis::Connection::SSLSocket < OpenSSL::SSL::SSLSocket
   def self.connect(host, port, timeout, ssl_params); end
+  def wait_readable(timeout = nil); end
+  def wait_writable(timeout = nil); end
   include Redis::Connection::SocketMixin
 end
 class Redis::Connection::Ruby
@@ -344,15 +349,15 @@ end
 class Redis::Client
   def _parse_driver(driver); end
   def _parse_options(options); end
-  def call(command); end
+  def call(*args, &block); end
   def call_loop(command, timeout = nil); end
-  def call_pipeline(pipeline); end
+  def call_pipeline(*args, &block); end
   def call_pipelined(pipeline); end
   def call_with_timeout(command, timeout, &blk); end
   def call_without_timeout(command, &blk); end
   def close; end
   def command_map; end
-  def connect; end
+  def connect(*args, &block); end
   def connect_timeout; end
   def connected?; end
   def connection; end
@@ -381,6 +386,7 @@ class Redis::Client
   def reconnect; end
   def scheme; end
   def timeout; end
+  def username; end
   def with_reconnect(val = nil); end
   def with_socket_timeout(timeout); end
   def without_reconnect(&blk); end
@@ -468,7 +474,6 @@ class Redis::Cluster::Option
   def use_replica?; end
 end
 class Redis::Cluster::Slot
-  def assign_node_key(mappings, slot, node_key); end
   def build_slot_node_key_map(available_slots); end
   def exists?(slot); end
   def find_node_key_of_master(slot); end

@@ -564,7 +564,7 @@ class ActiveRecord::Migration
   def version=(arg0); end
   def write(text = nil); end
 end
-class ActiveRecord::Migration::Current < ActiveRecord::Migration[4.2]
+class ActiveRecord::Migration::Current < ActiveRecord::Migration
 end
 class ActiveRecord::Migration::CheckPending
   def call(env); end
@@ -1054,8 +1054,8 @@ class ActiveRecord::Relation
   def cache_key(timestamp_column = nil); end
   def create!(attributes = nil, &block); end
   def create(attributes = nil, &block); end
-  def delete_all; end
-  def destroy_all; end
+  def delete_all(*args, &blk); end
+  def destroy_all(*args, &blk); end
   def eager_loading?; end
   def empty?; end
   def empty_scope?; end
@@ -1101,7 +1101,7 @@ class ActiveRecord::Relation
   def to_ary; end
   def to_sql; end
   def update(id = nil, attributes); end
-  def update_all(updates); end
+  def update_all(*args, &blk); end
   def values; end
   def values_for_create(attributes = nil); end
   def where_values_hash(relation_table_name = nil); end

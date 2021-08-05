@@ -424,6 +424,16 @@ end
 class Rack::Chunked::TrailerBody < Rack::Chunked::Body
   def yield_trailers; end
 end
+class Rack::Auth::AbstractRequest
+  def authorization_key; end
+  def initialize(env); end
+  def params; end
+  def parts; end
+  def provided?; end
+  def request; end
+  def scheme; end
+  def valid?; end
+end
 class Rack::Runtime
   def call(env); end
   def initialize(app, name = nil); end
@@ -434,6 +444,27 @@ class Rack::BodyProxy
   def initialize(body, &block); end
   def method_missing(method_name, *args, &block); end
   def respond_to_missing?(method_name, include_all = nil); end
+end
+class Rack::Builder
+  def call(env); end
+  def freeze_app; end
+  def generate_map(default_app, mapping); end
+  def initialize(default_app = nil, &block); end
+  def map(path, &block); end
+  def run(app, *args); end
+  def self.app(default_app = nil, &block); end
+  def self.load_file(path, opts = nil); end
+  def self.new_from_string(builder_script, file = nil); end
+  def self.parse_file(config, opts = nil); end
+  def to_app; end
+  def use(middleware_class, *args, &blk); end
+  def warmup(prc = nil, &block); end
+end
+class Rack::URLMap
+  def call(env); end
+  def casecmp?(v1, v2); end
+  def initialize(map = nil); end
+  def remap(map); end
 end
 class Rack::Sendfile
   def call(env); end
@@ -546,20 +577,19 @@ class Rack::Deflater::GzipStream
   def initialize(body, mtime, sync); end
   def write(data); end
 end
-class Rack::Builder
+class Rack::ContentLength
   def call(env); end
-  def freeze_app; end
-  def generate_map(default_app, mapping); end
-  def initialize(default_app = nil, &block); end
-  def map(path, &block); end
-  def run(app); end
-  def self.app(default_app = nil, &block); end
-  def self.load_file(path, opts = nil); end
-  def self.new_from_string(builder_script, file = nil); end
-  def self.parse_file(config, opts = nil); end
-  def to_app; end
-  def use(middleware, *args, &block); end
-  def warmup(prc = nil, &block); end
+  def initialize(app); end
+  include Rack::Utils
+end
+class Rack::Static
+  def add_index_root?(path); end
+  def applicable_rules(path); end
+  def call(env); end
+  def can_serve(path); end
+  def initialize(app, options = nil); end
+  def overwrite_file_path(path); end
+  def route_file(path); end
 end
 class Rack::Cascade
   def <<(app); end
@@ -578,11 +608,6 @@ end
 class Rack::Config
   def call(env); end
   def initialize(app, &block); end
-end
-class Rack::ContentLength
-  def call(env); end
-  def initialize(app); end
-  include Rack::Utils
 end
 class Rack::ContentType
   def call(env); end
@@ -832,21 +857,6 @@ class Rack::ShowStatus
   def h(obj); end
   def initialize(app); end
 end
-class Rack::Static
-  def add_index_root?(path); end
-  def applicable_rules(path); end
-  def call(env); end
-  def can_serve(path); end
-  def initialize(app, options = nil); end
-  def overwrite_file_path(path); end
-  def route_file(path); end
-end
-class Rack::URLMap
-  def call(env); end
-  def casecmp?(v1, v2); end
-  def initialize(map = nil); end
-  def remap(map); end
-end
 module Rack::Multipart
   def self.build_multipart(params, first = nil); end
   def self.extract_multipart(req, params = nil); end
@@ -965,16 +975,6 @@ class Rack::Auth::AbstractHandler
   def realm; end
   def realm=(arg0); end
   def unauthorized(www_authenticate = nil); end
-end
-class Rack::Auth::AbstractRequest
-  def authorization_key; end
-  def initialize(env); end
-  def params; end
-  def parts; end
-  def provided?; end
-  def request; end
-  def scheme; end
-  def valid?; end
 end
 class Rack::Auth::Basic < Rack::Auth::AbstractHandler
   def call(env); end

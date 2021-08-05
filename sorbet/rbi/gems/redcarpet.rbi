@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/redcarpet/all/redcarpet.rbi
 #
-# redcarpet-3.5.0
+# redcarpet-3.5.1
 
 class Redcarpet::Markdown
   def render(arg0); end

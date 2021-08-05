@@ -149,7 +149,7 @@ class CodeRay::Scanners::Ruby < CodeRay::Scanners::Scanner
 end
 module CodeRay::Scanners::Ruby::Patterns
 end
-class Anonymous_Struct_72 < Struct
+class Anonymous_Struct_73 < Struct
   def delim; end
   def delim=(_); end
   def heredoc; end
@@ -171,7 +171,7 @@ class Anonymous_Struct_72 < Struct
   def type; end
   def type=(_); end
 end
-class CodeRay::Scanners::Ruby::StringState < Anonymous_Struct_72
+class CodeRay::Scanners::Ruby::StringState < Anonymous_Struct_73
   def heredoc_pattern(delim, interpreted, indented); end
   def initialize(kind, interpreted, delim, heredoc = nil); end
   def self.simple_key_pattern(delim); end

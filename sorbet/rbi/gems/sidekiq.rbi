@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/sidekiq/all/sidekiq.rbi
 #
-# sidekiq-5.2.9
+# sidekiq-6.2.1
 
 module Sidekiq
   def self.average_scheduled_poll_interval=(interval); end
@@ -15,18 +15,20 @@ module Sidekiq
   def self.configure_client; end
   def self.configure_server; end
   def self.death_handlers; end
-  def self.default_retries_exhausted=(prok); end
   def self.default_server_middleware; end
   def self.default_worker_options; end
   def self.default_worker_options=(hash); end
   def self.dump_json(object); end
   def self.error_handlers; end
   def self.load_json(string); end
+  def self.log_formatter; end
+  def self.log_formatter=(log_formatter); end
   def self.logger; end
-  def self.logger=(log); end
+  def self.logger=(logger); end
   def self.on(event, &block); end
   def self.options; end
   def self.options=(opts); end
+  def self.pro?; end
   def self.redis; end
   def self.redis=(hash); end
   def self.redis_info; end
@@ -34,22 +36,40 @@ module Sidekiq
   def self.server?; end
   def self.server_middleware; end
 end
-module Sidekiq::Logging
-  def logger; end
-  def self.initialize_logger(log_target = nil); end
-  def self.job_hash_context(job_hash); end
-  def self.logger; end
-  def self.logger=(log); end
-  def self.reopen_logs; end
-  def self.tid; end
-  def self.with_context(msg); end
-  def self.with_job_hash_context(job_hash, &block); end
+module Sidekiq::Context
+  def self.current; end
+  def self.with(hash); end
 end
-class Sidekiq::Logging::Pretty < Logger::Formatter
+module Sidekiq::LoggingUtils
+  def add(severity, message = nil, progname = nil, &block); end
+  def debug?; end
+  def error?; end
+  def fatal?; end
+  def info?; end
+  def level; end
+  def local_level; end
+  def local_level=(level); end
+  def log_at(level); end
+  def warn?; end
+end
+class Sidekiq::Logger < Logger
+  def initialize(*args, **kwargs); end
+  include Sidekiq::LoggingUtils
+end
+module Sidekiq::Logger::Formatters
+end
+class Sidekiq::Logger::Formatters::Base < Logger::Formatter
+  def ctx; end
+  def format_context; end
+  def tid; end
+end
+class Sidekiq::Logger::Formatters::Pretty < Sidekiq::Logger::Formatters::Base
   def call(severity, time, program_name, message); end
-  def context; end
 end
-class Sidekiq::Logging::WithoutTimestamp < Sidekiq::Logging::Pretty
+class Sidekiq::Logger::Formatters::WithoutTimestamp < Sidekiq::Logger::Formatters::Pretty
+  def call(severity, time, program_name, message); end
+end
+class Sidekiq::Logger::Formatters::JSON < Sidekiq::Logger::Formatters::Base
   def call(severity, time, program_name, message); end
 end
 module Sidekiq::Middleware
@@ -58,6 +78,7 @@ class Sidekiq::Middleware::Chain
   def add(klass, *args); end
   def clear; end
   def each(&block); end
+  def empty?; end
   def entries; end
   def exists?(klass); end
   def initialize; end
@@ -94,12 +115,23 @@ class Sidekiq::Client
   def self.push(item); end
   def self.push_bulk(items); end
   def self.via(pool); end
+  def validate(item); end
 end
 module Sidekiq::Worker
   def jid; end
   def jid=(arg0); end
   def logger; end
   def self.included(base); end
+end
+module Sidekiq::Worker::Options
+  def self.included(base); end
+end
+module Sidekiq::Worker::Options::ClassMethods
+  def get_sidekiq_options; end
+  def sidekiq_class_attribute(*attrs); end
+  def sidekiq_options(opts = nil); end
+  def sidekiq_retries_exhausted(&block); end
+  def sidekiq_retry_in(&block); end
 end
 class Sidekiq::Worker::Setter
   def initialize(klass, opts); end
@@ -113,15 +145,11 @@ module Sidekiq::Worker::ClassMethods
   def delay(*args); end
   def delay_for(*args); end
   def delay_until(*args); end
-  def get_sidekiq_options; end
   def perform_async(*args); end
   def perform_at(interval, *args); end
   def perform_in(interval, *args); end
   def set(options); end
-  def sidekiq_class_attribute(*attrs); end
   def sidekiq_options(opts = nil); end
-  def sidekiq_retries_exhausted(&block); end
-  def sidekiq_retry_in(&block); end
 end
 class Sidekiq::RedisConnection
   def self.build_client(options); end
@@ -146,9 +174,6 @@ class Sidekiq::Rails::Reloader
 end
 class Sidekiq::Shutdown < Interrupt
 end
-module Sidekiq::RedisScanner
-  def sscan(conn, key); end
-end
 class Sidekiq::Stats
   def dead_size; end
   def default_queue_latency; end
@@ -164,11 +189,9 @@ class Sidekiq::Stats
   def scheduled_size; end
   def stat(s); end
   def workers_size; end
-  include Sidekiq::RedisScanner
 end
 class Sidekiq::Stats::Queues
   def lengths; end
-  include Sidekiq::RedisScanner
 end
 class Sidekiq::Stats::History
   def date_stat_hash(stat); end
@@ -186,7 +209,6 @@ class Sidekiq::Queue
   def paused?; end
   def self.all; end
   def size; end
-  extend Sidekiq::RedisScanner
   include Enumerable
 end
 class Sidekiq::Job
@@ -197,6 +219,7 @@ class Sidekiq::Job
   def display_args; end
   def display_class; end
   def enqueued_at; end
+  def error_backtrace; end
   def initialize(item, queue_name = nil); end
   def item; end
   def jid; end
@@ -205,6 +228,8 @@ class Sidekiq::Job
   def parse(item); end
   def queue; end
   def safe_load(content, default); end
+  def tags; end
+  def uncompress_backtrace(backtrace); end
   def value; end
 end
 class Sidekiq::SortedEntry < Sidekiq::Job
@@ -224,6 +249,7 @@ class Sidekiq::SortedSet
   def clear; end
   def initialize(name); end
   def name; end
+  def scan(match, count = nil); end
   def size; end
   include Enumerable
 end
@@ -257,8 +283,9 @@ class Sidekiq::ProcessSet
   def initialize(clean_plz = nil); end
   def leader; end
   def size; end
+  def total_concurrency; end
+  def total_rss; end
   include Enumerable
-  include Sidekiq::RedisScanner
 end
 class Sidekiq::Process
   def [](key); end
@@ -273,10 +300,9 @@ class Sidekiq::Process
   def tag; end
 end
 class Sidekiq::Workers
-  def each; end
+  def each(&block); end
   def size; end
   include Enumerable
-  include Sidekiq::RedisScanner
 end
 module Sidekiq::Paginator
   def page(key, pageidx = nil, page_size = nil, opts = nil); end
@@ -291,9 +317,11 @@ module Sidekiq::WebHelpers
   def delete_or_add_queue(job, params); end
   def display_args(args, truncate_after_chars = nil); end
   def display_custom_head; end
+  def display_tags(job, within = nil); end
   def environment_title_prefix; end
   def filtering(*arg0); end
   def find_locale_files(lang); end
+  def format_memory(rss_kb); end
   def get_locale; end
   def h(text); end
   def job_params(job, score); end
@@ -311,17 +339,19 @@ module Sidekiq::WebHelpers
   def redis_connection_and_namespace; end
   def redis_info; end
   def relative_time(time); end
-  def retries_with_score(score); end
   def retry_extra_items(retry_job); end
   def retry_or_delete_or_kill(job, params); end
   def root_path; end
   def rtl?; end
   def server_utc_time; end
+  def singularize(str, count); end
+  def sort_direction_label; end
   def stats; end
   def strings(lang); end
   def t(msg, options = nil); end
   def text_direction; end
   def to_display(arg); end
+  def to_query_string(params); end
   def truncate(text, truncate_after_chars = nil); end
   def unfiltered?; end
   def user_preferred_languages; end
@@ -330,6 +360,7 @@ end
 module Sidekiq::WebRouter
   def delete(path, &block); end
   def get(path, &block); end
+  def head(path, &block); end
   def match(env); end
   def patch(path, &block); end
   def post(path, &block); end
@@ -393,7 +424,6 @@ end
 class Sidekiq::Web
   def app; end
   def build; end
-  def build_sessions; end
   def call(env); end
   def disable(*opts); end
   def enable(*opts); end
@@ -412,20 +442,34 @@ class Sidekiq::Web
   def self.redis_pool; end
   def self.redis_pool=(arg0); end
   def self.register(extension); end
-  def self.session_secret; end
-  def self.session_secret=(arg0); end
-  def self.sessions; end
-  def self.sessions=(arg0); end
+  def self.session_secret=(val); end
+  def self.sessions=(val); end
   def self.set(attribute, value); end
   def self.settings; end
   def self.tabs; end
-  def self.use(*middleware_args, &block); end
+  def self.use(*args, &block); end
   def self.views; end
   def self.views=(arg0); end
-  def sessions; end
-  def sessions=(arg0); end
+  def sessions=(val); end
   def set(attribute, value); end
   def settings; end
-  def use(*middleware_args, &block); end
-  def using?(middleware); end
+  def use(*args, &block); end
+end
+class Sidekiq::Web::CsrfProtection
+  def accept?(env); end
+  def admit(env); end
+  def call(env); end
+  def compare_with_real_token(token, local); end
+  def decode_token(token); end
+  def deny(env); end
+  def initialize(app, options = nil); end
+  def logger(env); end
+  def mask_token(token); end
+  def masked_token?(token); end
+  def safe?(env); end
+  def session(env); end
+  def unmask_token(masked_token); end
+  def unmasked_token?(token); end
+  def valid_token?(env, giventoken); end
+  def xor_byte_strings(s1, s2); end
 end
