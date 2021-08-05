@@ -48,4 +48,15 @@ class TopUsageAPIKeysService < ApplicationService
     end
     r
   end
+
+  def total_usage_by_api_key_in_date_range(date_from, date_to)
+    # Use 0 as a default value for the hash members
+    r = Hash.new(0)
+    all_usage_by_api_key_in_date_range(date_from, date_to).each do |record|
+      requests = record[:requests]
+      api_key = record[:api_key]
+      r[api_key] += requests
+    end
+    r
+  end
 end
