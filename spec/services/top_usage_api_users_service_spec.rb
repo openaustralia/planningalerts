@@ -29,9 +29,10 @@ describe TopUsageAPIUsersService do
 
   describe ".call" do
     it "should return the top 2 total number of requests in descending sort order" do
-      expect(TopUsageAPIUsersService.call(redis: redis, date_from: Date.new(2021, 7, 1), date_to: Date.new(2021, 7, 2), number: 2)).to eq [
-        { user: user3, requests: 214 },
-        { user: user1, requests: 157 }
+      result = TopUsageAPIUsersService.call(redis: redis, date_from: Date.new(2021, 7, 1), date_to: Date.new(2021, 7, 2), number: 2)
+      expect(result.map(&:serialize)).to eq [
+        { "user" => user3, "requests" => 214 },
+        { "user" => user1, "requests" => 157 }
       ]
     end
   end
@@ -41,12 +42,15 @@ describe TopUsageAPIUsersService do
       s = TopUsageAPIUsersService.new(redis)
       date_from = Date.new(2021, 7, 1)
       date_to = date_from + 1
-      expect(s.all_usage_by_api_key_in_date_range(date_from, date_to)).to contain_exactly(
-        { api_key: user1.api_key, requests: 123 },
-        { api_key: user2.api_key, requests: 54 },
-        { api_key: user3.api_key, requests: 2 },
-        { api_key: user1.api_key, requests: 34 },
-        { api_key: user3.api_key, requests: 212 }
+      result = s.all_usage_by_api_key_in_date_range(date_from, date_to)
+      # Doing direct comparison of T::Struct appears to be fraught
+      # See https://github.com/sorbet/sorbet/issues/1540
+      expect(result.map(&:serialize)).to contain_exactly(
+        { "api_key" => user1.api_key, "requests" => 123 },
+        { "api_key" => user2.api_key, "requests" => 54 },
+        { "api_key" => user3.api_key, "requests" => 2 },
+        { "api_key" => user1.api_key, "requests" => 34 },
+        { "api_key" => user3.api_key, "requests" => 212 }
       )
     end
   end
@@ -56,10 +60,11 @@ describe TopUsageAPIUsersService do
       s = TopUsageAPIUsersService.new(redis)
       date_from = Date.new(2021, 7, 1)
       date_to = date_from + 1
-      expect(s.total_usage_by_api_key_in_date_range(date_from, date_to)).to contain_exactly(
-        { api_key: user1.api_key, requests: 157 },
-        { api_key: user2.api_key, requests: 54 },
-        { api_key: user3.api_key, requests: 214 }
+      result = s.total_usage_by_api_key_in_date_range(date_from, date_to)
+      expect(result.map(&:serialize)).to contain_exactly(
+        { "api_key" => user1.api_key, "requests" => 157 },
+        { "api_key" => user2.api_key, "requests" => 54 },
+        { "api_key" => user3.api_key, "requests" => 214 }
       )
     end
   end
@@ -69,9 +74,10 @@ describe TopUsageAPIUsersService do
       s = TopUsageAPIUsersService.new(redis)
       date_from = Date.new(2021, 7, 1)
       date_to = date_from + 1
-      expect(s.top_total_usage_by_api_key_in_date_range(date_from, date_to, 2)).to eq [
-        { api_key: user3.api_key, requests: 214 },
-        { api_key: user1.api_key, requests: 157 }
+      result = s.top_total_usage_by_api_key_in_date_range(date_from, date_to, 2)
+      expect(result.map(&:serialize)).to eq [
+        { "api_key" => user3.api_key, "requests" => 214 },
+        { "api_key" => user1.api_key, "requests" => 157 }
       ]
     end
   end
