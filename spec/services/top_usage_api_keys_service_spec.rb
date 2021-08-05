@@ -67,10 +67,10 @@ describe TopUsageAPIKeysService do
       s = TopUsageAPIKeysService.new(redis)
       date_from = Date.new(2021, 7, 1)
       date_to = date_from + 1
-      expect(s.total_usage_by_api_key_in_date_range(date_from, date_to)).to eq(
-        user1.api_key => 157,
-        user2.api_key => 54,
-        user3.api_key => 214
+      expect(s.total_usage_by_api_key_in_date_range(date_from, date_to)).to contain_exactly(
+        { api_key: user1.api_key, requests: 157 },
+        { api_key: user2.api_key, requests: 54 },
+        { api_key: user3.api_key, requests: 214 }
       )
     end
   end
