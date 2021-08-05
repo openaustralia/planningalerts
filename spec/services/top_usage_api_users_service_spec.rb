@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe TopUsageAPIKeysService do
+describe TopUsageAPIUsersService do
   let(:user1) { create(:user) }
   let(:user2) { create(:user) }
   let(:user3) { create(:user) }
@@ -29,7 +29,7 @@ describe TopUsageAPIKeysService do
 
   describe ".call" do
     it "should return the top 2 total number of requests in descending sort order" do
-      expect(TopUsageAPIKeysService.call(redis: redis, date_from: Date.new(2021, 7, 1), date_to: Date.new(2021, 7, 2), number: 2)).to eq [
+      expect(TopUsageAPIUsersService.call(redis: redis, date_from: Date.new(2021, 7, 1), date_to: Date.new(2021, 7, 2), number: 2)).to eq [
         { user: user3, requests: 214 },
         { user: user1, requests: 157 }
       ]
@@ -38,7 +38,7 @@ describe TopUsageAPIKeysService do
 
   describe ".all_usage_by_api_key_on_date" do
     it "should return data directly from redis in a more usable format" do
-      s = TopUsageAPIKeysService.new(redis)
+      s = TopUsageAPIUsersService.new(redis)
       date = Date.new(2021, 7, 1)
       expect(s.all_usage_by_api_key_on_date(date)).to contain_exactly(
         { api_key: user1.api_key, requests: 123 },
@@ -50,7 +50,7 @@ describe TopUsageAPIKeysService do
 
   describe ".all_usage_by_api_key_in_date_range" do
     it "should return data directly from redis in a more usable format" do
-      s = TopUsageAPIKeysService.new(redis)
+      s = TopUsageAPIUsersService.new(redis)
       date_from = Date.new(2021, 7, 1)
       date_to = date_from + 1
       expect(s.all_usage_by_api_key_in_date_range(date_from, date_to)).to contain_exactly(
@@ -65,7 +65,7 @@ describe TopUsageAPIKeysService do
 
   describe ".total_usage_by_api_key_in_date_range" do
     it "should return the total number of requests" do
-      s = TopUsageAPIKeysService.new(redis)
+      s = TopUsageAPIUsersService.new(redis)
       date_from = Date.new(2021, 7, 1)
       date_to = date_from + 1
       expect(s.total_usage_by_api_key_in_date_range(date_from, date_to)).to contain_exactly(
@@ -78,7 +78,7 @@ describe TopUsageAPIKeysService do
 
   describe ".top_total_usage_by_api_key_in_date_range" do
     it "should return the top 2 total number of requests in descending sort order" do
-      s = TopUsageAPIKeysService.new(redis)
+      s = TopUsageAPIUsersService.new(redis)
       date_from = Date.new(2021, 7, 1)
       date_to = date_from + 1
       expect(s.top_total_usage_by_api_key_in_date_range(date_from, date_to, 2)).to eq [

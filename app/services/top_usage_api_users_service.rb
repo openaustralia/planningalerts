@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-class TopUsageAPIKeysService < ApplicationService
+class TopUsageAPIUsersService < ApplicationService
   extend T::Sig
 
   attr_reader :redis
