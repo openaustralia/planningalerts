@@ -68,4 +68,11 @@ class TopUsageAPIKeysService < ApplicationService
     array = array.sort { |a, b| b[:requests] <=> a[:requests] }
     array[0..(number - 1)]
   end
+
+  def top_total_usage_by_user_in_date_range(date_from, date_to, number)
+    top_total_usage_by_api_key_in_date_range(date_from, date_to, number).map do |h|
+      user = User.find_by(api_key: h[:api_key])
+      { requests: h[:requests], user: user }
+    end
+  end
 end
