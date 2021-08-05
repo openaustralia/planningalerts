@@ -16,9 +16,9 @@ ActiveAdmin.register_page "API usage" do
     date_to = Date.today
     date_from = date_to - 30
     result = TopUsageAPIUsersService.call(redis: redis, date_from: date_from,
-      date_to: date_to, number: 10)
+      date_to: date_to, number: 20)
 
-    h2 "Top users of the API (by number of requests) over the last 30 days"
+    h2 "Top 20 users of the API (by number of requests) over the last 30 days"
 
     table_for result do
       column(:name) { |usage| link_to usage.user.name, admin_user_path(usage.user) }
