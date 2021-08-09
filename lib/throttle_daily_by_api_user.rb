@@ -6,10 +6,12 @@ require "sorbet-runtime"
 class ThrottleDailyByApiUser < Rack::Throttle::Daily
   extend T::Sig
 
+  # By default we allow up to 1000 API requests per day per API key
+  DEFAULT_MAX_PER_DAY = 1000
+
   sig { params(_request: Rack::Request).returns(Integer) }
   def max_per_day(_request)
-    # By default we allow up to 1000 API requests per day per API key
-    1000
+    DEFAULT_MAX_PER_DAY
   end
 
   sig { params(request: Rack::Request).returns(T::Boolean) }
