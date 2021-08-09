@@ -13,10 +13,10 @@ ActiveAdmin.register_page "API usage" do
     redis = Redis.new(Rails.configuration.redis)
     redis = Redis::Namespace.new(Rails.configuration.redis[:namespace], redis: redis)
 
-    date_to = Date.today
+    date_to = Time.zone.today
     date_from = date_to - 30
     result = TopUsageAPIUsersService.call(redis: redis, date_from: date_from,
-      date_to: date_to, number: 20)
+                                          date_to: date_to, number: 20)
 
     h2 "Top 20 users of the API (by number of requests) over the last 30 days"
 
