@@ -20,6 +20,13 @@ ActiveAdmin.register_page "API usage" do
 
     h2 "Top 20 users of the API (by number of requests) over the last 30 days"
 
+    para do
+      "Note that these numbers are measured before any authorization is done. " \
+      "So, for instance if an API key has been disabled but a user is still " \
+      "making requests with that key, which are then getting denied, those " \
+      "requests will still show up in the list here."
+    end
+
     table_for result do
       column(:name) { |usage| link_to usage.user.name, admin_user_path(usage.user) }
       column(:organisation) { |usage| link_to usage.user.organisation, admin_user_path(usage.user) }
