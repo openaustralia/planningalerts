@@ -14,12 +14,11 @@ class ThrottleDailyByApiUser < Rack::Throttle::Daily
 
   sig { params(request: Rack::Request).returns(T::Boolean) }
   def whitelisted?(request)
-    begin
-      path_info = Rails.application.routes.recognize_path request.url
-    # rubocop:disable Lint/SuppressedException
+    path_info = begin
+      Rails.application.routes.recognize_path request.url
     rescue StandardError
+      nil
     end
-    # rubocop:enable Lint/SuppressedException
 
     if path_info && path_info[:controller] == "api" && path_info[:action] != "howto"
       # Doing a database lookup in rack middleware - not ideal but
