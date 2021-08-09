@@ -53,7 +53,13 @@ class TopUsageAPIUsersService < ApplicationService
 
   sig { params(date: Date).returns(T::Array[ApiKeyRequests]) }
   def all_usage_by_api_key_on_date(date)
-    all_usage_by_api_key_on_date_no_caching(date)
+    # Don't do any caching for today's API usage info
+    return all_usage_by_api_key_on_date_no_caching(date) if date.today?
+
+    # TODO: Cache this for longer than one day
+    Rails.cache.fetch("TopUsageAPIUsersService/#{date}/v1", expires: 24.hours) do
+      all_usage_by_api_key_on_date_no_caching(date)
+    end
   end
 
   sig { params(date: Date).returns(T::Array[ApiKeyRequests]) }
