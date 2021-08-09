@@ -44,10 +44,16 @@ class TopUsageAPIUsersService < ApplicationService
 
   sig { params(date_from: Date, date_to: Date).returns(T::Array[ApiKeyRequests]) }
   def all_usage_by_api_key_in_date_range(date_from, date_to)
-    keys = []
+    r = []
     (date_from..date_to).each do |date|
-      keys += all_keys_for_date(date)
+      r += all_usage_by_api_key_on_date(date)
     end
+    r
+  end
+
+  sig { params(date: Date).returns(T::Array[ApiKeyRequests]) }
+  def all_usage_by_api_key_on_date(date)
+    keys = all_keys_for_date(date)
     api_keys = keys.map { |k| k.split(":")[1] }
     values = keys.empty? ? [] : redis.mget(keys).map(&:to_i)
     values.zip(api_keys).map { |a| ApiKeyRequests.new(requests: a[0], api_key: a[1]) }
