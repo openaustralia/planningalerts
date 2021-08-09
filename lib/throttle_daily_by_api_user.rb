@@ -14,13 +14,7 @@ class ThrottleDailyByApiUser < Rack::Throttle::Daily
 
   sig { params(request: Rack::Request).returns(T::Boolean) }
   def whitelisted?(request)
-    path_info = begin
-      Rails.application.routes.recognize_path request.url
-    rescue StandardError
-      nil
-    end
-
-    if path_info && path_info[:controller] == "api" && path_info[:action] != "howto"
+    if api_request?(request)
       # Doing a database lookup in rack middleware - not ideal but
       # we're only doing it if it's an api request and this allows
       # us to manage things in the admin panel without needing to deploy
@@ -30,6 +24,18 @@ class ThrottleDailyByApiUser < Rack::Throttle::Daily
     else
       true
     end
+  end
+
+  # Is this a request going to the API?
+  sig { params(request: Rack::Request).returns(T::Boolean) }
+  def api_request?(request)
+    path_info = begin
+                  Rails.application.routes.recognize_path request.url
+                rescue StandardError
+                  nil
+                end
+
+    path_info && path_info[:controller] == "api" && path_info[:action] != "howto"
   end
 
   sig { params(request: T.untyped).returns(T.untyped) }
