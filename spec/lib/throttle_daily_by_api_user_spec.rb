@@ -14,6 +14,23 @@ describe ThrottleDailyByApiUser do
     end
   end
 
+  describe "#max_per_day" do
+    let(:result) { ThrottleDailyByApiUser.new(nil).max_per_day(request) }
+    let(:url) { "/applications.js?lng=146&lat=-38&key=#{user.api_key}" }
+    let(:user) { create(:user) }
+
+    it "should have a default max of 1000" do
+      expect(result).to eq 1000
+    end
+
+    context "user with a special allowance" do
+      let(:user) { create(:user, api_daily_limit: 2000) }
+      it "should have a higher rate than normal" do
+        expect(result).to eq 2000
+      end
+    end
+  end
+
   describe "#whitelisted?" do
     let(:result) { ThrottleDailyByApiUser.new(nil).whitelisted?(request) }
 
@@ -33,14 +50,6 @@ describe ThrottleDailyByApiUser do
 
         it "should not be whitelisted" do
           expect(result).to eq false
-        end
-      end
-
-      describe "A very special user" do
-        let(:user) { create(:user, unlimited_api_usage: true) }
-
-        it "should be whitelisted" do
-          expect(result).to eq true
         end
       end
 
