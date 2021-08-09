@@ -46,7 +46,6 @@ module PlanningalertsApp
     }
 
     config.middleware.use ThrottleDailyByApiUser,
-                          max: 1000,
                           cache: ThrottleCache.new(config.redis),
                           key_prefix: :throttle,
                           message: "Rate Limit Exceeded. See http://www.planningalerts.org.au/api/howto#hLicenseInfo for more information"
