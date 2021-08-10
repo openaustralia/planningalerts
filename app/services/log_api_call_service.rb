@@ -13,7 +13,7 @@ class LogApiCallService < ApplicationService
       api_key: String,
       ip_address: String,
       query: String,
-      params: T::Hash[String, T.nilable(String)],
+      params: T::Hash[String, T.nilable(T.any(Integer, String))],
       user_agent: T.nilable(String),
       time: Time
     ).void
@@ -34,7 +34,7 @@ class LogApiCallService < ApplicationService
       api_key: String,
       ip_address: String,
       query: String,
-      params: T::Hash[String, T.nilable(String)],
+      params: T::Hash[String, T.nilable(T.any(Integer, String))],
       user_agent: T.nilable(String),
       time: Time
     ).void
@@ -69,7 +69,7 @@ class LogApiCallService < ApplicationService
   sig { returns(String) }
   attr_reader :query
 
-  sig { returns(T::Hash[String, T.nilable(String)]) }
+  sig { returns(T::Hash[String, T.nilable(T.any(Integer, String))]) }
   attr_reader :params
 
   sig { returns(T.nilable(String)) }
