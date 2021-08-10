@@ -13,15 +13,17 @@ class LogApiCallService < ApplicationService
       api_key: String,
       ip_address: String,
       query: String,
+      params: T::Hash[String, T.nilable(String)],
       user_agent: T.nilable(String),
       time: Time
     ).void
   end
-  def self.call(api_key:, ip_address:, query:, user_agent:, time:)
+  def self.call(api_key:, ip_address:, query:, params:, user_agent:, time:)
     new(
       api_key: api_key,
       ip_address: ip_address,
       query: query,
+      params: params,
       user_agent: user_agent,
       time: time
     ).call
@@ -32,14 +34,16 @@ class LogApiCallService < ApplicationService
       api_key: String,
       ip_address: String,
       query: String,
+      params: T::Hash[String, T.nilable(String)],
       user_agent: T.nilable(String),
       time: Time
     ).void
   end
-  def initialize(api_key:, ip_address:, query:, user_agent:, time:)
+  def initialize(api_key:, ip_address:, query:, params:, user_agent:, time:)
     @api_key = api_key
     @ip_address = ip_address
     @query = query
+    @params = params
     @user_agent = user_agent
     @time = time
   end
@@ -65,6 +69,9 @@ class LogApiCallService < ApplicationService
   sig { returns(String) }
   attr_reader :query
 
+  sig { returns(T::Hash[String, T.nilable(String)]) }
+  attr_reader :params
+
   sig { returns(T.nilable(String)) }
   attr_reader :user_agent
 
@@ -79,6 +86,7 @@ class LogApiCallService < ApplicationService
       body: {
         ip_address: ip_address,
         query: query,
+        params: params,
         user_agent: user_agent,
         query_time: time,
         user: {

@@ -4,25 +4,27 @@
 class LogApiCallJob
   sig do
     params(
-      api_key: T.untyped,
-      ip_address: T.untyped,
-      query: T.untyped,
-      user_agent: T.untyped,
-      time_as_float: T.untyped
+      api_key: String,
+      ip_address: String,
+      query: String,
+      params: T::Hash[String, T.nilable(String)],
+      user_agent: T.nilable(String),
+      time_as_float: Float
     ).void
   end
-  def self.perform_later(api_key:, ip_address:, query:, user_agent:, time_as_float:); end
+  def self.perform_later(api_key:, ip_address:, query:, params:, user_agent:, time_as_float:); end
 
   sig do
     params(
-      api_key: T.untyped,
-      ip_address: T.untyped,
-      query: T.untyped,
-      user_agent: T.untyped,
-      time_as_float: T.untyped
+      api_key: String,
+      ip_address: String,
+      query: String,
+      params: T::Hash[String, T.nilable(String)],
+      user_agent: T.nilable(String),
+      time_as_float: Float
     ).void
   end
-  def self.perform_now(api_key:, ip_address:, query:, user_agent:, time_as_float:); end
+  def self.perform_now(api_key:, ip_address:, query:, params:, user_agent:, time_as_float:); end
 
   sig do
     params(
