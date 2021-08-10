@@ -12,7 +12,7 @@ class ThrottleDailyByApiUser < Rack::Throttle::Daily
   sig { params(request: Rack::Request).returns(Integer) }
   def max_per_day(request)
     user = User.find_by(api_key: client_identifier(request))
-    user.api_daily_limit || DEFAULT_MAX_PER_DAY
+    user&.api_daily_limit || DEFAULT_MAX_PER_DAY
   end
 
   sig { params(request: Rack::Request).returns(T::Boolean) }

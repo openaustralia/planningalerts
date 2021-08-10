@@ -26,6 +26,15 @@ module User::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def api_commercial?; end
 
+  sig { returns(T.nilable(Integer)) }
+  def api_daily_limit; end
+
+  sig { params(value: T.nilable(T.any(Numeric, ActiveSupport::Duration))).void }
+  def api_daily_limit=(value); end
+
+  sig { returns(T::Boolean) }
+  def api_daily_limit?; end
+
   sig { returns(T.nilable(T::Boolean)) }
   def api_disabled; end
 
