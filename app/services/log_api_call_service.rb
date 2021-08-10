@@ -51,7 +51,6 @@ class LogApiCallService < ApplicationService
 
     # Lookup the api key if there is one
     user = User.find_by(api_key: api_key) if api_key.present?
-    # TODO: Also log whether this user is a commercial user
     log_to_elasticsearch(T.must(user))
   end
 
