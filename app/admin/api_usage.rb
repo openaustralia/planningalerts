@@ -4,9 +4,7 @@
 ActiveAdmin.register_page "API usage" do
   controller do
     def index
-      if params[:period].nil?
-        redirect_to period: 30
-      end
+      redirect_to(period: 30) if params[:period].nil?
       @period = params[:period].to_i
     end
   end
