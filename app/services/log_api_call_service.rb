@@ -96,7 +96,6 @@ class LogApiCallService < ApplicationService
           organisation: user.organisation,
           bulk_api: user.bulk_api,
           api_disabled: user.api_disabled,
-          unlimited_api_usage: user.unlimited_api_usage,
           api_commercial: user.api_commercial
         }
       }

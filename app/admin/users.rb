@@ -10,7 +10,6 @@ ActiveAdmin.register User do
     column :organisation
     column :api_key
     column :api_disabled
-    column :unlimited_api_usage
     column :bulk_api
     column :api_commercial
     column :api_daily_limit
@@ -27,7 +26,6 @@ ActiveAdmin.register User do
     inputs "API" do
       input :api_disabled
       input :api_key
-      input :unlimited_api_usage
       input :bulk_api
       input :api_commercial, hint: "Are they a paying commercial customer?"
       input :api_daily_limit, hint: "Override default daily number of allowed API requests"
@@ -38,5 +36,5 @@ ActiveAdmin.register User do
     actions
   end
 
-  permit_params :email, :name, :organisation, :api_key, :unlimited_api_usage, :bulk_api, :api_commercial, :api_daily_limit, :admin, :api_disabled
+  permit_params :email, :name, :organisation, :api_key, :bulk_api, :api_commercial, :api_daily_limit, :admin, :api_disabled
 end
