@@ -26,9 +26,9 @@ ActiveAdmin.register_page "API usage" do
     # we want today and yesterday
     date_from = date_to - (period - 1)
     result = TopUsageAPIUsersService.call(redis: redis, date_from: date_from,
-                                          date_to: date_to, number: 20)
+                                          date_to: date_to, number: 50)
 
-    h2 "Top 20 users of the API (by number of requests) over the last #{pluralize(period, 'day')}"
+    h2 "Top 50 users of the API (by number of requests) over the last #{pluralize(period, 'day')}"
 
     para do
       "Note that these numbers are measured before any authorization is done. " \
