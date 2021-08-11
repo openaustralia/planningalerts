@@ -242,15 +242,6 @@ module User::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def unconfirmed_email?; end
 
-  sig { returns(T::Boolean) }
-  def unlimited_api_usage; end
-
-  sig { params(value: T::Boolean).void }
-  def unlimited_api_usage=(value); end
-
-  sig { returns(T::Boolean) }
-  def unlimited_api_usage?; end
-
   sig { returns(T.nilable(ActiveSupport::TimeWithZone)) }
   def updated_at; end
 
