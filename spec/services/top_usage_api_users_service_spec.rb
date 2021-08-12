@@ -12,7 +12,7 @@ describe TopUsageAPIUsersService do
   before :each do
     # Delete data in redis
     keys = redis.scan_each(match: "throttle:*").to_a.uniq
-    redis.del(keys)
+    redis.del(keys) unless keys.empty?
 
     # Write some test data to redis
     redis.set("throttle:#{user1.api_key}:2021-07-01", 123)
