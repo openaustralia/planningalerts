@@ -242,6 +242,7 @@ describe ApiController do
       end
     end
 
+    # TODO: This call is deprecated. See https://github.com/openaustralia/planningalerts/issues/1356
     describe "search by address" do
       context "able to geocode address" do
         before :each do

@@ -41,17 +41,6 @@
 %h4 API documentation
 %article
   %h5
-    Single Location by address
-  %p
-    Return applications near a given street address. The area included is a circle with a radius of the given size (in metres)
-    with the address at its center. Suggested sizes are 400, 800 or 4000 metres.
-  %pre
-    %code= raw api_example_address_url_html("js", api_key)
-  - if current_user
-    = link_to "Example", api_example_address_url("js", api_key), class: "btn btn-outline-primary"
-
-%article
-  %h5
     Single Location by longitude/latitude
   %p
     Return applications near a given longitude/latitude. The area included is a circle with a radius of the given size (in metres)

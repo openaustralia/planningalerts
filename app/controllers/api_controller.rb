@@ -66,6 +66,10 @@ class ApiController < ApplicationController
     typed_params = TypedParams[PointParams].new.extract!(params)
     radius = typed_params.radius || typed_params.area_size || 2000.0
     address = typed_params.address
+    # Search by address in the API is deprecated. See
+    # https://github.com/openaustralia/planningalerts/issues/1356
+    # TODO: Remove this as soon as nobody is using it anymore or a
+    # date has passed that we've set
     if address
       location = GoogleGeocodeService.call(address).top
       if location.nil?

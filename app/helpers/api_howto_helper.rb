@@ -17,21 +17,6 @@ module ApiHowtoHelper
     params(
       format: String,
       key: T.nilable(String),
-      address: String,
-      radius: T.any(Integer, String)
-    ).returns(String)
-  end
-  def api_example_address_url(
-    format, key, address = Rails.application.config.planningalerts_api_example_address,
-    radius = Rails.application.config.planningalerts_api_example_size
-  )
-    applications_url(host: api_host, format: format, address: address, radius: radius, key: key)
-  end
-
-  sig do
-    params(
-      format: String,
-      key: T.nilable(String),
       lat: T.any(Float, String),
       lng: T.any(Float, String),
       radius: T.any(Integer, String)
@@ -108,16 +93,6 @@ module ApiHowtoHelper
       host: api_host, format: format, suburb: suburb, state: state, postcode: postcode,
       key: key
     )
-  end
-
-  sig { params(format: String, key: T.nilable(String)).returns(String) }
-  def api_example_address_url_html(format, key)
-    # Doing this hackery with 11's and 22's so that we don't escape the square brackets
-    t = api_example_address_url(format, key || "33", "11", "22")
-    t = t.sub("11", "[address]")
-    t = t.sub("22", "[distance_in_metres]")
-    t = t.sub("33", "[key]") if key.nil?
-    htmlify(t)
   end
 
   sig { params(format: String, key: T.nilable(String)).returns(String) }
