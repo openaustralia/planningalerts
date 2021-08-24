@@ -206,7 +206,7 @@ class ApiController < ApplicationController
   sig { void }
   def require_api_key
     typed_params = TypedParams[RequireApiKeyParams].new.extract!(params)
-    if typed_params.key && User.where(api_key: typed_params.key, api_disabled: false).exists?
+    if typed_params.key && ApiKey.where(value: typed_params.key, disabled: false).exists?
       # Everything is fine
       return
     end
@@ -236,7 +236,7 @@ class ApiController < ApplicationController
   sig { void }
   def authenticate_bulk_api
     typed_params = TypedParams[AuthenticateBulkApiParams].new.extract!(params)
-    return if User.where(api_key: typed_params.key, bulk_api: true).exists?
+    return if ApiKey.where(value: typed_params.key, bulk: true).exists?
 
     render_error("no bulk api access", :unauthorized)
   end

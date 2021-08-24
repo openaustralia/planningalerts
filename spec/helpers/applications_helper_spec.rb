@@ -175,7 +175,11 @@ describe ApplicationsHelper do
       subject { helper.authority_applications_json_url_for_current_user(authority) }
 
       context "when there is a current user" do
-        let(:user) { build(:user, api_key: "ABCDE12345") }
+        let(:user) do
+          user = create(:user)
+          user.api_key_object.update(value: "ABCDE12345")
+          user
+        end
         before { expect(helper).to receive(:current_user).and_return(user) }
 
         it { is_expected.to eq "http://test.host/authorities/marrickville/applications.js?key=ABCDE12345" }

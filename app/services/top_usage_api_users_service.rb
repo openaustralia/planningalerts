@@ -31,8 +31,8 @@ class TopUsageAPIUsersService < ApplicationService
   def call(date_from:, date_to:, number:)
     r = []
     top_total_usage_by_api_key_in_date_range(date_from, date_to, number).each do |h|
-      user = User.find_by(api_key: h.api_key)
-      r << ApiUserRequests.new(requests: h.requests, user: user) if user
+      key = ApiKey.find_by(value: h.api_key)
+      r << ApiUserRequests.new(requests: h.requests, user: key.user) if key
     end
     r
   end

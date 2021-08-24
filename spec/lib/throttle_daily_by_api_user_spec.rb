@@ -24,7 +24,11 @@ describe ThrottleDailyByApiUser do
     end
 
     context "user with a special allowance" do
-      let(:user) { create(:user, api_daily_limit: 2000) }
+      let(:user) do
+        user = create(:user)
+        user.api_key_object.update(daily_limit: 2000)
+        user
+      end
       it "should have a higher rate than normal" do
         expect(result).to eq 2000
       end

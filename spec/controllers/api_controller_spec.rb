@@ -23,7 +23,8 @@ describe ApiController do
 
     context "user has API access disabled" do
       subject do
-        user = FactoryBot.create(:user, api_disabled: true)
+        user = FactoryBot.create(:user)
+        user.api_key_object.update(disabled: true)
         get method, params: params.merge(key: user.api_key)
       end
       include_examples "not authorised"
@@ -35,7 +36,7 @@ describe ApiController do
   describe "#all" do
     describe "rss" do
       it "should not support rss" do
-        user.update(bulk_api: true)
+        user.api_key_object.update(bulk: true)
         expect { get :all, params: { format: "rss", key: user.api_key } }.to raise_error ActionController::UnknownFormat
       end
     end
@@ -55,7 +56,7 @@ describe ApiController do
       end
 
       it "should find recent applications if api key is given" do
-        user.update(bulk_api: true)
+        user.api_key_object.update(bulk: true)
         authority = create(:authority, full_name: "Acme Local Planning Authority")
         result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
         allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
@@ -489,7 +490,11 @@ describe ApiController do
     end
 
     context "valid authentication" do
-      let(:user) { FactoryBot.create(:user, bulk_api: true) }
+      let(:user) do
+        user = FactoryBot.create(:user)
+        user.api_key_object.update(bulk: true)
+        user
+      end
       before(:each) do
         5.times do
           create(:geocoded_application, date_scraped: Time.utc(2015, 5, 5, 12, 0, 0))

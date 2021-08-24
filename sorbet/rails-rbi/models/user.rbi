@@ -252,6 +252,14 @@ module User::GeneratedAttributeMethods
   def updated_at?; end
 end
 
+module User::GeneratedAssociationMethods
+  sig { returns(T.nilable(::ApiKey)) }
+  def api_key_object; end
+
+  sig { params(value: T.nilable(::ApiKey)).void }
+  def api_key_object=(value); end
+end
+
 module User::CustomFinderMethods
   sig { params(limit: Integer).returns(T::Array[User]) }
   def first_n(limit); end
@@ -271,6 +279,7 @@ end
 
 class User < ApplicationRecord
   include User::GeneratedAttributeMethods
+  include User::GeneratedAssociationMethods
   extend User::CustomFinderMethods
   extend User::QueryMethodsReturningRelation
   RelationType = T.type_alias { T.any(User::ActiveRecord_Relation, User::ActiveRecord_Associations_CollectionProxy, User::ActiveRecord_AssociationRelation) }
