@@ -35,19 +35,19 @@ module User::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def api_daily_limit?; end
 
-  sig { returns(T.nilable(T::Boolean)) }
+  sig { returns(T::Boolean) }
   def api_disabled; end
 
-  sig { params(value: T.nilable(T::Boolean)).void }
+  sig { params(value: T::Boolean).void }
   def api_disabled=(value); end
 
   sig { returns(T::Boolean) }
   def api_disabled?; end
 
-  sig { returns(T.nilable(String)) }
+  sig { returns(String) }
   def api_key; end
 
-  sig { params(value: T.nilable(T.any(String, Symbol))).void }
+  sig { params(value: T.any(String, Symbol)).void }
   def api_key=(value); end
 
   sig { returns(T::Boolean) }

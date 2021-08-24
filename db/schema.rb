@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_11_014304) do
+ActiveRecord::Schema.define(version: 2021_08_24_064306) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -257,7 +257,7 @@ ActiveRecord::Schema.define(version: 2021_08_11_014304) do
     t.datetime "updated_at"
     t.datetime "reset_password_sent_at"
     t.boolean "admin", default: false, null: false
-    t.string "api_key"
+    t.string "api_key", null: false
     t.string "name"
     t.string "organisation"
     t.boolean "bulk_api", default: false, null: false
@@ -265,7 +265,7 @@ ActiveRecord::Schema.define(version: 2021_08_11_014304) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.boolean "api_disabled", default: false
+    t.boolean "api_disabled", default: false, null: false
     t.boolean "api_commercial", default: false, null: false, comment: "api key is being used by a commercial customer"
     t.integer "api_daily_limit", comment: "override default daily API request limit"
     t.index ["api_key"], name: "index_users_on_api_key"
