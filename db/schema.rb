@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_24_064306) do
+ActiveRecord::Schema.define(version: 2021_08_24_173303) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -44,6 +44,19 @@ ActiveRecord::Schema.define(version: 2021_08_24_064306) do
     t.boolean "last_delivered_successfully"
     t.string "unsubscribed_by"
     t.index ["email"], name: "index_alerts_on_email"
+  end
+
+  create_table "api_keys", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "value", null: false
+    t.boolean "bulk", default: false, null: false
+    t.boolean "disabled", default: false, null: false
+    t.boolean "commercial", default: false, null: false, comment: "api key is being used by a commercial customer"
+    t.integer "daily_limit", comment: "override default daily API request limit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_api_keys_on_user_id"
+    t.index ["value"], name: "index_api_keys_on_value"
   end
 
   create_table "application_redirects", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
@@ -274,6 +287,7 @@ ActiveRecord::Schema.define(version: 2021_08_24_064306) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "api_keys", "users"
   add_foreign_key "application_redirects", "applications", column: "redirect_application_id"
   add_foreign_key "application_versions", "application_versions", column: "previous_version_id"
   add_foreign_key "application_versions", "applications"
