@@ -72,14 +72,6 @@ module CouncillorContributionsHelper
   include Devise::Controllers::Helpers
 end
 
-module DonationsHelper
-  include Kernel
-  include ActionView::Helpers
-  include ApplicationHelper
-  include ERB::Util
-  include Devise::Controllers::Helpers
-end
-
 module RepliesHelper
   include Kernel
   include ActionView::Helpers
@@ -113,6 +105,6 @@ module DeviseHelper
 end
 
 module ActionController::Helpers
-  sig { returns(T.all(Admin::AuthoritiesHelper, AlertMailerHelper, ApiHowtoHelper, ApplicationHelper, ApplicationsHelper, AtdisHelper, AuthoritiesHelper, CommentsHelper, CouncillorContributionsHelper, DonationsHelper, RepliesHelper, SignupHelper, StaticHelper, DeviseHelper)) }
+  sig { returns(T.all(Admin::AuthoritiesHelper, AlertMailerHelper, ApiHowtoHelper, ApplicationHelper, ApplicationsHelper, AtdisHelper, AuthoritiesHelper, CommentsHelper, CouncillorContributionsHelper, RepliesHelper, SignupHelper, StaticHelper, DeviseHelper)) }
   def helpers; end
 end

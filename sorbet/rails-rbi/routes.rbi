@@ -21,202 +21,6 @@ module GeneratedUrlHelpers
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def admin_root_url(*args, **kwargs); end
 
-  # Sigs for route /admin/comments/:id/load_replies(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def load_replies_admin_comment_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def load_replies_admin_comment_url(*args, **kwargs); end
-
-  # Sigs for route /admin/comments/:id/confirm(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def confirm_admin_comment_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def confirm_admin_comment_url(*args, **kwargs); end
-
-  # Sigs for route /admin/comments/batch_action(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_comments_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_comments_url(*args, **kwargs); end
-
-  # Sigs for route /admin/comments(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_comments_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_comments_url(*args, **kwargs); end
-
-  # Sigs for route /admin/comments/:id/edit(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_admin_comment_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_admin_comment_url(*args, **kwargs); end
-
-  # Sigs for route /admin/comments/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_comment_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_comment_url(*args, **kwargs); end
-
-  # Sigs for route /admin/background_jobs(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_background_jobs_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_background_jobs_url(*args, **kwargs); end
-
-  # Sigs for route /admin/authorities/:id/import(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def import_admin_authority_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def import_admin_authority_url(*args, **kwargs); end
-
-  # Sigs for route /admin/authorities/:id/load_councillors(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def load_councillors_admin_authority_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def load_councillors_admin_authority_url(*args, **kwargs); end
-
-  # Sigs for route /admin/authorities/batch_action(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_authorities_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_authorities_url(*args, **kwargs); end
-
-  # Sigs for route /admin/authorities(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_authorities_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_authorities_url(*args, **kwargs); end
-
-  # Sigs for route /admin/authorities/new(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def new_admin_authority_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def new_admin_authority_url(*args, **kwargs); end
-
-  # Sigs for route /admin/authorities/:id/edit(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_admin_authority_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_admin_authority_url(*args, **kwargs); end
-
-  # Sigs for route /admin/authorities/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_authority_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_authority_url(*args, **kwargs); end
-
-  # Sigs for route /admin/donations/batch_action(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_donations_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_donations_url(*args, **kwargs); end
-
-  # Sigs for route /admin/donations(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_donations_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_donations_url(*args, **kwargs); end
-
-  # Sigs for route /admin/donations/new(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def new_admin_donation_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def new_admin_donation_url(*args, **kwargs); end
-
-  # Sigs for route /admin/donations/:id/edit(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_admin_donation_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_admin_donation_url(*args, **kwargs); end
-
-  # Sigs for route /admin/donations/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_donation_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_donation_url(*args, **kwargs); end
-
-  # Sigs for route /admin/reports/batch_action(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_reports_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_reports_url(*args, **kwargs); end
-
-  # Sigs for route /admin/reports(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_reports_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_reports_url(*args, **kwargs); end
-
-  # Sigs for route /admin/reports/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_report_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_report_url(*args, **kwargs); end
-
-  # Sigs for route /admin/dashboard(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_dashboard_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_dashboard_url(*args, **kwargs); end
-
-  # Sigs for route /admin/councillor_contributions/:id/toggle_reviewed(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def toggle_reviewed_admin_councillor_contribution_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def toggle_reviewed_admin_councillor_contribution_url(*args, **kwargs); end
-
-  # Sigs for route /admin/councillor_contributions/:id/toggle_accepted(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def toggle_accepted_admin_councillor_contribution_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def toggle_accepted_admin_councillor_contribution_url(*args, **kwargs); end
-
-  # Sigs for route /admin/councillor_contributions/batch_action(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_councillor_contributions_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_councillor_contributions_url(*args, **kwargs); end
-
-  # Sigs for route /admin/councillor_contributions(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_councillor_contributions_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_councillor_contributions_url(*args, **kwargs); end
-
-  # Sigs for route /admin/councillor_contributions/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_councillor_contribution_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_councillor_contribution_url(*args, **kwargs); end
-
   # Sigs for route /admin/api_usage(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def admin_api_usage_path(*args, **kwargs); end
@@ -224,26 +28,12 @@ module GeneratedUrlHelpers
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def admin_api_usage_url(*args, **kwargs); end
 
-  # Sigs for route /admin/suggested_councillors/batch_action(.:format)
+  # Sigs for route /admin/dashboard(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_suggested_councillors_path(*args, **kwargs); end
+  def admin_dashboard_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_suggested_councillors_url(*args, **kwargs); end
-
-  # Sigs for route /admin/suggested_councillors/:id/edit(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_admin_suggested_councillor_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_admin_suggested_councillor_url(*args, **kwargs); end
-
-  # Sigs for route /admin/suggested_councillors/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_suggested_councillor_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_suggested_councillor_url(*args, **kwargs); end
+  def admin_dashboard_url(*args, **kwargs); end
 
   # Sigs for route /admin/councillors/batch_action(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
@@ -280,26 +70,26 @@ module GeneratedUrlHelpers
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def admin_councillor_url(*args, **kwargs); end
 
-  # Sigs for route /admin/applications/batch_action(.:format)
+  # Sigs for route /admin/suggested_councillors/batch_action(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_applications_path(*args, **kwargs); end
+  def batch_action_admin_suggested_councillors_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_applications_url(*args, **kwargs); end
+  def batch_action_admin_suggested_councillors_url(*args, **kwargs); end
 
-  # Sigs for route /admin/applications(.:format)
+  # Sigs for route /admin/suggested_councillors/:id/edit(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_applications_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_applications_url(*args, **kwargs); end
-
-  # Sigs for route /admin/applications/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_application_path(*args, **kwargs); end
+  def edit_admin_suggested_councillor_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_application_url(*args, **kwargs); end
+  def edit_admin_suggested_councillor_url(*args, **kwargs); end
+
+  # Sigs for route /admin/suggested_councillors/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_suggested_councillor_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_suggested_councillor_url(*args, **kwargs); end
 
   # Sigs for route /admin/users/batch_action(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
@@ -371,6 +161,90 @@ module GeneratedUrlHelpers
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def admin_reply_url(*args, **kwargs); end
 
+  # Sigs for route /admin/councillor_contributions/:id/toggle_reviewed(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def toggle_reviewed_admin_councillor_contribution_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def toggle_reviewed_admin_councillor_contribution_url(*args, **kwargs); end
+
+  # Sigs for route /admin/councillor_contributions/:id/toggle_accepted(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def toggle_accepted_admin_councillor_contribution_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def toggle_accepted_admin_councillor_contribution_url(*args, **kwargs); end
+
+  # Sigs for route /admin/councillor_contributions/batch_action(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_admin_councillor_contributions_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_admin_councillor_contributions_url(*args, **kwargs); end
+
+  # Sigs for route /admin/councillor_contributions(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_councillor_contributions_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_councillor_contributions_url(*args, **kwargs); end
+
+  # Sigs for route /admin/councillor_contributions/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_councillor_contribution_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_councillor_contribution_url(*args, **kwargs); end
+
+  # Sigs for route /admin/authorities/:id/import(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def import_admin_authority_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def import_admin_authority_url(*args, **kwargs); end
+
+  # Sigs for route /admin/authorities/:id/load_councillors(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def load_councillors_admin_authority_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def load_councillors_admin_authority_url(*args, **kwargs); end
+
+  # Sigs for route /admin/authorities/batch_action(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_admin_authorities_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_admin_authorities_url(*args, **kwargs); end
+
+  # Sigs for route /admin/authorities(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_authorities_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_authorities_url(*args, **kwargs); end
+
+  # Sigs for route /admin/authorities/new(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def new_admin_authority_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def new_admin_authority_url(*args, **kwargs); end
+
+  # Sigs for route /admin/authorities/:id/edit(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_admin_authority_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_admin_authority_url(*args, **kwargs); end
+
+  # Sigs for route /admin/authorities/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_authority_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_authority_url(*args, **kwargs); end
+
   # Sigs for route /admin/alerts/:id/unsubscribe(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def unsubscribe_admin_alert_path(*args, **kwargs); end
@@ -405,6 +279,104 @@ module GeneratedUrlHelpers
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def admin_alert_url(*args, **kwargs); end
+
+  # Sigs for route /admin/applications/batch_action(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_admin_applications_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_admin_applications_url(*args, **kwargs); end
+
+  # Sigs for route /admin/applications(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_applications_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_applications_url(*args, **kwargs); end
+
+  # Sigs for route /admin/applications/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_application_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_application_url(*args, **kwargs); end
+
+  # Sigs for route /admin/comments/:id/load_replies(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def load_replies_admin_comment_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def load_replies_admin_comment_url(*args, **kwargs); end
+
+  # Sigs for route /admin/comments/:id/resend(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def resend_admin_comment_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def resend_admin_comment_url(*args, **kwargs); end
+
+  # Sigs for route /admin/comments/:id/confirm(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def confirm_admin_comment_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def confirm_admin_comment_url(*args, **kwargs); end
+
+  # Sigs for route /admin/comments/batch_action(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_admin_comments_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_admin_comments_url(*args, **kwargs); end
+
+  # Sigs for route /admin/comments(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_comments_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_comments_url(*args, **kwargs); end
+
+  # Sigs for route /admin/comments/:id/edit(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_admin_comment_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_admin_comment_url(*args, **kwargs); end
+
+  # Sigs for route /admin/comments/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_comment_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_comment_url(*args, **kwargs); end
+
+  # Sigs for route /admin/background_jobs(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_background_jobs_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_background_jobs_url(*args, **kwargs); end
+
+  # Sigs for route /admin/reports/batch_action(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_admin_reports_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_admin_reports_url(*args, **kwargs); end
+
+  # Sigs for route /admin/reports(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_reports_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_reports_url(*args, **kwargs); end
+
+  # Sigs for route /admin/reports/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_report_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_report_url(*args, **kwargs); end
 
   # Sigs for route /admin/admin_comments(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
@@ -840,76 +812,6 @@ module GeneratedUrlHelpers
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def address_applications_url(*args, **kwargs); end
 
-  # Sigs for route /vanity(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def vanity_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def vanity_url(*args, **kwargs); end
-
-  # Sigs for route /vanity/complete(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def vanity_complete_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def vanity_complete_url(*args, **kwargs); end
-
-  # Sigs for route /vanity/chooses(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def vanity_chooses_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def vanity_chooses_url(*args, **kwargs); end
-
-  # Sigs for route /vanity/reset(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def vanity_reset_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def vanity_reset_url(*args, **kwargs); end
-
-  # Sigs for route /vanity/enable(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def vanity_enable_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def vanity_enable_url(*args, **kwargs); end
-
-  # Sigs for route /vanity/disable(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def vanity_disable_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def vanity_disable_url(*args, **kwargs); end
-
-  # Sigs for route /vanity/add_participant(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def vanity_add_participant_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def vanity_add_participant_url(*args, **kwargs); end
-
-  # Sigs for route /vanity/image(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def vanity_image_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def vanity_image_url(*args, **kwargs); end
-
-  # Sigs for route /donations(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def donations_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def donations_url(*args, **kwargs); end
-
-  # Sigs for route /donations/new(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def new_donation_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def new_donation_url(*args, **kwargs); end
-
   # Sigs for route /donations/new(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def donations_new_path(*args, **kwargs); end
@@ -924,6 +826,13 @@ module GeneratedUrlHelpers
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def donations_create_url(*args, **kwargs); end
 
+  # Sigs for route /donations(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def donations_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def donations_url(*args, **kwargs); end
+
   # Sigs for route /donate(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def donate_path(*args, **kwargs); end
@@ -937,6 +846,13 @@ module GeneratedUrlHelpers
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def root_url(*args, **kwargs); end
+
+  # Sigs for route /cuttlefish/event(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def cuttlefish_event_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def cuttlefish_event_url(*args, **kwargs); end
 
   # Sigs for route /theme/toggle(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }

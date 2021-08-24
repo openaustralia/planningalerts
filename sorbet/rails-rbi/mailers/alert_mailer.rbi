@@ -4,14 +4,14 @@
 class AlertMailer
   sig do
     params(
-      alert: T.untyped,
-      applications: T.untyped,
-      comments: T.untyped,
-      replies: T.untyped
+      alert: Alert,
+      applications: T::Array[Application],
+      comments: T::Array[Comment],
+      replies: T::Array[Reply]
     ).returns(ActionMailer::MessageDelivery)
   end
   def self.alert(alert, applications, comments = [], replies = []); end
 
-  sig { params(alert: T.untyped).returns(ActionMailer::MessageDelivery) }
+  sig { params(alert: Alert).returns(ActionMailer::MessageDelivery) }
   def self.new_signup_attempt_notice(alert); end
 end

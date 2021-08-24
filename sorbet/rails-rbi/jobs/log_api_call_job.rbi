@@ -7,7 +7,7 @@ class LogApiCallJob
       api_key: String,
       ip_address: String,
       query: String,
-      params: T::Hash[String, T.nilable(String)],
+      params: T::Hash[String, T.nilable(T.any(Integer, String))],
       user_agent: T.nilable(String),
       time_as_float: Float
     ).void
@@ -19,7 +19,7 @@ class LogApiCallJob
       api_key: String,
       ip_address: String,
       query: String,
-      params: T::Hash[String, T.nilable(String)],
+      params: T::Hash[String, T.nilable(T.any(Integer, String))],
       user_agent: T.nilable(String),
       time_as_float: Float
     ).void
