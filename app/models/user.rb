@@ -13,6 +13,8 @@ class User < ApplicationRecord
   before_create :set_dummy_value_on_old_api_key
   # TODO: Rename to :api_key once api key field on users have been removed
   has_one :api_key_object, class_name: "ApiKey", dependent: :destroy
+  # Doing this for the benefit of activeadmin
+  accepts_nested_attributes_for :api_key_object
 
   sig { params(notification: T.untyped, args: T.untyped).void }
   def send_devise_notification(notification, *args)

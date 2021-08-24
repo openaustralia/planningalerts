@@ -8,33 +8,29 @@ ActiveAdmin.register User do
     column :email
     column :name
     column :organisation
-    column :api_key
-    column :api_disabled
-    column :bulk_api
-    column :api_commercial
-    column :api_daily_limit
     column :admin
     actions
   end
 
-  form do |_f|
+  form do |f|
     inputs "Details" do
       input :email
       input :name
       input :organisation
+      input :admin
     end
     inputs "API" do
-      input :api_disabled
-      input :api_key
-      input :bulk_api
-      input :api_commercial, hint: "Are they a paying commercial customer?"
-      input :api_daily_limit, hint: "Override default daily number of allowed API requests"
-    end
-    inputs "Administration" do
-      input :admin
+      f.has_many :api_key_object, new_record: false, heading: false do |a|
+        a.input :disabled
+        a.input :value
+        a.input :bulk
+        a.input :commercial, hint: "Are they a paying commercial customer?"
+        a.input :daily_limit, hint: "Override default daily number of allowed API requests"
+      end
     end
     actions
   end
 
-  permit_params :email, :name, :organisation, :api_key, :bulk_api, :api_commercial, :api_daily_limit, :admin, :api_disabled
+  permit_params :email, :name, :organisation, :admin,
+                api_key_object_attributes: %i[value bulk commercial daily_limit disabled]
 end
