@@ -58,7 +58,7 @@ class BuildAlertService < ApplicationService
   sig { void }
   def send_notice_to_existing_active_alert_owner
     AlertMailer.new_signup_attempt_notice(
-      preexisting_alert
+      T.must(preexisting_alert)
     ).deliver_later
   end
 
