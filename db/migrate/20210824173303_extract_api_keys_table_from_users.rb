@@ -1,6 +1,6 @@
 class ExtractApiKeysTableFromUsers < ActiveRecord::Migration[5.2]
   def change
-    create_table :api_keys do |t|
+    create_table :api_keys, id: :integer do |t|
       t.references :user,    null: false, foreign_key: true, type: :integer
       t.string  :value,       null: false
       t.boolean :bulk,       null: false, default: false

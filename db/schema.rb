@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2021_08_24_173303) do
     t.index ["email"], name: "index_alerts_on_email"
   end
 
-  create_table "api_keys", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "api_keys", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "value", null: false
     t.boolean "bulk", default: false, null: false
