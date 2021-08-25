@@ -11,7 +11,10 @@ module ApiHowtoHelper
     url.gsub(/(\?|&|&amp;)([a-z_]+)=/, '\1<strong>\2</strong>=').gsub("&", "&amp;")
   end
 
-  delegate :api_key, to: :current_user, allow_nil: true
+  sig { returns(T.nilable(String)) }
+  def api_key
+    current_user&.api_key&.value
+  end
 
   sig do
     params(
