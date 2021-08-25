@@ -17,51 +17,6 @@ module User::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def admin?; end
 
-  sig { returns(T::Boolean) }
-  def api_commercial; end
-
-  sig { params(value: T::Boolean).void }
-  def api_commercial=(value); end
-
-  sig { returns(T::Boolean) }
-  def api_commercial?; end
-
-  sig { returns(T.nilable(Integer)) }
-  def api_daily_limit; end
-
-  sig { params(value: T.nilable(T.any(Numeric, ActiveSupport::Duration))).void }
-  def api_daily_limit=(value); end
-
-  sig { returns(T::Boolean) }
-  def api_daily_limit?; end
-
-  sig { returns(T::Boolean) }
-  def api_disabled; end
-
-  sig { params(value: T::Boolean).void }
-  def api_disabled=(value); end
-
-  sig { returns(T::Boolean) }
-  def api_disabled?; end
-
-  sig { returns(String) }
-  def api_key; end
-
-  sig { params(value: T.any(String, Symbol)).void }
-  def api_key=(value); end
-
-  sig { returns(T::Boolean) }
-  def api_key?; end
-
-  sig { returns(T::Boolean) }
-  def bulk_api; end
-
-  sig { params(value: T::Boolean).void }
-  def bulk_api=(value); end
-
-  sig { returns(T::Boolean) }
-  def bulk_api?; end
-
   sig { returns(T.nilable(ActiveSupport::TimeWithZone)) }
   def confirmation_sent_at; end
 
