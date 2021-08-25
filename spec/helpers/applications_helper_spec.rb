@@ -195,7 +195,7 @@ describe ApplicationsHelper do
         # Required for call to current_user
         include Devise::Test::ControllerHelpers
 
-        it { expect { subject }.to raise_error "undefined method `api_key' for nil:NilClass" }
+        it { expect { subject }.to raise_error "undefined method `api_key_object' for nil:NilClass" }
       end
     end
 

@@ -78,7 +78,7 @@ module ApplicationsHelper
 
   sig { params(authority: Authority).returns(String) }
   def authority_applications_json_url_for_current_user(authority)
-    link_params = { format: :js, key: current_user.api_key }
+    link_params = { format: :js, key: current_user.api_key_object.value }
     link_params[:host] = api_host if Rails.env.production?
 
     authority_applications_url(authority.short_name_encoded, link_params)

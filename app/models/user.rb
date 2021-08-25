@@ -18,34 +18,4 @@ class User < ApplicationRecord
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later
   end
-
-  # TODO: Remove this when we can
-  sig { returns(T.nilable(String)) }
-  def api_key
-    api_key_object&.value
-  end
-
-  # TODO: Remove this when we can
-  sig { returns(T.nilable(T::Boolean)) }
-  def bulk_api
-    api_key_object&.bulk
-  end
-
-  # TODO: Remove this when we can
-  sig { returns(T.nilable(T::Boolean)) }
-  def api_disabled
-    api_key_object&.disabled
-  end
-
-  # TODO: Remove this when we can
-  sig { returns(T.nilable(T::Boolean)) }
-  def api_commercial
-    api_key_object&.commercial
-  end
-
-  # TODO: Remove this when we can
-  sig { returns(T.nilable(Integer)) }
-  def api_daily_limit
-    api_key_object&.daily_limit
-  end
 end
