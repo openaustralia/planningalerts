@@ -157,6 +157,10 @@ FactoryBot.define do
     end
   end
 
+  factory :api_key do
+    user
+  end
+
   factory :alert do
     email { "mary@example.org" }
     sequence(:address) { |s| "#{s} Illawarra Road Marrickville 2204" }

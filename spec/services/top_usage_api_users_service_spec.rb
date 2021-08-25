@@ -3,9 +3,9 @@
 require "spec_helper"
 
 describe TopUsageAPIUsersService do
-  let(:user1) { create(:user) }
-  let(:user2) { create(:user) }
-  let(:user3) { create(:user) }
+  let(:key1) { create(:api_key) }
+  let(:key2) { create(:api_key) }
+  let(:key3) { create(:api_key) }
 
   let(:redis) { Redis.new }
 
@@ -15,24 +15,24 @@ describe TopUsageAPIUsersService do
     redis.del(keys) unless keys.empty?
 
     # Write some test data to redis
-    redis.set("throttle:#{user1.api_key.value}:2021-07-01", 123)
-    redis.set("throttle:#{user2.api_key.value}:2021-07-01", 54)
-    redis.set("throttle:#{user3.api_key.value}:2021-07-01", 2)
+    redis.set("throttle:#{key1.value}:2021-07-01", 123)
+    redis.set("throttle:#{key2.value}:2021-07-01", 54)
+    redis.set("throttle:#{key3.value}:2021-07-01", 2)
 
-    redis.set("throttle:#{user1.api_key.value}:2021-07-02", 34)
-    redis.set("throttle:#{user3.api_key.value}:2021-07-02", 212)
+    redis.set("throttle:#{key1.value}:2021-07-02", 34)
+    redis.set("throttle:#{key3.value}:2021-07-02", 212)
 
-    redis.set("throttle:#{user1.api_key.value}:2021-07-03", 12)
-    redis.set("throttle:#{user2.api_key.value}:2021-07-03", 5)
-    redis.set("throttle:#{user3.api_key.value}:2021-07-03", 42)
+    redis.set("throttle:#{key1.value}:2021-07-03", 12)
+    redis.set("throttle:#{key2.value}:2021-07-03", 5)
+    redis.set("throttle:#{key3.value}:2021-07-03", 42)
   end
 
   describe ".call" do
     it "should return the top 2 total number of requests in descending sort order" do
       result = TopUsageAPIUsersService.call(redis: redis, date_from: Date.new(2021, 7, 1), date_to: Date.new(2021, 7, 2), number: 2)
       expect(result.map(&:serialize)).to eq [
-        { "user" => user3, "requests" => 214 },
-        { "user" => user1, "requests" => 157 }
+        { "user" => key3.user, "requests" => 214 },
+        { "user" => key1.user, "requests" => 157 }
       ]
     end
   end
@@ -46,11 +46,11 @@ describe TopUsageAPIUsersService do
       # Doing direct comparison of T::Struct appears to be fraught
       # See https://github.com/sorbet/sorbet/issues/1540
       expect(result.map(&:serialize)).to contain_exactly(
-        { "api_key" => user1.api_key.value, "requests" => 123 },
-        { "api_key" => user2.api_key.value, "requests" => 54 },
-        { "api_key" => user3.api_key.value, "requests" => 2 },
-        { "api_key" => user1.api_key.value, "requests" => 34 },
-        { "api_key" => user3.api_key.value, "requests" => 212 }
+        { "api_key" => key1.value, "requests" => 123 },
+        { "api_key" => key2.value, "requests" => 54 },
+        { "api_key" => key3.value, "requests" => 2 },
+        { "api_key" => key1.value, "requests" => 34 },
+        { "api_key" => key3.value, "requests" => 212 }
       )
     end
   end
@@ -62,9 +62,9 @@ describe TopUsageAPIUsersService do
       date_to = date_from + 1
       result = s.total_usage_by_api_key_in_date_range(date_from, date_to)
       expect(result.map(&:serialize)).to contain_exactly(
-        { "api_key" => user1.api_key.value, "requests" => 157 },
-        { "api_key" => user2.api_key.value, "requests" => 54 },
-        { "api_key" => user3.api_key.value, "requests" => 214 }
+        { "api_key" => key1.value, "requests" => 157 },
+        { "api_key" => key2.value, "requests" => 54 },
+        { "api_key" => key3.value, "requests" => 214 }
       )
     end
   end
@@ -76,8 +76,8 @@ describe TopUsageAPIUsersService do
       date_to = date_from + 1
       result = s.top_total_usage_by_api_key_in_date_range(date_from, date_to, 2)
       expect(result.map(&:serialize)).to eq [
-        { "api_key" => user3.api_key.value, "requests" => 214 },
-        { "api_key" => user1.api_key.value, "requests" => 157 }
+        { "api_key" => key3.value, "requests" => 214 },
+        { "api_key" => key1.value, "requests" => 157 }
       ]
     end
   end

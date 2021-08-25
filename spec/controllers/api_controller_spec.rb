@@ -23,21 +23,20 @@ describe ApiController do
 
     context "user has API access disabled" do
       subject do
-        user = FactoryBot.create(:user)
-        user.api_key.update(disabled: true)
-        get method, params: params.merge(key: user.api_key.value)
+        key = FactoryBot.create(:api_key, disabled: true)
+        get method, params: params.merge(key: key.value)
       end
       include_examples "not authorised"
     end
   end
 
-  let(:user) { create(:user, email: "foo@bar.com", password: "foofoo") }
+  let(:key) { create(:api_key) }
 
   describe "#all" do
     describe "rss" do
       it "should not support rss" do
-        user.api_key.update(bulk: true)
-        expect { get :all, params: { format: "rss", key: user.api_key.value } }.to raise_error ActionController::UnknownFormat
+        key.update(bulk: true)
+        expect { get :all, params: { format: "rss", key: key.value } }.to raise_error ActionController::UnknownFormat
       end
     end
 
@@ -50,17 +49,17 @@ describe ApiController do
       it "should error if valid api key is given but no bulk api access" do
         result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1))
         allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
-        get :all, params: { key: user.api_key.value, format: "js" }
+        get :all, params: { key: key.value, format: "js" }
         expect(response.status).to eq(401)
         expect(response.body).to eq('{"error":"no bulk api access"}')
       end
 
       it "should find recent applications if api key is given" do
-        user.api_key.update(bulk: true)
+        key.update(bulk: true)
         authority = create(:authority, full_name: "Acme Local Planning Authority")
         result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
         allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
-        get :all, params: { key: user.api_key.value, format: "js" }
+        get :all, params: { key: key.value, format: "js" }
         expect(response.status).to eq(200)
         expect(JSON.parse(response.body)).to eq(
           "application_count" => 1,
@@ -107,7 +106,7 @@ describe ApiController do
       expect(scope2).to receive(:where).with(application_versions: { postcode: "2780" }).and_return(scope3)
       expect(scope3).to receive(:includes).and_return(scope4)
       expect(scope4).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
-      get :suburb_postcode, params: { key: user.api_key.value, format: "rss", postcode: "2780" }
+      get :suburb_postcode, params: { key: key.value, format: "rss", postcode: "2780" }
       expect(assigns[:applications]).to eq(result)
       expect(assigns[:description]).to eq("Recent applications in 2780")
     end
@@ -124,7 +123,7 @@ describe ApiController do
       allow(scope2).to receive(:where).and_return(scope3)
       allow(scope3).to receive(:includes).and_return(scope4)
       allow(scope4).to receive(:paginate).and_return(Application.where(id: result.id))
-      get :suburb_postcode, params: { key: user.api_key.value, format: "js", postcode: "2780", callback: "foobar" }, xhr: true
+      get :suburb_postcode, params: { key: key.value, format: "js", postcode: "2780", callback: "foobar" }, xhr: true
       expect(response.body[0..10]).to eq("/**/foobar(")
       expect(response.body[-2..]).to eq(");")
       expect(JSON.parse(response.body[11..-3])).to eq(
@@ -164,7 +163,7 @@ describe ApiController do
       allow(scope2).to receive(:where).and_return(scope3)
       allow(scope3).to receive(:includes).and_return(scope4)
       allow(scope4).to receive(:paginate).and_return(result)
-      get :suburb_postcode, params: { key: user.api_key.value, format: "js", postcode: "2780" }
+      get :suburb_postcode, params: { key: key.value, format: "js", postcode: "2780" }
       expect(JSON.parse(response.body)).to eq(
         [{
           "application" => {
@@ -202,7 +201,7 @@ describe ApiController do
       allow(scope2).to receive(:where).and_return(scope3)
       allow(scope3).to receive(:includes).and_return(scope4)
       allow(scope4).to receive(:paginate).and_return(result)
-      get :suburb_postcode, params: { key: user.api_key.value, format: "js", v: "2", postcode: "2780" }
+      get :suburb_postcode, params: { key: key.value, format: "js", v: "2", postcode: "2780" }
       expect(JSON.parse(response.body)).to eq(
         "application_count" => 1,
         "page_count" => 5,
@@ -261,14 +260,14 @@ describe ApiController do
         end
 
         it "should find recent applications near the address" do
-          get :point, params: { key: user.api_key.value, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000 }
+          get :point, params: { key: key.value, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000 }
           expect(assigns[:applications]).to eq(@result)
           # Should use the normalised form of the address in the description
           expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 24 Bruce Road, Glenbrook NSW 2773")
         end
 
         it "should find recent applications near the address using the old parameter name" do
-          get :point, params: { key: user.api_key.value, format: "rss", address: "24 Bruce Road Glenbrook", area_size: 4000 }
+          get :point, params: { key: key.value, format: "rss", address: "24 Bruce Road Glenbrook", area_size: 4000 }
           expect(assigns[:applications]).to eq(@result)
           expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 24 Bruce Road, Glenbrook NSW 2773")
         end
@@ -279,22 +278,22 @@ describe ApiController do
             expected_time = Time.at(Time.zone.now.to_f).utc
             expect(LogApiCallService).to receive(:call).with(
               time: expected_time,
-              api_key: user.api_key.value,
+              api_key: key.value,
               ip_address: "0.0.0.0",
-              query: "/applications.rss?address=24+Bruce+Road+Glenbrook&key=#{CGI.escape(user.api_key.value)}&radius=4000",
+              query: "/applications.rss?address=24+Bruce+Road+Glenbrook&key=#{CGI.escape(key.value)}&radius=4000",
               params: {
                 "controller" => "api",
                 "action" => "point",
                 "format" => "rss",
                 "address" => "24 Bruce Road Glenbrook",
-                "key" => user.api_key.value,
+                "key" => key.value,
                 "radius" => "4000",
                 "page" => nil
               },
               user_agent: "Rails Testing"
             )
             Sidekiq::Testing.inline! do
-              get :point, params: { key: user.api_key.value, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000 }
+              get :point, params: { key: key.value, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000 }
             end
           end
         end
@@ -307,7 +306,7 @@ describe ApiController do
           allow(scope1).to receive(:includes).and_return(scope2)
           allow(scope2).to receive(:paginate).and_return(result)
 
-          get :point, params: { key: user.api_key.value, address: "24 Bruce Road Glenbrook", format: "rss" }
+          get :point, params: { key: key.value, address: "24 Bruce Road Glenbrook", format: "rss" }
           expect(assigns[:applications]).to eq(result)
           expect(assigns[:description]).to eq("Recent applications within 2 kilometres of 24 Bruce Road, Glenbrook NSW 2773")
         end
@@ -323,7 +322,7 @@ describe ApiController do
           allow(Application).to receive_message_chain(:near, :paginate).and_return(@result)
         end
 
-        subject { get :point, params: { key: user.api_key.value, address: "24 Bruce Road Glenbrook", format: "rss" } }
+        subject { get :point, params: { key: key.value, address: "24 Bruce Road Glenbrook", format: "rss" } }
         it { expect(subject).to_not be_successful }
         it { expect(subject.body).to eq "could not geocode address" }
       end
@@ -341,13 +340,13 @@ describe ApiController do
       end
 
       it "should find recent applications near the point" do
-        get :point, params: { key: user.api_key.value, format: "rss", lat: 1.0, lng: 2.0, radius: 4000 }
+        get :point, params: { key: key.value, format: "rss", lat: 1.0, lng: 2.0, radius: 4000 }
         expect(assigns[:applications]).to eq(@result)
         expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 1.0,2.0")
       end
 
       it "should find recent applications near the point using the old parameter name" do
-        get :point, params: { key: user.api_key.value, format: "rss", lat: 1.0, lng: 2.0, area_size: 4000 }
+        get :point, params: { key: key.value, format: "rss", lat: 1.0, lng: 2.0, area_size: 4000 }
         expect(assigns[:applications]).to eq(@result)
         expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 1.0,2.0")
       end
@@ -376,7 +375,7 @@ describe ApiController do
       expect(scope4).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
 
       get :area, params: {
-        key: user.api_key.value,
+        key: key.value,
         format: "rss",
         bottom_left_lat: 1.0,
         bottom_left_lng: 2.0,
@@ -405,7 +404,7 @@ describe ApiController do
       expect(scope1).to receive(:includes).and_return(scope2)
       expect(scope2).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
 
-      get :authority, params: { key: user.api_key.value, format: "rss", authority_id: "blue_mountains" }
+      get :authority, params: { key: key.value, format: "rss", authority_id: "blue_mountains" }
       expect(assigns[:applications]).to eq(result)
       expect(assigns[:description]).to eq("Recent applications from Blue Mountains City Council, NSW")
     end
@@ -428,7 +427,7 @@ describe ApiController do
       expect(scope2).to receive(:where).with(application_versions: { suburb: "Katoomba" }).and_return(scope3)
       expect(scope3).to receive(:includes).and_return(scope4)
       expect(scope4).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
-      get :suburb_postcode, params: { key: user.api_key.value, format: "rss", suburb: "Katoomba" }
+      get :suburb_postcode, params: { key: key.value, format: "rss", suburb: "Katoomba" }
       expect(assigns[:applications]).to eq(result)
       expect(assigns[:description]).to eq("Recent applications in Katoomba")
     end
@@ -447,7 +446,7 @@ describe ApiController do
         expect(scope3).to receive(:where).with(application_versions: { state: "NSW" }).and_return(scope4)
         expect(scope4).to receive(:includes).and_return(scope5)
         expect(scope5).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
-        get :suburb_postcode, params: { key: user.api_key.value, format: "rss", suburb: "Katoomba", state: "NSW" }
+        get :suburb_postcode, params: { key: key.value, format: "rss", suburb: "Katoomba", state: "NSW" }
         expect(assigns[:applications]).to eq(result)
         expect(assigns[:description]).to eq("Recent applications in Katoomba, NSW")
       end
@@ -469,7 +468,7 @@ describe ApiController do
         expect(scope4).to receive(:where).with(application_versions: { postcode: "2780" }).and_return(scope5)
         expect(scope5).to receive(:includes).and_return(scope6)
         expect(scope6).to receive(:paginate).with(page: nil, per_page: 100).and_return(result)
-        get :suburb_postcode, params: { key: user.api_key.value, format: "rss", suburb: "Katoomba", state: "NSW", postcode: "2780" }
+        get :suburb_postcode, params: { key: key.value, format: "rss", suburb: "Katoomba", state: "NSW", postcode: "2780" }
         expect(assigns[:applications]).to eq(result)
         expect(assigns[:description]).to eq("Recent applications in Katoomba, NSW, 2780")
       end
@@ -483,31 +482,27 @@ describe ApiController do
     end
 
     context "valid api key is given but no bulk api access" do
-      subject { get :date_scraped, params: { key: FactoryBot.create(:user).api_key.value, format: "js", date_scraped: "2015-05-06" } }
+      subject { get :date_scraped, params: { key: FactoryBot.create(:api_key).value, format: "js", date_scraped: "2015-05-06" } }
 
       it { expect(subject.status).to eq 401 }
       it { expect(subject.body).to eq '{"error":"no bulk api access"}' }
     end
 
     context "valid authentication" do
-      let(:user) do
-        user = FactoryBot.create(:user)
-        user.api_key.update(bulk: true)
-        user
-      end
+      let(:key) { FactoryBot.create(:api_key, bulk: true) }
       before(:each) do
         5.times do
           create(:geocoded_application, date_scraped: Time.utc(2015, 5, 5, 12, 0, 0))
           create(:geocoded_application, date_scraped: Time.utc(2015, 5, 6, 12, 0, 0))
         end
       end
-      subject { get :date_scraped, params: { key: user.api_key.value, format: "js", date_scraped: "2015-05-06" } }
+      subject { get :date_scraped, params: { key: key.value, format: "js", date_scraped: "2015-05-06" } }
 
       it { expect(subject).to be_successful }
       it { expect(JSON.parse(subject.body).count).to eq 5 }
 
       context "invalid date" do
-        subject { get :date_scraped, params: { key: user.api_key.value, format: "js", date_scraped: "foobar" } }
+        subject { get :date_scraped, params: { key: key.value, format: "js", date_scraped: "foobar" } }
         it { expect(subject).to_not be_successful }
         it { expect(subject.body).to eq '{"error":"invalid date_scraped"}' }
       end
