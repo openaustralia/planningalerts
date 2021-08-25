@@ -181,7 +181,7 @@ class ApiController < ApplicationController
     valid_parameter_keys = %w[
       format action controller
       authority_id
-      page style
+      page
       postcode
       suburb state
       address lat lng radius area_size
@@ -259,7 +259,6 @@ class ApiController < ApplicationController
 
   class ApiRenderParams < T::Struct
     const :page, T.nilable(Integer)
-    const :style, T.nilable(String)
     const :v, T.nilable(String)
     const :callback, T.nilable(String)
   end
@@ -284,8 +283,7 @@ class ApiController < ApplicationController
       format.rss do
         render "index", format: :rss,
                         layout: false,
-                        content_type: Mime[:xml],
-                        variants: typed_params.style
+                        content_type: Mime[:xml]
       end
       format.js do
         # TODO: Document use of v parameter

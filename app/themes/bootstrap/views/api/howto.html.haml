@@ -114,13 +114,6 @@
     %code= raw api_example_postcode_url("js", api_key, 2780, count: 10)
 
 %article
-  %h5 style
-  %p
-    For georss, by setting &ldquo;style&rdquo; to &ldquo;html&rdquo; it will return an html formatted description in the georss feed rather than the default plain text. This is especially useful when a georss feed is embedded in a map as in some of the examples above.
-  %pre
-    %code= raw api_example_postcode_url("rss", api_key, 2780, style: "html")
-
-%article
   %h5 callback
   %p
     To return JSONP, set &ldquo;callback&rdquo; to the name of your javascript callback function.
