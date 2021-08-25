@@ -54,8 +54,8 @@ class LogApiCallService < ApplicationService
     return unless T.unsafe(LOGGING_ENABLED)
 
     # Lookup the api key if there is one
-    user = User.find_by(api_key: api_key) if api_key.present?
-    log_to_elasticsearch(T.must(user))
+    key = ApiKey.find_by(value: api_key) if api_key.present?
+    log_to_elasticsearch(key) if key
   end
 
   private
@@ -78,8 +78,8 @@ class LogApiCallService < ApplicationService
   sig { returns(Time) }
   attr_reader :time
 
-  sig { params(user: User).void }
-  def log_to_elasticsearch(user)
+  sig { params(key: ApiKey).void }
+  def log_to_elasticsearch(key)
     ElasticSearchClient&.index(
       index: elasticsearch_index(time),
       type: "api",
@@ -89,14 +89,16 @@ class LogApiCallService < ApplicationService
         params: params,
         user_agent: user_agent,
         query_time: time,
+        # Maintaining this structure for compatibility with old logs
+        # even though the api key data is now not stored with the user
         user: {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          organisation: user.organisation,
-          bulk_api: user.bulk_api,
-          api_disabled: user.api_disabled,
-          api_commercial: user.api_commercial
+          id: key.user.id,
+          email: key.user.email,
+          name: key.user.name,
+          organisation: key.user.organisation,
+          bulk_api: key.bulk,
+          api_disabled: key.disabled,
+          api_commercial: key.commercial
         }
       }
     )
