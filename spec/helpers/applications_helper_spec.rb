@@ -177,7 +177,7 @@ describe ApplicationsHelper do
       context "when there is a current user" do
         let(:user) do
           user = create(:user)
-          user.api_key_object.update(value: "ABCDE12345")
+          user.api_key.update(value: "ABCDE12345")
           user
         end
         before { expect(helper).to receive(:current_user).and_return(user) }
@@ -195,7 +195,7 @@ describe ApplicationsHelper do
         # Required for call to current_user
         include Devise::Test::ControllerHelpers
 
-        it { expect { subject }.to raise_error "undefined method `api_key_object' for nil:NilClass" }
+        it { expect { subject }.to raise_error "undefined method `api_key' for nil:NilClass" }
       end
     end
 

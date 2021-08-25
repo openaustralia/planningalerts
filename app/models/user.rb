@@ -8,11 +8,10 @@ class User < ApplicationRecord
   # :token_authenticatable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
          :trackable, :validatable, :confirmable
-  after_create :create_api_key_object
-  # TODO: Rename to :api_key once api key field on users have been removed
-  has_one :api_key_object, class_name: "ApiKey", dependent: :destroy
+  after_create :create_api_key
+  has_one :api_key, dependent: :destroy
   # Doing this for the benefit of activeadmin
-  accepts_nested_attributes_for :api_key_object
+  accepts_nested_attributes_for :api_key
 
   sig { params(notification: T.untyped, args: T.untyped).void }
   def send_devise_notification(notification, *args)

@@ -20,7 +20,7 @@ ActiveAdmin.register User do
       input :admin
     end
     inputs "API" do
-      f.has_many :api_key_object, new_record: false, heading: false do |a|
+      f.has_many :api_key, new_record: false, heading: false do |a|
         a.input :disabled
         a.input :value
         a.input :bulk
@@ -32,5 +32,5 @@ ActiveAdmin.register User do
   end
 
   permit_params :email, :name, :organisation, :admin,
-                api_key_object_attributes: %i[value bulk commercial daily_limit disabled]
+                api_key_attributes: %i[value bulk commercial daily_limit disabled]
 end

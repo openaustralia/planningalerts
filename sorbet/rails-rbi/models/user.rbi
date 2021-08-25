@@ -209,10 +209,10 @@ end
 
 module User::GeneratedAssociationMethods
   sig { returns(T.nilable(::ApiKey)) }
-  def api_key_object; end
+  def api_key; end
 
   sig { params(value: T.nilable(::ApiKey)).void }
-  def api_key_object=(value); end
+  def api_key=(value); end
 end
 
 module User::CustomFinderMethods

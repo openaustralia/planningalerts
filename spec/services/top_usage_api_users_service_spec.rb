@@ -15,16 +15,16 @@ describe TopUsageAPIUsersService do
     redis.del(keys) unless keys.empty?
 
     # Write some test data to redis
-    redis.set("throttle:#{user1.api_key_object.value}:2021-07-01", 123)
-    redis.set("throttle:#{user2.api_key_object.value}:2021-07-01", 54)
-    redis.set("throttle:#{user3.api_key_object.value}:2021-07-01", 2)
+    redis.set("throttle:#{user1.api_key.value}:2021-07-01", 123)
+    redis.set("throttle:#{user2.api_key.value}:2021-07-01", 54)
+    redis.set("throttle:#{user3.api_key.value}:2021-07-01", 2)
 
-    redis.set("throttle:#{user1.api_key_object.value}:2021-07-02", 34)
-    redis.set("throttle:#{user3.api_key_object.value}:2021-07-02", 212)
+    redis.set("throttle:#{user1.api_key.value}:2021-07-02", 34)
+    redis.set("throttle:#{user3.api_key.value}:2021-07-02", 212)
 
-    redis.set("throttle:#{user1.api_key_object.value}:2021-07-03", 12)
-    redis.set("throttle:#{user2.api_key_object.value}:2021-07-03", 5)
-    redis.set("throttle:#{user3.api_key_object.value}:2021-07-03", 42)
+    redis.set("throttle:#{user1.api_key.value}:2021-07-03", 12)
+    redis.set("throttle:#{user2.api_key.value}:2021-07-03", 5)
+    redis.set("throttle:#{user3.api_key.value}:2021-07-03", 42)
   end
 
   describe ".call" do
@@ -46,11 +46,11 @@ describe TopUsageAPIUsersService do
       # Doing direct comparison of T::Struct appears to be fraught
       # See https://github.com/sorbet/sorbet/issues/1540
       expect(result.map(&:serialize)).to contain_exactly(
-        { "api_key" => user1.api_key_object.value, "requests" => 123 },
-        { "api_key" => user2.api_key_object.value, "requests" => 54 },
-        { "api_key" => user3.api_key_object.value, "requests" => 2 },
-        { "api_key" => user1.api_key_object.value, "requests" => 34 },
-        { "api_key" => user3.api_key_object.value, "requests" => 212 }
+        { "api_key" => user1.api_key.value, "requests" => 123 },
+        { "api_key" => user2.api_key.value, "requests" => 54 },
+        { "api_key" => user3.api_key.value, "requests" => 2 },
+        { "api_key" => user1.api_key.value, "requests" => 34 },
+        { "api_key" => user3.api_key.value, "requests" => 212 }
       )
     end
   end
@@ -62,9 +62,9 @@ describe TopUsageAPIUsersService do
       date_to = date_from + 1
       result = s.total_usage_by_api_key_in_date_range(date_from, date_to)
       expect(result.map(&:serialize)).to contain_exactly(
-        { "api_key" => user1.api_key_object.value, "requests" => 157 },
-        { "api_key" => user2.api_key_object.value, "requests" => 54 },
-        { "api_key" => user3.api_key_object.value, "requests" => 214 }
+        { "api_key" => user1.api_key.value, "requests" => 157 },
+        { "api_key" => user2.api_key.value, "requests" => 54 },
+        { "api_key" => user3.api_key.value, "requests" => 214 }
       )
     end
   end
@@ -76,8 +76,8 @@ describe TopUsageAPIUsersService do
       date_to = date_from + 1
       result = s.top_total_usage_by_api_key_in_date_range(date_from, date_to, 2)
       expect(result.map(&:serialize)).to eq [
-        { "api_key" => user3.api_key_object.value, "requests" => 214 },
-        { "api_key" => user1.api_key_object.value, "requests" => 157 }
+        { "api_key" => user3.api_key.value, "requests" => 214 },
+        { "api_key" => user1.api_key.value, "requests" => 157 }
       ]
     end
   end

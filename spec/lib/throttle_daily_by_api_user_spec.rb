@@ -16,7 +16,7 @@ describe ThrottleDailyByApiUser do
 
   describe "#max_per_day" do
     let(:result) { ThrottleDailyByApiUser.new(nil).max_per_day(request) }
-    let(:url) { "/applications.js?lng=146&lat=-38&key=#{user.api_key_object.value}" }
+    let(:url) { "/applications.js?lng=146&lat=-38&key=#{user.api_key.value}" }
     let(:user) { create(:user) }
 
     it "should have a default max of 1000" do
@@ -26,7 +26,7 @@ describe ThrottleDailyByApiUser do
     context "user with a special allowance" do
       let(:user) do
         user = create(:user)
-        user.api_key_object.update(daily_limit: 2000)
+        user.api_key.update(daily_limit: 2000)
         user
       end
       it "should have a higher rate than normal" do
@@ -47,7 +47,7 @@ describe ThrottleDailyByApiUser do
     end
 
     describe "Request to the API" do
-      let(:url) { "/applications.js?lng=146&lat=-38&key=#{user.api_key_object.value}" }
+      let(:url) { "/applications.js?lng=146&lat=-38&key=#{user.api_key.value}" }
 
       describe "A normal user" do
         let(:user) { create(:user) }
