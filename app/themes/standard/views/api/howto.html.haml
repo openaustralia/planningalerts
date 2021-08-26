@@ -12,8 +12,8 @@
   All the API calls listed below return planning application sorted by the date they were scraped from the planning authority website with the most
   recent listed first.
 %p
-  The API can return different formats including <a href="http://www.georss.org/">GeoRSS</a>, <a href="http://www.json.org/">JSON</a> and <a href="http://en.wikipedia.org/wiki/JSONP">JSONP</a>. The examples below return
-  JSON. To get GeoRSS instead simply replace ".js" in the URL with ".rss". To get JSONP add the query parameter "callback".
+  The API can return different formats including <a href="http://www.georss.org/">GeoRSS</a> and <a href="http://www.json.org/">JSON</a>. The examples below return
+  JSON. To get GeoRSS instead simply replace ".js" in the URL with ".rss".
 
 %hr
 .notice
@@ -105,11 +105,6 @@
   %p.apidefinition
     API calls by default return a maximum of #{Application.per_page} results. To return less than that per page simply set the count parameter to the maximum number you want to return.
   %code= raw api_example_postcode_url("js", api_key, "2780", count: 10)
-.apiitem
-  %h5 callback
-  %p.apidefinition
-    To return JSONP, set &ldquo;callback&rdquo; to the name of your javascript callback function.
-  %code= raw api_example_postcode_url("js", api_key, "2780", callback: "my_callback")
 
 %hr
 %h4#hLicenseInfo
