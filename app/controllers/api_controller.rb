@@ -134,7 +134,6 @@ class ApiController < ApplicationController
 
   class AllParams < T::Struct
     const :since_id, T.nilable(Integer)
-    const :callback, T.nilable(String)
   end
 
   # Note that this returns results in a slightly different format than the
@@ -186,7 +185,7 @@ class ApiController < ApplicationController
       suburb state
       address lat lng radius area_size
       bottom_left_lat bottom_left_lng top_right_lat top_right_lng
-      callback count v key since_id date_scraped
+      count v key since_id date_scraped
     ]
 
     # Parameter error checking (only do it on the API calls)
@@ -260,7 +259,6 @@ class ApiController < ApplicationController
   class ApiRenderParams < T::Struct
     const :page, T.nilable(Integer)
     const :v, T.nilable(String)
-    const :callback, T.nilable(String)
   end
 
   sig { params(apps: Application::RelationType, description: String).void }
