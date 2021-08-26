@@ -111,44 +111,6 @@ describe ApiController do
       expect(assigns[:description]).to eq("Recent applications in 2780")
     end
 
-    it "should support jsonp" do
-      authority = create(:authority, full_name: "Acme Local Planning Authority")
-      result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
-      scope1 = Application.none
-      scope2 = Application.none
-      scope3 = Application.none
-      scope4 = Application.none
-      allow(Application).to receive(:with_current_version).and_return(scope1)
-      allow(scope1).to receive(:order).and_return(scope2)
-      allow(scope2).to receive(:where).and_return(scope3)
-      allow(scope3).to receive(:includes).and_return(scope4)
-      allow(scope4).to receive(:paginate).and_return(Application.where(id: result.id))
-      get :suburb_postcode, params: { key: key.value, format: "js", postcode: "2780", callback: "foobar" }, xhr: true
-      expect(response.body[0..10]).to eq("/**/foobar(")
-      expect(response.body[-2..]).to eq(");")
-      expect(JSON.parse(response.body[11..-3])).to eq(
-        [{
-          "application" => {
-            "id" => 10,
-            "council_reference" => "001",
-            "address" => "A test address",
-            "description" => "Pretty",
-            "info_url" => "http://foo.com",
-            "comment_url" => nil,
-            "lat" => 1.0,
-            "lng" => 2.0,
-            "date_scraped" => "2001-01-01T00:00:00.000Z",
-            "date_received" => nil,
-            "on_notice_from" => nil,
-            "on_notice_to" => nil,
-            "authority" => {
-              "full_name" => "Acme Local Planning Authority"
-            }
-          }
-        }]
-      )
-    end
-
     it "should support json api version 1" do
       authority = create(:authority, full_name: "Acme Local Planning Authority")
       application = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
