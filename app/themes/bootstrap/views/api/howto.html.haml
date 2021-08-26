@@ -114,6 +114,17 @@
     %code= raw api_example_postcode_url("js", api_key, 2780, count: 10)
 
 %hr
+%h4 Warning about client side API queries
+%p
+  Client-side API queries are supported using <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS</a>. You might do this, for example,
+  in a Javascript application that runs in the browser making requests directly to the PlanningAlerts API. This is fine for testing. However, this should <strong>not be used
+  in production</strong> as you would be effectively making your API key public, which is a very bad. It is your responsibility to keep the API key
+  safe and secure.
+%p
+  Instead we recommend either loading the data ahead of time server-side and passing the data to your client or alternatively proxying the client-side requests
+  through your own server where you add the API key.
+
+%hr
 %h4#hLicenseInfo
   Usage &amp; License
 %p
