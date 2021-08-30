@@ -3,7 +3,7 @@
 
 require "sorbet-runtime"
 
-class ThrottleDailyByApiUser < Rack::Throttle::TimeWindow
+class ThrottleDailyByApiUser < Rack::Throttle::Limiter
   extend T::Sig
 
   # By default we allow up to 1000 API requests per day per API key
@@ -25,6 +25,25 @@ class ThrottleDailyByApiUser < Rack::Throttle::TimeWindow
   sig { params(request: Rack::Request).returns(T::Boolean) }
   def whitelisted?(request)
     !api_request?(request)
+  end
+
+  sig { params(request: Rack::Request).returns(T::Boolean) }
+  def allowed?(request)
+    return true if whitelisted?(request)
+
+    count = begin
+              cache_get(key = cache_key(request)).to_i
+            rescue StandardError
+              0
+            end
+    count += 1
+    allowed = count <= max_per_window(request).to_i
+    begin
+      cache_set(key, count)
+      allowed
+    rescue StandardError
+      true
+    end
   end
 
   # Is this a request going to the API?
