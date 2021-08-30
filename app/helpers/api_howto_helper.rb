@@ -13,7 +13,7 @@ module ApiHowtoHelper
 
   sig { returns(T.nilable(String)) }
   def api_key
-    current_user&.api_key&.value
+    current_user&.api_keys&.first&.value
   end
 
   sig do

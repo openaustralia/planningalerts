@@ -208,11 +208,14 @@ module User::GeneratedAttributeMethods
 end
 
 module User::GeneratedAssociationMethods
-  sig { returns(T.nilable(::ApiKey)) }
-  def api_key; end
+  sig { returns(::ApiKey::ActiveRecord_Associations_CollectionProxy) }
+  def api_keys; end
 
-  sig { params(value: T.nilable(::ApiKey)).void }
-  def api_key=(value); end
+  sig { returns(T::Array[Integer]) }
+  def api_key_ids; end
+
+  sig { params(value: T::Enumerable[::ApiKey]).void }
+  def api_keys=(value); end
 end
 
 module User::CustomFinderMethods

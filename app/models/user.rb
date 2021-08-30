@@ -9,12 +9,19 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
          :trackable, :validatable, :confirmable
   after_create :create_api_key
-  has_one :api_key, dependent: :destroy
+  has_many :api_keys, dependent: :destroy
   # Doing this for the benefit of activeadmin
-  accepts_nested_attributes_for :api_key
+  accepts_nested_attributes_for :api_keys
 
   sig { params(notification: T.untyped, args: T.untyped).void }
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later
+  end
+
+  private
+
+  sig { void }
+  def create_api_key
+    api_keys.create!
   end
 end

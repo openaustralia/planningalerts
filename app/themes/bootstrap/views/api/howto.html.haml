@@ -19,7 +19,7 @@
   %p
     - if current_user
       The API examples below contain your API key:
-      = current_user.api_key.value
+      = api_key
     - else
       To use the API you will need an API key which you get automatically when you
       = link_to "register for an account", new_user_registration_path
