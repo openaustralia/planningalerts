@@ -162,6 +162,14 @@ class ApiController < ApplicationController
     max_id = last.id if last
 
     respond_to do |format|
+      format.json do
+        @applications = applications
+        @max_id = T.let(max_id, T.nilable(Integer))
+        render "all", formats: :json
+      end
+      # Use of the js extension is deprecated. See
+      # https://github.com/openaustralia/planningalerts/issues/679
+      # TODO: Remove when it's no longer used
       format.js do
         @applications = applications
         @max_id = T.let(max_id, T.nilable(Integer))
@@ -219,6 +227,12 @@ class ApiController < ApplicationController
   sig { params(error_text: String, status: Symbol).void }
   def render_error(error_text, status)
     respond_to do |format|
+      format.json do
+        render json: { error: error_text }, status: status
+      end
+      # Use of the js extension is deprecated. See
+      # https://github.com/openaustralia/planningalerts/issues/679
+      # TODO: Remove when it's no longer used
       format.js do
         render json: { error: error_text }, status: status, content_type: Mime[:json]
       end
@@ -283,6 +297,14 @@ class ApiController < ApplicationController
                         layout: false,
                         content_type: Mime[:xml]
       end
+      format.json do
+        # TODO: Document use of v parameter
+        render "index", formats: :json,
+                        variants: typed_params.v
+      end
+      # Use of the js extension is deprecated. See
+      # https://github.com/openaustralia/planningalerts/issues/679
+      # TODO: Remove when it's no longer used
       format.js do
         # TODO: Document use of v parameter
         render "index", formats: :json,
