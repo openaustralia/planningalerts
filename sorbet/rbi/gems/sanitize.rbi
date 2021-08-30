@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/sanitize/all/sanitize.rbi
 #
-# sanitize-5.2.1
+# sanitize-6.0.0
 
 class Sanitize
   def clean(html); end

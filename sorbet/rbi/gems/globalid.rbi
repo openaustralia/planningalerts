@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/globalid/all/globalid.rbi
 #
-# globalid-0.4.2
+# globalid-0.5.2
 
 module URI
 end
@@ -91,7 +91,6 @@ module GlobalID::Identification
   def to_sgid(options = nil); end
   def to_sgid_param(options = nil); end
   def to_signed_global_id(options = nil); end
-  extend ActiveSupport::Concern
 end
 class GlobalID::Verifier < ActiveSupport::MessageVerifier
   def decode(data); end

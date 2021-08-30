@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/actioncable/all/actioncable.rbi
 #
-# actioncable-5.2.4.3
+# actioncable-5.2.6
 
 module ActionCable
   def self.gem_version; end

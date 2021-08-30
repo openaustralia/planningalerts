@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/activerecord/all/activerecord.rbi
 #
-# activerecord-5.2.4.3
+# activerecord-5.2.6
 
 module ActiveRecord
   def self.eager_load!; end

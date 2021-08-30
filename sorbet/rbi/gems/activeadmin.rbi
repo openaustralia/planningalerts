@@ -1739,8 +1739,6 @@ module AlertMailerHelper
   extend T::Sig
 end
 module ApiHowtoHelper
-  def api_example_address_url(*args, &blk); end
-  def api_example_address_url_html(*args, &blk); end
   def api_example_area_url(*args, &blk); end
   def api_example_area_url_html(*args, &blk); end
   def api_example_authority_url(*args, &blk); end
@@ -1751,7 +1749,7 @@ module ApiHowtoHelper
   def api_example_postcode_url_html(*args, &blk); end
   def api_example_suburb_state_and_postcode_url(*args, &blk); end
   def api_example_suburb_state_and_postcode_url_html(*args, &blk); end
-  def api_key(*args, &block); end
+  def api_key(*args, &blk); end
   def htmlify(*args, &blk); end
   extend T::Private::Methods::MethodHooks
   extend T::Private::Methods::SingletonMethodHooks

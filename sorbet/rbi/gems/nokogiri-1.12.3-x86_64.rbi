@@ -5,9 +5,9 @@
 #
 # If you would like to make changes to this file, great! Please create the gem's shim here:
 #
-#   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/nokogiri-1.11.3-x86_64/all/nokogiri-1.11.3-x86_64.rbi
+#   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/nokogiri-1.12.3-x86_64/all/nokogiri-1.12.3-x86_64.rbi
 #
-# nokogiri-1.11.3-x86_64-linux
+# nokogiri-1.12.3-x86_64-linux
 
 class Nokogiri::XML::ElementContent
   def c1; end
@@ -147,7 +147,7 @@ class Nokogiri::XSLT::Stylesheet
   def serialize(arg0); end
   def transform(*arg0); end
 end
-class Nokogiri::HTML::ElementDescription
+class Nokogiri::HTML4::ElementDescription
   def block?; end
   def default_desc; end
   def default_sub_element; end
@@ -167,7 +167,7 @@ class Nokogiri::HTML::ElementDescription
   def sub_elements; end
   def to_s; end
 end
-class Nokogiri::HTML::EntityLookup
+class Nokogiri::HTML4::EntityLookup
   def [](name); end
   def get(arg0); end
 end
@@ -202,7 +202,7 @@ class Nokogiri::XML::SAX::ParserContext
   def self.memory(arg0); end
   def self.new(thing, encoding = nil); end
 end
-class Nokogiri::HTML::SAX::ParserContext < Nokogiri::XML::SAX::ParserContext
+class Nokogiri::HTML4::SAX::ParserContext < Nokogiri::XML::SAX::ParserContext
   def parse_with(arg0); end
   def self.file(arg0, arg1); end
   def self.memory(arg0, arg1); end
@@ -222,7 +222,7 @@ class Nokogiri::XML::SAX::PushParser
   def replace_entities=(arg0); end
   def write(chunk, last_chunk = nil); end
 end
-class Nokogiri::HTML::SAX::PushParser < Nokogiri::XML::SAX::PushParser
+class Nokogiri::HTML4::SAX::PushParser < Nokogiri::XML::SAX::PushParser
   def <<(chunk, last_chunk = nil); end
   def document; end
   def document=(arg0); end
@@ -502,7 +502,7 @@ class Nokogiri::XML::Document < Nokogiri::XML::Node
   def validate; end
   def version; end
 end
-class Nokogiri::HTML::Document < Nokogiri::XML::Document
+class Nokogiri::HTML4::Document < Nokogiri::XML::Document
   def fragment(tags = nil); end
   def meta_content_type; end
   def meta_encoding; end
@@ -517,11 +517,17 @@ class Nokogiri::HTML::Document < Nokogiri::XML::Document
   def title=(text); end
   def type; end
 end
+module Nokogiri::Gumbo
+  def self.fragment(arg0, arg1, arg2, arg3, arg4, arg5); end
+  def self.parse(arg0, arg1, arg2, arg3, arg4); end
+end
 module Nokogiri::Test
   def self.__foreign_error_handler; end
 end
 module Nokogiri
-  def self.HTML(thing, url = nil, encoding = nil, options = nil, &block); end
+  def self.HTML(input, url = nil, encoding = nil, options = nil, &block); end
+  def self.HTML4(input, url = nil, encoding = nil, options = nil, &block); end
+  def self.HTML5(input, url = nil, encoding = nil, **options, &block); end
   def self.Slop(*args, &block); end
   def self.XML(thing, url = nil, encoding = nil, options = nil, &block); end
   def self.XSLT(stylesheet, modules = nil); end
@@ -529,6 +535,7 @@ module Nokogiri
   def self.jruby?; end
   def self.make(input = nil, opts = nil, &blk); end
   def self.parse(string, url = nil, encoding = nil, options = nil); end
+  def self.uses_gumbo?; end
   def self.uses_libxml?(requirement = nil); end
 end
 class Nokogiri::VersionInfo
@@ -541,6 +548,7 @@ class Nokogiri::VersionInfo
   def libxml2_precompiled?; end
   def libxml2_using_packaged?; end
   def libxml2_using_system?; end
+  def libxslt_has_datetime?; end
   def loaded_libxml_version; end
   def loaded_libxslt_version; end
   def ruby_minor; end
@@ -583,6 +591,8 @@ class Nokogiri::XML::ParseOptions
   def default_schema?; end
   def default_xml; end
   def default_xml?; end
+  def default_xslt; end
+  def default_xslt?; end
   def dtdattr; end
   def dtdattr?; end
   def dtdload; end
@@ -603,6 +613,7 @@ class Nokogiri::XML::ParseOptions
   def nodefault_html; end
   def nodefault_schema; end
   def nodefault_xml; end
+  def nodefault_xslt; end
   def nodict; end
   def nodict?; end
   def nodtdattr; end
@@ -806,9 +817,9 @@ class Anonymous_Struct_24 < Struct
 end
 class Nokogiri::XML::Notation < Anonymous_Struct_24
 end
-module Nokogiri::HTML
+module Nokogiri::HTML4
   def self.fragment(string, encoding = nil); end
-  def self.parse(thing, url = nil, encoding = nil, options = nil, &block); end
+  def self.parse(input, url = nil, encoding = nil, options = nil, &block); end
 end
 class Anonymous_Struct_25 < Struct
   def description; end
@@ -822,34 +833,34 @@ class Anonymous_Struct_25 < Struct
   def value; end
   def value=(_); end
 end
-class Nokogiri::HTML::EntityDescription < Anonymous_Struct_25
+class Nokogiri::HTML4::EntityDescription < Anonymous_Struct_25
 end
-class Nokogiri::HTML::Document::EncodingFound < StandardError
+class Nokogiri::HTML4::Document::EncodingFound < StandardError
   def found_encoding; end
   def initialize(encoding); end
 end
-class Nokogiri::HTML::Document::EncodingReader
+class Nokogiri::HTML4::Document::EncodingReader
   def encoding_found; end
   def initialize(io); end
   def read(len); end
   def self.detect_encoding(chunk); end
 end
-class Nokogiri::HTML::Document::EncodingReader::SAXHandler < Nokogiri::XML::SAX::Document
+class Nokogiri::HTML4::Document::EncodingReader::SAXHandler < Nokogiri::XML::SAX::Document
   def encoding; end
   def initialize; end
   def start_element(name, attrs = nil); end
 end
-class Nokogiri::HTML::Document::EncodingReader::JumpSAXHandler < Nokogiri::HTML::Document::EncodingReader::SAXHandler
+class Nokogiri::HTML4::Document::EncodingReader::JumpSAXHandler < Nokogiri::HTML4::Document::EncodingReader::SAXHandler
   def initialize(jumptag); end
   def start_element(name, attrs = nil); end
 end
-class Nokogiri::HTML::DocumentFragment < Nokogiri::XML::DocumentFragment
+class Nokogiri::HTML4::DocumentFragment < Nokogiri::XML::DocumentFragment
   def initialize(document, tags = nil, ctx = nil); end
   def self.parse(tags, encoding = nil); end
 end
-module Nokogiri::HTML::SAX
+module Nokogiri::HTML4::SAX
 end
-class Nokogiri::HTML::SAX::Parser < Nokogiri::XML::SAX::Parser
+class Nokogiri::HTML4::SAX::Parser < Nokogiri::XML::SAX::Parser
   def parse_file(filename, encoding = nil); end
   def parse_io(io, encoding = nil); end
   def parse_memory(data, encoding = nil); end
@@ -887,6 +898,9 @@ class Struct::HTMLElementDescription < Struct
   def startTag=(_); end
   def subelts; end
   def subelts=(_); end
+end
+class Nokogiri::HTML4::Builder < Nokogiri::XML::Builder
+  def to_html; end
 end
 module Nokogiri::Decorators
 end
@@ -1028,8 +1042,40 @@ class Nokogiri::CSS::Tokenizer::ScanError < StandardError
 end
 class Nokogiri::CSS::SyntaxError < Nokogiri::SyntaxError
 end
-class Nokogiri::HTML::Builder < Nokogiri::XML::Builder
-  def to_html; end
+module Nokogiri::HTML5
+  def self.escape_text(text, encoding, attribute_mode); end
+  def self.fragment(string, encoding = nil, **options); end
+  def self.get(uri, options = nil); end
+  def self.get_impl(uri, options = nil); end
+  def self.parse(string, url = nil, encoding = nil, **options, &block); end
+  def self.prepend_newline?(node); end
+  def self.read_and_encode(string, encoding); end
+  def self.reencode(body, content_type = nil); end
+  def self.serialize_node_internal(current_node, io, encoding, options); end
+end
+class Nokogiri::HTML5::Document < Nokogiri::HTML4::Document
+  def fragment(tags = nil); end
+  def self.do_parse(string_or_io, url, encoding, options); end
+  def self.parse(string_or_io, url = nil, encoding = nil, **options, &block); end
+  def self.read_io(io, url = nil, encoding = nil, **options); end
+  def self.read_memory(string, url = nil, encoding = nil, **options); end
+  def to_xml(options = nil, &block); end
+end
+class Nokogiri::HTML5::DocumentFragment < Nokogiri::HTML4::DocumentFragment
+  def document; end
+  def document=(arg0); end
+  def errors; end
+  def errors=(arg0); end
+  def extract_params(params); end
+  def initialize(doc, tags = nil, ctx = nil, options = nil); end
+  def self.parse(tags, encoding = nil, options = nil); end
+  def serialize(options = nil, &block); end
+end
+module Nokogiri::HTML5::Node
+  def add_child_node_and_reparent_attrs(node); end
+  def fragment(tags); end
+  def inner_html(options = nil); end
+  def write_to(io, *options); end
 end
 class Object < BasicObject
   def Nokogiri(*args, &block); end

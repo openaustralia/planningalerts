@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/loofah/all/loofah.rbi
 #
-# loofah-2.6.0
+# loofah-2.12.0
 
 module Loofah
   def self.document(*args, &block); end
@@ -116,13 +116,13 @@ class Loofah::XML::DocumentFragment < Nokogiri::XML::DocumentFragment
 end
 module Loofah::HTML
 end
-class Loofah::HTML::Document < Nokogiri::HTML::Document
+class Loofah::HTML::Document < Nokogiri::HTML4::Document
   def serialize_root; end
   include Loofah::DocumentDecorator
   include Loofah::ScrubBehavior::Node
   include Loofah::TextBehavior
 end
-class Loofah::HTML::DocumentFragment < Nokogiri::HTML::DocumentFragment
+class Loofah::HTML::DocumentFragment < Nokogiri::HTML4::DocumentFragment
   def self.parse(tags, encoding = nil); end
   def serialize; end
   def serialize_root; end

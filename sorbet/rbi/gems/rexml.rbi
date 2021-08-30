@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/rexml/all/rexml.rbi
 #
-# rexml-3.2.4
+# rexml-3.2.5
 
 module REXML
 end
@@ -187,6 +187,10 @@ class REXML::AttlistDecl < REXML::Child
   def write(out, indent = nil); end
   include Enumerable
 end
+class REXML::ReferenceWriter
+  def initialize(id_type, public_id_literal, system_literal, context = nil); end
+  def write(output); end
+end
 class REXML::DocType < REXML::Parent
   def add(child); end
   def attribute_of(element, attribute); end
@@ -203,7 +207,6 @@ class REXML::DocType < REXML::Parent
   def notation(name); end
   def notations; end
   def public; end
-  def strip_quotes(quoted_string); end
   def system; end
   def write(output, indent = nil, transitive = nil, ie_hack = nil); end
   include REXML::XMLTokens
@@ -319,20 +322,7 @@ class REXML::Parsers::XPathParser
   def predicate_to_string(path, &block); end
   include REXML::XMLTokens
 end
-class Object < BasicObject
-  def dclone; end
-end
-class Symbol
-  def dclone; end
-end
-class Integer < Numeric
-  def dclone; end
-end
-class Float < Numeric
-  def dclone; end
-end
-class Array
-  def dclone; end
+module REXML::DClonable
 end
 class REXML::XPathParser
   def []=(variable_name, value); end
@@ -448,6 +438,7 @@ class REXML::Elements
   def initialize(parent); end
   def inject(xpath = nil, initial = nil); end
   def literalize(name); end
+  def parent; end
   def size; end
   def to_a(xpath = nil); end
   include Enumerable
@@ -536,6 +527,9 @@ class REXML::Parsers::BaseParser
   def need_source_encoding_update?(xml_declaration_encoding); end
   def normalize(input, entities = nil, entity_filter = nil); end
   def parse_attributes(prefixes, curr_ns); end
+  def parse_id(base_error_message, accept_external_id:, accept_public_id:); end
+  def parse_id_invalid_details(accept_external_id:, accept_public_id:); end
+  def parse_name(base_error_message); end
   def peek(depth = nil); end
   def position; end
   def process_instruction; end

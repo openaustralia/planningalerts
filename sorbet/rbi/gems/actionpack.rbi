@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/actionpack/all/actionpack.rbi
 #
-# actionpack-5.2.4.3
+# actionpack-5.2.6
 
 module ActionPack
   def self.gem_version; end
@@ -2187,8 +2187,11 @@ module ActionController::RequestForgeryProtection
   def compare_with_global_token(token, session); end
   def compare_with_real_token(token, session); end
   def csrf_token_hmac(session, identifier); end
+  def decode_csrf_token(encoded_csrf_token); end
+  def encode_csrf_token(csrf_token); end
   def form_authenticity_param; end
   def form_authenticity_token(form_options: nil); end
+  def generate_csrf_token; end
   def global_csrf_token(session); end
   def handle_unverified_request; end
   def mark_for_same_origin_verification!; end
@@ -2581,9 +2584,12 @@ class ActionController::Base < ActionController::Metal
   def self.responder?; end
   def self.stylesheets_dir; end
   def self.stylesheets_dir=(value); end
+  def self.urlsafe_csrf_tokens; end
+  def self.urlsafe_csrf_tokens=(value); end
   def self.without_modules(*modules); end
   def stylesheets_dir; end
   def stylesheets_dir=(value); end
+  def urlsafe_csrf_tokens; end
   extend AbstractController::Caching::ClassMethods
   extend AbstractController::Caching::ConfigMethods
   extend AbstractController::Caching::Fragments::ClassMethods

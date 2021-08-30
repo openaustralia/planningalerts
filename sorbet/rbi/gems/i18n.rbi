@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/i18n/all/i18n.rbi
 #
-# i18n-1.8.3
+# i18n-1.8.10
 
 module I18n
   def self.cache_key_digest; end
@@ -108,11 +108,11 @@ module I18n::Base
   def normalize_key(key, separator); end
   def normalize_keys(locale, key, scope, separator = nil); end
   def reload!; end
-  def t!(key, options = nil); end
-  def t(key = nil, *arg1, throw: nil, raise: nil, locale: nil, **options); end
-  def translate!(key, options = nil); end
-  def translate(key = nil, *arg1, throw: nil, raise: nil, locale: nil, **options); end
-  def transliterate(key, *arg1, throw: nil, raise: nil, locale: nil, replacement: nil, **options); end
+  def t!(key, **options); end
+  def t(key = nil, throw: nil, raise: nil, locale: nil, **options); end
+  def translate!(key, **options); end
+  def translate(key = nil, throw: nil, raise: nil, locale: nil, **options); end
+  def transliterate(key, throw: nil, raise: nil, locale: nil, replacement: nil, **options); end
   def with_locale(tmp_locale = nil); end
 end
 class I18n::Config

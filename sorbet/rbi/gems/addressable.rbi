@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/addressable/all/addressable.rbi
 #
-# addressable-2.7.0
+# addressable-2.8.0
 
 module Addressable
 end
@@ -27,6 +27,7 @@ module Addressable::IDNA
   def self.punycode_encode_digit(d); end
   def self.to_ascii(input); end
   def self.to_unicode(input); end
+  def self.ucs4_to_utf8(char, buffer); end
   def self.unicode_compose(unpacked); end
   def self.unicode_compose_pair(ch_one, ch_two); end
   def self.unicode_decompose(unpacked); end
@@ -113,6 +114,7 @@ class Addressable::URI
   def self.encode(uri, return_type = nil); end
   def self.encode_component(component, character_class = nil, upcase_encoded = nil); end
   def self.escape(uri, return_type = nil); end
+  def self.escape_component(component, character_class = nil, upcase_encoded = nil); end
   def self.form_encode(form_values, sort = nil); end
   def self.form_unencode(encoded_value); end
   def self.heuristic_parse(uri, hints = nil); end
@@ -145,13 +147,14 @@ class Addressable::URI::InvalidURIError < StandardError
 end
 module Addressable::URI::CharacterClasses
 end
+module Addressable::URI::NormalizeCharacterClasses
+end
 class Addressable::Template
   def ==(template); end
   def eql?(template); end
   def expand(mapping, processor = nil, normalize_values = nil); end
   def extract(uri, processor = nil); end
   def freeze; end
-  def generate(params = nil, recall = nil, options = nil); end
   def initialize(pattern); end
   def inspect; end
   def join_values(operator, return_value); end
@@ -162,6 +165,7 @@ class Addressable::Template
   def normalize_keys(mapping); end
   def normalize_value(value); end
   def ordered_variable_defaults; end
+  def parse_new_template_pattern(pattern, processor = nil); end
   def parse_template_pattern(pattern, processor = nil); end
   def partial_expand(mapping, processor = nil, normalize_values = nil); end
   def pattern; end
