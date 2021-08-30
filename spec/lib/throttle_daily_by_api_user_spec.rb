@@ -32,6 +32,38 @@ describe ThrottleDailyByApiUser do
     end
   end
 
+  describe "#blacklisted?" do
+    let(:result) { ThrottleDailyByApiUser.new(nil).blacklisted?(request) }
+
+    describe "Request to the home page" do
+      let(:url) { "/" }
+
+      it "should not be blacklisted as it's not an api request" do
+        expect(result).to eq false
+      end
+    end
+
+    describe "Request to the API" do
+      let(:url) { "/applications.js?lng=146&lat=-38&key=#{key.value}" }
+
+      describe "A normal key" do
+        let(:key) { create(:api_key) }
+
+        it "should not be blacklisted" do
+          expect(result).to eq false
+        end
+      end
+
+      describe "A disabled key" do
+        let(:key) { create(:api_key, disabled: true) }
+
+        it "should be blacklisted" do
+          expect(result).to eq true
+        end
+      end
+    end
+  end
+
   describe "#whitelisted?" do
     let(:result) { ThrottleDailyByApiUser.new(nil).whitelisted?(request) }
 

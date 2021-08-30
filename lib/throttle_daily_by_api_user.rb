@@ -31,9 +31,11 @@ class ThrottleDailyByApiUser < Rack::Throttle::Limiter
     !api_request?(request)
   end
 
-  sig { params(_request: Rack::Request).returns(T::Boolean) }
-  def blacklisted?(_request)
-    false
+  sig { params(request: Rack::Request).returns(T::Boolean) }
+  def blacklisted?(request)
+    # We're blocking requests from disabled API keys so they don't
+    # even appear in the throttling statistics
+    !!key(request)&.disabled
   end
 
   sig { params(request: Rack::Request).returns(T::Boolean) }
