@@ -14,10 +14,14 @@ class ThrottleDailyByApiUser < Rack::Throttle::Limiter
     super
   end
 
+  sig { params(request: Rack::Request).returns(T.nilable(ApiKey)) }
+  def key(request)
+    ApiKey.find_by(value: client_identifier(request))
+  end
+
   sig { params(request: Rack::Request).returns(Integer) }
   def max_per_day(request)
-    key = ApiKey.find_by(value: client_identifier(request))
-    key&.daily_limit || DEFAULT_MAX_PER_DAY
+    key(request)&.daily_limit || DEFAULT_MAX_PER_DAY
   end
 
   alias max_per_window max_per_day
