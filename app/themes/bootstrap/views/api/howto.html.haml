@@ -13,7 +13,7 @@
   recent listed first.
 %p
   The API can return different formats including <a href="http://www.georss.org/">GeoRSS</a> and <a href="http://www.json.org/">JSON</a>. The examples below return
-  JSON. To get GeoRSS instead simply replace ".js" in the URL with ".rss".
+  JSON. To get GeoRSS instead simply replace ".json" in the URL with ".rss".
 
 .alert.alert-info{role: "alert"}
   %p
@@ -46,9 +46,9 @@
     Return applications near a given longitude/latitude. The area included is a circle with a radius of the given size (in metres)
     with the longitude/latitude at its center. Suggested sizes are 400, 800 or 4000 metres.
   %pre
-    %code= raw api_example_latlong_url_html("js", api_key)
+    %code= raw api_example_latlong_url_html("json", api_key)
   - if current_user
-    = link_to "Example", api_example_latlong_url("js", api_key), class: "btn btn-outline-primary"
+    = link_to "Example", api_example_latlong_url("json", api_key), class: "btn btn-outline-primary"
 
 %article
   %h5
@@ -56,9 +56,9 @@
   %p
     Return applications within a rectangle defined by longitude/latitude.
   %pre
-    %code= raw api_example_area_url_html("js", api_key)
+    %code= raw api_example_area_url_html("json", api_key)
   - if current_user
-    = link_to "Example", api_example_area_url("js", api_key), class: "btn btn-outline-primary"
+    = link_to "Example", api_example_area_url("json", api_key), class: "btn btn-outline-primary"
 
 %article
   %h5
@@ -69,9 +69,9 @@
     = link_to "list of authorities", authorities_path
     and follow the link. The url has the authority short name in it.
   %pre
-    %code= raw api_example_authority_url_html("js", api_key)
+    %code= raw api_example_authority_url_html("json", api_key)
   - if current_user
-    = link_to "Example", api_example_authority_url("js", api_key), class: "btn btn-outline-primary"
+    = link_to "Example", api_example_authority_url("json", api_key), class: "btn btn-outline-primary"
 
 %article
   %h5
@@ -79,9 +79,9 @@
   %p
     Return applications for a specific postcode area
   %pre
-    %code= raw api_example_postcode_url_html("js", api_key)
+    %code= raw api_example_postcode_url_html("json", api_key)
   - if current_user
-    = link_to "Example", api_example_postcode_url("js", api_key), class: "btn btn-outline-primary"
+    = link_to "Example", api_example_postcode_url("json", api_key), class: "btn btn-outline-primary"
 
 %article
   %h5
@@ -89,9 +89,9 @@
   %p
     Return applications in a suburb. Including &ldquo;state&rdquo; and &ldquo;postcode&rdquo; in the search is optional.
   %pre
-    %code= raw api_example_suburb_state_and_postcode_url_html("js", api_key)
+    %code= raw api_example_suburb_state_and_postcode_url_html("json", api_key)
   - if current_user
-    = link_to "Example", api_example_suburb_state_and_postcode_url("js", api_key), class: "btn btn-outline-primary"
+    = link_to "Example", api_example_suburb_state_and_postcode_url("json", api_key), class: "btn btn-outline-primary"
 
 %hr
 %h4 Extra query parameters
@@ -104,14 +104,14 @@
     API calls return a maximum of #{Application.per_page} results. To retrieve more results simply do another request with page
     set to 2, 3, etc&hellip; Not setting the page parameter is the same as requesting page 1.
   %pre
-    %code= raw api_example_postcode_url("js", api_key, 2780, page: 2)
+    %code= raw api_example_postcode_url("json", api_key, 2780, page: 2)
 
 %article
   %h5 count
   %p
     API calls by default return a maximum of #{Application.per_page} results. To return less than that per page simply set the count parameter to the maximum number you want to return.
   %pre
-    %code= raw api_example_postcode_url("js", api_key, 2780, count: 10)
+    %code= raw api_example_postcode_url("json", api_key, 2780, count: 10)
 
 %hr
 %h4 Warning about client side API queries
