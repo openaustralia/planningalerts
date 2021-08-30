@@ -32,5 +32,5 @@ ActiveAdmin.register User do
   end
 
   permit_params :email, :name, :organisation, :admin,
-                api_keys_attributes: %i[value bulk commercial daily_limit disabled]
+                api_keys_attributes: %i[id value bulk commercial daily_limit disabled]
 end
