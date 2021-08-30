@@ -169,36 +169,6 @@ describe ApplicationsHelper do
       end
     end
 
-    describe "authority_applications_json_url_for_current_user" do
-      let(:authority) { create(:authority, short_name: "marrickville") }
-
-      subject { helper.authority_applications_json_url_for_current_user(authority) }
-
-      context "when there is a current user" do
-        let(:user) do
-          user = create(:user)
-          user.api_key.update(value: "ABCDE12345")
-          user
-        end
-        before { expect(helper).to receive(:current_user).and_return(user) }
-
-        it { is_expected.to eq "http://test.host/authorities/marrickville/applications.js?key=ABCDE12345" }
-
-        context "and we're in production" do
-          before { allow(Rails.env).to receive(:production?).and_return true }
-
-          it { is_expected.to eq "http://api.planningalerts.org.au/authorities/marrickville/applications.js?key=ABCDE12345" }
-        end
-      end
-
-      context "when there is no current user" do
-        # Required for call to current_user
-        include Devise::Test::ControllerHelpers
-
-        it { expect { subject }.to raise_error "undefined method `api_key' for nil:NilClass" }
-      end
-    end
-
     describe "static maps" do
       before :each do
         allow(@application).to receive(:address).and_return("Foo Road, NSW")

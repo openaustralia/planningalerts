@@ -76,14 +76,6 @@ module ApplicationsHelper
     "#{application.address} | #{application.first_date_scraped.to_date.to_formatted_s(:rfc822)}"
   end
 
-  sig { params(authority: Authority).returns(String) }
-  def authority_applications_json_url_for_current_user(authority)
-    link_params = { format: :js, key: current_user.api_key.value }
-    link_params[:host] = api_host if Rails.env.production?
-
-    authority_applications_url(authority.short_name_encoded, link_params)
-  end
-
   sig { params(application: Application, size: String, zoom: Integer, key: String).returns(String) }
   def google_static_map(application, size: "350x200", zoom: 16, key: "GOOGLE_MAPS_API_KEY")
     google_static_map_lat_lng(application.lat, application.lng, label: "Map of #{application.address}", size: size, zoom: zoom, key: key)

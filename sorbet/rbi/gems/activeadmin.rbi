@@ -1758,7 +1758,6 @@ module ApiHowtoHelper
 end
 module ApplicationsHelper
   def api_host(*args, &blk); end
-  def authority_applications_json_url_for_current_user(*args, &blk); end
   def days_ago_in_words(*args, &blk); end
   def days_in_future_in_words(*args, &blk); end
   def display_description_with_address(*args, &blk); end

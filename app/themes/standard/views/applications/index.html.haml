@@ -16,7 +16,3 @@
 
 = paginated_section @applications, previous_label: "« Newer", next_label: "Older »" do
   %ol.applications= render partial: "application", collection: @applications
-
-- if current_user && @authority
-  -# TODO: If people are logged out, should we show them a link to get an API key?
-  = link_to "Get applications as JSON", authority_applications_json_url_for_current_user(@authority)
