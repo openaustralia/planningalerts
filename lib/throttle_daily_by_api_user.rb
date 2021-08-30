@@ -27,6 +27,11 @@ class ThrottleDailyByApiUser < Rack::Throttle::Limiter
     !api_request?(request)
   end
 
+  sig { params(_request: Rack::Request).returns(T::Boolean) }
+  def blacklisted?(_request)
+    false
+  end
+
   sig { params(request: Rack::Request).returns(T::Boolean) }
   def allowed?(request)
     return true if whitelisted?(request)
