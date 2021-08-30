@@ -9,15 +9,15 @@ class TopUsageAPIUsersService < ApplicationService
     const :requests, Integer
   end
 
-  class ApiUserRequests < T::Struct
-    const :user, User
+  class ApiKeyObjectRequests < T::Struct
+    const :api_key_object, ApiKey
     const :requests, Integer
   end
 
   sig { returns(T.any(Redis, Redis::Namespace)) }
   attr_reader :redis
 
-  sig { params(redis: T.any(Redis, Redis::Namespace), date_from: Date, date_to: Date, number: Integer).returns(T::Array[ApiUserRequests]) }
+  sig { params(redis: T.any(Redis, Redis::Namespace), date_from: Date, date_to: Date, number: Integer).returns(T::Array[ApiKeyObjectRequests]) }
   def self.call(redis:, date_from:, date_to:, number:)
     new(redis).call(date_from: date_from, date_to: date_to, number: number)
   end
@@ -27,12 +27,12 @@ class TopUsageAPIUsersService < ApplicationService
     @redis = redis
   end
 
-  sig { params(date_from: Date, date_to: Date, number: Integer).returns(T::Array[ApiUserRequests]) }
+  sig { params(date_from: Date, date_to: Date, number: Integer).returns(T::Array[ApiKeyObjectRequests]) }
   def call(date_from:, date_to:, number:)
     r = []
     top_total_usage_by_api_key_in_date_range(date_from, date_to, number).each do |h|
       key = ApiKey.find_by(value: h.api_key)
-      r << ApiUserRequests.new(requests: h.requests, user: key.user) if key
+      r << ApiKeyObjectRequests.new(requests: h.requests, api_key_object: key) if key
     end
     r
   end

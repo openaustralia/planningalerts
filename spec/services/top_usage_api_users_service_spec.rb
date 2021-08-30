@@ -31,8 +31,8 @@ describe TopUsageAPIUsersService do
     it "should return the top 2 total number of requests in descending sort order" do
       result = TopUsageAPIUsersService.call(redis: redis, date_from: Date.new(2021, 7, 1), date_to: Date.new(2021, 7, 2), number: 2)
       expect(result.map(&:serialize)).to eq [
-        { "user" => key3.user, "requests" => 214 },
-        { "user" => key1.user, "requests" => 157 }
+        { "api_key_object" => key3, "requests" => 214 },
+        { "api_key_object" => key1, "requests" => 157 }
       ]
     end
   end

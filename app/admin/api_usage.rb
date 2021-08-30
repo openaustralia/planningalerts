@@ -50,12 +50,12 @@ ActiveAdmin.register_page "API usage" do
     end
 
     table_for result do
-      column(:name) { |usage| link_to usage.user.name, admin_user_path(usage.user) }
-      column(:organisation) { |usage| link_to usage.user.organisation, admin_user_path(usage.user) }
-      column(:email) { |usage| link_to usage.user.email, admin_user_path(usage.user) }
-      column(:disabled) { |usage| usage.user.api_disabled }
-      column(:commercial) { |usage| usage.user.api_commercial }
-      column(:daily_limit) { |usage| usage.user.api_daily_limit }
+      column(:name) { |usage| link_to usage.api_key_object.user.name, admin_user_path(usage.api_key_object.user) }
+      column(:organisation) { |usage| link_to usage.user.organisation, admin_user_path(usage.api_key_object.user) }
+      column(:email) { |usage| link_to usage.api_key_object.user.email, admin_user_path(usage.api_key_object.user) }
+      column(:disabled) { |usage| usage.api_key_object.disabled }
+      column(:commercial) { |usage| usage.api_key_object.commercial }
+      column(:daily_limit) { |usage| usage.api_key_object.daily_limit }
       column :requests
     end
   end
