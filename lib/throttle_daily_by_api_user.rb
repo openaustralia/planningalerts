@@ -30,6 +30,7 @@ class ThrottleDailyByApiUser < Rack::Throttle::Limiter
   sig { params(request: Rack::Request).returns(T::Boolean) }
   def allowed?(request)
     return true if whitelisted?(request)
+    return false if blacklisted?(request)
 
     count = begin
               cache_get(key = cache_key(request)).to_i
