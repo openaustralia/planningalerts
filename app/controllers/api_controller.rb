@@ -175,6 +175,7 @@ class ApiController < ApplicationController
         @max_id = T.let(max_id, T.nilable(Integer))
         render "all", formats: :json, content_type: Mime[:json]
       end
+      # Doesn't make sense (I think) to support georss and geojson here
     end
   end
 
@@ -235,6 +236,9 @@ class ApiController < ApplicationController
       # TODO: Remove when it's no longer used
       format.js do
         render json: { error: error_text }, status: status, content_type: Mime[:json]
+      end
+      format.geojson do
+        render json: { error: error_text }, status: status
       end
       format.rss do
         render plain: error_text, status: status
@@ -310,6 +314,9 @@ class ApiController < ApplicationController
         render "index", formats: :json,
                         content_type: Mime[:json],
                         variants: typed_params.v
+      end
+      format.geojson do
+        render "index"
       end
     end
   end

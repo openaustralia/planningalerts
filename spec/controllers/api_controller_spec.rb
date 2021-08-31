@@ -188,6 +188,47 @@ describe ApiController do
         }]
       )
     end
+
+    it "should support geojson" do
+      authority = create(:authority, full_name: "Acme Local Planning Authority")
+      application = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
+      result = Application.where(id: application.id)
+      scope1 = Application.none
+      scope2 = Application.none
+      scope3 = Application.none
+      scope4 = Application.none
+      allow(result).to receive(:total_pages).and_return(5)
+      allow(Application).to receive(:with_current_version).and_return(scope1)
+      allow(scope1).to receive(:order).and_return(scope2)
+      allow(scope2).to receive(:where).and_return(scope3)
+      allow(scope3).to receive(:includes).and_return(scope4)
+      allow(scope4).to receive(:paginate).and_return(result)
+      get :suburb_postcode, params: { key: key.value, format: "geojson", postcode: "2780" }
+      expect(JSON.parse(response.body)).to eq(
+        "type" => "FeatureCollection",
+        "features" => [
+          {
+            "type" => "Feature",
+            "geometry" => { "type" => "Point", "coordinates" => [2.0, 1.0] },
+            "properties" => {
+              "id" => 10,
+              "council_reference" => "001",
+              "address" => "A test address",
+              "description" => "Pretty",
+              "info_url" => "http://foo.com",
+              "comment_url" => nil,
+              "date_scraped" => "2001-01-01T00:00:00.000Z",
+              "date_received" => nil,
+              "on_notice_from" => nil,
+              "on_notice_to" => nil,
+              "authority" => {
+                "full_name" => "Acme Local Planning Authority"
+              }
+            }
+          }
+        ]
+      )
+    end
   end
 
   describe "#point" do
