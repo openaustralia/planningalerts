@@ -23,7 +23,8 @@ class ApiController < ApplicationController
     typed_params = TypedParams[AuthorityParams].new.extract!(params)
     # TODO: Handle the situation where the authority name isn't found
     authority = Authority.find_short_name_encoded!(typed_params.authority_id)
-    api_render(authority.applications, "Recent applications from #{authority.full_name_and_state}")
+    apps = authority.applications.with_current_version.order("date_scraped DESC")
+    api_render(apps, "Recent applications from #{authority.full_name_and_state}")
   end
 
   class SuburbPostcodeParams < T::Struct
