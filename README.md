@@ -1,7 +1,5 @@
 # PlanningAlerts
 
-gem install mysql2 -v '0.5.3' --source 'https://rubygems.org/' -- --with-ldflags=-L/usr/local/opt/openssl/lib --with-cppflags=-I/usr/local/opt/openssl/include
-
 [![Build Status](https://travis-ci.com/openaustralia/planningalerts.svg?branch=master)](https://travis-ci.com/openaustralia/planningalerts) [![Test Coverage](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/test_coverage)](https://codeclimate.com/github/openaustralia/planningalerts/test_coverage) [![Maintainability](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/maintainability)](https://codeclimate.com/github/openaustralia/planningalerts/maintainability)
 
 Find out and have your say about development applications in your area.
