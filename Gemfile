@@ -159,7 +159,6 @@ gem "newrelic_rpm"
 group :test do
   gem "capybara"
   gem "climate_control"
-  gem "database_cleaner"
   gem "email_spec"
   gem "factory_bot"
   gem "factory_bot_rails"
