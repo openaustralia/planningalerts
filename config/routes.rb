@@ -126,6 +126,10 @@ Rails.application.routes.draw do
     get :specification
   end
 
+  namespace :api_keys do
+    resource :request_non_commercial, only: [:new, :create]
+  end
+
   get "api/howto" => "api#howto", as: :api_howto
   get "api" => "api#index", as: :api
 

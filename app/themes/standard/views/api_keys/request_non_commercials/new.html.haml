@@ -1,0 +1,33 @@
+%h3 Request a non-commercial API key
+
+%h4 What exactly do you mean by non-commercial?
+
+%h4 Terms of use
+
+
+Things to ask:
+* Organisation
+* Purpose of use / application
+* Public URL
+* Open source? (repo)
+* Explain exactly why your use case is non-commercial
+* Expected number of API requests per day
+
+= semantic_form_for 'api_key_request_non_commercial' do |f|
+  = f.input :organisation
+  = f.input :purpose, as: :text
+  = f.input :public_url
+  = f.input :repo_url
+  = f.input :why_non_commercial,
+            as: :text,
+            label: "Explain exactly why your use is non-commercial"
+  = f.input :expected_max_api_requests_per_day,
+            as: :radio,
+            collection: ["0 - 100", "101 - 1000", "1001 - 10,000", "more than 10,000"],
+            label: "Expected maximum number of API requests per day"
+
+%h4 What happens next?
+
+%p
+  Your request will be reviewed by one of the human PlanningAlerts administrators.
+  We will try to do this quickly. You will then be notified via email ()
