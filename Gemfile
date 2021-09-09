@@ -156,11 +156,6 @@ gem "health_check"
 # Using New Relic temporarily to debug some performance issues
 gem "newrelic_rpm"
 
-# For explicitly archiving pages with comments to councillors
-# before this feature gets removed
-# TODO: Remove this once the archive has been done
-gem "wayback_archiver"
-
 group :test do
   gem "capybara"
   gem "climate_control"
