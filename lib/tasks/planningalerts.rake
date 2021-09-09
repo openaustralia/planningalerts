@@ -54,45 +54,4 @@ namespace :planningalerts do
       Comment.counter_culture_fix_counts
     end
   end
-
-  desc "Export archive of comments to councillors and replies"
-  task export_councillor_archive: :environment do
-    # Start by getting all the applications that have visible comments to councillors
-    application_ids = Comment.where("councillor_id IS NOT NULL").order(created_at: :desc).visible.group(:application_id).pluck(:application_id)
-    applications_info = application_ids.map do |id|
-      application = Application.find(id)
-      comments_info = application.comments.visible.to_councillor.order(created_at: :desc).map do |comment|
-        councillor = comment.councillor
-        councillor_info = {
-          "councillor_id" => councillor.id,
-          "name" => councillor.name,
-          "image_url" => councillor.image_url,
-          "party" => councillor.party
-        }
-        replies_info = comment.replies.map do |reply|
-          {
-            "reply_id" => reply.id,
-            "text" => reply.text
-          }
-        end
-        {
-          "comment_id" => comment.id,
-          "text" => comment.text,
-          "name" => comment.name,
-          "created_at" => comment.created_at.iso8601,
-          "councillor" => councillor_info,
-          "replies" => replies_info
-        }
-      end
-      url = "https://www.planningalerts.org.au/applications/#{application.id}"
-      {
-        "application_id" => application.id,
-        "planningalerts_url" => url,
-        "internet_archive_url" => "https://web.archive.org/web/20210909/#{url}",
-        "comments_to_councillors" => comments_info
-      }
-    end
-    result = { "applications" => applications_info }
-    puts result.to_yaml
-  end
 end
