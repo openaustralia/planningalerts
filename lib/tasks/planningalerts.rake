@@ -93,4 +93,21 @@ namespace :planningalerts do
     result = { "applications" => applications_info }
     puts result.to_yaml
   end
+
+  desc "Submit all URLs with comments to councillors to Internet Archive for archiving"
+  task submit_councillors_to_internet_archive: :environment do
+    # Start by getting all the applications that have visible comments to councillors
+    application_ids = Comment.where("councillor_id IS NOT NULL").order(created_at: :desc).visible.group(:application_id).pluck(:application_id)
+    urls = application_ids.map { |id| "https://www.planningalerts.org.au/applications/#{id}" }
+    puts "Submitting #{urls.count} URLs to Internet Archive..."
+    index = 0
+    WaybackArchiver.archive(urls, strategy: :urls) do |result|
+      if result.success?
+        puts "#{index}: Successfully archived: #{result.archived_url}"
+        index += 1
+      else
+        puts "Error (HTTP #{result.code}) when archiving: #{result.archived_url}"
+      end
+    end
+  end
 end
