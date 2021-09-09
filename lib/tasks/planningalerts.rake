@@ -84,9 +84,11 @@ namespace :planningalerts do
           "replies" => replies_info
         }
       end
+      url = "https://www.planningalerts.org.au/applications/#{application.id}"
       {
         "application_id" => application.id,
-        "planningalerts_url" => "https://www.planningalerts.org.au/applications/#{application.id}",
+        "planningalerts_url" => url,
+        "internet_archive_url" => "https://web.archive.org/web/20210909/#{url}",
         "comments_to_councillors" => comments_info
       }
     end
