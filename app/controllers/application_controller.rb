@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
-  before_action :set_header_variable, :validate_page_param
+  before_action :set_header_variable
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   sig { void }
@@ -45,12 +45,5 @@ class ApplicationController < ActionController::Base
   sig { void }
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[name organisation])
-  end
-
-  # this method is to respond to the will_paginate bug of invalid page number leading to error being thrown.
-  # see discussion here https://github.com/mislav/will_paginate/issues/271
-  sig { void }
-  def validate_page_param
-    params[:page] = (params[:page].to_i if params[:page].present? && params[:page].to_i.positive?)
   end
 end

@@ -290,8 +290,7 @@ describe ApiController do
                 "format" => "rss",
                 "address" => "24 Bruce Road Glenbrook",
                 "key" => key.value,
-                "radius" => "4000",
-                "page" => nil
+                "radius" => "4000"
               },
               user_agent: "Rails Testing"
             )
