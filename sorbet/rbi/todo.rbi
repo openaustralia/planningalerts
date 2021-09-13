@@ -11,12 +11,12 @@ module ::Anonymous_Delegator_20; end
 module ::Anonymous_Delegator_5; end
 module ::Anonymous_Delegator_6; end
 module ::Anonymous_Delegator_68; end
-module ::Anonymous_Delegator_71; end
-module ::Anonymous_Delegator_80; end
-module ::Anonymous_Delegator_84; end
-module ::Anonymous_Delegator_88; end
+module ::Anonymous_Delegator_72; end
+module ::Anonymous_Delegator_81; end
+module ::Anonymous_Delegator_85; end
 module ::Anonymous_Delegator_89; end
-module ::Anonymous_Delegator_93; end
+module ::Anonymous_Delegator_90; end
+module ::Anonymous_Delegator_94; end
 module ActiveStorage::Blob::Analyzable; end
 module ActiveStorage::Blob::Identifiable; end
 module ActiveStorage::Variant; end
@@ -40,4 +40,3 @@ module T::InterfaceWrapper::Helpers; end
 module T::Private::Abstract::Hooks; end
 module T::Private::Methods::MethodHooks; end
 module T::Private::Methods::SingletonMethodHooks; end
-module T::Props::Plugin::ClassMethods; end

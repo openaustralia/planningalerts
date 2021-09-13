@@ -1674,7 +1674,6 @@ class ApplicationController < ActionController::Base
   def set_header_variable(*args, &blk); end
   def theme_instance; end
   def theme_resolver(*args, &blk); end
-  def validate_page_param(*args, &blk); end
   extend T::Private::Methods::MethodHooks
   extend T::Private::Methods::SingletonMethodHooks
   extend T::Sig
