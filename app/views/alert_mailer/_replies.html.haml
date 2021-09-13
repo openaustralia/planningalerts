@@ -1,9 +1,0 @@
-.box.comments-header
-  - if replies.count == 1
-    The following <strong>new reply by a local councillor</strong> has
-  - else
-    The following <strong>new replies by local councillors</strong> have
-  been posted on comments
-  within #{meters_in_words(alert.radius_meters.to_f)} of
-  %strong= alert.address
-= render partial: "reply", collection: replies

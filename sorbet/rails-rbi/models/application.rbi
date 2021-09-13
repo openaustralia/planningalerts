@@ -82,15 +82,6 @@ module Application::GeneratedAssociationMethods
   sig { params(value: T.nilable(::ApplicationVersion)).void }
   def first_version=(value); end
 
-  sig { returns(::Reply::ActiveRecord_Associations_CollectionProxy) }
-  def replies; end
-
-  sig { returns(T::Array[Integer]) }
-  def reply_ids; end
-
-  sig { params(value: T::Enumerable[::Reply]).void }
-  def replies=(value); end
-
   sig { returns(::ApplicationVersion::ActiveRecord_Associations_CollectionProxy) }
   def versions; end
 

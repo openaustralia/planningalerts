@@ -1989,14 +1989,6 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
 
   def about_url(*args); end
 
-  def add_contributor_authority_councillor_contribution_path(*args); end
-
-  def add_contributor_authority_councillor_contribution_url(*args); end
-
-  def add_source_authority_councillor_contribution_path(*args); end
-
-  def add_source_authority_councillor_contribution_url(*args); end
-
   def address_applications_path(*args); end
 
   def address_applications_url(*args); end
@@ -2049,33 +2041,9 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
 
   def admin_comments_url(*args); end
 
-  def admin_councillor_contribution_path(*args); end
-
-  def admin_councillor_contribution_url(*args); end
-
-  def admin_councillor_contributions_path(*args); end
-
-  def admin_councillor_contributions_url(*args); end
-
-  def admin_councillor_path(*args); end
-
-  def admin_councillor_url(*args); end
-
-  def admin_councillors_path(*args); end
-
-  def admin_councillors_url(*args); end
-
   def admin_dashboard_path(*args); end
 
   def admin_dashboard_url(*args); end
-
-  def admin_replies_path(*args); end
-
-  def admin_replies_url(*args); end
-
-  def admin_reply_path(*args); end
-
-  def admin_reply_url(*args); end
 
   def admin_report_path(*args); end
 
@@ -2092,10 +2060,6 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
   def admin_site_settings_path(*args); end
 
   def admin_site_settings_url(*args); end
-
-  def admin_suggested_councillor_path(*args); end
-
-  def admin_suggested_councillor_url(*args); end
 
   def admin_user_path(*args); end
 
@@ -2165,14 +2129,6 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
 
   def authority_comments_url(*args); end
 
-  def authority_councillor_contribution_path(*args); end
-
-  def authority_councillor_contribution_thank_you_path(*args); end
-
-  def authority_councillor_contribution_thank_you_url(*args); end
-
-  def authority_councillor_contribution_url(*args); end
-
   def authority_path(*args); end
 
   def authority_under_the_hood_path(*args); end
@@ -2197,25 +2153,9 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
 
   def batch_action_admin_comments_url(*args); end
 
-  def batch_action_admin_councillor_contributions_path(*args); end
-
-  def batch_action_admin_councillor_contributions_url(*args); end
-
-  def batch_action_admin_councillors_path(*args); end
-
-  def batch_action_admin_councillors_url(*args); end
-
-  def batch_action_admin_replies_path(*args); end
-
-  def batch_action_admin_replies_url(*args); end
-
   def batch_action_admin_reports_path(*args); end
 
   def batch_action_admin_reports_url(*args); end
-
-  def batch_action_admin_suggested_councillors_path(*args); end
-
-  def batch_action_admin_suggested_councillors_url(*args); end
 
   def batch_action_admin_users_path(*args); end
 
@@ -2244,10 +2184,6 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
   def confirmed_comment_path(*args); end
 
   def confirmed_comment_url(*args); end
-
-  def councillor_contributions_path(*args); end
-
-  def councillor_contributions_url(*args); end
 
   def cuttlefish_event_path(*args); end
 
@@ -2280,18 +2216,6 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
   def edit_admin_comment_path(*args); end
 
   def edit_admin_comment_url(*args); end
-
-  def edit_admin_councillor_path(*args); end
-
-  def edit_admin_councillor_url(*args); end
-
-  def edit_admin_reply_path(*args); end
-
-  def edit_admin_reply_url(*args); end
-
-  def edit_admin_suggested_councillor_path(*args); end
-
-  def edit_admin_suggested_councillor_url(*args); end
 
   def edit_admin_user_path(*args); end
 
@@ -2341,14 +2265,6 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
 
   def import_admin_authority_url(*args); end
 
-  def load_councillors_admin_authority_path(*args); end
-
-  def load_councillors_admin_authority_url(*args); end
-
-  def load_replies_admin_comment_path(*args); end
-
-  def load_replies_admin_comment_url(*args); end
-
   def nearby_application_path(*args); end
 
   def nearby_application_url(*args); end
@@ -2357,14 +2273,6 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
 
   def new_admin_authority_url(*args); end
 
-  def new_admin_councillor_path(*args); end
-
-  def new_admin_councillor_url(*args); end
-
-  def new_admin_reply_path(*args); end
-
-  def new_admin_reply_url(*args); end
-
   def new_admin_user_path(*args); end
 
   def new_admin_user_url(*args); end
@@ -2372,10 +2280,6 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
   def new_alert_path(*args); end
 
   def new_alert_url(*args); end
-
-  def new_authority_councillor_contribution_path(*args); end
-
-  def new_authority_councillor_contribution_url(*args); end
 
   def new_comment_report_path(*args); end
 
@@ -2441,14 +2345,6 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
 
   def sidekiq_web_url(*args); end
 
-  def toggle_accepted_admin_councillor_contribution_path(*args); end
-
-  def toggle_accepted_admin_councillor_contribution_url(*args); end
-
-  def toggle_reviewed_admin_councillor_contribution_path(*args); end
-
-  def toggle_reviewed_admin_councillor_contribution_url(*args); end
-
   def toggle_theme_path(*args); end
 
   def toggle_theme_url(*args); end
@@ -2480,10 +2376,6 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
   def user_session_path(*args); end
 
   def user_session_url(*args); end
-
-  def writeit_reply_webhook_comments_path(*args); end
-
-  def writeit_reply_webhook_comments_url(*args); end
 end
 
 class ActiveAdmin::Inputs::DatepickerInput
@@ -5085,8 +4977,6 @@ end
 
 class Admin::AuthoritiesController
   def import(); end
-
-  def load_councillors(); end
 end
 
 class Admin::AuthoritiesController
@@ -5102,8 +4992,6 @@ end
 class Admin::CommentsController
   def confirm(); end
 
-  def load_replies(); end
-
   def resend(); end
 end
 
@@ -5111,34 +4999,10 @@ class Admin::CommentsController
   def self.resource_class=(klass); end
 end
 
-class Admin::CouncillorContributionsController
-  def toggle_accepted(); end
-
-  def toggle_reviewed(); end
-end
-
-class Admin::CouncillorContributionsController
-  def self.resource_class=(klass); end
-end
-
-class Admin::CouncillorsController
-end
-
-class Admin::CouncillorsController
-  def self.resource_class=(klass); end
-end
-
 class Admin::DashboardController
 end
 
 class Admin::DashboardController
-end
-
-class Admin::RepliesController
-end
-
-class Admin::RepliesController
-  def self.resource_class=(klass); end
 end
 
 class Admin::ReportsController
@@ -5154,14 +5018,6 @@ end
 
 class Admin::SiteSettingsController::WrappedSiteSettingParams
   def self.inherited(s); end
-end
-
-class Admin::SuggestedCouncillorsController
-  def update(); end
-end
-
-class Admin::SuggestedCouncillorsController
-  def self.resource_class=(klass); end
 end
 
 class Admin::UsersController
@@ -5340,12 +5196,6 @@ class Application
 
   def after_add_for_comments?(); end
 
-  def after_add_for_replies(); end
-
-  def after_add_for_replies=(val); end
-
-  def after_add_for_replies?(); end
-
   def after_add_for_versions(); end
 
   def after_add_for_versions=(val); end
@@ -5357,12 +5207,6 @@ class Application
   def after_remove_for_comments=(val); end
 
   def after_remove_for_comments?(); end
-
-  def after_remove_for_replies(); end
-
-  def after_remove_for_replies=(val); end
-
-  def after_remove_for_replies?(); end
 
   def after_remove_for_versions(); end
 
@@ -5378,8 +5222,6 @@ class Application
 
   def autosave_associated_records_for_first_version(); end
 
-  def autosave_associated_records_for_replies(*args); end
-
   def autosave_associated_records_for_versions(*args); end
 
   def before_add_for_comments(); end
@@ -5387,12 +5229,6 @@ class Application
   def before_add_for_comments=(val); end
 
   def before_add_for_comments?(); end
-
-  def before_add_for_replies(); end
-
-  def before_add_for_replies=(val); end
-
-  def before_add_for_replies?(); end
 
   def before_add_for_versions(); end
 
@@ -5405,12 +5241,6 @@ class Application
   def before_remove_for_comments=(val); end
 
   def before_remove_for_comments?(); end
-
-  def before_remove_for_replies(); end
-
-  def before_remove_for_replies=(val); end
-
-  def before_remove_for_replies?(); end
 
   def before_remove_for_versions(); end
 
@@ -5431,8 +5261,6 @@ class Application
   def similar(options=T.unsafe(nil)); end
 
   def validate_associated_records_for_comments(*args); end
-
-  def validate_associated_records_for_replies(*args); end
 
   def validate_associated_records_for_versions(*args); end
 end
@@ -5479,8 +5307,6 @@ module Application::GeneratedAssociationMethods
 
   def reload_first_version(); end
 
-  def reply_ids=(ids); end
-
   def version_ids=(ids); end
 end
 
@@ -5516,12 +5342,6 @@ class Application
 
   def self.after_add_for_comments?(); end
 
-  def self.after_add_for_replies(); end
-
-  def self.after_add_for_replies=(val); end
-
-  def self.after_add_for_replies?(); end
-
   def self.after_add_for_versions(); end
 
   def self.after_add_for_versions=(val); end
@@ -5533,12 +5353,6 @@ class Application
   def self.after_remove_for_comments=(val); end
 
   def self.after_remove_for_comments?(); end
-
-  def self.after_remove_for_replies(); end
-
-  def self.after_remove_for_replies=(val); end
-
-  def self.after_remove_for_replies?(); end
 
   def self.after_remove_for_versions(); end
 
@@ -5552,12 +5366,6 @@ class Application
 
   def self.before_add_for_comments?(); end
 
-  def self.before_add_for_replies(); end
-
-  def self.before_add_for_replies=(val); end
-
-  def self.before_add_for_replies?(); end
-
   def self.before_add_for_versions(); end
 
   def self.before_add_for_versions=(val); end
@@ -5569,12 +5377,6 @@ class Application
   def self.before_remove_for_comments=(val); end
 
   def self.before_remove_for_comments?(); end
-
-  def self.before_remove_for_replies(); end
-
-  def self.before_remove_for_replies=(val); end
-
-  def self.before_remove_for_replies?(); end
 
   def self.before_remove_for_versions(); end
 
@@ -5880,18 +5682,6 @@ class Authority
 
   def after_add_for_comments?(); end
 
-  def after_add_for_councillor_contributions(); end
-
-  def after_add_for_councillor_contributions=(val); end
-
-  def after_add_for_councillor_contributions?(); end
-
-  def after_add_for_councillors(); end
-
-  def after_add_for_councillors=(val); end
-
-  def after_add_for_councillors?(); end
-
   def after_remove_for_applications(); end
 
   def after_remove_for_applications=(val); end
@@ -5904,25 +5694,9 @@ class Authority
 
   def after_remove_for_comments?(); end
 
-  def after_remove_for_councillor_contributions(); end
-
-  def after_remove_for_councillor_contributions=(val); end
-
-  def after_remove_for_councillor_contributions?(); end
-
-  def after_remove_for_councillors(); end
-
-  def after_remove_for_councillors=(val); end
-
-  def after_remove_for_councillors?(); end
-
   def autosave_associated_records_for_applications(*args); end
 
   def autosave_associated_records_for_comments(*args); end
-
-  def autosave_associated_records_for_councillor_contributions(*args); end
-
-  def autosave_associated_records_for_councillors(*args); end
 
   def autosave_associated_records_for_github_issue(); end
 
@@ -5938,18 +5712,6 @@ class Authority
 
   def before_add_for_comments?(); end
 
-  def before_add_for_councillor_contributions(); end
-
-  def before_add_for_councillor_contributions=(val); end
-
-  def before_add_for_councillor_contributions?(); end
-
-  def before_add_for_councillors(); end
-
-  def before_add_for_councillors=(val); end
-
-  def before_add_for_councillors?(); end
-
   def before_remove_for_applications(); end
 
   def before_remove_for_applications=(val); end
@@ -5962,25 +5724,9 @@ class Authority
 
   def before_remove_for_comments?(); end
 
-  def before_remove_for_councillor_contributions(); end
-
-  def before_remove_for_councillor_contributions=(val); end
-
-  def before_remove_for_councillor_contributions?(); end
-
-  def before_remove_for_councillors(); end
-
-  def before_remove_for_councillors=(val); end
-
-  def before_remove_for_councillors?(); end
-
   def validate_associated_records_for_applications(*args); end
 
   def validate_associated_records_for_comments(*args); end
-
-  def validate_associated_records_for_councillor_contributions(*args); end
-
-  def validate_associated_records_for_councillors(*args); end
 end
 
 class Authority::ActiveRecord_AssociationRelation
@@ -6004,10 +5750,6 @@ module Authority::GeneratedAssociationMethods
   def build_github_issue(*args, &block); end
 
   def comment_ids=(ids); end
-
-  def councillor_contribution_ids=(ids); end
-
-  def councillor_ids=(ids); end
 
   def create_github_issue(*args, &block); end
 
@@ -6040,18 +5782,6 @@ class Authority
 
   def self.after_add_for_comments?(); end
 
-  def self.after_add_for_councillor_contributions(); end
-
-  def self.after_add_for_councillor_contributions=(val); end
-
-  def self.after_add_for_councillor_contributions?(); end
-
-  def self.after_add_for_councillors(); end
-
-  def self.after_add_for_councillors=(val); end
-
-  def self.after_add_for_councillors?(); end
-
   def self.after_remove_for_applications(); end
 
   def self.after_remove_for_applications=(val); end
@@ -6063,18 +5793,6 @@ class Authority
   def self.after_remove_for_comments=(val); end
 
   def self.after_remove_for_comments?(); end
-
-  def self.after_remove_for_councillor_contributions(); end
-
-  def self.after_remove_for_councillor_contributions=(val); end
-
-  def self.after_remove_for_councillor_contributions?(); end
-
-  def self.after_remove_for_councillors(); end
-
-  def self.after_remove_for_councillors=(val); end
-
-  def self.after_remove_for_councillors?(); end
 
   def self.before_add_for_applications(); end
 
@@ -6088,18 +5806,6 @@ class Authority
 
   def self.before_add_for_comments?(); end
 
-  def self.before_add_for_councillor_contributions(); end
-
-  def self.before_add_for_councillor_contributions=(val); end
-
-  def self.before_add_for_councillor_contributions?(); end
-
-  def self.before_add_for_councillors(); end
-
-  def self.before_add_for_councillors=(val); end
-
-  def self.before_add_for_councillors?(); end
-
   def self.before_remove_for_applications(); end
 
   def self.before_remove_for_applications=(val); end
@@ -6111,18 +5817,6 @@ class Authority
   def self.before_remove_for_comments=(val); end
 
   def self.before_remove_for_comments?(); end
-
-  def self.before_remove_for_councillor_contributions(); end
-
-  def self.before_remove_for_councillor_contributions=(val); end
-
-  def self.before_remove_for_councillor_contributions?(); end
-
-  def self.before_remove_for_councillors(); end
-
-  def self.before_remove_for_councillors=(val); end
-
-  def self.before_remove_for_councillors?(); end
 end
 
 class AuthorityLogger
@@ -8577,23 +8271,11 @@ end
 
 class Comment
   include ::AfterCommitAction
-  def after_add_for_replies(); end
-
-  def after_add_for_replies=(val); end
-
-  def after_add_for_replies?(); end
-
   def after_add_for_reports(); end
 
   def after_add_for_reports=(val); end
 
   def after_add_for_reports?(); end
-
-  def after_remove_for_replies(); end
-
-  def after_remove_for_replies=(val); end
-
-  def after_remove_for_replies?(); end
 
   def after_remove_for_reports(); end
 
@@ -8603,29 +8285,13 @@ class Comment
 
   def autosave_associated_records_for_application(*args); end
 
-  def autosave_associated_records_for_councillor(*args); end
-
-  def autosave_associated_records_for_replies(*args); end
-
   def autosave_associated_records_for_reports(*args); end
-
-  def before_add_for_replies(); end
-
-  def before_add_for_replies=(val); end
-
-  def before_add_for_replies?(); end
 
   def before_add_for_reports(); end
 
   def before_add_for_reports=(val); end
 
   def before_add_for_reports?(); end
-
-  def before_remove_for_replies(); end
-
-  def before_remove_for_replies=(val); end
-
-  def before_remove_for_replies?(); end
 
   def before_remove_for_reports(); end
 
@@ -8634,8 +8300,6 @@ class Comment
   def before_remove_for_reports?(); end
 
   def belongs_to_counter_cache_after_update(reflection); end
-
-  def validate_associated_records_for_replies(*args); end
 
   def validate_associated_records_for_reports(*args); end
 end
@@ -8658,21 +8322,11 @@ end
 module Comment::GeneratedAssociationMethods
   def build_application(*args, &block); end
 
-  def build_councillor(*args, &block); end
-
   def create_application(*args, &block); end
 
   def create_application!(*args, &block); end
 
-  def create_councillor(*args, &block); end
-
-  def create_councillor!(*args, &block); end
-
   def reload_application(); end
-
-  def reload_councillor(); end
-
-  def reply_ids=(ids); end
 
   def report_ids=(ids); end
 end
@@ -8681,8 +8335,6 @@ module Comment::GeneratedRelationMethods
   def confirmed(*args, &block); end
 
   def in_past_week(*args, &block); end
-
-  def to_councillor(*args, &block); end
 
   def visible(*args, &block); end
 end
@@ -8693,23 +8345,11 @@ end
 class Comment
   extend ::T::Private::Methods::MethodHooks
   extend ::T::Private::Methods::SingletonMethodHooks
-  def self.after_add_for_replies(); end
-
-  def self.after_add_for_replies=(val); end
-
-  def self.after_add_for_replies?(); end
-
   def self.after_add_for_reports(); end
 
   def self.after_add_for_reports=(val); end
 
   def self.after_add_for_reports?(); end
-
-  def self.after_remove_for_replies(); end
-
-  def self.after_remove_for_replies=(val); end
-
-  def self.after_remove_for_replies?(); end
 
   def self.after_remove_for_reports(); end
 
@@ -8717,23 +8357,11 @@ class Comment
 
   def self.after_remove_for_reports?(); end
 
-  def self.before_add_for_replies(); end
-
-  def self.before_add_for_replies=(val); end
-
-  def self.before_add_for_replies?(); end
-
   def self.before_add_for_reports(); end
 
   def self.before_add_for_reports=(val); end
 
   def self.before_add_for_reports?(); end
-
-  def self.before_remove_for_replies(); end
-
-  def self.before_remove_for_replies=(val); end
-
-  def self.before_remove_for_replies?(); end
 
   def self.before_remove_for_reports(); end
 
@@ -8756,10 +8384,6 @@ class CommentsController::IndexParams
 end
 
 class CommentsController::PerWeekParams
-  def self.inherited(s); end
-end
-
-class CommentsController::WriteitReplyHookParams
   def self.inherited(s); end
 end
 
@@ -9080,350 +8704,6 @@ class ConnectionPool::Wrapper
   METHODS = ::T.let(nil, ::T.untyped)
 end
 
-class Contributor
-  def after_add_for_councillor_contributions(); end
-
-  def after_add_for_councillor_contributions=(val); end
-
-  def after_add_for_councillor_contributions?(); end
-
-  def after_remove_for_councillor_contributions(); end
-
-  def after_remove_for_councillor_contributions=(val); end
-
-  def after_remove_for_councillor_contributions?(); end
-
-  def autosave_associated_records_for_councillor_contributions(*args); end
-
-  def before_add_for_councillor_contributions(); end
-
-  def before_add_for_councillor_contributions=(val); end
-
-  def before_add_for_councillor_contributions?(); end
-
-  def before_remove_for_councillor_contributions(); end
-
-  def before_remove_for_councillor_contributions=(val); end
-
-  def before_remove_for_councillor_contributions?(); end
-
-  def validate_associated_records_for_councillor_contributions(*args); end
-end
-
-class Contributor::ActiveRecord_AssociationRelation
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::Contributor::GeneratedRelationMethods
-end
-
-class Contributor::ActiveRecord_Associations_CollectionProxy
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::Contributor::GeneratedRelationMethods
-end
-
-class Contributor::ActiveRecord_Relation
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::Contributor::GeneratedRelationMethods
-end
-
-module Contributor::GeneratedAssociationMethods
-  def councillor_contribution_ids=(ids); end
-end
-
-module Contributor::GeneratedRelationMethods
-end
-
-module Contributor::GeneratedRelationMethods
-end
-
-class Contributor
-  def self.after_add_for_councillor_contributions(); end
-
-  def self.after_add_for_councillor_contributions=(val); end
-
-  def self.after_add_for_councillor_contributions?(); end
-
-  def self.after_remove_for_councillor_contributions(); end
-
-  def self.after_remove_for_councillor_contributions=(val); end
-
-  def self.after_remove_for_councillor_contributions?(); end
-
-  def self.before_add_for_councillor_contributions(); end
-
-  def self.before_add_for_councillor_contributions=(val); end
-
-  def self.before_add_for_councillor_contributions?(); end
-
-  def self.before_remove_for_councillor_contributions(); end
-
-  def self.before_remove_for_councillor_contributions=(val); end
-
-  def self.before_remove_for_councillor_contributions?(); end
-end
-
-class Councillor
-  def after_add_for_comments(); end
-
-  def after_add_for_comments=(val); end
-
-  def after_add_for_comments?(); end
-
-  def after_add_for_replies(); end
-
-  def after_add_for_replies=(val); end
-
-  def after_add_for_replies?(); end
-
-  def after_remove_for_comments(); end
-
-  def after_remove_for_comments=(val); end
-
-  def after_remove_for_comments?(); end
-
-  def after_remove_for_replies(); end
-
-  def after_remove_for_replies=(val); end
-
-  def after_remove_for_replies?(); end
-
-  def autosave_associated_records_for_authority(*args); end
-
-  def autosave_associated_records_for_comments(*args); end
-
-  def autosave_associated_records_for_replies(*args); end
-
-  def before_add_for_comments(); end
-
-  def before_add_for_comments=(val); end
-
-  def before_add_for_comments?(); end
-
-  def before_add_for_replies(); end
-
-  def before_add_for_replies=(val); end
-
-  def before_add_for_replies?(); end
-
-  def before_remove_for_comments(); end
-
-  def before_remove_for_comments=(val); end
-
-  def before_remove_for_comments?(); end
-
-  def before_remove_for_replies(); end
-
-  def before_remove_for_replies=(val); end
-
-  def before_remove_for_replies?(); end
-
-  def belongs_to_counter_cache_after_update(reflection); end
-
-  def validate_associated_records_for_comments(*args); end
-
-  def validate_associated_records_for_replies(*args); end
-end
-
-class Councillor::ActiveRecord_AssociationRelation
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::Councillor::GeneratedRelationMethods
-end
-
-class Councillor::ActiveRecord_Associations_CollectionProxy
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::Councillor::GeneratedRelationMethods
-end
-
-class Councillor::ActiveRecord_Relation
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::Councillor::GeneratedRelationMethods
-end
-
-module Councillor::GeneratedAssociationMethods
-  def build_authority(*args, &block); end
-
-  def comment_ids=(ids); end
-
-  def create_authority(*args, &block); end
-
-  def create_authority!(*args, &block); end
-
-  def reload_authority(); end
-
-  def reply_ids=(ids); end
-end
-
-module Councillor::GeneratedRelationMethods
-end
-
-module Councillor::GeneratedRelationMethods
-end
-
-class Councillor
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-  def self.after_add_for_comments(); end
-
-  def self.after_add_for_comments=(val); end
-
-  def self.after_add_for_comments?(); end
-
-  def self.after_add_for_replies(); end
-
-  def self.after_add_for_replies=(val); end
-
-  def self.after_add_for_replies?(); end
-
-  def self.after_remove_for_comments(); end
-
-  def self.after_remove_for_comments=(val); end
-
-  def self.after_remove_for_comments?(); end
-
-  def self.after_remove_for_replies(); end
-
-  def self.after_remove_for_replies=(val); end
-
-  def self.after_remove_for_replies?(); end
-
-  def self.before_add_for_comments(); end
-
-  def self.before_add_for_comments=(val); end
-
-  def self.before_add_for_comments?(); end
-
-  def self.before_add_for_replies(); end
-
-  def self.before_add_for_replies=(val); end
-
-  def self.before_add_for_replies?(); end
-
-  def self.before_remove_for_comments(); end
-
-  def self.before_remove_for_comments=(val); end
-
-  def self.before_remove_for_comments?(); end
-
-  def self.before_remove_for_replies(); end
-
-  def self.before_remove_for_replies=(val); end
-
-  def self.before_remove_for_replies?(); end
-end
-
-class CouncillorContribution
-  def after_add_for_suggested_councillors(); end
-
-  def after_add_for_suggested_councillors=(val); end
-
-  def after_add_for_suggested_councillors?(); end
-
-  def after_remove_for_suggested_councillors(); end
-
-  def after_remove_for_suggested_councillors=(val); end
-
-  def after_remove_for_suggested_councillors?(); end
-
-  def autosave_associated_records_for_authority(*args); end
-
-  def autosave_associated_records_for_contributor(*args); end
-
-  def autosave_associated_records_for_suggested_councillors(*args); end
-
-  def before_add_for_suggested_councillors(); end
-
-  def before_add_for_suggested_councillors=(val); end
-
-  def before_add_for_suggested_councillors?(); end
-
-  def before_remove_for_suggested_councillors(); end
-
-  def before_remove_for_suggested_councillors=(val); end
-
-  def before_remove_for_suggested_councillors?(); end
-
-  def belongs_to_counter_cache_after_update(reflection); end
-
-  def validate_associated_records_for_contributor(*args); end
-
-  def validate_associated_records_for_suggested_councillors(*args); end
-end
-
-class CouncillorContribution::ActiveRecord_AssociationRelation
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::CouncillorContribution::GeneratedRelationMethods
-end
-
-class CouncillorContribution::ActiveRecord_Associations_CollectionProxy
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::CouncillorContribution::GeneratedRelationMethods
-end
-
-class CouncillorContribution::ActiveRecord_Relation
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::CouncillorContribution::GeneratedRelationMethods
-end
-
-module CouncillorContribution::GeneratedAssociationMethods
-  def build_authority(*args, &block); end
-
-  def build_contributor(*args, &block); end
-
-  def contributor_attributes=(attributes); end
-
-  def create_authority(*args, &block); end
-
-  def create_authority!(*args, &block); end
-
-  def create_contributor(*args, &block); end
-
-  def create_contributor!(*args, &block); end
-
-  def reload_authority(); end
-
-  def reload_contributor(); end
-
-  def suggested_councillor_ids=(ids); end
-
-  def suggested_councillors_attributes=(attributes); end
-end
-
-module CouncillorContribution::GeneratedRelationMethods
-end
-
-module CouncillorContribution::GeneratedRelationMethods
-end
-
-class CouncillorContribution
-  def self.after_add_for_suggested_councillors(); end
-
-  def self.after_add_for_suggested_councillors=(val); end
-
-  def self.after_add_for_suggested_councillors?(); end
-
-  def self.after_remove_for_suggested_councillors(); end
-
-  def self.after_remove_for_suggested_councillors=(val); end
-
-  def self.after_remove_for_suggested_councillors?(); end
-
-  def self.before_add_for_suggested_councillors(); end
-
-  def self.before_add_for_suggested_councillors=(val); end
-
-  def self.before_add_for_suggested_councillors?(); end
-
-  def self.before_remove_for_suggested_councillors(); end
-
-  def self.before_remove_for_suggested_councillors=(val); end
-
-  def self.before_remove_for_suggested_councillors?(); end
-end
-
-class CouncillorContributionMailer
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
 class CountedFile
   extend ::T::Private::Methods::MethodHooks
   extend ::T::Private::Methods::SingletonMethodHooks
@@ -9719,22 +8999,6 @@ class Dalli::Server
   REQUEST = ::T.let(nil, ::T.untyped)
   RESPONSE = ::T.let(nil, ::T.untyped)
   RESPONSE_CODES = ::T.let(nil, ::T.untyped)
-end
-
-module DatabaseCleaner
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-class DatabaseCleaner::Safeguard
-  CHECKS = ::T.let(nil, ::T.untyped)
-end
-
-class DatabaseCleaner::Safeguard::Production
-  KEYS = ::T.let(nil, ::T.untyped)
-end
-
-class DatabaseCleaner::Safeguard::RemoteDatabaseUrl
-  LOCAL = ::T.let(nil, ::T.untyped)
 end
 
 class Date
@@ -10333,6 +9597,10 @@ module Docile
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
+module Docile::BacktraceFilter
+  FILTER_PATTERN = ::T.let(nil, ::T.untyped)
+end
+
 class Docile::FallbackContextProxy
   NON_FALLBACK_METHODS = ::T.let(nil, ::T.untyped)
   NON_PROXIED_INSTANCE_VARIABLES = ::T.let(nil, ::T.untyped)
@@ -10369,7 +9637,13 @@ class Dotenv::Parser
   LINE = ::T.let(nil, ::T.untyped)
 end
 
-EM = EventMachine
+module EventMachine
+end
+
+EM::Pool = EventMachine::Pool
+
+module EventMachine
+end
 
 class ERB
   def def_method(mod, methodname, fname=T.unsafe(nil)); end
@@ -10874,8 +10148,6 @@ class EventMachine::DNS::Resolver
   HOSTS_FILE = ::T.let(nil, ::T.untyped)
 end
 
-EventMachine::Deferrable::Pool = EventMachine::Pool
-
 class EventMachine::FileStreamer
   BackpressureLevel = ::T.let(nil, ::T.untyped)
   ChunkSize = ::T.let(nil, ::T.untyped)
@@ -10903,8 +10175,6 @@ end
 
 class EventMachine::NoHandlerForAcceptedConnection
 end
-
-EventMachine::P = EventMachine::Protocols
 
 class EventMachine::ProcessWatch
   Cexit = ::T.let(nil, ::T.untyped)
@@ -11308,12 +10578,6 @@ end
 
 class EventMachine::WebSocket::Handler76
   TERMINATE_STRING = ::T.let(nil, ::T.untyped)
-end
-
-EveryPolitician = Everypolitician
-
-module Everypolitician::Popolo
-  VERSION = ::T.let(nil, ::T.untyped)
 end
 
 class Exception
@@ -12027,6 +11291,8 @@ class File
   def self.atomic_write(file_name, temp_dir=T.unsafe(nil)); end
 
   def self.exists?(_); end
+
+  def self.probe_stat_in(dir); end
 end
 
 FileList = Rake::FileList
@@ -14522,7 +13788,7 @@ class Hash
 end
 
 class Hash
-  def self.from_trusted_xml(xml); end
+  def self.from_xml(xml, disallowed_types=T.unsafe(nil)); end
 end
 
 HashWithIndifferentAccess = ActiveSupport::HashWithIndifferentAccess
@@ -20082,8 +19348,6 @@ end
 class Net::HTTPAlreadyReported
 end
 
-Net::HTTPClientError::EXCEPTION_TYPE = Net::HTTPServerException
-
 Net::HTTPClientErrorCode = Net::HTTPClientError
 
 Net::HTTPClientException = Net::HTTPServerException
@@ -20172,8 +19436,6 @@ Net::HTTPRequestURITooLarge = Net::HTTPURITooLong
 Net::HTTPResponceReceiver = Net::HTTPResponse
 
 Net::HTTPRetriableCode = Net::HTTPRedirection
-
-Net::HTTPServerError::EXCEPTION_TYPE = Net::HTTPFatalError
 
 Net::HTTPServerErrorCode = Net::HTTPServerError
 
@@ -21502,19 +20764,7 @@ module Nokogiri::Gumbo
   DEFAULT_MAX_TREE_DEPTH = ::T.let(nil, ::T.untyped)
 end
 
-module Nokogiri::HTML4
-end
-
-class Nokogiri::HTML4::ElementDescription
-end
-
-Nokogiri::HTML::ElementDescription::Desc = Struct::HTMLElementDescription
-
-class Nokogiri::HTML4::ElementDescription
-end
-
-module Nokogiri::HTML4
-end
+Nokogiri::HTML = Nokogiri::HTML4
 
 module Nokogiri::HTML4
   NamedCharacters = ::T.let(nil, ::T.untyped)
@@ -21630,6 +20880,8 @@ class Nokogiri::HTML4::ElementDescription
   VERSION_ATTR = ::T.let(nil, ::T.untyped)
   WIDTH_ATTR = ::T.let(nil, ::T.untyped)
 end
+
+Nokogiri::HTML4::ElementDescription::Desc = Struct::HTMLElementDescription
 
 module Nokogiri::HTML5
   HTML_NAMESPACE = ::T.let(nil, ::T.untyped)
@@ -21849,7 +21101,6 @@ end
 class Object
   include ::JSON::Ext::Generator::GeneratorMethods::Object
   include ::PP::ObjectMixin
-  include ::RequireAll
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
   def to_yaml(options=T.unsafe(nil)); end
   ARGF = ::T.let(nil, ::T.untyped)
@@ -22269,11 +21520,6 @@ class Pathname
   def make_symlink(_); end
 end
 
-class PersonWithExtraFields
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
 Polyamorous::InnerJoin = Arel::Nodes::InnerJoin
 
 Polyamorous::JoinAssociation = ActiveRecord::Associations::JoinDependency::JoinAssociation
@@ -22396,45 +21642,40 @@ module Polyfill
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
-module Polyfill::Module::M47437324410960
+module Polyfill::Module::M47078918680360
 end
 
-module Polyfill::Module::M47437324410960
+module Polyfill::Module::M47078918680360
 end
 
-module Polyfill::Module::M47437324785200
+module Polyfill::Module::M47078919038500
 end
 
-module Polyfill::Module::M47437324785200
+module Polyfill::Module::M47078919038500
 end
 
-module Polyfill::Module::M47437325051180
+module Polyfill::Module::M47078921757560
 end
 
-module Polyfill::Module::M47437325051180
+module Polyfill::Module::M47078921757560
 end
 
-module Polyfill::Module::M47437325603160
+module Polyfill::Module::M47078922249600
 end
 
-module Polyfill::Module::M47437325603160
+module Polyfill::Module::M47078922249600
 end
 
-module Polyfill::Module::M47437325810800
+module Polyfill::Module::M47078924076340
 end
 
-module Polyfill::Module::M47437325810800
+module Polyfill::Module::M47078924076340
 end
 
-module Polyfill::Module::M47437329830840
+module Polyfill::Module::M47078924268440
 end
 
-module Polyfill::Module::M47437329830840
-end
-
-class PopoloCouncillors
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
+module Polyfill::Module::M47078924268440
 end
 
 class Proc
@@ -24996,6 +24237,15 @@ module Rack::Test::Methods
   METHODS = ::T.let(nil, ::T.untyped)
 end
 
+class Rack::Throttle::Daily
+  def max_per_day(request=T.unsafe(nil)); end
+
+  def max_per_window(request=T.unsafe(nil)); end
+end
+
+class Rack::Throttle::Daily
+end
+
 class Rack::Throttle::Hourly
   def max_per_hour(request=T.unsafe(nil)); end
 
@@ -25059,6 +24309,12 @@ class Rack::Throttle::Second
 end
 
 class Rack::Throttle::Second
+end
+
+class Rack::Throttle::TimeWindow
+end
+
+class Rack::Throttle::TimeWindow
 end
 
 module Rack::Throttle::VERSION
@@ -26372,63 +25628,6 @@ module Regexp::Syntax::Token::UnicodeProperty::Category
   Punctuation = ::T.let(nil, ::T.untyped)
   Separator = ::T.let(nil, ::T.untyped)
   Symbol = ::T.let(nil, ::T.untyped)
-end
-
-class Reply
-  def autosave_associated_records_for_comment(*args); end
-
-  def autosave_associated_records_for_councillor(*args); end
-
-  def belongs_to_counter_cache_after_update(reflection); end
-end
-
-class Reply::ActiveRecord_AssociationRelation
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::Reply::GeneratedRelationMethods
-end
-
-class Reply::ActiveRecord_Associations_CollectionProxy
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::Reply::GeneratedRelationMethods
-end
-
-class Reply::ActiveRecord_Relation
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::Reply::GeneratedRelationMethods
-end
-
-module Reply::GeneratedAssociationMethods
-  def build_comment(*args, &block); end
-
-  def build_councillor(*args, &block); end
-
-  def create_comment(*args, &block); end
-
-  def create_comment!(*args, &block); end
-
-  def create_councillor(*args, &block); end
-
-  def create_councillor!(*args, &block); end
-
-  def reload_comment(); end
-
-  def reload_councillor(); end
-end
-
-module Reply::GeneratedRelationMethods
-end
-
-module Reply::GeneratedRelationMethods
-end
-
-class Reply
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
-
-class ReplyMailer
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
 end
 
 class Report
@@ -28170,6 +27369,10 @@ module SimpleCov::ExitCodes
   SUCCESS = ::T.let(nil, ::T.untyped)
 end
 
+class SimpleCov::ExitCodes::MaximumCoverageDropCheck
+  MAX_DROP_ACCURACY = ::T.let(nil, ::T.untyped)
+end
+
 class SimpleCov::Formatter::HTMLFormatter
   VERSION = ::T.let(nil, ::T.untyped)
 end
@@ -28187,8 +27390,8 @@ class SimpleCov::SourceFile
   SHEBANG_REGEX = ::T.let(nil, ::T.untyped)
 end
 
-module SimpleCov::UselessResultsRemover
-  ROOT_REGX = ::T.let(nil, ::T.untyped)
+class SimpleCovJSONFormatter::ResultExporter
+  FILENAME = ::T.let(nil, ::T.untyped)
 end
 
 class SimpleOAuth::Header
@@ -28703,52 +27906,6 @@ Struct::Group = Etc::Group
 Struct::Passwd = Etc::Passwd
 
 Struct::Tms = Process::Tms
-
-class SuggestedCouncillor
-  def autosave_associated_records_for_authority(); end
-
-  def autosave_associated_records_for_councillor_contribution(*args); end
-
-  def belongs_to_counter_cache_after_update(reflection); end
-end
-
-class SuggestedCouncillor::ActiveRecord_AssociationRelation
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::SuggestedCouncillor::GeneratedRelationMethods
-end
-
-class SuggestedCouncillor::ActiveRecord_Associations_CollectionProxy
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::SuggestedCouncillor::GeneratedRelationMethods
-end
-
-class SuggestedCouncillor::ActiveRecord_Relation
-  include ::ActiveRecord::Delegation::ClassSpecificRelation
-  include ::SuggestedCouncillor::GeneratedRelationMethods
-end
-
-module SuggestedCouncillor::GeneratedAssociationMethods
-  def build_councillor_contribution(*args, &block); end
-
-  def create_councillor_contribution(*args, &block); end
-
-  def create_councillor_contribution!(*args, &block); end
-
-  def reload_authority(); end
-
-  def reload_councillor_contribution(); end
-end
-
-module SuggestedCouncillor::GeneratedRelationMethods
-end
-
-module SuggestedCouncillor::GeneratedRelationMethods
-end
-
-class SuggestedCouncillor
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
-end
 
 class Symbol
   def self.from_msgpack_ext(data); end

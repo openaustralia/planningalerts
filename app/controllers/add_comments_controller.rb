@@ -18,7 +18,6 @@ class AddCommentsController < ApplicationController
     const :application_id, Integer
     const :little_sweety, T.nilable(String)
     const :add_comment, AddCommentParams
-    const :councillors_list_toggler, T.nilable(String)
   end
 
   sig { void }
@@ -44,8 +43,6 @@ class AddCommentsController < ApplicationController
 
     # TODO: This seems to have a lot repeated from Application#show
     flash.now[:error] = t(".not_filled_out")
-
-    @councillor_list_open = T.let(true, T.nilable(T::Boolean)) if typed_params.councillors_list_toggler == "open"
 
     # HACK: Required for new email alert signup form
     @alert = T.let(Alert.new(address: application.address), T.nilable(Alert))

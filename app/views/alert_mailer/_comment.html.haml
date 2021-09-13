@@ -1,4 +1,4 @@
-.comment.module{ class: ("comment-to-councillor" if comment.councillor) }
+.comment.module
   %h2.comment-location.panel-body
     On
     = link_to application_url_with_tracking(id: comment.application.id),
@@ -9,17 +9,6 @@
     %p.comment-meta
       %span
         %span.comment-author= comment.name
-        - if comment.councillor
-          wrote to
-          %span.comment-recipient.h-card
-            local councillor
-            %span.p-name= comment.councillor.name
-        - else
-          commented
+        commented
     = comment_as_html(truncate(comment.text, length: 700))
     = link_to "View comment on PlanningAlerts", comment_url_with_tracking(comment: comment), class: "action-link"
-  - if comment.councillor && comment.replies.empty?
-    .panel-body.comment-to-councillor-status
-      %p
-        Delivered to #{comment.councillor.prefixed_name}.
-        %span They are yet to respond.

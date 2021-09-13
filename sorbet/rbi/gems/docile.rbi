@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/docile/all/docile.rbi
 #
-# docile-1.3.2
+# docile-1.4.0
 
 module Docile
   def dsl_eval(dsl, *args, &block); end
@@ -29,4 +29,8 @@ class Docile::FallbackContextProxy
 end
 class Docile::ChainingFallbackContextProxy < Docile::FallbackContextProxy
   def method_missing(method, *args, &block); end
+end
+module Docile::BacktraceFilter
+  def backtrace; end
+  def backtrace_locations; end
 end

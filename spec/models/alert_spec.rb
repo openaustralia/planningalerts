@@ -348,55 +348,6 @@ describe Alert do
     end
   end
 
-  describe "#new_replies" do
-    let(:alert) do
-      create(:alert,
-             address: address,
-             radius_meters: 2000,
-             lat: 1.0,
-             lng: 2.0)
-    end
-
-    context "when their are no new replies" do
-      it { expect(alert.new_replies).to eq [] }
-    end
-
-    it "when there is a new reply on a nearby application it finds a new reply" do
-      application = create(:application,
-                           lat: 1.0,
-                           lng: 2.0,
-                           address: address,
-                           suburb: "Glenbrook",
-                           state: "NSW",
-                           postcode: "2773",
-                           no_alerted: 3)
-      reply = create(:reply,
-                     comment: create(:comment, application: application),
-                     received_at: 1.hour.ago)
-
-      expect(alert.new_replies).to eq [reply]
-    end
-
-    it "only finds two new reply when there are two new replies on a sinlge application" do
-      application = create(:application,
-                           lat: 1.0,
-                           lng: 2.0,
-                           address: address,
-                           suburb: "Glenbrook",
-                           state: "NSW",
-                           postcode: "2773",
-                           no_alerted: 3)
-      reply1 = create(:reply,
-                      comment: create(:comment, application: application),
-                      received_at: 1.hour.ago)
-      reply2 = create(:reply,
-                      comment: create(:comment, application: application),
-                      received_at: 2.hours.ago)
-
-      expect(alert.new_replies).to eq [reply1, reply2]
-    end
-  end
-
   describe "#applications_with_new_comments" do
     let(:alert) { create(:alert, address: address, radius_meters: 2000, lat: 1.0, lng: 2.0) }
     let(:near_application) do
@@ -462,57 +413,6 @@ describe Alert do
         create(:confirmed_comment, application: far_away_application)
 
         expect(alert.applications_with_new_comments).to eq []
-      end
-    end
-  end
-
-  describe "#applications_with_new_replies" do
-    let(:alert) do
-      create(:alert,
-             address: address,
-             radius_meters: 2000,
-             lat: 1.0,
-             lng: 2.0)
-    end
-
-    context "when there are no new relies near by" do
-      it { expect(alert.applications_with_new_replies).to eq [] }
-    end
-
-    context "when there is a new reply near by" do
-      it "should return the application it belongs to" do
-        application = create(:application,
-                             lat: 1.0,
-                             lng: 2.0,
-                             address: address,
-                             suburb: "Glenbrook",
-                             state: "NSW",
-                             postcode: "2773",
-                             no_alerted: 3)
-        create(:reply,
-               comment: create(:comment, application: application),
-               received_at: 1.hour.ago)
-
-        expect(alert.applications_with_new_replies).to eq [application]
-      end
-    end
-
-    context "when there is a new reply far away" do
-      it "should not return the application it belongs to" do
-        far_away = alert.location.endpoint(0.0, 5001.0) # 5001 m north of alert
-        application = create(:application,
-                             lat: far_away.lat,
-                             lng: far_away.lng,
-                             address: address,
-                             suburb: "Glenbrook",
-                             state: "NSW",
-                             postcode: "2773",
-                             no_alerted: 3)
-        create(:reply,
-               comment: create(:comment, application: application),
-               received_at: 1.hour.ago)
-
-        expect(alert.applications_with_new_replies).to eq []
       end
     end
   end

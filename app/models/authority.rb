@@ -5,9 +5,7 @@ class Authority < ApplicationRecord
   extend T::Sig
 
   has_many :applications, dependent: :restrict_with_exception
-  has_many :councillors, dependent: :restrict_with_exception
   has_many :comments, through: :applications
-  has_many :councillor_contributions, dependent: :restrict_with_exception
   has_one :github_issue, dependent: :destroy
 
   validate :short_name_encoded_is_unique
@@ -26,15 +24,6 @@ class Authority < ApplicationRecord
     return if other.nil? || other.id == id
 
     errors.add(:short_name, "is not unique when encoded")
-  end
-
-  sig { returns(T::Array[Councillor]) }
-  def councillors_available_for_contact
-    if write_to_councillors_enabled?
-      councillors.where(current: true).shuffle
-    else
-      []
-    end
   end
 
   sig { returns(String) }
@@ -156,35 +145,6 @@ class Authority < ApplicationRecord
     raise ActiveRecord::RecordNotFound if r.nil?
 
     r
-  end
-
-  sig { returns(T::Boolean) }
-  def write_to_councillors_enabled?
-    ENV["COUNCILLORS_ENABLED"] == "true" ? write_to_councillors_enabled : false
-  end
-
-  sig { params(popolo: Everypolitician::Popolo::JSON).returns(T::Array[Councillor]) }
-  def load_councillors(popolo)
-    popolo_councillors = PopoloCouncillors.new(popolo)
-    persons = popolo_councillors.for_authority(full_name)
-
-    persons.map do |person|
-      councillor = councillors.find_or_create_by(name: person.name)
-
-      no_longer_councillor = person.end_date.present? && Date.parse(person.end_date) <= Time.zone.today
-
-      councillor.current = false if no_longer_councillor
-      councillor.popolo_id = person.id
-      councillor.image_url = councillor.cached_image_url if councillor.cached_image_available?
-      councillor.update(email: person.email, party: person.party)
-
-      councillor
-    end
-  end
-
-  sig { returns(String) }
-  def popolo_url
-    "https://raw.githubusercontent.com/openaustralia/australian_local_councillors_popolo/master/data/#{state.upcase}/local_councillor_popolo.json"
   end
 
   # When the last entirely new application was scraped. Applications being updated is ignored.

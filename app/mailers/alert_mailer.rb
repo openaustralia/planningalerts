@@ -11,15 +11,13 @@ class AlertMailer < ApplicationMailer
     params(
       alert: Alert,
       applications: T::Array[Application],
-      comments: T::Array[Comment],
-      replies: T::Array[Reply]
+      comments: T::Array[Comment]
     ).returns(Mail::Message)
   end
-  def alert(alert, applications, comments = [], replies = [])
+  def alert(alert, applications, comments = [])
     @alert = T.let(alert, T.nilable(Alert))
     @applications = T.let(applications, T.nilable(T::Array[Application]))
     @comments = T.let(comments, T.nilable(T::Array[Comment]))
-    @replies = T.let(replies, T.nilable(T::Array[Reply]))
 
     headers(
       "List-Unsubscribe" => "<" + unsubscribe_alert_url(id: alert.confirm_id) + ">",
@@ -33,7 +31,7 @@ class AlertMailer < ApplicationMailer
       to: alert.email,
       subject: render_to_string(
         partial: "subject",
-        locals: { applications: applications, comments: comments, alert: alert, replies: replies }
+        locals: { applications: applications, comments: comments, alert: alert }
       ).strip
     )
   end

@@ -16,8 +16,7 @@ class AlertMailerPreview < ActionMailer::Preview
     # This needs to have an application and a comment loaded for this to work
     applications = [Application.first]
     comments = [Comment.first]
-    replies = []
-    mail = AlertMailer.alert(alert, applications, comments, replies)
+    mail = AlertMailer.alert(alert, applications, comments)
     alert.destroy
     mail
   end

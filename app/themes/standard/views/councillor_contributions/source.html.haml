@@ -1,7 +1,0 @@
-= form_for [@authority, @councillor_contribution], url: add_contributor_authority_councillor_contribution_path(@authority.short_name_encoded), html: { class: "councillor-contribution-form councillor-contribution-form-source" } do |f|
-  %h1.page-title Thanks! Where did you get this information?
-  = f.hidden_field :id, value: @councillor_contribution.id
-  = f.label :source, "Let us know where you found this information so we can double check it and save time when it needs to be updated. If the source was the council website, enter the web address (URL) for main councillors page. This will be published.", class: "councillor-contribution-label"
-  = f.text_area :source, rows: "5", autofocus: true
-  .councillor-contribution-actions
-    = f.submit "Submit", class: "button-action"

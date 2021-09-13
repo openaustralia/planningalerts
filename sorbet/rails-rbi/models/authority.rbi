@@ -136,24 +136,6 @@ module Authority::GeneratedAssociationMethods
   sig { params(value: T::Enumerable[::Comment]).void }
   def comments=(value); end
 
-  sig { returns(::CouncillorContribution::ActiveRecord_Associations_CollectionProxy) }
-  def councillor_contributions; end
-
-  sig { returns(T::Array[Integer]) }
-  def councillor_contribution_ids; end
-
-  sig { params(value: T::Enumerable[::CouncillorContribution]).void }
-  def councillor_contributions=(value); end
-
-  sig { returns(::Councillor::ActiveRecord_Associations_CollectionProxy) }
-  def councillors; end
-
-  sig { returns(T::Array[Integer]) }
-  def councillor_ids; end
-
-  sig { params(value: T::Enumerable[::Councillor]).void }
-  def councillors=(value); end
-
   sig { returns(T.nilable(::GithubIssue)) }
   def github_issue; end
 

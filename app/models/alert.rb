@@ -94,21 +94,6 @@ class Alert < ApplicationRecord
                .distinct
   end
 
-  sig { returns(Application::ActiveRecord_Relation) }
-  def applications_with_new_replies
-    Application.with_current_version
-               .order("date_scraped DESC")
-               .near(
-                 [lat, lng], radius_km,
-                 units: :km,
-                 latitude: "application_versions.lat",
-                 longitude: "application_versions.lng"
-               )
-               .joins(:replies)
-               .where("replies.received_at > ?", cutoff_time)
-               .distinct
-  end
-
   sig { returns(T::Array[Comment]) }
   def new_comments
     comments = []
@@ -117,16 +102,6 @@ class Alert < ApplicationRecord
       comments += application.comments.visible.where("comments.confirmed_at > ?", cutoff_time)
     end
     comments
-  end
-
-  sig { returns(T::Array[Reply]) }
-  def new_replies
-    replies = []
-    # Doing this in this roundabout way because I'm not sure how to use "near" together with joins
-    applications_with_new_replies.each do |application|
-      replies += application.replies.where("replies.received_at > ?", cutoff_time)
-    end
-    replies
   end
 
   sig { returns(T.any(ActiveSupport::TimeWithZone, Date)) }

@@ -11,7 +11,6 @@ class Application < ApplicationRecord
 
   belongs_to :authority
   has_many :comments, dependent: :restrict_with_exception
-  has_many :replies, through: :comments
   has_many :versions, -> { order(id: :desc) }, class_name: "ApplicationVersion", dependent: :destroy, inverse_of: :application
   has_one :current_version, -> { where(current: true) }, class_name: "ApplicationVersion", inverse_of: :application
   # TODO: Move first_date_scraped into applications table so that we don't need this association
@@ -49,8 +48,6 @@ class Application < ApplicationRecord
   def first_date_scraped
     T.must(first_version).date_scraped.time
   end
-
-  delegate :councillors_available_for_contact, to: :authority
 
   # Providing this for back compatibility in the API
   sig { returns(NilClass) }

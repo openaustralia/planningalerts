@@ -40,9 +40,6 @@ en:
   add_comments:
     create:
       not_filled_out: Some of the comment wasn't filled out completely. See below.
-  councillor_contributions:
-    source:
-      save_problem: There's a problem with the information you entered. See the messages below and resolve the issue before submitting your councillors.
   reports:
     create:
       you_are_a_robot_html: Sorry, we couldn’t verify that you’re not a robot. Make sure you click the <em>I’m not a robot</em> box below and try again.

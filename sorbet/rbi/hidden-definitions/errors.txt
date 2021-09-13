@@ -1151,10 +1151,6 @@
 # wrong constant name _routes
 # wrong constant name about_path
 # wrong constant name about_url
-# wrong constant name add_contributor_authority_councillor_contribution_path
-# wrong constant name add_contributor_authority_councillor_contribution_url
-# wrong constant name add_source_authority_councillor_contribution_path
-# wrong constant name add_source_authority_councillor_contribution_url
 # wrong constant name address_applications_path
 # wrong constant name address_applications_url
 # wrong constant name admin_admin_comment_path
@@ -1181,20 +1177,8 @@
 # wrong constant name admin_comment_url
 # wrong constant name admin_comments_path
 # wrong constant name admin_comments_url
-# wrong constant name admin_councillor_contribution_path
-# wrong constant name admin_councillor_contribution_url
-# wrong constant name admin_councillor_contributions_path
-# wrong constant name admin_councillor_contributions_url
-# wrong constant name admin_councillor_path
-# wrong constant name admin_councillor_url
-# wrong constant name admin_councillors_path
-# wrong constant name admin_councillors_url
 # wrong constant name admin_dashboard_path
 # wrong constant name admin_dashboard_url
-# wrong constant name admin_replies_path
-# wrong constant name admin_replies_url
-# wrong constant name admin_reply_path
-# wrong constant name admin_reply_url
 # wrong constant name admin_report_path
 # wrong constant name admin_report_url
 # wrong constant name admin_reports_path
@@ -1203,8 +1187,6 @@
 # wrong constant name admin_root_url
 # wrong constant name admin_site_settings_path
 # wrong constant name admin_site_settings_url
-# wrong constant name admin_suggested_councillor_path
-# wrong constant name admin_suggested_councillor_url
 # wrong constant name admin_user_path
 # wrong constant name admin_user_url
 # wrong constant name admin_users_path
@@ -1239,10 +1221,6 @@
 # wrong constant name authority_applications_url
 # wrong constant name authority_comments_path
 # wrong constant name authority_comments_url
-# wrong constant name authority_councillor_contribution_path
-# wrong constant name authority_councillor_contribution_thank_you_path
-# wrong constant name authority_councillor_contribution_thank_you_url
-# wrong constant name authority_councillor_contribution_url
 # wrong constant name authority_path
 # wrong constant name authority_under_the_hood_path
 # wrong constant name authority_under_the_hood_url
@@ -1255,16 +1233,8 @@
 # wrong constant name batch_action_admin_authorities_url
 # wrong constant name batch_action_admin_comments_path
 # wrong constant name batch_action_admin_comments_url
-# wrong constant name batch_action_admin_councillor_contributions_path
-# wrong constant name batch_action_admin_councillor_contributions_url
-# wrong constant name batch_action_admin_councillors_path
-# wrong constant name batch_action_admin_councillors_url
-# wrong constant name batch_action_admin_replies_path
-# wrong constant name batch_action_admin_replies_url
 # wrong constant name batch_action_admin_reports_path
 # wrong constant name batch_action_admin_reports_url
-# wrong constant name batch_action_admin_suggested_councillors_path
-# wrong constant name batch_action_admin_suggested_councillors_url
 # wrong constant name batch_action_admin_users_path
 # wrong constant name batch_action_admin_users_url
 # wrong constant name cancel_user_registration_path
@@ -1279,8 +1249,6 @@
 # wrong constant name confirmed_alert_url
 # wrong constant name confirmed_comment_path
 # wrong constant name confirmed_comment_url
-# wrong constant name councillor_contributions_path
-# wrong constant name councillor_contributions_url
 # wrong constant name cuttlefish_event_path
 # wrong constant name cuttlefish_event_url
 # wrong constant name destroy_user_session_path
@@ -1297,12 +1265,6 @@
 # wrong constant name edit_admin_authority_url
 # wrong constant name edit_admin_comment_path
 # wrong constant name edit_admin_comment_url
-# wrong constant name edit_admin_councillor_path
-# wrong constant name edit_admin_councillor_url
-# wrong constant name edit_admin_reply_path
-# wrong constant name edit_admin_reply_url
-# wrong constant name edit_admin_suggested_councillor_path
-# wrong constant name edit_admin_suggested_councillor_url
 # wrong constant name edit_admin_user_path
 # wrong constant name edit_admin_user_url
 # wrong constant name edit_user_password_path
@@ -1327,24 +1289,14 @@
 # wrong constant name how_to_write_a_scraper_url
 # wrong constant name import_admin_authority_path
 # wrong constant name import_admin_authority_url
-# wrong constant name load_councillors_admin_authority_path
-# wrong constant name load_councillors_admin_authority_url
-# wrong constant name load_replies_admin_comment_path
-# wrong constant name load_replies_admin_comment_url
 # wrong constant name nearby_application_path
 # wrong constant name nearby_application_url
 # wrong constant name new_admin_authority_path
 # wrong constant name new_admin_authority_url
-# wrong constant name new_admin_councillor_path
-# wrong constant name new_admin_councillor_url
-# wrong constant name new_admin_reply_path
-# wrong constant name new_admin_reply_url
 # wrong constant name new_admin_user_path
 # wrong constant name new_admin_user_url
 # wrong constant name new_alert_path
 # wrong constant name new_alert_url
-# wrong constant name new_authority_councillor_contribution_path
-# wrong constant name new_authority_councillor_contribution_url
 # wrong constant name new_comment_report_path
 # wrong constant name new_comment_report_url
 # wrong constant name new_user_confirmation_path
@@ -1377,10 +1329,6 @@
 # wrong constant name search_applications_url
 # wrong constant name sidekiq_web_path
 # wrong constant name sidekiq_web_url
-# wrong constant name toggle_accepted_admin_councillor_contribution_path
-# wrong constant name toggle_accepted_admin_councillor_contribution_url
-# wrong constant name toggle_reviewed_admin_councillor_contribution_path
-# wrong constant name toggle_reviewed_admin_councillor_contribution_url
 # wrong constant name toggle_theme_path
 # wrong constant name toggle_theme_url
 # wrong constant name trending_applications_path
@@ -1397,8 +1345,6 @@
 # wrong constant name user_registration_url
 # wrong constant name user_session_path
 # wrong constant name user_session_url
-# wrong constant name writeit_reply_webhook_comments_path
-# wrong constant name writeit_reply_webhook_comments_url
 # wrong constant name <static-init>
 # wrong constant name <Class:SearchMethodSelect>
 # wrong constant name collection_from_options
@@ -1798,7 +1744,7 @@
 # A copy of ActiveRecord::InternalMetadata::ActiveRecord_Relation has been removed from the module tree but is still active!
 # wrong constant name <static-init>
 # wrong constant name <static-init>
-# undefined singleton method `page<defaultArg>1' for `#<Class:0x00005649c1e7c8c0>'
+# undefined singleton method `page<defaultArg>1' for `#<Class:0x000055a2da626b28>'
 # wrong constant name []
 # wrong constant name []=
 # wrong constant name create_table
@@ -2799,7 +2745,6 @@
 # uninitialized constant Admin::AuthoritiesController::RENDER_FORMATS_IN_PRIORITY
 # uninitialized constant Admin::AuthoritiesController::URL_OPTIONS
 # wrong constant name import
-# wrong constant name load_councillors
 # wrong constant name <static-init>
 # wrong constant name resource_class=
 # uninitialized constant Admin::BackgroundJobsController::ACTIONS_DICTIONARY
@@ -2845,56 +2790,7 @@
 # uninitialized constant Admin::CommentsController::RENDER_FORMATS_IN_PRIORITY
 # uninitialized constant Admin::CommentsController::URL_OPTIONS
 # wrong constant name confirm
-# wrong constant name load_replies
 # wrong constant name resend
-# wrong constant name <static-init>
-# wrong constant name resource_class=
-# uninitialized constant Admin::CouncillorContributionsController::ACTIONS_DICTIONARY
-# uninitialized constant Admin::CouncillorContributionsController::ACTION_OPTIONS
-# uninitialized constant Admin::CouncillorContributionsController::ACTIVE_ADMIN_ACTIONS
-# uninitialized constant Admin::CouncillorContributionsController::AUTHENTICITY_TOKEN_LENGTH
-# uninitialized constant Admin::CouncillorContributionsController::CALLBACK_FILTER_TYPES
-# uninitialized constant Admin::CouncillorContributionsController::COLLECTION_APPLIES
-# uninitialized constant Admin::CouncillorContributionsController::DEFAULT_PROTECTED_INSTANCE_VARIABLES
-# uninitialized constant Admin::CouncillorContributionsController::DEFAULT_SEND_FILE_DISPOSITION
-# uninitialized constant Admin::CouncillorContributionsController::DEFAULT_SEND_FILE_TYPE
-# uninitialized constant Admin::CouncillorContributionsController::EXCLUDE_PARAMETERS
-# uninitialized constant Admin::CouncillorContributionsController::MODULES
-# uninitialized constant Admin::CouncillorContributionsController::NR_DEFAULT_OPTIONS
-# uninitialized constant Admin::CouncillorContributionsController::NR_DO_NOT_TRACE_KEY
-# uninitialized constant Admin::CouncillorContributionsController::NR_IGNORE_APDEX_KEY
-# uninitialized constant Admin::CouncillorContributionsController::NR_IGNORE_ENDUSER_KEY
-# uninitialized constant Admin::CouncillorContributionsController::NULL_ORIGIN_MESSAGE
-# uninitialized constant Admin::CouncillorContributionsController::PROTECTED_IVARS
-# uninitialized constant Admin::CouncillorContributionsController::REDIRECT_OPTIONS
-# uninitialized constant Admin::CouncillorContributionsController::RENDERERS
-# uninitialized constant Admin::CouncillorContributionsController::RENDER_FORMATS_IN_PRIORITY
-# uninitialized constant Admin::CouncillorContributionsController::URL_OPTIONS
-# wrong constant name toggle_accepted
-# wrong constant name toggle_reviewed
-# wrong constant name <static-init>
-# wrong constant name resource_class=
-# uninitialized constant Admin::CouncillorsController::ACTIONS_DICTIONARY
-# uninitialized constant Admin::CouncillorsController::ACTION_OPTIONS
-# uninitialized constant Admin::CouncillorsController::ACTIVE_ADMIN_ACTIONS
-# uninitialized constant Admin::CouncillorsController::AUTHENTICITY_TOKEN_LENGTH
-# uninitialized constant Admin::CouncillorsController::CALLBACK_FILTER_TYPES
-# uninitialized constant Admin::CouncillorsController::COLLECTION_APPLIES
-# uninitialized constant Admin::CouncillorsController::DEFAULT_PROTECTED_INSTANCE_VARIABLES
-# uninitialized constant Admin::CouncillorsController::DEFAULT_SEND_FILE_DISPOSITION
-# uninitialized constant Admin::CouncillorsController::DEFAULT_SEND_FILE_TYPE
-# uninitialized constant Admin::CouncillorsController::EXCLUDE_PARAMETERS
-# uninitialized constant Admin::CouncillorsController::MODULES
-# uninitialized constant Admin::CouncillorsController::NR_DEFAULT_OPTIONS
-# uninitialized constant Admin::CouncillorsController::NR_DO_NOT_TRACE_KEY
-# uninitialized constant Admin::CouncillorsController::NR_IGNORE_APDEX_KEY
-# uninitialized constant Admin::CouncillorsController::NR_IGNORE_ENDUSER_KEY
-# uninitialized constant Admin::CouncillorsController::NULL_ORIGIN_MESSAGE
-# uninitialized constant Admin::CouncillorsController::PROTECTED_IVARS
-# uninitialized constant Admin::CouncillorsController::REDIRECT_OPTIONS
-# uninitialized constant Admin::CouncillorsController::RENDERERS
-# uninitialized constant Admin::CouncillorsController::RENDER_FORMATS_IN_PRIORITY
-# uninitialized constant Admin::CouncillorsController::URL_OPTIONS
 # wrong constant name <static-init>
 # wrong constant name resource_class=
 # uninitialized constant Admin::DashboardController::ACTIONS_DICTIONARY
@@ -2918,29 +2814,6 @@
 # uninitialized constant Admin::DashboardController::RENDER_FORMATS_IN_PRIORITY
 # uninitialized constant Admin::DashboardController::URL_OPTIONS
 # wrong constant name <static-init>
-# uninitialized constant Admin::RepliesController::ACTIONS_DICTIONARY
-# uninitialized constant Admin::RepliesController::ACTION_OPTIONS
-# uninitialized constant Admin::RepliesController::ACTIVE_ADMIN_ACTIONS
-# uninitialized constant Admin::RepliesController::AUTHENTICITY_TOKEN_LENGTH
-# uninitialized constant Admin::RepliesController::CALLBACK_FILTER_TYPES
-# uninitialized constant Admin::RepliesController::COLLECTION_APPLIES
-# uninitialized constant Admin::RepliesController::DEFAULT_PROTECTED_INSTANCE_VARIABLES
-# uninitialized constant Admin::RepliesController::DEFAULT_SEND_FILE_DISPOSITION
-# uninitialized constant Admin::RepliesController::DEFAULT_SEND_FILE_TYPE
-# uninitialized constant Admin::RepliesController::EXCLUDE_PARAMETERS
-# uninitialized constant Admin::RepliesController::MODULES
-# uninitialized constant Admin::RepliesController::NR_DEFAULT_OPTIONS
-# uninitialized constant Admin::RepliesController::NR_DO_NOT_TRACE_KEY
-# uninitialized constant Admin::RepliesController::NR_IGNORE_APDEX_KEY
-# uninitialized constant Admin::RepliesController::NR_IGNORE_ENDUSER_KEY
-# uninitialized constant Admin::RepliesController::NULL_ORIGIN_MESSAGE
-# uninitialized constant Admin::RepliesController::PROTECTED_IVARS
-# uninitialized constant Admin::RepliesController::REDIRECT_OPTIONS
-# uninitialized constant Admin::RepliesController::RENDERERS
-# uninitialized constant Admin::RepliesController::RENDER_FORMATS_IN_PRIORITY
-# uninitialized constant Admin::RepliesController::URL_OPTIONS
-# wrong constant name <static-init>
-# wrong constant name resource_class=
 # uninitialized constant Admin::ReportsController::ACTIONS_DICTIONARY
 # uninitialized constant Admin::ReportsController::ACTION_OPTIONS
 # uninitialized constant Admin::ReportsController::ACTIVE_ADMIN_ACTIONS
@@ -2966,30 +2839,6 @@
 # wrong constant name resource_class=
 # wrong constant name inherited
 # wrong constant name inherited
-# uninitialized constant Admin::SuggestedCouncillorsController::ACTIONS_DICTIONARY
-# uninitialized constant Admin::SuggestedCouncillorsController::ACTION_OPTIONS
-# uninitialized constant Admin::SuggestedCouncillorsController::ACTIVE_ADMIN_ACTIONS
-# uninitialized constant Admin::SuggestedCouncillorsController::AUTHENTICITY_TOKEN_LENGTH
-# uninitialized constant Admin::SuggestedCouncillorsController::CALLBACK_FILTER_TYPES
-# uninitialized constant Admin::SuggestedCouncillorsController::COLLECTION_APPLIES
-# uninitialized constant Admin::SuggestedCouncillorsController::DEFAULT_PROTECTED_INSTANCE_VARIABLES
-# uninitialized constant Admin::SuggestedCouncillorsController::DEFAULT_SEND_FILE_DISPOSITION
-# uninitialized constant Admin::SuggestedCouncillorsController::DEFAULT_SEND_FILE_TYPE
-# uninitialized constant Admin::SuggestedCouncillorsController::EXCLUDE_PARAMETERS
-# uninitialized constant Admin::SuggestedCouncillorsController::MODULES
-# uninitialized constant Admin::SuggestedCouncillorsController::NR_DEFAULT_OPTIONS
-# uninitialized constant Admin::SuggestedCouncillorsController::NR_DO_NOT_TRACE_KEY
-# uninitialized constant Admin::SuggestedCouncillorsController::NR_IGNORE_APDEX_KEY
-# uninitialized constant Admin::SuggestedCouncillorsController::NR_IGNORE_ENDUSER_KEY
-# uninitialized constant Admin::SuggestedCouncillorsController::NULL_ORIGIN_MESSAGE
-# uninitialized constant Admin::SuggestedCouncillorsController::PROTECTED_IVARS
-# uninitialized constant Admin::SuggestedCouncillorsController::REDIRECT_OPTIONS
-# uninitialized constant Admin::SuggestedCouncillorsController::RENDERERS
-# uninitialized constant Admin::SuggestedCouncillorsController::RENDER_FORMATS_IN_PRIORITY
-# uninitialized constant Admin::SuggestedCouncillorsController::URL_OPTIONS
-# wrong constant name update
-# wrong constant name <static-init>
-# wrong constant name resource_class=
 # uninitialized constant Admin::UsersController::ACTIONS_DICTIONARY
 # uninitialized constant Admin::UsersController::ACTION_OPTIONS
 # uninitialized constant Admin::UsersController::ACTIVE_ADMIN_ACTIONS
@@ -3139,8 +2988,8 @@
 # wrong constant name create_user!
 # wrong constant name reload_user
 # wrong constant name <static-init>
-# undefined method `reindex<defaultArg>1' for class `#<Class:0x00005649b9d757b8>'
-# undefined method `similar<defaultArg>1' for class `#<Class:0x00005649b9d757b8>'
+# undefined method `reindex<defaultArg>1' for class `#<Class:0x000055a2d67d5108>'
+# undefined method `similar<defaultArg>1' for class `#<Class:0x000055a2d67d5108>'
 # uninitialized constant Application::ACTIONS
 # uninitialized constant Application::BLACKLISTED_CLASS_METHODS
 # uninitialized constant Application::CALLBACKS
@@ -3155,18 +3004,12 @@
 # wrong constant name after_add_for_comments
 # wrong constant name after_add_for_comments=
 # wrong constant name after_add_for_comments?
-# wrong constant name after_add_for_replies
-# wrong constant name after_add_for_replies=
-# wrong constant name after_add_for_replies?
 # wrong constant name after_add_for_versions
 # wrong constant name after_add_for_versions=
 # wrong constant name after_add_for_versions?
 # wrong constant name after_remove_for_comments
 # wrong constant name after_remove_for_comments=
 # wrong constant name after_remove_for_comments?
-# wrong constant name after_remove_for_replies
-# wrong constant name after_remove_for_replies=
-# wrong constant name after_remove_for_replies?
 # wrong constant name after_remove_for_versions
 # wrong constant name after_remove_for_versions=
 # wrong constant name after_remove_for_versions?
@@ -3174,23 +3017,16 @@
 # wrong constant name autosave_associated_records_for_comments
 # wrong constant name autosave_associated_records_for_current_version
 # wrong constant name autosave_associated_records_for_first_version
-# wrong constant name autosave_associated_records_for_replies
 # wrong constant name autosave_associated_records_for_versions
 # wrong constant name before_add_for_comments
 # wrong constant name before_add_for_comments=
 # wrong constant name before_add_for_comments?
-# wrong constant name before_add_for_replies
-# wrong constant name before_add_for_replies=
-# wrong constant name before_add_for_replies?
 # wrong constant name before_add_for_versions
 # wrong constant name before_add_for_versions=
 # wrong constant name before_add_for_versions?
 # wrong constant name before_remove_for_comments
 # wrong constant name before_remove_for_comments=
 # wrong constant name before_remove_for_comments?
-# wrong constant name before_remove_for_replies
-# wrong constant name before_remove_for_replies=
-# wrong constant name before_remove_for_replies?
 # wrong constant name before_remove_for_versions
 # wrong constant name before_remove_for_versions=
 # wrong constant name before_remove_for_versions?
@@ -3203,7 +3039,6 @@
 # wrong constant name similar<defaultArg>1
 # wrong constant name similar
 # wrong constant name validate_associated_records_for_comments
-# wrong constant name validate_associated_records_for_replies
 # wrong constant name validate_associated_records_for_versions
 # A copy of Application::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Application::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
@@ -3257,7 +3092,6 @@
 # wrong constant name reload_authority
 # wrong constant name reload_current_version
 # wrong constant name reload_first_version
-# wrong constant name reply_ids=
 # wrong constant name version_ids=
 # wrong constant name geocoded
 # wrong constant name in_past_week
@@ -3269,45 +3103,33 @@
 # wrong constant name with_first_version
 # wrong constant name within_bounding_box
 # wrong constant name <static-init>
-# undefined singleton method `reindex<defaultArg>1' for `#<Class:0x00005649b9d757b8>'
-# undefined singleton method `search<defaultArg>1' for `#<Class:0x00005649b9d757b8>'
-# undefined singleton method `search_index<defaultArg>1' for `#<Class:0x00005649b9d757b8>'
-# undefined singleton method `searchkick_index<defaultArg>1' for `#<Class:0x00005649b9d757b8>'
-# undefined singleton method `searchkick_reindex<defaultArg>1' for `#<Class:0x00005649b9d757b8>'
-# undefined singleton method `searchkick_search<defaultArg>1' for `#<Class:0x00005649b9d757b8>'
+# undefined singleton method `reindex<defaultArg>1' for `#<Class:0x000055a2d67d5108>'
+# undefined singleton method `search<defaultArg>1' for `#<Class:0x000055a2d67d5108>'
+# undefined singleton method `search_index<defaultArg>1' for `#<Class:0x000055a2d67d5108>'
+# undefined singleton method `searchkick_index<defaultArg>1' for `#<Class:0x000055a2d67d5108>'
+# undefined singleton method `searchkick_reindex<defaultArg>1' for `#<Class:0x000055a2d67d5108>'
+# undefined singleton method `searchkick_search<defaultArg>1' for `#<Class:0x000055a2d67d5108>'
 # wrong constant name after_add_for_comments
 # wrong constant name after_add_for_comments=
 # wrong constant name after_add_for_comments?
-# wrong constant name after_add_for_replies
-# wrong constant name after_add_for_replies=
-# wrong constant name after_add_for_replies?
 # wrong constant name after_add_for_versions
 # wrong constant name after_add_for_versions=
 # wrong constant name after_add_for_versions?
 # wrong constant name after_remove_for_comments
 # wrong constant name after_remove_for_comments=
 # wrong constant name after_remove_for_comments?
-# wrong constant name after_remove_for_replies
-# wrong constant name after_remove_for_replies=
-# wrong constant name after_remove_for_replies?
 # wrong constant name after_remove_for_versions
 # wrong constant name after_remove_for_versions=
 # wrong constant name after_remove_for_versions?
 # wrong constant name before_add_for_comments
 # wrong constant name before_add_for_comments=
 # wrong constant name before_add_for_comments?
-# wrong constant name before_add_for_replies
-# wrong constant name before_add_for_replies=
-# wrong constant name before_add_for_replies?
 # wrong constant name before_add_for_versions
 # wrong constant name before_add_for_versions=
 # wrong constant name before_add_for_versions?
 # wrong constant name before_remove_for_comments
 # wrong constant name before_remove_for_comments=
 # wrong constant name before_remove_for_comments?
-# wrong constant name before_remove_for_replies
-# wrong constant name before_remove_for_replies=
-# wrong constant name before_remove_for_replies?
 # wrong constant name before_remove_for_versions
 # wrong constant name before_remove_for_versions=
 # wrong constant name before_remove_for_versions?
@@ -3556,28 +3378,14 @@
 # wrong constant name after_add_for_comments
 # wrong constant name after_add_for_comments=
 # wrong constant name after_add_for_comments?
-# wrong constant name after_add_for_councillor_contributions
-# wrong constant name after_add_for_councillor_contributions=
-# wrong constant name after_add_for_councillor_contributions?
-# wrong constant name after_add_for_councillors
-# wrong constant name after_add_for_councillors=
-# wrong constant name after_add_for_councillors?
 # wrong constant name after_remove_for_applications
 # wrong constant name after_remove_for_applications=
 # wrong constant name after_remove_for_applications?
 # wrong constant name after_remove_for_comments
 # wrong constant name after_remove_for_comments=
 # wrong constant name after_remove_for_comments?
-# wrong constant name after_remove_for_councillor_contributions
-# wrong constant name after_remove_for_councillor_contributions=
-# wrong constant name after_remove_for_councillor_contributions?
-# wrong constant name after_remove_for_councillors
-# wrong constant name after_remove_for_councillors=
-# wrong constant name after_remove_for_councillors?
 # wrong constant name autosave_associated_records_for_applications
 # wrong constant name autosave_associated_records_for_comments
-# wrong constant name autosave_associated_records_for_councillor_contributions
-# wrong constant name autosave_associated_records_for_councillors
 # wrong constant name autosave_associated_records_for_github_issue
 # wrong constant name before_add_for_applications
 # wrong constant name before_add_for_applications=
@@ -3585,28 +3393,14 @@
 # wrong constant name before_add_for_comments
 # wrong constant name before_add_for_comments=
 # wrong constant name before_add_for_comments?
-# wrong constant name before_add_for_councillor_contributions
-# wrong constant name before_add_for_councillor_contributions=
-# wrong constant name before_add_for_councillor_contributions?
-# wrong constant name before_add_for_councillors
-# wrong constant name before_add_for_councillors=
-# wrong constant name before_add_for_councillors?
 # wrong constant name before_remove_for_applications
 # wrong constant name before_remove_for_applications=
 # wrong constant name before_remove_for_applications?
 # wrong constant name before_remove_for_comments
 # wrong constant name before_remove_for_comments=
 # wrong constant name before_remove_for_comments?
-# wrong constant name before_remove_for_councillor_contributions
-# wrong constant name before_remove_for_councillor_contributions=
-# wrong constant name before_remove_for_councillor_contributions?
-# wrong constant name before_remove_for_councillors
-# wrong constant name before_remove_for_councillors=
-# wrong constant name before_remove_for_councillors?
 # wrong constant name validate_associated_records_for_applications
 # wrong constant name validate_associated_records_for_comments
-# wrong constant name validate_associated_records_for_councillor_contributions
-# wrong constant name validate_associated_records_for_councillors
 # A copy of Authority::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Authority::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Authority::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
@@ -3649,8 +3443,6 @@
 # wrong constant name application_ids=
 # wrong constant name build_github_issue
 # wrong constant name comment_ids=
-# wrong constant name councillor_contribution_ids=
-# wrong constant name councillor_ids=
 # wrong constant name create_github_issue
 # wrong constant name create_github_issue!
 # wrong constant name reload_github_issue
@@ -3663,48 +3455,24 @@
 # wrong constant name after_add_for_comments
 # wrong constant name after_add_for_comments=
 # wrong constant name after_add_for_comments?
-# wrong constant name after_add_for_councillor_contributions
-# wrong constant name after_add_for_councillor_contributions=
-# wrong constant name after_add_for_councillor_contributions?
-# wrong constant name after_add_for_councillors
-# wrong constant name after_add_for_councillors=
-# wrong constant name after_add_for_councillors?
 # wrong constant name after_remove_for_applications
 # wrong constant name after_remove_for_applications=
 # wrong constant name after_remove_for_applications?
 # wrong constant name after_remove_for_comments
 # wrong constant name after_remove_for_comments=
 # wrong constant name after_remove_for_comments?
-# wrong constant name after_remove_for_councillor_contributions
-# wrong constant name after_remove_for_councillor_contributions=
-# wrong constant name after_remove_for_councillor_contributions?
-# wrong constant name after_remove_for_councillors
-# wrong constant name after_remove_for_councillors=
-# wrong constant name after_remove_for_councillors?
 # wrong constant name before_add_for_applications
 # wrong constant name before_add_for_applications=
 # wrong constant name before_add_for_applications?
 # wrong constant name before_add_for_comments
 # wrong constant name before_add_for_comments=
 # wrong constant name before_add_for_comments?
-# wrong constant name before_add_for_councillor_contributions
-# wrong constant name before_add_for_councillor_contributions=
-# wrong constant name before_add_for_councillor_contributions?
-# wrong constant name before_add_for_councillors
-# wrong constant name before_add_for_councillors=
-# wrong constant name before_add_for_councillors?
 # wrong constant name before_remove_for_applications
 # wrong constant name before_remove_for_applications=
 # wrong constant name before_remove_for_applications?
 # wrong constant name before_remove_for_comments
 # wrong constant name before_remove_for_comments=
 # wrong constant name before_remove_for_comments?
-# wrong constant name before_remove_for_councillor_contributions
-# wrong constant name before_remove_for_councillor_contributions=
-# wrong constant name before_remove_for_councillor_contributions?
-# wrong constant name before_remove_for_councillors
-# wrong constant name before_remove_for_councillors=
-# wrong constant name before_remove_for_councillors?
 # wrong constant name <Class:BasicObject>
 # undefined method `read_nonblock<defaultArg>1' for class `BasicSocket'
 # undefined method `read_nonblock<defaultArg>2' for class `BasicSocket'
@@ -5117,36 +4885,21 @@
 # uninitialized constant Comment::MAX_PASSWORD_LENGTH_ALLOWED
 # uninitialized constant Comment::NAME_COMPILABLE_REGEXP
 # uninitialized constant Comment::UNASSIGNABLE_KEYS
-# wrong constant name after_add_for_replies
-# wrong constant name after_add_for_replies=
-# wrong constant name after_add_for_replies?
 # wrong constant name after_add_for_reports
 # wrong constant name after_add_for_reports=
 # wrong constant name after_add_for_reports?
-# wrong constant name after_remove_for_replies
-# wrong constant name after_remove_for_replies=
-# wrong constant name after_remove_for_replies?
 # wrong constant name after_remove_for_reports
 # wrong constant name after_remove_for_reports=
 # wrong constant name after_remove_for_reports?
 # wrong constant name autosave_associated_records_for_application
-# wrong constant name autosave_associated_records_for_councillor
-# wrong constant name autosave_associated_records_for_replies
 # wrong constant name autosave_associated_records_for_reports
-# wrong constant name before_add_for_replies
-# wrong constant name before_add_for_replies=
-# wrong constant name before_add_for_replies?
 # wrong constant name before_add_for_reports
 # wrong constant name before_add_for_reports=
 # wrong constant name before_add_for_reports?
-# wrong constant name before_remove_for_replies
-# wrong constant name before_remove_for_replies=
-# wrong constant name before_remove_for_replies?
 # wrong constant name before_remove_for_reports
 # wrong constant name before_remove_for_reports=
 # wrong constant name before_remove_for_reports?
 # wrong constant name belongs_to_counter_cache_after_update
-# wrong constant name validate_associated_records_for_replies
 # wrong constant name validate_associated_records_for_reports
 # A copy of Comment::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Comment::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
@@ -5188,45 +4941,26 @@
 # A copy of Comment::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Comment::ActiveRecord_Relation has been removed from the module tree but is still active!
 # wrong constant name build_application
-# wrong constant name build_councillor
 # wrong constant name create_application
 # wrong constant name create_application!
-# wrong constant name create_councillor
-# wrong constant name create_councillor!
 # wrong constant name reload_application
-# wrong constant name reload_councillor
-# wrong constant name reply_ids=
 # wrong constant name report_ids=
 # wrong constant name confirmed
 # wrong constant name in_past_week
-# wrong constant name to_councillor
 # wrong constant name visible
 # wrong constant name <static-init>
-# wrong constant name after_add_for_replies
-# wrong constant name after_add_for_replies=
-# wrong constant name after_add_for_replies?
 # wrong constant name after_add_for_reports
 # wrong constant name after_add_for_reports=
 # wrong constant name after_add_for_reports?
-# wrong constant name after_remove_for_replies
-# wrong constant name after_remove_for_replies=
-# wrong constant name after_remove_for_replies?
 # wrong constant name after_remove_for_reports
 # wrong constant name after_remove_for_reports=
 # wrong constant name after_remove_for_reports?
-# wrong constant name before_add_for_replies
-# wrong constant name before_add_for_replies=
-# wrong constant name before_add_for_replies?
 # wrong constant name before_add_for_reports
 # wrong constant name before_add_for_reports=
 # wrong constant name before_add_for_reports?
-# wrong constant name before_remove_for_replies
-# wrong constant name before_remove_for_replies=
-# wrong constant name before_remove_for_replies?
 # wrong constant name before_remove_for_reports
 # wrong constant name before_remove_for_reports=
 # wrong constant name before_remove_for_reports?
-# wrong constant name inherited
 # wrong constant name inherited
 # wrong constant name inherited
 # wrong constant name inherited
@@ -5254,281 +4988,6 @@
 # uninitialized constant Configatron
 # uninitialized constant Continuation
 # uninitialized constant Continuation
-# uninitialized constant Contributor::ACTIONS
-# uninitialized constant Contributor::BLACKLISTED_CLASS_METHODS
-# uninitialized constant Contributor::CALLBACKS
-# uninitialized constant Contributor::CALLBACK_FILTER_TYPES
-# uninitialized constant Contributor::CALL_COMPILABLE_REGEXP
-# wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant Contributor::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant Contributor::NAME_COMPILABLE_REGEXP
-# uninitialized constant Contributor::UNASSIGNABLE_KEYS
-# wrong constant name after_add_for_councillor_contributions
-# wrong constant name after_add_for_councillor_contributions=
-# wrong constant name after_add_for_councillor_contributions?
-# wrong constant name after_remove_for_councillor_contributions
-# wrong constant name after_remove_for_councillor_contributions=
-# wrong constant name after_remove_for_councillor_contributions?
-# wrong constant name autosave_associated_records_for_councillor_contributions
-# wrong constant name before_add_for_councillor_contributions
-# wrong constant name before_add_for_councillor_contributions=
-# wrong constant name before_add_for_councillor_contributions?
-# wrong constant name before_remove_for_councillor_contributions
-# wrong constant name before_remove_for_councillor_contributions=
-# wrong constant name before_remove_for_councillor_contributions?
-# wrong constant name validate_associated_records_for_councillor_contributions
-# A copy of Contributor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Contributor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name councillor_contribution_ids=
-# wrong constant name <static-init>
-# wrong constant name after_add_for_councillor_contributions
-# wrong constant name after_add_for_councillor_contributions=
-# wrong constant name after_add_for_councillor_contributions?
-# wrong constant name after_remove_for_councillor_contributions
-# wrong constant name after_remove_for_councillor_contributions=
-# wrong constant name after_remove_for_councillor_contributions?
-# wrong constant name before_add_for_councillor_contributions
-# wrong constant name before_add_for_councillor_contributions=
-# wrong constant name before_add_for_councillor_contributions?
-# wrong constant name before_remove_for_councillor_contributions
-# wrong constant name before_remove_for_councillor_contributions=
-# wrong constant name before_remove_for_councillor_contributions?
-# uninitialized constant Councillor::ACTIONS
-# uninitialized constant Councillor::BLACKLISTED_CLASS_METHODS
-# uninitialized constant Councillor::CALLBACKS
-# uninitialized constant Councillor::CALLBACK_FILTER_TYPES
-# uninitialized constant Councillor::CALL_COMPILABLE_REGEXP
-# wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant Councillor::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant Councillor::NAME_COMPILABLE_REGEXP
-# uninitialized constant Councillor::UNASSIGNABLE_KEYS
-# wrong constant name after_add_for_comments
-# wrong constant name after_add_for_comments=
-# wrong constant name after_add_for_comments?
-# wrong constant name after_add_for_replies
-# wrong constant name after_add_for_replies=
-# wrong constant name after_add_for_replies?
-# wrong constant name after_remove_for_comments
-# wrong constant name after_remove_for_comments=
-# wrong constant name after_remove_for_comments?
-# wrong constant name after_remove_for_replies
-# wrong constant name after_remove_for_replies=
-# wrong constant name after_remove_for_replies?
-# wrong constant name autosave_associated_records_for_authority
-# wrong constant name autosave_associated_records_for_comments
-# wrong constant name autosave_associated_records_for_replies
-# wrong constant name before_add_for_comments
-# wrong constant name before_add_for_comments=
-# wrong constant name before_add_for_comments?
-# wrong constant name before_add_for_replies
-# wrong constant name before_add_for_replies=
-# wrong constant name before_add_for_replies?
-# wrong constant name before_remove_for_comments
-# wrong constant name before_remove_for_comments=
-# wrong constant name before_remove_for_comments?
-# wrong constant name before_remove_for_replies
-# wrong constant name before_remove_for_replies=
-# wrong constant name before_remove_for_replies?
-# wrong constant name belongs_to_counter_cache_after_update
-# wrong constant name validate_associated_records_for_comments
-# wrong constant name validate_associated_records_for_replies
-# A copy of Councillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Councillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name build_authority
-# wrong constant name comment_ids=
-# wrong constant name create_authority
-# wrong constant name create_authority!
-# wrong constant name reload_authority
-# wrong constant name reply_ids=
-# wrong constant name <static-init>
-# wrong constant name after_add_for_comments
-# wrong constant name after_add_for_comments=
-# wrong constant name after_add_for_comments?
-# wrong constant name after_add_for_replies
-# wrong constant name after_add_for_replies=
-# wrong constant name after_add_for_replies?
-# wrong constant name after_remove_for_comments
-# wrong constant name after_remove_for_comments=
-# wrong constant name after_remove_for_comments?
-# wrong constant name after_remove_for_replies
-# wrong constant name after_remove_for_replies=
-# wrong constant name after_remove_for_replies?
-# wrong constant name before_add_for_comments
-# wrong constant name before_add_for_comments=
-# wrong constant name before_add_for_comments?
-# wrong constant name before_add_for_replies
-# wrong constant name before_add_for_replies=
-# wrong constant name before_add_for_replies?
-# wrong constant name before_remove_for_comments
-# wrong constant name before_remove_for_comments=
-# wrong constant name before_remove_for_comments?
-# wrong constant name before_remove_for_replies
-# wrong constant name before_remove_for_replies=
-# wrong constant name before_remove_for_replies?
-# uninitialized constant CouncillorContribution::ACTIONS
-# uninitialized constant CouncillorContribution::BLACKLISTED_CLASS_METHODS
-# uninitialized constant CouncillorContribution::CALLBACKS
-# uninitialized constant CouncillorContribution::CALLBACK_FILTER_TYPES
-# uninitialized constant CouncillorContribution::CALL_COMPILABLE_REGEXP
-# wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant CouncillorContribution::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant CouncillorContribution::NAME_COMPILABLE_REGEXP
-# uninitialized constant CouncillorContribution::UNASSIGNABLE_KEYS
-# wrong constant name after_add_for_suggested_councillors
-# wrong constant name after_add_for_suggested_councillors=
-# wrong constant name after_add_for_suggested_councillors?
-# wrong constant name after_remove_for_suggested_councillors
-# wrong constant name after_remove_for_suggested_councillors=
-# wrong constant name after_remove_for_suggested_councillors?
-# wrong constant name autosave_associated_records_for_authority
-# wrong constant name autosave_associated_records_for_contributor
-# wrong constant name autosave_associated_records_for_suggested_councillors
-# wrong constant name before_add_for_suggested_councillors
-# wrong constant name before_add_for_suggested_councillors=
-# wrong constant name before_add_for_suggested_councillors?
-# wrong constant name before_remove_for_suggested_councillors
-# wrong constant name before_remove_for_suggested_councillors=
-# wrong constant name before_remove_for_suggested_councillors?
-# wrong constant name belongs_to_counter_cache_after_update
-# wrong constant name validate_associated_records_for_contributor
-# wrong constant name validate_associated_records_for_suggested_councillors
-# A copy of CouncillorContribution::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of CouncillorContribution::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name build_authority
-# wrong constant name build_contributor
-# wrong constant name contributor_attributes=
-# wrong constant name create_authority
-# wrong constant name create_authority!
-# wrong constant name create_contributor
-# wrong constant name create_contributor!
-# wrong constant name reload_authority
-# wrong constant name reload_contributor
-# wrong constant name suggested_councillor_ids=
-# wrong constant name suggested_councillors_attributes=
-# wrong constant name <static-init>
-# wrong constant name after_add_for_suggested_councillors
-# wrong constant name after_add_for_suggested_councillors=
-# wrong constant name after_add_for_suggested_councillors?
-# wrong constant name after_remove_for_suggested_councillors
-# wrong constant name after_remove_for_suggested_councillors=
-# wrong constant name after_remove_for_suggested_councillors?
-# wrong constant name before_add_for_suggested_councillors
-# wrong constant name before_add_for_suggested_councillors=
-# wrong constant name before_add_for_suggested_councillors?
-# wrong constant name before_remove_for_suggested_councillors
-# wrong constant name before_remove_for_suggested_councillors=
-# wrong constant name before_remove_for_suggested_councillors?
 # uninitialized constant Coverage
 # uninitialized constant Coverage
 # wrong constant name inherited
@@ -6597,6 +6056,7 @@
 # wrong constant name atomic_write<defaultArg>1
 # wrong constant name atomic_write
 # wrong constant name exists?
+# wrong constant name probe_stat_in
 # uninitialized constant FileUtils::DryRun::LN_SUPPORTED
 # uninitialized constant FileUtils::DryRun::RUBY
 # uninitialized constant FileUtils::DryRun::VERSION
@@ -7448,7 +6908,9 @@
 # wrong constant name <static-init>
 # wrong constant name <static-init>
 # uninitialized constant HamlLint::Reporter::DisabledConfigReporter::DOT
-# wrong constant name from_trusted_xml
+# undefined singleton method `from_xml<defaultArg>1' for `Hash'
+# wrong constant name from_xml<defaultArg>1
+# wrong constant name from_xml
 # wrong constant name <Class:Clash>
 # wrong constant name <Class:Dash>
 # wrong constant name <Class:Rash>
@@ -12261,7 +11723,6 @@
 # uninitialized constant Newton
 # uninitialized constant Newton
 # wrong constant name to_d
-# wrong constant name <Class:HTML>
 # uninitialized constant Nokogiri::CSS::Parser::Racc_Main_Parsing_Routine
 # uninitialized constant Nokogiri::CSS::Parser::Racc_Runtime_Core_Id_C
 # uninitialized constant Nokogiri::CSS::Parser::Racc_Runtime_Core_Version
@@ -12270,7 +11731,6 @@
 # uninitialized constant Nokogiri::CSS::Parser::Racc_Runtime_Type
 # uninitialized constant Nokogiri::CSS::Parser::Racc_Runtime_Version
 # uninitialized constant Nokogiri::CSS::Parser::Racc_YY_Parse_Method
-# wrong constant name <Class:ElementDescription>
 # wrong constant name <Class:Element>
 # uninitialized constant Nokogiri::XML::Document::ATTRIBUTE_DECL
 # uninitialized constant Nokogiri::XML::Document::ATTRIBUTE_NODE
@@ -13491,6 +12951,13 @@
 # uninitialized constant Rack::Request::HTTP_X_FORWARDED_SSL
 # uninitialized constant Rack::Request::PARSEABLE_DATA_MEDIA_TYPES
 # uninitialized constant Rack::Session::Dalli::DEFAULT_OPTIONS
+# undefined method `max_per_day<defaultArg>1' for class `Rack::Throttle::Daily'
+# undefined method `max_per_window<defaultArg>1' for class `Rack::Throttle::Daily'
+# wrong constant name max_per_day<defaultArg>1
+# wrong constant name max_per_day
+# wrong constant name max_per_window<defaultArg>1
+# wrong constant name max_per_window
+# wrong constant name <static-init>
 # undefined method `max_per_hour<defaultArg>1' for class `Rack::Throttle::Hourly'
 # undefined method `max_per_window<defaultArg>1' for class `Rack::Throttle::Hourly'
 # wrong constant name max_per_hour<defaultArg>1
@@ -13527,6 +12994,7 @@
 # wrong constant name max_per_second
 # wrong constant name max_per_window<defaultArg>1
 # wrong constant name max_per_window
+# wrong constant name <static-init>
 # wrong constant name <static-init>
 # wrong constant name <static-init>
 # wrong constant name to_a
@@ -13784,7 +13252,7 @@
 # wrong constant name <static-init>
 # wrong constant name properties
 # wrong constant name properties=
-# undefined singleton method `property<defaultArg>1' for `#<Module:0x00005649c292a510>'
+# undefined singleton method `property<defaultArg>1' for `#<Module:0x000055a2dc3520f8>'
 # wrong constant name <static-init>
 # wrong constant name properties
 # wrong constant name properties=
@@ -14114,66 +13582,6 @@
 # uninitialized constant Regexp::Parser::VERSION_CONST_REGEXP
 # uninitialized constant Regexp::Parser::VERSION_FORMAT
 # uninitialized constant Regexp::Parser::VERSION_REGEXP
-# uninitialized constant Reply::ACTIONS
-# uninitialized constant Reply::BLACKLISTED_CLASS_METHODS
-# uninitialized constant Reply::CALLBACKS
-# uninitialized constant Reply::CALLBACK_FILTER_TYPES
-# uninitialized constant Reply::CALL_COMPILABLE_REGEXP
-# wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant Reply::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant Reply::NAME_COMPILABLE_REGEXP
-# uninitialized constant Reply::UNASSIGNABLE_KEYS
-# wrong constant name autosave_associated_records_for_comment
-# wrong constant name autosave_associated_records_for_councillor
-# wrong constant name belongs_to_counter_cache_after_update
-# A copy of Reply::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of Reply::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name build_comment
-# wrong constant name build_councillor
-# wrong constant name create_comment
-# wrong constant name create_comment!
-# wrong constant name create_councillor
-# wrong constant name create_councillor!
-# wrong constant name reload_comment
-# wrong constant name reload_councillor
-# wrong constant name <static-init>
 # uninitialized constant Report::ACTIONS
 # uninitialized constant Report::BLACKLISTED_CLASS_METHODS
 # uninitialized constant Report::CALLBACKS
@@ -15335,63 +14743,6 @@
 # wrong constant name initialize
 # wrong constant name filter
 # wrong constant name <Class:Struct>
-# uninitialized constant SuggestedCouncillor::ACTIONS
-# uninitialized constant SuggestedCouncillor::BLACKLISTED_CLASS_METHODS
-# uninitialized constant SuggestedCouncillor::CALLBACKS
-# uninitialized constant SuggestedCouncillor::CALLBACK_FILTER_TYPES
-# uninitialized constant SuggestedCouncillor::CALL_COMPILABLE_REGEXP
-# wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant SuggestedCouncillor::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant SuggestedCouncillor::NAME_COMPILABLE_REGEXP
-# uninitialized constant SuggestedCouncillor::UNASSIGNABLE_KEYS
-# wrong constant name autosave_associated_records_for_authority
-# wrong constant name autosave_associated_records_for_councillor_contribution
-# wrong constant name belongs_to_counter_cache_after_update
-# A copy of SuggestedCouncillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# A copy of SuggestedCouncillor::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name build_councillor_contribution
-# wrong constant name create_councillor_contribution
-# wrong constant name create_councillor_contribution!
-# wrong constant name reload_authority
-# wrong constant name reload_councillor_contribution
-# wrong constant name <static-init>
 # wrong constant name from_msgpack_ext
 # uninitialized constant Sync
 # uninitialized constant Sync

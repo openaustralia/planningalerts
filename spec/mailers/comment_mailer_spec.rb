@@ -44,44 +44,4 @@ describe CommentMailer do
       end
     end
   end
-
-  describe "#notify_councillor" do
-    let(:comment_text) { "It's a good thing.\r\n\r\nOh yes it is." }
-    let(:comment) do
-      application = create(:geocoded_application, council_reference: "X/001", address: "24 Bruce Road Glenbrook")
-      create(:comment_to_councillor, email: "foo@bar.com", name: "Matthew", application: application, text: comment_text, address: "1 Bar Street")
-    end
-
-    context "default theme" do
-      let(:notifier) { CommentMailer.notify_councillor(comment) }
-
-      it { expect(notifier.to).to eql [comment.councillor.email] }
-      it { expect(notifier.from).to eql ["contact@planningalerts.org.au"] }
-      it { expect(notifier.reply_to).to eql ["replies@planningalerts.org.au"] }
-      it { expect(notifier.subject).to eql "Planning application at 24 Bruce Road Glenbrook" }
-      it { expect(notifier.text_part).to have_content "It's a good thing." }
-      it { expect(notifier.html_part).to have_content "It's a good thing." }
-    end
-  end
-
-  describe "#send_comment_via_writeit!" do
-    around do |test|
-      with_modified_env(writeit_config_variables) do
-        test.run
-      end
-    end
-
-    let(:comment) do
-      councillor = create(:councillor, popolo_id: "marrickville_council/chris_woods")
-      create(:comment, councillor: councillor)
-    end
-
-    it "sends the comment to the WriteIt API, and stores the created WriteIt message’s id on the comment" do
-      VCR.use_cassette("writeit") do
-        CommentMailer.send_comment_via_writeit!(comment).deliver_now
-      end
-
-      expect(comment.writeit_message_id).to eq 5665
-    end
-  end
 end

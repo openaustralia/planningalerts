@@ -1,8 +1,5 @@
--# Note that for simplicity here we've made it so that if the authority
--# has no email for sending official comments then you can't write
--# to councillors either even if some are set
 - if application.authority.email.present?
-  = render "comments/comment_form_inputs", application: application, add_comment: add_comment, councillor_list_open: councillor_list_open
+  = render "comments/comment_form_inputs", application: application, add_comment: add_comment
 - else
   %h4#add-comment Add your own comment
   %p

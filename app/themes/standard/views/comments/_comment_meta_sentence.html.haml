@@ -1,12 +1,6 @@
 %span.comment-author= comment.name
 %span.comment-time-block
-  - if comment.to_councillor?
-    wrote to
-    %span.comment-recipient.h-card
-      local councillor
-      %span.p-name= comment.councillor.name
-  - else
-    commented
+  commented
   = link_to comment_path(comment), title: "View comment" do
     %time.comment-time{ datetime: comment.confirmed_at.strftime("%F") }
       #{time_ago_in_words(comment.confirmed_at)} ago

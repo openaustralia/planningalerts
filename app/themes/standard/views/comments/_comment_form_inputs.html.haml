@@ -14,8 +14,6 @@
                      placeholder: "e.g. Jane Citizen",
                      hint: "Please use your real full name if possible.",
                      input_html: { required: "required" }
-  - unless application.councillors_available_for_contact.empty?
-    = render "comments/comment_receiver_options", f: f, add_comment: add_comment, application: application, councillor_list_open: councillor_list_open
   = f.inputs id: "comment-detail-inputgroup" do
     = f.input :email, label: "Your email",
                       placeholder: "e.g. your@email.com",
@@ -25,7 +23,7 @@
     = f.input :address, label: "Your street address",
                         placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
                         hint: "We never display your street address. #{link_to("Why do you need my address?", faq_path(anchor: "address"))}".html_safe,
-                        input_html: { required: ("required" unless add_comment.could_be_for_councillor?) }
+                        input_html: { required: "required" }
     .inline-hints.hidden#faq_commenting_address
       = render partial: "static/faq_commenting_address"
     -#

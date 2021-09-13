@@ -8,10 +8,10 @@ module Comment::ActiveRelation_WhereNot
 end
 
 module Comment::GeneratedAttributeMethods
-  sig { returns(T.nilable(String)) }
+  sig { returns(String) }
   def address; end
 
-  sig { params(value: T.nilable(T.any(String, Symbol))).void }
+  sig { params(value: T.any(String, Symbol)).void }
   def address=(value); end
 
   sig { returns(T::Boolean) }
@@ -160,21 +160,6 @@ module Comment::GeneratedAssociationMethods
   sig { params(value: ::Application).void }
   def application=(value); end
 
-  sig { returns(T.nilable(::Councillor)) }
-  def councillor; end
-
-  sig { params(value: T.nilable(::Councillor)).void }
-  def councillor=(value); end
-
-  sig { returns(::Reply::ActiveRecord_Associations_CollectionProxy) }
-  def replies; end
-
-  sig { returns(T::Array[Integer]) }
-  def reply_ids; end
-
-  sig { params(value: T::Enumerable[::Reply]).void }
-  def replies=(value); end
-
   sig { returns(::Report::ActiveRecord_Associations_CollectionProxy) }
   def reports; end
 
@@ -216,9 +201,6 @@ class Comment < ApplicationRecord
   def self.in_past_week(*args); end
 
   sig { params(args: T.untyped).returns(Comment::ActiveRecord_Relation) }
-  def self.to_councillor(*args); end
-
-  sig { params(args: T.untyped).returns(Comment::ActiveRecord_Relation) }
   def self.visible(*args); end
 end
 
@@ -233,9 +215,6 @@ class Comment::ActiveRecord_Relation < ActiveRecord::Relation
 
   sig { params(args: T.untyped).returns(Comment::ActiveRecord_Relation) }
   def in_past_week(*args); end
-
-  sig { params(args: T.untyped).returns(Comment::ActiveRecord_Relation) }
-  def to_councillor(*args); end
 
   sig { params(args: T.untyped).returns(Comment::ActiveRecord_Relation) }
   def visible(*args); end
@@ -254,9 +233,6 @@ class Comment::ActiveRecord_AssociationRelation < ActiveRecord::AssociationRelat
   def in_past_week(*args); end
 
   sig { params(args: T.untyped).returns(Comment::ActiveRecord_AssociationRelation) }
-  def to_councillor(*args); end
-
-  sig { params(args: T.untyped).returns(Comment::ActiveRecord_AssociationRelation) }
   def visible(*args); end
 end
 
@@ -270,9 +246,6 @@ class Comment::ActiveRecord_Associations_CollectionProxy < ActiveRecord::Associa
 
   sig { params(args: T.untyped).returns(Comment::ActiveRecord_AssociationRelation) }
   def in_past_week(*args); end
-
-  sig { params(args: T.untyped).returns(Comment::ActiveRecord_AssociationRelation) }
-  def to_councillor(*args); end
 
   sig { params(args: T.untyped).returns(Comment::ActiveRecord_AssociationRelation) }
   def visible(*args); end

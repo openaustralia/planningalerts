@@ -1,13 +1,8 @@
 - if application.on_notice_to
-  - unless !application.councillors_available_for_contact.empty? && application.official_submission_period_expired?
-    %p= on_notice_text(application)
+  %p= on_notice_text(application)
 %p
-  - unless application.councillors_available_for_contact.empty?
-    Post a comment for the planning authority
-    or one of your elected local councillors.
-  - else
-    Your comment and details will be sent to
-    %strong #{application.authority.full_name}.
-    - unless application.official_submission_period_expired?
-      They may consider your submission when they decide whether to approve this application.
+  Your comment and details will be sent to
+  %strong #{application.authority.full_name}.
+  - unless application.official_submission_period_expired?
+    They may consider your submission when they decide whether to approve this application.
   Your&nbsp;name and comment will be posted publicly above.

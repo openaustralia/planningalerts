@@ -22,22 +22,4 @@ feature "Admin hides comment" do
     expect(page).to have_content("Comment was successfully updated")
     expect(page).to have_content("Hidden Yes")
   end
-
-  scenario "successfully when writing to councillor feature is enabled" do
-    with_modified_env COUNCILLORS_ENABLED: "true" do
-      sign_in_as_admin
-
-      click_link "Comments"
-
-      within("#comment_1") do
-        click_link "Edit"
-      end
-
-      check "Hidden"
-      click_button "Update Comment"
-
-      expect(page).to have_content("Comment was successfully updated")
-      expect(page).to have_content("Hidden Yes")
-    end
-  end
 end

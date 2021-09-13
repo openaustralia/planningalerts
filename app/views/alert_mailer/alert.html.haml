@@ -7,8 +7,6 @@
     = render "header"
     - unless @comments.empty?
       = render "comments", comments: @comments, alert: @alert
-    - unless @replies.empty?
-      = render "replies", replies: @replies, alert: @alert
     - unless @applications.empty?
       = render "applications", alert: @alert, applications: @applications
     = render "donation_banner"

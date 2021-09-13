@@ -16,11 +16,10 @@ class ProcessAlertAndRecordStatsService < ApplicationService
     @alert_id = alert_id
   end
 
-  # TODO: Also include no_replies in stats
   sig { void }
   def call
     alert = Alert.find(alert_id)
-    no_emails, no_applications, no_comments, no_replies = ProcessAlertService.call(alert: alert)
+    no_emails, no_applications, no_comments = ProcessAlertService.call(alert: alert)
 
     # Don't need to do anything further if no email was sent
     return if no_emails.zero?
@@ -34,7 +33,8 @@ class ProcessAlertAndRecordStatsService < ApplicationService
       no_emails: no_emails,
       no_applications: no_applications,
       no_comments: no_comments,
-      no_replies: no_replies
+      # TODO: Remove the no_replies field from EmailBatch
+      no_replies: 0
     )
   end
 

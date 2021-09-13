@@ -24,21 +24,3 @@
         %p
           Write to the planning authority (#{application.authority.full_name}) if you want your comment considered
           when they decide whether to approve this application.
-    .councillor-select-list{ class: ("open" if councillor_list_open) }
-      %header.councillor-select-list-intro
-        %strong One of your elected local councillors
-        %p
-          Your elected councillors can answer your questions
-          and represent you in council meetings.
-      = f.collection_radio_buttons(:comment_for, application.councillors_available_for_contact, :id, :name, include_hidden: false) do |b|
-        = b.radio_button(class: "councillor-select-radio")
-        = b.label(class: "councillor-select-label h-card") do
-          .councillor-option
-            = render "councillors/councillor_image", councillor: b.object
-            .councillor-details
-              %span.p-name= b.object.name
-              %span.p-org= b.object.party
-      %footer
-        %strong Don’t worry if you don’t know who to contact.
-        Every councillor is there to represent you
-        so just pick someone who seems nice.

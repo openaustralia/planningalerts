@@ -40,17 +40,6 @@ module AlertMailerHelper
     )
   end
 
-  sig { params(reply: Reply).returns(String) }
-  def reply_url_with_tracking(reply:)
-    T.unsafe(self).application_url(
-      base_tracking_params.merge(
-        id: reply.comment.application.id,
-        anchor: "reply#{reply.id}",
-        utm_campaign: "view-reply"
-      )
-    )
-  end
-
   sig { params(id: T.nilable(Integer)).returns(String) }
   def new_comment_url_with_tracking(id: nil)
     T.unsafe(self).application_url(
@@ -66,16 +55,14 @@ module AlertMailerHelper
     params(
       alert: Alert,
       applications: T::Array[Application],
-      comments: T::Array[Comment],
-      replies: T::Array[Reply]
+      comments: T::Array[Comment]
     ).returns(String)
   end
-  def subject(alert, applications, comments, replies)
+  def subject(alert, applications, comments)
     applications_text = pluralize(applications.size, "new planning application") if applications.any?
     comments_text = pluralize(comments.size, "new comment") if comments.any?
-    replies_text = pluralize(replies.size, "new reply") if replies.any?
 
-    items = [comments_text, replies_text, applications_text].compact.to_sentence(last_word_connector: " and ")
+    items = [comments_text, applications_text].compact.to_sentence(last_word_connector: " and ")
     items += " on planning applications" if applications.empty?
 
     "#{items} near #{alert.address}"

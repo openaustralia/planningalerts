@@ -9,23 +9,6 @@ ol#comments {
   margin-right: 0;
 }
 
-.comment-exchange {
-  position: relative;
-  z-index: 0;
-
-  &:before {
-    display: block;
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 6em;
-    width: 1px;
-    background-color: $councillor-message-border-color;
-    z-index: -1;
-  }
-}
-
 .panel {
   border: 1px $lightest-cool-highlight solid;
 }
@@ -96,33 +79,6 @@ ol#comments {
   }
 }
 
-.comment-to-councillor,
-.comment-to-councillor .comment-location,
-.comment-to-councillor-status,
-.reply-from-councillor {
-  border-color: $councillor-message-border-color;
-}
-
-.comment-to-councillor,
-.reply-from-councillor {
-  background: $councillor-message-background-color;
-}
-
-.comment-to-councillor .comment-location {
-  background-color: $councillor-message-header-color;
-}
-
-.comment-to-councillor-status {
-  background: #fff;
-  border-top-width: 1px;
-  border-top-style: solid;
-  border-radius: 0 0 .5em .5em;
-
-  span {
-    display: inline-block;
-  }
-}
-
 .comment-location,
 .comment-text {
   color: $font-color;
@@ -158,16 +114,9 @@ ol#comments {
   font-size: 1em;
 }
 
-.comment-author,
-.comment-recipient {
+.comment-author {
   display: inline-block;
   font-weight: bold;
-}
-
-.reply-from-councillor {
-  .comment-author {
-    display: block;
-  }
 }
 
 .comment-time-block {
@@ -176,11 +125,6 @@ ol#comments {
 
   @include at-breakpoint(40em) {
     display: inline-block;
-
-    .comment-to-councillor &,
-    .reply-from-councillor {
-      display: block;
-    }
   }
 }
 
@@ -197,38 +141,4 @@ ol#comments {
   @include quiet;
   margin-left: .5em;
   text-decoration: underline;
-}
-
-.reply-from-councillor {
-  .comment-item + & {
-    margin-top: -1em;
-    margin-left: 3em;
-  }
-
-  .comment-heading {
-    display: table;
-  }
-
-  .councillor-image-wrapper,
-  .comment-meta {
-    vertical-align: top;
-    display: table-cell;
-  }
-
-  .councillor-image-wrapper {
-    padding: 0 1em 0 0;
-  }
-
-  .councillor-image {
-    width: 4.5em;
-    height: 4.5em;
-  }
-}
-
-.councillor .p-name {
-  display: block;
-}
-
-.councillor .p-role {
-  font-weight: normal;
 }

@@ -24,8 +24,8 @@ describe ProcessAlertService do
         allow(alert).to receive(:recent_new_applications).and_return([application])
       end
 
-      it "should return the number of emails, applications, comments and replies sent" do
-        expect(ProcessAlertService.call(alert: alert)).to eq([1, 1, 0, 0])
+      it "should return the number of emails, applications and comments sent" do
+        expect(ProcessAlertService.call(alert: alert)).to eq([1, 1, 0])
       end
 
       it "should send an email" do
@@ -82,38 +82,8 @@ describe ProcessAlertService do
         expect((alert.last_processed - Time.zone.now).abs).to be < 1
       end
 
-      it "should return the number of applications, comments and replies sent" do
-        expect(ProcessAlertService.call(alert: alert)).to eq([0, 0, 0, 0])
-      end
-    end
-
-    context "and one new reply nearby" do
-      let(:application) do
-        create(:application,
-               lat: 1.0,
-               lng: 2.0,
-               address: "24 Bruce Road, Glenbrook, NSW",
-               suburb: "Glenbrook",
-               state: "NSW",
-               postcode: "2773",
-               no_alerted: 3)
-      end
-      let(:reply) do
-        create(:reply, comment: create(:comment, application: application),
-                       received_at: 1.hour.ago)
-      end
-
-      before :each do
-        allow(alert).to receive(:new_replies).and_return([reply])
-      end
-
-      it "should return the number of applications, comments and replies sent" do
-        expect(ProcessAlertService.call(alert: alert)).to eq([1, 0, 0, 1])
-      end
-
-      it "should send an email" do
-        ProcessAlertService.call(alert: alert)
-        expect(ActionMailer::Base.deliveries.size).to eq(1)
+      it "should return the number of applications and comments sent" do
+        expect(ProcessAlertService.call(alert: alert)).to eq([0, 0, 0])
       end
     end
   end

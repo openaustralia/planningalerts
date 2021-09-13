@@ -113,15 +113,6 @@ FactoryBot.define do
       confirmed { true }
       confirmed_at { 5.minutes.ago }
     end
-
-    factory :comment_to_authority do
-      councillor_id { nil }
-    end
-
-    factory :comment_to_councillor do
-      address { nil }
-      association :councillor
-    end
   end
 
   factory :report do
@@ -129,20 +120,6 @@ FactoryBot.define do
     email { "reporter@foo.com" }
     details { "It's very rude!" }
     comment { :comment }
-  end
-
-  factory :reply do
-    text { "Thanks for your comment, I agree" }
-    received_at { 1.day.ago }
-    association :comment
-    association :councillor
-  end
-
-  factory :councillor do
-    name { "Louise Councillor" }
-    email { "louise@council.state.gov" }
-    popolo_id { "louise_councillor" }
-    association :authority
   end
 
   factory :user do
@@ -193,21 +170,5 @@ FactoryBot.define do
 
   factory :subscription do
     sequence(:email) { |s| "mary#{s}@enterpriserealty.com.au" }
-  end
-
-  factory :suggested_councillor do
-    name { "Mila Gilic" }
-    email { "mgilic@casey.vic.gov.au" }
-    councillor_contribution
-  end
-
-  factory :councillor_contribution do
-    association :contributor
-    association :authority
-  end
-
-  factory :contributor do
-    name { "Felix Chaung" }
-    email { "felix@gmail.com" }
   end
 end

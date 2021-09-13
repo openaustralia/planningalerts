@@ -32,12 +32,3 @@ class Rack::Throttle::Limiter
   def request_start_time(request); end
   def whitelisted?(request); end
 end
-class Rack::Throttle::TimeWindow < Rack::Throttle::Limiter
-  def allowed?(request); end
-end
-class Rack::Throttle::Daily < Rack::Throttle::TimeWindow
-  def cache_key(request); end
-  def initialize(app, options = nil); end
-  def max_per_day(request = nil); end
-  def max_per_window(request = nil); end
-end

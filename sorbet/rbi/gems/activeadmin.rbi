@@ -1718,21 +1718,12 @@ module Anonymous_Module_29
   include Anonymous_Module_27
   include Anonymous_Module_28
 end
-module Admin
-end
-module Admin::AuthoritiesHelper
-  def load_councillors_response_text(*args, &blk); end
-  extend T::Private::Methods::MethodHooks
-  extend T::Private::Methods::SingletonMethodHooks
-  extend T::Sig
-end
 module AlertMailerHelper
   def application_url_with_tracking(*args, &blk); end
   def base_tracking_params(*args, &blk); end
   def capitalise_initial_character(*args, &blk); end
   def comment_url_with_tracking(*args, &blk); end
   def new_comment_url_with_tracking(*args, &blk); end
-  def reply_url_with_tracking(*args, &blk); end
   def subject(*args, &blk); end
   extend T::Private::Methods::MethodHooks
   extend T::Private::Methods::SingletonMethodHooks
@@ -1803,18 +1794,6 @@ module CommentsHelper
   extend T::Private::Methods::SingletonMethodHooks
   extend T::Sig
   include ApplicationHelper
-end
-module CouncillorContributionsHelper
-  def link_to_or_website_text_for(*args, &blk); end
-  extend T::Private::Methods::MethodHooks
-  extend T::Private::Methods::SingletonMethodHooks
-  extend T::Sig
-end
-module RepliesHelper
-  def reply_path(*args, &blk); end
-  extend T::Private::Methods::MethodHooks
-  extend T::Private::Methods::SingletonMethodHooks
-  extend T::Sig
 end
 module SignupHelper
   def draw_box_javascript(*args, &blk); end
@@ -2260,11 +2239,6 @@ class ActiveAdmin::PagePresenter
   def initialize(options = nil, &block); end
   def options; end
 end
-class ActiveAdmin::ControllerAction
-  def http_verb; end
-  def initialize(name, options = nil); end
-  def name; end
-end
 module ActiveAdmin::Localizers
   def self.resource(active_admin_config); end
 end
@@ -2287,6 +2261,11 @@ class ActiveAdmin::Scope
   def scope_block; end
   def scope_method; end
   def show_count; end
+end
+class ActiveAdmin::ControllerAction
+  def http_verb; end
+  def initialize(name, options = nil); end
+  def name; end
 end
 class ActiveAdmin::CSVBuilder
   def batch_size; end

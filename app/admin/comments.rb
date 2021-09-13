@@ -6,7 +6,6 @@ ActiveAdmin.register Comment do
   actions :all, except: %i[destroy new create]
 
   scope :visible, default: true
-  scope("Visible, sent to councillor") { |s| s.visible.to_councillor }
   scope(:hidden) { |s| s.where(hidden: true) }
   scope :all
 
@@ -17,7 +16,6 @@ ActiveAdmin.register Comment do
     column :email
     column :name
     column :application
-    column :councillor
     actions
   end
 
@@ -25,7 +23,6 @@ ActiveAdmin.register Comment do
   filter :email
   filter :name
   filter :text
-  filter :councillor
 
   show title: proc { |resource| "Comment by #{resource.name}#{' (unconfirmed)' unless resource.confirmed?}" }
 
@@ -42,20 +39,6 @@ ActiveAdmin.register Comment do
       input :hidden
     end
     actions
-  end
-
-  action_item :load_replies, only: :show do
-    button_to("Load replies from WriteIt", load_replies_admin_comment_path) if ENV["WRITEIT_BASE_URL"] && resource.to_councillor? && resource.writeit_message_id
-  end
-
-  member_action :load_replies, method: :post do
-    replies = resource.create_replies_from_writeit!
-    if replies.present?
-      # TODO: Fix pluralisation: "Loaded 1 replies"
-      redirect_to({ action: :show }, notice: "Loaded #{replies.count} replies")
-    else
-      redirect_to({ action: :show }, notice: "No replies loaded")
-    end
   end
 
   action_item :resend, only: :show do

@@ -4,10 +4,4 @@
 class CommentMailer
   sig { params(comment: Comment).returns(ActionMailer::MessageDelivery) }
   def self.notify_authority(comment); end
-
-  sig { params(comment: Comment).returns(ActionMailer::MessageDelivery) }
-  def self.notify_councillor(comment); end
-
-  sig { params(comment: Comment).returns(ActionMailer::MessageDelivery) }
-  def self.send_comment_via_writeit!(comment); end
 end

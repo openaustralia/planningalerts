@@ -6,7 +6,7 @@
 class ProcessAlertService < ApplicationService
   extend T::Sig
 
-  sig { params(alert: Alert).returns([Integer, Integer, Integer, Integer]) }
+  sig { params(alert: Alert).returns([Integer, Integer, Integer]) }
   def self.call(alert:)
     new(alert: alert).call
   end
@@ -16,14 +16,13 @@ class ProcessAlertService < ApplicationService
     @alert = alert
   end
 
-  sig { returns([Integer, Integer, Integer, Integer]) }
+  sig { returns([Integer, Integer, Integer]) }
   def call
     applications = alert.recent_new_applications.to_a
     comments = alert.new_comments
-    replies = alert.new_replies
 
-    if !applications.empty? || !comments.empty? || !replies.empty?
-      AlertMailer.alert(alert, applications, comments, replies).deliver_now
+    if !applications.empty? || !comments.empty?
+      AlertMailer.alert(alert, applications, comments).deliver_now
       alert.last_sent = Time.zone.now
       no_emails = 1
     else
@@ -39,8 +38,8 @@ class ProcessAlertService < ApplicationService
       # rubocop:enable Rails/SkipsModelValidations
     end
 
-    # Return number of emails, applications, comments and replies sent
-    [no_emails, applications.size, comments.size, replies.size]
+    # Return number of emails, applications and comments sent
+    [no_emails, applications.size, comments.size]
   end
 
   private

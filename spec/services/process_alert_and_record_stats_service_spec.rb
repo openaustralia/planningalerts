@@ -7,11 +7,11 @@ describe ProcessAlertAndRecordStatsService do
     let(:alert) { create(:confirmed_alert) }
 
     before(:each) do
-      allow(ProcessAlertService).to receive(:call).with(alert: alert).and_return([1, 5, 1, 1])
+      allow(ProcessAlertService).to receive(:call).with(alert: alert).and_return([1, 5, 1])
     end
 
     it "should process the individual alert" do
-      expect(ProcessAlertService).to receive(:call).with(alert: alert).and_return([1, 5, 1, 1])
+      expect(ProcessAlertService).to receive(:call).with(alert: alert).and_return([1, 5, 1])
       allow(Alert).to receive(:find).with(alert.id).and_return(alert)
       ProcessAlertAndRecordStatsService.call(alert_id: alert.id)
     end
@@ -25,7 +25,6 @@ describe ProcessAlertAndRecordStatsService do
       expect(batch.no_emails).to eq 1
       expect(batch.no_applications).to eq 5
       expect(batch.no_comments).to eq 1
-      expect(batch.no_replies).to eq 1
     end
 
     it "should increment the global stats" do

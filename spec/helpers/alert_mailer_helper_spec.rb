@@ -60,27 +60,6 @@ describe AlertMailerHelper do
       end
     end
 
-    describe "#reply_url_with_tracking" do
-      let(:reply) do
-        create(:reply, id: 5)
-      end
-
-      it "returns the correct url" do
-        expect(
-          helper.reply_url_with_tracking(
-            reply: reply
-          )
-        )
-          .to eq application_url(
-            @base_params.merge(
-              id: reply.comment.application.id,
-              anchor: "reply5",
-              utm_campaign: "view-reply"
-            )
-          )
-      end
-    end
-
     describe "#new_comment_url_with_tracking" do
       it {
         expect(
@@ -108,36 +87,20 @@ describe AlertMailerHelper do
     end
     let(:comment) { create(:comment, application: application) }
     let(:comment2) { create(:comment, application: application) }
-    let(:reply) { create(:reply, comment: comment) }
 
     context "with an application" do
-      subject { helper.subject(alert, [application], [], []) }
+      subject { helper.subject(alert, [application], []) }
       it { is_expected.to eql "1 new planning application near 123 Sample St" }
     end
 
     context "with a comment" do
-      subject { helper.subject(alert, [], [comment], []) }
+      subject { helper.subject(alert, [], [comment]) }
       it { is_expected.to eql "1 new comment on planning applications near 123 Sample St" }
     end
 
-    context "with a reply" do
-      subject { helper.subject(alert, [], [], [reply]) }
-      it { is_expected.to eql "1 new reply on planning applications near 123 Sample St" }
-    end
-
     context "with an application and a comment" do
-      subject { helper.subject(alert, [application], [comment], []) }
+      subject { helper.subject(alert, [application], [comment]) }
       it { is_expected.to eql "1 new comment and 1 new planning application near 123 Sample St" }
-    end
-
-    context "with an application and a reply" do
-      subject { helper.subject(alert, [application], [], [reply]) }
-      it { is_expected.to eql "1 new reply and 1 new planning application near 123 Sample St" }
-    end
-
-    context "with an application, a comment, and a reply" do
-      subject { helper.subject(alert, [application], [comment], [reply]) }
-      it { is_expected.to eql "1 new comment, 1 new reply and 1 new planning application near 123 Sample St" }
     end
   end
 end

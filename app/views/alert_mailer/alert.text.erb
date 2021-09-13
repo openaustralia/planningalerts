@@ -1,14 +1,6 @@
 <%= render "header" -%>
 <% unless @comments.empty? %>
 <%= render "comments", comments: @comments, alert: @alert -%>
-<% unless @replies.empty? && @applications.empty? -%>
-
-============================================================
-
-<% end %>
-<% end %>
-<% unless @replies.empty? %>
-<%= render "replies", replies: @replies, alert: @alert -%>
 <% unless @applications.empty? -%>
 
 ============================================================

@@ -83,12 +83,6 @@ gem "sanitize"
 gem "dotenv-rails"
 gem "foreman"
 
-# Councillors
-gem "everypolitician-popolo", git: "https://github.com/everypolitician/everypolitician-popolo.git", branch: "master"
-gem "mime-types", "~> 2.99" # our writeit gem version is incompatible with newer versions
-# Using master until an updated version of the Gem is released https://github.com/ciudadanointeligente/writeit-rails/issues/4
-gem "writeit-rails", git: "https://github.com/ciudadanointeligente/writeit-rails.git", branch: "master"
-
 # Figure out who is likely to be human
 gem "recaptcha", require: "recaptcha/rails"
 

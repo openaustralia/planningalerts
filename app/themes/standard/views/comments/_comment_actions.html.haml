@@ -1,6 +1,4 @@
 - if current_user&.admin?
-  - if comment.to_councillor? && comment.writeit_message_id.blank?
-    = link_to "add reply", new_admin_reply_path("reply[comment_id]" => comment), class: "comment-action"
   = link_to "admin", admin_comment_path(comment), class: "comment-action"
 - unless current_page?(new_comment_report_path(comment.id))
   = link_to "report comment", new_comment_report_path(comment), title: "Report this comment by #{comment.name} for removal", class: "comment-action"

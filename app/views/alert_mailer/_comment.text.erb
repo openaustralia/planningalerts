@@ -1,5 +1,5 @@
 
-<%= comment.name %> <%= comment.councillor ? "wrote to #{comment.councillor.prefixed_name} about" : "commented on"  %> <%= display_description_with_address(comment.application) %>:
+<%= comment.name %> commented on <%= display_description_with_address(comment.application) %>:
 
 <%= our_sanitize(truncate(comment.text, length: 700)) %>
 

@@ -16,10 +16,6 @@ ActiveAdmin.register Authority do
     column :email
     column(:applications) { |a| a.applications.count }
     column(:total_comments) { |a| a.comments.count }
-    column(:comments_to_councillors) { |a| a.comments.to_councillor.count }
-    column(:comments_with_replies) { |a| a.comments.joins(:replies).distinct.count }
-    column :write_to_councillors_enabled
-    column(:number_of_councillors) { |a| a.councillors.count }
     actions
   end
 
@@ -30,34 +26,10 @@ ActiveAdmin.register Authority do
       row :state
       row :email
       row :website_url
-      row :write_to_councillors_enabled
       row :population_2017
       row :morph_name
       row :scraper_authority_label
       row :disabled
-    end
-
-    h3 "Councillors"
-    if a.councillors.present?
-      table_for resource.councillors.order(current: :desc), class: "index_table" do
-        column :name
-        column :current
-        column :email
-        column :party
-        column(:image) { |c| link_to(image_tag(c.image_url), c.image_url) if c.image_url.present? }
-        # TODO: Add delete action
-        column do |c|
-          safe_join(
-            [
-              link_to("View", admin_councillor_path(c)),
-              link_to("Edit", edit_admin_councillor_path(c))
-            ],
-            " "
-          )
-        end
-      end
-    else
-      para "None loaded for this authority."
     end
 
     h3 "Last import run log"
@@ -79,7 +51,6 @@ ActiveAdmin.register Authority do
       input :email
       input :website_url
       input :population_2017
-      input :write_to_councillors_enabled
     end
     inputs "Scraping" do
       input :morph_name, hint: "The name of the scraper at morph.io", placeholder: "planningalerts-scrapers/scraper-blue-mountains"
@@ -99,23 +70,10 @@ ActiveAdmin.register Authority do
     redirect_to({ action: :show }, notice: "Queued for importing!")
   end
 
-  action_item :load_councillors, only: :show do
-    button_to("Load Councillors", load_councillors_admin_authority_path)
-  end
-
-  member_action :load_councillors, method: :post do
-    popolo = EveryPolitician::Popolo.parse(RestClient.get(resource.popolo_url).body)
-    results = resource.load_councillors(popolo)
-    notice = render_to_string(partial: "load_councillors_message", locals: { councillors: results })
-
-    redirect_to({ action: :show }, notice: notice)
-  end
-
   csv do
     column :full_name
     column :short_name
     column :disabled
-    column :write_to_councillors_enabled
     column :state
     column :email
     column :population_2017
@@ -124,5 +82,5 @@ ActiveAdmin.register Authority do
     column(:number_of_comments) { |a| a.comments.count }
   end
 
-  permit_params :full_name, :short_name, :state, :email, :website_url, :write_to_councillors_enabled, :population_2017, :morph_name, :scraper_authority_label, :disabled
+  permit_params :full_name, :short_name, :state, :email, :website_url, :population_2017, :morph_name, :scraper_authority_label, :disabled
 end

@@ -88,9 +88,6 @@ Rails.application.routes.draw do
     member do
       get :confirmed
     end
-    collection do
-      post :writeit_reply_webhook
-    end
     resources :reports, only: %i[new create]
   end
 
@@ -106,18 +103,10 @@ Rails.application.routes.draw do
         get :per_week
       end
     end
-    resources :councillor_contributions, only: %i[new show]
     get :under_the_hood
   end
 
-  resources :councillor_contributions, only: [:index]
-
   resources :geocode_queries, only: [:index, :show]
-
-  post "/authorities/:authority_id/councillor_contributions/new", to: "councillor_contributions#new"
-  patch "/authorities/:authority_id/councillor_contributions/add_contributor", to: "councillor_contributions#add_contributor", as: :add_contributor_authority_councillor_contribution
-  post "/authorities/:authority_id/councillor_contributions/source", to: "councillor_contributions#source", as: :add_source_authority_councillor_contribution
-  patch "/authorities/:authority_id/councillor_contributions/thank_you", to: "councillor_contributions#thank_you", as: :authority_councillor_contribution_thank_you
 
   namespace :atdis do
     get :test
