@@ -10,13 +10,15 @@ http_interactions:
       Accept:
       - application/json
       Accept-Encoding:
-      - gzip, deflate
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Content-Type:
       - application/json
       Content-Length:
       - '92'
       User-Agent:
-      - Ruby
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.6.6p146
+      Host:
+      - mappify.io
   response:
     status:
       code: 200
@@ -71,13 +73,15 @@ http_interactions:
       Accept:
       - application/json
       Accept-Encoding:
-      - gzip, deflate
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Content-Type:
       - application/json
       Content-Length:
       - '67'
       User-Agent:
-      - Ruby
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.6.6p146
+      Host:
+      - mappify.io
   response:
     status:
       code: 200
