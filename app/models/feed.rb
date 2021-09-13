@@ -66,7 +66,7 @@ class Feed
       u = URI.parse(url)
       if u.host == "localhost"
         file = Feed.example_path(Rails.application.routes.recognize_path(u.path)[:number].to_i, page)
-        raise RestClient::ResourceNotFound unless File.exist?(file)
+        raise RestClient::NotFound unless File.exist?(file)
 
         page = ATDIS::Models::Page.read_json(File.read(file), timezone)
         page.url = url

@@ -7,55 +7,9 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/mime-types/all/mime-types.rbi
 #
-# mime-types-2.99.3
+# mime-types-3.3.1
 
 module MIME
-  def self.const_missing(name); end
-  def self.warn_about_moved_constants(name); end
-end
-class MIME::Types
-  def [](type_id, flags = nil); end
-  def add(*types); end
-  def add_type(type, quiet = nil); end
-  def add_type_variant!(mime_type); end
-  def add_type_variant(mime_type); end
-  def count; end
-  def data_version; end
-  def defined_types; end
-  def each; end
-  def index_extensions!(mime_type); end
-  def index_extensions(mime_type); end
-  def initialize; end
-  def match(pattern); end
-  def of(filename, platform = nil); end
-  def prune_matches(matches, flags); end
-  def self.[](type_id, flags = nil); end
-  def self.__types__; end
-  def self.add(*types); end
-  def self.add_type_variant(mime_type); end
-  def self.cache_file; end
-  def self.count; end
-  def self.deprecated(klass, sym, message = nil, &block); end
-  def self.each; end
-  def self.index_extensions(mime_type); end
-  def self.lazy_load?; end
-  def self.load_default_mime_types(mode = nil); end
-  def self.load_from_file(filename); end
-  def self.load_mode; end
-  def self.logger; end
-  def self.logger=(arg0); end
-  def self.of(filename, platform = nil); end
-  def self.type_for(filename, platform = nil); end
-  def type_for(filename, platform = nil); end
-  include Enumerable
-end
-class MIME::Types::WarnLogger < Logger
-  def initialize(_1, _2 = nil, _3 = nil); end
-end
-class MIME::Types::WarnLogger::WarnLogDevice < Logger::LogDevice
-  def close; end
-  def initialize(*arg0); end
-  def write(m); end
 end
 class MIME::Type
   def <=>(other); end
@@ -73,50 +27,50 @@ class MIME::Type
   def encoding=(enc); end
   def eql?(other); end
   def extensions; end
-  def extensions=(ext); end
+  def extensions=(value); end
   def friendly(lang = nil); end
   def i18n_key; end
   def init_with(coder); end
   def initialize(content_type); end
+  def inspect; end
+  def intern_string(string); end
   def like?(other); end
   def media_type; end
-  def obsolete=(v); end
+  def obsolete; end
+  def obsolete=(arg0); end
   def obsolete?; end
-  def platform?(*arg0); end
   def preferred_extension; end
+  def preferred_extension=(value); end
   def priority_compare(other); end
   def raw_media_type; end
   def raw_sub_type; end
-  def references(*arg0); end
-  def references=(_r); end
-  def registered=(v); end
+  def registered; end
+  def registered=(arg0); end
   def registered?; end
-  def self.from_array(*args); end
-  def self.from_hash(hash); end
-  def self.from_mime_type(mime_type); end
   def self.i18n_key(content_type); end
-  def self.simplified(content_type); end
-  def signature=(v); end
+  def self.match(content_type); end
+  def self.simplified(content_type, remove_x_prefix: nil); end
+  def self.simplify_matchdata(matchdata, remove_x = nil, joiner: nil); end
+  def signature; end
+  def signature=(arg0); end
   def signature?; end
   def simplified; end
   def sub_type; end
-  def system; end
-  def system=(_os); end
-  def system?(*arg0); end
-  def to_a; end
   def to_h; end
-  def to_hash; end
   def to_json(*args); end
   def to_s; end
   def to_str; end
-  def url; end
-  def url=(_r); end
-  def urls; end
   def use_instead; end
   def use_instead=(arg0); end
+  def xref_map(values, helper); end
+  def xref_url_for_draft(value); end
+  def xref_url_for_person(value); end
+  def xref_url_for_rfc(value); end
+  def xref_url_for_rfc_errata(value); end
+  def xref_url_for_template(value); end
   def xref_urls; end
   def xrefs; end
-  def xrefs=(x); end
+  def xrefs=(xrefs); end
   include Comparable
 end
 class MIME::Type::InvalidContentType < ArgumentError
@@ -139,10 +93,63 @@ class MIME::Types::Cache < Struct
   def version; end
   def version=(_); end
 end
-class MIME::Types::Container < Hash
-  def initialize; end
+class MIME::Types::Container
+  def ==(*args, &block); end
+  def [](key); end
+  def []=(key, value); end
+  def add(key, value); end
+  def container; end
+  def container=(arg0); end
+  def count(*args, &block); end
+  def each(*args, &block); end
+  def each_value(*args, &block); end
+  def empty?(*args, &block); end
+  def encode_with(coder); end
+  def flat_map(*args, &block); end
+  def init_with(coder); end
+  def initialize(hash = nil); end
+  def keys(*args, &block); end
   def marshal_dump; end
   def marshal_load(hash); end
+  def merge!(other); end
+  def merge(other); end
+  def normalize; end
+  def select(*args, &block); end
+  def to_hash; end
+  def values(*args, &block); end
+  extend Forwardable
+end
+class MIME::Types
+  def [](type_id, complete: nil, registered: nil); end
+  def add(*types); end
+  def add_type(type, quiet = nil); end
+  def add_type_variant!(mime_type); end
+  def count; end
+  def each; end
+  def index_extensions!(mime_type); end
+  def initialize; end
+  def inspect; end
+  def match(pattern); end
+  def of(filename); end
+  def prune_matches(matches, complete, registered); end
+  def reindex_extensions!(mime_type); end
+  def self.[](type_id, complete: nil, registered: nil); end
+  def self.__instances__; end
+  def self.__types__; end
+  def self.add(*types); end
+  def self.count; end
+  def self.each; end
+  def self.lazy_load?; end
+  def self.load_default_mime_types(mode = nil); end
+  def self.load_mode; end
+  def self.logger; end
+  def self.logger=(arg0); end
+  def self.new(*arg0); end
+  def self.of(filename); end
+  def self.reindex_extensions(type); end
+  def self.type_for(filename); end
+  def type_for(filename); end
+  include Enumerable
 end
 class MIME::Types::Loader
   def columnar_path; end
@@ -152,48 +159,60 @@ class MIME::Types::Loader
   def load(options = nil); end
   def load_columnar; end
   def load_json; end
-  def load_v1; end
   def load_yaml; end
   def path; end
   def self.load(options = nil); end
   def self.load_from_json(filename); end
-  def self.load_from_v1(filename, __internal__ = nil); end
   def self.load_from_yaml(filename); end
   def self.read_file(filename); end
-  def v1_path; end
   def yaml_path; end
 end
-class MIME::Types::Loader::BadV1Format < Exception
+class MIME::Types::WarnLogger < Logger
+  def initialize(_one, _two = nil, _three = nil); end
+end
+class MIME::Types::WarnLogger::WarnLogDevice < Logger::LogDevice
+  def close; end
+  def initialize(*arg0); end
+  def write(m); end
 end
 class MIME::Type::Columnar < MIME::Type
-  def binary?; end
-  def docs; end
+  def docs(*args); end
+  def docs=(*args); end
   def encode_with(coder); end
-  def encoding; end
-  def friendly(*arg0); end
-  def friendly=(arg0); end
+  def encoding(*args); end
+  def encoding=(*args); end
+  def friendly(*args); end
   def initialize(container, content_type, extensions); end
-  def obsolete?; end
-  def registered?; end
-  def signature?; end
-  def to_a; end
-  def to_hash; end
-  def use_instead; end
-  def xrefs; end
+  def obsolete(*args); end
+  def obsolete=(*args); end
+  def obsolete?(*args); end
+  def preferred_extension(*args); end
+  def preferred_extension=(*args); end
+  def registered(*args); end
+  def registered=(*args); end
+  def registered?(*args); end
+  def signature(*args); end
+  def signature=(*args); end
+  def signature?(*args); end
+  def use_instead(*args); end
+  def use_instead=(*args); end
+  def xref_urls(*args); end
+  def xrefs(*args); end
+  def xrefs=(*args); end
 end
 module MIME::Types::Columnar
   def arr(line); end
-  def bool(line); end
-  def dict(line); end
+  def dict(line, array: nil); end
   def each_file_line(name, lookup = nil); end
+  def flag(line); end
   def load_base_data(path); end
   def load_docs; end
   def load_encoding; end
+  def load_flags; end
   def load_friendly; end
-  def load_obsolete; end
-  def load_registered; end
-  def load_signature; end
+  def load_preferred_extension; end
   def load_use_instead; end
   def load_xrefs; end
+  def opt(line); end
   def self.extended(obj); end
 end
