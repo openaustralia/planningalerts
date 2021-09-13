@@ -9,6 +9,8 @@
 # wrong constant name <Magic>
 # wrong constant name <Magic>
 # wrong constant name <Class:<Magic>>
+# wrong constant name <PackageRegistry>
+# wrong constant name <PackageRegistry>
 # wrong constant name <RESERVED_0>
 # wrong constant name <RESERVED_10>
 # wrong constant name <RESERVED_11>
@@ -87,18 +89,7 @@
 # wrong constant name <RESERVED_78>
 # wrong constant name <RESERVED_79>
 # wrong constant name <RESERVED_7>
-# wrong constant name <RESERVED_80>
-# wrong constant name <RESERVED_81>
-# wrong constant name <RESERVED_82>
-# wrong constant name <RESERVED_83>
-# wrong constant name <RESERVED_84>
-# wrong constant name <RESERVED_85>
-# wrong constant name <RESERVED_86>
-# wrong constant name <RESERVED_87>
-# wrong constant name <RESERVED_88>
-# wrong constant name <RESERVED_89>
 # wrong constant name <RESERVED_8>
-# wrong constant name <RESERVED_90>
 # wrong constant name <RESERVED_9>
 # wrong constant name <TypeAlias>
 # wrong constant name <TypeAlias>
@@ -1744,7 +1735,7 @@
 # A copy of ActiveRecord::InternalMetadata::ActiveRecord_Relation has been removed from the module tree but is still active!
 # wrong constant name <static-init>
 # wrong constant name <static-init>
-# undefined singleton method `page<defaultArg>1' for `#<Class:0x000055a2da626b28>'
+# undefined singleton method `page<defaultArg>1' for `#<Class:0x0000556a694f9ce0>'
 # wrong constant name []
 # wrong constant name []=
 # wrong constant name create_table
@@ -2988,8 +2979,8 @@
 # wrong constant name create_user!
 # wrong constant name reload_user
 # wrong constant name <static-init>
-# undefined method `reindex<defaultArg>1' for class `#<Class:0x000055a2d67d5108>'
-# undefined method `similar<defaultArg>1' for class `#<Class:0x000055a2d67d5108>'
+# undefined method `reindex<defaultArg>1' for class `#<Class:0x0000556a655cb3c0>'
+# undefined method `similar<defaultArg>1' for class `#<Class:0x0000556a655cb3c0>'
 # uninitialized constant Application::ACTIONS
 # uninitialized constant Application::BLACKLISTED_CLASS_METHODS
 # uninitialized constant Application::CALLBACKS
@@ -3103,12 +3094,12 @@
 # wrong constant name with_first_version
 # wrong constant name within_bounding_box
 # wrong constant name <static-init>
-# undefined singleton method `reindex<defaultArg>1' for `#<Class:0x000055a2d67d5108>'
-# undefined singleton method `search<defaultArg>1' for `#<Class:0x000055a2d67d5108>'
-# undefined singleton method `search_index<defaultArg>1' for `#<Class:0x000055a2d67d5108>'
-# undefined singleton method `searchkick_index<defaultArg>1' for `#<Class:0x000055a2d67d5108>'
-# undefined singleton method `searchkick_reindex<defaultArg>1' for `#<Class:0x000055a2d67d5108>'
-# undefined singleton method `searchkick_search<defaultArg>1' for `#<Class:0x000055a2d67d5108>'
+# undefined singleton method `reindex<defaultArg>1' for `#<Class:0x0000556a655cb3c0>'
+# undefined singleton method `search<defaultArg>1' for `#<Class:0x0000556a655cb3c0>'
+# undefined singleton method `search_index<defaultArg>1' for `#<Class:0x0000556a655cb3c0>'
+# undefined singleton method `searchkick_index<defaultArg>1' for `#<Class:0x0000556a655cb3c0>'
+# undefined singleton method `searchkick_reindex<defaultArg>1' for `#<Class:0x0000556a655cb3c0>'
+# undefined singleton method `searchkick_search<defaultArg>1' for `#<Class:0x0000556a655cb3c0>'
 # wrong constant name after_add_for_comments
 # wrong constant name after_add_for_comments=
 # wrong constant name after_add_for_comments?
@@ -4663,24 +4654,25 @@
 # wrong constant name each_pair
 # wrong constant name empty?
 # wrong constant name initialize<defaultArg>1
-# wrong constant name initialize
 # wrong constant name length
 # wrong constant name size
 # wrong constant name to_ary
 # undefined method `initialize<defaultArg>1' for class `CSV::Table'
 # Did you mean?  initialize_dup
-# wrong constant name dig
 # wrong constant name empty?
 # wrong constant name initialize<defaultArg>1
 # wrong constant name initialize
 # wrong constant name length
 # wrong constant name size
+# wrong constant name table
 # wrong constant name <<
 # wrong constant name headers
 # wrong constant name initialize
 # wrong constant name lineno
 # wrong constant name rewind
 # wrong constant name <static-init>
+# undefined singleton method `foreach<defaultArg>1' for `CSV'
+# wrong constant name foreach<defaultArg>1
 # uninitialized constant Capistrano::Configuration::DEFAULT_TASK
 # wrong constant name <Class:DSL>
 # wrong constant name <Class:Minitest>
@@ -11917,6 +11909,9 @@
 # uninitialized constant PStore
 # uninitialized constant PTY
 # uninitialized constant PTY
+# uninitialized constant PackageSpec
+# uninitialized constant PackageSpec
+# wrong constant name <Class:PackageSpec>
 # uninitialized constant Parser::Ruby24::Racc_Main_Parsing_Routine
 # uninitialized constant Parser::Ruby24::Racc_Runtime_Core_Id_C
 # uninitialized constant Parser::Ruby24::Racc_Runtime_Core_Version
@@ -13252,7 +13247,7 @@
 # wrong constant name <static-init>
 # wrong constant name properties
 # wrong constant name properties=
-# undefined singleton method `property<defaultArg>1' for `#<Module:0x000055a2dc3520f8>'
+# undefined singleton method `property<defaultArg>1' for `#<Module:0x0000556a63f01e00>'
 # wrong constant name <static-init>
 # wrong constant name properties
 # wrong constant name properties=

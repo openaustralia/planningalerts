@@ -7487,8 +7487,6 @@ class CSV::Row
 
   def empty?(*args, &block); end
 
-  def initialize(headers, fields, header_row=T.unsafe(nil)); end
-
   def length(*args, &block); end
 
   def size(*args, &block); end
@@ -7501,8 +7499,6 @@ class CSV::Row
 end
 
 class CSV::Table
-  def dig(index_or_header, *index_or_headers); end
-
   def empty?(*args, &block); end
 
   def initialize(array_of_rows, headers: T.unsafe(nil)); end
@@ -7510,6 +7506,8 @@ class CSV::Table
   def length(*args, &block); end
 
   def size(*args, &block); end
+
+  def table(); end
 end
 
 class CSV::Table
@@ -9637,13 +9635,7 @@ class Dotenv::Parser
   LINE = ::T.let(nil, ::T.untyped)
 end
 
-module EventMachine
-end
-
-EM::Pool = EventMachine::Pool
-
-module EventMachine
-end
+EM = EventMachine
 
 class ERB
   def def_method(mod, methodname, fname=T.unsafe(nil)); end
@@ -10148,6 +10140,8 @@ class EventMachine::DNS::Resolver
   HOSTS_FILE = ::T.let(nil, ::T.untyped)
 end
 
+EventMachine::Deferrable::Pool = EventMachine::Pool
+
 class EventMachine::FileStreamer
   BackpressureLevel = ::T.let(nil, ::T.untyped)
   ChunkSize = ::T.let(nil, ::T.untyped)
@@ -10175,6 +10169,8 @@ end
 
 class EventMachine::NoHandlerForAcceptedConnection
 end
+
+EventMachine::P = EventMachine::Protocols
 
 class EventMachine::ProcessWatch
   Cexit = ::T.let(nil, ::T.untyped)
@@ -13425,6 +13421,38 @@ module HTTP
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
+module HTTP::Accept
+  QUOTED_STRING = ::T.let(nil, ::T.untyped)
+  TOKEN = ::T.let(nil, ::T.untyped)
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+module HTTP::Accept::Encodings
+  CODINGS = ::T.let(nil, ::T.untyped)
+  CONTENT_CODING = ::T.let(nil, ::T.untyped)
+  HTTP_ACCEPT_ENCODING = ::T.let(nil, ::T.untyped)
+  IDENTITY_CONTENT_CODING = ::T.let(nil, ::T.untyped)
+  QVALUE = ::T.let(nil, ::T.untyped)
+  WILDCARD_CONTENT_CODING = ::T.let(nil, ::T.untyped)
+end
+
+module HTTP::Accept::Languages
+  LANGUAGE_RANGE = ::T.let(nil, ::T.untyped)
+  LOCALE = ::T.let(nil, ::T.untyped)
+  QVALUE = ::T.let(nil, ::T.untyped)
+end
+
+module HTTP::Accept::MediaTypes
+  HTTP_ACCEPT = ::T.let(nil, ::T.untyped)
+  MIME_TYPE = ::T.let(nil, ::T.untyped)
+  PARAMETER = ::T.let(nil, ::T.untyped)
+  WILDCARD_MEDIA_RANGE = ::T.let(nil, ::T.untyped)
+end
+
+class HTTP::Accept::MediaTypes::Map
+  WILDCARD = ::T.let(nil, ::T.untyped)
+end
+
 class HTTP::Client
   include ::NewRelic::Agent::Instrumentation::HTTPrb::Prepend
   include ::NewRelic::Agent::Instrumentation::HTTPrb
@@ -15676,8 +15704,9 @@ module MIME::Types::Columnar
   LOAD_MUTEX = ::T.let(nil, ::T.untyped)
 end
 
-class MIME::Types::Loader
+module MIME::Types::Data
   PATH = ::T.let(nil, ::T.untyped)
+  VERSION = ::T.let(nil, ::T.untyped)
 end
 
 class MIME::Types
@@ -19703,6 +19732,12 @@ class Net::WriteTimeout
   def io(); end
 end
 
+class Netrc
+  CYGWIN = ::T.let(nil, ::T.untyped)
+  VERSION = ::T.let(nil, ::T.untyped)
+  WINDOWS = ::T.let(nil, ::T.untyped)
+end
+
 module NewRelic
   ARGS_FOR_RUBY_VERSION = ::T.let(nil, ::T.untyped)
   CANDIDATE_NEWRELIC_KEYS = ::T.let(nil, ::T.untyped)
@@ -21642,40 +21677,40 @@ module Polyfill
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
-module Polyfill::Module::M47078918680360
+module Polyfill::Module::M46957722394300
 end
 
-module Polyfill::Module::M47078918680360
+module Polyfill::Module::M46957722394300
 end
 
-module Polyfill::Module::M47078919038500
+module Polyfill::Module::M46957726594680
 end
 
-module Polyfill::Module::M47078919038500
+module Polyfill::Module::M46957726594680
 end
 
-module Polyfill::Module::M47078921757560
+module Polyfill::Module::M46957726909380
 end
 
-module Polyfill::Module::M47078921757560
+module Polyfill::Module::M46957726909380
 end
 
-module Polyfill::Module::M47078922249600
+module Polyfill::Module::M46957727426500
 end
 
-module Polyfill::Module::M47078922249600
+module Polyfill::Module::M46957727426500
 end
 
-module Polyfill::Module::M47078924076340
+module Polyfill::Module::M46957727698900
 end
 
-module Polyfill::Module::M47078924076340
+module Polyfill::Module::M46957727698900
 end
 
-module Polyfill::Module::M47078924268440
+module Polyfill::Module::M46957728199780
 end
 
-module Polyfill::Module::M47078924268440
+module Polyfill::Module::M46957728199780
 end
 
 class Proc
@@ -25781,6 +25816,9 @@ end
 
 module RestClient
   STATUSES = ::T.let(nil, ::T.untyped)
+  STATUSES_COMPATIBILITY = ::T.let(nil, ::T.untyped)
+  VERSION = ::T.let(nil, ::T.untyped)
+  VERSION_INFO = ::T.let(nil, ::T.untyped)
 end
 
 module RestClient::Exceptions
@@ -25791,11 +25829,17 @@ class RestClient::Payload::Multipart
   EOL = ::T.let(nil, ::T.untyped)
 end
 
-RestClient::Request::Redirect = RestClient::Redirect
+class RestClient::Request
+  SSLOptionList = ::T.let(nil, ::T.untyped)
+end
 
-RestClient::Request::RequestFailed = RestClient::RequestFailed
+RestClient::RequestEntityTooLarge = RestClient::PayloadTooLarge
 
-RestClient::Request::Unauthorized = RestClient::Unauthorized
+RestClient::RequestURITooLong = RestClient::URITooLong
+
+RestClient::RequestedRangeNotSatisfiable = RestClient::RangeNotSatisfiable
+
+RestClient::ResourceNotFound = RestClient::NotFound
 
 class Ripper
   def column(); end
@@ -29515,7 +29559,6 @@ module URI
 end
 
 class URI::FTP
-  include ::OpenURI::OpenRead
   def buffer_open(buf, proxy, options); end
 end
 
@@ -29544,7 +29587,6 @@ class URI::GID
 end
 
 class URI::HTTP
-  include ::OpenURI::OpenRead
   def buffer_open(buf, proxy, options); end
 end
 

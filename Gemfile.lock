@@ -527,8 +527,8 @@ GEM
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.3)
     slack-notifier (2.3.2)
-    sorbet (0.5.5786)
-      sorbet-static (= 0.5.5786)
+    sorbet (0.5.6465)
+      sorbet-static (= 0.5.6465)
     sorbet-coerce (0.2.7)
       polyfill (~> 1.8)
       safe_type (~> 1.1, >= 1.1.1)
@@ -541,7 +541,7 @@ GEM
       sorbet-coerce (>= 0.2.6)
       sorbet-runtime (>= 0.5)
     sorbet-runtime (0.5.5786)
-    sorbet-static (0.5.5786-universal-darwin-14)
+    sorbet-static (0.5.6465-universal-darwin-14)
     spring (2.1.0)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -698,7 +698,7 @@ DEPENDENCIES
   sidekiq
   simplecov
   slack-notifier
-  sorbet
+  sorbet (= 0.5.6465)
   sorbet-rails
   sorbet-runtime
   spring

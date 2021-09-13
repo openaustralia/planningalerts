@@ -170,7 +170,7 @@ end
 
 group :development do
   # For static type checking
-  gem "sorbet"
+  gem "sorbet", "0.5.6465"
 
   # For guard and associated bits
   gem "growl"
