@@ -32,9 +32,7 @@ class ProcessAlertAndRecordStatsService < ApplicationService
     EmailBatch.create!(
       no_emails: no_emails,
       no_applications: no_applications,
-      no_comments: no_comments,
-      # TODO: Remove the no_replies field from EmailBatch
-      no_replies: 0
+      no_comments: no_comments
     )
   end
 

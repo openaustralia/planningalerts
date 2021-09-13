@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_13_004348) do
+ActiveRecord::Schema.define(version: 2021_09_13_021430) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "resource_id", null: false
@@ -114,7 +114,6 @@ ActiveRecord::Schema.define(version: 2021_09_13_004348) do
     t.string "email"
     t.text "last_scraper_run_log"
     t.string "morph_name"
-    t.boolean "write_to_councillors_enabled", default: false, null: false
     t.string "website_url"
     t.integer "population_2017"
     t.string "scraper_authority_label", comment: "For scrapers for multiple authorities filter by this label"
@@ -132,48 +131,13 @@ ActiveRecord::Schema.define(version: 2021_09_13_004348) do
     t.datetime "updated_at"
     t.string "address"
     t.boolean "hidden", default: false, null: false
-    t.integer "councillor_id"
     t.datetime "confirmed_at"
-    t.integer "writeit_message_id"
     t.datetime "last_delivered_at"
     t.boolean "last_delivered_successfully"
     t.index ["application_id"], name: "index_comments_on_application_id"
     t.index ["confirm_id"], name: "index_comments_on_confirm_id"
     t.index ["confirmed"], name: "index_comments_on_confirmed"
-    t.index ["councillor_id"], name: "fk_rails_f9fd210b40"
     t.index ["hidden"], name: "index_comments_on_hidden"
-  end
-
-  create_table "contributors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "councillor_contributions", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
-    t.integer "contributor_id"
-    t.integer "authority_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "source"
-    t.boolean "reviewed", default: false, null: false
-    t.boolean "accepted", default: false, null: false
-    t.index ["authority_id"], name: "fk_rails_b23f89eb2a"
-    t.index ["contributor_id"], name: "fk_rails_7fd8de62d1"
-  end
-
-  create_table "councillors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "image_url"
-    t.string "party"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "email", null: false
-    t.integer "authority_id", null: false
-    t.string "popolo_id", null: false
-    t.boolean "current", default: true, null: false
-    t.index ["authority_id"], name: "fk_rails_d8c8595037"
   end
 
   create_table "email_batches", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
@@ -182,7 +146,6 @@ ActiveRecord::Schema.define(version: 2021_09_13_004348) do
     t.integer "no_comments", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "no_replies", null: false
     t.index ["created_at"], name: "index_email_batches_on_created_at"
   end
 
@@ -215,16 +178,6 @@ ActiveRecord::Schema.define(version: 2021_09_13_004348) do
     t.index ["authority_id"], name: "index_github_issues_on_authority_id"
   end
 
-  create_table "replies", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
-    t.text "text", limit: 16777215
-    t.datetime "received_at"
-    t.integer "comment_id", null: false
-    t.integer "councillor_id", null: false
-    t.integer "writeit_id"
-    t.index ["comment_id"], name: "index_replies_on_comment_id"
-    t.index ["councillor_id"], name: "index_replies_on_councillor_id"
-  end
-
   create_table "reports", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -243,15 +196,6 @@ ActiveRecord::Schema.define(version: 2021_09_13_004348) do
   create_table "stats", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "key", limit: 25, default: "", null: false
     t.integer "value", null: false
-  end
-
-  create_table "suggested_councillors", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "councillor_contribution_id", null: false
-    t.index ["councillor_contribution_id"], name: "fk_rails_34c0974132"
   end
 
   create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
@@ -287,14 +231,7 @@ ActiveRecord::Schema.define(version: 2021_09_13_004348) do
   add_foreign_key "application_versions", "applications"
   add_foreign_key "applications", "authorities", name: "applications_authority_id_fk"
   add_foreign_key "comments", "applications"
-  add_foreign_key "comments", "councillors"
-  add_foreign_key "councillor_contributions", "authorities"
-  add_foreign_key "councillor_contributions", "contributors"
-  add_foreign_key "councillors", "authorities"
   add_foreign_key "geocode_results", "geocode_queries"
   add_foreign_key "github_issues", "authorities"
-  add_foreign_key "replies", "comments"
-  add_foreign_key "replies", "councillors"
   add_foreign_key "reports", "comments"
-  add_foreign_key "suggested_councillors", "councillor_contributions"
 end
