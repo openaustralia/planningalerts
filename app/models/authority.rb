@@ -135,7 +135,7 @@ class Authority < ApplicationRecord
   sig { params(name: String).returns(T.nilable(Authority)) }
   def self.find_short_name_encoded(name)
     # TODO: Potentially not very efficient when number of authorities is high. Loads all authorities into memory
-    all.find { |a| a.short_name_encoded == name }
+    all.to_a.find { |a| a.short_name_encoded == name }
   end
 
   sig { params(name: String).returns(Authority) }

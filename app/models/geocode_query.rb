@@ -14,16 +14,16 @@ class GeocodeQuery < ApplicationRecord
               "Created"]
       all.find_each do |q|
         csv << [q.id, q.query, q.average_distance_to_average_result,
-                q.result("google").lat, q.result("google").lng, q.result("google").full_address,
-                q.result("mappify").lat, q.result("mappify").lng, q.result("mappify").full_address,
+                q.result("google")&.lat, q.result("google")&.lng, q.result("google")&.full_address,
+                q.result("mappify")&.lat, q.result("mappify")&.lng, q.result("mappify")&.full_address,
                 q.created_at]
       end
     end
   end
 
-  sig { params(geocoder: String).returns(GeocodeResult) }
+  sig { params(geocoder: String).returns(T.nilable(GeocodeResult)) }
   def result(geocoder)
-    geocode_results.find { |r| r.geocoder == geocoder }
+    geocode_results.to_a.find { |r| r.geocoder == geocoder }
   end
 
   sig { returns(T.nilable(Location)) }

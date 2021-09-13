@@ -44,7 +44,7 @@ class TopUsageAPIUsersService < ApplicationService
 
   sig { params(date_from: Date, date_to: Date).returns(T::Array[ApiKeyRequests]) }
   def all_usage_by_api_key_in_date_range(date_from, date_to)
-    r = []
+    r = T.let([], T::Array[ApiKeyRequests])
     (date_from..date_to).each do |date|
       r += all_usage_by_api_key_on_date(date)
     end

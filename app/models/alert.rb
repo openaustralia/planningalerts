@@ -96,7 +96,7 @@ class Alert < ApplicationRecord
 
   sig { returns(T::Array[Comment]) }
   def new_comments
-    comments = []
+    comments = T.let([], T::Array[Comment])
     # Doing this in this roundabout way because I'm not sure how to use "near" together with joins
     applications_with_new_comments.each do |application|
       comments += application.comments.visible.where("comments.confirmed_at > ?", cutoff_time)
