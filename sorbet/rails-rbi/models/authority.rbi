@@ -106,15 +106,6 @@ module Authority::GeneratedAttributeMethods
 
   sig { returns(T::Boolean) }
   def website_url?; end
-
-  sig { returns(T::Boolean) }
-  def write_to_councillors_enabled; end
-
-  sig { params(value: T::Boolean).void }
-  def write_to_councillors_enabled=(value); end
-
-  sig { returns(T::Boolean) }
-  def write_to_councillors_enabled?; end
 end
 
 module Authority::GeneratedAssociationMethods

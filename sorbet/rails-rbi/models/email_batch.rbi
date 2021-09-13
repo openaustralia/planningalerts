@@ -53,15 +53,6 @@ module EmailBatch::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def no_emails?; end
 
-  sig { returns(Integer) }
-  def no_replies; end
-
-  sig { params(value: T.any(Numeric, ActiveSupport::Duration)).void }
-  def no_replies=(value); end
-
-  sig { returns(T::Boolean) }
-  def no_replies?; end
-
   sig { returns(ActiveSupport::TimeWithZone) }
   def updated_at; end
 

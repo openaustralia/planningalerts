@@ -53,15 +53,6 @@ module Comment::GeneratedAttributeMethods
   sig { returns(T::Boolean) }
   def confirmed_at?; end
 
-  sig { returns(T.nilable(Integer)) }
-  def councillor_id; end
-
-  sig { params(value: T.nilable(T.any(Numeric, ActiveSupport::Duration))).void }
-  def councillor_id=(value); end
-
-  sig { returns(T::Boolean) }
-  def councillor_id?; end
-
   sig { returns(T.nilable(ActiveSupport::TimeWithZone)) }
   def created_at; end
 
@@ -142,15 +133,6 @@ module Comment::GeneratedAttributeMethods
 
   sig { returns(T::Boolean) }
   def updated_at?; end
-
-  sig { returns(T.nilable(Integer)) }
-  def writeit_message_id; end
-
-  sig { params(value: T.nilable(T.any(Numeric, ActiveSupport::Duration))).void }
-  def writeit_message_id=(value); end
-
-  sig { returns(T::Boolean) }
-  def writeit_message_id?; end
 end
 
 module Comment::GeneratedAssociationMethods
