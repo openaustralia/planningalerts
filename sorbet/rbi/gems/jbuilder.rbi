@@ -7,12 +7,13 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/jbuilder/all/jbuilder.rbi
 #
-# jbuilder-2.10.0
+# jbuilder-2.11.2
 
 class Jbuilder < ActiveSupport::ProxyObject
   def _blank?(value = nil); end
   def _extract_hash_values(object, attributes); end
   def _extract_method_values(object, attributes); end
+  def _format_keys(hash_or_array); end
   def _is_collection?(object); end
   def _key(key); end
   def _map_collection(collection); end
@@ -25,14 +26,16 @@ class Jbuilder < ActiveSupport::ProxyObject
   def attributes!; end
   def call(object, *attributes, &block); end
   def child!; end
+  def deep_format_keys!(value = nil); end
   def extract!(object, *attributes); end
   def ignore_nil!(value = nil); end
   def initialize(options = nil); end
   def key_format!(*args); end
-  def merge!(hash_or_array); end
+  def merge!(object); end
   def method_missing(*args, &block); end
   def nil!; end
   def null!; end
+  def self.deep_format_keys(value = nil); end
   def self.encode(*args, &block); end
   def self.ignore_nil(value = nil); end
   def self.key_format(*args); end

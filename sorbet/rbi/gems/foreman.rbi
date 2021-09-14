@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/foreman/all/foreman.rbi
 #
-# foreman-0.87.1
+# foreman-0.87.2
 
 module Foreman
   def self.ruby_18?; end

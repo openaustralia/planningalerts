@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/slack-notifier/all/slack-notifier.rbi
 #
-# slack-notifier-2.3.2
+# slack-notifier-2.4.0
 
 module Slack
 end

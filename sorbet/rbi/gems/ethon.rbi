@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/ethon/all/ethon.rbi
 #
-# ethon-0.12.0
+# ethon-0.14.0
 
 module Ethon
   extend Ethon::Loggable
@@ -55,17 +55,11 @@ module Ethon::Curl
   def easy_cleanup(*arg0); end
   def easy_duphandle(*arg0); end
   def easy_escape(*arg0); end
-  def easy_getinfo(*arg0); end
+  def easy_getinfo(*args); end
   def easy_init(*arg0); end
   def easy_perform(*arg0); end
   def easy_reset(*arg0); end
-  def easy_setopt_callback(*arg0); end
-  def easy_setopt_debug_callback(*arg0); end
-  def easy_setopt_ffipointer(*arg0); end
-  def easy_setopt_long(*arg0); end
-  def easy_setopt_off_t(*arg0); end
-  def easy_setopt_progress_callback(*arg0); end
-  def easy_setopt_string(*arg0); end
+  def easy_setopt(*args); end
   def easy_strerror(*arg0); end
   def formadd(*args); end
   def formfree(*arg0); end
@@ -79,11 +73,7 @@ module Ethon::Curl
   def multi_init(*arg0); end
   def multi_perform(*arg0); end
   def multi_remove_handle(*arg0); end
-  def multi_setopt_callback(*arg0); end
-  def multi_setopt_ffipointer(*arg0); end
-  def multi_setopt_long(*arg0); end
-  def multi_setopt_off_t(*arg0); end
-  def multi_setopt_string(*arg0); end
+  def multi_setopt(*args); end
   def multi_strerror(*arg0); end
   def multi_timeout(*arg0); end
   def select(*arg0); end
@@ -91,17 +81,11 @@ module Ethon::Curl
   def self.easy_cleanup(*arg0); end
   def self.easy_duphandle(*arg0); end
   def self.easy_escape(*arg0); end
-  def self.easy_getinfo(*arg0); end
+  def self.easy_getinfo(*args); end
   def self.easy_init(*arg0); end
   def self.easy_perform(*arg0); end
   def self.easy_reset(*arg0); end
-  def self.easy_setopt_callback(*arg0); end
-  def self.easy_setopt_debug_callback(*arg0); end
-  def self.easy_setopt_ffipointer(*arg0); end
-  def self.easy_setopt_long(*arg0); end
-  def self.easy_setopt_off_t(*arg0); end
-  def self.easy_setopt_progress_callback(*arg0); end
-  def self.easy_setopt_string(*arg0); end
+  def self.easy_setopt(*args); end
   def self.easy_strerror(*arg0); end
   def self.formadd(*args); end
   def self.formfree(*arg0); end
@@ -116,11 +100,7 @@ module Ethon::Curl
   def self.multi_init(*arg0); end
   def self.multi_perform(*arg0); end
   def self.multi_remove_handle(*arg0); end
-  def self.multi_setopt_callback(*arg0); end
-  def self.multi_setopt_ffipointer(*arg0); end
-  def self.multi_setopt_long(*arg0); end
-  def self.multi_setopt_off_t(*arg0); end
-  def self.multi_setopt_string(*arg0); end
+  def self.multi_setopt(*args); end
   def self.multi_strerror(*arg0); end
   def self.multi_timeout(*arg0); end
   def self.select(*arg0); end
@@ -253,6 +233,7 @@ module Ethon::Easy::Options
   def dns_interface=(value); end
   def dns_local_ip4=(value); end
   def dns_servers=(value); end
+  def dns_shuffle_addresses=(value); end
   def dns_use_global_cache=(value); end
   def egdsocket=(value); end
   def encoding=(value); end
@@ -341,6 +322,9 @@ module Ethon::Easy::Options
   def opensocketfunction(&block); end
   def opensocketfunction=(value); end
   def password=(value); end
+  def path_as_is=(value); end
+  def pinned_public_key=(value); end
+  def pinnedpublickey=(value); end
   def pipewait=(value); end
   def port=(value); end
   def post301=(value); end
@@ -572,6 +556,10 @@ module Ethon::Easy::Operations
   def handle=(h); end
   def perform; end
   def prepare; end
+end
+class Ethon::Easy::Operations::PointerHelper
+  def self.release(pointer); end
+  def self.synchronize(&block); end
 end
 module Ethon::Easy::ResponseCallbacks
   def body(chunk); end

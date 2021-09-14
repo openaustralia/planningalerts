@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/ruby-progressbar/all/ruby-progressbar.rbi
 #
-# ruby-progressbar-1.10.1
+# ruby-progressbar-1.11.0
 
 class ProgressBar
   def self.create(*args); end
@@ -208,7 +208,6 @@ class ProgressBar::Components::Time
   def estimated_with_no_oob; end
   def estimated_with_unknown_oob; end
   def initialize(options = nil); end
-  def out_of_bounds_time; end
   def out_of_bounds_time_format; end
   def out_of_bounds_time_format=(format); end
   def progress; end

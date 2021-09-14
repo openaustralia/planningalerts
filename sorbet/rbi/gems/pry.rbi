@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/pry/all/pry.rbi
 #
-# pry-0.13.1
+# pry-0.14.1
 
 class Pry
   def add_sticky_local(name, &block); end
@@ -129,12 +129,10 @@ class Pry
   def self.load_file_at_toplevel(file); end
   def self.load_file_through_repl(file_name); end
   def self.load_history; end
-  def self.load_plugins(*args, &block); end
   def self.load_rc_files; end
   def self.load_requires; end
   def self.load_traps; end
   def self.load_win32console; end
-  def self.locate_plugins(*args, &block); end
   def self.main; end
   def self.memory_size(*args, &block); end
   def self.memory_size=(*args, &block); end
@@ -142,7 +140,6 @@ class Pry
   def self.output=(*args, &block); end
   def self.pager(*args, &block); end
   def self.pager=(*args, &block); end
-  def self.plugins(*args, &block); end
   def self.print(*args, &block); end
   def self.print=(*args, &block); end
   def self.prompt(*args, &block); end
@@ -468,39 +465,6 @@ class Pry::Prompt
   def self.add(name, description = nil, separators = nil); end
   def self.all; end
   def wait_proc; end
-end
-class Pry::PluginManager
-  def gem_list; end
-  def initialize; end
-  def load_plugins; end
-  def locate_plugins; end
-  def plugin_located?(plugin); end
-  def plugins; end
-end
-class Pry::PluginManager::NoPlugin
-  def initialize(name); end
-  def method_missing(*arg0); end
-  def respond_to_missing?(*arg0); end
-end
-class Pry::PluginManager::Plugin
-  def activate!; end
-  def active; end
-  def active=(arg0); end
-  def active?; end
-  def disable!; end
-  def enable!; end
-  def enabled; end
-  def enabled=(arg0); end
-  def enabled?; end
-  def gem_name; end
-  def gem_name=(arg0); end
-  def initialize(name, gem_name, spec, enabled); end
-  def load_cli_options; end
-  def name; end
-  def name=(arg0); end
-  def spec; end
-  def spec=(arg0); end
-  def supported?; end
 end
 class Pry::CodeObject
   def command_lookup; end
@@ -979,8 +943,6 @@ class Pry::Config
   def respond_to_missing?(method_name, include_all = nil); end
   def should_load_local_rc; end
   def should_load_local_rc=(arg0); end
-  def should_load_plugins; end
-  def should_load_plugins=(arg0); end
   def should_load_rc; end
   def should_load_rc=(arg0); end
   def should_load_requires; end
@@ -1364,32 +1326,20 @@ class Pry::Slop
 end
 class Pry::Slop::Option
   def accepts_optional_argument?; end
-  def argument?; end
   def argument_in_value; end
   def argument_in_value=(arg0); end
-  def as?; end
-  def autocreated?; end
   def call(*objects); end
-  def callback?; end
   def config; end
   def count; end
   def count=(arg0); end
-  def default?; end
-  def delimiter?; end
   def description; end
   def expects_argument?; end
   def help; end
   def initialize(slop, short, long, description, config = nil, &block); end
   def inspect; end
   def key; end
-  def limit?; end
   def long; end
-  def match?; end
-  def optional?; end
-  def optional_argument?; end
-  def required?; end
   def short; end
-  def tail?; end
   def to_s; end
   def types; end
   def value; end
@@ -1437,7 +1387,6 @@ end
 class Pry::CLI
   def self.add_option_processor(&block); end
   def self.add_options(&block); end
-  def self.add_plugin_options; end
   def self.input_args; end
   def self.input_args=(arg0); end
   def self.option_processors; end

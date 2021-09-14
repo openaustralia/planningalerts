@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/rack-mini-profiler/all/rack-mini-profiler.rbi
 #
-# rack-mini-profiler-2.0.2
+# rack-mini-profiler-2.3.3
 
 module Rack
 end
@@ -22,9 +22,10 @@ class Rack::MiniProfiler
   def current=(c); end
   def dump_env(env); end
   def dump_exceptions(exceptions); end
-  def flamegraph(graph); end
+  def flamegraph(graph, path); end
   def generate_html(page_struct, env, result_json = nil); end
   def get_profile_script(env); end
+  def handle_snapshots_request(env); end
   def help(client_settings, env); end
   def ids(env); end
   def ids_comma_separated(env); end
@@ -32,6 +33,8 @@ class Rack::MiniProfiler
   def inject(fragment, script); end
   def inject_profiler(env, status, headers, body); end
   def make_link(postfix, env); end
+  def rails_route_from_path(path, method); end
+  def self.add_snapshot_custom_field(key, value); end
   def self.advanced_tools_message; end
   def self.authorize_request; end
   def self.binds_to_params(binds); end
@@ -42,18 +45,26 @@ class Rack::MiniProfiler
   def self.deauthorize_request; end
   def self.discard_results; end
   def self.generate_id; end
+  def self.get_snapshot_custom_fields; end
   def self.patch_rails?; end
+  def self.redact_sql_queries?; end
   def self.request_authorized?; end
   def self.reset_config; end
   def self.resources_root; end
   def self.share_template; end
+  def self.snapshots_transporter?; end
   def self.subscribe_sql_active_record; end
   def self.subscribe_sql_active_record=(arg0); end
+  def serve_flamegraph(env); end
   def serve_html(env); end
   def serve_results(env); end
+  def take_snapshot(env, start); end
+  def take_snapshot?(path); end
   def text_result(body); end
   def tool_disabled_message(client_settings); end
   def trim_strings(strings, max_size); end
+  def url_for_snapshot(id); end
+  def url_for_snapshots_group(group_name); end
   def user(env); end
 end
 module Rack::MiniProfiler::TimerStruct
@@ -68,12 +79,17 @@ class Rack::MiniProfiler::TimerStruct::Base
 end
 class Rack::MiniProfiler::TimerStruct::Page < Rack::MiniProfiler::TimerStruct::Base
   def as_json(options = nil); end
+  def attributes; end
+  def attributes_to_serialize; end
   def duration_ms; end
   def duration_ms_in_sql; end
   def extra_json; end
   def initialize(env); end
   def name; end
   def root; end
+  def self.from_hash(hash); end
+  def self.symbolize_array(array); end
+  def self.symbolize_hash(hash); end
   def to_json(*a); end
 end
 class Rack::MiniProfiler::TimerStruct::Sql < Rack::MiniProfiler::TimerStruct::Base
@@ -124,13 +140,21 @@ class Rack::MiniProfiler::TimerStruct::Request < Rack::MiniProfiler::TimerStruct
 end
 class Rack::MiniProfiler::AbstractStore
   def allowed_tokens; end
+  def default_snapshot_grouping(snapshot); end
   def diagnostics(user); end
+  def fetch_snapshots(batch_size: nil, &blk); end
+  def find_snapshots_group(group_name); end
   def get_unviewed_ids(user); end
   def load(id); end
+  def load_snapshot(id); end
+  def push_snapshot(page_struct, config); end
+  def rails_route_from_path(path, method); end
   def save(page_struct); end
   def set_all_unviewed(user, ids); end
   def set_unviewed(user, id); end
   def set_viewed(user, id); end
+  def should_take_snapshot?(period); end
+  def snapshot_groups_overview; end
 end
 class Rack::MiniProfiler::MemcacheStore < Rack::MiniProfiler::AbstractStore
   def allowed_tokens; end
@@ -146,15 +170,20 @@ end
 class Rack::MiniProfiler::MemoryStore < Rack::MiniProfiler::AbstractStore
   def allowed_tokens; end
   def cleanup_cache; end
+  def fetch_snapshots(batch_size: nil, &blk); end
   def get_unviewed_ids(user); end
   def initialize(args = nil); end
   def initialize_cleanup_thread(args = nil); end
   def initialize_locks; end
   def load(id); end
+  def load_snapshot(id); end
+  def push_snapshot(page_struct, config); end
   def save(page_struct); end
   def set_all_unviewed(user, ids); end
   def set_unviewed(user, id); end
   def set_viewed(user, id); end
+  def should_take_snapshot?(period); end
+  def wipe_snapshots_data; end
 end
 class Rack::MiniProfiler::MemoryStore::CacheCleanupThread < Thread
   def cleanup; end
@@ -166,20 +195,29 @@ class Rack::MiniProfiler::MemoryStore::CacheCleanupThread < Thread
 end
 class Rack::MiniProfiler::RedisStore < Rack::MiniProfiler::AbstractStore
   def allowed_tokens; end
+  def cached_redis_eval(script, script_sha, reraise: nil, argv: nil, keys: nil); end
   def diagnostics(user); end
+  def fetch_snapshots(batch_size: nil, &blk); end
   def flush_tokens; end
   def get_unviewed_ids(user); end
   def initialize(args = nil); end
   def load(id); end
+  def load_snapshot(id); end
   def prefix; end
   def prefixed_id(id); end
+  def push_snapshot(page_struct, config); end
   def redis; end
   def save(page_struct); end
   def set_all_unviewed(user, ids); end
   def set_unviewed(user, id); end
   def set_viewed(user, id); end
+  def should_take_snapshot?(period); end
   def simulate_expire; end
+  def snapshot_counter_key; end
+  def snapshot_hash_key; end
+  def snapshot_zset_key; end
   def user_key(user); end
+  def wipe_snapshots_data; end
 end
 class Rack::MiniProfiler::FileStore < Rack::MiniProfiler::AbstractStore
   def allowed_tokens; end
@@ -202,8 +240,10 @@ class Rack::MiniProfiler::FileStore::FileCache
   def path(key); end
 end
 class Rack::MiniProfiler::Config
+  def assets_url; end
+  def assets_url=(lmbda); end
   def authorization_mode; end
-  def authorization_mode=(arg0); end
+  def authorization_mode=(mode); end
   def auto_inject; end
   def auto_inject=(arg0); end
   def backtrace_ignores; end
@@ -218,12 +258,18 @@ class Rack::MiniProfiler::Config
   def base_url_path=(arg0); end
   def collapse_results; end
   def collapse_results=(arg0); end
+  def content_security_policy_nonce; end
+  def content_security_policy_nonce=(arg0); end
   def disable_caching; end
   def disable_caching=(arg0); end
   def enable_advanced_debugging_tools; end
   def enable_advanced_debugging_tools=(arg0); end
+  def enable_hotwire_turbo_drive_support; end
+  def enable_hotwire_turbo_drive_support=(arg0); end
   def enabled; end
   def enabled=(arg0); end
+  def flamegraph_mode; end
+  def flamegraph_mode=(arg0); end
   def flamegraph_sample_rate; end
   def flamegraph_sample_rate=(arg0); end
   def horizontal_position; end
@@ -257,6 +303,20 @@ class Rack::MiniProfiler::Config
   def skip_schema_queries=(arg0); end
   def skip_sql_param_names; end
   def skip_sql_param_names=(arg0); end
+  def snapshot_every_n_requests; end
+  def snapshot_every_n_requests=(arg0); end
+  def snapshot_hidden_custom_fields; end
+  def snapshot_hidden_custom_fields=(arg0); end
+  def snapshots_limit; end
+  def snapshots_limit=(arg0); end
+  def snapshots_redact_sql_queries; end
+  def snapshots_redact_sql_queries=(arg0); end
+  def snapshots_transport_auth_key; end
+  def snapshots_transport_auth_key=(arg0); end
+  def snapshots_transport_destination_url; end
+  def snapshots_transport_destination_url=(arg0); end
+  def snapshots_transport_gzip_requests; end
+  def snapshots_transport_gzip_requests=(arg0); end
   def start_hidden; end
   def start_hidden=(arg0); end
   def storage; end
@@ -334,6 +394,23 @@ class Rack::MiniProfiler::GCProfiler
   def object_space_stats; end
   def profile_gc(app, env); end
 end
+class Rack::MiniProfiler::SnapshotsTransporter
+  def backoff_delay; end
+  def buffer; end
+  def flush_buffer; end
+  def gzip_requests; end
+  def gzip_requests=(arg0); end
+  def initialize(config); end
+  def max_buffer_size; end
+  def max_buffer_size=(arg0); end
+  def requests_interval; end
+  def self.failed_http_requests_count; end
+  def self.successful_http_requests_count; end
+  def self.transport(snapshot); end
+  def self.transported_snapshots_count; end
+  def ship(snapshot); end
+  def start_thread; end
+end
 class Mysql2::Result
   def each_without_profiling(*arg0); end
 end
@@ -356,12 +433,14 @@ class Net::HTTP < Net::Protocol
   def request_without_mini_profiler(req, body = nil, &block); end
 end
 module Rack::MiniProfilerRailsMethods
+  def get_webpacker_assets_path; end
   def render_notification_handler(name, finish, start, name_as_description: nil); end
   def should_measure?; end
   def should_move?(child, node); end
   extend Rack::MiniProfilerRailsMethods
 end
 module Rack::MiniProfilerRails
+  def self.create_engine; end
   def self.get_key(payload); end
   def self.initialize!(app); end
   def self.serves_static_assets?(app); end

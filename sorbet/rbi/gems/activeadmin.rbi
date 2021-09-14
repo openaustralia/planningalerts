@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/activeadmin/all/activeadmin.rbi
 #
-# activeadmin-2.7.0
+# activeadmin-2.9.0
 
 module ActiveAdmin
   def self.after_load(&block); end
@@ -250,7 +250,7 @@ class ActiveAdmin::Views::DropdownMenu < ActiveAdmin::Component
   def build(name, options = nil); end
   def build_button(name, button_options); end
   def build_menu(options); end
-  def item(*args); end
+  def item(*args, **kwargs); end
 end
 module ActiveAdmin::Helpers::Collection
   def collection_is_empty?(c = nil); end
@@ -498,7 +498,7 @@ class ActiveAdmin::Views::IndexAsTable::IndexTableFor < ActiveAdmin::Views::Tabl
   def selectable_column; end
 end
 class ActiveAdmin::Views::IndexAsTable::IndexTableFor::TableActions < ActiveAdmin::Component
-  def item(*args); end
+  def item(*args, **kwargs); end
 end
 module ActiveAdmin::Views::Pages
 end
@@ -1125,7 +1125,6 @@ module ActiveAdmin::Filters::FormtasticAddons
   def humanized_method_name; end
   def klass; end
   def polymorphic_foreign_type?(method); end
-  def ransacker?; end
   def reflection_for(method); end
   def scope?; end
   def searchable_has_many_through?; end
@@ -1167,6 +1166,7 @@ class ActiveAdmin::HasManyBuilder < SimpleDelegator
   def js_for_has_many(class_string, &form_block); end
   def new_record; end
   def options; end
+  def remove_record; end
   def render(&block); end
   def render_has_many_form(form_builder, parent, &block); end
   def sortable_column; end
@@ -1654,6 +1654,170 @@ module ActiveAdmin::BatchActions::Controller
   def batch_action_collection(only = nil); end
   def current_batch_action; end
 end
+class ActiveAdmin::CollectionDecorator
+  def &(*args, &block); end
+  def *(*args, &block); end
+  def +(*args, &block); end
+  def -(*args, &block); end
+  def <<(*args, &block); end
+  def ==(arg); end
+  def [](*args, &block); end
+  def []=(*args, &block); end
+  def all?(*args, &block); end
+  def any?(*args, &block); end
+  def append(*args, &block); end
+  def as_json(*args, &block); end
+  def assoc(*args, &block); end
+  def at(*args, &block); end
+  def bsearch(*args, &block); end
+  def bsearch_index(*args, &block); end
+  def chain(*args, &block); end
+  def chunk(*args, &block); end
+  def chunk_while(*args, &block); end
+  def clear(*args, &block); end
+  def collect!(*args, &block); end
+  def collect(*args, &block); end
+  def collect_concat(*args, &block); end
+  def combination(*args, &block); end
+  def compact!(*args, &block); end
+  def compact(*args, &block); end
+  def concat(*args, &block); end
+  def count(*args, &block); end
+  def cycle(*args, &block); end
+  def decorated_collection; end
+  def decorator_class; end
+  def delete(*args, &block); end
+  def delete_at(*args, &block); end
+  def delete_if(*args, &block); end
+  def detect(*args, &block); end
+  def difference(*args, &block); end
+  def dig(*args, &block); end
+  def drop(*args, &block); end
+  def drop_while(*args, &block); end
+  def each(*args, &block); end
+  def each_cons(*args, &block); end
+  def each_entry(*args, &block); end
+  def each_index(*args, &block); end
+  def each_slice(*args, &block); end
+  def each_with_index(*args, &block); end
+  def each_with_object(*args, &block); end
+  def empty?(*args, &block); end
+  def entries(*args, &block); end
+  def exclude?(*args, &block); end
+  def extract_options!(*args, &block); end
+  def fetch(*args, &block); end
+  def fifth(*args, &block); end
+  def fill(*args, &block); end
+  def filter!(*args, &block); end
+  def filter(*args, &block); end
+  def find(*args, &block); end
+  def find_all(*args, &block); end
+  def find_index(*args, &block); end
+  def first(*args, &block); end
+  def flat_map(*args, &block); end
+  def flatten!(*args, &block); end
+  def flatten(*args, &block); end
+  def forty_two(*args, &block); end
+  def fourth(*args, &block); end
+  def from(*args, &block); end
+  def grep(*args, &block); end
+  def grep_v(*args, &block); end
+  def group_by(*args, &block); end
+  def in_groups(*args, &block); end
+  def in_groups_of(*args, &block); end
+  def include?(*args, &block); end
+  def index(*args, &block); end
+  def index_by(*args, &block); end
+  def initialize(object, with:); end
+  def inject(*args, &block); end
+  def inquiry(*args, &block); end
+  def insert(*args, &block); end
+  def join(*args, &block); end
+  def keep_if(*args, &block); end
+  def last(*args, &block); end
+  def lazy(*args, &block); end
+  def length(*args, &block); end
+  def many?(*args, &block); end
+  def map!(*args, &block); end
+  def map(*args, &block); end
+  def max(*args, &block); end
+  def max_by(*args, &block); end
+  def member?(*args, &block); end
+  def min(*args, &block); end
+  def min_by(*args, &block); end
+  def minmax(*args, &block); end
+  def minmax_by(*args, &block); end
+  def none?(*args, &block); end
+  def object; end
+  def one?(*args, &block); end
+  def pack(*args, &block); end
+  def partition(*args, &block); end
+  def permutation(*args, &block); end
+  def pluck(*args, &block); end
+  def pop(*args, &block); end
+  def prepend(*args, &block); end
+  def product(*args, &block); end
+  def push(*args, &block); end
+  def rassoc(*args, &block); end
+  def reduce(*args, &block); end
+  def reject!(*args, &block); end
+  def reject(*args, &block); end
+  def repeated_combination(*args, &block); end
+  def repeated_permutation(*args, &block); end
+  def replace(*args, &block); end
+  def reverse!(*args, &block); end
+  def reverse(*args, &block); end
+  def reverse_each(*args, &block); end
+  def rindex(*args, &block); end
+  def rotate!(*args, &block); end
+  def rotate(*args, &block); end
+  def sample(*args, &block); end
+  def second(*args, &block); end
+  def second_to_last(*args, &block); end
+  def select!(*args, &block); end
+  def select(*args, &block); end
+  def self.decorate(*arg0); end
+  def shelljoin(*args, &block); end
+  def shift(*args, &block); end
+  def shuffle!(*args, &block); end
+  def shuffle(*args, &block); end
+  def size(*args, &block); end
+  def slice!(*args, &block); end
+  def slice(*args, &block); end
+  def slice_after(*args, &block); end
+  def slice_before(*args, &block); end
+  def slice_when(*args, &block); end
+  def sort!(*args, &block); end
+  def sort(*args, &block); end
+  def sort_by!(*args, &block); end
+  def sort_by(*args, &block); end
+  def split(*args, &block); end
+  def sum(*args, &block); end
+  def take(*args, &block); end
+  def take_while(*args, &block); end
+  def third(*args, &block); end
+  def third_to_last(*args, &block); end
+  def to(*args, &block); end
+  def to_a(*args, &block); end
+  def to_ary(*args, &block); end
+  def to_csv(*args, &block); end
+  def to_default_s(*args, &block); end
+  def to_formatted_s(*args, &block); end
+  def to_h(*args, &block); end
+  def to_msgpack(*args, &block); end
+  def to_sentence(*args, &block); end
+  def to_set(*args, &block); end
+  def to_xml(*args, &block); end
+  def transpose(*args, &block); end
+  def union(*args, &block); end
+  def uniq!(*args, &block); end
+  def uniq(*args, &block); end
+  def unshift(*args, &block); end
+  def values_at(*args, &block); end
+  def without(*args, &block); end
+  def zip(*args, &block); end
+  def |(*args, &block); end
+end
 module InheritedResources
 end
 class ApplicationController < ActionController::Base
@@ -2072,8 +2236,6 @@ module ActiveAdmin::ResourceController::Decorators
   def self.undecorate(resource); end
 end
 class ActiveAdmin::ResourceController::Decorators::Wrapper
-  def self.draper_collection_decorator; end
-  def self.draper_collection_decorator?(decorator); end
   def self.find_collection_decorator(decorator); end
   def self.wrap!(parent, name); end
   def self.wrap(decorator); end
@@ -2144,6 +2306,42 @@ class ActiveAdmin::MenuCollection
   def menu(menu_name); end
   def on_build(&block); end
   def run_on_build_callbacks; end
+end
+module ActiveAdmin::Localizers
+  def self.resource(active_admin_config); end
+end
+class ActiveAdmin::Localizers::ResourceLocalizer
+  def array_to_key(*arr); end
+  def initialize(model_name, model = nil); end
+  def self.from_resource(resource_config); end
+  def self.t(key, options); end
+  def self.translate(key, options); end
+  def t(key, options = nil); end
+  def translate(key, options = nil); end
+end
+class ActiveAdmin::Scope
+  def default_block; end
+  def display_if_block; end
+  def group; end
+  def id; end
+  def initialize(name, method = nil, options = nil, &block); end
+  def name; end
+  def scope_block; end
+  def scope_method; end
+  def show_count; end
+end
+class ActiveAdmin::PagePresenter
+  def [](key); end
+  def block; end
+  def fetch(*args, &block); end
+  def has_key?(*args, &block); end
+  def initialize(options = nil, &block); end
+  def options; end
+end
+class ActiveAdmin::ControllerAction
+  def http_verb; end
+  def initialize(name, options = nil); end
+  def name; end
 end
 class ActiveAdmin::Page
   def add_default_action_items; end
@@ -2229,42 +2427,6 @@ class ActiveAdmin::PageDSL < ActiveAdmin::DSL
   def belongs_to(target, options = nil); end
   def content(options = nil, &block); end
   def page_action(name, options = nil, &block); end
-end
-class ActiveAdmin::PagePresenter
-  def [](key); end
-  def block; end
-  def fetch(*args, &block); end
-  def has_key?(*args, &block); end
-  def initialize(options = nil, &block); end
-  def options; end
-end
-module ActiveAdmin::Localizers
-  def self.resource(active_admin_config); end
-end
-class ActiveAdmin::Localizers::ResourceLocalizer
-  def array_to_key(*arr); end
-  def initialize(model_name, model = nil); end
-  def self.from_resource(resource_config); end
-  def self.t(key, options); end
-  def self.translate(key, options); end
-  def t(key, options = nil); end
-  def translate(key, options = nil); end
-end
-class ActiveAdmin::Scope
-  def default_block; end
-  def display_if_block; end
-  def group; end
-  def id; end
-  def initialize(name, method = nil, options = nil, &block); end
-  def name; end
-  def scope_block; end
-  def scope_method; end
-  def show_count; end
-end
-class ActiveAdmin::ControllerAction
-  def http_verb; end
-  def initialize(name, options = nil); end
-  def name; end
 end
 class ActiveAdmin::CSVBuilder
   def batch_size; end

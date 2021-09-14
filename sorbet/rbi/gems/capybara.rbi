@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/capybara/all/capybara.rbi
 #
-# capybara-3.33.0
+# capybara-3.35.3
 
 module Capybara
   def self.HTML(html); end
@@ -219,7 +219,7 @@ class Capybara::Config
   def default_selector=(*args, &block); end
   def default_set_options(*args, &block); end
   def default_set_options=(*args, &block); end
-  def deprecate(method, alternate_method, once = nil); end
+  def deprecate(method, alternate_method, once: nil); end
   def disable_animation(*args, &block); end
   def disable_animation=(*args, &block); end
   def enable_aria_label(*args, &block); end
@@ -273,21 +273,25 @@ class Capybara::RegistrationContainer
   def method_missing(method_name, *args, **options, &block); end
   def names; end
   def register(name, block); end
-  def respond_to_missing?(method_name, include_private = nil); end
+  def respond_to_missing?(method_name, include_all); end
 end
 module Capybara::Helpers
   def declension(singular, plural, count); end
+  def filter_backtrace(trace); end
   def inject_asset_host(html, host: nil); end
   def monotonic_time; end
   def normalize_whitespace(text); end
   def self.declension(singular, plural, count); end
+  def self.filter_backtrace(trace); end
   def self.inject_asset_host(html, host: nil); end
   def self.monotonic_time; end
   def self.normalize_whitespace(text); end
   def self.timer(expire_in:); end
   def self.to_regexp(text, exact: nil, all_whitespace: nil, options: nil); end
+  def self.warn(message, uplevel: nil); end
   def timer(expire_in:); end
   def to_regexp(text, exact: nil, all_whitespace: nil, options: nil); end
+  def warn(message, uplevel: nil); end
 end
 class Capybara::Helpers::Timer
   def current; end
@@ -296,11 +300,11 @@ class Capybara::Helpers::Timer
   def stalled?; end
 end
 module Capybara::SessionMatchers
-  def _verify_current_path(path, **options); end
-  def assert_current_path(path, **options); end
-  def assert_no_current_path(path, **options); end
-  def has_current_path?(path, **options); end
-  def has_no_current_path?(path, **options); end
+  def _verify_current_path(path, filter_block, **options); end
+  def assert_current_path(path, **options, &optional_filter_block); end
+  def assert_no_current_path(path, **options, &optional_filter_block); end
+  def has_current_path?(path, **options, &optional_filter_block); end
+  def has_no_current_path?(path, **options, &optional_filter_block); end
   def make_predicate(options); end
 end
 class Capybara::Session
@@ -411,6 +415,7 @@ class Capybara::Session
   def scroll_to(*args, &block); end
   def select(*args, &block); end
   def self.instance_created?; end
+  def send_keys(*args, **kw_args); end
   def server; end
   def server_url; end
   def source; end
@@ -424,15 +429,15 @@ class Capybara::Session
   def title(*args, &block); end
   def uncheck(*args, &block); end
   def unselect(*args, &block); end
-  def using_wait_time(seconds); end
+  def using_wait_time(seconds, &block); end
   def visit(visit_uri); end
   def window_opened_by(**options); end
   def windows; end
   def within(*args, **kw_args); end
   def within_element(*args, **kw_args); end
-  def within_fieldset(locator); end
+  def within_fieldset(locator, &block); end
   def within_frame(*args, **kw_args); end
-  def within_table(locator); end
+  def within_table(locator, &block); end
   def within_window(window_or_proc); end
   include Capybara::SessionMatchers
 end
@@ -449,7 +454,6 @@ class Capybara::Window
   def initialize(session, handle); end
   def inspect; end
   def maximize; end
-  def raise_unless_current(what); end
   def resize_to(width, height); end
   def session; end
   def size; end
@@ -527,6 +531,7 @@ class Capybara::Selector < SimpleDelegator
   def format; end
   def initialize(definition, config:, format:); end
   def locate_field(xpath, locator, **_options); end
+  def locate_label(locator); end
   def locator_description; end
   def locator_valid?(locator); end
   def self.[](name); end
@@ -775,6 +780,7 @@ class Capybara::Queries::SelectorQuery < Capybara::Queries::BaseQuery
   def matches_visibility_filters?(node); end
   def matching_text; end
   def name; end
+  def need_to_process_classes?; end
   def negative_failure_message; end
   def node_filters; end
   def normalize_ws; end
@@ -844,7 +850,8 @@ end
 class Capybara::Queries::CurrentPathQuery < Capybara::Queries::BaseQuery
   def failure_message; end
   def failure_message_helper(negated = nil); end
-  def initialize(expected_path, **options); end
+  def initialize(expected_path, **options, &optional_filter_block); end
+  def matches_filter_block?(url); end
   def negative_failure_message; end
   def resolves_for?(session); end
   def valid_keys; end
@@ -899,7 +906,7 @@ module Capybara::Node::Matchers
   def assert_ancestor(*args, &optional_filter_block); end
   def assert_any_of_selectors(*args, wait: nil, **options, &optional_filter_block); end
   def assert_matches_selector(*args, &optional_filter_block); end
-  def assert_matches_style(styles, **options); end
+  def assert_matches_style(styles = nil, **options); end
   def assert_no_ancestor(*args, &optional_filter_block); end
   def assert_no_selector(*args, &optional_filter_block); end
   def assert_no_sibling(*args, &optional_filter_block); end
@@ -908,7 +915,7 @@ module Capybara::Node::Matchers
   def assert_not_matches_selector(*args, &optional_filter_block); end
   def assert_selector(*args, &optional_filter_block); end
   def assert_sibling(*args, &optional_filter_block); end
-  def assert_style(styles, **options); end
+  def assert_style(styles = nil, **options); end
   def assert_text(type_or_text, *args, **opts); end
   def extract_selector(args); end
   def has_ancestor?(*args, **options, &optional_filter_block); end
@@ -935,7 +942,7 @@ module Capybara::Node::Matchers
   def has_select?(locator = nil, **options, &optional_filter_block); end
   def has_selector?(*args, **options, &optional_filter_block); end
   def has_sibling?(*args, **options, &optional_filter_block); end
-  def has_style?(styles, **options); end
+  def has_style?(styles = nil, **options); end
   def has_table?(locator = nil, **options, &optional_filter_block); end
   def has_text?(*args, **options); end
   def has_unchecked_field?(locator = nil, **options, &optional_filter_block); end
@@ -943,7 +950,7 @@ module Capybara::Node::Matchers
   def make_predicate(options); end
   def matches_css?(css, **options, &optional_filter_block); end
   def matches_selector?(*args, **options, &optional_filter_block); end
-  def matches_style?(styles, **options); end
+  def matches_style?(styles = nil, **options); end
   def matches_xpath?(xpath, **options, &optional_filter_block); end
   def not_matches_css?(css, **options, &optional_filter_block); end
   def not_matches_selector?(*args, **options, &optional_filter_block); end
@@ -989,6 +996,7 @@ class Capybara::Node::Simple
   def native; end
   def option_value(option); end
   def path; end
+  def readonly?; end
   def selected?; end
   def session_options; end
   def synchronize(_seconds = nil); end
@@ -1093,6 +1101,7 @@ class Capybara::Driver::Base
   def resize_window_to(handle, width, height); end
   def response_headers; end
   def save_screenshot(path, **options); end
+  def send_keys(*arg0); end
   def session; end
   def session=(arg0); end
   def session_options; end
@@ -1330,7 +1339,7 @@ class Capybara::Selenium::Node < Capybara::Driver::Node
   def double_click(keys = nil, **options); end
   def drag_to(element, drop_modifiers: nil, **arg2); end
   def drop(*_); end
-  def each_key(keys); end
+  def each_key(keys, &block); end
   def find_context; end
   def hover; end
   def modifiers_down(actions, keys); end
@@ -1404,7 +1413,7 @@ module Capybara::Selenium::Node::FileInputClickEmulation
   def visible_file_field?; end
 end
 class Capybara::Selenium::ChromeNode < Capybara::Selenium::Node
-  def browser_version(to_float = nil); end
+  def browser_version(to_float: nil); end
   def chromedriver_fixed_actions_key_state?; end
   def chromedriver_supports_displayed_endpoint?; end
   def chromedriver_version; end
@@ -1415,6 +1424,7 @@ class Capybara::Selenium::ChromeNode < Capybara::Selenium::Node
   def native_displayed?; end
   def perform_legacy_drag(element, drop_modifiers); end
   def select_option; end
+  def send_keys(*args); end
   def set_file(value); end
   def set_text(value, clear: nil, **_unused); end
   def visible?; end
@@ -1448,6 +1458,7 @@ class Capybara::Selenium::FirefoxNode < Capybara::Selenium::Node
   def click(keys = nil, **options); end
   def disabled?; end
   def drop(*args); end
+  def focused?; end
   def hover; end
   def native_displayed?; end
   def perform_with_options(click_options); end
@@ -1537,6 +1548,7 @@ end
 class Capybara::Selenium::Driver < Capybara::Driver::Base
   def accept_modal(_type, **options); end
   def accept_unhandled_reset_alert; end
+  def active_element; end
   def app; end
   def bridge; end
   def browser; end
@@ -1581,7 +1593,9 @@ class Capybara::Selenium::Driver < Capybara::Driver::Base
   def selenium_4?; end
   def self.load_selenium; end
   def self.register_specialization(browser_name, specialization); end
+  def self.selenium_webdriver_version; end
   def self.specializations; end
+  def send_keys(*args); end
   def setup_exit_handler; end
   def silenced_unknown_error_message?(msg); end
   def silenced_unknown_error_messages; end

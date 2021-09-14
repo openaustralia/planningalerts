@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/octokit/all/octokit.rbi
 #
-# octokit-4.18.0
+# octokit-4.21.0
 
 module Octokit
   def self.client; end
@@ -110,7 +110,7 @@ class Octokit::Gist
   def to_s; end
   def url; end
 end
-class Anonymous_Struct_69 < Struct
+class Anonymous_Struct_71 < Struct
   def limit; end
   def limit=(_); end
   def remaining; end
@@ -124,7 +124,7 @@ class Anonymous_Struct_69 < Struct
   def self.members; end
   def self.new(*arg0); end
 end
-class Octokit::RateLimit < Anonymous_Struct_69
+class Octokit::RateLimit < Anonymous_Struct_71
   def self.from_response(response); end
 end
 class Octokit::Repository
@@ -172,6 +172,9 @@ class Octokit::Client
   def password=(value); end
   def user_path(user, path); end
   include Octokit::Authentication
+  include Octokit::Client::ActionsSecrets
+  include Octokit::Client::ActionsWorkflowRuns
+  include Octokit::Client::ActionsWorkflows
   include Octokit::Client::Apps
   include Octokit::Client::Authorizations
   include Octokit::Client::Checks
@@ -225,10 +228,36 @@ class Octokit::Client
   include Octokit::Preview
   include Octokit::Warnable
 end
+module Octokit::Client::ActionsSecrets
+  def create_or_update_secret(repo, name, options); end
+  def delete_secret(repo, name); end
+  def get_public_key(repo); end
+  def get_secret(repo, name); end
+  def list_secrets(repo); end
+end
+module Octokit::Client::ActionsWorkflows
+  def list_workflows(repo, options = nil); end
+  def workflow(repo, id, options = nil); end
+  def workflow_dispatch(repo, id, ref, options = nil); end
+  def workflows(repo, options = nil); end
+end
+module Octokit::Client::ActionsWorkflowRuns
+  def cancel_workflow_run(repo, id, options = nil); end
+  def delete_workflow_run(repo, id, options = nil); end
+  def delete_workflow_run_logs(repo, id, options = nil); end
+  def list_repository_workflow_runs(repo, options = nil); end
+  def list_workflow_runs(repo, workflow, options = nil); end
+  def repository_workflow_runs(repo, options = nil); end
+  def rerun_workflow_run(repo, id, options = nil); end
+  def workflow_run(repo, id, options = nil); end
+  def workflow_run_logs(repo, id, options = nil); end
+  def workflow_runs(repo, workflow, options = nil); end
+end
 module Octokit::Client::Apps
   def add_repo_to_installation(installation, repo, options = nil); end
   def add_repository_to_app_installation(installation, repo, options = nil); end
   def add_repository_to_integration_installation(installation, repo, options = nil); end
+  def app(options = nil); end
   def create_app_installation_access_token(installation, options = nil); end
   def create_installation_access_token(installation, options = nil); end
   def create_integration_installation_access_token(installation, options = nil); end
@@ -332,6 +361,7 @@ end
 module Octokit::Client::Deployments
   def create_deployment(repo, ref, options = nil); end
   def create_deployment_status(deployment_url, state, options = nil); end
+  def delete_deployment(repo, deployment_id, options = nil); end
   def deployment(repo, deployment_id, options = nil); end
   def deployment_statuses(deployment_url, options = nil); end
   def deployments(repo, options = nil); end
@@ -511,6 +541,7 @@ module Octokit::Client::Organizations
   def add_team_repository(team_id, repo, options = nil); end
   def all_organizations(options = nil); end
   def all_orgs(options = nil); end
+  def billing_actions(org); end
   def child_teams(team_id, options = nil); end
   def conceal_membership(org, user, options = nil); end
   def convert_to_outside_collaborator(org, user, options = nil); end
@@ -681,6 +712,7 @@ module Octokit::Client::Refs
   def delete_reference(repo, ref, options = nil); end
   def list_references(repo, namespace = nil, options = nil); end
   def list_refs(repo, namespace = nil, options = nil); end
+  def matching_refs(repo, ref, options = nil); end
   def ref(repo, ref, options = nil); end
   def reference(repo, ref, options = nil); end
   def references(repo, namespace = nil, options = nil); end
@@ -731,9 +763,12 @@ module Octokit::Client::Repositories
   def delete_subscription(repo, options = nil); end
   def deploy_key(repo, id, options = nil); end
   def deploy_keys(repo, options = nil); end
+  def disable_vulnerability_alerts(repo, options = nil); end
+  def dispatch_event(repo, event_type, options = nil); end
   def edit(repo, options = nil); end
   def edit_deploy_key(repo, id, options); end
   def edit_repository(repo, options = nil); end
+  def enable_vulnerability_alerts(repo, options = nil); end
   def fork(repo, options = nil); end
   def forks(repo, options = nil); end
   def get_branch(repo, branch, options = nil); end
@@ -747,6 +782,7 @@ module Octokit::Client::Repositories
   def remove_collab(repo, collaborator, options = nil); end
   def remove_collaborator(repo, collaborator, options = nil); end
   def remove_deploy_key(repo, id, options = nil); end
+  def rename_branch(repo, branch, new_name, options = nil); end
   def replace_all_topics(repo, names, options = nil); end
   def repo(repo, options = nil); end
   def repo_assignees(repo, options = nil); end
@@ -775,6 +811,7 @@ module Octokit::Client::Repositories
   def update_deploy_key(repo, id, options); end
   def update_repository(repo, options = nil); end
   def update_subscription(repo, options = nil); end
+  def vulnerability_alerts_enabled?(repo, options = nil); end
   def watch(repo, options = nil); end
   def watchers(repo, options = nil); end
 end
@@ -862,6 +899,7 @@ module Octokit::Client::Users
   def add_email(email, options = nil); end
   def add_key(title, key, options = nil); end
   def all_users(options = nil); end
+  def delete_user_migration_archive(id, options = nil); end
   def emails(options = nil); end
   def exchange_code_for_token(code, app_id = nil, app_secret = nil, options = nil); end
   def follow(user, options = nil); end
@@ -874,12 +912,18 @@ module Octokit::Client::Users
   def remove_key(id, options = nil); end
   def starred(user = nil, options = nil); end
   def starred?(repo, options = nil); end
+  def start_user_migration(repositories, options = nil); end
   def subscriptions(user = nil, options = nil); end
   def unfollow(user, options = nil); end
+  def unlock_user_repository(id, repo, options = nil); end
   def update_key(key_id, options = nil); end
   def update_user(options); end
   def user(user = nil, options = nil); end
   def user_keys(user, options = nil); end
+  def user_migration_archive_url(id, options = nil); end
+  def user_migration_repositories(id, options = nil); end
+  def user_migration_status(id, options = nil); end
+  def user_migrations(options = nil); end
   def validate_credentials(options = nil); end
   def watched(user = nil, options = nil); end
 end
@@ -990,7 +1034,9 @@ class Octokit::Middleware::FollowRedirects < Faraday::Middleware
   def update_env(env, request_body, response); end
 end
 class Octokit::Error < StandardError
+  def build_error_context; end
   def build_error_message; end
+  def context; end
   def data; end
   def documentation_url; end
   def errors; end
@@ -1005,6 +1051,7 @@ class Octokit::Error < StandardError
   def self.error_for_401(headers); end
   def self.error_for_403(body); end
   def self.error_for_404(body); end
+  def self.error_for_422(body); end
   def self.from_response(response); end
 end
 class Octokit::ClientError < Octokit::Error
@@ -1038,6 +1085,8 @@ class Octokit::BillingIssue < Octokit::Forbidden
 end
 class Octokit::SAMLProtected < Octokit::Forbidden
 end
+class Octokit::InstallationSuspended < Octokit::Forbidden
+end
 class Octokit::NotFound < Octokit::ClientError
 end
 class Octokit::BranchNotProtected < Octokit::ClientError
@@ -1051,6 +1100,10 @@ end
 class Octokit::UnsupportedMediaType < Octokit::ClientError
 end
 class Octokit::UnprocessableEntity < Octokit::ClientError
+end
+class Octokit::CommitIsNotPartOfPullRequest < Octokit::UnprocessableEntity
+end
+class Octokit::PathDiffTooLarge < Octokit::UnprocessableEntity
 end
 class Octokit::UnavailableForLegalReasons < Octokit::ClientError
 end

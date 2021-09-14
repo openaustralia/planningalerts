@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/autoprefixer-rails/all/autoprefixer-rails.rbi
 #
-# autoprefixer-rails-9.8.3
+# autoprefixer-rails-10.3.3.0
 
 module AutoprefixerRails
   def self.install(assets, params = nil); end
@@ -28,12 +28,9 @@ class AutoprefixerRails::Processor
   def find_config(file); end
   def info; end
   def initialize(params = nil); end
-  def js_params; end
   def params_with_browsers(from = nil); end
   def parse_config(config); end
   def process(css, opts = nil); end
-  def process_proxy; end
-  def read_js; end
   def runtime; end
 end
 module AutoprefixedRails
@@ -44,7 +41,7 @@ class AutoprefixedRails::Railtie < Rails::Railtie
 end
 class AutoprefixerRails::Sprockets
   def initialize(filename); end
-  def render(_, _); end
+  def render(*arg0); end
   def self.call(input); end
   def self.install(env); end
   def self.register_processor(processor); end

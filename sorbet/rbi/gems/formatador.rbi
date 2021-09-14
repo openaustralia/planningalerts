@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/formatador/all/formatador.rbi
 #
-# formatador-0.2.5
+# formatador-0.3.0
 
 class Formatador
   def calculate_datum(header, hash); end

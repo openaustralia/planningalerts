@@ -7,15 +7,8 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/geocoder/all/geocoder.rbi
 #
-# geocoder-1.6.3
+# geocoder-1.6.7
 
-module HashRecursiveMerge
-  def rmerge!(other_hash); end
-  def rmerge(other_hash); end
-end
-class Hash
-  include HashRecursiveMerge
-end
 module Geocoder
   def self.address(query, options = nil); end
   def self.config; end
@@ -28,7 +21,10 @@ module Geocoder
 end
 class Geocoder::ConfigurationHash < Hash
   def method_missing(meth, *args, &block); end
-  include HashRecursiveMerge
+  def respond_to_missing?(meth, include_private = nil); end
+end
+module Geocoder::Util
+  def self.recursive_hash_merge(h1, h2); end
 end
 class Geocoder::Configuration
   def always_raise; end
@@ -317,6 +313,7 @@ class Geocoder::Lookup::Test < Geocoder::Lookup::Base
   def name; end
   def results(query); end
   def self.add_stub(query_text, results); end
+  def self.delete_stub(query_text); end
   def self.read_stub(query_text); end
   def self.reset; end
   def self.set_default_stub(results); end

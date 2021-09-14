@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/brakeman/all/brakeman.rbi
 #
-# brakeman-4.8.2
+# brakeman-5.1.1
 
 module Brakeman
   def self.add_external_checks(options); end
@@ -24,6 +24,7 @@ module Brakeman
   def self.get_formats_from_output_format(output_format); end
   def self.get_github_url(options); end
   def self.get_output_formats(options); end
+  def self.ignore_file_entries_with_empty_notes(file); end
   def self.list_checks(options); end
   def self.load_brakeman_dependency(name, allow_fail = nil); end
   def self.load_options(line_options); end

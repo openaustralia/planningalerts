@@ -565,7 +565,7 @@ class Sprockets::ClosureCompressor
 end
 class Sprockets::SassCompressor
   def cache_key; end
-  def call(*args); end
+  def call(input); end
   def initialize(options = nil); end
   def self.cache_key; end
   def self.call(input); end

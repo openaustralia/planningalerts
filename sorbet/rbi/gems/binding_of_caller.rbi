@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/binding_of_caller/all/binding_of_caller.rbi
 #
-# binding_of_caller-0.8.0
+# binding_of_caller-1.0.0
 
 module BindingOfCaller
 end

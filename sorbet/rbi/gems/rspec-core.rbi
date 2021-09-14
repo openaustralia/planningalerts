@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/rspec-core/all/rspec-core.rbi
 #
-# rspec-core-3.9.2
+# rspec-core-3.9.3
 
 module RSpec
   def self.clear_examples; end
@@ -176,6 +176,7 @@ class RSpec::Core::Formatters::ExceptionPresenter
   def exception_backtrace; end
   def exception_class_name(exception = nil); end
   def exception_lines; end
+  def exception_message_string(exception); end
   def extra_detail_formatter; end
   def extra_failure_lines; end
   def failure_lines; end
@@ -669,8 +670,6 @@ module RSpec::Core::HashImitatable
   def reverse_merge!(*args, &block); end
   def reverse_merge(*args, &block); end
   def reverse_update(*args, &block); end
-  def rmerge!(*args, &block); end
-  def rmerge(*args, &block); end
   def select!(*args, &block); end
   def select(*args, &block); end
   def self.included(klass); end
@@ -1267,8 +1266,8 @@ class RSpec::Core::Configuration
   def seed_used?(*args, &block); end
   def self.add_read_only_setting(name, opts = nil); end
   def self.add_setting(name, opts = nil); end
-  def self.define_aliases(name, alias_name); end
-  def self.define_predicate_for(*names); end
+  def self.define_alias(name, alias_name); end
+  def self.define_predicate(name); end
   def self.define_reader(name); end
   def self.delegate_to_ordering_manager(*methods); end
   def shared_context_metadata_behavior; end
@@ -1325,7 +1324,6 @@ module RSpec::Core::Configuration::Readers
   def output_stream; end
   def pattern; end
   def pending_color; end
-  def profile_examples; end
   def project_source_dirs; end
   def requires; end
   def run_all_when_everything_filtered; end
@@ -1520,6 +1518,7 @@ class RSpec::Core::Example::Procsy
   def pending?(*a, &b); end
   def reporter(*a, &b); end
   def rerun_argument(*a, &b); end
+  def ruby2_keywords(*a, &b); end
   def run(*args, &block); end
   def skip(*a, &b); end
   def skipped?(*a, &b); end

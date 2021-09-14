@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/guard-rubocop/all/guard-rubocop.rbi
 #
-# guard-rubocop-1.3.0
+# guard-rubocop-1.5.0
 
 module Guard
 end

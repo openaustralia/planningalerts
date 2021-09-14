@@ -7,13 +7,24 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/elasticsearch/all/elasticsearch.rbi
 #
-# elasticsearch-7.8.0
+# elasticsearch-7.14.1
 
 module Elasticsearch
 end
-module Elasticsearch::Transport
-end
-class Elasticsearch::Transport::Client
+class Elasticsearch::Client
+  def elasticsearch_validation_request; end
+  def initialize(arguments = nil, &block); end
+  def method_missing(name, *args, &block); end
+  def transport; end
+  def transport=(arg0); end
+  def verify_elasticsearch; end
+  def verify_with_version_or_header(body, version, headers); end
   include Elasticsearch::API
   include Elasticsearch::API::Common
+end
+class Elasticsearch::UnsupportedProductError < StandardError
+  def initialize(message = nil); end
+end
+module Elastic
+  def self.client_meta_version; end
 end

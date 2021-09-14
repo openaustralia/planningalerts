@@ -2335,6 +2335,8 @@ end
 class ActiveAdmin::Inputs::Filters::CheckBoxesInput
   include ::ActiveAdmin::Inputs::Filters::Base
   include ::ActiveAdmin::Filters::FormtasticAddons
+  def hidden_fields?(); end
+
   def searchable_method_name(); end
 end
 
@@ -4023,10 +4025,6 @@ module ActiveSupport::Dependencies
   Reference = ::T.let(nil, ::T.untyped)
 end
 
-module ActiveSupport::Dependencies
-  extend ::Bootsnap::LoadPathCache::CoreExt::ActiveSupport::ClassMethods
-end
-
 class ActiveSupport::Deprecation
   def deprecation_horizon(); end
 
@@ -5523,6 +5521,10 @@ module AutoprefixerRails
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
+class AutoprefixerRails::Processor
+  SUPPORTED_RUNTIMES = ::T.let(nil, ::T.untyped)
+end
+
 module Axiom::Types
   Contradiction = ::T.let(nil, ::T.untyped)
   Tautology = ::T.let(nil, ::T.untyped)
@@ -5561,6 +5563,7 @@ end
 
 class BCrypt::Engine
   DEFAULT_COST = ::T.let(nil, ::T.untyped)
+  MAX_COST = ::T.let(nil, ::T.untyped)
   MAX_SALT_LENGTH = ::T.let(nil, ::T.untyped)
   MIN_COST = ::T.let(nil, ::T.untyped)
 end
@@ -5584,7 +5587,6 @@ class Benchmark::Tms
 end
 
 module BetterErrors
-  POSSIBLE_EDITOR_PRESETS = ::T.let(nil, ::T.untyped)
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
@@ -5592,8 +5594,13 @@ class BetterErrors::CodeFormatter
   FILE_TYPES = ::T.let(nil, ::T.untyped)
 end
 
+class BetterErrors::Editor
+  KNOWN_EDITORS = ::T.let(nil, ::T.untyped)
+end
+
 class BetterErrors::Middleware
   ALLOWED_IPS = ::T.let(nil, ::T.untyped)
+  CSRF_TOKEN_COOKIE_NAME = ::T.let(nil, ::T.untyped)
 end
 
 module BetterErrors::REPL
@@ -5618,6 +5625,10 @@ class Binding
   def clone(); end
 
   def irb(); end
+end
+
+module BindingOfCaller
+  VERSION = ::T.let(nil, ::T.untyped)
 end
 
 module Bootsnap
@@ -5660,7 +5671,6 @@ class Bootsnap::LoadPathCache::Path
 end
 
 module Bootsnap::LoadPathCache::PathScanner
-  ALL_FILES = ::T.let(nil, ::T.untyped)
   ALTERNATIVE_NATIVE_EXTENSIONS_PATTERN = ::T.let(nil, ::T.untyped)
   BUNDLE_PATH = ::T.let(nil, ::T.untyped)
   NORMALIZE_NATIVE_EXTENSIONS = ::T.let(nil, ::T.untyped)
@@ -6240,6 +6250,7 @@ end
 
 module Brakeman
   CONFIG_FILES = ::T.let(nil, ::T.untyped)
+  Empty_Ignore_Note_Exit_Code = ::T.let(nil, ::T.untyped)
   Errors_Found_Exit_Code = ::T.let(nil, ::T.untyped)
   Missing_Checks_Exit_Code = ::T.let(nil, ::T.untyped)
   No_App_Found_Exit_Code = ::T.let(nil, ::T.untyped)
@@ -7445,6 +7456,8 @@ module Capybara::DSL
 
   def select(*args, &block); end
 
+  def send_keys(*args, &block); end
+
   def source(*args, &block); end
 
   def status_code(*args, &block); end
@@ -7504,11 +7517,11 @@ module Capybara::Minitest::Assertions
 
   def assert_checked_field(*args, &optional_filter_block); end
 
-  def assert_content(*args, **kwargs); end
+  def assert_content(*args, **kwargs, &optional_filter_block); end
 
   def assert_css(*args, &optional_filter_block); end
 
-  def assert_current_path(*args, **kwargs); end
+  def assert_current_path(*args, **kwargs, &optional_filter_block); end
 
   def assert_field(*args, &optional_filter_block); end
 
@@ -7528,11 +7541,11 @@ module Capybara::Minitest::Assertions
 
   def assert_no_checked_field(*args, &optional_filter_block); end
 
-  def assert_no_content(*args, **kwargs); end
+  def assert_no_content(*args, **kwargs, &optional_filter_block); end
 
   def assert_no_css(*args, &optional_filter_block); end
 
-  def assert_no_current_path(*args, **kwargs); end
+  def assert_no_current_path(*args, **kwargs, &optional_filter_block); end
 
   def assert_no_field(*args, &optional_filter_block); end
 
@@ -7546,9 +7559,9 @@ module Capybara::Minitest::Assertions
 
   def assert_no_table(*args, &optional_filter_block); end
 
-  def assert_no_text(*args, **kwargs); end
+  def assert_no_text(*args, **kwargs, &optional_filter_block); end
 
-  def assert_no_title(*args, **kwargs); end
+  def assert_no_title(*args, **kwargs, &optional_filter_block); end
 
   def assert_no_unchecked_field(*args, &optional_filter_block); end
 
@@ -7570,9 +7583,9 @@ module Capybara::Minitest::Assertions
 
   def assert_table(*args, &optional_filter_block); end
 
-  def assert_text(*args, **kwargs); end
+  def assert_text(*args, **kwargs, &optional_filter_block); end
 
-  def assert_title(*args, **kwargs); end
+  def assert_title(*args, **kwargs, &optional_filter_block); end
 
   def assert_unchecked_field(*args, &optional_filter_block); end
 
@@ -7584,11 +7597,11 @@ module Capybara::Minitest::Assertions
 
   def refute_checked_field(*args, &optional_filter_block); end
 
-  def refute_content(*args, **kwargs); end
+  def refute_content(*args, **kwargs, &optional_filter_block); end
 
   def refute_css(*args, &optional_filter_block); end
 
-  def refute_current_path(*args, **kwargs); end
+  def refute_current_path(*args, **kwargs, &optional_filter_block); end
 
   def refute_field(*args, &optional_filter_block); end
 
@@ -7608,9 +7621,9 @@ module Capybara::Minitest::Assertions
 
   def refute_table(*args, &optional_filter_block); end
 
-  def refute_text(*args, **kwargs); end
+  def refute_text(*args, **kwargs, &optional_filter_block); end
 
-  def refute_title(*args, **kwargs); end
+  def refute_title(*args, **kwargs, &optional_filter_block); end
 
   def refute_unchecked_field(*args, &optional_filter_block); end
 
@@ -7673,6 +7686,7 @@ module Capybara::Selenium::ChromeLogs
 end
 
 class Capybara::Selenium::Driver
+  CAPS_VERSION = ::T.let(nil, ::T.untyped)
   DEFAULT_OPTIONS = ::T.let(nil, ::T.untyped)
   SPECIAL_OPTIONS = ::T.let(nil, ::T.untyped)
 end
@@ -7694,6 +7708,10 @@ end
 
 class Capybara::Selenium::SafariNode
   MODIFIER_KEYS = ::T.let(nil, ::T.untyped)
+end
+
+module Capybara::Selenium::Scroll
+  SCROLL_POSITIONS = ::T.let(nil, ::T.untyped)
 end
 
 class Capybara::Server::AnimationDisabler
@@ -7736,7 +7754,6 @@ module ChunkyPNG
   COLOR_TRUECOLOR_ALPHA = ::T.let(nil, ::T.untyped)
   COMPRESSED_CONTENT = ::T.let(nil, ::T.untyped)
   COMPRESSION_DEFAULT = ::T.let(nil, ::T.untyped)
-  EMPTY_BYTEARRAY = ::T.let(nil, ::T.untyped)
   EXTRA_BYTE = ::T.let(nil, ::T.untyped)
   FILTERING_DEFAULT = ::T.let(nil, ::T.untyped)
   FILTER_AVERAGE = ::T.let(nil, ::T.untyped)
@@ -7963,7 +7980,6 @@ module Coercible::TypeLookup
 end
 
 class Comment
-  include ::AfterCommitAction
   def after_add_for_reports(); end
 
   def after_add_for_reports=(val); end
@@ -8755,6 +8771,8 @@ module Devise::Controllers::ScopedViews
   extend ::ActiveSupport::Concern
 end
 
+Devise::DeprecatedConstantAccessor = ActiveSupport::Deprecation::DeprecatedConstantAccessor
+
 module Devise::Encryptor
 end
 
@@ -8810,7 +8828,7 @@ module Devise::Mailers::Helpers
 end
 
 module Devise::Models::Authenticatable
-  BLACKLIST_FOR_SERIALIZATION = ::T.let(nil, ::T.untyped)
+  UNSAFE_ATTRIBUTES_FOR_SERIALIZATION = ::T.let(nil, ::T.untyped)
 end
 
 module Devise::Models::Lockable
@@ -8835,6 +8853,8 @@ module Devise::Models::Lockable
   def lock_strategy_enabled?(*args, &block); end
 
   def resend_unlock_instructions(); end
+
+  def reset_failed_attempts!(); end
 
   def send_unlock_instructions(); end
 
@@ -9332,8 +9352,16 @@ module ERB::Util
   JSON_ESCAPE_REGEXP = ::T.let(nil, ::T.untyped)
 end
 
+module Elastic
+  ELASTICSEARCH_SERVICE_VERSION = ::T.let(nil, ::T.untyped)
+end
+
 module Elasticsearch
+  NOT_ELASTICSEARCH_WARNING = ::T.let(nil, ::T.untyped)
+  NOT_SUPPORTED_ELASTICSEARCH_WARNING = ::T.let(nil, ::T.untyped)
+  SECURITY_PRIVILEGES_VALIDATION_WARNING = ::T.let(nil, ::T.untyped)
   VERSION = ::T.let(nil, ::T.untyped)
+  YOU_KNOW_FOR_SEARCH = ::T.let(nil, ::T.untyped)
 end
 
 module Elasticsearch::API
@@ -9374,6 +9402,24 @@ end
 
 Elasticsearch::API::DEFAULT_SERIALIZER = MultiJson
 
+module Elasticsearch::API::DanglingIndices::Actions::ParamsRegistry
+  PARAMS = ::T.let(nil, ::T.untyped)
+end
+
+class Elasticsearch::API::DanglingIndices::DanglingIndicesClient
+  include ::Elasticsearch::API::DanglingIndices::Actions
+  include ::Elasticsearch::API::Common::Client::Base
+end
+
+module Elasticsearch::API::Features::Actions::ParamsRegistry
+  PARAMS = ::T.let(nil, ::T.untyped)
+end
+
+class Elasticsearch::API::Features::FeaturesClient
+  include ::Elasticsearch::API::Features::Actions
+  include ::Elasticsearch::API::Common::Client::Base
+end
+
 module Elasticsearch::API::Indices::Actions::ParamsRegistry
   PARAMS = ::T.let(nil, ::T.untyped)
 end
@@ -9406,6 +9452,20 @@ class Elasticsearch::API::Remote::RemoteClient
   include ::Elasticsearch::API::Common::Client::Base
 end
 
+class Elasticsearch::API::Security::SecurityClient
+  include ::Elasticsearch::API::Security::Actions
+  include ::Elasticsearch::API::Common::Client::Base
+end
+
+module Elasticsearch::API::Shutdown::Actions::ParamsRegistry
+  PARAMS = ::T.let(nil, ::T.untyped)
+end
+
+class Elasticsearch::API::Shutdown::ShutdownClient
+  include ::Elasticsearch::API::Shutdown::Actions
+  include ::Elasticsearch::API::Common::Client::Base
+end
+
 module Elasticsearch::API::Snapshot::Actions::ParamsRegistry
   PARAMS = ::T.let(nil, ::T.untyped)
 end
@@ -9424,11 +9484,10 @@ class Elasticsearch::API::Tasks::TasksClient
   include ::Elasticsearch::API::Common::Client::Base
 end
 
-module Elasticsearch::Transport
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-class Elasticsearch::Transport::Client
+class Elasticsearch::Client
+  include ::Elasticsearch::API::Shutdown
+  include ::Elasticsearch::API::Features
+  include ::Elasticsearch::API::DanglingIndices
   include ::Elasticsearch::API::Remote
   include ::Elasticsearch::API::Cat
   include ::Elasticsearch::API::Tasks
@@ -9438,9 +9497,17 @@ class Elasticsearch::Transport::Client
   include ::Elasticsearch::API::Nodes
   include ::Elasticsearch::API::Cluster
   include ::Elasticsearch::API::Actions
+end
+
+module Elasticsearch::Transport
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+class Elasticsearch::Transport::Client
   DEFAULT_CLOUD_PORT = ::T.let(nil, ::T.untyped)
   DEFAULT_HOST = ::T.let(nil, ::T.untyped)
   DEFAULT_LOGGER = ::T.let(nil, ::T.untyped)
+  DEFAULT_PORT = ::T.let(nil, ::T.untyped)
   DEFAULT_TRACER = ::T.let(nil, ::T.untyped)
 end
 
@@ -9748,7 +9815,6 @@ end
 module Ethon::Curls::Options
   EASY_OPTIONS = ::T.let(nil, ::T.untyped)
   FOPTION_STRINGS = ::T.let(nil, ::T.untyped)
-  FTYPES = ::T.let(nil, ::T.untyped)
   FUNCS = ::T.let(nil, ::T.untyped)
   MULTI_OPTIONS = ::T.let(nil, ::T.untyped)
   OPTION_STRINGS = ::T.let(nil, ::T.untyped)
@@ -10328,7 +10394,6 @@ module ExecJS::Runtimes
   JavaScriptCore = ::T.let(nil, ::T.untyped)
   MiniRacer = ::T.let(nil, ::T.untyped)
   Node = ::T.let(nil, ::T.untyped)
-  RubyRacer = ::T.let(nil, ::T.untyped)
   RubyRhino = ::T.let(nil, ::T.untyped)
   SpiderMonkey = ::T.let(nil, ::T.untyped)
   Spidermonkey = ::T.let(nil, ::T.untyped)
@@ -10586,114 +10651,8 @@ class Faraday::Adapter
   TIMEOUT_KEYS = ::T.let(nil, ::T.untyped)
 end
 
-class Faraday::Adapter::EMHttp
-  include ::Faraday::Adapter::EMHttp::Options
-  def create_request(env); end
-
-  def error_message(client); end
-
-  def parallel?(env); end
-
-  def perform_request(env); end
-
-  def perform_single_request(env); end
-
-  def raise_error(msg); end
-
-  def timeout_message?(msg); end
-end
-
-class Faraday::Adapter::EMHttp::Manager
-  def add(&block); end
-
-  def check_finished(); end
-
-  def perform_request(); end
-
-  def reset(); end
-
-  def run(); end
-
-  def running?(); end
-end
-
-class Faraday::Adapter::EMHttp::Manager
-end
-
-module Faraday::Adapter::EMHttp::Options
-  def configure_compression(options, env); end
-
-  def configure_proxy(options, env); end
-
-  def configure_socket(options, env); end
-
-  def configure_ssl(options, env); end
-
-  def configure_timeout(options, env); end
-
-  def connection_config(env); end
-
-  def read_body(env); end
-
-  def request_config(env); end
-
-  def request_options(env); end
-end
-
-module Faraday::Adapter::EMHttp::Options
-end
-
-class Faraday::Adapter::EMHttp
-  def self.setup_parallel_manager(_options=T.unsafe(nil)); end
-end
-
-class Faraday::Adapter::EMSynchrony
-  include ::Faraday::Adapter::EMHttp::Options
-  def create_request(env); end
-end
-
-class Faraday::Adapter::EMSynchrony::ParallelManager
-  def add(request, method, *args, &block); end
-
-  def run(); end
-end
-
-class Faraday::Adapter::EMSynchrony::ParallelManager
-end
-
-class Faraday::Adapter::EMSynchrony
-  def self.setup_parallel_manager(_options=T.unsafe(nil)); end
-end
-
 class Faraday::Adapter::Excon
-  def build_connection(env); end
-
-  def read_body(env); end
   OPTS_KEYS = ::T.let(nil, ::T.untyped)
-end
-
-class Faraday::Adapter::Excon
-end
-
-class Faraday::Adapter::HTTPClient
-  def build_connection(env); end
-
-  def configure_client(client); end
-
-  def configure_proxy(client, proxy); end
-
-  def configure_socket(client, bind); end
-
-  def configure_ssl(client, ssl); end
-
-  def configure_timeouts(client, req); end
-
-  def ssl_cert_store(ssl); end
-
-  def ssl_verify_mode(ssl); end
-end
-
-class Faraday::Adapter::HTTPClient
 end
 
 class Faraday::Adapter::NetHttp
@@ -10704,29 +10663,12 @@ class Faraday::Adapter::NetHttpPersistent
   SSL_CONFIGURATIONS = ::T.let(nil, ::T.untyped)
 end
 
-class Faraday::Adapter::NetHttpPersistent
-end
-
 class Faraday::Adapter::Patron
-  def build_connection(env); end
-
-  def configure_proxy(session, proxy); end
-
-  def configure_ssl(session, ssl); end
-
-  def configure_timeouts(session, req); end
   CURL_TIMEOUT_MESSAGES = ::T.let(nil, ::T.untyped)
 end
 
-class Faraday::Adapter::Patron
-end
-
 class Faraday::Adapter::Rack
-  def initialize(faraday_app, rack_app); end
   SPECIAL_HEADERS = ::T.let(nil, ::T.untyped)
-end
-
-class Faraday::Adapter::Rack
 end
 
 class Faraday::Adapter::Test
@@ -10742,11 +10684,9 @@ end
 class Faraday::Adapter::Test::Stub
   def headers_match?(request_headers); end
 
-  def initialize(host, full, headers, body, block); end
+  def matches?(env); end
 
-  def matches?(request_host, request_uri, request_headers, request_body); end
-
-  def params_match?(request_params); end
+  def params_match?(env); end
 
   def path_match?(request_path, meta); end
 end
@@ -10763,9 +10703,11 @@ class Faraday::Adapter::Test::Stubs
 
   def head(path, headers=T.unsafe(nil), &block); end
 
-  def match(request_method, host, path, headers, body); end
+  def initialize(strict_mode: T.unsafe(nil)); end
 
-  def matches?(stack, host, path, headers, body); end
+  def match(env); end
+
+  def matches?(stack, env); end
 
   def new_stub(request_method, path, headers=T.unsafe(nil), body=T.unsafe(nil), &block); end
 
@@ -10776,6 +10718,8 @@ class Faraday::Adapter::Test::Stubs
   def post(path, body=T.unsafe(nil), headers=T.unsafe(nil), &block); end
 
   def put(path, body=T.unsafe(nil), headers=T.unsafe(nil), &block); end
+
+  def strict_mode=(value); end
 
   def verify_stubbed_calls(); end
 end
@@ -10794,10 +10738,19 @@ end
 
 class Faraday::Connection
   METHODS = ::T.let(nil, ::T.untyped)
+  USER_AGENT = ::T.let(nil, ::T.untyped)
 end
 
 module Faraday::DecodeMethods
   SUBKEYS_REGEX = ::T.let(nil, ::T.untyped)
+end
+
+module Faraday::EmHttp
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+module Faraday::EmSynchrony
+  VERSION = ::T.let(nil, ::T.untyped)
 end
 
 class Faraday::Env
@@ -10807,9 +10760,33 @@ class Faraday::Env
   SuccessfulStatuses = ::T.let(nil, ::T.untyped)
 end
 
+module Faraday::Excon
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
 Faraday::FilePart = UploadIO
 
+module Faraday::HTTPClient
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+module Faraday::NetHttp
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+module Faraday::NetHttpPersistent
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
 Faraday::Parts = Parts
+
+module Faraday::Patron
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+module Faraday::Rack
+  VERSION = ::T.let(nil, ::T.untyped)
+end
 
 class Faraday::RackBuilder
   LOCK_ERR = ::T.let(nil, ::T.untyped)
@@ -10821,8 +10798,6 @@ class Faraday::RackBuilder::Handler
 end
 
 class Faraday::Request::Authorization
-  def call(env); end
-
   def initialize(app, type, token); end
   KEY = ::T.let(nil, ::T.untyped)
 end
@@ -10841,8 +10816,6 @@ class Faraday::Request::BasicAuthentication
 end
 
 class Faraday::Request::Instrumentation
-  def call(env); end
-
   def initialize(app, options=T.unsafe(nil)); end
 end
 
@@ -10955,9 +10928,9 @@ class Fiber
 end
 
 class File
-  def self.atomic_write(file_name, temp_dir=T.unsafe(nil)); end
-
   def self.exists?(_); end
+
+  def self.probe_stat_in(dir); end
 end
 
 FileList = Rake::FileList
@@ -11421,7 +11394,7 @@ class Formtastic::Inputs::CheckBoxesInput
 
   def hidden_field_for_all(); end
 
-  def hidden_fields?(); end
+  def hidden_fields_for_every?(); end
 
   def initialize(*args); end
 
@@ -13247,6 +13220,10 @@ class HTTP::URI
   NORMALIZER = ::T.let(nil, ::T.untyped)
 end
 
+class HTTParty::Decompressor
+  SupportedEncodings = ::T.let(nil, ::T.untyped)
+end
+
 module Haml
   VERSION = ::T.let(nil, ::T.untyped)
 end
@@ -13286,6 +13263,7 @@ class Haml::Parser
   FLAT_SCRIPT = ::T.let(nil, ::T.untyped)
   ID_KEY = ::T.let(nil, ::T.untyped)
   LITERAL_VALUE_REGEX = ::T.let(nil, ::T.untyped)
+  METHOD_CALL_PREFIX = ::T.let(nil, ::T.untyped)
   MID_BLOCK_KEYWORDS = ::T.let(nil, ::T.untyped)
   MULTILINE_CHAR_VALUE = ::T.let(nil, ::T.untyped)
   PLAIN_TEXT = ::T.let(nil, ::T.untyped)
@@ -14517,6 +14495,14 @@ class Integer
 end
 
 class JSON::Ext::Generator::State
+  def escape_slash(); end
+
+  def escape_slash=(escape_slash); end
+
+  def escape_slash?(); end
+end
+
+class JSON::Ext::Generator::State
   def self.from_state(_); end
 end
 
@@ -14529,6 +14515,16 @@ JSON::Parser = JSON::Ext::Parser
 JSON::State = JSON::Ext::Generator::State
 
 JSON::UnparserError = JSON::GeneratorError
+
+module JSON
+  def self.create_fast_state(); end
+
+  def self.create_pretty_state(); end
+
+  def self.load_file(filespec, opts=T.unsafe(nil)); end
+
+  def self.load_file!(filespec, opts=T.unsafe(nil)); end
+end
 
 class Jbuilder
   BLANK = ::T.let(nil, ::T.untyped)
@@ -14607,7 +14603,9 @@ module Launchy::Version
   PATCH = ::T.let(nil, ::T.untyped)
 end
 
-module Libv8
+module Libv8::Node
+  LIBV8_VERSION = ::T.let(nil, ::T.untyped)
+  NODE_VERSION = ::T.let(nil, ::T.untyped)
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
@@ -14638,9 +14636,8 @@ end
 
 class Listen::Adapter::Linux
   DEFAULTS = ::T.let(nil, ::T.untyped)
-  INOTIFY_LIMIT_MESSAGE = ::T.let(nil, ::T.untyped)
   OS_REGEXP = ::T.let(nil, ::T.untyped)
-  WIKI_URL = ::T.let(nil, ::T.untyped)
+  README_URL = ::T.let(nil, ::T.untyped)
 end
 
 class Listen::Adapter::Polling
@@ -14653,18 +14650,24 @@ class Listen::Adapter::Windows
   OS_REGEXP = ::T.let(nil, ::T.untyped)
 end
 
-module Listen::FSM
-  DEFAULT_STATE = ::T.let(nil, ::T.untyped)
+class Listen::Event::Loop
+  MAX_STARTUP_SECONDS = ::T.let(nil, ::T.untyped)
 end
+
+Listen::Event::Loop::Error = Listen::Error
+
+Listen::Event::Loop::NotStarted = Listen::Error::NotStarted
 
 class Listen::Listener::Config
   DEFAULTS = ::T.let(nil, ::T.untyped)
 end
 
 class Listen::Record::SymlinkDetector
+  README_URL = ::T.let(nil, ::T.untyped)
   SYMLINK_LOOP_ERROR = ::T.let(nil, ::T.untyped)
-  WIKI = ::T.let(nil, ::T.untyped)
 end
+
+Listen::Record::SymlinkDetector::Error = Listen::Error
 
 class Listen::Silencer
   DEFAULT_IGNORED_DIRECTORIES = ::T.let(nil, ::T.untyped)
@@ -14801,6 +14804,9 @@ module Lumberjack::Severity
   SEVERITY_LABELS = ::T.let(nil, ::T.untyped)
   UNKNOWN = ::T.let(nil, ::T.untyped)
   WARN = ::T.let(nil, ::T.untyped)
+end
+
+class Lumberjack::TaggedLoggerSupport::Formatter
 end
 
 class Lumberjack::Template
@@ -15182,6 +15188,9 @@ class Mail::POP3
 end
 
 class Mail::POP3
+end
+
+class Mail::PartsList
 end
 
 class Mail::PhraseList
@@ -15667,6 +15676,7 @@ class MiniPortile
 end
 
 module MiniRacer
+  LIBV8_NODE_VERSION = ::T.let(nil, ::T.untyped)
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
@@ -16148,6 +16158,8 @@ end
 class Net::HTTPRangeNotSatisfiable
 end
 
+Net::HTTPRedirection::EXCEPTION_TYPE = Net::HTTPRetriableError
+
 Net::HTTPRedirectionCode = Net::HTTPRedirection
 
 Net::HTTPRequestURITooLarge = Net::HTTPURITooLong
@@ -16162,13 +16174,9 @@ Net::HTTPServerErrorCode = Net::HTTPServerError
 
 Net::HTTPSession = Net::HTTP
 
-class Net::HTTPSuccess
-end
+Net::HTTPSuccess::EXCEPTION_TYPE = Net::HTTPError
 
-Net::HTTPSuccessCode::EXCEPTION_TYPE = Net::HTTPError
-
-class Net::HTTPSuccess
-end
+Net::HTTPSuccessCode = Net::HTTPSuccess
 
 class Net::HTTPURITooLong
   HAS_BODY = ::T.let(nil, ::T.untyped)
@@ -17498,7 +17506,19 @@ module Nokogiri::Gumbo
   DEFAULT_MAX_TREE_DEPTH = ::T.let(nil, ::T.untyped)
 end
 
-Nokogiri::HTML = Nokogiri::HTML4
+module Nokogiri::HTML4
+end
+
+class Nokogiri::HTML4::ElementDescription
+end
+
+Nokogiri::HTML::ElementDescription::Desc = Struct::HTMLElementDescription
+
+class Nokogiri::HTML4::ElementDescription
+end
+
+module Nokogiri::HTML4
+end
 
 module Nokogiri::HTML4
   NamedCharacters = ::T.let(nil, ::T.untyped)
@@ -17615,8 +17635,6 @@ class Nokogiri::HTML4::ElementDescription
   WIDTH_ATTR = ::T.let(nil, ::T.untyped)
 end
 
-Nokogiri::HTML4::ElementDescription::Desc = Struct::HTMLElementDescription
-
 module Nokogiri::HTML5
   HTML_NAMESPACE = ::T.let(nil, ::T.untyped)
   MATHML_NAMESPACE = ::T.let(nil, ::T.untyped)
@@ -17630,6 +17648,10 @@ module Nokogiri::XML
   XML_C14N_1_0 = ::T.let(nil, ::T.untyped)
   XML_C14N_1_1 = ::T.let(nil, ::T.untyped)
   XML_C14N_EXCLUSIVE_1_0 = ::T.let(nil, ::T.untyped)
+end
+
+class Nokogiri::XML::Builder
+  DEFAULT_DOCUMENT_OPTIONS = ::T.let(nil, ::T.untyped)
 end
 
 class Nokogiri::XML::Document
@@ -17922,6 +17944,7 @@ module Octokit
   MAJOR = ::T.let(nil, ::T.untyped)
   MINOR = ::T.let(nil, ::T.untyped)
   PATCH = ::T.let(nil, ::T.untyped)
+  RATE_LIMITED_ERRORS = ::T.let(nil, ::T.untyped)
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
@@ -17972,6 +17995,7 @@ module Octokit
 end
 
 module Oj
+  CUSTOM_MIMIC_JSON_OPTIONS = ::T.let(nil, ::T.untyped)
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
@@ -17979,6 +18003,12 @@ class Oj::CStack
 end
 
 class Oj::CStack
+end
+
+class Oj::Cache
+end
+
+class Oj::Cache
 end
 
 class OpenSSL::ASN1::ASN1Data
@@ -18393,6 +18423,7 @@ class ProgressBar::Components::Time
   NO_TIME_ELAPSED_TEXT = ::T.let(nil, ::T.untyped)
   OOB_FRIENDLY_TIME_TEXT = ::T.let(nil, ::T.untyped)
   OOB_LIMIT_IN_HOURS = ::T.let(nil, ::T.untyped)
+  OOB_TEXT_TO_FORMAT = ::T.let(nil, ::T.untyped)
   OOB_TIME_FORMATS = ::T.let(nil, ::T.untyped)
   OOB_UNKNOWN_TIME_TEXT = ::T.let(nil, ::T.untyped)
   TIME_FORMAT = ::T.let(nil, ::T.untyped)
@@ -18536,10 +18567,6 @@ class Pry::Output
   DEFAULT_SIZE = ::T.let(nil, ::T.untyped)
 end
 
-class Pry::PluginManager
-  PRY_PLUGIN_PREFIX = ::T.let(nil, ::T.untyped)
-end
-
 class Pry::Slop
   DEFAULT_OPTIONS = ::T.let(nil, ::T.untyped)
   VERSION = ::T.let(nil, ::T.untyped)
@@ -18554,6 +18581,7 @@ module Psych
 end
 
 module Psych
+  extend ::Bootsnap::CompileCache::YAML::Patch
   def self.add_builtin_type(type_tag, &block); end
 
   def self.add_domain_type(domain, type_tag, &block); end
@@ -18716,6 +18744,10 @@ class RGeo::Geos::ZMFactory
 end
 
 module RGeo::Geos::ZMGeometryCollectionMethods
+  include ::ActiveSupport::ToJsonWithActiveSupportEncoder
+end
+
+module RGeo::ImplHelper::BasicGeometryCollectionMethods
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
 end
 
@@ -20732,6 +20764,7 @@ end
 
 class Rack::MiniProfiler
   ASSET_VERSION = ::T.let(nil, ::T.untyped)
+  SOURCE_CODE_URI = ::T.let(nil, ::T.untyped)
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
@@ -20762,6 +20795,8 @@ class Rack::MiniProfiler::MemoryStore
 end
 
 class Rack::MiniProfiler::RedisStore
+  COUNTER_LUA = ::T.let(nil, ::T.untyped)
+  COUNTER_LUA_SHA = ::T.let(nil, ::T.untyped)
   EXPIRES_IN_SECONDS = ::T.let(nil, ::T.untyped)
 end
 
@@ -21564,6 +21599,7 @@ module Ransack::Constants
   OR = ::T.let(nil, ::T.untyped)
   Q = ::T.let(nil, ::T.untyped)
   RAILS_6_0 = ::T.let(nil, ::T.untyped)
+  RAILS_6_1 = ::T.let(nil, ::T.untyped)
   RANSACK_SLASH_SEARCHES = ::T.let(nil, ::T.untyped)
   RANSACK_SLASH_SEARCHES_SLASH_SEARCH = ::T.let(nil, ::T.untyped)
   SEARCH = ::T.let(nil, ::T.untyped)
@@ -21626,6 +21662,8 @@ class Redis
   HashifyClusterSlaves = ::T.let(nil, ::T.untyped)
   HashifyClusterSlots = ::T.let(nil, ::T.untyped)
   HashifyInfo = ::T.let(nil, ::T.untyped)
+  HashifyStreamAutoclaim = ::T.let(nil, ::T.untyped)
+  HashifyStreamAutoclaimJustId = ::T.let(nil, ::T.untyped)
   HashifyStreamEntries = ::T.let(nil, ::T.untyped)
   HashifyStreamPendingDetails = ::T.let(nil, ::T.untyped)
   HashifyStreamPendings = ::T.let(nil, ::T.untyped)
@@ -21967,6 +22005,8 @@ class Redis::Distributed
 
   def zincrby(key, increment, member); end
 
+  def zinter(*keys, **options); end
+
   def zinterstore(destination, keys, **options); end
 
   def zrange(key, start, stop, **options); end
@@ -22078,9 +22118,7 @@ class Regexp::Parser
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
-class Regexp::Scanner
-  PROP_MAPS_DIR = ::T.let(nil, ::T.untyped)
-end
+Regexp::Parser::UPTokens = Regexp::Syntax::Token::UnicodeProperty
 
 module Regexp::Syntax
   VERSION_CONST_REGEXP = ::T.let(nil, ::T.untyped)
@@ -22956,41 +22994,8 @@ class Ripper
   def self.token_match(src, pattern); end
 end
 
-class RuboCop::AST::ArrayNode
-  PERCENT_LITERAL_TYPES = ::T.let(nil, ::T.untyped)
-end
-
-class RuboCop::AST::BlockNode
-  VOID_CONTEXT_METHODS = ::T.let(nil, ::T.untyped)
-end
-
 class RuboCop::AST::Builder
   NODE_MAP = ::T.let(nil, ::T.untyped)
-end
-
-module RuboCop::AST::CollectionNode
-  ARRAY_METHODS = ::T.let(nil, ::T.untyped)
-end
-
-class RuboCop::AST::KeywordSplatNode
-  DOUBLE_SPLAT = ::T.let(nil, ::T.untyped)
-end
-
-module RuboCop::AST::MethodDispatchNode
-  ARITHMETIC_OPERATORS = ::T.let(nil, ::T.untyped)
-  SPECIAL_MODIFIERS = ::T.let(nil, ::T.untyped)
-end
-
-module RuboCop::AST::MethodIdentifierPredicates
-  ENUMERABLE_METHODS = ::T.let(nil, ::T.untyped)
-  ENUMERATOR_METHODS = ::T.let(nil, ::T.untyped)
-  NONMUTATING_ARRAY_METHODS = ::T.let(nil, ::T.untyped)
-  NONMUTATING_BINARY_OPERATOR_METHODS = ::T.let(nil, ::T.untyped)
-  NONMUTATING_HASH_METHODS = ::T.let(nil, ::T.untyped)
-  NONMUTATING_OPERATOR_METHODS = ::T.let(nil, ::T.untyped)
-  NONMUTATING_STRING_METHODS = ::T.let(nil, ::T.untyped)
-  NONMUTATING_UNARY_OPERATOR_METHODS = ::T.let(nil, ::T.untyped)
-  OPERATOR_METHODS = ::T.let(nil, ::T.untyped)
 end
 
 class RuboCop::AST::Node
@@ -23017,37 +23022,268 @@ class RuboCop::AST::Node
   VARIABLES = ::T.let(nil, ::T.untyped)
 end
 
-module RuboCop::AST::NumericNode
-  SIGN_REGEX = ::T.let(nil, ::T.untyped)
+class RuboCop::AST::NodePattern
+  VAR = ::T.let(nil, ::T.untyped)
 end
 
-class RuboCop::AST::PairNode
-  COLON = ::T.let(nil, ::T.untyped)
-  HASH_ROCKET = ::T.let(nil, ::T.untyped)
-  SPACED_COLON = ::T.let(nil, ::T.untyped)
-  SPACED_HASH_ROCKET = ::T.let(nil, ::T.untyped)
+class RuboCop::AST::NodePattern::Compiler::Debug
+  def comments(*args, &block); end
+
+  def node_ids(); end
+
+  def tokens(*args, &block); end
 end
 
-module RuboCop::AST::PredicateOperatorNode
-  LOGICAL_AND = ::T.let(nil, ::T.untyped)
-  LOGICAL_OR = ::T.let(nil, ::T.untyped)
-  SEMANTIC_AND = ::T.let(nil, ::T.untyped)
-  SEMANTIC_OR = ::T.let(nil, ::T.untyped)
+class RuboCop::AST::NodePattern::Compiler::Debug::Colorizer
+  def compiler(); end
+
+  def initialize(pattern, compiler: T.unsafe(nil)); end
+
+  def node_pattern(); end
+
+  def pattern(); end
+
+  def test(ruby, trace: T.unsafe(nil)); end
+  COLOR_SCHEME = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::AST::NodePattern::Compiler::Debug::Colorizer::Result
+  def color_map(color_scheme=T.unsafe(nil)); end
+
+  def colorize(color_scheme=T.unsafe(nil)); end
+
+  def colorizer(); end
+
+  def colorizer=(_); end
+
+  def match_map(); end
+
+  def matched?(node); end
+
+  def returned(); end
+
+  def returned=(_); end
+
+  def ruby_ast(); end
+
+  def ruby_ast=(_); end
+
+  def trace(); end
+
+  def trace=(_); end
+end
+
+class RuboCop::AST::NodePattern::Compiler::Debug::Colorizer::Result
+  def self.[](*_); end
+
+  def self.members(); end
+end
+
+class RuboCop::AST::NodePattern::Compiler::Debug::Colorizer
+end
+
+module RuboCop::AST::NodePattern::Compiler::Debug::InstrumentationSubcompiler
+  def do_compile(); end
+end
+
+module RuboCop::AST::NodePattern::Compiler::Debug::InstrumentationSubcompiler
+end
+
+class RuboCop::AST::NodePattern::Compiler::Debug::NodePatternSubcompiler
+  include ::RuboCop::AST::NodePattern::Compiler::Debug::InstrumentationSubcompiler
+end
+
+class RuboCop::AST::NodePattern::Compiler::Debug::NodePatternSubcompiler
+end
+
+class RuboCop::AST::NodePattern::Compiler::Debug::SequenceSubcompiler
+  include ::RuboCop::AST::NodePattern::Compiler::Debug::InstrumentationSubcompiler
+end
+
+class RuboCop::AST::NodePattern::Compiler::Debug::SequenceSubcompiler
+end
+
+class RuboCop::AST::NodePattern::Compiler::Debug::Trace
+  def enter(node_id); end
+
+  def matched?(node_id); end
+
+  def success(node_id); end
+end
+
+class RuboCop::AST::NodePattern::Compiler::Debug::Trace
+end
+
+class RuboCop::AST::NodePattern::Compiler::Debug
+end
+
+class RuboCop::AST::NodePattern::Compiler::SequenceSubcompiler
+  DELTA = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::AST::NodePattern::LexerRex
+  IDENTIFIER = ::T.let(nil, ::T.untyped)
+  REGEXP = ::T.let(nil, ::T.untyped)
+  REGEXP_BODY = ::T.let(nil, ::T.untyped)
+  SYMBOL_NAME = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::AST::NodePattern::Node
+  MAP = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::AST::NodePattern::Node::Repetition
+  ARITIES = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::AST::NodePattern::Parser
+  Racc_arg = ::T.let(nil, ::T.untyped)
+  Racc_debug_parser = ::T.let(nil, ::T.untyped)
+  Racc_token_to_s_table = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::AST::NodePattern::Parser::WithMeta
+  def comments(); end
+
+  def tokens(); end
+end
+
+class RuboCop::AST::NodePattern::Parser::WithMeta::Builder
+  def emit_atom(type, token); end
+
+  def emit_call(type, selector_t, args=T.unsafe(nil)); end
+
+  def emit_list(type, begin_t, children, end_t); end
+
+  def emit_unary_op(type, operator_t=T.unsafe(nil), *children); end
+end
+
+class RuboCop::AST::NodePattern::Parser::WithMeta::Builder
+end
+
+class RuboCop::AST::NodePattern::Parser::WithMeta::Lexer
+  def initialize(str_or_buffer); end
+
+  def pos(); end
+end
+
+class RuboCop::AST::NodePattern::Parser::WithMeta::Lexer
+end
+
+class RuboCop::AST::NodePattern::Parser::WithMeta
+end
+
+module RuboCop::AST::NodePattern::Sets
+  MAX = ::T.let(nil, ::T.untyped)
+  REGISTRY = ::T.let(nil, ::T.untyped)
+  SET_0_1 = ::T.let(nil, ::T.untyped)
+  SET_10_10 = ::T.let(nil, ::T.untyped)
+  SET_1_1 = ::T.let(nil, ::T.untyped)
+  SET_ABSTRACT_OVERRIDE_OVERRIDABLE_ETC = ::T.let(nil, ::T.untyped)
+  SET_ADD_DEPENDENCY_ADD_RUNTIME_DEPENDENCY_ADD_DEVELOPMENT_DEPENDENCY = ::T.let(nil, ::T.untyped)
+  SET_AFTER_ACTION_APPEND_AFTER_ACTION_APPEND_AROUND_ACTION_ETC = ::T.let(nil, ::T.untyped)
+  SET_ANY_ALL_NORETURN_ETC = ::T.let(nil, ::T.untyped)
+  SET_AP_P_PP_ETC = ::T.let(nil, ::T.untyped)
+  SET_ATTR_READER_ATTR_WRITER_ATTR_ACCESSOR = ::T.let(nil, ::T.untyped)
+  SET_ATTR_READER_ATTR_WRITER_ATTR_ACCESSOR_ATTR = ::T.let(nil, ::T.untyped)
+  SET_BELONGS_TO_HAS_ONE_HAS_MANY_HAS_AND_BELONGS_TO_MANY = ::T.let(nil, ::T.untyped)
+  SET_BINWRITE_SYSWRITE_WRITE_WRITE_NONBLOCK = ::T.let(nil, ::T.untyped)
+  SET_CAPTURE2_CAPTURE2E_CAPTURE3_ETC = ::T.let(nil, ::T.untyped)
+  SET_CIPHER_DIGEST = ::T.let(nil, ::T.untyped)
+  SET_CLASS_EVAL_INSTANCE_EVAL = ::T.let(nil, ::T.untyped)
+  SET_CLASS_EVAL_MODULE_EVAL = ::T.let(nil, ::T.untyped)
+  SET_CLASS_MODULE = ::T.let(nil, ::T.untyped)
+  SET_CLASS_MODULE_STRUCT = ::T.let(nil, ::T.untyped)
+  SET_CONSTANTIZE_CONSTANTS_CONST_GET = ::T.let(nil, ::T.untyped)
+  SET_COUNT_LENGTH_SIZE = ::T.let(nil, ::T.untyped)
+  SET_CREATED_AT_UPDATED_AT = ::T.let(nil, ::T.untyped)
+  SET_CREATED_AT_UPDATED_AT_2 = ::T.let(nil, ::T.untyped)
+  SET_DEBUGGER_BYEBUG_REMOTE_BYEBUG = ::T.let(nil, ::T.untyped)
+  SET_DEFINE_METHOD_DEFINE_SINGLETON_METHOD = ::T.let(nil, ::T.untyped)
+  SET_EACH_WITH_INDEX_WITH_INDEX = ::T.let(nil, ::T.untyped)
+  SET_EACH_WITH_OBJECT_WITH_OBJECT = ::T.let(nil, ::T.untyped)
+  SET_ENUMERATOR_RATIONAL_COMPLEX_THREAD = ::T.let(nil, ::T.untyped)
+  SET_ESCAPE_ENCODE_UNESCAPE_DECODE = ::T.let(nil, ::T.untyped)
+  SET_EXECUTE_REMOVE_BELONGS_TO = ::T.let(nil, ::T.untyped)
+  SET_FIRST_LAST__ETC = ::T.let(nil, ::T.untyped)
+  SET_FIRST_TAKE = ::T.let(nil, ::T.untyped)
+  SET_FIXNUM_BIGNUM = ::T.let(nil, ::T.untyped)
+  SET_FORMAT_SPRINTF_PRINTF = ::T.let(nil, ::T.untyped)
+  SET_GEMCUTTER_RUBYGEMS_RUBYFORGE = ::T.let(nil, ::T.untyped)
+  SET_GET_POST_PUT_ETC = ::T.let(nil, ::T.untyped)
+  SET_GSUB_GSUB = ::T.let(nil, ::T.untyped)
+  SET_HAS_MANY_HAS_ONE = ::T.let(nil, ::T.untyped)
+  SET_HAS_MANY_HAS_ONE_BELONGS_TO = ::T.let(nil, ::T.untyped)
+  SET_INCLUDE_EXTEND_PREPEND = ::T.let(nil, ::T.untyped)
+  SET_INSERT_INSERT = ::T.let(nil, ::T.untyped)
+  SET_INSTANCE_EVAL_CLASS_EVAL_MODULE_EVAL = ::T.let(nil, ::T.untyped)
+  SET_INSTANCE_EXEC_CLASS_EXEC_MODULE_EXEC = ::T.let(nil, ::T.untyped)
+  SET_IS_A_KIND_OF = ::T.let(nil, ::T.untyped)
+  SET_KEYS_VALUES = ::T.let(nil, ::T.untyped)
+  SET_LAST_FIRST = ::T.let(nil, ::T.untyped)
+  SET_LENGTH_SIZE = ::T.let(nil, ::T.untyped)
+  SET_LOAD_RESTORE = ::T.let(nil, ::T.untyped)
+  SET_MAP_COLLECT = ::T.let(nil, ::T.untyped)
+  SET_NEW_OPEN = ::T.let(nil, ::T.untyped)
+  SET_NIL_ = ::T.let(nil, ::T.untyped)
+  SET_ONLY_EXCEPT = ::T.let(nil, ::T.untyped)
+  SET_PIPELINE_PIPELINE_R_PIPELINE_RW_ETC = ::T.let(nil, ::T.untyped)
+  SET_PRIVATE_PROTECTED = ::T.let(nil, ::T.untyped)
+  SET_PRIVATE_PROTECTED_PUBLIC = ::T.let(nil, ::T.untyped)
+  SET_PROP_CONST = ::T.let(nil, ::T.untyped)
+  SET_PRY_REMOTE_PRY_PRY_REMOTE_CONSOLE = ::T.let(nil, ::T.untyped)
+  SET_PUBLIC_CONSTANT_PRIVATE_CONSTANT = ::T.let(nil, ::T.untyped)
+  SET_PUBLIC_PROTECTED_PRIVATE_MODULE_FUNCTION = ::T.let(nil, ::T.untyped)
+  SET_RAISE_FAIL = ::T.let(nil, ::T.untyped)
+  SET_RAISE_FAIL_THROW_ETC = ::T.let(nil, ::T.untyped)
+  SET_REDUCE_INJECT = ::T.let(nil, ::T.untyped)
+  SET_REFERER_REFERRER = ::T.let(nil, ::T.untyped)
+  SET_RENDER_REDIRECT_TO = ::T.let(nil, ::T.untyped)
+  SET_RETURNING_UNIQUE_BY = ::T.let(nil, ::T.untyped)
+  SET_SAVE_AND_OPEN_PAGE_SAVE_AND_OPEN_SCREENSHOT_SAVE_SCREENSHOT = ::T.let(nil, ::T.untyped)
+  SET_SEND_PUBLIC_SEND___SEND__ = ::T.let(nil, ::T.untyped)
+  SET_SINCE_FROM_NOW_AFTER_ETC = ::T.let(nil, ::T.untyped)
+  SET_SKIP_AFTER_ACTION_SKIP_AROUND_ACTION_SKIP_BEFORE_ACTION_SKIP_ACTION_CALLBACK = ::T.let(nil, ::T.untyped)
+  SET_SORT_BY_SORT = ::T.let(nil, ::T.untyped)
+  SET_SPAWN_SYSTEM = ::T.let(nil, ::T.untyped)
+  SET_SPRINTF_FORMAT = ::T.let(nil, ::T.untyped)
+  SET_STRUCT_CLASS = ::T.let(nil, ::T.untyped)
+  SET_SUCC_PRED_NEXT = ::T.let(nil, ::T.untyped)
+  SET_TEMPFILE_STRINGIO = ::T.let(nil, ::T.untyped)
+  SET_TIME_DATETIME = ::T.let(nil, ::T.untyped)
+  SET_TO_I_TO_F_TO_C = ::T.let(nil, ::T.untyped)
+  SET_TRANSLATE_LOCALIZE = ::T.let(nil, ::T.untyped)
+  SET_TRUE_FALSE = ::T.let(nil, ::T.untyped)
+  SET_TRY_TRY = ::T.let(nil, ::T.untyped)
+  SET_TYPE_TEMPLATE_TYPE_MEMBER = ::T.let(nil, ::T.untyped)
+  SET_UNIQ_DISTINCT = ::T.let(nil, ::T.untyped)
+  SET_ZERO_POSITIVE_NEGATIVE = ::T.let(nil, ::T.untyped)
+  SET__ = ::T.let(nil, ::T.untyped)
+  SET__AT_SLICE = ::T.let(nil, ::T.untyped)
+  SET__GLOB = ::T.let(nil, ::T.untyped)
+  SET___ = ::T.let(nil, ::T.untyped)
+  SET___2 = ::T.let(nil, ::T.untyped)
+  SET___3 = ::T.let(nil, ::T.untyped)
+  SET___4 = ::T.let(nil, ::T.untyped)
+  SET___5 = ::T.let(nil, ::T.untyped)
+  SET___6 = ::T.let(nil, ::T.untyped)
+  SET____ = ::T.let(nil, ::T.untyped)
+  SET____ETC = ::T.let(nil, ::T.untyped)
+  SET____ETC_2 = ::T.let(nil, ::T.untyped)
+  SET____ETC_3 = ::T.let(nil, ::T.untyped)
+  SET____ETC_4 = ::T.let(nil, ::T.untyped)
 end
 
 class RuboCop::AST::ProcessedSource
   STRING_SOURCE_NAME = ::T.let(nil, ::T.untyped)
 end
 
-class RuboCop::AST::RegexpNode
-  OPTIONS = ::T.let(nil, ::T.untyped)
+module RuboCop::AST::RuboCopCompatibility
+  INCOMPATIBLE_COPS = ::T.let(nil, ::T.untyped)
 end
 
 module RuboCop::AST::Traversal
-  MANY_CHILD_NODES = ::T.let(nil, ::T.untyped)
-  NO_CHILD_NODES = ::T.let(nil, ::T.untyped)
-  ONE_CHILD_NODE = ::T.let(nil, ::T.untyped)
-  SECOND_CHILD_ONLY = ::T.let(nil, ::T.untyped)
+  TYPE_TO_METHOD = ::T.let(nil, ::T.untyped)
 end
 
 module RuboCop::AST::Version
@@ -23056,6 +23292,10 @@ end
 
 class RuboCop::CLI::Command::AutoGenerateConfig
   AUTO_GENERATED_FILE = ::T.let(nil, ::T.untyped)
+end
+
+module RuboCop::Cop::ActiveRecordHelper
+  WHERE_METHODS = ::T.let(nil, ::T.untyped)
 end
 
 class RuboCop::Cop::Lint::ConstantResolution
@@ -23088,7 +23328,47 @@ class RuboCop::Cop::Offense
   NO_LOCATION = ::T.let(nil, ::T.untyped)
 end
 
+class RuboCop::Cop::Rails::ActiveRecordCallbacksOrder
+  CALLBACKS_IN_ORDER = ::T.let(nil, ::T.untyped)
+  CALLBACKS_ORDER_MAP = ::T.let(nil, ::T.untyped)
+  MSG = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Rails::AfterCommitOverride
+  AFTER_COMMIT_CALLBACKS = ::T.let(nil, ::T.untyped)
+  MSG = ::T.let(nil, ::T.untyped)
+end
+
 class RuboCop::Cop::Rails::ContentTag
+  MSG = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Rails::DefaultScope
+  MSG = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Rails::FindById
+  MSG = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Rails::Inquiry
+  MSG = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Rails::MailerName
+  MSG = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Rails::MatchRoute
+  HTTP_METHODS = ::T.let(nil, ::T.untyped)
+  MSG = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Rails::NegateInclude
+  MSG = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Rails::OrderById
   MSG = ::T.let(nil, ::T.untyped)
 end
 
@@ -23096,8 +23376,56 @@ class RuboCop::Cop::Rails::Pick
   MSG = ::T.let(nil, ::T.untyped)
 end
 
+class RuboCop::Cop::Rails::Pluck
+  MSG = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Rails::PluckId
+  MSG = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Rails::PluckInWhere
+  MSG = ::T.let(nil, ::T.untyped)
+end
+
 class RuboCop::Cop::Rails::RedundantForeignKey
   MSG = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Rails::RenderInline
+  MSG = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Rails::RenderPlainText
+  MSG = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Rails::ShortI18n
+  MSG = ::T.let(nil, ::T.untyped)
+  PREFERRED_METHODS = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Rails::SquishedSQLHeredocs
+  MSG = ::T.let(nil, ::T.untyped)
+  SQL = ::T.let(nil, ::T.untyped)
+  SQUISH = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Rails::WhereExists
+  MSG = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Rails::WhereNot
+  IS_NOT_NULL_RE = ::T.let(nil, ::T.untyped)
+  MSG = ::T.let(nil, ::T.untyped)
+  NOT_EQ_ANONYMOUS_RE = ::T.let(nil, ::T.untyped)
+  NOT_EQ_NAMED_RE = ::T.let(nil, ::T.untyped)
+  NOT_IN_ANONYMOUS_RE = ::T.let(nil, ::T.untyped)
+  NOT_IN_NAMED_RE = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Sorbet::CallbackConditionalsBinding
+  CALLBACKS = ::T.let(nil, ::T.untyped)
 end
 
 class RuboCop::Cop::Sorbet::EnforceSigilOrder
@@ -23108,8 +23436,17 @@ class RuboCop::Cop::Sorbet::EnforceSigilOrder
   PREFERRED_ORDER = ::T.let(nil, ::T.untyped)
 end
 
+class RuboCop::Cop::Sorbet::ForbidExtendTSigHelpersInShims
+  MSG = ::T.let(nil, ::T.untyped)
+  RESTRICT_ON_SEND = ::T.let(nil, ::T.untyped)
+end
+
 class RuboCop::Cop::Sorbet::ForbidIncludeConstLiteral
   MSG = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Sorbet::ForbidRBIOutsideOfSorbetDir
+  PATH_REGEXP = ::T.let(nil, ::T.untyped)
 end
 
 class RuboCop::Cop::Sorbet::ForbidSuperclassConstLiteral
@@ -23120,8 +23457,16 @@ class RuboCop::Cop::Sorbet::ForbidUntypedStructProps
   MSG = ::T.let(nil, ::T.untyped)
 end
 
+class RuboCop::Cop::Sorbet::OneAncestorPerLine
+  MSG = ::T.let(nil, ::T.untyped)
+end
+
 class RuboCop::Cop::Sorbet::SignatureBuildOrder
   ORDER = ::T.let(nil, ::T.untyped)
+end
+
+class RuboCop::Cop::Sorbet::SingleLineRbiClassModuleDefinitions
+  MSG = ::T.let(nil, ::T.untyped)
 end
 
 class RuboCop::Cop::Sorbet::ValidSigil
@@ -23155,7 +23500,29 @@ class RuboCop::Cop::Style::RedundantSelf
   KEYWORDS = ::T.let(nil, ::T.untyped)
 end
 
-RuboCop::NodePattern = RuboCop::AST::NodePattern
+class RuboCop::AST::NodePattern
+end
+
+RuboCop::NodePattern::Builder = RuboCop::AST::NodePattern::Builder
+
+class RuboCop::AST::NodePattern::Compiler
+end
+
+RuboCop::NodePattern::Compiler::Debug = RuboCop::AST::NodePattern::Compiler::Debug
+
+class RuboCop::AST::NodePattern::Compiler
+end
+
+class RuboCop::AST::NodePattern::Lexer
+end
+
+RuboCop::NodePattern::Lexer::Error = RuboCop::AST::NodePattern::LexerRex::ScanError
+
+class RuboCop::AST::NodePattern::Lexer
+end
+
+class RuboCop::AST::NodePattern
+end
 
 RuboCop::ProcessedSource = RuboCop::AST::ProcessedSource
 
@@ -23168,6 +23535,10 @@ RuboCop::Token = RuboCop::AST::Token
 
 class RubyVM::AbstractSyntaxTree::Node
   def pretty_print_children(q, names=T.unsafe(nil)); end
+end
+
+class RubyVM::DebugInspector
+  VERSION = ::T.let(nil, ::T.untyped)
 end
 
 class RubyVM::InstructionSequence
@@ -23187,68 +23558,6 @@ end
 
 class RubyVM
   def self.resolve_feature_path(_); end
-end
-
-module SafeYAML
-  DEFAULT_OPTIONS = ::T.let(nil, ::T.untyped)
-  MULTI_ARGUMENT_YAML_LOAD = ::T.let(nil, ::T.untyped)
-  OPTIONS = ::T.let(nil, ::T.untyped)
-  PREDEFINED_TAGS = ::T.let(nil, ::T.untyped)
-  YAML_ENGINE = ::T.let(nil, ::T.untyped)
-end
-
-class SafeYAML::LibyamlChecker
-  KNOWN_PATCHED_LIBYAML_VERSIONS = ::T.let(nil, ::T.untyped)
-  LIBYAML_VERSION = ::T.let(nil, ::T.untyped)
-  SAFE_LIBYAML_VERSION = ::T.let(nil, ::T.untyped)
-end
-
-class SafeYAML::Parse::Date
-  DATE_MATCHER = ::T.let(nil, ::T.untyped)
-  MICROSECONDS_PER_SECOND = ::T.let(nil, ::T.untyped)
-  SECONDS_PER_DAY = ::T.let(nil, ::T.untyped)
-  SEC_FRACTION_MULTIPLIER = ::T.let(nil, ::T.untyped)
-  TIME_MATCHER = ::T.let(nil, ::T.untyped)
-  TO_TIME_AVAILABLE = ::T.let(nil, ::T.untyped)
-end
-
-class SafeYAML::Parse::Hexadecimal
-  MATCHER = ::T.let(nil, ::T.untyped)
-end
-
-class SafeYAML::Parse::Sexagesimal
-  FLOAT_MATCHER = ::T.let(nil, ::T.untyped)
-  INTEGER_MATCHER = ::T.let(nil, ::T.untyped)
-end
-
-class SafeYAML::PsychResolver
-  NODE_TYPES = ::T.let(nil, ::T.untyped)
-end
-
-class SafeYAML::SafeToRubyVisitor
-  INITIALIZE_ARITY = ::T.let(nil, ::T.untyped)
-end
-
-class SafeYAML::Transform
-  TRANSFORMERS = ::T.let(nil, ::T.untyped)
-end
-
-class SafeYAML::Transform::ToBoolean
-  PREDEFINED_VALUES = ::T.let(nil, ::T.untyped)
-end
-
-class SafeYAML::Transform::ToFloat
-  Infinity = ::T.let(nil, ::T.untyped)
-  MATCHER = ::T.let(nil, ::T.untyped)
-  PREDEFINED_VALUES = ::T.let(nil, ::T.untyped)
-end
-
-class SafeYAML::Transform::ToInteger
-  MATCHERS = ::T.let(nil, ::T.untyped)
-end
-
-class SafeYAML::Transform::ToNil
-  PREDEFINED_VALUES = ::T.let(nil, ::T.untyped)
 end
 
 class Sanitize
@@ -23519,52 +23828,6 @@ module Sass::Util
   VLQ_BASE_MASK = ::T.let(nil, ::T.untyped)
   VLQ_BASE_SHIFT = ::T.let(nil, ::T.untyped)
   VLQ_CONTINUATION_BIT = ::T.let(nil, ::T.untyped)
-end
-
-module SassC
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-class SassC::Engine
-  OUTPUT_STYLES = ::T.let(nil, ::T.untyped)
-end
-
-module SassC::Native
-  SassInputStyle = ::T.let(nil, ::T.untyped)
-  SassOutputStyle = ::T.let(nil, ::T.untyped)
-  SassSeparator = ::T.let(nil, ::T.untyped)
-  SassTag = ::T.let(nil, ::T.untyped)
-end
-
-module SassC::Rails
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-class SassC::Rails::Importer
-  EXTENSIONS = ::T.let(nil, ::T.untyped)
-  GLOB = ::T.let(nil, ::T.untyped)
-  PREFIXS = ::T.let(nil, ::T.untyped)
-end
-
-class SassC::Script::Value::Bool
-  FALSE = ::T.let(nil, ::T.untyped)
-  TRUE = ::T.let(nil, ::T.untyped)
-end
-
-class SassC::Script::Value::Number
-  CONVERSION_TABLE = ::T.let(nil, ::T.untyped)
-  MUTUALLY_CONVERTIBLE = ::T.let(nil, ::T.untyped)
-  NO_UNITS = ::T.let(nil, ::T.untyped)
-  OPERATIONS = ::T.let(nil, ::T.untyped)
-end
-
-module SassC::Script::ValueConversion
-  SEPARATORS = ::T.let(nil, ::T.untyped)
-end
-
-module SassC::Util
-  RUBY_ENGINE = ::T.let(nil, ::T.untyped)
-  RUBY_VERSION_COMPONENTS = ::T.let(nil, ::T.untyped)
 end
 
 module Sawyer
@@ -24070,7 +24333,6 @@ class SiteSettingForm
   extend ::Virtus::ClassMethods
   extend ::Virtus::Extensions::Methods
   extend ::Virtus::ConstMissingExtensions
-  extend ::Virtus::Extensions::AllowedWriterMethods
   extend ::T::Private::Methods::MethodHooks
   extend ::T::Private::Methods::SingletonMethodHooks
   def self.__callbacks(); end
@@ -24359,6 +24621,16 @@ class Sprockets::SassCompressor
 end
 
 Sprockets::SassFunctions = Sprockets::SassProcessor::Functions
+
+class Sprockets::SassProcessor::CacheStore
+  def initialize(cache, version); end
+
+  def path_to(key); end
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+class Sprockets::SassProcessor::CacheStore
+end
 
 class Sprockets::SassTemplate
 end
@@ -25264,6 +25536,7 @@ class Thin::Headers
 
   def has_key?(key); end
   ALLOWED_DUPLICATES = ::T.let(nil, ::T.untyped)
+  CR_OR_LF = ::T.let(nil, ::T.untyped)
   HEADER_FORMAT = ::T.let(nil, ::T.untyped)
 end
 
@@ -25826,7 +26099,7 @@ class Tilt::SassTemplate
   def allows_script?(); end
 end
 
-Tilt::SassTemplate::Sass = SassC
+Tilt::SassTemplate::Sass = Sass
 
 class Tilt::SassTemplate
 end
@@ -26013,6 +26286,9 @@ class Typhoeus::Hydra
   include ::NewRelic::Agent::Instrumentation::Typhoeus
 end
 
+class Typhoeus::Response::Header
+end
+
 module UNF
   VERSION = ::T.let(nil, ::T.untyped)
 end
@@ -26163,6 +26439,7 @@ end
 
 class User
   include ::Devise::Models::Authenticatable
+  include ::ActiveSupport::Deprecation::DeprecatedConstantAccessor
   include ::Devise::Models::DatabaseAuthenticatable
   include ::Devise::Models::Rememberable
   include ::Devise::Models::Recoverable
@@ -26409,6 +26686,9 @@ class VCR::Errors::UnhandledHTTPRequestError
   ALL_SUGGESTIONS = ::T.let(nil, ::T.untyped)
 end
 
+class VCR::HTTPInteraction::HookAware
+end
+
 module VCR::InternetConnection
   def available?(); end
   EXAMPLE_HOST = ::T.let(nil, ::T.untyped)
@@ -26457,6 +26737,12 @@ end
 
 module VCR::RSpec::Metadata
   extend ::VCR::RSpec::Metadata
+end
+
+class VCR::Request::FiberAware
+end
+
+class VCR::Request::Typed
 end
 
 class VCR::RequestHandler
@@ -26542,11 +26828,6 @@ module Virtus::Extensions
   WRITER_METHOD_REGEXP = ::T.let(nil, ::T.untyped)
 end
 
-module Virtus::Extensions::AllowedWriterMethods
-  INVALID_WRITER_METHODS = ::T.let(nil, ::T.untyped)
-  WRITER_METHOD_REGEXP = ::T.let(nil, ::T.untyped)
-end
-
 module Virtus::TypeLookup
   TYPE_FORMAT = ::T.let(nil, ::T.untyped)
 end
@@ -26610,6 +26891,10 @@ end
 
 module Warning
   extend ::Warning
+end
+
+class WeakRef
+  def initialize(orig); end
 end
 
 module WebMock
@@ -27093,6 +27378,9 @@ end
 
 module Zip::NullInputStream
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
+end
+
+class Zip::StreamableStream
 end
 
 Zip::ZipCompressionMethodError = Zip::CompressionMethodError

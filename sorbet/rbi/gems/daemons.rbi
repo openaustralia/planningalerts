@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/daemons/all/daemons.rbi
 #
-# daemons-1.3.1
+# daemons-1.4.1
 
 module Daemons
   def call(options = nil, &block); end
@@ -122,14 +122,13 @@ class Daemons::Reporter
   def cannot_stop_process(app_name, pid); end
   def changing_process_privilege(user, group = nil); end
   def deleted_found_pidfile(pid, f); end
-  def forcefully_stopping_process(app_name, pid); end
   def initialize(options); end
   def options; end
   def output_message(message); end
   def process_started(app_name, pid); end
   def status(app_name, running, pid_exists, pid); end
   def stopped_process(app_name, pid); end
-  def stopping_process(app_name, pid); end
+  def stopping_process(app_name, pid, sig, wait); end
 end
 class Daemons::Application
   def app_argv; end
@@ -151,6 +150,7 @@ class Daemons::Application
   def options; end
   def output_logfile; end
   def output_logfilename; end
+  def parse_signals_and_waits(argv); end
   def pid; end
   def pidfile_dir; end
   def reload; end
@@ -165,6 +165,7 @@ class Daemons::Application
   def start_proc; end
   def started; end
   def stop(no_wait = nil); end
+  def wait_and_retry_kill_harder(pid, remaining_signals, no_wait = nil); end
   def zap!; end
   def zap; end
 end

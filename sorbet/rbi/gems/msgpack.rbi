@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/msgpack/all/msgpack.rbi
 #
-# msgpack-1.3.3
+# msgpack-1.4.2
 
 module MessagePack
   def dump(v, *rest); end
@@ -81,6 +81,7 @@ class MessagePack::Unpacker
   def feed(arg0); end
   def feed_each(arg0); end
   def feed_reference(arg0); end
+  def freeze?; end
   def full_unpack; end
   def initialize(*arg0); end
   def read; end

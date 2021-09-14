@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/http-cookie/all/http-cookie.rbi
 #
-# http-cookie-1.0.3
+# http-cookie-1.0.4
 
 module HTTP
 end

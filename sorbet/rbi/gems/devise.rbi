@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/devise/all/devise.rbi
 #
-# devise-4.7.2
+# devise-4.8.0
 
 module Devise
   def allow_unconfirmed_access_for; end
@@ -348,6 +348,7 @@ module Devise::Models::Authenticatable
   def unauthenticated_message; end
   def valid_for_authentication?; end
   extend ActiveSupport::Concern
+  include ActiveSupport::Deprecation::DeprecatedConstantAccessor
 end
 module Devise::Models::Authenticatable::ClassMethods
   def authentication_keys; end

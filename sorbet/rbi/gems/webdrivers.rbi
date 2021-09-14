@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/webdrivers/all/webdrivers.rbi
 #
-# webdrivers-4.4.1
+# webdrivers-4.6.1
 
 module Webdrivers
   def self.cache_time; end
@@ -55,6 +55,7 @@ class Webdrivers::Network
   def self.using_proxy; end
 end
 class Webdrivers::System
+  def self.apple_m1_architecture?; end
   def self.bitsize; end
   def self.cache_version(file_name, version); end
   def self.cached_version(file_name); end
@@ -72,7 +73,7 @@ class Webdrivers::System
   def self.untargz_file(source, target); end
   def self.unzip_file(filename, driver_name); end
   def self.valid_cache?(file_name); end
-  def self.wsl?; end
+  def self.wsl_v1?; end
 end
 class Webdrivers::ConnectionError < StandardError
 end
@@ -110,6 +111,7 @@ class Webdrivers::ChromeFinder
   def self.wsl_version(location); end
 end
 class Webdrivers::Chromedriver < Webdrivers::Common
+  def self.apple_m1_compatible?(driver_version); end
   def self.base_url; end
   def self.browser_build_version; end
   def self.browser_version; end
@@ -118,6 +120,7 @@ class Webdrivers::Chromedriver < Webdrivers::Common
   def self.current_build_version; end
   def self.current_version; end
   def self.download_url; end
+  def self.driver_filename(driver_version); end
   def self.file_name; end
   def self.latest_point_release(version); end
   def self.latest_version; end
@@ -144,17 +147,19 @@ class Webdrivers::EdgeFinder
   def self.win_version(location); end
 end
 class Webdrivers::Edgedriver < Webdrivers::Chromedriver
+  def self.apple_m1_compatible?(driver_version); end
   def self.base_url; end
   def self.browser_version; end
   def self.download_url; end
+  def self.driver_filename(driver_version); end
   def self.failed_to_find_message(version); end
   def self.file_name; end
   def self.latest_point_release(version); end
-  def self.remove; end
 end
 class Webdrivers::IEdriver < Webdrivers::Common
   def self.base_url; end
   def self.current_version; end
+  def self.download_manifest; end
   def self.downloads; end
   def self.file_name; end
   def self.latest_version; end

@@ -5,14 +5,16 @@
 #
 # If you would like to make changes to this file, great! Please create the gem's shim here:
 #
-#   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/libv8-7.3.492.27.1-x86_64/all/libv8-7.3.492.27.1-x86_64.rbi
+#   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/libv8-node-15.14.0.1-x86_64/all/libv8-node-15.14.0.1-x86_64.rbi
 #
-# libv8-7.3.492.27.1-x86_64-linux
+# libv8-node-15.14.0.1-x86_64-linux
 
 module Libv8
+end
+module Libv8::Node
   def self.configure_makefile; end
 end
-module Libv8::Paths
+module Libv8::Node::Paths
   def config; end
   def include_paths; end
   def object_paths; end
@@ -22,27 +24,21 @@ module Libv8::Paths
   def self.vendored_source_path; end
   def vendored_source_path; end
 end
-class Libv8::Location
+class Libv8::Node::Location
   def install!; end
   def self.load!; end
 end
-class Libv8::Location::Vendor < Libv8::Location
+class Libv8::Node::Location::Vendor < Libv8::Node::Location
   def configure(context = nil); end
   def install!; end
   def verify_installation!; end
 end
-class Libv8::Location::Vendor::HeaderNotFound < StandardError
+class Libv8::Node::Location::Vendor::HeaderNotFound < StandardError
 end
-class Libv8::Location::Vendor::ArchiveNotFound < StandardError
+class Libv8::Node::Location::Vendor::ArchiveNotFound < StandardError
   def initialize(filename); end
 end
-class Libv8::Location::System < Libv8::Location
-  def configure(context = nil); end
-end
-class Libv8::Location::System::NotFoundError < StandardError
-  def initialize(*args); end
-end
-class Libv8::Location::MkmfContext
+class Libv8::Node::Location::MkmfContext
   def incflags; end
   def ldflags; end
 end

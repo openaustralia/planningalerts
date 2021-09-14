@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/diff-lcs/all/diff-lcs.rbi
 #
-# diff-lcs-1.4.1
+# diff-lcs-1.4.4
 
 class Diff::LCS::Change
   def <=>(other); end
@@ -115,10 +115,10 @@ class Diff::LCS::Block
 end
 class Diff::LCS::Hunk
   def blocks; end
-  def context_diff; end
-  def context_range(mode, op = nil); end
-  def diff(format); end
-  def ed_diff(format); end
+  def context_diff(last = nil); end
+  def context_range(mode, op, last = nil); end
+  def diff(format, last = nil); end
+  def ed_diff(format, _last = nil); end
   def encode(literal, target_encoding = nil); end
   def encode_as(string, *args); end
   def end_new; end
@@ -128,11 +128,12 @@ class Diff::LCS::Hunk
   def flag_context=(context); end
   def initialize(data_old, data_new, piece, flag_context, file_length_difference); end
   def merge(hunk); end
-  def old_diff; end
+  def missing_last_newline?(data); end
+  def old_diff(_last = nil); end
   def overlaps?(hunk); end
   def start_new; end
   def start_old; end
-  def unified_diff; end
-  def unified_range(mode); end
+  def unified_diff(last = nil); end
+  def unified_range(mode, last); end
   def unshift(hunk); end
 end

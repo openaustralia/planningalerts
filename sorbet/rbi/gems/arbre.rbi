@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/arbre/all/arbre.rbi
 #
-# arbre-1.2.1
+# arbre-1.4.0
 
 module Arbre
 end

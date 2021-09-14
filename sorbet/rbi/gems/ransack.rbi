@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/ransack/all/ransack.rbi
 #
-# ransack-2.3.2
+# ransack-2.4.2
 
 module Ransack
   extend Ransack::Configuration
@@ -46,6 +46,7 @@ module Ransack::Configuration
   def ignore_unknown_conditions=(boolean); end
   def options; end
   def options=(obj); end
+  def postgres_fields_sort_option=(setting); end
   def predicates; end
   def predicates=(obj); end
   def sanitize_custom_scope_booleans=(boolean); end
@@ -80,6 +81,50 @@ class Ransack::Adapters::MongoidAdapter
   def require_context; end
   def require_nodes; end
   def require_search; end
+end
+module Polyamorous
+end
+module Polyamorous::TreeNode
+  def add_to_tree(hash); end
+end
+class Polyamorous::Join
+  def ==(other); end
+  def add_to_tree(hash); end
+  def convert_to_arel_join_type(type); end
+  def convert_to_class(value); end
+  def eql?(other); end
+  def hash; end
+  def initialize(name, type = nil, klass = nil); end
+  def klass; end
+  def klass=(klass); end
+  def name; end
+  def name=(arg0); end
+  def type; end
+  def type=(type); end
+  include Polyamorous::TreeNode
+end
+module Polyamorous::SwappingReflectionClass
+  def swapping_reflection_klass(reflection, klass); end
+end
+module Polyamorous::JoinAssociationExtensions
+  def ==(other); end
+  def initialize(reflection, children, polymorphic_class = nil, join_type = nil); end
+  def self.prepended(base); end
+  include Polyamorous::SwappingReflectionClass
+end
+module Polyamorous::JoinDependencyExtensions
+  def build(associations, base_klass); end
+  def join_constraints(joins_to_add, join_type, alias_tracker); end
+  def make_constraints(parent, child, join_type = nil); end
+end
+module Polyamorous::JoinDependencyExtensions::ClassMethods
+  def walk_tree(associations, hash); end
+end
+module Polyamorous::ReflectionExtensions
+  def join_scope(table, foreign_table, foreign_klass); end
+end
+class ActiveRecord::Associations::JoinDependency::JoinAssociation < ActiveRecord::Associations::JoinDependency::JoinPart
+  def join_type; end
 end
 module Ransack::Nodes
 end
@@ -383,6 +428,7 @@ end
 module Ransack::Adapters::ActiveRecord
 end
 module Ransack::Adapters::ActiveRecord::Base
+  def ransack!(params = nil, options = nil); end
   def ransack(params = nil, options = nil); end
   def ransack_alias(new_name, old_name); end
   def ransackable_associations(auth_object = nil); end

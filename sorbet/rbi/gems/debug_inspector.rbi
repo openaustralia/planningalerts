@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/debug_inspector/all/debug_inspector.rbi
 #
-# debug_inspector-0.0.3
+# debug_inspector-1.1.0
 
 class RubyVM::DebugInspector
   def backtrace_locations; end

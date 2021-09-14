@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/haml/all/haml.rbi
 #
-# haml-5.1.2
+# haml-5.2.2
 
 module Haml
   def self.init_rails(*args); end
@@ -30,6 +30,7 @@ module Haml::Util
 end
 class Haml::Parser
   def balance(*args); end
+  def balance_tokens(buf, start, finish, count: nil); end
   def block_keyword(text); end
   def block_opened?; end
   def call(template); end
@@ -126,6 +127,7 @@ class Haml::Parser::DynamicAttributes < Struct
   def to_literal; end
 end
 module Haml::AttributeBuilder
+  def self.build(class_id, obj_ref, is_html, attr_wrapper, escape_attrs, hyphenate_data_attrs, *attributes_hashes); end
   def self.build_attributes(is_html, attr_wrapper, escape_attrs, hyphenate_data_attrs, attributes = nil); end
   def self.build_data_keys(data_hash, hyphenate, attr_name = nil); end
   def self.filter_and_join(value, separator); end
@@ -133,6 +135,8 @@ module Haml::AttributeBuilder
   def self.merge_attributes!(to, from); end
   def self.merge_value(key, to, from); end
   def self.merge_values(key, *values); end
+  def self.parse_object_ref(ref); end
+  def self.underscore(camel_cased_word); end
   def self.verify_attribute_names!(attribute_names); end
 end
 module Haml::AttributeParser
@@ -150,19 +154,21 @@ end
 class Haml::AttributeParser::UnexpectedKeyError < StandardError
 end
 class Haml::AttributeCompiler
+  def attr_literal(attr); end
   def build_attribute_values(attributes, parsed_hashes); end
   def compile(attributes, object_ref, dynamic_attributes); end
   def compile_attribute(key, values); end
   def compile_attribute_values(values); end
   def compile_common_attribute(key, values); end
   def compile_id_or_class_attribute(id_or_class, values); end
+  def compile_runtime_build(attributes, object_ref, dynamic_attributes); end
   def frozen_string(str); end
   def group_values_for_sort(values); end
   def initialize(options); end
   def merged_value(key, values); end
   def runtime_build(values); end
-  def self.runtime_build(attributes, object_ref, dynamic_attributes); end
   def static_build(values); end
+  def to_literal(value); end
   def true_value(key); end
   def unique_name; end
 end
@@ -173,7 +179,6 @@ class Haml::AttributeCompiler::AttributeValue < Struct
   def self.inspect; end
   def self.members; end
   def self.new(*arg0); end
-  def to_literal; end
   def type; end
   def type=(_); end
   def value; end
@@ -331,7 +336,6 @@ class Haml::Buffer
   def active=(arg0); end
   def active?; end
   def adjust_tabs(tab_change); end
-  def attributes(class_id, obj_ref, *attributes_hashes); end
   def buffer; end
   def buffer=(arg0); end
   def capture_position; end
@@ -344,14 +348,12 @@ class Haml::Buffer
   def new_encoded_string; end
   def options; end
   def options=(arg0); end
-  def parse_object_ref(ref); end
   def push_text(text, tab_change, dont_tab_up); end
   def rstrip!; end
   def tabs(count = nil); end
   def tabulation; end
   def tabulation=(val); end
   def toplevel?; end
-  def underscore(camel_cased_word); end
   def upper; end
   def upper=(arg0); end
   def xhtml?; end
@@ -474,10 +476,22 @@ end
 class Haml::InvalidAttributeNameError < Haml::SyntaxError
 end
 class Haml::Escapable < Temple::Filter
+  def escape(value); end
+  def escape_code(value); end
+  def escape_once(value); end
+  def escape_once_code(value); end
   def initialize(*arg0); end
   def on_dynamic(value); end
   def on_escape(flag, exp); end
   def on_static(value); end
+end
+class Haml::Escapable::EscapeSafeBuffer < Struct
+  def self.[](*arg0); end
+  def self.inspect; end
+  def self.members; end
+  def self.new(*arg0); end
+  def value; end
+  def value=(_); end
 end
 class Haml::Generator
   def call(exp); end
@@ -501,7 +515,7 @@ class Haml::TempleEngine < Temple::Engine
   def precompiled_method_return_value; end
   def precompiled_method_return_value_with_haml_xss; end
   def precompiled_method_return_value_without_haml_xss; end
-  def precompiled_with_ambles(local_names, after_preamble: nil); end
+  def precompiled_with_ambles(local_names, after_preamble: nil, before_postamble: nil); end
   def precompiled_with_return_value; end
 end
 class Haml::Engine
@@ -614,6 +628,8 @@ class Haml::Plugin
   def cache_fragment(block, name = nil, options = nil); end
   def compile(template, source); end
   def handles_encoding?; end
+  def self.annotate_rendered_view_with_filenames; end
+  def self.annotate_rendered_view_with_filenames=(arg0); end
   def self.call(template, source = nil); end
 end
 class Haml::ErubiTemplateHandler < ActionView::Template::Handlers::ERB::Erubi

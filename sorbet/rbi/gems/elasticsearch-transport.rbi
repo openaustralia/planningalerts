@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/elasticsearch-transport/all/elasticsearch-transport.rbi
 #
-# elasticsearch-transport-7.8.0
+# elasticsearch-transport-7.14.1
 
 module Elasticsearch
 end
@@ -37,6 +37,7 @@ class Elasticsearch::Transport::Transport::Sniffer
   def initialize(transport); end
   def parse_address_port(publish_address); end
   def parse_publish_address(publish_address); end
+  def perform_sniff_request; end
   def timeout; end
   def timeout=(arg0); end
   def transport; end
@@ -113,6 +114,8 @@ class Elasticsearch::Transport::Transport::Errors::TooManyConnectionsFromThisIP 
 end
 class Elasticsearch::Transport::Transport::Errors::UpgradeRequired < Elasticsearch::Transport::Transport::ServerError
 end
+class Elasticsearch::Transport::Transport::Errors::TooManyRequests < Elasticsearch::Transport::Transport::ServerError
+end
 class Elasticsearch::Transport::Transport::Errors::BlockedByWindowsParentalControls < Elasticsearch::Transport::Transport::ServerError
 end
 class Elasticsearch::Transport::Transport::Errors::RequestHeaderTooLarge < Elasticsearch::Transport::Transport::ServerError
@@ -148,6 +151,7 @@ module Elasticsearch::Transport::Transport::Base
   def __rebuild_connections(arguments = nil); end
   def __trace(method, path, params, headers, body, url, response, json, took, duration); end
   def apply_headers(client, options); end
+  def connection_headers(connection); end
   def connections; end
   def counter; end
   def decompress_response(body); end
@@ -244,17 +248,30 @@ class Elasticsearch::Transport::Transport::HTTP::Faraday
   def user_agent_header(client); end
   include Elasticsearch::Transport::Transport::Base
 end
+module Elasticsearch::Transport::MetaHeader
+  def called_from?(service); end
+  def client_meta_version(version); end
+  def elasticsearch?; end
+  def enterprise_search?; end
+  def meta_header_adapter; end
+  def meta_header_engine; end
+  def meta_header_service_version; end
+  def set_meta_header; end
+end
 class Elasticsearch::Transport::Client
   def __auto_detect_adapter; end
   def __encode(api_key); end
   def __extract_hosts(hosts_config); end
   def __parse_host(host); end
+  def add_header(header); end
   def extract_cloud_creds(arguments); end
   def initialize(arguments = nil, &block); end
   def perform_request(method, path, params = nil, body = nil, headers = nil); end
   def set_api_key; end
+  def set_compatibility_header; end
   def transport; end
   def transport=(arg0); end
+  include Elasticsearch::Transport::MetaHeader
 end
 class Elasticsearch::Transport::Redacted < Hash
   def initialize(elements = nil); end
@@ -262,8 +279,4 @@ class Elasticsearch::Transport::Redacted < Hash
   def redact(k, v, method); end
   def redacted_string(method); end
   def to_s; end
-end
-module Elasticsearch::Client
-  def new(arguments = nil, &block); end
-  extend Elasticsearch::Client
 end

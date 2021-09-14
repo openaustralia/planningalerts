@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/rubyzip/all/rubyzip.rbi
 #
-# rubyzip-2.3.0
+# rubyzip-2.3.2
 
 module Zip
   def case_insensitive_match; end
@@ -518,7 +518,7 @@ class Zip::Deflater < Zip::Compressor
   def initialize(output_stream, level = nil, encrypter = nil); end
   def size; end
 end
-class Zip::StreamableStream < Anonymous_Delegator_85
+class Zip::StreamableStream < Anonymous_Delegator_87
   def clean_up; end
   def get_input_stream; end
   def get_output_stream; end

@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/formtastic_i18n/all/formtastic_i18n.rbi
 #
-# formtastic_i18n-0.6.0
+# formtastic_i18n-0.7.0
 
 module FormtasticI18n
 end

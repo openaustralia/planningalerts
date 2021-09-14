@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/atdis/all/atdis.rbi
 #
-# atdis-0.4.1
+# atdis-0.5.0
 
 module Atdis
 end
@@ -45,7 +45,8 @@ class ATDIS::Feed
   def applications(options = nil); end
   def applications_url(options = nil); end
   def base_url; end
-  def initialize(base_url, timezone); end
+  def ignore_ssl_certificate; end
+  def initialize(base_url, timezone, ignore_ssl_certificate = nil); end
   def self.base_url_from_url(url); end
   def self.escape(value); end
   def self.options_from_url(url); end
@@ -135,7 +136,8 @@ class ATDIS::Model
   def self.interpret(data, timezone); end
   def self.partition_by_used(data); end
   def self.read_json(text, timezone); end
-  def self.read_url(url, timezone); end
+  def self.read_url(url, timezone, ignore_ssl_certificate = nil); end
+  def self.read_url_raw(url, ignore_ssl_certificate = nil); end
   def timezone; end
   def url; end
   def url=(arg0); end

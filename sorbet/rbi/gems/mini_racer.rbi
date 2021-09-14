@@ -7,9 +7,12 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/mini_racer/all/mini_racer.rbi
 #
-# mini_racer-0.2.14
+# mini_racer-0.4.0
 
 module MiniRacer
+end
+module MiniRacer::Loader
+  def self.load(arg0); end
 end
 class MiniRacer::Context
   def assert_numeric_or_nil(option_name, object, min_value:); end
@@ -53,6 +56,7 @@ class MiniRacer::Isolate
   def init_with_snapshot(arg0); end
   def initialize(snapshot = nil); end
   def low_memory_notification; end
+  def pump_message_loop; end
 end
 class MiniRacer::Platform
   def self.flag_to_string(flag); end

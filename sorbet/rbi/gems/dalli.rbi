@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/dalli/all/dalli.rbi
 #
-# dalli-2.7.10
+# dalli-2.7.11
 
 module Dalli
   def self.default_logger; end
@@ -209,7 +209,7 @@ class Dalli::MarshalError < Dalli::DalliError
 end
 class Dalli::UnmarshalError < Dalli::DalliError
 end
-class Dalli::ValueOverMaxSize < RuntimeError
+class Dalli::ValueOverMaxSize < Dalli::DalliError
 end
 module Rack
 end

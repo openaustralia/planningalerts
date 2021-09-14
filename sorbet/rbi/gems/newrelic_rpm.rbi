@@ -114,7 +114,7 @@ class NewRelic::Control
 end
 module NewRelic::Control::Frameworks
 end
-class Anonymous_Struct_70 < Struct
+class Anonymous_Struct_72 < Struct
   def name; end
   def name=(_); end
   def port; end
@@ -124,7 +124,7 @@ class Anonymous_Struct_70 < Struct
   def self.members; end
   def self.new(*arg0); end
 end
-class NewRelic::Control::Server < Anonymous_Struct_70
+class NewRelic::Control::Server < Anonymous_Struct_72
   def to_s; end
 end
 module NewRelic::Control::ServerMethods

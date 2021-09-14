@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/crack/all/crack.rbi
 #
-# crack-0.4.3
+# crack-0.4.5
 
 module Crack
 end

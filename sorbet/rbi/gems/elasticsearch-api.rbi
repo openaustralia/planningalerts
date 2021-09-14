@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/elasticsearch-api/all/elasticsearch-api.rbi
 #
-# elasticsearch-api-7.8.0
+# elasticsearch-api-7.14.1
 
 module Elasticsearch
 end
@@ -46,6 +46,7 @@ module Elasticsearch::API::Actions
   def benchmark(arguments = nil); end
   def bulk(arguments = nil); end
   def clear_scroll(arguments = nil); end
+  def close_point_in_time(arguments = nil); end
   def count(arguments = nil); end
   def create(arguments = nil); end
   def delete(arguments = nil); end
@@ -69,6 +70,7 @@ module Elasticsearch::API::Actions
   def msearch(arguments = nil); end
   def msearch_template(arguments = nil); end
   def mtermvectors(arguments = nil); end
+  def open_point_in_time(arguments = nil); end
   def ping(arguments = nil); end
   def put_script(arguments = nil); end
   def rank_eval(arguments = nil); end
@@ -91,19 +93,31 @@ module Elasticsearch::API::Actions::ParamsRegistry
   def register(action, valid_params); end
   extend Elasticsearch::API::Actions::ParamsRegistry
 end
+module Elasticsearch::API::Shutdown
+  def shutdown; end
+end
+module Elasticsearch::API::Shutdown::Actions
+  def delete_node(arguments = nil); end
+  def get_node(arguments = nil); end
+  def put_node(arguments = nil); end
+end
+module Elasticsearch::API::Shutdown::Actions::ParamsRegistry
+  def get(action); end
+  def register(action, valid_params); end
+  extend Elasticsearch::API::Shutdown::Actions::ParamsRegistry
+end
 module Elasticsearch::API::Indices
   def indices; end
 end
 module Elasticsearch::API::Indices::Actions
+  def add_block(arguments = nil); end
   def analyze(arguments = nil); end
   def clear_cache(arguments = nil); end
   def clone(arguments = nil); end
   def close(arguments = nil); end
   def create(arguments = nil); end
-  def create_data_stream(arguments = nil); end
   def delete(arguments = nil); end
   def delete_alias(arguments = nil); end
-  def delete_data_stream(arguments = nil); end
   def delete_index_template(arguments = nil); end
   def delete_template(arguments = nil); end
   def exists(arguments = nil); end
@@ -119,10 +133,8 @@ module Elasticsearch::API::Indices::Actions
   def flush(arguments = nil); end
   def flush_synced(arguments = nil); end
   def forcemerge(arguments = nil); end
-  def freeze(arguments = nil); end
   def get(arguments = nil); end
   def get_alias(arguments = nil); end
-  def get_data_streams(arguments = nil); end
   def get_field_mapping(arguments = nil); end
   def get_index_template(arguments = nil); end
   def get_mapping(arguments = nil); end
@@ -137,14 +149,15 @@ module Elasticsearch::API::Indices::Actions
   def put_template(arguments = nil); end
   def recovery(arguments = nil); end
   def refresh(arguments = nil); end
+  def resolve_index(arguments = nil); end
   def rollover(arguments = nil); end
   def segments(arguments = nil); end
   def shard_stores(arguments = nil); end
   def shrink(arguments = nil); end
   def simulate_index_template(arguments = nil); end
+  def simulate_template(arguments = nil); end
   def split(arguments = nil); end
   def stats(arguments = nil); end
-  def unfreeze(arguments = nil); end
   def update_aliases(arguments = nil); end
   def upgrade(arguments = nil); end
   def validate_query(arguments = nil); end
@@ -169,6 +182,31 @@ module Elasticsearch::API::Nodes::Actions::ParamsRegistry
   def get(action); end
   def register(action, valid_params); end
   extend Elasticsearch::API::Nodes::Actions::ParamsRegistry
+end
+module Elasticsearch::API::Features
+  def features; end
+end
+module Elasticsearch::API::Features::Actions
+  def get_features(arguments = nil); end
+  def reset_features(arguments = nil); end
+end
+module Elasticsearch::API::Features::Actions::ParamsRegistry
+  def get(action); end
+  def register(action, valid_params); end
+  extend Elasticsearch::API::Features::Actions::ParamsRegistry
+end
+module Elasticsearch::API::DanglingIndices
+  def dangling_indices; end
+end
+module Elasticsearch::API::DanglingIndices::Actions
+  def delete_dangling_index(arguments = nil); end
+  def import_dangling_index(arguments = nil); end
+  def list_dangling_indices(arguments = nil); end
+end
+module Elasticsearch::API::DanglingIndices::Actions::ParamsRegistry
+  def get(action); end
+  def register(action, valid_params); end
+  extend Elasticsearch::API::DanglingIndices::Actions::ParamsRegistry
 end
 module Elasticsearch::API::Cluster
   def cluster; end
@@ -201,6 +239,7 @@ module Elasticsearch::API::Ingest
 end
 module Elasticsearch::API::Ingest::Actions
   def delete_pipeline(arguments = nil); end
+  def geo_ip_stats(arguments = nil); end
   def get_pipeline(arguments = nil); end
   def processor_grok(arguments = nil); end
   def put_pipeline(arguments = nil); end
@@ -216,12 +255,15 @@ module Elasticsearch::API::Snapshot
 end
 module Elasticsearch::API::Snapshot::Actions
   def cleanup_repository(arguments = nil); end
+  def clone(arguments = nil); end
   def create(arguments = nil); end
   def create_repository(arguments = nil); end
   def delete(arguments = nil); end
   def delete_repository(arguments = nil); end
   def get(arguments = nil); end
+  def get_features(arguments = nil); end
   def get_repository(arguments = nil); end
+  def repository_analyze(arguments = nil); end
   def restore(arguments = nil); end
   def status(arguments = nil); end
   def verify_repository(arguments = nil); end
@@ -286,7 +328,18 @@ end
 class Elasticsearch::API::Cluster::ClusterClient
   include Elasticsearch::API::Common::Client
 end
+class Elasticsearch::API::Features::FeaturesClient
+  include Elasticsearch::API::Common::Client
+end
 class Elasticsearch::API::Cat::CatClient
+  include Elasticsearch::API::Common::Client
+end
+module Elasticsearch::API::Security
+  def security; end
+end
+module Elasticsearch::API::Security::Actions
+end
+class Elasticsearch::API::Security::SecurityClient
   include Elasticsearch::API::Common::Client
 end
 class Elasticsearch::API::Snapshot::SnapshotClient
@@ -298,9 +351,15 @@ end
 class Elasticsearch::API::Nodes::NodesClient
   include Elasticsearch::API::Common::Client
 end
+class Elasticsearch::API::Shutdown::ShutdownClient
+  include Elasticsearch::API::Common::Client
+end
 class Elasticsearch::API::Ingest::IngestClient
   include Elasticsearch::API::Common::Client
 end
 class Elasticsearch::API::Tasks::TasksClient
+  include Elasticsearch::API::Common::Client
+end
+class Elasticsearch::API::DanglingIndices::DanglingIndicesClient
   include Elasticsearch::API::Common::Client
 end

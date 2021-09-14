@@ -1171,6 +1171,7 @@
 # wrong constant name included
 # wrong constant name <static-init>
 # wrong constant name <static-init>
+# wrong constant name hidden_fields?
 # wrong constant name searchable_method_name
 # wrong constant name <static-init>
 # wrong constant name <static-init>
@@ -3748,6 +3749,7 @@
 # wrong constant name scroll_by
 # wrong constant name scroll_to
 # wrong constant name select
+# wrong constant name send_keys
 # wrong constant name source
 # wrong constant name status_code
 # wrong constant name switch_to_frame
@@ -3839,9 +3841,11 @@
 # uninitialized constant Capybara::Node::Element::RESET_STYLE_SCRIPT
 # uninitialized constant Capybara::Node::Element::UPDATE_STYLE_SCRIPT
 # uninitialized constant Capybara::Queries::SelectorQuery::COUNT_KEYS
+# uninitialized constant Capybara::Selenium::Node::SCROLL_POSITIONS
 # uninitialized constant Capybara::Selenium::SafariNode::GET_XPATH_SCRIPT
 # uninitialized constant Capybara::Selenium::SafariNode::OBSCURED_OR_OFFSET_SCRIPT
 # uninitialized constant Capybara::Selenium::SafariNode::RAPID_APPEND_TEXT
+# uninitialized constant Capybara::Selenium::SafariNode::SCROLL_POSITIONS
 # uninitialized constant Chalk
 # uninitialized constant Chalk
 # uninitialized constant Class::ALLOWED_KEYS
@@ -4144,6 +4148,7 @@
 # wrong constant name lock_expired?
 # wrong constant name lock_strategy_enabled?
 # wrong constant name resend_unlock_instructions
+# wrong constant name reset_failed_attempts!
 # wrong constant name send_unlock_instructions
 # wrong constant name unauthenticated_message
 # wrong constant name unlock_access!
@@ -4406,17 +4411,17 @@
 # wrong constant name exists?
 # wrong constant name def_method
 # wrong constant name def_module
-# uninitialized constant Elasticsearch::Transport::Client::COMMON_PARAMS
-# uninitialized constant Elasticsearch::Transport::Client::COMMON_QUERY_PARAMS
-# uninitialized constant Elasticsearch::Transport::Client::DEFAULT_DOC
-# uninitialized constant Elasticsearch::Transport::Client::HTTP_DELETE
-# uninitialized constant Elasticsearch::Transport::Client::HTTP_GET
-# uninitialized constant Elasticsearch::Transport::Client::HTTP_HEAD
-# uninitialized constant Elasticsearch::Transport::Client::HTTP_POST
-# uninitialized constant Elasticsearch::Transport::Client::HTTP_PUT
-# uninitialized constant Elasticsearch::Transport::Client::UNDERSCORE_ALL
-# uninitialized constant Elasticsearch::Transport::Client::UNDERSCORE_SEARCH
-# uninitialized constant Elasticsearch::Transport::Client::VERSION
+# uninitialized constant Elasticsearch::Client::COMMON_PARAMS
+# uninitialized constant Elasticsearch::Client::COMMON_QUERY_PARAMS
+# uninitialized constant Elasticsearch::Client::DEFAULT_DOC
+# uninitialized constant Elasticsearch::Client::HTTP_DELETE
+# uninitialized constant Elasticsearch::Client::HTTP_GET
+# uninitialized constant Elasticsearch::Client::HTTP_HEAD
+# uninitialized constant Elasticsearch::Client::HTTP_POST
+# uninitialized constant Elasticsearch::Client::HTTP_PUT
+# uninitialized constant Elasticsearch::Client::UNDERSCORE_ALL
+# uninitialized constant Elasticsearch::Client::UNDERSCORE_SEARCH
+# uninitialized constant Elasticsearch::Client::VERSION
 # uninitialized constant EmailBatch::ACTIONS
 # uninitialized constant EmailBatch::BLACKLISTED_CLASS_METHODS
 # uninitialized constant EmailBatch::CALLBACKS
@@ -4705,86 +4710,18 @@
 # wrong constant name <static-init>
 # wrong constant name <static-init>
 # wrong constant name <static-init>
-# wrong constant name <Class:EMHttp>
-# wrong constant name <Class:EMSynchrony>
-# wrong constant name <Class:Excon>
-# wrong constant name <Class:HTTPClient>
-# wrong constant name <Class:NetHttpPersistent>
-# wrong constant name <Class:Patron>
-# wrong constant name <Class:Rack>
 # wrong constant name <Class:Test>
-# uninitialized constant Faraday::Adapter::EMHttp::CONTENT_LENGTH
-# wrong constant name <Class:Manager>
-# wrong constant name <Class:Options>
-# uninitialized constant Faraday::Adapter::EMHttp::TIMEOUT_KEYS
-# wrong constant name create_request
-# wrong constant name error_message
-# wrong constant name parallel?
-# wrong constant name perform_request
-# wrong constant name perform_single_request
-# wrong constant name raise_error
-# wrong constant name timeout_message?
-# wrong constant name add
-# wrong constant name check_finished
-# wrong constant name perform_request
-# wrong constant name reset
-# wrong constant name run
-# wrong constant name running?
-# wrong constant name <static-init>
-# wrong constant name configure_compression
-# wrong constant name configure_proxy
-# wrong constant name configure_socket
-# wrong constant name configure_ssl
-# wrong constant name configure_timeout
-# wrong constant name connection_config
-# wrong constant name read_body
-# wrong constant name request_config
-# wrong constant name request_options
-# wrong constant name <static-init>
-# wrong constant name <static-init>
-# wrong constant name setup_parallel_manager
-# uninitialized constant Faraday::Adapter::EMSynchrony::CONTENT_LENGTH
-# wrong constant name <Class:ParallelManager>
-# uninitialized constant Faraday::Adapter::EMSynchrony::TIMEOUT_KEYS
-# wrong constant name create_request
-# wrong constant name add
-# wrong constant name run
-# wrong constant name <static-init>
-# wrong constant name <static-init>
-# wrong constant name setup_parallel_manager
 # uninitialized constant Faraday::Adapter::Excon::CONTENT_LENGTH
 # uninitialized constant Faraday::Adapter::Excon::TIMEOUT_KEYS
-# wrong constant name build_connection
-# wrong constant name read_body
-# wrong constant name <static-init>
-# uninitialized constant Faraday::Adapter::HTTPClient::CONTENT_LENGTH
-# uninitialized constant Faraday::Adapter::HTTPClient::TIMEOUT_KEYS
-# wrong constant name build_connection
-# wrong constant name configure_client
-# wrong constant name configure_proxy
-# wrong constant name configure_socket
-# wrong constant name configure_ssl
-# wrong constant name configure_timeouts
-# wrong constant name ssl_cert_store
-# wrong constant name ssl_verify_mode
-# wrong constant name <static-init>
 # uninitialized constant Faraday::Adapter::NetHttp::CONTENT_LENGTH
 # uninitialized constant Faraday::Adapter::NetHttp::TIMEOUT_KEYS
 # uninitialized constant Faraday::Adapter::NetHttpPersistent::CONTENT_LENGTH
 # uninitialized constant Faraday::Adapter::NetHttpPersistent::NET_HTTP_EXCEPTIONS
 # uninitialized constant Faraday::Adapter::NetHttpPersistent::TIMEOUT_KEYS
-# wrong constant name <static-init>
 # uninitialized constant Faraday::Adapter::Patron::CONTENT_LENGTH
 # uninitialized constant Faraday::Adapter::Patron::TIMEOUT_KEYS
-# wrong constant name build_connection
-# wrong constant name configure_proxy
-# wrong constant name configure_ssl
-# wrong constant name configure_timeouts
-# wrong constant name <static-init>
 # uninitialized constant Faraday::Adapter::Rack::CONTENT_LENGTH
 # uninitialized constant Faraday::Adapter::Rack::TIMEOUT_KEYS
-# wrong constant name initialize
-# wrong constant name <static-init>
 # uninitialized constant Faraday::Adapter::Test::CONTENT_LENGTH
 # wrong constant name <Class:Stub>
 # wrong constant name <Class:Stubs>
@@ -4794,7 +4731,6 @@
 # wrong constant name stubs
 # wrong constant name stubs=
 # wrong constant name headers_match?
-# wrong constant name initialize
 # wrong constant name matches?
 # wrong constant name params_match?
 # wrong constant name path_match?
@@ -4804,6 +4740,7 @@
 # wrong constant name empty?
 # wrong constant name get
 # wrong constant name head
+# wrong constant name initialize
 # wrong constant name match
 # wrong constant name matches?
 # wrong constant name new_stub
@@ -4811,11 +4748,11 @@
 # wrong constant name patch
 # wrong constant name post
 # wrong constant name put
+# wrong constant name strict_mode=
 # wrong constant name verify_stubbed_calls
 # wrong constant name <static-init>
 # wrong constant name <static-init>
 # wrong constant name <static-init>
-# wrong constant name call
 # wrong constant name initialize
 # wrong constant name <static-init>
 # wrong constant name build_hash
@@ -4824,7 +4761,6 @@
 # wrong constant name <static-init>
 # wrong constant name header
 # wrong constant name <Class:Options>
-# wrong constant name call
 # wrong constant name initialize
 # wrong constant name <static-init>
 # wrong constant name <static-init>
@@ -4856,8 +4792,8 @@
 # wrong constant name current
 # uninitialized constant Fiddle
 # uninitialized constant Fiddle
-# wrong constant name atomic_write
 # wrong constant name exists?
+# wrong constant name probe_stat_in
 # uninitialized constant FileUtils::DryRun::LN_SUPPORTED
 # uninitialized constant FileUtils::DryRun::RUBY
 # uninitialized constant FileUtils::DryRun::VERSION
@@ -5024,7 +4960,7 @@
 # wrong constant name disabled_values
 # wrong constant name extra_html_options
 # wrong constant name hidden_field_for_all
-# wrong constant name hidden_fields?
+# wrong constant name hidden_fields_for_every?
 # wrong constant name initialize
 # wrong constant name make_selected_values
 # wrong constant name selected_values
@@ -6034,8 +5970,15 @@
 # uninitialized constant Integer::PETABYTE
 # uninitialized constant Integer::TERABYTE
 # wrong constant name to_bn
+# wrong constant name escape_slash
+# wrong constant name escape_slash=
+# wrong constant name escape_slash?
 # wrong constant name from_state
 # wrong constant name initialize
+# wrong constant name create_fast_state
+# wrong constant name create_pretty_state
+# wrong constant name load_file
+# wrong constant name load_file!
 # uninitialized constant Jacobian
 # uninitialized constant Jacobian
 # uninitialized constant Kconv
@@ -7931,6 +7874,7 @@
 # uninitialized constant Newton
 # uninitialized constant Newton
 # wrong constant name to_d
+# wrong constant name <Class:HTML>
 # uninitialized constant Nokogiri::CSS::Parser::Racc_Main_Parsing_Routine
 # uninitialized constant Nokogiri::CSS::Parser::Racc_Runtime_Core_Id_C
 # uninitialized constant Nokogiri::CSS::Parser::Racc_Runtime_Core_Version
@@ -7939,6 +7883,7 @@
 # uninitialized constant Nokogiri::CSS::Parser::Racc_Runtime_Type
 # uninitialized constant Nokogiri::CSS::Parser::Racc_Runtime_Version
 # uninitialized constant Nokogiri::CSS::Parser::Racc_YY_Parse_Method
+# wrong constant name <Class:ElementDescription>
 # wrong constant name <Class:Element>
 # uninitialized constant Nokogiri::XML::Document::ATTRIBUTE_DECL
 # uninitialized constant Nokogiri::XML::Document::ATTRIBUTE_NODE
@@ -8062,6 +8007,8 @@
 # uninitialized constant Octokit::Client::PREVIEW_TYPES
 # uninitialized constant Octokit::Client::STATUS_ROOT
 # wrong constant name <Class:CStack>
+# wrong constant name <Class:Cache>
+# wrong constant name <static-init>
 # wrong constant name <static-init>
 # wrong constant name indefinite_length
 # wrong constant name indefinite_length=
@@ -9469,6 +9416,7 @@
 # wrong constant name zcard
 # wrong constant name zcount
 # wrong constant name zincrby
+# wrong constant name zinter
 # wrong constant name zinterstore
 # wrong constant name zrange
 # wrong constant name zrangebyscore
@@ -9496,9 +9444,6 @@
 # wrong constant name sorted_keys
 # wrong constant name <static-init>
 # wrong constant name binary_search
-# uninitialized constant Regexp::Parser::VERSION_CONST_REGEXP
-# uninitialized constant Regexp::Parser::VERSION_FORMAT
-# uninitialized constant Regexp::Parser::VERSION_REGEXP
 # uninitialized constant Report::ACTIONS
 # uninitialized constant Report::BLACKLISTED_CLASS_METHODS
 # uninitialized constant Report::CALLBACKS
@@ -9902,147 +9847,136 @@
 # wrong constant name dedent_string
 # wrong constant name lex_state_name
 # wrong constant name token_match
-# uninitialized constant RuboCop::AST::ArrayNode::ARGUMENT_TYPES
-# uninitialized constant RuboCop::AST::ArrayNode::ASSIGNMENTS
-# uninitialized constant RuboCop::AST::ArrayNode::BASIC_CONDITIONALS
-# uninitialized constant RuboCop::AST::ArrayNode::BASIC_LITERALS
-# uninitialized constant RuboCop::AST::ArrayNode::COMPARISON_OPERATORS
-# uninitialized constant RuboCop::AST::ArrayNode::COMPOSITE_LITERALS
-# uninitialized constant RuboCop::AST::ArrayNode::CONDITIONALS
-# uninitialized constant RuboCop::AST::ArrayNode::EQUALS_ASSIGNMENTS
-# uninitialized constant RuboCop::AST::ArrayNode::FALSEY_LITERALS
-# uninitialized constant RuboCop::AST::ArrayNode::IMMUTABLE_LITERALS
-# uninitialized constant RuboCop::AST::ArrayNode::KEYWORDS
-# uninitialized constant RuboCop::AST::ArrayNode::LITERALS
-# uninitialized constant RuboCop::AST::ArrayNode::LOOP_TYPES
-# uninitialized constant RuboCop::AST::ArrayNode::MUTABLE_LITERALS
-# uninitialized constant RuboCop::AST::ArrayNode::OPERATOR_KEYWORDS
-# uninitialized constant RuboCop::AST::ArrayNode::POST_CONDITION_LOOP_TYPES
-# uninitialized constant RuboCop::AST::ArrayNode::REFERENCES
-# uninitialized constant RuboCop::AST::ArrayNode::SHORTHAND_ASSIGNMENTS
-# uninitialized constant RuboCop::AST::ArrayNode::SPECIAL_KEYWORDS
-# uninitialized constant RuboCop::AST::ArrayNode::TRUTHY_LITERALS
-# uninitialized constant RuboCop::AST::ArrayNode::VARIABLES
-# uninitialized constant RuboCop::AST::BlockNode::ARGUMENT_TYPES
-# uninitialized constant RuboCop::AST::BlockNode::ASSIGNMENTS
-# uninitialized constant RuboCop::AST::BlockNode::BASIC_CONDITIONALS
-# uninitialized constant RuboCop::AST::BlockNode::BASIC_LITERALS
-# uninitialized constant RuboCop::AST::BlockNode::COMPARISON_OPERATORS
-# uninitialized constant RuboCop::AST::BlockNode::COMPOSITE_LITERALS
-# uninitialized constant RuboCop::AST::BlockNode::CONDITIONALS
-# uninitialized constant RuboCop::AST::BlockNode::ENUMERABLE_METHODS
-# uninitialized constant RuboCop::AST::BlockNode::ENUMERATOR_METHODS
-# uninitialized constant RuboCop::AST::BlockNode::EQUALS_ASSIGNMENTS
-# uninitialized constant RuboCop::AST::BlockNode::FALSEY_LITERALS
-# uninitialized constant RuboCop::AST::BlockNode::IMMUTABLE_LITERALS
-# uninitialized constant RuboCop::AST::BlockNode::KEYWORDS
-# uninitialized constant RuboCop::AST::BlockNode::LITERALS
-# uninitialized constant RuboCop::AST::BlockNode::LOOP_TYPES
-# uninitialized constant RuboCop::AST::BlockNode::MUTABLE_LITERALS
-# uninitialized constant RuboCop::AST::BlockNode::NONMUTATING_ARRAY_METHODS
-# uninitialized constant RuboCop::AST::BlockNode::NONMUTATING_BINARY_OPERATOR_METHODS
-# uninitialized constant RuboCop::AST::BlockNode::NONMUTATING_HASH_METHODS
-# uninitialized constant RuboCop::AST::BlockNode::NONMUTATING_OPERATOR_METHODS
-# uninitialized constant RuboCop::AST::BlockNode::NONMUTATING_STRING_METHODS
-# uninitialized constant RuboCop::AST::BlockNode::NONMUTATING_UNARY_OPERATOR_METHODS
-# uninitialized constant RuboCop::AST::BlockNode::OPERATOR_KEYWORDS
-# uninitialized constant RuboCop::AST::BlockNode::OPERATOR_METHODS
-# uninitialized constant RuboCop::AST::BlockNode::POST_CONDITION_LOOP_TYPES
-# uninitialized constant RuboCop::AST::BlockNode::REFERENCES
-# uninitialized constant RuboCop::AST::BlockNode::SHORTHAND_ASSIGNMENTS
-# uninitialized constant RuboCop::AST::BlockNode::SPECIAL_KEYWORDS
-# uninitialized constant RuboCop::AST::BlockNode::TRUTHY_LITERALS
-# uninitialized constant RuboCop::AST::BlockNode::VARIABLES
-# uninitialized constant RuboCop::AST::KeywordSplatNode::ARGUMENT_TYPES
-# uninitialized constant RuboCop::AST::KeywordSplatNode::ASSIGNMENTS
-# uninitialized constant RuboCop::AST::KeywordSplatNode::BASIC_CONDITIONALS
-# uninitialized constant RuboCop::AST::KeywordSplatNode::BASIC_LITERALS
-# uninitialized constant RuboCop::AST::KeywordSplatNode::COMPARISON_OPERATORS
-# uninitialized constant RuboCop::AST::KeywordSplatNode::COMPOSITE_LITERALS
-# uninitialized constant RuboCop::AST::KeywordSplatNode::CONDITIONALS
-# uninitialized constant RuboCop::AST::KeywordSplatNode::EQUALS_ASSIGNMENTS
-# uninitialized constant RuboCop::AST::KeywordSplatNode::FALSEY_LITERALS
-# uninitialized constant RuboCop::AST::KeywordSplatNode::IMMUTABLE_LITERALS
-# uninitialized constant RuboCop::AST::KeywordSplatNode::KEYWORDS
-# uninitialized constant RuboCop::AST::KeywordSplatNode::LITERALS
-# uninitialized constant RuboCop::AST::KeywordSplatNode::LOOP_TYPES
-# uninitialized constant RuboCop::AST::KeywordSplatNode::MUTABLE_LITERALS
-# uninitialized constant RuboCop::AST::KeywordSplatNode::OPERATOR_KEYWORDS
-# uninitialized constant RuboCop::AST::KeywordSplatNode::POST_CONDITION_LOOP_TYPES
-# uninitialized constant RuboCop::AST::KeywordSplatNode::REFERENCES
-# uninitialized constant RuboCop::AST::KeywordSplatNode::SHORTHAND_ASSIGNMENTS
-# uninitialized constant RuboCop::AST::KeywordSplatNode::SPECIAL_KEYWORDS
-# uninitialized constant RuboCop::AST::KeywordSplatNode::TRUTHY_LITERALS
-# uninitialized constant RuboCop::AST::KeywordSplatNode::VARIABLES
-# uninitialized constant RuboCop::AST::MethodDispatchNode::ENUMERABLE_METHODS
-# uninitialized constant RuboCop::AST::MethodDispatchNode::ENUMERATOR_METHODS
-# uninitialized constant RuboCop::AST::MethodDispatchNode::NONMUTATING_ARRAY_METHODS
-# uninitialized constant RuboCop::AST::MethodDispatchNode::NONMUTATING_BINARY_OPERATOR_METHODS
-# uninitialized constant RuboCop::AST::MethodDispatchNode::NONMUTATING_HASH_METHODS
-# uninitialized constant RuboCop::AST::MethodDispatchNode::NONMUTATING_OPERATOR_METHODS
-# uninitialized constant RuboCop::AST::MethodDispatchNode::NONMUTATING_STRING_METHODS
-# uninitialized constant RuboCop::AST::MethodDispatchNode::NONMUTATING_UNARY_OPERATOR_METHODS
-# uninitialized constant RuboCop::AST::MethodDispatchNode::OPERATOR_METHODS
-# uninitialized constant RuboCop::AST::PairNode::ARGUMENT_TYPES
-# uninitialized constant RuboCop::AST::PairNode::ASSIGNMENTS
-# uninitialized constant RuboCop::AST::PairNode::BASIC_CONDITIONALS
-# uninitialized constant RuboCop::AST::PairNode::BASIC_LITERALS
-# uninitialized constant RuboCop::AST::PairNode::COMPARISON_OPERATORS
-# uninitialized constant RuboCop::AST::PairNode::COMPOSITE_LITERALS
-# uninitialized constant RuboCop::AST::PairNode::CONDITIONALS
-# uninitialized constant RuboCop::AST::PairNode::EQUALS_ASSIGNMENTS
-# uninitialized constant RuboCop::AST::PairNode::FALSEY_LITERALS
-# uninitialized constant RuboCop::AST::PairNode::IMMUTABLE_LITERALS
-# uninitialized constant RuboCop::AST::PairNode::KEYWORDS
-# uninitialized constant RuboCop::AST::PairNode::LITERALS
-# uninitialized constant RuboCop::AST::PairNode::LOOP_TYPES
-# uninitialized constant RuboCop::AST::PairNode::MUTABLE_LITERALS
-# uninitialized constant RuboCop::AST::PairNode::OPERATOR_KEYWORDS
-# uninitialized constant RuboCop::AST::PairNode::POST_CONDITION_LOOP_TYPES
-# uninitialized constant RuboCop::AST::PairNode::REFERENCES
-# uninitialized constant RuboCop::AST::PairNode::SHORTHAND_ASSIGNMENTS
-# uninitialized constant RuboCop::AST::PairNode::SPECIAL_KEYWORDS
-# uninitialized constant RuboCop::AST::PairNode::TRUTHY_LITERALS
-# uninitialized constant RuboCop::AST::PairNode::VARIABLES
-# uninitialized constant RuboCop::AST::RegexpNode::ARGUMENT_TYPES
-# uninitialized constant RuboCop::AST::RegexpNode::ASSIGNMENTS
-# uninitialized constant RuboCop::AST::RegexpNode::BASIC_CONDITIONALS
-# uninitialized constant RuboCop::AST::RegexpNode::BASIC_LITERALS
-# uninitialized constant RuboCop::AST::RegexpNode::COMPARISON_OPERATORS
-# uninitialized constant RuboCop::AST::RegexpNode::COMPOSITE_LITERALS
-# uninitialized constant RuboCop::AST::RegexpNode::CONDITIONALS
-# uninitialized constant RuboCop::AST::RegexpNode::EQUALS_ASSIGNMENTS
-# uninitialized constant RuboCop::AST::RegexpNode::FALSEY_LITERALS
-# uninitialized constant RuboCop::AST::RegexpNode::IMMUTABLE_LITERALS
-# uninitialized constant RuboCop::AST::RegexpNode::KEYWORDS
-# uninitialized constant RuboCop::AST::RegexpNode::LITERALS
-# uninitialized constant RuboCop::AST::RegexpNode::LOOP_TYPES
-# uninitialized constant RuboCop::AST::RegexpNode::MUTABLE_LITERALS
-# uninitialized constant RuboCop::AST::RegexpNode::OPERATOR_KEYWORDS
-# uninitialized constant RuboCop::AST::RegexpNode::POST_CONDITION_LOOP_TYPES
-# uninitialized constant RuboCop::AST::RegexpNode::REFERENCES
-# uninitialized constant RuboCop::AST::RegexpNode::SHORTHAND_ASSIGNMENTS
-# uninitialized constant RuboCop::AST::RegexpNode::SPECIAL_KEYWORDS
-# uninitialized constant RuboCop::AST::RegexpNode::TRUTHY_LITERALS
-# uninitialized constant RuboCop::AST::RegexpNode::VARIABLES
+# wrong constant name <Class:Colorizer>
+# wrong constant name <Class:InstrumentationSubcompiler>
+# wrong constant name <Class:NodePatternSubcompiler>
+# wrong constant name <Class:SequenceSubcompiler>
+# wrong constant name <Class:Trace>
+# wrong constant name comments
+# wrong constant name node_ids
+# wrong constant name tokens
+# wrong constant name <Class:Result>
+# wrong constant name compiler
+# wrong constant name initialize
+# wrong constant name node_pattern
+# wrong constant name pattern
+# wrong constant name test
+# uninitialized constant RuboCop::AST::NodePattern::Compiler::Debug::Colorizer::Result::Elem
+# wrong constant name color_map
+# wrong constant name colorize
+# wrong constant name colorizer
+# wrong constant name colorizer=
+# wrong constant name match_map
+# wrong constant name matched?
+# wrong constant name returned
+# wrong constant name returned=
+# wrong constant name ruby_ast
+# wrong constant name ruby_ast=
+# wrong constant name trace
+# wrong constant name trace=
+# wrong constant name <static-init>
+# wrong constant name []
+# wrong constant name members
+# wrong constant name <static-init>
+# wrong constant name do_compile
+# wrong constant name <static-init>
+# wrong constant name <static-init>
+# uninitialized constant RuboCop::AST::NodePattern::Compiler::Debug::SequenceSubcompiler::DELTA
+# wrong constant name <static-init>
+# wrong constant name enter
+# wrong constant name matched?
+# wrong constant name success
+# wrong constant name <static-init>
+# wrong constant name <static-init>
+# uninitialized constant RuboCop::AST::NodePattern::Node::Repetition::MAP
+# uninitialized constant RuboCop::AST::NodePattern::Parser::Racc_Main_Parsing_Routine
+# uninitialized constant RuboCop::AST::NodePattern::Parser::Racc_Runtime_Core_Id_C
+# uninitialized constant RuboCop::AST::NodePattern::Parser::Racc_Runtime_Core_Version
+# uninitialized constant RuboCop::AST::NodePattern::Parser::Racc_Runtime_Core_Version_C
+# uninitialized constant RuboCop::AST::NodePattern::Parser::Racc_Runtime_Core_Version_R
+# uninitialized constant RuboCop::AST::NodePattern::Parser::Racc_Runtime_Type
+# uninitialized constant RuboCop::AST::NodePattern::Parser::Racc_Runtime_Version
+# uninitialized constant RuboCop::AST::NodePattern::Parser::Racc_YY_Parse_Method
+# wrong constant name <Class:WithMeta>
+# wrong constant name <Class:Builder>
+# wrong constant name <Class:Lexer>
+# uninitialized constant RuboCop::AST::NodePattern::Parser::WithMeta::Racc_Main_Parsing_Routine
+# uninitialized constant RuboCop::AST::NodePattern::Parser::WithMeta::Racc_Runtime_Core_Id_C
+# uninitialized constant RuboCop::AST::NodePattern::Parser::WithMeta::Racc_Runtime_Core_Version
+# uninitialized constant RuboCop::AST::NodePattern::Parser::WithMeta::Racc_Runtime_Core_Version_C
+# uninitialized constant RuboCop::AST::NodePattern::Parser::WithMeta::Racc_Runtime_Core_Version_R
+# uninitialized constant RuboCop::AST::NodePattern::Parser::WithMeta::Racc_Runtime_Type
+# uninitialized constant RuboCop::AST::NodePattern::Parser::WithMeta::Racc_Runtime_Version
+# uninitialized constant RuboCop::AST::NodePattern::Parser::WithMeta::Racc_YY_Parse_Method
+# uninitialized constant RuboCop::AST::NodePattern::Parser::WithMeta::Racc_arg
+# uninitialized constant RuboCop::AST::NodePattern::Parser::WithMeta::Racc_debug_parser
+# uninitialized constant RuboCop::AST::NodePattern::Parser::WithMeta::Racc_token_to_s_table
+# wrong constant name comments
+# wrong constant name tokens
+# wrong constant name emit_atom
+# wrong constant name emit_call
+# wrong constant name emit_list
+# wrong constant name emit_unary_op
+# wrong constant name <static-init>
+# uninitialized constant RuboCop::AST::NodePattern::Parser::WithMeta::Lexer::IDENTIFIER
+# uninitialized constant RuboCop::AST::NodePattern::Parser::WithMeta::Lexer::REGEXP
+# uninitialized constant RuboCop::AST::NodePattern::Parser::WithMeta::Lexer::REGEXP_BODY
+# uninitialized constant RuboCop::AST::NodePattern::Parser::WithMeta::Lexer::SYMBOL_NAME
+# wrong constant name initialize
+# wrong constant name pos
+# wrong constant name <static-init>
+# wrong constant name <static-init>
 # uninitialized constant RuboCop::Cop::Lint::ConstantResolution::LITERAL_REGEX
 # uninitialized constant RuboCop::Cop::Lint::FormatParameterMismatch::LITERAL_REGEX
 # uninitialized constant RuboCop::Cop::Metrics::Utils::CodeLengthCalculator::LITERAL_REGEX
 # uninitialized constant RuboCop::Cop::Naming::AsciiIdentifiers::BYTE_ORDER_MARK
 # uninitialized constant RuboCop::Cop::Naming::AsciiIdentifiers::LITERAL_REGEX
 # uninitialized constant RuboCop::Cop::Naming::BinaryOperatorParameterName::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::ActiveRecordCallbacksOrder::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::AfterCommitOverride::LITERAL_REGEX
 # uninitialized constant RuboCop::Cop::Rails::ContentTag::BYTE_ORDER_MARK
 # uninitialized constant RuboCop::Cop::Rails::ContentTag::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::DefaultScope::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::FindById::BYTE_ORDER_MARK
+# uninitialized constant RuboCop::Cop::Rails::FindById::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::Inquiry::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::MailerName::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::MatchRoute::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::NegateInclude::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::OrderById::BYTE_ORDER_MARK
+# uninitialized constant RuboCop::Cop::Rails::OrderById::LITERAL_REGEX
 # uninitialized constant RuboCop::Cop::Rails::Pick::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::Pluck::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::PluckId::BYTE_ORDER_MARK
+# uninitialized constant RuboCop::Cop::Rails::PluckId::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::PluckId::WHERE_METHODS
+# uninitialized constant RuboCop::Cop::Rails::PluckInWhere::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::PluckInWhere::WHERE_METHODS
 # uninitialized constant RuboCop::Cop::Rails::RedundantForeignKey::BYTE_ORDER_MARK
 # uninitialized constant RuboCop::Cop::Rails::RedundantForeignKey::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::RenderInline::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::RenderPlainText::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::ShortI18n::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::SquishedSQLHeredocs::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::SquishedSQLHeredocs::OPENING_DELIMITER
+# uninitialized constant RuboCop::Cop::Rails::WhereExists::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Rails::WhereNot::BYTE_ORDER_MARK
+# uninitialized constant RuboCop::Cop::Rails::WhereNot::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Sorbet::CallbackConditionalsBinding::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Sorbet::EnforceSigilOrder::BYTE_ORDER_MARK
 # uninitialized constant RuboCop::Cop::Sorbet::EnforceSigilOrder::LITERAL_REGEX
 # uninitialized constant RuboCop::Cop::Sorbet::EnforceSigilOrder::SIGIL_REGEX
 # uninitialized constant RuboCop::Cop::Sorbet::EnforceSigilOrder::STRICTNESS_LEVELS
+# uninitialized constant RuboCop::Cop::Sorbet::ForbidExtendTSigHelpersInShims::BYTE_ORDER_MARK
+# uninitialized constant RuboCop::Cop::Sorbet::ForbidExtendTSigHelpersInShims::LITERAL_REGEX
 # uninitialized constant RuboCop::Cop::Sorbet::ForbidIncludeConstLiteral::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Sorbet::ForbidRBIOutsideOfSorbetDir::BYTE_ORDER_MARK
+# uninitialized constant RuboCop::Cop::Sorbet::ForbidRBIOutsideOfSorbetDir::LITERAL_REGEX
 # uninitialized constant RuboCop::Cop::Sorbet::ForbidSuperclassConstLiteral::LITERAL_REGEX
 # uninitialized constant RuboCop::Cop::Sorbet::ForbidUntypedStructProps::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Sorbet::OneAncestorPerLine::LITERAL_REGEX
 # uninitialized constant RuboCop::Cop::Sorbet::SignatureBuildOrder::LITERAL_REGEX
+# uninitialized constant RuboCop::Cop::Sorbet::SingleLineRbiClassModuleDefinitions::LITERAL_REGEX
 # uninitialized constant RuboCop::Cop::Sorbet::ValidSigil::LITERAL_REGEX
 # uninitialized constant RuboCop::Cop::Style::AccessorGrouping::LITERAL_REGEX
 # uninitialized constant RuboCop::Cop::Style::BisectedAttrAccessor::LITERAL_REGEX
@@ -10055,6 +9989,8 @@
 # uninitialized constant RuboCop::Cop::Style::RedundantFetchBlock::FROZEN_STRING_LITERAL_TYPES
 # uninitialized constant RuboCop::Cop::Style::RedundantFetchBlock::LITERAL_REGEX
 # uninitialized constant RuboCop::Cop::Style::RedundantSelf::LITERAL_REGEX
+# wrong constant name <Class:Compiler>
+# wrong constant name <Class:Lexer>
 # wrong constant name pretty_print_children
 # wrong constant name <static-init>
 # wrong constant name enabled?
@@ -10065,8 +10001,6 @@
 # uninitialized constant SDBM
 # uninitialized constant SDBMError
 # uninitialized constant SDBMError
-# uninitialized constant SafeYAML::SafeToRubyVisitor::DISPATCH
-# uninitialized constant SafeYAML::SafeToRubyVisitor::SHOVEL
 # uninitialized constant Sass::SCSS::Parser::ANY
 # uninitialized constant Sass::SCSS::Parser::CDC
 # uninitialized constant Sass::SCSS::Parser::CDO
@@ -10497,6 +10431,9 @@
 # uninitialized constant Sprockets::Rails::Helper::URI_REGEXP
 # uninitialized constant Sprockets::Railtie::ABSTRACT_RAILTIES
 # uninitialized constant Sprockets::Resolve::SEPARATOR_PATTERN
+# wrong constant name initialize
+# wrong constant name path_to
+# wrong constant name <static-init>
 # wrong constant name <static-init>
 # wrong constant name call
 # wrong constant name <static-init>
@@ -11221,7 +11158,6 @@
 # wrong constant name <static-init>
 # uninitialized constant User::ACTIONS
 # uninitialized constant User::BLACKLISTED_CLASS_METHODS
-# uninitialized constant User::BLACKLIST_FOR_SERIALIZATION
 # uninitialized constant User::CALLBACKS
 # uninitialized constant User::CALLBACK_FILTER_TYPES
 # uninitialized constant User::CALL_COMPILABLE_REGEXP
@@ -11229,6 +11165,7 @@
 # uninitialized constant User::MAX_PASSWORD_LENGTH_ALLOWED
 # uninitialized constant User::NAME_COMPILABLE_REGEXP
 # uninitialized constant User::UNASSIGNABLE_KEYS
+# uninitialized constant User::UNSAFE_ATTRIBUTES_FOR_SERIALIZATION
 # uninitialized constant User::VALIDATIONS
 # wrong constant name after_add_for_api_keys
 # wrong constant name after_add_for_api_keys=
@@ -11403,8 +11340,7 @@
 # wrong constant name on_next_request
 # wrong constant name test_reset!
 # wrong constant name <static-init>
-# uninitialized constant WeakRef
-# uninitialized constant WeakRef
+# wrong constant name initialize
 # wrong constant name <Class:Client>
 # wrong constant name <Class:Draft75>
 # wrong constant name <Class:Draft76>

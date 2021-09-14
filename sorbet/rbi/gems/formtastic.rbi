@@ -7,28 +7,12 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/formtastic/all/formtastic.rbi
 #
-# formtastic-3.1.5
+# formtastic-4.0.0
 
 module Formtastic
-  def deprecation; end
-  def deprecation=(obj); end
-  def self.deprecation; end
-  def self.deprecation=(obj); end
   extend ActiveSupport::Autoload
 end
 class Formtastic::Engine < Rails::Engine
-end
-module Formtastic::Util
-  def deprecated_version_of_rails?; end
-  def html_safe(text); end
-  def match?(version, dependency); end
-  def minimum_version_of_rails; end
-  def rails3?; end
-  def rails4?; end
-  def rails4_0?; end
-  def rails4_1?; end
-  def rails_version; end
-  extend Formtastic::Util
 end
 class Formtastic::UnknownInputError < NameError
 end
@@ -117,6 +101,7 @@ module Formtastic::Inputs::Base::Validations
   def limit; end
   def not_required_through_negated_validation!; end
   def not_required_through_negated_validation?; end
+  def option_value(option, object); end
   def optional?; end
   def readonly?; end
   def readonly_attribute?; end
@@ -198,8 +183,29 @@ class Formtastic::Localizer::Cache
   def has_key?(key); end
   def set(key, result); end
 end
+class Formtastic::NamespacedClassFinder
+  def class_name(as); end
+  def find(as); end
+  def find_by_trying(class_name); end
+  def find_with_const_defined(class_name); end
+  def finder(class_name); end
+  def initialize(namespaces); end
+  def namespaces; end
+  def resolve(as); end
+  def self.use_const_defined?; end
+end
+class Formtastic::NamespacedClassFinder::NotFoundError < NameError
+end
+class Formtastic::InputClassFinder < Formtastic::NamespacedClassFinder
+  def class_name(as); end
+  def initialize(builder); end
+end
 module Formtastic::Actions
   extend ActiveSupport::Autoload
+end
+class Formtastic::ActionClassFinder < Formtastic::NamespacedClassFinder
+  def class_name(as); end
+  def initialize(builder); end
 end
 module Formtastic::HtmlAttributes
   def dom_id_namespace; end
@@ -213,15 +219,9 @@ module Formtastic::Helpers::FileColumnDetection
 end
 module Formtastic::Helpers::InputHelper
   def column_for(method); end
-  def custom_input_class_name(as); end
   def default_input_type(method, options = nil); end
   def input(method, options = nil); end
-  def input_class(as); end
-  def input_class_by_trying(as); end
-  def input_class_deprecation_warning(method); end
-  def input_class_with_const_defined(as); end
   def namespaced_input_class(as); end
-  def standard_input_class_name(as); end
   include Formtastic::Helpers::Enum
   include Formtastic::Helpers::FileColumnDetection
   include Formtastic::Helpers::Reflection
@@ -237,6 +237,7 @@ module Formtastic::Helpers::InputsHelper
   def default_columns_for_object; end
   def field_set_title_from_args(*args); end
   def fieldset_contents_from_column_list(columns); end
+  def foreign_key_columns; end
   def inputs(*args, &block); end
   def inputs_for_nested_attributes(*args, &block); end
   include Formtastic::Helpers::FieldsetWrapper
@@ -244,12 +245,8 @@ module Formtastic::Helpers::InputsHelper
 end
 module Formtastic::Helpers::ActionHelper
   def action(method, options = nil); end
-  def action_class(as); end
-  def action_class_deprecation_warning(method); end
-  def custom_action_class_name(as); end
   def default_action_type(method, options = nil); end
   def namespaced_action_class(as); end
-  def standard_action_class_name(as); end
 end
 module Formtastic::Helpers::ActionsHelper
   def actions(*args, &block); end
@@ -327,7 +324,7 @@ class Formtastic::FormBuilder < ActionView::Helpers::FormBuilder
   def include_blank_for_select_by_default; end
   def include_blank_for_select_by_default=(val); end
   def include_blank_for_select_by_default?; end
-  def initialize(object_name, object, template, options, block = nil); end
+  def initialize(object_name, object, template, options); end
   def inline_errors; end
   def inline_errors=(val); end
   def inline_errors?; end
@@ -463,27 +460,6 @@ class Formtastic::FormBuilder < ActionView::Helpers::FormBuilder
   include Formtastic::Helpers::InputHelper
   include Formtastic::Helpers::InputsHelper
   include Formtastic::HtmlAttributes
-end
-class Formtastic::NamespacedClassFinder
-  def class_name(as); end
-  def find(as); end
-  def find_by_trying(class_name); end
-  def find_with_const_defined(class_name); end
-  def finder(class_name); end
-  def initialize(namespaces); end
-  def namespaces; end
-  def resolve(as); end
-  def self.use_const_defined?; end
-end
-class Formtastic::NamespacedClassFinder::NotFoundError < NameError
-end
-class Formtastic::InputClassFinder < Formtastic::NamespacedClassFinder
-  def class_name(as); end
-  def initialize(builder); end
-end
-class Formtastic::ActionClassFinder < Formtastic::NamespacedClassFinder
-  def class_name(as); end
-  def initialize(builder); end
 end
 module Formtastic::Helpers::FormHelper
   def builder; end

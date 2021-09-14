@@ -5,9 +5,9 @@
 #
 # If you would like to make changes to this file, great! Please create the gem's shim here:
 #
-#   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/nokogiri-1.12.3-x86_64/all/nokogiri-1.12.3-x86_64.rbi
+#   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/nokogiri-1.12.4-x86_64/all/nokogiri-1.12.4-x86_64.rbi
 #
-# nokogiri-1.12.3-x86_64-linux
+# nokogiri-1.12.4-x86_64-linux
 
 class Nokogiri::XML::ElementContent
   def c1; end
@@ -487,6 +487,8 @@ class Nokogiri::XML::Document < Nokogiri::XML::Node
   def initialize(*args); end
   def inspect_attributes; end
   def name; end
+  def namespace_inheritance; end
+  def namespace_inheritance=(arg0); end
   def namespaces; end
   def remove_namespaces!; end
   def root; end

@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/faraday/all/faraday.rbi
 #
-# faraday-1.0.1
+# faraday-1.7.2
 
 module Faraday
   def self.default_adapter; end
@@ -298,8 +298,8 @@ class Faraday::Options < Struct
   def deep_dup; end
   def delete(key); end
   def each; end
-  def each_key; end
-  def each_value; end
+  def each_key(&block); end
+  def each_value(&block); end
   def empty?; end
   def fetch(key, *args); end
   def has_key?(key); end
@@ -370,6 +370,7 @@ class Faraday::Connection
   def scheme(*args, &block); end
   def scheme=(*args, &block); end
   def set_authorization_header(header_type, *args); end
+  def set_basic_auth(user, password); end
   def ssl; end
   def support_parallel?(adapter); end
   def token_auth(token, options = nil); end
@@ -442,6 +443,8 @@ module Faraday::DecodeMethods
 end
 module Faraday::NestedParamsEncoder
   def self.escape(*args, &block); end
+  def self.sort_params; end
+  def self.sort_params=(arg0); end
   def self.unescape(*args, &block); end
   extend Faraday::DecodeMethods
   extend Faraday::EncodeMethods
@@ -450,11 +453,16 @@ module Faraday::FlatParamsEncoder
   def self.decode(query); end
   def self.encode(params); end
   def self.escape(*args, &block); end
+  def self.sort_params; end
+  def self.sort_params=(arg0); end
   def self.unescape(*args, &block); end
 end
 class Faraday::Middleware
+  def app; end
+  def call(env); end
   def close; end
-  def initialize(app = nil); end
+  def initialize(app = nil, options = nil); end
+  def options; end
   extend Faraday::DependencyLoader
   extend Faraday::MiddlewareRegistry
 end
@@ -480,8 +488,8 @@ class Anonymous_Struct_45 < Struct
   def body=(_); end
   def headers; end
   def headers=(_); end
-  def method; end
-  def method=(_); end
+  def http_method; end
+  def http_method=(_); end
   def options; end
   def options=(_); end
   def params; end
@@ -499,6 +507,7 @@ class Faraday::Request < Anonymous_Struct_45
   def headers=(hash); end
   def marshal_dump; end
   def marshal_load(serialised); end
+  def method; end
   def params=(hash); end
   def self.create(request_method); end
   def to_env(connection); end
@@ -527,7 +536,6 @@ class Faraday::Response
   extend Forwardable
 end
 class Faraday::Response::Middleware < Faraday::Middleware
-  def call(env); end
   def on_complete(env); end
 end
 class Faraday::Error < StandardError
@@ -537,6 +545,9 @@ class Faraday::Error < StandardError
   def initialize(exc, response = nil); end
   def inspect; end
   def response; end
+  def response_body; end
+  def response_headers; end
+  def response_status; end
   def wrapped_exception; end
 end
 class Faraday::ClientError < Faraday::Error
@@ -643,21 +654,6 @@ class Faraday::Request::Retry::Options < Anonymous_Faraday_Options_46
   def retry_statuses; end
   def self.from(value); end
 end
-class Faraday::Adapter::NetHttp < Faraday::Adapter
-  def build_connection(env); end
-  def call(env); end
-  def configure_request(http, req); end
-  def configure_ssl(http, ssl); end
-  def create_request(env); end
-  def initialize(app = nil, opts = nil, &block); end
-  def net_http_connection(env); end
-  def perform_request(http, env); end
-  def request_via_get_method(http, env, &block); end
-  def request_via_request_method(http, env, &block); end
-  def request_with_wrapped_block(http, env, &block); end
-  def ssl_cert_store(ssl); end
-  def ssl_verify_mode(ssl); end
-end
 class Faraday::Adapter::Typhoeus < Faraday::Adapter
   def call(env); end
 end
@@ -673,6 +669,7 @@ class Faraday::Request::Multipart < Faraday::Request::UrlEncoded
   def call(env); end
   def create_multipart(env, params); end
   def has_multipart?(obj); end
+  def initialize(app = nil, options = nil); end
   def part(boundary, key, value); end
   def process_params(params, prefix = nil, pieces = nil, &block); end
   def process_request?(env); end

@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/haml_lint/all/haml_lint.rbi
 #
-# haml_lint-0.35.0
+# haml_lint-0.37.1
 
 module HamlLint
 end
@@ -199,6 +199,7 @@ class HamlLint::Runner
   def process_files(report); end
   def report(options); end
   def run(options = nil); end
+  def warm_cache; end
 end
 module HamlLint::Utils
   def any_glob_matches?(globs_or_glob, file); end
@@ -510,6 +511,7 @@ class HamlLint::Linter::RuboCop < HamlLint::Linter
   def lint_file(rubocop, file); end
   def record_lint(node, message, severity); end
   def rubocop_flags; end
+  def self.rubocop_cli; end
   def visit_root(_node); end
   def with_ruby_from_stdin(ruby, &_block); end
   include HamlLint::LinterRegistry

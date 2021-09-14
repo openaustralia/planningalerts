@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/execjs/all/execjs.rbi
 #
-# execjs-2.7.0
+# execjs-2.8.1
 
 module ExecJS
   def self.compile(source, options = nil); end
@@ -41,7 +41,7 @@ class ExecJS::Runtime
   def name; end
 end
 class ExecJS::Runtime::Context
-  def call(properties, *args); end
+  def call(source, *args); end
   def eval(source, options = nil); end
   def exec(source, options = nil); end
   def initialize(runtime, source = nil, options = nil); end
@@ -89,19 +89,6 @@ class ExecJS::ExternalRuntime::Context < ExecJS::Runtime::Context
   def extract_result(output, filename); end
   def initialize(runtime, source = nil, options = nil); end
   def write_to_tempfile(contents); end
-end
-class ExecJS::RubyRacerRuntime < ExecJS::Runtime
-  def available?; end
-  def name; end
-end
-class ExecJS::RubyRacerRuntime::Context < ExecJS::Runtime::Context
-  def call(properties, *args); end
-  def eval(source, options = nil); end
-  def exec(source, options = nil); end
-  def initialize(runtime, source = nil, options = nil); end
-  def lock; end
-  def unbox(value); end
-  def wrap_error(e); end
 end
 class ExecJS::RubyRhinoRuntime < ExecJS::Runtime
   def available?; end

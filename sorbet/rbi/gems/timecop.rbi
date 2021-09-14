@@ -7,35 +7,8 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/timecop/all/timecop.rbi
 #
-# timecop-0.9.1
+# timecop-0.9.4
 
-class Time
-  def self.mock_time; end
-  def self.new(*args); end
-  def self.new_with_mock_time(*args); end
-  def self.new_without_mock_time(*arg0); end
-  def self.now_with_mock_time; end
-  def self.now_without_mock_time; end
-end
-class Date
-  def self.closest_wday(wday); end
-  def self.mock_date; end
-  def self.mocked_time_stack_item; end
-  def self.parse_with_mock_date(*args); end
-  def self.parse_without_mock_date(*arg0); end
-  def self.strptime_with_mock_date(str = nil, fmt = nil, start = nil); end
-  def self.strptime_without_mock_date(*arg0); end
-  def self.today_with_mock_date; end
-  def self.today_without_mock_date(*arg0); end
-end
-class DateTime < Date
-  def self.mock_time; end
-  def self.mocked_time_stack_item; end
-  def self.now_with_mock_time; end
-  def self.now_without_mock_time(*arg0); end
-  def self.parse_with_mock_date(*args); end
-  def self.parse_without_mock_date(*arg0); end
-end
 class Timecop
   def baseline; end
   def baseline=(b); end
@@ -59,6 +32,7 @@ class Timecop
   def self.thread_safe=(t); end
   def self.top_stack_item; end
   def self.travel(*args, &block); end
+  def self.unfreeze(&block); end
   def set_baseline(b); end
   def set_stack(s); end
   def stack; end
@@ -92,6 +66,33 @@ class Timecop::TimeStackItem
   def utc_offset; end
   def utc_offset_to_rational(utc_offset); end
   def year; end
+end
+class Time
+  def self.mock_time; end
+  def self.new(*args); end
+  def self.new_with_mock_time(*args); end
+  def self.new_without_mock_time(*arg0); end
+  def self.now_with_mock_time; end
+  def self.now_without_mock_time; end
+end
+class Date
+  def self.closest_wday(wday); end
+  def self.mock_date; end
+  def self.mocked_time_stack_item; end
+  def self.parse_with_mock_date(*args); end
+  def self.parse_without_mock_date(*arg0); end
+  def self.strptime_with_mock_date(str = nil, fmt = nil, start = nil); end
+  def self.strptime_without_mock_date(*arg0); end
+  def self.today_with_mock_date; end
+  def self.today_without_mock_date(*arg0); end
+end
+class DateTime < Date
+  def self.mock_time; end
+  def self.mocked_time_stack_item; end
+  def self.now_with_mock_time; end
+  def self.now_without_mock_time(*arg0); end
+  def self.parse_with_mock_date(*args); end
+  def self.parse_without_mock_date(*arg0); end
 end
 class Timecop::SafeModeException < StandardError
   def initialize; end

@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/http-parser/all/http-parser.rbi
 #
-# http-parser-1.2.1
+# http-parser-1.2.3
 
 module HttpParser
   def err_desc(*arg0); end

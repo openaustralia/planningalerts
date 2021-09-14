@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/httparty/all/httparty.rbi
 #
-# httparty-0.16.2
+# httparty-0.19.0
 
 module HTTParty
   def self.copy(*args, &block); end
@@ -31,7 +31,7 @@ module HTTParty::ModuleInheritableAttributes::ClassMethods
   def mattr_inheritable(*args); end
 end
 class HTTParty::CookieHash < Hash
-  def add_cookies(value); end
+  def add_cookies(data); end
   def to_cookie_string; end
 end
 module Net
@@ -56,12 +56,16 @@ class Net::HTTPHeader::DigestAuthenticator
   def use_md5_sess?; end
 end
 class HTTParty::ConnectionAdapter
+  def add_max_retries?(max_retries); end
+  def add_timeout?(timeout); end
   def attach_ssl_certificates(http, options); end
   def clean_host(host); end
   def connection; end
+  def from_ruby_version(ruby_version, option: nil, warn: nil); end
   def initialize(uri, options = nil); end
   def options; end
   def self.call(uri, options); end
+  def self.default_cert_store; end
   def ssl_implied?(uri); end
   def strip_ipv6_brackets(host); end
   def uri; end
@@ -73,16 +77,22 @@ module HTTParty::Logger
   def self.formatters; end
 end
 class HTTParty::Logger::ApacheFormatter
+  def content_length; end
   def current_time; end
-  def current_time=(arg0); end
   def format(request, response); end
+  def http_method; end
   def initialize(logger, level); end
   def level; end
   def level=(arg0); end
   def logger; end
   def logger=(arg0); end
+  def message; end
+  def path; end
+  def request; end
+  def response; end
 end
 class HTTParty::Logger::CurlFormatter
+  def current_time; end
   def format(request, response); end
   def initialize(logger, level); end
   def level; end
@@ -101,62 +111,38 @@ class HTTParty::Logger::CurlFormatter
   def messages=(arg0); end
   def request; end
   def response; end
-  def time; end
 end
-module HTTParty::HashConversions
-  def self.normalize_keys(key, value); end
-  def self.normalize_param(key, value); end
-  def self.to_params(hash); end
-end
-class HTTParty::Error < StandardError
-end
-class HTTParty::UnsupportedFormat < HTTParty::Error
-end
-class HTTParty::UnsupportedURIScheme < HTTParty::Error
-end
-class HTTParty::ResponseError < HTTParty::Error
-  def initialize(response); end
+class HTTParty::Logger::LogstashFormatter
+  def content_length; end
+  def current_time; end
+  def format(request, response); end
+  def http_method; end
+  def initialize(logger, level); end
+  def level; end
+  def level=(arg0); end
+  def logger; end
+  def logger=(arg0); end
+  def logstash_message; end
+  def message; end
+  def path; end
+  def request; end
   def response; end
 end
-class HTTParty::RedirectionTooDeep < HTTParty::ResponseError
-end
-class HTTParty::DuplicateLocationHeader < HTTParty::ResponseError
-end
-class HTTParty::Parser
-  def body; end
-  def csv; end
-  def format; end
-  def html; end
-  def initialize(body, format); end
-  def json; end
-  def parse; end
-  def parse_supported_format; end
-  def plain; end
-  def self.call(body, format); end
-  def self.format_from_mimetype(mimetype); end
-  def self.formats; end
-  def self.supported_formats; end
-  def self.supports_format?(format); end
-  def supports_format?; end
-  def xml; end
-end
 class HTTParty::Request
-  def _encode_body(body); end
   def assume_utf16_is_big_endian; end
   def base_uri; end
   def capture_cookies(response); end
   def check_duplicate_location_header; end
   def connection_adapter; end
   def credentials; end
+  def decompress(body, encoding); end
+  def decompress_content?; end
   def digest_auth?; end
-  def encode_body(body); end
-  def encode_utf_16(body); end
-  def encode_with_ruby_encoding(body, charset); end
+  def encode_text(text, content_type); end
   def format; end
   def format_from_mimetype(mimetype); end
-  def get_charset; end
   def handle_host_redirection; end
-  def handle_response(body, &block); end
+  def handle_response(raw_body, &block); end
   def handle_unauthorized(&block); end
   def http; end
   def http_method; end
@@ -199,17 +185,97 @@ end
 class HTTParty::Request::Body
   def boundary; end
   def call; end
+  def content_body(object); end
+  def content_type(object); end
   def file?(object); end
+  def file_name(object); end
+  def force_multipart; end
   def generate_multipart; end
-  def has_file?(hash); end
-  def includes_hash?(object); end
-  def initialize(params, query_string_normalizer: nil); end
+  def has_file?(value); end
+  def initialize(params, query_string_normalizer: nil, force_multipart: nil); end
   def multipart?; end
   def normalize_query(query); end
   def params; end
   def query_string_normalizer; end
 end
+class HTTParty::ResponseFragment < SimpleDelegator
+  def code; end
+  def connection; end
+  def http_response; end
+  def initialize(fragment, http_response, connection); end
+end
+class HTTParty::Decompressor
+  def body; end
+  def brotli; end
+  def decompress; end
+  def decompress_supported_encoding; end
+  def encoding; end
+  def initialize(body, encoding); end
+  def lzw; end
+  def none; end
+  def supports_encoding?; end
+end
+class HTTParty::TextEncoder
+  def assume_utf16_is_big_endian; end
+  def call; end
+  def can_encode?; end
+  def charset; end
+  def content_type; end
+  def encode_utf_16; end
+  def encode_with_ruby_encoding; end
+  def encoded_text; end
+  def initialize(text, assume_utf16_is_big_endian: nil, content_type: nil); end
+  def text; end
+end
+class HTTParty::HeadersProcessor
+  def call; end
+  def headers; end
+  def initialize(headers, options); end
+  def options; end
+  def process_dynamic_headers; end
+end
+module HTTParty::HashConversions
+  def self.normalize_keys(key, value); end
+  def self.normalize_param(key, value); end
+  def self.to_params(hash); end
+end
+module HTTParty::Utils
+  def self.stringify_keys(hash); end
+end
+class HTTParty::Error < StandardError
+end
+class HTTParty::UnsupportedFormat < HTTParty::Error
+end
+class HTTParty::UnsupportedURIScheme < HTTParty::Error
+end
+class HTTParty::ResponseError < HTTParty::Error
+  def initialize(response); end
+  def response; end
+end
+class HTTParty::RedirectionTooDeep < HTTParty::ResponseError
+end
+class HTTParty::DuplicateLocationHeader < HTTParty::ResponseError
+end
+class HTTParty::Parser
+  def body; end
+  def csv; end
+  def format; end
+  def html; end
+  def initialize(body, format); end
+  def json; end
+  def parse; end
+  def parse_supported_format; end
+  def plain; end
+  def self.call(body, format); end
+  def self.format_from_mimetype(mimetype); end
+  def self.formats; end
+  def self.supported_formats; end
+  def self.supports_format?(format); end
+  def supports_format?; end
+  def xml; end
+end
 class HTTParty::Response
+  def _dump(_level); end
   def accepted?; end
   def already_reported?; end
   def bad_gateway?; end
@@ -226,9 +292,11 @@ class HTTParty::Response
   def failed_dependency?; end
   def forbidden?; end
   def found?; end
+  def gateway_time_out?; end
   def gateway_timeout?; end
   def gone?; end
   def headers; end
+  def http_version; end
   def im_used?; end
   def information?; end
   def initialize(request, response, parsed_block, options = nil); end
@@ -268,12 +336,17 @@ class HTTParty::Response
   def range_not_satisfiable?; end
   def redirection?; end
   def request; end
+  def request_entity_too_large?; end
   def request_header_fields_too_large?; end
+  def request_time_out?; end
   def request_timeout?; end
+  def request_uri_too_long?; end
+  def requested_range_not_satisfiable?; end
   def reset_content?; end
   def respond_to_missing?(name, *args); end
   def response; end
   def see_other?; end
+  def self._load(data); end
   def self.underscore(string); end
   def server_error?; end
   def service_unavailable?; end
@@ -293,6 +366,7 @@ class HTTParty::Response
   def use_proxy?; end
   def variant_also_negotiates?; end
   def version_not_supported?; end
+  def warn_about_nil_deprecation; end
 end
 class HTTParty::Response::Headers < SimpleDelegator
   def ==(other); end
@@ -309,7 +383,7 @@ module HTTParty::ClassMethods
   def debug_output(stream = nil); end
   def default_options; end
   def default_params(h = nil); end
-  def default_timeout(t); end
+  def default_timeout(value); end
   def delete(path, options = nil, &block); end
   def digest_auth(u, p); end
   def disable_rails_query_string_format; end
@@ -320,12 +394,13 @@ module HTTParty::ClassMethods
   def head(path, options = nil, &block); end
   def headers(h = nil); end
   def http_proxy(addr = nil, port = nil, user = nil, pass = nil); end
+  def lock(path, options = nil, &block); end
   def logger(logger, level = nil, format = nil); end
   def maintain_method_across_redirects(value = nil); end
   def mkcol(path, options = nil, &block); end
   def move(path, options = nil, &block); end
   def no_follow(value = nil); end
-  def open_timeout(t); end
+  def open_timeout(value); end
   def options(path, options = nil, &block); end
   def parser(custom_parser = nil); end
   def patch(path, options = nil, &block); end
@@ -334,17 +409,20 @@ module HTTParty::ClassMethods
   def pkcs12(p12_contents, password); end
   def post(path, options = nil, &block); end
   def process_cookies(options); end
-  def process_headers(options); end
   def put(path, options = nil, &block); end
   def query_string_normalizer(normalizer); end
   def raise_on(codes = nil); end
-  def read_timeout(t); end
+  def read_timeout(value); end
   def resend_on_redirect(value = nil); end
+  def skip_decompression(value = nil); end
   def ssl_ca_file(path); end
   def ssl_ca_path(path); end
   def ssl_version(version); end
+  def unlock(path, options = nil, &block); end
   def uri_adapter(uri_adapter); end
   def validate_format; end
+  def validate_timeout_argument(timeout_type, value); end
+  def write_timeout(value); end
 end
 class HTTParty::Basement
   def self.default_cookies; end

@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/em-websocket/all/em-websocket.rbi
 #
-# em-websocket-0.5.1
+# em-websocket-0.5.2
 
 module EventMachine
 end
@@ -37,7 +37,7 @@ class EventMachine::WebSocket::WSMessageTooBigError < EventMachine::WebSocket::W
   def code; end
 end
 class EventMachine::WebSocket::Connection < EventMachine::Connection
-  def abort; end
+  def abort(reason); end
   def acceptable_close_code?(code); end
   def close(code = nil, body = nil); end
   def close_timeout; end
@@ -59,9 +59,12 @@ class EventMachine::WebSocket::Connection < EventMachine::Connection
   def pong(body = nil); end
   def post_init; end
   def receive_data(data); end
+  def remote_ip; end
   def send(data); end
   def send_binary(data); end
+  def send_data(data); end
   def send_flash_cross_domain_file; end
+  def send_healthcheck_response; end
   def send_text(data); end
   def state; end
   def supports_close_codes?; end
@@ -92,6 +95,7 @@ class EventMachine::WebSocket::Handshake
 end
 module EventMachine::WebSocket::Handshake75
   def self.handshake(headers, path, secure); end
+  def self.validate_protocol!(protocol); end
 end
 module EventMachine::WebSocket::Handshake76
   def self.handshake(headers, path, secure); end
@@ -101,6 +105,7 @@ module EventMachine::WebSocket::Handshake76
 end
 module EventMachine::WebSocket::Handshake04
   def self.handshake(headers, _, __); end
+  def self.validate_protocol!(protocol); end
 end
 module EventMachine::WebSocket::Framing76
   def initialize_framing; end

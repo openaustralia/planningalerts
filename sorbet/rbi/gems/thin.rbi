@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/thin/all/thin.rbi
 #
-# thin-1.7.2
+# thin-1.8.1
 
 module Thin
   def self.linux?; end
@@ -81,6 +81,7 @@ end
 module Thin::Daemonizable
   def change_privilege(user, group = nil); end
   def daemonize; end
+  def kill(timeout = nil); end
   def log_file; end
   def log_file=(arg0); end
   def on_restart(&block); end
@@ -96,6 +97,7 @@ end
 module Thin::Daemonizable::ClassMethods
   def force_kill(pid, pid_file); end
   def kill(pid_file, timeout = nil); end
+  def monotonic_time; end
   def read_pid_file(file); end
   def restart(pid_file); end
   def send_signal(signal, pid_file, timeout = nil); end

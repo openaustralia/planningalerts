@@ -7,15 +7,16 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/lumberjack/all/lumberjack.rbi
 #
-# lumberjack-1.2.6
+# lumberjack-1.2.8
 
 module Lumberjack
-  def self.context; end
+  def self.context(&block); end
   def self.context?; end
   def self.context_tags; end
   def self.tag(tags); end
   def self.unit_of_work(id = nil); end
   def self.unit_of_work_id; end
+  def self.use_context(context, &block); end
 end
 module Lumberjack::Severity
   def self.label_to_level(label); end
@@ -122,7 +123,7 @@ class Lumberjack::Device::Writer < Lumberjack::Device
   def flush; end
   def initialize(stream, options = nil); end
   def stream; end
-  def stream=(stream); end
+  def stream=(arg0); end
   def write(entry); end
   def write_to_stream(lines); end
 end
@@ -230,6 +231,7 @@ class Lumberjack::Logger
   def tags; end
   def thread_local_value(name); end
   def unknown(message_or_progname_or_tags = nil, progname_or_tags = nil, &block); end
+  def untagged(&block); end
   def warn!; end
   def warn(message_or_progname_or_tags = nil, progname_or_tags = nil, &block); end
   def warn?; end
@@ -256,7 +258,7 @@ module Lumberjack::TaggedLoggerSupport
   def push_tags(*tags); end
   def tagged(*tags, &block); end
 end
-class Lumberjack::TaggedLoggerSupport::Formatter < Anonymous_Delegator_72
+class Lumberjack::TaggedLoggerSupport::Formatter < Anonymous_Delegator_74
   def __formatter; end
   def clear_tags!(*args, &block); end
   def current_tags; end

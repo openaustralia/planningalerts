@@ -7,13 +7,15 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/rgeo/all/rgeo.rbi
 #
-# rgeo-2.1.1
+# rgeo-2.3.0
 
 module RGeo
 end
 module RGeo::Error
 end
 class RGeo::Error::RGeoError < RuntimeError
+end
+class RGeo::Error::GeosError < RGeo::Error::RGeoError
 end
 class RGeo::Error::InvalidGeometry < RGeo::Error::RGeoError
 end
@@ -117,6 +119,7 @@ module RGeo::Feature::LineString
   include RGeo::Feature::Curve
 end
 module RGeo::Feature::LinearRing
+  def ccw?; end
   extend RGeo::Feature::Type
   include RGeo::Feature::LineString
 end
@@ -477,6 +480,7 @@ module RGeo::ImplHelper::BasicGeometryCollectionMethods
   def dimension; end
   def each(&block); end
   def elements; end
+  def geometries; end
   def geometry_n(n); end
   def geometry_type; end
   def hash; end
@@ -484,10 +488,12 @@ module RGeo::ImplHelper::BasicGeometryCollectionMethods
   def is_empty?; end
   def num_geometries; end
   def rep_equals?(rhs); end
+  include Enumerable
 end
 module RGeo::ImplHelper::BasicMultiLineStringMethods
   def add_boundary(hash, point); end
   def boundary; end
+  def contains?(rhs); end
   def coordinates; end
   def geometry_type; end
   def initialize(factory, elements); end
@@ -503,6 +509,7 @@ end
 module RGeo::ImplHelper::BasicMultiPolygonMethods
   def area; end
   def boundary; end
+  def contains?(rhs); end
   def coordinates; end
   def geometry_type; end
   def initialize(factory, elements); end
@@ -527,7 +534,10 @@ module RGeo::ImplHelper::BasicPointMethods
   def z; end
 end
 module RGeo::ImplHelper::BasicLineStringMethods
+  def between_coordinate?(coord, start_coord, end_coord); end
   def boundary; end
+  def contains?(rhs); end
+  def contains_point?(point); end
   def coordinates; end
   def copy_state_from(obj); end
   def dimension; end
@@ -539,6 +549,8 @@ module RGeo::ImplHelper::BasicLineStringMethods
   def is_empty?; end
   def is_ring?; end
   def num_points; end
+  def point_collinear?(a, b, c); end
+  def point_intersect_segment?(point, start_point, end_point); end
   def point_n(n); end
   def points; end
   def rep_equals?(rhs); end
@@ -552,11 +564,14 @@ module RGeo::ImplHelper::BasicLineMethods
   def validate_geometry; end
 end
 module RGeo::ImplHelper::BasicLinearRingMethods
+  def ccw?; end
   def geometry_type; end
   def validate_geometry; end
 end
 module RGeo::ImplHelper::BasicPolygonMethods
   def boundary; end
+  def contains?(rhs); end
+  def contains_point?(point); end
   def coordinates; end
   def copy_state_from(obj); end
   def dimension; end
@@ -569,6 +584,7 @@ module RGeo::ImplHelper::BasicPolygonMethods
   def is_empty?; end
   def num_interior_rings; end
   def rep_equals?(rhs); end
+  def ring_encloses_point?(ring, point, on_border_return: nil); end
 end
 module RGeo::WKRep
 end
@@ -752,6 +768,7 @@ module RGeo::Geos::FFILineStringMethods
   def start_point; end
 end
 module RGeo::Geos::FFILinearRingMethods
+  def ccw?; end
   def geometry_type; end
 end
 module RGeo::Geos::FFILineMethods
@@ -1231,6 +1248,8 @@ class RGeo::Cartesian::BoundingBox
   def z_span; end
 end
 module RGeo::Cartesian::Analysis
+  def self.ccw?(ring); end
+  def self.counter_clockwise?(ring); end
   def self.ring_direction(ring); end
 end
 module RGeo::Geographic
@@ -1368,6 +1387,9 @@ end
 module RGeo::Geographic::SphericalMultiLineStringMethods
   def length; end
 end
+module RGeo::Geographic::SphericalPolygonMethods
+  def centroid; end
+end
 class RGeo::Geographic::SphericalPointImpl
   def lat; end
   def latitude; end
@@ -1405,6 +1427,7 @@ end
 class RGeo::Geographic::SphericalPolygonImpl
   include RGeo::Feature::Polygon
   include RGeo::Geographic::SphericalGeometryMethods
+  include RGeo::Geographic::SphericalPolygonMethods
   include RGeo::ImplHelper::BasicGeometryMethods
   include RGeo::ImplHelper::BasicPolygonMethods
 end

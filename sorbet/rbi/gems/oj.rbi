@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/oj/all/oj.rbi
 #
-# oj-3.10.6
+# oj-3.13.6
 
 module Oj
   def add_to_json(*arg0); end
@@ -70,7 +70,7 @@ class Oj::EasyHash < Hash
   def [](key); end
   def initialize; end
   def method_missing(m, *args, &block); end
-  def respond_to?(m); end
+  def respond_to?(m, include_all = nil); end
 end
 class Oj::Error < StandardError
 end
@@ -170,14 +170,33 @@ class Oj::Doc
   def each_child(*arg0); end
   def each_leaf(*arg0); end
   def each_value(*arg0); end
+  def exists?(arg0); end
   def fetch(*arg0); end
   def home; end
   def local_key; end
   def move(arg0); end
+  def path; end
   def self.open(arg0); end
   def self.open_file(arg0); end
   def self.parse(arg0); end
   def size; end
   def type(*arg0); end
+  def where; end
   def where?; end
+end
+class Oj::Parser
+  def file(arg0); end
+  def just_one; end
+  def just_one=(arg0); end
+  def load(arg0); end
+  def method_missing(*arg0); end
+  def new(*arg0); end
+  def parse(arg0); end
+  def saj; end
+  def self.new(*arg0); end
+  def self.saj; end
+  def self.usual; end
+  def self.validate; end
+  def usual; end
+  def validate; end
 end

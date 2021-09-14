@@ -7,110 +7,353 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/rubocop-ast/all/rubocop-ast.rbi
 #
-# rubocop-ast-0.1.0
+# rubocop-ast-0.8.0
 
 module RuboCop
 end
 module RuboCop::AST
+  extend RuboCop::AST::RuboCopCompatibility
+end
+module RuboCop::AST::Ext
+end
+module RuboCop::AST::Ext::Range
+  def line_span(exclude_end: nil); end
+end
+class Parser::Source::Range
+  include RuboCop::AST::Ext::Range
 end
 class RuboCop::AST::NodePattern
   def ==(other); end
+  def as_json(_options = nil); end
+  def ast; end
+  def captures(*args, &block); end
+  def encode_with(coder); end
   def eql?(other); end
-  def initialize(str); end
+  def freeze; end
+  def init_with(coder); end
+  def initialize(str, compiler: nil); end
   def marshal_dump; end
   def marshal_load(pattern); end
-  def match(*args, **rest); end
+  def match(*args, **rest, &block); end
+  def match_code; end
+  def named_parameters(*args, &block); end
   def pattern; end
+  def positional_parameters(*args, &block); end
   def self.descend(element, &block); end
   def to_s; end
+  extend Forwardable
+  include RuboCop::AST::NodePattern::MethodDefiner
 end
-class RuboCop::AST::NodePattern::Invalid < StandardError
-end
-class RuboCop::AST::NodePattern::Compiler
-  def access_unify(name); end
-  def auto_use_temp_node?(code); end
-  def captures; end
-  def compile_any_order(capture_all = nil); end
-  def compile_arg(token); end
-  def compile_args(tokens); end
-  def compile_ascend; end
-  def compile_capture; end
-  def compile_captured_ellipsis; end
-  def compile_const(const); end
-  def compile_descend; end
-  def compile_ellipsis; end
-  def compile_expr(token = nil); end
-  def compile_funcall(method); end
-  def compile_guard_clause; end
-  def compile_intersect; end
-  def compile_keyword(keyword); end
-  def compile_literal(literal); end
-  def compile_negation; end
-  def compile_nodetype(type); end
-  def compile_param(number); end
-  def compile_predicate(predicate); end
-  def compile_repeated_expr(token); end
-  def compile_seq; end
-  def compile_union; end
-  def compile_wildcard(name); end
+module RuboCop::AST::NodePattern::MethodDefiner
+  def as_lambda; end
+  def compile_as_lambda; end
+  def compile_init; end
   def def_helper(base, method_name, **defaults); end
   def def_node_matcher(base, method_name, **defaults); end
   def def_node_search(base, method_name, **defaults); end
   def emit_keyword_list(forwarding: nil); end
+  def emit_lambda_code; end
   def emit_method_code; end
   def emit_node_search(method_name); end
   def emit_node_search_body(method_name, prelude:, on_match:); end
   def emit_param_list; end
+  def emit_params(*first, forwarding: nil); end
   def emit_retval; end
-  def emit_trailing_params(forwarding: nil); end
-  def emit_yield_capture(when_no_capture = nil); end
-  def fail_due_to(message); end
-  def forbid_unification(*names); end
-  def get_const(const); end
-  def get_keyword(name); end
-  def get_param(number); end
-  def initialize(str, node_var = nil); end
-  def insure_same_captures(enum, what); end
-  def match_code; end
-  def next_capture; end
-  def next_temp_value; end
-  def next_temp_variable(name); end
-  def parse_repetition_token; end
-  def repeated_generator(expr, captured, accumulate); end
-  def run(node_var); end
-  def self.tokens(pattern); end
-  def substitute_cur_node(code, cur_node, first_cur_node: nil); end
-  def tokens; end
-  def tokens_until(stop, what); end
-  def unify_in_union(enum); end
-  def variadic_seq_term; end
-  def with_child_context(code, child_index); end
-  def with_context(code, cur_node, use_temp_node: nil); end
-  def with_seq_head_context(code); end
-  def with_temp_node(cur_node); end
-  def with_temp_variables(&block); end
-end
-class RuboCop::AST::NodePattern::Compiler::Sequence < SimpleDelegator
-  def compile; end
-  def compile_child_nb_guard; end
-  def compile_first_terms; end
-  def compile_last_terms; end
-  def compile_seq_head; end
-  def compile_terms(index_range, start); end
-  def compile_variadic_term; end
-  def first_terms_arity; end
-  def first_terms_range; end
-  def initialize(compiler, *arity_term_list); end
-  def last_terms_arity; end
-  def last_terms_range; end
-  def seq_head?; end
-  def term(index, range); end
-  def variadic_arity; end
-  def variadic_term_min_arity; end
+  def emit_yield_capture(when_no_capture = nil, yield_with: nil); end
+  def wrapping_block(method_name, **defaults); end
 end
 module RuboCop::AST::NodePattern::Macros
   def def_node_matcher(method_name, pattern_str, **keyword_defaults); end
   def def_node_search(method_name, pattern_str, **keyword_defaults); end
+end
+class RuboCop::AST::NodePattern::Invalid < StandardError
+end
+module RuboCop::AST::Descendence
+  def child_nodes; end
+  def descendants; end
+  def each_child_node(*types); end
+  def each_descendant(*types, &block); end
+  def each_node(*types, &block); end
+  def visit_descendants(types, &block); end
+end
+class RuboCop::AST::NodePattern::Builder
+  def emit_atom(type, value); end
+  def emit_call(type, selector, args = nil); end
+  def emit_capture(capture_token, node); end
+  def emit_list(type, _begin, children, _end); end
+  def emit_subsequence(node_list); end
+  def emit_unary_op(type, _operator = nil, *children); end
+  def emit_union(begin_t, pattern_lists, end_t); end
+  def n(type, *args); end
+  def optimizable_as_set?(children); end
+  def union_children(pattern_lists); end
+end
+class RuboCop::AST::NodePattern::Comment
+  def ==(other); end
+  def initialize(range); end
+  def inspect; end
+  def loc; end
+  def location; end
+  def text; end
+end
+class RuboCop::AST::NodePattern::Compiler
+  def bind(*args, &block); end
+  def binding; end
+  def captures; end
+  def compile_as_atom(node); end
+  def compile_as_node_pattern(node, **options); end
+  def compile_sequence(sequence, var:); end
+  def each_union(enum, &block); end
+  def enforce_same_captures(enum); end
+  def freeze; end
+  def initialize; end
+  def named_parameter(name); end
+  def named_parameters; end
+  def new_capture; end
+  def next_capture; end
+  def parser; end
+  def positional_parameter(number); end
+  def positional_parameters; end
+  def with_temp_variables(*names, &block); end
+  extend Forwardable
+end
+class RuboCop::AST::NodePattern::Compiler::Subcompiler
+  def compile(node); end
+  def compiler; end
+  def do_compile; end
+  def initialize(compiler); end
+  def node; end
+  def self.inherited(base); end
+  def self.method_added(method); end
+  def self.registry; end
+end
+class RuboCop::AST::NodePattern::Compiler::AtomSubcompiler < RuboCop::AST::NodePattern::Compiler::Subcompiler
+  def visit_const; end
+  def visit_named_parameter; end
+  def visit_number; end
+  def visit_other_type; end
+  def visit_positional_parameter; end
+  def visit_regexp; end
+  def visit_set; end
+  def visit_string; end
+  def visit_symbol; end
+  def visit_unify; end
+end
+class RuboCop::AST::NodePattern::Compiler::Binding
+  def bind(name); end
+  def forbid(names); end
+  def initialize; end
+  def union_bind(enum); end
+end
+class RuboCop::AST::NodePattern::Compiler::NodePatternSubcompiler < RuboCop::AST::NodePattern::Compiler::Subcompiler
+  def access; end
+  def access_element; end
+  def access_node; end
+  def compile_args(arg_list, first: nil); end
+  def compile_guard_clause; end
+  def compile_value_match(value); end
+  def initialize(compiler, var: nil, access: nil, seq_head: nil); end
+  def multiple_access(kind); end
+  def seq_head; end
+  def visit_ascend; end
+  def visit_capture; end
+  def visit_descend; end
+  def visit_function_call; end
+  def visit_intersection; end
+  def visit_negation; end
+  def visit_node_type; end
+  def visit_other_type; end
+  def visit_predicate; end
+  def visit_sequence; end
+  def visit_unify; end
+  def visit_union; end
+  def visit_wildcard; end
+end
+class RuboCop::AST::NodePattern::Compiler::SequenceSubcompiler < RuboCop::AST::NodePattern::Compiler::Subcompiler
+  def compile(node); end
+  def compile_and_advance(term); end
+  def compile_any_order_branches(matched_var); end
+  def compile_any_order_else; end
+  def compile_captured_repetition(child_code, child_captures); end
+  def compile_case(when_branches, else_code); end
+  def compile_child_nb_guard(arity_range); end
+  def compile_cur_index; end
+  def compile_index(cur = nil); end
+  def compile_loop(term); end
+  def compile_loop_advance(to = nil); end
+  def compile_matched(kind); end
+  def compile_max_matched; end
+  def compile_min_check; end
+  def compile_remaining; end
+  def compile_sequence; end
+  def compile_terms(children = nil, last_arity = nil); end
+  def compile_union_forks; end
+  def cur_index; end
+  def empty_loop; end
+  def handle_prev; end
+  def in_sync; end
+  def initialize(compiler, sequence:, var:); end
+  def merge_forks!(forks); end
+  def preserve_union_start(forks); end
+  def remaining_arities(children, last_arity); end
+  def sync; end
+  def use_index_from_end; end
+  def visit_any_order; end
+  def visit_capture; end
+  def visit_other_type; end
+  def visit_repetition; end
+  def visit_rest; end
+  def visit_union; end
+  def within_loop; end
+end
+class RuboCop::AST::NodePattern::LexerRex
+  def action; end
+  def filename; end
+  def filename=(arg0); end
+  def location; end
+  def match; end
+  def matches; end
+  def next_token; end
+  def parse(str); end
+  def parse_file(path); end
+  def scanner_class; end
+  def ss; end
+  def ss=(arg0); end
+  def state; end
+  def state=(arg0); end
+end
+class RuboCop::AST::NodePattern::LexerRex::LexerError < StandardError
+end
+class RuboCop::AST::NodePattern::LexerRex::ScanError < RuboCop::AST::NodePattern::LexerRex::LexerError
+end
+class RuboCop::AST::NodePattern::Lexer < RuboCop::AST::NodePattern::LexerRex
+  def comments; end
+  def do_parse; end
+  def emit(type); end
+  def emit_comment; end
+  def emit_regexp; end
+  def initialize(source); end
+  def source_buffer; end
+  def token(type, value); end
+  def tokens; end
+end
+class RuboCop::AST::NodePattern::Node < Parser::AST::Node
+  def arity; end
+  def arity_range; end
+  def capture?; end
+  def child; end
+  def children_nodes; end
+  def in_sequence_head; end
+  def matches_within_set?; end
+  def nb_captures; end
+  def rest?; end
+  def variadic?; end
+  def with(type: nil, children: nil, location: nil); end
+  extend Forwardable
+  include RuboCop::AST::Descendence
+end
+module RuboCop::AST::NodePattern::Node::ForbidInSeqHead
+  def in_sequence_head; end
+end
+class RuboCop::AST::NodePattern::Node::Capture < RuboCop::AST::NodePattern::Node
+  def arity(*args, &block); end
+  def capture?; end
+  def in_sequence_head; end
+  def nb_captures; end
+  def rest?(*args, &block); end
+end
+class RuboCop::AST::NodePattern::Node::Sequence < RuboCop::AST::NodePattern::Node
+  def initialize(type, children = nil, properties = nil); end
+  include RuboCop::AST::NodePattern::Node::ForbidInSeqHead
+end
+class RuboCop::AST::NodePattern::Node::Predicate < RuboCop::AST::NodePattern::Node
+  def arg_list; end
+  def method_name; end
+end
+class RuboCop::AST::NodePattern::Node::Repetition < RuboCop::AST::NodePattern::Node
+  def arity; end
+  def operator; end
+  include RuboCop::AST::NodePattern::Node::ForbidInSeqHead
+end
+class RuboCop::AST::NodePattern::Node::Rest < RuboCop::AST::NodePattern::Node
+  def arity; end
+  def in_sequence_head; end
+  def rest?; end
+end
+class RuboCop::AST::NodePattern::Node::AnyOrder < RuboCop::AST::NodePattern::Node
+  def arity; end
+  def ends_with_rest?; end
+  def rest_node; end
+  def term_nodes; end
+  include RuboCop::AST::NodePattern::Node::ForbidInSeqHead
+end
+module RuboCop::AST::NodePattern::Node::MapMinMax
+  def map_min_max(enum); end
+end
+class RuboCop::AST::NodePattern::Node::Subsequence < RuboCop::AST::NodePattern::Node
+  def arity; end
+  def in_sequence_head; end
+  include RuboCop::AST::NodePattern::Node::ForbidInSeqHead
+  include RuboCop::AST::NodePattern::Node::MapMinMax
+end
+class RuboCop::AST::NodePattern::Node::Union < RuboCop::AST::NodePattern::Node
+  def arity; end
+  def in_sequence_head; end
+  include RuboCop::AST::NodePattern::Node::MapMinMax
+end
+class RuboCop::AST::NodePattern::Parser < Racc::Parser
+  def _reduce_10(val, _values); end
+  def _reduce_11(val, _values); end
+  def _reduce_13(val, _values); end
+  def _reduce_14(val, _values); end
+  def _reduce_15(val, _values); end
+  def _reduce_16(val, _values); end
+  def _reduce_17(val, _values); end
+  def _reduce_18(val, _values); end
+  def _reduce_19(val, _values); end
+  def _reduce_2(val, _values); end
+  def _reduce_20(val, _values); end
+  def _reduce_21(val, _values); end
+  def _reduce_22(val, _values); end
+  def _reduce_25(val, _values); end
+  def _reduce_26(val, _values); end
+  def _reduce_3(val, _values); end
+  def _reduce_33(val, _values); end
+  def _reduce_37(val, _values); end
+  def _reduce_38(val, _values); end
+  def _reduce_39(val, _values); end
+  def _reduce_4(val, _values); end
+  def _reduce_40(val, _values); end
+  def _reduce_41(val, _values); end
+  def _reduce_42(val, _values); end
+  def _reduce_43(val, _values); end
+  def _reduce_44(val, _values); end
+  def _reduce_45(val, _values); end
+  def _reduce_46(val, _values); end
+  def _reduce_5(val, _values); end
+  def _reduce_6(val, _values); end
+  def _reduce_7(val, _values); end
+  def _reduce_8(val, _values); end
+  def _reduce_9(val, _values); end
+  def _reduce_none(val, _values); end
+  def emit_atom(*args, &block); end
+  def emit_call(*args, &block); end
+  def emit_capture(*args, &block); end
+  def emit_list(*args, &block); end
+  def emit_unary_op(*args, &block); end
+  def emit_union(*args, &block); end
+  def enforce_unary(node); end
+  def initialize(builder = nil); end
+  def inspect; end
+  def next_token(*args, &block); end
+  def on_error(token, val, _vstack); end
+  def parse(source); end
+  extend Forwardable
+end
+module RuboCop::AST::NodePattern::Sets
+  def self.[](set); end
+  def self.name(set); end
+  def self.uniq(name); end
 end
 module RuboCop::AST::Sexp
   def s(type, *children); end
@@ -132,7 +375,7 @@ class RuboCop::AST::Node < Parser::AST::Node
   def array_pattern_with_tail_type?; end
   def array_type?; end
   def assignment?; end
-  def assignment_or_similar?(node = nil); end
+  def assignment_or_similar?(param0 = nil); end
   def back_ref_type?; end
   def basic_conditional?; end
   def basic_literal?; end
@@ -151,8 +394,8 @@ class RuboCop::AST::Node < Parser::AST::Node
   def casgn_type?; end
   def cbase_type?; end
   def chained?; end
-  def child_nodes; end
-  def class_constructor?(node = nil); end
+  def class_constructor?(param0 = nil); end
+  def class_definition?(param0 = nil); end
   def class_type?; end
   def complete!; end
   def complete?; end
@@ -165,18 +408,14 @@ class RuboCop::AST::Node < Parser::AST::Node
   def cvar_type?; end
   def cvasgn_type?; end
   def def_type?; end
-  def defined_module0(node = nil); end
+  def defined_module0(param0 = nil); end
   def defined_module; end
   def defined_module_name; end
   def defined_type?; end
   def defs_type?; end
-  def descendants; end
   def dstr_type?; end
   def dsym_type?; end
   def each_ancestor(*types, &block); end
-  def each_child_node(*types); end
-  def each_descendant(*types, &block); end
-  def each_node(*types, &block); end
   def eflipflop_type?; end
   def empty_else_type?; end
   def empty_source?; end
@@ -193,6 +432,7 @@ class RuboCop::AST::Node < Parser::AST::Node
   def forward_arg_type?; end
   def forward_args_type?; end
   def forwarded_args_type?; end
+  def global_const?(param0 = nil, param1); end
   def guard_clause?; end
   def gvar_type?; end
   def gvasgn_type?; end
@@ -220,10 +460,12 @@ class RuboCop::AST::Node < Parser::AST::Node
   def kwoptarg_type?; end
   def kwrestarg_type?; end
   def kwsplat_type?; end
-  def lambda?(node = nil); end
-  def lambda_or_proc?(node = nil); end
+  def lambda?(param0 = nil); end
+  def lambda_or_proc?(param0 = nil); end
   def lambda_type?; end
   def last_line; end
+  def left_sibling; end
+  def left_siblings; end
   def line_count; end
   def literal?; end
   def loop_keyword?; end
@@ -233,7 +475,7 @@ class RuboCop::AST::Node < Parser::AST::Node
   def match_alt_type?; end
   def match_as_type?; end
   def match_current_line_type?; end
-  def match_guard_clause?(node = nil); end
+  def match_guard_clause?(param0 = nil); end
   def match_nil_pattern_type?; end
   def match_pattern_p_type?; end
   def match_pattern_type?; end
@@ -242,10 +484,11 @@ class RuboCop::AST::Node < Parser::AST::Node
   def match_with_lvasgn_type?; end
   def match_with_trailing_comma_type?; end
   def mlhs_type?; end
+  def module_definition?(param0 = nil); end
   def module_type?; end
   def multiline?; end
   def mutable_literal?; end
-  def new_class_or_module_block?(node = nil); end
+  def new_class_or_module_block?(param0 = nil); end
   def next_type?; end
   def nil_type?; end
   def node_parts; end
@@ -266,6 +509,7 @@ class RuboCop::AST::Node < Parser::AST::Node
   def pair_type?; end
   def parent; end
   def parent=(node); end
+  def parent?; end
   def parent_module_name; end
   def parent_module_name_for_block(ancestor); end
   def parent_module_name_for_sclass(sclass_node); end
@@ -275,12 +519,12 @@ class RuboCop::AST::Node < Parser::AST::Node
   def post_condition_loop?; end
   def postexe_type?; end
   def preexe_type?; end
-  def proc?(node = nil); end
+  def proc?(param0 = nil); end
   def procarg0_type?; end
   def pure?; end
   def range_type?; end
   def rational_type?; end
-  def receiver(node = nil); end
+  def receiver(param0 = nil); end
   def recursive_basic_literal?; end
   def recursive_literal?; end
   def redo_type?; end
@@ -293,6 +537,9 @@ class RuboCop::AST::Node < Parser::AST::Node
   def restarg_type?; end
   def retry_type?; end
   def return_type?; end
+  def right_sibling; end
+  def right_siblings; end
+  def root?; end
   def sclass_type?; end
   def self_type?; end
   def send_type?; end
@@ -305,8 +552,9 @@ class RuboCop::AST::Node < Parser::AST::Node
   def source_range; end
   def special_keyword?; end
   def splat_type?; end
-  def str_content(node = nil); end
+  def str_content(param0 = nil); end
   def str_type?; end
+  def struct_constructor?(param0 = nil); end
   def super_type?; end
   def sym_type?; end
   def true_type?; end
@@ -319,7 +567,6 @@ class RuboCop::AST::Node < Parser::AST::Node
   def value_used?; end
   def variable?; end
   def visit_ancestors(types); end
-  def visit_descendants(types, &block); end
   def when_type?; end
   def while_post_type?; end
   def while_type?; end
@@ -328,6 +575,7 @@ class RuboCop::AST::Node < Parser::AST::Node
   def yield_type?; end
   def zsuper_type?; end
   extend RuboCop::AST::NodePattern::Macros
+  include RuboCop::AST::Descendence
   include RuboCop::AST::Sexp
 end
 module RuboCop::AST::MethodIdentifierPredicates
@@ -542,12 +790,11 @@ class RuboCop::AST::HashElementNode::HashElementDelta
 end
 module RuboCop::AST::MethodDispatchNode
   def access_modifier?; end
-  def adjacent_def_modifier?(node = nil); end
-  def arguments; end
+  def adjacent_def_modifier?(param0 = nil); end
   def arithmetic_operation?; end
   def assignment?; end
   def bare_access_modifier?; end
-  def bare_access_modifier_declaration?(node = nil); end
+  def bare_access_modifier_declaration?(param0 = nil); end
   def binary_operation?; end
   def block_literal?; end
   def block_node; end
@@ -557,16 +804,14 @@ module RuboCop::AST::MethodDispatchNode
   def dot?; end
   def double_colon?; end
   def implicit_call?; end
+  def in_macro_scope?(param0 = nil); end
   def lambda?; end
   def lambda_literal?; end
   def macro?; end
-  def macro_kwbegin_wrapper?(parent); end
-  def macro_scope?(node = nil); end
   def method_name; end
   def non_bare_access_modifier?; end
-  def non_bare_access_modifier_declaration?(node = nil); end
+  def non_bare_access_modifier_declaration?(param0 = nil); end
   def receiver; end
-  def root_node?(node); end
   def safe_navigation?; end
   def self_receiver?; end
   def setter_method?; end
@@ -589,6 +834,17 @@ module RuboCop::AST::ParameterizedNode
   def parenthesized?; end
   def rest_argument?; end
   def splat_argument?; end
+end
+module RuboCop::AST::ParameterizedNode::WrappedArguments
+  def arguments; end
+  include RuboCop::AST::ParameterizedNode
+end
+module RuboCop::AST::ParameterizedNode::RestArguments
+  def arguments; end
+  def arguments?; end
+  def first_argument; end
+  def last_argument; end
+  include RuboCop::AST::ParameterizedNode
 end
 module RuboCop::AST::PredicateOperatorNode
   def logical_operator?; end
@@ -637,12 +893,10 @@ class RuboCop::AST::BlockNode < RuboCop::AST::Node
   include RuboCop::AST::MethodIdentifierPredicates
 end
 class RuboCop::AST::BreakNode < RuboCop::AST::Node
-  def arguments; end
-  include RuboCop::AST::MethodDispatchNode
-  include RuboCop::AST::ParameterizedNode
+  include RuboCop::AST::ParameterizedNode::WrappedArguments
 end
 class RuboCop::AST::CaseMatchNode < RuboCop::AST::Node
-  def each_in_pattern; end
+  def each_in_pattern(&block); end
   def else?; end
   def else_branch; end
   def in_pattern_branches; end
@@ -650,7 +904,8 @@ class RuboCop::AST::CaseMatchNode < RuboCop::AST::Node
   include RuboCop::AST::ConditionalNode
 end
 class RuboCop::AST::CaseNode < RuboCop::AST::Node
-  def each_when; end
+  def branches; end
+  def each_when(&block); end
   def else?; end
   def else_branch; end
   def keyword; end
@@ -662,18 +917,28 @@ class RuboCop::AST::ClassNode < RuboCop::AST::Node
   def identifier; end
   def parent_class; end
 end
+class RuboCop::AST::ConstNode < RuboCop::AST::Node
+  def absolute?; end
+  def class_name?; end
+  def each_path(&block); end
+  def module_name?; end
+  def namespace; end
+  def relative?; end
+  def short_name; end
+end
 class RuboCop::AST::DefNode < RuboCop::AST::Node
   def argument_forwarding?; end
   def arguments; end
   def body; end
+  def endless?; end
   def method_name; end
-  def node_parts; end
   def receiver; end
   def void_context?; end
   include RuboCop::AST::MethodIdentifierPredicates
   include RuboCop::AST::ParameterizedNode
 end
 class RuboCop::AST::DefinedNode < RuboCop::AST::Node
+  def arguments; end
   def node_parts; end
   include RuboCop::AST::MethodDispatchNode
   include RuboCop::AST::ParameterizedNode
@@ -694,13 +959,14 @@ class RuboCop::AST::ForwardArgsNode < RuboCop::AST::Node
   include RuboCop::AST::CollectionNode
 end
 class RuboCop::AST::FloatNode < RuboCop::AST::Node
+  include RuboCop::AST::BasicLiteralNode
   include RuboCop::AST::NumericNode
 end
 class RuboCop::AST::HashNode < RuboCop::AST::Node
   def braces?; end
-  def each_key; end
+  def each_key(&block); end
   def each_pair; end
-  def each_value; end
+  def each_value(&block); end
   def empty?; end
   def keys; end
   def mixed_delimiters?; end
@@ -710,7 +976,7 @@ class RuboCop::AST::HashNode < RuboCop::AST::Node
 end
 class RuboCop::AST::IfNode < RuboCop::AST::Node
   def branches; end
-  def each_branch; end
+  def each_branch(&block); end
   def else?; end
   def else_branch; end
   def elsif?; end
@@ -728,22 +994,23 @@ class RuboCop::AST::IfNode < RuboCop::AST::Node
   include RuboCop::AST::ModifierNode
 end
 class RuboCop::AST::IndexNode < RuboCop::AST::Node
-  def arguments; end
   def assignment_method?; end
   def attribute_accessor?; end
+  def first_argument_index; end
   def method_name; end
   include RuboCop::AST::MethodDispatchNode
-  include RuboCop::AST::ParameterizedNode
+  include RuboCop::AST::ParameterizedNode::RestArguments
 end
 class RuboCop::AST::IndexasgnNode < RuboCop::AST::Node
-  def arguments; end
   def assignment_method?; end
   def attribute_accessor?; end
+  def first_argument_index; end
   def method_name; end
   include RuboCop::AST::MethodDispatchNode
-  include RuboCop::AST::ParameterizedNode
+  include RuboCop::AST::ParameterizedNode::RestArguments
 end
 class RuboCop::AST::IntNode < RuboCop::AST::Node
+  include RuboCop::AST::BasicLiteralNode
   include RuboCop::AST::NumericNode
 end
 class RuboCop::AST::KeywordSplatNode < RuboCop::AST::Node
@@ -754,18 +1021,22 @@ class RuboCop::AST::KeywordSplatNode < RuboCop::AST::Node
   include RuboCop::AST::HashElementNode
 end
 class RuboCop::AST::LambdaNode < RuboCop::AST::Node
-  def arguments; end
   def assignment_method?; end
   def attribute_accessor?; end
+  def first_argument_index; end
   def lambda?; end
   def lambda_literal?; end
   def method_name; end
+  def receiver; end
   include RuboCop::AST::MethodDispatchNode
-  include RuboCop::AST::ParameterizedNode
+  include RuboCop::AST::ParameterizedNode::RestArguments
 end
 class RuboCop::AST::ModuleNode < RuboCop::AST::Node
   def body; end
   def identifier; end
+end
+class RuboCop::AST::NextNode < RuboCop::AST::Node
+  include RuboCop::AST::ParameterizedNode::WrappedArguments
 end
 class RuboCop::AST::OrNode < RuboCop::AST::Node
   def alternate_operator; end
@@ -775,9 +1046,9 @@ class RuboCop::AST::OrNode < RuboCop::AST::Node
 end
 class RuboCop::AST::PairNode < RuboCop::AST::Node
   def colon?; end
-  def delimiter(with_spacing = nil); end
+  def delimiter(*deprecated, with_spacing: nil); end
   def hash_rocket?; end
-  def inverse_delimiter(with_spacing = nil); end
+  def inverse_delimiter(*deprecated, with_spacing: nil); end
   def value_on_new_line?; end
   include RuboCop::AST::HashElementNode
 end
@@ -794,6 +1065,7 @@ class RuboCop::AST::RegexpNode < RuboCop::AST::Node
   def interpolation?; end
   def multiline_mode?; end
   def no_encoding?; end
+  def options; end
   def percent_r_literal?; end
   def regopt; end
   def regopt_include?(option); end
@@ -801,34 +1073,38 @@ class RuboCop::AST::RegexpNode < RuboCop::AST::Node
   def slash_literal?; end
   def to_regexp; end
 end
+class RuboCop::AST::RescueNode < RuboCop::AST::Node
+  def body; end
+  def branches; end
+  def else?; end
+  def else_branch; end
+  def resbody_branches; end
+end
 class RuboCop::AST::ResbodyNode < RuboCop::AST::Node
   def body; end
+  def branch_index; end
   def exception_variable; end
-end
-class RuboCop::AST::RetryNode < RuboCop::AST::Node
-  def arguments; end
-  include RuboCop::AST::MethodDispatchNode
-  include RuboCop::AST::ParameterizedNode
+  def exceptions; end
 end
 class RuboCop::AST::ReturnNode < RuboCop::AST::Node
-  def arguments; end
-  include RuboCop::AST::MethodDispatchNode
-  include RuboCop::AST::ParameterizedNode
+  include RuboCop::AST::ParameterizedNode::WrappedArguments
 end
 class RuboCop::AST::SelfClassNode < RuboCop::AST::Node
   def body; end
   def identifier; end
 end
 class RuboCop::AST::SendNode < RuboCop::AST::Node
-  def attribute_accessor?(node = nil); end
+  def attribute_accessor?(param0 = nil); end
+  def first_argument_index; end
   include RuboCop::AST::MethodDispatchNode
-  include RuboCop::AST::ParameterizedNode
+  include RuboCop::AST::ParameterizedNode::RestArguments
 end
 class RuboCop::AST::StrNode < RuboCop::AST::Node
   def heredoc?; end
   include RuboCop::AST::BasicLiteralNode
 end
 class RuboCop::AST::SuperNode < RuboCop::AST::Node
+  def arguments; end
   def node_parts; end
   include RuboCop::AST::MethodDispatchNode
   include RuboCop::AST::ParameterizedNode
@@ -847,7 +1123,7 @@ class RuboCop::AST::WhenNode < RuboCop::AST::Node
   def body; end
   def branch_index; end
   def conditions; end
-  def each_condition; end
+  def each_condition(&block); end
   def then?; end
 end
 class RuboCop::AST::WhileNode < RuboCop::AST::Node
@@ -858,6 +1134,7 @@ class RuboCop::AST::WhileNode < RuboCop::AST::Node
   include RuboCop::AST::ModifierNode
 end
 class RuboCop::AST::YieldNode < RuboCop::AST::Node
+  def arguments; end
   def node_parts; end
   include RuboCop::AST::MethodDispatchNode
   include RuboCop::AST::ParameterizedNode
@@ -874,21 +1151,29 @@ class RuboCop::AST::ProcessedSource
   def blank?; end
   def buffer; end
   def checksum; end
-  def comment_lines; end
+  def comment_at_line(line); end
+  def comment_index; end
   def commented?(source_range); end
   def comments; end
   def comments_before_line(line); end
+  def contains_comment?(source_range); end
   def create_parser(ruby_version); end
   def current_line(token); end
   def diagnostics; end
-  def each_comment; end
-  def each_token; end
+  def each_comment(&block); end
+  def each_comment_in_lines(line_range); end
+  def each_token(&block); end
   def file_path; end
-  def find_comment; end
-  def find_token; end
+  def find_comment(&block); end
+  def find_token(&block); end
+  def first_token_index(range_or_node); end
+  def first_token_of(range_or_node); end
   def following_line(token); end
   def initialize(source, ruby_version, path = nil); end
+  def last_token_index(range_or_node); end
+  def last_token_of(range_or_node); end
   def line_indentation(line_number); end
+  def line_with_comment?(line); end
   def lines; end
   def parse(source, ruby_version); end
   def parser_class(ruby_version); end
@@ -898,10 +1183,16 @@ class RuboCop::AST::ProcessedSource
   def raw_source; end
   def ruby_version; end
   def self.from_file(path, ruby_version); end
+  def sorted_tokens; end
+  def source_range(range_or_node); end
   def start_with?(string); end
   def tokenize(parser); end
   def tokens; end
+  def tokens_within(range_or_node); end
   def valid_syntax?; end
+end
+module RuboCop::AST::RuboCopCompatibility
+  def rubocop_loaded; end
 end
 class RuboCop::AST::Token
   def begin_pos; end
@@ -934,6 +1225,8 @@ class RuboCop::AST::Token
 end
 module RuboCop::AST::Traversal
   def on___ENCODING__(node); end
+  def on___FILE__(node); end
+  def on___LINE__(node); end
   def on_alias(node); end
   def on_and(node); end
   def on_and_asgn(node); end
@@ -970,6 +1263,7 @@ module RuboCop::AST::Traversal
   def on_ensure(node); end
   def on_erange(node); end
   def on_false(node); end
+  def on_find_pattern(node); end
   def on_float(node); end
   def on_for(node); end
   def on_forward_arg(node); end
@@ -991,7 +1285,9 @@ module RuboCop::AST::Traversal
   def on_ivar(node); end
   def on_ivasgn(node); end
   def on_kwarg(node); end
+  def on_kwargs(node); end
   def on_kwbegin(node); end
+  def on_kwnilarg(node); end
   def on_kwoptarg(node); end
   def on_kwrestarg(node); end
   def on_kwsplat(node); end
@@ -1003,12 +1299,15 @@ module RuboCop::AST::Traversal
   def on_match_as(node); end
   def on_match_current_line(node); end
   def on_match_nil_pattern(node); end
+  def on_match_pattern(node); end
+  def on_match_pattern_p(node); end
   def on_match_rest(node); end
   def on_match_var(node); end
   def on_match_with_lvasgn(node); end
   def on_match_with_trailing_comma(node); end
   def on_mlhs(node); end
   def on_module(node); end
+  def on_mrasgn(node); end
   def on_next(node); end
   def on_nil(node); end
   def on_not(node); end
@@ -1023,6 +1322,7 @@ module RuboCop::AST::Traversal
   def on_postexe(node); end
   def on_preexe(node); end
   def on_procarg0(node); end
+  def on_rasgn(node); end
   def on_rational(node); end
   def on_redo(node); end
   def on_regexp(node); end
@@ -1052,6 +1352,14 @@ module RuboCop::AST::Traversal
   def on_yield(node); end
   def on_zsuper(node); end
   def walk(node); end
+  extend RuboCop::AST::Traversal::CallbackCompiler
+end
+class RuboCop::AST::Traversal::DebugError < RuntimeError
+end
+module RuboCop::AST::Traversal::CallbackCompiler
+  def arity_check(range); end
+  def body(signature, prelude); end
+  def def_callback(type, *signature, arity: nil, arity_check: nil, body: nil); end
 end
 module RuboCop::AST::Version
 end

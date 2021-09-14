@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/virtus/all/virtus.rbi
 #
-# virtus-1.0.5
+# virtus-2.0.0
 
 module Virtus
   def self.coerce; end
@@ -15,9 +15,11 @@ module Virtus
   def self.coercer(&block); end
   def self.config(&block); end
   def self.configuration; end
+  def self.constantize(type); end
   def self.extended(object); end
   def self.finalize; end
   def self.included(object); end
+  def self.inflector; end
   def self.model(options = nil, &block); end
   def self.module(options = nil, &block); end
   def self.value_object(options = nil, &block); end
@@ -73,13 +75,11 @@ module Virtus::Extensions
   def self.extended(object); end
 end
 module Virtus::Extensions::Methods
+  def allowed_writer_methods; end
   def attribute(name, type = nil, options = nil); end
   def attribute_set; end
   def self.extended(descendant); end
   def values(&block); end
-end
-module Virtus::Extensions::AllowedWriterMethods
-  def allowed_writer_methods; end
 end
 module Virtus::ConstMissingExtensions
   def const_missing(name); end
@@ -201,6 +201,13 @@ class Virtus::Coercer
   def primitive; end
   def success?(primitive, input); end
   def type; end
+  include Anonymous_Virtus_Equalizer_67
+end
+module Anonymous_Virtus_Equalizer_67
+  def cmp?(comparator, other); end
+  def hash; end
+  def inspect; end
+  include Virtus::Equalizer::Methods
 end
 class Virtus::AttributeSet < Module
   def <<(attribute); end
@@ -255,8 +262,7 @@ class Virtus::Attribute
   def type; end
   def value_coerced?(value); end
   extend DescendantsTracker
-  include Anonymous_Equalizer_67
-  include Equalizer::Methods
+  include Anonymous_Virtus_Equalizer_68
 end
 class Virtus::Attribute::DefaultValue
   def call(*arg0); end
@@ -264,6 +270,13 @@ class Virtus::Attribute::DefaultValue
   def self.build(*args); end
   def value; end
   extend DescendantsTracker
+  include Anonymous_Virtus_Equalizer_69
+end
+module Anonymous_Virtus_Equalizer_69
+  def cmp?(comparator, other); end
+  def hash; end
+  def inspect; end
+  include Virtus::Equalizer::Methods
 end
 class Virtus::Attribute::DefaultValue::FromClonable < Virtus::Attribute::DefaultValue
   def call(*arg0); end
@@ -277,10 +290,11 @@ class Virtus::Attribute::DefaultValue::FromSymbol < Virtus::Attribute::DefaultVa
   def call(instance, _); end
   def self.handle?(value); end
 end
-module Anonymous_Equalizer_67
+module Anonymous_Virtus_Equalizer_68
   def cmp?(comparator, other); end
   def hash; end
   def inspect; end
+  include Virtus::Equalizer::Methods
 end
 class Virtus::PendingAttribute
   def determine_type; end
@@ -358,6 +372,7 @@ class Virtus::Attribute::Collection < Virtus::Attribute
   def member_type; end
   def self.build_type(definition); end
   def self.merge_options!(type, options); end
+  def value_coerced?(value); end
 end
 class Virtus::Attribute::Collection::Type < Struct
   def coercion_method; end

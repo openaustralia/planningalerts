@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/redis/all/redis.rbi
 #
-# redis-4.3.1
+# redis-4.4.0
 
 class Redis
   def _bpop(cmd, args, &blk); end
@@ -193,6 +193,7 @@ class Redis
   def without_reconnect(&blk); end
   def xack(key, group, *ids); end
   def xadd(key, entry, approximate: nil, maxlen: nil, id: nil); end
+  def xautoclaim(key, group, consumer, min_idle_time, start, count: nil, justid: nil); end
   def xclaim(key, group, consumer, min_idle_time, *ids, **opts); end
   def xdel(key, *ids); end
   def xgroup(subcommand, key, group, id_or_consumer = nil, mkstream: nil); end
@@ -208,6 +209,7 @@ class Redis
   def zcard(key); end
   def zcount(key, min, max); end
   def zincrby(key, increment, member); end
+  def zinter(*keys, weights: nil, aggregate: nil, with_scores: nil); end
   def zinterstore(destination, keys, weights: nil, aggregate: nil); end
   def zlexcount(key, min, max); end
   def zpopmax(key, count = nil); end
@@ -262,11 +264,10 @@ class Redis::Cluster
   def db; end
   def db=(_db); end
   def disconnect; end
-  def extract_keys_in_pipeline(pipeline); end
   def fetch_cluster_info!(option); end
   def fetch_command_details(nodes); end
   def find_node(node_key); end
-  def find_node_key(command); end
+  def find_node_key(command, primary_only: nil); end
   def id; end
   def initialize(options = nil); end
   def process(commands, &block); end

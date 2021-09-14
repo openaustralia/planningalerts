@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/chunky_png/all/chunky_png.rbi
 #
-# chunky_png-1.3.11
+# chunky_png-1.4.0
 
 module ChunkyPNG
   def self.Color(*args); end
@@ -16,11 +16,6 @@ module ChunkyPNG
   def self.Vector(*args); end
   def self.build_dimension_from_object(source); end
   def self.build_point_from_object(source); end
-  def self.force_binary(str); end
-end
-class String
-end
-module Enumerable
 end
 class ChunkyPNG::Datastream
   def chunks; end
@@ -41,7 +36,6 @@ class ChunkyPNG::Datastream
   def physical_chunk; end
   def physical_chunk=(arg0); end
   def save(filename); end
-  def self.empty_bytearray; end
   def self.from_blob(str); end
   def self.from_file(filename); end
   def self.from_io(io); end
@@ -155,7 +149,7 @@ class ChunkyPNG::Chunk::InternationalText < ChunkyPNG::Chunk::Base
   def translated_keyword; end
   def translated_keyword=(arg0); end
 end
-class ChunkyPNG::Palette < SortedSet
+class ChunkyPNG::Palette < Set
   def [](index); end
   def best_color_settings; end
   def black_and_white?; end
@@ -269,6 +263,7 @@ class ChunkyPNG::Dimension
   def ==(other); end
   def area; end
   def eql?(other); end
+  def hash; end
   def height; end
   def height=(arg0); end
   def include?(*point_like); end

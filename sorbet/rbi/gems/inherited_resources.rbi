@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/inherited_resources/all/inherited_resources.rbi
 #
-# inherited_resources-1.11.0
+# inherited_resources-1.13.0
 
 module InheritedResources
   def self.flash_keys=(array); end

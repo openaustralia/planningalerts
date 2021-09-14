@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/multi_json/all/multi_json.rbi
 #
-# multi_json-1.14.1
+# multi_json-1.15.0
 
 module MultiJson
   def adapter; end

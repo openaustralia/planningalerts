@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/climate_control/all/climate_control.rbi
 #
-# climate_control-0.2.0
+# climate_control-1.0.1
 
 module ClimateControl
   def self.env; end

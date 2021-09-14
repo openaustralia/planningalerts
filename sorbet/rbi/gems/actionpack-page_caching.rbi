@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/actionpack-page_caching/all/actionpack-page_caching.rbi
 #
-# actionpack-page_caching-1.2.3
+# actionpack-page_caching-1.2.4
 
 module ActionPack
 end

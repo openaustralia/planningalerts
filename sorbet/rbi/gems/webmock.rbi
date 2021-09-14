@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/webmock/all/webmock.rbi
 #
-# webmock-3.8.3
+# webmock-3.14.0
 
 module WebMock
   def after_request(*args, &block); end
@@ -24,7 +24,7 @@ module WebMock
   def self.disallow_net_connect!(options = nil); end
   def self.enable!; end
   def self.enable_net_connect!(options = nil); end
-  def self.globally_stub_request(&block); end
+  def self.globally_stub_request(order = nil, &block); end
   def self.hide_body_diff!; end
   def self.hide_stubbing_instructions!; end
   def self.included(clazz); end
@@ -173,27 +173,34 @@ end
 class WebMock::URIPattern
   def add_query_params(query_params); end
   def initialize(pattern); end
+  def matches?(uri); end
+  def pattern_inspect; end
+  def query_params_matches?(uri); end
   def to_s; end
   include WebMock::RSpecMatcherDetector
 end
+class WebMock::URICallablePattern < WebMock::URIPattern
+  def pattern_matches?(uri); end
+end
 class WebMock::URIRegexpPattern < WebMock::URIPattern
-  def matches?(uri); end
-  def to_s; end
+  def pattern_matches?(uri); end
 end
 class WebMock::URIAddressablePattern < WebMock::URIPattern
   def add_query_params(query_params); end
-  def matches?(uri); end
   def matches_with_variations?(uri); end
-  def to_s; end
+  def pattern_inspect; end
+  def pattern_matches?(uri); end
+  def template_matches_uri?(template, uri); end
 end
 class WebMock::URIStringPattern < WebMock::URIPattern
   def add_query_params(query_params); end
-  def matches?(uri); end
-  def to_s; end
+  def pattern_inspect; end
+  def pattern_matches?(uri); end
 end
 class WebMock::BodyPattern
   def assert_non_multipart_body(content_type); end
   def body_as_hash(body, content_type); end
+  def body_format(content_type); end
   def empty_string?(string); end
   def initialize(pattern); end
   def matches?(body, content_type = nil); end
@@ -398,7 +405,7 @@ class WebMock::StubRegistry
   def evaluate_response_for_request(response, request_signature); end
   def global_stubs; end
   def initialize; end
-  def register_global_stub(&block); end
+  def register_global_stub(order = nil, &block); end
   def register_request_stub(stub); end
   def registered_request?(request_signature); end
   def remove_request_stub(stub); end
@@ -467,11 +474,15 @@ class StubSocket
   def continue_timeout; end
   def continue_timeout=(arg0); end
   def initialize(*args); end
+  def io; end
   def read_timeout; end
   def read_timeout=(arg0); end
   def readuntil(*args); end
   def write_timeout; end
   def write_timeout=(arg0); end
+end
+class StubSocket::StubIO
+  def setsockopt(*args); end
 end
 class Net::WebMockNetBufferedIO < Net::BufferedIO
   def initialize(io, *args, **kwargs); end
@@ -479,6 +490,7 @@ class Net::WebMockNetBufferedIO < Net::BufferedIO
 end
 module WebMock::NetHTTPUtility
   def self.check_right_http_connection; end
+  def self.get_uri(net_http, path); end
   def self.puts_warning_for_right_http_if_needed; end
   def self.request_signature_from_request(net_http, request, body = nil); end
   def self.validate_headers(headers); end
@@ -493,7 +505,7 @@ class HTTP::Request
   def webmock_signature; end
 end
 class HTTP::Response
-  def self.from_webmock(webmock_response, request_signature = nil); end
+  def self.from_webmock(request, webmock_response, request_signature = nil); end
   def self.normalize_uri(uri); end
   def to_webmock; end
 end

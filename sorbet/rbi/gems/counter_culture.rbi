@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/counter_culture/all/counter_culture.rbi
 #
-# counter_culture-2.5.1
+# counter_culture-2.9.0
 
 module CounterCulture
   def batch_size; end
@@ -38,6 +38,8 @@ class CounterCulture::Counter
   def counter_delta_magnitude_for(obj); end
   def delta_column; end
   def delta_magnitude; end
+  def execute_after_commit; end
+  def execute_now_or_after_commit(obj, &block); end
   def first_level_relation_changed?(instance); end
   def first_level_relation_foreign_key; end
   def first_level_relation_foreign_type; end
@@ -64,6 +66,7 @@ class CounterCulture::Reconciler
   def counter_cache_name(*args, &block); end
   def delta_column(*args, &block); end
   def delta_magnitude(*args, &block); end
+  def execute_after_commit(*args, &block); end
   def foreign_key_values(*args, &block); end
   def full_primary_key(*args, &block); end
   def initialize(counter, options = nil); end
@@ -83,6 +86,7 @@ class CounterCulture::Reconciler::Reconciliation
   def counter_cache_name(*args, &block); end
   def delta_column(*args, &block); end
   def delta_magnitude(*args, &block); end
+  def execute_after_commit(*args, &block); end
   def foreign_key_values(*args, &block); end
   def full_primary_key(*args, &block); end
   def initialize(counter, changes_holder, options, relation_class); end

@@ -1296,159 +1296,7 @@ class ActiveSupport::Messages::RotationConfiguration
   def rotate(kind, *args); end
   def signed; end
 end
-class LoadError < ScriptError
-  def is_missing?(location); end
-end
-class NameError < StandardError
-  def missing_name; end
-  def missing_name?(name); end
-end
 module ActiveSupport::Concurrency
-end
-class ActiveSupport::Concurrency::ShareLock
-  def busy_for_exclusive?(purpose); end
-  def busy_for_sharing?(purpose); end
-  def eligible_waiters?(compatible); end
-  def exclusive(purpose: nil, compatible: nil, after_compatible: nil, no_wait: nil); end
-  def initialize; end
-  def raw_state; end
-  def sharing; end
-  def start_exclusive(purpose: nil, compatible: nil, no_wait: nil); end
-  def start_sharing; end
-  def stop_exclusive(compatible: nil); end
-  def stop_sharing; end
-  def wait_for(method); end
-  def yield_shares(purpose: nil, compatible: nil, block_share: nil); end
-  include MonitorMixin
-end
-module ActiveSupport::Dependencies
-  def autoload_module!(into, const_name, qualified_name, path_suffix); end
-  def autoload_once_paths; end
-  def autoload_once_paths=(obj); end
-  def autoload_paths; end
-  def autoload_paths=(obj); end
-  def autoloadable_module?(path_suffix); end
-  def autoloaded?(desc); end
-  def autoloaded_constants; end
-  def autoloaded_constants=(obj); end
-  def clear; end
-  def constant_watch_stack; end
-  def constant_watch_stack=(obj); end
-  def constantize(name); end
-  def depend_on(file_name, message = nil); end
-  def explicitly_unloadable_constants; end
-  def explicitly_unloadable_constants=(obj); end
-  def history; end
-  def history=(obj); end
-  def hook!; end
-  def interlock; end
-  def interlock=(obj); end
-  def load?; end
-  def load_file(path, const_paths = nil); end
-  def load_missing_constant(from_mod, const_name); end
-  def load_once_path?(path); end
-  def loadable_constants_for_path(path, bases = nil); end
-  def loaded; end
-  def loaded=(obj); end
-  def loading; end
-  def loading=(obj); end
-  def mark_for_unload(const_desc); end
-  def mechanism; end
-  def mechanism=(obj); end
-  def new_constants_in(*descs); end
-  def qualified_const_defined?(path); end
-  def qualified_name_for(mod, name); end
-  def reference(klass); end
-  def remove_constant(const); end
-  def remove_unloadable_constants!; end
-  def require_or_load(file_name, const_path = nil); end
-  def safe_constantize(name); end
-  def search_for_file(path_suffix); end
-  def self.autoload_once_paths; end
-  def self.autoload_once_paths=(obj); end
-  def self.autoload_paths; end
-  def self.autoload_paths=(o); end
-  def self.autoloaded_constants; end
-  def self.autoloaded_constants=(obj); end
-  def self.constant_watch_stack; end
-  def self.constant_watch_stack=(obj); end
-  def self.explicitly_unloadable_constants; end
-  def self.explicitly_unloadable_constants=(obj); end
-  def self.history; end
-  def self.history=(obj); end
-  def self.interlock; end
-  def self.interlock=(obj); end
-  def self.load_interlock; end
-  def self.loaded; end
-  def self.loaded=(obj); end
-  def self.loading; end
-  def self.loading=(obj); end
-  def self.mechanism; end
-  def self.mechanism=(obj); end
-  def self.run_interlock; end
-  def self.unload_interlock; end
-  def self.warnings_on_first_load; end
-  def self.warnings_on_first_load=(obj); end
-  def to_constant_name(desc); end
-  def unhook!; end
-  def warnings_on_first_load; end
-  def warnings_on_first_load=(obj); end
-  def will_unload?(const_desc); end
-  extend ActiveSupport::Dependencies
-end
-class ActiveSupport::Dependencies::Interlock
-  def done_running; end
-  def done_unloading; end
-  def initialize; end
-  def loading; end
-  def permit_concurrent_loads; end
-  def raw_state(&block); end
-  def running; end
-  def start_running; end
-  def start_unloading; end
-  def unloading; end
-end
-class ActiveSupport::Dependencies::WatchStack
-  def each(&block); end
-  def initialize; end
-  def new_constants; end
-  def pop_modules(modules); end
-  def watch_namespaces(namespaces); end
-  def watching; end
-  def watching?; end
-  include Enumerable
-end
-module ActiveSupport::Dependencies::ModuleConstMissing
-  def const_missing(const_name); end
-  def guess_for_anonymous(const_name); end
-  def self.append_features(base); end
-  def self.exclude_from(base); end
-  def unloadable(const_desc = nil); end
-end
-module ActiveSupport::Dependencies::Loadable
-  def load(file, wrap = nil); end
-  def load_dependency(file); end
-  def require(file); end
-  def require_dependency(file_name, message = nil); end
-  def require_or_load(file_name); end
-  def self.exclude_from(base); end
-  def unloadable(const_desc); end
-end
-module ActiveSupport::Dependencies::Blamable
-  def blame_file!(file); end
-  def blamed_files; end
-  def copy_blame!(exc); end
-  def describe_blame; end
-end
-class ActiveSupport::Dependencies::ClassCache
-  def [](key); end
-  def clear!; end
-  def empty?; end
-  def get(key); end
-  def initialize; end
-  def key?(key); end
-  def safe_get(key); end
-  def store(klass); end
 end
 class ActiveSupport::Concurrency::LoadInterlockAwareMonitor < Monitor
   def mon_enter; end
@@ -1696,6 +1544,13 @@ module ActiveSupport::Rescuable::ClassMethods
   def rescue_from(*klasses, with: nil, &block); end
   def rescue_with_handler(exception, object: nil, visited_exceptions: nil); end
 end
+class LoadError < ScriptError
+  def is_missing?(location); end
+end
+class NameError < StandardError
+  def missing_name; end
+  def missing_name?(name); end
+end
 module URI
   def self.parser; end
 end
@@ -1850,8 +1705,8 @@ class ActiveSupport::ArrayInquirer < Array
   def respond_to_missing?(name, include_private = nil); end
 end
 class File < IO
+  def self.atomic_write(file_name, temp_dir = nil); end
   def self.empty?(arg0); end
-  def self.probe_stat_in(dir); end
 end
 module ActiveSupport::NumericWithFormat
   def to_s(format = nil, options = nil); end
@@ -1887,6 +1742,151 @@ module SecureRandom
 end
 module ActiveSupport::MarshalWithAutoloading
   def load(source, proc = nil); end
+end
+class ActiveSupport::Concurrency::ShareLock
+  def busy_for_exclusive?(purpose); end
+  def busy_for_sharing?(purpose); end
+  def eligible_waiters?(compatible); end
+  def exclusive(purpose: nil, compatible: nil, after_compatible: nil, no_wait: nil); end
+  def initialize; end
+  def raw_state; end
+  def sharing; end
+  def start_exclusive(purpose: nil, compatible: nil, no_wait: nil); end
+  def start_sharing; end
+  def stop_exclusive(compatible: nil); end
+  def stop_sharing; end
+  def wait_for(method); end
+  def yield_shares(purpose: nil, compatible: nil, block_share: nil); end
+  include MonitorMixin
+end
+module ActiveSupport::Dependencies
+  def autoload_module!(into, const_name, qualified_name, path_suffix); end
+  def autoload_once_paths; end
+  def autoload_once_paths=(obj); end
+  def autoload_paths; end
+  def autoload_paths=(obj); end
+  def autoloadable_module?(path_suffix); end
+  def autoloaded?(desc); end
+  def autoloaded_constants; end
+  def autoloaded_constants=(obj); end
+  def clear; end
+  def constant_watch_stack; end
+  def constant_watch_stack=(obj); end
+  def constantize(name); end
+  def depend_on(file_name, message = nil); end
+  def explicitly_unloadable_constants; end
+  def explicitly_unloadable_constants=(obj); end
+  def history; end
+  def history=(obj); end
+  def hook!; end
+  def interlock; end
+  def interlock=(obj); end
+  def load?; end
+  def load_file(path, const_paths = nil); end
+  def load_missing_constant(from_mod, const_name); end
+  def load_once_path?(path); end
+  def loadable_constants_for_path(path, bases = nil); end
+  def loaded; end
+  def loaded=(obj); end
+  def loading; end
+  def loading=(obj); end
+  def mark_for_unload(const_desc); end
+  def mechanism; end
+  def mechanism=(obj); end
+  def new_constants_in(*descs); end
+  def qualified_const_defined?(path); end
+  def qualified_name_for(mod, name); end
+  def reference(klass); end
+  def remove_constant(const); end
+  def remove_unloadable_constants!; end
+  def require_or_load(file_name, const_path = nil); end
+  def safe_constantize(name); end
+  def search_for_file(path_suffix); end
+  def self.autoload_once_paths; end
+  def self.autoload_once_paths=(obj); end
+  def self.autoload_paths; end
+  def self.autoload_paths=(obj); end
+  def self.autoloaded_constants; end
+  def self.autoloaded_constants=(obj); end
+  def self.constant_watch_stack; end
+  def self.constant_watch_stack=(obj); end
+  def self.explicitly_unloadable_constants; end
+  def self.explicitly_unloadable_constants=(obj); end
+  def self.history; end
+  def self.history=(obj); end
+  def self.interlock; end
+  def self.interlock=(obj); end
+  def self.load_interlock; end
+  def self.loaded; end
+  def self.loaded=(obj); end
+  def self.loading; end
+  def self.loading=(obj); end
+  def self.mechanism; end
+  def self.mechanism=(obj); end
+  def self.run_interlock; end
+  def self.unload_interlock; end
+  def self.warnings_on_first_load; end
+  def self.warnings_on_first_load=(obj); end
+  def to_constant_name(desc); end
+  def unhook!; end
+  def warnings_on_first_load; end
+  def warnings_on_first_load=(obj); end
+  def will_unload?(const_desc); end
+  extend ActiveSupport::Dependencies
+end
+class ActiveSupport::Dependencies::Interlock
+  def done_running; end
+  def done_unloading; end
+  def initialize; end
+  def loading; end
+  def permit_concurrent_loads; end
+  def raw_state(&block); end
+  def running; end
+  def start_running; end
+  def start_unloading; end
+  def unloading; end
+end
+class ActiveSupport::Dependencies::WatchStack
+  def each(&block); end
+  def initialize; end
+  def new_constants; end
+  def pop_modules(modules); end
+  def watch_namespaces(namespaces); end
+  def watching; end
+  def watching?; end
+  include Enumerable
+end
+module ActiveSupport::Dependencies::ModuleConstMissing
+  def const_missing(const_name); end
+  def guess_for_anonymous(const_name); end
+  def self.append_features(base); end
+  def self.exclude_from(base); end
+  def unloadable(const_desc = nil); end
+end
+module ActiveSupport::Dependencies::Loadable
+  def load(file, wrap = nil); end
+  def load_dependency(file); end
+  def require(file); end
+  def require_dependency(file_name, message = nil); end
+  def require_or_load(file_name); end
+  def self.exclude_from(base); end
+  def unloadable(const_desc); end
+end
+module ActiveSupport::Dependencies::Blamable
+  def blame_file!(file); end
+  def blamed_files; end
+  def copy_blame!(exc); end
+  def describe_blame; end
+end
+class ActiveSupport::Dependencies::ClassCache
+  def [](key); end
+  def clear!; end
+  def empty?; end
+  def get(key); end
+  def initialize; end
+  def key?(key); end
+  def safe_get(key); end
+  def store(klass); end
 end
 class ActiveSupport::Subscriber
   def self.add_event_subscriber(event); end

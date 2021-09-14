@@ -7,18 +7,22 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/recaptcha/all/recaptcha.rbi
 #
-# recaptcha-5.5.0
+# recaptcha-5.8.1
 
 module Recaptcha
   def self.action_valid?(action, expected_action); end
-  def self.api_verification(verify_hash, timeout: nil); end
+  def self.api_verification_enterprise(query_params, body, project_id, timeout: nil); end
+  def self.api_verification_free(verify_hash, timeout: nil); end
   def self.configuration; end
   def self.configure; end
   def self.hostname_valid?(hostname, validation); end
+  def self.http_client_for(uri:, timeout: nil); end
   def self.invalid_response?(resp); end
   def self.score_above_threshold?(score, minimum_score); end
   def self.skip_env?(env); end
   def self.verify_via_api_call(response, options); end
+  def self.verify_via_api_call_enterprise(response, options); end
+  def self.verify_via_api_call_free(response, options); end
   def self.with_configuration(config); end
 end
 class Recaptcha::Configuration
@@ -26,6 +30,14 @@ class Recaptcha::Configuration
   def api_server_url=(arg0); end
   def default_env; end
   def default_env=(arg0); end
+  def enterprise; end
+  def enterprise=(arg0); end
+  def enterprise_api_key!; end
+  def enterprise_api_key; end
+  def enterprise_api_key=(arg0); end
+  def enterprise_project_id!; end
+  def enterprise_project_id; end
+  def enterprise_project_id=(arg0); end
   def handle_timeouts_gracefully; end
   def handle_timeouts_gracefully=(arg0); end
   def hostname; end
@@ -51,6 +63,8 @@ module Recaptcha::Helpers
   def self.default_callback_required?(options); end
   def self.hash_to_query(hash); end
   def self.invisible_recaptcha_tags(custom); end
+  def self.recaptcha_execute_method_name; end
+  def self.recaptcha_ready_method_name; end
   def self.recaptcha_tags(options); end
   def self.recaptcha_v3(options = nil); end
   def self.recaptcha_v3_async_execute_function_name(action); end

@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/will_paginate/all/will_paginate.rbi
 #
-# will_paginate-3.3.0
+# will_paginate-3.3.1
 
 module WillPaginate
   def self.PageNumber(value, name = nil); end

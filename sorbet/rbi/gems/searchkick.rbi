@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/searchkick/all/searchkick.rbi
 #
-# searchkick-4.4.0
+# searchkick-4.5.2
 
 module Searchkick
   def self.aws_credentials; end
@@ -35,6 +35,7 @@ module Searchkick
   def self.models; end
   def self.models=(arg0); end
   def self.multi_search(searches); end
+  def self.opensearch?; end
   def self.queue_name; end
   def self.queue_name=(arg0); end
   def self.redis; end
@@ -48,6 +49,7 @@ module Searchkick
   def self.search_timeout=(arg0); end
   def self.server_below7?; end
   def self.server_below?(version); end
+  def self.server_info; end
   def self.server_version; end
   def self.signer_middleware_aws_params; end
   def self.signer_middleware_key; end
@@ -74,8 +76,24 @@ class Searchkick::BulkIndexer
   def initialize(index); end
   def with_retries; end
 end
-module Searchkick::IndexOptions
+class Searchkick::IndexOptions
+  def add_search_synonyms(settings); end
+  def add_synonyms(settings); end
+  def add_wordnet(settings); end
+  def below62?; end
+  def below70?; end
+  def below73?; end
+  def default_analyzer; end
+  def default_type; end
+  def generate_mappings; end
+  def generate_settings; end
   def index_options; end
+  def index_type; end
+  def initialize(index); end
+  def options; end
+  def set_deep_paging(settings); end
+  def update_language(settings, language); end
+  def update_stemming(settings); end
 end
 class Searchkick::Index
   def alias_exists?; end
@@ -97,6 +115,7 @@ class Searchkick::Index
   def import(records); end
   def import_before_promotion(index, relation, **import_options); end
   def import_scope(relation, **options); end
+  def index_options; end
   def index_settings; end
   def initialize(name, options = nil); end
   def klass_document_type(klass, ignore_type = nil); end
@@ -124,7 +143,6 @@ class Searchkick::Index
   def update_record(record, method_name); end
   def update_settings(settings); end
   def uuid; end
-  include Searchkick::IndexOptions
 end
 class Searchkick::Indexer
   def initialize; end
@@ -244,7 +262,9 @@ class Searchkick::ReindexQueue
   def name; end
   def push(record_id); end
   def redis_key; end
+  def redis_version; end
   def reserve(limit: nil); end
+  def supports_rpop_with_count?; end
 end
 class Searchkick::RecordData
   def cast_big_decimal(obj); end
@@ -290,6 +310,7 @@ class Searchkick::Results
   def last_page?; end
   def length(*args, &block); end
   def limit_value; end
+  def missing_records; end
   def misspellings?; end
   def model_name; end
   def next_page; end
@@ -317,6 +338,8 @@ class Searchkick::Results
   def total_pages; end
   def with_highlights(multiple: nil); end
   def with_hit; end
+  def with_hit_and_missing_records; end
+  def with_score; end
   extend Forwardable
   include Enumerable
 end

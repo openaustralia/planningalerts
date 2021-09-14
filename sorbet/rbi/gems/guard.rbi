@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/guard/all/guard.rbi
 #
-# guard-2.16.2
+# guard-2.18.0
 
 module Guard
   def self._evaluate(options); end
@@ -25,11 +25,11 @@ module Guard
   def self.state; end
   extend Guard::Deprecated::Guard::ClassMethods
 end
-class Anonymous_Nenv_Environment_71 < Nenv::Environment
+class Anonymous_Nenv_Environment_73 < Nenv::Environment
   def gem_silence_deprecations?; end
   def strict?; end
 end
-class Guard::Config < Anonymous_Nenv_Environment_71
+class Guard::Config < Anonymous_Nenv_Environment_73
   def initialize; end
   def silence_deprecations?; end
 end
