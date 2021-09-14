@@ -11,7 +11,7 @@ module ActiveStorage::Blob::GeneratedAssociationMethods
   sig { returns(::ActiveStorage::Attachment::ActiveRecord_Associations_CollectionProxy) }
   def attachments; end
 
-  sig { returns(T::Array[Integer]) }
+  sig { returns(T::Array[T.untyped]) }
   def attachment_ids; end
 
   sig { params(value: T::Enumerable[::ActiveStorage::Attachment]).void }
@@ -20,14 +20,38 @@ module ActiveStorage::Blob::GeneratedAssociationMethods
   sig { returns(T.nilable(::ActiveStorage::Attachment)) }
   def preview_image_attachment; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Attachment).void)).returns(::ActiveStorage::Attachment) }
+  def build_preview_image_attachment(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Attachment).void)).returns(::ActiveStorage::Attachment) }
+  def create_preview_image_attachment(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Attachment).void)).returns(::ActiveStorage::Attachment) }
+  def create_preview_image_attachment!(*args, &block); end
+
   sig { params(value: T.nilable(::ActiveStorage::Attachment)).void }
   def preview_image_attachment=(value); end
+
+  sig { returns(T.nilable(::ActiveStorage::Attachment)) }
+  def reload_preview_image_attachment; end
 
   sig { returns(T.nilable(::ActiveStorage::Blob)) }
   def preview_image_blob; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Blob).void)).returns(::ActiveStorage::Blob) }
+  def build_preview_image_blob(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Blob).void)).returns(::ActiveStorage::Blob) }
+  def create_preview_image_blob(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ActiveStorage::Blob).void)).returns(::ActiveStorage::Blob) }
+  def create_preview_image_blob!(*args, &block); end
+
   sig { params(value: T.nilable(::ActiveStorage::Blob)).void }
   def preview_image_blob=(value); end
+
+  sig { returns(T.nilable(::ActiveStorage::Blob)) }
+  def reload_preview_image_blob; end
 end
 
 module ActiveStorage::Blob::CustomFinderMethods

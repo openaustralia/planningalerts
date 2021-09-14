@@ -76,8 +76,20 @@ module Report::GeneratedAssociationMethods
   sig { returns(::Comment) }
   def comment; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Comment).void)).returns(::Comment) }
+  def build_comment(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Comment).void)).returns(::Comment) }
+  def create_comment(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Comment).void)).returns(::Comment) }
+  def create_comment!(*args, &block); end
+
   sig { params(value: ::Comment).void }
   def comment=(value); end
+
+  sig { returns(::Comment) }
+  def reload_comment; end
 end
 
 module Report::CustomFinderMethods

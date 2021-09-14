@@ -58,8 +58,20 @@ module ApplicationRedirect::GeneratedAssociationMethods
   sig { returns(::Application) }
   def redirect_application; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Application).void)).returns(::Application) }
+  def build_redirect_application(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Application).void)).returns(::Application) }
+  def create_redirect_application(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Application).void)).returns(::Application) }
+  def create_redirect_application!(*args, &block); end
+
   sig { params(value: ::Application).void }
   def redirect_application=(value); end
+
+  sig { returns(::Application) }
+  def reload_redirect_application; end
 end
 
 module ApplicationRedirect::CustomFinderMethods

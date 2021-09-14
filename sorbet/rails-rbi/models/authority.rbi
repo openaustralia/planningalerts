@@ -130,8 +130,20 @@ module Authority::GeneratedAssociationMethods
   sig { returns(T.nilable(::GithubIssue)) }
   def github_issue; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::GithubIssue).void)).returns(::GithubIssue) }
+  def build_github_issue(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::GithubIssue).void)).returns(::GithubIssue) }
+  def create_github_issue(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::GithubIssue).void)).returns(::GithubIssue) }
+  def create_github_issue!(*args, &block); end
+
   sig { params(value: T.nilable(::GithubIssue)).void }
   def github_issue=(value); end
+
+  sig { returns(T.nilable(::GithubIssue)) }
+  def reload_github_issue; end
 end
 
 module Authority::CustomFinderMethods

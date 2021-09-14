@@ -94,8 +94,20 @@ module ApiKey::GeneratedAssociationMethods
   sig { returns(::User) }
   def user; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::User).void)).returns(::User) }
+  def build_user(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::User).void)).returns(::User) }
+  def create_user(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::User).void)).returns(::User) }
+  def create_user!(*args, &block); end
+
   sig { params(value: ::User).void }
   def user=(value); end
+
+  sig { returns(::User) }
+  def reload_user; end
 end
 
 module ApiKey::CustomFinderMethods

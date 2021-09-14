@@ -67,8 +67,20 @@ module GithubIssue::GeneratedAssociationMethods
   sig { returns(::Authority) }
   def authority; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Authority).void)).returns(::Authority) }
+  def build_authority(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Authority).void)).returns(::Authority) }
+  def create_authority(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Authority).void)).returns(::Authority) }
+  def create_authority!(*args, &block); end
+
   sig { params(value: ::Authority).void }
   def authority=(value); end
+
+  sig { returns(::Authority) }
+  def reload_authority; end
 end
 
 module GithubIssue::CustomFinderMethods

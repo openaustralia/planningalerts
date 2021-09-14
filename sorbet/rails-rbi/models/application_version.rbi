@@ -184,14 +184,38 @@ module ApplicationVersion::GeneratedAssociationMethods
   sig { returns(::Application) }
   def application; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Application).void)).returns(::Application) }
+  def build_application(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Application).void)).returns(::Application) }
+  def create_application(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Application).void)).returns(::Application) }
+  def create_application!(*args, &block); end
+
   sig { params(value: ::Application).void }
   def application=(value); end
+
+  sig { returns(::Application) }
+  def reload_application; end
 
   sig { returns(T.nilable(::ApplicationVersion)) }
   def previous_version; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ApplicationVersion).void)).returns(::ApplicationVersion) }
+  def build_previous_version(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ApplicationVersion).void)).returns(::ApplicationVersion) }
+  def create_previous_version(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ApplicationVersion).void)).returns(::ApplicationVersion) }
+  def create_previous_version!(*args, &block); end
+
   sig { params(value: T.nilable(::ApplicationVersion)).void }
   def previous_version=(value); end
+
+  sig { returns(T.nilable(::ApplicationVersion)) }
+  def reload_previous_version; end
 end
 
 module ApplicationVersion::CustomFinderMethods

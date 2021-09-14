@@ -94,14 +94,38 @@ module ActiveAdmin::Comment::GeneratedAssociationMethods
   sig { returns(T.untyped) }
   def author; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.untyped).void)).returns(T.untyped) }
+  def build_author(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.untyped).void)).returns(T.untyped) }
+  def create_author(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.untyped).void)).returns(T.untyped) }
+  def create_author!(*args, &block); end
+
   sig { params(value: T.untyped).void }
   def author=(value); end
 
   sig { returns(T.untyped) }
+  def reload_author; end
+
+  sig { returns(T.untyped) }
   def resource; end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.untyped).void)).returns(T.untyped) }
+  def build_resource(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.untyped).void)).returns(T.untyped) }
+  def create_resource(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: T.untyped).void)).returns(T.untyped) }
+  def create_resource!(*args, &block); end
 
   sig { params(value: T.untyped).void }
   def resource=(value); end
+
+  sig { returns(T.untyped) }
+  def reload_resource; end
 end
 
 module ActiveAdmin::Comment::CustomFinderMethods

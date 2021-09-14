@@ -7,6 +7,17 @@ module SiteSetting::ActiveRelation_WhereNot
   def not(opts, *rest); end
 end
 
+module SiteSetting::GeneratedSerializedAttributeMethods
+  sig { returns(T.nilable(T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String))) }
+  def settings; end
+
+  sig { params(value: T.nilable(T.any(T::Array[T.untyped], T::Boolean, Float, T::Hash[T.untyped, T.untyped], Integer, String))).void }
+  def settings=(value); end
+
+  sig { returns(T::Boolean) }
+  def settings?; end
+end
+
 module SiteSetting::GeneratedAttributeMethods
   sig { returns(T.nilable(ActiveSupport::TimeWithZone)) }
   def created_at; end
@@ -25,15 +36,6 @@ module SiteSetting::GeneratedAttributeMethods
 
   sig { returns(T::Boolean) }
   def id?; end
-
-  sig { returns(T.nilable(String)) }
-  def settings; end
-
-  sig { params(value: T.nilable(T.any(String, Symbol))).void }
-  def settings=(value); end
-
-  sig { returns(T::Boolean) }
-  def settings?; end
 end
 
 module SiteSetting::CustomFinderMethods
@@ -54,6 +56,7 @@ module SiteSetting::CustomFinderMethods
 end
 
 class SiteSetting < ApplicationRecord
+  include SiteSetting::GeneratedSerializedAttributeMethods
   include SiteSetting::GeneratedAttributeMethods
   extend SiteSetting::CustomFinderMethods
   extend SiteSetting::QueryMethodsReturningRelation

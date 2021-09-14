@@ -58,8 +58,20 @@ module Application::GeneratedAssociationMethods
   sig { returns(::Authority) }
   def authority; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Authority).void)).returns(::Authority) }
+  def build_authority(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Authority).void)).returns(::Authority) }
+  def create_authority(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Authority).void)).returns(::Authority) }
+  def create_authority!(*args, &block); end
+
   sig { params(value: ::Authority).void }
   def authority=(value); end
+
+  sig { returns(::Authority) }
+  def reload_authority; end
 
   sig { returns(::Comment::ActiveRecord_Associations_CollectionProxy) }
   def comments; end
@@ -73,14 +85,38 @@ module Application::GeneratedAssociationMethods
   sig { returns(T.nilable(::ApplicationVersion)) }
   def current_version; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ApplicationVersion).void)).returns(::ApplicationVersion) }
+  def build_current_version(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ApplicationVersion).void)).returns(::ApplicationVersion) }
+  def create_current_version(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ApplicationVersion).void)).returns(::ApplicationVersion) }
+  def create_current_version!(*args, &block); end
+
   sig { params(value: T.nilable(::ApplicationVersion)).void }
   def current_version=(value); end
 
   sig { returns(T.nilable(::ApplicationVersion)) }
+  def reload_current_version; end
+
+  sig { returns(T.nilable(::ApplicationVersion)) }
   def first_version; end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ApplicationVersion).void)).returns(::ApplicationVersion) }
+  def build_first_version(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ApplicationVersion).void)).returns(::ApplicationVersion) }
+  def create_first_version(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::ApplicationVersion).void)).returns(::ApplicationVersion) }
+  def create_first_version!(*args, &block); end
 
   sig { params(value: T.nilable(::ApplicationVersion)).void }
   def first_version=(value); end
+
+  sig { returns(T.nilable(::ApplicationVersion)) }
+  def reload_first_version; end
 
   sig { returns(::ApplicationVersion::ActiveRecord_Associations_CollectionProxy) }
   def versions; end

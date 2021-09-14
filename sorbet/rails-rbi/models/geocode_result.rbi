@@ -112,8 +112,20 @@ module GeocodeResult::GeneratedAssociationMethods
   sig { returns(::GeocodeQuery) }
   def geocode_query; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::GeocodeQuery).void)).returns(::GeocodeQuery) }
+  def build_geocode_query(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::GeocodeQuery).void)).returns(::GeocodeQuery) }
+  def create_geocode_query(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::GeocodeQuery).void)).returns(::GeocodeQuery) }
+  def create_geocode_query!(*args, &block); end
+
   sig { params(value: ::GeocodeQuery).void }
   def geocode_query=(value); end
+
+  sig { returns(::GeocodeQuery) }
+  def reload_geocode_query; end
 end
 
 module GeocodeResult::CustomFinderMethods

@@ -139,8 +139,20 @@ module Comment::GeneratedAssociationMethods
   sig { returns(::Application) }
   def application; end
 
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Application).void)).returns(::Application) }
+  def build_application(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Application).void)).returns(::Application) }
+  def create_application(*args, &block); end
+
+  sig { params(args: T.untyped, block: T.nilable(T.proc.params(object: ::Application).void)).returns(::Application) }
+  def create_application!(*args, &block); end
+
   sig { params(value: ::Application).void }
   def application=(value); end
+
+  sig { returns(::Application) }
+  def reload_application; end
 
   sig { returns(::Report::ActiveRecord_Associations_CollectionProxy) }
   def reports; end

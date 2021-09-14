@@ -10,7 +10,7 @@ class LogApiCallJob
       params: T::Hash[String, T.nilable(T.any(Integer, String))],
       user_agent: T.nilable(String),
       time_as_float: Float
-    ).void
+    ).returns(LogApiCallJob)
   end
   def self.perform_later(api_key:, ip_address:, query:, params:, user_agent:, time_as_float:); end
 
@@ -22,7 +22,7 @@ class LogApiCallJob
       params: T::Hash[String, T.nilable(T.any(Integer, String))],
       user_agent: T.nilable(String),
       time_as_float: Float
-    ).void
+    ).returns(LogApiCallJob)
   end
   def self.perform_now(api_key:, ip_address:, query:, params:, user_agent:, time_as_float:); end
 
