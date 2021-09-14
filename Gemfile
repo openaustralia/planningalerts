@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gem "bootsnap", require: false
 gem "mysql2"
-gem "rails", "5.2.6"
+gem "rails", "6.0.4.1"
 gem "rake"
 
 # Monkey-patch for bug where distance isn't loaded into model
