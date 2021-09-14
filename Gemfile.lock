@@ -540,7 +540,7 @@ GEM
       parser (>= 2.7)
       sorbet-coerce (>= 0.2.6)
       sorbet-runtime (>= 0.5)
-    sorbet-runtime (0.5.5786)
+    sorbet-runtime (0.5.6465)
     sorbet-static (0.5.6465-universal-darwin-14)
     spring (2.1.0)
     spring-commands-rspec (1.0.4)
@@ -700,7 +700,7 @@ DEPENDENCIES
   slack-notifier
   sorbet (= 0.5.6465)
   sorbet-rails
-  sorbet-runtime
+  sorbet-runtime (= 0.5.6465)
   spring
   spring-commands-rspec
   susy

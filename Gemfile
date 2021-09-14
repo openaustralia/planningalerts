@@ -127,7 +127,7 @@ gem "rack-cors"
 
 # For type checking
 gem "sorbet-rails"
-gem "sorbet-runtime"
+gem "sorbet-runtime", "0.5.6465"
 
 # Only including these to keep sorbet happy
 # TODO: Figure out how to remove them
