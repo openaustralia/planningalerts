@@ -4932,16 +4932,6 @@ class ApiKey::ActiveRecord_Relation
   include ::ApiKey::GeneratedRelationMethods
 end
 
-module ApiKey::GeneratedAssociationMethods
-  def build_user(*args, &block); end
-
-  def create_user(*args, &block); end
-
-  def create_user!(*args, &block); end
-
-  def reload_user(); end
-end
-
 module ApiKey::GeneratedRelationMethods
 end
 
@@ -5051,31 +5041,7 @@ class Application::ActiveRecord_Relation
 end
 
 module Application::GeneratedAssociationMethods
-  def build_authority(*args, &block); end
-
-  def build_current_version(*args, &block); end
-
-  def build_first_version(*args, &block); end
-
   def comment_ids=(ids); end
-
-  def create_authority(*args, &block); end
-
-  def create_authority!(*args, &block); end
-
-  def create_current_version(*args, &block); end
-
-  def create_current_version!(*args, &block); end
-
-  def create_first_version(*args, &block); end
-
-  def create_first_version!(*args, &block); end
-
-  def reload_authority(); end
-
-  def reload_current_version(); end
-
-  def reload_first_version(); end
 
   def version_ids=(ids); end
 end
@@ -5242,16 +5208,6 @@ class ApplicationRedirect::ActiveRecord_Relation
   include ::ApplicationRedirect::GeneratedRelationMethods
 end
 
-module ApplicationRedirect::GeneratedAssociationMethods
-  def build_redirect_application(*args, &block); end
-
-  def create_redirect_application(*args, &block); end
-
-  def create_redirect_application!(*args, &block); end
-
-  def reload_redirect_application(); end
-end
-
 module ApplicationRedirect::GeneratedRelationMethods
 end
 
@@ -5279,24 +5235,6 @@ end
 class ApplicationVersion::ActiveRecord_Relation
   include ::ActiveRecord::Delegation::ClassSpecificRelation
   include ::ApplicationVersion::GeneratedRelationMethods
-end
-
-module ApplicationVersion::GeneratedAssociationMethods
-  def build_application(*args, &block); end
-
-  def build_previous_version(*args, &block); end
-
-  def create_application(*args, &block); end
-
-  def create_application!(*args, &block); end
-
-  def create_previous_version(*args, &block); end
-
-  def create_previous_version!(*args, &block); end
-
-  def reload_application(); end
-
-  def reload_previous_version(); end
 end
 
 module ApplicationVersion::GeneratedRelationMethods
@@ -5512,15 +5450,7 @@ end
 module Authority::GeneratedAssociationMethods
   def application_ids=(ids); end
 
-  def build_github_issue(*args, &block); end
-
   def comment_ids=(ids); end
-
-  def create_github_issue(*args, &block); end
-
-  def create_github_issue!(*args, &block); end
-
-  def reload_github_issue(); end
 end
 
 module Authority::GeneratedRelationMethods
@@ -8083,14 +8013,6 @@ class Comment::ActiveRecord_Relation
 end
 
 module Comment::GeneratedAssociationMethods
-  def build_application(*args, &block); end
-
-  def create_application(*args, &block); end
-
-  def create_application!(*args, &block); end
-
-  def reload_application(); end
-
   def report_ids=(ids); end
 end
 
@@ -11036,8 +10958,6 @@ class File
   def self.atomic_write(file_name, temp_dir=T.unsafe(nil)); end
 
   def self.exists?(_); end
-
-  def self.probe_stat_in(dir); end
 end
 
 FileList = Rake::FileList
@@ -12784,16 +12704,6 @@ class GeocodeResult::ActiveRecord_Relation
   include ::GeocodeResult::GeneratedRelationMethods
 end
 
-module GeocodeResult::GeneratedAssociationMethods
-  def build_geocode_query(*args, &block); end
-
-  def create_geocode_query(*args, &block); end
-
-  def create_geocode_query!(*args, &block); end
-
-  def reload_geocode_query(); end
-end
-
 module GeocodeResult::GeneratedRelationMethods
 end
 
@@ -12906,16 +12816,6 @@ end
 class GithubIssue::ActiveRecord_Relation
   include ::ActiveRecord::Delegation::ClassSpecificRelation
   include ::GithubIssue::GeneratedRelationMethods
-end
-
-module GithubIssue::GeneratedAssociationMethods
-  def build_authority(*args, &block); end
-
-  def create_authority(*args, &block); end
-
-  def create_authority!(*args, &block); end
-
-  def reload_authority(); end
 end
 
 module GithubIssue::GeneratedRelationMethods
@@ -14903,9 +14803,6 @@ module Lumberjack::Severity
   WARN = ::T.let(nil, ::T.untyped)
 end
 
-class Lumberjack::TaggedLoggerSupport::Formatter
-end
-
 class Lumberjack::Template
   MICROSECOND_TIME_FORMAT = ::T.let(nil, ::T.untyped)
   MILLISECOND_TIME_FORMAT = ::T.let(nil, ::T.untyped)
@@ -15285,9 +15182,6 @@ class Mail::POP3
 end
 
 class Mail::POP3
-end
-
-class Mail::PartsList
 end
 
 class Mail::PhraseList
@@ -16187,6 +16081,8 @@ end
 class Net::HTTPAlreadyReported
 end
 
+Net::HTTPClientError::EXCEPTION_TYPE = Net::HTTPServerException
+
 Net::HTTPClientErrorCode = Net::HTTPClientError
 
 class Net::HTTPEarlyHints
@@ -16259,6 +16155,8 @@ Net::HTTPRequestURITooLarge = Net::HTTPURITooLong
 Net::HTTPResponceReceiver = Net::HTTPResponse
 
 Net::HTTPRetriableCode = Net::HTTPRedirection
+
+Net::HTTPServerError::EXCEPTION_TYPE = Net::HTTPFatalError
 
 Net::HTTPServerErrorCode = Net::HTTPServerError
 
@@ -18251,18 +18149,6 @@ class Parallel::UserInterruptHandler
   INTERRUPT_SIGNAL = ::T.let(nil, ::T.untyped)
 end
 
-module Parlour
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-module Parlour::Debugging::Tree
-  INDENT_SPACES = ::T.let(nil, ::T.untyped)
-end
-
-class Parlour::RbiGenerator::Parameter
-  PREFIXES = ::T.let(nil, ::T.untyped)
-end
-
 ParseError = Racc::ParseError
 
 module Parser
@@ -18293,6 +18179,10 @@ end
 class Parser::Lexer::Literal
   DELIMITERS = ::T.let(nil, ::T.untyped)
   TYPES = ::T.let(nil, ::T.untyped)
+end
+
+class Parser::MaxNumparamStack
+  ORDINARY_PARAMS = ::T.let(nil, ::T.untyped)
 end
 
 module Parser::Meta
@@ -22413,16 +22303,6 @@ class Report::ActiveRecord_Relation
   include ::Report::GeneratedRelationMethods
 end
 
-module Report::GeneratedAssociationMethods
-  def build_comment(*args, &block); end
-
-  def create_comment(*args, &block); end
-
-  def create_comment!(*args, &block); end
-
-  def reload_comment(); end
-end
-
 module Report::GeneratedRelationMethods
 end
 
@@ -24245,7 +24125,15 @@ module Socket::Constants
   SO_BPF_EXTENSIONS = ::T.let(nil, ::T.untyped)
 end
 
+SorbetRails::JobRbiFormatter::Parameter = Parlour::RbiGenerator::Parameter
+
+SorbetRails::MailerRbiFormatter::Parameter = Parlour::RbiGenerator::Parameter
+
 SorbetRails::ModelPlugins::Base::Parameter = Parlour::RbiGenerator::Parameter
+
+module SorbetRails::PluckToTStruct
+  NILCLASS_STRING = ::T.let(nil, ::T.untyped)
+end
 
 module SorbetRails
   extend ::T::Private::Methods::SingletonMethodHooks
@@ -26521,9 +26409,6 @@ class VCR::Errors::UnhandledHTTPRequestError
   ALL_SUGGESTIONS = ::T.let(nil, ::T.untyped)
 end
 
-class VCR::HTTPInteraction::HookAware
-end
-
 module VCR::InternetConnection
   def available?(); end
   EXAMPLE_HOST = ::T.let(nil, ::T.untyped)
@@ -26572,9 +26457,6 @@ end
 
 module VCR::RSpec::Metadata
   extend ::VCR::RSpec::Metadata
-end
-
-class VCR::Request::FiberAware
 end
 
 class VCR::RequestHandler
@@ -27211,9 +27093,6 @@ end
 
 module Zip::NullInputStream
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
-end
-
-class Zip::StreamableStream
 end
 
 Zip::ZipCompressionMethodError = Zip::CompressionMethodError

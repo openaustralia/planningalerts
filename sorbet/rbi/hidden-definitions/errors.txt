@@ -1462,6 +1462,7 @@
 # A copy of ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -1475,6 +1476,8 @@
 # A copy of ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of ActiveRecord::InternalMetadata::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of ActiveRecord::InternalMetadata::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of ActiveRecord::InternalMetadata::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of ActiveRecord::InternalMetadata::ActiveRecord_Relation has been removed from the module tree but is still active!
@@ -1664,6 +1667,7 @@
 # uninitialized constant ActiveRecord::Relation::DEFAULT_VALUES
 # uninitialized constant ActiveRecord::Relation::FROZEN_EMPTY_ARRAY
 # uninitialized constant ActiveRecord::Relation::FROZEN_EMPTY_HASH
+# uninitialized constant ActiveRecord::Relation::NILCLASS_STRING
 # uninitialized constant ActiveRecord::Relation::ONE_AS_ONE
 # uninitialized constant ActiveRecord::Relation::ORDER_IGNORE_MESSAGE
 # uninitialized constant ActiveRecord::Relation::STRUCTURAL_OR_METHODS
@@ -1708,6 +1712,7 @@
 # A copy of ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -1721,6 +1726,8 @@
 # A copy of ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of ActiveRecord::SchemaMigration::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of ActiveRecord::SchemaMigration::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of ActiveRecord::SchemaMigration::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of ActiveRecord::SchemaMigration::ActiveRecord_Relation has been removed from the module tree but is still active!
@@ -2425,6 +2432,7 @@
 # A copy of Alert::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Alert::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Alert::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of Alert::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Alert::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Alert::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Alert::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -2438,6 +2446,8 @@
 # A copy of Alert::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Alert::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Alert::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of Alert::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of Alert::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Alert::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Alert::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Alert::ActiveRecord_Relation has been removed from the module tree but is still active!
@@ -2496,6 +2506,8 @@
 # A copy of ApiKey::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of ApiKey::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of ApiKey::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of ApiKey::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of ApiKey::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ApiKey::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ApiKey::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ApiKey::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -2522,10 +2534,7 @@
 # A copy of ApiKey::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of ApiKey::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of ApiKey::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name build_user
-# wrong constant name create_user
-# wrong constant name create_user!
-# wrong constant name reload_user
+# A copy of ApiKey::ActiveRecord_Relation has been removed from the module tree but is still active!
 # wrong constant name <static-init>
 # uninitialized constant Application::ACTIONS
 # uninitialized constant Application::BLACKLISTED_CLASS_METHODS
@@ -2588,6 +2597,8 @@
 # A copy of Application::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Application::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Application::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of Application::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of Application::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Application::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Application::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Application::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -2614,19 +2625,8 @@
 # A copy of Application::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Application::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Application::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name build_authority
-# wrong constant name build_current_version
-# wrong constant name build_first_version
+# A copy of Application::ActiveRecord_Relation has been removed from the module tree but is still active!
 # wrong constant name comment_ids=
-# wrong constant name create_authority
-# wrong constant name create_authority!
-# wrong constant name create_current_version
-# wrong constant name create_current_version!
-# wrong constant name create_first_version
-# wrong constant name create_first_version!
-# wrong constant name reload_authority
-# wrong constant name reload_current_version
-# wrong constant name reload_first_version
 # wrong constant name version_ids=
 # wrong constant name geocoded
 # wrong constant name in_past_week
@@ -2698,6 +2698,7 @@
 # A copy of ApplicationRecord::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of ApplicationRecord::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of ApplicationRecord::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of ApplicationRecord::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # wrong constant name <static-init>
 # A copy of ApplicationRecord::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ApplicationRecord::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -2713,7 +2714,9 @@
 # A copy of ApplicationRecord::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ApplicationRecord::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ApplicationRecord::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of ApplicationRecord::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # wrong constant name <static-init>
+# A copy of ApplicationRecord::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of ApplicationRecord::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of ApplicationRecord::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of ApplicationRecord::ActiveRecord_Relation has been removed from the module tree but is still active!
@@ -2756,6 +2759,8 @@
 # A copy of ApplicationRedirect::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of ApplicationRedirect::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of ApplicationRedirect::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of ApplicationRedirect::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of ApplicationRedirect::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ApplicationRedirect::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ApplicationRedirect::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ApplicationRedirect::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -2782,10 +2787,7 @@
 # A copy of ApplicationRedirect::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of ApplicationRedirect::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of ApplicationRedirect::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name build_redirect_application
-# wrong constant name create_redirect_application
-# wrong constant name create_redirect_application!
-# wrong constant name reload_redirect_application
+# A copy of ApplicationRedirect::ActiveRecord_Relation has been removed from the module tree but is still active!
 # wrong constant name <static-init>
 # uninitialized constant ApplicationVersion::ACTIONS
 # uninitialized constant ApplicationVersion::BLACKLISTED_CLASS_METHODS
@@ -2812,6 +2814,8 @@
 # A copy of ApplicationVersion::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of ApplicationVersion::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of ApplicationVersion::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of ApplicationVersion::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of ApplicationVersion::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ApplicationVersion::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ApplicationVersion::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of ApplicationVersion::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -2838,14 +2842,7 @@
 # A copy of ApplicationVersion::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of ApplicationVersion::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of ApplicationVersion::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name build_application
-# wrong constant name build_previous_version
-# wrong constant name create_application
-# wrong constant name create_application!
-# wrong constant name create_previous_version
-# wrong constant name create_previous_version!
-# wrong constant name reload_application
-# wrong constant name reload_previous_version
+# A copy of ApplicationVersion::ActiveRecord_Relation has been removed from the module tree but is still active!
 # wrong constant name <static-init>
 # wrong constant name inherited
 # wrong constant name inherited
@@ -2928,6 +2925,7 @@
 # A copy of Authority::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Authority::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Authority::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of Authority::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Authority::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Authority::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Authority::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -2941,6 +2939,8 @@
 # A copy of Authority::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Authority::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Authority::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of Authority::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of Authority::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Authority::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Authority::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Authority::ActiveRecord_Relation has been removed from the module tree but is still active!
@@ -2955,11 +2955,7 @@
 # A copy of Authority::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Authority::ActiveRecord_Relation has been removed from the module tree but is still active!
 # wrong constant name application_ids=
-# wrong constant name build_github_issue
 # wrong constant name comment_ids=
-# wrong constant name create_github_issue
-# wrong constant name create_github_issue!
-# wrong constant name reload_github_issue
 # wrong constant name active
 # wrong constant name enabled
 # wrong constant name <static-init>
@@ -3897,6 +3893,8 @@
 # A copy of Comment::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Comment::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Comment::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of Comment::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of Comment::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Comment::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Comment::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Comment::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -3923,10 +3921,7 @@
 # A copy of Comment::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Comment::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Comment::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name build_application
-# wrong constant name create_application
-# wrong constant name create_application!
-# wrong constant name reload_application
+# A copy of Comment::ActiveRecord_Relation has been removed from the module tree but is still active!
 # wrong constant name report_ids=
 # wrong constant name confirmed
 # wrong constant name in_past_week
@@ -4445,6 +4440,7 @@
 # A copy of EmailBatch::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of EmailBatch::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of EmailBatch::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of EmailBatch::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of EmailBatch::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of EmailBatch::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of EmailBatch::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -4458,6 +4454,8 @@
 # A copy of EmailBatch::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of EmailBatch::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of EmailBatch::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of EmailBatch::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of EmailBatch::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of EmailBatch::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of EmailBatch::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of EmailBatch::ActiveRecord_Relation has been removed from the module tree but is still active!
@@ -4860,7 +4858,6 @@
 # uninitialized constant Fiddle
 # wrong constant name atomic_write
 # wrong constant name exists?
-# wrong constant name probe_stat_in
 # uninitialized constant FileUtils::DryRun::LN_SUPPORTED
 # uninitialized constant FileUtils::DryRun::RUBY
 # uninitialized constant FileUtils::DryRun::VERSION
@@ -5366,6 +5363,7 @@
 # A copy of GeocodeQuery::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of GeocodeQuery::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of GeocodeQuery::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of GeocodeQuery::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of GeocodeQuery::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of GeocodeQuery::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of GeocodeQuery::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -5379,6 +5377,8 @@
 # A copy of GeocodeQuery::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of GeocodeQuery::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of GeocodeQuery::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of GeocodeQuery::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of GeocodeQuery::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of GeocodeQuery::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of GeocodeQuery::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of GeocodeQuery::ActiveRecord_Relation has been removed from the module tree but is still active!
@@ -5430,6 +5430,8 @@
 # A copy of GeocodeResult::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of GeocodeResult::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of GeocodeResult::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of GeocodeResult::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of GeocodeResult::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of GeocodeResult::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of GeocodeResult::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of GeocodeResult::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -5456,10 +5458,7 @@
 # A copy of GeocodeResult::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of GeocodeResult::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of GeocodeResult::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name build_geocode_query
-# wrong constant name create_geocode_query
-# wrong constant name create_geocode_query!
-# wrong constant name reload_geocode_query
+# A copy of GeocodeResult::ActiveRecord_Relation has been removed from the module tree but is still active!
 # wrong constant name <static-init>
 # uninitialized constant Geocoder::IpAddress::BLANK_RE
 # uninitialized constant Geocoder::IpAddress::ENCODED_BLANKS
@@ -5499,6 +5498,8 @@
 # A copy of GithubIssue::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of GithubIssue::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of GithubIssue::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of GithubIssue::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of GithubIssue::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of GithubIssue::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of GithubIssue::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of GithubIssue::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -5525,10 +5526,7 @@
 # A copy of GithubIssue::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of GithubIssue::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of GithubIssue::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name build_authority
-# wrong constant name create_authority
-# wrong constant name create_authority!
-# wrong constant name reload_authority
+# A copy of GithubIssue::ActiveRecord_Relation has been removed from the module tree but is still active!
 # wrong constant name <static-init>
 # wrong constant name <Class:BaseLocator>
 # wrong constant name <Class:BlockLocator>
@@ -9525,6 +9523,8 @@
 # A copy of Report::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Report::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Report::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of Report::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of Report::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Report::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Report::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Report::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -9551,10 +9551,7 @@
 # A copy of Report::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Report::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Report::ActiveRecord_Relation has been removed from the module tree but is still active!
-# wrong constant name build_comment
-# wrong constant name create_comment
-# wrong constant name create_comment!
-# wrong constant name reload_comment
+# A copy of Report::ActiveRecord_Relation has been removed from the module tree but is still active!
 # wrong constant name <static-init>
 # wrong constant name inherited
 # wrong constant name inherited
@@ -10341,6 +10338,7 @@
 # A copy of SiteSetting::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of SiteSetting::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of SiteSetting::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of SiteSetting::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of SiteSetting::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of SiteSetting::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of SiteSetting::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -10354,6 +10352,8 @@
 # A copy of SiteSetting::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of SiteSetting::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of SiteSetting::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of SiteSetting::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of SiteSetting::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of SiteSetting::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of SiteSetting::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of SiteSetting::ActiveRecord_Relation has been removed from the module tree but is still active!
@@ -10538,6 +10538,7 @@
 # A copy of Stat::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Stat::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Stat::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of Stat::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of Stat::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Stat::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Stat::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -10551,6 +10552,8 @@
 # A copy of Stat::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Stat::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of Stat::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of Stat::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of Stat::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Stat::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Stat::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of Stat::ActiveRecord_Relation has been removed from the module tree but is still active!
@@ -11260,6 +11263,7 @@
 # A copy of User::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of User::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of User::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
+# A copy of User::ActiveRecord_AssociationRelation has been removed from the module tree but is still active!
 # A copy of User::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of User::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of User::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
@@ -11273,6 +11277,8 @@
 # A copy of User::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of User::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
 # A copy of User::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of User::ActiveRecord_Associations_CollectionProxy has been removed from the module tree but is still active!
+# A copy of User::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of User::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of User::ActiveRecord_Relation has been removed from the module tree but is still active!
 # A copy of User::ActiveRecord_Relation has been removed from the module tree but is still active!
