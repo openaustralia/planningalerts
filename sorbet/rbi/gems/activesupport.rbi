@@ -1851,7 +1851,7 @@ class ActiveSupport::ArrayInquirer < Array
 end
 class File < IO
   def self.empty?(arg0); end
-  def self.split(arg0); end
+  def self.probe_stat_in(dir); end
 end
 module ActiveSupport::NumericWithFormat
   def to_s(format = nil, options = nil); end

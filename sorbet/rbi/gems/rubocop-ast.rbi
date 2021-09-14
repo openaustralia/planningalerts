@@ -164,13 +164,11 @@ class RuboCop::AST::Node < Parser::AST::Node
   def csend_type?; end
   def cvar_type?; end
   def cvasgn_type?; end
-  def def_e_type?; end
   def def_type?; end
   def defined_module0(node = nil); end
   def defined_module; end
   def defined_module_name; end
   def defined_type?; end
-  def defs_e_type?; end
   def defs_type?; end
   def descendants; end
   def dstr_type?; end
@@ -216,6 +214,7 @@ class RuboCop::AST::Node < Parser::AST::Node
   def ivasgn_type?; end
   def keyword?; end
   def kwarg_type?; end
+  def kwargs_type?; end
   def kwbegin_type?; end
   def kwnilarg_type?; end
   def kwoptarg_type?; end
@@ -236,13 +235,14 @@ class RuboCop::AST::Node < Parser::AST::Node
   def match_current_line_type?; end
   def match_guard_clause?(node = nil); end
   def match_nil_pattern_type?; end
+  def match_pattern_p_type?; end
+  def match_pattern_type?; end
   def match_rest_type?; end
   def match_var_type?; end
   def match_with_lvasgn_type?; end
   def match_with_trailing_comma_type?; end
   def mlhs_type?; end
   def module_type?; end
-  def mrasgn_type?; end
   def multiline?; end
   def mutable_literal?; end
   def new_class_or_module_block?(node = nil); end
@@ -279,7 +279,6 @@ class RuboCop::AST::Node < Parser::AST::Node
   def procarg0_type?; end
   def pure?; end
   def range_type?; end
-  def rasgn_type?; end
   def rational_type?; end
   def receiver(node = nil); end
   def recursive_basic_literal?; end
@@ -294,7 +293,6 @@ class RuboCop::AST::Node < Parser::AST::Node
   def restarg_type?; end
   def retry_type?; end
   def return_type?; end
-  def root_type?; end
   def sclass_type?; end
   def self_type?; end
   def send_type?; end

@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/parser/all/parser.rbi
 #
-# parser-2.7.1.4
+# parser-3.0.2.0
 
 module Parser
   def self.warn_syntax_deviation(feature, version); end
@@ -54,10 +54,8 @@ class Parser::AST::Processor < AST::Processor
   def on_cvar(node); end
   def on_cvasgn(node); end
   def on_def(node); end
-  def on_def_e(node); end
   def on_defined?(node); end
   def on_defs(node); end
-  def on_defs_e(node); end
   def on_dstr(node); end
   def on_dsym(node); end
   def on_eflipflop(node); end
@@ -82,6 +80,7 @@ class Parser::AST::Processor < AST::Processor
   def on_ivar(node); end
   def on_ivasgn(node); end
   def on_kwarg(node); end
+  def on_kwargs(node); end
   def on_kwbegin(node); end
   def on_kwoptarg(node); end
   def on_kwrestarg(node); end
@@ -93,12 +92,13 @@ class Parser::AST::Processor < AST::Processor
   def on_match_alt(node); end
   def on_match_as(node); end
   def on_match_current_line(node); end
+  def on_match_pattern(node); end
+  def on_match_pattern_p(node); end
   def on_match_rest(node); end
   def on_match_var(node); end
   def on_match_with_lvasgn(node); end
   def on_mlhs(node); end
   def on_module(node); end
-  def on_mrasgn(node); end
   def on_next(node); end
   def on_not(node); end
   def on_nth_ref(node); end
@@ -112,7 +112,6 @@ class Parser::AST::Processor < AST::Processor
   def on_postexe(node); end
   def on_preexe(node); end
   def on_procarg0(node); end
-  def on_rasgn(node); end
   def on_redo(node); end
   def on_regexp(node); end
   def on_resbody(node); end
@@ -147,14 +146,17 @@ end
 module Parser::Source
 end
 class Parser::Source::Buffer
+  def bsearch(line_begins, position); end
   def column_for_position(position); end
   def decompose_position(position); end
   def first_line; end
+  def freeze; end
   def initialize(name, first_line = nil, source: nil); end
+  def inspect; end
   def last_line; end
   def line_begins; end
-  def line_for(position); end
   def line_for_position(position); end
+  def line_index_for_position(position); end
   def line_range(lineno); end
   def name; end
   def raw_source=(input); end
@@ -215,6 +217,7 @@ class Parser::Source::Comment
   def loc; end
   def location; end
   def self.associate(ast, comments); end
+  def self.associate_by_identity(ast, comments); end
   def self.associate_locations(ast, comments); end
   def text; end
   def type; end
@@ -224,6 +227,7 @@ class Parser::Source::Comment::Associator
   def advance_through_directives; end
   def associate; end
   def associate_and_advance_comment(node); end
+  def associate_by_identity; end
   def associate_locations; end
   def children_in_source_order(node); end
   def current_comment_before?(node); end
@@ -288,6 +292,7 @@ class Parser::Source::Rewriter::Action
 end
 class Parser::Source::TreeRewriter
   def action_root; end
+  def action_summary; end
   def as_nested_actions; end
   def as_replacements; end
   def check_policy_validity; end
@@ -303,6 +308,7 @@ class Parser::Source::TreeRewriter
   def insert_after_multi(range, text); end
   def insert_before(range, content); end
   def insert_before_multi(range, text); end
+  def inspect; end
   def merge!(with); end
   def merge(with); end
   def process; end
@@ -394,9 +400,10 @@ class Parser::Source::Map::Definition < Parser::Source::Map
   def name; end
   def operator; end
 end
-class Parser::Source::Map::EndlessDefinition < Parser::Source::Map
+class Parser::Source::Map::MethodDefinition < Parser::Source::Map
   def assignment; end
-  def initialize(keyword_l, operator_l, name_l, assignment_l, body_l); end
+  def end; end
+  def initialize(keyword_l, operator_l, name_l, end_l, assignment_l, body_l); end
   def keyword; end
   def name; end
   def operator; end
@@ -491,6 +498,7 @@ class Parser::StaticEnvironment
   def declare_forward_args; end
   def declared?(name); end
   def declared_forward_args?; end
+  def empty?; end
   def extend_dynamic; end
   def extend_static; end
   def initialize; end
@@ -502,12 +510,14 @@ class Parser::Lexer
   def arg_or_cmdarg(cmd_state); end
   def cmdarg; end
   def cmdarg=(arg0); end
+  def cmdarg_stack; end
   def command_start; end
   def command_start=(arg0); end
   def comments; end
   def comments=(arg0); end
   def cond; end
   def cond=(arg0); end
+  def cond_stack; end
   def context; end
   def context=(arg0); end
   def dedent_level; end
@@ -526,8 +536,10 @@ class Parser::Lexer
   def in_kwarg; end
   def in_kwarg=(arg0); end
   def initialize(version); end
+  def lambda_stack; end
   def literal; end
   def next_state_for_literal(literal); end
+  def paren_nest; end
   def pop_cmdarg; end
   def pop_cond; end
   def pop_literal; end
@@ -699,13 +711,14 @@ class Parser::Builders::Default
   def case(case_t, expr, when_bodies, else_t, else_body, end_t); end
   def case_match(case_t, expr, in_bodies, else_t, else_body, end_t); end
   def character(char_t); end
-  def check_assignment_to_numparam(node); end
+  def check_assignment_to_numparam(name, loc); end
   def check_condition(cond); end
   def check_duplicate_arg(this_arg, map = nil); end
   def check_duplicate_args(args, map = nil); end
   def check_duplicate_pattern_key(name, loc); end
   def check_duplicate_pattern_variable(name, loc); end
   def check_lvar_name(name, loc); end
+  def check_reserved_for_numparam(name, loc); end
   def collapse_string_parts?(parts); end
   def collection_map(begin_t, parts, end_t); end
   def complex(complex_t); end
@@ -763,6 +776,7 @@ class Parser::Builders::Default
   def keyword_mod_map(pre_e, keyword_t, post_e); end
   def kwarg(name_t); end
   def kwarg_map(name_t, value_e = nil); end
+  def kwargs?(node); end
   def kwnilarg(dstar_t, nil_t); end
   def kwoptarg(name_t, value); end
   def kwrestarg(dstar_t, name_t = nil); end
@@ -779,13 +793,14 @@ class Parser::Builders::Default
   def match_nil_pattern(dstar_t, nil_t); end
   def match_op(receiver, match_t, arg); end
   def match_pair(label_type, label, value); end
+  def match_pattern(lhs, match_t, rhs); end
+  def match_pattern_p(lhs, match_t, rhs); end
   def match_rest(star_t, name_t = nil); end
   def match_var(name_t); end
   def match_with_trailing_comma(match, comma_t); end
   def module_definition_map(keyword_t, name_e, operator_t, end_t); end
   def multi_assign(lhs, eql_t, rhs); end
   def multi_lhs(begin_t, items, end_t); end
-  def multi_rassign(lhs, assoc_t, rhs); end
   def n(type, children, source_map); end
   def n0(type, source_map); end
   def nil(nil_t); end
@@ -814,7 +829,6 @@ class Parser::Builders::Default
   def range_exclusive(lhs, dot3_t, rhs); end
   def range_inclusive(lhs, dot2_t, rhs); end
   def range_map(start_e, op_t, end_e); end
-  def rassign(lhs, assoc_t, rhs); end
   def rational(rational_t); end
   def regexp_compose(begin_t, parts, end_t, options); end
   def regexp_map(begin_t, end_t, options_e); end
@@ -823,6 +837,7 @@ class Parser::Builders::Default
   def rescue_body_map(keyword_t, exc_list_e, assoc_t, exc_var_e, then_t, compstmt_e); end
   def restarg(star_t, name_t = nil); end
   def restarg_expr(star_t, expr = nil); end
+  def rewrite_hash_args_to_kwargs(args); end
   def self(token); end
   def self.emit_arg_inside_procarg0; end
   def self.emit_arg_inside_procarg0=(arg0); end
@@ -832,8 +847,12 @@ class Parser::Builders::Default
   def self.emit_forward_arg=(arg0); end
   def self.emit_index; end
   def self.emit_index=(arg0); end
+  def self.emit_kwargs; end
+  def self.emit_kwargs=(arg0); end
   def self.emit_lambda; end
   def self.emit_lambda=(arg0); end
+  def self.emit_match_pattern; end
+  def self.emit_match_pattern=(arg0); end
   def self.emit_procarg0; end
   def self.emit_procarg0=(arg0); end
   def self.modernize; end
@@ -877,6 +896,7 @@ end
 class Parser::Context
   def class_definition_allowed?; end
   def dynamic_const_definition_allowed?; end
+  def empty?; end
   def in_block?; end
   def in_class?; end
   def in_dynamic_block?; end
@@ -890,6 +910,7 @@ class Parser::Context
   def stack; end
 end
 class Parser::MaxNumparamStack
+  def empty?; end
   def has_numparams?; end
   def has_ordinary_params!; end
   def has_ordinary_params?; end
@@ -902,6 +923,7 @@ class Parser::MaxNumparamStack
   def top; end
 end
 class Parser::CurrentArgStack
+  def empty?; end
   def initialize; end
   def pop; end
   def push(value); end
@@ -913,6 +935,7 @@ end
 class Parser::VariablesStack
   def declare(name); end
   def declared?(name); end
+  def empty?; end
   def initialize; end
   def pop; end
   def push; end
@@ -926,6 +949,7 @@ class Parser::Base < Racc::Parser
   def diagnostic(level, reason, arguments, location_t, highlights_ts = nil); end
   def diagnostics; end
   def initialize(builder = nil); end
+  def lexer; end
   def max_numparam_stack; end
   def next_token; end
   def on_error(error_token_id, error_value, value_stack); end
