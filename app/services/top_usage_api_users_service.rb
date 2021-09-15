@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-class TopUsageAPIUsersService < ApplicationService
+class TopUsageApiUsersService < ApplicationService
   extend T::Sig
 
   class ApiKeyRequests < T::Struct
@@ -56,7 +56,7 @@ class TopUsageAPIUsersService < ApplicationService
     # Don't do any caching for today's API usage info
     return all_usage_by_api_key_on_date_no_caching(date) if date.today?
 
-    Rails.cache.fetch("TopUsageAPIUsersService/#{date}/v1", expires: 30.days) do
+    Rails.cache.fetch("TopUsageApiUsersService/#{date}/v1", expires: 30.days) do
       all_usage_by_api_key_on_date_no_caching(date)
     end
   end
