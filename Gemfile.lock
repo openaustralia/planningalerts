@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/bitsatom/themes_on_rails
+  revision: 93114fe552607a90f47959075cb6bfce3f728771
+  specs:
+    themes_on_rails (0.4.0)
+      rails (>= 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -430,8 +437,6 @@ GEM
       activemodel (>= 4.0)
     rails_autolink (1.1.6)
       rails (> 3.1)
-    rails_select_on_includes (5.2.1)
-      activerecord (>= 5.2.1)
     railties (6.0.4.1)
       actionpack (= 6.0.4.1)
       activesupport (= 6.0.4.1)
@@ -573,8 +578,6 @@ GEM
       sass (>= 3.3.0, < 3.5)
     sysexits (1.2.0)
     temple (0.8.2)
-    themes_on_rails (0.4.0)
-      rails (>= 3.2)
     thin (1.8.1)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -694,7 +697,6 @@ DEPENDENCIES
   rails-controller-testing
   rails-observers
   rails_autolink
-  rails_select_on_includes (~> 5.2.1)
   rake
   rb-fsevent
   rb-inotify
@@ -721,7 +723,7 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   susy
-  themes_on_rails
+  themes_on_rails!
   thin
   timecop
   twitter

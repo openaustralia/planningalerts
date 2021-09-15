@@ -295,6 +295,9 @@ class ApiController < ApplicationController
       user_agent: request.headers["User-Agent"],
       time_as_float: Time.zone.now.to_f
     )
+    # In Rails 6.0 variants seem to not be able to be a string
+    variants = :v2 if typed_params.v == "2"
+
     respond_to do |format|
       # TODO: Move the template over to using an xml builder
       format.rss do
@@ -305,7 +308,7 @@ class ApiController < ApplicationController
       format.json do
         # TODO: Document use of v parameter
         render "index", formats: :json,
-                        variants: typed_params.v
+                        variants: variants
       end
       # Use of the js extension is deprecated. See
       # https://github.com/openaustralia/planningalerts/issues/679
@@ -314,7 +317,7 @@ class ApiController < ApplicationController
         # TODO: Document use of v parameter
         render "index", formats: :json,
                         content_type: Mime[:json],
-                        variants: typed_params.v
+                        variants: variants
       end
       format.geojson do
         render "index"
