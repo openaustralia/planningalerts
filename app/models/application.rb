@@ -19,7 +19,7 @@ class Application < ApplicationRecord
   geocoded_by :address, latitude: :lat, longitude: :lng
 
   validates :council_reference, presence: true
-  validates :council_reference, uniqueness: { scope: :authority_id }
+  validates :council_reference, uniqueness: { scope: :authority_id, case_sensitive: false }
 
   scope(:with_current_version, -> { includes(:current_version).joins(:current_version) })
   scope(:with_first_version, -> { includes(:first_version).joins(:first_version) })
