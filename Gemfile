@@ -134,7 +134,7 @@ gem "pundit"
 gem "octokit", "~> 4.0"
 
 # For rendering json output
-gem "jpbuilder"
+gem "jbuilder"
 
 # For sending notifications to Slack about bounced emails to authorities
 gem "slack-notifier"
