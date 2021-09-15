@@ -33,7 +33,6 @@ gem "haml"
 # Temporarily locking version of rabl because upgrading causes
 # "Gem::Package::PathError: installing into parent path"
 gem "rabl", "0.14.0"
-gem "redcarpet"
 
 # Extra validation
 gem "validates_email_format_of", "~> 1.6", ">= 1.6.3"
