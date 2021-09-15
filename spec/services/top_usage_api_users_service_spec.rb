@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe TopUsageAPIUsersService do
+describe TopUsageApiUsersService do
   let(:key1) { create(:api_key) }
   let(:key2) { create(:api_key) }
   let(:key3) { create(:api_key) }
@@ -29,7 +29,7 @@ describe TopUsageAPIUsersService do
 
   describe ".call" do
     it "should return the top 2 total number of requests in descending sort order" do
-      result = TopUsageAPIUsersService.call(redis: redis, date_from: Date.new(2021, 7, 1), date_to: Date.new(2021, 7, 2), number: 2)
+      result = TopUsageApiUsersService.call(redis: redis, date_from: Date.new(2021, 7, 1), date_to: Date.new(2021, 7, 2), number: 2)
       expect(result.map(&:serialize)).to eq [
         { "api_key_object" => key3, "requests" => 214 },
         { "api_key_object" => key1, "requests" => 157 }
@@ -39,7 +39,7 @@ describe TopUsageAPIUsersService do
 
   describe ".all_usage_by_api_key_in_date_range" do
     it "should return data directly from redis in a more usable format" do
-      s = TopUsageAPIUsersService.new(redis)
+      s = TopUsageApiUsersService.new(redis)
       date_from = Date.new(2021, 7, 1)
       date_to = date_from + 1
       result = s.all_usage_by_api_key_in_date_range(date_from, date_to)
@@ -57,7 +57,7 @@ describe TopUsageAPIUsersService do
 
   describe ".total_usage_by_api_key_in_date_range" do
     it "should return the total number of requests" do
-      s = TopUsageAPIUsersService.new(redis)
+      s = TopUsageApiUsersService.new(redis)
       date_from = Date.new(2021, 7, 1)
       date_to = date_from + 1
       result = s.total_usage_by_api_key_in_date_range(date_from, date_to)
@@ -71,7 +71,7 @@ describe TopUsageAPIUsersService do
 
   describe ".top_total_usage_by_api_key_in_date_range" do
     it "should return the top 2 total number of requests in descending sort order" do
-      s = TopUsageAPIUsersService.new(redis)
+      s = TopUsageApiUsersService.new(redis)
       date_from = Date.new(2021, 7, 1)
       date_to = date_from + 1
       result = s.top_total_usage_by_api_key_in_date_range(date_from, date_to, 2)
