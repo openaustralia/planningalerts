@@ -454,7 +454,6 @@ GEM
       ffi (~> 1.0)
     recaptcha (5.8.1)
       json
-    redcarpet (3.5.1)
     redis (4.4.0)
     redis-namespace (1.8.1)
       redis (>= 3.0.4)
@@ -701,7 +700,6 @@ DEPENDENCIES
   rb-fsevent
   rb-inotify
   recaptcha
-  redcarpet
   redis-namespace
   rest-client
   rspec-activemodel-mocks
