@@ -150,6 +150,11 @@ gem "health_check"
 # Using New Relic temporarily to debug some performance issues
 gem "newrelic_rpm"
 
+# TODO: HORRIBLE HACK
+# Locking this gem to 2.3.2 because upgrading it causes some really weird bug
+# See https://github.com/openaustralia/planningalerts/issues/1547
+gem "ransack", "2.3.2"
+
 group :test do
   gem "capybara"
   gem "climate_control"
