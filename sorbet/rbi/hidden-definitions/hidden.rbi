@@ -26142,15 +26142,15 @@ class Timecop
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
-class TopUsageApiUsersService::ApiKeyObjectRequests
+class TopUsageAPIUsersService::ApiKeyObjectRequests
   def self.inherited(s); end
 end
 
-class TopUsageApiUsersService::ApiKeyRequests
+class TopUsageAPIUsersService::ApiKeyRequests
   def self.inherited(s); end
 end
 
-class TopUsageApiUsersService
+class TopUsageAPIUsersService
   extend ::T::Private::Methods::MethodHooks
   extend ::T::Private::Methods::SingletonMethodHooks
 end

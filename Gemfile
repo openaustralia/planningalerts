@@ -4,8 +4,13 @@ source "https://rubygems.org"
 
 gem "bootsnap", require: false
 gem "mysql2"
-gem "rails", "6.0.4.1"
+gem "rails", "5.2.6"
 gem "rake"
+
+# Monkey-patch for bug where distance isn't loaded into model
+# This is the version of the gem required for rails 5.2
+# So, will need to upgrade this if we are upgrading rails.
+gem "rails_select_on_includes", "~> 5.2.1"
 
 # Caching
 # Allow us to use `caches_page`
@@ -28,6 +33,7 @@ gem "haml"
 # Temporarily locking version of rabl because upgrading causes
 # "Gem::Package::PathError: installing into parent path"
 gem "rabl", "0.14.0"
+gem "redcarpet"
 
 # Extra validation
 gem "validates_email_format_of", "~> 1.6", ">= 1.6.3"
@@ -106,9 +112,7 @@ gem "virtus"
 
 # For theming (so we can run our proper theme at the same time as an
 # experimental bootstrap based theme)
-# Using fork to add Rails 6 support
-# TODO: Go back to released gem when fix merged
-gem "themes_on_rails", git: "https://github.com/bitsatom/themes_on_rails"
+gem "themes_on_rails"
 
 # For logging API calls to elasticsearch
 gem "elasticsearch"
@@ -134,7 +138,7 @@ gem "pundit"
 gem "octokit", "~> 4.0"
 
 # For rendering json output
-gem "jbuilder"
+gem "jpbuilder"
 
 # For sending notifications to Slack about bounced emails to authorities
 gem "slack-notifier"
