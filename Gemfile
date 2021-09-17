@@ -170,6 +170,10 @@ group :test do
 end
 
 group :development do
+  # To try to hunt down a memory leak
+  gem "derailed_benchmarks"
+  gem "stackprof"
+
   # For static type checking
   gem "sorbet", "0.5.6465"
 
