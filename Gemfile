@@ -4,13 +4,8 @@ source "https://rubygems.org"
 
 gem "bootsnap", require: false
 gem "mysql2"
-gem "rails", "5.2.6"
+gem "rails", "6.0.4.1"
 gem "rake"
-
-# Monkey-patch for bug where distance isn't loaded into model
-# This is the version of the gem required for rails 5.2
-# So, will need to upgrade this if we are upgrading rails.
-gem "rails_select_on_includes", "~> 5.2.1"
 
 # Caching
 # Allow us to use `caches_page`
@@ -111,7 +106,9 @@ gem "virtus"
 
 # For theming (so we can run our proper theme at the same time as an
 # experimental bootstrap based theme)
-gem "themes_on_rails"
+# Using fork to add Rails 6 support
+# TODO: Go back to released gem when fix merged
+gem "themes_on_rails", git: "https://github.com/bitsatom/themes_on_rails"
 
 # For logging API calls to elasticsearch
 gem "elasticsearch"
