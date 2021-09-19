@@ -157,7 +157,7 @@ group :test do
   gem "factory_bot"
   gem "factory_bot_rails"
   gem "rails-controller-testing"
-  gem "rspec-rails", "~> 3"
+  gem "rspec-rails", "~> 4"
   gem "selenium-webdriver"
   gem "simplecov", require: false
   gem "timecop"
