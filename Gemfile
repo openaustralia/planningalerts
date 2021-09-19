@@ -106,9 +106,8 @@ gem "virtus"
 
 # For theming (so we can run our proper theme at the same time as an
 # experimental bootstrap based theme)
-# Using fork to add Rails 6 support
-# TODO: Go back to released gem when fix merged
-gem "themes_on_rails", git: "https://github.com/bitsatom/themes_on_rails"
+# Using our fork to add Rails 6 support and fix a bad memory leak
+gem "themes_on_rails", git: "https://github.com/openaustralia/themes_on_rails"
 
 # For logging API calls to elasticsearch
 gem "elasticsearch"

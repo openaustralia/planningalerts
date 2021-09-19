@@ -1,6 +1,6 @@
 GIT
-  remote: https://github.com/bitsatom/themes_on_rails
-  revision: 93114fe552607a90f47959075cb6bfce3f728771
+  remote: https://github.com/openaustralia/themes_on_rails
+  revision: 8f7d7e6084bdd9829bd71e9008f12a759c1d0517
   specs:
     themes_on_rails (0.4.0)
       rails (>= 3.2)
