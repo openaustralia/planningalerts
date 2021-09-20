@@ -54,7 +54,7 @@ gem "geocoder"
 
 # CSS related stuff
 gem "autoprefixer-rails"
-gem "bourbon", "~> 5.0"
+gem "bourbon"
 gem "compass-blueprint"
 # compass is no longer maintained. TODO: Move away from compass
 gem "compass-rails", "3.1.0"
