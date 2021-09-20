@@ -1,7 +1,7 @@
 # typed: false
-require_relative 'boot'
+require_relative "boot"
 
-require 'rails/all'
+require "rails/all"
 require "rack/throttle"
 require File.dirname(__FILE__) + "/../lib/throttle_daily_by_api_user"
 require File.dirname(__FILE__) + "/../lib/throttle_cache"
@@ -91,8 +91,13 @@ module PlanningalertsApp
 
     # This was causing exceptions to be thrown on some API calls. Disabling it as it seems not to be needed
     config.action_dispatch.ip_spoofing_check = false
-    # Application configuration can go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded after loading
-    # the framework and any gems in your application.
+
+    # Configuration for the application, engines, and railties goes here.
+    #
+    # These settings can be overridden in specific environments using the files
+    # in config/environments, which are processed later.
+    #
+    # config.time_zone = "Central Time (US & Canada)"
+    # config.eager_load_paths << Rails.root.join("extras")
   end
 end
