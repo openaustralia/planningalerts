@@ -109,7 +109,7 @@ GEM
     bootstrap_form (4.5.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
-    bourbon (4.3.4)
+    bourbon (5.1.0)
       sass (~> 3.4)
       thor (~> 0.19)
     brakeman (5.1.1)
@@ -649,7 +649,7 @@ DEPENDENCIES
   binding_of_caller
   bootsnap
   bootstrap_form (>= 4.1.0)
-  bourbon (~> 4.0)
+  bourbon (~> 5.0)
   brakeman
   cancan
   capistrano (~> 2)

@@ -54,9 +54,7 @@ gem "geocoder"
 
 # CSS related stuff
 gem "autoprefixer-rails"
-# Upgrading to version 5.0 of bourbon looks like a fairly big change. So, delaying this
-# See https://www.bourbon.io/docs/migrating-from-v4-to-v5/
-gem "bourbon", "~> 4.0"
+gem "bourbon", "~> 5.0"
 gem "compass-blueprint"
 # compass is no longer maintained. TODO: Move away from compass
 gem "compass-rails", "3.1.0"
