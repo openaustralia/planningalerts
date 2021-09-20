@@ -21,10 +21,10 @@ end
 
 Rails.application.routes.draw do
   namespace :admin do
-    resources :applications
-    resources :authorities
-    resources :users
-    resources :reports, except: [:new, :create, :edit, :update]
+    resources :applications, only: [:index, :show, :destroy]
+    resources :authorities, except: :destroy
+    resources :users, except: [:new, :create]
+    resources :reports, only: [:index, :show, :destroy]
     resources :comments
     resources :api_keys
     resources :alerts
