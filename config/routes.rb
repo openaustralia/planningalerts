@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resources :users, except: [:new, :create]
     resources :reports, only: [:index, :show, :destroy]
     resources :comments, except: [:destroy, :new, :create]
-    resources :api_keys
+    resources :api_keys, except: [:destroy, :new, :create]
     resources :alerts
 
     root to: "applications#index"
