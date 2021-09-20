@@ -21,7 +21,7 @@ class AuthorityDashboard < Administrate::BaseDashboard
     morph_name: Field::String,
     website_url: Field::String,
     population_2017: Field::Number,
-    scraper_authority_label: Field::String,
+    scraper_authority_label: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -30,48 +30,39 @@ class AuthorityDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    applications
-    comments
-    github_issue
-    id
+    full_name
+    state
+    email
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    applications
-    comments
-    github_issue
-    id
     full_name
     short_name
-    disabled
     state
     email
-    last_scraper_run_log
-    morph_name
     website_url
     population_2017
+    morph_name
     scraper_authority_label
+    disabled
+    last_scraper_run_log
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    applications
-    comments
-    github_issue
     full_name
     short_name
-    disabled
     state
     email
-    last_scraper_run_log
-    morph_name
     website_url
     population_2017
+    morph_name
     scraper_authority_label
+    disabled
   ].freeze
 
   # COLLECTION_FILTERS
