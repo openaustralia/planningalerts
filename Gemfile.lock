@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/openaustralia/themes_on_rails
-  revision: 093e0df315afc5a90d83fb4881c8cee92805c087
+  revision: 4eb4f6201f4eb992e4446ba29bd17219988452d9
   specs:
     themes_on_rails (0.4.0)
       concurrent-ruby
