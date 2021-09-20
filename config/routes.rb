@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     resources :authorities, except: :destroy
     resources :users, except: [:new, :create]
     resources :reports, only: [:index, :show, :destroy]
-    resources :comments
+    resources :comments, except: [:destroy, :new, :create]
     resources :api_keys
     resources :alerts
 

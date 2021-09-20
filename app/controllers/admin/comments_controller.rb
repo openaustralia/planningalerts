@@ -42,5 +42,13 @@ module Admin
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
+
+    def default_sorting_attribute
+      :created_at
+    end
+
+    def default_sorting_direction
+      :desc
+    end
   end
 end
