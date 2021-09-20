@@ -14,7 +14,7 @@ class ReportDashboard < Administrate::BaseDashboard
     email: Field::String,
     details: Field::Text,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -23,20 +23,19 @@ class ReportDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    comment
-    id
+    created_at
     name
     email
+    comment
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    comment
-    id
     name
     email
     details
+    comment
     created_at
     updated_at
   ].freeze

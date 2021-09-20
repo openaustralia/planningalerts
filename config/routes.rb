@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resources :applications
     resources :authorities
     resources :users
-    resources :reports
+    resources :reports, except: [:new, :create, :edit, :update]
     resources :comments
     resources :api_keys
     resources :alerts
