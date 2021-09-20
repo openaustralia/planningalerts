@@ -18,7 +18,9 @@ gem "dalli"
 gem "rack-throttle"
 
 # Admin interface
+# TODO: Remove activeadmin as soon as we have fully replaced it with administrate
 gem "activeadmin"
+gem "administrate"
 
 # Logging in and such things
 gem "devise", "~> 4.2" # Pin to a particular major version to get deprecation warnings
