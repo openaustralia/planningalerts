@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gem "bootsnap", require: false
 gem "mysql2"
-gem "rails", "6.0.4.1"
+gem "rails", "6.1.4.1"
 gem "rake"
 
 # Caching
