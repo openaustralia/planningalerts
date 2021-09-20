@@ -26,10 +26,10 @@ Rails.application.routes.draw do
     end
   end
 
-  ActiveAdmin.routes(self)
-  namespace "admin" do
-    resource :site_settings, only: :update
-  end
+  # ActiveAdmin.routes(self)
+  # namespace "admin" do
+  #   resource :site_settings, only: :update
+  # end
 
   require 'sidekiq/web'
   authenticate :user, lambda { |u| u.admin? } do

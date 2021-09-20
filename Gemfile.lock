@@ -47,15 +47,6 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    activeadmin (2.9.0)
-      arbre (~> 1.2, >= 1.2.1)
-      formtastic (>= 3.1, < 5.0)
-      formtastic_i18n (~> 0.4)
-      inherited_resources (~> 1.7)
-      jquery-rails (~> 4.2)
-      kaminari (~> 1.0, >= 1.2.1)
-      railties (>= 5.2, < 6.2)
-      ransack (~> 2.1, >= 2.1.1)
     activejob (6.0.4.1)
       activesupport (= 6.0.4.1)
       globalid (>= 0.3.6)
@@ -87,9 +78,6 @@ GEM
       momentjs-rails (~> 2.8)
       sassc-rails (~> 2.1)
       selectize-rails (~> 0.6)
-    arbre (1.4.0)
-      activesupport (>= 3.0.0, < 6.2)
-      ruby2_keywords (>= 0.0.2, < 1.0)
     ast (2.4.2)
     atdis (0.5.0)
       activemodel
@@ -244,7 +232,6 @@ GEM
     formatador (0.3.0)
     formtastic (4.0.0)
       actionpack (>= 5.2.0)
-    formtastic_i18n (0.7.0)
     foundation-icons-sass-rails (3.0.0)
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
@@ -284,9 +271,6 @@ GEM
       rainbow
       rubocop (>= 0.50.0)
       sysexits (~> 1.1)
-    has_scope (0.8.0)
-      actionpack (>= 5.2)
-      activesupport (>= 5.2)
     hashdiff (1.0.1)
     hashie (4.1.0)
     health_check (3.1.0)
@@ -312,11 +296,6 @@ GEM
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
-    inherited_resources (1.13.0)
-      actionpack (>= 5.2, < 6.2)
-      has_scope (~> 0.6)
-      railties (>= 5.2, < 6.2)
-      responders (>= 2, < 4)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jquery-rails (4.4.0)
@@ -664,7 +643,6 @@ PLATFORMS
 
 DEPENDENCIES
   actionpack-page_caching
-  activeadmin
   administrate
   atdis
   autoprefixer-rails

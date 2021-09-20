@@ -19,7 +19,7 @@ gem "rack-throttle"
 
 # Admin interface
 # TODO: Remove activeadmin as soon as we have fully replaced it with administrate
-gem "activeadmin"
+# gem "activeadmin"
 gem "administrate"
 
 # Logging in and such things
