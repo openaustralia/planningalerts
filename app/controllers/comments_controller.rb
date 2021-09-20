@@ -38,9 +38,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find_by(confirm_id: typed_params.id)
     if @comment
       @comment.confirm!
-      # rubocop:disable Rails/OutputSafety
-      redirect_to @comment.application, notice: render_to_string(partial: "confirmed", locals: { comment: @comment }).html_safe
-      # rubocop:enable Rails/OutputSafety
+      redirect_to @comment.application, notice: render_to_string(partial: "confirmed", locals: { comment: @comment })
     else
       render plain: "", status: :not_found
     end

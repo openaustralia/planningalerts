@@ -4,6 +4,5 @@
 # Specify a serializer for the signed and encrypted cookie jars.
 # Valid options are :json, :marshal, and :hybrid.
 
-# Using marshal (rather than json) so that the flash will store
-# whether the string is html_safe 
-Rails.application.config.action_dispatch.cookies_serializer = :marshal
+# TODO: Switch over to :json after we've been on :hybrid for a month or so at least
+Rails.application.config.action_dispatch.cookies_serializer = :hybrid

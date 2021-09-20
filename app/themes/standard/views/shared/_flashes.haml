@@ -1,7 +1,7 @@
 .flash-message
   - if notice
-    .notice= notice
+    .notice= sanitize(notice)
   - if alert
-    %p.alert= alert
+    %p.alert= sanitize(alert)
   - if flash[:error]
-    %p.error= flash[:error]
+    %p.error= sanitize(flash[:error])
