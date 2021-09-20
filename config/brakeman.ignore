@@ -1,25 +1,5 @@
 {
   "ignored_warnings": [
-    {
-      "warning_type": "File Access",
-      "warning_code": 16,
-      "fingerprint": "6ed22922c7f5d0614474bdb6098ebfb631aaf99e055d0a5a7fe59147034b8521",
-      "check_name": "FileAccess",
-      "message": "Model attribute used in file name",
-      "file": "app/models/feed.rb",
-      "line": 64,
-      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
-      "code": "File.read(Feed.example_path(Rails.application.routes.recognize_path(URI.parse(url).path)[:number].to_i, page))",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Feed",
-        "method": "applications"
-      },
-      "user_input": "Feed.example_path(Rails.application.routes.recognize_path(URI.parse(url).path)[:number].to_i, page)",
-      "confidence": "Medium",
-      "note": "Only ever done in development"
-    }
   ],
   "updated": "2018-12-15 10:20:47 +1100",
   "brakeman_version": "4.3.1"
