@@ -23,17 +23,10 @@ Rails.application.routes.draw do
   namespace :admin do
       resources :applications
       resources :authorities
-      resources :stats
       resources :users
       resources :reports
-      resources :email_batches
       resources :comments
-      resources :github_issues
-      resources :geocode_queries
       resources :api_keys
-      resources :site_settings
-      resources :geocode_results
-      resources :application_redirects
       resources :alerts
 
       root to: "applications#index"
