@@ -30,7 +30,7 @@ class UserDashboard < Administrate::BaseDashboard
     confirmation_token: Field::String,
     confirmed_at: Field::DateTime,
     confirmation_sent_at: Field::DateTime,
-    unconfirmed_email: Field::String,
+    unconfirmed_email: Field::String
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -39,64 +39,42 @@ class UserDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    api_keys
-    id
     email
-    encrypted_password
+    name
+    organisation
+    admin
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    api_keys
-    id
     email
-    encrypted_password
-    password_salt
-    reset_password_token
-    remember_token
-    remember_created_at
-    sign_in_count
-    current_sign_in_at
-    last_sign_in_at
-    current_sign_in_ip
-    last_sign_in_ip
-    created_at
-    updated_at
-    reset_password_sent_at
-    admin
     name
     organisation
-    confirmation_token
+    admin
+    unconfirmed_email
+    api_keys
+    created_at
+    updated_at
+    current_sign_in_at
+    last_sign_in_at
+    reset_password_sent_at
     confirmed_at
     confirmation_sent_at
-    unconfirmed_email
+    remember_created_at
+    current_sign_in_ip
+    last_sign_in_ip
+    sign_in_count
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    api_keys
     email
-    encrypted_password
-    password_salt
-    reset_password_token
-    remember_token
-    remember_created_at
-    sign_in_count
-    current_sign_in_at
-    last_sign_in_at
-    current_sign_in_ip
-    last_sign_in_ip
-    reset_password_sent_at
-    admin
     name
     organisation
-    confirmation_token
-    confirmed_at
-    confirmation_sent_at
-    unconfirmed_email
+    admin
   ].freeze
 
   # COLLECTION_FILTERS
@@ -113,8 +91,8 @@ class UserDashboard < Administrate::BaseDashboard
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
-  #
-  # def display_resource(user)
-  #   "User ##{user.id}"
-  # end
+
+  def display_resource(user)
+    user.name.presence || user.email
+  end
 end
