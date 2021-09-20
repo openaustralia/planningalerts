@@ -17,6 +17,17 @@ class ApplicationDashboard < Administrate::BaseDashboard
     council_reference: Field::String,
     no_alerted: Field::Number,
     visible_comments_count: Field::Number,
+    address: Field::Text,
+    description: Field::Text,
+    info_url: Field::String,
+    lat: Field::Number.with_options(decimals: 2),
+    lng: Field::Number.with_options(decimals: 2),
+    date_scraped: Field::DateTime,
+    date_received: Field::Date,
+    suburb: Field::String,
+    postcode: Field::String,
+    on_notice_from: Field::Date,
+    on_notice_to: Field::Date
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -25,24 +36,29 @@ class ApplicationDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
+    council_reference
     authority
-    comments
-    versions
-    current_version
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    authority
-    comments
-    versions
-    current_version
-    first_version
     id
     council_reference
+    address
+    description
+    info_url
+    authority
+    lat
+    lng
+    date_scraped
+    date_received
+    suburb
+    postcode
+    on_notice_from
+    on_notice_to
     no_alerted
-    visible_comments_count
+    comments
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -74,7 +90,7 @@ class ApplicationDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how applications are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(application)
-  #   "Application ##{application.id}"
-  # end
+  def display_resource(application)
+    application.council_reference
+  end
 end

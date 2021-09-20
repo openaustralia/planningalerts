@@ -25,7 +25,6 @@ Rails.application.routes.draw do
       resources :authorities
       resources :stats
       resources :users
-      resources :application_versions
       resources :reports
       resources :email_batches
       resources :comments
