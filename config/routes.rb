@@ -20,6 +20,25 @@ class QueryParamsPresentConstraint
 end
 
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :applications
+      resources :authorities
+      resources :stats
+      resources :users
+      resources :application_versions
+      resources :reports
+      resources :email_batches
+      resources :comments
+      resources :github_issues
+      resources :geocode_queries
+      resources :api_keys
+      resources :site_settings
+      resources :geocode_results
+      resources :application_redirects
+      resources :alerts
+
+      root to: "applications#index"
+    end
   constraints subdomain: "api" do
     constraints FormatConstraint.new do
       get "(*path)" => redirect { |p, r| "http://www.#{r.domain(2)}/#{p[:path]}" }
