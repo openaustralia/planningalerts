@@ -21,16 +21,17 @@ end
 
 Rails.application.routes.draw do
   namespace :admin do
-      resources :applications
-      resources :authorities
-      resources :users
-      resources :reports
-      resources :comments
-      resources :api_keys
-      resources :alerts
+    resources :applications
+    resources :authorities
+    resources :users
+    resources :reports
+    resources :comments
+    resources :api_keys
+    resources :alerts
 
-      root to: "applications#index"
-    end
+    root to: "applications#index"
+  end
+
   constraints subdomain: "api" do
     constraints FormatConstraint.new do
       get "(*path)" => redirect { |p, r| "http://www.#{r.domain(2)}/#{p[:path]}" }
