@@ -53,9 +53,20 @@ class AuthorityDashboard < Administrate::BaseDashboard
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = %i[
+  FORM_ATTRIBUTES_NEW = %i[
     full_name
     short_name
+    state
+    email
+    website_url
+    population_2017
+    morph_name
+    scraper_authority_label
+    disabled
+  ].freeze
+
+  FORM_ATTRIBUTES_EDIT = %i[
+    full_name
     state
     email
     website_url
