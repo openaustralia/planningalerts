@@ -1,4 +1,5 @@
 # typed: true
+# frozen_string_literal: true
 
 # All Administrate controllers inherit from this
 # `Administrate::ApplicationController`, making it the ideal place to put

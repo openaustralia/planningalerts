@@ -1,4 +1,5 @@
-# typed: true
+# typed: strict
+# frozen_string_literal: true
 
 require "administrate/base_dashboard"
 
@@ -9,7 +10,7 @@ class CommentDashboard < Administrate::BaseDashboard
   # Each different type represents an Administrate::Field object,
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
-  ATTRIBUTE_TYPES = {
+  ATTRIBUTE_TYPES = T.let({
     application: Field::BelongsTo,
     reports: Field::HasMany,
     id: Field::Number,
@@ -24,24 +25,24 @@ class CommentDashboard < Administrate::BaseDashboard
     hidden: Field::Boolean,
     confirmed_at: Field::DateTime,
     last_delivered_at: Field::DateTime,
-    last_delivered_successfully: Field::Boolean,
-  }.freeze
+    last_delivered_successfully: Field::Boolean
+  }.freeze, T::Hash[Symbol, T.untyped])
 
   # COLLECTION_ATTRIBUTES
   # an array of attributes that will be displayed on the model's index page.
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
-  COLLECTION_ATTRIBUTES = %i[
+  COLLECTION_ATTRIBUTES = T.let(%i[
     created_at
     application
     text
     name
-  ].freeze
+  ].freeze, T::Array[Symbol])
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = %i[
+  SHOW_PAGE_ATTRIBUTES = T.let(%i[
     application
     text
     email
@@ -56,18 +57,18 @@ class CommentDashboard < Administrate::BaseDashboard
     last_delivered_at
     last_delivered_successfully
     reports
-  ].freeze
+  ].freeze, T::Array[Symbol])
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = %i[
+  FORM_ATTRIBUTES = T.let(%i[
     text
     email
     name
     address
     hidden
-  ].freeze
+  ].freeze, T::Array[Symbol])
 
   # COLLECTION_FILTERS
   # a hash that defines filters that can be used while searching via the search
@@ -79,7 +80,7 @@ class CommentDashboard < Administrate::BaseDashboard
   #   COLLECTION_FILTERS = {
   #     open: ->(resources) { resources.where(open: true) }
   #   }.freeze
-  COLLECTION_FILTERS = {}.freeze
+  COLLECTION_FILTERS = T.let({}.freeze, T::Hash[Symbol, T.untyped])
 
   # Overwrite this method to customize how comments are displayed
   # across all pages of the admin dashboard.

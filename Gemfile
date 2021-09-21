@@ -20,7 +20,7 @@ gem "rack-throttle"
 # Admin interface
 # TODO: Remove activeadmin as soon as we have fully replaced it with administrate
 gem "activeadmin"
-# TODO Use normal release as soon as https://github.com/thoughtbot/administrate/pull/1991 is included
+# TODO: Use normal release as soon as https://github.com/thoughtbot/administrate/pull/1991 is included
 gem "administrate", git: "https://github.com/thoughtbot/administrate", branch: "main"
 
 # Logging in and such things

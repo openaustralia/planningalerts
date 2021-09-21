@@ -1,4 +1,5 @@
-# typed: true
+# typed: strict
+# frozen_string_literal: true
 
 require "administrate/base_dashboard"
 
@@ -9,7 +10,7 @@ class AlertDashboard < Administrate::BaseDashboard
   # Each different type represents an Administrate::Field object,
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
-  ATTRIBUTE_TYPES = {
+  ATTRIBUTE_TYPES = T.let({
     id: Field::Number,
     email: Field::String,
     address: Field::String,
@@ -26,24 +27,24 @@ class AlertDashboard < Administrate::BaseDashboard
     unsubscribed_at: Field::DateTime,
     last_delivered_at: Field::DateTime,
     last_delivered_successfully: Field::Boolean,
-    unsubscribed_by: Field::String,
-  }.freeze
+    unsubscribed_by: Field::String
+  }.freeze, T::Hash[Symbol, T.untyped])
 
   # COLLECTION_ATTRIBUTES
   # an array of attributes that will be displayed on the model's index page.
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
-  COLLECTION_ATTRIBUTES = %i[
+  COLLECTION_ATTRIBUTES = T.let(%i[
     email
     address
     confirmed
     unsubscribed
-  ].freeze
+  ].freeze, T::Array[Symbol])
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = %i[
+  SHOW_PAGE_ATTRIBUTES = T.let(%i[
     id
     email
     address
@@ -61,12 +62,12 @@ class AlertDashboard < Administrate::BaseDashboard
     last_delivered_at
     last_delivered_successfully
     unsubscribed_by
-  ].freeze
+  ].freeze, T::Array[Symbol])
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = %i[
+  FORM_ATTRIBUTES = T.let(%i[
     email
     address
     last_sent
@@ -81,7 +82,7 @@ class AlertDashboard < Administrate::BaseDashboard
     last_delivered_at
     last_delivered_successfully
     unsubscribed_by
-  ].freeze
+  ].freeze, T::Array[Symbol])
 
   # COLLECTION_FILTERS
   # a hash that defines filters that can be used while searching via the search
@@ -93,7 +94,7 @@ class AlertDashboard < Administrate::BaseDashboard
   #   COLLECTION_FILTERS = {
   #     open: ->(resources) { resources.where(open: true) }
   #   }.freeze
-  COLLECTION_FILTERS = {}.freeze
+  COLLECTION_FILTERS = T.let({}.freeze, T::Hash[Symbol, T.untyped])
 
   # Overwrite this method to customize how alerts are displayed
   # across all pages of the admin dashboard.
