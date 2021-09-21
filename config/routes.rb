@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     resources :comments, except: [:destroy, :new, :create]
     resources :api_keys, except: [:destroy, :new, :create]
     resources :alerts, only: [:index, :show]
+    resources :background_jobs, only: :index
 
     root to: "applications#index"
   end
