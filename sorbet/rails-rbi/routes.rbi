@@ -25,6 +25,41 @@ module GeneratedUrlHelpers
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def admin_root_url(*args, **kwargs); end
 
+  # Sigs for route /admin/alerts/:id/unsubscribe(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def unsubscribe_admin_alert_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def unsubscribe_admin_alert_url(*args, **kwargs); end
+
+  # Sigs for route /admin/alerts/export_active_emails(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def export_active_emails_admin_alerts_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def export_active_emails_admin_alerts_url(*args, **kwargs); end
+
+  # Sigs for route /admin/alerts/batch_action(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_admin_alerts_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_admin_alerts_url(*args, **kwargs); end
+
+  # Sigs for route /admin/alerts(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_alerts_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_alerts_url(*args, **kwargs); end
+
+  # Sigs for route /admin/alerts/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_alert_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_alert_url(*args, **kwargs); end
+
   # Sigs for route /admin/api_usage(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def admin_api_usage_path(*args, **kwargs); end
@@ -32,47 +67,26 @@ module GeneratedUrlHelpers
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def admin_api_usage_url(*args, **kwargs); end
 
-  # Sigs for route /admin/dashboard(.:format)
+  # Sigs for route /admin/applications/batch_action(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_dashboard_path(*args, **kwargs); end
+  def batch_action_admin_applications_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_dashboard_url(*args, **kwargs); end
+  def batch_action_admin_applications_url(*args, **kwargs); end
 
-  # Sigs for route /admin/users/batch_action(.:format)
+  # Sigs for route /admin/applications(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_users_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_users_url(*args, **kwargs); end
-
-  # Sigs for route /admin/users(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_users_path(*args, **kwargs); end
+  def admin_applications_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_users_url(*args, **kwargs); end
+  def admin_applications_url(*args, **kwargs); end
 
-  # Sigs for route /admin/users/new(.:format)
+  # Sigs for route /admin/applications/:id(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def new_admin_user_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def new_admin_user_url(*args, **kwargs); end
-
-  # Sigs for route /admin/users/:id/edit(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_admin_user_path(*args, **kwargs); end
+  def admin_application_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_admin_user_url(*args, **kwargs); end
-
-  # Sigs for route /admin/users/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_user_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_user_url(*args, **kwargs); end
+  def admin_application_url(*args, **kwargs); end
 
   # Sigs for route /admin/authorities/:id/import(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
@@ -116,61 +130,12 @@ module GeneratedUrlHelpers
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def admin_authority_url(*args, **kwargs); end
 
-  # Sigs for route /admin/alerts/:id/unsubscribe(.:format)
+  # Sigs for route /admin/background_jobs(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def unsubscribe_admin_alert_path(*args, **kwargs); end
+  def admin_background_jobs_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def unsubscribe_admin_alert_url(*args, **kwargs); end
-
-  # Sigs for route /admin/alerts/export_active_emails(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def export_active_emails_admin_alerts_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def export_active_emails_admin_alerts_url(*args, **kwargs); end
-
-  # Sigs for route /admin/alerts/batch_action(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_alerts_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_alerts_url(*args, **kwargs); end
-
-  # Sigs for route /admin/alerts(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_alerts_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_alerts_url(*args, **kwargs); end
-
-  # Sigs for route /admin/alerts/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_alert_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_alert_url(*args, **kwargs); end
-
-  # Sigs for route /admin/applications/batch_action(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_applications_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_admin_applications_url(*args, **kwargs); end
-
-  # Sigs for route /admin/applications(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_applications_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_applications_url(*args, **kwargs); end
-
-  # Sigs for route /admin/applications/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_application_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_application_url(*args, **kwargs); end
+  def admin_background_jobs_url(*args, **kwargs); end
 
   # Sigs for route /admin/comments/:id/resend(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
@@ -214,12 +179,12 @@ module GeneratedUrlHelpers
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def admin_comment_url(*args, **kwargs); end
 
-  # Sigs for route /admin/background_jobs(.:format)
+  # Sigs for route /admin/dashboard(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_background_jobs_path(*args, **kwargs); end
+  def admin_dashboard_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def admin_background_jobs_url(*args, **kwargs); end
+  def admin_dashboard_url(*args, **kwargs); end
 
   # Sigs for route /admin/reports/batch_action(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
@@ -241,6 +206,41 @@ module GeneratedUrlHelpers
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def admin_report_url(*args, **kwargs); end
+
+  # Sigs for route /admin/users/batch_action(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_admin_users_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_admin_users_url(*args, **kwargs); end
+
+  # Sigs for route /admin/users(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_users_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_users_url(*args, **kwargs); end
+
+  # Sigs for route /admin/users/new(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def new_admin_user_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def new_admin_user_url(*args, **kwargs); end
+
+  # Sigs for route /admin/users/:id/edit(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_admin_user_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_admin_user_url(*args, **kwargs); end
+
+  # Sigs for route /admin/users/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_user_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_user_url(*args, **kwargs); end
 
   # Sigs for route /admin/admin_comments(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
@@ -675,6 +675,83 @@ module GeneratedUrlHelpers
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def toggle_theme_url(*args, **kwargs); end
+
+  # Sigs for route /rails/action_mailbox/postmark/inbound_emails(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_postmark_inbound_emails_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_postmark_inbound_emails_url(*args, **kwargs); end
+
+  # Sigs for route /rails/action_mailbox/relay/inbound_emails(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_relay_inbound_emails_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_relay_inbound_emails_url(*args, **kwargs); end
+
+  # Sigs for route /rails/action_mailbox/sendgrid/inbound_emails(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_sendgrid_inbound_emails_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_sendgrid_inbound_emails_url(*args, **kwargs); end
+
+  # Sigs for route /rails/action_mailbox/mandrill/inbound_emails(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_mandrill_inbound_health_check_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_mandrill_inbound_health_check_url(*args, **kwargs); end
+
+  # Sigs for route /rails/action_mailbox/mandrill/inbound_emails(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_mandrill_inbound_emails_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_mandrill_inbound_emails_url(*args, **kwargs); end
+
+  # Sigs for route /rails/action_mailbox/mailgun/inbound_emails/mime(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_mailgun_inbound_emails_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_mailgun_inbound_emails_url(*args, **kwargs); end
+
+  # Sigs for route /rails/conductor/action_mailbox/inbound_emails(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_conductor_inbound_emails_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_conductor_inbound_emails_url(*args, **kwargs); end
+
+  # Sigs for route /rails/conductor/action_mailbox/inbound_emails/new(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def new_rails_conductor_inbound_email_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def new_rails_conductor_inbound_email_url(*args, **kwargs); end
+
+  # Sigs for route /rails/conductor/action_mailbox/inbound_emails/:id/edit(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_rails_conductor_inbound_email_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_rails_conductor_inbound_email_url(*args, **kwargs); end
+
+  # Sigs for route /rails/conductor/action_mailbox/inbound_emails/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_conductor_inbound_email_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_conductor_inbound_email_url(*args, **kwargs); end
+
+  # Sigs for route /rails/conductor/action_mailbox/:inbound_email_id/reroute(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_conductor_inbound_email_reroute_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def rails_conductor_inbound_email_reroute_url(*args, **kwargs); end
 
   # Sigs for route /rails/active_storage/blobs/:signed_id/*filename(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }

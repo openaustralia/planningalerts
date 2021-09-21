@@ -164,6 +164,9 @@ module ActiveAdmin::Comment::QueryMethodsReturningRelation
   def select(*args); end
 
   sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_Relation) }
+  def reselect(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_Relation) }
   def order(*args); end
 
   sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_Relation) }
@@ -195,6 +198,9 @@ module ActiveAdmin::Comment::QueryMethodsReturningRelation
 
   sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_Relation) }
   def preload(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_Relation) }
+  def extract_associated(*args); end
 
   sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_Relation) }
   def eager_load(*args); end
@@ -233,10 +239,16 @@ module ActiveAdmin::Comment::QueryMethodsReturningRelation
   def unscope(*args); end
 
   sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_Relation) }
+  def optimizer_hints(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_Relation) }
   def merge(*args); end
 
   sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_Relation) }
   def except(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_Relation) }
+  def only(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveAdmin::Comment::ActiveRecord_Relation) }
   def extending(*args, &block); end
@@ -265,6 +277,9 @@ module ActiveAdmin::Comment::QueryMethodsReturningAssociationRelation
   def select(*args); end
 
   sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_AssociationRelation) }
+  def reselect(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_AssociationRelation) }
   def order(*args); end
 
   sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_AssociationRelation) }
@@ -296,6 +311,9 @@ module ActiveAdmin::Comment::QueryMethodsReturningAssociationRelation
 
   sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_AssociationRelation) }
   def preload(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_AssociationRelation) }
+  def extract_associated(*args); end
 
   sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_AssociationRelation) }
   def eager_load(*args); end
@@ -334,10 +352,16 @@ module ActiveAdmin::Comment::QueryMethodsReturningAssociationRelation
   def unscope(*args); end
 
   sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_AssociationRelation) }
+  def optimizer_hints(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_AssociationRelation) }
   def merge(*args); end
 
   sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_AssociationRelation) }
   def except(*args); end
+
+  sig { params(args: T.untyped).returns(ActiveAdmin::Comment::ActiveRecord_AssociationRelation) }
+  def only(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ActiveAdmin::Comment::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end

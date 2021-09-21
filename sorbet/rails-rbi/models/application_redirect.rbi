@@ -110,6 +110,9 @@ module ApplicationRedirect::QueryMethodsReturningRelation
   def select(*args); end
 
   sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_Relation) }
+  def reselect(*args); end
+
+  sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_Relation) }
   def order(*args); end
 
   sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_Relation) }
@@ -141,6 +144,9 @@ module ApplicationRedirect::QueryMethodsReturningRelation
 
   sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_Relation) }
   def preload(*args); end
+
+  sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_Relation) }
+  def extract_associated(*args); end
 
   sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_Relation) }
   def eager_load(*args); end
@@ -179,10 +185,16 @@ module ApplicationRedirect::QueryMethodsReturningRelation
   def unscope(*args); end
 
   sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_Relation) }
+  def optimizer_hints(*args); end
+
+  sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_Relation) }
   def merge(*args); end
 
   sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_Relation) }
   def except(*args); end
+
+  sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_Relation) }
+  def only(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ApplicationRedirect::ActiveRecord_Relation) }
   def extending(*args, &block); end
@@ -211,6 +223,9 @@ module ApplicationRedirect::QueryMethodsReturningAssociationRelation
   def select(*args); end
 
   sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_AssociationRelation) }
+  def reselect(*args); end
+
+  sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_AssociationRelation) }
   def order(*args); end
 
   sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_AssociationRelation) }
@@ -242,6 +257,9 @@ module ApplicationRedirect::QueryMethodsReturningAssociationRelation
 
   sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_AssociationRelation) }
   def preload(*args); end
+
+  sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_AssociationRelation) }
+  def extract_associated(*args); end
 
   sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_AssociationRelation) }
   def eager_load(*args); end
@@ -280,10 +298,16 @@ module ApplicationRedirect::QueryMethodsReturningAssociationRelation
   def unscope(*args); end
 
   sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_AssociationRelation) }
+  def optimizer_hints(*args); end
+
+  sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_AssociationRelation) }
   def merge(*args); end
 
   sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_AssociationRelation) }
   def except(*args); end
+
+  sig { params(args: T.untyped).returns(ApplicationRedirect::ActiveRecord_AssociationRelation) }
+  def only(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(ApplicationRedirect::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end

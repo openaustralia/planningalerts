@@ -238,6 +238,9 @@ module Authority::QueryMethodsReturningRelation
   def select(*args); end
 
   sig { params(args: T.untyped).returns(Authority::ActiveRecord_Relation) }
+  def reselect(*args); end
+
+  sig { params(args: T.untyped).returns(Authority::ActiveRecord_Relation) }
   def order(*args); end
 
   sig { params(args: T.untyped).returns(Authority::ActiveRecord_Relation) }
@@ -269,6 +272,9 @@ module Authority::QueryMethodsReturningRelation
 
   sig { params(args: T.untyped).returns(Authority::ActiveRecord_Relation) }
   def preload(*args); end
+
+  sig { params(args: T.untyped).returns(Authority::ActiveRecord_Relation) }
+  def extract_associated(*args); end
 
   sig { params(args: T.untyped).returns(Authority::ActiveRecord_Relation) }
   def eager_load(*args); end
@@ -307,10 +313,16 @@ module Authority::QueryMethodsReturningRelation
   def unscope(*args); end
 
   sig { params(args: T.untyped).returns(Authority::ActiveRecord_Relation) }
+  def optimizer_hints(*args); end
+
+  sig { params(args: T.untyped).returns(Authority::ActiveRecord_Relation) }
   def merge(*args); end
 
   sig { params(args: T.untyped).returns(Authority::ActiveRecord_Relation) }
   def except(*args); end
+
+  sig { params(args: T.untyped).returns(Authority::ActiveRecord_Relation) }
+  def only(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Authority::ActiveRecord_Relation) }
   def extending(*args, &block); end
@@ -339,6 +351,9 @@ module Authority::QueryMethodsReturningAssociationRelation
   def select(*args); end
 
   sig { params(args: T.untyped).returns(Authority::ActiveRecord_AssociationRelation) }
+  def reselect(*args); end
+
+  sig { params(args: T.untyped).returns(Authority::ActiveRecord_AssociationRelation) }
   def order(*args); end
 
   sig { params(args: T.untyped).returns(Authority::ActiveRecord_AssociationRelation) }
@@ -370,6 +385,9 @@ module Authority::QueryMethodsReturningAssociationRelation
 
   sig { params(args: T.untyped).returns(Authority::ActiveRecord_AssociationRelation) }
   def preload(*args); end
+
+  sig { params(args: T.untyped).returns(Authority::ActiveRecord_AssociationRelation) }
+  def extract_associated(*args); end
 
   sig { params(args: T.untyped).returns(Authority::ActiveRecord_AssociationRelation) }
   def eager_load(*args); end
@@ -408,10 +426,16 @@ module Authority::QueryMethodsReturningAssociationRelation
   def unscope(*args); end
 
   sig { params(args: T.untyped).returns(Authority::ActiveRecord_AssociationRelation) }
+  def optimizer_hints(*args); end
+
+  sig { params(args: T.untyped).returns(Authority::ActiveRecord_AssociationRelation) }
   def merge(*args); end
 
   sig { params(args: T.untyped).returns(Authority::ActiveRecord_AssociationRelation) }
   def except(*args); end
+
+  sig { params(args: T.untyped).returns(Authority::ActiveRecord_AssociationRelation) }
+  def only(*args); end
 
   sig { params(args: T.untyped, block: T.nilable(T.proc.void)).returns(Authority::ActiveRecord_AssociationRelation) }
   def extending(*args, &block); end
