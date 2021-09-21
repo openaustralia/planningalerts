@@ -1,3 +1,5 @@
+# typed: true
+
 require "administrate/base_dashboard"
 
 class AlertDashboard < Administrate::BaseDashboard

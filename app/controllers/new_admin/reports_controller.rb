@@ -1,3 +1,5 @@
+# typed: true
+
 module NewAdmin
   class ReportsController < NewAdmin::ApplicationController
     # Overwrite any of the RESTful controller actions to implement custom behavior

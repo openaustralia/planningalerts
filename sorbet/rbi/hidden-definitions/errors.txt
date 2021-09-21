@@ -640,19 +640,7 @@
 # Did you mean?  ActionMailbox::InboundEmail::RESTRICTED_CLASS_METHODS
 # uninitialized constant ActionMailbox::InboundEmail(Table doesn't exist)::UNASSIGNABLE_KEYS
 # Did you mean?  ActionMailbox::InboundEmail::UNASSIGNABLE_KEYS
-# wrong constant name bounced
-# wrong constant name delivered
-# wrong constant name failed
-# wrong constant name not_bounced
-# wrong constant name not_delivered
-# wrong constant name not_failed
-# wrong constant name not_pending
-# wrong constant name not_processing
 # wrong constant name page
-# wrong constant name pending
-# wrong constant name processing
-# wrong constant name statuses
-# wrong constant name with_attached_raw_email
 # uninitialized constant ActionMailer::Base::CALLBACK_FILTER_TYPES
 # uninitialized constant ActionMailer::Base::DEFAULT_PROTECTED_INSTANCE_VARIABLES
 # uninitialized constant ActionMailer::LogSubscriber::BLACK
@@ -702,24 +690,6 @@
 # wrong constant name assert_no_emails
 # wrong constant name assert_no_enqueued_emails
 # wrong constant name <static-init>
-# uninitialized constant ActionText::RichText(Table doesn't exist)::ACTIONS
-# Did you mean?  ActionText::RichText::ACTIONS
-# uninitialized constant ActionText::RichText(Table doesn't exist)::CALLBACKS
-# Did you mean?  ActionText::RichText::Callbacks
-#                ActionText::RichText::Callback
-#                ActionText::RichText::CALLBACKS
-# uninitialized constant ActionText::RichText(Table doesn't exist)::CALLBACK_FILTER_TYPES
-# Did you mean?  ActionText::RichText::CALLBACK_FILTER_TYPES
-# uninitialized constant ActionText::RichText(Table doesn't exist)::CALL_COMPILABLE_REGEXP
-# Did you mean?  ActionText::RichText::CALL_COMPILABLE_REGEXP
-# uninitialized constant ActionText::RichText(Table doesn't exist)::MAX_PASSWORD_LENGTH_ALLOWED
-# Did you mean?  ActionText::RichText::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant ActionText::RichText(Table doesn't exist)::NAME_COMPILABLE_REGEXP
-# Did you mean?  ActionText::RichText::NAME_COMPILABLE_REGEXP
-# uninitialized constant ActionText::RichText(Table doesn't exist)::RESTRICTED_CLASS_METHODS
-# Did you mean?  ActionText::RichText::RESTRICTED_CLASS_METHODS
-# uninitialized constant ActionText::RichText(Table doesn't exist)::UNASSIGNABLE_KEYS
-# Did you mean?  ActionText::RichText::UNASSIGNABLE_KEYS
 # wrong constant name after_add_for_embeds_attachments
 # wrong constant name after_add_for_embeds_attachments=
 # wrong constant name after_add_for_embeds_attachments?
@@ -745,7 +715,6 @@
 # wrong constant name before_remove_for_embeds_blobs=
 # wrong constant name before_remove_for_embeds_blobs?
 # wrong constant name page
-# wrong constant name with_attached_embeds
 # wrong constant name <Class:OutputBuffer>
 # wrong constant name <Class:OutputFlow>
 # wrong constant name <Class:StreamingBuffer>
@@ -1228,6 +1197,14 @@
 # wrong constant name edit_admin_comment_url
 # wrong constant name edit_admin_user_path
 # wrong constant name edit_admin_user_url
+# wrong constant name edit_new_admin_api_key_path
+# wrong constant name edit_new_admin_api_key_url
+# wrong constant name edit_new_admin_authority_path
+# wrong constant name edit_new_admin_authority_url
+# wrong constant name edit_new_admin_comment_path
+# wrong constant name edit_new_admin_comment_url
+# wrong constant name edit_new_admin_user_path
+# wrong constant name edit_new_admin_user_url
 # wrong constant name edit_user_password_path
 # wrong constant name edit_user_password_url
 # wrong constant name edit_user_registration_path
@@ -1252,14 +1229,44 @@
 # wrong constant name import_admin_authority_url
 # wrong constant name nearby_application_path
 # wrong constant name nearby_application_url
+# wrong constant name new_admin_alert_path
+# wrong constant name new_admin_alert_url
+# wrong constant name new_admin_alerts_path
+# wrong constant name new_admin_alerts_url
+# wrong constant name new_admin_api_key_path
+# wrong constant name new_admin_api_key_url
+# wrong constant name new_admin_api_keys_path
+# wrong constant name new_admin_api_keys_url
+# wrong constant name new_admin_application_path
+# wrong constant name new_admin_application_url
+# wrong constant name new_admin_applications_path
+# wrong constant name new_admin_applications_url
+# wrong constant name new_admin_authorities_path
+# wrong constant name new_admin_authorities_url
 # wrong constant name new_admin_authority_path
 # wrong constant name new_admin_authority_url
+# wrong constant name new_admin_background_jobs_path
+# wrong constant name new_admin_background_jobs_url
+# wrong constant name new_admin_comment_path
+# wrong constant name new_admin_comment_url
+# wrong constant name new_admin_comments_path
+# wrong constant name new_admin_comments_url
+# wrong constant name new_admin_report_path
+# wrong constant name new_admin_report_url
+# wrong constant name new_admin_reports_path
+# wrong constant name new_admin_reports_url
+# wrong constant name new_admin_root_path
+# wrong constant name new_admin_root_url
 # wrong constant name new_admin_user_path
 # wrong constant name new_admin_user_url
+# wrong constant name new_admin_users_path
+# wrong constant name new_admin_users_url
 # wrong constant name new_alert_path
 # wrong constant name new_alert_url
 # wrong constant name new_comment_report_path
 # wrong constant name new_comment_report_url
+# wrong constant name new_new_admin_authority_path
+# wrong constant name new_new_admin_authority_url
 # wrong constant name new_user_confirmation_path
 # wrong constant name new_user_confirmation_url
 # wrong constant name new_user_password_path
@@ -1568,39 +1575,39 @@
 # uninitialized constant ActiveRecord::AdvisoryLockBase::ActiveRecord_AssociationRelation::VALUE_METHODS
 # Did you mean?  ActiveRecord::AdvisoryLockBase::ActiveRecord_AssociationRelation::CLAUSE_METHODS
 # wrong constant name <static-init>
-# uninitialized constant #<Class:0x0000559c3d02ebb0>::CLAUSE_METHODS
+# uninitialized constant #<Class:0x0000561380015768>::CLAUSE_METHODS
 # Did you mean?  ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::ClassMethods
 #                ActiveRecord::AdvisoryLockBase::ClassMethods
 #                ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::VALUE_METHODS
 #                ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::CLAUSE_METHODS
-# uninitialized constant #<Class:0x0000559c3d02ebb0>::DEFAULT_VALUES
+# uninitialized constant #<Class:0x0000561380015768>::DEFAULT_VALUES
 # Did you mean?  ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::DEFAULT_VALUES
-# uninitialized constant #<Class:0x0000559c3d02ebb0>::Elem
-# uninitialized constant #<Class:0x0000559c3d02ebb0>::FROZEN_EMPTY_ARRAY
+# uninitialized constant #<Class:0x0000561380015768>::Elem
+# uninitialized constant #<Class:0x0000561380015768>::FROZEN_EMPTY_ARRAY
 # Did you mean?  ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::FROZEN_EMPTY_HASH
 #                ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::FROZEN_EMPTY_ARRAY
-# uninitialized constant #<Class:0x0000559c3d02ebb0>::FROZEN_EMPTY_HASH
+# uninitialized constant #<Class:0x0000561380015768>::FROZEN_EMPTY_HASH
 # Did you mean?  ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::FROZEN_EMPTY_HASH
 #                ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::FROZEN_EMPTY_ARRAY
-# uninitialized constant #<Class:0x0000559c3d02ebb0>::INVALID_METHODS_FOR_DELETE_ALL
+# uninitialized constant #<Class:0x0000561380015768>::INVALID_METHODS_FOR_DELETE_ALL
 # Did you mean?  ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::INVALID_METHODS_FOR_DELETE_ALL
-# uninitialized constant #<Class:0x0000559c3d02ebb0>::MULTI_VALUE_METHODS
+# uninitialized constant #<Class:0x0000561380015768>::MULTI_VALUE_METHODS
 # Did you mean?  ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::MULTI_VALUE_METHODS
-# uninitialized constant #<Class:0x0000559c3d02ebb0>::NILCLASS_STRING
+# uninitialized constant #<Class:0x0000561380015768>::NILCLASS_STRING
 # Did you mean?  ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::NILCLASS_STRING
-# uninitialized constant #<Class:0x0000559c3d02ebb0>::ONE_AS_ONE
+# uninitialized constant #<Class:0x0000561380015768>::ONE_AS_ONE
 # Did you mean?  ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::ONE_AS_ONE
-# uninitialized constant #<Class:0x0000559c3d02ebb0>::ORDER_IGNORE_MESSAGE
+# uninitialized constant #<Class:0x0000561380015768>::ORDER_IGNORE_MESSAGE
 # Did you mean?  ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::ORDER_IGNORE_MESSAGE
-# uninitialized constant #<Class:0x0000559c3d02ebb0>::SINGLE_VALUE_METHODS
+# uninitialized constant #<Class:0x0000561380015768>::SINGLE_VALUE_METHODS
 # Did you mean?  ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::SINGLE_VALUE_METHODS
-# uninitialized constant #<Class:0x0000559c3d02ebb0>::STRUCTURAL_OR_METHODS
+# uninitialized constant #<Class:0x0000561380015768>::STRUCTURAL_OR_METHODS
 # Did you mean?  ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::STRUCTURAL_OR_METHODS
-# uninitialized constant #<Class:0x0000559c3d02ebb0>::VALID_DIRECTIONS
+# uninitialized constant #<Class:0x0000561380015768>::VALID_DIRECTIONS
 # Did you mean?  ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::VALID_DIRECTIONS
-# uninitialized constant #<Class:0x0000559c3d02ebb0>::VALID_UNSCOPING_VALUES
+# uninitialized constant #<Class:0x0000561380015768>::VALID_UNSCOPING_VALUES
 # Did you mean?  ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::VALID_UNSCOPING_VALUES
-# uninitialized constant #<Class:0x0000559c3d02ebb0>::VALUE_METHODS
+# uninitialized constant #<Class:0x0000561380015768>::VALUE_METHODS
 # Did you mean?  ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::VALUE_METHODS
 #                ActiveRecord::AdvisoryLockBase::ActiveRecord_Associations_CollectionProxy::CLAUSE_METHODS
 # wrong constant name <static-init>
@@ -1839,26 +1846,26 @@
 # wrong constant name <static-init>
 # uninitialized constant ActiveRecord::Enum::RUBYGEMS_ACTIVATION_MONITOR
 # wrong constant name collect?
-# uninitialized constant #<Class:0x0000559c3d0311a8>::ACTIONS
+# uninitialized constant #<Class:0x0000561380019110>::ACTIONS
 # Did you mean?  ActiveRecord::InternalMetadata::ACTIONS
-# uninitialized constant #<Class:0x0000559c3d0311a8>::CALLBACKS
+# uninitialized constant #<Class:0x0000561380019110>::CALLBACKS
 # Did you mean?  ActiveRecord::InternalMetadata::Callbacks
 #                ActiveRecord::Callbacks
 #                ActiveRecord::InternalMetadata::Callback
 #                ActiveRecord::InternalMetadata::CALLBACKS
-# uninitialized constant #<Class:0x0000559c3d0311a8>::CALLBACK_FILTER_TYPES
+# uninitialized constant #<Class:0x0000561380019110>::CALLBACK_FILTER_TYPES
 # Did you mean?  ActiveRecord::InternalMetadata::CALLBACK_FILTER_TYPES
-# uninitialized constant #<Class:0x0000559c3d0311a8>::CALL_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x0000561380019110>::CALL_COMPILABLE_REGEXP
 # Did you mean?  ActiveRecord::InternalMetadata::CALL_COMPILABLE_REGEXP
 # wrong constant name <Class:GeneratedAssociationMethods>
 # wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant #<Class:0x0000559c3d0311a8>::MAX_PASSWORD_LENGTH_ALLOWED
+# uninitialized constant #<Class:0x0000561380019110>::MAX_PASSWORD_LENGTH_ALLOWED
 # Did you mean?  ActiveRecord::InternalMetadata::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant #<Class:0x0000559c3d0311a8>::NAME_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x0000561380019110>::NAME_COMPILABLE_REGEXP
 # Did you mean?  ActiveRecord::InternalMetadata::NAME_COMPILABLE_REGEXP
-# uninitialized constant #<Class:0x0000559c3d0311a8>::RESTRICTED_CLASS_METHODS
+# uninitialized constant #<Class:0x0000561380019110>::RESTRICTED_CLASS_METHODS
 # Did you mean?  ActiveRecord::InternalMetadata::RESTRICTED_CLASS_METHODS
-# uninitialized constant #<Class:0x0000559c3d0311a8>::UNASSIGNABLE_KEYS
+# uninitialized constant #<Class:0x0000561380019110>::UNASSIGNABLE_KEYS
 # Did you mean?  ActiveRecord::InternalMetadata::UNASSIGNABLE_KEYS
 # uninitialized constant ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation::CLAUSE_METHODS
 # Did you mean?  ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation::ClassMethods
@@ -1880,38 +1887,38 @@
 # uninitialized constant ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation::VALID_UNSCOPING_VALUES
 # uninitialized constant ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation::VALUE_METHODS
 # Did you mean?  ActiveRecord::InternalMetadata::ActiveRecord_AssociationRelation::CLAUSE_METHODS
-# uninitialized constant #<Class:0x0000559c3d037648>::CLAUSE_METHODS
+# uninitialized constant #<Class:0x0000561380018008>::CLAUSE_METHODS
 # Did you mean?  ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::ClassMethods
 #                ActiveRecord::InternalMetadata::ClassMethods
 #                ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::VALUE_METHODS
 #                ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::CLAUSE_METHODS
-# uninitialized constant #<Class:0x0000559c3d037648>::DEFAULT_VALUES
+# uninitialized constant #<Class:0x0000561380018008>::DEFAULT_VALUES
 # Did you mean?  ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::DEFAULT_VALUES
-# uninitialized constant #<Class:0x0000559c3d037648>::FROZEN_EMPTY_ARRAY
+# uninitialized constant #<Class:0x0000561380018008>::FROZEN_EMPTY_ARRAY
 # Did you mean?  ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::FROZEN_EMPTY_HASH
 #                ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::FROZEN_EMPTY_ARRAY
-# uninitialized constant #<Class:0x0000559c3d037648>::FROZEN_EMPTY_HASH
+# uninitialized constant #<Class:0x0000561380018008>::FROZEN_EMPTY_HASH
 # Did you mean?  ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::FROZEN_EMPTY_HASH
 #                ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::FROZEN_EMPTY_ARRAY
-# uninitialized constant #<Class:0x0000559c3d037648>::INVALID_METHODS_FOR_DELETE_ALL
+# uninitialized constant #<Class:0x0000561380018008>::INVALID_METHODS_FOR_DELETE_ALL
 # Did you mean?  ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::INVALID_METHODS_FOR_DELETE_ALL
-# uninitialized constant #<Class:0x0000559c3d037648>::MULTI_VALUE_METHODS
+# uninitialized constant #<Class:0x0000561380018008>::MULTI_VALUE_METHODS
 # Did you mean?  ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::MULTI_VALUE_METHODS
-# uninitialized constant #<Class:0x0000559c3d037648>::NILCLASS_STRING
+# uninitialized constant #<Class:0x0000561380018008>::NILCLASS_STRING
 # Did you mean?  ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::NILCLASS_STRING
-# uninitialized constant #<Class:0x0000559c3d037648>::ONE_AS_ONE
+# uninitialized constant #<Class:0x0000561380018008>::ONE_AS_ONE
 # Did you mean?  ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::ONE_AS_ONE
-# uninitialized constant #<Class:0x0000559c3d037648>::ORDER_IGNORE_MESSAGE
+# uninitialized constant #<Class:0x0000561380018008>::ORDER_IGNORE_MESSAGE
 # Did you mean?  ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::ORDER_IGNORE_MESSAGE
-# uninitialized constant #<Class:0x0000559c3d037648>::SINGLE_VALUE_METHODS
+# uninitialized constant #<Class:0x0000561380018008>::SINGLE_VALUE_METHODS
 # Did you mean?  ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::SINGLE_VALUE_METHODS
-# uninitialized constant #<Class:0x0000559c3d037648>::STRUCTURAL_OR_METHODS
+# uninitialized constant #<Class:0x0000561380018008>::STRUCTURAL_OR_METHODS
 # Did you mean?  ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::STRUCTURAL_OR_METHODS
-# uninitialized constant #<Class:0x0000559c3d037648>::VALID_DIRECTIONS
+# uninitialized constant #<Class:0x0000561380018008>::VALID_DIRECTIONS
 # Did you mean?  ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::VALID_DIRECTIONS
-# uninitialized constant #<Class:0x0000559c3d037648>::VALID_UNSCOPING_VALUES
+# uninitialized constant #<Class:0x0000561380018008>::VALID_UNSCOPING_VALUES
 # Did you mean?  ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::VALID_UNSCOPING_VALUES
-# uninitialized constant #<Class:0x0000559c3d037648>::VALUE_METHODS
+# uninitialized constant #<Class:0x0000561380018008>::VALUE_METHODS
 # Did you mean?  ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::VALUE_METHODS
 #                ActiveRecord::InternalMetadata::ActiveRecord_Associations_CollectionProxy::CLAUSE_METHODS
 # uninitialized constant ActiveRecord::InternalMetadata::ActiveRecord_Relation::CLAUSE_METHODS
@@ -2227,38 +2234,38 @@
 # uninitialized constant ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation::VALID_UNSCOPING_VALUES
 # uninitialized constant ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation::VALUE_METHODS
 # Did you mean?  ActiveRecord::SchemaMigration::ActiveRecord_AssociationRelation::CLAUSE_METHODS
-# uninitialized constant #<Class:0x0000559c3d0450e0>::CLAUSE_METHODS
+# uninitialized constant #<Class:0x000056138002bae0>::CLAUSE_METHODS
 # Did you mean?  ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::ClassMethods
 #                ActiveRecord::SchemaMigration::ClassMethods
 #                ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::VALUE_METHODS
 #                ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::CLAUSE_METHODS
-# uninitialized constant #<Class:0x0000559c3d0450e0>::DEFAULT_VALUES
+# uninitialized constant #<Class:0x000056138002bae0>::DEFAULT_VALUES
 # Did you mean?  ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::DEFAULT_VALUES
-# uninitialized constant #<Class:0x0000559c3d0450e0>::FROZEN_EMPTY_ARRAY
+# uninitialized constant #<Class:0x000056138002bae0>::FROZEN_EMPTY_ARRAY
 # Did you mean?  ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::FROZEN_EMPTY_HASH
 #                ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::FROZEN_EMPTY_ARRAY
-# uninitialized constant #<Class:0x0000559c3d0450e0>::FROZEN_EMPTY_HASH
+# uninitialized constant #<Class:0x000056138002bae0>::FROZEN_EMPTY_HASH
 # Did you mean?  ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::FROZEN_EMPTY_HASH
 #                ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::FROZEN_EMPTY_ARRAY
-# uninitialized constant #<Class:0x0000559c3d0450e0>::INVALID_METHODS_FOR_DELETE_ALL
+# uninitialized constant #<Class:0x000056138002bae0>::INVALID_METHODS_FOR_DELETE_ALL
 # Did you mean?  ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::INVALID_METHODS_FOR_DELETE_ALL
-# uninitialized constant #<Class:0x0000559c3d0450e0>::MULTI_VALUE_METHODS
+# uninitialized constant #<Class:0x000056138002bae0>::MULTI_VALUE_METHODS
 # Did you mean?  ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::MULTI_VALUE_METHODS
-# uninitialized constant #<Class:0x0000559c3d0450e0>::NILCLASS_STRING
+# uninitialized constant #<Class:0x000056138002bae0>::NILCLASS_STRING
 # Did you mean?  ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::NILCLASS_STRING
-# uninitialized constant #<Class:0x0000559c3d0450e0>::ONE_AS_ONE
+# uninitialized constant #<Class:0x000056138002bae0>::ONE_AS_ONE
 # Did you mean?  ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::ONE_AS_ONE
-# uninitialized constant #<Class:0x0000559c3d0450e0>::ORDER_IGNORE_MESSAGE
+# uninitialized constant #<Class:0x000056138002bae0>::ORDER_IGNORE_MESSAGE
 # Did you mean?  ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::ORDER_IGNORE_MESSAGE
-# uninitialized constant #<Class:0x0000559c3d0450e0>::SINGLE_VALUE_METHODS
+# uninitialized constant #<Class:0x000056138002bae0>::SINGLE_VALUE_METHODS
 # Did you mean?  ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::SINGLE_VALUE_METHODS
-# uninitialized constant #<Class:0x0000559c3d0450e0>::STRUCTURAL_OR_METHODS
+# uninitialized constant #<Class:0x000056138002bae0>::STRUCTURAL_OR_METHODS
 # Did you mean?  ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::STRUCTURAL_OR_METHODS
-# uninitialized constant #<Class:0x0000559c3d0450e0>::VALID_DIRECTIONS
+# uninitialized constant #<Class:0x000056138002bae0>::VALID_DIRECTIONS
 # Did you mean?  ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::VALID_DIRECTIONS
-# uninitialized constant #<Class:0x0000559c3d0450e0>::VALID_UNSCOPING_VALUES
+# uninitialized constant #<Class:0x000056138002bae0>::VALID_UNSCOPING_VALUES
 # Did you mean?  ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::VALID_UNSCOPING_VALUES
-# uninitialized constant #<Class:0x0000559c3d0450e0>::VALUE_METHODS
+# uninitialized constant #<Class:0x000056138002bae0>::VALUE_METHODS
 # Did you mean?  ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::VALUE_METHODS
 #                ActiveRecord::SchemaMigration::ActiveRecord_Associations_CollectionProxy::CLAUSE_METHODS
 # uninitialized constant ActiveRecord::SchemaMigration::ActiveRecord_Relation::CLAUSE_METHODS
@@ -2552,6 +2559,16 @@
 # wrong constant name inherited
 # wrong constant name inherited
 # wrong constant name connect_internal
+# wrong constant name <Class:AdminCommentsController>
+# wrong constant name <Class:AlertsController>
+# wrong constant name <Class:ApiUsageController>
+# wrong constant name <Class:ApplicationsController>
+# wrong constant name <Class:AuthoritiesController>
+# wrong constant name <Class:BackgroundJobsController>
+# wrong constant name <Class:CommentsController>
+# wrong constant name <Class:DashboardController>
+# wrong constant name <Class:ReportsController>
+# wrong constant name <Class:UsersController>
 # uninitialized constant Admin::AdminCommentsController::ACTIONS_DICTIONARY
 # uninitialized constant Admin::AdminCommentsController::ACTION_OPTIONS
 # uninitialized constant Admin::AdminCommentsController::ACTIVE_ADMIN_ACTIONS
@@ -2787,8 +2804,6 @@
 # uninitialized constant Admin::ReportsController::URL_OPTIONS
 # wrong constant name <static-init>
 # wrong constant name resource_class=
-# wrong constant name inherited
-# wrong constant name inherited
 # uninitialized constant Admin::UsersController::ACTIONS_DICTIONARY
 # uninitialized constant Admin::UsersController::ACTION_OPTIONS
 # uninitialized constant Admin::UsersController::ACTIVE_ADMIN_ACTIONS
@@ -2815,25 +2830,26 @@
 # uninitialized constant Admin::UsersController::URL_OPTIONS
 # wrong constant name <static-init>
 # wrong constant name resource_class=
-# uninitialized constant #<Class:0x0000559c32e17908>::ACTIONS
+# wrong constant name <static-init>
+# uninitialized constant #<Class:0x000056137a134118>::ACTIONS
 # Did you mean?  Alert::ACTIONS
-# uninitialized constant #<Class:0x0000559c32e17908>::CALLBACKS
+# uninitialized constant #<Class:0x000056137a134118>::CALLBACKS
 # Did you mean?  Alert::Callbacks
 #                Alert::Callback
 #                Alert::CALLBACKS
-# uninitialized constant #<Class:0x0000559c32e17908>::CALLBACK_FILTER_TYPES
+# uninitialized constant #<Class:0x000056137a134118>::CALLBACK_FILTER_TYPES
 # Did you mean?  Alert::CALLBACK_FILTER_TYPES
-# uninitialized constant #<Class:0x0000559c32e17908>::CALL_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x000056137a134118>::CALL_COMPILABLE_REGEXP
 # Did you mean?  Alert::CALL_COMPILABLE_REGEXP
 # wrong constant name <Class:GeneratedAssociationMethods>
 # wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant #<Class:0x0000559c32e17908>::MAX_PASSWORD_LENGTH_ALLOWED
+# uninitialized constant #<Class:0x000056137a134118>::MAX_PASSWORD_LENGTH_ALLOWED
 # Did you mean?  Alert::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant #<Class:0x0000559c32e17908>::NAME_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x000056137a134118>::NAME_COMPILABLE_REGEXP
 # Did you mean?  Alert::NAME_COMPILABLE_REGEXP
-# uninitialized constant #<Class:0x0000559c32e17908>::RESTRICTED_CLASS_METHODS
+# uninitialized constant #<Class:0x000056137a134118>::RESTRICTED_CLASS_METHODS
 # Did you mean?  Alert::RESTRICTED_CLASS_METHODS
-# uninitialized constant #<Class:0x0000559c32e17908>::UNASSIGNABLE_KEYS
+# uninitialized constant #<Class:0x000056137a134118>::UNASSIGNABLE_KEYS
 # Did you mean?  Alert::UNASSIGNABLE_KEYS
 # uninitialized constant Alert::ActiveRecord_AssociationRelation::CLAUSE_METHODS
 # Did you mean?  Alert::ActiveRecord_AssociationRelation::ClassMethods
@@ -2918,24 +2934,24 @@
 # wrong constant name inherited
 # wrong constant name inherited
 # wrong constant name inherited
-# uninitialized constant #<Class:0x0000559c35f9b920>::ACTIONS
+# uninitialized constant #<Class:0x000056137a7fe458>::ACTIONS
 # Did you mean?  ApiKey::ACTIONS
-# uninitialized constant #<Class:0x0000559c35f9b920>::CALLBACKS
+# uninitialized constant #<Class:0x000056137a7fe458>::CALLBACKS
 # Did you mean?  ApiKey::Callbacks
 #                ApiKey::Callback
 #                ApiKey::CALLBACKS
-# uninitialized constant #<Class:0x0000559c35f9b920>::CALLBACK_FILTER_TYPES
+# uninitialized constant #<Class:0x000056137a7fe458>::CALLBACK_FILTER_TYPES
 # Did you mean?  ApiKey::CALLBACK_FILTER_TYPES
-# uninitialized constant #<Class:0x0000559c35f9b920>::CALL_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x000056137a7fe458>::CALL_COMPILABLE_REGEXP
 # Did you mean?  ApiKey::CALL_COMPILABLE_REGEXP
 # wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant #<Class:0x0000559c35f9b920>::MAX_PASSWORD_LENGTH_ALLOWED
+# uninitialized constant #<Class:0x000056137a7fe458>::MAX_PASSWORD_LENGTH_ALLOWED
 # Did you mean?  ApiKey::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant #<Class:0x0000559c35f9b920>::NAME_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x000056137a7fe458>::NAME_COMPILABLE_REGEXP
 # Did you mean?  ApiKey::NAME_COMPILABLE_REGEXP
-# uninitialized constant #<Class:0x0000559c35f9b920>::RESTRICTED_CLASS_METHODS
+# uninitialized constant #<Class:0x000056137a7fe458>::RESTRICTED_CLASS_METHODS
 # Did you mean?  ApiKey::RESTRICTED_CLASS_METHODS
-# uninitialized constant #<Class:0x0000559c35f9b920>::UNASSIGNABLE_KEYS
+# uninitialized constant #<Class:0x000056137a7fe458>::UNASSIGNABLE_KEYS
 # Did you mean?  ApiKey::UNASSIGNABLE_KEYS
 # wrong constant name autosave_associated_records_for_user
 # uninitialized constant ApiKey::ActiveRecord_AssociationRelation::CLAUSE_METHODS
@@ -2999,24 +3015,24 @@
 # uninitialized constant ApiKey::ActiveRecord_Relation::VALUE_METHODS
 # Did you mean?  ApiKey::ActiveRecord_Relation::CLAUSE_METHODS
 # wrong constant name <static-init>
-# uninitialized constant #<Class:0x0000559c32db84d0>::ACTIONS
+# uninitialized constant #<Class:0x00005613763cf868>::ACTIONS
 # Did you mean?  Application::ACTIONS
-# uninitialized constant #<Class:0x0000559c32db84d0>::CALLBACKS
+# uninitialized constant #<Class:0x00005613763cf868>::CALLBACKS
 # Did you mean?  Application::Callbacks
 #                Application::Callback
 #                Application::CALLBACKS
-# uninitialized constant #<Class:0x0000559c32db84d0>::CALLBACK_FILTER_TYPES
+# uninitialized constant #<Class:0x00005613763cf868>::CALLBACK_FILTER_TYPES
 # Did you mean?  Application::CALLBACK_FILTER_TYPES
-# uninitialized constant #<Class:0x0000559c32db84d0>::CALL_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x00005613763cf868>::CALL_COMPILABLE_REGEXP
 # Did you mean?  Application::CALL_COMPILABLE_REGEXP
 # wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant #<Class:0x0000559c32db84d0>::MAX_PASSWORD_LENGTH_ALLOWED
+# uninitialized constant #<Class:0x00005613763cf868>::MAX_PASSWORD_LENGTH_ALLOWED
 # Did you mean?  Application::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant #<Class:0x0000559c32db84d0>::NAME_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x00005613763cf868>::NAME_COMPILABLE_REGEXP
 # Did you mean?  Application::NAME_COMPILABLE_REGEXP
-# uninitialized constant #<Class:0x0000559c32db84d0>::RESTRICTED_CLASS_METHODS
+# uninitialized constant #<Class:0x00005613763cf868>::RESTRICTED_CLASS_METHODS
 # Did you mean?  Application::RESTRICTED_CLASS_METHODS
-# uninitialized constant #<Class:0x0000559c32db84d0>::UNASSIGNABLE_KEYS
+# uninitialized constant #<Class:0x00005613763cf868>::UNASSIGNABLE_KEYS
 # Did you mean?  Application::UNASSIGNABLE_KEYS
 # wrong constant name _notify_application_sweeper_for_after_create
 # wrong constant name _notify_application_sweeper_for_after_destroy
@@ -3277,24 +3293,24 @@
 # wrong constant name <static-init>
 # wrong constant name <static-init>
 # wrong constant name page
-# uninitialized constant #<Class:0x0000559c35f36548>::ACTIONS
+# uninitialized constant #<Class:0x00007f7ac81db510>::ACTIONS
 # Did you mean?  ApplicationRedirect::ACTIONS
-# uninitialized constant #<Class:0x0000559c35f36548>::CALLBACKS
+# uninitialized constant #<Class:0x00007f7ac81db510>::CALLBACKS
 # Did you mean?  ApplicationRedirect::Callbacks
 #                ApplicationRedirect::Callback
 #                ApplicationRedirect::CALLBACKS
-# uninitialized constant #<Class:0x0000559c35f36548>::CALLBACK_FILTER_TYPES
+# uninitialized constant #<Class:0x00007f7ac81db510>::CALLBACK_FILTER_TYPES
 # Did you mean?  ApplicationRedirect::CALLBACK_FILTER_TYPES
-# uninitialized constant #<Class:0x0000559c35f36548>::CALL_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x00007f7ac81db510>::CALL_COMPILABLE_REGEXP
 # Did you mean?  ApplicationRedirect::CALL_COMPILABLE_REGEXP
 # wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant #<Class:0x0000559c35f36548>::MAX_PASSWORD_LENGTH_ALLOWED
+# uninitialized constant #<Class:0x00007f7ac81db510>::MAX_PASSWORD_LENGTH_ALLOWED
 # Did you mean?  ApplicationRedirect::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant #<Class:0x0000559c35f36548>::NAME_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x00007f7ac81db510>::NAME_COMPILABLE_REGEXP
 # Did you mean?  ApplicationRedirect::NAME_COMPILABLE_REGEXP
-# uninitialized constant #<Class:0x0000559c35f36548>::RESTRICTED_CLASS_METHODS
+# uninitialized constant #<Class:0x00007f7ac81db510>::RESTRICTED_CLASS_METHODS
 # Did you mean?  ApplicationRedirect::RESTRICTED_CLASS_METHODS
-# uninitialized constant #<Class:0x0000559c35f36548>::UNASSIGNABLE_KEYS
+# uninitialized constant #<Class:0x00007f7ac81db510>::UNASSIGNABLE_KEYS
 # Did you mean?  ApplicationRedirect::UNASSIGNABLE_KEYS
 # wrong constant name autosave_associated_records_for_redirect_application
 # uninitialized constant ApplicationRedirect::ActiveRecord_AssociationRelation::CLAUSE_METHODS
@@ -3358,24 +3374,24 @@
 # uninitialized constant ApplicationRedirect::ActiveRecord_Relation::VALUE_METHODS
 # Did you mean?  ApplicationRedirect::ActiveRecord_Relation::CLAUSE_METHODS
 # wrong constant name <static-init>
-# uninitialized constant #<Class:0x0000559c35096060>::ACTIONS
+# uninitialized constant #<Class:0x0000561379236198>::ACTIONS
 # Did you mean?  ApplicationVersion::ACTIONS
-# uninitialized constant #<Class:0x0000559c35096060>::CALLBACKS
+# uninitialized constant #<Class:0x0000561379236198>::CALLBACKS
 # Did you mean?  ApplicationVersion::Callbacks
 #                ApplicationVersion::Callback
 #                ApplicationVersion::CALLBACKS
-# uninitialized constant #<Class:0x0000559c35096060>::CALLBACK_FILTER_TYPES
+# uninitialized constant #<Class:0x0000561379236198>::CALLBACK_FILTER_TYPES
 # Did you mean?  ApplicationVersion::CALLBACK_FILTER_TYPES
-# uninitialized constant #<Class:0x0000559c35096060>::CALL_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x0000561379236198>::CALL_COMPILABLE_REGEXP
 # Did you mean?  ApplicationVersion::CALL_COMPILABLE_REGEXP
 # wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant #<Class:0x0000559c35096060>::MAX_PASSWORD_LENGTH_ALLOWED
+# uninitialized constant #<Class:0x0000561379236198>::MAX_PASSWORD_LENGTH_ALLOWED
 # Did you mean?  ApplicationVersion::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant #<Class:0x0000559c35096060>::NAME_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x0000561379236198>::NAME_COMPILABLE_REGEXP
 # Did you mean?  ApplicationVersion::NAME_COMPILABLE_REGEXP
-# uninitialized constant #<Class:0x0000559c35096060>::RESTRICTED_CLASS_METHODS
+# uninitialized constant #<Class:0x0000561379236198>::RESTRICTED_CLASS_METHODS
 # Did you mean?  ApplicationVersion::RESTRICTED_CLASS_METHODS
-# uninitialized constant #<Class:0x0000559c35096060>::UNASSIGNABLE_KEYS
+# uninitialized constant #<Class:0x0000561379236198>::UNASSIGNABLE_KEYS
 # Did you mean?  ApplicationVersion::UNASSIGNABLE_KEYS
 # wrong constant name autosave_associated_records_for_application
 # wrong constant name autosave_associated_records_for_previous_version
@@ -3459,24 +3475,24 @@
 # wrong constant name inherited
 # wrong constant name inherited
 # wrong constant name inherited
-# uninitialized constant #<Class:0x0000559c34434060>::ACTIONS
+# uninitialized constant #<Class:0x0000561376536aa8>::ACTIONS
 # Did you mean?  Authority::ACTIONS
-# uninitialized constant #<Class:0x0000559c34434060>::CALLBACKS
+# uninitialized constant #<Class:0x0000561376536aa8>::CALLBACKS
 # Did you mean?  Authority::Callbacks
 #                Authority::Callback
 #                Authority::CALLBACKS
-# uninitialized constant #<Class:0x0000559c34434060>::CALLBACK_FILTER_TYPES
+# uninitialized constant #<Class:0x0000561376536aa8>::CALLBACK_FILTER_TYPES
 # Did you mean?  Authority::CALLBACK_FILTER_TYPES
-# uninitialized constant #<Class:0x0000559c34434060>::CALL_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x0000561376536aa8>::CALL_COMPILABLE_REGEXP
 # Did you mean?  Authority::CALL_COMPILABLE_REGEXP
 # wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant #<Class:0x0000559c34434060>::MAX_PASSWORD_LENGTH_ALLOWED
+# uninitialized constant #<Class:0x0000561376536aa8>::MAX_PASSWORD_LENGTH_ALLOWED
 # Did you mean?  Authority::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant #<Class:0x0000559c34434060>::NAME_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x0000561376536aa8>::NAME_COMPILABLE_REGEXP
 # Did you mean?  Authority::NAME_COMPILABLE_REGEXP
-# uninitialized constant #<Class:0x0000559c34434060>::RESTRICTED_CLASS_METHODS
+# uninitialized constant #<Class:0x0000561376536aa8>::RESTRICTED_CLASS_METHODS
 # Did you mean?  Authority::RESTRICTED_CLASS_METHODS
-# uninitialized constant #<Class:0x0000559c34434060>::UNASSIGNABLE_KEYS
+# uninitialized constant #<Class:0x0000561376536aa8>::UNASSIGNABLE_KEYS
 # Did you mean?  Authority::UNASSIGNABLE_KEYS
 # wrong constant name _notify_authority_sweeper_for_after_create
 # wrong constant name _notify_authority_sweeper_for_after_destroy
@@ -3599,6 +3615,7 @@
 # wrong constant name before_remove_for_comments
 # wrong constant name before_remove_for_comments=
 # wrong constant name before_remove_for_comments?
+# wrong constant name named_resource
 # wrong constant name <Class:BasicObject>
 # uninitialized constant BasicSocket::APPEND
 # uninitialized constant BasicSocket::BINARY
@@ -4563,24 +4580,24 @@
 # uninitialized constant Coercible::Coercer::Decimal::COERCION_METHOD_REGEXP
 # uninitialized constant Coercible::Coercer::Hash::COERCION_METHOD_REGEXP
 # uninitialized constant Coercible::Coercer::String::COERCION_METHOD_REGEXP
-# uninitialized constant #<Class:0x0000559c31e5c4a0>::ACTIONS
+# uninitialized constant #<Class:0x0000561375111820>::ACTIONS
 # Did you mean?  Comment::ACTIONS
-# uninitialized constant #<Class:0x0000559c31e5c4a0>::CALLBACKS
+# uninitialized constant #<Class:0x0000561375111820>::CALLBACKS
 # Did you mean?  Comment::Callbacks
 #                Comment::Callback
 #                Comment::CALLBACKS
-# uninitialized constant #<Class:0x0000559c31e5c4a0>::CALLBACK_FILTER_TYPES
+# uninitialized constant #<Class:0x0000561375111820>::CALLBACK_FILTER_TYPES
 # Did you mean?  Comment::CALLBACK_FILTER_TYPES
-# uninitialized constant #<Class:0x0000559c31e5c4a0>::CALL_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x0000561375111820>::CALL_COMPILABLE_REGEXP
 # Did you mean?  Comment::CALL_COMPILABLE_REGEXP
 # wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant #<Class:0x0000559c31e5c4a0>::MAX_PASSWORD_LENGTH_ALLOWED
+# uninitialized constant #<Class:0x0000561375111820>::MAX_PASSWORD_LENGTH_ALLOWED
 # Did you mean?  Comment::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant #<Class:0x0000559c31e5c4a0>::NAME_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x0000561375111820>::NAME_COMPILABLE_REGEXP
 # Did you mean?  Comment::NAME_COMPILABLE_REGEXP
-# uninitialized constant #<Class:0x0000559c31e5c4a0>::RESTRICTED_CLASS_METHODS
+# uninitialized constant #<Class:0x0000561375111820>::RESTRICTED_CLASS_METHODS
 # Did you mean?  Comment::RESTRICTED_CLASS_METHODS
-# uninitialized constant #<Class:0x0000559c31e5c4a0>::UNASSIGNABLE_KEYS
+# uninitialized constant #<Class:0x0000561375111820>::UNASSIGNABLE_KEYS
 # Did you mean?  Comment::UNASSIGNABLE_KEYS
 # wrong constant name after_add_for_reports
 # wrong constant name after_add_for_reports=
@@ -4677,10 +4694,10 @@
 # wrong constant name inherited
 # wrong constant name inherited
 # wrong constant name inherited
-# uninitialized constant #<Class:0x0000559c2f54b2f0>::E
+# uninitialized constant #<Class:0x00005613734e4ad0>::E
 # Did you mean?  Compass::Core::SassExtensions::Functions::GradientSupport::CSS3AngleToSVGConverter::E
 #                EM
-# uninitialized constant #<Class:0x0000559c2f54b2f0>::PI
+# uninitialized constant #<Class:0x00005613734e4ad0>::PI
 # Did you mean?  Compass::Core::SassExtensions::Functions::GradientSupport::CSS3AngleToSVGConverter::PI
 # uninitialized constant Compass::SassExtensions::Functions::Sprites::VALID_UNIT
 # uninitialized constant Compass::SassExtensions::Sprites::Image::VALID_UNIT
@@ -4990,8 +5007,8 @@
 # uninitialized constant Elasticsearch::Client::HTTP_HEAD
 # Did you mean?  Elasticsearch::Client::HTTP_GET
 # uninitialized constant Elasticsearch::Client::HTTP_POST
-# Did you mean?  Elasticsearch::Client::HTTP_PUT
-#                Elasticsearch::Client::HTTP_GET
+# Did you mean?  Elasticsearch::Client::HTTP_GET
+#                Elasticsearch::Client::HTTP_PUT
 # uninitialized constant Elasticsearch::Client::HTTP_PUT
 # Did you mean?  Elasticsearch::Client::HTTP_GET
 #                Elasticsearch::Client::HTTP_POST
@@ -5000,25 +5017,25 @@
 # Did you mean?  Elasticsearch::Client::UNDERSCORE_ALL
 # uninitialized constant Elasticsearch::Client::VERSION
 # Did you mean?  Elasticsearch::VERSION
-# uninitialized constant #<Class:0x0000559c351f85e8>::ACTIONS
+# uninitialized constant #<Class:0x0000561379241610>::ACTIONS
 # Did you mean?  EmailBatch::ACTIONS
-# uninitialized constant #<Class:0x0000559c351f85e8>::CALLBACKS
+# uninitialized constant #<Class:0x0000561379241610>::CALLBACKS
 # Did you mean?  EmailBatch::Callbacks
 #                EmailBatch::Callback
 #                EmailBatch::CALLBACKS
-# uninitialized constant #<Class:0x0000559c351f85e8>::CALLBACK_FILTER_TYPES
+# uninitialized constant #<Class:0x0000561379241610>::CALLBACK_FILTER_TYPES
 # Did you mean?  EmailBatch::CALLBACK_FILTER_TYPES
-# uninitialized constant #<Class:0x0000559c351f85e8>::CALL_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x0000561379241610>::CALL_COMPILABLE_REGEXP
 # Did you mean?  EmailBatch::CALL_COMPILABLE_REGEXP
 # wrong constant name <Class:GeneratedAssociationMethods>
 # wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant #<Class:0x0000559c351f85e8>::MAX_PASSWORD_LENGTH_ALLOWED
+# uninitialized constant #<Class:0x0000561379241610>::MAX_PASSWORD_LENGTH_ALLOWED
 # Did you mean?  EmailBatch::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant #<Class:0x0000559c351f85e8>::NAME_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x0000561379241610>::NAME_COMPILABLE_REGEXP
 # Did you mean?  EmailBatch::NAME_COMPILABLE_REGEXP
-# uninitialized constant #<Class:0x0000559c351f85e8>::RESTRICTED_CLASS_METHODS
+# uninitialized constant #<Class:0x0000561379241610>::RESTRICTED_CLASS_METHODS
 # Did you mean?  EmailBatch::RESTRICTED_CLASS_METHODS
-# uninitialized constant #<Class:0x0000559c351f85e8>::UNASSIGNABLE_KEYS
+# uninitialized constant #<Class:0x0000561379241610>::UNASSIGNABLE_KEYS
 # Did you mean?  EmailBatch::UNASSIGNABLE_KEYS
 # uninitialized constant EmailBatch::ActiveRecord_AssociationRelation::CLAUSE_METHODS
 # Did you mean?  EmailBatch::ActiveRecord_AssociationRelation::ClassMethods
@@ -5896,6 +5913,44 @@
 # wrong constant name default_url_options
 # wrong constant name default_url_options=
 # wrong constant name default_url_options?
+# wrong constant name edit_new_admin_api_key_path
+# wrong constant name edit_new_admin_api_key_url
+# wrong constant name edit_new_admin_authority_path
+# wrong constant name edit_new_admin_authority_url
+# wrong constant name edit_new_admin_comment_path
+# wrong constant name edit_new_admin_comment_url
+# wrong constant name edit_new_admin_user_path
+# wrong constant name edit_new_admin_user_url
+# wrong constant name new_admin_alert_path
+# wrong constant name new_admin_alert_url
+# wrong constant name new_admin_alerts_path
+# wrong constant name new_admin_alerts_url
+# wrong constant name new_admin_api_key_path
+# wrong constant name new_admin_api_key_url
+# wrong constant name new_admin_api_keys_path
+# wrong constant name new_admin_api_keys_url
+# wrong constant name new_admin_application_path
+# wrong constant name new_admin_application_url
+# wrong constant name new_admin_applications_path
+# wrong constant name new_admin_applications_url
+# wrong constant name new_admin_authorities_path
+# wrong constant name new_admin_authorities_url
+# wrong constant name new_admin_background_jobs_path
+# wrong constant name new_admin_background_jobs_url
+# wrong constant name new_admin_comment_path
+# wrong constant name new_admin_comment_url
+# wrong constant name new_admin_comments_path
+# wrong constant name new_admin_comments_url
+# wrong constant name new_admin_report_path
+# wrong constant name new_admin_report_url
+# wrong constant name new_admin_reports_path
+# wrong constant name new_admin_reports_url
+# wrong constant name new_admin_root_path
+# wrong constant name new_admin_root_url
+# wrong constant name new_admin_users_path
+# wrong constant name new_admin_users_url
+# wrong constant name new_new_admin_authority_path
+# wrong constant name new_new_admin_authority_url
 # wrong constant name rails_info_path
 # wrong constant name rails_info_properties_path
 # wrong constant name rails_info_properties_url
@@ -5904,24 +5959,24 @@
 # wrong constant name rails_info_url
 # wrong constant name rails_mailers_path
 # wrong constant name rails_mailers_url
-# uninitialized constant #<Class:0x0000559c352a8fd8>::ACTIONS
+# uninitialized constant #<Class:0x000056137a37f918>::ACTIONS
 # Did you mean?  GeocodeQuery::ACTIONS
-# uninitialized constant #<Class:0x0000559c352a8fd8>::CALLBACKS
+# uninitialized constant #<Class:0x000056137a37f918>::CALLBACKS
 # Did you mean?  GeocodeQuery::Callbacks
 #                GeocodeQuery::Callback
 #                GeocodeQuery::CALLBACKS
-# uninitialized constant #<Class:0x0000559c352a8fd8>::CALLBACK_FILTER_TYPES
+# uninitialized constant #<Class:0x000056137a37f918>::CALLBACK_FILTER_TYPES
 # Did you mean?  GeocodeQuery::CALLBACK_FILTER_TYPES
-# uninitialized constant #<Class:0x0000559c352a8fd8>::CALL_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x000056137a37f918>::CALL_COMPILABLE_REGEXP
 # Did you mean?  GeocodeQuery::CALL_COMPILABLE_REGEXP
 # wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant #<Class:0x0000559c352a8fd8>::MAX_PASSWORD_LENGTH_ALLOWED
+# uninitialized constant #<Class:0x000056137a37f918>::MAX_PASSWORD_LENGTH_ALLOWED
 # Did you mean?  GeocodeQuery::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant #<Class:0x0000559c352a8fd8>::NAME_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x000056137a37f918>::NAME_COMPILABLE_REGEXP
 # Did you mean?  GeocodeQuery::NAME_COMPILABLE_REGEXP
-# uninitialized constant #<Class:0x0000559c352a8fd8>::RESTRICTED_CLASS_METHODS
+# uninitialized constant #<Class:0x000056137a37f918>::RESTRICTED_CLASS_METHODS
 # Did you mean?  GeocodeQuery::RESTRICTED_CLASS_METHODS
-# uninitialized constant #<Class:0x0000559c352a8fd8>::UNASSIGNABLE_KEYS
+# uninitialized constant #<Class:0x000056137a37f918>::UNASSIGNABLE_KEYS
 # Did you mean?  GeocodeQuery::UNASSIGNABLE_KEYS
 # wrong constant name after_add_for_geocode_results
 # wrong constant name after_add_for_geocode_results=
@@ -6011,24 +6066,24 @@
 # wrong constant name before_remove_for_geocode_results
 # wrong constant name before_remove_for_geocode_results=
 # wrong constant name before_remove_for_geocode_results?
-# uninitialized constant #<Class:0x0000559c35fdd550>::ACTIONS
+# uninitialized constant #<Class:0x000056137a60fb38>::ACTIONS
 # Did you mean?  GeocodeResult::ACTIONS
-# uninitialized constant #<Class:0x0000559c35fdd550>::CALLBACKS
+# uninitialized constant #<Class:0x000056137a60fb38>::CALLBACKS
 # Did you mean?  GeocodeResult::Callbacks
 #                GeocodeResult::Callback
 #                GeocodeResult::CALLBACKS
-# uninitialized constant #<Class:0x0000559c35fdd550>::CALLBACK_FILTER_TYPES
+# uninitialized constant #<Class:0x000056137a60fb38>::CALLBACK_FILTER_TYPES
 # Did you mean?  GeocodeResult::CALLBACK_FILTER_TYPES
-# uninitialized constant #<Class:0x0000559c35fdd550>::CALL_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x000056137a60fb38>::CALL_COMPILABLE_REGEXP
 # Did you mean?  GeocodeResult::CALL_COMPILABLE_REGEXP
 # wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant #<Class:0x0000559c35fdd550>::MAX_PASSWORD_LENGTH_ALLOWED
+# uninitialized constant #<Class:0x000056137a60fb38>::MAX_PASSWORD_LENGTH_ALLOWED
 # Did you mean?  GeocodeResult::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant #<Class:0x0000559c35fdd550>::NAME_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x000056137a60fb38>::NAME_COMPILABLE_REGEXP
 # Did you mean?  GeocodeResult::NAME_COMPILABLE_REGEXP
-# uninitialized constant #<Class:0x0000559c35fdd550>::RESTRICTED_CLASS_METHODS
+# uninitialized constant #<Class:0x000056137a60fb38>::RESTRICTED_CLASS_METHODS
 # Did you mean?  GeocodeResult::RESTRICTED_CLASS_METHODS
-# uninitialized constant #<Class:0x0000559c35fdd550>::UNASSIGNABLE_KEYS
+# uninitialized constant #<Class:0x000056137a60fb38>::UNASSIGNABLE_KEYS
 # Did you mean?  GeocodeResult::UNASSIGNABLE_KEYS
 # wrong constant name autosave_associated_records_for_geocode_query
 # uninitialized constant GeocodeResult::ActiveRecord_AssociationRelation::CLAUSE_METHODS
@@ -6118,24 +6173,24 @@
 # uninitialized constant GetText::PoParser::Racc_YY_Parse_Method
 # uninitialized constant GetoptLong
 # uninitialized constant GetoptLong
-# uninitialized constant #<Class:0x0000559c3525b288>::ACTIONS
+# uninitialized constant #<Class:0x000056137a7e8950>::ACTIONS
 # Did you mean?  GithubIssue::ACTIONS
-# uninitialized constant #<Class:0x0000559c3525b288>::CALLBACKS
+# uninitialized constant #<Class:0x000056137a7e8950>::CALLBACKS
 # Did you mean?  GithubIssue::Callbacks
 #                GithubIssue::Callback
 #                GithubIssue::CALLBACKS
-# uninitialized constant #<Class:0x0000559c3525b288>::CALLBACK_FILTER_TYPES
+# uninitialized constant #<Class:0x000056137a7e8950>::CALLBACK_FILTER_TYPES
 # Did you mean?  GithubIssue::CALLBACK_FILTER_TYPES
-# uninitialized constant #<Class:0x0000559c3525b288>::CALL_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x000056137a7e8950>::CALL_COMPILABLE_REGEXP
 # Did you mean?  GithubIssue::CALL_COMPILABLE_REGEXP
 # wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant #<Class:0x0000559c3525b288>::MAX_PASSWORD_LENGTH_ALLOWED
+# uninitialized constant #<Class:0x000056137a7e8950>::MAX_PASSWORD_LENGTH_ALLOWED
 # Did you mean?  GithubIssue::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant #<Class:0x0000559c3525b288>::NAME_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x000056137a7e8950>::NAME_COMPILABLE_REGEXP
 # Did you mean?  GithubIssue::NAME_COMPILABLE_REGEXP
-# uninitialized constant #<Class:0x0000559c3525b288>::RESTRICTED_CLASS_METHODS
+# uninitialized constant #<Class:0x000056137a7e8950>::RESTRICTED_CLASS_METHODS
 # Did you mean?  GithubIssue::RESTRICTED_CLASS_METHODS
-# uninitialized constant #<Class:0x0000559c3525b288>::UNASSIGNABLE_KEYS
+# uninitialized constant #<Class:0x000056137a7e8950>::UNASSIGNABLE_KEYS
 # Did you mean?  GithubIssue::UNASSIGNABLE_KEYS
 # wrong constant name autosave_associated_records_for_authority
 # uninitialized constant GithubIssue::ActiveRecord_AssociationRelation::CLAUSE_METHODS
@@ -10786,24 +10841,24 @@
 # wrong constant name sorted_keys
 # wrong constant name <static-init>
 # wrong constant name binary_search
-# uninitialized constant #<Class:0x0000559c32f446a0>::ACTIONS
+# uninitialized constant #<Class:0x0000561376425718>::ACTIONS
 # Did you mean?  Report::ACTIONS
-# uninitialized constant #<Class:0x0000559c32f446a0>::CALLBACKS
+# uninitialized constant #<Class:0x0000561376425718>::CALLBACKS
 # Did you mean?  Report::Callbacks
 #                Report::Callback
 #                Report::CALLBACKS
-# uninitialized constant #<Class:0x0000559c32f446a0>::CALLBACK_FILTER_TYPES
+# uninitialized constant #<Class:0x0000561376425718>::CALLBACK_FILTER_TYPES
 # Did you mean?  Report::CALLBACK_FILTER_TYPES
-# uninitialized constant #<Class:0x0000559c32f446a0>::CALL_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x0000561376425718>::CALL_COMPILABLE_REGEXP
 # Did you mean?  Report::CALL_COMPILABLE_REGEXP
 # wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant #<Class:0x0000559c32f446a0>::MAX_PASSWORD_LENGTH_ALLOWED
+# uninitialized constant #<Class:0x0000561376425718>::MAX_PASSWORD_LENGTH_ALLOWED
 # Did you mean?  Report::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant #<Class:0x0000559c32f446a0>::NAME_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x0000561376425718>::NAME_COMPILABLE_REGEXP
 # Did you mean?  Report::NAME_COMPILABLE_REGEXP
-# uninitialized constant #<Class:0x0000559c32f446a0>::RESTRICTED_CLASS_METHODS
+# uninitialized constant #<Class:0x0000561376425718>::RESTRICTED_CLASS_METHODS
 # Did you mean?  Report::RESTRICTED_CLASS_METHODS
-# uninitialized constant #<Class:0x0000559c32f446a0>::UNASSIGNABLE_KEYS
+# uninitialized constant #<Class:0x0000561376425718>::UNASSIGNABLE_KEYS
 # Did you mean?  Report::UNASSIGNABLE_KEYS
 # wrong constant name autosave_associated_records_for_comment
 # uninitialized constant Report::ActiveRecord_AssociationRelation::CLAUSE_METHODS
@@ -12316,9 +12371,6 @@
 # uninitialized constant Sprockets::Rails::Helper::URI_REGEXP
 # uninitialized constant Sprockets::Railtie::ABSTRACT_RAILTIES
 # uninitialized constant Sprockets::Resolve::SEPARATOR_PATTERN
-# wrong constant name initialize
-# wrong constant name path_to
-# wrong constant name <static-init>
 # wrong constant name <static-init>
 # wrong constant name call
 # wrong constant name <static-init>
@@ -13262,28 +13314,28 @@
 # wrong constant name nfd_one
 # wrong constant name normalize
 # wrong constant name normalized?
-# uninitialized constant #<Class:0x0000559c344f82f8>::ACTIONS
+# uninitialized constant #<Class:0x0000561376613c78>::ACTIONS
 # Did you mean?  User::ACTIONS
-# uninitialized constant #<Class:0x0000559c344f82f8>::CALLBACKS
+# uninitialized constant #<Class:0x0000561376613c78>::CALLBACKS
 # Did you mean?  User::Callbacks
 #                User::Callback
 #                User::CALLBACKS
-# uninitialized constant #<Class:0x0000559c344f82f8>::CALLBACK_FILTER_TYPES
+# uninitialized constant #<Class:0x0000561376613c78>::CALLBACK_FILTER_TYPES
 # Did you mean?  User::CALLBACK_FILTER_TYPES
-# uninitialized constant #<Class:0x0000559c344f82f8>::CALL_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x0000561376613c78>::CALL_COMPILABLE_REGEXP
 # Did you mean?  User::CALL_COMPILABLE_REGEXP
 # wrong constant name <Class:GeneratedRelationMethods>
-# uninitialized constant #<Class:0x0000559c344f82f8>::MAX_PASSWORD_LENGTH_ALLOWED
+# uninitialized constant #<Class:0x0000561376613c78>::MAX_PASSWORD_LENGTH_ALLOWED
 # Did you mean?  User::MAX_PASSWORD_LENGTH_ALLOWED
-# uninitialized constant #<Class:0x0000559c344f82f8>::NAME_COMPILABLE_REGEXP
+# uninitialized constant #<Class:0x0000561376613c78>::NAME_COMPILABLE_REGEXP
 # Did you mean?  User::NAME_COMPILABLE_REGEXP
-# uninitialized constant #<Class:0x0000559c344f82f8>::RESTRICTED_CLASS_METHODS
+# uninitialized constant #<Class:0x0000561376613c78>::RESTRICTED_CLASS_METHODS
 # Did you mean?  User::RESTRICTED_CLASS_METHODS
-# uninitialized constant #<Class:0x0000559c344f82f8>::UNASSIGNABLE_KEYS
+# uninitialized constant #<Class:0x0000561376613c78>::UNASSIGNABLE_KEYS
 # Did you mean?  User::UNASSIGNABLE_KEYS
-# uninitialized constant #<Class:0x0000559c344f82f8>::UNSAFE_ATTRIBUTES_FOR_SERIALIZATION
+# uninitialized constant #<Class:0x0000561376613c78>::UNSAFE_ATTRIBUTES_FOR_SERIALIZATION
 # Did you mean?  User::UNSAFE_ATTRIBUTES_FOR_SERIALIZATION
-# uninitialized constant #<Class:0x0000559c344f82f8>::VALIDATIONS
+# uninitialized constant #<Class:0x0000561376613c78>::VALIDATIONS
 # Did you mean?  User::VALIDATIONS
 # wrong constant name after_add_for_api_keys
 # wrong constant name after_add_for_api_keys=

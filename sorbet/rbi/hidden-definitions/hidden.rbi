@@ -865,7 +865,6 @@ end
 class ActionMailbox::InboundEmail
   include ::ActionMailbox::InboundEmail::Routable
   include ::ActionMailbox::InboundEmail::MessageId
-  RelationType = ::T.let(nil, ::T.untyped)
 end
 
 module ActionMailbox::InboundEmail::GeneratedAttributeMethods
@@ -885,31 +884,7 @@ class ActionMailbox::InboundEmail::Status
 end
 
 class ActionMailbox::InboundEmail
-  def self.bounced(*args); end
-
-  def self.delivered(*args); end
-
-  def self.failed(*args); end
-
-  def self.not_bounced(*args); end
-
-  def self.not_delivered(*args); end
-
-  def self.not_failed(*args); end
-
-  def self.not_pending(*args); end
-
-  def self.not_processing(*args); end
-
   def self.page(num=T.unsafe(nil)); end
-
-  def self.pending(*args); end
-
-  def self.processing(*args); end
-
-  def self.statuses(); end
-
-  def self.with_attached_raw_email(*args); end
 end
 
 class ActionMailer::Base
@@ -1033,10 +1008,6 @@ class ActionText::Attachment
   TAG_NAME = ::T.let(nil, ::T.untyped)
 end
 
-class ActionText::RichText
-  RelationType = ::T.let(nil, ::T.untyped)
-end
-
 module ActionText::RichText::GeneratedAttributeMethods
   extend ::Mutex_m
 end
@@ -1095,8 +1066,6 @@ class ActionText::RichText
   def self.before_remove_for_embeds_blobs?(); end
 
   def self.page(num=T.unsafe(nil)); end
-
-  def self.with_attached_embeds(*args); end
 end
 
 class ActionText::TrixAttachment
@@ -1402,9 +1371,6 @@ end
 
 class ActionView::Template::Inline
   Finalizer = ::T.let(nil, ::T.untyped)
-end
-
-class ActionView::Template::LegacyTemplate
 end
 
 class ActionView::Template::Sources::File
@@ -1850,6 +1816,22 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
 
   def edit_admin_user_url(*args); end
 
+  def edit_new_admin_api_key_path(*args); end
+
+  def edit_new_admin_api_key_url(*args); end
+
+  def edit_new_admin_authority_path(*args); end
+
+  def edit_new_admin_authority_url(*args); end
+
+  def edit_new_admin_comment_path(*args); end
+
+  def edit_new_admin_comment_url(*args); end
+
+  def edit_new_admin_user_path(*args); end
+
+  def edit_new_admin_user_url(*args); end
+
   def edit_user_password_path(*args); end
 
   def edit_user_password_url(*args); end
@@ -1898,13 +1880,69 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
 
   def nearby_application_url(*args); end
 
+  def new_admin_alert_path(*args); end
+
+  def new_admin_alert_url(*args); end
+
+  def new_admin_alerts_path(*args); end
+
+  def new_admin_alerts_url(*args); end
+
+  def new_admin_api_key_path(*args); end
+
+  def new_admin_api_key_url(*args); end
+
+  def new_admin_api_keys_path(*args); end
+
+  def new_admin_api_keys_url(*args); end
+
+  def new_admin_application_path(*args); end
+
+  def new_admin_application_url(*args); end
+
+  def new_admin_applications_path(*args); end
+
+  def new_admin_applications_url(*args); end
+
+  def new_admin_authorities_path(*args); end
+
+  def new_admin_authorities_url(*args); end
+
   def new_admin_authority_path(*args); end
 
   def new_admin_authority_url(*args); end
 
+  def new_admin_background_jobs_path(*args); end
+
+  def new_admin_background_jobs_url(*args); end
+
+  def new_admin_comment_path(*args); end
+
+  def new_admin_comment_url(*args); end
+
+  def new_admin_comments_path(*args); end
+
+  def new_admin_comments_url(*args); end
+
+  def new_admin_report_path(*args); end
+
+  def new_admin_report_url(*args); end
+
+  def new_admin_reports_path(*args); end
+
+  def new_admin_reports_url(*args); end
+
+  def new_admin_root_path(*args); end
+
+  def new_admin_root_url(*args); end
+
   def new_admin_user_path(*args); end
 
   def new_admin_user_url(*args); end
+
+  def new_admin_users_path(*args); end
+
+  def new_admin_users_url(*args); end
 
   def new_alert_path(*args); end
 
@@ -1913,6 +1951,10 @@ module ActiveAdmin::Helpers::Routes::UrlHelpers
   def new_comment_report_path(*args); end
 
   def new_comment_report_url(*args); end
+
+  def new_new_admin_authority_path(*args); end
+
+  def new_new_admin_authority_url(*args); end
 
   def new_user_confirmation_path(*args); end
 
@@ -4486,6 +4528,9 @@ class Addrinfo
   def connect_internal(local_addrinfo, timeout=T.unsafe(nil)); end
 end
 
+module Admin
+end
+
 class Admin::AdminCommentsController
   def create(); end
 end
@@ -4555,19 +4600,27 @@ class Admin::ReportsController
   def self.resource_class=(klass); end
 end
 
-class Admin::SiteSettingsController::SiteSettingParams
-  def self.inherited(s); end
-end
-
-class Admin::SiteSettingsController::WrappedSiteSettingParams
-  def self.inherited(s); end
-end
-
 class Admin::UsersController
 end
 
 class Admin::UsersController
   def self.resource_class=(klass); end
+end
+
+module Admin
+end
+
+module Administrate::ApplicationHelper
+  PLURAL_MANY_COUNT = ::T.let(nil, ::T.untyped)
+  SINGULAR_COUNT = ::T.let(nil, ::T.untyped)
+end
+
+class Administrate::BaseDashboard
+  DASHBOARD_SUFFIX = ::T.let(nil, ::T.untyped)
+end
+
+class Administrate::Field::HasMany
+  DEFAULT_LIMIT = ::T.let(nil, ::T.untyped)
 end
 
 class Alert
@@ -5397,6 +5450,10 @@ class BCrypt::Engine
   MAX_COST = ::T.let(nil, ::T.untyped)
   MAX_SALT_LENGTH = ::T.let(nil, ::T.untyped)
   MIN_COST = ::T.let(nil, ::T.untyped)
+end
+
+class BackgroundJobDashboard
+  def self.named_resource(); end
 end
 
 BasicObject::BasicObject = BasicObject
@@ -8626,6 +8683,10 @@ end
 
 class Date::Infinity
   def initialize(d=T.unsafe(nil)); end
+end
+
+module DateTimePicker::Rails
+  VERSION = ::T.let(nil, ::T.untyped)
 end
 
 class DependencyDetection::Dependent
@@ -12295,6 +12356,82 @@ class GenerateSitemapService
 end
 
 module GeneratedUrlHelpers
+  def edit_new_admin_api_key_path(*args); end
+
+  def edit_new_admin_api_key_url(*args); end
+
+  def edit_new_admin_authority_path(*args); end
+
+  def edit_new_admin_authority_url(*args); end
+
+  def edit_new_admin_comment_path(*args); end
+
+  def edit_new_admin_comment_url(*args); end
+
+  def edit_new_admin_user_path(*args); end
+
+  def edit_new_admin_user_url(*args); end
+
+  def new_admin_alert_path(*args); end
+
+  def new_admin_alert_url(*args); end
+
+  def new_admin_alerts_path(*args); end
+
+  def new_admin_alerts_url(*args); end
+
+  def new_admin_api_key_path(*args); end
+
+  def new_admin_api_key_url(*args); end
+
+  def new_admin_api_keys_path(*args); end
+
+  def new_admin_api_keys_url(*args); end
+
+  def new_admin_application_path(*args); end
+
+  def new_admin_application_url(*args); end
+
+  def new_admin_applications_path(*args); end
+
+  def new_admin_applications_url(*args); end
+
+  def new_admin_authorities_path(*args); end
+
+  def new_admin_authorities_url(*args); end
+
+  def new_admin_background_jobs_path(*args); end
+
+  def new_admin_background_jobs_url(*args); end
+
+  def new_admin_comment_path(*args); end
+
+  def new_admin_comment_url(*args); end
+
+  def new_admin_comments_path(*args); end
+
+  def new_admin_comments_url(*args); end
+
+  def new_admin_report_path(*args); end
+
+  def new_admin_report_url(*args); end
+
+  def new_admin_reports_path(*args); end
+
+  def new_admin_reports_url(*args); end
+
+  def new_admin_root_path(*args); end
+
+  def new_admin_root_url(*args); end
+
+  def new_admin_users_path(*args); end
+
+  def new_admin_users_url(*args); end
+
+  def new_new_admin_authority_path(*args); end
+
+  def new_new_admin_authority_url(*args); end
+
   def rails_info_path(*args); end
 
   def rails_info_properties_path(*args); end
@@ -14940,9 +15077,6 @@ end
 class Mail::POP3
 end
 
-class Mail::PartsList
-end
-
 class Mail::PhraseList
   def initialize(string); end
 
@@ -15659,13 +15793,9 @@ end
 
 Net::HTTPFatalErrorCode = Net::HTTPClientError
 
-class Net::HTTPInformation
-end
+Net::HTTPInformation::EXCEPTION_TYPE = Net::HTTPError
 
-Net::HTTPInformationCode::EXCEPTION_TYPE = Net::HTTPError
-
-class Net::HTTPInformation
-end
+Net::HTTPInformationCode = Net::HTTPInformation
 
 class Net::HTTPLoopDetected
   HAS_BODY = ::T.let(nil, ::T.untyped)
@@ -20464,9 +20594,6 @@ class Rack::Session::Abstract::SessionHash
   Unspecified = ::T.let(nil, ::T.untyped)
 end
 
-class Rack::Session::Cookie::SessionId
-end
-
 class Rack::Session::Dalli
   DEFAULT_DALLI_OPTIONS = ::T.let(nil, ::T.untyped)
 end
@@ -23396,6 +23523,52 @@ module Sass::Util
   VLQ_CONTINUATION_BIT = ::T.let(nil, ::T.untyped)
 end
 
+module SassC
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+class SassC::Engine
+  OUTPUT_STYLES = ::T.let(nil, ::T.untyped)
+end
+
+module SassC::Native
+  SassInputStyle = ::T.let(nil, ::T.untyped)
+  SassOutputStyle = ::T.let(nil, ::T.untyped)
+  SassSeparator = ::T.let(nil, ::T.untyped)
+  SassTag = ::T.let(nil, ::T.untyped)
+end
+
+module SassC::Rails
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+class SassC::Rails::Importer
+  EXTENSIONS = ::T.let(nil, ::T.untyped)
+  GLOB = ::T.let(nil, ::T.untyped)
+  PREFIXS = ::T.let(nil, ::T.untyped)
+end
+
+class SassC::Script::Value::Bool
+  FALSE = ::T.let(nil, ::T.untyped)
+  TRUE = ::T.let(nil, ::T.untyped)
+end
+
+class SassC::Script::Value::Number
+  CONVERSION_TABLE = ::T.let(nil, ::T.untyped)
+  MUTUALLY_CONVERTIBLE = ::T.let(nil, ::T.untyped)
+  NO_UNITS = ::T.let(nil, ::T.untyped)
+  OPERATIONS = ::T.let(nil, ::T.untyped)
+end
+
+module SassC::Script::ValueConversion
+  SEPARATORS = ::T.let(nil, ::T.untyped)
+end
+
+module SassC::Util
+  RUBY_ENGINE = ::T.let(nil, ::T.untyped)
+  RUBY_VERSION_COMPONENTS = ::T.let(nil, ::T.untyped)
+end
+
 module Sawyer
   VERSION = ::T.let(nil, ::T.untyped)
 end
@@ -23480,6 +23653,10 @@ end
 module SecureRandom
   BASE36_ALPHABET = ::T.let(nil, ::T.untyped)
   BASE58_ALPHABET = ::T.let(nil, ::T.untyped)
+end
+
+module Selectize::Rails
+  VERSION = ::T.let(nil, ::T.untyped)
 end
 
 module Selenium::WebDriver
@@ -24198,16 +24375,6 @@ class Sprockets::SassCompressor
 end
 
 Sprockets::SassFunctions = Sprockets::SassProcessor::Functions
-
-class Sprockets::SassProcessor::CacheStore
-  def initialize(cache, version); end
-
-  def path_to(key); end
-  VERSION = ::T.let(nil, ::T.untyped)
-end
-
-class Sprockets::SassProcessor::CacheStore
-end
 
 class Sprockets::SassTemplate
 end
@@ -25900,7 +26067,7 @@ class Tilt::SassTemplate
   def allows_script?(); end
 end
 
-Tilt::SassTemplate::Sass = Sass
+Tilt::SassTemplate::Sass = SassC
 
 class Tilt::SassTemplate
 end

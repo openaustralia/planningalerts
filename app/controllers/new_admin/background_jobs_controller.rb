@@ -1,3 +1,5 @@
+# typed: true
+
 module NewAdmin
   class BackgroundJobsController < NewAdmin::ApplicationController
     def index

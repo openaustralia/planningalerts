@@ -110,7 +110,7 @@ class Octokit::Gist
   def to_s; end
   def url; end
 end
-class Anonymous_Struct_101 < Struct
+class Anonymous_Struct_104 < Struct
   def limit; end
   def limit=(_); end
   def remaining; end
@@ -124,7 +124,7 @@ class Anonymous_Struct_101 < Struct
   def self.members; end
   def self.new(*arg0); end
 end
-class Octokit::RateLimit < Anonymous_Struct_101
+class Octokit::RateLimit < Anonymous_Struct_104
   def self.from_response(response); end
 end
 class Octokit::Repository

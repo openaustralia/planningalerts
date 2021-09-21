@@ -201,9 +201,9 @@ class Virtus::Coercer
   def primitive; end
   def success?(primitive, input); end
   def type; end
-  include Anonymous_Virtus_Equalizer_97
+  include Anonymous_Virtus_Equalizer_100
 end
-module Anonymous_Virtus_Equalizer_97
+module Anonymous_Virtus_Equalizer_100
   def cmp?(comparator, other); end
   def hash; end
   def inspect; end
@@ -262,7 +262,7 @@ class Virtus::Attribute
   def type; end
   def value_coerced?(value); end
   extend DescendantsTracker
-  include Anonymous_Virtus_Equalizer_98
+  include Anonymous_Virtus_Equalizer_101
 end
 class Virtus::Attribute::DefaultValue
   def call(*arg0); end
@@ -270,9 +270,9 @@ class Virtus::Attribute::DefaultValue
   def self.build(*args); end
   def value; end
   extend DescendantsTracker
-  include Anonymous_Virtus_Equalizer_99
+  include Anonymous_Virtus_Equalizer_102
 end
-module Anonymous_Virtus_Equalizer_99
+module Anonymous_Virtus_Equalizer_102
   def cmp?(comparator, other); end
   def hash; end
   def inspect; end
@@ -290,7 +290,7 @@ class Virtus::Attribute::DefaultValue::FromSymbol < Virtus::Attribute::DefaultVa
   def call(instance, _); end
   def self.handle?(value); end
 end
-module Anonymous_Virtus_Equalizer_98
+module Anonymous_Virtus_Equalizer_101
   def cmp?(comparator, other); end
   def hash; end
   def inspect; end

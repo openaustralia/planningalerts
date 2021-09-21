@@ -1,3 +1,5 @@
+# typed: strict
+
 module NewAdmin
   class ApplicationsController < NewAdmin::ApplicationController
     # Overwrite any of the RESTful controller actions to implement custom behavior

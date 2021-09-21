@@ -345,7 +345,7 @@ class VCR::RequestMatcherRegistry
   def uri_without_param_matchers; end
   def uri_without_params(*ignores); end
 end
-class Anonymous_Struct_117 < Struct
+class Anonymous_Struct_120 < Struct
   def callable; end
   def callable=(_); end
   def self.[](*arg0); end
@@ -353,10 +353,10 @@ class Anonymous_Struct_117 < Struct
   def self.members; end
   def self.new(*arg0); end
 end
-class VCR::RequestMatcherRegistry::Matcher < Anonymous_Struct_117
+class VCR::RequestMatcherRegistry::Matcher < Anonymous_Struct_120
   def matches?(request_1, request_2); end
 end
-class Anonymous_Struct_118 < Struct
+class Anonymous_Struct_121 < Struct
   def params_to_ignore; end
   def params_to_ignore=(_); end
   def self.[](*arg0); end
@@ -364,7 +364,7 @@ class Anonymous_Struct_118 < Struct
   def self.members; end
   def self.new(*arg0); end
 end
-class VCR::RequestMatcherRegistry::URIWithoutParamsMatcher < Anonymous_Struct_118
+class VCR::RequestMatcherRegistry::URIWithoutParamsMatcher < Anonymous_Struct_121
   def call(request_1, request_2); end
   def partial_uri_from(request); end
   def to_proc; end
@@ -391,7 +391,7 @@ module VCR::Normalizers::Header
   def initialize(*args); end
   def normalize_headers; end
 end
-class Anonymous_Struct_119 < Struct
+class Anonymous_Struct_122 < Struct
   def body; end
   def body=(_); end
   def headers; end
@@ -405,7 +405,7 @@ class Anonymous_Struct_119 < Struct
   def uri; end
   def uri=(_); end
 end
-class VCR::Request < Anonymous_Struct_119
+class VCR::Request < Anonymous_Struct_122
   def initialize(*args); end
   def method(*args); end
   def parsed_uri; end
@@ -416,7 +416,7 @@ class VCR::Request < Anonymous_Struct_119
   include VCR::Normalizers::Body
   include VCR::Normalizers::Header
 end
-class VCR::Request::Typed < Anonymous_Delegator_120
+class VCR::Request::Typed < Anonymous_Delegator_123
   def externally_stubbed?; end
   def ignored?; end
   def initialize(request, type); end
@@ -427,11 +427,11 @@ class VCR::Request::Typed < Anonymous_Delegator_120
   def type; end
   def unhandled?; end
 end
-class VCR::Request::FiberAware < Anonymous_Delegator_121
+class VCR::Request::FiberAware < Anonymous_Delegator_124
   def proceed; end
   def to_proc; end
 end
-class Anonymous_Struct_122 < Struct
+class Anonymous_Struct_125 < Struct
   def adapter_metadata; end
   def adapter_metadata=(_); end
   def body; end
@@ -447,7 +447,7 @@ class Anonymous_Struct_122 < Struct
   def status; end
   def status=(_); end
 end
-class VCR::Response < Anonymous_Struct_122
+class VCR::Response < Anonymous_Struct_125
   def compressed?; end
   def content_encoding; end
   def decompress; end
@@ -462,7 +462,7 @@ class VCR::Response < Anonymous_Struct_122
   include VCR::Normalizers::Body
   include VCR::Normalizers::Header
 end
-class Anonymous_Struct_123 < Struct
+class Anonymous_Struct_126 < Struct
   def code; end
   def code=(_); end
   def message; end
@@ -472,11 +472,11 @@ class Anonymous_Struct_123 < Struct
   def self.members; end
   def self.new(*arg0); end
 end
-class VCR::ResponseStatus < Anonymous_Struct_123
+class VCR::ResponseStatus < Anonymous_Struct_126
   def self.from_hash(hash); end
   def to_hash; end
 end
-class Anonymous_Struct_124 < Struct
+class Anonymous_Struct_127 < Struct
   def recorded_at; end
   def recorded_at=(_); end
   def request; end
@@ -488,13 +488,13 @@ class Anonymous_Struct_124 < Struct
   def self.members; end
   def self.new(*arg0); end
 end
-class VCR::HTTPInteraction < Anonymous_Struct_124
+class VCR::HTTPInteraction < Anonymous_Struct_127
   def hook_aware; end
   def initialize(*args); end
   def self.from_hash(hash); end
   def to_hash; end
 end
-class VCR::HTTPInteraction::HookAware < Anonymous_Delegator_125
+class VCR::HTTPInteraction::HookAware < Anonymous_Delegator_128
   def filter!(text, replacement_text); end
   def filter_hash!(hash, text, replacement_text); end
   def filter_object!(object, text, replacement_text); end
