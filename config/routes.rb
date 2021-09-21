@@ -20,7 +20,7 @@ class QueryParamsPresentConstraint
 end
 
 Rails.application.routes.draw do
-  namespace :admin do
+  namespace :new_admin do
     resources :applications, only: [:index, :show, :destroy]
     resources :authorities, except: :destroy
     resources :users, except: [:new, :create]
