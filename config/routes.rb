@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     resources :api_keys, except: [:destroy, :new, :create]
     resources :alerts, only: [:index, :show]
     resources :background_jobs, only: :index
+    resources :api_usages, only: :index
 
     root to: "applications#index"
   end
