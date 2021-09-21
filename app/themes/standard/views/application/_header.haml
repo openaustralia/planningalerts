@@ -35,6 +35,6 @@
           -#
             This extra menu item kind of screws up the menu layout and is
             also not what most people see. Convenience trumps that I think.
-          -# - if current_user&.admin?
-          -#   %li
-          -#     = link_to "Admin", admin_root_path
+          - if current_user&.admin?
+            %li
+              = link_to "Admin", admin_root_path
