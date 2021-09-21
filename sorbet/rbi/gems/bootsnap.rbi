@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/bootsnap/all/bootsnap.rbi
 #
-# bootsnap-1.8.1
+# bootsnap-1.9.0
 
 module Bootsnap
   def bundler?; end
@@ -20,7 +20,7 @@ module Bootsnap
   def self.log!; end
   def self.logger; end
   def self.logger=(logger); end
-  def self.setup(cache_dir:, development_mode: nil, load_path_cache: nil, autoload_paths_cache: nil, disable_trace: nil, compile_cache_iseq: nil, compile_cache_yaml: nil); end
+  def self.setup(cache_dir:, development_mode: nil, load_path_cache: nil, autoload_paths_cache: nil, disable_trace: nil, compile_cache_iseq: nil, compile_cache_yaml: nil, compile_cache_json: nil); end
   extend Bootsnap
 end
 module Bootsnap::ExplicitRequire
@@ -143,7 +143,7 @@ class Bootsnap::LoadPathCache::FallbackScan < StandardError
 end
 module Bootsnap::CompileCache
   def self.permission_error(path); end
-  def self.setup(cache_dir:, iseq:, yaml:); end
+  def self.setup(cache_dir:, iseq:, yaml:, json:); end
   def self.supported?; end
 end
 class Bootsnap::CompileCache::Error < StandardError
@@ -207,5 +207,22 @@ module Bootsnap::CompileCache::YAML
   def self.supported_options=(arg0); end
 end
 module Bootsnap::CompileCache::YAML::Patch
+  def load_file(path, *args); end
+end
+module Bootsnap::CompileCache::JSON
+  def self.cache_dir; end
+  def self.cache_dir=(arg0); end
+  def self.init!; end
+  def self.input_to_output(data, kwargs); end
+  def self.input_to_storage(payload, _); end
+  def self.install!(cache_dir); end
+  def self.msgpack_factory; end
+  def self.msgpack_factory=(arg0); end
+  def self.precompile(path, cache_dir: nil); end
+  def self.storage_to_output(data, kwargs); end
+  def self.supported_options; end
+  def self.supported_options=(arg0); end
+end
+module Bootsnap::CompileCache::JSON::Patch
   def load_file(path, *args); end
 end

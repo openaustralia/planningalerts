@@ -161,7 +161,7 @@ class HealthCheck::Utils
   def self.process_checks(checks, called_from_middleware = nil); end
 end
 class HealthCheck::HealthCheckController < ActionController::Base
-  def _layout(formats); end
+  def _layout(lookup_context, formats); end
   def authenticate; end
   def check_origin_ip; end
   def index; end

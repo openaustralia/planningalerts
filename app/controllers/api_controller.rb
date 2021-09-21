@@ -147,7 +147,7 @@ class ApiController < ApplicationController
       api_key: request.query_parameters["key"],
       ip_address: request.remote_ip,
       query: request.fullpath,
-      params: params.to_h,
+      params: params.to_h.to_hash,
       user_agent: request.headers["User-Agent"],
       time_as_float: Time.zone.now.to_f
     )
@@ -291,7 +291,7 @@ class ApiController < ApplicationController
       api_key: request.query_parameters["key"],
       ip_address: request.remote_ip,
       query: request.fullpath,
-      params: params.to_h,
+      params: params.to_h.to_hash,
       user_agent: request.headers["User-Agent"],
       time_as_float: Time.zone.now.to_f
     )

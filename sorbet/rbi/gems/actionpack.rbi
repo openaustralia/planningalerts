@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/actionpack/all/actionpack.rbi
 #
-# actionpack-5.2.6
+# actionpack-6.0.4.1
 
 module ActionPack
   def self.gem_version; end
@@ -26,6 +26,8 @@ module ActionDispatch
 end
 class ActionDispatch::IllegalStateError < StandardError
 end
+class ActionDispatch::MissingController < NameError
+end
 module ActionDispatch::Http
   extend ActiveSupport::Autoload
 end
@@ -36,196 +38,6 @@ end
 module AbstractController
   def self.eager_load!; end
   extend ActiveSupport::Autoload
-end
-module ActionDispatch::Http::FilterRedirect
-  def filtered_location; end
-  def location_filter_match?; end
-  def location_filters; end
-end
-module ActionDispatch::Http::Cache
-end
-module ActionDispatch::Http::Cache::Request
-  def etag_matches?(etag); end
-  def fresh?(response); end
-  def if_modified_since; end
-  def if_none_match; end
-  def if_none_match_etags; end
-  def not_modified?(modified_at); end
-end
-module ActionDispatch::Http::Cache::Response
-  def cache_control; end
-  def cache_control_headers; end
-  def cache_control_segments; end
-  def date; end
-  def date=(utc_time); end
-  def date?; end
-  def etag=(weak_validators); end
-  def etag?; end
-  def generate_strong_etag(validators); end
-  def generate_weak_etag(validators); end
-  def handle_conditional_get!; end
-  def last_modified; end
-  def last_modified=(utc_time); end
-  def last_modified?; end
-  def merge_and_normalize_cache_control!(cache_control); end
-  def prepare_cache_control!; end
-  def strong_etag=(strong_validators); end
-  def strong_etag?; end
-  def weak_etag=(weak_validators); end
-  def weak_etag?; end
-end
-class ActionDispatch::Response
-  def [](*args, &block); end
-  def []=(*args, &block); end
-  def _cache_control; end
-  def _cache_control=(v); end
-  def abort; end
-  def assign_default_content_type_and_charset!; end
-  def await_commit; end
-  def await_sent; end
-  def before_committed; end
-  def before_sending; end
-  def body; end
-  def body=(body); end
-  def body_parts; end
-  def build_buffer(response, body); end
-  def charset; end
-  def charset=(charset); end
-  def close; end
-  def code; end
-  def commit!; end
-  def committed?; end
-  def content_type; end
-  def content_type=(content_type); end
-  def cookies; end
-  def default_charset; end
-  def default_charset=(obj); end
-  def default_headers; end
-  def default_headers=(obj); end
-  def delete_header(key); end
-  def each(&block); end
-  def get_header(key); end
-  def handle_no_content!; end
-  def has_header?(key); end
-  def header; end
-  def headers; end
-  def initialize(status = nil, header = nil, body = nil); end
-  def message; end
-  def munge_body_object(body); end
-  def parse_content_type(content_type); end
-  def parsed_content_type_header; end
-  def prepare!; end
-  def rack_response(status, header); end
-  def redirect_url; end
-  def request; end
-  def request=(arg0); end
-  def reset_body!; end
-  def response_code; end
-  def self.create(status = nil, header = nil, body = nil, default_headers: nil); end
-  def self.default_charset; end
-  def self.default_charset=(obj); end
-  def self.default_headers; end
-  def self.default_headers=(obj); end
-  def self.merge_default_headers(original, default); end
-  def send_file(path); end
-  def sending!; end
-  def sending?; end
-  def sending_file=(v); end
-  def sent!; end
-  def sent?; end
-  def set_content_type(content_type, charset); end
-  def set_header(key, v); end
-  def status; end
-  def status=(status); end
-  def status_message; end
-  def stream; end
-  def to_a; end
-  def write(string); end
-  include ActionDispatch::Http::Cache::Response
-  include ActionDispatch::Http::FilterRedirect
-  include MonitorMixin
-  include Rack::Response::Helpers
-end
-class ActionDispatch::Response::Header < Anonymous_Delegator_2
-  def []=(k, v); end
-  def initialize(response, header); end
-  def merge(other); end
-  def to_hash; end
-end
-class ActionDispatch::Response::Buffer
-  def abort; end
-  def body; end
-  def close; end
-  def closed?; end
-  def each(&block); end
-  def each_chunk(&block); end
-  def initialize(response, buf); end
-  def write(string); end
-end
-class ActionDispatch::Response::FileBody
-  def body; end
-  def each; end
-  def initialize(path); end
-  def to_path; end
-end
-class ActionDispatch::Response::ContentTypeHeader < Struct
-  def charset; end
-  def charset=(_); end
-  def mime_type; end
-  def mime_type=(_); end
-  def self.[](*arg0); end
-  def self.inspect; end
-  def self.members; end
-  def self.new(*arg0); end
-end
-class ActionDispatch::Response::RackBody
-  def body; end
-  def close; end
-  def each(*args, &block); end
-  def initialize(response); end
-  def respond_to?(method, include_private = nil); end
-  def to_ary; end
-  def to_path; end
-end
-module ActionController
-  def self.add_renderer(key, &block); end
-  def self.remove_renderer(key); end
-  extend ActiveSupport::Autoload
-end
-module ActionController::Live
-  def log_error(exception); end
-  def new_controller_thread; end
-  def process(name); end
-  def response_body=(body); end
-  extend ActiveSupport::Concern
-end
-module ActionController::Live::ClassMethods
-  def make_response!(request); end
-end
-class ActionController::Live::SSE
-  def close; end
-  def initialize(stream, options = nil); end
-  def perform_write(json, options); end
-  def write(object, options = nil); end
-end
-class ActionController::Live::ClientDisconnected < RuntimeError
-end
-class ActionController::Live::Buffer < ActionDispatch::Response::Buffer
-  def abort; end
-  def call_on_error; end
-  def close; end
-  def connected?; end
-  def each_chunk(&block); end
-  def ignore_disconnect; end
-  def ignore_disconnect=(arg0); end
-  def initialize(response); end
-  def on_error(&block); end
-  def write(string); end
-  include MonitorMixin
-end
-class ActionController::Live::Response < ActionDispatch::Response
-  def before_committed; end
-  def build_buffer(response, body); end
 end
 class ActionDispatch::Http::UploadedFile
   def close(unlink_now = nil); end
@@ -245,6 +57,12 @@ class ActionDispatch::Http::UploadedFile
   def tempfile; end
   def tempfile=(arg0); end
   def to_io; end
+  def to_path; end
+end
+module ActionController
+  def self.add_renderer(key, &block); end
+  def self.remove_renderer(key); end
+  extend ActiveSupport::Autoload
 end
 class ActionController::ParameterMissing < KeyError
   def initialize(param); end
@@ -275,7 +93,9 @@ class ActionController::Parameters
   def dig(*keys); end
   def each(&block); end
   def each_element(object); end
+  def each_key(*args, &block); end
   def each_pair(&block); end
+  def each_value(&block); end
   def empty?(*args, &block); end
   def except(*keys); end
   def extract!(*keys); end
@@ -301,10 +121,10 @@ class ActionController::Parameters
   def permit(*filters); end
   def permit_any_in_array(array); end
   def permit_any_in_parameters(params); end
-  def permitted=(new_permitted); end
+  def permitted=(arg0); end
   def permitted?; end
   def permitted_scalar?(value); end
-  def permitted_scalar_filter(params, key); end
+  def permitted_scalar_filter(params, permitted_key); end
   def reject!(&block); end
   def reject(&block); end
   def require(key); end
@@ -345,8 +165,6 @@ end
 module ActionController::StrongParameters
   def params; end
   def params=(value); end
-  extend ActiveSupport::Concern
-  include ActiveSupport::Rescuable
 end
 module AbstractController::Railties
 end
@@ -442,6 +260,11 @@ class ActionController::UnknownHttpMethod < ActionController::ActionControllerEr
 end
 class ActionController::UnknownFormat < ActionController::ActionControllerError
 end
+class ActionController::RespondToMismatchError < ActionController::ActionControllerError
+  def initialize(message = nil); end
+end
+class ActionController::MissingExactTemplate < ActionController::UnknownFormat
+end
 class ActionDispatch::Journey::Formatter
   def build_cache; end
   def cache; end
@@ -460,6 +283,7 @@ module ActionDispatch::Journey::Formatter::RegexCaseComparator
   def self.===(regex); end
 end
 class ActionDispatch::Journey::Scanner
+  def dedup_scan(regex); end
   def eos?; end
   def initialize; end
   def next_token; end
@@ -582,6 +406,12 @@ class ActionDispatch::Journey::Nodes::Dummy < ActionDispatch::Journey::Nodes::Li
   def initialize(x = nil); end
   def literal?; end
 end
+class ActionDispatch::Journey::Nodes::Slash < ActionDispatch::Journey::Nodes::Terminal
+  def type; end
+end
+class ActionDispatch::Journey::Nodes::Dot < ActionDispatch::Journey::Nodes::Terminal
+  def type; end
+end
 class ActionDispatch::Journey::Nodes::Symbol < ActionDispatch::Journey::Nodes::Terminal
   def default_regexp?; end
   def initialize(left); end
@@ -590,12 +420,6 @@ class ActionDispatch::Journey::Nodes::Symbol < ActionDispatch::Journey::Nodes::T
   def regexp=(arg0); end
   def symbol; end
   def symbol?; end
-  def type; end
-end
-class ActionDispatch::Journey::Nodes::Slash < ActionDispatch::Journey::Nodes::Terminal
-  def type; end
-end
-class ActionDispatch::Journey::Nodes::Dot < ActionDispatch::Journey::Nodes::Terminal
   def type; end
 end
 class ActionDispatch::Journey::Nodes::Unary < ActionDispatch::Journey::Nodes::Node
@@ -653,7 +477,7 @@ class ActionDispatch::Journey::Route
   def eager_load!; end
   def format(path_options); end
   def glob?; end
-  def initialize(name, app, path, constraints, required_defaults, defaults, request_method_match, precedence, internal = nil); end
+  def initialize(name, app, path, constraints, required_defaults, defaults, request_method_match, precedence, scope_options, internal = nil); end
   def internal; end
   def ip; end
   def match_verb(request); end
@@ -668,6 +492,7 @@ class ActionDispatch::Journey::Route
   def required_parts; end
   def requirements; end
   def requires_matching_verb?; end
+  def scope_options; end
   def score(supplied_keys); end
   def segment_keys; end
   def segments; end
@@ -769,11 +594,10 @@ class ActionDispatch::Journey::Path::Pattern::MatchData
   def captures; end
   def initialize(names, offsets, match); end
   def length; end
+  def named_captures; end
   def names; end
   def post_match; end
   def to_s; end
-end
-class ActionDispatch::Journey::Router::RoutingError < StandardError
 end
 module ActionDispatch::Journey::NFA
 end
@@ -882,22 +706,37 @@ class ActionDispatch::Http::Headers
   def self.from_hash(hash); end
   include Enumerable
 end
-module ActionDispatch::Http::MimeNegotiation
-  def accepts; end
-  def content_mime_type; end
-  def content_type; end
-  def format(view_path = nil); end
-  def format=(extension); end
-  def format_from_path_extension; end
-  def formats; end
-  def formats=(extensions); end
-  def has_content_type?; end
-  def negotiate_mime(order); end
-  def use_accept_header; end
-  def valid_accept_header; end
-  def variant; end
-  def variant=(variant); end
-  extend ActiveSupport::Concern
+module ActionDispatch::Http::Cache
+end
+module ActionDispatch::Http::Cache::Request
+  def etag_matches?(etag); end
+  def fresh?(response); end
+  def if_modified_since; end
+  def if_none_match; end
+  def if_none_match_etags; end
+  def not_modified?(modified_at); end
+end
+module ActionDispatch::Http::Cache::Response
+  def cache_control; end
+  def cache_control_headers; end
+  def cache_control_segments; end
+  def date; end
+  def date=(utc_time); end
+  def date?; end
+  def etag=(weak_validators); end
+  def etag?; end
+  def generate_strong_etag(validators); end
+  def generate_weak_etag(validators); end
+  def handle_conditional_get!; end
+  def last_modified; end
+  def last_modified=(utc_time); end
+  def last_modified?; end
+  def merge_and_normalize_cache_control!(cache_control); end
+  def prepare_cache_control!; end
+  def strong_etag=(strong_validators); end
+  def strong_etag?; end
+  def weak_etag=(weak_validators); end
+  def weak_etag?; end
 end
 module Mime
   def self.[](type); end
@@ -956,6 +795,8 @@ class Mime::Type::AcceptList
   def self.find_item_by_name(array, name); end
   def self.sort!(list); end
 end
+class Mime::Type::InvalidMimeType < StandardError
+end
 class Mime::AllType < Mime::Type
   def all?; end
   def html?; end
@@ -979,6 +820,7 @@ class Mime::NullType
 end
 module ActionDispatch::Http::Parameters
   def binary_params_for?(controller, action); end
+  def log_parse_error_once; end
   def parameters; end
   def params; end
   def params_parsers; end
@@ -994,18 +836,24 @@ end
 module ActionDispatch::Http::Parameters::ClassMethods
   def parameter_parsers=(parsers); end
 end
-class ActionDispatch::Http::ParameterFilter
-  def compiled_filter; end
-  def filter(params); end
-  def initialize(filters = nil); end
+module ActionDispatch::Http::MimeNegotiation
+  def accepts; end
+  def content_mime_type; end
+  def content_type; end
+  def format(view_path = nil); end
+  def format=(extension); end
+  def format_from_path_extension; end
+  def formats; end
+  def formats=(extensions); end
+  def has_content_type?; end
+  def negotiate_mime(order); end
+  def use_accept_header; end
+  def valid_accept_header; end
+  def variant; end
+  def variant=(variant); end
+  extend ActiveSupport::Concern
 end
-class ActionDispatch::Http::ParameterFilter::CompiledFilter
-  def blocks; end
-  def call(original_params, parents = nil); end
-  def deep_regexps; end
-  def initialize(regexps, deep_regexps, blocks); end
-  def regexps; end
-  def self.compile(filters); end
+class ActionDispatch::Http::MimeNegotiation::InvalidType < Mime::Type::InvalidMimeType
 end
 module ActionDispatch::Http::FilterParameters
   def env_filter; end
@@ -1059,9 +907,9 @@ class ActionDispatch::ContentSecurityPolicy
   def apply_mappings(sources); end
   def base_uri(*sources); end
   def block_all_mixed_content(enabled = nil); end
-  def build(context = nil, nonce = nil); end
+  def build(context = nil, nonce = nil, nonce_directives = nil); end
   def build_directive(sources, context); end
-  def build_directives(context, nonce); end
+  def build_directives(context, nonce, nonce_directives); end
   def child_src(*sources); end
   def connect_src(*sources); end
   def default_src(*sources); end
@@ -1075,9 +923,10 @@ class ActionDispatch::ContentSecurityPolicy
   def initialize_copy(other); end
   def manifest_src(*sources); end
   def media_src(*sources); end
-  def nonce_directive?(directive); end
+  def nonce_directive?(directive, nonce_directives); end
   def object_src(*sources); end
   def plugin_types(*types); end
+  def prefetch_src(*sources); end
   def report_uri(uri); end
   def require_sri_for(*types); end
   def resolve_source(source, context); end
@@ -1098,6 +947,8 @@ module ActionDispatch::ContentSecurityPolicy::Request
   def content_security_policy; end
   def content_security_policy=(policy); end
   def content_security_policy_nonce; end
+  def content_security_policy_nonce_directives; end
+  def content_security_policy_nonce_directives=(generator); end
   def content_security_policy_nonce_generator; end
   def content_security_policy_nonce_generator=(generator); end
   def content_security_policy_report_only; end
@@ -1163,6 +1014,7 @@ class ActionDispatch::Request
   def pragma; end
   def query_parameters; end
   def raw_post; end
+  def raw_request_method; end
   def remote_addr; end
   def remote_host; end
   def remote_ident; end
@@ -1180,7 +1032,6 @@ class ActionDispatch::Request
   def routes; end
   def routes=(routes); end
   def secret_key_base; end
-  def secret_token; end
   def self.empty; end
   def self.ignore_accept_header; end
   def self.ignore_accept_header=(obj); end
@@ -1197,6 +1048,7 @@ class ActionDispatch::Request
   def signed_cookie_salt; end
   def ssl?; end
   def use_authenticated_cookie_encryption; end
+  def use_cookies_with_metadata; end
   def uuid; end
   def version; end
   def x_csrf_token; end
@@ -1505,7 +1357,8 @@ class ActionDispatch::Routing::Mapper::Mapping
   def default_controller; end
   def defaults; end
   def dispatcher(raise_on_name_error); end
-  def initialize(set, ast, defaults, controller, default_action, modyoule, to, formatted, scope_constraints, blocks, via, options_constraints, anchor, options); end
+  def initialize(set, ast, defaults, controller, default_action, modyoule, to, formatted, scope_constraints, scope_options, blocks, via, options_constraints, anchor, options); end
+  def intern(object); end
   def make_route(name, precedence); end
   def normalize_defaults(options); end
   def normalize_format(formatted); end
@@ -1514,6 +1367,7 @@ class ActionDispatch::Routing::Mapper::Mapping
   def request_method; end
   def required_defaults; end
   def requirements; end
+  def scope_options; end
   def self.build(scope, set, ast, controller, default_action, to, via, formatted, options_constraints, anchor, options); end
   def self.check_via(via); end
   def self.normalize_path(path, format); end
@@ -1611,6 +1465,7 @@ module ActionDispatch::Routing::Mapper::Resources
 end
 class ActionDispatch::Routing::Mapper::Resources::Resource
   def actions; end
+  def available_actions; end
   def collection_name; end
   def collection_scope; end
   def controller; end
@@ -1673,6 +1528,7 @@ class ActionController::LogSubscriber < ActiveSupport::LogSubscriber
 end
 module ActionController::ParamsWrapper
   def _extract_parameters(parameters); end
+  def _perform_parameter_wrapping; end
   def _wrap_parameters(parameters); end
   def _wrapper_enabled?; end
   def _wrapper_formats; end
@@ -1743,10 +1599,138 @@ class ActionDispatch::MiddlewareStack::Middleware
   def args; end
   def block; end
   def build(app); end
+  def build_instrumented(app); end
   def initialize(klass, args, block); end
   def inspect; end
   def klass; end
   def name; end
+end
+class ActionDispatch::MiddlewareStack::InstrumentationProxy
+  def call(env); end
+  def initialize(middleware, class_name); end
+end
+module ActionDispatch::Http::FilterRedirect
+  def filtered_location; end
+  def location_filter_match?; end
+  def location_filters; end
+end
+class ActionDispatch::Response
+  def [](*args, &block); end
+  def []=(*args, &block); end
+  def _cache_control; end
+  def _cache_control=(v); end
+  def abort; end
+  def assign_default_content_type_and_charset!; end
+  def await_commit; end
+  def await_sent; end
+  def before_committed; end
+  def before_sending; end
+  def body; end
+  def body=(body); end
+  def body_parts; end
+  def build_buffer(response, body); end
+  def charset; end
+  def charset=(charset); end
+  def close; end
+  def code; end
+  def commit!; end
+  def committed?; end
+  def content_type; end
+  def content_type=(content_type); end
+  def cookies; end
+  def default_charset; end
+  def default_charset=(obj); end
+  def default_headers; end
+  def default_headers=(obj); end
+  def delete_header(key); end
+  def each(&block); end
+  def get_header(key); end
+  def handle_no_content!; end
+  def has_header?(key); end
+  def header; end
+  def headers; end
+  def initialize(status = nil, header = nil, body = nil); end
+  def media_type; end
+  def message; end
+  def munge_body_object(body); end
+  def parse_content_type(content_type); end
+  def parsed_content_type_header; end
+  def prepare!; end
+  def rack_response(status, header); end
+  def redirect_url; end
+  def request; end
+  def request=(arg0); end
+  def reset_body!; end
+  def response_code; end
+  def return_only_media_type_on_content_type; end
+  def return_only_media_type_on_content_type=(obj); end
+  def self.create(status = nil, header = nil, body = nil, default_headers: nil); end
+  def self.default_charset; end
+  def self.default_charset=(obj); end
+  def self.default_headers; end
+  def self.default_headers=(obj); end
+  def self.merge_default_headers(original, default); end
+  def self.return_only_media_type_on_content_type; end
+  def self.return_only_media_type_on_content_type=(obj); end
+  def send_file(path); end
+  def sending!; end
+  def sending?; end
+  def sending_file=(v); end
+  def sent!; end
+  def sent?; end
+  def set_content_type(content_type, charset); end
+  def set_header(key, v); end
+  def status; end
+  def status=(status); end
+  def status_message; end
+  def stream; end
+  def to_a; end
+  def write(string); end
+  include ActionDispatch::Http::Cache::Response
+  include ActionDispatch::Http::FilterRedirect
+  include MonitorMixin
+  include Rack::Response::Helpers
+end
+class ActionDispatch::Response::Header < Anonymous_Delegator_4
+  def []=(k, v); end
+  def initialize(response, header); end
+  def merge(other); end
+  def to_hash; end
+end
+class ActionDispatch::Response::Buffer
+  def abort; end
+  def body; end
+  def close; end
+  def closed?; end
+  def each(&block); end
+  def each_chunk(&block); end
+  def initialize(response, buf); end
+  def write(string); end
+end
+class ActionDispatch::Response::FileBody
+  def body; end
+  def each; end
+  def initialize(path); end
+  def to_path; end
+end
+class ActionDispatch::Response::ContentTypeHeader < Struct
+  def charset; end
+  def charset=(_); end
+  def mime_type; end
+  def mime_type=(_); end
+  def self.[](*arg0); end
+  def self.inspect; end
+  def self.members; end
+  def self.new(*arg0); end
+end
+class ActionDispatch::Response::RackBody
+  def body; end
+  def close; end
+  def each(*args, &block); end
+  def initialize(response); end
+  def respond_to?(method, include_private = nil); end
+  def to_ary; end
+  def to_path; end
 end
 class AbstractController::Error < StandardError
 end
@@ -1802,6 +1786,7 @@ class ActionController::Metal < AbstractController::Base
   def initialize; end
   def location(*args, &block); end
   def location=(arg); end
+  def media_type(*args, &block); end
   def middleware_stack; end
   def middleware_stack=(val); end
   def middleware_stack?; end
@@ -1833,6 +1818,7 @@ class ActionController::Metal < AbstractController::Base
   def status=(arg); end
   def to_a; end
   def url_for(string); end
+  include ActionController::Testing::Functional
 end
 class AbstractController::DoubleRenderError < AbstractController::Error
   def initialize(message = nil); end
@@ -1856,10 +1842,10 @@ module AbstractController::Rendering
   include ActionView::ViewPaths
 end
 module AbstractController::Translation
-  def l(*args); end
-  def localize(*args); end
-  def t(key, options = nil); end
-  def translate(key, options = nil); end
+  def l(object, **options); end
+  def localize(object, **options); end
+  def t(key, **options); end
+  def translate(key, **options); end
 end
 module AbstractController::AssetPaths
   extend ActiveSupport::Concern
@@ -1912,10 +1898,10 @@ module AbstractController::Logger
 end
 module ActionController::Redirecting
   def _compute_redirect_to_location(request, options); end
-  def _extract_redirect_to_status(options, response_status); end
+  def _extract_redirect_to_status(options, response_options); end
   def _url_host_allowed?(url); end
   def redirect_back(fallback_location:, allow_other_host: nil, **args); end
-  def redirect_to(options = nil, response_status = nil); end
+  def redirect_to(options = nil, response_options = nil); end
   def self._compute_redirect_to_location(request, options); end
   extend ActiveSupport::Concern
   include AbstractController::Logger
@@ -2059,11 +2045,11 @@ class ActionController::MimeResponds::Collector::VariantCollector
   def variant_key; end
 end
 module ActionController::BasicImplicitRender
-  def default_render(*args); end
+  def default_render; end
   def send_action(method, *args); end
 end
 module ActionController::ImplicitRender
-  def default_render(*args); end
+  def default_render; end
   def interactive_browser_request?; end
   def method_for_action(action_name); end
   include ActionController::BasicImplicitRender
@@ -2082,7 +2068,7 @@ module ActionController::Cookies
   extend ActiveSupport::Concern
 end
 module ActionController::Flash
-  def redirect_to(options = nil, response_status_and_flash = nil); end
+  def redirect_to(options = nil, response_options_and_flash = nil); end
   extend ActiveSupport::Concern
 end
 module ActionController::Flash::ClassMethods
@@ -2109,7 +2095,6 @@ module ActionDispatch::Cookies::ChainedCookieJars
   def signed_cookie_digest; end
   def signed_or_encrypted; end
   def upgrade_legacy_hmac_aes_cbc_cookies?; end
-  def upgrade_legacy_signed_cookies?; end
 end
 class ActionDispatch::Cookies::CookieJar
   def [](name); end
@@ -2144,15 +2129,16 @@ end
 class ActionDispatch::Cookies::AbstractCookieJar
   def [](name); end
   def []=(name, options); end
-  def commit(options); end
+  def commit(name, options); end
+  def cookie_metadata(name, options); end
   def expiry_options(options); end
   def initialize(parent_jar); end
-  def parse(name, data); end
+  def parse(name, data, purpose: nil); end
   def request; end
   include ActionDispatch::Cookies::ChainedCookieJars
 end
 class ActionDispatch::Cookies::PermanentCookieJar < ActionDispatch::Cookies::AbstractCookieJar
-  def commit(options); end
+  def commit(name, options); end
 end
 class ActionDispatch::Cookies::JsonSerializer
   def self.dump(value); end
@@ -2166,16 +2152,15 @@ module ActionDispatch::Cookies::SerializedCookieJars
   def serializer; end
 end
 class ActionDispatch::Cookies::SignedKeyRotatingCookieJar < ActionDispatch::Cookies::AbstractCookieJar
-  def commit(options); end
+  def commit(name, options); end
   def initialize(parent_jar); end
-  def parse(name, signed_message); end
+  def parse(name, signed_message, purpose: nil); end
   include ActionDispatch::Cookies::SerializedCookieJars
 end
 class ActionDispatch::Cookies::EncryptedKeyRotatingCookieJar < ActionDispatch::Cookies::AbstractCookieJar
-  def commit(options); end
+  def commit(name, options); end
   def initialize(parent_jar); end
-  def parse(name, encrypted_message); end
-  def parse_legacy_signed_message(name, legacy_signed_message); end
+  def parse(name, encrypted_message, purpose: nil); end
   include ActionDispatch::Cookies::SerializedCookieJars
 end
 class ActionController::InvalidAuthenticityToken < ActionController::ActionControllerError
@@ -2268,6 +2253,16 @@ module ActionController::Streaming
   def _render_template(options); end
   extend ActiveSupport::Concern
 end
+class ActionDispatch::Http::ContentDisposition
+  def ascii_filename; end
+  def disposition; end
+  def filename; end
+  def initialize(disposition:, filename:); end
+  def percent_escape(string, pattern); end
+  def self.format(disposition:, filename:); end
+  def to_s; end
+  def utf8_filename; end
+end
 module ActionController::DataStreaming
   def send_data(data, options = nil); end
   def send_file(path, options = nil); end
@@ -2291,11 +2286,12 @@ end
 module ActionController::HttpAuthentication::Basic::ControllerMethods
   def authenticate_or_request_with_http_basic(realm = nil, message = nil, &login_procedure); end
   def authenticate_with_http_basic(&login_procedure); end
+  def http_basic_authenticate_or_request_with(name:, password:, realm: nil, message: nil); end
   def request_http_basic_authentication(realm = nil, message = nil); end
   extend ActiveSupport::Concern
 end
 module ActionController::HttpAuthentication::Basic::ControllerMethods::ClassMethods
-  def http_basic_authenticate_with(options = nil); end
+  def http_basic_authenticate_with(name:, password:, realm: nil, **options); end
 end
 module ActionController::HttpAuthentication::Digest
   def authenticate(request, realm, &password_procedure); end
@@ -2334,6 +2330,12 @@ module ActionController::HttpAuthentication::Token::ControllerMethods
   def authenticate_with_http_token(&login_procedure); end
   def request_http_token_authentication(realm = nil, message = nil); end
 end
+module ActionController::DefaultHeaders
+  extend ActiveSupport::Concern
+end
+module ActionController::DefaultHeaders::ClassMethods
+  def make_response!(request); end
+end
 module ActionController::Rescue
   def process_action(*args); end
   def show_detailed_exceptions?; end
@@ -2368,7 +2370,6 @@ end
 module AbstractController::Caching::Fragments
   def combined_fragment_cache_key(key); end
   def expire_fragment(key, options = nil); end
-  def fragment_cache_key(key); end
   def fragment_exist?(key, options = nil); end
   def instrument_fragment_cache(name, key); end
   def read_fragment(key, options = nil); end
@@ -2407,7 +2408,7 @@ class ActionController::Base < ActionController::Metal
   def _helpers; end
   def _helpers=(val); end
   def _helpers?; end
-  def _layout(formats); end
+  def _layout(lookup_context, formats); end
   def _process_action_callbacks; end
   def _protected_ivars; end
   def _renderers; end
@@ -2417,9 +2418,6 @@ class ActionController::Base < ActionController::Metal
   def _view_cache_dependencies; end
   def _view_cache_dependencies=(val); end
   def _view_cache_dependencies?; end
-  def _view_paths; end
-  def _view_paths=(val); end
-  def _view_paths?; end
   def _wrapper_options; end
   def _wrapper_options=(val); end
   def _wrapper_options?; end
@@ -2514,9 +2512,6 @@ class ActionController::Base < ActionController::Metal
   def self._view_cache_dependencies; end
   def self._view_cache_dependencies=(val); end
   def self._view_cache_dependencies?; end
-  def self._view_paths; end
-  def self._view_paths=(val); end
-  def self._view_paths?; end
   def self._wrapper_options; end
   def self._wrapper_options=(val); end
   def self._wrapper_options?; end
@@ -2563,7 +2558,6 @@ class ActionController::Base < ActionController::Metal
   def self.log_warning_on_csrf_failure=(value); end
   def self.logger; end
   def self.logger=(value); end
-  def self.make_response!(request); end
   def self.middleware_stack; end
   def self.mimes_for_respond_to; end
   def self.mimes_for_respond_to=(val); end
@@ -2598,6 +2592,7 @@ class ActionController::Base < ActionController::Metal
   extend AbstractController::UrlFor::ClassMethods
   extend ActionController::ConditionalGet::ClassMethods
   extend ActionController::ContentSecurityPolicy::ClassMethods
+  extend ActionController::DefaultHeaders::ClassMethods
   extend ActionController::Flash::ClassMethods
   extend ActionController::ForceSSL::ClassMethods
   extend ActionController::FormBuilder::ClassMethods
@@ -2619,6 +2614,7 @@ class ActionController::Base < ActionController::Metal
   extend Responders::ControllerMethod
   extend Responders::ControllerMethod
   extend Searchkick::ControllerRuntime::ClassMethods
+  extend WillPaginate::Railtie::ControllerRescuePatch
   include AbstractController::AssetPaths
   include AbstractController::Caching
   include AbstractController::Caching::Fragments
@@ -2641,6 +2637,7 @@ class ActionController::Base < ActionController::Metal
   include ActionController::ContentSecurityPolicy
   include ActionController::Cookies
   include ActionController::DataStreaming
+  include ActionController::DefaultHeaders
   include ActionController::EtagWithFlash
   include ActionController::EtagWithTemplateDigest
   include ActionController::Flash
@@ -2675,7 +2672,6 @@ class ActionController::Base < ActionController::Metal
   include ActiveSupport::Benchmarkable
   include ActiveSupport::Callbacks
   include ActiveSupport::Rescuable
-  include ActiveSupport::Rescuable
   include Recaptcha::Adapters::ControllerMethods
   include Searchkick::ControllerRuntime
 end
@@ -2683,6 +2679,7 @@ class ActionDispatch::ExceptionWrapper
   def application_trace; end
   def backtrace; end
   def backtrace_cleaner; end
+  def causes_for(exception); end
   def clean_backtrace(*args); end
   def exception; end
   def expand_backtrace; end
@@ -2692,7 +2689,6 @@ class ActionDispatch::ExceptionWrapper
   def full_trace; end
   def initialize(backtrace_cleaner, exception); end
   def line_number; end
-  def original_exception(exception); end
   def rescue_responses; end
   def rescue_responses=(obj); end
   def rescue_template; end
@@ -2703,10 +2699,20 @@ class ActionDispatch::ExceptionWrapper
   def self.rescue_templates; end
   def self.rescue_templates=(obj); end
   def self.status_code_for_exception(class_name); end
+  def self.wrapper_exceptions; end
+  def self.wrapper_exceptions=(obj); end
   def source_extracts; end
   def source_fragment(path, line); end
+  def source_to_show_id; end
   def status_code(exception = nil); end
+  def trace_to_show; end
   def traces; end
+  def unwrapped_exception; end
+  def wrapped_causes; end
+  def wrapped_causes_for(exception, backtrace_cleaner); end
+  def wrapper_exceptions; end
+  def wrapper_exceptions=(obj); end
+  include WillPaginate::Railtie::ShowExceptionsPatch
 end
 class ActionDispatch::Routing::RouteWrapper < SimpleDelegator
   def action; end
@@ -2728,16 +2734,29 @@ class ActionDispatch::Routing::RoutesInspector
   def initialize(routes); end
   def normalize_filter(filter); end
 end
-class ActionDispatch::Routing::ConsoleFormatter
-  def draw_header(routes); end
-  def draw_section(routes); end
+module ActionDispatch::Routing::ConsoleFormatter
+end
+class ActionDispatch::Routing::ConsoleFormatter::Base
   def header(routes); end
   def initialize; end
-  def no_routes(routes); end
+  def no_routes(routes, filter); end
   def result; end
   def section(routes); end
   def section_title(title); end
+end
+class ActionDispatch::Routing::ConsoleFormatter::Sheet < ActionDispatch::Routing::ConsoleFormatter::Base
+  def draw_header(routes); end
+  def draw_section(routes); end
+  def header(routes); end
+  def section(routes); end
+  def section_title(title); end
   def widths(routes); end
+end
+class ActionDispatch::Routing::ConsoleFormatter::Expanded < ActionDispatch::Routing::ConsoleFormatter::Base
+  def draw_expanded_section(routes); end
+  def route_header(index:); end
+  def section(routes); end
+  def section_title(title); end
 end
 class ActionDispatch::Routing::HtmlTableFormatter
   def header(routes); end
@@ -2751,7 +2770,8 @@ class ActionDispatch::DebugExceptions
   def api_request?(content_type); end
   def call(env); end
   def create_template(request, wrapper); end
-  def initialize(app, routes_app = nil, response_format = nil); end
+  def initialize(app, routes_app = nil, response_format = nil, interceptors = nil); end
+  def invoke_interceptors(request, exception); end
   def log_array(logger, array); end
   def log_error(request, wrapper); end
   def logger(request); end
@@ -2760,13 +2780,9 @@ class ActionDispatch::DebugExceptions
   def render_for_api_request(content_type, wrapper); end
   def render_for_browser_request(request, wrapper); end
   def routes_inspector(exception); end
+  def self.interceptors; end
+  def self.register_interceptor(object = nil, &block); end
   def stderr_logger; end
-end
-class ActionDispatch::DebugExceptions::DebugView < ActionView::Base
-  def debug_hash(object); end
-  def debug_headers(headers); end
-  def debug_params(params); end
-  def render(*arg0); end
 end
 class ActionDispatch::Request::Utils
   def perform_deep_munge; end
@@ -2814,9 +2830,6 @@ class ActionController::API < ActionController::Metal
   def _renderers=(val); end
   def _renderers?; end
   def _run_process_action_callbacks(&block); end
-  def _view_paths; end
-  def _view_paths=(val); end
-  def _view_paths?; end
   def _wrapper_options; end
   def _wrapper_options=(val); end
   def _wrapper_options?; end
@@ -2845,9 +2858,6 @@ class ActionController::API < ActionController::Metal
   def self._renderers; end
   def self._renderers=(val); end
   def self._renderers?; end
-  def self._view_paths; end
-  def self._view_paths=(val); end
-  def self._view_paths?; end
   def self._wrapper_options; end
   def self._wrapper_options=(val); end
   def self._wrapper_options?; end
@@ -2873,6 +2883,7 @@ class ActionController::API < ActionController::Metal
   extend AbstractController::Callbacks::ClassMethods
   extend AbstractController::UrlFor::ClassMethods
   extend ActionController::ConditionalGet::ClassMethods
+  extend ActionController::DefaultHeaders::ClassMethods
   extend ActionController::ForceSSL::ClassMethods
   extend ActionController::Instrumentation::ClassMethods
   extend ActionController::ParamsWrapper::ClassMethods
@@ -2886,7 +2897,7 @@ class ActionController::API < ActionController::Metal
   extend ActiveSupport::Callbacks::ClassMethods
   extend ActiveSupport::DescendantsTracker
   extend ActiveSupport::Rescuable::ClassMethods
-  extend Anonymous_Module_4
+  extend Anonymous_Module_5
   extend Searchkick::ControllerRuntime::ClassMethods
   include AbstractController::Callbacks
   include AbstractController::Callbacks
@@ -2898,6 +2909,7 @@ class ActionController::API < ActionController::Metal
   include ActionController::BasicImplicitRender
   include ActionController::ConditionalGet
   include ActionController::DataStreaming
+  include ActionController::DefaultHeaders
   include ActionController::ForceSSL
   include ActionController::Instrumentation
   include ActionController::ParamsWrapper
@@ -2921,12 +2933,25 @@ class ActionController::API < ActionController::Metal
   include ActiveSupport::Benchmarkable
   include ActiveSupport::Callbacks
   include ActiveSupport::Rescuable
-  include ActiveSupport::Rescuable
   include Recaptcha::Adapters::ControllerMethods
   include Searchkick::ControllerRuntime
 end
-module Anonymous_Module_4
+module Anonymous_Module_5
   def inherited(klass); end
+end
+class ActionDispatch::HostAuthorization
+  def authorized?(request); end
+  def call(env); end
+  def initialize(app, hosts, response_app = nil); end
+  def mark_as_authorized(request); end
+end
+class ActionDispatch::HostAuthorization::Permissions
+  def allows?(host); end
+  def empty?; end
+  def initialize(hosts); end
+  def sanitize_hosts(hosts); end
+  def sanitize_regexp(host); end
+  def sanitize_string(host); end
 end
 class ActionDispatch::FileHandler
   def call(env); end
@@ -2973,6 +2998,16 @@ class ActionDispatch::ShowExceptions
   def pass_response(status); end
   def render_exception(request, exception); end
 end
+class ActionDispatch::ActionableExceptions
+  def actionable_request?(request); end
+  def call(env); end
+  def endpoint; end
+  def endpoint=(obj); end
+  def initialize(app); end
+  def redirect_to(location); end
+  def self.endpoint; end
+  def self.endpoint=(obj); end
+end
 class ActionDispatch::Reloader < ActionDispatch::Executor
 end
 class ActionDispatch::Request::Session
@@ -2981,6 +3016,7 @@ class ActionDispatch::Request::Session
   def clear; end
   def delete(key); end
   def destroy; end
+  def dig(*keys); end
   def each(&block); end
   def empty?; end
   def exists?; end
@@ -3060,7 +3096,7 @@ class ActionDispatch::Session::CookieStore < ActionDispatch::Session::AbstractSe
   def unpacked_cookie_data(req); end
   def write_session(req, sid, session_data, options); end
 end
-class ActionDispatch::Session::CookieStore::SessionId < Anonymous_Delegator_5
+class ActionDispatch::Session::CookieStore::SessionId < Anonymous_Delegator_6
   def cookie_value; end
   def initialize(session_id, cookie_value = nil); end
 end
@@ -3111,4 +3147,173 @@ class ActionDispatch::Flash::FlashHash
   def to_session_value; end
   def update(h); end
   include Enumerable
+end
+class ActionDispatch::TestRequest < ActionDispatch::Request
+  def accept=(mime_types); end
+  def action=(action_name); end
+  def host=(host); end
+  def if_modified_since=(last_modified); end
+  def if_none_match=(etag); end
+  def path=(path); end
+  def port=(number); end
+  def remote_addr=(addr); end
+  def request_method=(method); end
+  def request_uri=(uri); end
+  def self.create(env = nil); end
+  def self.default_env; end
+  def user_agent=(user_agent); end
+end
+module ActionController::TemplateAssertions
+  def assert_template(options = nil, message = nil); end
+end
+module ActionController::Testing
+  extend ActiveSupport::Concern
+end
+module ActionController::Testing::Functional
+  def recycle!; end
+end
+module ActionController::Live
+  def log_error(exception); end
+  def new_controller_thread; end
+  def process(name); end
+  def response_body=(body); end
+  extend ActiveSupport::Concern
+end
+module ActionController::Live::ClassMethods
+  def make_response!(request); end
+end
+class ActionController::Live::SSE
+  def close; end
+  def initialize(stream, options = nil); end
+  def perform_write(json, options); end
+  def write(object, options = nil); end
+end
+class ActionController::Live::ClientDisconnected < RuntimeError
+end
+class ActionController::Live::Buffer < ActionDispatch::Response::Buffer
+  def abort; end
+  def call_on_error; end
+  def close; end
+  def connected?; end
+  def each_chunk(&block); end
+  def ignore_disconnect; end
+  def ignore_disconnect=(arg0); end
+  def initialize(response); end
+  def on_error(&block); end
+  def write(string); end
+  include MonitorMixin
+end
+class ActionController::Live::Response < ActionDispatch::Response
+  def before_committed; end
+  def build_buffer(response, body); end
+end
+module ActionDispatch::TestProcess
+  def assigns(key = nil); end
+  def cookies; end
+  def flash; end
+  def redirect_to_url; end
+  def session; end
+  include ActionDispatch::TestProcess::FixtureFile
+end
+module ActionDispatch::TestProcess::FixtureFile
+  def fixture_file_upload(path, mime_type = nil, binary = nil); end
+end
+module ActionDispatch::Assertions
+  def html_document; end
+  extend ActiveSupport::Concern
+  include ActionDispatch::Assertions::ResponseAssertions
+  include ActionDispatch::Assertions::RoutingAssertions
+  include Rails::Dom::Testing::Assertions
+end
+module ActionDispatch::Assertions::ResponseAssertions
+  def assert_redirected_to(options = nil, message = nil); end
+  def assert_response(type, message = nil); end
+  def code_with_name(code_or_name); end
+  def generate_response_message(expected, actual = nil); end
+  def location_if_redirected; end
+  def normalize_argument_to_redirection(fragment); end
+  def parameterize(value); end
+  def response_body_if_short; end
+end
+module ActionDispatch::Assertions::RoutingAssertions
+  def assert_generates(expected_path, options, defaults = nil, extras = nil, message = nil); end
+  def assert_recognizes(expected_options, path, extras = nil, msg = nil); end
+  def assert_routing(path, options, defaults = nil, extras = nil, message = nil); end
+  def fail_on(exception_class, message); end
+  def method_missing(selector, *args, &block); end
+  def recognized_request_for(path, extras = nil, msg); end
+  def setup; end
+  def with_routing; end
+end
+class ActionController::TestRequest < ActionDispatch::TestRequest
+  def assign_parameters(routes, controller_path, action, parameters, generated_path, query_string_keys); end
+  def content_type=(type); end
+  def controller_class; end
+  def initialize(env, session, controller_class); end
+  def params_parsers; end
+  def query_string=(string); end
+  def self.create(controller_class); end
+  def self.default_env; end
+  def self.new_session; end
+end
+class ActionController::LiveTestResponse < ActionController::Live::Response
+  def error?; end
+  def missing?; end
+  def success?; end
+end
+class ActionController::TestSession < Rack::Session::Abstract::PersistedSecure::SecureSessionHash
+  def destroy; end
+  def dig(*keys); end
+  def exists?; end
+  def fetch(key, *args, &block); end
+  def initialize(session = nil); end
+  def keys; end
+  def load!; end
+  def values; end
+end
+class ActionController::TestCase < ActiveSupport::TestCase
+  def _controller_class; end
+  def _controller_class=(val); end
+  def _controller_class?; end
+  def self.__callbacks; end
+  def self._controller_class; end
+  def self._controller_class=(val); end
+  def self._controller_class?; end
+  extend ActionController::TestCase::Behavior::ClassMethods
+  extend ActiveSupport::Testing::ConstantLookup::ClassMethods
+  include ActionController::TemplateAssertions
+  include ActionController::TestCase::Behavior
+  include ActionDispatch::Assertions
+  include ActiveSupport::Testing::ConstantLookup
+  include Rails::Dom::Testing::Assertions
+  include Rails::Dom::Testing::Assertions
+end
+module ActionController::TestCase::Behavior
+  def build_response(klass); end
+  def check_required_ivars; end
+  def controller_class_name; end
+  def delete(action, **args); end
+  def document_root_element; end
+  def generated_path(generated_extras); end
+  def get(action, **args); end
+  def head(action, **args); end
+  def patch(action, **args); end
+  def post(action, **args); end
+  def process(action, method: nil, params: nil, session: nil, body: nil, flash: nil, format: nil, xhr: nil, as: nil); end
+  def put(action, **args); end
+  def query_parameter_names(generated_extras); end
+  def request; end
+  def response; end
+  def scrub_env!(env); end
+  def setup_controller_request_and_response; end
+  extend ActiveSupport::Concern
+  include ActionDispatch::TestProcess
+  include ActiveSupport::Testing::ConstantLookup
+  include Rails::Dom::Testing::Assertions
+end
+module ActionController::TestCase::Behavior::ClassMethods
+  def controller_class; end
+  def controller_class=(new_class); end
+  def determine_default_controller_class(name); end
+  def tests(controller_class); end
 end

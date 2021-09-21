@@ -159,9 +159,9 @@ class ATDIS::Model
   include ActiveModel::Validations
   include ActiveModel::Validations::HelperMethods
   include ActiveSupport::Callbacks
-  include Anonymous_Module_52
+  include Anonymous_Module_82
 end
-module Anonymous_Module_52
+module Anonymous_Module_82
 end
 module ATDIS::Models
 end
@@ -169,9 +169,9 @@ class ATDIS::Models::Authority < ATDIS::Model
   def self.__callbacks; end
   def self._validators; end
   def self.attribute_types; end
-  include Anonymous_Module_53
+  include Anonymous_Module_83
 end
-module Anonymous_Module_53
+module Anonymous_Module_83
   def name(*args); end
   def name=(*args); end
   def name_before_type_cast(*args); end
@@ -187,9 +187,9 @@ class ATDIS::Models::Info < ATDIS::Model
   def self._validators; end
   def self.attribute_types; end
   def self.url_encoded?(str); end
-  include Anonymous_Module_54
+  include Anonymous_Module_84
 end
-module Anonymous_Module_54
+module Anonymous_Module_84
   def application_type(*args); end
   def application_type=(*args); end
   def application_type_before_type_cast(*args); end
@@ -240,9 +240,9 @@ class ATDIS::Models::Reference < ATDIS::Model
   def self.__callbacks; end
   def self._validators; end
   def self.attribute_types; end
-  include Anonymous_Module_55
+  include Anonymous_Module_85
 end
-module Anonymous_Module_55
+module Anonymous_Module_85
   def comments_url(*args); end
   def comments_url=(*args); end
   def comments_url_before_type_cast(*args); end
@@ -254,9 +254,9 @@ class ATDIS::Models::Address < ATDIS::Model
   def self.__callbacks; end
   def self._validators; end
   def self.attribute_types; end
-  include Anonymous_Module_56
+  include Anonymous_Module_86
 end
-module Anonymous_Module_56
+module Anonymous_Module_86
   def postcode(*args); end
   def postcode=(*args); end
   def postcode_before_type_cast(*args); end
@@ -275,9 +275,9 @@ class ATDIS::Models::TorrensTitle < ATDIS::Model
   def self.__callbacks; end
   def self._validators; end
   def self.attribute_types; end
-  include Anonymous_Module_57
+  include Anonymous_Module_87
 end
-module Anonymous_Module_57
+module Anonymous_Module_87
   def dpsp_id(*args); end
   def dpsp_id=(*args); end
   def dpsp_id_before_type_cast(*args); end
@@ -293,9 +293,9 @@ class ATDIS::Models::LandTitleRef < ATDIS::Model
   def self.__callbacks; end
   def self._validators; end
   def self.attribute_types; end
-  include Anonymous_Module_58
+  include Anonymous_Module_88
 end
-module Anonymous_Module_58
+module Anonymous_Module_88
   def other(*args); end
   def other=(*args); end
   def other_before_type_cast(*args); end
@@ -307,9 +307,9 @@ class ATDIS::Models::Location < ATDIS::Model
   def self.__callbacks; end
   def self._validators; end
   def self.attribute_types; end
-  include Anonymous_Module_59
+  include Anonymous_Module_89
 end
-module Anonymous_Module_59
+module Anonymous_Module_89
   def address(*args); end
   def address=(*args); end
   def address_before_type_cast(*args); end
@@ -324,9 +324,9 @@ class ATDIS::Models::Event < ATDIS::Model
   def self.__callbacks; end
   def self._validators; end
   def self.attribute_types; end
-  include Anonymous_Module_60
+  include Anonymous_Module_90
 end
-module Anonymous_Module_60
+module Anonymous_Module_90
   def description(*args); end
   def description=(*args); end
   def description_before_type_cast(*args); end
@@ -347,9 +347,9 @@ class ATDIS::Models::Document < ATDIS::Model
   def self.__callbacks; end
   def self._validators; end
   def self.attribute_types; end
-  include Anonymous_Module_61
+  include Anonymous_Module_91
 end
-module Anonymous_Module_61
+module Anonymous_Module_91
   def document_url(*args); end
   def document_url=(*args); end
   def document_url_before_type_cast(*args); end
@@ -364,9 +364,9 @@ class ATDIS::Models::Person < ATDIS::Model
   def self.__callbacks; end
   def self._validators; end
   def self.attribute_types; end
-  include Anonymous_Module_62
+  include Anonymous_Module_92
 end
-module Anonymous_Module_62
+module Anonymous_Module_92
   def contact(*args); end
   def contact=(*args); end
   def contact_before_type_cast(*args); end
@@ -381,9 +381,9 @@ class ATDIS::Models::Application < ATDIS::Model
   def self.__callbacks; end
   def self._validators; end
   def self.attribute_types; end
-  include Anonymous_Module_63
+  include Anonymous_Module_93
 end
-module Anonymous_Module_63
+module Anonymous_Module_93
   def documents(*args); end
   def documents=(*args); end
   def documents_before_type_cast(*args); end
@@ -410,9 +410,9 @@ class ATDIS::Models::Response < ATDIS::Model
   def self.__callbacks; end
   def self._validators; end
   def self.attribute_types; end
-  include Anonymous_Module_64
+  include Anonymous_Module_94
 end
-module Anonymous_Module_64
+module Anonymous_Module_94
   def application(*args); end
   def application=(*args); end
   def application_before_type_cast(*args); end
@@ -426,9 +426,9 @@ class ATDIS::Models::Pagination < ATDIS::Model
   def self.__callbacks; end
   def self._validators; end
   def self.attribute_types; end
-  include Anonymous_Module_65
+  include Anonymous_Module_95
 end
-module Anonymous_Module_65
+module Anonymous_Module_95
   def count(*args); end
   def count=(*args); end
   def count_before_type_cast(*args); end
@@ -458,9 +458,9 @@ class ATDIS::Models::Page < ATDIS::Model
   def self.__callbacks; end
   def self._validators; end
   def self.attribute_types; end
-  include Anonymous_Module_66
+  include Anonymous_Module_96
 end
-module Anonymous_Module_66
+module Anonymous_Module_96
   def count(*args); end
   def count=(*args); end
   def count_before_type_cast(*args); end

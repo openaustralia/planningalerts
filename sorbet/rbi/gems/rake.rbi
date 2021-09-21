@@ -140,9 +140,11 @@ class Rake::FileList
   def entries(*args, &block); end
   def exclude(*patterns, &block); end
   def excluded_from_list?(fn); end
+  def excluding(*args, &block); end
   def existing!; end
   def existing; end
   def ext(newext = nil); end
+  def extract!(*args, &block); end
   def extract_options!(*args, &block); end
   def fetch(*args, &block); end
   def fifth(*args, &block); end
@@ -167,6 +169,7 @@ class Rake::FileList
   def import(array); end
   def include(*filenames); end
   def include?(*args, &block); end
+  def including(*args, &block); end
   def index(*args, &block); end
   def initialize(*patterns); end
   def inject(*args, &block); end

@@ -162,3 +162,10 @@ class Hashie::Mash < Hashie::Hash
   include Hashie::Extensions::PrettyInspect
   include Hashie::Extensions::RubyVersionCheck
 end
+module Hashie::Extensions::ActiveSupport
+end
+module Hashie::Extensions::ActiveSupport::CoreExt
+end
+module Hashie::Extensions::ActiveSupport::CoreExt::Hash
+  def except(*keys); end
+end

@@ -220,37 +220,3 @@ class Rabl::CacheEngine
   def read_multi(*keys); end
   def write(key, value, options = nil); end
 end
-class Rabl::Tracker
-  def dependencies; end
-  def directory; end
-  def extends_dependencies; end
-  def initialize(name, template); end
-  def name; end
-  def partial_dependencies; end
-  def self.call(name, template); end
-  def source; end
-  def template; end
-end
-class Rabl::Digestor < ActionView::Digestor
-  def dependency_digest; end
-end
-class Rabl::Railtie < Rails::Railtie
-end
-class RablTemplate < Tilt::Template
-  def evaluate(context_scope, locals, &block); end
-  def initialize_engine; end
-  def prepare; end
-end
-module ActionView
-end
-module ActionView::Template::Handlers
-end
-class ActionView::Template::Handlers::Rabl
-  def default_format; end
-  def default_format=(val); end
-  def default_format?; end
-  def self.call(template); end
-  def self.default_format; end
-  def self.default_format=(val); end
-  def self.default_format?; end
-end

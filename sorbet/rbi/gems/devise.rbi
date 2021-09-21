@@ -464,6 +464,9 @@ class Devise::TokenGenerator
   def initialize(key_generator, digest = nil); end
   def key_for(column); end
 end
+module DeviseHelper
+  def devise_error_messages!; end
+end
 class Devise::Strategies::Base < Warden::Strategies::Base
   def mapping; end
   def store?; end
@@ -729,10 +732,10 @@ class Devise::FailureApp < ActionController::Metal
   include ActionDispatch::Routing::UrlFor
   include ActionDispatch::Routing::UrlFor
   include ActiveSupport::Benchmarkable
-  include Anonymous_Module_35
+  include Anonymous_Module_57
   include Devise::Controllers::StoreLocation
 end
-module Anonymous_Module_35
+module Anonymous_Module_57
   def _generate_paths_by_default; end
   def _routes; end
   def self._routes; end
@@ -744,13 +747,349 @@ module Anonymous_Module_35
   def self.url_for(options); end
   def self.url_options; end
   extend ActiveSupport::Concern
-  extend Anonymous_Module_27
-  extend Anonymous_Module_28
+  extend Anonymous_Module_23
+  extend Anonymous_Module_24
   include ActionDispatch::Routing::UrlFor
-  include Anonymous_Module_27
-  include Anonymous_Module_28
+  include Anonymous_Module_23
+  include Anonymous_Module_24
 end
 class Devise::Delegator
   def call(env); end
   def failure_app(env); end
+end
+module Devise::Controllers::ScopedViews
+  extend ActiveSupport::Concern
+end
+module Devise::Controllers::ScopedViews::ClassMethods
+  def scoped_views=(value); end
+  def scoped_views?; end
+end
+class DeviseController < ApplicationController
+  def _layout(lookup_context, formats); end
+  def _prefixes; end
+  def assert_is_devise_resource!; end
+  def clean_up_passwords(object); end
+  def devise_i18n_options(options); end
+  def devise_mapping; end
+  def find_message(kind, options = nil); end
+  def navigational_formats; end
+  def require_no_authentication; end
+  def resource; end
+  def resource=(new_resource); end
+  def resource_class; end
+  def resource_name; end
+  def resource_params; end
+  def respond_with_navigational(*args, &block); end
+  def scope_name; end
+  def self.__callbacks; end
+  def self._helper_methods; end
+  def self._helpers; end
+  def self._routes; end
+  def self._wrapper_options; end
+  def self.helpers_path; end
+  def self.middleware_stack; end
+  def self.mimes_for_respond_to; end
+  def set_flash_message!(key, kind, options = nil); end
+  def set_flash_message(key, kind, options = nil); end
+  def set_minimum_password_length; end
+  def signed_in_resource; end
+  def successfully_sent?(resource); end
+  def translation_scope; end
+  def unknown_action!(msg); end
+  extend Devise::Controllers::ScopedViews::ClassMethods
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_58
+  include Devise::Controllers::ScopedViews
+end
+module Anonymous_Module_58
+  def _generate_paths_by_default; end
+  def _routes; end
+  def self._routes; end
+  def self.full_url_for(options); end
+  def self.optimize_routes_generation?; end
+  def self.polymorphic_path(record_or_hash_or_array, options = nil); end
+  def self.polymorphic_url(record_or_hash_or_array, options = nil); end
+  def self.route_for(name, *args); end
+  def self.url_for(options); end
+  def self.url_options; end
+  extend ActiveSupport::Concern
+  extend Anonymous_Module_23
+  extend Anonymous_Module_24
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_23
+  include Anonymous_Module_24
+end
+class Devise::PasswordsController < DeviseController
+  def _layout(lookup_context, formats); end
+  def after_resetting_password_path_for(resource); end
+  def after_sending_reset_password_instructions_path_for(resource_name); end
+  def assert_reset_token_passed; end
+  def create; end
+  def edit; end
+  def new; end
+  def self.__callbacks; end
+  def self._helpers; end
+  def self._routes; end
+  def self._wrapper_options; end
+  def self.helpers_path; end
+  def self.middleware_stack; end
+  def translation_scope; end
+  def unlockable?(resource); end
+  def update; end
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_59
+end
+module Anonymous_Module_59
+  def _generate_paths_by_default; end
+  def _routes; end
+  def self._routes; end
+  def self.full_url_for(options); end
+  def self.optimize_routes_generation?; end
+  def self.polymorphic_path(record_or_hash_or_array, options = nil); end
+  def self.polymorphic_url(record_or_hash_or_array, options = nil); end
+  def self.route_for(name, *args); end
+  def self.url_for(options); end
+  def self.url_options; end
+  extend ActiveSupport::Concern
+  extend Anonymous_Module_23
+  extend Anonymous_Module_24
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_23
+  include Anonymous_Module_24
+end
+class Devise::UnlocksController < DeviseController
+  def _layout(lookup_context, formats); end
+  def after_sending_unlock_instructions_path_for(resource); end
+  def after_unlock_path_for(resource); end
+  def create; end
+  def new; end
+  def self.__callbacks; end
+  def self._helpers; end
+  def self._routes; end
+  def self._wrapper_options; end
+  def self.helpers_path; end
+  def self.middleware_stack; end
+  def show; end
+  def translation_scope; end
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_60
+end
+module Anonymous_Module_60
+  def _generate_paths_by_default; end
+  def _routes; end
+  def self._routes; end
+  def self.full_url_for(options); end
+  def self.optimize_routes_generation?; end
+  def self.polymorphic_path(record_or_hash_or_array, options = nil); end
+  def self.polymorphic_url(record_or_hash_or_array, options = nil); end
+  def self.route_for(name, *args); end
+  def self.url_for(options); end
+  def self.url_options; end
+  extend ActiveSupport::Concern
+  extend Anonymous_Module_23
+  extend Anonymous_Module_24
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_23
+  include Anonymous_Module_24
+end
+class Devise::SessionsController < DeviseController
+  def _layout(lookup_context, formats); end
+  def all_signed_out?; end
+  def auth_options; end
+  def create; end
+  def destroy; end
+  def new; end
+  def respond_to_on_destroy; end
+  def self.__callbacks; end
+  def self._helpers; end
+  def self._routes; end
+  def self._wrapper_options; end
+  def self.helpers_path; end
+  def self.middleware_stack; end
+  def serialize_options(resource); end
+  def sign_in_params; end
+  def translation_scope; end
+  def verify_signed_out_user; end
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_61
+end
+module Anonymous_Module_61
+  def _generate_paths_by_default; end
+  def _routes; end
+  def self._routes; end
+  def self.full_url_for(options); end
+  def self.optimize_routes_generation?; end
+  def self.polymorphic_path(record_or_hash_or_array, options = nil); end
+  def self.polymorphic_url(record_or_hash_or_array, options = nil); end
+  def self.route_for(name, *args); end
+  def self.url_for(options); end
+  def self.url_options; end
+  extend ActiveSupport::Concern
+  extend Anonymous_Module_23
+  extend Anonymous_Module_24
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_23
+  include Anonymous_Module_24
+end
+class Devise::OmniauthCallbacksController < DeviseController
+  def _layout(lookup_context, formats); end
+  def after_omniauth_failure_path_for(scope); end
+  def failed_strategy; end
+  def failure; end
+  def failure_message; end
+  def passthru; end
+  def self.__callbacks; end
+  def self._helpers; end
+  def self._routes; end
+  def self._wrapper_options; end
+  def self.helpers_path; end
+  def self.middleware_stack; end
+  def translation_scope; end
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_62
+end
+module Anonymous_Module_62
+  def _generate_paths_by_default; end
+  def _routes; end
+  def self._routes; end
+  def self.full_url_for(options); end
+  def self.optimize_routes_generation?; end
+  def self.polymorphic_path(record_or_hash_or_array, options = nil); end
+  def self.polymorphic_url(record_or_hash_or_array, options = nil); end
+  def self.route_for(name, *args); end
+  def self.url_for(options); end
+  def self.url_options; end
+  extend ActiveSupport::Concern
+  extend Anonymous_Module_23
+  extend Anonymous_Module_24
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_23
+  include Anonymous_Module_24
+end
+class Devise::RegistrationsController < DeviseController
+  def _layout(lookup_context, formats); end
+  def account_update_params; end
+  def after_inactive_sign_up_path_for(resource); end
+  def after_sign_up_path_for(resource); end
+  def after_update_path_for(resource); end
+  def authenticate_scope!; end
+  def build_resource(hash = nil); end
+  def cancel; end
+  def create; end
+  def destroy; end
+  def edit; end
+  def new; end
+  def self.__callbacks; end
+  def self._helpers; end
+  def self._routes; end
+  def self._wrapper_options; end
+  def self.helpers_path; end
+  def self.middleware_stack; end
+  def set_flash_message_for_update(resource, prev_unconfirmed_email); end
+  def sign_in_after_change_password?; end
+  def sign_up(resource_name, resource); end
+  def sign_up_params; end
+  def translation_scope; end
+  def update; end
+  def update_needs_confirmation?(resource, previous); end
+  def update_resource(resource, params); end
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_63
+end
+module Anonymous_Module_63
+  def _generate_paths_by_default; end
+  def _routes; end
+  def self._routes; end
+  def self.full_url_for(options); end
+  def self.optimize_routes_generation?; end
+  def self.polymorphic_path(record_or_hash_or_array, options = nil); end
+  def self.polymorphic_url(record_or_hash_or_array, options = nil); end
+  def self.route_for(name, *args); end
+  def self.url_for(options); end
+  def self.url_options; end
+  extend ActiveSupport::Concern
+  extend Anonymous_Module_23
+  extend Anonymous_Module_24
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_23
+  include Anonymous_Module_24
+end
+class Devise::ConfirmationsController < DeviseController
+  def _layout(lookup_context, formats); end
+  def after_confirmation_path_for(resource_name, resource); end
+  def after_resending_confirmation_instructions_path_for(resource_name); end
+  def create; end
+  def new; end
+  def self._helpers; end
+  def self._routes; end
+  def self._wrapper_options; end
+  def self.helpers_path; end
+  def self.middleware_stack; end
+  def show; end
+  def translation_scope; end
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_64
+end
+module Anonymous_Module_64
+  def _generate_paths_by_default; end
+  def _routes; end
+  def self._routes; end
+  def self.full_url_for(options); end
+  def self.optimize_routes_generation?; end
+  def self.polymorphic_path(record_or_hash_or_array, options = nil); end
+  def self.polymorphic_url(record_or_hash_or_array, options = nil); end
+  def self.route_for(name, *args); end
+  def self.url_for(options); end
+  def self.url_options; end
+  extend ActiveSupport::Concern
+  extend Anonymous_Module_23
+  extend Anonymous_Module_24
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_23
+  include Anonymous_Module_24
+end
+module Devise::Mailers::Helpers
+  def devise_mail(record, action, opts = nil, &block); end
+  def devise_mapping; end
+  def headers_for(action, opts); end
+  def initialize_from_record(record); end
+  def mailer_from(mapping); end
+  def mailer_reply_to(mapping); end
+  def mailer_sender(mapping, sender = nil); end
+  def resource; end
+  def scope_name; end
+  def subject_for(key); end
+  def template_paths; end
+  extend ActiveSupport::Concern
+end
+class Devise::Mailer < ActionMailer::Base
+  def _layout(lookup_context, formats); end
+  def confirmation_instructions(record, token, opts = nil); end
+  def email_changed(record, opts = nil); end
+  def password_change(record, opts = nil); end
+  def reset_password_instructions(record, token, opts = nil); end
+  def self._helpers; end
+  def self._routes; end
+  def unlock_instructions(record, token, opts = nil); end
+  extend Devise::Controllers::ScopedViews::ClassMethods
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_65
+  include Devise::Controllers::ScopedViews
+  include Devise::Mailers::Helpers
+end
+module Anonymous_Module_65
+  def _generate_paths_by_default; end
+  def _routes; end
+  def self._routes; end
+  def self.full_url_for(options); end
+  def self.optimize_routes_generation?; end
+  def self.polymorphic_path(record_or_hash_or_array, options = nil); end
+  def self.polymorphic_url(record_or_hash_or_array, options = nil); end
+  def self.route_for(name, *args); end
+  def self.url_for(options); end
+  def self.url_options; end
+  extend ActiveSupport::Concern
+  extend Anonymous_Module_23
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_23
 end

@@ -370,7 +370,7 @@ class Sass::Source::Map
   def to_json(options); end
   def write_json_field(out, name, value, is_first = nil); end
 end
-class Anonymous_Struct_38 < Struct
+class Anonymous_Struct_68 < Struct
   def input; end
   def input=(_); end
   def output; end
@@ -380,7 +380,7 @@ class Anonymous_Struct_38 < Struct
   def self.members; end
   def self.new(*arg0); end
 end
-class Sass::Source::Map::Mapping < Anonymous_Struct_38
+class Sass::Source::Map::Mapping < Anonymous_Struct_68
   def inspect; end
 end
 module Sass::Tree
@@ -2272,7 +2272,7 @@ class Sass::Engine
   def try_comment(line, last, tab_str, comment_tab_str, index); end
   def validate_and_append_child(parent, child, line, root); end
 end
-class Anonymous_Struct_39 < Struct
+class Anonymous_Struct_69 < Struct
   def children; end
   def children=(_); end
   def comment_tab_str; end
@@ -2292,7 +2292,7 @@ class Anonymous_Struct_39 < Struct
   def text; end
   def text=(_); end
 end
-class Sass::Engine::Line < Anonymous_Struct_39
+class Sass::Engine::Line < Anonymous_Struct_69
   def comment?; end
 end
 module Sass::Features

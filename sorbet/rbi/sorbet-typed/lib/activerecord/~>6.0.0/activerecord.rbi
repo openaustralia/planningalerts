@@ -3,19 +3,15 @@
 #
 # If you would like to make changes to this file, great! Please upstream any changes you make here:
 #
-#   https://github.com/sorbet/sorbet-typed/edit/master/lib/activerecord/~>5.2.0/activerecord.rbi
+#   https://github.com/sorbet/sorbet-typed/edit/master/lib/activerecord/~>6.0.0/activerecord.rbi
 #
 # typed: strong
 
-class ActiveRecord::Migration::Compatibility::V5_1 < ActiveRecord::Migration::Current; end
+class ActiveRecord::Migration::Compatibility::V5_1 < ActiveRecord::Migration::Compatibility::V5_2; end
 
-ActiveRecord::Migration::Compatibility::V5_2 = ActiveRecord::Migration::Current
-
-# Method definitions are documented here:
-# https://api.rubyonrails.org/v5.2/classes/ActiveRecord/ConnectionAdapters/SchemaStatements.html
-class ActiveRecord::Migration::Current < ActiveRecord::Migration
-  # Tables
-
+# 5.2 has a different definition for create_table because 6.0 adds a new option.
+# This is the only difference between 5.2 and 6.0.
+class ActiveRecord::Migration::Compatibility::V5_2 < ActiveRecord::Migration::Current
   # https://github.com/rails/rails/blob/v5.2.3/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L151-L290
   sig do
     params(
@@ -28,7 +24,7 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
       force: T.any(T::Boolean, Symbol),
       as: T.untyped,
       blk: T.nilable(T.proc.params(t: ActiveRecord::ConnectionAdapters::TableDefinition).void)
-    ).returns(T.untyped)
+    ).void
   end
   def create_table(
     table_name,
@@ -38,6 +34,42 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     options: nil,
     temporary: false,
     force: false,
+    as: nil,
+    &blk
+  ); end
+end
+
+ActiveRecord::Migration::Compatibility::V6_0 = ActiveRecord::Migration::Current
+
+# Method definitions are documented here:
+# https://api.rubyonrails.org/v6.0/classes/ActiveRecord/ConnectionAdapters/SchemaStatements.html
+class ActiveRecord::Migration::Current < ActiveRecord::Migration
+  # Tables
+
+  # https://github.com/rails/rails/blob/v6.0.0/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L152-L292
+  sig do
+    params(
+      table_name: T.any(String, Symbol),
+      comment: T.untyped,
+      id: T.any(T::Boolean, Symbol),
+      primary_key: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
+      options: T.untyped,
+      temporary: T::Boolean,
+      force: T.any(T::Boolean, Symbol),
+      if_not_exists: T::Boolean,
+      as: T.untyped,
+      blk: T.nilable(T.proc.params(t: ActiveRecord::ConnectionAdapters::TableDefinition).void)
+    ).void
+  end
+  def create_table(
+    table_name,
+    comment: nil,
+    id: :primary_key,
+    primary_key: :_,
+    options: nil,
+    temporary: false,
+    force: false,
+    if_not_exists: false,
     as: nil,
     &blk
   ); end
@@ -354,7 +386,7 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     params(
       table_name: T.any(String, Symbol),
       column_name: T.any(String, Symbol),
-      type: T.nilable(T.any(String, Symbol)),
+      type: T.nilable(Symbol),
       options: T.untyped
     ).returns(T::Boolean)
   end
@@ -385,8 +417,6 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
     polymorphic: false,
     null: nil
   ); end
-
-  alias add_belongs_to add_reference
 
   sig do
     params(
@@ -444,4 +474,19 @@ class ActiveRecord::Migration::Current < ActiveRecord::Migration
 
   sig { params(sql: String, name: T.nilable(String)).returns(T.untyped) }
   def execute(sql, name = nil); end
+end
+
+module ActiveRecord::Core
+  sig { returns(T::Boolean) }
+  def blank?; end
+
+  sig { returns(T::Boolean) }
+  def present?; end
+end
+
+module ActiveRecord::ConnectionHandling
+  def connected_to(database: T.unsafe(nil), role: T.unsafe(nil), prevent_writes: T.unsafe(nil), &blk); end
+  def connected_to?(role:); end
+  def connects_to(database: T.unsafe(nil)); end
+  def current_role; end
 end

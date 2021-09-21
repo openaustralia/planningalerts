@@ -98,3 +98,54 @@ module InheritedResources::UrlHelpers
   def generate_url_and_path_helpers(prefix, name, resource_segments, resource_ivars); end
   def handle_shallow_resource(prefix, name, segments, ivars); end
 end
+class InheritedResources::Base < ApplicationController
+  def _layout(lookup_context, formats); end
+  def parents_symbols; end
+  def parents_symbols?; end
+  def resource_class; end
+  def resource_class?; end
+  def resources_configuration; end
+  def resources_configuration?; end
+  def self._helper_methods; end
+  def self._helpers; end
+  def self._routes; end
+  def self._wrapper_options; end
+  def self.helpers_path; end
+  def self.inherit_resources(base); end
+  def self.middleware_stack; end
+  def self.mimes_for_respond_to; end
+  def self.parents_symbols; end
+  def self.parents_symbols=(val); end
+  def self.parents_symbols?; end
+  def self.resource_class; end
+  def self.resource_class=(val); end
+  def self.resource_class?; end
+  def self.resources_configuration; end
+  def self.resources_configuration=(val); end
+  def self.resources_configuration?; end
+  def self.responder; end
+  extend InheritedResources::ClassMethods
+  extend InheritedResources::UrlHelpers
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_56
+  include InheritedResources::Actions
+  include InheritedResources::BaseHelpers
+end
+module Anonymous_Module_56
+  def _generate_paths_by_default; end
+  def _routes; end
+  def self._routes; end
+  def self.full_url_for(options); end
+  def self.optimize_routes_generation?; end
+  def self.polymorphic_path(record_or_hash_or_array, options = nil); end
+  def self.polymorphic_url(record_or_hash_or_array, options = nil); end
+  def self.route_for(name, *args); end
+  def self.url_for(options); end
+  def self.url_options; end
+  extend ActiveSupport::Concern
+  extend Anonymous_Module_23
+  extend Anonymous_Module_24
+  include ActionDispatch::Routing::UrlFor
+  include Anonymous_Module_23
+  include Anonymous_Module_24
+end

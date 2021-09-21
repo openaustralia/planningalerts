@@ -299,13 +299,13 @@ class SorbetRails::TypedEnumConfig < T::Struct
   extend T::Props::Serializable::ClassMethods
 end
 module ActiveRecord::Enum
-  def _define_enum(*args, &blk); end
+  def _define_enum(arg0, &blk); end
   def _define_typed_enum(*args, &blk); end
-  def extract_enum_values(*args, &blk); end
-  def gen_typed_enum_values(*args, &blk); end
+  def extract_enum_values(arg0, &blk); end
+  def gen_typed_enum_values(arg0, &blk); end
   def old_enum(definitions); end
   def typed_enum(*args, &blk); end
-  def typed_enum_reflections(*args, &blk); end
+  def typed_enum_reflections(&blk); end
   extend T::Private::Methods::MethodHooks
   extend T::Private::Methods::SingletonMethodHooks
   extend T::Sig
@@ -346,9 +346,9 @@ module GeneratedUrlHelpers
   def self.url_for(options); end
   def self.url_options; end
   extend ActiveSupport::Concern
-  extend Anonymous_Module_27
-  extend Anonymous_Module_28
+  extend Anonymous_Module_23
+  extend Anonymous_Module_24
   include ActionDispatch::Routing::UrlFor
-  include Anonymous_Module_27
-  include Anonymous_Module_28
+  include Anonymous_Module_23
+  include Anonymous_Module_24
 end

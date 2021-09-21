@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/rspec-core/all/rspec-core.rbi
 #
-# rspec-core-3.9.3
+# rspec-core-3.10.1
 
 module RSpec
   def self.clear_examples; end
@@ -587,6 +587,8 @@ module RSpec::Core::HashImitatable
   def deep_symbolize_keys(*args, &block); end
   def deep_transform_keys!(*args, &block); end
   def deep_transform_keys(*args, &block); end
+  def deep_transform_values!(*args, &block); end
+  def deep_transform_values(*args, &block); end
   def default(*args, &block); end
   def default=(*args, &block); end
   def default_proc(*args, &block); end
@@ -612,6 +614,7 @@ module RSpec::Core::HashImitatable
   def except!(*args, &block); end
   def except(*args, &block); end
   def exclude?(*args, &block); end
+  def excluding(*args, &block); end
   def extra_hash_attributes; end
   def extract!(*args, &block); end
   def extractable_options?(*args, &block); end
@@ -633,8 +636,10 @@ module RSpec::Core::HashImitatable
   def has_value?(*args, &block); end
   def hash_for_delegation; end
   def include?(*args, &block); end
+  def including(*args, &block); end
   def index(*args, &block); end
   def index_by(*args, &block); end
+  def index_with(*args, &block); end
   def inject(*args, &block); end
   def invert(*args, &block); end
   def issue_deprecation(_method_name, *_args); end
@@ -1136,6 +1141,9 @@ class RSpec::Core::Configuration
   def dry_run; end
   def dry_run=(arg0); end
   def dry_run?; end
+  def error_exit_code; end
+  def error_exit_code=(arg0); end
+  def error_exit_code?; end
   def error_stream; end
   def error_stream=(arg0); end
   def error_stream?; end
@@ -1310,6 +1318,7 @@ module RSpec::Core::Configuration::Readers
   def drb; end
   def drb_port; end
   def dry_run; end
+  def error_exit_code; end
   def error_stream; end
   def example_status_persistence_file_path; end
   def exclude_pattern; end
@@ -1387,6 +1396,7 @@ end
 class RSpec::Core::Runner
   def configuration; end
   def configure(err, out); end
+  def exit_code(examples_passed = nil); end
   def initialize(options, configuration = nil, world = nil); end
   def options; end
   def persist_example_statuses; end

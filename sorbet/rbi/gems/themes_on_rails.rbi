@@ -7,7 +7,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/new/master?filename=lib/themes_on_rails/all/themes_on_rails.rbi
 #
-# themes_on_rails-0.4.0
+# themes_on_rails-4eb4f6201f4e
 
 module ThemesOnRails
   def self.all; end
@@ -27,5 +27,6 @@ class ThemesOnRails::ActionController
   def self.apply_theme(controller_class, theme, options = nil); end
   def self.before_filter_method(options); end
   def theme_name; end
+  def theme_resolver; end
   def theme_view_path; end
 end
