@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     resources :reports, only: [:index, :show, :destroy]
     resources :comments, except: [:destroy, :new, :create]
     resources :api_keys, except: [:destroy, :new, :create]
-    resources :alerts
+    resources :alerts, only: [:index, :show]
 
     root to: "applications#index"
   end
