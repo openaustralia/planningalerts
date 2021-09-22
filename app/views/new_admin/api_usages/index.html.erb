@@ -33,12 +33,12 @@
     <tbody>
       <% @result.each do |usage| %>
         <tr>
-          <td><%= link_to usage.api_key_object.user.name,         admin_user_path(usage.api_key_object.user) %></td>
-          <td><%= link_to usage.api_key_object.user.organisation, admin_user_path(usage.api_key_object.user) %></td>
-          <td><%= link_to usage.api_key_object.user.email,        admin_user_path(usage.api_key_object.user) %></td>
-          <td><%= usage.api_key_object.disabled %></td>
-          <td><%= usage.api_key_object.commercial %></td>
-          <td><%= usage.api_key_object.daily_limit %></td>
+          <td><%= link_to usage.api_key_object.user.name,         new_admin_api_key_path(usage.api_key_object) %></td>
+          <td><%= link_to usage.api_key_object.user.organisation, new_admin_api_key_path(usage.api_key_object) %></td>
+          <td><%= link_to usage.api_key_object.user.email,        new_admin_api_key_path(usage.api_key_object) %></td>
+          <td><%= link_to usage.api_key_object.disabled,          new_admin_api_key_path(usage.api_key_object) %></td>
+          <td><%= link_to usage.api_key_object.commercial,        new_admin_api_key_path(usage.api_key_object) %></td>
+          <td><%= link_to usage.api_key_object.daily_limit,       new_admin_api_key_path(usage.api_key_object) %></td>
           <td><%= usage.requests %></td>
         </tr>
       <% end %>
