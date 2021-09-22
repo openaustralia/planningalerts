@@ -36,9 +36,9 @@
           <td><%= link_to usage.api_key_object.user.name,         new_admin_api_key_path(usage.api_key_object) %></td>
           <td><%= link_to usage.api_key_object.user.organisation, new_admin_api_key_path(usage.api_key_object) %></td>
           <td><%= link_to usage.api_key_object.user.email,        new_admin_api_key_path(usage.api_key_object) %></td>
-          <td><%= link_to usage.api_key_object.disabled,          new_admin_api_key_path(usage.api_key_object) %></td>
-          <td><%= link_to usage.api_key_object.commercial,        new_admin_api_key_path(usage.api_key_object) %></td>
-          <td><%= link_to usage.api_key_object.daily_limit,       new_admin_api_key_path(usage.api_key_object) %></td>
+          <td><%= link_to usage.api_key_object.disabled.to_s,     new_admin_api_key_path(usage.api_key_object) %></td>
+          <td><%= link_to usage.api_key_object.commercial.to_s,   new_admin_api_key_path(usage.api_key_object) %></td>
+          <td><%= link_to usage.api_key_object.daily_limit.to_s,  new_admin_api_key_path(usage.api_key_object) %></td>
           <td><%= usage.requests %></td>
         </tr>
       <% end %>
