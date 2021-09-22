@@ -45,5 +45,9 @@ module NewAdmin
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
+
+    def export_active_emails
+      send_data Alert.active.select(:email).distinct.pluck(:email).join("\n"), filename: "emails.txt"
+    end
   end
 end
