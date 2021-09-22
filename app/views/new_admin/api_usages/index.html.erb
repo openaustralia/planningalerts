@@ -14,11 +14,11 @@
     requests will still show up in the list here.
   </p>
 
-  <ul>
-    <li><%= link_to_unless_current "last 30 days", period: 30 %></li>
-    <li><%= link_to_unless_current "last 7 days", period: 7 %></li>
-    <li><%= link_to_unless_current "last 1 day", period: 1 %></li>
-  </ul>
+  <div>
+    <%= link_to "last 30 days", {period: 30}, class: "button" %>
+    <%= link_to "last 7 days", {period: 7}, class: "button" %>
+    <%= link_to "last 1 day", {period: 1}, class: "button" %>
+  </div>
 
   <table>
     <thead>
