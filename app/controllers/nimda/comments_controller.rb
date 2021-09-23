@@ -59,5 +59,11 @@ module Nimda
       comment.send_comment!
       redirect_to({ action: :show }, notice: "Resent comment")
     end
+
+    def confirm
+      comment = Comment.find(params[:id])
+      comment.confirm!
+      redirect_to({ action: :show }, notice: "Comment confirmed and sent")
+    end
   end
 end

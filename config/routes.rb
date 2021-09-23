@@ -36,7 +36,8 @@ Rails.application.routes.draw do
     resources :reports, only: [:index, :show, :destroy]
     resources :comments, except: [:destroy, :new, :create] do
       member do
-        post :resend        
+        post :resend
+        post :confirm        
       end
     end
     resources :api_keys, except: [:destroy, :new, :create]
