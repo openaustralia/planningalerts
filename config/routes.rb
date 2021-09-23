@@ -20,6 +20,11 @@ class QueryParamsPresentConstraint
 end
 
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
+  namespace "admin" do
+    resource :site_settings, only: :update
+  end
+
   namespace :new_admin do
     resources :applications, only: [:index, :show, :destroy]
     resources :authorities, except: :destroy
@@ -48,10 +53,6 @@ Rails.application.routes.draw do
     end
   end
 
-  ActiveAdmin.routes(self)
-  namespace "admin" do
-    resource :site_settings, only: :update
-  end
 
   require 'sidekiq/web'
   authenticate :user, lambda { |u| u.admin? } do
