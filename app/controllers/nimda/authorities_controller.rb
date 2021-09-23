@@ -1,8 +1,8 @@
 # typed: strict
 # frozen_string_literal: true
 
-module NewAdmin
-  class ApiKeysController < NewAdmin::ApplicationController
+module Nimda
+  class AuthoritiesController < Nimda::ApplicationController
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #

@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     resource :site_settings, only: :update
   end
 
-  namespace :new_admin do
+  namespace :nimda do
     resources :applications, only: [:index, :show, :destroy]
     resources :authorities, except: :destroy
     resources :users, except: [:new, :create]

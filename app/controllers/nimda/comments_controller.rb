@@ -1,8 +1,8 @@
-# typed: strict
+# typed: true
 # frozen_string_literal: true
 
-module NewAdmin
-  class AuthoritiesController < NewAdmin::ApplicationController
+module Nimda
+  class CommentsController < Nimda::ApplicationController
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #
@@ -45,5 +45,13 @@ module NewAdmin
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
+
+    def default_sorting_attribute
+      :created_at
+    end
+
+    def default_sorting_direction
+      :desc
+    end
   end
 end
