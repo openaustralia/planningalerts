@@ -32,6 +32,8 @@ as well as a link to its edit page.
   </div>
 </header>
 
+<%= render "show_extra_header", page: page %>
+
 <section class="main-content__body">
   <dl>
     <% page.attributes.each do |attribute| %>
