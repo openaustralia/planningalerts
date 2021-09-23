@@ -49,5 +49,11 @@ module NewAdmin
     def export_active_emails
       send_data Alert.active.select(:email).distinct.pluck(:email).join("\n"), filename: "emails.txt"
     end
+
+    def unsubscribe
+      alert = Alert.find(params[:id])
+      alert.unsubscribe!
+      redirect_to({ action: :show }, notice: "Alert unsubscribed")
+    end
   end
 end

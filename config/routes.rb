@@ -28,6 +28,10 @@ Rails.application.routes.draw do
     resources :comments, except: [:destroy, :new, :create]
     resources :api_keys, except: [:destroy, :new, :create]
     resources :alerts, only: [:index, :show] do
+      member do
+        post "unsubscribe"
+      end
+
       collection do
         get "export_active_emails"        
       end
