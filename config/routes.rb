@@ -27,18 +27,22 @@ Rails.application.routes.draw do
 
   namespace :nimda do
     resources :applications, only: [:index, :show, :destroy]
-    resources :authorities, except: :destroy
+    resources :authorities, except: :destroy do
+      member do
+        post :import
+      end
+    end
     resources :users, except: [:new, :create]
     resources :reports, only: [:index, :show, :destroy]
     resources :comments, except: [:destroy, :new, :create]
     resources :api_keys, except: [:destroy, :new, :create]
     resources :alerts, only: [:index, :show] do
       member do
-        post "unsubscribe"
+        post :unsubscribe
       end
 
       collection do
-        get "export_active_emails"
+        get :export_active_emails
       end
     end
     resources :background_jobs, only: :index
