@@ -53,5 +53,11 @@ module Nimda
     def default_sorting_direction
       :desc
     end
+
+    def resend
+      comment = Comment.find(params[:id])
+      comment.send_comment!
+      redirect_to({ action: :show }, notice: "Resent comment")
+    end
   end
 end

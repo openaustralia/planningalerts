@@ -34,7 +34,11 @@ Rails.application.routes.draw do
     end
     resources :users, except: [:new, :create]
     resources :reports, only: [:index, :show, :destroy]
-    resources :comments, except: [:destroy, :new, :create]
+    resources :comments, except: [:destroy, :new, :create] do
+      member do
+        post :resend        
+      end
+    end
     resources :api_keys, except: [:destroy, :new, :create]
     resources :alerts, only: [:index, :show] do
       member do
