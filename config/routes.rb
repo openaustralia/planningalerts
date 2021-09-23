@@ -33,7 +33,7 @@ Rails.application.routes.draw do
       end
 
       collection do
-        get "export_active_emails"        
+        get "export_active_emails"
       end
     end
     resources :background_jobs, only: :index
