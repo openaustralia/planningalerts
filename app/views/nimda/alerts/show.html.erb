@@ -32,9 +32,7 @@ as well as a link to its edit page.
   </div>
 </header>
 
-<section class="main-content__header">
-  <%= button_to "Unsubscribe", unsubscribe_nimda_alert_path(page.resource), disabled: page.resource.unsubscribed %>
-</section>
+<%= render "show_extra_header", page: page %>
 
 <section class="main-content__body">
   <dl>
