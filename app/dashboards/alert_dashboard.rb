@@ -94,7 +94,9 @@ class AlertDashboard < Administrate::BaseDashboard
   #   COLLECTION_FILTERS = {
   #     open: ->(resources) { resources.where(open: true) }
   #   }.freeze
-  COLLECTION_FILTERS = T.let({}.freeze, T::Hash[Symbol, T.untyped])
+  COLLECTION_FILTERS = T.let({
+    active: ->(resources) { resources.active }
+  }.freeze, T::Hash[Symbol, T.untyped])
 
   # Overwrite this method to customize how alerts are displayed
   # across all pages of the admin dashboard.
