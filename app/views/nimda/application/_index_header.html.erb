@@ -8,11 +8,14 @@
   </h1>
 
   <% if show_search_bar %>
-    <%= render(
-      "search",
-      search_term: search_term,
-      resource_name: display_resource_name(page.resource_name)
-    ) %>
+    <div>
+      <%= render(
+        "search",
+        search_term: search_term,
+        resource_name: display_resource_name(page.resource_name)
+      ) %>
+      <%= render("search_extras", search_term: search_term) %>
+    </div>
   <% end %>
 
   <div>
