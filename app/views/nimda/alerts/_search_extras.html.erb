@@ -1,1 +1,3 @@
-<%= link_to_unless include_search_tag?("active", search_term), "active", search: add_tag_to_search("active", search_term) %>
+<% ["active"].each do |tag| %>
+  <%= link_to_unless include_search_tag?(tag, search_term), tag, search: add_tag_to_search(tag, search_term) %>
+<% end %>
