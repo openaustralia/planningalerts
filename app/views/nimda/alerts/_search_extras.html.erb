@@ -1,1 +1,1 @@
-<%= link_to_unless include_active?(search_term), "active", search: add_active_to_search(search_term) %>
+<%= link_to_unless include_search_tag?("active", search_term), "active", search: add_tag_to_search("active", search_term) %>
