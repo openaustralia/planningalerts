@@ -416,4 +416,50 @@ describe Alert do
       end
     end
   end
+
+  # Related to https://github.com/openaustralia/planningalerts/issues/1547
+  context "A problematic alert seen in production" do
+    it "should do something sensible" do
+      alert = create(
+        :alert,
+        last_sent: Time.utc(2021, 9, 9, 16, 28, 49),
+        lat: -32.9364626,
+        lng: 151.6784514,
+        radius_meters: 2000
+      )
+      authority = create(:authority, disabled: false)
+      # TODO: Why is this getting called twice?
+      expect(GeocodeService).to receive(:call).with(", NSW").twice.and_return(GeocoderResults.new([], "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"))
+      CreateOrUpdateApplicationService.call(
+        authority: authority,
+        council_reference: "DA/2341/2021",
+        attributes: {
+          address: ", NSW",
+          description: "Construction of two storey dwelling house",
+          info_url: "https://property.lakemac.com.au/ePathway/Productio...",
+          date_scraped: "2021-09-10 02:05:17"
+        }
+      )
+      CreateOrUpdateApplicationService.call(
+        authority: authority,
+        council_reference: "DA/2341/2021",
+        attributes: {
+          address: "1 Bank Street, CARDIFF NSW 2285",
+          lat: -32.9456848,
+          lng: 151.662601,
+          suburb: "Cardiff",
+          state: "NSW",
+          postcode: "2285",
+          description: "Dwelling House",
+          info_url: "https://property.lakemac.com.au/ePathway/Productio...",
+          date_scraped: "2021-09-14 02:04:04"
+        }
+      )
+      a = alert.recent_new_applications.first
+      # This should pick up the location of the most recent version of the
+      # application
+      expect(a.location.lat).to eq(-32.9456848)
+      expect(a.location.lng).to eq(151.662601)
+    end
+  end
 end
