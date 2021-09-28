@@ -29,7 +29,7 @@ class ReportDashboard < Administrate::BaseDashboard
     created_at
     name
     email
-    comment
+    details
   ].freeze, T::Array[Symbol])
 
   # SHOW_PAGE_ATTRIBUTES
