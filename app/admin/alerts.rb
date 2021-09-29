@@ -28,12 +28,12 @@ ActiveAdmin.register Alert do
 
   action_item :export do
     link_to "Export active email addresses",
-            export_active_emails_old_alerts_path,
+            export_active_emails_nimda_alerts_path,
             title: "Export a text file containing all email addresses with an active alert set up"
   end
 
   action_item :unsubscribe, only: :show do
-    button_to "Unsubscribe", unsubscribe_old_alert_path
+    button_to "Unsubscribe", unsubscribe_nimda_alert_path
   end
 
   member_action :unsubscribe, method: :post do

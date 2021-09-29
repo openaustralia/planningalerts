@@ -61,7 +61,7 @@ ActiveAdmin.register Authority do
   end
 
   action_item :scrape, only: :show do
-    button_to("Import applications", import_old_authority_path)
+    button_to("Import applications", import_nimda_authority_path)
   end
 
   member_action :import, method: :post do

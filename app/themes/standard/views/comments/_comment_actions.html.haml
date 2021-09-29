@@ -1,4 +1,4 @@
 - if current_user&.admin?
-  = link_to "admin", old_comment_path(comment), class: "comment-action"
+  = link_to "admin", nimda_comment_path(comment), class: "comment-action"
 - unless current_page?(new_comment_report_path(comment.id))
   = link_to "report comment", new_comment_report_path(comment), title: "Report this comment by #{comment.name} for removal", class: "comment-action"

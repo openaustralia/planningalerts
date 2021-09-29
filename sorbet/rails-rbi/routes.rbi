@@ -18,250 +18,61 @@ class ActionMailer::Base
 end
 
 module GeneratedUrlHelpers
-  # Sigs for route /old(.:format)
+  # Sigs for route /nimda(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_root_path(*args, **kwargs); end
+  def nimda_root_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_root_url(*args, **kwargs); end
+  def nimda_root_url(*args, **kwargs); end
 
-  # Sigs for route /old/alerts/:id/unsubscribe(.:format)
+  # Sigs for route /nimda/alerts/:id/unsubscribe(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def unsubscribe_old_alert_path(*args, **kwargs); end
+  def unsubscribe_nimda_alert_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def unsubscribe_old_alert_url(*args, **kwargs); end
+  def unsubscribe_nimda_alert_url(*args, **kwargs); end
 
-  # Sigs for route /old/alerts/export_active_emails(.:format)
+  # Sigs for route /nimda/alerts/export_active_emails(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def export_active_emails_old_alerts_path(*args, **kwargs); end
+  def export_active_emails_nimda_alerts_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def export_active_emails_old_alerts_url(*args, **kwargs); end
+  def export_active_emails_nimda_alerts_url(*args, **kwargs); end
 
-  # Sigs for route /old/alerts/batch_action(.:format)
+  # Sigs for route /nimda/alerts/batch_action(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_old_alerts_path(*args, **kwargs); end
+  def batch_action_nimda_alerts_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_old_alerts_url(*args, **kwargs); end
+  def batch_action_nimda_alerts_url(*args, **kwargs); end
 
-  # Sigs for route /old/alerts(.:format)
+  # Sigs for route /nimda/alerts(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_alerts_path(*args, **kwargs); end
+  def nimda_alerts_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_alerts_url(*args, **kwargs); end
+  def nimda_alerts_url(*args, **kwargs); end
 
-  # Sigs for route /old/alerts/:id(.:format)
+  # Sigs for route /nimda/alerts/:id(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_alert_path(*args, **kwargs); end
+  def nimda_alert_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_alert_url(*args, **kwargs); end
+  def nimda_alert_url(*args, **kwargs); end
 
-  # Sigs for route /old/api_usage(.:format)
+  # Sigs for route /nimda/api_usage(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_api_usage_path(*args, **kwargs); end
+  def nimda_api_usage_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_api_usage_url(*args, **kwargs); end
+  def nimda_api_usage_url(*args, **kwargs); end
 
-  # Sigs for route /old/applications/batch_action(.:format)
+  # Sigs for route /nimda/applications/batch_action(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_old_applications_path(*args, **kwargs); end
+  def batch_action_nimda_applications_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_old_applications_url(*args, **kwargs); end
-
-  # Sigs for route /old/applications(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_applications_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_applications_url(*args, **kwargs); end
-
-  # Sigs for route /old/applications/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_application_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_application_url(*args, **kwargs); end
-
-  # Sigs for route /old/authorities/:id/import(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def import_old_authority_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def import_old_authority_url(*args, **kwargs); end
-
-  # Sigs for route /old/authorities/batch_action(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_old_authorities_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_old_authorities_url(*args, **kwargs); end
-
-  # Sigs for route /old/authorities(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_authorities_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_authorities_url(*args, **kwargs); end
-
-  # Sigs for route /old/authorities/new(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def new_old_authority_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def new_old_authority_url(*args, **kwargs); end
-
-  # Sigs for route /old/authorities/:id/edit(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_old_authority_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_old_authority_url(*args, **kwargs); end
-
-  # Sigs for route /old/authorities/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_authority_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_authority_url(*args, **kwargs); end
-
-  # Sigs for route /old/background_jobs(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_background_jobs_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_background_jobs_url(*args, **kwargs); end
-
-  # Sigs for route /old/comments/:id/resend(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def resend_old_comment_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def resend_old_comment_url(*args, **kwargs); end
-
-  # Sigs for route /old/comments/:id/confirm(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def confirm_old_comment_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def confirm_old_comment_url(*args, **kwargs); end
-
-  # Sigs for route /old/comments/batch_action(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_old_comments_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_old_comments_url(*args, **kwargs); end
-
-  # Sigs for route /old/comments(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_comments_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_comments_url(*args, **kwargs); end
-
-  # Sigs for route /old/comments/:id/edit(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_old_comment_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_old_comment_url(*args, **kwargs); end
-
-  # Sigs for route /old/comments/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_comment_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_comment_url(*args, **kwargs); end
-
-  # Sigs for route /old/dashboard(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_dashboard_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_dashboard_url(*args, **kwargs); end
-
-  # Sigs for route /old/reports/batch_action(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_old_reports_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_old_reports_url(*args, **kwargs); end
-
-  # Sigs for route /old/reports(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_reports_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_reports_url(*args, **kwargs); end
-
-  # Sigs for route /old/reports/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_report_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_report_url(*args, **kwargs); end
-
-  # Sigs for route /old/users/batch_action(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_old_users_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def batch_action_old_users_url(*args, **kwargs); end
-
-  # Sigs for route /old/users(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_users_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_users_url(*args, **kwargs); end
-
-  # Sigs for route /old/users/new(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def new_old_user_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def new_old_user_url(*args, **kwargs); end
-
-  # Sigs for route /old/users/:id/edit(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_old_user_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_old_user_url(*args, **kwargs); end
-
-  # Sigs for route /old/users/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_user_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_user_url(*args, **kwargs); end
-
-  # Sigs for route /old/admin_comments(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_admin_comments_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_admin_comments_url(*args, **kwargs); end
-
-  # Sigs for route /old/admin_comments/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_admin_comment_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_admin_comment_url(*args, **kwargs); end
-
-  # Sigs for route /old/site_settings(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_site_settings_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def old_site_settings_url(*args, **kwargs); end
+  def batch_action_nimda_applications_url(*args, **kwargs); end
 
   # Sigs for route /nimda/applications(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
@@ -283,6 +94,13 @@ module GeneratedUrlHelpers
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def import_nimda_authority_url(*args, **kwargs); end
+
+  # Sigs for route /nimda/authorities/batch_action(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_nimda_authorities_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_nimda_authorities_url(*args, **kwargs); end
 
   # Sigs for route /nimda/authorities(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
@@ -312,40 +130,12 @@ module GeneratedUrlHelpers
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def nimda_authority_url(*args, **kwargs); end
 
-  # Sigs for route /nimda/users(.:format)
+  # Sigs for route /nimda/background_jobs(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_users_path(*args, **kwargs); end
+  def nimda_background_jobs_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_users_url(*args, **kwargs); end
-
-  # Sigs for route /nimda/users/:id/edit(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_nimda_user_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_nimda_user_url(*args, **kwargs); end
-
-  # Sigs for route /nimda/users/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_user_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_user_url(*args, **kwargs); end
-
-  # Sigs for route /nimda/reports(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_reports_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_reports_url(*args, **kwargs); end
-
-  # Sigs for route /nimda/reports/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_report_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_report_url(*args, **kwargs); end
+  def nimda_background_jobs_url(*args, **kwargs); end
 
   # Sigs for route /nimda/comments/:id/resend(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
@@ -360,6 +150,13 @@ module GeneratedUrlHelpers
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def confirm_nimda_comment_url(*args, **kwargs); end
+
+  # Sigs for route /nimda/comments/batch_action(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_nimda_comments_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def batch_action_nimda_comments_url(*args, **kwargs); end
 
   # Sigs for route /nimda/comments(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
@@ -382,75 +179,278 @@ module GeneratedUrlHelpers
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def nimda_comment_url(*args, **kwargs); end
 
-  # Sigs for route /nimda/api_keys(.:format)
+  # Sigs for route /nimda/dashboard(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_api_keys_path(*args, **kwargs); end
+  def nimda_dashboard_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_api_keys_url(*args, **kwargs); end
+  def nimda_dashboard_url(*args, **kwargs); end
 
-  # Sigs for route /nimda/api_keys/:id/edit(.:format)
+  # Sigs for route /nimda/reports/batch_action(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_nimda_api_key_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def edit_nimda_api_key_url(*args, **kwargs); end
-
-  # Sigs for route /nimda/api_keys/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_api_key_path(*args, **kwargs); end
+  def batch_action_nimda_reports_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_api_key_url(*args, **kwargs); end
+  def batch_action_nimda_reports_url(*args, **kwargs); end
 
-  # Sigs for route /nimda/alerts/:id/unsubscribe(.:format)
+  # Sigs for route /nimda/reports(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def unsubscribe_nimda_alert_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def unsubscribe_nimda_alert_url(*args, **kwargs); end
-
-  # Sigs for route /nimda/alerts/export_active_emails(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def export_active_emails_nimda_alerts_path(*args, **kwargs); end
+  def nimda_reports_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def export_active_emails_nimda_alerts_url(*args, **kwargs); end
+  def nimda_reports_url(*args, **kwargs); end
 
-  # Sigs for route /nimda/alerts(.:format)
+  # Sigs for route /nimda/reports/:id(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_alerts_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_alerts_url(*args, **kwargs); end
-
-  # Sigs for route /nimda/alerts/:id(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_alert_path(*args, **kwargs); end
+  def nimda_report_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_alert_url(*args, **kwargs); end
+  def nimda_report_url(*args, **kwargs); end
 
-  # Sigs for route /nimda/background_jobs(.:format)
+  # Sigs for route /nimda/users/batch_action(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_background_jobs_path(*args, **kwargs); end
-
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_background_jobs_url(*args, **kwargs); end
-
-  # Sigs for route /nimda/api_usages(.:format)
-  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_api_usages_path(*args, **kwargs); end
+  def batch_action_nimda_users_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_api_usages_url(*args, **kwargs); end
+  def batch_action_nimda_users_url(*args, **kwargs); end
 
-  # Sigs for route /nimda(.:format)
+  # Sigs for route /nimda/users(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_root_path(*args, **kwargs); end
+  def nimda_users_path(*args, **kwargs); end
 
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
-  def nimda_root_url(*args, **kwargs); end
+  def nimda_users_url(*args, **kwargs); end
+
+  # Sigs for route /nimda/users/new(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def new_nimda_user_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def new_nimda_user_url(*args, **kwargs); end
+
+  # Sigs for route /nimda/users/:id/edit(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_nimda_user_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_nimda_user_url(*args, **kwargs); end
+
+  # Sigs for route /nimda/users/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def nimda_user_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def nimda_user_url(*args, **kwargs); end
+
+  # Sigs for route /nimda/admin_comments(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def nimda_admin_comments_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def nimda_admin_comments_url(*args, **kwargs); end
+
+  # Sigs for route /nimda/admin_comments/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def nimda_admin_comment_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def nimda_admin_comment_url(*args, **kwargs); end
+
+  # Sigs for route /nimda/site_settings(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def nimda_site_settings_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def nimda_site_settings_url(*args, **kwargs); end
+
+  # Sigs for route /admin/applications(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_applications_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_applications_url(*args, **kwargs); end
+
+  # Sigs for route /admin/applications/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_application_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_application_url(*args, **kwargs); end
+
+  # Sigs for route /admin/authorities/:id/import(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def import_admin_authority_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def import_admin_authority_url(*args, **kwargs); end
+
+  # Sigs for route /admin/authorities(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_authorities_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_authorities_url(*args, **kwargs); end
+
+  # Sigs for route /admin/authorities/new(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def new_admin_authority_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def new_admin_authority_url(*args, **kwargs); end
+
+  # Sigs for route /admin/authorities/:id/edit(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_admin_authority_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_admin_authority_url(*args, **kwargs); end
+
+  # Sigs for route /admin/authorities/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_authority_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_authority_url(*args, **kwargs); end
+
+  # Sigs for route /admin/users(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_users_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_users_url(*args, **kwargs); end
+
+  # Sigs for route /admin/users/:id/edit(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_admin_user_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_admin_user_url(*args, **kwargs); end
+
+  # Sigs for route /admin/users/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_user_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_user_url(*args, **kwargs); end
+
+  # Sigs for route /admin/reports(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_reports_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_reports_url(*args, **kwargs); end
+
+  # Sigs for route /admin/reports/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_report_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_report_url(*args, **kwargs); end
+
+  # Sigs for route /admin/comments/:id/resend(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def resend_admin_comment_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def resend_admin_comment_url(*args, **kwargs); end
+
+  # Sigs for route /admin/comments/:id/confirm(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def confirm_admin_comment_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def confirm_admin_comment_url(*args, **kwargs); end
+
+  # Sigs for route /admin/comments(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_comments_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_comments_url(*args, **kwargs); end
+
+  # Sigs for route /admin/comments/:id/edit(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_admin_comment_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_admin_comment_url(*args, **kwargs); end
+
+  # Sigs for route /admin/comments/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_comment_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_comment_url(*args, **kwargs); end
+
+  # Sigs for route /admin/api_keys(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_api_keys_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_api_keys_url(*args, **kwargs); end
+
+  # Sigs for route /admin/api_keys/:id/edit(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_admin_api_key_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def edit_admin_api_key_url(*args, **kwargs); end
+
+  # Sigs for route /admin/api_keys/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_api_key_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_api_key_url(*args, **kwargs); end
+
+  # Sigs for route /admin/alerts/:id/unsubscribe(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def unsubscribe_admin_alert_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def unsubscribe_admin_alert_url(*args, **kwargs); end
+
+  # Sigs for route /admin/alerts/export_active_emails(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def export_active_emails_admin_alerts_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def export_active_emails_admin_alerts_url(*args, **kwargs); end
+
+  # Sigs for route /admin/alerts(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_alerts_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_alerts_url(*args, **kwargs); end
+
+  # Sigs for route /admin/alerts/:id(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_alert_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_alert_url(*args, **kwargs); end
+
+  # Sigs for route /admin/background_jobs(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_background_jobs_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_background_jobs_url(*args, **kwargs); end
+
+  # Sigs for route /admin/api_usages(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_api_usages_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_api_usages_url(*args, **kwargs); end
+
+  # Sigs for route /admin(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_root_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_root_url(*args, **kwargs); end
 
   # Sigs for route /admin/jobs
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }

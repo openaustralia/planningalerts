@@ -4,7 +4,7 @@ module SessionHelpers
   def sign_in_as_admin
     admin = create(:admin)
 
-    visit old_root_path
+    visit nimda_root_path
 
     within("#new_user") do
       fill_in "Email", with: admin.email

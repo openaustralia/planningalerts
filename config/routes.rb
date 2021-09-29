@@ -21,7 +21,7 @@ end
 
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
-  namespace "old" do
+  namespace "nimda" do
     resource :site_settings, only: :update
   end
 

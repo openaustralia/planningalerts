@@ -1,4 +1,4 @@
-= semantic_form_for SiteSettingForm.new, as: :site_setting, url: old_site_settings_path do |f|
+= semantic_form_for SiteSettingForm.new, as: :site_setting, url: nimda_site_settings_path do |f|
   = f.semantic_errors
   = f.inputs "Google Streetview - not using it saves money" do
     = f.input :streetview_in_emails_enabled, as: :boolean, label: "Enabled in email alerts"

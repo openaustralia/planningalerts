@@ -1,12 +1,12 @@
 # typed: true
 # frozen_string_literal: true
 
-module Old
+module Nimda
   class SiteSettingsController < ApplicationController
     def update
       s = SiteSettingForm.new(site_setting)
       s.persist
-      redirect_to old_dashboard_url, notice: "Site settings updated"
+      redirect_to nimda_dashboard_url, notice: "Site settings updated"
     end
 
     private
