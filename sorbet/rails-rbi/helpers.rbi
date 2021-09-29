@@ -56,6 +56,14 @@ module CommentsHelper
   include Devise::Controllers::Helpers
 end
 
+module Nimda::ApplicationHelper
+  include Kernel
+  include ActionView::Helpers
+  include ApplicationHelper
+  include ERB::Util
+  include Devise::Controllers::Helpers
+end
+
 module SignupHelper
   include Kernel
   include ActionView::Helpers
@@ -81,6 +89,6 @@ module DeviseHelper
 end
 
 module ActionController::Helpers
-  sig { returns(T.all(AlertMailerHelper, ApiHowtoHelper, ApplicationHelper, ApplicationsHelper, AtdisHelper, AuthoritiesHelper, CommentsHelper, SignupHelper, StaticHelper, DeviseHelper)) }
+  sig { returns(T.all(AlertMailerHelper, ApiHowtoHelper, ApplicationHelper, ApplicationsHelper, AtdisHelper, AuthoritiesHelper, CommentsHelper, Nimda::ApplicationHelper, SignupHelper, StaticHelper, DeviseHelper)) }
   def helpers; end
 end

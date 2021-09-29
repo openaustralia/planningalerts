@@ -21,7 +21,7 @@ end
 
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
-  namespace "admin" do
+  namespace "old" do
     resource :site_settings, only: :update
   end
 
@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     resources :comments, except: [:destroy, :new, :create] do
       member do
         post :resend
-        post :confirm        
+        post :confirm
       end
     end
     resources :api_keys, except: [:destroy, :new, :create]

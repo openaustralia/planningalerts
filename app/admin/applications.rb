@@ -43,7 +43,7 @@ ActiveAdmin.register Application do
     ul do
       resource.comments.each do |comment|
         li do
-          link_to(comment.text, admin_comment_path(comment)) + " by " + comment.name
+          link_to(comment.text, old_comment_path(comment)) + " by " + comment.name
         end
       end
     end

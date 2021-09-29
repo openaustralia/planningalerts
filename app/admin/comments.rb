@@ -42,7 +42,7 @@ ActiveAdmin.register Comment do
   end
 
   action_item :resend, only: :show do
-    button_to("Resend email", resend_admin_comment_path, disabled: resource.last_delivered_successfully)
+    button_to("Resend email", resend_old_comment_path, disabled: resource.last_delivered_successfully)
   end
 
   member_action :resend, method: :post do
@@ -53,7 +53,7 @@ ActiveAdmin.register Comment do
   action_item :confirm, only: :show do
     if resource.confirmed?
     else
-      button_to("Confirm", confirm_admin_comment_path)
+      button_to("Confirm", confirm_old_comment_path)
     end
   end
 

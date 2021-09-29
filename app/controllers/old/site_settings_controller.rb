@@ -1,12 +1,12 @@
 # typed: true
 # frozen_string_literal: true
 
-module Admin
+module Old
   class SiteSettingsController < ApplicationController
     def update
       s = SiteSettingForm.new(site_setting)
       s.persist
-      redirect_to admin_dashboard_url, notice: "Site settings updated"
+      redirect_to old_dashboard_url, notice: "Site settings updated"
     end
 
     private

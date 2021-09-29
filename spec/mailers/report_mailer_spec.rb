@@ -47,7 +47,7 @@ describe ReportMailer do
       https://dev.planningalerts.org.au/applications/2#comment23
 
       To edit/hide/delete this comment:
-      https://dev.planningalerts.org.au/admin/comments/23/edit
+      https://dev.planningalerts.org.au/old/comments/23/edit
     REPORT
   end
 
