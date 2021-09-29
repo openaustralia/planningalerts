@@ -55,7 +55,9 @@ Rails.application.configure do
   # Also turn off HSTS includeSubDomains because we DON'T want HSTS on
   # the email subdomain which points at Cuttlefish and depends on it
   # working with http
-  config.ssl_options = { redirect: false, hsts: { subdomains: false } }
+  # TODO: Get rid of "expires: 0" to re-enable HSTS
+  # This is currently setup to expire anyone who has HSTS cached in their browser
+  config.ssl_options = { redirect: false, hsts: { subdomains: false, expires: 0 } }
 
   # Set to :debug to see everything in the log.
   config.log_level = :warn
