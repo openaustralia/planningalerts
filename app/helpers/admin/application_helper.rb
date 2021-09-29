@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-module Nimda
+module Admin
   module ApplicationHelper
     extend T::Sig
 

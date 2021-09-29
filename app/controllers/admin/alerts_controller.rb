@@ -1,8 +1,10 @@
 # typed: strict
 # frozen_string_literal: true
 
-module Nimda
-  class ApplicationsController < Nimda::ApplicationController
+module Admin
+  class AlertsController < Admin::ApplicationController
+    extend T::Sig
+
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #
@@ -45,5 +47,17 @@ module Nimda
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
+
+    sig { void }
+    def export_active_emails
+      send_data Alert.active.select(:email).distinct.pluck(:email).join("\n"), filename: "emails.txt"
+    end
+
+    sig { void }
+    def unsubscribe
+      alert = Alert.find(params[:id])
+      alert.unsubscribe!
+      redirect_to({ action: :show }, notice: "Alert unsubscribed")
+    end
   end
 end

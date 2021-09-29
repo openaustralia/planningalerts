@@ -1,8 +1,8 @@
 # typed: strict
 # frozen_string_literal: true
 
-module Nimda
-  class ApiUsagesController < Nimda::ApplicationController
+module Admin
+  class ApiUsagesController < Admin::ApplicationController
     extend T::Sig
 
     class IndexParams < T::Struct

@@ -1,8 +1,8 @@
 # typed: true
 # frozen_string_literal: true
 
-module Nimda
-  class ReportsController < Nimda::ApplicationController
+module Admin
+  class CommentsController < Admin::ApplicationController
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #
@@ -52,6 +52,18 @@ module Nimda
 
     def default_sorting_direction
       :desc
+    end
+
+    def resend
+      comment = Comment.find(params[:id])
+      comment.send_comment!
+      redirect_to({ action: :show }, notice: "Resent comment")
+    end
+
+    def confirm
+      comment = Comment.find(params[:id])
+      comment.confirm!
+      redirect_to({ action: :show }, notice: "Comment confirmed and sent")
     end
   end
 end

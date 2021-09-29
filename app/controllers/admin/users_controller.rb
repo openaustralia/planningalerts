@@ -1,9 +1,8 @@
 # typed: strict
 # frozen_string_literal: true
 
-module Nimda
-  class AuthoritiesController < Nimda::ApplicationController
-    extend T::Sig
+module Admin
+  class UsersController < Admin::ApplicationController
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #
@@ -46,12 +45,5 @@ module Nimda
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
-
-    sig { void }
-    def import
-      authority = Authority.find(params[:id])
-      ImportApplicationsJob.perform_later(authority: authority)
-      redirect_to({ action: :show }, notice: "Queued for importing!")
-    end
   end
 end
