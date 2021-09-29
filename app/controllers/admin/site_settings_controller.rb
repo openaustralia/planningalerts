@@ -12,8 +12,8 @@ module Admin
     private
 
     class SiteSettingParams < T::Struct
-      const :streetview_in_emails_enabled, T::Boolean
-      const :streetview_in_app_enabled, T::Boolean
+      const :streetview_in_emails_enabled, Integer
+      const :streetview_in_app_enabled, Integer
     end
 
     class WrappedSiteSettingParams < T::Struct
