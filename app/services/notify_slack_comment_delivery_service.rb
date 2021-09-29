@@ -61,7 +61,7 @@ class NotifySlackCommentDeliveryService < ApplicationService
 
   sig { returns(String) }
   def comment_url
-    Rails.application.routes.url_helpers.nimda_comment_url(comment, host: ENV["HOST"])
+    Rails.application.routes.url_helpers.admin_comment_url(comment, host: ENV["HOST"])
   end
 
   private
