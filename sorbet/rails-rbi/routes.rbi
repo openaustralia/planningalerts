@@ -445,6 +445,13 @@ module GeneratedUrlHelpers
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def admin_api_usages_url(*args, **kwargs); end
 
+  # Sigs for route /admin/site_settings(.:format)
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_site_settings_path(*args, **kwargs); end
+
+  sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
+  def admin_site_settings_url(*args, **kwargs); end
+
   # Sigs for route /admin(.:format)
   sig { params(args: T.untyped, kwargs: T.untyped).returns(String) }
   def admin_root_path(*args, **kwargs); end

@@ -52,6 +52,11 @@ Rails.application.routes.draw do
     end
     resources :background_jobs, only: :index
     resources :api_usages, only: :index
+    # Doing this weird thing where we add both the singular and the plural
+    # of the resources because administrate only seems to recognise the route
+    # when it's plural while we want the singular resource for the update action
+    resources :site_settings, only: :index
+    resource :site_settings, only: :update
 
     root to: "applications#index"
   end
