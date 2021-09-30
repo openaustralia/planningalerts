@@ -16,9 +16,9 @@ class ApiKeyDashboard < Administrate::BaseDashboard
     user: Field::BelongsTo,
     id: Field::Number,
     value: Field::String,
-    bulk: Field::Boolean,
-    disabled: Field::Boolean,
-    commercial: Field::Boolean,
+    bulk: YesNoBooleanField,
+    disabled: YesNoBooleanField,
+    commercial: YesNoBooleanField,
     daily_limit: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime

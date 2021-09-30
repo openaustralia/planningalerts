@@ -18,14 +18,14 @@ class CommentDashboard < Administrate::BaseDashboard
     email: Field::String,
     name: Field::String,
     confirm_id: Field::String,
-    confirmed: Field::Boolean,
+    confirmed: YesNoBooleanField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     address: Field::String,
-    hidden: Field::Boolean,
+    hidden: YesNoBooleanField,
     confirmed_at: Field::DateTime,
     last_delivered_at: Field::DateTime,
-    last_delivered_successfully: Field::Boolean
+    last_delivered_successfully: YesNoBooleanField
   }.freeze, T::Hash[Symbol, T.untyped])
 
   # COLLECTION_ATTRIBUTES

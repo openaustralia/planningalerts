@@ -19,7 +19,7 @@ class AuthorityDashboard < Administrate::BaseDashboard
     id: Field::Number,
     full_name: Field::String,
     short_name: Field::String,
-    disabled: Field::Boolean,
+    disabled: YesNoBooleanField,
     state: Field::String,
     email: Field::String,
     last_scraper_run_log: Field::Text,

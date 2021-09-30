@@ -29,7 +29,7 @@ class UserDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     reset_password_sent_at: Field::DateTime,
-    admin: Field::Boolean,
+    admin: YesNoBooleanField,
     name: Field::String,
     organisation: Field::String,
     confirmation_token: Field::String,

@@ -18,15 +18,15 @@ class AlertDashboard < Administrate::BaseDashboard
     lat: Field::Number.with_options(decimals: 2),
     lng: Field::Number.with_options(decimals: 2),
     confirm_id: Field::String,
-    confirmed: Field::Boolean,
+    confirmed: YesNoBooleanField,
     radius_meters: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    unsubscribed: Field::Boolean,
+    unsubscribed: YesNoBooleanField,
     last_processed: Field::DateTime,
     unsubscribed_at: Field::DateTime,
     last_delivered_at: Field::DateTime,
-    last_delivered_successfully: Field::Boolean,
+    last_delivered_successfully: YesNoBooleanField,
     unsubscribed_by: Field::String
   }.freeze, T::Hash[Symbol, T.untyped])
 
