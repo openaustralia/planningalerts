@@ -94,9 +94,9 @@ class AlertsController < ApplicationController
   sig { returns(T::Hash[String, Integer]) }
   def zone_sizes
     {
-      "s" => Rails.application.config.planningalerts_small_zone_size,
-      "m" => Rails.application.config.planningalerts_medium_zone_size,
-      "l" => Rails.application.config.planningalerts_large_zone_size
+      "s" => Rails.configuration.planningalerts_small_zone_size,
+      "m" => Rails.configuration.planningalerts_medium_zone_size,
+      "l" => Rails.configuration.planningalerts_large_zone_size
     }
   end
 end
