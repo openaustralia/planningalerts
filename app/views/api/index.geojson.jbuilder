@@ -3,5 +3,5 @@
 
 json.type "FeatureCollection"
 json.features @applications do |application|
-  json.partial! "application.geojson", application: application
+  json.partial! "application", application: application
 end
