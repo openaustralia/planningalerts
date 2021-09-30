@@ -21,19 +21,16 @@ feature "Admin confirms comment for user" do
     sign_in_as_admin
 
     click_link "Comments"
-    click_link "All"
 
-    within "#comment_1" do
-      click_link "View"
-    end
+    click_link "Alena"
 
-    expect(page).to have_content "unconfirmed"
+    expect(page).to have_content "Confirmed\nno"
 
     click_button "Confirm"
 
     expect(page).to have_content "Comment confirmed and sent"
-    expect(page).to have_content "Confirmed Yes"
-    expect(page).to have_content "Confirmed At October 10, 2016"
+    expect(page).to have_content "Confirmed\nyes"
+    expect(page).to have_content "Confirmed at Mon, 10 Oct 2016"
     expect(page).to_not have_button "Confirm"
   end
 end

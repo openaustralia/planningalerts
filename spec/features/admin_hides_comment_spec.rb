@@ -12,14 +12,12 @@ feature "Admin hides comment" do
 
     click_link "Comments"
 
-    within("#comment_1") do
-      click_link "Edit"
-    end
+    click_link "Edit"
 
     check "Hidden"
     click_button "Update Comment"
 
     expect(page).to have_content("Comment was successfully updated")
-    expect(page).to have_content("Hidden Yes")
+    expect(page).to have_content("Hidden\nyes")
   end
 end

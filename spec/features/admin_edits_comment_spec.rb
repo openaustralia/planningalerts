@@ -15,9 +15,7 @@ feature "Admin edits comment" do
 
     click_link "Comments"
 
-    within("#comment_1") do
-      click_link "Edit"
-    end
+    click_link "Edit"
 
     fill_in "Name", with: "Foo"
     click_button "Update Comment"
