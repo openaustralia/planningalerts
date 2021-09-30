@@ -18,8 +18,6 @@ gem "dalli"
 gem "rack-throttle"
 
 # Admin interface
-# TODO: Remove activeadmin as soon as we have fully replaced it with administrate
-gem "activeadmin"
 # TODO: Use normal release as soon as https://github.com/thoughtbot/administrate/pull/1991 is included
 gem "administrate", git: "https://github.com/thoughtbot/administrate", branch: "main"
 
@@ -147,11 +145,6 @@ gem "health_check"
 
 # Using New Relic temporarily to debug some performance issues
 gem "newrelic_rpm"
-
-# TODO: HORRIBLE HACK
-# Locking this gem to 2.3.2 because upgrading it causes some really weird bug
-# See https://github.com/openaustralia/planningalerts/issues/1547
-gem "ransack", "2.3.2"
 
 group :test do
   gem "capybara"
