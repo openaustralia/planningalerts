@@ -484,7 +484,6 @@ class ActionController::Base < ::ActionController::Metal
   include(::ActionController::RespondWith)
   include(::Recaptcha::Adapters::ControllerMethods)
   include(::Searchkick::ControllerRuntime)
-  include(::CanCan::ControllerAdditions)
   extend(::ActionView::ViewPaths::ClassMethods)
   extend(::AbstractController::Helpers::ClassMethods)
   extend(::ActionController::Helpers::ClassMethods)
@@ -514,7 +513,6 @@ class ActionController::Base < ::ActionController::Metal
   extend(::Responders::ControllerMethod)
   extend(::ActionController::RespondWith::ClassMethods)
   extend(::Searchkick::ControllerRuntime::ClassMethods)
-  extend(::CanCan::ControllerAdditions::ClassMethods)
 
   def __callbacks; end
   def __callbacks?; end
@@ -704,13 +702,10 @@ end
 
 module ActionController::Base::HelperMethods
   def alert(*args, &block); end
-  def can?(*args, &block); end
-  def cannot?(*args, &block); end
   def combined_fragment_cache_key(*args, &block); end
   def content_security_policy?(*args, &block); end
   def content_security_policy_nonce(*args, &block); end
   def cookies(*args, &block); end
-  def current_ability(*args, &block); end
   def form_authenticity_token(*args, &block); end
   def notice(*args, &block); end
   def protect_against_forgery?(*args, &block); end

@@ -118,7 +118,6 @@ GEM
     brakeman (5.1.1)
     buftok (0.2.0)
     builder (3.2.4)
-    cancan (1.6.10)
     capistrano (2.15.9)
       highline
       net-scp (>= 1.0.0)
@@ -393,8 +392,6 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     public_suffix (4.0.6)
-    pundit (2.1.1)
-      activesupport (>= 3.0.0)
     rabl (0.14.0)
       activesupport (>= 2.3.14)
     racc (1.5.2)
@@ -655,7 +652,6 @@ DEPENDENCIES
   bootstrap_form (>= 4.1.0)
   bourbon
   brakeman
-  cancan
   capistrano (~> 2)
   capybara
   climate_control
@@ -693,7 +689,6 @@ DEPENDENCIES
   nokogiri
   octokit (~> 4.0)
   oj
-  pundit
   rabl (= 0.14.0)
   rack-cors
   rack-livereload

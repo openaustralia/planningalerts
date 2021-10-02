@@ -1276,7 +1276,6 @@ class ActiveRecord::Base
   include(::ActiveRecord::Suppressor)
   include(::Kaminari::ActiveRecordExtension)
   include(::CounterCulture::Extensions)
-  include(::CanCan::ModelAdditions)
   extend(::ActiveModel::Naming)
   extend(::ActiveSupport::Benchmarkable)
   extend(::ActiveSupport::DescendantsTracker)
@@ -1335,7 +1334,6 @@ class ActiveRecord::Base
   extend(::Kaminari::ActiveRecordExtension::ClassMethods)
   extend(::OrmAdapter::ToAdapter)
   extend(::CounterCulture::Extensions::ClassMethods)
-  extend(::CanCan::ModelAdditions::ClassMethods)
   extend(::Devise::Models)
 
   def __callbacks; end

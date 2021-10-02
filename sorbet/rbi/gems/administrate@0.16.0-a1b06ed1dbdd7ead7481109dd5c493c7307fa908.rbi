@@ -490,14 +490,6 @@ class Administrate::Page::Show < ::Administrate::Page::Base
 end
 
 module Administrate::Punditize
-  extend(::ActiveSupport::Concern)
-
-  include(::Pundit)
-
-
-  private
-
-  def policy_scope_admin(scope); end
 end
 
 class Administrate::ResourceResolver

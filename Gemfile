@@ -123,11 +123,6 @@ gem "rack-cors"
 # gem "sorbet-rails"
 gem "sorbet-runtime"
 
-# Only including these to keep sorbet happy
-# TODO: Figure out how to remove them
-gem "cancan"
-gem "pundit"
-
 # For automatic creation of github issues when scrapers are broken
 gem "octokit", "~> 4.0"
 
