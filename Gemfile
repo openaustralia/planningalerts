@@ -7,12 +7,6 @@ gem "mysql2"
 gem "rails", "6.1.4.1"
 gem "rake"
 
-# Caching
-# Allow us to use `caches_page`
-gem "actionpack-page_caching"
-# Need to support sweepers
-gem "rails-observers"
-
 # API
 gem "dalli"
 gem "rack-throttle"
@@ -45,7 +39,7 @@ gem "httparty"
 gem "rest-client"
 
 # Pagination
-gem "will_paginate"
+gem "kaminari"
 
 # Geocoding and location stuff
 gem "geokit"

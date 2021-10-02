@@ -1,5 +1,6 @@
 - content_for :page_title, @description
 %h1.page-title= @description
-= paginated_section @comments, previous_label: "« Newer", next_label: "Older »" do
-  %ol#comments
-    = render partial: "comment", collection: @comments, locals: { in_list: true, with_address: true }
+= paginate @comments
+%ol#comments
+  = render partial: "comment", collection: @comments, locals: { in_list: true, with_address: true }
+= paginate @comments

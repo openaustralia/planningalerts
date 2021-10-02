@@ -21,12 +21,7 @@ module PlanningalertsApp
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
-    config.autoload_paths << "#{config.root}/app/sweepers"
     config.autoload_paths << "#{config.root}/lib"
-
-    # Activate observers that should always be running.
-    # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
-    config.active_record.observers = :application_sweeper, :authority_sweeper, :stat_sweeper
 
     config.active_job.queue_adapter = :sidekiq
 

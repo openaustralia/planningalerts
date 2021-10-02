@@ -97,13 +97,13 @@
 .apiitem
   %h5 page
   %p.apidefinition
-    API calls return a maximum of #{Application.per_page} results. To retrieve more results simply do another request with page
+    API calls return a maximum of #{Application.max_per_page} results. To retrieve more results simply do another request with page
     set to 2, 3, etc&hellip; Not setting the page parameter is the same as requesting page 1.
   %code= raw api_example_postcode_url("json", api_key, "2780", page: 2)
 .apiitem
   %h5 count
   %p.apidefinition
-    API calls by default return a maximum of #{Application.per_page} results. To return less than that per page simply set the count parameter to the maximum number you want to return.
+    API calls by default return a maximum of #{Application.max_per_page} results. To return less than that per page simply set the count parameter to the maximum number you want to return.
   %code= raw api_example_postcode_url("json", api_key, "2780", count: 10)
 
 %hr

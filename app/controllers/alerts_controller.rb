@@ -4,8 +4,6 @@
 class AlertsController < ApplicationController
   extend T::Sig
 
-  caches_page :statistics
-
   class NewParams < T::Struct
     const :address, T.nilable(String)
     const :email, T.nilable(String)
