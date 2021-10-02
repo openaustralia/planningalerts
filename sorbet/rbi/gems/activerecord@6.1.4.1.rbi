@@ -1336,6 +1336,7 @@ class ActiveRecord::Base
   extend(::OrmAdapter::ToAdapter)
   extend(::CounterCulture::Extensions::ClassMethods)
   extend(::CanCan::ModelAdditions::ClassMethods)
+  extend(::Devise::Models)
 
   def __callbacks; end
   def __callbacks?; end

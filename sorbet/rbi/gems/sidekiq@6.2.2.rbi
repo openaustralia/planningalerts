@@ -74,6 +74,18 @@ Sidekiq::DEFAULTS = T.let(T.unsafe(nil), Hash)
 
 Sidekiq::DEFAULT_WORKER_OPTIONS = T.let(T.unsafe(nil), Hash)
 
+class Sidekiq::DeadSet < ::Sidekiq::JobSet
+  def initialize; end
+
+  def kill(message, opts = T.unsafe(nil)); end
+  def retry_all; end
+
+  class << self
+    def max_jobs; end
+    def timeout; end
+  end
+end
+
 module Sidekiq::Extensions
   class << self
     def enable_delay!; end
@@ -85,6 +97,42 @@ module Sidekiq::Extensions::PsychAutoload
 end
 
 Sidekiq::FAKE_INFO = T.let(T.unsafe(nil), Hash)
+
+class Sidekiq::JobRecord
+  def initialize(item, queue_name = T.unsafe(nil)); end
+
+  def [](name); end
+  def args; end
+  def created_at; end
+  def delete; end
+  def display_args; end
+  def display_class; end
+  def enqueued_at; end
+  def error_backtrace; end
+  def item; end
+  def jid; end
+  def klass; end
+  def latency; end
+  def parse(item); end
+  def queue; end
+  def tags; end
+  def value; end
+
+  private
+
+  def safe_load(content, default); end
+  def uncompress_backtrace(backtrace); end
+end
+
+class Sidekiq::JobSet < ::Sidekiq::SortedSet
+  def delete(score, jid); end
+  def delete_by_jid(score, jid); end
+  def delete_by_value(name, value); end
+  def each; end
+  def fetch(score, jid = T.unsafe(nil)); end
+  def find_job(jid); end
+  def schedule(timestamp, message); end
+end
 
 Sidekiq::LICENSE = T.let(T.unsafe(nil), String)
 
@@ -165,6 +213,60 @@ end
 
 Sidekiq::NAME = T.let(T.unsafe(nil), String)
 
+module Sidekiq::Paginator
+  def page(key, pageidx = T.unsafe(nil), page_size = T.unsafe(nil), opts = T.unsafe(nil)); end
+end
+
+class Sidekiq::Process
+  def initialize(hash); end
+
+  def [](key); end
+  def dump_threads; end
+  def identity; end
+  def labels; end
+  def queues; end
+  def quiet!; end
+  def stop!; end
+  def stopping?; end
+  def tag; end
+
+  private
+
+  def signal(sig); end
+end
+
+class Sidekiq::ProcessSet
+  include(::Enumerable)
+
+  def initialize(clean_plz = T.unsafe(nil)); end
+
+  def cleanup; end
+  def each; end
+  def leader; end
+  def size; end
+  def total_concurrency; end
+  def total_rss; end
+  def total_rss_in_kb; end
+end
+
+class Sidekiq::Queue
+  include(::Enumerable)
+
+  def initialize(name = T.unsafe(nil)); end
+
+  def clear; end
+  def each; end
+  def find_job(jid); end
+  def latency; end
+  def name; end
+  def paused?; end
+  def size; end
+
+  class << self
+    def all; end
+  end
+end
+
 class Sidekiq::Rails < ::Rails::Engine
 end
 
@@ -189,10 +291,335 @@ class Sidekiq::RedisConnection
   end
 end
 
+class Sidekiq::RetrySet < ::Sidekiq::JobSet
+  def initialize; end
+
+  def kill_all; end
+  def retry_all; end
+end
+
+class Sidekiq::ScheduledSet < ::Sidekiq::JobSet
+  def initialize; end
+end
+
 class Sidekiq::Shutdown < ::Interrupt
 end
 
+class Sidekiq::SortedEntry < ::Sidekiq::JobRecord
+  def initialize(parent, score, item); end
+
+  def add_to_queue; end
+  def at; end
+  def delete; end
+  def error?; end
+  def kill; end
+  def parent; end
+  def reschedule(at); end
+  def retry; end
+  def score; end
+
+  private
+
+  def remove_job; end
+end
+
+class Sidekiq::SortedSet
+  include(::Enumerable)
+
+  def initialize(name); end
+
+  def clear; end
+  def name; end
+  def scan(match, count = T.unsafe(nil)); end
+  def size; end
+end
+
+class Sidekiq::Stats
+  def initialize; end
+
+  def dead_size; end
+  def default_queue_latency; end
+  def enqueued; end
+  def failed; end
+  def fetch_stats!; end
+  def fetch_stats_fast!; end
+  def fetch_stats_slow!; end
+  def processed; end
+  def processes_size; end
+  def queues; end
+  def reset(*stats); end
+  def retry_size; end
+  def scheduled_size; end
+  def workers_size; end
+
+  private
+
+  def stat(s); end
+end
+
+class Sidekiq::Stats::History
+  def initialize(days_previous, start_date = T.unsafe(nil)); end
+
+  def failed; end
+  def processed; end
+
+  private
+
+  def date_stat_hash(stat); end
+end
+
+class Sidekiq::Stats::Queues
+  def lengths; end
+end
+
 Sidekiq::VERSION = T.let(T.unsafe(nil), String)
+
+class Sidekiq::Web
+  def app; end
+  def call(env); end
+  def disable(*opts); end
+  def enable(*opts); end
+  def middlewares; end
+  def sessions=(val); end
+  def set(attribute, value); end
+  def settings; end
+  def use(*args, &block); end
+
+  private
+
+  def build; end
+
+  class << self
+    def app_url; end
+    def app_url=(_arg0); end
+    def call(env); end
+    def custom_tabs; end
+    def default_tabs; end
+    def disable(*opts); end
+    def enable(*opts); end
+    def inherited(child); end
+    def locales; end
+    def locales=(_arg0); end
+    def middlewares; end
+    def redis_pool; end
+    def redis_pool=(_arg0); end
+    def register(extension); end
+    def session_secret=(val); end
+    def sessions=(val); end
+    def set(attribute, value); end
+    def settings; end
+    def tabs; end
+    def use(*args, &block); end
+    def views; end
+    def views=(_arg0); end
+  end
+end
+
+Sidekiq::Web::ASSETS = T.let(T.unsafe(nil), String)
+
+class Sidekiq::Web::CsrfProtection
+  def initialize(app, options = T.unsafe(nil)); end
+
+  def call(env); end
+
+  private
+
+  def accept?(env); end
+  def admit(env); end
+  def compare_with_real_token(token, local); end
+  def decode_token(token); end
+  def deny(env); end
+  def logger(env); end
+  def mask_token(token); end
+  def masked_token?(token); end
+  def safe?(env); end
+  def session(env); end
+  def unmask_token(masked_token); end
+  def unmasked_token?(token); end
+  def valid_token?(env, giventoken); end
+  def xor_byte_strings(s1, s2); end
+end
+
+Sidekiq::Web::CsrfProtection::TOKEN_LENGTH = T.let(T.unsafe(nil), Integer)
+
+Sidekiq::Web::DEFAULT_TABS = T.let(T.unsafe(nil), Hash)
+
+Sidekiq::Web::LAYOUT = T.let(T.unsafe(nil), String)
+
+Sidekiq::Web::LOCALES = T.let(T.unsafe(nil), Array)
+
+Sidekiq::Web::ROOT = T.let(T.unsafe(nil), String)
+
+Sidekiq::Web::VIEWS = T.let(T.unsafe(nil), String)
+
+class Sidekiq::WebAction
+  include(::Sidekiq::WebHelpers)
+  include(::Sidekiq::Paginator)
+
+  def initialize(env, block); end
+
+  def _render; end
+  def block; end
+  def block=(_arg0); end
+  def env; end
+  def env=(_arg0); end
+  def erb(content, options = T.unsafe(nil)); end
+  def halt(res); end
+  def json(payload); end
+  def params; end
+  def redirect(location); end
+  def render(engine, content, options = T.unsafe(nil)); end
+  def request; end
+  def route_params; end
+  def session; end
+  def settings; end
+  def type; end
+  def type=(_arg0); end
+
+  private
+
+  def _erb(file, locals); end
+end
+
+Sidekiq::WebAction::RACK_SESSION = T.let(T.unsafe(nil), String)
+
+class Sidekiq::WebApplication
+  extend(::Sidekiq::WebRouter)
+
+  def initialize(klass); end
+
+  def call(env); end
+  def settings; end
+
+  class << self
+    def after(path = T.unsafe(nil), &block); end
+    def afters; end
+    def before(path = T.unsafe(nil), &block); end
+    def befores; end
+    def helpers(mod = T.unsafe(nil), &block); end
+    def run_afters(app, action); end
+    def run_befores(app, action); end
+    def run_hooks(hooks, app, action); end
+    def set(key, val); end
+    def settings; end
+    def tabs; end
+  end
+end
+
+Sidekiq::WebApplication::CSP_HEADER = T.let(T.unsafe(nil), String)
+
+Sidekiq::WebApplication::QUEUE_NAME = T.let(T.unsafe(nil), Regexp)
+
+Sidekiq::WebApplication::REDIS_KEYS = T.let(T.unsafe(nil), Array)
+
+module Sidekiq::WebHelpers
+  def add_to_head; end
+  def available_locales; end
+  def clear_caches; end
+  def csrf_tag; end
+  def current_path; end
+  def current_status; end
+  def delete_or_add_queue(job, params); end
+  def display_args(args, truncate_after_chars = T.unsafe(nil)); end
+  def display_custom_head; end
+  def display_tags(job, within = T.unsafe(nil)); end
+  def environment_title_prefix; end
+  def filtering(*_arg0); end
+  def find_locale_files(lang); end
+  def format_memory(rss_kb); end
+  def get_locale; end
+  def h(text); end
+  def job_params(job, score); end
+  def locale; end
+  def locale_files; end
+  def namespace; end
+  def number_with_delimiter(number); end
+  def parse_params(params); end
+  def poll_path; end
+  def processes; end
+  def product_version; end
+  def qparams(options); end
+  def redirect_with_query(url); end
+  def redis_connection; end
+  def redis_connection_and_namespace; end
+  def redis_info; end
+  def relative_time(time); end
+  def retry_extra_items(retry_job); end
+  def retry_or_delete_or_kill(job, params); end
+  def root_path; end
+  def rtl?; end
+  def server_utc_time; end
+  def singularize(str, count); end
+  def sort_direction_label; end
+  def stats; end
+  def strings(lang); end
+  def t(msg, options = T.unsafe(nil)); end
+  def text_direction; end
+  def to_display(arg); end
+  def to_query_string(params); end
+  def truncate(text, truncate_after_chars = T.unsafe(nil)); end
+  def unfiltered?; end
+  def user_preferred_languages; end
+  def workers; end
+end
+
+Sidekiq::WebHelpers::RETRY_JOB_KEYS = T.let(T.unsafe(nil), Set)
+
+Sidekiq::WebHelpers::SAFE_QPARAMS = T.let(T.unsafe(nil), Array)
+
+class Sidekiq::WebRoute
+  def initialize(request_method, pattern, block); end
+
+  def block; end
+  def block=(_arg0); end
+  def compile; end
+  def match(request_method, path); end
+  def matcher; end
+  def name; end
+  def name=(_arg0); end
+  def pattern; end
+  def pattern=(_arg0); end
+  def request_method; end
+  def request_method=(_arg0); end
+end
+
+Sidekiq::WebRoute::NAMED_SEGMENTS_PATTERN = T.let(T.unsafe(nil), Regexp)
+
+module Sidekiq::WebRouter
+  def delete(path, &block); end
+  def get(path, &block); end
+  def head(path, &block); end
+  def match(env); end
+  def patch(path, &block); end
+  def post(path, &block); end
+  def put(path, &block); end
+  def route(method, path, &block); end
+end
+
+Sidekiq::WebRouter::DELETE = T.let(T.unsafe(nil), String)
+
+Sidekiq::WebRouter::GET = T.let(T.unsafe(nil), String)
+
+Sidekiq::WebRouter::HEAD = T.let(T.unsafe(nil), String)
+
+Sidekiq::WebRouter::PATCH = T.let(T.unsafe(nil), String)
+
+Sidekiq::WebRouter::PATH_INFO = T.let(T.unsafe(nil), String)
+
+Sidekiq::WebRouter::POST = T.let(T.unsafe(nil), String)
+
+Sidekiq::WebRouter::PUT = T.let(T.unsafe(nil), String)
+
+Sidekiq::WebRouter::REQUEST_METHOD = T.let(T.unsafe(nil), String)
+
+Sidekiq::WebRouter::ROUTE_PARAMS = T.let(T.unsafe(nil), String)
+
+class Sidekiq::WorkSet
+  include(::Enumerable)
+
+  def each(&block); end
+  def size; end
+end
 
 module Sidekiq::Worker
   include(::Sidekiq::Worker::Options)
@@ -246,3 +673,5 @@ class Sidekiq::Worker::Setter
   def perform_in(interval, *args); end
   def set(options); end
 end
+
+Sidekiq::Workers = Sidekiq::WorkSet
