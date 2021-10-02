@@ -7,6 +7,7 @@ class SyncGithubIssueForAuthorityService < ApplicationService
   extend T::Sig
 
   # include GeneratedUrlHelpers
+  include Rails.application.routes.url_helpers
   include AuthoritiesHelper
 
   # The repository in which we want the issues created
