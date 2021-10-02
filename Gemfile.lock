@@ -49,8 +49,6 @@ GEM
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.2.0)
-    actionpack-page_caching (1.2.4)
-      actionpack (>= 4.0.0)
     actiontext (6.0.4.1)
       actionpack (= 6.0.4.1)
       activerecord (= 6.0.4.1)
@@ -454,8 +452,6 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
-    rails-observers (0.1.5)
-      activemodel (>= 4.0)
     rails_autolink (1.1.6)
       rails (> 3.1)
     railties (6.0.4.1)
@@ -668,7 +664,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionpack-page_caching
   activeadmin
   administrate!
   atdis
@@ -726,7 +721,6 @@ DEPENDENCIES
   rack-throttle
   rails (= 6.0.4.1)
   rails-controller-testing
-  rails-observers
   rails_autolink
   rake
   ransack (= 2.3.2)

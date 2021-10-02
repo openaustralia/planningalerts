@@ -7,12 +7,6 @@ gem "mysql2"
 gem "rails", "6.0.4.1"
 gem "rake"
 
-# Caching
-# Allow us to use `caches_page`
-gem "actionpack-page_caching"
-# Need to support sweepers
-gem "rails-observers"
-
 # API
 gem "dalli"
 gem "rack-throttle"
