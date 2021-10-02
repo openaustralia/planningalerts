@@ -8,7 +8,8 @@ class GenerateSitemapService < ApplicationService
   attr_reader :logger
 
   # include GeneratedUrlHelpers
-  include Rails.application.routes.url_helpers
+  # See https://sorbet.org/docs/error-reference#4002
+  T.unsafe(self).include Rails.application.routes.url_helpers
 
   sig { params(logger: Logger).void }
   def self.call(logger: Logger.new(STDOUT))

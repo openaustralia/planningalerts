@@ -7,7 +7,8 @@ class SyncGithubIssueForAuthorityService < ApplicationService
   extend T::Sig
 
   # include GeneratedUrlHelpers
-  include Rails.application.routes.url_helpers
+  # See https://sorbet.org/docs/error-reference#4002
+  T.unsafe(self).include Rails.application.routes.url_helpers
   include AuthoritiesHelper
 
   # The repository in which we want the issues created

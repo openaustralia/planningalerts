@@ -62,7 +62,7 @@ class Alert < ApplicationRecord
   # Applications that have been initially scraped since the last time the user was sent an alert
   # If the application is updated (with a more recent date_scraped) it will not
   # be included with the results.
-  sig { returns(Application::ActiveRecord_Relation) }
+  # sig { returns(Application::ActiveRecord_Relation) }
   def recent_new_applications
     Application.with_first_version
                .with_current_version
@@ -77,7 +77,7 @@ class Alert < ApplicationRecord
   end
 
   # Applications in the area of interest which have new comments made since we were last alerted
-  sig { returns(Application::ActiveRecord_Relation) }
+  # sig { returns(Application::ActiveRecord_Relation) }
   def applications_with_new_comments
     Application.with_current_version
                .order("date_scraped DESC")

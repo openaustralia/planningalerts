@@ -42,7 +42,7 @@ class QueueUpAlertsService < ApplicationService
     "#{time_between_alerts.round} seconds"
   end
 
-  sig { returns(Alert::ActiveRecord_Relation) }
+  # sig { returns(Alert::ActiveRecord_Relation) }
   def alerts
     Alert.active.all
   end
