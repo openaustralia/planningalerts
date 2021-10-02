@@ -2,22 +2,23 @@
 
 %p= link_to "Download as CSV", geocode_queries_path(format: :csv)
 
-= paginated_section @geocode_queries do
-  %table
-    %thead
+= paginate @geocode_queries
+%table
+  %thead
+    %tr
+      %th Address
+      %th Average distance to average result (to nearest metre)
+      %th Google address
+      %th Mappify address
+      %th Created
+  %tbody
+    - @geocode_queries.each do |geocode_query|
       %tr
-        %th Address
-        %th Average distance to average result (to nearest metre)
-        %th Google address
-        %th Mappify address
-        %th Created
-    %tbody
-      - @geocode_queries.each do |geocode_query|
-        %tr
-          %td= link_to geocode_query.query, geocode_query
-          %td= geocode_query.average_distance_to_average_result&.round
-          %td= geocode_query.result("google").full_address
-          %td= geocode_query.result("mappify").full_address
-          %td
-            = time_ago_in_words(geocode_query.created_at)
-            ago
+        %td= link_to geocode_query.query, geocode_query
+        %td= geocode_query.average_distance_to_average_result&.round
+        %td= geocode_query.result("google").full_address
+        %td= geocode_query.result("mappify").full_address
+        %td
+          = time_ago_in_words(geocode_query.created_at)
+          ago
+= paginate @geocode_queries

@@ -32,11 +32,9 @@ class Application < ApplicationRecord
     attributes.symbolize_keys.merge(current_version&.search_data || {})
   end
 
-  # For the benefit of will_paginate
-  cattr_reader :per_page
-  # rubocop:disable Style/ClassVars
-  @@per_page = T.let(100, Integer)
-  # rubocop:enable Style/ClassVars
+  # For the benefit of kaminari. Also sets the maximum number of
+  # allowed returned applications in a single API request
+  max_paginates_per 100
 
   delegate :info_url, :date_received,
            :on_notice_from, :on_notice_to, :lat, :lng, :suburb, :state,

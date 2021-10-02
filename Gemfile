@@ -47,7 +47,7 @@ gem "httparty"
 gem "rest-client"
 
 # Pagination
-gem "will_paginate"
+gem "kaminari"
 
 # Geocoding and location stuff
 gem "geokit"

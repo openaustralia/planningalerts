@@ -37,13 +37,9 @@
     = link_to "Most recent first", { sort: "time", q: @q, page: nil }, class: "btn btn-secondary #{"active" if @sort == "time"}"
     = link_to "Closest first", { sort: "distance", q: @q, page: nil }, class: "btn btn-secondary #{"active" if @sort == "distance"}"
 
-  :ruby
-    p = @sort == "distance" ? "Closer" : "Newer"
-    n = @sort == "distance" ? "Further" : "Older"
-
   %section.applications
     -# Only show the top pagination links beyond the first page
     - if @page.to_i > 1
-      = will_paginate @applications, previous_label: "« #{p}", next_label: "#{n} »"
+      = paginate @applications
     = render partial: "application", collection: @applications
-    = will_paginate @applications, previous_label: "« #{p}", next_label: "#{n} »"
+    = paginate @applications

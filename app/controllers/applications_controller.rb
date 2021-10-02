@@ -1,8 +1,6 @@
 # typed: true
 # frozen_string_literal: true
 
-require "will_paginate/array"
-
 class ApplicationsController < ApplicationController
   # TODO: Switch actions from JS to JSON format and remove this
   skip_before_action :verify_authenticity_token, only: %i[per_day per_week]
@@ -28,8 +26,7 @@ class ApplicationsController < ApplicationController
       apps = Application.with_first_version.order("date_scraped DESC").where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
     end
 
-    @applications = apps
-                    .paginate(page: typed_params.page, per_page: 30)
+    @applications = apps.page(typed_params.page).per(30)
     @alert = Alert.new
   end
 
@@ -104,8 +101,7 @@ class ApplicationsController < ApplicationController
           @applications = @applications
                           .reorder("date_scraped DESC")
         end
-        @applications = @applications
-                        .paginate(page: typed_params.page, per_page: per_page)
+        @applications = @applications.page(typed_params.page).per(per_page)
         @rss = applications_path(format: "rss", address: @q, radius: @radius)
       end
     end
@@ -186,8 +182,7 @@ class ApplicationsController < ApplicationController
       redirect_to sort: "time"
       return
     end
-    @applications = @applications
-                    .paginate page: typed_params.page, per_page: per_page
+    @applications = @applications.page(typed_params.page).per(per_page)
 
     respond_to do |format|
       format.html { render "nearby" }

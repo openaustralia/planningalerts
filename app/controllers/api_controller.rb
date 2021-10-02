@@ -268,10 +268,10 @@ class ApiController < ApplicationController
     typed_params = TypedParams[PerPageParams].new.extract!(params)
     # Allow to set number of returned applications up to a maximum
     count = typed_params.count
-    if count && count <= Application.per_page
+    if count && count <= Application.max_per_page
       count
     else
-      Application.per_page
+      Application.max_per_page
     end
   end
 
@@ -283,7 +283,7 @@ class ApiController < ApplicationController
   sig { params(apps: Application::RelationType, description: String).void }
   def api_render(apps, description)
     typed_params = TypedParams[ApiRenderParams].new.extract!(params)
-    applications = apps.includes(:authority).paginate(page: typed_params.page, per_page: per_page)
+    applications = apps.includes(:authority).page(typed_params.page).per(per_page)
     @applications = T.let(applications, T.nilable(T.any(Application::RelationType, T::Array[Application])))
     @description = T.let(description, T.nilable(String))
 
