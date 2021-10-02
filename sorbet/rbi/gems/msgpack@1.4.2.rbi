@@ -20,6 +20,7 @@ Bignum = Integer
 class FalseClass
   include(::JSON::Ext::Generator::GeneratorMethods::FalseClass)
   include(::MessagePack::CoreExt)
+  include(::SafeType::BooleanMixin)
 
 
   private
@@ -186,6 +187,7 @@ end
 class TrueClass
   include(::JSON::Ext::Generator::GeneratorMethods::TrueClass)
   include(::MessagePack::CoreExt)
+  include(::SafeType::BooleanMixin)
 
 
   private

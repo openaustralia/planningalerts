@@ -3549,6 +3549,7 @@ end
 class FalseClass
   include(::JSON::Ext::Generator::GeneratorMethods::FalseClass)
   include(::MessagePack::CoreExt)
+  include(::SafeType::BooleanMixin)
 
   def as_json(options = T.unsafe(nil)); end
   def blank?; end
@@ -4091,6 +4092,7 @@ Time::DATE_FORMATS = T.let(T.unsafe(nil), Hash)
 class TrueClass
   include(::JSON::Ext::Generator::GeneratorMethods::TrueClass)
   include(::MessagePack::CoreExt)
+  include(::SafeType::BooleanMixin)
 
   def as_json(options = T.unsafe(nil)); end
   def blank?; end
