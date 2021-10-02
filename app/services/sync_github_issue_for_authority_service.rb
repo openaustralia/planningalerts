@@ -6,7 +6,7 @@
 class SyncGithubIssueForAuthorityService < ApplicationService
   extend T::Sig
 
-  include GeneratedUrlHelpers
+  # include GeneratedUrlHelpers
   include AuthoritiesHelper
 
   # The repository in which we want the issues created

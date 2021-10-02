@@ -7,7 +7,7 @@ class GenerateSitemapService < ApplicationService
   sig { returns(Logger) }
   attr_reader :logger
 
-  include GeneratedUrlHelpers
+  # include GeneratedUrlHelpers
 
   sig { params(logger: Logger).void }
   def self.call(logger: Logger.new(STDOUT))

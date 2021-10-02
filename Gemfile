@@ -120,7 +120,7 @@ gem "counter_culture"
 gem "rack-cors"
 
 # For type checking
-gem "sorbet-rails"
+# gem "sorbet-rails"
 gem "sorbet-runtime"
 
 # Only including these to keep sorbet happy

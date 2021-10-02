@@ -9,7 +9,7 @@ class StandaloneSweeper < ActionController::Caching::Sweeper
 
   # GeneratedUrlHelpers is provided by sorbet-rails as a drop-in replacement for
   # Rails.application.routes.url_helpers
-  include GeneratedUrlHelpers
+  # include GeneratedUrlHelpers
 
   protected
 
