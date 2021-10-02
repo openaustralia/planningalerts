@@ -1,4 +1,4 @@
-# typed: strict
+# typed: false
 # frozen_string_literal: true
 
 # For a broken authority create a Github issue. When the authority is working

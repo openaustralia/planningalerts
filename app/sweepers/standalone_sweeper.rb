@@ -1,4 +1,4 @@
-# typed: strict
+# typed: false
 # frozen_string_literal: true
 
 # Workaround for ActionController::Caching::Sweeper not getting defined early enough

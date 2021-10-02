@@ -1,4 +1,4 @@
-# typed: strict
+# typed: false
 # frozen_string_literal: true
 
 # Stores versioned site settings. This is an append only log where the most

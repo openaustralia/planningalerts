@@ -1,4 +1,4 @@
-# typed: strict
+# typed: false
 # frozen_string_literal: true
 
 # Queues up all active alerts to be sent out in batches over the next 24 hours

@@ -1,4 +1,4 @@
-# typed: strict
+# typed: false
 
 HealthCheck.setup do |config|
   # Don't do all the standard checks
