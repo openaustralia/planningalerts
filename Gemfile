@@ -121,7 +121,7 @@ gem "rack-cors"
 
 # For type checking
 gem "sorbet-rails"
-gem "sorbet-runtime", "0.5.6465"
+gem "sorbet-runtime"
 
 # Only including these to keep sorbet happy
 # TODO: Figure out how to remove them
@@ -164,7 +164,7 @@ end
 
 group :development do
   # For static type checking
-  gem "sorbet", "0.5.6465"
+  gem "sorbet"
 
   # For guard and associated bits
   gem "growl"
