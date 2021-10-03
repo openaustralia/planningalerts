@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 # Be sure to restart your server when you modify this file.
 
 Rails.application.config.session_store :cookie_store, key: '_planningalerts_app_session'
