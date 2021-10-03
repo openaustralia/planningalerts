@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 require 'sidekiq'
 
 Sidekiq.configure_server do |config|
