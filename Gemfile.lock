@@ -726,6 +726,7 @@ DEPENDENCIES
   sorbet
   sorbet-rails
   sorbet-runtime
+  spoom
   spring
   spring-commands-rspec
   susy

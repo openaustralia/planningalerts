@@ -155,6 +155,7 @@ group :development do
   # For static type checking
   gem "sorbet"
   gem "tapioca"
+  gem "spoom"
 
   # For guard and associated bits
   gem "growl"
