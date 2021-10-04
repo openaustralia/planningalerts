@@ -1,4 +1,4 @@
-# typed: false
+# typed: strict
 # frozen_string_literal: true
 
 class LogApiCallService < ApplicationService
@@ -92,10 +92,10 @@ class LogApiCallService < ApplicationService
         # Maintaining this structure for compatibility with old logs
         # even though the api key data is now not stored with the user
         user: {
-          id: key.user.id,
-          email: key.user.email,
-          name: key.user.name,
-          organisation: key.user.organisation,
+          id: key.user&.id,
+          email: key.user&.email,
+          name: key.user&.name,
+          organisation: key.user&.organisation,
           bulk_api: key.bulk,
           api_disabled: key.disabled,
           api_commercial: key.commercial

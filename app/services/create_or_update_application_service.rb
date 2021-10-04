@@ -1,4 +1,4 @@
-# typed: false
+# typed: strict
 # frozen_string_literal: true
 
 class CreateOrUpdateApplicationService < ApplicationService
@@ -60,7 +60,7 @@ class CreateOrUpdateApplicationService < ApplicationService
   def create_version(application)
     previous_version = application.current_version
     new_version = ApplicationVersion.build_version(
-      application_id: application.id,
+      application_id: T.must(application.id),
       previous_version: previous_version,
       attributes: attributes
     )

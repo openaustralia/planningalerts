@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 # Queues up all active alerts to be sent out in batches over the next 24 hours
@@ -42,7 +42,7 @@ class QueueUpAlertsService < ApplicationService
     "#{time_between_alerts.round} seconds"
   end
 
-  # sig { returns(Alert::ActiveRecord_Relation) }
+  sig { returns(T.untyped) }
   def alerts
     Alert.active.all
   end

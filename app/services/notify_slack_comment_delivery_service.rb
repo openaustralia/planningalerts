@@ -1,4 +1,4 @@
-# typed: false
+# typed: strict
 # frozen_string_literal: true
 
 class NotifySlackCommentDeliveryService < ApplicationService
@@ -44,11 +44,11 @@ class NotifySlackCommentDeliveryService < ApplicationService
   def call
     notifier = Slack::Notifier.new ENV["SLACK_WEBHOOK_URL"]
     if status == "delivered"
-      notifier.ping "A [comment](#{comment_url}) was succesfully [delivered](#{email_url}) to #{comment.application.authority.full_name} #{to}"
+      notifier.ping "A [comment](#{comment_url}) was succesfully [delivered](#{email_url}) to #{comment.application&.authority&.full_name} #{to}"
     elsif status == "soft_bounce"
-      notifier.ping "A [comment](#{comment_url}) soft bounced when [delivered](#{email_url}) to #{comment.application.authority.full_name} #{to}. Their email server said \"#{extended_status}\""
+      notifier.ping "A [comment](#{comment_url}) soft bounced when [delivered](#{email_url}) to #{comment.application&.authority&.full_name} #{to}. Their email server said \"#{extended_status}\""
     elsif status == "hard_bounce"
-      notifier.ping "A [comment](#{comment_url}) hard bounced when [delivered](#{email_url}) to #{comment.application.authority.full_name} #{to}. Their email server said \"#{extended_status}\""
+      notifier.ping "A [comment](#{comment_url}) hard bounced when [delivered](#{email_url}) to #{comment.application&.authority&.full_name} #{to}. Their email server said \"#{extended_status}\""
     else
       raise "Unexpected status"
     end
