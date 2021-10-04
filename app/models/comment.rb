@@ -1,4 +1,4 @@
-# typed: false
+# typed: strict
 # frozen_string_literal: true
 
 require "rest-client"
@@ -43,8 +43,8 @@ class Comment < ApplicationRecord
     CommentMailer.notify_authority(self).deliver_later
   end
 
-  sig { returns(String) }
+  sig { returns(T.nilable(String)) }
   def recipient_display_name
-    application.authority.full_name
+    application&.authority&.full_name
   end
 end
