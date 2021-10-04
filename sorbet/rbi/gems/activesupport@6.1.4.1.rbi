@@ -3925,6 +3925,19 @@ class Regexp::Token < ::Struct
   end
 end
 
+module SecureRandom
+  extend(::Random::Formatter)
+
+  class << self
+    def base36(n = T.unsafe(nil)); end
+    def base58(n = T.unsafe(nil)); end
+  end
+end
+
+SecureRandom::BASE36_ALPHABET = T.let(T.unsafe(nil), Array)
+
+SecureRandom::BASE58_ALPHABET = T.let(T.unsafe(nil), Array)
+
 class String
   include(::Comparable)
   include(::Colorize::InstanceMethods)
