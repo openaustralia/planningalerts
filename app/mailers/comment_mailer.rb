@@ -1,4 +1,4 @@
-# typed: false
+# typed: strict
 # frozen_string_literal: true
 
 class CommentMailer < ApplicationMailer
@@ -26,8 +26,8 @@ class CommentMailer < ApplicationMailer
       # but DMARC now effectively makes this way of doing things unworkable.
       from: email_from,
       reply_to: "#{comment.name} <#{comment.email}>",
-      to: comment.application.authority.email,
-      subject: "Comment on application #{comment.application.council_reference}"
+      to: comment.application&.authority&.email,
+      subject: "Comment on application #{comment.application&.council_reference}"
     )
   end
 end
