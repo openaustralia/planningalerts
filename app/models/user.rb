@@ -1,8 +1,11 @@
-# typed: false
+# typed: strict
 # frozen_string_literal: true
 
 class User < ApplicationRecord
   extend T::Sig
+
+  # For sorbet
+  include Devise::Models::Authenticatable
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :lockable and :timeoutable
