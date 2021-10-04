@@ -440,6 +440,66 @@ end
 class Geocoder::ServiceUnavailable < ::Geocoder::Error
 end
 
+module Geocoder::Sql
+  extend(::Geocoder::Sql)
+
+  def approx_bearing(latitude, longitude, lat_attr, lon_attr, options = T.unsafe(nil)); end
+  def approx_distance(latitude, longitude, lat_attr, lon_attr, options = T.unsafe(nil)); end
+  def full_bearing(latitude, longitude, lat_attr, lon_attr, options = T.unsafe(nil)); end
+  def full_distance(latitude, longitude, lat_attr, lon_attr, options = T.unsafe(nil)); end
+  def within_bounding_box(sw_lat, sw_lng, ne_lat, ne_lng, lat_attr, lon_attr); end
+end
+
+module Geocoder::Store
+end
+
+module Geocoder::Store::ActiveRecord
+  include(::Geocoder::Store::Base)
+
+  mixes_in_class_methods(::Geocoder::Store::ActiveRecord::ClassMethods)
+
+  def fetch_address; end
+  def fetch_coordinates; end
+  def geocode; end
+  def nearbys(radius = T.unsafe(nil), options = T.unsafe(nil)); end
+  def reverse_geocode; end
+
+  class << self
+    def included(base); end
+  end
+end
+
+module Geocoder::Store::ActiveRecord::ClassMethods
+  def add_exclude_condition(conditions, exclude); end
+  def bearing_sql(latitude, longitude, options = T.unsafe(nil)); end
+  def distance_from_sql(location, *args); end
+  def distance_sql(latitude, longitude, options = T.unsafe(nil)); end
+  def false_condition; end
+  def full_column_name(column); end
+  def near_scope_options(latitude, longitude, radius = T.unsafe(nil), options = T.unsafe(nil)); end
+  def null_value; end
+  def select_clause(columns, distance = T.unsafe(nil), bearing = T.unsafe(nil), distance_column = T.unsafe(nil), bearing_column = T.unsafe(nil)); end
+  def using_postgres?; end
+  def using_sqlite?; end
+  def using_sqlite_with_extensions?; end
+  def using_unextended_sqlite?; end
+end
+
+module Geocoder::Store::Base
+  def bearing_from(point, options = T.unsafe(nil)); end
+  def bearing_to(point, options = T.unsafe(nil)); end
+  def distance_from(point, units = T.unsafe(nil)); end
+  def distance_to(point, units = T.unsafe(nil)); end
+  def geocode; end
+  def geocoded?; end
+  def reverse_geocode; end
+  def to_coordinates; end
+
+  private
+
+  def do_lookup(reverse = T.unsafe(nil)); end
+end
+
 module Geocoder::Util
   class << self
     def recursive_hash_merge(h1, h2); end

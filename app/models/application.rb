@@ -1,8 +1,13 @@
-# typed: false
+# typed: strict
 # frozen_string_literal: true
 
 class Application < ApplicationRecord
   extend T::Sig
+
+  # For sorbet
+  include Geocoder::Store::ActiveRecord
+  extend Geocoder::Model::ActiveRecord
+  extend Kaminari::ConfigurationMethods::ClassMethods
 
   searchkick highlight: [:description],
              index_name: "pa_applications_#{ENV['STAGE']}",
@@ -66,7 +71,7 @@ class Application < ApplicationRecord
   end
 
   # Find applications that are near the current application location and/or recently scraped
-  # sig { returns(Application::ActiveRecord_Relation) }
+  sig { returns(T.untyped) }
   def find_all_nearest_or_recent
     if location
       nearbys(
