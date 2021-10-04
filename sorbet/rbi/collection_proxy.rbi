@@ -1,6 +1,8 @@
 # typed: true
 
 # This is a workaround from https://github.com/Shopify/tapioca/issues/179
+# In theory this should be fixed when this PR is merged:
+# https://github.com/Shopify/tapioca/pull/236
 
 class ActiveRecord::Associations::CollectionProxy < ::ActiveRecord::Relation
   extend(T::Generic)
