@@ -147,6 +147,9 @@ gem "newrelic_rpm"
 # See https://github.com/openaustralia/planningalerts/issues/1547
 gem "ransack", "2.3.2"
 
+# For rendering markdown in ATDIS specification
+gem "pandoc-ruby"
+
 group :test do
   gem "capybara"
   gem "climate_control"
