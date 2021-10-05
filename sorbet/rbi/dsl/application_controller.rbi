@@ -13,11 +13,15 @@ class ApplicationController
     include ::ActionDispatch::Routing::UrlFor
     include ::ActionText::ContentHelper
     include ::ActionText::TagHelper
+    include ::ActionView::Helpers::AssetTagHelper
+    include ::ActionView::Helpers::AssetUrlHelper
     include ::ActionView::Helpers::CaptureHelper
+    include ::ActionView::Helpers::DateHelper
     include ::ActionView::Helpers::OutputSafetyHelper
     include ::ActionView::Helpers::SanitizeHelper
     include ::ActionView::Helpers::TagHelper
     include ::ActionView::Helpers::TextHelper
+    include ::ActionView::Helpers::UrlHelper
     include ::Admin::ApplicationHelper
     include ::AlertMailerHelper
     include ::ApiHowtoHelper
@@ -27,6 +31,7 @@ class ApplicationController
     include ::AuthoritiesHelper
     include ::CommentsHelper
     include ::DeviseHelper
+    include ::ERB::Util
     include ::GeneratedPathHelpersModule
     include ::GeneratedUrlHelpers
     include ::GeneratedUrlHelpersModule
