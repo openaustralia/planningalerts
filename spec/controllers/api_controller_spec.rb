@@ -381,7 +381,7 @@ describe ApiController do
       scope5 = Application.none
       expect(Application).to receive(:with_current_version).and_return(scope1)
       expect(scope1).to receive(:order).and_return(scope2)
-      expect(scope2).to receive(:where).with("lat > ? AND lng > ? AND lat < ? AND lng < ?", 1.0, 2.0, 3.0, 4.0).and_return(scope3)
+      expect(scope2).to receive(:where).with("lat > ? AND lng > ? AND lat < ? AND lng < ?", "1.0", "2.0", "3.0", "4.0").and_return(scope3)
       expect(scope3).to receive(:includes).and_return(scope4)
       expect(scope4).to receive(:page).with(nil).and_return(scope5)
       expect(scope5).to receive(:per).with(100).and_return(result)

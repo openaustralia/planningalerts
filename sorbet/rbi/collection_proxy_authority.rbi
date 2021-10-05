@@ -6,6 +6,6 @@
 
 class ActiveRecord::Associations::CollectionProxy < ::ActiveRecord::Relation
   def recent; end
-
   def with_first_version; end
+  def with_current_version; end
 end
