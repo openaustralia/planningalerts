@@ -8,6 +8,11 @@ class ReportsController
     include ::ActionController::Base::HelperMethods
     include ::ActionText::ContentHelper
     include ::ActionText::TagHelper
+    include ::ActionView::Helpers::CaptureHelper
+    include ::ActionView::Helpers::OutputSafetyHelper
+    include ::ActionView::Helpers::SanitizeHelper
+    include ::ActionView::Helpers::TagHelper
+    include ::ActionView::Helpers::TextHelper
     include ::Admin::ApplicationHelper
     include ::AlertMailerHelper
     include ::ApiHowtoHelper
