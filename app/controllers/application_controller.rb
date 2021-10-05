@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 # frozen_string_literal: true
 
 # Filters added to this controller apply to all controllers in the application.
@@ -7,6 +7,9 @@
 class ApplicationController < ActionController::Base
   extend T::Sig
   extend ThemesOnRails::ControllerAdditions::ClassMethods
+
+  # For sorbet
+  include Devise::Controllers::Helpers
 
   theme :theme_resolver
 
@@ -22,7 +25,7 @@ class ApplicationController < ActionController::Base
   sig { void }
   def authenticate_active_admin_user!
     authenticate_user!
-    render plain: "Not authorised", status: :forbidden unless current_user.admin?
+    render plain: "Not authorised", status: :forbidden unless T.must(current_user).admin?
   end
 
   private
