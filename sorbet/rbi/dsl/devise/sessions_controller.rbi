@@ -7,6 +7,8 @@ module Devise
   class SessionsController
     module HelperMethods
       include ::ActionController::Base::HelperMethods
+      include ::ActionDispatch::Routing::PolymorphicRoutes
+      include ::ActionDispatch::Routing::UrlFor
       include ::ActionText::ContentHelper
       include ::ActionText::TagHelper
       include ::ActionView::Helpers::CaptureHelper
@@ -24,6 +26,9 @@ module Devise
       include ::AuthoritiesHelper
       include ::CommentsHelper
       include ::DeviseHelper
+      include ::GeneratedPathHelpersModule
+      include ::GeneratedUrlHelpers
+      include ::GeneratedUrlHelpersModule
       include ::SignupHelper
       include ::StaticHelper
 

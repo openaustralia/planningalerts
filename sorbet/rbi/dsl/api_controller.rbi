@@ -6,6 +6,8 @@
 class ApiController
   module HelperMethods
     include ::ActionController::Base::HelperMethods
+    include ::ActionDispatch::Routing::PolymorphicRoutes
+    include ::ActionDispatch::Routing::UrlFor
     include ::ActionText::ContentHelper
     include ::ActionText::TagHelper
     include ::ActionView::Helpers::CaptureHelper
@@ -22,6 +24,9 @@ class ApiController
     include ::AuthoritiesHelper
     include ::CommentsHelper
     include ::DeviseHelper
+    include ::GeneratedPathHelpersModule
+    include ::GeneratedUrlHelpers
+    include ::GeneratedUrlHelpersModule
     include ::SignupHelper
     include ::StaticHelper
 
