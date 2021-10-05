@@ -148,7 +148,7 @@ gem "newrelic_rpm"
 gem "ransack", "2.3.2"
 
 # For rendering markdown in ATDIS specification
-gem "pandoc-ruby"
+gem "redcarpet"
 
 group :test do
   gem "capybara"
