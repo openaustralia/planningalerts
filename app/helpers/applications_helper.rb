@@ -1,8 +1,14 @@
-# typed: false
+# typed: strict
 # frozen_string_literal: true
 
 module ApplicationsHelper
   extend T::Sig
+
+  # For sorbet
+  include ActionView::Helpers::UrlHelper
+  include ActionView::Helpers::DateHelper
+  include ActionView::Helpers::AssetTagHelper
+  include ApplicationHelper
 
   sig { params(application: Application).returns(String) }
   def display_description_with_address(application)
