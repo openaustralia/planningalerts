@@ -1299,6 +1299,7 @@ module ActionView::Helpers::TextHelper
   include(::ActionView::Helpers::SanitizeHelper)
   include(::ActionView::Helpers::TagHelper)
 
+  def auto_link(text, *args, &block); end
   def concat(string); end
   def current_cycle(name = T.unsafe(nil)); end
   def cycle(first_value, *values); end
@@ -1313,11 +1314,26 @@ module ActionView::Helpers::TextHelper
 
   private
 
+  def auto_link_email_addresses(text, html_options = T.unsafe(nil), options = T.unsafe(nil)); end
+  def auto_link_urls(text, html_options = T.unsafe(nil), options = T.unsafe(nil)); end
+  def auto_linked?(left, right); end
+  def conditional_html_safe(target, condition); end
+  def conditional_sanitize(target, condition, sanitize_options = T.unsafe(nil)); end
   def cut_excerpt_part(part_position, part, separator, options); end
   def get_cycle(name); end
   def set_cycle(name, cycle_object); end
   def split_paragraphs(text); end
 end
+
+ActionView::Helpers::TextHelper::AUTO_EMAIL_LOCAL_RE = T.let(T.unsafe(nil), Regexp)
+
+ActionView::Helpers::TextHelper::AUTO_EMAIL_RE = T.let(T.unsafe(nil), Regexp)
+
+ActionView::Helpers::TextHelper::AUTO_LINK_CRE = T.let(T.unsafe(nil), Array)
+
+ActionView::Helpers::TextHelper::AUTO_LINK_RE = T.let(T.unsafe(nil), Regexp)
+
+ActionView::Helpers::TextHelper::BRACKETS = T.let(T.unsafe(nil), Hash)
 
 class ActionView::Helpers::TextHelper::Cycle
   def initialize(first_value, *values); end
@@ -1333,6 +1349,8 @@ class ActionView::Helpers::TextHelper::Cycle
   def previous_index; end
   def step_index(n); end
 end
+
+ActionView::Helpers::TextHelper::WORD_PATTERN = T.let(T.unsafe(nil), String)
 
 module ActionView::Helpers::TranslationHelper
   extend(::ActiveSupport::Concern)

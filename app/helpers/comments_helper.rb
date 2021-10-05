@@ -7,6 +7,9 @@ module CommentsHelper
   # to access our_sanitize
   include ApplicationHelper
 
+  # For sorbet
+  include ActionView::Helpers::TextHelper
+
   sig { params(text: String).returns(String) }
   def comment_as_html(text)
     # duplicate string to avoid "can't modify frozen String"
