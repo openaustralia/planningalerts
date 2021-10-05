@@ -1,6 +1,8 @@
 # typed: strict
 # frozen_string_literal: true
 
+require "geocoder/stores/active_record"
+
 class Application < ApplicationRecord
   extend T::Sig
 
