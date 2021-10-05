@@ -6,6 +6,9 @@ module ApiHowtoHelper
 
   include ApplicationsHelper
 
+  # See https://sorbet.org/docs/error-reference#4002
+  T.unsafe(self).include Rails.application.routes.url_helpers
+
   sig { params(url: String).returns(String) }
   def htmlify(url)
     url.gsub(/(\?|&|&amp;)([a-z_]+)=/, '\1<strong>\2</strong>=').gsub("&", "&amp;")
