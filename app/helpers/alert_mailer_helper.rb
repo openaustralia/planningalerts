@@ -1,8 +1,11 @@
-# typed: false
+# typed: strict
 # frozen_string_literal: true
 
 module AlertMailerHelper
   extend T::Sig
+
+  # For sorbet
+  include ActionView::Helpers::TextHelper
 
   sig { params(text: String).returns(String) }
   def capitalise_initial_character(text)
@@ -33,7 +36,7 @@ module AlertMailerHelper
   def comment_url_with_tracking(comment:)
     T.unsafe(self).application_url(
       base_tracking_params.merge(
-        id: comment.application.id,
+        id: comment.application&.id,
         anchor: "comment#{comment.id}",
         utm_campaign: "view-comment"
       )
