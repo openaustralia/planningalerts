@@ -154,8 +154,8 @@ end
 group :development do
   # For static type checking
   gem "sorbet"
-  gem "tapioca"
   gem "spoom"
+  gem "tapioca"
 
   # For guard and associated bits
   gem "growl"
