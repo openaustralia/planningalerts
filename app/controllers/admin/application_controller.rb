@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 # frozen_string_literal: true
 
 # All Administrate controllers inherit from this
@@ -13,7 +13,7 @@ module Admin
 
     def authenticate_admin
       authenticate_user!
-      render plain: "Not authorised", status: :forbidden unless current_user.admin?
+      render plain: "Not authorised", status: :forbidden unless T.must(current_user).admin?
     end
 
     # Override this value to specify the number of elements to display at a time
