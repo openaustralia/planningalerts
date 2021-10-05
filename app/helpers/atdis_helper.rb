@@ -1,10 +1,15 @@
-# typed: false
+# typed: strict
 # frozen_string_literal: true
 
 module AtdisHelper
   extend T::Sig
 
   include ApplicationsHelper
+
+  # For sorbet
+  include ActionView::Helpers::AssetTagHelper
+  include AbstractController::Rendering
+  include ERB::Util
 
   sig { params(value: T.untyped).returns(String) }
   def attribute_value(value)
