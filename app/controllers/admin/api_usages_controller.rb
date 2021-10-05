@@ -1,4 +1,4 @@
-# typed: ignore
+# typed: true
 # frozen_string_literal: true
 
 module Admin
@@ -11,11 +11,11 @@ module Admin
 
     sig { void }
     def index
-      typed_params = TypedParams[IndexParams].new.extract!(params)
+      # typed_params = TypedParams[IndexParams].new.extract!(params)
 
-      redirect_to(period: 30) and return if typed_params.period.nil?
+      redirect_to(period: 30) and return if params[:period].nil?
 
-      @period = T.let(typed_params.period, T.nilable(Integer))
+      @period = T.let(params[:period].to_i, T.nilable(Integer))
 
       # TODO: Make this less ugly
       redis = Redis.new(Rails.configuration.redis)
@@ -24,7 +24,7 @@ module Admin
       date_to = Time.zone.today
       # If period is 1 then we just want today's data roughly. If period is 2
       # we want today and yesterday
-      date_from = date_to - (T.must(typed_params.period) - 1)
+      date_from = date_to - (T.must(params[:period].to_i) - 1)
       @result = T.let(TopUsageApiUsersService.call(redis: redis, date_from: date_from,
                                                    date_to: date_to, number: 50),
                       T.nilable(T::Array[TopUsageApiUsersService::ApiKeyObjectRequests]))

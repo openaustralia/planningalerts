@@ -1,4 +1,4 @@
-# typed: ignore
+# typed: true
 # frozen_string_literal: true
 
 module Admin
@@ -23,8 +23,10 @@ module Admin
     end
 
     def site_setting
-      typed_params = TypedParams[WrappedSiteSettingParams].new.extract!(params)
-      typed_params.site_setting.serialize.symbolize_keys
+      {
+        streetview_in_emails_enabled: params[:site_setting][:streetview_in_emails_enabled],
+        streetview_in_app_enabled: params[:site_setting][:streetview_in_app_enabled]
+      }
     end
   end
 end
