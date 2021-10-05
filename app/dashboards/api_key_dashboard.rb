@@ -1,4 +1,4 @@
-# typed: false
+# typed: strict
 # frozen_string_literal: true
 
 require "administrate/base_dashboard"
@@ -77,6 +77,6 @@ class ApiKeyDashboard < Administrate::BaseDashboard
   #
   sig { params(api_key: ApiKey).returns(String) }
   def display_resource(api_key)
-    "ApiKey ##{api_key.id} (#{api_key.user.email})"
+    "ApiKey ##{api_key.id} (#{api_key.user&.email})"
   end
 end
