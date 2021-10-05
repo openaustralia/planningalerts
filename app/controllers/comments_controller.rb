@@ -1,4 +1,4 @@
-# typed: ignore
+# typed: true
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
@@ -8,9 +8,9 @@ class CommentsController < ApplicationController
   end
 
   def index
-    typed_params = TypedParams[IndexParams].new.extract!(params)
+    # typed_params = TypedParams[IndexParams].new.extract!(params)
     @description = +"Recent comments"
-    authority_id = typed_params.authority_id
+    authority_id = params[:authority_id]
     if authority_id
       authority = Authority.find_short_name_encoded!(authority_id)
       comments_to_display = authority.comments
@@ -19,8 +19,12 @@ class CommentsController < ApplicationController
       comments_to_display = Comment.all
     end
 
-    @comments = comments_to_display.confirmed.order("confirmed_at DESC").page(typed_params.page)
-    @rss = comments_url(typed_params.serialize.merge(format: "rss", page: nil))
+    @comments = comments_to_display.confirmed.order("confirmed_at DESC").page(params[:page])
+    @rss = comments_url(
+      authority_id: params[:authority_id],
+      format: "rss",
+      page: nil
+    )
 
     respond_to do |format|
       format.html
@@ -34,8 +38,8 @@ class CommentsController < ApplicationController
   end
 
   def confirmed
-    typed_params = TypedParams[ConfirmedParams].new.extract!(params)
-    @comment = Comment.find_by(confirm_id: typed_params.id)
+    # typed_params = TypedParams[ConfirmedParams].new.extract!(params)
+    @comment = Comment.find_by(confirm_id: params[:id])
     if @comment
       @comment.confirm!
       redirect_to @comment.application, notice: render_to_string(partial: "confirmed", locals: { comment: @comment })
@@ -49,8 +53,8 @@ class CommentsController < ApplicationController
   end
 
   def per_week
-    typed_params = TypedParams[PerWeekParams].new.extract!(params)
-    authority = Authority.find_short_name_encoded!(typed_params.authority_id)
+    # typed_params = TypedParams[PerWeekParams].new.extract!(params)
+    authority = Authority.find_short_name_encoded!(params[:authority_id])
 
     respond_to do |format|
       format.json { render json: authority.comments_per_week }
