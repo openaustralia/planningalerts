@@ -1,4 +1,4 @@
-# typed: ignore
+# typed: true
 # frozen_string_literal: true
 
 class ApplicationsController < ApplicationController
@@ -12,10 +12,10 @@ class ApplicationsController < ApplicationController
   end
 
   def index
-    typed_params = TypedParams[IndexParams].new.extract!(params)
+    # typed_params = TypedParams[IndexParams].new.extract!(params)
     @description = +"Recent applications"
 
-    authority_id = typed_params.authority_id
+    authority_id = params[:authority_id]
     if authority_id
       # TODO: Handle the situation where the authority name isn't found
       @authority = Authority.find_short_name_encoded!(authority_id)
@@ -26,7 +26,7 @@ class ApplicationsController < ApplicationController
       apps = Application.with_first_version.order("date_scraped DESC").where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
     end
 
-    @applications = apps.page(typed_params.page).per(30)
+    @applications = apps.page(params[:page]).per(30)
     @alert = Alert.new
   end
 
@@ -44,8 +44,8 @@ class ApplicationsController < ApplicationController
 
   # JSON api for returning the number of new scraped applications per day
   def per_day
-    typed_params = TypedParams[PerDayParams].new.extract!(params)
-    authority = Authority.find_short_name_encoded!(typed_params.authority_id)
+    # typed_params = TypedParams[PerDayParams].new.extract!(params)
+    authority = Authority.find_short_name_encoded!(params[:authority_id])
     respond_to do |format|
       format.js do
         render json: authority.new_applications_per_day
@@ -58,8 +58,8 @@ class ApplicationsController < ApplicationController
   end
 
   def per_week
-    typed_params = TypedParams[PerWeekParams].new.extract!(params)
-    authority = Authority.find_short_name_encoded!(typed_params.authority_id)
+    # typed_params = TypedParams[PerWeekParams].new.extract!(params)
+    authority = Authority.find_short_name_encoded!(params[:authority_id])
     respond_to do |format|
       format.js do
         render json: authority.new_applications_per_week
@@ -75,12 +75,12 @@ class ApplicationsController < ApplicationController
   end
 
   def address
-    typed_params = TypedParams[AddressParams].new.extract!(params)
-    @q = typed_params.q
-    @radius = typed_params.radius || 2000.0
-    @sort = typed_params.sort || "time"
+    # typed_params = TypedParams[AddressParams].new.extract!(params)
+    @q = params[:q]
+    @radius = params[:radius] ? params[:radius].to_f : 2000.0
+    @sort = params[:sort] || "time"
     per_page = 30
-    @page = typed_params.page
+    @page = params[:page]
     if @q
       result = GoogleGeocodeService.call(@q)
       top = result.top
@@ -101,7 +101,7 @@ class ApplicationsController < ApplicationController
           @applications = @applications
                           .reorder("date_scraped DESC")
         end
-        @applications = @applications.page(typed_params.page).per(per_page)
+        @applications = @applications.page(params[:page]).per(per_page)
         @rss = applications_path(format: "rss", address: @q, radius: @radius)
       end
     end
@@ -121,13 +121,13 @@ class ApplicationsController < ApplicationController
   end
 
   def search
-    typed_params = TypedParams[SearchParams].new.extract!(params)
+    # typed_params = TypedParams[SearchParams].new.extract!(params)
     # TODO: Fix this hacky ugliness
     per_page = request.format == Mime[:html] ? 30 : Application.max_per_page
 
-    @q = typed_params.q
+    @q = params[:q]
     if @q
-      @applications = Application.search(@q, fields: [:description], order: { date_scraped: :desc }, highlight: { tag: "<span class=\"highlight\">" }, page: typed_params.page, per_page: per_page)
+      @applications = Application.search(@q, fields: [:description], order: { date_scraped: :desc }, highlight: { tag: "<span class=\"highlight\">" }, page: params[:page], per_page: per_page)
       @rss = search_applications_path(format: "rss", q: @q, page: nil)
     end
     @description = @q ? "Search: #{@q}" : "Search"
@@ -143,8 +143,8 @@ class ApplicationsController < ApplicationController
   end
 
   def show
-    typed_params = TypedParams[ShowParams].new.extract!(params)
-    @application = Application.find(typed_params.id)
+    # typed_params = TypedParams[ShowParams].new.extract!(params)
+    @application = Application.find(params[:id])
     @comments = @application.comments.confirmed.order(:confirmed_at)
     @nearby_count = @application.find_all_nearest_or_recent.size
     @add_comment = AddComment.new(
@@ -165,14 +165,19 @@ class ApplicationsController < ApplicationController
   end
 
   def nearby
-    typed_params = TypedParams[NearbyParams].new.extract!(params)
-    @sort = typed_params.sort
-    @rss = nearby_application_url(typed_params.serialize.merge(format: "rss", page: nil))
+    # typed_params = TypedParams[NearbyParams].new.extract!(params)
+    @sort = params[:sort]
+    @rss = nearby_application_url(
+      id: params[:id],
+      sort: params[:sort],
+      format: "rss",
+      page: nil
+    )
 
     # TODO: Fix this hacky ugliness
     per_page = request.format == Mime[:html] ? 30 : Application.max_per_page
 
-    @application = Application.find(typed_params.id)
+    @application = Application.find(params[:id])
     case @sort
     when "time"
       @applications = @application.find_all_nearest_or_recent.reorder("application_versions.date_scraped DESC")
@@ -182,7 +187,7 @@ class ApplicationsController < ApplicationController
       redirect_to sort: "time"
       return
     end
-    @applications = @applications.page(typed_params.page).per(per_page)
+    @applications = @applications.page(params[:page]).per(per_page)
 
     respond_to do |format|
       format.html { render "nearby" }
@@ -197,8 +202,8 @@ class ApplicationsController < ApplicationController
   end
 
   def check_application_redirect
-    typed_params = TypedParams[CheckApplicationRedirectParams].new.extract!(params)
-    redirect = ApplicationRedirect.find_by(application_id: typed_params.id)
+    # typed_params = TypedParams[CheckApplicationRedirectParams].new.extract!(params)
+    redirect = ApplicationRedirect.find_by(application_id: params[:id])
     redirect_to(id: redirect.redirect_application_id) if redirect
   end
 end
