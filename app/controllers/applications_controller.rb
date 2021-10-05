@@ -123,7 +123,7 @@ class ApplicationsController < ApplicationController
   def search
     typed_params = TypedParams[SearchParams].new.extract!(params)
     # TODO: Fix this hacky ugliness
-    per_page = request.format == Mime[:html] ? 30 : Application.per_page
+    per_page = request.format == Mime[:html] ? 30 : Application.max_per_page
 
     @q = typed_params.q
     if @q
@@ -170,7 +170,7 @@ class ApplicationsController < ApplicationController
     @rss = nearby_application_url(typed_params.serialize.merge(format: "rss", page: nil))
 
     # TODO: Fix this hacky ugliness
-    per_page = request.format == Mime[:html] ? 30 : Application.per_page
+    per_page = request.format == Mime[:html] ? 30 : Application.max_per_page
 
     @application = Application.find(typed_params.id)
     case @sort
