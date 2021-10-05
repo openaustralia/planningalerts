@@ -1,4 +1,4 @@
-# typed: false
+# typed: strict
 # frozen_string_literal: true
 
 require "rss/1.0"
@@ -7,6 +7,10 @@ require "rss/2.0"
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
   extend T::Sig
+
+  # For sorbet
+  include ActionView::Helpers::UrlHelper
+  include ActionView::Helpers::TextHelper
 
   sig { params(options: T::Hash[Symbol, T.untyped]).returns(T::Boolean) }
   def page_matches?(options)
