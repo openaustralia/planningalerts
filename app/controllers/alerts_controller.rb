@@ -1,4 +1,4 @@
-# typed: ignore
+# typed: true
 # frozen_string_literal: true
 
 class AlertsController < ApplicationController
@@ -34,19 +34,17 @@ class AlertsController < ApplicationController
 
   sig { void }
   def new
-    typed_params = TypedParams[NewParams].new.extract!(params)
-    @alert = T.let(Alert.new(typed_params.serialize), T.nilable(Alert))
-    @set_focus_control = T.let(typed_params.address ? "alert_email" : "alert_address", T.nilable(String))
+    @alert = T.let(Alert.new(address: params[:address], email: params[:email]), T.nilable(Alert))
+    @set_focus_control = T.let(params[:address] ? "alert_email" : "alert_address", T.nilable(String))
   end
 
   sig { void }
   def create
-    typed_params = TypedParams[CreateParams].new.extract!(params)
-    address = typed_params.alert.address
+    address = params[:alert][:address]
     @address = T.let(address, T.nilable(String))
     @alert = T.let(
       BuildAlertService.call(
-        email: typed_params.alert.email,
+        email: params[:alert][:email],
         address: address,
         radius_meters: T.must(zone_sizes["l"])
       ),
@@ -58,30 +56,27 @@ class AlertsController < ApplicationController
 
   sig { void }
   def confirmed
-    typed_params = TypedParams[ConfirmedParams].new.extract!(params)
-    @alert = Alert.find_by!(confirm_id: typed_params.id)
+    @alert = Alert.find_by!(confirm_id: params[:id])
     @alert.confirm!
   end
 
   sig { void }
   def unsubscribe
-    typed_params = TypedParams[UnsubscribeParams].new.extract!(params)
-    @alert = Alert.find_by(confirm_id: typed_params.id)
+    @alert = Alert.find_by(confirm_id: params[:id])
     @alert&.unsubscribe!
   end
 
   # TODO: Split this into two actions
   sig { void }
   def area
-    typed_params = TypedParams[AreaParams].new.extract!(params)
     @zone_sizes = T.let(zone_sizes, T.nilable(T::Hash[String, Integer]))
-    alert = Alert.find_by!(confirm_id: typed_params.id)
+    alert = Alert.find_by!(confirm_id: params[:id])
     @alert = T.let(alert, T.nilable(Alert))
     if request.get? || request.head?
       @size = T.let(zone_sizes.invert[alert.radius_meters], T.nilable(String))
     else
       # TODO: If we seperate this action into two then we won't need to use T.must here
-      alert.radius_meters = T.must(zone_sizes[T.must(typed_params.size)])
+      alert.radius_meters = T.must(zone_sizes[T.must(params[:size])])
       alert.save!
       render "area_updated"
     end

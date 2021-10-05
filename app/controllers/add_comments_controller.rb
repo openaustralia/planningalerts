@@ -1,4 +1,4 @@
-# typed: ignore
+# typed: strict
 # frozen_string_literal: true
 
 class AddCommentsController < ApplicationController
@@ -6,34 +6,23 @@ class AddCommentsController < ApplicationController
 
   respond_to :html
 
-  class AddCommentParams < T::Struct
-    const :name, String
-    const :text, String
-    const :address, String
-    const :email, String
-    const :comment_for, T.nilable(String)
-  end
-
-  class CreateParams < T::Struct
-    const :application_id, Integer
-    const :little_sweety, T.nilable(String)
-    const :add_comment, AddCommentParams
-  end
-
   sig { void }
   def create
-    typed_params = TypedParams[CreateParams].new.extract!(params)
-    application = Application.find(typed_params.application_id)
+    application = Application.find(params[:application_id])
     @application = T.let(application, T.nilable(Application))
 
     # First check if the honeypot field has been filled out by a spam bot
     # If so, make it look like things worked but don't actually do anything
-    return if typed_params.little_sweety.present?
+    return if params[:little_sweety].present?
 
     add_comment = AddComment.new(
-      typed_params.add_comment.serialize.merge(
-        application: @application
-      )
+      name: params[:add_comment][:name],
+      text: params[:add_comment][:text],
+      address: params[:add_comment][:address],
+      email: params[:add_comment][:email],
+      # TODO: Remove comment_for
+      comment_for: params[:add_comment][:comment_for],
+      application: @application
     )
     @add_comment = T.let(add_comment, T.nilable(AddComment))
 
