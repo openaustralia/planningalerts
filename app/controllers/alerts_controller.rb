@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class AlertsController < ApplicationController
@@ -48,7 +48,7 @@ class AlertsController < ApplicationController
       @size = T.let(zone_sizes.invert[alert.radius_meters], T.nilable(String))
     else
       # TODO: If we seperate this action into two then we won't need to use T.must here
-      alert.radius_meters = T.must(zone_sizes[T.must(params[:size])])
+      alert.radius_meters = T.must(zone_sizes[params[:size]])
       alert.save!
       render "area_updated"
     end
