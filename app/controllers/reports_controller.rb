@@ -3,13 +3,11 @@
 
 class ReportsController < ApplicationController
   def new
-    # typed_params = TypedParams[NewParams].new.extract!(params)
     @comment = Comment.visible.find(params[:comment_id])
     @report = Report.new
   end
 
   def create
-    # typed_params = TypedParams[CreateParams].new.extract!(params)
     @comment = Comment.visible.find(params[:comment_id])
     @report = @comment.reports.build(
       name: params[:report][:name],

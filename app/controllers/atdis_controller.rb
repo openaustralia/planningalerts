@@ -3,7 +3,6 @@
 
 class AtdisController < ApplicationController
   def test
-    # typed_params = TypedParams[TestParams].new.extract!(params)
     if params[:url].present?
       @feed = Feed.create_from_url(params[:url])
       begin

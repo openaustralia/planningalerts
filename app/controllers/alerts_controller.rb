@@ -4,34 +4,6 @@
 class AlertsController < ApplicationController
   extend T::Sig
 
-  class NewParams < T::Struct
-    const :address, T.nilable(String)
-    const :email, T.nilable(String)
-  end
-
-  class AlertParams < T::Struct
-    const :address, String
-    const :email, String
-  end
-
-  class CreateParams < T::Struct
-    const :alert, AlertParams
-  end
-
-  class ConfirmedParams < T::Struct
-    const :id, String
-  end
-
-  class UnsubscribeParams < T::Struct
-    const :id, String
-  end
-
-  class AreaParams < T::Struct
-    const :id, String
-    # TODO: Use an enum here?
-    const :size, T.nilable(String)
-  end
-
   sig { void }
   def new
     @alert = T.let(Alert.new(address: params[:address], email: params[:email]), T.nilable(Alert))

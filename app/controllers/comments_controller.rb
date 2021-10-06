@@ -2,13 +2,7 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  class IndexParams < T::Struct
-    const :authority_id, T.nilable(String)
-    const :page, T.nilable(Integer)
-  end
-
   def index
-    # typed_params = TypedParams[IndexParams].new.extract!(params)
     @description = +"Recent comments"
     authority_id = params[:authority_id]
     if authority_id
@@ -33,12 +27,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  class ConfirmedParams < T::Struct
-    const :id, String
-  end
-
   def confirmed
-    # typed_params = TypedParams[ConfirmedParams].new.extract!(params)
     @comment = Comment.find_by(confirm_id: params[:id])
     if @comment
       @comment.confirm!
@@ -48,12 +37,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  class PerWeekParams < T::Struct
-    const :authority_id, String
-  end
-
   def per_week
-    # typed_params = TypedParams[PerWeekParams].new.extract!(params)
     authority = Authority.find_short_name_encoded!(params[:authority_id])
 
     respond_to do |format|

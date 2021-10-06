@@ -6,13 +6,7 @@ class ApplicationsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: %i[per_day per_week]
   before_action :check_application_redirect, only: %i[show nearby]
 
-  class IndexParams < T::Struct
-    const :authority_id, T.nilable(String)
-    const :page, T.nilable(Integer)
-  end
-
   def index
-    # typed_params = TypedParams[IndexParams].new.extract!(params)
     @description = +"Recent applications"
 
     authority_id = params[:authority_id]
@@ -38,13 +32,8 @@ class ApplicationsController < ApplicationController
                     .limit(20)
   end
 
-  class PerDayParams < T::Struct
-    const :authority_id, String
-  end
-
   # JSON api for returning the number of new scraped applications per day
   def per_day
-    # typed_params = TypedParams[PerDayParams].new.extract!(params)
     authority = Authority.find_short_name_encoded!(params[:authority_id])
     respond_to do |format|
       format.js do
@@ -53,12 +42,7 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  class PerWeekParams < T::Struct
-    const :authority_id, String
-  end
-
   def per_week
-    # typed_params = TypedParams[PerWeekParams].new.extract!(params)
     authority = Authority.find_short_name_encoded!(params[:authority_id])
     respond_to do |format|
       format.js do
@@ -67,15 +51,7 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  class AddressParams < T::Struct
-    const :q, T.nilable(String)
-    const :radius, T.nilable(Float)
-    const :sort, T.nilable(String)
-    const :page, T.nilable(Integer)
-  end
-
   def address
-    # typed_params = TypedParams[AddressParams].new.extract!(params)
     @q = params[:q]
     @radius = params[:radius] ? params[:radius].to_f : 2000.0
     @sort = params[:sort] || "time"
@@ -115,13 +91,7 @@ class ApplicationsController < ApplicationController
     render "address_results" if @q && @error.nil?
   end
 
-  class SearchParams < T::Struct
-    const :q, T.nilable(String)
-    const :page, T.nilable(Integer)
-  end
-
   def search
-    # typed_params = TypedParams[SearchParams].new.extract!(params)
     # TODO: Fix this hacky ugliness
     per_page = request.format == Mime[:html] ? 30 : Application.max_per_page
 
@@ -138,12 +108,7 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  class ShowParams < T::Struct
-    const :id, Integer
-  end
-
   def show
-    # typed_params = TypedParams[ShowParams].new.extract!(params)
     @application = Application.find(params[:id])
     @comments = @application.comments.confirmed.order(:confirmed_at)
     @nearby_count = @application.find_all_nearest_or_recent.size
@@ -158,14 +123,7 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  class NearbyParams < T::Struct
-    const :id, Integer
-    const :sort, T.nilable(String)
-    const :page, T.nilable(Integer)
-  end
-
   def nearby
-    # typed_params = TypedParams[NearbyParams].new.extract!(params)
     @sort = params[:sort]
     @rss = nearby_application_url(
       id: params[:id],
@@ -197,12 +155,7 @@ class ApplicationsController < ApplicationController
 
   private
 
-  class CheckApplicationRedirectParams < T::Struct
-    const :id, Integer
-  end
-
   def check_application_redirect
-    # typed_params = TypedParams[CheckApplicationRedirectParams].new.extract!(params)
     redirect = ApplicationRedirect.find_by(application_id: params[:id])
     redirect_to(id: redirect.redirect_application_id) if redirect
   end
