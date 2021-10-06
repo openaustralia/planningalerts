@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module ApiKeys
-  class RequestNonCommercialsController < ApplicationController
+  class NonCommercialsController < ApplicationController
     def new
     end
   end
