@@ -20,11 +20,6 @@ class QueryParamsPresentConstraint
 end
 
 Rails.application.routes.draw do
-  ActiveAdmin.routes(self)
-  namespace "nimda" do
-    resource :site_settings, only: :update
-  end
-
   namespace :admin do
     resources :applications, only: [:index, :show, :destroy]
     resources :authorities, except: :destroy do

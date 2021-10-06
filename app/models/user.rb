@@ -10,8 +10,6 @@ class User < ApplicationRecord
          :trackable, :validatable, :confirmable
   after_create :create_api_key
   has_many :api_keys, dependent: :destroy
-  # Doing this for the benefit of activeadmin
-  accepts_nested_attributes_for :api_keys
 
   sig { params(notification: T.untyped, args: T.untyped).void }
   def send_devise_notification(notification, *args)
