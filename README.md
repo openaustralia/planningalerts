@@ -37,15 +37,15 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 ### Type checking
 
-Ruby is a dynamic language with very fluid types. This makes it great
-for quick development and a fun developer experience. However I (Matthew Landauer) have come to realise over the last few years as I've been
-using modern strongly typed languages like Go, Typescript and Elm that
-many of the painful aspects of typed languages that I'd grown up with (Mostly C/C++) were not there anymore and they were replaced with a
-greater sense of security when refactoring and working on larger
+Ruby is a dynamic language. This makes it great
+for quick development with a fun developer experience.
+
+However strong typing can really help.
+It gives a greater sense of security when refactoring and working on larger
 code-bases.
 
-So, with the release of [Sorbet](https://sorbet.org/) from [Stripe](https://stripe.com/) it is time to apply some of that static
-typing to PlanningAlerts.
+So, we use [Sorbet](https://sorbet.org/) from Stripe
+to add strong typing to PlanningAlerts.
 
 To run the type checker:
 ```
