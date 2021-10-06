@@ -4,27 +4,41 @@
 
 %h4 Terms of use
 
-
-Things to ask:
-* Organisation
-* Purpose of use / application
-* Public URL
-* Open source? (repo)
-* Explain exactly why your use case is non-commercial
-* Expected number of API requests per day
-
 = semantic_form_for 'api_key_request_non_commercial' do |f|
-  = f.input :organisation
-  = f.input :purpose, as: :text
-  = f.input :public_url
-  = f.input :repo_url
-  = f.input :why_non_commercial,
-            as: :text,
-            label: "Explain exactly why your use is non-commercial"
+  = f.input :organisation,
+            placeholder: "e.g. Acme Conservation Foundation",
+            hint: "Leave this blank if you are applying as an individual",
+            required: false
+  = f.input :public_url,
+            as: :url,
+            hint: "A publically accessible URL for your project",
+            placeholder: "e.g. https://www.acmeconservation.org.au/mylocaltrees",
+            required: false
+  = f.input :open_source,
+            as: :boolean,
+            hint: "Is the software that you are creating released under an open source license?"
+  = f.input :repo_url,
+            placeholder: "https://github.com/acmeconservation/mylocaltrees/",
+            as: :url,
+            hint: "Where to view the source code for your software",
+            required: false
   = f.input :expected_max_api_requests_per_day,
             as: :radio,
             collection: ["0 - 100", "101 - 1000", "1001 - 10,000", "more than 10,000"],
-            label: "Expected maximum number of API requests per day"
+            label: "Max API requests per day",
+            hint: "Expected maximum number of API requests per day. Take your best estimate. This doesn't have to be exact. Keep in mind that each API request returns a maximum of #{Application.per_page} applications"
+  = f.input :purpose,
+            as: :text,
+            placeholder: "e.g. \"My Local Trees\" will use the API to show all tree applications on a map. The aim is to give the members of our not-for-profit new tools to protect trees around our city."
+  = f.input :why_non_commercial,
+            as: :text,
+            label: "How is it non-commercial?",
+            hint: "Explain in detail why your particular use is non-commercial. Please bear in mind our guidelines above on what constitutes non-commercial.",
+            placeholder: "e.g. We are a not-for-profit. The project is unfunded and created by unpaid volunteers. The result will be freely accessible to our members as well as the general public."
+  = f.actions do
+    = f.action :submit,
+               label: "Submit request",
+               button_html: { class: "button button-action" }
 
 %h4 What happens next?
 
