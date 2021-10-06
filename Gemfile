@@ -133,6 +133,9 @@ gem "health_check"
 # Using New Relic temporarily to debug some performance issues
 gem "newrelic_rpm"
 
+# For rendering markdown in ATDIS specification
+gem "redcarpet"
+
 group :test do
   gem "capybara"
   gem "climate_control"
