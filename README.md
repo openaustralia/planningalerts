@@ -58,6 +58,8 @@ for all methods.
 
 Also as Sorbet is relatively new things are bound to change quite quickly.
 
+We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all our rbi files. We **don't** use `bundle exec srb rbi ...`.
+
 ### Scraping and sending emails in development
 
 **Step 1 - Scrape DAs**
