@@ -1,0 +1,50 @@
+%h3 Sign up for access to the API key
+
+%p
+  You're signing up to the ... plan
+
+%p
+  Once you agree to the contract below, we will review your details and activate
+  your API key. You will then be invoiced for the period in advance from when you sign up to the
+  end of the calendar month (pro-rated). From then on
+  you will be invoiced on the first of each calendar month for the month of usage in advance.
+
+%p
+  Standard payment terms are 7 days.
+
+%p
+  For an annual payment you will be invoiced in advance on the day you sign up
+
+= semantic_form_for 'api_key_request_non_commercial' do |f|
+  = f.inputs name: "Company" do
+    = f.input :name,
+              placeholder: "e.g. Acme Conservation Foundation",
+              required: true
+    = f.input :website,
+              as: :url,
+              placeholder: "e.g. https://www.acmeconservation.org.au/mylocaltrees",
+              required: false
+    -# Multiple things for postal address
+    = f.input :postal_address
+    = f.input :abn
+  = f.inputs name: "Main contact" do
+    = f.input :name
+    = f.input :email
+    = f.input :phone
+  = f.inputs name: "Technical contact" do
+    = f.input :name
+    = f.input :email
+    = f.input :phone
+  = f.inputs name: "Billing contact" do
+    = f.input :name
+    = f.input :email
+    = f.input :phone
+  = f.input :purpose,
+            as: :text,
+            placeholder: "e.g. \"My Local foo Trees\" will use the API to show all tree applications on a map. The aim is to give the members of our not-for-profit new tools to protect trees around our city."
+  = f.input :agree_contract,
+            as: :boolean
+  = f.actions do
+    = f.action :submit,
+               label: "Submit request",
+               button_html: { class: "button button-action" }

@@ -129,6 +129,7 @@ Rails.application.routes.draw do
   namespace :api_keys do
     resource :non_commercial, only: [:new, :create]
     resources :requests, only: [:new]
+    resources :paid, only: [:new, :create]
   end
 
   get "api/howto" => "api#howto", as: :api_howto
