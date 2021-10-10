@@ -121,9 +121,9 @@ body {
     color: #ffffff;
     text-decoration: underline;
   }
-  .container {
+  .pa-container {
     padding-top: 1em;
-    padding-bottom: 1em;    
+    padding-bottom: 1em;
   }
 }
 
@@ -263,7 +263,7 @@ hr {
   padding: 0;
 }
 
-.container {
+.pa-container {
   .button {
     @include bourbon-button($lightest-cool-highlight);
     font-weight: normal;
@@ -374,7 +374,7 @@ summary {
 }
 
 /* Attention grabbers */
-body .container .attention {
+body .pa-container .attention {
   @include boxed-content;
   padding: 1em;
   margin-bottom: 1em;

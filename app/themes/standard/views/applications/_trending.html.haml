@@ -3,7 +3,7 @@
   %p
     The most commented on recent applications
 
-  .container
+  .pa-container
     %ol= render partial: "application_trending", collection: applications, as: :application
 
   = link_to "More&hellip;".html_safe, trending_applications_path, class: "cta"

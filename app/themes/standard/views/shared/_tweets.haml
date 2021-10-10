@@ -1,6 +1,6 @@
 #tweets-wrapper
   - cache "tweets", expires_in: 30.minutes do
-    .tweets.container
+    .tweets.pa-container
       %div
         %h4 Tweets from PlanningAlerts
         %ul= render partial: "shared/tweet", collection: TwitterFeed.new("PlanningAlerts", logger).items, as: :item
