@@ -240,125 +240,70 @@ describe ApiController do
   end
 
   describe "#point" do
+    # Calls using address are no longer supported. See
+    # https://github.com/openaustralia/planningalerts/issues/1356
+    it "should error when using deprecated API call" do
+      get :point, params: { format: "rss", address: "24 Bruce Road Glenbrook" }
+      expect(response.body).to eq("Bad request: Invalid parameter(s) used: address")
+      expect(response.code).to eq("400")
+    end
+
     it_behaves_like "an authenticated API" do
       let(:method) { :point }
-      let(:params) { { format: "js", address: "24 Bruce Road Glenbrook", radius: 4000 } }
+      let(:params) { { format: "js", lat: 1.0, lng: 2.0 } }
     end
 
-    describe "failed search by address" do
-      it "should error if some unknown parameters are included" do
-        get :point, params: { format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000, foo: 200, bar: "fiddle" }
-        expect(response.body).to eq("Bad request: Invalid parameter(s) used: bar, foo")
-        expect(response.code).to eq("400")
-      end
+    before :each do
+      @result = Application.none
+      scope1 = Application.none
+      scope2 = Application.none
+
+      allow(Application).to receive(:near).and_return(scope1)
+      allow(scope1).to receive(:includes).and_return(scope2)
+      allow(scope2).to receive(:paginate).and_return(@result)
     end
 
-    # TODO: This call is deprecated. See https://github.com/openaustralia/planningalerts/issues/1356
-    describe "search by address" do
-      context "able to geocode address" do
-        before :each do
-          location_result = double
-          location = double(lat: 1.0, lng: 2.0, full_address: "24 Bruce Road, Glenbrook NSW 2773")
-          @result = Application.none
-          scope1 = Application.none
-          scope2 = Application.none
-
-          expect(GoogleGeocodeService).to receive(:call).with("24 Bruce Road Glenbrook").and_return(location_result)
-          expect(location_result).to receive(:top).and_return(location)
-          allow(Application).to receive(:near).and_return(scope1)
-          allow(scope1).to receive(:includes).and_return(scope2)
-          allow(scope2).to receive(:paginate).and_return(@result)
-        end
-
-        it "should find recent applications near the address" do
-          get :point, params: { key: key.value, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000 }
-          expect(assigns[:applications]).to eq(@result)
-          # Should use the normalised form of the address in the description
-          expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 24 Bruce Road, Glenbrook NSW 2773")
-        end
-
-        it "should find recent applications near the address using the old parameter name" do
-          get :point, params: { key: key.value, format: "rss", address: "24 Bruce Road Glenbrook", area_size: 4000 }
-          expect(assigns[:applications]).to eq(@result)
-          expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 24 Bruce Road, Glenbrook NSW 2773")
-        end
-
-        it "should log the api call" do
-          Timecop.freeze do
-            # There is some truncation that happens in the serialisation
-            expected_time = Time.at(Time.zone.now.to_f).utc
-            expect(LogApiCallService).to receive(:call).with(
-              time: expected_time,
-              api_key: key.value,
-              ip_address: "0.0.0.0",
-              query: "/applications.rss?address=24+Bruce+Road+Glenbrook&key=#{CGI.escape(key.value)}&radius=4000",
-              params: {
-                "controller" => "api",
-                "action" => "point",
-                "format" => "rss",
-                "address" => "24 Bruce Road Glenbrook",
-                "key" => key.value,
-                "radius" => "4000"
-              },
-              user_agent: "Rails Testing"
-            )
-            Sidekiq::Testing.inline! do
-              get :point, params: { key: key.value, format: "rss", address: "24 Bruce Road Glenbrook", radius: 4000 }
-            end
-          end
-        end
-
-        it "should use a search radius of 2000 when none is specified" do
-          result = Application.none
-          scope1 = Application.none
-          scope2 = Application.none
-          allow(Application).to receive(:near).and_return(scope1)
-          allow(scope1).to receive(:includes).and_return(scope2)
-          allow(scope2).to receive(:paginate).and_return(result)
-
-          get :point, params: { key: key.value, address: "24 Bruce Road Glenbrook", format: "rss" }
-          expect(assigns[:applications]).to eq(result)
-          expect(assigns[:description]).to eq("Recent applications within 2 kilometres of 24 Bruce Road, Glenbrook NSW 2773")
-        end
-      end
-
-      context "geocoding error on address" do
-        before :each do
-          location_result = double
-          @result = double
-
-          expect(GoogleGeocodeService).to receive(:call).with("24 Bruce Road Glenbrook").and_return(location_result)
-          expect(location_result).to receive(:top).and_return(nil)
-          allow(Application).to receive_message_chain(:near, :paginate).and_return(@result)
-        end
-
-        subject { get :point, params: { key: key.value, address: "24 Bruce Road Glenbrook", format: "rss" } }
-        it { expect(subject).to_not be_successful }
-        it { expect(subject.body).to eq "could not geocode address" }
-      end
+    it "should find recent applications near the point" do
+      get :point, params: { key: key.value, format: "rss", lat: 1.0, lng: 2.0, radius: 4000 }
+      expect(assigns[:applications]).to eq(@result)
+      expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 1.0,2.0")
     end
 
-    describe "search by lat & lng" do
-      before :each do
-        @result = Application.none
-        scope1 = Application.none
-        scope2 = Application.none
+    it "should find recent applications near the point using the old parameter name" do
+      get :point, params: { key: key.value, format: "rss", lat: 1.0, lng: 2.0, area_size: 4000 }
+      expect(assigns[:applications]).to eq(@result)
+      expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 1.0,2.0")
+    end
 
-        allow(Application).to receive(:near).and_return(scope1)
-        allow(scope1).to receive(:includes).and_return(scope2)
-        allow(scope2).to receive(:paginate).and_return(@result)
-      end
+    it "should use a search radius of 2000 when none is specified" do
+      get :point, params: { key: key.value, format: "rss", lat: 1.0, lng: 2.0 }
+      expect(assigns[:applications]).to eq(@result)
+      expect(assigns[:description]).to eq("Recent applications within 2 kilometres of 1.0,2.0")
+    end
 
-      it "should find recent applications near the point" do
-        get :point, params: { key: key.value, format: "rss", lat: 1.0, lng: 2.0, radius: 4000 }
-        expect(assigns[:applications]).to eq(@result)
-        expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 1.0,2.0")
-      end
-
-      it "should find recent applications near the point using the old parameter name" do
-        get :point, params: { key: key.value, format: "rss", lat: 1.0, lng: 2.0, area_size: 4000 }
-        expect(assigns[:applications]).to eq(@result)
-        expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 1.0,2.0")
+    it "should log the api call" do
+      Timecop.freeze do
+        # There is some truncation that happens in the serialisation
+        expected_time = Time.at(Time.zone.now.to_f).utc
+        expect(LogApiCallService).to receive(:call).with(
+          time: expected_time,
+          api_key: key.value,
+          ip_address: "0.0.0.0",
+          query: "/applications.rss?key=#{CGI.escape(key.value)}&lat=1.0&lng=2.0&radius=4000",
+          params: {
+            "controller" => "api",
+            "action" => "point",
+            "format" => "rss",
+            "lat" => "1.0",
+            "lng" => "2.0",
+            "key" => key.value,
+            "radius" => "4000"
+          },
+          user_agent: "Rails Testing"
+        )
+        Sidekiq::Testing.inline! do
+          get :point, params: { key: key.value, format: "rss", lat: 1.0, lng: 2.0, radius: 4000 }
+        end
       end
     end
   end

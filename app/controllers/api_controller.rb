@@ -51,22 +51,8 @@ class ApiController < ApplicationController
              else
                2000.0
              end
-    address = params[:address]
-    # Search by address in the API is deprecated. See
-    # https://github.com/openaustralia/planningalerts/issues/1356
-    # TODO: Remove this as soon as nobody is using it anymore or a
-    # date has passed that we've set
-    if address
-      location = GoogleGeocodeService.call(address).top
-      if location.nil?
-        render_error("could not geocode address", :bad_request)
-        return
-      end
-      location_text = location.full_address
-    else
-      location = Location.new(lat: params[:lat].to_f, lng: params[:lng].to_f)
-      location_text = location.to_s
-    end
+    location = Location.new(lat: params[:lat].to_f, lng: params[:lng].to_f)
+    location_text = location.to_s
     api_render(
       Application.with_current_version.order("date_scraped DESC").near(
         [location.lat, location.lng], radius / 1000,
@@ -160,7 +146,7 @@ class ApiController < ApplicationController
       page
       postcode
       suburb state
-      address lat lng radius area_size
+      lat lng radius area_size
       bottom_left_lat bottom_left_lng top_right_lat top_right_lng
       count v key since_id date_scraped
     ]
@@ -295,7 +281,7 @@ class ApiController < ApplicationController
   sig { returns(T.untyped) }
   def permitted_params
     params.permit(
-      :authority_id, :suburb, :state, :postcode, :radius, :area_size, :address,
+      :authority_id, :suburb, :state, :postcode, :radius, :area_size,
       :lat, :lng, :bottom_left_lat, :bottom_left_lng, :top_right_lat,
       :top_right_lng, :date_scraped, :since_id, :key, :count, :page, :v
     )
