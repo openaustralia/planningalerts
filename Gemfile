@@ -114,7 +114,6 @@ gem "counter_culture"
 gem "rack-cors"
 
 # For type checking
-gem "sorbet-rails"
 gem "sorbet-runtime"
 
 # For automatic creation of github issues when scrapers are broken

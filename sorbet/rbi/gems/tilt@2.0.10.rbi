@@ -132,6 +132,8 @@ class Tilt::RDocTemplate < ::Tilt::Template
   def prepare; end
 end
 
+Tilt::RedcarpetTemplate = Tilt::Redcarpet2Template
+
 class Tilt::SassTemplate < ::Tilt::Template
   def allows_script?; end
   def evaluate(scope, locals, &block); end
@@ -207,3 +209,21 @@ class Tilt::Template
 end
 
 Tilt::VERSION = T.let(T.unsafe(nil), String)
+
+class Tilt::Redcarpet1Template < ::Tilt::Template
+  def allows_script?; end
+  def evaluate(scope, locals, &block); end
+  def flags; end
+  def prepare; end
+end
+
+Tilt::Redcarpet1Template::ALIAS = T.let(T.unsafe(nil), Hash)
+
+Tilt::Redcarpet1Template::FLAGS = T.let(T.unsafe(nil), Array)
+
+class Tilt::Redcarpet2Template < ::Tilt::Template
+  def allows_script?; end
+  def evaluate(scope, locals, &block); end
+  def generate_renderer; end
+  def prepare; end
+end
