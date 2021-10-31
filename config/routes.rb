@@ -162,7 +162,7 @@ Rails.application.routes.draw do
   get "donations/new", to: redirect("https://www.oaf.org.au/donate/planningalerts/")
   get "donations/create", to: redirect("https://www.oaf.org.au/donate/planningalerts/")
   get "donations", to: redirect("https://www.oaf.org.au/donate/planningalerts/")
-  get "donate", to: redirect("https://www.oaf.org.au/donate/planningalerts/")
+  get "donate", to: redirect("https://www.oaf.org.au/donate/planningalerts/"), as: nil
 
   root to: "applications#address"
 
