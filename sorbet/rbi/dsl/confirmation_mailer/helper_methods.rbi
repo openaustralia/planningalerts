@@ -3,9 +3,8 @@
 # Please instead update this file by running `bin/tapioca dsl ConfirmationMailer::HelperMethods`.
 
 # typed: true
-class ConfirmationMailer
-  module HelperMethods
-    include GeneratedPathHelpersModule
-    include GeneratedUrlHelpersModule
-  end
+
+module ConfirmationMailer::HelperMethods
+  include GeneratedUrlHelpersModule
+  include GeneratedPathHelpersModule
 end

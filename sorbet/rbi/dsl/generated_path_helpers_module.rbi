@@ -3,9 +3,10 @@
 # Please instead update this file by running `bin/tapioca dsl GeneratedPathHelpersModule`.
 
 # typed: true
+
 module GeneratedPathHelpersModule
-  include ::ActionDispatch::Routing::PolymorphicRoutes
   include ::ActionDispatch::Routing::UrlFor
+  include ::ActionDispatch::Routing::PolymorphicRoutes
 
   sig { params(args: T.untyped).returns(String) }
   def about_path(*args); end

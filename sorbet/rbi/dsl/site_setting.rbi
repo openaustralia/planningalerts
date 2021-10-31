@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl SiteSetting`.
 
 # typed: true
+
 class SiteSetting
   include GeneratedAttributeMethods
 

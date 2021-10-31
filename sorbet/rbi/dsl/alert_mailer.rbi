@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl AlertMailer`.
 
 # typed: true
+
 class AlertMailer
   sig { params(alert: Alert, applications: T::Array[Application], comments: T::Array[Comment]).returns(::ActionMailer::MessageDelivery) }
   def self.alert(alert, applications, comments = T.unsafe(nil)); end

@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl GeocodeQuery`.
 
 # typed: true
+
 class GeocodeQuery
   include GeneratedAssociationMethods
   include GeneratedAttributeMethods
@@ -14,7 +15,7 @@ class GeocodeQuery
     sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
     def geocode_result_ids=(ids); end
 
-    sig { returns(::ActiveRecord::Associations::CollectionProxy[GeocodeResult]) }
+    sig { returns(::ActiveRecord::Associations::CollectionProxy[::GeocodeResult]) }
     def geocode_results; end
 
     sig { params(value: T::Enumerable[::GeocodeResult]).void }

@@ -3,12 +3,11 @@
 # Please instead update this file by running `bin/tapioca dsl ActiveStorage::AnalyzeJob`.
 
 # typed: true
-module ActiveStorage
-  class AnalyzeJob
-    sig { params(blob: T.untyped).returns(T.any(ActiveStorage::AnalyzeJob, FalseClass)) }
-    def self.perform_later(blob); end
 
-    sig { params(blob: T.untyped).returns(T.untyped) }
-    def self.perform_now(blob); end
-  end
+class ActiveStorage::AnalyzeJob
+  sig { params(blob: T.untyped).returns(T.any(ActiveStorage::AnalyzeJob, FalseClass)) }
+  def self.perform_later(blob); end
+
+  sig { params(blob: T.untyped).returns(T.untyped) }
+  def self.perform_now(blob); end
 end

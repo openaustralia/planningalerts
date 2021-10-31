@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl Alert`.
 
 # typed: true
+
 class Alert
   include GeneratedAttributeMethods
   extend GeneratedRelationMethods

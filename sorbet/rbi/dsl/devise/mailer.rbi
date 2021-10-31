@@ -3,23 +3,22 @@
 # Please instead update this file by running `bin/tapioca dsl Devise::Mailer`.
 
 # typed: true
-module Devise
-  class Mailer
-    include GeneratedUrlHelpersModule
 
-    sig { params(record: T.untyped, token: T.untyped, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
-    def self.confirmation_instructions(record, token, opts = T.unsafe(nil)); end
+class Devise::Mailer
+  include GeneratedUrlHelpersModule
 
-    sig { params(record: T.untyped, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
-    def self.email_changed(record, opts = T.unsafe(nil)); end
+  sig { params(record: T.untyped, token: T.untyped, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
+  def self.confirmation_instructions(record, token, opts = T.unsafe(nil)); end
 
-    sig { params(record: T.untyped, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
-    def self.password_change(record, opts = T.unsafe(nil)); end
+  sig { params(record: T.untyped, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
+  def self.email_changed(record, opts = T.unsafe(nil)); end
 
-    sig { params(record: T.untyped, token: T.untyped, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
-    def self.reset_password_instructions(record, token, opts = T.unsafe(nil)); end
+  sig { params(record: T.untyped, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
+  def self.password_change(record, opts = T.unsafe(nil)); end
 
-    sig { params(record: T.untyped, token: T.untyped, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
-    def self.unlock_instructions(record, token, opts = T.unsafe(nil)); end
-  end
+  sig { params(record: T.untyped, token: T.untyped, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
+  def self.reset_password_instructions(record, token, opts = T.unsafe(nil)); end
+
+  sig { params(record: T.untyped, token: T.untyped, opts: T.untyped).returns(::ActionMailer::MessageDelivery) }
+  def self.unlock_instructions(record, token, opts = T.unsafe(nil)); end
 end

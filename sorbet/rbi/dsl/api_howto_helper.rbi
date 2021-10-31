@@ -3,7 +3,8 @@
 # Please instead update this file by running `bin/tapioca dsl ApiHowtoHelper`.
 
 # typed: true
+
 module ApiHowtoHelper
-  include GeneratedPathHelpersModule
   include GeneratedUrlHelpersModule
+  include GeneratedPathHelpersModule
 end

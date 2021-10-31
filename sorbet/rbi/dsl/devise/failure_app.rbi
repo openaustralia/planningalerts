@@ -3,9 +3,8 @@
 # Please instead update this file by running `bin/tapioca dsl Devise::FailureApp`.
 
 # typed: true
-module Devise
-  class FailureApp
-    include GeneratedPathHelpersModule
-    include GeneratedUrlHelpersModule
-  end
+
+class Devise::FailureApp
+  include GeneratedUrlHelpersModule
+  include GeneratedPathHelpersModule
 end

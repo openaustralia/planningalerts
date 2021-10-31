@@ -3,9 +3,11 @@
 # Please instead update this file by running `bin/tapioca dsl ActionView::Helpers`.
 
 # typed: true
-module ActionView
-  module Helpers
-    include GeneratedPathHelpersModule
-    include GeneratedUrlHelpersModule
-  end
+
+module ActionView::Helpers
+  include GeneratedUrlHelpersModule
+  include GeneratedPathHelpersModule
+
+  mixes_in_class_methods ::ActionView::Helpers::UrlHelper::ClassMethods
+  mixes_in_class_methods ::ActionView::Helpers::SanitizeHelper::ClassMethods
 end

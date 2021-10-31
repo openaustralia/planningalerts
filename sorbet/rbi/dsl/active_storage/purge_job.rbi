@@ -3,12 +3,11 @@
 # Please instead update this file by running `bin/tapioca dsl ActiveStorage::PurgeJob`.
 
 # typed: true
-module ActiveStorage
-  class PurgeJob
-    sig { params(blob: T.untyped).returns(T.any(ActiveStorage::PurgeJob, FalseClass)) }
-    def self.perform_later(blob); end
 
-    sig { params(blob: T.untyped).returns(T.untyped) }
-    def self.perform_now(blob); end
-  end
+class ActiveStorage::PurgeJob
+  sig { params(blob: T.untyped).returns(T.any(ActiveStorage::PurgeJob, FalseClass)) }
+  def self.perform_later(blob); end
+
+  sig { params(blob: T.untyped).returns(T.untyped) }
+  def self.perform_now(blob); end
 end

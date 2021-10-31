@@ -3,26 +3,11 @@
 # Please instead update this file by running `bin/tapioca dsl ActionMailer::DeliveryJob`.
 
 # typed: true
-module ActionMailer
-  class DeliveryJob
-    sig do
-      params(
-        mailer: T.untyped,
-        mail_method: T.untyped,
-        delivery_method: T.untyped,
-        args: T.untyped
-      ).returns(T.any(ActionMailer::DeliveryJob, FalseClass))
-    end
-    def self.perform_later(mailer, mail_method, delivery_method, *args); end
 
-    sig do
-      params(
-        mailer: T.untyped,
-        mail_method: T.untyped,
-        delivery_method: T.untyped,
-        args: T.untyped
-      ).returns(T.untyped)
-    end
-    def self.perform_now(mailer, mail_method, delivery_method, *args); end
-  end
+class ActionMailer::DeliveryJob
+  sig { params(mailer: T.untyped, mail_method: T.untyped, delivery_method: T.untyped, args: T.untyped).returns(T.any(ActionMailer::DeliveryJob, FalseClass)) }
+  def self.perform_later(mailer, mail_method, delivery_method, *args); end
+
+  sig { params(mailer: T.untyped, mail_method: T.untyped, delivery_method: T.untyped, args: T.untyped).returns(T.untyped) }
+  def self.perform_now(mailer, mail_method, delivery_method, *args); end
 end

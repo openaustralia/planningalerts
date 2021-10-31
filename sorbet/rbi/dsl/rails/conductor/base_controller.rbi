@@ -3,48 +3,45 @@
 # Please instead update this file by running `bin/tapioca dsl Rails::Conductor::BaseController`.
 
 # typed: true
-module Rails
-  module Conductor
-    class BaseController
-      include GeneratedPathHelpersModule
-      include GeneratedUrlHelpersModule
 
-      module HelperMethods
-        include ::ActionController::Base::HelperMethods
-        include ::ActionDispatch::Routing::PolymorphicRoutes
-        include ::ActionDispatch::Routing::UrlFor
-        include ::ActionText::ContentHelper
-        include ::ActionText::TagHelper
-        include ::ActionView::Helpers::AssetTagHelper
-        include ::ActionView::Helpers::AssetUrlHelper
-        include ::ActionView::Helpers::CaptureHelper
-        include ::ActionView::Helpers::DateHelper
-        include ::ActionView::Helpers::OutputSafetyHelper
-        include ::ActionView::Helpers::SanitizeHelper
-        include ::ActionView::Helpers::TagHelper
-        include ::ActionView::Helpers::TextHelper
-        include ::ActionView::Helpers::UrlHelper
-        include ::Admin::ApplicationHelper
-        include ::AlertMailerHelper
-        include ::ApiHowtoHelper
-        include ::ApplicationHelper
-        include ::ApplicationsHelper
-        include ::AtdisHelper
-        include ::AuthoritiesHelper
-        include ::CommentsHelper
-        include ::DeviseHelper
-        include ::GeneratedPathHelpersModule
-        include ::GeneratedUrlHelpersModule
-        include ::SignupHelper
-        include ::StaticHelper
-      end
+class Rails::Conductor::BaseController
+  include GeneratedUrlHelpersModule
+  include GeneratedPathHelpersModule
 
-      class HelperProxy < ::ActionView::Base
-        include HelperMethods
-      end
+  sig { returns(HelperProxy) }
+  def helpers; end
 
-      sig { returns(HelperProxy) }
-      def helpers; end
-    end
+  module HelperMethods
+    include ::ActionText::ContentHelper
+    include ::ActionText::TagHelper
+    include ::ActionController::Base::HelperMethods
+    include ::Admin::ApplicationHelper
+    include ::ActionView::Helpers::UrlHelper
+    include ::ActionView::Helpers::DateHelper
+    include ::ActionView::Helpers::AssetUrlHelper
+    include ::ActionView::Helpers::AssetTagHelper
+    include ::ActionView::Helpers::SanitizeHelper
+    include ::ActionView::Helpers::CaptureHelper
+    include ::ActionView::Helpers::OutputSafetyHelper
+    include ::ActionView::Helpers::TagHelper
+    include ::ActionView::Helpers::TextHelper
+    include ::AlertMailerHelper
+    include ::ApplicationHelper
+    include ::ApplicationsHelper
+    include ::ActionDispatch::Routing::PolymorphicRoutes
+    include ::ActionDispatch::Routing::UrlFor
+    include ::GeneratedUrlHelpersModule
+    include ::GeneratedPathHelpersModule
+    include ::ApiHowtoHelper
+    include ::AtdisHelper
+    include ::AuthoritiesHelper
+    include ::CommentsHelper
+    include ::SignupHelper
+    include ::StaticHelper
+    include ::DeviseHelper
+  end
+
+  class HelperProxy < ::ActionView::Base
+    include HelperMethods
   end
 end

@@ -3,9 +3,8 @@
 # Please instead update this file by running `bin/tapioca dsl CommentMailer::HelperMethods`.
 
 # typed: true
-class CommentMailer
-  module HelperMethods
-    include GeneratedPathHelpersModule
-    include GeneratedUrlHelpersModule
-  end
+
+module CommentMailer::HelperMethods
+  include GeneratedUrlHelpersModule
+  include GeneratedPathHelpersModule
 end

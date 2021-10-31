@@ -3,12 +3,11 @@
 # Please instead update this file by running `bin/tapioca dsl ActionMailbox::IncinerationJob`.
 
 # typed: true
-module ActionMailbox
-  class IncinerationJob
-    sig { params(inbound_email: T.untyped).returns(T.any(ActionMailbox::IncinerationJob, FalseClass)) }
-    def self.perform_later(inbound_email); end
 
-    sig { params(inbound_email: T.untyped).returns(T.untyped) }
-    def self.perform_now(inbound_email); end
-  end
+class ActionMailbox::IncinerationJob
+  sig { params(inbound_email: T.untyped).returns(T.any(ActionMailbox::IncinerationJob, FalseClass)) }
+  def self.perform_later(inbound_email); end
+
+  sig { params(inbound_email: T.untyped).returns(T.untyped) }
+  def self.perform_now(inbound_email); end
 end

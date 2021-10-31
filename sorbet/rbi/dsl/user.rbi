@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl User`.
 
 # typed: true
+
 class User
   include GeneratedAssociationMethods
   include GeneratedAttributeMethods
@@ -14,7 +15,7 @@ class User
     sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
     def api_key_ids=(ids); end
 
-    sig { returns(::ActiveRecord::Associations::CollectionProxy[ApiKey]) }
+    sig { returns(::ActiveRecord::Associations::CollectionProxy[::ApiKey]) }
     def api_keys; end
 
     sig { params(value: T::Enumerable[::ApiKey]).void }

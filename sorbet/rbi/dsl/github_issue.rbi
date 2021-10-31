@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl GithubIssue`.
 
 # typed: true
+
 class GithubIssue
   include GeneratedAssociationMethods
   include GeneratedAttributeMethods

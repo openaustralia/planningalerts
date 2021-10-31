@@ -3,30 +3,11 @@
 # Please instead update this file by running `bin/tapioca dsl ActiveRecord::DestroyAssociationAsyncJob`.
 
 # typed: true
-module ActiveRecord
-  class DestroyAssociationAsyncJob
-    sig do
-      params(
-        owner_model_name: T.untyped,
-        owner_id: T.untyped,
-        association_class: T.untyped,
-        association_ids: T.untyped,
-        association_primary_key_column: T.untyped,
-        ensuring_owner_was_method: T.untyped
-      ).returns(T.any(ActiveRecord::DestroyAssociationAsyncJob, FalseClass))
-    end
-    def self.perform_later(owner_model_name: T.unsafe(nil), owner_id: T.unsafe(nil), association_class: T.unsafe(nil), association_ids: T.unsafe(nil), association_primary_key_column: T.unsafe(nil), ensuring_owner_was_method: T.unsafe(nil)); end
 
-    sig do
-      params(
-        owner_model_name: T.untyped,
-        owner_id: T.untyped,
-        association_class: T.untyped,
-        association_ids: T.untyped,
-        association_primary_key_column: T.untyped,
-        ensuring_owner_was_method: T.untyped
-      ).returns(T.untyped)
-    end
-    def self.perform_now(owner_model_name: T.unsafe(nil), owner_id: T.unsafe(nil), association_class: T.unsafe(nil), association_ids: T.unsafe(nil), association_primary_key_column: T.unsafe(nil), ensuring_owner_was_method: T.unsafe(nil)); end
-  end
+class ActiveRecord::DestroyAssociationAsyncJob
+  sig { params(owner_model_name: T.untyped, owner_id: T.untyped, association_class: T.untyped, association_ids: T.untyped, association_primary_key_column: T.untyped, ensuring_owner_was_method: T.untyped).returns(T.any(ActiveRecord::DestroyAssociationAsyncJob, FalseClass)) }
+  def self.perform_later(owner_model_name: T.unsafe(nil), owner_id: T.unsafe(nil), association_class: T.unsafe(nil), association_ids: T.unsafe(nil), association_primary_key_column: T.unsafe(nil), ensuring_owner_was_method: T.unsafe(nil)); end
+
+  sig { params(owner_model_name: T.untyped, owner_id: T.untyped, association_class: T.untyped, association_ids: T.untyped, association_primary_key_column: T.untyped, ensuring_owner_was_method: T.untyped).returns(T.untyped) }
+  def self.perform_now(owner_model_name: T.unsafe(nil), owner_id: T.unsafe(nil), association_class: T.unsafe(nil), association_ids: T.unsafe(nil), association_primary_key_column: T.unsafe(nil), ensuring_owner_was_method: T.unsafe(nil)); end
 end

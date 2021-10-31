@@ -3,19 +3,14 @@
 # Please instead update this file by running `bin/tapioca dsl ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper`.
 
 # typed: true
-module ActiveJob
-  module QueueAdapters
-    class SidekiqAdapter
-      class JobWrapper
-        sig { params(job_data: T.untyped).returns(String) }
-        def self.perform_async(job_data); end
 
-        sig { params(interval: T.any(DateTime, Time), job_data: T.untyped).returns(String) }
-        def self.perform_at(interval, job_data); end
+class ActiveJob::QueueAdapters::SidekiqAdapter::JobWrapper
+  sig { params(job_data: T.untyped).returns(String) }
+  def self.perform_async(job_data); end
 
-        sig { params(interval: Numeric, job_data: T.untyped).returns(String) }
-        def self.perform_in(interval, job_data); end
-      end
-    end
-  end
+  sig { params(interval: T.any(DateTime, Time), job_data: T.untyped).returns(String) }
+  def self.perform_at(interval, job_data); end
+
+  sig { params(interval: Numeric, job_data: T.untyped).returns(String) }
+  def self.perform_in(interval, job_data); end
 end

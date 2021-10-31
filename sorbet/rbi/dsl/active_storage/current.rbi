@@ -3,18 +3,17 @@
 # Please instead update this file by running `bin/tapioca dsl ActiveStorage::Current`.
 
 # typed: true
-module ActiveStorage
-  class Current
-    sig { returns(T.untyped) }
-    def self.host; end
 
-    sig { returns(T.untyped) }
-    def host; end
+class ActiveStorage::Current
+  sig { returns(T.untyped) }
+  def host; end
 
-    sig { params(value: T.untyped).returns(T.untyped) }
-    def self.host=(value); end
+  sig { params(value: T.untyped).returns(T.untyped) }
+  def host=(value); end
 
-    sig { params(value: T.untyped).returns(T.untyped) }
-    def host=(value); end
-  end
+  sig { returns(T.untyped) }
+  def self.host; end
+
+  sig { params(value: T.untyped).returns(T.untyped) }
+  def self.host=(value); end
 end

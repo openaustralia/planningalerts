@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl ApplicationVersion`.
 
 # typed: true
+
 class ApplicationVersion
   include GeneratedAssociationMethods
   include GeneratedAttributeMethods

@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl Report`.
 
 # typed: true
+
 class Report
   include GeneratedAssociationMethods
   include GeneratedAttributeMethods

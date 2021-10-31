@@ -3,22 +3,21 @@
 # Please instead update this file by running `bin/tapioca dsl Admin::SiteSettingsController`.
 
 # typed: true
-module Admin
-  class SiteSettingsController
-    module HelperMethods
-      include ::ActionController::Base::HelperMethods
-      include ::ActionText::ContentHelper
-      include ::ActionText::TagHelper
-      include ::Admin::ApplicationHelper
-      include ::Administrate::ApplicationController::HelperMethods
-      include ::Administrate::ApplicationHelper
-    end
 
-    class HelperProxy < ::ActionView::Base
-      include HelperMethods
-    end
+class Admin::SiteSettingsController
+  sig { returns(HelperProxy) }
+  def helpers; end
 
-    sig { returns(HelperProxy) }
-    def helpers; end
+  module HelperMethods
+    include ::ActionText::ContentHelper
+    include ::ActionText::TagHelper
+    include ::ActionController::Base::HelperMethods
+    include ::Administrate::ApplicationHelper
+    include ::Administrate::ApplicationController::HelperMethods
+    include ::Admin::ApplicationHelper
+  end
+
+  class HelperProxy < ::ActionView::Base
+    include HelperMethods
   end
 end

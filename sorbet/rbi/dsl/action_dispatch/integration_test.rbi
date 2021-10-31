@@ -3,9 +3,8 @@
 # Please instead update this file by running `bin/tapioca dsl ActionDispatch::IntegrationTest`.
 
 # typed: true
-module ActionDispatch
-  class IntegrationTest
-    include GeneratedPathHelpersModule
-    include GeneratedUrlHelpersModule
-  end
+
+class ActionDispatch::IntegrationTest
+  include GeneratedUrlHelpersModule
+  include GeneratedPathHelpersModule
 end

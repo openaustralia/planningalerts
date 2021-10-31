@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl ReportMailer`.
 
 # typed: true
+
 class ReportMailer
   sig { params(report: Report).returns(::ActionMailer::MessageDelivery) }
   def self.notify(report); end

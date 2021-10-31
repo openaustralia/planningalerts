@@ -3,9 +3,8 @@
 # Please instead update this file by running `bin/tapioca dsl AlertMailer::HelperMethods`.
 
 # typed: true
-class AlertMailer
-  module HelperMethods
-    include GeneratedPathHelpersModule
-    include GeneratedUrlHelpersModule
-  end
+
+module AlertMailer::HelperMethods
+  include GeneratedUrlHelpersModule
+  include GeneratedPathHelpersModule
 end

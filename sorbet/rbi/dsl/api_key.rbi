@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl ApiKey`.
 
 # typed: true
+
 class ApiKey
   include GeneratedAssociationMethods
   include GeneratedAttributeMethods

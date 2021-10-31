@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl Comment`.
 
 # typed: true
+
 class Comment
   include GeneratedAssociationMethods
   include GeneratedAttributeMethods
@@ -33,7 +34,7 @@ class Comment
     sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
     def report_ids=(ids); end
 
-    sig { returns(::ActiveRecord::Associations::CollectionProxy[Report]) }
+    sig { returns(::ActiveRecord::Associations::CollectionProxy[::Report]) }
     def reports; end
 
     sig { params(value: T::Enumerable[::Report]).void }

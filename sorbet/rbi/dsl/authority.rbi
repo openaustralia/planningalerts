@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl Authority`.
 
 # typed: true
+
 class Authority
   include GeneratedAssociationMethods
   include GeneratedAttributeMethods
@@ -15,7 +16,7 @@ class Authority
     sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
     def application_ids=(ids); end
 
-    sig { returns(::ActiveRecord::Associations::CollectionProxy[Application]) }
+    sig { returns(::ActiveRecord::Associations::CollectionProxy[::Application]) }
     def applications; end
 
     sig { params(value: T::Enumerable[::Application]).void }
@@ -30,7 +31,7 @@ class Authority
     sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
     def comment_ids=(ids); end
 
-    sig { returns(::ActiveRecord::Associations::CollectionProxy[Comment]) }
+    sig { returns(::ActiveRecord::Associations::CollectionProxy[::Comment]) }
     def comments; end
 
     sig { params(value: T::Enumerable[::Comment]).void }

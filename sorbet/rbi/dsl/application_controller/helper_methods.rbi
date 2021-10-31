@@ -3,9 +3,8 @@
 # Please instead update this file by running `bin/tapioca dsl ApplicationController::HelperMethods`.
 
 # typed: true
-class ApplicationController
-  module HelperMethods
-    include GeneratedPathHelpersModule
-    include GeneratedUrlHelpersModule
-  end
+
+module ApplicationController::HelperMethods
+  include GeneratedUrlHelpersModule
+  include GeneratedPathHelpersModule
 end

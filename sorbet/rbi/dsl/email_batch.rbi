@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl EmailBatch`.
 
 # typed: true
+
 class EmailBatch
   include GeneratedAttributeMethods
   extend GeneratedRelationMethods

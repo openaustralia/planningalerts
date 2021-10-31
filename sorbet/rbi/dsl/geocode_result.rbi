@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl GeocodeResult`.
 
 # typed: true
+
 class GeocodeResult
   include GeneratedAssociationMethods
   include GeneratedAttributeMethods

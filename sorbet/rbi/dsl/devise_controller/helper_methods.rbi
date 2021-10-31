@@ -3,9 +3,8 @@
 # Please instead update this file by running `bin/tapioca dsl DeviseController::HelperMethods`.
 
 # typed: true
-class DeviseController
-  module HelperMethods
-    include GeneratedPathHelpersModule
-    include GeneratedUrlHelpersModule
-  end
+
+module DeviseController::HelperMethods
+  include GeneratedUrlHelpersModule
+  include GeneratedPathHelpersModule
 end

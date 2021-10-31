@@ -3,7 +3,8 @@
 # Please instead update this file by running `bin/tapioca dsl GenerateSitemapService`.
 
 # typed: true
+
 class GenerateSitemapService
-  include GeneratedPathHelpersModule
   include GeneratedUrlHelpersModule
+  include GeneratedPathHelpersModule
 end

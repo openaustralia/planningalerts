@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl ImportApplicationsJob`.
 
 # typed: true
+
 class ImportApplicationsJob
   sig { params(authority: Authority).returns(T.any(ImportApplicationsJob, FalseClass)) }
   def self.perform_later(authority:); end

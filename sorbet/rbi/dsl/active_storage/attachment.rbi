@@ -3,37 +3,36 @@
 # Please instead update this file by running `bin/tapioca dsl ActiveStorage::Attachment`.
 
 # typed: true
-module ActiveStorage
-  class Attachment
-    include GeneratedAssociationMethods
 
-    module GeneratedAssociationMethods
-      sig { returns(T.nilable(T.untyped)) }
-      def blob; end
+class ActiveStorage::Attachment
+  include GeneratedAssociationMethods
 
-      sig { params(value: T.nilable(T.untyped)).void }
-      def blob=(value); end
+  module GeneratedAssociationMethods
+    sig { returns(T.nilable(T.untyped)) }
+    def blob; end
 
-      sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
-      def build_blob(*args, &blk); end
+    sig { params(value: T.nilable(T.untyped)).void }
+    def blob=(value); end
 
-      sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
-      def create_blob(*args, &blk); end
+    sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
+    def build_blob(*args, &blk); end
 
-      sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
-      def create_blob!(*args, &blk); end
+    sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
+    def create_blob(*args, &blk); end
 
-      sig { returns(T.nilable(T.untyped)) }
-      def record; end
+    sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
+    def create_blob!(*args, &blk); end
 
-      sig { params(value: T.nilable(T.untyped)).void }
-      def record=(value); end
+    sig { returns(T.nilable(T.untyped)) }
+    def record; end
 
-      sig { returns(T.nilable(T.untyped)) }
-      def reload_blob; end
+    sig { params(value: T.nilable(T.untyped)).void }
+    def record=(value); end
 
-      sig { returns(T.nilable(T.untyped)) }
-      def reload_record; end
-    end
+    sig { returns(T.nilable(T.untyped)) }
+    def reload_blob; end
+
+    sig { returns(T.nilable(T.untyped)) }
+    def reload_record; end
   end
 end

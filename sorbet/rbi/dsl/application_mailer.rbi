@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl ApplicationMailer`.
 
 # typed: true
+
 class ApplicationMailer
   include GeneratedUrlHelpersModule
 end

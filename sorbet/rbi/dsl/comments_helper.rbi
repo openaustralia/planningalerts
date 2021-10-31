@@ -3,7 +3,8 @@
 # Please instead update this file by running `bin/tapioca dsl CommentsHelper`.
 
 # typed: true
+
 module CommentsHelper
-  include GeneratedPathHelpersModule
   include GeneratedUrlHelpersModule
+  include GeneratedPathHelpersModule
 end

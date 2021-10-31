@@ -3,28 +3,11 @@
 # Please instead update this file by running `bin/tapioca dsl LogApiCallJob`.
 
 # typed: true
+
 class LogApiCallJob
-  sig do
-    params(
-      api_key: String,
-      ip_address: String,
-      query: String,
-      params: T::Hash[String, T.nilable(T.any(Integer, String))],
-      user_agent: T.nilable(String),
-      time_as_float: Float
-    ).returns(T.any(LogApiCallJob, FalseClass))
-  end
+  sig { params(api_key: String, ip_address: String, query: String, params: T::Hash[String, T.nilable(T.any(Integer, String))], user_agent: T.nilable(String), time_as_float: Float).returns(T.any(LogApiCallJob, FalseClass)) }
   def self.perform_later(api_key:, ip_address:, query:, params:, user_agent:, time_as_float:); end
 
-  sig do
-    params(
-      api_key: String,
-      ip_address: String,
-      query: String,
-      params: T::Hash[String, T.nilable(T.any(Integer, String))],
-      user_agent: T.nilable(String),
-      time_as_float: Float
-    ).void
-  end
+  sig { params(api_key: String, ip_address: String, query: String, params: T::Hash[String, T.nilable(T.any(Integer, String))], user_agent: T.nilable(String), time_as_float: Float).void }
   def self.perform_now(api_key:, ip_address:, query:, params:, user_agent:, time_as_float:); end
 end

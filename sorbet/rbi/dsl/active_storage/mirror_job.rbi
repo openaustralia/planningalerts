@@ -3,12 +3,11 @@
 # Please instead update this file by running `bin/tapioca dsl ActiveStorage::MirrorJob`.
 
 # typed: true
-module ActiveStorage
-  class MirrorJob
-    sig { params(key: T.untyped, checksum: T.untyped).returns(T.any(ActiveStorage::MirrorJob, FalseClass)) }
-    def self.perform_later(key, checksum:); end
 
-    sig { params(key: T.untyped, checksum: T.untyped).returns(T.untyped) }
-    def self.perform_now(key, checksum:); end
-  end
+class ActiveStorage::MirrorJob
+  sig { params(key: T.untyped, checksum: T.untyped).returns(T.any(ActiveStorage::MirrorJob, FalseClass)) }
+  def self.perform_later(key, checksum:); end
+
+  sig { params(key: T.untyped, checksum: T.untyped).returns(T.untyped) }
+  def self.perform_now(key, checksum:); end
 end

@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl ApplicationRedirect`.
 
 # typed: true
+
 class ApplicationRedirect
   include GeneratedAssociationMethods
   include GeneratedAttributeMethods

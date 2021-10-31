@@ -3,7 +3,8 @@
 # Please instead update this file by running `bin/tapioca dsl SyncGithubIssueForAuthorityService`.
 
 # typed: true
+
 class SyncGithubIssueForAuthorityService
-  include GeneratedPathHelpersModule
   include GeneratedUrlHelpersModule
+  include GeneratedPathHelpersModule
 end

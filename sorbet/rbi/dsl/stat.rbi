@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl Stat`.
 
 # typed: true
+
 class Stat
   include GeneratedAttributeMethods
 

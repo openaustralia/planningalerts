@@ -3,30 +3,11 @@
 # Please instead update this file by running `bin/tapioca dsl ActionMailer::MailDeliveryJob`.
 
 # typed: true
-module ActionMailer
-  class MailDeliveryJob
-    sig do
-      params(
-        mailer: T.untyped,
-        mail_method: T.untyped,
-        delivery_method: T.untyped,
-        args: T.untyped,
-        kwargs: T.untyped,
-        params: T.untyped
-      ).returns(T.any(ActionMailer::MailDeliveryJob, FalseClass))
-    end
-    def self.perform_later(mailer, mail_method, delivery_method, args:, kwargs: T.unsafe(nil), params: T.unsafe(nil)); end
 
-    sig do
-      params(
-        mailer: T.untyped,
-        mail_method: T.untyped,
-        delivery_method: T.untyped,
-        args: T.untyped,
-        kwargs: T.untyped,
-        params: T.untyped
-      ).returns(T.untyped)
-    end
-    def self.perform_now(mailer, mail_method, delivery_method, args:, kwargs: T.unsafe(nil), params: T.unsafe(nil)); end
-  end
+class ActionMailer::MailDeliveryJob
+  sig { params(mailer: T.untyped, mail_method: T.untyped, delivery_method: T.untyped, args: T.untyped, kwargs: T.untyped, params: T.untyped).returns(T.any(ActionMailer::MailDeliveryJob, FalseClass)) }
+  def self.perform_later(mailer, mail_method, delivery_method, args:, kwargs: T.unsafe(nil), params: T.unsafe(nil)); end
+
+  sig { params(mailer: T.untyped, mail_method: T.untyped, delivery_method: T.untyped, args: T.untyped, kwargs: T.untyped, params: T.untyped).returns(T.untyped) }
+  def self.perform_now(mailer, mail_method, delivery_method, args:, kwargs: T.unsafe(nil), params: T.unsafe(nil)); end
 end

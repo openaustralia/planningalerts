@@ -3,6 +3,7 @@
 # Please instead update this file by running `bin/tapioca dsl ProcessAlertJob`.
 
 # typed: true
+
 class ProcessAlertJob
   sig { params(id: Integer).returns(T.any(ProcessAlertJob, FalseClass)) }
   def self.perform_later(id); end
