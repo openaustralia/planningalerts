@@ -157,7 +157,8 @@ group :development do
   # For static type checking
   gem "sorbet"
   gem "spoom"
-  gem "tapioca"
+  # TODO: Upgrade to latest
+  gem "tapioca", "~> 0.4.13"
 
   # For guard and associated bits
   gem "growl"

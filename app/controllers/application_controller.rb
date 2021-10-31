@@ -6,7 +6,6 @@
 
 class ApplicationController < ActionController::Base
   extend T::Sig
-  extend ThemesOnRails::ControllerAdditions::ClassMethods
 
   # For sorbet
   include Devise::Controllers::Helpers
