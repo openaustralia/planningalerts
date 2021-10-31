@@ -28,9 +28,7 @@ class ThemesController
     include ::AuthoritiesHelper
     include ::CommentsHelper
     include ::DeviseHelper
-    include ::ERB::Util
     include ::GeneratedPathHelpersModule
-    include ::GeneratedUrlHelpers
     include ::GeneratedUrlHelpersModule
     include ::SignupHelper
     include ::StaticHelper
