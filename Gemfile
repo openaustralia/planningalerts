@@ -23,7 +23,7 @@ gem "haml"
 gem "rabl"
 
 # Extra validation
-gem "validates_email_format_of", "~> 1.6", ">= 1.6.3"
+gem "validates_email_format_of"
 gem "validate_url", "~> 0.2.2" # 1.0.0 causes failures like "Validation failed: Comment url is not a valid URL" on mailto: links
 
 # Background queue uses sidekiq with redis

@@ -731,7 +731,7 @@ DEPENDENCIES
   typhoeus
   uglifier
   validate_url (~> 0.2.2)
-  validates_email_format_of (~> 1.6, >= 1.6.3)
+  validates_email_format_of
   vcr
   virtus
   webdrivers (~> 4.0)
