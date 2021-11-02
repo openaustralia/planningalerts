@@ -24,7 +24,7 @@ gem "rabl"
 
 # Extra validation
 gem "validates_email_format_of"
-gem "validate_url", "~> 0.2.2" # 1.0.0 causes failures like "Validation failed: Comment url is not a valid URL" on mailto: links
+gem "validate_url"
 
 # Background queue uses sidekiq with redis
 # We need redis namespaces to seperate the production and staging environments
