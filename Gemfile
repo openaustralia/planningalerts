@@ -20,9 +20,7 @@ gem "devise", "~> 4.2" # Pin to a particular major version to get deprecation wa
 
 # To handle different kinds of view templates
 gem "haml"
-# Temporarily locking version of rabl because upgrading causes
-# "Gem::Package::PathError: installing into parent path"
-gem "rabl", "0.14.0"
+gem "rabl"
 
 # Extra validation
 gem "validates_email_format_of", "~> 1.6", ">= 1.6.3"
