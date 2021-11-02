@@ -145,7 +145,7 @@ group :test do
   gem "simplecov", require: false
   gem "timecop"
   gem "vcr"
-  gem "webdrivers", "~> 4.0"
+  gem "webdrivers"
   gem "webmock"
   # FIXME: stop using `mock_model` and remove this
   gem "rspec-activemodel-mocks"
