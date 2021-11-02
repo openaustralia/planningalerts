@@ -189,7 +189,7 @@ group :development do
   # Help with code quality
   gem "brakeman"
   gem "haml_lint", require: false
-  gem "rubocop", "0.87.0", require: false # Using same version as defined in .codeclimate.yml
+  gem "rubocop", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-sorbet", require: false
 end
