@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 require:
   - rubocop-rails
   - rubocop-sorbet
@@ -228,6 +230,14 @@ Rails/TimeZoneAssignment: # new in 2.10
 Rails/UnusedIgnoredColumns: # new in 2.11
   Enabled: true
 Rails/WhereEquals: # new in 2.9
+  Enabled: true
+RSpec/ExcessiveDocstringSpacing: # new in 2.5
+  Enabled: true
+RSpec/IdenticalEqualityAssertion: # new in 2.4
+  Enabled: true
+RSpec/SubjectDeclaration: # new in 2.5
+  Enabled: true
+RSpec/Rails/AvoidSetupHook: # new in 2.4
   Enabled: true
 
 # Sorbet
