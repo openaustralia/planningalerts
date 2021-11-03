@@ -191,6 +191,8 @@ group :development do
   gem "haml_lint", require: false
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
+  gem "rubocop-rake", require: false
+  gem "rubocop-rspec", require: false
   gem "rubocop-sorbet", require: false
 end
 

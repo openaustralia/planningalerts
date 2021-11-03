@@ -1,6 +1,8 @@
 require:
   - rubocop-rails
   - rubocop-sorbet
+  - rubocop-rake
+  - rubocop-rspec
 
 AllCops:
   TargetRailsVersion: 5.0

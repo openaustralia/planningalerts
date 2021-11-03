@@ -500,6 +500,10 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
+    rubocop-rake (0.6.0)
+      rubocop (~> 1.0)
+    rubocop-rspec (2.5.0)
+      rubocop (~> 1.19)
     rubocop-sorbet (0.6.2)
       rubocop
     ruby-progressbar (1.11.0)
@@ -708,6 +712,8 @@ DEPENDENCIES
   rspec-rails
   rubocop
   rubocop-rails
+  rubocop-rake
+  rubocop-rspec
   rubocop-sorbet
   ruby-progressbar
   sanitize
