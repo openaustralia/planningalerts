@@ -2,12 +2,12 @@
 
 require "spec_helper"
 
-feature "Admin hides comment" do
-  background do
+describe "Admin hides comment" do
+  before do
     create(:confirmed_comment, id: 1)
   end
 
-  scenario "successfully" do
+  it "successfully" do
     sign_in_as_admin
 
     click_link "Comments"

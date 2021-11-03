@@ -2,8 +2,8 @@
 
 require "spec_helper"
 
-feature "Manage alerts" do
-  scenario "Unsubscribe from an email alert" do
+describe "Manage alerts" do
+  it "Unsubscribe from an email alert" do
     # Adding arbitrary coordinates so that geocoding is not carried out
     alert = create(:alert,
                    address: "24 Bruce Rd, Glenbrook", email: "example@example.com",
@@ -16,7 +16,7 @@ feature "Manage alerts" do
                                 email: "example@example.com")).to be_nil
   end
 
-  scenario "Change size of email alert" do
+  it "Change size of email alert" do
     alert = create(:alert,
                    address: "24 Bruce Rd, Glenbrook", email: "example@example.com",
                    radius_meters: "2000", lat: 1.0, lng: 1.0, confirmed: true)

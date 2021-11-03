@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe AlertMailer do
-  before :each do
+  before do
     @alert = create(:alert,
                     email: "matthew@openaustralia.org", address: "24 Bruce Rd, Glenbrook NSW 2773",
                     lat: 1.0, lng: 2.0, radius_meters: 800)
@@ -30,104 +30,104 @@ describe AlertMailer do
   end
 
   describe "when sending a planning alert with one new comment" do
-    let(:email) { AlertMailer.alert(@alert, [], [@c1]) }
+    let(:email) { described_class.alert(@alert, [], [@c1]) }
 
-    it "should use the singular in the comment line" do
+    it "uses the singular in the comment line" do
       expect(email.subject).to eq("1 new comment on planning applications near #{@alert.address}")
     end
 
-    it "should have the unsubscribe header" do
+    it "has the unsubscribe header" do
       expect(email.header["List-Unsubscribe"].to_s).to eq("<https://dev.planningalerts.org.au/alerts/abcdef/unsubscribe>")
     end
   end
 
   describe "when sending a planning alert with two new comments" do
-    let(:email) { AlertMailer.alert(@alert, [], [@c1, @c2]) }
+    let(:email) { described_class.alert(@alert, [], [@c1, @c2]) }
 
-    it "should use the plural in the comment line" do
+    it "uses the plural in the comment line" do
       expect(email.subject).to eq("2 new comments on planning applications near #{@alert.address}")
     end
 
-    it "should nicely format (in text) a list of multiple planning applications" do
+    it "nicelies format (in text) a list of multiple planning applications" do
       expect(email.text_part.body.to_s.strip).to eq Rails.root.join("spec/mailers/regression/alert_mailer/email3.txt").read.gsub("\n", "\r\n").strip
     end
 
-    it "should nicely format (in HTML) a list of multiple planning applications" do
+    it "nicelies format (in HTML) a list of multiple planning applications" do
       expect(email.html_part.body.to_s).to eq(Rails.root.join("spec/mailers/regression/alert_mailer/email3.html").read.gsub("\n", "\r\n"))
     end
   end
 
   describe "when send a planning alert with one new comment and two new planning applications" do
-    let(:email) { AlertMailer.alert(@alert, [@a1, @a2], [@c1]) }
+    let(:email) { described_class.alert(@alert, [@a1, @a2], [@c1]) }
 
-    it "should tell you about both in the comment line" do
+    it "tells you about both in the comment line" do
       expect(email.subject).to eq("1 new comment and 2 new planning applications near #{@alert.address}")
     end
 
-    it "should nicely format (in text) a list of multiple planning applications" do
+    it "nicelies format (in text) a list of multiple planning applications" do
       expect(email.text_part.body.to_s.strip).to eq Rails.root.join("spec/mailers/regression/alert_mailer/email2.txt").read.gsub("\n", "\r\n").strip
     end
 
-    it "should nicely format (in HTML) a list of multiple planning applications" do
+    it "nicelies format (in HTML) a list of multiple planning applications" do
       expect(email.html_part.body.to_s).to eq(Rails.root.join("spec/mailers/regression/alert_mailer/email2.html").read.gsub("\n", "\r\n"))
     end
   end
 
   describe "when sending a planning alert with one new planning application" do
-    before :each do
-      @email = AlertMailer.alert(@alert, [@a1])
+    before do
+      @email = described_class.alert(@alert, [@a1])
     end
 
-    it "should use the singular (application) in the subject line" do
+    it "uses the singular (application) in the subject line" do
       expect(@email.subject).to eq("1 new planning application near #{@alert.address}")
     end
   end
 
   describe "when sending a planning alert with two new planning applications" do
     context "and the theme is Default" do
-      before :each do
-        @email = AlertMailer.alert(@alert, [@a1, @a2])
+      before do
+        @email = described_class.alert(@alert, [@a1, @a2])
       end
 
-      it "should be sent to the user's email address" do
+      it "is sent to the user's email address" do
         expect(@email.to).to eq([@alert.email])
       end
 
-      it "should be from the main planningalerts email address" do
+      it "is from the main planningalerts email address" do
         expect(@email.from).to eq(["contact@planningalerts.org.au"])
         # @email.from_addrs.first.name.should == "PlanningAlerts.org.au"
       end
 
-      it "should have a sensible subject line" do
+      it "has a sensible subject line" do
         expect(@email.subject).to eq("2 new planning applications near #{@alert.address}")
       end
 
-      it "should be a multipart email" do
+      it "is a multipart email" do
         expect(@email.body.parts.length).to eq(2)
       end
 
       context "Text email" do
-        it "should nicely format a list of multiple planning applications" do
+        it "nicelies format a list of multiple planning applications" do
           expect(@email.text_part.body.to_s.strip).to eq Rails.root.join("spec/mailers/regression/alert_mailer/email1.txt").read.gsub("\n", "\r\n").strip
         end
       end
 
       context "HTML emails" do
-        before :each do
+        before do
           @html_body = @email.html_part.body.to_s
         end
 
-        it "should contain links to the applications" do
+        it "contains links to the applications" do
           expect(@html_body).to have_link("Foo Street, Bar", href: "https://dev.planningalerts.org.au/applications/1?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
           expect(@html_body).to have_link("Bar Street, Foo", href: "https://dev.planningalerts.org.au/applications/2?utm_campaign=view-application&utm_medium=email&utm_source=alerts")
         end
 
-        it "should contain application descriptions" do
+        it "contains application descriptions" do
           expect(@html_body).to have_content "Knock something down"
           expect(@html_body).to have_content "Put something up"
         end
 
-        it "should have a specific body" do
+        it "has a specific body" do
           expect(@html_body).to eq(Rails.root.join("spec/mailers/regression/alert_mailer/email1.html").read.gsub("\n", "\r\n"))
         end
       end
@@ -137,14 +137,14 @@ describe AlertMailer do
   describe ".new_signup_attempt_notice" do
     it "puts the address in the subject" do
       alert = build(:alert, address: "123 Lovely St, La La")
-      email = AlertMailer.new_signup_attempt_notice(alert)
+      email = described_class.new_signup_attempt_notice(alert)
 
       expect(email).to have_subject "Your subscription for 123 Lovely St, La La"
     end
 
     it "tells the user that we’ve recieved a new signup attempt" do
       alert = build(:alert, address: "123 Lovely St, La La")
-      email = AlertMailer.new_signup_attempt_notice(alert)
+      email = described_class.new_signup_attempt_notice(alert)
 
       expect(email.html_part.body.to_s).to have_content "We just received a new request to send PlanningAlerts for 123 Lovely St, La La\nto your email address."
       expect(email.text_part.body.to_s).to have_content "We just received a new request to send PlanningAlerts for 123 Lovely St, La La to your email address."

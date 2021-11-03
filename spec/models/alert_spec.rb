@@ -3,9 +3,9 @@
 require "spec_helper"
 
 describe Alert do
-  it_behaves_like "email_confirmable"
-
   let(:address) { "24 Bruce Road, Glenbrook" }
+
+  it_behaves_like "email_confirmable"
 
   context "when the geocoder doesn't need to run" do
     let(:alert) { build(:alert, address: "foo", lat: 1, lng: 2) }
@@ -45,7 +45,7 @@ describe Alert do
     end
   end
 
-  it "should be able to accept location information if it is already known and so not use the geocoder" do
+  it "is able to accept location information if it is already known and so not use the geocoder" do
     expect(GoogleGeocodeService).not_to receive(:call)
 
     alert = create(:alert, lat: 1.0, lng: 2.0)
@@ -55,7 +55,7 @@ describe Alert do
   end
 
   describe "geocoding" do
-    before :each do
+    before do
       expect(GoogleGeocodeService).to receive(:call).with(address).and_return(
         GeocoderResults.new(
           [
@@ -73,22 +73,22 @@ describe Alert do
       )
     end
 
-    it "should happen automatically on saving" do
+    it "happens automatically on saving" do
       alert = create(:alert, address: address, lat: nil, lng: nil)
 
       expect(alert.lat).to eq(-33.7726179)
       expect(alert.lng).to eq(150.6242341)
     end
 
-    it "should replace the address with the full resolved address obtained by geocoding" do
+    it "replaces the address with the full resolved address obtained by geocoding" do
       alert = create(:alert, address: "24 Bruce Road, Glenbrook", lat: nil, lng: nil)
 
       expect(alert.address).to eq("24 Bruce Rd, Glenbrook NSW 2773")
     end
   end
 
-  it "should be able to store the attribute location" do
-    alert = Alert.new
+  it "is able to store the attribute location" do
+    alert = described_class.new
     alert.location = Location.new(lat: 1.0, lng: 2.0)
     expect(alert.lat).to eq(1.0)
     expect(alert.lng).to eq(2.0)
@@ -96,8 +96,8 @@ describe Alert do
     expect(alert.location.lng).to eq(2.0)
   end
 
-  it "should handle location being nil" do
-    alert = Alert.new
+  it "handles location being nil" do
+    alert = described_class.new
     alert.location = nil
     expect(alert.lat).to be_nil
     expect(alert.lng).to be_nil
@@ -105,13 +105,13 @@ describe Alert do
   end
 
   describe "radius_meters" do
-    it "should have a number" do
+    it "has a number" do
       alert = build(:alert, radius_meters: "a")
       expect(alert).not_to be_valid
       expect(alert.errors[:radius_meters]).to eq(["isn't selected"])
     end
 
-    it "should be greater than zero" do
+    it "is greater than zero" do
       alert = build(:alert, radius_meters: "0")
       expect(alert).not_to be_valid
       expect(alert.errors[:radius_meters]).to eq(["isn't selected"])
@@ -119,18 +119,18 @@ describe Alert do
   end
 
   describe "confirmed" do
-    it "should be false when alert is created" do
+    it "is false when alert is created" do
       expect(create(:alert).confirmed).to be false
     end
 
-    it "should be able to be set to false" do
+    it "is able to be set to false" do
       alert = build(:alert)
       alert.confirmed = false
       alert.save!
       expect(alert.confirmed).to eq(false)
     end
 
-    it "should be able to set to true" do
+    it "is able to set to true" do
       alert = build(:alert)
       alert.confirmed = true
       alert.save!
@@ -229,7 +229,7 @@ describe Alert do
       context "never before sent an alert" do
         let(:last_sent) { nil }
 
-        it "should return applications that have been scraped in the last twenty four hours if the user has never had an alert" do
+        it "returns applications that have been scraped in the last twenty four hours if the user has never had an alert" do
           expect(alert.recent_new_applications).to contain_exactly(app1, app2)
         end
       end
@@ -237,12 +237,12 @@ describe Alert do
       context "last sent an alert 3 days ago" do
         let(:last_sent) { 3.days.ago }
 
-        it "should return applications that have been scraped since the last time the user was sent an alert" do
+        it "returns applications that have been scraped since the last time the user was sent an alert" do
           expect(alert.recent_new_applications).to contain_exactly(app1, app2, app3)
         end
 
         context "A couple of applications are updated one day ago" do
-          before(:each) do
+          before do
             CreateOrUpdateApplicationService.call(
               authority: app4.authority,
               council_reference: app4.council_reference,
@@ -261,13 +261,13 @@ describe Alert do
             )
           end
 
-          it "should only include applications initially scraped within the last 3 days" do
+          it "onlies include applications initially scraped within the last 3 days" do
             expect(alert.recent_new_applications).to contain_exactly(app1, app2, app3)
           end
         end
 
         context "One application has an updated location (way off in the distance)" do
-          before(:each) do
+          before do
             p = alert.location.endpoint(0.0, 10000.0)
             CreateOrUpdateApplicationService.call(
               authority: app2.authority,
@@ -279,7 +279,7 @@ describe Alert do
             )
           end
 
-          it "should not include the application with the updated address" do
+          it "does not include the application with the updated address" do
             expect(alert.recent_new_applications).to contain_exactly(app1, app3)
           end
         end
@@ -288,7 +288,7 @@ describe Alert do
       context "last sent an alert 5 days ago" do
         let(:last_sent) { 5.days.ago }
 
-        it "should return applications that have been scraped since the last time the user was sent an alert" do
+        it "returns applications that have been scraped since the last time the user was sent an alert" do
           expect(alert.recent_new_applications).to contain_exactly(app1, app2, app3, app4)
         end
       end
@@ -302,7 +302,7 @@ describe Alert do
       context "last sent an alert 5 days ago" do
         let(:last_sent) { 5.days.ago }
 
-        it "should return applications within the user's search area" do
+        it "returns applications within the user's search area" do
           expect(alert.recent_new_applications).to contain_exactly(app2, app4)
         end
       end
@@ -332,19 +332,19 @@ describe Alert do
                            confirmed_at: alert.cutoff_time - 1,
                            application: application)
 
-      expect(alert.new_comments).to_not eql [old_comment]
+      expect(alert.new_comments).not_to eql [old_comment]
     end
 
     it "does not see unconfirmed comments" do
       unconfirmed_comment = create(:unconfirmed_comment, application: application)
 
-      expect(alert.new_comments).to_not eql [unconfirmed_comment]
+      expect(alert.new_comments).not_to eql [unconfirmed_comment]
     end
 
     it "does not see hidden comments" do
       hidden_comment = create(:confirmed_comment, hidden: true, application: application)
 
-      expect(alert.new_comments).to_not eql [hidden_comment]
+      expect(alert.new_comments).not_to eql [hidden_comment]
     end
   end
 
@@ -419,7 +419,7 @@ describe Alert do
 
   # Related to https://github.com/openaustralia/planningalerts/issues/1547
   context "A problematic alert seen in production" do
-    it "should do something sensible" do
+    it "does something sensible" do
       alert = create(
         :alert,
         last_sent: Time.utc(2021, 9, 9, 16, 28, 49),

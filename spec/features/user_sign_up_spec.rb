@@ -2,8 +2,8 @@
 
 require "spec_helper"
 
-feature "Signing up for an API account" do
-  scenario "Successfully signing up", truncation: true do
+describe "Signing up for an API account" do
+  it "Successfully signing up", truncation: true do
     visit "/api/howto"
     click_link "Register for an account"
 

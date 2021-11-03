@@ -7,7 +7,7 @@ describe User do
     subject(:user) { build(:user, email: "foo@mailinator.com") }
 
     it "is not valid" do
-      expect(subject).to_not be_valid
+      expect(subject).not_to be_valid
     end
   end
 end

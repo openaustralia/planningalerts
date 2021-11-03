@@ -11,12 +11,12 @@ describe Comment do
         build(:confirmed_comment)
       end
 
-      it "should not run after_confirm callback" do
-        expect(comment).to_not receive(:after_confirm)
+      it "does not run after_confirm callback" do
+        expect(comment).not_to receive(:after_confirm)
         comment.confirm!
       end
 
-      it "should not change the confirmed_at time" do
+      it "does not change the confirmed_at time" do
         time_before_confirmed_again = comment.confirmed_at
 
         comment.confirm!
@@ -34,7 +34,7 @@ describe Comment do
     it "is not valid without an address" do
       comment_to_authority.address = nil
 
-      expect(comment_to_authority).to_not be_valid
+      expect(comment_to_authority).not_to be_valid
     end
 
     it "is valid with an address" do
@@ -43,9 +43,9 @@ describe Comment do
       expect(comment_to_authority).to be_valid
     end
 
-    it "should handle emojis in the comment text" do
+    it "handles emojis in the comment text" do
       comment_to_authority.text = "🙏🏼"
-      expect { comment_to_authority.save! }.to_not raise_error
+      expect { comment_to_authority.save! }.not_to raise_error
     end
   end
 

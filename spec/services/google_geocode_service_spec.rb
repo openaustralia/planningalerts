@@ -13,7 +13,7 @@ describe "GoogleGeocodeService" do
   context "valid full address" do
     let(:address) { "24 Bruce Road, Glenbrook, NSW 2773" }
 
-    it "should geocode an address into a latitude and longitude by using the Google service" do
+    it "geocodes an address into a latitude and longitude by using the Google service" do
       expect(result.top.lat).to eq(-33.7726179)
       expect(result.top.lng).to eq(150.6242341)
       expect(result.top.suburb).to eq "Glenbrook"
@@ -22,7 +22,7 @@ describe "GoogleGeocodeService" do
       expect(result.top.full_address).to eq "24 Bruce Rd, Glenbrook NSW 2773"
     end
 
-    it "should not error" do
+    it "does not error" do
       expect(result.error).to be_nil
     end
   end
@@ -30,11 +30,11 @@ describe "GoogleGeocodeService" do
   context "empty address" do
     let(:address) { "" }
 
-    it "should return nil" do
+    it "returns nil" do
       expect(result.top).to be_nil
     end
 
-    it "should error" do
+    it "errors" do
       expect(result.error).to eq("Please enter a street address")
     end
   end
@@ -42,7 +42,7 @@ describe "GoogleGeocodeService" do
   context "address that is not valid" do
     let(:address) { "rxsd23dfj" }
 
-    it "should error" do
+    it "errors" do
       expect(result.error).to eq("Sorry we don’t understand that address. Try one like ‘1 Sowerby St, Goulburn, NSW’")
     end
   end
@@ -50,7 +50,7 @@ describe "GoogleGeocodeService" do
   context "street address not in australia" do
     let(:address) { "New York" }
 
-    it "should error" do
+    it "errors" do
       expect(result.error).to eq("Unfortunately we only cover Australia. It looks like that address is in another country.")
     end
   end
@@ -58,7 +58,7 @@ describe "GoogleGeocodeService" do
   context "address is just a suburb name" do
     let(:address) { "Glenbrook, NSW" }
 
-    it "should error" do
+    it "errors" do
       expect(result.error).to eq("Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’")
     end
   end
@@ -66,7 +66,7 @@ describe "GoogleGeocodeService" do
   context "address with multiple matches" do
     let(:address) { "Bruce Road" }
 
-    it "should not error" do
+    it "does not error" do
       expect(result.error).to be_nil
     end
   end
@@ -74,7 +74,7 @@ describe "GoogleGeocodeService" do
   context "another address with multiple matches" do
     let(:address) { "Bathurst Rd" }
 
-    it "should list potential matches and they should be in Australia" do
+    it "lists potential matches and they should be in Australia" do
       expect(result.all.count).to eq(2)
       expect(result.all[0].full_address).to eq("Bathurst Rd, Orange NSW 2800")
       expect(result.all[1].full_address).to eq("Bathurst Rd, Katoomba NSW 2780")
@@ -96,7 +96,7 @@ describe "GoogleGeocodeService" do
   context "valid address that google only gets partial match on" do
     let(:address) { "11 Explorers Way Westdale NSW 2340" }
 
-    it "should error" do
+    it "errors" do
       expect(result.error).to eq "Sorry we only got a partial match on that address"
     end
   end
@@ -107,42 +107,50 @@ describe "GoogleGeocodeService" do
   describe "addresses that were causing problems with the google geocoder before" do
     context do
       let(:address) { "1 Wickham Street Marsden Park NSW 2765" }
-      it { expect(error).to_not be_nil }
+
+      it { expect(error).not_to be_nil }
     end
 
     context do
       let(:address) { "7 Bradfield Street Flagstone QLD 4280" }
-      it { expect(error).to_not be_nil }
+
+      it { expect(error).not_to be_nil }
     end
 
     context do
       let(:address) { "21 Beck Street Park Ridge QLD 4125" }
-      it { expect(error).to_not be_nil }
+
+      it { expect(error).not_to be_nil }
     end
 
     context do
       let(:address) { "8 Bennelong Cres Lloyd NSW 2650" }
-      it { expect(error).to_not be_nil }
+
+      it { expect(error).not_to be_nil }
     end
 
     context do
       let(:address) { "16 Hilltop Gr, Cliftleigh 2321 NSW" }
-      it { expect(error).to_not be_nil }
+
+      it { expect(error).not_to be_nil }
     end
 
     context do
       let(:address) { "17 Isabella Close, Narara NSW 2250" }
-      it { expect(error).to_not be_nil }
+
+      it { expect(error).not_to be_nil }
     end
 
     context do
       let(:address) { "41 Foxall Street Riverstone NSW 2765" }
-      it { expect(error).to_not be_nil }
+
+      it { expect(error).not_to be_nil }
     end
 
     context do
       let(:address) { "29 Larkin Street Marsden Park NSW 2765" }
-      it { expect(error).to_not be_nil }
+
+      it { expect(error).not_to be_nil }
     end
   end
 end

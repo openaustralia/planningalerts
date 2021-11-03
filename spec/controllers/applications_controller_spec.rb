@@ -3,13 +3,13 @@
 require "spec_helper"
 
 describe ApplicationsController do
-  before :each do
+  before do
     request.env["HTTPS"] = "on"
   end
 
   describe "#index" do
     describe "rss feed" do
-      before :each do
+      before do
         allow(GeocodeService).to receive(:call).and_return(
           GeocoderResults.new(
             [
@@ -27,21 +27,21 @@ describe ApplicationsController do
         )
       end
 
-      it "should not provide a link for all applications" do
+      it "does not provide a link for all applications" do
         get :index
         expect(assigns[:rss]).to be_nil
       end
     end
 
     describe "error checking on parameters used" do
-      it "should not do error checking on the normal html sites" do
+      it "does not do error checking on the normal html sites" do
         get :index, params: { address: "24 Bruce Road Glenbrook", radius: 4000, foo: 200, bar: "fiddle" }
         expect(response.code).to eq("200")
       end
     end
 
     describe "search by authority" do
-      it "should give a 404 when an invalid authority_id is used" do
+      it "gives a 404 when an invalid authority_id is used" do
         expect(Authority).to receive(:find_short_name_encoded).with("this_authority_does_not_exist").and_return(nil)
         expect { get :index, params: { authority_id: "this_authority_does_not_exist" } }.to raise_error ActiveRecord::RecordNotFound
       end
@@ -49,7 +49,7 @@ describe ApplicationsController do
   end
 
   describe "#show" do
-    it "should gracefully handle an application without any geocoded information" do
+    it "gracefullies handle an application without any geocoded information" do
       address = "An address that can't be geocoded"
       allow(GeocodeService).to receive(:call).with(address).and_return(GeocoderResults.new([], "Couldn't understand address"))
       application = create(
@@ -72,11 +72,12 @@ describe ApplicationsController do
 
     context "a redirect is set up" do
       let(:redirect) { create(:application_redirect) }
-      before(:each) do
+
+      before do
         redirect
       end
 
-      it "should redirect to another application" do
+      it "redirects to another application" do
         get :show, params: { id: redirect.application_id }
         expect(response).to redirect_to(id: redirect.redirect_application_id)
       end
@@ -84,12 +85,12 @@ describe ApplicationsController do
   end
 
   describe "#address" do
-    it "should set the radius to the supplied parameter" do
+    it "sets the radius to the supplied parameter" do
       get :address, params: { address: "24 Bruce Road Glenbrook", radius: 500 }
       expect(assigns[:radius]).to eq 500.0
     end
 
-    it "should set the radius to the default when not supplied" do
+    it "sets the radius to the default when not supplied" do
       get :address, params: { address: "24 Bruce Road Glenbrook" }
       expect(assigns[:radius]).to eq 2000.0
     end
@@ -98,11 +99,12 @@ describe ApplicationsController do
   describe "#nearby" do
     context "a redirect is set up" do
       let(:redirect) { create(:application_redirect) }
-      before(:each) do
+
+      before do
         redirect
       end
 
-      it "should redirect to another application" do
+      it "redirects to another application" do
         get :nearby, params: { id: redirect.application_id }
         expect(response).to redirect_to(id: redirect.redirect_application_id)
       end
@@ -110,16 +112,17 @@ describe ApplicationsController do
 
     context "an application with nothing nearby" do
       let(:application) { create(:geocoded_application) }
-      before(:each) do
+
+      before do
         application
       end
 
-      it "should redirect if sort isn't set" do
+      it "redirects if sort isn't set" do
         get :nearby, params: { id: application.id }
         expect(response).to redirect_to(sort: "time")
       end
 
-      it "should render something" do
+      it "renders something" do
         get :nearby, params: { id: application.id, sort: "time" }
         expect(response).to be_successful
       end

@@ -29,7 +29,7 @@ describe ImportApplicationsService do
     app_data2.merge(description: "Knocking a house down")
   end
 
-  before :each do
+  before do
     # Stub out the geocoder to return some arbitrary coordinates so that the tests can run quickly
     allow(GeocodeService).to receive(:call).and_return(
       GeocoderResults.new(
@@ -46,12 +46,12 @@ describe ImportApplicationsService do
         nil
       )
     )
-    allow(ImportApplicationsService).to receive(:open_url_safe).and_return(
+    allow(described_class).to receive(:open_url_safe).and_return(
       [app_data1, app_data2].to_json
     )
   end
 
-  it "should import the correct applications" do
+  it "imports the correct applications" do
     logger = Logger.new($stdout)
     expect(logger).to receive(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01")
     expect(logger).to receive(:info).with("Took 0 s to import applications from Fiddlesticks, NSW")
@@ -60,7 +60,7 @@ describe ImportApplicationsService do
     expect(SyncGithubIssueForAuthorityService).to receive(:call).with(logger: logger, authority: auth)
 
     Timecop.freeze(date) do
-      ImportApplicationsService.call(authority: auth, logger: logger)
+      described_class.call(authority: auth, logger: logger)
     end
     expect(Application.count).to eq(2)
     r1 = Application.find_by(council_reference: "R1")
@@ -74,7 +74,7 @@ describe ImportApplicationsService do
     expect(r1.on_notice_to).to eq(Date.new(2009, 1, 19))
   end
 
-  it "should update an application when it already exist" do
+  it "updates an application when it already exist" do
     logger = Logger.new($stdout)
     expect(logger).to receive(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01")
     expect(logger).to receive(:info).with("1 application found for Fiddlesticks, NSW with date from 2009-01-01")
@@ -84,12 +84,12 @@ describe ImportApplicationsService do
     allow(SyncGithubIssueForAuthorityService).to receive(:call).with(logger: logger, authority: auth)
 
     Timecop.freeze(date) do
-      ImportApplicationsService.call(authority: auth, logger: logger)
+      described_class.call(authority: auth, logger: logger)
       # Getting the feed again with updated content for one of the applicartions
-      allow(ImportApplicationsService).to receive(:open_url_safe).and_return(
+      allow(described_class).to receive(:open_url_safe).and_return(
         [app_data2_updated].to_json
       )
-      ImportApplicationsService.call(authority: auth, logger: logger)
+      described_class.call(authority: auth, logger: logger)
     end
     expect(Application.count).to eq(2)
     r2 = Application.find_by(council_reference: "R2")
@@ -98,10 +98,10 @@ describe ImportApplicationsService do
     expect(r2.first_version.description).to eq "Putting a house up"
   end
 
-  it "should escape the morph api key and the sql query" do
+  it "escapes the morph api key and the sql query" do
     logger = Logger.new($stdout)
     allow(logger).to receive(:info)
-    expect(ImportApplicationsService).to receive(:open_url_safe).with(
+    expect(described_class).to receive(:open_url_safe).with(
       "https://api.morph.io//data.json?key=12%2F&query=select+%2A+from+%60data%60+where+%60date_scraped%60+%3E%3D+%272009-01-01%27",
       logger
     )
@@ -110,16 +110,16 @@ describe ImportApplicationsService do
     expect(SyncGithubIssueForAuthorityService).to receive(:call).with(logger: logger, authority: auth)
 
     Timecop.freeze(date) do
-      ImportApplicationsService.call(authority: auth, logger: logger)
+      described_class.call(authority: auth, logger: logger)
     end
   end
 
   describe "#morph_query" do
-    it "should filter by the date range" do
+    it "filters by the date range" do
       allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(7)
       allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("")
       Timecop.freeze(date) do
-        s = ImportApplicationsService.new(authority: auth, logger: Logger.new($stdout))
+        s = described_class.new(authority: auth, logger: Logger.new($stdout))
         expect(s.morph_query).to eq "select * from `data` where `date_scraped` >= '2008-12-25'"
       end
     end
@@ -127,11 +127,11 @@ describe ImportApplicationsService do
     context "scraper_authority_label is set on authority" do
       let(:auth) { create(:authority, scraper_authority_label: "foo") }
 
-      it "should filter by the authority_label" do
+      it "filters by the authority_label" do
         allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(7)
         allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("")
         Timecop.freeze(date) do
-          s = ImportApplicationsService.new(authority: auth, logger: Logger.new($stdout))
+          s = described_class.new(authority: auth, logger: Logger.new($stdout))
           expect(s.morph_query).to eq "select * from `data` where `authority_label` = 'foo' and `date_scraped` >= '2008-12-25'"
         end
       end

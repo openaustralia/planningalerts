@@ -9,7 +9,7 @@ describe TopUsageApiUsersService do
 
   let(:redis) { Redis.new }
 
-  before :each do
+  before do
     # Delete data in redis
     keys = redis.scan_each(match: "throttle:*").to_a.uniq
     redis.del(keys) unless keys.empty?
@@ -28,8 +28,8 @@ describe TopUsageApiUsersService do
   end
 
   describe ".call" do
-    it "should return the top 2 total number of requests in descending sort order" do
-      result = TopUsageApiUsersService.call(redis: redis, date_from: Date.new(2021, 7, 1), date_to: Date.new(2021, 7, 2), number: 2)
+    it "returns the top 2 total number of requests in descending sort order" do
+      result = described_class.call(redis: redis, date_from: Date.new(2021, 7, 1), date_to: Date.new(2021, 7, 2), number: 2)
       expect(result.map(&:serialize)).to eq [
         { "api_key_object" => key3, "requests" => 214 },
         { "api_key_object" => key1, "requests" => 157 }
@@ -38,8 +38,8 @@ describe TopUsageApiUsersService do
   end
 
   describe ".all_usage_by_api_key_in_date_range" do
-    it "should return data directly from redis in a more usable format" do
-      s = TopUsageApiUsersService.new(redis)
+    it "returns data directly from redis in a more usable format" do
+      s = described_class.new(redis)
       date_from = Date.new(2021, 7, 1)
       date_to = date_from + 1
       result = s.all_usage_by_api_key_in_date_range(date_from, date_to)
@@ -56,8 +56,8 @@ describe TopUsageApiUsersService do
   end
 
   describe ".total_usage_by_api_key_in_date_range" do
-    it "should return the total number of requests" do
-      s = TopUsageApiUsersService.new(redis)
+    it "returns the total number of requests" do
+      s = described_class.new(redis)
       date_from = Date.new(2021, 7, 1)
       date_to = date_from + 1
       result = s.total_usage_by_api_key_in_date_range(date_from, date_to)
@@ -70,8 +70,8 @@ describe TopUsageApiUsersService do
   end
 
   describe ".top_total_usage_by_api_key_in_date_range" do
-    it "should return the top 2 total number of requests in descending sort order" do
-      s = TopUsageApiUsersService.new(redis)
+    it "returns the top 2 total number of requests in descending sort order" do
+      s = described_class.new(redis)
       date_from = Date.new(2021, 7, 1)
       date_to = date_from + 1
       result = s.top_total_usage_by_api_key_in_date_range(date_from, date_to, 2)

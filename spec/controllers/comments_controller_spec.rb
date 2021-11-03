@@ -3,22 +3,23 @@
 require "spec_helper"
 
 describe CommentsController do
-  before :each do
+  before do
     request.env["HTTPS"] = "on"
   end
 
   describe "#per_week" do
+    subject(:get_authority_comments_per_week) do
+      get(:per_week, params: { authority_id: "blue_mountains", format: :json })
+    end
+
     let!(:authority) { create(:authority, short_name: "Blue Mountains", id: 1) }
-    before :each do
+
+    before do
       Timecop.freeze(Time.zone.local(2016, 1, 5))
     end
 
-    after :each do
+    after do
       Timecop.return
-    end
-
-    subject(:get_authority_comments_per_week) do
-      get(:per_week, params: { authority_id: "blue_mountains", format: :json })
     end
 
     it { expect(get_authority_comments_per_week).to be_successful }

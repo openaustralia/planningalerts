@@ -2,12 +2,12 @@
 
 require "spec_helper"
 
-feature "Give feedback" do
+describe "Give feedback" do
   # In order to affect the outcome of a development application
   # As a citizen
   # I want to send feedback on a development application directly to the planning authority
 
-  scenario "Giving feedback for an authority without a feedback email" do
+  it "Giving feedback for an authority without a feedback email" do
     authority = create(:authority, full_name: "Foo")
     application = create(:geocoded_application, id: "1", authority: authority)
     visit(application_path(application))
@@ -15,7 +15,7 @@ feature "Give feedback" do
     expect(page).to have_content("To comment on this application you will need to go to the original source")
   end
 
-  scenario "Getting an error message if the comment form isn’t completed correctly" do
+  it "Getting an error message if the comment form isn’t completed correctly" do
     authority = create(:authority, full_name: "Foo", email: "feedback@foo.gov.au")
     application = create(:geocoded_application, id: "1", authority: authority)
     visit(application_path(application))
@@ -31,14 +31,14 @@ feature "Give feedback" do
   end
 
   context "when the authority is contactable" do
-    given(:application) do
+    let(:application) do
       authority = create(:contactable_authority,
                          full_name: "Foo",
                          email: "feedback@foo.gov.au")
       create(:geocoded_application, id: "1", authority: authority)
     end
 
-    scenario "Adding a comment" do
+    it "Adding a comment" do
       visit(application_path(application))
 
       fill_in("Have your say on this application", with: "I think this is a really good ideas")
@@ -58,7 +58,7 @@ feature "Give feedback" do
       expect(current_email.default_part_body.to_s).to include(confirmed_comment_url(id: comment.confirm_id, protocol: "https", host: "dev.planningalerts.org.au"))
     end
 
-    scenario "Unconfirmed comment should not be shown" do
+    it "Unconfirmed comment should not be shown" do
       create(:comment, confirmed: false, text: "I think this is a really good ideas", application: application)
 
       visit(application_path(application))
@@ -67,11 +67,11 @@ feature "Give feedback" do
     end
 
     context "confirming the comment" do
-      given(:comment) do
+      let(:comment) do
         create(:comment, confirmed: false, text: "I think this is a really good ideas", application: application)
       end
 
-      scenario "should publish the comment" do
+      it "publishes the comment" do
         visit(confirmed_comment_path(id: comment.confirm_id))
 
         expect(page).to have_content("Your comment has been sent to Foo and posted below.")
@@ -82,7 +82,7 @@ feature "Give feedback" do
         expect(current_email.default_part_body.to_s).to include("I think this is a really good ideas")
       end
 
-      scenario "twice should not send the comment twice" do
+      it "twice should not send the comment twice" do
         visit(confirmed_comment_path(id: comment.confirm_id))
         visit(confirmed_comment_path(id: comment.confirm_id))
 
@@ -90,7 +90,7 @@ feature "Give feedback" do
       end
     end
 
-    scenario "Viewing the comment on the application page" do
+    it "Viewing the comment on the application page" do
       comment = create(:comment, confirmed: false, text: "I think this is a really good ideas", application: application)
 
       visit(confirmed_comment_path(id: comment.confirm_id))
@@ -99,7 +99,7 @@ feature "Give feedback" do
       expect(page).to have_content("I think this is a really good ideas")
     end
 
-    scenario "Sharing new comment on facebook" do
+    it "Sharing new comment on facebook" do
       comment = create(:unconfirmed_comment, application: application)
 
       visit(confirmed_comment_path(id: comment.confirm_id))
@@ -108,7 +108,7 @@ feature "Give feedback" do
     end
   end
 
-  scenario "Reporting abuse on a confirmed comment" do
+  it "Reporting abuse on a confirmed comment" do
     comment = create(:confirmed_comment, text: "I'm saying something abusive", name: "Jack Rude", email: "rude@foo.com", id: "23")
     visit(new_comment_report_path(comment))
 
@@ -128,11 +128,11 @@ feature "Give feedback" do
   end
 
   context "when signed in as admin" do
-    background do
+    before do
       sign_in_as_admin
     end
 
-    scenario "Getting an error message if the comment form isn’t completed correctly" do
+    it "Getting an error message if the comment form isn’t completed correctly" do
       authority = create(:authority, full_name: "Foo", email: "feedback@foo.gov.au")
       application = create(:geocoded_application, id: "1", authority: authority)
       visit(application_path(application))

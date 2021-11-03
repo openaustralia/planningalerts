@@ -2,12 +2,12 @@
 
 require "spec_helper"
 
-feature "Admin confirms comment for user" do
+describe "Admin confirms comment for user" do
   around do |test|
     Timecop.freeze(Time.zone.local(2016, 10, 10)) { test.run }
   end
 
-  background do
+  before do
     application = create(:geocoded_application,
                          authority: create(:contactable_authority))
     create(:unconfirmed_comment,
@@ -17,7 +17,7 @@ feature "Admin confirms comment for user" do
            application: application)
   end
 
-  scenario "successfully" do
+  it "successfully" do
     sign_in_as_admin
 
     click_link "Comments"
@@ -31,6 +31,6 @@ feature "Admin confirms comment for user" do
     expect(page).to have_content "Comment confirmed and sent"
     expect(page).to have_content "Confirmed\nyes"
     expect(page).to have_content "Confirmed at Mon, 10 Oct 2016"
-    expect(page).to_not have_button "Confirm"
+    expect(page).not_to have_button "Confirm"
   end
 end

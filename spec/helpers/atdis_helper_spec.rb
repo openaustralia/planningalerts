@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe AtdisHelper do
   describe "#attribute_value" do
-    it "should custom display a time" do
+    it "customs display a time" do
       # TODO: Update atdis gem to not return datetime but use time instead
       value = DateTime.new(2001, 1, 1)
       Timecop.freeze(Time.utc(2002, 1, 1)) do
@@ -17,14 +17,14 @@ describe AtdisHelper do
       end
     end
 
-    it "should custom display a url" do
+    it "customs display a url" do
       value = URI.parse("https://foo.com")
       expect(helper.attribute_value(value)).to eq(
         '<div class="value"><a href="https://foo.com">https://foo.com</a></div>'
       )
     end
 
-    it "should custom display an rgeo point" do
+    it "customs display an rgeo point" do
       value = RGeo::Cartesian.preferred_factory.point(-122.3, 47.6)
       expect(helper.attribute_value(value)).to eq(
         '<div class="value">' \
@@ -36,14 +36,14 @@ describe AtdisHelper do
       )
     end
 
-    it "should custom display nil" do
+    it "customs display nil" do
       value = nil
       expect(helper.attribute_value(value)).to eq(
         '<div class="value"><p class="quiet">absent or null</p></div>'
       )
     end
 
-    it "should display a string" do
+    it "displays a string" do
       value = "foo"
       expect(helper.attribute_value(value)).to eq(
         '<div class="value">foo</div>'

@@ -5,7 +5,7 @@ require "spec_helper"
 describe CreateOrUpdateApplicationService do
   let(:authority) { create(:authority) }
   let(:application) do
-    CreateOrUpdateApplicationService.call(
+    described_class.call(
       authority: authority,
       council_reference: "123/45",
       attributes: {
@@ -25,11 +25,11 @@ describe CreateOrUpdateApplicationService do
     )
   end
 
-  it "should automatically create a version on creating an application" do
+  it "automaticallies create a version on creating an application" do
     expect(application.versions.count).to eq 1
   end
 
-  it "should populate the version with the current information" do
+  it "populates the version with the current information" do
     version = application.versions.first
     expect(version.application).to eq application
     expect(version.previous_version).to be_nil
@@ -50,9 +50,9 @@ describe CreateOrUpdateApplicationService do
     expect(version.current).to eq true
   end
 
-  it "should not leave an application record around if the version doesn't validate" do
+  it "does not leave an application record around if the version doesn't validate" do
     expect do
-      CreateOrUpdateApplicationService.call(
+      described_class.call(
         authority: authority,
         council_reference: "123/45",
         # This will not be valid
@@ -68,30 +68,30 @@ describe CreateOrUpdateApplicationService do
 
   context "updated application with new data" do
     let(:updated_application) do
-      CreateOrUpdateApplicationService.call(
+      described_class.call(
         authority: application.authority,
         council_reference: application.council_reference,
         attributes: { address: "A better kind of address" }
       )
     end
 
-    it "should create a new version when updating" do
+    it "creates a new version when updating" do
       expect(updated_application.versions.count).to eq 2
     end
 
-    it "should have the new value" do
+    it "has the new value" do
       expect(updated_application.address).to eq "A better kind of address"
     end
 
-    it "should have the new value in the latest version" do
+    it "has the new value in the latest version" do
       expect(updated_application.versions[0].address).to eq "A better kind of address"
     end
 
-    it "should point to the previous version in the latest version" do
+    it "points to the previous version in the latest version" do
       expect(updated_application.versions[0].previous_version).to eq updated_application.versions[1]
     end
 
-    it "should have the old value in the previous version" do
+    it "has the old value in the previous version" do
       expect(updated_application.versions[1].address).to eq "Some kind of address"
     end
 
@@ -106,7 +106,7 @@ describe CreateOrUpdateApplicationService do
 
   context "updated application where only date_scraped has changed" do
     let(:updated_application) do
-      CreateOrUpdateApplicationService.call(
+      described_class.call(
         authority: application.authority,
         council_reference: application.council_reference,
         attributes: {
@@ -117,14 +117,14 @@ describe CreateOrUpdateApplicationService do
       )
     end
 
-    it "should not create a new version" do
+    it "does not create a new version" do
       expect(updated_application.versions.count).to eq 1
     end
   end
 
   context "updated application with unchanged data once typecast" do
     let(:updated_application) do
-      CreateOrUpdateApplicationService.call(
+      described_class.call(
         authority: application.authority,
         council_reference: application.council_reference,
         attributes: {
@@ -134,7 +134,7 @@ describe CreateOrUpdateApplicationService do
       )
     end
 
-    it "should not create a new version" do
+    it "does not create a new version" do
       expect(updated_application.versions.count).to eq 1
     end
   end

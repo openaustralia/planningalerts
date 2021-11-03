@@ -2,14 +2,14 @@
 
 require "spec_helper"
 
-feature "Searching for development application near an address" do
+describe "Searching for development application near an address" do
   around do |scenario|
     VCR.use_cassette("planningalerts") do
       scenario.run
     end
   end
 
-  background do
+  before do
     create(:geocoded_application,
            address: "24 Bruce Road Glenbrook",
            description: "A lovely house",
@@ -17,7 +17,7 @@ feature "Searching for development application near an address" do
            lng: 150.624256)
   end
 
-  scenario "successfully" do
+  it "successfully" do
     visit root_path
 
     fill_in "Enter a street address", with: "24 Bruce Road, Glenbrook"

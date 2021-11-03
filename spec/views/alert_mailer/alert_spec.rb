@@ -10,13 +10,13 @@ describe "alert_mailer/alert.html.haml" do
            address: "24 Bruce Road Glenbrook")
   end
 
-  before(:each) do
+  before do
     assign(:applications, [application])
     assign(:comments, [])
     assign(:host, "foo.com")
   end
 
-  it "should not use html entities to encode the description" do
+  it "does not use html entities to encode the description" do
     assign(:alert, create(:alert))
     render
     expect(rendered).to have_content("Alterations & additions")
@@ -47,7 +47,7 @@ describe "alert_mailer/alert.text.erb" do
            address: "24 Bruce Road Glenbrook")
   end
 
-  before(:each) do
+  before do
     assign(:applications, [application])
     assign(:comments, [])
     assign(:host, "foo.com")

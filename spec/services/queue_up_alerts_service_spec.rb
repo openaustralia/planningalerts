@@ -4,32 +4,33 @@ require "spec_helper"
 
 describe QueueUpAlertsService do
   context "with no active alerts" do
-    it "should log some useful messages" do
+    it "logs some useful messages" do
       logger = Logger.new($stdout)
       expect(logger).to receive(:info).with("Checking 0 active alerts")
       expect(logger).to receive(:info).with("Splitting mailing for the next 24 hours - checks an alert roughly every 86400 seconds")
       expect(logger).to receive(:info).with("Mailing jobs for the next 24 hours queued")
-      QueueUpAlertsService.call(logger: logger)
+      described_class.call(logger: logger)
     end
   end
 
   context "with two confirmed alerts" do
     let(:alert1) { create(:confirmed_alert) }
     let(:alert2) { create(:confirmed_alert) }
-    before(:each) do
+
+    before do
       alert1
       alert2
     end
 
-    it "should log some messages" do
+    it "logs some messages" do
       logger = Logger.new($stdout)
       expect(logger).to receive(:info).with("Checking 2 active alerts")
       expect(logger).to receive(:info).with("Splitting mailing for the next 24 hours - checks an alert roughly every 43200 seconds")
       expect(logger).to receive(:info).with("Mailing jobs for the next 24 hours queued")
-      QueueUpAlertsService.call(logger: logger)
+      described_class.call(logger: logger)
     end
 
-    it "should queue up batches" do
+    it "queues up batches" do
       # Silent logger
       logger = Logger.new($stdout)
       allow(logger).to receive(:info)
@@ -39,7 +40,7 @@ describe QueueUpAlertsService do
       expect(job).to receive(:perform_later).with(alert1.id)
       expect(job).to receive(:perform_later).with(alert2.id)
 
-      QueueUpAlertsService.call(logger: logger)
+      described_class.call(logger: logger)
     end
   end
 end

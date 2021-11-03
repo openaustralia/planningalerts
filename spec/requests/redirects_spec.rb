@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe "redirects" do
   describe "api redirects" do
-    it "should not redirect the normal home page on the normal subdomain" do
+    it "does not redirect the normal home page on the normal subdomain" do
       get "https://www.planningalerts.org.au"
       expect(response).not_to be_redirect
     end

@@ -16,7 +16,7 @@ describe AlertMailerHelper do
   end
 
   context "when application and theme are set" do
-    before :each do
+    before do
       @application = mock_model(Application, id: 1)
       @base_params = base_tracking_params
     end
@@ -38,7 +38,7 @@ describe AlertMailerHelper do
     end
 
     context "and there is a comment" do
-      before :each do
+      before do
         @comment = create(:comment)
       end
 
@@ -90,16 +90,19 @@ describe AlertMailerHelper do
 
     context "with an application" do
       subject { helper.subject(alert, [application], []) }
+
       it { is_expected.to eql "1 new planning application near 123 Sample St" }
     end
 
     context "with a comment" do
       subject { helper.subject(alert, [], [comment]) }
+
       it { is_expected.to eql "1 new comment on planning applications near 123 Sample St" }
     end
 
     context "with an application and a comment" do
       subject { helper.subject(alert, [application], [comment]) }
+
       it { is_expected.to eql "1 new comment and 1 new planning application near 123 Sample St" }
     end
   end

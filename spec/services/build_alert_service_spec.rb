@@ -4,24 +4,24 @@ require "spec_helper"
 
 describe BuildAlertService do
   describe "#parse" do
-    before :each do
+    before do
       mock_geocoder_valid_address_response
     end
 
     context "when there is no matching pre-existing Alert" do
       it "returns the original alert" do
-        parser_result = BuildAlertService.call(
+        parser_result = described_class.call(
           address: "24 Bruce Rd, Glenbrook",
           email: "foo@foo.com",
           radius_meters: 1000
         )
 
         expect(parser_result.email).to eql "foo@foo.com"
-        expect(parser_result.radius_meters).to eql 1000
+        expect(parser_result.radius_meters).to be 1000
       end
 
       it "geocodes the alert" do
-        parser_result = BuildAlertService.call(
+        parser_result = described_class.call(
           address: "24 Bruce Rd, Glenbrook",
           email: "foo@foo.com",
           radius_meters: 1000
@@ -46,7 +46,7 @@ describe BuildAlertService do
       it "resends the confirmation email for the pre-existing alert" do
         allow(ConfirmationMailer).to receive(:confirm).with(preexisting_alert).and_call_original
 
-        BuildAlertService.call(
+        described_class.call(
           email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
           radius_meters: 1000
@@ -56,7 +56,7 @@ describe BuildAlertService do
       end
 
       it "returns nil" do
-        parser_result = BuildAlertService.call(
+        parser_result = described_class.call(
           email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
           radius_meters: 1000
@@ -78,7 +78,7 @@ describe BuildAlertService do
       end
 
       it "returns nil" do
-        parser_result = BuildAlertService.call(
+        parser_result = described_class.call(
           email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
           radius_meters: 1000
@@ -90,7 +90,7 @@ describe BuildAlertService do
       it "sends a helpful email to the alert’s email address" do
         allow(AlertMailer).to receive(:new_signup_attempt_notice).with(preexisting_alert).and_call_original
 
-        BuildAlertService.call(
+        described_class.call(
           email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
           radius_meters: 1000
@@ -105,7 +105,7 @@ describe BuildAlertService do
         end
 
         it "returns the new alert" do
-          parser_result = BuildAlertService.call(
+          parser_result = described_class.call(
             email: "jenny@example.com",
             address: "24 Bruce Rd, Glenbrook",
             radius_meters: 1000

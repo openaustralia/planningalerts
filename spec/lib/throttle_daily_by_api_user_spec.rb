@@ -7,38 +7,38 @@ describe ThrottleDailyByApiUser do
 
   describe "client_identifier" do
     let(:url) { "/applications.js?lng=146&lat=-38&key=myapikey" }
-    let(:result) { ThrottleDailyByApiUser.new(nil).client_identifier(request) }
+    let(:result) { described_class.new(nil).client_identifier(request) }
 
-    it "should throttle based on the api key" do
+    it "throttles based on the api key" do
       expect(result).to eq "myapikey"
     end
   end
 
   describe "#max_per_day" do
-    let(:result) { ThrottleDailyByApiUser.new(nil).max_per_day(request) }
+    let(:result) { described_class.new(nil).max_per_day(request) }
     let(:url) { "/applications.js?lng=146&lat=-38&key=#{key.value}" }
     let(:key) { create(:api_key) }
 
-    it "should have a default max of 1000" do
+    it "has a default max of 1000" do
       expect(result).to eq 1000
     end
 
     context "user with a special allowance" do
       let(:key) { create(:api_key, daily_limit: 2000) }
 
-      it "should have a higher rate than normal" do
+      it "has a higher rate than normal" do
         expect(result).to eq 2000
       end
     end
   end
 
   describe "#blacklisted?" do
-    let(:result) { ThrottleDailyByApiUser.new(nil).blacklisted?(request) }
+    let(:result) { described_class.new(nil).blacklisted?(request) }
 
     describe "Request to the home page" do
       let(:url) { "/" }
 
-      it "should not be blacklisted as it's not an api request" do
+      it "is not blacklisted as it's not an api request" do
         expect(result).to eq false
       end
     end
@@ -49,7 +49,7 @@ describe ThrottleDailyByApiUser do
       describe "A normal key" do
         let(:key) { create(:api_key) }
 
-        it "should not be blacklisted" do
+        it "is not blacklisted" do
           expect(result).to eq false
         end
       end
@@ -57,7 +57,7 @@ describe ThrottleDailyByApiUser do
       describe "A disabled key" do
         let(:key) { create(:api_key, disabled: true) }
 
-        it "should be blacklisted" do
+        it "is blacklisted" do
           expect(result).to eq true
         end
       end
@@ -65,12 +65,12 @@ describe ThrottleDailyByApiUser do
   end
 
   describe "#whitelisted?" do
-    let(:result) { ThrottleDailyByApiUser.new(nil).whitelisted?(request) }
+    let(:result) { described_class.new(nil).whitelisted?(request) }
 
     describe "Request to the home page" do
       let(:url) { "/" }
 
-      it "should be whitelisted as it's not an api request" do
+      it "is whitelisted as it's not an api request" do
         expect(result).to eq true
       end
     end
@@ -81,7 +81,7 @@ describe ThrottleDailyByApiUser do
       describe "A normal user" do
         let(:key) { create(:api_key) }
 
-        it "should not be whitelisted" do
+        it "is not whitelisted" do
           expect(result).to eq false
         end
       end
@@ -89,7 +89,7 @@ describe ThrottleDailyByApiUser do
       describe "with a non existent api key" do
         let(:url) { "/applications.js?lng=146&lat=-38&key=foo" }
 
-        it "should not be whitelisted" do
+        it "is not whitelisted" do
           expect(result).to be_falsey
         end
       end
@@ -98,7 +98,7 @@ describe ThrottleDailyByApiUser do
       describe "request to api docs" do
         let(:url) { "/api/howto" }
 
-        it "should be whitelisted" do
+        it "is whitelisted" do
           expect(result).to eq true
         end
       end

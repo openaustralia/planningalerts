@@ -3,7 +3,7 @@
 require "spec_helper"
 
 describe ReportMailer do
-  before :each do
+  before do
     @comment = build(:comment,
                      application: create(:geocoded_application, id: 2),
                      text: "I'm saying something abusive",
@@ -16,26 +16,26 @@ describe ReportMailer do
                     email: "reporter@foo.com",
                     comment: @comment,
                     details: "It's very rude!")
-    @notifier = ReportMailer.notify(@report)
+    @notifier = described_class.notify(@report)
   end
 
-  it "should come from the moderator's email address" do
+  it "comes from the moderator's email address" do
     expect(@notifier.from).to eq(["moderator@planningalerts.org.au"])
   end
 
-  it "should have a replyto of the reporter's email address" do
+  it "has a replyto of the reporter's email address" do
     expect(@notifier.reply_to).to eq(["reporter@foo.com"])
   end
 
-  it "should go to the moderator email address" do
+  it "goes to the moderator email address" do
     expect(@notifier.to).to eq(["moderator@planningalerts.org.au"])
   end
 
-  it "should tell the moderator what the email is about" do
+  it "tells the moderator what the email is about" do
     expect(@notifier.subject).to eq("PlanningAlerts: Abuse report")
   end
 
-  it "should tell the moderator everything they need to know to decide on what to do with the report" do
+  it "tells the moderator everything they need to know to decide on what to do with the report" do
     expect(@notifier.body.to_s).to eq <<~REPORT
       The abuse report was completed by Joe Reporter (reporter@foo.com) who said:
       It's very rude!
@@ -52,6 +52,6 @@ describe ReportMailer do
   end
 
   it "doesn’t include the commenters email as this could lead to data leak" do
-    expect(@notifier.body.to_s).to_not have_content("rude@foo.com")
+    expect(@notifier.body.to_s).not_to have_content("rude@foo.com")
   end
 end

@@ -12,14 +12,14 @@ describe TwitterFeed do
     end
 
     context "with no twitter credentials" do
-      it "should return nothing" do
-        expect(TwitterFeed.new("planningalerts", silent_logger).items).to be_empty
+      it "returns nothing" do
+        expect(described_class.new("planningalerts", silent_logger).items).to be_empty
       end
 
-      it "should log a warning" do
+      it "logs a warning" do
         logger = Logger.new($stdout)
         expect(logger).to receive(:warn).with("No twitter API credentials set")
-        TwitterFeed.new("planningalerts", logger).items
+        described_class.new("planningalerts", logger).items
       end
     end
 
@@ -38,9 +38,9 @@ describe TwitterFeed do
       context "for a valid twitter user" do
         let(:twitter_user) { "planningalerts" }
 
-        it "should return the last 2 tweets" do
+        it "returns the last 2 tweets" do
           items = VCR.use_cassette("twitter") do
-            TwitterFeed.new(twitter_user, Logger.new($stdout)).items
+            described_class.new(twitter_user, Logger.new($stdout)).items
           end
           expect(items.count).to eq 2
           expect(items[0].title).to eq "@wheelyweb definitely agree that things would be improved by showing a selection of trending applications in differ… https://t.co/z8XDZOz7kK"
@@ -55,18 +55,18 @@ describe TwitterFeed do
       context "for an invalid twitter user" do
         let(:twitter_user) { "abc768a" }
 
-        it "should return nothing" do
+        it "returns nothing" do
           items = VCR.use_cassette("twitter") do
-            TwitterFeed.new(twitter_user, silent_logger).items
+            described_class.new(twitter_user, silent_logger).items
           end
           expect(items).to be_empty
         end
 
-        it "should log an error" do
+        it "logs an error" do
           logger = Logger.new($stdout)
           expect(logger).to receive(:error).with("while accessing twitter API: Sorry, that page does not exist.")
           VCR.use_cassette("twitter") do
-            TwitterFeed.new(twitter_user, logger).items
+            described_class.new(twitter_user, logger).items
           end
         end
       end

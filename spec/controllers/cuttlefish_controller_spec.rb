@@ -6,29 +6,29 @@ describe CuttlefishController do
   context "has a webhook key" do
     before { expect(ENV).to receive(:[]).with("CUTTLEFISH_WEBHOOK_KEY").and_return("abc123") }
 
-    it "should not allow an incorrect webhook key" do
-      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
+    it "does not allow an incorrect webhook key" do
+      expect(NotifySlackCommentDeliveryService).not_to receive(:call)
 
       post :event, params: { key: "wrong" }, format: :json
       expect(response.status).to eq(403)
     end
 
-    it "should allow a correct webhook key" do
-      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
+    it "allows a correct webhook key" do
+      expect(NotifySlackCommentDeliveryService).not_to receive(:call)
 
       post :event, params: { key: "abc123" }, format: :json
       expect(response.status).to eq(200)
     end
 
-    it "should accept a test event but do nothing" do
-      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
+    it "accepts a test event but do nothing" do
+      expect(NotifySlackCommentDeliveryService).not_to receive(:call)
 
       post :event, params: { key: "abc123", test_event: {} }, format: :json
       expect(response.status).to eq(200)
     end
 
-    it "should accept a delivery event for an alert email and record a succesful delivery" do
-      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
+    it "accepts a delivery event for an alert email and record a succesful delivery" do
+      expect(NotifySlackCommentDeliveryService).not_to receive(:call)
       alert = create(:alert, id: 123)
       params = {
         key: "abc123",
@@ -58,8 +58,8 @@ describe CuttlefishController do
       expect(alert.last_delivered_successfully).to eq true
     end
 
-    it "should accept a delivery event for an alert email and do nothing" do
-      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
+    it "accepts a delivery event for an alert email and do nothing" do
+      expect(NotifySlackCommentDeliveryService).not_to receive(:call)
       alert = create(:alert, id: 123)
       params = {
         key: "abc123",
@@ -89,8 +89,8 @@ describe CuttlefishController do
       expect(alert.last_delivered_successfully).to be_nil
     end
 
-    it "should accept a delivery event for an alert email and record a failed delivery" do
-      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
+    it "accepts a delivery event for an alert email and record a failed delivery" do
+      expect(NotifySlackCommentDeliveryService).not_to receive(:call)
       alert = create(:alert, id: 123)
       params = {
         key: "abc123",
@@ -120,8 +120,8 @@ describe CuttlefishController do
       expect(alert.last_delivered_successfully).to eq false
     end
 
-    it "should accept a succesful delivery event for a comment email" do
-      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
+    it "accepts a succesful delivery event for a comment email" do
+      expect(NotifySlackCommentDeliveryService).not_to receive(:call)
       comment = create(:comment, id: 12)
       params = {
         key: "abc123",
@@ -150,7 +150,7 @@ describe CuttlefishController do
       expect(comment.last_delivered_successfully).to eq true
     end
 
-    it "should accept a hard bounce delivery event for a comment email and do something" do
+    it "accepts a hard bounce delivery event for a comment email and do something" do
       comment = create(:comment, id: 12)
       expect(NotifySlackCommentDeliveryService).to receive(:call).with(
         comment: comment,
@@ -187,9 +187,9 @@ describe CuttlefishController do
       expect(comment.last_delivered_successfully).to eq false
     end
 
-    it "should accept a soft bounce delivery event for a comment email and do something" do
+    it "accepts a soft bounce delivery event for a comment email and do something" do
       comment = create(:comment, id: 12)
-      expect(NotifySlackCommentDeliveryService).to_not receive(:call)
+      expect(NotifySlackCommentDeliveryService).not_to receive(:call)
 
       params = {
         key: "abc123",

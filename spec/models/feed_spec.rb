@@ -5,15 +5,15 @@ require "#{File.dirname(__FILE__)}/../spec_helper"
 describe Feed do
   describe "#valid?" do
     it "lodgement_date_start" do
-      feed = Feed.new(base_url: "http://foo.com", lodgement_date_start: "2012")
+      feed = described_class.new(base_url: "http://foo.com", lodgement_date_start: "2012")
       expect(feed).not_to be_valid
       expect(feed.errors.messages).to eq(lodgement_date_start: ["is not a correctly formatted date"])
     end
   end
 
   describe ".create_from_url" do
-    it "should parse out parameters from a full url" do
-      f = Feed.create_from_url("http://localhost:3000/atdis/feed/1/atdis/1.0/applications.json?lodgement_date_end=2019-01-01&lodgement_date_start=2018-12-01&street=Foo")
+    it "parses out parameters from a full url" do
+      f = described_class.create_from_url("http://localhost:3000/atdis/feed/1/atdis/1.0/applications.json?lodgement_date_end=2019-01-01&lodgement_date_start=2018-12-01&street=Foo")
       expect(f.base_url).to eq "http://localhost:3000/atdis/feed/1/atdis/1.0"
       expect(f.page).to eq 1
       expect(f.street).to eq "Foo"
@@ -25,20 +25,20 @@ describe Feed do
   end
 
   describe "#filters_set?" do
-    it "should be false if all filters are nil" do
-      f = Feed.new(base_url: "http://foo.com")
-      expect(f.filters_set?).to be_falsey
+    it "is false if all filters are nil" do
+      f = described_class.new(base_url: "http://foo.com")
+      expect(f).not_to be_filters_set
     end
 
-    it "should be true if any filter is set" do
-      f = Feed.new(base_url: "http://foo.com", lodgement_date_start: "2012")
-      expect(f.filters_set?).to be_truthy
+    it "is true if any filter is set" do
+      f = described_class.new(base_url: "http://foo.com", lodgement_date_start: "2012")
+      expect(f).to be_filters_set
     end
   end
 
   describe "#applications" do
-    it "should just delegate to the ATDIS gem" do
-      f = Feed.new(base_url: "http://foo.com", lodgement_date_start: "2012")
+    it "justs delegate to the ATDIS gem" do
+      f = described_class.new(base_url: "http://foo.com", lodgement_date_start: "2012")
       atdis = double
       applications = double
       expect(ATDIS::Feed).to receive(:new).with("http://foo.com", "Sydney").and_return(atdis)
@@ -48,19 +48,19 @@ describe Feed do
   end
 
   describe "#persisted?" do
-    it "should always be false" do
-      f = Feed.new(base_url: "http://foo.com")
+    it "alwayses be false" do
+      f = described_class.new(base_url: "http://foo.com")
       expect(f.persisted?).to eq false
     end
   end
 
   describe ".example_path" do
-    it "should return the file path to where the examples are stored" do
-      expect(Feed.example_path(6, 1)).to eq "app/views/atdis/examples/example6_page1.json"
+    it "returns the file path to where the examples are stored" do
+      expect(described_class.example_path(6, 1)).to eq "app/views/atdis/examples/example6_page1.json"
     end
 
-    it "should return a path to an existing file" do
-      expect(File.exist?(Feed.example_path(1, 1))).to be true
+    it "returns a path to an existing file" do
+      expect(File.exist?(described_class.example_path(1, 1))).to be true
     end
   end
 end

@@ -72,7 +72,7 @@ RSpec.configure do |config|
 
   # This is a workaround for a strange thing where ActionMailer::Base.deliveries isn't being
   # cleared out correctly in feature specs. So, do it here for everything.
-  config.before(:each) do
+  config.before do
     ActionMailer::Base.deliveries = []
   end
 

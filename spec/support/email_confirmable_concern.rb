@@ -11,7 +11,7 @@ shared_examples_for "email_confirmable" do
       build(model_name_for_factory_bot, email: nil)
     end
 
-    expect(object).to_not be_valid
+    expect(object).not_to be_valid
   end
 
   it "must have a valid email address" do
@@ -47,7 +47,7 @@ shared_examples_for "email_confirmable" do
         create(model_name_for_factory_bot)
       end
 
-      expect(object.confirm_id).to_not eq another_object.confirm_id
+      expect(object.confirm_id).not_to eq another_object.confirm_id
     end
 
     it "only includes hex characters and is exactly twenty characters long" do
@@ -60,7 +60,7 @@ shared_examples_for "email_confirmable" do
       VCR.use_cassette("planningalerts") { build(model_name_for_factory_bot) }
     end
 
-    it "should call the method to send the confirmation email" do
+    it "calls the method to send the confirmation email" do
       expect(object).to receive(:send_confirmation_email)
       object.save
     end

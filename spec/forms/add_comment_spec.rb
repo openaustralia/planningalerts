@@ -23,7 +23,7 @@ describe AddComment do
     context "and there is no address" do
       before { add_comment_form.address = nil }
 
-      it { expect(add_comment_form).to_not be_valid }
+      it { expect(add_comment_form).not_to be_valid }
     end
 
     context "and an address is present" do

@@ -11,11 +11,13 @@ describe "GenerateSitemapService" do
     logger
   end
 
-  before(:each) { application }
-  before(:each) { FileUtils.rm_f("public/sitemaps/sitemap1.xml.gz") }
-  after(:each) { FileUtils.rm_f("public/sitemaps/sitemap1.xml.gz") }
+  before { application }
 
-  it "should include the path of the application page" do
+  before { FileUtils.rm_f("public/sitemaps/sitemap1.xml.gz") }
+
+  after { FileUtils.rm_f("public/sitemaps/sitemap1.xml.gz") }
+
+  it "includes the path of the application page" do
     GenerateSitemapService.call(logger: logger)
 
     Zlib::GzipReader.open("public/sitemaps/sitemap1.xml.gz") do |gz|

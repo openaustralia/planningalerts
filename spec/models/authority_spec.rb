@@ -6,79 +6,79 @@ describe Authority do
   describe "validations" do
     let!(:existing_authority) { create(:authority, short_name: "Existing Council") }
 
-    it "should ensure a unique short_name" do
+    it "ensures a unique short_name" do
       new_authority = build(:authority, short_name: "Existing Council")
 
       expect(existing_authority).to be_valid
 
-      expect(new_authority).to_not be_valid
+      expect(new_authority).not_to be_valid
       expect(new_authority.errors.messages[:short_name]).to eq(["is not unique when encoded"])
     end
 
     it "unique short name should be case insensitive" do
       new_authority = build(:authority, short_name: "existing council")
 
-      expect(new_authority).to_not be_valid
+      expect(new_authority).not_to be_valid
       expect(new_authority.errors.messages[:short_name]).to eq(["is not unique when encoded"])
     end
 
-    it "should allow a different short_name" do
+    it "allows a different short_name" do
       new_authority = build(:authority, short_name: "Different Council")
       expect(new_authority).to be_valid
     end
 
-    it "should not allow a name that encodes to the same string" do
+    it "does not allow a name that encodes to the same string" do
       new_authority = build(:authority, short_name: "existing_council")
-      expect(new_authority).to_not be_valid
+      expect(new_authority).not_to be_valid
       expect(new_authority.errors.messages[:short_name]).to eq(["is not unique when encoded"])
     end
   end
 
   describe "detecting authorities with old applications" do
-    before :each do
+    before do
       @a1 = create(:authority)
       @a2 = create(:authority)
       create(:geocoded_application, authority: @a1, date_scraped: 3.weeks.ago)
       create(:geocoded_application, authority: @a2)
     end
 
-    it "should report that a scraper is broken if it hasn't received a DA in over two weeks" do
+    it "reports that a scraper is broken if it hasn't received a DA in over two weeks" do
       expect(@a1.broken?).to eq true
     end
 
-    it "should not report that a scraper is broken if it has received a DA in less than two weeks" do
+    it "does not report that a scraper is broken if it has received a DA in less than two weeks" do
       expect(@a2.broken?).to eq false
     end
   end
 
   describe "short name encoded" do
-    before :each do
+    before do
       @a1 = create(:authority, short_name: "Blue Mountains", full_name: "Blue Mountains City Council")
       @a2 = create(:authority, short_name: "Blue Mountains (new one)", full_name: "Blue Mountains City Council (fictional new one)")
     end
 
-    it "should be constructed by replacing space by underscores and making it all lowercase" do
+    it "is constructed by replacing space by underscores and making it all lowercase" do
       expect(@a1.short_name_encoded).to eq "blue_mountains"
     end
 
-    it "should remove any non-word characters (except for underscore)" do
+    it "removes any non-word characters (except for underscore)" do
       expect(@a2.short_name_encoded).to eq "blue_mountains_new_one"
     end
 
-    it "should find a authority by the encoded name" do
-      expect(Authority.find_short_name_encoded("blue_mountains")).to eq @a1
-      expect(Authority.find_short_name_encoded("blue_mountains_new_one")).to eq @a2
+    it "finds a authority by the encoded name" do
+      expect(described_class.find_short_name_encoded("blue_mountains")).to eq @a1
+      expect(described_class.find_short_name_encoded("blue_mountains_new_one")).to eq @a2
     end
   end
 
   describe "#comments_per_week" do
     let(:authority) { create(:authority) }
 
-    before :each do
+    before do
       Timecop.freeze(Time.zone.local(2016, 1, 5))
     end
 
-    after :each do
+    after do
       Timecop.return
     end
 
@@ -87,7 +87,7 @@ describe Authority do
     end
 
     context "when the authority has applications" do
-      before :each do
+      before do
         create(
           :geocoded_application,
           authority: authority,

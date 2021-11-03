@@ -7,18 +7,18 @@ describe ConfirmationMailer do
     let(:object) { mock_model(Alert, confirm_id: "a237bfc", email: "matthew@oaf.org.au") }
 
     context "default theme" do
-      let(:notifier) { ConfirmationMailer.confirm(object) }
+      let(:notifier) { described_class.confirm(object) }
 
       describe "confirm" do
-        it "should come from the planningalerts' normal email" do
+        it "comes from the planningalerts' normal email" do
           expect(notifier.from).to eq(["contact@planningalerts.org.au"])
         end
 
-        it "should go to the alert's email address" do
+        it "goes to the alert's email address" do
           expect(notifier.to).to eq(["matthew@oaf.org.au"])
         end
 
-        it "should tell the person what the email is about" do
+        it "tells the person what the email is about" do
           expect(notifier.subject).to eq("PlanningAlerts: Please confirm your alert")
         end
 
@@ -49,18 +49,18 @@ describe ConfirmationMailer do
     end
 
     context "default theme" do
-      let(:notifier) { ConfirmationMailer.confirm(object) }
+      let(:notifier) { described_class.confirm(object) }
 
       describe "confirm" do
-        it "should come from the planningalerts' normal email" do
+        it "comes from the planningalerts' normal email" do
           expect(notifier.from).to eq(["contact@planningalerts.org.au"])
         end
 
-        it "should go to the comment's email address" do
+        it "goes to the comment's email address" do
           expect(notifier.to).to eq(["matthew@openaustralia.org"])
         end
 
-        it "should tell the person what the email is about" do
+        it "tells the person what the email is about" do
           expect(notifier.subject).to eq("PlanningAlerts: Please confirm your comment")
         end
 

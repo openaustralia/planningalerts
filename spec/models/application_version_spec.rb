@@ -57,31 +57,31 @@ describe ApplicationVersion do
         application
       end
 
-      it "should allow multiple versions for the same application that are not current" do
+      it "allows multiple versions for the same application that are not current" do
         create(:geocoded_application_version, application: application1, current: false)
         version2 = build(:application_version, application: application1, current: false)
         expect(version2).to be_valid
       end
 
-      it "should allow one version for the same application to be current" do
+      it "allows one version for the same application to be current" do
         create(:geocoded_application_version, application: application1, current: false)
         version2 = build(:application_version, application: application1, current: true)
         expect(version2).to be_valid
       end
 
-      it "should allow one version for the same application to be current" do
+      it "allows one version for the same application to be current" do
         create(:geocoded_application_version, application: application1, current: true)
         version2 = build(:application_version, application: application1, current: false)
         expect(version2).to be_valid
       end
 
-      it "should not allow more than one version to be current" do
+      it "does not allow more than one version to be current" do
         create(:geocoded_application_version, application: application1, current: true)
         version2 = build(:application_version, application: application1, current: true)
-        expect(version2).to_not be_valid
+        expect(version2).not_to be_valid
       end
 
-      it "should allow more than one version to be current for different applications" do
+      it "allows more than one version to be current for different applications" do
         create(:geocoded_application_version, application: application1, current: true)
         version2 = build(:application_version, application: application2, current: true)
         expect(version2).to be_valid
@@ -90,77 +90,77 @@ describe ApplicationVersion do
   end
 
   describe ".normalise_description" do
-    it "should allow applications to be blank" do
-      expect(ApplicationVersion.normalise_description("")).to eq("")
+    it "allows applications to be blank" do
+      expect(described_class.normalise_description("")).to eq("")
     end
 
-    it "should start descriptions with a capital letter" do
-      expect(ApplicationVersion.normalise_description("a description")).to eq("A description")
+    it "starts descriptions with a capital letter" do
+      expect(described_class.normalise_description("a description")).to eq("A description")
     end
 
-    it "should fix capitilisation of descriptions all in caps" do
-      expect(ApplicationVersion.normalise_description("DWELLING")).to eq("Dwelling")
+    it "fixes capitilisation of descriptions all in caps" do
+      expect(described_class.normalise_description("DWELLING")).to eq("Dwelling")
     end
 
-    it "should not capitalise descriptions that are partially in lowercase" do
-      expect(ApplicationVersion.normalise_description("To merge Owners Corporation")).to eq("To merge Owners Corporation")
+    it "does not capitalise descriptions that are partially in lowercase" do
+      expect(described_class.normalise_description("To merge Owners Corporation")).to eq("To merge Owners Corporation")
     end
 
-    it "should capitalise the first word of each sentence" do
-      expect(ApplicationVersion.normalise_description("A SENTENCE. ANOTHER SENTENCE")).to eq("A sentence. Another sentence")
+    it "capitalises the first word of each sentence" do
+      expect(described_class.normalise_description("A SENTENCE. ANOTHER SENTENCE")).to eq("A sentence. Another sentence")
     end
 
-    it "should only capitalise the word if it's all lower case" do
-      expect(ApplicationVersion.normalise_description("ab sentence. AB SENTENCE. aB sentence. Ab sentence")).to eq("Ab sentence. AB SENTENCE. aB sentence. Ab sentence")
+    it "onlies capitalise the word if it's all lower case" do
+      expect(described_class.normalise_description("ab sentence. AB SENTENCE. aB sentence. Ab sentence")).to eq("Ab sentence. AB SENTENCE. aB sentence. Ab sentence")
     end
 
-    it "should allow blank sentences" do
-      expect(ApplicationVersion.normalise_description("A poorly.    . formed sentence . \n")).to eq("A poorly. . Formed sentence. ")
+    it "allows blank sentences" do
+      expect(described_class.normalise_description("A poorly.    . formed sentence . \n")).to eq("A poorly. . Formed sentence. ")
     end
   end
 
   describe ".normalise_address" do
-    it "should convert words to first letter capitalised form" do
-      expect(ApplicationVersion.normalise_address("1 KINGSTON AVENUE, PAKENHAM")).to eq("1 Kingston Avenue, Pakenham")
+    it "converts words to first letter capitalised form" do
+      expect(described_class.normalise_address("1 KINGSTON AVENUE, PAKENHAM")).to eq("1 Kingston Avenue, Pakenham")
     end
 
-    it "should not convert words that are not already all in upper case" do
-      expect(ApplicationVersion.normalise_address("In the paddock next to the radio telescope")).to eq("In the paddock next to the radio telescope")
+    it "does not convert words that are not already all in upper case" do
+      expect(described_class.normalise_address("In the paddock next to the radio telescope")).to eq("In the paddock next to the radio telescope")
     end
 
-    it "should handle a mixed bag of lower and upper case" do
-      expect(ApplicationVersion.normalise_address("63 Kimberley drive, SHAILER PARK")).to eq("63 Kimberley drive, Shailer Park")
+    it "handles a mixed bag of lower and upper case" do
+      expect(described_class.normalise_address("63 Kimberley drive, SHAILER PARK")).to eq("63 Kimberley drive, Shailer Park")
     end
 
-    it "should not affect dashes in the address" do
-      expect(ApplicationVersion.normalise_address("63-81")).to eq("63-81")
+    it "does not affect dashes in the address" do
+      expect(described_class.normalise_address("63-81")).to eq("63-81")
     end
 
-    it "should not affect abbreviations like the state names" do
-      expect(ApplicationVersion.normalise_address("1 KINGSTON AVENUE, PAKENHAM VIC 3810")).to eq("1 Kingston Avenue, Pakenham VIC 3810")
+    it "does not affect abbreviations like the state names" do
+      expect(described_class.normalise_address("1 KINGSTON AVENUE, PAKENHAM VIC 3810")).to eq("1 Kingston Avenue, Pakenham VIC 3810")
     end
 
-    it "should not affect the state names" do
-      expect(ApplicationVersion.normalise_address("QLD VIC NSW SA ACT TAS WA NT")).to eq("QLD VIC NSW SA ACT TAS WA NT")
+    it "does not affect the state names" do
+      expect(described_class.normalise_address("QLD VIC NSW SA ACT TAS WA NT")).to eq("QLD VIC NSW SA ACT TAS WA NT")
     end
 
-    it "should not affect the state names with punctuation" do
-      expect(ApplicationVersion.normalise_address("QLD. ,VIC ,NSW, !SA /ACT/ TAS: WA, NT;")).to eq("QLD. ,VIC ,NSW, !SA /ACT/ TAS: WA, NT;")
+    it "does not affect the state names with punctuation" do
+      expect(described_class.normalise_address("QLD. ,VIC ,NSW, !SA /ACT/ TAS: WA, NT;")).to eq("QLD. ,VIC ,NSW, !SA /ACT/ TAS: WA, NT;")
     end
 
-    it "should not affect codes" do
-      expect(ApplicationVersion.normalise_address("R79813 24X")).to eq("R79813 24X")
+    it "does not affect codes" do
+      expect(described_class.normalise_address("R79813 24X")).to eq("R79813 24X")
     end
   end
 
   describe "#changed_data_attributes" do
     let(:version) { create(:geocoded_application_version) }
 
-    it "should return all data_attributes if only version" do
+    it "returns all data_attributes if only version" do
       expect(version.changed_data_attributes).to eq version.data_attributes
     end
 
-    it "should return just what's changed" do
+    it "returns just what's changed" do
       date_scraped = 1.minute.ago
       new_version = create(
         :geocoded_application_version,
@@ -181,10 +181,10 @@ describe ApplicationVersion do
         create(:geocoded_application_version, on_notice_to: nil)
       end
 
-      it { expect(version.official_submission_period_expired?).to be_falsey }
+      it { expect(version).not_to be_official_submission_period_expired }
     end
 
-    context "when the ‘on notice to’ date has passed", focus: true do
+    context "when the ‘on notice to’ date has passed" do
       let(:version) do
         create(:geocoded_application_version, on_notice_to: Time.zone.today - 1.day)
       end

@@ -10,9 +10,10 @@ describe Application do
       it { expect(build(:application_with_no_version, council_reference: "")).not_to be_valid }
 
       context "one application already exists" do
-        before :each do
+        before do
           create(:geocoded_application, council_reference: "A01", authority: authority)
         end
+
         let(:authority2) { create(:authority, full_name: "A second authority") }
 
         it { expect(build(:application_with_no_version, council_reference: "A01", authority: authority)).not_to be_valid }
@@ -23,7 +24,7 @@ describe Application do
   end
 
   describe "on saving" do
-    it "should geocode the address" do
+    it "geocodes the address" do
       loc = GeocoderResults.new(
         [
           GeocodedLocation.new(
@@ -43,7 +44,7 @@ describe Application do
       expect(a.lng).to eq(loc.top.lng)
     end
 
-    it "should log an error if the geocoder can't make sense of the address" do
+    it "logs an error if the geocoder can't make sense of the address" do
       expect(GeocodeService).to receive(:call).with("dfjshd").and_return(
         GeocoderResults.new([], "something went wrong")
       )
@@ -59,10 +60,10 @@ describe Application do
 
   # TODO: The main code in the application does not yet reflect this way of doing a query
   describe ".with_first_version" do
-    it "should not do too many sql queries" do
-      5.times { create(:geocoded_application) }
-      expect(ActiveRecord::Base.connection).to receive(:exec_query).at_most(2).times.and_call_original
-      Application.with_first_version.order("application_versions.date_scraped DESC").includes(:current_version).all.map(&:description)
+    it "does not do too many sql queries" do
+      create_list(:geocoded_application, 5)
+      expect(ActiveRecord::Base.connection).to receive(:exec_query).at_most(:twice).and_call_original
+      described_class.with_first_version.order("application_versions.date_scraped DESC").includes(:current_version).all.map(&:description)
     end
   end
 
@@ -80,10 +81,10 @@ describe Application do
       )
     end
 
-    it "should be the initial date scraped" do
+    it "is the initial date scraped" do
       date_scraped = application.first_date_scraped
       expect(updated_application.first_date_scraped).to eq date_scraped
-      expect(updated_application.current_version.date_scraped).to_not eq date_scraped
+      expect(updated_application.current_version.date_scraped).not_to eq date_scraped
     end
   end
 end

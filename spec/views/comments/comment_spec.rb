@@ -13,7 +13,7 @@ describe "comments/_comment" do
     Timecop.return
   end
 
-  it "should add rel='no-follow' to links in the comment text" do
+  it "adds rel='no-follow' to links in the comment text" do
     comment = create(:confirmed_comment,
                      text: 'This is a link to <a href="http://openaustralia.org">openaustralia.org</a>',
                      application: application)
@@ -24,7 +24,7 @@ describe "comments/_comment" do
     expect(rendered).to include(expected_html)
   end
 
-  it "should format simple text in separate paragraphs with p tags" do
+  it "formats simple text in separate paragraphs with p tags" do
     comment = create(:confirmed_comment,
                      text: "This is the first paragraph\nAnd the next line\n\nThis is a new paragraph",
                      application: application)
@@ -38,7 +38,7 @@ describe "comments/_comment" do
     expect(rendered).to include(expected_html)
   end
 
-  it "should get rid of nasty javascript and strip out images" do
+  it "gets rid of nasty javascript and strip out images" do
     comment = create(:confirmed_comment,
                      text: "<a href=\"javascript:document.location='http://www.google.com/'\">A nasty link</a><img src=\"http://foo.co\">",
                      application: application)

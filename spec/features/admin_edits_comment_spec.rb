@@ -2,15 +2,15 @@
 
 require "spec_helper"
 
-feature "Admin edits comment" do
-  background do
+describe "Admin edits comment" do
+  before do
     create(:confirmed_comment,
            name: "Alena",
            id: 1,
            confirmed_at: 3.days.ago)
   end
 
-  scenario "successfully" do
+  it "successfully" do
     sign_in_as_admin
 
     click_link "Comments"

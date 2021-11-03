@@ -13,11 +13,13 @@ describe ApiController do
 
     context "no API key is given" do
       subject { get method, params: params.merge(key: nil) }
+
       include_examples "not authorised"
     end
 
     context "invalid API key is given" do
       subject { get method, params: params.merge(key: "jsdfhsd") }
+
       include_examples "not authorised"
     end
 
@@ -26,6 +28,7 @@ describe ApiController do
         key = FactoryBot.create(:api_key, disabled: true)
         get method, params: params.merge(key: key.value)
       end
+
       include_examples "not authorised"
     end
   end
@@ -34,7 +37,7 @@ describe ApiController do
 
   describe "#all" do
     describe "rss" do
-      it "should not support rss" do
+      it "does not support rss" do
         key.update(bulk: true)
         expect { get :all, params: { format: "rss", key: key.value } }.to raise_error ActionController::UnknownFormat
       end
@@ -46,7 +49,7 @@ describe ApiController do
         let(:params) { { format: "js" } }
       end
 
-      it "should error if valid api key is given but no bulk api access" do
+      it "errors if valid api key is given but no bulk api access" do
         result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1))
         allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
         get :all, params: { key: key.value, format: "js" }
@@ -54,7 +57,7 @@ describe ApiController do
         expect(response.body).to eq('{"error":"no bulk api access"}')
       end
 
-      it "should find recent applications if api key is given" do
+      it "finds recent applications if api key is given" do
         key.update(bulk: true)
         authority = create(:authority, full_name: "Acme Local Planning Authority")
         result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
@@ -95,7 +98,7 @@ describe ApiController do
       let(:params) { { format: "js", postcode: "2780" } }
     end
 
-    it "should find recent applications for a postcode" do
+    it "finds recent applications for a postcode" do
       result = Application.none
       scope1 = Application.none
       scope2 = Application.none
@@ -113,7 +116,7 @@ describe ApiController do
       expect(assigns[:description]).to eq("Recent applications in 2780")
     end
 
-    it "should support json api version 1" do
+    it "supports json api version 1" do
       authority = create(:authority, full_name: "Acme Local Planning Authority")
       application = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
       result = Application.where(id: application.id)
@@ -153,7 +156,7 @@ describe ApiController do
       )
     end
 
-    it "should support json api version 2" do
+    it "supports json api version 2" do
       authority = create(:authority, full_name: "Acme Local Planning Authority")
       application = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
       result = Application.where(id: application.id)
@@ -195,7 +198,7 @@ describe ApiController do
       )
     end
 
-    it "should support geojson" do
+    it "supports geojson" do
       authority = create(:authority, full_name: "Acme Local Planning Authority")
       application = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
       result = Application.where(id: application.id)
@@ -242,7 +245,17 @@ describe ApiController do
   describe "#point" do
     # Calls using address are no longer supported. See
     # https://github.com/openaustralia/planningalerts/issues/1356
-    it "should error when using deprecated API call" do
+    before do
+      @result = Application.none
+      scope1 = Application.none
+      scope2 = Application.none
+
+      allow(Application).to receive(:near).and_return(scope1)
+      allow(scope1).to receive(:includes).and_return(scope2)
+      allow(scope2).to receive(:paginate).and_return(@result)
+    end
+
+    it "errors when using deprecated API call" do
       get :point, params: { format: "rss", address: "24 Bruce Road Glenbrook" }
       expect(response.body).to eq("Bad request: Invalid parameter(s) used: address")
       expect(response.code).to eq("400")
@@ -253,35 +266,25 @@ describe ApiController do
       let(:params) { { format: "js", lat: 1.0, lng: 2.0 } }
     end
 
-    before :each do
-      @result = Application.none
-      scope1 = Application.none
-      scope2 = Application.none
-
-      allow(Application).to receive(:near).and_return(scope1)
-      allow(scope1).to receive(:includes).and_return(scope2)
-      allow(scope2).to receive(:paginate).and_return(@result)
-    end
-
-    it "should find recent applications near the point" do
+    it "finds recent applications near the point" do
       get :point, params: { key: key.value, format: "rss", lat: 1.0, lng: 2.0, radius: 4000 }
       expect(assigns[:applications]).to eq(@result)
       expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 1.0,2.0")
     end
 
-    it "should find recent applications near the point using the old parameter name" do
+    it "finds recent applications near the point using the old parameter name" do
       get :point, params: { key: key.value, format: "rss", lat: 1.0, lng: 2.0, area_size: 4000 }
       expect(assigns[:applications]).to eq(@result)
       expect(assigns[:description]).to eq("Recent applications within 4 kilometres of 1.0,2.0")
     end
 
-    it "should use a search radius of 2000 when none is specified" do
+    it "uses a search radius of 2000 when none is specified" do
       get :point, params: { key: key.value, format: "rss", lat: 1.0, lng: 2.0 }
       expect(assigns[:applications]).to eq(@result)
       expect(assigns[:description]).to eq("Recent applications within 2 kilometres of 1.0,2.0")
     end
 
-    it "should log the api call" do
+    it "logs the api call" do
       Timecop.freeze do
         # There is some truncation that happens in the serialisation
         expected_time = Time.at(Time.zone.now.to_f).utc
@@ -317,7 +320,7 @@ describe ApiController do
       end
     end
 
-    it "should find recent applications in an area" do
+    it "finds recent applications in an area" do
       result = Application.none
       scope1 = Application.none
       scope2 = Application.none
@@ -350,7 +353,7 @@ describe ApiController do
       let(:params) { { format: "js", authority_id: "blue_mountains" } }
     end
 
-    it "should find recent applications for an authority" do
+    it "finds recent applications for an authority" do
       authority = build(:authority, full_name: "Blue Mountains City Council", state: "NSW")
       result = Application.none
       scope1 = Application.none
@@ -375,7 +378,7 @@ describe ApiController do
       let(:params) { { format: "js", suburb: "Katoomba" } }
     end
 
-    it "should find recent applications for a suburb" do
+    it "finds recent applications for a suburb" do
       result = Application.none
       scope1 = Application.none
       scope2 = Application.none
@@ -394,7 +397,7 @@ describe ApiController do
     end
 
     describe "search by suburb and state" do
-      it "should find recent applications for a suburb and state" do
+      it "finds recent applications for a suburb and state" do
         result = Application.none
         scope1 = Application.none
         scope2 = Application.none
@@ -416,7 +419,7 @@ describe ApiController do
     end
 
     describe "search by suburb, state and postcode" do
-      it "should find recent applications for a suburb, state and postcode" do
+      it "finds recent applications for a suburb, state and postcode" do
         result = Application.none
         scope1 = Application.none
         scope2 = Application.none
@@ -454,21 +457,24 @@ describe ApiController do
     end
 
     context "valid authentication" do
+      subject { get :date_scraped, params: { key: key.value, format: "js", date_scraped: "2015-05-06" } }
+
       let(:key) { FactoryBot.create(:api_key, bulk: true) }
-      before(:each) do
+
+      before do
         5.times do
           create(:geocoded_application, date_scraped: Time.utc(2015, 5, 5, 12, 0, 0))
           create(:geocoded_application, date_scraped: Time.utc(2015, 5, 6, 12, 0, 0))
         end
       end
-      subject { get :date_scraped, params: { key: key.value, format: "js", date_scraped: "2015-05-06" } }
 
       it { expect(subject).to be_successful }
       it { expect(JSON.parse(subject.body).count).to eq 5 }
 
       context "invalid date" do
         subject { get :date_scraped, params: { key: key.value, format: "js", date_scraped: "foobar" } }
-        it { expect(subject).to_not be_successful }
+
+        it { expect(subject).not_to be_successful }
         it { expect(subject.body).to eq '{"error":"invalid date_scraped"}' }
       end
     end

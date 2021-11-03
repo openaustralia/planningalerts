@@ -7,7 +7,8 @@ describe ProcessAlertService do
 
   context "an alert with no new comments" do
     let(:alert) { create(:alert, address: address) }
-    before :each do
+
+    before do
       allow(alert).to receive(:recent_comments).and_return([])
       # Don't know why this isn't cleared out automatically
       ActionMailer::Base.deliveries = []
@@ -20,33 +21,33 @@ describe ProcessAlertService do
                suburb: "Glenbrook", state: "NSW", postcode: "2773", no_alerted: 3)
       end
 
-      before :each do
+      before do
         allow(alert).to receive(:recent_new_applications).and_return([application])
       end
 
-      it "should return the number of emails, applications and comments sent" do
-        expect(ProcessAlertService.call(alert: alert)).to eq([1, 1, 0])
+      it "returns the number of emails, applications and comments sent" do
+        expect(described_class.call(alert: alert)).to eq([1, 1, 0])
       end
 
-      it "should send an email" do
-        ProcessAlertService.call(alert: alert)
+      it "sends an email" do
+        described_class.call(alert: alert)
         expect(ActionMailer::Base.deliveries.size).to eq(1)
       end
 
-      it "should update the tally" do
-        ProcessAlertService.call(alert: alert)
+      it "updates the tally" do
+        described_class.call(alert: alert)
         # Just reload from the database to make sure
         application.reload
         expect(application.no_alerted).to eq(4)
       end
 
-      it "should update the last_sent time" do
-        ProcessAlertService.call(alert: alert)
+      it "updates the last_sent time" do
+        described_class.call(alert: alert)
         expect((alert.last_sent - Time.zone.now).abs).to be < 1
       end
 
-      it "should update the last_processed time" do
-        ProcessAlertService.call(alert: alert)
+      it "updates the last_processed time" do
+        described_class.call(alert: alert)
         expect((alert.last_processed - Time.zone.now).abs).to be < 1
       end
 
@@ -55,35 +56,35 @@ describe ProcessAlertService do
           create(:geocoded_application, lat: 1.0, lng: 2.0, address: "An address that can't be geocoded")
         end
 
-        it "should not cause the application to be re-geocoded" do
-          expect(GeocodeService).to_not receive(:call)
-          ProcessAlertService.call(alert: alert)
+        it "does not cause the application to be re-geocoded" do
+          expect(GeocodeService).not_to receive(:call)
+          described_class.call(alert: alert)
         end
       end
     end
 
     context "and no new applications nearby" do
-      before :each do
+      before do
         allow(alert).to receive(:recent_new_applications).and_return([])
       end
 
-      it "should not send an email" do
-        ProcessAlertService.call(alert: alert)
+      it "does not send an email" do
+        described_class.call(alert: alert)
         expect(ActionMailer::Base.deliveries).to be_empty
       end
 
-      it "should not update the last_sent time" do
-        ProcessAlertService.call(alert: alert)
+      it "does not update the last_sent time" do
+        described_class.call(alert: alert)
         expect(alert.last_sent).to be_nil
       end
 
-      it "should update the last_processed time" do
-        ProcessAlertService.call(alert: alert)
+      it "updates the last_processed time" do
+        described_class.call(alert: alert)
         expect((alert.last_processed - Time.zone.now).abs).to be < 1
       end
 
-      it "should return the number of applications and comments sent" do
-        expect(ProcessAlertService.call(alert: alert)).to eq([0, 0, 0])
+      it "returns the number of applications and comments sent" do
+        expect(described_class.call(alert: alert)).to eq([0, 0, 0])
       end
     end
   end
