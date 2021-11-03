@@ -11,6 +11,7 @@ class GoogleGeocodeService < ApplicationService
 
   sig { params(address: String).void }
   def initialize(address)
+    super()
     @address = address
   end
 
@@ -24,7 +25,7 @@ class GoogleGeocodeService < ApplicationService
       region: "au",
       sensor: false
     }
-    response = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?" + params.to_query)
+    response = HTTParty.get("https://maps.googleapis.com/maps/api/geocode/json?#{params.to_query}")
 
     status = response.parsed_response["status"]
     # TODO: Raise a proper error class here

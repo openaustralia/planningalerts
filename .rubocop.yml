@@ -37,6 +37,11 @@ Style/NumericLiterals:
 Style/Documentation:
   Enabled: false
 
+# We have a few places that we're using things population_2017 which quite
+# a reasonable way to name things.
+Naming/VariableNumber:
+  Enabled: false
+
 # Disable a bunch of metrics to do with code complexity. These as are all
 # a bit hard-nosed. Maybe after we've done a pass with Code Climate we
 # can revisit these

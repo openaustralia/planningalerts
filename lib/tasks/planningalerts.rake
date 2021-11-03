@@ -10,14 +10,14 @@ namespace :planningalerts do
       authorities = args[:authority_short_name] ? [Authority.find_short_name_encoded(args[:authority_short_name])] : Authority.active
       puts "Importing #{authorities.count} authorities"
       authorities.each do |authority|
-        info_logger = AuthorityLogger.new(authority.id, Logger.new(STDOUT))
+        info_logger = AuthorityLogger.new(authority.id, Logger.new($stdout))
         ImportApplicationsService.call(authority: authority, logger: info_logger)
       end
     end
 
     desc "Send planning alerts"
     task email: :environment do
-      QueueUpAlertsService.call(logger: Logger.new(STDOUT))
+      QueueUpAlertsService.call(logger: Logger.new($stdout))
     end
   end
 

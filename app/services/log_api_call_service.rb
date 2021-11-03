@@ -40,6 +40,7 @@ class LogApiCallService < ApplicationService
     ).void
   end
   def initialize(api_key:, ip_address:, query:, params:, user_agent:, time:)
+    super()
     @api_key = api_key
     @ip_address = ip_address
     @query = query

@@ -12,6 +12,7 @@ class QueueUpAlertsService < ApplicationService
 
   sig { params(logger: Logger).void }
   def initialize(logger:)
+    super()
     @logger = logger
   end
 

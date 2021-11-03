@@ -12,6 +12,7 @@ class GeocodeService < ApplicationService
 
   sig { params(address: String, threshold: Integer).void }
   def initialize(address, threshold)
+    super()
     @address = address
     @threshold = threshold
   end

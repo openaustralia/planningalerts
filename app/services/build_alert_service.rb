@@ -14,6 +14,7 @@ class BuildAlertService < ApplicationService
 
   sig { params(email: String, address: String, radius_meters: Integer).void }
   def initialize(email:, address:, radius_meters:)
+    super()
     @alert = T.let(
       Alert.new(
         email: email,

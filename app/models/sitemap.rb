@@ -74,7 +74,7 @@ class Sitemap
   SITEMAP_XMLNS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
   sig { params(root_url: String, root_path: String, logger: Logger).void }
-  def initialize(root_url, root_path, logger = Logger.new(STDOUT))
+  def initialize(root_url, root_path, logger = Logger.new($stdout))
     @root_url = root_url
     @root_path = root_path
     @logger = logger

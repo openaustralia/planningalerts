@@ -5,7 +5,7 @@ require "spec_helper"
 describe Sitemap do
   before :each do
     # Make the logging more silent during testing. Only display errors not general chit-chat.
-    @logger = Logger.new(STDOUT)
+    @logger = Logger.new($stdout)
     @logger.level = Logger::ERROR
   end
 

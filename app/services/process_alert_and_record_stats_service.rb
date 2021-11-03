@@ -13,6 +13,7 @@ class ProcessAlertAndRecordStatsService < ApplicationService
 
   sig { params(alert_id: Integer).void }
   def initialize(alert_id:)
+    super()
     @alert_id = alert_id
   end
 

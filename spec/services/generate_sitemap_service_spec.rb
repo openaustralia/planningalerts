@@ -6,7 +6,7 @@ describe "GenerateSitemapService" do
   let(:application) { create(:geocoded_application) }
   # A logger that only displays errrors
   let(:logger) do
-    logger = Logger.new(STDOUT)
+    logger = Logger.new($stdout)
     logger.level = Logger::ERROR
     logger
   end

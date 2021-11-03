@@ -24,6 +24,7 @@ class TopUsageApiUsersService < ApplicationService
 
   sig { params(redis: T.any(Redis, Redis::Namespace)).void }
   def initialize(redis)
+    super()
     @redis = redis
   end
 

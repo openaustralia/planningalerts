@@ -44,10 +44,10 @@ class ThrottleDailyByApiUser < Rack::Throttle::Limiter
     return false if blacklisted?(request)
 
     count = begin
-              cache_get(key = cache_key(request)).to_i
-            rescue StandardError
-              0
-            end
+      cache_get(key = cache_key(request)).to_i
+    rescue StandardError
+      0
+    end
     count += 1
     allowed = count <= max_per_window(request).to_i
     begin
@@ -62,10 +62,10 @@ class ThrottleDailyByApiUser < Rack::Throttle::Limiter
   sig { params(request: Rack::Request).returns(T::Boolean) }
   def api_request?(request)
     path_info = begin
-                  Rails.application.routes.recognize_path request.url
-                rescue StandardError
-                  nil
-                end
+      Rails.application.routes.recognize_path request.url
+    rescue StandardError
+      nil
+    end
 
     !path_info.nil? && path_info[:controller] == "api" && path_info[:action] != "howto"
   end

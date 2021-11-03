@@ -13,7 +13,12 @@ module AtdisHelper
     elsif value.class.respond_to?(:attribute_names)
       render partial: "attribute_table", locals: { model: value }
     elsif value.is_a?(DateTime)
-      content_tag(:div, time_tag(value) + " (" + time_ago_in_words(value) + " ago)", class: "value")
+      a = []
+      a << time_tag(value)
+      a << " ("
+      a << time_ago_in_words(value)
+      a << " ago)"
+      content_tag(:div, safe_join(a), class: "value")
     elsif value.is_a?(URI::HTTP)
       content_tag(:div, link_to(value.to_s, value.to_s), class: "value")
     elsif value.respond_to?(:x) && value.respond_to?(:y)

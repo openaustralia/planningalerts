@@ -52,7 +52,7 @@ describe ImportApplicationsService do
   end
 
   it "should import the correct applications" do
-    logger = Logger.new(STDOUT)
+    logger = Logger.new($stdout)
     expect(logger).to receive(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01")
     expect(logger).to receive(:info).with("Took 0 s to import applications from Fiddlesticks, NSW")
     allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(0)
@@ -75,7 +75,7 @@ describe ImportApplicationsService do
   end
 
   it "should update an application when it already exist" do
-    logger = Logger.new(STDOUT)
+    logger = Logger.new($stdout)
     expect(logger).to receive(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01")
     expect(logger).to receive(:info).with("1 application found for Fiddlesticks, NSW with date from 2009-01-01")
     expect(logger).to receive(:info).twice.with("Took 0 s to import applications from Fiddlesticks, NSW")
@@ -99,7 +99,7 @@ describe ImportApplicationsService do
   end
 
   it "should escape the morph api key and the sql query" do
-    logger = Logger.new(STDOUT)
+    logger = Logger.new($stdout)
     allow(logger).to receive(:info)
     expect(ImportApplicationsService).to receive(:open_url_safe).with(
       "https://api.morph.io//data.json?key=12%2F&query=select+%2A+from+%60data%60+where+%60date_scraped%60+%3E%3D+%272009-01-01%27",
@@ -119,7 +119,7 @@ describe ImportApplicationsService do
       allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(7)
       allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("")
       Timecop.freeze(date) do
-        s = ImportApplicationsService.new(authority: auth, logger: Logger.new(STDOUT))
+        s = ImportApplicationsService.new(authority: auth, logger: Logger.new($stdout))
         expect(s.morph_query).to eq "select * from `data` where `date_scraped` >= '2008-12-25'"
       end
     end
@@ -131,7 +131,7 @@ describe ImportApplicationsService do
         allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(7)
         allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("")
         Timecop.freeze(date) do
-          s = ImportApplicationsService.new(authority: auth, logger: Logger.new(STDOUT))
+          s = ImportApplicationsService.new(authority: auth, logger: Logger.new($stdout))
           expect(s.morph_query).to eq "select * from `data` where `authority_label` = 'foo' and `date_scraped` >= '2008-12-25'"
         end
       end

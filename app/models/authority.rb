@@ -28,7 +28,7 @@ class Authority < ApplicationRecord
 
   sig { returns(String) }
   def full_name_and_state
-    full_name + ", " + state
+    "#{full_name}, #{state}"
   end
 
   sig { returns(T::Boolean) }

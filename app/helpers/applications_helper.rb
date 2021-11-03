@@ -159,9 +159,7 @@ module ApplicationsHelper
 
   sig { params(from: Location, to: Location).returns(String) }
   def distance_and_heading_in_words(from, to)
-    meters_in_words(from.distance_to(to)) +
-      " " +
-      heading_in_words(from.heading_to(to))
+    "#{meters_in_words(from.distance_to(to))} #{heading_in_words(from.heading_to(to))}"
   end
 
   private
@@ -171,11 +169,11 @@ module ApplicationsHelper
     google_maps_key = ENV[key]
     cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
     if google_maps_key.present?
-      signed = path + "?" + query.merge(key: google_maps_key).to_query
+      signed = "#{path}?#{query.merge(key: google_maps_key).to_query}"
       signature = sign_gmap_bus_api_url(signed, cryptographic_key)
       domain + signed + "&signature=#{signature}"
     else
-      domain + path + "?" + query.to_query
+      "#{domain}#{path}?#{query.to_query}"
     end
   end
 

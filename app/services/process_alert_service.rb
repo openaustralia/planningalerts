@@ -13,6 +13,7 @@ class ProcessAlertService < ApplicationService
 
   sig { params(alert: Alert).void }
   def initialize(alert:)
+    super()
     @alert = alert
   end
 

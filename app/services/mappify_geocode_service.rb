@@ -12,6 +12,7 @@ class MappifyGeocodeService < ApplicationService
 
   sig { params(address: String).void }
   def initialize(address)
+    super()
     @address = address
   end
 

@@ -12,12 +12,13 @@ class GenerateSitemapService < ApplicationService
   T.unsafe(self).include Rails.application.routes.url_helpers
 
   sig { params(logger: Logger).void }
-  def self.call(logger: Logger.new(STDOUT))
+  def self.call(logger: Logger.new($stdout))
     new(logger: logger).call
   end
 
   sig { params(logger: Logger).void }
   def initialize(logger:)
+    super()
     @logger = logger
   end
 

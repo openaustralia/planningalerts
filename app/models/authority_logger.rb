@@ -6,6 +6,7 @@ class AuthorityLogger < Logger
 
   sig { params(authority_id: Integer, other_logger: Logger).void }
   def initialize(authority_id, other_logger)
+    super()
     @authority_id = authority_id
     @other_logger = other_logger
     # We're starting a new run of the logger & scraper so clear out the old so we're ready for the new
@@ -20,7 +21,7 @@ class AuthorityLogger < Logger
     # TODO: Don't use block form as soon as possible
     @other_logger.add(severity, nil, progname) { message }
     # Put a maximum limit on how long the log can get
-    e = (Authority.find(@authority_id).last_scraper_run_log || "") + (progname || "") + "\n"
+    e = "#{Authority.find(@authority_id).last_scraper_run_log || ''}#{progname || ''}\n"
     return if e.size >= 5000
 
     # We want this log to be written even if the rest of the authority

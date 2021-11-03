@@ -14,6 +14,7 @@ class ImportApplicationsService < ApplicationService
 
   sig { params(authority: Authority, logger: Logger).void }
   def initialize(authority:, logger:)
+    super()
     @authority = authority
     @logger = logger
   end
@@ -40,7 +41,7 @@ class ImportApplicationsService < ApplicationService
     filters = []
     filters << "`authority_label` = '#{authority.scraper_authority_label}'" if authority.scraper_authority_label.present?
     filters << "`date_scraped` >= '#{start_date}'"
-    "select * from `data` where " + filters.join(" and ")
+    "select * from `data` where #{filters.join(' and ')}"
   end
 
   private
