@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-class BuildAlertService < ApplicationService
+class BuildAlertService
   extend T::Sig
 
   sig { returns(Alert) }
@@ -14,7 +14,6 @@ class BuildAlertService < ApplicationService
 
   sig { params(email: String, address: String, radius_meters: Integer).void }
   def initialize(email:, address:, radius_meters:)
-    super()
     @alert = T.let(
       Alert.new(
         email: email,
@@ -31,15 +30,15 @@ class BuildAlertService < ApplicationService
     alert.geocode_from_address
 
     a = preexisting_alert
-    if !a
-      alert
-    else
+    if a
       if a.confirmed?
         send_notice_to_existing_active_alert_owner
       else
         resend_original_confirmation_email
       end
       nil
+    else
+      alert
     end
   end
 

@@ -3,7 +3,7 @@
 
 # For a broken authority create a Github issue. When the authority is working
 # again tag the Github issue as "probably fixed"
-class SyncGithubIssueForAuthorityService < ApplicationService
+class SyncGithubIssueForAuthorityService
   extend T::Sig
 
   # include GeneratedUrlHelpers

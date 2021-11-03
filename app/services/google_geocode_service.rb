@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-class GoogleGeocodeService < ApplicationService
+class GoogleGeocodeService
   extend T::Sig
 
   sig { params(address: String).returns(GeocoderResults) }
@@ -11,7 +11,6 @@ class GoogleGeocodeService < ApplicationService
 
   sig { params(address: String).void }
   def initialize(address)
-    super()
     @address = address
   end
 

@@ -3,7 +3,7 @@
 
 # Sends out a bunch of email alerts and
 # records the batch being sent out and updates the global statistics
-class ProcessAlertAndRecordStatsService < ApplicationService
+class ProcessAlertAndRecordStatsService
   extend T::Sig
 
   sig { params(alert_id: Integer).void }
@@ -13,7 +13,6 @@ class ProcessAlertAndRecordStatsService < ApplicationService
 
   sig { params(alert_id: Integer).void }
   def initialize(alert_id:)
-    super()
     @alert_id = alert_id
   end
 

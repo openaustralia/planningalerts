@@ -12,7 +12,7 @@ module Admin
 
     sig { params(tag: String, search_term: String).returns(T::Boolean) }
     def include_search_tag?(tag, search_term)
-      search_term.split(" ").include?("#{tag}:")
+      search_term.split.include?("#{tag}:")
     end
   end
 end

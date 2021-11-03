@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-class GenerateSitemapService < ApplicationService
+class GenerateSitemapService
   extend T::Sig
 
   sig { returns(Logger) }
@@ -18,7 +18,6 @@ class GenerateSitemapService < ApplicationService
 
   sig { params(logger: Logger).void }
   def initialize(logger:)
-    super()
     @logger = logger
   end
 

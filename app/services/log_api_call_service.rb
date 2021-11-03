@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-class LogApiCallService < ApplicationService
+class LogApiCallService
   extend T::Sig
 
   # If you're deploying big database changes you can flip this and commit
@@ -40,7 +40,6 @@ class LogApiCallService < ApplicationService
     ).void
   end
   def initialize(api_key:, ip_address:, query:, params:, user_agent:, time:)
-    super()
     @api_key = api_key
     @ip_address = ip_address
     @query = query

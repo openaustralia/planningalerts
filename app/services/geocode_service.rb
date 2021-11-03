@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-class GeocodeService < ApplicationService
+class GeocodeService
   extend T::Sig
 
   # Default threshold of 100m
@@ -12,7 +12,6 @@ class GeocodeService < ApplicationService
 
   sig { params(address: String, threshold: Integer).void }
   def initialize(address, threshold)
-    super()
     @address = address
     @threshold = threshold
   end

@@ -3,7 +3,7 @@
 
 # Process email alert and send out an email if necessary.
 # Returns number of applications and comments sent.
-class ProcessAlertService < ApplicationService
+class ProcessAlertService
   extend T::Sig
 
   sig { params(alert: Alert).returns([Integer, Integer, Integer]) }
@@ -13,7 +13,6 @@ class ProcessAlertService < ApplicationService
 
   sig { params(alert: Alert).void }
   def initialize(alert:)
-    super()
     @alert = alert
   end
 

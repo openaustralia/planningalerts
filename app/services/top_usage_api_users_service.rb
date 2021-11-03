@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-class TopUsageApiUsersService < ApplicationService
+class TopUsageApiUsersService
   extend T::Sig
 
   class ApiKeyRequests < T::Struct
@@ -24,7 +24,6 @@ class TopUsageApiUsersService < ApplicationService
 
   sig { params(redis: T.any(Redis, Redis::Namespace)).void }
   def initialize(redis)
-    super()
     @redis = redis
   end
 

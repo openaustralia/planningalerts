@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-class CreateOrUpdateApplicationService < ApplicationService
+class CreateOrUpdateApplicationService
   extend T::Sig
 
   sig do
@@ -23,7 +23,6 @@ class CreateOrUpdateApplicationService < ApplicationService
   def initialize(
     authority:, council_reference:, attributes:
   )
-    super()
     @authority = authority
     @council_reference = council_reference
     @attributes = T.let(attributes.stringify_keys, T::Hash[String, T.untyped])

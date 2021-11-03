@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 # Experiment using the mappify.io geocoder (which uses GNAF)
-class MappifyGeocodeService < ApplicationService
+class MappifyGeocodeService
   extend T::Sig
 
   sig { params(address: String).returns(GeocoderResults) }
@@ -12,7 +12,6 @@ class MappifyGeocodeService < ApplicationService
 
   sig { params(address: String).void }
   def initialize(address)
-    super()
     @address = address
   end
 
@@ -23,7 +22,7 @@ class MappifyGeocodeService < ApplicationService
     # address to be split out into street, suburb, state and postcode fields.
 
     # Not a REST api. Ugh.
-    params = { "streetAddress": address, "formatCase": true, boostPrefix: false }
+    params = { streetAddress: address, formatCase: true, boostPrefix: false }
     params["apiKey"] = ENV["MAPPIFY_API_KEY"] if ENV["MAPPIFY_API_KEY"].present?
     request = RestClient.post("https://mappify.io/api/rpc/address/autocomplete/",
                               params.to_json, content_type: :json, accept: :json)

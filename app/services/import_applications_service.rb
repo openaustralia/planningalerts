@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-class ImportApplicationsService < ApplicationService
+class ImportApplicationsService
   extend T::Sig
 
   sig { params(authority: Authority, logger: Logger).void }
@@ -14,7 +14,6 @@ class ImportApplicationsService < ApplicationService
 
   sig { params(authority: Authority, logger: Logger).void }
   def initialize(authority:, logger:)
-    super()
     @authority = authority
     @logger = logger
   end

@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 # Queues up all active alerts to be sent out in batches over the next 24 hours
-class QueueUpAlertsService < ApplicationService
+class QueueUpAlertsService
   extend T::Sig
 
   sig { params(logger: Logger).void }
@@ -12,7 +12,6 @@ class QueueUpAlertsService < ApplicationService
 
   sig { params(logger: Logger).void }
   def initialize(logger:)
-    super()
     @logger = logger
   end
 
@@ -25,7 +24,7 @@ class QueueUpAlertsService < ApplicationService
     count = 0
     delay = time_between_alerts
     alerts.pluck(:id).shuffle.each do |alert_id|
-      time = start_time + count * delay
+      time = start_time + (count * delay)
       ProcessAlertJob.set(wait_until: time).perform_later(alert_id)
       count += 1
     end

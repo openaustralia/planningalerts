@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-class NotifySlackCommentDeliveryService < ApplicationService
+class NotifySlackCommentDeliveryService
   extend T::Sig
 
   sig do
@@ -33,7 +33,6 @@ class NotifySlackCommentDeliveryService < ApplicationService
     ).void
   end
   def initialize(comment:, to:, status:, extended_status:, email_id:)
-    super()
     @comment = comment
     @to = to
     @status = status
