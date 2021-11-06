@@ -3,13 +3,19 @@
 require "spec_helper"
 
 describe QueueUpAlertsService do
+  let(:logger) do
+    logger = Logger.new($stdout)
+    allow(logger).to receive(:info)
+    logger
+  end
+
   context "with no active alerts" do
     it "logs some useful messages" do
-      logger = Logger.new($stdout)
-      expect(logger).to receive(:info).with("Checking 0 active alerts")
-      expect(logger).to receive(:info).with("Splitting mailing for the next 24 hours - checks an alert roughly every 86400 seconds")
-      expect(logger).to receive(:info).with("Mailing jobs for the next 24 hours queued")
       described_class.call(logger: logger)
+
+      expect(logger).to have_received(:info).with("Checking 0 active alerts")
+      expect(logger).to have_received(:info).with("Splitting mailing for the next 24 hours - checks an alert roughly every 86400 seconds")
+      expect(logger).to have_received(:info).with("Mailing jobs for the next 24 hours queued")
     end
   end
 
@@ -23,24 +29,21 @@ describe QueueUpAlertsService do
     end
 
     it "logs some messages" do
-      logger = Logger.new($stdout)
-      expect(logger).to receive(:info).with("Checking 2 active alerts")
-      expect(logger).to receive(:info).with("Splitting mailing for the next 24 hours - checks an alert roughly every 43200 seconds")
-      expect(logger).to receive(:info).with("Mailing jobs for the next 24 hours queued")
       described_class.call(logger: logger)
+
+      expect(logger).to have_received(:info).with("Checking 2 active alerts")
+      expect(logger).to have_received(:info).with("Splitting mailing for the next 24 hours - checks an alert roughly every 43200 seconds")
+      expect(logger).to have_received(:info).with("Mailing jobs for the next 24 hours queued")
     end
 
     it "queues up batches" do
-      # Silent logger
-      logger = Logger.new($stdout)
-      allow(logger).to receive(:info)
-
-      job = double
-      expect(ProcessAlertJob).to receive(:set).and_return(job).twice
-      expect(job).to receive(:perform_later).with(alert1.id)
-      expect(job).to receive(:perform_later).with(alert2.id)
-
+      job = instance_double("ConfiguredJob", perform_later: nil)
+      allow(ProcessAlertJob).to receive(:set).and_return(job)
       described_class.call(logger: logger)
+
+      expect(ProcessAlertJob).to have_received(:set).twice
+      expect(job).to have_received(:perform_later).with(alert1.id)
+      expect(job).to have_received(:perform_later).with(alert2.id)
     end
   end
 end
