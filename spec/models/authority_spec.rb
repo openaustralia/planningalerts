@@ -35,39 +35,38 @@ describe Authority do
   end
 
   describe "detecting authorities with old applications" do
+    let(:a1) { create(:authority) }
+    let(:a2) { create(:authority) }
+
     before do
-      @a1 = create(:authority)
-      @a2 = create(:authority)
-      create(:geocoded_application, authority: @a1, date_scraped: 3.weeks.ago)
-      create(:geocoded_application, authority: @a2)
+      create(:geocoded_application, authority: a1, date_scraped: 3.weeks.ago)
+      create(:geocoded_application, authority: a2)
     end
 
     it "reports that a scraper is broken if it hasn't received a DA in over two weeks" do
-      expect(@a1.broken?).to eq true
+      expect(a1.broken?).to eq true
     end
 
     it "does not report that a scraper is broken if it has received a DA in less than two weeks" do
-      expect(@a2.broken?).to eq false
+      expect(a2.broken?).to eq false
     end
   end
 
   describe "short name encoded" do
-    before do
-      @a1 = create(:authority, short_name: "Blue Mountains", full_name: "Blue Mountains City Council")
-      @a2 = create(:authority, short_name: "Blue Mountains (new one)", full_name: "Blue Mountains City Council (fictional new one)")
-    end
+    let!(:a1) { create(:authority, short_name: "Blue Mountains", full_name: "Blue Mountains City Council") }
+    let!(:a2) { create(:authority, short_name: "Blue Mountains (new one)", full_name: "Blue Mountains City Council (fictional new one)") }
 
     it "is constructed by replacing space by underscores and making it all lowercase" do
-      expect(@a1.short_name_encoded).to eq "blue_mountains"
+      expect(a1.short_name_encoded).to eq "blue_mountains"
     end
 
     it "removes any non-word characters (except for underscore)" do
-      expect(@a2.short_name_encoded).to eq "blue_mountains_new_one"
+      expect(a2.short_name_encoded).to eq "blue_mountains_new_one"
     end
 
     it "finds a authority by the encoded name" do
-      expect(described_class.find_short_name_encoded("blue_mountains")).to eq @a1
-      expect(described_class.find_short_name_encoded("blue_mountains_new_one")).to eq @a2
+      expect(described_class.find_short_name_encoded("blue_mountains")).to eq a1
+      expect(described_class.find_short_name_encoded("blue_mountains_new_one")).to eq a2
     end
   end
 
@@ -96,7 +95,7 @@ describe Authority do
         )
       end
 
-      context "but no comments" do
+      context "when no comments" do
         it {
           expect(authority.comments_per_week).to eq [
             [Date.new(2015, 12, 20), 0],

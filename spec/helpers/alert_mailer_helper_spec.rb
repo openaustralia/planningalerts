@@ -16,43 +16,39 @@ describe AlertMailerHelper do
   end
 
   context "when application and theme are set" do
-    before do
-      @application = mock_model(Application, id: 1)
-      @base_params = base_tracking_params
-    end
+    let(:application) { mock_model(Application, id: 1) }
+    let(:base_params) { base_tracking_params }
 
     describe "#application_url_with_tracking" do
       it "returns the correct url" do
         expect(
           helper.application_url_with_tracking(
-            id: @application.id
+            id: application.id
           )
         )
           .to eq application_url(
-            @base_params.merge(
-              id: @application.id,
+            base_params.merge(
+              id: application.id,
               utm_campaign: "view-application"
             )
           )
       end
     end
 
-    context "and there is a comment" do
-      before do
-        @comment = create(:comment)
-      end
+    context "when there is a comment" do
+      let(:comment) { create(:comment) }
 
       describe "#comment_url_with_tracking" do
         it "returns the correct url" do
           expect(
             helper.comment_url_with_tracking(
-              comment: @comment
+              comment: comment
             )
           )
             .to eq application_url(
-              @base_params.merge(
-                id: @comment.application.id,
-                anchor: "comment#{@comment.id}",
+              base_params.merge(
+                id: comment.application.id,
+                anchor: "comment#{comment.id}",
                 utm_campaign: "view-comment"
               )
             )
@@ -64,12 +60,12 @@ describe AlertMailerHelper do
       it {
         expect(
           helper.new_comment_url_with_tracking(
-            id: @application.id
+            id: application.id
           )
         )
           .to eq application_url(
-            @base_params.merge(
-              id: @application.id,
+            base_params.merge(
+              id: application.id,
               utm_campaign: "add-comment",
               anchor: "add-comment"
             )

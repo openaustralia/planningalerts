@@ -3,15 +3,13 @@
 require "spec_helper"
 
 describe "GenerateSitemapService" do
-  let(:application) { create(:geocoded_application) }
+  let!(:application) { create(:geocoded_application) }
   # A logger that only displays errrors
   let(:logger) do
     logger = Logger.new($stdout)
     logger.level = Logger::ERROR
     logger
   end
-
-  before { application }
 
   before { FileUtils.rm_f("public/sitemaps/sitemap1.xml.gz") }
 

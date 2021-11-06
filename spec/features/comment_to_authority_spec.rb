@@ -66,7 +66,7 @@ describe "Give feedback" do
       expect(page).not_to have_content("I think this is a really good ideas")
     end
 
-    context "confirming the comment" do
+    context "when confirming the comment" do
       let(:comment) do
         create(:comment, confirmed: false, text: "I think this is a really good ideas", application: application)
       end

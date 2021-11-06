@@ -25,7 +25,7 @@ describe ApplicationVersion do
     describe "date_received" do
       it { expect(build(:application_version, date_received: nil)).to be_valid }
 
-      context "the date today is 1 january 2001" do
+      context "when the date today is 1 january 2001" do
         around do |test|
           Timecop.freeze(Date.new(2001, 1, 1)) { test.run }
         end
@@ -63,13 +63,13 @@ describe ApplicationVersion do
         expect(version2).to be_valid
       end
 
-      it "allows one version for the same application to be current" do
+      it "allows one version for the same application to be current with second version current" do
         create(:geocoded_application_version, application: application1, current: false)
         version2 = build(:application_version, application: application1, current: true)
         expect(version2).to be_valid
       end
 
-      it "allows one version for the same application to be current" do
+      it "allows one version for the same application to be current with first version current" do
         create(:geocoded_application_version, application: application1, current: true)
         version2 = build(:application_version, application: application1, current: false)
         expect(version2).to be_valid

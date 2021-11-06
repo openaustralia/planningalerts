@@ -3,9 +3,9 @@
 require "spec_helper"
 
 describe ApplicationsHelper do
-  before do
-    authority = mock_model(Authority, full_name: "An authority", short_name: "Blue Mountains")
-    @application = mock_model(
+  let(:authority) { mock_model(Authority, full_name: "An authority", short_name: "Blue Mountains") }
+  let(:application) do
+    mock_model(
       Application,
       map_url: "http://a.map.url",
       description: "A planning application",
@@ -19,40 +19,40 @@ describe ApplicationsHelper do
 
   describe "display_description_with_address" do
     before do
-      allow(@application).to receive(:address).and_return("Foo Road, NSW")
+      allow(application).to receive(:address).and_return("Foo Road, NSW")
     end
 
     context "when the application has a short description" do
       before do
-        allow(@application).to receive(:description).and_return("Build something")
+        allow(application).to receive(:description).and_return("Build something")
       end
 
       it {
-        expect(helper.display_description_with_address(@application))
+        expect(helper.display_description_with_address(application))
           .to eq "“Build something” at Foo Road, NSW"
       }
 
-      it { expect(helper.display_description_with_address(@application)).not_to be html_safe? }
+      it { expect(helper.display_description_with_address(application)).not_to be html_safe? }
     end
 
     context "when the application has a description longer than 30 characters" do
       before do
-        allow(@application).to receive(:description).and_return("Build something really really big")
+        allow(application).to receive(:description).and_return("Build something really really big")
       end
 
       it "trucates the description" do
-        expect(helper.display_description_with_address(@application))
+        expect(helper.display_description_with_address(application))
           .to eq "“Build something really...” at Foo Road, NSW"
       end
     end
 
     context "when the application has a description with special characters" do
       before do
-        allow(@application).to receive(:description).and_return("Alertations & additions")
+        allow(application).to receive(:description).and_return("Alertations & additions")
       end
 
       it "does not escape them" do
-        expect(helper.display_description_with_address(@application))
+        expect(helper.display_description_with_address(application))
           .to eq "“Alertations & additions” at Foo Road, NSW"
       end
     end
@@ -60,24 +60,24 @@ describe ApplicationsHelper do
 
   describe "scraped_and_received_text" do
     before do
-      allow(@application).to receive(:address).and_return("foo")
-      allow(@application).to receive(:lat).and_return(1.0)
-      allow(@application).to receive(:lng).and_return(2.0)
-      allow(@application).to receive(:location).and_return(Location.new(lat: 1.0, lng: 2.0))
+      allow(application).to receive(:address).and_return("foo")
+      allow(application).to receive(:lat).and_return(1.0)
+      allow(application).to receive(:lng).and_return(2.0)
+      allow(application).to receive(:location).and_return(Location.new(lat: 1.0, lng: 2.0))
     end
 
     it "says when the application was received by the planning authority and when it appeared on PlanningAlerts" do
-      allow(@application).to receive(:date_received).and_return(20.days.ago)
-      allow(@application).to receive(:first_date_scraped).and_return(18.days.ago)
-      expect(helper.scraped_and_received_text(@application)).to eq(
+      allow(application).to receive(:date_received).and_return(20.days.ago)
+      allow(application).to receive(:first_date_scraped).and_return(18.days.ago)
+      expect(helper.scraped_and_received_text(application)).to eq(
         "We found this application for you on the planning authority's website 18 days ago. It was received by them 2 days earlier."
       )
     end
 
     it "says something appropriate when the received date is not known" do
-      allow(@application).to receive(:date_received).and_return(nil)
-      allow(@application).to receive(:first_date_scraped).and_return(18.days.ago)
-      expect(helper.scraped_and_received_text(@application)).to eq(
+      allow(application).to receive(:date_received).and_return(nil)
+      allow(application).to receive(:first_date_scraped).and_return(18.days.ago)
+      expect(helper.scraped_and_received_text(application)).to eq(
         "We found this application for you on the planning authority's website 18 days ago. The date it was received by them was not recorded."
       )
     end
@@ -85,35 +85,37 @@ describe ApplicationsHelper do
 
   describe "on_notice_text" do
     before do
-      allow(@application).to receive(:address).and_return("foo")
-      allow(@application).to receive(:lat).and_return(1.0)
-      allow(@application).to receive(:lng).and_return(2.0)
-      allow(@application).to receive(:location).and_return(Location.new(lat: 1.0, lng: 2.0))
-      allow(@application).to receive(:date_received).and_return(nil)
-      allow(@application).to receive(:date_scraped).and_return(Time.zone.now)
+      allow(application).to receive(:address).and_return("foo")
+      allow(application).to receive(:lat).and_return(1.0)
+      allow(application).to receive(:lng).and_return(2.0)
+      allow(application).to receive(:location).and_return(Location.new(lat: 1.0, lng: 2.0))
+      allow(application).to receive(:date_received).and_return(nil)
+      allow(application).to receive(:date_scraped).and_return(Time.zone.now)
     end
 
     it "says when the application is on notice (and hasn't started yet)" do
-      allow(@application).to receive(:on_notice_from).and_return(Time.zone.today + 2.days)
-      allow(@application).to receive(:on_notice_to).and_return(Time.zone.today + 16.days)
-      expect(helper.on_notice_text(@application)).to eq(
+      allow(application).to receive(:on_notice_from).and_return(Time.zone.today + 2.days)
+      allow(application).to receive(:on_notice_to).and_return(Time.zone.today + 16.days)
+      expect(helper.on_notice_text(application)).to eq(
         "The period to have your comment officially considered by the planning authority <strong>starts in 2 days</strong> and finishes 14 days later."
       )
     end
 
-    describe "period has just started" do
+    describe "period started today" do
       it "says when the application is on notice" do
-        allow(@application).to receive(:on_notice_from).and_return(Time.zone.today)
-        allow(@application).to receive(:on_notice_to).and_return(Time.zone.today + 14.days)
-        expect(helper.on_notice_text(@application)).to eq(
+        allow(application).to receive(:on_notice_from).and_return(Time.zone.today)
+        allow(application).to receive(:on_notice_to).and_return(Time.zone.today + 14.days)
+        expect(helper.on_notice_text(application)).to eq(
           "<strong>You have 14 days left</strong> to have your comment officially considered by the planning authority. The period for comment started today."
         )
       end
+    end
 
+    describe "period started a day ago" do
       it "says when the application is on notice" do
-        allow(@application).to receive(:on_notice_from).and_return(Time.zone.today - 1.day)
-        allow(@application).to receive(:on_notice_to).and_return(Time.zone.today + 13.days)
-        expect(helper.on_notice_text(@application)).to eq(
+        allow(application).to receive(:on_notice_from).and_return(Time.zone.today - 1.day)
+        allow(application).to receive(:on_notice_to).and_return(Time.zone.today + 13.days)
+        expect(helper.on_notice_text(application)).to eq(
           "<strong>You have 13 days left</strong> to have your comment officially considered by the planning authority. The period for comment started yesterday."
         )
       end
@@ -121,19 +123,19 @@ describe ApplicationsHelper do
 
     describe "period is in progress" do
       before do
-        allow(@application).to receive(:on_notice_from).and_return(Time.zone.today - 2.days)
-        allow(@application).to receive(:on_notice_to).and_return(Time.zone.today + 12.days)
+        allow(application).to receive(:on_notice_from).and_return(Time.zone.today - 2.days)
+        allow(application).to receive(:on_notice_to).and_return(Time.zone.today + 12.days)
       end
 
       it "says when the application is on notice" do
-        expect(helper.on_notice_text(@application)).to eq(
+        expect(helper.on_notice_text(application)).to eq(
           "<strong>You have 12 days left</strong> to have your comment officially considered by the planning authority. The period for comment started 2 days ago."
         )
       end
 
       it "onlies say when on notice to if there is no on notice from information" do
-        allow(@application).to receive(:on_notice_from).and_return(nil)
-        expect(helper.on_notice_text(@application)).to eq(
+        allow(application).to receive(:on_notice_from).and_return(nil)
+        expect(helper.on_notice_text(application)).to eq(
           "<strong>You have 12 days left</strong> to have your comment officially considered by the planning authority."
         )
       end
@@ -141,9 +143,9 @@ describe ApplicationsHelper do
 
     describe "period is finishing today" do
       it "says when the application is on notice" do
-        allow(@application).to receive(:on_notice_from).and_return(Time.zone.today - 14.days)
-        allow(@application).to receive(:on_notice_to).and_return(Time.zone.today)
-        expect(helper.on_notice_text(@application)).to eq(
+        allow(application).to receive(:on_notice_from).and_return(Time.zone.today - 14.days)
+        allow(application).to receive(:on_notice_to).and_return(Time.zone.today)
+        expect(helper.on_notice_text(application)).to eq(
           "<strong>Today is the last day</strong> to have your comment officially considered by the planning authority. The period for comment started 14 days ago."
         )
       end
@@ -151,19 +153,19 @@ describe ApplicationsHelper do
 
     describe "period is finished" do
       before do
-        allow(@application).to receive(:on_notice_from).and_return(Time.zone.today - 16.days)
-        allow(@application).to receive(:on_notice_to).and_return(Time.zone.today - 2.days)
+        allow(application).to receive(:on_notice_from).and_return(Time.zone.today - 16.days)
+        allow(application).to receive(:on_notice_to).and_return(Time.zone.today - 2.days)
       end
 
       it "says when the application is on notice" do
-        expect(helper.on_notice_text(@application)).to eq(
+        expect(helper.on_notice_text(application)).to eq(
           "You&#39;re too late! The period for officially commenting on this application <strong>finished 2 days ago</strong>. It lasted for 14 days. If you chose to comment now, your comment will still be displayed here and be sent to the planning authority but it will <strong>not be officially considered</strong> by the planning authority."
         )
       end
 
       it "onlies say when on notice to if there is no on notice from information" do
-        allow(@application).to receive(:on_notice_from).and_return(nil)
-        expect(helper.on_notice_text(@application)).to eq(
+        allow(application).to receive(:on_notice_from).and_return(nil)
+        expect(helper.on_notice_text(application)).to eq(
           "You&#39;re too late! The period for officially commenting on this application <strong>finished 2 days ago</strong>. If you chose to comment now, your comment will still be displayed here and be sent to the planning authority but it will <strong>not be officially considered</strong> by the planning authority."
         )
       end
@@ -171,13 +173,13 @@ describe ApplicationsHelper do
 
     describe "static maps" do
       before do
-        allow(@application).to receive(:address).and_return("Foo Road, NSW")
+        allow(application).to receive(:address).and_return("Foo Road, NSW")
         allow(ENV).to receive(:[]).with("GOOGLE_MAPS_API_KEY").and_return("abc")
         allow(ENV).to receive(:[]).with("GOOGLE_MAPS_CRYPTOGRAPHIC_KEY").and_return("123456789012345678901234567=")
       end
 
       it "generates a static google map api image" do
-        expect(helper.google_static_map(@application, size: "350x200", zoom: 16)).to eq(
+        expect(helper.google_static_map(application, size: "350x200", zoom: 16)).to eq(
           "<img alt=\"Map of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/staticmap?key=abc&amp;maptype=roadmap&amp;markers=color%3Ared%7C1.0%2C2.0&amp;size=350x200&amp;zoom=16&amp;signature=BDMqLaSPiNHLtaxJtbj3n8YM0dg=\" width=\"350\" height=\"200\" />"
         )
       end
@@ -185,13 +187,13 @@ describe ApplicationsHelper do
 
     describe "static streetview" do
       before do
-        allow(@application).to receive(:address).and_return("Foo Road, NSW")
+        allow(application).to receive(:address).and_return("Foo Road, NSW")
         allow(ENV).to receive(:[]).with("GOOGLE_MAPS_API_KEY").and_return("abc")
         allow(ENV).to receive(:[]).with("GOOGLE_MAPS_CRYPTOGRAPHIC_KEY").and_return("123456789012345678901234567=")
       end
 
       it "generates a static google streetview image" do
-        expect(helper.google_static_streetview(@application, size: "350x200", fov: 90)).to eq(
+        expect(helper.google_static_streetview(application, size: "350x200", fov: 90)).to eq(
           "<img alt=\"Streetview of Foo Road, NSW\" src=\"https://maps.googleapis.com/maps/api/streetview?fov=90&amp;key=abc&amp;location=1.0%2C2.0&amp;size=350x200&amp;signature=jVq9tBwGacE2vi01iJhpwi-VTls=\" width=\"350\" height=\"200\" />"
         )
       end

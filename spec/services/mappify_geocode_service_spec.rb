@@ -10,7 +10,7 @@ describe MappifyGeocodeService do
     end
   end
 
-  context "valid address" do
+  context "with valid address" do
     let(:address) { "24 Bruce Road, Glenbrook, NSW 2773" }
 
     it "geocodes the address into a specific latitude and longitude" do
@@ -26,7 +26,7 @@ describe MappifyGeocodeService do
       expect(result.error).to be_nil
     end
 
-    context "an API key is set in the environment variable" do
+    context "with an API key is set in the environment variable" do
       let(:api_key) { "12345678-1234-1234-1234-123456789abc" }
 
       around do |test|
@@ -34,7 +34,7 @@ describe MappifyGeocodeService do
       end
 
       it "uses the api key to do the api call" do
-        expect(RestClient).to receive(:post).with(
+        allow(RestClient).to receive(:post).with(
           "https://mappify.io/api/rpc/address/autocomplete/",
           {
             streetAddress: address,
@@ -49,7 +49,7 @@ describe MappifyGeocodeService do
     end
   end
 
-  context "an invalid address" do
+  context "with an invalid address" do
     let(:address) { "rxsd23dfj" }
 
     it "returns no results" do

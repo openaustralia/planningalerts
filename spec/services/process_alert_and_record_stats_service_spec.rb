@@ -11,7 +11,7 @@ describe ProcessAlertAndRecordStatsService do
     end
 
     it "processes the individual alert" do
-      expect(ProcessAlertService).to receive(:call).with(alert: alert).and_return([1, 5, 1])
+      allow(ProcessAlertService).to receive(:call).with(alert: alert).and_return([1, 5, 1])
       allow(Alert).to receive(:find).with(alert.id).and_return(alert)
       described_class.call(alert_id: alert.id)
     end

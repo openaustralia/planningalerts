@@ -42,7 +42,7 @@ describe ApplicationsController do
 
     describe "search by authority" do
       it "gives a 404 when an invalid authority_id is used" do
-        expect(Authority).to receive(:find_short_name_encoded).with("this_authority_does_not_exist").and_return(nil)
+        allow(Authority).to receive(:find_short_name_encoded).with("this_authority_does_not_exist").and_return(nil)
         expect { get :index, params: { authority_id: "this_authority_does_not_exist" } }.to raise_error ActiveRecord::RecordNotFound
       end
     end
@@ -63,14 +63,14 @@ describe ApplicationsController do
 
       # TODO: Can this line be removed? It seems to be a duplicate of
       # expectation on final line.
-      expect(Application).to receive(:find).with("1").and_return(application)
+      allow(Application).to receive(:find).with("1").and_return(application)
 
       get :show, params: { id: 1 }
 
       expect(assigns[:application]).to eq application
     end
 
-    context "a redirect is set up" do
+    context "when a redirect is set up" do
       let(:redirect) { create(:application_redirect) }
 
       before do
@@ -97,7 +97,7 @@ describe ApplicationsController do
   end
 
   describe "#nearby" do
-    context "a redirect is set up" do
+    context "when a redirect is set up" do
       let(:redirect) { create(:application_redirect) }
 
       before do
@@ -110,7 +110,7 @@ describe ApplicationsController do
       end
     end
 
-    context "an application with nothing nearby" do
+    context "when an application with nothing nearby" do
       let(:application) { create(:geocoded_application) }
 
       before do

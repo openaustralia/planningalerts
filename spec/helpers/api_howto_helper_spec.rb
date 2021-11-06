@@ -11,7 +11,7 @@ describe ApiHowtoHelper do
     expect(helper.api_example_suburb_state_and_postcode_url("js", nil)).to eq("http://api.planningalerts.org.au/applications.js?postcode=2780&state=NSW&suburb=Katoomba")
   end
 
-  it "displays the example urls nicely" do
+  it "displays the example urls nicely without an api key" do
     expect(helper.api_example_latlong_url_html("rss", nil)).to eq("http://api.planningalerts.org.au/applications.rss?<strong>key</strong>=[key]&amp;<strong>lat</strong>=[latitude]&amp;<strong>lng</strong>=[longitude]&amp;<strong>radius</strong>=[distance_in_metres]")
     expect(helper.api_example_area_url_html("rss", nil)).to eq("http://api.planningalerts.org.au/applications.rss?<strong>bottom_left_lat</strong>=[latitude]&amp;<strong>bottom_left_lng</strong>=[longitude]&amp;<strong>key</strong>=[key]&amp;<strong>top_right_lat</strong>=[latitude]&amp;<strong>top_right_lng</strong>=[longitude]")
     expect(helper.api_example_authority_url_html("rss", nil)).to eq("http://api.planningalerts.org.au/authorities/[name]/applications.rss?<strong>key</strong>=[key]")
@@ -19,7 +19,7 @@ describe ApiHowtoHelper do
     expect(helper.api_example_suburb_state_and_postcode_url_html("rss", nil)).to eq("http://api.planningalerts.org.au/applications.rss?<strong>key</strong>=[key]&amp;<strong>postcode</strong>=[postcode]&amp;<strong>state</strong>=[state]&amp;<strong>suburb</strong>=[suburb]")
   end
 
-  it "displays the example urls nicely" do
+  it "displays the example urls nicely with an api key" do
     expect(helper.api_example_latlong_url_html("rss", "123")).to eq("http://api.planningalerts.org.au/applications.rss?<strong>key</strong>=123&amp;<strong>lat</strong>=[latitude]&amp;<strong>lng</strong>=[longitude]&amp;<strong>radius</strong>=[distance_in_metres]")
     expect(helper.api_example_area_url_html("rss", "123")).to eq("http://api.planningalerts.org.au/applications.rss?<strong>bottom_left_lat</strong>=[latitude]&amp;<strong>bottom_left_lng</strong>=[longitude]&amp;<strong>key</strong>=123&amp;<strong>top_right_lat</strong>=[latitude]&amp;<strong>top_right_lng</strong>=[longitude]")
     expect(helper.api_example_authority_url_html("rss", "123")).to eq("http://api.planningalerts.org.au/authorities/[name]/applications.rss?<strong>key</strong>=123")

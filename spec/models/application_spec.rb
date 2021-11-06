@@ -9,7 +9,7 @@ describe Application do
     describe "council_reference" do
       it { expect(build(:application_with_no_version, council_reference: "")).not_to be_valid }
 
-      context "one application already exists" do
+      context "when one application already exists" do
         before do
           create(:geocoded_application, council_reference: "A01", authority: authority)
         end
@@ -38,14 +38,14 @@ describe Application do
         ],
         nil
       )
-      expect(GeocodeService).to receive(:call).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
+      allow(GeocodeService).to receive(:call).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
       a = create(:application, address: "24 Bruce Road, Glenbrook, NSW", council_reference: "r1", date_scraped: Time.zone.now)
       expect(a.lat).to eq(loc.top.lat)
       expect(a.lng).to eq(loc.top.lng)
     end
 
     it "logs an error if the geocoder can't make sense of the address" do
-      expect(GeocodeService).to receive(:call).with("dfjshd").and_return(
+      allow(GeocodeService).to receive(:call).with("dfjshd").and_return(
         GeocoderResults.new([], "something went wrong")
       )
       logger = double("Logger")

@@ -66,7 +66,7 @@ describe CreateOrUpdateApplicationService do
     expect(Application.count).to eq 0
   end
 
-  context "updated application with new data" do
+  context "with updated application with new data" do
     let(:updated_application) do
       described_class.call(
         authority: application.authority,
@@ -104,7 +104,7 @@ describe CreateOrUpdateApplicationService do
     end
   end
 
-  context "updated application where only date_scraped has changed" do
+  context "with updated application where only date_scraped has changed" do
     let(:updated_application) do
       described_class.call(
         authority: application.authority,
@@ -122,7 +122,7 @@ describe CreateOrUpdateApplicationService do
     end
   end
 
-  context "updated application with unchanged data once typecast" do
+  context "with updated application with unchanged data once typecast" do
     let(:updated_application) do
       described_class.call(
         authority: application.authority,

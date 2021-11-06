@@ -99,7 +99,7 @@ describe BuildAlertService do
         expect(AlertMailer).to have_received(:new_signup_attempt_notice).with(preexisting_alert)
       end
 
-      context "but it is unsubscribed" do
+      context "when it is unsubscribed" do
         before do
           preexisting_alert.unsubscribe!
         end

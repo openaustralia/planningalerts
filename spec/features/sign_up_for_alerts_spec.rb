@@ -47,7 +47,7 @@ describe "Sign up for alerts" do
     expect(page).to have_content(/Please enter a full street address, including suburb and state, e.g. Bruce Rd, Victoria/)
   end
 
-  context "via an application page" do
+  context "when via an application page" do
     let(:application) do
       create(:geocoded_application, address: "24 Bruce Rd, Glenbrook NSW 2773")
     end
@@ -69,7 +69,7 @@ describe "Sign up for alerts" do
     end
   end
 
-  context "via the homepage" do
+  context "when via the homepage" do
     before do
       create(:geocoded_application,
              address: "26 Bruce Rd, Glenbrook NSW 2773",
@@ -93,7 +93,7 @@ describe "Sign up for alerts" do
     end
   end
 
-  context "via an authority’s applications page" do
+  context "when via an authority’s applications page" do
     before do
       authority = create(:authority, short_name: "Glenbrook")
       create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", authority: authority)
@@ -184,7 +184,7 @@ describe "Sign up for alerts" do
       )
     end
 
-    context "but it is unsubscribed" do
+    context "when it is unsubscribed" do
       before do
         preexisting_alert.unsubscribe!
       end

@@ -124,7 +124,7 @@ describe ImportApplicationsService do
       end
     end
 
-    context "scraper_authority_label is set on authority" do
+    context "with scraper_authority_label is set on authority" do
       let(:auth) { create(:authority, scraper_authority_label: "foo") }
 
       it "filters by the authority_label" do

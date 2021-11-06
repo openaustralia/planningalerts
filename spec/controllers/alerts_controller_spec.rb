@@ -10,7 +10,7 @@ describe AlertsController do
   describe "#confirmed" do
     it "sets the alert to be confirmed" do
       alert = create(:alert)
-      expect(Alert).to receive(:find_by!).with(confirm_id: "1234").and_return(alert)
+      allow(Alert).to receive(:find_by!).with(confirm_id: "1234").and_return(alert)
       expect(alert).to receive(:confirm!)
       get :confirmed, params: { resource: "alerts", id: "1234" }
     end
@@ -18,7 +18,7 @@ describe AlertsController do
     it "sets the alert to be confirmed when on an iPhone" do
       allow(request).to receive(:user_agent).and_return("iphone")
       alert = create(:alert)
-      expect(Alert).to receive(:find_by!).with(confirm_id: "1234").and_return(alert)
+      allow(Alert).to receive(:find_by!).with(confirm_id: "1234").and_return(alert)
       expect(alert).to receive(:confirm!)
       get :confirmed, params: { resource: "alerts", id: "1234" }
       expect(response).to be_successful

@@ -56,7 +56,7 @@ describe Alert do
 
   describe "geocoding" do
     before do
-      expect(GoogleGeocodeService).to receive(:call).with(address).and_return(
+      allow(GoogleGeocodeService).to receive(:call).with(address).and_return(
         GeocoderResults.new(
           [
             GeocodedLocation.new(
@@ -226,7 +226,7 @@ describe Alert do
     context "with a search radius which includes all applications" do
       let(:radius_meters) { 2000 }
 
-      context "never before sent an alert" do
+      context "when never before sent an alert" do
         let(:last_sent) { nil }
 
         it "returns applications that have been scraped in the last twenty four hours if the user has never had an alert" do
@@ -234,14 +234,14 @@ describe Alert do
         end
       end
 
-      context "last sent an alert 3 days ago" do
+      context "when last sent an alert 3 days ago" do
         let(:last_sent) { 3.days.ago }
 
         it "returns applications that have been scraped since the last time the user was sent an alert" do
           expect(alert.recent_new_applications).to contain_exactly(app1, app2, app3)
         end
 
-        context "A couple of applications are updated one day ago" do
+        context "when a couple of applications are updated one day ago" do
           before do
             CreateOrUpdateApplicationService.call(
               authority: app4.authority,
@@ -266,7 +266,7 @@ describe Alert do
           end
         end
 
-        context "One application has an updated location (way off in the distance)" do
+        context "when one application has an updated location (way off in the distance)" do
           before do
             p = alert.location.endpoint(0.0, 10000.0)
             CreateOrUpdateApplicationService.call(
@@ -285,7 +285,7 @@ describe Alert do
         end
       end
 
-      context "last sent an alert 5 days ago" do
+      context "when last sent an alert 5 days ago" do
         let(:last_sent) { 5.days.ago }
 
         it "returns applications that have been scraped since the last time the user was sent an alert" do
@@ -299,7 +299,7 @@ describe Alert do
 
       # Using last_sent of 5 days ago to ensure that otherwise all applications
       # would be included if it wasn't for the search radius
-      context "last sent an alert 5 days ago" do
+      context "when last sent an alert 5 days ago" do
         let(:last_sent) { 5.days.ago }
 
         it "returns applications within the user's search area" do
@@ -418,7 +418,7 @@ describe Alert do
   end
 
   # Related to https://github.com/openaustralia/planningalerts/issues/1547
-  context "A problematic alert seen in production" do
+  context "with a problematic alert seen in production" do
     it "does something sensible" do
       alert = create(
         :alert,

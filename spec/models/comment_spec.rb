@@ -26,7 +26,7 @@ describe Comment do
     end
   end
 
-  context "new comment for a planning authority" do
+  context "when new comment for a planning authority" do
     let(:comment_to_authority) do
       create(:comment)
     end

@@ -5,7 +5,7 @@ require "spec_helper"
 describe ProcessAlertService do
   let(:address) { "24 Bruce Road, Glenbrook" }
 
-  context "an alert with no new comments" do
+  context "with an alert with no new comments" do
     let(:alert) { create(:alert, address: address) }
 
     before do
@@ -14,7 +14,7 @@ describe ProcessAlertService do
       ActionMailer::Base.deliveries = []
     end
 
-    context "and a new application nearby" do
+    context "with a new application nearby" do
       let(:application) do
         create(:application,
                lat: 1.0, lng: 2.0, address: "24 Bruce Road, Glenbrook, NSW",
@@ -51,7 +51,7 @@ describe ProcessAlertService do
         expect((alert.last_processed - Time.zone.now).abs).to be < 1
       end
 
-      context "that was not properly geocoded" do
+      context "with application that was not properly geocoded" do
         let(:application) do
           create(:geocoded_application, lat: 1.0, lng: 2.0, address: "An address that can't be geocoded")
         end
@@ -63,7 +63,7 @@ describe ProcessAlertService do
       end
     end
 
-    context "and no new applications nearby" do
+    context "with no new applications nearby" do
       before do
         allow(alert).to receive(:recent_new_applications).and_return([])
       end

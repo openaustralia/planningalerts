@@ -3,8 +3,8 @@
 require "spec_helper"
 
 describe CuttlefishController do
-  context "has a webhook key" do
-    before { expect(ENV).to receive(:[]).with("CUTTLEFISH_WEBHOOK_KEY").and_return("abc123") }
+  context "when has a webhook key" do
+    before { allow(ENV).to receive(:[]).with("CUTTLEFISH_WEBHOOK_KEY").and_return("abc123") }
 
     it "does not allow an incorrect webhook key" do
       expect(NotifySlackCommentDeliveryService).not_to receive(:call)

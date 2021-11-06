@@ -4,8 +4,8 @@ require "spec_helper"
 
 describe CommentMailer do
   describe "#notify_authority" do
-    before do
-      application = create(
+    let(:application) do
+      create(
         :geocoded_application,
         authority: create(:contactable_authority),
         address: "12 Foo Rd",
@@ -13,14 +13,22 @@ describe CommentMailer do
         description: "Building something",
         id: 123
       )
-      @comment = create(:confirmed_comment, email: "foo@bar.com", name: "Matthew", application: application, text: "It's a good thing.\n\nOh yes it is.", address: "1 Bar Street")
     end
 
-    context "default theme" do
-      let(:notifier) { described_class.notify_authority(@comment) }
+    let(:comment) do
+      create(:confirmed_comment,
+             email: "foo@bar.com",
+             name: "Matthew",
+             application: application,
+             text: "It's a good thing.\n\nOh yes it is.",
+             address: "1 Bar Street")
+    end
+
+    context "with default theme" do
+      let(:notifier) { described_class.notify_authority(comment) }
 
       it "is sent to the planning authority's feedback email address" do
-        expect(notifier.to).to eq([@comment.application.authority.email])
+        expect(notifier.to).to eq([comment.application.authority.email])
       end
 
       it "has the from as the main planningalerts email address" do
@@ -28,7 +36,7 @@ describe CommentMailer do
       end
 
       it "is reply-to be the email address of the person who made the comment" do
-        expect(notifier.reply_to).to eq([@comment.email])
+        expect(notifier.reply_to).to eq([comment.email])
       end
 
       it "says in the subject line it is a comment on a development application" do

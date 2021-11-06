@@ -3,10 +3,10 @@
 require "spec_helper"
 
 describe ConfirmationMailer do
-  context "alert" do
+  context "with alert" do
     let(:object) { mock_model(Alert, confirm_id: "a237bfc", email: "matthew@oaf.org.au") }
 
-    context "default theme" do
+    context "with default theme" do
       let(:notifier) { described_class.confirm(object) }
 
       describe "confirm" do
@@ -33,7 +33,7 @@ describe ConfirmationMailer do
     end
   end
 
-  context "comment" do
+  context "with comment" do
     let(:authority) { mock_model(Authority) }
     let(:application) do
       mock_model(Application,
@@ -48,7 +48,7 @@ describe ConfirmationMailer do
                           recipient_display_name: nil)
     end
 
-    context "default theme" do
+    context "with default theme" do
       let(:notifier) { described_class.confirm(object) }
 
       describe "confirm" do

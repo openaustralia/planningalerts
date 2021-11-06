@@ -23,7 +23,7 @@ describe ThrottleDailyByApiUser do
       expect(result).to eq 1000
     end
 
-    context "user with a special allowance" do
+    context "with user with a special allowance" do
       let(:key) { create(:api_key, daily_limit: 2000) }
 
       it "has a higher rate than normal" do

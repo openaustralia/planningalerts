@@ -35,7 +35,7 @@ describe TwitterFeed do
         end
       end
 
-      context "for a valid twitter user" do
+      context "when a valid twitter user" do
         let(:twitter_user) { "planningalerts" }
 
         it "returns the last 2 tweets" do
@@ -52,7 +52,7 @@ describe TwitterFeed do
         end
       end
 
-      context "for an invalid twitter user" do
+      context "when an invalid twitter user" do
         let(:twitter_user) { "abc768a" }
 
         it "returns nothing" do

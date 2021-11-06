@@ -20,13 +20,13 @@ describe AddComment do
       expect(application.comments.first.text).to eq "Testing testing 1 2 3"
     end
 
-    context "and there is no address" do
+    context "when there is no address" do
       before { add_comment_form.address = nil }
 
       it { expect(add_comment_form).not_to be_valid }
     end
 
-    context "and an address is present" do
+    context "when an address is present" do
       before { add_comment_form.address = "64 Fake st" }
 
       it { expect(add_comment_form).to be_valid }

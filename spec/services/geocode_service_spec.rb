@@ -31,14 +31,14 @@ describe GeocodeService do
   let(:result50) { GeocoderResults.new([point50], nil) }
   let(:empty_result) { GeocoderResults.new([], nil) }
 
-  context "valid google and mappify results" do
+  context "with valid google and mappify results" do
     before do
       allow(GoogleGeocodeService).to receive(:call).with(address).and_return(result0)
       allow(MappifyGeocodeService).to receive(:call).with(address).and_return(result500)
     end
 
     it "delegates the result to GoogleGeocodeService" do
-      expect(GoogleGeocodeService).to receive(:call).with(address).and_return(result0)
+      allow(GoogleGeocodeService).to receive(:call).with(address).and_return(result0)
       expect(described_class.call(address)).to eq result0
     end
 
@@ -79,7 +79,7 @@ describe GeocodeService do
     end
   end
 
-  context "valid google results but invalid mappify results" do
+  context "with valid google results but invalid mappify results" do
     before do
       allow(GoogleGeocodeService).to receive(:call).with(address).and_return(result0)
       allow(MappifyGeocodeService).to receive(:call).with(address).and_return(empty_result)
@@ -110,7 +110,7 @@ describe GeocodeService do
     end
   end
 
-  context "valid results that are very close together" do
+  context "with valid results that are very close together" do
     before do
       allow(GoogleGeocodeService).to receive(:call).with(address).and_return(result0)
       allow(MappifyGeocodeService).to receive(:call).with(address).and_return(result50)
