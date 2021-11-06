@@ -12,8 +12,9 @@ describe Comment do
       end
 
       it "does not run after_confirm callback" do
-        expect(comment).not_to receive(:after_confirm)
+        allow(comment).to receive(:after_confirm)
         comment.confirm!
+        expect(comment).not_to have_received(:after_confirm)
       end
 
       it "does not change the confirmed_at time" do

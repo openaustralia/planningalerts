@@ -18,8 +18,9 @@ describe TwitterFeed do
 
       it "logs a warning" do
         logger = Logger.new($stdout)
-        expect(logger).to receive(:warn).with("No twitter API credentials set")
+        allow(logger).to receive(:warn)
         described_class.new("planningalerts", logger).items
+        expect(logger).to have_received(:warn).with("No twitter API credentials set")
       end
     end
 
@@ -64,10 +65,11 @@ describe TwitterFeed do
 
         it "logs an error" do
           logger = Logger.new($stdout)
-          expect(logger).to receive(:error).with("while accessing twitter API: Sorry, that page does not exist.")
+          allow(logger).to receive(:error)
           VCR.use_cassette("twitter") do
             described_class.new(twitter_user, logger).items
           end
+          expect(logger).to have_received(:error).with("while accessing twitter API: Sorry, that page does not exist.")
         end
       end
     end

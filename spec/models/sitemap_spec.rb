@@ -15,23 +15,13 @@ describe Sitemap do
 
     file1 = File.new("foo", "w")
     allow(File).to receive(:open).with("#{public}/sitemap.xml", "w").and_return(file1)
-    expect(file1).to receive(:<<).with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
-    expect(file1).to receive(:<<).with("<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")
-    expect(file1).to receive(:<<).with("<sitemap>")
-    expect(file1).to receive(:<<).with("<loc>http://domain.org/sitemaps/sitemap1.xml.gz</loc>")
-    expect(file1).to receive(:<<).with("<lastmod>2010-02-01T00:00:00+00:00</lastmod>")
-    expect(file1).to receive(:<<).with("</sitemap>")
-    expect(file1).to receive(:<<).with("</sitemapindex>")
-    expect(file1).to receive(:close).and_call_original
+    allow(file1).to receive(:<<)
+    allow(file1).to receive(:close).and_call_original
 
     file2 = Zlib::GzipWriter.new(StringIO.new)
     allow(Zlib::GzipWriter).to receive(:open).with("#{public}/sitemaps/sitemap1.xml.gz").and_return(file2)
-    expect(file2).to receive(:<<).with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
-    expect(file2).to receive(:<<).with("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")
-    expect(file2).to receive(:<<).with("<url><loc>http://domain.org/</loc><changefreq>hourly</changefreq><lastmod>2010-02-01T00:00:00+00:00</lastmod></url>")
-    expect(file2).to receive(:<<).with("<url><loc>http://domain.org/foo</loc><changefreq>daily</changefreq><lastmod>2010-01-01T00:00:00+00:00</lastmod></url>")
-    expect(file2).to receive(:<<).with("</urlset>")
-    expect(file2).to receive(:close).and_call_original
+    allow(file2).to receive(:<<)
+    allow(file2).to receive(:close).and_call_original
 
     s = described_class.new("http://domain.org", public, logger)
 
@@ -40,6 +30,22 @@ describe Sitemap do
     s.finish
     # s.notify_search_engines
     File.delete("foo")
+
+    expect(file1).to have_received(:<<).with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
+    expect(file1).to have_received(:<<).with("<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")
+    expect(file1).to have_received(:<<).with("<sitemap>")
+    expect(file1).to have_received(:<<).with("<loc>http://domain.org/sitemaps/sitemap1.xml.gz</loc>")
+    expect(file1).to have_received(:<<).with("<lastmod>2010-02-01T00:00:00+00:00</lastmod>")
+    expect(file1).to have_received(:<<).with("</sitemap>")
+    expect(file1).to have_received(:<<).with("</sitemapindex>")
+    expect(file1).to have_received(:close)
+
+    expect(file2).to have_received(:<<).with("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
+    expect(file2).to have_received(:<<).with("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">")
+    expect(file2).to have_received(:<<).with("<url><loc>http://domain.org/</loc><changefreq>hourly</changefreq><lastmod>2010-02-01T00:00:00+00:00</lastmod></url>")
+    expect(file2).to have_received(:<<).with("<url><loc>http://domain.org/foo</loc><changefreq>daily</changefreq><lastmod>2010-01-01T00:00:00+00:00</lastmod></url>")
+    expect(file2).to have_received(:<<).with("</urlset>")
+    expect(file2).to have_received(:close)
   end
 
   it "knows the web root and the file path root" do

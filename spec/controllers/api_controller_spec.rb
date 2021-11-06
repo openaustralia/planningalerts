@@ -362,7 +362,11 @@ describe ApiController do
       Timecop.freeze do
         # There is some truncation that happens in the serialisation
         expected_time = Time.at(Time.zone.now.to_f).utc
-        expect(LogApiCallService).to receive(:call).with(
+        allow(LogApiCallService).to receive(:call)
+        Sidekiq::Testing.inline! do
+          get :point, params: { key: key.value, format: "rss", lat: 1.0, lng: 2.0, radius: 4000 }
+        end
+        expect(LogApiCallService).to have_received(:call).with(
           time: expected_time,
           api_key: key.value,
           ip_address: "0.0.0.0",
@@ -378,9 +382,6 @@ describe ApiController do
           },
           user_agent: "Rails Testing"
         )
-        Sidekiq::Testing.inline! do
-          get :point, params: { key: key.value, format: "rss", lat: 1.0, lng: 2.0, radius: 4000 }
-        end
       end
     end
   end

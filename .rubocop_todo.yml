@@ -11,12 +11,6 @@ RSpec/AnyInstance:
   Exclude:
     - 'spec/models/application_spec.rb'
 
-# Offense count: 105
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: have_received, receive
-RSpec/MessageSpies:
-  Enabled: false
-
 # Offense count: 13
 # Configuration parameters: AllowSubject.
 RSpec/MultipleMemoizedHelpers:

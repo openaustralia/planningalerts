@@ -46,10 +46,10 @@ describe Alert do
   end
 
   it "is able to accept location information if it is already known and so not use the geocoder" do
-    expect(GoogleGeocodeService).not_to receive(:call)
-
+    allow(GoogleGeocodeService).to receive(:call)
     alert = create(:alert, lat: 1.0, lng: 2.0)
 
+    expect(GoogleGeocodeService).not_to have_received(:call)
     expect(alert.lat).to eq(1.0)
     expect(alert.lng).to eq(2.0)
   end
@@ -428,8 +428,7 @@ describe Alert do
         radius_meters: 2000
       )
       authority = create(:authority, disabled: false)
-      # TODO: Why is this getting called twice?
-      expect(GeocodeService).to receive(:call).with(", NSW").twice.and_return(GeocoderResults.new([], "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"))
+      allow(GeocodeService).to receive(:call).with(", NSW").and_return(GeocoderResults.new([], "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"))
       CreateOrUpdateApplicationService.call(
         authority: authority,
         council_reference: "DA/2341/2021",
@@ -455,6 +454,8 @@ describe Alert do
           date_scraped: "2021-09-14 02:04:04"
         }
       )
+      # TODO: Why is this getting called twice?
+      expect(GeocodeService).to have_received(:call).with(", NSW").twice
       a = alert.recent_new_applications.first
       # This should pick up the location of the most recent version of the
       # application

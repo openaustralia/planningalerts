@@ -61,8 +61,9 @@ shared_examples_for "email_confirmable" do
     end
 
     it "calls the method to send the confirmation email" do
-      expect(object).to receive(:send_confirmation_email)
+      allow(object).to receive(:send_confirmation_email)
       object.save
+      expect(object).to have_received(:send_confirmation_email)
     end
   end
 end

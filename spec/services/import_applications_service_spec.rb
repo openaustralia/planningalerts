@@ -53,16 +53,18 @@ describe ImportApplicationsService do
 
   it "imports the correct applications" do
     logger = Logger.new($stdout)
-    expect(logger).to receive(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01")
-    expect(logger).to receive(:info).with("Took 0 s to import applications from Fiddlesticks, NSW")
+    allow(logger).to receive(:info)
     allow(ENV).to receive(:[])
     allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(0)
     allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("123")
-    expect(SyncGithubIssueForAuthorityService).to receive(:call).with(logger: logger, authority: auth)
+    allow(SyncGithubIssueForAuthorityService).to receive(:call)
 
     Timecop.freeze(date) do
       described_class.call(authority: auth, logger: logger)
     end
+    expect(logger).to have_received(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01")
+    expect(logger).to have_received(:info).with("Took 0 s to import applications from Fiddlesticks, NSW")
+    expect(SyncGithubIssueForAuthorityService).to have_received(:call).with(logger: logger, authority: auth)
     expect(Application.count).to eq(2)
     r1 = Application.find_by(council_reference: "R1")
     expect(r1.first_date_scraped).to eq(date)
@@ -77,9 +79,7 @@ describe ImportApplicationsService do
 
   it "updates an application when it already exist" do
     logger = Logger.new($stdout)
-    expect(logger).to receive(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01")
-    expect(logger).to receive(:info).with("1 application found for Fiddlesticks, NSW with date from 2009-01-01")
-    expect(logger).to receive(:info).twice.with("Took 0 s to import applications from Fiddlesticks, NSW")
+    allow(logger).to receive(:info)
     allow(ENV).to receive(:[])
     allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(0)
     allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("123")
@@ -93,6 +93,10 @@ describe ImportApplicationsService do
       )
       described_class.call(authority: auth, logger: logger)
     end
+
+    expect(logger).to have_received(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01")
+    expect(logger).to have_received(:info).with("1 application found for Fiddlesticks, NSW with date from 2009-01-01")
+    expect(logger).to have_received(:info).twice.with("Took 0 s to import applications from Fiddlesticks, NSW")
     expect(Application.count).to eq(2)
     r2 = Application.find_by(council_reference: "R2")
     expect(r2.versions.count).to eq 2
@@ -103,17 +107,20 @@ describe ImportApplicationsService do
   it "escapes the morph api key and the sql query" do
     logger = Logger.new($stdout)
     allow(logger).to receive(:info)
-    expect(described_class).to receive(:open_url_safe).with(
-      "https://api.morph.io//data.json?key=12%2F&query=select+%2A+from+%60data%60+where+%60date_scraped%60+%3E%3D+%272009-01-01%27",
-      logger
-    )
+    allow(ENV).to receive(:[])
     allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(0)
     allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("12/")
-    expect(SyncGithubIssueForAuthorityService).to receive(:call).with(logger: logger, authority: auth)
+    allow(SyncGithubIssueForAuthorityService).to receive(:call)
 
     Timecop.freeze(date) do
       described_class.call(authority: auth, logger: logger)
     end
+
+    expect(described_class).to have_received(:open_url_safe).with(
+      "https://api.morph.io//data.json?key=12%2F&query=select+%2A+from+%60data%60+where+%60date_scraped%60+%3E%3D+%272009-01-01%27",
+      logger
+    )
+    expect(SyncGithubIssueForAuthorityService).to have_received(:call).with(logger: logger, authority: auth)
   end
 
   describe "#morph_query" do

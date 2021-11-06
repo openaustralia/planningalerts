@@ -48,11 +48,11 @@ describe Application do
       allow(GeocodeService).to receive(:call).with("dfjshd").and_return(
         GeocoderResults.new([], "something went wrong")
       )
-      logger = double("Logger")
-      expect(logger).to receive(:error).with("Couldn't geocode address: dfjshd (something went wrong)")
+      logger = double("Logger", error: nil)
 
       allow_any_instance_of(ApplicationVersion).to receive(:logger).and_return(logger)
       a = create(:application, address: "dfjshd", council_reference: "r1", date_scraped: Time.zone.now)
+      expect(logger).to have_received(:error).with("Couldn't geocode address: dfjshd (something went wrong)")
       expect(a.lat).to be_nil
       expect(a.lng).to be_nil
     end
@@ -62,8 +62,10 @@ describe Application do
   describe ".with_first_version" do
     it "does not do too many sql queries" do
       create_list(:geocoded_application, 5)
-      expect(ActiveRecord::Base.connection).to receive(:exec_query).at_most(:twice).and_call_original
+      allow(ActiveRecord::Base.connection).to receive(:exec_query).and_call_original
+
       described_class.with_first_version.order("application_versions.date_scraped DESC").includes(:current_version).all.map(&:description)
+      expect(ActiveRecord::Base.connection).to have_received(:exec_query).at_most(:twice)
     end
   end
 
