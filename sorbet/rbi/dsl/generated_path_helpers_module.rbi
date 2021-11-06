@@ -144,9 +144,6 @@ module GeneratedPathHelpersModule
   def destroy_user_session_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def donate_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def donations_create_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

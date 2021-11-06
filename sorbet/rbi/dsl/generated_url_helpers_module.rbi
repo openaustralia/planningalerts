@@ -144,9 +144,6 @@ module GeneratedUrlHelpersModule
   def destroy_user_session_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def donate_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def donations_create_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
