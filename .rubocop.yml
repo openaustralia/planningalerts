@@ -1,5 +1,3 @@
-inherit_from: .rubocop_todo.yml
-
 require:
   - rubocop-rails
   - rubocop-sorbet
@@ -51,32 +49,32 @@ Naming/VariableNumber:
 # can revisit these
 Metrics/AbcSize:
   Enabled: false
-
 Metrics/BlockLength:
   Enabled: false
-
 Metrics/ClassLength:
   Enabled: false
-
 Metrics/CyclomaticComplexity:
   Enabled: false
-
 Metrics/MethodLength:
   Enabled: false
-
 Metrics/ModuleLength:
   Enabled: false
-
 Metrics/ParameterLists:
   Enabled: false
-
 Metrics/PerceivedComplexity:
   Enabled: false
 
+# Also disabling some things to do with messy tests that are overly
+# complicated. It would be good to turn these on as it would result
+# in cleaner, clearer and more readable tests. It is probably a fair amount of
+# work so putting it off for the time being.
 RSpec/ExampleLength:
   Enabled: false
-
 RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+RSpec/NestedGroups:
   Enabled: false
 
 Layout/EmptyLinesAroundAttributeAccessor:

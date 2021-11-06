@@ -43,7 +43,7 @@ describe MappifyGeocodeService do
             apiKey: api_key
           }.to_json,
           accept: :json, content_type: :json
-        ).and_return(double(body: { type: "completeAddressRecordArray", result: [] }.to_json))
+        ).and_return(instance_double("ResClient::Response", body: { type: "completeAddressRecordArray", result: [] }.to_json))
         result
       end
     end

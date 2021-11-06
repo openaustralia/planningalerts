@@ -48,9 +48,11 @@ describe Application do
       allow(GeocodeService).to receive(:call).with("dfjshd").and_return(
         GeocoderResults.new([], "something went wrong")
       )
-      logger = double("Logger", error: nil)
+      logger = instance_double("Logger", error: nil)
 
+      # rubocop:disable RSpec/AnyInstance
       allow_any_instance_of(ApplicationVersion).to receive(:logger).and_return(logger)
+      # rubocop:enable RSpec/AnyInstance
       a = create(:application, address: "dfjshd", council_reference: "r1", date_scraped: Time.zone.now)
       expect(logger).to have_received(:error).with("Couldn't geocode address: dfjshd (something went wrong)")
       expect(a.lat).to be_nil
