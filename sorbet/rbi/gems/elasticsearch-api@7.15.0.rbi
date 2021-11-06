@@ -53,6 +53,7 @@ module Elasticsearch::API::Actions
   def scripts_painless_execute(arguments = T.unsafe(nil)); end
   def scroll(arguments = T.unsafe(nil)); end
   def search(arguments = T.unsafe(nil)); end
+  def search_mvt(arguments = T.unsafe(nil)); end
   def search_shards(arguments = T.unsafe(nil)); end
   def search_template(arguments = T.unsafe(nil)); end
   def termvector(arguments = T.unsafe(nil)); end
@@ -239,6 +240,7 @@ module Elasticsearch::API::Indices::Actions
   def delete_alias(arguments = T.unsafe(nil)); end
   def delete_index_template(arguments = T.unsafe(nil)); end
   def delete_template(arguments = T.unsafe(nil)); end
+  def disk_usage(arguments = T.unsafe(nil)); end
   def exists(arguments = T.unsafe(nil)); end
   def exists?(arguments = T.unsafe(nil)); end
   def exists_alias(arguments = T.unsafe(nil)); end
@@ -249,6 +251,7 @@ module Elasticsearch::API::Indices::Actions
   def exists_template?(arguments = T.unsafe(nil)); end
   def exists_type(arguments = T.unsafe(nil)); end
   def exists_type?(arguments = T.unsafe(nil)); end
+  def field_usage_stats(arguments = T.unsafe(nil)); end
   def flush(arguments = T.unsafe(nil)); end
   def flush_synced(arguments = T.unsafe(nil)); end
   def forcemerge(arguments = T.unsafe(nil)); end
@@ -330,6 +333,8 @@ module Elasticsearch::API::Nodes
 end
 
 module Elasticsearch::API::Nodes::Actions
+  def clear_repositories_metering_archive(arguments = T.unsafe(nil)); end
+  def get_repositories_metering_info(arguments = T.unsafe(nil)); end
   def hot_threads(arguments = T.unsafe(nil)); end
   def info(arguments = T.unsafe(nil)); end
   def reload_secure_settings(arguments = T.unsafe(nil)); end

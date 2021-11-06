@@ -92,6 +92,8 @@ module Capybara
     def threadsafe(*args, &block); end
     def threadsafe=(*args, &block); end
     def use_default_driver; end
+    def use_html5_parsing(*args, &block); end
+    def use_html5_parsing=(*args, &block); end
     def using_driver(driver); end
     def using_session(name_or_session, &block); end
     def using_wait_time(seconds); end
@@ -118,7 +120,7 @@ class Capybara::Config
   def initialize; end
 
   def allow_gumbo; end
-  def allow_gumbo=(_arg0); end
+  def allow_gumbo=(val); end
   def always_include_port(*args, &block); end
   def always_include_port=(*args, &block); end
   def app; end
@@ -183,6 +185,8 @@ class Capybara::Config
   def test_id=(*args, &block); end
   def threadsafe; end
   def threadsafe=(bool); end
+  def use_html5_parsing; end
+  def use_html5_parsing=(_arg0); end
   def visible_text_only(*args, &block); end
   def visible_text_only=(*args, &block); end
   def w3c_click_offset(*args, &block); end
@@ -308,6 +312,7 @@ module Capybara::Driver; end
 
 class Capybara::Driver::Base
   def accept_modal(type, **options, &blk); end
+  def active_element; end
   def close_window(handle); end
   def current_url; end
   def current_window_handle; end
@@ -560,7 +565,7 @@ class Capybara::Node::Document < ::Capybara::Node::Base
   def evaluate_script(*args); end
   def execute_script(*args); end
   def inspect; end
-  def scroll_to(*args, **options); end
+  def scroll_to(*args, quirks: T.unsafe(nil), **options); end
   def text(type = T.unsafe(nil), normalize_ws: T.unsafe(nil)); end
   def title; end
 end
@@ -715,6 +720,7 @@ class Capybara::Node::Simple
 
   def initialize(native); end
 
+  def ==(other); end
   def [](name); end
   def allow_reload!(*_arg0); end
   def checked?; end
@@ -744,6 +750,12 @@ end
 Capybara::Node::Simple::VISIBILITY_XPATH = T.let(T.unsafe(nil), String)
 class Capybara::NotSupportedByDriverError < ::Capybara::CapybaraError; end
 module Capybara::Queries; end
+
+class Capybara::Queries::ActiveElementQuery < ::Capybara::Queries::BaseQuery
+  def initialize(**options); end
+
+  def resolve_for(session); end
+end
 
 class Capybara::Queries::AncestorQuery < ::Capybara::Queries::SelectorQuery
   def description(applied = T.unsafe(nil)); end
@@ -842,6 +854,7 @@ class Capybara::Queries::SelectorQuery < ::Capybara::Queries::BaseQuery
   def matches_class_filter?(node); end
   def matches_exact_text_filter?(node); end
   def matches_filter_block?(node); end
+  def matches_focused_filter?(node); end
   def matches_id_filter?(node); end
   def matches_locator_filter?(node); end
   def matches_node_filters?(node, errors); end
@@ -867,6 +880,7 @@ class Capybara::Queries::SelectorQuery < ::Capybara::Queries::BaseQuery
   def to_element(node); end
   def try_text_match_in_expression?; end
   def use_default_class_filter?; end
+  def use_default_focused_filter?; end
   def use_default_id_filter?; end
   def use_default_style_filter?; end
   def use_spatial_filter?; end
@@ -1065,7 +1079,6 @@ class Capybara::RackTest::Form::ParamsHash < ::Hash
 end
 
 class Capybara::RackTest::Node < ::Capybara::Driver::Node
-  def ==(other); end
   def [](*args); end
   def all_text(*args); end
   def checked?(*args); end
@@ -1074,6 +1087,7 @@ class Capybara::RackTest::Node < ::Capybara::Driver::Node
   def find_css(*args); end
   def find_xpath(*args); end
   def path(*args); end
+  def readonly?(*args); end
   def select_option(*args); end
   def selected?(*args); end
   def set(*args); end
@@ -1121,6 +1135,7 @@ class Capybara::RackTest::Node < ::Capybara::Driver::Node
   def unchecked_find_css(locator, **_hints); end
   def unchecked_find_xpath(locator, **_hints); end
   def unchecked_path; end
+  def unchecked_readonly?; end
   def unchecked_select_option; end
   def unchecked_selected?; end
   def unchecked_set(value, **options); end
@@ -1509,6 +1524,7 @@ class Capybara::Selenium::Driver < ::Capybara::Driver::Base
   def initialize(app, **options); end
 
   def accept_modal(_type, **options); end
+  def active_element; end
   def app; end
   def browser; end
   def close_window(handle); end
@@ -1546,7 +1562,6 @@ class Capybara::Selenium::Driver < ::Capybara::Driver::Base
   private
 
   def accept_unhandled_reset_alert; end
-  def active_element; end
   def bridge; end
   def build_node(native_node, initial_cache = T.unsafe(nil)); end
   def clear_browser_state; end
@@ -1559,6 +1574,7 @@ class Capybara::Selenium::Driver < ::Capybara::Driver::Base
   def find_modal(text: T.unsafe(nil), **options); end
   def find_modal_errors; end
   def modal_error; end
+  def native_active_element; end
   def native_args(args); end
   def navigate_with_accept(url); end
   def reset_browser_state; end
@@ -1738,7 +1754,6 @@ class Capybara::Selenium::Node < ::Capybara::Driver::Node
   include ::Capybara::Selenium::Find
   include ::Capybara::Selenium::Scroll
 
-  def ==(other); end
   def [](name); end
   def all_text; end
   def checked?; end
@@ -1786,6 +1801,7 @@ class Capybara::Selenium::Node < ::Capybara::Driver::Node
   def find_context; end
   def modifiers_down(actions, keys); end
   def modifiers_up(actions, keys); end
+  def native_id; end
   def normalize_keys(keys); end
   def perform_with_options(click_options, &block); end
   def select_node; end
@@ -1932,7 +1948,8 @@ class Capybara::Server::AnimationDisabler
 
   private
 
-  def disable_markup; end
+  def disable_css_markup; end
+  def disable_js_markup; end
   def html_content?; end
   def insert_disable(html); end
 
@@ -1941,7 +1958,8 @@ class Capybara::Server::AnimationDisabler
   end
 end
 
-Capybara::Server::AnimationDisabler::DISABLE_MARKUP_TEMPLATE = T.let(T.unsafe(nil), String)
+Capybara::Server::AnimationDisabler::DISABLE_CSS_MARKUP_TEMPLATE = T.let(T.unsafe(nil), String)
+Capybara::Server::AnimationDisabler::DISABLE_JS_MARKUP_TEMPLATE = T.let(T.unsafe(nil), String)
 
 class Capybara::Server::Checker
   def initialize(host, port); end
@@ -1986,6 +2004,7 @@ class Capybara::Session
   def accept_alert(text = T.unsafe(nil), **options, &blk); end
   def accept_confirm(text = T.unsafe(nil), **options, &blk); end
   def accept_prompt(text = T.unsafe(nil), **options, &blk); end
+  def active_element; end
   def all(*args, &block); end
   def app; end
   def assert_all_of_selectors(*args, &block); end

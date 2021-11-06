@@ -68,4 +68,10 @@ class ActiveModel::Validations::UrlValidator < ::ActiveModel::EachValidator
   def initialize(options); end
 
   def validate_each(record, attribute, value); end
+
+  protected
+
+  def filtered_options(value); end
 end
+
+ActiveModel::Validations::UrlValidator::RESERVED_OPTIONS = T.let(T.unsafe(nil), Array)

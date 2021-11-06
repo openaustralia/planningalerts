@@ -39,6 +39,7 @@ module Ethon::Curl
   def multi_perform(*_arg0); end
   def multi_remove_handle(*_arg0); end
   def multi_setopt(*args); end
+  def multi_socket_action(*_arg0); end
   def multi_strerror(*_arg0); end
   def multi_timeout(*_arg0); end
   def select(*_arg0); end
@@ -72,6 +73,7 @@ module Ethon::Curl
     def multi_perform(*_arg0); end
     def multi_remove_handle(*_arg0); end
     def multi_setopt(*args); end
+    def multi_socket_action(*_arg0); end
     def multi_strerror(*_arg0); end
     def multi_timeout(*_arg0); end
     def select(*_arg0); end
@@ -104,6 +106,10 @@ Ethon::Curl::MsgCode = T.let(T.unsafe(nil), FFI::Enum)
 class Ethon::Curl::MsgData < ::FFI::Union; end
 Ethon::Curl::MultiCode = T.let(T.unsafe(nil), FFI::Enum)
 Ethon::Curl::MultiOption = T.let(T.unsafe(nil), FFI::Enum)
+Ethon::Curl::PollAction = T.let(T.unsafe(nil), FFI::Enum)
+Ethon::Curl::SOCKET_BAD = T.let(T.unsafe(nil), Integer)
+Ethon::Curl::SOCKET_TIMEOUT = T.let(T.unsafe(nil), Integer)
+Ethon::Curl::SocketReadiness = T.let(T.unsafe(nil), FFI::Bitmask)
 class Ethon::Curl::Timeval < ::FFI::Struct; end
 Ethon::Curl::VERSION_ASYNCHDNS = T.let(T.unsafe(nil), Integer)
 Ethon::Curl::VERSION_CONV = T.let(T.unsafe(nil), Integer)
@@ -384,6 +390,10 @@ module Ethon::Easy::Informations
   def redirect_time; end
   def request_size; end
   def response_code; end
+  def size_download; end
+  def size_upload; end
+  def speed_download; end
+  def speed_upload; end
   def starttransfer_time; end
   def supports_zlib?; end
   def total_time; end
@@ -411,6 +421,10 @@ class Ethon::Easy::Mirror
   def response_code; end
   def response_headers; end
   def return_code; end
+  def size_download; end
+  def size_upload; end
+  def speed_download; end
+  def speed_upload; end
   def starttransfer_time; end
   def to_hash; end
   def total_time; end
@@ -429,13 +443,6 @@ module Ethon::Easy::Operations
   def handle=(h); end
   def perform; end
   def prepare; end
-end
-
-class Ethon::Easy::Operations::PointerHelper
-  class << self
-    def release(pointer); end
-    def synchronize(&block); end
-  end
 end
 
 module Ethon::Easy::Options
@@ -582,12 +589,34 @@ module Ethon::Easy::Options
   def postfieldsize_large=(value); end
   def postquote=(value); end
   def postredir=(value); end
+  def pre_proxy=(value); end
   def prequote=(value); end
   def private=(value); end
   def progressdata=(value); end
   def progressfunction=(value); end
   def protocols=(value); end
   def proxy=(value); end
+  def proxy_cainfo=(value); end
+  def proxy_capath=(value); end
+  def proxy_crlfile=(value); end
+  def proxy_issuercert=(value); end
+  def proxy_keypasswd=(value); end
+  def proxy_pinned_public_key=(value); end
+  def proxy_pinnedpublickey=(value); end
+  def proxy_ssl_cipher_list=(value); end
+  def proxy_ssl_options=(value); end
+  def proxy_ssl_verifyhost=(value); end
+  def proxy_ssl_verifypeer=(value); end
+  def proxy_sslcert=(value); end
+  def proxy_sslcertpasswd=(value); end
+  def proxy_sslcerttype=(value); end
+  def proxy_sslkey=(value); end
+  def proxy_sslkeypasswd=(value); end
+  def proxy_sslkeytype=(value); end
+  def proxy_sslversion=(value); end
+  def proxy_tlsauth_password=(value); end
+  def proxy_tlsauth_type=(value); end
+  def proxy_tlsauth_username=(value); end
   def proxy_transfer_mode=(value); end
   def proxyauth=(value); end
   def proxypassword=(value); end
@@ -803,19 +832,24 @@ class Ethon::Multi
   def initialize(options = T.unsafe(nil)); end
 
   def set_attributes(options); end
+
+  private
+
+  def ensure_execution_mode(expected_mode); end
 end
 
 module Ethon::Multi::Operations
   def handle; end
   def init_vars; end
+  def ongoing?; end
   def perform; end
   def prepare; end
+  def socket_action(io = T.unsafe(nil), readiness = T.unsafe(nil)); end
 
   private
 
   def check; end
   def get_timeout; end
-  def ongoing?; end
   def reset_fds; end
   def run; end
   def running_count; end

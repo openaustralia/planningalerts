@@ -92,6 +92,8 @@ class Geocoder::Configuration
   def data=(_arg0); end
   def distances; end
   def distances=(value); end
+  def host; end
+  def host=(value); end
   def http_headers; end
   def http_headers=(value); end
   def http_proxy; end
@@ -129,6 +131,8 @@ class Geocoder::Configuration
     def cache_prefix=(value); end
     def distances; end
     def distances=(value); end
+    def host; end
+    def host=(value); end
     def http_headers; end
     def http_headers=(value); end
     def http_proxy; end
@@ -172,6 +176,8 @@ class Geocoder::InvalidApiKey < ::Geocoder::Error; end
 class Geocoder::InvalidRequest < ::Geocoder::Error; end
 
 class Geocoder::IpAddress < ::String
+  def initialize(ip); end
+
   def internal?; end
   def loopback?; end
   def private?; end
@@ -218,6 +224,7 @@ module Geocoder::Lookup
 
   def all_services; end
   def all_services_except_test; end
+  def all_services_with_http_requests; end
   def get(name); end
   def ip_services; end
   def ip_services=(_arg0); end

@@ -385,7 +385,13 @@ class Administrate::Field::Text < ::Administrate::Field::Base
   end
 end
 
-class Administrate::Field::Time < ::Administrate::Field::Base; end
+class Administrate::Field::Time < ::Administrate::Field::Base
+  def time; end
+
+  private
+
+  def format; end
+end
 
 class Administrate::Field::Url < ::Administrate::Field::Base
   def truncate; end

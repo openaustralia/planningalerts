@@ -298,6 +298,7 @@ class HTTParty::RedirectionTooDeep < ::HTTParty::ResponseError; end
 class HTTParty::Request
   def initialize(http_method, path, o = T.unsafe(nil)); end
 
+  def _dump(_level); end
   def base_uri; end
   def connection_adapter; end
   def format; end
@@ -349,6 +350,10 @@ class HTTParty::Request
   def setup_raw_request; end
   def username; end
   def validate; end
+
+  class << self
+    def _load(data); end
+  end
 end
 
 class HTTParty::Request::Body

@@ -66,7 +66,6 @@ end
 DependencyDetection::Dependent::AUTO_CONFIG_VALUE = T.let(T.unsafe(nil), Symbol)
 DependencyDetection::Dependent::VALID_CONFIG_VALUES = T.let(T.unsafe(nil), Array)
 module NewRelic; end
-NewRelic::ARGS_FOR_RUBY_VERSION = T.let(T.unsafe(nil), String)
 
 module NewRelic::Agent
   extend ::NewRelic::Agent
@@ -77,7 +76,7 @@ module NewRelic::Agent
   def add_custom_span_attributes(params); end
   def add_deferred_method_tracers_now; end
   def add_instrumentation(file_pattern); end
-  def add_or_defer_method_tracer(receiver, method_name, metric_name_code, options); end
+  def add_or_defer_method_tracer(receiver, method_name, metric_name, options); end
   def after_fork(options = T.unsafe(nil)); end
   def agent; end
   def agent=(new_instance); end
@@ -609,6 +608,11 @@ module NewRelic::Agent::Configuration::EventHarvestConfig
 
   def from_config(config); end
   def to_config_hash(connect_reply); end
+
+  private
+
+  def transform_event_harvest_config_keys(connect_reply, event_harvest_interval); end
+  def transform_span_event_harvest_config(config_hash, connect_reply); end
 end
 
 NewRelic::Agent::Configuration::EventHarvestConfig::EVENT_HARVEST_CONFIG_KEY_MAPPING = T.let(T.unsafe(nil), Hash)
@@ -726,6 +730,7 @@ class NewRelic::Agent::Configuration::YamlSource < ::NewRelic::Agent::Configurat
   protected
 
   def booleanify_values(config, *keys); end
+  def dot_flattened(nested_hash, names = T.unsafe(nil), result = T.unsafe(nil)); end
   def is_boolean?(value); end
   def log_failure(*messages); end
   def process_erb(file); end
@@ -735,6 +740,7 @@ class NewRelic::Agent::Configuration::YamlSource < ::NewRelic::Agent::Configurat
   def warn_missing_config_file(path); end
 end
 
+NewRelic::Agent::Configuration::YamlSource::CONFIG_WITH_HASH_VALUE = T.let(T.unsafe(nil), Array)
 module NewRelic::Agent::Connect; end
 
 class NewRelic::Agent::Connect::RequestBuilder
@@ -1016,7 +1022,7 @@ module NewRelic::Agent::Datastores
   class << self
     def notice_sql(query, scoped_metric, elapsed); end
     def notice_statement(statement, elapsed); end
-    def trace(clazz, method_name, product, operation = T.unsafe(nil)); end
+    def trace(klass, method_name, product, operation = T.unsafe(nil)); end
     def wrap(product, operation, collection = T.unsafe(nil), callback = T.unsafe(nil)); end
   end
 end
@@ -1478,7 +1484,6 @@ module NewRelic::Agent::External
 
   def get_response_metadata; end
   def process_request_metadata(request_metadata); end
-  def start_segment(library: T.unsafe(nil), uri: T.unsafe(nil), procedure: T.unsafe(nil)); end
 
   private
 
@@ -1673,7 +1678,7 @@ end
 NewRelic::Agent::Instrumentation::QueueTime::ALL_QUEUE_METRIC = T.let(T.unsafe(nil), String)
 NewRelic::Agent::Instrumentation::QueueTime::CANDIDATE_HEADERS = T.let(T.unsafe(nil), Array)
 NewRelic::Agent::Instrumentation::QueueTime::DIVISORS = T.let(T.unsafe(nil), Array)
-NewRelic::Agent::Instrumentation::QueueTime::EARLIEST_ACCEPTABLE_TIME = T.let(T.unsafe(nil), Time)
+NewRelic::Agent::Instrumentation::QueueTime::EARLIEST_ACCEPTABLE_TIME = T.let(T.unsafe(nil), Float)
 NewRelic::Agent::Instrumentation::QueueTime::MIDDLEWARE_START_HEADER = T.let(T.unsafe(nil), String)
 NewRelic::Agent::Instrumentation::QueueTime::QUEUE_START_HEADER = T.let(T.unsafe(nil), String)
 NewRelic::Agent::Instrumentation::QueueTime::REQUEST_START_HEADER = T.let(T.unsafe(nil), String)
@@ -1790,40 +1795,32 @@ module NewRelic::Agent::MethodTracer
   def trace_execution_unscoped(metric_names, options = T.unsafe(nil)); end
 
   class << self
-    def extended(clazz); end
-    def included(clazz); end
+    def extended(klass); end
+    def included(klass); end
   end
 end
 
 module NewRelic::Agent::MethodTracer::ClassMethods
   include ::NewRelic::Agent::MethodTracer::ClassMethods::AddMethodTracer
 
-  def add_method_tracer(method_name, metric_name_code = T.unsafe(nil), options = T.unsafe(nil)); end
-  def remove_method_tracer(method_name, metric_name_code); end
+  def add_method_tracer(method_name, metric_name = T.unsafe(nil), options = T.unsafe(nil)); end
+  def remove_method_tracer(method_name); end
 
   private
 
-  def _add_method_tracer_now(method_name, metric_name_code, options); end
-  def _sanitize_name(name); end
-  def _traced_method_name(method_name, metric_name); end
-  def _untraced_method_name(method_name, metric_name); end
+  def _nr_add_method_tracer_now(method_name, metric_name, options); end
+  def _nr_define_traced_method(method_name, scoped_metric: T.unsafe(nil), unscoped_metrics: T.unsafe(nil), code_header: T.unsafe(nil), code_footer: T.unsafe(nil), record_metrics: T.unsafe(nil), visibility: T.unsafe(nil)); end
+  def _nr_scoped_unscoped_metrics(metric_name, method_name, push_scope: T.unsafe(nil)); end
 end
 
 module NewRelic::Agent::MethodTracer::ClassMethods::AddMethodTracer
-  def assemble_code_header(method_name, metric_name_code, options); end
-  def check_for_illegal_keys!(method_name, options); end
-  def check_for_push_scope_and_metric(options); end
-  def code_to_eval(method_name, metric_name_code, options); end
-  def default_metric_name_code(method_name); end
-  def method_with_push_scope(method_name, metric_name_code, options); end
-  def method_without_push_scope(method_name, metric_name_code, options); end
+  def _nr_clear_traced_methods!; end
+  def _nr_default_metric_name(method_name); end
+  def _nr_derived_class_name; end
+  def _nr_traced_method_module; end
+  def _nr_validate_method_tracer_options(method_name, options); end
+  def method_traced?(method_name); end
   def newrelic_method_exists?(method_name); end
-  def traced_method_exists?(method_name, metric_name_code); end
-  def validate_options(method_name, options); end
-
-  private
-
-  def derived_class_name; end
 end
 
 NewRelic::Agent::MethodTracer::ClassMethods::AddMethodTracer::ALLOWED_KEYS = T.let(T.unsafe(nil), Array)
@@ -2103,7 +2100,7 @@ class NewRelic::Agent::PipeService
   def request_timeout; end
   def request_timeout=(_arg0); end
   def session; end
-  def shutdown(time); end
+  def shutdown; end
   def span_event_data(events); end
   def sql_trace_data(sql); end
   def transaction_sample_data(transactions); end
@@ -2460,7 +2457,7 @@ class NewRelic::Agent::SqlSampler
   def notice_sql(sql, metric_name, config, duration, state = T.unsafe(nil), explainer = T.unsafe(nil), binds = T.unsafe(nil), name = T.unsafe(nil)); end
   def notice_sql_statement(statement, metric_name, duration); end
   def on_finishing_transaction(state, name); end
-  def on_start_transaction(state, start_time, uri = T.unsafe(nil)); end
+  def on_start_transaction(state, uri = T.unsafe(nil)); end
   def remove_shortest_trace; end
   def reset!; end
   def save_slow_sql(transaction_sql_data); end
@@ -2894,11 +2891,11 @@ class NewRelic::Agent::Tracer
     def sampled?; end
     def span_id; end
     def start_datastore_segment(product: T.unsafe(nil), operation: T.unsafe(nil), collection: T.unsafe(nil), host: T.unsafe(nil), port_path_or_id: T.unsafe(nil), database_name: T.unsafe(nil), start_time: T.unsafe(nil), parent: T.unsafe(nil)); end
-    def start_external_request_segment(library: T.unsafe(nil), uri: T.unsafe(nil), procedure: T.unsafe(nil), start_time: T.unsafe(nil), parent: T.unsafe(nil)); end
-    def start_message_broker_segment(action: T.unsafe(nil), library: T.unsafe(nil), destination_type: T.unsafe(nil), destination_name: T.unsafe(nil), headers: T.unsafe(nil), parameters: T.unsafe(nil), start_time: T.unsafe(nil), parent: T.unsafe(nil)); end
-    def start_segment(name: T.unsafe(nil), unscoped_metrics: T.unsafe(nil), start_time: T.unsafe(nil), parent: T.unsafe(nil)); end
-    def start_transaction(name: T.unsafe(nil), partial_name: T.unsafe(nil), category: T.unsafe(nil), **options); end
-    def start_transaction_or_segment(name: T.unsafe(nil), partial_name: T.unsafe(nil), category: T.unsafe(nil), options: T.unsafe(nil)); end
+    def start_external_request_segment(library:, uri:, procedure:, start_time: T.unsafe(nil), parent: T.unsafe(nil)); end
+    def start_message_broker_segment(action:, library:, destination_type:, destination_name:, headers: T.unsafe(nil), parameters: T.unsafe(nil), start_time: T.unsafe(nil), parent: T.unsafe(nil)); end
+    def start_segment(name:, unscoped_metrics: T.unsafe(nil), start_time: T.unsafe(nil), parent: T.unsafe(nil)); end
+    def start_transaction(category:, name: T.unsafe(nil), partial_name: T.unsafe(nil), **options); end
+    def start_transaction_or_segment(category:, name: T.unsafe(nil), partial_name: T.unsafe(nil), options: T.unsafe(nil)); end
     def state; end
     def state_for(thread); end
     def tl_clear; end
@@ -3080,7 +3077,6 @@ class NewRelic::Agent::Transaction
     def set_overriding_transaction_name(partial_name, category = T.unsafe(nil)); end
     def start_new_transaction(state, category, options); end
     def tl_current; end
-    def wrap(state, name, category, options = T.unsafe(nil)); end
   end
 end
 
@@ -3313,7 +3309,7 @@ NewRelic::Agent::Transaction::MIDDLEWARE_PREFIX = T.let(T.unsafe(nil), String)
 NewRelic::Agent::Transaction::MIDDLEWARE_SUMMARY_METRICS = T.let(T.unsafe(nil), Array)
 
 class NewRelic::Agent::Transaction::MessageBrokerSegment < ::NewRelic::Agent::Transaction::Segment
-  def initialize(action: T.unsafe(nil), library: T.unsafe(nil), destination_type: T.unsafe(nil), destination_name: T.unsafe(nil), headers: T.unsafe(nil), parameters: T.unsafe(nil), start_time: T.unsafe(nil)); end
+  def initialize(action:, library:, destination_type:, destination_name:, headers: T.unsafe(nil), parameters: T.unsafe(nil), start_time: T.unsafe(nil)); end
 
   def action; end
   def destination_name; end

@@ -4,6 +4,15 @@
 
 # typed: true
 
+class LRU < ::Hash
+  def initialize; end
+
+  def []=(k, v); end
+  def limit_size; end
+  def max_size; end
+  def max_size=(_arg0); end
+end
+
 module Rabl
   class << self
     def configuration; end
@@ -57,6 +66,8 @@ end
 Rabl::Builder::SETTING_TYPES = T.let(T.unsafe(nil), Hash)
 
 class Rabl::CacheEngine
+  def initialize; end
+
   def fetch(key, cache_options, &block); end
   def read_multi(*keys); end
   def write(key, value, options = T.unsafe(nil)); end
@@ -124,6 +135,12 @@ end
 
 Rabl::Configuration::DEFAULT_XML_OPTIONS = T.let(T.unsafe(nil), Hash)
 
+class Rabl::Digestor < ::ActionView::Digestor
+  private
+
+  def dependency_digest; end
+end
+
 class Rabl::Engine
   include ::Rabl::Helpers
   include ::Rabl::Sources
@@ -178,9 +195,11 @@ class Rabl::Engine
   def respond_to?(name, include_private = T.unsafe(nil)); end
   def set_instance_variables!(context_scope, locals); end
   def set_locals(locals); end
+  def valid_format?(format); end
 end
 
 Rabl::Engine::FORMATS = T.let(T.unsafe(nil), Array)
+Rabl::Engine::SAFE_FORMATS = T.let(T.unsafe(nil), Array)
 
 module Rabl::Helpers
   def collection_root_name; end
@@ -230,6 +249,8 @@ module Rabl::Partials
   def partial_as_engine(file, options = T.unsafe(nil), &block); end
 end
 
+class Rabl::Railtie < ::Rails::Railtie; end
+
 class Rabl::Renderer
   def initialize(source, object = T.unsafe(nil), options = T.unsafe(nil)); end
 
@@ -267,4 +288,25 @@ module Rabl::Sources
   def partialized(file); end
 end
 
+class Rabl::Tracker
+  def initialize(name, template); end
+
+  def dependencies; end
+
+  private
+
+  def directory; end
+  def extends_dependencies; end
+  def name; end
+  def partial_dependencies; end
+  def source; end
+  def template; end
+
+  class << self
+    def call(name, template); end
+  end
+end
+
+Rabl::Tracker::EXTENDS_DEPENDENCY = T.let(T.unsafe(nil), Regexp)
+Rabl::Tracker::PARTIAL_DEPENDENCY = T.let(T.unsafe(nil), Regexp)
 Rabl::VERSION = T.let(T.unsafe(nil), String)

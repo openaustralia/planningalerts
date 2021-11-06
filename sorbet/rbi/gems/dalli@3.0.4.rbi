@@ -24,18 +24,24 @@ class Dalli::Client
   def close; end
   def decr(key, amt = T.unsafe(nil), ttl = T.unsafe(nil), default = T.unsafe(nil)); end
   def delete(key); end
+  def delete_cas(key, cas = T.unsafe(nil)); end
   def fetch(key, ttl = T.unsafe(nil), options = T.unsafe(nil)); end
   def flush(delay = T.unsafe(nil)); end
   def flush_all(delay = T.unsafe(nil)); end
+  def gat(key, ttl = T.unsafe(nil)); end
   def get(key, options = T.unsafe(nil)); end
+  def get_cas(key); end
   def get_multi(*keys); end
+  def get_multi_cas(*keys); end
   def incr(key, amt = T.unsafe(nil), ttl = T.unsafe(nil), default = T.unsafe(nil)); end
   def multi; end
   def prepend(key, value); end
   def replace(key, value, ttl = T.unsafe(nil), options = T.unsafe(nil)); end
+  def replace_cas(key, value, cas, ttl = T.unsafe(nil), options = T.unsafe(nil)); end
   def reset; end
   def reset_stats; end
   def set(key, value, ttl = T.unsafe(nil), options = T.unsafe(nil)); end
+  def set_cas(key, value, cas, ttl = T.unsafe(nil), options = T.unsafe(nil)); end
   def stats(type = T.unsafe(nil)); end
   def touch(key, ttl = T.unsafe(nil)); end
   def version; end
@@ -49,7 +55,6 @@ class Dalli::Client
   def key_with_namespace(key); end
   def key_without_namespace(key); end
   def make_multi_get_requests(groups); end
-  def mapped_keys(keys); end
   def namespace; end
   def normalize_options(opts); end
   def normalize_servers(servers); end
@@ -58,6 +63,7 @@ class Dalli::Client
   def ring; end
   def ttl_or_default(ttl); end
   def validate_key(key); end
+  def validate_servers_arg(servers); end
 end
 
 Dalli::Client::CACHE_NILS = T.let(T.unsafe(nil), Hash)
@@ -80,42 +86,13 @@ end
 
 class Dalli::MarshalError < ::Dalli::DalliError; end
 class Dalli::NetworkError < ::Dalli::DalliError; end
-class Dalli::Railtie < ::Rails::Railtie; end
+module Dalli::Protocol; end
 
-class Dalli::Ring
-  def initialize(servers, options); end
-
-  def continuum; end
-  def continuum=(_arg0); end
-  def lock; end
-  def server_for_key(key); end
-  def servers; end
-  def servers=(_arg0); end
-
-  private
-
-  def binary_search(ary, value); end
-  def entry_count_for(server, total_servers, total_weight); end
-  def hash_for(key); end
-  def threadsafe!; end
-end
-
-class Dalli::Ring::Entry
-  def initialize(val, srv); end
-
-  def server; end
-  def value; end
-end
-
-Dalli::Ring::POINTS_PER_SERVER = T.let(T.unsafe(nil), Integer)
-class Dalli::RingError < ::Dalli::DalliError; end
-
-class Dalli::Server
+class Dalli::Protocol::Binary
   def initialize(attribs, options = T.unsafe(nil)); end
 
   def alive?; end
   def close; end
-  def compressor; end
   def hostname; end
   def hostname=(_arg0); end
   def lock!; end
@@ -151,6 +128,7 @@ class Dalli::Server
   def down!; end
   def failure!(exception); end
   def flush(ttl); end
+  def gat(key, ttl, options = T.unsafe(nil)); end
   def generic_response(unpack = T.unsafe(nil), cache_nils = T.unsafe(nil)); end
   def get(key, options = T.unsafe(nil)); end
   def guard_max_value(key, value); end
@@ -160,7 +138,6 @@ class Dalli::Server
   def multi_response; end
   def need_auth?; end
   def noop; end
-  def parse_hostname(str); end
   def password; end
   def prepend(key, value); end
   def read(count); end
@@ -168,7 +145,6 @@ class Dalli::Server
   def reconnect!(message); end
   def replace(key, value, ttl, cas, options); end
   def reset_stats; end
-  def sanitize_ttl(ttl); end
   def sasl_authentication; end
   def send_multiget(keys); end
   def serialize(key, value, options = T.unsafe(nil)); end
@@ -186,32 +162,108 @@ class Dalli::Server
   def write_noop; end
 end
 
-Dalli::Server::CAS_HEADER = T.let(T.unsafe(nil), String)
-Dalli::Server::DEFAULTS = T.let(T.unsafe(nil), Hash)
-Dalli::Server::DEFAULT_PORT = T.let(T.unsafe(nil), Integer)
-Dalli::Server::DEFAULT_WEIGHT = T.let(T.unsafe(nil), Integer)
-Dalli::Server::FLAG_COMPRESSED = T.let(T.unsafe(nil), Integer)
-Dalli::Server::FLAG_SERIALIZED = T.let(T.unsafe(nil), Integer)
-Dalli::Server::FORMAT = T.let(T.unsafe(nil), Hash)
-Dalli::Server::HEADER = T.let(T.unsafe(nil), String)
+Dalli::Protocol::Binary::CAS_HEADER = T.let(T.unsafe(nil), String)
+Dalli::Protocol::Binary::DEFAULTS = T.let(T.unsafe(nil), Hash)
+Dalli::Protocol::Binary::FLAG_SERIALIZED = T.let(T.unsafe(nil), Integer)
+Dalli::Protocol::Binary::FORMAT = T.let(T.unsafe(nil), Hash)
+Dalli::Protocol::Binary::HEADER = T.let(T.unsafe(nil), String)
+Dalli::Protocol::Binary::KV_HEADER = T.let(T.unsafe(nil), String)
+Dalli::Protocol::Binary::NORMAL_HEADER = T.let(T.unsafe(nil), String)
+Dalli::Protocol::Binary::NOT_FOUND = T.let(T.unsafe(nil), Dalli::Protocol::Binary::NilObject)
+class Dalli::Protocol::Binary::NilObject; end
+Dalli::Protocol::Binary::OPCODES = T.let(T.unsafe(nil), Hash)
+Dalli::Protocol::Binary::OP_FORMAT = T.let(T.unsafe(nil), Hash)
+Dalli::Protocol::Binary::REQUEST = T.let(T.unsafe(nil), Integer)
+Dalli::Protocol::Binary::RESPONSE = T.let(T.unsafe(nil), Integer)
+Dalli::Protocol::Binary::RESPONSE_CODES = T.let(T.unsafe(nil), Hash)
+Dalli::Protocol::NOT_FOUND = T.let(T.unsafe(nil), Dalli::Protocol::NilObject)
+class Dalli::Protocol::NilObject; end
 
-module Dalli::Server::KSocket
-  include ::Dalli::Server::KSocket::InstanceMethods
-
+class Dalli::Protocol::ServerConfigParser
   class << self
-    def included(receiver); end
+    def attributes_for_tcp_socket(res); end
+    def attributes_for_unix_socket(res); end
+    def deconstruct_string(str); end
+    def normalize_hostname(str, res); end
+    def normalize_port(port); end
+    def normalize_weight(weight); end
+    def parse(str); end
   end
 end
 
-module Dalli::Server::KSocket::InstanceMethods
-  def read_available; end
-  def readfull(count); end
+Dalli::Protocol::ServerConfigParser::DEFAULT_PORT = T.let(T.unsafe(nil), Integer)
+Dalli::Protocol::ServerConfigParser::DEFAULT_WEIGHT = T.let(T.unsafe(nil), Integer)
+Dalli::Protocol::ServerConfigParser::SERVER_CONFIG_REGEXP = T.let(T.unsafe(nil), Regexp)
+
+class Dalli::Protocol::TtlSanitizer
+  class << self
+    def as_timestamp(ttl_as_i); end
+    def current_timestamp; end
+    def less_than_max_expiration_interval?(ttl_as_i); end
+    def sanitize(ttl); end
+  end
 end
 
-class Dalli::Server::KSocket::TCP < ::TCPSocket
-  include ::Dalli::Server::KSocket
-  include ::Dalli::Server::KSocket::InstanceMethods
-  extend ::Dalli::Server::TCPSocketOptions
+Dalli::Protocol::TtlSanitizer::MAX_ACCEPTABLE_EXPIRATION_INTERVAL = T.let(T.unsafe(nil), Integer)
+
+class Dalli::Protocol::ValueCompressor
+  def initialize(client_options); end
+
+  def compress_by_default?; end
+  def compress_value?(value, req_options); end
+  def compression_min_size; end
+  def compressor; end
+  def retrieve(value, bitflags); end
+  def store(value, req_options, bitflags); end
+end
+
+Dalli::Protocol::ValueCompressor::DEFAULTS = T.let(T.unsafe(nil), Hash)
+Dalli::Protocol::ValueCompressor::FLAG_COMPRESSED = T.let(T.unsafe(nil), Integer)
+Dalli::Protocol::ValueCompressor::OPTIONS = T.let(T.unsafe(nil), Array)
+
+class Dalli::Ring
+  def initialize(servers, options); end
+
+  def continuum; end
+  def continuum=(_arg0); end
+  def lock; end
+  def server_for_key(key); end
+  def servers; end
+  def servers=(_arg0); end
+
+  private
+
+  def entry_count_for(server, total_servers, total_weight); end
+  def hash_for(key); end
+  def threadsafe!; end
+end
+
+class Dalli::Ring::Entry
+  def initialize(val, srv); end
+
+  def server; end
+  def value; end
+end
+
+Dalli::Ring::POINTS_PER_SERVER = T.let(T.unsafe(nil), Integer)
+class Dalli::RingError < ::Dalli::DalliError; end
+Dalli::Server = Dalli::Protocol::Binary
+module Dalli::Socket; end
+
+module Dalli::Socket::InstanceMethods
+  def read_available; end
+  def readfull(count); end
+  def safe_options; end
+end
+
+class Dalli::Socket::SSLSocket < ::OpenSSL::SSL::SSLSocket
+  include ::Dalli::Socket::InstanceMethods
+
+  def options; end
+end
+
+class Dalli::Socket::TCP < ::TCPSocket
+  include ::Dalli::Socket::InstanceMethods
 
   def options; end
   def options=(_arg0); end
@@ -223,9 +275,8 @@ class Dalli::Server::KSocket::TCP < ::TCPSocket
   end
 end
 
-class Dalli::Server::KSocket::UNIX < ::UNIXSocket
-  include ::Dalli::Server::KSocket
-  include ::Dalli::Server::KSocket::InstanceMethods
+class Dalli::Socket::UNIX < ::UNIXSocket
+  include ::Dalli::Socket::InstanceMethods
 
   def options; end
   def options=(_arg0); end
@@ -235,21 +286,6 @@ class Dalli::Server::KSocket::UNIX < ::UNIXSocket
   class << self
     def open(path, server, options = T.unsafe(nil)); end
   end
-end
-
-Dalli::Server::KV_HEADER = T.let(T.unsafe(nil), String)
-Dalli::Server::MAX_ACCEPTABLE_EXPIRATION_INTERVAL = T.let(T.unsafe(nil), Integer)
-Dalli::Server::NORMAL_HEADER = T.let(T.unsafe(nil), String)
-Dalli::Server::NOT_FOUND = T.let(T.unsafe(nil), Dalli::Server::NilObject)
-class Dalli::Server::NilObject; end
-Dalli::Server::OPCODES = T.let(T.unsafe(nil), Hash)
-Dalli::Server::OP_FORMAT = T.let(T.unsafe(nil), Hash)
-Dalli::Server::REQUEST = T.let(T.unsafe(nil), Integer)
-Dalli::Server::RESPONSE = T.let(T.unsafe(nil), Integer)
-Dalli::Server::RESPONSE_CODES = T.let(T.unsafe(nil), Hash)
-
-module Dalli::Server::TCPSocketOptions
-  def setsockopts(sock, options); end
 end
 
 module Dalli::Threadsafe
@@ -345,7 +381,6 @@ class Rack::Session::Dalli < ::Rack::Session::Abstract::Persisted
   def destroy_session(env, session_id, options); end
   def find_session(req, sid); end
   def get_session(env, sid); end
-  def mutex; end
   def pool; end
   def set_session(env, session_id, new_session, options); end
   def write_session(req, sid, session, options); end
@@ -355,7 +390,7 @@ class Rack::Session::Dalli < ::Rack::Session::Abstract::Persisted
   def extract_dalli_options(options); end
   def generate_sid_with(dc); end
   def ttl(expire_after); end
-  def with_block(env, default = T.unsafe(nil), &block); end
+  def with_block(default = T.unsafe(nil), &block); end
 end
 
 Rack::Session::Dalli::DEFAULT_DALLI_OPTIONS = T.let(T.unsafe(nil), Hash)

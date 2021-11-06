@@ -23,6 +23,7 @@ class Redis
   def bitcount(key, start = T.unsafe(nil), stop = T.unsafe(nil)); end
   def bitop(operation, destkey, *keys); end
   def bitpos(key, bit, start = T.unsafe(nil), stop = T.unsafe(nil)); end
+  def blmove(source, destination, where_source, where_destination, timeout: T.unsafe(nil)); end
   def blpop(*args); end
   def brpop(*args); end
   def brpoplpush(source, destination, deprecated_timeout = T.unsafe(nil), timeout: T.unsafe(nil)); end
@@ -63,6 +64,8 @@ class Redis
   def georadiusbymember(*args, **geoptions); end
   def get(key); end
   def getbit(key, offset); end
+  def getdel(key); end
+  def getex(key, ex: T.unsafe(nil), px: T.unsafe(nil), exat: T.unsafe(nil), pxat: T.unsafe(nil), persist: T.unsafe(nil)); end
   def getrange(key, start, stop); end
   def getset(key, value); end
   def hdel(key, *fields); end
@@ -91,6 +94,7 @@ class Redis
   def lindex(key, index); end
   def linsert(key, where, pivot, value); end
   def llen(key); end
+  def lmove(source, destination, where_source, where_destination); end
   def lpop(key, count = T.unsafe(nil)); end
   def lpush(key, value); end
   def lpushx(key, value); end
@@ -147,7 +151,7 @@ class Redis
   def sdiffstore(destination, *keys); end
   def select(db); end
   def sentinel(subcommand, *args); end
-  def set(key, value, ex: T.unsafe(nil), px: T.unsafe(nil), nx: T.unsafe(nil), xx: T.unsafe(nil), keepttl: T.unsafe(nil)); end
+  def set(key, value, ex: T.unsafe(nil), px: T.unsafe(nil), exat: T.unsafe(nil), pxat: T.unsafe(nil), nx: T.unsafe(nil), xx: T.unsafe(nil), keepttl: T.unsafe(nil), get: T.unsafe(nil)); end
   def setbit(key, offset, value); end
   def setex(key, ttl, value); end
   def setnx(key, value); end
@@ -159,6 +163,7 @@ class Redis
   def slaveof(host, port); end
   def slowlog(subcommand, length = T.unsafe(nil)); end
   def smembers(key); end
+  def smismember(key, *members); end
   def smove(source, destination, member); end
   def sort(key, by: T.unsafe(nil), limit: T.unsafe(nil), get: T.unsafe(nil), order: T.unsafe(nil), store: T.unsafe(nil)); end
   def spop(key, count = T.unsafe(nil)); end
@@ -197,15 +202,17 @@ class Redis
   def xreadgroup(group, consumer, keys, ids, count: T.unsafe(nil), block: T.unsafe(nil), noack: T.unsafe(nil)); end
   def xrevrange(key, range_end = T.unsafe(nil), start = T.unsafe(nil), count: T.unsafe(nil)); end
   def xtrim(key, maxlen, approximate: T.unsafe(nil)); end
-  def zadd(key, *args, nx: T.unsafe(nil), xx: T.unsafe(nil), ch: T.unsafe(nil), incr: T.unsafe(nil)); end
+  def zadd(key, *args, nx: T.unsafe(nil), xx: T.unsafe(nil), lt: T.unsafe(nil), gt: T.unsafe(nil), ch: T.unsafe(nil), incr: T.unsafe(nil)); end
   def zcard(key); end
   def zcount(key, min, max); end
   def zincrby(key, increment, member); end
   def zinter(*keys, weights: T.unsafe(nil), aggregate: T.unsafe(nil), with_scores: T.unsafe(nil)); end
   def zinterstore(destination, keys, weights: T.unsafe(nil), aggregate: T.unsafe(nil)); end
   def zlexcount(key, min, max); end
+  def zmscore(key, *members); end
   def zpopmax(key, count = T.unsafe(nil)); end
   def zpopmin(key, count = T.unsafe(nil)); end
+  def zrandmember(key, count = T.unsafe(nil), withscores: T.unsafe(nil), with_scores: T.unsafe(nil)); end
   def zrange(key, start, stop, withscores: T.unsafe(nil), with_scores: T.unsafe(nil)); end
   def zrangebylex(key, min, max, limit: T.unsafe(nil)); end
   def zrangebyscore(key, min, max, withscores: T.unsafe(nil), with_scores: T.unsafe(nil), limit: T.unsafe(nil)); end
@@ -225,6 +232,7 @@ class Redis
   private
 
   def _geoarguments(*args, options: T.unsafe(nil), sort: T.unsafe(nil), count: T.unsafe(nil)); end
+  def _normalize_move_wheres(where_source, where_destination); end
   def _subscription(method, timeout, channels, block); end
   def _xread(args, keys, ids, blocking_timeout_msec); end
 

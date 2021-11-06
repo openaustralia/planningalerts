@@ -4,8 +4,5 @@
 
 # typed: true
 
-class Set
-  include ::Enumerable
-end
-
-Set::InspectKey = T.let(T.unsafe(nil), Symbol)
+# THIS IS AN EMPTY RBI FILE.
+# see https://github.com/Shopify/tapioca/wiki/Manual-Gem-Requires
