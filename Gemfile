@@ -115,7 +115,7 @@ gem "rack-cors"
 gem "sorbet-runtime"
 
 # For automatic creation of github issues when scrapers are broken
-gem "octokit", "~> 4.0"
+gem "octokit"
 
 # For rendering json output
 gem "jbuilder"

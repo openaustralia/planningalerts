@@ -691,7 +691,7 @@ DEPENDENCIES
   mysql2
   newrelic_rpm
   nokogiri
-  octokit (~> 4.0)
+  octokit
   oj
   rabl
   rack-cors
