@@ -24,13 +24,13 @@ class ApplicationDashboard < Administrate::BaseDashboard
     visible_comments_count: Field::Number,
     address: Field::Text,
     description: Field::Text,
-    info_url: Field::String,
+    info_url: Field::String.with_options(searchable: false),
     lat: Field::Number.with_options(decimals: 2),
     lng: Field::Number.with_options(decimals: 2),
     date_scraped: Field::DateTime,
     date_received: Field::Date,
-    suburb: Field::String,
-    postcode: Field::String,
+    suburb: Field::String.with_options(searchable: false),
+    postcode: Field::String.with_options(searchable: false),
     on_notice_from: Field::Date,
     on_notice_to: Field::Date
   }.freeze, T::Hash[Symbol, T.untyped])
