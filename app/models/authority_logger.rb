@@ -6,7 +6,7 @@ class AuthorityLogger < Logger
 
   sig { params(authority_id: Integer, other_logger: Logger).void }
   def initialize(authority_id, other_logger)
-    super()
+    super($stdout)
     @authority_id = authority_id
     @other_logger = other_logger
     # We're starting a new run of the logger & scraper so clear out the old so we're ready for the new
