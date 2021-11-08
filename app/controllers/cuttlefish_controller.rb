@@ -1,10 +1,13 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class CuttlefishController < ApplicationController
+  extend T::Sig
+
   # Because this is an API
   skip_before_action :verify_authenticity_token
 
+  sig { void }
   def event
     # First check that key is what we expect. Otherwise ignore this request
     if params[:key] != ENV["CUTTLEFISH_WEBHOOK_KEY"]

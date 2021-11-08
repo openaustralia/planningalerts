@@ -1,24 +1,29 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
+  extend T::Sig
+
+  sig { void }
   def index
-    @description = +"Recent comments"
+    description = +"Recent comments"
     authority_id = params[:authority_id]
     if authority_id
       authority = Authority.find_short_name_encoded!(authority_id)
       comments_to_display = authority.comments
-      @description << " on applications from #{authority.full_name_and_state}"
+      description << " on applications from #{authority.full_name_and_state}"
     else
       comments_to_display = Comment.all
     end
+    @description = T.let(description, T.nilable(String))
 
-    @comments = comments_to_display.confirmed.order("confirmed_at DESC").page(params[:page])
-    @rss = comments_url(
-      authority_id: params[:authority_id],
-      format: "rss",
-      page: nil
-    )
+    @comments = T.let(comments_to_display.confirmed.order("confirmed_at DESC").page(params[:page]), T.untyped)
+    @rss = T.let(comments_url(
+                   authority_id: params[:authority_id],
+                   format: "rss",
+                   page: nil
+                 ),
+                 T.nilable(String))
 
     respond_to do |format|
       format.html
@@ -27,8 +32,9 @@ class CommentsController < ApplicationController
     end
   end
 
+  sig { void }
   def confirmed
-    @comment = Comment.find_by(confirm_id: params[:id])
+    @comment = T.let(Comment.find_by(confirm_id: params[:id]), T.nilable(Comment))
     if @comment
       @comment.confirm!
       redirect_to @comment.application, notice: render_to_string(partial: "confirmed", locals: { comment: @comment })
@@ -37,6 +43,7 @@ class CommentsController < ApplicationController
     end
   end
 
+  sig { void }
   def per_week
     authority = Authority.find_short_name_encoded!(params[:authority_id])
 

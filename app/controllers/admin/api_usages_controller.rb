@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 module Admin
@@ -24,7 +24,7 @@ module Admin
       date_to = Time.zone.today
       # If period is 1 then we just want today's data roughly. If period is 2
       # we want today and yesterday
-      date_from = date_to - (T.must(params[:period].to_i) - 1)
+      date_from = date_to - (params[:period].to_i - 1)
       @result = T.let(TopUsageApiUsersService.call(redis: redis, date_from: date_from,
                                                    date_to: date_to, number: 50),
                       T.nilable(T::Array[TopUsageApiUsersService::ApiKeyObjectRequests]))

@@ -1,8 +1,9 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 module Admin
   class CommentsController < Admin::ApplicationController
+    extend T::Sig
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #
@@ -46,20 +47,24 @@ module Admin
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
 
+    sig { returns(Symbol) }
     def default_sorting_attribute
       :created_at
     end
 
+    sig { returns(Symbol) }
     def default_sorting_direction
       :desc
     end
 
+    sig { void }
     def resend
       comment = Comment.find(params[:id])
       comment.send_comment!
       redirect_to({ action: :show }, notice: "Resent comment")
     end
 
+    sig { void }
     def confirm
       comment = Comment.find(params[:id])
       comment.confirm!

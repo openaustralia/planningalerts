@@ -1,14 +1,17 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class AtdisController < ApplicationController
+  extend T::Sig
+
+  sig { void }
   def test
     if params[:url].present?
-      @feed = Feed.create_from_url(params[:url])
+      feed = Feed.create_from_url(params[:url])
       begin
-        @page = @feed.applications
+        @page = T.let(feed.applications, T.untyped)
       rescue RestClient::InternalServerError
-        @error = "Remote server returned an internal server error (error code 500) accessing #{params[:url]}"
+        @error = T.let("Remote server returned an internal server error (error code 500) accessing #{params[:url]}", T.nilable(String))
       rescue RestClient::RequestTimeout
         @error = "Timeout in request to #{params[:url]}. Remote server did not respond in a reasonable amount of time."
       rescue RestClient::Exception => e
@@ -16,12 +19,14 @@ class AtdisController < ApplicationController
       rescue URI::InvalidURIError
         @error = "The url appears to be invalid #{params[:url]}"
       end
+      @feed = T.let(feed, T.nilable(Feed))
     else
       @feed = Feed.new
     end
   end
 
   # The job here is to take ugly posted parameters and redirect to a much simpler url
+  sig { void }
   def test_redirect
     @feed = Feed.new(
       base_url: params[:feed][:base_url],
@@ -41,6 +46,7 @@ class AtdisController < ApplicationController
     end
   end
 
+  sig { void }
   def feed
     file = Feed.example_path(params[:number], params[:page] || 1)
     if File.exist?(file)
@@ -50,5 +56,6 @@ class AtdisController < ApplicationController
     end
   end
 
+  sig { void }
   def specification; end
 end

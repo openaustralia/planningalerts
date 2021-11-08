@@ -1,4 +1,4 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 # All Administrate controllers inherit from this
@@ -9,8 +9,11 @@
 # you're free to overwrite the RESTful controller actions.
 module Admin
   class ApplicationController < Administrate::ApplicationController
+    extend T::Sig
+
     before_action :authenticate_admin
 
+    sig { void }
     def authenticate_admin
       authenticate_user!
       render plain: "Not authorised", status: :forbidden unless T.must(current_user).admin?

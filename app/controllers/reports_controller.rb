@@ -1,12 +1,16 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
 class ReportsController < ApplicationController
+  extend T::Sig
+
+  sig { void }
   def new
-    @comment = Comment.visible.find(params[:comment_id])
-    @report = Report.new
+    @comment = T.let(Comment.visible.find(params[:comment_id]), T.nilable(Comment))
+    @report = T.let(Report.new, T.nilable(Report))
   end
 
+  sig { void }
   def create
     @comment = Comment.visible.find(params[:comment_id])
     @report = @comment.reports.build(

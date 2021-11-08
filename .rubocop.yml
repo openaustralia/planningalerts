@@ -288,8 +288,6 @@ Sorbet/StrictSigil:
     # TODO: Remove these exclusions as soon as we can
     - app/models/concerns/email_confirmable.rb
     - app/models/feed.rb
-    - app/admin/*.rb
-    - app/controllers/**/*.rb
     - app/forms/*.rb
 
 Rails/ActiveRecordCallbacksOrder:
