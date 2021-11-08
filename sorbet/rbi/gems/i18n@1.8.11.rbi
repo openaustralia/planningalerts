@@ -574,43 +574,11 @@ end
 
 module I18n::Tests; end
 
-module I18n::Tests::Basics
-  def teardown; end
-end
-
-module I18n::Tests::Defaults
-  def setup; end
-end
-
-module I18n::Tests::Interpolation; end
-module I18n::Tests::Link; end
-
 module I18n::Tests::Localization
   class << self
     def included(base); end
   end
 end
-
-module I18n::Tests::Localization::Date
-  def setup; end
-end
-
-module I18n::Tests::Localization::DateTime
-  def setup; end
-end
-
-module I18n::Tests::Localization::Procs; end
-
-module I18n::Tests::Localization::Time
-  def setup; end
-end
-
-module I18n::Tests::Lookup
-  def setup; end
-end
-
-module I18n::Tests::Pluralization; end
-module I18n::Tests::Procs; end
 
 class I18n::UnknownFileType < ::I18n::ArgumentError
   def initialize(type, filename); end

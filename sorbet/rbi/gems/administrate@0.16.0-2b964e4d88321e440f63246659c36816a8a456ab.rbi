@@ -30,14 +30,14 @@ end
 
 class Administrate::ApplicationController < ::ActionController::Base
   def create; end
-  def dashboard_class(*args, &block); end
+  def dashboard_class(*_arg0, &_arg1); end
   def destroy; end
   def edit; end
   def index; end
-  def namespace(*args, &block); end
+  def namespace(*_arg0, &_arg1); end
   def new; end
-  def resource_class(*args, &block); end
-  def resource_name(*args, &block); end
+  def resource_class(*_arg0, &_arg1); end
+  def resource_name(*_arg0, &_arg1); end
   def show; end
   def update; end
 
@@ -247,7 +247,7 @@ class Administrate::Field::Deferred
   def ==(other); end
   def associative?; end
   def deferred_class; end
-  def html_class(*args, &block); end
+  def html_class(*_arg0, &_arg1); end
   def new(*args); end
   def options; end
   def permitted_attribute(attr, opts = T.unsafe(nil)); end
@@ -475,7 +475,7 @@ class Administrate::Page::Collection < ::Administrate::Page::Base
   def attribute_types; end
   def attributes_for(resource); end
   def order_params_for(attr, key: T.unsafe(nil)); end
-  def ordered_by?(*args, &block); end
+  def ordered_by?(*_arg0, &_arg1); end
   def ordered_html_class(attr); end
 
   private

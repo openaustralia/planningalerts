@@ -79,7 +79,7 @@ class ActiveJob::Base
   def _run_perform_callbacks(&block); end
   def logger; end
   def logger=(val); end
-  def queue_adapter(*args, &block); end
+  def queue_adapter(*_arg0, &_arg1); end
   def queue_name_prefix; end
   def queue_name_prefix=(_arg0); end
   def queue_name_prefix?; end
@@ -499,10 +499,6 @@ class ActiveJob::Serializers::DateSerializer < ::ActiveJob::Serializers::ObjectS
   private
 
   def klass; end
-
-  class << self
-    def instance; end
-  end
 end
 
 class ActiveJob::Serializers::DateTimeSerializer < ::ActiveJob::Serializers::TimeObjectSerializer
@@ -511,10 +507,6 @@ class ActiveJob::Serializers::DateTimeSerializer < ::ActiveJob::Serializers::Tim
   private
 
   def klass; end
-
-  class << self
-    def instance; end
-  end
 end
 
 class ActiveJob::Serializers::DurationSerializer < ::ActiveJob::Serializers::ObjectSerializer
@@ -524,10 +516,6 @@ class ActiveJob::Serializers::DurationSerializer < ::ActiveJob::Serializers::Obj
   private
 
   def klass; end
-
-  class << self
-    def instance; end
-  end
 end
 
 class ActiveJob::Serializers::ModuleSerializer < ::ActiveJob::Serializers::ObjectSerializer
@@ -537,10 +525,6 @@ class ActiveJob::Serializers::ModuleSerializer < ::ActiveJob::Serializers::Objec
   private
 
   def klass; end
-
-  class << self
-    def instance; end
-  end
 end
 
 class ActiveJob::Serializers::ObjectSerializer
@@ -556,10 +540,9 @@ class ActiveJob::Serializers::ObjectSerializer
   def klass; end
 
   class << self
-    def deserialize(*args, &block); end
-    def instance; end
-    def serialize(*args, &block); end
-    def serialize?(*args, &block); end
+    def deserialize(*_arg0, &_arg1); end
+    def serialize(*_arg0, &_arg1); end
+    def serialize?(*_arg0, &_arg1); end
   end
 end
 
@@ -570,18 +553,10 @@ class ActiveJob::Serializers::SymbolSerializer < ::ActiveJob::Serializers::Objec
   private
 
   def klass; end
-
-  class << self
-    def instance; end
-  end
 end
 
 class ActiveJob::Serializers::TimeObjectSerializer < ::ActiveJob::Serializers::ObjectSerializer
   def serialize(time); end
-
-  class << self
-    def instance; end
-  end
 end
 
 ActiveJob::Serializers::TimeObjectSerializer::NANO_PRECISION = T.let(T.unsafe(nil), Integer)
@@ -592,10 +567,6 @@ class ActiveJob::Serializers::TimeSerializer < ::ActiveJob::Serializers::TimeObj
   private
 
   def klass; end
-
-  class << self
-    def instance; end
-  end
 end
 
 class ActiveJob::Serializers::TimeWithZoneSerializer < ::ActiveJob::Serializers::TimeObjectSerializer
@@ -604,10 +575,6 @@ class ActiveJob::Serializers::TimeWithZoneSerializer < ::ActiveJob::Serializers:
   private
 
   def klass; end
-
-  class << self
-    def instance; end
-  end
 end
 
 class ActiveJob::TestCase < ::ActiveSupport::TestCase
@@ -625,10 +592,10 @@ module ActiveJob::TestHelper
   def assert_performed_jobs(number, only: T.unsafe(nil), except: T.unsafe(nil), queue: T.unsafe(nil), &block); end
   def assert_performed_with(job: T.unsafe(nil), args: T.unsafe(nil), at: T.unsafe(nil), queue: T.unsafe(nil), &block); end
   def before_setup; end
-  def enqueued_jobs(*args, &block); end
+  def enqueued_jobs(*_arg0, &_arg1); end
   def enqueued_jobs=(arg); end
   def perform_enqueued_jobs(only: T.unsafe(nil), except: T.unsafe(nil), queue: T.unsafe(nil), at: T.unsafe(nil), &block); end
-  def performed_jobs(*args, &block); end
+  def performed_jobs(*_arg0, &_arg1); end
   def performed_jobs=(arg); end
   def queue_adapter; end
   def queue_adapter_for_test; end

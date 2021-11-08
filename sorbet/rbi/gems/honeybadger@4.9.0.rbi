@@ -491,10 +491,6 @@ class Honeybadger::Logging::BootLogger < ::Honeybadger::Logging::Base
 
   def add(severity, msg); end
   def flush(logger); end
-
-  class << self
-    def instance; end
-  end
 end
 
 class Honeybadger::Logging::ConfigLogger < ::Honeybadger::Logging::StandardLogger

@@ -374,12 +374,10 @@ class Concurrent::CRubySet < ::Set
   def subset?(*args); end
   def subtract(*args); end
   def superset?(*args); end
-  def taint(*args); end
   def to_a(*args); end
   def to_s(*args); end
   def to_set(*args); end
   def union(*args); end
-  def untaint(*args); end
   def |(*args); end
 
   private

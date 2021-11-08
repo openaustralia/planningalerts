@@ -21,8 +21,8 @@ module Rails
     def env=(environment); end
     def gem_version; end
     def groups(*groups); end
-    def initialize!(*args, &block); end
-    def initialized?(*args, &block); end
+    def initialize!(*_arg0, &_arg1); end
+    def initialized?(*_arg0, &_arg1); end
     def logger; end
     def logger=(_arg0); end
     def public_path; end
@@ -46,7 +46,7 @@ class Rails::Application < ::Rails::Engine
   def console(&blk); end
   def credentials; end
   def credentials=(_arg0); end
-  def default_url_options(*args, &block); end
+  def default_url_options(*_arg0, &_arg1); end
   def default_url_options=(arg); end
   def eager_load!; end
   def encrypted(path, key_path: T.unsafe(nil), env_key: T.unsafe(nil)); end
@@ -238,21 +238,21 @@ class Rails::Engine < ::Rails::Railtie
   def config; end
   def eager_load!; end
   def endpoint; end
-  def engine_name(*args, &block); end
+  def engine_name(*_arg0, &_arg1); end
   def env_config; end
   def helpers; end
   def helpers_paths; end
-  def isolated?(*args, &block); end
+  def isolated?(*_arg0, &_arg1); end
   def load_console(app = T.unsafe(nil)); end
   def load_generators(app = T.unsafe(nil)); end
   def load_runner(app = T.unsafe(nil)); end
   def load_seed; end
   def load_server(app = T.unsafe(nil)); end
   def load_tasks(app = T.unsafe(nil)); end
-  def middleware(*args, &block); end
-  def paths(*args, &block); end
+  def middleware(*_arg0, &_arg1); end
+  def paths(*_arg0, &_arg1); end
   def railties; end
-  def root(*args, &block); end
+  def root(*_arg0, &_arg1); end
   def routes(&block); end
   def routes?; end
 
@@ -279,7 +279,7 @@ class Rails::Engine < ::Rails::Railtie
     def _load_seed_callbacks=(value); end
     def called_from; end
     def called_from=(_arg0); end
-    def eager_load!(*args, &block); end
+    def eager_load!(*_arg0, &_arg1); end
     def endpoint(endpoint = T.unsafe(nil)); end
     def engine_name(name = T.unsafe(nil)); end
     def find(path); end
@@ -382,12 +382,12 @@ class Sprockets::Rails::HelperAssetResolvers::Environment
 
   def asset_path(path, digest, allow_non_precompiled = T.unsafe(nil)); end
   def digest_path(path, allow_non_precompiled = T.unsafe(nil)); end
+  def find_asset(path, options = T.unsafe(nil)); end
   def find_debug_asset(path); end
   def integrity(path); end
 
   private
 
-  def find_asset(path, options = T.unsafe(nil)); end
   def precompiled?(path); end
   def raise_unless_precompiled_asset(path); end
 end

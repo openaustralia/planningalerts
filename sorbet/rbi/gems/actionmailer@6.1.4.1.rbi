@@ -319,7 +319,7 @@ end
 
 module ActionMailer::DeliveryMethods::ClassMethods
   def add_delivery_method(symbol, klass, default_options = T.unsafe(nil)); end
-  def deliveries(*args, &block); end
+  def deliveries(*_arg0, &_arg1); end
   def deliveries=(arg); end
   def wrap_delivery_behavior(mail, method = T.unsafe(nil), options = T.unsafe(nil)); end
 end

@@ -141,7 +141,7 @@ class BootstrapForm::FormBuilder < ::ActionView::Helpers::FormBuilder
 
   def acts_like_form_tag; end
   def add_default_form_attributes_and_form_inline(options); end
-  def capture(*args, &block); end
+  def capture(*_arg0, &_arg1); end
   def check_box(name, options = T.unsafe(nil), checked_value = T.unsafe(nil), unchecked_value = T.unsafe(nil), &block); end
   def check_box_with_bootstrap(name, options = T.unsafe(nil), checked_value = T.unsafe(nil), unchecked_value = T.unsafe(nil), &block); end
   def check_box_without_bootstrap(method, options = T.unsafe(nil), checked_value = T.unsafe(nil), unchecked_value = T.unsafe(nil)); end
@@ -157,8 +157,8 @@ class BootstrapForm::FormBuilder < ::ActionView::Helpers::FormBuilder
   def color_field(name, options = T.unsafe(nil)); end
   def color_field_with_bootstrap(name, options = T.unsafe(nil)); end
   def color_field_without_bootstrap(method, options = T.unsafe(nil)); end
-  def concat(*args, &block); end
-  def content_tag(*args, &block); end
+  def concat(*_arg0, &_arg1); end
+  def content_tag(*_arg0, &_arg1); end
   def control_col; end
   def date_field(name, options = T.unsafe(nil)); end
   def date_field_with_bootstrap(name, options = T.unsafe(nil)); end

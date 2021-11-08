@@ -575,7 +575,7 @@ class Devise::FailureApp < ::ActionController::Metal
   def default_url_options; end
   def default_url_options=(_arg0); end
   def default_url_options?; end
-  def flash(*args, &block); end
+  def flash(*_arg0, &_arg1); end
   def http_auth; end
   def logger; end
   def logger=(value); end
@@ -639,8 +639,8 @@ class Devise::Hooks::Proxy
 
   def initialize(warden); end
 
-  def cookies(*args, &block); end
-  def request(*args, &block); end
+  def cookies(*_arg0, &_arg1); end
+  def request(*_arg0, &_arg1); end
   def session; end
   def warden; end
 end
@@ -932,13 +932,13 @@ module Devise::Models::Lockable
   def inactive_message; end
   def increment_failed_attempts; end
   def lock_access!(opts = T.unsafe(nil)); end
-  def lock_strategy_enabled?(*args, &block); end
+  def lock_strategy_enabled?(*_arg0, &_arg1); end
   def resend_unlock_instructions; end
   def reset_failed_attempts!; end
   def send_unlock_instructions; end
   def unauthenticated_message; end
   def unlock_access!; end
-  def unlock_strategy_enabled?(*args, &block); end
+  def unlock_strategy_enabled?(*_arg0, &_arg1); end
   def valid_for_authentication?; end
 
   protected
@@ -1409,7 +1409,7 @@ class Devise::TimeInflector
 
   class << self
     def instance; end
-    def time_ago_in_words(*args, &block); end
+    def time_ago_in_words(*_arg0, &_arg1); end
   end
 end
 

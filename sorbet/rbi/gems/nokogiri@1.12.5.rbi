@@ -566,10 +566,6 @@ class Nokogiri::VersionInfo
   def to_markdown; end
   def warnings; end
   def windows?; end
-
-  class << self
-    def instance; end
-  end
 end
 
 module Nokogiri::XML

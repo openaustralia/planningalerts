@@ -17,13 +17,13 @@ module FactoryBot
     def build_stubbed_starting_id=(starting_id); end
     def definition_file_paths; end
     def definition_file_paths=(_arg0); end
-    def factories(*args, &block); end
+    def factories(*_arg0, &_arg1); end
     def find_definitions; end
     def lint(*args); end
-    def register_strategy(*args, &block); end
+    def register_strategy(*_arg0, &_arg1); end
     def reload; end
-    def rewind_sequences(*args, &block); end
-    def strategy_by_name(*args, &block); end
+    def rewind_sequences(*_arg0, &_arg1); end
+    def strategy_by_name(*_arg0, &_arg1); end
     def use_parent_strategy; end
     def use_parent_strategy=(val); end
   end
@@ -139,19 +139,19 @@ end
 class FactoryBot::Configuration
   def initialize; end
 
-  def after(*args, &block); end
-  def before(*args, &block); end
-  def callback(*args, &block); end
+  def after(*_arg0, &_arg1); end
+  def before(*_arg0, &_arg1); end
+  def callback(*_arg0, &_arg1); end
   def callback_names; end
-  def callbacks(*args, &block); end
-  def constructor(*args, &block); end
+  def callbacks(*_arg0, &_arg1); end
+  def constructor(*_arg0, &_arg1); end
   def factories; end
   def initialize_with(&block); end
   def inline_sequences; end
   def sequences; end
-  def skip_create(*args, &block); end
+  def skip_create(*_arg0, &_arg1); end
   def strategies; end
-  def to_create(*args, &block); end
+  def to_create(*_arg0, &_arg1); end
   def traits; end
 end
 
@@ -232,8 +232,8 @@ end
 class FactoryBot::Decorator < ::BasicObject
   def initialize(component); end
 
-  def method_missing(name, *args, &block); end
-  def send(symbol, *args, &block); end
+  def method_missing(*_arg0, &_arg1); end
+  def send(*_arg0, &_arg1); end
 
   private
 
@@ -264,7 +264,7 @@ end
 class FactoryBot::Decorator::NewConstructor < ::FactoryBot::Decorator
   def initialize(component, build_class); end
 
-  def new(*args, &block); end
+  def new(*_arg0, &_arg1); end
 end
 
 class FactoryBot::Definition
@@ -280,7 +280,7 @@ class FactoryBot::Definition
   def compile(klass = T.unsafe(nil)); end
   def constructor; end
   def declarations; end
-  def declare_attribute(*args, &block); end
+  def declare_attribute(*_arg0, &_arg1); end
   def define_constructor(&block); end
   def define_trait(trait); end
   def defined_traits; end
@@ -307,9 +307,9 @@ class FactoryBot::Definition
 end
 
 class FactoryBot::DefinitionHierarchy
-  def callbacks(*args, &block); end
-  def constructor(*args, &block); end
-  def to_create(*args, &block); end
+  def callbacks(*_arg0, &_arg1); end
+  def constructor(*_arg0, &_arg1); end
+  def to_create(*_arg0, &_arg1); end
 
   class << self
     def build_from_definition(definition); end
@@ -326,10 +326,10 @@ class FactoryBot::DefinitionProxy
   def initialize(definition, ignore = T.unsafe(nil)); end
 
   def add_attribute(name, &block); end
-  def after(*args, &block); end
+  def after(*_arg0, &_arg1); end
   def association(name, *options); end
-  def before(*args, &block); end
-  def callback(*args, &block); end
+  def before(*_arg0, &_arg1); end
+  def callback(*_arg0, &_arg1); end
   def child_factories; end
   def factory(name, options = T.unsafe(nil), &block); end
   def initialize_with(&block); end
@@ -369,9 +369,9 @@ class FactoryBot::Evaluation
   def initialize(evaluator, attribute_assigner, to_create); end
 
   def create(result_instance); end
-  def hash(*args, &block); end
+  def hash(*_arg0, &_arg1); end
   def notify(name, result_instance); end
-  def object(*args, &block); end
+  def object(*_arg0, &_arg1); end
 end
 
 class FactoryBot::Evaluator
@@ -409,22 +409,22 @@ end
 class FactoryBot::Factory
   def initialize(name, options = T.unsafe(nil)); end
 
-  def add_callback(*args, &block); end
-  def append_traits(*args, &block); end
+  def add_callback(*_arg0, &_arg1); end
+  def append_traits(*_arg0, &_arg1); end
   def associations; end
   def build_class; end
   def compile; end
-  def constructor(*args, &block); end
-  def declare_attribute(*args, &block); end
-  def define_trait(*args, &block); end
-  def defined_traits(*args, &block); end
+  def constructor(*_arg0, &_arg1); end
+  def declare_attribute(*_arg0, &_arg1); end
+  def define_trait(*_arg0, &_arg1); end
+  def defined_traits(*_arg0, &_arg1); end
   def definition; end
   def human_names; end
-  def inherit_traits(*args, &block); end
+  def inherit_traits(*_arg0, &_arg1); end
   def name; end
   def names; end
   def run(build_strategy, overrides, &block); end
-  def to_create(*args, &block); end
+  def to_create(*_arg0, &_arg1); end
   def with_traits(traits); end
 
   protected
@@ -454,15 +454,15 @@ end
 
 module FactoryBot::Internal
   class << self
-    def after(*args, &block); end
-    def before(*args, &block); end
-    def callbacks(*args, &block); end
+    def after(*_arg0, &_arg1); end
+    def before(*_arg0, &_arg1); end
+    def callbacks(*_arg0, &_arg1); end
     def configuration; end
-    def constructor(*args, &block); end
-    def factories(*args, &block); end
+    def constructor(*_arg0, &_arg1); end
+    def factories(*_arg0, &_arg1); end
     def factory_by_name(name); end
-    def initialize_with(*args, &block); end
-    def inline_sequences(*args, &block); end
+    def initialize_with(*_arg0, &_arg1); end
+    def inline_sequences(*_arg0, &_arg1); end
     def register_default_strategies; end
     def register_factory(factory); end
     def register_inline_sequence(sequence); end
@@ -473,13 +473,13 @@ module FactoryBot::Internal
     def rewind_inline_sequences; end
     def rewind_sequences; end
     def sequence_by_name(name); end
-    def sequences(*args, &block); end
-    def skip_create(*args, &block); end
-    def strategies(*args, &block); end
+    def sequences(*_arg0, &_arg1); end
+    def skip_create(*_arg0, &_arg1); end
+    def strategies(*_arg0, &_arg1); end
     def strategy_by_name(name); end
-    def to_create(*args, &block); end
+    def to_create(*_arg0, &_arg1); end
     def trait_by_name(name); end
-    def traits(*args, &block); end
+    def traits(*_arg0, &_arg1); end
   end
 end
 
@@ -523,16 +523,16 @@ class FactoryBot::MethodDefinitionError < ::RuntimeError; end
 class FactoryBot::NullFactory
   def initialize; end
 
-  def attributes(*args, &block); end
-  def callbacks(*args, &block); end
+  def attributes(*_arg0, &_arg1); end
+  def callbacks(*_arg0, &_arg1); end
   def class_name; end
   def compile; end
-  def constructor(*args, &block); end
-  def defined_traits(*args, &block); end
+  def constructor(*_arg0, &_arg1); end
+  def defined_traits(*_arg0, &_arg1); end
   def definition; end
   def evaluator_class; end
   def hierarchy_class; end
-  def to_create(*args, &block); end
+  def to_create(*_arg0, &_arg1); end
 end
 
 class FactoryBot::NullObject < ::BasicObject
@@ -664,14 +664,14 @@ module FactoryBot::Syntax::Default
 end
 
 class FactoryBot::Syntax::Default::DSL
-  def after(*args, &block); end
-  def before(*args, &block); end
-  def callback(*args, &block); end
+  def after(*_arg0, &_arg1); end
+  def before(*_arg0, &_arg1); end
+  def callback(*_arg0, &_arg1); end
   def factory(name, options = T.unsafe(nil), &block); end
-  def initialize_with(*args, &block); end
+  def initialize_with(*_arg0, &_arg1); end
   def sequence(name, *args, &block); end
-  def skip_create(*args, &block); end
-  def to_create(*args, &block); end
+  def skip_create(*_arg0, &_arg1); end
+  def to_create(*_arg0, &_arg1); end
   def trait(name, &block); end
 
   class << self
@@ -715,16 +715,16 @@ class FactoryBot::Trait
   def initialize(name, &block); end
 
   def ==(other); end
-  def add_callback(*args, &block); end
-  def attributes(*args, &block); end
-  def callbacks(*args, &block); end
-  def constructor(*args, &block); end
-  def declare_attribute(*args, &block); end
-  def define_trait(*args, &block); end
+  def add_callback(*_arg0, &_arg1); end
+  def attributes(*_arg0, &_arg1); end
+  def callbacks(*_arg0, &_arg1); end
+  def constructor(*_arg0, &_arg1); end
+  def declare_attribute(*_arg0, &_arg1); end
+  def define_trait(*_arg0, &_arg1); end
   def definition; end
   def name; end
   def names; end
-  def to_create(*args, &block); end
+  def to_create(*_arg0, &_arg1); end
 
   protected
 

@@ -322,17 +322,12 @@ class HTTP::MimeType::Adapter
   class << self
     def decode(*args, &block); end
     def encode(*args, &block); end
-    def instance; end
   end
 end
 
 class HTTP::MimeType::JSON < ::HTTP::MimeType::Adapter
   def decode(str); end
   def encode(obj); end
-
-  class << self
-    def instance; end
-  end
 end
 
 class HTTP::Options

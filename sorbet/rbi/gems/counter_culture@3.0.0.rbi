@@ -75,21 +75,21 @@ class CounterCulture::Reconciler
   def initialize(counter, options = T.unsafe(nil)); end
 
   def changes; end
-  def column_names(*args, &block); end
+  def column_names(*_arg0, &_arg1); end
   def counter; end
-  def counter_cache_name(*args, &block); end
-  def delta_column(*args, &block); end
-  def delta_magnitude(*args, &block); end
-  def execute_after_commit(*args, &block); end
-  def foreign_key_values(*args, &block); end
-  def full_primary_key(*args, &block); end
-  def model(*args, &block); end
+  def counter_cache_name(*_arg0, &_arg1); end
+  def delta_column(*_arg0, &_arg1); end
+  def delta_magnitude(*_arg0, &_arg1); end
+  def execute_after_commit(*_arg0, &_arg1); end
+  def foreign_key_values(*_arg0, &_arg1); end
+  def full_primary_key(*_arg0, &_arg1); end
+  def model(*_arg0, &_arg1); end
   def options; end
-  def polymorphic?(*args, &block); end
+  def polymorphic?(*_arg0, &_arg1); end
   def reconcile!; end
-  def relation(*args, &block); end
-  def relation_reflect(*args, &block); end
-  def touch(*args, &block); end
+  def relation(*_arg0, &_arg1); end
+  def relation_reflect(*_arg0, &_arg1); end
+  def touch(*_arg0, &_arg1); end
 
   private
 
@@ -103,22 +103,22 @@ CounterCulture::Reconciler::ACTIVE_RECORD_VERSION = T.let(T.unsafe(nil), Gem::Ve
 class CounterCulture::Reconciler::Reconciliation
   def initialize(counter, changes_holder, options, relation_class); end
 
-  def column_names(*args, &block); end
+  def column_names(*_arg0, &_arg1); end
   def counter; end
-  def counter_cache_name(*args, &block); end
-  def delta_column(*args, &block); end
-  def delta_magnitude(*args, &block); end
-  def execute_after_commit(*args, &block); end
-  def foreign_key_values(*args, &block); end
-  def full_primary_key(*args, &block); end
-  def model(*args, &block); end
+  def counter_cache_name(*_arg0, &_arg1); end
+  def delta_column(*_arg0, &_arg1); end
+  def delta_magnitude(*_arg0, &_arg1); end
+  def execute_after_commit(*_arg0, &_arg1); end
+  def foreign_key_values(*_arg0, &_arg1); end
+  def full_primary_key(*_arg0, &_arg1); end
+  def model(*_arg0, &_arg1); end
   def options; end
   def perform; end
-  def polymorphic?(*args, &block); end
-  def relation(*args, &block); end
+  def polymorphic?(*_arg0, &_arg1); end
+  def relation(*_arg0, &_arg1); end
   def relation_class; end
-  def relation_reflect(*args, &block); end
-  def touch(*args, &block); end
+  def relation_reflect(*_arg0, &_arg1); end
+  def touch(*_arg0, &_arg1); end
 
   private
 

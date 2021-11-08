@@ -846,6 +846,7 @@ class TZInfo::UnaryMinusGlobalStringDeduper
 end
 
 class TZInfo::UnknownTimezone < ::StandardError; end
+module TZInfo::UntaintExt; end
 TZInfo::VERSION = T.let(T.unsafe(nil), String)
 
 module TZInfo::WithOffset

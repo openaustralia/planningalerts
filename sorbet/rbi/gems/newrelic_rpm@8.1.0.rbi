@@ -882,10 +882,6 @@ class NewRelic::Agent::Database::ConnectionManager
 
   def close_connections; end
   def get_connection(config, &connector); end
-
-  class << self
-    def instance; end
-  end
 end
 
 NewRelic::Agent::Database::ELLIPSIS = T.let(T.unsafe(nil), String)
@@ -944,10 +940,6 @@ class NewRelic::Agent::Database::Obfuscator
   def obfuscator; end
   def reset; end
   def set_sql_obfuscator(type, &block); end
-
-  class << self
-    def instance; end
-  end
 end
 
 NewRelic::Agent::Database::Obfuscator::ELLIPSIS = T.let(T.unsafe(nil), String)
@@ -1761,7 +1753,7 @@ NewRelic::Agent::Logging::DecoratingFormatter::QUOTE = T.let(T.unsafe(nil), Stri
 NewRelic::Agent::Logging::DecoratingFormatter::TIMESTAMP_KEY = T.let(T.unsafe(nil), String)
 
 class NewRelic::Agent::Logging::DecoratingLogger < ::ActiveSupport::Logger
-  def initialize(*args); end
+  def initialize(*args, **kwargs); end
 
   def write(progname = T.unsafe(nil), &block); end
 end
@@ -2497,10 +2489,6 @@ end
 class NewRelic::Agent::StartupLogger < ::NewRelic::Agent::MemoryLogger
   include ::Singleton
   extend ::Singleton::SingletonClassMethods
-
-  class << self
-    def instance; end
-  end
 end
 
 class NewRelic::Agent::Stats

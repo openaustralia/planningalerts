@@ -609,10 +609,6 @@ class Compass::Core::CanIUse
   def requires_prefix(browser, min_version, capability, capability_options_list); end
   def usage(browser, version); end
   def versions(browser, min_usage = T.unsafe(nil)); end
-
-  class << self
-    def instance; end
-  end
 end
 
 Compass::Core::CanIUse::ALTERNATE_VERSIONS = T.let(T.unsafe(nil), Hash)

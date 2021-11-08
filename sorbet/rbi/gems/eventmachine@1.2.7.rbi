@@ -944,3 +944,5 @@ end
 class StringIO < ::Data
   include ::Enumerable
 end
+
+StringIO::VERSION = T.let(T.unsafe(nil), String)

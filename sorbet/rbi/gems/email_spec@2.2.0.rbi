@@ -22,10 +22,6 @@ class EmailSpec::AddressConverter
   def convert(input); end
   def converter; end
   def converter=(_arg0); end
-
-  class << self
-    def instance; end
-  end
 end
 
 class EmailSpec::CouldNotFindEmailError < ::StandardError; end

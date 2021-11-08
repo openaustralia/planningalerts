@@ -15,7 +15,6 @@ class UNF::Normalizer
   def normalize(_arg0, _arg1); end
 
   class << self
-    def instance; end
     def normalize(string, form); end
   end
 end

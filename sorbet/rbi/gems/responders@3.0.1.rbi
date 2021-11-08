@@ -36,16 +36,16 @@ class ActionController::Responder
   def initialize(controller, resources, options = T.unsafe(nil)); end
 
   def controller; end
-  def delete?(*args, &block); end
+  def delete?(*_arg0, &_arg1); end
   def format; end
-  def get?(*args, &block); end
-  def head(*args, &block); end
+  def get?(*_arg0, &_arg1); end
+  def head(*_arg0, &_arg1); end
   def options; end
-  def patch?(*args, &block); end
-  def post?(*args, &block); end
-  def put?(*args, &block); end
-  def redirect_to(*args, &block); end
-  def render(*args, &block); end
+  def patch?(*_arg0, &_arg1); end
+  def post?(*_arg0, &_arg1); end
+  def put?(*_arg0, &_arg1); end
+  def redirect_to(*_arg0, &_arg1); end
+  def render(*_arg0, &_arg1); end
   def request; end
   def resource; end
   def resources; end

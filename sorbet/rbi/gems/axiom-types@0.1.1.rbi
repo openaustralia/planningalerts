@@ -123,7 +123,6 @@ class Axiom::Types::Infinity
   def inverse; end
 
   class << self
-    def instance; end
     def inverse(*args); end
     def number(*args); end
   end
@@ -146,10 +145,6 @@ end
 
 class Axiom::Types::NegativeInfinity < ::Axiom::Types::Infinity
   def <=>(_other); end
-
-  class << self
-    def instance; end
-  end
 end
 
 class Axiom::Types::Numeric < ::Axiom::Types::Object

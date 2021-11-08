@@ -29,7 +29,6 @@ class Timecop
     def baseline=(baseline); end
     def freeze(*args, &block); end
     def frozen?; end
-    def instance; end
     def return(&block); end
     def return_to_baseline; end
     def safe_mode=(safe); end

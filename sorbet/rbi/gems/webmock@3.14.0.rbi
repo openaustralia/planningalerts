@@ -331,10 +331,6 @@ class WebMock::Config
   def show_body_diff=(_arg0); end
   def show_stubbing_instructions; end
   def show_stubbing_instructions=(_arg0); end
-
-  class << self
-    def instance; end
-  end
 end
 
 class WebMock::Deprecation
@@ -385,10 +381,6 @@ class WebMock::HttpLibAdapterRegistry
   def http_lib_adapters; end
   def http_lib_adapters=(_arg0); end
   def register(lib, adapter); end
-
-  class << self
-    def instance; end
-  end
 end
 
 module WebMock::HttpLibAdapters; end
@@ -572,10 +564,6 @@ class WebMock::RequestRegistry
   def reset!; end
   def times_executed(request_pattern); end
   def to_s; end
-
-  class << self
-    def instance; end
-  end
 end
 
 class WebMock::RequestSignature
@@ -707,10 +695,6 @@ class WebMock::StubRegistry
 
   def evaluate_response_for_request(response, request_signature); end
   def request_stub_for(request_signature); end
-
-  class << self
-    def instance; end
-  end
 end
 
 class WebMock::StubRequestSnippet

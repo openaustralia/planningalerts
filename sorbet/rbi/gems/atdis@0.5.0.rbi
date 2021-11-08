@@ -88,7 +88,7 @@ class ATDIS::Model
   def json_load_error; end
   def json_load_error=(_arg0); end
   def json_loaded_correctly!; end
-  def model_name(*args, &block); end
+  def model_name(*_arg0, &_arg1); end
   def timezone; end
   def url; end
   def url=(_arg0); end

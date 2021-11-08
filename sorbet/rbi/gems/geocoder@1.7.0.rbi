@@ -139,7 +139,6 @@ class Geocoder::Configuration
     def http_proxy=(value); end
     def https_proxy; end
     def https_proxy=(value); end
-    def instance; end
     def ip_lookup; end
     def ip_lookup=(value); end
     def kernel_logger_level; end
@@ -195,10 +194,6 @@ class Geocoder::KernelLogger
   private
 
   def log_message_at_level?(level); end
-
-  class << self
-    def instance; end
-  end
 end
 
 class Geocoder::Logger
@@ -211,10 +206,6 @@ class Geocoder::Logger
 
   def current_logger; end
   def valid_level?(level); end
-
-  class << self
-    def instance; end
-  end
 end
 
 Geocoder::Logger::SEVERITY = T.let(T.unsafe(nil), Hash)

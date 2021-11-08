@@ -640,10 +640,6 @@ class Zip::NullCompressor < ::Zip::Compressor
   def <<(_data); end
   def compressed_size; end
   def size; end
-
-  class << self
-    def instance; end
-  end
 end
 
 module Zip::NullDecompressor

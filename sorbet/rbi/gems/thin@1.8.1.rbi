@@ -14,6 +14,8 @@ module Process
   end
 end
 
+Process::CLOCK_TAI = T.let(T.unsafe(nil), Integer)
+
 module Rack
   class << self
     def release; end

@@ -17,10 +17,10 @@ end
 class ActionView::AbstractRenderer
   def initialize(lookup_context); end
 
-  def any_templates?(*args, &block); end
-  def formats(*args, &block); end
+  def any_templates?(*_arg0, &_arg1); end
+  def formats(*_arg0, &_arg1); end
   def render; end
-  def template_exists?(*args, &block); end
+  def template_exists?(*_arg0, &_arg1); end
 
   private
 
@@ -137,10 +137,10 @@ class ActionView::Base
   def default_formats=(val); end
   def field_error_proc; end
   def field_error_proc=(val); end
-  def formats(*args, &block); end
+  def formats(*_arg0, &_arg1); end
   def formats=(arg); end
   def in_rendering_context(options); end
-  def locale(*args, &block); end
+  def locale(*_arg0, &_arg1); end
   def locale=(arg); end
   def logger; end
   def logger=(_arg0); end
@@ -153,7 +153,7 @@ class ActionView::Base
   def raise_on_missing_translations=(val); end
   def streaming_completion_on_exception; end
   def streaming_completion_on_exception=(val); end
-  def view_paths(*args, &block); end
+  def view_paths(*_arg0, &_arg1); end
   def view_paths=(arg); end
   def view_renderer; end
 
@@ -556,23 +556,23 @@ module ActionView::Helpers::CaptureHelper
 end
 
 module ActionView::Helpers::ControllerHelper
-  def action_name(*args, &block); end
+  def action_name(*_arg0, &_arg1); end
   def assign_controller(controller); end
   def controller; end
   def controller=(_arg0); end
-  def controller_name(*args, &block); end
-  def controller_path(*args, &block); end
-  def cookies(*args, &block); end
-  def flash(*args, &block); end
-  def headers(*args, &block); end
+  def controller_name(*_arg0, &_arg1); end
+  def controller_path(*_arg0, &_arg1); end
+  def cookies(*_arg0, &_arg1); end
+  def flash(*_arg0, &_arg1); end
+  def headers(*_arg0, &_arg1); end
   def logger; end
-  def params(*args, &block); end
+  def params(*_arg0, &_arg1); end
   def request; end
   def request=(_arg0); end
-  def request_forgery_protection_token(*args, &block); end
+  def request_forgery_protection_token(*_arg0, &_arg1); end
   def respond_to?(method_name, include_private = T.unsafe(nil)); end
-  def response(*args, &block); end
-  def session(*args, &block); end
+  def response(*_arg0, &_arg1); end
+  def session(*_arg0, &_arg1); end
 end
 
 ActionView::Helpers::ControllerHelper::CONTROLLER_DELEGATES = T.let(T.unsafe(nil), Array)
@@ -1431,7 +1431,7 @@ module ActionView::Helpers::UrlHelper
   mixes_in_class_methods ::ActionView::Helpers::UrlHelper::ClassMethods
 
   def button_to(name = T.unsafe(nil), options = T.unsafe(nil), html_options = T.unsafe(nil), &block); end
-  def current_page?(options = T.unsafe(nil), check_parameters: T.unsafe(nil), **options_as_kwargs); end
+  def current_page?(*args); end
   def link_to(name = T.unsafe(nil), options = T.unsafe(nil), html_options = T.unsafe(nil), &block); end
   def link_to_if(condition, name, options = T.unsafe(nil), html_options = T.unsafe(nil), &block); end
   def link_to_unless(condition, name, options = T.unsafe(nil), html_options = T.unsafe(nil), &block); end
@@ -1482,7 +1482,7 @@ module ActionView::Layouts
 
   def initialize(*_arg0); end
 
-  def _layout_conditions(*args, &block); end
+  def _layout_conditions(*_arg0, &_arg1); end
   def _normalize_options(options); end
   def action_has_layout=(_arg0); end
   def action_has_layout?; end
@@ -1747,20 +1747,20 @@ class ActionView::PathSet
 
   def +(array); end
   def <<(*args); end
-  def [](*args, &block); end
+  def [](*_arg0, &_arg1); end
   def compact; end
   def concat(*args); end
-  def each(*args, &block); end
+  def each(*_arg0, &_arg1); end
   def exists?(path, prefixes, *args); end
   def find(*args); end
   def find_all(path, prefixes = T.unsafe(nil), *args); end
   def find_all_with_query(query); end
-  def include?(*args, &block); end
+  def include?(*_arg0, &_arg1); end
   def insert(*args); end
   def paths; end
-  def pop(*args, &block); end
+  def pop(*_arg0, &_arg1); end
   def push(*args); end
-  def size(*args, &block); end
+  def size(*_arg0, &_arg1); end
   def to_ary; end
   def unshift(*args); end
 
@@ -1845,7 +1845,7 @@ class ActionView::Resolver
 
   def caching; end
   def caching=(val); end
-  def caching?(*args, &block); end
+  def caching?(*_arg0, &_arg1); end
   def clear_cache; end
   def find_all(name, prefix = T.unsafe(nil), partial = T.unsafe(nil), details = T.unsafe(nil), key = T.unsafe(nil), locals = T.unsafe(nil)); end
   def find_all_with_query(query); end
@@ -2314,7 +2314,7 @@ module ActionView::TestCase::Behavior
   def config; end
   def controller; end
   def controller=(_arg0); end
-  def lookup_context(*args, &block); end
+  def lookup_context(*_arg0, &_arg1); end
   def output_buffer; end
   def output_buffer=(_arg0); end
   def render(options = T.unsafe(nil), local_assigns = T.unsafe(nil), &block); end
@@ -2417,17 +2417,17 @@ module ActionView::ViewPaths
   mixes_in_class_methods ::ActionView::ViewPaths::ClassMethods
 
   def _prefixes; end
-  def any_templates?(*args, &block); end
+  def any_templates?(*_arg0, &_arg1); end
   def append_view_path(path); end
   def details_for_lookup; end
-  def formats(*args, &block); end
+  def formats(*_arg0, &_arg1); end
   def formats=(arg); end
-  def locale(*args, &block); end
+  def locale(*_arg0, &_arg1); end
   def locale=(arg); end
   def lookup_context; end
   def prepend_view_path(path); end
-  def template_exists?(*args, &block); end
-  def view_paths(*args, &block); end
+  def template_exists?(*_arg0, &_arg1); end
+  def view_paths(*_arg0, &_arg1); end
 
   class << self
     def all_view_paths; end

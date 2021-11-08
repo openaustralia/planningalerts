@@ -266,10 +266,6 @@ class Mail::Configuration
   def lookup_retriever_method(method); end
   def param_encode_language(value = T.unsafe(nil)); end
   def retriever_method(method = T.unsafe(nil), settings = T.unsafe(nil)); end
-
-  class << self
-    def instance; end
-  end
 end
 
 module Mail::Constants; end
