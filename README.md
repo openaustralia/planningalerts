@@ -96,6 +96,41 @@ View more available Capistrano commands with:
 
     bundle exec cap --tasks
 
+## Upgrading Ruby in production
+
+Upgrading Ruby in production is an unbelievably painful process right now. I'm sorry. Let's make it simpler
+but in the meantime:
+
+### Update the application code
+* Change `.ruby-version`. Run tests to make sure nothing has broken.
+
+### Upgrade ruby in staging
+* In the `oaf/infrastructure` repo update `roles/internal/planningalerts/meta/main.yml` to add the new ruby version before the current one. The last listed one is the default. We don't yet want to change the default
+* Install the new ruby on the server by running `ansible-playbook site.yml -l planningalerts`. Remember to set your python virtual environment if you're using that.
+* Deploy new version of the application with upgraded `.ruby-version` to staging by running `bundle exec cap -S stage=test deploy`
+* Login to each webserver in turn (as root user). Then, `cd /srv/www/staging/current; gem install bundler:1.17.3`
+* Login to each webserver in turn (as deploy user). Then `cd /srv/www/staging/current; bundle install --gemfile Gemfile --path /srv/www/staging/shared/bundle --deployment --without development test`. This step is necessary if you're upgrading a ruby major version. You might be able to skip it if not.
+* Edit `roles/internal/planningalerts/templates/default` to change the ruby version used by passenger for staging
+in staging to the new version
+* Run ansible again with `ansible-playbook site.yml -l planningalerts`
+* Check deployed staging is still working by going https://www.test.planningalerts.org.au
+
+### Upgrade ruby in production
+* Deploy new version of the application with upgraded `.ruby-version` to production by running `bundle exec cap -S stage=production deploy`
+* Check deployed production is still working by going https://www.planningalerts.org.au
+* Login to each webserver in turn (as deploy user). Then `cd /srv/www/production/current; bundle install --gemfile Gemfile --path /srv/www/production/shared/bundle --deployment --without development test`. This step is necessary if you're upgrading a ruby major version. You might be able to skip it if not.
+* Edit `roles/internal/planningalerts/templates/default` to change the ruby version used by passenger for production
+in staging to the new version
+* Run ansible again with `ansible-playbook site.yml -l planningalerts`
+* Check deployed production is still working by going https://www.planningalerts.org.au
+
+During this keep a close eye on disk space on the root partition as this might get close to full
+
+### Tidy up
+* Remove old ruby version from `roles/internal/planningalerts/meta/main.yml` in the `oaf/infrastructure` repo
+* Rerun ansible with `ansible-playbook site.yml -l planningalerts`
+* If you did a ruby major version upgrade (e.g. ruby 2.6.6 to 2.7.4) then you should also clean up an old unused bundler directory that is taking up a lot of space. Login to each webserver in turn (as deploy user). Then `cd /srv/www/staging/shared/bundle/ruby` and remove the unused directory (e.g. `2.6.0`). Do the same for production `cd /srv/www/production/shared/bundle/ruby`.
+
 ### Adding a new authority
 
 Someone has just written a new scraper for PlanningAlerts, woohoo! :tada: Now we need to add it to the site.
