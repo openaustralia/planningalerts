@@ -58,7 +58,7 @@ class AuthorityDashboard < Administrate::BaseDashboard
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES_NEW = T.let(%i[
+  FORM_ATTRIBUTES = T.let(%i[
     full_name
     short_name
     state
