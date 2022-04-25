@@ -45,6 +45,8 @@ describe "applications/show" do
       allow(application).to receive(:lat).and_return(1.0)
       allow(application).to receive(:lng).and_return(2.0)
       allow(application).to receive(:location).and_return(Location.new(lat: 1.0, lng: 2.0))
+      allow(application.authority).to receive(:ignoring_planning_alert_comments?).and_return(false)
+      allow(application.authority).to receive(:email_for_ignoring_councils).and_return(nil)
     end
 
     it "displays the map" do
@@ -74,6 +76,8 @@ describe "applications/show" do
       allow(application).to receive(:location).and_return(nil)
       allow(application).to receive(:date_received).and_return(nil)
       allow(application).to receive(:first_date_scraped).and_return(Time.zone.now)
+      allow(application.authority).to receive(:ignoring_planning_alert_comments?).and_return(false)
+      allow(application.authority).to receive(:email_for_ignoring_councils).and_return(nil)
       assign(:application, application)
 
       render

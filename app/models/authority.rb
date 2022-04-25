@@ -154,6 +154,22 @@ class Authority < ApplicationRecord
     latest_application&.first_date_scraped
   end
 
+  # When the authority is ignoring commments from us, at least for the time being.
+  sig { returns(T::Boolean) }
+  def ignoring_planning_alert_comments?
+    short_name_encoded() == "parramatta"
+  end
+
+  # If the council is ignoring our comments provide their email if we have it.
+  sig { returns(T.nilable(String)) }
+  def email_for_ignoring_councils
+    if ignoring_planning_alert_comments?
+      return email
+    end
+    return nil
+  end
+
+
   # If the latest application is over two weeks old, the scraper's probably broken
   sig { returns(T::Boolean) }
   def broken?

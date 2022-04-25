@@ -47,7 +47,7 @@
 
       %footer
         %p.dates= scraped_and_received_text(@application)
-        %p.source (Source: #{link_to @application.authority.full_name, authority_path(@application.authority.short_name_encoded)}, reference #{@application.council_reference})
+        %p.source (Source: #{link_to @application.authority.full_name, authority_path(@application.authority.short_name_encoded),  data: {'reference': @application.council_reference, 'ignoringComments': @application.authority.ignoring_planning_alert_comments?, 'email': @application.authority.email_for_ignoring_councils}, id: "council_ref"} reference #{@application.council_reference})
 
       = render "comments/comments_area", comments: @comments, application: @application, add_comment: @add_comment
 

@@ -35,5 +35,14 @@
       = text_field_tag :little_sweety, "", placeholder: "Please leave this blank"
     -# haml-lint:enable InlineStyles
   = f.actions id: "comment-action-inputgroup" do
-    = f.action :submit, label: "Post your public comment",
+    - if application.authority.ignoring_planning_alert_comments?
+      %div{class: "flash_message"}
+      %p{class: "alert"} This council may or may not accept your submission via planning alerts. Instead you may need to email the council. For convience there is a button below that you can press to prompt emailing this form to the council. You may still wish to submit your comment to planning alerts to share your comments with others.
+
+      #{ link_to 'Email Council', '#', id: 'council-mail-button',  target: '_blank', class: "button button-action"}
+      <br>
+      = f.action :submit, label: "Post your public comment", button_html: { class: "button button-primary" }
+
+    - else
+      = f.action :submit, label: "Post your public comment",
                         button_html: { class: "button button-action" }
