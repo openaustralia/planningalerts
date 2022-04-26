@@ -10,14 +10,14 @@ authority = Authority.create! full_name: "Marrickville Council",
                               website_url: "http://www.marrickville.nsw.gov.au",
                               disabled: false
 
-authorityTwo = Authority.create! full_name: "Parramatta City Council",
-                              short_name: "Parramatta",
-                              state: "NSW",
-                              email: "council@cityofparramatta.nsw.gov.au",
-                              population_2017: "243276",
-                              morph_name: "planningalerts-scrapers/multiple_epathway_scraper",
-                              website_url: "https://www.cityofparramatta.nsw.gov.au",
-                              disabled: false
+authority_two = Authority.create! full_name: "Parramatta City Council",
+                                  short_name: "Parramatta",
+                                  state: "NSW",
+                                  email: "council@cityofparramatta.nsw.gov.au",
+                                  population_2017: "243276",
+                                  morph_name: "planningalerts-scrapers/multiple_epathway_scraper",
+                                  website_url: "https://www.cityofparramatta.nsw.gov.au",
+                                  disabled: false
 
 CreateOrUpdateApplicationService.call(
   authority: authority,
@@ -37,7 +37,7 @@ CreateOrUpdateApplicationService.call(
 )
 
 CreateOrUpdateApplicationService.call(
-  authority: authorityTwo,
+  authority: authority_two,
   council_reference: "DA/321/2022",
   attributes: {
     address: "110 Wetherill Street North, SILVERWATER NSW 2128",
