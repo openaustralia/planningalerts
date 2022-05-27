@@ -387,7 +387,7 @@ GEM
     rabl (0.14.5)
       activesupport (>= 2.3.14)
     racc (1.6.0)
-    rack (2.2.3)
+    rack (2.2.3.1)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
     rack-livereload (0.3.17)
