@@ -4,7 +4,7 @@
 class IsEmailAddressBannedService
   extend T::Sig
 
-  BANNED_TLDS = ["fodiscomail.com", "elighmail.com"].freeze
+  BANNED_TLDS = T.let(["fodiscomail.com", "elighmail.com"].freeze, T::Array[String])
 
   sig { returns(String) }
   attr_reader :email
