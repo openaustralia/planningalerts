@@ -26,6 +26,14 @@ class AddCommentsController < ApplicationController
     )
     @add_comment = T.let(add_comment, T.nilable(AddComment))
 
+    if IsEmailAddressBannedService.call(email: params[:add_comment][:email])
+      flash.now[:error] = "Your email address is not allowed. Please contact us if you think this is in error."
+      # HACK: Required for new email alert signup form
+      @alert = T.let(Alert.new(address: application.address), T.nilable(Alert))
+      render "applications/show"
+      return
+    end
+
     @comment = T.let(add_comment.save_comment, T.nilable(Comment))
 
     return if @comment
