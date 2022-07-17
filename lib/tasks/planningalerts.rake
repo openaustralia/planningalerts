@@ -1,6 +1,29 @@
 # frozen_string_literal: true
 
 namespace :planningalerts do
+  desc "Test creating a project (beta) and some things in it using the Github API"
+  task test: :environment do
+    require "graphql/client"
+    require "graphql/client/http"
+    http = GraphQL::Client::HTTP.new("https://api.github.com/graphql") do
+      def headers(context)
+        { "Authorization": "bearer #{ENV['GITHUB_PERSONAL_ACCESS_TOKEN']}" }
+      end
+    end
+    schema = GraphQL::Client.load_schema(http)
+    client = GraphQL::Client.new(schema: schema, execute: http)
+
+    ViewerLoginQuery = client.parse <<-'GRAPHQL'
+      query {
+        viewer {
+          login
+        }
+      }
+    GRAPHQL
+    result = client.query(ViewerLoginQuery)
+    p result.data.viewer.login
+  end
+
   namespace :applications do
     desc "Import new applications, index them and send emails"
     task import_and_email: %i[import email]
