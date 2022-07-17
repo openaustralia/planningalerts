@@ -133,6 +133,10 @@ gem "newrelic_rpm"
 # For rendering markdown in ATDIS specification
 gem "redcarpet"
 
+# For accessing the Github GraphQL API which we're using for accessing projects
+# which we're using for managing the list of broken scrapers
+gem "graphql-client"
+
 group :test do
   gem "capybara"
   gem "climate_control"
