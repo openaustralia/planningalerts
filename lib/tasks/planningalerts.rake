@@ -22,20 +22,20 @@ namespace :planningalerts do
 
     client = GraphQL::Client.new(schema: schema, execute: http)
 
-    ListProjectsQuery = client.parse <<-'GRAPHQL'
-      query {
+    ShowProjectQuery = client.parse <<-GRAPHQL
+      query($number: Int!) {
         viewer {
-          login
-          projectsV2(first: 10) {
-            nodes {
-              title
-            }
-          }
-        }  
+          projectV2(number: $number) {
+            title
+          }  
+        }
       }
     GRAPHQL
-    result = client.query(ListProjectsQuery)
-    puts result.data.viewer.projects_v2.nodes.first.title
+
+    # You can get the project number by looking in the URL 
+    PROJECT_NUMBER = 2
+    result = client.query(ShowProjectQuery, variables: {number: PROJECT_NUMBER})
+    puts result.data.viewer.project_v2.title
   end
 
   namespace :applications do
