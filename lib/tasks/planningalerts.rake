@@ -13,15 +13,20 @@ namespace :planningalerts do
     schema = GraphQL::Client.load_schema(http)
     client = GraphQL::Client.new(schema: schema, execute: http)
 
-    ViewerLoginQuery = client.parse <<-'GRAPHQL'
+    ListProjectsQuery = client.parse <<-'GRAPHQL'
       query {
         viewer {
           login
-        }
+          projectsV2(first: 10) {
+            nodes {
+              title
+            }
+          }
+        }  
       }
     GRAPHQL
-    result = client.query(ViewerLoginQuery)
-    p result.data.viewer.login
+    result = client.query(ListProjectsQuery)
+    puts result.data.viewer.projects_v2.nodes.first.title
   end
 
   namespace :applications do
