@@ -27,6 +27,15 @@ namespace :planningalerts do
         viewer {
           projectV2(number: $number) {
             title
+            items(first: 10) {
+              nodes {
+                content {
+                  ... on DraftIssue {
+                    title
+                  }
+                }
+              }
+            }
           }  
         }
       }
@@ -35,7 +44,7 @@ namespace :planningalerts do
     # You can get the project number by looking in the URL 
     PROJECT_NUMBER = 2
     result = client.query(ShowProjectQuery, variables: {number: PROJECT_NUMBER})
-    puts result.data.viewer.project_v2.title
+    p result.data.viewer.project_v2.items.nodes.first.content.title
   end
 
   namespace :applications do
