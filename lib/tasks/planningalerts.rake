@@ -26,17 +26,7 @@ namespace :planningalerts do
       query($number: Int!) {
         viewer {
           projectV2(number: $number) {
-            title
             id
-            items(first: 10) {
-              nodes {
-                content {
-                  ... on DraftIssue {
-                    title
-                  }
-                }
-              }
-            }
           }  
         }
       }
@@ -44,17 +34,21 @@ namespace :planningalerts do
 
     CreateDraftIssueMutation = client.parse <<-GRAPHQL
       mutation($input: AddProjectV2DraftIssueInput!) {
-        addProjectV2DraftIssue(input: $input)
+        addProjectV2DraftIssue(input: $input) {
+          projectItem {
+            id
+          }
+        }
       }
     GRAPHQL
 
     # You can get the project number by looking in the URL 
     PROJECT_NUMBER = 2
     result = client.query(ShowProjectQuery, variables: {number: PROJECT_NUMBER})
-    # p result.data.viewer.project_v2.items.nodes.first.content.title
     project_id = result.data.viewer.project_v2.id
     result = client.query(CreateDraftIssueMutation, variables: {input: {projectId: project_id, title: "This item added automatically"}})
-    p result
+    draft_issue_id = result.data.add_project_v2_draft_issue.project_item.id
+    p draft_issue_id
   end
 
   namespace :applications do
