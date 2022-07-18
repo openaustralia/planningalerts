@@ -10,7 +10,16 @@ namespace :planningalerts do
         { "Authorization": "bearer #{ENV['GITHUB_PERSONAL_ACCESS_TOKEN']}" }
       end
     end
-    schema = GraphQL::Client.load_schema(http)
+    # TODO: Put the schema file in a sensible place
+    schema_path = "schema.json"
+    schema = if File.exist?(schema_path)
+               GraphQL::Client.load_schema(schema_path)
+             else 
+               schema = GraphQL::Client.load_schema(http)
+               GraphQL::Client.dump_schema(http, schema_path)
+               schema
+             end
+
     client = GraphQL::Client.new(schema: schema, execute: http)
 
     ListProjectsQuery = client.parse <<-'GRAPHQL'
