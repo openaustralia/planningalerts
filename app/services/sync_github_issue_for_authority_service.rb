@@ -39,7 +39,7 @@ class SyncGithubIssueForAuthorityService
       organization(login: $login) {
         projectV2(number: $number) {
           id
-          fields(first: 10) {
+          fields(first: 20) {
             nodes {
               ... on ProjectV2FieldCommon {
                 id
@@ -103,14 +103,14 @@ class SyncGithubIssueForAuthorityService
       )
       # We also want to attach the issue to a project with some custom fields which makes it
       # easier to order / prioritise the work of fixing the scrapers
-      attach_issue_to_project(issue.node_id, authority)
+      attach_issue_to_project(issue_id: issue.node_id, authority: authority, latest_date: latest_date)
     elsif !authority.broken? && issue && !issue.closed?(client)
       logger.info "Authority #{authority.full_name} is fixed but github issue is still open. So labelling."
       issue.add_label!(client, PROBABLY_FIXED_LABEL_NAME)
     end
   end
 
-  def attach_issue_to_project(issue_id, authority)
+  def attach_issue_to_project(issue_id:, authority:, latest_date:)
     # TODO: Make this different for development and production
     result = Client.query(ShowProjectQuery, variables: {login: "planningalerts-scrapers", number: 4})
     project_id = result.data.organization.project_v2.id
@@ -122,10 +122,13 @@ class SyncGithubIssueForAuthorityService
     # TODO: Check for errors
 
     # The field that we want to update
+    p fields.map(&:name)
     authority_field_id = fields.find { |f| f.name == "Authority" }.id
+    latest_date_field_id = fields.find { |f| f.name == "No data received since" }.id
 
     # Update authority field
     result = Client.query(UpdateFieldValueMutation, variables: {input: {projectId: project_id, itemId: item_id, fieldId: authority_field_id, value: {text: authority.full_name}}})
+    result = Client.query(UpdateFieldValueMutation, variables: {input: {projectId: project_id, itemId: item_id, fieldId: latest_date_field_id, value: {date: latest_date.iso8601}}})
     # TODO: Check for errors
   end
 
