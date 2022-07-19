@@ -27,6 +27,18 @@ namespace :planningalerts do
         viewer {
           projectV2(number: $number) {
             id
+            fields(first: 10) {
+              nodes {
+                ... on ProjectV2FieldCommon {
+                  name
+                }
+                ... on ProjectV2SingleSelectField {
+                  options {
+                    name
+                  }      
+                }
+              }
+            }
           }  
         }
       }
@@ -46,9 +58,18 @@ namespace :planningalerts do
     PROJECT_NUMBER = 2
     result = client.query(ShowProjectQuery, variables: {number: PROJECT_NUMBER})
     project_id = result.data.viewer.project_v2.id
-    result = client.query(CreateDraftIssueMutation, variables: {input: {projectId: project_id, title: "This item added automatically"}})
-    draft_issue_id = result.data.add_project_v2_draft_issue.project_item.id
-    p draft_issue_id
+    fields = result.data.viewer.project_v2.fields.nodes
+    # result = client.query(CreateDraftIssueMutation, variables: {input: {projectId: project_id, title: "This item added automatically"}})
+    # draft_issue_id = result.data.add_project_v2_draft_issue.project_item.id
+    # p draft_issue_id
+
+    # Let's check that the expected fields are present and error if they aren't
+    # I don't think you can use the API to create fields so we need to do that by hand first
+    state_field = fields.find { |f| f.name == "State" }
+    # In alphabetical order
+    found_state_options = state_field.options.map(&:name).sort
+    STATE_OPTIONS = ["NSW", "NT", "QLD", "SA", "TAS", "VIC", "WA"]
+    raise "Options on State not correct. Expected: #{STATE_OPTIONS.join(', ')}. Found: #{found_state_options.join(', ')}" unless found_state_options == STATE_OPTIONS
   end
 
   namespace :applications do
