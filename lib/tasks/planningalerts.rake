@@ -54,6 +54,22 @@ namespace :planningalerts do
       }
     GRAPHQL
 
+    GetIssueId = client.parse <<-GRAPHQL
+      query($owner: String!, $name: String!, $number: Int!) { 
+        repository(owner: $owner, name: $name) {
+          issue(number: $number) {
+            id
+          }
+        }
+      }
+    GRAPHQL
+
+    AddIssueToProjectMutation = client.parse <<-GRAPHQL
+      mutation($input: AddProjectV2ItemByIdInput!) {
+        addProjectV2ItemById(input: $input)
+      }
+    GRAPHQL
+
     # You can get the project number by looking in the URL 
     PROJECT_NUMBER = 2
     result = client.query(ShowProjectQuery, variables: {number: PROJECT_NUMBER})
@@ -70,6 +86,14 @@ namespace :planningalerts do
     found_state_options = state_field.options.map(&:name).sort
     STATE_OPTIONS = ["NSW", "NT", "QLD", "SA", "TAS", "VIC", "WA"]
     raise "Options on State not correct. Expected: #{STATE_OPTIONS.join(', ')}. Found: #{found_state_options.join(', ')}" unless found_state_options == STATE_OPTIONS
+
+    # Find the ID of an issue we want to attach
+    result = client.query(GetIssueId, variables: {owner: "mlandauer", name: "thats-camping-elm", number: 108})
+    issue_id = result.data.repository.issue.id
+
+    # Now add the issue to the project
+    result = client.query(AddIssueToProjectMutation, variables: {input: {projectId: project_id, contentId: issue_id}})
+    p result
   end
 
   namespace :applications do
