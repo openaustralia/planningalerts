@@ -122,7 +122,6 @@ class SyncGithubIssueForAuthorityService
     # TODO: Check for errors
 
     # The field that we want to update
-    p fields.map(&:name)
     authority_field_id = fields.find { |f| f.name == "Authority" }.id
     latest_date_field_id = fields.find { |f| f.name == "No data received since" }.id
 
