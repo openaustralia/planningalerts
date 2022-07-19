@@ -124,10 +124,18 @@ class SyncGithubIssueForAuthorityService
     # The field that we want to update
     authority_field_id = fields.find { |f| f.name == "Authority" }.id
     latest_date_field_id = fields.find { |f| f.name == "No data received since" }.id
+    scraper_field_id = fields.find { |f| f.name == "Scraper (Morph)"}.id
+    state_field_id = fields.find { |f| f.name == "State"}.id
+    population_field_id = fields.find { |f| f.name == "Population"}.id
+    website_field_id = fields.find { |f| f.name == "Website"}.id
 
     # Update authority field
     result = Client.query(UpdateFieldValueMutation, variables: {input: {projectId: project_id, itemId: item_id, fieldId: authority_field_id, value: {text: authority.full_name}}})
     result = Client.query(UpdateFieldValueMutation, variables: {input: {projectId: project_id, itemId: item_id, fieldId: latest_date_field_id, value: {date: latest_date.iso8601}}})
+    result = Client.query(UpdateFieldValueMutation, variables: {input: {projectId: project_id, itemId: item_id, fieldId: scraper_field_id, value: {text: morph_url(authority)}}})
+    result = Client.query(UpdateFieldValueMutation, variables: {input: {projectId: project_id, itemId: item_id, fieldId: state_field_id, value: {text: authority.state}}})
+    result = Client.query(UpdateFieldValueMutation, variables: {input: {projectId: project_id, itemId: item_id, fieldId: population_field_id, value: {number: authority.population_2017}}})
+    result = Client.query(UpdateFieldValueMutation, variables: {input: {projectId: project_id, itemId: item_id, fieldId: website_field_id, value: {number: authority.website_url}}})
     # TODO: Check for errors
   end
 
