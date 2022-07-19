@@ -42,6 +42,7 @@ class SyncGithubIssueForAuthorityService
           fields(first: 10) {
             nodes {
               ... on ProjectV2FieldCommon {
+                id
                 name
               }
               ... on ProjectV2SingleSelectField {
@@ -58,7 +59,17 @@ class SyncGithubIssueForAuthorityService
 
   AddIssueToProjectMutation = Client.parse <<-GRAPHQL
     mutation($input: AddProjectV2ItemByIdInput!) {
-      addProjectV2ItemById(input: $input)
+      addProjectV2ItemById(input: $input) {
+        item {
+          id
+        }
+      }
+    }
+  GRAPHQL
+
+  UpdateFieldValueMutation = Client.parse <<-GRAPHQL
+    mutation($input: UpdateProjectV2ItemFieldValueInput!) {
+      updateProjectV2ItemFieldValue(input: $input)
     }
   GRAPHQL
 
@@ -92,20 +103,29 @@ class SyncGithubIssueForAuthorityService
       )
       # We also want to attach the issue to a project with some custom fields which makes it
       # easier to order / prioritise the work of fixing the scrapers
-      attach_issue_to_project(issue.node_id)
+      attach_issue_to_project(issue.node_id, authority)
     elsif !authority.broken? && issue && !issue.closed?(client)
       logger.info "Authority #{authority.full_name} is fixed but github issue is still open. So labelling."
       issue.add_label!(client, PROBABLY_FIXED_LABEL_NAME)
     end
   end
 
-  def attach_issue_to_project(issue_id)
+  def attach_issue_to_project(issue_id, authority)
     # TODO: Make this different for development and production
     result = Client.query(ShowProjectQuery, variables: {login: "planningalerts-scrapers", number: 4})
     project_id = result.data.organization.project_v2.id
+    fields = result.data.organization.project_v2.fields.nodes
 
     # Now add the issue to the project
     result = Client.query(AddIssueToProjectMutation, variables: {input: {projectId: project_id, contentId: issue_id}})
+    item_id = result.data.add_project_v2_item_by_id.item.id
+    # TODO: Check for errors
+
+    # The field that we want to update
+    authority_field_id = fields.find { |f| f.name == "Authority" }.id
+
+    # Update authority field
+    result = Client.query(UpdateFieldValueMutation, variables: {input: {projectId: project_id, itemId: item_id, fieldId: authority_field_id, value: {text: authority.full_name}}})
     # TODO: Check for errors
   end
 
