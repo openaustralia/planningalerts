@@ -110,6 +110,13 @@ class SyncGithubIssueForAuthorityService
     String
   )
 
+  # The project that the issues are added to
+  PROJECT_ORG = "planningalerts-scrapers"
+  PROJECT_NUMBER = T.let(
+    Rails.env.production? ? 3 : 4,
+    Integer
+  )
+
   PROBABLY_FIXED_LABEL_NAME = "probably fixed"
 
   sig { params(logger: Logger, authority: Authority).void }
@@ -143,8 +150,7 @@ class SyncGithubIssueForAuthorityService
 
   sig { params(issue_id: String, authority: Authority, latest_date: Time).void }
   def attach_issue_to_project(issue_id:, authority:, latest_date:)
-    # TODO: Make this different for development and production
-    result = CLIENT.query(SHOW_PROJECT_QUERY, variables: { login: "planningalerts-scrapers", number: 4 })
+    result = CLIENT.query(SHOW_PROJECT_QUERY, variables: { login: PROJECT_ORG, number: PROJECT_NUMBER })
     project = result.data.organization.project_v2
 
     # Now add the issue to the project
