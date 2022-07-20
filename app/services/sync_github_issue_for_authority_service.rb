@@ -107,14 +107,14 @@ class SyncGithubIssueForAuthorityService
   # Issues and project sit under this
   ORG = "planningalerts-scrapers"
 
-  # The repository in which we want the issues created
-  REPO = T.let(Rails.env.production? ? "issues" : "test-issues", String)
-
-  # The project that the issues are added to
-  PROJECT_NUMBER = T.let(
-    Rails.env.production? ? 3 : 4,
-    Integer
-  )
+  # The repository in which we want the issues created and the project that the issues are added to
+  if Rails.env.production?
+    REPO = "issues"
+    PROJECT_NUMBER = 3
+  else
+    REPO = "test-issues"
+    PROJECT_NUMBER = 4
+  end
 
   PROBABLY_FIXED_LABEL_NAME = "probably fixed"
 
