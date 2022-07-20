@@ -38,6 +38,13 @@ class SyncGithubIssueForAuthorityService
 
   CLIENT = T.let(GraphQL::Client.new(schema: SCHEMA, execute: HTTP), GraphQL::Client)
 
+  AUTHORITY_FIELD_NAME = "Authority"
+  LATEST_DATE_FIELD_NAME = "No data received since"
+  SCRAPER_FIELD_NAME = "Scraper (Morph)"
+  STATE_FIELD_NAME = "State"
+  POPULATION_FIELD_NAME = "Population"
+  WEBSITE_FIELD_NAME = "Website"
+
   # First find the project we want to attach the issue to
   SHOW_PROJECT_QUERY_TEXT = <<-GRAPHQL
     query($login: String!, $number: Int!) {
@@ -132,12 +139,12 @@ class SyncGithubIssueForAuthorityService
     # TODO: Check for errors
 
     # The field that we want to update
-    authority_field_id = fields.find { |f| f.name == "Authority" }.id
-    latest_date_field_id = fields.find { |f| f.name == "No data received since" }.id
-    scraper_field_id = fields.find { |f| f.name == "Scraper (Morph)" }.id
-    state_field_id = fields.find { |f| f.name == "State" }.id
-    population_field_id = fields.find { |f| f.name == "Population" }.id
-    website_field_id = fields.find { |f| f.name == "Website" }.id
+    authority_field_id = fields.find { |f| f.name == AUTHORITY_FIELD_NAME }.id
+    latest_date_field_id = fields.find { |f| f.name == LATEST_DATE_FIELD_NAME }.id
+    scraper_field_id = fields.find { |f| f.name == SCRAPER_FIELD_NAME }.id
+    state_field_id = fields.find { |f| f.name == STATE_FIELD_NAME }.id
+    population_field_id = fields.find { |f| f.name == POPULATION_FIELD_NAME }.id
+    website_field_id = fields.find { |f| f.name == WEBSITE_FIELD_NAME }.id
 
     # Update authority field
     CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project_id, itemId: item_id, fieldId: authority_field_id, value: { text: authority.full_name } } })
