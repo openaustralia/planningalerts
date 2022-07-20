@@ -74,6 +74,11 @@ class SyncGithubIssueForAuthorityService
               id
             }
           }
+          authorityAdminField: field(name: "Authority admin (PA)") {
+            ... on ProjectV2FieldCommon {
+              id
+            }
+          }
         }
       }
     }
@@ -153,6 +158,7 @@ class SyncGithubIssueForAuthorityService
     update_text_field(project: project, item: item, field: project.state_field, value: authority.state)
     update_number_field(project: project, item: item, field: project.population_field, value: authority.population_2017)
     update_text_field(project: project, item: item, field: project.website_field, value: authority.website_url)
+    update_text_field(project: project, item: item, field: project.authority_admin_field, value: admin_authority_url(authority, host: ENV["HOST"]))
   end
 
   sig { params(project: T.untyped, item: T.untyped, field: T.untyped, value: T.nilable(String)).void }
