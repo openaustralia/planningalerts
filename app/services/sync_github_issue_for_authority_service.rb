@@ -104,14 +104,13 @@ class SyncGithubIssueForAuthorityService
   ADD_ISSUE_TO_PROJECT_MUTATION = T.let(CLIENT.parse(ADD_ISSUE_TO_PROJECT_MUTATION_TEXT), GraphQL::Client::OperationDefinition)
   UPDATE_FIELD_VALUE_MUTATION = T.let(CLIENT.parse(UPDATE_FIELD_VALUE_MUTATION_TEXT), GraphQL::Client::OperationDefinition)
 
+  # Issues and project sit under this
+  ORG = "planningalerts-scrapers"
+
   # The repository in which we want the issues created
-  REPO = T.let(
-    Rails.env.production? ? "planningalerts-scrapers/issues" : "planningalerts-scrapers/test-issues",
-    String
-  )
+  REPO = T.let(Rails.env.production? ? "issues" : "test-issues", String)
 
   # The project that the issues are added to
-  PROJECT_ORG = "planningalerts-scrapers"
   PROJECT_NUMBER = T.let(
     Rails.env.production? ? 3 : 4,
     Integer
@@ -134,9 +133,9 @@ class SyncGithubIssueForAuthorityService
     # not yet scraped anything
     if authority.broken? && latest_date && (issue.nil? || issue.closed?(client))
       logger.info "Creating GitHub issue for broken authority #{authority.full_name}"
-      issue = client.create_issue(REPO, title(authority), body)
+      issue = client.create_issue("#{ORG}/#{REPO}", title(authority), body)
       authority.create_github_issue!(
-        github_repo: REPO,
+        github_repo: "#{ORG}/#{REPO}",
         github_number: issue.number
       )
       # We also want to attach the issue to a project with some custom fields which makes it
@@ -150,7 +149,7 @@ class SyncGithubIssueForAuthorityService
 
   sig { params(issue_id: String, authority: Authority, latest_date: Time).void }
   def attach_issue_to_project(issue_id:, authority:, latest_date:)
-    result = CLIENT.query(SHOW_PROJECT_QUERY, variables: { login: PROJECT_ORG, number: PROJECT_NUMBER })
+    result = CLIENT.query(SHOW_PROJECT_QUERY, variables: { login: ORG, number: PROJECT_NUMBER })
     project = result.data.organization.project_v2
 
     # Now add the issue to the project
