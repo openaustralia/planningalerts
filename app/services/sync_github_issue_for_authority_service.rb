@@ -147,13 +147,29 @@ class SyncGithubIssueForAuthorityService
     item = result.data.add_project_v2_item_by_id.item
     # TODO: Check for errors
 
-    # Update custom fields
-    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project.id, itemId: item.id, fieldId: project.authority_field.id, value: { text: authority.full_name } } })
-    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project.id, itemId: item.id, fieldId: project.latest_date_field.id, value: { date: latest_date.iso8601 } } })
-    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project.id, itemId: item.id, fieldId: project.scraper_field.id, value: { text: morph_url(authority) } } })
-    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project.id, itemId: item.id, fieldId: project.state_field.id, value: { text: authority.state } } })
-    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project.id, itemId: item.id, fieldId: project.population_field.id, value: { number: authority.population_2017 } } })
-    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project.id, itemId: item.id, fieldId: project.website_field.id, value: { number: authority.website_url } } })
+    update_text_field(project: project, item: item, field: project.authority_field, value: authority.full_name)
+    update_date_field(project: project, item: item, field: project.latest_date_field, value: latest_date)
+    update_text_field(project: project, item: item, field: project.scraper_field, value: morph_url(authority))
+    update_text_field(project: project, item: item, field: project.state_field, value: authority.state)
+    update_number_field(project: project, item: item, field: project.population_field, value: authority.population_2017)
+    update_text_field(project: project, item: item, field: project.website_field, value: authority.website_url)
+  end
+
+  sig { params(project: T.untyped, item: T.untyped, field: T.untyped, value: T.nilable(String)).void }
+  def update_text_field(project:, item:, field:, value:)
+    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project.id, itemId: item.id, fieldId: field.id, value: { text: value } } })
+    # TODO: Check for errors
+  end
+
+  sig { params(project: T.untyped, item: T.untyped, field: T.untyped, value: Time).void }
+  def update_date_field(project:, item:, field:, value:)
+    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project.id, itemId: item.id, fieldId: field.id, value: { date: value.iso8601 } } })
+    # TODO: Check for errors
+  end
+
+  sig { params(project: T.untyped, item: T.untyped, field: T.untyped, value: T.nilable(Integer)).void }
+  def update_number_field(project:, item:, field:, value:)
+    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project.id, itemId: item.id, fieldId: field.id, value: { number: value } } })
     # TODO: Check for errors
   end
 
