@@ -22,12 +22,12 @@ class SyncGithubIssueForAuthorityService
   end
 
   # TODO: Put the schema file in a sensible place
-  SCHEMA_PATH = "SCHEMA.json"
+  SCHEMA_PATH = "schema.json"
   SCHEMA = if File.exist?(SCHEMA_PATH)
-             GraphQL::Client.load_SCHEMA(SCHEMA_PATH)
+             GraphQL::Client.load_schema(SCHEMA_PATH)
            else
-             schema = GraphQL::Client.load_SCHEMA(HTTP)
-             GraphQL::Client.dump_SCHEMA(HTTP, SCHEMA_PATH)
+             schema = GraphQL::Client.load_schema(HTTP)
+             GraphQL::Client.dump_schema(HTTP, SCHEMA_PATH)
              schema
            end
 
