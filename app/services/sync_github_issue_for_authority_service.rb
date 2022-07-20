@@ -15,26 +15,26 @@ class SyncGithubIssueForAuthorityService
   include AuthoritiesHelper
 
   # First setup all the graphql stuff
-  Http = GraphQL::Client::HTTP.new("https://api.github.com/graphql") do
-    def headers(context)
-      { "Authorization": "bearer #{ENV['GITHUB_PERSONAL_ACCESS_TOKEN']}" }
+  HTTP = GraphQL::Client::HTTP.new("https://api.github.com/graphql") do
+    def headers(_context)
+      { Authorization: "bearer #{ENV['GITHUB_PERSONAL_ACCESS_TOKEN']}" }
     end
   end
-  
+
   # TODO: Put the schema file in a sensible place
-  SchemaPath = "schema.json"
-  Schema = if File.exist?(SchemaPath)
-              GraphQL::Client.load_schema(SchemaPath)
-            else 
-              schema = GraphQL::Client.load_schema(Http)
-              GraphQL::Client.dump_schema(Http, SchemaPath)
-              schema
-            end
-  
-  Client = GraphQL::Client.new(schema: Schema, execute: Http)
+  SCHEMA_PATH = "SCHEMA.json"
+  SCHEMA = if File.exist?(SCHEMA_PATH)
+             GraphQL::Client.load_SCHEMA(SCHEMA_PATH)
+           else
+             schema = GraphQL::Client.load_SCHEMA(HTTP)
+             GraphQL::Client.dump_SCHEMA(HTTP, SCHEMA_PATH)
+             schema
+           end
+
+  CLIENT = GraphQL::Client.new(schema: SCHEMA, execute: HTTP)
 
   # First find the project we want to attach the issue to
-  ShowProjectQuery = Client.parse <<-GRAPHQL
+  SHOW_PROJECT_QUERY = CLIENT.parse <<-GRAPHQL
     query($login: String!, $number: Int!) {
       organization(login: $login) {
         projectV2(number: $number) {
@@ -48,16 +48,16 @@ class SyncGithubIssueForAuthorityService
               ... on ProjectV2SingleSelectField {
                 options {
                   name
-                }      
+                }
               }
             }
           }
-        }  
+        }
       }
     }
   GRAPHQL
 
-  AddIssueToProjectMutation = Client.parse <<-GRAPHQL
+  ADD_ISSUE_TO_PROJECT_MUTATION = CLIENT.parse <<-GRAPHQL
     mutation($input: AddProjectV2ItemByIdInput!) {
       addProjectV2ItemById(input: $input) {
         item {
@@ -67,7 +67,7 @@ class SyncGithubIssueForAuthorityService
     }
   GRAPHQL
 
-  UpdateFieldValueMutation = Client.parse <<-GRAPHQL
+  UPDATE_FIELD_VALUE_MUTATION = CLIENT.parse <<-GRAPHQL
     mutation($input: UpdateProjectV2ItemFieldValueInput!) {
       updateProjectV2ItemFieldValue(input: $input)
     }
@@ -112,30 +112,30 @@ class SyncGithubIssueForAuthorityService
 
   def attach_issue_to_project(issue_id:, authority:, latest_date:)
     # TODO: Make this different for development and production
-    result = Client.query(ShowProjectQuery, variables: {login: "planningalerts-scrapers", number: 4})
+    result = CLIENT.query(SHOW_PROJECT_QUERY, variables: { login: "planningalerts-scrapers", number: 4 })
     project_id = result.data.organization.project_v2.id
     fields = result.data.organization.project_v2.fields.nodes
 
     # Now add the issue to the project
-    result = Client.query(AddIssueToProjectMutation, variables: {input: {projectId: project_id, contentId: issue_id}})
+    result = CLIENT.query(ADD_ISSUE_TO_PROJECT_MUTATION, variables: { input: { projectId: project_id, contentId: issue_id } })
     item_id = result.data.add_project_v2_item_by_id.item.id
     # TODO: Check for errors
 
     # The field that we want to update
     authority_field_id = fields.find { |f| f.name == "Authority" }.id
     latest_date_field_id = fields.find { |f| f.name == "No data received since" }.id
-    scraper_field_id = fields.find { |f| f.name == "Scraper (Morph)"}.id
-    state_field_id = fields.find { |f| f.name == "State"}.id
-    population_field_id = fields.find { |f| f.name == "Population"}.id
-    website_field_id = fields.find { |f| f.name == "Website"}.id
+    scraper_field_id = fields.find { |f| f.name == "Scraper (Morph)" }.id
+    state_field_id = fields.find { |f| f.name == "State" }.id
+    population_field_id = fields.find { |f| f.name == "Population" }.id
+    website_field_id = fields.find { |f| f.name == "Website" }.id
 
     # Update authority field
-    result = Client.query(UpdateFieldValueMutation, variables: {input: {projectId: project_id, itemId: item_id, fieldId: authority_field_id, value: {text: authority.full_name}}})
-    result = Client.query(UpdateFieldValueMutation, variables: {input: {projectId: project_id, itemId: item_id, fieldId: latest_date_field_id, value: {date: latest_date.iso8601}}})
-    result = Client.query(UpdateFieldValueMutation, variables: {input: {projectId: project_id, itemId: item_id, fieldId: scraper_field_id, value: {text: morph_url(authority)}}})
-    result = Client.query(UpdateFieldValueMutation, variables: {input: {projectId: project_id, itemId: item_id, fieldId: state_field_id, value: {text: authority.state}}})
-    result = Client.query(UpdateFieldValueMutation, variables: {input: {projectId: project_id, itemId: item_id, fieldId: population_field_id, value: {number: authority.population_2017}}})
-    result = Client.query(UpdateFieldValueMutation, variables: {input: {projectId: project_id, itemId: item_id, fieldId: website_field_id, value: {number: authority.website_url}}})
+    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project_id, itemId: item_id, fieldId: authority_field_id, value: { text: authority.full_name } } })
+    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project_id, itemId: item_id, fieldId: latest_date_field_id, value: { date: latest_date.iso8601 } } })
+    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project_id, itemId: item_id, fieldId: scraper_field_id, value: { text: morph_url(authority) } } })
+    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project_id, itemId: item_id, fieldId: state_field_id, value: { text: authority.state } } })
+    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project_id, itemId: item_id, fieldId: population_field_id, value: { number: authority.population_2017 } } })
+    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project_id, itemId: item_id, fieldId: website_field_id, value: { number: authority.website_url } } })
     # TODO: Check for errors
   end
 
