@@ -163,19 +163,22 @@ class SyncGithubIssueForAuthorityService
 
   sig { params(project: T.untyped, item: T.untyped, field: T.untyped, value: T.nilable(String)).void }
   def update_text_field(project:, item:, field:, value:)
-    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project.id, itemId: item.id, fieldId: field.id, value: { text: value } } })
-    # TODO: Check for errors
+    update_field(project: project, item: item, field: field, type: :text, value: value)
   end
 
   sig { params(project: T.untyped, item: T.untyped, field: T.untyped, value: Time).void }
   def update_date_field(project:, item:, field:, value:)
-    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project.id, itemId: item.id, fieldId: field.id, value: { date: value.iso8601 } } })
-    # TODO: Check for errors
+    update_field(project: project, item: item, field: field, type: :date, value: value.iso8601)
   end
 
   sig { params(project: T.untyped, item: T.untyped, field: T.untyped, value: T.nilable(Integer)).void }
   def update_number_field(project:, item:, field:, value:)
-    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project.id, itemId: item.id, fieldId: field.id, value: { number: value } } })
+    update_field(project: project, item: item, field: field, type: :number, value: value)
+  end
+
+  sig { params(project: T.untyped, item: T.untyped, field: T.untyped, type: Symbol, value: T.nilable(T.any(String, Integer))).void }
+  def update_field(project:, item:, field:, type:, value:)
+    CLIENT.query(UPDATE_FIELD_VALUE_MUTATION, variables: { input: { projectId: project.id, itemId: item.id, fieldId: field.id, value: { type => value } } })
     # TODO: Check for errors
   end
 
