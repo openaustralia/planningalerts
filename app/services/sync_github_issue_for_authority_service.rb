@@ -24,7 +24,10 @@ class SyncGithubIssueForAuthorityService
   end, GraphQL::Client::HTTP)
 
   # TODO: Put the schema file in a sensible place
-  SCHEMA_PATH = "schema.json"
+  # We're using a hardcoded version of the downloaded github graphQL schema during testing
+  # so that we're not having to download anything from github and we're not having to set a
+  # personal access token up for test either
+  SCHEMA_PATH = T.let(Rails.env.test? ? "spec/fixtures/github_graphql_schema.json" : "schema.json", String)
   SCHEMA = T.let(if File.exist?(SCHEMA_PATH)
                    GraphQL::Client.load_schema(SCHEMA_PATH)
                  else
