@@ -15,26 +15,27 @@ class SyncGithubIssueForAuthorityService
   include AuthoritiesHelper
 
   # First setup all the graphql stuff
-  HTTP = GraphQL::Client::HTTP.new("https://api.github.com/graphql") do
+  HTTP = T.let(GraphQL::Client::HTTP.new("https://api.github.com/graphql") do
+    sig { params(_context: T.untyped).returns(T::Hash[Symbol, String]) }
     def headers(_context)
       { Authorization: "bearer #{ENV['GITHUB_PERSONAL_ACCESS_TOKEN']}" }
     end
-  end
+  end, GraphQL::Client::HTTP)
 
   # TODO: Put the schema file in a sensible place
   SCHEMA_PATH = "schema.json"
-  SCHEMA = if File.exist?(SCHEMA_PATH)
-             GraphQL::Client.load_schema(SCHEMA_PATH)
-           else
-             schema = GraphQL::Client.load_schema(HTTP)
-             GraphQL::Client.dump_schema(HTTP, SCHEMA_PATH)
-             schema
-           end
+  SCHEMA = T.let(if File.exist?(SCHEMA_PATH)
+                   GraphQL::Client.load_schema(SCHEMA_PATH)
+                 else
+                   schema = GraphQL::Client.load_schema(HTTP)
+                   GraphQL::Client.dump_schema(HTTP, SCHEMA_PATH)
+                   schema
+                 end, GraphQL::Schema)
 
-  CLIENT = GraphQL::Client.new(schema: SCHEMA, execute: HTTP)
+  CLIENT = T.let(GraphQL::Client.new(schema: SCHEMA, execute: HTTP), GraphQL::Client)
 
   # First find the project we want to attach the issue to
-  SHOW_PROJECT_QUERY = CLIENT.parse <<-GRAPHQL
+  SHOW_PROJECT_QUERY_TEXT = <<-GRAPHQL
     query($login: String!, $number: Int!) {
       organization(login: $login) {
         projectV2(number: $number) {
@@ -57,7 +58,7 @@ class SyncGithubIssueForAuthorityService
     }
   GRAPHQL
 
-  ADD_ISSUE_TO_PROJECT_MUTATION = CLIENT.parse <<-GRAPHQL
+  ADD_ISSUE_TO_PROJECT_MUTATION_TEXT = <<-GRAPHQL
     mutation($input: AddProjectV2ItemByIdInput!) {
       addProjectV2ItemById(input: $input) {
         item {
@@ -67,11 +68,15 @@ class SyncGithubIssueForAuthorityService
     }
   GRAPHQL
 
-  UPDATE_FIELD_VALUE_MUTATION = CLIENT.parse <<-GRAPHQL
+  UPDATE_FIELD_VALUE_MUTATION_TEXT = <<-GRAPHQL
     mutation($input: UpdateProjectV2ItemFieldValueInput!) {
       updateProjectV2ItemFieldValue(input: $input)
     }
   GRAPHQL
+
+  SHOW_PROJECT_QUERY = T.let(CLIENT.parse(SHOW_PROJECT_QUERY_TEXT), GraphQL::Client::OperationDefinition)
+  ADD_ISSUE_TO_PROJECT_MUTATION = T.let(CLIENT.parse(ADD_ISSUE_TO_PROJECT_MUTATION_TEXT), GraphQL::Client::OperationDefinition)
+  UPDATE_FIELD_VALUE_MUTATION = T.let(CLIENT.parse(UPDATE_FIELD_VALUE_MUTATION_TEXT), GraphQL::Client::OperationDefinition)
 
   # The repository in which we want the issues created
   REPO = T.let(
@@ -110,6 +115,7 @@ class SyncGithubIssueForAuthorityService
     end
   end
 
+  sig { params(issue_id: String, authority: Authority, latest_date: Time).void }
   def attach_issue_to_project(issue_id:, authority:, latest_date:)
     # TODO: Make this different for development and production
     result = CLIENT.query(SHOW_PROJECT_QUERY, variables: { login: "planningalerts-scrapers", number: 4 })
