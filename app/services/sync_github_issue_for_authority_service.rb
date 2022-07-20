@@ -16,6 +16,7 @@ class SyncGithubIssueForAuthorityService
 
   # First setup all the graphql stuff
   HTTP = T.let(GraphQL::Client::HTTP.new("https://api.github.com/graphql") do
+    extend T::Sig
     sig { params(_context: T.untyped).returns(T::Hash[Symbol, String]) }
     def headers(_context)
       { Authorization: "bearer #{ENV['GITHUB_PERSONAL_ACCESS_TOKEN']}" }
@@ -30,7 +31,7 @@ class SyncGithubIssueForAuthorityService
                    schema = GraphQL::Client.load_schema(HTTP)
                    GraphQL::Client.dump_schema(HTTP, SCHEMA_PATH)
                    schema
-                 end, GraphQL::Schema)
+                 end, T.untyped)
 
   CLIENT = T.let(GraphQL::Client.new(schema: SCHEMA, execute: HTTP), GraphQL::Client)
 
