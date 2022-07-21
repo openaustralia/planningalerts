@@ -157,6 +157,11 @@ class SyncGithubIssueForAuthorityService
     item = result.data.add_project_v2_item_by_id.item
     # TODO: Check for errors
 
+    if project.authority_field.nil? || project.latest_date_field.nil? || project.scraper_field.nil? || project.state_field.nil? ||
+       project.population_field.nil? || project.website_field.nil? || project.authority_admin_field.nil?
+      raise "Can't find all the required custom fields for the project"
+    end
+
     update_text_field(project: project, item: item, field: project.authority_field, value: authority.full_name)
     update_date_field(project: project, item: item, field: project.latest_date_field, value: latest_date)
     update_text_field(project: project, item: item, field: project.scraper_field, value: morph_url(authority))
