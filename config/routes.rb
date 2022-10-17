@@ -108,9 +108,7 @@ Rails.application.routes.draw do
     collection do
       get :search
       get :trending
-      get :geocoding
     end
-    resources :comments, only: [:show]
     # TODO: Why is add_comments a separate controller?
     resources :add_comments, only: [:create]
     resources :versions, only: [:index], controller: "application_versions"
@@ -138,8 +136,6 @@ Rails.application.routes.draw do
     get :under_the_hood
   end
 
-  resources :geocode_queries, only: [:index, :show]
-
   namespace :atdis do
     get :test
     post :test, action: "test_redirect"
@@ -148,7 +144,6 @@ Rails.application.routes.draw do
   end
 
   get "api/howto" => "api#howto", as: :api_howto
-  get "api" => "api#index", as: :api
 
   get "about" => "static#about", as: :about
   get "faq" => "static#faq", as: :faq
