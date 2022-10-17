@@ -23,6 +23,7 @@ Thinking of using the following bits of technology to implement the redesign:
 * [Tailwind CSS](https://tailwindcss.com/)
 * [View Components](https://viewcomponent.org/)
 * [Maizzle](https://maizzle.com/) (for emails)
+* [Flowbite components](https://flowbite.com/#components) are a good reference for starting points on components
 
 ## Pages
 
