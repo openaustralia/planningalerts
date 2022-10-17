@@ -27,24 +27,7 @@ Thinking of using the following bits of technology to implement the redesign:
 ## Pages
 
 Trying to systematically list every single page on the site that users can access. These would be all the ones we need to redesign.
-
-### Login/registration for API users
-
-* /users/sign_in
-* /users/password/new
-* /users/password/edit
-* /users/cancel
-* /users/sign_up
-* /users/edit
-* /users/confirmation/new
-* /users/confirmation
-
-### Alerts
-
-* /alerts/:id/confirmed
-* /alerts/:id/area
-* /alerts/:id/unsubscribe
-* /alerts/signup
+Each group is roughly ordered in order of importance (from most important to least important).
 
 ### Applications
 
@@ -54,24 +37,19 @@ Trying to systematically list every single page on the site that users can acces
 * /applications/:id
 * /authorities/:authority_id/applications
 
-### Comments
+# Emails
 
-* /comments
-* /comments/:id/confirmed
-* /comments/:comment_id/reports/new
-* /authorities/:authority_id/comments
+* Confirm your comment
+* Confirm your alert
+* Email alert
+* ... There are more
 
-# Authorities
+### Alerts
 
-* /authorities/:authority_id/under_the_hood
-* /authorities
-* /authorities/:id
-
-# ATDIS
-
-* /atdis/test
-* /atdis/feed/:number/atdis/1.0/applications.json
-* /atdis/specification
+* /alerts/:id/confirmed
+* /alerts/:id/area
+* /alerts/:id/unsubscribe
+* /alerts/signup
 
 # Documentation/help
 
@@ -86,9 +64,32 @@ Trying to systematically list every single page on the site that users can acces
 
 * /
 
-# Emails
+# Authorities
 
-* Confirm your comment
-* Confirm your alert
-* Email alert
-* ... There are more
+* /authorities/:authority_id/under_the_hood
+* /authorities
+* /authorities/:id
+
+### Comments
+
+* /comments
+* /comments/:id/confirmed
+* /comments/:comment_id/reports/new
+* /authorities/:authority_id/comments
+
+### Login/registration for API users
+
+* /users/sign_in
+* /users/password/new
+* /users/password/edit
+* /users/cancel
+* /users/sign_up
+* /users/edit
+* /users/confirmation/new
+* /users/confirmation
+
+# ATDIS
+
+* /atdis/test
+* /atdis/feed/:number/atdis/1.0/applications.json
+* /atdis/specification
