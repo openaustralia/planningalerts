@@ -30,67 +30,42 @@ Thinking of using the following bits of technology to implement the redesign:
 Trying to systematically list every single page on the site that users can access. These would be all the ones we need to redesign.
 Each group is roughly ordered in order of importance (from most important to least important).
 
-### Applications
-
-* /applications/:id/nearby
-* /applications/trending
-* /applications
-* /applications/:id
-* /authorities/:authority_id/applications
-
-# Emails
-
-* Confirm your comment
-* Confirm your alert
-* Email alert
-* ... There are more
-
-### Alerts
-
-* /alerts/:id/confirmed
-* /alerts/:id/area
-* /alerts/:id/unsubscribe
-* /alerts/signup
-
-# Documentation/help
-
-* /api/howto
-* /about
-* /faq
-* /getinvolved
-* /how_to_write_a_scraper
-* /how_to_lobby_your_local_council
-
-# Landing page
-
-* /
-
-# Authorities
-
-* /authorities/:authority_id/under_the_hood
-* /authorities
-* /authorities/:id
-
-### Comments
-
-* /comments
-* /comments/:id/confirmed
-* /comments/:comment_id/reports/new
-* /authorities/:authority_id/comments
-
-### Login/registration for API users
-
-* /users/sign_in
-* /users/password/new
-* /users/password/edit
-* /users/cancel
-* /users/sign_up
-* /users/edit
-* /users/confirmation/new
-* /users/confirmation
-
-# ATDIS
-
-* /atdis/test
-* /atdis/feed/:number/atdis/1.0/applications.json
-* /atdis/specification
+| grouping      | path                                      | description
+| ------------  | ---------------------------------------   | -----------------------------------------
+| Applications  | /applications/:id                         | details of an application
+|               | /applications/:id/nearby                  | applications near another application
+|               | /applications/trending                    | "trending" applications (lots of comments)
+|               | /authorities/:authority_id/applications   | recent applications for a particular authority
+|               | /applications                             | all recent applications
+| Emails        | N/A                                       | Confirm your comment
+|               | N/A                                       | Confirm your alert
+|               | N/A                                       | Email alert
+|               | N/A                                       | ... There are more
+| Alerts        | /alerts/:id/confirmed                     | You've confirmed your alert
+|               | /alerts/:id/area                          | Changing the area of your alert
+|               | /alerts/:id/unsubscribe                   | Unsubscribing from your alert
+|               | /alerts/signup                            | Signing up for an alert
+| Documentation | /api/howto                                | How to use the API
+|               | /about                                    | About PlanningAlerts
+|               | /faq                                      | Frequently asked questions
+|               | /getinvolved                              | How to get involved
+|               | /how_to_write_a_scraper                   | How to write a scraper
+|               | /how_to_lobby_your_local_council          | How to lobby your local council
+| Landing page  | /                                         | The page on the root of the domain
+| Authorities   | /authorities                              | All authorities and the state of their scrapers
+|               | /authorities/:id                          | Details for an authority
+|               | /authorities/:authority_id/under_the_hood | Details of the scraping for an authority
+| Comments      | /comments/:comment_id/reports/new         | Report a comment
+|               | /comments/:id/confirmed                   | Confirm a comment you made
+|               | /comments                                 | All recent comments
+|               | /authorities/:authority_id/comments       | Recent comments for a particular authority
+| API login     | /users/sign_in                            | Log in
+|               | /users/sign_up                            | Register for an account
+|               | /users/edit                               | Edit my account
+|               | /users/password/new                       | I forgot my password
+|               | /users/password/edit                      | Update my password
+|               | /users/cancel                             | Cancel registration
+|               | /users/confirmation/new                   | ?
+|               | /users/confirmation                       | ?
+| ATDIS         | /atdis/test                               | Test an ATDIS feed
+|               | /atdis/specification                      | Documentation for the ATDIS specification
