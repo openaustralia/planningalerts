@@ -37,10 +37,11 @@ Each group is roughly ordered in order of importance (from most important to lea
 |               | /applications/trending                    | "trending" applications (lots of comments)
 |               | /authorities/:authority_id/applications   | recent applications for a particular authority
 |               | /applications                             | all recent applications
-| Emails        | N/A                                       | Confirm your comment
-|               | N/A                                       | Confirm your alert
+| Emails        | N/A                                       | Confirm your alert
+|               | N/A                                       | You already have an alert set up
 |               | N/A                                       | Email alert
-|               | N/A                                       | ... There are more
+|               | N/A                                       | Confirm your comment
+|               | N/A                                       | Comment sent to authority
 | Alerts        | /alerts/:id/confirmed                     | You've confirmed your alert
 |               | /alerts/:id/area                          | Changing the area of your alert
 |               | /alerts/:id/unsubscribe                   | Unsubscribing from your alert
