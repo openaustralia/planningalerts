@@ -6,22 +6,6 @@ GIT
       concurrent-ruby
       rails (>= 3.2)
 
-GIT
-  remote: https://github.com/thoughtbot/administrate
-  revision: 2b964e4d88321e440f63246659c36816a8a456ab
-  branch: main
-  specs:
-    administrate (0.16.0)
-      actionpack (>= 5.0)
-      actionview (>= 5.0)
-      activerecord (>= 5.0)
-      datetime_picker_rails (~> 0.0.7)
-      jquery-rails (>= 4.0)
-      kaminari (>= 1.0)
-      momentjs-rails (~> 2.8)
-      sassc-rails (~> 2.1)
-      selectize-rails (~> 0.6)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -86,6 +70,16 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    administrate (0.17.0)
+      actionpack (>= 5.0)
+      actionview (>= 5.0)
+      activerecord (>= 5.0)
+      datetime_picker_rails (~> 0.0.7)
+      jquery-rails (>= 4.0)
+      kaminari (>= 1.0)
+      momentjs-rails (~> 2.8)
+      sassc-rails (~> 2.1)
+      selectize-rails (~> 0.6)
     ast (2.4.2)
     atdis (0.5.0)
       activemodel
@@ -351,7 +345,7 @@ GEM
     mini_racer (0.4.0)
       libv8-node (~> 15.14.0.0)
     minitest (5.14.4)
-    momentjs-rails (2.20.1)
+    momentjs-rails (2.29.4.1)
       railties (>= 3.1)
     msgpack (1.4.2)
     multi_json (1.15.0)
@@ -650,7 +644,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  administrate!
+  administrate (= 0.17.0)
   atdis
   autoprefixer-rails
   better_errors
