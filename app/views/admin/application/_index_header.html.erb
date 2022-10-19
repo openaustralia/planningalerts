@@ -2,7 +2,7 @@
   <%= display_resource_name(page.resource_name) %>
 <% end %>
 
-<header class="main-content__header" role="banner">
+<header class="main-content__header">
   <h1 class="main-content__page-title" id="page-title">
     <%= content_for(:title) %>
   </h1>
@@ -26,6 +26,6 @@
       ),
       [:new, namespace, page.resource_path.to_sym],
       class: "button",
-    ) if valid_action?(:new) && show_action?(:new, new_resource) %>
+    ) if accessible_action?(new_resource, :new) %>
   </div>
 </header>
