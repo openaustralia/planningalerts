@@ -12,8 +12,7 @@ gem "dalli"
 gem "rack-throttle"
 
 # Admin interface
-# We need https://github.com/thoughtbot/administrate/pull/1991 to be included in the release
-gem "administrate", "= 0.17.0"
+gem "administrate"
 
 # Logging in and such things
 gem "devise", "~> 4.2" # Pin to a particular major version to get deprecation warnings
