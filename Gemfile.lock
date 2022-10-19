@@ -692,7 +692,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   kaminari
-  mini_racer
+  mini_racer (= 0.4.0)
   mysql2
   newrelic_rpm
   nokogiri
