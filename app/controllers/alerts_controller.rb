@@ -14,9 +14,21 @@ class AlertsController < ApplicationController
   def create
     address = params[:alert][:address]
     @address = T.let(address, T.nilable(String))
+    # Create an unconfirmed user without a password if one doesn't already exist matching the email address
+    user = User.find_by(email: params[:alert][:email])
+    if user.nil?
+      # from_alert says that this user was created "from" an alert rather than a user
+      # registering an account in the "normal" way
+      user = User.new(email: params[:alert][:email], from_alert: true)
+      # Otherwise it would send out a confirmation email on saving the record
+      user.skip_confirmation_notification!
+      # Disable validation so we can save with an empty password
+      user.save!(validate: false)
+    end
+
     @alert = T.let(
       BuildAlertService.call(
-        email: params[:alert][:email],
+        user: user,
         address: address,
         radius_meters: T.must(zone_sizes["l"])
       ),

@@ -7,16 +7,17 @@ class BuildAlertService
   sig { returns(Alert) }
   attr_reader :alert
 
-  sig { params(email: String, address: String, radius_meters: Integer).returns(T.nilable(Alert)) }
-  def self.call(email:, address:, radius_meters:)
-    new(email: email, address: address, radius_meters: radius_meters).call
+  sig { params(user: User, address: String, radius_meters: Integer).returns(T.nilable(Alert)) }
+  def self.call(user:, address:, radius_meters:)
+    new(user: user, address: address, radius_meters: radius_meters).call
   end
 
-  sig { params(email: String, address: String, radius_meters: Integer).void }
-  def initialize(email:, address:, radius_meters:)
+  sig { params(user: User, address: String, radius_meters: Integer).void }
+  def initialize(user:, address:, radius_meters:)
     @alert = T.let(
       Alert.new(
-        email: email,
+        email: user.email,
+        user: user,
         address: address,
         radius_meters: radius_meters
       ),
