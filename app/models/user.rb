@@ -15,6 +15,7 @@ class User < ApplicationRecord
          :trackable, :validatable, :confirmable
   after_create :create_api_key
   has_many :api_keys, dependent: :destroy
+  has_many :alerts, dependent: :destroy
 
   sig { params(notification: T.untyped, args: T.untyped).void }
   def send_devise_notification(notification, *args)

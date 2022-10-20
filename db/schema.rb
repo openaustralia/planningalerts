@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_13_021430) do
+ActiveRecord::Schema.define(version: 2022_10_20_012304) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "resource_id", default: "", null: false
@@ -43,7 +43,9 @@ ActiveRecord::Schema.define(version: 2021_09_13_021430) do
     t.datetime "last_delivered_at"
     t.boolean "last_delivered_successfully"
     t.string "unsubscribed_by"
+    t.integer "user_id"
     t.index ["email"], name: "index_alerts_on_email"
+    t.index ["user_id"], name: "fk_rails_d4053234e7"
   end
 
   create_table "api_keys", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
@@ -219,11 +221,13 @@ ActiveRecord::Schema.define(version: 2021_09_13_021430) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.boolean "from_alert", default: false, null: false, comment: "whether this user was created from an alert rather than through the normal devise registration process"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "alerts", "users"
   add_foreign_key "api_keys", "users"
   add_foreign_key "application_redirects", "applications", column: "redirect_application_id"
   add_foreign_key "application_versions", "application_versions", column: "previous_version_id"
