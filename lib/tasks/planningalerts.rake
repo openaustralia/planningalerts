@@ -54,4 +54,32 @@ namespace :planningalerts do
       Comment.counter_culture_fix_counts
     end
   end
+
+  namespace :data_migration do
+    desc "Connect alerts to users"
+    task connect_alerts_to_users: :environment do
+      alerts = Alert.where(user: nil)
+      progressbar = ProgressBar.create(total: alerts.count, format: "%t %W %E")
+
+      alerts.find_each do |alert|
+        # Find an already connected user
+        user = User.find_by(email: alert.email)
+        if user.nil?
+          # TODO: We don't want api keys for this new user!
+          # from_alert says that this user was created "from" an alert rather than a user
+          # registering an account in the "normal" way
+          user = User.new(email: alert.email, from_alert: true)
+          # Otherwise it would send out a confirmation email on saving the record
+          user.skip_confirmation_notification!
+          # Disable validation so we can save with an empty password
+          user.save!(validate: false)
+        end
+        # Confirm the user if the alert is already confirmed
+        user.confirm if !user.confirmed? && alert.confirmed?
+
+        alert.update!(user: user)
+        progressbar.increment
+      end
+    end
+  end
 end
