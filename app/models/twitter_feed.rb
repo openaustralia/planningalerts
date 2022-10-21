@@ -36,8 +36,7 @@ class TwitterFeed
 
   class Item < T::Struct
     const :title, String
-    # TODO: Use this right for the string here?
-    const :date, String
+    const :date, Time
     const :link, String
   end
 
