@@ -9,24 +9,31 @@ class CuttlefishController < ApplicationController
 
   sig { void }
   def event
+    delivery_event = T.cast(params[:delivery_event], T.nilable(ActionController::Parameters))
+
     # First check that key is what we expect. Otherwise ignore this request
     if params[:key] != ENV["CUTTLEFISH_WEBHOOK_KEY"]
       head :forbidden
       return
     end
 
-    delivery_event = params[:delivery_event]
     if delivery_event
-      status = delivery_event[:status]
+      delivery_event_email = T.cast(delivery_event[:email], ActionController::Parameters)
+      delivery_event_email_meta_values = T.cast(delivery_event_email[:meta_values], ActionController::Parameters)
+      delivery_event_email_to = T.cast(delivery_event_email[:to], String)
+      deliver_event_status = T.cast(delivery_event[:status], String)
+      delivery_event_extended_status = T.cast(delivery_event[:extended_status], String)
+      delivery_event_email_id = T.cast(delivery_event_email[:id], T.any(String, Numeric))
+
       # We're not interested in soft bounces. So, just accept them and move on...
-      if status == "soft_bounce"
+      if deliver_event_status == "soft_bounce"
         head :ok
         return
       end
-      success = status == "delivered"
+      success = deliver_event_status == "delivered"
 
       # Check if this is from a comment
-      comment_id = delivery_event[:email][:meta_values]["comment-id"]
+      comment_id = delivery_event_email_meta_values["comment-id"]
       if comment_id
         comment = Comment.find(comment_id)
         comment.update!(
@@ -36,16 +43,16 @@ class CuttlefishController < ApplicationController
         unless success
           NotifySlackCommentDeliveryService.call(
             comment: comment,
-            to: delivery_event[:email][:to],
-            status: status,
-            extended_status: delivery_event[:extended_status],
-            email_id: delivery_event[:email][:id].to_i
+            to: delivery_event_email_to,
+            status: deliver_event_status,
+            extended_status: delivery_event_extended_status,
+            email_id: delivery_event_email_id.to_i
           )
         end
       end
 
       # Check if this is from an alert
-      alert_id = delivery_event[:email][:meta_values]["alert-id"]
+      alert_id = delivery_event_email_meta_values["alert-id"]
       if alert_id
         alert = Alert.find(alert_id)
         alert.update!(

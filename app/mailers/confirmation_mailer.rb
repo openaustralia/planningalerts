@@ -8,7 +8,7 @@ class ConfirmationMailer < ApplicationMailer
   helper :comments
 
   # TODO: Don't like the typing here
-  sig { params(object: T.untyped).returns(Mail::Message) }
+  sig { params(object: T.untyped).returns(T.any(Mail::Message, ActionMailer::MessageDelivery)) }
   def confirm(object)
     class_name = object.class.name.underscore
     # This seems a bit long-winded. Is there a better way?

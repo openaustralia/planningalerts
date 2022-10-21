@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   # For sorbet
   include Devise::Models::Authenticatable
+  include Devise::Models::Confirmable
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :lockable and :timeoutable

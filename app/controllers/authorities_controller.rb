@@ -15,12 +15,16 @@ class AuthoritiesController < ApplicationController
 
   sig { void }
   def show
+    params_id = T.cast(params[:id], String)
+
     # TODO: Use something like the friendly_id gem instead
-    @authority = T.let(Authority.find_short_name_encoded!(params[:id]), T.nilable(Authority))
+    @authority = T.let(Authority.find_short_name_encoded!(params_id), T.nilable(Authority))
   end
 
   sig { void }
   def under_the_hood
-    @authority = Authority.find_short_name_encoded!(params[:authority_id])
+    params_authority_id = T.cast(params[:authority_id], String)
+
+    @authority = Authority.find_short_name_encoded!(params_authority_id)
   end
 end

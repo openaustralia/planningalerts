@@ -12,14 +12,16 @@ class AlertsController < ApplicationController
 
   sig { void }
   def create
-    address = params[:alert][:address]
+    params_alert = T.cast(params[:alert], ActionController::Parameters)
+    address = T.cast(params_alert[:address], String)
+
     @address = T.let(address, T.nilable(String))
     # Create an unconfirmed user without a password if one doesn't already exist matching the email address
-    user = User.find_by(email: params[:alert][:email])
+    user = User.find_by(email: params_alert[:email])
     if user.nil?
       # from_alert says that this user was created "from" an alert rather than a user
       # registering an account in the "normal" way
-      user = User.new(email: params[:alert][:email], from_alert: true)
+      user = User.new(email: params_alert[:email], from_alert: true)
       # Otherwise it would send out a confirmation email on saving the record
       user.skip_confirmation_notification!
       # Disable validation so we can save with an empty password
@@ -53,6 +55,8 @@ class AlertsController < ApplicationController
   # TODO: Split this into two actions
   sig { void }
   def area
+    params_size = T.cast(params[:size], T.nilable(String))
+
     @zone_sizes = T.let(zone_sizes, T.nilable(T::Hash[String, Integer]))
     alert = Alert.find_by!(confirm_id: params[:id])
     @alert = T.let(alert, T.nilable(Alert))
@@ -60,7 +64,7 @@ class AlertsController < ApplicationController
       @size = T.let(zone_sizes.invert[alert.radius_meters], T.nilable(String))
     else
       # TODO: If we seperate this action into two then we won't need to use T.must here
-      alert.radius_meters = T.must(zone_sizes[params[:size]])
+      alert.radius_meters = T.must(zone_sizes[T.must(params_size)])
       alert.save!
       render "area_updated"
     end

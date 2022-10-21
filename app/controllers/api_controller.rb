@@ -16,8 +16,10 @@ class ApiController < ApplicationController
 
   sig { void }
   def authority
+    params_authority_id = T.cast(params[:authority_id], String)
+
     # TODO: Handle the situation where the authority name isn't found
-    authority = Authority.find_short_name_encoded!(params[:authority_id])
+    authority = Authority.find_short_name_encoded!(params_authority_id)
     apps = authority.applications.with_current_version.order("date_scraped DESC")
     api_render(apps, "Recent applications from #{authority.full_name_and_state}")
   end
@@ -44,14 +46,19 @@ class ApiController < ApplicationController
 
   sig { void }
   def point
-    radius = if params[:radius]
-               params[:radius].to_f
-             elsif params[:area_size]
-               params[:area_size].to_f
+    params_radius = T.cast(params[:radius], T.nilable(T.any(String, Numeric)))
+    params_area_size = T.cast(params[:area_size], T.nilable(T.any(String, Numeric)))
+    params_lat = T.cast(params[:lat], T.any(String, Numeric))
+    params_lng = T.cast(params[:lng], T.any(String, Numeric))
+
+    radius = if params_radius
+               params_radius.to_f
+             elsif params_area_size
+               params_area_size.to_f
              else
                2000.0
              end
-    location = Location.new(lat: params[:lat].to_f, lng: params[:lng].to_f)
+    location = Location.new(lat: params_lat.to_f, lng: params_lng.to_f)
     location_text = location.to_s
     api_render(
       Application.with_current_version.order("date_scraped DESC").near(
@@ -204,8 +211,10 @@ class ApiController < ApplicationController
 
   sig { returns(Integer) }
   def per_page
+    params_count = T.cast(params[:count], T.nilable(T.any(String, Numeric)))
+
     # Allow to set number of returned applications up to a maximum
-    count = params[:count]&.to_i
+    count = params_count&.to_i
     if count && count <= Application.max_per_page
       count
     else

@@ -4,7 +4,7 @@
 class ReportMailer < ApplicationMailer
   extend T::Sig
 
-  sig { params(report: Report).returns(Mail::Message) }
+  sig { params(report: Report).returns(T.any(Mail::Message, ActionMailer::MessageDelivery)) }
   def notify(report)
     @report = T.let(report, T.nilable(Report))
     @comment = T.let(report.comment, T.nilable(Comment))

@@ -28,16 +28,18 @@ class AtdisController < ApplicationController
   # The job here is to take ugly posted parameters and redirect to a much simpler url
   sig { void }
   def test_redirect
+    params_feed = T.cast(params[:feed], ActionController::Parameters)
+
     @feed = Feed.new(
-      base_url: params[:feed][:base_url],
-      page: params[:feed][:page],
-      lodgement_date_start: params[:feed][:lodgement_date_start],
-      lodgement_date_end: params[:feed][:lodgement_date_end],
-      last_modified_date_start: params[:feed][:last_modified_date_start],
-      last_modified_date_end: params[:feed][:last_modified_date_end],
-      street: params[:feed][:street],
-      suburb: params[:feed][:suburb],
-      postcode: params[:feed][:postcode]
+      base_url: params_feed[:base_url],
+      page: params_feed[:page],
+      lodgement_date_start: params_feed[:lodgement_date_start],
+      lodgement_date_end: params_feed[:lodgement_date_end],
+      last_modified_date_start: params_feed[:last_modified_date_start],
+      last_modified_date_end: params_feed[:last_modified_date_end],
+      street: params_feed[:street],
+      suburb: params_feed[:suburb],
+      postcode: params_feed[:postcode]
     )
     if @feed.valid?
       redirect_to atdis_test_url(url: @feed.url)

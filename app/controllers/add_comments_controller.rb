@@ -15,18 +15,20 @@ class AddCommentsController < ApplicationController
     # If so, make it look like things worked but don't actually do anything
     return if params[:little_sweety].present?
 
+    add_comment_params = T.cast(params[:add_comment], ActionController::Parameters)
+
     add_comment = AddComment.new(
-      name: params[:add_comment][:name],
-      text: params[:add_comment][:text],
-      address: params[:add_comment][:address],
-      email: params[:add_comment][:email],
+      name: add_comment_params[:name],
+      text: add_comment_params[:text],
+      address: add_comment_params[:address],
+      email: add_comment_params[:email],
       # TODO: Remove comment_for
-      comment_for: params[:add_comment][:comment_for],
+      comment_for: add_comment_params[:comment_for],
       application: @application
     )
     @add_comment = T.let(add_comment, T.nilable(AddComment))
 
-    if IsEmailAddressBannedService.call(email: params[:add_comment][:email])
+    if IsEmailAddressBannedService.call(email: T.cast(add_comment_params[:email], String))
       flash.now[:error] = "Your email address is not allowed. Please contact us if you think this is in error."
       # HACK: Required for new email alert signup form
       @alert = T.let(Alert.new(address: application.address), T.nilable(Alert))
