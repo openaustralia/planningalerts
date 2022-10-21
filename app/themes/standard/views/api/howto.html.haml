@@ -19,16 +19,20 @@
 .notice
   %p
     - if current_user
-      The API examples below contain your API key:
-      = api_key
+      - if api_key
+        The API examples below contain your API key:
+        = api_key
+      - else
+        You need an API key to try out the examples below and use the API for yourself.
+        = button_to "Create API key", users_api_keys_path, method: :post, class: "button button-rounded"
     - else
-      To use the API you will need an API key which you get automatically when you
+      To use the API you will to
       = link_to "register for an account", new_user_registration_path
       or
       = link_to "sign in", new_user_session_path
       to your existing account. (Note that this is different
       than having signed up for an email alert). Once you've done that, return to this page
-      and the API examples below will contain your API key.
+      and the you will be able to create an API key here.
 
   - if current_user
     %p
@@ -47,7 +51,7 @@
     Return applications near a given longitude/latitude. The area included is a circle with a radius of the given size (in metres)
     with the longitude/latitude at its center. Suggested sizes are 400, 800 or 4000 metres.
   %code= raw api_example_latlong_url_html("json", api_key)
-  - if current_user
+  - if api_key
     .apiexamples
       = link_to "Example", api_example_latlong_url("json", api_key), class: "button button-rounded"
 .apiitem
@@ -56,7 +60,7 @@
   %p.apidefinition
     Return applications within a rectangle defined by longitude/latitude.
   %code= raw api_example_area_url_html("json", api_key)
-  - if current_user
+  - if api_key
     .apiexamples
       = link_to "Example", api_example_area_url("json", api_key), class: "button button-rounded"
 .apiitem
@@ -68,7 +72,7 @@
     = link_to "list of authorities", authorities_path
     and follow the link. The url has the authority short name in it.
   %code= raw api_example_authority_url_html("json", api_key)
-  - if current_user
+  - if api_key
     .apiexamples
       = link_to "Example", api_example_authority_url("json", api_key), class: "button button-rounded"
 .apiitem
@@ -77,7 +81,7 @@
   %p.apidefinition
     Return applications for a specific postcode area
   %code= raw api_example_postcode_url_html("json", api_key)
-  - if current_user
+  - if api_key
     .apiexamples
       = link_to "Example", api_example_postcode_url("json", api_key), class: "button button-rounded"
 .apiitem
@@ -86,7 +90,7 @@
   %p.apidefinition
     Return applications in a suburb. Including &ldquo;state&rdquo; and &ldquo;postcode&rdquo; in the search is optional.
   %code= raw api_example_suburb_state_and_postcode_url_html("json", api_key)
-  - if current_user
+  - if api_key
     .apiexamples
       = link_to "Example", api_example_suburb_state_and_postcode_url("json", api_key), class: "button button-rounded"
 

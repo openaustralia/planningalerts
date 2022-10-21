@@ -13,7 +13,6 @@ class User < ApplicationRecord
   # :token_authenticatable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
          :trackable, :validatable, :confirmable
-  after_create :create_api_key
   has_many :api_keys, dependent: :destroy
 
   sig { params(notification: T.untyped, args: T.untyped).void }
@@ -22,11 +21,6 @@ class User < ApplicationRecord
   end
 
   private
-
-  sig { void }
-  def create_api_key
-    api_keys.create!
-  end
 
   sig { void }
   def validate_email_domain
