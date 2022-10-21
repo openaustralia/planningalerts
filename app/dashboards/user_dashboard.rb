@@ -14,6 +14,7 @@ class UserDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = T.let({
     api_keys: Field::HasMany,
+    alerts: Field::HasMany,
     id: Field::Number,
     email: Field::String,
     encrypted_password: Field::String,
@@ -58,6 +59,7 @@ class UserDashboard < Administrate::BaseDashboard
     organisation
     admin
     unconfirmed_email
+    alerts
     api_keys
     created_at
     updated_at
