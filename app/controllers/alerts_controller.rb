@@ -44,6 +44,10 @@ class AlertsController < ApplicationController
   def confirmed
     @alert = Alert.find_by!(confirm_id: params[:id])
     @alert.confirm!
+
+    # Confirm the attached user if it isn't already confirmed
+    user = @alert.user
+    user.confirm if user && !user.confirmed?
   end
 
   sig { void }
