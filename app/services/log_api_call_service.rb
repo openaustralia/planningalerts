@@ -108,6 +108,6 @@ class LogApiCallService
   def elasticsearch_index(time)
     # Put all data for a particular month (in UTC) in its own index
     time_as_text = time.utc.strftime("%Y.%m")
-    "pa-api-#{ENV['STAGE']}-#{time_as_text}"
+    "pa-api-#{ENV.fetch('STAGE', nil)}-#{time_as_text}"
   end
 end

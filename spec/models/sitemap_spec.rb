@@ -11,7 +11,7 @@ describe Sitemap do
   end
 
   it "outputs an xml sitemap" do
-    public = Rails.root.join("public").to_s
+    public = Rails.public_path.to_s
 
     file1 = File.new("foo", "w")
     allow(File).to receive(:open).with("#{public}/sitemap.xml", "w").and_return(file1)
@@ -49,7 +49,7 @@ describe Sitemap do
   end
 
   it "knows the web root and the file path root" do
-    public = Rails.root.join("public").to_s
+    public = Rails.public_path.to_s
     s = described_class.new("http://domain.org", public, logger)
     expect(s.root_url).to eq("http://domain.org")
     expect(s.root_path).to eq(public)
@@ -57,14 +57,14 @@ describe Sitemap do
   end
 
   it "has the path to one of the sitemaps" do
-    public = Rails.root.join("public").to_s
+    public = Rails.public_path.to_s
     s = described_class.new("http://domain.org", public, logger)
     expect(s.sitemap_relative_path).to eq("sitemaps/sitemap1.xml.gz")
     s.finish
   end
 
   it "has the path to the sitemap index" do
-    public = Rails.root.join("public").to_s
+    public = Rails.public_path.to_s
     s = described_class.new("http://domain.org", public, logger)
     expect(s.sitemap_index_relative_path).to eq("sitemap.xml")
     s.finish

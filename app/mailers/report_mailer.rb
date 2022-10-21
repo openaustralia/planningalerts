@@ -9,8 +9,8 @@ class ReportMailer < ApplicationMailer
     @report = T.let(report, T.nilable(Report))
     @comment = T.let(report.comment, T.nilable(Comment))
     mail(
-      to: ENV["EMAIL_MODERATOR"],
-      from: "#{report.name} <#{ENV['EMAIL_MODERATOR']}>",
+      to: ENV.fetch("EMAIL_MODERATOR", nil),
+      from: "#{report.name} <#{ENV.fetch('EMAIL_MODERATOR', nil)}>",
       reply_to: "#{report.name} <#{report.email}>",
       subject: "PlanningAlerts: Abuse report"
     )

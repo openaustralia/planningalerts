@@ -28,18 +28,18 @@ namespace :planningalerts do
       body: {
         type: "s3",
         settings: {
-          bucket: ENV["ELASTICSEARCH_SNAPSHOT_S3_BUCKET"],
-          region: ENV["ELASTICSEARCH_SNAPSHOT_S3_REGION"],
-          access_key: ENV["ELASTICSEARCH_SNAPSHOT_ACCESS_KEY"],
-          secret_key: ENV["ELASTICSEARCH_SNAPSHOT_SECRET_KEY"],
+          bucket: ENV.fetch("ELASTICSEARCH_SNAPSHOT_S3_BUCKET", nil),
+          region: ENV.fetch("ELASTICSEARCH_SNAPSHOT_S3_REGION", nil),
+          access_key: ENV.fetch("ELASTICSEARCH_SNAPSHOT_ACCESS_KEY", nil),
+          secret_key: ENV.fetch("ELASTICSEARCH_SNAPSHOT_SECRET_KEY", nil),
           compress: true
         }
       }
     )
     ElasticSearchClient&.snapshot&.create(
       repository: "backups",
-      snapshot: "pa-api-#{ENV['STAGE']}-#{Time.zone.now.utc.strftime('%Y.%m.%d')}",
-      body: { indices: "pa-api-#{ENV['STAGE']}-*" }
+      snapshot: "pa-api-#{ENV.fetch('STAGE', nil)}-#{Time.zone.now.utc.strftime('%Y.%m.%d')}",
+      body: { indices: "pa-api-#{ENV.fetch('STAGE', nil)}-*" }
     )
   end
 
