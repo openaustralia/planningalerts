@@ -12,7 +12,7 @@ class Authority < ApplicationRecord
 
   validates :state, inclusion: {
     in: %w[NSW VIC QLD SA WA TAS NT ACT],
-    message: "%<value> is not a state in Australia"
+    message: "%{value} is not a state in Australia"
   }
 
   scope(:enabled, -> { where("disabled = 0 or disabled is null") })
