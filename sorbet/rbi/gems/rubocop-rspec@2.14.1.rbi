@@ -14,10 +14,10 @@ end
 # source://rubocop-rspec//lib/rubocop/cop/rspec/mixin/top_level_group.rb#4
 module RuboCop::Cop; end
 
-# source://rubocop/1.37.0/lib/rubocop/cop/mixin/allowed_methods.rb#38
+# source://rubocop/1.37.1/lib/rubocop/cop/mixin/allowed_methods.rb#38
 RuboCop::Cop::IgnoredMethods = RuboCop::Cop::AllowedMethods
 
-# source://rubocop/1.37.0/lib/rubocop/cop/mixin/allowed_pattern.rb#54
+# source://rubocop/1.37.1/lib/rubocop/cop/mixin/allowed_pattern.rb#54
 RuboCop::Cop::IgnoredPattern = RuboCop::Cop::AllowedPattern
 
 # source://rubocop-rspec//lib/rubocop/cop/rspec/mixin/top_level_group.rb#5
@@ -5519,29 +5519,35 @@ class RuboCop::Cop::RSpec::Rails::InferredSpecType < ::RuboCop::Cop::RSpec::Base
   # @param node [RuboCop::AST::PairNode]
   # @return [RuboCop::AST::Node]
   #
-  # source://rubocop-rspec//lib/rubocop/cop/rspec/rails/inferred_spec_type.rb#101
+  # source://rubocop-rspec//lib/rubocop/cop/rspec/rails/inferred_spec_type.rb#111
   def detect_removable_node(node); end
 
   # @return [String]
   #
-  # source://rubocop-rspec//lib/rubocop/cop/rspec/rails/inferred_spec_type.rb#110
+  # source://rubocop-rspec//lib/rubocop/cop/rspec/rails/inferred_spec_type.rb#120
   def file_path; end
 
   # @return [Hash]
   #
-  # source://rubocop-rspec//lib/rubocop/cop/rspec/rails/inferred_spec_type.rb#128
+  # source://rubocop-rspec//lib/rubocop/cop/rspec/rails/inferred_spec_type.rb#138
   def inferences; end
 
   # @param node [RuboCop::AST::PairNode]
   # @return [Boolean]
   #
-  # source://rubocop-rspec//lib/rubocop/cop/rspec/rails/inferred_spec_type.rb#116
+  # source://rubocop-rspec//lib/rubocop/cop/rspec/rails/inferred_spec_type.rb#126
   def inferred_type?(node); end
 
   # @return [Symbol, nil]
   #
-  # source://rubocop-rspec//lib/rubocop/cop/rspec/rails/inferred_spec_type.rb#121
+  # source://rubocop-rspec//lib/rubocop/cop/rspec/rails/inferred_spec_type.rb#131
   def inferred_type_from_file_path; end
+
+  # @param node [RuboCop::AST::Node]
+  # @return [Parser::Source::Range]
+  #
+  # source://rubocop-rspec//lib/rubocop/cop/rspec/rails/inferred_spec_type.rb#97
+  def remove_range(node); end
 end
 
 # source://rubocop-rspec//lib/rubocop/cop/rspec/rails/inferred_spec_type.rb#57
@@ -7084,10 +7090,10 @@ end
 # source://rubocop-rspec//lib/rubocop/cop/rspec/yield.rb#19
 RuboCop::Cop::RSpec::Yield::MSG = T.let(T.unsafe(nil), String)
 
-# source://rubocop/1.37.0/lib/rubocop/ast_aliases.rb#5
+# source://rubocop/1.37.1/lib/rubocop/ast_aliases.rb#5
 RuboCop::NodePattern = RuboCop::AST::NodePattern
 
-# source://rubocop/1.37.0/lib/rubocop/ast_aliases.rb#6
+# source://rubocop/1.37.1/lib/rubocop/ast_aliases.rb#6
 RuboCop::ProcessedSource = RuboCop::AST::ProcessedSource
 
 # RuboCop RSpec project namespace
@@ -7677,5 +7683,5 @@ RuboCop::RSpec::Wording::SHOULDNT_BE_PREFIX = T.let(T.unsafe(nil), Regexp)
 # source://rubocop-rspec//lib/rubocop/rspec/wording.rb#7
 RuboCop::RSpec::Wording::SHOULDNT_PREFIX = T.let(T.unsafe(nil), Regexp)
 
-# source://rubocop/1.37.0/lib/rubocop/ast_aliases.rb#7
+# source://rubocop/1.37.1/lib/rubocop/ast_aliases.rb#7
 RuboCop::Token = RuboCop::AST::Token

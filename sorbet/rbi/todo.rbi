@@ -4,7 +4,7 @@
 
 # typed: false
 
+module ::Multipart::Post::Parts; end
+module ::Multipart::Post::UploadIO; end
 module ::Parts; end
 module ::UploadIO; end
-module Faraday::AutoloadHelper; end
-module Faraday::DependencyLoader; end

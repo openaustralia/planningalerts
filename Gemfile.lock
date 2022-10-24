@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/openaustralia/themes_on_rails
   revision: 4eb4f6201f4eb992e4446ba29bd17219988452d9
+  ref: 4eb4f6
   specs:
     themes_on_rails (0.4.0)
       concurrent-ruby
@@ -174,13 +175,13 @@ GEM
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
-    elastic-transport (8.1.0)
-      faraday (< 3)
+    elasticsearch (7.17.1)
+      elasticsearch-api (= 7.17.1)
+      elasticsearch-transport (= 7.17.1)
+    elasticsearch-api (7.17.1)
       multi_json
-    elasticsearch (8.4.0)
-      elastic-transport (~> 8)
-      elasticsearch-api (= 8.4.0)
-    elasticsearch-api (8.4.0)
+    elasticsearch-transport (7.17.1)
+      faraday (~> 1)
       multi_json
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
@@ -200,10 +201,29 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faraday (2.6.0)
-      faraday-net_http (>= 2.0, < 3.1)
+    faraday (1.10.2)
+      faraday-em_http (~> 1.0)
+      faraday-em_synchrony (~> 1.0)
+      faraday-excon (~> 1.1)
+      faraday-httpclient (~> 1.0)
+      faraday-multipart (~> 1.0)
+      faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.0)
+      faraday-patron (~> 1.0)
+      faraday-rack (~> 1.0)
+      faraday-retry (~> 1.0)
       ruby2_keywords (>= 0.0.4)
-    faraday-net_http (3.0.1)
+    faraday-em_http (1.0.0)
+    faraday-em_synchrony (1.0.0)
+    faraday-excon (1.1.0)
+    faraday-httpclient (1.0.1)
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
+    faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.2.0)
+    faraday-patron (1.0.0)
+    faraday-rack (1.0.0)
+    faraday-retry (1.0.3)
     ffi (1.15.5)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
@@ -464,14 +484,14 @@ GEM
       rspec-mocks (~> 3.11)
       rspec-support (~> 3.11)
     rspec-support (3.11.1)
-    rubocop (1.37.0)
+    rubocop (1.37.1)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.1.2.1)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.22.0, < 2.0)
+      rubocop-ast (>= 1.23.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.23.0)
@@ -482,7 +502,7 @@ GEM
       rubocop (>= 1.33.0, < 2.0)
     rubocop-rake (0.6.0)
       rubocop (~> 1.0)
-    rubocop-rspec (2.14.0)
+    rubocop-rspec (2.14.1)
       rubocop (~> 1.33)
     rubocop-sorbet (0.6.11)
       rubocop (>= 0.90.0)
@@ -655,7 +675,7 @@ DEPENDENCIES
   dalli
   devise (~> 4.2)
   dotenv-rails
-  elasticsearch
+  elasticsearch (~> 7.15)
   email_spec (= 2.2.0)
   factory_bot
   factory_bot_rails
