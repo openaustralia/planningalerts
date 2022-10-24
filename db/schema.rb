@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 2022_10_20_012304) do
     t.index ["short_name"], name: "short_name_unique", unique: true
   end
 
-    t.text "text", size: :medium
+  create_table "comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "email"
     t.string "name"
     t.integer "application_id", null: false
