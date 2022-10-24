@@ -23,7 +23,7 @@ script:
   # - bundle exec rubocop
   # Also make sure that our tapioca stuff is up to date
   - bin/tapioca gems --verify
-  - RAILS_ENV=test bin/tapioca dsl --verify
+  - bin/tapioca dsl --verify --environment=test
   - bin/tapioca check-shims
 
 services:
