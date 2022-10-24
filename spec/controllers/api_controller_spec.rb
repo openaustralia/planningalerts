@@ -323,10 +323,16 @@ describe ApiController do
     before do
       scope1 = Application.none
       scope2 = Application.none
+      scope3 = Application.none
+      scope4 = Application.none
+      scope5 = Application.none
 
-      allow(Application).to receive(:near).and_return(scope1)
-      allow(scope1).to receive(:includes).and_return(scope2)
-      allow(scope2).to receive(:paginate).and_return(result)
+      allow(Application).to receive(:with_current_version).and_return(scope1)
+      allow(scope1).to receive(:order).and_return(scope2)
+      allow(scope2).to receive(:near).and_return(scope3)
+      allow(scope3).to receive(:includes).and_return(scope4)
+      allow(scope4).to receive(:page).and_return(scope5)
+      allow(scope5).to receive(:per).and_return(result)
     end
 
     it "errors when using deprecated API call" do
