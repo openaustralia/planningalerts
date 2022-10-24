@@ -24,7 +24,7 @@ class ReportsController < ApplicationController
     if verify_recaptcha && @report.save
       ReportMailer.notify(@report).deliver_later
     else
-      flash[:error] = t(".you_are_a_robot_html") if flash[:recaptcha_error]
+      flash.now[:error] = t(".you_are_a_robot_html") if flash[:recaptcha_error]
       render "new"
     end
   end

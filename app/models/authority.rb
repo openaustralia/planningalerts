@@ -71,7 +71,7 @@ class Authority < ApplicationRecord
 
   sig { returns(T.nilable(Integer)) }
   def median_new_applications_per_week
-    v = new_applications_per_week.select { |a| a[1].positive? }.map { |a| a[1] }.sort
+    v = new_applications_per_week.select { |a| a[1].positive? }.pluck(1).sort
     v[v.count / 2]
   end
 
