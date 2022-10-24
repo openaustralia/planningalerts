@@ -21,6 +21,9 @@ script:
   # Also fail if any static type checking fails
   - bundle exec srb
   - bundle exec rubocop
+  # Also make sure that our tapioca stuff is up to date
+  - bundle exec tapioca gems --verify
+  - bundle exec tapioca dsl --verify
 
 services:
   - mysql
