@@ -8,3 +8,4 @@ module ::Multipart::Post::Parts; end
 module ::Multipart::Post::UploadIO; end
 module ::Parts; end
 module ::UploadIO; end
+module ActiveSupport::Dependencies::ModuleConstMissing; end

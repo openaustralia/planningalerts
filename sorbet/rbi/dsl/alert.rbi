@@ -73,6 +73,9 @@ class Alert
     sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::Alert).void)).returns(::Alert) }
     def find_or_initialize_by(attributes, &block); end
 
+    sig { params(arg: T.untyped, args: T.untyped).returns(::Alert) }
+    def find_sole_by(arg, *args); end
+
     sig { params(limit: T.untyped).returns(T.untyped) }
     def first(limit = nil); end
 
@@ -141,6 +144,9 @@ class Alert
 
     sig { returns(::Alert) }
     def second_to_last!; end
+
+    sig { returns(::Alert) }
+    def sole; end
 
     sig do
       params(
@@ -218,6 +224,9 @@ class Alert
     def except(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def excluding(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def extending(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
@@ -231,6 +240,9 @@ class Alert
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def having(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def in_order_of(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def in_past_week(*args, &blk); end
@@ -271,6 +283,9 @@ class Alert
       ).returns(ActiveRecord::Result)
     end
     def insert_all!(attributes, returning: nil); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def invert_where(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def joins(*args, &blk); end
@@ -336,6 +351,9 @@ class Alert
     def strict_loading(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def structurally_compatible?(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def uniq!(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
@@ -361,6 +379,9 @@ class Alert
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelationWhereChain) }
     def where(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def without(*args, &blk); end
   end
 
   module GeneratedAttributeMethods
@@ -1420,6 +1441,9 @@ class Alert
     def except(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def excluding(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def extending(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
@@ -1435,10 +1459,16 @@ class Alert
     def having(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def in_order_of(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def in_past_week(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def includes(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def invert_where(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def joins(*args, &blk); end
@@ -1504,6 +1534,9 @@ class Alert
     def strict_loading(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def structurally_compatible?(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def uniq!(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
@@ -1511,6 +1544,9 @@ class Alert
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelationWhereChain) }
     def where(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def without(*args, &blk); end
   end
 
   class PrivateAssociationRelation < ::ActiveRecord::AssociationRelation
@@ -1525,6 +1561,9 @@ class Alert
 
   class PrivateAssociationRelationWhereChain < PrivateAssociationRelation
     Elem = type_member { { fixed: ::Alert } }
+
+    sig { params(args: T.untyped).returns(PrivateAssociationRelation) }
+    def associated(*args); end
 
     sig { params(args: T.untyped).returns(PrivateAssociationRelation) }
     def missing(*args); end
@@ -1623,6 +1662,9 @@ class Alert
 
   class PrivateRelationWhereChain < PrivateRelation
     Elem = type_member { { fixed: ::Alert } }
+
+    sig { params(args: T.untyped).returns(PrivateRelation) }
+    def associated(*args); end
 
     sig { params(args: T.untyped).returns(PrivateRelation) }
     def missing(*args); end

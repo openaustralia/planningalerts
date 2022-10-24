@@ -234,6 +234,9 @@ module GeneratedPathHelpersModule
   def rails_blob_representation_proxy_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def rails_conductor_inbound_email_incinerate_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def rails_conductor_inbound_email_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

@@ -234,6 +234,9 @@ module GeneratedUrlHelpersModule
   def rails_blob_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def rails_conductor_inbound_email_incinerate_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def rails_conductor_inbound_email_reroute_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
