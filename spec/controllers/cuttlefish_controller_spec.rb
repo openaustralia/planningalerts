@@ -12,19 +12,19 @@ describe CuttlefishController do
 
     it "does not allow an incorrect webhook key" do
       post :event, params: { key: "wrong" }, format: :json
-      expect(response.status).to eq(403)
+      expect(response).to have_http_status(:forbidden)
       expect(NotifySlackCommentDeliveryService).not_to have_received(:call)
     end
 
     it "allows a correct webhook key" do
       post :event, params: { key: "abc123" }, format: :json
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(:ok)
       expect(NotifySlackCommentDeliveryService).not_to have_received(:call)
     end
 
     it "accepts a test event but do nothing" do
       post :event, params: { key: "abc123", test_event: {} }, format: :json
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(:ok)
       expect(NotifySlackCommentDeliveryService).not_to have_received(:call)
     end
 
@@ -52,10 +52,10 @@ describe CuttlefishController do
       }
 
       post :event, params: params, format: :json
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(:ok)
       alert.reload
       expect(alert.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
-      expect(alert.last_delivered_successfully).to eq true
+      expect(alert.last_delivered_successfully).to be true
       expect(NotifySlackCommentDeliveryService).not_to have_received(:call)
     end
 
@@ -83,7 +83,7 @@ describe CuttlefishController do
       }
 
       post :event, params: params, format: :json
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(:ok)
       alert.reload
       expect(alert.last_delivered_at).to be_nil
       expect(alert.last_delivered_successfully).to be_nil
@@ -114,10 +114,10 @@ describe CuttlefishController do
       }
 
       post :event, params: params, format: :json
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(:ok)
       alert.reload
       expect(alert.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
-      expect(alert.last_delivered_successfully).to eq false
+      expect(alert.last_delivered_successfully).to be false
       expect(NotifySlackCommentDeliveryService).not_to have_received(:call)
     end
 
@@ -144,10 +144,10 @@ describe CuttlefishController do
         }
       }
       post :event, params: params, format: :json
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(:ok)
       comment.reload
       expect(comment.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
-      expect(comment.last_delivered_successfully).to eq true
+      expect(comment.last_delivered_successfully).to be true
       expect(NotifySlackCommentDeliveryService).not_to have_received(:call)
     end
 
@@ -175,10 +175,10 @@ describe CuttlefishController do
         }
       }
       post :event, params: params, format: :json
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(:ok)
       comment.reload
       expect(comment.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
-      expect(comment.last_delivered_successfully).to eq false
+      expect(comment.last_delivered_successfully).to be false
       expect(NotifySlackCommentDeliveryService).to have_received(:call).with(
         comment: comment,
         to: "joy@smart-unlimited.com",
@@ -212,7 +212,7 @@ describe CuttlefishController do
         }
       }
       post :event, params: params, format: :json
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(:ok)
       comment.reload
       expect(comment.last_delivered_at).to be_nil
       expect(comment.last_delivered_successfully).to be_nil

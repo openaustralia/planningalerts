@@ -25,7 +25,7 @@ describe ApiController do
 
     context "when user has API access disabled" do
       subject do
-        key = FactoryBot.create(:api_key, disabled: true)
+        key = create(:api_key, disabled: true)
         get method, params: params.merge(key: key.value)
       end
 
@@ -55,7 +55,7 @@ describe ApiController do
         allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
         # rubocop:enable RSpec/MessageChain
         get :all, params: { key: key.value, format: "js" }
-        expect(response.status).to eq(401)
+        expect(response).to have_http_status(:unauthorized)
         expect(response.body).to eq('{"error":"no bulk api access"}')
       end
 
@@ -67,7 +67,7 @@ describe ApiController do
         allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
         # rubocop:enable RSpec/MessageChain
         get :all, params: { key: key.value, format: "js" }
-        expect(response.status).to eq(200)
+        expect(response).to have_http_status(:ok)
         expect(JSON.parse(response.body)).to eq(
           "application_count" => 1,
           "max_id" => 10,
@@ -454,7 +454,7 @@ describe ApiController do
     end
 
     context "when valid api key is given but no bulk api access" do
-      subject(:page) { get :date_scraped, params: { key: FactoryBot.create(:api_key).value, format: "js", date_scraped: "2015-05-06" } }
+      subject(:page) { get :date_scraped, params: { key: create(:api_key).value, format: "js", date_scraped: "2015-05-06" } }
 
       it { expect(page.status).to eq 401 }
       it { expect(page.body).to eq '{"error":"no bulk api access"}' }
@@ -463,7 +463,7 @@ describe ApiController do
     context "with valid authentication" do
       subject(:page) { get :date_scraped, params: { key: key.value, format: "js", date_scraped: "2015-05-06" } }
 
-      let(:key) { FactoryBot.create(:api_key, bulk: true) }
+      let(:key) { create(:api_key, bulk: true) }
 
       before do
         5.times do

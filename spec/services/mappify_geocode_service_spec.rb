@@ -43,8 +43,18 @@ describe MappifyGeocodeService do
             apiKey: api_key
           }.to_json,
           accept: :json, content_type: :json
-        ).and_return(instance_double("ResClient::Response", body: { type: "completeAddressRecordArray", result: [] }.to_json))
+        ).and_return(instance_double(RestClient::Response, body: { type: "completeAddressRecordArray", result: [] }.to_json))
         result
+        expect(RestClient).to have_received(:post).with(
+          "https://mappify.io/api/rpc/address/autocomplete/",
+          {
+            streetAddress: address,
+            formatCase: true,
+            boostPrefix: false,
+            apiKey: api_key
+          }.to_json,
+          accept: :json, content_type: :json
+        )
       end
     end
   end

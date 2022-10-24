@@ -33,7 +33,7 @@ describe AlertsController do
 
   describe "#unsubscribe" do
     it "marks the alert as unsubscribed" do
-      alert = create :confirmed_alert
+      alert = create(:confirmed_alert)
 
       get :unsubscribe, params: { id: alert.confirm_id }
 
@@ -54,7 +54,7 @@ describe AlertsController do
     end
 
     it "supports head requests" do
-      alert = create :confirmed_alert
+      alert = create(:confirmed_alert)
       head :area, params: { id: alert.confirm_id }
       expect(response).to be_successful
     end

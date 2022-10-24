@@ -48,7 +48,7 @@ describe Application do
       allow(GeocodeService).to receive(:call).with("dfjshd").and_return(
         GeocoderResults.new([], "something went wrong")
       )
-      logger = instance_double("Logger", error: nil)
+      logger = instance_double(Logger, error: nil)
 
       # rubocop:disable RSpec/AnyInstance
       allow_any_instance_of(ApplicationVersion).to receive(:logger).and_return(logger)

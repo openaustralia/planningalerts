@@ -62,7 +62,7 @@ describe BuildAlertService do
           radius_meters: 1000
         )
 
-        expect(parser_result).to be nil
+        expect(parser_result).to be_nil
       end
     end
 
@@ -84,7 +84,7 @@ describe BuildAlertService do
           radius_meters: 1000
         )
 
-        expect(parser_result).to be nil
+        expect(parser_result).to be_nil
       end
 
       it "sends a helpful email to the alert’s email address" do

@@ -48,7 +48,7 @@ describe SiteSetting do
     it "is able to update several params at once" do
       described_class.set(streetview_in_app_enabled: "foo", streetview_in_emails_enabled: false)
       expect(described_class.get(:streetview_in_app_enabled)).to eq "foo"
-      expect(described_class.get(:streetview_in_emails_enabled)).to eq false
+      expect(described_class.get(:streetview_in_emails_enabled)).to be false
     end
   end
 end

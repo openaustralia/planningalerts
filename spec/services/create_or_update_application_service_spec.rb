@@ -47,7 +47,7 @@ describe CreateOrUpdateApplicationService do
     expect(version.suburb).to eq "Sydney"
     expect(version.state).to eq "NSW"
     expect(version.postcode).to eq "2000"
-    expect(version.current).to eq true
+    expect(version.current).to be true
   end
 
   it "does not leave an application record around if the version doesn't validate" do
@@ -96,11 +96,11 @@ describe CreateOrUpdateApplicationService do
     end
 
     it "the latest version should now be current" do
-      expect(updated_application.versions[0].current).to eq true
+      expect(updated_application.versions[0].current).to be true
     end
 
     it "the previous version should now be not current" do
-      expect(updated_application.versions[1].current).to eq false
+      expect(updated_application.versions[1].current).to be false
     end
   end
 

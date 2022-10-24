@@ -50,7 +50,7 @@ describe Feed do
   describe "#persisted?" do
     it "alwayses be false" do
       f = described_class.new(base_url: "http://foo.com")
-      expect(f.persisted?).to eq false
+      expect(f.persisted?).to be false
     end
   end
 

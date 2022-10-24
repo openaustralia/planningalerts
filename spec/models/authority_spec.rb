@@ -44,11 +44,11 @@ describe Authority do
     end
 
     it "reports that a scraper is broken if it hasn't received a DA in over two weeks" do
-      expect(a1.broken?).to eq true
+      expect(a1.broken?).to be true
     end
 
     it "does not report that a scraper is broken if it has received a DA in less than two weeks" do
-      expect(a2.broken?).to eq false
+      expect(a2.broken?).to be false
     end
   end
 

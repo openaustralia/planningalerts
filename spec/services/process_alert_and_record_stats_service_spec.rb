@@ -14,6 +14,7 @@ describe ProcessAlertAndRecordStatsService do
       allow(ProcessAlertService).to receive(:call).with(alert: alert).and_return([1, 5, 1])
       allow(Alert).to receive(:find).with(alert.id).and_return(alert)
       described_class.call(alert_id: alert.id)
+      expect(ProcessAlertService).to have_received(:call).with(alert: alert)
     end
 
     it "creates a record of the batch of sent email alerts" do

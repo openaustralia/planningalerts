@@ -37,7 +37,7 @@ describe QueueUpAlertsService do
     end
 
     it "queues up batches" do
-      job = instance_double("ConfiguredJob", perform_later: nil)
+      job = class_double(ProcessAlertJob, perform_later: nil)
       allow(ProcessAlertJob).to receive(:set).and_return(job)
       described_class.call(logger: logger)
 

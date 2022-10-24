@@ -39,7 +39,7 @@ describe ThrottleDailyByApiUser do
       let(:url) { "/" }
 
       it "is not blacklisted as it's not an api request" do
-        expect(result).to eq false
+        expect(result).to be false
       end
     end
 
@@ -50,7 +50,7 @@ describe ThrottleDailyByApiUser do
         let(:key) { create(:api_key) }
 
         it "is not blacklisted" do
-          expect(result).to eq false
+          expect(result).to be false
         end
       end
 
@@ -58,7 +58,7 @@ describe ThrottleDailyByApiUser do
         let(:key) { create(:api_key, disabled: true) }
 
         it "is blacklisted" do
-          expect(result).to eq true
+          expect(result).to be true
         end
       end
     end
@@ -71,7 +71,7 @@ describe ThrottleDailyByApiUser do
       let(:url) { "/" }
 
       it "is whitelisted as it's not an api request" do
-        expect(result).to eq true
+        expect(result).to be true
       end
     end
 
@@ -82,7 +82,7 @@ describe ThrottleDailyByApiUser do
         let(:key) { create(:api_key) }
 
         it "is not whitelisted" do
-          expect(result).to eq false
+          expect(result).to be false
         end
       end
 
@@ -99,7 +99,7 @@ describe ThrottleDailyByApiUser do
         let(:url) { "/api/howto" }
 
         it "is whitelisted" do
-          expect(result).to eq true
+          expect(result).to be true
         end
       end
     end

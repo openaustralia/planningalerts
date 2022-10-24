@@ -127,14 +127,14 @@ describe Alert do
       alert = build(:alert)
       alert.confirmed = false
       alert.save!
-      expect(alert.confirmed).to eq(false)
+      expect(alert.confirmed).to be(false)
     end
 
     it "is able to set to true" do
       alert = build(:alert)
       alert.confirmed = true
       alert.save!
-      expect(alert.confirmed).to eq(true)
+      expect(alert.confirmed).to be(true)
     end
   end
 
@@ -169,7 +169,7 @@ describe Alert do
         alert.geocode_from_address
 
         expect(alert.address).to eq original_address
-        expect(alert.location).to eq nil
+        expect(alert.location).to be_nil
       end
     end
 
@@ -181,7 +181,7 @@ describe Alert do
         alert.geocode_from_address
 
         expect(alert.address).to eq original_address
-        expect(alert.location).to eq nil
+        expect(alert.location).to be_nil
       end
     end
   end
@@ -192,7 +192,7 @@ describe Alert do
   end
 
   describe "#unsubscribe!" do
-    let(:alert) { create :alert }
+    let(:alert) { create(:alert) }
 
     it "unsubscribes the alert" do
       alert.unsubscribe!

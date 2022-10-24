@@ -30,7 +30,7 @@ describe "applications/show" do
   let(:alert) { Alert.new }
 
   let(:comment) do
-    errors = instance_double("ActiveModel::Errors", :[] => nil)
+    errors = instance_double(ActiveModel::Errors, :[] => nil)
     mock_model(Comment, errors: errors, text: nil, name: nil, email: nil)
   end
 
