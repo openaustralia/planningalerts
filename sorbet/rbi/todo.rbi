@@ -4,4 +4,7 @@
 
 # typed: false
 
-module Sidekiq::Job; end
+module ::Parts; end
+module ::UploadIO; end
+module Faraday::AutoloadHelper; end
+module Faraday::DependencyLoader; end
