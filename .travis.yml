@@ -22,9 +22,9 @@ script:
   # - bundle exec srb
   # - bundle exec rubocop
   # Also make sure that our tapioca stuff is up to date
-  - RAILS_ENV=test bundle exec tapioca gems --verify
-  - RAILS_ENV=test bundle exec tapioca dsl --verify
-  - bundle exec tapioca check-shims
+  - bin/tapioca gems --verify
+  - bin/tapioca dsl --verify
+  - bin/tapioca check-shims
 
 services:
   - mysql
