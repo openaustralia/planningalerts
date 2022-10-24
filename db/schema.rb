@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 2022_10_20_012304) do
   end
 
   create_table "comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+    t.text "text", size: :medium
     t.string "email"
     t.string "name"
     t.integer "application_id", null: false
