@@ -24,6 +24,7 @@ script:
   # Also make sure that our tapioca stuff is up to date
   - bundle exec tapioca gems --verify
   - bundle exec tapioca dsl --verify
+  - bundle exec tapioca check-shims
 
 services:
   - mysql
