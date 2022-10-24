@@ -96,8 +96,8 @@ gem "virtus"
 
 # For theming (so we can run our proper theme at the same time as an
 # experimental bootstrap based theme)
-# Using our fork to add Rails 6 support and fix a bad memory leak
-gem "themes_on_rails", git: "https://github.com/openaustralia/themes_on_rails", ref: "4eb4f6"
+# Using our fork to add Rails 6 & 7 support and fix a bad memory leak
+gem "themes_on_rails", git: "https://github.com/openaustralia/themes_on_rails"
 
 # For logging API calls to elasticsearch
 # We can't upgrade elasticsearch gem until we've upgraded the server
