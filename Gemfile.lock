@@ -657,7 +657,7 @@ DEPENDENCIES
   devise (~> 4.2)
   dotenv-rails
   elasticsearch
-  email_spec
+  email_spec (= 2.2.0)
   factory_bot
   factory_bot_rails
   foreman
