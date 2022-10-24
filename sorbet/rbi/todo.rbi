@@ -6,5 +6,6 @@
 
 module ::Parts; end
 module ::UploadIO; end
+module ActiveSupport::Dependencies::ModuleConstMissing; end
 module Faraday::AutoloadHelper; end
 module Faraday::DependencyLoader; end

@@ -116,6 +116,9 @@ class ActiveRecord::SchemaMigration
     end
     def find_or_initialize_by(attributes, &block); end
 
+    sig { params(arg: T.untyped, args: T.untyped).returns(::ActiveRecord::SchemaMigration) }
+    def find_sole_by(arg, *args); end
+
     sig { params(limit: T.untyped).returns(T.untyped) }
     def first(limit = nil); end
 
@@ -202,6 +205,9 @@ class ActiveRecord::SchemaMigration
     sig { returns(::ActiveRecord::SchemaMigration) }
     def second_to_last!; end
 
+    sig { returns(::ActiveRecord::SchemaMigration) }
+    def sole; end
+
     sig do
       params(
         column_name: T.nilable(T.any(String, Symbol)),
@@ -252,6 +258,9 @@ class ActiveRecord::SchemaMigration
     def except(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def excluding(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def extending(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
@@ -265,6 +274,9 @@ class ActiveRecord::SchemaMigration
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def having(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def in_order_of(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def includes(*args, &blk); end
@@ -302,6 +314,9 @@ class ActiveRecord::SchemaMigration
       ).returns(ActiveRecord::Result)
     end
     def insert_all!(attributes, returning: nil); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def invert_where(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def joins(*args, &blk); end
@@ -370,6 +385,9 @@ class ActiveRecord::SchemaMigration
     def strict_loading(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def structurally_compatible?(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def uniq!(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
@@ -395,6 +413,9 @@ class ActiveRecord::SchemaMigration
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelationWhereChain) }
     def where(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def without(*args, &blk); end
   end
 
   module GeneratedAttributeMethods
@@ -479,6 +500,9 @@ class ActiveRecord::SchemaMigration
     def except(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def excluding(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def extending(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
@@ -494,7 +518,13 @@ class ActiveRecord::SchemaMigration
     def having(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def in_order_of(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def includes(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def invert_where(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def joins(*args, &blk); end
@@ -563,6 +593,9 @@ class ActiveRecord::SchemaMigration
     def strict_loading(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def structurally_compatible?(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def uniq!(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
@@ -570,6 +603,9 @@ class ActiveRecord::SchemaMigration
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelationWhereChain) }
     def where(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def without(*args, &blk); end
   end
 
   class PrivateAssociationRelation < ::ActiveRecord::AssociationRelation
@@ -584,6 +620,9 @@ class ActiveRecord::SchemaMigration
 
   class PrivateAssociationRelationWhereChain < PrivateAssociationRelation
     Elem = type_member { { fixed: ::ActiveRecord::SchemaMigration } }
+
+    sig { params(args: T.untyped).returns(PrivateAssociationRelation) }
+    def associated(*args); end
 
     sig { params(args: T.untyped).returns(PrivateAssociationRelation) }
     def missing(*args); end
@@ -682,6 +721,9 @@ class ActiveRecord::SchemaMigration
 
   class PrivateRelationWhereChain < PrivateRelation
     Elem = type_member { { fixed: ::ActiveRecord::SchemaMigration } }
+
+    sig { params(args: T.untyped).returns(PrivateRelation) }
+    def associated(*args); end
 
     sig { params(args: T.untyped).returns(PrivateRelation) }
     def missing(*args); end

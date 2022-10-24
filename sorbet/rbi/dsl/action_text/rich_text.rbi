@@ -122,6 +122,9 @@ class ActionText::RichText
     end
     def find_or_initialize_by(attributes, &block); end
 
+    sig { params(arg: T.untyped, args: T.untyped).returns(::ActionText::RichText) }
+    def find_sole_by(arg, *args); end
+
     sig { params(limit: T.untyped).returns(T.untyped) }
     def first(limit = nil); end
 
@@ -208,6 +211,9 @@ class ActionText::RichText
     sig { returns(::ActionText::RichText) }
     def second_to_last!; end
 
+    sig { returns(::ActionText::RichText) }
+    def sole; end
+
     sig do
       params(
         column_name: T.nilable(T.any(String, Symbol)),
@@ -293,6 +299,9 @@ class ActionText::RichText
     def except(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def excluding(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def extending(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
@@ -306,6 +315,9 @@ class ActionText::RichText
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def having(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def in_order_of(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def includes(*args, &blk); end
@@ -345,6 +357,9 @@ class ActionText::RichText
     def insert_all!(attributes, returning: nil); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def invert_where(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def joins(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
@@ -406,6 +421,9 @@ class ActionText::RichText
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def strict_loading(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def structurally_compatible?(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def uniq!(*args, &blk); end
@@ -436,6 +454,9 @@ class ActionText::RichText
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def with_attached_embeds(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def without(*args, &blk); end
   end
 
   module GeneratedRelationMethods
@@ -461,6 +482,9 @@ class ActionText::RichText
     def except(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def excluding(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def extending(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
@@ -476,7 +500,13 @@ class ActionText::RichText
     def having(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def in_order_of(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def includes(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def invert_where(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def joins(*args, &blk); end
@@ -542,6 +572,9 @@ class ActionText::RichText
     def strict_loading(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def structurally_compatible?(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def uniq!(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
@@ -552,6 +585,9 @@ class ActionText::RichText
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def with_attached_embeds(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def without(*args, &blk); end
   end
 
   class PrivateAssociationRelation < ::ActiveRecord::AssociationRelation
@@ -566,6 +602,9 @@ class ActionText::RichText
 
   class PrivateAssociationRelationWhereChain < PrivateAssociationRelation
     Elem = type_member { { fixed: ::ActionText::RichText } }
+
+    sig { params(args: T.untyped).returns(PrivateAssociationRelation) }
+    def associated(*args); end
 
     sig { params(args: T.untyped).returns(PrivateAssociationRelation) }
     def missing(*args); end
@@ -664,6 +703,9 @@ class ActionText::RichText
 
   class PrivateRelationWhereChain < PrivateRelation
     Elem = type_member { { fixed: ::ActionText::RichText } }
+
+    sig { params(args: T.untyped).returns(PrivateRelation) }
+    def associated(*args); end
 
     sig { params(args: T.untyped).returns(PrivateRelation) }
     def missing(*args); end
