@@ -10,8 +10,8 @@ describe AtdisHelper do
       Timecop.freeze(Time.utc(2002, 1, 1)) do
         expect(helper.attribute_value(value)).to eq(
           '<div class="value">' \
-          '<time datetime="2001-01-01T00:00:00+00:00">January 01, 2001 00:00</time>' \
-          ' (about 1 year ago)' \
+          '<time datetime="2001-01-01T00:00:00+00:00">January 01, 2001 00:00</time> ' \
+          '(about 1 year ago)' \
           '</div>'
         )
       end

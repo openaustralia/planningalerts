@@ -4,6 +4,9 @@
 class Alert < ApplicationRecord
   extend T::Sig
 
+  # TODO: Once migration is complete this should not be optional
+  belongs_to :user, optional: true
+
   validates :radius_meters, numericality: { greater_than: 0, message: "isn't selected" }
   validate :validate_address
 

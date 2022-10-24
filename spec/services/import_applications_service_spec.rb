@@ -54,9 +54,9 @@ describe ImportApplicationsService do
   it "imports the correct applications" do
     logger = Logger.new($stdout)
     allow(logger).to receive(:info)
-    allow(ENV).to receive(:[])
-    allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(0)
-    allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("123")
+    allow(ENV).to receive(:fetch)
+    allow(ENV).to receive(:fetch).with("SCRAPE_DELAY", nil).and_return(0)
+    allow(ENV).to receive(:fetch).with("MORPH_API_KEY", nil).and_return("123")
     allow(SyncGithubIssueForAuthorityService).to receive(:call)
 
     Timecop.freeze(date) do
@@ -80,9 +80,9 @@ describe ImportApplicationsService do
   it "updates an application when it already exist" do
     logger = Logger.new($stdout)
     allow(logger).to receive(:info)
-    allow(ENV).to receive(:[])
-    allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(0)
-    allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("123")
+    allow(ENV).to receive(:fetch)
+    allow(ENV).to receive(:fetch).with("SCRAPE_DELAY", nil).and_return(0)
+    allow(ENV).to receive(:fetch).with("MORPH_API_KEY", nil).and_return("123")
     allow(SyncGithubIssueForAuthorityService).to receive(:call).with(logger: logger, authority: auth)
 
     Timecop.freeze(date) do
@@ -107,9 +107,9 @@ describe ImportApplicationsService do
   it "escapes the morph api key and the sql query" do
     logger = Logger.new($stdout)
     allow(logger).to receive(:info)
-    allow(ENV).to receive(:[])
-    allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(0)
-    allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("12/")
+    allow(ENV).to receive(:fetch)
+    allow(ENV).to receive(:fetch).with("SCRAPE_DELAY", nil).and_return(0)
+    allow(ENV).to receive(:fetch).with("MORPH_API_KEY", nil).and_return("12/")
     allow(SyncGithubIssueForAuthorityService).to receive(:call)
 
     Timecop.freeze(date) do
@@ -125,8 +125,8 @@ describe ImportApplicationsService do
 
   describe "#morph_query" do
     it "filters by the date range" do
-      allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(7)
-      allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("")
+      allow(ENV).to receive(:fetch).with("SCRAPE_DELAY", nil).and_return(7)
+      allow(ENV).to receive(:fetch).with("MORPH_API_KEY", nil).and_return("")
       Timecop.freeze(date) do
         s = described_class.new(authority: auth, logger: Logger.new($stdout))
         expect(s.morph_query).to eq "select * from `data` where `date_scraped` >= '2008-12-25'"
@@ -137,8 +137,8 @@ describe ImportApplicationsService do
       let(:auth) { create(:authority, scraper_authority_label: "foo") }
 
       it "filters by the authority_label" do
-        allow(ENV).to receive(:[]).with("SCRAPE_DELAY").and_return(7)
-        allow(ENV).to receive(:[]).with("MORPH_API_KEY").and_return("")
+        allow(ENV).to receive(:fetch).with("SCRAPE_DELAY", nil).and_return(7)
+        allow(ENV).to receive(:fetch).with("MORPH_API_KEY", nil).and_return("")
         Timecop.freeze(date) do
           s = described_class.new(authority: auth, logger: Logger.new($stdout))
           expect(s.morph_query).to eq "select * from `data` where `authority_label` = 'foo' and `date_scraped` >= '2008-12-25'"

@@ -10,9 +10,10 @@ class ApplicationsController < ApplicationController
 
   sig { void }
   def index
+    authority_id = T.cast(params[:authority_id], T.nilable(String))
+
     description = +"Recent applications"
 
-    authority_id = params[:authority_id]
     if authority_id
       # TODO: Handle the situation where the authority name isn't found
       authority = Authority.find_short_name_encoded!(authority_id)
@@ -41,7 +42,9 @@ class ApplicationsController < ApplicationController
   # JSON api for returning the number of new scraped applications per day
   sig { void }
   def per_day
-    authority = Authority.find_short_name_encoded!(params[:authority_id])
+    params_authority_id = T.cast(params[:authority_id], String)
+
+    authority = Authority.find_short_name_encoded!(params_authority_id)
     respond_to do |format|
       format.js do
         render json: authority.new_applications_per_day
@@ -51,7 +54,9 @@ class ApplicationsController < ApplicationController
 
   sig { void }
   def per_week
-    authority = Authority.find_short_name_encoded!(params[:authority_id])
+    params_authority_id = T.cast(params[:authority_id], String)
+
+    authority = Authority.find_short_name_encoded!(params_authority_id)
     respond_to do |format|
       format.js do
         render json: authority.new_applications_per_week
@@ -61,13 +66,18 @@ class ApplicationsController < ApplicationController
 
   sig { void }
   def address
-    @q = T.let(params[:q], T.nilable(String))
-    radius = params[:radius] ? params[:radius].to_f : 2000.0
+    params_q = T.cast(params[:q], T.nilable(String))
+    params_radius = T.cast(params[:radius], T.nilable(T.any(String, Numeric)))
+    params_sort = T.cast(params[:sort], T.nilable(String))
+    params_page = T.cast(params[:page], T.nilable(String))
+
+    @q = T.let(params_q, T.nilable(String))
+    radius = params_radius ? params_radius.to_f : 2000.0
     @radius = T.let(radius, T.nilable(Float))
-    sort = params[:sort] || "time"
+    sort = params_sort || "time"
     @sort = T.let(sort, T.nilable(String))
     per_page = 30
-    @page = T.let(params[:page], T.nilable(String))
+    @page = T.let(params_page, T.nilable(String))
     if @q
       result = GoogleGeocodeService.call(@q)
       top = result.top
@@ -104,10 +114,12 @@ class ApplicationsController < ApplicationController
 
   sig { void }
   def search
+    params_q = T.cast(params[:q], T.nilable(String))
+
     # TODO: Fix this hacky ugliness
     per_page = request.format == Mime[:html] ? 30 : Application.max_per_page
 
-    @q = params[:q]
+    @q = params_q
     if @q
       @applications = Application.search(@q, fields: [:description], order: { date_scraped: :desc }, highlight: { tag: "<span class=\"highlight\">" }, page: params[:page], per_page: per_page)
       @rss = search_applications_path(format: "rss", q: @q, page: nil)
@@ -139,7 +151,9 @@ class ApplicationsController < ApplicationController
 
   sig { void }
   def nearby
-    @sort = params[:sort]
+    params_sort = T.cast(params[:sort], T.nilable(String))
+
+    @sort = params_sort
     @rss = nearby_application_url(
       id: params[:id],
       sort: params[:sort],

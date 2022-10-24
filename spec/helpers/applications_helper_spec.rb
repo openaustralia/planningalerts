@@ -174,8 +174,8 @@ describe ApplicationsHelper do
     describe "static maps" do
       before do
         allow(application).to receive(:address).and_return("Foo Road, NSW")
-        allow(ENV).to receive(:[]).with("GOOGLE_MAPS_API_KEY").and_return("abc")
-        allow(ENV).to receive(:[]).with("GOOGLE_MAPS_CRYPTOGRAPHIC_KEY").and_return("123456789012345678901234567=")
+        allow(ENV).to receive(:fetch).with("GOOGLE_MAPS_API_KEY", nil).and_return("abc")
+        allow(ENV).to receive(:fetch).with("GOOGLE_MAPS_CRYPTOGRAPHIC_KEY", nil).and_return("123456789012345678901234567=")
       end
 
       it "generates a static google map api image" do
@@ -188,8 +188,8 @@ describe ApplicationsHelper do
     describe "static streetview" do
       before do
         allow(application).to receive(:address).and_return("Foo Road, NSW")
-        allow(ENV).to receive(:[]).with("GOOGLE_MAPS_API_KEY").and_return("abc")
-        allow(ENV).to receive(:[]).with("GOOGLE_MAPS_CRYPTOGRAPHIC_KEY").and_return("123456789012345678901234567=")
+        allow(ENV).to receive(:fetch).with("GOOGLE_MAPS_API_KEY", nil).and_return("abc")
+        allow(ENV).to receive(:fetch).with("GOOGLE_MAPS_CRYPTOGRAPHIC_KEY", nil).and_return("123456789012345678901234567=")
       end
 
       it "generates a static google streetview image" do

@@ -13,6 +13,7 @@ class AlertDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = T.let({
     id: Field::Number,
     email: Field::String,
+    user: Field::BelongsTo,
     address: Field::String,
     last_sent: Field::DateTime,
     lat: Field::Number.with_options(decimals: 2),
@@ -47,6 +48,7 @@ class AlertDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = T.let(%i[
     id
     email
+    user
     address
     last_sent
     lat

@@ -12,7 +12,7 @@ class AlertMailer < ApplicationMailer
       alert: Alert,
       applications: T::Array[Application],
       comments: T::Array[Comment]
-    ).returns(Mail::Message)
+    ).returns(T.any(Mail::Message, ActionMailer::MessageDelivery))
   end
   def alert(alert, applications, comments = [])
     @alert = T.let(alert, T.nilable(Alert))
@@ -36,7 +36,7 @@ class AlertMailer < ApplicationMailer
     )
   end
 
-  sig { params(alert: Alert).returns(Mail::Message) }
+  sig { params(alert: Alert).returns(T.any(Mail::Message, ActionMailer::MessageDelivery)) }
   def new_signup_attempt_notice(alert)
     @alert = alert
 

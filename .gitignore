@@ -29,3 +29,5 @@ planningalerts-app.sublime-project
 *.iml
 .generators
 .rakeTasks
+
+.vscode

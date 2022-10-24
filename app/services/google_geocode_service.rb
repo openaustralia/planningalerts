@@ -20,7 +20,7 @@ class GoogleGeocodeService
 
     params = {
       address: address,
-      key: ENV["GOOGLE_MAPS_SERVER_KEY"],
+      key: ENV.fetch("GOOGLE_MAPS_SERVER_KEY", nil),
       region: "au",
       sensor: false
     }

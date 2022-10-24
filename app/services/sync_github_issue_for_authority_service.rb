@@ -19,7 +19,7 @@ class SyncGithubIssueForAuthorityService
     extend T::Sig
     sig { params(_context: T.untyped).returns(T::Hash[Symbol, String]) }
     def headers(_context)
-      { Authorization: "bearer #{ENV['GITHUB_PERSONAL_ACCESS_TOKEN']}" }
+      { Authorization: "bearer #{ENV.fetch('GITHUB_PERSONAL_ACCESS_TOKEN', nil)}" }
     end
   end, GraphQL::Client::HTTP)
 
@@ -125,7 +125,7 @@ class SyncGithubIssueForAuthorityService
 
   sig { params(logger: Logger, authority: Authority).void }
   def call(logger:, authority:)
-    client = Octokit::Client.new(access_token: ENV["GITHUB_PERSONAL_ACCESS_TOKEN"])
+    client = Octokit::Client.new(access_token: ENV.fetch("GITHUB_PERSONAL_ACCESS_TOKEN", nil))
 
     issue = authority.github_issue
     latest_date = authority.date_last_new_application_scraped
@@ -168,7 +168,7 @@ class SyncGithubIssueForAuthorityService
     update_text_field(project: project, item: item, field: project.state_field, value: authority.state)
     update_number_field(project: project, item: item, field: project.population_field, value: authority.population_2017)
     update_text_field(project: project, item: item, field: project.website_field, value: authority.website_url)
-    update_text_field(project: project, item: item, field: project.authority_admin_field, value: admin_authority_url(authority, host: ENV["HOST"]))
+    update_text_field(project: project, item: item, field: project.authority_admin_field, value: admin_authority_url(authority, host: ENV.fetch("HOST", nil)))
   end
 
   sig { params(project: T.untyped, item: T.untyped, field: T.untyped, value: T.nilable(String)).void }

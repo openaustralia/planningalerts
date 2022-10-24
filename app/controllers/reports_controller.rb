@@ -12,11 +12,13 @@ class ReportsController < ApplicationController
 
   sig { void }
   def create
+    params_report = T.cast(params[:report], ActionController::Parameters)
+
     @comment = Comment.visible.find(params[:comment_id])
     @report = @comment.reports.build(
-      name: params[:report][:name],
-      email: params[:report][:email],
-      details: params[:report][:details]
+      name: params_report[:name],
+      email: params_report[:email],
+      details: params_report[:details]
     )
 
     if verify_recaptcha && @report.save

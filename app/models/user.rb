@@ -8,12 +8,14 @@ class User < ApplicationRecord
 
   # For sorbet
   include Devise::Models::Authenticatable
+  include Devise::Models::Confirmable
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
          :trackable, :validatable, :confirmable
   has_many :api_keys, dependent: :destroy
+  has_many :alerts, dependent: :destroy
 
   sig { params(notification: T.untyped, args: T.untyped).void }
   def send_devise_notification(notification, *args)

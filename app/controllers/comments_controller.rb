@@ -6,8 +6,9 @@ class CommentsController < ApplicationController
 
   sig { void }
   def index
+    authority_id = T.cast(params[:authority_id], T.nilable(String))
+
     description = +"Recent comments"
-    authority_id = params[:authority_id]
     if authority_id
       authority = Authority.find_short_name_encoded!(authority_id)
       comments_to_display = authority.comments
@@ -45,7 +46,9 @@ class CommentsController < ApplicationController
 
   sig { void }
   def per_week
-    authority = Authority.find_short_name_encoded!(params[:authority_id])
+    params_authority_id = T.cast(params[:authority_id], String)
+
+    authority = Authority.find_short_name_encoded!(params_authority_id)
 
     respond_to do |format|
       format.json { render json: authority.comments_per_week }

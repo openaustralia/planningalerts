@@ -23,7 +23,7 @@ class GenerateSitemapService
 
   sig { void }
   def call
-    s = Sitemap.new(T.must(root_url(host: ENV["HOST"], protocol: "https")[0..-2]), Rails.root.join("public").to_s, logger)
+    s = Sitemap.new(T.must(root_url(host: ENV.fetch("HOST", nil), protocol: "https")[0..-2]), Rails.public_path.to_s, logger)
 
     # TODO: There is some redundancy between what is going on here and what is listed in the routes.rb
     # Figure out if there is a way to combine the configuration information entirely in the routing.

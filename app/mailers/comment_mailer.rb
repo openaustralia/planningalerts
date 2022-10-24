@@ -7,7 +7,7 @@ class CommentMailer < ApplicationMailer
   include EmailFrom
   helper :comments
 
-  sig { params(comment: Comment).returns(Mail::Message) }
+  sig { params(comment: Comment).returns(T.any(Mail::Message, ActionMailer::MessageDelivery)) }
   def notify_authority(comment)
     @comment = T.let(comment, T.nilable(Comment))
 

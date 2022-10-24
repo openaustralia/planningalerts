@@ -28,9 +28,10 @@ module Admin
 
     sig { returns(T::Hash[Symbol, Integer]) }
     def site_setting
+      params_site_setting = T.cast(params[:site_setting], ActionController::Parameters)
       {
-        streetview_in_emails_enabled: params[:site_setting][:streetview_in_emails_enabled],
-        streetview_in_app_enabled: params[:site_setting][:streetview_in_app_enabled]
+        streetview_in_emails_enabled: params_site_setting[:streetview_in_emails_enabled],
+        streetview_in_app_enabled: params_site_setting[:streetview_in_app_enabled]
       }
     end
   end

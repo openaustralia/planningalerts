@@ -28,18 +28,18 @@ namespace :planningalerts do
       body: {
         type: "s3",
         settings: {
-          bucket: ENV["ELASTICSEARCH_SNAPSHOT_S3_BUCKET"],
-          region: ENV["ELASTICSEARCH_SNAPSHOT_S3_REGION"],
-          access_key: ENV["ELASTICSEARCH_SNAPSHOT_ACCESS_KEY"],
-          secret_key: ENV["ELASTICSEARCH_SNAPSHOT_SECRET_KEY"],
+          bucket: ENV.fetch("ELASTICSEARCH_SNAPSHOT_S3_BUCKET", nil),
+          region: ENV.fetch("ELASTICSEARCH_SNAPSHOT_S3_REGION", nil),
+          access_key: ENV.fetch("ELASTICSEARCH_SNAPSHOT_ACCESS_KEY", nil),
+          secret_key: ENV.fetch("ELASTICSEARCH_SNAPSHOT_SECRET_KEY", nil),
           compress: true
         }
       }
     )
     ElasticSearchClient&.snapshot&.create(
       repository: "backups",
-      snapshot: "pa-api-#{ENV['STAGE']}-#{Time.zone.now.utc.strftime('%Y.%m.%d')}",
-      body: { indices: "pa-api-#{ENV['STAGE']}-*" }
+      snapshot: "pa-api-#{ENV.fetch('STAGE', nil)}-#{Time.zone.now.utc.strftime('%Y.%m.%d')}",
+      body: { indices: "pa-api-#{ENV.fetch('STAGE', nil)}-*" }
     )
   end
 
@@ -52,6 +52,34 @@ namespace :planningalerts do
     desc "Regenerates all the counter caches in case they got out of synch"
     task fixup_counter_caches: :environment do
       Comment.counter_culture_fix_counts
+    end
+  end
+
+  namespace :data_migration do
+    desc "Connect alerts to users"
+    task connect_alerts_to_users: :environment do
+      alerts = Alert.where(user: nil)
+      progressbar = ProgressBar.create(total: alerts.count, format: "%t %W %E")
+
+      alerts.find_each do |alert|
+        # Find an already connected user
+        user = User.find_by(email: alert.email)
+        if user.nil?
+          # TODO: We don't want api keys for this new user!
+          # from_alert says that this user was created "from" an alert rather than a user
+          # registering an account in the "normal" way
+          user = User.new(email: alert.email, from_alert: true)
+          # Otherwise it would send out a confirmation email on saving the record
+          user.skip_confirmation_notification!
+          # Disable validation so we can save with an empty password
+          user.save!(validate: false)
+        end
+        # Confirm the user if the alert is already confirmed
+        user.confirm if !user.confirmed? && alert.confirmed?
+
+        alert.update!(user: user)
+        progressbar.increment
+      end
     end
   end
 end

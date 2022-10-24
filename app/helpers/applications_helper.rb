@@ -166,8 +166,8 @@ module ApplicationsHelper
 
   sig { params(domain: String, path: String, query: T::Hash[Symbol, T.any(String, Integer)], key: String).returns(String) }
   def google_signed_url(domain:, path:, query:, key: "GOOGLE_MAPS_API_KEY")
-    google_maps_key = ENV[key]
-    cryptographic_key = ENV["GOOGLE_MAPS_CRYPTOGRAPHIC_KEY"]
+    google_maps_key = ENV.fetch(key, nil)
+    cryptographic_key = ENV.fetch("GOOGLE_MAPS_CRYPTOGRAPHIC_KEY", nil)
     if google_maps_key.present?
       signed = "#{path}?#{query.merge(key: google_maps_key).to_query}"
       signature = sign_gmap_bus_api_url(signed, cryptographic_key)

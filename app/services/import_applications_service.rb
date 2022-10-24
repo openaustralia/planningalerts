@@ -47,12 +47,12 @@ class ImportApplicationsService
 
   sig { returns(Integer) }
   def scrape_delay
-    T.must(ENV["SCRAPE_DELAY"]).to_i
+    T.must(ENV.fetch("SCRAPE_DELAY", nil)).to_i
   end
 
   sig { returns(String) }
   def morph_api_key
-    T.must(ENV["MORPH_API_KEY"])
+    T.must(ENV.fetch("MORPH_API_KEY", nil))
   end
 
   sig { returns(Date) }

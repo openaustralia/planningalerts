@@ -42,7 +42,7 @@ class NotifySlackCommentDeliveryService
 
   sig { void }
   def call
-    notifier = Slack::Notifier.new ENV["SLACK_WEBHOOK_URL"]
+    notifier = Slack::Notifier.new ENV.fetch("SLACK_WEBHOOK_URL", nil)
     case status
     when "delivered"
       notifier.ping "A [comment](#{comment_url}) was succesfully [delivered](#{email_url}) to #{comment.application&.authority&.full_name} #{to}"
@@ -62,7 +62,7 @@ class NotifySlackCommentDeliveryService
 
   sig { returns(String) }
   def comment_url
-    Rails.application.routes.url_helpers.admin_comment_url(comment, host: ENV["HOST"])
+    Rails.application.routes.url_helpers.admin_comment_url(comment, host: ENV.fetch("HOST", nil))
   end
 
   private

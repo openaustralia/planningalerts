@@ -2,22 +2,22 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_13_021430) do
+ActiveRecord::Schema.define(version: 2022_10_20_012304) do
 
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
-    t.string "resource_id", null: false
-    t.string "resource_type", null: false
+    t.string "resource_id", default: "", null: false
+    t.string "resource_type", default: "", null: false
     t.integer "author_id"
     t.string "author_type"
-    t.text "body"
+    t.text "body", size: :medium
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "namespace"
@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 2021_09_13_021430) do
   end
 
   create_table "alerts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
-    t.string "email", limit: 120, null: false
-    t.string "address", limit: 120, null: false
+    t.string "email", limit: 120, default: "", null: false
+    t.string "address", limit: 120, default: "", null: false
     t.datetime "last_sent"
     t.float "lat", limit: 53, null: false
     t.float "lng", limit: 53, null: false
@@ -43,7 +43,9 @@ ActiveRecord::Schema.define(version: 2021_09_13_021430) do
     t.datetime "last_delivered_at"
     t.boolean "last_delivered_successfully"
     t.string "unsubscribed_by"
+    t.integer "user_id"
     t.index ["email"], name: "index_alerts_on_email"
+    t.index ["user_id"], name: "fk_rails_d4053234e7"
   end
 
   create_table "api_keys", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
@@ -74,7 +76,7 @@ ActiveRecord::Schema.define(version: 2021_09_13_021430) do
     t.boolean "current", null: false
     t.text "address", null: false
     t.text "description", null: false
-    t.string "info_url", limit: 1024, null: false
+    t.string "info_url", limit: 1024, default: "", null: false
     t.string "comment_url", limit: 1024
     t.date "date_received"
     t.date "on_notice_from"
@@ -97,7 +99,7 @@ ActiveRecord::Schema.define(version: 2021_09_13_021430) do
   end
 
   create_table "applications", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
-    t.string "council_reference", limit: 50, null: false
+    t.string "council_reference", limit: 50, default: "", null: false
     t.integer "authority_id", null: false
     t.integer "no_alerted"
     t.integer "visible_comments_count", default: 0, null: false
@@ -107,8 +109,8 @@ ActiveRecord::Schema.define(version: 2021_09_13_021430) do
   end
 
   create_table "authorities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
-    t.string "full_name", limit: 200, null: false
-    t.string "short_name", limit: 100, null: false
+    t.string "full_name", limit: 200, default: "", null: false
+    t.string "short_name", limit: 100, default: "", null: false
     t.boolean "disabled", null: false
     t.string "state", limit: 20, null: false
     t.string "email"
@@ -120,8 +122,7 @@ ActiveRecord::Schema.define(version: 2021_09_13_021430) do
     t.index ["short_name"], name: "short_name_unique", unique: true
   end
 
-  create_table "comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
-    t.text "text", limit: 16777215
+    t.text "text", size: :medium
     t.string "email"
     t.string "name"
     t.integer "application_id", null: false
@@ -150,13 +151,13 @@ ActiveRecord::Schema.define(version: 2021_09_13_021430) do
   end
 
   create_table "geocode_queries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
-    t.string "query", null: false
+    t.string "query", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "geocode_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
-    t.string "geocoder", null: false
+    t.string "geocoder", default: "", null: false
     t.float "lat"
     t.float "lng"
     t.datetime "created_at", null: false
@@ -181,7 +182,7 @@ ActiveRecord::Schema.define(version: 2021_09_13_021430) do
   create_table "reports", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.text "details", limit: 16777215
+    t.text "details", size: :medium
     t.integer "comment_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -220,11 +221,13 @@ ActiveRecord::Schema.define(version: 2021_09_13_021430) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.boolean "from_alert", default: false, null: false, comment: "whether this user was created from an alert rather than through the normal devise registration process"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "alerts", "users"
   add_foreign_key "api_keys", "users"
   add_foreign_key "application_redirects", "applications", column: "redirect_application_id"
   add_foreign_key "application_versions", "application_versions", column: "previous_version_id"

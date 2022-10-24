@@ -34,11 +34,17 @@ class TwitterFeed
     end
   end
 
-  sig { returns(T::Array[OpenStruct]) }
+  class Item < T::Struct
+    const :title, String
+    const :date, Time
+    const :link, String
+  end
+
+  sig { returns(T::Array[Item]) }
   def items
-    @items = T.let(@items, T.nilable(T::Array[OpenStruct]))
+    @items = T.let(@items, T.nilable(T::Array[Item]))
     @items ||= feed.map do |tweet|
-      OpenStruct.new(
+      Item.new(
         title: tweet.text,
         date: tweet.created_at,
         link: "https://twitter.com/#{username}/status/#{tweet.id}"
@@ -51,10 +57,10 @@ class TwitterFeed
     return unless ENV["TWITTER_CONSUMER_KEY"]
 
     Twitter::REST::Client.new do |config|
-      config.consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
-      config.consumer_secret     = ENV["TWITTER_CONSUMER_SECRET"]
-      config.access_token        = ENV["TWITTER_OAUTH_TOKEN"]
-      config.access_token_secret = ENV["TWITTER_OAUTH_TOKEN_SECRET"]
+      config.consumer_key        = ENV.fetch("TWITTER_CONSUMER_KEY", nil)
+      config.consumer_secret     = ENV.fetch("TWITTER_CONSUMER_SECRET", nil)
+      config.access_token        = ENV.fetch("TWITTER_OAUTH_TOKEN", nil)
+      config.access_token_secret = ENV.fetch("TWITTER_OAUTH_TOKEN_SECRET", nil)
     end
   end
 end

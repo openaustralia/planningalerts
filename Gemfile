@@ -160,10 +160,7 @@ group :development do
   # For static type checking
   gem "sorbet"
   gem "spoom"
-  # v0.5.3 has a problem with the DSL generation for Active Record fixtures:
-  # https://github.com/Shopify/tapioca/blob/main/manual/generator_activerecordfixtures.md
-  # TODO: Upgrade to latest
-  gem "tapioca", "< 0.5.3"
+  gem "tapioca"
 
   # For guard and associated bits
   gem "growl"
