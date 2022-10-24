@@ -71,6 +71,10 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  resource :users, only: [] do
+    resources :api_keys, only: :create
+  end
+
   resources :alerts, only: %i[new create], path_names: { new: "signup" } do
     member do
       get :confirmed
