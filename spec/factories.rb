@@ -140,6 +140,7 @@ FactoryBot.define do
 
   factory :alert do
     email { "mary@example.org" }
+    user
     sequence(:address) { |s| "#{s} Illawarra Road Marrickville 2204" }
     lat { -33.911105 }
     lng { 151.155503 }

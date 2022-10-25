@@ -10,16 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[6.1].define(version: 2022_10_20_012304) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_10_24_221033) do
   create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "resource_id", default: "", null: false
     t.string "resource_type", default: "", null: false
     t.integer "author_id"
     t.string "author_type"
     t.text "body", size: :medium
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "namespace"
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
@@ -29,21 +28,21 @@ ActiveRecord::Schema[6.1].define(version: 2022_10_20_012304) do
   create_table "alerts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "email", limit: 120, default: "", null: false
     t.string "address", limit: 120, default: "", null: false
-    t.datetime "last_sent"
+    t.datetime "last_sent", precision: nil
     t.float "lat", limit: 53, null: false
     t.float "lng", limit: 53, null: false
     t.string "confirm_id", limit: 20
     t.boolean "confirmed", default: false, null: false
     t.integer "radius_meters", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.boolean "unsubscribed", default: false, null: false
-    t.datetime "last_processed"
-    t.datetime "unsubscribed_at"
-    t.datetime "last_delivered_at"
+    t.datetime "last_processed", precision: nil
+    t.datetime "unsubscribed_at", precision: nil
+    t.datetime "last_delivered_at", precision: nil
     t.boolean "last_delivered_successfully"
     t.string "unsubscribed_by"
-    t.integer "user_id"
+    t.integer "user_id", null: false
     t.index ["email"], name: "index_alerts_on_email"
     t.index ["user_id"], name: "fk_rails_d4053234e7"
   end
@@ -55,8 +54,8 @@ ActiveRecord::Schema[6.1].define(version: 2022_10_20_012304) do
     t.boolean "disabled", default: false, null: false
     t.boolean "commercial", default: false, null: false, comment: "api key is being used by a commercial customer"
     t.integer "daily_limit", comment: "override default daily API request limit"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_api_keys_on_user_id"
     t.index ["value"], name: "index_api_keys_on_value"
   end
@@ -64,8 +63,8 @@ ActiveRecord::Schema[6.1].define(version: 2022_10_20_012304) do
   create_table "application_redirects", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "application_id", null: false
     t.integer "redirect_application_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["application_id"], name: "index_application_redirects_on_application_id"
     t.index ["redirect_application_id"], name: "fk_rails_24f1a5992a"
   end
@@ -87,8 +86,8 @@ ActiveRecord::Schema[6.1].define(version: 2022_10_20_012304) do
     t.string "suburb", limit: 50
     t.string "state", limit: 10
     t.string "postcode", limit: 4
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["application_id"], name: "index_application_versions_on_application_id"
     t.index ["date_scraped"], name: "index_application_versions_on_date_scraped"
     t.index ["lat", "lng", "date_scraped"], name: "index_application_versions_on_lat_and_lng_and_date_scraped"
@@ -129,12 +128,12 @@ ActiveRecord::Schema[6.1].define(version: 2022_10_20_012304) do
     t.integer "application_id", null: false
     t.string "confirm_id"
     t.boolean "confirmed"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "address"
     t.boolean "hidden", default: false, null: false
-    t.datetime "confirmed_at"
-    t.datetime "last_delivered_at"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "last_delivered_at", precision: nil
     t.boolean "last_delivered_successfully"
     t.index ["application_id"], name: "index_comments_on_application_id"
     t.index ["confirm_id"], name: "index_comments_on_confirm_id"
@@ -146,23 +145,23 @@ ActiveRecord::Schema[6.1].define(version: 2022_10_20_012304) do
     t.integer "no_emails", null: false
     t.integer "no_applications", null: false
     t.integer "no_comments", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["created_at"], name: "index_email_batches_on_created_at"
   end
 
   create_table "geocode_queries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "query", default: "", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "geocode_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "geocoder", default: "", null: false
     t.float "lat"
     t.float "lng"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "geocode_query_id", null: false
     t.string "suburb"
     t.string "state"
@@ -175,8 +174,8 @@ ActiveRecord::Schema[6.1].define(version: 2022_10_20_012304) do
     t.integer "authority_id", null: false
     t.string "github_repo", null: false
     t.integer "github_number", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["authority_id"], name: "index_github_issues_on_authority_id"
   end
 
@@ -185,14 +184,14 @@ ActiveRecord::Schema[6.1].define(version: 2022_10_20_012304) do
     t.string "email"
     t.text "details", size: :medium
     t.integer "comment_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["comment_id"], name: "fk_rails_bc3addd41c"
   end
 
   create_table "site_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "settings"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
   end
 
   create_table "stats", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
@@ -206,21 +205,21 @@ ActiveRecord::Schema[6.1].define(version: 2022_10_20_012304) do
     t.string "password_salt", default: "", null: false
     t.string "reset_password_token"
     t.string "remember_token"
-    t.datetime "remember_created_at"
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "reset_password_sent_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
+    t.datetime "reset_password_sent_at", precision: nil
     t.boolean "admin", default: false, null: false
     t.string "name"
     t.string "organisation"
     t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at", precision: nil
+    t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email"
     t.boolean "from_alert", default: false, null: false, comment: "whether this user was created from an alert rather than through the normal devise registration process"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
