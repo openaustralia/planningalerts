@@ -71,7 +71,9 @@ gem "foreman"
 gem "recaptcha", require: "recaptcha/rails"
 
 # Site search
-gem "searchkick"
+# Our elasticsearch server is still on version 6
+# TODO: Upgrade our server and remove this lock
+gem "searchkick", "4.6.3"
 
 # Reporting exceptions
 gem "honeybadger"
@@ -102,7 +104,7 @@ gem "themes_on_rails", git: "https://github.com/openaustralia/themes_on_rails"
 # For logging API calls to elasticsearch
 # We can't upgrade elasticsearch gem until we've upgraded the server
 # TODO: Fix this
-gem "elasticsearch", "~> 7.15"
+gem "elasticsearch", "< 8"
 gem "ruby-progressbar"
 gem "typhoeus"
 
