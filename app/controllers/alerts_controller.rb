@@ -6,7 +6,8 @@ class AlertsController < ApplicationController
 
   sig { void }
   def new
-    @alert = T.let(Alert.new(address: params[:address], email: params[:email]), T.nilable(Alert))
+    user = User.new(email: params[:email])
+    @alert = Alert.new(address: params[:address], user: user)
     @set_focus_control = T.let(params[:address] ? "alert_email" : "alert_address", T.nilable(String))
   end
 
@@ -14,14 +15,16 @@ class AlertsController < ApplicationController
   def create
     params_alert = T.cast(params[:alert], ActionController::Parameters)
     address = T.cast(params_alert[:address], String)
+    params_alert_user_attributes = T.cast(params_alert[:user_attributes], ActionController::Parameters)
+    email = params_alert_user_attributes[:email]
 
     @address = T.let(address, T.nilable(String))
     # Create an unconfirmed user without a password if one doesn't already exist matching the email address
-    user = User.find_by(email: params_alert[:email])
+    user = User.find_by(email: email)
     if user.nil?
       # from_alert says that this user was created "from" an alert rather than a user
       # registering an account in the "normal" way
-      user = User.new(email: params_alert[:email], from_alert: true)
+      user = User.new(email: email, from_alert: true)
       # Otherwise it would send out a confirmation email on saving the record
       user.skip_confirmation_notification!
       # Disable validation so we can save with an empty password

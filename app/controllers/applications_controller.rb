@@ -27,7 +27,7 @@ class ApplicationsController < ApplicationController
     @authority = T.let(authority, T.nilable(Authority))
     @description = T.let(description, T.nilable(String))
     @applications = T.let(apps.page(params[:page]).per(30), T.untyped)
-    @alert = T.let(Alert.new, T.nilable(Alert))
+    @alert = T.let(Alert.new(user: User.new), T.nilable(Alert))
   end
 
   sig { void }
@@ -86,7 +86,7 @@ class ApplicationsController < ApplicationController
         @error = T.let(result.error, T.nilable(String))
       else
         @q = top.full_address
-        @alert = Alert.new(address: @q)
+        @alert = Alert.new(address: @q, user: User.new)
         @other_addresses = T.must(result.rest).map(&:full_address)
         @applications = Application.with_current_version.near(
           [top.lat, top.lng], radius / 1000,
@@ -142,7 +142,7 @@ class ApplicationsController < ApplicationController
                            application: application
                          ), T.nilable(AddComment))
     # Required for new email alert signup form
-    @alert = Alert.new(address: application.address)
+    @alert = Alert.new(address: application.address, user: User.new)
 
     respond_to do |format|
       format.html
