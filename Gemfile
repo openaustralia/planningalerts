@@ -177,8 +177,6 @@ group :development do
   gem "rack-livereload"
   gem "rb-fsevent"
   gem "rb-inotify", require: false
-  gem "spring"
-  gem "spring-commands-rspec"
 
   # Using this webserver for development
   gem "thin"
