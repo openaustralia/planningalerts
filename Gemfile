@@ -71,9 +71,11 @@ gem "foreman"
 gem "recaptcha", require: "recaptcha/rails"
 
 # Site search
-# Our elasticsearch server is still on version 6
+# Our elasticsearch server is still on version 6. According to the documentation
+# that means we should use 4.6.3 but that causes issues in production with "index_name"
 # TODO: Upgrade our server and remove this lock
-gem "searchkick", "4.6.3"
+# We're actually locking to even lower version which we were using before
+gem "searchkick", "4.5.2"
 
 # Reporting exceptions
 gem "honeybadger"

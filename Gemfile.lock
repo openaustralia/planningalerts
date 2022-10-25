@@ -180,12 +180,12 @@ GEM
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
-    elasticsearch (7.13.3)
-      elasticsearch-api (= 7.13.3)
-      elasticsearch-transport (= 7.13.3)
-    elasticsearch-api (7.13.3)
+    elasticsearch (7.17.1)
+      elasticsearch-api (= 7.17.1)
+      elasticsearch-transport (= 7.17.1)
+    elasticsearch-api (7.17.1)
       multi_json
-    elasticsearch-transport (7.13.3)
+    elasticsearch-transport (7.17.1)
       faraday (~> 1)
       multi_json
     em-websocket (0.5.3)
@@ -543,9 +543,9 @@ GEM
     sawyer (0.9.2)
       addressable (>= 2.3.5)
       faraday (>= 0.17.3, < 3)
-    searchkick (4.6.3)
+    searchkick (4.5.2)
       activemodel (>= 5)
-      elasticsearch (>= 6, < 7.14)
+      elasticsearch (>= 6)
       hashie
     selectize-rails (0.12.6)
     selenium-webdriver (4.5.0)
@@ -745,7 +745,7 @@ DEPENDENCIES
   ruby-progressbar
   sanitize
   sass-rails
-  searchkick (= 4.6.3)
+  searchkick (= 4.5.2)
   selenium-webdriver
   sidekiq
   simplecov
