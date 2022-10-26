@@ -24,8 +24,7 @@ class AlertsController < ApplicationController
       user = User.new(email: params_alert[:email], from_alert: true)
       # Otherwise it would send out a confirmation email on saving the record
       user.skip_confirmation_notification!
-      # Disable validation so we can save with an empty password
-      user.save!(validate: false)
+      # We're not saving the new user record until the alert has validated
     end
 
     @alert = T.let(
@@ -36,8 +35,20 @@ class AlertsController < ApplicationController
       ),
       T.nilable(Alert)
     )
+    # If the returned alert is nil that means there was a pre-existing alert and a new
+    # email has been sent but a new alert has *not* been created. Let's just act like one has.
+    return if @alert.nil?
 
-    render "new" if @alert.present? && !@alert.save
+    if @alert.valid?
+      ActiveRecord::Base.transaction do
+        # Disable validation so we can save with an empty password
+        user.save!(validate: false)
+        @alert.save!
+      end
+      return
+    end
+
+    render "new"
   end
 
   sig { void }
