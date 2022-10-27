@@ -8,11 +8,10 @@ class Alert < ApplicationRecord
 
   validates :radius_meters, numericality: { greater_than: 0, message: "isn't selected" }
   validate :validate_address
-
-  before_validation :geocode_from_address, unless: :geocoded?
-
   validates :email, presence: true
   validates_email_format_of :email, on: :create
+
+  before_validation :geocode_from_address, unless: :geocoded?
   before_create :set_confirm_info
   # Doing after_commit instead after_create so that sidekiq doesn't try
   # to see this before it properly exists. See
@@ -20,7 +19,6 @@ class Alert < ApplicationRecord
   after_commit :send_confirmation_email, on: :create
 
   scope(:confirmed, -> { where(confirmed: true) })
-
   scope(:active, -> { where(confirmed: true, unsubscribed: false) })
   scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
 

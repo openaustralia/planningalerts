@@ -8,12 +8,13 @@ class Comment < ApplicationRecord
 
   belongs_to :application
   has_many :reports, dependent: :destroy
+
   validates :name, presence: true
   validates :text, presence: true
   validates :address, presence: true
-
   validates :email, presence: true
   validates_email_format_of :email, on: :create
+
   before_create :set_confirm_info
   # Doing after_commit instead after_create so that sidekiq doesn't try
   # to see this before it properly exists. See
@@ -21,7 +22,6 @@ class Comment < ApplicationRecord
   after_commit :send_confirmation_email, on: :create
 
   scope(:confirmed, -> { where(confirmed: true) })
-
   scope(:visible, -> { where(confirmed: true, hidden: false) })
   scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
 
