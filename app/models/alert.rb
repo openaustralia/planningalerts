@@ -10,12 +10,24 @@ class Alert < ApplicationRecord
 
   validates :radius_meters, numericality: { greater_than: 0, message: "isn't selected" }
   validate :validate_address
+  validates :email, presence: true
+  validates_email_format_of :email, on: :create
 
   before_validation :geocode_from_address, unless: :geocoded?
-  include EmailConfirmable
+  before_create :set_confirm_info
+  # Doing after_commit instead after_create so that sidekiq doesn't try
+  # to see this before it properly exists. See
+  # https://github.com/mperham/sidekiq/wiki/Problems-and-Troubleshooting#cannot-find-modelname-with-id12345
+  after_commit :send_confirmation_email, on: :create
 
+  scope(:confirmed, -> { where(confirmed: true) })
   scope(:active, -> { where(confirmed: true, unsubscribed: false) })
   scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
+
+  sig { void }
+  def send_confirmation_email
+    ConfirmationMailer.confirm(self).deliver_later
+  end
 
   # lat and lng are only populated on save (where they are stored as not null).
   # so they start off being nil. We're just overriding the type signature here.
@@ -149,5 +161,11 @@ class Alert < ApplicationRecord
     elsif @geocode_result.all.many?
       errors.add(:address, "isn't complete. Please enter a full street address, including suburb and state, e.g. #{top.full_address}")
     end
+  end
+
+  sig { void }
+  def set_confirm_info
+    # TODO: Should check that this is unique across all objects and if not try again
+    self.confirm_id = Digest::MD5.hexdigest(Kernel.rand.to_s + Time.zone.now.to_s)[0...20]
   end
 end
