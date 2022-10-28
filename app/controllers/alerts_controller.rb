@@ -27,9 +27,8 @@ class AlertsController < ApplicationController
       user = User.new(email: email, from_alert: true)
       # Otherwise it would send out a confirmation email on saving the record
       user.skip_confirmation_notification!
+      user.temporarily_allow_empty_password!
       # We're not saving the new user record until the alert has validated
-      # Force the calculation of user.errors which is used below
-      user.valid?
     end
 
     @alert = T.let(
@@ -44,12 +43,9 @@ class AlertsController < ApplicationController
     # email has been sent but a new alert has *not* been created. Let's just act like one has.
     return if @alert.nil?
 
-    # We're only concerned about errors on the email field of the user model. The password field will always error
-    # because it's empty but we're actively ignoring that here
-    if @alert.valid? && user.errors[:email].empty?
+    if @alert.valid? && user.valid?
       ActiveRecord::Base.transaction do
-        # Disable validation so we can save with an empty password
-        user.save!(validate: false)
+        user.save!
         @alert.save!
       end
       return

@@ -22,7 +22,21 @@ class User < ApplicationRecord
     devise_mailer.send(notification, self, *args).deliver_later
   end
 
+  # This is currently used when creating users via an alert
+  # TODO: Remove this as soon as users are purely being created by people registering
+  sig { void }
+  def temporarily_allow_empty_password!
+    @temporarily_allow_empty_password = T.let(true, T.nilable(T::Boolean))
+  end
+
   private
+
+  sig { returns(T::Boolean) }
+  def password_required?
+    return false if @temporarily_allow_empty_password
+
+    super
+  end
 
   sig { void }
   def validate_email_domain
