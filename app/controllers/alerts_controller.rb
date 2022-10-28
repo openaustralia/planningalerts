@@ -43,13 +43,7 @@ class AlertsController < ApplicationController
     # email has been sent but a new alert has *not* been created. Let's just act like one has.
     return if @alert.nil?
 
-    if @alert.valid? && user.valid?
-      ActiveRecord::Base.transaction do
-        user.save!
-        @alert.save!
-      end
-      return
-    end
+    return if @alert.save
 
     render "new"
   end
