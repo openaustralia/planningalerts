@@ -132,6 +132,10 @@ FactoryBot.define do
       admin { true }
       confirmed_at { 1.day.ago }
     end
+
+    factory :confirmed_user do
+      confirmed_at { Time.zone.now }
+    end
   end
 
   factory :api_key do

@@ -10,8 +10,6 @@ class Alert < ApplicationRecord
 
   validates :radius_meters, numericality: { greater_than: 0, message: "isn't selected" }
   validate :validate_address
-  validates :email, presence: true
-  validates_email_format_of :email, on: :create
 
   before_validation :geocode_from_address, unless: :geocoded?
   before_create :set_confirm_info
@@ -23,6 +21,8 @@ class Alert < ApplicationRecord
   scope(:confirmed, -> { where(confirmed: true) })
   scope(:active, -> { where(confirmed: true, unsubscribed: false) })
   scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
+
+  delegate :email, to: :user
 
   sig { void }
   def send_confirmation_email

@@ -135,6 +135,7 @@ describe "Sign up for alerts" do
     let!(:preexisting_alert) do
       create(:unconfirmed_alert, address: "24 Bruce Rd, Glenbrook NSW 2773",
                                  email: "example@example.com",
+                                 user: create(:confirmed_user, email: "example@example.com"),
                                  created_at: 3.days.ago,
                                  updated_at: 3.days.ago)
     end
@@ -163,6 +164,7 @@ describe "Sign up for alerts" do
     let!(:preexisting_alert) do
       create(:confirmed_alert, address: "24 Bruce Rd, Glenbrook NSW 2773",
                                email: "jenny@email.org",
+                               user: create(:confirmed_user, email: "jenny@email.org"),
                                created_at: 3.days.ago,
                                updated_at: 3.days.ago)
     end
