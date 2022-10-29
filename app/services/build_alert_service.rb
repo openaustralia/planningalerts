@@ -4,24 +4,35 @@
 class BuildAlertService
   extend T::Sig
 
-  sig { params(user: User, address: String, radius_meters: Integer).returns(T.nilable(Alert)) }
-  def self.call(user:, address:, radius_meters:)
-    new(user: user, address: address, radius_meters: radius_meters).call
+  sig { params(email: String, address: String, radius_meters: Integer).returns(T.nilable(Alert)) }
+  def self.call(email:, address:, radius_meters:)
+    new(email: email, address: address, radius_meters: radius_meters).call
   end
 
-  sig { params(user: User, address: String, radius_meters: Integer).void }
-  def initialize(user:, address:, radius_meters:)
-    @email = T.let(user.email, String)
-    @user = user
+  sig { params(email: String, address: String, radius_meters: Integer).void }
+  def initialize(email:, address:, radius_meters:)
+    @email = email
     @address = address
     @radius_meters = radius_meters
   end
 
   sig { returns(T.nilable(Alert)) }
   def call
+    # Create an unconfirmed user without a password if one doesn't already exist matching the email address
+    user = User.find_by(email: @email)
+    if user.nil?
+      # from_alert says that this user was created "from" an alert rather than a user
+      # registering an account in the "normal" way
+      user = User.new(email: @email, from_alert: true)
+      # Otherwise it would send out a confirmation email on saving the record
+      user.skip_confirmation_notification!
+      user.temporarily_allow_empty_password!
+      # We're not saving the new user record until the alert has validated
+    end
+
     alert = Alert.new(
       email: @email,
-      user: @user,
+      user: user,
       address: @address,
       radius_meters: @radius_meters
     )

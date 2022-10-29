@@ -12,7 +12,7 @@ describe BuildAlertService do
       it "returns the original alert" do
         parser_result = described_class.call(
           address: "24 Bruce Rd, Glenbrook",
-          user: create(:user, email: "foo@foo.com"),
+          email: "foo@foo.com",
           radius_meters: 1000
         )
 
@@ -23,7 +23,7 @@ describe BuildAlertService do
       it "geocodes the alert" do
         parser_result = described_class.call(
           address: "24 Bruce Rd, Glenbrook",
-          user: create(:user, email: "foo@foo.com"),
+          email: "foo@foo.com",
           radius_meters: 1000
         )
 
@@ -47,7 +47,7 @@ describe BuildAlertService do
         allow(ConfirmationMailer).to receive(:confirm).with(preexisting_alert).and_call_original
 
         described_class.call(
-          user: create(:user, email: "jenny@example.com"),
+          email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
           radius_meters: 1000
         )
@@ -57,7 +57,7 @@ describe BuildAlertService do
 
       it "returns nil" do
         parser_result = described_class.call(
-          user: create(:user, email: "jenny@example.com"),
+          email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
           radius_meters: 1000
         )
@@ -79,7 +79,7 @@ describe BuildAlertService do
 
       it "returns nil" do
         parser_result = described_class.call(
-          user: create(:user, email: "jenny@example.com"),
+          email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
           radius_meters: 1000
         )
@@ -91,7 +91,7 @@ describe BuildAlertService do
         allow(AlertMailer).to receive(:new_signup_attempt_notice).with(preexisting_alert).and_call_original
 
         described_class.call(
-          user: create(:user, email: "jenny@example.com"),
+          email: "jenny@example.com",
           address: "24 Bruce Rd, Glenbrook",
           radius_meters: 1000
         )
@@ -106,7 +106,7 @@ describe BuildAlertService do
 
         it "returns the new alert" do
           parser_result = described_class.call(
-            user: create(:user, email: "jenny@example.com"),
+            email: "jenny@example.com",
             address: "24 Bruce Rd, Glenbrook",
             radius_meters: 1000
           )
