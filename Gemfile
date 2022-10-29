@@ -71,7 +71,11 @@ gem "foreman"
 gem "recaptcha", require: "recaptcha/rails"
 
 # Site search
-gem "searchkick"
+# Our elasticsearch server is still on version 6. According to the documentation
+# that means we should use 4.6.3 but that causes issues in production with "index_name"
+# TODO: Upgrade our server and remove this lock
+# We're actually locking to even lower version which we were using before
+gem "searchkick", "4.5.2"
 
 # Reporting exceptions
 gem "honeybadger"
@@ -100,7 +104,9 @@ gem "virtus"
 gem "themes_on_rails", git: "https://github.com/openaustralia/themes_on_rails"
 
 # For logging API calls to elasticsearch
-gem "elasticsearch"
+# We can't upgrade elasticsearch gem until we've upgraded the server
+# TODO: Fix this
+gem "elasticsearch", "< 8"
 gem "ruby-progressbar"
 gem "typhoeus"
 
