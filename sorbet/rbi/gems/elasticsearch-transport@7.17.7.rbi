@@ -64,13 +64,13 @@ module Elasticsearch::Loggable
   def log_warn(message); end
 end
 
-# source://elasticsearch/7.17.1/lib/elasticsearch.rb#24
+# source://elasticsearch/7.17.7/lib/elasticsearch.rb#24
 Elasticsearch::NOT_ELASTICSEARCH_WARNING = T.let(T.unsafe(nil), String)
 
-# source://elasticsearch/7.17.1/lib/elasticsearch.rb#25
+# source://elasticsearch/7.17.7/lib/elasticsearch.rb#25
 Elasticsearch::NOT_SUPPORTED_ELASTICSEARCH_WARNING = T.let(T.unsafe(nil), String)
 
-# source://elasticsearch/7.17.1/lib/elasticsearch.rb#23
+# source://elasticsearch/7.17.7/lib/elasticsearch.rb#23
 Elasticsearch::SECURITY_PRIVILEGES_VALIDATION_WARNING = T.let(T.unsafe(nil), String)
 
 # source://elasticsearch-transport//lib/elasticsearch/transport/transport/serializer/multi_json.rb#19
@@ -1288,8 +1288,8 @@ class Elasticsearch::Transport::Transport::SnifferTimeoutError < ::Timeout::Erro
 # source://elasticsearch-transport//lib/elasticsearch/transport/version.rb#20
 Elasticsearch::Transport::VERSION = T.let(T.unsafe(nil), String)
 
-# source://elasticsearch/7.17.1/lib/elasticsearch/version.rb#19
+# source://elasticsearch/7.17.7/lib/elasticsearch/version.rb#19
 Elasticsearch::VERSION = T.let(T.unsafe(nil), String)
 
-# source://elasticsearch/7.17.1/lib/elasticsearch.rb#26
+# source://elasticsearch/7.17.7/lib/elasticsearch.rb#26
 Elasticsearch::YOU_KNOW_FOR_SEARCH = T.let(T.unsafe(nil), String)

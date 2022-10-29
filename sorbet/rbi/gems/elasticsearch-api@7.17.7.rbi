@@ -3356,11 +3356,18 @@ module Elasticsearch::API::Snapshot::Actions
   # @option arguments
   # @option arguments
   # @option arguments
+  # @option arguments
+  # @option arguments
+  # @option arguments
+  # @option arguments
+  # @option arguments
+  # @option arguments
+  # @option arguments
   # @param arguments [Hash] a customizable set of options
   # @raise [ArgumentError]
   # @see https://www.elastic.co/guide/en/elasticsearch/reference/7.17/modules-snapshots.html
   #
-  # source://elasticsearch-api//lib/elasticsearch/api/actions/snapshot/get.rb#35
+  # source://elasticsearch-api//lib/elasticsearch/api/actions/snapshot/get.rb#42
   def get(arguments = T.unsafe(nil)); end
 
   # Returns information about a repository.
@@ -3730,17 +3737,17 @@ end
 # source://elasticsearch-api//lib/elasticsearch/api/version.rb#20
 Elasticsearch::API::VERSION = T.let(T.unsafe(nil), String)
 
-# source://elasticsearch/7.17.1/lib/elasticsearch.rb#24
+# source://elasticsearch/7.17.7/lib/elasticsearch.rb#24
 Elasticsearch::NOT_ELASTICSEARCH_WARNING = T.let(T.unsafe(nil), String)
 
-# source://elasticsearch/7.17.1/lib/elasticsearch.rb#25
+# source://elasticsearch/7.17.7/lib/elasticsearch.rb#25
 Elasticsearch::NOT_SUPPORTED_ELASTICSEARCH_WARNING = T.let(T.unsafe(nil), String)
 
-# source://elasticsearch/7.17.1/lib/elasticsearch.rb#23
+# source://elasticsearch/7.17.7/lib/elasticsearch.rb#23
 Elasticsearch::SECURITY_PRIVILEGES_VALIDATION_WARNING = T.let(T.unsafe(nil), String)
 
-# source://elasticsearch/7.17.1/lib/elasticsearch/version.rb#19
+# source://elasticsearch/7.17.7/lib/elasticsearch/version.rb#19
 Elasticsearch::VERSION = T.let(T.unsafe(nil), String)
 
-# source://elasticsearch/7.17.1/lib/elasticsearch.rb#26
+# source://elasticsearch/7.17.7/lib/elasticsearch.rb#26
 Elasticsearch::YOU_KNOW_FOR_SEARCH = T.let(T.unsafe(nil), String)
