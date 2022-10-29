@@ -568,51 +568,6 @@ class Alert
     sig { void }
     def created_at_will_change!; end
 
-    sig { returns(::String) }
-    def email; end
-
-    sig { params(value: ::String).returns(::String) }
-    def email=(value); end
-
-    sig { returns(T::Boolean) }
-    def email?; end
-
-    sig { returns(T.nilable(::String)) }
-    def email_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def email_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def email_came_from_user?; end
-
-    sig { returns(T.nilable([::String, ::String])) }
-    def email_change; end
-
-    sig { returns(T.nilable([::String, ::String])) }
-    def email_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def email_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def email_in_database; end
-
-    sig { returns(T.nilable([::String, ::String])) }
-    def email_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def email_previously_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def email_previously_was; end
-
-    sig { returns(T.nilable(::String)) }
-    def email_was; end
-
-    sig { void }
-    def email_will_change!; end
-
     sig { returns(T.nilable(::Integer)) }
     def id; end
 
@@ -986,9 +941,6 @@ class Alert
     def restore_created_at!; end
 
     sig { void }
-    def restore_email!; end
-
-    sig { void }
     def restore_id!; end
 
     sig { void }
@@ -1050,12 +1002,6 @@ class Alert
 
     sig { returns(T::Boolean) }
     def saved_change_to_created_at?; end
-
-    sig { returns(T.nilable([::String, ::String])) }
-    def saved_change_to_email; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_email?; end
 
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def saved_change_to_id; end
@@ -1371,9 +1317,6 @@ class Alert
 
     sig { returns(T::Boolean) }
     def will_save_change_to_created_at?; end
-
-    sig { returns(T::Boolean) }
-    def will_save_change_to_email?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_id?; end
