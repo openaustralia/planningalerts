@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_10_24_221033) do
-  create_table "active_admin_comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "active_admin_comments", id: :integer, charset: "utf8mb4", options: "ENGINE=InnoDB DEFAULT COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "resource_id", default: "", null: false
     t.string "resource_type", default: "", null: false
     t.integer "author_id"
@@ -25,7 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_221033) do
     t.index ["resource_type", "resource_id"], name: "index_admin_notes_on_resource_type_and_resource_id"
   end
 
-  create_table "alerts", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "alerts", id: :integer, charset: "utf8mb4", options: "ENGINE=InnoDB DEFAULT COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "email", limit: 120, default: "", null: false
     t.string "address", limit: 120, default: "", null: false
     t.datetime "last_sent", precision: nil
@@ -47,7 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_221033) do
     t.index ["user_id"], name: "fk_rails_d4053234e7"
   end
 
-  create_table "api_keys", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "api_keys", id: :integer, charset: "utf8mb4", options: "ENGINE=InnoDB DEFAULT COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "value", null: false
     t.boolean "bulk", default: false, null: false
@@ -60,7 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_221033) do
     t.index ["value"], name: "index_api_keys_on_value"
   end
 
-  create_table "application_redirects", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "application_redirects", id: :integer, charset: "utf8mb4", options: "ENGINE=InnoDB DEFAULT COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "application_id", null: false
     t.integer "redirect_application_id", null: false
     t.datetime "created_at", precision: nil, null: false
@@ -69,7 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_221033) do
     t.index ["redirect_application_id"], name: "fk_rails_24f1a5992a"
   end
 
-  create_table "application_versions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "application_versions", charset: "utf8mb4", options: "ENGINE=InnoDB DEFAULT COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "application_id", null: false
     t.bigint "previous_version_id"
     t.boolean "current", null: false
@@ -97,7 +97,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_221033) do
     t.index ["suburb"], name: "index_application_versions_on_suburb"
   end
 
-  create_table "applications", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "applications", id: :integer, charset: "utf8mb4", options: "ENGINE=InnoDB DEFAULT COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "council_reference", limit: 50, default: "", null: false
     t.integer "authority_id", null: false
     t.integer "no_alerted"
@@ -107,7 +107,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_221033) do
     t.index ["visible_comments_count"], name: "index_applications_on_visible_comments_count"
   end
 
-  create_table "authorities", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "authorities", id: :integer, charset: "utf8mb4", options: "ENGINE=InnoDB DEFAULT COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "full_name", limit: 200, default: "", null: false
     t.string "short_name", limit: 100, default: "", null: false
     t.boolean "disabled", null: false
@@ -121,7 +121,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_221033) do
     t.index ["short_name"], name: "short_name_unique", unique: true
   end
 
-  create_table "comments", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "comments", id: :integer, charset: "utf8mb4", options: "ENGINE=InnoDB DEFAULT COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.text "text", size: :medium
     t.string "email"
     t.string "name"
@@ -141,7 +141,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_221033) do
     t.index ["hidden"], name: "index_comments_on_hidden"
   end
 
-  create_table "email_batches", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "email_batches", id: :integer, charset: "utf8mb4", options: "ENGINE=InnoDB DEFAULT COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "no_emails", null: false
     t.integer "no_applications", null: false
     t.integer "no_comments", null: false
@@ -150,13 +150,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_221033) do
     t.index ["created_at"], name: "index_email_batches_on_created_at"
   end
 
-  create_table "geocode_queries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "geocode_queries", charset: "utf8mb4", options: "ENGINE=InnoDB DEFAULT COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "query", default: "", null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "geocode_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "geocode_results", charset: "utf8mb4", options: "ENGINE=InnoDB DEFAULT COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "geocoder", default: "", null: false
     t.float "lat"
     t.float "lng"
@@ -170,7 +170,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_221033) do
     t.index ["geocode_query_id"], name: "index_geocode_results_on_geocode_query_id"
   end
 
-  create_table "github_issues", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "github_issues", charset: "utf8mb4", options: "ENGINE=InnoDB DEFAULT COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.integer "authority_id", null: false
     t.string "github_repo", null: false
     t.integer "github_number", null: false
@@ -179,7 +179,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_221033) do
     t.index ["authority_id"], name: "index_github_issues_on_authority_id"
   end
 
-  create_table "reports", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "reports", id: :integer, charset: "utf8mb4", options: "ENGINE=InnoDB DEFAULT COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.text "details", size: :medium
@@ -189,17 +189,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_221033) do
     t.index ["comment_id"], name: "fk_rails_bc3addd41c"
   end
 
-  create_table "site_settings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "site_settings", charset: "utf8mb4", options: "ENGINE=InnoDB DEFAULT COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "settings"
     t.datetime "created_at", precision: nil
   end
 
-  create_table "stats", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "stats", id: :integer, charset: "utf8mb4", options: "ENGINE=InnoDB DEFAULT COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "key", limit: 25, default: "", null: false
     t.integer "value", null: false
   end
 
-  create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
+  create_table "users", id: :integer, charset: "utf8mb4", options: "ENGINE=InnoDB DEFAULT COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", limit: 128, default: "", null: false
     t.string "password_salt", default: "", null: false
