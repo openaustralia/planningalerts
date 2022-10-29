@@ -82,7 +82,6 @@ class LogApiCallService
   def log_to_elasticsearch(key)
     ElasticSearchClient&.index(
       index: elasticsearch_index(time),
-      type: "api",
       body: {
         ip_address: ip_address,
         query: query,
