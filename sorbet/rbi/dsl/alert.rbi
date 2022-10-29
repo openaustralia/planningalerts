@@ -193,6 +193,9 @@ class Alert
 
     sig { params(value: T.nilable(::User)).void }
     def user=(value); end
+
+    sig { params(attributes: T.untyped).returns(T.untyped) }
+    def user_attributes=(attributes); end
   end
 
   module GeneratedAssociationRelationMethods
