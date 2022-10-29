@@ -5,7 +5,8 @@ require "spec_helper"
 describe AlertMailer do
   let(:alert) do
     create(:alert,
-           email: "matthew@openaustralia.org", address: "24 Bruce Rd, Glenbrook NSW 2773",
+           user: create(:user, email: "matthew@openaustralia.org"),
+           address: "24 Bruce Rd, Glenbrook NSW 2773",
            lat: 1.0, lng: 2.0, radius_meters: 800)
   end
 

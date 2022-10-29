@@ -31,7 +31,6 @@ class BuildAlertService
     end
 
     alert = Alert.new(
-      email: @email,
       user: user,
       address: @address,
       radius_meters: @radius_meters
@@ -59,8 +58,11 @@ class BuildAlertService
   # been confirmed yet
   sig { params(alert: Alert).returns(T.nilable(Alert)) }
   def preexisting_alert(alert)
+    user = User.find_by(email: alert.email)
+    return nil if user.nil?
+
     Alert.find_by(
-      email: alert.email,
+      user: user,
       address: alert.address,
       unsubscribed: false
     )

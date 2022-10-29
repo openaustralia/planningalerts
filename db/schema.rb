@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_24_221033) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_29_043757) do
   create_table "active_admin_comments", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", options: "ENGINE=InnoDB ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "resource_id", default: "", null: false
     t.string "resource_type", default: "", null: false
@@ -26,7 +26,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_221033) do
   end
 
   create_table "alerts", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", options: "ENGINE=InnoDB ROW_FORMAT=DYNAMIC", force: :cascade do |t|
-    t.string "email", limit: 120, default: "", null: false
     t.string "address", limit: 120, default: "", null: false
     t.datetime "last_sent", precision: nil
     t.float "lat", limit: 53, null: false
@@ -43,7 +42,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_221033) do
     t.boolean "last_delivered_successfully"
     t.string "unsubscribed_by"
     t.integer "user_id", null: false
-    t.index ["email"], name: "index_alerts_on_email"
     t.index ["user_id"], name: "fk_rails_d4053234e7"
   end
 

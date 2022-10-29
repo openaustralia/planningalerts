@@ -29,7 +29,7 @@ describe "Sign up for alerts" do
     expect(
       Alert.active.find_by(address: "24 Bruce Rd, Glenbrook NSW 2773",
                            radius_meters: "2000",
-                           email: current_email_address)
+                           user: User.find_by(email: current_email_address))
     ).not_to be_nil
   end
 
@@ -134,7 +134,6 @@ describe "Sign up for alerts" do
 
     let!(:preexisting_alert) do
       create(:unconfirmed_alert, address: "24 Bruce Rd, Glenbrook NSW 2773",
-                                 email: "example@example.com",
                                  user: create(:confirmed_user, email: "example@example.com"),
                                  created_at: 3.days.ago,
                                  updated_at: 3.days.ago)
@@ -163,7 +162,6 @@ describe "Sign up for alerts" do
   context "when there is already an confirmed alert for the address" do
     let!(:preexisting_alert) do
       create(:confirmed_alert, address: "24 Bruce Rd, Glenbrook NSW 2773",
-                               email: "jenny@email.org",
                                user: create(:confirmed_user, email: "jenny@email.org"),
                                created_at: 3.days.ago,
                                updated_at: 3.days.ago)

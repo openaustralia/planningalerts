@@ -37,7 +37,7 @@ describe BuildAlertService do
         create(
           :unconfirmed_alert,
           address: "24 Bruce Rd, Glenbrook, VIC 3885",
-          email: "jenny@example.com",
+          user: create(:user, email: "jenny@example.com"),
           created_at: 3.days.ago,
           updated_at: 3.days.ago
         )
@@ -71,7 +71,7 @@ describe BuildAlertService do
         create(
           :confirmed_alert,
           address: "24 Bruce Rd, Glenbrook, VIC 3885",
-          email: "jenny@example.com",
+          user: create(:user, email: "jenny@example.com"),
           created_at: 3.days.ago,
           updated_at: 3.days.ago
         )
