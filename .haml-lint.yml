@@ -32,3 +32,6 @@ linters:
         - Style/WhileUntilModifier
         - Style/StringLiteralsInInterpolation
         - Layout/CommentIndentation
+        - Sorbet/FalseSigil
+        - Sorbet/TrueSigil
+        - Sorbet/StrictSigil
