@@ -788,49 +788,49 @@ class User
     def encrypted_password_will_change!; end
 
     sig { returns(T::Boolean) }
-    def from_alert; end
+    def from_alert_or_comment; end
 
     sig { params(value: T::Boolean).returns(T::Boolean) }
-    def from_alert=(value); end
+    def from_alert_or_comment=(value); end
 
     sig { returns(T::Boolean) }
-    def from_alert?; end
+    def from_alert_or_comment?; end
 
     sig { returns(T.nilable(T::Boolean)) }
-    def from_alert_before_last_save; end
+    def from_alert_or_comment_before_last_save; end
 
     sig { returns(T.untyped) }
-    def from_alert_before_type_cast; end
+    def from_alert_or_comment_before_type_cast; end
 
     sig { returns(T::Boolean) }
-    def from_alert_came_from_user?; end
+    def from_alert_or_comment_came_from_user?; end
 
     sig { returns(T.nilable([T::Boolean, T::Boolean])) }
-    def from_alert_change; end
+    def from_alert_or_comment_change; end
 
     sig { returns(T.nilable([T::Boolean, T::Boolean])) }
-    def from_alert_change_to_be_saved; end
+    def from_alert_or_comment_change_to_be_saved; end
 
     sig { returns(T::Boolean) }
-    def from_alert_changed?; end
+    def from_alert_or_comment_changed?; end
 
     sig { returns(T.nilable(T::Boolean)) }
-    def from_alert_in_database; end
+    def from_alert_or_comment_in_database; end
 
     sig { returns(T.nilable([T::Boolean, T::Boolean])) }
-    def from_alert_previous_change; end
+    def from_alert_or_comment_previous_change; end
 
     sig { returns(T::Boolean) }
-    def from_alert_previously_changed?; end
+    def from_alert_or_comment_previously_changed?; end
 
     sig { returns(T.nilable(T::Boolean)) }
-    def from_alert_previously_was; end
+    def from_alert_or_comment_previously_was; end
 
     sig { returns(T.nilable(T::Boolean)) }
-    def from_alert_was; end
+    def from_alert_or_comment_was; end
 
     sig { void }
-    def from_alert_will_change!; end
+    def from_alert_or_comment_will_change!; end
 
     sig { returns(T.nilable(::Integer)) }
     def id; end
@@ -1310,7 +1310,7 @@ class User
     def restore_encrypted_password!; end
 
     sig { void }
-    def restore_from_alert!; end
+    def restore_from_alert_or_comment!; end
 
     sig { void }
     def restore_id!; end
@@ -1406,10 +1406,10 @@ class User
     def saved_change_to_encrypted_password?; end
 
     sig { returns(T.nilable([T::Boolean, T::Boolean])) }
-    def saved_change_to_from_alert; end
+    def saved_change_to_from_alert_or_comment; end
 
     sig { returns(T::Boolean) }
-    def saved_change_to_from_alert?; end
+    def saved_change_to_from_alert_or_comment?; end
 
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def saved_change_to_id; end
@@ -1652,7 +1652,7 @@ class User
     def will_save_change_to_encrypted_password?; end
 
     sig { returns(T::Boolean) }
-    def will_save_change_to_from_alert?; end
+    def will_save_change_to_from_alert_or_comment?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_id?; end

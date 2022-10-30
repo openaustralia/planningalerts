@@ -66,9 +66,9 @@ namespace :planningalerts do
         user = User.find_by(email: alert.email)
         if user.nil?
           # TODO: We don't want api keys for this new user!
-          # from_alert says that this user was created "from" an alert rather than a user
+          # from_alert_or_comment says that this user was created "from" an alert rather than a user
           # registering an account in the "normal" way
-          user = User.new(email: alert.email, from_alert: true)
+          user = User.new(email: alert.email, from_alert_or_comment: true)
           # Otherwise it would send out a confirmation email on saving the record
           user.skip_confirmation_notification!
           # Disable validation so we can save with an empty password

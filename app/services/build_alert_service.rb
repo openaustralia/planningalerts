@@ -21,9 +21,9 @@ class BuildAlertService
     # Create an unconfirmed user without a password if one doesn't already exist matching the email address
     user = User.find_by(email: @email)
     if user.nil?
-      # from_alert says that this user was created "from" an alert rather than a user
+      # from_alert_or_comment says that this user was created "from" an alert rather than a user
       # registering an account in the "normal" way
-      user = User.new(email: @email, from_alert: true)
+      user = User.new(email: @email, from_alert_or_comment: true)
       # Otherwise it would send out a confirmation email on saving the record
       user.skip_confirmation_notification!
       user.temporarily_allow_empty_password!

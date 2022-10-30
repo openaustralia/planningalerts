@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_29_043757) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_30_220823) do
   create_table "active_admin_comments", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", options: "ENGINE=InnoDB ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "resource_id", default: "", null: false
     t.string "resource_type", default: "", null: false
@@ -133,10 +133,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_043757) do
     t.datetime "confirmed_at", precision: nil
     t.datetime "last_delivered_at", precision: nil
     t.boolean "last_delivered_successfully"
+    t.integer "user_id"
     t.index ["application_id"], name: "index_comments_on_application_id"
     t.index ["confirm_id"], name: "index_comments_on_confirm_id"
     t.index ["confirmed"], name: "index_comments_on_confirmed"
     t.index ["hidden"], name: "index_comments_on_hidden"
+    t.index ["user_id"], name: "fk_rails_03de2dc08c"
   end
 
   create_table "email_batches", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", options: "ENGINE=InnoDB ROW_FORMAT=DYNAMIC", force: :cascade do |t|
@@ -219,7 +221,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_043757) do
     t.datetime "confirmed_at", precision: nil
     t.datetime "confirmation_sent_at", precision: nil
     t.string "unconfirmed_email"
-    t.boolean "from_alert", default: false, null: false, comment: "whether this user was created from an alert rather than through the normal devise registration process"
+    t.boolean "from_alert_or_comment", default: false, null: false, comment: "whether this user was created from an alert or comment rather than through the normal devise registration process"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -232,6 +234,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_29_043757) do
   add_foreign_key "application_versions", "applications"
   add_foreign_key "applications", "authorities", name: "applications_authority_id_fk"
   add_foreign_key "comments", "applications"
+  add_foreign_key "comments", "users"
   add_foreign_key "geocode_results", "geocode_queries"
   add_foreign_key "github_issues", "authorities"
   add_foreign_key "reports", "comments"
