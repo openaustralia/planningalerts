@@ -138,6 +138,8 @@ gem "redcarpet"
 # which we're using for managing the list of broken scrapers
 gem "graphql-client"
 
+gem "tailwindcss-rails", "~> 2.0"
+
 group :test do
   gem "capybara"
   gem "climate_control"

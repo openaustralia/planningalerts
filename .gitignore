@@ -31,3 +31,6 @@ planningalerts-app.sublime-project
 .rakeTasks
 
 .vscode
+
+/app/assets/builds/*
+!/app/assets/builds/.keep

@@ -586,6 +586,8 @@ GEM
     susy (2.2.14)
       sass (>= 3.3.0, < 3.5)
     sysexits (1.2.0)
+    tailwindcss-rails (2.0.16)
+      railties (>= 6.0.0)
     tapioca (0.10.2)
       bundler (>= 1.17.3)
       netrc (>= 0.11.0)
@@ -750,6 +752,7 @@ DEPENDENCIES
   sorbet-runtime
   spoom
   susy
+  tailwindcss-rails (~> 2.0)
   tapioca
   themes_on_rails!
   thin
