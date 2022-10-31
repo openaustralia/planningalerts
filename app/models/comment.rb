@@ -7,8 +7,7 @@ class Comment < ApplicationRecord
   extend T::Sig
 
   belongs_to :application
-  # TODO: Make this NOT optional as soon as we can
-  belongs_to :user, optional: true
+  belongs_to :user
   has_many :reports, dependent: :destroy
 
   validates :name, presence: true

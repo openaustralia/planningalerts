@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_30_220823) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_31_024545) do
   create_table "active_admin_comments", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", options: "ENGINE=InnoDB ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "resource_id", default: "", null: false
     t.string "resource_type", default: "", null: false
@@ -133,7 +133,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_30_220823) do
     t.datetime "confirmed_at", precision: nil
     t.datetime "last_delivered_at", precision: nil
     t.boolean "last_delivered_successfully"
-    t.integer "user_id"
+    t.integer "user_id", null: false
     t.index ["application_id"], name: "index_comments_on_application_id"
     t.index ["confirm_id"], name: "index_comments_on_confirm_id"
     t.index ["confirmed"], name: "index_comments_on_confirmed"
