@@ -1,6 +1,6 @@
 %header
   %h1
-    = link_to ENV["EMAIL_FROM_NAME"], root_path
+    = link_to ENV.fetch("EMAIL_FROM_NAME", nil), root_path
     %small.text-muted Email alerts of planning applications near you
   %p
     = number_to_human(alert_count).downcase
@@ -9,9 +9,9 @@
     = link_to "Skip navigation", "#content", class: "sr-only sr-only-focusable"
     %nav.navbar.navbar-expand-lg.navbar-light.bg-light
       -# %a.navbar-brand{href: "#"} Navbar
-      %button.navbar-toggler{"aria-controls" => "navbarsExample09", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarsExample09", "data-toggle" => "collapse", type: "button"}
+      %button.navbar-toggler{ "aria-controls" => "navbarsExample09", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarsExample09", "data-toggle" => "collapse", type: "button" }
         %span.navbar-toggler-icon
-      #navbarsExample09.collapse.navbar-collapse
+      .collapse.navbar-collapse#navbarsExample09
         %ul.navbar-nav.mr-auto
           = nav_item address_applications_path do
             Search

@@ -1,5 +1,5 @@
 %dt
-  What does #{ENV["EMAIL_FROM_NAME"]} do?
+  What does #{ENV.fetch("EMAIL_FROM_NAME", nil)} do?
 %dd
   It sends you emails of any planning and development applications we find based on the address you give us when you
   sign up.

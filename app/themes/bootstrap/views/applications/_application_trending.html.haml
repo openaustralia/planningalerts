@@ -4,6 +4,6 @@
       .card-body
         In #{application.suburb}, #{application.state}
         the planning application for
-        = truncate(application.description, length: 100, separator: ' ')
+        = truncate(application.description, length: 100, separator: " ")
         was commented on
         = pluralize(application.visible_comments_count, "time")

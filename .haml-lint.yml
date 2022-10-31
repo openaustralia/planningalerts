@@ -2,6 +2,9 @@ linters:
   LineLength:
     enabled: false
 
+  ViewLength:
+    enabled: false
+
   # Another one that we should fix but sometimes it's non-trivial. So,
   # putting aside for the time being
   IdNames:
@@ -22,6 +25,7 @@ linters:
         - Layout/IndentationWidth
         - Layout/TrailingBlankLines
         - Layout/TrailingWhitespace
+        - Layout/TrailingEmptyLines
         - Metrics/BlockLength
         - Metrics/BlockNesting
         - Metrics/LineLength

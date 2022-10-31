@@ -1,5 +1,5 @@
-= link_to application, class: ["list-group-item", "list-group-item-action"] do
-  - if application.visible_comments_count > 0
+= link_to application, class: %w[list-group-item list-group-item-action] do
+  - if application.visible_comments_count.positive?
     .comments= pluralize(application.visible_comments_count, "comment")
   %h4.address= application.address
   .appinfo
