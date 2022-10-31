@@ -6,7 +6,7 @@ class ThemesController < ApplicationController
 
   sig { void }
   def toggle
-    session[:theme] = session[:theme] == "bootstrap" ? "standard" : "bootstrap"
+    session[:theme] = session[:theme] == "tailwind" ? "standard" : "tailwind"
     redirect_to root_url
   end
 end
