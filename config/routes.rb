@@ -113,8 +113,7 @@ Rails.application.routes.draw do
       get :search
       get :trending
     end
-    # TODO: Why is add_comments a separate controller?
-    resources :add_comments, only: [:create]
+    resources :comments, only: [:create]
     resources :versions, only: [:index], controller: "application_versions"
   end
 

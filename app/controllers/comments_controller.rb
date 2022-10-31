@@ -34,6 +34,45 @@ class CommentsController < ApplicationController
   end
 
   sig { void }
+  def create
+    application = Application.find(params[:application_id])
+    @application = T.let(application, T.nilable(Application))
+
+    # First check if the honeypot field has been filled out by a spam bot
+    # If so, make it look like things worked but don't actually do anything
+    return if params[:little_sweety].present?
+
+    comment_params = T.cast(params[:comment], ActionController::Parameters)
+
+    comment = Comment.new(
+      name: comment_params[:name],
+      text: comment_params[:text],
+      address: comment_params[:address],
+      email: comment_params[:email],
+      application: @application
+    )
+    @comment = T.let(comment, T.nilable(Comment))
+
+    if IsEmailAddressBannedService.call(email: T.cast(comment_params[:email], String))
+      flash.now[:error] = "Your email address is not allowed. Please contact us if you think this is in error."
+      # HACK: Required for new email alert signup form
+      @alert = T.let(Alert.new(address: application.address), T.nilable(Alert))
+      render "applications/show"
+      return
+    end
+
+    return if comment.save
+
+    # TODO: This seems to have a lot repeated from Application#show
+    flash.now[:error] = t(".not_filled_out")
+
+    # HACK: Required for new email alert signup form
+    @alert = T.let(Alert.new(address: application.address), T.nilable(Alert))
+
+    render "applications/show"
+  end
+
+  sig { void }
   def confirmed
     @comment = T.let(Comment.find_by(confirm_id: params[:id]), T.nilable(Comment))
     if @comment

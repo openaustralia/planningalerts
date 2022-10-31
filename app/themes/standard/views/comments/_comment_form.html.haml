@@ -1,5 +1,5 @@
 - if application.authority.email.present?
-  = render "comments/comment_form_inputs", application: application, add_comment: add_comment
+  = render "comments/comment_form_inputs", application: application, comment: comment
 - else
   %h4#add-comment Add your own comment
   %p

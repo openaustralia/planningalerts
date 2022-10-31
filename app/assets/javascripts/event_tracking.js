@@ -10,11 +10,11 @@ $( document ).ready(function() {
       ga('send', 'event', 'comments', 'click submit new comment');
     });
 
-    $('#add_comment_text_input .inline-hints a').click(function(e) {
+    $('#comment_text_input .inline-hints a').click(function(e) {
       ga('send', 'event', 'comments', 'click link for info about donation disclosure');
     });
 
-    $('#add_comment_address_input .inline-hints a').click(function(e) {
+    $('#comment_address_input .inline-hints a').click(function(e) {
       ga('send', 'event', 'comments', 'click link for info about why your address is necessay');
     });
 

@@ -75,7 +75,7 @@ module GeneratedUrlHelpersModule
   def api_howto_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def application_add_comments_url(*args); end
+  def application_comments_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def application_url(*args); end

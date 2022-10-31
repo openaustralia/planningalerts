@@ -138,9 +138,9 @@ class ApplicationsController < ApplicationController
     @application = T.let(application, T.nilable(Application))
     @comments = T.let(application.comments.confirmed.order(:confirmed_at), T.untyped)
     @nearby_count = T.let(application.find_all_nearest_or_recent.size, T.nilable(Integer))
-    @add_comment = T.let(AddComment.new(
-                           application: application
-                         ), T.nilable(AddComment))
+    @comment = T.let(Comment.new(
+                       application: application
+                     ), T.nilable(Comment))
     # Required for new email alert signup form
     @alert = Alert.new(address: application.address, user: User.new)
 

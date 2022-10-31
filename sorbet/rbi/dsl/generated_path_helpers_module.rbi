@@ -75,7 +75,7 @@ module GeneratedPathHelpersModule
   def api_howto_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def application_add_comments_path(*args); end
+  def application_comments_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def application_path(*args); end
