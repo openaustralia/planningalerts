@@ -41,10 +41,8 @@ class User < ApplicationRecord
 
   sig { void }
   def validate_email_domain
-    domain = Mail::Address.new(email).domain
+    return unless IsEmailAddressBannedService.call(email: email)
 
-    return if domain != "mailinator.com"
-
-    errors.add(:email, "is not available. Please use another email address.")
+    errors.add(:email, "is not allowed. Please contact us if you think this is in error.")
   end
 end
