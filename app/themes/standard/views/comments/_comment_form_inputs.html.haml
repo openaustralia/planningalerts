@@ -7,7 +7,7 @@
                      placeholder: "Be polite, clear, and to the point so your comment gets listened to.",
                      hint: "Have you made a donation or gift to a Councillor or Council employee? #{link_to("You may need to disclose this", faq_path(anchor: "disclosure"))}.".html_safe,
                      as: :text,
-                     input_html: { rows: "10", required: "required" }
+                     input_html: { rows: "10" }
     .inline-hints.hidden#disclosure_explanation
       = render partial: "static/disclosure_explanation"
     = f.input :name, label: "Your name",
@@ -15,11 +15,12 @@
                      hint: "Please use your real full name if possible.",
                      input_html: { required: "required" }
   = f.inputs id: "comment-detail-inputgroup" do
-    = f.input :email, label: "Your email",
-                      placeholder: "e.g. your@email.com",
-                      hint: "We never display your email address.",
-                      as: :email,
-                      input_html: { required: "required" }
+    = f.semantic_fields_for :user do |user|
+      = user.input :email, label: "Your email",
+                           placeholder: "e.g. your@email.com",
+                           hint: "We never display your email address.",
+                           as: :email,
+                           input_html: { required: "required" }
     = f.input :address, label: "Your street address",
                         placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
                         hint: "We never display your street address. #{link_to("Why do you need my address?", faq_path(anchor: "address"))}".html_safe,

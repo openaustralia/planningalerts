@@ -43,13 +43,15 @@ class CommentsController < ApplicationController
     return if params[:little_sweety].present?
 
     comment_params = T.cast(params[:comment], ActionController::Parameters)
+    user_params = T.cast(comment_params[:user], ActionController::Parameters)
+    email = T.cast(user_params[:email], String)
 
     # Create an unconfirmed user without a password if one doesn't already exist matching the email address
-    user = User.find_by(email: comment_params[:email])
+    user = User.find_by(email: email)
     if user.nil?
       # from_alert_or_comment says that this user was created "from" an alert rather than a user
       # registering an account in the "normal" way
-      user = User.new(email: comment_params[:email], from_alert_or_comment: true)
+      user = User.new(email: email, from_alert_or_comment: true)
       # Otherwise it would send out a confirmation email on saving the record
       user.skip_confirmation_notification!
       user.temporarily_allow_empty_password!
@@ -60,13 +62,13 @@ class CommentsController < ApplicationController
       name: comment_params[:name],
       text: comment_params[:text],
       address: comment_params[:address],
-      email: comment_params[:email],
+      email: email,
       application: @application,
       user: user
     )
     @comment = T.let(comment, T.nilable(Comment))
 
-    if IsEmailAddressBannedService.call(email: T.cast(comment_params[:email], String))
+    if IsEmailAddressBannedService.call(email: email)
       flash.now[:error] = "Your email address is not allowed. Please contact us if you think this is in error."
       # HACK: Required for new email alert signup form
       @alert = T.let(Alert.new(address: application.address), T.nilable(Alert))
