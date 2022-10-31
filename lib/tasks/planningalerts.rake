@@ -81,5 +81,30 @@ namespace :planningalerts do
         progressbar.increment
       end
     end
+
+    desc "Connect comments to users"
+    task connect_comments_to_users: :environment do
+      comments = Comment.where(user: nil)
+      progressbar = ProgressBar.create(total: comments.count, format: "%t %W %E")
+
+      comments.find_each do |comment|
+        # Find an already connected user
+        user = User.find_by(email: comment.email)
+        if user.nil?
+          # from_alert_or_comment says that this user was created "from" an alert rather than a user
+          # registering an account in the "normal" way
+          user = User.new(email: comment.email, from_alert_or_comment: true)
+          # Otherwise it would send out a confirmation email on saving the record
+          user.skip_confirmation_notification!
+          # Disable validation so we can save with an empty password
+          user.save!(validate: false)
+        end
+        # Confirm the user if the comment is already confirmed
+        user.confirm if !user.confirmed? && comment.confirmed?
+
+        comment.update!(user: user)
+        progressbar.increment
+      end
+    end
   end
 end
