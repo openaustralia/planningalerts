@@ -21,6 +21,8 @@ script:
   # Also fail if any static type checking fails
   - bundle exec srb
   - bundle exec rubocop
+  # TODO: Uncomment haml-lint when we've dealt with the errors
+  # - bundle exec haml-lint
   # Also make sure that our tapioca stuff is up to date
   - bin/tapioca gems --verify
   - bin/tapioca dsl --verify --environment=test
