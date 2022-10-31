@@ -15,7 +15,7 @@ class CommentDashboard < Administrate::BaseDashboard
     reports: Field::HasMany,
     id: Field::Number,
     text: Field::Text,
-    email: Field::String,
+    user: Field::BelongsTo,
     name: Field::String,
     confirm_id: Field::String,
     confirmed: YesNoBooleanField,
@@ -45,7 +45,7 @@ class CommentDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = T.let(%i[
     application
     text
-    email
+    user
     name
     confirm_id
     confirmed
@@ -64,7 +64,6 @@ class CommentDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = T.let(%i[
     text
-    email
     name
     address
     hidden
