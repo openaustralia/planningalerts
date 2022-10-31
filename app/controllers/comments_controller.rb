@@ -44,12 +44,25 @@ class CommentsController < ApplicationController
 
     comment_params = T.cast(params[:comment], ActionController::Parameters)
 
+    # Create an unconfirmed user without a password if one doesn't already exist matching the email address
+    user = User.find_by(email: comment_params[:email])
+    if user.nil?
+      # from_alert_or_comment says that this user was created "from" an alert rather than a user
+      # registering an account in the "normal" way
+      user = User.new(email: comment_params[:email], from_alert_or_comment: true)
+      # Otherwise it would send out a confirmation email on saving the record
+      user.skip_confirmation_notification!
+      user.temporarily_allow_empty_password!
+      # We're not saving the new user record until the alert has validated
+    end
+
     comment = Comment.new(
       name: comment_params[:name],
       text: comment_params[:text],
       address: comment_params[:address],
       email: comment_params[:email],
-      application: @application
+      application: @application,
+      user: user
     )
     @comment = T.let(comment, T.nilable(Comment))
 
@@ -77,6 +90,11 @@ class CommentsController < ApplicationController
     @comment = T.let(Comment.find_by(confirm_id: params[:id]), T.nilable(Comment))
     if @comment
       @comment.confirm!
+
+      # Confirm the attached user if it isn't already confirmed
+      user = @comment.user
+      user.confirm if user && !user.confirmed?
+
       redirect_to @comment.application, notice: render_to_string(partial: "confirmed", locals: { comment: @comment })
     else
       render plain: "", status: :not_found

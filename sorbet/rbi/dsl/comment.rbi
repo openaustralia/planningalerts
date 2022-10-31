@@ -185,14 +185,26 @@ class Comment
     sig { params(args: T.untyped, blk: T.untyped).returns(::Application) }
     def build_application(*args, &blk); end
 
+    sig { params(args: T.untyped, blk: T.untyped).returns(::User) }
+    def build_user(*args, &blk); end
+
     sig { params(args: T.untyped, blk: T.untyped).returns(::Application) }
     def create_application(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(::Application) }
     def create_application!(*args, &blk); end
 
+    sig { params(args: T.untyped, blk: T.untyped).returns(::User) }
+    def create_user(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(::User) }
+    def create_user!(*args, &blk); end
+
     sig { returns(T.nilable(::Application)) }
     def reload_application; end
+
+    sig { returns(T.nilable(::User)) }
+    def reload_user; end
 
     sig { returns(T::Array[T.untyped]) }
     def report_ids; end
@@ -205,6 +217,12 @@ class Comment
 
     sig { params(value: T::Enumerable[::Report]).void }
     def reports=(value); end
+
+    sig { returns(T.nilable(::User)) }
+    def user; end
+
+    sig { params(value: T.nilable(::User)).void }
+    def user=(value); end
   end
 
   module GeneratedAssociationRelationMethods
