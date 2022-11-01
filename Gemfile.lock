@@ -85,7 +85,7 @@ GEM
       sassc-rails (~> 2.1)
       selectize-rails (~> 0.6)
     ast (2.4.2)
-    atdis (0.5.0)
+    atdis (0.5.1)
       activemodel
       activesupport
       multi_json (~> 1.7)
