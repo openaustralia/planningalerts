@@ -94,7 +94,6 @@ FactoryBot.define do
   end
 
   factory :comment do
-    email { "matthew@openaustralia.org" }
     user
     name { "Matthew Landauer" }
     text { "a comment" }

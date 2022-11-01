@@ -109,7 +109,7 @@ describe "Give feedback" do
   end
 
   it "Reporting abuse on a confirmed comment" do
-    comment = create(:confirmed_comment, text: "I'm saying something abusive", name: "Jack Rude", email: "rude@foo.com", id: "23")
+    comment = create(:confirmed_comment, text: "I'm saying something abusive", name: "Jack Rude", user: create(:user, email: "rude@foo.com"), id: "23")
     visit(new_comment_report_path(comment))
 
     fill_in("Your name", with: "Joe Reporter")

@@ -63,7 +63,6 @@ class CommentsController < ApplicationController
       name: params_comment[:name],
       text: params_comment[:text],
       address: params_comment[:address],
-      email: email,
       application: @application,
       user: user
     )

@@ -8,7 +8,7 @@ describe ReportMailer do
           application: create(:geocoded_application, id: 2),
           text: "I'm saying something abusive",
           name: "Jack Rude",
-          email: "rude@foo.com",
+          user: create(:user, email: "rude@foo.com"),
           id: "23")
   end
 
