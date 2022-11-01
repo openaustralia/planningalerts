@@ -16,8 +16,6 @@ class Comment < ApplicationRecord
   validates :name, presence: true
   validates :text, presence: true
   validates :address, presence: true
-  validates :email, presence: true
-  validates_email_format_of :email, on: :create
 
   before_create :set_confirm_info
   # Doing after_commit instead after_create so that sidekiq doesn't try
@@ -28,6 +26,8 @@ class Comment < ApplicationRecord
   scope(:confirmed, -> { where(confirmed: true) })
   scope(:visible, -> { where(confirmed: true, hidden: false) })
   scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
+
+  delegate :email, to: :user
 
   counter_culture :application,
                   column_name: proc { |comment| comment.visible? ? "visible_comments_count" : nil },
