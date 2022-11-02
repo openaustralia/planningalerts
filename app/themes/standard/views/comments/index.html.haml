@@ -2,5 +2,6 @@
 %h1.page-title= @description
 = paginate @comments
 %ol#comments
-  = render partial: "comment", collection: @comments, locals: { in_list: true, with_address: true }
+  - @comments.each do |comment|
+    %li= render comment, in_list: false, with_address: true
 = paginate @comments

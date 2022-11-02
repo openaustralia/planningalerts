@@ -19,7 +19,7 @@ describe "comments/_comment" do
                      application: application)
     expected_html = "<blockquote class='comment-text'><p>This is a link to <a href=\"http://openaustralia.org\" rel=\"nofollow\">openaustralia.org</a></p></blockquote>"
 
-    render comment, in_list: false, with_address: false
+    render comment, with_address: false
 
     expect(rendered).to include(expected_html)
   end
@@ -33,7 +33,7 @@ describe "comments/_comment" do
 
 <p>This is a new paragraph</p></blockquote>"
 
-    render comment, in_list: false, with_address: false
+    render comment, with_address: false
 
     expect(rendered).to include(expected_html)
   end
@@ -44,7 +44,7 @@ describe "comments/_comment" do
                      application: application)
     expected_html = "<blockquote class='comment-text'><p><a rel=\"nofollow\">A nasty link</a></p></blockquote>"
 
-    render comment, in_list: false, with_address: false
+    render comment, with_address: false
 
     expect(rendered).to include(expected_html)
   end
