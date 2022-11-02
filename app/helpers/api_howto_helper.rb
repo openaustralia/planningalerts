@@ -134,9 +134,16 @@ module ApiHowtoHelper
     htmlify(t)
   end
 
-  sig { params(format: String, key: T.nilable(String)).returns(String) }
-  def api_example_postcode_url_html(format, key)
-    t = api_example_postcode_url(format, key || "22", "11")
+  sig do
+    params(
+      format: String,
+      key: T.nilable(String),
+      postcode: T.nilable(String),
+      extra_params: T::Hash[Symbol, T.any(String, Integer)]
+    ).returns(String)
+  end
+  def api_example_postcode_url_html(format, key, postcode = nil, extra_params = {})
+    t = api_example_postcode_url(format, key || "22", postcode || "11", extra_params)
     t = t.sub("11", "[postcode]")
     t = t.sub("22", "[key]") if key.nil?
     htmlify(t)
