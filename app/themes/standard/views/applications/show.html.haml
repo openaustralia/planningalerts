@@ -24,20 +24,8 @@
       %header
         %h3.address= @application.address
 
-      - if SiteSetting.get(:streetview_in_app_enabled)
-        - if @application.location
-          #map_div{ data: { latitude: @application.lat, longitude: @application.lng, address: @application.address } }
-            %noscript= google_static_map(@application, size: "350x330")
-
-        .details
-          - if @application.location
-            #pano{ data: { latitude: @application.lat, longitude: @application.lng, address: @application.address } }
-              %noscript= google_static_streetview(@application, size: "350x330")
-      - elsif @application.location
-        -# If just showing the map make it twice as wide
-        .double#map_div{ data: { latitude: @application.lat, longitude: @application.lng, address: @application.address } }
-          %noscript= google_static_map(@application, size: "700x330")
-
+      -# TODO: Weird that the line below fails a test if it's just "map" rather than "applications/map"
+      = render "applications/map", application: @application
 
       %p.description= @application.description
       = link_to @application.info_url, class: "button button-rounded", target: "_blank", rel: "noopener" do
