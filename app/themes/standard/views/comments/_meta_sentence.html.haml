@@ -1,4 +1,6 @@
-%span.comment-author= comment.name
+- if comment.visible?
+  %span.comment-author= comment.name
+
 %span.comment-time-block
   commented
   = link_to comment_path(comment), title: "View comment" do

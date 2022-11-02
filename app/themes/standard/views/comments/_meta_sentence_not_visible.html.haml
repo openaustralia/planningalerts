@@ -1,5 +1,0 @@
-%span.comment-time-block
-  commented
-  = link_to comment_path(comment), title: "View comment" do
-    %time.comment-time{ datetime: comment.confirmed_at.strftime("%F") }
-      #{time_ago_in_words(comment.confirmed_at)} ago

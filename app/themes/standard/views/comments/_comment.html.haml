@@ -2,10 +2,7 @@
   = render "comments/location_heading", comment: comment if with_address
   .panel-body
     %figcaption.comment-meta.comment-heading
-      - if comment.visible?
-        = render "comments/meta_sentence", comment: comment
-      - else
-        = render "comments/meta_sentence_not_visible", comment: comment
+      = render "comments/meta_sentence", comment: comment
 
     %blockquote.comment-text
       - if comment.visible?
