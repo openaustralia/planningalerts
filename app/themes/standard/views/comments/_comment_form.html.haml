@@ -1,4 +1,6 @@
 - if application.authority.email.present?
+  %h4#add-comment Have your say on this application
+  = render "comments/comment_form_introduction", application: application
   = render "comments/comment_form_inputs", application: application, comment: comment
 - else
   %h4#add-comment Add your own comment
