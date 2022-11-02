@@ -7,10 +7,7 @@
     %meta{ name: "Description", content: yield(:meta_description) }
 
   %title
-    - if yield(:page_title) != ""
-      = yield(:page_title)
-    - else
-      Email alerts of planning applications near you
+    = yield(:page_title).presence || "Email alerts of planning applications near you"
     | PlanningAlerts
 
   - if rss

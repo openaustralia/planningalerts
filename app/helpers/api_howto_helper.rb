@@ -11,7 +11,13 @@ module ApiHowtoHelper
 
   sig { params(url: String).returns(String) }
   def htmlify(url)
-    url.gsub(/(\?|&|&amp;)([a-z_]+)=/, '\1<strong>\2</strong>=').gsub("&", "&amp;")
+    # Sorry about this ugly and longwinded way of doing this
+    first, query_text = url.split("?")
+    query_htmlified = Rack::Utils.parse_nested_query(query_text).map do |key, value|
+      safe_join([content_tag(:strong, key), "=", value])
+    end
+    query = safe_join(query_htmlified, "&")
+    safe_join([first, "?", query])
   end
 
   sig { returns(T.nilable(String)) }
@@ -128,9 +134,16 @@ module ApiHowtoHelper
     htmlify(t)
   end
 
-  sig { params(format: String, key: T.nilable(String)).returns(String) }
-  def api_example_postcode_url_html(format, key)
-    t = api_example_postcode_url(format, key || "22", "11")
+  sig do
+    params(
+      format: String,
+      key: T.nilable(String),
+      postcode: T.nilable(String),
+      extra_params: T::Hash[Symbol, T.any(String, Integer)]
+    ).returns(String)
+  end
+  def api_example_postcode_url_html(format, key, postcode = nil, extra_params = {})
+    t = api_example_postcode_url(format, key || "22", postcode || "11", extra_params)
     t = t.sub("11", "[postcode]")
     t = t.sub("22", "[key]") if key.nil?
     htmlify(t)

@@ -42,9 +42,10 @@ class CommentsController < ApplicationController
     # If so, make it look like things worked but don't actually do anything
     return if params[:little_sweety].present?
 
-    comment_params = T.cast(params[:comment], ActionController::Parameters)
-    user_params = T.cast(comment_params[:user], ActionController::Parameters)
-    email = T.cast(user_params[:email], String)
+    params_comment = T.cast(params[:comment], ActionController::Parameters)
+    params_comment_user_attributes = T.cast(params_comment[:user_attributes], ActionController::Parameters)
+
+    email = T.cast(params_comment_user_attributes[:email], String)
 
     # Create an unconfirmed user without a password if one doesn't already exist matching the email address
     user = User.find_by(email: email)
@@ -59,22 +60,13 @@ class CommentsController < ApplicationController
     end
 
     comment = Comment.new(
-      name: comment_params[:name],
-      text: comment_params[:text],
-      address: comment_params[:address],
-      email: email,
+      name: params_comment[:name],
+      text: params_comment[:text],
+      address: params_comment[:address],
       application: @application,
       user: user
     )
     @comment = T.let(comment, T.nilable(Comment))
-
-    if IsEmailAddressBannedService.call(email: email)
-      flash.now[:error] = "Your email address is not allowed. Please contact us if you think this is in error."
-      # HACK: Required for new email alert signup form
-      @alert = T.let(Alert.new(address: application.address), T.nilable(Alert))
-      render "applications/show"
-      return
-    end
 
     return if comment.save
 

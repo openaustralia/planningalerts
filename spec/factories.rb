@@ -86,15 +86,7 @@ FactoryBot.define do
     association :redirect_application, factory: :application_with_no_version
   end
 
-  factory :add_comment do
-    email { "matthew@openaustralia.org" }
-    name { "Matthew Landauer" }
-    text { "a comment" }
-    address { "12 Foo Street" }
-  end
-
   factory :comment do
-    email { "matthew@openaustralia.org" }
     user
     name { "Matthew Landauer" }
     text { "a comment" }

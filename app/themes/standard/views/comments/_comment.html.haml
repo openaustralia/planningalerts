@@ -1,5 +1,42 @@
-- if in_list
-  %li
-    = render "comments/comment_item", comment: comment, with_address: with_address
-- else
-  = render "comments/comment_item", comment: comment, with_address: with_address
+%figure.comment-item.panel{ id: "comment#{comment.id}" }
+  = render "comments/location_heading", comment: comment if with_address
+  .panel-body
+    %figcaption.comment-meta.comment-heading
+      = render "comments/meta_sentence", comment: comment
+
+    %blockquote.comment-text
+      - if comment.visible?
+        = comment_as_html(comment.text)
+      - else
+        %em Hidden by site administrators
+
+    - if comment.visible?
+      %footer
+        %p.comment-meta
+          - if comment.last_delivered_successfully.nil?
+            sent to the planning authority
+          - elsif comment.last_delivered_successfully
+            = link_to "delivered to the planning authority", { anchor: "delivery-info-#{comment.id}" }, class: "hideable", data: { target: "#delivery-info-#{comment.id}" }
+          - else
+            = link_to "there was a problem delivering this to the planning authority", { anchor: "delivery-info-#{comment.id}" }, class: "hideable", data: { target: "#delivery-info-#{comment.id}" }
+
+        %p.comment-meta.hidden{ id: "delivery-info-#{comment.id}" }
+          - if comment.last_delivered_successfully.nil?
+            -#
+              Don't display any extra message if the comment has been sent but not yet delivered
+              Do we want to stick with this?
+          - elsif comment.last_delivered_successfully
+            This comment was successfully delivered to the
+            email server of
+            = comment.application.authority.full_name
+            at
+            = comment.last_delivered_at
+          - else
+            The comment was hard bounced by the email server of
+            = comment.application.authority.full_name
+            at
+            = comment.last_delivered_at
+            Please follow up by emailing us at contact@planningalerts.org.au so
+            that we can try to help resolve this issue
+
+        .comment-actions= render "comments/actions", comment: comment

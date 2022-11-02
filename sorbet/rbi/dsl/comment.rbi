@@ -223,6 +223,9 @@ class Comment
 
     sig { params(value: T.nilable(::User)).void }
     def user=(value); end
+
+    sig { params(attributes: T.untyped).returns(T.untyped) }
+    def user_attributes=(attributes); end
   end
 
   module GeneratedAssociationRelationMethods
@@ -685,51 +688,6 @@ class Comment
     sig { void }
     def created_at_will_change!; end
 
-    sig { returns(T.nilable(::String)) }
-    def email; end
-
-    sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
-    def email=(value); end
-
-    sig { returns(T::Boolean) }
-    def email?; end
-
-    sig { returns(T.nilable(::String)) }
-    def email_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def email_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def email_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def email_change; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def email_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def email_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def email_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def email_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def email_previously_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def email_previously_was; end
-
-    sig { returns(T.nilable(::String)) }
-    def email_was; end
-
-    sig { void }
-    def email_will_change!; end
-
     sig { returns(T::Boolean) }
     def hidden; end
 
@@ -974,9 +932,6 @@ class Comment
     def restore_created_at!; end
 
     sig { void }
-    def restore_email!; end
-
-    sig { void }
     def restore_hidden!; end
 
     sig { void }
@@ -1035,12 +990,6 @@ class Comment
 
     sig { returns(T::Boolean) }
     def saved_change_to_created_at?; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def saved_change_to_email; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_email?; end
 
     sig { returns(T.nilable([T::Boolean, T::Boolean])) }
     def saved_change_to_hidden; end
@@ -1242,9 +1191,6 @@ class Comment
 
     sig { returns(T::Boolean) }
     def will_save_change_to_created_at?; end
-
-    sig { returns(T::Boolean) }
-    def will_save_change_to_email?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_hidden?; end

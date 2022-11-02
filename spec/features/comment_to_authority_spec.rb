@@ -20,7 +20,7 @@ describe "Give feedback" do
     application = create(:geocoded_application, id: "1", authority: authority)
     visit(application_path(application))
 
-    fill_in("Have your say on this application", with: "I think this is a really good idea")
+    fill_in("Your comment", with: "I think this is a really good idea")
     fill_in("Your name", with: "Matthew Landauer")
     fill_in("Your email", with: "example@example.com")
     # Don't fill in the address
@@ -41,7 +41,7 @@ describe "Give feedback" do
     it "Adding a comment" do
       visit(application_path(application))
 
-      fill_in("Have your say on this application", with: "I think this is a really good ideas")
+      fill_in("Your comment", with: "I think this is a really good ideas")
       fill_in("Your name", with: "Matthew Landauer")
       fill_in("Your email", with: "example@example.com")
       fill_in("Your street address", with: "11 Foo Street")
@@ -109,7 +109,7 @@ describe "Give feedback" do
   end
 
   it "Reporting abuse on a confirmed comment" do
-    comment = create(:confirmed_comment, text: "I'm saying something abusive", name: "Jack Rude", email: "rude@foo.com", id: "23")
+    comment = create(:confirmed_comment, text: "I'm saying something abusive", name: "Jack Rude", user: create(:user, email: "rude@foo.com"), id: "23")
     visit(new_comment_report_path(comment))
 
     fill_in("Your name", with: "Joe Reporter")
@@ -137,7 +137,7 @@ describe "Give feedback" do
       application = create(:geocoded_application, id: "1", authority: authority)
       visit(application_path(application))
 
-      fill_in("Have your say on this application", with: "I think this is a really good idea")
+      fill_in("Your comment", with: "I think this is a really good idea")
       fill_in("Your name", with: "Matthew Landauer")
       fill_in("Your email", with: "example@example.com")
       # Don't fill in the address

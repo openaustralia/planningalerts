@@ -8,4 +8,6 @@
     - else
       #{time_ago_in_words(application.first_date_scraped)} ago
   .description
+    -# rubocop:disable Rails/OutputSafety
     = application.respond_to?(:excerpts) && application.excerpts ? application.excerpts.description.html_safe : application.description
+    -# rubocop:enable Rails/OutputSafety

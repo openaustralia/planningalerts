@@ -45,6 +45,10 @@
   [aria-hidden="true"] {
     display: none;
   }
+
+  #comment_text_input label {
+    display: none;
+  }
 }
 
 #comment-base-inputgroup {
