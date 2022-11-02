@@ -28,7 +28,10 @@ Rails.application.configure do
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = Uglifier.new(harmony: true)
   # Compress CSS using a preprocessor.
-  # config.assets.css_compressor = :sass
+  # Disabling css compressor as workaround to be able to deploy tailwind in production. See 
+  # https://github.com/tailwindlabs/tailwindcss/discussions/6738#discussioncomment-2010199
+  # TODO: Come up with a "better" solution if there is one
+  config.assets.css_compressor = nil
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
