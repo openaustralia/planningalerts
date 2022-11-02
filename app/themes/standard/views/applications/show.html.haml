@@ -48,7 +48,15 @@
         %p.dates= scraped_and_received_text(@application)
         %p.source (Source: #{link_to @application.authority.full_name, authority_path(@application.authority.short_name_encoded)}, reference #{@application.council_reference})
 
-      = render "comments/comments_area", comments: @comments, application: @application, comment: @comment
+      #comments-area
+        - if @comments.present?
+          %h4= pluralize(@comments.count, "Comment")
+          %p.small.quiet
+            Have your say by #{link_to "adding your own comment", "#add-comment", class: "link-to-comment-form"}.
+          %ol#comments
+            - @comments.each do |comment|
+              %li= render comment, with_address: false
+        = render "comments/comment_form", application: @application, comment: @comment
 
 #sidebar
   #alert
