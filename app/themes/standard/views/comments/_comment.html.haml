@@ -1,6 +1,6 @@
 - if comment.visible?
   %figure.comment-item.panel{ id: "comment#{comment.id}" }
-    = render "comments/comment_location_heading", comment: comment if with_address
+    = render "comments/location_heading", comment: comment if with_address
     .panel-body
       %figcaption.comment-meta.comment-heading
         = render "comments/comment_meta_sentence", comment: comment
@@ -36,7 +36,7 @@
         .comment-actions= render "comments/actions", comment: comment
 - else
   %figure.comment-item.panel{ id: "comment#{comment.id}" }
-    = render "comments/comment_location_heading", comment: comment if with_address
+    = render "comments/location_heading", comment: comment if with_address
     .panel-body
       %figcaption.comment-meta.comment-heading
         %span.comment-time-block
