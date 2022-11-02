@@ -3,7 +3,7 @@
     = render "comments/location_heading", comment: comment if with_address
     .panel-body
       %figcaption.comment-meta.comment-heading
-        = render "comments/comment_meta_sentence", comment: comment
+        = render "comments/meta_sentence", comment: comment
       %blockquote.comment-text= comment_as_html(comment.text)
       %footer
         %p.comment-meta
