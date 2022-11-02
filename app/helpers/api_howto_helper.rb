@@ -11,7 +11,13 @@ module ApiHowtoHelper
 
   sig { params(url: String).returns(String) }
   def htmlify(url)
-    url.gsub(/(\?|&|&amp;)([a-z_]+)=/, '\1<strong>\2</strong>=').gsub("&", "&amp;")
+    # Sorry about this ugly and longwinded way of doing this
+    first, query_text = url.split("?")
+    query_htmlified = Rack::Utils.parse_nested_query(query_text).map do |key, value|
+      safe_join([content_tag(:strong, key), "=", value])
+    end
+    query = safe_join(query_htmlified, "&")
+    safe_join([first, "?", query])
   end
 
   sig { returns(T.nilable(String)) }
