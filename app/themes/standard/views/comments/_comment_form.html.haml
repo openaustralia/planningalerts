@@ -1,7 +1,0 @@
-%h4#add-comment Have your say on this application
-
-- if application.authority.email.present?
-  = render "comments/comment_form_introduction", application: application
-  = render "comments/comment_form_inputs", application: application, comment: comment
-- else
-  = render "comments/no_authority_email_explanation", application: application
