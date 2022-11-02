@@ -1,10 +1,19 @@
 %figure.comment-item.panel{ id: "comment#{comment.id}" }
   = render "comments/location_heading", comment: comment if with_address
   .panel-body
-    - if comment.visible?
-      %figcaption.comment-meta.comment-heading
+    %figcaption.comment-meta.comment-heading
+      - if comment.visible?
         = render "comments/meta_sentence", comment: comment
-      %blockquote.comment-text= comment_as_html(comment.text)
+      - else
+        = render "comments/meta_sentence_not_visible", comment: comment
+
+    %blockquote.comment-text
+      - if comment.visible?
+        = comment_as_html(comment.text)
+      - else
+        %em Hidden by site administrators
+
+    - if comment.visible?
       %footer
         %p.comment-meta
           - if comment.last_delivered_successfully.nil?
@@ -34,8 +43,3 @@
             that we can try to help resolve this issue
 
         .comment-actions= render "comments/actions", comment: comment
-    - else
-      %figcaption.comment-meta.comment-heading
-        = render "comments/meta_sentence_not_visible", comment: comment
-      %blockquote.comment-text
-        %em Hidden by site administrators
