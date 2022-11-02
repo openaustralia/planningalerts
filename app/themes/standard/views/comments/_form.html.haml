@@ -1,10 +1,12 @@
 = semantic_form_for [application, comment] do |f|
   = f.inputs id: "comment-base-inputgroup" do
+    -# rubocop:disable Rails/OutputSafety
     = f.input :text, label: "Your comment",
                      placeholder: "Be polite, clear, and to the point so your comment gets listened to.",
                      hint: "Have you made a donation or gift to a Councillor or Council employee? #{link_to("You may need to disclose this", faq_path(anchor: "disclosure"))}.".html_safe,
                      as: :text,
                      input_html: { rows: "10" }
+    -# rubocop:enable Rails/OutputSafety
     .inline-hints.hidden#disclosure_explanation
       = render partial: "static/disclosure_explanation"
     = f.input :name, label: "Your name",
@@ -18,10 +20,12 @@
                            hint: "We never display your email address.",
                            as: :email,
                            input_html: { required: "required" }
+    -# rubocop:disable Rails/OutputSafety
     = f.input :address, label: "Your street address",
                         placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
                         hint: "We never display your street address. #{link_to("Why do you need my address?", faq_path(anchor: "address"))}".html_safe,
                         input_html: { required: "required" }
+    -# rubocop:enable Rails/OutputSafety
     .inline-hints.hidden#faq_commenting_address
       = render partial: "static/faq_commenting_address"
     -#
