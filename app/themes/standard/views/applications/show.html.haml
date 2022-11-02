@@ -59,7 +59,7 @@
 
         %h4#add-comment Have your say on this application
         - if @application.authority.email.present?
-          = render "comments/comment_form_introduction", application: @application
+          = render "comments/form_introduction", application: @application
           = render "comments/form", application: @application, comment: @comment
         - else
           = render "comments/no_authority_email_explanation", application: @application
