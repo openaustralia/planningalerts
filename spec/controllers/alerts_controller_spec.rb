@@ -46,16 +46,16 @@ describe AlertsController do
     end
   end
 
-  describe "#area" do
+  describe "#edit_area" do
     it "404S if the alert can't be found" do
       expect do
-        get :area, params: { id: "38457982345874" }
+        get :edit_area, params: { id: "38457982345874" }
       end.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     it "supports head requests" do
       alert = create(:confirmed_alert)
-      head :area, params: { id: alert.confirm_id }
+      head :edit_area, params: { id: alert.confirm_id }
       expect(response).to be_successful
     end
   end

@@ -60,22 +60,26 @@ class AlertsController < ApplicationController
     @alert&.unsubscribe!
   end
 
-  # TODO: Split this into two actions
   sig { void }
-  def area
-    params_size = T.cast(params[:size], T.nilable(String))
+  def edit_area
+    alert = Alert.find_by!(confirm_id: params[:id])
 
     @zone_sizes = T.let(zone_sizes, T.nilable(T::Hash[String, Integer]))
-    alert = Alert.find_by!(confirm_id: params[:id])
     @alert = T.let(alert, T.nilable(Alert))
-    if request.get? || request.head?
-      @size = T.let(zone_sizes.invert[alert.radius_meters], T.nilable(String))
-    else
-      # TODO: If we seperate this action into two then we won't need to use T.must here
-      alert.radius_meters = T.must(zone_sizes[T.must(params_size)])
-      alert.save!
-      render "area_updated"
-    end
+    @size = T.let(zone_sizes.invert[alert.radius_meters], T.nilable(String))
+    render "area"
+  end
+
+  sig { void }
+  def update_area
+    params_size = T.cast(params[:size], String)
+
+    alert = Alert.find_by!(confirm_id: params[:id])
+    alert.radius_meters = T.must(zone_sizes[params_size])
+    alert.save!
+
+    @alert = T.let(alert, T.nilable(Alert))
+    render "area_updated"
   end
 
   private
