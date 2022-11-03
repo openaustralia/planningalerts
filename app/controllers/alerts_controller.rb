@@ -67,7 +67,6 @@ class AlertsController < ApplicationController
     @zone_sizes = T.let(zone_sizes, T.nilable(T::Hash[String, Integer]))
     @alert = T.let(alert, T.nilable(Alert))
     @size = T.let(zone_sizes.invert[alert.radius_meters], T.nilable(String))
-    render "area"
   end
 
   sig { void }
@@ -79,7 +78,6 @@ class AlertsController < ApplicationController
     alert.save!
 
     @alert = T.let(alert, T.nilable(Alert))
-    render "area_updated"
   end
 
   private
