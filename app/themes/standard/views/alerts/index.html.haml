@@ -24,5 +24,7 @@
       %td= alert.last_delivered_successfully
       %td
         = button_to "Unsubscribe", unsubscribe_alert_path(id: alert.confirm_id), method: :get, class: "button button-action"
+      %td
+        = link_to "Change size", area_alert_path(id: alert.confirm_id)
 
 = link_to "Create new alert", new_alert_path(email: current_user.email)
