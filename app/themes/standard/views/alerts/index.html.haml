@@ -1,0 +1,28 @@
+%h2 Your active alerts
+%dl
+
+%table
+  %thead
+    %th Address
+    %th Radius (km)
+    %th Created
+    %th Last delivered
+    %th Last delivered successfully
+  %tbody
+  - @alerts.each do |alert|
+    %tr
+      %td= alert.address
+      %td= alert.radius_km
+      %td
+        = time_ago_in_words(alert.created_at)
+        ago
+      %td= alert.last_sent
+      %td
+        - if alert.last_delivered_at
+          = time_ago_in_words(alert.last_delivered_at)
+          ago
+      %td= alert.last_delivered_successfully
+      %td
+        = button_to "Unsubscribe", unsubscribe_alert_path(id: alert.confirm_id), method: :get, class: "button button-action"
+
+= link_to "Create new alert", new_alert_path(email: current_user.email)

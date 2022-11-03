@@ -4,6 +4,13 @@
 class AlertsController < ApplicationController
   extend T::Sig
 
+  before_action :authenticate_user!, only: :index
+
+  sig { void }
+  def index
+    @alerts = T.let(T.must(current_user).alerts.active, T.nilable(ActiveRecord::AssociationRelation))
+  end
+
   sig { void }
   def new
     user = User.new(email: params[:email])
