@@ -46,7 +46,7 @@ class AlertsController < ApplicationController
 
   sig { void }
   def confirmed
-    @alert = Alert.find_by!(confirm_id: params[:id])
+    @alert = Alert.find_by!(confirm_id: params[:confirm_id])
     @alert.confirm!
 
     # Confirm the attached user if it isn't already confirmed
@@ -56,13 +56,13 @@ class AlertsController < ApplicationController
 
   sig { void }
   def unsubscribe
-    @alert = Alert.find_by(confirm_id: params[:id])
+    @alert = Alert.find_by(confirm_id: params[:confirm_id])
     @alert&.unsubscribe!
   end
 
   sig { void }
   def edit_area
-    alert = Alert.find_by!(confirm_id: params[:id])
+    alert = Alert.find_by!(confirm_id: params[:confirm_id])
 
     @zone_sizes = T.let(zone_sizes, T.nilable(T::Hash[String, Integer]))
     @alert = T.let(alert, T.nilable(Alert))
@@ -73,7 +73,7 @@ class AlertsController < ApplicationController
   def update_area
     params_size = T.cast(params[:size], String)
 
-    alert = Alert.find_by!(confirm_id: params[:id])
+    alert = Alert.find_by!(confirm_id: params[:confirm_id])
     alert.radius_meters = T.must(zone_sizes[params_size])
     alert.save!
 

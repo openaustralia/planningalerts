@@ -75,7 +75,7 @@ Rails.application.routes.draw do
     resources :api_keys, only: :create
   end
 
-  resources :alerts, only: %i[new create index], path_names: { new: "signup" } do
+  resources :alerts, only: %i[new create index], path_names: { new: "signup" }, param: :confirm_id do
     member do
       get :confirmed
       get "area" => "alerts#edit_area"

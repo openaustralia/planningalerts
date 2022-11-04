@@ -12,7 +12,7 @@ describe AlertsController do
       alert = create(:alert)
       allow(Alert).to receive(:find_by!).with(confirm_id: "1234").and_return(alert)
       allow(alert).to receive(:confirm!)
-      get :confirmed, params: { resource: "alerts", id: "1234" }
+      get :confirmed, params: { resource: "alerts", confirm_id: "1234" }
       expect(alert).to have_received(:confirm!)
     end
 
@@ -21,13 +21,13 @@ describe AlertsController do
       alert = create(:alert)
       allow(Alert).to receive(:find_by!).with(confirm_id: "1234").and_return(alert)
       allow(alert).to receive(:confirm!)
-      get :confirmed, params: { resource: "alerts", id: "1234" }
+      get :confirmed, params: { resource: "alerts", confirm_id: "1234" }
       expect(response).to be_successful
       expect(alert).to have_received(:confirm!)
     end
 
     it "returns a 404 when the wrong confirm_id is used" do
-      expect { get :confirmed, params: { resource: "alerts", id: "1111" } }.to raise_error ActiveRecord::RecordNotFound
+      expect { get :confirmed, params: { resource: "alerts", confirm_id: "1111" } }.to raise_error ActiveRecord::RecordNotFound
     end
   end
 
@@ -35,13 +35,13 @@ describe AlertsController do
     it "marks the alert as unsubscribed" do
       alert = create(:confirmed_alert)
 
-      get :unsubscribe, params: { id: alert.confirm_id }
+      get :unsubscribe, params: { confirm_id: alert.confirm_id }
 
       expect(alert.reload).to be_unsubscribed
     end
 
     it "allows unsubscribing for non-existent alerts" do
-      get :unsubscribe, params: { id: "1111" }
+      get :unsubscribe, params: { confirm_id: "1111" }
       expect(response).to be_successful
     end
   end
@@ -49,13 +49,13 @@ describe AlertsController do
   describe "#edit_area" do
     it "404S if the alert can't be found" do
       expect do
-        get :edit_area, params: { id: "38457982345874" }
+        get :edit_area, params: { confirm_id: "38457982345874" }
       end.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     it "supports head requests" do
       alert = create(:confirmed_alert)
-      head :edit_area, params: { id: alert.confirm_id }
+      head :edit_area, params: { confirm_id: alert.confirm_id }
       expect(response).to be_successful
     end
   end
