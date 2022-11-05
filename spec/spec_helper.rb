@@ -13,6 +13,7 @@ require File.expand_path("../config/environment", __dir__)
 require "rspec/rails"
 require "email_spec"
 require "rspec/active_model/mocks"
+require "pundit/rspec"
 
 Capybara.javascript_driver = :selenium_headless
 Capybara.server = :webrick
