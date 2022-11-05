@@ -396,6 +396,8 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     public_suffix (5.0.0)
+    pundit (2.2.0)
+      activesupport (>= 3.0.0)
     rabl (0.16.1)
       activesupport (>= 2.3.14)
     racc (1.6.0)
@@ -716,6 +718,7 @@ DEPENDENCIES
   nokogiri
   octokit
   oj
+  pundit (~> 2.2)
   rabl
   rack-cors
   rack-livereload

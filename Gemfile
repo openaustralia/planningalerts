@@ -16,6 +16,7 @@ gem "administrate"
 
 # Logging in and such things
 gem "devise", "~> 4.2" # Pin to a particular major version to get deprecation warnings
+gem "pundit", "~> 2.2"
 
 # To handle different kinds of view templates
 gem "haml"
