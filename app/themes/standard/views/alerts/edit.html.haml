@@ -6,7 +6,7 @@
 .map-settings
   %p What size area near #{@alert.address} would you like to receive alerts for?
 
-  = form_tag do
+  = form_tag alert_path(confirm_id: @alert.confirm_id), method: :put do
     %ul.sizes
       - @zone_sizes.each_key do |size|
         %li
