@@ -12,6 +12,15 @@ class AlertsController < ApplicationController
   end
 
   sig { void }
+  def edit
+    alert = Alert.find_by!(confirm_id: params[:confirm_id])
+
+    @zone_sizes = T.let(zone_sizes, T.nilable(T::Hash[String, Integer]))
+    @alert = T.let(alert, T.nilable(Alert))
+    @size = T.let(zone_sizes.invert[alert.radius_meters], T.nilable(String))
+  end
+
+  sig { void }
   def create
     params_alert = T.cast(params[:alert], ActionController::Parameters)
     address = T.cast(params_alert[:address], String)
@@ -54,16 +63,7 @@ class AlertsController < ApplicationController
   end
 
   sig { void }
-  def edit_area
-    alert = Alert.find_by!(confirm_id: params[:confirm_id])
-
-    @zone_sizes = T.let(zone_sizes, T.nilable(T::Hash[String, Integer]))
-    @alert = T.let(alert, T.nilable(Alert))
-    @size = T.let(zone_sizes.invert[alert.radius_meters], T.nilable(String))
-  end
-
-  sig { void }
-  def update_area
+  def update
     params_size = T.cast(params[:size], String)
 
     alert = Alert.find_by!(confirm_id: params[:confirm_id])

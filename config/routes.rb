@@ -79,8 +79,8 @@ Rails.application.routes.draw do
   resources :alerts, only: %i[new create], path_names: { new: "signup" }, param: :confirm_id do
     member do
       get :confirmed
-      get "area" => "alerts#edit_area"
-      post "area" => "alerts#update_area"
+      get "area" => "alerts#edit"
+      post "area" => "alerts#update"
       get :unsubscribe
     end
   end
