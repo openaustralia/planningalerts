@@ -9,6 +9,7 @@
     %th Last delivered successfully
   %tbody
   - @alerts.each do |alert|
+    -# TODO: Show an error of some sort if the last delivery was not successful
     %tr
       %td= alert.address
       %td
