@@ -5,7 +5,6 @@
   %thead
     %th Address
     %th Radius
-    %th Created
     %th Last delivered
     %th Last delivered successfully
   %tbody
@@ -15,9 +14,6 @@
       %td
         = meters_in_words(alert.radius_meters.to_f)
         = link_to "Change", edit_users_alert_path(alert)
-      %td
-        = time_ago_in_words(alert.created_at)
-        ago
       %td= alert.last_sent
       %td
         - if alert.last_delivered_at
