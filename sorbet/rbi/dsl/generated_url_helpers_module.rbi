@@ -69,6 +69,9 @@ module GeneratedUrlHelpersModule
   def admin_users_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def alert_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def alerts_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -85,9 +88,6 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def applications_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def area_alert_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def atdis_feed_url(*args); end
@@ -157,6 +157,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def edit_admin_user_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def edit_alert_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def edit_rails_conductor_inbound_email_url(*args); end
@@ -325,6 +328,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def user_session_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def users_alerts_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def users_api_keys_url(*args); end

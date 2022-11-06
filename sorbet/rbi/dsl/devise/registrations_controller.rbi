@@ -24,6 +24,7 @@ class Devise::RegistrationsController
     include ::ApplicationHelper
     include ::Admin::ApplicationHelper
     include ::AlertMailerHelper
+    include ::AlertsHelper
     include ::ApplicationsHelper
     include ::ActionDispatch::Routing::PolymorphicRoutes
     include ::ActionDispatch::Routing::UrlFor

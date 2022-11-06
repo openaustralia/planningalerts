@@ -69,6 +69,9 @@ module GeneratedPathHelpersModule
   def admin_users_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def alert_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def alerts_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -85,9 +88,6 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def applications_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def area_alert_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def atdis_feed_path(*args); end
@@ -157,6 +157,9 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def edit_admin_user_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def edit_alert_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def edit_rails_conductor_inbound_email_path(*args); end
@@ -325,6 +328,9 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def user_session_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def users_alerts_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def users_api_keys_path(*args); end
