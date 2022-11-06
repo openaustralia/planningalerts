@@ -171,6 +171,9 @@ module GeneratedPathHelpersModule
   def edit_user_registration_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def edit_users_alert_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def export_active_emails_admin_alerts_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -328,6 +331,9 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def user_session_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def users_alert_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def users_alerts_path(*args); end

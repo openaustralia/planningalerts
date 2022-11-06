@@ -37,6 +37,7 @@ class Devise::PasswordsController
     include ::SignupHelper
     include ::StaticHelper
     include ::DeviseHelper
+    include ::Pundit::Helper
     include ::ApplicationController::HelperMethods
 
     sig { returns(T.untyped) }
