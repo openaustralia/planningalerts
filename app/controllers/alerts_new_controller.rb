@@ -5,7 +5,7 @@ class AlertsNewController < ApplicationController
   extend T::Sig
 
   before_action :authenticate_user!
-  # TODO: Make sure we're always calling authorize
+  after_action :verify_authorized, except: :index
 
   sig { void }
   def index
