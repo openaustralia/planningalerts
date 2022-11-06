@@ -14,7 +14,7 @@
       %td= alert.address
       %td
         = alert.radius_km
-        = link_to "Change", edit_alert_path(confirm_id: alert.confirm_id)
+        = link_to "Change", edit_users_alert_path(alert)
       %td
         = time_ago_in_words(alert.created_at)
         ago

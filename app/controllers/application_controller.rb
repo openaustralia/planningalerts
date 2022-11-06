@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
   # For sorbet
   include Devise::Controllers::Helpers
 
+  include Pundit::Authorization
+
   theme :theme_resolver
 
   helper :all # include all helpers, all the time
