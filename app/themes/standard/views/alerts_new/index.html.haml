@@ -25,6 +25,6 @@
           ago
       %td= alert.last_delivered_successfully
       %td
-        = button_to "Unsubscribe", unsubscribe_alert_path(confirm_id: alert.confirm_id), method: :get, class: "button button-action"
+        = button_to "Unsubscribe", [:users, alert], method: :delete, class: "button button-action"
 
 = link_to "Create new alert", new_alert_path(email: current_user.email)

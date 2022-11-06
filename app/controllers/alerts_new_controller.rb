@@ -30,4 +30,13 @@ class AlertsNewController < ApplicationController
 
     redirect_to users_alerts_path, notice: "Your alert for #{alert.address} now has a size of #{helpers.meters_in_words(alert.radius_meters.to_f)}"
   end
+
+  sig { void }
+  def destroy
+    alert = Alert.find(params[:id])
+    authorize alert
+    alert.unsubscribe!
+
+    redirect_to users_alerts_path, notice: "You will no longer receive alerts for #{alert.address}"
+  end
 end

@@ -73,7 +73,7 @@ Rails.application.routes.draw do
 
   resource :users, only: [] do
     resources :api_keys, only: :create
-    resources :alerts, only: %i[index edit update], controller: :alerts_new
+    resources :alerts, only: %i[index edit update destroy], controller: :alerts_new
   end
 
   resources :alerts, only: %i[new create update edit], path_names: { new: "signup", edit: "area" }, param: :confirm_id do

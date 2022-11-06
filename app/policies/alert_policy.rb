@@ -22,6 +22,11 @@ class AlertPolicy < ApplicationPolicy
     alert.user_id == user.id
   end
 
+  sig { returns(T::Boolean) }
+  def destroy?
+    update?
+  end
+
   class Scope < ApplicationPolicy::Scope
     # NOTE: Be explicit about which records you allow access to!
     # def resolve
