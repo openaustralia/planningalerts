@@ -30,8 +30,8 @@
     marker = new mxn.Marker(centre)
     marker.setLabel("#{escape_javascript(@alert.address)}");
     map.addMarker(marker);
-    #{draw_box_javascript(@size, @alert, @zone_sizes)}
-    $('#radius_meters_#{@zone_sizes["s"]}').click(function(){ #{draw_box_javascript("s", @alert, @zone_sizes)} });
-    $('#radius_meters_#{@zone_sizes["m"]}').click(function(){ #{draw_box_javascript("m", @alert, @zone_sizes)} });
-    $('#radius_meters_#{@zone_sizes["l"]}').click(function(){ #{draw_box_javascript("l", @alert, @zone_sizes)} });
+    preview(#{@alert.location.lat}, #{@alert.location.lng}, #{@alert.radius_meters});
+    $('.sizes input').click(function(){
+      preview(#{@alert.location.lat}, #{@alert.location.lng}, $(this).val());
+    });
   });
