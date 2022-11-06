@@ -5,8 +5,7 @@
   %thead
     %th Address
     %th Radius
-    %th Last delivered
-    %th Last delivered successfully
+    %th Last sent
   %tbody
   - @alerts.each do |alert|
     -# TODO: Show an error of some sort if the last delivery was not successful
@@ -15,12 +14,11 @@
       %td
         = meters_in_words(alert.radius_meters.to_f)
         = link_to "Change", edit_users_alert_path(alert)
-      %td= alert.last_sent
       %td
-        - if alert.last_delivered_at
-          = time_ago_in_words(alert.last_delivered_at)
-          ago
-      %td= alert.last_delivered_successfully
+        - if alert.last_sent
+          = time_ago_in_words(alert.last_sent)
+        - else
+          Not yet sent
       %td
         = button_to "Unsubscribe", [:users, alert], method: :delete, class: "button button-action"
 
