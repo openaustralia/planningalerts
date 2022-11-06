@@ -6,17 +6,14 @@
 .map-settings
   %p What size area near #{@alert.address} would you like to receive alerts for?
 
-  = form_tag alert_path(confirm_id: @alert.confirm_id), method: :put do
+  = form_with model: @alert, url: alert_path(confirm_id: @alert.confirm_id) do |f|
     %ul.sizes
-      - Alert::VALID_RADIUS_METERS_VALUES.each do |radius_meters|
-        %li
-          = radio_button_tag(:radius_meters, radius_meters, radius_meters == @alert.radius_meters)
-          = label_tag("radius_meters_#{radius_meters}", size_option_sentence(radius_meters))
+      = f.collection_radio_buttons :radius_meters, Alert::VALID_RADIUS_METERS_VALUES, ->(r) { r }, ->(r) { size_option_sentence(r) } do |b|
+        - content_tag(:li, b.radio_button + b.label)
       %noscript
         %li
           Note: viewing the alert area on a map requires javascript
-
-    %p= submit_tag("Update size", class: "button button-action button-rounded")
+    = f.submit class: "button button-action button-rounded"
 
 = javascript_include_tag "maps"
 :javascript

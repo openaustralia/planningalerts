@@ -61,7 +61,8 @@ class AlertsController < ApplicationController
 
   sig { void }
   def update
-    params_radius_meters = T.cast(params[:radius_meters], String)
+    params_alert = T.cast(params[:alert], ActionController::Parameters)
+    params_radius_meters = T.cast(params_alert[:radius_meters], String)
 
     alert = Alert.find_by!(confirm_id: params[:confirm_id])
     alert.update!(radius_meters: params_radius_meters.to_i)
