@@ -8,10 +8,10 @@
 
   = form_tag alert_path(confirm_id: @alert.confirm_id), method: :put do
     %ul.sizes
-      - @zone_sizes.each_key do |size|
+      - Alert::VALID_RADIUS_METERS_VALUES.each do |radius_meters|
         %li
-          = radio_button_tag(:radius_meters, @zone_sizes[size], @zone_sizes[size] == @alert.radius_meters)
-          = label_tag("radius_meters_#{@zone_sizes[size]}", size_option_sentence(@zone_sizes[size]))
+          = radio_button_tag(:radius_meters, radius_meters, radius_meters == @alert.radius_meters)
+          = label_tag("radius_meters_#{radius_meters}", size_option_sentence(radius_meters))
       %noscript
         %li
           Note: viewing the alert area on a map requires javascript

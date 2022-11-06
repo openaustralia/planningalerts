@@ -14,10 +14,7 @@ class AlertsController < ApplicationController
   sig { void }
   def edit
     alert = Alert.find_by!(confirm_id: params[:confirm_id])
-
-    @zone_sizes = T.let(zone_sizes, T.nilable(T::Hash[String, Integer]))
     @alert = T.let(alert, T.nilable(Alert))
-    @size = T.let(zone_sizes.invert[alert.radius_meters], T.nilable(String))
   end
 
   sig { void }
@@ -33,7 +30,7 @@ class AlertsController < ApplicationController
       BuildAlertService.call(
         email: email,
         address: address,
-        radius_meters: T.must(zone_sizes["l"])
+        radius_meters: Rails.configuration.planningalerts_large_zone_size
       ),
       T.nilable(Alert)
     )
@@ -70,16 +67,5 @@ class AlertsController < ApplicationController
     alert.update!(radius_meters: params_radius_meters.to_i)
 
     @alert = T.let(alert, T.nilable(Alert))
-  end
-
-  private
-
-  sig { returns(T::Hash[String, Integer]) }
-  def zone_sizes
-    {
-      "s" => Rails.configuration.planningalerts_small_zone_size,
-      "m" => Rails.configuration.planningalerts_medium_zone_size,
-      "l" => Rails.configuration.planningalerts_large_zone_size
-    }
   end
 end
