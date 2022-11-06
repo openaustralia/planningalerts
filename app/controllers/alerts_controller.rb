@@ -64,11 +64,10 @@ class AlertsController < ApplicationController
 
   sig { void }
   def update
-    params_size = T.cast(params[:size], String)
+    params_radius_meters = T.cast(params[:radius_meters], String)
 
     alert = Alert.find_by!(confirm_id: params[:confirm_id])
-    alert.radius_meters = T.must(zone_sizes[params_size])
-    alert.save!
+    alert.update!(radius_meters: params_radius_meters.to_i)
 
     @alert = T.let(alert, T.nilable(Alert))
   end
