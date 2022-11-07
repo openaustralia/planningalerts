@@ -37,7 +37,6 @@ class AlertsNewController < ApplicationController
     # Ensures the address is normalised into a consistent form
     alert.geocode_from_address
 
-    # TODO: Add validation to check that we don't already have an alert for this normalised address
     if alert.save
       redirect_to users_alerts_path, notice: "You succesfully added a new alert for #{alert.address}"
     else

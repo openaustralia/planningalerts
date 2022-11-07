@@ -17,6 +17,7 @@ class Alert < ApplicationRecord
   validates :radius_meters, numericality: { greater_than: 0, message: "isn't selected" }
   validates :radius_meters, inclusion: { in: VALID_RADIUS_METERS_VALUES }
   validate :validate_address
+  validates :address, uniqueness: { scope: :user_id, message: "You already have an alert for that address" }
 
   before_validation :geocode_from_address, unless: :geocoded?
   before_create :set_confirm_info
