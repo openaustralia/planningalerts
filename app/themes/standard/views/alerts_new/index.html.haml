@@ -27,4 +27,13 @@
       %td
         = button_to "Unsubscribe", [:users, alert], method: :delete, class: "button button-action"
 
-= link_to "Create new alert", new_alert_path(email: current_user.email)
+%h2 Create new alert
+
+= semantic_form_for [:users, @alert] do |f|
+  = f.inputs do
+    = f.input :address, label: "Enter a street address",
+                        placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
+                        input_html: { required: "required", class: "address-autocomplete-input" }
+  = f.actions do
+    = f.action :submit, label: "Create alert",
+                        button_html: { class: "button button-rounded button-large button-action" }

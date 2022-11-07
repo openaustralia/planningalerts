@@ -18,6 +18,11 @@ class AlertPolicy < ApplicationPolicy
   end
 
   sig { returns(T::Boolean) }
+  def create?
+    true
+  end
+
+  sig { returns(T::Boolean) }
   def update?
     alert.user_id == user.id
   end
