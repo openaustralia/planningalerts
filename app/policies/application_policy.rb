@@ -60,8 +60,7 @@ class ApplicationPolicy
       @scope = scope
     end
 
-    # TODO: Fix the return type on this
-    sig { void }
+    sig { returns(T.untyped) }
     def resolve
       raise NotImplementedError, "You must define #resolve in #{self.class}"
     end
@@ -71,7 +70,6 @@ class ApplicationPolicy
     sig { returns(User) }
     attr_reader :user
 
-    # TODO: Fix the return type on this
     sig { returns(T.untyped) }
     attr_reader :scope
   end

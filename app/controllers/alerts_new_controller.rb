@@ -6,10 +6,11 @@ class AlertsNewController < ApplicationController
 
   before_action :authenticate_user!
   after_action :verify_authorized, except: :index
+  after_action :verify_policy_scoped, only: :index
 
   sig { void }
   def index
-    @alerts = T.let(T.must(current_user).alerts.active, T.nilable(ActiveRecord::AssociationRelation))
+    @alerts = T.let(policy_scope(Alert), T.nilable(ActiveRecord::Relation))
   end
 
   sig { void }

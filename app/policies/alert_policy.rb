@@ -28,9 +28,10 @@ class AlertPolicy < ApplicationPolicy
   end
 
   class Scope < ApplicationPolicy::Scope
-    # NOTE: Be explicit about which records you allow access to!
-    # def resolve
-    #   scope.all
-    # end
+    sig { returns(ActiveRecord::Relation) }
+    def resolve
+      # Use can only see their own active alerts
+      scope.where(user: user).active
+    end
   end
 end
