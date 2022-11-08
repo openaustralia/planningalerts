@@ -106,5 +106,26 @@ namespace :planningalerts do
         progressbar.increment
       end
     end
+
+    # This is necessary as a pre-step to adding unique validation on the alerts model for the address field
+    # TODO: Remove this once that's all up and running
+    desc "Remove duplicate alerts"
+    task remove_duplicate_alerts: :environment do
+      # Alert.where(unsubscribed: false).group(:user_id, :address).count.select{|v,c| c> 1}.select{|v,c| Alert.where(user_id: v.first, address: v.second).where(confirmed: true).empty? }
+      Alert.where(unsubscribed: false).group(:user_id, :address).count.each do |v, c|
+        # Only consider cases with duplicates
+        next unless c > 1
+
+        alerts = Alert.where(user_id: v.first, address: v.second)
+        # Now find the alert we want to keep
+        keep = alerts.where(confirmed: true).order(created_at: :desc).first ||
+               alerts.order(created_at: :desc).first
+        puts "Keep alert #{keep.id}..."
+        alerts.where.not(id: keep.id).each do |a|
+          puts "Delete alert #{a.id}..."
+        end
+        puts "******"
+      end
+    end
   end
 end
