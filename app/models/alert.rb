@@ -20,11 +20,7 @@ class Alert < ApplicationRecord
   # We want to make sure that a certain user can't have multiple alerts for the same address even if some of
   # them haven't been confirmed yet. We also need to allow there to be multiple unsubscribed alerts with the
   # same address to allow people to do multiple rounds of subscribing and unsubscribing.
-  # Commented out the address uniqueness validation until we resolve:
-  # * https://github.com/openaustralia/planningalerts/issues/1600
-  # * https://github.com/openaustralia/planningalerts/issues/1601
-  # TODO: Re-enable validation below as soon as we can
-  # validates :address, uniqueness: { scope: %i[user_id unsubscribed], message: "You already have an alert for that address" }, unless: :unsubscribed?
+  validates :address, uniqueness: { scope: %i[user_id unsubscribed], message: "You already have an alert for that address" }, unless: :unsubscribed?
 
   before_validation :geocode_from_address, unless: :geocoded?
   before_create :set_confirm_info

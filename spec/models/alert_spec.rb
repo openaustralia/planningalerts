@@ -136,6 +136,52 @@ describe Alert do
     expect(alert.location).to be_nil
   end
 
+  describe "address" do
+    let(:address) { "1234 Marine Parade, NSW" }
+    let(:user) { create(:user) }
+
+    context "when there is already an alert for 1234 Marine Parade" do
+      before do
+        create(:alert, user: user, address: address)
+      end
+
+      it "is not valid for another alert at the same address for the same user" do
+        expect(build(:alert, user: user, address: address)).not_to be_valid
+      end
+
+      it "is valid for another alert at a different address for the same user" do
+        expect(build(:alert, user: user, address: "Another address")).to be_valid
+      end
+
+      it "is valid for another alert at the same address for a different user" do
+        expect(build(:confirmed_alert, address: address)).to be_valid
+      end
+
+      it "is valid for an unsubscribed alert at the same address for the same user" do
+        expect(build(:unsubscribed_alert, user: user, address: address)).to be_valid
+      end
+
+      it "is valid for two unsubscribed alerts at the same address for the same user" do
+        create(:unsubscribed_alert, user: user, address: address)
+        expect(build(:unsubscribed_alert, user: user, address: address)).to be_valid
+      end
+    end
+
+    context "when there is already an unsubscribed alert for 1234 Marine Parade" do
+      before do
+        create(:unsubscribed_alert, user: user, address: address)
+      end
+
+      it "is valid for another alert at the same address for the same user" do
+        expect(build(:alert, user: user, address: address)).to be_valid
+      end
+
+      it "is valid for another unsubscribed alert at the same address for the same user" do
+        expect(build(:unsubscribed_alert, user: user, address: address)).to be_valid
+      end
+    end
+  end
+
   describe "radius_meters" do
     it "has a number" do
       alert = build(:alert, radius_meters: "a")
