@@ -111,7 +111,6 @@ namespace :planningalerts do
     # TODO: Remove this once that's all up and running
     desc "Remove duplicate alerts"
     task remove_duplicate_alerts: :environment do
-      # Alert.where(unsubscribed: false).group(:user_id, :address).count.select{|v,c| c> 1}.select{|v,c| Alert.where(user_id: v.first, address: v.second).where(confirmed: true).empty? }
       Alert.where(unsubscribed: false).group(:user_id, :address).count.each do |v, c|
         # Only consider cases with duplicates
         next unless c > 1
