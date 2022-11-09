@@ -1,4 +1,9 @@
-%h2= current_user.name.presence || current_user.email
+- if current_user.name.present?
+  %h2= current_user.name
+  %p= current_user.email
+- else
+  %h2= current_user.email
+
 
 - if current_user.admin?
   %p= link_to "Administration panel for PlanningAlerts", admin_root_path
