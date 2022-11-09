@@ -8,4 +8,9 @@ class ProfilesController < ApplicationController
 
   sig { void }
   def show; end
+
+  sig { void }
+  def comments
+    @comments = T.must(current_user).comments.visible.order(confirmed_at: :desc)
+  end
 end

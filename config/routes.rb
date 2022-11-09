@@ -74,7 +74,7 @@ Rails.application.routes.draw do
   resource :profile, only: [:show] do
     resources :api_keys, only: :create
     resources :alerts, only: %i[index edit update destroy create], controller: :alerts_new
-    get "comments" => "comments#index_profile"
+    get :comments
   end
 
   resources :alerts, only: %i[new create update edit], path_names: { new: "signup", edit: "area" }, param: :confirm_id do

@@ -36,11 +36,6 @@ class CommentsController < ApplicationController
   end
 
   sig { void }
-  def index_profile
-    @comments = T.must(current_user).comments.visible.order(confirmed_at: :desc)
-  end
-
-  sig { void }
   def create
     application = Application.find(params[:application_id])
     @application = T.let(application, T.nilable(Application))
