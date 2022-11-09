@@ -4,8 +4,6 @@
 class CommentsController < ApplicationController
   extend T::Sig
 
-  before_action :authenticate_user!, only: :index_profile
-
   sig { void }
   def index
     authority_id = T.cast(params[:authority_id], T.nilable(String))
