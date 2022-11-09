@@ -22,7 +22,7 @@ class IsEmailAddressBannedService
   sig { returns(T::Boolean) }
   def call
     domain = Mail::Address.new(email).domain
-    tld = domain.split(".")[-2..].join(".")
+    tld = domain.split(".")[-2..]&.join(".")
     BANNED_TLDS.include?(tld)
   end
 end
