@@ -120,6 +120,9 @@ module GeneratedUrlHelpersModule
   def comment_reports_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def comments_profile_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def comments_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -238,6 +241,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def profile_api_keys_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def profile_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def rails_blob_representation_proxy_url(*args); end
