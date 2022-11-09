@@ -162,6 +162,9 @@ module GeneratedUrlHelpersModule
   def edit_alert_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def edit_profile_alert_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def edit_rails_conductor_inbound_email_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -169,9 +172,6 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def edit_user_registration_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def edit_users_alert_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def export_active_emails_admin_alerts_url(*args); end
@@ -229,6 +229,15 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def per_week_authority_comments_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def profile_alert_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def profile_alerts_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def profile_api_keys_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def rails_blob_representation_proxy_url(*args); end
@@ -331,13 +340,4 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def user_session_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def users_alert_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def users_alerts_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def users_api_keys_url(*args); end
 end

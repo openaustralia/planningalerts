@@ -71,7 +71,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resource :users, only: [] do
+  resource :profile, only: [] do
     resources :api_keys, only: :create
     resources :alerts, only: %i[index edit update destroy create], controller: :alerts_new
   end

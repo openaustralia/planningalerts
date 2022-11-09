@@ -6,7 +6,7 @@
 .map-settings
   %p What size area near #{@alert.address} would you like to receive alerts for?
 
-  = form_with model: [:users, @alert] do |f|
+  = form_with model: [:profile, @alert] do |f|
     %ul.sizes
       = f.collection_radio_buttons :radius_meters, Alert::VALID_RADIUS_METERS_VALUES, ->(r) { r }, ->(r) { size_option_sentence(r) } do |b|
         - content_tag(:li, b.radio_button + b.label)

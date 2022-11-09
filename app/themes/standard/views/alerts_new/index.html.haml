@@ -17,7 +17,7 @@
       %td= alert.address
       %td
         = meters_in_words(alert.radius_meters.to_f)
-        = link_to "Change", edit_users_alert_path(alert)
+        = link_to "Change", edit_profile_alert_path(alert)
       %td
         - if alert.last_sent
           = time_ago_in_words(alert.last_sent)
@@ -25,11 +25,11 @@
         - else
           Not yet sent
       %td
-        = button_to "Unsubscribe", [:users, alert], method: :delete, class: "button button-action"
+        = button_to "Unsubscribe", [:profile, alert], method: :delete, class: "button button-action"
 
 %h2 Create new alert
 
-= semantic_form_for [:users, @alert] do |f|
+= semantic_form_for [:profile, @alert] do |f|
   = f.inputs do
     = f.input :address, label: "Enter a street address",
                         placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
