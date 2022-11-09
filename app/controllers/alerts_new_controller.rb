@@ -11,7 +11,7 @@ class AlertsNewController < ApplicationController
   sig { void }
   def index
     @alerts = T.let(policy_scope(Alert), T.nilable(ActiveRecord::Relation))
-    @alert = T.must(current_user).alerts.build
+    @alert = Alert.new
   end
 
   sig { void }
