@@ -120,11 +120,7 @@ namespace :planningalerts do
         # Now find the alert we want to keep
         keep = alerts.where(confirmed: true).order(created_at: :desc).first ||
                alerts.order(created_at: :desc).first
-        puts "Keep alert #{keep.id}..."
-        alerts.where.not(id: keep.id).each do |a|
-          puts "Delete alert #{a.id}..."
-        end
-        puts "******"
+        alerts.where.not(id: keep.id).destroy_all
       end
     end
   end
