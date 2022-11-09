@@ -1,0 +1,9 @@
+- content_for :page_title, "Your comments"
+%h1.page-title Your comments
+
+- if @comments.empty?
+  %p You have not made any comments
+- else
+  %ol
+    - @comments.each do |comment|
+      %li= render comment, in_list: false, with_address: true

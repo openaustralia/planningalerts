@@ -4,6 +4,8 @@
 class CommentsController < ApplicationController
   extend T::Sig
 
+  before_action :authenticate_user!, only: :index_profile
+
   sig { void }
   def index
     authority_id = T.cast(params[:authority_id], T.nilable(String))
@@ -31,6 +33,11 @@ class CommentsController < ApplicationController
       format.rss
       format.js { render content_type: Mime[:json] }
     end
+  end
+
+  sig { void }
+  def index_profile
+    @comments = T.must(current_user).comments.visible.order(confirmed_at: :desc)
   end
 
   sig { void }
