@@ -7,10 +7,11 @@
       = f.input :address, label: "Enter a street address",
                           placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
                           input_html: { required: "required", class: "address-autocomplete-input" }
-    = f.semantic_fields_for :user do |user|
-      = user.input :email, label: "Enter your email address",
-                           placeholder: "your@email.com",
-                           input_html: { required: "required" }
+    - if current_user.nil?
+      = f.semantic_fields_for :user do |user|
+        = user.input :email, label: "Enter your email address",
+                            placeholder: "your@email.com",
+                            input_html: { required: "required" }
   = f.actions do
     = f.action :submit, label: "Create alert",
                         button_html: { class: "button button-rounded button-large button-action" }
