@@ -1,0 +1,11 @@
+%h2= current_user.name.presence || current_user.email
+
+- if current_user.admin?
+  %p= link_to "Administration panel for PlanningAlerts", admin_root_path
+
+%ul
+  %li= link_to "Manage your alerts", profile_alerts_path
+  -# TODO: Should be able to update your name there as well
+  %li= link_to "Edit your profile", edit_user_registration_path
+
+%p= link_to "Sign out", destroy_user_session_path, class: "button button-action button-rounded"
