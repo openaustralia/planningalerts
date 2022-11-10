@@ -11,7 +11,7 @@ class ProfilesController < ApplicationController
 
   sig { void }
   def comments
-    comments = T.must(current_user).comments.visible.order(confirmed_at: :desc)
-    @comments = T.let(comments, T.nilable(ActiveRecord::AssociationRelation))
+    comments = T.must(current_user).comments.visible.order(confirmed_at: :desc).page(params[:page])
+    @comments = T.let(comments, T.nilable(ActiveRecord::Relation))
   end
 end
