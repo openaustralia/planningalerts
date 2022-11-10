@@ -21,7 +21,7 @@ class Comment < ApplicationRecord
   # Doing after_commit instead after_create so that sidekiq doesn't try
   # to see this before it properly exists. See
   # https://github.com/mperham/sidekiq/wiki/Problems-and-Troubleshooting#cannot-find-modelname-with-id12345
-  after_commit :send_confirmation_email, on: :create
+  after_commit :send_confirmation_email, on: :create, unless: :confirmed?
 
   scope(:confirmed, -> { where(confirmed: true) })
   scope(:visible, -> { where(confirmed: true, hidden: false) })

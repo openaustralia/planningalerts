@@ -43,32 +43,53 @@ class CommentsController < ApplicationController
     return if params[:little_sweety].present?
 
     params_comment = T.cast(params[:comment], ActionController::Parameters)
-    params_comment_user_attributes = T.cast(params_comment[:user_attributes], ActionController::Parameters)
 
-    email = T.cast(params_comment_user_attributes[:email], String)
+    if current_user
+      comment = Comment.new(
+        name: params_comment[:name],
+        text: params_comment[:text],
+        address: params_comment[:address],
+        application: @application,
+        user: current_user,
+        # Because we're logged in we don't need to go through the whole email confirmation step
+        confirmed: true,
+        confirmed_at: Time.current
+      )
+      @comment = T.let(comment, T.nilable(Comment))
 
-    # Create an unconfirmed user without a password if one doesn't already exist matching the email address
-    user = User.find_by(email: email)
-    if user.nil?
-      # from_alert_or_comment says that this user was created "from" an alert rather than a user
-      # registering an account in the "normal" way
-      user = User.new(email: email, from_alert_or_comment: true)
-      # Otherwise it would send out a confirmation email on saving the record
-      user.skip_confirmation_notification!
-      user.temporarily_allow_empty_password!
-      # We're not saving the new user record until the alert has validated
+      if comment.save
+        comment.send_comment!
+        redirect_to application, notice: render_to_string(partial: "confirmed", locals: { comment: comment })
+        return
+      end
+    else
+      params_comment_user_attributes = T.cast(params_comment[:user_attributes], ActionController::Parameters)
+
+      email = T.cast(params_comment_user_attributes[:email], String)
+
+      # Create an unconfirmed user without a password if one doesn't already exist matching the email address
+      user = User.find_by(email: email)
+      if user.nil?
+        # from_alert_or_comment says that this user was created "from" an alert rather than a user
+        # registering an account in the "normal" way
+        user = User.new(email: email, from_alert_or_comment: true)
+        # Otherwise it would send out a confirmation email on saving the record
+        user.skip_confirmation_notification!
+        user.temporarily_allow_empty_password!
+        # We're not saving the new user record until the alert has validated
+      end
+
+      comment = Comment.new(
+        name: params_comment[:name],
+        text: params_comment[:text],
+        address: params_comment[:address],
+        application: @application,
+        user: user
+      )
+      @comment = T.let(comment, T.nilable(Comment))
+
+      return if comment.save
     end
-
-    comment = Comment.new(
-      name: params_comment[:name],
-      text: params_comment[:text],
-      address: params_comment[:address],
-      application: @application,
-      user: user
-    )
-    @comment = T.let(comment, T.nilable(Comment))
-
-    return if comment.save
 
     # TODO: This seems to have a lot repeated from Application#show
     flash.now[:error] = t(".not_filled_out")
