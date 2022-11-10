@@ -4,6 +4,6 @@
 - if @comments.empty?
   %p You have not made any comments
 - else
-  %ol
+  %ol#comments
     - @comments.each do |comment|
       %li= render comment, in_list: false, with_address: true
