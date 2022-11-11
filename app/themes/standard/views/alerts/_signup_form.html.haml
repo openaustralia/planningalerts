@@ -6,7 +6,7 @@
     - else
       = f.input :address, label: "Enter a street address",
                           placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
-                          input_html: { required: "required", class: "address-autocomplete-input" }
+                          input_html: { required: "required", class: "address-autocomplete-input", autofocus: true }
     - if current_user.nil?
       = f.semantic_fields_for :user do |user|
         = user.input :email, label: "Enter your email address",

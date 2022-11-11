@@ -9,7 +9,6 @@ class AlertsController < ApplicationController
     # If you're logged then don't ask for your email address
     user = User.new(email: params[:email]) if current_user.nil?
     @alert = Alert.new(address: params[:address], user: user)
-    @set_focus_control = T.let(params[:address] && current_user.nil? ? "alert_email" : "alert_address", T.nilable(String))
   end
 
   sig { void }

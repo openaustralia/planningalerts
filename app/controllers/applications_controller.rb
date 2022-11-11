@@ -107,7 +107,6 @@ class ApplicationsController < ApplicationController
                         .where("date_scraped > ?", 4.weeks.ago)
                         .order(visible_comments_count: :desc)
                         .limit(4), T.untyped)
-    @set_focus_control = T.let("q", T.nilable(String))
     # Use a different template if there are results to display
     render "address_results" if @q && @error.nil?
   end
