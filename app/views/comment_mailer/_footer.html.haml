@@ -1,5 +1,32 @@
 %p
-  This comment was submitted via PlanningAlerts, a free service run by
-  = link_to "the OpenAustralia Foundation", "https://www.openaustraliafoundation.org.au"
+  This comment was submitted via PlanningAlerts, a free service run by the charity
+  = link_to "the OpenAustralia Foundation", "https://www.oaf.org.au"
   for the public good.
   = link_to "View this application on PlanningAlerts", application_url(comment.application, protocol: "https")
+
+%h2 Important Privacy Notice - Please Read
+
+%p
+  You,
+  = comment.application.authority.full_name
+  do
+  %strong
+    NOT
+  have permission to publish, nor share with anyone outside
+  = comment.application.authority.full_name
+  the email address and street address without express written permission from
+  #{comment.name}.
+
+%p
+  The email address and street address are provided to
+  = comment.application.authority.full_name
+  only so you can contact,
+  identify and verify
+  #{comment.name},
+  in response to
+  #{comment.application.council_reference},
+  and not for any other purpose.
+
+%p
+  We specifically confirm that any consent given in any form (including pursuant to your privacy policy)
+  to disclose personal information to third parties is withdrawn.

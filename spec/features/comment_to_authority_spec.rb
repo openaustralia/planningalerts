@@ -126,25 +126,4 @@ describe "Give feedback" do
     expect(current_email).to have_reply_to("Joe Reporter <reporter@foo.com>")
     expect(current_email).to have_subject("PlanningAlerts: Abuse report")
   end
-
-  context "when signed in as admin" do
-    before do
-      sign_in_as_admin
-    end
-
-    it "Getting an error message if the comment form isn’t completed correctly" do
-      authority = create(:authority, full_name: "Foo", email: "feedback@foo.gov.au")
-      application = create(:geocoded_application, id: "1", authority: authority)
-      visit(application_path(application))
-
-      fill_in("Your comment", with: "I think this is a really good idea")
-      fill_in("Your name", with: "Matthew Landauer")
-      fill_in("Your email", with: "example@example.com")
-      # Don't fill in the address
-      click_button("Post your public comment")
-
-      expect(page).to have_content("Some of the comment wasn't filled out completely. See below.")
-      expect(page).not_to have_content("Now check your email")
-    end
-  end
 end

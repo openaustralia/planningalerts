@@ -79,7 +79,7 @@ module ApplicationsHelper
   sig { params(application: Application).returns(String) }
   def page_title(application)
     # Include the scraping date in the title so that multiple applications from the same address have different titles
-    "#{application.address} | #{application.first_date_scraped.to_date.to_formatted_s(:rfc822)}"
+    "#{application.address} | #{application.first_date_scraped.to_date.to_fs(:rfc822)}"
   end
 
   sig { params(application: Application, size: String, zoom: Integer, key: String).returns(String) }

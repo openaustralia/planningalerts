@@ -10,6 +10,7 @@
       %div
         Currently waiting confirmation for:
         = resource.unconfirmed_email
+    = f.input :name, required: false
     = f.input :password, required: false, hint: "leave blank if you don't want to change it"
     = f.input :current_password, hint: "we need your current password to confirm your changes"
   = f.actions do

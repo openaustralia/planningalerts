@@ -107,7 +107,6 @@ class ApplicationsController < ApplicationController
                         .where("date_scraped > ?", 4.weeks.ago)
                         .order(visible_comments_count: :desc)
                         .limit(4), T.untyped)
-    @set_focus_control = T.let("q", T.nilable(String))
     # Use a different template if there are results to display
     render "address_results" if @q && @error.nil?
   end
@@ -138,10 +137,13 @@ class ApplicationsController < ApplicationController
     @application = T.let(application, T.nilable(Application))
     @comments = T.let(application.comments.confirmed.order(:confirmed_at), T.untyped)
     @nearby_count = T.let(application.find_all_nearest_or_recent.size, T.nilable(Integer))
-    @comment = T.let(Comment.new(
-                       application: application,
-                       user: User.new
-                     ), T.nilable(Comment))
+    comment = Comment.new(
+      application: application,
+      user: User.new,
+      # If the user is logged in by default populate the name on the comment with their name
+      name: current_user&.name
+    )
+    @comment = T.let(comment, T.nilable(Comment))
     # Required for new email alert signup form
     @alert = Alert.new(address: application.address, user: User.new)
 

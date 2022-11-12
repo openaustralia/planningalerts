@@ -1,0 +1,34 @@
+- content_for :page_title, "Change the size of your alert"
+%h3= yield :page_title
+
+#map_div
+
+.map-settings
+  %p What size area near #{@alert.address} would you like to receive alerts for?
+
+  = form_with model: @alert, url: alert_path(confirm_id: @alert.confirm_id) do |f|
+    %ul.sizes
+      = f.collection_radio_buttons :radius_meters, Alert::VALID_RADIUS_METERS_VALUES, ->(r) { r }, ->(r) { size_option_sentence(r) } do |b|
+        - content_tag(:li, b.radio_button + b.label)
+      %noscript
+        %li
+          Note: viewing the alert area on a map requires javascript
+    = f.submit class: "button button-action button-rounded"
+
+= javascript_include_tag "maps"
+:javascript
+  var map;
+  $(document).ready(function(){
+    map = new mxn.Mapstraction("map_div","googlev3");
+    centre = new mxn.LatLonPoint(#{@alert.lat},#{@alert.lng});
+    map.setCenterAndZoom(centre,13);
+    map.addSmallControls();
+    map.addMapTypeControls();
+    marker = new mxn.Marker(centre)
+    marker.setLabel("#{escape_javascript(@alert.address)}");
+    map.addMarker(marker);
+    preview(#{@alert.location.lat}, #{@alert.location.lng}, #{@alert.radius_meters});
+    $('.sizes input').click(function(){
+      preview(#{@alert.location.lat}, #{@alert.location.lng}, $(this).val());
+    });
+  });

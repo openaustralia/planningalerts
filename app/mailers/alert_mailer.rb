@@ -20,7 +20,7 @@ class AlertMailer < ApplicationMailer
     @comments = T.let(comments, T.nilable(T::Array[Comment]))
 
     headers(
-      "List-Unsubscribe" => "<#{unsubscribe_alert_url(id: alert.confirm_id)}>",
+      "List-Unsubscribe" => "<#{unsubscribe_alert_url(confirm_id: alert.confirm_id)}>",
       # This special header sets arbitrary metadata on the email in Cuttlefish
       # It's not sent on in the outgoing email
       "X-Cuttlefish-Metadata-alert-id" => alert.id.to_s

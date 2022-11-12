@@ -14,12 +14,13 @@
                      hint: "Please use your real full name if possible.",
                      input_html: { required: "required" }
   = f.inputs id: "comment-detail-inputgroup" do
-    = f.semantic_fields_for :user do |user|
-      = user.input :email, label: "Your email",
-                           placeholder: "e.g. your@email.com",
-                           hint: "We never display your email address.",
-                           as: :email,
-                           input_html: { required: "required" }
+    - if current_user.nil?
+      = f.semantic_fields_for :user do |user|
+        = user.input :email, label: "Your email",
+                            placeholder: "e.g. your@email.com",
+                            hint: "We never display your email address.",
+                            as: :email,
+                            input_html: { required: "required" }
     -# rubocop:disable Rails/OutputSafety
     = f.input :address, label: "Your street address",
                         placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",

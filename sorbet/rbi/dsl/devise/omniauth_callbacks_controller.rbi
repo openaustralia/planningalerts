@@ -24,6 +24,7 @@ class Devise::OmniauthCallbacksController
     include ::ApplicationHelper
     include ::Admin::ApplicationHelper
     include ::AlertMailerHelper
+    include ::AlertsHelper
     include ::ApplicationsHelper
     include ::ActionDispatch::Routing::PolymorphicRoutes
     include ::ActionDispatch::Routing::UrlFor
@@ -36,6 +37,7 @@ class Devise::OmniauthCallbacksController
     include ::SignupHelper
     include ::StaticHelper
     include ::DeviseHelper
+    include ::Pundit::Helper
     include ::ApplicationController::HelperMethods
 
     sig { returns(T.untyped) }

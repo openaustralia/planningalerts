@@ -1,0 +1,39 @@
+%h2 Your alerts
+
+%p
+  Alerts are sent to your email at
+  = current_user.email
+  = link_to "Change", edit_user_registration_path
+
+%table
+  %thead
+    %th Address
+    %th Radius
+    %th Last sent
+  %tbody
+  - @alerts.each do |alert|
+    -# TODO: Show an error of some sort if the last delivery was not successful
+    %tr
+      %td= alert.address
+      %td
+        = meters_in_words(alert.radius_meters.to_f)
+        = link_to "Change", edit_profile_alert_path(alert)
+      %td
+        - if alert.last_sent
+          = time_ago_in_words(alert.last_sent)
+          ago
+        - else
+          Not yet sent
+      %td
+        = button_to "Unsubscribe", [:profile, alert], method: :delete, class: "button button-action"
+
+%h2 Create new alert
+
+= semantic_form_for [:profile, @alert] do |f|
+  = f.inputs do
+    = f.input :address, label: "Enter a street address",
+                        placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
+                        input_html: { required: "required", class: "address-autocomplete-input" }
+  = f.actions do
+    = f.action :submit, label: "Create alert",
+                        button_html: { class: "button button-rounded button-large button-action" }

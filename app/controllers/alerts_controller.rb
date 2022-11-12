@@ -6,40 +6,68 @@ class AlertsController < ApplicationController
 
   sig { void }
   def new
-    user = User.new(email: params[:email])
+    # If you're logged then don't ask for your email address
+    user = User.new(email: params[:email]) if current_user.nil?
     @alert = Alert.new(address: params[:address], user: user)
-    @set_focus_control = T.let(params[:address] ? "alert_email" : "alert_address", T.nilable(String))
+  end
+
+  sig { void }
+  def edit
+    alert = Alert.find_by!(confirm_id: params[:confirm_id])
+    @alert = T.let(alert, T.nilable(Alert))
   end
 
   sig { void }
   def create
     params_alert = T.cast(params[:alert], ActionController::Parameters)
     address = T.cast(params_alert[:address], String)
-    params_alert_user_attributes = T.cast(params_alert[:user_attributes], ActionController::Parameters)
-    email = T.cast(params_alert_user_attributes[:email], String)
 
-    @address = T.let(address, T.nilable(String))
-
-    @alert = T.let(
-      BuildAlertService.call(
-        email: email,
+    if current_user
+      alert = Alert.new(
+        user: current_user,
         address: address,
-        radius_meters: T.must(zone_sizes["l"])
-      ),
-      T.nilable(Alert)
-    )
-    # If the returned alert is nil that means there was a pre-existing alert and a new
-    # email has been sent but a new alert has *not* been created. Let's just act like one has.
-    return if @alert.nil?
+        radius_meters: Rails.configuration.planningalerts_large_zone_size,
+        # Because we're logged in we don't need to go through the whole email confirmation step
+        confirmed: true
+      )
+      authorize alert
+      # Ensures the address is normalised into a consistent form
+      alert.geocode_from_address
 
-    return if @alert.save
+      if alert.save
+        # TODO: Do something more sensible here than redirecting to the profile page
+        redirect_to profile_alerts_path, notice: "You succesfully added a new alert for #{alert.address}"
+      else
+        @alert = T.let(alert, T.nilable(Alert))
+        render :new
+      end
+    else
+      params_alert_user_attributes = T.cast(params_alert[:user_attributes], ActionController::Parameters)
+      email = T.cast(params_alert_user_attributes[:email], String)
 
-    render "new"
+      @address = T.let(address, T.nilable(String))
+
+      @alert = T.let(
+        BuildAlertService.call(
+          email: email,
+          address: address,
+          radius_meters: Rails.configuration.planningalerts_large_zone_size
+        ),
+        T.nilable(Alert)
+      )
+      # If the returned alert is nil that means there was a pre-existing alert and a new
+      # email has been sent but a new alert has *not* been created. Let's just act like one has.
+      return if @alert.nil?
+
+      return if @alert.save
+
+      render "new"
+    end
   end
 
   sig { void }
   def confirmed
-    @alert = Alert.find_by!(confirm_id: params[:id])
+    @alert = Alert.find_by!(confirm_id: params[:confirm_id])
     @alert.confirm!
 
     # Confirm the attached user if it isn't already confirmed
@@ -49,36 +77,18 @@ class AlertsController < ApplicationController
 
   sig { void }
   def unsubscribe
-    @alert = Alert.find_by(confirm_id: params[:id])
+    @alert = Alert.find_by(confirm_id: params[:confirm_id])
     @alert&.unsubscribe!
   end
 
-  # TODO: Split this into two actions
   sig { void }
-  def area
-    params_size = T.cast(params[:size], T.nilable(String))
+  def update
+    params_alert = T.cast(params[:alert], ActionController::Parameters)
+    params_radius_meters = T.cast(params_alert[:radius_meters], String)
 
-    @zone_sizes = T.let(zone_sizes, T.nilable(T::Hash[String, Integer]))
-    alert = Alert.find_by!(confirm_id: params[:id])
+    alert = Alert.find_by!(confirm_id: params[:confirm_id])
+    alert.update!(radius_meters: params_radius_meters.to_i)
+
     @alert = T.let(alert, T.nilable(Alert))
-    if request.get? || request.head?
-      @size = T.let(zone_sizes.invert[alert.radius_meters], T.nilable(String))
-    else
-      # TODO: If we seperate this action into two then we won't need to use T.must here
-      alert.radius_meters = T.must(zone_sizes[T.must(params_size)])
-      alert.save!
-      render "area_updated"
-    end
-  end
-
-  private
-
-  sig { returns(T::Hash[String, Integer]) }
-  def zone_sizes
-    {
-      "s" => Rails.configuration.planningalerts_small_zone_size,
-      "m" => Rails.configuration.planningalerts_medium_zone_size,
-      "l" => Rails.configuration.planningalerts_large_zone_size
-    }
   end
 end

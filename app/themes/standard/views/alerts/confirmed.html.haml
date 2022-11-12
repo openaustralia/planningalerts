@@ -7,7 +7,7 @@
     of
     %strong #{@alert.address}.
 %p
-  You can #{link_to "change the size of the area covered by the alerts", area_alert_path(id: @alert.confirm_id)}
+  You can #{link_to "change the size of the area covered by the alerts", edit_alert_path(confirm_id: @alert.confirm_id)}
   now or at a later time. Every email alert will have this link.
   If you want alerts around another address as well
   #{link_to "you can sign up for multiple alerts", new_alert_path}.

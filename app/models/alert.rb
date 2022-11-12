@@ -8,15 +8,26 @@ class Alert < ApplicationRecord
   # TODO: Remove accepts_nested_attributes_for after users purely sign up for alerts by being logged in
   accepts_nested_attributes_for :user
 
+  VALID_RADIUS_METERS_VALUES = T.let([
+    Rails.configuration.planningalerts_small_zone_size,
+    Rails.configuration.planningalerts_medium_zone_size,
+    Rails.configuration.planningalerts_large_zone_size
+  ].freeze, T::Array[Integer])
+
   validates :radius_meters, numericality: { greater_than: 0, message: "isn't selected" }
+  validates :radius_meters, inclusion: { in: VALID_RADIUS_METERS_VALUES }
   validate :validate_address
+  # We want to make sure that a certain user can't have multiple alerts for the same address even if some of
+  # them haven't been confirmed yet. We also need to allow there to be multiple unsubscribed alerts with the
+  # same address to allow people to do multiple rounds of subscribing and unsubscribing.
+  validates :address, uniqueness: { scope: %i[user_id unsubscribed], message: "You already have an alert for that address" }, unless: :unsubscribed?
 
   before_validation :geocode_from_address, unless: :geocoded?
   before_create :set_confirm_info
   # Doing after_commit instead after_create so that sidekiq doesn't try
   # to see this before it properly exists. See
   # https://github.com/mperham/sidekiq/wiki/Problems-and-Troubleshooting#cannot-find-modelname-with-id12345
-  after_commit :send_confirmation_email, on: :create
+  after_commit :send_confirmation_email, on: :create, unless: :confirmed?
 
   scope(:confirmed, -> { where(confirmed: true) })
   scope(:active, -> { where(confirmed: true, unsubscribed: false) })

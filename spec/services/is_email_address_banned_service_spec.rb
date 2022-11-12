@@ -10,5 +10,9 @@ describe IsEmailAddressBannedService do
     it { expect(described_class.call(email: "bar@ulabo.elighmail.com")).to be true }
     it { expect(described_class.call(email: "abc@exilh.elighmail.com")).to be true }
     it { expect(described_class.call(email: "foo@mailinator.com")).to be true }
+
+    it "handles a badly formed email address" do
+      expect(described_class.call(email: "foo@gmail")).to be false
+    end
   end
 end

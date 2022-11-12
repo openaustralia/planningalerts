@@ -24,7 +24,7 @@
         = api_key
       - else
         You need an API key to try out the examples below and use the API for yourself.
-        = button_to "Create API key", users_api_keys_path, method: :post, class: "button button-rounded"
+        = button_to "Create API key", profile_api_keys_path, method: :post, class: "button button-rounded"
     - else
       To use the API you will to
       = link_to "register for an account", new_user_registration_path

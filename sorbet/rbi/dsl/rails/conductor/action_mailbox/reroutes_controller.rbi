@@ -24,6 +24,7 @@ class Rails::Conductor::ActionMailbox::ReroutesController
     include ::ActionView::Helpers::TextHelper
     include ::AlertMailerHelper
     include ::ApplicationHelper
+    include ::AlertsHelper
     include ::ApplicationsHelper
     include ::ActionDispatch::Routing::PolymorphicRoutes
     include ::ActionDispatch::Routing::UrlFor

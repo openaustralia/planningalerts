@@ -3,5 +3,5 @@
 = paginate @comments
 %ol#comments
   - @comments.each do |comment|
-    %li= render comment, in_list: false, with_address: true
+    %li= render comment, with_address: true
 = paginate @comments

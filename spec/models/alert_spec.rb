@@ -136,17 +136,74 @@ describe Alert do
     expect(alert.location).to be_nil
   end
 
+  describe "address" do
+    let(:address) { "1234 Marine Parade, NSW" }
+    let(:user) { create(:user) }
+
+    context "when there is already an alert for 1234 Marine Parade" do
+      before do
+        create(:alert, user: user, address: address)
+      end
+
+      it "is not valid for another alert at the same address for the same user" do
+        expect(build(:alert, user: user, address: address)).not_to be_valid
+      end
+
+      it "is valid for another alert at a different address for the same user" do
+        expect(build(:alert, user: user, address: "Another address")).to be_valid
+      end
+
+      it "is valid for another alert at the same address for a different user" do
+        expect(build(:confirmed_alert, address: address)).to be_valid
+      end
+
+      it "is valid for an unsubscribed alert at the same address for the same user" do
+        expect(build(:unsubscribed_alert, user: user, address: address)).to be_valid
+      end
+
+      it "is valid for two unsubscribed alerts at the same address for the same user" do
+        create(:unsubscribed_alert, user: user, address: address)
+        expect(build(:unsubscribed_alert, user: user, address: address)).to be_valid
+      end
+    end
+
+    context "when there is already an unsubscribed alert for 1234 Marine Parade" do
+      before do
+        create(:unsubscribed_alert, user: user, address: address)
+      end
+
+      it "is valid for another alert at the same address for the same user" do
+        expect(build(:alert, user: user, address: address)).to be_valid
+      end
+
+      it "is valid for another unsubscribed alert at the same address for the same user" do
+        expect(build(:unsubscribed_alert, user: user, address: address)).to be_valid
+      end
+    end
+  end
+
   describe "radius_meters" do
     it "has a number" do
       alert = build(:alert, radius_meters: "a")
       expect(alert).not_to be_valid
-      expect(alert.errors[:radius_meters]).to eq(["isn't selected"])
+      expect(alert.errors[:radius_meters]).to eq(["isn't selected", "is not included in the list"])
     end
 
     it "is greater than zero" do
       alert = build(:alert, radius_meters: "0")
       expect(alert).not_to be_valid
-      expect(alert.errors[:radius_meters]).to eq(["isn't selected"])
+      expect(alert.errors[:radius_meters]).to eq(["isn't selected", "is not included in the list"])
+    end
+
+    it "is only one of the allowed values" do
+      alert = build(:alert, radius_meters: "300")
+      expect(alert).not_to be_valid
+      expect(alert.errors[:radius_meters]).to eq(["is not included in the list"])
+    end
+
+    it "is valid when it is one of the allowed values" do
+      alert = build(:alert, radius_meters: "2000")
+      expect(alert).to be_valid
     end
   end
 
@@ -327,7 +384,9 @@ describe Alert do
     end
 
     context "with a reduced search radius of 500 metres" do
-      let(:radius_meters) { 500 }
+      # We're setting the actual radius below. We're just using this value to get
+      # a valid initial record
+      let(:radius_meters) { 800 }
 
       # Using last_sent of 5 days ago to ensure that otherwise all applications
       # would be included if it wasn't for the search radius
@@ -335,6 +394,9 @@ describe Alert do
         let(:last_sent) { 5.days.ago }
 
         it "returns applications within the user's search area" do
+          # Doing this hacky workaround so that we can have this unusual radius
+          alert.radius_meters = 500
+          alert.save!(validate: false)
           expect(alert.recent_new_applications).to contain_exactly(app2, app4)
         end
       end

@@ -7,7 +7,6 @@ require:
   - rubocop-rspec
 
 AllCops:
-  TargetRailsVersion: 5.0
   Exclude:
       - 'db/migrate/*'
       - 'db/schema.rb'

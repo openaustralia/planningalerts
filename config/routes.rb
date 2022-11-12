@@ -71,15 +71,15 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resource :users, only: [] do
+  resource :profile, only: [:show] do
     resources :api_keys, only: :create
+    resources :alerts, only: %i[index edit update destroy create], controller: :alerts_new
+    get :comments
   end
 
-  resources :alerts, only: %i[new create], path_names: { new: "signup" } do
+  resources :alerts, only: %i[new create update edit], path_names: { new: "signup", edit: "area" }, param: :confirm_id do
     member do
       get :confirmed
-      get :area
-      post :area
       get :unsubscribe
     end
   end

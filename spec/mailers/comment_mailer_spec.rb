@@ -7,7 +7,7 @@ describe CommentMailer do
     let(:application) do
       create(
         :geocoded_application,
-        authority: create(:contactable_authority),
+        authority: create(:contactable_authority, full_name: "Foobar Shire Council"),
         address: "12 Foo Rd",
         council_reference: "X/001",
         description: "Building something",

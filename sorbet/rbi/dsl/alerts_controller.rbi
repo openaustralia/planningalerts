@@ -24,6 +24,7 @@ class AlertsController
     include ::ApplicationHelper
     include ::Admin::ApplicationHelper
     include ::AlertMailerHelper
+    include ::AlertsHelper
     include ::ApplicationsHelper
     include ::ActionDispatch::Routing::PolymorphicRoutes
     include ::ActionDispatch::Routing::UrlFor
@@ -36,9 +37,19 @@ class AlertsController
     include ::SignupHelper
     include ::StaticHelper
     include ::DeviseHelper
+    include ::Pundit::Helper
 
     sig { returns(T.untyped) }
     def current_theme; end
+
+    sig { params(record: T.untyped).returns(T.untyped) }
+    def policy(record); end
+
+    sig { params(scope: T.untyped).returns(T.untyped) }
+    def pundit_policy_scope(scope); end
+
+    sig { returns(T.untyped) }
+    def pundit_user; end
   end
 
   class HelperProxy < ::ActionView::Base
