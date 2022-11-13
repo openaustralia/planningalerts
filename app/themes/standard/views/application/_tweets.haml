@@ -3,5 +3,5 @@
     .tweets.pa-container
       %div
         %h4 Tweets from PlanningAlerts
-        %ul= render partial: "shared/tweet", collection: TwitterFeed.new("PlanningAlerts", logger).items, as: :item
+        %ul= render partial: "tweet", collection: TwitterFeed.new("PlanningAlerts", logger).items, as: :item
         = link_to "Follow us on @PlanningAlerts", "http://www.twitter.com/PlanningAlerts", class: "cta"
