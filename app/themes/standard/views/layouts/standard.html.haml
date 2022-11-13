@@ -2,7 +2,7 @@
 %html{ lang: "en" }
   = render "html_head", with_placeholder_polyfill: true, rss: @rss
   %body
-    = render "header", with_navigation: true, alert_count: @alert_count
+    = render "header", alert_count: @alert_count
     = render "main"
     = render "stats"
     = render "donations"
