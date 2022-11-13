@@ -1,20 +1,6 @@
 # typed: false
 require "active_support/core_ext/integer/time"
 
-# TODO: Remove this as soon as we can remove sassc-rails
-# Currently administrate depends on it
-class SkippingSassCompressor
-  def compress(string)
-    options = { syntax: :scss, cache: false, read_cache: false, style: :compressed}
-    begin
-      SassC::Engine.new(string, options).render
-    rescue => e
-      puts "Could not compress '#{string[0..65]}'...: #{e.message}, skipping compression"
-      string
-    end
-  end
-end
-
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -42,7 +28,6 @@ Rails.application.configure do
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = Uglifier.new(harmony: true)
   # Compress CSS using a preprocessor.
-  config.assets.css_compressor = SkippingSassCompressor.new
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
