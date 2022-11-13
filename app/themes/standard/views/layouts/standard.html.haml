@@ -2,9 +2,9 @@
 %html{ lang: "en" }
   = render "html_head", with_placeholder_polyfill: true, rss: @rss
   %body
-    = render "application/header", with_navigation: true, alert_count: @alert_count
-    = render "application/main"
+    = render "header", with_navigation: true, alert_count: @alert_count
+    = render "main"
     = render "stats"
     = render "donations"
-    = render "application/footer"
+    = render "footer"
     = render "end_matter", with_maps_scripts: true
