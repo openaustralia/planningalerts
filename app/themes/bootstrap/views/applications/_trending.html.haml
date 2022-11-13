@@ -1,8 +1,0 @@
-%section.trending
-  %h4 Trending planning applications across Australia
-  %p The most commented on recent applications
-
-  .row.row-cols-1.row-cols-md-2
-    = render partial: "application_trending", collection: applications, as: :application
-
-  = link_to "More&hellip;".html_safe, trending_applications_path

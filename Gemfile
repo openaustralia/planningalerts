@@ -85,7 +85,6 @@ gem "atdis"
 gem "nokogiri"
 
 # For making forms a little easier
-gem "bootstrap_form"
 gem "formtastic"
 
 # Speed up json parsing
@@ -96,7 +95,7 @@ gem "oj"
 gem "virtus"
 
 # For theming (so we can run our proper theme at the same time as an
-# experimental bootstrap based theme)
+# experimental tailwind based theme)
 # Using our fork to add Rails 6 & 7 support and fix a bad memory leak
 gem "themes_on_rails", git: "https://github.com/openaustralia/themes_on_rails"
 

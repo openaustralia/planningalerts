@@ -169,7 +169,7 @@ Rails.application.routes.draw do
 
   post "/cuttlefish/event", to: "cuttlefish#event"
 
-  # TODO: Only needed while we're testing the bootstrap theme
+  # TODO: Only needed while we're testing the tailwind theme
   resource :theme, only: [] do
     post 'toggle'
   end

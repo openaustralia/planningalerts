@@ -1,8 +1,0 @@
-= render "shared/analytics"
-- if with_maps_scripts
-  = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV.fetch('GOOGLE_MAPS_API_KEY', nil)}&v=3&libraries=places&region=au"
-= javascript_include_tag "application"
-
-%script{ src: "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js", integrity: "sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo", crossorigin: "anonymous" }
--# TODO: Replace with local bootstrap
-%script{ src: "https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js", integrity: "sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI", crossorigin: "anonymous" }
