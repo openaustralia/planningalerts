@@ -29,9 +29,8 @@
   -#
     The placeholder polyfill js needs to be in the header for it to work.
     Would like to investigate more and understand this better
-  - if with_placeholder_polyfill
-    = stylesheet_link_tag "placeholder_polyfill.min.css"
-    = javascript_include_tag "placeholder_polyfill.jquery.min.combo.js"
+  = stylesheet_link_tag "placeholder_polyfill.min.css"
+  = javascript_include_tag "placeholder_polyfill.jquery.min.combo.js"
 
   = csrf_meta_tag
   = yield :extra_meta_tags
