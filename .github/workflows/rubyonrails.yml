@@ -103,6 +103,5 @@ jobs:
         run: bundle exec rubocop --parallel
       - name: Lint haml
         run: bundle exec haml-lint
-      # TODO: Add brakeman here
-      # - name: Security audit application code
-      #   run: bin/brakeman -q -w2
+      - name: Security audit application code
+        run: bin/brakeman -q
