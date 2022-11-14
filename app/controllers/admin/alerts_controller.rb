@@ -57,7 +57,7 @@ module Admin
     def unsubscribe
       alert = Alert.find(params[:id])
       alert.unsubscribe!
-      redirect_to({ action: :show }, notice: "Alert unsubscribed")
+      redirect_to({ action: :show }, notice: t(".success"))
     end
   end
 end
