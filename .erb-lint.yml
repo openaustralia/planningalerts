@@ -1,4 +1,6 @@
 ---
+exclude:
+  - vendor/**/*
 EnableDefaultLinters: true
 linters:
   PartialInstanceVariable:
