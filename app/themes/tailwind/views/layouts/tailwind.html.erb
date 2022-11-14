@@ -1,7 +1,12 @@
-<%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
-<%= yield %>
-
-<% if current_user&.admin? %>
-  <%= button_to "Toggle theme (visible only admins)", toggle_theme_path, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
-<% end %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+  </head>
+  <body>
+    <%= yield %>
+    <% if current_user&.admin? %>
+      <%= button_to "Toggle theme (visible only admins)", toggle_theme_path, class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+    <% end %>
+  </body>
+</html>
