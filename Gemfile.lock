@@ -102,6 +102,13 @@ GEM
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
+    better_html (2.0.1)
+      actionview (>= 6.0)
+      activesupport (>= 6.0)
+      ast (~> 2.0)
+      erubi (~> 1.4)
+      parser (>= 2.4)
+      smart_properties
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
     bootsnap (1.13.0)
@@ -193,6 +200,13 @@ GEM
       launchy (~> 2.1)
       mail (~> 2.7)
     equalizer (0.0.11)
+    erb_lint (0.3.1)
+      activesupport
+      better_html (>= 2.0.1)
+      parser (>= 2.7.1.4)
+      rainbow
+      rubocop
+      smart_properties
     erubi (1.11.0)
     ethon (0.15.0)
       ffi (>= 1.15.0)
@@ -564,6 +578,7 @@ GEM
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
     slack-notifier (2.4.0)
+    smart_properties (1.17.0)
     sorbet (0.5.10511)
       sorbet-static (= 0.5.10511)
     sorbet-runtime (0.5.10511)
@@ -688,6 +703,7 @@ DEPENDENCIES
   dotenv-rails
   elasticsearch (~> 7)
   email_spec (= 2.2.0)
+  erb_lint
   factory_bot
   factory_bot_rails
   foreman

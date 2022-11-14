@@ -103,5 +103,7 @@ jobs:
         run: bin/rubocop --parallel
       - name: Lint haml
         run: bin/haml-lint
+      - name: Lint erb
+        run: bin/erblint --lint-all
       - name: Security audit application code
         run: bin/brakeman -q

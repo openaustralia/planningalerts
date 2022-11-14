@@ -193,6 +193,7 @@ group :development do
   # Help with code quality
   gem "brakeman"
   gem "haml_lint", require: false
+  gem "erb_lint", require: false
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rake", require: false
