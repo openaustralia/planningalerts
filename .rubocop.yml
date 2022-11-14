@@ -263,8 +263,6 @@ Sorbet/TrueSigil:
     - Gemfile
     - Guardfile
     - Rakefile
-    - app/themes/standard/views/comments/index.js.rabl
-    - app/themes/standard/views/comments/index.rss.builder
     - app/views/api/_application.json.jbuilder
     # TODO: Remove these exclusions as soon as we can
     - app/admin/*.rb
@@ -280,8 +278,6 @@ Sorbet/StrictSigil:
     - Gemfile
     - Guardfile
     - Rakefile
-    - app/themes/standard/views/comments/index.js.rabl
-    - app/themes/standard/views/comments/index.rss.builder
     - app/views/api/_application.json.jbuilder
     - experiments/metrics/alert_signup.rb
     # TODO: Remove these exclusions as soon as we can

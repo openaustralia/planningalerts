@@ -19,18 +19,6 @@ class CommentsController < ApplicationController
     @description = T.let(description, T.nilable(String))
 
     @comments = T.let(comments_to_display.confirmed.order("confirmed_at DESC").page(params[:page]), T.untyped)
-    @rss = T.let(comments_url(
-                   authority_id: params[:authority_id],
-                   format: "rss",
-                   page: nil
-                 ),
-                 T.nilable(String))
-
-    respond_to do |format|
-      format.html
-      format.rss
-      format.js { render content_type: Mime[:json] }
-    end
   end
 
   sig { void }
