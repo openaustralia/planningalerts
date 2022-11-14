@@ -82,7 +82,7 @@ jobs:
       - name: Set up database schema
         run: bin/rails db:schema:load
       - name: Sorbet type checking
-        run: bundle exec srb
+        run: bin/srb
       - name: Verify tapioca gems up to date
         run: bin/tapioca gems --verify
       - name: Verify tapioca dsl up to date
@@ -100,8 +100,8 @@ jobs:
         with:
           bundler-cache: true
       - name: Rubocop
-        run: bundle exec rubocop --parallel
+        run: bin/rubocop --parallel
       - name: Lint haml
-        run: bundle exec haml-lint
+        run: bin/haml-lint
       - name: Security audit application code
         run: bin/brakeman -q
