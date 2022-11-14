@@ -355,7 +355,6 @@ class ActionView::Base
   include ::Kaminari::Helpers::UrlHelper
   include ::Kaminari::Helpers::HelperMethods
   include ::Recaptcha::Adapters::ViewMethods
-  include ::BootstrapForm::ActionViewExtensions::FormHelper
   extend ::ActionView::Helpers::UrlHelper::ClassMethods
   extend ::ActionView::Helpers::SanitizeHelper::ClassMethods
 
