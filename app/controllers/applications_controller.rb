@@ -99,7 +99,6 @@ class ApplicationsController < ApplicationController
                           .reorder("date_scraped DESC")
         end
         @applications = @applications.page(params[:page]).per(per_page)
-        @rss = T.let(applications_path(format: "rss", address: @q, radius: radius), T.nilable(String))
       end
     end
     @trending = T.let(Application
@@ -119,16 +118,8 @@ class ApplicationsController < ApplicationController
     per_page = request.format == Mime[:html] ? 30 : Application.max_per_page
 
     @q = params_q
-    if @q
-      @applications = Application.search(@q, fields: [:description], order: { date_scraped: :desc }, highlight: { tag: "<span class=\"highlight\">" }, page: params[:page], per_page: per_page)
-      @rss = search_applications_path(format: "rss", q: @q, page: nil)
-    end
+    @applications = Application.search(@q, fields: [:description], order: { date_scraped: :desc }, highlight: { tag: "<span class=\"highlight\">" }, page: params[:page], per_page: per_page) if @q
     @description = @q ? "Search: #{@q}" : "Search"
-
-    respond_to do |format|
-      format.html
-      format.rss { render "api/index", format: :rss, layout: false, content_type: Mime[:xml] }
-    end
   end
 
   sig { void }
@@ -157,12 +148,6 @@ class ApplicationsController < ApplicationController
     params_sort = T.cast(params[:sort], T.nilable(String))
 
     @sort = params_sort
-    @rss = nearby_application_url(
-      id: params[:id],
-      sort: params[:sort],
-      format: "rss",
-      page: nil
-    )
 
     # TODO: Fix this hacky ugliness
     per_page = request.format == Mime[:html] ? 30 : Application.max_per_page
@@ -178,11 +163,6 @@ class ApplicationsController < ApplicationController
       return
     end
     @applications = @applications.page(params[:page]).per(per_page)
-
-    respond_to do |format|
-      format.html { render "nearby" }
-      format.rss { render "api/index", format: :rss, layout: false, content_type: Mime[:xml] }
-    end
   end
 
   private

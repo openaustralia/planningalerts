@@ -8,31 +8,6 @@ describe ApplicationsController do
   end
 
   describe "#index" do
-    describe "rss feed" do
-      before do
-        allow(GeocodeService).to receive(:call).and_return(
-          GeocoderResults.new(
-            [
-              GeocodedLocation.new(
-                lat: 1.0,
-                lng: 2.0,
-                suburb: "Glenbrook",
-                state: "NSW",
-                postcode: "2773",
-                full_address: "24 Bruce Road, Glenbrook NSW 2773"
-              )
-            ],
-            nil
-          )
-        )
-      end
-
-      it "does not provide a link for all applications" do
-        get :index
-        expect(assigns[:rss]).to be_nil
-      end
-    end
-
     describe "error checking on parameters used" do
       it "does not do error checking on the normal html sites" do
         get :index, params: { address: "24 Bruce Road Glenbrook", radius: 4000, foo: 200, bar: "fiddle" }
