@@ -1,0 +1,41 @@
+---
+EnableDefaultLinters: true
+linters:
+#   ErbSafety:
+#     enabled: true
+#     better_html_config: .better-html.yml
+  Rubocop:
+    enabled: true
+    rubocop_config:
+      inherit_from:
+        - .rubocop.yml
+      Style/FrozenStringLiteralComment:
+        Enabled: false
+      Layout/TrailingEmptyLines:
+        Enabled: false
+      Layout/InitialIndentation:
+        Enabled: false
+      Layout/ExtraSpacing:
+        Enabled: false
+      Style/TrailingCommaInArguments:
+        Exclude:
+          - app/views/admin/application/*
+      Layout/FirstArgumentIndentation:
+        Exclude:
+          - app/views/admin/application/*
+      Style/MultilineIfModifier:
+        Exclude:
+          - app/views/admin/application/*
+      Layout/TrailingWhitespace:
+        Exclude:
+          - app/views/admin/application/*
+      Layout/MultilineMethodCallBraceLayout:
+        Exclude:
+          - app/views/admin/application/*
+      Layout/LeadingEmptyLines:
+        Exclude:
+          - app/views/admin/application/*
+      Layout/ArgumentAlignment:
+        Exclude:
+          - app/views/admin/application/*
+      

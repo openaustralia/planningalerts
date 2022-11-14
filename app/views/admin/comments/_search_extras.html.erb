@@ -1,3 +1,3 @@
-<% ["visible", "hidden"].each do |tag| %>
+<% %w[visible hidden].each do |tag| %>
   <%= link_to_unless include_search_tag?(tag, search_term), tag, search: add_tag_to_search(tag, search_term) %>
 <% end %>

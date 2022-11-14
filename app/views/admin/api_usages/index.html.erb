@@ -5,7 +5,7 @@
     <%= link_to "View dashboard in Kibana", "https://d2ba5a791b81410f8d2365c8a6d59905.ap-southeast-2.aws.found.io:9243/app/kibana#/dashboard/8e1285f0-3582-11e9-8f74-c54feae3d9a2?_g=(refreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-1y%2Cmode%3Aquick%2Cto%3Anow))" %>
   </p>
 
-  <h1>Top 50 users of the API (by number of requests) over the last <%= pluralize(@period, 'day') %></h1>
+  <h1>Top 50 users of the API (by number of requests) over the last <%= pluralize(@period, "day") %></h1>
 
   <p>
     Note that these numbers are measured before any authorization is done.
@@ -15,9 +15,9 @@
   </p>
 
   <div>
-    <%= link_to "last 30 days", {period: 30}, class: "button" %>
-    <%= link_to "last 7 days", {period: 7}, class: "button" %>
-    <%= link_to "last 1 day", {period: 1}, class: "button" %>
+    <%= link_to "last 30 days", { period: 30 }, class: "button" %>
+    <%= link_to "last 7 days", { period: 7 }, class: "button" %>
+    <%= link_to "last 1 day", { period: 1 }, class: "button" %>
   </div>
 
   <table>
