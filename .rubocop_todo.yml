@@ -9,8 +9,6 @@
 # Offense count: 10
 Rails/I18nLocaleTexts:
   Exclude:
-    - 'app/controllers/admin/authorities_controller.rb'
-    - 'app/controllers/admin/comments_controller.rb'
     - 'app/controllers/admin/site_settings_controller.rb'
     - 'app/controllers/api_keys_controller.rb'
     - 'app/mailers/report_mailer.rb'

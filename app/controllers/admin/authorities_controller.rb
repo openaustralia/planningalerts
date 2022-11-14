@@ -51,7 +51,7 @@ module Admin
     def import
       authority = Authority.find(params[:id])
       ImportApplicationsJob.perform_later(authority: authority)
-      redirect_to({ action: :show }, notice: "Queued for importing!")
+      redirect_to({ action: :show }, notice: t(".success"))
     end
   end
 end

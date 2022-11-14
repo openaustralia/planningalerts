@@ -47,3 +47,11 @@ en:
     alerts:
       unsubscribe:
         success: "Alert unsubscribed"
+    authorities:
+      import:
+        success: "Queued for importing!"
+    comments:
+      resend:
+        success: "Resent comment"
+      confirm:
+        success: "Comment confirmed and sent"
