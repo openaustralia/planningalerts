@@ -7,12 +7,12 @@
           Find out for free what is being built and knocked down in your area and receive email alerts when something new is planned.
         </p>
         <ul>
-          <li>About</li>
-          <li>Create alert</li>
+          <li><%= link_to "About", about_path, class: "hover:text-red-400" %></li>
+          <li><%= link_to "Create alert", new_alert_path, class: "hover:text-red-400" %></li>
           <li>Privacy</li>
-          <li>Help/FAQ</li>
+          <li><%= link_to "Help/FAQ", faq_path, class: "hover:text-red-400" %></li>
           <li>Contact us</li>
-          <li>Get the Data (API)</li>
+          <li><%= link_to "Get the Data (API)", api_howto_path, class: "hover:text-red-400" %></li>
         </ul>
       </div>
     </div>
