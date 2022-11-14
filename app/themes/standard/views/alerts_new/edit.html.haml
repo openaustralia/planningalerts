@@ -20,15 +20,15 @@
   var map;
   $(document).ready(function(){
     map = new mxn.Mapstraction("map_div","googlev3");
-    centre = new mxn.LatLonPoint(#{@alert.lat},#{@alert.lng});
+    centre = new mxn.LatLonPoint(#{j(@alert.lat)},#{j(@alert.lng)});
     map.setCenterAndZoom(centre,13);
     map.addSmallControls();
     map.addMapTypeControls();
     marker = new mxn.Marker(centre)
-    marker.setLabel("#{escape_javascript(@alert.address)}");
+    marker.setLabel("#{j(@alert.address)}");
     map.addMarker(marker);
-    preview(#{@alert.location.lat}, #{@alert.location.lng}, #{@alert.radius_meters});
+    preview(#{j(@alert.location.lat)}, #{j(@alert.location.lng)}, #{j(@alert.radius_meters)});
     $('.sizes input').click(function(){
-      preview(#{@alert.location.lat}, #{@alert.location.lng}, $(this).val());
+      preview(#{j(@alert.location.lat)}, #{j(@alert.location.lng)}, $(this).val());
     });
   });
