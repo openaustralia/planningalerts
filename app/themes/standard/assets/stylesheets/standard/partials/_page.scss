@@ -72,6 +72,10 @@ body {
       background-color: $content-background;
     }
 
+    li.user { 
+      float: right;
+    }
+
     a.donate-link-header {
       color: $warm-highlight;
     }
