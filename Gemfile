@@ -52,6 +52,7 @@ gem "compass-blueprint"
 gem "compass-rails", "3.1.0"
 gem "sass-rails"
 gem "susy"
+gem "tailwindcss-rails", "~> 2.0"
 
 # Icons
 gem "foundation-icons-sass-rails"
@@ -138,11 +139,10 @@ gem "redcarpet"
 # which we're using for managing the list of broken scrapers
 gem "graphql-client"
 
-gem "tailwindcss-rails", "~> 2.0"
-
 # For feature flags
 gem "flipper"
 gem "flipper-redis"
+gem "flipper-ui"
 
 group :test do
   gem "capybara"
