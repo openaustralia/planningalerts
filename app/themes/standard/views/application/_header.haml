@@ -31,3 +31,5 @@
           = link_to "About", about_path
         - if current_user
           %li{ class: ([:user] + (current_page?(profile_path) ? [:selected] : [])) }= link_to current_user.name, profile_path
+        - elsif Flipper.enabled?(:force_login_to_comment)
+          %li{ class: ([:user] + (current_page?(new_user_session_path) ? [:selected] : [])) }= link_to "Sign In", new_user_session_path
