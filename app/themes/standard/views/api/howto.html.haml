@@ -34,10 +34,7 @@
       than having signed up for an email alert). Once you've done that, return to this page
       and the you will be able to create an API key here.
 
-  - if current_user
-    %p
-      = link_to "Logout", destroy_user_session_path, class: "button button-rounded"
-  - else
+  - if current_user.nil?
     %p
       = link_to "Register for an account", new_user_registration_path, class: "button button-rounded"
       or
