@@ -211,4 +211,3 @@ group :production do
   gem "mini_racer", "0.4.0"
   gem "uglifier"
 end
-
