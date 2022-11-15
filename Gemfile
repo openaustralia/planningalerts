@@ -140,6 +140,10 @@ gem "graphql-client"
 
 gem "tailwindcss-rails", "~> 2.0"
 
+# For feature flags
+gem "flipper"
+gem "flipper-redis"
+
 group :test do
   gem "capybara"
   gem "climate_control"
@@ -207,3 +211,4 @@ group :production do
   gem "mini_racer", "0.4.0"
   gem "uglifier"
 end
+

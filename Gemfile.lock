@@ -244,6 +244,10 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
+    flipper (0.25.4)
+    flipper-redis (0.25.4)
+      flipper (~> 0.25.4)
+      redis (>= 3.0, < 6)
     foreman (0.87.2)
     formatador (1.1.0)
     formtastic (4.0.0)
@@ -706,6 +710,8 @@ DEPENDENCIES
   erb_lint
   factory_bot
   factory_bot_rails
+  flipper
+  flipper-redis
   foreman
   formtastic
   foundation-icons-sass-rails
