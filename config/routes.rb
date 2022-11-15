@@ -21,6 +21,11 @@ end
 
 Rails.application.routes.draw do
   namespace :admin do
+    # Feature flag admin
+    constraints CanAccessFlipperUI do
+      mount Flipper::UI.app(Flipper) => "flipper", as: :flipper
+    end
+
     resources :applications, only: [:index, :show, :destroy]
     resources :authorities, except: :destroy do
       member do
