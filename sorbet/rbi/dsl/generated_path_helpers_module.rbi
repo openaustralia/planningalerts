@@ -51,6 +51,9 @@ module GeneratedPathHelpersModule
   def admin_comments_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def admin_flipper_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def admin_report_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

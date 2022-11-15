@@ -51,6 +51,9 @@ module GeneratedUrlHelpersModule
   def admin_comments_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def admin_flipper_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def admin_report_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
