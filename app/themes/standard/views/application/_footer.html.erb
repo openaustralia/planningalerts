@@ -52,8 +52,8 @@
         </li>
       </ul>
     </div>
-    <% if current_user&.admin? %>
-      <%= button_to "Toggle theme (visible only admins)", toggle_theme_path, class: "btn btn-outline-primary" %>
+    <% if Flipper.enabled?(:switch_themes, current_user) %>
+      <%= button_to "Toggle theme", toggle_theme_path, class: "btn btn-outline-primary" %>
     <% end %>
   </div>
 </div>

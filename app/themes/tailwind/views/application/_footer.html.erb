@@ -26,7 +26,7 @@
                   onClick: "_gaq.push(['_trackEvent', 'Donations', 'click donation link', 'donations footer banner']);" %>
     </div>
   </div>
-  <% if current_user&.admin? %>
-    <%= button_to "Toggle theme (visible only admins)", toggle_theme_path, class: "text-black bg-white hover:bg-gray-200 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
+  <% if Flipper.enabled?(:switch_themes, current_user) %>
+    <%= button_to "Toggle theme", toggle_theme_path, class: "text-black bg-white hover:bg-gray-200 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" %>
   <% end %>
 </footer>
