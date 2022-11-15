@@ -16,7 +16,7 @@
         = li_selected(controller: "/applications", action: "address") do
           = link_to "Search", address_applications_path
         = li_selected(controller: "/alerts", action: %w[new create]) do
-          = link_to "Sign Up", new_alert_path
+          = link_to "Alert", new_alert_path
         = li_selected(controller: "/static", action: "faq") do
           = link_to faq_path do
             %abbr{ title: "Frequently asked questions" } FAQ
