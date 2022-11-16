@@ -1,0 +1,15 @@
+<h3>Resend confirmation instructions</h3>
+
+<%= semantic_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <%= f.inputs do %>
+    <%= f.input :email, required: false, input_html: { autofocus: true } %>
+  <% end %>
+
+  <%= f.actions do %>
+    <%= f.action :submit, label: "Resend confirmation instructions", button_html: { class: "button button-rounded button-large button-action" } %>
+  <% end %>
+<% end %>
+
+<%= render "devise/shared/links" %>
