@@ -5,7 +5,9 @@
   %h2= current_user.email
 
 - if current_user.admin?
-  %p= link_to "Administration panel for PlanningAlerts", admin_root_path
+  %ul
+    %li= link_to "Administration panel", admin_root_path
+    %li= link_to "Feature flags", admin_flipper_path
 
 %ul
   -# TODO: Should be able to update your name there as well
