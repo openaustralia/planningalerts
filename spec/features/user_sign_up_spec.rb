@@ -8,7 +8,7 @@ describe "Signing up for an API account" do
     click_link "Register for an account"
 
     fill_in "Email", with: "henare@oaf.org.au"
-    fill_in "Your name", with: "Henare Degan"
+    fill_in "Name", with: "Henare Degan"
     fill_in "Password", with: "password"
     click_button "Sign up"
 
