@@ -28,10 +28,6 @@
     margin: 0;
   }
 
-  label abbr[title="required"] {
-    @include sr-only();
-  }
-
   .actions {
     padding: 0;
     // Formtastic overrides
