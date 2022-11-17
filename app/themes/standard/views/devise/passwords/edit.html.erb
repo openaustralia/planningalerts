@@ -4,12 +4,13 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <%= f.hidden_field :reset_password_token %>
+
   <%= f.inputs do %>
-    <%= f.input :password, required: false, input_html: { autofocus: true } %>
+    <%= f.input :password, required: false, label: "New password", hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autofocus: true, autocomplete: "new-password" } %>
   <% end %>
 
   <%= f.actions do %>
-    <%= f.action :submit, label: "Change my password" %>
+    <%= f.action :submit, label: "Change my password", button_html: { class: "button button-rounded button-large button-action" } %>
   <% end %>
 <% end %>
 

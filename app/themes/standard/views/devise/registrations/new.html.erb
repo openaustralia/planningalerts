@@ -1,16 +1,16 @@
-<h3>Register for account</h3>
+<h3>Sign up</h3>
 
 <%= semantic_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <%= f.inputs do %>
-    <%= f.input :email, required: false, input_html: { autofocus: true } %>
+    <%= f.input :email, required: false, input_html: { autofocus: true, autocomplete: "email" } %>
     <%= f.input :name, hint: "Please use your full name", label: "Your name" %>
-    <%= f.input :password, required: false %>
+    <%= f.input :password, required: false, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autocomplete: "new-password" } %>
   <% end %>
 
   <%= f.actions do %>
-    <%= f.action :submit, label: "Register", button_html: { class: "button button-rounded button-large button-action" } %>
+    <%= f.action :submit, label: "Sign up", button_html: { class: "button button-rounded button-large button-action" } %>
   <% end %>
 <% end %>
 
