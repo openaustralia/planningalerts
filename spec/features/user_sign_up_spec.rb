@@ -17,7 +17,7 @@ describe "Signing up for an API account" do
 
     expect(unread_emails_for("henare@oaf.org.au").size).to eq(1)
     open_email("henare@oaf.org.au")
-    expect(current_email).to have_subject("Please confirm your account")
+    expect(current_email).to have_subject("Confirmation instructions")
     expect(current_email.default_part_body.to_s).to include("You can confirm your account email through the link below")
   end
 end
