@@ -46,6 +46,10 @@ Each group is roughly ordered in order of importance (from most important to lea
 |               | /alerts/:id/area                          | Changing the area of your alert
 |               | /alerts/:id/unsubscribe                   | Unsubscribing from your alert
 |               | /alerts/signup                            | Signing up for an alert
+| User profile  | /profile                                  | Your user profile
+|               | /profile/alerts                           | All your alerts
+|               | /profile/comments                         | All your comments
+|               | /profile/alerts/:id/edit                  | Change the area of one of your alerts
 | Documentation | /api/howto                                | How to use the API
 |               | /about                                    | About PlanningAlerts
 |               | /faq                                      | Frequently asked questions
@@ -65,8 +69,6 @@ Each group is roughly ordered in order of importance (from most important to lea
 |               | /users/edit                               | Edit my account
 |               | /users/password/new                       | I forgot my password
 |               | /users/password/edit                      | Update my password
-|               | /users/cancel                             | Cancel registration
-|               | /users/confirmation/new                   | ?
-|               | /users/confirmation                       | ?
+|               | /users/confirmation/new                   | Resend confirmation instructions
 | ATDIS         | /atdis/test                               | Test an ATDIS feed
 |               | /atdis/specification                      | Documentation for the ATDIS specification
