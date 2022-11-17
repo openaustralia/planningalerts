@@ -21,6 +21,7 @@ class Alert < ApplicationRecord
   # them haven't been confirmed yet. We also need to allow there to be multiple unsubscribed alerts with the
   # same address to allow people to do multiple rounds of subscribing and unsubscribing.
   validates :address, uniqueness: { scope: %i[user_id unsubscribed], message: "You already have an alert for that address" }, unless: :unsubscribed?
+  validates :address, presence: true
 
   before_validation :geocode_from_address, unless: :geocoded?
   before_create :set_confirm_info
