@@ -15,4 +15,4 @@
   %li= link_to "Your alerts", profile_alerts_path
   %li= link_to "Your comments", comments_profile_path
 
-%p= link_to "Sign out", destroy_user_session_path, class: "button button-action button-rounded"
+= button_to "Sign out", destroy_user_session_path, method: :delete, class: "button button-action button-rounded"
