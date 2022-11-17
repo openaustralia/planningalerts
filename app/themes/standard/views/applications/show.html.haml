@@ -57,10 +57,10 @@
     = semantic_form_for @alert do |f|
       = render "alerts/signup_introduction"
       = f.inputs do
-        = f.input :address, label: "Enter a street address", placeholder: "Enter a street address", input_html: { required: "required" }
+        = f.input :address, label: "Enter a street address", placeholder: "Enter a street address"
         - if current_user.nil?
           = f.semantic_fields_for :user do |user|
-            = user.input :email, label: "Enter your email address", placeholder: "Enter your email address", input_html: { required: "required" }
+            = user.input :email, label: "Enter your email address", placeholder: "Enter your email address"
       = f.actions do
         = f.action :submit, label: "Create Alert", button_html: { class: "button button-rounded button-action button-large" }
 

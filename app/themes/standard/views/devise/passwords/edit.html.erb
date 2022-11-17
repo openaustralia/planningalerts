@@ -6,7 +6,7 @@
   <%= f.hidden_field :reset_password_token %>
 
   <%= f.inputs do %>
-    <%= f.input :password, required: false, label: "New password", hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autofocus: true, autocomplete: "new-password" } %>
+    <%= f.input :password, label: "New password", hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autofocus: true, autocomplete: "new-password" } %>
   <% end %>
 
   <%= f.actions do %>

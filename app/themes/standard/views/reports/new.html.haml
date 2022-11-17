@@ -8,9 +8,9 @@
   you think the comment should be removed.
 = semantic_form_for [@comment, @report] do |f|
   = f.inputs do
-    = f.input :name, label: "Your name", placeholder: "e.g. Jane Citizen", input_html: { required: "required" }
-    = f.input :email, label: "Your email", placeholder: "e.g. your@email.com", input_html: { required: "required" }
-    = f.input :details, label: "Why should this comment be removed?", as: :text, input_html: { required: "required" }
+    = f.input :name, label: "Your name", placeholder: "e.g. Jane Citizen"
+    = f.input :email, label: "Your email", placeholder: "e.g. your@email.com"
+    = f.input :details, label: "Why should this comment be removed?", as: :text
     = recaptcha_tags
   = f.actions do
     = f.action :submit, label: "Send report", button_html: { class: "button button-action" }

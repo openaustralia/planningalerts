@@ -11,21 +11,18 @@
       = render partial: "static/disclosure_explanation"
     = f.input :name, label: "Your name",
                      placeholder: "e.g. Jane Citizen",
-                     hint: "Please use your real full name if possible.",
-                     input_html: { required: "required" }
+                     hint: "Please use your real full name if possible."
   = f.inputs id: "comment-detail-inputgroup" do
     - if current_user.nil?
       = f.semantic_fields_for :user do |user|
         = user.input :email, label: "Your email",
                             placeholder: "e.g. your@email.com",
                             hint: "We never display your email address.",
-                            as: :email,
-                            input_html: { required: "required" }
+                            as: :email
     -# rubocop:disable Rails/OutputSafety
     = f.input :address, label: "Your street address",
                         placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
-                        hint: "We never display your street address. #{link_to("Why do you need my address?", faq_path(anchor: "address"))}".html_safe,
-                        input_html: { required: "required" }
+                        hint: "We never display your street address. #{link_to("Why do you need my address?", faq_path(anchor: "address"))}".html_safe
     -# rubocop:enable Rails/OutputSafety
     .inline-hints.hidden#faq_commenting_address
       = render partial: "static/faq_commenting_address"

@@ -4,7 +4,7 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <%= f.inputs do %>
-    <%= f.input :email, required: false, input_html: { autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) } %>
+    <%= f.input :email, input_html: { autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) } %>
   <% end %>
 
   <%= f.actions do %>
