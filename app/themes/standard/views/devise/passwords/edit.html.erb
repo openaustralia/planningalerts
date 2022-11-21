@@ -1,17 +1,20 @@
-<h3>Change your password</h3>
+<div class="login-block">
+  <h2>Change your password</h2>
+  <p class="login-explanation">
+    Or <%= link_to "sign in", new_user_session_path %> if you know your current password.
+  </p>
 
-<%= semantic_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <%= semantic_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-  <%= f.hidden_field :reset_password_token %>
+    <%= f.hidden_field :reset_password_token %>
 
-  <%= f.inputs do %>
-    <%= f.input :password, label: "New password", hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autofocus: true, autocomplete: "new-password" } %>
+    <%= f.inputs do %>
+      <%= f.input :password, label: "New password", hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autofocus: true, autocomplete: "new-password" } %>
+    <% end %>
+
+    <%= f.actions do %>
+      <%= f.action :submit, label: "Change my password", button_html: { class: "button button-rounded button-large button-action" } %>
+    <% end %>
   <% end %>
-
-  <%= f.actions do %>
-    <%= f.action :submit, label: "Change my password", button_html: { class: "button button-rounded button-large button-action" } %>
-  <% end %>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
