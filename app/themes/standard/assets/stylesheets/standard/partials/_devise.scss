@@ -19,6 +19,12 @@
     .actions { 
       padding: 0;
       width: 100%;
+      li { 
+        width: 100%;
+        input { 
+          width: 100%;
+        }
+      }
     }
   }  
 }
