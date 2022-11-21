@@ -3,6 +3,10 @@
   max-width: 30em;
   margin: 0 auto;
 
+  h2 { 
+    text-align: center;
+  }
+
   .formtastic#new_user { 
     @include float-form(100%, 100%, 100%, 0, "buttons-left", left, "select-auto");
   
