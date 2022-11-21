@@ -26,7 +26,9 @@
     }
 
     li#user_remember_me_input {
-      width: 40%;
+      label { 
+        width: auto;
+      }
     }
 
     .actions {
