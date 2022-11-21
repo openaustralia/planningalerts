@@ -20,6 +20,10 @@
       font-size: 16px;
     }
 
+    input[type="email"], input[type="password"] { 
+      text-align: left;
+    }
+
     input[type="checkbox"] {
       width: auto;
       margin: 0 0.5em 3px 0;
