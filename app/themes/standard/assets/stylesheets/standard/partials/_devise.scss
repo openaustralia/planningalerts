@@ -1,0 +1,21 @@
+.formtastic#new_user { 
+  @include float-form(100%, 100%, 100%, 0, "buttons-left", left, "select-auto");
+
+  label {
+    margin-left: 0;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    padding: 0;
+  }
+
+  input[type="checkbox"] { 
+    width: auto;
+    margin: 0 0.5em 3px 0;
+  }
+
+  .actions { 
+    padding: 0;
+    width: 100%;
+  }
+}
+
