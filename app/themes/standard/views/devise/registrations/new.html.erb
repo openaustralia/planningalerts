@@ -1,17 +1,21 @@
-<h3>Sign up</h3>
+<div class="login-block">
+  <h2>Create an account</h2>
+  <p class="login-explanation">
+    Already have an account?
+    <%= link_to "Sign in", new_user_session_path %>.
+  </p>
 
-<%= semantic_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <%= semantic_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-  <%= f.inputs do %>
-    <%= f.input :name, required: true, hint: "Please use your full name" %>
-    <%= f.input :email, input_html: { autofocus: true, autocomplete: "email" } %>
-    <%= f.input :password, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autocomplete: "new-password" } %>
+    <%= f.inputs do %>
+      <%= f.input :name, label: "Your full name", required: true %>
+      <%= f.input :email, input_html: { autofocus: true, autocomplete: "email" } %>
+      <%= f.input :password, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autocomplete: "new-password" } %>
+    <% end %>
+
+    <%= f.actions do %>
+      <%= f.action :submit, label: "Sign up", button_html: { class: "button button-rounded button-large button-action" } %>
+    <% end %>
   <% end %>
-
-  <%= f.actions do %>
-    <%= f.action :submit, label: "Sign up", button_html: { class: "button button-rounded button-large button-action" } %>
-  <% end %>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
