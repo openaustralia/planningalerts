@@ -30,6 +30,11 @@ class User < ApplicationRecord
     @temporarily_allow_empty_password = T.let(true, T.nilable(T::Boolean))
   end
 
+  sig { returns(T::Boolean) }
+  def requires_activation?
+    from_alert_or_comment && encrypted_password.blank?
+  end
+
   private
 
   sig { returns(T::Boolean) }
