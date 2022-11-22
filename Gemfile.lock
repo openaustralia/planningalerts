@@ -743,6 +743,7 @@ DEPENDENCIES
   kaminari
   mini_racer (= 0.4.0)
   mysql2
+  net-protocol
   newrelic_rpm
   nokogiri
   octokit

@@ -194,6 +194,10 @@ group :development do
   # TODO: Upgrade to capistrano 3
   gem "capistrano", "~> 2"
 
+  # Workaround for "already initialized constant" errors with net/protocol
+  # See https://github.com/ruby/net-imap/issues/16#issuecomment-803086765
+  gem "net-protocol"
+
   # Help with code quality
   gem "brakeman"
   gem "erb_lint", require: false
