@@ -430,6 +430,9 @@ class Dalli::KeyManager
   # source://dalli//lib/dalli/key_manager.rb#73
   def digest_class; end
 
+  # source://dalli//lib/dalli/key_manager.rb#97
+  def evaluate_namespace; end
+
   # Returns the key with the namespace prefixed, if a namespace is
   # defined.  Otherwise just returns the key
   #
@@ -444,25 +447,25 @@ class Dalli::KeyManager
   # source://dalli//lib/dalli/key_manager.rb#29
   def namespace; end
 
-  # source://dalli//lib/dalli/key_manager.rb#87
+  # source://dalli//lib/dalli/key_manager.rb#89
   def namespace_from_options; end
 
   # source://dalli//lib/dalli/key_manager.rb#77
   def namespace_regexp; end
 
-  # source://dalli//lib/dalli/key_manager.rb#105
+  # source://dalli//lib/dalli/key_manager.rb#113
   def prefix_length(digest); end
 
   # Produces a truncated key, if the raw key is longer than the maximum allowed
   # length.  The truncated key is produced by generating a hex digest
   # of the key, and appending that to a truncated section of the key.
   #
-  # source://dalli//lib/dalli/key_manager.rb#100
+  # source://dalli//lib/dalli/key_manager.rb#108
   def truncated_key(key); end
 
   # @raise [ArgumentError]
   #
-  # source://dalli//lib/dalli/key_manager.rb#81
+  # source://dalli//lib/dalli/key_manager.rb#83
   def validate_digest_class_option(opts); end
 
   # Validates the key, and transforms as needed.
@@ -1356,39 +1359,39 @@ class Dalli::Protocol::Meta < ::Dalli::Protocol::Base
 
   private
 
-  # source://dalli//lib/dalli/protocol/meta.rb#68
+  # source://dalli//lib/dalli/protocol/meta.rb#69
   def add(key, value, ttl, options); end
 
-  # source://dalli//lib/dalli/protocol/meta.rb#90
+  # source://dalli//lib/dalli/protocol/meta.rb#91
   def append(key, value); end
 
   # @raise [Dalli::DalliError]
   #
-  # source://dalli//lib/dalli/protocol/meta.rb#168
+  # source://dalli//lib/dalli/protocol/meta.rb#169
   def authenticate_connection; end
 
   # TODO: This is confusing, as there's a cas command in memcached
   # and this isn't it.  Maybe rename?  Maybe eliminate?
   #
-  # source://dalli//lib/dalli/protocol/meta.rb#55
+  # source://dalli//lib/dalli/protocol/meta.rb#56
   def cas(key); end
 
   # Arithmetic Commands
   #
-  # source://dalli//lib/dalli/protocol/meta.rb#120
+  # source://dalli//lib/dalli/protocol/meta.rb#121
   def decr(key, count, ttl, initial); end
 
-  # source://dalli//lib/dalli/protocol/meta.rb#128
+  # source://dalli//lib/dalli/protocol/meta.rb#129
   def decr_incr(incr, key, delta, ttl, initial); end
 
   # Delete Commands
   #
-  # source://dalli//lib/dalli/protocol/meta.rb#111
+  # source://dalli//lib/dalli/protocol/meta.rb#112
   def delete(key, cas); end
 
   # Other Commands
   #
-  # source://dalli//lib/dalli/protocol/meta.rb#137
+  # source://dalli//lib/dalli/protocol/meta.rb#138
   def flush(delay = T.unsafe(nil)); end
 
   # source://dalli//lib/dalli/protocol/meta.rb#38
@@ -1399,48 +1402,48 @@ class Dalli::Protocol::Meta < ::Dalli::Protocol::Base
   # source://dalli//lib/dalli/protocol/meta.rb#26
   def get(key, options = T.unsafe(nil)); end
 
-  # source://dalli//lib/dalli/protocol/meta.rb#124
+  # source://dalli//lib/dalli/protocol/meta.rb#125
   def incr(key, count, ttl, initial); end
 
   # Noop is a keepalive operation but also used to demarcate the end of a set of pipelined commands.
   # We need to read all the responses at once.
   #
-  # source://dalli//lib/dalli/protocol/meta.rb#144
+  # source://dalli//lib/dalli/protocol/meta.rb#145
   def noop; end
 
-  # source://dalli//lib/dalli/protocol/meta.rb#95
+  # source://dalli//lib/dalli/protocol/meta.rb#96
   def prepend(key, value); end
 
   # source://dalli//lib/dalli/protocol/meta.rb#33
   def quiet_get_request(key); end
 
-  # source://dalli//lib/dalli/protocol/meta.rb#73
+  # source://dalli//lib/dalli/protocol/meta.rb#74
   def replace(key, value, ttl, cas, options); end
 
-  # source://dalli//lib/dalli/protocol/meta.rb#154
+  # source://dalli//lib/dalli/protocol/meta.rb#155
   def reset_stats; end
 
   # Storage Commands
   #
-  # source://dalli//lib/dalli/protocol/meta.rb#63
+  # source://dalli//lib/dalli/protocol/meta.rb#64
   def set(key, value, ttl, cas, options); end
 
-  # source://dalli//lib/dalli/protocol/meta.rb#149
+  # source://dalli//lib/dalli/protocol/meta.rb#150
   def stats(info = T.unsafe(nil)); end
 
   # source://dalli//lib/dalli/protocol/meta.rb#46
   def touch(key, ttl); end
 
-  # source://dalli//lib/dalli/protocol/meta.rb#159
+  # source://dalli//lib/dalli/protocol/meta.rb#160
   def version; end
 
-  # source://dalli//lib/dalli/protocol/meta.rb#101
+  # source://dalli//lib/dalli/protocol/meta.rb#102
   def write_append_prepend_req(mode, key, value, ttl = T.unsafe(nil), cas = T.unsafe(nil), _options = T.unsafe(nil)); end
 
-  # source://dalli//lib/dalli/protocol/meta.rb#164
+  # source://dalli//lib/dalli/protocol/meta.rb#165
   def write_noop; end
 
-  # source://dalli//lib/dalli/protocol/meta.rb#79
+  # source://dalli//lib/dalli/protocol/meta.rb#80
   def write_storage_req(mode, key, raw_value, ttl = T.unsafe(nil), cas = T.unsafe(nil), options = T.unsafe(nil)); end
 end
 
@@ -1470,7 +1473,10 @@ Dalli::Protocol::Meta::KeyRegularizer::WHITESPACE = T.let(T.unsafe(nil), Regexp)
 # source://dalli//lib/dalli/protocol/meta/request_formatter.rb#10
 class Dalli::Protocol::Meta::RequestFormatter
   class << self
-    # source://dalli//lib/dalli/protocol/meta/request_formatter.rb#76
+    # source://dalli//lib/dalli/protocol/meta/request_formatter.rb#107
+    def cas_string(cas); end
+
+    # source://dalli//lib/dalli/protocol/meta/request_formatter.rb#77
     def flush(delay: T.unsafe(nil), quiet: T.unsafe(nil)); end
 
     # source://dalli//lib/dalli/protocol/meta/request_formatter.rb#52
@@ -1487,19 +1493,22 @@ class Dalli::Protocol::Meta::RequestFormatter
     # source://dalli//lib/dalli/protocol/meta/request_formatter.rb#19
     def meta_get(key:, value: T.unsafe(nil), return_cas: T.unsafe(nil), ttl: T.unsafe(nil), base64: T.unsafe(nil), quiet: T.unsafe(nil)); end
 
-    # source://dalli//lib/dalli/protocol/meta/request_formatter.rb#68
+    # source://dalli//lib/dalli/protocol/meta/request_formatter.rb#69
     def meta_noop; end
 
     # source://dalli//lib/dalli/protocol/meta/request_formatter.rb#29
     def meta_set(key:, value:, bitflags: T.unsafe(nil), cas: T.unsafe(nil), ttl: T.unsafe(nil), mode: T.unsafe(nil), base64: T.unsafe(nil), quiet: T.unsafe(nil)); end
 
-    # source://dalli//lib/dalli/protocol/meta/request_formatter.rb#90
+    # source://dalli//lib/dalli/protocol/meta/request_formatter.rb#91
     def mode_to_token(mode); end
 
-    # source://dalli//lib/dalli/protocol/meta/request_formatter.rb#83
+    # source://dalli//lib/dalli/protocol/meta/request_formatter.rb#112
+    def parse_to_64_bit_int(val, default); end
+
+    # source://dalli//lib/dalli/protocol/meta/request_formatter.rb#84
     def stats(arg = T.unsafe(nil)); end
 
-    # source://dalli//lib/dalli/protocol/meta/request_formatter.rb#72
+    # source://dalli//lib/dalli/protocol/meta/request_formatter.rb#73
     def version; end
   end
 end
@@ -1693,51 +1702,51 @@ end
 # a Dalli::Protocol::Binary instance into the hostname, port, weight, and
 # socket_type.
 #
-# source://dalli//lib/dalli/protocol/server_config_parser.rb#10
+# source://dalli//lib/dalli/protocol/server_config_parser.rb#12
 class Dalli::Protocol::ServerConfigParser
   class << self
-    # source://dalli//lib/dalli/protocol/server_config_parser.rb#65
+    # source://dalli//lib/dalli/protocol/server_config_parser.rb#67
     def attributes_for_tcp_socket(res); end
 
     # @raise [Dalli::DalliError]
     #
-    # source://dalli//lib/dalli/protocol/server_config_parser.rb#58
+    # source://dalli//lib/dalli/protocol/server_config_parser.rb#60
     def attributes_for_unix_socket(res); end
 
     # @raise [Dalli::DalliError]
     #
-    # source://dalli//lib/dalli/protocol/server_config_parser.rb#51
+    # source://dalli//lib/dalli/protocol/server_config_parser.rb#53
     def deconstruct_string(str); end
 
     # @raise [Dalli::DalliError]
     #
-    # source://dalli//lib/dalli/protocol/server_config_parser.rb#69
+    # source://dalli//lib/dalli/protocol/server_config_parser.rb#71
     def normalize_host_from_match(str, res); end
 
-    # source://dalli//lib/dalli/protocol/server_config_parser.rb#75
+    # source://dalli//lib/dalli/protocol/server_config_parser.rb#77
     def normalize_port(port); end
 
-    # source://dalli//lib/dalli/protocol/server_config_parser.rb#79
+    # source://dalli//lib/dalli/protocol/server_config_parser.rb#81
     def normalize_weight(weight); end
 
-    # source://dalli//lib/dalli/protocol/server_config_parser.rb#22
+    # source://dalli//lib/dalli/protocol/server_config_parser.rb#24
     def parse(str); end
 
-    # source://dalli//lib/dalli/protocol/server_config_parser.rb#37
+    # source://dalli//lib/dalli/protocol/server_config_parser.rb#39
     def parse_non_uri(str); end
 
-    # source://dalli//lib/dalli/protocol/server_config_parser.rb#28
+    # source://dalli//lib/dalli/protocol/server_config_parser.rb#30
     def parse_uri(str); end
   end
 end
 
-# source://dalli//lib/dalli/protocol/server_config_parser.rb#19
+# source://dalli//lib/dalli/protocol/server_config_parser.rb#21
 Dalli::Protocol::ServerConfigParser::DEFAULT_PORT = T.let(T.unsafe(nil), Integer)
 
-# source://dalli//lib/dalli/protocol/server_config_parser.rb#20
+# source://dalli//lib/dalli/protocol/server_config_parser.rb#22
 Dalli::Protocol::ServerConfigParser::DEFAULT_WEIGHT = T.let(T.unsafe(nil), Integer)
 
-# source://dalli//lib/dalli/protocol/server_config_parser.rb#11
+# source://dalli//lib/dalli/protocol/server_config_parser.rb#13
 Dalli::Protocol::ServerConfigParser::MEMCACHED_URI_PROTOCOL = T.let(T.unsafe(nil), String)
 
 # TODO: Revisit this, especially the IP/domain part.  Likely
@@ -1745,7 +1754,7 @@ Dalli::Protocol::ServerConfigParser::MEMCACHED_URI_PROTOCOL = T.let(T.unsafe(nil
 # is there to support IPv6 addresses, which need to be specified with
 # a bounding []
 #
-# source://dalli//lib/dalli/protocol/server_config_parser.rb#17
+# source://dalli//lib/dalli/protocol/server_config_parser.rb#19
 Dalli::Protocol::ServerConfigParser::SERVER_CONFIG_REGEXP = T.let(T.unsafe(nil), Regexp)
 
 # Utility class for sanitizing TTL arguments based on Memcached rules.
@@ -2319,7 +2328,6 @@ Rack::ETAG = T.let(T.unsafe(nil), String)
 # source://rack/2.2.4/lib/rack.rb#30
 Rack::EXPIRES = T.let(T.unsafe(nil), String)
 
-# source://rack/2.2.4/lib/rack/file.rb#6
 Rack::File = Rack::Files
 
 # source://rack/2.2.4/lib/rack.rb#39
