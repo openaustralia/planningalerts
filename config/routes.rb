@@ -74,7 +74,9 @@ Rails.application.routes.draw do
   end
 
 
-  devise_for :users
+  devise_for :users, controllers: {
+    passwords: "users/passwords"
+  }
 
   resource :profile, only: [:show] do
     resources :api_keys, only: :create
