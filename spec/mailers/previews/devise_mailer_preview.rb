@@ -18,4 +18,9 @@ class DeviseMailerPreview < ActionMailer::Preview
     user = FactoryBot.build_stubbed(:user)
     Devise::Mailer.reset_password_instructions(user, "faketoken")
   end
+
+  def activate_notify
+    user = FactoryBot.build_stubbed(:user)
+    ActivationMailer.notify(user, "faketoken")
+  end
 end
