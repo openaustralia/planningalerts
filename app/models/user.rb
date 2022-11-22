@@ -37,6 +37,17 @@ class User < ApplicationRecord
 
   private
 
+  # Overriding the default devise implementation
+  sig { params(token: String).void }
+  def send_reset_password_instructions_notification(token)
+    if requires_activation?
+      # TODO: Probably want this to be deliver_later
+      ActivationMailer.notify(self, token).deliver_now
+    else
+      send_devise_notification(:reset_password_instructions, token, {})
+    end
+  end
+
   sig { returns(T::Boolean) }
   def password_required?
     return false if @temporarily_allow_empty_password
