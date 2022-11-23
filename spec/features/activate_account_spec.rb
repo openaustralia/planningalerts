@@ -40,6 +40,18 @@ describe "Activate account" do
       create(:confirmed_user, email: "matthew@oaf.org.au")
     end
 
-    pending "should get a different email"
+    it "gets a different email" do
+      visit "/users/activation/new"
+      fill_in "Email", with: "matthew@oaf.org.au"
+      click_button "Send me account activation instructions"
+
+      expect(page).to have_content "If your email address exists in our database, you will receive an account activation link"
+
+      expect(unread_emails_for("matthew@oaf.org.au").size).to eq 1
+      open_email("matthew@oaf.org.au")
+
+      expect(current_email).to have_subject("Account activation instructions")
+      expect(current_email.default_part_body.to_s).to include("Your account has already been activated")
+    end
   end
 end

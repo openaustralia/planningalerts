@@ -180,6 +180,9 @@ module GeneratedPathHelpersModule
   def edit_user_registration_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def edit_users_activation_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def export_active_emails_admin_alerts_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

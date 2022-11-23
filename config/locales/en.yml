@@ -50,6 +50,8 @@ en:
     activation_mailer:
       notify:
         subject: "Account activation instructions"
+      already_activated:
+        subject: "Account activation instructions"
   admin:
     alerts:
       unsubscribe:

@@ -1,0 +1,9 @@
+<p>Hello <%= @user.name_with_fallback %>!</p>
+
+<p>Your account has already been activated.</p>
+
+<p>If you've forgotten your password and would like to reset it instead follow the link below</p>
+
+<p><%= link_to "Change my password", edit_user_password_url(@user, reset_password_token: @token) %></p>
+
+<p>If you didn't request this email, you can safely ignore it</p>

@@ -180,6 +180,9 @@ module GeneratedUrlHelpersModule
   def edit_user_registration_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def edit_users_activation_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def export_active_emails_admin_alerts_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }

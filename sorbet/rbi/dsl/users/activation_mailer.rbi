@@ -7,6 +7,9 @@
 class Users::ActivationMailer
   class << self
     sig { params(user: ::User, token: ::String).returns(::ActionMailer::MessageDelivery) }
+    def already_activated(user, token); end
+
+    sig { params(user: ::User, token: ::String).returns(::ActionMailer::MessageDelivery) }
     def notify(user, token); end
   end
 end

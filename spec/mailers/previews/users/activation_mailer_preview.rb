@@ -10,5 +10,10 @@ module Users
       user = FactoryBot.build_stubbed(:user)
       ActivationMailer.notify(user, "faketoken")
     end
+
+    def already_activated
+      user = FactoryBot.build_stubbed(:user)
+      ActivationMailer.already_activated(user, "faketoken")
+    end
   end
 end
