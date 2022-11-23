@@ -67,12 +67,10 @@ Rails.application.routes.draw do
     end
   end
 
-
   require 'sidekiq/web'
   authenticate :user, lambda { |u| u.admin? } do
     mount Sidekiq::Web => '/admin/jobs'
   end
-
 
   devise_for :users
 
