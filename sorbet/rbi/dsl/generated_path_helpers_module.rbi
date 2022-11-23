@@ -228,6 +228,9 @@ module GeneratedPathHelpersModule
   def new_user_session_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def new_users_activation_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def per_day_authority_applications_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -349,4 +352,7 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def user_session_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def users_activation_path(*args); end
 end

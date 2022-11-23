@@ -75,7 +75,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :users do
-    resource :activation, only: [:new, :create]
+    resource :activation, only: [:new, :create, :edit]
   end
 
   resource :profile, only: [:show] do

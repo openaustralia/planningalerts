@@ -1,0 +1,7 @@
+<p>Hello!</p>
+
+<p>Someone has requested a link to activate your account. You can do this through the link below.</p>
+
+<p><%= link_to "Activate my account", edit_users_activation_url(@user, token: @token) %></p>
+
+<p>If you didn't request this, please ignore this email.</p>

@@ -44,8 +44,8 @@ class User < ApplicationRecord
 
   sig { void }
   def send_activation_instructions
-    _token = set_reset_password_token
-    # TODO: Actually send email here
+    token = set_reset_password_token
+    Users::ActivationMailer.notify(self, token).deliver_later!
   end
 
   private
