@@ -35,6 +35,12 @@ class User < ApplicationRecord
     from_alert_or_comment && encrypted_password.blank?
   end
 
+  # Returns the name of the user. If that isn't set just returns the email
+  sig { returns(String) }
+  def name_with_fallback
+    name.presence || email
+  end
+
   private
 
   sig { returns(T::Boolean) }
