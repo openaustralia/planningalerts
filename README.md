@@ -23,7 +23,6 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 
 **Install Ruby Dependencies**
  * Install bundler - `gem install bundler -v '~>1'`
- * Install foreman - `gem install foreman`
  * Install dependencies - `bundle install`
 
 **Setup The Database**
@@ -68,7 +67,7 @@ We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all
  * Run - `rake planningalerts:applications:scrape['marrickville']`
 
 **Step 2 - Setup an Alert**
- * Start servers - `foreman start`
+ * Start servers - `bin/dev`
  * Hit the home page - http://localhost:3000
  * Enter an address e.g. 638 King St, Newtown NSW 2042
  * Click the "Email me" link and setup an alert

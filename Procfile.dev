@@ -1,2 +1,6 @@
+# Start with "bin/dev"
+#
 web: bin/rails server -p 3000
 css: bin/rails tailwindcss:watch
+worker: bin/sidekiq -q default -q mailers -q searchkick
+mailcatcher: mailcatcher --foreground

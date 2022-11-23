@@ -6,4 +6,11 @@ then
   gem install foreman
 fi
 
+# Mailcatcher shouldn't be installed with bundler
+if ! command -v mailcatcher &> /dev/null
+then
+  echo "Installing mailcatcher..."
+  gem install mailcatcher
+fi
+
 foreman start -f Procfile.dev
