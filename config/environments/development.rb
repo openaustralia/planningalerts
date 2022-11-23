@@ -89,4 +89,8 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  # Disable default security headers in development (well mainly X-Frame-Options
+  # I think) to allow this page to be opened in the embedded VSCode simple browser
+  config.action_dispatch.default_headers = {}
 end
