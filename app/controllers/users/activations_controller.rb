@@ -18,13 +18,7 @@ module Users
 
       user = User.find_by(email: params_user[:email])
       # If the user doesn't exist then don't send an email but do everything else
-      if user
-        if user.requires_activation?
-          user.send_activation_instructions
-        else
-          user.send_already_activated_instructions
-        end
-      end
+      user&.send_activation_instructions
 
       redirect_to new_user_session_path, notice: t(".success")
     end

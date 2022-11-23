@@ -45,13 +45,12 @@ class User < ApplicationRecord
   sig { void }
   def send_activation_instructions
     token = set_reset_password_token
-    Users::ActivationMailer.notify(self, token).deliver_later!
-  end
-
-  sig { void }
-  def send_already_activated_instructions
-    token = set_reset_password_token
-    Users::ActivationMailer.already_activated(self, token).deliver_later!
+    m = if requires_activation?
+          Users::ActivationMailer.notify(self, token)
+        else
+          Users::ActivationMailer.already_activated(self, token)
+        end
+    m.deliver_later!
   end
 
   private
