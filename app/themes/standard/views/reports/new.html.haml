@@ -8,8 +8,9 @@
   you think the comment should be removed.
 = semantic_form_for [@comment, @report] do |f|
   = f.inputs do
-    = f.input :name, label: "Your name", placeholder: "e.g. Jane Citizen"
-    = f.input :email, label: "Your email", placeholder: "e.g. your@email.com"
+    - if current_user.nil?
+      = f.input :name, label: "Your name", placeholder: "e.g. Jane Citizen"
+      = f.input :email, label: "Your email", placeholder: "e.g. your@email.com"
     = f.input :details, label: "Why should this comment be removed?", as: :text
     = recaptcha_tags
   = f.actions do
