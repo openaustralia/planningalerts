@@ -3,6 +3,8 @@
   %p= current_user.email
 - else
   %h2= current_user.email
+  %p
+    Please #{link_to "add your name to your profile", edit_user_registration_path}. It will make things easier.
 
 - if current_user.admin?
   %ul
