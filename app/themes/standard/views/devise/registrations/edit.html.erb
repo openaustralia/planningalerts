@@ -4,8 +4,8 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <%= f.inputs do %>
-    <%= f.input :name, required: true, hint: "Please use your full name" %>
-    <%= f.input :email, input_html: { autofocus: true, autocomplete: "email" } %>
+    <%= f.input :name, hint: "Please use your full name", input_html: { autofocus: true, autocomplete: "name" } %>
+    <%= f.input :email, input_html: { autocomplete: "email" } %>
     <% if resource.pending_reconfirmation? %>
       <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
     <% end %>

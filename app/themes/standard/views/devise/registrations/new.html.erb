@@ -9,8 +9,8 @@
     <%= render "devise/shared/error_messages", resource: resource %>
 
     <%= f.inputs do %>
-      <%= f.input :name, label: "Your full name", required: true %>
-      <%= f.input :email, input_html: { autofocus: true, autocomplete: "email" } %>
+      <%= f.input :name, label: "Your full name", input_html: { autofocus: true, autocomplete: "name" } %>
+      <%= f.input :email, input_html: { autocomplete: "email" } %>
       <%= f.input :password, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autocomplete: "new-password" } %>
     <% end %>
 
