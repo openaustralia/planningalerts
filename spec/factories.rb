@@ -112,7 +112,7 @@ FactoryBot.define do
     name { "Joe Reporter" }
     email { "reporter@foo.com" }
     details { "It's very rude!" }
-    comment { :comment }
+    comment
   end
 
   factory :user do
