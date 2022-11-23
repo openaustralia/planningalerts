@@ -43,6 +43,10 @@ en:
   reports:
     create:
       you_are_a_robot_html: Sorry, we couldn’t verify that you’re not a robot. Make sure you click the <em>I’m not a robot</em> box below and try again.
+  users:
+    activations:
+      create:
+        success: "If your email address exists in our database, you will receive an account activation link at your email address in a few minutes."
   admin:
     alerts:
       unsubscribe:

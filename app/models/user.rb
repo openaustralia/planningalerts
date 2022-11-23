@@ -9,6 +9,7 @@ class User < ApplicationRecord
   # For sorbet
   include Devise::Models::Authenticatable
   include Devise::Models::Confirmable
+  include Devise::Models::Recoverable
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :lockable and :timeoutable
@@ -39,6 +40,12 @@ class User < ApplicationRecord
   sig { returns(String) }
   def name_with_fallback
     name.presence || email
+  end
+
+  sig { void }
+  def send_activation_instructions
+    _token = set_reset_password_token
+    # TODO: Actually send email here
   end
 
   private

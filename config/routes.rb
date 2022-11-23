@@ -74,6 +74,10 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  namespace :users do
+    resource :activation, only: [:new, :create]
+  end
+
   resource :profile, only: [:show] do
     resources :api_keys, only: :create
     resources :alerts, only: %i[index edit update destroy create], controller: :alerts_new

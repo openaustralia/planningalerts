@@ -1,0 +1,19 @@
+<div class="login-block">
+  <h2>Activate your account</h2>
+  <p class="login-explanation">
+    New to PlanningAlerts?
+    <%= link_to "Create an account", new_user_registration_path %>.
+  </p>
+
+  <%= semantic_form_for(@user, url: users_activation_path, html: { method: :post }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: @user %>
+
+    <%= f.inputs do %>
+      <%= f.input :email, input_html: { autofocus: true, autocomplete: "email" } %>
+    <% end %>
+
+    <%= f.actions do %>
+      <%= f.action :submit, label: "Send me account activation instructions", button_html: { class: "button button-rounded button-large button-action" } %>
+    <% end %>
+  <% end %>
+</div>
