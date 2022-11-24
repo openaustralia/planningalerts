@@ -47,6 +47,8 @@ en:
     activations:
       create:
         success: "If your email address exists in our database, you will receive an account activation link at your email address in a few minutes."
+      update:
+        success: "Your account has been activated successfully. You are now signed in."
     activation_mailer:
       notify:
         subject: "Account activation instructions"

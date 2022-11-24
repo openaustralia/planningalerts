@@ -23,15 +23,18 @@ describe "Activate account" do
       expect(current_email).to have_subject("Account activation instructions")
       expect(current_email.default_part_body.to_s).to include("Someone has requested a link to activate your account. You can do this through the link below.")
 
-      # visit_in_email("Activate my account")
+      visit_in_email("Activate my account")
 
-      # fill_in "New password", with: "my new password"
-      # click_button "Change my password"
+      fill_in "Your full name", with: "Matthew"
+      fill_in "Password", with: "my new password"
+      click_button "Activate my account"
 
-      # expect(page).to have_content "Your password has been changed successfully. You are now signed in"
+      expect(page).to have_content "Your account has been activated successfully. You are now signed in"
+      expect(page).to have_content "Matthew"
 
-      # # The password should have changed
-      # expect(User.find_by(email: "matthew@oaf.org.au").encrypted_password).not_to eq encrypted_password
+      user = User.find_by(email: "matthew@oaf.org.au")
+      expect(user.name).to eq "Matthew"
+      expect(user.encrypted_password).not_to be_nil
     end
   end
 

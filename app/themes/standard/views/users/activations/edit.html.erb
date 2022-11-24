@@ -1,0 +1,22 @@
+<div class="login-block">
+  <h2>Activate your account</h2>
+    <p class="login-explanation">
+    After you have activated your account you will be able to login using your
+    email and password.
+  </p>
+
+  <%= semantic_form_for(@user, url: users_activation_path, html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: @user %>
+
+    <%= f.hidden_field :reset_password_token %>
+
+    <%= f.inputs do %>
+      <%= f.input :name, label: "Your full name", input_html: { autofocus: true, autocomplete: "name" } %>
+      <%= f.input :password, label: "Password", hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autofocus: true, autocomplete: "new-password" } %>
+    <% end %>
+
+    <%= f.actions do %>
+      <%= f.action :submit, label: "Activate my account", button_html: { class: "button button-rounded button-large button-action" } %>
+    <% end %>
+  <% end %>
+</div>

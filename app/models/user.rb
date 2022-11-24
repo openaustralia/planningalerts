@@ -10,6 +10,7 @@ class User < ApplicationRecord
   include Devise::Models::Authenticatable
   include Devise::Models::Confirmable
   include Devise::Models::Recoverable
+  extend Devise::Models::Validatable::ClassMethods
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :lockable and :timeoutable
