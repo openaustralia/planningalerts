@@ -7,6 +7,16 @@
 %h2 Important Privacy Notice - Please Read
 
 %p
+  The email address and street address are provided to
+  = comment.application.authority.full_name
+  only so you can contact,
+  identify and verify
+  #{comment.name},
+  in response to
+  #{comment.application.council_reference},
+  and not for any other purpose.
+
+%p
   You,
   = comment.application.authority.full_name
   do
@@ -16,16 +26,6 @@
   = comment.application.authority.full_name
   the email address and street address without express written permission from
   #{comment.name}.
-
-%p
-  The email address and street address are provided to
-  = comment.application.authority.full_name
-  only so you can contact,
-  identify and verify
-  #{comment.name},
-  in response to
-  #{comment.application.council_reference},
-  and not for any other purpose.
 
 %p
   We specifically confirm that any consent given in any form (including pursuant to your privacy policy)
