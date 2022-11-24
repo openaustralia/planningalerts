@@ -13,7 +13,8 @@ class CommentMailerPreview < ActionMailer::Preview
           address: "20 Illawarra Road Marrickville 2204"
         ),
         authority: Authority.new(
-          full_name: "Inner West Council"
+          full_name: "Inner West Council",
+          email: "hello@innerwest.nsw.gov.au"
         )
       ),
       user: User.new(
