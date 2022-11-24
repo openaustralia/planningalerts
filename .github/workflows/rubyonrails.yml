@@ -106,4 +106,4 @@ jobs:
       - name: Lint erb
         run: bin/erblint --lint-all
       - name: Security audit application code
-        run: bin/brakeman -q
+        run: bin/brakeman -q -w2
