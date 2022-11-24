@@ -6,7 +6,7 @@ require "factory_bot_rails"
 
 module Users
   class ActivationMailerPreview < ActionMailer::Preview
-    def notidy
+    def notify
       user = FactoryBot.build_stubbed(:user)
       ActivationMailer.notify(user, "faketoken")
     end
