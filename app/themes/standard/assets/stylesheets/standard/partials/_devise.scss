@@ -35,7 +35,15 @@
       }
     }
 
-    .inline-hints {
+    #error_explanation h2 {
+      text-align: left;
+    }
+
+    li.error {
+      padding: 0;
+    }
+
+    .inline-hints, .inline-errors {
       margin: 0;
     }
 
