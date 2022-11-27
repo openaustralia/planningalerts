@@ -12,7 +12,7 @@ module Admin
     def update
       s = SiteSettingForm.new(site_setting)
       s.persist
-      redirect_to admin_site_settings_url, notice: "Site settings updated"
+      redirect_to admin_site_settings_url, notice: t(".success")
     end
 
     private

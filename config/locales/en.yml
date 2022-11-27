@@ -30,6 +30,19 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    errors:
+      models:
+        alert:
+          attributes:
+            address:
+              taken: "You already have an alert for that address"
+            radius_meters:
+              greater_than: "isn't selected"
+        authority:
+          attributes:
+            state:
+              inclusion: "%{value} is not a state in Australia"
   errors:
     messages:
       not_a_date: "is not a date"
@@ -37,12 +50,19 @@ en:
       after_or_equal_to: "must be after or equal to %{date}"
       before: "must be before %{date}"
       before_or_equal_to: "must be before or equal to %{date}"
+  api_keys:
+    create:
+      success: "API key created"
+      already_have_key: "You already have an API key"
   comments:
     create:
       not_filled_out: Some of the comment wasn't filled out completely. See below.
   reports:
     create:
       you_are_a_robot_html: Sorry, we couldn’t verify that you’re not a robot. Make sure you click the <em>I’m not a robot</em> box below and try again.
+  report_mailer:
+    notify:
+      subject: "PlanningAlerts: Abuse report"
   users:
     activations:
       create:
@@ -66,3 +86,6 @@ en:
         success: "Resent comment"
       confirm:
         success: "Comment confirmed and sent"
+    site_settings:
+      update:
+        success: "Site settings updated"

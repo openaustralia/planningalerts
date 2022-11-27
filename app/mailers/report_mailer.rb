@@ -11,8 +11,7 @@ class ReportMailer < ApplicationMailer
     mail(
       to: ENV.fetch("EMAIL_MODERATOR", nil),
       from: "#{report.name} <#{ENV.fetch('EMAIL_MODERATOR', nil)}>",
-      reply_to: "#{report.name} <#{report.email}>",
-      subject: "PlanningAlerts: Abuse report"
+      reply_to: "#{report.name} <#{report.email}>"
     )
   end
 end

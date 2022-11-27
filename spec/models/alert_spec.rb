@@ -186,7 +186,7 @@ describe Alert do
     it "has a number" do
       alert = build(:alert, radius_meters: "a")
       expect(alert).not_to be_valid
-      expect(alert.errors[:radius_meters]).to eq(["isn't selected", "is not included in the list"])
+      expect(alert.errors[:radius_meters]).to eq(["is not a number", "is not included in the list"])
     end
 
     it "is greater than zero" do

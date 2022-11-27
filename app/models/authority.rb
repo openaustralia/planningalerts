@@ -10,10 +10,7 @@ class Authority < ApplicationRecord
 
   validate :short_name_encoded_is_unique
 
-  validates :state, inclusion: {
-    in: %w[NSW VIC QLD SA WA TAS NT ACT],
-    message: "%{value} is not a state in Australia"
-  }
+  validates :state, inclusion: { in: %w[NSW VIC QLD SA WA TAS NT ACT] }
 
   scope(:enabled, -> { where("disabled = 0 or disabled is null") })
   scope(:active, -> { where('(disabled = 0 or disabled is null) AND morph_name != "" AND morph_name IS NOT NULL') })

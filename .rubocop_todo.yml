@@ -6,15 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 10
-Rails/I18nLocaleTexts:
-  Exclude:
-    - 'app/controllers/admin/site_settings_controller.rb'
-    - 'app/controllers/api_keys_controller.rb'
-    - 'app/mailers/report_mailer.rb'
-    - 'app/models/alert.rb'
-    - 'app/models/authority.rb'
-
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: MaxUnannotatedPlaceholdersAllowed, AllowedMethods, AllowedPatterns, IgnoredMethods.
