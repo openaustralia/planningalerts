@@ -60,6 +60,12 @@ en:
   reports:
     create:
       you_are_a_robot_html: Sorry, we couldn’t verify that you’re not a robot. Make sure you click the <em>I’m not a robot</em> box below and try again.
+  alert_mailer:
+    new_signup_attempt_notice:
+      subject: "Your subscription for %{address}"
+  comment_mailer:
+    notify_authority:
+      subject: "Comment on application %{council_reference}"
   report_mailer:
     notify:
       subject: "PlanningAlerts: Abuse report"

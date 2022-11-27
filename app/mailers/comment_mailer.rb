@@ -27,7 +27,7 @@ class CommentMailer < ApplicationMailer
       from: email_from,
       reply_to: "#{comment.name} <#{comment.email}>",
       to: comment.application&.authority&.email,
-      subject: "Comment on application #{comment.application&.council_reference}"
+      subject: default_i18n_subject(council_reference: comment.application&.council_reference)
     )
   end
 end

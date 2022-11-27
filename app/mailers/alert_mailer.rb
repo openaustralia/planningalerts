@@ -47,7 +47,7 @@ class AlertMailer < ApplicationMailer
     mail(
       from: email_from,
       to: alert.email,
-      subject: "Your subscription for #{alert.address}"
+      subject: default_i18n_subject(address: alert.address)
     )
   end
 end
