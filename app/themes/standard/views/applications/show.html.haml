@@ -39,8 +39,15 @@
       #comments-area
         - if @comments.present?
           %h4= pluralize(@comments.count, "Comment")
-          %p.small.quiet
-            Have your say by #{link_to "adding your own comment", "#add-comment", class: "link-to-comment-form"}.
+          - if current_user.nil? && Flipper.enabled?(:force_login_to_comment)
+            %p
+              = link_to "Create an account", new_user_registration_path
+              or
+              = link_to "sign in", new_user_session_path
+              to have your say by adding your own comment.
+          - else
+            %p.small.quiet
+              Have your say by #{link_to "adding your own comment", "#add-comment", class: "link-to-comment-form"}.
           %ol#comments
             - @comments.each do |comment|
               %li= render comment, with_address: false
@@ -48,7 +55,14 @@
         %h4#add-comment Have your say on this application
         - if @application.authority.email.present?
           = render "comments/form_introduction", application: @application
-          = render "comments/form", application: @application, comment: @comment
+          - if current_user.nil? && Flipper.enabled?(:force_login_to_comment)
+            %p
+              = link_to "Create an account", new_user_registration_path
+              or
+              = link_to "sign in", new_user_session_path
+              to make a comment
+          - else
+            = render "comments/form", application: @application, comment: @comment
         - else
           = render "comments/no_authority_email_explanation", application: @application
 
