@@ -27,10 +27,10 @@
     The more people that sign up for your area, the sooner we'll add your area to PlanningAlerts. So, get your friends and neighbours to sign up too!
 
 - else
-  = render "alerts/signup_form", alert: @alert,
-                                 with_intro: true,
-                                 address_hidden: true,
-                                 form_classes: "attention"
+  .attention
+    = render "alerts/signup_form", alert: @alert,
+                                   with_intro: true,
+                                   address_hidden: true
 
   %ul.list-options
     %li
