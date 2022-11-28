@@ -3,9 +3,8 @@
 %h3= @description
 
 .attention
-  = render "alerts/signup_form", alert: @alert,
-                                with_intro: true,
-                                address_hidden: false
+  = render "alerts/signup_introduction"
+  = render "alerts/signup_form", alert: @alert, address_hidden: false
 
 - if @authority&.broken?
   - if @authority.date_last_new_application_scraped.nil?

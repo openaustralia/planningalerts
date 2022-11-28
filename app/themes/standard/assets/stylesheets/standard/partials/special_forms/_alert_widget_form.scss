@@ -1,7 +1,5 @@
 #sidebar .formtastic.alert {
-  @include boxed-content;
-  margin-top: 0;
-
+  width: 100%;
   .label {
     /* Use seriously old-school way of hiding these labels so that placeholder polyfill can still work */
     left: -999em;

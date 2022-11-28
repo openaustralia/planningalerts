@@ -28,9 +28,8 @@
 
 - else
   .attention
-    = render "alerts/signup_form", alert: @alert,
-                                   with_intro: true,
-                                   address_hidden: true
+    = render "alerts/signup_introduction"
+    = render "alerts/signup_form", alert: @alert, address_hidden: true
 
   %ul.list-options
     %li
