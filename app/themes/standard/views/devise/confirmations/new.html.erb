@@ -1,7 +1,8 @@
 <div class="login-block">
   <h2>Resend confirmation instructions</h2>
   <p class="login-explanation">
-    Or you could try <%= link_to "creating an account", new_user_registration_path %> again.
+    Or you could <%= link_to "create an account", new_user_registration_path %> or
+    <%= link_to "sign in", new_user_session_path %>.
   </p>
 
   <%= semantic_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
