@@ -59,8 +59,27 @@ function preview(centre_lat, centre_lng, radius_in_metres) {
 };
 
 $(document).ready(function(){
-  map_div = $("#map_div.alert-radius");
-  if (map_div.length) {
+  // Map on the application page
+  if ($("#map_div.application").length) {
+    initialiseMap(
+      "map_div",
+      $("#map_div").data("latitude"),
+      $("#map_div").data("longitude"),
+      $("#map_div").data("address")
+    );
+  }
+  // Streetview on the application page
+  if ($("#pano").length) {
+    initialisePano(
+      "pano",
+      $("#pano").data("latitude"),
+      $("#pano").data("longitude"),
+      $("#pano").data("address")
+    );
+  }
+  // Alert radius map on the edit alert page
+  if ($("#map_div.alert-radius").length) {
+    map_div = $("#map_div.alert-radius");
     lat = map_div.data("lat");
     lng = map_div.data("lng");
     address = map_div.data("address");

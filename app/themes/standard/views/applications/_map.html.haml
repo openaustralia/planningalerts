@@ -1,6 +1,6 @@
 - if application.location
   -# If just showing the map make it twice as wide
-  #map_div{ data: { latitude: application.lat, longitude: application.lng, address: application.address }, class: ("double" unless SiteSetting.get(:streetview_in_app_enabled)) }
+  .application#map_div{ data: { latitude: application.lat, longitude: application.lng, address: application.address }, class: ("double" unless SiteSetting.get(:streetview_in_app_enabled)) }
     %noscript= google_static_map(application, size: "350x330")
 
   - if SiteSetting.get(:streetview_in_app_enabled)

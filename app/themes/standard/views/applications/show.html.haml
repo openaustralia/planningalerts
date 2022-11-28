@@ -100,24 +100,4 @@
 
   = render "applications/social_share", application: @application
 
-:javascript
-  $(document).ready(function(){
-    if ($("#map_div").length) {
-      initialiseMap(
-        "map_div",
-        $("#map_div").data("latitude"),
-        $("#map_div").data("longitude"),
-        $("#map_div").data("address")
-      );
-    }
-    if ($("#pano").length) {
-      initialisePano(
-        "pano",
-        $("#pano").data("latitude"),
-        $("#pano").data("longitude"),
-        $("#pano").data("address")
-      );
-    }
-  })
-
 = javascript_include_tag "maps"
