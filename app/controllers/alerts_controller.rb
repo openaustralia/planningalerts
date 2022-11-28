@@ -4,6 +4,8 @@
 class AlertsController < ApplicationController
   extend T::Sig
 
+  before_action :authenticate_user!, only: :new, if: :force_login
+
   sig { void }
   def new
     # If you're logged then don't ask for your email address
@@ -90,5 +92,12 @@ class AlertsController < ApplicationController
     alert.update!(radius_meters: params_radius_meters.to_i)
 
     @alert = T.let(alert, T.nilable(Alert))
+  end
+
+  private
+
+  sig { returns(T::Boolean) }
+  def force_login
+    Flipper.enabled?(:force_login_to_comment)
   end
 end
