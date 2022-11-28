@@ -106,4 +106,9 @@ RSpec.configure do |config|
   config.before(:suite) do
     Searchkick.disable_callbacks
   end
+
+  # For testing use a memory adapter with all features disabled by default
+  config.before do
+    Flipper.instance = Flipper.new(Flipper::Adapters::Memory.new)
+  end
 end
