@@ -72,7 +72,9 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/admin/jobs'
   end
 
-  devise_for :users
+  devise_for :users, controllers: {
+    confirmations: "users/confirmations"
+  }
 
   namespace :users do
     resource :activation, only: [:new, :create, :edit, :update]
