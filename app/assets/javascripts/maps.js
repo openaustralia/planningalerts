@@ -57,3 +57,26 @@ function preview(centre_lat, centre_lng, radius_in_metres) {
   p.setOpacity(0.2);
   map.addPolyline(p);
 };
+
+$(document).ready(function(){
+  map_div = $("#map_div.alert-radius");
+  if (map_div.length) {
+    lat = map_div.data("lat");
+    lng = map_div.data("lng");
+    address = map_div.data("address");
+    radius_meters = map_div.data("radius-meters");
+
+    map = new mxn.Mapstraction("map_div","googlev3");
+    centre = new mxn.LatLonPoint(lat, lng);
+    map.setCenterAndZoom(centre, 13);
+    map.addSmallControls();
+    map.addMapTypeControls();
+    marker = new mxn.Marker(centre)
+    marker.setLabel(address);
+    map.addMarker(marker);
+    preview(lat, lng, radius_meters);
+    $('.sizes input').click(function(){
+      preview(lat, lng, $(this).val());
+    });
+  }
+});
