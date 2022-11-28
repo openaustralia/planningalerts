@@ -57,7 +57,7 @@ describe "Sign up for alerts" do
 
       within "#new_alert" do
         fill_in("Enter your email address", with: "example@example.com")
-        click_button("Create Alert")
+        click_button("Create alert")
       end
 
       expect(page).to have_content("Now check your email")

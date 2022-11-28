@@ -63,7 +63,7 @@
             = f.semantic_fields_for :user do |user|
               = user.input :email, label: "Enter your email address", placeholder: "Enter your email address"
         = f.actions do
-          = f.action :submit, label: "Create Alert", button_html: { class: "button button-rounded button-action button-large" }
+          = f.action :submit, label: "Create alert", button_html: { class: "button button-rounded button-action button-large" }
 
   - if @application.no_alerted || @nearby_count != 0
     #application-stats
