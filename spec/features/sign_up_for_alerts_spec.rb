@@ -160,15 +160,6 @@ describe "Sign up for alerts" do
       expect(page).to have_content("Your email address has been successfully confirmed and you are now logged in.")
       expect(page).to have_content("Ms Example")
 
-      # Ideally we would land up on the same page where we started. But unfortunately right now that is NOT
-      # the case. We end up on the landing page
-      # TODO: Fix this
-
-      # We need to manually go back to where we started. Ugh!
-      # TODO: Fix this so the user doesn't need to do this extra step! VERY IMPORTANT!
-      fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
-      click_button("Search")
-
       # We should be back at the same page from where we clicked "sign in"
       expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
       click_button("Create alert")
