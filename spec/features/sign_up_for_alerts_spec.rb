@@ -5,10 +5,22 @@ require "spec_helper"
 describe "Sign up for alerts" do
   # In order to see new development applications in my suburb
   # I want to sign up for an email alert
-  around do |example|
-    VCR.use_cassette("planningalerts") do
-      example.run
-    end
+
+  before do
+    # It's more elegant to mock out the geocoder rather than using VCR
+    g = GeocodedLocation.new(
+      lat: -33.772607,
+      lng: 150.624245,
+      suburb: "Glenbrook",
+      state: "NSW",
+      postcode: "2773",
+      full_address: "24 Bruce Rd, Glenbrook NSW 2773"
+    )
+    allow(GoogleGeocodeService).to receive(:call).with("24 Bruce Rd, Glenbrook").and_return(GeocoderResults.new([g], nil))
+    allow(GoogleGeocodeService).to receive(:call).with("24 Bruce Rd, Glenbrook NSW 2773").and_return(GeocoderResults.new([g], nil))
+    allow(GoogleGeocodeService).to receive(:call).with("Bruce Rd").and_return(
+      GeocoderResults.new([], "Please enter a full street address, including suburb and state, e.g. Bruce Rd, Victoria")
+    )
   end
 
   it "successfully" do
@@ -102,18 +114,6 @@ describe "Sign up for alerts" do
       before do
         create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", lat: -33.772812, lng: 150.624252)
         create(:confirmed_user, email: "example@example.com", password: "mypassword")
-        # We're mocking out the geocoder because the VCR stuff set above doesn't handle what we need
-        # TODO: Replace VCR with the mocked geocoding everywhere in this feature test because it's more clear what's being assumed
-        g = GeocodedLocation.new(
-          lat: -33.772607,
-          lng: 150.624245,
-          suburb: "Glenbrook",
-          state: "NSW",
-          postcode: "2773",
-          full_address: "24 Bruce Road, Glenbrook NSW 2773, Australia"
-        )
-        allow(GoogleGeocodeService).to receive(:call).with("24 Bruce Rd, Glenbrook").and_return(GeocoderResults.new([g], nil))
-        allow(GoogleGeocodeService).to receive(:call).with("24 Bruce Road, Glenbrook NSW 2773, Australia").and_return(GeocoderResults.new([g], nil))
       end
 
       it "when not logged in to start with" do
@@ -121,7 +121,7 @@ describe "Sign up for alerts" do
         fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
         click_button("Search")
 
-        expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Road, Glenbrook NSW 2773, Australia")
+        expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
         expect(page).to have_content("Create an account or sign in to create an alert.")
         click_link("sign in")
 
@@ -131,10 +131,10 @@ describe "Sign up for alerts" do
 
         expect(page).to have_content("Signed in successfully.")
         # We should be back at the same page from where we clicked "sign in"
-        expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Road, Glenbrook NSW 2773, Australia")
+        expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
         click_button("Create alert")
 
-        expect(page).to have_content("You succesfully added a new alert for 24 Bruce Road, Glenbrook NSW 2773, Australia")
+        expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
       end
     end
   end
