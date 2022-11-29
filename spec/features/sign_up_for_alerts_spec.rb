@@ -93,6 +93,52 @@ describe "Sign up for alerts" do
     end
   end
 
+  context "with force login feature flag set" do
+    before do
+      Flipper.enable(:force_login_to_comment)
+    end
+
+    context "when via the homepage" do
+      before do
+        create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", lat: -33.772812, lng: 150.624252)
+        create(:confirmed_user, email: "example@example.com", password: "mypassword")
+        # We're mocking out the geocoder because the VCR stuff set above doesn't handle what we need
+        # TODO: Replace VCR with the mocked geocoding everywhere in this feature test because it's more clear what's being assumed
+        g = GeocodedLocation.new(
+          lat: -33.772607,
+          lng: 150.624245,
+          suburb: "Glenbrook",
+          state: "NSW",
+          postcode: "2773",
+          full_address: "24 Bruce Road, Glenbrook NSW 2773, Australia"
+        )
+        allow(GoogleGeocodeService).to receive(:call).with("24 Bruce Rd, Glenbrook").and_return(GeocoderResults.new([g], nil))
+        allow(GoogleGeocodeService).to receive(:call).with("24 Bruce Road, Glenbrook NSW 2773, Australia").and_return(GeocoderResults.new([g], nil))
+      end
+
+      it "when not logged in to start with" do
+        visit root_path
+        fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
+        click_button("Search")
+
+        expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Road, Glenbrook NSW 2773, Australia")
+        expect(page).to have_content("Create an account or sign in to create an alert.")
+        click_link("sign in")
+
+        fill_in("Your email", with: "example@example.com")
+        fill_in("Password", with: "mypassword")
+        click_button("Sign in")
+
+        expect(page).to have_content("Signed in successfully.")
+        # We should be back at the same page from where we clicked "sign in"
+        expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Road, Glenbrook NSW 2773, Australia")
+        click_button("Create alert")
+
+        expect(page).to have_content("You succesfully added a new alert for 24 Bruce Road, Glenbrook NSW 2773, Australia")
+      end
+    end
+  end
+
   context "when via an authority’s applications page" do
     before do
       authority = create(:authority, short_name: "Glenbrook")
