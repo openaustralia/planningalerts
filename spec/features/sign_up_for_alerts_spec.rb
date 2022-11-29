@@ -110,32 +110,70 @@ describe "Sign up for alerts" do
       Flipper.enable(:force_login_to_comment)
     end
 
-    context "when via the homepage" do
-      before do
-        create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", lat: -33.772812, lng: 150.624252)
-        create(:confirmed_user, email: "example@example.com", password: "mypassword")
-      end
+    it "when via the homepage with a pre-existing user but not logged in" do
+      create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", lat: -33.772812, lng: 150.624252)
+      create(:confirmed_user, email: "example@example.com", password: "mypassword")
 
-      it "when not logged in to start with" do
-        visit root_path
-        fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
-        click_button("Search")
+      visit root_path
+      fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
+      click_button("Search")
 
-        expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
-        expect(page).to have_content("Create an account or sign in to create an alert.")
-        click_link("sign in")
+      expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
+      expect(page).to have_content("Create an account or sign in to create an alert.")
+      click_link("sign in")
 
-        fill_in("Your email", with: "example@example.com")
-        fill_in("Password", with: "mypassword")
-        click_button("Sign in")
+      fill_in("Your email", with: "example@example.com")
+      fill_in("Password", with: "mypassword")
+      click_button("Sign in")
 
-        expect(page).to have_content("Signed in successfully.")
-        # We should be back at the same page from where we clicked "sign in"
-        expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
-        click_button("Create alert")
+      expect(page).to have_content("Signed in successfully.")
+      # We should be back at the same page from where we clicked "sign in"
+      expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
+      click_button("Create alert")
 
-        expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
-      end
+      expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
+    end
+
+    it "when via the homepage but not yet have an account" do
+      create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", lat: -33.772812, lng: 150.624252)
+
+      visit root_path
+      fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
+      click_button("Search")
+
+      expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
+      expect(page).to have_content("Create an account or sign in to create an alert.")
+      click_link("Create an account")
+
+      fill_in("Your full name", with: "Ms Example")
+      fill_in("Email", with: "example@example.com")
+      fill_in("Password", with: "mypassword")
+      click_button("Create my account")
+
+      expect(page).to have_content("A message with a confirmation link has been sent to your email address.")
+
+      open_email("example@example.com")
+      expect(current_email).to have_subject("Confirmation instructions")
+
+      visit_in_email("Confirm my account")
+
+      expect(page).to have_content("Your email address has been successfully confirmed and you are now logged in.")
+      expect(page).to have_content("Ms Example")
+
+      # Ideally we would land up on the same page where we started. But unfortunately right now that is NOT
+      # the case. We end up on the landing page
+      # TODO: Fix this
+
+      # We need to manually go back to where we started. Ugh!
+      # TODO: Fix this so the user doesn't need to do this extra step! VERY IMPORTANT!
+      fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
+      click_button("Search")
+
+      # We should be back at the same page from where we clicked "sign in"
+      expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
+      click_button("Create alert")
+
+      expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
     end
   end
 
