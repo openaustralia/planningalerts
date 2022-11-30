@@ -22,6 +22,8 @@ class AlertMailer < ApplicationMailer
     @force_login = T.let(force_login, T.nilable(T::Boolean))
 
     headers(
+      # The List-Unsubscribe header appears not to be working in gmail anymore
+      # TODO: Figure out what's going on. Is it fixable?
       "List-Unsubscribe" => "<#{unsubscribe_alert_url(confirm_id: alert.confirm_id)}>",
       # This special header sets arbitrary metadata on the email in Cuttlefish
       # It's not sent on in the outgoing email
