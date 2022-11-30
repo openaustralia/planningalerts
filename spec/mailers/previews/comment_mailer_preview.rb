@@ -2,6 +2,8 @@
 
 # You can preview the mails by browsing to http://localhost:3000/rails/mailers
 
+require "factory_bot_rails"
+
 class CommentMailerPreview < ActionMailer::Preview
   def notify_authority
     comment = Comment.new(
@@ -26,5 +28,11 @@ class CommentMailerPreview < ActionMailer::Preview
     )
 
     CommentMailer.notify_authority(comment)
+  end
+
+  # This is the old-school kind that we are getting rid of
+  def confirmation
+    comment = FactoryBot.build_stubbed(:comment, confirm_id: "1234")
+    ConfirmationMailer.confirm(comment)
   end
 end

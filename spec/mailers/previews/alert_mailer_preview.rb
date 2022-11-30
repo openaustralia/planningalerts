@@ -2,6 +2,8 @@
 
 # You can preview the mails by browsing to http://localhost:3000/rails/mailers
 
+require "factory_bot_rails"
+
 class AlertMailerPreview < ActionMailer::Preview
   def alert
     alert = Alert.new(
@@ -68,5 +70,11 @@ class AlertMailerPreview < ActionMailer::Preview
     )
 
     AlertMailer.alert(alert: alert, applications: [application], comments: [comment], force_login: true)
+  end
+
+  # This is the old-school kind that we are getting rid of
+  def confirmation
+    alert = FactoryBot.build_stubbed(:alert, confirm_id: "1234")
+    ConfirmationMailer.confirm(alert)
   end
 end
