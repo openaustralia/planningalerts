@@ -4,7 +4,7 @@
 
 require "factory_bot_rails"
 
-class ReportMailerPreview < ActionMailer::Preview
+class ReportsPreview < ActionMailer::Preview
   def notify
     report = FactoryBot.build_stubbed(:report)
     ReportMailer.notify(report)

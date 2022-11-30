@@ -4,7 +4,7 @@
 
 require "factory_bot_rails"
 
-class CommentMailerPreview < ActionMailer::Preview
+class AuthorityPreview < ActionMailer::Preview
   def notify_authority
     comment = Comment.new(
       application: Application.new(

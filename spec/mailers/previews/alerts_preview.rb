@@ -4,7 +4,7 @@
 
 require "factory_bot_rails"
 
-class AlertMailerPreview < ActionMailer::Preview
+class AlertsPreview < ActionMailer::Preview
   def alert
     alert = Alert.new(
       lat: -33.902723,
