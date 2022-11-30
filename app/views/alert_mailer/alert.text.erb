@@ -1,4 +1,9 @@
 <%= render "header" -%>
+<% if @alert.user.requires_activation? && @force_login %>
+<%= render "activate_account_call_to_action", alert: @alert %>
+============================================================
+
+<% end %>
 <% unless @comments.empty? %>
 <%= render "comments", comments: @comments, alert: @alert -%>
 <% unless @applications.empty? -%>
@@ -15,4 +20,4 @@
 
 <%= render "donation_banner" %>
 <%= render "footer_main" %>
-<%= render "footer_actions", alert: @alert %>
+<%= render "footer_actions", alert: @alert, force_login: @force_login %>

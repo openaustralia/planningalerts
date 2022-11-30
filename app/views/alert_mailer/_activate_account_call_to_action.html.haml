@@ -1,0 +1,12 @@
+.box
+  %p Please activate your account!
+
+  %p
+    To make it easier for you to manage your personal settings on PlanningAlerts we're changing the way things work.
+    With your email address
+    = alert.email
+    and a password you set when you activate your account you will be able to login and manage your settings.
+    = link_to "Read more", "#"
+    about why we're making this change.
+
+  %p= link_to "Activate my account", new_users_activation_url(email: alert.email)

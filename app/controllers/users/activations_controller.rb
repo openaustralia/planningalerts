@@ -9,7 +9,8 @@ module Users
 
     sig { void }
     def new
-      @user = T.let(User.new, T.nilable(User))
+      user = User.new(email: params[:email])
+      @user = T.let(user, T.nilable(User))
     end
 
     sig { void }

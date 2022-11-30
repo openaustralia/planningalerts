@@ -1,5 +1,11 @@
 %p
   You can
-  = link_to "change the size", edit_alert_url(confirm_id: alert.confirm_id)
+  - if force_login
+    = link_to "change the size", edit_profile_alert_url(alert)
+  - else
+    = link_to "change the size", edit_alert_url(confirm_id: alert.confirm_id)
   of the area you’re interested in or
-  #{link_to "unsubscribe from alerts for this address", unsubscribe_alert_url(confirm_id: alert.confirm_id)}.
+  - if force_login
+    #{link_to "unsubscribe from alerts", profile_alerts_url}.
+  - else
+    #{link_to "unsubscribe from alerts for this address", unsubscribe_alert_url(confirm_id: alert.confirm_id)}.
