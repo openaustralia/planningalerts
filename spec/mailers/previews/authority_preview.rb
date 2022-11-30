@@ -35,4 +35,9 @@ class AuthorityPreview < ActionMailer::Preview
     comment = FactoryBot.build_stubbed(:comment, confirm_id: "1234")
     ConfirmationMailer.confirm(comment)
   end
+
+  def abuse_report
+    report = FactoryBot.build_stubbed(:report)
+    ReportMailer.notify(report)
+  end
 end
