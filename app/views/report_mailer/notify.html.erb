@@ -1,0 +1,15 @@
+<p>
+  The abuse report was completed by <%= @report.name %> (<%= @report.email %>) who said:
+</p>
+
+<blockquote><%= @report.details %></blockquote>
+
+<p>
+  The
+  <%= link_to "original comment", application_url(@comment.application, anchor: "comment#{@comment.id}") %>
+  was written by <%= link_to @comment.name, admin_user_url(@comment.user) %> who said:
+</p>
+
+<blockquote><%= @comment.text %></blockquote>
+
+<p><%= link_to "Edit/hide/delete this comment", edit_admin_comment_url(@comment) %></p>

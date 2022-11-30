@@ -39,7 +39,7 @@ describe ReportMailer do
   end
 
   it "tells the moderator everything they need to know to decide on what to do with the report" do
-    expect(notifier.body.to_s).to eq <<~REPORT
+    expect(notifier.text_part.body.to_s).to eq <<~REPORT
       The abuse report was completed by Joe Reporter (reporter@foo.com) who said:
       It's very rude!
 
@@ -55,6 +55,6 @@ describe ReportMailer do
   end
 
   it "doesn’t include the commenters email as this could lead to data leak" do
-    expect(notifier.body.to_s).not_to have_content("rude@foo.com")
+    expect(notifier.text_part.body.to_s).not_to have_content("rude@foo.com")
   end
 end
