@@ -2,7 +2,7 @@
 <%= application.address %>
 <%= distance_and_heading_in_words(alert.location, application.location) %>
 
-<%= raw application.description %>
+<%= application.description %>
 
-Read more: <%= raw application_url_with_tracking(id: application.id) %>
-Add your own comment: <%= raw new_comment_url_with_tracking(id: application.id) %>
+Read more: <%= application_url_with_tracking(id: application.id) %>
+Add your own comment: <%= new_comment_url_with_tracking(id: application.id) %>
