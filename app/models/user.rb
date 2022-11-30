@@ -18,7 +18,9 @@ class User < ApplicationRecord
          :trackable, :validatable, :confirmable
   has_many :api_keys, dependent: :destroy
   has_many :alerts, dependent: :destroy
-  has_many :comments, dependent: :destroy
+  # If a user is destroyed we want to keep the comments because they
+  # are part of the public record
+  has_many :comments, dependent: :nullify
 
   sig { params(notification: T.untyped, args: T.untyped).void }
   def send_devise_notification(notification, *args)
