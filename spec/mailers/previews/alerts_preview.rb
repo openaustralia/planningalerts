@@ -38,6 +38,12 @@ class AlertsPreview < ActionMailer::Preview
     AlertMailer.alert(alert: alert, applications: [application], comments: [comment])
   end
 
+  # This is getting phased out
+  def new_signup_attempt_notice
+    alert = FactoryBot.build_stubbed(:alert)
+    AlertMailer.new_signup_attempt_notice(alert)
+  end
+
   def force_login_enabled_and_account_requires_activation
     alert = Alert.new(
       lat: -33.902723,
