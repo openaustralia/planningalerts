@@ -11,13 +11,15 @@ class AlertMailer < ApplicationMailer
     params(
       alert: Alert,
       applications: T::Array[Application],
-      comments: T::Array[Comment]
+      comments: T::Array[Comment],
+      force_login: T::Boolean
     ).returns(T.any(Mail::Message, ActionMailer::MessageDelivery))
   end
-  def alert(alert, applications, comments = [])
+  def alert(alert:, applications: [], comments: [], force_login: false)
     @alert = T.let(alert, T.nilable(Alert))
     @applications = T.let(applications, T.nilable(T::Array[Application]))
     @comments = T.let(comments, T.nilable(T::Array[Comment]))
+    @force_login = T.let(force_login, T.nilable(T::Boolean))
 
     headers(
       "List-Unsubscribe" => "<#{unsubscribe_alert_url(confirm_id: alert.confirm_id)}>",

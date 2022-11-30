@@ -33,6 +33,6 @@ class AlertMailerPreview < ActionMailer::Preview
       name: "Martha"
     )
 
-    AlertMailer.alert(alert, [application], [comment])
+    AlertMailer.alert(alert: alert, applications: [application], comments: [comment])
   end
 end
