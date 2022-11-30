@@ -14,7 +14,7 @@ class AlertMailer
         force_login: T::Boolean
       ).returns(::ActionMailer::MessageDelivery)
     end
-    def alert(alert:, applications:, comments: T.unsafe(nil), force_login: T.unsafe(nil)); end
+    def alert(alert:, applications: T.unsafe(nil), comments: T.unsafe(nil), force_login: T.unsafe(nil)); end
 
     sig { params(alert: ::Alert).returns(::ActionMailer::MessageDelivery) }
     def new_signup_attempt_notice(alert); end
