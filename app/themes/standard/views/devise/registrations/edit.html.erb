@@ -30,4 +30,4 @@
   </p>
 <% end %>
 
-<p><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "button button-rounded button-action" %></p>
+<p><%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "This will permanently remove your account and can not be undone. Are you sure?" }, method: :delete, class: "button button-rounded button-action" %></p>
