@@ -77,9 +77,9 @@ en:
         success: "Your account has been activated successfully. You are now signed in."
     activation_mailer:
       notify:
-        subject: "Account activation instructions"
+        subject: "PlanningAlerts: Account activation instructions"
       already_activated:
-        subject: "Account activation instructions"
+        subject: "PlanningAlerts: Account activation instructions"
   admin:
     alerts:
       unsubscribe:
