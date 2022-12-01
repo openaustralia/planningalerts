@@ -21,4 +21,4 @@
           - else
             Not yet sent
         %td
-          = button_to "Unsubscribe", [:profile, alert], method: :delete, class: "button button-action"
+          = button_to "Unsubscribe", [:profile, alert], method: :delete, data: { confirm: "Are you sure you want to unsubscribe for email alerts for #{alert.address}?" }, class: "button button-action"
