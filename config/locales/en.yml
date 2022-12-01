@@ -43,6 +43,25 @@ en:
           attributes:
             state:
               inclusion: "%{value} is not a state in Australia"
+  formtastic:
+    labels:
+      comment:
+        text: "Your comment"
+        name: "Your name"
+        email: "Your email"
+        address: "Your street address"
+    hints:
+      comment:
+        text: "Have you made a donation or gift to a Councillor or Council employee? <a href=\"%{link}\">You may need to disclose this</a>"
+        name: "Please use your real full name if possible."
+        email: "We never display your email address."
+        address: "We never display your street address. <a href=\"%{link}\">Why do you need my address?</a>"
+    placeholders:
+      comment:
+        text: "Be polite, clear, and to the point so your comment gets listened to."
+        name: "e.g. Jane Citizen"
+        email: "e.g. your@email.com"
+        address: "e.g. 1 Sowerby St, Goulburn, NSW 2580"
   errors:
     messages:
       not_a_date: "is not a date"
