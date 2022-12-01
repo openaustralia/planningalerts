@@ -21,11 +21,11 @@ class LoginAndAccountPreview < ActionMailer::Preview
 
   def activate_account_instructions
     user = FactoryBot.build_stubbed(:user)
-    ActivationMailer.notify(user, "faketoken")
+    Users::ActivationMailer.notify(user, "faketoken")
   end
 
   def activate_account_already_activated
     user = FactoryBot.build_stubbed(:user)
-    ActivationMailer.already_activated(user, "faketoken")
+    Users::ActivationMailer.already_activated(user, "faketoken")
   end
 end
