@@ -5,6 +5,8 @@
 //= require geolocation
 //= require applications
 //= require event_tracking
+// Need ujs for confirmation on buttons
+//= require jquery_ujs
 
 $("#menu .toggle").click(function(){
   $("#menu ul").slideToggle("fast", function(){
