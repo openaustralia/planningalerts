@@ -1,4 +1,8 @@
-<p>Welcome <%= @email %>!</p>
+<% if @resource.name.present? %>
+  <p>Welcome <%= @resource.name %>!</p>
+<% else %>
+  <p>Welcome!</p>
+<% end %>
 
 <p>You can confirm your account email through the link below:</p>
 

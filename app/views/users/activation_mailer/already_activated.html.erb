@@ -1,4 +1,8 @@
-<p>Hello <%= @user.name_with_fallback %>!</p>
+<% if @user.name.present? %>
+  <p>Hello <%= @user.name %>!</p>
+<% else %>
+  <p>Hello!</p>
+<% end %>
 
 <p>Your account has already been activated.</p>
 

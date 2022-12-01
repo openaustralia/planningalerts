@@ -40,6 +40,11 @@ class User < ApplicationRecord
   end
 
   # Returns the name of the user. If that isn't set just returns the email
+  # We want to use this very sparingly. The only place it really makes sense
+  # is in the nav bar. In places where we are referring to people by name
+  # it doesn't make sense to use their email address if their name isn't
+  # available. It makes much more sense in that case to just have a more
+  # generic "Hello!" rather than "Hello foo@foo.com!".
   sig { returns(String) }
   def name_with_fallback
     name.presence || email
