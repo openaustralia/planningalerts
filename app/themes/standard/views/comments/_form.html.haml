@@ -21,6 +21,7 @@
                             as: :email
     -# rubocop:disable Rails/OutputSafety
     = f.input :address, label: "Your street address",
+                        input_html: { class: "address-autocomplete-input" },
                         placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
                         hint: "We never display your street address. #{link_to("Why do you need my address?", faq_path(anchor: "address"))}".html_safe
     -# rubocop:enable Rails/OutputSafety
