@@ -1,8 +1,8 @@
 The abuse report was completed by <%= @report.name %> (<%= @report.email %>) who said:
-<%= @report.details.html_safe %>
+<%= @report.details %>
 
-The original comment was written by <%= @comment.name%> who said:
-<%= @comment.text.html_safe %>
+The original comment was written by <%= @comment.name %> who said:
+<%= @comment.text %>
 
 The original comment can be found at:
 <%= application_url(@comment.application, anchor: "comment#{@comment.id}") %>
