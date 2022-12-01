@@ -6,8 +6,8 @@
 
 <p>Your account has already been activated.</p>
 
-<p>If you've forgotten your password and would like to reset it instead follow the link below</p>
+<p>If you've forgotten your password and would like to reset it instead then click the link below</p>
 
-<p><%= link_to "Change my password", edit_user_password_url(@user, reset_password_token: @token) %></p>
+<p><%= link_to "Reset password", edit_user_password_url(@user, reset_password_token: @token) %></p>
 
-<p>If you didn't request this email, you can safely ignore it</p>
+<p>Didn't request this email? Then you can safely ignore it.</p>

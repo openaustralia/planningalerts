@@ -155,7 +155,7 @@ describe "Sign up for alerts" do
       open_email("example@example.com")
       expect(current_email).to have_subject("PlanningAlerts: Confirmation instructions")
 
-      visit_in_email("Confirm my account")
+      visit_in_email("Confirm account")
 
       expect(page).to have_content("Your email address has been successfully confirmed and you are now logged in.")
       expect(page).to have_content("Ms Example")
