@@ -90,7 +90,8 @@ module ApplicationsHelper
   # Version of google_static_map above that isn't tied into the implementation of Application
   sig { params(lat: Float, lng: Float, size: String, label: String, zoom: Integer, key: String).returns(String) }
   def google_static_map_lat_lng(lat:, lng:, size: "350x200", label: "Map", zoom: 16, key: "GOOGLE_MAPS_API_KEY")
-    image_tag(google_static_map_url(lat: lat, lng: lng, zoom: zoom, size: size, key: key), size: size, alt: label)
+    url = google_static_map_url(lat: lat, lng: lng, zoom: zoom, size: size, key: key)
+    image_tag(url, size: size, alt: label)
   end
 
   sig { params(lat: T.nilable(Float), lng: T.nilable(Float), zoom: Integer, size: String, key: String).returns(T.nilable(String)) }
