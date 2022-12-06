@@ -1,0 +1,20 @@
+ul.email-alert-list {
+  list-style: none;
+  padding: 0;
+}
+
+.email-alert-list .email-alert {
+  margin-bottom: 4em;
+
+  .email-alert-main { 
+    max-width: 40em;
+  }
+
+  .unsubscribe { 
+    margin-top: 1em;
+  }
+
+  h4 {
+    margin: 1em 0;
+  }
+}
