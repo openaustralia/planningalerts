@@ -5,7 +5,7 @@
     - alerts.each do |alert|
       -# TODO: Show an error of some sort if the last delivery was not successful
       %li.email-alert
-        = google_static_map_lat_lng(alert.lat, alert.lng, zoom: 12, size: "300x300")
+        = google_static_map_lat_lng(lat: alert.lat, lng: alert.lng, zoom: 12, size: "300x300")
         .email-alert-main
           %h4
             Within
