@@ -49,7 +49,8 @@ function drawCircleOnMap(map, centre_lat, centre_lng, radius_in_metres) {
   return new google.maps.Circle({
     strokeColor: "#FF0000",
     strokeOpacity: 0.2,
-    fillOpacity: 0,
+    fillColor: "#FF0000",
+    fillOpacity: 0.1,
     map: map,
     center: { lat: centre_lat, lng: centre_lng },
     radius: radius_in_metres,
