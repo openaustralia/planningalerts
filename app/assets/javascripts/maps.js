@@ -1,7 +1,7 @@
-function initialiseMap(id, lat, lng, address, zoom) {
+function initialiseMap(elem, lat, lng, address, zoom) {
   var center = { lat: lat, lng: lng };
   var map = new google.maps.Map(
-    document.getElementById(id),
+    elem,
     { zoom: zoom, center: center, fullscreenControl: false, streetViewControl: false, draggable: false }
   );
   new google.maps.Marker({ position: center, map: map, title: address });
@@ -9,10 +9,10 @@ function initialiseMap(id, lat, lng, address, zoom) {
   return map;
 }
 
-function initialisePano(id, latitude, longitude, address) {
+function initialisePano(elem, latitude, longitude, address) {
   // Can't yet figure out how to make the POV point at the marker
   var pointToLookAt = new google.maps.LatLng(latitude, longitude);
-  var myPano = new  google.maps.StreetViewPanorama(document.getElementById(id),
+  var myPano = new  google.maps.StreetViewPanorama(elem,
     {position: pointToLookAt, navigationControl: false, addressControl: false, zoom: 0});
   google.maps.event.addListener(myPano, 'position_changed', function() {
     // Orient the camera to face the position we're interested in
@@ -61,7 +61,7 @@ $(document).ready(function(){
   if ($("#map_div.application").length) {
     var map_div = $("#map_div");
     initialiseMap(
-      "map_div",
+      map_div[0],
       map_div.data("lat"),
       map_div.data("lng"),
       map_div.data("address"),
@@ -71,7 +71,7 @@ $(document).ready(function(){
   // Streetview on the application page
   if ($("#pano").length) {
     initialisePano(
-      "pano",
+      $("#pano")[0],
       $("#pano").data("lat"),
       $("#pano").data("lng"),
       $("#pano").data("address")
@@ -86,7 +86,7 @@ $(document).ready(function(){
     var zoom = map_div.data("zoom")
     var radius_meters = map_div.data("radius-meters");
 
-    var map = initialiseMap("map_div", lat, lng, address, zoom);
+    var map = initialiseMap(map_div[0], lat, lng, address, zoom);
 
     var circle = drawCircleOnMap(map, lat, lng, radius_meters);
     $('.sizes input').click(function(){
@@ -100,8 +100,7 @@ $(document).ready(function(){
     var address = $(this).data("address");
     var zoom = $(this).data("zoom");
     var radius_meters = $(this).data("radius-meters");
-    var id = $(this).attr("id");
-    var map = initialiseMap(id, lat, lng, address, zoom);
+    var map = initialiseMap(this, lat, lng, address, zoom);
 
     drawCircleOnMap(map, lat, lng, radius_meters);
   })

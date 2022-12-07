@@ -5,8 +5,7 @@
     - alerts.each do |alert|
       -# TODO: Show an error of some sort if the last delivery was not successful
       %li.email-alert
-        -# Each map div needs to have a unique id
-        .map{ id: "email-alert-#{alert.id}", data: { lat: alert.lat, lng: alert.lng, address: alert.address, zoom: 13, radius_meters: alert.radius_meters } }
+        .map{ data: { lat: alert.lat, lng: alert.lng, address: alert.address, zoom: 13, radius_meters: alert.radius_meters } }
         .email-alert-main
           %h4
             Within
