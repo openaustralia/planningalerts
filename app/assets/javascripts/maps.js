@@ -54,8 +54,8 @@ function wrapAngle(angle) {
 
 function drawCircleOnMap(map, centre_lat, centre_lng, radius_in_metres) {
   map.removeAllPolylines();
-  r = new mxn.Radius(new mxn.LatLonPoint(centre_lat, centre_lng), 10);
-  p = r.getPolyline(radius_in_metres / 1000, "#FF0000");
+  var r = new mxn.Radius(new mxn.LatLonPoint(centre_lat, centre_lng), 10);
+  var p = r.getPolyline(radius_in_metres / 1000, "#FF0000");
   p.setWidth(0);
   p.setOpacity(0.2);
   map.addPolyline(p);
@@ -83,11 +83,11 @@ $(document).ready(function(){
   }
   // Alert radius map on the edit alert page
   if ($("#map_div.alert-radius").length) {
-    map_div = $("#map_div.alert-radius");
-    lat = map_div.data("lat");
-    lng = map_div.data("lng");
-    address = map_div.data("address");
-    radius_meters = map_div.data("radius-meters");
+    var map_div = $("#map_div.alert-radius");
+    var lat = map_div.data("lat");
+    var lng = map_div.data("lng");
+    var address = map_div.data("address");
+    var radius_meters = map_div.data("radius-meters");
 
     var map = initialiseMap("map_div", lat, lng, address, 13);
 
