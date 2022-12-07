@@ -64,12 +64,13 @@ function drawCircleOnMap(map, centre_lat, centre_lng, radius_in_metres) {
 $(document).ready(function(){
   // Map on the application page
   if ($("#map_div.application").length) {
+    var map_div = $("#map_div");
     initialiseMap(
       "map_div",
-      $("#map_div").data("lat"),
-      $("#map_div").data("lng"),
-      $("#map_div").data("address"),
-      $("#map_div").data("zoom")
+      map_div.data("lat"),
+      map_div.data("lng"),
+      map_div.data("address"),
+      map_div.data("zoom")
     );
   }
   // Streetview on the application page
@@ -83,7 +84,7 @@ $(document).ready(function(){
   }
   // Alert radius map on the edit alert page
   if ($("#map_div.alert-radius").length) {
-    var map_div = $("#map_div.alert-radius");
+    var map_div = $("#map_div");
     var lat = map_div.data("lat");
     var lng = map_div.data("lng");
     var address = map_div.data("address");
