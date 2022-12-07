@@ -66,8 +66,8 @@ $(document).ready(function(){
   if ($("#map_div.application").length) {
     initialiseMap(
       "map_div",
-      $("#map_div").data("latitude"),
-      $("#map_div").data("longitude"),
+      $("#map_div").data("lat"),
+      $("#map_div").data("lng"),
       $("#map_div").data("address"),
       16
     );
@@ -76,8 +76,8 @@ $(document).ready(function(){
   if ($("#pano").length) {
     initialisePano(
       "pano",
-      $("#pano").data("latitude"),
-      $("#pano").data("longitude"),
+      $("#pano").data("lat"),
+      $("#pano").data("lng"),
       $("#pano").data("address")
     );
   }
