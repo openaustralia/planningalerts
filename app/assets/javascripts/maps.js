@@ -1,17 +1,10 @@
-//= require mxn.js
-//= require mxn.core.js
-//= require mxn.googlev3.core.js
-
 function initialiseMap(id, lat, lng, address, zoom) {
-  var map = new mxn.Mapstraction(id, "googlev3");
-  var centre = new mxn.LatLonPoint(lat, lng);
-  map.setCenterAndZoom(centre, zoom);
-  map.addSmallControls();
-  map.addMapTypeControls();
-  map.dragging(false);
-  var marker = new mxn.Marker(centre)
-  marker.setLabel(address);
-  map.addMarker(marker);
+  var center = { lat: lat, lng: lng };
+  var map = new google.maps.Map(
+    document.getElementById(id),
+    { zoom: zoom, center: center, fullscreenControl: false, streetViewControl: false, draggable: false }
+  );
+  new google.maps.Marker({ position: center, map: map, title: address });
 
   return map;
 }
@@ -53,13 +46,23 @@ function wrapAngle(angle) {
 }
 
 function drawCircleOnMap(map, centre_lat, centre_lng, radius_in_metres) {
-  map.removeAllPolylines();
-  var r = new mxn.Radius(new mxn.LatLonPoint(centre_lat, centre_lng), 10);
-  var p = r.getPolyline(radius_in_metres / 1000, "#FF0000");
-  p.setWidth(0);
-  p.setOpacity(0.2);
-  map.addPolyline(p);
+  // Remove the previous circle from the map if there is one
+  if (circle !== null) {
+    circle.setMap(null);
+  }
+
+  circle = new google.maps.Circle({
+    strokeColor: "#FF0000",
+    strokeOpacity: 0.2,
+    fillOpacity: 0,
+    map: map,
+    center: { lat: centre_lat, lng: centre_lng },
+    radius: radius_in_metres,
+  });
 };
+
+// Stores the current circle on the map
+var circle = null;
 
 $(document).ready(function(){
   // Map on the application page
@@ -95,7 +98,7 @@ $(document).ready(function(){
 
     drawCircleOnMap(map, lat, lng, radius_meters);
     $('.sizes input').click(function(){
-      drawCircleOnMap(map, lat, lng, $(this).val());
+      drawCircleOnMap(map, lat, lng, parseInt($(this).val()));
     });  
   }
 
