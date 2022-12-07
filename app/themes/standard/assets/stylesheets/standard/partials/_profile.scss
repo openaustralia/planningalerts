@@ -17,4 +17,10 @@ ul.email-alert-list {
   h4 {
     margin: 16px 0;
   }
+
+  .map { 
+    height: 300px;
+    // A green colour that you might see on a map. Display this while loading the map
+    background-color: #d1e6d9;
+  }
 }

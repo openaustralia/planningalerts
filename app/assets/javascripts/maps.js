@@ -98,4 +98,16 @@ $(document).ready(function(){
       drawCircleOnMap(map, lat, lng, $(this).val());
     });  
   }
+
+  $(".map").each(function(index) {
+    var lat = $(this).data("lat");
+    var lng = $(this).data("lng");
+    var address = $(this).data("address");
+    var zoom = $(this).data("zoom");
+    var radius_meters = $(this).data("radius-meters");
+    var id = $(this).attr("id");
+    var map = initialiseMap(id, lat, lng, address, zoom);
+
+    drawCircleOnMap(map, lat, lng, radius_meters);
+  })
 });
