@@ -5,6 +5,7 @@
 //= require geolocation
 //= require applications
 //= require event_tracking
+//= require maps
 // Need ujs for confirmation on buttons
 //= require jquery_ujs
 

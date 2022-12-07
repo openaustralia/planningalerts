@@ -20,5 +20,3 @@
             - else
               Not yet sent
           .unsubscribe= button_to "Unsubscribe", [:profile, alert], method: :delete, data: { confirm: "Are you sure you want to unsubscribe for email alerts for #{alert.address}?" }, class: "button button-action"
-
-= javascript_include_tag "maps"
