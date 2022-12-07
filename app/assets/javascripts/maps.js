@@ -2,7 +2,7 @@ function initialiseMap(elem, lat, lng, address, zoom) {
   var center = { lat: lat, lng: lng };
   var map = new google.maps.Map(
     elem,
-    { zoom: zoom, center: center, fullscreenControl: false, streetViewControl: false, draggable: false }
+    { zoom: zoom, center: center, fullscreenControl: false, streetViewControl: false, draggable: false, backgroundColor: "#d1e6d9" }
   );
   new google.maps.Marker({ position: center, map: map, title: address });
 

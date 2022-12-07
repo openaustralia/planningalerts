@@ -21,6 +21,8 @@ ul.email-alert-list {
   .map { 
     height: 300px;
     // A green colour that you might see on a map. Display this while loading the map
+    // Note that we're using the same colour when initialising the google map so that
+    // everything matches
     background-color: #d1e6d9;
   }
 }
