@@ -69,7 +69,7 @@ $(document).ready(function(){
       $("#map_div").data("lat"),
       $("#map_div").data("lng"),
       $("#map_div").data("address"),
-      16
+      $("#map_div").data("zoom")
     );
   }
   // Streetview on the application page
@@ -87,9 +87,10 @@ $(document).ready(function(){
     var lat = map_div.data("lat");
     var lng = map_div.data("lng");
     var address = map_div.data("address");
+    var zoom = map_div.data("zoom")
     var radius_meters = map_div.data("radius-meters");
 
-    var map = initialiseMap("map_div", lat, lng, address, 13);
+    var map = initialiseMap("map_div", lat, lng, address, zoom);
 
     drawCircleOnMap(map, lat, lng, radius_meters);
     $('.sizes input').click(function(){

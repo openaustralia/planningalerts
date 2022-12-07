@@ -1,7 +1,7 @@
 - content_for :page_title, "Change the size of your alert"
 %h3= yield :page_title
 
-.alert-radius#map_div{ data: { lat: @alert.lat, lng: @alert.lng, address: @alert.address, radius_meters: @alert.radius_meters } }
+.alert-radius#map_div{ data: { lat: @alert.lat, lng: @alert.lng, address: @alert.address, radius_meters: @alert.radius_meters, zoom: 13 } }
 
 .map-settings
   %p What size area near #{@alert.address} would you like to receive alerts for?
