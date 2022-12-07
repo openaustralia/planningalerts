@@ -2,26 +2,18 @@
 //= require mxn.core.js
 //= require mxn.googlev3.core.js
 
-function initialiseMap(id, lat, lng, address) {
+function initialiseMap(id, lat, lng, address, zoom) {
   var map = new mxn.Mapstraction(id, "googlev3");
-  centre = new mxn.LatLonPoint(lat, lng);
-  map.setCenterAndZoom(centre, 16);
-  map.addControls({ zoom: 'small', map_type: true });
-  map.dragging(false);
-  marker = new mxn.Marker(centre)
-  marker.setLabel(address);
-  map.addMarker(marker);
-}
-
-function initialiseMapWithRadius(id, lat, lng, address) {
-  map = new mxn.Mapstraction(id, "googlev3");
-  centre = new mxn.LatLonPoint(lat, lng);
-  map.setCenterAndZoom(centre, 13);
+  var centre = new mxn.LatLonPoint(lat, lng);
+  map.setCenterAndZoom(centre, zoom);
   map.addSmallControls();
   map.addMapTypeControls();
-  marker = new mxn.Marker(centre)
+  map.dragging(false);
+  var marker = new mxn.Marker(centre)
   marker.setLabel(address);
   map.addMarker(marker);
+
+  return map;
 }
 
 function initialisePano(id, latitude, longitude, address) {
@@ -60,7 +52,7 @@ function wrapAngle(angle) {
   return angle;
 }
 
-function preview(centre_lat, centre_lng, radius_in_metres) {
+function preview(map, centre_lat, centre_lng, radius_in_metres) {
   map.removeAllPolylines();
   r = new mxn.Radius(new mxn.LatLonPoint(centre_lat, centre_lng), 10);
   p = r.getPolyline(radius_in_metres / 1000, "#FF0000");
@@ -76,7 +68,8 @@ $(document).ready(function(){
       "map_div",
       $("#map_div").data("latitude"),
       $("#map_div").data("longitude"),
-      $("#map_div").data("address")
+      $("#map_div").data("address"),
+      16
     );
   }
   // Streetview on the application page
@@ -96,11 +89,11 @@ $(document).ready(function(){
     address = map_div.data("address");
     radius_meters = map_div.data("radius-meters");
 
-    initialiseMapWithRadius("map_div", lat, lng, address)
+    var map = initialiseMap("map_div", lat, lng, address, 13);
 
-    preview(lat, lng, radius_meters);
+    preview(map, lat, lng, radius_meters);
     $('.sizes input').click(function(){
-      preview(lat, lng, $(this).val());
+      preview(map, lat, lng, $(this).val());
     });  
   }
 });
