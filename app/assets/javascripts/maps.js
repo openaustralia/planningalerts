@@ -2,13 +2,24 @@
 //= require mxn.core.js
 //= require mxn.googlev3.core.js
 
-function initialiseMap(id, latitude, longitude, address) {
+function initialiseMap(id, lat, lng, address) {
   var map = new mxn.Mapstraction(id, "googlev3");
-  point = new mxn.LatLonPoint(latitude, longitude);
-  map.setCenterAndZoom(point,16);
+  centre = new mxn.LatLonPoint(lat, lng);
+  map.setCenterAndZoom(centre, 16);
   map.addControls({ zoom: 'small', map_type: true });
   map.dragging(false);
-  marker = new mxn.Marker(point)
+  marker = new mxn.Marker(centre)
+  marker.setLabel(address);
+  map.addMarker(marker);
+}
+
+function initialiseMapWithRadius(id, lat, lng, address) {
+  map = new mxn.Mapstraction(id, "googlev3");
+  centre = new mxn.LatLonPoint(lat, lng);
+  map.setCenterAndZoom(centre, 13);
+  map.addSmallControls();
+  map.addMapTypeControls();
+  marker = new mxn.Marker(centre)
   marker.setLabel(address);
   map.addMarker(marker);
 }
@@ -85,17 +96,11 @@ $(document).ready(function(){
     address = map_div.data("address");
     radius_meters = map_div.data("radius-meters");
 
-    map = new mxn.Mapstraction("map_div","googlev3");
-    centre = new mxn.LatLonPoint(lat, lng);
-    map.setCenterAndZoom(centre, 13);
-    map.addSmallControls();
-    map.addMapTypeControls();
-    marker = new mxn.Marker(centre)
-    marker.setLabel(address);
-    map.addMarker(marker);
+    initialiseMapWithRadius("map_div", lat, lng, address)
+
     preview(lat, lng, radius_meters);
     $('.sizes input').click(function(){
       preview(lat, lng, $(this).val());
-    });
+    });  
   }
 });
