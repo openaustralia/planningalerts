@@ -1,15 +1,8 @@
 #sidebar .formtastic.alert {
   width: 100%;
-  .label {
-    /* Use seriously old-school way of hiding these labels so that placeholder polyfill can still work */
-    left: -999em;
-    position: absolute;
 
-    /* This is only used when the placeholder polyfill is active */
-    span.placeholder {
-      padding-top: .2em;
-      font-size: .8em;
-    }
+  .label {
+    display: none;
   }
 
   .inline-hints {
