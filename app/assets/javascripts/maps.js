@@ -46,12 +46,7 @@ function wrapAngle(angle) {
 }
 
 function drawCircleOnMap(map, centre_lat, centre_lng, radius_in_metres) {
-  // Remove the previous circle from the map if there is one
-  if (circle !== null) {
-    circle.setMap(null);
-  }
-
-  circle = new google.maps.Circle({
+  return new google.maps.Circle({
     strokeColor: "#FF0000",
     strokeOpacity: 0.2,
     fillOpacity: 0,
@@ -60,9 +55,6 @@ function drawCircleOnMap(map, centre_lat, centre_lng, radius_in_metres) {
     radius: radius_in_metres,
   });
 };
-
-// Stores the current circle on the map
-var circle = null;
 
 $(document).ready(function(){
   // Map on the application page
@@ -96,9 +88,9 @@ $(document).ready(function(){
 
     var map = initialiseMap("map_div", lat, lng, address, zoom);
 
-    drawCircleOnMap(map, lat, lng, radius_meters);
+    var circle = drawCircleOnMap(map, lat, lng, radius_meters);
     $('.sizes input').click(function(){
-      drawCircleOnMap(map, lat, lng, parseInt($(this).val()));
+      circle.setRadius(parseInt($(this).val()));
     });  
   }
 
