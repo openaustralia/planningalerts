@@ -52,7 +52,7 @@ function wrapAngle(angle) {
   return angle;
 }
 
-function preview(map, centre_lat, centre_lng, radius_in_metres) {
+function drawCircleOnMap(map, centre_lat, centre_lng, radius_in_metres) {
   map.removeAllPolylines();
   r = new mxn.Radius(new mxn.LatLonPoint(centre_lat, centre_lng), 10);
   p = r.getPolyline(radius_in_metres / 1000, "#FF0000");
@@ -91,9 +91,9 @@ $(document).ready(function(){
 
     var map = initialiseMap("map_div", lat, lng, address, 13);
 
-    preview(map, lat, lng, radius_meters);
+    drawCircleOnMap(map, lat, lng, radius_meters);
     $('.sizes input').click(function(){
-      preview(map, lat, lng, $(this).val());
+      drawCircleOnMap(map, lat, lng, $(this).val());
     });  
   }
 });
