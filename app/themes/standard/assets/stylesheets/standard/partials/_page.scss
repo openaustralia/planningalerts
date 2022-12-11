@@ -865,12 +865,6 @@ td pre {
   }
 }
 
-// Style the autocomplete with a powered by Google logo as per the terms and conditions
-ul.ui-autocomplete {
-  background: image_url("powered-by-google-on-white.png") white no-repeat bottom right;
-  padding-bottom: 10px;
-}
-
 #geolocate {
   visibility: hidden;
   font-size: 1em;

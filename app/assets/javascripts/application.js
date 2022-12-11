@@ -1,6 +1,4 @@
-//= require jquery-ui/widgets/autocomplete
 //= require jquery-ui/widgets/menu
-//= require jquery.ui.autocomplete.html.js
 //= require address_autocomplete.js
 //= require geolocation
 //= require applications
