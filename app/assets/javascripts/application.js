@@ -4,7 +4,7 @@
 //= require event_tracking
 //= require maps
 // Need ujs for confirmation on buttons
-//= require jquery_ujs
+//= require rails-ujs
 
 $("#menu .toggle").click(function(){
   $("#menu ul").slideToggle("fast", function(){
