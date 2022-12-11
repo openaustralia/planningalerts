@@ -59,7 +59,9 @@ gem "foundation-icons-sass-rails"
 
 # Javascript stuff
 gem "jquery-rails"
-gem "jquery-ui-rails"
+
+# Date picker with no dependencies
+gem "flatpickr"
 
 # Sanitizing and manipulating user input
 gem "rails_autolink"

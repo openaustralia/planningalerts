@@ -1,5 +1,4 @@
-//= require jquery-ui/widgets/datepicker
-//= require jquery-ui/i18n/datepicker-en-AU.js
+//= require flatpickr
 
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
@@ -7,16 +6,11 @@
 $(function() {
   // When this_selector is updated, update the option on the other_selector
   function setupDatePicker(this_selector, other_selector, option) {
-    $(this_selector).datepicker({
-      dateFormat: "yy-mm-dd",
-      onClose: function(date) {
-        $(other_selector).datepicker("option", option, date);
+    flatpickr(this_selector, {
+      onClose: function(selectedDates, dateStr, instance) {
+        document.querySelector(other_selector)._flatpickr.set(option, dateStr);
       }
     });
-    if ($(this_selector).datepicker("getDate") != null) {
-      var date = $(this_selector).datepicker("getDate");
-      $(other_selector).datepicker("option", option, date);
-    }
   }
 
   function setupDateRange(start_selector, end_selector) {
