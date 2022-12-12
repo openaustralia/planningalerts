@@ -43,6 +43,11 @@ en:
           attributes:
             state:
               inclusion: "%{value} is not a state in Australia"
+        user:
+          attributes:
+            email:
+              taken: "You already have an account with that email address. Please sign into your account."
+              taken_activation: "You already have an account with that email address. Please activate your account."
   formtastic:
     labels:
       comment:

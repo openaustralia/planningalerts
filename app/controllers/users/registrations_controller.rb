@@ -17,9 +17,20 @@ module Users
     # end
 
     # POST /resource
-    # def create
-    #   super
-    # end
+    sig { void }
+    def create
+      # Do some extra checking here for different situations when an email address
+      # is already exists for a user when trying to create a new user. Basically we
+      # are overriding the message that's returned when the email uniqueness validation
+      # fails.
+      super do
+        u = User.find_by(email: resource.email)
+        if u&.requires_activation?
+          resource.errors.delete(:email)
+          resource.errors.add(:email, :taken_activation)
+        end
+      end
+    end
 
     # GET /resource/edit
     # def edit
