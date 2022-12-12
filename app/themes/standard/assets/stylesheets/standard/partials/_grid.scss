@@ -217,10 +217,6 @@
   }
 }
 
-#menu ul.hidden {
-  display: none;
-}
-
 // From tablet (mid) upwards
 @include at-breakpoint(30em) {
   // Move from having a mobile-focused global nav
