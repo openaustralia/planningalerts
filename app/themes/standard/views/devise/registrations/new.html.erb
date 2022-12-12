@@ -2,7 +2,8 @@
   <h2>Create an account</h2>
   <p class="login-explanation">
     Already have an account?
-    <%= link_to "Sign in", new_user_session_path %>.
+    <%= link_to "Sign in", new_user_session_path %> or
+    <%= link_to "activate", new_users_activation_path %>.
   </p>
 
   <%= semantic_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>

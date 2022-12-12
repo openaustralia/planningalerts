@@ -5,6 +5,11 @@
     <%= link_to "Create an account", new_user_registration_path %>.
   </p>
 
+  <p>
+    Note that you only need to activate your account if you've had an alert or made any
+    comments on PlanningAlerts using the same email address
+  </p>
+
   <%= semantic_form_for(@user, url: users_activation_path, html: { method: :post }) do |f| %>
     <%= render "devise/shared/error_messages", resource: @user %>
 
