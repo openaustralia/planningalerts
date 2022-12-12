@@ -57,10 +57,10 @@ en:
         address: "Your street address"
     hints:
       comment:
-        text: "Have you made a donation or gift to a Councillor or Council employee? <a href=\"%{link}\">You may need to disclose this</a>"
+        text: "Have you made a donation or gift to a Councillor or Council employee? <a href=\"%{link}\" data-target=\"%{target}\" class=\"%{class}\">You may need to disclose this</a>"
         name: "Please use your real full name if possible."
         email: "We never display your email address."
-        address: "We never display your street address. <a href=\"%{link}\">Why do you need my address?</a>"
+        address: "We never display your street address. <a href=\"%{link}\" data-target=\"%{target}\" class=\"%{class}\">Why do you need my address?</a>"
     placeholders:
       comment:
         text: "Be polite, clear, and to the point so your comment gets listened to."

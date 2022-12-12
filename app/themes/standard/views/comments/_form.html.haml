@@ -1,7 +1,7 @@
 = semantic_form_for [application, comment] do |f|
   = f.inputs id: "comment-base-inputgroup" do
     = f.input :text, as: :text, input_html: { rows: "10" },
-                     hint: t("formtastic.hints.comment.text", link: faq_path(anchor: "disclosure"))
+                     hint: t("formtastic.hints.comment.text", link: faq_path(anchor: "disclosure"), target: "#disclosure_explanation", class: "hideable")
     .inline-hints.hidden#disclosure_explanation
       = render partial: "static/disclosure_explanation"
     = f.input :name
@@ -10,7 +10,7 @@
       = f.semantic_fields_for :user do |user|
         = user.input :email, as: :email
     = f.input :address, input_html: { class: "address-autocomplete-input" },
-                        hint: t("formtastic.hints.comment.address", link: faq_path(anchor: "address"))
+                        hint: t("formtastic.hints.comment.address", link: faq_path(anchor: "address"), target: "#faq_commenting_address", class: "hideable")
     .inline-hints.hidden#faq_commenting_address
       = render partial: "static/faq_commenting_address"
     -#
