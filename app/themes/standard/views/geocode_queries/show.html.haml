@@ -14,7 +14,7 @@
 #geocoding-map
 
 :javascript
-  $(document).ready(function(){
+  window.addEventListener("DOMContentLoaded", function() {
     var googleLatLng = {lat: #{h @geocode_query.result("google").lat}, lng: #{h @geocode_query.result("google").lng}};
     var mappifyLatLng = {lat: #{h @geocode_query.result("mappify").lat}, lng: #{h @geocode_query.result("mappify").lng}};
 
