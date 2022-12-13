@@ -5,8 +5,10 @@
 // Need ujs for confirmation on buttons
 //= require rails-ujs
 
-$('.hideable').click(function(e) {
-  e.preventDefault();
-  var target = $(e.target).attr("data-target");
-  $(target).toggleClass("hideable-target-show");
-});
+document.querySelectorAll(".hideable").forEach(function(e) {
+  e.addEventListener("click", function(e) {
+    e.preventDefault();
+    var target = e.target.getAttribute("data-target");
+    document.querySelector(target).classList.toggle("hideable-target-show");  
+  })
+})

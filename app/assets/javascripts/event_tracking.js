@@ -1,93 +1,100 @@
-$( document ).ready(function() {
+window.addEventListener("DOMContentLoaded", function() {
   // check if the Google Analytics function is available
   if (typeof ga == 'function') {
+    // Shorthand for what we used to do with jquery
+    function clicks(selector, f) {
+      document.querySelectorAll(selector).forEach(function(elem) {
+        elem.addEventListener("click", f);
+      });
+    }
+
     // GA Tracking of comment process
-    $('.link-to-comment-form').click(function(e) {
+    clicks('.link-to-comment-form', function(e) {
       ga('send', 'event', 'comments', 'click link to go to comment form');
     });
 
-    $('#comment-action-inputgroup input[type="submit"]').click(function(e) {
+    clicks('#comment-action-inputgroup input[type="submit"]', function(e) {
       ga('send', 'event', 'comments', 'click submit new comment');
     });
 
-    $('#comment_text_input .inline-hints a').click(function(e) {
+    clicks('#comment_text_input .inline-hints a', function(e) {
       ga('send', 'event', 'comments', 'click link for info about donation disclosure');
     });
 
-    $('#comment_address_input .inline-hints a').click(function(e) {
+    clicks('#comment_address_input .inline-hints a', function(e) {
       ga('send', 'event', 'comments', 'click link for info about why your address is necessay');
     });
 
-    if ($('.notice-comment-confirmed').length) {
+    if (document.querySelectorAll('.notice-comment-confirmed').length) {
       ga('send', 'event', 'comments', 'comment confirm message displayed');
     }
 
-    if ($('#comments-area .error').length) {
+    if (document.querySelectorAll('#comments-area .error').length) {
       ga('send', 'event', 'comments', 'comment form error message displayed');
     }
 
-    $('.notice-comment-confirmed .button-facebook').click(function(e) {
+    clicks('.notice-comment-confirmed .button-facebook', function(e) {
       ga('send', 'event', 'comments', 'click Facebook share', 'from comment confirmation');
     });
 
     // Creating Alerts
-    $('#new_alert input[type="submit"]').click(function(e) {
+    clicks('#new_alert input[type="submit"]', function(e) {
       ga('send', 'event', 'alerts', 'click submit create alert');
     });
 
-    if ($('#new_alert .error').length) {
+    if (document.querySelectorAll('#new_alert .error').length) {
       ga('send', 'event', 'alerts', 'alert form error messages displayed');
     }
 
-    if ($('#alert-email-confirm-prompt').length) {
+    if (document.querySelectorAll('#alert-email-confirm-prompt').length) {
       ga('send', 'event', 'alerts', 'alert prompt to confirm in email displayed');
     }
 
     // Searching for applications
-    $('.address-search input[type="submit"]').click(function(e) {
+    clicks('.address-search input[type="submit"]', function(e) {
       ga('send', 'event', 'search', 'click submit address search');
     });
 
-    $('.address-search #geolocate').click(function(e) {
+    clicks('.address-search #geolocate', function(e) {
       ga('send', 'event', 'search', 'click locate me link');
     });
 
-    if ($('.address-search .error').length) {
+    if (document.querySelectorAll('.address-search .error').length) {
       ga('send', 'event', 'search', 'address search form error message displayed');
     }
 
     // Updating alert radius
-    $('.map-settings input#size_s').click(function(e) {
+    clicks('.map-settings input#size_s', function(e) {
       ga('send', 'event', 'update alert settings', 'click size option My street');
     });
 
-    $('.map-settings input#size_m').click(function(e) {
+    clicks('.map-settings input#size_m', function(e) {
       ga('send', 'event', 'update alert settings', 'click size option My neighbourhood');
     });
 
-    $('.map-settings input#size_l').click(function(e) {
+    clicks('.map-settings input#size_l', function(e) {
       ga('send', 'event', 'update alert settings', 'click size option My suburb');
     });
 
-    $('.map-settings input[type="submit"]').click(function(e) {
+    clicks('.map-settings input[type="submit"]', function(e) {
       ga('send', 'event', 'update alert settings', 'click submit Update size');
     });
 
     // Donations
-    $('.donate-link-header').click(function(e) {
+    clicks('.donate-link-header', function(e) {
       ga('send', 'event', 'donate', 'click donate', 'header menu donate item');
     });
 
-    $('.donations-banner .button').click(function(e) {
+    clicks('.donations-banner .button', function(e) {
       ga('send', 'event', 'donate', 'click donate', 'footer donation banner button');
     });
 
     // Regular donations
-    $('#button-pro-signup').click(function(e) {
+    clicks('#button-pro-signup', function(e) {
       ga('send', 'event', 'donate', 'click donate each month button');
     });
 
-    if ($('.donations-notice').length) {
+    if (document.querySelectorAll('.donations-notice').length) {
       ga('send', 'event', 'donate', 'donations form error message displayed');
     }
   }
