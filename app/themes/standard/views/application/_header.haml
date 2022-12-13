@@ -11,8 +11,8 @@
 
     .hide= link_to "Skip navigation", "#content"
     #menu
-      = image_tag "standard/menu.png", size: "50x50", class: "toggle", alt: "Toggle menu"
-      %ul.collapse.hidden
+      = image_tag "standard/menu.png", size: "50x50", class: "toggle hideable", alt: "Toggle menu", data: { target: "#menu ul" }
+      %ul.hideable-target
         = li_selected(controller: "/applications", action: "address") do
           = link_to "Search", address_applications_path
         = li_selected(controller: "/alerts", action: %w[new create]) do

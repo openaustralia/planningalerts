@@ -225,7 +225,9 @@
       display: none;
     }
     ul {
-      display: block !important;
+      // Force display of nav
+      max-height: 200px;
+      opacity: 1;
     }
     li {
       margin-right: .2em;

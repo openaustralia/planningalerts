@@ -926,9 +926,10 @@ ul.authorities {
   overflow: hidden;
   transition-duration: 0.3s;
   transition-timing-function: ease-out;
+  transition-property: opacity max-height;
 }
 
 .hideable-target-show {
   opacity: 1;
-  max-height: 100px;
+  max-height: 200px;
 }
