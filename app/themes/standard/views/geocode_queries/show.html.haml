@@ -25,8 +25,8 @@
 
     // TODO: Generalise to any number of geocoder results
 
-    var googleContentString = '#{escape_javascript(render("geocode_results/result"), result: @geocode_query.result("google"))}';
-    var mappifyContentString = '#{escape_javascript(render("geocode_results/result"), result: @geocode_query.result("mappify"))}';
+    var googleContentString = '#{escape_javascript(render("geocode_results/result", result: @geocode_query.result("google")))}';
+    var mappifyContentString = '#{escape_javascript(render("geocode_results/result", result: @geocode_query.result("mappify")))}';
 
     var googleInfowindow = new google.maps.InfoWindow({
       content: googleContentString
