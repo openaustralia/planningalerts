@@ -57,52 +57,55 @@ function drawCircleOnMap(map, centre_lat, centre_lng, radius_in_metres) {
   });
 };
 
-$(document).ready(function(){
+window.addEventListener("DOMContentLoaded", function() {
   // Map on the application page
-  if ($("#map_div.application").length) {
-    var map_div = $("#map_div");
+  var map_div = document.querySelector("#map_div.application");
+  if (map_div) {
     initialiseMap(
-      map_div[0],
-      map_div.data("lat"),
-      map_div.data("lng"),
-      map_div.data("address"),
-      map_div.data("zoom")
+      map_div,
+      Number(map_div.dataset.lat),
+      Number(map_div.dataset.lng),
+      map_div.dataset.address,
+      Number(map_div.dataset.zoom)
     );
   }
-  // Streetview on the application page
-  if ($("#pano").length) {
-    initialisePano(
-      $("#pano")[0],
-      $("#pano").data("lat"),
-      $("#pano").data("lng"),
-      $("#pano").data("address")
-    );
-  }
-  // Alert radius map on the edit alert page
-  if ($("#map_div.alert-radius").length) {
-    var map_div = $("#map_div");
-    var lat = map_div.data("lat");
-    var lng = map_div.data("lng");
-    var address = map_div.data("address");
-    var zoom = map_div.data("zoom")
-    var radius_meters = map_div.data("radius-meters");
 
-    var map = initialiseMap(map_div[0], lat, lng, address, zoom);
+  // Streetview on the application page
+  var pano = document.querySelector("#pano");
+  if (pano) {
+    initialisePano(
+      pano,
+      Number(pano.dataset.lat),
+      Number(pano.dataset.lng),
+      pano.dataset.address
+    );
+  }
+
+  // Alert radius map on the edit alert page
+  var map_alert_radius = document.querySelector("#map_div.alert-radius");
+  if (map_alert_radius) {
+    var lat = Number(map_alert_radius.dataset.lat);
+    var lng = Number(map_alert_radius.dataset.lng);
+    var address = map_alert_radius.dataset.address;
+    var zoom = Number(map_alert_radius.dataset.zoom);
+    var radius_meters = Number(map_alert_radius.dataset.radiusMeters);
+
+    var map = initialiseMap(map_alert_radius, lat, lng, address, zoom);
 
     var circle = drawCircleOnMap(map, lat, lng, radius_meters);
-    $('.sizes input').click(function(){
-      circle.setRadius(parseInt($(this).val()));
-    });  
+    document.querySelector(".sizes").addEventListener("change", function(e) {
+      circle.setRadius(parseInt(e.target.value));
+    });
   }
 
-  $(".map").each(function(index) {
-    var lat = $(this).data("lat");
-    var lng = $(this).data("lng");
-    var address = $(this).data("address");
-    var zoom = $(this).data("zoom");
-    var radius_meters = $(this).data("radius-meters");
-    var map = initialiseMap(this, lat, lng, address, zoom);
+  document.querySelectorAll(".map").forEach(function(e) {
+    var lat = Number(e.dataset.lat);
+    var lng = Number(e.dataset.lng);
+    var address = e.dataset.address;
+    var zoom = Number(e.dataset.zoom);
+    var radius_meters = Number(e.dataset.radiusMeters);
+    var map = initialiseMap(e, lat, lng, address, zoom);
 
     drawCircleOnMap(map, lat, lng, radius_meters);
-  })
+  });
 });
