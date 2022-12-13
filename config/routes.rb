@@ -122,7 +122,6 @@ Rails.application.routes.draw do
     collection do
       get :search
       get :trending
-      get :geocoding
     end
     resources :comments, only: [:create]
     resources :versions, only: [:index], controller: "application_versions"
