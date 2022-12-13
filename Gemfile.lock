@@ -738,7 +738,6 @@ DEPENDENCIES
   honeybadger
   httparty
   jbuilder
-  jquery-rails
   kaminari
   mini_racer (= 0.4.0)
   mysql2

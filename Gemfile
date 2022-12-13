@@ -57,9 +57,6 @@ gem "tailwindcss-rails", "~> 2.0"
 # Icons
 gem "foundation-icons-sass-rails"
 
-# Javascript stuff
-gem "jquery-rails"
-
 # Date picker with no dependencies
 gem "flatpickr"
 
