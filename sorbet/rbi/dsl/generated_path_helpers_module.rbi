@@ -189,6 +189,12 @@ module GeneratedPathHelpersModule
   def faq_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def geocode_queries_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def geocode_query_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def get_involved_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

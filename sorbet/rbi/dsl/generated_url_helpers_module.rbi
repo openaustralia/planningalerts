@@ -189,6 +189,12 @@ module GeneratedUrlHelpersModule
   def faq_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def geocode_queries_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def geocode_query_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def get_involved_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
