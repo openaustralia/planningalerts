@@ -32,7 +32,11 @@ Rails.application.routes.draw do
         post :import
       end
     end
-    resources :users, except: [:new, :create]
+    resources :users, except: [:new, :create] do
+      collection do
+        get :export_confirmed_emails
+      end
+    end
     resources :reports, only: [:index, :show, :destroy]
     resources :comments, except: [:destroy, :new, :create] do
       member do
@@ -46,9 +50,6 @@ Rails.application.routes.draw do
         post :unsubscribe
       end
 
-      collection do
-        get :export_active_emails
-      end
     end
     resources :background_jobs, only: :index
     resources :api_usages, only: :index

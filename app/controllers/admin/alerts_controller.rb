@@ -49,11 +49,6 @@ module Admin
     # for more information
 
     sig { void }
-    def export_active_emails
-      send_data Alert.active.select(:email).distinct.pluck(:email).join("\n"), filename: "emails.txt"
-    end
-
-    sig { void }
     def unsubscribe
       alert = Alert.find(params[:id])
       alert.unsubscribe!

@@ -45,5 +45,10 @@ module Admin
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
+
+    sig { void }
+    def export_confirmed_emails
+      send_data User.where.not(confirmed_at: nil).select(:email).distinct.pluck(:email).join("\n"), filename: "emails.txt"
+    end
   end
 end
