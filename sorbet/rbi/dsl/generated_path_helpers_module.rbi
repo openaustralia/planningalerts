@@ -183,7 +183,7 @@ module GeneratedPathHelpersModule
   def edit_users_activation_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def export_active_emails_admin_alerts_path(*args); end
+  def export_confirmed_emails_admin_users_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def faq_path(*args); end
