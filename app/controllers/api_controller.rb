@@ -7,6 +7,7 @@ class ApiController < ApplicationController
   before_action :check_api_parameters
   before_action :require_api_key
   before_action :authenticate_bulk_api, only: %i[all date_scraped]
+  before_action :log_api_call
 
   # This is disabled because at least one commercial user of the API is doing
   # GET requests for JSONP instead of using XHR
@@ -103,14 +104,6 @@ class ApiController < ApplicationController
   sig { void }
   def all
     # TODO: Check that params page and v aren't being used
-    LogApiCallJob.perform_later(
-      api_key: request.query_parameters["key"],
-      ip_address: request.remote_ip,
-      query: request.fullpath,
-      params: params_for_logging,
-      user_agent: request.headers["User-Agent"],
-      time_as_float: Time.zone.now.to_f
-    )
     apps = Application.with_current_version.order("applications.id")
     apps = apps.where("applications.id > ?", params[:since_id]) if params[:since_id]
 
@@ -186,6 +179,22 @@ class ApiController < ApplicationController
     render_error("no bulk api access", :unauthorized)
   end
 
+  sig { void }
+  def log_api_call
+    LogApiCallJob.perform_later(
+      api_key: request.query_parameters["key"],
+      ip_address: request.remote_ip,
+      query: request.fullpath,
+      params: permitted_params.merge(
+        controller: params[:controller],
+        action: params[:action],
+        format: params[:format]
+      ),
+      user_agent: request.headers["User-Agent"],
+      time_as_float: Time.zone.now.to_f
+    )
+  end
+
   sig { params(error_text: String, status: Symbol).void }
   def render_error(error_text, status)
     respond_to do |format|
@@ -227,14 +236,6 @@ class ApiController < ApplicationController
     @applications = T.let(applications, T.untyped)
     @description = T.let(description, T.nilable(String))
 
-    LogApiCallJob.perform_later(
-      api_key: request.query_parameters["key"],
-      ip_address: request.remote_ip,
-      query: request.fullpath,
-      params: params_for_logging,
-      user_agent: request.headers["User-Agent"],
-      time_as_float: Time.zone.now.to_f
-    )
     # In Rails 6.0 variants seem to not be able to be a string
     variants = :v2 if params[:v] == "2"
 
@@ -274,15 +275,6 @@ class ApiController < ApplicationController
     include Singleton
     include ApplicationHelper
     include ActionView::Helpers::TextHelper
-  end
-
-  sig { returns(T.untyped) }
-  def params_for_logging
-    permitted_params.merge(
-      controller: params[:controller],
-      action: params[:action],
-      format: params[:format]
-    )
   end
 
   sig { returns(T.untyped) }
