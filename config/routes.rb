@@ -162,7 +162,8 @@ Rails.application.routes.draw do
   get "api/howto" => "static#api_howto"
   get "about" => "static#about"
   get "faq" => "static#faq"
-  get "getinvolved" => "static#get_involved", as: :get_involved
+  get "getinvolved", to: redirect("/get_involved")
+  get "get_involved" => "static#get_involved", as: :get_involved
   get "how_to_write_a_scraper" => "static#how_to_write_a_scraper"
   get "how_to_lobby_your_local_council" => "static#how_to_lobby_your_local_council"
 

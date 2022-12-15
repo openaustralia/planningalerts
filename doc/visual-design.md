@@ -53,7 +53,7 @@ Each group is roughly ordered in order of importance (from most important to lea
 | Documentation | /api/howto                                | How to use the API
 |               | /about                                    | About PlanningAlerts
 |               | /faq                                      | Frequently asked questions
-|               | /getinvolved                              | How to get involved
+|               | /get_involved                             | How to get involved
 |               | /how_to_write_a_scraper                   | How to write a scraper
 |               | /how_to_lobby_your_local_council          | How to lobby your local council
 | Landing page  | /                                         | The page on the root of the domain
