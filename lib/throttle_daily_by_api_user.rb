@@ -67,7 +67,7 @@ class ThrottleDailyByApiUser < Rack::Throttle::Limiter
       nil
     end
 
-    !path_info.nil? && path_info[:controller] == "api" && path_info[:action] != "howto"
+    !path_info.nil? && path_info[:controller] == "api"
   end
 
   sig { params(request: T.untyped).returns(T.untyped) }

@@ -4,8 +4,8 @@
 class ApiController < ApplicationController
   extend T::Sig
 
-  before_action :check_api_parameters, except: %i[howto]
-  before_action :require_api_key, except: %i[howto]
+  before_action :check_api_parameters
+  before_action :require_api_key
   before_action :authenticate_bulk_api, only: %i[all date_scraped]
 
   # This is disabled because at least one commercial user of the API is doing
@@ -139,9 +139,6 @@ class ApiController < ApplicationController
       # Doesn't make sense (I think) to support georss and geojson here
     end
   end
-
-  sig { void }
-  def howto; end
 
   private
 

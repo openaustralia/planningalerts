@@ -11,6 +11,9 @@ class StaticController < ApplicationController
   sig { void }
   def faq; end
 
+  sig { void }
+  def api_howto; end
+
   # rubocop:disable Naming/AccessorMethodName
   sig { void }
   def get_involved; end

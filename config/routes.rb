@@ -159,8 +159,7 @@ Rails.application.routes.draw do
     get :specification
   end
 
-  get "api/howto" => "api#howto", as: :api_howto
-
+  get "api/howto" => "static#api_howto", as: :api_howto
   get "about" => "static#about", as: :about
   get "faq" => "static#faq", as: :faq
   get "getinvolved" => "static#get_involved", as: :get_involved
