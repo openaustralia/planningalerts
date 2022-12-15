@@ -178,6 +178,13 @@ class ApiController < ApplicationController
     )
   end
 
+  sig { void }
+  def authenticate_bulk_api
+    return if ApiKey.exists?(value: params[:key], bulk: true)
+
+    render_error("no bulk api access", :unauthorized)
+  end
+
   sig { params(error_text: String, status: Symbol).void }
   def render_error(error_text, status)
     respond_to do |format|
@@ -197,13 +204,6 @@ class ApiController < ApplicationController
         render plain: error_text, status: status
       end
     end
-  end
-
-  sig { void }
-  def authenticate_bulk_api
-    return if ApiKey.exists?(value: params[:key], bulk: true)
-
-    render_error("no bulk api access", :unauthorized)
   end
 
   sig { returns(Integer) }
