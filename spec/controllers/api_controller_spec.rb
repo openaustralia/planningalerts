@@ -8,7 +8,7 @@ describe ApiController do
   shared_examples "an authenticated API" do
     shared_examples "not authorised" do
       it { expect(subject.status).to eq 401 }
-      it { expect(subject.body).to eq '{"error":"not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes"}' }
+      it { expect(subject.body).to eq '{"error":"not authorised - use a valid api key"}' }
     end
 
     context "when no API key is given" do

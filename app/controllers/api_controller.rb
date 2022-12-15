@@ -173,7 +173,7 @@ class ApiController < ApplicationController
     end
 
     render_error(
-      "not authorised - use a valid api key - https://www.openaustraliafoundation.org.au/2015/03/02/planningalerts-api-changes",
+      "not authorised - use a valid api key",
       :unauthorized
     )
   end
