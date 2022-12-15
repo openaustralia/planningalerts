@@ -13,11 +13,6 @@ tmp/miniprofiler
 coverage
 config/database.yml
 rerun.txt
-public/about.html
-public/api/*.html
-public/faq.html
-public/getinvolved.html
-public/index.html
 public/sitemap.xml
 public/sitemaps/sitemap*.xml.gz
 webrat.log
