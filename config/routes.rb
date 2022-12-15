@@ -159,9 +159,9 @@ Rails.application.routes.draw do
     get :specification
   end
 
-  get "api/howto" => "static#api_howto", as: :api_howto
-  get "about" => "static#about", as: :about
-  get "faq" => "static#faq", as: :faq
+  get "api/howto" => "static#api_howto"
+  get "about" => "static#about"
+  get "faq" => "static#faq"
   get "getinvolved" => "static#get_involved", as: :get_involved
   get "how_to_write_a_scraper" => "static#how_to_write_a_scraper"
   get "how_to_lobby_your_local_council" => "static#how_to_lobby_your_local_council"
