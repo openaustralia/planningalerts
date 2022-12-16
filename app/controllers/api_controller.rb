@@ -202,7 +202,7 @@ class ApiController < ApplicationController
     # confusing. It's not hugely important in the grand scheme of things as the daily usage is more used to see the order of magnitude
     # of usage. The detailed usage of users is capped via the rack middleware which is going to be accurate.
     # TODO: Switch over to using an Australian time zone
-    UpdateApiUsageJob.perform_later(api_key: @current_api_key, date: Time.zone.today)
+    UpdateApiUsageJob.perform_later(api_key: T.must(@current_api_key), date: Time.zone.today)
   end
 
   sig { params(error_text: String, status: Symbol).void }
