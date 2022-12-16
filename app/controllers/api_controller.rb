@@ -8,6 +8,7 @@ class ApiController < ApplicationController
   before_action :require_api_key
   before_action :authenticate_bulk_api, only: %i[all date_scraped]
   before_action :log_api_call
+  before_action :update_api_usage
 
   # This is disabled because at least one commercial user of the API is doing
   # GET requests for JSONP instead of using XHR
@@ -193,6 +194,18 @@ class ApiController < ApplicationController
       user_agent: request.headers["User-Agent"],
       time_as_float: Time.zone.now.to_f
     )
+  end
+
+  sig { void }
+  def update_api_usage
+    # This is doing everything in UTC which means that the "daily" period does *not* start at midnight Australian time which is somewhat
+    # confusing. It's not hugely important in the grand scheme of things as the daily usage is more used to see the order of magnitude
+    # of usage. The detailed usage of users is capped via the rack middleware which is going to be accurate.
+    # TODO: Switch over to using an Australian time zone
+    usage = DailyApiUsage.find_or_create_by(api_key: @current_api_key, date: Time.zone.today)
+    # rubocop:disable Rails/SkipsModelValidations
+    usage.increment!(:count)
+    # rubocop:enable Rails/SkipsModelValidations
   end
 
   sig { params(error_text: String, status: Symbol).void }
