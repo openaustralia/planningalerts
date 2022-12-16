@@ -12,11 +12,11 @@
 
 ActiveRecord::Schema[7.0].define(version: 2022_12_16_182420) do
   create_table "active_admin_comments", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "resource_id", null: false
-    t.string "resource_type", null: false
+    t.string "resource_id", default: "", null: false
+    t.string "resource_type", default: "", null: false
     t.integer "author_id"
     t.string "author_type"
-    t.text "body"
+    t.text "body", size: :medium
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.string "namespace"
@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_182420) do
   end
 
   create_table "alerts", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "address", limit: 120, null: false
+    t.string "address", limit: 120, default: "", null: false
     t.datetime "last_sent", precision: nil
     t.float "lat", limit: 53, null: false
     t.float "lng", limit: 53, null: false
@@ -73,7 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_182420) do
     t.boolean "current", null: false
     t.text "address", null: false
     t.text "description", null: false
-    t.string "info_url", limit: 1024, null: false
+    t.string "info_url", limit: 1024, default: "", null: false
     t.string "comment_url", limit: 1024
     t.date "date_received"
     t.date "on_notice_from"
@@ -96,7 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_182420) do
   end
 
   create_table "applications", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "council_reference", limit: 50, null: false
+    t.string "council_reference", limit: 50, default: "", null: false
     t.integer "authority_id", null: false
     t.integer "no_alerted"
     t.integer "visible_comments_count", default: 0, null: false
@@ -106,8 +106,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_182420) do
   end
 
   create_table "authorities", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "full_name", limit: 200, null: false
-    t.string "short_name", limit: 100, null: false
+    t.string "full_name", limit: 200, default: "", null: false
+    t.string "short_name", limit: 100, default: "", null: false
     t.boolean "disabled", null: false
     t.string "state", limit: 20, null: false
     t.string "email"
@@ -159,13 +159,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_182420) do
   end
 
   create_table "geocode_queries", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "query", null: false
+    t.string "query", default: "", null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "geocode_results", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "geocoder", null: false
+    t.string "geocoder", default: "", null: false
     t.float "lat"
     t.float "lng"
     t.datetime "created_at", precision: nil, null: false
@@ -190,7 +190,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_182420) do
   create_table "reports", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.text "details"
+    t.text "details", size: :medium
     t.integer "comment_id", null: false
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
@@ -203,7 +203,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_182420) do
   end
 
   create_table "stats", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "key", limit: 25, null: false
+    t.string "key", limit: 25, default: "", null: false
     t.integer "value", null: false
   end
 
