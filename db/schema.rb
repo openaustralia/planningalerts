@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_30_062434) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_16_182420) do
   create_table "active_admin_comments", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "resource_id", null: false
     t.string "resource_type", null: false
@@ -45,7 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_062434) do
     t.index ["user_id"], name: "fk_rails_d4053234e7"
   end
 
-  create_table "api_keys", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "api_keys", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "value", null: false
     t.boolean "bulk", default: false, null: false
@@ -138,6 +138,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_062434) do
     t.index ["confirmed"], name: "index_comments_on_confirmed"
     t.index ["hidden"], name: "index_comments_on_hidden"
     t.index ["user_id"], name: "fk_rails_03de2dc08c"
+  end
+
+  create_table "daily_api_usages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "api_key_id", null: false
+    t.date "date", null: false
+    t.integer "count", default: 0, null: false
+    t.index ["api_key_id", "date"], name: "index_daily_api_usages_on_api_key_id_and_date", unique: true
+    t.index ["api_key_id"], name: "index_daily_api_usages_on_api_key_id"
+    t.index ["date"], name: "index_daily_api_usages_on_date"
   end
 
   create_table "email_batches", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -234,6 +243,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_062434) do
   add_foreign_key "applications", "authorities", name: "applications_authority_id_fk"
   add_foreign_key "comments", "applications"
   add_foreign_key "comments", "users"
+  add_foreign_key "daily_api_usages", "api_keys"
   add_foreign_key "geocode_results", "geocode_queries"
   add_foreign_key "github_issues", "authorities"
   add_foreign_key "reports", "comments"
