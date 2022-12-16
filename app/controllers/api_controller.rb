@@ -161,8 +161,8 @@ class ApiController < ApplicationController
   sig { void }
   def require_api_key
     if params[:key]
-      @api_key = T.let(ApiKey.find_by(value: params[:key], disabled: false), T.nilable(ApiKey))
-      if @api_key
+      @current_api_key = T.let(ApiKey.find_by(value: params[:key], disabled: false), T.nilable(ApiKey))
+      if @current_api_key
         # Everything is fine
         return
       end
@@ -173,8 +173,8 @@ class ApiController < ApplicationController
 
   sig { void }
   def authenticate_bulk_api
-    # This should only be called after require_api_key doesn't error so @api_key should always be non-nil
-    return if T.must(@api_key).bulk?
+    # This should only be called after require_api_key doesn't error so @current_api_key should always be non-nil
+    return if T.must(@current_api_key).bulk?
 
     render_error("no bulk api access", :unauthorized)
   end
