@@ -140,7 +140,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_182420) do
     t.index ["user_id"], name: "fk_rails_03de2dc08c"
   end
 
-  create_table "daily_api_usages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "daily_api_usages", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "api_key_id", null: false
     t.date "date", null: false
     t.integer "count", default: 0, null: false
