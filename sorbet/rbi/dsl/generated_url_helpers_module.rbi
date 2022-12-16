@@ -198,6 +198,9 @@ module GeneratedUrlHelpersModule
   def get_involved_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def getinvolved_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def how_to_lobby_your_local_council_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
