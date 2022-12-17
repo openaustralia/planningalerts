@@ -11,8 +11,9 @@ class TopUsageApiUsersService
 
   sig { params(date_from: Date, date_to: Date, number: Integer).returns(T::Array[ApiKeyCount]) }
   def self.call(date_from:, date_to:, number:)
-    DailyApiUsage.where(date: date_from..date_to).group(:api_key_id).order("SUM(count) DESC").limit(number).sum(:count).map do |api_key_id, sum|
-      ApiKeyCount.new(count: sum, api_key: ApiKey.find(api_key_id))
+    result = DailyApiUsage.top_usage_in_date_range(date_from: date_from, date_to: date_to, number: number)
+    result.map do |api_key, sum|
+      ApiKeyCount.new(count: sum, api_key: api_key)
     end
   end
 end
