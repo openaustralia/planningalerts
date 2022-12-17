@@ -23,8 +23,8 @@ module Admin
       # If period is 1 then we just want today's data roughly. If period is 2
       # we want today and yesterday
       date_from = date_to - (params_period.to_i - 1)
-      @result = T.let(TopUsageApiUsersService.call(date_from: date_from, date_to: date_to, number: 50),
-                      T.nilable(T::Array[TopUsageApiUsersService::ApiKeyCount]))
+      result = DailyApiUsage.top_usage_in_date_range(date_from: date_from, date_to: date_to, number: 50)
+      @result = T.let(result, T.nilable(T::Hash[ApiKey, Integer]))
     end
   end
 end
