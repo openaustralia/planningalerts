@@ -15,3 +15,5 @@ Rack::Attack.throttle(
   
   request.params["key"] if path_info && path_info[:controller] == "api"
 end
+
+Rack::Attack.throttled_response_retry_after_header = true
