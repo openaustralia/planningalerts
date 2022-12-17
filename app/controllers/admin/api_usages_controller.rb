@@ -19,16 +19,11 @@ module Admin
 
       @period = T.let(params_period.to_i, T.nilable(Integer))
 
-      # TODO: Make this less ugly
-      redis = Redis.new(Rails.configuration.redis)
-      redis = Redis::Namespace.new(Rails.configuration.redis[:namespace], redis: redis)
-
       date_to = Time.zone.today
       # If period is 1 then we just want today's data roughly. If period is 2
       # we want today and yesterday
       date_from = date_to - (params_period.to_i - 1)
-      @result = T.let(TopUsageApiUsersService.call(redis: redis, date_from: date_from,
-                                                   date_to: date_to, number: 50),
+      @result = T.let(TopUsageApiUsersService.call(date_from: date_from, date_to: date_to, number: 50),
                       T.nilable(T::Array[TopUsageApiUsersService::ApiKeyObjectRequests]))
     end
   end
