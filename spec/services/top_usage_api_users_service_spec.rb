@@ -25,8 +25,8 @@ describe TopUsageApiUsersService do
     it "returns the top 2 total number of requests in descending sort order" do
       result = described_class.call(date_from: Date.new(2021, 7, 1), date_to: Date.new(2021, 7, 2), number: 2)
       expect(result.map(&:serialize)).to eq [
-        { "api_key_object" => key3, "requests" => 214 },
-        { "api_key_object" => key1, "requests" => 157 }
+        { "api_key" => key3, "count" => 214 },
+        { "api_key" => key1, "count" => 157 }
       ]
     end
   end

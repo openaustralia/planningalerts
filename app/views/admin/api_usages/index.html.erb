@@ -33,13 +33,13 @@
     <tbody>
       <% @result.each do |usage| %>
         <tr>
-          <td><%= link_to usage.api_key_object.user.name,         admin_api_key_path(usage.api_key_object) %></td>
-          <td><%= link_to usage.api_key_object.user.organisation, admin_api_key_path(usage.api_key_object) %></td>
-          <td><%= link_to usage.api_key_object.user.email,        admin_api_key_path(usage.api_key_object) %></td>
-          <td><%= link_to usage.api_key_object.disabled.to_s,     admin_api_key_path(usage.api_key_object) %></td>
-          <td><%= link_to usage.api_key_object.commercial.to_s,   admin_api_key_path(usage.api_key_object) %></td>
-          <td><%= link_to usage.api_key_object.daily_limit.to_s,  admin_api_key_path(usage.api_key_object) %></td>
-          <td><%= usage.requests %></td>
+          <td><%= link_to usage.api_key.user.name,         admin_api_key_path(usage.api_key) %></td>
+          <td><%= link_to usage.api_key.user.organisation, admin_api_key_path(usage.api_key) %></td>
+          <td><%= link_to usage.api_key.user.email,        admin_api_key_path(usage.api_key) %></td>
+          <td><%= link_to usage.api_key.disabled.to_s,     admin_api_key_path(usage.api_key) %></td>
+          <td><%= link_to usage.api_key.commercial.to_s,   admin_api_key_path(usage.api_key) %></td>
+          <td><%= link_to usage.api_key.daily_limit.to_s,  admin_api_key_path(usage.api_key) %></td>
+          <td><%= usage.count %></td>
         </tr>
       <% end %>
     </tbody>

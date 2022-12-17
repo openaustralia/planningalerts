@@ -24,7 +24,7 @@ module Admin
       # we want today and yesterday
       date_from = date_to - (params_period.to_i - 1)
       @result = T.let(TopUsageApiUsersService.call(date_from: date_from, date_to: date_to, number: 50),
-                      T.nilable(T::Array[TopUsageApiUsersService::ApiKeyObjectRequests]))
+                      T.nilable(T::Array[TopUsageApiUsersService::ApiKeyCount]))
     end
   end
 end
