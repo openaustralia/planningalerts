@@ -2,9 +2,7 @@
 require_relative "boot"
 
 require "rails/all"
-require "rack/throttle"
-require File.dirname(__FILE__) + "/../lib/throttle_daily_by_api_user"
-require File.dirname(__FILE__) + "/../lib/throttle_cache"
+require "rack/attack"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -54,10 +52,7 @@ module PlanningalertsApp
       namespace: "pa_#{ENV['STAGE']}"
     }
 
-    config.middleware.use ThrottleDailyByApiUser,
-                          cache: ThrottleCache.new(config.redis),
-                          key_prefix: :throttle,
-                          message: "Rate Limit Exceeded. See https://www.planningalerts.org.au/api/howto#usage for more information"
+    config.middleware.use Rack::Attack
 
     config.action_dispatch.tld_length = 2
 

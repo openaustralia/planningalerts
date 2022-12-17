@@ -422,6 +422,8 @@ GEM
       activesupport (>= 2.3.14)
     racc (1.6.1)
     rack (2.2.4)
+    rack-attack (6.6.1)
+      rack (>= 1.0, < 3)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
     rack-livereload (0.3.17)
@@ -748,6 +750,7 @@ DEPENDENCIES
   oj
   pundit (~> 2.2)
   rabl
+  rack-attack
   rack-cors
   rack-livereload
   rack-mini-profiler

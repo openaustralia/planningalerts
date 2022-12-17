@@ -9,7 +9,9 @@ gem "rake"
 
 # API
 gem "dalli"
-gem "rack-throttle"
+
+# For throttling API requests
+gem "rack-attack"
 
 # Admin interface
 gem "administrate"
