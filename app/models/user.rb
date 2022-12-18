@@ -13,9 +13,9 @@ class User < ApplicationRecord
   extend Devise::Models::Validatable::ClassMethods
 
   # Include default devise modules. Others available are:
-  # :token_authenticatable, :lockable and :timeoutable
+  # :token_authenticatable and :timeoutable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
-         :trackable, :validatable, :confirmable
+         :trackable, :validatable, :confirmable, :lockable
   has_many :api_keys, dependent: :destroy
   has_many :alerts, dependent: :destroy
   # If a user is destroyed we want to keep the comments because they
