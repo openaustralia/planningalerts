@@ -1,4 +1,8 @@
-<p>Hello <%= @resource.email %>!</p>
+<% if @resource.name.present? %>
+  <p>Hello <%= @resource.name %>!</p>
+<% else %>
+  <p>Hello!</p>
+<% end %>
 
 <p>Your account has been locked due to an excessive number of unsuccessful sign in attempts.</p>
 
