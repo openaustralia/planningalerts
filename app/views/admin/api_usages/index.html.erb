@@ -28,7 +28,7 @@
       <th>Disabled</th>
       <th>Commercial</th>
       <th>Daily Limit</th>
-      <th>Requests</th>
+      <th>Average daily requests</th>
     </thead>
     <tbody>
       <% @result.each do |api_key, requests| %>
@@ -39,7 +39,7 @@
           <td><%= link_to api_key.disabled.to_s,     admin_api_key_path(api_key) %></td>
           <td><%= link_to api_key.commercial.to_s,   admin_api_key_path(api_key) %></td>
           <td><%= link_to api_key.daily_limit.to_s,  admin_api_key_path(api_key) %></td>
-          <td><%= requests %></td>
+          <td><%= requests.round %></td>
         </tr>
       <% end %>
     </tbody>
