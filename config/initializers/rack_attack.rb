@@ -16,4 +16,11 @@ Rack::Attack.throttle(
   request.params["key"] if path_info && path_info[:controller] == "api"
 end
 
+# Slow down credential stuffing (from data breaches) by throttling
+# attempted sign ins
+# See https://ankane.org/hardening-devise
+Rack::Attack.throttle("logins/ip", limit: 20, period: 1.hour) do |req|
+  req.ip if req.post? && req.path.start_with?("/users/sign_in")
+end
+
 Rack::Attack.throttled_response_retry_after_header = true
