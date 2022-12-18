@@ -7,13 +7,6 @@
 
   <h1>Top 50 users of the API (by number of requests) over the last <%= pluralize(@period, "day") %></h1>
 
-  <p>
-    Note that these numbers are measured before any authorization is done.
-    So, for instance if an API key has been disabled but a user is still
-    making requests with that key, which are then getting denied, those
-    requests will still show up in the list here.
-  </p>
-
   <div>
     <%= link_to "last 30 days", { period: 30 }, class: "button" %>
     <%= link_to "last 7 days", { period: 7 }, class: "button" %>
