@@ -76,9 +76,6 @@ gem "recaptcha", require: "recaptcha/rails"
 # Site search
 gem "searchkick"
 
-# Reporting exceptions
-gem "honeybadger"
-
 # For accessing the Twitter api
 gem "twitter"
 
@@ -211,6 +208,9 @@ group :development do
 end
 
 group :production do
+  # Reporting exceptions
+  gem "honeybadger"
+
   # Javascript runtime (required for precompiling assets in production)
   # TODO: Remove lock on mini_racer (I think this is blocked by needing to upgrade bundler)
   gem "mini_racer", "0.4.0"
