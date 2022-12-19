@@ -1,0 +1,37 @@
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app
+      - gem_cache:/usr/local/bundle/gems
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+      - redis
+
+  database:
+    # Using same version as used in production
+    # TODO: Upgrade when we can
+    image: mysql:5.7
+    ports:
+      - "3306"
+    volumes:
+      - database_data:/var/lib/mysql
+    environment:
+      # The values below need to be the same in config/database.yml
+      MYSQL_ROOT_PASSWORD: password
+
+  redis:
+    # Using the latest but locking the version
+    # TODO: Try switching to alpine variant for slimmer images
+    image: redis:7.0
+    ports:
+      - "6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  gem_cache:
+  database_data:
+  redis_data:
