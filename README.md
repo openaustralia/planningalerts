@@ -64,7 +64,7 @@ We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all
 **Step 1 - Scrape DAs**
  * Register on [morph.io](https://morph.io) and [get your api key](https://morph.io/documentation/api).
  * Create a `.env.development` file and set your `MORPH_API_KEY`
- * Run - `rake planningalerts:applications:scrape['marrickville']`
+ * Run - `rake planningalerts:applications:import['marrickville']`
 
 **Step 2 - Setup an Alert**
  * Start servers - `bin/dev`
