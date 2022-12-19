@@ -44,7 +44,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Insert livereload js
-  config.middleware.insert_before(ActionDispatch::DebugExceptions, Rack::LiveReload)
+  config.middleware.insert_before(ActionDispatch::DebugExceptions, Rack::LiveReload, source: :vendored)
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false

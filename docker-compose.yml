@@ -11,6 +11,7 @@ services:
       - redis
       - mailcatcher
       - elasticsearch
+      - livereload
 
   database:
     # Using same version as used in production
@@ -65,6 +66,15 @@ services:
       - "discovery.type=single-node"
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
+
+  livereload:
+    build: .
+    command: bin/guard -i -P livereload
+    ports:
+      - 35729:35729
+    volumes:
+      - .:/app  
+      - gem_cache:/usr/local/bundle/gems
 
 volumes:
   gem_cache:
