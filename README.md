@@ -13,70 +13,39 @@ PlanningAlerts is brought to you by the [OpenAustralia Foundation](http://www.op
 ## Development
 
 **Install Dependencies**
- * Install MySql - On macOS download dmg from [http://dev.mysql.com/downloads/](http://dev.mysql.com/downloads/)
- * [Install Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup.html) - On macOS `brew install elasticsearch; brew services start elasticsearch`
- * [Install Redis](https://redis.io/) - On macOS `brew install redis; brew services start redis`
+ * [Docker compose](https://docs.docker.com/compose/install/)
 
 **Checkout The Project**
- * Fork the project on Github
- * Checkout the project
 
-**Install Ruby Dependencies**
- * Install bundler - `gem install bundler -v '~>1'`
- * Install dependencies - `bundle install`
+```
+$ git clone https://github.com/openaustralia/planningalerts.git
+$ cd planningalerts
+```
 
 **Setup The Database**
  * Create your own database config file - `cp config/database.yml.example config/database.yml`
- * Update the config/database.yml with your root mysql credentials
- * If you are on OSX change the socket to /tmp/mysql.sock
- * Set up the databases - `bundle exec rake db:setup`
+ * Set up the databases - `docker compose run web bin/rake db:setup`
+
+ **Start the application**
+ * `docker compose up`
+ * Point your browser at http://localhost:3000
 
 **Run The Tests**
- * Run the test suite - `bundle exec rake`
+ * In a separate window - `docker compose run web bin/guard`
+ * Press enter to run all the tests
+
+### Emails in development
+
+In development all emails are sent locally to [mailcatcher](https://mailcatcher.me/). The emails can be viewed at http://localhost:1080.
 
 ### Type checking
 
-Ruby is a dynamic language. This makes it great
-for quick development with a fun developer experience.
-
-However strong typing can really help.
-It gives a greater sense of security when refactoring and working on larger
-code-bases.
-
-So, we use [Sorbet](https://sorbet.org/) from Stripe
-to add strong typing to PlanningAlerts.
-
-To run the type checker:
+We're using [Sorbet](https://sorbet.org/) to add type checking to Ruby which otherwise is a dynamic language. To run the type checker:
 ```
-bundle exec srb
+docker compose run web bin/srb
 ```
-
-This is still a work in progress. We're gradually trying to move the
-codebase over to `typed: strict` which enforces typed signatures
-for all methods.
-
-Also as Sorbet is relatively new things are bound to change quite quickly.
 
 We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all our rbi files. We **don't** use `bundle exec srb rbi ...`.
-
-### Scraping and sending emails in development
-
-**Step 1 - Scrape DAs**
- * Register on [morph.io](https://morph.io) and [get your api key](https://morph.io/documentation/api).
- * Create a `.env.development` file and set your `MORPH_API_KEY`
- * Run - `rake planningalerts:applications:import['marrickville']`
-
-**Step 2 - Setup an Alert**
- * Start servers - `bin/dev`
- * Hit the home page - http://localhost:3000
- * Enter an address e.g. 638 King St, Newtown NSW 2042
- * Click the "Email me" link and setup an alert
- * Open MailCatcher and click the confirm link: http://localhost:1080/
-
-**Step 3 - Send email alerts**
- * Run - `rake planningalerts:applications:email`
- * Check the email in your browser: http://localhost:1080/
- * To resend alerts during testing, just set the `last_sent` attribute of your alert to *nil*
 
 ## Deployment
 
