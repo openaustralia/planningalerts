@@ -1,0 +1,6 @@
+# Ruby version isn't very important here as this is only used in development
+FROM ruby:2.7.4
+
+RUN gem install mailcatcher
+
+CMD ["mailcatcher", "--foreground", "--ip", "0.0.0.0"]

@@ -9,6 +9,7 @@ services:
     depends_on:
       - database
       - redis
+      - mailcatcher
 
   database:
     # Using same version as used in production
@@ -30,6 +31,13 @@ services:
       - "6379"
     volumes:
       - redis_data:/data
+
+  mailcatcher:
+    build:
+      context: .
+      dockerfile: Dockerfile.mailcatcher
+    ports:
+      - "1080:1080"
 
 volumes:
   gem_cache:
