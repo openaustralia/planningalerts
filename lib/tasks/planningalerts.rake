@@ -7,7 +7,14 @@ namespace :planningalerts do
 
     desc "Import all the applications for the last few days for all the loaded authorities"
     task :import, [:authority_short_name] => :environment do |_t, args|
-      authorities = args[:authority_short_name] ? [Authority.find_short_name_encoded(args[:authority_short_name])] : Authority.active
+      authorities = if args[:authority_short_name]
+                      a = Authority.find_short_name_encoded(args[:authority_short_name])
+                      raise "Couldn't find authority by short name: #{args[:authority_short_name]}" if a.nil?
+
+                      [a]
+                    else
+                      Authority.active
+                    end
       puts "Importing #{authorities.count} authorities"
       authorities.each do |authority|
         info_logger = AuthorityLogger.new(authority.id, Logger.new($stdout))
