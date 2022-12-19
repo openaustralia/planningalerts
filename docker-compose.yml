@@ -10,6 +10,7 @@ services:
       - database
       - redis
       - mailcatcher
+      - elasticsearch
 
   database:
     # Using same version as used in production
@@ -51,9 +52,22 @@ services:
       - database
       - redis
       - mailcatcher
+      - elasticsearch
 
+  elasticsearch:
+    # Using version 7.17.7 in production. So matching here
+    # TODO: Upgrade when we can
+    image: elasticsearch:7.17.7
+    ports:
+      - "9200"
+    mem_limit: 1073741824
+    environment:
+      - "discovery.type=single-node"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
 
 volumes:
   gem_cache:
   database_data:
   redis_data:
+  elasticsearch_data:
