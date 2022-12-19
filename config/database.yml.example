@@ -14,6 +14,7 @@
 #
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
+
 development:
   adapter: mysql2
   # To use utf8mb4 with mysql 5.6 we need to enable innodb_large_prefix. See
@@ -25,9 +26,9 @@ development:
   reconnect: false
   database: pa_development
   pool: 10
-  username: planningalerts
-  password:
-  socket: /var/run/mysqld/mysqld.sock
+  host: database
+  username: root
+  password: password
   # This setting is only really necessary if using mysql 5.7.5 or later
   variables:
     sql_mode: TRADITIONAL
@@ -42,8 +43,8 @@ test: &TEST
   reconnect: false
   database: pa_test
   pool: 10
+  host: database
   username: root
-  password:
-  socket: /var/run/mysqld/mysqld.sock
+  password: password
   variables:
     sql_mode: TRADITIONAL
