@@ -70,7 +70,8 @@ services:
 
   livereload:
     build: .
-    command: bin/guard -i -P livereload
+    command: bin/guard -P livereload
+    tty: true
     ports:
       - 35729:35729
     volumes:
