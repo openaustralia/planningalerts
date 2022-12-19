@@ -39,6 +39,20 @@ services:
     ports:
       - "1080:1080"
 
+  worker:
+    build: .
+    volumes:
+      - .:/app
+      - gem_cache:/usr/local/bundle/gems
+    command: bin/sidekiq -q default -q mailers -q searchkick
+    depends_on:
+      # So this is the last to start
+      - web
+      - database
+      - redis
+      - mailcatcher
+
+
 volumes:
   gem_cache:
   database_data:
