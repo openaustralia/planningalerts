@@ -12,6 +12,7 @@ services:
       - mailcatcher
       - elasticsearch
       - livereload
+      - tailwind
 
   database:
     # Using same version as used in production
@@ -72,6 +73,14 @@ services:
     command: bin/guard -i -P livereload
     ports:
       - 35729:35729
+    volumes:
+      - .:/app  
+      - gem_cache:/usr/local/bundle/gems
+
+  tailwind:
+    build: .
+    command: bin/rails tailwindcss:watch
+    tty: true
     volumes:
       - .:/app  
       - gem_cache:/usr/local/bundle/gems
