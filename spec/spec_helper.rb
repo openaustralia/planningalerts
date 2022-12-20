@@ -103,8 +103,10 @@ RSpec.configure do |config|
 
   # Disable searchkick during testing so that we don't need to run
   # elasticsearch locally which is a pain
+  # Also disable rack attack because we're logging in quite a bit during testing
   config.before(:suite) do
     Searchkick.disable_callbacks
+    Rack::Attack.enabled = false
   end
 
   # For testing use a memory adapter with all features disabled by default
