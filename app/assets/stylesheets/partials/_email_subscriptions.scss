@@ -55,3 +55,28 @@
     background-color: lighten($orange, 20%);
   }
 }
+
+.cta-button {
+  display: inline-block;
+  border-radius: 5px;
+  padding-top: 12px;
+  padding-right: 14px;
+  padding-bottom: 12px;
+  padding-left: 14px;
+  background-color: darken($orange, 2%);
+  color: #ffffff;
+  text-decoration: none !important;
+
+  @media only screen and (max-width: 480px) {
+    font-size: 16px;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: lighten($orange, 20%);
+  }
+}
+
+ol {
+  padding-left: 20px;
+}
