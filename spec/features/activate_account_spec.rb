@@ -20,7 +20,7 @@ describe "Activate account" do
       expect(unread_emails_for("matthew@oaf.org.au").size).to eq 1
       open_email("matthew@oaf.org.au")
 
-      expect(current_email).to have_subject("PlanningAlerts: Account activation instructions")
+      expect(current_email).to have_subject("PlanningAlerts: Activate your account")
       expect(current_email.default_part_body.to_s).to include("Please click the link below and follow the instructions.")
 
       visit_in_email("Activate my account")
@@ -53,7 +53,7 @@ describe "Activate account" do
       expect(unread_emails_for("matthew@oaf.org.au").size).to eq 1
       open_email("matthew@oaf.org.au")
 
-      expect(current_email).to have_subject("PlanningAlerts: Account activation instructions")
+      expect(current_email).to have_subject("PlanningAlerts: Activate your account")
       expect(current_email.default_part_body.to_s).to include("Your account has already been activated")
     end
   end
