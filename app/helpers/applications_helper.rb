@@ -15,17 +15,6 @@ module ApplicationsHelper
     "“#{truncate(application.description, escape: false, separator: ' ')}” at #{application.address}"
   end
 
-  sig { params(application: Application).returns(String) }
-  def scraped_and_received_text(application)
-    text = +"We found this application for you on the planning authority's website #{time_ago_in_words(application.first_date_scraped)} ago. "
-    text << if application.date_received
-              "It was received by them #{distance_of_time_in_words(application.date_received, application.first_date_scraped)} earlier."
-            else
-              "The date it was received by them was not recorded."
-            end
-    text
-  end
-
   sig { params(date: Date).returns(String) }
   def days_ago_in_words(date)
     case date
