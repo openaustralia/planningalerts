@@ -4,7 +4,7 @@
 class AlertsController < ApplicationController
   extend T::Sig
 
-  before_action :authenticate_user!, only: :new, if: :force_login
+  before_action :authenticate_user!, only: %i[new create], if: :force_login
 
   sig { void }
   def new
