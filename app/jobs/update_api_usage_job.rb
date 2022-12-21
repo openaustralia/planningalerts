@@ -6,6 +6,9 @@ class UpdateApiUsageJob < ApplicationJob
 
   queue_as :default
 
+  # This retries before it reaches the underlying queuing system (sidekiq)
+  retry_on ActiveRecord::RecordNotUnique
+
   sig { params(api_key: ApiKey, date: Date).void }
   def perform(api_key:, date:)
     # The following command can fail if two api calls with the same api key get made very close together when no calls have been
