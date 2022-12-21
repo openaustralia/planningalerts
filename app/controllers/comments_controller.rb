@@ -4,6 +4,8 @@
 class CommentsController < ApplicationController
   extend T::Sig
 
+  before_action :authenticate_user!, only: :create, if: :force_login
+
   sig { void }
   def index
     authority_id = T.cast(params[:authority_id], T.nilable(String))
@@ -113,5 +115,12 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.json { render json: authority.comments_per_week }
     end
+  end
+
+  private
+
+  sig { returns(T::Boolean) }
+  def force_login
+    Flipper.enabled?(:force_login_to_comment)
   end
 end
