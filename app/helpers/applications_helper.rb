@@ -39,6 +39,14 @@ module ApplicationsHelper
     end
   end
 
+  # Useful for when you're showing a human readable relative date (e.g. "5 days ago") but
+  # also want to have a machine readable exact date and an exact date that displays on hover
+  # to the user
+  sig { params(time: T.any(Time, Date), content: String).returns(String) }
+  def time_tag_with_hover(time, content)
+    content_tag(:time, content, datetime: time.iso8601, title: time.to_fs(:rfc822))
+  end
+
   sig { params(application: Application).returns(String) }
   def on_notice_text(application)
     t = []
