@@ -15,6 +15,7 @@ module Users
 
     sig { void }
     def edit
+      # TODO: Handle case where @user is nil here - probably want to 404 or something like that?
       @user = User.new(reset_password_token: params[:token])
       @minimum_password_length = T.let(User.password_length.min, T.nilable(Integer))
     end
