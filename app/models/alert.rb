@@ -25,21 +25,12 @@ class Alert < ApplicationRecord
 
   before_validation :geocode_from_address, unless: :geocoded?
   before_create :set_confirm_info
-  # Doing after_commit instead after_create so that sidekiq doesn't try
-  # to see this before it properly exists. See
-  # https://github.com/mperham/sidekiq/wiki/Problems-and-Troubleshooting#cannot-find-modelname-with-id12345
-  after_commit :send_confirmation_email, on: :create, unless: :confirmed?
 
   scope(:confirmed, -> { where(confirmed: true) })
   scope(:active, -> { where(confirmed: true, unsubscribed: false) })
   scope(:in_past_week, -> { where("created_at > ?", 7.days.ago) })
 
   delegate :email, to: :user
-
-  sig { void }
-  def send_confirmation_email
-    ConfirmationMailer.confirm(self).deliver_later
-  end
 
   # lat and lng are only populated on save (where they are stored as not null).
   # so they start off being nil. We're just overriding the type signature here.

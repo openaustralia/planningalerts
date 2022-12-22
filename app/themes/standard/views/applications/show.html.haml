@@ -39,7 +39,7 @@
       #comments-area
         - if @comments.present?
           %h4= pluralize(@comments.count, "Comment")
-          - if current_user.nil? && Flipper.enabled?(:force_login_to_comment)
+          - if current_user.nil?
             %p
               = link_to "Create an account", new_user_registration_path
               or
@@ -55,7 +55,7 @@
         %h4#add-comment Have your say on this application
         - if @application.authority.email.present?
           = render "comments/form_introduction", application: @application
-          - if current_user.nil? && Flipper.enabled?(:force_login_to_comment)
+          - if current_user.nil?
             %p
               = link_to "Create an account", new_user_registration_path
               or
@@ -70,7 +70,7 @@
   #alert
     .attention
       = render "alerts/signup_introduction"
-      - if current_user.nil? && Flipper.enabled?(:force_login_to_comment)
+      - if current_user.nil?
         = link_to "Create an account", new_user_registration_path
         or
         = link_to "sign in", new_user_session_path
@@ -79,9 +79,6 @@
         = semantic_form_for @alert do |f|
           = f.inputs do
             = f.input :address, label: "Enter a street address", placeholder: "Enter a street address"
-            - if current_user.nil?
-              = f.semantic_fields_for :user do |user|
-                = user.input :email, label: "Enter your email address", placeholder: "Enter your email address"
           = f.actions do
             = f.action :submit, label: "Create alert", button_html: { class: "button button-rounded button-action button-large" }
 

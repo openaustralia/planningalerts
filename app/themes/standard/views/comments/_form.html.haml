@@ -6,9 +6,6 @@
       = render partial: "static/disclosure_explanation"
     = f.input :name
   = f.inputs id: "comment-detail-inputgroup" do
-    - if current_user.nil?
-      = f.semantic_fields_for :user do |user|
-        = user.input :email, as: :email
     = f.input :address, input_html: { class: "address-autocomplete-input" },
                         hint: t("formtastic.hints.comment.address", link: faq_path(anchor: "address"), target: "#faq_commenting_address", class: "hideable")
     .inline-hints.hideable-target#faq_commenting_address

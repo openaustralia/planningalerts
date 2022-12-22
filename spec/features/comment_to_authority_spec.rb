@@ -3,6 +3,8 @@
 require "spec_helper"
 
 describe "Give feedback" do
+  include Devise::Test::IntegrationHelpers
+
   # In order to affect the outcome of a development application
   # As a citizen
   # I want to send feedback on a development application directly to the planning authority
@@ -18,11 +20,12 @@ describe "Give feedback" do
   it "Getting an error message if the comment form isn’t completed correctly" do
     authority = create(:authority, full_name: "Foo", email: "feedback@foo.gov.au")
     application = create(:geocoded_application, id: "1", authority: authority)
+
+    sign_in create(:confirmed_user)
     visit(application_path(application))
 
     fill_in("Your comment", with: "I think this is a really good idea")
     fill_in("Your name", with: "Matthew Landauer")
-    fill_in("Your email", with: "example@example.com")
     # Don't fill in the address
     click_button("Post your public comment")
 
@@ -39,23 +42,15 @@ describe "Give feedback" do
     end
 
     it "Adding a comment" do
+      sign_in create(:confirmed_user)
       visit(application_path(application))
 
       fill_in("Your comment", with: "I think this is a really good ideas")
       fill_in("Your name", with: "Matthew Landauer")
-      fill_in("Your email", with: "example@example.com")
       fill_in("Your street address", with: "11 Foo Street")
       click_button("Post your public comment")
 
-      expect(page).to have_content("Now check your email")
-      expect(page).to have_content("Click on the link in the email to confirm your comment")
-
-      expect(unread_emails_for("example@example.com").size).to eq(1)
-      open_email("example@example.com")
-      expect(current_email).to have_subject("PlanningAlerts: Please confirm your comment")
-      # And the email body should contain a link to the confirmation page
-      comment = Comment.find_by(text: "I think this is a really good ideas")
-      expect(current_email.default_part_body.to_s).to include(confirmed_comment_url(id: comment.confirm_id, protocol: "https", host: "dev.planningalerts.org.au"))
+      expect(page).to have_content("Your comment has been sent to Foo and posted below.")
     end
 
     it "Unconfirmed comment should not be shown" do

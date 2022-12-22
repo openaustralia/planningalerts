@@ -7,7 +7,8 @@ describe AlertMailer do
     create(:alert,
            user: create(:user, email: "matthew@openaustralia.org"),
            address: "24 Bruce Rd, Glenbrook NSW 2773",
-           lat: 1.0, lng: 2.0, radius_meters: 800)
+           lat: 1.0, lng: 2.0, radius_meters: 800,
+           id: 1)
   end
 
   let(:a1) do
@@ -142,23 +143,6 @@ describe AlertMailer do
           expect(html_body).to eq(Rails.root.join("spec/mailers/regression/alert_mailer/email1.html").read.gsub("\n", "\r\n"))
         end
       end
-    end
-  end
-
-  describe ".new_signup_attempt_notice" do
-    it "puts the address in the subject" do
-      alert = build(:alert, address: "123 Lovely St, La La")
-      email = described_class.new_signup_attempt_notice(alert)
-
-      expect(email).to have_subject "Your subscription for 123 Lovely St, La La"
-    end
-
-    it "tells the user that we’ve recieved a new signup attempt" do
-      alert = build(:alert, address: "123 Lovely St, La La")
-      email = described_class.new_signup_attempt_notice(alert)
-
-      expect(email.html_part.body.to_s).to have_content "We just received a new request to send PlanningAlerts for 123 Lovely St, La La\nto your email address."
-      expect(email.text_part.body.to_s).to have_content "We just received a new request to send PlanningAlerts for 123 Lovely St, La La to your email address."
     end
   end
 end

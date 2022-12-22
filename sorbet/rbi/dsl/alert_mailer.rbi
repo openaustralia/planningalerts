@@ -10,13 +10,9 @@ class AlertMailer
       params(
         alert: ::Alert,
         applications: T::Array[::Application],
-        comments: T::Array[::Comment],
-        force_login: T::Boolean
+        comments: T::Array[::Comment]
       ).returns(::ActionMailer::MessageDelivery)
     end
-    def alert(alert:, applications: T.unsafe(nil), comments: T.unsafe(nil), force_login: T.unsafe(nil)); end
-
-    sig { params(alert: ::Alert).returns(::ActionMailer::MessageDelivery) }
-    def new_signup_attempt_notice(alert); end
+    def alert(alert:, applications: T.unsafe(nil), comments: T.unsafe(nil)); end
   end
 end

@@ -22,7 +22,7 @@ class ProcessAlertService
     comments = alert.new_comments
 
     if !applications.empty? || !comments.empty?
-      AlertMailer.alert(alert: alert, applications: applications, comments: comments, force_login: Flipper.enabled?(:force_login_to_comment)).deliver_now
+      AlertMailer.alert(alert: alert, applications: applications, comments: comments).deliver_now
       alert.last_sent = Time.zone.now
       no_emails = 1
     else

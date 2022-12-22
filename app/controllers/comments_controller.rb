@@ -4,7 +4,7 @@
 class CommentsController < ApplicationController
   extend T::Sig
 
-  before_action :authenticate_user!, only: :create, if: :force_login
+  before_action :authenticate_user!, only: :create
 
   sig { void }
   def index
@@ -30,55 +30,27 @@ class CommentsController < ApplicationController
 
     # First check if the honeypot field has been filled out by a spam bot
     # If so, make it look like things worked but don't actually do anything
+    # TODO: Do we still need this given that we now require a login?
     return if params[:little_sweety].present?
 
     params_comment = T.cast(params[:comment], ActionController::Parameters)
 
-    if current_user
-      comment = Comment.new(
-        name: params_comment[:name],
-        text: params_comment[:text],
-        address: params_comment[:address],
-        application: @application,
-        user: current_user,
-        # Because we're logged in we don't need to go through the whole email confirmation step
-        confirmed: true,
-        confirmed_at: Time.current
-      )
-      @comment = T.let(comment, T.nilable(Comment))
+    comment = Comment.new(
+      name: params_comment[:name],
+      text: params_comment[:text],
+      address: params_comment[:address],
+      application: @application,
+      user: current_user,
+      # Because we're logged in we don't need to go through the whole email confirmation step
+      confirmed: true,
+      confirmed_at: Time.current
+    )
+    @comment = T.let(comment, T.nilable(Comment))
 
-      if comment.save
-        comment.send_comment!
-        redirect_to application, notice: render_to_string(partial: "confirmed", locals: { comment: comment })
-        return
-      end
-    else
-      params_comment_user_attributes = T.cast(params_comment[:user_attributes], ActionController::Parameters)
-
-      email = T.cast(params_comment_user_attributes[:email], String)
-
-      # Create an unconfirmed user without a password if one doesn't already exist matching the email address
-      user = User.find_by(email: email)
-      if user.nil?
-        # from_alert_or_comment says that this user was created "from" an alert rather than a user
-        # registering an account in the "normal" way
-        user = User.new(email: email, from_alert_or_comment: true)
-        # Otherwise it would send out a confirmation email on saving the record
-        user.skip_confirmation_notification!
-        user.temporarily_allow_empty_password!
-        # We're not saving the new user record until the alert has validated
-      end
-
-      comment = Comment.new(
-        name: params_comment[:name],
-        text: params_comment[:text],
-        address: params_comment[:address],
-        application: @application,
-        user: user
-      )
-      @comment = T.let(comment, T.nilable(Comment))
-
-      return if comment.save
+    if comment.save
+      comment.send_comment!
+      redirect_to application, notice: render_to_string(partial: "confirmed", locals: { comment: comment })
+      return
     end
 
     # TODO: This seems to have a lot repeated from Application#show
@@ -91,6 +63,7 @@ class CommentsController < ApplicationController
   end
 
   sig { void }
+  # TODO: We should leave this working until March 2023 to alllow people to still confirm old comments
   def confirmed
     @comment = T.let(Comment.find_by(confirm_id: params[:id]), T.nilable(Comment))
     if @comment

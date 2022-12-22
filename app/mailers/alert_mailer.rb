@@ -11,15 +11,13 @@ class AlertMailer < ApplicationMailer
     params(
       alert: Alert,
       applications: T::Array[Application],
-      comments: T::Array[Comment],
-      force_login: T::Boolean
+      comments: T::Array[Comment]
     ).returns(T.any(Mail::Message, ActionMailer::MessageDelivery))
   end
-  def alert(alert:, applications: [], comments: [], force_login: false)
+  def alert(alert:, applications: [], comments: [])
     @alert = T.let(alert, T.nilable(Alert))
     @applications = T.let(applications, T.nilable(T::Array[Application]))
     @comments = T.let(comments, T.nilable(T::Array[Comment]))
-    @force_login = T.let(force_login, T.nilable(T::Boolean))
 
     headers(
       # The List-Unsubscribe header appears not to be working in gmail anymore
@@ -38,22 +36,6 @@ class AlertMailer < ApplicationMailer
         partial: "subject",
         locals: { applications: applications, comments: comments, alert: alert }
       ).strip
-    )
-  end
-
-  sig { params(alert: Alert).returns(T.any(Mail::Message, ActionMailer::MessageDelivery)) }
-  def new_signup_attempt_notice(alert)
-    @alert = alert
-
-    headers(
-      "X-Cuttlefish-Metadata-alert-id" => alert.id.to_s,
-      "X-Cuttlefish-Metadata-user-id" => T.must(alert.user).id.to_s
-    )
-
-    mail(
-      from: email_from,
-      to: alert.email,
-      subject: default_i18n_subject(address: alert.address)
     )
   end
 end

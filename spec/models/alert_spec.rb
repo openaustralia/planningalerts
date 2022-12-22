@@ -27,18 +27,6 @@ describe Alert do
     end
   end
 
-  describe "#after_create" do
-    let(:object) do
-      VCR.use_cassette("planningalerts") { build(:alert) }
-    end
-
-    it "calls the method to send the confirmation email" do
-      allow(object).to receive(:send_confirmation_email)
-      object.save
-      expect(object).to have_received(:send_confirmation_email)
-    end
-  end
-
   context "when the geocoder doesn't need to run" do
     let(:alert) { build(:alert, address: "foo", lat: 1, lng: 2) }
 

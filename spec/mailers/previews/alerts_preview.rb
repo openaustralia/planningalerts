@@ -12,7 +12,8 @@ class AlertsPreview < ActionMailer::Preview
       radius_meters: 1000,
       user: User.new(email: "mary@example.com"),
       address: "1 Illawarra Road Marrickville 2204",
-      confirm_id: "1234"
+      confirm_id: "1234",
+      id: 1
     )
     application = Application.new(
       id: 1,
@@ -38,7 +39,7 @@ class AlertsPreview < ActionMailer::Preview
     AlertMailer.alert(alert: alert, applications: [application], comments: [comment])
   end
 
-  def alert_force_login_enabled_and_account_requires_activation
+  def alert_account_requires_activation
     alert = Alert.new(
       lat: -33.902723,
       lng: 151.163362,
@@ -69,18 +70,6 @@ class AlertsPreview < ActionMailer::Preview
       name: "Martha"
     )
 
-    AlertMailer.alert(alert: alert, applications: [application], comments: [comment], force_login: true)
-  end
-
-  # This is the old-school kind that we are getting rid of
-  def confirmation
-    alert = FactoryBot.build_stubbed(:alert, confirm_id: "1234")
-    ConfirmationMailer.confirm(alert)
-  end
-
-  # This is getting phased out
-  def confirmation_new_signup_attempt_notice
-    alert = FactoryBot.build_stubbed(:alert)
-    AlertMailer.new_signup_attempt_notice(alert)
+    AlertMailer.alert(alert: alert, applications: [application], comments: [comment])
   end
 end

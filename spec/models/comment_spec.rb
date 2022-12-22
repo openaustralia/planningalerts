@@ -25,18 +25,6 @@ describe Comment do
     end
   end
 
-  describe "#after_create" do
-    let(:object) do
-      VCR.use_cassette("planningalerts") { build(:comment) }
-    end
-
-    it "calls the method to send the confirmation email" do
-      allow(object).to receive(:send_confirmation_email)
-      object.save
-      expect(object).to have_received(:send_confirmation_email)
-    end
-  end
-
   describe "#confirm!" do
     context "when already confirmed" do
       let(:comment) do

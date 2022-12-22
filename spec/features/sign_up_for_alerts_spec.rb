@@ -3,6 +3,8 @@
 require "spec_helper"
 
 describe "Sign up for alerts" do
+  include Devise::Test::IntegrationHelpers
+
   # In order to see new development applications in my suburb
   # I want to sign up for an email alert
 
@@ -24,33 +26,26 @@ describe "Sign up for alerts" do
   end
 
   it "successfully" do
+    user = create(:confirmed_user)
+    sign_in user
     visit "/alerts/signup"
 
     fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
-    fill_in("Enter your email address", with: "example@example.com")
     click_button("Create alert")
 
-    expect(page).to have_content("Now check your email")
-    expect(page).to have_content("Return to applications near 24 Bruce Rd, Glenbrook")
-
-    confirm_alert_in_email
-
-    expect(page).to have_content("your alert has been activated")
-    expect(page).to have_content("24 Bruce Rd, Glenbrook NSW 2773")
-    expect(page).not_to have_content("You now have several email alerts")
+    expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
     expect(
       Alert.active.find_by(address: "24 Bruce Rd, Glenbrook NSW 2773",
                            radius_meters: "2000",
-                           user: User.find_by(email: current_email_address))
+                           user: user)
     ).not_to be_nil
   end
 
   it "unsuccessfully with an invalid address" do
+    sign_in create(:confirmed_user)
     visit "/alerts/signup"
 
     fill_in("Enter a street address", with: "Bruce Rd")
-    fill_in("Enter your email address", with: "example@example.com")
-
     click_button("Create alert")
 
     # I think because of the way geokit works we can return different alternative
@@ -65,19 +60,14 @@ describe "Sign up for alerts" do
     end
 
     it "successfully" do
+      sign_in create(:confirmed_user)
       visit application_path(application)
 
       within "#new_alert" do
-        fill_in("Enter your email address", with: "example@example.com")
         click_button("Create alert")
       end
 
-      expect(page).to have_content("Now check your email")
-      expect(page).to have_content("Return to applications near 24 Bruce Rd, Glenbrook")
-
-      confirm_alert_in_email
-
-      expect(page).to have_content("your alert has been activated")
+      expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
     end
   end
 
@@ -89,83 +79,72 @@ describe "Sign up for alerts" do
     end
 
     it "successfully" do
+      sign_in create(:confirmed_user)
       visit root_path
       fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
       click_button("Search")
 
-      fill_in("Enter your email address", with: "example@example.com")
       click_button("Create alert")
 
-      expect(page).to have_content("Now check your email")
-      expect(page).to have_content("Return to applications near 24 Bruce Rd, Glenbrook")
-
-      confirm_alert_in_email
-
-      expect(page).to have_content("your alert has been activated")
+      expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
     end
   end
 
-  context "with force login feature flag set" do
-    before do
-      Flipper.enable(:force_login_to_comment)
-    end
+  it "when via the homepage with a pre-existing user but not logged in" do
+    create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", lat: -33.772812, lng: 150.624252)
+    create(:confirmed_user, email: "example@example.com", password: "mypassword")
 
-    it "when via the homepage with a pre-existing user but not logged in" do
-      create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", lat: -33.772812, lng: 150.624252)
-      create(:confirmed_user, email: "example@example.com", password: "mypassword")
+    visit root_path
+    fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
+    click_button("Search")
 
-      visit root_path
-      fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
-      click_button("Search")
+    expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
+    expect(page).to have_content("Create an account or sign in to create an alert.")
+    click_link("sign in")
 
-      expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
-      expect(page).to have_content("Create an account or sign in to create an alert.")
-      click_link("sign in")
+    fill_in("Your email", with: "example@example.com")
+    fill_in("Password", with: "mypassword")
+    click_button("Sign in")
 
-      fill_in("Your email", with: "example@example.com")
-      fill_in("Password", with: "mypassword")
-      click_button("Sign in")
+    expect(page).to have_content("Signed in successfully.")
+    # We should be back at the same page from where we clicked "sign in"
+    expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
+    click_button("Create alert")
 
-      expect(page).to have_content("Signed in successfully.")
-      # We should be back at the same page from where we clicked "sign in"
-      expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
-      click_button("Create alert")
+    expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
+  end
 
-      expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
-    end
+  it "when via the homepage but not yet have an account" do
+    create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", lat: -33.772812, lng: 150.624252)
 
-    it "when via the homepage but not yet have an account" do
-      create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", lat: -33.772812, lng: 150.624252)
+    visit root_path
+    fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
+    click_button("Search")
 
-      visit root_path
-      fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
-      click_button("Search")
+    expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
+    expect(page).to have_content("Create an account or sign in to create an alert.")
+    click_link("Create an account")
 
-      expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
-      expect(page).to have_content("Create an account or sign in to create an alert.")
-      click_link("Create an account")
+    fill_in("Your full name", with: "Ms Example")
+    fill_in("Email", with: "example@example.com")
+    fill_in("Password", with: "mypassword")
+    click_button("Create my account")
 
-      fill_in("Your full name", with: "Ms Example")
-      fill_in("Email", with: "example@example.com")
-      fill_in("Password", with: "mypassword")
-      click_button("Create my account")
+    expect(page).to have_content("A message with a confirmation link has been sent to your email address.")
 
-      expect(page).to have_content("A message with a confirmation link has been sent to your email address.")
+    open_email("example@example.com")
+    expect(current_email).to have_subject("PlanningAlerts: Confirmation instructions")
 
-      open_email("example@example.com")
-      expect(current_email).to have_subject("PlanningAlerts: Confirmation instructions")
+    visit_in_email("Confirm account")
 
-      visit_in_email("Confirm account")
+    expect(page).to have_content("Your email address has been successfully confirmed and you are now logged in.")
+    expect(page).to have_content("Ms Example")
 
-      expect(page).to have_content("Your email address has been successfully confirmed and you are now logged in.")
-      expect(page).to have_content("Ms Example")
+    # We should be back at the same page from where we clicked "sign in"
+    expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
+    click_button("Create alert")
 
-      # We should be back at the same page from where we clicked "sign in"
-      expect(page).to have_content("Applications within 2 kilometres of 24 Bruce Rd, Glenbrook NSW 2773")
-      click_button("Create alert")
-
-      expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
-    end
+    expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
   end
 
   context "when via an authority’s applications page" do
@@ -175,18 +154,13 @@ describe "Sign up for alerts" do
     end
 
     it "successfully" do
+      sign_in create(:confirmed_user)
       visit applications_path(authority_id: "glenbrook")
 
       fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
-      fill_in("Enter your email address", with: "example@example.com")
       click_button("Create alert")
 
-      expect(page).to have_content("Now check your email")
-      expect(page).to have_content("Return to applications near 24 Bruce Rd, Glenbrook")
-
-      confirm_alert_in_email
-
-      expect(page).to have_content("your alert has been activated")
+      expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
     end
 
     # Having trouble getting this to work. I think the autocomplete
@@ -207,56 +181,44 @@ describe "Sign up for alerts" do
       Timecop.freeze(Time.utc(2017, 1, 4, 14, 35)) { test.run }
     end
 
-    let!(:preexisting_alert) do
+    let(:user) { create(:confirmed_user, email: "example@example.com") }
+
+    before do
       create(:unconfirmed_alert, address: "24 Bruce Rd, Glenbrook NSW 2773",
-                                 user: create(:confirmed_user, email: "example@example.com"),
+                                 user: user,
                                  created_at: 3.days.ago,
                                  updated_at: 3.days.ago)
     end
 
     it "successfully" do
+      sign_in user
       visit "/alerts/signup"
 
       fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
-      fill_in("Enter your email address", with: "example@example.com")
       click_button("Create alert")
 
-      expect(page).to have_content("Now check your email")
-      expect(page).to have_content("Return to applications near 24 Bruce Rd, Glenbrook")
-
-      confirm_alert_in_email
-
-      expect(page).to have_content("your alert has been activated")
-      expect(page).to have_content("24 Bruce Rd, Glenbrook NSW 2773")
-
-      expect(preexisting_alert.reload.created_at).to eq 3.days.ago
-      expect(preexisting_alert.reload.updated_at).to eq Time.current
+      # Not convinced this is the correct behaviour. Hmmm...
+      expect(page).to have_content("You already have an alert for that address")
     end
   end
 
   context "when there is already an confirmed alert for the address" do
+    let(:user) { create(:confirmed_user, email: "jenny@email.org") }
     let!(:preexisting_alert) do
       create(:confirmed_alert, address: "24 Bruce Rd, Glenbrook NSW 2773",
-                               user: create(:confirmed_user, email: "jenny@email.org"),
+                               user: user,
                                created_at: 3.days.ago,
                                updated_at: 3.days.ago)
     end
 
     it "see the confirmation page, so we don't leak information, but also get a notice about the signup attempt" do
+      sign_in user
       visit "/alerts/signup"
 
       fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
-      fill_in("Enter your email address", with: "jenny@email.org")
       click_button("Create alert")
 
-      expect(page).to have_content("Now check your email")
-      expect(page).to have_content("Return to applications near 24 Bruce Rd, Glenbrook")
-
-      open_last_email_for("jenny@email.org")
-
-      expect(current_email.default_part_body.to_s).to have_content(
-        "We just received a new request to send PlanningAlerts for 24 Bruce Rd, Glenbrook NSW 2773\nto your email address."
-      )
+      expect(page).to have_content("You already have an alert for that address")
     end
 
     context "when it is unsubscribed" do
@@ -265,21 +227,13 @@ describe "Sign up for alerts" do
       end
 
       it "successfully" do
+        sign_in user
         visit "/alerts/signup"
 
         fill_in("Enter a street address", with: "24 Bruce Rd, Glenbrook")
-        fill_in("Enter your email address", with: "jenny@email.org")
         click_button("Create alert")
 
-        expect(page).to have_content("Now check your email")
-        expect(page).to have_content("Return to applications near 24 Bruce Rd, Glenbrook")
-
-        open_email("jenny@email.org")
-
-        click_first_link_in_email
-
-        expect(page).to have_content("your alert has been activated")
-        expect(page).to have_content("24 Bruce Rd, Glenbrook NSW 2773")
+        expect(page).to have_content("You succesfully added a new alert for 24 Bruce Rd, Glenbrook NSW 2773")
       end
     end
   end

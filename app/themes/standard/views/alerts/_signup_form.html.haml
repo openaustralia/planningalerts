@@ -1,4 +1,4 @@
-- if current_user.nil? && Flipper.enabled?(:force_login_to_comment)
+- if current_user.nil?
   = link_to "Create an account", new_user_registration_path
   or
   = link_to "sign in", new_user_session_path
@@ -12,10 +12,6 @@
         = f.input :address, label: "Enter a street address",
                             placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580",
                             input_html: { class: "address-autocomplete-input", autofocus: true }
-      - if current_user.nil?
-        = f.semantic_fields_for :user do |user|
-          = user.input :email, label: "Enter your email address",
-                              placeholder: "your@email.com"
     = f.actions do
       = f.action :submit, label: "Create alert",
                           button_html: { class: "button button-rounded button-large button-action" }

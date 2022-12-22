@@ -30,12 +30,6 @@ class AuthorityPreview < ActionMailer::Preview
     CommentMailer.notify_authority(comment)
   end
 
-  # This is the old-school kind that we are getting rid of
-  def confirmation
-    comment = FactoryBot.build_stubbed(:comment, confirm_id: "1234")
-    ConfirmationMailer.confirm(comment)
-  end
-
   def abuse_report
     report = FactoryBot.build_stubbed(:report)
     ReportMailer.notify(report)
