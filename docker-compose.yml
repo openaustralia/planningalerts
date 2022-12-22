@@ -11,8 +11,8 @@ services:
       - redis
       - mailcatcher
       - elasticsearch
-      - livereload
-      - tailwind
+    command: "bin/dev"
+    tty: true
 
   database:
     # Using same version as used in production
@@ -42,20 +42,6 @@ services:
     ports:
       - "1080:1080"
 
-  worker:
-    build: .
-    volumes:
-      - .:/app
-      - gem_cache:/usr/local/bundle/gems
-    command: bin/sidekiq -q default -q mailers -q searchkick
-    depends_on:
-      # So this is the last to start
-      - web
-      - database
-      - redis
-      - mailcatcher
-      - elasticsearch
-
   elasticsearch:
     # Using version 7.17.7 in production. So matching here
     # TODO: Upgrade when we can
@@ -67,24 +53,6 @@ services:
       - "discovery.type=single-node"
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
-
-  livereload:
-    build: .
-    command: bin/guard -P livereload
-    tty: true
-    ports:
-      - 35729:35729
-    volumes:
-      - .:/app  
-      - gem_cache:/usr/local/bundle/gems
-
-  tailwind:
-    build: .
-    command: bin/rails tailwindcss:watch
-    tty: true
-    volumes:
-      - .:/app  
-      - gem_cache:/usr/local/bundle/gems
 
 volumes:
   gem_cache:
