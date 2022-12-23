@@ -93,4 +93,7 @@ Rails.application.configure do
   # Disable default security headers in development (well mainly X-Frame-Options
   # I think) to allow this page to be opened in the embedded VSCode simple browser
   config.action_dispatch.default_headers = {}
+
+  # Allow access from github codespaces preview
+  config.hosts << /.*\.preview\.app\.github\.dev/
 end
