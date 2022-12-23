@@ -19,6 +19,23 @@
 	"workspaceFolder": "/app",
 	"features": {
 		"ghcr.io/meaningful-ooo/devcontainer-features/fish:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"wingrunr21.vscode-ruby",
+				"karunamurti.haml",
+				"deibit.devdocs",
+				"manuelpuyol.erb-linter",
+				"GitHub.vscode-pull-request-github",
+				"aki77.haml-lint",
+				"rebornix.ruby",
+				"sorbet.sorbet-vscode-extension",
+				"misogi.ruby-rubocop",
+				"syler.sass-indented",
+				"bradlc.vscode-tailwindcss"
+			]
+		}
 	}
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
