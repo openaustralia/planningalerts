@@ -12,6 +12,9 @@ RUN apt-get update \
     && echo deploy ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/deploy \
     && chmod 0440 /etc/sudoers.d/deploy
 
+# Needed for sorbet extension for vscode
+RUN apt install watchman
+
 USER deploy
 
 COPY Gemfile /app/Gemfile
