@@ -36,7 +36,7 @@ module Users
       @user = User.reset_password_by_token(params_user)
       if @user.errors.empty?
         # TODO: Do this better
-        @user.update!(name: params_user[:name])
+        @user.update!(name: params_user[:name], activated_at: Time.current)
         sign_in(@user)
         redirect_to after_sign_in_path_for(@user), notice: t(".success")
       else
