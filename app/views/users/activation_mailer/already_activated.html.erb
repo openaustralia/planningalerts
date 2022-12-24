@@ -8,6 +8,6 @@
 
 <p>If you've forgotten your password and would like to reset it instead then click the link below</p>
 
-<p><%= link_to "Reset password", edit_user_password_url(@user, reset_password_token: @token) %></p>
+<p><%= link_to "Reset password", edit_user_password_url(reset_password_token: @token) %></p>
 
 <p>Didn't request this email? Then you can safely ignore it.</p>
