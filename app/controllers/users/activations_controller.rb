@@ -5,8 +5,6 @@ module Users
   class ActivationsController < ApplicationController
     extend T::Sig
 
-    layout "minimal"
-
     sig { void }
     def new
       user = User.new(email: params[:email])
