@@ -14,11 +14,16 @@
     <%= render "devise/shared/error_messages", resource: @user %>
 
     <%= f.inputs do %>
-      <%= f.input :email, input_html: { autofocus: true, autocomplete: "email" } %>
+      <%= f.input :email, label: "Your email", input_html: { autofocus: true, autocomplete: "email" } %>
     <% end %>
 
     <%= f.actions do %>
-      <%= f.action :submit, label: "Send me account activation instructions", button_html: { class: "button button-rounded button-large button-action" } %>
+      <%= f.action :submit, label: "Send account activation instructions to my email", button_html: { class: "button button-rounded button-large button-action" } %>
     <% end %>
   <% end %>
+
+  <p>
+    After clicking "Send ..." an email will be sent to your email address with the subject
+    "<%= t("users.activation_mailer.notify.subject") %>".
+  </p>
 </div>

@@ -12,8 +12,8 @@ describe "Activate account" do
 
     it "Successfully does an account activation" do
       visit "/users/activation/new"
-      fill_in "Email", with: "matthew@oaf.org.au"
-      click_button "Send me account activation instructions"
+      fill_in "Your email", with: "matthew@oaf.org.au"
+      click_button "Send account activation instructions to my email"
 
       expect(page).to have_content "If your email address exists in our database, you will receive an account activation link"
 
@@ -45,8 +45,8 @@ describe "Activate account" do
 
     it "gets a different email" do
       visit "/users/activation/new"
-      fill_in "Email", with: "matthew@oaf.org.au"
-      click_button "Send me account activation instructions"
+      fill_in "Your email", with: "matthew@oaf.org.au"
+      click_button "Send account activation instructions to my email"
 
       expect(page).to have_content "If your email address exists in our database, you will receive an account activation link"
 
