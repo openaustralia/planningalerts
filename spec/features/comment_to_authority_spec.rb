@@ -105,10 +105,10 @@ describe "Give feedback" do
 
   it "Reporting abuse on a confirmed comment" do
     comment = create(:confirmed_comment, text: "I'm saying something abusive", name: "Jack Rude", user: create(:user, email: "rude@foo.com"), id: "23")
+
+    sign_in create(:confirmed_user, email: "reporter@foo.com", name: "Joe Reporter")
     visit(new_comment_report_path(comment))
 
-    fill_in("Your name", with: "Joe Reporter")
-    fill_in("Your email", with: "reporter@foo.com")
     fill_in("Why should this comment be removed?", with: "You can't be rude to people!")
     click_button("Send report")
 

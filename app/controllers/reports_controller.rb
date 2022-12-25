@@ -4,6 +4,8 @@
 class ReportsController < ApplicationController
   extend T::Sig
 
+  before_action :authenticate_user!
+
   sig { void }
   def new
     @comment = T.let(Comment.visible.find(params[:comment_id]), T.nilable(Comment))
@@ -15,20 +17,11 @@ class ReportsController < ApplicationController
     params_report = T.cast(params[:report], ActionController::Parameters)
 
     @comment = Comment.visible.find(params[:comment_id])
-    user = current_user
-    @report = if user
-                @comment.reports.build(
-                  name: user.name,
-                  email: user.email,
-                  details: params_report[:details]
-                )
-              else
-                @comment.reports.build(
-                  name: params_report[:name],
-                  email: params_report[:email],
-                  details: params_report[:details]
-                )
-              end
+    @report = @comment.reports.build(
+      name: current_user.name,
+      email: current_user.email,
+      details: params_report[:details]
+    )
 
     if verify_recaptcha && @report.save
       ReportMailer.notify(@report).deliver_later
