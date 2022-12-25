@@ -1,1 +1,10 @@
-%p If your email address exists in our database, you will receive an account activation link at your email address in a few minutes.
+- content_for :page_title, "Now check your email"
+.attention
+  %h3= yield :page_title
+  %p
+    If your email address exists in our database
+    you will shortly receive an email from PlanningAlerts.org.au.
+    %span.highlight Click on the link in the email
+    to complete the final step to activate your account.
+  %p
+    If you don't get an email in the next few minutes, try checking your spam filter.

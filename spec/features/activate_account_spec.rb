@@ -15,7 +15,7 @@ describe "Activate account" do
       fill_in "Your email", with: "matthew@oaf.org.au"
       click_button "Send account activation instructions to my email"
 
-      expect(page).to have_content "If your email address exists in our database, you will receive an account activation link"
+      expect(page).to have_content "Now check your email"
 
       expect(unread_emails_for("matthew@oaf.org.au").size).to eq 1
       open_email("matthew@oaf.org.au")
@@ -48,7 +48,7 @@ describe "Activate account" do
       fill_in "Your email", with: "matthew@oaf.org.au"
       click_button "Send account activation instructions to my email"
 
-      expect(page).to have_content "If your email address exists in our database, you will receive an account activation link"
+      expect(page).to have_content "Now check your email"
 
       expect(unread_emails_for("matthew@oaf.org.au").size).to eq 1
       open_email("matthew@oaf.org.au")
