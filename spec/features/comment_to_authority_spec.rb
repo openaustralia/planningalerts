@@ -121,4 +121,23 @@ describe "Give feedback" do
     expect(current_email).to have_reply_to("Joe Reporter <reporter@foo.com>")
     expect(current_email).to have_subject("PlanningAlerts: Abuse report")
   end
+
+  it "reporting abuse when user doesn't have a name set" do
+    comment = create(:confirmed_comment, text: "I'm saying something abusive", name: "Jack Rude", user: create(:user, email: "rude@foo.com"), id: "23")
+
+    sign_in create(:confirmed_user, email: "reporter@foo.com")
+    visit(new_comment_report_path(comment))
+
+    fill_in("Why should this comment be removed?", with: "You can't be rude to people!")
+    click_button("Send report")
+
+    expect(page).to have_content("The comment has been reported and a moderator will look into it as soon as possible.")
+    expect(page).to have_content("Thanks for taking the time let us know about this.")
+
+    expect(unread_emails_for("moderator@planningalerts.org.au").size).to eq(1)
+    open_email("moderator@planningalerts.org.au")
+    expect(current_email).to be_delivered_from("moderator@planningalerts.org.au")
+    expect(current_email).to have_reply_to("reporter@foo.com")
+    expect(current_email).to have_subject("PlanningAlerts: Abuse report")
+  end
 end
