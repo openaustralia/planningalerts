@@ -3,6 +3,8 @@
 
 class Report < ApplicationRecord
   belongs_to :comment
+  # Only newer reports have users attached to them
+  belongs_to :user, optional: true
 
   validates :email, presence: true
   validates :details, presence: true

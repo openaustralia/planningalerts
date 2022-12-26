@@ -20,6 +20,7 @@ class ReportsController < ApplicationController
     @report = @comment.reports.build(
       name: T.must(current_user).name,
       email: T.must(current_user).email,
+      user: current_user,
       details: params_report[:details]
     )
 

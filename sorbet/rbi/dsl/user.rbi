@@ -211,6 +211,18 @@ class User
 
     sig { params(value: T::Enumerable[::Comment]).void }
     def comments=(value); end
+
+    sig { returns(T::Array[T.untyped]) }
+    def report_ids; end
+
+    sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
+    def report_ids=(ids); end
+
+    sig { returns(::Report::PrivateCollectionProxy) }
+    def reports; end
+
+    sig { params(value: T::Enumerable[::Report]).void }
+    def reports=(value); end
   end
 
   module GeneratedAssociationRelationMethods

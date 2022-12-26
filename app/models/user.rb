@@ -21,6 +21,8 @@ class User < ApplicationRecord
   # If a user is destroyed we want to keep the comments because they
   # are part of the public record
   has_many :comments, dependent: :nullify
+  # Same for reports but they're not public
+  has_many :reports, dependent: :nullify
 
   sig { params(notification: T.untyped, args: T.untyped).void }
   def send_devise_notification(notification, *args)
