@@ -18,8 +18,8 @@ class ReportsController < ApplicationController
 
     @comment = Comment.visible.find(params[:comment_id])
     @report = @comment.reports.build(
-      name: current_user.name,
-      email: current_user.email,
+      name: T.must(current_user).name,
+      email: T.must(current_user).email,
       details: params_report[:details]
     )
 
