@@ -11,5 +11,6 @@ Disallow: /authorities/*/comments
 Allow: /applications/
 Disallow: /applications
 Disallow: /applications/*/nearby
+Disallow: /applications/search
 Disallow: /comments
 Disallow: /geocode_queries
