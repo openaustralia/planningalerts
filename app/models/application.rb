@@ -6,6 +6,11 @@ require "geocoder/stores/active_record"
 class Application < ApplicationRecord
   extend T::Sig
 
+  # Limit number of pages for kaminari to 100. Picked this number because a human isn't ever going to be
+  # looking through 100 pages of results. However limiting it to 100 stops searchkick complaining about
+  # doing "deep searches"
+  max_pages 100
+
   # For sorbet
   include Geocoder::Store::ActiveRecord
   extend Geocoder::Model::ActiveRecord
