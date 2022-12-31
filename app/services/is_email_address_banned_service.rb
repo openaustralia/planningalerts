@@ -27,6 +27,8 @@ class IsEmailAddressBannedService
       return false
     end
 
+    return false if address.domain.nil?
+
     tld = address.domain.split(".")[-2..]&.join(".")
     BANNED_TLDS.include?(tld)
   end
