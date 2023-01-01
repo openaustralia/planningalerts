@@ -13,11 +13,11 @@ class Rails::Conductor::ActionMailbox::InboundEmailsController
     include ::ActionText::TagHelper
     include ::ActionController::Base::HelperMethods
     include ::Admin::ApplicationHelper
+    include ::ActionView::Helpers::AssetUrlHelper
     include ::ActionView::Helpers::UrlHelper
     include ::ActionView::Helpers::DateHelper
     include ::ActionView::Helpers::AssetTagHelper
     include ::ActionView::Helpers::SanitizeHelper
-    include ::ActionView::Helpers::AssetUrlHelper
     include ::ActionView::Helpers::CaptureHelper
     include ::ActionView::Helpers::OutputSafetyHelper
     include ::ActionView::Helpers::TagHelper

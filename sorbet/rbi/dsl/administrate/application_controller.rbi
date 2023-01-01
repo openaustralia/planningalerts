@@ -20,8 +20,8 @@ class Administrate::ApplicationController
     sig { params(resource: T.untyped, action_name: T.untyped).returns(T.untyped) }
     def existing_action?(resource, action_name); end
 
-    sig { params(_arg0: T.untyped, _arg1: T.untyped).returns(T.untyped) }
-    def namespace(*_arg0, &_arg1); end
+    sig { params(_arg0: T.untyped, _arg1: T.untyped, _arg2: T.untyped).returns(T.untyped) }
+    def namespace(*_arg0, **_arg1, &_arg2); end
 
     sig { params(resource: T.untyped).returns(T.untyped) }
     def nav_link_state(resource); end
@@ -29,11 +29,11 @@ class Administrate::ApplicationController
     sig { returns(T.untyped) }
     def new_resource; end
 
-    sig { params(_arg0: T.untyped, _arg1: T.untyped).returns(T.untyped) }
-    def resource_class(*_arg0, &_arg1); end
+    sig { params(_arg0: T.untyped, _arg1: T.untyped, _arg2: T.untyped).returns(T.untyped) }
+    def resource_class(*_arg0, **_arg1, &_arg2); end
 
-    sig { params(_arg0: T.untyped, _arg1: T.untyped).returns(T.untyped) }
-    def resource_name(*_arg0, &_arg1); end
+    sig { params(_arg0: T.untyped, _arg1: T.untyped, _arg2: T.untyped).returns(T.untyped) }
+    def resource_name(*_arg0, **_arg1, &_arg2); end
 
     sig { params(action: T.untyped, resource: T.untyped).returns(T.untyped) }
     def show_action?(action, resource); end
