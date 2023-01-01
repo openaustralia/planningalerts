@@ -213,7 +213,6 @@ group :production do
   gem "honeybadger"
 
   # Javascript runtime (required for precompiling assets in production)
-  # TODO: Remove lock on mini_racer (I think this is blocked by needing to upgrade bundler)
-  gem "mini_racer", "0.4.0"
+  gem "mini_racer"
   gem "uglifier"
 end
