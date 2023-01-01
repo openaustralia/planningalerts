@@ -127,6 +127,8 @@ Faraday::CONTENT_TYPE = T.let(T.unsafe(nil), String)
 # source://faraday-multipart/1.0.4/lib/faraday/multipart.rb#18
 Faraday::CompositeReadIO = Faraday::Multipart::CompositeReadIO
 
+# Aliases for Faraday v1, these are all deprecated and will be removed in v2 of this middleware
+#
 # source://faraday-multipart/1.0.4/lib/faraday/multipart.rb#15
 Faraday::FilePart = Multipart::Post::UploadIO
 
@@ -153,6 +155,9 @@ Faraday::Patron::VERSION = T.let(T.unsafe(nil), String)
 # source://faraday/1.10.2/lib/faraday.rb#12
 Faraday::Timer = Timeout
 
+# multipart-post v2.2.0 introduces a new class hierarchy for classes like Parts and UploadIO
+# For backwards compatibility, detect the gem version and use the right class
+#
 # source://faraday-multipart/1.0.4/lib/faraday/multipart.rb#21
 Faraday::UploadIO = Multipart::Post::UploadIO
 

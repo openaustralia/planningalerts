@@ -113,6 +113,12 @@ class Application
     end
     def find_or_initialize_by(attributes, &block); end
 
+    sig { params(signed_id: T.untyped, purpose: T.untyped).returns(T.nilable(::Application)) }
+    def find_signed(signed_id, purpose: nil); end
+
+    sig { params(signed_id: T.untyped, purpose: T.untyped).returns(::Application) }
+    def find_signed!(signed_id, purpose: nil); end
+
     sig { params(arg: T.untyped, args: T.untyped).returns(::Application) }
     def find_sole_by(arg, *args); end
 
@@ -242,6 +248,8 @@ class Application
     sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
     def comment_ids=(ids); end
 
+    # This method is created by ActiveRecord on the `Application` class because it declared `has_many :comments`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
     sig { returns(::Comment::PrivateCollectionProxy) }
     def comments; end
 
@@ -293,6 +301,8 @@ class Application
     sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
     def version_ids=(ids); end
 
+    # This method is created by ActiveRecord on the `Application` class because it declared `has_many :versions`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
     sig { returns(::ApplicationVersion::PrivateCollectionProxy) }
     def versions; end
 

@@ -87,8 +87,10 @@ class ApiController < ApplicationController
 
   sig { void }
   def date_scraped
+    params_date_scraped = T.cast(params[:date_scraped], String)
+
     begin
-      date = Date.parse(params[:date_scraped])
+      date = Date.parse(params_date_scraped)
     rescue ArgumentError => e
       raise e unless e.message == "invalid date"
     end

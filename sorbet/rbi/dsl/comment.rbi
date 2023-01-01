@@ -73,6 +73,12 @@ class Comment
     sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::Comment).void)).returns(::Comment) }
     def find_or_initialize_by(attributes, &block); end
 
+    sig { params(signed_id: T.untyped, purpose: T.untyped).returns(T.nilable(::Comment)) }
+    def find_signed(signed_id, purpose: nil); end
+
+    sig { params(signed_id: T.untyped, purpose: T.untyped).returns(::Comment) }
+    def find_signed!(signed_id, purpose: nil); end
+
     sig { params(arg: T.untyped, args: T.untyped).returns(::Comment) }
     def find_sole_by(arg, *args); end
 
@@ -212,6 +218,8 @@ class Comment
     sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
     def report_ids=(ids); end
 
+    # This method is created by ActiveRecord on the `Comment` class because it declared `has_many :reports`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
     sig { returns(::Report::PrivateCollectionProxy) }
     def reports; end
 

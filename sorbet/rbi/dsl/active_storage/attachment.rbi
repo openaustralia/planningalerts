@@ -116,6 +116,12 @@ class ActiveStorage::Attachment
     end
     def find_or_initialize_by(attributes, &block); end
 
+    sig { params(signed_id: T.untyped, purpose: T.untyped).returns(T.nilable(::ActiveStorage::Attachment)) }
+    def find_signed(signed_id, purpose: nil); end
+
+    sig { params(signed_id: T.untyped, purpose: T.untyped).returns(::ActiveStorage::Attachment) }
+    def find_signed!(signed_id, purpose: nil); end
+
     sig { params(arg: T.untyped, args: T.untyped).returns(::ActiveStorage::Attachment) }
     def find_sole_by(arg, *args); end
 

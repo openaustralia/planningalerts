@@ -122,6 +122,12 @@ class ActionText::RichText
     end
     def find_or_initialize_by(attributes, &block); end
 
+    sig { params(signed_id: T.untyped, purpose: T.untyped).returns(T.nilable(::ActionText::RichText)) }
+    def find_signed(signed_id, purpose: nil); end
+
+    sig { params(signed_id: T.untyped, purpose: T.untyped).returns(::ActionText::RichText) }
+    def find_signed!(signed_id, purpose: nil); end
+
     sig { params(arg: T.untyped, args: T.untyped).returns(::ActionText::RichText) }
     def find_sole_by(arg, *args); end
 
@@ -248,6 +254,8 @@ class ActionText::RichText
     sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
     def embeds_attachment_ids=(ids); end
 
+    # This method is created by ActiveRecord on the `ActionText::RichText` class because it declared `has_many :embeds_attachments`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
     sig { returns(ActiveRecord::Associations::CollectionProxy) }
     def embeds_attachments; end
 
@@ -260,6 +268,8 @@ class ActionText::RichText
     sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
     def embeds_blob_ids=(ids); end
 
+    # This method is created by ActiveRecord on the `ActionText::RichText` class because it declared `has_many :embeds_blobs, through: :embeds_attachments`.
+    # 🔗 [Rails guide for `has_many_through` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-through-association)
     sig { returns(ActiveRecord::Associations::CollectionProxy) }
     def embeds_blobs; end
 

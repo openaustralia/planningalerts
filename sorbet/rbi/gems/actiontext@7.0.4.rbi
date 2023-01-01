@@ -1500,6 +1500,8 @@ module ActionView::Helpers::FormHelper
   end
 end
 
+module ActionView::Helpers::Tags; end
+
 class ActionView::Helpers::Tags::ActionText < ::ActionView::Helpers::Tags::Base
   include ::ActionView::Helpers::Tags::Placeholderable
 

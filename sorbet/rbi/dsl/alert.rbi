@@ -73,6 +73,12 @@ class Alert
     sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::Alert).void)).returns(::Alert) }
     def find_or_initialize_by(attributes, &block); end
 
+    sig { params(signed_id: T.untyped, purpose: T.untyped).returns(T.nilable(::Alert)) }
+    def find_signed(signed_id, purpose: nil); end
+
+    sig { params(signed_id: T.untyped, purpose: T.untyped).returns(::Alert) }
+    def find_signed!(signed_id, purpose: nil); end
+
     sig { params(arg: T.untyped, args: T.untyped).returns(::Alert) }
     def find_sole_by(arg, *args); end
 

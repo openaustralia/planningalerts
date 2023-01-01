@@ -7,19 +7,19 @@
 # source://administrate//lib/administrate/namespace/resource.rb#1
 module Administrate
   class << self
-    # source://railties/6.1.4.1/lib/rails/engine.rb#405
+    # source://railties/7.0.4/lib/rails/engine.rb#405
     def railtie_helpers_paths; end
 
-    # source://railties/6.1.4.1/lib/rails/engine.rb#394
+    # source://railties/7.0.4/lib/rails/engine.rb#394
     def railtie_namespace; end
 
-    # source://railties/6.1.4.1/lib/rails/engine.rb#409
+    # source://railties/7.0.4/lib/rails/engine.rb#409
     def railtie_routes_url_helpers(include_path_helpers = T.unsafe(nil)); end
 
-    # source://railties/6.1.4.1/lib/rails/engine.rb#397
+    # source://railties/7.0.4/lib/rails/engine.rb#397
     def table_name_prefix; end
 
-    # source://railties/6.1.4.1/lib/rails/engine.rb#401
+    # source://railties/7.0.4/lib/rails/engine.rb#401
     def use_relative_model_naming?; end
 
     # source://administrate//lib/administrate.rb#34
@@ -51,7 +51,7 @@ class Administrate::ApplicationController < ::ActionController::Base
 
   private
 
-  # source://actionview/6.1.4.1/lib/action_view/layouts.rb#325
+  # source://actionview/7.0.4/lib/action_view/layouts.rb#328
   def _layout(lookup_context, formats); end
 
   def after_resource_created_path(requested_resource); end
@@ -88,13 +88,13 @@ class Administrate::ApplicationController < ::ActionController::Base
   def valid_action?(action_name, resource = T.unsafe(nil)); end
 
   class << self
-    # source://activesupport/6.1.4.1/lib/active_support/callbacks.rb#67
+    # source://activesupport/7.0.4/lib/active_support/callbacks.rb#68
     def __callbacks; end
 
-    # source://actionpack/6.1.4.1/lib/abstract_controller/helpers.rb#10
+    # source://actionpack/7.0.4/lib/abstract_controller/helpers.rb#11
     def _helper_methods; end
 
-    # source://actionpack/6.1.4.1/lib/action_controller/metal.rb#212
+    # source://actionpack/7.0.4/lib/action_controller/metal.rb#210
     def middleware_stack; end
   end
 end
@@ -1016,7 +1016,14 @@ class Administrate::Page::Show < ::Administrate::Page::Base
   def resource; end
 end
 
-module Administrate::Punditize; end
+module Administrate::Punditize
+  extend ::ActiveSupport::Concern
+  include ::Pundit::Authorization
+
+  private
+
+  def policy_scope_admin(scope); end
+end
 
 # source://administrate//lib/administrate/resource_resolver.rb#2
 class Administrate::ResourceResolver

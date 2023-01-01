@@ -526,7 +526,3 @@ class URI::GID::MissingModelIdError < ::URI::InvalidComponentError; end
 #
 # source://globalid//lib/global_id/uri/gid.rb#127
 URI::GID::PATH_REGEXP = T.let(T.unsafe(nil), Regexp)
-
-class URI::RFC2396_Parser
-  include ::URI::RFC2396_REGEXP
-end

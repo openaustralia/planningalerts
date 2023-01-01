@@ -1022,6 +1022,7 @@ class FFI::ManagedStruct < ::FFI::Struct
   def initialize(pointer = T.unsafe(nil)); end
 end
 
+# missing on rubinius
 class FFI::MemoryPointer < ::FFI::Pointer
   def initialize(*_arg0); end
 

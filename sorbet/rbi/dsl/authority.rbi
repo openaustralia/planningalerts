@@ -113,6 +113,12 @@ class Authority
     end
     def find_or_initialize_by(attributes, &block); end
 
+    sig { params(signed_id: T.untyped, purpose: T.untyped).returns(T.nilable(::Authority)) }
+    def find_signed(signed_id, purpose: nil); end
+
+    sig { params(signed_id: T.untyped, purpose: T.untyped).returns(::Authority) }
+    def find_signed!(signed_id, purpose: nil); end
+
     sig { params(arg: T.untyped, args: T.untyped).returns(::Authority) }
     def find_sole_by(arg, *args); end
 
@@ -227,6 +233,8 @@ class Authority
     sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
     def application_ids=(ids); end
 
+    # This method is created by ActiveRecord on the `Authority` class because it declared `has_many :applications`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
     sig { returns(::Application::PrivateCollectionProxy) }
     def applications; end
 
@@ -242,6 +250,8 @@ class Authority
     sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
     def comment_ids=(ids); end
 
+    # This method is created by ActiveRecord on the `Authority` class because it declared `has_many :comments, through: :applications`.
+    # 🔗 [Rails guide for `has_many_through` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-through-association)
     sig { returns(::Comment::PrivateCollectionProxy) }
     def comments; end
 

@@ -1530,9 +1530,3 @@ module Kernel
   # source://json//lib/json/common.rb#672
   def jj(*objs); end
 end
-
-class Set
-  include ::Enumerable
-end
-
-Set::InspectKey = T.let(T.unsafe(nil), Symbol)

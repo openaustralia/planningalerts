@@ -73,6 +73,12 @@ class User
     sig { params(attributes: T.untyped, block: T.nilable(T.proc.params(object: ::User).void)).returns(::User) }
     def find_or_initialize_by(attributes, &block); end
 
+    sig { params(signed_id: T.untyped, purpose: T.untyped).returns(T.nilable(::User)) }
+    def find_signed(signed_id, purpose: nil); end
+
+    sig { params(signed_id: T.untyped, purpose: T.untyped).returns(::User) }
+    def find_signed!(signed_id, purpose: nil); end
+
     sig { params(arg: T.untyped, args: T.untyped).returns(::User) }
     def find_sole_by(arg, *args); end
 
@@ -182,6 +188,8 @@ class User
     sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
     def alert_ids=(ids); end
 
+    # This method is created by ActiveRecord on the `User` class because it declared `has_many :alerts`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
     sig { returns(::Alert::PrivateCollectionProxy) }
     def alerts; end
 
@@ -194,6 +202,8 @@ class User
     sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
     def api_key_ids=(ids); end
 
+    # This method is created by ActiveRecord on the `User` class because it declared `has_many :api_keys`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
     sig { returns(::ApiKey::PrivateCollectionProxy) }
     def api_keys; end
 
@@ -206,6 +216,8 @@ class User
     sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
     def comment_ids=(ids); end
 
+    # This method is created by ActiveRecord on the `User` class because it declared `has_many :comments`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
     sig { returns(::Comment::PrivateCollectionProxy) }
     def comments; end
 

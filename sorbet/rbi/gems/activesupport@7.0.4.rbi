@@ -15573,6 +15573,41 @@ class FalseClass
   def to_param; end
 end
 
+# source://activesupport//lib/active_support/core_ext/file/atomic.rb#5
+class File < ::IO
+  class << self
+    # Write to a file atomically. Useful for situations where you don't
+    # want other processes or threads to see half-written files.
+    #
+    #   File.atomic_write('important.file') do |file|
+    #     file.write('hello')
+    #   end
+    #
+    # This method needs to create a temporary file. By default it will create it
+    # in the same directory as the destination file. If you don't like this
+    # behavior you can provide a different directory but it must be on the
+    # same physical filesystem as the file you're trying to write.
+    #
+    #   File.atomic_write('/data/something.important', '/data/tmp') do |file|
+    #     file.write('hello')
+    #   end
+    #
+    # source://activesupport//lib/active_support/core_ext/file/atomic.rb#21
+    def atomic_write(file_name, temp_dir = T.unsafe(nil)); end
+
+    # Private utility method.
+    #
+    # source://activesupport//lib/active_support/core_ext/file/atomic.rb#56
+    def probe_stat_in(dir); end
+  end
+end
+
+# source://yard/0.9.28/lib/yard/core_ext/file.rb#5
+File::RELATIVE_PARENTDIR = T.let(T.unsafe(nil), String)
+
+# source://yard/0.9.28/lib/yard/core_ext/file.rb#6
+File::RELATIVE_SAMEDIR = T.let(T.unsafe(nil), String)
+
 # source://activesupport//lib/active_support/core_ext/object/json.rb#110
 class Float < ::Numeric
   include ::ActiveSupport::NumericWithFormat
@@ -16243,6 +16278,8 @@ class Integer < ::Numeric
   # source://activesupport//lib/active_support/core_ext/integer/time.rb#18
   def years; end
 end
+
+Integer::GMP_VERSION = T.let(T.unsafe(nil), String)
 
 # source://activesupport//lib/active_support/core_ext/kernel/reporting.rb#3
 module Kernel
@@ -17772,6 +17809,7 @@ class Object < ::BasicObject
   include ::ActiveSupport::ForkTracker::CoreExt
   include ::ActiveSupport::ForkTracker::CoreExtPrivate
   include ::Kernel
+  include ::PP::ObjectMixin
   include ::ActiveSupport::Tryable
 
   # Provides a way to check whether some class acts like some other class based on the existence of
@@ -18042,7 +18080,14 @@ class Pathname
   def as_json(options = T.unsafe(nil)); end
 end
 
-module Process; end
+module Process
+  class << self
+    # source://activesupport//lib/active_support/fork_tracker.rb#16
+    def fork(*_arg0, &_arg1); end
+  end
+end
+
+Process::CLOCK_TAI = T.let(T.unsafe(nil), Integer)
 
 # source://activesupport//lib/active_support/core_ext/object/json.rb#234
 class Process::Status
@@ -18135,7 +18180,7 @@ class Regexp
   def multiline?; end
 end
 
-# source://regexp_parser/2.6.0/lib/regexp_parser/token.rb#2
+# source://regexp_parser/2.6.1/lib/regexp_parser/token.rb#2
 Regexp::TOKEN_KEYS = T.let(T.unsafe(nil), Array)
 
 # source://activesupport//lib/active_support/core_ext/securerandom.rb#5
@@ -18908,7 +18953,7 @@ end
 
 Struct::Group = Etc::Group
 
-# source://nokogiri/1.13.9/lib/nokogiri/html4/element_description_defaults.rb#11
+# source://nokogiri/1.13.10/lib/nokogiri/html4/element_description_defaults.rb#11
 Struct::HTMLElementDescription = Struct
 
 Struct::Passwd = Etc::Passwd

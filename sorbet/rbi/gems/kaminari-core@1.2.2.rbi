@@ -934,10 +934,10 @@ class Kaminari::PaginatableArray < ::Array
   # source://kaminari-core//lib/kaminari/models/array_extension.rb#49
   def limit(num); end
 
-  # source://activesupport/6.1.4.1/lib/active_support/core_ext/module/attr_internal.rb#33
+  # source://activesupport/7.0.4/lib/active_support/core_ext/module/attr_internal.rb#33
   def limit_value; end
 
-  # source://activesupport/6.1.4.1/lib/active_support/core_ext/module/attr_internal.rb#33
+  # source://activesupport/7.0.4/lib/active_support/core_ext/module/attr_internal.rb#33
   def limit_value=(_arg0); end
 
   # returns another chunk of the original array
@@ -945,10 +945,10 @@ class Kaminari::PaginatableArray < ::Array
   # source://kaminari-core//lib/kaminari/models/array_extension.rb#59
   def offset(num); end
 
-  # source://activesupport/6.1.4.1/lib/active_support/core_ext/module/attr_internal.rb#33
+  # source://activesupport/7.0.4/lib/active_support/core_ext/module/attr_internal.rb#33
   def offset_value; end
 
-  # source://activesupport/6.1.4.1/lib/active_support/core_ext/module/attr_internal.rb#33
+  # source://activesupport/7.0.4/lib/active_support/core_ext/module/attr_internal.rb#33
   def offset_value=(_arg0); end
 
   # source://kaminari-core//lib/kaminari/models/array_extension.rb#43

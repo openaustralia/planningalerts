@@ -116,6 +116,12 @@ class ActiveRecord::SchemaMigration
     end
     def find_or_initialize_by(attributes, &block); end
 
+    sig { params(signed_id: T.untyped, purpose: T.untyped).returns(T.nilable(::ActiveRecord::SchemaMigration)) }
+    def find_signed(signed_id, purpose: nil); end
+
+    sig { params(signed_id: T.untyped, purpose: T.untyped).returns(::ActiveRecord::SchemaMigration) }
+    def find_signed!(signed_id, purpose: nil); end
+
     sig { params(arg: T.untyped, args: T.untyped).returns(::ActiveRecord::SchemaMigration) }
     def find_sole_by(arg, *args); end
 
