@@ -548,6 +548,8 @@ GEM
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
+    rvm-capistrano (1.5.6)
+      capistrano (~> 2.15.4)
     sanitize (6.0.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -762,6 +764,7 @@ DEPENDENCIES
   redcarpet
   redis-namespace
   rest-client
+  rexml
   rspec-activemodel-mocks
   rspec-rails
   rubocop
@@ -770,6 +773,7 @@ DEPENDENCIES
   rubocop-rspec
   rubocop-sorbet
   ruby-progressbar
+  rvm-capistrano
   sanitize
   sass-rails
   searchkick

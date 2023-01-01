@@ -44,6 +44,8 @@ gem "kaminari"
 
 # Geocoding and location stuff
 gem "geokit"
+# rexml is used by geokit but is no longer by default in ruby 3.1
+gem "rexml"
 # geocoder is only used for the near activerecord method
 gem "geocoder"
 
@@ -193,6 +195,7 @@ group :development do
   # For deployment
   # TODO: Upgrade to capistrano 3
   gem "capistrano", "~> 2"
+  gem "rvm-capistrano"
 
   # Workaround for "already initialized constant" errors with net/protocol
   # See https://github.com/ruby/net-imap/issues/16#issuecomment-803086765
