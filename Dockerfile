@@ -17,8 +17,8 @@ RUN apt install watchman
 
 USER deploy
 
-COPY Gemfile /app/Gemfile
-COPY Gemfile.lock /app/Gemfile.lock
+COPY --chown=deploy:deploy Gemfile /app/Gemfile
+COPY --chown=deploy:deploy Gemfile.lock /app/Gemfile.lock
 RUN bundle install
 
 ENTRYPOINT ["./entrypoint.sh"]
