@@ -464,3 +464,13 @@ RSpec/Rails/HaveHttpStatus: # new in 2.12
   Enabled: true
 RSpec/Rails/InferredSpecType: # new in 2.14
   Enabled: true
+Style/ArrayIntersect: # new in 1.40
+  Enabled: true
+Style/ConcatArrayLiterals: # new in 1.41
+  Enabled: true
+Style/RedundantConstantBase: # new in 1.40
+  Enabled: true
+Style/RedundantDoubleSplatHashBraces: # new in 1.41
+  Enabled: true
+Style/RedundantEach: # new in 1.38
+  Enabled: true
