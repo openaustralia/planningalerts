@@ -6,7 +6,7 @@ describe CreateOrUpdateApplicationService do
   let(:authority) { create(:authority) }
   let(:application) do
     described_class.call(
-      authority: authority,
+      authority:,
       council_reference: "123/45",
       attributes: {
         date_scraped: Date.new(2001, 1, 10),
@@ -53,7 +53,7 @@ describe CreateOrUpdateApplicationService do
   it "does not leave an application record around if the version doesn't validate" do
     expect do
       described_class.call(
-        authority: authority,
+        authority:,
         council_reference: "123/45",
         # This will not be valid
         attributes: {

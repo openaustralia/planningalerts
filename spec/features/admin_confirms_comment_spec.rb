@@ -14,7 +14,7 @@ describe "Admin confirms comment for user" do
            name: "Alena",
            id: 1,
            created_at: 3.days.ago,
-           application: application)
+           application:)
   end
 
   it "successfully" do

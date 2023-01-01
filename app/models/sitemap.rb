@@ -132,7 +132,7 @@ class Sitemap
     ).void
   end
   def add_url(loc, changefreq: nil, lastmod: nil)
-    url = SitemapUrl.new(loc, changefreq: changefreq, lastmod: lastmod)
+    url = SitemapUrl.new(loc, changefreq:, lastmod:)
     # Now build up the bit of XML that we're going to add (as a string)
     t = +"<url>"
     t << "<loc>#{root_url}#{url.loc}</loc>"

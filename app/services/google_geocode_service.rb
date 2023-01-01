@@ -19,7 +19,7 @@ class GoogleGeocodeService
     return error("Please enter a street address") if address == ""
 
     params = {
-      address: address,
+      address:,
       key: ENV.fetch("GOOGLE_MAPS_SERVER_KEY", nil),
       region: "au",
       sensor: false

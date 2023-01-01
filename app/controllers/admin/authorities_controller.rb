@@ -50,7 +50,7 @@ module Admin
     sig { void }
     def import
       authority = Authority.find(params[:id])
-      ImportApplicationsJob.perform_later(authority: authority)
+      ImportApplicationsJob.perform_later(authority:)
       redirect_to({ action: :show }, notice: t(".success"))
     end
   end

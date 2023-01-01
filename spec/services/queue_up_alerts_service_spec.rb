@@ -11,7 +11,7 @@ describe QueueUpAlertsService do
 
   context "with no active alerts" do
     it "logs some useful messages" do
-      described_class.call(logger: logger)
+      described_class.call(logger:)
 
       expect(logger).to have_received(:info).with("Checking 0 active alerts")
       expect(logger).to have_received(:info).with("Splitting mailing for the next 24 hours - checks an alert roughly every 86400 seconds")
@@ -29,7 +29,7 @@ describe QueueUpAlertsService do
     end
 
     it "logs some messages" do
-      described_class.call(logger: logger)
+      described_class.call(logger:)
 
       expect(logger).to have_received(:info).with("Checking 2 active alerts")
       expect(logger).to have_received(:info).with("Splitting mailing for the next 24 hours - checks an alert roughly every 43200 seconds")
@@ -39,7 +39,7 @@ describe QueueUpAlertsService do
     it "queues up batches" do
       job = class_double(ProcessAlertJob, perform_later: nil)
       allow(ProcessAlertJob).to receive(:set).and_return(job)
-      described_class.call(logger: logger)
+      described_class.call(logger:)
 
       expect(ProcessAlertJob).to have_received(:set).twice
       expect(job).to have_received(:perform_later).with(alert1.id)

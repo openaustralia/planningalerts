@@ -11,13 +11,13 @@ describe Application do
 
       context "when one application already exists" do
         before do
-          create(:geocoded_application, council_reference: "A01", authority: authority)
+          create(:geocoded_application, council_reference: "A01", authority:)
         end
 
         let(:authority2) { create(:authority, full_name: "A second authority") }
 
-        it { expect(build(:application_with_no_version, council_reference: "A01", authority: authority)).not_to be_valid }
-        it { expect(build(:application_with_no_version, council_reference: "A02", authority: authority)).to be_valid }
+        it { expect(build(:application_with_no_version, council_reference: "A01", authority:)).not_to be_valid }
+        it { expect(build(:application_with_no_version, council_reference: "A02", authority:)).to be_valid }
         it { expect(build(:application_with_no_version, council_reference: "A01", authority: authority2)).to be_valid }
       end
     end

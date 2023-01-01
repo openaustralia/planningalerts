@@ -26,7 +26,7 @@ module AlertMailerHelper
   def application_url_with_tracking(id: nil)
     T.unsafe(self).application_url(
       base_tracking_params.merge(
-        id: id,
+        id:,
         utm_campaign: "view-application"
       )
     )
@@ -47,7 +47,7 @@ module AlertMailerHelper
   def new_comment_url_with_tracking(id: nil)
     T.unsafe(self).application_url(
       base_tracking_params.merge(
-        id: id,
+        id:,
         anchor: "add-comment",
         utm_campaign: "add-comment"
       )

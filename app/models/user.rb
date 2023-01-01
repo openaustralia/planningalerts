@@ -74,7 +74,7 @@ class User < ApplicationRecord
 
   sig { void }
   def validate_email_domain
-    return unless IsEmailAddressBannedService.call(email: email)
+    return unless IsEmailAddressBannedService.call(email:)
 
     errors.add(:email, "is not allowed. Please contact us if you think this is in error.")
   end

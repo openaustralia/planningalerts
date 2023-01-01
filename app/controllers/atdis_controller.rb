@@ -52,7 +52,7 @@ class AtdisController < ApplicationController
   def feed
     file = Feed.example_path(params[:number], params[:page] || 1)
     if File.exist?(file)
-      render file: file, content_type: Mime[:json], layout: false
+      render file:, content_type: Mime[:json], layout: false
     else
       render plain: "not available", status: :not_found
     end

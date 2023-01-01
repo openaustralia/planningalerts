@@ -18,7 +18,7 @@ describe "applications/show" do
       map_url: "http://a.map.url",
       description: "A planning application",
       council_reference: "A1",
-      authority: authority,
+      authority:,
       info_url: "http://info.url",
       on_notice_from: nil,
       on_notice_to: nil,
@@ -31,7 +31,7 @@ describe "applications/show" do
 
   let(:comment) do
     errors = instance_double(ActiveModel::Errors, :[] => nil)
-    mock_model(Comment, errors: errors, text: nil, name: nil, email: nil)
+    mock_model(Comment, errors:, text: nil, name: nil, email: nil)
   end
 
   before do

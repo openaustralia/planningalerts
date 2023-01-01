@@ -120,7 +120,7 @@ class SyncGithubIssueForAuthorityService
 
   sig { params(logger: Logger, authority: Authority).void }
   def self.call(logger:, authority:)
-    new.call(logger: logger, authority: authority)
+    new.call(logger:, authority:)
   end
 
   sig { params(logger: Logger, authority: Authority).void }
@@ -140,7 +140,7 @@ class SyncGithubIssueForAuthorityService
       )
       # We also want to attach the issue to a project with some custom fields which makes it
       # easier to order / prioritise the work of fixing the scrapers
-      attach_issue_to_project(issue_id: issue.node_id, authority: authority, latest_date: latest_date)
+      attach_issue_to_project(issue_id: issue.node_id, authority:, latest_date:)
     elsif !authority.broken? && issue && !issue.closed?(client)
       logger.info "Authority #{authority.full_name} is fixed but github issue is still open. So labelling."
       issue.add_label!(client, PROBABLY_FIXED_LABEL_NAME)
@@ -162,28 +162,28 @@ class SyncGithubIssueForAuthorityService
       raise "Can't find all the required custom fields for the project"
     end
 
-    update_text_field(project: project, item: item, field: project.authority_field, value: authority.full_name)
-    update_date_field(project: project, item: item, field: project.latest_date_field, value: latest_date)
-    update_text_field(project: project, item: item, field: project.scraper_field, value: morph_url(authority))
-    update_text_field(project: project, item: item, field: project.state_field, value: authority.state)
-    update_number_field(project: project, item: item, field: project.population_field, value: authority.population_2017)
-    update_text_field(project: project, item: item, field: project.website_field, value: authority.website_url)
-    update_text_field(project: project, item: item, field: project.authority_admin_field, value: admin_authority_url(authority, host: ENV.fetch("HOST", nil)))
+    update_text_field(project:, item:, field: project.authority_field, value: authority.full_name)
+    update_date_field(project:, item:, field: project.latest_date_field, value: latest_date)
+    update_text_field(project:, item:, field: project.scraper_field, value: morph_url(authority))
+    update_text_field(project:, item:, field: project.state_field, value: authority.state)
+    update_number_field(project:, item:, field: project.population_field, value: authority.population_2017)
+    update_text_field(project:, item:, field: project.website_field, value: authority.website_url)
+    update_text_field(project:, item:, field: project.authority_admin_field, value: admin_authority_url(authority, host: ENV.fetch("HOST", nil)))
   end
 
   sig { params(project: T.untyped, item: T.untyped, field: T.untyped, value: T.nilable(String)).void }
   def update_text_field(project:, item:, field:, value:)
-    update_field(project: project, item: item, field: field, type: :text, value: value)
+    update_field(project:, item:, field:, type: :text, value:)
   end
 
   sig { params(project: T.untyped, item: T.untyped, field: T.untyped, value: Time).void }
   def update_date_field(project:, item:, field:, value:)
-    update_field(project: project, item: item, field: field, type: :date, value: value.iso8601)
+    update_field(project:, item:, field:, type: :date, value: value.iso8601)
   end
 
   sig { params(project: T.untyped, item: T.untyped, field: T.untyped, value: T.nilable(Integer)).void }
   def update_number_field(project:, item:, field:, value:)
-    update_field(project: project, item: item, field: field, type: :number, value: value)
+    update_field(project:, item:, field:, type: :number, value:)
   end
 
   sig { params(project: T.untyped, item: T.untyped, field: T.untyped, type: Symbol, value: T.nilable(T.any(String, Integer))).void }

@@ -32,12 +32,12 @@ class Stat < ApplicationRecord
   sig { params(key: String, value: Integer).void }
   def self.increment_value_for_key(key, value)
     # rubocop:disable Rails/SkipsModelValidations
-    Stat.update_counters(record_for_key(key).id, value: value)
+    Stat.update_counters(record_for_key(key).id, value:)
     # rubocop:enable Rails/SkipsModelValidations
   end
 
   sig { params(key: String).returns(Stat) }
   def self.record_for_key(key)
-    Stat.find_or_create_by(key: key) { |s| s.value = 0 }
+    Stat.find_or_create_by(key:) { |s| s.value = 0 }
   end
 end

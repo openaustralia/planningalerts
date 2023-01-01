@@ -24,7 +24,7 @@ describe CommentsHelper do
 
   describe "#comment_path" do
     let(:application) { create(:geocoded_application, id: 1) }
-    let(:comment) { create(:confirmed_comment, id: 1, application: application) }
+    let(:comment) { create(:confirmed_comment, id: 1, application:) }
 
     it "returns the path for the application with an anchor with the comment id" do
       expect(helper.comment_path(comment)).to eq "/applications/1#comment1"
@@ -33,7 +33,7 @@ describe CommentsHelper do
 
   describe "#comment_url" do
     let(:application) { create(:geocoded_application, id: 1) }
-    let(:comment) { create(:confirmed_comment, id: 1, application: application) }
+    let(:comment) { create(:confirmed_comment, id: 1, application:) }
 
     it "returns the url for the application with an anchor with the comment id" do
       expect(helper.comment_url(comment)).to eq "http://test.host/applications/1#comment1"

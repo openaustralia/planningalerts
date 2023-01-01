@@ -19,7 +19,7 @@ describe CommentMailer do
       create(:confirmed_comment,
              user: create(:user, email: "foo@bar.com"),
              name: "Matthew",
-             application: application,
+             application:,
              text: "It's a good thing.\n\nOh yes it is.",
              address: "1 Bar Street")
     end

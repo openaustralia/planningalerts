@@ -7,8 +7,8 @@ class ImportApplicationsService
   sig { params(authority: Authority, logger: Logger).void }
   def self.call(authority:, logger:)
     new(
-      authority: authority,
-      logger: logger
+      authority:,
+      logger:
     ).call
   end
 
@@ -23,7 +23,7 @@ class ImportApplicationsService
     time = Benchmark.ms { import_applications_date_range }
     logger.info "Took #{(time / 1000).to_i} s to import applications from #{authority.full_name_and_state}"
 
-    SyncGithubIssueForAuthorityService.call(logger: logger, authority: authority)
+    SyncGithubIssueForAuthorityService.call(logger:, authority:)
   end
 
   # Open a url and return it's content. If there is a problem will just return nil rather than raising an exception
@@ -73,7 +73,7 @@ class ImportApplicationsService
     error_count = 0
     import_data.each do |r|
       CreateOrUpdateApplicationService.call(
-        authority: authority,
+        authority:,
         council_reference: r.council_reference,
         attributes: {
           address: r.address,

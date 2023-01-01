@@ -7,7 +7,7 @@ class QueueUpAlertsService
 
   sig { params(logger: Logger).void }
   def self.call(logger:)
-    new(logger: logger).call
+    new(logger:).call
   end
 
   sig { params(logger: Logger).void }

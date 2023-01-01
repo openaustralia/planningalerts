@@ -60,11 +60,11 @@ describe ImportApplicationsService do
     allow(SyncGithubIssueForAuthorityService).to receive(:call)
 
     Timecop.freeze(date) do
-      described_class.call(authority: auth, logger: logger)
+      described_class.call(authority: auth, logger:)
     end
     expect(logger).to have_received(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01")
     expect(logger).to have_received(:info).with("Took 0 s to import applications from Fiddlesticks, NSW")
-    expect(SyncGithubIssueForAuthorityService).to have_received(:call).with(logger: logger, authority: auth)
+    expect(SyncGithubIssueForAuthorityService).to have_received(:call).with(logger:, authority: auth)
     expect(Application.count).to eq(2)
     r1 = Application.find_by(council_reference: "R1")
     expect(r1.first_date_scraped).to eq(date)
@@ -83,15 +83,15 @@ describe ImportApplicationsService do
     allow(ENV).to receive(:fetch)
     allow(ENV).to receive(:fetch).with("SCRAPE_DELAY", nil).and_return(0)
     allow(ENV).to receive(:fetch).with("MORPH_API_KEY", nil).and_return("123")
-    allow(SyncGithubIssueForAuthorityService).to receive(:call).with(logger: logger, authority: auth)
+    allow(SyncGithubIssueForAuthorityService).to receive(:call).with(logger:, authority: auth)
 
     Timecop.freeze(date) do
-      described_class.call(authority: auth, logger: logger)
+      described_class.call(authority: auth, logger:)
       # Getting the feed again with updated content for one of the applicartions
       allow(described_class).to receive(:open_url_safe).and_return(
         [app_data2_updated].to_json
       )
-      described_class.call(authority: auth, logger: logger)
+      described_class.call(authority: auth, logger:)
     end
 
     expect(logger).to have_received(:info).with("2 applications found for Fiddlesticks, NSW with date from 2009-01-01")
@@ -113,14 +113,14 @@ describe ImportApplicationsService do
     allow(SyncGithubIssueForAuthorityService).to receive(:call)
 
     Timecop.freeze(date) do
-      described_class.call(authority: auth, logger: logger)
+      described_class.call(authority: auth, logger:)
     end
 
     expect(described_class).to have_received(:open_url_safe).with(
       "https://api.morph.io//data.json?key=12%2F&query=select+%2A+from+%60data%60+where+%60date_scraped%60+%3E%3D+%272009-01-01%27",
       logger
     )
-    expect(SyncGithubIssueForAuthorityService).to have_received(:call).with(logger: logger, authority: auth)
+    expect(SyncGithubIssueForAuthorityService).to have_received(:call).with(logger:, authority: auth)
   end
 
   describe "#morph_query" do

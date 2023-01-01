@@ -51,7 +51,7 @@ describe CuttlefishController do
         }
       }
 
-      post :event, params: params, format: :json
+      post :event, params:, format: :json
       expect(response).to have_http_status(:ok)
       alert.reload
       expect(alert.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
@@ -82,7 +82,7 @@ describe CuttlefishController do
         }
       }
 
-      post :event, params: params, format: :json
+      post :event, params:, format: :json
       expect(response).to have_http_status(:ok)
       alert.reload
       expect(alert.last_delivered_at).to be_nil
@@ -113,7 +113,7 @@ describe CuttlefishController do
         }
       }
 
-      post :event, params: params, format: :json
+      post :event, params:, format: :json
       expect(response).to have_http_status(:ok)
       alert.reload
       expect(alert.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
@@ -143,7 +143,7 @@ describe CuttlefishController do
           }
         }
       }
-      post :event, params: params, format: :json
+      post :event, params:, format: :json
       expect(response).to have_http_status(:ok)
       comment.reload
       expect(comment.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
@@ -174,13 +174,13 @@ describe CuttlefishController do
           }
         }
       }
-      post :event, params: params, format: :json
+      post :event, params:, format: :json
       expect(response).to have_http_status(:ok)
       comment.reload
       expect(comment.last_delivered_at).to eq "2020-08-27T02:10:17.000Z"
       expect(comment.last_delivered_successfully).to be false
       expect(NotifySlackCommentDeliveryService).to have_received(:call).with(
-        comment: comment,
+        comment:,
         to: "joy@smart-unlimited.com",
         status: "hard_bounce",
         extended_status: "hard bounce",
@@ -211,7 +211,7 @@ describe CuttlefishController do
           }
         }
       }
-      post :event, params: params, format: :json
+      post :event, params:, format: :json
       expect(response).to have_http_status(:ok)
       comment.reload
       expect(comment.last_delivered_at).to be_nil

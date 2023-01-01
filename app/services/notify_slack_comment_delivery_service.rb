@@ -15,11 +15,11 @@ class NotifySlackCommentDeliveryService
   end
   def self.call(comment:, to:, status:, extended_status:, email_id:)
     new(
-      comment: comment,
-      to: to,
-      status: status,
-      extended_status: extended_status,
-      email_id: email_id
+      comment:,
+      to:,
+      status:,
+      extended_status:,
+      email_id:
     ).call
   end
 

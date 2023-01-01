@@ -48,7 +48,7 @@ describe AlertMailer do
   end
 
   describe "when sending a planning alert with one new comment" do
-    let(:email) { described_class.alert(alert: alert, comments: [c1]) }
+    let(:email) { described_class.alert(alert:, comments: [c1]) }
 
     it "uses the singular in the comment line" do
       expect(email.subject).to eq("1 new comment on planning applications near #{alert.address}")
@@ -60,7 +60,7 @@ describe AlertMailer do
   end
 
   describe "when sending a planning alert with two new comments" do
-    let(:email) { described_class.alert(alert: alert, comments: [c1, c2]) }
+    let(:email) { described_class.alert(alert:, comments: [c1, c2]) }
 
     it "uses the plural in the comment line" do
       expect(email.subject).to eq("2 new comments on planning applications near #{alert.address}")
@@ -76,7 +76,7 @@ describe AlertMailer do
   end
 
   describe "when send a planning alert with one new comment and two new planning applications" do
-    let(:email) { described_class.alert(alert: alert, applications: [a1, a2], comments: [c1]) }
+    let(:email) { described_class.alert(alert:, applications: [a1, a2], comments: [c1]) }
 
     it "tells you about both in the comment line" do
       expect(email.subject).to eq("1 new comment and 2 new planning applications near #{alert.address}")
@@ -92,7 +92,7 @@ describe AlertMailer do
   end
 
   describe "when sending a planning alert with one new planning application" do
-    let(:email) { described_class.alert(alert: alert, applications: [a1]) }
+    let(:email) { described_class.alert(alert:, applications: [a1]) }
 
     it "uses the singular (application) in the subject line" do
       expect(email.subject).to eq("1 new planning application near #{alert.address}")
@@ -101,7 +101,7 @@ describe AlertMailer do
 
   describe "when sending a planning alert with two new planning applications" do
     context "when the theme is Default" do
-      let(:email) { described_class.alert(alert: alert, applications: [a1, a2]) }
+      let(:email) { described_class.alert(alert:, applications: [a1, a2]) }
 
       it "is sent to the user's email address" do
         expect(email.to).to eq([alert.email])

@@ -38,7 +38,7 @@ module ApiHowtoHelper
     format, key, lat = Rails.configuration.planningalerts_api_example_lat, lng = Rails.configuration.planningalerts_api_example_lng,
     radius = Rails.configuration.planningalerts_api_example_size
   )
-    applications_url(host: api_host, format: format, lat: lat, lng: lng, radius: radius, key: key)
+    applications_url(host: api_host, format:, lat:, lng:, radius:, key:)
   end
 
   sig do
@@ -58,18 +58,18 @@ module ApiHowtoHelper
     top_right_lng = Rails.configuration.planningalerts_api_example_top_right_lng
   )
     applications_url(
-      host: api_host, format: format,
-      bottom_left_lat: bottom_left_lat, bottom_left_lng: bottom_left_lng,
-      top_right_lat: top_right_lat, top_right_lng: top_right_lng,
-      key: key
+      host: api_host, format:,
+      bottom_left_lat:, bottom_left_lng:,
+      top_right_lat:, top_right_lng:,
+      key:
     )
   end
 
   sig { params(format: String, key: T.nilable(String), authority: String).returns(String) }
   def api_example_authority_url(format, key, authority = Rails.configuration.planningalerts_api_example_authority)
     authority_applications_url(
-      host: api_host, format: format, authority_id: authority,
-      key: key
+      host: api_host, format:, authority_id: authority,
+      key:
     )
   end
 
@@ -82,7 +82,7 @@ module ApiHowtoHelper
     ).returns(String)
   end
   def api_example_postcode_url(format, key, postcode = Rails.configuration.planningalerts_api_example_postcode, extra_params = {})
-    T.unsafe(self).applications_url({ host: api_host, format: format, postcode: postcode, key: key }.merge(extra_params))
+    T.unsafe(self).applications_url({ host: api_host, format:, postcode:, key: }.merge(extra_params))
   end
 
   sig do
@@ -102,8 +102,8 @@ module ApiHowtoHelper
     postcode = Rails.configuration.planningalerts_api_example_postcode
   )
     applications_url(
-      host: api_host, format: format, suburb: suburb, state: state, postcode: postcode,
-      key: key
+      host: api_host, format:, suburb:, state:, postcode:,
+      key:
     )
   end
 

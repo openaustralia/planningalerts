@@ -49,7 +49,7 @@ class CommentsController < ApplicationController
 
     if comment.save
       comment.send_comment!
-      redirect_to application, notice: render_to_string(partial: "confirmed", locals: { comment: comment })
+      redirect_to application, notice: render_to_string(partial: "confirmed", locals: { comment: })
       return
     end
 

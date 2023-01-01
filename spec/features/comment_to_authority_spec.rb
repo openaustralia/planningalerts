@@ -11,7 +11,7 @@ describe "Give feedback" do
 
   it "Giving feedback for an authority without a feedback email" do
     authority = create(:authority, full_name: "Foo")
-    application = create(:geocoded_application, id: "1", authority: authority)
+    application = create(:geocoded_application, id: "1", authority:)
     visit(application_path(application))
 
     expect(page).to have_content("To comment on this application you will need to go to the original source")
@@ -19,7 +19,7 @@ describe "Give feedback" do
 
   it "Getting an error message if the comment form isn’t completed correctly" do
     authority = create(:authority, full_name: "Foo", email: "feedback@foo.gov.au")
-    application = create(:geocoded_application, id: "1", authority: authority)
+    application = create(:geocoded_application, id: "1", authority:)
 
     sign_in create(:confirmed_user)
     visit(application_path(application))
@@ -38,7 +38,7 @@ describe "Give feedback" do
       authority = create(:contactable_authority,
                          full_name: "Foo",
                          email: "feedback@foo.gov.au")
-      create(:geocoded_application, id: "1", authority: authority)
+      create(:geocoded_application, id: "1", authority:)
     end
 
     it "Adding a comment" do
@@ -54,7 +54,7 @@ describe "Give feedback" do
     end
 
     it "Unconfirmed comment should not be shown" do
-      create(:comment, confirmed: false, text: "I think this is a really good ideas", application: application)
+      create(:comment, confirmed: false, text: "I think this is a really good ideas", application:)
 
       visit(application_path(application))
 
@@ -63,7 +63,7 @@ describe "Give feedback" do
 
     context "when confirming the comment" do
       let(:comment) do
-        create(:comment, confirmed: false, text: "I think this is a really good ideas", application: application)
+        create(:comment, confirmed: false, text: "I think this is a really good ideas", application:)
       end
 
       it "publishes the comment" do
@@ -86,7 +86,7 @@ describe "Give feedback" do
     end
 
     it "Viewing the comment on the application page" do
-      comment = create(:comment, confirmed: false, text: "I think this is a really good ideas", application: application)
+      comment = create(:comment, confirmed: false, text: "I think this is a really good ideas", application:)
 
       visit(confirmed_comment_path(id: comment.confirm_id))
 
@@ -95,7 +95,7 @@ describe "Give feedback" do
     end
 
     it "Sharing new comment on facebook" do
-      comment = create(:unconfirmed_comment, application: application)
+      comment = create(:unconfirmed_comment, application:)
 
       visit(confirmed_comment_path(id: comment.confirm_id))
 

@@ -8,6 +8,6 @@ class GeocodeResult < ApplicationRecord
 
   sig { returns(T.nilable(Location)) }
   def location
-    Location.build(lat: lat, lng: lng)
+    Location.build(lat:, lng:)
   end
 end

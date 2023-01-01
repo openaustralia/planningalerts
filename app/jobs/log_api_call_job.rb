@@ -21,11 +21,11 @@ class LogApiCallJob < ApplicationJob
   end
   def perform(api_key:, ip_address:, query:, params:, user_agent:, time_as_float:)
     LogApiCallService.call(
-      api_key: api_key,
-      ip_address: ip_address,
-      query: query,
-      params: params,
-      user_agent: user_agent,
+      api_key:,
+      ip_address:,
+      query:,
+      params:,
+      user_agent:,
       time: Time.at(time_as_float).utc
     )
   end

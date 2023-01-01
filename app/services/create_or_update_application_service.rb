@@ -13,9 +13,9 @@ class CreateOrUpdateApplicationService
   end
   def self.call(authority:, council_reference:, attributes:)
     new(
-      authority: authority,
-      council_reference: council_reference,
-      attributes: attributes
+      authority:,
+      council_reference:,
+      attributes:
     ).call
   end
 
@@ -37,7 +37,7 @@ class CreateOrUpdateApplicationService
     Application.transaction do
       # First check if record already exists or create a new one if it doesn't
       application = Application.find_or_create_by!(
-        authority: authority, council_reference: council_reference
+        authority:, council_reference:
       )
       create_version(application)
       application.reindex
@@ -61,8 +61,8 @@ class CreateOrUpdateApplicationService
     previous_version = application.current_version
     new_version = ApplicationVersion.build_version(
       application_id: T.must(application.id),
-      previous_version: previous_version,
-      attributes: attributes
+      previous_version:,
+      attributes:
     )
 
     # If none of the data has changed don't save the new version

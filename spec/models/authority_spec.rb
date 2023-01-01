@@ -89,7 +89,7 @@ describe Authority do
       before do
         create(
           :geocoded_application,
-          authority: authority,
+          authority:,
           date_scraped: Date.new(2015, 12, 24),
           id: 1
         )

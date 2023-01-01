@@ -29,7 +29,7 @@ describe ApplicationsController do
       allow(GeocodeService).to receive(:call).with(address).and_return(GeocoderResults.new([], "Couldn't understand address"))
       application = create(
         :application,
-        address: address,
+        address:,
         id: 1
       )
 

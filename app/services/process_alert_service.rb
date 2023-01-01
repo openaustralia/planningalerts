@@ -8,7 +8,7 @@ class ProcessAlertService
 
   sig { params(alert: Alert).returns([Integer, Integer, Integer]) }
   def self.call(alert:)
-    new(alert: alert).call
+    new(alert:).call
   end
 
   sig { params(alert: Alert).void }
@@ -22,7 +22,7 @@ class ProcessAlertService
     comments = alert.new_comments
 
     if !applications.empty? || !comments.empty?
-      AlertMailer.alert(alert: alert, applications: applications, comments: comments).deliver_now
+      AlertMailer.alert(alert:, applications:, comments:).deliver_now
       alert.last_sent = Time.zone.now
       no_emails = 1
     else

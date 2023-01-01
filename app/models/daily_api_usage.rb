@@ -14,7 +14,7 @@ class DailyApiUsage < ApplicationRecord
 
   sig { params(date_from: Date, date_to: Date, number: Integer).returns(T::Hash[ApiKey, Float]) }
   def self.top_average_usage_in_date_range(date_from:, date_to:, number:)
-    r = top_usage_in_date_range(date_from: date_from, date_to: date_to, number: number)
+    r = top_usage_in_date_range(date_from:, date_to:, number:)
     r.transform_values { |v| v.to_f / (date_to - date_from + 1) }
   end
 end

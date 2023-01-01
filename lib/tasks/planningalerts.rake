@@ -18,7 +18,7 @@ namespace :planningalerts do
       puts "Importing #{authorities.count} authorities"
       authorities.each do |authority|
         info_logger = AuthorityLogger.new(authority.id, Logger.new($stdout))
-        ImportApplicationsService.call(authority: authority, logger: info_logger)
+        ImportApplicationsService.call(authority:, logger: info_logger)
       end
     end
 

@@ -42,7 +42,7 @@ describe AlertMailerHelper do
         it "returns the correct url" do
           expect(
             helper.comment_url_with_tracking(
-              comment: comment
+              comment:
             )
           )
             .to eq application_url(
@@ -81,8 +81,8 @@ describe AlertMailerHelper do
                                     description: "Alterations & additions",
                                     council_reference: "007")
     end
-    let(:comment) { create(:comment, application: application) }
-    let(:comment2) { create(:comment, application: application) }
+    let(:comment) { create(:comment, application:) }
+    let(:comment2) { create(:comment, application:) }
 
     context "with an application" do
       subject { helper.subject(alert, [application], []) }

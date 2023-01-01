@@ -11,7 +11,7 @@ class IsEmailAddressBannedService
 
   sig { params(email: String).returns(T::Boolean) }
   def self.call(email:)
-    new(email: email).call
+    new(email:).call
   end
 
   sig { params(email: String).void }

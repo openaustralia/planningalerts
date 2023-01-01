@@ -48,7 +48,7 @@ FactoryBot.define do
           suburb: evaluator.suburb,
           state: evaluator.state,
           postcode: evaluator.postcode,
-          application: application
+          application:
         )
       end
 

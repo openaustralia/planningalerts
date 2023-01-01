@@ -20,12 +20,12 @@ class LogApiCallService
   end
   def self.call(api_key:, ip_address:, query:, params:, user_agent:, time:)
     new(
-      api_key: api_key,
-      ip_address: ip_address,
-      query: query,
-      params: params,
-      user_agent: user_agent,
-      time: time
+      api_key:,
+      ip_address:,
+      query:,
+      params:,
+      user_agent:,
+      time:
     ).call
   end
 
@@ -83,10 +83,10 @@ class LogApiCallService
     ElasticSearchClient&.index(
       index: elasticsearch_index(time),
       body: {
-        ip_address: ip_address,
-        query: query,
-        params: params,
-        user_agent: user_agent,
+        ip_address:,
+        query:,
+        params:,
+        user_agent:,
         query_time: time,
         # Maintaining this structure for compatibility with old logs
         # even though the api key data is now not stored with the user

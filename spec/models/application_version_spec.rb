@@ -166,7 +166,7 @@ describe ApplicationVersion do
         :geocoded_application_version,
         previous_version: version,
         description: "A new description",
-        date_scraped: date_scraped
+        date_scraped:
       )
       expect(new_version.changed_data_attributes).to eq(
         "description" => "A new description",

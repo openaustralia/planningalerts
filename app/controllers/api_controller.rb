@@ -211,19 +211,19 @@ class ApiController < ApplicationController
   def render_error(error_text, status)
     respond_to do |format|
       format.json do
-        render json: { error: error_text }, status: status
+        render json: { error: error_text }, status:
       end
       # Use of the js extension is deprecated. See
       # https://github.com/openaustralia/planningalerts/issues/679
       # TODO: Remove when it's no longer used
       format.js do
-        render json: { error: error_text }, status: status, content_type: Mime[:json]
+        render json: { error: error_text }, status:, content_type: Mime[:json]
       end
       format.geojson do
-        render json: { error: error_text }, status: status
+        render json: { error: error_text }, status:
       end
       format.rss do
-        render plain: error_text, status: status
+        render plain: error_text, status:
       end
     end
   end
@@ -261,7 +261,7 @@ class ApiController < ApplicationController
       format.json do
         # TODO: Document use of v parameter
         render "index", formats: :json,
-                        variants: variants
+                        variants:
       end
       # Use of the js extension is deprecated. See
       # https://github.com/openaustralia/planningalerts/issues/679
@@ -270,7 +270,7 @@ class ApiController < ApplicationController
         # TODO: Document use of v parameter
         render "index", formats: :json,
                         content_type: Mime[:json],
-                        variants: variants
+                        variants:
       end
       format.geojson do
         render "index"

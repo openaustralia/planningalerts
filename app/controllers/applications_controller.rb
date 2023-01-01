@@ -118,7 +118,7 @@ class ApplicationsController < ApplicationController
     per_page = request.format == Mime[:html] ? 30 : Application.max_per_page
 
     @q = params_q
-    @applications = Application.search(@q, fields: [:description], order: { date_scraped: :desc }, highlight: { tag: "<span class=\"highlight\">" }, page: params[:page], per_page: per_page) if @q
+    @applications = Application.search(@q, fields: [:description], order: { date_scraped: :desc }, highlight: { tag: "<span class=\"highlight\">" }, page: params[:page], per_page:) if @q
     @description = @q ? "Search: #{@q}" : "Search"
   end
 
@@ -129,7 +129,7 @@ class ApplicationsController < ApplicationController
     @comments = T.let(application.comments.confirmed.order(:confirmed_at), T.untyped)
     @nearby_count = T.let(application.find_all_nearest_or_recent.size, T.nilable(Integer))
     comment = Comment.new(
-      application: application,
+      application:,
       user: User.new,
       # If the user is logged in by default populate the name on the comment with their name
       name: current_user&.name

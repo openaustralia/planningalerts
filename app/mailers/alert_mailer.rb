@@ -34,7 +34,7 @@ class AlertMailer < ApplicationMailer
       to: alert.email,
       subject: render_to_string(
         partial: "subject",
-        locals: { applications: applications, comments: comments, alert: alert }
+        locals: { applications:, comments:, alert: }
       ).strip
     )
   end

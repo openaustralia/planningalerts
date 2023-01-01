@@ -36,7 +36,7 @@ class AlertsPreview < ActionMailer::Preview
       name: "Martha"
     )
 
-    AlertMailer.alert(alert: alert, applications: [application], comments: [comment])
+    AlertMailer.alert(alert:, applications: [application], comments: [comment])
   end
 
   def alert_account_requires_activation
@@ -70,6 +70,6 @@ class AlertsPreview < ActionMailer::Preview
       name: "Martha"
     )
 
-    AlertMailer.alert(alert: alert, applications: [application], comments: [comment])
+    AlertMailer.alert(alert:, applications: [application], comments: [comment])
   end
 end

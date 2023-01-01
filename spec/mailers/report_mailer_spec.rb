@@ -16,7 +16,7 @@ describe ReportMailer do
     build(:report,
           name: "Joe Reporter",
           email: "reporter@foo.com",
-          comment: comment,
+          comment:,
           details: "It's very rude!")
   end
 

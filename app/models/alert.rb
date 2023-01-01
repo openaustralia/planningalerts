@@ -75,7 +75,7 @@ class Alert < ApplicationRecord
 
   sig { returns(T.nilable(Location)) }
   def location
-    Location.build(lat: lat, lng: lng)
+    Location.build(lat:, lng:)
   end
 
   # Applications that have been initially scraped since the last time the user was sent an alert

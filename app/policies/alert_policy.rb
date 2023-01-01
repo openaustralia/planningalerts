@@ -36,7 +36,7 @@ class AlertPolicy < ApplicationPolicy
     sig { returns(ActiveRecord::Relation) }
     def resolve
       # Use can only see their own active alerts
-      scope.where(user: user).active
+      scope.where(user:).active
     end
   end
 end

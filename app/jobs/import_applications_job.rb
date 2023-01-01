@@ -9,6 +9,6 @@ class ImportApplicationsJob < ApplicationJob
   sig { params(authority: Authority).void }
   def perform(authority:)
     info_logger = AuthorityLogger.new(T.must(authority.id), logger)
-    ImportApplicationsService.call(authority: authority, logger: info_logger)
+    ImportApplicationsService.call(authority:, logger: info_logger)
   end
 end

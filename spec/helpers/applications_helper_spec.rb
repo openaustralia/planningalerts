@@ -10,7 +10,7 @@ describe ApplicationsHelper do
       map_url: "http://a.map.url",
       description: "A planning application",
       council_reference: "A1",
-      authority: authority,
+      authority:,
       info_url: "http://info.url",
       on_notice_from: nil,
       on_notice_to: nil

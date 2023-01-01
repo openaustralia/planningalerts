@@ -26,7 +26,7 @@ describe "alert_mailer/alert.html.haml" do
     before do
       comment = create(:comment,
                        name: "Matthew Landauer",
-                       application: application)
+                       application:)
 
       assign(:comments, [comment])
       assign(:alert, create(:alert))

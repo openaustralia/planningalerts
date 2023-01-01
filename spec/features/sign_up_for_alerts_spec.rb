@@ -37,7 +37,7 @@ describe "Sign up for alerts" do
     expect(
       Alert.active.find_by(address: "24 Bruce Rd, Glenbrook NSW 2773",
                            radius_meters: "2000",
-                           user: user)
+                           user:)
     ).not_to be_nil
   end
 
@@ -150,7 +150,7 @@ describe "Sign up for alerts" do
   context "when via an authority’s applications page" do
     before do
       authority = create(:authority, short_name: "Glenbrook")
-      create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", authority: authority)
+      create(:geocoded_application, address: "26 Bruce Rd, Glenbrook NSW 2773", authority:)
     end
 
     it "successfully" do
@@ -185,7 +185,7 @@ describe "Sign up for alerts" do
 
     before do
       create(:unconfirmed_alert, address: "24 Bruce Rd, Glenbrook NSW 2773",
-                                 user: user,
+                                 user:,
                                  created_at: 3.days.ago,
                                  updated_at: 3.days.ago)
     end
@@ -206,7 +206,7 @@ describe "Sign up for alerts" do
     let(:user) { create(:confirmed_user, email: "jenny@email.org") }
     let!(:preexisting_alert) do
       create(:confirmed_alert, address: "24 Bruce Rd, Glenbrook NSW 2773",
-                               user: user,
+                               user:,
                                created_at: 3.days.ago,
                                updated_at: 3.days.ago)
     end

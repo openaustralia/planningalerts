@@ -62,7 +62,7 @@ describe ApiController do
       it "finds recent applications if api key is given" do
         key.update(bulk: true)
         authority = create(:authority, full_name: "Acme Local Planning Authority")
-        result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
+        result = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority:)
         # rubocop:disable RSpec/MessageChain
         allow(Application).to receive_message_chain(:where, :paginate).and_return([result])
         # rubocop:enable RSpec/MessageChain
@@ -127,7 +127,7 @@ describe ApiController do
 
     it "supports json api version 1" do
       authority = create(:authority, full_name: "Acme Local Planning Authority")
-      application = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
+      application = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority:)
       result = Application.where(id: application.id)
       scope1 = Application.none
       scope2 = Application.none
@@ -167,7 +167,7 @@ describe ApiController do
 
     it "supports json api version 2" do
       authority = create(:authority, full_name: "Acme Local Planning Authority")
-      application = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
+      application = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority:)
       result = Application.where(id: application.id)
       scope1 = Application.none
       scope2 = Application.none
@@ -209,7 +209,7 @@ describe ApiController do
 
     it "supports geojson" do
       authority = create(:authority, full_name: "Acme Local Planning Authority")
-      application = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority: authority)
+      application = create(:geocoded_application, id: 10, date_scraped: Time.utc(2001, 1, 1), authority:)
       result = Application.where(id: application.id)
       scope1 = Application.none
       scope2 = Application.none

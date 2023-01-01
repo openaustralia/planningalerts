@@ -94,7 +94,7 @@ describe Alert do
     end
 
     it "happens automatically on saving" do
-      alert = create(:alert, address: address, lat: nil, lng: nil)
+      alert = create(:alert, address:, lat: nil, lng: nil)
 
       expect(alert.lat).to eq(-33.7726179)
       expect(alert.lng).to eq(150.6242341)
@@ -130,42 +130,42 @@ describe Alert do
 
     context "when there is already an alert for 1234 Marine Parade" do
       before do
-        create(:alert, user: user, address: address)
+        create(:alert, user:, address:)
       end
 
       it "is not valid for another alert at the same address for the same user" do
-        expect(build(:alert, user: user, address: address)).not_to be_valid
+        expect(build(:alert, user:, address:)).not_to be_valid
       end
 
       it "is valid for another alert at a different address for the same user" do
-        expect(build(:alert, user: user, address: "Another address")).to be_valid
+        expect(build(:alert, user:, address: "Another address")).to be_valid
       end
 
       it "is valid for another alert at the same address for a different user" do
-        expect(build(:confirmed_alert, address: address)).to be_valid
+        expect(build(:confirmed_alert, address:)).to be_valid
       end
 
       it "is valid for an unsubscribed alert at the same address for the same user" do
-        expect(build(:unsubscribed_alert, user: user, address: address)).to be_valid
+        expect(build(:unsubscribed_alert, user:, address:)).to be_valid
       end
 
       it "is valid for two unsubscribed alerts at the same address for the same user" do
-        create(:unsubscribed_alert, user: user, address: address)
-        expect(build(:unsubscribed_alert, user: user, address: address)).to be_valid
+        create(:unsubscribed_alert, user:, address:)
+        expect(build(:unsubscribed_alert, user:, address:)).to be_valid
       end
     end
 
     context "when there is already an unsubscribed alert for 1234 Marine Parade" do
       before do
-        create(:unsubscribed_alert, user: user, address: address)
+        create(:unsubscribed_alert, user:, address:)
       end
 
       it "is valid for another alert at the same address for the same user" do
-        expect(build(:alert, user: user, address: address)).to be_valid
+        expect(build(:alert, user:, address:)).to be_valid
       end
 
       it "is valid for another unsubscribed alert at the same address for the same user" do
-        expect(build(:unsubscribed_alert, user: user, address: address)).to be_valid
+        expect(build(:unsubscribed_alert, user:, address:)).to be_valid
       end
     end
   end
@@ -287,7 +287,7 @@ describe Alert do
   end
 
   describe "#recent_new_applications" do
-    let(:alert) { create(:alert, last_sent: last_sent, radius_meters: radius_meters) }
+    let(:alert) { create(:alert, last_sent:, radius_meters:) }
 
     # Position test application around the point of the alert
     let(:p1) { alert.location.endpoint(0.0, 501.0) } # 501 m north of alert
@@ -392,19 +392,19 @@ describe Alert do
   end
 
   describe "#new_comments" do
-    let(:alert) { create(:alert, address: address, radius_meters: 2000) }
+    let(:alert) { create(:alert, address:, radius_meters: 2000) }
     let(:p1) { alert.location.endpoint(0.0, 501.0) } # 501 m north of alert
     let(:application) { create(:application, lat: p1.lat, lng: p1.lng, suburb: "", state: "", postcode: "") }
 
     it "sees a new comment when there are new comments on an application" do
-      comment1 = create(:confirmed_comment, application: application)
+      comment1 = create(:confirmed_comment, application:)
 
       expect(alert.new_comments).to eql [comment1]
     end
 
     it "only sees two new comments when there are two new comments on a single application" do
-      comment1 = create(:confirmed_comment, application: application)
-      comment2 = create(:confirmed_comment, application: application)
+      comment1 = create(:confirmed_comment, application:)
+      comment2 = create(:confirmed_comment, application:)
 
       expect(alert.new_comments).to eql [comment1, comment2]
     end
@@ -412,31 +412,31 @@ describe Alert do
     it "does not see old confirmed comments" do
       old_comment = create(:confirmed_comment,
                            confirmed_at: alert.cutoff_time - 1,
-                           application: application)
+                           application:)
 
       expect(alert.new_comments).not_to eql [old_comment]
     end
 
     it "does not see unconfirmed comments" do
-      unconfirmed_comment = create(:unconfirmed_comment, application: application)
+      unconfirmed_comment = create(:unconfirmed_comment, application:)
 
       expect(alert.new_comments).not_to eql [unconfirmed_comment]
     end
 
     it "does not see hidden comments" do
-      hidden_comment = create(:confirmed_comment, hidden: true, application: application)
+      hidden_comment = create(:confirmed_comment, hidden: true, application:)
 
       expect(alert.new_comments).not_to eql [hidden_comment]
     end
   end
 
   describe "#applications_with_new_comments" do
-    let(:alert) { create(:alert, address: address, radius_meters: 2000, lat: 1.0, lng: 2.0) }
+    let(:alert) { create(:alert, address:, radius_meters: 2000, lat: 1.0, lng: 2.0) }
     let(:near_application) do
       create(:application,
              lat: 1.0,
              lng: 2.0,
-             address: address,
+             address:,
              suburb: "Glenbrook",
              state: "NSW",
              postcode: "2773")
@@ -446,7 +446,7 @@ describe Alert do
       create(:application,
              lat: alert.location.endpoint(0.0, 5001.0).lat,
              lng: alert.location.endpoint(0.0, 5001.0).lng,
-             address: address,
+             address:,
              suburb: "Glenbrook",
              state: "NSW",
              postcode: "2773")
@@ -512,7 +512,7 @@ describe Alert do
       authority = create(:authority, disabled: false)
       allow(GeocodeService).to receive(:call).with(", NSW").and_return(GeocoderResults.new([], "Please enter a full street address like ‘36 Sowerby St, Goulburn, NSW’"))
       CreateOrUpdateApplicationService.call(
-        authority: authority,
+        authority:,
         council_reference: "DA/2341/2021",
         attributes: {
           address: ", NSW",
@@ -522,7 +522,7 @@ describe Alert do
         }
       )
       CreateOrUpdateApplicationService.call(
-        authority: authority,
+        authority:,
         council_reference: "DA/2341/2021",
         attributes: {
           address: "1 Bank Street, CARDIFF NSW 2285",

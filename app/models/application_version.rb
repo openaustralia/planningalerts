@@ -21,7 +21,7 @@ class ApplicationVersion < ApplicationRecord
   def search_data
     # lat and lon need to be symbols (rather than strings) in search_data
     # to get valid data come through searchkick for some reason
-    attributes.symbolize_keys.merge(location: { lat: lat, lon: lng })
+    attributes.symbolize_keys.merge(location: { lat:, lon: lng })
   end
 
   sig { returns(String) }
@@ -37,7 +37,7 @@ class ApplicationVersion < ApplicationRecord
   # TODO: factor out common location accessor between Application and Alert
   sig { returns(T.nilable(Location)) }
   def location
-    Location.build(lat: lat, lng: lng)
+    Location.build(lat:, lng:)
   end
 
   sig { returns(T::Hash[String, T.untyped]) }

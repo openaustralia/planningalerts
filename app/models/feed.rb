@@ -46,7 +46,7 @@ class Feed
   def self.create_from_url(url)
     feed_options = ATDIS::Feed.options_from_url(url)
     base_url = ATDIS::Feed.base_url_from_url(url)
-    Feed.new(feed_options.merge(base_url: base_url))
+    Feed.new(feed_options.merge(base_url:))
   end
 
   # TODO: Make timezone (currently hardcoded to "Sydney") configurable

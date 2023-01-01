@@ -81,14 +81,14 @@ module ApplicationsHelper
 
   sig { params(application: Application, size: String, zoom: Integer, key: String).returns(String) }
   def google_static_map(application, size: "350x200", zoom: 16, key: "GOOGLE_MAPS_API_KEY")
-    google_static_map_lat_lng(lat: application.lat, lng: application.lng, label: "Map of #{application.address}", size: size, zoom: zoom, key: key)
+    google_static_map_lat_lng(lat: application.lat, lng: application.lng, label: "Map of #{application.address}", size:, zoom:, key:)
   end
 
   # Version of google_static_map above that isn't tied into the implementation of Application
   sig { params(lat: Float, lng: Float, size: String, label: String, zoom: Integer, key: String).returns(String) }
   def google_static_map_lat_lng(lat:, lng:, size: "350x200", label: "Map", zoom: 16, key: "GOOGLE_MAPS_API_KEY")
-    url = google_static_map_url(lat: lat, lng: lng, zoom: zoom, size: size, key: key)
-    image_tag(url, size: size, alt: label)
+    url = google_static_map_url(lat:, lng:, zoom:, size:, key:)
+    image_tag(url, size:, alt: label)
   end
 
   sig { params(lat: T.nilable(Float), lng: T.nilable(Float), zoom: Integer, size: String, key: String).returns(T.nilable(String)) }
@@ -101,10 +101,10 @@ module ApplicationsHelper
       query: {
         maptype: "roadmap",
         markers: "color:red|#{lat},#{lng}",
-        size: size,
-        zoom: zoom
+        size:,
+        zoom:
       },
-      key: key
+      key:
     )
   end
 
@@ -114,18 +114,18 @@ module ApplicationsHelper
       domain: "https://maps.googleapis.com",
       path: "/maps/api/streetview",
       query: {
-        fov: fov,
+        fov:,
         location: "#{lat},#{lng}",
-        size: size
+        size:
       },
-      key: key
+      key:
     )
   end
 
   sig { params(application: Application, size: String, fov: Integer, key: String).returns(String) }
   def google_static_streetview(application, size: "350x200", fov: 90, key: "GOOGLE_MAPS_API_KEY")
-    url = google_static_streetview_url(lat: application.lat, lng: application.lng, size: size, fov: fov, key: key)
-    image_tag(url, size: size, alt: "Streetview of #{application.address}")
+    url = google_static_streetview_url(lat: application.lat, lng: application.lng, size:, fov:, key:)
+    image_tag(url, size:, alt: "Streetview of #{application.address}")
   end
 
   HEADING_SECTOR_NAMES = T.let(%w[north northeast east southeast south southwest west northwest].freeze, T::Array[String])

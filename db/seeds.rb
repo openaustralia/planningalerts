@@ -11,7 +11,7 @@ authority = Authority.create! full_name: "Marrickville Council",
                               disabled: false
 
 CreateOrUpdateApplicationService.call(
-  authority: authority,
+  authority:,
   council_reference: "DA21/0642",
   attributes: {
     address: "28 Grey Street, Emu Plains NSW 2750",

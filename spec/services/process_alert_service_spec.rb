@@ -6,7 +6,7 @@ describe ProcessAlertService do
   let(:address) { "24 Bruce Road, Glenbrook" }
 
   context "with an alert with no new comments" do
-    let(:alert) { create(:alert, address: address) }
+    let(:alert) { create(:alert, address:) }
 
     before do
       allow(alert).to receive(:recent_comments).and_return([])
@@ -26,28 +26,28 @@ describe ProcessAlertService do
       end
 
       it "returns the number of emails, applications and comments sent" do
-        expect(described_class.call(alert: alert)).to eq([1, 1, 0])
+        expect(described_class.call(alert:)).to eq([1, 1, 0])
       end
 
       it "sends an email" do
-        described_class.call(alert: alert)
+        described_class.call(alert:)
         expect(ActionMailer::Base.deliveries.size).to eq(1)
       end
 
       it "updates the tally" do
-        described_class.call(alert: alert)
+        described_class.call(alert:)
         # Just reload from the database to make sure
         application.reload
         expect(application.no_alerted).to eq(4)
       end
 
       it "updates the last_sent time" do
-        described_class.call(alert: alert)
+        described_class.call(alert:)
         expect((alert.last_sent - Time.zone.now).abs).to be < 1
       end
 
       it "updates the last_processed time" do
-        described_class.call(alert: alert)
+        described_class.call(alert:)
         expect((alert.last_processed - Time.zone.now).abs).to be < 1
       end
 
@@ -58,7 +58,7 @@ describe ProcessAlertService do
 
         it "does not cause the application to be re-geocoded" do
           allow(GeocodeService).to receive(:call)
-          described_class.call(alert: alert)
+          described_class.call(alert:)
           expect(GeocodeService).not_to have_received(:call)
         end
       end
@@ -70,22 +70,22 @@ describe ProcessAlertService do
       end
 
       it "does not send an email" do
-        described_class.call(alert: alert)
+        described_class.call(alert:)
         expect(ActionMailer::Base.deliveries).to be_empty
       end
 
       it "does not update the last_sent time" do
-        described_class.call(alert: alert)
+        described_class.call(alert:)
         expect(alert.last_sent).to be_nil
       end
 
       it "updates the last_processed time" do
-        described_class.call(alert: alert)
+        described_class.call(alert:)
         expect((alert.last_processed - Time.zone.now).abs).to be < 1
       end
 
       it "returns the number of applications and comments sent" do
-        expect(described_class.call(alert: alert)).to eq([0, 0, 0])
+        expect(described_class.call(alert:)).to eq([0, 0, 0])
       end
     end
   end

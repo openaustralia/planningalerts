@@ -42,7 +42,7 @@ class CuttlefishController < ApplicationController
         )
         unless success
           NotifySlackCommentDeliveryService.call(
-            comment: comment,
+            comment:,
             to: delivery_event_email_to,
             status: deliver_event_status,
             extended_status: delivery_event_extended_status,
