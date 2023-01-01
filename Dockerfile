@@ -19,7 +19,6 @@ USER deploy
 
 COPY --chown=deploy:deploy Gemfile /app/Gemfile
 COPY --chown=deploy:deploy Gemfile.lock /app/Gemfile.lock
-RUN gem install bundler -v 2.1.4
 RUN bundle install
 
 ENTRYPOINT ["./entrypoint.sh"]
