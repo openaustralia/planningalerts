@@ -1,5 +1,5 @@
 # TODO: Upgrade ruby as soon as we can
-FROM ruby:2.7.4
+FROM ruby:2.7.7
 WORKDIR /app
 
 # Run everything as a non-root "deploy" user

@@ -1,5 +1,5 @@
 # Ruby version isn't very important here as this is only used in development
-FROM ruby:2.7.4
+FROM ruby:2.7.7
 
 RUN gem install mailcatcher
 
