@@ -52,6 +52,7 @@ gem "autoprefixer-rails"
 gem "bourbon"
 gem "compass-blueprint"
 # compass is no longer maintained. TODO: Move away from compass
+# We can't upgrade to ruby 3.2 until we get rid of compass
 gem "compass-rails", "3.1.0"
 gem "sass-rails"
 gem "susy"
