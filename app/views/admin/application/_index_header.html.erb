@@ -11,10 +11,10 @@
     <div>
       <%= render(
         "search",
-        search_term: search_term,
+        search_term:,
         resource_name: display_resource_name(page.resource_name)
       ) %>
-      <%= render("search_extras", search_term: search_term) %>
+      <%= render("search_extras", search_term:) %>
     </div>
   <% end %>
 

@@ -40,7 +40,7 @@ as well as a link to its edit page.
   </div>
 </header>
 
-<%= render "show_extra_header", page: page %>
+<%= render "show_extra_header", page: %>
 
 <section class="main-content__body">
   <dl>
@@ -53,7 +53,7 @@ as well as a link to its edit page.
       </dt>
 
       <dd class="attribute-data attribute-data--<%= attribute.html_class %>">
-        <%= render_field attribute, page: page %>
+        <%= render_field attribute, page: %>
       </dd>
     <% end %>
   </dl>

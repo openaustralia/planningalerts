@@ -6,7 +6,7 @@
   </p>
 
   <%= semantic_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
+    <%= render "devise/shared/error_messages", resource: %>
 
     <%= f.inputs do %>
       <%= f.input :email, input_html: { autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) } %>
