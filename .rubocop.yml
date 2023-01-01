@@ -45,6 +45,11 @@ Style/Documentation:
 Naming/VariableNumber:
   Enabled: false
 
+# Anonymous block forwarding doesn't look to be compatible with sorbet
+Naming/BlockForwarding: # new in 1.24
+  Enabled: true
+  EnforcedStyle: explicit
+
 # Disable a bunch of metrics to do with code complexity. These as are all
 # a bit hard-nosed. Maybe after we've done a pass with Code Climate we
 # can revisit these
@@ -349,8 +354,6 @@ Lint/RefinementImportMethods: # new in 1.27
 Lint/RequireRangeParentheses: # new in 1.32
   Enabled: true
 Lint/UselessRuby2Keywords: # new in 1.23
-  Enabled: true
-Naming/BlockForwarding: # new in 1.24
   Enabled: true
 Security/CompoundHash: # new in 1.28
   Enabled: true
