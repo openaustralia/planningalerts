@@ -19,8 +19,6 @@ USER deploy
 
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
-# TODO: Upgrade bundler as soon as we can
-RUN gem install bundler:1.17.3
 RUN bundle install
 
 ENTRYPOINT ["./entrypoint.sh"]
