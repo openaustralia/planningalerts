@@ -31,7 +31,8 @@ gem "validate_url"
 # Background queue uses sidekiq with redis
 # We need redis namespaces to seperate the production and staging environments
 gem "redis-namespace"
-gem "sidekiq"
+# TODO: Upgrade to sidekiq 7.0
+gem "sidekiq", "<7"
 
 # For accessing external urls
 # TODO: Just pick one and use it for everything
