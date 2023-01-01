@@ -9,7 +9,7 @@
     = paginate @applications
     %ol.applications
       - @applications.with_highlights.each do |application, highlights|
-        = render application, highlights: highlights
+        = render application, highlights:
     = paginate @applications
   - else
     %br
