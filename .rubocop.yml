@@ -474,3 +474,9 @@ Style/RedundantDoubleSplatHashBraces: # new in 1.41
   Enabled: true
 Style/RedundantEach: # new in 1.38
   Enabled: true
+RSpec/DuplicatedMetadata: # new in 2.16
+  Enabled: true
+RSpec/PendingWithoutReason: # new in 2.16
+  Enabled: true
+RSpec/FactoryBot/FactoryNameStyle: # new in 2.16
+  Enabled: true  
