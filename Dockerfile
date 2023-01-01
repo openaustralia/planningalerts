@@ -1,5 +1,5 @@
 # TODO: Upgrade ruby as soon as we can
-FROM ruby:2.7.7
+FROM ruby:3.0.5
 WORKDIR /app
 
 # Run everything as a non-root "deploy" user
@@ -19,6 +19,7 @@ USER deploy
 
 COPY --chown=deploy:deploy Gemfile /app/Gemfile
 COPY --chown=deploy:deploy Gemfile.lock /app/Gemfile.lock
+RUN gem install bundler -v 2.1.4
 RUN bundle install
 
 ENTRYPOINT ["./entrypoint.sh"]

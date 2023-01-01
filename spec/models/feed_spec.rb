@@ -42,7 +42,7 @@ describe Feed do
       atdis = double
       applications = double
       allow(ATDIS::Feed).to receive(:new).with("http://foo.com", "Sydney").and_return(atdis)
-      allow(atdis).to receive(:applications).with(lodgement_date_start: "2012").and_return(applications)
+      allow(atdis).to receive(:applications).with({ lodgement_date_start: "2012" }).and_return(applications)
       expect(f.applications).to eq applications
     end
   end
