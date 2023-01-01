@@ -195,7 +195,6 @@ group :development do
   # For deployment
   # TODO: Upgrade to capistrano 3
   gem "capistrano", "~> 2"
-  gem "rvm-capistrano"
 
   # Workaround for "already initialized constant" errors with net/protocol
   # See https://github.com/ruby/net-imap/issues/16#issuecomment-803086765
