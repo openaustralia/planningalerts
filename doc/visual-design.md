@@ -37,11 +37,12 @@ Each group is roughly ordered in order of importance (from most important to lea
 |               | /applications/trending                    | "trending" applications (lots of comments)
 |               | /authorities/:authority_id/applications   | recent applications for a particular authority
 |               | /applications                             | all recent applications
-| Emails        | N/A                                       | Confirm your alert
-|               | N/A                                       | You already have an alert set up
-|               | N/A                                       | Email alert
-|               | N/A                                       | Confirm your comment
+| Emails        | N/A                                       | Email alert
 |               | N/A                                       | Comment sent to authority
+|               | Activate account instructions             | 
+|               | Confirmation instructions                 | After you sign up for an account
+|               | Reset password instructions               | When you want to reset your password
+|               | Unlock instructions                       | When someone is trying to get in to your account
 | Alerts        | /alerts/:id/confirmed                     | You've confirmed your alert
 |               | /alerts/:id/area                          | Changing the area of your alert
 |               | /alerts/:id/unsubscribe                   | Unsubscribing from your alert
@@ -64,11 +65,14 @@ Each group is roughly ordered in order of importance (from most important to lea
 |               | /comments/:id/confirmed                   | Confirm a comment you made
 |               | /comments                                 | All recent comments
 |               | /authorities/:authority_id/comments       | Recent comments for a particular authority
-| API login     | /users/sign_in                            | Log in
+| Login         | /users/sign_in                            | Log in
 |               | /users/sign_up                            | Register for an account
+|               | /users/activations/new                    | Activate your account
+|               | /users/activation/edit                    | To activate set your name and password
 |               | /users/edit                               | Edit my account
 |               | /users/password/new                       | I forgot my password
 |               | /users/password/edit                      | Update my password
 |               | /users/confirmation/new                   | Resend confirmation instructions
+|               | /users/unlock/new                         | Resend unlock instructions
 | ATDIS         | /atdis/test                               | Test an ATDIS feed
-|               | /atdis/specification                      | Documentation for the ATDIS specification
+|               | /atdis/specification                 
