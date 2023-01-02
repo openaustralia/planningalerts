@@ -292,7 +292,7 @@ describe Alert do
     # Position test application around the point of the alert
     let(:p1) { alert.location.endpoint(0.0, 501.0) } # 501 m north of alert
     let(:p2) { alert.location.endpoint(0.0, 499.0) } # 499 m north of alert
-    let(:p3) { alert.location.endpoint(45.0, 499 * Math.sqrt(2)) } # Just inside the NE corner of a box centred on the alert (of size 2 * 499m)
+    let(:p3) { alert.location.endpoint(45.0, Math.sqrt(2) * 499) } # Just inside the NE corner of a box centred on the alert (of size 2 * 499m)
     let(:p4) { alert.location.endpoint(90.0, 499.0) } # 499 m east of alert
 
     let!(:app1) { create(:geocoded_application, lat: p1.lat, lng: p1.lng, date_scraped: 5.minutes.ago) }
