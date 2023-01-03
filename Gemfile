@@ -131,9 +131,6 @@ gem "slack-notifier"
 # (used by load balancer)
 gem "health_check"
 
-# Using New Relic temporarily to debug some performance issues
-gem "newrelic_rpm"
-
 # For rendering markdown in ATDIS specification
 gem "redcarpet"
 
@@ -145,6 +142,9 @@ gem "graphql-client"
 gem "flipper"
 gem "flipper-redis"
 gem "flipper-ui"
+
+# Testing this out for application performance monitoring
+gem "skylight"
 
 group :test do
   gem "capybara"

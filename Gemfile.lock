@@ -400,7 +400,6 @@ GEM
     net-ssh-gateway (2.0.0)
       net-ssh (>= 4.0.0)
     netrc (0.11.0)
-    newrelic_rpm (8.14.0)
     nio4r (2.5.8)
     nokogiri (1.13.10-x86_64-linux)
       racc (~> 1.4)
@@ -589,6 +588,8 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
+    skylight (5.3.4)
+      activesupport (>= 5.2.0)
     slack-notifier (2.4.0)
     smart_properties (1.17.0)
     sorbet (0.5.10599)
@@ -741,7 +742,6 @@ DEPENDENCIES
   kaminari
   mini_racer
   mysql2
-  newrelic_rpm
   nokogiri
   octokit
   oj
@@ -776,6 +776,7 @@ DEPENDENCIES
   selenium-webdriver
   sidekiq (< 7)
   simplecov
+  skylight
   slack-notifier
   sorbet
   sorbet-runtime
