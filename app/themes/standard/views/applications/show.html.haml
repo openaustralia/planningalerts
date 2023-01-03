@@ -82,17 +82,15 @@
           = f.actions do
             = f.action :submit, label: "Create alert", button_html: { class: "button button-rounded button-action button-large" }
 
-  - if @application.no_alerted || @nearby_count != 0
-    #application-stats
-      - if @application.no_alerted
-        %p.no_alerted
-          - if @application.no_alerted == 1
-            1 person was
-          - else
-            #{@application.no_alerted} people were
-          notified of this application via
-          = link_to "email alerts", new_alert_path
-      - if @nearby_count != 0
-        = link_to "Recent nearby applications", nearby_application_url(@application, sort: "time"), class: "button button-rounded"
+  #application-stats
+    - if @application.no_alerted
+      %p.no_alerted
+        - if @application.no_alerted == 1
+          1 person was
+        - else
+          #{@application.no_alerted} people were
+        notified of this application via
+        = link_to "email alerts", new_alert_path
+    = link_to "Recent nearby applications", nearby_application_url(@application, sort: "time"), class: "button button-rounded"
 
   = render "applications/social_share", application: @application

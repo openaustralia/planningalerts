@@ -127,7 +127,6 @@ class ApplicationsController < ApplicationController
     application = Application.find(params[:id])
     @application = T.let(application, T.nilable(Application))
     @comments = T.let(application.comments.confirmed.order(:confirmed_at), T.untyped)
-    @nearby_count = T.let(application.find_all_nearest_or_recent.size, T.nilable(Integer))
     comment = Comment.new(
       application:,
       user: User.new,
