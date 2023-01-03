@@ -24,11 +24,6 @@ class LoginAndAccountPreview < ActionMailer::Preview
     Users::ActivationMailer.notify(user, "faketoken")
   end
 
-  def activate_account_already_activated
-    user = FactoryBot.build_stubbed(:user, name: "Matthew")
-    Users::ActivationMailer.already_activated(user, "faketoken")
-  end
-
   def unlock_instructions
     user = FactoryBot.build_stubbed(:user, name: "Matthew")
     Devise::Mailer.unlock_instructions(user, "faketoken")

@@ -48,6 +48,7 @@ en:
             email:
               taken: "You already have an account with that email address. Please sign into your account."
               taken_activation: "You already have an account with that email address. Please activate your account."
+              already_activated: "Account with that email address has already been activated"
   formtastic:
     labels:
       comment:
