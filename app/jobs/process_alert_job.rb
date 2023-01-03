@@ -8,6 +8,7 @@ class ProcessAlertJob < ApplicationJob
 
   sig { params(id: Integer).void }
   def perform(id)
-    ProcessAlertAndRecordStatsService.call(alert_id: id)
+    alert = Alert.find(id)
+    ProcessAlertAndRecordStatsService.call(alert:)
   end
 end

@@ -13,14 +13,14 @@ describe ProcessAlertAndRecordStatsService do
     it "processes the individual alert" do
       allow(ProcessAlertService).to receive(:call).with(alert:).and_return([1, 5, 1])
       allow(Alert).to receive(:find).with(alert.id).and_return(alert)
-      described_class.call(alert_id: alert.id)
+      described_class.call(alert:)
       expect(ProcessAlertService).to have_received(:call).with(alert:)
     end
 
     it "creates a record of the batch of sent email alerts" do
       allow(Alert).to receive(:find).with(alert.id).and_return(alert)
 
-      described_class.call(alert_id: alert.id)
+      described_class.call(alert:)
       expect(EmailBatch.count).to eq 1
       batch = EmailBatch.first
       expect(batch.no_emails).to eq 1
@@ -35,7 +35,7 @@ describe ProcessAlertAndRecordStatsService do
 
       allow(Alert).to receive(:find).with(alert.id).and_return(alert)
 
-      described_class.call(alert_id: alert.id)
+      described_class.call(alert:)
       expect(Stat.emails_sent).to eq 6
       expect(Stat.applications_sent).to eq 15
     end
