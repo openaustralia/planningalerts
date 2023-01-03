@@ -38,7 +38,7 @@ class User < ApplicationRecord
 
   sig { returns(T::Boolean) }
   def requires_activation?
-    from_alert_or_comment && encrypted_password.blank?
+    encrypted_password.blank?
   end
 
   # Returns the name of the user. If that isn't set just returns the email
