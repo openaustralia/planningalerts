@@ -343,9 +343,6 @@ class ActiveRecord::SchemaMigration
     def merge(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
-    def name(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def none(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
@@ -549,9 +546,6 @@ class ActiveRecord::SchemaMigration
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def merge(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
-    def name(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def none(*args, &blk); end
