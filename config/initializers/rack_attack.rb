@@ -23,4 +23,12 @@ Rack::Attack.throttle("logins/ip", limit: 20, period: 1.hour) do |req|
   req.ip if req.post? && req.path.start_with?("/users/sign_in")
 end
 
+# Throttle account activation page so that we can show whether an
+# email exists or not (for usability) while at the same limiting
+# the dangers of an attacker trying out a bunch of email addresses
+# to see who has an account
+Rack::Attack.throttle("activation", limit: 10, period: 1.hour) do |req|
+  req.ip if req.path.start_with?("/users/activation/new")
+end
+
 Rack::Attack.throttled_response_retry_after_header = true
