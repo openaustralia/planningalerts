@@ -1,6 +1,6 @@
 # PlanningAlerts
 
-[![Build Status](https://travis-ci.com/openaustralia/planningalerts.svg?branch=master)](https://travis-ci.com/openaustralia/planningalerts) [![Test Coverage](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/test_coverage)](https://codeclimate.com/github/openaustralia/planningalerts/test_coverage) [![Maintainability](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/maintainability)](https://codeclimate.com/github/openaustralia/planningalerts/maintainability)
+[![Build Status](https://travis-ci.com/openaustralia/planningalerts.svg?branch=master)](https://travis-ci.com/openaustralia/planningalerts) [![Test Coverage](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/test_coverage)](https://codeclimate.com/github/openaustralia/planningalerts/test_coverage) [![Maintainability](https://api.codeclimate.com/v1/badges/a7fa0b47c8fdd193bfda/maintainability)](https://codeclimate.com/github/openaustralia/planningalerts/maintainability) [![View performance data on Skylight](https://badges.skylight.io/status/JANyIYPM9FwR.svg?token=dDtVtXbOqFPrEZjsGnMPoT-Ss9h3UHtYtZZjFLE9KWo)](https://www.skylight.io/app/applications/JANyIYPM9FwR)
 
 Find out and have your say about development applications in your area.
 
