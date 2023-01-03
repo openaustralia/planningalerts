@@ -11,7 +11,7 @@
     text-align: center;
   }
 
-  .formtastic#new_user, .formtastic#edit_user, .formtastic#edit_user_2 {
+  .formtastic#edit_user, .formtastic.user {
     @include float-form(100%, 100%, 100%, 0, "buttons-left", left, "select-auto");
 
     label {

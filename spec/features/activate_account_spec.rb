@@ -51,4 +51,14 @@ describe "Activate account" do
       expect(page).to have_content "Account with that email address has already been activated"
     end
   end
+
+  context "with a non-existent user" do
+    it "shows an error message" do
+      visit "/users/activation/new"
+      fill_in "Your email", with: "matthew@oaf.org.au"
+      click_button "Send account activation instructions to my email"
+
+      expect(page).to have_content "We don't know recognise that email address"
+    end
+  end
 end
