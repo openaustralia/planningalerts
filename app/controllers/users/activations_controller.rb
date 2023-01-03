@@ -22,21 +22,16 @@ module Users
     def create
       params_user = T.cast(params[:user], ActionController::Parameters)
 
-      @user = User.find_by(email: params_user[:email])
-      if @user.nil?
-        @user = User.new(email: params_user[:email])
+      @user = User.find_or_initialize_by(email: params_user[:email])
+      if !@user.persisted?
         @user.errors.add(:email, :not_found)
         render "new"
-        return
-      end
-      unless @user.requires_activation?
+      elsif !@user.requires_activation?
         @user.errors.add(:email, :already_activated)
         render "new"
-        return
+      else
+        @user.send_activation_instructions
       end
-
-      # If the user doesn't exist then don't send an email but do everything else
-      @user.send_activation_instructions
     end
 
     sig { void }
