@@ -1,6 +1,10 @@
 <% content_for :page_title, "Now check your email" %>
-<div class="attention">
-  <h3><%= yield :page_title %></h3>
+
+<div class="login-block">
+  <h2><%= yield :page_title %></h3>
+
+  <%= render "svg/email" %>
+
   <p>
     You will shortly receive an email from PlanningAlerts.org.au.
     <span class="highlight">Click on the link in the email</span>

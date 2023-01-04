@@ -65,4 +65,9 @@
       float: right;
     }
   }
+
+  // Make an icon the same colour as the PlanningAlerts "logo" in the header
+  svg {
+    fill: $warm-highlight;
+  }
 }
