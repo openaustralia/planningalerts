@@ -95,7 +95,7 @@ en:
   users:
     activations:
       update:
-        success: "Your account has been activated successfully. You are now signed in."
+        success: "Wonderful! Your account is now activated. You are now signed in. Click on the right most menu to manage all your alerts, settings and comments."
     activation_mailer:
       notify:
         subject: "PlanningAlerts: Activate your account"

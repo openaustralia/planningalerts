@@ -29,7 +29,7 @@ describe "Activate account" do
       fill_in "Password", with: "my new password"
       click_button "Activate my account"
 
-      expect(page).to have_content "Your account has been activated successfully. You are now signed in"
+      expect(page).to have_content "Your account is now activated. You are now signed in"
       expect(page).to have_content "Matthew"
 
       user = User.find_by(email: "matthew@oaf.org.au")
