@@ -13,13 +13,13 @@ class ApiKeyDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = T.let({
-    user: Field::BelongsTo,
     id: Field::Number,
-    value: Field::String,
     bulk: YesNoBooleanField,
-    disabled: YesNoBooleanField,
     commercial: YesNoBooleanField,
     daily_limit: Field::Number,
+    disabled: YesNoBooleanField,
+    user: Field::BelongsTo,
+    value: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze, T::Hash[Symbol, T.untyped])

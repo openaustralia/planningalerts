@@ -12,22 +12,22 @@ class AlertDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = T.let({
     id: Field::Number,
-    user: Field::BelongsTo,
     address: Field::String,
+    confirm_id: Field::String,
+    confirmed: YesNoBooleanField,
+    last_delivered_at: Field::DateTime,
+    last_delivered_successfully: YesNoBooleanField,
+    last_processed: Field::DateTime,
     last_sent: Field::DateTime,
     lat: Field::Number.with_options(decimals: 2),
     lng: Field::Number.with_options(decimals: 2),
-    confirm_id: Field::String,
-    confirmed: YesNoBooleanField,
     radius_meters: Field::Number,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime,
     unsubscribed: YesNoBooleanField,
-    last_processed: Field::DateTime,
     unsubscribed_at: Field::DateTime,
-    last_delivered_at: Field::DateTime,
-    last_delivered_successfully: YesNoBooleanField,
-    unsubscribed_by: Field::String
+    unsubscribed_by: Field::String,
+    user: Field::BelongsTo,
+    created_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze, T::Hash[Symbol, T.untyped])
 
   # COLLECTION_ATTRIBUTES

@@ -11,21 +11,21 @@ class CommentDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = T.let({
-    application: Field::BelongsTo,
-    reports: Field::HasMany,
     id: Field::Number,
-    text: Field::Text,
-    user: Field::BelongsTo,
-    name: Field::String,
+    address: Field::String,
+    application: Field::BelongsTo,
     confirm_id: Field::String,
     confirmed: YesNoBooleanField,
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    address: Field::String,
-    hidden: YesNoBooleanField,
     confirmed_at: Field::DateTime,
+    hidden: YesNoBooleanField,
     last_delivered_at: Field::DateTime,
-    last_delivered_successfully: YesNoBooleanField
+    last_delivered_successfully: YesNoBooleanField,
+    name: Field::String,
+    reports: Field::HasMany,
+    text: Field::Text,
+    user: Field::BelongsTo,
+    created_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze, T::Hash[Symbol, T.untyped])
 
   # COLLECTION_ATTRIBUTES

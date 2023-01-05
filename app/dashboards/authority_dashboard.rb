@@ -13,20 +13,20 @@ class AuthorityDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = T.let({
+    id: Field::Number,
     applications: Field::HasMany,
     comments: Field::HasMany,
-    github_issue: Field::HasOne,
-    id: Field::Number,
-    full_name: Field::String,
-    short_name: Field::String,
     disabled: YesNoBooleanField,
-    state: Field::String,
     email: Field::String,
+    full_name: Field::String,
+    github_issue: Field::HasOne,
     last_scraper_run_log: Field::Text,
     morph_name: Field::String,
-    website_url: Field::String,
     population_2017: Field::Number,
-    scraper_authority_label: Field::String
+    scraper_authority_label: Field::String,
+    short_name: Field::String,
+    state: Field::String,
+    website_url: Field::String
   }.freeze, T::Hash[Symbol, T.untyped])
 
   # COLLECTION_ATTRIBUTES

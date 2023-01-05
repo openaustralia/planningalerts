@@ -11,12 +11,12 @@ class ReportDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = T.let({
-    comment: Field::BelongsTo,
     id: Field::Number,
-    user: Field::BelongsTo,
-    name: Field::String,
-    email: Field::String,
+    comment: Field::BelongsTo,
     details: Field::Text,
+    email: Field::String,
+    name: Field::String,
+    user: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze, T::Hash[Symbol, T.untyped])

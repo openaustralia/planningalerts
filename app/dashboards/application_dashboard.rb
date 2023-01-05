@@ -13,26 +13,26 @@ class ApplicationDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = T.let({
+    id: Field::Number,
+    address: Field::Text,
     authority: Field::BelongsTo,
     comments: Field::HasMany,
-    versions: Field::HasMany,
-    current_version: Field::HasOne,
-    first_version: Field::HasOne,
-    id: Field::Number,
     council_reference: Field::String,
-    no_alerted: Field::Number,
-    visible_comments_count: Field::Number,
-    address: Field::Text,
+    current_version: Field::HasOne,
+    date_received: Field::Date,
+    date_scraped: Field::DateTime,
     description: Field::Text,
+    first_version: Field::HasOne,
     info_url: Field::String.with_options(searchable: false),
     lat: Field::Number.with_options(decimals: 2),
     lng: Field::Number.with_options(decimals: 2),
-    date_scraped: Field::DateTime,
-    date_received: Field::Date,
-    suburb: Field::String.with_options(searchable: false),
-    postcode: Field::String.with_options(searchable: false),
+    no_alerted: Field::Number,
     on_notice_from: Field::Date,
-    on_notice_to: Field::Date
+    on_notice_to: Field::Date,
+    postcode: Field::String.with_options(searchable: false),
+    suburb: Field::String.with_options(searchable: false),
+    versions: Field::HasMany,
+    visible_comments_count: Field::Number
   }.freeze, T::Hash[Symbol, T.untyped])
 
   # COLLECTION_ATTRIBUTES
