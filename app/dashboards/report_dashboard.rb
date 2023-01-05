@@ -13,6 +13,7 @@ class ReportDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = T.let({
     comment: Field::BelongsTo,
     id: Field::Number,
+    user: Field::BelongsTo,
     name: Field::String,
     email: Field::String,
     details: Field::Text,
@@ -27,14 +28,14 @@ class ReportDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = T.let(%i[
     created_at
-    name
-    email
+    user
     details
   ].freeze, T::Array[Symbol])
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = T.let(%i[
+    user
     name
     email
     details
@@ -48,6 +49,7 @@ class ReportDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = T.let(%i[
     comment
+    user
     name
     email
     details
