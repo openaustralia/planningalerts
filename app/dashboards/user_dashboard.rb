@@ -37,7 +37,13 @@ class UserDashboard < Administrate::BaseDashboard
     confirmation_token: Field::String,
     confirmed_at: Field::DateTime,
     confirmation_sent_at: Field::DateTime,
-    unconfirmed_email: Field::String
+    unconfirmed_email: Field::String,
+    activated_at: Field::DateTime,
+    failed_attempts: Field::Number,
+    from_alert_or_comment: Field::Boolean,
+    locked_at: Field::DateTime,
+    reports: Field::HasMany,
+    unlock_token: Field::String
   }.freeze, T::Hash[Symbol, T.untyped])
 
   # COLLECTION_ATTRIBUTES
@@ -62,6 +68,7 @@ class UserDashboard < Administrate::BaseDashboard
     unconfirmed_email
     alerts
     comments
+    reports
     api_keys
     created_at
     updated_at
@@ -74,13 +81,15 @@ class UserDashboard < Administrate::BaseDashboard
     current_sign_in_ip
     last_sign_in_ip
     sign_in_count
+    activated_at
+    from_alert_or_comment
+    locked_at
   ].freeze, T::Array[Symbol])
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = T.let(%i[
-    email
     name
     organisation
     admin
@@ -103,6 +112,6 @@ class UserDashboard < Administrate::BaseDashboard
 
   sig { params(user: User).returns(String) }
   def display_resource(user)
-    user.name.presence || user.email
+    user.name_with_fallback
   end
 end
