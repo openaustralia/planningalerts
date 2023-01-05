@@ -27,7 +27,7 @@ class UserDashboard < Administrate::BaseDashboard
     email: Field::String,
     encrypted_password: Field::String,
     failed_attempts: Field::Number,
-    from_alert_or_comment: Field::Boolean,
+    from_alert_or_comment: YesNoBooleanField,
     last_sign_in_at: Field::DateTime,
     last_sign_in_ip: Field::String,
     locked_at: Field::DateTime,
