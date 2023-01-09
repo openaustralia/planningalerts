@@ -42,6 +42,9 @@ module Users
       if @user.errors.empty?
         # TODO: Do this better
         @user.update!(name: params_user[:name], activated_at: Time.current)
+        # In case the user is not yet confirmed we've effectively confirmed their email address
+        # so we can safely confirm their user record here
+        @user.confirm
         sign_in(@user)
         redirect_to after_sign_in_path_for(@user), notice: t(".success")
       else
