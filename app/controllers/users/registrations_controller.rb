@@ -23,9 +23,8 @@ module Users
       # is already exists for a user when trying to create a new user. Basically we
       # are overriding the message that's returned when the email uniqueness validation
       # fails.
-      super do
-        u = User.find_by(email: resource.email)
-        if u&.requires_activation?
+      super do |resource|
+        if resource.requires_activation?
           resource.errors.delete(:email)
           resource.errors.add(:email, :taken_activation)
         end
