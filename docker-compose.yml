@@ -19,7 +19,11 @@ services:
     # TODO: Upgrade when we can
     image: mysql:5.7
     ports:
-      - "3306"
+      # Give access to the database from your host machine. This is useful
+      # if you want to poke around with something like mysql workbench.
+      # Note that we're forwarding this to port 13306 on the host machine so
+      # that it doesn't conflict with any mysql server you might have running there.
+      - 13306:3306
     volumes:
       - database_data:/var/lib/mysql
     environment:
