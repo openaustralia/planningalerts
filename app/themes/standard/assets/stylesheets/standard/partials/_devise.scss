@@ -47,6 +47,17 @@
       margin: 0;
     }
 
+    .error {
+      input,
+      textarea {
+        border-color: $form-error-color;
+      }
+  
+      .inline-errors {
+        color: $form-error-color;
+      }
+    }  
+
     .actions {
       padding: 0;
       width: 100%;
