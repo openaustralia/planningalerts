@@ -60,14 +60,5 @@ namespace :planningalerts do
     task fixup_counter_caches: :environment do
       Comment.counter_culture_fix_counts
     end
-
-    desc "Strip whitespace from users email"
-    task strip_users_email_whitespace: :environment do
-      User.where("email like ?", " %").or(User.where("email like ?", "% ")).find_each do |user|
-        user.email = user.email.strip
-        user.skip_reconfirmation!
-        user.save!(validate: false)
-      end
-    end
   end
 end
