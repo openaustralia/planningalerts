@@ -30,24 +30,7 @@ namespace :planningalerts do
 
   desc "Take a snapshot of planningalerts indexes on elasticsearch and store on S3"
   task elasticsearch_snapshot: :environment do
-    ElasticSearchClient&.snapshot&.create_repository(
-      repository: "backups",
-      body: {
-        type: "s3",
-        settings: {
-          bucket: ENV.fetch("ELASTICSEARCH_SNAPSHOT_S3_BUCKET", nil),
-          region: ENV.fetch("ELASTICSEARCH_SNAPSHOT_S3_REGION", nil),
-          access_key: ENV.fetch("ELASTICSEARCH_SNAPSHOT_ACCESS_KEY", nil),
-          secret_key: ENV.fetch("ELASTICSEARCH_SNAPSHOT_SECRET_KEY", nil),
-          compress: true
-        }
-      }
-    )
-    ElasticSearchClient&.snapshot&.create(
-      repository: "backups",
-      snapshot: "pa-api-#{ENV.fetch('STAGE', nil)}-#{Time.zone.now.utc.strftime('%Y.%m.%d')}",
-      body: { indices: "pa-api-#{ENV.fetch('STAGE', nil)}-*" }
-    )
+    ElasticsearchSnapshotJob.perform_now
   end
 
   desc "Generate XML sitemap"
