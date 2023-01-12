@@ -33,6 +33,10 @@ gem "validate_url"
 gem "redis-namespace"
 # TODO: Upgrade to sidekiq 7.0
 gem "sidekiq", "<7"
+# Run cron jobs alongside sidekiq. Only use this for jobs that need
+# to run once across a cluster. We're still using "regular" cron
+# for jobs that need to run on every machine
+gem "sidekiq-cron"
 
 # For accessing external urls
 # TODO: Just pick one and use it for everything
@@ -145,6 +149,8 @@ gem "flipper-ui"
 
 # Testing this out for application performance monitoring
 gem "skylight"
+
+
 
 group :test do
   gem "capybara"

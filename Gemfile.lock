@@ -208,6 +208,8 @@ GEM
       rubocop
       smart_properties
     erubi (1.12.0)
+    et-orbi (1.2.7)
+      tzinfo
     ethon (0.16.0)
       ffi (>= 1.15.0)
     eventmachine (1.2.7)
@@ -263,6 +265,9 @@ GEM
     foundation-icons-sass-rails (3.0.0)
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
+    fugit (1.8.0)
+      et-orbi (~> 1, >= 1.2.7)
+      raabro (~> 1.4)
     geocoder (1.8.1)
     geokit (1.13.1)
     globalid (1.0.0)
@@ -420,6 +425,7 @@ GEM
     public_suffix (5.0.1)
     pundit (2.3.0)
       activesupport (>= 3.0.0)
+    raabro (1.4.0)
     rabl (0.16.1)
       activesupport (>= 2.3.14)
     racc (1.6.2)
@@ -581,6 +587,9 @@ GEM
       connection_pool (>= 2.2.5, < 3)
       rack (~> 2.0)
       redis (>= 4.5.0, < 5)
+    sidekiq-cron (1.9.1)
+      fugit (~> 1.8)
+      sidekiq (>= 4.2.1)
     simple_oauth (0.3.1)
     simplecov (0.22.0)
       docile (~> 1.1)
@@ -775,6 +784,7 @@ DEPENDENCIES
   searchkick
   selenium-webdriver
   sidekiq (< 7)
+  sidekiq-cron
   simplecov
   skylight
   slack-notifier
