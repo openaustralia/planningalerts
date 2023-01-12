@@ -28,11 +28,6 @@ namespace :planningalerts do
     end
   end
 
-  desc "Take a snapshot of planningalerts indexes on elasticsearch and store on S3"
-  task elasticsearch_snapshot: :environment do
-    ElasticsearchSnapshotJob.perform_now
-  end
-
   desc "Generate XML sitemap"
   task sitemap: :environment do
     GenerateSitemapService.call

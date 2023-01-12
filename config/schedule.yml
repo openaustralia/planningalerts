@@ -1,0 +1,4 @@
+elasticsearch_snapshot:
+  cron: "every day at 3:20 am "
+  class: "ElasticsearchSnapshotJob"
+  description: "Take a snapshot of planningalerts indexes on elasticsearch and store on S3"
