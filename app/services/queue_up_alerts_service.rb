@@ -5,14 +5,9 @@
 class QueueUpAlertsService
   extend T::Sig
 
-  sig { params(logger: Logger).void }
-  def self.call(logger:)
-    new(logger:).call
-  end
-
-  sig { params(logger: Logger).void }
-  def initialize(logger:)
-    @logger = logger
+  sig { void }
+  def self.call
+    new.call
   end
 
   sig { void }
@@ -33,9 +28,6 @@ class QueueUpAlertsService
       start_time + (count * 24.hours.to_f / number)
     end
   end
-
-  sig { returns(Logger) }
-  attr_reader :logger
 
   sig { returns(T.untyped) }
   def alerts
