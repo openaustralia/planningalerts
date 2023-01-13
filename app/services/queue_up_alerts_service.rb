@@ -19,9 +19,9 @@ class QueueUpAlertsService
   def call
     start_time = Time.zone.now
     count = 0
-    delay = time_between_alerts
+    no_alerts = alerts.count
     alerts.pluck(:id).shuffle.each do |alert_id|
-      time = start_time + (count * delay)
+      time = start_time + (count * 24.hours.to_f / no_alerts)
       ProcessAlertJob.set(wait_until: time).perform_later(alert_id)
       count += 1
     end
@@ -35,17 +35,5 @@ class QueueUpAlertsService
   sig { returns(T.untyped) }
   def alerts
     Alert.active.all
-  end
-
-  sig { returns(Integer) }
-  def no_alerts
-    no_alerts = alerts.count
-    no_alerts = 1 if no_alerts.zero?
-    no_alerts
-  end
-
-  sig { returns(Float) }
-  def time_between_alerts
-    24.hours.to_f / no_alerts
   end
 end
