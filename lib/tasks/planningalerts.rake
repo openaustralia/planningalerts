@@ -7,12 +7,7 @@ namespace :planningalerts do
 
     desc "Import all the applications for the last few days for all the loaded authorities"
     task import: :environment do
-      authorities = Authority.active
-      puts "Importing #{authorities.count} authorities"
-      authorities.each do |authority|
-        info_logger = AuthorityLogger.new(authority.id, Logger.new($stdout))
-        ImportApplicationsService.call(authority:, logger: info_logger)
-      end
+      QueueUpJobsOverTimeService.call(ImportApplicationsJob, 24.hours, Authority.active.all.to_a)
     end
 
     desc "Send planning alerts"
