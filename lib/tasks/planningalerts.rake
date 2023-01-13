@@ -17,7 +17,7 @@ namespace :planningalerts do
 
     desc "Send planning alerts"
     task email: :environment do
-      QueueUpAlertsService.call(logger: Logger.new($stdout))
+      QueueUpJobsOverTimeService.call(ProcessAlertJob, 24.hours, Alert.active.pluck(:id).shuffle)
     end
   end
 
