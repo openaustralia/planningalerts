@@ -4,13 +4,8 @@ require "spec_helper"
 
 describe QueueUpAlertsService do
   context "with two confirmed alerts" do
-    let(:alert1) { create(:confirmed_alert) }
-    let(:alert2) { create(:confirmed_alert) }
-
-    before do
-      alert1
-      alert2
-    end
+    let!(:alert1) { create(:confirmed_alert) }
+    let!(:alert2) { create(:confirmed_alert) }
 
     it "queues up batches" do
       job = class_double(ProcessAlertJob, perform_later: nil)
