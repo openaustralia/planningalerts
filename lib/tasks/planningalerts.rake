@@ -2,16 +2,9 @@
 
 namespace :planningalerts do
   namespace :applications do
-    desc "Import new applications, index them and send emails"
-    task import_and_email: %i[import email]
-
-    desc "Import all the applications for the last few days for all the loaded authorities"
-    task import: :environment do
+    desc "Queue up importing of new applications and sending of emails"
+    task import_and_email: :environment do
       QueueUpJobsOverTimeService.call(ImportApplicationsJob, 24.hours, Authority.active.all.to_a)
-    end
-
-    desc "Send planning alerts"
-    task email: :environment do
       QueueUpJobsOverTimeService.call(ProcessAlertJob, 24.hours, Alert.active.pluck(:id).shuffle)
     end
   end
