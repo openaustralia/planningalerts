@@ -12,14 +12,17 @@ class QueueUpAlertsService
 
   sig { void }
   def call
-    alert_ids = alerts.pluck(:id).shuffle
-    times = times_over_next_24_hours(alert_ids.count)
-    times.zip(alert_ids).each do |time, alert_id|
-      ProcessAlertJob.set(wait_until: time).perform_later(alert_id)
-    end
+    queue_up_jobs_over_next_24_hours(ProcessAlertJob, Alert.active.pluck(:id).shuffle)
   end
 
   private
+
+  sig { params(job_class: T.class_of(ActiveJob::Base), params: T::Array[T.untyped]).void }
+  def queue_up_jobs_over_next_24_hours(job_class, params)
+    times_over_next_24_hours(params.count).zip(params).each do |time, param|
+      job_class.set(wait_until: time).perform_later(param)
+    end
+  end
 
   sig { params(number: Integer).returns(T::Array[Time]) }
   def times_over_next_24_hours(number)
@@ -27,10 +30,5 @@ class QueueUpAlertsService
     (0...number).map do |count|
       start_time + (count * 24.hours.to_f / number)
     end
-  end
-
-  sig { returns(T.untyped) }
-  def alerts
-    Alert.active.all
   end
 end
