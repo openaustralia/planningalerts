@@ -17,17 +17,22 @@ class QueueUpAlertsService
 
   sig { void }
   def call
-    start_time = Time.zone.now
-    count = 0
-    no_alerts = alerts.count
-    alerts.pluck(:id).shuffle.each do |alert_id|
-      time = start_time + (count * 24.hours.to_f / no_alerts)
+    alert_ids = alerts.pluck(:id).shuffle
+    times = times_over_next_24_hours(alert_ids.count)
+    times.zip(alert_ids).each do |time, alert_id|
       ProcessAlertJob.set(wait_until: time).perform_later(alert_id)
-      count += 1
     end
   end
 
   private
+
+  sig { params(number: Integer).returns(T::Array[Time]) }
+  def times_over_next_24_hours(number)
+    start_time = Time.zone.now
+    (0...number).map do |count|
+      start_time + (count * 24.hours.to_f / number)
+    end
+  end
 
   sig { returns(Logger) }
   attr_reader :logger
