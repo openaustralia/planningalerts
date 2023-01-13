@@ -9,16 +9,6 @@ describe QueueUpAlertsService do
     logger
   end
 
-  context "with no active alerts" do
-    it "logs some useful messages" do
-      described_class.call(logger:)
-
-      expect(logger).to have_received(:info).with("Checking 0 active alerts")
-      expect(logger).to have_received(:info).with("Splitting mailing for the next 24 hours - checks an alert roughly every 86400 seconds")
-      expect(logger).to have_received(:info).with("Mailing jobs for the next 24 hours queued")
-    end
-  end
-
   context "with two confirmed alerts" do
     let(:alert1) { create(:confirmed_alert) }
     let(:alert2) { create(:confirmed_alert) }
@@ -26,14 +16,6 @@ describe QueueUpAlertsService do
     before do
       alert1
       alert2
-    end
-
-    it "logs some messages" do
-      described_class.call(logger:)
-
-      expect(logger).to have_received(:info).with("Checking 2 active alerts")
-      expect(logger).to have_received(:info).with("Splitting mailing for the next 24 hours - checks an alert roughly every 43200 seconds")
-      expect(logger).to have_received(:info).with("Mailing jobs for the next 24 hours queued")
     end
 
     it "queues up batches" do

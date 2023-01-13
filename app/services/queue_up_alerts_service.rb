@@ -17,9 +17,6 @@ class QueueUpAlertsService
 
   sig { void }
   def call
-    logger.info "Checking #{alerts.count} active alerts"
-    logger.info "Splitting mailing for the next 24 hours - checks an alert roughly every #{time_between_alerts_in_words}"
-
     start_time = Time.zone.now
     count = 0
     delay = time_between_alerts
@@ -28,19 +25,12 @@ class QueueUpAlertsService
       ProcessAlertJob.set(wait_until: time).perform_later(alert_id)
       count += 1
     end
-
-    logger.info "Mailing jobs for the next 24 hours queued"
   end
 
   private
 
   sig { returns(Logger) }
   attr_reader :logger
-
-  sig { returns(String) }
-  def time_between_alerts_in_words
-    "#{time_between_alerts.round} seconds"
-  end
 
   sig { returns(T.untyped) }
   def alerts
