@@ -19,16 +19,19 @@ class QueueUpAlertsService
 
   sig { params(job_class: T.class_of(ActiveJob::Base), params: T::Array[T.untyped]).void }
   def queue_up_jobs_over_next_24_hours(job_class, params)
-    times_over_next_24_hours(params.count).zip(params).each do |time, param|
+    times_over_next_24_hours(params).each do |time, param|
       job_class.set(wait_until: time).perform_later(param)
     end
   end
 
-  sig { params(number: Integer).returns(T::Array[Time]) }
-  def times_over_next_24_hours(number)
+  sig { params(params: T::Array[T.untyped]).returns(T::Array[[Time, T.untyped]]) }
+  def times_over_next_24_hours(params)
     start_time = Time.zone.now
-    (0...number).map do |count|
-      start_time + (count * 24.hours.to_f / number)
+    number = params.count
+
+    params.map.with_index do |param, count|
+      time = start_time + (count * 24.hours.to_f / number)
+      [time, param]
     end
   end
 end
