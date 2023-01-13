@@ -7,7 +7,7 @@ class ImportApplicationsJob < ApplicationJob
   queue_as :default
 
   sig { params(authority: Authority).void }
-  def perform(authority:)
+  def perform(authority)
     info_logger = AuthorityLogger.new(T.must(authority.id), logger)
     ImportApplicationsService.call(authority:, logger: info_logger)
   end
