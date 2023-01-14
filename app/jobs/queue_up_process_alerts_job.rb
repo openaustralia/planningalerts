@@ -3,10 +3,16 @@
 
 class QueueUpProcessAlertsJob < ApplicationJob
   extend T::Sig
+  include Sidekiq::Job
+
+  # Hopefully it's unlikely that this job will fail, since it only queues up other jobs
+  # But if it were to fail we don't want it to retry automatically in case we end with
+  # a bazillion queued jobs. Also, this job gets run once per day anyway so it will run
+  # again
+  sidekiq_options retry: 0
 
   sig { void }
   def perform
-    # TODO: Need some kind of safety mechanism to handle failures on this so that we don't get a bazillion queued jobs
     QueueUpJobsOverTimeService.call(ProcessAlertJob, 24.hours, Alert.active.pluck(:id).shuffle)
   end
 end
