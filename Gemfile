@@ -28,9 +28,7 @@ gem "rabl"
 gem "validates_email_format_of"
 gem "validate_url"
 
-# Background queue uses sidekiq with redis
-# We need redis namespaces to seperate the production and staging environments
-gem "redis-namespace"
+# Background queue uses sidekiq
 # TODO: Upgrade to sidekiq 7.0
 gem "sidekiq", "<7"
 # Run cron jobs alongside sidekiq. Only use this for jobs that need

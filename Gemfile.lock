@@ -488,8 +488,6 @@ GEM
       json
     redcarpet (3.5.1)
     redis (4.8.0)
-    redis-namespace (1.10.0)
-      redis (>= 4)
     regexp_parser (2.6.1)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -768,7 +766,6 @@ DEPENDENCIES
   rb-inotify
   recaptcha
   redcarpet
-  redis-namespace
   rest-client
   rexml
   rspec-activemodel-mocks
