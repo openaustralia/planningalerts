@@ -2,3 +2,11 @@ elasticsearch_snapshot:
   cron: "every day at 3:20 am Australia/Sydney"
   class: "ElasticsearchSnapshotJob"
   description: "Take a snapshot of planningalerts indexes on elasticsearch and store on S3"
+queue_up_import_applications:
+  cron: "every day at 12 pm Australia/Sydney"
+  class: "QueueUpImportApplicationsJob"
+  description: "Set up queue for applications for all authorities to be imported over the next 24 hours"
+queue_up_process_alerts:
+  cron: "every day at 12 pm Australia/Sydney"
+  class: "QueueUpProcessAlertsJob"
+  description: "Set up queue for all alerts to be processed over the next 24 hours"
