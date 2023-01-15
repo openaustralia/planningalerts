@@ -11,6 +11,8 @@ class QueueUpImportApplicationsJob < ApplicationJob
   # again
   sidekiq_options retry: 0
 
+  # TODO: Add sidekiq-unique-jobs to ensure that we can't have more than one ImportApplicationsJob running at a time
+
   sig { void }
   def perform
     QueueUpJobsOverTimeService.call(ImportApplicationsJob, 24.hours, Authority.active.all.to_a)
