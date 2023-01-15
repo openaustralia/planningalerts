@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-class QueueUpImportApplicationsJob < ApplicationJob
+class QueueUpImportApplicationsJob
   extend T::Sig
   include Sidekiq::Job
 

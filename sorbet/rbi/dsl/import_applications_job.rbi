@@ -7,9 +7,9 @@
 class ImportApplicationsJob
   class << self
     sig { params(authority: ::Authority).returns(T.any(ImportApplicationsJob, FalseClass)) }
-    def perform_later(authority:); end
+    def perform_later(authority); end
 
     sig { params(authority: ::Authority).void }
-    def perform_now(authority:); end
+    def perform_now(authority); end
   end
 end

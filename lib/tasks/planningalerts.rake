@@ -4,8 +4,8 @@ namespace :planningalerts do
   namespace :applications do
     desc "Queue up importing of new applications and sending of emails"
     task import_and_email: :environment do
-      QueueUpImportApplicationsJob.perform_later
-      QueueUpProcessAlertsJob.perform_later
+      QueueUpImportApplicationsJob.perform_async
+      QueueUpProcessAlertsJob.perform_async
     end
   end
 

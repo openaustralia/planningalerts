@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-class QueueUpProcessAlertsJob < ApplicationJob
+class QueueUpProcessAlertsJob
   extend T::Sig
   include Sidekiq::Job
 
