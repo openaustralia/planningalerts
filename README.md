@@ -51,14 +51,14 @@ We use Shopify's [tapioca](https://github.com/Shopify/tapioca) gem to manage all
 
 The code is deployed using Capistrano. To deploy to production run:
 
-    bundle exec cap --set-before stage=production deploy
+    bundle exec cap production deploy
 
 This command is defined in `config/deploy.rb`.
 
 Sometimes you want to deploy an alternate branch, for instance when deploying to the `test` stage.
 In this case you'll need to set the `branch` variable after recipies are loaded by using the `--set` argument instead of `--set-before`, e.g.
 
-    bundle exec cap --set-before stage=test --set branch=a-branch-i-want-to-test deploy
+    bundle exec cap staging --set branch=a-branch-i-want-to-test deploy
 
 View more available Capistrano commands with:
 
@@ -75,7 +75,7 @@ but in the meantime:
 ### Upgrade ruby in staging
 * In the `oaf/infrastructure` repo update `roles/internal/planningalerts/meta/main.yml` to add the new ruby version before the current one. The last listed one is the default. We don't yet want to change the default
 * Install the new ruby on the server by running `ansible-playbook site.yml -l planningalerts`. Remember to set your python virtual environment if you're using that.
-* Deploy new version of the application with upgraded `.ruby-version` to staging by running `bundle exec cap -S stage=test deploy`
+* Deploy new version of the application with upgraded `.ruby-version` to staging by running `bundle exec cap staging deploy`
 * Login to each webserver in turn (as root user). Then, `cd /srv/www/staging/current; gem install bundler:1.17.3`
 * Login to each webserver in turn (as deploy user). Then `cd /srv/www/staging/current; bundle install --gemfile Gemfile --path /srv/www/staging/shared/bundle --deployment --without development test`. This step is necessary if you're upgrading a ruby major version. You might be able to skip it if not.
 * Edit `roles/internal/planningalerts/templates/default` to change the ruby version used by passenger for staging
@@ -84,7 +84,7 @@ in staging to the new version
 * Check deployed staging is still working by going https://www.test.planningalerts.org.au
 
 ### Upgrade ruby in production
-* Deploy new version of the application with upgraded `.ruby-version` to production by running `bundle exec cap -S stage=production deploy`
+* Deploy new version of the application with upgraded `.ruby-version` to production by running `bundle exec cap production deploy`
 * Check deployed production is still working by going https://www.planningalerts.org.au
 * Login to each webserver in turn (as deploy user). Then `cd /srv/www/production/current; bundle install --gemfile Gemfile --path /srv/www/production/shared/bundle --deployment --without development test`. This step is necessary if you're upgrading a ruby major version. You might be able to skip it if not.
 * Edit `roles/internal/planningalerts/templates/default` to change the ruby version used by passenger for production
