@@ -9,8 +9,8 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-# server "web1.planningalerts.org.au", roles: %i[app web db], primary: true
-# server "web2.planningalerts.org.au", roles: %i[app web]
+server "web1.planningalerts.org.au", roles: %i[app web db], primary: true
+server "web2.planningalerts.org.au", roles: %i[app web]
 
 # role-based syntax
 # ==================
@@ -33,6 +33,7 @@
 # Feel free to add new variables to customise your setup.
 
 set :deploy_to, "/srv/www/production"
+set :app_name, "planningalerts"
 
 # Custom SSH Options
 # ==================

@@ -33,6 +33,7 @@ server "web1.planningalerts.org.au.test", roles: %i[app web db], primary: true
 
 set :deploy_to, "/srv/www/production"
 set :app_name, "planningalerts"
+set :honeybadger_env, "development"
 
 # Custom SSH Options
 # ==================
