@@ -192,7 +192,7 @@ class ApiController < ApplicationController
         controller: params[:controller],
         action: params[:action],
         format: params[:format]
-      ),
+      ).to_h,
       request.headers["User-Agent"],
       Time.zone.now.to_f
     )
