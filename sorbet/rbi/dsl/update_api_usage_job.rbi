@@ -6,10 +6,13 @@
 
 class UpdateApiUsageJob
   class << self
-    sig { params(api_key: ::ApiKey, date: ::Date).returns(T.any(UpdateApiUsageJob, FalseClass)) }
-    def perform_later(api_key:, date:); end
+    sig { params(api_key_id: ::Integer, date_as_string: ::String).returns(String) }
+    def perform_async(api_key_id:, date_as_string:); end
 
-    sig { params(api_key: ::ApiKey, date: ::Date).void }
-    def perform_now(api_key:, date:); end
+    sig { params(interval: T.any(DateTime, Time), api_key_id: ::Integer, date_as_string: ::String).returns(String) }
+    def perform_at(interval, api_key_id:, date_as_string:); end
+
+    sig { params(interval: Numeric, api_key_id: ::Integer, date_as_string: ::String).returns(String) }
+    def perform_in(interval, api_key_id:, date_as_string:); end
   end
 end
