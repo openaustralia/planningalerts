@@ -1,7 +1,7 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.17.1"
 
-set :application, "planningalerts.org.au"
+set :application, "planningalerts"
 set :repo_url, "https://github.com/openaustralia/planningalerts.git"
 
 # Default branch is :master
