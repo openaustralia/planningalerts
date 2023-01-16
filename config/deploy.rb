@@ -22,7 +22,7 @@ set :repo_url, "https://github.com/openaustralia/planningalerts.git"
 
 # Default value for :linked_files is []
 # append :linked_files, "config/database.yml", 'config/master.key'
-append :linked_files, "config/database.yml", "config/throttling.yml", "config/newrelic.yml", ".env.production", "public/sitemap.xml"
+append :linked_files, "config/database.yml", "config/newrelic.yml", ".env.production", "public/sitemap.xml"
 
 # "#{release_path}/public/assets" => "#{shared_path}/assets"
 
