@@ -195,8 +195,10 @@ group :development do
   gem "rack-mini-profiler"
 
   # For deployment
-  # TODO: Upgrade to capistrano 3
-  gem "capistrano", "~> 2"
+  gem "capistrano", require: false
+  gem "capistrano-bundler", require: false
+  gem "capistrano-rails", require: false
+  gem "capistrano-rvm", require: false
 
   # Help with code quality
   gem "brakeman"
