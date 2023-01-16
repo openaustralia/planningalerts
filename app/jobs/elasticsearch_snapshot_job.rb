@@ -1,10 +1,9 @@
 # typed: strict
 # frozen_string_literal: true
 
-class ElasticsearchSnapshotJob < ApplicationJob
+class ElasticsearchSnapshotJob
   extend T::Sig
-
-  queue_as :default
+  include Sidekiq::Job
 
   sig { void }
   def perform

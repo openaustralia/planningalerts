@@ -6,10 +6,13 @@
 
 class ElasticsearchSnapshotJob
   class << self
-    sig { returns(T.any(ElasticsearchSnapshotJob, FalseClass)) }
-    def perform_later; end
+    sig { returns(String) }
+    def perform_async; end
 
-    sig { void }
-    def perform_now; end
+    sig { params(interval: T.any(DateTime, Time)).returns(String) }
+    def perform_at(interval); end
+
+    sig { params(interval: Numeric).returns(String) }
+    def perform_in(interval); end
   end
 end
