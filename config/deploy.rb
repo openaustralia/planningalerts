@@ -44,6 +44,21 @@ set :rails_env, "production"
 # TODO: This way of restarting passenger is deprecated. So, it would be good to move over to the new way
 set :passenger_restart_with_touch, true
 
+set :aws_ec2_regions, ['ap-southeast-2']
+# We don't want to use the stage tag to filter because we have both production and staging on the same machine
+set :aws_ec2_default_filters, (proc {
+  [
+    {
+      name: "tag:#{fetch(:aws_ec2_application_tag)}",
+      values: [fetch(:aws_ec2_application)]
+    },
+    {
+      name: 'instance-state-name',
+      values: ['running']
+    }
+  ]
+})
+
 namespace :foreman do
   desc "Export the Procfile to Ubuntu's upstart scripts"
   task :export do
