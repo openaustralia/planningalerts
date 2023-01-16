@@ -45,3 +45,45 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 set :rails_env, "production"
 # TODO: This way of restarting passenger is deprecated. So, it would be good to move over to the new way
 set :passenger_restart_with_touch, true
+
+namespace :foreman do
+  desc "Export the Procfile to Ubuntu's upstart scripts"
+  task :export do
+    on roles(:app) do
+      execute "cd #{current_path} && sudo bundle exec foreman export systemd /etc/systemd/system -e .env.production -u deploy -a #{fetch(:app_name)}-#{fetch(:stage)} -f Procfile.production -l #{shared_path}/log --root #{current_path}"
+    end
+  end
+
+  desc "Start the application services"
+  task :start do
+    on roles(:app) do
+      sudo "systemctl enable #{fetch(:app_name)}-#{fetch(:stage)}.target"
+    end
+  end
+
+  desc "Stop the application services"
+  task :stop do
+    on roles(:app) do
+      sudo "systemctl stop #{fetch(:app_name)}-#{fetch(:stage)}.target"
+    end
+  end
+
+  desc "Restart the application services"
+  task :restart do
+    on roles(:app) do
+      sudo "systemctl restart #{fetch(:app_name)}-#{fetch(:stage)}.target"
+    end
+  end
+
+  # This only strictly needs to get run on the first deploy
+  desc "Enable the application services"
+  task :enable do
+    on roles(:app) do
+      sudo "systemctl enable #{fetch(:app_name)}-#{fetch(:stage)}.target"
+    end
+  end
+end
+
+before "deploy:restart", "foreman:restart"
+before "foreman:restart", "foreman:enable"
+before "foreman:enable", "foreman:export"
