@@ -4,15 +4,15 @@
 class QueueUpJobsOverTimeService
   extend T::Sig
 
-  sig { params(job_class: T.class_of(ActiveJob::Base), duration: ActiveSupport::Duration, params: T::Array[T.untyped]).void }
+  sig { params(job_class: T.untyped, duration: ActiveSupport::Duration, params: T::Array[T.untyped]).void }
   def self.call(job_class, duration, params)
     new.call(job_class, duration, params)
   end
 
-  sig { params(job_class: T.class_of(ActiveJob::Base), duration: ActiveSupport::Duration, params: T::Array[T.untyped]).void }
+  sig { params(job_class: T.untyped, duration: ActiveSupport::Duration, params: T::Array[T.untyped]).void }
   def call(job_class, duration, params)
     times_over_duration(duration, params).each do |time, param|
-      job_class.set(wait_until: time).perform_later(param)
+      job_class.perform_at(time, param)
     end
   end
 

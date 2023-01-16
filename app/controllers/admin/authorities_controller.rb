@@ -49,8 +49,8 @@ module Admin
 
     sig { void }
     def import
-      authority = Authority.find(params[:id])
-      ImportApplicationsJob.perform_later(authority)
+      params_id = T.cast(params[:id], Numeric)
+      ImportApplicationsSidekiqJob.perform_async(params_id.to_i)
       redirect_to({ action: :show }, notice: t(".success"))
     end
   end
