@@ -32,7 +32,6 @@ aws_ec2_register
 # Feel free to add new variables to customise your setup.
 
 set :deploy_to, "/srv/www/production"
-set :app_name, "planningalerts"
 
 # Custom SSH Options
 # ==================

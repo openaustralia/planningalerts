@@ -32,7 +32,6 @@ server "web1.planningalerts.org.au.test", roles: %i[app web db]
 # Feel free to add new variables to customise your setup.
 
 set :deploy_to, "/srv/www/production"
-set :app_name, "planningalerts"
 set :honeybadger_env, "development"
 
 # Custom SSH Options

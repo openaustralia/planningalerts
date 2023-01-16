@@ -63,28 +63,28 @@ namespace :foreman do
   desc "Export the Procfile to Ubuntu's upstart scripts"
   task :export do
     on roles(:app) do
-      execute "cd #{current_path} && sudo bundle exec foreman export systemd /etc/systemd/system -e .env.production -u deploy -a #{fetch(:app_name)}-#{fetch(:stage)} -f Procfile.production -l #{shared_path}/log --root #{current_path}"
+      execute "cd #{current_path} && sudo bundle exec foreman export systemd /etc/systemd/system -e .env.production -u deploy -a #{fetch(:application)}-#{fetch(:stage)} -f Procfile.production -l #{shared_path}/log --root #{current_path}"
     end
   end
 
   desc "Start the application services"
   task :start do
     on roles(:app) do
-      sudo "systemctl enable #{fetch(:app_name)}-#{fetch(:stage)}.target"
+      sudo "systemctl enable #{fetch(:application)}-#{fetch(:stage)}.target"
     end
   end
 
   desc "Stop the application services"
   task :stop do
     on roles(:app) do
-      sudo "systemctl stop #{fetch(:app_name)}-#{fetch(:stage)}.target"
+      sudo "systemctl stop #{fetch(:application)}-#{fetch(:stage)}.target"
     end
   end
 
   desc "Restart the application services"
   task :restart do
     on roles(:app) do
-      sudo "systemctl restart #{fetch(:app_name)}-#{fetch(:stage)}.target"
+      sudo "systemctl restart #{fetch(:application)}-#{fetch(:stage)}.target"
     end
   end
 
@@ -92,7 +92,7 @@ namespace :foreman do
   desc "Enable the application services"
   task :enable do
     on roles(:app) do
-      sudo "systemctl enable #{fetch(:app_name)}-#{fetch(:stage)}.target"
+      sudo "systemctl enable #{fetch(:application)}-#{fetch(:stage)}.target"
     end
   end
 end
