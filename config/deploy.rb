@@ -1,8 +1,8 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.17.1"
 
-set :application, "my_app_name"
-set :repo_url, "git@example.com:me/my_repo.git"
+set :application, "planningalerts.org.au"
+set :repo_url, "https://github.com/openaustralia/planningalerts.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -22,9 +22,13 @@ set :repo_url, "git@example.com:me/my_repo.git"
 
 # Default value for :linked_files is []
 # append :linked_files, "config/database.yml", 'config/master.key'
+append :linked_files, "config/database.yml", "config/throttling.yml", "config/newrelic.yml", ".env.production", "public/sitemap.xml"
+
+# "#{release_path}/public/assets" => "#{shared_path}/assets"
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "tmp/webpacker", "public/system", "vendor", "storage"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "public/sitemaps"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
