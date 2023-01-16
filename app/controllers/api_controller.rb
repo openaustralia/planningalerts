@@ -184,7 +184,7 @@ class ApiController < ApplicationController
 
   sig { void }
   def log_api_call
-    LogApiCallJob.perform_later(
+    LogApiCallJob.perform_async(
       api_key: request.query_parameters["key"],
       ip_address: request.remote_ip,
       query: request.fullpath,

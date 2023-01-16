@@ -1,10 +1,9 @@
 # typed: strict
 # frozen_string_literal: true
 
-class LogApiCallJob < ApplicationJob
+class LogApiCallJob
   extend T::Sig
-
-  queue_as :default
+  include Sidekiq::Job
 
   # time parameter needs to be serialised as a float because rails
   # won't serialise time for us here. We also don't really want to round

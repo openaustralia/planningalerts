@@ -14,20 +14,34 @@ class LogApiCallJob
         params: T::Hash[::String, T.nilable(T.any(::Integer, ::String))],
         user_agent: T.nilable(::String),
         time_as_float: ::Float
-      ).returns(T.any(LogApiCallJob, FalseClass))
+      ).returns(String)
     end
-    def perform_later(api_key:, ip_address:, query:, params:, user_agent:, time_as_float:); end
+    def perform_async(api_key:, ip_address:, query:, params:, user_agent:, time_as_float:); end
 
     sig do
       params(
+        interval: T.any(DateTime, Time),
         api_key: ::String,
         ip_address: ::String,
         query: ::String,
         params: T::Hash[::String, T.nilable(T.any(::Integer, ::String))],
         user_agent: T.nilable(::String),
         time_as_float: ::Float
-      ).void
+      ).returns(String)
     end
-    def perform_now(api_key:, ip_address:, query:, params:, user_agent:, time_as_float:); end
+    def perform_at(interval, api_key:, ip_address:, query:, params:, user_agent:, time_as_float:); end
+
+    sig do
+      params(
+        interval: Numeric,
+        api_key: ::String,
+        ip_address: ::String,
+        query: ::String,
+        params: T::Hash[::String, T.nilable(T.any(::Integer, ::String))],
+        user_agent: T.nilable(::String),
+        time_as_float: ::Float
+      ).returns(String)
+    end
+    def perform_in(interval, api_key:, ip_address:, query:, params:, user_agent:, time_as_float:); end
   end
 end
