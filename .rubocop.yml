@@ -11,6 +11,7 @@ AllCops:
       - config/*
       - config/initializers/*
       - config/environments/*
+      - config/deploy/*
       - bin/*
       - vendor/**/*
 
