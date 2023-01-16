@@ -185,16 +185,16 @@ class ApiController < ApplicationController
   sig { void }
   def log_api_call
     LogApiCallJob.perform_async(
-      api_key: request.query_parameters["key"],
-      ip_address: request.remote_ip,
-      query: request.fullpath,
-      params: permitted_params.merge(
+      request.query_parameters["key"],
+      request.remote_ip,
+      request.fullpath,
+      permitted_params.merge(
         controller: params[:controller],
         action: params[:action],
         format: params[:format]
       ),
-      user_agent: request.headers["User-Agent"],
-      time_as_float: Time.zone.now.to_f
+      request.headers["User-Agent"],
+      Time.zone.now.to_f
     )
   end
 

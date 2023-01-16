@@ -18,7 +18,7 @@ class LogApiCallJob
       time_as_float: Float
     ).void
   end
-  def perform(api_key:, ip_address:, query:, params:, user_agent:, time_as_float:)
+  def perform(api_key, ip_address, query, params, user_agent, time_as_float)
     LogApiCallService.call(
       api_key:,
       ip_address:,

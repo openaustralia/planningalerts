@@ -16,7 +16,7 @@ class LogApiCallJob
         time_as_float: ::Float
       ).returns(String)
     end
-    def perform_async(api_key:, ip_address:, query:, params:, user_agent:, time_as_float:); end
+    def perform_async(api_key, ip_address, query, params, user_agent, time_as_float); end
 
     sig do
       params(
@@ -29,7 +29,7 @@ class LogApiCallJob
         time_as_float: ::Float
       ).returns(String)
     end
-    def perform_at(interval, api_key:, ip_address:, query:, params:, user_agent:, time_as_float:); end
+    def perform_at(interval, api_key, ip_address, query, params, user_agent, time_as_float); end
 
     sig do
       params(
@@ -42,6 +42,6 @@ class LogApiCallJob
         time_as_float: ::Float
       ).returns(String)
     end
-    def perform_in(interval, api_key:, ip_address:, query:, params:, user_agent:, time_as_float:); end
+    def perform_in(interval, api_key, ip_address, query, params, user_agent, time_as_float); end
   end
 end
