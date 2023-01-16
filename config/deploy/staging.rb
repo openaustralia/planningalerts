@@ -9,8 +9,7 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-server "web1.planningalerts.org.au", roles: %i[app web db]
-server "web2.planningalerts.org.au", roles: %i[app web db]
+aws_ec2_register
 
 # role-based syntax
 # ==================
