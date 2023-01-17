@@ -7,3 +7,13 @@
   ga('create', '<%= ENV.fetch("GOOGLE_ANALYTICS_KEY", nil) %>', 'auto');
   ga('send', 'pageview');
 </script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=<%= ENV.fetch("GOOGLE_ANALYTICS_MEASUREMENT_ID", nil) %>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '<%= ENV.fetch("GOOGLE_ANALYTICS_MEASUREMENT_ID", nil) %>');
+</script>
