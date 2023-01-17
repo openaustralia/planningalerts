@@ -7,6 +7,8 @@
   = yield(:page_title).presence || "Email alerts of planning applications near you"
   | PlanningAlerts
 
+= render "analytics"
+
 = stylesheet_link_tag "standard/all.css", media: "screen"
 = stylesheet_link_tag "standard/print.css", media: "print"
 /[if IE]
