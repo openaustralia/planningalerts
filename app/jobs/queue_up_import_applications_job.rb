@@ -13,6 +13,6 @@ class QueueUpImportApplicationsJob
 
   sig { void }
   def perform
-    QueueUpJobsOverTimeService.call(ImportApplicationsSidekiqJob, 24.hours, Authority.active.pluck(:id))
+    QueueUpJobsOverTimeService.call(ImportApplicationsJob, 24.hours, Authority.active.pluck(:id))
   end
 end

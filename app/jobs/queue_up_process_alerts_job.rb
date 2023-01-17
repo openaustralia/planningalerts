@@ -13,6 +13,6 @@ class QueueUpProcessAlertsJob
 
   sig { void }
   def perform
-    QueueUpJobsOverTimeService.call(ProcessAlertSidekiqJob, 24.hours, Alert.active.pluck(:id).shuffle)
+    QueueUpJobsOverTimeService.call(ProcessAlertJob, 24.hours, Alert.active.pluck(:id).shuffle)
   end
 end

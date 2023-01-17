@@ -1,8 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-# TODO: Remove this when we can
-class ProcessAlertSidekiqJob
+class ProcessAlertJob
   extend T::Sig
   include Sidekiq::Job
 

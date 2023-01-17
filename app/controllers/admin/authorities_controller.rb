@@ -50,7 +50,7 @@ module Admin
     sig { void }
     def import
       params_id = T.cast(params[:id], Numeric)
-      ImportApplicationsSidekiqJob.perform_async(params_id.to_i)
+      ImportApplicationsJob.perform_async(params_id.to_i)
       redirect_to({ action: :show }, notice: t(".success"))
     end
   end
