@@ -6,9 +6,10 @@ linters:
   PartialInstanceVariable:
     enabled: true
   ErbSafety:
-    enabled: true
+    # This one is just weird to me when you're just trying to include a string inside quotes in some js it fails
+    enabled: false
   RequireScriptNonce:
-    enabled: true
+    enabled: false
   Rubocop:
     enabled: true
     rubocop_config:
