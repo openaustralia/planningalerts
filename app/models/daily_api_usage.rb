@@ -6,6 +6,14 @@ class DailyApiUsage < ApplicationRecord
 
   belongs_to :api_key
 
+  sig { params(api_key_id: Integer, date: Date).void }
+  def self.increment(api_key_id:, date:)
+    usage = DailyApiUsage.find_or_create_by!(api_key_id:, date:)
+    # rubocop:disable Rails/SkipsModelValidations
+    usage.increment!(:count)
+    # rubocop:enable Rails/SkipsModelValidations
+  end
+
   sig { params(date_from: Date, date_to: Date, number: Integer).returns(T::Hash[ApiKey, Integer]) }
   def self.top_usage_in_date_range(date_from:, date_to:, number:)
     count = where(date: date_from..date_to).group(:api_key_id).order("SUM(count) DESC").limit(number).sum(:count)
