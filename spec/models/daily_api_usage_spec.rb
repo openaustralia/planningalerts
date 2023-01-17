@@ -27,4 +27,29 @@ describe DailyApiUsage do
       expect(result).to eq({ key3 => 214, key1 => 157 })
     end
   end
+
+  describe ".increment" do
+    let(:key) { create(:api_key) }
+    let(:date) { Date.new(2023, 2, 1) }
+
+    it "creates a record with a count of 1 if one doesn't exist" do
+      described_class.increment(api_key_id: key.id, date:)
+      expect(described_class.find_by!(api_key_id: key.id, date:).count).to eq 1
+    end
+
+    it "adds one to the value if it already exists" do
+      described_class.create!(api_key_id: key.id, date:, count: 3)
+      described_class.increment(api_key_id: key.id, date:)
+      expect(described_class.find_by!(api_key_id: key.id, date:).count).to eq 4
+    end
+
+    it "handles several requests being made simultaneously" do
+      # Simulate what happens when two requests for a new date (the same new date) or made at the same time
+      allow(described_class).to receive(:find_or_create_by!).once.and_raise(ActiveRecord::RecordNotUnique)
+      allow(described_class).to receive(:find_or_create_by!).once.and_call_original
+
+      described_class.increment(api_key_id: key.id, date:)
+      expect(described_class.find_by!(api_key_id: key.id, date:).count).to eq 1
+    end
+  end
 end

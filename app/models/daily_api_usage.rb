@@ -8,7 +8,11 @@ class DailyApiUsage < ApplicationRecord
 
   sig { params(api_key_id: Integer, date: Date).void }
   def self.increment(api_key_id:, date:)
-    usage = DailyApiUsage.find_or_create_by!(api_key_id:, date:)
+    begin
+      usage = DailyApiUsage.find_or_create_by!(api_key_id:, date:)
+    rescue ActiveRecord::RecordNotUnique
+      retry
+    end
     # rubocop:disable Rails/SkipsModelValidations
     usage.increment!(:count)
     # rubocop:enable Rails/SkipsModelValidations
