@@ -1,17 +1,16 @@
-%head
-  %meta{ content: "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
-  %meta{ name: "viewport", content: "width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1" }
-  - if yield(:meta_description)
-    %meta{ name: "Description", content: yield(:meta_description) }
+%meta{ content: "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
+%meta{ name: "viewport", content: "width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1" }
+- if yield(:meta_description)
+  %meta{ name: "Description", content: yield(:meta_description) }
 
-  %title
-    = yield(:page_title).presence || "Email alerts of planning applications near you"
-    | PlanningAlerts
+%title
+  = yield(:page_title).presence || "Email alerts of planning applications near you"
+  | PlanningAlerts
 
-  = stylesheet_link_tag "standard/all.css", media: "screen"
-  = stylesheet_link_tag "standard/print.css", media: "print"
-  /[if IE]
-    = stylesheet_link_tag "standard/ie.css", media: "screen"
+= stylesheet_link_tag "standard/all.css", media: "screen"
+= stylesheet_link_tag "standard/print.css", media: "print"
+/[if IE]
+  = stylesheet_link_tag "standard/ie.css", media: "screen"
 
-  = csrf_meta_tag
-  = yield :extra_meta_tags
+= csrf_meta_tag
+= yield :extra_meta_tags
