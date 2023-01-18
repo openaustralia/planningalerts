@@ -12,17 +12,17 @@ class ApplicationsController < ApplicationController
   def index
     authority_id = T.cast(params[:authority_id], T.nilable(String))
 
-    description = +"Recent applications"
+    description = +"Recent applications within the last #{Application.nearby_and_recent_max_age_months} months"
 
     if authority_id
       # TODO: Handle the situation where the authority name isn't found
       authority = Authority.find_short_name_encoded!(authority_id)
-      apps = authority.applications.with_first_version.order("date_scraped DESC")
       description << " from #{authority.full_name_and_state}"
+      apps = authority.applications
     else
-      description << " within the last #{Application.nearby_and_recent_max_age_months} months"
-      apps = Application.with_first_version.order("date_scraped DESC").where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
+      apps = Application
     end
+    apps = apps.with_first_version.order("date_scraped DESC").where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
 
     @authority = T.let(authority, T.nilable(Authority))
     @description = T.let(description, T.nilable(String))
