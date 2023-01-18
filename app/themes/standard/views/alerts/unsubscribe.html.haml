@@ -7,6 +7,8 @@
       %strong= @alert.address
       (within #{meters_in_words(@alert.radius_meters.to_f)}).
   %p
-    If you have unsubscribed because you would like to receive alerts at a different email address, or were getting too many emails,
-    = link_to "you could always create a new alert with a new email address, or for a smaller area?",
-      @alert ? new_alert_path(address: @alert.address, email: @alert.email) : new_alert_path
+    If this was a mistake
+    - if @alert
+      = link_to "you could always create a new alert for the same address", new_alert_path(address: @alert.address)
+    - else
+      = link_to "you could always create a new alert", new_alert_path
