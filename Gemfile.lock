@@ -298,7 +298,7 @@ GEM
       raabro (~> 1.4)
     geocoder (1.8.1)
     geokit (1.13.1)
-    globalid (1.0.0)
+    globalid (1.0.1)
       activesupport (>= 5.0)
     graphql (2.0.16)
     graphql-client (0.18.0)
