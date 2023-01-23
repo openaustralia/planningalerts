@@ -32,11 +32,7 @@ class ApplicationsController < ApplicationController
 
   sig { void }
   def trending
-    @applications = Application
-                    .with_current_version
-                    .where("date_scraped > ?", 4.weeks.ago)
-                    .order(visible_comments_count: :desc)
-                    .limit(20)
+    @applications = Application.trending.limit(20)
   end
 
   # JSON api for returning the number of new scraped applications per day
@@ -66,11 +62,7 @@ class ApplicationsController < ApplicationController
 
   sig { void }
   def address
-    @trending = T.let(Application
-                        .with_current_version
-                        .where("date_scraped > ?", 4.weeks.ago)
-                        .order(visible_comments_count: :desc)
-                        .limit(4), T.untyped)
+    @trending = T.let(Application.trending.limit(4), T.untyped)
   end
 
   sig { void }
@@ -110,11 +102,7 @@ class ApplicationsController < ApplicationController
     end
     return unless @error
 
-    @trending = T.let(Application
-      .with_current_version
-      .where("date_scraped > ?", 4.weeks.ago)
-      .order(visible_comments_count: :desc)
-      .limit(4), T.untyped)
+    @trending = T.let(Application.trending.limit(4), T.untyped)
     render "address"
   end
 
