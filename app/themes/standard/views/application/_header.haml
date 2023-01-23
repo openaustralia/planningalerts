@@ -13,23 +13,23 @@
     #menu
       = image_tag "standard/menu.png", size: "50x50", class: "toggle hideable", alt: "Toggle menu", data: { target: "#menu ul" }
       %ul.hideable-target
-        = li_selected(controller: "/applications", action: "address") do
-          = link_to "Search", address_applications_path
-        = li_selected(controller: "/alerts", action: %w[new create]) do
-          = link_to "Alert", new_alert_path
-        = li_selected(controller: "/static", action: "faq") do
-          = link_to faq_path do
-            %abbr{ title: "Frequently asked questions" } FAQ
-        = li_selected(controller: "/authorities", action: "index") do
-          = link_to "Coverage", authorities_path
-        = li_selected(controller: "/static", action: "get_involved") do
-          = link_to "Get Involved", get_involved_path
-        = li_selected(controller: "/static", action: "api_howto") do
-          = link_to api_howto_path do
-            Get the Data
-        = li_selected(controller: "/static", action: "about") do
-          = link_to "About", about_path
+        = menu_item(root_path) do
+          Search
+        = menu_item(new_alert_path) do
+          Alert
+        = menu_item(faq_path) do
+          %abbr{ title: "Frequently asked questions" } FAQ
+        = menu_item(authorities_path) do
+          Coverage
+        = menu_item(get_involved_path) do
+          Get Involved
+        = menu_item(api_howto_path) do
+          Get the Data
+        = menu_item(about_path) do
+          About
         - if current_user
-          %li{ class: ([:user] + (current_page?(profile_path) ? [:selected] : [])) }= link_to current_user.name_with_fallback, profile_path
+          = menu_item(profile_path, extra_classes: [:user]) do
+            = current_user.name_with_fallback
         - else
-          %li{ class: ([:user] + (current_page?(new_user_session_path) ? [:selected] : [])) }= link_to "Sign In", new_user_session_path
+          = menu_item(new_user_session_path, extra_classes: [:user]) do
+            Sign In

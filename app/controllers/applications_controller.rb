@@ -32,11 +32,7 @@ class ApplicationsController < ApplicationController
 
   sig { void }
   def trending
-    @applications = Application
-                    .with_current_version
-                    .where("date_scraped > ?", 4.weeks.ago)
-                    .order(visible_comments_count: :desc)
-                    .limit(20)
+    @applications = Application.trending.limit(20)
   end
 
   # JSON api for returning the number of new scraped applications per day
@@ -65,7 +61,7 @@ class ApplicationsController < ApplicationController
   end
 
   sig { void }
-  def address
+  def address_results
     params_q = T.cast(params[:q], T.nilable(String))
     params_radius = T.cast(params[:radius], T.nilable(T.any(String, Numeric)))
     params_sort = T.cast(params[:sort], T.nilable(String))
@@ -78,36 +74,31 @@ class ApplicationsController < ApplicationController
     @sort = T.let(sort, T.nilable(String))
     per_page = 30
     @page = T.let(params_page, T.nilable(String))
-    if @q
-      result = GoogleGeocodeService.call(@q)
-      top = result.top
-      if top.nil?
-        @other_addresses = T.let([], T.nilable(T::Array[String]))
-        @error = T.let(result.error, T.nilable(String))
-      else
-        @q = top.full_address
-        @alert = Alert.new(address: @q, user: User.new)
-        @other_addresses = T.must(result.rest).map(&:full_address)
-        @applications = Application.with_current_version.near(
-          [top.lat, top.lng], radius / 1000,
-          units: :km,
-          latitude: "application_versions.lat",
-          longitude: "application_versions.lng"
-        )
-        if sort == "time"
-          @applications = @applications
-                          .reorder("date_scraped DESC")
-        end
-        @applications = @applications.page(params[:page]).per(per_page)
+    result = GoogleGeocodeService.call(T.must(@q))
+    top = result.top
+    if top.nil?
+      @other_addresses = T.let([], T.nilable(T::Array[String]))
+      @error = T.let(result.error, T.nilable(String))
+    else
+      @q = top.full_address
+      @alert = Alert.new(address: @q, user: User.new)
+      @other_addresses = T.must(result.rest).map(&:full_address)
+      @applications = Application.with_current_version.near(
+        [top.lat, top.lng], radius / 1000,
+        units: :km,
+        latitude: "application_versions.lat",
+        longitude: "application_versions.lng"
+      )
+      if sort == "time"
+        @applications = @applications
+                        .reorder("date_scraped DESC")
       end
+      @applications = @applications.page(params[:page]).per(per_page)
     end
-    @trending = T.let(Application
-                        .with_current_version
-                        .where("date_scraped > ?", 4.weeks.ago)
-                        .order(visible_comments_count: :desc)
-                        .limit(4), T.untyped)
-    # Use a different template if there are results to display
-    render "address_results" if @q && @error.nil?
+    return unless @error
+
+    @trending = T.let(Application.trending.limit(4), T.untyped)
+    render "home/index"
   end
 
   sig { void }

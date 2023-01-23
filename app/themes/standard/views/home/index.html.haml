@@ -1,8 +1,8 @@
 - content_for :meta_description, Rails.configuration.planningalerts_meta_description
 
-= render "address_search_preamble"
+= render "home/address_search_preamble"
 
-%form.address-search.formtastic.one-field{ "accept-charset" => "UTF-8", "action" => "/", "method" => "get" }
+%form.address-search.formtastic.one-field{ "accept-charset" => "UTF-8", "action" => address_applications_path, "method" => "get" }
   %fieldset.inputs
     %ol
       %li.string#q_input{ class: ("error" if @error) }
@@ -33,5 +33,5 @@
   = link_to "Participate in research", "https://forms.gle/Ju31FoVazC9qUkqVA", class: "button button-action"
 
 
-= render "trending", applications: @trending
-= render "tweets"
+= render "home/trending", applications: @trending
+= render "home/tweets"

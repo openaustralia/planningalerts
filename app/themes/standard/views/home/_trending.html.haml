@@ -4,6 +4,6 @@
     The most commented on recent applications
 
   .pa-container
-    %ol= render partial: "application_trending", collection: applications, as: :application
+    %ol= render partial: "home/application_trending", collection: applications, as: :application
 
   = link_to "More&hellip;".html_safe, trending_applications_path, class: "cta"
