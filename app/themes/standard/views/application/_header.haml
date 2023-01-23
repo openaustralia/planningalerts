@@ -14,7 +14,7 @@
       = image_tag "standard/menu.png", size: "50x50", class: "toggle hideable", alt: "Toggle menu", data: { target: "#menu ul" }
       %ul.hideable-target
         = li_selected(controller: "/applications", action: "address") do
-          = link_to "Search", address_applications_path
+          = link_to "Search", root_path
         = li_selected(controller: "/alerts", action: %w[new create]) do
           = link_to "Alert", new_alert_path
         = li_selected(controller: "/static", action: "faq") do
