@@ -28,6 +28,8 @@
         = menu_item(about_path) do
           About
         - if current_user
-          %li{ class: ([:user] + (current_page?(profile_path) ? [:selected] : [])) }= link_to current_user.name_with_fallback, profile_path
+          = menu_item(profile_path, extra_classes: [:user]) do
+            = current_user.name_with_fallback
         - else
-          %li{ class: ([:user] + (current_page?(new_user_session_path) ? [:selected] : [])) }= link_to "Sign In", new_user_session_path
+          = menu_item(new_user_session_path, extra_classes: [:user]) do
+            Sign In
