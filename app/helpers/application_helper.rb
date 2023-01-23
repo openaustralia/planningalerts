@@ -9,15 +9,6 @@ module ApplicationHelper
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TextHelper
 
-  sig { params(options: T::Hash[Symbol, T.untyped]).returns(T::Boolean) }
-  def page_matches?(options)
-    if options[:action].is_a?(Array)
-      options[:action].any? { |a| current_page?(controller: options[:controller], action: a) }
-    else
-      current_page?(controller: options[:controller], action: options[:action])
-    end
-  end
-
   sig { params(selected: T::Boolean, block: T.untyped).returns(T.untyped) }
   def li_selected(selected, &block)
     content_tag(:li, capture(&block), class: ("selected" if selected))
