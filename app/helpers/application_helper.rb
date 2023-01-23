@@ -18,9 +18,9 @@ module ApplicationHelper
     end
   end
 
-  sig { params(options: T::Hash[Symbol, T.untyped], block: T.untyped).returns(T.untyped) }
-  def li_selected(options, &block)
-    content_tag(:li, capture(&block), class: ("selected" if page_matches?(options)))
+  sig { params(selected: T::Boolean, block: T.untyped).returns(T.untyped) }
+  def li_selected(selected, &block)
+    content_tag(:li, capture(&block), class: ("selected" if selected))
   end
 
   sig { params(url: String, block: T.untyped).returns(T.untyped) }

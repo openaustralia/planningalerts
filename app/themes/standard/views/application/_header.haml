@@ -13,21 +13,21 @@
     #menu
       = image_tag "standard/menu.png", size: "50x50", class: "toggle hideable", alt: "Toggle menu", data: { target: "#menu ul" }
       %ul.hideable-target
-        = li_selected(controller: "/applications", action: "address") do
+        = li_selected(page_matches?(controller: "/applications", action: "address")) do
           = link_to "Search", root_path
-        = li_selected(controller: "/alerts", action: %w[new create]) do
+        = li_selected(page_matches?(controller: "/alerts", action: %w[new create])) do
           = link_to "Alert", new_alert_path
-        = li_selected(controller: "/static", action: "faq") do
+        = li_selected(page_matches?(controller: "/static", action: "faq")) do
           = link_to faq_path do
             %abbr{ title: "Frequently asked questions" } FAQ
-        = li_selected(controller: "/authorities", action: "index") do
+        = li_selected(page_matches?(controller: "/authorities", action: "index")) do
           = link_to "Coverage", authorities_path
-        = li_selected(controller: "/static", action: "get_involved") do
+        = li_selected(page_matches?(controller: "/static", action: "get_involved")) do
           = link_to "Get Involved", get_involved_path
-        = li_selected(controller: "/static", action: "api_howto") do
+        = li_selected(page_matches?(controller: "/static", action: "api_howto")) do
           = link_to api_howto_path do
             Get the Data
-        = li_selected(controller: "/static", action: "about") do
+        = li_selected(page_matches?(controller: "/static", action: "about")) do
           = link_to "About", about_path
         - if current_user
           %li{ class: ([:user] + (current_page?(profile_path) ? [:selected] : [])) }= link_to current_user.name_with_fallback, profile_path
