@@ -15,7 +15,7 @@
       %ul.hideable-target
         = li_selected(current_page?(root_path)) do
           = link_to "Search", root_path
-        = li_selected(current_page?(new_alert_path) || current_page?(alerts_path)) do
+        = li_selected(current_page?(new_alert_path)) do
           = link_to "Alert", new_alert_path
         = li_selected(current_page?(faq_path)) do
           = link_to faq_path do
