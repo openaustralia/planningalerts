@@ -172,6 +172,7 @@ Rails.application.routes.draw do
   get "how_to_write_a_scraper" => "static#how_to_write_a_scraper"
   get "how_to_lobby_your_local_council" => "static#how_to_lobby_your_local_council"
 
+  get "/" => "applications#address_results", constraints: QueryParamsPresentConstraint.new(:q)
   get "/" => "applications#address", as: :address_applications
 
   ## Use the donations form on OAF for now.
