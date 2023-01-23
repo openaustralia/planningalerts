@@ -22,7 +22,8 @@ module.exports = {
       fuchsia: '#CD4A9A',
       lavender: '#9786AD',
       yellow: '#F4BE53',
-      blue: '#414860'
+      blue: '#414860',
+      green: '#038A81',
     }
 },
   plugins: [

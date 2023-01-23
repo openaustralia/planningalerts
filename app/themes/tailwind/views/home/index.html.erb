@@ -1,6 +1,14 @@
 <div class="container mx-auto">
-  <div class="flex items-center justify-between mt-7">
+  <div class="flex items-center justify-between my-7">
     <h2 class="font-display font-medium text-blue text-4xl max-w-xl">Find out for free what is being built and knocked down in your area.</h2>
     <%= image_tag "tailwind/illustration.svg" %>
+  </div>
+
+  <div class="bg-blue px-28 py-16">
+    <%= form_with url: address_applications_path, method: :get, class: "space-y-6 text-center" do |form| %>
+      <%= form.label :q, "Enter a street address", class: "font-semibold text-4xl text-white" %>
+      <%= form.text_field :q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", class: "text-xl w-full py-4 text-center", required: "required", autofocus: true %>
+      <%= form.submit "Search", name: nil, class: "text-xl text-white bg-green px-16 py-4" %>
+    <% end %>
   </div>
 </div>
