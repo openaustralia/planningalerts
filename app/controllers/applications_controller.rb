@@ -61,11 +61,6 @@ class ApplicationsController < ApplicationController
   end
 
   sig { void }
-  def address
-    @trending = T.let(Application.trending.limit(4), T.untyped)
-  end
-
-  sig { void }
   def address_results
     params_q = T.cast(params[:q], T.nilable(String))
     params_radius = T.cast(params[:radius], T.nilable(T.any(String, Numeric)))
@@ -103,7 +98,7 @@ class ApplicationsController < ApplicationController
     return unless @error
 
     @trending = T.let(Application.trending.limit(4), T.untyped)
-    render "address"
+    render "home/index"
   end
 
   sig { void }
