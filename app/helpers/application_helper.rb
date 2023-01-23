@@ -9,6 +9,13 @@ module ApplicationHelper
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TextHelper
 
+  sig { params(path: String, block: T.untyped).returns(T.untyped) }
+  def menu_item(path, &block)
+    li_selected(current_page?(path)) do
+      link_to(capture(&block), path)
+    end
+  end
+
   sig { params(selected: T::Boolean, block: T.untyped).returns(T.untyped) }
   def li_selected(selected, &block)
     content_tag(:li, capture(&block), class: ("selected" if selected))
