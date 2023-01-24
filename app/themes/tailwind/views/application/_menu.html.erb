@@ -1,7 +1,19 @@
 <ul class="font-medium text-lg flex items-start space-x-6 text-blue">
-  <li class="border-b-4">Home</li>
+  <li class="<%= class_names("border-b-4" => current_page?(root_path)) %>"><%= link_to "Home", root_path %></li>
   <li>Applications</li>
-  <li>FAQ</li>
-  <li>About</li>
-  <li><%= render "application/svg/user" %></li>
+  <li class="<%= class_names("border-b-4" => current_page?(faq_path)) %>"><%= link_to_unless_current "FAQ", faq_path %></li>
+  <li class="<%= class_names("border-b-4" => current_page?(about_path)) %>"><%= link_to_unless_current "About", about_path %></li>
+  <% if current_user %>
+    <li class="<%= class_names("border-b-4" => current_page?(profile_path)) %>">
+      <%= link_to_unless_current profile_path do %>
+        <%= link_to profile_path do %>
+          <%= render "application/svg/user" %>
+        <% end %>
+      <% end %>
+    </li>
+  <% else %>
+    <li class="<%= class_names("border-b-4" => current_page?(new_user_session_path)) %>">
+      <%= link_to_unless_current "Sign In", new_user_session_path %>
+    </li>
+  <% end %>
 </ul>
