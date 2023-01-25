@@ -1,27 +1,32 @@
-%h1 For the attention of the General Manager / Planning Manager / Planning Department
+!!! 5
+%html
+  %head
+    %meta{ content: "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
+  %body
+    %h1 For the attention of the General Manager / Planning Manager / Planning Department
 
-%table
-  %tr
-    %td Application
-    %td= @comment.application.council_reference
-  %tr
-    %td Address
-    %td= @comment.application.address
-  %tr
-    %td Description
-    %td= @comment.application.description
-  %tr
-    %td Name of commenter
-    %td= @comment.name
-  %tr
-    %td Address of commenter
-    %td= @comment.address
-  %tr
-    %td Email of commenter
-    %td= @comment.email
+    %table
+      %tr
+        %td Application
+        %td= @comment.application.council_reference
+      %tr
+        %td Address
+        %td= @comment.application.address
+      %tr
+        %td Description
+        %td= @comment.application.description
+      %tr
+        %td Name of commenter
+        %td= @comment.name
+      %tr
+        %td Address of commenter
+        %td= @comment.address
+      %tr
+        %td Email of commenter
+        %td= @comment.email
 
-%h2 Comment
-= comment_as_html(@comment.text)
+    %h2 Comment
+    = comment_as_html(@comment.text)
 
-%hr
-= render "footer", comment: @comment
+    %hr
+    = render "footer", comment: @comment
