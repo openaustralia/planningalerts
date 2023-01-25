@@ -146,7 +146,7 @@ gem "flipper-redis"
 gem "flipper-ui"
 
 # Testing this out for application performance monitoring
-gem "skylight"
+# gem "skylight"
 
 group :test do
   gem "capybara"
