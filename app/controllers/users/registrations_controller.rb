@@ -76,9 +76,9 @@ module Users
     # end
 
     # The path used after sign up for inactive accounts.
-    sig { params(resource: User).returns(String) }
-    def after_inactive_sign_up_path_for(resource)
-      after_sign_in_path_for(resource)
+    sig { params(_resource: User).returns(String) }
+    def after_inactive_sign_up_path_for(_resource)
+      helpers.check_email_user_registration_path
     end
   end
 end
