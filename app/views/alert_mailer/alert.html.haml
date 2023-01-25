@@ -1,6 +1,7 @@
-!!!
+!!! 5
 %html
   %head
+    %meta{ content: "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
     -# rubocop:disable Rails/OutputSafety
     %style= assets_manifest.find_sources("email.css").first.to_s.html_safe
     -# rubocop:enable Rails/OutputSafety
