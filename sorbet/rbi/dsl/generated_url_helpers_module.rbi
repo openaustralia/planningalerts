@@ -120,6 +120,9 @@ module GeneratedUrlHelpersModule
   def cancel_user_registration_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def check_email_user_registration_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def comment_reports_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }

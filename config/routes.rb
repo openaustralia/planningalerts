@@ -83,7 +83,7 @@ Rails.application.routes.draw do
     # After people fill in the form to register it redirects to this page
     # which asks people to go to their email and confirm their email address
     # TODO: I shouldn't need to prefix the route with users here. Why is this happening? What have I done wrong?
-    get "users/sign_up/check_email",  to: "users/registrations#check_email"
+    get "users/sign_up/check_email",  to: "users/registrations#check_email", as: "check_email_user_registration"
   end
 
   namespace :users do
