@@ -31,6 +31,9 @@ module Users
       end
     end
 
+    sig { void }
+    def check_email; end
+
     # GET /resource/edit
     # def edit
     #   super

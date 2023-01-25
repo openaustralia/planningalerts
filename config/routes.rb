@@ -78,6 +78,13 @@ Rails.application.routes.draw do
     confirmations: "users/confirmations",
     registrations: "users/registrations"
   }
+  
+  devise_scope :user do
+    # After people fill in the form to register it redirects to this page
+    # which asks people to go to their email and confirm their email address
+    # TODO: I shouldn't need to prefix the route with users here. Why is this happening? What have I done wrong?
+    get "users/sign_up/check_email",  to: "users/registrations#check_email"
+  end
 
   namespace :users do
     resource :activation, only: [:new, :create, :edit, :update] do
