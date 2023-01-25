@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gem "bootsnap", require: false
 gem "mysql2"
-gem "rails", "7.0.4"
+gem "rails", "7.0.4.2"
 gem "rake"
 
 # API

@@ -17,7 +17,7 @@ class GlobalID
   def ==(other); end
 
   # source://globalid//lib/global_id/global_id.rb#49
-  def app(*_arg0, &_arg1); end
+  def app(*_arg0, **_arg1, &_arg2); end
 
   # source://globalid//lib/global_id/global_id.rb#63
   def eql?(other); end
@@ -32,19 +32,19 @@ class GlobalID
   def model_class; end
 
   # source://globalid//lib/global_id/global_id.rb#49
-  def model_id(*_arg0, &_arg1); end
+  def model_id(*_arg0, **_arg1, &_arg2); end
 
   # source://globalid//lib/global_id/global_id.rb#49
-  def model_name(*_arg0, &_arg1); end
+  def model_name(*_arg0, **_arg1, &_arg2); end
 
   # source://globalid//lib/global_id/global_id.rb#49
-  def params(*_arg0, &_arg1); end
+  def params(*_arg0, **_arg1, &_arg2); end
 
   # source://globalid//lib/global_id/global_id.rb#72
   def to_param; end
 
   # source://globalid//lib/global_id/global_id.rb#49
-  def to_s(*_arg0, &_arg1); end
+  def to_s(*_arg0, **_arg1, &_arg2); end
 
   # Returns the value of attribute uri.
   #
@@ -368,12 +368,6 @@ end
 # source://globalid//lib/global_id/signed_global_id.rb#6
 class SignedGlobalID::ExpiredMessage < ::StandardError; end
 
-# source://globalid//lib/global_id/uri/gid.rb#6
-module URI
-  include ::URI::RFC2396_REGEXP
-  extend ::URI::Escape
-end
-
 # source://globalid//lib/global_id/uri/gid.rb#27
 class URI::GID < ::URI::Generic
   # URI::GID encodes an app unique reference to a specific model as an URI.
@@ -397,7 +391,7 @@ class URI::GID < ::URI::Generic
   #
   # Read the documentation for +parse+, +create+ and +build+ for more.
   #
-  # source://uri/0.10.0/uri/generic.rb#244
+  # source://uri/0.11.0/uri/generic.rb#243
   def app; end
 
   # Returns the value of attribute model_id.
@@ -438,29 +432,29 @@ class URI::GID < ::URI::Generic
 
   private
 
-  # source://globalid//lib/global_id/uri/gid.rb#129
+  # source://globalid//lib/global_id/uri/gid.rb#126
   def check_host(host); end
 
-  # source://globalid//lib/global_id/uri/gid.rb#134
+  # source://globalid//lib/global_id/uri/gid.rb#131
   def check_path(path); end
 
-  # source://globalid//lib/global_id/uri/gid.rb#139
+  # source://globalid//lib/global_id/uri/gid.rb#136
   def check_scheme(scheme); end
 
-  # source://globalid//lib/global_id/uri/gid.rb#171
+  # source://globalid//lib/global_id/uri/gid.rb#168
   def parse_query_params(query); end
 
-  # source://globalid//lib/global_id/uri/gid.rb#147
+  # source://globalid//lib/global_id/uri/gid.rb#144
   def set_model_components(path, validate = T.unsafe(nil)); end
 
   # @raise [URI::InvalidComponentError]
   #
-  # source://globalid//lib/global_id/uri/gid.rb#157
+  # source://globalid//lib/global_id/uri/gid.rb#154
   def validate_component(component); end
 
   # @raise [MissingModelIdError]
   #
-  # source://globalid//lib/global_id/uri/gid.rb#164
+  # source://globalid//lib/global_id/uri/gid.rb#161
   def validate_model_id(model_id, model_name); end
 
   class << self
@@ -521,8 +515,3 @@ URI::GID::COMPONENT = T.let(T.unsafe(nil), Array)
 #
 # source://globalid//lib/global_id/uri/gid.rb#32
 class URI::GID::MissingModelIdError < ::URI::InvalidComponentError; end
-
-# Extracts model_name and model_id from the URI path.
-#
-# source://globalid//lib/global_id/uri/gid.rb#127
-URI::GID::PATH_REGEXP = T.let(T.unsafe(nil), Regexp)
