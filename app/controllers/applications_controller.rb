@@ -4,8 +4,6 @@
 class ApplicationsController < ApplicationController
   extend T::Sig
 
-  # TODO: Switch actions from JS to JSON format and remove this
-  skip_before_action :verify_authenticity_token, only: :per_week
   before_action :check_application_redirect, only: %i[show nearby]
 
   sig { void }
