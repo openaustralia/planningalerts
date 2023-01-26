@@ -41,7 +41,7 @@ class ApplicationsController < ApplicationController
 
     authority = Authority.find_short_name_encoded!(params_authority_id)
     respond_to do |format|
-      format.js do
+      format.json do
         render json: authority.new_applications_per_week
       end
     end
