@@ -55,8 +55,6 @@ module Users
     end
 
     sig { void }
-    def check_email
-      render "create"
-    end
+    def check_email; end
   end
 end
