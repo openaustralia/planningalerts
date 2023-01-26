@@ -31,6 +31,7 @@ module Users
         render "new"
       else
         @user.send_activation_instructions
+        redirect_to check_email_users_activation_url
       end
     end
 
