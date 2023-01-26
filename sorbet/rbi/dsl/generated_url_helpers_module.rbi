@@ -252,9 +252,6 @@ module GeneratedUrlHelpersModule
   def new_users_activation_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def per_day_authority_applications_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def per_week_authority_applications_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
