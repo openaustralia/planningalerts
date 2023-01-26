@@ -53,9 +53,8 @@ module Users
       end
     end
 
-    # This page is only accessible in development
     sig { void }
-    def now_check_your_email
+    def check_email
       render "create"
     end
   end

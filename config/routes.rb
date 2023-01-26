@@ -88,9 +88,7 @@ Rails.application.routes.draw do
 
   namespace :users do
     resource :activation, only: [:new, :create, :edit, :update] do
-      # Only show this in development. Useful for seeing what the page looks like
-      # when it says "now check your email"
-      get :now_check_your_email if Rails.env.development?      
+      get :check_email
     end
   end
 
