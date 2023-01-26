@@ -62,10 +62,11 @@ class ApplicationsController < ApplicationController
     result = GoogleGeocodeService.call(T.must(@q))
     top = result.top
     if top.nil?
+      @full_address = @q
       @other_addresses = T.let([], T.nilable(T::Array[String]))
       @error = T.let(result.error, T.nilable(String))
     else
-      @q = top.full_address
+      @full_address = T.let(top.full_address, T.nilable(String))
       @alert = Alert.new(address: @q, user: User.new)
       @other_addresses = T.must(result.rest).map(&:full_address)
       @applications = Application.with_current_version.near(

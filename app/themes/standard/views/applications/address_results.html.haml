@@ -1,6 +1,6 @@
 - content_for :meta_description, Rails.configuration.planningalerts_meta_description
 
-%h3 Applications within #{meters_in_words(@radius)} of #{@q}
+%h3 Applications within #{meters_in_words(@radius)} of #{@full_address}
 
 - unless @other_addresses.empty?
   %h4 Or did you want?
@@ -10,7 +10,7 @@
 
 - if @applications.empty?
   %p
-    Unfortunately, we don't know of any applications near #{@q}.
+    Unfortunately, we don't know of any applications near #{@full_address}.
     This is most likely because we haven't yet been able to add your local planning authority.
     There is a list of the planning authorities we currently cover
     #{link_to "here", authorities_path}. We're working on covering the whole country but we're not there yet.
