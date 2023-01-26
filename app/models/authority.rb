@@ -55,17 +55,6 @@ class Authority < ApplicationRecord
     (total_population_2017_covered_by_all_active_authorities.to_f / total_population_2017) * 100
   end
 
-  # Returns an array of arrays [date, number_of_applications_that_date]
-  sig { returns(T::Array[T::Array[[Date, Integer]]]) }
-  def new_applications_per_day
-    h = applications.with_first_version.order("date_scraped DESC").group("CAST(date_scraped AS DATE)").count
-    # For any dates not in h fill them in with zeros
-    (h.keys.min..Time.zone.today).each do |date|
-      h[date] = 0 unless h.key?(date)
-    end
-    h.sort
-  end
-
   sig { returns(T.nilable(Integer)) }
   def median_new_applications_per_week
     v = new_applications_per_week.select { |a| a[1].positive? }.pluck(1).sort

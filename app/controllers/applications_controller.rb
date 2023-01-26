@@ -5,7 +5,7 @@ class ApplicationsController < ApplicationController
   extend T::Sig
 
   # TODO: Switch actions from JS to JSON format and remove this
-  skip_before_action :verify_authenticity_token, only: %i[per_day per_week]
+  skip_before_action :verify_authenticity_token, only: :per_week
   before_action :check_application_redirect, only: %i[show nearby]
 
   sig { void }
@@ -33,19 +33,6 @@ class ApplicationsController < ApplicationController
   sig { void }
   def trending
     @applications = Application.trending.limit(20)
-  end
-
-  # JSON api for returning the number of new scraped applications per day
-  sig { void }
-  def per_day
-    params_authority_id = T.cast(params[:authority_id], String)
-
-    authority = Authority.find_short_name_encoded!(params_authority_id)
-    respond_to do |format|
-      format.js do
-        render json: authority.new_applications_per_day
-      end
-    end
   end
 
   sig { void }
