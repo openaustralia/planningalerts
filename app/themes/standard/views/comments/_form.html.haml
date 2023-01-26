@@ -3,13 +3,13 @@
     = f.input :text, as: :text, input_html: { rows: "10" },
                      hint: t("formtastic.hints.comment.text", link: faq_path(anchor: "disclosure"), target: "#disclosure_explanation", class: "hideable")
     .inline-hints.hideable-target#disclosure_explanation
-      = render partial: "static/disclosure_explanation"
+      = render partial: "documentation/disclosure_explanation"
     = f.input :name
   = f.inputs id: "comment-detail-inputgroup" do
     = f.input :address, input_html: { class: "address-autocomplete-input" },
                         hint: t("formtastic.hints.comment.address", link: faq_path(anchor: "address"), target: "#faq_commenting_address", class: "hideable")
     .inline-hints.hideable-target#faq_commenting_address
-      = render partial: "static/faq_commenting_address"
+      = render partial: "documentation/faq_commenting_address"
     -#
       This is a spam bot honeytrap. A human being should not be filling this in
       It's not awesome for screenreaders though

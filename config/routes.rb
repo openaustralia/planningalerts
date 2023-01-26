@@ -169,13 +169,13 @@ Rails.application.routes.draw do
     get :specification
   end
 
-  get "api/howto" => "static#api_howto"
-  get "about" => "static#about"
-  get "faq" => "static#faq"
+  get "api/howto" => "documentation#api_howto"
+  get "about" => "documentation#about"
+  get "faq" => "documentation#faq"
   get "getinvolved", to: redirect("/get_involved")
-  get "get_involved" => "static#get_involved"
-  get "how_to_write_a_scraper" => "static#how_to_write_a_scraper"
-  get "how_to_lobby_your_local_council" => "static#how_to_lobby_your_local_council"
+  get "get_involved" => "documentation#get_involved"
+  get "how_to_write_a_scraper" => "documentation#how_to_write_a_scraper"
+  get "how_to_lobby_your_local_council" => "documentation#how_to_lobby_your_local_council"
 
   get "/" => "applications#address_results", as: :address_applications, constraints: QueryParamsPresentConstraint.new(:q)
   get "/" => "home#index"
@@ -188,8 +188,8 @@ Rails.application.routes.draw do
 
   root to: "applications#address"
 
-  get "/404", to: "static#error_404"
-  get "/500", to: "static#error_500"
+  get "/404", to: "documentation#error_404"
+  get "/500", to: "documentation#error_500"
 
   post "/cuttlefish/event", to: "cuttlefish#event"
 

@@ -1,8 +1,8 @@
 # typed: strict
 # frozen_string_literal: true
 
-# Controller for (mostly) static content
-class StaticController < ApplicationController
+# Pages that are largely documentation belong here
+class DocumentationController < ApplicationController
   extend T::Sig
 
   sig { void }
