@@ -17,7 +17,7 @@
 
   %ul.list-options
     %li
-      %b Sort by
+      %b Sorted by
     %li= link_to "most recent first", { sort: "time", q: @q, page: nil }, class: "button button-pill button-small #{"button-active" if @sort == "time"}"
     %li= link_to "closest first", { sort: "distance", q: @q, page: nil }, class: "button button-pill button-small #{"button-active" if @sort == "distance"}"
 
