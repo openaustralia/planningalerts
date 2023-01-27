@@ -9,23 +9,7 @@
       %li= link_to a, q: a
 
 - if @applications.empty?
-  %p
-    Unfortunately, we don't know of any applications near #{@full_address}.
-    This is most likely because we haven't yet been able to add your local planning authority.
-    There is a list of the planning authorities we currently cover
-    #{link_to "here", authorities_path}. We're working on covering the whole country but we're not there yet.
-
-  .attention
-    %h4 You can help!
-    %p Donations allow us to add more local authorities, including yours! Or, if you're a programmer you can help directly by #{link_to "writing a screen scraper", get_involved_path}.
-    = link_to "Donate", donate_url, class: "button button-rounded button-action"
-
-  %p
-    To see an example of what the results would look like once your area is included see #{link_to "Bourke Street in Melbourne", address_applications_path(q: "Bourke St, Melbourne 3000")}.
-  %p
-    If you #{link_to "sign up for email alerts", new_alert_path(address: @q)} anyway, you will receive new applications when they become available.
-    The more people that sign up for your area, the sooner we'll add your area to PlanningAlerts. So, get your friends and neighbours to sign up too!
-
+  = render "no_applications", full_address: @full_address, q: @q
 - else
   .attention
     = render "alerts/signup_introduction"
