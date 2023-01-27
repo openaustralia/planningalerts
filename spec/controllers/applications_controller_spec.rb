@@ -59,16 +59,16 @@ describe ApplicationsController do
     end
   end
 
-  describe "#address_results" do
+  describe "#address" do
     before { allow(GoogleGeocodeService).to receive(:call).and_return(GeocoderResults.new([], nil)) }
 
     it "sets the radius to the supplied parameter" do
-      get :address_results, params: { q: "24 Bruce Road Glenbrook", radius: 500 }
+      get :address, params: { q: "24 Bruce Road Glenbrook", radius: 500 }
       expect(assigns[:radius]).to eq 500.0
     end
 
     it "sets the radius to the default when not supplied" do
-      get :address_results, params: { q: "24 Bruce Road Glenbrook" }
+      get :address, params: { q: "24 Bruce Road Glenbrook" }
       expect(assigns[:radius]).to eq 2000.0
     end
   end

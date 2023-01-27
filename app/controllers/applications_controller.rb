@@ -46,7 +46,7 @@ class ApplicationsController < ApplicationController
   end
 
   sig { void }
-  def address_results
+  def address
     params_q = T.cast(params[:q], T.nilable(String))
     params_radius = T.cast(params[:radius], T.nilable(T.any(String, Numeric)))
     params_sort = T.cast(params[:sort], T.nilable(String))
