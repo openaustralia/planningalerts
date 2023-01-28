@@ -15,11 +15,7 @@
     = render "alerts/signup_introduction"
     = render "alerts/signup_form", alert: @alert, address_hidden: true
 
-  %ul.list-options
-    %li
-      %b Sorted by
-    %li= link_to "most recent first", { sort: "time", q: @q, page: nil }, class: "button button-pill button-small #{"button-active" if @sort == "time"}"
-    %li= link_to "closest first", { sort: "distance", q: @q, page: nil }, class: "button button-pill button-small #{"button-active" if @sort == "distance"}"
+  = render "sort_options", sort: @sort, extra_params: { q: @q }
 
   -# Only show the top pagination links beyond the first page
   - if @page.to_i > 1
