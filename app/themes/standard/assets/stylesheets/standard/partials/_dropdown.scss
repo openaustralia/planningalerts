@@ -20,6 +20,11 @@ ul.dropdown-menu {
       background-color: #eee;
     }
   }
+  li.disabled {
+    a { 
+      color: #666;
+    }
+  }
 }
 
 .dropdown.open .dropdown-menu {
