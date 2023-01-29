@@ -1,5 +1,10 @@
-%ul.list-options
-  %li
-    %b Sorted by
-  %li= link_to "most recent first", { sort: "time", page: nil }.merge(extra_params), class: "button button-pill button-small #{"button-active" if sort == "time"}"
-  %li= link_to "closest first", { sort: "distance", page: nil }.merge(extra_params), class: "button button-pill button-small #{"button-active" if sort == "distance"}"
+.dropdown
+  %button.dropdown-toggle
+    Sorted by
+    - if sort == "time"
+      most recent first
+    - else
+      closest first
+  %ul.dropdown-menu
+    %li= link_to "most recent first", { sort: "time", page: nil }.merge(extra_params)
+    %li= link_to "closest first", { sort: "distance", page: nil }.merge(extra_params)
