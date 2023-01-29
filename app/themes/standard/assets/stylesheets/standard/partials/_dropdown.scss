@@ -29,4 +29,7 @@ button.dropdown-toggle {
   font-size: 1em;
   font-family: $blueprint-font-family;
   padding: 0.5em 1em;
+  img { 
+    vertical-align: sub;
+  }
 }
