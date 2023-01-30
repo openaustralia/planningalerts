@@ -7,6 +7,20 @@ function getPosition(options) {
   );
 }
 
+function getAddressFromPosition(latitude, longitude) {
+  return new Promise((resolve, reject) => {
+    const latlng = new google.maps.LatLng(latitude, longitude);
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'latLng': latlng}, (results, status) => {
+      if (status == google.maps.GeocoderStatus.OK) {
+        resolve(results[0].formatted_address);
+      } else {
+        reject(status);
+      }
+    });  
+  });
+}
+
 window.addEventListener("DOMContentLoaded", function() {
   var geolocate = this.document.getElementById("geolocate");
 
@@ -20,16 +34,14 @@ window.addEventListener("DOMContentLoaded", function() {
       spinner.style.visibility = "visible";
       getPosition({enableHighAccuracy: true, timeout: 10000})
         .then((pos) => {
-          var latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-          geocoder = new google.maps.Geocoder();
-          geocoder.geocode({'latLng': latlng}, function(results, status){
-            if (status == google.maps.GeocoderStatus.OK) {
-              location.href = '/?q=' + encodeURIComponent(results[0].formatted_address);
-            } else {
+          getAddressFromPosition(pos.coords.latitude, pos.coords.longitude)
+            .then((address) => {
+              location.href = '/?q=' + encodeURIComponent(address);
+            })
+            .catch((err) => {
               spinner.style.visibility = "hidden";
-              link.innerHTML = "Address lookup failed: " + status;
-            }
-          });  
+              link.innerHTML = "Address lookup failed: " + err;
+            });
         })
         .catch((err) => {
           spinner.style.visibility = "hidden";
@@ -40,6 +52,7 @@ window.addEventListener("DOMContentLoaded", function() {
           } else if (err.code == 3) { // Too long
             link.innerHTML = "No result returned";
           } else { // Unknown
+            console.log(err);
             link.innerHTML = "Unknown error";
           }  
         });
