@@ -16,10 +16,6 @@ $fb-line-height: 1em;
 // Remove this hack if we remove blueprint
 body .error a {
   color: $link-color;
-
-  &#geolocate {
-    color: $font-color;
-  }
 }
 
 #error_explanation {

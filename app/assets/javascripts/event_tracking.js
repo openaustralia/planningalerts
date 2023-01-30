@@ -55,7 +55,7 @@ window.addEventListener("DOMContentLoaded", function() {
       ga('send', 'event', 'search', 'click submit address search');
     });
 
-    clicks('.address-search #geolocate', function(e) {
+    clicks('.address-search .geolocate', function(e) {
       ga('send', 'event', 'search', 'click locate me link');
     });
 

@@ -865,9 +865,9 @@ td pre {
   }
 }
 
-#geolocate {
-  font-size: 1em;
-  margin-top: 0.5em;
+.geolocate {
+  font-size: 1em !important;
+  margin-top: 0.5em !important;
   display: inline-block;
   border-style: none;
   background-color: white;

@@ -1,6 +1,3 @@
-// This depends on there being a link with the id #geolocate with a
-// .spinner inside of it that is hidden by default in the css
-
 function getPosition(options) {
   return new Promise((resolve, reject) =>
     navigator.geolocation.getCurrentPosition(resolve, reject, options)

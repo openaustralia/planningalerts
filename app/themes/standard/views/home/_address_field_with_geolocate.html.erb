@@ -19,7 +19,7 @@
         this.spinner = false;
       }
     }">
-      <%= button_tag id: "geolocate", type: "button", class: "inline-hints", "@click.prevent": "geolocate($event)" do %>
+      <%= button_tag type: "button", class: "geolocate inline-hints", "@click.prevent": "geolocate($event)" do %>
         &hellip; or locate me automatically
         <%= image_tag("standard/spinner.gif", size: "16x16", "x-show": "spinner", "x-cloak": true) %>
       <% end %>
