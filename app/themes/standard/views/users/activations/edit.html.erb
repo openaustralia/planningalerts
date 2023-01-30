@@ -12,7 +12,7 @@
 
     <%= f.inputs do %>
       <%= f.input :name, label: "Your full name", input_html: { autofocus: true, autocomplete: "name" } %>
-      <%= f.input :password, label: "Password", hint: ("Choose a password you would like to use. #{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autofocus: true, autocomplete: "new-password" } %>
+      <%= f.input :password, label: "Password", hint: ("Choose a password you would like to use. #{@minimum_password_length} characters minimum" if @minimum_password_length), input_html: { autocomplete: "new-password" } %>
     <% end %>
 
     <%= f.actions do %>
