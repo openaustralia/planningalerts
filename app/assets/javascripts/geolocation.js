@@ -21,30 +21,26 @@ function getAddressFromPosition(latitude, longitude) {
   });
 }
 
-function getAddress() {
-  return new Promise((resolve, reject) => {
-    getPosition({enableHighAccuracy: true, timeout: 10000})
-    .then((pos) => {
-      getAddressFromPosition(pos.coords.latitude, pos.coords.longitude)
-        .then((address) => {
-          resolve(address);
-        })
-        .catch((err) => {
-          reject("Address lookup failed: " + err);
-        });
-    })
-    .catch((err) => {
-      if (err.code == 1) { // User said no
-        reject("You declined; please fill in the box above");
-      } else if (err.code == 2) { // No position
-        reject("Could not look up location");
-      } else if (err.code == 3) { // Too long
-        reject("No result returned");
-      } else { // Unknown
-        reject("Unknown error");
-      }  
-    });  
-  })
+async function getAddress() {
+  try {
+    var pos = await getPosition({enableHighAccuracy: true, timeout: 10000});
+  } catch(err) {
+    if (err.code == 1) { // User said no
+      throw("You declined; please fill in the box above");
+    } else if (err.code == 2) { // No position
+      throw("Could not look up location");
+    } else if (err.code == 3) { // Too long
+      throw("No result returned");
+    } else { // Unknown
+      throw("Unknown error");
+    }
+  }
+
+  try {
+    return await getAddressFromPosition(pos.coords.latitude, pos.coords.longitude);
+  } catch(err) {
+    throw("Address lookup failed: " + err);
+  }
 }
 
 window.addEventListener("DOMContentLoaded", function() {
