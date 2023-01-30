@@ -1,3 +1,4 @@
-= f.inputs description, class: "daterange" do
-  = f.input start_name, label: "Start", required: false, input_html: { class: "date" }, placeholder: "from"
-  = f.input end_name, label: "End", required: false, placeholder: "to"
+%div{ "x-data": "" }
+  = f.inputs description, class: "daterange" do
+    = f.input start_name, label: "Start", required: false, placeholder: "from", input_html: { class: "date", "x-init": "flatpickr($el)", "x-ref": "start", "@input": "$refs.end._flatpickr.set('minDate', $el.value)" }
+    = f.input end_name, label: "End", required: false, placeholder: "to", input_html: { "x-init": "flatpickr($el)", "x-ref": "end", "@input": "$refs.start._flatpickr.set('maxDate', $el.value)" }
