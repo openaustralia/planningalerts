@@ -21,6 +21,32 @@ function getAddressFromPosition(latitude, longitude) {
   });
 }
 
+function getAddress() {
+  return new Promise((resolve, reject) => {
+    getPosition({enableHighAccuracy: true, timeout: 10000})
+    .then((pos) => {
+      getAddressFromPosition(pos.coords.latitude, pos.coords.longitude)
+        .then((address) => {
+          resolve(address);
+        })
+        .catch((err) => {
+          reject("Address lookup failed: " + err);
+        });
+    })
+    .catch((err) => {
+      if (err.code == 1) { // User said no
+        reject("You declined; please fill in the box above");
+      } else if (err.code == 2) { // No position
+        reject("Could not look up location");
+      } else if (err.code == 3) { // Too long
+        reject("No result returned");
+      } else { // Unknown
+        reject("Unknown error");
+      }  
+    });  
+  })
+}
+
 window.addEventListener("DOMContentLoaded", function() {
   var geolocate = this.document.getElementById("geolocate");
 
@@ -32,30 +58,14 @@ window.addEventListener("DOMContentLoaded", function() {
       var spinner = this.querySelector(".spinner");
       e.preventDefault();
       spinner.style.visibility = "visible";
-      getPosition({enableHighAccuracy: true, timeout: 10000})
-        .then((pos) => {
-          getAddressFromPosition(pos.coords.latitude, pos.coords.longitude)
-            .then((address) => {
-              location.href = '/?q=' + encodeURIComponent(address);
-            })
-            .catch((err) => {
-              spinner.style.visibility = "hidden";
-              link.innerHTML = "Address lookup failed: " + err;
-            });
+      getAddress()
+        .then((address) => {
+          location.href = '/?q=' + encodeURIComponent(address);
         })
         .catch((err) => {
           spinner.style.visibility = "hidden";
-          if (err.code == 1) { // User said no
-            link.innerHTML = "You declined; please fill in the box above";
-          } else if (err.code == 2) { // No position
-            link.innerHTML = "Could not look up location";
-          } else if (err.code == 3) { // Too long
-            link.innerHTML = "No result returned";
-          } else { // Unknown
-            console.log(err);
-            link.innerHTML = "Unknown error";
-          }  
-        });
+          link.innerHTML = err;
+        })
     });
   }
 });
