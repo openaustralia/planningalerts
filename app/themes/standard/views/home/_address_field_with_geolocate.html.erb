@@ -1,11 +1,29 @@
-<div>
-  <%= text_field_tag(:q, q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", required: "required", class: "address-autocomplete-input", autofocus: true) %>
-  <% if error %> 
+<div x-data="{address: ''}">
+  <%= text_field_tag(:q, q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", required: "required", class: "address-autocomplete-input", autofocus: true, "x-model": "address") %>
+  <% if error %>
     <p class="inline-errors"><%= error %></p>
   <% else %>
-    <%= button_tag id: "geolocate", class: "inline-hints" do %>
-      &hellip; or locate me automatically
-      <%= image_tag("standard/spinner.gif", size: "16x16", class: "spinner") %>
-    <% end %>
+    <div x-show="navigator.geolocation" x-data="{
+      spinner: false,
+      error: '',
+      async geolocate(event) {
+        this.spinner = true;
+        this.error = '';
+        try {
+          this.address = await getAddress();
+          await $nextTick();
+          event.target.form.submit();
+        } catch(err) {
+          this.error = err;
+        }
+        this.spinner = false;
+      }
+    }">
+      <p x-text="error" class="inline-errors"></p>
+      <%= button_tag id: "geolocate", class: "inline-hints", "@click.prevent": "geolocate($event)", "x-show": "error == ''" do %>
+        &hellip; or locate me automatically
+        <%= image_tag("standard/spinner.gif", size: "16x16", "x-show": "spinner", "x-cloak": true) %>
+      <% end %>
+    </div>
   <% end %>
 </div>

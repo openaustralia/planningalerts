@@ -42,26 +42,3 @@ async function getAddress() {
     throw("Address lookup failed: " + err);
   }
 }
-
-window.addEventListener("DOMContentLoaded", function() {
-  var geolocate = this.document.getElementById("geolocate");
-
-  if (geolocate && navigator.geolocation) {
-    geolocate.style.visibility = "visible";
-  
-    geolocate.addEventListener("click", function(e) {
-      var link = this;
-      var spinner = this.querySelector(".spinner");
-      e.preventDefault();
-      spinner.style.visibility = "visible";
-      getAddress()
-        .then((address) => {
-          location.href = '/?q=' + encodeURIComponent(address);
-        })
-        .catch((err) => {
-          spinner.style.visibility = "hidden";
-          link.innerHTML = err;
-        })
-    });
-  }
-});
