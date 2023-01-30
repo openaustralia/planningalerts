@@ -20,7 +20,7 @@
       }
     }">
       <p x-text="error" class="inline-errors"></p>
-      <%= button_tag id: "geolocate", class: "inline-hints", "@click.prevent": "geolocate($event)", "x-show": "error == ''" do %>
+      <%= button_tag id: "geolocate", type: "button", class: "inline-hints", "@click.prevent": "geolocate($event)", "x-show": "error == ''" do %>
         &hellip; or locate me automatically
         <%= image_tag("standard/spinner.gif", size: "16x16", "x-show": "spinner", "x-cloak": true) %>
       <% end %>
