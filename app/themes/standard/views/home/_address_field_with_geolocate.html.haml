@@ -1,0 +1,7 @@
+%div
+  = text_field_tag(:q, q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", required: "required", class: "address-autocomplete-input", autofocus: true)
+  - if error
+    %p.inline-errors= error
+  = link_to "#", class: "inline-hints", id: "geolocate" do
+    &hellip; or locate me automatically
+    = image_tag("standard/spinner.gif", size: "16x16", class: "spinner")
