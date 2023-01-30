@@ -1,12 +1,12 @@
-.dropdown.sort-options
-  %button.dropdown-toggle
+.dropdown.sort-options{ "x-data": "{open: false}" }
+  %button.dropdown-toggle{ "@click": "open = !open" }
     Sorted by
     - if sort == "time"
       most recent first
     - else
       closest first
     = image_tag "standard/chevron-up-down.svg", size: "16x16"
-  %ul.dropdown-menu
+  %ul.dropdown-menu{ "x-show": "open", "x-cloak": true }
     %li{ class: ("disabled" if sort == "time") }
       = link_to "most recent first", { sort: "time", page: nil }.merge(extra_params)
     %li{ class: ("disabled" if sort == "distance") }

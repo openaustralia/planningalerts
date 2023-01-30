@@ -4,7 +4,6 @@
 
 ul.dropdown-menu {
   margin-top: 0.25em;
-  display: none;
   position: absolute;
   background: white;
   list-style: none;
@@ -31,10 +30,6 @@ ul.dropdown-menu {
   }
 }
 
-.dropdown.open .dropdown-menu {
-  display: block;
-}
-
 button.dropdown-toggle {
   font-size: 1em;
   font-family: $blueprint-font-family;
@@ -43,3 +38,5 @@ button.dropdown-toggle {
     vertical-align: sub;
   }
 }
+
+[x-cloak] { display: none !important; }
