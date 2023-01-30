@@ -20,9 +20,4 @@ window.addEventListener("DOMContentLoaded", function() {
 
   setupDateRange("#feed_lodgement_date_start", "#feed_lodgement_date_end");
   setupDateRange("#feed_last_modified_date_start", "#feed_last_modified_date_end");
-
-  document.getElementById("filter-heading").addEventListener("click", function(e) {
-    e.preventDefault();
-    document.getElementById("filters").classList.toggle("hidden");
-  })
 })

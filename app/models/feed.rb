@@ -38,9 +38,9 @@ class Feed
   end
 
   def filters_set?
-    @street || @suburb || @postcode ||
-      @lodgement_date_start || @lodgement_date_end ||
-      @last_modified_date_start || @last_modified_date_end
+    !@street.nil? || !@suburb.nil? || !@postcode.nil? ||
+      !@lodgement_date_start.nil? || !@lodgement_date_end.nil? ||
+      !@last_modified_date_start.nil? || !@last_modified_date_end.nil?
   end
 
   def self.create_from_url(url)
