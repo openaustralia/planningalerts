@@ -76,9 +76,6 @@ gem "sanitize"
 gem "dotenv-rails"
 gem "foreman"
 
-# Figure out who is likely to be human
-gem "recaptcha", require: "recaptcha/rails"
-
 # Site search
 gem "searchkick"
 

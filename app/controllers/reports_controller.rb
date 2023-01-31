@@ -24,10 +24,10 @@ class ReportsController < ApplicationController
       details: params_report[:details]
     )
 
-    if verify_recaptcha && @report.save
+    if @report.save
       ReportMailer.notify(@report).deliver_later
+      # TODO: Redirect to a dedicated page which gives it a persistent url
     else
-      flash.now[:error] = t(".you_are_a_robot_html") if flash[:recaptcha_error]
       render "new"
     end
   end

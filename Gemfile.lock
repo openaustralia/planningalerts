@@ -508,8 +508,6 @@ GEM
       parser (>= 2.6.4.0)
       sorbet-runtime (>= 0.5.9204)
       unparser
-    recaptcha (5.12.3)
-      json
     redcarpet (3.5.1)
     redis (4.8.0)
     regexp_parser (2.6.1)
@@ -796,7 +794,6 @@ DEPENDENCIES
   rake
   rb-fsevent
   rb-inotify
-  recaptcha
   redcarpet
   rest-client
   rexml
