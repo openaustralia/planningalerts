@@ -26,9 +26,14 @@ class ReportsController < ApplicationController
 
     if @report.save
       ReportMailer.notify(@report).deliver_later
-      # TODO: Redirect to a dedicated page which gives it a persistent url
+      redirect_to thank_you_comment_reports_url(@comment)
     else
       render "new"
     end
+  end
+
+  sig { void }
+  def thank_you
+    @comment = Comment.visible.find(params[:comment_id])
   end
 end

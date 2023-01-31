@@ -142,7 +142,11 @@ Rails.application.routes.draw do
     member do
       get :confirmed
     end
-    resources :reports, only: %i[new create]
+    resources :reports, only: %i[new create] do
+      collection do
+        get :thank_you
+      end
+    end
   end
 
   resources :authorities, only: %i[index show] do
