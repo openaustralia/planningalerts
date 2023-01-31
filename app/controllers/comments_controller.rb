@@ -89,11 +89,4 @@ class CommentsController < ApplicationController
       format.json { render json: authority.comments_per_week }
     end
   end
-
-  private
-
-  sig { returns(T::Boolean) }
-  def force_login
-    Flipper.enabled?(:force_login_to_comment)
-  end
 end
