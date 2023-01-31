@@ -1,0 +1,12 @@
+%ul
+  - if sort == "time"
+    %li= link_to "within 200 metres", "#"
+    %li= link_to "within 800 metres", "#"
+    %li= link_to "within 2 kilometres", "#"
+  - else
+    %li= link_to "within the last 3 months", "#"
+    %li= link_to "within the last 6 months", "#"
+    %li= link_to "within the last year", "#"
+    %li= link_to "within the last 2 years", "#"
+    %li= link_to "within the last 5 years", "#"
+    %li= link_to "all time", "#"

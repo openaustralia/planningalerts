@@ -16,6 +16,8 @@
     = render "alerts/signup_form", alert: @alert, address_hidden: true
 
   = render "sort_options", sort: @sort, extra_params: { q: @q }
+  - if Flipper.enabled?(:extra_options_on_address_search, current_user)
+    = render "filter_options", sort: @sort
 
   -# Only show the top pagination links beyond the first page
   - if @page.to_i > 1
