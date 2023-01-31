@@ -1248,7 +1248,6 @@ class ActionController::API < ::ActionController::Metal
   include ::ActionController::Instrumentation
   include ::ActionController::ParamsWrapper
   include ::ActionController::RespondWith
-  include ::Recaptcha::Adapters::ControllerMethods
   include ::Searchkick::ControllerRuntime
   extend ::ActionView::ViewPaths::ClassMethods
   extend ::AbstractController::UrlFor::ClassMethods
@@ -1703,7 +1702,6 @@ class ActionController::Base < ::ActionController::Metal
   include ::ActionController::Instrumentation
   include ::ActionController::ParamsWrapper
   include ::ActionController::RespondWith
-  include ::Recaptcha::Adapters::ControllerMethods
   include ::Searchkick::ControllerRuntime
   extend ::ActionView::ViewPaths::ClassMethods
   extend ::AbstractController::Helpers::ClassMethods

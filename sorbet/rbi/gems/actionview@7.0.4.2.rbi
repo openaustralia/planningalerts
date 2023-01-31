@@ -917,7 +917,6 @@ class ActionView::Base
   include ::ActionView::Helpers
   include ::Kaminari::Helpers::UrlHelper
   include ::Kaminari::Helpers::HelperMethods
-  include ::Recaptcha::Adapters::ViewMethods
   extend ::ActionView::Helpers::UrlHelper::ClassMethods
   extend ::ActionView::Helpers::SanitizeHelper::ClassMethods
 
