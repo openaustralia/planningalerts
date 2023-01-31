@@ -300,18 +300,6 @@ module GeneratedPathHelpersModule
   def rails_disk_service_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def rails_info_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def rails_info_properties_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def rails_info_routes_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def rails_mailers_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def rails_mailgun_inbound_emails_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
