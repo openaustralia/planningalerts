@@ -11,3 +11,17 @@
       = link_to "most recent first", { sort: "time", page: nil }.merge(extra_params)
     %li{ class: ("disabled" if sort == "distance") }
       = link_to "closest first", { sort: "distance", page: nil }.merge(extra_params)
+
+- if Flipper.enabled?(:extra_options_on_address_search, current_user)
+  %ul
+    - if sort == "time"
+      %li= link_to "within 200 metres", "#"
+      %li= link_to "within 800 metres", "#"
+      %li= link_to "within 2 kilometres", "#"
+    - else
+      %li= link_to "within the last 3 months", "#"
+      %li= link_to "within the last 6 months", "#"
+      %li= link_to "within the last year", "#"
+      %li= link_to "within the last 2 years", "#"
+      %li= link_to "within the last 5 years", "#"
+      %li= link_to "all time", "#"
