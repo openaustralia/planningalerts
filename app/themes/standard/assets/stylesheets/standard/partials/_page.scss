@@ -105,7 +105,6 @@ body {
 }
 
 #content {
-  @include clearfix;
   clear: both;
   position: relative;
   padding: 2em 0 1.5em 0;
