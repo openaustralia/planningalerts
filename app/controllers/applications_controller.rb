@@ -54,6 +54,8 @@ class ApplicationsController < ApplicationController
 
     @q = T.let(params_q, T.nilable(String))
     radius = params_radius ? params_radius.to_f : 2000.0
+    # We don't want to allow a search radius that's too large
+    radius = [2000.0, radius].min
     @radius = T.let(radius, T.nilable(Float))
     sort = params_sort || "time"
     @sort = T.let(sort, T.nilable(String))
