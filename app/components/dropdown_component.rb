@@ -3,12 +3,12 @@
 
 class DropdownComponent < ViewComponent::Base
   renders_one :button
-  renders_one :menu, "DropdownMenuComponent"
+  renders_one :menu, "MenuComponent"
 
-  class DropdownMenuComponent < ViewComponent::Base
-    renders_many :items, "DropdownMenuItemComponent"
+  class MenuComponent < ViewComponent::Base
+    renders_many :items, "ItemComponent"
 
-    class DropdownMenuItemComponent < ViewComponent::Base
+    class ItemComponent < ViewComponent::Base
       extend T::Sig
 
       sig { params(disabled: T::Boolean).void }
