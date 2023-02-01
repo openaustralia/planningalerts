@@ -72,6 +72,8 @@ class ApplicationsController < ApplicationController
       @full_address = @q
       @other_addresses = T.let([], T.nilable(T::Array[String]))
       @error = T.let(result.error, T.nilable(String))
+      @trending = T.let(Application.trending.limit(4), T.untyped)
+      render "home/index"
     else
       @full_address = T.let(top.full_address, T.nilable(String))
       @alert = Alert.new(address: @q, user: User.new)
@@ -89,10 +91,6 @@ class ApplicationsController < ApplicationController
       end
       @applications = @applications.page(params[:page]).per(per_page)
     end
-    return unless @error
-
-    @trending = T.let(Application.trending.limit(4), T.untyped)
-    render "home/index"
   end
 
   sig { void }
