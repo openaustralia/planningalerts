@@ -8,7 +8,8 @@
     - @other_addresses.each do |a|
       %li= link_to a, q: a
 
-- if @applications.empty?
+-# TODO: Figure out how to handle no results when extra_options_on_address_search is enabled
+- if @applications.empty? && !Flipper.enabled?(:extra_options_on_address_search, current_user)
   = render "no_applications", full_address: @full_address, q: @q
 - else
   .attention
@@ -17,7 +18,7 @@
 
   = render "sort_options", sort: @sort, extra_params: { q: @q }
   - if Flipper.enabled?(:extra_options_on_address_search, current_user)
-    = render "filter_options", sort: @sort
+    = render "filter_options", sort: @sort, q: @q
 
   -# Only show the top pagination links beyond the first page
   - if @page.to_i > 1
