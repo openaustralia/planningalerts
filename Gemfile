@@ -145,6 +145,9 @@ gem "flipper-ui"
 # Testing this out for application performance monitoring
 # gem "skylight"
 
+# For making more reusable and testable components
+gem "view_component"
+
 group :test do
   gem "capybara"
   gem "climate_control"

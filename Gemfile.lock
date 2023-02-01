@@ -696,6 +696,10 @@ GEM
     validates_email_format_of (1.7.2)
       i18n
     vcr (6.1.0)
+    view_component (2.82.0)
+      activesupport (>= 5.2.0, < 8.0)
+      concurrent-ruby (~> 1.0)
+      method_source (~> 1.0)
     virtus (2.0.0)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -828,6 +832,7 @@ DEPENDENCIES
   validate_url
   validates_email_format_of
   vcr
+  view_component
   virtus
   webdrivers
   webmock
