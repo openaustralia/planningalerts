@@ -1,0 +1,19 @@
+<div class="dropdown sort-options" x-data="{open: false}">
+  <button class="dropdown-toggle" x-on:click="open = !open">
+    Sorted by
+    <% if sort == "time" %>
+      most recent first
+    <% else %>
+      closest first
+    <% end %>
+    <%= image_tag "standard/chevron-up-down.svg", size: "16x16" %>
+  </button>
+  <ul class="dropdown-menu" x-show="open" x-cloak x-on:click.outside="open = false">
+    <%= render(DropdownMenuItemComponent.new(disabled: sort == "time")) do %>
+      <%= link_to "most recent first", { sort: "time", page: nil }.merge(extra_params) %>
+    <% end %>
+    <%= render(DropdownMenuItemComponent.new(disabled: sort == "distance")) do %>
+      <%= link_to "closest first", { sort: "distance", page: nil }.merge(extra_params) %>
+    <% end %>
+  </ul>
+</div>
