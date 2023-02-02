@@ -2,6 +2,10 @@
 
 %h3
   Applications within
+  - if Flipper.enabled?(:extra_options_on_address_search, current_user)
+    the last
+    = days_in_words(@time)
+    and
   = meters_in_words(@radius)
   of
   = @full_address
