@@ -16,10 +16,7 @@
       = days_in_words(time)
     :ruby
       component.with_menu do |menu|
-        menu.with_item(disabled: time == 365 / 4)  { link_to "within the last 3 months", { q:, sort:, time: 365 / 4 } }
-        menu.with_item(disabled: time == 365 / 2)  { link_to "within the last 6 months", { q:, sort:, time: 365 / 2 } }
-        menu.with_item(disabled: time == 365)      { link_to "within the last year",     { q:, sort:, time: 365 } }
-        menu.with_item(disabled: time == 365 * 2)  { link_to "within the last 2 years",  { q:, sort:, time: 365 * 2 } }
-        menu.with_item(disabled: time == 365 * 5)  { link_to "within the last 5 years",  { q:, sort:, time: 365 * 5 } }
-        menu.with_item(disabled: time == 365 * 10) { link_to "within the last 10 years", { q:, sort:, time: 365 * 10 } }
+        [364 / 4, 365 / 2, 365, 365 * 2, 365 * 5, 365 * 10].each do |time_option|
+          menu.with_item(disabled: time == time_option) { link_to "within the last #{days_in_words(time_option)}", { q:, sort:, time: (time_option == 365 ? nil : time_option) } }
+        end
       end

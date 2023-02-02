@@ -8,6 +8,7 @@ module ApplicationHelper
   # For sorbet
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TextHelper
+  include Kernel
 
   sig { params(path: String, extra_classes: T::Array[Symbol], block: T.untyped).returns(T.untyped) }
   def menu_item(path, extra_classes: [], &block)
