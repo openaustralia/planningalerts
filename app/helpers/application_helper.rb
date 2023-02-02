@@ -73,6 +73,27 @@ module ApplicationHelper
     meters_in_words(value_in_km * 1000)
   end
 
+  # For some particular number of days return a human readable version
+  sig { params(days: Integer).returns(String) }
+  def days_in_words(days)
+    case days
+    when 365 / 4
+      "3 months"
+    when 365 / 2
+      "6 months"
+    when 365
+      "year"
+    when 365 * 2
+      "2 years"
+    when 365 * 5
+      "5 years"
+    when 365 * 10
+      "10 years"
+    else
+      raise "Unexpected number of days"
+    end
+  end
+
   sig { returns(T::Array[T::Hash[Symbol, String]]) }
   def contributors
     JSON.parse(File.read("CONTRIBUTORS.json"), symbolize_names: true)

@@ -12,18 +12,8 @@
 - else
   = render(DropdownComponent.new) do |component|
     - component.with_button do
-      - if time == 365 / 4
-        within the last 3 months
-      - elsif time == 365 / 2
-        within the last 6 months
-      - elsif time == 365
-        within the last year
-      - elsif time == 365 * 2
-        within the last 2 years
-      - elsif time == 365 * 5
-        within the last 5 years
-      - elsif time == 365 * 10
-        within the last 10 years
+      within the last
+      = days_in_words(time)
     :ruby
       component.with_menu do |menu|
         menu.with_item(disabled: time == 365 / 4)  { link_to "within the last 3 months", { q:, sort:, time: 365 / 4 } }
