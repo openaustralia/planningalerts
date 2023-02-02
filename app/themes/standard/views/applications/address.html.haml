@@ -1,6 +1,10 @@
 - content_for :meta_description, Rails.configuration.planningalerts_meta_description
 
-%h3 Applications within #{meters_in_words(@radius)} of #{@full_address}
+%h3
+  Applications within
+  = meters_in_words(@radius)
+  of
+  = @full_address
 
 - unless @other_addresses.empty?
   %h4 Or did you want?
