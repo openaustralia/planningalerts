@@ -9,6 +9,9 @@ module GeneratedUrlHelpersModule
   include ::ActionDispatch::Routing::PolymorphicRoutes
 
   sig { params(args: T.untyped).returns(String) }
+  def _system_test_entrypoint_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def about_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -256,6 +259,12 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def per_week_authority_comments_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def preview_view_component_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def preview_view_components_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def profile_alert_url(*args); end

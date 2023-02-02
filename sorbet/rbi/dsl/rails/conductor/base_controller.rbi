@@ -26,6 +26,7 @@ class Rails::Conductor::BaseController
     include ::ActionView::Helpers::TagHelper
     include ::ActionView::Helpers::TextHelper
     include ::AlertMailerHelper
+    include ::Kernel
     include ::ApplicationHelper
     include ::AlertsHelper
     include ::ApplicationsHelper
@@ -39,6 +40,7 @@ class Rails::Conductor::BaseController
     include ::CommentsHelper
     include ::SignupHelper
     include ::StaticHelper
+    include ::PreviewHelper
     include ::DeviseHelper
   end
 
