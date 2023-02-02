@@ -30,10 +30,10 @@ module ApplicationHelper
                 class: ["nav-item", ("active" if active)])
   end
 
-  sig { params(meters: Float).returns(String) }
+  sig { params(meters: T.any(Float, Integer)).returns(String) }
   def meters_in_words(meters)
     if meters < 1000
-      pluralize(significant_figure_remove_trailing_zero(meters, 2), "metre")
+      pluralize(significant_figure_remove_trailing_zero(meters.to_f, 2), "metre")
     else
       pluralize(significant_figure_remove_trailing_zero(meters / 1000.0, 2), "kilometre")
     end

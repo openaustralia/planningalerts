@@ -5,9 +5,9 @@
       = meters_in_words(radius)
     :ruby
       component.with_menu do |menu|
-        menu.with_item(disabled: radius.to_i == 200) { link_to "within 200 metres", { q:, radius: 200 } }
-        menu.with_item(disabled: radius.to_i == 800) { link_to "within 800 metres", { q:, radius: 800 } }
-        menu.with_item(disabled: radius.to_i == 2000) { link_to "within 2 kilometres", { q:, radius: nil } }
+        [200, 800, 2000].each do |radius_option|
+          menu.with_item(disabled: radius.to_i == radius_option) { link_to "within #{meters_in_words(radius_option)}", { q:, radius: (radius_option == 2000 ? nil : radius_option) } }
+        end
       end
 - else
   = render(DropdownComponent.new) do |component|
