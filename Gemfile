@@ -79,9 +79,6 @@ gem "foreman"
 # Site search
 gem "searchkick"
 
-# For accessing the Twitter api
-gem "twitter"
-
 # Used to parse different external application feeds
 gem "atdis"
 gem "nokogiri"

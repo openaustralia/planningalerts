@@ -130,7 +130,6 @@ GEM
     bourbon (7.2.0)
       thor (~> 1.0)
     brakeman (5.4.0)
-    buftok (0.2.0)
     builder (3.2.4)
     capistrano (3.17.1)
       airbrussh (>= 1.0.0)
@@ -227,7 +226,6 @@ GEM
       htmlentities (~> 4.3.3)
       launchy (~> 2.1)
       mail (~> 2.7)
-    equalizer (0.0.11)
     erb_lint (0.3.1)
       activesupport
       better_html (>= 2.0.1)
@@ -271,9 +269,6 @@ GEM
     faraday-rack (1.0.0)
     faraday-retry (1.0.3)
     ffi (1.15.5)
-    ffi-compiler (1.0.1)
-      ffi (>= 1.0.0)
-      rake
     flatpickr (4.6.11.0)
     flipper (0.26.0)
       concurrent-ruby (< 2)
@@ -343,17 +338,9 @@ GEM
       railties (>= 5.0)
     honeybadger (5.0.2)
     htmlentities (4.3.4)
-    http (4.4.1)
-      addressable (~> 2.3)
-      http-cookie (~> 1.0)
-      http-form_data (~> 2.2)
-      http-parser (~> 1.2.0)
     http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
-    http-form_data (2.3.0)
-    http-parser (1.2.3)
-      ffi-compiler (>= 1.0, < 2.0)
     http_parser.rb (0.6.0)
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
@@ -399,8 +386,6 @@ GEM
       net-smtp
     marcel (1.0.2)
     matrix (0.4.2)
-    memoizable (0.4.2)
-      thread_safe (~> 0.3, >= 0.3.1)
     method_source (1.0.0)
     mime-types (3.4.1)
       mime-types-data (~> 3.2015)
@@ -414,7 +399,6 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.2.3)
     mysql2 (0.5.4)
-    naught (1.1.0)
     nenv (0.3.0)
     net-imap (0.3.4)
       date
@@ -610,7 +594,6 @@ GEM
     sidekiq-cron (1.9.1)
       fugit (~> 1.8)
       sidekiq (>= 4.2.1)
-    simple_oauth (0.3.1)
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -666,17 +649,6 @@ GEM
     tilt (2.0.11)
     timecop (0.9.6)
     timeout (0.3.1)
-    twitter (7.0.0)
-      addressable (~> 2.3)
-      buftok (~> 0.2.0)
-      equalizer (~> 0.0.11)
-      http (~> 4.0)
-      http-form_data (~> 2.0)
-      http_parser.rb (~> 0.6.0)
-      memoizable (~> 0.4.0)
-      multipart-post (~> 2.0)
-      naught (~> 1.0)
-      simple_oauth (~> 0.3.0)
     typhoeus (1.4.0)
       ethon (>= 0.9.0)
     tzinfo (2.0.5)
@@ -826,7 +798,6 @@ DEPENDENCIES
   themes_on_rails!
   thin
   timecop
-  twitter
   typhoeus
   uglifier
   validate_url
