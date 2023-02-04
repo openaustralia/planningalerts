@@ -34,7 +34,8 @@
 				"misogi.ruby-rubocop",
 				"syler.sass-indented",
 				"bradlc.vscode-tailwindcss",
-				"jock.svg"
+				"jock.svg",
+				"heybourn.headwind"
 			]
 		}
 	}
