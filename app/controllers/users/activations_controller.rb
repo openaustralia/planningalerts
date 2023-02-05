@@ -31,6 +31,7 @@ module Users
         render "new"
       else
         @user.send_activation_instructions
+        redirect_to check_email_users_activation_url
       end
     end
 
@@ -53,10 +54,7 @@ module Users
       end
     end
 
-    # This page is only accessible in development
     sig { void }
-    def now_check_your_email
-      render "create"
-    end
+    def check_email; end
   end
 end

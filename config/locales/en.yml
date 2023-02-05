@@ -83,9 +83,6 @@ en:
   comments:
     create:
       not_filled_out: Some of the comment wasn't filled out completely. See below.
-  reports:
-    create:
-      you_are_a_robot_html: Sorry, we couldn’t verify that you’re not a robot. Make sure you click the <em>I’m not a robot</em> box below and try again.
   comment_mailer:
     notify_authority:
       subject: "Comment on application %{council_reference}"

@@ -33,7 +33,9 @@
 				"sorbet.sorbet-vscode-extension",
 				"misogi.ruby-rubocop",
 				"syler.sass-indented",
-				"bradlc.vscode-tailwindcss"
+				"bradlc.vscode-tailwindcss",
+				"jock.svg",
+				"heybourn.headwind"
 			]
 		}
 	}

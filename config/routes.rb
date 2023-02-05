@@ -78,12 +78,17 @@ Rails.application.routes.draw do
     confirmations: "users/confirmations",
     registrations: "users/registrations"
   }
+  
+  devise_scope :user do
+    # After people fill in the form to register it redirects to this page
+    # which asks people to go to their email and confirm their email address
+    # TODO: I shouldn't need to prefix the route with users here. Why is this happening? What have I done wrong?
+    get "users/sign_up/check_email",  to: "users/registrations#check_email", as: "check_email_user_registration"
+  end
 
   namespace :users do
     resource :activation, only: [:new, :create, :edit, :update] do
-      # Only show this in development. Useful for seeing what the page looks like
-      # when it says "now check your email"
-      get :now_check_your_email if Rails.env.development?      
+      get :check_email
     end
   end
 
@@ -137,13 +142,16 @@ Rails.application.routes.draw do
     member do
       get :confirmed
     end
-    resources :reports, only: %i[new create]
+    resources :reports, only: %i[new create] do
+      collection do
+        get :thank_you
+      end
+    end
   end
 
   resources :authorities, only: %i[index show] do
     resources :applications, only: [:index] do
       collection do
-        get :per_day
         get :per_week
       end
     end
@@ -164,15 +172,15 @@ Rails.application.routes.draw do
     get :specification
   end
 
-  get "api/howto" => "static#api_howto"
-  get "about" => "static#about"
-  get "faq" => "static#faq"
+  get "api/howto" => "documentation#api_howto"
+  get "about" => "documentation#about"
+  get "faq" => "documentation#faq"
   get "getinvolved", to: redirect("/get_involved")
-  get "get_involved" => "static#get_involved"
-  get "how_to_write_a_scraper" => "static#how_to_write_a_scraper"
-  get "how_to_lobby_your_local_council" => "static#how_to_lobby_your_local_council"
+  get "get_involved" => "documentation#get_involved"
+  get "how_to_write_a_scraper" => "documentation#how_to_write_a_scraper"
+  get "how_to_lobby_your_local_council" => "documentation#how_to_lobby_your_local_council"
 
-  get "/" => "applications#address_results", as: :address_applications, constraints: QueryParamsPresentConstraint.new(:q)
+  get "/" => "applications#address", as: :address_applications, constraints: QueryParamsPresentConstraint.new(:q)
   get "/" => "home#index"
 
   ## Use the donations form on OAF for now.
@@ -183,8 +191,8 @@ Rails.application.routes.draw do
 
   root to: "applications#address"
 
-  get "/404", to: "static#error_404"
-  get "/500", to: "static#error_500"
+  get "/404", to: "documentation#error_404"
+  get "/500", to: "documentation#error_500"
 
   post "/cuttlefish/event", to: "cuttlefish#event"
 

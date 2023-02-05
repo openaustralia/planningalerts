@@ -24,11 +24,16 @@ class ReportsController < ApplicationController
       details: params_report[:details]
     )
 
-    if verify_recaptcha && @report.save
+    if @report.save
       ReportMailer.notify(@report).deliver_later
+      redirect_to thank_you_comment_reports_url(@comment)
     else
-      flash.now[:error] = t(".you_are_a_robot_html") if flash[:recaptcha_error]
       render "new"
     end
+  end
+
+  sig { void }
+  def thank_you
+    @comment = Comment.visible.find(params[:comment_id])
   end
 end

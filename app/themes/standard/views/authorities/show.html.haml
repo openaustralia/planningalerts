@@ -34,7 +34,7 @@
     :javascript
       barGraph(
         "#applications-chart",
-        "#{per_week_authority_applications_url(@authority.short_name_encoded, format: "js")}",
+        "#{per_week_authority_applications_url(@authority.short_name_encoded, format: :json)}",
         "new applications scraped"
       );
 

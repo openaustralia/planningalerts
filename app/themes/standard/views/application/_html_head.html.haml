@@ -13,6 +13,7 @@
 = stylesheet_link_tag "standard/print.css", media: "print"
 /[if IE]
   = stylesheet_link_tag "standard/ie.css", media: "screen"
+= javascript_include_tag "https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js", defer: true
 
 = csrf_meta_tag
 = yield :extra_meta_tags

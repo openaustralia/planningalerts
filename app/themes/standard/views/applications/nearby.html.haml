@@ -1,14 +1,13 @@
 - content_for :page_title, "Applications nearby #{@application.address}"
 
 %h3 Applications nearby
-%p Other applications in the last #{Application.nearby_and_recent_max_age_months} months within #{Application.nearby_and_recent_max_distance_km} km of #{@application.address}
+- if @applications.empty?
+  %p There are no other applications in the last #{Application.nearby_and_recent_max_age_months} months within #{Application.nearby_and_recent_max_distance_km} km of #{@application.address}
+- else
+  %p Other applications in the last #{Application.nearby_and_recent_max_age_months} months within #{Application.nearby_and_recent_max_distance_km} km of #{@application.address}
 
-%ul.list-options
-  %li
-    %b Sort results
-  %li= link_to "Most recent first", { sort: "time", page: nil }, class: "button button-pill button-small #{"button-active" if @sort == "time"}"
-  %li= link_to "Closest first", { sort: "distance", page: nil }, class: "button button-pill button-small #{"button-active" if @sort == "distance"}"
+  = render "sort_options", sort: @sort, extra_params: {}
 
-= paginate @applications
-%ol.applications= render @applications
-= paginate @applications
+  = paginate @applications
+  %ol.applications= render @applications
+  = paginate @applications

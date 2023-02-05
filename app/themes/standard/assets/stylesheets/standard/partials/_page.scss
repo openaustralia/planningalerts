@@ -105,7 +105,6 @@ body {
 }
 
 #content {
-  @include clearfix;
   clear: both;
   position: relative;
   padding: 2em 0 1.5em 0;
@@ -865,13 +864,14 @@ td pre {
   }
 }
 
-#geolocate {
-  visibility: hidden;
-  font-size: 1em;
-  margin-top: 0.5em;
+.geolocate {
+  font-size: 1em !important;
+  margin-top: 0.5em !important;
   display: inline-block;
-  .spinner {
-    visibility: hidden;
+  border-style: none;
+  background-color: white;
+  &:hover {
+    text-decoration: underline;
   }
 }
 
@@ -932,9 +932,4 @@ ul.authorities {
 .hideable-target-show {
   opacity: 1;
   max-height: 200px;
-}
-
-.box.research {
-  margin: 3em 0;
-  padding: 2em;
 }

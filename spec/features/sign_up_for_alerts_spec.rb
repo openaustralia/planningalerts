@@ -130,7 +130,7 @@ describe "Sign up for alerts" do
     fill_in("Password", with: "mypassword")
     click_button("Create my account")
 
-    expect(page).to have_content("A message with a confirmation link has been sent to your email address.")
+    expect(page).to have_content("You will shortly receive an email from PlanningAlerts.org.au. Click on the link in the email")
 
     open_email("example@example.com")
     expect(current_email).to have_subject("PlanningAlerts: Confirmation instructions")

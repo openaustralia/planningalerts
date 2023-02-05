@@ -4,8 +4,6 @@
 class ApplicationsController < ApplicationController
   extend T::Sig
 
-  # TODO: Switch actions from JS to JSON format and remove this
-  skip_before_action :verify_authenticity_token, only: %i[per_day per_week]
   before_action :check_application_redirect, only: %i[show nearby]
 
   sig { void }
@@ -35,41 +33,35 @@ class ApplicationsController < ApplicationController
     @applications = Application.trending.limit(20)
   end
 
-  # JSON api for returning the number of new scraped applications per day
-  sig { void }
-  def per_day
-    params_authority_id = T.cast(params[:authority_id], String)
-
-    authority = Authority.find_short_name_encoded!(params_authority_id)
-    respond_to do |format|
-      format.js do
-        render json: authority.new_applications_per_day
-      end
-    end
-  end
-
   sig { void }
   def per_week
     params_authority_id = T.cast(params[:authority_id], String)
 
     authority = Authority.find_short_name_encoded!(params_authority_id)
     respond_to do |format|
-      format.js do
+      format.json do
         render json: authority.new_applications_per_week
       end
     end
   end
 
   sig { void }
-  def address_results
+  def address
     params_q = T.cast(params[:q], T.nilable(String))
     params_radius = T.cast(params[:radius], T.nilable(T.any(String, Numeric)))
     params_sort = T.cast(params[:sort], T.nilable(String))
     params_page = T.cast(params[:page], T.nilable(String))
+    params_time = T.cast(params[:time], T.nilable(String))
 
     @q = T.let(params_q, T.nilable(String))
     radius = params_radius ? params_radius.to_f : 2000.0
+    # We don't want to allow a search radius that's too large
+    radius = [2000.0, radius].min
     @radius = T.let(radius, T.nilable(Float))
+
+    time = params_time ? params_time.to_i : 365
+    @time = T.let(time, T.nilable(Integer))
+
     sort = params_sort || "time"
     @sort = T.let(sort, T.nilable(String))
     per_page = 30
@@ -77,10 +69,13 @@ class ApplicationsController < ApplicationController
     result = GoogleGeocodeService.call(T.must(@q))
     top = result.top
     if top.nil?
+      @full_address = @q
       @other_addresses = T.let([], T.nilable(T::Array[String]))
       @error = T.let(result.error, T.nilable(String))
+      @trending = T.let(Application.trending.limit(4), T.untyped)
+      render "home/index"
     else
-      @q = top.full_address
+      @full_address = T.let(top.full_address, T.nilable(String))
       @alert = Alert.new(address: @q, user: User.new)
       @other_addresses = T.must(result.rest).map(&:full_address)
       @applications = Application.with_current_version.near(
@@ -89,16 +84,13 @@ class ApplicationsController < ApplicationController
         latitude: "application_versions.lat",
         longitude: "application_versions.lng"
       )
+      @applications = @applications.where("date_scraped > ?", time.days.ago) if Flipper.enabled?(:extra_options_on_address_search, current_user)
       if sort == "time"
         @applications = @applications
                         .reorder("date_scraped DESC")
       end
       @applications = @applications.page(params[:page]).per(per_page)
     end
-    return unless @error
-
-    @trending = T.let(Application.trending.limit(4), T.untyped)
-    render "home/index"
   end
 
   sig { void }

@@ -8,6 +8,7 @@ module ApplicationHelper
   # For sorbet
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TextHelper
+  include Kernel
 
   sig { params(path: String, extra_classes: T::Array[Symbol], block: T.untyped).returns(T.untyped) }
   def menu_item(path, extra_classes: [], &block)
@@ -30,10 +31,10 @@ module ApplicationHelper
                 class: ["nav-item", ("active" if active)])
   end
 
-  sig { params(meters: Float).returns(String) }
+  sig { params(meters: T.any(Float, Integer)).returns(String) }
   def meters_in_words(meters)
     if meters < 1000
-      pluralize(significant_figure_remove_trailing_zero(meters, 2), "metre")
+      pluralize(significant_figure_remove_trailing_zero(meters.to_f, 2), "metre")
     else
       pluralize(significant_figure_remove_trailing_zero(meters / 1000.0, 2), "kilometre")
     end
@@ -71,6 +72,27 @@ module ApplicationHelper
   sig { params(value_in_km: Float).returns(String) }
   def km_in_words(value_in_km)
     meters_in_words(value_in_km * 1000)
+  end
+
+  # For some particular number of days return a human readable version
+  sig { params(days: Integer).returns(String) }
+  def days_in_words(days)
+    case days
+    when 365 / 4
+      "3 months"
+    when 365 / 2
+      "6 months"
+    when 365
+      "year"
+    when 365 * 2
+      "2 years"
+    when 365 * 5
+      "5 years"
+    when 365 * 10
+      "10 years"
+    else
+      raise "Unexpected number of days"
+    end
   end
 
   sig { returns(T::Array[T::Hash[Symbol, String]]) }

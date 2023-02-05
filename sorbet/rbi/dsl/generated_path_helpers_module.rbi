@@ -9,6 +9,9 @@ module GeneratedPathHelpersModule
   include ::ActionDispatch::Routing::PolymorphicRoutes
 
   sig { params(args: T.untyped).returns(String) }
+  def _system_test_entrypoint_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def about_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -118,6 +121,12 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def cancel_user_registration_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def check_email_user_registration_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def check_email_users_activation_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def comment_reports_path(*args); end
@@ -246,13 +255,16 @@ module GeneratedPathHelpersModule
   def new_users_activation_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def per_day_authority_applications_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def per_week_authority_applications_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def per_week_authority_comments_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def preview_view_component_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def preview_view_components_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def profile_alert_path(*args); end
@@ -340,6 +352,9 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def sidekiq_web_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def thank_you_comment_reports_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def toggle_theme_path(*args); end

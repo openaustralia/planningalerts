@@ -9,6 +9,9 @@ module GeneratedUrlHelpersModule
   include ::ActionDispatch::Routing::PolymorphicRoutes
 
   sig { params(args: T.untyped).returns(String) }
+  def _system_test_entrypoint_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def about_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -118,6 +121,12 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def cancel_user_registration_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def check_email_user_registration_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def check_email_users_activation_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def comment_reports_url(*args); end
@@ -246,13 +255,16 @@ module GeneratedUrlHelpersModule
   def new_users_activation_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def per_day_authority_applications_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def per_week_authority_applications_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def per_week_authority_comments_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def preview_view_component_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def preview_view_components_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def profile_alert_url(*args); end
@@ -340,6 +352,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def sidekiq_web_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def thank_you_comment_reports_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def toggle_theme_url(*args); end

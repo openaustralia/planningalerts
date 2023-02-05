@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gem "bootsnap", require: false
 gem "mysql2"
-gem "rails", "7.0.4"
+gem "rails", "7.0.4.2"
 gem "rake"
 
 # API
@@ -76,14 +76,8 @@ gem "sanitize"
 gem "dotenv-rails"
 gem "foreman"
 
-# Figure out who is likely to be human
-gem "recaptcha", require: "recaptcha/rails"
-
 # Site search
 gem "searchkick"
-
-# For accessing the Twitter api
-gem "twitter"
 
 # Used to parse different external application feeds
 gem "atdis"
@@ -146,7 +140,10 @@ gem "flipper-redis"
 gem "flipper-ui"
 
 # Testing this out for application performance monitoring
-gem "skylight"
+# gem "skylight"
+
+# For making more reusable and testable components
+gem "view_component"
 
 group :test do
   gem "capybara"

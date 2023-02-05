@@ -46,17 +46,14 @@
     = f.input :base_url, label: "ATDIS Base URL", placeholder: "http://www.council.nsw.gov.au/atdis/1.0"
   = f.inputs do
     = f.input :page, label: "Page Number", as: :number, min: 1
-  %h2= link_to "Filters", "#", id: "filter-heading"
-  #filters{ class: ("hidden" unless @feed.filters_set?) }
-    = f.inputs "Lodgement Date", class: "daterange" do
-      = f.input :lodgement_date_start, label: "Start", required: false, input_html: { class: "date" }, placeholder: "from"
-      = f.input :lodgement_date_end, label: "End", required: false, placeholder: "to"
-    = f.inputs "Last Modified Date", class: "daterange" do
-      = f.input :last_modified_date_start, label: "Start", required: false, input_html: { class: "date" }, placeholder: "from"
-      = f.input :last_modified_date_end, label: "End", required: false, placeholder: "to"
-    = f.input :street, placeholder: "Military,Cardinal", required: false, hint: "Restrict results to those applications in the given streets"
-    = f.input :suburb, placeholder: "Mosman,Manly", required: false, hint: "Restrict results to those applications in the given suburbs"
-    = f.input :postcode, placeholder: "2000,2780", required: false, hint: "Restrict results to those applications in the given postcodes"
+  %div{ "x-data": "{show: #{@feed.filters_set?}}" }
+    %h2= link_to "Filters", "#", "@click.prevent": "show = !show"
+    %div{ "x-show": "show", "x-cloak": true }
+      = render "date_range_fields", f:, description: "Lodgement Date", start_name: :lodgement_date_start, end_name: :lodgement_date_end
+      = render "date_range_fields", f:, description: "Last Modified Date", start_name: :last_modified_date_start, end_name: :last_modified_date_end
+      = f.input :street, placeholder: "Military,Cardinal", required: false, hint: "Restrict results to those applications in the given streets"
+      = f.input :suburb, placeholder: "Mosman,Manly", required: false, hint: "Restrict results to those applications in the given suburbs"
+      = f.input :postcode, placeholder: "2000,2780", required: false, hint: "Restrict results to those applications in the given postcodes"
   = f.actions do
     = f.action :submit, label: "Test", button_html: { class: "button button-rounded" }
 
@@ -94,4 +91,4 @@
     %h3 Errors
     = render partial: "attribute_error_table", locals: { model: @page }
 
-= javascript_include_tag "atdis"
+= javascript_include_tag "flatpickr"

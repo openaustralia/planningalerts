@@ -1,11 +1,19 @@
-<% if @resource.name.present? %>
-  <p>Welcome <%= @resource.name %>!</p>
-<% else %>
-  <p>Welcome!</p>
-<% end %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html charset=UTF-8">
+  </head>
+  <body>
+    <% if @resource.name.present? %>
+      <p>Welcome <%= @resource.name %>!</p>
+    <% else %>
+      <p>Welcome!</p>
+    <% end %>
 
-<p>We're so happy that you're joining us on PlanningAlerts.</p>
+    <p>We're so happy that you're joining us on PlanningAlerts.</p>
 
-<p>Please confirm your account email by clicking the link below:</p>
+    <p>Please confirm your account email by clicking the link below:</p>
 
-<p><%= link_to "Confirm account", confirmation_url(@resource, confirmation_token: @token) %></p>
+    <p><%= link_to "Confirm account", confirmation_url(@resource, confirmation_token: @token) %></p>
+  </body>
+</html>

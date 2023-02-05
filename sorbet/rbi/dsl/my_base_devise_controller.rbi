@@ -21,6 +21,7 @@ class MyBaseDeviseController
     include ::ActionView::Helpers::AssetTagHelper
     include ::ActionView::Helpers::SanitizeHelper
     include ::ActionView::Helpers::TextHelper
+    include ::Kernel
     include ::ApplicationHelper
     include ::Admin::ApplicationHelper
     include ::AlertMailerHelper
@@ -36,6 +37,7 @@ class MyBaseDeviseController
     include ::CommentsHelper
     include ::SignupHelper
     include ::StaticHelper
+    include ::PreviewHelper
     include ::DeviseHelper
     include ::Pundit::Helper
 

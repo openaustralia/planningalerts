@@ -7,31 +7,10 @@
     %ol
       %li.string#q_input{ class: ("error" if @error) }
         = label_tag(:q, "Enter a street address")
-        = text_field_tag(:q, @q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", required: "required", class: "address-autocomplete-input", autofocus: true)
-        - if @error
-          %p.inline-errors= @error
-        = link_to "#", class: "inline-hints", id: "geolocate" do
-          &hellip; or locate me automatically
-          = image_tag("standard/spinner.gif", size: "16x16", class: "spinner")
+        = render "home/address_field_with_geolocate", q: @q, error: @error
 
   %fieldset.actions
     %ol
       %li.submit= submit_tag "Search", name: nil, class: "button button-rounded button-large button-action"
 
-.box.research
-  %h3 Do you have some time to share your views about Planning Alerts?
-
-  %p
-    The team at Planning Alerts are doing some research to understand how we could improve the service for you.
-    We ask for an hour of your time in a 1-1 format (you and the researcher) held online via video call.
-
-  %p
-    The research will run from <strong>6th - 10th of February 2023</strong>.
-    If you are available and interested in participating in our research please click on the button below.
-    It will take you to a short survey to sign up for the research.
-
-  = link_to "Participate in research", "https://forms.gle/Ju31FoVazC9qUkqVA", class: "button button-action"
-
-
 = render "home/trending", applications: @trending
-= render "home/tweets"
