@@ -6,4 +6,6 @@
 <ol class="pl-10 mt-10 text-xl font-bold list-decimal columns-1 md:columns-2 gap-x-10 text-fuchsia">
   <%= render partial: "home/application_trending", collection: applications, as: :application %>
 </ol>
-<div class="text-xl font-bold text-right text-yellow">> View all top 20</div>
+<div class="text-right">
+  <%= link_to "> View all top 20", trending_applications_path, class: "text-xl font-bold text-yellow" %>
+</div>
