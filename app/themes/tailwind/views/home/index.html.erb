@@ -1,10 +1,10 @@
 <div class="max-w-6xl px-10 mx-auto">
   <div class="flex items-center justify-between my-7">
-    <h2 class="font-display font-medium text-blue text-4xl max-w-xl">Find out for free what is being built and knocked down in your area.</h2>
+    <h2 class="max-w-xl text-4xl font-medium font-display text-blue">Find out for free what is being built and knocked down in your area.</h2>
     <%= image_tag "tailwind/illustration.svg" %>
   </div>
 
-  <div class="bg-blue px-28 py-16">
+  <div class="py-16 bg-blue px-28">
     <%= form_with url: address_applications_path, method: :get, class: "space-y-6 text-center" do |form| %>
       <%= form.label :q, "Enter a street address", class: "font-semibold text-4xl text-white" %>
       <%= form.text_field :q, placeholder: "e.g. 1 Sowerby St, Goulburn, NSW 2580", class: "text-xl w-full p-4", required: "required", autofocus: true %>
