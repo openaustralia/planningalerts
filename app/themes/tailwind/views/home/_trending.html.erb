@@ -4,35 +4,6 @@
   We bring you the trending applications so you can see what people find most popular or contentionus.
 </p>
 <ol class="pl-10 mt-10 text-xl font-bold list-decimal columns-1 md:columns-2 gap-x-10 text-fuchsia">
-  <li class="mb-6 break-inside-avoid">
-    <div class="ml-6">
-      <div class="text-orange">2 Club Court, Strathfieldsaye 3551, VIC</div>
-      <div class="font-normal text-blue">13 comments</div>
-    </div>
-  </li>
-  <li class="mb-6 break-inside-avoid">
-    <div class="ml-6">
-      <div class="text-orange">179 Albion Street, Brunswick VIC 3056</div>
-      <div class="font-normal text-blue">11 comments</div>
-    </div>
-  </li>
-  <li class="mb-6 break-inside-avoid">
-    <div class="ml-6">
-      <div class="text-orange">257 Albert Street, Brunswick VIC 3056</div>
-      <div class="font-normal text-blue">11 comments</div>
-    </div>
-  </li>
-  <li class="mb-6 break-inside-avoid">
-    <div class="ml-6">
-      <div class="text-orange">49 Newcombe Street, Portarlington, VIC</div>
-      <div class="font-normal text-blue">28 days ago</div>
-    </div>
-  </li>
-  <li class="mb-6 break-inside-avoid">
-    <div class="ml-6">
-      <div class="text-orange">11 John Batman Avenue, Werrington County NSW 2747</div>
-      <div class="font-normal text-blue">9 comments</div>
-    </div>
-  </li>
+  <%= render partial: "home/application_trending", collection: applications, as: :application %>
 </ol>
 <div class="text-xl font-bold text-right text-yellow">> View all top 20</div>
