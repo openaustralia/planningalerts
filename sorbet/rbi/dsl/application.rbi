@@ -608,6 +608,51 @@ class Application
     sig { void }
     def council_reference_will_change!; end
 
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def first_date_scraped; end
+
+    sig { params(value: T.nilable(::ActiveSupport::TimeWithZone)).returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def first_date_scraped=(value); end
+
+    sig { returns(T::Boolean) }
+    def first_date_scraped?; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def first_date_scraped_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def first_date_scraped_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def first_date_scraped_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def first_date_scraped_change; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def first_date_scraped_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def first_date_scraped_changed?; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def first_date_scraped_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def first_date_scraped_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def first_date_scraped_previously_changed?; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def first_date_scraped_previously_was; end
+
+    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    def first_date_scraped_was; end
+
+    sig { void }
+    def first_date_scraped_will_change!; end
+
     sig { returns(T.nilable(::Integer)) }
     def id; end
 
@@ -705,6 +750,9 @@ class Application
     def restore_council_reference!; end
 
     sig { void }
+    def restore_first_date_scraped!; end
+
+    sig { void }
     def restore_id!; end
 
     sig { void }
@@ -724,6 +772,12 @@ class Application
 
     sig { returns(T::Boolean) }
     def saved_change_to_council_reference?; end
+
+    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    def saved_change_to_first_date_scraped; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_first_date_scraped?; end
 
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def saved_change_to_id; end
@@ -793,6 +847,9 @@ class Application
 
     sig { returns(T::Boolean) }
     def will_save_change_to_council_reference?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_first_date_scraped?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_id?; end

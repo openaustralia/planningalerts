@@ -36,9 +36,8 @@ class CreateOrUpdateApplicationService
   def call
     Application.transaction do
       # First check if record already exists or create a new one if it doesn't
-      application = Application.find_or_create_by!(
-        authority:, council_reference:
-      )
+      application = Application.find_by(authority:, council_reference:)
+      application = Application.create!(authority:, council_reference:, first_date_scraped: attributes["date_scraped"]) if application.nil?
       create_version(application)
       application.reindex
       application

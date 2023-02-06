@@ -25,6 +25,10 @@ describe CreateOrUpdateApplicationService do
     )
   end
 
+  it "sets the first_date_scraped on the application" do
+    expect(application.attributes["first_date_scraped"]).to eq Date.new(2001, 1, 10)
+  end
+
   it "automaticallies create a version on creating an application" do
     expect(application.versions.count).to eq 1
   end
