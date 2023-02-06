@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_26_004418) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_06_002921) do
   create_table "active_admin_comments", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "resource_id", default: "", null: false
     t.string "resource_type", default: "", null: false
@@ -100,6 +100,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_26_004418) do
     t.integer "authority_id", null: false
     t.integer "no_alerted"
     t.integer "visible_comments_count", default: 0, null: false
+    t.timestamp "first_date_scraped"
     t.index ["authority_id", "council_reference"], name: "index_applications_on_authority_id_and_council_reference", unique: true
     t.index ["authority_id"], name: "authority_id"
     t.index ["visible_comments_count"], name: "index_applications_on_visible_comments_count"
