@@ -14,7 +14,8 @@ describe ImportApplicationsService do
       info_url: "http://fiddle.gov.au/info/R1",
       date_received: "2009-01-01",
       on_notice_from: "2009-01-05",
-      on_notice_to: "2009-01-19"
+      on_notice_to: "2009-01-19",
+      comment_email: "foo@bar.com"
     }
   end
   let(:app_data2) do
@@ -75,6 +76,9 @@ describe ImportApplicationsService do
     expect(r1.date_received).to eq(date)
     expect(r1.on_notice_from).to eq(Date.new(2009, 1, 5))
     expect(r1.on_notice_to).to eq(Date.new(2009, 1, 19))
+    expect(r1.comment_email).to eq "foo@bar.com"
+    r2 = Application.find_by(council_reference: "R2")
+    expect(r2.comment_email).to be_nil
   end
 
   it "updates an application when it already exist" do
