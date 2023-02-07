@@ -50,6 +50,12 @@ class Application < ApplicationRecord
            :comment_email,
            to: :current_version
 
+  # TODO: This also needs to take into account comment_email
+  sig { returns(T.nilable(String)) }
+  def comment_email_with_fallback
+    T.must(authority).email
+  end
+
   sig { returns(Time) }
   def first_date_scraped
     T.must(first_version).date_scraped.time

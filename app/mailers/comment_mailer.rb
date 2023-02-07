@@ -26,7 +26,7 @@ class CommentMailer < ApplicationMailer
       # but DMARC now effectively makes this way of doing things unworkable.
       from: email_from,
       reply_to: "#{comment.name} <#{comment.email}>",
-      to: T.must(T.must(comment.application).authority).email,
+      to: T.must(comment.application).comment_email_with_fallback,
       subject: default_i18n_subject(council_reference: T.must(comment.application).council_reference)
     )
   end
