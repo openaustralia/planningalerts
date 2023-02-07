@@ -134,6 +134,18 @@
           The date until when public submissions can be made about this application. Should be in
           = link_to "ISO 8601", "http://en.wikipedia.org/wiki/ISO_8601"
           format.
+    %tr
+      %td.field comment_email
+      %td.example foo@bar.com
+      %td
+        %p
+          Only set this in
+          %strong extremely unusual
+          situations. Allows each application in a single
+          planning authority to go to a different email address. This should never be set for 99.9%
+          of authorities as a single email address is used for all comments. Currently this is only
+          used for SA Planning Portal where comments are ideally sent back to the originating
+          local council so that the staff in state government don't have to do the redirection by hand.
 
 %h4 Versioning application data
 %p
