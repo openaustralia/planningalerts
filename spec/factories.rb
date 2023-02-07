@@ -30,6 +30,7 @@ FactoryBot.define do
         suburb { nil }
         state { nil }
         postcode { nil }
+        comment_email { nil }
       end
 
       after(:create) do |application, evaluator|
@@ -42,6 +43,7 @@ FactoryBot.define do
           date_received: evaluator.date_received,
           on_notice_from: evaluator.on_notice_from,
           on_notice_to: evaluator.on_notice_to,
+          comment_email: evaluator.comment_email,
           date_scraped: evaluator.date_scraped,
           lat: evaluator.lat,
           lng: evaluator.lng,

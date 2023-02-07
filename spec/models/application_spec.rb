@@ -91,4 +91,24 @@ describe Application do
       expect(updated_application.current_version.date_scraped).not_to eq date_scraped
     end
   end
+
+  describe "#comment_email_with_fallback" do
+    let(:authority) { create(:authority, email: "council@foo.com") }
+
+    context "when application has comment_email set to nil" do
+      let(:application) { create(:geocoded_application, authority:) }
+
+      it "returns the email address of the authority" do
+        expect(application.comment_email_with_fallback).to eq "council@foo.com"
+      end
+    end
+
+    context "when application has comment_email set to specialplace@bar.com" do
+      let(:application) { create(:geocoded_application, authority:, comment_email: "specialplace@bar.com") }
+
+      it "returns the overridden email address connected to the application" do
+        expect(application.comment_email_with_fallback).to eq "specialplace@bar.com"
+      end
+    end
+  end
 end
