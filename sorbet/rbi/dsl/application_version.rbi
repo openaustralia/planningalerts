@@ -552,6 +552,51 @@ class ApplicationVersion
     def application_id_will_change!; end
 
     sig { returns(T.nilable(::String)) }
+    def comment_email; end
+
+    sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
+    def comment_email=(value); end
+
+    sig { returns(T::Boolean) }
+    def comment_email?; end
+
+    sig { returns(T.nilable(::String)) }
+    def comment_email_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def comment_email_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def comment_email_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def comment_email_change; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def comment_email_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def comment_email_changed?; end
+
+    sig { returns(T.nilable(::String)) }
+    def comment_email_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def comment_email_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def comment_email_previously_changed?; end
+
+    sig { returns(T.nilable(::String)) }
+    def comment_email_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def comment_email_was; end
+
+    sig { void }
+    def comment_email_will_change!; end
+
+    sig { returns(T.nilable(::String)) }
     def comment_url; end
 
     sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
@@ -1188,6 +1233,9 @@ class ApplicationVersion
     def restore_application_id!; end
 
     sig { void }
+    def restore_comment_email!; end
+
+    sig { void }
     def restore_comment_url!; end
 
     sig { void }
@@ -1249,6 +1297,12 @@ class ApplicationVersion
 
     sig { returns(T::Boolean) }
     def saved_change_to_application_id?; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def saved_change_to_comment_email; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_comment_email?; end
 
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def saved_change_to_comment_url; end
@@ -1492,6 +1546,9 @@ class ApplicationVersion
 
     sig { returns(T::Boolean) }
     def will_save_change_to_application_id?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_comment_email?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_comment_url?; end
