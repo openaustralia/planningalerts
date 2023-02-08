@@ -55,6 +55,12 @@ class Application < ApplicationRecord
     comment_email.presence || T.must(authority).email
   end
 
+  # TODO: Make this use comment_authority as well
+  sig { returns(String) }
+  def comment_authority_with_fallback
+    T.must(authority).full_name
+  end
+
   sig { returns(Time) }
   def first_date_scraped
     T.must(first_version).date_scraped.time

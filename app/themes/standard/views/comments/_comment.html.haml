@@ -29,12 +29,12 @@
           - elsif comment.last_delivered_successfully
             This comment was successfully delivered to the
             email server of
-            = comment.application.authority.full_name
+            = comment.application.comment_authority_with_fallback
             at
             = comment.last_delivered_at
           - else
             The comment was hard bounced by the email server of
-            = comment.application.authority.full_name
+            = comment.application.comment_authority_with_fallback
             at
             = comment.last_delivered_at
             Please follow up by emailing us at contact@planningalerts.org.au so
