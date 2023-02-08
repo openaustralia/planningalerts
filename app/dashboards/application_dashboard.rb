@@ -24,7 +24,6 @@ class ApplicationDashboard < Administrate::BaseDashboard
     date_received: Field::Date,
     date_scraped: Field::DateTime,
     description: Field::Text,
-    first_version: Field::HasOne,
     info_url: Field::String.with_options(searchable: false),
     lat: Field::Number.with_options(decimals: 2),
     lng: Field::Number.with_options(decimals: 2),
@@ -78,7 +77,6 @@ class ApplicationDashboard < Administrate::BaseDashboard
     comments
     versions
     current_version
-    first_version
     council_reference
     no_alerted
     visible_comments_count

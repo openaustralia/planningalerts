@@ -239,9 +239,6 @@ class Application
     sig { params(args: T.untyped, blk: T.untyped).returns(::ApplicationVersion) }
     def build_current_version(*args, &blk); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(::ApplicationVersion) }
-    def build_first_version(*args, &blk); end
-
     sig { returns(T::Array[T.untyped]) }
     def comment_ids; end
 
@@ -268,32 +265,17 @@ class Application
     sig { params(args: T.untyped, blk: T.untyped).returns(::ApplicationVersion) }
     def create_current_version!(*args, &blk); end
 
-    sig { params(args: T.untyped, blk: T.untyped).returns(::ApplicationVersion) }
-    def create_first_version(*args, &blk); end
-
-    sig { params(args: T.untyped, blk: T.untyped).returns(::ApplicationVersion) }
-    def create_first_version!(*args, &blk); end
-
     sig { returns(T.nilable(::ApplicationVersion)) }
     def current_version; end
 
     sig { params(value: T.nilable(::ApplicationVersion)).void }
     def current_version=(value); end
 
-    sig { returns(T.nilable(::ApplicationVersion)) }
-    def first_version; end
-
-    sig { params(value: T.nilable(::ApplicationVersion)).void }
-    def first_version=(value); end
-
     sig { returns(T.nilable(::Authority)) }
     def reload_authority; end
 
     sig { returns(T.nilable(::ApplicationVersion)) }
     def reload_current_version; end
-
-    sig { returns(T.nilable(::ApplicationVersion)) }
-    def reload_first_version; end
 
     sig { returns(T::Array[T.untyped]) }
     def version_ids; end
