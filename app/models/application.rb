@@ -60,11 +60,6 @@ class Application < ApplicationRecord
     comment_authority.presence || T.must(authority).full_name
   end
 
-  sig { returns(Time) }
-  def first_date_scraped
-    T.must(first_version).date_scraped.time
-  end
-
   # Providing this for back compatibility in the API
   sig { returns(NilClass) }
   def comment_url

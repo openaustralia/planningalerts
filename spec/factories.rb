@@ -54,6 +54,7 @@ FactoryBot.define do
           postcode: evaluator.postcode,
           application:
         )
+        application.update!(first_date_scraped: evaluator.date_scraped)
       end
 
       factory :geocoded_application do
