@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_07_022012) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_08_003615) do
   create_table "active_admin_comments", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "resource_id", default: "", null: false
     t.string "resource_type", default: "", null: false
@@ -87,6 +87,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_022012) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.string "comment_email"
+    t.string "comment_authority"
     t.index ["application_id"], name: "index_application_versions_on_application_id"
     t.index ["date_scraped"], name: "index_application_versions_on_date_scraped"
     t.index ["lat", "lng", "date_scraped"], name: "index_application_versions_on_lat_and_lng_and_date_scraped"
