@@ -47,7 +47,7 @@ class Application < ApplicationRecord
            :on_notice_from, :on_notice_to, :lat, :lng, :suburb, :state,
            :postcode, :description, :address, :location,
            :official_submission_period_expired?, :date_scraped,
-           :comment_email,
+           :comment_email, :comment_authority,
            to: :current_version
 
   sig { returns(T.nilable(String)) }

@@ -31,6 +31,7 @@ FactoryBot.define do
         state { nil }
         postcode { nil }
         comment_email { nil }
+        comment_authority { nil }
       end
 
       after(:create) do |application, evaluator|
@@ -44,6 +45,7 @@ FactoryBot.define do
           on_notice_from: evaluator.on_notice_from,
           on_notice_to: evaluator.on_notice_to,
           comment_email: evaluator.comment_email,
+          comment_authority: evaluator.comment_authority,
           date_scraped: evaluator.date_scraped,
           lat: evaluator.lat,
           lng: evaluator.lng,

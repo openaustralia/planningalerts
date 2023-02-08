@@ -83,7 +83,8 @@ class ImportApplicationsService
           date_scraped: r.date_scraped,
           on_notice_from: r.on_notice_from,
           on_notice_to: r.on_notice_to,
-          comment_email: r.comment_email
+          comment_email: r.comment_email,
+          comment_authority: r.comment_authority
         }
       )
       count += 1
@@ -105,10 +106,11 @@ class ImportApplicationsService
     const :info_url, String
     const :date_received, T.nilable(String)
     const :date_scraped, ActiveSupport::TimeWithZone
-    # on_notice_from, on_notice_to and comment_email are optional
+    # on_notice_from, on_notice_to, comment_email and comment_authority are optional
     const :on_notice_from, T.nilable(String)
     const :on_notice_to, T.nilable(String)
     const :comment_email, T.nilable(String)
+    const :comment_authority, T.nilable(String)
   end
 
   sig { returns(T::Array[ImportRecord]) }
@@ -134,7 +136,8 @@ class ImportApplicationsService
         # on_notice_from and on_notice_to tags are optional
         on_notice_from: a["on_notice_from"],
         on_notice_to: a["on_notice_to"],
-        comment_email: a["comment_email"]
+        comment_email: a["comment_email"],
+        comment_authority: a["comment_authority"]
       )
     end
   end

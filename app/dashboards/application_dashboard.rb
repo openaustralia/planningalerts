@@ -17,6 +17,7 @@ class ApplicationDashboard < Administrate::BaseDashboard
     address: Field::Text,
     authority: Field::BelongsTo,
     comments: Field::HasMany,
+    comment_authority: Field::Text,
     comment_email: Field::Text,
     council_reference: Field::String,
     current_version: Field::HasOne,
@@ -56,6 +57,7 @@ class ApplicationDashboard < Administrate::BaseDashboard
     info_url
     authority
     comment_email
+    comment_authority
     lat
     lng
     date_scraped
