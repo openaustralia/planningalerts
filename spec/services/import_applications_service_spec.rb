@@ -108,7 +108,7 @@ describe ImportApplicationsService do
     r2 = Application.find_by(council_reference: "R2")
     expect(r2.versions.count).to eq 2
     expect(r2.description).to eq "Knocking a house down"
-    expect(r2.first_version.description).to eq "Putting a house up"
+    expect(r2.versions.where(previous_version: nil).first.description).to eq "Putting a house up"
   end
 
   it "escapes the morph api key and the sql query" do
