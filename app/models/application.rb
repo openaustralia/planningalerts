@@ -55,10 +55,9 @@ class Application < ApplicationRecord
     comment_email.presence || T.must(authority).email
   end
 
-  # TODO: Make this use comment_authority as well
   sig { returns(String) }
   def comment_authority_with_fallback
-    T.must(authority).full_name
+    comment_authority.presence || T.must(authority).full_name
   end
 
   sig { returns(Time) }
