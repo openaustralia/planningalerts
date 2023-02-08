@@ -83,16 +83,15 @@ class Alert < ApplicationRecord
   # be included with the results.
   sig { returns(T.untyped) }
   def recent_new_applications
-    Application.with_first_version
-               .with_current_version
-               .order("application_versions.date_scraped DESC")
+    Application.with_current_version
+               .order("first_date_scraped DESC")
                .near(
                  [lat, lng], radius_km,
                  units: :km,
-                 latitude: "current_versions_applications.lat",
-                 longitude: "current_versions_applications.lng"
+                 latitude: "application_versions.lat",
+                 longitude: "application_versions.lng"
                )
-               .where("application_versions.date_scraped > ?", cutoff_time)
+               .where("first_date_scraped > ?", cutoff_time)
   end
 
   # Applications in the area of interest which have new comments made since we were last alerted
