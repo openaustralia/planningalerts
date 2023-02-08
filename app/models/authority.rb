@@ -103,8 +103,7 @@ class Authority < ApplicationRecord
   # When this authority started on PlanningAlerts. Just the date of the earliest scraped application
   sig { returns(T.nilable(Time)) }
   def earliest_date
-    earliest_application = applications.with_first_version.order("date_scraped").first
-    earliest_application&.first_date_scraped
+    applications.minimum(:first_date_scraped)
   end
 
   # So that the encoding function can be used elsewhere
@@ -136,8 +135,7 @@ class Authority < ApplicationRecord
   # When the last entirely new application was scraped. Applications being updated is ignored.
   sig { returns(T.nilable(Time)) }
   def date_last_new_application_scraped
-    latest_application = applications.with_first_version.order("date_scraped DESC").first
-    latest_application&.first_date_scraped
+    applications.maximum(:first_date_scraped)
   end
 
   # If the latest application is over two weeks old, the scraper's probably broken
