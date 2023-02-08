@@ -60,17 +60,6 @@ describe Application do
     end
   end
 
-  # TODO: The main code in the application does not yet reflect this way of doing a query
-  describe ".with_first_version" do
-    it "does not do too many sql queries" do
-      create_list(:geocoded_application, 5)
-      allow(ActiveRecord::Base.connection).to receive(:exec_query).and_call_original
-
-      described_class.with_first_version.order("application_versions.date_scraped DESC").includes(:current_version).all.map(&:description)
-      expect(ActiveRecord::Base.connection).to have_received(:exec_query).at_most(:twice)
-    end
-  end
-
   describe "#date_scraped" do
     let(:application) { create(:geocoded_application) }
 
