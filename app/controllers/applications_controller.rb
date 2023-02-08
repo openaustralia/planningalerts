@@ -130,21 +130,17 @@ class ApplicationsController < ApplicationController
     params_sort = T.cast(params[:sort], T.nilable(String))
 
     @sort = params_sort
+    if @sort != "time" && @sort != "distance"
+      redirect_to sort: "time"
+      return
+    end
 
     # TODO: Fix this hacky ugliness
     per_page = request.format == Mime[:html] ? 30 : Application.max_per_page
 
     @application = Application.find(params[:id])
-    case @sort
-    when "time"
-      @applications = @application.find_all_nearest_or_recent.reorder("application_versions.date_scraped DESC")
-    when "distance"
-      @applications = @application.find_all_nearest_or_recent
-    else
-      redirect_to sort: "time"
-      return
-    end
-    @applications = @applications.page(params[:page]).per(per_page)
+    @applications = @application.find_all_nearest_or_recent.page(params[:page]).per(per_page)
+    @applications = @applications.reorder("application_versions.date_scraped DESC") if @sort == "time"
   end
 
   private
