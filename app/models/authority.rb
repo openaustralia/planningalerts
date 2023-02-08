@@ -65,7 +65,7 @@ class Authority < ApplicationRecord
   def new_applications_per_week
     # Sunday is the beginning of the week (and the date returned here)
     # Have to compensate for MySQL which treats Monday as the beginning of the week
-    h = applications.with_first_version.order("date_scraped DESC").group("CAST(SUBDATE(date_scraped, WEEKDAY(date_scraped) + 1) AS DATE)").count
+    h = applications.order("first_date_scraped DESC").group("CAST(SUBDATE(first_date_scraped, WEEKDAY(first_date_scraped) + 1) AS DATE)").count
     min = h.keys.min
     max = Time.zone.today - Time.zone.today.wday
     (min..max).step(7) do |date|
