@@ -140,7 +140,7 @@ class ApplicationsController < ApplicationController
 
     @application = Application.find(params[:id])
     @applications = @application.find_all_nearest_or_recent.page(params[:page]).per(per_page)
-    @applications = @applications.reorder("application_versions.date_scraped DESC") if @sort == "time"
+    @applications = @applications.reorder("first_date_scraped DESC") if @sort == "time"
   end
 
   private
