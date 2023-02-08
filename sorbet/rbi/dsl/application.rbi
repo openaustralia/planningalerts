@@ -608,10 +608,10 @@ class Application
     sig { void }
     def council_reference_will_change!; end
 
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    sig { returns(::ActiveSupport::TimeWithZone) }
     def first_date_scraped; end
 
-    sig { params(value: T.nilable(::ActiveSupport::TimeWithZone)).returns(T.nilable(::ActiveSupport::TimeWithZone)) }
+    sig { params(value: ::ActiveSupport::TimeWithZone).returns(::ActiveSupport::TimeWithZone) }
     def first_date_scraped=(value); end
 
     sig { returns(T::Boolean) }
@@ -626,10 +626,10 @@ class Application
     sig { returns(T::Boolean) }
     def first_date_scraped_came_from_user?; end
 
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    sig { returns(T.nilable([::ActiveSupport::TimeWithZone, ::ActiveSupport::TimeWithZone])) }
     def first_date_scraped_change; end
 
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    sig { returns(T.nilable([::ActiveSupport::TimeWithZone, ::ActiveSupport::TimeWithZone])) }
     def first_date_scraped_change_to_be_saved; end
 
     sig { returns(T::Boolean) }
@@ -638,7 +638,7 @@ class Application
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def first_date_scraped_in_database; end
 
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    sig { returns(T.nilable([::ActiveSupport::TimeWithZone, ::ActiveSupport::TimeWithZone])) }
     def first_date_scraped_previous_change; end
 
     sig { returns(T::Boolean) }
@@ -773,7 +773,7 @@ class Application
     sig { returns(T::Boolean) }
     def saved_change_to_council_reference?; end
 
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
+    sig { returns(T.nilable([::ActiveSupport::TimeWithZone, ::ActiveSupport::TimeWithZone])) }
     def saved_change_to_first_date_scraped; end
 
     sig { returns(T::Boolean) }
