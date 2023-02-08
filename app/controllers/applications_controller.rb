@@ -20,7 +20,7 @@ class ApplicationsController < ApplicationController
     else
       apps = Application
     end
-    apps = apps.with_first_version.order("date_scraped DESC").where("date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
+    apps = apps.includes(:current_version).order("first_date_scraped DESC").where("first_date_scraped > ?", Application.nearby_and_recent_max_age_months.months.ago)
 
     @authority = T.let(authority, T.nilable(Authority))
     @description = T.let(description, T.nilable(String))
