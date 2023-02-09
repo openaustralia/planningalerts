@@ -140,7 +140,7 @@ gem "flipper-redis"
 gem "flipper-ui"
 
 # Testing this out for application performance monitoring
-# gem "skylight"
+gem "skylight"
 
 # For making more reusable and testable components
 gem "view_component"
