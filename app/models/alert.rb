@@ -98,7 +98,7 @@ class Alert < ApplicationRecord
   sig { returns(T.untyped) }
   def applications_with_new_comments
     Application.with_current_version
-               .order("date_scraped DESC")
+               .order("application_versions.date_scraped DESC")
                .near(
                  [lat, lng], radius_km,
                  units: :km,

@@ -87,7 +87,7 @@ class ApplicationsController < ApplicationController
       @applications = @applications.where("date_scraped > ?", time.days.ago) if Flipper.enabled?(:extra_options_on_address_search, current_user)
       if sort == "time"
         @applications = @applications
-                        .reorder("date_scraped DESC")
+                        .reorder("application_versions.date_scraped DESC")
       end
       @applications = @applications.page(params[:page]).per(per_page)
     end
