@@ -33,6 +33,22 @@ describe CreateOrUpdateApplicationService do
     expect(application.versions.count).to eq 1
   end
 
+  it "also sets the information on the original application" do
+    a = application.attributes
+    expect(a["date_scraped"]).to eq Date.new(2001, 1, 10)
+    expect(a["address"]).to eq "Some kind of address"
+    expect(a["description"]).to eq "A really nice change"
+    expect(a["info_url"]).to eq "http://foo.com"
+    expect(a["date_received"]).to eq Date.new(2001, 1, 1)
+    expect(a["on_notice_from"]).to eq Date.new(2002, 1, 1)
+    expect(a["on_notice_to"]).to eq Date.new(2002, 2, 1)
+    expect(a["lat"]).to eq 1.0
+    expect(a["lng"]).to eq 2.0
+    expect(a["suburb"]).to eq "Sydney"
+    expect(a["state"]).to eq "NSW"
+    expect(a["postcode"]).to eq "2000"
+  end
+
   it "populates the version with the current information" do
     version = application.versions.first
     expect(version.application).to eq application
@@ -85,6 +101,11 @@ describe CreateOrUpdateApplicationService do
 
     it "has the new value" do
       expect(updated_application.address).to eq "A better kind of address"
+    end
+
+    it "also updates the field on the main table" do
+      a = updated_application.attributes
+      expect(a["address"]).to eq "A better kind of address"
     end
 
     it "has the new value in the latest version" do

@@ -37,7 +37,11 @@ class CreateOrUpdateApplicationService
     Application.transaction do
       # First check if record already exists or create a new one if it doesn't
       application = Application.find_by(authority:, council_reference:)
-      application = Application.create!(authority:, council_reference:, first_date_scraped: attributes["date_scraped"]) if application.nil?
+      if application
+        application.update!(attributes)
+      else
+        application = Application.create!(attributes.symbolize_keys.merge(authority:, council_reference:, first_date_scraped: attributes["date_scraped"]))
+      end
       create_version(application)
       application.reindex
       application
