@@ -96,7 +96,7 @@ class ApiController < ApplicationController
     end
 
     if date
-      api_render(Application.with_current_version.order("date_scraped DESC").where("application_versions.date_scraped" => date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
+      api_render(Application.with_current_version.order("application_versions.date_scraped DESC").where("application_versions.date_scraped" => date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
     else
       render_error("invalid date_scraped", :bad_request)
     end

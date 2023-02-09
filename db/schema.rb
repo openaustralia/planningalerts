@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_09_001043) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_09_180422) do
   create_table "active_admin_comments", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "resource_id", default: "", null: false
     t.string "resource_type", default: "", null: false
@@ -103,9 +103,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_09_001043) do
     t.integer "no_alerted"
     t.integer "visible_comments_count", default: 0, null: false
     t.timestamp "first_date_scraped", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.text "address"
+    t.text "description"
+    t.string "info_url", limit: 1024
+    t.date "date_received"
+    t.date "on_notice_from"
+    t.date "on_notice_to"
+    t.timestamp "date_scraped", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.float "lat", limit: 53
+    t.float "lng", limit: 53
+    t.string "suburb", limit: 50
+    t.string "state", limit: 10
+    t.string "postcode", limit: 4
+    t.string "comment_email"
+    t.string "comment_authority"
     t.index ["authority_id", "council_reference"], name: "index_applications_on_authority_id_and_council_reference", unique: true
     t.index ["authority_id"], name: "authority_id"
+    t.index ["date_scraped"], name: "index_applications_on_date_scraped"
     t.index ["first_date_scraped"], name: "index_applications_on_first_date_scraped"
+    t.index ["lat", "lng", "date_scraped"], name: "index_applications_on_lat_and_lng_and_date_scraped"
+    t.index ["postcode"], name: "index_applications_on_postcode"
+    t.index ["state"], name: "index_applications_on_state"
+    t.index ["suburb"], name: "index_applications_on_suburb"
     t.index ["visible_comments_count"], name: "index_applications_on_visible_comments_count"
   end
 
