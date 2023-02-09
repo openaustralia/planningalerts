@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_08_203844) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_09_001043) do
   create_table "active_admin_comments", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "resource_id", default: "", null: false
     t.string "resource_type", default: "", null: false
@@ -105,6 +105,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_203844) do
     t.timestamp "first_date_scraped", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["authority_id", "council_reference"], name: "index_applications_on_authority_id_and_council_reference", unique: true
     t.index ["authority_id"], name: "authority_id"
+    t.index ["first_date_scraped"], name: "index_applications_on_first_date_scraped"
     t.index ["visible_comments_count"], name: "index_applications_on_visible_comments_count"
   end
 
