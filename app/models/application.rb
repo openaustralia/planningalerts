@@ -92,6 +92,6 @@ class Application < ApplicationRecord
 
   sig { returns(ActiveRecord::Relation) }
   def self.trending
-    with_current_version.where("date_scraped > ?", 4.weeks.ago).order(visible_comments_count: :desc)
+    with_current_version.where("first_date_scraped > ?", 4.weeks.ago).order(visible_comments_count: :desc)
   end
 end
