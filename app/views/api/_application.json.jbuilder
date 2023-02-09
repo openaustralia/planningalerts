@@ -8,7 +8,8 @@ json.application do
   json.address application.address
   json.description application.description
   json.info_url application.info_url
-  json.comment_url application.comment_url
+  # Provided for backwards compatibility
+  json.comment_url nil
   json.date_received application.date_received
   json.on_notice_from application.on_notice_from
   json.on_notice_to application.on_notice_to

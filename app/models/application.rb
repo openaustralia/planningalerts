@@ -57,12 +57,6 @@ class Application < ApplicationRecord
     comment_authority.presence || T.must(authority).full_name
   end
 
-  # Providing this for back compatibility in the API
-  sig { returns(NilClass) }
-  def comment_url
-    nil
-  end
-
   # Default values for what we consider nearby and recent
   sig { returns(Integer) }
   def self.nearby_and_recent_max_distance_km
