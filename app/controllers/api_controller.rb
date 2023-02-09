@@ -22,13 +22,13 @@ class ApiController < ApplicationController
 
     # TODO: Handle the situation where the authority name isn't found
     authority = Authority.find_short_name_encoded!(params_authority_id)
-    apps = authority.applications.with_current_version.order("date_scraped DESC")
+    apps = authority.applications.with_current_version.order("first_date_scraped DESC")
     api_render(apps, "Recent applications from #{authority.full_name_and_state}")
   end
 
   sig { void }
   def suburb_postcode
-    apps = Application.with_current_version.order("date_scraped DESC")
+    apps = Application.with_current_version.order("first_date_scraped DESC")
     descriptions = []
     if params[:suburb]
       descriptions << params[:suburb]
@@ -63,7 +63,7 @@ class ApiController < ApplicationController
     location = Location.new(lat: params_lat.to_f, lng: params_lng.to_f)
     location_text = location.to_s
     api_render(
-      Application.with_current_version.order("date_scraped DESC").near(
+      Application.with_current_version.order("first_date_scraped DESC").near(
         [location.lat, location.lng], radius / 1000,
         units: :km,
         latitude: "application_versions.lat",
@@ -80,7 +80,7 @@ class ApiController < ApplicationController
     lat1 = params[:top_right_lat]
     lng1 = params[:top_right_lng]
     api_render(
-      Application.with_current_version.order("date_scraped DESC").where("lat > ? AND lng > ? AND lat < ? AND lng < ?", lat0, lng0, lat1, lng1),
+      Application.with_current_version.order("first_date_scraped DESC").where("lat > ? AND lng > ? AND lat < ? AND lng < ?", lat0, lng0, lat1, lng1),
       "Recent applications in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
     )
   end
@@ -96,7 +96,7 @@ class ApiController < ApplicationController
     end
 
     if date
-      api_render(Application.with_current_version.order("date_scraped DESC").where("application_versions.date_scraped" => date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
+      api_render(Application.with_current_version.order("first_date_scraped DESC").where("first_date_scraped" => date.beginning_of_day...date.end_of_day), "All applications collected on #{date}")
     else
       render_error("invalid date_scraped", :bad_request)
     end
