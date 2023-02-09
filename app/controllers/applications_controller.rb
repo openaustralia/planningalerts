@@ -101,7 +101,7 @@ class ApplicationsController < ApplicationController
     per_page = request.format == Mime[:html] ? 30 : Application.max_per_page
 
     @q = params_q
-    @applications = Application.search(@q, fields: [:description], order: { date_scraped: :desc }, highlight: { tag: "<span class=\"highlight\">" }, page: params[:page], per_page:) if @q
+    @applications = Application.search(@q, fields: [:description], order: { first_date_scraped: :desc }, highlight: { tag: "<span class=\"highlight\">" }, page: params[:page], per_page:) if @q
     @description = @q ? "Search: #{@q}" : "Search"
   end
 
