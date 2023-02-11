@@ -1,1 +1,3 @@
 enable_sidekiq: true
+deploy:
+  git_sha: <%= File.read("REVISION").strip %>
