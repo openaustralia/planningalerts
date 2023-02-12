@@ -114,9 +114,6 @@ class ApplicationVersion < ApplicationRecord
   # TODO: Optimisation is to make sure that this doesn't get called again on save when the address hasn't changed
   sig { void }
   def geocode
-    # Only geocode if location hasn't been set
-    return if lat && lng && suburb && state && postcode
-
     r = GeocodeService.call(address)
     top = r.top
     if top
