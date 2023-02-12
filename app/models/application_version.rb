@@ -111,7 +111,6 @@ class ApplicationVersion < ApplicationRecord
     !on_notice_to.nil? && Time.zone.today > on_notice_to
   end
 
-  # TODO: Optimisation is to make sure that this doesn't get called again on save when the address hasn't changed
   sig { params(address: String).returns(T::Hash[Symbol, T.untyped]) }
   def self.geocode_attributes(address)
     r = GeocodeService.call(address)
