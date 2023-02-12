@@ -78,7 +78,12 @@ describe CreateOrUpdateApplicationService do
         # This will not be valid
         attributes: {
           description: "A really nice change",
-          address: ""
+          address: "",
+          lat: 1.0,
+          lng: 2.0,
+          suburb: "Sydney",
+          state: "NSW",
+          postcode: "2000"
         }
       )
     end.to raise_error ActiveRecord::RecordInvalid
