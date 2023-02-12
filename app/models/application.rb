@@ -42,10 +42,20 @@ class Application < ApplicationRecord
 
   delegate :info_url, :date_received,
            :on_notice_from, :on_notice_to, :lat, :lng, :suburb, :state,
-           :postcode, :description, :address, :location,
+           :postcode, :location,
            :official_submission_period_expired?, :date_scraped,
            :comment_email, :comment_authority,
            to: :current_version
+
+  sig { returns(String) }
+  def description
+    ApplicationVersion.normalise_description(T.must(current_version).description)
+  end
+
+  sig { returns(String) }
+  def address
+    ApplicationVersion.normalise_address(T.must(current_version).address)
+  end
 
   sig { returns(T.nilable(String)) }
   def comment_email_with_fallback

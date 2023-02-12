@@ -22,16 +22,6 @@ class ApplicationVersion < ApplicationRecord
     attributes.symbolize_keys.merge(location: { lat:, lon: lng })
   end
 
-  sig { returns(String) }
-  def description
-    ApplicationVersion.normalise_description(self[:description])
-  end
-
-  sig { returns(String) }
-  def address
-    ApplicationVersion.normalise_address(self[:address])
-  end
-
   # TODO: factor out common location accessor between Application and Alert
   sig { returns(T.nilable(Location)) }
   def location
