@@ -112,21 +112,23 @@ class ApplicationVersion < ApplicationRecord
   end
 
   # TODO: Optimisation is to make sure that this doesn't get called again on save when the address hasn't changed
-  sig { void }
-  def geocode
+  sig { returns(T::Hash[Symbol, T.untyped]) }
+  def geocode_attributes
     r = GeocodeService.call(address)
     top = r.top
     if top
-      self.lat = top.lat
-      self.lng = top.lng
-      self.suburb = top.suburb
-      self.state = top.state
-      # Hack - workaround for inconsistent returned state name (as of 21 Jan 2011)
-      # from Google Geocoder
-      self.state = "NSW" if state == "New South Wales"
-      self.postcode = top.postcode
+      {
+        lat: top.lat,
+        lng: top.lng,
+        suburb: top.suburb,
+        # Hack - workaround for inconsistent returned state name (as of 21 Jan 2011)
+        # from Google Geocoder
+        state: top.state == "New South Wales" ? "NSW" : top.state,
+        postcode: top.postcode
+      }
     else
       logger.error "Couldn't geocode address: #{address} (#{r.error})"
+      {}
     end
   end
 
