@@ -42,7 +42,7 @@ class Application < ApplicationRecord
 
   delegate :info_url, :date_received,
            :on_notice_from, :on_notice_to, :lat, :lng, :suburb, :state,
-           :postcode, :location,
+           :postcode,
            :official_submission_period_expired?, :date_scraped,
            :comment_email, :comment_authority,
            to: :current_version
@@ -55,6 +55,12 @@ class Application < ApplicationRecord
   sig { returns(String) }
   def address
     Application.normalise_address(T.must(current_version).address)
+  end
+
+  # TODO: factor out common location accessor between Application and Alert
+  sig { returns(T.nilable(Location)) }
+  def location
+    Location.build(lat:, lng:)
   end
 
   sig { returns(T.nilable(String)) }

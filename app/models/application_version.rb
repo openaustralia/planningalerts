@@ -22,12 +22,6 @@ class ApplicationVersion < ApplicationRecord
     attributes.symbolize_keys.merge(location: { lat:, lon: lng })
   end
 
-  # TODO: factor out common location accessor between Application and Alert
-  sig { returns(T.nilable(Location)) }
-  def location
-    Location.build(lat:, lng:)
-  end
-
   sig { returns(T::Hash[String, T.untyped]) }
   def data_attributes
     attributes.except(
