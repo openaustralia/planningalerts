@@ -28,7 +28,7 @@ class CreateOrUpdateApplicationService
       application.address = attributes[:address] if attributes.key?(:address)
 
       # Geocode if address has changed and it hasn't already been geocoded (by passing in lat and lng from the outside)
-      attributes = attributes.merge(ApplicationVersion.geocode_attributes(attributes[:address])) if application.address_changed? && !(attributes[:lat] && attributes[:lng] && attributes[:suburb] && attributes[:state] && attributes[:postcode])
+      attributes = attributes.merge(Application.geocode_attributes(attributes[:address])) if application.address_changed? && !(attributes[:lat] && attributes[:lng] && attributes[:suburb] && attributes[:state] && attributes[:postcode])
 
       application.assign_attributes(attributes)
       application.save!

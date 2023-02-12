@@ -220,7 +220,7 @@ describe CreateOrUpdateApplicationService do
       )
       logger = instance_double(Logger, error: nil)
 
-      allow(ApplicationVersion).to receive(:logger).and_return(logger)
+      allow(Application).to receive(:logger).and_return(logger)
       expect(application.lat).to be_nil
       expect(application.lng).to be_nil
       expect(logger).to have_received(:error).with("Couldn't geocode address: 24 Bruce Road, Glenbrook, NSW (something went wrong)")

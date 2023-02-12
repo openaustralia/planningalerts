@@ -75,26 +75,6 @@ class ApplicationVersion < ApplicationRecord
     !on_notice_to.nil? && Time.zone.today > on_notice_to
   end
 
-  sig { params(address: String).returns(T::Hash[Symbol, T.untyped]) }
-  def self.geocode_attributes(address)
-    r = GeocodeService.call(address)
-    top = r.top
-    if top
-      {
-        lat: top.lat,
-        lng: top.lng,
-        suburb: top.suburb,
-        # Hack - workaround for inconsistent returned state name (as of 21 Jan 2011)
-        # from Google Geocoder
-        state: top.state == "New South Wales" ? "NSW" : top.state,
-        postcode: top.postcode
-      }
-    else
-      logger.error "Couldn't geocode address: #{address} (#{r.error})"
-      {}
-    end
-  end
-
   private
 
   sig { void }
