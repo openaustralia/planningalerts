@@ -73,6 +73,8 @@ class CreateOrUpdateApplicationService
     return if previous_version && new_version.data_attributes.except("date_scraped") == previous_version.data_attributes.except("date_scraped")
 
     previous_version&.update(current: false)
+    # Don't bother geocoding if it's not going to validate
+    new_version.geocode if new_version.valid?
     new_version.save!
     application.versions.reload
     application.reload_current_version

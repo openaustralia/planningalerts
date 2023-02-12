@@ -23,43 +23,6 @@ describe Application do
     end
   end
 
-  describe "on saving" do
-    it "geocodes the address" do
-      loc = GeocoderResults.new(
-        [
-          GeocodedLocation.new(
-            lat: -33.772609,
-            lng: 150.624263,
-            suburb: "Glenbrook",
-            state: "NSW",
-            postcode: "2773",
-            full_address: "Glenbrook, NSW 2773"
-          )
-        ],
-        nil
-      )
-      allow(GeocodeService).to receive(:call).with("24 Bruce Road, Glenbrook, NSW").and_return(loc)
-      a = create(:application, address: "24 Bruce Road, Glenbrook, NSW", council_reference: "r1", date_scraped: Time.zone.now)
-      expect(a.lat).to eq(loc.top.lat)
-      expect(a.lng).to eq(loc.top.lng)
-    end
-
-    it "logs an error if the geocoder can't make sense of the address" do
-      allow(GeocodeService).to receive(:call).with("dfjshd").and_return(
-        GeocoderResults.new([], "something went wrong")
-      )
-      logger = instance_double(Logger, error: nil)
-
-      # rubocop:disable RSpec/AnyInstance
-      allow_any_instance_of(ApplicationVersion).to receive(:logger).and_return(logger)
-      # rubocop:enable RSpec/AnyInstance
-      a = create(:application, address: "dfjshd", council_reference: "r1", date_scraped: Time.zone.now)
-      expect(logger).to have_received(:error).with("Couldn't geocode address: dfjshd (something went wrong)")
-      expect(a.lat).to be_nil
-      expect(a.lng).to be_nil
-    end
-  end
-
   describe "#date_scraped" do
     let(:application) { create(:geocoded_application) }
 

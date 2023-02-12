@@ -13,8 +13,6 @@ class ApplicationVersion < ApplicationRecord
 
   validates :current, uniqueness: { scope: :application_id }, if: :current
 
-  before_save :geocode
-
   delegate :authority, :council_reference, to: :application
 
   sig { returns(T::Hash[Symbol, T.untyped]) }
@@ -113,26 +111,6 @@ class ApplicationVersion < ApplicationRecord
     !on_notice_to.nil? && Time.zone.today > on_notice_to
   end
 
-  private
-
-  sig { void }
-  def date_received_can_not_be_in_the_future
-    d = date_received
-    return unless d && d > Time.zone.today
-
-    errors.add(:date_received, "can not be in the future")
-  end
-
-  sig { void }
-  def validate_on_notice_period
-    from = on_notice_from
-    to = on_notice_to
-
-    return unless from && to && from > to
-
-    errors.add(:on_notice_to, "can not be earlier than the start of the on notice period")
-  end
-
   # TODO: Optimisation is to make sure that this doesn't get called again on save when the address hasn't changed
   sig { void }
   def geocode
@@ -153,5 +131,25 @@ class ApplicationVersion < ApplicationRecord
     else
       logger.error "Couldn't geocode address: #{address} (#{r.error})"
     end
+  end
+
+  private
+
+  sig { void }
+  def date_received_can_not_be_in_the_future
+    d = date_received
+    return unless d && d > Time.zone.today
+
+    errors.add(:date_received, "can not be in the future")
+  end
+
+  sig { void }
+  def validate_on_notice_period
+    from = on_notice_from
+    to = on_notice_to
+
+    return unless from && to && from > to
+
+    errors.add(:on_notice_to, "can not be earlier than the start of the on notice period")
   end
 end

@@ -163,4 +163,57 @@ describe CreateOrUpdateApplicationService do
       expect(updated_application.versions.count).to eq 1
     end
   end
+
+  context "with an application with no lat and lng when it's created" do
+    let(:application) do
+      described_class.call(
+        authority:,
+        council_reference: "123/45",
+        attributes: {
+          date_scraped: Date.new(2001, 1, 10),
+          address: "24 Bruce Road, Glenbrook, NSW",
+          description: "A really nice change",
+          info_url: "http://foo.com",
+          date_received: Date.new(2001, 1, 1),
+          on_notice_from: Date.new(2002, 1, 1),
+          on_notice_to: Date.new(2002, 2, 1)
+        }
+      )
+    end
+
+    let(:location) do
+      GeocodedLocation.new(
+        lat: -33.772609,
+        lng: 150.624263,
+        suburb: "Glenbrook",
+        state: "NSW",
+        postcode: "2773",
+        full_address: "Glenbrook, NSW 2773"
+      )
+    end
+
+    it "geocodes the address" do
+      allow(GeocodeService).to receive(:call).with("24 Bruce Road, Glenbrook, NSW").and_return(GeocoderResults.new([location], nil))
+
+      expect(application.lat).to eq location.lat
+      expect(application.lng).to eq location.lng
+      expect(application.suburb).to eq location.suburb
+      expect(application.state).to eq location.state
+      expect(application.postcode).to eq location.postcode
+    end
+
+    it "logs an error if the geocoder can't make sense of the address" do
+      allow(GeocodeService).to receive(:call).with("24 Bruce Road, Glenbrook, NSW").and_return(
+        GeocoderResults.new([], "something went wrong")
+      )
+      logger = instance_double(Logger, error: nil)
+
+      # rubocop:disable RSpec/AnyInstance
+      allow_any_instance_of(ApplicationVersion).to receive(:logger).and_return(logger)
+      # rubocop:enable RSpec/AnyInstance
+      expect(application.lat).to be_nil
+      expect(application.lng).to be_nil
+      expect(logger).to have_received(:error).with("Couldn't geocode address: 24 Bruce Road, Glenbrook, NSW (something went wrong)")
+    end
+  end
 end

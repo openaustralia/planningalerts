@@ -536,8 +536,7 @@ describe Alert do
           date_scraped: "2021-09-14 02:04:04"
         }
       )
-      # TODO: Why is this getting called twice?
-      expect(GeocodeService).to have_received(:call).with(", NSW").twice
+      expect(GeocodeService).to have_received(:call).with(", NSW")
       a = alert.recent_new_applications.first
       # This should pick up the location of the most recent version of the
       # application
