@@ -70,32 +70,6 @@ class ApplicationVersion < ApplicationRecord
     )
   end
 
-  sig { params(description: String).returns(String) }
-  def self.normalise_description(description)
-    # If whole description is in upper case switch the whole description to lower case
-    description = description.downcase if description.upcase == description
-    description.split(". ").map do |sentence|
-      words = sentence.split
-      # Capitalise the first word of the sentence if it's all lowercase
-      first = words[0]
-      words[0] = first.capitalize if first && first.downcase == first
-      words.join(" ")
-    end.join(". ")
-  end
-
-  sig { params(address: String).returns(String) }
-  def self.normalise_address(address)
-    exceptions = %w[QLD VIC NSW SA ACT TAS WA NT]
-
-    address.split.map do |word|
-      if word != word.upcase || exceptions.any? { |exception| word =~ /^\W*#{exception}\W*$/ } || word =~ /\d/
-        word
-      else
-        word.capitalize
-      end
-    end.join(" ")
-  end
-
   sig { returns(T::Boolean) }
   def official_submission_period_expired?
     !on_notice_to.nil? && Time.zone.today > on_notice_to

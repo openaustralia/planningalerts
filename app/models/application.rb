@@ -49,12 +49,12 @@ class Application < ApplicationRecord
 
   sig { returns(String) }
   def description
-    ApplicationVersion.normalise_description(T.must(current_version).description)
+    Application.normalise_description(T.must(current_version).description)
   end
 
   sig { returns(String) }
   def address
-    ApplicationVersion.normalise_address(T.must(current_version).address)
+    Application.normalise_address(T.must(current_version).address)
   end
 
   sig { returns(T.nilable(String)) }
@@ -97,5 +97,31 @@ class Application < ApplicationRecord
   sig { returns(ActiveRecord::Relation) }
   def self.trending
     with_current_version.where("first_date_scraped > ?", 4.weeks.ago).order(visible_comments_count: :desc)
+  end
+
+  sig { params(description: String).returns(String) }
+  def self.normalise_description(description)
+    # If whole description is in upper case switch the whole description to lower case
+    description = description.downcase if description.upcase == description
+    description.split(". ").map do |sentence|
+      words = sentence.split
+      # Capitalise the first word of the sentence if it's all lowercase
+      first = words[0]
+      words[0] = first.capitalize if first && first.downcase == first
+      words.join(" ")
+    end.join(". ")
+  end
+
+  sig { params(address: String).returns(String) }
+  def self.normalise_address(address)
+    exceptions = %w[QLD VIC NSW SA ACT TAS WA NT]
+
+    address.split.map do |word|
+      if word != word.upcase || exceptions.any? { |exception| word =~ /^\W*#{exception}\W*$/ } || word =~ /\d/
+        word
+      else
+        word.capitalize
+      end
+    end.join(" ")
   end
 end
