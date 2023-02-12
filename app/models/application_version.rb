@@ -127,15 +127,10 @@ class ApplicationVersion < ApplicationRecord
   def validate_on_notice_period
     from = on_notice_from
     to = on_notice_to
-    return unless from || to
 
-    if from.nil?
-      # errors.add(:on_notice_from, "can not be empty if end of on notice period is set")
-    elsif to.nil?
-      # errors.add(:on_notice_to, "can not be empty if start of on notice period is set")
-    elsif from > to
-      errors.add(:on_notice_to, "can not be earlier than the start of the on notice period")
-    end
+    return unless from && to && from > to
+
+    errors.add(:on_notice_to, "can not be earlier than the start of the on notice period")
   end
 
   # TODO: Optimisation is to make sure that this doesn't get called again on save when the address hasn't changed
