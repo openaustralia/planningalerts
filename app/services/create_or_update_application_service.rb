@@ -74,7 +74,7 @@ class CreateOrUpdateApplicationService
 
     previous_version&.update(current: false)
     # Don't bother geocoding if it's already been geocoded (by passing in lat and lng from the outside)
-    new_version.assign_attributes(new_version.geocode_attributes) unless new_version.lat && new_version.lng && new_version.suburb && new_version.state && new_version.postcode
+    new_version.assign_attributes(ApplicationVersion.geocode_attributes(new_version.address)) unless new_version.lat && new_version.lng && new_version.suburb && new_version.state && new_version.postcode
     new_version.save!
     application.versions.reload
     application.reload_current_version

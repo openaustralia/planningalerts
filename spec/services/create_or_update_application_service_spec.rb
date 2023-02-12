@@ -213,9 +213,7 @@ describe CreateOrUpdateApplicationService do
       )
       logger = instance_double(Logger, error: nil)
 
-      # rubocop:disable RSpec/AnyInstance
-      allow_any_instance_of(ApplicationVersion).to receive(:logger).and_return(logger)
-      # rubocop:enable RSpec/AnyInstance
+      allow(ApplicationVersion).to receive(:logger).and_return(logger)
       expect(application.lat).to be_nil
       expect(application.lng).to be_nil
       expect(logger).to have_received(:error).with("Couldn't geocode address: 24 Bruce Road, Glenbrook, NSW (something went wrong)")

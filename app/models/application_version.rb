@@ -112,8 +112,8 @@ class ApplicationVersion < ApplicationRecord
   end
 
   # TODO: Optimisation is to make sure that this doesn't get called again on save when the address hasn't changed
-  sig { returns(T::Hash[Symbol, T.untyped]) }
-  def geocode_attributes
+  sig { params(address: String).returns(T::Hash[Symbol, T.untyped]) }
+  def self.geocode_attributes(address)
     r = GeocodeService.call(address)
     top = r.top
     if top
