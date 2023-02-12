@@ -64,11 +64,6 @@ class ApplicationVersion < ApplicationRecord
     )
   end
 
-  sig { returns(T::Boolean) }
-  def official_submission_period_expired?
-    !on_notice_to.nil? && Time.zone.today > on_notice_to
-  end
-
   private
 
   sig { void }

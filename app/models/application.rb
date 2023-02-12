@@ -43,7 +43,7 @@ class Application < ApplicationRecord
   delegate :info_url, :date_received,
            :on_notice_from, :on_notice_to, :lat, :lng, :suburb, :state,
            :postcode,
-           :official_submission_period_expired?, :date_scraped,
+           :date_scraped,
            :comment_email, :comment_authority,
            to: :current_version
 
@@ -61,6 +61,11 @@ class Application < ApplicationRecord
   sig { returns(T.nilable(Location)) }
   def location
     Location.build(lat:, lng:)
+  end
+
+  sig { returns(T::Boolean) }
+  def official_submission_period_expired?
+    !on_notice_to.nil? && Time.zone.today > on_notice_to
   end
 
   sig { returns(T.nilable(String)) }
