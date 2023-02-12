@@ -37,6 +37,11 @@ class CreateOrUpdateApplicationService
     Application.transaction do
       # First check if record already exists or create a new one if it doesn't
       application = Application.find_by(authority:, council_reference:) || Application.new(authority:, council_reference:, first_date_scraped: attributes["date_scraped"])
+      application.address = attributes["address"] if attributes.key?("address")
+
+      # Geocode if address has changed and it hasn't already been geocoded (by passing in lat and lng from the outside)
+      @attributes = attributes.merge(ApplicationVersion.geocode_attributes(attributes["address"]).stringify_keys) if application.address_changed? && !(attributes["lat"] && attributes["lng"] && attributes["suburb"] && attributes["state"] && attributes["postcode"])
+
       application.assign_attributes(attributes)
       application.save!
       create_version(application)
@@ -70,8 +75,6 @@ class CreateOrUpdateApplicationService
     return if previous_version && new_version.data_attributes.except("date_scraped") == previous_version.data_attributes.except("date_scraped")
 
     previous_version&.update(current: false)
-    # Don't bother geocoding if it's already been geocoded (by passing in lat and lng from the outside)
-    new_version.assign_attributes(ApplicationVersion.geocode_attributes(new_version.address)) unless new_version.lat && new_version.lng && new_version.suburb && new_version.state && new_version.postcode
     new_version.save!
     application.versions.reload
     application.reload_current_version

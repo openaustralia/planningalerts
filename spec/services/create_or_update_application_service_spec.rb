@@ -96,7 +96,14 @@ describe CreateOrUpdateApplicationService do
       described_class.call(
         authority: application.authority,
         council_reference: application.council_reference,
-        attributes: { address: "A better kind of address" }
+        attributes: {
+          address: "A better kind of address",
+          lat: 1.2,
+          lng: 2.2,
+          suburb: "Sydney",
+          state: "NSW",
+          postcode: "2000"
+        }
       )
     end
 
