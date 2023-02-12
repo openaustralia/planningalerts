@@ -4,6 +4,11 @@
 class CreateOrUpdateApplicationService
   extend T::Sig
 
+  VALID_ATTRIBUTES = T.let(
+    %w[address description info_url date_received on_notice_from on_notice_to date_scraped lat lng suburb state postcode comment_email comment_authority].freeze,
+    T::Array[String]
+  )
+
   sig do
     params(
       authority: Authority,
@@ -26,9 +31,10 @@ class CreateOrUpdateApplicationService
     @authority = authority
     @council_reference = council_reference
     @attributes = T.let(attributes.stringify_keys, T::Hash[String, T.untyped])
-    # TODO: Do some sanity checking on the keys in attributes
-    # TODO: Make sure that authority_id and council_reference are not
-    # keys in attributes
+
+    @attributes.each_key do |key|
+      raise "Invalid attribute #{key}" unless VALID_ATTRIBUTES.include?(key)
+    end
   end
 
   # Returns created or updated application
