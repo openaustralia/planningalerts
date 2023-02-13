@@ -83,14 +83,8 @@ class Alert < ApplicationRecord
   # be included with the results.
   sig { returns(T.untyped) }
   def recent_new_applications
-    Application.with_current_version
-               .order("first_date_scraped DESC")
-               .near(
-                 [lat, lng], radius_km,
-                 units: :km,
-                 latitude: "application_versions.lat",
-                 longitude: "application_versions.lng"
-               )
+    Application.order("first_date_scraped DESC")
+               .near([lat, lng], radius_km, units: :km)
                .where("first_date_scraped > ?", cutoff_time)
   end
 
