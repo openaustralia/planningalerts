@@ -50,21 +50,24 @@ module ApplicationsHelper
   sig { params(application: Application).returns(String) }
   def on_notice_text(application)
     t = []
-    if application.on_notice_from && (Time.zone.today < application.on_notice_from)
+    on_notice_from = application.on_notice_from
+    # This helper is only getting called when on_notice_to is set. So we can assume it is.
+    on_notice_to = T.must(application.on_notice_to)
+    if on_notice_from && (Time.zone.today < application.on_notice_from)
       t << "The period to have your comment officially considered by the planning authority"
-      t << content_tag(:strong, "starts #{days_in_future_in_words(application.on_notice_from)}")
+      t << content_tag(:strong, "starts #{days_in_future_in_words(on_notice_from)}")
       t << "and finishes #{distance_of_time_in_words(application.on_notice_from, application.on_notice_to)} later."
     elsif Time.zone.today == application.on_notice_to
       t << content_tag(:strong, "Today is the last day")
       t << "to have your comment officially considered by the planning authority."
-      t << "The period for comment started #{days_ago_in_words(application.on_notice_from)}." if application.on_notice_from
+      t << "The period for comment started #{days_ago_in_words(on_notice_from)}." if on_notice_from
     elsif Time.zone.today < application.on_notice_to
       t << content_tag(:strong, "You have #{distance_of_time_in_words(Time.zone.today, application.on_notice_to)} left")
       t << "to have your comment officially considered by the planning authority."
-      t << "The period for comment started #{days_ago_in_words(application.on_notice_from)}." if application.on_notice_from
+      t << "The period for comment started #{days_ago_in_words(on_notice_from)}." if on_notice_from
     else
       t << "You're too late! The period for officially commenting on this application"
-      t << safe_join([content_tag(:strong, "finished #{days_ago_in_words(application.on_notice_to)}"), "."])
+      t << safe_join([content_tag(:strong, "finished #{days_ago_in_words(on_notice_to)}"), "."])
       t << "It lasted for #{distance_of_time_in_words(application.on_notice_from, application.on_notice_to)}." if application.on_notice_from
       t << "If you chose to comment now, your comment will still be displayed here and be sent to the planning authority but it will"
       t << content_tag(:strong, "not be officially considered")
@@ -81,7 +84,7 @@ module ApplicationsHelper
 
   sig { params(application: Application, size: String, zoom: Integer, key: String).returns(String) }
   def google_static_map(application, size: "350x200", zoom: 16, key: "GOOGLE_MAPS_API_KEY")
-    google_static_map_lat_lng(lat: application.lat, lng: application.lng, label: "Map of #{application.address}", size:, zoom:, key:)
+    google_static_map_lat_lng(lat: T.must(application.lat), lng: T.must(application.lng), label: "Map of #{application.address}", size:, zoom:, key:)
   end
 
   # Version of google_static_map above that isn't tied into the implementation of Application
@@ -124,7 +127,7 @@ module ApplicationsHelper
 
   sig { params(application: Application, size: String, fov: Integer, key: String).returns(String) }
   def google_static_streetview(application, size: "350x200", fov: 90, key: "GOOGLE_MAPS_API_KEY")
-    url = google_static_streetview_url(lat: application.lat, lng: application.lng, size:, fov:, key:)
+    url = google_static_streetview_url(lat: T.must(application.lat), lng: T.must(application.lng), size:, fov:, key:)
     image_tag(url, size:, alt: "Streetview of #{application.address}")
   end
 
