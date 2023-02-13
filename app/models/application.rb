@@ -21,6 +21,9 @@ class Application < ApplicationRecord
   has_many :versions, -> { order(id: :desc) }, class_name: "ApplicationVersion", dependent: :destroy, inverse_of: :application
   has_one :current_version, -> { where(current: true) }, class_name: "ApplicationVersion", inverse_of: :application, dependent: :restrict_with_exception
 
+  # Even though we're not using the geocoder gem to do our geocoding we still need this here because we're using
+  # the gem for the near and nearbys functions which depend on some other functions that this creates. It's a bit
+  # ugly for sure but we want to get rid of the geocoder gem entirely. So, we'll live with it until then.
   geocoded_by :address, latitude: :lat, longitude: :lng
 
   validates :council_reference, presence: true
