@@ -5,6 +5,7 @@
 # Returns number of applications and comments sent.
 class ProcessAlertService
   extend T::Sig
+  include Skylight::Helpers
 
   sig { params(alert: Alert).returns([Integer, Integer, Integer]) }
   def self.call(alert:)
@@ -16,6 +17,7 @@ class ProcessAlertService
     @alert = alert
   end
 
+  instrument_method
   sig { returns([Integer, Integer, Integer]) }
   def call
     applications = alert.recent_new_applications.to_a

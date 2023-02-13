@@ -5,6 +5,7 @@
 # records the batch being sent out and updates the global statistics
 class ProcessAlertAndRecordStatsService
   extend T::Sig
+  include Skylight::Helpers
 
   sig { params(alert: Alert).void }
   def self.call(alert:)
@@ -16,6 +17,7 @@ class ProcessAlertAndRecordStatsService
     @alert = alert
   end
 
+  instrument_method
   sig { void }
   def call
     no_emails, no_applications, no_comments = ProcessAlertService.call(alert:)
