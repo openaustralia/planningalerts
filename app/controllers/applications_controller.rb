@@ -84,7 +84,7 @@ class ApplicationsController < ApplicationController
         latitude: "application_versions.lat",
         longitude: "application_versions.lng"
       )
-      @applications = @applications.where("date_scraped > ?", time.days.ago) if Flipper.enabled?(:extra_options_on_address_search, current_user)
+      @applications = @applications.where("application_versions.date_scraped > ?", time.days.ago) if Flipper.enabled?(:extra_options_on_address_search, current_user)
       if sort == "time"
         @applications = @applications
                         .reorder("application_versions.date_scraped DESC")
