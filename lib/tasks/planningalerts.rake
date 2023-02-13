@@ -16,11 +16,7 @@ namespace :planningalerts do
   namespace :migrate do
     desc "copy current version data back to application"
     task copy_current_version_data_back_to_application: :environment do
-      query = %w[address description info_url date_received on_notice_from on_notice_to date_scraped lat lng suburb state postcode comment_email comment_authority].map do |field|
-        "applications.#{field} != application_versions.#{field}"
-      end.join(" OR ")
-
-      applications = Application.joins(:current_version).where(query)
+      applications = Application.applications_needing_updating_from_current
       puts "#{applications.count} to migrate..."
       progressbar = ProgressBar.create(total: applications.count, format: "%t: |%B| %e")
       applications.includes(:current_version).find_each do |application|
