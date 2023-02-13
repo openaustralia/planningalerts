@@ -97,14 +97,8 @@ class Alert < ApplicationRecord
   # Applications in the area of interest which have new comments made since we were last alerted
   sig { returns(T.untyped) }
   def applications_with_new_comments
-    Application.with_current_version
-               .order("application_versions.date_scraped DESC")
-               .near(
-                 [lat, lng], radius_km,
-                 units: :km,
-                 latitude: "application_versions.lat",
-                 longitude: "application_versions.lng"
-               )
+    Application.order("date_scraped DESC")
+               .near([lat, lng], radius_km, units: :km)
                .joins(:comments)
                .where("comments.confirmed_at > ?", cutoff_time)
                .where("comments.confirmed" => true)
