@@ -80,7 +80,7 @@ class ApiController < ApplicationController
     lat1 = params[:top_right_lat]
     lng1 = params[:top_right_lng]
     api_render(
-      Application.with_current_version.order("application_versions.date_scraped DESC").where("application_versions.lat > ? AND application_versions.lng > ? AND application_versions.lat < ? AND application_versions.lng < ?", lat0, lng0, lat1, lng1),
+      Application.order("date_scraped DESC").where(lat: lat0..lat1, lng: lng0..lng1),
       "Recent applications in the area (#{lat0},#{lng0}) (#{lat1},#{lng1})"
     )
   end

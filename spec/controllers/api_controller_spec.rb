@@ -407,13 +407,11 @@ describe ApiController do
       scope2 = Application.none
       scope3 = Application.none
       scope4 = Application.none
-      scope5 = Application.none
-      allow(Application).to receive(:with_current_version).and_return(scope1)
-      allow(scope1).to receive(:order).and_return(scope2)
-      allow(scope2).to receive(:where).with("application_versions.lat > ? AND application_versions.lng > ? AND application_versions.lat < ? AND application_versions.lng < ?", "1.0", "2.0", "3.0", "4.0").and_return(scope3)
-      allow(scope3).to receive(:includes).and_return(scope4)
-      allow(scope4).to receive(:page).with(nil).and_return(scope5)
-      allow(scope5).to receive(:per).with(100).and_return(result)
+      allow(Application).to receive(:order).and_return(scope1)
+      allow(scope1).to receive(:where).with(lat: "1.0".."3.0", lng: "2.0".."4.0").and_return(scope2)
+      allow(scope2).to receive(:includes).and_return(scope3)
+      allow(scope3).to receive(:page).with(nil).and_return(scope4)
+      allow(scope4).to receive(:per).with(100).and_return(result)
 
       get :area, params: {
         key: key.value,
