@@ -17,22 +17,13 @@ FactoryBot.define do
     council_reference { "001" }
 
     factory :application do
-      transient do
-        address { "A test address" }
-        description { "pretty" }
-        info_url { "http://foo.com" }
-        date_received { nil }
-        on_notice_from { nil }
-        on_notice_to { nil }
-        date_scraped { 10.minutes.ago }
-        lat { nil }
-        lng { nil }
-        suburb { nil }
-        state { nil }
-        postcode { nil }
-        comment_email { nil }
-        comment_authority { nil }
-      end
+      address { "A test address" }
+      description { "pretty" }
+      info_url { "http://foo.com" }
+      date_received { nil }
+      on_notice_from { nil }
+      on_notice_to { nil }
+      date_scraped { 10.minutes.ago }
 
       after(:create) do |application, evaluator|
         create(
@@ -54,17 +45,17 @@ FactoryBot.define do
           postcode: evaluator.postcode,
           application:
         )
-        application.update!(first_date_scraped: evaluator.date_scraped)
+        application.update!(
+          first_date_scraped: evaluator.date_scraped
+        )
       end
 
       factory :geocoded_application do
-        transient do
-          lat { 1.0 }
-          lng { 2.0 }
-          suburb { "Sydney" }
-          state { "NSW" }
-          postcode { "2000" }
-        end
+        lat { 1.0 }
+        lng { 2.0 }
+        suburb { "Sydney" }
+        state { "NSW" }
+        postcode { "2000" }
       end
     end
   end

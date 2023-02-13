@@ -43,13 +43,6 @@ class Application < ApplicationRecord
   # allowed returned applications in a single API request
   max_paginates_per 100
 
-  delegate :info_url, :date_received,
-           :on_notice_from, :on_notice_to, :lat, :lng, :suburb, :state,
-           :postcode,
-           :date_scraped,
-           :comment_email, :comment_authority,
-           to: :current_version
-
   # TODO: Remove this as soon as we can
   sig { returns(T.untyped) }
   def self.applications_needing_updating_from_current
@@ -62,12 +55,12 @@ class Application < ApplicationRecord
 
   sig { returns(String) }
   def description
-    Application.normalise_description(T.must(current_version).description)
+    Application.normalise_description(attributes["description"])
   end
 
   sig { returns(String) }
   def address
-    Application.normalise_address(T.must(current_version).address)
+    Application.normalise_address(attributes["address"])
   end
 
   # TODO: factor out common location accessor between Application and Alert
