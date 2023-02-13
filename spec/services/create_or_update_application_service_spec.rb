@@ -157,6 +157,10 @@ describe CreateOrUpdateApplicationService do
     it "does not create a new version" do
       expect(updated_application.versions.count).to eq 1
     end
+
+    it "has an unchanged date_scraped on the main application" do
+      expect(updated_application.attributes["date_scraped"]).to eq Date.new(2001, 1, 10)
+    end
   end
 
   context "with updated application with unchanged data once typecast" do

@@ -30,10 +30,16 @@ class CreateOrUpdateApplicationService
       # Geocode if address has changed and it hasn't already been geocoded (by passing in lat and lng from the outside)
       attributes = attributes.merge(Application.geocode_attributes(attributes[:address])) if application.address_changed? && !(attributes[:lat] && attributes[:lng] && attributes[:suburb] && attributes[:state] && attributes[:postcode])
 
-      application.assign_attributes(attributes)
-      application.save!
-      create_version(application, attributes)
-      application.reindex
+      # If it's just the date_scraped changing and nothing else we don't want to alter the object
+      application.assign_attributes(attributes.except(:date_scraped))
+
+      # If none of the data has changed then don't save a new version
+      unless application.changed_attributes.empty?
+        application.date_scraped = attributes[:date_scraped] if attributes.key?(:date_scraped)
+        application.save!
+        create_version(application, attributes)
+        application.reindex
+      end
       application
     end
   end
@@ -46,10 +52,6 @@ class CreateOrUpdateApplicationService
       previous_version:,
       attributes: attributes.stringify_keys
     )
-
-    # If none of the data has changed don't save the new version
-    # Comparing attributes on model so that typecasting has been done
-    return if previous_version && new_version.data_attributes.except("date_scraped") == previous_version.data_attributes.except("date_scraped")
 
     previous_version&.update(current: false)
     new_version.save!
