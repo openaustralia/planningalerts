@@ -208,6 +208,9 @@ group :development do
   gem "rubocop-rake", require: false
   gem "rubocop-rspec", require: false
   gem "rubocop-sorbet", require: false
+
+  # To help identify database issues
+  gem "active_record_doctor"
 end
 
 group :production do
