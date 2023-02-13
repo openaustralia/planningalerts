@@ -47,7 +47,7 @@ class Application < ApplicationRecord
   sig { returns(T.untyped) }
   def self.applications_needing_updating_from_current
     query = %w[address description info_url date_received on_notice_from on_notice_to date_scraped lat lng suburb state postcode comment_email comment_authority].map do |field|
-      "applications.#{field} != application_versions.#{field}"
+      "NOT(applications.#{field} <=> application_versions.#{field})"
     end.join(" OR ")
 
     Application.joins(:current_version).where(query)
