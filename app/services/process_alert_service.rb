@@ -24,7 +24,10 @@ class ProcessAlertService
     comments = alert.new_comments
 
     if !applications.empty? || !comments.empty?
-      AlertMailer.alert(alert:, applications:, comments:).deliver_now
+      # offloading the actual sending of the email to another background job
+      # since this depends on an external service which might be down.
+      # Saves us from running the whole job again if it fails
+      AlertMailer.alert(alert:, applications:, comments:).deliver_later
       alert.last_sent = Time.zone.now
       no_emails = 1
     else

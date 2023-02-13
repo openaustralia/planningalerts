@@ -30,8 +30,10 @@ describe ProcessAlertService do
       end
 
       it "sends an email" do
-        described_class.call(alert:)
-        expect(ActionMailer::Base.deliveries.size).to eq(1)
+        Sidekiq::Testing.inline! do
+          described_class.call(alert:)
+          expect(ActionMailer::Base.deliveries.size).to eq(1)
+        end
       end
 
       it "updates the tally" do
