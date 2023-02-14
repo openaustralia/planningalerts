@@ -13,8 +13,6 @@ tmp/miniprofiler
 coverage
 config/database.yml
 rerun.txt
-public/sitemap.xml
-public/sitemaps/sitemap*.xml.gz
 webrat.log
 .DS_Store
 planningalerts-app.sublime-workspace
