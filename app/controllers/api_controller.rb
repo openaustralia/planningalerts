@@ -103,11 +103,11 @@ class ApiController < ApplicationController
   sig { void }
   def all
     # TODO: Check that params page and v aren't being used
-    apps = Application.includes(:current_version).includes(:authority).order(:id)
+    apps = Application.includes(:authority).order(:id)
     apps = apps.where("id > ?", params[:since_id]) if params[:since_id]
 
     # Max number of records that we'll show
-    limit = 1000
+    limit = 10
 
     applications = apps.limit(limit).to_a
     last = applications.last
