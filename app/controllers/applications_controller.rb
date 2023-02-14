@@ -134,7 +134,7 @@ class ApplicationsController < ApplicationController
     per_page = request.format == Mime[:html] ? 30 : Application.max_per_page
 
     @application = Application.find(params[:id])
-    @applications = @application.find_all_nearest_or_recent.page(params[:page]).per(per_page)
+    @applications = @application.find_all_nearest_or_recent.page(params[:page]).per(per_page).without_count
     @applications = @applications.reorder("first_date_scraped DESC") if @sort == "time"
   end
 

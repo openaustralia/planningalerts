@@ -8,6 +8,6 @@
 
   = render "sort_options", sort: @sort, extra_params: {}
 
-  = paginate @applications
+  = render "pagination", applications: @applications
   %ol.applications= render @applications
-  = paginate @applications
+  = render "pagination", applications: @applications
